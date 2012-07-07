@@ -1,0 +1,17 @@
+Tukz and Elv for the amazing UI's of awesomeness.
+
+Main Functions = Camealion
+Altoholic = Azilroka
+Advanced Trade Skill Window = Outofammo / Blazeflack / Camealion / Azilroka
+BuyEmAll = Azilroka
+Extended Vendor = Azilroka / Elv
+Karni's Crap Filter = Azilroka
+Mage Nuggets = Azilroka
+MoveAnything = Konungr / Azilroka / Darth Predator
+Mizus Raid Tracker = Azilroka
+Odyssey = Azilroka
+Prayer of Mending Tracker = Azilroka
+Raid Invite Organizer = Konungr / Azilroka
+Searing Plasma Tracker = Azilroka
+Spine Counter = Azilroka
+Spy = Azilroka
