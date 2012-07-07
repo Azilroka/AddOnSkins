@@ -19,10 +19,12 @@ MageNuggets.lua
 MRT.lua
 Odyssey.lua
 Ogri'Lazy.lua
+Outfitter.lua
 PoMTracker.lua
 RaidInviteOrganizer.lua
 SearingPlasmaTracker.lua
 SpineCounter.lua
 Spy.lua
+
 
 MoveAnything.lua
