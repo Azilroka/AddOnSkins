@@ -1,4 +1,11 @@
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 if not IsAddOnLoaded("MageNuggets") then return end
+local SkinMageNuggets = CreateFrame("Frame")
+	SkinMageNuggets:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	SkinMageNuggets:SetScript( "OnEvent", function(self)
+	if (UISkinOptions.MageNuggetsSkin == "Disabled") then return end
+local s = UIPackageSkinFuncs.s
+local c = UIPackageSkinFuncs.c
 
 	local frames = {
 		"MNSpellSteal_Frame",
@@ -84,3 +91,5 @@ MageNugClearcast_Frame_Bar:CreateBackdrop("Transparent")
 MageNugClearcast_Frame_Bar:ClearAllPoints()
 MageNugClearcast_Frame_Bar:Point("TOPLEFT", MageNugClearcast_Frame, "TOPLEFT", 1, -42)
 MNabCast_Frame:Point("TOPLEFT", MageNugAB_Frame, "TOPLEFT", 0, 18)
+
+end)

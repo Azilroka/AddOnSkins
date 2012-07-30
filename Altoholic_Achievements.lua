@@ -1,8 +1,10 @@
+local s = UIPackageSkinFuncs.s
+local c = UIPackageSkinFuncs.c
 local Altoholic = _G.Altoholic
 local function LoadSkin()
 
 AltoholicFrameAchievements:StripTextures()
-AltoholicFrameAchievements:SetTemplate("Default")
+AltoholicFrameAchievements:CreateBackdrop("Transparent")
 AltoholicFrameAchievementsScrollFrame:StripTextures()
 cSkinScrollBar(AltoholicFrameAchievementsScrollFrameScrollBar)
 AltoholicAchievementsMenuScrollFrame:StripTextures()
@@ -12,7 +14,7 @@ AltoholicTabAchievements_SelectRealm:Point("TOPLEFT", AltoholicFrame, "TOPLEFT",
 
 for i = 1, 15 do
 	_G["AltoholicTabAchievementsMenuItem"..i]:StripTextures()
-	_G["AltoholicTabAchievementsMenuItem"..i]:SetTemplate("Default")
+	_G["AltoholicTabAchievementsMenuItem"..i]:SetTemplate("Transparent")
 end
 for i = 1, 10 do
 	_G["AltoholicFrameAchievementsEntry1Item"..i]:StripTextures()
@@ -28,9 +30,15 @@ end
 end
 
 if (IsAddOnLoaded("Tukui") and IsAddOnLoaded("Altoholic")) then 
+	local SkinAltoholic = CreateFrame("Frame")
+	SkinAltoholic:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	SkinAltoholic:SetScript( "OnEvent", function(self)
+	if (UISkinOptions.AltoholicSkin == "Disabled") then return end
 	s.SkinFuncs["Altoholic_Achievements"] = LoadSkin
+	end)
 end
 if (IsAddOnLoaded("ElvUI") and IsAddOnLoaded("Altoholic")) then 
+if IsAddOnLoaded("ElvUI_SLE") then return end --Repooc and Darth Predator has a modified skin to fit the UI
 	c:GetModule('Skins')
 	s:RegisterSkin('Altoholic_Achievements', LoadSkin)
 end

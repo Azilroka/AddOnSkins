@@ -1,17 +1,27 @@
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
+if IsAddOnLoaded("ElvUI_SLE") then return end --Repooc and Darth Predator has a modified skin to fit the UI
 if not IsAddOnLoaded("Altoholic") then return end
+
+local SkinAltoholic = CreateFrame("Frame")
+SkinAltoholic:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+SkinAltoholic:SetScript( "OnEvent", function(self)
+if (UISkinOptions.AltoholicSkin == "Disabled") then return end
+local s = UIPackageSkinFuncs.s
+local c = UIPackageSkinFuncs.c
+
 local Altoholic = _G.Altoholic
 LoadAddOn("Altoholic_Characters")
 
 AltoholicFrameContainers:StripTextures()
-AltoholicFrameContainers:SetTemplate("Default")
-AltoholicFrameRecipes:SetTemplate("Default")
-AltoholicFrameQuests:SetTemplate("Default")
-AltoholicFrameTalents:SetTemplate("Default")
-AltoholicFrameGlyphs:SetTemplate("Default")
-AltoholicFrameMail:SetTemplate("Default")
-AltoholicFrameSpellbook:SetTemplate("Default")
-AltoholicFramePets:SetTemplate("Default")
-AltoholicFrameAuctions:SetTemplate("Default")
+AltoholicFrameContainers:SetTemplate("Transparent")
+AltoholicFrameRecipes:SetTemplate("Transparent")
+AltoholicFrameQuests:SetTemplate("Transparent")
+AltoholicFrameTalents:SetTemplate("Transparent")
+AltoholicFrameGlyphs:SetTemplate("Transparent")
+AltoholicFrameMail:SetTemplate("Transparent")
+AltoholicFrameSpellbook:SetTemplate("Transparent")
+AltoholicFramePets:SetTemplate("Transparent")
+AltoholicFrameAuctions:SetTemplate("Transparent")
 
 cSkinScrollBar(AltoholicFrameContainersScrollFrameScrollBar)
 AltoholicFrameContainersScrollFrame:StripTextures()
@@ -42,3 +52,4 @@ for i = 1, 14 do
 	_G["AltoholicFrameContainersEntry6Item"..i]:StripTextures()
 	_G["AltoholicFrameContainersEntry7Item"..i]:StripTextures()
 end
+end)

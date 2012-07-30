@@ -1,4 +1,11 @@
-	if not IsAddOnLoaded("KarniCrap") then return end
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
+if not IsAddOnLoaded("KarniCrap") then return end
+local SkinKarniCrap = CreateFrame("Frame")
+	SkinKarniCrap:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	SkinKarniCrap:SetScript( "OnEvent", function(self)
+	if (UISkinOptions.KarniCrapSkin == "Disabled") then return end
+local s = UIPackageSkinFuncs.s
+local c = UIPackageSkinFuncs.c
 
 	KarniCrap:StripTextures()
 	KarniCrap:SetTemplate("Transparent")
@@ -101,3 +108,5 @@
 for i = 1, 15 do
 	cSkinCloseButton(_G["KarniInvEntry"..i.."_BtnCrap"])
 end
+
+end)

@@ -1,4 +1,12 @@
 if (IsAddOnLoaded("ExtVendor") and IsAddOnLoaded("Tukui")) then
+local SkinExtVendor = CreateFrame("Frame")
+	SkinExtVendor:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	SkinExtVendor:SetScript( "OnEvent", function(self)
+	if (UISkinOptions.ExtVendorSkin == "Disabled") then return end
+
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
+
 	MerchantFrame:StripTextures()
 	cSkinButton(MerchantFrameFilterButton)
 	cSkinButton(MerchantFrameSellJunkButton)
@@ -19,6 +27,7 @@ if (IsAddOnLoaded("ExtVendor") and IsAddOnLoaded("Tukui")) then
 		t:Point("TOPLEFT", 2, -2)
 		t:Point("BOTTOMRIGHT", -2, 2)
 	end
+end)
 end
 local function LoadSkin()
 	if c.private.skins.blizzard.enable ~= true or c.private.skins.blizzard.merchant ~= true then return end
@@ -109,7 +118,13 @@ local function LoadSkin()
 	cSkinButton(MerchantFrameSellJunkButton)
 end
 
-if IsAddOnLoaded("ElvUI") then
+if (IsAddOnLoaded("ElvUI") and IsAddOnLoaded("ExtVendor")) then
+local SkinExtVendor = CreateFrame("Frame")
+	SkinExtVendor:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	SkinExtVendor:SetScript( "OnEvent", function(self)
+	if (UISkinOptions.ExtVendorSkin == "Disabled") then return end
+	if IsAddOnLoaded("ElvUI_SLE") then ExtVendorSkinButton:Disable() ExtVendorSkinButton.text:SetText("|cFF808080Extended Vendor Skin Disabled for SLE|r") return end
 	c:GetModule('Skins')
 	s:RegisterSkin('ElvUI', LoadSkin)
+	end)
 end

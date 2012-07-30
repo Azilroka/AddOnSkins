@@ -1,4 +1,13 @@
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 if not IsAddOnLoaded("MoveAnything") then return end
+local SkinMoveAnything = CreateFrame("Frame")
+	SkinMoveAnything:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	SkinMoveAnything:SetScript( "OnEvent", function(self)
+	if (UISkinOptions.MoveAnythingSkin == "Disabled") then return end
+	if IsAddOnLoaded("ElvUI_SLE") then MoveAnythingSkinButton:Disable() MoveAnythingSkinButton.text:SetText("|cFF808080MoveAnything Skin Disabled for SLE|r") return end
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
+
 MAOptions:StripTextures()
 MAOptions:SetTemplate("Transparent")
 MAScrollBorder:StripTextures()
@@ -40,3 +49,5 @@ cSkinButton(MANudger_NudgeLeft)
 cSkinButton(MANudger_NudgeRight)
 cSkinButton(MANudger_Detach)
 cSkinButton(MANudger_Hide)
+
+end)

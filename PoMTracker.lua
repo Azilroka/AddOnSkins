@@ -1,4 +1,11 @@
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 if not IsAddOnLoaded("PoMTracker") then return end
+local SkinPoMTracker = CreateFrame("Frame")
+	SkinPoMTracker:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	SkinPoMTracker:SetScript( "OnEvent", function(self)
+	if (UISkinOptions.PoMTrackerSkin == "Disabled") then return end
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
 
 PoMOptionFrame:StripTextures()
 PoMOptionFrame:SetTemplate("Transparent")
@@ -24,3 +31,5 @@ pomtrackerstatusBar:CreateBackdrop("Transparent")
 for i = 1,6 do
 	cSkinCheckBox(_G["PoMOptionFrame_CheckButton"..i])
 end
+
+end)

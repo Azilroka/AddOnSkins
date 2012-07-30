@@ -1,8 +1,10 @@
 ## Interface: 40300
 ## Title: Various Skins for |cffC495DDTukui|r Editted Packages
 ## Author: See Credits.txt
+## SavedVariables: UISkinOptions
 
 !Functions.lua
+Options.lua
 
 Altoholic.lua
 Altoholic_Achievements.lua
@@ -13,18 +15,32 @@ Altoholic_Guild.lua
 Altoholic_Search.lua
 ATSW.lua
 BuyEmAll.lua
+Clique.lua
+EnergyWatch.lua
 ExtVendor.lua
 KarniCrap.lua
 MageNuggets.lua
+MoveAnything.lua
 MRT.lua
 Odyssey.lua
 Ogri'Lazy.lua
 Outfitter.lua
+PlayerScore.lua
 PoMTracker.lua
+Poisoner.lua
+PowerAuras.lua
 RaidInviteOrganizer.lua
+RBS.lua
 SearingPlasmaTracker.lua
 SpineCounter.lua
 Spy.lua
+Swatter.lua
 
-
-MoveAnything.lua
+DBM.lua
+DXE.lua
+BigWigs.lua
+EmbedWindow.lua
+Recount.lua
+Skada.lua
+Omen.lua
+TinyDPS.lua

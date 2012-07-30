@@ -1,4 +1,11 @@
-	if not IsAddOnLoaded("Odyssey") then return end
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
+if not IsAddOnLoaded("Odyssey") then return end
+local SkinOdyssey = CreateFrame("Frame")
+	SkinOdyssey:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	SkinOdyssey:SetScript( "OnEvent", function(self)
+	if (UISkinOptions.OdysseySkin == "Disabled") then return end
+local s = UIPackageSkinFuncs.s
+local c = UIPackageSkinFuncs.c
 
 	OdysseyFrame:StripTextures()
 	OdysseyFrameQuestDBScrollFrame:StripTextures()
@@ -61,3 +68,5 @@ for i = 1, 10 do
 	_G["OdysseyFrameRealmSummaryEntry8Item"..i]:StripTextures()
 end
 	OdyTooltip:HookScript( "OnShow", function( self ) self:SetTemplate( "Transparent" ) end )
+
+end)

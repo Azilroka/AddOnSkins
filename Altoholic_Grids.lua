@@ -1,7 +1,9 @@
+local s = UIPackageSkinFuncs.s
+local c = UIPackageSkinFuncs.c
 local Altoholic = _G.Altoholic
 local function LoadSkin()
 
-AltoholicFrameGrids:SetTemplate("Default")
+AltoholicFrameGrids:CreateBackdrop("Transparent")
 
 cSkinScrollBar(AltoholicFrameGridsScrollFrameScrollBar)
 AltoholicFrameGridsScrollFrame:StripTextures()
@@ -22,10 +24,16 @@ end
 
 end
 
-if (IsAddOnLoaded("Tukui") and IsAddOnLoaded("Altoholic")) then 
+if (IsAddOnLoaded("Tukui") and IsAddOnLoaded("Altoholic")) then
+	local SkinAltoholic = CreateFrame("Frame")
+	SkinAltoholic:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	SkinAltoholic:SetScript( "OnEvent", function(self)
+	if (UISkinOptions.AltoholicSkin == "Disabled") then return end
 	s.SkinFuncs["Altoholic_Grids"] = LoadSkin
+	end)
 end
 if (IsAddOnLoaded("ElvUI") and IsAddOnLoaded("Altoholic")) then 
+if IsAddOnLoaded("ElvUI_SLE") then return end --Repooc and Darth Predator has a modified skin to fit the UI
 	c:GetModule('Skins')
 	s:RegisterSkin('Altoholic_Grids', LoadSkin)
 end
