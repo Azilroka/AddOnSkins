@@ -1,24 +1,57 @@
-	if not IsAddOnLoaded("AdvancedTradeSkillWindow") then return end
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
+if not IsAddOnLoaded("AdvancedTradeSkillWindow") then return end
+local SkinATSW = CreateFrame("Frame")
+	SkinATSW:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	SkinATSW:SetScript( "OnEvent", function(self)
+	if (UISkinOptions.ATSWSkin == "Disabled") then return end
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
 
-	ATSWFrame:StripTextures(true)
-	ATSWSkillIcon:StripTextures(true)
-	ATSWFrame:SetTemplate("Transparent")
-	ATSWFrame:CreateShadow("Default")
-	ATSWListScrollFrame:StripTextures(true)
+	ATSWFrame:HookScript("OnShow", function()
+	ATSWFrame:StripTextures()
+	ATSWSkillIcon:StripTextures()
+	ATSWListScrollFrame:StripTextures()
 	ATSWExpandButtonFrame:StripTextures()
 	ATSWRankFrameBorder:StripTextures()
 	ATSWRankFrame:StripTextures()
-	ATSWRankFrame:CreateBackdrop("Default")
+	ATSWFrame:SetTemplate("Transparent")
+	ATSWRankFrame:CreateBackdrop("Transparent")
 	ATSWRankFrame:SetStatusBarTexture(c["media"].normTex)
-	ATSWRankFrame:SetHeight(13)
-	
+	ATSWRankFrame:Size(398,20)
+	ATSWRankFrame:ClearAllPoints()
+	ATSWRankFrame:Point("CENTER", ATSWFrame, "CENTER", 165, 200)
+	ATSWListScrollFrame:Width(280)
+	ATSWFramePortrait:Kill()
+	cSkinScrollBar(ATSWListScrollFrameScrollBar)
+--	ATSWListScrollFrameScrollBar:SetFrameStrata("HIGH")
+	ATSWListScrollFrameScrollBar:Point("CENTER", ATSWListScrollFrame, "CENTER", 0, 0)
+--Backdrops	
+	ATSWFrame.bg1 = CreateFrame("Frame", nil, ATSWFrame)
+	ATSWFrame.bg1:CreateBackdrop()
+	ATSWFrame.bg1:Point("TOPLEFT", 22, -72)
+	ATSWFrame.bg1:Point("BOTTOMRIGHT", -439, 20)
+
+	ATSWFrame.bg2 = CreateFrame("Frame", nil, ATSWFrame)
+	ATSWFrame.bg2:CreateBackdrop()
+	ATSWFrame.bg2:Point("TOPLEFT", 350, -72)
+	ATSWFrame.bg2:Point("BOTTOMRIGHT", -20, 20)
+--Edit Boxs
 	cSkinEditBox(ATSWFilterBox)
 	cSkinEditBox(ATSWInputBox)
 	cSkinEditBox(ATSWCSNewCategoryBox)
-
+	ATSWFilterBox:ClearAllPoints()
+	ATSWFilterBox:Point("TOPLEFT", ATSWFrame, "TOPLEFT", 120, -98)
+	ATSWFilterBox:Width(188)
+--DropDowns
 	cSkinDropDownBox(ATSWSubClassDropDown)
 	cSkinDropDownBox(ATSWInvSlotDropDown)
-
+	ATSWSubClassDropDown:ClearAllPoints()
+	ATSWInvSlotDropDown:ClearAllPoints()
+--	ATSWSubClassDropDown:SetFrameStrata("HIGH")
+--	ATSWInvSlotDropDown:SetFrameStrata("HIGH")
+	ATSWSubClassDropDown:Point("TOPLEFT", ATSWFrame, "TOPLEFT", 50, -70)
+	ATSWInvSlotDropDown:Point("RIGHT", ATSWSubClassDropDown, "RIGHT", 132, 0)
+--Buttons
 	cSkinButton(ATSWQueueAllButton)
 	cSkinButton(ATSWCreateAllButton)
 	cSkinButton(ATSWCreateButton)
@@ -31,10 +64,31 @@
 	cSkinButton(ATSWBuyReagentsButton)
 	cSkinButton(ATSWOptionsFrameOKButton)
 	cSkinButton(ATSWAddCategoryButton)
-
 	cSkinCloseButton(ATSWFrameCloseButton)
 	cSkinCloseButton(ATSWReagentFrameCloseButton)
-
+	ATSWOptionsButton:ClearAllPoints()
+	ATSWIncrementButton:ClearAllPoints()
+	ATSWDecrementButton:ClearAllPoints()
+	ATSWQueueAllButton:ClearAllPoints()
+	ATSWQueueButton:ClearAllPoints()
+	ATSWCreateButton:ClearAllPoints()
+	ATSWQueueDeleteButton:ClearAllPoints()
+	ATSWReagentsButton:ClearAllPoints()
+	ATSWCSButton:Point("LEFT", ATSWCustomSortButton, "RIGHT", 0, -20)
+	ATSWOptionsButton:Point("TOPRIGHT", ATSWFrame, "TOPRIGHT", -20, -72)
+	ATSWQueueAllButton:Point("BOTTOMLEFT", ATSWFrame, "BOTTOMRIGHT", -418, 152)
+	ATSWCreateAllButton:Point("RIGHT", ATSWQueueAllButton, "RIGHT", 80, 0)
+	ATSWDecrementButton:Point("RIGHT", ATSWQueueAllButton, "RIGHT", 106, 0)
+	ATSWIncrementButton:Point("RIGHT", ATSWDecrementButton, "RIGHT", 52, 0)
+	ATSWCreateButton:Point("RIGHT", ATSWQueueAllButton, "RIGHT", 248, 0)
+	ATSWQueueButton:Point("RIGHT", ATSWQueueAllButton, "RIGHT", 322, 0)
+	ATSWQueueButton:Width(70)
+	ATSWQueueStartStopButton:Point("BOTTOMLEFT", ATSWFrame, "BOTTOMRIGHT", -418, 20)
+	ATSWQueueDeleteButton:Point("RIGHT", ATSWQueueStartStopButton, "RIGHT", 124, 0)
+	ATSWQueueDeleteButton:Width(120)
+	ATSWReagentsButton:Width(120)
+	ATSWReagentsButton:Point("RIGHT", ATSWQueueStartStopButton, "RIGHT", 248, 0)
+--Checkboxes
 	cSkinCheckBox(ATSWHeaderSortButton)
 	cSkinCheckBox(ATSWNameSortButton)
 	cSkinCheckBox(ATSWDifficultySortButton)
@@ -49,26 +103,29 @@
 	cSkinCheckBox(ATSWOFTooltipButton)
 	cSkinCheckBox(ATSWOFShoppingListButton)
 	cSkinCheckBox(ATSWOFReagentListButton)
+	ATSWCustomSortButton:ClearAllPoints()
+	ATSWOnlyCreatableButton:ClearAllPoints()
+	ATSWCustomSortButton:Point("RIGHT", ATSWHeaderSortButton, "RIGHT", 150, 0)
+	ATSWOnlyCreatableButton:Point("TOPLEFT", ATSWFrame, "TOPRIGHT", -140, -100)
+	ATSWHeaderSortButton:Point("TOPLEFT", ATSWFrame, "TOPLEFT", 20, -15)
+	ATSWNameSortButton:Point("TOPLEFT", ATSWFrame, "TOPLEFT", 20, -49)
+	ATSWDifficultySortButton:Point("TOPLEFT", ATSWFrame, "TOPLEFT", 20, -32)
 
-	--Tooltip
+--Tooltip
 	ATSWTradeskillTooltip:StripTextures(true)
 	ATSWTradeskillTooltip:SetTemplate("Transparent")
 	ATSWTradeskillTooltip:CreateShadow("Default")
-
-	--Regeants frame
+--Regeants frame
 	ATSWReagentFrame:StripTextures(true)
 	ATSWReagentFrame:SetTemplate("Transparent")
 	ATSWReagentFrame:CreateShadow("Default")
-
-	--Options frame
+--Options frame
 	ATSWOptionsFrame:StripTextures(true)
 	ATSWOptionsFrame:SetTemplate("Transparent")
 	ATSWOptionsFrame:CreateShadow("Default")
-
-	--Edit frame
+--Edit frame
 	ATSWCSFrame:StripTextures(true)
 	ATSWCSUListScrollFrame:StripTextures()
-
 	ATSWCSFrame:SetTemplate("Transparent")
 		local once = false
 			for i=1, ATSW_MAX_TRADE_SKILL_REAGENTS do
@@ -108,44 +165,37 @@
 	end
 
 	ATSWQueueStartStopButton:Point("CENTER", ATSWFrame, "TOPLEFT", 425, -480)
-	ATSWOptionsButton:Point("CENTER", ATSWFrame, "TOPLEFT", 685, -80)
-	ATSWCSButton:Point("CENTER", ATSWFrame, "TOPLEFT", 390, -50)
 	ATSWAddCategoryButton:Point("LEFT", ATSWCSNewCategoryBox, "RIGHT", 5, 0)
 	ATSWFrameCloseButton:Point("TOPRIGHT", ATSWFrame, "TOPRIGHT", -5, -5)
-	ATSWFilterBox:Point("TOPLEFT", ATSWFrame, "TOPLEFT", 126, -90)
 	ATSWBuyReagentsButton:Point("CENTER", ATSWReagentFrame, "BOTTOMLEFT", 246, 50)
-	ATSWQueueScrollFrame:StripTextures(True)
+	ATSWQueueScrollFrame:StripTextures()
+	ATSWQueueScrollFrame:Width(52)
 	cSkinScrollBar(ATSWQueueScrollFrameScrollBar)
 	cSkinNextPrevButton(ATSWIncrementButton)
 	cSkinNextPrevButton(ATSWDecrementButton)
 	cSkinButton(ATSWAutoBuyButton)
+
 --Shopping List Frame
-	ATSWShoppingListFrame:StripTextures(true)
+	ATSWShoppingListFrame:StripTextures()
 	ATSWShoppingListFrame:SetTemplate("Transparent")
 	ATSWShoppingListFrame:Size(475,150)
 	ATSWShoppingListFrame:ClearAllPoints()
 	ATSWShoppingListFrame:Point("TOPLEFT", AuctionFrame, "BOTTOMRIGHT", -475, -1)
-	cSkinButton(ATSWSLCloseButton, true)
+	cSkinButton(ATSWSLCloseButton)
 	ATSWSLCloseButton:ClearAllPoints()
 	ATSWSLCloseButton:Point("TOPRIGHT", ATSWShoppingListFrame, "TOPRIGHT", -5, -5)
-	ATSWSLScrollFrame:StripTextures(True)
+	ATSWSLScrollFrame:StripTextures()
 	cSkinScrollBar(ATSWSLScrollFrameScrollBar)
-	cSkinScrollBar(ATSWListScrollFrameScrollBar)
---Delay Frame	
+
+--Delay Frame
 	cSkinButton(ATSWScanDelayFrameSkipButton)
 	cSkinButton(ATSWScanDelayFrameAbortButton)
-	ATSWScanDelayFrame:StripTextures(true)
+	ATSWScanDelayFrame:StripTextures()
 	ATSWScanDelayFrame:SetTemplate("Transparent")
 	ATSWScanDelayFrameBar:StripTextures()
+	ATSWScanDelayFrameBar:CreateBackdrop("ClassColor")
 	ATSWScanDelayFrameBar:SetStatusBarTexture(c["media"].normTex)
-	if ( ccolor == "DEATHKNIGHT")	then ATSWScanDelayFrameBar:SetStatusBarColor(0.77,0.12,0.23)	end
-	if ( ccolor == "DRUID" )	then ATSWScanDelayFrameBar:SetStatusBarColor(1.00,0.49,0.04)	end
-	if ( ccolor == "HUNTER" )	then ATSWScanDelayFrameBar:SetStatusBarColor(0.67,0.83,0.45)	end
-	if ( ccolor == "MAGE" )		then ATSWScanDelayFrameBar:SetStatusBarColor(0.41,0.80,0.94)	end
-	if ( ccolor == "MONK" )		then ATSWScanDelayFrameBar:SetStatusBarColor(0.00,1.00,0.59)	end
-	if ( ccolor == "PALADIN" )	then ATSWScanDelayFrameBar:SetStatusBarColor(0.96,0.55,0.73)	end
-	if ( ccolor == "PRIEST" )	then ATSWScanDelayFrameBar:SetStatusBarColor(1.00,1.00,1.00)	end
-	if ( ccolor == "ROGUE" )	then ATSWScanDelayFrameBar:SetStatusBarColor(1.00,0.96,0.41)	end
-	if ( ccolor == "SHAMAN" )	then ATSWScanDelayFrameBar:SetStatusBarColor(0.00,0.44,0.87)	end
-	if ( ccolor == "WARLOCK" )	then ATSWScanDelayFrameBar:SetStatusBarColor(0.58,0.51,0.79)	end
-	if ( ccolor == "WARRIOR" )	then ATSWScanDelayFrameBar:SetStatusBarColor(0.78,0.61,0.43)	end
+	local color = RAID_CLASS_COLORS[UIPackageSkinFuncs.ccolor]
+	ATSWScanDelayFrameBar:SetStatusBarColor(color.r, color.g, color.b)
+end)
+	end)
