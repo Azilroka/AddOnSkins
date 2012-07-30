@@ -1,4 +1,12 @@
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 if not IsAddOnLoaded("Altoholic") then return end
+local s = UIPackageSkinFuncs.s
+local c = UIPackageSkinFuncs.c
+local SkinAltoholic = CreateFrame("Frame")
+SkinAltoholic:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+SkinAltoholic:SetScript( "OnEvent", function(self)
+if (UISkinOptions.AltoholicSkin == "Disabled") then return end
+if IsAddOnLoaded("ElvUI_SLE") then AltoholicSkinButton:Disable() AltoholicSkinButton.text:SetText("|cFF808080Altoholic Skin Disabled for SLE|r") return end
 
 AltoMsgBox:StripTextures()
 AltoMsgBox:SetTemplate("Transparent")
@@ -26,13 +34,13 @@ AltoholicFrame_SearchButton:Size(85, 24)
 --Summary
 for i = 1, 4 do
 	_G["AltoholicTabSummaryMenuItem"..i]:StripTextures()
-	_G["AltoholicTabSummaryMenuItem"..i]:SetTemplate("Default")	
+	_G["AltoholicTabSummaryMenuItem"..i]:SetTemplate("Transparent")	
 end
 
 --Sorts
 for i = 1, 8 do
 	_G["AltoholicTabSummary_Sort"..i]:StripTextures()
-	_G["AltoholicTabSummary_Sort"..i]:SetTemplate("Default")
+	_G["AltoholicTabSummary_Sort"..i]:SetTemplate("Transparent")
 end
 
 -- Buttons
@@ -64,3 +72,5 @@ AltoholicFrameActivityScrollFrame:StripTextures()
 AltoholicFrameTab1:Point("TOPLEFT", AltoholicFrame, "BOTTOMLEFT", -5, 2)
 
 AltoTooltip:HookScript( "OnShow", function( self ) self:SetTemplate( "Transparent" ) end )
+
+end)
