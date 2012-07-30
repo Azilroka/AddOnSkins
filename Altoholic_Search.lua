@@ -35,16 +35,12 @@ cSkinEditBox(_G["AltoholicTabSearch_MinLevel"])
 cSkinEditBox(_G["AltoholicTabSearch_MaxLevel"])
 
 end
-if (IsAddOnLoaded("Tukui") and IsAddOnLoaded("Altoholic")) then 
+if IsAddOnLoaded("Altoholic") then 
 	local SkinAltoholic = CreateFrame("Frame")
 	SkinAltoholic:RegisterEvent( "PLAYER_ENTERING_WORLD" )
 	SkinAltoholic:SetScript( "OnEvent", function(self)
 	if (UISkinOptions.AltoholicSkin == "Disabled") then return end
-	s.SkinFuncs["Altoholic_Search"] = LoadSkin
+	if IsAddOnLoaded("Tukui") then s.SkinFuncs["Altoholic_Search"] = LoadSkin end
+	if (IsAddOnLoaded("ElvUI") then c:GetModule('Skins') s:RegisterSkin('Altoholic_Search', LoadSkin) end
 	end)
-end
-if (IsAddOnLoaded("ElvUI") and IsAddOnLoaded("Altoholic")) then 
-if IsAddOnLoaded("ElvUI_SLE") then return end --Repooc and Darth Predator has a modified skin to fit the UI
-	c:GetModule('Skins')
-	s:RegisterSkin('Altoholic_Search', LoadSkin)
 end

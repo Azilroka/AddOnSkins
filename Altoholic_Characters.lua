@@ -1,5 +1,4 @@
 if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
-if IsAddOnLoaded("ElvUI_SLE") then return end --Repooc and Darth Predator has a modified skin to fit the UI
 if not IsAddOnLoaded("Altoholic") then return end
 
 local SkinAltoholic = CreateFrame("Frame")
