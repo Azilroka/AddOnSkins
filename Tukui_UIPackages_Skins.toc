@@ -7,12 +7,6 @@ Functions.lua
 Options.lua
 
 Altoholic.lua
-Altoholic_Achievements.lua
-Altoholic_Agenda.lua
-Altoholic_Characters.lua
-Altoholic_Grids.lua
-Altoholic_Guild.lua
-Altoholic_Search.lua
 ATSW.lua
 BuyEmAll.lua
 Clique.lua
