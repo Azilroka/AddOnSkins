@@ -1,23 +1,19 @@
-local SkinSkada = CreateFrame("Frame")
-	SkinSkada:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	SkinSkada:SetScript( "OnEvent", function(self)
-	if (UISkinOptions.SkadaSkin == "Disabled") then return end
-	if IsAddOnLoaded("ElvUI") then SkadaSkinButton:Disable() SkadaSkinButton.text:SetText("|cFF808080Skada Skin Disabled for ElvUI|r") return end
-	if not (IsAddOnLoaded("Skada") and IsAddOnLoaded("Tukui")) then return end
-TukuiSkinsDB = {}
+if not (IsAddOnLoaded( "Skada" ) and IsAddOnLoaded("Tukui")) then return end
+local s = UIPackageSkinFuncs.s
+local c = UIPackageSkinFuncs.c
 
 SLASH_SKADAEMBEDDED1, SLASH_SKADAEMBEDDED2 = '/es', '/embedskada';
 function SlashCmdList.SKADAEMBEDDED(msg, editbox)
-	if(TukuiSkinsDB.skadaembedded == "Disabled") then
-		TukuiSkinsDB.skadaembedded = "Enabled";
+	if(UISkinOptions.EmbedSkada == "Disabled") then
+		UISkinOptions.EmbedSkada = "Enabled";
 	else
-		TukuiSkinsDB.skadaembedded = "Disabled";
+		UISkinOptions.EmbedSkada = "Disabled";
 	end
-	if(TukuiSkinsDB.skadaembedded == "Enabled") then
-	print("Skada Embedding to Embed Window is |cff00ff00"..TukuiSkinsDB.skadaembedded.."|r.");
+	if(UISkinOptions.EmbedSkada == "Enabled") then
+	print("Skada Embedding to Embed Window is |cff00ff00"..UISkinOptions.EmbedSkada.."|r.");
 	end
-	if(TukuiSkinsDB.skadaembedded == "Disabled") then
-	print("Skada Embedding to Embed Window is |cffff2020"..TukuiSkinsDB.skadaembedded.."|r.");
+	if(UISkinOptions.EmbedSkada == "Disabled") then
+	print("Skada Embedding to Embed Window is |cffff2020"..UISkinOptions.EmbedSkada.."|r.");
 	end
 	print("Please Reload the UI with /rl");	
 end
@@ -104,7 +100,7 @@ barmod.ApplySettings = function( self, win )
 		skada.backdrop:Point( "TOPLEFT", skada, "TOPLEFT", -2, 2 )
 	end
 	skada.backdrop:Point( "BOTTOMRIGHT", skada, "BOTTOMRIGHT", 2, -2 )
-	if( TukuiSkinsDB.skadaembedded == "Enabled" ) then
+	if( UISkinOptions.EmbedSkada == "Enabled" ) then
 		win.bargroup.button:SetFrameStrata( "MEDIUM" )
 		win.bargroup.button:SetFrameLevel( 5 )	
 		win.bargroup:SetFrameStrata( "MEDIUM" )
@@ -148,7 +144,7 @@ Skada.CreateWindow_ = Skada.CreateWindow
 		for _, window in ipairs( Skada:GetWindows() ) do
 			tinsert( windows, window )
 		end	
-	if(TukuiSkinsDB.skadaembedded == "Enabled") then
+	if(UISkinOptions.EmbedSkada == "Enabled") then
 		EmbedSkada()
 	end
 end
@@ -160,7 +156,7 @@ Skada.DeleteWindow_ = Skada.DeleteWindow
 		for _, window in ipairs( Skada:GetWindows() ) do
 			tinsert( windows, window )
 		end	
-	if(TukuiSkinsDB.skadaembedded == "Enabled") then
+	if(UISkinOptions.EmbedSkada == "Enabled") then
 		EmbedSkada()
 	end
 end
@@ -170,9 +166,7 @@ local Skada_Skin = CreateFrame( "Frame" )
 	Skada_Skin:SetScript( "OnEvent", function( self )
 		self:UnregisterAllEvents()
 		self = nil
-	if(TukuiSkinsDB.skadaembedded == "Enabled") then
+	if(UISkinOptions.EmbedSkada == "Enabled") then
 		EmbedSkada()
 	end
 end )
-
-end)

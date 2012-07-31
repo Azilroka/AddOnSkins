@@ -3,7 +3,7 @@
 ## Author: See Credits.txt
 ## SavedVariables: UISkinOptions
 
-Functions.lua
+!Functions.lua
 Options.lua
 
 Altoholic.lua
