@@ -13,7 +13,9 @@ Clique.lua
 EnergyWatch.lua
 ExtVendor.lua
 KarniCrap.lua
+LootCouncilLite.lua
 MageNuggets.lua
+MinimalArchaeology.lua
 MoveAnything.lua
 MRT.lua
 Odyssey.lua
@@ -23,12 +25,14 @@ PlayerScore.lua
 PoMTracker.lua
 Poisoner.lua
 PowerAuras.lua
+Quartz.lua
 RaidInviteOrganizer.lua
 RBS.lua
 SearingPlasmaTracker.lua
 SpineCounter.lua
 Spy.lua
 Swatter.lua
+WowLua.lua
 
 DBM.lua
 DXE.lua

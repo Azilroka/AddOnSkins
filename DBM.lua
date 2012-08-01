@@ -3,13 +3,15 @@
 	Modified: Elv, Azilroka
 	All rights reserved.
 ]]--
-if not (IsAddOnLoaded("DBM-Core") and IsAddOnLoaded("Tukui")) then return end
+if not IsAddOnLoaded("DBM-Core") then return end
 
 local croprwicons = true			-- crops blizz shitty borders from icons in RaidWarning messages
 local rwiconsize = 18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
 local buttonsize = 22
 
 local function LoadSkin()
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
 	local function SkinBars(self)
 		for bar in self:GetBarIterator() do
 			if not bar.injected then
@@ -106,7 +108,8 @@ local function LoadSkin()
 						name:Point("LEFT", frame, "LEFT", 4, 0)
 						name:SetWidth(165)
 						name:SetHeight(8)
-						name:SetFont(c["media"].font, 12, "OUTLINE")
+						if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
+						if IsAddOnLoaded("ElvUI") then name:SetFont(c["media"].normFont, 12, "OUTLINE") end
 						name:SetJustifyH("LEFT")
 						name:SetShadowColor(0, 0, 0, 0)
 						name.SetFont = s.dummy
@@ -116,7 +119,8 @@ local function LoadSkin()
 					if not timer.styled then	
 						timer:ClearAllPoints()
 						timer:Point("RIGHT", frame, "RIGHT", -4, 0)
-						timer:SetFont(c["media"].font, 12, "OUTLINE")
+						if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
+						if IsAddOnLoaded("ElvUI") then timer:SetFont(c["media"].normFont, 12, "OUTLINE") end
 						timer:SetJustifyH("RIGHT")
 						timer:SetShadowColor(0, 0, 0, 0)
 						timer.SetFont = s.dummy
@@ -143,7 +147,8 @@ local function LoadSkin()
 		if not anchor.styled then
 			local header={anchor:GetRegions()}
 				if header[1]:IsObjectType("FontString") then
-					header[1]:SetFont(c["media"].font, 12, "OUTLINE")
+					if IsAddOnLoaded("Tukui") then header[1]:SetFont(c["media"].font, 12, "OUTLINE") end
+					if IsAddOnLoaded("ElvUI") then header[1]:SetFont(c["media"].normFont, 12, "OUTLINE") end
 					header[1]:SetTextColor(1,1,1,1)
 					header[1]:SetShadowColor(0, 0, 0, 0)
 					anchor.styled=true	
@@ -198,7 +203,8 @@ local function LoadSkin()
 			if not name.styled then
 				name:ClearAllPoints()
 				name:Point("LEFT", bar, "LEFT", 4, 0)
-				name:SetFont(c["media"].font, 12, "OUTLINE")
+				if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
+				if IsAddOnLoaded("ElvUI") then name:SetFont(c["media"].normFont, 12, "OUTLINE") end
 				name:SetJustifyH("LEFT")
 				name:SetShadowColor(0, 0, 0, 0)
 				name.styled=true
@@ -207,7 +213,8 @@ local function LoadSkin()
 			if not timer.styled then
 				timer:ClearAllPoints()
 				timer:Point("RIGHT", bar, "RIGHT", -4, 0)
-				timer:SetFont(c["media"].font, 12, "OUTLINE")
+				if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
+				if IsAddOnLoaded("ElvUI") then timer:SetFont(c["media"].normFont, 12, "OUTLINE") end
 				timer:SetJustifyH("RIGHT")
 				timer:SetShadowColor(0, 0, 0, 0)
 				timer.styled=true
@@ -240,7 +247,8 @@ local SkinDBM = CreateFrame("Frame")
 	SkinDBM:RegisterEvent( "PLAYER_ENTERING_WORLD" )
 	SkinDBM:SetScript( "OnEvent", function(self)
 	if (UISkinOptions.DBMSkin == "Disabled") then return end
-	if IsAddOnLoaded("ElvUI") then DBMSkinButton:Disable() DBMSkinButton.text:SetText("|cFF808080DBM Skin Disabled for ElvUI|r") return end
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
 	LoadSkin()
 	DBM_SavedOptions.Enabled=true
 	DBT_SavedOptions["DBM"].Scale = 1
@@ -248,7 +256,8 @@ local SkinDBM = CreateFrame("Frame")
 	DBT_SavedOptions["DBM"].BarXOffset = 0
 	DBT_SavedOptions["DBM"].BarYOffset = 2
 	DBT_SavedOptions["DBM"].Texture = c.media.normTex
-	DBT_SavedOptions["DBM"].Font = c.media.font
+	if IsAddOnLoaded("Tukui") then DBT_SavedOptions["DBM"].Font = c.media.font end
+	if IsAddOnLoaded("ElvUI") then DBT_SavedOptions["DBM"].Font = c.media.normFont end
 	end)
 end
 
