@@ -7,7 +7,7 @@ local s
 
 if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 if ElvUI then
-	local E, L, DF = unpack(ElvUI)
+	local E, L, V, P, G, DF = unpack(ElvUI)
 	local S = E:GetModule('Skins')
 	UIPackageSkinFuncs.s = S
 	UIPackageSkinFuncs.c = E
@@ -45,7 +45,7 @@ function cSkinTab(self)
 	end
 end
 
-function UIPackageSkinFuncs.cSkinNextPrevButton(self)
+function cSkinNextPrevButton(self)
 	if ElvUI then
 		s:HandleNextPrevButton(self)
 	else
@@ -53,7 +53,7 @@ function UIPackageSkinFuncs.cSkinNextPrevButton(self)
 	end
 end
 
-function UIPackageSkinFuncs.cSkinRotateButton(self)
+function cSkinRotateButton(self)
 	if ElvUI then
 		s:HandleRotateButton(self)
 	else
