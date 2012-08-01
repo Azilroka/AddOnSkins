@@ -1,4 +1,4 @@
-if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 UISkinOptions = {}
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
@@ -29,9 +29,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.PowerAurasSkin == nil) then UISkinOptions.PowerAurasSkin = "Enabled" end
 	if(UISkinOptions.RaidInviteOrganizerSkin == nil) then UISkinOptions.RaidInviteOrganizerSkin = "Enabled" end
 	if(UISkinOptions.RaidBuffStatusSkin == nil) then UISkinOptions.RaidBuffStatusSkin = "Enabled" end
-	if(UISkinOptions.RecountSkin == nil) then UISkinOptions.RecountSkin = "Disabled" end
 	if(UISkinOptions.SearingPlasmaTrackerSkin == nil) then UISkinOptions.SearingPlasmaTrackerSkin = "Enabled" end
-	if(UISkinOptions.SkadaSkin == nil) then UISkinOptions.SkadaSkin = "Disabled" end
 	if(UISkinOptions.SpineCounterSkin == nil) then UISkinOptions.SpineCounterSkin = "Enabled" end
 	if(UISkinOptions.SpySkin == nil) then UISkinOptions.SpySkin = "Enabled" end
 	if(UISkinOptions.SwatterSkin == nil) then UISkinOptions.SwatterSkin = "Enabled" end
@@ -42,6 +40,8 @@ local DefaultSetSkin = CreateFrame("Frame")
 local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions:RegisterEvent( "PLAYER_ENTERING_WORLD" )
 	SkinOptions:SetScript( "OnEvent", function(self)
+	if IsAddOnLoaded("Tukui") then UIFont = c["media"].font end
+	if IsAddOnLoaded("ElvUI") then UIFont = c["media"].normFont end
 	SkinOptions:Hide()
 	SkinOptions:SetTemplate("Transparent")
 	SkinOptions:Point("CENTER", UIParent, "CENTER", 0, 0)
@@ -51,7 +51,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions:SetClampedToScreen(true)
 	SkinOptions:SetMovable(true)
 	SkinOptions.text = SkinOptions:CreateFontString(nil, "OVERLAY")
-	SkinOptions.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 16, "OUTLINE")
+	SkinOptions.text:SetFont(UIFont, 16, "OUTLINE")
 	SkinOptions.text:SetPoint("TOP", SkinOptions, 0, -6)
 	SkinOptions.text:SetText("|cffC495DDTukui|r & |cff1784d1ElvUI|r Extra Skin Options by |cff2F9E00Azilroka|r")
 	SkinOptions:EnableMouse(true)
@@ -64,28 +64,59 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	ApplySkinSettingsButton:Size(217,24)
 	cSkinButton(ApplySkinSettingsButton)
 	ApplySkinSettingsButton.text = ApplySkinSettingsButton:CreateFontString(nil, "OVERLAY")
-	ApplySkinSettingsButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	ApplySkinSettingsButton.text:SetFont(UIFont, 12, "OUTLINE")
 	ApplySkinSettingsButton.text:SetPoint("CENTER", ApplySkinSettingsButton, 0, 0)
 	ApplySkinSettingsButton.text:SetText("Apply Skin Settings")
 	ApplySkinSettingsButton:HookScript("OnClick", function() ReloadUI() end)
+
+	EmbedWindowSettingsButton = CreateFrame("Button", "EmbedWindowSettingsButton", SkinOptions, "UIPanelButtonTemplate")
+	EmbedWindowSettingsButton:SetPoint("BOTTOM", 0, -26)
+	EmbedWindowSettingsButton:Size(212,24)
+	cSkinButton(EmbedWindowSettingsButton)
+	EmbedWindowSettingsButton.text = ApplySkinSettingsButton:CreateFontString(nil, "OVERLAY")
+	EmbedWindowSettingsButton.text:SetFont(UIFont, 12, "OUTLINE")
+	EmbedWindowSettingsButton.text:SetPoint("CENTER", EmbedWindowSettingsButton, 0, 0)
+	EmbedWindowSettingsButton.text:SetText("Embedding Window Settings")
+	EmbedWindowSettingsButton:HookScript("OnClick", function()
+		if EmbeddingWindow:IsVisible() then
+			EmbeddingWindow:Hide()
+			print("Embedding Window is now |cffff2020Hidden|r.");
+		else
+			EmbeddingWindow:Show()
+			print("Embedding Window is now |cff00ff00Shown|r.");
+		end
+	end)
 
 	SkinOptionsCloseButton = CreateFrame("Button", "SkinOptionsCloseButton", SkinOptions, "UIPanelButtonTemplate")
 	SkinOptionsCloseButton:SetPoint("BOTTOMRIGHT", 0, -26)
 	SkinOptionsCloseButton:Size(217,24)
 	cSkinButton(SkinOptionsCloseButton)
 	SkinOptionsCloseButton.text = SkinOptionsCloseButton:CreateFontString(nil, "OVERLAY")
-	SkinOptionsCloseButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	SkinOptionsCloseButton.text:SetFont(UIFont, 12, "OUTLINE")
 	SkinOptionsCloseButton.text:SetPoint("CENTER", SkinOptionsCloseButton, 0, 0)
 	SkinOptionsCloseButton.text:SetText("Close Skin Options")
 	SkinOptionsCloseButton:HookScript("OnClick", function() SkinOptions:Hide() end)
 
 --Buttons
+	if IsAddOnLoaded("Tukui") then GameMenuFrame:HookScript("OnShow", function(self) self:Size(195, 325) end) end
+	if IsAddOnLoaded("ElvUI") then GameMenuFrame:HookScript("OnShow", function(self) self:Size(195, 305) end) end
+	GameMenuButtonLogout:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -40)
+	SkinOptionsButton = CreateFrame("Button", "SkinOptionsButton", GameMenuFrame, "GameMenuButtonTemplate")
+	SkinOptionsButton:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -1)
+	SkinOptionsButton:Size(144,21)
+	cSkinButton(SkinOptionsButton)
+	SkinOptionsButton.text = SkinOptionsButton:CreateFontString(nil, "OVERLAY")
+	SkinOptionsButton.text:SetFont(UIFont, 12)
+	SkinOptionsButton.text:SetPoint("CENTER", SkinOptionsButton, 0, 0)
+	SkinOptionsButton.text:SetText("Skins")
+	SkinOptionsButton:HookScript("OnClick", function() SkinOptions:Show() HideUIPanel(GameMenuFrame) end)
+
 	AltoholicSkinButton = CreateFrame("Button", "AltoholicSkinButton", SkinOptions, "UIPanelButtonTemplate")
 	AltoholicSkinButton:SetPoint("TOPLEFT", 12, -40)
 	AltoholicSkinButton:Size(200,24)
 	cSkinButton(AltoholicSkinButton)
 	AltoholicSkinButton.text = AltoholicSkinButton:CreateFontString(nil, "OVERLAY")
-	AltoholicSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	AltoholicSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	AltoholicSkinButton.text:SetPoint("CENTER", AltoholicSkinButton, 0, 0)
 	if (UISkinOptions.AltoholicSkin == "Enabled") then AltoholicSkinButton.text:SetText("Altoholic Skin |cff00ff00"..UISkinOptions.AltoholicSkin.."|r") end
 	if (UISkinOptions.AltoholicSkin == "Disabled") then AltoholicSkinButton.text:SetText("Altoholic Skin |cffff2020"..UISkinOptions.AltoholicSkin.."|r") end
@@ -104,7 +135,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	ATSWSkinButton:Size(200,24)
 	cSkinButton(ATSWSkinButton)
 	ATSWSkinButton.text = ATSWSkinButton:CreateFontString(nil, "OVERLAY")
-	ATSWSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	ATSWSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	ATSWSkinButton.text:SetPoint("CENTER", ATSWSkinButton, 0, 0)
 	if (UISkinOptions.ATSWSkin == "Enabled") then ATSWSkinButton.text:SetText("ATSW Skin |cff00ff00"..UISkinOptions.ATSWSkin.."|r") end
 	if (UISkinOptions.ATSWSkin == "Disabled") then ATSWSkinButton.text:SetText("ATSW Skin |cffff2020"..UISkinOptions.ATSWSkin.."|r") end
@@ -123,7 +154,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	BigWigsSkinButton:Size(200,24)
 	cSkinButton(BigWigsSkinButton)
 	BigWigsSkinButton.text = BigWigsSkinButton:CreateFontString(nil, "OVERLAY")
-	BigWigsSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	BigWigsSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	BigWigsSkinButton.text:SetPoint("CENTER", BigWigsSkinButton, 0, 0)
 	if (UISkinOptions.BigWigsSkin == "Enabled") then BigWigsSkinButton.text:SetText("BigWigs Skin |cff00ff00"..UISkinOptions.BigWigsSkin.."|r") end
 	if (UISkinOptions.BigWigsSkin == "Disabled") then BigWigsSkinButton.text:SetText("BigWigs Skin |cffff2020"..UISkinOptions.BigWigsSkin.."|r") end
@@ -142,7 +173,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	BuyEmAllSkinButton:Size(200,24)
 	cSkinButton(BuyEmAllSkinButton)
 	BuyEmAllSkinButton.text = BuyEmAllSkinButton:CreateFontString(nil, "OVERLAY")
-	BuyEmAllSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	BuyEmAllSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	BuyEmAllSkinButton.text:SetPoint("CENTER", BuyEmAllSkinButton, 0, 0)
 	if (UISkinOptions.BuyEmAllSkin == "Enabled") then BuyEmAllSkinButton.text:SetText("BuyEmAll Skin |cff00ff00"..UISkinOptions.BuyEmAllSkin.."|r") end
 	if (UISkinOptions.BuyEmAllSkin == "Disabled") then BuyEmAllSkinButton.text:SetText("BuyEmAll Skin |cffff2020"..UISkinOptions.BuyEmAllSkin.."|r") end
@@ -161,7 +192,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	CliqueSkinButton:Size(200,24)
 	cSkinButton(CliqueSkinButton)
 	CliqueSkinButton.text = CliqueSkinButton:CreateFontString(nil, "OVERLAY")
-	CliqueSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	CliqueSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	CliqueSkinButton.text:SetPoint("CENTER", CliqueSkinButton, 0, 0)
 	if (UISkinOptions.CliqueSkin == "Enabled") then CliqueSkinButton.text:SetText("Clique Skin |cff00ff00"..UISkinOptions.CliqueSkin.."|r") end
 	if (UISkinOptions.CliqueSkin == "Disabled") then CliqueSkinButton.text:SetText("Clique Skin |cffff2020"..UISkinOptions.CliqueSkin.."|r") end
@@ -180,7 +211,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	DBMSkinButton:Size(200,24)
 	cSkinButton(DBMSkinButton)
 	DBMSkinButton.text = DBMSkinButton:CreateFontString(nil, "OVERLAY")
-	DBMSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	DBMSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	DBMSkinButton.text:SetPoint("CENTER", DBMSkinButton, 0, 0)
 	if (UISkinOptions.DBMSkin == "Enabled") then DBMSkinButton.text:SetText("DBM Skin |cff00ff00"..UISkinOptions.DBMSkin.."|r") end
 	if (UISkinOptions.DBMSkin == "Disabled") then DBMSkinButton.text:SetText("DBM Skin |cffff2020"..UISkinOptions.DBMSkin.."|r") end
@@ -199,7 +230,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	DXESkinButton:Size(200,24)
 	cSkinButton(DXESkinButton)
 	DXESkinButton.text = DXESkinButton:CreateFontString(nil, "OVERLAY")
-	DXESkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	DXESkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	DXESkinButton.text:SetPoint("CENTER", DXESkinButton, 0, 0)
 	if (UISkinOptions.DXESkin == "Enabled") then DXESkinButton.text:SetText("DXE Skin |cff00ff00"..UISkinOptions.DXESkin.."|r") end
 	if (UISkinOptions.DXESkin == "Disabled") then DXESkinButton.text:SetText("DXE Skin |cffff2020"..UISkinOptions.DXESkin.."|r") end
@@ -218,7 +249,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	EnergyWatchSkinButton:Size(200,24)
 	cSkinButton(EnergyWatchSkinButton)
 	EnergyWatchSkinButton.text = EnergyWatchSkinButton:CreateFontString(nil, "OVERLAY")
-	EnergyWatchSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	EnergyWatchSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	EnergyWatchSkinButton.text:SetPoint("CENTER", EnergyWatchSkinButton, 0, 0)
 	if (UISkinOptions.EnergyWatchSkin == "Enabled") then EnergyWatchSkinButton.text:SetText("EnergyWatch Skin |cff00ff00"..UISkinOptions.EnergyWatchSkin.."|r") end
 	if (UISkinOptions.EnergyWatchSkin == "Disabled") then EnergyWatchSkinButton.text:SetText("EnergyWatch Skin |cffff2020"..UISkinOptions.EnergyWatchSkin.."|r") end
@@ -237,7 +268,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	ExtVendorSkinButton:Size(200,24)
 	cSkinButton(ExtVendorSkinButton)
 	ExtVendorSkinButton.text = ExtVendorSkinButton:CreateFontString(nil, "OVERLAY")
-	ExtVendorSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	ExtVendorSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	ExtVendorSkinButton.text:SetPoint("CENTER", ExtVendorSkinButton, 0, 0)
 	if (UISkinOptions.ExtVendorSkin == "Enabled") then ExtVendorSkinButton.text:SetText("Extended Vendor Skin |cff00ff00"..UISkinOptions.ExtVendorSkin.."|r") end
 	if (UISkinOptions.ExtVendorSkin == "Disabled") then ExtVendorSkinButton.text:SetText("Extended Vendor Skin |cffff2020"..UISkinOptions.ExtVendorSkin.."|r") end
@@ -256,7 +287,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	KarniCrapSkinButton:Size(200,24)
 	cSkinButton(KarniCrapSkinButton)
 	KarniCrapSkinButton.text = KarniCrapSkinButton:CreateFontString(nil, "OVERLAY")
-	KarniCrapSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	KarniCrapSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	KarniCrapSkinButton.text:SetPoint("CENTER", KarniCrapSkinButton, 0, 0)
 	if (UISkinOptions.KarniCrapSkin == "Enabled") then KarniCrapSkinButton.text:SetText("Karni's Crap Filter Skin |cff00ff00"..UISkinOptions.KarniCrapSkin.."|r") end
 	if (UISkinOptions.KarniCrapSkin == "Disabled") then KarniCrapSkinButton.text:SetText("Karni's Crap Filter Skin |cffff2020"..UISkinOptions.KarniCrapSkin.."|r") end
@@ -275,7 +306,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	MageNuggetsSkinButton:Size(200,24)
 	cSkinButton(MageNuggetsSkinButton)
 	MageNuggetsSkinButton.text = MageNuggetsSkinButton:CreateFontString(nil, "OVERLAY")
-	MageNuggetsSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	MageNuggetsSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	MageNuggetsSkinButton.text:SetPoint("CENTER", MageNuggetsSkinButton, 0, 0)
 	if (UISkinOptions.MageNuggetsSkin == "Enabled") then MageNuggetsSkinButton.text:SetText("MageNuggets Skin |cff00ff00"..UISkinOptions.MageNuggetsSkin.."|r") end
 	if (UISkinOptions.MageNuggetsSkin == "Disabled") then MageNuggetsSkinButton.text:SetText("MageNuggets Skin |cffff2020"..UISkinOptions.MageNuggetsSkin.."|r") end
@@ -294,7 +325,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	MoveAnythingSkinButton:Size(200,24)
 	cSkinButton(MoveAnythingSkinButton)
 	MoveAnythingSkinButton.text = MoveAnythingSkinButton:CreateFontString(nil, "OVERLAY")
-	MoveAnythingSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	MoveAnythingSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	MoveAnythingSkinButton.text:SetPoint("CENTER", MoveAnythingSkinButton, 0, 0)
 	if (UISkinOptions.MoveAnythingSkin == "Enabled") then MoveAnythingSkinButton.text:SetText("MoveAnything Skin |cff00ff00"..UISkinOptions.MoveAnythingSkin.."|r") end
 	if (UISkinOptions.MoveAnythingSkin == "Disabled") then MoveAnythingSkinButton.text:SetText("MoveAnything Skin |cffff2020"..UISkinOptions.MoveAnythingSkin.."|r") end
@@ -313,7 +344,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	MRTSkinButton:Size(200,24)
 	cSkinButton(MRTSkinButton)
 	MRTSkinButton.text = MRTSkinButton:CreateFontString(nil, "OVERLAY")
-	MRTSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	MRTSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	MRTSkinButton.text:SetPoint("CENTER", MRTSkinButton, 0, 0)
 	if (UISkinOptions.MRTSkin == "Enabled") then MRTSkinButton.text:SetText("Mizus Raid Tracker Skin |cff00ff00"..UISkinOptions.MRTSkin.."|r") end
 	if (UISkinOptions.MRTSkin == "Disabled") then MRTSkinButton.text:SetText("Mizus Raid Tracker Skin |cffff2020"..UISkinOptions.MRTSkin.."|r") end
@@ -332,7 +363,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	OdysseySkinButton:Size(200,24)
 	cSkinButton(OdysseySkinButton)
 	OdysseySkinButton.text = OdysseySkinButton:CreateFontString(nil, "OVERLAY")
-	OdysseySkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	OdysseySkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	OdysseySkinButton.text:SetPoint("CENTER", OdysseySkinButton, 0, 0)
 	if (UISkinOptions.OdysseySkin == "Enabled") then OdysseySkinButton.text:SetText("Odyssey Skin |cff00ff00"..UISkinOptions.OdysseySkin.."|r") end
 	if (UISkinOptions.OdysseySkin == "Disabled") then OdysseySkinButton.text:SetText("Odyssey Skin |cffff2020"..UISkinOptions.OdysseySkin.."|r") end
@@ -351,7 +382,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	OgriLazySkinButton:Size(200,24)
 	cSkinButton(OgriLazySkinButton)
 	OgriLazySkinButton.text = OgriLazySkinButton:CreateFontString(nil, "OVERLAY")
-	OgriLazySkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	OgriLazySkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	OgriLazySkinButton.text:SetPoint("CENTER", OgriLazySkinButton, 0, 0)
 	if (UISkinOptions.OgriLazySkin == "Enabled") then OgriLazySkinButton.text:SetText("Ogri'Lazy Skin |cff00ff00"..UISkinOptions.OgriLazySkin.."|r") end
 	if (UISkinOptions.OgriLazySkin == "Disabled") then OgriLazySkinButton.text:SetText("Ogri'Lazy Skin |cffff2020"..UISkinOptions.OgriLazySkin.."|r") end
@@ -370,7 +401,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	OmenSkinButton:Size(200,24)
 	cSkinButton(OmenSkinButton)
 	OmenSkinButton.text = OmenSkinButton:CreateFontString(nil, "OVERLAY")
-	OmenSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	OmenSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	OmenSkinButton.text:SetPoint("CENTER", OmenSkinButton, 0, 0)
 	if (UISkinOptions.OmenSkin == "Enabled") then OmenSkinButton.text:SetText("Omen Skin |cff00ff00"..UISkinOptions.OmenSkin.."|r") end
 	if (UISkinOptions.OmenSkin == "Disabled") then OmenSkinButton.text:SetText("Omen Skin |cffff2020"..UISkinOptions.OmenSkin.."|r") end
@@ -389,7 +420,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	OutfitterSkinButton:Size(200,24)
 	cSkinButton(OutfitterSkinButton)
 	OutfitterSkinButton.text = OutfitterSkinButton:CreateFontString(nil, "OVERLAY")
-	OutfitterSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	OutfitterSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	OutfitterSkinButton.text:SetPoint("CENTER", OutfitterSkinButton, 0, 0)
 	if (UISkinOptions.OutfitterSkin == "Enabled") then OutfitterSkinButton.text:SetText("Outfitter Skin |cff00ff00"..UISkinOptions.OutfitterSkin.."|r") end
 	if (UISkinOptions.OutfitterSkin == "Disabled") then OutfitterSkinButton.text:SetText("Outfitter Skin |cffff2020"..UISkinOptions.OutfitterSkin.."|r") end
@@ -408,7 +439,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	PlayerScoreSkinButton:Size(200,24)
 	cSkinButton(PlayerScoreSkinButton)
 	PlayerScoreSkinButton.text = PlayerScoreSkinButton:CreateFontString(nil, "OVERLAY")
-	PlayerScoreSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	PlayerScoreSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	PlayerScoreSkinButton.text:SetPoint("CENTER", PlayerScoreSkinButton, 0, 0)
 	if (UISkinOptions.PlayerScoreSkin == "Enabled") then PlayerScoreSkinButton.text:SetText("PlayerScore Skin |cff00ff00"..UISkinOptions.PlayerScoreSkin.."|r") end
 	if (UISkinOptions.PlayerScoreSkin == "Disabled") then PlayerScoreSkinButton.text:SetText("PlayerScore Skin |cffff2020"..UISkinOptions.PlayerScoreSkin.."|r") end
@@ -427,7 +458,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	PoisonerSkinButton:Size(200,24)
 	cSkinButton(PoisonerSkinButton)
 	PoisonerSkinButton.text = PoisonerSkinButton:CreateFontString(nil, "OVERLAY")
-	PoisonerSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	PoisonerSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	PoisonerSkinButton.text:SetPoint("CENTER", PoisonerSkinButton, 0, 0)
 	if (UISkinOptions.PoisonerSkin == "Enabled") then PoisonerSkinButton.text:SetText("Poisoner Skin |cff00ff00"..UISkinOptions.PoisonerSkin.."|r") end
 	if (UISkinOptions.PoisonerSkin == "Disabled") then PoisonerSkinButton.text:SetText("Poisoner Skin |cffff2020"..UISkinOptions.PoisonerSkin.."|r") end
@@ -446,7 +477,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	PoMTrackerSkinButton:Size(200,24)
 	cSkinButton(PoMTrackerSkinButton)
 	PoMTrackerSkinButton.text = PoMTrackerSkinButton:CreateFontString(nil, "OVERLAY")
-	PoMTrackerSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	PoMTrackerSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	PoMTrackerSkinButton.text:SetPoint("CENTER", PoMTrackerSkinButton, 0, 0)
 	if (UISkinOptions.PoMTrackerSkin == "Enabled") then PoMTrackerSkinButton.text:SetText("PoMTracker Skin |cff00ff00"..UISkinOptions.PoMTrackerSkin.."|r") end
 	if (UISkinOptions.PoMTrackerSkin == "Disabled") then PoMTrackerSkinButton.text:SetText("PoMTracker Skin |cffff2020"..UISkinOptions.PoMTrackerSkin.."|r") end
@@ -465,7 +496,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	PowerAurasSkinButton:Size(200,24)
 	cSkinButton(PowerAurasSkinButton)
 	PowerAurasSkinButton.text = PowerAurasSkinButton:CreateFontString(nil, "OVERLAY")
-	PowerAurasSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	PowerAurasSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	PowerAurasSkinButton.text:SetPoint("CENTER", PowerAurasSkinButton, 0, 0)
 	if (UISkinOptions.PowerAurasSkin == "Enabled") then PowerAurasSkinButton.text:SetText("Power Auras Skin |cff00ff00"..UISkinOptions.PowerAurasSkin.."|r") end
 	if (UISkinOptions.PowerAurasSkin == "Disabled") then PowerAurasSkinButton.text:SetText("Power Auras Skin |cffff2020"..UISkinOptions.PowerAurasSkin.."|r") end
@@ -484,7 +515,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	RaidInviteOrganizerSkinButton:Size(200,24)
 	cSkinButton(RaidInviteOrganizerSkinButton)
 	RaidInviteOrganizerSkinButton.text = RaidInviteOrganizerSkinButton:CreateFontString(nil, "OVERLAY")
-	RaidInviteOrganizerSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	RaidInviteOrganizerSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	RaidInviteOrganizerSkinButton.text:SetPoint("CENTER", RaidInviteOrganizerSkinButton, 0, 0)
 	if (UISkinOptions.RaidInviteOrganizerSkin == "Enabled") then RaidInviteOrganizerSkinButton.text:SetText("Raid Invite Organizer Skin |cff00ff00"..UISkinOptions.RaidInviteOrganizerSkin.."|r") end
 	if (UISkinOptions.RaidInviteOrganizerSkin == "Disabled") then RaidInviteOrganizerSkinButton.text:SetText("Raid Invite Organizer Skin |cffff2020"..UISkinOptions.RaidInviteOrganizerSkin.."|r") end
@@ -503,7 +534,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	RaidBuffStatusSkinButton:Size(200,24)
 	cSkinButton(RaidBuffStatusSkinButton)
 	RaidBuffStatusSkinButton.text = RaidBuffStatusSkinButton:CreateFontString(nil, "OVERLAY")
-	RaidBuffStatusSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	RaidBuffStatusSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	RaidBuffStatusSkinButton.text:SetPoint("CENTER", RaidBuffStatusSkinButton, 0, 0)
 	if (UISkinOptions.RaidBuffStatusSkin == "Enabled") then RaidBuffStatusSkinButton.text:SetText("Raid Buff Status Skin |cff00ff00"..UISkinOptions.RaidBuffStatusSkin.."|r") end
 	if (UISkinOptions.RaidBuffStatusSkin == "Disabled") then RaidBuffStatusSkinButton.text:SetText("Raid Buff Status Skin |cffff2020"..UISkinOptions.RaidBuffStatusSkin.."|r") end
@@ -517,31 +548,12 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 			RaidBuffStatusSkinButton.text:SetText("Raid Buff Status Skin |cff00ff00"..UISkinOptions.RaidBuffStatusSkin.."|r")
 		end
 	end)
-	RecountSkinButton = CreateFrame("Button", "RecountSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	RecountSkinButton:SetPoint("TOP", 0, -370)
-	RecountSkinButton:Size(200,24)
-	cSkinButton(RecountSkinButton)
-	RecountSkinButton.text = RecountSkinButton:CreateFontString(nil, "OVERLAY")
-	RecountSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
-	RecountSkinButton.text:SetPoint("CENTER", RecountSkinButton, 0, 0)
-	if (UISkinOptions.RecountSkin == "Enabled") then RecountSkinButton.text:SetText("Recount Skin |cff00ff00"..UISkinOptions.RecountSkin.."|r") end
-	if (UISkinOptions.RecountSkin == "Disabled") then RecountSkinButton.text:SetText("Recount Skin |cffff2020"..UISkinOptions.RecountSkin.."|r") end
-	if not IsAddOnLoaded("Recount") then RecountSkinButton:Disable() RecountSkinButton.text:SetText("|cFF808080Recount Not Detected|r") end
-	RecountSkinButton:HookScript("OnClick", function()
-		if (UISkinOptions.RecountSkin == "Enabled") then
-			UISkinOptions.RecountSkin = "Disabled"			
-			RecountSkinButton.text:SetText("Recount Skin |cffff2020"..UISkinOptions.RecountSkin.."|r")
-		else
-			UISkinOptions.RecountSkin = "Enabled"
-			RecountSkinButton.text:SetText("Recount Skin |cff00ff00"..UISkinOptions.RecountSkin.."|r")
-		end
-	end)
 	SearingPlasmaTrackerSkinButton = CreateFrame("Button", "SearingPlasmaTrackerSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	SearingPlasmaTrackerSkinButton:SetPoint("TOPRIGHT", -12, -40)
+	SearingPlasmaTrackerSkinButton:SetPoint("TOP", 0, -370)
 	SearingPlasmaTrackerSkinButton:Size(200,24)
 	cSkinButton(SearingPlasmaTrackerSkinButton)
 	SearingPlasmaTrackerSkinButton.text = SearingPlasmaTrackerSkinButton:CreateFontString(nil, "OVERLAY")
-	SearingPlasmaTrackerSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	SearingPlasmaTrackerSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	SearingPlasmaTrackerSkinButton.text:SetPoint("CENTER", SearingPlasmaTrackerSkinButton, 0, 0)
 	if (UISkinOptions.SearingPlasmaTrackerSkin == "Enabled") then SearingPlasmaTrackerSkinButton.text:SetText("Searing Plasma Tracker Skin |cff00ff00"..UISkinOptions.SearingPlasmaTrackerSkin.."|r") end
 	if (UISkinOptions.SearingPlasmaTrackerSkin == "Disabled") then SearingPlasmaTrackerSkinButton.text:SetText("Searing Plasma Tracker Skin |cffff2020"..UISkinOptions.SearingPlasmaTrackerSkin.."|r") end
@@ -555,31 +567,12 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 			SearingPlasmaTrackerSkinButton.text:SetText("Searing Plasma Tracker Skin |cff00ff00"..UISkinOptions.SearingPlasmaTrackerSkin.."|r")
 		end
 	end)
-	SkadaSkinButton = CreateFrame("Button", "SkadaSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	SkadaSkinButton:SetPoint("TOPRIGHT", -12, -70)
-	SkadaSkinButton:Size(200,24)
-	cSkinButton(SkadaSkinButton)
-	SkadaSkinButton.text = SkadaSkinButton:CreateFontString(nil, "OVERLAY")
-	SkadaSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
-	SkadaSkinButton.text:SetPoint("CENTER", SkadaSkinButton, 0, 0)
-	if (UISkinOptions.SkadaSkin == "Enabled") then SkadaSkinButton.text:SetText("Skada Skin |cff00ff00"..UISkinOptions.SkadaSkin.."|r") end
-	if (UISkinOptions.SkadaSkin == "Disabled") then SkadaSkinButton.text:SetText("Skada Skin |cffff2020"..UISkinOptions.SkadaSkin.."|r") end
-	if not IsAddOnLoaded("Skada") then SkadaSkinButton:Disable() SkadaSkinButton.text:SetText("|cFF808080Skada Not Detected|r") end
-	SkadaSkinButton:HookScript("OnClick", function()
-		if (UISkinOptions.SkadaSkin == "Enabled") then
-			UISkinOptions.SkadaSkin = "Disabled"			
-			SkadaSkinButton.text:SetText("Skada Skin |cffff2020"..UISkinOptions.SkadaSkin.."|r")
-		else
-			UISkinOptions.SkadaSkin = "Enabled"
-			SkadaSkinButton.text:SetText("Skada Skin |cff00ff00"..UISkinOptions.SkadaSkin.."|r")
-		end
-	end)
 	SpineCounterSkinButton = CreateFrame("Button", "SpineCounterSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	SpineCounterSkinButton:SetPoint("TOPRIGHT", -12, -100)
+	SpineCounterSkinButton:SetPoint("TOPRIGHT", -12, -40)
 	SpineCounterSkinButton:Size(200,24)
 	cSkinButton(SpineCounterSkinButton)
 	SpineCounterSkinButton.text = SpineCounterSkinButton:CreateFontString(nil, "OVERLAY")
-	SpineCounterSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	SpineCounterSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	SpineCounterSkinButton.text:SetPoint("CENTER", SpineCounterSkinButton, 0, 0)
 	if (UISkinOptions.SpineCounterSkin == "Enabled") then SpineCounterSkinButton.text:SetText("Spine Blood Counter Skin |cff00ff00"..UISkinOptions.SpineCounterSkin.."|r") end
 	if (UISkinOptions.SpineCounterSkin == "Disabled") then SpineCounterSkinButton.text:SetText("Spine Blood Counter Skin |cffff2020"..UISkinOptions.SpineCounterSkin.."|r") end
@@ -594,11 +587,11 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		end
 	end)
 	SpySkinButton = CreateFrame("Button", "SpySkinButton", SkinOptions, "UIPanelButtonTemplate")
-	SpySkinButton:SetPoint("TOPRIGHT", -12, -130)
+	SpySkinButton:SetPoint("TOPRIGHT", -12, -70)
 	SpySkinButton:Size(200,24)
 	cSkinButton(SpySkinButton)
 	SpySkinButton.text = SpySkinButton:CreateFontString(nil, "OVERLAY")
-	SpySkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	SpySkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	SpySkinButton.text:SetPoint("CENTER", SpySkinButton, 0, 0)
 	if (UISkinOptions.SpySkin == "Enabled") then SpySkinButton.text:SetText("Spy Skin |cff00ff00"..UISkinOptions.SpySkin.."|r") end
 	if (UISkinOptions.SpySkin == "Disabled") then SpySkinButton.text:SetText("Spy Skin |cffff2020"..UISkinOptions.SpySkin.."|r") end
@@ -613,11 +606,11 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		end
 	end)
 	SwatterSkinButton = CreateFrame("Button", "SwatterSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	SwatterSkinButton:SetPoint("TOPRIGHT", -12, -160)
+	SwatterSkinButton:SetPoint("TOPRIGHT", -12, -100)
 	SwatterSkinButton:Size(200,24)
 	cSkinButton(SwatterSkinButton)
 	SwatterSkinButton.text = SwatterSkinButton:CreateFontString(nil, "OVERLAY")
-	SwatterSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	SwatterSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	SwatterSkinButton.text:SetPoint("CENTER", SwatterSkinButton, 0, 0)
 	if (UISkinOptions.SwatterSkin == "Enabled") then SwatterSkinButton.text:SetText("Swatter Skin |cff00ff00"..UISkinOptions.SwatterSkin.."|r") end
 	if (UISkinOptions.SwatterSkin == "Disabled") then SwatterSkinButton.text:SetText("Swatter Skin |cffff2020"..UISkinOptions.SwatterSkin.."|r") end
@@ -632,11 +625,11 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		end
 	end)
 	TinyDPSSkinButton = CreateFrame("Button", "TinyDPSSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	TinyDPSSkinButton:SetPoint("TOPRIGHT", -12, -190)
+	TinyDPSSkinButton:SetPoint("TOPRIGHT", -12, -130)
 	TinyDPSSkinButton:Size(200,24)
 	cSkinButton(TinyDPSSkinButton)
 	TinyDPSSkinButton.text = TinyDPSSkinButton:CreateFontString(nil, "OVERLAY")
-	TinyDPSSkinButton.text:SetFont("Interface\\AddOns\\Tukui_UIPackages_Skins\\default.ttf", 14, "OUTLINE")
+	TinyDPSSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	TinyDPSSkinButton.text:SetPoint("CENTER", TinyDPSSkinButton, 0, 0)
 	if (UISkinOptions.TinyDPSSkin == "Enabled") then TinyDPSSkinButton.text:SetText("TinyDPS Skin |cff00ff00"..UISkinOptions.TinyDPSSkin.."|r") end
 	if (UISkinOptions.TinyDPSSkin == "Disabled") then TinyDPSSkinButton.text:SetText("TinyDPS Skin |cffff2020"..UISkinOptions.TinyDPSSkin.."|r") end
@@ -662,5 +655,4 @@ function SlashCmdList.SKINOPTIONSWINDOW(msg, editbox)
 	end
 end
 end)
-
 
