@@ -1,4 +1,3 @@
-TukuiSkinsDB = {}
 local Recount = _G.Recount
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
@@ -180,7 +179,8 @@ local Recount_Skin = CreateFrame("Frame")
 	Recount_Skin:SetScript("OnEvent", function(self)
 		self:UnregisterAllEvents()
 		self = nil
-		if (TukuiSkinsDB.recountembedded == "Enabled") then
+		if (UISkinOptions.EmbedRecount == "Enabled") then
+			Recount:LockWindows(true)
 			Recount_MainWindow:ClearAllPoints()
 			Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 7)
 			Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 0)
@@ -191,16 +191,16 @@ local Recount_Skin = CreateFrame("Frame")
 
 SLASH_RECOUNTEMBEDDED1, SLASH_RECOUNTEMBEDDED2 = '/er', '/embedrecount';
 function SlashCmdList.RECOUNTEMBEDDED(msg, editbox)
-	if (TukuiSkinsDB.recountembedded == "Disabled") then
-		TukuiSkinsDB.recountembedded = "Enabled";
+	if (UISkinOptions.EmbedRecount == "Disabled") then
+		UISkinOptions.EmbedRecount = "Enabled";
 	else
-		TukuiSkinsDB.recountembedded = "Disabled";
+		UISkinOptions.EmbedRecount = "Disabled";
 	end
-	if(TukuiSkinsDB.recountembedded == "Enabled") then
-	print("Recount Embedding is |cff00ff00"..TukuiSkinsDB.recountembedded.."|r.");
+	if(UISkinOptions.EmbedRecount == "Enabled") then
+	print("Recount Embedding is |cff00ff00"..UISkinOptions.EmbedRecount.."|r.");
 	end
-	if(TukuiSkinsDB.recountembedded == "Disabled") then
-	print("Recount Embedding is |cffff2020"..TukuiSkinsDB.recountembedded.."|r.");
+	if(UISkinOptions.EmbedRecount == "Disabled") then
+	print("Recount Embedding is |cffff2020"..UISkinOptions.EmbedRecount.."|r.");
 	end
 	print("Please Reload the UI with /rl");	
 end
