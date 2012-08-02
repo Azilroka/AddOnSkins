@@ -24,6 +24,7 @@ Outfitter.lua
 PlayerScore.lua
 PoMTracker.lua
 Poisoner.lua
+Postal.lua
 PowerAuras.lua
 Quartz.lua
 RaidInviteOrganizer.lua
@@ -32,6 +33,7 @@ SearingPlasmaTracker.lua
 SpineCounter.lua
 Spy.lua
 Swatter.lua
+WeakAuras.lua
 WowLua.lua
 
 DBM.lua

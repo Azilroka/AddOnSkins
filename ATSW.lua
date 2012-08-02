@@ -1,19 +1,19 @@
-if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 if not IsAddOnLoaded("AdvancedTradeSkillWindow") then return end
 local SkinATSW = CreateFrame("Frame")
-	SkinATSW:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	SkinATSW:SetScript( "OnEvent", function(self)
+	SkinATSW:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinATSW:SetScript("OnEvent", function(self)
 	if (UISkinOptions.ATSWSkin == "Disabled") then return end
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
 	ATSWFrame:HookScript("OnShow", function()
-	ATSWFrame:StripTextures()
-	ATSWSkillIcon:StripTextures()
-	ATSWListScrollFrame:StripTextures()
-	ATSWExpandButtonFrame:StripTextures()
-	ATSWRankFrameBorder:StripTextures()
-	ATSWRankFrame:StripTextures()
+	ATSWFrame:StripTextures(True)
+	ATSWSkillIcon:StripTextures(True)
+	ATSWListScrollFrame:StripTextures(True)
+	ATSWExpandButtonFrame:StripTextures(True)
+	ATSWRankFrameBorder:StripTextures(True)
+	ATSWRankFrame:StripTextures(True)
 	ATSWFrame:SetTemplate("Transparent")
 	ATSWRankFrame:CreateBackdrop("Transparent")
 	ATSWRankFrame:SetStatusBarTexture(c["media"].normTex)
@@ -112,20 +112,20 @@ local SkinATSW = CreateFrame("Frame")
 	ATSWDifficultySortButton:Point("TOPLEFT", ATSWFrame, "TOPLEFT", 20, -32)
 
 --Tooltip
-	ATSWTradeskillTooltip:StripTextures(true)
+	ATSWTradeskillTooltip:StripTextures(True)
 	ATSWTradeskillTooltip:SetTemplate("Transparent")
 	ATSWTradeskillTooltip:CreateShadow("Default")
 --Regeants frame
-	ATSWReagentFrame:StripTextures(true)
+	ATSWReagentFrame:StripTextures(True)
 	ATSWReagentFrame:SetTemplate("Transparent")
 	ATSWReagentFrame:CreateShadow("Default")
 --Options frame
-	ATSWOptionsFrame:StripTextures(true)
+	ATSWOptionsFrame:StripTextures(True)
 	ATSWOptionsFrame:SetTemplate("Transparent")
 	ATSWOptionsFrame:CreateShadow("Default")
 --Edit frame
-	ATSWCSFrame:StripTextures(true)
-	ATSWCSUListScrollFrame:StripTextures()
+	ATSWCSFrame:StripTextures(True)
+	ATSWCSUListScrollFrame:StripTextures(True)
 	ATSWCSFrame:SetTemplate("Transparent")
 		local once = false
 			for i=1, ATSW_MAX_TRADE_SKILL_REAGENTS do
@@ -158,7 +158,7 @@ local SkinATSW = CreateFrame("Frame")
 			end
 		cSkinScrollBar(ATSWCSUListScrollFrameScrollBar)
 		cSkinScrollBar(ATSWCSSListScrollFrameScrollBar)
-		ATSWCSSListScrollFrame:StripTextures()
+		ATSWCSSListScrollFrame:StripTextures(True)
 		cSkinCloseButton(ATSWCSFrameCloseButton)
 	for i = 1, 4 do
 		cSkinButton(_G["ATSWQueueItem"..i.."DeleteButton"])
@@ -168,7 +168,7 @@ local SkinATSW = CreateFrame("Frame")
 	ATSWAddCategoryButton:Point("LEFT", ATSWCSNewCategoryBox, "RIGHT", 5, 0)
 	ATSWFrameCloseButton:Point("TOPRIGHT", ATSWFrame, "TOPRIGHT", -5, -5)
 	ATSWBuyReagentsButton:Point("CENTER", ATSWReagentFrame, "BOTTOMLEFT", 246, 50)
-	ATSWQueueScrollFrame:StripTextures()
+	ATSWQueueScrollFrame:StripTextures(True)
 	ATSWQueueScrollFrame:Width(52)
 	cSkinScrollBar(ATSWQueueScrollFrameScrollBar)
 	cSkinNextPrevButton(ATSWIncrementButton)
@@ -176,7 +176,7 @@ local SkinATSW = CreateFrame("Frame")
 	cSkinButton(ATSWAutoBuyButton)
 
 --Shopping List Frame
-	ATSWShoppingListFrame:StripTextures()
+	ATSWShoppingListFrame:StripTextures(True)
 	ATSWShoppingListFrame:SetTemplate("Transparent")
 	ATSWShoppingListFrame:Size(475,150)
 	ATSWShoppingListFrame:ClearAllPoints()
@@ -184,15 +184,15 @@ local SkinATSW = CreateFrame("Frame")
 	cSkinButton(ATSWSLCloseButton)
 	ATSWSLCloseButton:ClearAllPoints()
 	ATSWSLCloseButton:Point("TOPRIGHT", ATSWShoppingListFrame, "TOPRIGHT", -5, -5)
-	ATSWSLScrollFrame:StripTextures()
+	ATSWSLScrollFrame:StripTextures(True)
 	cSkinScrollBar(ATSWSLScrollFrameScrollBar)
 
 --Delay Frame
 	cSkinButton(ATSWScanDelayFrameSkipButton)
 	cSkinButton(ATSWScanDelayFrameAbortButton)
-	ATSWScanDelayFrame:StripTextures()
+	ATSWScanDelayFrame:StripTextures(True)
 	ATSWScanDelayFrame:SetTemplate("Transparent")
-	ATSWScanDelayFrameBar:StripTextures()
+	ATSWScanDelayFrameBar:StripTextures(True)
 	ATSWScanDelayFrameBar:CreateBackdrop("ClassColor")
 	ATSWScanDelayFrameBar:SetStatusBarTexture(c["media"].normTex)
 	local color = RAID_CLASS_COLORS[UIPackageSkinFuncs.ccolor]

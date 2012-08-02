@@ -7,9 +7,9 @@ local c = UIPackageSkinFuncs.c
 	SkinEnergyWatch:SetScript( "OnEvent", function(self)
 	if (UISkinOptions.EnergyWatchSkin == "Disabled") then return end
 
-EnergyWatchBar:StripTextures()
-EnergyWatchStatusBar:CreateBackdrop()
-EnergyWatchStatusBar:SetStatusBarTexture(c["media"].normTex)
+	EnergyWatchBar:StripTextures(True)
+	EnergyWatchStatusBar:CreateBackdrop()
+	EnergyWatchStatusBar:SetStatusBarTexture(c["media"].normTex)
 
 end)
 

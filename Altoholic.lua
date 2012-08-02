@@ -1,22 +1,21 @@
-if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 if not IsAddOnLoaded("Altoholic") then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
 local SkinAltoholic = CreateFrame("Frame")
-SkinAltoholic:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-SkinAltoholic:SetScript( "OnEvent", function(self)
+SkinAltoholic:RegisterEvent("PLAYER_ENTERING_WORLD")
+SkinAltoholic:SetScript("OnEvent", function(self)
 if (UISkinOptions.AltoholicSkin == "Disabled") then return end
-if IsAddOnLoaded("ElvUI_SLE") then AltoholicSkinButton:Disable() AltoholicSkinButton.text:SetText("|cFF808080Altoholic Skin Disabled for SLE|r") return end
 LoadAddOn("Altoholic_Characters")
 
-	AltoTooltip:HookScript( "OnShow", function( self ) self:SetTemplate( "Transparent" ) end )
+	AltoTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 	AltoholicFramePortrait:Kill()
-	AltoholicFrame:StripTextures()
-	AltoholicFrameActivity:StripTextures()
-	AltoholicFrameBagUsage:StripTextures()
-	AltoholicFrameSkills:StripTextures()
-	AltoholicFrameSummary:StripTextures()
-	AltoMsgBox:StripTextures()
+	AltoholicFrame:StripTextures(True)
+	AltoholicFrameActivity:StripTextures(True)
+	AltoholicFrameBagUsage:StripTextures(True)
+	AltoholicFrameSkills:StripTextures(True)
+	AltoholicFrameSummary:StripTextures(True)
+	AltoMsgBox:StripTextures(True)
 	AltoholicFrame:SetTemplate("Transparent")
 	AltoholicFrameActivity:SetTemplate("Transparent")
 	AltoholicFrameBagUsage:SetTemplate("Transparent")
@@ -37,15 +36,15 @@ LoadAddOn("Altoholic_Characters")
 	AltoholicFrame_SearchEditBox:Size(175, 15)
 	AltoholicFrame_SearchEditBox:Point("TOPLEFT", AltoholicFrame, "TOPLEFT", 37, -56)
 	cSkinScrollBar(AltoholicFrameSummaryScrollFrameScrollBar)
-	AltoholicFrameSummaryScrollFrame:StripTextures()
+	AltoholicFrameSummaryScrollFrame:StripTextures(True)
 	cSkinScrollBar(AltoholicFrameBagUsageScrollFrameScrollBar)
-	AltoholicFrameBagUsageScrollFrame:StripTextures()
+	AltoholicFrameBagUsageScrollFrame:StripTextures(True)
 	cSkinScrollBar(AltoholicFrameSkillsScrollFrameScrollBar)
-	AltoholicFrameSkillsScrollFrame:StripTextures()
+	AltoholicFrameSkillsScrollFrame:StripTextures(True)
 	cSkinScrollBar(AltoholicFrameActivityScrollFrameScrollBar)
-	AltoholicFrameActivityScrollFrame:StripTextures()
+	AltoholicFrameActivityScrollFrame:StripTextures(True)
 	AltoholicFrameTab1:Point("TOPLEFT", AltoholicFrame, "BOTTOMLEFT", -5, 2)
-	AltoholicFrameContainers:StripTextures()
+	AltoholicFrameContainers:StripTextures(True)
 	AltoholicFrameContainers:SetTemplate("Transparent")
 	AltoholicFrameRecipes:SetTemplate("Transparent")
 	AltoholicFrameQuests:SetTemplate("Transparent")
@@ -56,11 +55,11 @@ LoadAddOn("Altoholic_Characters")
 	AltoholicFramePets:SetTemplate("Transparent")
 	AltoholicFrameAuctions:SetTemplate("Transparent")
 	cSkinScrollBar(AltoholicFrameContainersScrollFrameScrollBar)
-	AltoholicFrameContainersScrollFrame:StripTextures()
+	AltoholicFrameContainersScrollFrame:StripTextures(True)
 	cSkinScrollBar(AltoholicFrameQuestsScrollFrameScrollBar)
-	AltoholicFrameQuestsScrollFrame:StripTextures()
+	AltoholicFrameQuestsScrollFrame:StripTextures(True)
 	cSkinScrollBar(AltoholicFrameRecipesScrollFrameScrollBar)
-	AltoholicFrameRecipesScrollFrame:StripTextures()
+	AltoholicFrameRecipesScrollFrame:StripTextures(True)
 	cSkinDropDownBox(AltoholicFrameTalents_SelectMember)
 	cSkinDropDownBox(AltoholicTabCharacters_SelectRealm)
 	cSkinNextPrevButton(AltoholicFrameSpellbookPrevPage)
@@ -74,12 +73,12 @@ LoadAddOn("Altoholic_Characters")
 	cSkinButton(AltoholicTabCharacters_Sort3)
 
 	for i = 1, 4 do
-		_G["AltoholicTabSummaryMenuItem"..i]:StripTextures()
+		_G["AltoholicTabSummaryMenuItem"..i]:StripTextures(True)
 		_G["AltoholicTabSummaryMenuItem"..i]:SetTemplate("Transparent")	
 	end
 
 	for i = 1, 8 do
-		_G["AltoholicTabSummary_Sort"..i]:StripTextures()
+		_G["AltoholicTabSummary_Sort"..i]:StripTextures(True)
 		_G["AltoholicTabSummary_Sort"..i]:SetTemplate("Transparent")
 	end
 
@@ -88,55 +87,55 @@ LoadAddOn("Altoholic_Characters")
 	end
 
 	for i = 1, 14 do
-		_G["AltoholicFrameContainersEntry1Item"..i]:StripTextures()
-		_G["AltoholicFrameContainersEntry2Item"..i]:StripTextures()
-		_G["AltoholicFrameContainersEntry3Item"..i]:StripTextures()
-		_G["AltoholicFrameContainersEntry4Item"..i]:StripTextures()
-		_G["AltoholicFrameContainersEntry5Item"..i]:StripTextures()
-		_G["AltoholicFrameContainersEntry6Item"..i]:StripTextures()
-		_G["AltoholicFrameContainersEntry7Item"..i]:StripTextures()
+		_G["AltoholicFrameContainersEntry1Item"..i]:StripTextures(True)
+		_G["AltoholicFrameContainersEntry2Item"..i]:StripTextures(True)
+		_G["AltoholicFrameContainersEntry3Item"..i]:StripTextures(True)
+		_G["AltoholicFrameContainersEntry4Item"..i]:StripTextures(True)
+		_G["AltoholicFrameContainersEntry5Item"..i]:StripTextures(True)
+		_G["AltoholicFrameContainersEntry6Item"..i]:StripTextures(True)
+		_G["AltoholicFrameContainersEntry7Item"..i]:StripTextures(True)
 	end
 
 local function LoadSkinAchievements()
 
-	AltoholicFrameAchievements:StripTextures()
+	AltoholicFrameAchievements:StripTextures(True)
 	AltoholicFrameAchievements:CreateBackdrop("Transparent")
-	AltoholicFrameAchievementsScrollFrame:StripTextures()
+	AltoholicFrameAchievementsScrollFrame:StripTextures(True)
 	cSkinScrollBar(AltoholicFrameAchievementsScrollFrameScrollBar)
-	AltoholicAchievementsMenuScrollFrame:StripTextures()
+	AltoholicAchievementsMenuScrollFrame:StripTextures(True)
 	cSkinScrollBar(AltoholicAchievementsMenuScrollFrameScrollBar)
 	cSkinDropDownBox(AltoholicTabAchievements_SelectRealm)
 	AltoholicTabAchievements_SelectRealm:Point("TOPLEFT", AltoholicFrame, "TOPLEFT", 205, -57)
 
 	for i = 1, 15 do
-		_G["AltoholicTabAchievementsMenuItem"..i]:StripTextures()
+		_G["AltoholicTabAchievementsMenuItem"..i]:StripTextures(True)
 		_G["AltoholicTabAchievementsMenuItem"..i]:SetTemplate("Transparent")
 	end
 
 	for i = 1, 10 do
-		_G["AltoholicFrameAchievementsEntry1Item"..i]:StripTextures()
-		_G["AltoholicFrameAchievementsEntry2Item"..i]:StripTextures()
-		_G["AltoholicFrameAchievementsEntry3Item"..i]:StripTextures()
-		_G["AltoholicFrameAchievementsEntry4Item"..i]:StripTextures()
-		_G["AltoholicFrameAchievementsEntry5Item"..i]:StripTextures()
-		_G["AltoholicFrameAchievementsEntry6Item"..i]:StripTextures()
-		_G["AltoholicFrameAchievementsEntry7Item"..i]:StripTextures()
-		_G["AltoholicFrameAchievementsEntry8Item"..i]:StripTextures()
+		_G["AltoholicFrameAchievementsEntry1Item"..i]:StripTextures(True)
+		_G["AltoholicFrameAchievementsEntry2Item"..i]:StripTextures(True)
+		_G["AltoholicFrameAchievementsEntry3Item"..i]:StripTextures(True)
+		_G["AltoholicFrameAchievementsEntry4Item"..i]:StripTextures(True)
+		_G["AltoholicFrameAchievementsEntry5Item"..i]:StripTextures(True)
+		_G["AltoholicFrameAchievementsEntry6Item"..i]:StripTextures(True)
+		_G["AltoholicFrameAchievementsEntry7Item"..i]:StripTextures(True)
+		_G["AltoholicFrameAchievementsEntry8Item"..i]:StripTextures(True)
 	end
 end
 
 local function LoadSkinAgenda()
 
-	AltoholicFrameCalendarScrollFrame:StripTextures()
+	AltoholicFrameCalendarScrollFrame:StripTextures(True)
 	AltoholicFrameCalendarScrollFrame:CreateBackdrop("Transparent")
 	cSkinScrollBar(AltoholicFrameCalendarScrollFrameScrollBar)
 	cSkinNextPrevButton(AltoholicFrameCalendar_NextMonth)
 	cSkinNextPrevButton(AltoholicFrameCalendar_PrevMonth)
-	AltoholicTabAgendaMenuItem1:StripTextures()
+	AltoholicTabAgendaMenuItem1:StripTextures(True)
 	AltoholicTabAgendaMenuItem1:SetTemplate("Transparent")
 
 	for i = 1, 14 do
-		_G["AltoholicFrameCalendarEntry"..i]:StripTextures()
+		_G["AltoholicFrameCalendarEntry"..i]:StripTextures(True)
 		_G["AltoholicFrameCalendarEntry"..i]:SetTemplate("Transparent")
 	end
 end
@@ -145,63 +144,63 @@ local function LoadSkinGrids()
 
 	AltoholicFrameGrids:CreateBackdrop("Transparent")
 	cSkinScrollBar(AltoholicFrameGridsScrollFrameScrollBar)
-	AltoholicFrameGridsScrollFrame:StripTextures()
+	AltoholicFrameGridsScrollFrame:StripTextures(True)
 	cSkinDropDownBox(AltoholicTabGrids_SelectRealm)
 	cSkinDropDownBox(AltoholicTabGrids_SelectView)
 
 	for i = 1, 10 do
-		_G["AltoholicFrameGridsEntry1Item"..i]:StripTextures()
-		_G["AltoholicFrameGridsEntry2Item"..i]:StripTextures()
-		_G["AltoholicFrameGridsEntry3Item"..i]:StripTextures()
-		_G["AltoholicFrameGridsEntry4Item"..i]:StripTextures()
-		_G["AltoholicFrameGridsEntry5Item"..i]:StripTextures()
-		_G["AltoholicFrameGridsEntry6Item"..i]:StripTextures()
-		_G["AltoholicFrameGridsEntry7Item"..i]:StripTextures()
-		_G["AltoholicFrameGridsEntry8Item"..i]:StripTextures()
+		_G["AltoholicFrameGridsEntry1Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGridsEntry2Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGridsEntry3Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGridsEntry4Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGridsEntry5Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGridsEntry6Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGridsEntry7Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGridsEntry8Item"..i]:StripTextures(True)
 	end
 end
 
 local function LoadSkinGuild()
 
-	AltoholicFrameGuildMembers:StripTextures()
+	AltoholicFrameGuildMembers:StripTextures(True)
 	AltoholicFrameGuildMembers:SetTemplate("Transparent")
-	AltoholicFrameGuildBank:StripTextures()
+	AltoholicFrameGuildBank:StripTextures(True)
 	AltoholicFrameGuildBank:SetTemplate("Transparent")
 	cSkinScrollBar(AltoholicFrameGuildMembersScrollFrameScrollBar)
-	AltoholicFrameGuildMembersScrollFrame:StripTextures()
+	AltoholicFrameGuildMembersScrollFrame:StripTextures(True)
 
 	for i = 1, 2 do
-		_G["AltoholicTabGuildMenuItem"..i]:StripTextures()
+		_G["AltoholicTabGuildMenuItem"..i]:StripTextures(True)
 		_G["AltoholicTabGuildMenuItem"..i]:SetTemplate("Transparent")
 	end
 
 	for i = 1, 14 do
-		_G["AltoholicFrameGuildBankEntry1Item"..i]:StripTextures()
-		_G["AltoholicFrameGuildBankEntry2Item"..i]:StripTextures()
-		_G["AltoholicFrameGuildBankEntry3Item"..i]:StripTextures()
-		_G["AltoholicFrameGuildBankEntry4Item"..i]:StripTextures()
-		_G["AltoholicFrameGuildBankEntry5Item"..i]:StripTextures()
-		_G["AltoholicFrameGuildBankEntry6Item"..i]:StripTextures()
-		_G["AltoholicFrameGuildBankEntry7Item"..i]:StripTextures()
+		_G["AltoholicFrameGuildBankEntry1Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGuildBankEntry2Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGuildBankEntry3Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGuildBankEntry4Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGuildBankEntry5Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGuildBankEntry6Item"..i]:StripTextures(True)
+		_G["AltoholicFrameGuildBankEntry7Item"..i]:StripTextures(True)
 	end
 
 	for i = 1, 19 do
-		_G["AltoholicFrameGuildMembersItem"..i]:StripTextures()
+		_G["AltoholicFrameGuildMembersItem"..i]:StripTextures(True)
 	end
 
 	for i = 1, 5 do
-		_G["AltoholicTabGuild_Sort"..i]:StripTextures()
+		_G["AltoholicTabGuild_Sort"..i]:StripTextures(True)
 		_G["AltoholicTabGuild_Sort"..i]:SetTemplate("Transparent")
 	end
 end
 
 local function LoadSkinSearch()
 
-	AltoholicFrameSearch:StripTextures()
+	AltoholicFrameSearch:StripTextures(True)
 	AltoholicFrameSearch:CreateBackdrop("Transparent")
-	AltoholicFrameSearchScrollFrame:StripTextures()
+	AltoholicFrameSearchScrollFrame:StripTextures(True)
 	cSkinScrollBar(AltoholicFrameSearchScrollFrameScrollBar)
-	AltoholicSearchMenuScrollFrame:StripTextures()
+	AltoholicSearchMenuScrollFrame:StripTextures(True)
 	cSkinScrollBar(AltoholicSearchMenuScrollFrameScrollBar)
 	cSkinDropDownBox(AltoholicTabSearch_SelectRarity)
 	cSkinDropDownBox(AltoholicTabSearch_SelectSlot)
@@ -213,12 +212,12 @@ local function LoadSkinSearch()
 	cSkinEditBox(_G["AltoholicTabSearch_MaxLevel"])
 
 	for i = 1, 15 do
-		_G["AltoholicTabSearchMenuItem"..i]:StripTextures()
+		_G["AltoholicTabSearchMenuItem"..i]:StripTextures(True)
 		_G["AltoholicTabSearchMenuItem"..i]:SetTemplate("Transparent")
 	end
 
 	for i = 1, 8 do
-		_G["AltoholicTabSearch_Sort"..i]:StripTextures()
+		_G["AltoholicTabSearch_Sort"..i]:StripTextures(True)
 		_G["AltoholicTabSearch_Sort"..i]:SetTemplate("Transparent")
 	end
 end

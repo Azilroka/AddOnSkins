@@ -1,22 +1,7 @@
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 if not IsAddOnLoaded("Skada") then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
-
-SLASH_SKADAEMBEDDED1, SLASH_SKADAEMBEDDED2 = '/es', '/embedskada';
-function SlashCmdList.SKADAEMBEDDED(msg, editbox)
-	if(UISkinOptions.EmbedSkada == "Disabled") then
-		UISkinOptions.EmbedSkada = "Enabled";
-	else
-		UISkinOptions.EmbedSkada = "Disabled";
-	end
-	if(UISkinOptions.EmbedSkada == "Enabled") then
-	print("Skada Embedding to Embed Window is |cff00ff00"..UISkinOptions.EmbedSkada.."|r.");
-	end
-	if(UISkinOptions.EmbedSkada == "Disabled") then
-	print("Skada Embedding to Embed Window is |cffff2020"..UISkinOptions.EmbedSkada.."|r.");
-	end
-	print("Please Reload the UI with /rl");	
-end
 
 local Skada = Skada
 local barSpacing = 1
@@ -123,6 +108,15 @@ local function EmbedWindow(window, width, barheight, height, point, relativeFram
 end
 
 local windows = {}
+function DeembedSkada()
+		if not Skada.CreateWindow_ then
+			Skada.CreateWindow_ = Skada.CreateWindow
+			Skada.DeleteWindow_ = Skada.DeleteWindow
+		end
+		for _, window in pairs(skadaWindows) do
+			window.bargroup:SetParent(UIParent)
+		end
+end
 function EmbedSkada()
 	if(#windows == 1) then
 		EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 2 - (barSpacing * 4)) / 10, (EmbeddingWindow:GetHeight() - 6), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
@@ -175,4 +169,51 @@ local Skada_Skin = CreateFrame( "Frame" )
 	if(UISkinOptions.EmbedSkada == "Enabled") then
 		EmbedSkada()
 	end
+
+StaticPopupDialogs["SKADA_RELOADUI"] = {
+	text = "Reload your User Interface?",
+        button1 = TEXT(ACCEPT),
+        button2 = TEXT(CANCEL),
+        OnAccept = function()
+            ReloadUI()
+        end,
+        OnCancel = function(data, reason)
+            if (reason == "timeout") then
+                ReloadUI()
+            else
+                StaticPopupDialogs["SKADA_RELOADUI"].reloadAccepted = false
+            end
+        end,
+        OnHide = function()
+            if (StaticPopupDialogs["SKADA_RELOADUI"].reloadAccepted) then
+                ReloadUI();
+            end
+        end,
+        OnShow = function()
+            StaticPopupDialogs["SKADA_RELOADUI"].reloadAccepted = true;
+        end,
+        timeout = 5,
+        hideOnEscape = 1,
+        exclusive = 1,
+        whileDead = 1
+    }
+
+SLASH_SKADAEMBEDDED1, SLASH_SKADAEMBEDDED2 = '/es', '/embedskada';
+function SlashCmdList.SKADAEMBEDDED(msg, editbox)
+	if(UISkinOptions.EmbedSkada == "Disabled") then
+		UISkinOptions.EmbedSkada = "Enabled";
+		EmbedSkada()
+	else
+		UISkinOptions.EmbedSkada = "Disabled";
+		StaticPopup_Show("SKADA_RELOADUI")
+	end
+	if(UISkinOptions.EmbedSkada == "Enabled") then
+	print("Skada Embedding to Embed Window is |cff00ff00"..UISkinOptions.EmbedSkada.."|r.");
+	end
+	if(UISkinOptions.EmbedSkada == "Disabled") then
+	print("Skada Embedding to Embed Window is |cffff2020"..UISkinOptions.EmbedSkada.."|r.");
+	print("Need to Reload UI to take effect /rl ")
+	end
+end
+
 end )

@@ -1,10 +1,10 @@
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
+if not IsAddOnLoaded("DXE") then return end
 local skin = CreateFrame("Frame")
 skin:RegisterEvent("ADDON_LOADED")
 skin:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "DXE" then return end
 	if (UISkinOptions.DXESkin == "Disabled") then return end
-	if IsAddOnLoaded("ElvUI_SLE") then DXESkinButton:Disable() DXESkinButton.text:SetText("|cFF808080DXE Skin Disabled for ElvUI|r") return end
-	if not (IsAddOnLoaded("DXE") and IsAddOnLoaded("Tukui")) then return end
 	local DXE = DXE
 	local _G = getfenv(0)
 	local barSpacing = s.Scale(2, 2)

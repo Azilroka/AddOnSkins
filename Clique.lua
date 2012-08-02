@@ -1,9 +1,9 @@
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
+if not IsAddOnLoaded("Clique") then return end
 local SkinClique = CreateFrame("Frame")
-	SkinClique:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	SkinClique:SetScript( "OnEvent", function(self)
+	SkinClique:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinClique:SetScript("OnEvent", function(self)
 	if (UISkinOptions.CliqueSkin == "Disabled") then return end
-	if IsAddOnLoaded("ElvUI") then CliqueSkinButton:Disable() CliqueSkinButton.text:SetText("|cFF808080Clique Skin Disabled for ElvUI|r") return end
-	if not (IsAddOnLoaded("Clique") and IsAddOnLoaded("Tukui")) then return end
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -16,7 +16,7 @@ local SkinClique = CreateFrame("Frame")
 	"CliqueClickGrabber",
 	}
 	for _, object in pairs(Frames) do
-		_G[object]:StripTextures()
+		_G[object]:StripTextures(True)
 		if _G[object] == CliqueConfig then
 			_G[object]:CreateBackdrop("Transparent")
 			_G[object].backdrop:SetPoint("TOPLEFT",0,0)
@@ -44,20 +44,19 @@ local SkinClique = CreateFrame("Frame")
 	"CliqueConfigPage2ButtonCancel",
 	}
 	for _, object in pairs(CliqueButtons) do
-		_G[object]:StripTextures()
+		_G[object]:StripTextures(True)
 		cSkinButton(_G[object])
 	end
 	
 	cSkinCloseButton(CliqueConfigCloseButton)
-	if CliqueDialog.CloseButton then cSkinCloseButton(CliqueDialog.CloseButton) end
-	if CliqueDialogCloseButton then cSkinCloseButton(CliqueDialogCloseButton) end
+	cSkinCloseButton(CliqueDialog.CloseButton)
 	
 	local CliqueTabs = {
 	"CliqueConfigPage1Column1",
 	"CliqueConfigPage1Column2",
 	}
 	for _, object in pairs(CliqueTabs) do
-		_G[object]:StripTextures()
+		_G[object]:StripTextures(True)
 	end
 	
 	-- Rows
@@ -78,7 +77,7 @@ local SkinClique = CreateFrame("Frame")
 		CliqueRow1:SetPoint("TOPLEFT",5,-(CliqueConfigPage1Column1:GetHeight() +3))
 	end)
 	
-	CliqueConfigPage1_VSlider:StripTextures()
+	CliqueConfigPage1_VSlider:StripTextures(True)
 	CliqueDialog:SetSize(CliqueDialog:GetWidth()-1, CliqueDialog:GetHeight()-1)
 	CliqueConfigPage1ButtonSpell:ClearAllPoints()
 	CliqueConfigPage1ButtonOptions:ClearAllPoints()
@@ -97,6 +96,6 @@ local SkinClique = CreateFrame("Frame")
 	CliqueSpellTab:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
 	CliqueSpellTab:CreateBackdrop("Transparent")
 	CliqueSpellTab.backdrop:SetAllPoints()
-	CliqueSpellTab:StyleButton(true)
+	CliqueSpellTab:StyleButton(True)
 
 end)

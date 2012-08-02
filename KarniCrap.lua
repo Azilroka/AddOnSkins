@@ -1,25 +1,25 @@
-if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 if not IsAddOnLoaded("KarniCrap") then return end
 local SkinKarniCrap = CreateFrame("Frame")
-	SkinKarniCrap:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	SkinKarniCrap:SetScript( "OnEvent", function(self)
+	SkinKarniCrap:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinKarniCrap:SetScript("OnEvent", function(self)
 	if (UISkinOptions.KarniCrapSkin == "Disabled") then return end
-local s = UIPackageSkinFuncs.s
-local c = UIPackageSkinFuncs.c
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
 
-	KarniCrap:StripTextures()
+	KarniCrap:StripTextures(True)
 	KarniCrap:SetTemplate("Transparent")
-	KarniCrap_CategoryFrame:StripTextures()
+	KarniCrap_CategoryFrame:StripTextures(True)
 	KarniCrap_CategoryFrame:SetTemplate("Transparent")
-	KarniCrap_OptionsFrame:StripTextures()
+	KarniCrap_OptionsFrame:StripTextures(True)
 	KarniCrap_OptionsFrame:SetTemplate("Transparent")
-	KarniCrap_Blacklist:StripTextures()
+	KarniCrap_Blacklist:StripTextures(True)
 	KarniCrap_Blacklist:SetTemplate("Transparent")
-	KarniCrap_Whitelist:StripTextures()
+	KarniCrap_Whitelist:StripTextures(True)
 	KarniCrap_Whitelist:SetTemplate("Transparent")
-	KarniCrap_Inventory:StripTextures()
+	KarniCrap_Inventory:StripTextures(True)
 	KarniCrap_Inventory:SetTemplate("Transparent")
-	KarniCrap_Inventory_ScrollBar:StripTextures()
+	KarniCrap_Inventory_ScrollBar:StripTextures(True)
 	KarniCrapTab1:Point("BOTTOMLEFT", KarniCrap, "BOTTOMLEFT",0,-30)
 	cSkinScrollBar(KarniCrap_Inventory_ScrollBarScrollBar)
 	cSkinButton(KarniCrap_BtnBlacklistRemove)

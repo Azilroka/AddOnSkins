@@ -1,41 +1,46 @@
-if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 if not IsAddOnLoaded("GearScore") then return end
 local SkinPlayerScore = CreateFrame("Frame")
-	SkinPlayerScore:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	SkinPlayerScore:SetScript( "OnEvent", function(self)
+	SkinPlayerScore:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinPlayerScore:SetScript("OnEvent", function(self)
 	if (UISkinOptions.PlayScoreSkin == "Disabled") then return end
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
-TenTonHammer:StripTextures(true)
-TenTonHammer_TitleFrame:StripTextures(true)
-TenTonHammer_QuickRateFrame:StripTextures(true)
-TenTonHammer_EquipmentFrame_Model:StripTextures(true)
-TTH_InspectPVPFrame:StripTextures(true)
-TenTonHammer:SetTemplate("Transparent")
-TenTonHammer_TitleFrame:SetTemplate("Transparent")
-TenTonHammer_QuickRateFrame:SetTemplate("Transparent")
-TenTonHammer_EquipmentFrame_Model:SetTemplate("Transparent")
-TenTonHammerTab1:Point("TOPLEFT", TenTonHammer, "BOTTOMLEFT", 0, 2)
-TenTonHammerTab6:Point("TOPRIGHT", TenTonHammer, "BOTTOMRIGHT", 0, 2)
-TenTonHammer_TitleFrame:Point("TOPLEFT", TenTonHammer, "TOPLEFT", 160, 65)
-TenTonHammer_Frame6_Slider_ApplyButton:Point("TOPLEFT", TenTonHammer_Frame6_Slider, "TOPLEFT", -2, -25)
-cSkinCloseButton(TenTonHammer_ExitButton)
-cSkinRotateButton(TenTonHammer_EquipmentFrame_Model_RotateLeftButton)
-cSkinRotateButton(TenTonHammer_EquipmentFrame_Model_RotateRightButton)
-if _G["TenTonHammer_Frame6_Slider_ApplyButton"] then cSkinButton(_G["TenTonHammer_Frame6_Slider_ApplyButton"]) end
-if _G["TenTonHammer_Frame6_Check_Inspect"] then cSkinCheckBox(_G["TenTonHammer_Frame6_Check_Inspect"]) end
-if _G["TenTonHammer_Frame6_Check_Database"] then cSkinCheckBox(_G["TenTonHammer_Frame6_Check_Database"]) end
-if _G["TenTonHammer_Frame6_Check_Updater"] then cSkinCheckBox(_G["TenTonHammer_Frame6_Check_Updater"]) end
-for i = 1, 11 do
-	if _G["TenTonHammer_Frame6_Check"..i] then cSkinCheckBox(_G["TenTonHammer_Frame6_Check"..i]) end
-	if _G["TenTonHammer_Frame6_Check2_"..i] then cSkinCheckBox(_G["TenTonHammer_Frame6_Check2_"..i]) end
-	if _G["TenTonHammer_Frame6_Checky"..i] then cSkinCheckBox(_G["TenTonHammer_Frame6_Checky"..i]) end
-end
+	TenTonHammer:StripTextures(True)
+	TenTonHammer_TitleFrame:StripTextures(True)
+	TenTonHammer_QuickRateFrame:StripTextures(true)
+	TenTonHammer_EquipmentFrame_Model:StripTextures(True)
+	TTH_InspectPVPFrame:StripTextures(True)
 
-for i = 1, 10 do
-	if _G["TenTonHammerTab"..i] then cSkinTab(_G["TenTonHammerTab"..i]) end
-	if _G["TenTonHammer_MainButton"..i] then cSkinButton(_G["TenTonHammer_MainButton"..i]) _G["TenTonHammer_MainButton"..i]:SetFrameStrata("HIGH") end
-end
+	TenTonHammer:SetTemplate("Transparent")
+	TenTonHammer_TitleFrame:SetTemplate("Transparent")
+	TenTonHammer_QuickRateFrame:SetTemplate("Transparent")
+	TenTonHammer_EquipmentFrame_Model:SetTemplate("Transparent")
+
+	TenTonHammerTab1:Point("TOPLEFT", TenTonHammer, "BOTTOMLEFT", 0, 2)
+	TenTonHammerTab6:Point("TOPRIGHT", TenTonHammer, "BOTTOMRIGHT", 0, 2)
+	TenTonHammer_TitleFrame:Point("TOPLEFT", TenTonHammer, "TOPLEFT", 160, 65)
+	TenTonHammer_Frame6_Slider_ApplyButton:Point("TOPLEFT", TenTonHammer_Frame6_Slider, "TOPLEFT", -2, -25)
+
+	cSkinCloseButton(TenTonHammer_ExitButton)
+	cSkinRotateButton(TenTonHammer_EquipmentFrame_Model_RotateLeftButton)
+	cSkinRotateButton(TenTonHammer_EquipmentFrame_Model_RotateRightButton)
+
+	if _G["TenTonHammer_Frame6_Slider_ApplyButton"] then cSkinButton(_G["TenTonHammer_Frame6_Slider_ApplyButton"]) end
+	if _G["TenTonHammer_Frame6_Check_Inspect"] then cSkinCheckBox(_G["TenTonHammer_Frame6_Check_Inspect"]) end
+	if _G["TenTonHammer_Frame6_Check_Database"] then cSkinCheckBox(_G["TenTonHammer_Frame6_Check_Database"]) end
+	if _G["TenTonHammer_Frame6_Check_Updater"] then cSkinCheckBox(_G["TenTonHammer_Frame6_Check_Updater"]) end
+
+	for i = 1, 11 do
+		if _G["TenTonHammer_Frame6_Check"..i] then cSkinCheckBox(_G["TenTonHammer_Frame6_Check"..i]) end
+		if _G["TenTonHammer_Frame6_Check2_"..i] then cSkinCheckBox(_G["TenTonHammer_Frame6_Check2_"..i]) end
+		if _G["TenTonHammer_Frame6_Checky"..i] then cSkinCheckBox(_G["TenTonHammer_Frame6_Checky"..i]) end
+	end
+
+	for i = 1, 10 do
+		if _G["TenTonHammerTab"..i] then cSkinTab(_G["TenTonHammerTab"..i]) end
+		if _G["TenTonHammer_MainButton"..i] then cSkinButton(_G["TenTonHammer_MainButton"..i]) _G["TenTonHammer_MainButton"..i]:SetFrameStrata("HIGH") end
+	end
 
 end)

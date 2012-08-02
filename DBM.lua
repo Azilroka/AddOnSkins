@@ -3,6 +3,7 @@
 	Modified: Elv, Azilroka
 	All rights reserved.
 ]]--
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 if not IsAddOnLoaded("DBM-Core") then return end
 
 local croprwicons = true			-- crops blizz shitty borders from icons in RaidWarning messages
@@ -244,8 +245,8 @@ end
 
 local Init = function()
 local SkinDBM = CreateFrame("Frame")
-	SkinDBM:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	SkinDBM:SetScript( "OnEvent", function(self)
+	SkinDBM:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinDBM:SetScript("OnEvent", function(self)
 	if (UISkinOptions.DBMSkin == "Disabled") then return end
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c

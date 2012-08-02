@@ -1,4 +1,4 @@
---if not IsAddOnLoaded("Tukui") then return end
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
 if IsAddOnLoaded("ElvUI") then UIFont = c["media"].normFont end
@@ -21,6 +21,43 @@ local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 		EmbeddingWindow:SetScript("OnDragStart", function(self) if IsShiftKeyDown() then self:StartMoving() end end)
 		EmbeddingWindow:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end);
 
+		local UILoader = CreateFrame("Frame")
+		UILoader:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+		UILoader:SetScript( "OnEvent", function(self)
+		if IsAddOnLoaded("ElvUI") then
+			local E, L, V, P, G, DF = unpack(ElvUI)
+			RightChatToggleButton:SetScript("OnClick", function(self, btn)
+				if btn == 'RightButton' then
+				if (IsAddOnLoaded("Recount") and (UISkinOptions.EmbedRecount == "Enabled")) then
+					ToggleFrame(Recount_MainWindow)
+				end
+				if (IsAddOnLoaded("Skada") and (UISkinOptions.EmbedSkada == "Enabled")) then
+					Skada:ToggleWindow()
+				end
+			else
+			if c.db[self.parent:GetName()..'Faded'] then
+				c.db[self.parent:GetName()..'Faded'] = nil
+				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
+				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+			else
+				c.db[self.parent:GetName()..'Faded'] = true
+				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
+				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
+				end
+			end
+			end)
+
+		RightChatToggleButton:SetScript("OnEnter", function(self, ...)
+			GameTooltip:SetOwner(self, 'ANCHOR_TOPRIGHT', 0, 4)
+			GameTooltip:ClearLines()
+			GameTooltip:AddDoubleLine(L['Left Click:'], L['Toggle Chat Frame'], 1, 1, 1)
+			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
+			GameTooltip:Show()
+			end)
+		end
+		end)
+
 SLASH_EMBEDDINGWINDOW1 = '/embed';
 function SlashCmdList.EMBEDDINGWINDOW(msg, editbox)
 	if EmbeddingWindow:IsVisible() then
@@ -31,4 +68,3 @@ function SlashCmdList.EMBEDDINGWINDOW(msg, editbox)
 		print("Embedding Window is now |cff00ff00Shown|r.");
 	end
 end
-

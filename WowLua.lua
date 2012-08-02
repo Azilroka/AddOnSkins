@@ -1,11 +1,11 @@
-if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 LoadAddOn("WowLua")
 if not IsAddOnLoaded("WowLua") then return end
 
-	WowLuaFrame:StripTextures(true)
+	WowLuaFrame:StripTextures(True)
 	WowLuaFrame:SetTemplate("Transparent")
-	WowLuaFrameLineNumScrollFrame:StripTextures()
-	WowLuaFrameResizeBar:StripTextures()
+	WowLuaFrameLineNumScrollFrame:StripTextures(True)
+	WowLuaFrameResizeBar:StripTextures(True)
 	WowLuaFrameResizeBar:Height(10)
 	cSkinCloseButton(WowLuaButton_Close)
 	WowLuaButton_Close:Point("TOPRIGHT", WowLuaFrame, "TOPRIGHT", 0 , 0)

@@ -1,3 +1,5 @@
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
+if not IsAddOnLoaded("Recount") then return end
 local Recount = _G.Recount
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
@@ -193,8 +195,15 @@ SLASH_RECOUNTEMBEDDED1, SLASH_RECOUNTEMBEDDED2 = '/er', '/embedrecount';
 function SlashCmdList.RECOUNTEMBEDDED(msg, editbox)
 	if (UISkinOptions.EmbedRecount == "Disabled") then
 		UISkinOptions.EmbedRecount = "Enabled";
+		Recount:LockWindows(true)
+		Recount_MainWindow:ClearAllPoints()
+		Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 7)
+		Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 0)
+		Recount.db.profile.FrameStrata = "3-MEDIUM"
+		Recount.db.profile.MainWindowWidth = (EmbeddingWindow:GetWidth())
 	else
 		UISkinOptions.EmbedRecount = "Disabled";
+		Recount:LockWindows(false)
 	end
 	if(UISkinOptions.EmbedRecount == "Enabled") then
 	print("Recount Embedding is |cff00ff00"..UISkinOptions.EmbedRecount.."|r.");
@@ -202,5 +211,4 @@ function SlashCmdList.RECOUNTEMBEDDED(msg, editbox)
 	if(UISkinOptions.EmbedRecount == "Disabled") then
 	print("Recount Embedding is |cffff2020"..UISkinOptions.EmbedRecount.."|r.");
 	end
-	print("Please Reload the UI with /rl");	
 end

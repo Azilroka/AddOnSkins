@@ -1,7 +1,7 @@
 if (IsAddOnLoaded("ExtVendor") and IsAddOnLoaded("Tukui")) then
 local SkinExtVendor = CreateFrame("Frame")
-	SkinExtVendor:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	SkinExtVendor:SetScript( "OnEvent", function(self)
+	SkinExtVendor:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinExtVendor:SetScript("OnEvent", function(self)
 	if (UISkinOptions.ExtVendorSkin == "Disabled") then return end
 
 	local s = UIPackageSkinFuncs.s
@@ -120,10 +120,9 @@ end
 
 if (IsAddOnLoaded("ElvUI") and IsAddOnLoaded("ExtVendor")) then
 local SkinExtVendor = CreateFrame("Frame")
-	SkinExtVendor:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	SkinExtVendor:SetScript( "OnEvent", function(self)
+	SkinExtVendor:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinExtVendor:SetScript("OnEvent", function(self)
 	if (UISkinOptions.ExtVendorSkin == "Disabled") then return end
-	if IsAddOnLoaded("ElvUI_SLE") then ExtVendorSkinButton:Disable() ExtVendorSkinButton.text:SetText("|cFF808080Extended Vendor Skin Disabled for SLE|r") return end
 	c:GetModule('Skins')
 	s:RegisterSkin('ElvUI', LoadSkin)
 	end)
