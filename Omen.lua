@@ -1,15 +1,16 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not (IsAddOnLoaded("Omen") then return end
+if not IsAddOnLoaded("Omen") then return end
 
 local SkinOmen = CreateFrame("Frame")
 	SkinOmen:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinOmen:SetScript("OnEvent", function(self)
 	if (UISkinOptions.OmenSkin == "Disabled") then return end
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
 
 	if(TukuiThreatBar) then TukuiThreatBar:Kill() end
 
-local Omen = LibStub("AceAddon-3.0"):GetAddon("Omen")
-local borderWidth = s.Scale(2, 2)
+local borderWidth = 2
 
 Omen.UpdateBarTextureSettings_ = Omen.UpdateBarTextureSettings
 Omen.UpdateBarTextureSettings = function(self)
@@ -22,9 +23,16 @@ Omen.UpdateBarLabelSettings_ = Omen.UpdateBarLabelSettings
 Omen.UpdateBarLabelSettings = function(self)
 	self:UpdateBarLabelSettings_()
 	for i, v in ipairs(self.Bars) do
+	if IsAddOnLoaded("Tukui") then
 		v.Text1:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		v.Text2:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		v.Text3:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
+	end
+	if IsAddOnLoaded("ElvUI") then
+		v.Text1:FontTemplate(nil, self.db.profile.Bar.FontSize)
+		v.Text2:FontTemplate(nil, self.db.profile.Bar.FontSize)
+		v.Text3:FontTemplate(nil, self.db.profile.Bar.FontSize)
+	end
 	end
 end
 
@@ -35,10 +43,15 @@ Omen.UpdateTitleBar = function(self)
 	Omen.db.profile.Background.BarInset = borderWidth
 	Omen.db.profile.TitleBar.UseSameBG = true
 	self:UpdateTitleBar_()
-	self.Title:SetHeight(23)
-	self.TitleText:SetFont(c["media"].pixelfont, 12, "MONOCHROMEOUTLINE")
-	self.TitleText:ClearAllPoints()
-	self.TitleText:SetPoint("CENTER")
+	if IsAddOnLoaded("Tukui") then
+		self.Title:SetHeight(23)
+		self.TitleText:SetFont(c["media"].pixelfont, 12, "MONOCHROMEOUTLINE")
+		self.TitleText:ClearAllPoints()
+		self.TitleText:SetPoint("CENTER")
+	end
+	if IsAddOnLoaded("ElvUI") then
+		self.TitleText:FontTemplate(nil, self.db.profile.TitleBar.FontSize)
+	end
 	self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, -1)
 end
 
@@ -49,7 +62,7 @@ Omen.UpdateBackdrop = function(self)
 	Omen.db.profile.Background.BarInset = borderWidth
 	self:UpdateBackdrop_()
 	self.BarList:SetTemplate("Transparent")
-	self.Title:SetTemplate("Transparent")
+	self.Title:SetTemplate("Transparent", True)
 	self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, -1)
 end
 
@@ -62,7 +75,10 @@ omen_mt.__index = function(self, barID)
 	return bar
 end
 
-Omen.db.profile.Bar.Spacing = 2
+Omen.db.profile.Bar.Spacing = 1
+if IsAddOnLoaded("ElvUI") then
+	Omen.db.profile.Background.Texture = "ElvUI Blank"
+end
 
 Omen:UpdateBarTextureSettings()
 Omen:UpdateBarLabelSettings()

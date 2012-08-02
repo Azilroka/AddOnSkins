@@ -234,7 +234,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	DXESkinButton.text:SetPoint("CENTER", DXESkinButton, 0, 0)
 	if (UISkinOptions.DXESkin == "Enabled") then DXESkinButton.text:SetText("DXE Skin |cff00ff00"..UISkinOptions.DXESkin.."|r") end
 	if (UISkinOptions.DXESkin == "Disabled") then DXESkinButton.text:SetText("DXE Skin |cffff2020"..UISkinOptions.DXESkin.."|r") end
-	if not IsAddOnLoaded("DXE") then DXESkinButton:Disable() DXESkinButton.text:SetText("|cFF808080DXE Not Detected|r") end
+	if not IsAddOnLoaded("DXE_Loader") then DXESkinButton:Disable() DXESkinButton.text:SetText("|cFF808080DXE Not Detected|r") end
 	DXESkinButton:HookScript("OnClick", function()
 		if (UISkinOptions.DXESkin == "Enabled") then
 			UISkinOptions.DXESkin = "Disabled"			
@@ -405,7 +405,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	OmenSkinButton.text:SetPoint("CENTER", OmenSkinButton, 0, 0)
 	if (UISkinOptions.OmenSkin == "Enabled") then OmenSkinButton.text:SetText("Omen Skin |cff00ff00"..UISkinOptions.OmenSkin.."|r") end
 	if (UISkinOptions.OmenSkin == "Disabled") then OmenSkinButton.text:SetText("Omen Skin |cffff2020"..UISkinOptions.OmenSkin.."|r") end
-	if not IsAddOnLoaded("Ogri'Lazy") then OmenSkinButton:Disable() OmenSkinButton.text:SetText("|cFF808080Omen Not Detected|r") end
+	if not IsAddOnLoaded("Omen") then OmenSkinButton:Disable() OmenSkinButton.text:SetText("|cFF808080Omen Not Detected|r") end
 	OmenSkinButton:HookScript("OnClick", function()
 		if (UISkinOptions.OmenSkin == "Enabled") then
 			UISkinOptions.OmenSkin = "Disabled"			

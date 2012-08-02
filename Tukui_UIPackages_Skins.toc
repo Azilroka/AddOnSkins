@@ -33,12 +33,11 @@ SearingPlasmaTracker.lua
 SpineCounter.lua
 Spy.lua
 Swatter.lua
+TellMeWhen.lua
 WeakAuras.lua
 WowLua.lua
 
 DBM.lua
-DXE.lua
-BigWigs.lua
 EmbedWindow.lua
 Recount.lua
 Skada.lua
