@@ -1,4 +1,7 @@
 if not IsAddOnLoaded("ElvUI") then return end
+local s = UIPackageSkinFuncs.s
+local c = UIPackageSkinFuncs.c
+
 local function SkinPowerAuras(self, aura, elapsed)
 	local returnValue = PowaAuras.OldUpdateAura(self, aura, elapsed)
 	
