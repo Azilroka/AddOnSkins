@@ -1,11 +1,10 @@
 -- Camealion's Functions File
 -- Added ccolor for class coloring. Azilroka
 -- Porting to global namespace hopefully - Azilroka
-
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 UIPackageSkinFuncs = {}
 local s
 
-if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 if ElvUI then
 	local E, L, V, P, G, DF = unpack(ElvUI)
 	local S = E:GetModule('Skins')
