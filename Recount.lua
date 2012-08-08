@@ -1,10 +1,10 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("Recount") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Recount") then return end
+local Recount_Skin = CreateFrame( "Frame" )
+	Recount_Skin:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	Recount_Skin:SetScript( "OnEvent", function( self )
 local Recount = _G.Recount
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
-if IsAddOnLoaded("ElvUI") then UIFont = c["media"].normFont end
-if IsAddOnLoaded("Tukui") then UIFont = c["media"].pixelfont end
 
 local function SkinFrame(frame)
 	frame.bgMain = CreateFrame("Frame", nil, frame)
@@ -21,21 +21,52 @@ local function SkinFrame(frame)
 	frame.TitleBackground:SetPoint("RIGHT", 0)
 	frame.TitleBackground:SetHeight(24)
 	frame.TitleBackground:SetTemplate("Transparent")
-	frame.Title:SetFont(UIFont, 10, "MONOCHROMEOUTLINE")
 	frame.Title:SetParent(frame.TitleBackground)
 	frame.Title:ClearAllPoints()
 	frame.Title:SetPoint("LEFT", 4, 0)
 	if IsAddOnLoaded("Tukui") then
-		frame.Title:SetFont(UIFont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		frame.Title:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		frame.CloseButton:SetNormalTexture("")
 		frame.CloseButton:SetPushedTexture("")
 		frame.CloseButton:SetHighlightTexture("")
 		frame.CloseButton.t = frame.CloseButton:CreateFontString(nil, "OVERLAY")
-		frame.CloseButton.t:SetFont(UIFont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		frame.CloseButton.t:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
 		frame.CloseButton.t:SetPoint("CENTER", 0, 1)
 		frame.CloseButton.t:SetText("X")
 	end
-	if IsAddOnLoaded("ElvUI") then cSkinCloseButton(frame.CloseButton) end
+	if IsAddOnLoaded("ElvUI") then if not Recount_MainWindow then cSkinCloseButton(frame.CloseButton) end end
+end
+local function SkinMainFrame(frame)
+	frame.bgMain = CreateFrame("Frame", nil, frame)
+	frame.bgMain:SetTemplate("Transparent")
+	frame.bgMain:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT")
+	frame.bgMain:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT")
+	frame.bgMain:SetPoint("TOP", frame, "TOP", 0, -7)
+	frame.bgMain:SetFrameLevel(frame:GetFrameLevel())
+	print(UISkinOptions.RecountBackdrop)
+	if (UISkinOptions.RecountBackdrop == "Disabled") then frame.bgMain:Hide() end
+	frame.CloseButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -1, -9)
+	frame:SetBackdrop(nil)
+	frame.TitleBackground = CreateFrame("Frame", nil, frame)
+	frame.TitleBackground:SetPoint("TOP", frame, "TOP", 0, -7)
+	frame.TitleBackground:SetPoint("LEFT", 0)
+	frame.TitleBackground:SetPoint("RIGHT", 0)
+	frame.TitleBackground:SetHeight(24)
+	frame.TitleBackground:SetTemplate("Transparent")
+	frame.Title:SetParent(frame.TitleBackground)
+	frame.Title:ClearAllPoints()
+	frame.Title:SetPoint("LEFT", 4, 0)
+	if IsAddOnLoaded("Tukui") then
+		frame.Title:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		frame.CloseButton:SetNormalTexture("")
+		frame.CloseButton:SetPushedTexture("")
+		frame.CloseButton:SetHighlightTexture("")
+		frame.CloseButton.t = frame.CloseButton:CreateFontString(nil, "OVERLAY")
+		frame.CloseButton.t:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		frame.CloseButton.t:SetPoint("CENTER", 0, 1)
+		frame.CloseButton.t:SetText("X")
+	end
+	if IsAddOnLoaded("ElvUI") then if not Recount_MainWindow then cSkinCloseButton(frame.CloseButton) end end
 end
 
 Recount.UpdateBarTextures = function(self)
@@ -43,10 +74,12 @@ Recount.UpdateBarTextures = function(self)
 		v.StatusBar:SetStatusBarTexture(c["media"].normTex)
 		v.StatusBar:GetStatusBarTexture():SetHorizTile(false)
 		v.StatusBar:GetStatusBarTexture():SetVertTile(false)
-		v.LeftText:SetPoint("LEFT", 4, 1)
-		v.LeftText:SetFont(UIFont, 10, "MONOCHROMEOUTLINE")
-		v.RightText:SetPoint("RIGHT", -4, 1)
-		v.RightText:SetFont(UIFont, 10, "MONOCHROMEOUTLINE")
+		if IsAddOnLoaded("Tukui") then
+			v.LeftText:SetPoint("LEFT", 4, 1)
+			v.RightText:SetPoint("RIGHT", -4, 1)
+			v.LeftText:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
+			v.RightText:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		end
 	end
 end
 Recount.SetBarTextures = Recount.UpdateBarTextures
@@ -64,7 +97,7 @@ Recount.CreateFrame = function(self, Name, Title, Height, Width, ShowFunc, HideF
 	return frame
 end
 
-	if Recount.MainWindow then SkinFrame(Recount.MainWindow) end
+	if Recount.MainWindow then SkinMainFrame(Recount.MainWindow) end
 	if Recount.ConfigWindow then SkinFrame(Recount.ConfigWindow) end
 	if Recount.GraphWindow then SkinFrame(Recount.GraphWindow) end
 	if Recount.DetailWindow then SkinFrame(Recount.DetailWindow) end
@@ -212,3 +245,14 @@ function SlashCmdList.RECOUNTEMBEDDED(msg, editbox)
 	print("Recount Embedding is |cffff2020"..UISkinOptions.EmbedRecount.."|r.");
 	end
 end
+SLASH_RECOUNTBACKDROP1 = '/recountbackdrop';
+function SlashCmdList.RECOUNTBACKDROP(msg, editbox)
+	if(UISkinOptions.RecountBackdrop == "Disabled") then
+		UISkinOptions.RecountBackdrop = "Enabled"
+		print("Recount Backdrop Enabled")
+	else
+		UISkinOptions.RecountBackdrop = "Disabled"
+		print("Recount Backdrop Disabled")
+	end
+end
+end)

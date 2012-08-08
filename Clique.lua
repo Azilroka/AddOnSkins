@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("Clique") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Clique") then return end
 local SkinClique = CreateFrame("Frame")
 	SkinClique:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinClique:SetScript("OnEvent", function(self)
@@ -7,7 +6,6 @@ local SkinClique = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
--- >> -- Clique Config
 	local Frames = {
 	"CliqueDialog",
 	"CliqueConfig",
@@ -49,8 +47,9 @@ local SkinClique = CreateFrame("Frame")
 	end
 	
 	cSkinCloseButton(CliqueConfigCloseButton)
-	cSkinCloseButton(CliqueDialog.CloseButton)
-	
+	if CliqueDialog.CloseButton then cSkinCloseButton(CliqueDialog.CloseButton) end
+	if CliqueDialogCloseButton then cSkinCloseButton(CliqueDialogCloseButton) end
+
 	local CliqueTabs = {
 	"CliqueConfigPage1Column1",
 	"CliqueConfigPage1Column2",
@@ -59,7 +58,6 @@ local SkinClique = CreateFrame("Frame")
 		_G[object]:StripTextures(True)
 	end
 	
-	-- Rows
 	CliqueConfigPage1:SetScript("OnShow", function(self)
 		for i = 1, 12 do
 			if _G["CliqueRow"..i] then
@@ -88,7 +86,6 @@ local SkinClique = CreateFrame("Frame")
 	CliqueConfigPage2ButtonSave:SetPoint("TOPLEFT", CliqueConfigPage2,"BOTTOMLEFT",0,-4)
 	CliqueConfigPage2ButtonCancel:SetPoint("TOPRIGHT", CliqueConfigPage2,"BOTTOMRIGHT",2,-4)
 	
--- >> -- Spellbook Tab
 	CliqueSpellTab:GetRegions():SetSize(.1,.1)
 	CliqueSpellTab:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
 	CliqueSpellTab:GetNormalTexture():ClearAllPoints()

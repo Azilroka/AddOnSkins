@@ -1,5 +1,4 @@
-﻿if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("Quartz") then return end
+﻿if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Quartz") then return end
 local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
 if not Q3 then return end
 	SkinQuartzBar = function(self, bar)

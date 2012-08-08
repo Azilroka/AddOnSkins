@@ -2,8 +2,7 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 LoadAddOn("WowLua")
 if not IsAddOnLoaded("WowLua") then return end
 
-	WowLuaFrame:StripTextures(True)
-	WowLuaFrame:SetTemplate("Transparent")
+	cSkinFrame(WowLuaFrame)
 	WowLuaFrameLineNumScrollFrame:StripTextures(True)
 	WowLuaFrameResizeBar:StripTextures(True)
 	WowLuaFrameResizeBar:Height(10)

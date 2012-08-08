@@ -1,0 +1,5 @@
+cSkinFrame(AdiBagsContainer1)
+cSkinCloseButton(AdiBagsContainer1.CloseButton)
+
+cSkinFrame(AdiBagsContainer2)
+cSkinCloseButton(AdiBagsContainer2.CloseButton)

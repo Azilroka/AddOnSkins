@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("RaidInviteOrganizer") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("RaidInviteOrganizer") then return end
 local SkinRIO = CreateFrame("Frame")
 	SkinRIO:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinRIO:SetScript("OnEvent", function(self)
@@ -7,10 +6,9 @@ local SkinRIO = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 	
-	RIO_MainFrame:StripTextures(True)
-	RIO_MainFrame:SetTemplate("Transparent")
-	RIO_GuildMemberFrame:SetTemplate("Transparent")
-	RIO_CodeWordsContainer:SetTemplate("Transparent")
+	cSkinFrame(RIO_MainFrame)
+	cSiinFrame(RIO_GuildMemberFrame)
+	cSkinFrame(RIO_CodeWordsContainer)
 	RIO_SliderContainer:StripTextures(True)
 
 	cSkinScrollBar(RIO_GuildSlider)

@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("PoMTracker") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("PoMTracker") then return end
 local SkinPoMTracker = CreateFrame("Frame")
 	SkinPoMTracker:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinPoMTracker:SetScript("OnEvent", function(self)
@@ -7,15 +6,13 @@ local SkinPoMTracker = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
-	PoMOptionFrame:StripTextures(True)
-	PoMOptionFrame:SetTemplate("Transparent")
+	cSkinFrame(PoMOptionFrame)
 	cSkinCloseButton(PoMOptionFrame_CloseButton)
 
 	pomtracker1:CreateBackdrop("Transparent")
 	pomtracker1:Size(85,15)
 
-	pomtracker2:StripTextures(True)
-	pomtracker2:SetTemplate("Transparent")
+	cSkinFrame(pomtracker2)
 
 	pomtracker3:CreateBackdrop("Transparent")
 	pomtracker3:ClearAllPoints()

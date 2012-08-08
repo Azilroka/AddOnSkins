@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("PowerAuras") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("PowerAuras") then return end
 local SkinPowerAuras = CreateFrame("Frame")
 	SkinPowerAuras:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinPowerAuras:SetScript("OnEvent", function(self)
@@ -7,12 +6,12 @@ local SkinPowerAuras = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
-	PowaOptionsFrame:StripTextures(true) 
-	PowaBarConfigFrame:StripTextures(true)
-	PowaOptionsFrame:SetTemplate("Transparent")
-	PowaBarConfigFrame:SetTemplate("Transparent")
-	PowaAuraExportDialog:SetTemplate("Transparent")
-	PowaAuraPlayerImportDialog:SetTemplate("Transparent")
+	cSkinFrame(PowaOptionsFrame)
+	cSkinFrame(PowaBarConfigFrame)
+	cSkinFrame(PowaOptionsFrame)
+	cSkinFrame(PowaBarConfigFrame)
+	cSkinFrame(PowaAuraExportDialog)
+	cSkinFrame(PowaAuraPlayerImportDialog)
 	cSkinEditBox(PowaAuraExportDialogCopyBox)
 	cSkinEditBox(PowaAuraExportDialogSendBox)
 	cSkinEditBox(PowaBarCustomSound)
@@ -84,7 +83,7 @@ local SkinPowerAuras = CreateFrame("Frame")
 	cSkinDropDownBox(PowaBuffStacksRelative)
 
 	for i = 1, 5 do
-		cSkinTab(_G"PowaEditorTab"..i)
+		cSkinTab(_G["PowaEditorTab"..i])
 		_G["PowaEditorTab"..i]:Height(30)
 	end
 

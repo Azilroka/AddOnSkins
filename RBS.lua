@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("RaidBuffStatus") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("RaidBuffStatus") then return end
 local SkinRBS = CreateFrame("Frame")
 	SkinRBS:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinRBS:SetScript("OnEvent", function(self, event, addon)
@@ -7,8 +6,7 @@ local SkinRBS = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
-	RBSFrame:StripTextures(True) 
-	RBSFrame:SetTemplate("Transparent")
+	cSkinFrame(RBSFrame)
 	cSkinButton(RaidBuffStatus.scanbutton)
 	cSkinButton(RaidBuffStatus.readybutton)
 	cSkinButton(RaidBuffStatus.bossbutton)
@@ -17,5 +15,4 @@ local SkinRBS = CreateFrame("Frame")
 	cSkinNextPrevButton(talentsbutton)
 	optionsbutton:Size(20)
 	talentsbutton:Size(20)
-	SkinRBS:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)

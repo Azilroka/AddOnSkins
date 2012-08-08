@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("MageNuggets") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MageNuggets") then return end
 local SkinMageNuggets = CreateFrame("Frame")
 	SkinMageNuggets:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinMageNuggets:SetScript("OnEvent", function(self)

@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("Ogri'Lazy") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Ogri'Lazy") then return end
 local SkinOgriLazy = CreateFrame("Frame")
 	SkinOgriLazy:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinOgriLazy:SetScript("OnEvent", function(self)
@@ -7,8 +6,7 @@ local SkinOgriLazy = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
-	Relic_View:StripTextures(True)
-	Relic_View:SetTemplate("Transparent")
+	cSkinFrame(Relic_View)
 	cSkinCloseButton(Relic_ViewCloseButton)
 
 end)

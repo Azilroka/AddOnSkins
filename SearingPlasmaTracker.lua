@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("SearingPlasmaTracker") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("SearingPlasmaTracker") then return end
 local SkinSearingPlasmaTracker = CreateFrame("Frame")
 	SkinSearingPlasmaTracker:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinSearingPlasmaTracker:SetScript("OnEvent", function(self)
@@ -7,7 +6,6 @@ local SkinSearingPlasmaTracker = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
-	SearingPlasmaTrackerFrame:StripTextures(True)
-	SearingPlasmaTrackerFrame:SetTemplate("Transparent")
+	cSkinFrame(SearingPlasmaTrackerFrame)
 
 end)

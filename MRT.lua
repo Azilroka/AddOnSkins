@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("MizusRaidTracker") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MizusRaidTracker") then return end
 local SkinMRT = CreateFrame("Frame")
 	SkinMRT:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinMRT:SetScript("OnEvent", function(self)
@@ -7,10 +6,8 @@ local SkinMRT = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
-	MRT_GUIFrame:StripTextures(True)
-	MRT_GUIFrame:SetTemplate("Transparent")
-	MRT_GUI_FourRowDialog:StripTextures(True)
-	MRT_GUI_FourRowDialog:SetTemplate("Transparent")
+	cSkinFrame(MRT_GUIFrame)
+	cSkinFrame(MRT_GUI_FourRowDialog)
 	cSkinCloseButton(MRT_GUIFrame_CloseButton)
 	cSkinButton(MRT_GUIFrame_RaidLog_Export_Button)
 	cSkinButton(MRT_GUIFrame_RaidLog_Delete_Button)
@@ -35,8 +32,7 @@ local SkinMRT = CreateFrame("Frame")
 	cSkinButton(MRT_GUI_FourRowDialog_CancelButton)
 
 	for i = 1, 6 do
-		_G["ScrollTable"..i]:StripTextures(True)
-		_G["ScrollTable"..i]:SetTemplate("Transparent")
+		cSkinFrame(_G["ScrollTable"..i])
 		_G["ScrollTable"..i.."ScrollFrameScrollBar"]:StripTextures(true)
 		cSkinScrollBar(_G["ScrollTable"..i.."ScrollFrameScrollBar"])
 	end

@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("KarniCrap") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("KarniCrap") then return end
 local SkinKarniCrap = CreateFrame("Frame")
 	SkinKarniCrap:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinKarniCrap:SetScript("OnEvent", function(self)
@@ -7,18 +6,12 @@ local SkinKarniCrap = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
-	KarniCrap:StripTextures(True)
-	KarniCrap:SetTemplate("Transparent")
-	KarniCrap_CategoryFrame:StripTextures(True)
-	KarniCrap_CategoryFrame:SetTemplate("Transparent")
-	KarniCrap_OptionsFrame:StripTextures(True)
-	KarniCrap_OptionsFrame:SetTemplate("Transparent")
-	KarniCrap_Blacklist:StripTextures(True)
-	KarniCrap_Blacklist:SetTemplate("Transparent")
-	KarniCrap_Whitelist:StripTextures(True)
-	KarniCrap_Whitelist:SetTemplate("Transparent")
-	KarniCrap_Inventory:StripTextures(True)
-	KarniCrap_Inventory:SetTemplate("Transparent")
+	cSkinFrame(KarniCrap)
+	cSkinFrame(KarniCrap_CategoryFrame)
+	cSkinFrame(KarniCrap_OptionsFrame)
+	cSkinFrame(KarniCrap_Blacklist)
+	cSkinFrame(KarniCrap_Whitelist)
+	cSkinFrame(KarniCrap_Inventory)
 	KarniCrap_Inventory_ScrollBar:StripTextures(True)
 	KarniCrapTab1:Point("BOTTOMLEFT", KarniCrap, "BOTTOMLEFT",0,-30)
 	cSkinScrollBar(KarniCrap_Inventory_ScrollBarScrollBar)
@@ -105,8 +98,7 @@ local SkinKarniCrap = CreateFrame("Frame")
 	cSkinCheckBox(KarniCrap_Inventory_CBHideQuestItems)
 	cSkinCheckBox(KarniCrap_CBOpenAtMerchant)
 
-for i = 1, 15 do
-	cSkinCloseButton(_G["KarniInvEntry"..i.."_BtnCrap"])
-end
-
+	for i = 1, 15 do
+		cSkinCloseButton(_G["KarniInvEntry"..i.."_BtnCrap"])
+	end
 end)

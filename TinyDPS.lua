@@ -1,5 +1,5 @@
-if not IsAddOnLoaded("TinyDPS") then return end
-local frame = CreateFrame( "Frame" )
+if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("TinyDPS") then return end
+local frame = CreateFrame("Frame")
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", function(self, event)	
 	if (UISkinOptions.TinyDPSSkin == "Disabled") then return end

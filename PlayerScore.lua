@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("GearScore") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("GearScore") then return end
 local SkinPlayerScore = CreateFrame("Frame")
 	SkinPlayerScore:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinPlayerScore:SetScript("OnEvent", function(self)
@@ -7,16 +6,11 @@ local SkinPlayerScore = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
-	TenTonHammer:StripTextures(True)
-	TenTonHammer_TitleFrame:StripTextures(True)
-	TenTonHammer_QuickRateFrame:StripTextures(true)
-	TenTonHammer_EquipmentFrame_Model:StripTextures(True)
+	cSkinFrame(TenTonHammer)
+	cSkinFrame(TenTonHammer_TitleFrame)
+	cSkinFrame(TenTonHammer_QuickRateFrame)
+	cSkinFrame(TenTonHammer_EquipmentFrame_Model)
 	TTH_InspectPVPFrame:StripTextures(True)
-
-	TenTonHammer:SetTemplate("Transparent")
-	TenTonHammer_TitleFrame:SetTemplate("Transparent")
-	TenTonHammer_QuickRateFrame:SetTemplate("Transparent")
-	TenTonHammer_EquipmentFrame_Model:SetTemplate("Transparent")
 
 	TenTonHammerTab1:Point("TOPLEFT", TenTonHammer, "BOTTOMLEFT", 0, 2)
 	TenTonHammerTab6:Point("TOPRIGHT", TenTonHammer, "BOTTOMRIGHT", 0, 2)

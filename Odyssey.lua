@@ -1,23 +1,20 @@
-if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("Odyssey") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Odyssey") then return end
 local SkinOdyssey = CreateFrame("Frame")
-	SkinOdyssey:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	SkinOdyssey:SetScript( "OnEvent", function(self)
+	SkinOdyssey:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinOdyssey:SetScript("OnEvent", function(self)
 	if (UISkinOptions.OdysseySkin == "Disabled") then return end
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
-	OdysseyFrame:StripTextures(True)
 	OdysseyFrameQuestDBScrollFrame:StripTextures(True)
-	OdysseyFrameRealmSummaryScrollFrame:StripTextures(True)
 	OdysseyMapsMenuScrollFrame:StripTextures(True)
 	OdysseyFrameQuestDetailsSeries:StripTextures(True)
 	OdysseyFrameSearchScrollFrame:StripTextures(True)
 
 	OdysseyFramePortrait:Kill()
 
-	OdysseyFrame:SetTemplate("Transparent")
-	OdysseyFrameRealmSummaryScrollFrame:SetTemplate("Transparent")
+	cSkinFrame(OdysseyFrame)
+	cSkinFrame(OdysseyFrameRealmSummaryScrollFrame)
 	OdysseyFrameQuestDB:SetTemplate("Transparent")
 	OdysseyFrameQuestDBScrollFrame:SetTemplate("Transparent")
 	OdysseyFrameQuestDetails:SetTemplate("Transparent")
@@ -43,22 +40,19 @@ local SkinOdyssey = CreateFrame("Frame")
 
 	for i = 1, 3 do
 		cSkinTab(_G["OdysseyFrameTab"..i])
-		_G["OdysseyTabQuestsMenuItem"..i]:StripTextures(True)
-		cSkinButton(_G["OdysseyTabQuestsMenuItem"..i])
+		cSkinFrame(_G["OdysseyTabQuestsMenuItem"..i])
 	end
 
 	for i = 1, 5 do
-		cSkinButton(_G["OdysseyTabQuests_Sort"..i])
+		cSkinFrame(_G["OdysseyTabQuests_Sort"..i])
 	end
 
 	for i = 1, 15 do
-		_G["OdysseyTabMapsMenuItem"..i]:StripTextures(True)
-		cSkinButton(_G["OdysseyTabMapsMenuItem"..i])
+		cSkinFrame(_G["OdysseyTabMapsMenuItem"..i])
 	end
 
 	for i = 1, 4 do
-		_G["OdysseyTabSearchMenuItem"..i]:StripTextures(True)
-		cSkinButton(_G["OdysseyTabSearchMenuItem"..i])
+		cSkinFrame(_G["OdysseyTabSearchMenuItem"..i])
 	end
 
 	for i = 1, 10 do

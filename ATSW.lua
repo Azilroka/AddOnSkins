@@ -1,31 +1,26 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("AdvancedTradeSkillWindow") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("AdvancedTradeSkillWindow") then return end
 local SkinATSW = CreateFrame("Frame")
 	SkinATSW:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinATSW:SetScript("OnEvent", function(self)
-	if (UISkinOptions.ATSWSkin == "Disabled") then return end
+	if (UISkinOptions.ATSWSkin ~= "Enabled") then return end
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
 	ATSWFrame:HookScript("OnShow", function()
-	ATSWFrame:StripTextures(True)
+	cSkinFrame(ATSWFrame)
 	ATSWSkillIcon:StripTextures(True)
 	ATSWListScrollFrame:StripTextures(True)
 	ATSWExpandButtonFrame:StripTextures(True)
 	ATSWRankFrameBorder:StripTextures(True)
-	ATSWRankFrame:StripTextures(True)
-	ATSWFrame:SetTemplate("Transparent")
-	ATSWRankFrame:CreateBackdrop("Transparent")
-	ATSWRankFrame:SetStatusBarTexture(c["media"].normTex)
+	cSkinStatusBar(ATSWRankFrame)
 	ATSWRankFrame:Size(398,20)
 	ATSWRankFrame:ClearAllPoints()
 	ATSWRankFrame:Point("CENTER", ATSWFrame, "CENTER", 165, 200)
 	ATSWListScrollFrame:Width(280)
 	ATSWFramePortrait:Kill()
 	cSkinScrollBar(ATSWListScrollFrameScrollBar)
---	ATSWListScrollFrameScrollBar:SetFrameStrata("HIGH")
 	ATSWListScrollFrameScrollBar:Point("CENTER", ATSWListScrollFrame, "CENTER", 0, 0)
---Backdrops	
+
 	ATSWFrame.bg1 = CreateFrame("Frame", nil, ATSWFrame)
 	ATSWFrame.bg1:CreateBackdrop()
 	ATSWFrame.bg1:Point("TOPLEFT", 22, -72)
@@ -35,23 +30,21 @@ local SkinATSW = CreateFrame("Frame")
 	ATSWFrame.bg2:CreateBackdrop()
 	ATSWFrame.bg2:Point("TOPLEFT", 350, -72)
 	ATSWFrame.bg2:Point("BOTTOMRIGHT", -20, 20)
---Edit Boxs
+
 	cSkinEditBox(ATSWFilterBox)
 	cSkinEditBox(ATSWInputBox)
 	cSkinEditBox(ATSWCSNewCategoryBox)
 	ATSWFilterBox:ClearAllPoints()
 	ATSWFilterBox:Point("TOPLEFT", ATSWFrame, "TOPLEFT", 120, -98)
 	ATSWFilterBox:Width(188)
---DropDowns
+
 	cSkinDropDownBox(ATSWSubClassDropDown)
 	cSkinDropDownBox(ATSWInvSlotDropDown)
 	ATSWSubClassDropDown:ClearAllPoints()
 	ATSWInvSlotDropDown:ClearAllPoints()
---	ATSWSubClassDropDown:SetFrameStrata("HIGH")
---	ATSWInvSlotDropDown:SetFrameStrata("HIGH")
 	ATSWSubClassDropDown:Point("TOPLEFT", ATSWFrame, "TOPLEFT", 50, -70)
 	ATSWInvSlotDropDown:Point("RIGHT", ATSWSubClassDropDown, "RIGHT", 132, 0)
---Buttons
+
 	cSkinButton(ATSWQueueAllButton)
 	cSkinButton(ATSWCreateAllButton)
 	cSkinButton(ATSWCreateButton)
@@ -88,7 +81,7 @@ local SkinATSW = CreateFrame("Frame")
 	ATSWQueueDeleteButton:Width(120)
 	ATSWReagentsButton:Width(120)
 	ATSWReagentsButton:Point("RIGHT", ATSWQueueStartStopButton, "RIGHT", 248, 0)
---Checkboxes
+
 	cSkinCheckBox(ATSWHeaderSortButton)
 	cSkinCheckBox(ATSWNameSortButton)
 	cSkinCheckBox(ATSWDifficultySortButton)
@@ -111,55 +104,48 @@ local SkinATSW = CreateFrame("Frame")
 	ATSWNameSortButton:Point("TOPLEFT", ATSWFrame, "TOPLEFT", 20, -49)
 	ATSWDifficultySortButton:Point("TOPLEFT", ATSWFrame, "TOPLEFT", 20, -32)
 
---Tooltip
-	ATSWTradeskillTooltip:StripTextures(True)
-	ATSWTradeskillTooltip:SetTemplate("Transparent")
-	ATSWTradeskillTooltip:CreateShadow("Default")
---Regeants frame
-	ATSWReagentFrame:StripTextures(True)
-	ATSWReagentFrame:SetTemplate("Transparent")
-	ATSWReagentFrame:CreateShadow("Default")
---Options frame
-	ATSWOptionsFrame:StripTextures(True)
-	ATSWOptionsFrame:SetTemplate("Transparent")
-	ATSWOptionsFrame:CreateShadow("Default")
---Edit frame
-	ATSWCSFrame:StripTextures(True)
+	cSkinFrame(ATSWTradeskillTooltip)
+	cSkinFrame(ATSWReagentFrame)
+	cSkinFrame(ATSWOptionsFrame)
+
+	cSkinFrame(ATSWCSFrame)
 	ATSWCSUListScrollFrame:StripTextures(True)
-	ATSWCSFrame:SetTemplate("Transparent")
+	ATSWCSSListScrollFrame:StripTextures(True)
+
 		local once = false
 			for i=1, ATSW_MAX_TRADE_SKILL_REAGENTS do
 				local button = _G["ATSWReagent"..i]
 				local icon = _G["ATSWReagent"..i.."IconTexture"]
 				local count = _G["ATSWReagent"..i.."Count"]
 
-				icon:SetTexCoord(.08, .92, .08, .92)
-				icon:SetDrawLayer("OVERLAY")
-				if not icon.backdrop then
-					icon.backdrop = CreateFrame("Frame", nil, button)
-					icon.backdrop:SetFrameLevel(button:GetFrameLevel() - 1)
-					icon.backdrop:SetTemplate("Default")
-					icon.backdrop:Point("TOPLEFT", icon, "TOPLEFT", -2, 2)
-					icon.backdrop:Point("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 2, -2)
-				end
+			icon:SetTexCoord(.08, .92, .08, .92)
+			icon:SetDrawLayer("OVERLAY")
 
-				icon:SetParent(icon.backdrop)
-				count:SetParent(icon.backdrop)
-				count:SetDrawLayer("OVERLAY")
-
-				if i > 2 and once == false then
-					local point, anchoredto, point2, x, y = button:GetPoint()
-					button:ClearAllPoints()
-					button:Point(point, anchoredto, point2, x, y - .8)
-					--once = true
-				end
-
-				_G["ATSWReagent"..i.."NameFrame"]:Kill()
+			if not icon.backdrop then
+				icon.backdrop = CreateFrame("Frame", nil, button)
+				icon.backdrop:SetFrameLevel(button:GetFrameLevel() - 1)
+				icon.backdrop:SetTemplate("Default")
+				icon.backdrop:Point("TOPLEFT", icon, "TOPLEFT", -2, 2)
+				icon.backdrop:Point("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 2, -2)
 			end
-		cSkinScrollBar(ATSWCSUListScrollFrameScrollBar)
-		cSkinScrollBar(ATSWCSSListScrollFrameScrollBar)
-		ATSWCSSListScrollFrame:StripTextures(True)
-		cSkinCloseButton(ATSWCSFrameCloseButton)
+
+			icon:SetParent(icon.backdrop)
+			count:SetParent(icon.backdrop)
+			count:SetDrawLayer("OVERLAY")
+
+			if i > 2 and once == false then
+			local point, anchoredto, point2, x, y = button:GetPoint()
+			button:ClearAllPoints()
+			button:Point(point, anchoredto, point2, x, y - .8)
+		end
+
+		_G["ATSWReagent"..i.."NameFrame"]:Kill()
+	end
+
+	cSkinScrollBar(ATSWCSUListScrollFrameScrollBar)
+	cSkinScrollBar(ATSWCSSListScrollFrameScrollBar)
+	cSkinCloseButton(ATSWCSFrameCloseButton)
+
 	for i = 1, 4 do
 		cSkinButton(_G["ATSWQueueItem"..i.."DeleteButton"])
 	end
@@ -175,9 +161,7 @@ local SkinATSW = CreateFrame("Frame")
 	cSkinNextPrevButton(ATSWDecrementButton)
 	cSkinButton(ATSWAutoBuyButton)
 
---Shopping List Frame
-	ATSWShoppingListFrame:StripTextures(True)
-	ATSWShoppingListFrame:SetTemplate("Transparent")
+	cSkinFrame(ATSWShoppingListFrame)
 	ATSWShoppingListFrame:Size(475,150)
 	ATSWShoppingListFrame:ClearAllPoints()
 	ATSWShoppingListFrame:Point("TOPLEFT", AuctionFrame, "BOTTOMRIGHT", -475, -1)
@@ -187,15 +171,9 @@ local SkinATSW = CreateFrame("Frame")
 	ATSWSLScrollFrame:StripTextures(True)
 	cSkinScrollBar(ATSWSLScrollFrameScrollBar)
 
---Delay Frame
 	cSkinButton(ATSWScanDelayFrameSkipButton)
 	cSkinButton(ATSWScanDelayFrameAbortButton)
-	ATSWScanDelayFrame:StripTextures(True)
-	ATSWScanDelayFrame:SetTemplate("Transparent")
-	ATSWScanDelayFrameBar:StripTextures(True)
-	ATSWScanDelayFrameBar:CreateBackdrop("ClassColor")
-	ATSWScanDelayFrameBar:SetStatusBarTexture(c["media"].normTex)
-	local color = RAID_CLASS_COLORS[UIPackageSkinFuncs.ccolor]
-	ATSWScanDelayFrameBar:SetStatusBarColor(color.r, color.g, color.b)
-end)
+	cSkinFrame(ATSWScanDelayFrame)
+	cSkinCCStatusBar(ATSWScanDelayFrameBar)
 	end)
+end)

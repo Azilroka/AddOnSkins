@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("Postal") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Postal") then return end
 local SkinPostal = CreateFrame("Frame")
 	SkinPostal:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinPostal:SetScript("OnEvent", function(self)

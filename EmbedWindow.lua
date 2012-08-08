@@ -5,11 +5,10 @@ if IsAddOnLoaded("ElvUI") then UIFont = c["media"].normFont end
 if IsAddOnLoaded("Tukui") then UIFont = c["media"].pixelfont end
 local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 		EmbeddingWindow:SetTemplate("Transparent")
-		EmbeddingWindow:Point("CENTER", UIParent, "CENTER", 100, 100)
+		if IsAddOnLoaded("ElvUI") then EmbeddingWindow:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -9, 31) EmbeddingWindow:Size(402,148) end
+		if IsAddOnLoaded("Tukui") then EmbeddingWindow:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -7, 30) EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiInfoRight:GetHeight() * 6) + 4) end
 		EmbeddingWindow:SetFrameStrata("HIGH")
 		EmbeddingWindow:Hide()
-		if IsAddOnLoaded("ElvUI") then EmbeddingWindow:Size(402,148) end
-		if IsAddOnLoaded("Tukui") then EmbeddingWindow:Size(TukuiInfoRight:GetWidth() , (TukuiInfoRight:GetHeight() * 6) + 4) end
 		EmbeddingWindow:SetClampedToScreen(true)
 		EmbeddingWindow:SetMovable(true)
 		EmbeddingWindow.text = EmbeddingWindow:CreateFontString(nil, "OVERLAY")
@@ -22,8 +21,8 @@ local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 		EmbeddingWindow:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end);
 
 		local UILoader = CreateFrame("Frame")
-		UILoader:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-		UILoader:SetScript( "OnEvent", function(self)
+		UILoader:RegisterEvent("PLAYER_ENTERING_WORLD")
+		UILoader:SetScript("OnEvent", function(self)
 		if IsAddOnLoaded("ElvUI") then
 			local E, L, V, P, G, DF = unpack(ElvUI)
 			RightChatToggleButton:SetScript("OnClick", function(self, btn)

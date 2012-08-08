@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("Skada") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Skada") then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
 
@@ -85,7 +84,8 @@ barmod.ApplySettings = function(self, win)
 		skada.backdrop:Point("TOPLEFT", skada, "TOPLEFT", -2, 2)
 	end
 	skada.backdrop:Point("BOTTOMRIGHT", skada, "BOTTOMRIGHT", 2, -2)
-	if(UISkinOptions.EmbedSkada == "Enabled") then
+	if (UISkinOptions.SkadaBackdrop == "Disabled") then skada.backdrop:Hide() end
+	if (UISkinOptions.EmbedSkada == "Enabled") then
 		win.bargroup.button:SetFrameStrata("MEDIUM")
 		win.bargroup.button:SetFrameLevel(5)	
 		win.bargroup:SetFrameStrata("MEDIUM")
@@ -108,15 +108,6 @@ local function EmbedWindow(window, width, barheight, height, point, relativeFram
 end
 
 local windows = {}
-function DeembedSkada()
-		if not Skada.CreateWindow_ then
-			Skada.CreateWindow_ = Skada.CreateWindow
-			Skada.DeleteWindow_ = Skada.DeleteWindow
-		end
-		for _, window in pairs(skadaWindows) do
-			window.bargroup:SetParent(UIParent)
-		end
-end
 function EmbedSkada()
 	if(#windows == 1) then
 		EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 2 - (barSpacing * 4)) / 10, (EmbeddingWindow:GetHeight() - 6), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
@@ -208,11 +199,20 @@ function SlashCmdList.SKADAEMBEDDED(msg, editbox)
 		StaticPopup_Show("SKADA_RELOADUI")
 	end
 	if(UISkinOptions.EmbedSkada == "Enabled") then
-	print("Skada Embedding to Embed Window is |cff00ff00"..UISkinOptions.EmbedSkada.."|r.");
+	print("Skada Embedding to Embed Window is |cff00ff00"..UISkinOptions.EmbedSkada.."|r.")
 	end
 	if(UISkinOptions.EmbedSkada == "Disabled") then
-	print("Skada Embedding to Embed Window is |cffff2020"..UISkinOptions.EmbedSkada.."|r.");
+	print("Skada Embedding to Embed Window is |cffff2020"..UISkinOptions.EmbedSkada.."|r.")
 	print("Need to Reload UI to take effect /rl ")
+	end
+end
+
+SLASH_SKADABACKDROP1 = '/skadabackdrop';
+function SlashCmdList.SKADABACKDROP(msg, editbox)
+	if(UISkinOptions.SkadaBackdrop == "Disabled") then
+		UISkinOptions.SkadaBackdrop = "Enabled"
+	else
+		UISkinOptions.SkadaBackdrop = "Disabled"
 	end
 end
 

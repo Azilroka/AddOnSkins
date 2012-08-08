@@ -1,12 +1,11 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("LootCouncil_Lite") then return end
-	RankFrame:SetTemplate("Transparent")
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("LootCouncil_Lite") then return end
+	cSkinFrame(RankFrame)
 	cSkinDropDownBox(RankDropDown)
 	cSkinButton(RankAcceptButton)
 	cSkinButton(RankCancelButton)
-	MainFrame:SetTemplate("Transparent")
-	EntryFrame:SetTemplate("Transparent")
-	LCTestFrame:SetTemplate("Transparent")
+	cSkinFrame(MainFrame)
+	cSkinFrame(EntryFrame)
+	cSkinFrame(LCTestFrame)
 	cSkinButton(CloseButton)
 	cSkinButton(RunTestButton)
 	cSkinButton(TestCancelButton)

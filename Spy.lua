@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("Spy") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Spy") then return end
 local SkinSpy = CreateFrame("Frame")
 	SkinSpy:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinSpy:SetScript("OnEvent", function(self)
@@ -7,8 +6,7 @@ local SkinSpy = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
-	Spy_MainWindow:StripTextures(True)
-	Spy_MainWindow:SetTemplate("Transparent")
+	cSkinFrame(Spy_MainWindow)
 	cSkinCloseButton(Spy_MainWindow.CloseButton)
 	cDesaturate(Spy_MainWindow.ClearButton)
 	cDesaturate(Spy_MainWindow.LeftButton)

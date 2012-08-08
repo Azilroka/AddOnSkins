@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("BuyEmAll") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("BuyEmAll") then return end
 local SkinBuyEmAll = CreateFrame("Frame")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
@@ -7,11 +6,9 @@ local SkinBuyEmAll = CreateFrame("Frame")
 	SkinBuyEmAll:SetScript("OnEvent", function(self)
 	if (UISkinOptions.BuyEmAllSkin == "Disabled") then return end
 
-	BuyEmAllFrame:StripTextures(True)
-	BuyEmAllFrame:SetTemplate("Transparent")
+	cSkinFrame(BuyEmAllFrame)
 	cSkinButton(BuyEmAllStackButton)
 	cSkinButton(BuyEmAllMaxButton)
 	cSkinButton(BuyEmAllCancelButton)
 	cSkinButton(BuyEmAllOkayButton)
-
 end)

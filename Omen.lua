@@ -1,5 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("Omen") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Omen") then return end
 
 local SkinOmen = CreateFrame("Frame")
 	SkinOmen:RegisterEvent("PLAYER_ENTERING_WORLD")
