@@ -25,6 +25,6 @@ SkinArchy:SetScript("OnEvent", function(self, event, addon)
 	if ArchyArtifactFrameSkillBar then
 		cSkinStatusBar(ArchyArtifactFrameSkillBar)
 	end
-	
+
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end)
