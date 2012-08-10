@@ -1,29 +1,43 @@
 ## Interface: 40300
 ## Title: Various Skins for |cffC495DDTukui|r Editted Packages
 ## Author: See Credits.txt
-## SavedVariables: UISkinOptions
+## OptionalDeps: Tukui, ElvUI, Ace3
+## SavedVariables: UISkinOptions, CBEnableSpecialBars, CBBar2and3Width, CBBar2and3Position, CBShowButtonPosition, TPEnableSpecialBars, TPBar2and3Width, TPBar2and3Position, TPShowButtonPosition
+## X-Embeds: Ace3
+
+embeds.xml
 
 !Functions.lua
 Options.lua
 EmbedWindow.lua
 
+Ace3.lua
+ACP.lua
 Altoholic.lua
 Archy.lua
-ArkInventory.lua
+AtlasLoot.lua
 ATSW.lua
 Auctionator.lua
+Auctioneer.lua
+BGDefender.lua
 BuyEmAll.lua
+ChocolateBar.lua
 CLCInfo.lua
 CLCProt.lua
 CLCRet.lua
 Clique.lua
 DBM.lua
+EasyMail.lua
 EnergyWatch.lua
 ExtVendor.lua
+Factionizer.lua
 KarniCrap.lua
+Lightheaded.lua
 LootCouncilLite.lua
 MageNuggets.lua
+MasterLootManagerRemix.lua
 MinimalArchaeology.lua
+MiscFixes.lua
 MoveAnything.lua
 MRT.lua
 Odyssey.lua
@@ -35,20 +49,19 @@ Poisoner.lua
 PoMTracker.lua
 Postal.lua
 PowerAuras.lua
+ProfessionTabs.lua
 Quartz.lua
 RaidInviteOrganizer.lua
 RBS.lua
-
+Recount.lua
 SearingPlasmaTracker.lua
 Skada.lua
+Skillet.lua
 SpineCounter.lua
 Spy.lua
 Swatter.lua
 TellMeWhen.lua
 TinyDPS.lua
+TitanPanel.lua
 WeakAuras.lua
 WowLua.lua
-
-Recount.lua
-
-SpecSwitcher.lua

@@ -100,6 +100,7 @@ function cSkinSliderFrame(self)
 	if ElvUI then
 		s:HandleSliderFrame(self)
 	else
+		SkinSlidebar(self, height, movetext)
 	end
 end
 
@@ -114,12 +115,16 @@ function cSkinFrameD(self)
 end
 
 function cSkinStatusBar(self)
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
 	self:StripTextures(True)
 	self:CreateBackdrop()
 	self:SetStatusBarTexture(c["media"].normTex)
 end
 
 function cSkinCCStatusBar(self)
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
 	self:StripTextures(True)
 	self:CreateBackdrop("ClassColor")
 	self:SetStatusBarTexture(c["media"].normTex)
@@ -141,35 +146,5 @@ function cDesaturate(f, point)
 
 	if point then
 		f:Point("TOPRIGHT", point, "TOPRIGHT", 2, 2)
-	end
-end
-
-function cSkinSlideBar(self, height, movetext)
-	self:StripTextures(True)
-	self:SetTemplate("Default")
-	self:SetBackdropColor(0, 0, 0, .8)
-
-	if not height then
-		height = self:GetHeight()
-	end
-	
-	local slidername = self:GetName()
-
-	if(movetext) then
-		if(_G[slidername.."Low"]) then _G[slidername.."Low"]:Point("BOTTOM", 0, -18) end
-		if(_G[slidername.."High"]) then _G[slidername.."High"]:Point("BOTTOM", 0, -18) end
-		if(_G[slidername.."Text"]) then _G[slidername.."Text"]:Point("TOP", 0, 19) end
-	end
-
-	local c = UIPackageSkinFuncs.c
-
-	_G[slidername]:SetThumbTexture(c["media"].blank)
-	_G[slidername]:GetThumbTexture():SetVertexColor(unpack(c["media"].bordercolor))
-	if(self:GetWidth() < self:GetHeight()) then
-		self:Width(height)
-		_G[slidername]:GetThumbTexture():Size(self:GetWidth(),self:GetWidth()+4)
-	else
-		self:Height(height)
-		_G[slidername]:GetThumbTexture():Size(height+4,height)
 	end
 end

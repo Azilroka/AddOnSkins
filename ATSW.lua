@@ -3,10 +3,9 @@ local SkinATSW = CreateFrame("Frame")
 	SkinATSW:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinATSW:SetScript("OnEvent", function(self)
 	if (UISkinOptions.ATSWSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
-
-	ATSWFrame:HookScript("OnShow", function()
 	cSkinFrame(ATSWFrame)
 	ATSWSkillIcon:StripTextures(True)
 	ATSWListScrollFrame:StripTextures(True)
@@ -175,5 +174,4 @@ local SkinATSW = CreateFrame("Frame")
 	cSkinButton(ATSWScanDelayFrameAbortButton)
 	cSkinFrame(ATSWScanDelayFrame)
 	cSkinCCStatusBar(ATSWScanDelayFrameBar)
-	end)
 end)

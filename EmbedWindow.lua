@@ -4,9 +4,11 @@ local c = UIPackageSkinFuncs.c
 if IsAddOnLoaded("ElvUI") then UIFont = c["media"].normFont end
 if IsAddOnLoaded("Tukui") then UIFont = c["media"].pixelfont end
 local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
+		EmbeddingWindow:RegisterEvent("PLAYER_ENTERING_WORLD")
+		EmbeddingWindow:SetScript("OnEvent", function(self)
 		EmbeddingWindow:SetTemplate("Transparent")
-		if IsAddOnLoaded("ElvUI") then EmbeddingWindow:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -9, 31) EmbeddingWindow:Size(402,148) end
-		if IsAddOnLoaded("Tukui") then EmbeddingWindow:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -7, 30) EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiInfoRight:GetHeight() * 6) + 4) end
+		if IsAddOnLoaded("ElvUI") then EmbeddingWindow:Point("BOTTOMRIGHT", RightChatDataPanel, "BOTTOMRIGHT", 16, 23) EmbeddingWindow:Size(402,148) end
+		if IsAddOnLoaded("Tukui") then EmbeddingWindow:Point("BOTTOMRIGHT", TukuiInfoRight, "BOTTOMRIGHT", 0, 23) EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiInfoRight:GetHeight() * 6) + 4) end
 		EmbeddingWindow:SetFrameStrata("HIGH")
 		EmbeddingWindow:Hide()
 		EmbeddingWindow:SetClampedToScreen(true)
@@ -20,9 +22,6 @@ local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 		EmbeddingWindow:SetScript("OnDragStart", function(self) if IsShiftKeyDown() then self:StartMoving() end end)
 		EmbeddingWindow:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end);
 
-		local UILoader = CreateFrame("Frame")
-		UILoader:RegisterEvent("PLAYER_ENTERING_WORLD")
-		UILoader:SetScript("OnEvent", function(self)
 		if IsAddOnLoaded("ElvUI") then
 			local E, L, V, P, G, DF = unpack(ElvUI)
 			RightChatToggleButton:SetScript("OnClick", function(self, btn)
@@ -45,7 +44,7 @@ local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
 				end
 			end
-			end)
+		end)
 
 		RightChatToggleButton:SetScript("OnEnter", function(self, ...)
 			GameTooltip:SetOwner(self, 'ANCHOR_TOPRIGHT', 0, 4)

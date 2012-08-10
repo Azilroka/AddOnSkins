@@ -43,7 +43,6 @@ local function SkinMainFrame(frame)
 	frame.bgMain:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT")
 	frame.bgMain:SetPoint("TOP", frame, "TOP", 0, -7)
 	frame.bgMain:SetFrameLevel(frame:GetFrameLevel())
-	print(UISkinOptions.RecountBackdrop)
 	if (UISkinOptions.RecountBackdrop == "Disabled") then frame.bgMain:Hide() end
 	frame.CloseButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -1, -9)
 	frame:SetBackdrop(nil)

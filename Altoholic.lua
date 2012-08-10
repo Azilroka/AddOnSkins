@@ -87,6 +87,7 @@ LoadAddOn("Altoholic_Characters")
 		_G["AltoholicFrameContainersEntry6Item"..i]:StripTextures(True)
 		_G["AltoholicFrameContainersEntry7Item"..i]:StripTextures(True)
 	end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 local function LoadSkinAchievements()
 

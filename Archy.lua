@@ -1,4 +1,4 @@
-if not(IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) and not (IsAddOnLoaded("Archy")) then return end
+if not(IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not (IsAddOnLoaded("Archy")) then return end
 local SkinArchy = CreateFrame("Frame")
 SkinArchy:RegisterEvent("ADDON_LOADED")
 SkinArchy:SetScript("OnEvent", function(self, event, addon)
@@ -16,7 +16,8 @@ SkinArchy:SetScript("OnEvent", function(self, event, addon)
 	hooksecurefunc(Archy, "UpdateRacesFrame", SkinArchyArtifactFrame)
 
 	local function SkinArchyDigSiteFrame()
-		SkinFrame(ArchyDigSiteFrame)
+		cSkinFrame(ArchyDigSiteFrame)
+		cSkinButton(ArchyDistanceIndicatorFrameSurveyButton)
 	end
 
 	hooksecurefunc(Archy, "UpdateDigSiteFrame", SkinArchyDigSiteFrame)
@@ -24,7 +25,6 @@ SkinArchy:SetScript("OnEvent", function(self, event, addon)
 	if ArchyArtifactFrameSkillBar then
 		cSkinStatusBar(ArchyArtifactFrameSkillBar)
 	end
-
-	cSkinButton(ArchyDistanceIndicatorFrameSurveyButton)
+	
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end)

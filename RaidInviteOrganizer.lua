@@ -7,7 +7,7 @@ local SkinRIO = CreateFrame("Frame")
 	local c = UIPackageSkinFuncs.c
 	
 	cSkinFrame(RIO_MainFrame)
-	cSiinFrame(RIO_GuildMemberFrame)
+	cSkinFrame(RIO_GuildMemberFrame)
 	cSkinFrame(RIO_CodeWordsContainer)
 	RIO_SliderContainer:StripTextures(True)
 
