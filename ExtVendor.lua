@@ -1,4 +1,4 @@
-if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) and not IsAddOnLoaded("ExtVendor") then return end
+if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("ExtVendor") then return end
 local SkinExtVendor = CreateFrame("Frame")
 	SkinExtVendor:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinExtVendor:SetScript("OnEvent", function(self)
