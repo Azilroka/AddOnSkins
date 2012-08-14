@@ -44,8 +44,8 @@ local DefaultSetSkin = CreateFrame("Frame")
 local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions:RegisterEvent( "PLAYER_ENTERING_WORLD" )
 	SkinOptions:SetScript( "OnEvent", function(self)
-	if IsAddOnLoaded("Tukui") then UIFont = c["media"].font end
-	if IsAddOnLoaded("ElvUI") then UIFont = c["media"].uffont end
+	if IsAddOnLoaded("Tukui") then UIFont = [[Interface\AddOns\Tukui\medias\fonts\normal_font.ttf]] end
+	if IsAddOnLoaded("ElvUI") then UIFont = [[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]] end
 	SkinOptions:Hide()
 	SkinOptions:SetTemplate("Transparent")
 	SkinOptions:Point("CENTER", UIParent, "CENTER", 0, 0)

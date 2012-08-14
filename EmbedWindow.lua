@@ -1,19 +1,19 @@
 if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
-if IsAddOnLoaded("ElvUI") then UIFont = c["media"].normFont end
-if IsAddOnLoaded("Tukui") then UIFont = c["media"].pixelfont end
 local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 		EmbeddingWindow:RegisterEvent("PLAYER_ENTERING_WORLD")
 		EmbeddingWindow:SetScript("OnEvent", function(self)
 		EmbeddingWindow:SetTemplate("Transparent")
 		if IsAddOnLoaded("ElvUI") then EmbeddingWindow:Point("BOTTOMRIGHT", RightChatDataPanel, "BOTTOMRIGHT", 16, 23) EmbeddingWindow:Size(402,148) end
-		if IsAddOnLoaded("Tukui") then EmbeddingWindow:Point("BOTTOMRIGHT", TukuiInfoRight, "BOTTOMRIGHT", 0, 23) EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiInfoRight:GetHeight() * 6) + 4) end
+		if IsAddOnLoaded("Tukui") then EmbeddingWindow:Point("BOTTOMRIGHT", TukuiInfoRight, "BOTTOMRIGHT", 0, 24) EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiInfoRight:GetHeight() * 6) + 4) end
 		EmbeddingWindow:SetFrameStrata("HIGH")
 		EmbeddingWindow:Hide()
 		EmbeddingWindow:SetClampedToScreen(true)
 		EmbeddingWindow:SetMovable(true)
 		EmbeddingWindow.text = EmbeddingWindow:CreateFontString(nil, "OVERLAY")
+		if IsAddOnLoaded("ElvUI") then UIFont = [[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]] end
+		if IsAddOnLoaded("Tukui") then UIFont = [[Interface\AddOns\Tukui\medias\fonts\normal_font.ttf]] end
 		EmbeddingWindow.text:SetFont(UIFont, 14, "OUTLINE")
 		EmbeddingWindow.text:SetPoint("CENTER")
 		EmbeddingWindow.text:SetText("Embedding Window")
