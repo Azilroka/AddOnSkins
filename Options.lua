@@ -102,9 +102,15 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptionsCloseButton:HookScript("OnClick", function() SkinOptions:Hide() end)
 
 --Buttons
-	GameMenuButtonLogout:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -40)
+	GameMenuButtonLogout:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -38)
 	SkinOptionsButton = CreateFrame("Button", "SkinOptionsButton", GameMenuFrame, "GameMenuButtonTemplate")
 	SkinOptionsButton:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -1)
+	if not IsAddOnLoaded("stAddonmanager") then GameMenuFrame:Height(GameMenuFrame:GetHeight() + 26) end
+	if IsAddOnLoaded("stAddonmanager") then	
+		SkinOptionsButton:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -23)
+		GameMenuFrame:Height(GameMenuFrame:GetHeight() + 36)
+		GameMenuButtonLogout:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -60)
+	end
 	SkinOptionsButton:Size(144,21)
 	cSkinButton(SkinOptionsButton)
 	SkinOptionsButton.text = SkinOptionsButton:CreateFontString(nil, "OVERLAY")
@@ -112,7 +118,6 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptionsButton.text:SetPoint("CENTER", SkinOptionsButton, 0, 0)
 	SkinOptionsButton.text:SetText("Skins")
 	SkinOptionsButton:HookScript("OnClick", function() SkinOptions:Show() HideUIPanel(GameMenuFrame) end)
-	GameMenuFrame:Height(GameMenuFrame:GetHeight() + 26)
 
 	AltoholicSkinButton = CreateFrame("Button", "AltoholicSkinButton", SkinOptions, "UIPanelButtonTemplate")
 	AltoholicSkinButton:SetPoint("TOPLEFT", 12, -40)
