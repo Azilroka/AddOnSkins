@@ -20,8 +20,8 @@ local function StripOptions(options)
 	options.titleoptions.args.margin = nil
 	options.titleoptions.args.color = nil
 	options.windowoptions = nil
-	options.baroptions.args.barfont = nil
-	options.titleoptions.args.font = nil
+--	options.baroptions.args.barfont = nil
+--	options.titleoptions.args.font = nil
 end
 
 local barmod = Skada.displays["bar"]
@@ -193,7 +193,7 @@ StaticPopupDialogs["SKADA_RELOADUI"] = {
         hideOnEscape = 1,
         exclusive = 1,
         whileDead = 1
-    }
+}
 
 SLASH_SKADAEMBEDDED1, SLASH_SKADAEMBEDDED2 = '/es', '/embedskada';
 function SlashCmdList.SKADAEMBEDDED(msg, editbox)
