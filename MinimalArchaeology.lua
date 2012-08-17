@@ -1,4 +1,9 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MinimalArchaeology") then return end
+	local SkinMinimalArchaeology = CreateFrame("Frame")
+	SkinMinimalArchaeology:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinMinimalArchaeology:SetScript("OnEvent", function(self, event, addon)
+	if (UISkinOptions.MinimalArchaeologySkin ~= "Enabled") then return end
+
 	cSkinFrame(MinArchMain)
 	cSkinStatusBar(MinArchMainSkillBar)
 	MinArchMainSkillBar:Point("TOP", MinArchMain, "TOP", 2, -24)
@@ -24,3 +29,4 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 		_G["MinArchMainArtifactBar"..i]:SetStatusBarColor(1.0, 0.4, 0)
 		cSkinButton(_G["MinArchMainArtifactBar"..i.."ButtonSolve"])
 	end
+end)

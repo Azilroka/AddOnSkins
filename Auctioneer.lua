@@ -2,6 +2,7 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local AuctioneerSkin = CreateFrame("Frame")
 AuctioneerSkin:RegisterEvent("AUCTION_HOUSE_SHOW")
 AuctioneerSkin:SetScript("OnEvent", function(self)
+if (UISkinOptions.AuctioneerSkin ~= "Enabled") then return end
 	AuctionsCancelAuctionButton:Point("RIGHT", AuctionFrameMoneyFrame, "RIGHT", 554, 0)
 	AuctionsCloseButton:ClearAllPoints()
 	AuctionsCloseButton:Point("RIGHT", AuctionsCancelAuctionButton, "RIGHT", 86, 0)

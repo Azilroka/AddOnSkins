@@ -2,7 +2,7 @@
 local SkinEasyMail = CreateFrame("Frame")
 	SkinEasyMail:RegisterEvent("MAIL_SHOW")
 	SkinEasyMail:SetScript("OnEvent", function(self, event, addon)
-	
+	if (UISkinOptions.EasyMailSkin ~= "Enabled") then return end
 		cSkinButton(EasyMail_CheckAllButton)
 		cSkinButton(EasyMail_GetAllButton)
 		cSkinButton(EasyMail_AttButton)

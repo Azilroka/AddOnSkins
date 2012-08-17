@@ -45,7 +45,8 @@ end
 local SkinLightHeaded = CreateFrame("Frame")
 	SkinLightHeaded:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinLightHeaded:SetScript("OnEvent", function(self, event, addon)
-	
+	if (UISkinOptions.LightheadedSkin ~= "Enabled") then return end
+
 	cSkinFrame(LightHeadedFrame)
 	cSkinFrame(LightHeadedFrameSub)
 	cSkinFrame(LightHeadedSearchBox)

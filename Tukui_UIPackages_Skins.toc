@@ -13,6 +13,7 @@ EmbedWindow.lua
 
 Ace3.lua
 ACP.lua
+AdiBags.lua
 Altoholic.lua
 Archy.lua
 AtlasLoot.lua

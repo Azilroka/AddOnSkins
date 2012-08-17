@@ -2,8 +2,6 @@
 -- Added ccolor for class coloring. - Azilroka
 -- Restructured Functions file. - Azilroka
 -- Added Skinning features for ease of skinning and smaller size skins. - Azilroka
--- Important: cSkinSlideBar is for Tukui / cSkinSliderFrame is for ElvUI. Tukui doesn't have a slider function. I was given permission to use the code by Sinaris.
--- cSkinSlideBar usage: cSkinSlideBar(FrameName, Height, Movetext) Example: cSkinSlideBar(TukuiSlider, 10, True)
 
 UIPackageSkinFuncs = {}
 local s

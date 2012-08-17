@@ -2,7 +2,7 @@ if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("M
 local SkinMLM = CreateFrame("Frame")
 	SkinMLM:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinMLM:SetScript("OnEvent", function(self, event, addon)
-
+	if (UISkinOptions.MasterLootManagerRemixSkin ~= "Enabled") then return end
 	local StripAllTextures = {
 				"MasterLootManagerMain",
 				"MasterLootLoggerFrame",

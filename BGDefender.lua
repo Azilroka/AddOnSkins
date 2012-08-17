@@ -24,6 +24,7 @@ end
 local SkinBGDefender = CreateFrame("Frame")
 	SkinBGDefender:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinBGDefender:SetScript("OnEvent", function(self, event, addon)
+	if (UISkinOptions.BGDefenderSkin ~= "Enabled") then return end
 	cSkinFrame(BGDefenderFrame)
 
 	local StripAllTextures = {

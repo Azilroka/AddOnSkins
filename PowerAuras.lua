@@ -2,7 +2,7 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local SkinPowerAuras = CreateFrame("Frame")
 	SkinPowerAuras:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinPowerAuras:SetScript("OnEvent", function(self)
-	if (UISkinOptions.PowerAurasSkin == "Disabled") then return end
+	if (UISkinOptions.PowerAurasSkin ~= "Enabled") then return end
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
