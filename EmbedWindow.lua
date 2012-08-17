@@ -50,7 +50,7 @@ local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 			GameTooltip:SetOwner(self, 'ANCHOR_TOPRIGHT', 0, 4)
 			GameTooltip:ClearLines()
 			GameTooltip:AddDoubleLine(L['Left Click:'], L['Toggle Chat Frame'], 1, 1, 1)
-			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
+			GameTooltip:AddDoubleLine(L['Right Click:'], 'Toggle Embedded Addon', 1, 1, 1)
 			GameTooltip:Show()
 			end)
 		end
