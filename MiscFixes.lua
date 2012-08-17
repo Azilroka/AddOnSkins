@@ -1,5 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 if IsAddOnLoaded("TomTom") then TomTomBlock:SetTemplate("Transparent") end
+if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
 GeneralDockManagerOverflowButtonList:SetTemplate()
 cSkinCloseButton(TokenFramePopupCloseButton)
 cSkinCloseButton(RolePollPopupCloseButton)
