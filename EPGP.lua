@@ -2,12 +2,12 @@ LoadAddOn("epgp")
 
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("epgp") then return end
 local Skin = CreateFrame("Frame")
-	Skin:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	Skin:SetScript( "OnEvent", function(self)
+	Skin:RegisterEvent("PLAYER_ENTERING_WORLD")
+	Skin:SetScript("OnEvent", function(self)
+	if (UISkinOptions.EPGPisSkinned == "True") then UISkinOptions.EPGPisSkinned = "False" end
 
 local function SkinEPGP()
 	
-	print(UISkinOptions.EPGPisSkinned)
 	if (UISkinOptions.EPGPisSkinned == "True") then return end
 	UISkinOptions.EPGPisSkinned = "True"
 	EPGPFrame:StripTextures()
@@ -18,6 +18,7 @@ local function SkinEPGP()
 	EPGPSideFrame:SetTemplate("Transparent")
 	EPGPSideFrame2:SetTemplate("Transparent")
 	EPGPScrollFrameScrollBar:StripTextures()
+	EPGPScrollFrameScrollBarBorder:StripTextures()
 
 	cSkinScrollBar(EPGPScrollFrameScrollBar)
 	cSkinDropDownBox(EPGPSideFrameGPControlDropDown)
