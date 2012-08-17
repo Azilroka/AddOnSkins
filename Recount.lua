@@ -1,10 +1,13 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Recount") then return end
-local Recount_Skin = CreateFrame( "Frame" )
-	Recount_Skin:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	Recount_Skin:SetScript( "OnEvent", function( self )
+
 local Recount = _G.Recount
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
+
+local SkinRecount = CreateFrame( "Frame" )
+	SkinRecount:RegisterEvent( "PLAYER_ENTERING_WORLD" )
+	SkinRecount:SetScript( "OnEvent", function( self )
+	if(UISkinOptions.RecountSkin ~= "Enabled") then return end
 
 local function SkinFrame(frame)
 	frame.bgMain = CreateFrame("Frame", nil, frame)
@@ -36,6 +39,7 @@ local function SkinFrame(frame)
 	end
 	if IsAddOnLoaded("ElvUI") then if not Recount_MainWindow then cSkinCloseButton(frame.CloseButton) end end
 end
+
 local function SkinMainFrame(frame)
 	frame.bgMain = CreateFrame("Frame", nil, frame)
 	frame.bgMain:SetTemplate("Transparent")
@@ -207,7 +211,7 @@ Recount.DetailWindow.ReportButton.text:SetText(s.RGBToHex(unpack(c["media"].data
 Recount.DetailWindow.ReportButton.text:SetPoint("CENTER", 1, 1)
 
 end
-
+end)
 local Recount_Skin = CreateFrame("Frame")
 	Recount_Skin:RegisterEvent("PLAYER_ENTERING_WORLD")
 	Recount_Skin:SetScript("OnEvent", function(self)
@@ -222,6 +226,34 @@ local Recount_Skin = CreateFrame("Frame")
 			Recount.db.profile.MainWindowWidth = (EmbeddingWindow:GetWidth())
 		end
 	end)
+
+StaticPopupDialogs["RECOUNT_RELOADUI"] = {
+	text = "Reload your User Interface?",
+        button1 = TEXT(ACCEPT),
+        button2 = TEXT(CANCEL),
+        OnAccept = function()
+            ReloadUI()
+        end,
+        OnCancel = function(data, reason)
+            if (reason == "timeout") then
+                ReloadUI()
+            else
+                StaticPopupDialogs["RECOUNT_RELOADUI"].reloadAccepted = false
+            end
+        end,
+        OnHide = function()
+            if (StaticPopupDialogs["RECOUNT_RELOADUI"].reloadAccepted) then
+                ReloadUI();
+            end
+        end,
+        OnShow = function()
+            StaticPopupDialogs["RECOUNT_RELOADUI"].reloadAccepted = true;
+        end,
+        timeout = 5,
+        hideOnEscape = 1,
+        exclusive = 1,
+        whileDead = 1
+}
 
 SLASH_RECOUNTEMBEDDED1, SLASH_RECOUNTEMBEDDED2 = '/er', '/embedrecount';
 function SlashCmdList.RECOUNTEMBEDDED(msg, editbox)
@@ -246,6 +278,10 @@ function SlashCmdList.RECOUNTEMBEDDED(msg, editbox)
 end
 SLASH_RECOUNTBACKDROP1 = '/recountbackdrop';
 function SlashCmdList.RECOUNTBACKDROP(msg, editbox)
+	if(UISkinOptions.RecountSkin ~= "Enabled") then
+		print("You must have the Recount Skin enabled to use this feature.")
+		return
+	end
 	if(UISkinOptions.RecountBackdrop == "Disabled") then
 		UISkinOptions.RecountBackdrop = "Enabled"
 		print("Recount Backdrop Enabled")
@@ -253,5 +289,6 @@ function SlashCmdList.RECOUNTBACKDROP(msg, editbox)
 		UISkinOptions.RecountBackdrop = "Disabled"
 		print("Recount Backdrop Disabled")
 	end
+	print("You must reload your interface for this change.")
+	StaticPopup_Show("RECOUNT_RELOADUI")
 end
-end)

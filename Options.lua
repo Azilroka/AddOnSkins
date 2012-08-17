@@ -48,10 +48,12 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.ProfessionTabsSkin == nil) then UISkinOptions.ProfessionTabsSkin = "Enabled" end
 	if(UISkinOptions.RaidInviteOrganizerSkin == nil) then UISkinOptions.RaidInviteOrganizerSkin = "Enabled" end
 	if(UISkinOptions.RaidBuffStatusSkin == nil) then UISkinOptions.RaidBuffStatusSkin = "Enabled" end
+	if(UISkinOptions.RecountSkin == nil) then UISkinOptions.RecountSkin = "Enabled" end
 	if(UISkinOptions.SearingPlasmaTrackerSkin == nil) then UISkinOptions.SearingPlasmaTrackerSkin = "Enabled" end
 	if(UISkinOptions.SkilletSkin == nil) then UISkinOptions.SkilletSkin = "Enabled" end
 	if(UISkinOptions.SpineCounterSkin == nil) then UISkinOptions.SpineCounterSkin = "Enabled" end
 	if(UISkinOptions.SpySkin == nil) then UISkinOptions.SpySkin = "Enabled" end
+	if(UISkinOptions.SkadaSkin == nil) then UISkinOptions.SkadaSkin = "Enabled" end
 	if(UISkinOptions.SwatterSkin == nil) then UISkinOptions.SwatterSkin = "Enabled" end
 	if(UISkinOptions.TinyDPSSkin == nil) then UISkinOptions.TinyDPSSkin = "Disabled" end
 	if(UISkinOptions.TitanPanelSkin == nil) then UISkinOptions.TitanPanelSkin = "Enabled" end
@@ -120,15 +122,6 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptionsCloseButton:HookScript("OnClick", function() SkinOptions:Hide() end)
 
 --Buttons
-	GameMenuButtonLogout:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -38)
-
-	if not IsAddOnLoaded("stAddonmanager") then GameMenuFrame:Height(GameMenuFrame:GetHeight() + 26) end
-	if IsAddOnLoaded("stAddonmanager") then  
-		SkinOptionsButton:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -23)
-		GameMenuFrame:Height(GameMenuFrame:GetHeight() + 36)
-		GameMenuButtonLogout:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -60)
-	end
-
 	SkinOptionsButton = CreateFrame("Button", "SkinOptionsButton", GameMenuFrame, "GameMenuButtonTemplate")
 	SkinOptionsButton:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -1)
 	SkinOptionsButton:Size(144,21)
@@ -138,6 +131,13 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptionsButton.text:SetPoint("CENTER", SkinOptionsButton, 0, 0)
 	SkinOptionsButton.text:SetText("Skins")
 	SkinOptionsButton:HookScript("OnClick", function() SkinOptions:Show() HideUIPanel(GameMenuFrame) end)
+
+	GameMenuButtonLogout:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -38)
+	GameMenuFrame:Height(GameMenuFrame:GetHeight() + 26)
+	if IsAddOnLoaded("stAddonmanager") then  
+		SkinOptionsButton:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -23)
+		GameMenuButtonLogout:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -60)
+	end
 
 	ACPSkinButton = CreateFrame("Button", "ACPSkinButton", SkinOptions, "UIPanelButtonTemplate")
 	ACPSkinButton:SetPoint("TOPLEFT", 12, -40)
@@ -291,25 +291,6 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 			AuctioneerSkinButton.text:SetText("Auctioneer Skin |cff00ff00"..UISkinOptions.AuctioneerSkin.."|r")
 		end
 	end)
---	BigWigsSkinButton = CreateFrame("Button", "BigWigsSkinButton", SkinOptions, "UIPanelButtonTemplate")
---	BigWigsSkinButton:SetPoint("TOPLEFT", 12, -280)
---	BigWigsSkinButton:Size(200,24)
---	cSkinButton(BigWigsSkinButton)
---	BigWigsSkinButton.text = BigWigsSkinButton:CreateFontString(nil, "OVERLAY")
---	BigWigsSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
---	BigWigsSkinButton.text:SetPoint("CENTER", BigWigsSkinButton, 0, 0)
---	if (UISkinOptions.BigWigsSkin == "Enabled") then BigWigsSkinButton.text:SetText("BigWigs Skin |cff00ff00"..UISkinOptions.BigWigsSkin.."|r") end
---	if (UISkinOptions.BigWigsSkin == "Disabled") then BigWigsSkinButton.text:SetText("BigWigs Skin |cffff2020"..UISkinOptions.BigWigsSkin.."|r") end
---	if not IsAddOnLoaded("BigWigs") then BigWigsSkinButton:Disable() BigWigsSkinButton.text:SetText("|cFF808080BigWigs Not Detected|r") end
---	BigWigsSkinButton:HookScript("OnClick", function()
---		if (UISkinOptions.BigWigsSkin == "Enabled") then
---			UISkinOptions.BigWigsSkin = "Disabled"			
---			BigWigsSkinButton.text:SetText("BigWigs Skin |cffff2020"..UISkinOptions.BigWigsSkin.."|r")
---		else
---			UISkinOptions.BigWigsSkin = "Enabled"
---			BigWigsSkinButton.text:SetText("BigWigs Skin |cff00ff00"..UISkinOptions.BigWigsSkin.."|r")
---		end
---	end)
 	BGDefenderSkinButton = CreateFrame("Button", "BGDefenderSkinButton", SkinOptions, "UIPanelButtonTemplate")
 	BGDefenderSkinButton:SetPoint("TOPLEFT", 12, -280)
 	BGDefenderSkinButton:Size(200,24)
@@ -405,25 +386,6 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 			DBMSkinButton.text:SetText("DBM Skin |cff00ff00"..UISkinOptions.DBMSkin.."|r")
 		end
 	end)
---	DXESkinButton = CreateFrame("Button", "DXESkinButton", SkinOptions, "UIPanelButtonTemplate")
---	DXESkinButton:SetPoint("TOP", 0, -100)
---	DXESkinButton:Size(200,24)
---	cSkinButton(DXESkinButton)
---	DXESkinButton.text = DXESkinButton:CreateFontString(nil, "OVERLAY")
---	DXESkinButton.text:SetFont(UIFont, 12, "OUTLINE")
---	DXESkinButton.text:SetPoint("CENTER", DXESkinButton, 0, 0)
---	if (UISkinOptions.DXESkin == "Enabled") then DXESkinButton.text:SetText("DXE Skin |cff00ff00"..UISkinOptions.DXESkin.."|r") end
---	if (UISkinOptions.DXESkin == "Disabled") then DXESkinButton.text:SetText("DXE Skin |cffff2020"..UISkinOptions.DXESkin.."|r") end
---	if not IsAddOnLoaded("DXE_Loader") then DXESkinButton:Disable() DXESkinButton.text:SetText("|cFF808080DXE Not Detected|r") end
---	DXESkinButton:HookScript("OnClick", function()
---		if (UISkinOptions.DXESkin == "Enabled") then
---			UISkinOptions.DXESkin = "Disabled"			
---			DXESkinButton.text:SetText("DXE Skin |cffff2020"..UISkinOptions.DXESkin.."|r")
---		else
---			UISkinOptions.DXESkin = "Enabled"
---			DXESkinButton.text:SetText("DXE Skin |cff00ff00"..UISkinOptions.DXESkin.."|r")
---		end
---	end)
 	EasyMailSkinButton = CreateFrame("Button", "EasyMailSkinButton", SkinOptions, "UIPanelButtonTemplate")
 	EasyMailSkinButton:SetPoint("TOPLEFT", 12, -430)
 	EasyMailSkinButton:Size(200,24)
@@ -842,8 +804,27 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 			RaidBuffStatusSkinButton.text:SetText("Raid Buff Status Skin |cff00ff00"..UISkinOptions.RaidBuffStatusSkin.."|r")
 		end
 	end)
+	RecountSkinButton = CreateFrame("Button", "RecountSkinButton", SkinOptions, "UIPanelButtonTemplate")
+	RecountSkinButton:SetPoint("TOPRIGHT", -12, -190)
+	RecountSkinButton:Size(200,24)
+	cSkinButton(RecountSkinButton)
+	RecountSkinButton.text = RecountSkinButton:CreateFontString(nil, "OVERLAY")
+	RecountSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
+	RecountSkinButton.text:SetPoint("CENTER", RecountSkinButton, 0, 0)
+	if (UISkinOptions.RecountSkin == "Enabled") then RecountSkinButton.text:SetText("Recount Skin |cff00ff00"..UISkinOptions.RecountSkin.."|r") end
+	if (UISkinOptions.RecountSkin == "Disabled") then RecountSkinButton.text:SetText("Recount Skin |cffff2020"..UISkinOptions.RecountSkin.."|r") end
+	if not IsAddOnLoaded("Recount") then RecountSkinButton:Disable() RecountSkinButton.text:SetText("|cFF808080Recount Not Detected|r") end
+	RecountSkinButton:HookScript("OnClick", function()
+		if (UISkinOptions.RecountSkin == "Enabled") then
+			UISkinOptions.RecountSkin = "Disabled"			
+			RecountSkinButton.text:SetText("Recount Skin |cffff2020"..UISkinOptions.RecountSkin.."|r")
+		else
+			UISkinOptions.RecountSkin = "Enabled"
+			RecountSkinButton.text:SetText("Recount Skin |cff00ff00"..UISkinOptions.RecountSkin.."|r")
+		end
+	end)
 	SearingPlasmaTrackerSkinButton = CreateFrame("Button", "SearingPlasmaTrackerSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	SearingPlasmaTrackerSkinButton:SetPoint("TOPRIGHT", -12, -190)
+	SearingPlasmaTrackerSkinButton:SetPoint("TOPRIGHT", -12, -220)
 	SearingPlasmaTrackerSkinButton:Size(200,24)
 	cSkinButton(SearingPlasmaTrackerSkinButton)
 	SearingPlasmaTrackerSkinButton.text = SearingPlasmaTrackerSkinButton:CreateFontString(nil, "OVERLAY")
@@ -861,8 +842,27 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 			SearingPlasmaTrackerSkinButton.text:SetText("Searing Plasma Tracker Skin |cff00ff00"..UISkinOptions.SearingPlasmaTrackerSkin.."|r")
 		end
 	end)
+	SkadaSkinButton = CreateFrame("Button", "SkadaSkinButton", SkinOptions, "UIPanelButtonTemplate")
+	SkadaSkinButton:SetPoint("TOPRIGHT", -12, -250)
+	SkadaSkinButton:Size(200,24)
+	cSkinButton(SkadaSkinButton)
+	SkadaSkinButton.text = SkadaSkinButton:CreateFontString(nil, "OVERLAY")
+	SkadaSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
+	SkadaSkinButton.text:SetPoint("CENTER", SkadaSkinButton, 0, 0)
+	if (UISkinOptions.SkadaSkin == "Enabled") then SkadaSkinButton.text:SetText("Skada Skin |cff00ff00"..UISkinOptions.SkadaSkin.."|r") end
+	if (UISkinOptions.SkadaSkin == "Disabled") then SkadaSkinButton.text:SetText("Skada Skin |cffff2020"..UISkinOptions.SkadaSkin.."|r") end
+	if not IsAddOnLoaded("Skada") then SkadaSkinButton:Disable() SkadaSkinButton.text:SetText("|cFF808080Skada Not Detected|r") end
+	SkadaSkinButton:HookScript("OnClick", function()
+		if (UISkinOptions.SkadaSkin == "Enabled") then
+			UISkinOptions.SkadaSkin = "Disabled"			
+			SkadaSkinButton.text:SetText("Skada Skin |cffff2020"..UISkinOptions.SkadaSkin.."|r")
+		else
+			UISkinOptions.SkadaSkin = "Enabled"
+			SkadaSkinButton.text:SetText("Skada Skin |cff00ff00"..UISkinOptions.SkadaSkin.."|r")
+		end
+	end)
 	SkilletSkinButton = CreateFrame("Button", "SkilletSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	SkilletSkinButton:SetPoint("TOPRIGHT", -12, -220)
+	SkilletSkinButton:SetPoint("TOPRIGHT", -12, -280)
 	SkilletSkinButton:Size(200,24)
 	cSkinButton(SkilletSkinButton)
 	SkilletSkinButton.text = SkilletSkinButton:CreateFontString(nil, "OVERLAY")
@@ -881,7 +881,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		end
 	end)
 	SpineCounterSkinButton = CreateFrame("Button", "SpineCounterSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	SpineCounterSkinButton:SetPoint("TOPRIGHT", -12, -250)
+	SpineCounterSkinButton:SetPoint("TOPRIGHT", -12, -310)
 	SpineCounterSkinButton:Size(200,24)
 	cSkinButton(SpineCounterSkinButton)
 	SpineCounterSkinButton.text = SpineCounterSkinButton:CreateFontString(nil, "OVERLAY")
@@ -900,7 +900,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		end
 	end)
 	SpySkinButton = CreateFrame("Button", "SpySkinButton", SkinOptions, "UIPanelButtonTemplate")
-	SpySkinButton:SetPoint("TOPRIGHT", -12, -280)
+	SpySkinButton:SetPoint("TOPRIGHT", -12, -340)
 	SpySkinButton:Size(200,24)
 	cSkinButton(SpySkinButton)
 	SpySkinButton.text = SpySkinButton:CreateFontString(nil, "OVERLAY")
@@ -919,7 +919,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		end
 	end)
 	SwatterSkinButton = CreateFrame("Button", "SwatterSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	SwatterSkinButton:SetPoint("TOPRIGHT", -12, -310)
+	SwatterSkinButton:SetPoint("TOPRIGHT", -12, -370)
 	SwatterSkinButton:Size(200,24)
 	cSkinButton(SwatterSkinButton)
 	SwatterSkinButton.text = SwatterSkinButton:CreateFontString(nil, "OVERLAY")
@@ -938,7 +938,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		end
 	end)
 	TinyDPSSkinButton = CreateFrame("Button", "TinyDPSSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	TinyDPSSkinButton:SetPoint("TOPRIGHT", -12, -340)
+	TinyDPSSkinButton:SetPoint("TOPRIGHT", -12, -400)
 	TinyDPSSkinButton:Size(200,24)
 	cSkinButton(TinyDPSSkinButton)
 	TinyDPSSkinButton.text = TinyDPSSkinButton:CreateFontString(nil, "OVERLAY")
@@ -957,7 +957,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		end
 	end)
 	TitanPanelSkinButton = CreateFrame("Button", "TitanPanelSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	TitanPanelSkinButton:SetPoint("TOPRIGHT", -12, -370)
+	TitanPanelSkinButton:SetPoint("TOPRIGHT", -12, -430)
 	TitanPanelSkinButton:Size(200,24)
 	cSkinButton(TitanPanelSkinButton)
 	TitanPanelSkinButton.text = TitanPanelSkinButton:CreateFontString(nil, "OVERLAY")
@@ -976,7 +976,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		end
 	end)
 	WowLuaSkinButton = CreateFrame("Button", "WowLuaSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	WowLuaSkinButton:SetPoint("TOPRIGHT", -12, -400)
+	WowLuaSkinButton:SetPoint("TOPRIGHT", -12, -460)
 	WowLuaSkinButton:Size(200,24)
 	cSkinButton(WowLuaSkinButton)
 	WowLuaSkinButton.text = WowLuaSkinButton:CreateFontString(nil, "OVERLAY")

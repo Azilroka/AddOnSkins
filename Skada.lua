@@ -7,6 +7,11 @@ local barSpacing = 1
 local borderWidth = 1
 local barmod = Skada.displays["bar"]
 
+local SkinSkada = CreateFrame("Frame")
+	SkinSkada:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinSkada:SetScript("OnEvent", function(self)
+	if(UISkinOptions.SkadaSkin ~= "Enabled") then return end
+
 local function StripOptions(options)
 	options.baroptions.args.barspacing = nil
 	options.titleoptions.args.texture = nil
@@ -91,6 +96,7 @@ barmod.ApplySettings = function(self, win)
 		win.bargroup:SetFrameStrata("MEDIUM")
 	end
 end
+end)
 
 local function EmbedWindow(window, width, barheight, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 	window.db.barwidth = width
@@ -152,9 +158,9 @@ Skada.DeleteWindow_ = Skada.DeleteWindow
 	end
 end
 
-local Skada_Skin = CreateFrame( "Frame" )
-	Skada_Skin:RegisterEvent( "PLAYER_ENTERING_WORLD" )
-	Skada_Skin:SetScript( "OnEvent", function( self )
+local Skada_Skin = CreateFrame("Frame")
+	Skada_Skin:RegisterEvent("PLAYER_ENTERING_WORLD")
+	Skada_Skin:SetScript("OnEvent", function(self)
 		self:UnregisterAllEvents()
 		self = nil
 	if(UISkinOptions.EmbedSkada == "Enabled") then

@@ -98,13 +98,18 @@ function cSkinSliderFrame(self)
 	if ElvUI then
 		s:HandleSliderFrame(self)
 	else
-		SkinSlidebar(self, height, movetext)
+		SkinSlideBar(self, height, movetext)
 	end
 end
 
 function cSkinFrame(self)
 	self:StripTextures(True)
 	self:SetTemplate("Transparent")
+end
+
+function cSkinBackdropFrame(self)
+	self:StripTextures(True)
+	self:CreateBackdrop("Transparent")
 end
 
 function cSkinFrameD(self)
