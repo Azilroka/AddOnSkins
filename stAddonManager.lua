@@ -1,6 +1,5 @@
 LoadAddOn("stAddonmanager")
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("stAddonmanager") then return end
-print("stAddonManager Skinning")
 local SkinstAddonmanager = CreateFrame("Frame")
 	SkinstAddonmanager:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinstAddonmanager:SetScript("OnEvent", function(self)
@@ -14,5 +13,4 @@ local SkinstAddonmanager = CreateFrame("Frame")
 	stAddonManager.profileButton:CreateBackdrop()
 	stAddonManager_ScrollFrameScrollBar.thumbbg:CreateBackdrop()
 	stAddonManager:Hide()
-
 end)
