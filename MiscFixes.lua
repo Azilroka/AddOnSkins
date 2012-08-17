@@ -17,7 +17,9 @@ local buttons = {
 	"QueueStatusMinimapButton",
 	"MiniMapTrackingButton",
 	"MiniMapMailFrame",
-	"HelpOpenTicketButton"
+	"HelpOpenTicketButton",
+	"ElvConfigToggle",
+	"DBMMinimapButton",
 }
 
 local function SkinButton(frame)
