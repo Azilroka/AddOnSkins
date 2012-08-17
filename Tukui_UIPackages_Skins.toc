@@ -30,6 +30,7 @@ Clique.lua
 DBM.lua
 EasyMail.lua
 EnergyWatch.lua
+EPGP.lua
 ExtVendor.lua
 Factionizer.lua
 KarniCrap.lua
