@@ -1,5 +1,5 @@
 ## Interface: 40300
-## Title: Various Skins for |cffC495DDTukui|r Editted Packages
+## Title: |cffC495DDTukui|r & |cff1784d1ElvUI |rSkin Options
 ## Author: See Credits.txt
 ## OptionalDeps: Tukui, ElvUI, Ace3
 ## SavedVariables: UISkinOptions, CBEnableSpecialBars, CBBar2and3Width, CBBar2and3Position, CBShowButtonPosition, TPEnableSpecialBars, TPBar2and3Width, TPBar2and3Position, TPShowButtonPosition
