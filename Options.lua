@@ -1006,4 +1006,3 @@ function SlashCmdList.SKINOPTIONSWINDOW(msg, editbox)
 	end
 end
 end)
-

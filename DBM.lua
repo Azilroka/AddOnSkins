@@ -109,7 +109,8 @@ local function LoadSkin()
 						name:SetWidth(165)
 						name:SetHeight(8)
 						if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
-						if IsAddOnLoaded("ElvUI") then name:SetFont(c["media"].normFont, 12, "OUTLINE") end
+						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:SetFont(c["media"].normFont, 12, "OUTLINE") end
+						if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
 						name:SetJustifyH("LEFT")
 						name:SetShadowColor(0, 0, 0, 0)
 						name.SetFont = s.dummy
@@ -120,7 +121,8 @@ local function LoadSkin()
 						timer:ClearAllPoints()
 						timer:Point("RIGHT", frame, "RIGHT", -4, 0)
 						if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
-						if IsAddOnLoaded("ElvUI") then timer:SetFont(c["media"].normFont, 12, "OUTLINE") end
+						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:SetFont(c["media"].normFont, 12, "OUTLINE") end
+						if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
 						timer:SetJustifyH("RIGHT")
 						timer:SetShadowColor(0, 0, 0, 0)
 						timer.SetFont = s.dummy
@@ -148,7 +150,8 @@ local function LoadSkin()
 			local header={anchor:GetRegions()}
 				if header[1]:IsObjectType("FontString") then
 					if IsAddOnLoaded("Tukui") then header[1]:SetFont(c["media"].font, 12, "OUTLINE") end
-					if IsAddOnLoaded("ElvUI") then header[1]:SetFont(c["media"].normFont, 12, "OUTLINE") end
+					if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then header[1]:SetFont(c["media"].normFont, 12, "OUTLINE") end
+					if IsAddOnLoaded("ElvUI_SLE") then header[1]:FontTemplate(nil, 8, 'OUTLINE') end
 					header[1]:SetTextColor(1,1,1,1)
 					header[1]:SetShadowColor(0, 0, 0, 0)
 					anchor.styled=true	
@@ -204,7 +207,8 @@ local function LoadSkin()
 				name:ClearAllPoints()
 				name:Point("LEFT", bar, "LEFT", 4, 0)
 				if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
-				if IsAddOnLoaded("ElvUI") then name:SetFont(c["media"].normFont, 12, "OUTLINE") end
+				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:SetFont(c["media"].normFont, 12, "OUTLINE") end
+				if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
 				name:SetJustifyH("LEFT")
 				name:SetShadowColor(0, 0, 0, 0)
 				name.styled=true
@@ -214,7 +218,8 @@ local function LoadSkin()
 				timer:ClearAllPoints()
 				timer:Point("RIGHT", bar, "RIGHT", -4, 0)
 				if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
-				if IsAddOnLoaded("ElvUI") then timer:SetFont(c["media"].normFont, 12, "OUTLINE") end
+				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:SetFont(c["media"].normFont, 12, "OUTLINE") end
+				if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
 				timer:SetJustifyH("RIGHT")
 				timer:SetShadowColor(0, 0, 0, 0)
 				timer.styled=true
@@ -233,6 +238,12 @@ local function LoadSkin()
 	DBMRangeCheck:HookScript("OnShow",function(self)
 		self:SetTemplate("Transparent")
 	end)
+	DBMRangeCheckRadar:SetTemplate("Transparent")
+	DBM.InfoFrame:Show(5, "test")
+	DBM.InfoFrame:Hide()
+	DBMInfoFrame:HookScript("OnShow",function(self)
+		self:SetTemplate("Transparent")
+	end)
 	local RaidNotice_AddMessage_=RaidNotice_AddMessage
 	RaidNotice_AddMessage=function(noticeFrame, textString, colorInfo)
 		if textString:find(" |T") then
@@ -240,6 +251,35 @@ local function LoadSkin()
 		end
 		return RaidNotice_AddMessage_(noticeFrame, textString, colorInfo)
 	end
+end
+
+local function LoadSkinOptions()
+	DBM_GUI_OptionsFrame:HookScript("OnShow", function()
+	DBM_GUI_OptionsFrame:StripTextures()
+	DBM_GUI_OptionsFrameBossMods:StripTextures()
+	DBM_GUI_OptionsFrameDBMOptions:StripTextures()
+	DBM_GUI_OptionsFrame:SetTemplate("Transparent")
+	DBM_GUI_OptionsFrameBossMods:SetTemplate("Transparent")
+	DBM_GUI_OptionsFrameDBMOptions:SetTemplate("Transparent")
+	DBM_GUI_OptionsFramePanelContainer:SetTemplate("Transparent")
+	end)
+	cSkinTab(DBM_GUI_OptionsFrameTab1)
+	cSkinTab(DBM_GUI_OptionsFrameTab2)
+	cSkinButton(DBM_GUI_OptionsFrameOkay, true)
+	
+	cSkinScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
+end
+
+if IsAddOnLoaded("Tukui") then 
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
+	s.SkinFuncs["DBM-GUI"] = LoadSkinOptions
+end
+if IsAddOnLoaded("ElvUI") then 
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
+	c:GetModule('Skins')
+	s:RegisterSkin('DBM-GUI', LoadSkinOptions)
 end
 
 local Init = function()
