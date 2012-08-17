@@ -3,10 +3,11 @@
 -- Restructured Functions file. - Azilroka
 -- Added Skinning features for ease of skinning and smaller size skins. - Azilroka
 
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
+
 UIPackageSkinFuncs = {}
 local s
 
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 if ElvUI then
 	local E, L, V, P, G, DF = unpack(ElvUI)
 	local S = E:GetModule('Skins')
