@@ -1,7 +1,7 @@
 ## Interface: 40300
 ## Title: |cffC495DDTukui|r & |cff1784d1ElvUI |rSkin Options
 ## Author: See Credits.txt
-## OptionalDeps: Tukui, ElvUI, Ace3
+## OptionalDeps: Tukui, ElvUI, Ace3, ElvUI_SLE
 ## SavedVariables: UISkinOptions, CBEnableSpecialBars, CBBar2and3Width, CBBar2and3Position, CBShowButtonPosition, TPEnableSpecialBars, TPBar2and3Width, TPBar2and3Position, TPShowButtonPosition
 ## X-Embeds: Ace3
 
@@ -60,6 +60,7 @@ Skada.lua
 Skillet.lua
 SpineCounter.lua
 Spy.lua
+stAddonManager.lua
 Swatter.lua
 TellMeWhen.lua
 TinyDPS.lua
