@@ -1,4 +1,4 @@
-if not(IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not (IsAddOnLoaded("Archy")) then return end
+if not(IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("Archy") then return end
 local SkinArchy = CreateFrame("Frame")
 SkinArchy:RegisterEvent("ADDON_LOADED")
 SkinArchy:SetScript("OnEvent", function(self, event, addon)

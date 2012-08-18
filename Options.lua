@@ -49,11 +49,13 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.RaidInviteOrganizerSkin == nil) then UISkinOptions.RaidInviteOrganizerSkin = "Enabled" end
 	if(UISkinOptions.RaidBuffStatusSkin == nil) then UISkinOptions.RaidBuffStatusSkin = "Enabled" end
 	if(UISkinOptions.RecountSkin == nil) then UISkinOptions.RecountSkin = "Enabled" end
+	if(UISkinOptions.RecountBackdrop == nil) then UISkinOptions.RecountBackdrop = "Enabled" end
 	if(UISkinOptions.SearingPlasmaTrackerSkin == nil) then UISkinOptions.SearingPlasmaTrackerSkin = "Enabled" end
 	if(UISkinOptions.SkilletSkin == nil) then UISkinOptions.SkilletSkin = "Enabled" end
 	if(UISkinOptions.SpineCounterSkin == nil) then UISkinOptions.SpineCounterSkin = "Enabled" end
 	if(UISkinOptions.SpySkin == nil) then UISkinOptions.SpySkin = "Enabled" end
 	if(UISkinOptions.SkadaSkin == nil) then UISkinOptions.SkadaSkin = "Enabled" end
+	if(UISkinOptions.SkadaBackdrop == nil) then UISkinOptions.SkadaBackdrop = "Enabled" end
 	if(UISkinOptions.SwatterSkin == nil) then UISkinOptions.SwatterSkin = "Enabled" end
 	if(UISkinOptions.TinyDPSSkin == nil) then UISkinOptions.TinyDPSSkin = "Disabled" end
 	if(UISkinOptions.TitanPanelSkin == nil) then UISkinOptions.TitanPanelSkin = "Enabled" end
@@ -450,16 +452,16 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	FactionizerSkinButton.text = FactionizerSkinButton:CreateFontString(nil, "OVERLAY")
 	FactionizerSkinButton.text:SetFont(UIFont, 12, "OUTLINE")
 	FactionizerSkinButton.text:SetPoint("CENTER", FactionizerSkinButton, 0, 0)
-	if (UISkinOptions.FactionizerSkin == "Enabled") then FactionizerSkinButton.text:SetText("Extended Vendor Skin |cff00ff00"..UISkinOptions.FactionizerSkin.."|r") end
-	if (UISkinOptions.FactionizerSkin == "Disabled") then FactionizerSkinButton.text:SetText("Extended Vendor Skin |cffff2020"..UISkinOptions.FactionizerSkin.."|r") end
-	if not IsAddOnLoaded("Factionizer") then FactionizerSkinButton:Disable() FactionizerSkinButton.text:SetText("|cFF808080Extended Vendor Not Detected|r") end
+	if (UISkinOptions.FactionizerSkin == "Enabled") then FactionizerSkinButton.text:SetText("Factionizer Skin |cff00ff00"..UISkinOptions.FactionizerSkin.."|r") end
+	if (UISkinOptions.FactionizerSkin == "Disabled") then FactionizerSkinButton.text:SetText("Factionizer Skin |cffff2020"..UISkinOptions.FactionizerSkin.."|r") end
+	if not IsAddOnLoaded("Factionizer") then FactionizerSkinButton:Disable() FactionizerSkinButton.text:SetText("|cFF808080Factionizer Not Detected|r") end
 	FactionizerSkinButton:HookScript("OnClick", function()
 		if (UISkinOptions.FactionizerSkin == "Enabled") then
 			UISkinOptions.FactionizerSkin = "Disabled"			
-			FactionizerSkinButton.text:SetText("Extended Vendor Skin |cffff2020"..UISkinOptions.FactionizerSkin.."|r")
+			FactionizerSkinButton.text:SetText("Factionizer Skin |cffff2020"..UISkinOptions.FactionizerSkin.."|r")
 		else
 			UISkinOptions.FactionizerSkin = "Enabled"
-			FactionizerSkinButton.text:SetText("Extended Vendor Skin |cff00ff00"..UISkinOptions.FactionizerSkin.."|r")
+			FactionizerSkinButton.text:SetText("Factionizer Skin |cff00ff00"..UISkinOptions.FactionizerSkin.."|r")
 		end
 	end)
 	KarniCrapSkinButton = CreateFrame("Button", "KarniCrapSkinButton", SkinOptions, "UIPanelButtonTemplate")

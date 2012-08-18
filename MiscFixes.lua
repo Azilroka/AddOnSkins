@@ -1,19 +1,11 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-if IsAddOnLoaded("TomTom") then TomTomBlock:SetTemplate("Transparent") end
+if IsAddOnLoaded("TomTom") then if TomTomBlock then TomTomBlock:SetTemplate("Transparent") end end
 if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
-GeneralDockManagerOverflowButtonList:SetTemplate()
-cSkinCloseButton(TokenFramePopupCloseButton)
-cSkinCloseButton(RolePollPopupCloseButton)
-cSkinCheckBox(TokenFramePopupInactiveCheckBox)
-cSkinCheckBox(TokenFramePopupBackpackCheckBox)
-
-if IsAddOnLoaded("AsphyxiaUI") or IsAddOnLoaded("SinarisUI") then return end
 
 --Minimap Button Skinning thanks to Sinaris
 
----------------------------------------------------------------------------------------------
--- Project: AsphyxiaUI Version 6.0 
----------------------------------------------------------------------------------------------
+if IsAddOnLoaded("AsphyxiaUI") or IsAddOnLoaded("SinarisUI") then return end
+
 local buttons = {
 	"QueueStatusMinimapButton",
 	"MiniMapTrackingButton",
