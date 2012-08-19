@@ -1,6 +1,10 @@
 ﻿if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Quartz") then return end
 local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
-if not Q3 then return end
+local SkinQuartz = CreateFrame("Frame")
+	SkinQuartz:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinQuartz:SetScript("OnEvent", function(self)
+	if (UISkinOptions.QuartzSkin ~= "Enabled") then return end
+
 	SkinQuartzBar = function(self, bar)
 		Quartz3CastBarPlayer:SetTemplate("Transparent")
 		Quartz3CastBarPlayer.IconBorder = CreateFrame("Frame", nil, Quartz3CastBarPlayer)
@@ -59,3 +63,4 @@ if not Q3 then return end
 	end
 
 	Q3:ApplySettings()
+end)

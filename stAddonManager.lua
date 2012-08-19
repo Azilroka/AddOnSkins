@@ -3,6 +3,7 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local SkinstAddonmanager = CreateFrame("Frame")
 	SkinstAddonmanager:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinstAddonmanager:SetScript("OnEvent", function(self)
+	if (UISkinOptions.stAddonManagerSkin ~= "Enabled") then return end
 
 	stAddonManager:LoadWindow()
 	stAddonManager:CreateBackdrop()
