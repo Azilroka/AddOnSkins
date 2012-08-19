@@ -2,14 +2,11 @@ if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
 local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
-	EmbeddingWindow:RegisterEvent("PLAYER_ENTERING_WORLD")
-	EmbeddingWindow:SetScript("OnEvent", function(self)
 	EmbeddingWindow:SetTemplate("Transparent")
+	EmbeddingWindow:SetFrameStrata("HIGH")
+	EmbeddingWindow:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
 	if IsAddOnLoaded("ElvUI") then UIFont = [[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]] end
 	if IsAddOnLoaded("Tukui") then UIFont = [[Interface\AddOns\Tukui\medias\fonts\normal_font.ttf]] end
-	if IsAddOnLoaded("ElvUI") then EmbeddingWindow:Point("BOTTOMRIGHT", RightChatDataPanel, "BOTTOMRIGHT", 16, 23) EmbeddingWindow:Size(402,148) end
-	if IsAddOnLoaded("Tukui") then EmbeddingWindow:Point("BOTTOMRIGHT", TukuiInfoRight, "BOTTOMRIGHT", 0, 24) EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiInfoRight:GetHeight() * 6) + 4) end
-	EmbeddingWindow:SetFrameStrata("HIGH")
 	EmbeddingWindow:Hide()
 	EmbeddingWindow:SetClampedToScreen(true)
 	EmbeddingWindow:SetMovable(true)
@@ -25,6 +22,17 @@ local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 	EmbeddingWindow:RegisterForDrag("LeftButton")
 	EmbeddingWindow:SetScript("OnDragStart", function(self) if IsShiftKeyDown() then self:StartMoving() end end)
 	EmbeddingWindow:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end);
+	EmbeddingWindow:RegisterEvent("PLAYER_ENTERING_WORLD")
+	EmbeddingWindow:SetScript("OnEvent", function(self)
+
+	if (UISkinOptions.EmbedRunOnce ~= "True") then
+		if IsAddOnLoaded("ElvUI") then EmbeddingWindow:Point("BOTTOMRIGHT", RightChatDataPanel, "BOTTOMRIGHT", 16, 22) end
+		if IsAddOnLoaded("Tukui") then EmbeddingWindow:Point("BOTTOMRIGHT", TukuiInfoRight, "BOTTOMRIGHT", 0, 24) end
+		UISkinOptions.EmbedRunOnce = "True"
+	end
+
+	if IsAddOnLoaded("ElvUI") then EmbeddingWindow:Size((RightChatPanel:GetWidth() - 10),(RightChatPanel:GetHeight() - 32)) end
+	if IsAddOnLoaded("Tukui") then EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiInfoRight:GetHeight() * 6) + 4) end
 
 	if IsAddOnLoaded("ElvUI") then
 		local E, L, V, P, G, DF = unpack(ElvUI)
