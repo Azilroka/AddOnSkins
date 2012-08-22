@@ -2,7 +2,8 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local SkinSpy = CreateFrame("Frame")
 	SkinSpy:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinSpy:SetScript("OnEvent", function(self)
-	if (UISkinOptions.SpySkin == "Disabled") then return end
+	if (UISkinOptions.SpySkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 

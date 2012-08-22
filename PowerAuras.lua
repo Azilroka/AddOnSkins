@@ -3,6 +3,7 @@ local SkinPowerAuras = CreateFrame("Frame")
 	SkinPowerAuras:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinPowerAuras:SetScript("OnEvent", function(self)
 	if (UISkinOptions.PowerAurasSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 

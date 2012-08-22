@@ -3,6 +3,7 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 	SkinMinimalArchaeology:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinMinimalArchaeology:SetScript("OnEvent", function(self, event, addon)
 	if (UISkinOptions.MinimalArchaeologySkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	cSkinFrame(MinArchMain)
 	cSkinStatusBar(MinArchMainSkillBar)

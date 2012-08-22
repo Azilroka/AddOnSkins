@@ -11,6 +11,7 @@ local SkinSkada = CreateFrame("Frame")
 	SkinSkada:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinSkada:SetScript("OnEvent", function(self)
 	if(UISkinOptions.SkadaSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 local function StripOptions(options)
 	options.baroptions.args.barspacing = nil

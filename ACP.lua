@@ -29,7 +29,9 @@ local SkinACP = CreateFrame("Frame")
 	SkinACP:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinACP:SetScript("OnEvent", function(self, event, addon)
 	if(UISkinOptions.ACPSkin ~= "Enabled") then return end
-	cSkinFrame(ACP_AddonList)				
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
+	cSkinFrame(ACP_AddonList)
         cSkinFrame(ACP_AddonList_ScrollFrame)
 	
 	local buttons = {
@@ -55,9 +57,9 @@ local SkinACP = CreateFrame("Frame")
 	end
 
 	for i = 1, 20 do
-			cSkinCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
+		cSkinCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
 	end
-			cSkinCheckBox(ACP_AddonList_NoRecurse)
+	cSkinCheckBox(ACP_AddonList_NoRecurse)
 
 	cSkinScrollBar(ACP_AddonList_ScrollFrameScrollBar)
 	cSkinDropDownBox(ACP_AddonListSortDropDown)

@@ -3,6 +3,7 @@ local SkinPostal = CreateFrame("Frame")
 	SkinPostal:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinPostal:SetScript("OnEvent", function(self)
 	if (UISkinOptions.PostalSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 	if IsAddOnLoaded("ElvUI") then if c.private.skins.blizzard.enable ~= true or c.private.skins.blizzard.mail ~= true then return end end

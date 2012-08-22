@@ -8,6 +8,7 @@ local SkinRecount = CreateFrame( "Frame" )
 	SkinRecount:RegisterEvent( "PLAYER_ENTERING_WORLD" )
 	SkinRecount:SetScript( "OnEvent", function( self )
 	if(UISkinOptions.RecountSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 local function SkinFrame(frame)
 	frame.bgMain = CreateFrame("Frame", nil, frame)

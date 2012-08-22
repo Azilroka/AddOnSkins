@@ -5,6 +5,7 @@ local SkinBuyEmAll = CreateFrame("Frame")
 	SkinBuyEmAll:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinBuyEmAll:SetScript("OnEvent", function(self)
 	if (UISkinOptions.BuyEmAllSkin == "Disabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	cSkinFrame(BuyEmAllFrame)
 	cSkinButton(BuyEmAllStackButton)

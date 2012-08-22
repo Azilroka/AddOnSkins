@@ -63,6 +63,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.TitanPanelSkin == nil) then UISkinOptions.TitanPanelSkin = "Enabled" end
 	if(UISkinOptions.WeakAuraSkin == nil) then UISkinOptions.WeakAuraSkin = "Enabled" end
 	if(UISkinOptions.WowLuaSkin == nil) then UISkinOptions.WowLuaSkin = "Enabled" end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end)
 
 local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
@@ -1035,6 +1036,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 			UISkinOptions.WowLuaSkin = "Enabled"
 			WowLuaSkinButton.text:SetText("WowLua Skin |cff00ff00Enabled|r")
 		end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end)
 
 SLASH_SKINOPTIONSWINDOW1 = '/skinoptions';

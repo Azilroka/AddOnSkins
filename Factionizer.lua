@@ -13,6 +13,7 @@ local SkinFactionizer = CreateFrame("Frame")
 	SkinFactionizer:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinFactionizer:SetScript("OnEvent", function(self, event, addon)
 	if (UISkinOptions.FactionizerSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	local StripAllTextures = {
                 "FIZ_ReputationDetailFrame",

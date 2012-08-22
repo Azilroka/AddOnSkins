@@ -3,6 +3,7 @@ local SkinPoMTracker = CreateFrame("Frame")
 	SkinPoMTracker:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinPoMTracker:SetScript("OnEvent", function(self)
 	if (UISkinOptions.PoMTrackerSkin == "Disabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 

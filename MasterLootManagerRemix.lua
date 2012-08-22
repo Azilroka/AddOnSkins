@@ -3,6 +3,7 @@ local SkinMLM = CreateFrame("Frame")
 	SkinMLM:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinMLM:SetScript("OnEvent", function(self, event, addon)
 	if (UISkinOptions.MasterLootManagerRemixSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local StripAllTextures = {
 				"MasterLootManagerMain",
 				"MasterLootLoggerFrame",

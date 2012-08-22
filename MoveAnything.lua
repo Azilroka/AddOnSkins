@@ -3,6 +3,7 @@ local SkinMoveAnything = CreateFrame("Frame")
 	SkinMoveAnything:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinMoveAnything:SetScript("OnEvent", function(self)
 	if (UISkinOptions.MoveAnythingSkin == "Disabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 

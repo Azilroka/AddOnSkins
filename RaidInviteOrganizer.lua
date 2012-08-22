@@ -2,7 +2,8 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local SkinRIO = CreateFrame("Frame")
 	SkinRIO:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinRIO:SetScript("OnEvent", function(self)
-	if (UISkinOptions.RaidInviteOrganizerSkin == "Disabled") then return end
+	if (UISkinOptions.RaidInviteOrganizerSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 	

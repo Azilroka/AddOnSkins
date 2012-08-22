@@ -3,6 +3,8 @@ local SkinOdyssey = CreateFrame("Frame")
 	SkinOdyssey:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinOdyssey:SetScript("OnEvent", function(self)
 	if (UISkinOptions.OdysseySkin == "Disabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 

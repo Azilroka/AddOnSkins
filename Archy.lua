@@ -1,10 +1,8 @@
 if not(IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("Archy") then return end
 local SkinArchy = CreateFrame("Frame")
-SkinArchy:RegisterEvent("ADDON_LOADED")
+SkinArchy:RegisterEvent("PLAYER_ENTERING_WORLD")
 SkinArchy:SetScript("OnEvent", function(self, event, addon)
-	if (UISkinOptions.ArchySkin ~= "Enabled")
-		then return
-	end
+	if (UISkinOptions.ArchySkin ~= "Enabled") then return end
 
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c

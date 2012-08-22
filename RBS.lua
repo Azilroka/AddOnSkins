@@ -2,7 +2,8 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local SkinRBS = CreateFrame("Frame")
 	SkinRBS:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinRBS:SetScript("OnEvent", function(self, event, addon)
-	if (UISkinOptions.RaidBuffStatusSkin == "Disabled") then return end
+	if (UISkinOptions.RaidBuffStatusSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 

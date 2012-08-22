@@ -3,6 +3,8 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 	SkinLootCouncilLite:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinLootCouncilLite:SetScript("OnEvent", function(self)
 	if (UISkinOptions.LootCouncilLiteSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
 	cSkinFrame(RankFrame)
 	cSkinDropDownBox(RankDropDown)
 	cSkinButton(RankAcceptButton)

@@ -2,7 +2,8 @@ if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("
 local SkinSwatter = CreateFrame("Frame")
 	SkinSwatter:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinSwatter:SetScript("OnEvent", function(self)
-	if (UISkinOptions.SwatterSkin == "Disabled") then return end
+	if (UISkinOptions.SwatterSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 

@@ -287,6 +287,7 @@ local SkinDBM = CreateFrame("Frame")
 	SkinDBM:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinDBM:SetScript("OnEvent", function(self)
 	if (UISkinOptions.DBMSkin == "Disabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 	LoadSkin()

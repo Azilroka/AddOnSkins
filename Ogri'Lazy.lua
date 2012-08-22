@@ -3,6 +3,8 @@ local SkinOgriLazy = CreateFrame("Frame")
 	SkinOgriLazy:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinOgriLazy:SetScript("OnEvent", function(self)
 	if (UISkinOptions.OgriLazySkin == "Disabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 

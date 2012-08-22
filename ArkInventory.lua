@@ -2,7 +2,8 @@ if not IsAddOnLoaded("ArkInventory") then return end
 local ArkInventory = LibStub("AceAddon-3.0"):GetAddon("ArkInventory")
 
 local _G = _G
-
+local s = UIPackageSkinFuncs.s
+local c = UIPackageSkinFuncs.c
 ArkInventory.Frame_Main_Paint_ = ArkInventory.Frame_Main_Paint
 ArkInventory.Frame_Main_Paint = function(frame)
 
@@ -14,7 +15,7 @@ if not ArkInventory.ValidFrame(frame, true) then return	end
 			if _G[name.."ArkBorder"] then _G[name.."ArkBorder"]:Hide() end
 			if _G[name.."Background"] then _G[name.."Background"]:Hide() end
 		end
-			skin:SkinBackgroundFrame(subframe)
+			cSkinFrame(subframe)
 		end
 	end
 	
@@ -28,7 +29,6 @@ if not ArkInventory.ValidFrame(frame, true) then return	end
 	
 	ArkInventory.Frame_Main_Scale_ = ArkInventory.Frame_Main_Scale
 	ArkInventory.Frame_Main_Scale = function(loc_id)
-		-- Lock the scale at 1 to protect our pixel-perfect borders!
 		ArkInventory.Frame_Main_Get( loc_id ):SetScale(1)
 		ArkInventory.Frame_Main_Anchor_Set(loc_id)
 	end
@@ -47,33 +47,31 @@ if not ArkInventory.ValidFrame(frame, true) then return	end
 		title:SetPoint("TOPLEFT")
 		title:SetPoint("TOPRIGHT")
 		search:ClearAllPoints()
-		search:SetPoint("TOPLEFT",title,"BOTTOMLEFT",0,-config.buttonSpacing)
-		search:SetPoint("TOPRIGHT",title,"BOTTOMRIGHT",0,-config.buttonSpacing)
+		search:SetPoint("TOPLEFT",title,"BOTTOMLEFT",0,-2)
+		search:SetPoint("TOPRIGHT",title,"BOTTOMRIGHT",0,-2)
 		container:ClearAllPoints()
-		container:SetPoint("TOPLEFT",search,"BOTTOMLEFT",0,-config.buttonSpacing)
-		container:SetPoint("TOPRIGHT",search,"BOTTOMRIGHT",0,-config.buttonSpacing)
+		container:SetPoint("TOPLEFT",search,"BOTTOMLEFT",0,-2)
+		container:SetPoint("TOPRIGHT",search,"BOTTOMRIGHT",0,-2)
 		changer:ClearAllPoints()
-		changer:SetPoint("TOPLEFT",container,"BOTTOMLEFT",0,-config.buttonSpacing)
-		changer:SetPoint("TOPRIGHT",container,"BOTTOMRIGHT",0,-config.buttonSpacing)
+		changer:SetPoint("TOPLEFT",container,"BOTTOMLEFT",0,-2)
+		changer:SetPoint("TOPRIGHT",container,"BOTTOMRIGHT",0,-2)
 		status:ClearAllPoints()
-		status:SetPoint("TOPLEFT",changer,"BOTTOMLEFT",0,-config.buttonSpacing)
-		status:SetPoint("TOPRIGHT",changer,"BOTTOMRIGHT",0,-config.buttonSpacing)
+		status:SetPoint("TOPLEFT",changer,"BOTTOMLEFT",0,-2)
+		status:SetPoint("TOPRIGHT",changer,"BOTTOMRIGHT",0,-2)
 
-		ArkInventory.Const.Frame.Status.Height = config.fontSize + config.borderWidth * 4
-		_G[status:GetName().."EmptyText"]:SetPoint("LEFT",config.borderWidth,0)
-		_G[status:GetName().."EmptyText"]:SetFont(config.font,config.fontSize,config.fontFlags)
+		ArkInventory.Const.Frame.Status.Height = 10 + 2 * 4
+		_G[status:GetName().."EmptyText"]:SetPoint("LEFT",2,0)
+		_G[status:GetName().."EmptyText"]:SetFont(c["media"].font, 12)
 
-		_G[status:GetName().."GoldCopperButton"]:SetPoint("RIGHT",-config.borderWidth,0)
-		_G[status:GetName().."GoldCopperButtonText"]:SetFont(config.font,config.fontSize,config.fontFlags)
+		_G[status:GetName().."GoldCopperButton"]:SetPoint("RIGHT",-1,0)
+		_G[status:GetName().."GoldCopperButtonText"]:SetFont(c["media"].font,12)
+
+		_G[status:GetName().."GoldSilverButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldCopperButtonText"],"LEFT",-1,0)
+		_G[status:GetName().."GoldSilverButtonText"]:SetFont(c["media"].font,12)
 
 		
-		_G[status:GetName().."GoldSilverButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldCopperButtonText"],"LEFT",-config.borderWidth,0)
-		_G[status:GetName().."GoldSilverButtonText"]:SetFont(config.font,config.fontSize,config.fontFlags)
-
-		
-		_G[status:GetName().."GoldGoldButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldSilverButtonText"],"LEFT",-config.borderWidth,0)
-		_G[status:GetName().."GoldGoldButtonText"]:SetFont(config.font,config.fontSize,config.fontFlags)
-		
+		_G[status:GetName().."GoldGoldButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldSilverButtonText"],"LEFT",-1,0)
+		_G[status:GetName().."GoldGoldButtonText"]:SetFont(c["media"].font,12)
 	end
 	
 	ArkInventory.Const.Frame.Title.Height2 = 32
@@ -89,7 +87,7 @@ if not ArkInventory.ValidFrame(frame, true) then return	end
 		local name = bar:GetName()
 		if _G[name.."ArkBorder"] then _G[name.."ArkBorder"]:Hide() end
 		if _G[name.."Background"] then _G[name.."Background"]:Hide() end
-		skin:SkinFrame(bar)
+		cSkinFrame(bar)
 
 		if ArkInventory.Global.Mode.Edit then
 			bar:SetBackdropBorderColor(1,0,0,1)
@@ -105,11 +103,11 @@ if not ArkInventory.ValidFrame(frame, true) then return	end
 			obj:Hide()
 		else
 			obj:SetTexture(texture)
-			obj:SetTexCoord(unpack(config.buttonZoom))
+			obj:SetTexCoord(.08, .92, .08, .92)
 			obj:SetVertexColor(r or 1, r and g or 1, r and b or 1)
 			obj:ClearAllPoints()
-			obj:SetPoint("TOPLEFT",config.borderWidth,-config.borderWidth)
-			obj:SetPoint("BOTTOMRIGHT",-config.borderWidth,config.borderWidth)
+			obj:SetPoint("TOPLEFT",2,-2)
+			obj:SetPoint("BOTTOMRIGHT",-2,2)
 		end
 	end
 	
@@ -120,8 +118,8 @@ if not ArkInventory.ValidFrame(frame, true) then return	end
 		local obj = _G[frame:GetName().."ArkBorder"]
 		local r,g,b,a = obj:GetBackdropBorderColor()
 		obj:Hide()
-		skin:SkinFrame(frame)
+		cSkinFrame(frame)
 		frame:SetBackdropBorderColor(r,g,b,a)
 
 	end
-end)
+	

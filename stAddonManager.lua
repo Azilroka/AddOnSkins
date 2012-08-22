@@ -4,6 +4,7 @@ local SkinstAddonmanager = CreateFrame("Frame")
 	SkinstAddonmanager:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinstAddonmanager:SetScript("OnEvent", function(self)
 	if (UISkinOptions.stAddonManagerSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	stAddonManager:LoadWindow()
 	stAddonManager:CreateBackdrop()

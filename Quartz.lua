@@ -4,6 +4,7 @@ local SkinQuartz = CreateFrame("Frame")
 	SkinQuartz:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinQuartz:SetScript("OnEvent", function(self)
 	if (UISkinOptions.QuartzSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	SkinQuartzBar = function(self, bar)
 		Quartz3CastBarPlayer:SetTemplate("Transparent")

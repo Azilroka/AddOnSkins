@@ -157,6 +157,7 @@ local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 	CloseEmbedWindowButton.text:SetPoint("CENTER", CloseEmbedWindowButton, 0, 0)
 	CloseEmbedWindowButton.text:SetText("Close Window")
 	CloseEmbedWindowButton:HookScript("OnClick", function()	EmbeddingWindow:Hide() StaticPopup_Show("RELOADUI") end)
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 
 StaticPopupDialogs["RELOADUI"] = {

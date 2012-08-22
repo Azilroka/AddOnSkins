@@ -5,6 +5,7 @@ local Skin = CreateFrame("Frame")
 	Skin:RegisterEvent("PLAYER_ENTERING_WORLD")
 	Skin:SetScript("OnEvent", function(self)
 	if (UISkinOptions.EPGPisSkinned == "True") then UISkinOptions.EPGPisSkinned = "False" end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 local function SkinEPGP()
 	
