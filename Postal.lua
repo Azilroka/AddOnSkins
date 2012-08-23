@@ -9,7 +9,7 @@ local SkinPostal = CreateFrame("Frame")
 	if IsAddOnLoaded("ElvUI") then if c.private.skins.blizzard.enable ~= true or c.private.skins.blizzard.mail ~= true then return end end
 
 	MailFrame:Size(350,450)
-	PostalOpenAllButton:Point("Center", InboxFrame, "TOP", -22, -420)
+	--PostalOpenAllButton:Point("Center", InboxFrame, "TOP", -22, -420)
 	InboxPrevPageButton:Point("CENTER", InboxFrame, "BOTTOMLEFT", 64, 92)
 	InboxNextPageButton:Point("CENTER", InboxFrame, "BOTTOMLEFT", 314, 92)
 

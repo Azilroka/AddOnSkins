@@ -1,6 +1,10 @@
 if not IsAddOnLoaded("ArkInventory") then return end
 local ArkInventory = LibStub("AceAddon-3.0"):GetAddon("ArkInventory")
-
+local SkinArkInventory = CreateFrame("Frame")
+	SkinArkInventory:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinArkInventory:SetScript("OnEvent", function(self)
+	if (UISkinOptions.ArkInventorySkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 local _G = _G
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
@@ -122,4 +126,4 @@ if not ArkInventory.ValidFrame(frame, true) then return	end
 		frame:SetBackdropBorderColor(r,g,b,a)
 
 	end
-	
+end)

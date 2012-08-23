@@ -21,6 +21,8 @@ ATSW.lua
 Auctionator.lua
 Auctioneer.lua
 BGDefender.lua
+BigWigs-ElvUI.lua
+BigWigs-Tukui.lua
 BuyEmAll.lua
 ChocolateBar.lua
 CLCInfo.lua

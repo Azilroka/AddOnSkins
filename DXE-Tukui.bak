@@ -1,10 +1,12 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
+if not IsAddOnLoaded("Tukui") then return end
 if not IsAddOnLoaded("DXE") then return end
 local skin = CreateFrame("Frame")
 skin:RegisterEvent("ADDON_LOADED")
 skin:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "DXE" then return end
 	if (UISkinOptions.DXESkin == "Disabled") then return end
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
 	local DXE = DXE
 	local _G = getfenv(0)
 	local barSpacing = s.Scale(2, 2)
@@ -16,7 +18,7 @@ skin:SetScript("OnEvent", function(self, event, addon)
 		bar:SetTemplate("Transparent")
 		bar.bg:SetTexture(nil)
 		bar.border:Kill()
-		bar.statusbar:SetStatusBarTexture(C["media"].normTex)
+		bar.statusbar:SetStatusBarTexture(c["media"].normTex)
 		bar.statusbar:ClearAllPoints()
 		bar.statusbar:SetPoint("TOPLEFT",borderWidth, -borderWidth)
 		bar.statusbar:SetPoint("BOTTOMRIGHT",-borderWidth, borderWidth)
@@ -51,7 +53,7 @@ skin:SetScript("OnEvent", function(self, event, addon)
 			if hw:IsShown() then
 				hw:SetTemplate("Transparent")
 				hw.border:Kill()
-				hw.healthbar:SetStatusBarTexture(C["media"].normTex)
+				hw.healthbar:SetStatusBarTexture(c["media"].normTex)
 			end
 		end
 	end

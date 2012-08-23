@@ -8,22 +8,25 @@ SkinArchy:SetScript("OnEvent", function(self, event, addon)
 	local c = UIPackageSkinFuncs.c
 
 	local function SkinArchyArtifactFrame()
-		ArchyArtifactFrame:StripTextures()
-		ArchyArtifactFrame.bg = CreateFrame("Frame", nil, UIParent)
-		ArchyArtifactFrame.bg:CreateBackdrop()
-		ArchyArtifactFrame.bg:Point("TOPLEFT", ArchyArtifactFrame, 0, 0)
-		ArchyArtifactFrame.bg:Point("BOTTOMRIGHT", ArchyArtifactFrame, 0, 0)
+		cSkinFrame(ArchyArtifactFrame)
+		ArchyArtifactFrame:SetParent(UIParent)
+		ArchyArtifactFrame:SetScale(1)
+		--ArchyArtifactFrame:CreateBackdrop()
+		--ArchyArtifactFrame.backdrop:SetParent(UIParent)
+		--ArchyArtifactFrame.backdrop:Point("TOPLEFT", ArchyArtifactFrame, 0, 0)
+		--ArchyArtifactFrame.backdrop:Point("BOTTOMRIGHT", ArchyArtifactFrame, 0, 0)
 	end
 
 	hooksecurefunc(Archy, "UpdateRacesFrame", SkinArchyArtifactFrame)
 
 	local function SkinArchyDigSiteFrame()
-		ArchyDigSiteFrame:StripTextures()
-		ArchyDigSiteFrame.bg = CreateFrame("Frame", nil, UIParent)
-		ArchyDigSiteFrame.bg:CreateBackdrop()
-		ArchyDigSiteFrame.bg:Point("TOPLEFT", ArchyDigSiteFrame, 0, 0)
-		ArchyDigSiteFrame.bg:Point("BOTTOMRIGHT", ArchyDigSiteFrame, 0, 0)
-		cSkinButton(ArchyDistanceIndicatorFrameSurveyButton)
+		cSkinFrame(ArchyDigSiteFrame)
+		ArchyDigSiteFrame:SetParent(UIParent)
+		ArchyDigSiteFrame:SetScale(1)
+		--ArchyDigSiteFrame:CreateBackdrop()
+		--ArchyDigSiteFrame.backdrop:SetParent(UIParent)
+		--ArchyDigSiteFrame.backdrop:Point("TOPLEFT", ArchyArtifactFrame, 0, 0)
+		--ArchyDigSiteFrame.backdrop:Point("BOTTOMRIGHT", ArchyArtifactFrame, 0, 0)
 	end
 
 	hooksecurefunc(Archy, "UpdateDigSiteFrame", SkinArchyDigSiteFrame)
@@ -31,6 +34,6 @@ SkinArchy:SetScript("OnEvent", function(self, event, addon)
 	if ArchyArtifactFrameSkillBar then
 		cSkinStatusBar(ArchyArtifactFrameSkillBar)
 	end
-
+	cSkinButton(ArchyDistanceIndicatorFrameSurveyButton)
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end)
