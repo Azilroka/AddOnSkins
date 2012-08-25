@@ -35,8 +35,14 @@ local function SkinPowerAuras(self, aura, elapsed)
 end
 
 local function PowerAuras_LoadSkin()
+local SkinPowerAurasIcons = CreateFrame("Frame")
+	SkinPowerAurasIcons:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinPowerAurasIcons:SetScript("OnEvent", function(self)
+	if (UISkinOptions.PowerAurasIconsSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	PowaAuras.OldUpdateAura = PowaAuras.UpdateAura
 	PowaAuras.UpdateAura = SkinPowerAuras
+	end)
 end
 
 local function Skin_WeakAuras(frame)
@@ -67,6 +73,12 @@ local function Modify_WeakAuras(parent, region, data)
 end
 
 local function WeakAuras_LoadSkin()
+local SkinWeakAuras = CreateFrame("Frame")
+	SkinWeakAuras:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinWeakAuras:SetScript("OnEvent", function(self)
+	if (UISkinOptions.WeakAurasSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
 	WeakAuras.regionTypes.icon.OldCreate = WeakAuras.regionTypes.icon.create
 	WeakAuras.regionTypes.icon.create = Create_WeakAuras
 	
@@ -78,6 +90,7 @@ local function WeakAuras_LoadSkin()
 			Skin_WeakAuras(WeakAuras.regions[weakAura].region)
 		end
 	end
+	end)
 end
 
 s:RegisterSkin('PowerAuras', PowerAuras_LoadSkin)

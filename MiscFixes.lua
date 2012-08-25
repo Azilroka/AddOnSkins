@@ -1,6 +1,37 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 if IsAddOnLoaded("TomTom") then if TomTomBlock then TomTomBlock:SetTemplate("Transparent") end end
 if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
+LoadAddOn("acb_CastBar")
+if IsAddOnLoaded("acb_CastBar") then
+local SkinAZCastBar = CreateFrame("Frame")
+	SkinAZCastBar:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinAZCastBar:SetScript("OnEvent", function(self)
+	print("AzCastBar Skinning")
+	AzCastBarPluginPlayer:StripTextures() AzCastBarPluginPlayer:CreateBackdrop()
+	AzCastBarPluginTarget:StripTextures() AzCastBarPluginTarget:CreateBackdrop()
+	AzCastBarPluginFocus:StripTextures() AzCastBarPluginFocus:CreateBackdrop()
+	AzCastBarPluginMirror:StripTextures() AzCastBarPluginMirror:CreateBackdrop()
+	AzCastBarPluginPet:StripTextures() AzCastBarPluginPet:CreateBackdrop()
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+end)
+end
+
+cSkinTab(CharacterFrameTab5)
+
+----------------------------------------
+-- Loot auto confirm
+----------------------------------------
+local LootConfirmer = CreateFrame("Frame")
+
+LootConfirmer:RegisterEvent("CONFIRM_DISENCHANT_ROLL");
+LootConfirmer:RegisterEvent("CONFIRM_LOOT_ROLL");
+LootConfirmer:SetScript('OnEvent',
+	function(self, event, ...)
+		local arg1, arg2 = ...;
+		ConfirmLootRoll(arg1, arg2);
+	end
+)
+StaticPopupDialogs["CONFIRM_LOOT_ROLL"] = nil
 
 --Minimap Button Skinning thanks to Sinaris
 
@@ -13,6 +44,7 @@ local buttons = {
 	"HelpOpenTicketButton",
 	"ElvConfigToggle",
 	"DBMMinimapButton",
+	"UpperRepExpBarHolder",
 }
 
 local function SkinButton(frame)
