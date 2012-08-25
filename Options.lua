@@ -53,9 +53,11 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.RaidBuffStatusSkin == nil) then UISkinOptions.RaidBuffStatusSkin = "Enabled" end
 	if(UISkinOptions.RecountSkin == nil) then UISkinOptions.RecountSkin = "Disabled" end
 	if(UISkinOptions.RecountBackdrop == nil) then UISkinOptions.RecountBackdrop = "Enabled" end
+	if(UISkinOptions.EmbedRecount == nil) then UISkinOptions.EmbedRecount = "Disabled" end
 	if(UISkinOptions.SearingPlasmaTrackerSkin == nil) then UISkinOptions.SearingPlasmaTrackerSkin = "Enabled" end
 	if(UISkinOptions.SkadaSkin == nil) then UISkinOptions.SkadaSkin = "Disabled" end
 	if(UISkinOptions.SkadaBackdrop == nil) then UISkinOptions.SkadaBackdrop = "Enabled" end
+	if(UISkinOptions.EmbedSkada == nil) then UISkinOptions.EmbedSkada = "Disabled" end
 	if(UISkinOptions.SkilletSkin == nil) then UISkinOptions.SkilletSkin = "Enabled" end
 	if(UISkinOptions.SpineCounterSkin == nil) then UISkinOptions.SpineCounterSkin = "Enabled" end
 	if(UISkinOptions.SpySkin == nil) then UISkinOptions.SpySkin = "Enabled" end
@@ -85,7 +87,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions.text = SkinOptions:CreateFontString(nil, "OVERLAY")
 	SkinOptions.text:SetFont(UIFont, 14, "OUTLINE")
 	SkinOptions.text:SetPoint("TOP", SkinOptions, 0, -6)
-	SkinOptions.text:SetText("|cffC495DDTukui|r & |cff1784d1ElvUI|r Extra Skin Options")
+	SkinOptions.text:SetText("|cffC495DDTukui|r & |cff1784d1ElvUI|r Skin Options")
 	SkinOptions:EnableMouse(true)
 	SkinOptions:RegisterForDrag("LeftButton");
 	SkinOptions:SetScript("OnDragStart", function(self) self:StartMoving() end)
@@ -93,7 +95,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 
 	SkinOptions2 = CreateFrame("Frame", "SkinOptions2", SkinOptions)
 	SkinOptions2:SetTemplate("Transparent")
-	SkinOptions2:Point("TOPLEFT", SkinOptions, "TOPLEFT", -202, -130)
+	SkinOptions2:Point("TOPLEFT", SkinOptions, "TOPLEFT", -202, -125)
 	SkinOptions2:SetFrameStrata("MEDIUM")
 	SkinOptions2:Width(200)
 	SkinOptions2:Height(240)
@@ -143,6 +145,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	cSkinButton(SkinOptionsButton)
 	SkinOptionsButton.text = SkinOptionsButton:CreateFontString(nil, "OVERLAY")
 	SkinOptionsButton.text:SetFont(UIFont, 12)
+	if IsAddOnLoaded("ElvUI") then SkinOptionsButton.text:SetFont(c["media"].normFont, 11) end
 	SkinOptionsButton.text:SetPoint("CENTER", SkinOptionsButton, 0, 0)
 	SkinOptionsButton.text:SetText("Skins")
 	SkinOptionsButton:HookScript("OnClick", function() SkinOptions:Show() HideUIPanel(GameMenuFrame) end)
@@ -1104,8 +1107,56 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 			WowLuaSkinButton.text:SetText("|cff00ff00WowLua|r")
 		end
 	end)
+
+	SkinOptions2.text = SkinOptions2:CreateFontString(nil, "OVERLAY")
+	SkinOptions2.text:SetFont(UIFont, 14, "OUTLINE")
+	SkinOptions2.text:SetPoint("TOP", SkinOptions2, 0, -8)
+	SkinOptions2.text:SetText("|cffC495DDTukui|r & |cff1784d1ElvUI|r Module Options")
+
+	LootConfirmerButton = CreateFrame("Button", "LootConfirmerButton", SkinOptions2, "UIPanelButtonTemplate")
+	LootConfirmerButton:SetPoint("TOP", 0, -30)
+	LootConfirmerButton:Size(175,20)
+	cSkinButton(LootConfirmerButton)
+	LootConfirmerButton.text = LootConfirmerButton:CreateFontString(nil, "OVERLAY")
+	LootConfirmerButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
+	LootConfirmerButton.text:SetPoint("CENTER", LootConfirmerButton, 0, 0)
+	if (LootConfirm == "True") then LootConfirmerButton.text:SetText("|cff00ff00Loot Confirm|r") end
+	if (LootConfirm == "False") then LootConfirmerButton.text:SetText("|cffff2020Loot Confirm|r") end
+	LootConfirmerButton:HookScript("OnClick", function()
+		if (LootConfirm == "True") then
+			LootConfirm = "False"
+			LootConfirmerButton.text:SetText("|cffff2020Loot Confirm|r")
+		else
+			LootConfirm = "True"
+			LootConfirmerButton.text:SetText("|cff00ff00Loot Confirm|r")
+		end
+	end)
+	UISkinMinimap = CreateFrame("Button", "UISkinMinimap", SkinOptions2, "UIPanelButtonTemplate")
+	UISkinMinimap:SetPoint("TOP", 0, -55)
+	UISkinMinimap:Size(175,20)
+	cSkinButton(UISkinMinimap)
+	UISkinMinimap.text = UISkinMinimap:CreateFontString(nil, "OVERLAY")
+	UISkinMinimap.text:SetFont(UIFont, UIFontSize, "OUTLINE")
+	UISkinMinimap.text:SetPoint("CENTER", UISkinMinimap, 0, 0)
+	if (UISkinOptions.UISkinMinimap == "True") then UISkinMinimap.text:SetText("|cff00ff00Square Minimap Buttons|r") end
+	if (UISkinOptions.UISkinMinimap == "False") then UISkinMinimap.text:SetText("|cffff2020Square Minimap Buttons|r") end
+	UISkinMinimap:HookScript("OnClick", function()
+		if (UISkinOptions.UISkinMinimap == "True") then
+			UISkinOptions.UISkinMinimap = "False"
+			UISkinMinimap.text:SetText("|cffff2020Square Minimap Buttons|r")
+		else
+			UISkinOptions.UISkinMinimap = "True"
+			UISkinMinimap.text:SetText("|cff00ff00Square Minimap Buttons|r")
+		end
+	end)
+
 if IsAddOnLoaded("ElvUI") then
 -- ElvUI Only
+	SkinOptions2.text2 = SkinOptions2:CreateFontString(nil, "OVERLAY")
+	SkinOptions2.text2:SetFont(UIFont, 14, "OUTLINE")
+	SkinOptions2.text2:SetPoint("TOP", SkinOptions2, 0, -82)
+	SkinOptions2.text2:SetText("|cff1784d1ElvUI|r Only Options")
+
 	CLCInfoSkinButton = CreateFrame("Button", "CLCInfoSkinButton", SkinOptions2, "UIPanelButtonTemplate")
 	CLCInfoSkinButton:SetPoint("TOP", 0, -105)
 	CLCInfoSkinButton:Size(175,20)
@@ -1170,16 +1221,16 @@ if IsAddOnLoaded("ElvUI") then
 	PowerAurasIconsSkinButton.text = PowerAurasIconsSkinButton:CreateFontString(nil, "OVERLAY")
 	PowerAurasIconsSkinButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
 	PowerAurasIconsSkinButton.text:SetPoint("CENTER", PowerAurasIconsSkinButton, 0, 0)
-	if (UISkinOptions.PowerAurasIconsSkin == "Enabled") then PowerAurasIconsSkinButton.text:SetText("|cff00ff00PowerAurasIcons Icon's|r") end
-	if (UISkinOptions.PowerAurasIconsSkin == "Disabled") then PowerAurasIconsSkinButton.text:SetText("|cffff2020PowerAurasIcons Icon's|r") end
+	if (UISkinOptions.PowerAurasIconsSkin == "Enabled") then PowerAurasIconsSkinButton.text:SetText("|cff00ff00PowerAuras Icon's|r") end
+	if (UISkinOptions.PowerAurasIconsSkin == "Disabled") then PowerAurasIconsSkinButton.text:SetText("|cffff2020PowerAuras Icon's|r") end
 	if not IsAddOnLoaded("PowerAuras") then PowerAurasIconsSkinButton:Disable() PowerAurasIconsSkinButton.text:SetText("|cFF808080PowerAuras|r") end
 	PowerAurasIconsSkinButton:HookScript("OnClick", function()
 		if (UISkinOptions.PowerAurasIconsSkin == "Enabled") then
 			UISkinOptions.PowerAurasIconsSkin = "Disabled"
-			PowerAurasIconsSkinButton.text:SetText("|cffff2020PowerAurasIcons Icon's|r")
+			PowerAurasIconsSkinButton.text:SetText("|cffff2020PowerAuras Icon's|r")
 		else
 			UISkinOptions.PowerAurasIconsSkin = "Enabled"
-			PowerAurasIconsSkinButton.text:SetText("|cff00ff00PowerAurasIcons Icon's|r")
+			PowerAurasIconsSkinButton.text:SetText("|cff00ff00PowerAuras Icon's|r")
 		end
 	end)
 	WeakAuraSkinButton = CreateFrame("Button", "WeakAuraSkinButton", SkinOptions2, "UIPanelButtonTemplate")

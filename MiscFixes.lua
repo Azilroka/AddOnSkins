@@ -87,8 +87,10 @@ local function SkinButton(frame)
 end
 
 local UISkinMinimapButtons = CreateFrame("Frame")
-UISkinMinimapButtons:RegisterEvent("PLAYER_LOGIN")
+UISkinMinimapButtons:RegisterEvent("PLAYER_ENTERING_WORLD")
 UISkinMinimapButtons:SetScript("OnEvent", function(self, event)
+	print(UISkinOptions.UISkinMinimap)
+	if (UISkinOptions.UISkinMinimap ~= "True") then return end
 	for i = 1, Minimap:GetNumChildren() do
 		SkinButton(select(i, Minimap:GetChildren()))
 	end
