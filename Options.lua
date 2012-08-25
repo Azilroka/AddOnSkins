@@ -1202,6 +1202,18 @@ if IsAddOnLoaded("ElvUI") then
 		end
 	end)
 end
+
+--Killing for specfic UI's
+
+if IsAddOnLoaded("AsphyxiaUI") or IsAddOnLoaded("SinarisUI") then
+	EmbedWindowSettingsButton:Disable() EmbedWindowSettingsButton.text:SetText("|cFF808080Embedding Window Settings|r")
+	SkadaSkinButton:Disable() UISkinOptions.SkadaSkin = "Disabled" SkadaSkinButton.text:SetText("|cFF808080Skada|r")
+	RecountSkinButton:Disable() UISkinOptions.RecountSkin = "Disabled" RecountSkinButton.text:SetText("|cFF808080Recount|r")
+	DBMSkinButton:Disable() UISkinOptions.DBMSkin = "Disabled" DBMSkinButton.text:SetText("|cFF808080DBM|r")
+	TinyDPSSkinButton:Disable() UISkinOptions.TinyDPSSkin = "Disabled" TinyDPSSkinButton.text:SetText("|cFF808080TinyDPS|r")
+	BigWigsSkinButton:Disable() UISkinOptions.BigWigsSkin = "Disabled" BigWigsSkinButton.text:SetText("|cFF808080BigWigs|r")
+	OmenSkinButton:Disable() UISkinOptions.OmenSkin = "Disabled" OmenSkinButton.text:SetText("|cFF808080Omen|r")
+end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 SLASH_SKINOPTIONSWINDOW1 = '/skinoptions';
