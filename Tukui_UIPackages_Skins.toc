@@ -1,4 +1,4 @@
-## Interface: 40300
+## Interface: 50400
 ## Title: |cffC495DDTukui|r & |cff1784d1ElvUI |rSkin Options
 ## Author: See Credits.txt
 ## OptionalDeps: Tukui, ElvUI, Ace3, ElvUI_SLE

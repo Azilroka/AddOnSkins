@@ -5,12 +5,9 @@ local c = UIPackageSkinFuncs.c
 local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 	EmbeddingWindow:SetTemplate("Transparent")
 	EmbeddingWindow:SetFrameStrata("HIGH")
-	EmbeddingWindow:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", 0, 0)
 	if IsAddOnLoaded("ElvUI") then UIFont = [[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]] end
 	if IsAddOnLoaded("Tukui") then UIFont = [[Interface\AddOns\Tukui\medias\fonts\normal_font.ttf]] end
 	EmbeddingWindow:Hide()
-	EmbeddingWindow:SetClampedToScreen(true)
-	EmbeddingWindow:SetMovable(true)
 	EmbeddingWindow.text = EmbeddingWindow:CreateFontString(nil, "OVERLAY")
 	EmbeddingWindow.text:SetFont(UIFont, 14, "OUTLINE")
 	EmbeddingWindow.text:SetPoint("TOP", 0, -4)
@@ -18,23 +15,11 @@ local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 	EmbeddingWindow.text2 = EmbeddingWindow:CreateFontString(nil, "OVERLAY")
 	EmbeddingWindow.text2:SetFont(UIFont, 10, "OUTLINE")
 	EmbeddingWindow.text2:SetPoint("TOP", 0, -20)
-	EmbeddingWindow.text2:SetText("To Move: Shift + Left Click")
 	EmbeddingWindow:EnableMouse(true)
-	EmbeddingWindow:RegisterForDrag("LeftButton")
-	EmbeddingWindow:SetScript("OnDragStart", function(self) if IsShiftKeyDown() then self:StartMoving() end end)
-	EmbeddingWindow:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end);
 	EmbeddingWindow:RegisterEvent("PLAYER_ENTERING_WORLD")
 	EmbeddingWindow:SetScript("OnEvent", function(self)
-
-	if (UISkinOptions.EmbedRunOnce ~= "True") then
-		if IsAddOnLoaded("ElvUI") then EmbeddingWindow:Point("BOTTOMRIGHT", RightChatDataPanel, "BOTTOMRIGHT", 16, 22) end
-		if IsAddOnLoaded("Tukui") then EmbeddingWindow:Point("BOTTOMRIGHT", TukuiInfoRight, "BOTTOMRIGHT", 0, 24) end
-		UISkinOptions.EmbedRunOnce = "True"
-	end
-
-	if IsAddOnLoaded("ElvUI") then EmbeddingWindow:Size((RightChatPanel:GetWidth() - 10),(RightChatPanel:GetHeight() - 32)) end
-	if IsAddOnLoaded("Tukui") then EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiInfoRight:GetHeight() * 6) + 4) end
-
+	if IsAddOnLoaded("ElvUI") then EmbeddingWindow:Point("BOTTOMRIGHT", RightChatDataPanel, "BOTTOMRIGHT", 16, 22) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 10),(RightChatPanel:GetHeight() - 32)) end
+	if IsAddOnLoaded("Tukui") then EmbeddingWindow:Point("BOTTOMRIGHT", TukuiInfoRight, "BOTTOMRIGHT", 0, 24) EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiInfoRight:GetHeight() * 6) + 4) end
 	if IsAddOnLoaded("ElvUI") then
 		local E, L, V, P, G, DF = unpack(ElvUI)
 		RightChatToggleButton:SetScript("OnClick", function(self, btn)

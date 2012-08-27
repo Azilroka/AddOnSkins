@@ -56,6 +56,7 @@ barmod.ApplySettings = function(self, win)
 
 	skada:SetTexture(c["media"].normTex)
 	skada:SetSpacing(barSpacing)
+	if IsAddOnLoaded("ElvUI") then skada:SetFont(c["media"].normFont, 11) end
 	if IsAddOnLoaded("Tukui") then skada:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "") end
 	skada:SetFrameLevel(5)
 	
@@ -70,6 +71,7 @@ barmod.ApplySettings = function(self, win)
 	end
 	
 	local titlefont = CreateFont("TitleFont" .. win.db.name)
+	if IsAddOnLoaded("ElvUI") then titlefont:SetFont(c["media"].normFont, 11) end
 	if IsAddOnLoaded("Tukui") then titlefont:SetFont(c.media.pixelfont, 12, "MONOCHROMEOUTLINE") end
 	skada.button:SetNormalFontObject(titlefont)
 	if IsAddOnLoaded("Tukui") then 

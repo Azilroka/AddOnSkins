@@ -68,6 +68,8 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.TitanPanelSkin == nil) then UISkinOptions.TitanPanelSkin = "Enabled" end
 	if(UISkinOptions.WeakAuraSkin == nil) then UISkinOptions.WeakAuraSkin = "Enabled" end
 	if(UISkinOptions.WowLuaSkin == nil) then UISkinOptions.WowLuaSkin = "Enabled" end
+	if(UISkinOptions.UISkinMinimap == nil) then UISkinOptions.UISkinMinimap = "True" end
+	if(LootConfirm == nil) then LootConfirm = "False" end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 
@@ -107,7 +109,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	ApplySkinSettingsButton.text = ApplySkinSettingsButton:CreateFontString(nil, "OVERLAY")
 	ApplySkinSettingsButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
 	ApplySkinSettingsButton.text:SetPoint("CENTER", ApplySkinSettingsButton, 0, 0)
-	ApplySkinSettingsButton.text:SetText("Apply Skin Settings")
+	ApplySkinSettingsButton.text:SetText("Apply Settings")
 	ApplySkinSettingsButton:HookScript("OnClick", function() ReloadUI() end)
 
 	EmbedWindowSettingsButton = CreateFrame("Button", "EmbedWindowSettingsButton", SkinOptions, "UIPanelButtonTemplate")
@@ -135,7 +137,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptionsCloseButton.text = SkinOptionsCloseButton:CreateFontString(nil, "OVERLAY")
 	SkinOptionsCloseButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
 	SkinOptionsCloseButton.text:SetPoint("CENTER", SkinOptionsCloseButton, 0, 0)
-	SkinOptionsCloseButton.text:SetText("Close Skin Options")
+	SkinOptionsCloseButton.text:SetText("Close Options")
 	SkinOptionsCloseButton:HookScript("OnClick", function() SkinOptions:Hide() end)
 
 --Buttons
@@ -145,7 +147,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	cSkinButton(SkinOptionsButton)
 	SkinOptionsButton.text = SkinOptionsButton:CreateFontString(nil, "OVERLAY")
 	SkinOptionsButton.text:SetFont(UIFont, 12)
-	if IsAddOnLoaded("ElvUI") then SkinOptionsButton.text:SetFont(c["media"].normFont, 11) end
+	if IsAddOnLoaded("ElvUI") then SkinOptionsButton.text:SetFont(c["media"].normFont, 12) end
 	SkinOptionsButton.text:SetPoint("CENTER", SkinOptionsButton, 0, 0)
 	SkinOptionsButton.text:SetText("Skins")
 	SkinOptionsButton:HookScript("OnClick", function() SkinOptions:Show() HideUIPanel(GameMenuFrame) end)

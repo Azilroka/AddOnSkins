@@ -6,7 +6,6 @@ if IsAddOnLoaded("acb_CastBar") then
 local SkinAZCastBar = CreateFrame("Frame")
 	SkinAZCastBar:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinAZCastBar:SetScript("OnEvent", function(self)
-	print("AzCastBar Skinning")
 	AzCastBarPluginPlayer:StripTextures() AzCastBarPluginPlayer:CreateBackdrop()
 	AzCastBarPluginTarget:StripTextures() AzCastBarPluginTarget:CreateBackdrop()
 	AzCastBarPluginFocus:StripTextures() AzCastBarPluginFocus:CreateBackdrop()
@@ -16,7 +15,7 @@ local SkinAZCastBar = CreateFrame("Frame")
 end)
 end
 
-cSkinTab(CharacterFrameTab5)
+--cSkinTab(CharacterFrameTab5)
 
 ----------------------------------------
 -- Loot auto confirm
@@ -33,6 +32,7 @@ LootConfirmer:RegisterEvent("CONFIRM_LOOT_ROLL");
 	end)
 
 StaticPopupDialogs["CONFIRM_LOOT_ROLL"] = nil
+StaticPopupDialogs["LOOT_BIND"] = nil
 end
 
 --Minimap Button Skinning thanks to Sinaris
@@ -89,7 +89,6 @@ end
 local UISkinMinimapButtons = CreateFrame("Frame")
 UISkinMinimapButtons:RegisterEvent("PLAYER_ENTERING_WORLD")
 UISkinMinimapButtons:SetScript("OnEvent", function(self, event)
-	print(UISkinOptions.UISkinMinimap)
 	if (UISkinOptions.UISkinMinimap ~= "True") then return end
 	for i = 1, Minimap:GetNumChildren() do
 		SkinButton(select(i, Minimap:GetChildren()))
