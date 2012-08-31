@@ -26,7 +26,7 @@ if IsAddOnLoaded("ElvUI") then if c.private.skins.blizzard.enable ~= true or c.p
 	BrowseResetButton:Point("LEFT", BrowseName, "LEFT", -2, -26)
 	BrowseSearchButton:ClearAllPoints()
 	BrowseSearchButton:Point("RIGHT", BrowseResetButton, "RIGHT", 83, 0)
-
+	BrowseResetButton:Width(80)
 	BrowseNameText:Point("TOPLEFT", 20, -41)
 	BrowseLevelText:Point("TOPLEFT", 184, -45)
 	BrowseLevelHyphen:Point("LEFT", BrowseMinLevel, "RIGHT", 4, 0)

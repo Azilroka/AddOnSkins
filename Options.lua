@@ -23,7 +23,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.CLCInfoSkin == nil) then UISkinOptions.CLCInfoSkin = "Enabled" end
 	if(UISkinOptions.CLCProtSkin == nil) then UISkinOptions.CLCProtSkin = "Enabled" end
 	if(UISkinOptions.CLCRetSkin == nil) then UISkinOptions.CLCRetSkin = "Enabled" end
-	if(UISkinOptions.DBMSkin == nil) then UISkinOptions.DBMSkin = "Disabled" end
+	if(UISkinOptions.DBMSkin == nil) then UISkinOptions.DBMSkin = "Enabled" end
 	if(UISkinOptions.DXESkin == nil) then UISkinOptions.DXESkin = "Disabled" end
 	if(UISkinOptions.EasyMailSkin == nil) then UISkinOptions.EasyMailSkin = "Enabled" end
 	if(UISkinOptions.EnergyWatchSkin == nil) then UISkinOptions.EnergyWatchSkin = "Enabled" end
@@ -39,7 +39,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.MRTSkin == nil) then UISkinOptions.MRTSkin = "Enabled" end
 	if(UISkinOptions.OdysseySkin == nil) then UISkinOptions.OdysseySkin = "Enabled" end
 	if(UISkinOptions.OgriLazySkin == nil) then UISkinOptions.OgriLazySkin = "Enabled" end
-	if(UISkinOptions.OmenSkin == nil) then UISkinOptions.OmenSkin = "Disabled" end	
+	if(UISkinOptions.OmenSkin == nil) then UISkinOptions.OmenSkin = "Enabled" end	
 	if(UISkinOptions.OutfitterSkin == nil) then UISkinOptions.OutfitterSkin = "Enabled" end
 	if(UISkinOptions.PlayerScoreSkin == nil) then UISkinOptions.PlayerScoreSkin = "Enabled" end
 	if(UISkinOptions.PoisonerSkin == nil) then UISkinOptions.PoisonerSkin = "Enabled" end
@@ -51,11 +51,11 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.QuartzSkin == nil) then UISkinOptions.QuartzSkin = "Enabled" end
 	if(UISkinOptions.RaidInviteOrganizerSkin == nil) then UISkinOptions.RaidInviteOrganizerSkin = "Enabled" end
 	if(UISkinOptions.RaidBuffStatusSkin == nil) then UISkinOptions.RaidBuffStatusSkin = "Enabled" end
-	if(UISkinOptions.RecountSkin == nil) then UISkinOptions.RecountSkin = "Disabled" end
+	if(UISkinOptions.RecountSkin == nil) then UISkinOptions.RecountSkin = "Enabled" end
 	if(UISkinOptions.RecountBackdrop == nil) then UISkinOptions.RecountBackdrop = "Enabled" end
 	if(UISkinOptions.EmbedRecount == nil) then UISkinOptions.EmbedRecount = "Disabled" end
 	if(UISkinOptions.SearingPlasmaTrackerSkin == nil) then UISkinOptions.SearingPlasmaTrackerSkin = "Enabled" end
-	if(UISkinOptions.SkadaSkin == nil) then UISkinOptions.SkadaSkin = "Disabled" end
+	if(UISkinOptions.SkadaSkin == nil) then UISkinOptions.SkadaSkin = "Enabled" end
 	if(UISkinOptions.SkadaBackdrop == nil) then UISkinOptions.SkadaBackdrop = "Enabled" end
 	if(UISkinOptions.EmbedSkada == nil) then UISkinOptions.EmbedSkada = "Disabled" end
 	if(UISkinOptions.SkilletSkin == nil) then UISkinOptions.SkilletSkin = "Enabled" end
@@ -64,7 +64,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.stAddonManagerSkin == nil) then UISkinOptions.stAddonManagerSkin = "Enabled" end
 	if(UISkinOptions.SwatterSkin == nil) then UISkinOptions.SwatterSkin = "Enabled" end
 	if(UISkinOptions.TellMeWhenSkin == nil) then UISkinOptions.TellMeWhenSkin = "Enabled" end
-	if(UISkinOptions.TinyDPSSkin == nil) then UISkinOptions.TinyDPSSkin = "Disabled" end
+	if(UISkinOptions.TinyDPSSkin == nil) then UISkinOptions.TinyDPSSkin = "Enabled" end
 	if(UISkinOptions.TitanPanelSkin == nil) then UISkinOptions.TitanPanelSkin = "Enabled" end
 	if(UISkinOptions.WeakAuraSkin == nil) then UISkinOptions.WeakAuraSkin = "Enabled" end
 	if(UISkinOptions.WowLuaSkin == nil) then UISkinOptions.WowLuaSkin = "Enabled" end
@@ -1259,13 +1259,13 @@ end
 --Killing for specfic UI's
 
 if IsAddOnLoaded("AsphyxiaUI") or IsAddOnLoaded("SinarisUI") then
-	EmbedWindowSettingsButton:Disable() EmbedWindowSettingsButton.text:SetText("|cFF808080Embedding Window Settings|r")
-	SkadaSkinButton:Disable() UISkinOptions.SkadaSkin = "Disabled" SkadaSkinButton.text:SetText("|cFF808080Skada|r")
-	RecountSkinButton:Disable() UISkinOptions.RecountSkin = "Disabled" RecountSkinButton.text:SetText("|cFF808080Recount|r")
-	DBMSkinButton:Disable() UISkinOptions.DBMSkin = "Disabled" DBMSkinButton.text:SetText("|cFF808080DBM|r")
-	TinyDPSSkinButton:Disable() UISkinOptions.TinyDPSSkin = "Disabled" TinyDPSSkinButton.text:SetText("|cFF808080TinyDPS|r")
-	BigWigsSkinButton:Disable() UISkinOptions.BigWigsSkin = "Disabled" BigWigsSkinButton.text:SetText("|cFF808080BigWigs|r")
-	OmenSkinButton:Disable() UISkinOptions.OmenSkin = "Disabled" OmenSkinButton.text:SetText("|cFF808080Omen|r")
+	EmbedWindowSettingsButton:Disable() EmbedWindowSettingsButton.text:SetText("Embedding Window Settings")
+	SkadaSkinButton:Disable() UISkinOptions.SkadaSkin = "Disabled" SkadaSkinButton.text:SetText("Skada")
+	RecountSkinButton:Disable() UISkinOptions.RecountSkin = "Disabled" RecountSkinButton.text:SetText("Recount")
+	DBMSkinButton:Disable() UISkinOptions.DBMSkin = "Disabled" DBMSkinButton.text:SetText("DBM")
+	TinyDPSSkinButton:Disable() UISkinOptions.TinyDPSSkin = "Disabled" TinyDPSSkinButton.text:SetText("TinyDPS")
+	BigWigsSkinButton:Disable() UISkinOptions.BigWigsSkin = "Disabled" BigWigsSkinButton.text:SetText("BigWigs")
+	OmenSkinButton:Disable() UISkinOptions.OmenSkin = "Disabled" OmenSkinButton.text:SetText("Omen")
 end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 

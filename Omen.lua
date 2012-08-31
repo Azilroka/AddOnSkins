@@ -25,9 +25,9 @@ Omen.UpdateBarLabelSettings = function(self)
 	self:UpdateBarLabelSettings_()
 	for i, v in ipairs(self.Bars) do
 	if IsAddOnLoaded("Tukui") then
-		v.Text1:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
-		v.Text2:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
-		v.Text3:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
+		v.Text1:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
+		v.Text2:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
+		v.Text3:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
 	end
 	if IsAddOnLoaded("ElvUI") then
 		v.Text1:FontTemplate(nil, self.db.profile.Bar.FontSize)
@@ -46,7 +46,7 @@ Omen.UpdateTitleBar = function(self)
 	self:UpdateTitleBar_()
 	if IsAddOnLoaded("Tukui") then
 		self.Title:SetHeight(23)
-		self.TitleText:SetFont(c["media"].pixelfont, 12, "MONOCHROMEOUTLINE")
+		self.TitleText:SetFont(c["media"].font, 12, "OUTLINE")
 		self.TitleText:ClearAllPoints()
 		self.TitleText:SetPoint("CENTER")
 	end

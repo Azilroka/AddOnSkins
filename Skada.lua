@@ -1,4 +1,5 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Skada") then return end
+if IsAddOnLoaded("AsphyxiaUI") or IsAddOnLoaded("SinarisUI") then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
 
@@ -56,8 +57,6 @@ barmod.ApplySettings = function(self, win)
 
 	skada:SetTexture(c["media"].normTex)
 	skada:SetSpacing(barSpacing)
-	if IsAddOnLoaded("ElvUI") then skada:SetFont(c["media"].normFont, 11) end
-	if IsAddOnLoaded("Tukui") then skada:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "") end
 	skada:SetFrameLevel(5)
 	
 	if not skada.TitleBackGround then
@@ -71,8 +70,6 @@ barmod.ApplySettings = function(self, win)
 	end
 	
 	local titlefont = CreateFont("TitleFont" .. win.db.name)
-	if IsAddOnLoaded("ElvUI") then titlefont:SetFont(c["media"].normFont, 11) end
-	if IsAddOnLoaded("Tukui") then titlefont:SetFont(c.media.pixelfont, 12, "MONOCHROMEOUTLINE") end
 	skada.button:SetNormalFontObject(titlefont)
 	if IsAddOnLoaded("Tukui") then 
 		local color = win.db.title.color

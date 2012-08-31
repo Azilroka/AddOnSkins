@@ -14,6 +14,7 @@ OutfitterFrame:HookScript("OnShow", function(self)
 	OutfitterFrameTab1:Size(60,25)
 	OutfitterFrameTab2:Size(60,25)
 	OutfitterFrameTab3:Size(60,25)
+	OutfitterMainFrame:StripTextures(True)
 	for i = 0,13 do
 		if _G["OutfitterItem"..i.."OutfitMenu"] then 
 			cSkinNextPrevButton(_G["OutfitterItem"..i.."OutfitMenu"])
@@ -26,23 +27,23 @@ OutfitterFrame:HookScript("OnShow", function(self)
 			_G["OutfitterItem"..i.."OutfitSelected"]:Point("LEFT", _G["OutfitterItem"..i.."Outfit"], "LEFT", 8, 0)
 		end
 	end
-		Outfitter.NameOutfitDialog.DoneButton:StripTextures(True)
-		Outfitter.NameOutfitDialog.CancelButton:StripTextures(True)
-		cSkinFrame(Outfitter.NameOutfitDialog)
-		cSkinFrame(Outfitter.NameOutfitDialog.InfoSection)
-		cSkinFrame(Outfitter.NameOutfitDialog.BuildSection)
-		cSkinFrame(Outfitter.NameOutfitDialog.StatsSection)
-		cSkinButton(Outfitter.NameOutfitDialog.EmptyOutfitCheckButton)
-		cSkinButton(Outfitter.NameOutfitDialog.ExistingOutfitCheckButton)
-		cSkinButton(Outfitter.NameOutfitDialog.GenerateOutfitCheckButton)
-		cSkinButton(Outfitter.NameOutfitDialog.DoneButton)
-		cSkinButton(Outfitter.NameOutfitDialog.CancelButton)
-		cSkinFrame(Outfitter.RebuildOutfitDialog)
-		cSkinFrame(Outfitter.RebuildOutfitDialog.StatsSection)
-		Outfitter.RebuildOutfitDialog.DoneButton:StripTextures(True)
-		Outfitter.RebuildOutfitDialog.CancelButton:StripTextures(True)
-		cSkinButton(Outfitter.RebuildOutfitDialog.DoneButton)
-		cSkinButton(Outfitter.RebuildOutfitDialog.CancelButton)
+--		Outfitter.NameOutfitDialog.DoneButton:StripTextures(True)
+--		Outfitter.NameOutfitDialog.CancelButton:StripTextures(True)
+--		cSkinFrame(Outfitter.NameOutfitDialog)
+--		cSkinFrame(Outfitter.NameOutfitDialog.InfoSection)
+--		cSkinFrame(Outfitter.NameOutfitDialog.BuildSection)
+--		cSkinFrame(Outfitter.NameOutfitDialog.StatsSection)
+--		cSkinButton(Outfitter.NameOutfitDialog.EmptyOutfitCheckButton)
+--		cSkinButton(Outfitter.NameOutfitDialog.ExistingOutfitCheckButton)
+--		cSkinButton(Outfitter.NameOutfitDialog.GenerateOutfitCheckButton)
+--		cSkinButton(Outfitter.NameOutfitDialog.DoneButton)
+--		cSkinButton(Outfitter.NameOutfitDialog.CancelButton)
+--		cSkinFrame(Outfitter.RebuildOutfitDialog)
+--		cSkinFrame(Outfitter.RebuildOutfitDialog.StatsSection)
+--		Outfitter.RebuildOutfitDialog.DoneButton:StripTextures(True)
+--		Outfitter.RebuildOutfitDialog.CancelButton:StripTextures(True)
+--		cSkinButton(Outfitter.RebuildOutfitDialog.DoneButton)
+--		cSkinButton(Outfitter.RebuildOutfitDialog.CancelButton)
 	end)
 
 
@@ -71,47 +72,38 @@ OutfitterFrame:HookScript("OnShow", function(self)
 	OutfitterButton:SetPoint("RIGHT", PaperDollSidebarTabs, "RIGHT", 26, -2)
 	OutfitterButton:SetHighlightTexture(nil)
 
-	local CheckBoxButtons = {
-		"OutfitterEnableHeadSlot",
-		"OutfitterEnableNeckSlot",
-		"OutfitterEnableShoulderSlot",
-		"OutfitterEnableBackSlot",
-		"OutfitterEnableChestSlot",
-		"OutfitterEnableShirtSlot",
-		"OutfitterEnableTabardSlot",
-		"OutfitterEnableWristSlot",
-		"OutfitterEnableMainHandSlot",
-		"OutfitterEnableSecondaryHandSlot",
-		"OutfitterEnableRangedSlot",
-		"OutfitterEnableHandsSlot",
-		"OutfitterEnableWaistSlot",
-		"OutfitterEnableLegsSlot",
-		"OutfitterEnableFeetSlot",
-		"OutfitterEnableFinger0Slot",
-		"OutfitterEnableFinger1Slot",
-		"OutfitterEnableTrinket0Slot",
-		"OutfitterEnableTrinket1Slot",
-	}
+	OutfitterSlotEnables:SetFrameStrata("HIGH")
+	cSkinCheckBox(OutfitterEnableHeadSlot)
+	cSkinCheckBox(OutfitterEnableNeckSlot)
+	cSkinCheckBox(OutfitterEnableShoulderSlot)
+	cSkinCheckBox(OutfitterEnableBackSlot)
+	cSkinCheckBox(OutfitterEnableChestSlot)
+	cSkinCheckBox(OutfitterEnableShirtSlot)
+	cSkinCheckBox(OutfitterEnableTabardSlot)
+	cSkinCheckBox(OutfitterEnableWristSlot)
+	cSkinCheckBox(OutfitterEnableMainHandSlot)
+	cSkinCheckBox(OutfitterEnableSecondaryHandSlot)
+	cSkinCheckBox(OutfitterEnableHandsSlot)
+	cSkinCheckBox(OutfitterEnableWaistSlot)
+	cSkinCheckBox(OutfitterEnableLegsSlot)
+	cSkinCheckBox(OutfitterEnableFeetSlot)
+	cSkinCheckBox(OutfitterEnableFinger0Slot)
+	cSkinCheckBox(OutfitterEnableFinger1Slot)
+	cSkinCheckBox(OutfitterEnableTrinket0Slot)
+	cSkinCheckBox(OutfitterEnableTrinket1Slot)
 
-	for _, object in pairs(CheckBoxButtons) do
-		cSkinCheckBox(_G[object])
-		_G[object]:SetFrameStrata("HIGH")
-		_G[object]:SetFrameLevel(5)
-	end
-
-	local BoxButtons = {
-		"OutfitterItemComparisons",
-		"OutfitterTooltipInfo",
-		"OutfitterShowHotkeyMessages",
-		"OutfitterShowMinimapButton",
-		"OutfitterShowOutfitBar",
-		"OutfitterAutoSwitch",
-	}
-
-	for _, object in pairs(BoxButtons) do
-		cSkinButton(_G[object])
-		_G[object]:Size(20)
-	end
+	cSkinButton(OutfitterItemComparisons)
+	cSkinButton(OutfitterTooltipInfo)
+	cSkinButton(OutfitterShowHotkeyMessages)
+	cSkinButton(OutfitterShowMinimapButton)
+	cSkinButton(OutfitterShowOutfitBar)
+	cSkinButton(OutfitterAutoSwitch)
+	OutfitterItemComparisons:Size(20)
+	OutfitterTooltipInfo:Size(20)
+	OutfitterShowHotkeyMessages:Size(20)
+	OutfitterShowMinimapButton:Size(20)
+	OutfitterShowOutfitBar:Size(20)
+	OutfitterAutoSwitch:Size(20)
 
 	OutfitterShowOutfitBar:Point("TOPLEFT", OutfitterAutoSwitch, "BOTTOMLEFT", 0, -5)
 

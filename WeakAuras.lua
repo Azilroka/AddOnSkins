@@ -76,7 +76,7 @@ local function WeakAuras_LoadSkin()
 local SkinWeakAuras = CreateFrame("Frame")
 	SkinWeakAuras:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinWeakAuras:SetScript("OnEvent", function(self)
-	if (UISkinOptions.WeakAurasSkin ~= "Enabled") then return end
+	if (UISkinOptions.WeakAuraSkin ~= "Enabled") then return end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	WeakAuras.regionTypes.icon.OldCreate = WeakAuras.regionTypes.icon.create

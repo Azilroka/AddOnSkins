@@ -122,7 +122,7 @@ if not ArkInventory.ValidFrame(frame, true) then return	end
 		local obj = _G[frame:GetName().."ArkBorder"]
 		local r,g,b,a = obj:GetBackdropBorderColor()
 		obj:Hide()
-		cSkinFrame(frame)
+		frame:SetTemplate("Transparent")
 		frame:SetBackdropBorderColor(r,g,b,a)
 
 	end
