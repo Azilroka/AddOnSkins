@@ -27,7 +27,7 @@ function cSkinButton(self)
 	if ElvUI then
 		s:HandleButton(self)
 	else
-		s.SkinButton(self)
+		self:SkinButton()
 	end
 end
 
@@ -35,7 +35,7 @@ function cSkinScrollBar(self)
 	if ElvUI then
 		s:HandleScrollBar(self)
 	else
-		s.SkinScrollBar(self)
+		self:SkinScrollBar()
 	end
 end
 
@@ -43,7 +43,7 @@ function cSkinTab(self)
 	if ElvUI then
 		s:HandleTab(self)
 	else
-		s.SkinTab(self)
+		self:SkinTab()
 	end
 end
 
@@ -59,7 +59,7 @@ function cSkinRotateButton(self)
 	if ElvUI then
 		s:HandleRotateButton(self)
 	else
-		s.SkinRotateButton(self)
+		self:SkinRotateButton()
 	end
 end
 
@@ -67,7 +67,7 @@ function cSkinEditBox(self)
 	if ElvUI then
 		s:HandleEditBox(self)
 	else
-		s.SkinEditBox(self)
+		self:SkinEditBox()
 	end
 end
 
@@ -75,7 +75,7 @@ function cSkinDropDownBox(self)
 	if ElvUI then
 		s:HandleDropDownBox(self)
 	else
-		s.SkinDropDownBox(self)
+		self:SkinDropDownBox()
 	end
 end
 
@@ -83,7 +83,7 @@ function cSkinCheckBox(self)
 	if ElvUI then
 		s:HandleCheckBox(self)
 	else
-		s.SkinCheckBox(self)
+		self:SkinCheckBox()
 	end
 end
 
