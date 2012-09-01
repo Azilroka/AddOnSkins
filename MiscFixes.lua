@@ -50,6 +50,7 @@ local buttons = {
 }
 
 local function SkinButton(frame)
+	local s = UIPackageSkinFuncs.s
 	if(frame:GetObjectType() ~= "Button") then return end
 
 	for i, buttons in pairs(buttons) do
@@ -77,7 +78,7 @@ local function SkinButton(frame)
 				region:SetTexCoord( 0.1, 0.9, 0.1, 0.9 )
 				region:SetDrawLayer( "ARTWORK" )
 				if(frame:GetName() == "PS_MinimapButton") then
-					region.SetPoint = S.dummy
+					region.SetPoint = s.dummy
 				end
 			end
 		end
@@ -90,6 +91,7 @@ local UISkinMinimapButtons = CreateFrame("Frame")
 UISkinMinimapButtons:RegisterEvent("PLAYER_ENTERING_WORLD")
 UISkinMinimapButtons:SetScript("OnEvent", function(self, event)
 	if (UISkinOptions.UISkinMinimap ~= "True") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	for i = 1, Minimap:GetNumChildren() do
 		SkinButton(select(i, Minimap:GetChildren()))
 	end

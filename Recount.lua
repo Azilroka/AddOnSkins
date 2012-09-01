@@ -43,7 +43,7 @@ end
 
 local function SkinMainFrame(frame)
 	frame.bgMain = CreateFrame("Frame", nil, frame)
-	frame.bgMain:SetTemplate("Transparent")
+	frame.bgMain:SetTemplate("Default")
 	frame.bgMain:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT")
 	frame.bgMain:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT")
 	frame.bgMain:SetPoint("TOP", frame, "TOP", 0, -7)
@@ -135,7 +135,7 @@ if IsAddOnLoaded("ElvUI") then
 	for i = 1, getn(MWbuttons) do
 		local button = MWbuttons[i]
 		if button then
-			button:GetNormalTexture():SetDesaturated(true)	
+			button:GetNormalTexture():SetDesaturated(true)
 			button:GetHighlightTexture():SetDesaturated(true)
 		end
 	end
