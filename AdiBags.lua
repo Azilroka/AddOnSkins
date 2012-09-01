@@ -60,8 +60,8 @@ if (UISkinOptions.AdiBagsSkin ~= "Enabled") then return end
 		A.db.profile.positions['Bank'].point = 'BOTTOMLEFT'
 	end
 		AdiSkin:UnregisterEvent('PLAYER_ENTERING_WORLD')
-	elseif event == 'BANKFRAME_OPENED' then
-				SkinFrame(AdiBagsContainer2)
-		AdiSkin:UnregisterEvent('BANKFRAME_OPENED')
+	--elseif event == 'BANKFRAME_OPENED' then
+	--		SkinFrame(AdiBagsContainer2)
+	--	AdiSkin:UnregisterEvent('BANKFRAME_OPENED')
 	end
 end)
