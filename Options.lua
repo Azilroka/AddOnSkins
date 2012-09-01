@@ -1244,7 +1244,7 @@ if IsAddOnLoaded("ElvUI") then
 	WeakAuraSkinButton.text:SetPoint("CENTER", WeakAuraSkinButton, 0, 0)
 	if (UISkinOptions.WeakAuraSkin == "Enabled") then WeakAuraSkinButton.text:SetText("|cff00ff00WeakAura Icon's|r") end
 	if (UISkinOptions.WeakAuraSkin == "Disabled") then WeakAuraSkinButton.text:SetText("|cffff2020WeakAura Icon's|r") end
-	if not IsAddOnLoaded("WeakAura") then WeakAuraSkinButton:Disable() WeakAuraSkinButton.text:SetText("|cFF808080WeakAura|r") end
+	if not IsAddOnLoaded("WeakAuras") then WeakAuraSkinButton:Disable() WeakAuraSkinButton.text:SetText("|cFF808080WeakAura|r") end
 	WeakAuraSkinButton:HookScript("OnClick", function()
 		if (UISkinOptions.WeakAuraSkin == "Enabled") then
 			UISkinOptions.WeakAuraSkin = "Disabled"
