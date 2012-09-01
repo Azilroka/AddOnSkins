@@ -63,19 +63,22 @@ if not ArkInventory.ValidFrame(frame, true) then return	end
 		status:SetPoint("TOPLEFT",changer,"BOTTOMLEFT",0,-2)
 		status:SetPoint("TOPRIGHT",changer,"BOTTOMRIGHT",0,-2)
 
-		ArkInventory.Const.Frame.Status.Height = 10 + 2 * 4
+		ArkInventory.Const.Frame.Status.Height = 30
 		_G[status:GetName().."EmptyText"]:SetPoint("LEFT",2,0)
-		_G[status:GetName().."EmptyText"]:SetFont(c["media"].font, 12)
+		if IsAddOnLoaded("ElvUI") then _G[status:GetName().."EmptyText"]:SetFont(c["media"].normFont, 12) end
+		if IsAddOnLoaded("Tukui") then _G[status:GetName().."EmptyText"]:SetFont(c["media"].font, 12) end
 
 		_G[status:GetName().."GoldCopperButton"]:SetPoint("RIGHT",-1,0)
-		_G[status:GetName().."GoldCopperButtonText"]:SetFont(c["media"].font,12)
+		if IsAddOnLoaded("ElvUI") then _G[status:GetName().."GoldCopperButtonText"]:SetFont(c["media"].normFont, 12) end
+		if IsAddOnLoaded("Tukui") then _G[status:GetName().."GoldCopperButtonText"]:SetFont(c["media"].font,12) end
 
 		_G[status:GetName().."GoldSilverButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldCopperButtonText"],"LEFT",-1,0)
-		_G[status:GetName().."GoldSilverButtonText"]:SetFont(c["media"].font,12)
-
+		if IsAddOnLoaded("ElvUI") then _G[status:GetName().."GoldSilverButtonText"]:SetFont(c["media"].normFont, 12) end
+		if IsAddOnLoaded("Tukui") then _G[status:GetName().."GoldSilverButtonText"]:SetFont(c["media"].font,12) end
 		
 		_G[status:GetName().."GoldGoldButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldSilverButtonText"],"LEFT",-1,0)
-		_G[status:GetName().."GoldGoldButtonText"]:SetFont(c["media"].font,12)
+		if IsAddOnLoaded("ElvUI") then _G[status:GetName().."GoldGoldButtonText"]:SetFont(c["media"].normFont, 12) end
+		if IsAddOnLoaded("Tukui") then _G[status:GetName().."GoldGoldButtonText"]:SetFont(c["media"].font,12) end
 	end
 	
 	ArkInventory.Const.Frame.Title.Height2 = 32

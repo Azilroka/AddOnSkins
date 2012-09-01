@@ -1,12 +1,12 @@
 ﻿if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("ChocolateBar") then return end
-local function UpdateRepExpBar(self, event, ...)
-		if ElvUI then 
-			WhoIsYourDaddy = UpperRepExpBarHolder:GetParent()
-			if WhoIsYourDaddy == ElvUIParent then		
-					UpperRepExpBarHolder:SetPoint("TOP", ChocolateBar1, "BOTTOM", 0, 0)
-			end 
-		end
-end
+--local function UpdateRepExpBar(self, event, ...)
+--		if ElvUI then 
+--			WhoIsYourDaddy = UpperRepExpBarHolder:GetParent()
+--			if WhoIsYourDaddy == ElvUIParent then		
+--					UpperRepExpBarHolder:SetPoint("TOP", ChocolateBar1, "BOTTOM", 0, 0)
+--			end 
+--		end
+--end
 
 local SkinCB = CreateFrame("Frame")
 	SkinCB:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -244,16 +244,16 @@ end
 			end
 	end)
 	
-		if IsAddOnLoaded("ElvUI") then
-			if CBShowButtonPosition == nil then
-				x = ElvUIParent:GetWidth()/4			
-				ShowButton:SetPoint("TOP", ChocolateBar1, "BOTTOM", -x, 0)
-				slider3:SetValue(x)			
-			else
-				slider3:SetValue(CBShowButtonPosition)
-				ShowButton:SetPoint("TOPLEFT", ChocolateBar1, "BOTTOMLEFT", CBShowButtonPosition, 0)
-			end
-		end	
+--		if IsAddOnLoaded("ElvUI") then
+--			if CBShowButtonPosition == nil then
+--				x = ElvUIParent:GetWidth()/4			
+--				ShowButton:SetPoint("TOP", ChocolateBar1, "BOTTOM", -x, 0)
+--				slider3:SetValue(x)			
+--			else
+--				slider3:SetValue(CBShowButtonPosition)
+--				ShowButton:SetPoint("TOPLEFT", ChocolateBar1, "BOTTOMLEFT", CBShowButtonPosition, 0)
+--			end
+--		end	
 	
 	SLASH_CBSKIN1, SLASH_CBSKIN2 = '/cbskin', '/cbskin show'
 	function SlashCmdList.CBSKIN(msg, editbox)

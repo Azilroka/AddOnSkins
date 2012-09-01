@@ -5,7 +5,6 @@ local SkinAltoholic = CreateFrame("Frame")
 SkinAltoholic:RegisterEvent("PLAYER_ENTERING_WORLD")
 SkinAltoholic:SetScript("OnEvent", function(self)
 if (UISkinOptions.AltoholicSkin ~= "Enabled") then return end
-self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 LoadAddOn("Altoholic_Characters")
 
 	AltoTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)

@@ -71,11 +71,12 @@ end
 local applystyle = function(bar)
 
 	-- general bar settings
-	bar.OldHeight = bar:GetHeight()
-	bar.OldScale = bar:GetScale()
+
+	--bar.OldHeight = bar:GetHeight()
+	--bar.OldScale = bar:GetScale()
 	bar.OldSetScale=bar.SetScale
 	bar.SetScale=c.noop
-	bar:Height(buttonsize)
+	--bar:Height(buttonsize)
 	bar:SetScale(1)
 	
 	-- create or reparent and use bar background
@@ -132,9 +133,9 @@ local applystyle = function(bar)
 	bar.candyBarBackground:SetTexture(unpack(c.media.backdropcolor))
 
 	-- setup icon positions and other things
-	bar.candyBarIconFrame.OldPoint, bar.candyBarIconFrame.Anchor, bar.candyBarIconFrame.OldPoint2, bar.candyBarIconFrame.XPoint, bar.candyBarIconFrame.YPoint  = bar.candyBarIconFrame:GetPoint()
-	bar.candyBarIconFrame.OldWidth = bar.candyBarIconFrame:GetWidth()
-	bar.candyBarIconFrame.OldHeight = bar.candyBarIconFrame:GetHeight()
+--	bar.candyBarIconFrame.OldPoint, bar.candyBarIconFrame.Anchor, bar.candyBarIconFrame.OldPoint2, bar.candyBarIconFrame.XPoint, bar.candyBarIconFrame.YPoint  = bar.candyBarIconFrame:GetPoint()
+--	bar.candyBarIconFrame.OldWidth = bar.candyBarIconFrame:GetWidth()
+--	bar.candyBarIconFrame.OldHeight = bar.candyBarIconFrame:GetHeight()
 	bar.candyBarIconFrame.OldSetWidth = bar.candyBarIconFrame.SetWidth
 	bar.candyBarIconFrame.SetWidth=c.noop
 	bar.candyBarIconFrame:ClearAllPoints()

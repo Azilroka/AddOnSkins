@@ -8,7 +8,6 @@ local function SkinFrame(frame)
 	frame:SetTemplate('Transparent')
 	_G[frame:GetName()..'Bags']:StripTextures()
 	_G[frame:GetName()..'Bags']:SetTemplate('Transparent')
-	cSkinEditBox(_G[frame:GetName()..'SearchBox'])
 	cSkinCloseButton(frame.CloseButton)
 	for i = 1, 3 do
 		cSkinButton(region.widgets[i].widget, true)
@@ -30,8 +29,9 @@ if (UISkinOptions.AdiBagsSkin ~= "Enabled") then return end
 		local A = LibStub('AceAddon-3.0'):GetAddon('AdiBags', true)
 		local f = AdiBagsContainer1
 		SkinFrame(f)
+		cSkinEditBox(AdiBagsSearchFrame)
 	if IsAddOnLoaded("Tukui") then
-		AdiBagsContainer1SearchBox:Point("TOPRIGHT", AdiBagsSimpleLayeredRegion2, "TOPRIGHT", -75, -1)
+		AdiBagsSearchFrame:Point("TOPRIGHT", AdiBagsSimpleLayeredRegion2, "TOPRIGHT", -75, -1)
 	end
 	if IsAddOnLoaded("ElvUI") then
 		local B = c:GetModule('Bags')
@@ -59,10 +59,9 @@ if (UISkinOptions.AdiBagsSkin ~= "Enabled") then return end
 		A.db.profile.positions['Bank'].yOffset = y
 		A.db.profile.positions['Bank'].point = 'BOTTOMLEFT'
 	end
-
 		AdiSkin:UnregisterEvent('PLAYER_ENTERING_WORLD')
-			elseif event == 'BANKFRAME_OPENED' then
+	elseif event == 'BANKFRAME_OPENED' then
 				SkinFrame(AdiBagsContainer2)
 		AdiSkin:UnregisterEvent('BANKFRAME_OPENED')
-		end
-	end)
+	end
+end)

@@ -45,8 +45,6 @@ local SkinMageNuggets = CreateFrame("Frame")
 		"MNmoonFire_Frame",
 		"MNinsectSwarm_Frame",
 		"MNstarSurge_Frame",
-		"MNTorment_Frame",
-		"MNPyromaniac_Frame",
 	}
 	for i = 1, #sframes do
 		_G[sframes[i]]:SetBackdrop({bgFile = nil, edgeFile = nil, tile = false, tileSize = 0, edgeSize = 0, insets = { left = 0, right = 0, top = 0, bottom = 0 }});
@@ -74,7 +72,6 @@ local SkinMageNuggets = CreateFrame("Frame")
 	cSkinButton(MageNugHordeFrameShowOptions)
 	cSkinButton(MageNugAlliFrameClose)
 	cSkinButton(MageNugAlliFrameShowOptions)
-	MNTorment_Frame:CreateTexture("$parentIcon", "ARTWORK")
 
 	MageNugAB_Frame_ABBar:CreateBackdrop("Transparent")
 	MageNugAB_Frame_ABBar:ClearAllPoints()

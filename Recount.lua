@@ -101,7 +101,7 @@ Recount.CreateFrame = function(self, Name, Title, Height, Width, ShowFunc, HideF
 	return frame
 end
 
-	if Recount.MainWindow then SkinMainFrame(Recount.MainWindow) end
+	if Recount.MainWindow then SkinMainFrame(Recount.MainWindow) Recount.MainWindow:SetFrameStrata("MEDIUM") end
 	if Recount.ConfigWindow then SkinFrame(Recount.ConfigWindow) end
 	if Recount.GraphWindow then SkinFrame(Recount.GraphWindow) end
 	if Recount.DetailWindow then SkinFrame(Recount.DetailWindow) end

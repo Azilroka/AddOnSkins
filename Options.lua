@@ -299,8 +299,8 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	AuctionatorSkinButton.text = AuctionatorSkinButton:CreateFontString(nil, "OVERLAY")
 	AuctionatorSkinButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
 	AuctionatorSkinButton.text:SetPoint("CENTER", AuctionatorSkinButton, 0, 0)
-	if (UISkinOptions.AuctionatorSkin == "Enabled") then AuctionatorSkinButton.text:SetText("|cffff2020Auctionator|r") end
-	if (UISkinOptions.AuctionatorSkin == "Disabled") then AuctionatorSkinButton.text:SetText("|cff00ff00Auctionator|r") end
+	if (UISkinOptions.AuctionatorSkin == "Enabled") then AuctionatorSkinButton.text:SetText("|cff00ff00Auctionator|r") end
+	if (UISkinOptions.AuctionatorSkin == "Disabled") then AuctionatorSkinButton.text:SetText("|cffff2020Auctionator|r") end
 	if not IsAddOnLoaded("Auctionator") then AuctionatorSkinButton:Disable() AuctionatorSkinButton.text:SetText("|cFF808080Auctionator|r") end
 	AuctionatorSkinButton:HookScript("OnClick", function()
 		if (UISkinOptions.AuctionatorSkin == "Enabled") then
@@ -1260,12 +1260,12 @@ end
 
 if IsAddOnLoaded("AsphyxiaUI") or IsAddOnLoaded("SinarisUI") then
 	EmbedWindowSettingsButton:Disable() EmbedWindowSettingsButton.text:SetText("Embedding Window Settings")
-	SkadaSkinButton:Disable() UISkinOptions.SkadaSkin = "Disabled" SkadaSkinButton.text:SetText("Skada")
-	RecountSkinButton:Disable() UISkinOptions.RecountSkin = "Disabled" RecountSkinButton.text:SetText("Recount")
-	DBMSkinButton:Disable() UISkinOptions.DBMSkin = "Disabled" DBMSkinButton.text:SetText("DBM")
-	TinyDPSSkinButton:Disable() UISkinOptions.TinyDPSSkin = "Disabled" TinyDPSSkinButton.text:SetText("TinyDPS")
-	BigWigsSkinButton:Disable() UISkinOptions.BigWigsSkin = "Disabled" BigWigsSkinButton.text:SetText("BigWigs")
-	OmenSkinButton:Disable() UISkinOptions.OmenSkin = "Disabled" OmenSkinButton.text:SetText("Omen")
+	SkadaSkinButton:Disable() UISkinOptions.SkadaSkin = "Disabled" SkadaSkinButton.text:SetText("Skada : Disabled by UI")
+	RecountSkinButton:Disable() UISkinOptions.RecountSkin = "Disabled" RecountSkinButton.text:SetText("Recount : Disabled by UI")
+	DBMSkinButton:Disable() UISkinOptions.DBMSkin = "Disabled" DBMSkinButton.text:SetText("DBM : Disabled by UI")
+	TinyDPSSkinButton:Disable() UISkinOptions.TinyDPSSkin = "Disabled" TinyDPSSkinButton.text:SetText("TinyDPS : Disabled by UI")
+	BigWigsSkinButton:Disable() UISkinOptions.BigWigsSkin = "Disabled" BigWigsSkinButton.text:SetText("BigWigs : Disabled by UI")
+	OmenSkinButton:Disable() UISkinOptions.OmenSkin = "Disabled" OmenSkinButton.text:SetText("Omen : Disabled by UI")
 end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 

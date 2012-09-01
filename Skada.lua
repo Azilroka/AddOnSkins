@@ -57,6 +57,7 @@ barmod.ApplySettings = function(self, win)
 
 	skada:SetTexture(c["media"].normTex)
 	skada:SetSpacing(barSpacing)
+	skada:SetFrameStrata("MEDIUM")
 	skada:SetFrameLevel(5)
 	
 	if not skada.TitleBackGround then
