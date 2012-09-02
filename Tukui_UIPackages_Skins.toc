@@ -12,7 +12,6 @@ embeds.xml
 Options.lua
 EmbedWindow.lua
 
-Ace3.lua
 ACP.lua
 AdiBags.lua
 Altoholic.lua
@@ -55,7 +54,6 @@ Poisoner.lua
 PoMTracker.lua
 Postal.lua
 PowerAuras.lua
-ProfessionTabs.lua
 Quartz.lua
 RaidInviteOrganizer.lua
 RBS.lua

@@ -223,8 +223,8 @@ local Recount_Skin = CreateFrame("Frame")
 			Recount_MainWindow:ClearAllPoints()
 			Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 7)
 			Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 0)
-			Recount.db.profile.FrameStrata = "3-MEDIUM"
-			Recount.db.profile.MainWindowWidth = (EmbeddingWindow:GetWidth())
+			--Recount.db.profile.FrameStrata = "3-MEDIUM"
+			--Recount.db.profile.MainWindowWidth = (EmbeddingWindow:GetWidth())
 		end
 	end)
 

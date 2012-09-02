@@ -98,10 +98,11 @@ barmod.ApplySettings = function(self, win)
 end
 end)
 
-local function EmbedWindow(window, width, barheight, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+	local barheight = window.db.barheight
 	window.db.barwidth = width
 	window.db.barheight = barheight
-	if(window.db.enabletitle) then 
+	if window.db.enabletitle then
 		height = height - barheight
 	end
 	window.db.background.height = height
@@ -116,15 +117,15 @@ end
 local windows = {}
 function EmbedSkada()
 	if(#windows == 1) then
-		EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 2 - (barSpacing * 4)) / 10, (EmbeddingWindow:GetHeight() - 6), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
+		EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 6), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
 	elseif(#windows == 2) then
 	if IsAddOnLoaded("Tukui") then
-		EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + s.mult), (EmbeddingWindow:GetHeight() - 2 - (barSpacing * 4)) / 10, EmbeddingWindow:GetHeight() - 6, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
-		EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + s.mult), (EmbeddingWindow:GetHeight() - 2 - (barSpacing * 4)) / 10, EmbeddingWindow:GetHeight() - 6, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -17)
+		EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + s.mult), EmbeddingWindow:GetHeight() - 6, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
+		EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + s.mult), EmbeddingWindow:GetHeight() - 6, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -17)
 	end
 	if IsAddOnLoaded("ElvUI") then 
-		EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), (EmbeddingWindow:GetHeight() - 2 - (barSpacing * 4)) / 10, EmbeddingWindow:GetHeight() - 6, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
-		EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), (EmbeddingWindow:GetHeight() - 2 - (barSpacing * 4)) / 10, EmbeddingWindow:GetHeight() - 6, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -17)
+		EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), EmbeddingWindow:GetHeight() - 6, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
+		EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), EmbeddingWindow:GetHeight() - 6, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -17)
 	end
 	end
 end
