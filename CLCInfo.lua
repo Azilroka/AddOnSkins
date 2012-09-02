@@ -200,7 +200,8 @@ local SkinCLCInfo2 = CreateFrame("Frame")
 	mod.UpdateIconList = UpdateIconList
 	
 	mod.OldUpdateMIconList = mod.UpdateMIconList
-	mod.UpdateMIconList = UpdateMIconList	
+	mod.UpdateMIconList = UpdateMIconList
+	end)
 end
 
 s:RegisterSkin('clcInfo_Options', CLCInfo_Options)

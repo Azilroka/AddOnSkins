@@ -94,6 +94,7 @@ local SkinCLCRet = CreateFrame("Frame")
 	local clcret = LibStub("AceAddon-3.0"):GetAddon("clcret")
 	clcret.CreateButton = CreateButton
 	clcret.UpdateButtonLayout = UpdateButtonLayout
+	end)
 end
 
 s:RegisterSkin('CLCRet', LoadSkin)

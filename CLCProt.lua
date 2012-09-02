@@ -93,6 +93,7 @@ local SkinCLCProt = CreateFrame("Frame")
 	local clcprot = LibStub("AceAddon-3.0"):GetAddon("clcprot")
 	clcprot.CreateButton = CreateButton
 	clcprot.UpdateButtonLayout = UpdateButtonLayout
+	end)
 end
 
 s:RegisterSkin('CLCProt', LoadSkin)
