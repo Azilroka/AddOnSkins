@@ -49,15 +49,6 @@ if (UISkinOptions.AdiBagsSkin ~= "Enabled") then return end
 		cSkinButton(vendorButton, true)
 		f:AddHeaderWidget(vendorButton, -5)
 
-		local x = LeftChatToggleButton:GetLeft()
-		local y = LeftChatToggleButton:GetTop() + 1
-
-		A.db.profile.positionMode = 'manual'
-		A.db.profile.positions['Backpack'].xOffset = -x
-		A.db.profile.positions['Backpack'].yOffset = y
-		A.db.profile.positions['Bank'].xOffset = x
-		A.db.profile.positions['Bank'].yOffset = y
-		A.db.profile.positions['Bank'].point = 'BOTTOMLEFT'
 	end
 		AdiSkin:UnregisterEvent('PLAYER_ENTERING_WORLD')
 	--elseif event == 'BANKFRAME_OPENED' then
