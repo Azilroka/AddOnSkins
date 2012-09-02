@@ -2,6 +2,12 @@
 if not IsAddOnLoaded("Quartz") then return end
 local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
 if not Q3 then return end
+local SkinQuartz = CreateFrame("Frame")
+	SkinQuartz:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinQuartz:SetScript("OnEvent", function(self)
+	if (UISkinOptions.QuartzSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
 	SkinQuartzBar = function(self, bar)
 		self:SetTemplate("Transparent")
 		self.IconBorder = CreateFrame("Frame", nil, self)
@@ -39,3 +45,4 @@ if not Q3 then return end
 	end
 
 	Q3:ApplySettings()
+end)

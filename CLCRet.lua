@@ -82,7 +82,7 @@ local function CreateButton(self, name, size, point, parent, pointParent, offset
 end
 
 local function LoadSkin()
-	if not c.private.skins.clcret.enable or c.myclass ~= "PALADIN" then 
+	if not c.myclass ~= "PALADIN" then 
 		return;
 	end
 	
