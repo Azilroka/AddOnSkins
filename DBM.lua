@@ -108,7 +108,7 @@ local function LoadSkin()
 						name:Point("LEFT", frame, "LEFT", 4, 0)
 						name:SetWidth(165)
 						name:SetHeight(8)
-						if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12) end
+						if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
 						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(nil, 12, 'OUTLINE') end
 						if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
 						name:SetJustifyH("LEFT")
@@ -120,7 +120,7 @@ local function LoadSkin()
 					if not timer.styled then	
 						timer:ClearAllPoints()
 						timer:Point("RIGHT", frame, "RIGHT", -4, 0)
-						if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12) end
+						if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
 						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(nil, 12, 'OUTLINE') end
 						if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
 						timer:SetJustifyH("RIGHT")
@@ -149,7 +149,7 @@ local function LoadSkin()
 		if not anchor.styled then
 			local header={anchor:GetRegions()}
 				if header[1]:IsObjectType("FontString") then
-					if IsAddOnLoaded("Tukui") then header[1]:SetFont(c["media"].font, 12) end
+					if IsAddOnLoaded("Tukui") then header[1]:SetFont(c["media"].font, 12, "OUTLINE") end
 					if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then header[1]:FontTemplate(nil, 12, 'OUTLINE') end
 					if IsAddOnLoaded("ElvUI_SLE") then header[1]:FontTemplate(nil, 8, 'OUTLINE') end
 					header[1]:SetTextColor(1,1,1,1)
@@ -206,7 +206,7 @@ local function LoadSkin()
 			if not name.styled then
 				name:ClearAllPoints()
 				name:Point("LEFT", bar, "LEFT", 4, 0)
-				if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12) end
+				if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
 				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(nil, 12, 'OUTLINE') end
 				if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
 				name:SetJustifyH("LEFT")
@@ -217,7 +217,7 @@ local function LoadSkin()
 			if not timer.styled then
 				timer:ClearAllPoints()
 				timer:Point("RIGHT", bar, "RIGHT", -4, 0)
-				if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12) end
+				if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
 				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(nil, 12, 'OUTLINE') end
 				if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
 				timer:SetJustifyH("RIGHT")
