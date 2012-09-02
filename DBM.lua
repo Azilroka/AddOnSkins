@@ -28,8 +28,8 @@ local function LoadSkin()
 					if not (icon1.overlay) then
 						icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
 						icon1.overlay:CreateBackdrop()
-						icon1.overlay:Size(buttonsize)
-						icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -4, 0)
+						icon1.overlay:Size(buttonsize - 4)
+						icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -4, 2)
 
 					--	local backdroptex = icon1.overlay:CreateTexture(nil, "BORDER")
 					--	backdroptex:SetTexture([=[Interface\Icons\Spell_Nature_WispSplode]=])
@@ -41,8 +41,8 @@ local function LoadSkin()
 					if not (icon2.overlay) then
 						icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
 						icon2.overlay:CreateBackdrop()
-						icon2.overlay:Size(buttonsize)
-						icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", 4, 0)
+						icon2.overlay:Size(buttonsize - 4)
+						icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", 4, 2)
 						
 					--	local backdroptex = icon2.overlay:CreateTexture(nil, "BORDER")
 					--	backdroptex:SetTexture([=[Interface\Icons\Spell_Nature_WispSplode]=])
