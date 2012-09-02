@@ -169,6 +169,12 @@ end
 
 local function CLCInfo()
 	if not clcInfo then return; end
+local SkinCLCInfo = CreateFrame("Frame")
+	SkinCLCInfo:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinCLCInfo:SetScript("OnEvent", function(self)
+	if (UISkinOptions.CLCInfoSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
 	local mod = clcInfo.display['icons']
 	if not mod then return; end
 	mod.oldNew = mod.New
@@ -178,7 +184,12 @@ end
 local function CLCInfo_Options()
 	local mod = clcInfo_Options
 	if not mod then return; end
-	
+local SkinCLCInfo2 = CreateFrame("Frame")
+	SkinCLCInfo2:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SkinCLCInfo2:SetScript("OnEvent", function(self)
+	if (UISkinOptions.CLCInfoSkin ~= "Enabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+
 	mod.OldLoadActiveTemplate = mod.LoadActiveTemplate
 	mod.LoadActiveTemplate = LoadActiveTemplate
 	
