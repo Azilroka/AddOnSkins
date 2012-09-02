@@ -179,12 +179,13 @@ local SkinCLCInfo = CreateFrame("Frame")
 	if not mod then return; end
 	mod.oldNew = mod.New
 	mod.New = New
+	end)
 end
 
 local function CLCInfo_Options()
 	local mod = clcInfo_Options
 	if not mod then return; end
-local SkinCLCInfo2 = CreateFrame("Frame")
+	local SkinCLCInfo2 = CreateFrame("Frame")
 	SkinCLCInfo2:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinCLCInfo2:SetScript("OnEvent", function(self)
 	if (UISkinOptions.CLCInfoSkin ~= "Enabled") then return end
