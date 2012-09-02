@@ -1,6 +1,7 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Altoholic") then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
+AltoholicFrame.IsSkinned = "False"
 local SkinAltoholic = CreateFrame("Frame")
 SkinAltoholic:RegisterEvent("PLAYER_ENTERING_WORLD")
 SkinAltoholic:SetScript("OnEvent", function(self)
@@ -10,10 +11,12 @@ LoadAddOn("Altoholic_Characters")
 	AltoTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 	AltoholicFramePortrait:Kill()
 	cSkinFrame(AltoholicFrame)
+	AltoholicFrame:HookScript("OnShow", function(self) if AltoholicFrame.IsSkinned == "True" then return end
+	AltoholicFrame.IsSkinned = "True"
+	cSkinFrame(AltoholicFrameSummary)
 	cSkinFrame(AltoholicFrameActivity)
 	cSkinFrame(AltoholicFrameBagUsage)
 	cSkinFrame(AltoholicFrameSkills)
-	cSkinFrame(AltoholicFrameSummary)
 	cSkinFrame(AltoMsgBox)
 	cSkinFrame(AltoholicFrameContainers)
 	cSkinFrame(AltoholicFrameRecipes)
@@ -67,14 +70,17 @@ LoadAddOn("Altoholic_Characters")
 	AltoholicFrame_SearchEditBox:Point("TOPLEFT", AltoholicFrame, "TOPLEFT", 37, -56)
 
 	for i = 1, 4 do
-		cSkinFrame(_G["AltoholicTabSummaryMenuItem"..i])
+		_G["AltoholicTabSummaryMenuItem"..i]:StripTextures(True)
+		cSkinButton(_G["AltoholicTabSummaryMenuItem"..i])
 	end
 
 	for i = 1, 8 do
-		cSkinFrame(_G["AltoholicTabSummary_Sort"..i])
+		_G["AltoholicTabSummary_Sort"..i]:StripTextures(True)
+		cSkinButton(_G["AltoholicTabSummary_Sort"..i])
 	end
 
 	for i = 1, 7 do
+		_G["AltoholicFrameTab"..i]:StripTextures(True)
 		cSkinTab(_G["AltoholicFrameTab"..i])
 	end
 
@@ -87,8 +93,7 @@ LoadAddOn("Altoholic_Characters")
 		_G["AltoholicFrameContainersEntry6Item"..i]:StripTextures(True)
 		_G["AltoholicFrameContainersEntry7Item"..i]:StripTextures(True)
 	end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
+end)
 local function LoadSkinAchievements()
 
 	AltoholicFrameAchievements:StripTextures(True)
@@ -101,7 +106,8 @@ local function LoadSkinAchievements()
 	AltoholicTabAchievements_SelectRealm:Point("TOPLEFT", AltoholicFrame, "TOPLEFT", 205, -57)
 
 	for i = 1, 15 do
-		cSkinFrame(_G["AltoholicTabAchievementsMenuItem"..i])
+		_G["AltoholicTabAchievementsMenuItem"..i]:StripTextures(True)
+		cSkinButton(_G["AltoholicTabAchievementsMenuItem"..i])
 	end
 
 	for i = 1, 10 do
@@ -126,6 +132,7 @@ local function LoadSkinAgenda()
 	AltoholicTabAgendaMenuItem1:SetTemplate("Transparent")
 
 	for i = 1, 14 do
+		_G["AltoholicFrameCalendarEntry"..i]:StripTextures(True)
 		cSkinFrame(_G["AltoholicFrameCalendarEntry"..i])
 	end
 end
@@ -158,7 +165,8 @@ local function LoadSkinGuild()
 	AltoholicFrameGuildMembersScrollFrame:StripTextures(True)
 
 	for i = 1, 2 do
-		cSkinFrame(_G["AltoholicTabGuildMenuItem"..i])
+		_G["AltoholicTabGuildMenuItem"..i]:StripTextures(True)
+		cSkinButton(_G["AltoholicTabGuildMenuItem"..i])
 	end
 
 	for i = 1, 14 do
@@ -176,7 +184,8 @@ local function LoadSkinGuild()
 	end
 
 	for i = 1, 5 do
-		cSkinFrame(_G["AltoholicTabGuild_Sort"..i])
+		_G["AltoholicTabGuild_Sort"..i]:StripTextures(True)
+		cSkinButton(_G["AltoholicTabGuild_Sort"..i])
 	end
 end
 
@@ -198,11 +207,13 @@ local function LoadSkinSearch()
 	cSkinEditBox(_G["AltoholicTabSearch_MaxLevel"])
 
 	for i = 1, 15 do
-		cSkinFrame(_G["AltoholicTabSearchMenuItem"..i])
+		_G["AltoholicTabSearchMenuItem"..i]:StripTextures(True)
+		cSkinButton(_G["AltoholicTabSearchMenuItem"..i])
 	end
 
 	for i = 1, 8 do
-		cSkinFrame(_G["AltoholicTabSearch_Sort"..i])
+		_G["AltoholicTabSearch_Sort"..i]:StripTextures(True)
+		cSkinButton(_G["AltoholicTabSearch_Sort"..i])
 	end
 end
 
