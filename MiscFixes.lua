@@ -44,6 +44,7 @@ local buttons = {
 	"HelpOpenTicketButton",
 	"ElvConfigToggle",
 	"DBMMinimapButton",
+	"ZygorGuidesViewerMapIcon",
 }
 
 local function SkinButton(frame)
