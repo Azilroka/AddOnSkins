@@ -6,8 +6,9 @@ local SkinBigWigs = CreateFrame("Frame")
 	SkinBigWigs:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinBigWigs:SetScript("OnEvent", function(self)
 	if (UISkinOptions.BigWigsSkin == "Disabled") then return end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
-local buttonsize = 19
+local buttonsize = 20
 
 -- init some tables to store backgrounds
 local freebg = {}
@@ -24,7 +25,7 @@ local function freestyle(bar)
 	local bg = bar:Get("bigwigs:elvui:barbg")
 	if bg then
 		bg:ClearAllPoints()
-		bg:SetParent(c.UIParent)
+		bg:SetParent(UIParent)
 		bg:Hide()
 		freebg[#freebg + 1] = bg
 	end
@@ -33,7 +34,7 @@ local function freestyle(bar)
 	local ibg = bar:Get("bigwigs:elvui:iconbg")
 	if ibg then
 		ibg:ClearAllPoints()
-		ibg:SetParent(c.UIParent)
+		ibg:SetParent(UIParent)
 		ibg:Hide()
 		freebg[#freebg + 1] = ibg
 	end
@@ -72,11 +73,9 @@ local applystyle = function(bar)
 
 	-- general bar settings
 
-	--bar.OldHeight = bar:GetHeight()
-	--bar.OldScale = bar:GetScale()
+	bar:SetHeight(buttonsize-8)
 	bar.OldSetScale=bar.SetScale
 	bar.SetScale=c.noop
-	--bar:Height(buttonsize)
 	bar:SetScale(1)
 	
 	-- create or reparent and use bar background
@@ -139,7 +138,7 @@ local applystyle = function(bar)
 	bar.candyBarIconFrame.OldSetWidth = bar.candyBarIconFrame.SetWidth
 	bar.candyBarIconFrame.SetWidth=c.noop
 	bar.candyBarIconFrame:ClearAllPoints()
-	bar.candyBarIconFrame:Point("BOTTOMRIGHT", bar, "BOTTOMLEFT", -5, 0)	
+	bar.candyBarIconFrame:Point("BOTTOMLEFT", bar, "BOTTOMLEFT", -buttonsize - buttonsize/3 , 0)
 	bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
 	bar.candyBarIconFrame:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 end

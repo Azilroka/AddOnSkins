@@ -27,28 +27,28 @@ local function LoadSkin()
 					
 					if not (icon1.overlay) then
 						icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
-						icon1.overlay:SetTemplate("Default")
+						icon1.overlay:CreateBackdrop()
 						icon1.overlay:Size(buttonsize)
-						icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -1, 0)
+						icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -4, 0)
 
-						local backdroptex = icon1.overlay:CreateTexture(nil, "BORDER")
-						backdroptex:SetTexture([=[Interface\Icons\Spell_Nature_WispSplode]=])
-						backdroptex:Point("TOPLEFT", icon1.overlay, "TOPLEFT", 2, -2)
-						backdroptex:Point("BOTTOMRIGHT", icon1.overlay, "BOTTOMRIGHT", -2, 2)
-						backdroptex:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+					--	local backdroptex = icon1.overlay:CreateTexture(nil, "BORDER")
+					--	backdroptex:SetTexture([=[Interface\Icons\Spell_Nature_WispSplode]=])
+					--	backdroptex:Point("TOPLEFT", icon1.overlay, "TOPLEFT", 2, -2)
+					--	backdroptex:Point("BOTTOMRIGHT", icon1.overlay, "BOTTOMRIGHT", -2, 2)
+					--	backdroptex:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 					end
 
 					if not (icon2.overlay) then
 						icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
-						icon2.overlay:SetTemplate("Default")
+						icon2.overlay:CreateBackdrop()
 						icon2.overlay:Size(buttonsize)
-						icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", 1, 0)
+						icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", 4, 0)
 						
-						local backdroptex = icon2.overlay:CreateTexture(nil, "BORDER")
-						backdroptex:SetTexture([=[Interface\Icons\Spell_Nature_WispSplode]=])
-						backdroptex:Point("TOPLEFT", icon2.overlay, "TOPLEFT", 2, -2)
-						backdroptex:Point("BOTTOMRIGHT", icon2.overlay, "BOTTOMRIGHT", -2, 2)
-						backdroptex:SetTexCoord(0.08, 0.92, 0.08, 0.92)					
+					--	local backdroptex = icon2.overlay:CreateTexture(nil, "BORDER")
+					--	backdroptex:SetTexture([=[Interface\Icons\Spell_Nature_WispSplode]=])
+					--	backdroptex:Point("TOPLEFT", icon2.overlay, "TOPLEFT", 2, -2)
+					--	backdroptex:Point("BOTTOMRIGHT", icon2.overlay, "BOTTOMRIGHT", -2, 2)
+					--	backdroptex:SetTexCoord(0.08, 0.92, 0.08, 0.92)					
 					end
 
 					if bar.color then
@@ -77,16 +77,16 @@ local function LoadSkin()
 					if not icon1.styled then
 						icon1:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 						icon1:ClearAllPoints()
-						icon1:Point("TOPLEFT", icon1.overlay, 2, -2)
-						icon1:Point("BOTTOMRIGHT", icon1.overlay, -2, 2)
+						icon1:Point("TOPLEFT", icon1.overlay, 0, 0)
+						icon1:Point("BOTTOMRIGHT", icon1.overlay, 0, 0)
 						icon1.styled=true
 					end
 					
 					if not icon2.styled then
 						icon2:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 						icon2:ClearAllPoints()
-						icon2:Point("TOPLEFT", icon2.overlay, 2, -2)
-						icon2:Point("BOTTOMRIGHT", icon2.overlay, -2, 2)
+						icon2:Point("TOPLEFT", icon2.overlay, 0, 0)
+						icon2:Point("BOTTOMRIGHT", icon2.overlay, 0, 0)
 						icon2.styled=true
 					end
 

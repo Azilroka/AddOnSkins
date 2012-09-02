@@ -4,11 +4,8 @@ local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
 
 local function LoadSkin()
-local SkinTMW = CreateFrame("Frame")
-	SkinTMW:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinTMW:SetScript("OnEvent", function(self)
+	LoadAddOn("TellMeWhen_Options")
 	if (UISkinOptions.TellMeWhenSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	TellMeWhen_IconEditorMain:StripTextures()
 	TellMeWhen_IconEditorConditions:StripTextures()
 	TellMeWhen_IconEditor:StripTextures()
@@ -59,7 +56,6 @@ local SkinTMW = CreateFrame("Frame")
 	--cSkinScrollBar(TellMeWhen_IconEditorEventsSoundSoundsScrollBar)
 	cSkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsPassThrough)
 	cSkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsOnlyShown)
-	end)
 end
 
 if IsAddOnLoaded("Tukui") then

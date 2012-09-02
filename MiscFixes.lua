@@ -15,8 +15,6 @@ local SkinAZCastBar = CreateFrame("Frame")
 end)
 end
 
---cSkinTab(CharacterFrameTab5)
-
 ----------------------------------------
 -- Loot auto confirm
 ----------------------------------------
@@ -46,7 +44,6 @@ local buttons = {
 	"HelpOpenTicketButton",
 	"ElvConfigToggle",
 	"DBMMinimapButton",
-	"UpperRepExpBarHolder",
 }
 
 local function SkinButton(frame)
