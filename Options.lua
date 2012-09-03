@@ -1112,7 +1112,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		end
 	end)
 	ZygorSkinButton = CreateFrame("Button", "ZygorSkinButton", SkinOptions, "UIPanelButtonTemplate")
-	ZygorSkinButton:SetPoint("TOPRIGHT", -12, -370)
+	ZygorSkinButton:SetPoint("TOPRIGHT", -12, -380)
 	ZygorSkinButton:Size(200,20)
 	cSkinButton(ZygorSkinButton)
 	ZygorSkinButton.text = ZygorSkinButton:CreateFontString(nil, "OVERLAY")
