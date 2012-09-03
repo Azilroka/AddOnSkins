@@ -3,7 +3,7 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local SkinZygor = CreateFrame("Frame")
 	SkinZygor:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinZygor:SetScript("OnEvent", function(self)
-	--if (UISkinOptions.ZygorSkin ~= "Enabled") then return end
+	if (UISkinOptions.ZygorSkin ~= "Enabled") then return end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 	ZygorGuidesViewerFrame:StripTextures(True)
