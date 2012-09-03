@@ -8,10 +8,8 @@ local SkinPostal = CreateFrame("Frame")
 	local c = UIPackageSkinFuncs.c
 	if IsAddOnLoaded("ElvUI") then if c.private.skins.blizzard.enable ~= true or c.private.skins.blizzard.mail ~= true then return end end
 
-	MailFrame:Size(350,450)
-	if PostalOpenAllButton then PostalOpenAllButton:Point("Center", InboxFrame, "TOP", -22, -420) end
-	InboxPrevPageButton:Point("CENTER", InboxFrame, "BOTTOMLEFT", 64, 92)
-	InboxNextPageButton:Point("CENTER", InboxFrame, "BOTTOMLEFT", 314, 92)
+	InboxPrevPageButton:Point("CENTER", InboxFrame, "BOTTOMLEFT", 45, 112)
+	InboxNextPageButton:Point("CENTER", InboxFrame, "BOTTOMLEFT", 295, 112)
 
 	for i = 1, INBOXITEMS_TO_DISPLAY do
 		local b = _G["MailItem"..i.."ExpireTime"]
@@ -26,6 +24,7 @@ local SkinPostal = CreateFrame("Frame")
 	if PostalSelectOpenButton and not PostalSelectOpenButton.handled then
 		cSkinButton(PostalSelectOpenButton, true)
 		PostalSelectOpenButton.handled = true;
+		PostalSelectOpenButton:Point("RIGHT", InboxFrame, "TOP", -41, -48)
 	end	
 	
 	if Postal_OpenAllMenuButton and not Postal_OpenAllMenuButton.handled then
@@ -37,15 +36,17 @@ local SkinPostal = CreateFrame("Frame")
 	if PostalOpenAllButton and not PostalOpenAllButton.handled then
 		cSkinButton(PostalOpenAllButton, true)
 		PostalOpenAllButton.handled = true;
+		PostalOpenAllButton:Point("Center", InboxFrame, "TOP", -34, -400)
 	end	
 	
 	if PostalSelectReturnButton then
-		cSkinButton(PostalSelectReturnButton, true)	
+		cSkinButton(PostalSelectReturnButton, true)
+		PostalSelectReturnButton:Point("LEFT", InboxFrame, "TOP", -5, -48)
 	end
 
 	if Postal_ModuleMenuButton then
 		cSkinNextPrevButton(Postal_ModuleMenuButton, true)
-		Postal_ModuleMenuButton:SetPoint('TOPRIGHT', MailFrame, -58, -16)
+		Postal_ModuleMenuButton:SetPoint('TOPRIGHT', MailFrame, -53, -6)
 	end
 	
 	if Postal_BlackBookButton then

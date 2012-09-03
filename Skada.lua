@@ -110,19 +110,19 @@ local function EmbedWindow(window, width, height, point, relativeFrame, relative
 end
 
 local windows = {}
-function EmbedSkada()
-	if(#windows == 1) then
-		EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 26), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -21)
-	elseif(#windows == 2) then
-	if IsAddOnLoaded("Tukui") then
-		EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + s.mult), EmbeddingWindow:GetHeight() - 26, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -21)
-		EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + s.mult), EmbeddingWindow:GetHeight() - 26, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -21)
-	end
-	if IsAddOnLoaded("ElvUI") then 
-		EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), EmbeddingWindow:GetHeight() - 26, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -21)
-		EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), EmbeddingWindow:GetHeight() - 26, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -21)
-	end
-	end
+	function EmbedSkada()
+		if(#windows == 1) then
+			EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 24), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -18)
+		elseif(#windows == 2) then
+		if IsAddOnLoaded("Tukui") then
+			EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + s.mult), EmbeddingWindow:GetHeight() - 24, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -18)
+			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + s.mult), EmbeddingWindow:GetHeight() - 24, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -18)
+		end
+		if IsAddOnLoaded("ElvUI") then
+			EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), EmbeddingWindow:GetHeight() - 24, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -18)
+			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), EmbeddingWindow:GetHeight() - 24, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -18)
+		end
+		end
 end
 
 for _, window in ipairs( Skada:GetWindows() ) do

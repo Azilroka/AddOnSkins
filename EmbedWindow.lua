@@ -159,13 +159,13 @@ if event == "PLAYER_ENTERING_WORLD" then
 end
 
 if event == "PLAYER_REGEN_DISABLED" then
-	print("Entering Combat")
+--	print("Entering Combat")
 	if (IsAddOnLoaded("Recount") and (UISkinOptions.EmbedRecount == "Enabled")) then
 		Recount_MainWindow:Show()
 	end
 	if (IsAddOnLoaded("Skada") and (UISkinOptions.EmbedSkada == "Enabled")) then
 	if Skada.db.profile.hidesolo then return end
-	if Skada.db.profile.hideincomabt then return end
+	if Skada.db.profile.hidecombat then return end
 		for _, window in ipairs(Skada:GetWindows()) do
 			window:Show()
 		end
@@ -173,7 +173,7 @@ if event == "PLAYER_REGEN_DISABLED" then
 end
 
 if event == "PLAYER_REGEN_ENABLED" then
-	print("Exiting Combat")
+--	print("Exiting Combat")
 	if (IsAddOnLoaded("Recount") and (UISkinOptions.EmbedRecount == "Enabled")) then
 		Recount_MainWindow:Hide()
 	end
