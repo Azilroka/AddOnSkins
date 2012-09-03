@@ -1,12 +1,4 @@
 ﻿if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("ChocolateBar") then return end
---local function UpdateRepExpBar(self, event, ...)
---		if ElvUI then 
---			WhoIsYourDaddy = UpperRepExpBarHolder:GetParent()
---			if WhoIsYourDaddy == ElvUIParent then		
---					UpperRepExpBarHolder:SetPoint("TOP", ChocolateBar1, "BOTTOM", 0, 0)
---			end 
---		end
---end
 
 local SkinCB = CreateFrame("Frame")
 	SkinCB:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -156,7 +148,7 @@ local AceGUI = LibStub("AceGUI-3.0")
 	slider3.frame:SetParent("CB_Skin_OptionsFrame")
 	slider3:SetPoint("TOPLEFT", cbskin_zoom, "BOTTOMLEFT", 0, -130)
 	slider3:SetLabel("Set Location of Raid Control Button")
-	if RaidUtilityPanel then slider3:SetSliderValues(ceil(RaidUtilityPanel:GetWidth()/4)-1,ceil(UIParent:GetWidth())-1-ceil(RaidUtilityPanel:GetWidth()/1.25)-1,1) end
+	if RaidUtility_ShowButton then slider3:SetSliderValues(ceil(RaidUtility_ShowButton:GetWidth()/4)-1,ceil(UIParent:GetWidth())-1-ceil(RaidUtility_ShowButton:GetWidth()/1.25)-1,1) end
 	slider3:SetCallback("OnValueChanged", function(self, value) CBShowButtonPosition = self.value end)
 	if Tukui then slider3.frame:Hide() end
 	if CBEnableSpecialBars == true then
@@ -244,16 +236,16 @@ end
 			end
 	end)
 	
---		if IsAddOnLoaded("ElvUI") then
---			if CBShowButtonPosition == nil then
---				x = ElvUIParent:GetWidth()/4			
---				ShowButton:SetPoint("TOP", ChocolateBar1, "BOTTOM", -x, 0)
---				slider3:SetValue(x)			
---			else
---				slider3:SetValue(CBShowButtonPosition)
---				ShowButton:SetPoint("TOPLEFT", ChocolateBar1, "BOTTOMLEFT", CBShowButtonPosition, 0)
---			end
---		end	
+		if IsAddOnLoaded("ElvUI") then
+			if CBShowButtonPosition == nil then
+				x = ElvUIParent:GetWidth()/4			
+				RaidUtility_ShowButton:SetPoint("TOP", ChocolateBar1, "BOTTOM", -x, 0)
+				slider3:SetValue(x)			
+			else
+				slider3:SetValue(CBShowButtonPosition)
+				RaidUtility_ShowButton:SetPoint("TOPLEFT", ChocolateBar1, "BOTTOMLEFT", CBShowButtonPosition, 0)
+			end
+		end	
 	
 	SLASH_CBSKIN1, SLASH_CBSKIN2 = '/cbskin', '/cbskin show'
 	function SlashCmdList.CBSKIN(msg, editbox)

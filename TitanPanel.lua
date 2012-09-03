@@ -1,18 +1,4 @@
-﻿--local function UpdateRepExpBar(self, event, ...) 
---	if ElvUI then 
---	x = ElvUIParent:GetWidth()/4
---			WhoIsYourDaddy = UpperRepExpBarHolder:GetParent()
---		if WhoIsYourDaddy == ElvUIParent then		
---			Bar2Height = Titan_Bar__Display_Bar2:GetHeight()
---			if Bar2Height == 0 or TPEnableSpecialBars == true then
---				if UpperRepExpBarHolder then UpperRepExpBarHolder:SetPoint("TOP", Titan_Bar__Display_Bar, "BOTTOM", 0, 0) end
---			else
---				if UpperRepExpBarHolder then UpperRepExpBarHolder:SetPoint("TOP", Titan_Bar__Display_Bar2, "BOTTOM", 0, 0) end
---			end
---		end 
---	end
---end
-
+﻿if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Titan") then return end
 local function SetEnabled(self, event, ...) 
 		if TPBar2and3Position == nil then
 			x = WorldFrame:GetWidth()/5 
@@ -275,26 +261,26 @@ local AceGUI = LibStub("AceGUI-3.0")
 		Enabled:SetScript("OnUpdate", SetEnabled)
 	end
 
---		if IsAddOnLoaded("ElvUI") then
---			if TPShowButtonPosition == nil then
---				x = ElvUIParent:GetWidth()/4
---					Bar2Height = Titan_Bar__Display_Bar2:GetHeight()
---					if Bar2Height == 0 or TPEnableSpecialBars == true then
---						ShowButton:SetPoint("TOP", Titan_Bar__Display_Bar, "BOTTOM", -x, 0)
---					else
---						ShowButton:SetPoint("TOP", Titan_Bar__Display_Bar2, "BOTTOM", -x, 0)
---					end
---				slider3:SetValue(x)
---			else
---				slider3:SetValue(TPShowButtonPosition)
---					Bar2Height = Titan_Bar__Display_Bar2:GetHeight()
---					if Bar2Height == 0 or TPEnableSpecialBars == true then
---						ShowButton:SetPoint("TOPLEFT", Titan_Bar__Display_Bar, "BOTTOMLEFT", TPShowButtonPosition, 0)
---					else
---						ShowButton:SetPoint("TOPLEFT", Titan_Bar__Display_Bar2, "BOTTOMLEFT", TPShowButtonPosition, 0)
---					end
---			end
---		end
+		if IsAddOnLoaded("ElvUI") then
+			if TPShowButtonPosition == nil then
+				x = ElvUIParent:GetWidth()/4
+					Bar2Height = Titan_Bar__Display_Bar2:GetHeight()
+					if Bar2Height == 0 or TPEnableSpecialBars == true then
+						RaidUtility_ShowButton:SetPoint("TOP", Titan_Bar__Display_Bar, "BOTTOM", -x, 0)
+					else
+						RaidUtility_ShowButton:SetPoint("TOP", Titan_Bar__Display_Bar2, "BOTTOM", -x, 0)
+					end
+				slider3:SetValue(x)
+			else
+				slider3:SetValue(TPShowButtonPosition)
+					Bar2Height = Titan_Bar__Display_Bar2:GetHeight()
+					if Bar2Height == 0 or TPEnableSpecialBars == true then
+						RaidUtility_ShowButton:SetPoint("TOPLEFT", Titan_Bar__Display_Bar, "BOTTOMLEFT", TPShowButtonPosition, 0)
+					else
+						RaidUtility_ShowButton:SetPoint("TOPLEFT", Titan_Bar__Display_Bar2, "BOTTOMLEFT", TPShowButtonPosition, 0)
+					end
+			end
+		end
 
 	SLASH_TPSKIN1, SLASH_TPSKIN2 = '/tpskin', '/tpskin show'
 	function SlashCmdList.TPSKIN(msg, editbox)
