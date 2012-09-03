@@ -68,8 +68,10 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.TitanPanelSkin == nil) then UISkinOptions.TitanPanelSkin = "Enabled" end
 	if(UISkinOptions.WeakAuraSkin == nil) then UISkinOptions.WeakAuraSkin = "Enabled" end
 	if(UISkinOptions.WowLuaSkin == nil) then UISkinOptions.WowLuaSkin = "Enabled" end
+	if(UISkinOptions.ZygorSkin == nil) then UISkinOptions.ZygorSkin = "Enabled" end
 	if(UISkinOptions.UISkinMinimap == nil) then UISkinOptions.UISkinMinimap = "True" end
 	if(LootConfirm == nil) then LootConfirm = "False" end
+	if(UISkinOptions.EmbedOoC == nil) then UISkinOptions.EmbedOoC = "Disabled" end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 
@@ -1107,6 +1109,25 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		else
 			UISkinOptions.WowLuaSkin = "Enabled"
 			WowLuaSkinButton.text:SetText("|cff00ff00WowLua|r")
+		end
+	end)
+	ZygorSkinButton = CreateFrame("Button", "ZygorSkinButton", SkinOptions, "UIPanelButtonTemplate")
+	ZygorSkinButton:SetPoint("TOPRIGHT", -12, -370)
+	ZygorSkinButton:Size(200,20)
+	cSkinButton(ZygorSkinButton)
+	ZygorSkinButton.text = ZygorSkinButton:CreateFontString(nil, "OVERLAY")
+	ZygorSkinButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
+	ZygorSkinButton.text:SetPoint("CENTER", ZygorSkinButton, 0, 0)
+	if (UISkinOptions.ZygorSkin == "Enabled") then ZygorSkinButton.text:SetText("|cff00ff00Zygor|r") end
+	if (UISkinOptions.ZygorSkin == "Disabled") then ZygorSkinButton.text:SetText("|cffff2020Zygor|r") end
+	if not IsAddOnLoaded("ZygorGuidesViewer") then ZygorSkinButton:Disable() ZygorSkinButton.text:SetText("|cFF808080Zygor|r") end
+	ZygorSkinButton:HookScript("OnClick", function()
+		if (UISkinOptions.ZygorSkin == "Enabled") then
+			UISkinOptions.ZygorSkin = "Disabled"
+			ZygorSkinButton.text:SetText("|cffff2020Zygor|r")
+		else
+			UISkinOptions.ZygorSkin = "Enabled"
+			ZygorSkinButton.text:SetText("|cff00ff00Zygor|r")
 		end
 	end)
 

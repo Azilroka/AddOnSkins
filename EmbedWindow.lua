@@ -147,7 +147,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 	end)
 
 	EmbedOoCButton = CreateFrame("Button", "EmbedOoCButton", EmbeddingWindow, "UIPanelButtonTemplate")
-	EmbedOoCButton:SetPoint("TOP", 0, -20)
+	EmbedOoCButton:SetPoint("TOP", 0, -22)
 	EmbedOoCButton:Size(170,24)
 	cSkinButton(EmbedOoCButton)
 	EmbedOoCButton.text = EmbedOoCButton:CreateFontString(nil, "OVERLAY")
