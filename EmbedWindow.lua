@@ -146,6 +146,25 @@ if event == "PLAYER_ENTERING_WORLD" then
 		end
 	end)
 
+	EmbedOoCButton = CreateFrame("Button", "EmbedOoCButton", EmbeddingWindow, "UIPanelButtonTemplate")
+	EmbedOoCButton:SetPoint("TOP", 0, -20)
+	EmbedOoCButton:Size(170,24)
+	cSkinButton(EmbedOoCButton)
+	EmbedOoCButton.text = EmbedOoCButton:CreateFontString(nil, "OVERLAY")
+	EmbedOoCButton.text:SetFont(UIFont, 12, "OUTLINE")
+	EmbedOoCButton.text:SetPoint("CENTER", EmbedOoCButton, 0, 0)
+	if (UISkinOptions.EmbedOoC == "Enabled") then EmbedOoCButton.text:SetText("OoC Hide: |cff00ff00Enabled|r") end
+	if (UISkinOptions.EmbedOoC == "Disabled") then EmbedOoCButton.text:SetText("OoC Hide: |cffff2020Disabled|r") end
+	EmbedOoCButton:SetScript("OnClick", function()
+		if (UISkinOptions.EmbedOoC == "Enabled") then
+			UISkinOptions.EmbedOoC = "Disabled"
+			EmbedOoCButton.text:SetText("OoC Hide: |cffff2020Disabled|r")
+		else
+			UISkinOptions.EmbedOoC = "Enabled"
+			EmbedOoCButton.text:SetText("OoC Hide: |cff00ff00Enabled|r")
+		end
+	end)
+
 	CloseEmbedWindowButton = CreateFrame("Button", "CloseEmbedWindowButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	CloseEmbedWindowButton:SetPoint("BOTTOM", 0, 10)
 	CloseEmbedWindowButton:Size(170,24)
@@ -160,26 +179,30 @@ end
 
 if event == "PLAYER_REGEN_DISABLED" then
 --	print("Entering Combat")
-	if (IsAddOnLoaded("Recount") and (UISkinOptions.EmbedRecount == "Enabled")) then
-		Recount_MainWindow:Show()
-	end
-	if (IsAddOnLoaded("Skada") and (UISkinOptions.EmbedSkada == "Enabled")) then
-	if Skada.db.profile.hidesolo then return end
-	if Skada.db.profile.hidecombat then return end
-		for _, window in ipairs(Skada:GetWindows()) do
-			window:Show()
+	if (UISkinOptions.EmbedOoC == "Enabled") then
+		if (IsAddOnLoaded("Recount") and (UISkinOptions.EmbedRecount == "Enabled")) then
+			Recount_MainWindow:Show()
+		end
+		if (IsAddOnLoaded("Skada") and (UISkinOptions.EmbedSkada == "Enabled")) then
+			if Skada.db.profile.hidesolo then return end
+			if Skada.db.profile.hidecombat then return end
+			for _, window in ipairs(Skada:GetWindows()) do
+				window:Show()
+			end
 		end
 	end
 end
 
 if event == "PLAYER_REGEN_ENABLED" then
 --	print("Exiting Combat")
-	if (IsAddOnLoaded("Recount") and (UISkinOptions.EmbedRecount == "Enabled")) then
-		Recount_MainWindow:Hide()
-	end
-	if (IsAddOnLoaded("Skada") and (UISkinOptions.EmbedSkada == "Enabled")) then
-		for _, window in ipairs(Skada:GetWindows()) do
-			window:Hide()
+	if (UISkinOptions.EmbedOoC == "Enabled") then
+		if (IsAddOnLoaded("Recount") and (UISkinOptions.EmbedRecount == "Enabled")) then
+			Recount_MainWindow:Hide()
+		end
+		if (IsAddOnLoaded("Skada") and (UISkinOptions.EmbedSkada == "Enabled")) then
+			for _, window in ipairs(Skada:GetWindows()) do
+				window:Hide()
+			end
 		end
 	end
 end
