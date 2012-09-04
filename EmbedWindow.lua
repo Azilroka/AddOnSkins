@@ -1,4 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
+if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 if IsAddOnLoaded("AsphyxiaUI") or IsAddOnLoaded("SinarisUI") then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
@@ -321,6 +321,8 @@ function SlashCmdList.EMBEDDINGWINDOW(msg, editbox)
 end
 
 function EmbedRecountOmen()
+		if not IsAddOnLoaded("Omen") then UISkinOptions.EmbedRO = "Disabled" return end
+		if not IsAddOnLoaded("Recount") then UISkinOptions.EmbedRO = "Disabled" return end
 		OmenTitle:Kill()
 		Omen.db.profile.Locked = true
 		Omen:UpdateGrips()

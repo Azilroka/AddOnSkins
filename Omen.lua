@@ -1,6 +1,7 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Omen") then return end
 
 function EmbedOmen()
+	if not IsAddOnLoaded("Omen") then UISkinOptions.EmbedOmen = "Disabled" return end
 		Omen.db.profile.Locked = true
 		Omen:UpdateGrips()
 		Omen.UpdateGrips = function(...)
