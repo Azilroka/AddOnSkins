@@ -153,6 +153,8 @@ function cDesaturate(f, point)
 	end
 end
 
+if IsAddOnLoaded("Tukui") then
+
 SLASH_FRAME1 = "/frame"
 SlashCmdList["FRAME"] = function(arg)
 	if arg ~= "" then
@@ -189,4 +191,6 @@ SlashCmdList["FRAME"] = function(arg)
 	else
 		ChatFrame1:AddMessage("Could not find frame info")
 	end
+end
+
 end
