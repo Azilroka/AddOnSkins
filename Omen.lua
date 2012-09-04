@@ -97,8 +97,8 @@ Omen.UpdateBackdrop = function(self)
 	Omen.db.profile.Background.EdgeSize = 1
 	Omen.db.profile.Background.BarInset = borderWidth
 	self:UpdateBackdrop_()
-	self.BarList:SetTemplate("Transparent")
-	self.Title:SetTemplate("Transparent", True)
+	self.BarList:SetTemplate("Default")
+	self.Title:SetTemplate("Default", True)
 	self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, -1)
 end
 
