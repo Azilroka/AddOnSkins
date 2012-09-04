@@ -81,9 +81,9 @@ local function CreateButton(self, name, size, point, parent, pointParent, offset
 end
 
 local function LoadSkin()
-	if not c.myclass ~= "PALADIN" then 
-		return;
-	end
+if (select(2, UnitClass("player")) ~= "PALADIN") then
+	return
+end
 local SkinCLCProt = CreateFrame("Frame")
 	SkinCLCProt:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinCLCProt:SetScript("OnEvent", function(self)
