@@ -12,7 +12,6 @@ local function SkinFrame(frame)
 	for i = 1, 3 do
 		cSkinButton(region.widgets[i].widget, true)
 	end
-	frame.Anchor:EnableMouse(false)
 end
 
 
