@@ -219,12 +219,7 @@ local Recount_Skin = CreateFrame("Frame")
 		self:UnregisterAllEvents()
 		self = nil
 		if (UISkinOptions.EmbedRecount == "Enabled") then
-			Recount:LockWindows(true)
-			Recount_MainWindow:ClearAllPoints()
-			Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 7)
-			Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 0)
-			--Recount.db.profile.FrameStrata = "3-MEDIUM"
-			--Recount.db.profile.MainWindowWidth = (EmbeddingWindow:GetWidth())
+			EmbedRecount()
 		end
 	end)
 
@@ -256,16 +251,20 @@ StaticPopupDialogs["RECOUNT_RELOADUI"] = {
         whileDead = 1
 }
 
+function EmbedRecount()
+	UISkinOptions.EmbedRecount = "Enabled"
+	Recount:LockWindows(true)
+	Recount_MainWindow:ClearAllPoints()
+	Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 7)
+	Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 0)
+	Recount_MainWindow:SetFrameStrata("MEDIUM")
+end
+
 SLASH_RECOUNTEMBEDDED1, SLASH_RECOUNTEMBEDDED2 = '/er', '/embedrecount';
 function SlashCmdList.RECOUNTEMBEDDED(msg, editbox)
 	if (UISkinOptions.EmbedRecount == "Disabled") then
 		UISkinOptions.EmbedRecount = "Enabled";
-		Recount:LockWindows(true)
-		Recount_MainWindow:ClearAllPoints()
-		Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 7)
-		Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 0)
-		Recount.db.profile.FrameStrata = "3-MEDIUM"
-		Recount.db.profile.MainWindowWidth = (EmbeddingWindow:GetWidth())
+		EmbedRecount()
 	else
 		UISkinOptions.EmbedRecount = "Disabled";
 		Recount:LockWindows(false)

@@ -1,5 +1,39 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Omen") then return end
 
+function EmbedOmen()
+		Omen.db.profile.Locked = true
+		Omen:UpdateGrips()
+		Omen.UpdateGrips = function(...)
+			local db = Omen.db.profile
+				Omen.VGrip1:ClearAllPoints()
+				Omen.VGrip1:SetPoint("TOPLEFT", Omen.BarList, "TOPLEFT", db.VGrip1, 0)
+				Omen.VGrip1:SetPoint("BOTTOMLEFT", Omen.BarList, "BOTTOMLEFT", db.VGrip1, 0)
+				Omen.VGrip2:ClearAllPoints()
+				Omen.VGrip2:SetPoint("TOPLEFT", Omen.BarList, "TOPLEFT", db.VGrip2, 0)
+				Omen.VGrip2:SetPoint("BOTTOMLEFT", Omen.BarList, "BOTTOMLEFT", db.VGrip2, 0)
+				Omen.Grip:Hide()
+				if db.Locked then
+					Omen.VGrip1:Hide()
+					Omen.VGrip2:Hide()
+				else
+					Omen.VGrip1:Show()
+					if db.Bar.ShowTPS then
+						Omen.VGrip2:Show()
+					else
+						Omen.VGrip2:Hide()
+					end
+				end
+		end
+		OmenTitle:Kill()
+		OmenAnchor:ClearAllPoints()
+		OmenAnchor:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 16)
+
+		OmenAnchor:SetWidth(EmbeddingWindow:GetWidth())
+		OmenAnchor:SetHeight(EmbeddingWindow:GetHeight() + 12)
+
+		OmenAnchor:SetFrameStrata("MEDIUM")
+end
+
 local SkinOmen = CreateFrame("Frame")
 	SkinOmen:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinOmen:SetScript("OnEvent", function(self)
