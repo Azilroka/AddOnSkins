@@ -1,4 +1,4 @@
-if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 if IsAddOnLoaded("AsphyxiaUI") or IsAddOnLoaded("SinarisUI") then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
@@ -191,9 +191,7 @@ if event == "PLAYER_REGEN_DISABLED" then
 			end
 		end
 	end
-end
-
-if event == "PLAYER_REGEN_ENABLED" then
+else
 --	print("Exiting Combat")
 	if (UISkinOptions.EmbedOoC == "Enabled") then
 		if (IsAddOnLoaded("Recount") and (UISkinOptions.EmbedRecount == "Enabled")) then
