@@ -76,6 +76,7 @@ local applystyle = function(bar)
 	bar:SetHeight(buttonsize-8)
 	bar.OldSetScale=bar.SetScale
 	bar.SetScale=c.noop
+	bar:Height(buttonsize)
 	bar:SetScale(1)
 	
 	-- create or reparent and use bar background
@@ -132,13 +133,13 @@ local applystyle = function(bar)
 	bar.candyBarBackground:SetTexture(unpack(c.media.backdropcolor))
 
 	-- setup icon positions and other things
---	bar.candyBarIconFrame.OldPoint, bar.candyBarIconFrame.Anchor, bar.candyBarIconFrame.OldPoint2, bar.candyBarIconFrame.XPoint, bar.candyBarIconFrame.YPoint  = bar.candyBarIconFrame:GetPoint()
---	bar.candyBarIconFrame.OldWidth = bar.candyBarIconFrame:GetWidth()
---	bar.candyBarIconFrame.OldHeight = bar.candyBarIconFrame:GetHeight()
+	bar.candyBarIconFrame.OldPoint, bar.candyBarIconFrame.Anchor, bar.candyBarIconFrame.OldPoint2, bar.candyBarIconFrame.XPoint, bar.candyBarIconFrame.YPoint  = bar.candyBarIconFrame:GetPoint()
+	bar.candyBarIconFrame.OldWidth = bar.candyBarIconFrame:GetWidth()
+	bar.candyBarIconFrame.OldHeight = bar.candyBarIconFrame:GetHeight()
 	bar.candyBarIconFrame.OldSetWidth = bar.candyBarIconFrame.SetWidth
 	bar.candyBarIconFrame.SetWidth=c.noop
 	bar.candyBarIconFrame:ClearAllPoints()
-	bar.candyBarIconFrame:Point("BOTTOMLEFT", bar, "BOTTOMLEFT", -buttonsize - buttonsize/3 , 0)
+	bar.candyBarIconFrame:Point("BOTTOMLEFT", bar, "BOTTOMLEFT", -(buttonsize + 7), 0)
 	bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
 	bar.candyBarIconFrame:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 end
@@ -159,7 +160,7 @@ local function RegisterStyle()
 	bars:RegisterBarStyle("ElvUI", {
 		apiVersion = 1,
 		version = 1,
-		GetSpacing = function(bar) return buttonsize end,
+		GetSpacing = function(bar) return 8 end,
 		ApplyStyle = applystyle,
 		BarStopped = freestyle,
 		GetStyleName = function() return "ElvUI" end,
