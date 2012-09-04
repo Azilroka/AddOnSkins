@@ -13,13 +13,11 @@ local SkinQuartz = CreateFrame("Frame")
 	if IsAddOnLoaded("ElvUI") then UIFont = [[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]] UIFontSize = 12 end
 
 	SkinQuartzBar = function(self, bar)
-		self:SetTemplate("Transparent")
 		if not self.IconBorder then
 			self.IconBorder = CreateFrame("Frame", nil, self)
-			self.IconBorder:SetTemplate("Transparent")
-			self.IconBorder:SetPoint("TOPLEFT",self.Icon, "TOPLEFT", -2, 2)
-			self.IconBorder:SetPoint("BOTTOMRIGHT", self.Icon, "BOTTOMRIGHT", 2, -2)
-			self.IconBorder:SetFrameStrata("LOW")
+			self.IconBorder:CreateBackdrop()
+			self.IconBorder:SetPoint("TOPLEFT",self.Icon, "TOPLEFT", 0, 0)
+			self.IconBorder:SetPoint("BOTTOMRIGHT", self.Icon, "BOTTOMRIGHT", 0, 0)
 		end
 		if self.config.hideicon then
 			self.IconBorder:Hide()
@@ -28,6 +26,7 @@ local SkinQuartz = CreateFrame("Frame")
 		end
 		self.Text:SetFont(UIFont,UIFontSize)
 		self.TimeText:SetFont(UIFont,UIFontSize)
+		self.Bar:CreateBackdrop()
 		self.Bar:SetStatusBarTexture(c["media"].normTex)
 	end
 
