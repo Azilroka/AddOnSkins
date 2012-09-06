@@ -23,7 +23,7 @@ local function SkinFrame(frame)
 	frame.TitleBackground:SetPoint("TOP", 0)
 	frame.TitleBackground:SetPoint("LEFT", 0)
 	frame.TitleBackground:SetPoint("RIGHT", 0)
-	frame.TitleBackground:SetHeight(24)
+	frame.TitleBackground:SetHeight(23)
 	frame.TitleBackground:SetTemplate("Transparent")
 	frame.Title:SetParent(frame.TitleBackground)
 	frame.Title:ClearAllPoints()
@@ -33,9 +33,10 @@ local function SkinFrame(frame)
 		frame.CloseButton:SetNormalTexture("")
 		frame.CloseButton:SetPushedTexture("")
 		frame.CloseButton:SetHighlightTexture("")
+		frame.CloseButton:SetSize(16, 16)
 		frame.CloseButton.t = frame.CloseButton:CreateFontString(nil, "OVERLAY")
-		frame.CloseButton.t:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
-		frame.CloseButton.t:SetPoint("CENTER", 0, 1)
+		frame.CloseButton.t:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "OUTLINE")
+		frame.CloseButton.t:SetPoint("CENTER", 1, 1)
 		frame.CloseButton.t:SetText("X")
 	end
 	if IsAddOnLoaded("ElvUI") then if not Recount_MainWindow then cSkinCloseButton(frame.CloseButton) end end
@@ -55,7 +56,7 @@ local function SkinMainFrame(frame)
 	frame.TitleBackground:SetPoint("TOP", frame, "TOP", 0, -7)
 	frame.TitleBackground:SetPoint("LEFT", 0)
 	frame.TitleBackground:SetPoint("RIGHT", 0)
-	frame.TitleBackground:SetHeight(24)
+	frame.TitleBackground:SetHeight(23)
 	frame.TitleBackground:SetTemplate("Transparent")
 	frame.Title:SetParent(frame.TitleBackground)
 	frame.Title:ClearAllPoints()
@@ -65,9 +66,10 @@ local function SkinMainFrame(frame)
 		frame.CloseButton:SetNormalTexture("")
 		frame.CloseButton:SetPushedTexture("")
 		frame.CloseButton:SetHighlightTexture("")
+		frame.CloseButton:SetSize(16, 16)
 		frame.CloseButton.t = frame.CloseButton:CreateFontString(nil, "OVERLAY")
-		frame.CloseButton.t:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
-		frame.CloseButton.t:SetPoint("CENTER", 0, 1)
+		frame.CloseButton.t:SetFont(c["media"].pixelfont, c["datatext"].fontsize, "OUTLINE")
+		frame.CloseButton.t:SetPoint("CENTER", 1, 1)
 		frame.CloseButton.t:SetText("X")
 	end
 	if IsAddOnLoaded("ElvUI") then if not Recount_MainWindow then cSkinCloseButton(frame.CloseButton) end end
@@ -79,10 +81,10 @@ Recount.UpdateBarTextures = function(self)
 		v.StatusBar:GetStatusBarTexture():SetHorizTile(false)
 		v.StatusBar:GetStatusBarTexture():SetVertTile(false)
 		if IsAddOnLoaded("Tukui") then
-			v.LeftText:SetPoint("LEFT", 4, 1)
-			v.RightText:SetPoint("RIGHT", -4, 1)
-			v.LeftText:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
-			v.RightText:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
+			v.LeftText:SetPoint("LEFT", 4, 0)
+			v.RightText:SetPoint("RIGHT", -4, 0)
+			v.LeftText:SetFont(c["media"].font, c["datatext"].fontsize)
+			v.RightText:SetFont(c["media"].font, c["datatext"].fontsize)
 		end
 	end
 end
@@ -119,6 +121,13 @@ end
 Recount:UpdateBarTextures()
 
 cSkinScrollBar(Recount_MainWindow_ScrollBarScrollBar)
+hooksecurefunc(Recount,"RefreshMainWindow",function(self,datarefresh)
+ 	if not Recount.db.profile.MainWindow.ShowScrollbar then
+		Recount_MainWindow_ScrollBarScrollBar:Hide()
+	else
+		Recount_MainWindow_ScrollBarScrollBar:Show()
+	end
+end)
 
 Recount.MainWindow.FileButton:HookScript("OnClick", function(self) if LibDropdownFrame0 then LibDropdownFrame0:SetTemplate() end end)
 
@@ -146,12 +155,17 @@ if IsAddOnLoaded("ElvUI") then
 end
 
 if IsAddOnLoaded("Tukui") then
+
+Recount.MainWindow.CloseButton:ClearAllPoints()
+Recount.MainWindow.CloseButton:Point("TOPRIGHT", Recount.MainWindow.TitleBackground, "TOPRIGHT", -3, -3)
+Recount.MainWindow.CloseButton:SetTemplate()
+
 Recount.MainWindow.RightButton:SetTemplate("Transparent")
 Recount.MainWindow.RightButton:SetNormalTexture("")
 Recount.MainWindow.RightButton:SetPushedTexture("")	
 Recount.MainWindow.RightButton:SetHighlightTexture("")
 Recount.MainWindow.RightButton:SetSize(16, 16)
-Recount.MainWindow.RightButton:FontString("text", c["media"].font, c["datatext"].fontsize, "OUTLINE")
+Recount.MainWindow.RightButton:FontString("text", c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
 Recount.MainWindow.RightButton.text:SetText(s.RGBToHex(unpack(c["media"].datatextcolor2))..">")
 Recount.MainWindow.RightButton.text:SetPoint("CENTER", 1, 1 )
 Recount.MainWindow.RightButton:ClearAllPoints()
@@ -162,7 +176,7 @@ Recount.MainWindow.LeftButton:SetNormalTexture("")
 Recount.MainWindow.LeftButton:SetPushedTexture("")	
 Recount.MainWindow.LeftButton:SetHighlightTexture("")
 Recount.MainWindow.LeftButton:SetSize( 16, 16 )
-Recount.MainWindow.LeftButton:FontString("text", c["media"].font, c["datatext"].fontsize, "OUTLINE")
+Recount.MainWindow.LeftButton:FontString("text", c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
 Recount.MainWindow.LeftButton.text:SetText(s.RGBToHex(unpack(c["media"].datatextcolor2)).."<")
 Recount.MainWindow.LeftButton.text:SetPoint("CENTER", 1, 1 )
 Recount.MainWindow.LeftButton:SetPoint("RIGHT", Recount.MainWindow.RightButton, "LEFT", -2, 0)
@@ -171,7 +185,7 @@ Recount.MainWindow.ResetButton:SetTemplate("Transparent")
 Recount.MainWindow.ResetButton:SetNormalTexture("")
 Recount.MainWindow.ResetButton:SetPushedTexture("")	
 Recount.MainWindow.ResetButton:SetHighlightTexture("")
-Recount.MainWindow.ResetButton:FontString("text", c["media"].font, c["datatext"].fontsize, "OUTLINE")
+Recount.MainWindow.ResetButton:FontString("text", c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
 Recount.MainWindow.ResetButton.text:SetText(s.RGBToHex(unpack(c["media"].datatextcolor2)).."R")
 Recount.MainWindow.ResetButton.text:SetPoint("CENTER", 1, 1 )
 Recount.MainWindow.ResetButton:SetPoint("RIGHT", Recount.MainWindow.LeftButton, "LEFT", -2, 0)
@@ -180,7 +194,7 @@ Recount.MainWindow.FileButton:SetTemplate("Transparent")
 Recount.MainWindow.FileButton:SetNormalTexture("")
 Recount.MainWindow.FileButton:SetPushedTexture("")	
 Recount.MainWindow.FileButton:SetHighlightTexture("")
-Recount.MainWindow.FileButton:FontString("text", c["media"].font, c["datatext"].fontsize, "OUTLINE")
+Recount.MainWindow.FileButton:FontString("text", c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
 Recount.MainWindow.FileButton.text:SetText(s.RGBToHex(unpack(c["media"].datatextcolor2)).."F")
 Recount.MainWindow.FileButton.text:SetPoint("CENTER", 1, 1)
 Recount.MainWindow.FileButton:SetPoint("RIGHT", Recount.MainWindow.ResetButton, "LEFT", -2, 0)
@@ -189,7 +203,7 @@ Recount.MainWindow.ConfigButton:SetTemplate("Transparent")
 Recount.MainWindow.ConfigButton:SetNormalTexture("")
 Recount.MainWindow.ConfigButton:SetPushedTexture("")	
 Recount.MainWindow.ConfigButton:SetHighlightTexture("")
-Recount.MainWindow.ConfigButton:FontString("text", c["media"].font, c["datatext"].fontsize, "OUTLINE")
+Recount.MainWindow.ConfigButton:FontString("text", c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
 Recount.MainWindow.ConfigButton.text:SetText(s.RGBToHex(unpack(c["media"].datatextcolor2)).."C")
 Recount.MainWindow.ConfigButton.text:SetPoint("CENTER", 1, 1)
 Recount.MainWindow.ConfigButton:SetPoint("RIGHT", Recount.MainWindow.FileButton, "LEFT", -2, 0)
@@ -198,7 +212,7 @@ Recount.MainWindow.ReportButton:SetTemplate("Transparent")
 Recount.MainWindow.ReportButton:SetNormalTexture("")
 Recount.MainWindow.ReportButton:SetPushedTexture("")	
 Recount.MainWindow.ReportButton:SetHighlightTexture("")
-Recount.MainWindow.ReportButton:FontString("text", c["media"].font, c["datatext"].fontsize, "OUTLINE")
+Recount.MainWindow.ReportButton:FontString("text", c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
 Recount.MainWindow.ReportButton.text:SetText(s.RGBToHex(unpack(c["media"].datatextcolor2)).."S")
 Recount.MainWindow.ReportButton.text:SetPoint("CENTER", 1, 1)
 Recount.MainWindow.ReportButton:SetPoint("RIGHT", Recount.MainWindow.ConfigButton, "LEFT", -2, 0)
@@ -207,7 +221,7 @@ Recount.DetailWindow.ReportButton:SetTemplate("Transparent")
 Recount.DetailWindow.ReportButton:SetNormalTexture("")
 Recount.DetailWindow.ReportButton:SetPushedTexture("")	
 Recount.DetailWindow.ReportButton:SetHighlightTexture("")
-Recount.DetailWindow.ReportButton:FontString("text", c["media"].font, c["datatext"].fontsize, "OUTLINE")
+Recount.DetailWindow.ReportButton:FontString("text", c["media"].pixelfont, c["datatext"].fontsize, "MONOCHROMEOUTLINE")
 Recount.DetailWindow.ReportButton.text:SetText(s.RGBToHex(unpack(c["media"].datatextcolor2)).."S")
 Recount.DetailWindow.ReportButton.text:SetPoint("CENTER", 1, 1)
 
@@ -270,10 +284,10 @@ function SlashCmdList.RECOUNTEMBEDDED(msg, editbox)
 		Recount:LockWindows(false)
 	end
 	if(UISkinOptions.EmbedRecount == "Enabled") then
-	print("Recount Embedding is |cff00ff00"..UISkinOptions.EmbedRecount.."|r.");
+	print("Recount Embedding is |cff00ff00Enabled|r.");
 	end
 	if(UISkinOptions.EmbedRecount == "Disabled") then
-	print("Recount Embedding is |cffff2020"..UISkinOptions.EmbedRecount.."|r.");
+	print("Recount Embedding is |cffff2020Disabled|r.");
 	end
 end
 SLASH_RECOUNTBACKDROP1 = '/recountbackdrop';
@@ -284,10 +298,10 @@ function SlashCmdList.RECOUNTBACKDROP(msg, editbox)
 	end
 	if(UISkinOptions.RecountBackdrop == "Disabled") then
 		UISkinOptions.RecountBackdrop = "Enabled"
-		print("Recount Backdrop Enabled")
+		print("Recount Backdrop |cff00ff00Enabled|r")
 	else
 		UISkinOptions.RecountBackdrop = "Disabled"
-		print("Recount Backdrop Disabled")
+		print("Recount Backdrop |cffff2020Disabled|r")
 	end
 	print("You must reload your interface for this change.")
 	StaticPopup_Show("RECOUNT_RELOADUI")

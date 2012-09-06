@@ -9,8 +9,8 @@ local SkinQuartz = CreateFrame("Frame")
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
-	if IsAddOnLoaded("Tukui") then UIFont = [[Interface\AddOns\Tukui\medias\fonts\normal_font.ttf]] UIFontSize = 12 end
-	if IsAddOnLoaded("ElvUI") then UIFont = [[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]] UIFontSize = 12 end
+	if IsAddOnLoaded("Tukui") then UIFont = c["media"].font UIFontSize = 12 end
+	if IsAddOnLoaded("ElvUI") then UIFont = c["media"].normFont UIFontSize = 12 end
 
 	SkinQuartzBar = function(self, bar)
 		if not self.IconBorder then
@@ -24,8 +24,8 @@ local SkinQuartz = CreateFrame("Frame")
 		else
 			self.IconBorder:Show()
 		end
-		self.Text:SetFont(UIFont,UIFontSize)
-		self.TimeText:SetFont(UIFont,UIFontSize)
+		self.Text:SetFont(UIFont, UIFontSize, "OUTLINE")
+		self.TimeText:SetFont(UIFont, UIFontSize, "OUTLINE")
 		self.Bar:CreateBackdrop()
 		self.Bar:SetStatusBarTexture(c["media"].normTex)
 	end

@@ -60,9 +60,9 @@ Omen.UpdateBarLabelSettings = function(self)
 	self:UpdateBarLabelSettings_()
 	for i, v in ipairs(self.Bars) do
 	if IsAddOnLoaded("Tukui") then
-		v.Text1:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
-		v.Text2:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
-		v.Text3:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
+		v.Text1:SetFont(c["media"].font, c["datatext"].fontsize)
+		v.Text2:SetFont(c["media"].font, c["datatext"].fontsize)
+		v.Text3:SetFont(c["media"].font, c["datatext"].fontsize)
 	end
 	if IsAddOnLoaded("ElvUI") then
 		v.Text1:FontTemplate(nil, self.db.profile.Bar.FontSize)
@@ -81,14 +81,14 @@ Omen.UpdateTitleBar = function(self)
 	self:UpdateTitleBar_()
 	if IsAddOnLoaded("Tukui") then
 		self.Title:SetHeight(23)
-		self.TitleText:SetFont(c["media"].font, 12, "OUTLINE")
+		self.TitleText:SetFont(c["media"].font, c["datatext"].fontsize)
 		self.TitleText:ClearAllPoints()
 		self.TitleText:SetPoint("CENTER")
 	end
 	if IsAddOnLoaded("ElvUI") then
 		self.TitleText:FontTemplate(nil, self.db.profile.TitleBar.FontSize)
 	end
-	self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, -1)
+	self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, 1)
 end
 
 Omen.UpdateBackdrop_ = Omen.UpdateBackdrop
@@ -99,7 +99,7 @@ Omen.UpdateBackdrop = function(self)
 	self:UpdateBackdrop_()
 	self.BarList:SetTemplate("Default")
 	self.Title:SetTemplate("Default", True)
-	self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, -1)
+	self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, 1)
 end
 
 local omen_mt = getmetatable(Omen.Bars)

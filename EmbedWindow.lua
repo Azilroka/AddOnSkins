@@ -19,6 +19,8 @@ local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 	EmbeddingWindow:RegisterEvent("PLAYER_ENTERING_WORLD")
 	EmbeddingWindow:RegisterEvent("PLAYER_REGEN_DISABLED")
 	EmbeddingWindow:RegisterEvent("PLAYER_REGEN_ENABLED")
+	EmbeddingWindow:RegisterEvent("PLAYER_ENTER_COMBAT")
+	EmbeddingWindow:RegisterEvent("PLAYER_LEAVE_COMBAT")
 	EmbeddingWindow:SetScript("OnEvent", function(self, event)
 
 if event == "PLAYER_ENTERING_WORLD" then
@@ -127,7 +129,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 	RecountEmbedBackdropButton.text:SetPoint("CENTER", RecountEmbedBackdropButton, 0, 0)
 	if (UISkinOptions.RecountBackdrop == "Enabled") then RecountEmbedBackdropButton.text:SetText("Recount Backdrop : |cff00ff00Enabled|r") end
 	if (UISkinOptions.RecountBackdrop == "Disabled") then RecountEmbedBackdropButton.text:SetText("Recount Backdrop : |cffff2020Disabled|r") end
-	if (UISkinOptions.RecountSkin ~= "Enabled") then UISkinOptions.RecountBackdrop = "Disabled" RecountEmbedBackdropButton:Disable() RecountEmbedBackdropButton.text:SetText("|cFF808080Recount Backdrop: Disabled|r") end
+	if (UISkinOptions.RecountSkin ~= "Enabled") then RecountEmbedBackdropButton:Disable() RecountEmbedBackdropButton.text:SetText("|cFF808080Recount Backdrop: Disabled|r") end
 	RecountEmbedBackdropButton:SetScript("OnClick", function()
 		if (UISkinOptions.RecountBackdrop == "Enabled") then
 			UISkinOptions.RecountBackdrop = "Disabled"
@@ -146,7 +148,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 	SkadaEmbedBackdropButton.text:SetPoint("CENTER", SkadaEmbedBackdropButton, 0, 0)
 	if (UISkinOptions.SkadaBackdrop == "Enabled") then SkadaEmbedBackdropButton.text:SetText("Skada Backdrop : |cff00ff00Enabled|r") end
 	if (UISkinOptions.SkadaBackdrop == "Disabled") then SkadaEmbedBackdropButton.text:SetText("Skada Backdrop : |cffff2020Disabled|r") end
-	if (UISkinOptions.SkadaSkin ~= "Enabled") then UISkinOptions.SkadaBackdrop = "Disabled" SkadaEmbedBackdropButton:Disable() SkadaEmbedBackdropButton.text:SetText("|cFF808080Skada Backdrop: Disabled|r") end
+	if (UISkinOptions.SkadaSkin ~= "Enabled") then SkadaEmbedBackdropButton:Disable() SkadaEmbedBackdropButton.text:SetText("|cFF808080Skada Backdrop: Disabled|r") end
 	SkadaEmbedBackdropButton:SetScript("OnClick", function()
 		if (UISkinOptions.SkadaBackdrop == "Enabled") then
 			UISkinOptions.SkadaBackdrop = "Disabled"
@@ -209,6 +211,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 	EmbedOmenButton.text:SetPoint("CENTER", EmbedOmenButton, 0, 0)
 	if (UISkinOptions.EmbedOmen == "Enabled") then EmbedOmenButton.text:SetText("Omen : |cff00ff00Enabled|r") end
 	if (UISkinOptions.EmbedOmen == "Disabled") then EmbedOmenButton.text:SetText("Omen : |cffff2020Disabled|r") end
+	if not IsAddOnLoaded("Omen") then EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
 	EmbedOmenButton:SetScript("OnClick", function()
 		if (UISkinOptions.EmbedOmen == "Enabled") then
 			UISkinOptions.EmbedOmen = "Disabled"
@@ -237,7 +240,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end
 
-if event == "PLAYER_REGEN_DISABLED" then
+if event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_ENTER_COMBAT" or InCombatLockdown() then
 --	print("Entering Combat")
 	if (UISkinOptions.EmbedOoC == "Enabled") then
 		if (IsAddOnLoaded("Recount") and (UISkinOptions.EmbedRecount == "Enabled")) then
