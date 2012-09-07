@@ -17,6 +17,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.ATSWSkin == nil) then UISkinOptions.ATSWSkin = "Enabled" end
 	if(UISkinOptions.AuctionatorSkin == nil) then UISkinOptions.AuctionatorSkin = "Enabled" end
 	if(UISkinOptions.AuctioneerSkin == nil) then UISkinOptions.AuctioneerSkin = "Enabled" end
+	if(UISkinOptions.BPTSkin == nil) then UISkinOptions.BPTSkin = "Enabled" end
 	if(UISkinOptions.BigWigsSkin == nil) then UISkinOptions.BigWigsSkin = "Enabled" end
 	if(UISkinOptions.BGDefenderSkin == nil) then UISkinOptions.BGDefenderSkin = "Enabled" end
 	if(UISkinOptions.BuyEmAllSkin == nil) then UISkinOptions.BuyEmAllSkin = "Enabled" end
@@ -1131,6 +1132,25 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		end
 	end)
 
+	BPTSkinButton = CreateFrame("Button", "BPTSkinButton", SkinOptions, "UIPanelButtonTemplate")
+	BPTSkinButton:SetPoint("TOPRIGHT", -12, -380)
+	BPTSkinButton:Size(200,20)
+	cSkinButton(BPTSkinButton)
+	BPTSkinButton.text = BPTSkinButton:CreateFontString(nil, "OVERLAY")
+	BPTSkinButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
+	BPTSkinButton.text:SetPoint("CENTER", BPTSkinButton, 0, 0)
+	if (UISkinOptions.BPTSkin == "Enabled") then BPTSkinButton.text:SetText("|cff00ff00Balance Power Tracker|r") end
+	if (UISkinOptions.BPTSkin == "Disabled") then BPTSkinButton.text:SetText("|cffff2020Balance Power Tracker|r") end
+	if not IsAddOnLoaded("BalancePowerTracker") then BPTSkinButton:Disable() BPTSkinButton.text:SetText("|cFF808080Balance Power Tracker|r") end
+	BPTSkinButton:HookScript("OnClick", function()
+		if (UISkinOptions.BPTSkin == "Enabled") then
+			UISkinOptions.BPTSkin = "Disabled"
+			BPTSkinButton.text:SetText("|cffff2020Balance Power Tracker|r")
+		else
+			UISkinOptions.BPTSkin = "Enabled"
+			BPTSkinButton.text:SetText("|cff00ff00Balance Power Tracker|r")
+		end
+	end)
 	SkinOptions2.text = SkinOptions2:CreateFontString(nil, "OVERLAY")
 	SkinOptions2.text:SetFont(UIFont, 14, "OUTLINE")
 	SkinOptions2.text:SetPoint("TOP", SkinOptions2, 0, -8)
