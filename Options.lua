@@ -40,6 +40,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.MinimalArchaeologySkin == nil) then UISkinOptions.MinimalArchaeologySkin = "Enabled" end
 	if(UISkinOptions.MoveAnythingSkin == nil) then UISkinOptions.MoveAnythingSkin = "Enabled" end
 	if(UISkinOptions.MRTSkin == nil) then UISkinOptions.MRTSkin = "Enabled" end
+	if(UISkinOptions.MyRolePlaySkin == nil) then UISkinOptions.MyRolePlaySkin = "Enabled" end
 	if(UISkinOptions.OdysseySkin == nil) then UISkinOptions.OdysseySkin = "Enabled" end
 	if(UISkinOptions.OgriLazySkin == nil) then UISkinOptions.OgriLazySkin = "Enabled" end
 	if(UISkinOptions.OmenSkin == nil) then UISkinOptions.OmenSkin = "Enabled" end	
@@ -280,6 +281,9 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 			["buttonText"] = "Mizus Raid Tracker",
 			["addon"] = "MizusRaidTracker"
 		},
+		["MyRolePlaySkin"] = {
+			["addon"] = "MyRolePlay"
+		},
 		["OdysseySkin"] = {
 			["addon"] = "Odyssey"
 		},
@@ -366,9 +370,21 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		},
 	}
 	--local function CreateButton(name,buttonText,addon,option,x,y)
-	local curX, curY = 1,1
-	local maxY = 18
-	for skin,options in pairs(Skins) do
+	function pairsByKeys (t, f)
+      local a = {}
+      for n in pairs(t) do table.insert(a, n) end
+      table.sort(a, f)
+      local i = 0      -- iterator variable
+      local iter = function ()   -- iterator function
+        i = i + 1
+        if a[i] == nil then return nil
+        else return a[i], t[a[i]]
+        end
+      end
+      return iter
+    end
+    local curX,curY,maxY=1,1,18
+	for skin,options in pairsByKeys(Skins) do
 		local addon = options.addon
 		local buttonText = options.buttonText or addon
 		CreateButton(string.format('%sButton',skin),buttonText,addon,skin,curX,curY)
@@ -394,7 +410,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	}
 
 	curY = 1
-	for skin,options in pairs(Skins2) do
+	for skin,options in pairsByKeys(Skins2) do
 		local addon = nil
 		local buttonText = options.buttonText
 		CreateButton(string.format('%sButton',skin),buttonText,addon,skin,2,curY,true)
@@ -429,7 +445,7 @@ if IsAddOnLoaded("ElvUI") then
 	}
 
 	curY = 4
-	for skin,options in pairs(ElvSkins2) do
+	for skin,options in pairsByKeys(ElvSkins2) do
 		local addon = options.addon
 		local buttonText = options.buttonText or addon
 		CreateButton(string.format('%sButton',skin),buttonText,addon,skin,2,curY,true)
