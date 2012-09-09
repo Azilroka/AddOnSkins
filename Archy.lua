@@ -1,4 +1,5 @@
 if not(IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("Archy") then return end
+local name = "ArchySkin"
 local function SkinArchy(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
@@ -33,4 +34,4 @@ local function SkinArchy(self)
 	cSkinButton(ArchyDistanceIndicatorFrameSurveyButton)
 end
 
-cRegisterSkin('ArchySkin',SkinArchy)
+cRegisterSkin(name,SkinArchy)

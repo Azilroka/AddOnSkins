@@ -1,4 +1,5 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("ACP") then return end
+local name = "ACPSkin"
 local function cbResize(self, event, ...)
     for i=1,20,1 do
         local checkbox = _G["ACP_AddonListEntry" .. i .. "Enabled"]
@@ -78,4 +79,4 @@ local function SkinACP(self)
 	ACP_AddonList:SetParent(UIParent)
  end
 
- cRegisterSkin("ACPSkin", SkinACP)
+ cRegisterSkin(name, SkinACP)

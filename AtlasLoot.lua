@@ -104,9 +104,8 @@ local function Compare_OnShow(self, event, ...)
 		cSkinScrollBar(AtlasLootCompareFrame_WishlistScrollFrameScrollBar)
 end
 
-local SkinAL = CreateFrame("Frame")
-	SkinAL:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinAL:SetScript("OnEvent", function(self, event, addon)
+local name = 'AtlasLootSkin'
+local function SkinAL(self)
 	LoadAddOn("AtlasLoot")
 
 	local FrameShow = AtlasLootDefaultFrame
@@ -237,6 +236,6 @@ local SkinAL = CreateFrame("Frame")
 	local Frame = AtlasLootPanel
 	Frame.Titel:SetTextColor(23/255, 132/255, 209/255)
 	Frame.Titel:SetPoint("BOTTOM", Frame.TitelBg, "BOTTOM", 0, 40)
+end
 
-	SkinAL:UnregisterEvent("PLAYER_ENTERING_WORLD")
-end)
+cRegisterSkin(name,SkinAL)

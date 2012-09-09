@@ -1,6 +1,7 @@
 if not IsAddOnLoaded("ArkInventory") then return end
 local ArkInventory = LibStub("AceAddon-3.0"):GetAddon("ArkInventory")
-	local function SkinArkInventory(self)
+local name = "ArkInventorySkin"
+local function SkinArkInventory(self)
 	local _G = _G
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
@@ -126,4 +127,4 @@ local ArkInventory = LibStub("AceAddon-3.0"):GetAddon("ArkInventory")
 	end
 end
 
-cRegisterSkin('ArkInventorySkin',SkinArkInventory)
+cRegisterSkin(name,SkinArkInventory)

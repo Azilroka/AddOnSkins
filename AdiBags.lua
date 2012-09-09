@@ -2,6 +2,7 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
 
+local name = 'AdiBagsSkin'
 local function SkinFrame(frame)
 	local region = frame.HeaderRightRegion
 	frame:StripTextures()
@@ -50,4 +51,4 @@ local function AdiSkin(self,event,addon)
 	end
 end
 
-cRegisterSkin('AdiBagsSkin',AdiSkin,"BANKFRAME_OPENED")
+cRegisterSkin(name,AdiSkin,"BANKFRAME_OPENED")

@@ -1,12 +1,11 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Auctionator") then return end
-local AtrSkin = CreateFrame("Frame")
-AtrSkin:RegisterEvent("AUCTION_HOUSE_SHOW")
-AtrSkin:SetScript('OnEvent', function(self)
-if (UISkinOptions.AuctionatorSkin ~= "Enabled") then return end
-local s = UIPackageSkinFuncs.s
-local c = UIPackageSkinFuncs.c
-	
-if IsAddOnLoaded("ElvUI") then if c.private.skins.blizzard.enable ~= true or c.private.skins.blizzard.auctionhouse ~= true then return end end
+local name = "AuctionantorSkin"
+local function AtrSkin(self,event)
+	if event == "PLAYER_ENTERING_WORLD" then return end
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
+		
+	if IsAddOnLoaded("ElvUI") then if c.private.skins.blizzard.enable ~= true or c.private.skins.blizzard.auctionhouse ~= true then return end end
 	AuctionsCancelAuctionButton:Point("RIGHT", AuctionFrameMoneyFrame, "RIGHT", 554, 0)
 	AuctionsCloseButton:ClearAllPoints()
 	AuctionsCloseButton:Point("RIGHT", AuctionsCancelAuctionButton, "RIGHT", 86, 0)
@@ -54,66 +53,66 @@ if IsAddOnLoaded("ElvUI") then if c.private.skins.blizzard.enable ~= true or c.p
 	BrowseNextPageButton:Size(20, 20)
 	BrowsePrevPageButton:Size(20, 20)
 
-cSkinFrame(Atr_BasicOptionsFrame)
-cSkinFrame(Atr_TooltipsOptionsFrame)
-cSkinFrame(Atr_UCConfigFrame)
-cSkinFrame(Atr_StackingOptionsFrame)
-cSkinFrame(Atr_ScanningOptionsFrame)
-cSkinFrame(AuctionatorResetsFrame)
-cSkinFrame(Atr_ShpList_Options_Frame)
-cSkinFrame(AuctionatorDescriptionFrame)
-cSkinFrame(Atr_Stacking_List)
-cSkinFrame(Atr_ShpList_Frame)
-	
-cSkinCheckBox(AuctionatorOption_Enable_Alt_CB)
-cSkinCheckBox(AuctionatorOption_Open_All_Bags_CB)
-cSkinCheckBox(AuctionatorOption_Show_StartingPrice_CB)
-cSkinCheckBox(ATR_tipsVendorOpt_CB)
-cSkinCheckBox(ATR_tipsAuctionOpt_CB)
-cSkinCheckBox(ATR_tipsDisenchantOpt_CB)
-	
-cSkinDropDownBox(AuctionatorOption_Deftab)
-cSkinDropDownBox(Atr_tipsShiftDD)
-cSkinDropDownBox(Atr_deDetailsDD)
-cSkinDropDownBox(Atr_scanLevelDD)
-Atr_deDetailsDDText:SetJustifyH('RIGHT')
+	cSkinFrame(Atr_BasicOptionsFrame)
+	cSkinFrame(Atr_TooltipsOptionsFrame)
+	cSkinFrame(Atr_UCConfigFrame)
+	cSkinFrame(Atr_StackingOptionsFrame)
+	cSkinFrame(Atr_ScanningOptionsFrame)
+	cSkinFrame(AuctionatorResetsFrame)
+	cSkinFrame(Atr_ShpList_Options_Frame)
+	cSkinFrame(AuctionatorDescriptionFrame)
+	cSkinFrame(Atr_Stacking_List)
+	cSkinFrame(Atr_ShpList_Frame)
+		
+	cSkinCheckBox(AuctionatorOption_Enable_Alt_CB)
+	cSkinCheckBox(AuctionatorOption_Open_All_Bags_CB)
+	cSkinCheckBox(AuctionatorOption_Show_StartingPrice_CB)
+	cSkinCheckBox(ATR_tipsVendorOpt_CB)
+	cSkinCheckBox(ATR_tipsAuctionOpt_CB)
+	cSkinCheckBox(ATR_tipsDisenchantOpt_CB)
+		
+	cSkinDropDownBox(AuctionatorOption_Deftab)
+	cSkinDropDownBox(Atr_tipsShiftDD)
+	cSkinDropDownBox(Atr_deDetailsDD)
+	cSkinDropDownBox(Atr_scanLevelDD)
+	Atr_deDetailsDDText:SetJustifyH('RIGHT')
 
-local moneyEditBoxes = {
-	'UC_5000000_MoneyInput',
-	'UC_1000000_MoneyInput',
-	'UC_200000_MoneyInput',
-	'UC_50000_MoneyInput',
-	'UC_10000_MoneyInput',
-	'UC_2000_MoneyInput',
-	'UC_500_MoneyInput',
-}
+	local moneyEditBoxes = {
+		'UC_5000000_MoneyInput',
+		'UC_1000000_MoneyInput',
+		'UC_200000_MoneyInput',
+		'UC_50000_MoneyInput',
+		'UC_10000_MoneyInput',
+		'UC_2000_MoneyInput',
+		'UC_500_MoneyInput',
+	}
 
-for i = 1, #moneyEditBoxes do
-	cSkinEditBox(_G[moneyEditBoxes[i]..'Gold'])
-	cSkinEditBox(_G[moneyEditBoxes[i]..'Silver'])
-	cSkinEditBox(_G[moneyEditBoxes[i]..'Copper'])
-end
-
-cSkinEditBox(Atr_Starting_Discount)
-cSkinEditBox(Atr_ScanOpts_MaxHistAge)
-	
-cSkinButton(Atr_UCConfigFrame_Reset)
-cSkinButton(Atr_StackingOptionsFrame_Edit)
-cSkinButton(Atr_StackingOptionsFrame_New)
-
-for i = 1, Atr_ShpList_Options_Frame:GetNumChildren() do
-	local object = select(i, Atr_ShpList_Options_Frame:GetChildren())
-	if object:GetObjectType() == 'Button' then
-		cSkinButton(object)
+	for i = 1, #moneyEditBoxes do
+		cSkinEditBox(_G[moneyEditBoxes[i]..'Gold'])
+		cSkinEditBox(_G[moneyEditBoxes[i]..'Silver'])
+		cSkinEditBox(_G[moneyEditBoxes[i]..'Copper'])
 	end
-end
-	
-for i = 1, AuctionatorResetsFrame:GetNumChildren() do
-	local object = select(i, AuctionatorResetsFrame:GetChildren())
-	if object:GetObjectType() == 'Button' then
-		cSkinButton(object)
+
+	cSkinEditBox(Atr_Starting_Discount)
+	cSkinEditBox(Atr_ScanOpts_MaxHistAge)
+		
+	cSkinButton(Atr_UCConfigFrame_Reset)
+	cSkinButton(Atr_StackingOptionsFrame_Edit)
+	cSkinButton(Atr_StackingOptionsFrame_New)
+
+	for i = 1, Atr_ShpList_Options_Frame:GetNumChildren() do
+		local object = select(i, Atr_ShpList_Options_Frame:GetChildren())
+		if object:GetObjectType() == 'Button' then
+			cSkinButton(object)
+		end
 	end
-end
+		
+	for i = 1, AuctionatorResetsFrame:GetNumChildren() do
+		local object = select(i, AuctionatorResetsFrame:GetChildren())
+		if object:GetObjectType() == 'Button' then
+			cSkinButton(object)
+		end
+	end
 
 	cSkinDropDownBox(Atr_Duration)
 	cSkinDropDownBox(Atr_DropDownSL)
@@ -197,5 +196,7 @@ end
 		cSkinTab(_G["AuctionFrameTab"..i])
 	end
 	AuctionFrameTab1:Point("TOPLEFT", AuctionFrame, "BOTTOMLEFT", 5, 2)
-	self:UnregisterEvent("AUCTION_HOUSE_SHOW")
-	end)
+	cUnregisterEvent(name,self,"AUCTION_HOUSE_SHOW")
+end
+
+cRegisterSkin(name,AtrSkin,'AUCTION_HOUSE_SHOW')

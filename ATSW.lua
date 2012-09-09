@@ -1,9 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("AdvancedTradeSkillWindow") then return end
-local SkinATSW = CreateFrame("Frame")
-	SkinATSW:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinATSW:SetScript("OnEvent", function(self)
-	if (UISkinOptions.ATSWSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+local name = 'ATSWSkin'
+local function SkinATSW(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 	cSkinFrame(ATSWFrame)
@@ -174,4 +171,6 @@ local SkinATSW = CreateFrame("Frame")
 	cSkinButton(ATSWScanDelayFrameAbortButton)
 	cSkinFrame(ATSWScanDelayFrame)
 	cSkinCCStatusBar(ATSWScanDelayFrameBar)
-end)
+end
+
+cRegisterSkin(skin,SkinATSW)

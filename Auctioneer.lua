@@ -1,8 +1,7 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Auc-Advanced") then return end
-local AuctioneerSkin = CreateFrame("Frame")
-AuctioneerSkin:RegisterEvent("AUCTION_HOUSE_SHOW")
-AuctioneerSkin:SetScript("OnEvent", function(self)
-if (UISkinOptions.AuctioneerSkin ~= "Enabled") then return end
+local name = 'AuctioneerSkin'
+local function AuctioneerSkin(self,event)
+	if event == "PLAYER_ENTERING_WORLD" then return end
 	AuctionsCancelAuctionButton:Point("RIGHT", AuctionFrameMoneyFrame, "RIGHT", 554, 0)
 	AuctionsCloseButton:ClearAllPoints()
 	AuctionsCloseButton:Point("RIGHT", AuctionsCancelAuctionButton, "RIGHT", 86, 0)
@@ -64,5 +63,7 @@ if (UISkinOptions.AuctioneerSkin ~= "Enabled") then return end
 	if AuctionFrameTabUtilSearchUi then cSkinTab(AuctionFrameTabUtilSearchUi) end
 	if AuctionFrameTabUtilSimple then cSkinTab(AuctionFrameTabUtilSimple) end
 	if AuctionFrameTabUtilBeanCounter then cSkinTab(AuctionFrameTabUtilBeanCounter) end
-	self:UnregisterEvent("AUCTION_HOUSE_SHOW")
-end)
+	cUnregisterEvent(name,self,"AUCTION_HOUSE_SHOW")
+end
+
+cRegisterSkin(name,AuctioneerSkin,'AUCTION_HOUSE_SHOW')

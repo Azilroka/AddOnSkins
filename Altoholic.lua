@@ -1,8 +1,8 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Altoholic") then return end
 local s = UIPackageSkinFuncs.s
-local c = UIPackageSkinFuncs.c
+local c = UIPackageSkinFuncs.c 
+local name = "AltoholicSkin"
 local function SkinAltoholic(self)
-	print('Skinning altoholic')
 	LoadAddOn("Altoholic_Characters")
 	AltoholicFrame.IsSkinned = "False"
 	AltoTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
@@ -233,4 +233,4 @@ local function SkinAltoholic(self)
 	end
 end
 
-cRegisterSkin('AltoholicSkin',SkinAltoholic)
+cRegisterSkin(name,SkinAltoholic)
