@@ -187,6 +187,16 @@ function cRegisterSkin(skinName,skinFunc,...)
 	end
 end
 
+function cUnregisterEvent(skinName,frame,event)
+	if IsAddOnLoaded("Tukui") then
+		frame:UnregisterEvent(event)
+	else
+		local c = UIPackageSkinFuncs.c
+		local XS = c:GetModule("ExtraSkins")
+		XS:UnregisterEvent(skinName,event)
+	end
+end
+
 if IsAddOnLoaded("Tukui") then
 
 SLASH_FRAME1 = "/frame"

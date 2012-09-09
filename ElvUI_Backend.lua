@@ -114,8 +114,25 @@ function XS:RegisterSkin(skinName,func,...)
 	self.skins[skinName] = func
 	for i = 1,#events do
 		local event = select(i,events)
-		if not self.events[event] then f:RegisterEvent(event); self.events[event] = {} end
+		if not self.events[event] then self.frame:RegisterEvent(event); self.events[event] = {} end
 		self.events[event][skinName] = true
+	end
+end
+
+function XS:UnregisterEvent(skinName,event)
+	if not self.events[event] then return end
+	if not self.events[event][skinName] then return end
+
+	self.events[event][skinName] = nil
+	local found = false
+	for skin,_ in pairs(self.events[event]) do
+		if skin then
+			found = true
+			break
+		end
+	end
+	if not found then
+		self.frame:UnregisterEvent(event)
 	end
 end
 
