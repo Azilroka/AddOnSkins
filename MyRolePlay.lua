@@ -1,11 +1,7 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MyRolePlay") then return end
-local SkinMyRolePlay = CreateFrame("Frame")
-	SkinMyRolePlay:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinMyRolePlay:SetScript("OnEvent", function(self)
-	if (UISkinOptions.MyRolePlaySkin == "Disabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 hooksecurefunc(mrp, "CreateBrowseFrame", function()
+	if (UISkinOptions.MyRolePlaySkin == "Disabled") then return end
 	local bg = CreateFrame("Frame", nil, MyRolePlayBrowseFrame)
 	bg:SetPoint("TOPLEFT")
 	bg:SetPoint("BOTTOMRIGHT")
@@ -31,10 +27,12 @@ hooksecurefunc(mrp, "CreateBrowseFrame", function()
 end)
 
 hooksecurefunc(mrp, "AddMRPTab", function()
+	if (UISkinOptions.MyRolePlaySkin == "Disabled") then return end
 	cSkinTab(CharacterFrameTab5)
 end)
 
 hooksecurefunc(mrp, "CreateEditFrames", function()
+	if (UISkinOptions.MyRolePlaySkin == "Disabled") then return end
 	MyRolePlayMultiEditFrame:DisableDrawLayer("BORDER")
 	MyRolePlayMultiEditFrameBg:Hide()
 	MyRolePlayMultiEditFrameScrollFrameTop:Hide()
@@ -83,6 +81,7 @@ hooksecurefunc(mrp, "CreateEditFrames", function()
 end)
 
 hooksecurefunc(mrp, "CreateOptionsPanel", function()
+	if (UISkinOptions.MyRolePlaySkin == "Disabled") then return end
 	cSkinCheckBox(MyRolePlayOptionsPanel_Enable)
 	cSkinCheckBox(MyRolePlayOptionsPanel_MRPButton)
 	cSkinCheckBox(MyRolePlayOptionsPanel_RPChatName)
@@ -95,6 +94,7 @@ hooksecurefunc(mrp, "CreateOptionsPanel", function()
 end)
 
 local function reskinHeader(c, field)
+	if (UISkinOptions.MyRolePlaySkin == "Disabled") then return end
 	for i = 1, field:GetNumChildren() do
 		local f = select(i, field:GetChildren())
 		if not f.reskinned then
@@ -118,5 +118,3 @@ end
 
 hooksecurefunc(mrp, "CreateCFpfield", reskinHeader)
 hooksecurefunc(mrp, "CreateBFpfield", reskinHeader)
-
-end)
