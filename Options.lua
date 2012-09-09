@@ -27,11 +27,13 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.CLCProtSkin == nil) then UISkinOptions.CLCProtSkin = "Enabled" end
 	if(UISkinOptions.CLCRetSkin == nil) then UISkinOptions.CLCRetSkin = "Enabled" end
 	if(UISkinOptions.DBMSkin == nil) then UISkinOptions.DBMSkin = "Enabled" end
+	if(UISkinOptions.DBMSkinHalf == nil) then UISkinOptions.DBMSkinHalf = "Disabled" end
 	if(UISkinOptions.DXESkin == nil) then UISkinOptions.DXESkin = "Disabled" end
 	if(UISkinOptions.EasyMailSkin == nil) then UISkinOptions.EasyMailSkin = "Enabled" end
 	if(UISkinOptions.EnergyWatchSkin == nil) then UISkinOptions.EnergyWatchSkin = "Enabled" end
 	if(UISkinOptions.ExtVendorSkin == nil) then UISkinOptions.ExtVendorSkin = "Enabled" end
 	if(UISkinOptions.FactionizerSkin == nil) then UISkinOptions.FactionizerSkin = "Enabled" end
+	if(UISkinOptions.FlightMapSkin == nil) then UISkinOptions.FlightMapSkin = "Enabled" end
 	if(UISkinOptions.KarniCrapSkin == nil) then UISkinOptions.KarniCrapSkin = "Enabled" end
 	if(UISkinOptions.LightheadedSkin == nil) then UISkinOptions.LightheadedSkin = "Enabled" end
 	if(UISkinOptions.LootCouncilLiteSkin == nil) then UISkinOptions.LootCouncilLiteSkin = "Enabled" end
@@ -257,6 +259,9 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		},
 		["FactionizerSkin"] = {
 			["addon"] = "Factionizer"
+		},
+		["FlightMapSkin"] = {
+			["addon"] = "FlightMap"
 		},
 		["KarniCrapSkin"] = {
 			["buttonText"] = "Karni's Crap Filter",

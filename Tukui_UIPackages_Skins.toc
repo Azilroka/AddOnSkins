@@ -37,6 +37,7 @@ EnergyWatch.lua
 EPGP.lua
 ExtVendor.lua
 Factionizer.lua
+FlightMap.lua
 KarniCrap.lua
 Lightheaded.lua
 LootCouncilLite.lua
