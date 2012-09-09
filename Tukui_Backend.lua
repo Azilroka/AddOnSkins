@@ -1,4 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
+if not IsAddOnLoaded("Tukui") then return end
 UISkinOptions = {}
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
@@ -196,7 +196,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	local Skins = {
 		["ACPSkin"] = {
 			["buttonText"] = "Addon Control Panel",
-			["addon"] = "AdiBags",
+			["addon"] = "ACP",
 		},
 		["AdiBagsSkin"] = {
 			["addon"] = "AdiBags",
@@ -375,7 +375,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		},
 	}
 	--local function CreateButton(name,buttonText,addon,option,x,y)
-	function pairsByKeys (t, f)
+	local function pairsByKeys (t, f)
       local a = {}
       for n in pairs(t) do table.insert(a, n) end
       table.sort(a, f)
@@ -424,42 +424,6 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		CreateButton(string.format('%sButton',skin),buttonText,addon,skin,2,curY,true)
 		curY = curY + 1
 	end
-
-if IsAddOnLoaded("ElvUI") then
-	-- ElvUI Only
-	SkinOptions2.text2 = SkinOptions2:CreateFontString(nil, "OVERLAY")
-	SkinOptions2.text2:SetFont(UIFont, 14, "OUTLINE")
-	SkinOptions2.text2:SetPoint("TOP", SkinOptions2, 0, -107)
-	SkinOptions2.text2:SetText("|cff1784d1ElvUI|r Only Options")
-
-	local ElvSkins2 = {
-		["CLCInfoSkin"] = {
-			["addon"] = "CLCInfo"
-		},
-		["CLCProtSkin"] = {
-			["addon"] = "CLCProt"
-		},
-		["CLCRetSkin"] = {
-			["addon"] = "CLCRet"
-		},
-		["PowerAurasIconsSkin"] = {
-			["buttonText"] = "PowerAuras Icon's",
-			["addon"] = "PowerAuras"
-		},
-		["WeakAurasIconsSkin"] = {
-			["buttonText"] = "WeakAuras Icon's",
-			["addon"] = "WeakAuras"
-		},
-	}
-
-	curY = 5
-	for skin,options in pairsByKeys(ElvSkins2) do
-		local addon = options.addon
-		local buttonText = options.buttonText or addon
-		CreateButton(string.format('%sButton',skin),buttonText,addon,skin,2,curY,true)
-		curY = curY + 1
-	end
-end
 
 --Killing for specfic UI's
 

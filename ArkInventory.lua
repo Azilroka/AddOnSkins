@@ -1,24 +1,19 @@
 if not IsAddOnLoaded("ArkInventory") then return end
 local ArkInventory = LibStub("AceAddon-3.0"):GetAddon("ArkInventory")
-local SkinArkInventory = CreateFrame("Frame")
-	SkinArkInventory:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinArkInventory:SetScript("OnEvent", function(self)
-	if (UISkinOptions.ArkInventorySkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-local _G = _G
-local s = UIPackageSkinFuncs.s
-local c = UIPackageSkinFuncs.c
-ArkInventory.Frame_Main_Paint_ = ArkInventory.Frame_Main_Paint
-ArkInventory.Frame_Main_Paint = function(frame)
-
-if not ArkInventory.ValidFrame(frame, true) then return	end
-	for i = 1, select("#",frame:GetChildren()) do
-		local subframe = select(i,frame:GetChildren())
-		local name = subframe:GetName()
-		if name then
-			if _G[name.."ArkBorder"] then _G[name.."ArkBorder"]:Hide() end
-			if _G[name.."Background"] then _G[name.."Background"]:Hide() end
-		end
+	local function SkinArkInventory(self)
+	local _G = _G
+	local s = UIPackageSkinFuncs.s
+	local c = UIPackageSkinFuncs.c
+	ArkInventory.Frame_Main_Paint_ = ArkInventory.Frame_Main_Paint
+	ArkInventory.Frame_Main_Paint = function(frame)
+		if not ArkInventory.ValidFrame(frame, true) then return	end
+		for i = 1, select("#",frame:GetChildren()) do
+			local subframe = select(i,frame:GetChildren())
+			local name = subframe:GetName()
+			if name then
+				if _G[name.."ArkBorder"] then _G[name.."ArkBorder"]:Hide() end
+				if _G[name.."Background"] then _G[name.."Background"]:Hide() end
+			end
 			cSkinFrame(subframe)
 		end
 	end
@@ -129,4 +124,6 @@ if not ArkInventory.ValidFrame(frame, true) then return	end
 		frame:SetBackdropBorderColor(r,g,b,a)
 
 	end
-end)
+end
+
+cRegisterSkin('ArkInventorySkin',SkinArkInventory)

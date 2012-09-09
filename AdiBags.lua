@@ -14,12 +14,7 @@ local function SkinFrame(frame)
 	end
 end
 
-
-local AdiSkin = CreateFrame('Frame')
-AdiSkin:RegisterEvent('PLAYER_ENTERING_WORLD')
-AdiSkin:RegisterEvent('BANKFRAME_OPENED')
-AdiSkin:SetScript('OnEvent', function(self, event, addon)
-if (UISkinOptions.AdiBagsSkin ~= "Enabled") then return end
+local function AdiSkin(self,event,addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		while not AdiBagsContainer1 do
 			ToggleBackpack()
@@ -52,6 +47,7 @@ if (UISkinOptions.AdiBagsSkin ~= "Enabled") then return end
 	--	SkinFrame(AdiBagsContainer2)
 	--	AdiSkin:UnregisterEvent('BANKFRAME_OPENED')
 	--end
-		AdiSkin:UnregisterEvent('PLAYER_ENTERING_WORLD')
 	end
-end)
+end
+
+cRegisterSkin('AdiBagsSkin',AdiSkin,"BANKFRAME_OPENED")

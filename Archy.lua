@@ -1,9 +1,5 @@
 if not(IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("Archy") then return end
-local SkinArchy = CreateFrame("Frame")
-SkinArchy:RegisterEvent("PLAYER_ENTERING_WORLD")
-SkinArchy:SetScript("OnEvent", function(self, event, addon)
-	if (UISkinOptions.ArchySkin ~= "Enabled") then return end
-
+local function SkinArchy(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -35,5 +31,6 @@ SkinArchy:SetScript("OnEvent", function(self, event, addon)
 		cSkinStatusBar(ArchyArtifactFrameSkillBar)
 	end
 	cSkinButton(ArchyDistanceIndicatorFrameSurveyButton)
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	end)
+end
+
+cRegisterSkin('ArchySkin',SkinArchy)

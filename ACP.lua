@@ -25,22 +25,17 @@ local function cbResize(self, event, ...)
    end
 end 
 
-local SkinACP = CreateFrame("Frame")
-	SkinACP:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinACP:SetScript("OnEvent", function(self, event, addon)
-	if(UISkinOptions.ACPSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
+local function SkinACP(self)
 	cSkinFrame(ACP_AddonList)
-        cSkinFrame(ACP_AddonList_ScrollFrame)
+    cSkinFrame(ACP_AddonList_ScrollFrame)
 	
 	local buttons = {
-                "ACP_AddonListSetButton",
-                "ACP_AddonListDisableAll",
-                "ACP_AddonListEnableAll",
-                "ACP_AddonList_ReloadUI",
+        "ACP_AddonListSetButton",
+        "ACP_AddonListDisableAll",
+        "ACP_AddonListEnableAll",
+        "ACP_AddonList_ReloadUI",
 		"ACP_AddonListBottomClose",
-		}
+	}
 
 	for _, button in pairs(buttons) do
 		cSkinButton(_G[button])
@@ -81,4 +76,6 @@ local SkinACP = CreateFrame("Frame")
 	ACP_AddonListBottomClose:Point("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -50, 8)
 	ACP_AddonListBottomClose:SetHeight(25)
 	ACP_AddonList:SetParent(UIParent)
- end)
+ end
+
+ cRegisterSkin("ACPSkin", SkinACP)
