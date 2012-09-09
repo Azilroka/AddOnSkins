@@ -24,6 +24,7 @@ Auctioneer.lua
 BGDefender.lua
 BigWigs-ElvUI.lua
 BigWigs-Tukui.lua
+BPT.lua
 BuyEmAll.lua
 ChocolateBar.lua
 CLCInfo.lua
@@ -45,6 +46,7 @@ MinimalArchaeology.lua
 MiscFixes.lua
 MoveAnything.lua
 MRT.lua
+MyRolePlay.lua
 Odyssey.lua
 Ogri'Lazy.lua
 Omen.lua

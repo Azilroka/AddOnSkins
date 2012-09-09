@@ -18,7 +18,7 @@ end
 ----------------------------------------
 -- Loot auto confirm
 ----------------------------------------
-if (LootConfirm == "True") then
+if (LootConfirm == "Enabled") then
 
 local LootConfirmer = CreateFrame("Frame")
 LootConfirmer:RegisterEvent("CONFIRM_DISENCHANT_ROLL");
@@ -88,7 +88,7 @@ end
 local UISkinMinimapButtons = CreateFrame("Frame")
 UISkinMinimapButtons:RegisterEvent("PLAYER_ENTERING_WORLD")
 UISkinMinimapButtons:SetScript("OnEvent", function(self, event)
-	if (UISkinOptions.UISkinMinimap ~= "True") then return end
+	if (UISkinOptions.UISkinMinimap ~= "Enabled") then return end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	for i = 1, Minimap:GetNumChildren() do
 		SkinButton(select(i, Minimap:GetChildren()))

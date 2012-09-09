@@ -47,11 +47,11 @@ if (UISkinOptions.AdiBagsSkin ~= "Enabled") then return end
 		vendorButton:SetScript('OnClick', function() B:VendorGrayCheck() end)
 		cSkinButton(vendorButton, true)
 		f:AddHeaderWidget(vendorButton, -5)
-
 	end
-		AdiSkin:UnregisterEvent('PLAYER_ENTERING_WORLD')
 	--elseif event == 'BANKFRAME_OPENED' then
-	--		SkinFrame(AdiBagsContainer2)
+	--	SkinFrame(AdiBagsContainer2)
 	--	AdiSkin:UnregisterEvent('BANKFRAME_OPENED')
+	--end
+		AdiSkin:UnregisterEvent('PLAYER_ENTERING_WORLD')
 	end
 end)

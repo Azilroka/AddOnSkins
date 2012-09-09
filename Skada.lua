@@ -122,7 +122,7 @@ local windows = {}
 			EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), EmbeddingWindow:GetHeight() - 24, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -18)
 			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), EmbeddingWindow:GetHeight() - 24, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -18)
 		end
-		end
+	end
 end
 
 for _, window in ipairs( Skada:GetWindows() ) do
