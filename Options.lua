@@ -104,7 +104,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions2:Point("TOPLEFT", SkinOptions, "TOPLEFT", -202, -125)
 	SkinOptions2:SetFrameStrata("MEDIUM")
 	SkinOptions2:Width(200)
-	SkinOptions2:Height(240)
+	SkinOptions2:Height(265)
 
 	ApplySkinSettingsButton = CreateFrame("Button", "ApplySkinSettingsButton", SkinOptions, "UIPanelButtonTemplate")
 	ApplySkinSettingsButton:SetPoint("BOTTOMLEFT", 0, -26)
@@ -221,6 +221,10 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		["AuctioneerSkin"] = {
 			["buttonText"] = "Auctioneer",
 			["addon"] = "Auc-Advanced"
+		},
+		["BPTSkin"] = {
+			["buttonText"] = "Balance Power Tracker",
+			["addon"] = "BalancePowerTracker"
 		},
 		["BGDefenderSkin"] = {
 			["addon"] = "BGDefender"
@@ -364,10 +368,6 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 			["buttonText"] = "Zygor",
 			["addon"] = "ZygorGuidesViewer"
 		},
-		["BPTSkin"] = {
-			["buttonText"] = "Balance Power Tracker",
-			["addon"] = "BalancePowerTracker"
-		},
 	}
 	--local function CreateButton(name,buttonText,addon,option,x,y)
 	function pairsByKeys (t, f)
@@ -406,7 +406,10 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		},
 		["UISkinMinimap"] = {
 			["buttonText"] = "Square Minimap Buttons"
-		}
+		},
+		["DBMSkinHalf"] = {
+			["buttonText"] = "DBM Half-Bar Skin"
+		},
 	}
 
 	curY = 1
@@ -421,7 +424,7 @@ if IsAddOnLoaded("ElvUI") then
 	-- ElvUI Only
 	SkinOptions2.text2 = SkinOptions2:CreateFontString(nil, "OVERLAY")
 	SkinOptions2.text2:SetFont(UIFont, 14, "OUTLINE")
-	SkinOptions2.text2:SetPoint("TOP", SkinOptions2, 0, -82)
+	SkinOptions2.text2:SetPoint("TOP", SkinOptions2, 0, -107)
 	SkinOptions2.text2:SetText("|cff1784d1ElvUI|r Only Options")
 
 	local ElvSkins2 = {
@@ -444,7 +447,7 @@ if IsAddOnLoaded("ElvUI") then
 		},
 	}
 
-	curY = 4
+	curY = 5
 	for skin,options in pairsByKeys(ElvSkins2) do
 		local addon = options.addon
 		local buttonText = options.buttonText or addon

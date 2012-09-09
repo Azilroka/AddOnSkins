@@ -18,7 +18,7 @@ end
 ----------------------------------------
 -- Loot auto confirm
 ----------------------------------------
-if (LootConfirm == "True") then
+if (LootConfirm == "Enabled") then
 
 local LootConfirmer = CreateFrame("Frame")
 LootConfirmer:RegisterEvent("CONFIRM_DISENCHANT_ROLL");

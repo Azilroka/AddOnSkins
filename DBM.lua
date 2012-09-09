@@ -61,9 +61,10 @@ local function LoadSkin()
 					if bar.enlarged then tbar:Width(bar.owner.options.HugeWidth) else tbar:SetWidth(bar.owner.options.Width) end
 
 					if not frame.styled then
-						frame:SetScale(1)
+						--frame:SetScale(1)
 						frame.SetScale=s.dummy
 						frame:SetHeight(buttonsize)
+						if (UISkinOptions.DBMSkinHalf == "Enabled") then frame:SetHeight(buttonsize/3) end
 						frame:SetTemplate("Transparent")
 						frame.styled=true
 					end
@@ -95,17 +96,17 @@ local function LoadSkin()
 						texture.styled=true
 					end
 					
-					tbar:SetStatusBarTexture(c["media"].normTex)
 					if not tbar.styled then
+						tbar:SetStatusBarTexture(c["media"].normTex)
 						tbar:Point("TOPLEFT", frame, "TOPLEFT", 2, -2)
 						tbar:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
-						
 						tbar.styled=true
 					end
 
 					if not name.styled then
 						name:ClearAllPoints()
 						name:Point("LEFT", frame, "LEFT", 4, 0)
+						if (UISkinOptions.DBMSkinHalf == "Enabled") then name:Point("BOTTOMLEFT", frame, "TOPLEFT", 0, 4) end
 						name:SetWidth(165)
 						name:SetHeight(8)
 						if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
@@ -120,6 +121,7 @@ local function LoadSkin()
 					if not timer.styled then	
 						timer:ClearAllPoints()
 						timer:Point("RIGHT", frame, "RIGHT", -4, 0)
+						if (UISkinOptions.DBMSkinHalf == "Enabled") then timer:Point("BOTTOMRIGHT", frame, "TOPRIGHT", -1, 2) end
 						if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
 						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(nil, 12, 'OUTLINE') end
 						if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
@@ -190,6 +192,7 @@ local function LoadSkin()
 
 			if not bar.styled then
 				bar:SetHeight(buttonsize)
+				if (UISkinOptions.DBMSkinHalf == "Enabled") then bar:SetHeight(buttonsize/3) end
 				bar:SetTemplate("Transparent")
 				background:SetNormalTexture(nil)
 				bar.styled=true
@@ -206,6 +209,7 @@ local function LoadSkin()
 			if not name.styled then
 				name:ClearAllPoints()
 				name:Point("LEFT", bar, "LEFT", 4, 0)
+				if (UISkinOptions.DBMSkinHalf == "Enabled") then name:Point("BOTTOMLEFT", bar, "TOPLEFT", 1, 4) end
 				if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
 				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(nil, 12, 'OUTLINE') end
 				if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
@@ -217,6 +221,7 @@ local function LoadSkin()
 			if not timer.styled then
 				timer:ClearAllPoints()
 				timer:Point("RIGHT", bar, "RIGHT", -4, 0)
+				if (UISkinOptions.DBMSkinHalf == "Enabled") then timer:Point("BOTTOMLEFT", bar, "TOPLEFT", 0, 2) end
 				if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
 				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(nil, 12, 'OUTLINE') end
 				if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end

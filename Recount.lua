@@ -23,7 +23,7 @@ local function SkinFrame(frame)
 	frame.TitleBackground:SetPoint("TOP", 0)
 	frame.TitleBackground:SetPoint("LEFT", 0)
 	frame.TitleBackground:SetPoint("RIGHT", 0)
-	frame.TitleBackground:SetHeight(23)
+	frame.TitleBackground:SetHeight(24)
 	frame.TitleBackground:SetTemplate("Transparent")
 	frame.Title:SetParent(frame.TitleBackground)
 	frame.Title:ClearAllPoints()
@@ -56,7 +56,7 @@ local function SkinMainFrame(frame)
 	frame.TitleBackground:SetPoint("TOP", frame, "TOP", 0, -7)
 	frame.TitleBackground:SetPoint("LEFT", 0)
 	frame.TitleBackground:SetPoint("RIGHT", 0)
-	frame.TitleBackground:SetHeight(23)
+	frame.TitleBackground:SetHeight(24)
 	frame.TitleBackground:SetTemplate("Transparent")
 	frame.Title:SetParent(frame.TitleBackground)
 	frame.Title:ClearAllPoints()
@@ -267,6 +267,11 @@ StaticPopupDialogs["RECOUNT_RELOADUI"] = {
 
 function EmbedRecount()
 	UISkinOptions.EmbedRecount = "Enabled"
+	if (UISkinOptions.EmbedOoC == "Enabled") then
+		if (UISkinOptions.EmbedRecount == "Enabled") then
+			Recount_MainWindow:Hide()
+		end
+	end
 	Recount:LockWindows(true)
 	Recount_MainWindow:ClearAllPoints()
 	Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 7)

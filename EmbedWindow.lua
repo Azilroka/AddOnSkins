@@ -32,11 +32,18 @@ if event == "PLAYER_ENTERING_WORLD" then
 		local E, L, V, P, G, DF = unpack(ElvUI)
 		RightChatToggleButton:SetScript("OnClick", function(self, btn)
 				if btn == 'RightButton' then
-				if (IsAddOnLoaded("Recount") and (UISkinOptions.EmbedRecount == "Enabled")) then
+				if IsAddOnLoaded("Recount") and ((UISkinOptions.EmbedRecount == "Enabled") or (UISkinOptions.EmbedRO == "Enabled")) then
 					ToggleFrame(Recount_MainWindow)
 				end
-				if (IsAddOnLoaded("Skada") and (UISkinOptions.EmbedSkada == "Enabled")) then
+				if IsAddOnLoaded("Skada") and ((UISkinOptions.EmbedSkada == "Enabled")) then
 					Skada:ToggleWindow()
+				end
+				if IsAddOnLoaded("Omen") and ((UISkinOptions.EmbedOmen == "Enabled") or (UISkinOptions.EmbedRO == "Enabled")) then
+					if OmenBarList:IsShown() then
+						OmenBarList:Hide()
+					else
+						OmenBarList:Show()
+					end
 				end
 			else
 			if c.db[self.parent:GetName()..'Faded'] then
@@ -92,6 +99,9 @@ if event == "PLAYER_ENTERING_WORLD" then
 			RecountEmbedButton.text:SetText("Recount : |cff00ff00Enabled|r")
 			SkadaEmbedButton.text:SetText("Skada : |cffff2020Disabled|r")
 		end
+		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
+		if not IsAddOnLoaded("Skada") then SkadaEmbedButton:Disable() SkadaEmbedButton.text:SetText("|cFF808080Skada Not Detected|r") end
+		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
 	end)
 	SkadaEmbedButton = CreateFrame("Button", "SkadaEmbedButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	SkadaEmbedButton:SetPoint("TOPRIGHT", -10, -50)
@@ -118,7 +128,9 @@ if event == "PLAYER_ENTERING_WORLD" then
 			RecountEmbedButton.text:SetText("Recount : |cffff2020Disabled|r")
 			SkadaEmbedButton.text:SetText("Skada : |cff00ff00Enabled|r")
 		end
-
+		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
+		if not IsAddOnLoaded("Skada") then SkadaEmbedButton:Disable() SkadaEmbedButton.text:SetText("|cFF808080Skada Not Detected|r") end
+		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
 	end)
 	RecountEmbedBackdropButton = CreateFrame("Button", "RecountEmbedBackdropButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	RecountEmbedBackdropButton:SetPoint("TOPLEFT", 10, -80)
@@ -185,6 +197,8 @@ if event == "PLAYER_ENTERING_WORLD" then
 	EmbedROButton.text:SetPoint("CENTER", EmbedROButton, 0, 0)
 	if (UISkinOptions.EmbedRO == "Enabled") then EmbedROButton.text:SetText("Recount & Omen : |cff00ff00Enabled|r") end
 	if (UISkinOptions.EmbedRO == "Disabled") then EmbedROButton.text:SetText("Recount & Omen : |cffff2020Disabled|r") end
+	if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") end
+	if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") end
 	EmbedROButton:SetScript("OnClick", function()
 		if (UISkinOptions.EmbedRO == "Enabled") then
 			UISkinOptions.EmbedRO = "Disabled"
@@ -200,6 +214,9 @@ if event == "PLAYER_ENTERING_WORLD" then
 			SkadaEmbedButton.text:SetText("Skada : |cffff2020Disabled|r")
 			EmbedROButton.text:SetText("Recount & Omen : |cff00ff00Enabled|r")
 		end
+		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
+		if not IsAddOnLoaded("Skada") then SkadaEmbedButton:Disable() SkadaEmbedButton.text:SetText("|cFF808080Skada Not Detected|r") end
+		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
 	end)
 
 	EmbedOmenButton = CreateFrame("Button", "EmbedOmenButton", EmbeddingWindow, "UIPanelButtonTemplate")
@@ -227,6 +244,9 @@ if event == "PLAYER_ENTERING_WORLD" then
 			EmbedROButton.text:SetText("Recount & Omen : |cffff2020Disabled|r")
 			EmbedOmenButton.text:SetText("Omen : |cff00ff00Enabled|r")
 		end
+		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
+		if not IsAddOnLoaded("Skada") then SkadaEmbedButton:Disable() SkadaEmbedButton.text:SetText("|cFF808080Skada Not Detected|r") end
+		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
 	end)
 	CloseEmbedWindowButton = CreateFrame("Button", "CloseEmbedWindowButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	CloseEmbedWindowButton:SetPoint("TOPRIGHT", -10, -110)
@@ -326,6 +346,12 @@ end
 function EmbedRecountOmen()
 		if not IsAddOnLoaded("Omen") then UISkinOptions.EmbedRO = "Disabled" return end
 		if not IsAddOnLoaded("Recount") then UISkinOptions.EmbedRO = "Disabled" return end
+	if (UISkinOptions.EmbedOoC == "Enabled") then
+		if (UISkinOptions.EmbedRO == "Enabled") then
+			Recount_MainWindow:Hide()
+			OmenBarList:Hide()
+		end
+	end
 		OmenTitle:Kill()
 		Omen.db.profile.Locked = true
 		Omen:UpdateGrips()
@@ -350,6 +376,8 @@ function EmbedRecountOmen()
 					end
 				end
 		end
+		OmenBarList:StripTextures()
+		OmenBarList:SetTemplate("Default")
 		OmenAnchor:ClearAllPoints()
 		OmenAnchor:SetFrameStrata("MEDIUM")
 		Recount:LockWindows(true)

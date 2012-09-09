@@ -2,6 +2,11 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 
 function EmbedOmen()
 	if not IsAddOnLoaded("Omen") then UISkinOptions.EmbedOmen = "Disabled" return end
+	if (UISkinOptions.EmbedOoC == "Enabled") then
+		if (UISkinOptions.EmbedOmen == "Enabled") then
+			OmenBarList:Hide()
+		end
+	end
 		Omen.db.profile.Locked = true
 		Omen:UpdateGrips()
 		Omen.UpdateGrips = function(...)
@@ -26,6 +31,8 @@ function EmbedOmen()
 				end
 		end
 		OmenTitle:Kill()
+		OmenBarList:StripTextures()
+		OmenBarList:SetTemplate("Default")
 		OmenAnchor:ClearAllPoints()
 		OmenAnchor:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 16)
 
