@@ -3,7 +3,7 @@
 ## Version: 2.1D
 ## Author: See Credits
 ## OptionalDeps: Tukui, ElvUI, Ace3, ElvUI_SLE
-## SavedVariables: LootConfirm, UISkinOptions, CBEnableSpecialBars, CBBar2and3Width, CBBar2and3Position, CBShowButtonPosition, TPEnableSpecialBars, TPBar2and3Width, TPBar2and3Position, TPShowButtonPosition
+## SavedVariables: UISkinOptions, CBEnableSpecialBars, CBBar2and3Width, CBBar2and3Position, CBShowButtonPosition, TPEnableSpecialBars, TPBar2and3Width, TPBar2and3Position, TPShowButtonPosition
 ## X-Embeds: Ace3
 
 embeds.xml
@@ -37,6 +37,7 @@ EnergyWatch.lua
 EPGP.lua
 ExtVendor.lua
 Factionizer.lua
+FlightMap.lua
 KarniCrap.lua
 Lightheaded.lua
 LootCouncilLite.lua
