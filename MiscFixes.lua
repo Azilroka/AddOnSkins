@@ -26,7 +26,7 @@ LootConfirmer:RegisterEvent("CONFIRM_LOOT_ROLL");
 LootConfirmer:RegisterEvent("LOOT_OPENED");
 LootConfirmer:SetScript("OnEvent",
 	function(self, event, ...)
-		if (UISkinOptions.LootConfirmer == "Enabled") then
+		if (cCheckOption("LootConfirmer")) then
 		if event == "PLAYER_ENTERING_WORLD" then
 			StaticPopupDialogs["CONFIRM_LOOT_ROLL"] = nil
 			StaticPopupDialogs["LOOT_BIND"] = nil
