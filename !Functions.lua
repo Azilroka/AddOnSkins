@@ -154,7 +154,7 @@ function cDesaturate(f, point)
 end
 
 function cCheckOption(optionName)
-	if ElvUI then
+	if IsAddOnLoaded("ElvUI") then
 		local c = UIPackageSkinFuncs.c
 		return c.db.skins[optionName]
 	else
@@ -164,6 +164,7 @@ end
 
 function cRegisterSkin(skinName,skinFunc,...)
 	if IsAddOnLoaded("Tukui") then
+		print(cCheckOption(skinName))
 		if not cCheckOption(skinName) then return end
 
 		local events = ...
