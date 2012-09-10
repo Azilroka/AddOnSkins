@@ -9,12 +9,8 @@ local function desat(self, event, ...)
 	end
 end
 
-local SkinFactionizer = CreateFrame("Frame")
-	SkinFactionizer:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinFactionizer:SetScript("OnEvent", function(self, event, addon)
-	if (UISkinOptions.FactionizerSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
+local name = "FactionizerSkin"
+local function SkinFactionizer(self)
 	local StripAllTextures = {
                 "FIZ_ReputationDetailFrame",
                 "FIZ_OptionsFrame",
@@ -105,4 +101,6 @@ local SkinFactionizer = CreateFrame("Frame")
 	FIZ_SupressNoneGlobalButton:Point("TOPLEFT",  FIZ_SupressNoneFactionButton, "BOTTOMLEFT", 0, -5)
 	FIZ_ReputationDetailFrame:Point("TOPLEFT",   ReputationFrame, "TOPRIGHT", 5, 0)
 	FIZ_OptionsFrame:Point("TOPLEFT",   ReputationFrame, "TOPRIGHT", 5, 0)
-end)
+end
+
+cRegisterSkin(name,SkinFactionizer)

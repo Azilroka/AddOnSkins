@@ -42,12 +42,8 @@ local function SkinOptions(self, event, ...)-- Skin the Options Frame
 	end
 end
 
-local SkinLightHeaded = CreateFrame("Frame")
-	SkinLightHeaded:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinLightHeaded:SetScript("OnEvent", function(self, event, addon)
-	if (UISkinOptions.LightheadedSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
+local name = "LightheadedSkin"
+local function SkinLightHeaded(self)
 	cSkinFrame(LightHeadedFrame)
 	cSkinFrame(LightHeadedFrameSub)
 	cSkinFrame(LightHeadedSearchBox)
@@ -79,4 +75,6 @@ local SkinLightHeaded = CreateFrame("Frame")
 	LH_OnLoad:SetScript("OnUpdate", DoDis)
 
 	local LH_Options = _G["LightHeaded_Panel"]
-end)
+end
+
+cRegisterSkin(name,SkinLightHeaded)

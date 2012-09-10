@@ -1,5 +1,4 @@
 if not IsAddOnLoaded("Tukui") then return end
-local addon,ns = ...
 UISkinOptions = {}
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c

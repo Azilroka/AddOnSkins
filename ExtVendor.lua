@@ -1,10 +1,6 @@
 if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("ExtVendor") then return end
-local SkinExtVendor = CreateFrame("Frame")
-	SkinExtVendor:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinExtVendor:SetScript("OnEvent", function(self)
-	if (UISkinOptions.ExtVendorSkin == "Disabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
+local name = "ExtVendorSkin"
+local function SkinExtVendor(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 	if IsAddOnLoaded("ElvUI") then
@@ -39,5 +35,7 @@ local SkinExtVendor = CreateFrame("Frame")
 
 	end
 	MerchantFrame:Width(690)
-	end)
+end
+
+cRegisterSkin(name,SkinExtVendor)
 
