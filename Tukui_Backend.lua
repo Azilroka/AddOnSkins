@@ -280,6 +280,10 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		["ArchySkin"] = {
 			["addon"] = "Archy"
 		},
+		['ArhSkin'] = {
+			["buttonText"] = "ArchaeologyHelper",
+			["addon"] = "Arh"
+		},
 		["ArkInventorySkin"] = {
 			["addon"] = "ArkInventory"
 		},

@@ -17,6 +17,7 @@ ACP.lua
 AdiBags.lua
 Altoholic.lua
 Archy.lua
+Arh.lua
 ArkInventory.lua
 AtlasLoot.lua
 ATSW.lua

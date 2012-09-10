@@ -16,6 +16,7 @@ P["skins"] = {
 	["AdiBagsSkin"] = true,
 	["AltoholicSkin"] = true,
 	["ArchySkin"] = true,
+	["ArhSkin"] = true,
 	["ArkInventorySkin"] = true,
 	["AtlasLootSkin"] = true,
 	["ATSWSkin"] = true,
@@ -161,6 +162,10 @@ local Skins = {
 	},
 	["ArchySkin"] = {
 		["addon"] = "Archy"
+	},
+	['ArhSkin'] = {
+		["buttonText"] = "ArchaeologyHelper",
+		["addon"] = "Arh"
 	},
 	["ArkInventorySkin"] = {
 		["addon"] = "ArkInventory"
