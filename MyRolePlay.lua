@@ -1,117 +1,123 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MyRolePlay") then return end
 
 hooksecurefunc(mrp, "CreateBrowseFrame", function()
-	if (cCheckOption("MyRolePlaySkin")) then return end
-	local bg = CreateFrame("Frame", nil, MyRolePlayBrowseFrame)
-	bg:SetPoint("TOPLEFT")
-	bg:SetPoint("BOTTOMRIGHT")
-	bg:SetFrameLevel(MyRolePlayBrowseFrame:GetFrameLevel()-1)
-	bg:SetTemplate("Transparent")
+	if (cCheckOption("MyRolePlaySkin")) then 
+		local bg = CreateFrame("Frame", nil, MyRolePlayBrowseFrame)
+		bg:SetPoint("TOPLEFT")
+		bg:SetPoint("BOTTOMRIGHT")
+		bg:SetFrameLevel(MyRolePlayBrowseFrame:GetFrameLevel()-1)
+		bg:SetTemplate("Transparent")
 
-	MyRolePlayBrowseFrame:DisableDrawLayer("BACKGROUND")
-	MyRolePlayBrowseFrame:DisableDrawLayer("BORDER")
-	MyRolePlayBrowseFramePortraitFrame:Hide()
-	MyRolePlayBrowseFrameTopBorder:Hide()
-	MyRolePlayBrowseFrameTopRightCorner:Hide()
-	MyRolePlayBrowseFrameInset:DisableDrawLayer("BORDER")
-	MyRolePlayBrowseFrameInsetBg:Hide()
+		MyRolePlayBrowseFrame:DisableDrawLayer("BACKGROUND")
+		MyRolePlayBrowseFrame:DisableDrawLayer("BORDER")
+		MyRolePlayBrowseFramePortraitFrame:Hide()
+		MyRolePlayBrowseFrameTopBorder:Hide()
+		MyRolePlayBrowseFrameTopRightCorner:Hide()
+		MyRolePlayBrowseFrameInset:DisableDrawLayer("BORDER")
+		MyRolePlayBrowseFrameInsetBg:Hide()
 
-	cSkinTab(MyRolePlayBrowseFrameTab1)
-	cSkinTab(MyRolePlayBrowseFrameTab2)
+		cSkinTab(MyRolePlayBrowseFrameTab1)
+		cSkinTab(MyRolePlayBrowseFrameTab2)
 
-	MyRolePlayBrowseFramePortrait:Hide()
+		MyRolePlayBrowseFramePortrait:Hide()
 
-	cSkinCloseButton(MyRolePlayBrowseFrameCloseButton)
-	cSkinScrollBar(MyRolePlayBrowseFrameAScrollFrameScrollBar)
-	cSkinScrollBar(MyRolePlayBrowseFrameBScrollFrameScrollBar)
+		cSkinCloseButton(MyRolePlayBrowseFrameCloseButton)
+		cSkinScrollBar(MyRolePlayBrowseFrameAScrollFrameScrollBar)
+		cSkinScrollBar(MyRolePlayBrowseFrameBScrollFrameScrollBar)
+	end
 end)
 
 hooksecurefunc(mrp, "AddMRPTab", function()
-	if (cCheckOption("MyRolePlaySkin")) then return end
-	cSkinTab(CharacterFrameTab5)
+	if (cCheckOption("MyRolePlaySkin")) then
+		cSkinTab(CharacterFrameTab5)
+	end
 end)
 
 hooksecurefunc(mrp, "CreateEditFrames", function()
-	if (cCheckOption("MyRolePlaySkin")) then return end
-	MyRolePlayMultiEditFrame:DisableDrawLayer("BORDER")
-	MyRolePlayMultiEditFrameBg:Hide()
-	MyRolePlayMultiEditFrameScrollFrameTop:Hide()
-	MyRolePlayMultiEditFrameScrollFrameBottom:Hide()
+	if (cCheckOption("MyRolePlaySkin")) then
+		MyRolePlayMultiEditFrame:DisableDrawLayer("BORDER")
+		MyRolePlayMultiEditFrameBg:Hide()
+		MyRolePlayMultiEditFrameScrollFrameTop:Hide()
+		MyRolePlayMultiEditFrameScrollFrameBottom:Hide()
 
-	MyRolePlayCharacterFrame.ver:SetPoint("TOP", CharacterFrameInset, "TOP", -110, 17)
-	cSkinButton(MyRolePlayMultiEditFrameOK)
-	cSkinButton(MyRolePlayMultiEditFrameCancel)
-	cSkinButton(MyRolePlayMultiEditFrameInherit)
-	cSkinButton(MyRolePlayComboEditFrameOK)
-	cSkinButton(MyRolePlayComboEditFrameCancel)
-	cSkinButton(MyRolePlayComboEditFrameInherit)
-	cSkinButton(MyRolePlayCharacterFrame_NewProfileButton)
-	cSkinButton(MyRolePlayCharacterFrame_RenProfileButton)
-	cSkinButton(MyRolePlayCharacterFrame_DelProfileButton)
-	cSkinButton(MyRolePlayEditFrameOK)
-	cSkinButton(MyRolePlayEditFrameCancel)
-	cSkinButton(MyRolePlayEditFrameInherit)
-	MyRolePlayCharacterFrame_NewProfileButton:Point("LEFT", MyRolePlayCharacterFrame_ProfileComboBox_Button, "RIGHT", 37, 0)
-	MyRolePlayEditFrame.editbox:Height(25)
-	MyRolePlayEditFrame.editbox:SetBackdrop({
-				bgFile = "",
-				edgeFile = "",
-				tile = true,
-				tileSize = 0,
-				edgeSize = 0,
-				insets = { left = 0, right = 0, top = 0, bottom = 0	},
+		MyRolePlayCharacterFrame.ver:SetPoint("TOP", CharacterFrameInset, "TOP", -110, 17)
+		cSkinButton(MyRolePlayMultiEditFrameOK)
+		cSkinButton(MyRolePlayMultiEditFrameCancel)
+		cSkinButton(MyRolePlayMultiEditFrameInherit)
+		cSkinButton(MyRolePlayComboEditFrameOK)
+		cSkinButton(MyRolePlayComboEditFrameCancel)
+		cSkinButton(MyRolePlayComboEditFrameInherit)
+		cSkinButton(MyRolePlayCharacterFrame_NewProfileButton)
+		cSkinButton(MyRolePlayCharacterFrame_RenProfileButton)
+		cSkinButton(MyRolePlayCharacterFrame_DelProfileButton)
+		cSkinButton(MyRolePlayEditFrameOK)
+		cSkinButton(MyRolePlayEditFrameCancel)
+		cSkinButton(MyRolePlayEditFrameInherit)
+		MyRolePlayCharacterFrame_NewProfileButton:Point("LEFT", MyRolePlayCharacterFrame_ProfileComboBox_Button, "RIGHT", 37, 0)
+		MyRolePlayEditFrame.editbox:Height(25)
+		MyRolePlayEditFrame.editbox:SetBackdrop({
+			bgFile = "",
+			edgeFile = "",
+			tile = true,
+			tileSize = 0,
+			edgeSize = 0,
+			insets = { left = 0, right = 0, top = 0, bottom = 0	},
 		} )
-	MyRolePlayEditFrame.editbox:CreateBackdrop()
-	MyRolePlayCharacterFrame_ProfileComboBox:SetPoint("TOP", CharacterFrameInset, "TOP", 0, 22)
-	MyRolePlayCharacterFrame_ProfileComboBox.text:SetPoint("LEFT", MyRolePlayCharacterFrame_ProfileComboBox, "LEFT", 8, 0)
-	cSkinNextPrevButton(MyRolePlayCharacterFrame_ProfileComboBox_Button)
-	MyRolePlayCharacterFrame_ProfileComboBox:StripTextures()
-	MyRolePlayCharacterFrame_ProfileComboBox:CreateBackdrop()
-	MyRolePlayCharacterFrame_ProfileComboBox:Size(100,20)
-	MyRolePlayCharacterFrame_ProfileComboBox_Button:ClearAllPoints()
-	MyRolePlayCharacterFrame_ProfileComboBox_Button:SetPoint("RIGHT", MyRolePlayCharacterFrame_ProfileComboBox, "RIGHT", 0 , 0)
---	MyRolePlayComboEditFrameComboBox:StripTextures()
---	MyRolePlayComboEditFrameComboBox:CreateBackdrop()
---	cSkinEditBox(MyRolePlayComboEditFrameComboBox)
---	MyRolePlayComboEditFrameComboBox:Size(100,20)
---	MyRolePlayComboEditFrameComboBoxButton:ClearAllPoints()
---	MyRolePlayComboEditFrameComboBoxButton:SetPoint("RIGHT", MyRolePlayComboEditFrameComboBox, "RIGHT", 0 , 0)
---	cSkinNextPrevButton(MyRolePlayComboEditFrameComboBoxButton)
-	cSkinScrollBar(MyRolePlayMultiEditFrameScrollFrameScrollBar)
+
+		MyRolePlayEditFrame.editbox:CreateBackdrop()
+		MyRolePlayCharacterFrame_ProfileComboBox:SetPoint("TOP", CharacterFrameInset, "TOP", 0, 22)
+		MyRolePlayCharacterFrame_ProfileComboBox.text:SetPoint("LEFT", MyRolePlayCharacterFrame_ProfileComboBox, "LEFT", 8, 0)
+		cSkinNextPrevButton(MyRolePlayCharacterFrame_ProfileComboBox_Button)
+		MyRolePlayCharacterFrame_ProfileComboBox:StripTextures()
+		MyRolePlayCharacterFrame_ProfileComboBox:CreateBackdrop()
+		MyRolePlayCharacterFrame_ProfileComboBox:Size(100,20)
+		MyRolePlayCharacterFrame_ProfileComboBox_Button:ClearAllPoints()
+		MyRolePlayCharacterFrame_ProfileComboBox_Button:SetPoint("RIGHT", MyRolePlayCharacterFrame_ProfileComboBox, "RIGHT", 0 , 0)
+	--	MyRolePlayComboEditFrameComboBox:StripTextures()
+	--	MyRolePlayComboEditFrameComboBox:CreateBackdrop()
+	--	cSkinEditBox(MyRolePlayComboEditFrameComboBox)
+	--	MyRolePlayComboEditFrameComboBox:Size(100,20)
+	--	MyRolePlayComboEditFrameComboBoxButton:ClearAllPoints()
+	--	MyRolePlayComboEditFrameComboBoxButton:SetPoint("RIGHT", MyRolePlayComboEditFrameComboBox, "RIGHT", 0 , 0)
+	--	cSkinNextPrevButton(MyRolePlayComboEditFrameComboBoxButton)
+		cSkinScrollBar(MyRolePlayMultiEditFrameScrollFrameScrollBar)
+	end
 end)
 
 hooksecurefunc(mrp, "CreateOptionsPanel", function()
-	if (cCheckOption("MyRolePlaySkin")) then return end
-	cSkinCheckBox(MyRolePlayOptionsPanel_Enable)
-	cSkinCheckBox(MyRolePlayOptionsPanel_MRPButton)
-	cSkinCheckBox(MyRolePlayOptionsPanel_RPChatName)
-	cSkinCheckBox(MyRolePlayOptionsPanel_Biog)
-	cSkinCheckBox(MyRolePlayOptionsPanel_FormAC)
-	cSkinCheckBox(MyRolePlayOptionsPanel_EquipAC)
-	cSkinDropDownBox(MyRolePlayOptionsPanel_TTStyle)
-	cSkinDropDownBox(MyRolePlayOptionsPanel_HeightUnit)
-	cSkinDropDownBox(MyRolePlayOptionsPanel_WeightUnit)
+	if (cCheckOption("MyRolePlaySkin")) then
+		cSkinCheckBox(MyRolePlayOptionsPanel_Enable)
+		cSkinCheckBox(MyRolePlayOptionsPanel_MRPButton)
+		cSkinCheckBox(MyRolePlayOptionsPanel_RPChatName)
+		cSkinCheckBox(MyRolePlayOptionsPanel_Biog)
+		cSkinCheckBox(MyRolePlayOptionsPanel_FormAC)
+		cSkinCheckBox(MyRolePlayOptionsPanel_EquipAC)
+		cSkinDropDownBox(MyRolePlayOptionsPanel_TTStyle)
+		cSkinDropDownBox(MyRolePlayOptionsPanel_HeightUnit)
+		cSkinDropDownBox(MyRolePlayOptionsPanel_WeightUnit)
+	end
 end)
 
 local function reskinHeader(c, field)
-	if (cCheckOption("MyRolePlaySkin")) then return end
-	for i = 1, field:GetNumChildren() do
-		local f = select(i, field:GetChildren())
-		if not f.reskinned then
-			local s = UIPackageSkinFuncs.s
-			local z = UIPackageSkinFuncs.c
-			if IsAddOnLoaded("ElvUI") then f.h.SetBackdrop = z.noop end
-			if IsAddOnLoaded("Tukui") then f.h.SetBackdrop = s.dummy end
-			f:StripTextures(True)
-			f.h:CreateBackdrop()
-			f.h:StripTextures(True)
-			f.h.fs:SetPoint("TOPLEFT", f.h, "TOPLEFT", 0, 1)
+	if (cCheckOption("MyRolePlaySkin")) then
+		for i = 1, field:GetNumChildren() do
+			local f = select(i, field:GetChildren())
+			if not f.reskinned then
+				local s = UIPackageSkinFuncs.s
+				local z = UIPackageSkinFuncs.c
+				if IsAddOnLoaded("ElvUI") then f.h.SetBackdrop = z.noop end
+				if IsAddOnLoaded("Tukui") then f.h.SetBackdrop = s.dummy end
+				f:StripTextures(True)
+				f.h:CreateBackdrop()
+				f.h:StripTextures(True)
+				f.h.fs:SetPoint("TOPLEFT", f.h, "TOPLEFT", 0, 1)
 
-		if f.sep then
-			f.sep:SetAlpha(0)
-		end
+			if f.sep then
+				f.sep:SetAlpha(0)
+			end
 
-		f.reskinned = true
+			f.reskinned = true
+			end
 		end
 	end
 end
