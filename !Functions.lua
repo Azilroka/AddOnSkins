@@ -158,7 +158,6 @@ function cCheckOption(optionName)
 		local c = UIPackageSkinFuncs.c
 		return c.db.skins[optionName]
 	else
-		print(optionName,UISkinOptions[optionName],UISkinOptions[optionName] == "Enabled")
 		return UISkinOptions[optionName] == "Enabled"
 	end
 end
