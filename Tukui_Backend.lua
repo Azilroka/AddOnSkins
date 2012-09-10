@@ -23,7 +23,7 @@ XS.Init = function(self)
 	for skin,funcs in pairs(XS.skins) do
 		if cCheckOption(skin) then
 			for func,_ in pairs(funcs) do
-				func(f,event)
+				func(f,"PLAYER_ENTERING_WORLD")
 			end
 		end
 	end
