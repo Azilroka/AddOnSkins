@@ -20,22 +20,18 @@ XS.Init = function(self)
 			self:RegisterSkin(skin,data.func,data.events)
 		end
 	end
-	f:RegisterEvent("PLAYER_ENTERING_WORLD")
-	f:SetScript("OnEvent", function(self,event)
-		if event == "PLAYER_ENTERING_WORLD" then
-			for skin,funcs in pairs(XS.skins) do
-				if cCheckOption(skin) then
-					for func,_ in pairs(funcs) do
-						func(f,event)
-					end
-				end
+	for skin,funcs in pairs(XS.skins) do
+		if cCheckOption(skin) then
+			for func,_ in pairs(funcs) do
+				func(f,event)
 			end
-		else
-			for skin,funcs in pairs(XS.skins) do
-				if cCheckOption(skin) and XS.events[event][skin] then
-					for func,_ in pairs(funcs) do
-						func(f,event)
-					end
+		end
+	end
+	f:SetScript("OnEvent", function(self,event)
+		for skin,funcs in pairs(XS.skins) do
+			if cCheckOption(skin) and XS.events[event][skin] then
+				for func,_ in pairs(funcs) do
+					func(f,event)
 				end
 			end
 		end

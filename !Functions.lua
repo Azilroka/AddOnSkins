@@ -158,6 +158,7 @@ function cCheckOption(optionName)
 		local c = UIPackageSkinFuncs.c
 		return c.db.skins[optionName]
 	else
+		print(optionName,UISkinOptions[optionName],UISkinOptions[optionName] == "Enabled")
 		return UISkinOptions[optionName] == "Enabled"
 	end
 end
@@ -171,7 +172,6 @@ function cRegisterSkin(skinName,skinFunc,...)
 		local c = UIPackageSkinFuncs.c
 		XS = c:GetModule("ExtraSkins")
 	end
-	print(skinName)
 	local registerMe = { func = skinFunc, events = events or {} }
 	if not XS.register[skinName] then XS.register[skinName] = {} end
 	XS.register[skinName][skinFunc] = registerMe
