@@ -12,8 +12,6 @@ XS.register = {}
 UIPackageSkinFuncs.x = XS
 
 P["skins"] = {
-	["RecountBackdrop"] = true,
-	["SkadaBackdrop"] = true,
 	["ACPSkin"] = true,
 	["AdiBagsSkin"] = true,
 	["AltoholicSkin"] = true,
@@ -65,10 +63,8 @@ P["skins"] = {
 	["RaidInviteOrganizerSkin"] = true,
 	["RaidBuffStatusSkin"] = true,
 	["RecountSkin"] = true,
-	["EmbedRecount"] = false,
 	["SearingPlasmaTrackerSkin"] = true,
 	["SkadaSkin"] = true,
-	["EmbedSkada"] = false,
 	["SkilletSkin"] = true,
 	["SpineCounterSkin"] = true,
 	["SpySkin"] = true,
@@ -83,6 +79,13 @@ P["skins"] = {
 	["UISkinMinimap"] = true,
 	["LootConfirmer"] = true,
 	["EmbedOoC"] = false,
+	["EmbedRecount"] = false,
+	["EmbedSkada"] = false,
+	["EmbedOmen"] = false,
+	["EmbedRO"] = false,
+	["RecountBackdrop"] = true,
+	["SkadaBackdrop"] = true,
+
 }
 
 function XS:Initialize()

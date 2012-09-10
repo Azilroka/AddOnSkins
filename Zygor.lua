@@ -1,11 +1,7 @@
 LoadAddOn("ZygorGuidesViewer")
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("ZygorGuidesViewer") then return end
-local SkinZygor = CreateFrame("Frame")
-	SkinZygor:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinZygor:SetScript("OnEvent", function(self)
-	if (UISkinOptions.ZygorSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
+local name = "ZygorSkin"
+local function SkinZygor(self)
 	ZygorGuidesViewerFrame:StripTextures(True)
 	ZygorGuidesViewerFrame_Border:StripTextures(True)
 	ZygorGuidesViewer_CreatureViewer:SetTemplate("Transparent")
@@ -27,4 +23,6 @@ local SkinZygor = CreateFrame("Frame")
 	ZygorGuidesViewerFrame_Border:HookScript("OnHide", function(self) self:StripTextures(True) end)
 	ZygorGuidesViewerFrame_Border:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 
-end)
+end
+
+cRegisterSkin(name,SkinZygor)

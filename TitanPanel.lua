@@ -14,11 +14,8 @@ local function SetEnabled(self, event, ...)
 				Titan_Bar__Display_AuxBar2:SetPoint("TOPLEFT", WorldFrame, "TOP", x, -y)		
 end
 
-local SkinTitanPanel = CreateFrame("Frame")
-	SkinTitanPanel:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinTitanPanel:SetScript("OnEvent", function(self, event, addon)
-	if not IsAddOnLoaded("Titan") then return end
-
+local name = "TitanPanelSkin"
+local function SkinTitanPanel(self)
 		Titan_Bar__Display_Bar:StripTextures()
 		Titan_Bar__Display_Bar:SetTemplate("Default")
 
@@ -286,4 +283,6 @@ local AceGUI = LibStub("AceGUI-3.0")
 	function SlashCmdList.TPSKIN(msg, editbox)
 		TP_Skin_OptionsFrame:Show()
 	end
-end)
+end
+
+cRegisterSkin(name,SkinTitanPanel)
