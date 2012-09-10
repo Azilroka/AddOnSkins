@@ -287,7 +287,7 @@ if IsAddOnLoaded("ElvUI") then
 	s:RegisterSkin('DBM-GUI', LoadSkinOptions)
 end
 
-local Init = function()
+--local Init = function()
 	local name = "DBMSkin"
 	local function SkinDBM(self)
 		local s = UIPackageSkinFuncs.s
@@ -303,8 +303,8 @@ local Init = function()
 		if IsAddOnLoaded("ElvUI") then DBT_SavedOptions["DBM"].Font = "ElvUI Font" end
 	end
 	cRegisterSkin(name,SkinDBM)
-end
+--end
 
-local loadOptions = CreateFrame("Frame")
-loadOptions:RegisterEvent("PLAYER_LOGIN")
-loadOptions:SetScript("OnEvent", Init)
+--local loadOptions = CreateFrame("Frame")
+--loadOptions:RegisterEvent("PLAYER_ENTERING_WORLD")
+--loadOptions:SetScript("OnEvent", Init)
