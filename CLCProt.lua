@@ -84,16 +84,13 @@ local function LoadSkin()
 if (select(2, UnitClass("player")) ~= "PALADIN") then
 	return
 end
-local SkinCLCProt = CreateFrame("Frame")
-	SkinCLCProt:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinCLCProt:SetScript("OnEvent", function(self)
-	if (UISkinOptions.CLCProtSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	
-	local clcprot = LibStub("AceAddon-3.0"):GetAddon("clcprot")
-	clcprot.CreateButton = CreateButton
-	clcprot.UpdateButtonLayout = UpdateButtonLayout
-	end)
+	local name = "CLCProtSkin"
+	local function SkinCLCProt(self)
+		local clcprot = LibStub("AceAddon-3.0"):GetAddon("clcprot")
+		clcprot.CreateButton = CreateButton
+		clcprot.UpdateButtonLayout = UpdateButtonLayout
+	end
+	cRegisterSkin(name,SkinCLCProt)
 end
 
 s:RegisterSkin('CLCProt', LoadSkin)

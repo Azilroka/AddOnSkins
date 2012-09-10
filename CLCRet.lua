@@ -84,16 +84,11 @@ local function LoadSkin()
 if (select(2, UnitClass("player")) ~= "PALADIN") then
 	return
 end
-local SkinCLCRet = CreateFrame("Frame")
-	SkinCLCRet:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinCLCRet:SetScript("OnEvent", function(self)
-	if (UISkinOptions.CLCRetSkin ~= "Enabled") then return end
-	print("CLCRET SKINNING START")
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
-	local clcret = LibStub("AceAddon-3.0"):GetAddon("clcret")
-	clcret.CreateButton = CreateButton
-	clcret.UpdateButtonLayout = UpdateButtonLayout
-	end)
+	local name = "CLCRetSkin"
+	local function SkinCLCRet(self)
+		local clcret = LibStub("AceAddon-3.0"):GetAddon("clcret")
+		clcret.CreateButton = CreateButton
+		clcret.UpdateButtonLayout = UpdateButtonLayout
+	end
 end
 s:RegisterSkin('CLCRet', LoadSkin)

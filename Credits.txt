@@ -1,10 +1,13 @@
 Tukz and Elv for the amazing UI's of awesomeness.
 
-Main Functions = Camealion
+Main Functions = Camealion / Azilroka / Sortokk
+ElvUI Backend = Sortokk
 Altoholic = Azilroka
 Advanced Trade Skill Window = Outofammo / Blazeflack / Camealion / Azilroka
+Archy = Azilroka/Sortokk
 BuyEmAll = Azilroka
 Extended Vendor = Azilroka / Elv
+FlightMap = Sortokk
 Karni's Crap Filter = Azilroka
 Mage Nuggets = Azilroka
 MoveAnything = Konungr / Azilroka / Darth Predator

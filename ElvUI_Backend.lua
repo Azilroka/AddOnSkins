@@ -85,20 +85,30 @@ P["skins"] = {
 function XS:Initialize()
 	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
-	for skin,data in pairs(self.register) do
-		self:RegisterSkin(skin,data.func,data.events)
-	end
 	local f = CreateFrame("Frame",nil)
+
+	self.frame = f
+	for skin,alldata in pairs(self.register) do
+		for _,data in pairs(alldata) do
+			self:RegisterSkin(skin,data.func,data.events)
+		end
+	end
 	f:RegisterEvent("PLAYER_ENTERING_WORLD")
 	f:SetScript("OnEvent", function(self,event)
 		if event == "PLAYER_ENTERING_WORLD" then
-			for skin,func in pairs(XS.skins) do
-				if cCheckOption(skin) then func(f,event) end
+			for skin,funcs in pairs(XS.skins) do
+				if cCheckOption(skin) then
+					for func,_ in pairs(funcs) do
+						func(f,event)
+					end
+				end
 			end
 		else
-			for skin,func in pairs(XS.skin) do
-				if XS.events[skin] then
-					func(f,event)
+			for skin,funcs in pairs(XS.skins) do
+				if cCheckOption(skin) and XS.events[event][skin] then
+					for func,_ in pairs(funcs) do
+						func(f,event)
+					end
 				end
 			end
 		end
@@ -111,9 +121,11 @@ end
 
 function XS:RegisterSkin(skinName,func,...)
 	local events = ...
-	self.skins[skinName] = func
+	if not self.skins[skinName] then self.skins[skinName] = {} end
+	self.skins[skinName][func] = true
 	for i = 1,#events do
 		local event = select(i,events)
+		if not event then return end
 		if not self.events[event] then self.frame:RegisterEvent(event); self.events[event] = {} end
 		self.events[event][skinName] = true
 	end

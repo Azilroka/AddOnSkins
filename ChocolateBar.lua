@@ -1,10 +1,7 @@
 ﻿if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("ChocolateBar") then return end
 
-local SkinCB = CreateFrame("Frame")
-	SkinCB:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinCB:SetScript("OnEvent", function(self, event, addon)
-	if (UISkinOptions.ChocolateBarSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+local name = "ChocolateBarSkin"
+local function SkinCB(self)
 		for i = 1, 20 do   	
 		local f = _G["ChocolateBar"..i]
 			if f then
@@ -251,4 +248,6 @@ end
 	function SlashCmdList.CBSKIN(msg, editbox)
 		CB_Skin_OptionsFrame:Show()
 	end
-end)
+end
+
+cRegisterSkin(name,SkinCB)

@@ -169,40 +169,34 @@ end
 
 local function CLCInfo()
 	if not clcInfo then return; end
-local SkinCLCInfo = CreateFrame("Frame")
-	SkinCLCInfo:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinCLCInfo:SetScript("OnEvent", function(self)
-	if (UISkinOptions.CLCInfoSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
-	local mod = clcInfo.display['icons']
-	if not mod then return; end
-	mod.oldNew = mod.New
-	mod.New = New
-	end)
+	local name = 'CLCInfoSkin'
+	local function SkinCLCInfo(self)
+		local mod = clcInfo.display['icons']
+		if not mod then return; end
+		mod.oldNew = mod.New
+		mod.New = New
+	end
+	cRegisterSkin(name,SkinCLCInfo)
 end
 
 local function CLCInfo_Options()
 	local mod = clcInfo_Options
 	if not mod then return; end
-	local SkinCLCInfo2 = CreateFrame("Frame")
-	SkinCLCInfo2:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinCLCInfo2:SetScript("OnEvent", function(self)
-	if (UISkinOptions.CLCInfoSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
-	mod.OldLoadActiveTemplate = mod.LoadActiveTemplate
-	mod.LoadActiveTemplate = LoadActiveTemplate
-	
-	mod.OldUpdateGridList = mod.UpdateGridList
-	mod.UpdateGridList = UpdateGridList
-	
-	mod.OldUpdateIconList = mod.UpdateIconList
-	mod.UpdateIconList = UpdateIconList
-	
-	mod.OldUpdateMIconList = mod.UpdateMIconList
-	mod.UpdateMIconList = UpdateMIconList
-	end)
+	local name = 'CLCInfoSkin'
+	local function SkinCLCInfo2(self)
+		mod.OldLoadActiveTemplate = mod.LoadActiveTemplate
+		mod.LoadActiveTemplate = LoadActiveTemplate
+		
+		mod.OldUpdateGridList = mod.UpdateGridList
+		mod.UpdateGridList = UpdateGridList
+		
+		mod.OldUpdateIconList = mod.UpdateIconList
+		mod.UpdateIconList = UpdateIconList
+		
+		mod.OldUpdateMIconList = mod.UpdateMIconList
+		mod.UpdateMIconList = UpdateMIconList
+	end
+	cRegisterSkin(name,SkinCLCInfo2)
 end
 
 s:RegisterSkin('clcInfo_Options', CLCInfo_Options)

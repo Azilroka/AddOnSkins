@@ -170,7 +170,9 @@ function cRegisterSkin(skinName,skinFunc,...)
 		local Skin = CreateFrame("Frame")
 		Skin:RegisterEvent("PLAYER_ENTERING_WORLD")
 		for i = 1,#events do
-			Skin:RegisterEvent(select(i,events))
+			local event = select(i,events)
+			if not event then break end
+			Skin:RegisterEvent(event)
 		end
 		Skin:SetScript("OnEvent", function(self,event,addon)
 			skinFunc(self,event,addon)
@@ -183,7 +185,8 @@ function cRegisterSkin(skinName,skinFunc,...)
 		local XS = c:GetModule("ExtraSkins")
 		local events = ...
 		local registerMe = { func = skinFunc, events = events or {} }
-		XS.register[skinName] = registerMe
+		if not XS.register[skinName] then XS.register[skinName] = {} end
+		XS.register[skinName][skinFunc] = registerMe
 	end
 end
 

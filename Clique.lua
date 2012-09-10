@@ -1,9 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Clique") then return end
-local SkinClique = CreateFrame("Frame")
-	SkinClique:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinClique:SetScript("OnEvent", function(self)
-	if (UISkinOptions.CliqueSkin == "Disabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+local name = "CliqueSkin"
+local function SkinClique(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -96,4 +93,6 @@ local SkinClique = CreateFrame("Frame")
 	CliqueSpellTab.backdrop:SetAllPoints()
 	CliqueSpellTab:StyleButton(True)
 
-end)
+end
+
+cRegisterSkin(name,SkinClique)

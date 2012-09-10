@@ -21,12 +21,8 @@ local function OnLeave(Self)
   GameTooltip:Hide()
 end
 
-local SkinBGDefender = CreateFrame("Frame")
-	SkinBGDefender:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinBGDefender:SetScript("OnEvent", function(self, event, addon)
-	if (UISkinOptions.BGDefenderSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
+local name = 'BGDefenderSkin'
+local function SkinBGDefender(self)
 	cSkinFrame(BGDefenderFrame)
 
 	local StripAllTextures = {
@@ -95,4 +91,6 @@ local SkinBGDefender = CreateFrame("Frame")
 	Button10:SetScript("OnLeave", OnLeave)
 	Button11:SetScript("OnEnter", OnEnter11)
 	Button11:SetScript("OnLeave", OnLeave)
-end)
+end
+
+cRegisterSkin(name,SkinBGDefender)
