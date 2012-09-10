@@ -69,6 +69,8 @@ if event == "PLAYER_ENTERING_WORLD" then
 	end
 
 --Embed Check
+	if not IsAddOnLoaded("Omen") then UISkinOptions.EmbedRO = "Disabled" UISkinOptions.EmbedOmen = "Disabled" end
+	if not IsAddOnLoaded("Recount") then UISkinOptions.EmbedRO = "Disabled" end
 	if UISkinOptions.EmbedRO == "Enabled" then EmbedRecountOmen() end
 	if UISkinOptions.EmbedOmen == "Enabled" then EmbedOmen() end
 --Embed Check Finished
