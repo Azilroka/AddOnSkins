@@ -171,6 +171,7 @@ function cRegisterSkin(skinName,skinFunc,...)
 		local c = UIPackageSkinFuncs.c
 		XS = c:GetModule("ExtraSkins")
 	end
+	print(skinName)
 	local registerMe = { func = skinFunc, events = events or {} }
 	if not XS.register[skinName] then XS.register[skinName] = {} end
 	XS.register[skinName][skinFunc] = registerMe
