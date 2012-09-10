@@ -2,49 +2,6 @@ if not IsAddOnLoaded("ElvUI") then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
 
-local function SkinPowerAuras(self, aura, elapsed)
-	local returnValue = PowaAuras.OldUpdateAura(self, aura, elapsed)
-	
-	if (aura == nil) or (aura.off) then
-		return false;
-	end
-
-	if (aura.Showing) then
-		local frame = aura:GetFrame();
-		if (frame == nil) then
-			return false;
-		end
-		
-		if frame and not frame.backdrop then
-			frame:CreateBackdrop('Default')
-			frame.backdrop:Hide()
-		end
-		
-		if frame and aura.owntex then
-			local texture = aura:GetTexture()
-			if not frame.backdrop:IsShown() then
-				frame.backdrop:Show()
-			end
-			texture:SetTexCoord(unpack(c.TexCoords))
-		elseif frame and frame.backdrop:IsShown() then
-			frame.backdrop:Hide()
-		end
-	end
-	
-	return returnValue
-end
-
-local function PowerAuras_LoadSkin()
-local SkinPowerAurasIcons = CreateFrame("Frame")
-	SkinPowerAurasIcons:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinPowerAurasIcons:SetScript("OnEvent", function(self)
-	if (UISkinOptions.PowerAurasIconsSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-	PowaAuras.OldUpdateAura = PowaAuras.UpdateAura
-	PowaAuras.UpdateAura = SkinPowerAuras
-	end)
-end
-
 local function Skin_WeakAuras(frame)
 	if not frame.backdrop then
 		frame:CreateBackdrop('Default')
@@ -73,25 +30,22 @@ local function Modify_WeakAuras(parent, region, data)
 end
 
 local function WeakAuras_LoadSkin()
-local SkinWeakAuras = CreateFrame("Frame")
-	SkinWeakAuras:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinWeakAuras:SetScript("OnEvent", function(self)
-	if (UISkinOptions.WeakAurasSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
-	WeakAuras.regionTypes.icon.OldCreate = WeakAuras.regionTypes.icon.create
-	WeakAuras.regionTypes.icon.create = Create_WeakAuras
-	
-	WeakAuras.regionTypes.icon.OldModify = WeakAuras.regionTypes.icon.modify
-	WeakAuras.regionTypes.icon.modify = Modify_WeakAuras
-	
-	for weakAura, _ in pairs(WeakAuras.regions) do
-		if WeakAuras.regions[weakAura].regionType == 'icon' then
-			Skin_WeakAuras(WeakAuras.regions[weakAura].region)
+	local name = "WeakAurasSkin"
+	local function SkinWeakAuras(self)
+		WeakAuras.regionTypes.icon.OldCreate = WeakAuras.regionTypes.icon.create
+		WeakAuras.regionTypes.icon.create = Create_WeakAuras
+		
+		WeakAuras.regionTypes.icon.OldModify = WeakAuras.regionTypes.icon.modify
+		WeakAuras.regionTypes.icon.modify = Modify_WeakAuras
+		
+		for weakAura, _ in pairs(WeakAuras.regions) do
+			if WeakAuras.regions[weakAura].regionType == 'icon' then
+				Skin_WeakAuras(WeakAuras.regions[weakAura].region)
+			end
 		end
 	end
-	end)
+
+	cRegisterSkin(name,SkinWeakAuras)
 end
 
-s:RegisterSkin('PowerAuras', PowerAuras_LoadSkin)
 s:RegisterSkin('WeakAuras', WeakAuras_LoadSkin)

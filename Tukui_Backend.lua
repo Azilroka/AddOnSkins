@@ -7,7 +7,7 @@ XS.skins = {}
 XS.events = {}
 XS.register = {}
 UIPackageSkinFuncs.x = XS
-
+local Skins = UIPackageSkinFuncs.Skins
 XS.Init = function(self)
 	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
 

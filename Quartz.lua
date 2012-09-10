@@ -2,11 +2,8 @@
 if not IsAddOnLoaded("Quartz") then return end
 local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
 if not Q3 then return end
-local SkinQuartz = CreateFrame("Frame")
-	SkinQuartz:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinQuartz:SetScript("OnEvent", function(self)
-	if (UISkinOptions.QuartzSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+local name = "QuartzSkin"
+local function SkinQuartz(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 	if IsAddOnLoaded("Tukui") then UIFont = c["media"].font UIFontSize = 12 end
@@ -58,4 +55,6 @@ local SkinQuartz = CreateFrame("Frame")
 	end
 
 	Q3:ApplySettings()
-end)
+end
+
+cRegisterSkin(name,SkinQuartz)

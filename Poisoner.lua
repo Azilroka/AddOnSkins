@@ -1,10 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Poisoner") then return end
-
-local SkinPoisoner = CreateFrame("Frame")
-	SkinPoisoner:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinPoisoner:SetScript("OnEvent", function(self)
-	if (UISkinOptions.PoisonerSkin == "Disabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+local name = "PoisonerSkin"
+local function SkinPoisoner(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -97,4 +93,6 @@ function Poisoner_UpdateQuickButton()
 		Poisoner_QuickButton:Show();
 end
 
-end)
+end
+
+cRegisterSkin(name,SkinPoisoner)

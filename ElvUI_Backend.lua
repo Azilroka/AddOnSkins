@@ -4,7 +4,7 @@ if not IsAddOnLoaded("ElvUI") then return end
 
 local E, L, V, P, G,_ = unpack(ElvUI)
 local XS=E:NewModule('ExtraSkins','AceTimer-3.0','AceEvent-3.0')
-
+local Skins = UIPackageSkinFuncs.Skins
 XS.skins = {}
 XS.events = {}
 XS.register = {}
@@ -86,13 +86,18 @@ P["skins"] = {
 }
 
 function XS:Initialize()
+	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
+
+	local f = CreateFrame("Frame",nil)
+
+	self.frame = f
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
 			self:RegisterSkin(skin,data.func,data.events)
 		end
 	end
-	self:RegisterEvent("PLAYER_ENTERING_WORLD")
-	self:SetScript("OnEvent", function(self,event)
+	f:RegisterEvent("PLAYER_ENTERING_WORLD")
+	f:SetScript("OnEvent", function(self,event)
 		if event == "PLAYER_ENTERING_WORLD" then
 			for skin,funcs in pairs(XS.skins) do
 				if cCheckOption(skin) then
@@ -111,6 +116,9 @@ function XS:Initialize()
 			end
 		end
 	end)
+
+	self.frame = f
+
 	self:GenerateOptions()
 end
 
@@ -121,7 +129,7 @@ function XS:RegisterSkin(skinName,func,...)
 	for i = 1,#events do
 		local event = select(i,events)
 		if not event then return end
-		if not self.events[event] then self:RegisterEvent(event); self.events[event] = {} end
+		if not self.events[event] then self.frame:RegisterEvent(event); self.events[event] = {} end
 		self.events[event][skinName] = true
 	end
 end
@@ -139,7 +147,7 @@ function XS:UnregisterEvent(skinName,event)
 		end
 	end
 	if not found then
-		self:UnregisterEvent(event)
+		self.frame:UnregisterEvent(event)
 	end
 end
 

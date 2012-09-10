@@ -1,9 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("RaidInviteOrganizer") then return end
-local SkinRIO = CreateFrame("Frame")
-	SkinRIO:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinRIO:SetScript("OnEvent", function(self)
-	if (UISkinOptions.RaidInviteOrganizerSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+local name = "RaidInviteOrganizerSkin"
+local function SkinRIO(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 	
@@ -42,4 +39,6 @@ local SkinRIO = CreateFrame("Frame")
 		cSkinCheckBox(_G["RIO_ShowRank"..i])
 	end
 
-end)
+end
+
+cRegisterSkin(name,SkinRIO)

@@ -1,9 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("PoMTracker") then return end
-local SkinPoMTracker = CreateFrame("Frame")
-	SkinPoMTracker:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinPoMTracker:SetScript("OnEvent", function(self)
-	if (UISkinOptions.PoMTrackerSkin == "Disabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+local name = "PoMTrackerSkin"
+local function SkinPoMTracker(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -30,4 +27,6 @@ local SkinPoMTracker = CreateFrame("Frame")
 		cSkinCheckBox(_G["PoMOptionFrame_CheckButton"..i])
 	end
 
-end)
+end
+
+cRegisterSkin(name,SkinPoMTracker)

@@ -1,9 +1,53 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("PowerAuras") then return end
 LoadAddOn("PowerAurasOptions")
-local SkinPowerAuras = CreateFrame("Frame")
-	SkinPowerAuras:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinPowerAuras:SetScript("OnEvent", function(self)
-	if (UISkinOptions.PowerAurasSkin ~= "Enabled") then return end
+local s = UIPackageSkinFuncs.s
+local c = UIPackageSkinFuncs.c
+
+local function SkinPowerAuras(self, aura, elapsed)
+	local returnValue = PowaAuras.OldUpdateAura(self, aura, elapsed)
+	
+	if (aura == nil) or (aura.off) then
+		return false;
+	end
+
+	if (aura.Showing) then
+		local frame = aura:GetFrame();
+		if (frame == nil) then
+			return false;
+		end
+		
+		if frame and not frame.backdrop then
+			frame:CreateBackdrop('Default')
+			frame.backdrop:Hide()
+		end
+		
+		if frame and aura.owntex then
+			local texture = aura:GetTexture()
+			if not frame.backdrop:IsShown() then
+				frame.backdrop:Show()
+			end
+			texture:SetTexCoord(unpack(c.TexCoords))
+		elseif frame and frame.backdrop:IsShown() then
+			frame.backdrop:Hide()
+		end
+	end
+	
+	return returnValue
+end
+
+local function PowerAuras_LoadSkin()
+	local name = "PowerAurasIconsSkin"
+	local function SkinPowerAurasIcons(self)
+		PowaAuras.OldUpdateAura = PowaAuras.UpdateAura
+		PowaAuras.UpdateAura = SkinPowerAuras
+	end
+	cRegisterSkin(name,SkinPowerAurasIcons)
+end
+
+s:RegisterSkin('PowerAuras', PowerAuras_LoadSkin)
+
+local name = "PowerAurasSkin"
+local function SkinPowerAuras(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -88,7 +132,9 @@ local SkinPowerAuras = CreateFrame("Frame")
 		_G["PowaEditorTab"..i]:Height(30)
 	end
 
-end)
+end
+
+cRegisterSkin(name,SkinPowerAuras)
 
 --	cSkinFrame(PowerAurasGUIBrowser)
 --	cSkinFrame(PowerAurasEditor)

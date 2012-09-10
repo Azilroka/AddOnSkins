@@ -1,9 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Postal") then return end
-local SkinPostal = CreateFrame("Frame")
-	SkinPostal:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinPostal:SetScript("OnEvent", function(self)
-	if (UISkinOptions.PostalSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+local name = "PostalSkin"
+local function SkinPostal(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 	if IsAddOnLoaded("ElvUI") then if c.private.skins.blizzard.enable ~= true or c.private.skins.blizzard.mail ~= true then return end end
@@ -83,4 +80,6 @@ local SkinPostal = CreateFrame("Frame")
 			end
 		end		
 	end
-end)
+end
+
+cRegisterSkin(name,SkinPostal)

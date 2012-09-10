@@ -375,10 +375,8 @@ local function SkilletFrameOnUpdate(self, event, ...)
 	end
 end
 
-local SkinSkillet = CreateFrame("Frame")
-	SkinSkillet:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinSkillet:SetScript("OnEvent", function(self, event, addon)
-
+local name = "SkilletSkin"
+local function SkinSkillet(Self)
 		local buttons = {
 				"SkilletQueueAllButton",
 				"SkilletCreateAllButton",
@@ -470,4 +468,5 @@ local SkinSkillet = CreateFrame("Frame")
 
 		local plugin = _G["SkilletPluginButton"]
 		plugin:SetScript("PostClick", SkinPluginButtons)
-end)
+end
+cRegisterSkin(name,SkinSkillet)
