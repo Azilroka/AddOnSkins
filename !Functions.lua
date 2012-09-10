@@ -164,7 +164,7 @@ end
 
 function cRegisterSkin(skinName,skinFunc,...)
 	if IsAddOnLoaded("Tukui") then
-		print(cCheckOption(skinName))
+		print(skinName,cCheckOption(skinName))
 		if not cCheckOption(skinName) then return end
 
 		local events = ...
