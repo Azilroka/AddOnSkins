@@ -9,6 +9,7 @@
 embeds.xml
 
 !Functions.lua
+Backend.lua
 Tukui_Backend.lua
 ElvUI_Backend.lua
 EmbedWindow.lua

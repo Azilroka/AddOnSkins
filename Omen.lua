@@ -1,9 +1,9 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Omen") then return end
 
 function EmbedOmen()
-	if not IsAddOnLoaded("Omen") then UISkinOptions.EmbedOmen = "Disabled" return end
-	if (UISkinOptions.EmbedOoC == "Enabled") then
-		if (UISkinOptions.EmbedOmen == "Enabled") then
+	if not IsAddOnLoaded("Omen") then cDisableOption("EmbedOption") return end
+	if (cCheckOption("EmbedOoC")) then
+		if (cCheckOption("EmbedOmen")) then
 			OmenBarList:Hide()
 		end
 	end
@@ -42,12 +42,8 @@ function EmbedOmen()
 		OmenAnchor:SetFrameStrata("MEDIUM")
 end
 
-local SkinOmen = CreateFrame("Frame")
-	SkinOmen:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinOmen:SetScript("OnEvent", function(self)
-	if (UISkinOptions.OmenSkin == "Disabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
+local name = "OmenSkin"
+local function SkinOmen(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -130,4 +126,6 @@ Omen:UpdateBackdrop()
 Omen:ReAnchorBars()
 Omen:ResizeBars()
 
-end)
+end
+
+cRegisterSkin(name,SkinOmen)

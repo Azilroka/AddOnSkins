@@ -86,18 +86,13 @@ P["skins"] = {
 }
 
 function XS:Initialize()
-	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
-
-	local f = CreateFrame("Frame",nil)
-
-	self.frame = f
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
 			self:RegisterSkin(skin,data.func,data.events)
 		end
 	end
-	f:RegisterEvent("PLAYER_ENTERING_WORLD")
-	f:SetScript("OnEvent", function(self,event)
+	self:RegisterEvent("PLAYER_ENTERING_WORLD")
+	self:SetScript("OnEvent", function(self,event)
 		if event == "PLAYER_ENTERING_WORLD" then
 			for skin,funcs in pairs(XS.skins) do
 				if cCheckOption(skin) then
@@ -116,9 +111,6 @@ function XS:Initialize()
 			end
 		end
 	end)
-
-	self.frame = f
-
 	self:GenerateOptions()
 end
 
@@ -129,7 +121,7 @@ function XS:RegisterSkin(skinName,func,...)
 	for i = 1,#events do
 		local event = select(i,events)
 		if not event then return end
-		if not self.events[event] then self.frame:RegisterEvent(event); self.events[event] = {} end
+		if not self.events[event] then self:RegisterEvent(event); self.events[event] = {} end
 		self.events[event][skinName] = true
 	end
 end
@@ -147,221 +139,9 @@ function XS:UnregisterEvent(skinName,event)
 		end
 	end
 	if not found then
-		self.frame:UnregisterEvent(event)
+		self:UnregisterEvent(event)
 	end
 end
-
-local Skins = {
-	["ACPSkin"] = {
-		["text"] = "Addon Control Panel",
-		["addon"] = "ACP"
-	},
-	["AdiBagsSkin"] = {
-		["addon"] = "AdiBags",
-	},
-	["AltoholicSkin"] = {
-		["addon"] = "Altoholic",
-	},
-	["ArchySkin"] = {
-		["addon"] = "Archy"
-	},
-	['ArhSkin'] = {
-		["buttonText"] = "ArchaeologyHelper",
-		["addon"] = "Arh"
-	},
-	["ArkInventorySkin"] = {
-		["addon"] = "ArkInventory"
-	},
-	["AtlasLootSkin"] = {
-		["text"] = "AtlasLoot",
-		["addon"] = "AtlasLoot_Loader"
-	},
-	["ATSWSkin"] = {
-		["addon"] = "AdvancedTradeSkillWindow"
-	},
-	["AuctionatorSkin"] = {
-		["addon"] = "Auctionator"
-	},
-	["AuctioneerSkin"] = {
-		["text"] = "Auctioneer",
-		["addon"] = "Auc-Advanced"
-	},
-	["BPTSkin"] = {
-		["text"] = "Balance Power Tracker",
-		["addon"] = "BalancePowerTracker"
-	},
-	["BGDefenderSkin"] = {
-		["addon"] = "BGDefender"
-	},
-	["BigWigsSkin"] = {
-		["addon"] = "BigWigs"
-	},
-	["BuyEmAllSkin"] = {
-		["addon"] = "BuyEmAll"
-	},
-	["ChocolateBarSkin"] = {
-		["addon"] = "ChocolateBar"
-	},
-	["CliqueSkin"] = {
-		["addon"] = "Clique"
-	},
-	["DBMSkin"] = {
-		["text"] = "DBM",
-		["addon"] = "DBM-Core"
-	},
-	["EasyMailSkin"] = {
-		["addon"] = "EasyMail"
-	},
-	["EnergyWatchSkin"] = {
-		["addon"] = "EnergyWatch"
-	},
-	["ExtVendorSkin"] = {
-		["text"] = "Extended Vendor",
-		["addon"] = "ExtVendor"
-	},
-	["FactionizerSkin"] = {
-		["addon"] = "Factionizer"
-	},
-	["FlightMapSkin"] = {
-		["addon"] = "FlightMap"
-	},
-	["KarniCrapSkin"] = {
-		["text"] = "Karni's Crap Filter",
-		["addon"] = "KarniCrap"
-	},
-	["LightheadedSkin"] = {
-		["addon"] = "Lightheaded"
-	},
-	["LootCouncilLiteSkin"] = {
-		["text"] = "LootCouncilLite",
-		["addon"] = "LootCouncil_Lite"
-	},
-	["MageNuggetsSkin"] = {
-		["addon"] = "MageNuggests"
-	},
-	["MasterLootManagerRemixSkin"] = {
-		["addon"] = "MasterLootManagerRemix"
-	},
-	["MinimalArchaeologySkin"] = {
-		["addon"] = "MinimalArchaeology"
-	},
-	["MoveAnythingSkin"] = {
-		["addon"] = "MoveAnything"
-	},
-	["MRTSkin"] = {
-		["text"] = "Mizus Raid Tracker",
-		["addon"] = "MizusRaidTracker"
-	},
-	["MyRolePlaySkin"] = {
-		["addon"] = "MyRolePlay"
-	},
-	["OdysseySkin"] = {
-		["addon"] = "Odyssey"
-	},
-	["OgriLazySkin"] = {
-		["addon"] = "Ogri'Lazy"
-	},
-	["OmenSkin"] = {
-		["addon"] = "Omen"
-	},
-	["OutfitterSkin"] = {
-		["addon"] = "Outfitter"
-	},
-	["PoisonerSkin"] = {
-		["addon"] = "Poisoner"
-	},
-	["PoMTrackerSkin"] = {
-		["addon"] = "PoMTracker"
-	},
-	["PostalSkin"] = {
-		["addon"] = "Postal"
-	},
-	["PowerAurasSkin"] = {
-		["addon"] = "PowerAuras"
-	},
-	["QuartzSkin"] = {
-		["addon"] = "Quartz"
-	},
-	["RaidInviteOrganizerSkin"] = {
-		["text"] = "Raid Invite Organizer",
-		["addon"] = "RaidInviteOrganizer"
-	},
-	["RaidBuffStatusSkin"] = {
-		["text"] = "Raid Buff Status",
-		["addon"] = "RaidBuffStatus"
-	},
-	["RecountSkin"] = {
-		["addon"] = "Recount"
-	},
-	["SearingPlasmaTrackerSkin"] = {
-		["text"] = "Searing Plasma Tracker",
-		["addon"] = "SearingPlasmaTracker"
-	},
-	["SkadaSkin"] = {
-		["addon"] = "Skada"
-	},
-	["SkilletSkin"] = {
-		["addon"] = "Skillet"
-	},
-	["SpineCounterSkin"] = {
-		["text"] = "Spine Blood Counter",
-		["addon"] = "SpineCounter"
-	},
-	["SpySkin"] = {
-		["addon"] = "Spy"
-	},
-	["stAddonManagerSkin"] = {
-		["text"] = "stAddonManager",
-		["addon"] = "stAddonmanager"
-	},
-	["SwatterSkin"] = {
-		["text"] = "Swatter",
-		["addon"] = "!Swatter"
-	},
-	["TellMeWhenSkin"] = {
-		["addon"] = "TellMeWhen"
-	},
-	["TinyDPSSkin"] = {
-		["addon"] = "TinyDPS"
-	},
-	["TitanPanelSkin"] = {
-		["text"] = "TitanPanel",
-		["addon"] = "Titan"
-	},
-	["WowLuaSkin"] = {
-		["addon"] = "WowLua"
-	},
-	["ZygorSkin"] = {
-		["text"] = "Zygor",
-		["addon"] = "ZygorGuidesViewer"
-	},
-	["LootConfirmer"] = {
-		["text"] = "Loot Confirm"
-	},
-	["UISkinMinimap"] = {
-		["text"] = "Square Minimap Buttons"
-	},
-	["DBMSkinHalf"] = {
-		["text"] = "DBM Half-Bar Skin"
-	},
-	["CLCInfoSkin"] = {
-		["addon"] = "CLCInfo"
-	},
-	["CLCProtSkin"] = {
-		["addon"] = "CLCProt"
-	},
-	["CLCRetSkin"] = {
-		["addon"] = "CLCRet"
-	},
-	["PowerAurasIconsSkin"] = {
-		["text"] = "PowerAuras Icon's",
-		["addon"] = "PowerAuras"
-	},
-	["WeakAurasIconsSkin"] = {
-		["text"] = "WeakAuras Icon's",
-		["addon"] = "WeakAuras"
-	},
-}
 
 function XS:GenerateOptionTable(skinName,order)
 	local data = Skins[skinName]

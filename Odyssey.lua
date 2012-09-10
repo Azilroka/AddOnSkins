@@ -1,10 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Odyssey") then return end
-local SkinOdyssey = CreateFrame("Frame")
-	SkinOdyssey:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinOdyssey:SetScript("OnEvent", function(self)
-	if (UISkinOptions.OdysseySkin == "Disabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
+local name = "OdysseySkin"
+local function SkinOdyssey(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -70,4 +66,6 @@ local SkinOdyssey = CreateFrame("Frame")
 
 	OdyTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 
-end)
+end
+
+cRegisterSkin(name,SkinOdyssey)

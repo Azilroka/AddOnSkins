@@ -1,9 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MageNuggets") then return end
-local SkinMageNuggets = CreateFrame("Frame")
-	SkinMageNuggets:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinMageNuggets:SetScript("OnEvent", function(self)
-	if (UISkinOptions.MageNuggetsSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+local name = "MageNuggetsSkin"
+local function SkinMageNuggets(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -87,4 +84,6 @@ local SkinMageNuggets = CreateFrame("Frame")
 	MageNugClearcast_Frame_Bar:Point("TOPLEFT", MageNugClearcast_Frame, "TOPLEFT", 1, -42)
 	MNabCast_Frame:Point("TOPLEFT", MageNugAB_Frame, "TOPLEFT", 0, 18)
 
-end)
+end
+
+cRegisterSkin(name,SkinMageNuggets)

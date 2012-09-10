@@ -1,10 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MizusRaidTracker") then return end
-local SkinMRT = CreateFrame("Frame")
-	SkinMRT:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinMRT:SetScript("OnEvent", function(self)
-	if (UISkinOptions.MRTSkin == "Disabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
+local name = "MRTSkin"
+local function SkinMRT(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -41,4 +37,6 @@ local SkinMRT = CreateFrame("Frame")
 
 	MRT_GUI_ItemTT:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 	MRT_GUI_TT:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
-end)
+end
+
+cRegisterSkin(name,SkinMRT)

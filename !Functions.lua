@@ -162,6 +162,24 @@ function cCheckOption(optionName)
 	end
 end
 
+function cDisableOption(optionName)
+	if IsAddOnLoaded("ElvUI") then
+		local c = UIPackageSkinFuncs.c
+		c.db.skins[optionName] = false
+	else
+		UISkinOptions[optionName] = "Disabled"
+	end
+end
+
+function cEnableOption(optionName)
+	if IsAddOnLoaded("ElvUI") then
+		local c = UIPackageSkinFuncs.c
+		c.db.skins[optionName] = true
+	else
+		UISkinOptions[optionName] = "Enabled"
+	end
+end
+
 function cRegisterSkin(skinName,skinFunc,...)
 	local events = ...
 	local XS = UIPackageSkinFuncs.x

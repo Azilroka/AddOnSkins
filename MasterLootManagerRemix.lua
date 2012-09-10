@@ -1,9 +1,6 @@
 if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MasterLootManagerRemix") then return end
-local SkinMLM = CreateFrame("Frame")
-	SkinMLM:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinMLM:SetScript("OnEvent", function(self, event, addon)
-	if (UISkinOptions.MasterLootManagerRemixSkin ~= "Enabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+local name = "MasterLootManagerRemixSkin"
+local function SkinMLM(self)
 	local StripAllTextures = {
 				"MasterLootManagerMain",
 				"MasterLootLoggerFrame",
@@ -125,4 +122,6 @@ local SkinMLM = CreateFrame("Frame")
 	-- Skin CloseButtons
 		cSkinCloseButton(MasterLootLoggerFrameCloseButton)
 		cSkinCloseButton(MasterLootLoggerAddEditFrameCloseButton)
-end)
+end
+
+cRegisterSkin(name,SkinMLM)

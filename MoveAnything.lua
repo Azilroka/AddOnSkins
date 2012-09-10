@@ -1,9 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MoveAnything") then return end
-local SkinMoveAnything = CreateFrame("Frame")
-	SkinMoveAnything:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinMoveAnything:SetScript("OnEvent", function(self)
-	if (UISkinOptions.MoveAnythingSkin == "Disabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+local name = "MoveAnythingSkin"
+local function SkinMoveAnything(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -43,5 +40,6 @@ local SkinMoveAnything = CreateFrame("Frame")
 	cSkinButton(MANudger_NudgeRight)
 	cSkinButton(MANudger_Detach)
 	cSkinButton(MANudger_Hide)
+end
 
-end)
+cRegisterSkin(name,SkinMoveAnything)

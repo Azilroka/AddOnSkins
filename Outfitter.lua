@@ -1,10 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Outfitter") then return end
-local SkinOutfitter = CreateFrame("Frame")
-	SkinOutfitter:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinOutfitter:SetScript("OnEvent", function(self)
-	if (UISkinOptions.OutfitterSkin == "Disabled") then return end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-
+local name = "OutfitterSkin"
+local function SkinOutfitter(self)
 	local s = UIPackageSkinFuncs.s
 	local c = UIPackageSkinFuncs.c
 
@@ -117,4 +113,6 @@ OutfitterFrame:HookScript("OnShow", function(self)
 	cSkinTab(OutfitterEditScriptDialogTab2)
 	cSkinDropDownBox(OutfitterEditScriptDialogPresetScript)
 
-end)
+end
+
+cRegisterSkin(name,SkinOutfitter)
