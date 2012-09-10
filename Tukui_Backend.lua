@@ -56,6 +56,23 @@ XS.RegisterSkin = function(self,skinName,func,...)
 	end
 end
 
+XS.UnregisterEvent = function(self,skinName,event)
+	if not self.events[event] then return end
+	if not self.events[event][skinName] then return end
+
+	self.events[event][skinName] = nil
+	local found = false
+	for skin,_ in pairs(self.events[event]) do
+		if skin then
+			found = true
+			break
+		end
+	end
+	if not found then
+		self.frame:UnregisterEvent(event)
+	end
+end
+
 local XSFrame = CreateFrame("Frame",nil)
 XSFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 XSFrame:SetScript("OnEvent",function(self)

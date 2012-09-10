@@ -163,30 +163,28 @@ function cCheckOption(optionName)
 end
 
 function cRegisterSkin(skinName,skinFunc,...)
+	local events = ...
+	local XS
 	if IsAddOnLoaded("Tukui") then
-		local XS = UIPackageSkinFuncs.x
-		local events = ...
-		local registerMe = { func = skinFunc, events = events or {} }
-		if not XS.register[skinName] then XS.register[skinName] = {} end
-		XS.register[skinName][skinFunc] = registerMe
+		XS = UIPackageSkinFuncs.x
 	else
 		local c = UIPackageSkinFuncs.c
-		local XS = c:GetModule("ExtraSkins")
-		local events = ...
-		local registerMe = { func = skinFunc, events = events or {} }
-		if not XS.register[skinName] then XS.register[skinName] = {} end
-		XS.register[skinName][skinFunc] = registerMe
+		XS = c:GetModule("ExtraSkins")
 	end
+	local registerMe = { func = skinFunc, events = events or {} }
+	if not XS.register[skinName] then XS.register[skinName] = {} end
+	XS.register[skinName][skinFunc] = registerMe
 end
 
 function cUnregisterEvent(skinName,frame,event)
+	local XS
 	if IsAddOnLoaded("Tukui") then
-		frame:UnregisterEvent(event)
+		XS = UIPackageSkinFuncs.x
 	else
 		local c = UIPackageSkinFuncs.c
-		local XS = c:GetModule("ExtraSkins")
-		XS:UnregisterEvent(skinName,event)
+		XS = c:GetModule("ExtraSkins")
 	end
+	XS:UnregisterEvent(skinName,event)
 end
 
 if IsAddOnLoaded("Tukui") then
