@@ -165,26 +165,14 @@ end
 
 function cRegisterSkin(skinName,skinFunc,...)
 	local events = ...
-	local XS
-	if IsAddOnLoaded("Tukui") then
-		XS = UIPackageSkinFuncs.x
-	else
-		local c = UIPackageSkinFuncs.c
-		XS = c:GetModule("ExtraSkins")
-	end
+	local XS = UIPackageSkinFuncs.x
 	local registerMe = { func = skinFunc, events = events or {} }
 	if not XS.register[skinName] then XS.register[skinName] = {} end
 	XS.register[skinName][skinFunc] = registerMe
 end
 
 function cUnregisterEvent(skinName,frame,event)
-	local XS
-	if IsAddOnLoaded("Tukui") then
-		XS = UIPackageSkinFuncs.x
-	else
-		local c = UIPackageSkinFuncs.c
-		XS = c:GetModule("ExtraSkins")
-	end
+	local XS = UIPackageSkinFuncs.x
 	XS:UnregisterEvent(skinName,event)
 end
 

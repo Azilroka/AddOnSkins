@@ -9,6 +9,8 @@ XS.skins = {}
 XS.events = {}
 XS.register = {}
 
+UIPackageSkinFuncs.x = XS
+
 P["skins"] = {
 	["RecountBackdrop"] = true,
 	["SkadaBackdrop"] = true,
