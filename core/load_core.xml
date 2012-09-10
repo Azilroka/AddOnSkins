@@ -1,0 +1,7 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="core.lua"/>
+    <Script file="backend_shared.lua"/>
+    <Script file="backend_elvui.lua"/>
+    <Script file="backend_tukui.lua"/>
+    <Script file="embed.lua"/>
+</Ui>

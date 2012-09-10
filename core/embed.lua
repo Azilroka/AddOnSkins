@@ -324,7 +324,7 @@ else
 			},
 			EmbedOoC = {
 				type = 'toggle',
-				name = 'Hide embedded window while out of combat',
+				name = 'Hide while out of combat',
 				desc = L['TOGGLESKIN_DESC'],
 				order = 8,
 			},
