@@ -161,7 +161,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions:Point("CENTER", UIParent, "CENTER", 0, 0)
 	SkinOptions:SetFrameStrata("MEDIUM")
 	SkinOptions:Width(648)
-	SkinOptions:Height(490)
+	SkinOptions:Height(540)
 	SkinOptions:SetClampedToScreen(true)
 	SkinOptions:SetMovable(true)
 	SkinOptions.text = SkinOptions:CreateFontString(nil, "OVERLAY")
@@ -280,7 +280,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
       end
       return iter
     end
-    local curX,curY,maxY=1,1,18
+    local curX,curY,maxY=1,1,20
 	for skin,options in pairsByKeys(Skins) do
 		local addon = options.addon
 		local buttonText = options.buttonText or addon
