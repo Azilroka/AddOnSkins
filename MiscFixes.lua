@@ -15,23 +15,36 @@ local SkinAZCastBar = CreateFrame("Frame")
 end)
 end
 
-----------------------------------------
+-----------------------------------------
 -- Loot auto confirm
-----------------------------------------
-if (LootConfirm == "Enabled") then
+-----------------------------------------
 
 local LootConfirmer = CreateFrame("Frame")
+LootConfirmer:RegisterEvent("PLAYER_ENTERING_WORLD");
 LootConfirmer:RegisterEvent("CONFIRM_DISENCHANT_ROLL");
 LootConfirmer:RegisterEvent("CONFIRM_LOOT_ROLL");
-	LootConfirmer:SetScript("OnEvent",
-		function(self, event, ...)
-		local arg1, arg2 = ...;
-		ConfirmLootRoll(arg1, arg2);
-	end)
-
-StaticPopupDialogs["CONFIRM_LOOT_ROLL"] = nil
-StaticPopupDialogs["LOOT_BIND"] = nil
-end
+LootConfirmer:RegisterEvent("LOOT_OPENED");
+LootConfirmer:SetScript("OnEvent",
+	function(self, event, ...)
+		if (UISkinOptions.LootConfirmer == "Enabled") then
+		if event == "PLAYER_ENTERING_WORLD" then
+			StaticPopupDialogs["CONFIRM_LOOT_ROLL"] = nil
+			StaticPopupDialogs["LOOT_BIND"] = nil
+		elseif event == "CONFIRM_LOOT_ROLL" or event == "CONFIRM_DISENCHANT_ROLL" then
+			local arg1, arg2 = ...;
+			ConfirmLootRoll(arg1, arg2);
+		elseif event == "LOOT_OPENED" then
+			cnt = GetNumLootItems()
+			if cnt == 0 then
+				CloseLoot()
+			else
+				for slot = 1, cnt do
+					ConfirmLootSlot(slot)
+				end
+			end
+		end
+	end
+end)
 
 --Minimap Button Skinning thanks to Sinaris
 
