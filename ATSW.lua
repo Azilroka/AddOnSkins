@@ -173,4 +173,4 @@ local function SkinATSW(self)
 	cSkinCCStatusBar(ATSWScanDelayFrameBar)
 end
 
-cRegisterSkin(skin,SkinATSW)
+cRegisterSkin(name,SkinATSW)
