@@ -1,5 +1,5 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Auctionator") then return end
-local name = "AuctionantorSkin"
+local name = "AuctionatorSkin"
 local function AtrSkin(self,event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
 	local s = UIPackageSkinFuncs.s

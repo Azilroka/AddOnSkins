@@ -4,7 +4,7 @@
 -- Added Skinning features for ease of skinning and smaller size skins. - Azilroka
 
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-
+local addon,ns = ...
 UIPackageSkinFuncs = {}
 local s
 
@@ -164,23 +164,11 @@ end
 
 function cRegisterSkin(skinName,skinFunc,...)
 	if IsAddOnLoaded("Tukui") then
-		print(skinName,UISkinOptions[skinName],cCheckOption(skinName))
-		if not cCheckOption(skinName) then return end
-
+		local XS = UIPackageSkinFuncs.x
 		local events = ...
-		local Skin = CreateFrame("Frame")
-		Skin:RegisterEvent("PLAYER_ENTERING_WORLD")
-		for i = 1,#events do
-			local event = select(i,events)
-			if not event then break end
-			Skin:RegisterEvent(event)
-		end
-		Skin:SetScript("OnEvent", function(self,event,addon)
-			skinFunc(self,event,addon)
-			if event == "PLAYER_ENTERING_WORLD" then
-				self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-			end
-		end)
+		local registerMe = { func = skinFunc, events = events or {} }
+		if not XS.register[skinName] then XS.register[skinName] = {} end
+		XS.register[skinName][skinFunc] = registerMe
 	else
 		local c = UIPackageSkinFuncs.c
 		local XS = c:GetModule("ExtraSkins")

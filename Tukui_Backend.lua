@@ -1,7 +1,67 @@
 if not IsAddOnLoaded("Tukui") then return end
+local addon,ns = ...
 UISkinOptions = {}
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
+local XS = {}
+XS.skins = {}
+XS.events = {}
+XS.register = {}
+UIPackageSkinFuncs.x = XS
+
+XS.Init = function(self)
+	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
+
+	local f = CreateFrame("Frame",nil)
+
+	self.frame = f
+	for skin,alldata in pairs(self.register) do
+		for _,data in pairs(alldata) do
+			self:RegisterSkin(skin,data.func,data.events)
+		end
+	end
+	f:RegisterEvent("PLAYER_ENTERING_WORLD")
+	f:SetScript("OnEvent", function(self,event)
+		if event == "PLAYER_ENTERING_WORLD" then
+			for skin,funcs in pairs(XS.skins) do
+				if cCheckOption(skin) then
+					for func,_ in pairs(funcs) do
+						func(f,event)
+					end
+				end
+			end
+		else
+			for skin,funcs in pairs(XS.skins) do
+				if cCheckOption(skin) and XS.events[event][skin] then
+					for func,_ in pairs(funcs) do
+						func(f,event)
+					end
+				end
+			end
+		end
+	end)
+
+	self.frame = f
+end
+
+XS.RegisterSkin = function(self,skinName,func,...)
+	local events = ...
+	if not self.skins[skinName] then self.skins[skinName] = {} end
+	self.skins[skinName][func] = true
+	for i = 1,#events do
+		local event = select(i,events)
+		if not event then return end
+		if not self.events[event] then self.frame:RegisterEvent(event); self.events[event] = {} end
+		self.events[event][skinName] = true
+	end
+end
+
+local XSFrame = CreateFrame("Frame",nil)
+XSFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+XSFrame:SetScript("OnEvent",function(self)
+	XS:init()
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+end)
 
 local DefaultSetSkin = CreateFrame("Frame")
 	DefaultSetSkin:RegisterEvent( "PLAYER_ENTERING_WORLD" )
