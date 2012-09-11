@@ -88,9 +88,19 @@ P["skins"] = {
 
 }
 
+E.PopupDialogs["OLD_SKIN_PACKAGE"] = {
+	text = "You have the old Tukui_UIPackages_Skins addon.  This addon replaces and will conflict with it.  Press accept to disable this addon and reload your UI.",
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function() DisableAddon("Tukui_UIPackages_Skins"); ReloadUI() end,
+	timeout = 0,
+	whileDead = 1,
+}
+
 function XS:Initialize()
 	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
+	if IsAddOnLoaded("Tukui_UIPackages_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
 	local f = CreateFrame("Frame",nil)
 
 	self.frame = f
