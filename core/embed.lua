@@ -456,7 +456,7 @@ function EmbedRecountOmen()
 		Recount:LockWindows(true)
 		Recount_MainWindow:ClearAllPoints()
 		EmbedRecountOmenResize()
-		--if IsAddOnLoaded("ElvUI") then hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedRecountOmenResize() end) end
+		if IsAddOnLoaded("ElvUI") then hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedRecountOmenResize() end) end
 end
 
 function EmbedRecountOmenResize()
