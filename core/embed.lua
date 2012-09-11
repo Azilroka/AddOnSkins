@@ -335,6 +335,13 @@ else
 				desc = L['TOGGLESKIN_DESC'],
 				order = 9,
 			},
+			EmbedSexyCooldown = {
+				type = 'toggle',
+				name = 'Attach SexyCD to action bar',
+				desc = L['TOGGLESKIN_DESC'],
+				order = 10,
+				disabled = function() return not IsAddOnLoaded("SexyCooldown2") end,
+			}
 		}
 	}
 end
