@@ -49,6 +49,7 @@
 	<Script file="RaidInviteOrganizer.lua"/>
 	<Script file="Recount.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
+	<Script file="SexyCooldown.lua"/>
 	<Script file="Skada.lua"/>
 	<Script file="Skillet.lua"/>
 	<Script file="SpineCounter.lua"/>
