@@ -46,7 +46,7 @@ local function SkinRecount(self)
 		frame.bgMain:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT")
 		frame.bgMain:SetPoint("TOP", frame, "TOP", 0, -7)
 		frame.bgMain:SetFrameLevel(frame:GetFrameLevel())
-		if (UISkinOptions.RecountBackdrop == "Disabled") then frame.bgMain:Hide() end
+		if (not cCheckOption("RecountBackdrop")) then frame.bgMain:Hide() end
 		frame.CloseButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -1, -9)
 		frame:SetBackdrop(nil)
 		frame.TitleBackground = CreateFrame("Frame", nil, frame)

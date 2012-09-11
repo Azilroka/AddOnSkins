@@ -5,7 +5,7 @@ local c = UIPackageSkinFuncs.c
 
 local function LoadSkin()
 	LoadAddOn("TellMeWhen_Options")
-	if (UISkinOptions.TellMeWhenSkin ~= "Enabled") then return end
+	if (not cCheckOption("TellMeWhenSkin")) then return end
 	TellMeWhen_IconEditorMain:StripTextures()
 	TellMeWhen_IconEditorConditions:StripTextures()
 	TellMeWhen_IconEditor:StripTextures()
