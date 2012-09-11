@@ -455,24 +455,43 @@ function EmbedRecountOmen()
 		OmenAnchor:SetFrameStrata("MEDIUM")
 		Recount:LockWindows(true)
 		Recount_MainWindow:ClearAllPoints()
+		EmbedRecountOmenResize()
+		--if IsAddOnLoaded("ElvUI") then hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedRecountOmenResize() end) end
+end
 
+function EmbedRecountOmenResize()
 	if IsAddOnLoaded("Tukui") then
-		OmenAnchor:SetWidth(EmbeddingWindow:GetWidth() - 240)
-		OmenAnchor:SetHeight(EmbeddingWindow:GetHeight() + 12)
-		OmenAnchor:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 16)
-		Recount_MainWindow:SetWidth(EmbeddingWindow:GetWidth() - 131)
-		Recount_MainWindow:SetHeight(EmbeddingWindow:GetHeight() + 2)
-		Recount_MainWindow:SetPoint("TOPRIGHT", EmbeddingWindow,"TOPRIGHT", 0, 6)
+		if TukuiChatBackgroundRight then
+			OmenAnchor:SetWidth((TukuiChatBackgroundRight:GetWidth() / 3) - ( 10 + s.mult))
+			OmenAnchor:SetHeight(TukuiChatBackgroundRight:GetHeight() - 20)
+			OmenAnchor:SetPoint("TOPLEFT", TukuiChatBackgroundRight, "TOPLEFT", 6, 10)
+			Recount_MainWindow:SetWidth(((TukuiChatBackgroundRight:GetWidth() / 3) + (TukuiChatBackgroundRight:GetWidth() / 3)) - ( 1 + s.mult))
+			Recount_MainWindow:SetHeight(TukuiChatBackgroundRight:GetHeight() - 28)
+			Recount_MainWindow:SetPoint("TOPRIGHT", TukuiChatBackgroundRight,"TOPRIGHT", -6, 2)
+		else
+			OmenAnchor:SetWidth((TukuiInfoRight:GetWidth() / 3) + 1)
+			OmenAnchor:SetHeight((TukuiInfoRight:GetHeight() * 6) + 4)
+			OmenAnchor:SetPoint("TOPLEFT", TukuiInfoRight, "TOPLEFT", 0, 144)
+			Recount_MainWindow:SetWidth(((TukuiInfoRight:GetWidth() / 3) + (TukuiInfoRight:GetWidth() / 3)) - ( 1 + s.mult))
+			Recount_MainWindow:SetHeight((TukuiInfoRight:GetHeight() * 6) - 4)
+			Recount_MainWindow:SetPoint("TOPRIGHT", TukuiInfoRight,"TOPRIGHT", 0, 136)
+		end
 	end
 
-	if IsAddOnLoaded("ElvUI") then
+	if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then
 		OmenAnchor:SetWidth((RightChatPanel:GetWidth() / 3) - ( 8 + c.mult))
 		OmenAnchor:SetHeight(RightChatPanel:GetHeight() - 12)
 		OmenAnchor:SetPoint("TOPLEFT", RightChatPanel, "TOPLEFT", 5, 16)
 		Recount_MainWindow:SetWidth(((RightChatPanel:GetWidth() / 3) + (RightChatPanel:GetWidth() / 3)) - ( 1 + c.mult))
 		Recount_MainWindow:SetHeight(RightChatPanel:GetHeight() - 26)
 		Recount_MainWindow:SetPoint("TOPRIGHT", RightChatPanel,"TOPRIGHT", -5, 2)
-		RightChatPanel:SetScript("OnUpdate", EmbedRecountOmen)
 	end
-
+	if IsAddOnLoaded("ElvUI_SLE") then
+		OmenAnchor:SetWidth((RightChatPanel:GetWidth() / 3) - ( 3 + c.mult))
+		OmenAnchor:SetHeight(RightChatPanel:GetHeight() - 4)
+		OmenAnchor:SetPoint("TOPLEFT", RightChatPanel, "TOPLEFT", 2, -2)
+		Recount_MainWindow:SetWidth(((RightChatPanel:GetWidth() / 3) + (RightChatPanel:GetWidth() / 3)) - ( 0 + c.mult))
+		Recount_MainWindow:SetHeight(RightChatPanel:GetHeight() - 18)
+		Recount_MainWindow:SetPoint("TOPRIGHT", RightChatPanel,"TOPRIGHT", -2, -16)
+	end
 end
