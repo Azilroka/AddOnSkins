@@ -45,6 +45,13 @@ if event == "PLAYER_ENTERING_WORLD" then
 						OmenBarList:Show()
 					end
 				end
+				if IsAddOnLoaded("TinyDPS") and (cCheckOption("EmbedTDPS")) then
+					if tdpsFrame:IsShown() then
+						tdpsFrame:Hide()
+					else
+						tdpsFrame:Show()
+					end
+				end
 			else
 			if c.db[self.parent:GetName()..'Faded'] then
 				c.db[self.parent:GetName()..'Faded'] = nil
@@ -367,6 +374,9 @@ if event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_ENTER_COMBAT" or InComba
 		if (IsAddOnLoaded("Omen") and (cCheckOption("EmbedOmen"))) then
 			OmenBarList:Show()
 		end
+		if (IsAddOnLoaded("TinyDPS") and (cCheckOption("EmbedTDPS"))) then
+			tdpsFrame:Show()
+		end
 	end
 else
 --	print("Exiting Combat")
@@ -385,6 +395,9 @@ else
 		end
 		if (IsAddOnLoaded("Omen") and (cCheckOption("EmbedOmen"))) then
 			OmenBarList:Hide()
+		end
+		if (IsAddOnLoaded("TinyDPS") and (cCheckOption("EmbedTDPS"))) then
+			tdpsFrame:Hide()
 		end
 	end
 end

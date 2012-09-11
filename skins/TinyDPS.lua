@@ -9,8 +9,9 @@ local function SkinTinyDps(self)
 	local tdps = tdps
 	local font = tdpsFont
 	local position = tdpsPosition
-
-	frame:SetTemplate("Transparent", true)
+	local template
+	if cCheckOption("EmbedTDPS") then template = "Default" else template = "Transparent" end
+	frame:SetTemplate(template, true)
 	frame:CreateShadow("Default")
 	if(tdps) then
 		tdps.width = Minimap:GetWidth()
@@ -63,16 +64,16 @@ local function SkinTinyDps(self)
 end
 
 function EmbedTDPS()
--- if not IsAddOnLoaded("TinyDPS") then cDisableOption("EmbedTDPS") return end
--- if (cCheckOption("EmbedOoC")) then
---  if (cCheckOption("EmbedTDPS")) then
---   tdpsFrame:Hide()
---  end
--- end
-  tdpsVisibleBars = 9
-  tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
-  tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
-  tdpsRefresh()
+	if not IsAddOnLoaded("TinyDPS") then cDisableOption("EmbedTDPS") return end
+	if (cCheckOption("EmbedOoC")) then
+		if (cCheckOption("EmbedTDPS")) then
+			tdpsFrame:Hide()
+		end
+	end
+  	tdpsVisibleBars = 9
+  	tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
+  	tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
+  	tdpsRefresh()
 end
 
 cRegisterSkin(name,SkinTinyDps)
