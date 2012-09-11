@@ -1,4 +1,5 @@
 if not IsAddOnLoaded("Tukui") then return end
+
 UISkinOptions = {}
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
@@ -167,7 +168,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions.text = SkinOptions:CreateFontString(nil, "OVERLAY")
 	SkinOptions.text:SetFont(UIFont, 14, "OUTLINE")
 	SkinOptions.text:SetPoint("TOP", SkinOptions, 0, -6)
-	SkinOptions.text:SetText("|cffC495DDTukui|r & |cff1784d1ElvUI|r Skin Options")
+	SkinOptions.text:SetText("|cffC495DDTukui|r & |cff1784d1ElvUI|r Skin Options - v"..UIPackageSkinFuncs.Version)
 	SkinOptions:EnableMouse(true)
 	SkinOptions:RegisterForDrag("LeftButton");
 	SkinOptions:SetScript("OnDragStart", function(self) self:StartMoving() end)

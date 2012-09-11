@@ -1,4 +1,7 @@
 -- Shared backend for both UIs
+local addon,ns = ...
+UIPackageSkinFuncs.Version = GetAddOnMetadata(addon,"Version")
+
 UIPackageSkinFuncs.Skins = {
 	["ACPSkin"] = {
 		["buttonText"] = "Addon Control Panel",
