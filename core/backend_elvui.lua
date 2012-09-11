@@ -64,6 +64,7 @@ P["skins"] = {
 	["RaidBuffStatusSkin"] = true,
 	["RecountSkin"] = true,
 	["SearingPlasmaTrackerSkin"] = true,
+	["SexyCooldownSkin"] = true,
 	["SkadaSkin"] = true,
 	["SkilletSkin"] = true,
 	["SpineCounterSkin"] = true,
@@ -83,6 +84,8 @@ P["skins"] = {
 	["EmbedSkada"] = false,
 	["EmbedOmen"] = false,
 	["EmbedRO"] = false,
+	["EmbedTDPS"] = false,
+	["EmbedSexyCooldown"] = false,
 	["RecountBackdrop"] = true,
 	["SkadaBackdrop"] = true,
 
