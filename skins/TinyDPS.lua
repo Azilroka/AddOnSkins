@@ -33,31 +33,46 @@ local function SkinTinyDps(self)
 		})
 		tdpsStatusBar:SetStatusBarTexture(c["media"].normTex)
 	end
-if IsAddOnLoaded("Tukui") then
-	if(tdps) then
-		tdps.width = TukuiMinimap:GetWidth()
-		tdps.spacing = 2
-		tdps.barHeight = 14
-		font.name = c["media"].pixelfont
-		font.size = 12
-		font.outline = "MONOCHROMEOUTLINE"
-	end
-	anchor:Point("BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -26)
-	frame:SetWidth(TukuiMinimap:GetWidth())
-	position = { x = 0, y = -6 }
+	if IsAddOnLoaded("Tukui") then
+		if(tdps) then
+			tdps.width = TukuiMinimap:GetWidth()
+			tdps.spacing = 2
+			tdps.barHeight = 14
+			font.name = c["media"].pixelfont
+			font.size = 12
+			font.outline = "MONOCHROMEOUTLINE"
+		end
+		anchor:Point("BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -26)
+		frame:SetWidth(TukuiMinimap:GetWidth())
+		position = { x = 0, y = -6 }
 
-	local button = TukuiRaidUtilityShowButton
-	if(button) then
-		button:HookScript("OnShow", function(self) 
-			anchor:ClearAllPoints()
-			anchor:Point("BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -49)
-		end)
-		button:HookScript("OnHide", function(self) 
-			anchor:ClearAllPoints()
-			anchor:Point("BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -26)
-		end)
+		local button = TukuiRaidUtilityShowButton
+		if(button) then
+			button:HookScript("OnShow", function(self) 
+				anchor:ClearAllPoints()
+				anchor:Point("BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -49)
+			end)
+			button:HookScript("OnHide", function(self) 
+				anchor:ClearAllPoints()
+				anchor:Point("BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -26)
+			end)
+		end
 	end
+
+	if cCheckOption('EmbedTDPS') then EmbedTDPS() end
 end
+
+function EmbedTDPS()
+-- if not IsAddOnLoaded("TinyDPS") then cDisableOption("EmbedTDPS") return end
+-- if (cCheckOption("EmbedOoC")) then
+--  if (cCheckOption("EmbedTDPS")) then
+--   tdpsFrame:Hide()
+--  end
+-- end
+  tdpsVisibleBars = 9
+  tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
+  tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
+  tdpsRefresh()
 end
 
 cRegisterSkin(name,SkinTinyDps)

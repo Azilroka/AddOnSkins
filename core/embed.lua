@@ -315,18 +315,25 @@ else
 				order = 6,
 				disabled = function() return not IsAddOnLoaded("Omen") end,
 			},
+			EmbedTDPS = {
+				type = 'toggle',
+				name = 'TinyDPS',
+				desc = L['TOGGLESKIN_DESC'],
+				order = 7,
+				disabled = function() return not IsAddOnLoaded("TinyDPS") end,
+			},
 			EmbedRO = {
 				type = 'toggle',
 				name = 'Recount & Omen',
 				desc = L['TOGGLESKIN_DESC'],
-				order = 7,
+				order = 8,
 				disabled = function() return not IsAddOnLoaded("Omen") or not IsAddOnLoaded("Recount") end,
 			},
 			EmbedOoC = {
 				type = 'toggle',
 				name = 'Hide while out of combat',
 				desc = L['TOGGLESKIN_DESC'],
-				order = 8,
+				order = 9,
 			},
 		}
 	}
