@@ -466,12 +466,13 @@ function EmbedRecountOmen()
 	end
 
 	if IsAddOnLoaded("ElvUI") then
-		OmenAnchor:SetWidth(EmbeddingWindow:GetWidth() - 272)
-		OmenAnchor:SetHeight(EmbeddingWindow:GetHeight() + 18)
-		OmenAnchor:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 22)
-		Recount_MainWindow:SetWidth(EmbeddingWindow:GetWidth() - 131)
-		Recount_MainWindow:SetHeight(EmbeddingWindow:GetHeight() + 2)
-		Recount_MainWindow:SetPoint("TOPRIGHT", EmbeddingWindow,"TOPRIGHT", 0, 6)
+		OmenAnchor:SetWidth((RightChatPanel:GetWidth() / 3) - ( 8 + c.mult))
+		OmenAnchor:SetHeight(RightChatPanel:GetHeight() - 12)
+		OmenAnchor:SetPoint("TOPLEFT", RightChatPanel, "TOPLEFT", 5, 16)
+		Recount_MainWindow:SetWidth(((RightChatPanel:GetWidth() / 3) + (RightChatPanel:GetWidth() / 3)) - ( 1 + c.mult))
+		Recount_MainWindow:SetHeight(RightChatPanel:GetHeight() - 26)
+		Recount_MainWindow:SetPoint("TOPRIGHT", RightChatPanel,"TOPRIGHT", -5, 2)
+		RightChatPanel:SetScript("OnUpdate", EmbedRecountOmen)
 	end
 
 end
