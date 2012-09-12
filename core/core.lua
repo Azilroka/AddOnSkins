@@ -95,7 +95,7 @@ function cSkinCloseButton(self)
 	end
 end
 
-function cSkinSliderFrame(self)
+function cSkinSliderFrame(self, height)
 	if ElvUI then
 		s:HandleSliderFrame(self)
 	else
