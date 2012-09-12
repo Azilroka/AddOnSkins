@@ -317,17 +317,6 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		CreateButton(string.format('%sButton',skin),buttonText,addon,skin,2,curY,true)
 		curY = curY + 1
 	end
-
---Killing for specfic UI's
-if IsAddOnLoaded("AsphyxiaUI") or IsAddOnLoaded("SinarisUI") then
-	EmbedWindowSettingsButton:Disable() EmbedWindowSettingsButton.text:SetText("Embedding Window Settings")
-	SkadaSkinButton:Disable() UISkinOptions.SkadaSkin = "Disabled" SkadaSkinButton.text:SetText("Skada : Disabled by UI")
-	RecountSkinButton:Disable() UISkinOptions.RecountSkin = "Disabled" RecountSkinButton.text:SetText("Recount : Disabled by UI")
-	DBMSkinButton:Disable() UISkinOptions.DBMSkin = "Disabled" DBMSkinButton.text:SetText("DBM : Disabled by UI")
-	TinyDPSSkinButton:Disable() UISkinOptions.TinyDPSSkin = "Disabled" TinyDPSSkinButton.text:SetText("TinyDPS : Disabled by UI")
-	BigWigsSkinButton:Disable() UISkinOptions.BigWigsSkin = "Disabled" BigWigsSkinButton.text:SetText("BigWigs : Disabled by UI")
-	OmenSkinButton:Disable() UISkinOptions.OmenSkin = "Disabled" OmenSkinButton.text:SetText("Omen : Disabled by UI")
-end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 SLASH_SKINOPTIONSWINDOW1 = '/skinoptions';

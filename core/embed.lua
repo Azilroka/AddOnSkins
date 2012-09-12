@@ -1,5 +1,4 @@
 if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
-if IsAddOnLoaded("AsphyxiaUI") or IsAddOnLoaded("SinarisUI") then return end
 local s = UIPackageSkinFuncs.s
 local c = UIPackageSkinFuncs.c
 local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
