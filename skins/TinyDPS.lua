@@ -15,8 +15,8 @@ local function SkinTinyDps(self)
 	frame:CreateShadow("Default")
 	if(tdps) then
 		tdps.width = Minimap:GetWidth()
-		tdps.spacing = 2
-		tdps.barHeight = 14
+		tdps.spacing = 1
+		tdps.barHeight = 16
 	end
 	if(status) then
 		tdpsStatusBar:SetBackdrop( {

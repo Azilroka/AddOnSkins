@@ -3,7 +3,7 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local name = "SexyCooldownSkin"
 local scd = SexyCooldown2
 local c = UIPackageSkinFuncs.c
-
+local LSM = LibStub("LibSharedMedia-3.0")
 -- Strip skinning settings from in-game GUI
 local function SCDStripSkinSettings(bar)
 	-- Remove conflicting options
@@ -26,6 +26,15 @@ end
 local function SkinSexyCooldownBar(bar)
 	SCDStripSkinSettings(bar)
 	cSkinFrame(bar)
+	if(cCheckOption("EmbedSexyCooldown")) then
+		bar:ClearAllPoints()
+		if IsAddOnLoaded("ElvUI") then
+			bar:Point('BOTTOM', ElvUI_Bar1, 'TOP', 0, 1)
+			bar:SetHeight(ElvUI_Bar1:GetHeight())
+			bar:SetWidth(ElvUI_Bar1:GetWidth())
+			bar:EnableMouse(false)
+		end
+	end
 end
 
 
@@ -42,42 +51,21 @@ local function SkinSexyCooldownIcon(bar, icon)
 	icon.overlay:SetBackdropBorderColor(c["media].bordercolor"])
 end
 
-local function PositionSexyCooldownBar(bar)
-	if(cCheckOption("EmbedSexyCooldown")) then
-		bar:ClearAllPoints()
-		if IsAddOnLoaded("ElvUI") then
-			bar:Point('BOTTOM', ElvUI_Bar1, 'TOP', 0, 1)
-			bar:SetHeight(ElvUI_Bar1:GetHeight()/1.5)
-			bar:SetWidth(ElvUI_Bar1:GetWidth())
-			bar:EnableMouse(false)
-		end
+local function SkinSexyCooldownLabel(bar,label,store)
+	if IsAddOnLoaded("ElvUI") then
+		local x = UIPackageSkinFuncs.x
+		label:SetFont(x.pixelFont, store.fontsize, "OUTLINE")
+	else
+		label:SetFont(c["media"].pixelfont, store.fontsize, "OUTLINE")
 	end
 end
 
 --[[ Hook bar creation to add skinning ]]
 
 local function HookSCDBar(bar)
-	-- Hook bar skinning & layout
-	bar.UpdateBarLook_ = bar.UpdateBarLook
-	bar.UpdateBarLook = function(self)
-		self:UpdateBarLook_()
-		SkinSexyCooldownBar(self)
-		PositionSexyCooldownBar(self)
-	end
-	-- Hook icon skinning
-	bar.UpdateSingleIconLook_ = bar.UpdateSingleIconLook
-	bar.UpdateSingleIconLook = function(self,icon)
-		self:UpdateSingleIconLook_(icon)
-		SkinSexyCooldownIcon(bar,icon)
-	end
-	bar.UpdateLabel_ = bar.UpdateLabel
-	bar.UpdateLabel = function(self,label,store)
-		if IsAddOnLoaded("ElvUI") then
-			label:SetFont([[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]], store.fontsize, "OUTLINE")
-		else
-			label:SetFont([[Interface\AddOns\Tukui\medias\fonts\normal_font.ttf]], store.fontsize, "OUTLINE")
-		end
-	end
+	hooksecurefunc(bar,"UpdateBarLook",SkinSexyCooldownBar)
+	hooksecurefunc(bar,"UpdateSingleIconLook", SkinSexyCooldownIcon)
+	hooksecurefunc(bar,"UpdateLabel",SkinSexyCooldownLabel)
 	-- Static skinning
 	bar.settings.icon.borderInset = 1
 end

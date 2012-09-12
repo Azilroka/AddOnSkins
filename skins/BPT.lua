@@ -4,6 +4,8 @@ local function SkinBPT(self)
 	if (select(2, UnitClass("player")) ~= "DRUID") then
 		return
 	end
+	BalancePowerTracker_Options.global.enabled = BalancePowerTracker_LunarEclipseIcon
+	BalancePowerTracker.CheckAll()
 	BalancePowerTracker_Eclipse_Bar_Frame:SetTemplate("Transparent")
 	BalancePowerTracker_SolarEclipseIcon:SetTemplate(Transparent)
 	BalancePowerTracker_LunarEclipseIcon:SetTemplate(Transparent)

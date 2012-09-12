@@ -4,6 +4,7 @@ if not IsAddOnLoaded("ElvUI") then return end
 
 local E, L, V, P, G,_ = unpack(ElvUI)
 local XS=E:NewModule('ExtraSkins','AceTimer-3.0','AceEvent-3.0')
+local LSM = LibStub("LibSharedMedia-3.0");
 local Skins = UIPackageSkinFuncs.Skins
 XS.skins = {}
 XS.events = {}
@@ -106,6 +107,8 @@ function XS:Initialize()
 	if IsAddOnLoaded("Tukui_UIPackages_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
 	local f = CreateFrame("Frame",nil)
 
+	self.font = E["media"].normFont
+	self.pixelFont = LSM:Fetch("font","ElvUI Pixel")
 	self.frame = f
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
@@ -170,7 +173,7 @@ end
 function XS:GenerateOptionTable(skinName,order)
 	local data = Skins[skinName]
 	local addon = data.addon
-	local text = data.text or addon
+	local text = data.buttonText or addon
 	local options = {
 		type = 'toggle',
 		name = text,
