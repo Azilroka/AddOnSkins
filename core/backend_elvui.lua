@@ -3,9 +3,10 @@
 if not IsAddOnLoaded("ElvUI") then return end
 
 local E, L, V, P, G,_ = unpack(ElvUI)
-local XS=E:NewModule('ExtraSkins','AceTimer-3.0','AceEvent-3.0')
+local XS = E:NewModule('ExtraSkins','AceTimer-3.0','AceEvent-3.0')
 local LSM = LibStub("LibSharedMedia-3.0");
 local Skins = UIPackageSkinFuncs.Skins
+XS.LSM = LSM
 XS.skins = {}
 XS.events = {}
 XS.register = {}
@@ -101,42 +102,39 @@ E.PopupDialogs["OLD_SKIN_PACKAGE"] = {
 	whileDead = 1,
 }
 
+local function GenerateEventFunction(event)
+	local eventHandler = function(self,event)
+		for skin,funcs in pairs(self.skins) do
+			if cCheckOption(skin) and self.events[event][skin] then
+				for func,_ in pairs(funcs) do
+					func(f,event)
+				end
+			end
+		end
+	end
+	return eventHandler
+end
+
 function XS:Initialize()
 	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
 	if IsAddOnLoaded("Tukui_UIPackages_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
-	local f = CreateFrame("Frame",nil)
-
 	self.font = E["media"].normFont
 	self.pixelFont = LSM:Fetch("font","ElvUI Pixel")
-	self.frame = f
+
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
 			self:RegisterSkin(skin,data.func,data.events)
 		end
 	end
-	f:RegisterEvent("PLAYER_ENTERING_WORLD")
-	f:SetScript("OnEvent", function(self,event)
-		if event == "PLAYER_ENTERING_WORLD" then
-			for skin,funcs in pairs(XS.skins) do
-				if cCheckOption(skin) then
-					for func,_ in pairs(funcs) do
-						func(f,event)
-					end
-				end
-			end
-		else
-			for skin,funcs in pairs(XS.skins) do
-				if cCheckOption(skin) and XS.events[event][skin] then
-					for func,_ in pairs(funcs) do
-						func(f,event)
-					end
-				end
+
+	for skin,funcs in pairs(XS.skins) do
+		if cCheckOption(skin) then
+			for func,_ in pairs(funcs) do
+				func(f,"PLAYER_ENTERING_WORLD")
 			end
 		end
-	end)
-
-	self.frame = f
+	end
 
 	self:GenerateOptions()
 end
@@ -148,7 +146,11 @@ function XS:RegisterSkin(skinName,func,...)
 	for i = 1,#events do
 		local event = select(i,events)
 		if not event then return end
-		if not self.events[event] then self.frame:RegisterEvent(event); self.events[event] = {} end
+		if not self.events[event] then
+			self[event] = GenerateEventFunction(event)
+			self:RegisterEvent(event); 
+			self.events[event] = {} 
+		end
 		self.events[event][skinName] = true
 	end
 end
@@ -166,7 +168,7 @@ function XS:UnregisterEvent(skinName,event)
 		end
 	end
 	if not found then
-		self.frame:UnregisterEvent(event)
+		self:UnregisterEvent(event)
 	end
 end
 
