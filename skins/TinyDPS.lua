@@ -76,4 +76,16 @@ function EmbedTDPS()
   	tdpsRefresh()
 end
 
+function EmbedTDPS()
+--	if not IsAddOnLoaded("TinyDPS") then cDisableOption("EmbedTDPS") return end
+--	if (cCheckOption("EmbedOoC")) then
+--		if (cCheckOption("EmbedTDPS")) then
+--			tdpsFrame:Hide()
+--		end
+--	end
+		tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
+		tdpsFrame:SetHeight(EmbeddingWindow:GetHeight())
+		anchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
+end
+
 cRegisterSkin(name,SkinTinyDps)

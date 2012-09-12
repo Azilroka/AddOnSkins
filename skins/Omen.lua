@@ -1,7 +1,7 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Omen") then return end
 
 function EmbedOmen()
-	if not IsAddOnLoaded("Omen") then cDisableOption("EmbedOption") return end
+	if not IsAddOnLoaded("Omen") then cDisableOption("EmbedOmen") return end
 	if (cCheckOption("EmbedOoC")) then
 		if (cCheckOption("EmbedOmen")) then
 			OmenBarList:Hide()
