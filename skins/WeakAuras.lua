@@ -1,6 +1,7 @@
 if not IsAddOnLoaded("ElvUI") then return end
-local s = UIPackageSkinFuncs.s
-local c = UIPackageSkinFuncs.c
+local U = unpack(select(2,...))
+local s = U.s
+local c = U.c
 
 local function Skin_WeakAuras(frame)
 	if not frame.backdrop then

@@ -1,8 +1,10 @@
 -- Shared backend for both UIs
-local addon,ns = ...
-UIPackageSkinFuncs.Version = GetAddOnMetadata(addon,"Version")
+local addon = select(1,...)
+local U = unpack(select(2,...))
 
-UIPackageSkinFuncs.Skins = {
+U.Version = GetAddOnMetadata(addon,"Version")
+
+U.Skins = {
 	["ACPSkin"] = {
 		["buttonText"] = "Addon Control Panel",
 		["addon"] = "ACP",

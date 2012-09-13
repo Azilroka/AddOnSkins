@@ -1,8 +1,9 @@
 if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("TinyDPS") then return end
+local U = unpack(select(2,...))
 local name = "TinyDPSSkin"
 local function SkinTinyDps(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 	local frame = tdpsFrame
 	local anchor = tdpsAnchor
 	local status = tdpsStatusBar
@@ -74,22 +75,13 @@ function EmbedTDPS()
 			tdpsFrame:Hide()
 		end
 	end
-	if IsAddOnLoaded("Tukui") or (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then
-		tdps.spacing = 1
-		tdps.barHeight = 16
-		tdpsVisibleBars = 8
-		tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
-		tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
-		tdpsRefresh()
-	end
-	if IsAddOnLoaded("ElvUI_SLE") then
-		tdps.spacing = 1
-		tdps.barHeight = 16
-		tdpsVisibleBars = 9
-		tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
-		tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
-		tdpsRefresh()
-	end
+	local visibleBars = U.sle and 9 or 8
+	tdps.spacing = 1
+	tdps.barHeight = 16
+	tdpsVisibleBars = visibleBars
+	tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
+	tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
+	tdpsRefresh()
 end
 
 cRegisterSkin(name,SkinTinyDps)

@@ -1,8 +1,9 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Odyssey") then return end
+local U = unpack(select(2,...))
 local name = "OdysseySkin"
 local function SkinOdyssey(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 
 	OdysseyFrameQuestDBScrollFrame:StripTextures(True)
 	OdysseyMapsMenuScrollFrame:StripTextures(True)

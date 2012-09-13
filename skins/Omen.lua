@@ -1,4 +1,5 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Omen") then return end
+local U = unpack(select(2,...))
 
 function EmbedOmen()
 	if not IsAddOnLoaded("Omen") then cDisableOption("EmbedOmen") return end
@@ -44,8 +45,8 @@ end
 
 local name = "OmenSkin"
 local function SkinOmen(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 
 	if(TukuiThreatBar) then TukuiThreatBar:Kill() end
 

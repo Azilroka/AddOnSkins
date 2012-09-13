@@ -1,8 +1,9 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("AdvancedTradeSkillWindow") then return end
+local U = unpack(select(2,...))
 local name = 'ATSWSkin'
 local function SkinATSW(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 	cSkinFrame(ATSWFrame)
 	ATSWSkillIcon:StripTextures(True)
 	ATSWListScrollFrame:StripTextures(True)

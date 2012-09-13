@@ -1,11 +1,12 @@
 ﻿if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
 if not IsAddOnLoaded("Quartz") then return end
+local U = unpack(select(2,...))
 local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
 if not Q3 then return end
 local name = "QuartzSkin"
 local function SkinQuartz(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 	if IsAddOnLoaded("Tukui") then UIFont = c["media"].font UIFontSize = 12 end
 	if IsAddOnLoaded("ElvUI") then UIFont = c["media"].normFont UIFontSize = 12 end
 

@@ -1,10 +1,11 @@
 if not IsAddOnLoaded("ArkInventory") then return end
+local U = unpack(select(2,...))
 local ArkInventory = LibStub("AceAddon-3.0"):GetAddon("ArkInventory")
 local name = "ArkInventorySkin"
 local function SkinArkInventory(self)
 	local _G = _G
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 	ArkInventory.Frame_Main_Paint_ = ArkInventory.Frame_Main_Paint
 	ArkInventory.Frame_Main_Paint = function(frame)
 		if not ArkInventory.ValidFrame(frame, true) then return	end

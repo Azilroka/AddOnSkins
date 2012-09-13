@@ -4,22 +4,25 @@
 -- Added Skinning features for ease of skinning and smaller size skins. - Azilroka
 
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-local addon,ns = ...
-UIPackageSkinFuncs = {}
-local s
+local addon,Engine = ...
 
+local AddOn = {};
+
+Engine[1] = AddOn
+
+local s
 if ElvUI then
 	local E, L, V, P, G, DF = unpack(ElvUI)
 	local S = E:GetModule('Skins')
-	UIPackageSkinFuncs.s = S
-	UIPackageSkinFuncs.c = E
-	UIPackageSkinFuncs.ccolor = E.myclass
+	AddOn.s = S
+	AddOn.c = E
+	AddOn.ccolor = E.myclass
 	s = S
 else
 	local T, C, L = unpack(Tukui)
-	UIPackageSkinFuncs.s = T
-	UIPackageSkinFuncs.c = C
-	UIPackageSkinFuncs.ccolor = T.myclass
+	AddOn.s = T
+	AddOn.c = C
+	AddOn.ccolor = T.myclass
 	s = T
 end
 
@@ -119,20 +122,20 @@ function cSkinFrameD(self)
 end
 
 function cSkinStatusBar(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = AddOn.s
+	local c = AddOn.c
 	self:StripTextures(True)
 	self:CreateBackdrop()
 	self:SetStatusBarTexture(c["media"].normTex)
 end
 
 function cSkinCCStatusBar(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = AddOn.s
+	local c = AddOn.c
 	self:StripTextures(True)
 	self:CreateBackdrop("ClassColor")
 	self:SetStatusBarTexture(c["media"].normTex)
-	local color = RAID_CLASS_COLORS[UIPackageSkinFuncs.ccolor]
+	local color = RAID_CLASS_COLORS[AddOn.ccolor]
 	self:SetStatusBarColor(color.r, color.g, color.b)
 end
 
@@ -155,7 +158,7 @@ end
 
 function cCheckOption(optionName)
 	if IsAddOnLoaded("ElvUI") then
-		local c = UIPackageSkinFuncs.c
+		local c = AddOn.c
 		return c.db.skins[optionName]
 	else
 		return UISkinOptions[optionName] == "Enabled"
@@ -164,7 +167,7 @@ end
 
 function cDisableOption(optionName)
 	if IsAddOnLoaded("ElvUI") then
-		local c = UIPackageSkinFuncs.c
+		local c = AddOn.c
 		c.db.skins[optionName] = false
 	else
 		UISkinOptions[optionName] = "Disabled"
@@ -173,7 +176,7 @@ end
 
 function cEnableOption(optionName)
 	if IsAddOnLoaded("ElvUI") then
-		local c = UIPackageSkinFuncs.c
+		local c = AddOn.c
 		c.db.skins[optionName] = true
 	else
 		UISkinOptions[optionName] = "Enabled"
@@ -182,14 +185,14 @@ end
 
 function cRegisterSkin(skinName,skinFunc,...)
 	local events = ...
-	local XS = UIPackageSkinFuncs.x
+	local XS = AddOn.x
 	local registerMe = { func = skinFunc, events = events or {} }
 	if not XS.register[skinName] then XS.register[skinName] = {} end
 	XS.register[skinName][skinFunc] = registerMe
 end
 
 function cUnregisterEvent(skinName,frame,event)
-	local XS = UIPackageSkinFuncs.x
+	local XS = AddOn.x
 	XS:UnregisterEvent(skinName,event)
 end
 

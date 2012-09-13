@@ -1,4 +1,5 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MyRolePlay") then return end
+local U = unpack(select(2,...))
 
 hooksecurefunc(mrp, "CreateBrowseFrame", function()
 	if (cCheckOption("MyRolePlaySkin")) then 
@@ -103,8 +104,8 @@ local function reskinHeader(c, field)
 		for i = 1, field:GetNumChildren() do
 			local f = select(i, field:GetChildren())
 			if not f.reskinned then
-				local s = UIPackageSkinFuncs.s
-				local z = UIPackageSkinFuncs.c
+				local s = U.s
+				local z = U.c
 				if IsAddOnLoaded("ElvUI") then f.h.SetBackdrop = z.noop end
 				if IsAddOnLoaded("Tukui") then f.h.SetBackdrop = s.dummy end
 				f:StripTextures(True)

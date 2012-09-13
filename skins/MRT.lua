@@ -1,8 +1,9 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MizusRaidTracker") then return end
+local U = unpack(select(2,...))
 local name = "MRTSkin"
 local function SkinMRT(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 
 	cSkinFrame(MRT_GUIFrame)
 	cSkinFrame(MRT_GUI_FourRowDialog)

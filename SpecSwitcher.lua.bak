@@ -1,7 +1,7 @@
 if not IsAddOnLoaded("Tukui") then return end
 if UnitLevel("player") <= 10 then return end
-local s = UIPackageSkinFuncs.s
-local c = UIPackageSkinFuncs.c
+local s = U.s
+local c = U.c
 local frame = CreateFrame("Frame", "SpecTalent", UIParent)
 	frame:SetTemplate()
 

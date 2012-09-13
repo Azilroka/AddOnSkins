@@ -1,7 +1,8 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("PowerAuras") then return end
+local U = unpack(select(2,...))
 LoadAddOn("PowerAurasOptions")
-local s = UIPackageSkinFuncs.s
-local c = UIPackageSkinFuncs.c
+local s = U.s
+local c = U.c
 
 local function SkinPowerAuras(self, aura, elapsed)
 	local returnValue = PowaAuras.OldUpdateAura(self, aura, elapsed)
@@ -48,8 +49,8 @@ s:RegisterSkin('PowerAuras', PowerAuras_LoadSkin)
 
 local name = "PowerAurasSkin"
 local function SkinPowerAuras(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 
 	cSkinFrame(PowaOptionsFrame)
 	cSkinFrame(PowaBarConfigFrame)

@@ -1,8 +1,9 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Poisoner") then return end
+local U = unpack(select(2,...))
 local name = "PoisonerSkin"
 local function SkinPoisoner(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 
 	cSkinFrame(PoisonerOptions_SettingsFrame)
 	cSkinButton(PoisonerOptions_MenuSortingButton)

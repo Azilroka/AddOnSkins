@@ -1,5 +1,6 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Reforgenator") then return end
-local c = UIPackageSkinFuncs.c
+local U = unpack(select(2,...))
+local c = U.c
 local name = "ReforgenatorSkin"
 local function SkinReforgenator(self)
 	cSkinFrame(ReforgenatorPanel)

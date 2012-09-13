@@ -1,8 +1,9 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("RaidBuffStatus") then return end
+local U = unpack(select(2,...))
 local name = "RaidBuffStatusSkin"
 local function SkinRBS(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 
 	cSkinFrame(RBSFrame)
 	cSkinButton(RaidBuffStatus.scanbutton)

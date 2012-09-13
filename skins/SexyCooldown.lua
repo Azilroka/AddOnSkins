@@ -1,8 +1,8 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("SexyCooldown2") then return end
-
+local U = unpack(select(2,...))
 local name = "SexyCooldownSkin"
 local scd = SexyCooldown2
-local c = UIPackageSkinFuncs.c
+local c = U.c
 local LSM = LibStub("LibSharedMedia-3.0")
 -- Strip skinning settings from in-game GUI
 local function SCDStripSkinSettings(bar)
@@ -53,7 +53,7 @@ end
 
 local function SkinSexyCooldownLabel(bar,label,store)
 	if IsAddOnLoaded("ElvUI") then
-		local x = UIPackageSkinFuncs.x
+		local x = U.x
 		label:SetFont(x.pixelFont, store.fontsize, "OUTLINE")
 	else
 		label:SetFont(c["media"].pixelfont, store.fontsize, "OUTLINE")

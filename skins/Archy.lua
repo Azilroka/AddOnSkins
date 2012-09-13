@@ -1,8 +1,9 @@
 if not(IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("Archy") then return end
+local U = unpack(select(2,...))
 local name = "ArchySkin"
 local function SkinArchy(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 
 	local function SkinArchyArtifactFrame()
 		cSkinFrame(ArchyArtifactFrame)

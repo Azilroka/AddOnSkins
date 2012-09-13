@@ -1,6 +1,7 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Skada") then return end
-local s = UIPackageSkinFuncs.s
-local c = UIPackageSkinFuncs.c
+local U = unpack(select(2,...))
+local s = U.s
+local c = U.c
 
 local Skada = Skada
 local barSpacing = 1
@@ -202,7 +203,7 @@ end
 SLASH_SKADABACKDROP1 = '/skadabackdrop';
 function SlashCmdList.SKADABACKDROP(msg, editbox)
 	if(not cCheckOption("SkadaBackdrop")) then
-		cDisableOption("SkadaBackdrop")
+		cEnableOption("SkadaBackdrop")
 	else
 		cDisableOption("SkadaBackdrop")
 	end

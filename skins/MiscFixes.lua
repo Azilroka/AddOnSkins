@@ -1,4 +1,5 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
+local U = unpack(select(2,...))
 if IsAddOnLoaded("TomTom") then if TomTomBlock then TomTomBlock:SetTemplate("Transparent") end end
 if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
 LoadAddOn("acb_CastBar")
@@ -61,7 +62,7 @@ local buttons = {
 }
 
 local function SkinButton(frame)
-	local s = UIPackageSkinFuncs.s
+	local s = U.s
 	if(frame:GetObjectType() ~= "Button") then return end
 
 	for i, buttons in pairs(buttons) do

@@ -1,8 +1,9 @@
 if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("ExtVendor") then return end
+local U = unpack(select(2,...))
 local name = "ExtVendorSkin"
 local function SkinExtVendor(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 	if IsAddOnLoaded("ElvUI") then
 		if c.private.skins.blizzard.enable ~= true or c.private.skins.blizzard.merchant ~= true then return end
 	end

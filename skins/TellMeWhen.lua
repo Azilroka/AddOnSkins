@@ -1,7 +1,7 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("TellMeWhen") then return end
-
-local s = UIPackageSkinFuncs.s
-local c = UIPackageSkinFuncs.c
+local U = unpack(select(2,...))
+local s = U.s
+local c = U.c
 
 local function LoadSkin()
 	LoadAddOn("TellMeWhen_Options")

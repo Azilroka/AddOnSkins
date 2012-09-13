@@ -1,11 +1,12 @@
 ﻿if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Skillet") then return end
-local s = UIPackageSkinFuncs.s
-local c = UIPackageSkinFuncs.c
+local U = unpack(select(2,...))
+local s = U.s
+local c = U.c
 local Skillet = _G.Skillet
 
 function SetModifiedBackdrop(self)
 	if Tukui then
-		local color = RAID_CLASS_COLORS[UIPackageSkinFuncs.ccolor]
+		local color = RAID_CLASS_COLORS[U.ccolor]
 		self:SetBackdropColor(color.r*.15, color.g*.15, color.b*.15)
 		self:SetBackdropBorderColor(color.r, color.g, color.b)
 	else
@@ -16,7 +17,7 @@ end
 
 function SetOriginalBackdrop(self)
 	if Tukui then
-		local color = RAID_CLASS_COLORS[UIPackageSkinFuncs.ccolor]
+		local color = RAID_CLASS_COLORS[U.ccolor]
 		if c["general"].classcolortheme == true then
 			self:SetBackdropBorderColor(color.r, color.g, color.b)
 		else

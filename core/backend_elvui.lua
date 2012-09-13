@@ -2,16 +2,19 @@
 
 if not IsAddOnLoaded("ElvUI") then return end
 
+local U = unpack(select(2,...))
 local E, L, V, P, G,_ = unpack(ElvUI)
 local XS = E:NewModule('ExtraSkins','AceTimer-3.0','AceEvent-3.0')
 local LSM = LibStub("LibSharedMedia-3.0");
-local Skins = UIPackageSkinFuncs.Skins
+local Skins = U.Skins
 XS.LSM = LSM
 XS.skins = {}
 XS.events = {}
 XS.register = {}
 
-UIPackageSkinFuncs.x = XS
+U.x = XS
+U.elv = true
+U.sle = IsAddOnLoaded("ElvUI_SLE")
 
 P["skins"] = {
 	["ACPSkin"] = true,

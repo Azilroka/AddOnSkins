@@ -5,8 +5,8 @@ skin:RegisterEvent("ADDON_LOADED")
 skin:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "DXE" then return end
 	if (UISkinOptions.DXESkin == "Disabled") then return end
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 
 local DXE = DXE
 local _G = getfenv(0)

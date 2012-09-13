@@ -6,10 +6,11 @@ All rights reserved.
 ]]--
 if not IsAddOnLoaded("Tukui") then return end
 if not IsAddOnLoaded("BigWigs") then return end
+local U = unpack(select(2,...))
 local name = "BigWigsSkin"
 local function SkinBigWigs(self)
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 
 	-- little config
 	----------------------------------------
@@ -20,7 +21,7 @@ local function SkinBigWigs(self)
 	local disablescaling = true		-- disables bar scaling (including emphasized bars). 
 	----------------------------------------
 
-	local barcolor = classcolor and RAID_CLASS_COLORS[UIPackageSkinFuncs.ccolor] -- or {["r"]=.1,["g"]=.1,["b"]=1,} -- uncomment the following to use your own color for the bars
+	local barcolor = classcolor and RAID_CLASS_COLORS[U.ccolor] -- or {["r"]=.1,["g"]=.1,["b"]=1,} -- uncomment the following to use your own color for the bars
 	local buttonsize
 
 	-- get buttonsize from Tukui

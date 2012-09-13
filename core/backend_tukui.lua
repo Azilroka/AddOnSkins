@@ -1,14 +1,16 @@
 if not IsAddOnLoaded("Tukui") then return end
 
+local U = unpack(select(2,...))
 UISkinOptions = {}
-local s = UIPackageSkinFuncs.s
-local c = UIPackageSkinFuncs.c
+local s = U.s
+local c = U.c
 local XS = {}
 XS.skins = {}
 XS.events = {}
 XS.register = {}
-UIPackageSkinFuncs.x = XS
-local Skins = UIPackageSkinFuncs.Skins
+U.x = XS
+U.tuk = true
+local Skins = U.Skins
 XS.Init = function(self)
 	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
@@ -177,7 +179,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions.text = SkinOptions:CreateFontString(nil, "OVERLAY")
 	SkinOptions.text:SetFont(UIFont, 14, "OUTLINE")
 	SkinOptions.text:SetPoint("TOP", SkinOptions, 0, -6)
-	SkinOptions.text:SetText("|cffC495DDTukui|r & |cff1784d1ElvUI|r Skin Options - v"..UIPackageSkinFuncs.Version)
+	SkinOptions.text:SetText("|cffC495DDTukui|r & |cff1784d1ElvUI|r Skin Options - v"..U.Version)
 	SkinOptions:EnableMouse(true)
 	SkinOptions:RegisterForDrag("LeftButton");
 	SkinOptions:SetScript("OnDragStart", function(self) self:StartMoving() end)

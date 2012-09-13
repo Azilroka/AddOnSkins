@@ -4,14 +4,14 @@
 	All rights reserved.
 ]]--
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("DBM-Core") then return end
-
+local U = unpack(select(2,...))
 local croprwicons = true			-- crops blizz shitty borders from icons in RaidWarning messages
 local rwiconsize = 18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
 local buttonsize = 22
 
 local function LoadSkin()
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 	local function SkinBars(self)
 		for bar in self:GetBarIterator() do
 			if not bar.injected then
@@ -276,13 +276,13 @@ local function LoadSkinOptions()
 end
 
 if IsAddOnLoaded("Tukui") then 
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 	s.SkinFuncs["DBM-GUI"] = LoadSkinOptions
 end
 if IsAddOnLoaded("ElvUI") then 
-	local s = UIPackageSkinFuncs.s
-	local c = UIPackageSkinFuncs.c
+	local s = U.s
+	local c = U.c
 	c:GetModule('Skins')
 	s:RegisterSkin('DBM-GUI', LoadSkinOptions)
 end
@@ -290,8 +290,8 @@ end
 --local Init = function()
 	local name = "DBMSkin"
 	local function SkinDBM(self)
-		local s = UIPackageSkinFuncs.s
-		local c = UIPackageSkinFuncs.c
+		local s = U.s
+		local c = U.c
 		LoadSkin()
 		DBM_SavedOptions.Enabled=true
 		DBT_SavedOptions["DBM"].Scale = 1
