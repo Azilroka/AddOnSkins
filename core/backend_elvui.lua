@@ -65,6 +65,7 @@ P["skins"] = {
 	["RaidInviteOrganizerSkin"] = true,
 	["RaidBuffStatusSkin"] = true,
 	["RecountSkin"] = true,
+	["ReforgenatorSkin"] = true,
 	["SearingPlasmaTrackerSkin"] = true,
 	["SexyCooldownSkin"] = true,
 	["SkadaSkin"] = true,

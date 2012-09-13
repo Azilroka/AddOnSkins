@@ -144,6 +144,9 @@ UIPackageSkinFuncs.Skins = {
 	["RecountSkin"] = {
 		["addon"] = "Recount"
 	},
+	["ReforgenatorSkin"] = {
+		["addon"] = "Reforgenator"
+	},
 	["SearingPlasmaTrackerSkin"] = {
 		["buttonText"] = "Searing Plasma Tracker",
 		["addon"] = "SearingPlasmaTracker"
