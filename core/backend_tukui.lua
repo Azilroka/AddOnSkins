@@ -69,10 +69,19 @@ XS.UnregisterEvent = function(self,skinName,event)
 	end
 end
 
+s.CreatePopup["OLD_SKIN_PACKAGE"] = {
+	question = "You have the old Tukui_UIPackages_Skins addon.  This addon replaces it and will conflict.  Press accept to disable this addon and reload your UI.",
+	answer1 = ACCEPT,
+	function1 = function() DisableAddOn("Tukui_UIPackages_Skins"); ReloadUI() end,
+	timeout = 0,
+	whileDead = 1,
+}
+
 local XSFrame = CreateFrame("Frame",nil)
 XSFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 XSFrame:SetScript("OnEvent",function(self)
 	XS:Init()
+	if IsAddOnLoaded("Tukui_UIPackages_Skins") then s.ShowPopup("OLD_SKIN_PACKAGE") end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 
