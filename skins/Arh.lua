@@ -1,7 +1,8 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Arh") then return end
+local U = unpack(select(2,...))
 local name = 'ArhSkin'
 local function SkinArh(self,event)
-	cSkinFrame(Arh_MainFrame)
+	U.SkinFrame(Arh_MainFrame)
 end
 
-cRegisterSkin(name,SkinArh)
+U.RegisterSkin(name,SkinArh)

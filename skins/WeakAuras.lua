@@ -46,7 +46,7 @@ local function WeakAuras_LoadSkin()
 		end
 	end
 
-	cRegisterSkin(name,SkinWeakAuras)
+	U.RegisterSkin(name,SkinWeakAuras)
 end
 
 s:RegisterSkin('WeakAuras', WeakAuras_LoadSkin)

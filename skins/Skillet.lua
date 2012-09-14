@@ -138,7 +138,7 @@ local function SkinIcon(self)
 	SkinButton(SkilletRecipeDifficultyButton)
 	SkinButton(SkilletExpandAllButton)
 	SkinButton(SkilletCollapseAllButton)
-	cSkinButton(SkilletShowOptionsButton)
+	U.SkinButton(SkilletShowOptionsButton)
 	SkilletShowOptionsButton:SetHeight(16)
 	SkilletShowOptionsButton:SetWidth(12)
 	SkilletShowOptionsButton:SetPoint("RIGHT", SkilletFrameCloseButton, "LEFT", 3, 0)
@@ -162,18 +162,18 @@ local function SkinShopping(self)
 	SkilletShoppingList:SetTemplate("Transparent")
 	SkilletShoppingListParent:StripTextures()
 	SkilletShoppingListParent:SetTemplate("Default")
-	cSkinCloseButton(SkilletShoppingListCloseButton)
-	cSkinCheckBox(SkilletShowQueuesFromAllAlts)
-	cSkinScrollBar(SkilletShoppingListListScrollBar)
+	U.SkinCloseButton(SkilletShoppingListCloseButton)
+	U.SkinCheckBox(SkilletShowQueuesFromAllAlts)
+	U.SkinScrollBar(SkilletShoppingListListScrollBar)
 end
 
 local function SkinPluginButtons(self)
 
 		if SkilletPluginDropdown1 then
-			cSkinButton(_G["SkilletPluginDropdown1"])
+			U.SkinButton(_G["SkilletPluginDropdown1"])
 		end
 		if SkilletPluginDropdown2 then
-			cSkinButton(_G["SkilletPluginDropdown2"])
+			U.SkinButton(_G["SkilletPluginDropdown2"])
 		end
 end	
 
@@ -218,7 +218,7 @@ local function SkilletFrameOnShow(self)
 					_G[object]:SetTemplate("Transparent")
 		end	
 
-		cSkinCloseButton(SkilletNotesCloseButton)
+		U.SkinCloseButton(SkilletNotesCloseButton)
 
 		SkilletSkillListParent:SetPoint("TOPLEFT", SkilletFrame, "TOPLEFT", 5, -100)
 		SkilletRankFrame:SetPoint("TOPRIGHT", SkilletFrame, "TOPRIGHT", -12, -57)
@@ -244,11 +244,11 @@ local function SkilletFrameOnShow(self)
 		SkilletTradeskillTooltip:StripTextures()
 		SkilletTradeskillTooltip:SetTemplate("Default")
 
-		cSkinScrollBar(SkilletQueueListScrollBar)
+		U.SkinScrollBar(SkilletQueueListScrollBar)
 
 	for i=1,3 do
 		local queDelete = _G["SkilletQueueButton"..i.."DeleteButton"]
-			cSkinButton(queDelete)
+			U.SkinButton(queDelete)
 			queDelete:SetWidth(14)
 			queDelete:SetHeight(14)
 	end
@@ -260,18 +260,18 @@ local function SkilletFrameOnShow(self)
 
 		for i=1,4 do 
 			tabs = _G["Enchantrix_BarkerOptions_FrameTab"..i]
-				cSkinTab(tabs)
+				U.SkinTab(tabs)
 		end
 
 		Enchantrix_BarkerOptions_FrameTab1:ClearAllPoints()
 		Enchantrix_BarkerOptions_FrameTab1:SetPoint("TOPLEFT", Enchantrix_BarkerOptions_Frame, "BOTTOMLEFT", 11, 1)
 		Enchantrix_BarkerOptions_CloseButton:SetPoint("TOPRIGHT", Enchantrix_BarkerOptions_Frame, "TOPRIGHT", -5, -2)
 
-		cSkinButton(Enchantrix_BarkerOptionsBark_Button)
-		cSkinButton(Enchantrix_BarkerOptionsReset_Button)
-		cSkinButton(Enchantrix_BarkerOptionsTest_Button)
+		U.SkinButton(Enchantrix_BarkerOptionsBark_Button)
+		U.SkinButton(Enchantrix_BarkerOptionsReset_Button)
+		U.SkinButton(Enchantrix_BarkerOptionsTest_Button)
 
-		cSkinCloseButton(Enchantrix_BarkerOptions_CloseButton)
+		U.SkinCloseButton(Enchantrix_BarkerOptions_CloseButton)
 	end
 end
 
@@ -369,7 +369,7 @@ local function SkilletFrameOnUpdate(self, event, ...)
 	if SkilletQueueButton13DeleteButton then
 			for i=1,13 do
 			local queDelete = _G["SkilletQueueButton"..i.."DeleteButton"]
-				cSkinButton(queDelete)
+				U.SkinButton(queDelete)
 				queDelete:SetWidth(14)
 				queDelete:SetHeight(14)
 			end
@@ -398,17 +398,17 @@ local function SkinSkillet(Self)
 				}
 
 		for _, button in pairs(buttons) do
-						cSkinButton(_G[button])
+						U.SkinButton(_G[button])
 		end	
 
-		cSkinCloseButton(SkilletFrameCloseButton)
-		cSkinCloseButton(SkilletStandalonQueueCloseButton)
+		U.SkinCloseButton(SkilletFrameCloseButton)
+		U.SkinCloseButton(SkilletStandalonQueueCloseButton)
 
-		cSkinDropDownBox(SkilletRecipeGroupDropdown)
-		cSkinDropDownBox(SkilletSortDropdown)
-		cSkinDropDownBox(SkilletQueueLoadDropdown)
+		U.SkinDropDownBox(SkilletRecipeGroupDropdown)
+		U.SkinDropDownBox(SkilletSortDropdown)
+		U.SkinDropDownBox(SkilletQueueLoadDropdown)
 
-		cDesaturate(SkilletSearchFilterClear)
+		U.Desaturate(SkilletSearchFilterClear)
 
 		SkilletSortAscButton:StripTextures()
 		SkilletSortAscButton:SetTemplate("Default", true)
@@ -438,20 +438,20 @@ local function SkinSkillet(Self)
 			SkilletSortDescButton.texture:SetVertexColor(unpack(c["media"].bordercolor))
 		end
 
-		cSkinNextPrevButton(SkilletRecipeGroupOperations)
+		U.SkinNextPrevButton(SkilletRecipeGroupOperations)
 
-		cSkinEditBox(SkilletItemCountInputBox)
-		cSkinEditBox(SkillButtonNameEdit)
-		cSkinEditBox(GroupButtonNameEdit)
-		cSkinEditBox(SkilletFilterBox)
+		U.SkinEditBox(SkilletItemCountInputBox)
+		U.SkinEditBox(SkillButtonNameEdit)
+		U.SkinEditBox(GroupButtonNameEdit)
+		U.SkinEditBox(SkilletFilterBox)
 		SkilletFilterBox:SetHeight(20)
-		cSkinEditBox(SkilletQueueSaveEditBox)
+		U.SkinEditBox(SkilletQueueSaveEditBox)
 	
 		SkilletRankFrameBorder:StripTextures()
-		cSkinStatusBar(SkilletRankFrame)
+		U.SkinStatusBar(SkilletRankFrame)
 		SkilletRankFrame:SetHeight(10)		
 	
-		cSkinScrollBar(SkilletSkillListScrollBar, 5)
+		U.SkinScrollBar(SkilletSkillListScrollBar, 5)
 
 		local SkilletOnload = _G["SkilletSkillListParent"]
 		SkilletOnload:SetScript("OnShow", SkilletFrameOnShow)
@@ -470,4 +470,4 @@ local function SkinSkillet(Self)
 		local plugin = _G["SkilletPluginButton"]
 		plugin:SetScript("PostClick", SkinPluginButtons)
 end
-cRegisterSkin(name,SkinSkillet)
+U.RegisterSkin(name,SkinSkillet)

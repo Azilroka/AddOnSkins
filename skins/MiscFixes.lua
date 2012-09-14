@@ -27,7 +27,7 @@ LootConfirmer:RegisterEvent("CONFIRM_LOOT_ROLL");
 LootConfirmer:RegisterEvent("LOOT_OPENED");
 LootConfirmer:SetScript("OnEvent",
 	function(self, event, ...)
-		if (cCheckOption("LootConfirmer")) then
+		if (U.CheckOption("LootConfirmer")) then
 		if event == "PLAYER_ENTERING_WORLD" then
 			StaticPopupDialogs["CONFIRM_LOOT_ROLL"] = nil
 			StaticPopupDialogs["LOOT_BIND"] = nil
@@ -102,7 +102,7 @@ end
 local UISkinMinimapButtons = CreateFrame("Frame")
 UISkinMinimapButtons:RegisterEvent("PLAYER_ENTERING_WORLD")
 UISkinMinimapButtons:SetScript("OnEvent", function(self, event)
-	if (not cCheckOption("UISkinMinimap")) then return end
+	if (not U.CheckOption("UISkinMinimap")) then return end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	for i = 1, Minimap:GetNumChildren() do
 		SkinButton(select(i, Minimap:GetChildren()))

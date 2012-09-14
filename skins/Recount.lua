@@ -36,7 +36,7 @@ local function SkinRecount(self)
 			frame.CloseButton.t:SetPoint("CENTER", 1, 1)
 			frame.CloseButton.t:SetText("X")
 		end
-		if IsAddOnLoaded("ElvUI") then if not Recount_MainWindow then cSkinCloseButton(frame.CloseButton) end end
+		if IsAddOnLoaded("ElvUI") then if not Recount_MainWindow then U.SkinCloseButton(frame.CloseButton) end end
 	end
 
 	local function SkinMainFrame(frame)
@@ -46,7 +46,7 @@ local function SkinRecount(self)
 		frame.bgMain:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT")
 		frame.bgMain:SetPoint("TOP", frame, "TOP", 0, -7)
 		frame.bgMain:SetFrameLevel(frame:GetFrameLevel())
-		if (not cCheckOption("RecountBackdrop")) then frame.bgMain:Hide() end
+		if (not U.CheckOption("RecountBackdrop")) then frame.bgMain:Hide() end
 		frame.CloseButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -1, -9)
 		frame:SetBackdrop(nil)
 		frame.TitleBackground = CreateFrame("Frame", nil, frame)
@@ -69,7 +69,7 @@ local function SkinRecount(self)
 			frame.CloseButton.t:SetPoint("CENTER", 1, 1)
 			frame.CloseButton.t:SetText("X")
 		end
-		if IsAddOnLoaded("ElvUI") then if not Recount_MainWindow then cSkinCloseButton(frame.CloseButton) end end
+		if IsAddOnLoaded("ElvUI") then if not Recount_MainWindow then U.SkinCloseButton(frame.CloseButton) end end
 	end
 
 	Recount.UpdateBarTextures = function(self)
@@ -117,7 +117,7 @@ local function SkinRecount(self)
 
 	Recount:UpdateBarTextures()
 
-	cSkinScrollBar(Recount_MainWindow_ScrollBarScrollBar)
+	U.SkinScrollBar(Recount_MainWindow_ScrollBarScrollBar)
 	hooksecurefunc(Recount,"RefreshMainWindow",function(self,datarefresh)
 	 	if not Recount.db.profile.MainWindow.ShowScrollbar then
 			Recount_MainWindow_ScrollBarScrollBar:Hide()
@@ -145,10 +145,10 @@ local function SkinRecount(self)
 				button:GetHighlightTexture():SetDesaturated(true)
 			end
 		end
-		cDesaturate(Recount.DetailWindow.RightButton)
-		cDesaturate(Recount.DetailWindow.LeftButton)
-		cDesaturate(Recount.DetailWindow.ReportButton)
-		cDesaturate(Recount.DetailWindow.SummaryButton)
+		U.Desaturate(Recount.DetailWindow.RightButton)
+		U.Desaturate(Recount.DetailWindow.LeftButton)
+		U.Desaturate(Recount.DetailWindow.ReportButton)
+		U.Desaturate(Recount.DetailWindow.SummaryButton)
 	end
 
 	if IsAddOnLoaded("Tukui") then
@@ -224,10 +224,10 @@ local function SkinRecount(self)
 
 	end
 
-	if cCheckOption("EmbedRecount") then EmbedRecount() end
+	if U.CheckOption("EmbedRecount") then EmbedRecount() end
 end
 
-cRegisterSkin(name,SkinRecount)
+U.RegisterSkin(name,SkinRecount)
 
 StaticPopupDialogs["RECOUNT_RELOADUI"] = {
 	text = "Reload your User Interface?",
@@ -258,9 +258,9 @@ StaticPopupDialogs["RECOUNT_RELOADUI"] = {
 }
 
 function EmbedRecount()
-	cEnableOption("EmbedRecount")
-	if (cCheckOption("EmbedOoC")) then
-		if (cCheckOption("EmbedRecount")) then
+	U.EnableOption("EmbedRecount")
+	if (U.CheckOption("EmbedOoC")) then
+		if (U.CheckOption("EmbedRecount")) then
 			Recount_MainWindow:Hide()
 		end
 	end
@@ -273,31 +273,31 @@ end
 
 SLASH_RECOUNTEMBEDDED1, SLASH_RECOUNTEMBEDDED2 = '/er', '/embedrecount';
 function SlashCmdList.RECOUNTEMBEDDED(msg, editbox)
-	if (not cCheckOption("EmbedRecount")) then
-		cEnableOption("EmbedRecount")
+	if (not U.CheckOption("EmbedRecount")) then
+		U.EnableOption("EmbedRecount")
 		EmbedRecount()
 	else
-		cDisableOption("EmbedRecount")
+		U.DisableOption("EmbedRecount")
 		Recount:LockWindows(false)
 	end
-	if(cCheckOption("EmbedRecount")) then
+	if(U.CheckOption("EmbedRecount")) then
 	print("Recount Embedding is |cff00ff00Enabled|r.");
 	end
-	if(not cCheckOption("EmbedRecount")) then
+	if(not U.CheckOption("EmbedRecount")) then
 	print("Recount Embedding is |cffff2020Disabled|r.");
 	end
 end
 SLASH_RECOUNTBACKDROP1 = '/recountbackdrop';
 function SlashCmdList.RECOUNTBACKDROP(msg, editbox)
-	if(not cCheckOption("EmbedRecount")) then
+	if(not U.CheckOption("EmbedRecount")) then
 		print("You must have the Recount Skin enabled to use this feature.")
 		return
 	end
-	if(not cCheckOption("RecountBackdrop")) then
-		cEnableOption("RecountBackdrop")
+	if(not U.CheckOption("RecountBackdrop")) then
+		U.EnableOption("RecountBackdrop")
 		print("Recount Backdrop |cff00ff00Enabled|r")
 	else
-		cDisableOption("RecountBackdrop")
+		U.DisableOption("RecountBackdrop")
 		print("Recount Backdrop |cffff2020Disabled|r")
 	end
 	print("You must reload your interface for this change.")

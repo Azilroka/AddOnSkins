@@ -66,10 +66,10 @@ local function SkinMageNuggets(self)
 	MageNugMI_Frame_MiBar:CreateBackdrop("Transparent")
 	MageNugCauterize_Frame_Bar:CreateBackdrop("Transparent")
 
-	cSkinButton(MageNugHordeFrameClose)
-	cSkinButton(MageNugHordeFrameShowOptions)
-	cSkinButton(MageNugAlliFrameClose)
-	cSkinButton(MageNugAlliFrameShowOptions)
+	U.SkinButton(MageNugHordeFrameClose)
+	U.SkinButton(MageNugHordeFrameShowOptions)
+	U.SkinButton(MageNugAlliFrameClose)
+	U.SkinButton(MageNugAlliFrameShowOptions)
 
 	MageNugAB_Frame_ABBar:CreateBackdrop("Transparent")
 	MageNugAB_Frame_ABBar:ClearAllPoints()
@@ -87,4 +87,4 @@ local function SkinMageNuggets(self)
 
 end
 
-cRegisterSkin(name,SkinMageNuggets)
+U.RegisterSkin(name,SkinMageNuggets)

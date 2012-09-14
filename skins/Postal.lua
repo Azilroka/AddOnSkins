@@ -15,40 +15,40 @@ local function SkinPostal(self)
 		b.returnicon:SetPoint("TOPRIGHT", b, "TOPRIGHT", 20, 0)	
 		
 		if _G['PostalInboxCB'..i] then
-			cSkinCheckBox(_G['PostalInboxCB'..i])
+			U.SkinCheckBox(_G['PostalInboxCB'..i])
 		end
 	end
 
 	if PostalSelectOpenButton and not PostalSelectOpenButton.handled then
-		cSkinButton(PostalSelectOpenButton, true)
+		U.SkinButton(PostalSelectOpenButton, true)
 		PostalSelectOpenButton.handled = true;
 		PostalSelectOpenButton:Point("RIGHT", InboxFrame, "TOP", -41, -48)
 	end	
 	
 	if Postal_OpenAllMenuButton and not Postal_OpenAllMenuButton.handled then
-		cSkinNextPrevButton(Postal_OpenAllMenuButton, true)
+		U.SkinNextPrevButton(Postal_OpenAllMenuButton, true)
 		Postal_OpenAllMenuButton:SetPoint('LEFT', PostalOpenAllButton, 'RIGHT', 5, 0)
 		Postal_OpenAllMenuButton.handled = true;
 	end	
 
 	if PostalOpenAllButton and not PostalOpenAllButton.handled then
-		cSkinButton(PostalOpenAllButton, true)
+		U.SkinButton(PostalOpenAllButton, true)
 		PostalOpenAllButton.handled = true;
 		PostalOpenAllButton:Point("Center", InboxFrame, "TOP", -34, -400)
 	end	
 	
 	if PostalSelectReturnButton then
-		cSkinButton(PostalSelectReturnButton, true)
+		U.SkinButton(PostalSelectReturnButton, true)
 		PostalSelectReturnButton:Point("LEFT", InboxFrame, "TOP", -5, -48)
 	end
 
 	if Postal_ModuleMenuButton then
-		cSkinNextPrevButton(Postal_ModuleMenuButton, true)
+		U.SkinNextPrevButton(Postal_ModuleMenuButton, true)
 		Postal_ModuleMenuButton:SetPoint('TOPRIGHT', MailFrame, -53, -6)
 	end
 	
 	if Postal_BlackBookButton then
-		cSkinNextPrevButton(Postal_BlackBookButton, true)
+		U.SkinNextPrevButton(Postal_BlackBookButton, true)
 		Postal_BlackBookButton:SetPoint('LEFT', SendMailNameEditBox, 'RIGHT', 5, 2)
 	end
 		
@@ -58,13 +58,13 @@ local function SkinPostal(self)
 	function Postal_OpenAll:OnEnable(self)
 		Postal_OpenAll.OnEnable_(self)
 		if Postal_OpenAllMenuButton and not Postal_OpenAllMenuButton.handled then
-			cSkinNextPrevButton(Postal_OpenAllMenuButton, true)
+			U.SkinNextPrevButton(Postal_OpenAllMenuButton, true)
 			Postal_OpenAllMenuButton:SetPoint('LEFT', PostalOpenAllButton, 'RIGHT', 5, 0)
 			Postal_OpenAllMenuButton.handled = true;
 		end
 
 		if PostalOpenAllButton and not PostalOpenAllButton.handled then
-			cSkinButton(PostalOpenAllButton, true)
+			U.SkinButton(PostalOpenAllButton, true)
 			PostalOpenAllButton.handled = true;
 		end
 	end
@@ -76,11 +76,11 @@ local function SkinPostal(self)
 		
 		for i = 1, INBOXITEMS_TO_DISPLAY do
 			if _G['PostalInboxCB'..i] and not _G['PostalInboxCB'..i].handled then
-				cSkinCheckBox(_G['PostalInboxCB'..i])
+				U.SkinCheckBox(_G['PostalInboxCB'..i])
 				_G['PostalInboxCB'..i].handled = true;
 			end
 		end		
 	end
 end
 
-cRegisterSkin(name,SkinPostal)
+U.RegisterSkin(name,SkinPostal)

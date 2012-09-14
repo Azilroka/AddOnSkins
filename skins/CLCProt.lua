@@ -91,7 +91,7 @@ end
 		clcprot.CreateButton = CreateButton
 		clcprot.UpdateButtonLayout = UpdateButtonLayout
 	end
-	cRegisterSkin(name,SkinCLCProt)
+	U.RegisterSkin(name,SkinCLCProt)
 end
 
 s:RegisterSkin('CLCProt', LoadSkin)

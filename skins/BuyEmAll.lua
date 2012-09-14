@@ -5,11 +5,11 @@ local function SkinBuyEmAll(self)
 	local s = U.s
 	local c = U.c
 
-	cSkinFrame(BuyEmAllFrame)
-	cSkinButton(BuyEmAllStackButton)
-	cSkinButton(BuyEmAllMaxButton)
-	cSkinButton(BuyEmAllCancelButton)
-	cSkinButton(BuyEmAllOkayButton)
+	U.SkinFrame(BuyEmAllFrame)
+	U.SkinButton(BuyEmAllStackButton)
+	U.SkinButton(BuyEmAllMaxButton)
+	U.SkinButton(BuyEmAllCancelButton)
+	U.SkinButton(BuyEmAllOkayButton)
 end
 
-cRegisterSkin(name,SkinBuyEmAll)
+U.RegisterSkin(name,SkinBuyEmAll)

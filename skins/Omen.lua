@@ -2,9 +2,9 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local U = unpack(select(2,...))
 
 function EmbedOmen()
-	if not IsAddOnLoaded("Omen") then cDisableOption("EmbedOmen") return end
-	if (cCheckOption("EmbedOoC")) then
-		if (cCheckOption("EmbedOmen")) then
+	if not IsAddOnLoaded("Omen") then U.DisableOption("EmbedOmen") return end
+	if (U.CheckOption("EmbedOoC")) then
+		if (U.CheckOption("EmbedOmen")) then
 			OmenBarList:Hide()
 		end
 	end
@@ -129,4 +129,4 @@ Omen:ResizeBars()
 
 end
 
-cRegisterSkin(name,SkinOmen)
+U.RegisterSkin(name,SkinOmen)

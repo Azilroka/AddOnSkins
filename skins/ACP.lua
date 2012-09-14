@@ -1,4 +1,5 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("ACP") then return end
+local U = unpack(select(2,...))
 local name = "ACPSkin"
 local function cbResize(self, event, ...)
     for i=1,20,1 do
@@ -27,8 +28,8 @@ local function cbResize(self, event, ...)
 end 
 
 local function SkinACP(self)
-	cSkinFrame(ACP_AddonList)
-    cSkinFrame(ACP_AddonList_ScrollFrame)
+	U.SkinFrame(ACP_AddonList)
+    U.SkinFrame(ACP_AddonList_ScrollFrame)
 	
 	local buttons = {
         "ACP_AddonListSetButton",
@@ -39,13 +40,13 @@ local function SkinACP(self)
 	}
 
 	for _, button in pairs(buttons) do
-		cSkinButton(_G[button])
+		U.SkinButton(_G[button])
 	end	
 	for i = 1, 20 do
-		cSkinButton(_G["ACP_AddonListEntry"..i.."LoadNow"])
+		U.SkinButton(_G["ACP_AddonListEntry"..i.."LoadNow"])
 	end	
 
-	cSkinCloseButton(ACP_AddonListCloseButton)
+	U.SkinCloseButton(ACP_AddonListCloseButton)
 
 	for i=1,20,1 do
 		local ACP_OnLoad = _G["ACP_AddonList"]
@@ -53,12 +54,12 @@ local function SkinACP(self)
 	end
 
 	for i = 1, 20 do
-		cSkinCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
+		U.SkinCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
 	end
-	cSkinCheckBox(ACP_AddonList_NoRecurse)
+	U.SkinCheckBox(ACP_AddonList_NoRecurse)
 
-	cSkinScrollBar(ACP_AddonList_ScrollFrameScrollBar)
-	cSkinDropDownBox(ACP_AddonListSortDropDown)
+	U.SkinScrollBar(ACP_AddonList_ScrollFrameScrollBar)
+	U.SkinDropDownBox(ACP_AddonListSortDropDown)
 	ACP_AddonListSortDropDown:Width(130)
 
 	ACP_AddonList_ScrollFrame:SetWidth(590)
@@ -79,4 +80,4 @@ local function SkinACP(self)
 	ACP_AddonList:SetParent(UIParent)
  end
 
- cRegisterSkin(name, SkinACP)
+ U.RegisterSkin(name, SkinACP)

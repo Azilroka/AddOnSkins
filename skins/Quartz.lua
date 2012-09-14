@@ -58,4 +58,4 @@ local function SkinQuartz(self)
 	Q3:ApplySettings()
 end
 
-cRegisterSkin(name,SkinQuartz)
+U.RegisterSkin(name,SkinQuartz)

@@ -110,7 +110,7 @@ E.PopupDialogs["OLD_SKIN_PACKAGE"] = {
 local function GenerateEventFunction(event)
 	local eventHandler = function(self,event)
 		for skin,funcs in pairs(self.skins) do
-			if cCheckOption(skin) and self.events[event][skin] then
+			if U.CheckOption(skin) and self.events[event][skin] then
 				for func,_ in pairs(funcs) do
 					func(f,event)
 				end
@@ -135,7 +135,7 @@ function XS:Initialize()
 	end
 
 	for skin,funcs in pairs(XS.skins) do
-		if cCheckOption(skin) then
+		if U.CheckOption(skin) then
 			for func,_ in pairs(funcs) do
 				func(f,"PLAYER_ENTERING_WORLD")
 			end

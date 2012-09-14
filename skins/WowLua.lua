@@ -1,14 +1,15 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
+local U = unpack(select(2,...))
 LoadAddOn("WowLua")
 if not IsAddOnLoaded("WowLua") then return end
 
-	cSkinFrame(WowLuaFrame)
+	U.SkinFrame(WowLuaFrame)
 	WowLuaFrameLineNumScrollFrame:StripTextures(True)
 	WowLuaFrameResizeBar:StripTextures(True)
 	WowLuaFrameResizeBar:Height(10)
-	cSkinCloseButton(WowLuaButton_Close)
+	U.SkinCloseButton(WowLuaButton_Close)
 	WowLuaButton_Close:Point("TOPRIGHT", WowLuaFrame, "TOPRIGHT", 0 , 0)
-	cSkinScrollBar(WowLuaFrameEditScrollFrameScrollBar)
+	U.SkinScrollBar(WowLuaFrameEditScrollFrameScrollBar)
 	WowLuaButton_New:Point("LEFT", WowLuaFrameToolbar, "LEFT", 60, 0)
 
 	WowLuaFrameEditFocusGrabber.bg1 = CreateFrame("Frame", nil, WowLuaFrameEditFocusGrabber)

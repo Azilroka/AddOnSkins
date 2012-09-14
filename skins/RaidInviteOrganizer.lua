@@ -5,41 +5,41 @@ local function SkinRIO(self)
 	local s = U.s
 	local c = U.c
 	
-	cSkinFrame(RIO_MainFrame)
-	cSkinFrame(RIO_GuildMemberFrame)
-	cSkinFrame(RIO_CodeWordsContainer)
+	U.SkinFrame(RIO_MainFrame)
+	U.SkinFrame(RIO_GuildMemberFrame)
+	U.SkinFrame(RIO_CodeWordsContainer)
 	RIO_SliderContainer:StripTextures(True)
 
-	cSkinScrollBar(RIO_GuildSlider)
-	cSkinCloseButton(RIO_CloseButtonThing)
-	cSkinButton(RIO_SelectAll)
-	cSkinButton(RIO_SelectNone)
-	cSkinButton(RIO_SendMassInvites)
-	cSkinButton(RIO_SaveCodeWordList)
-	cSkinButton(RIO_ToggleCodewordInvites)
+	U.SkinScrollBar(RIO_GuildSlider)
+	U.SkinCloseButton(RIO_CloseButtonThing)
+	U.SkinButton(RIO_SelectAll)
+	U.SkinButton(RIO_SelectNone)
+	U.SkinButton(RIO_SendMassInvites)
+	U.SkinButton(RIO_SaveCodeWordList)
+	U.SkinButton(RIO_ToggleCodewordInvites)
 
-	cSkinCheckBox(RIO_ShowOfflineBox)
-	cSkinCheckBox(RIO_GuildMessageAtStart)
-	cSkinCheckBox(RIO_NotifyWhenTimerDone)
-	cSkinCheckBox(RIO_OnlyGuildMembers)
-	cSkinCheckBox(RIO_AlwaysInviteListen)
-	cSkinCheckBox(RIO_ShowMinimapIconConfig)
-	cSkinCheckBox(RIO_AutoSet25manBox)
-	cSkinCheckBox(RIO_AutoSetDifficultyBox)
-	cSkinCheckBox(RIO_AutoSetMasterLooter)
+	U.SkinCheckBox(RIO_ShowOfflineBox)
+	U.SkinCheckBox(RIO_GuildMessageAtStart)
+	U.SkinCheckBox(RIO_NotifyWhenTimerDone)
+	U.SkinCheckBox(RIO_OnlyGuildMembers)
+	U.SkinCheckBox(RIO_AlwaysInviteListen)
+	U.SkinCheckBox(RIO_ShowMinimapIconConfig)
+	U.SkinCheckBox(RIO_AutoSet25manBox)
+	U.SkinCheckBox(RIO_AutoSetDifficultyBox)
+	U.SkinCheckBox(RIO_AutoSetMasterLooter)
 
 	RIO_MainFrameTab1:Point("TOPLEFT", RIO_MainFrame, "BOTTOMLEFT", -5, 2)
 	RIO_MainFrameTab2:Point("LEFT", RIO_MainFrameTab1, "RIGHT", -2, 0)
 	RIO_MainFrameTab3:Point("LEFT", RIO_MainFrameTab2, "RIGHT", -2, 0)
  
 	for i = 1, 3 do
-		cSkinTab(_G["RIO_MainFrameTab"..i])
+		U.SkinTab(_G["RIO_MainFrameTab"..i])
 	end
 
 	for i = 1, 10 do
-		cSkinCheckBox(_G["RIO_ShowRank"..i])
+		U.SkinCheckBox(_G["RIO_ShowRank"..i])
 	end
 
 end
 
-cRegisterSkin(name,SkinRIO)
+U.RegisterSkin(name,SkinRIO)

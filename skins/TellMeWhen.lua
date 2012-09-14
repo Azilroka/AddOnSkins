@@ -5,7 +5,7 @@ local c = U.c
 
 local function LoadSkin()
 	LoadAddOn("TellMeWhen_Options")
-	if (not cCheckOption("TellMeWhenSkin")) then return end
+	if (not U.CheckOption("TellMeWhenSkin")) then return end
 	TellMeWhen_IconEditorMain:StripTextures()
 	TellMeWhen_IconEditorConditions:StripTextures()
 	TellMeWhen_IconEditor:StripTextures()
@@ -14,23 +14,23 @@ local function LoadSkin()
 	TellMeWhen_IconEditor:SetTemplate("Transparent")
 	TellMeWhen_IconEditorMainOptions:SetTemplate("Transparent")
 	
-	cSkinButton(TellMeWhen_IconEditorReset, true)
-	cSkinButton(TellMeWhen_IconEditorUndo, true)
-	cSkinButton(TellMeWhen_IconEditorRedo, true)
+	U.SkinButton(TellMeWhen_IconEditorReset, true)
+	U.SkinButton(TellMeWhen_IconEditorUndo, true)
+	U.SkinButton(TellMeWhen_IconEditorRedo, true)
 
-	cSkinTab(TellMeWhen_IconEditorTab1)
-	cSkinTab(TellMeWhen_IconEditorTab2)
-	cSkinTab(TellMeWhen_IconEditorTab3)
-	cSkinTab(TellMeWhen_IconEditorTab4)
-	cSkinTab(TellMeWhen_IconEditorTab5)
+	U.SkinTab(TellMeWhen_IconEditorTab1)
+	U.SkinTab(TellMeWhen_IconEditorTab2)
+	U.SkinTab(TellMeWhen_IconEditorTab3)
+	U.SkinTab(TellMeWhen_IconEditorTab4)
+	U.SkinTab(TellMeWhen_IconEditorTab5)
 
-	cSkinButton(TellMeWhen_IconEditorOkay, true)
-	cSkinCloseButton(TellMeWhen_IconEditorClose, true)
+	U.SkinButton(TellMeWhen_IconEditorOkay, true)
+	U.SkinCloseButton(TellMeWhen_IconEditorClose, true)
 	
 	TellMeWhen_ConfigWarning:StripTextures()
 	TellMeWhen_ConfigWarning:SetTemplate("Transparent")
-	cSkinButton(TellMeWhen_ConfigWarningExit, true)
-	cSkinButton(TellMeWhen_ConfigWarningNeverAgain, true)
+	U.SkinButton(TellMeWhen_ConfigWarningExit, true)
+	U.SkinButton(TellMeWhen_ConfigWarningNeverAgain, true)
 	
 	
 	TellMeWhen_IconEditorSuggest:ClearAllPoints()
@@ -53,9 +53,9 @@ local function LoadSkin()
 	TellMeWhen_IconEditorTab4:Point("LEFT", TellMeWhen_IconEditorTab3, "RIGHT", -19, 0)
 	TellMeWhen_IconEditorTab5:Point("LEFT", TellMeWhen_IconEditorTab4, "RIGHT", -19, 0)
 	
-	--cSkinScrollBar(TellMeWhen_IconEditorEventsSoundSoundsScrollBar)
-	cSkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsPassThrough)
-	cSkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsOnlyShown)
+	--U.SkinScrollBar(TellMeWhen_IconEditorEventsSoundSoundsScrollBar)
+	U.SkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsPassThrough)
+	U.SkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsOnlyShown)
 end
 
 if IsAddOnLoaded("Tukui") then

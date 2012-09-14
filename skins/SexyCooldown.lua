@@ -25,8 +25,8 @@ end
 -- Skin Bars
 local function SkinSexyCooldownBar(bar)
 	SCDStripSkinSettings(bar)
-	cSkinFrame(bar)
-	if(cCheckOption("EmbedSexyCooldown")) then
+	U.SkinFrame(bar)
+	if(U.CheckOption("EmbedSexyCooldown")) then
 		bar:ClearAllPoints()
 		if IsAddOnLoaded("ElvUI") then
 			bar:Point('BOTTOM', ElvUI_Bar1, 'TOP', 0, 1)
@@ -40,7 +40,7 @@ end
 
 -- Skin Icons
 local function SkinSexyCooldownIcon(bar, icon)
-	cSkinFrame(icon)
+	U.SkinFrame(icon)
 	icon.overlay:CreateBackdrop("Default")
 	icon.tex:SetTexCoord(unpack(c.TexCoords))
 	icon.tex.SetTexCoord = E.noop
@@ -86,4 +86,4 @@ local function SkinSexyCooldown(self)
 	end
 end
 
-cRegisterSkin(name,SkinSexyCooldown)
+U.RegisterSkin(name,SkinSexyCooldown)

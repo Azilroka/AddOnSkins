@@ -21,10 +21,10 @@ local function SkinEPGP()
 	EPGPScrollFrameScrollBar:StripTextures()
 	EPGPScrollFrameScrollBarBorder:StripTextures()
 
-	cSkinScrollBar(EPGPScrollFrameScrollBar)
-	cSkinDropDownBox(EPGPSideFrameGPControlDropDown)
-	cSkinDropDownBox(EPGPSideFrameEPControlDropDown)
-	cSkinDropDownBox(EPGPSideFrame2EPControlDropDown)
+	U.SkinScrollBar(EPGPScrollFrameScrollBar)
+	U.SkinDropDownBox(EPGPSideFrameGPControlDropDown)
+	U.SkinDropDownBox(EPGPSideFrameEPControlDropDown)
+	U.SkinDropDownBox(EPGPSideFrame2EPControlDropDown)
 end
 
 hooksecurefunc(EPGP, "ToggleUI", SkinEPGP)

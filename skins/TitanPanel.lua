@@ -1,4 +1,5 @@
 ﻿if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Titan") then return end
+local U = unpack(select(2,...))
 local function SetEnabled(self, event, ...) 
 		if TPBar2and3Position == nil then
 			x = WorldFrame:GetWidth()/5 
@@ -118,10 +119,10 @@ local function SkinTitanPanel(self)
 		TP_Skin_OptionsFrame.btn3:SetAlpha(1)
 		TP_Skin_OptionsFrame.btn3:Show()
 
-		cSkinButton(TP_Skin_OptionsFrame.btn)
-		cSkinButton(TP_Skin_OptionsFrame.btn2)
-		cSkinButton(TP_Skin_OptionsFrame.btn3)
-		cSkinButton(TP_Skin_PreviewFrame.btn)
+		U.SkinButton(TP_Skin_OptionsFrame.btn)
+		U.SkinButton(TP_Skin_OptionsFrame.btn2)
+		U.SkinButton(TP_Skin_OptionsFrame.btn3)
+		U.SkinButton(TP_Skin_PreviewFrame.btn)
 
 	local EnableBars = CreateFrame("CheckButton", "tpskin_checkbox", TP_Skin_OptionsFrame, "OptionsBaseCheckButtonTemplate")
 		EnableBars:SetPoint("TOPLEFT", TP_Skin_OptionsFrame, "TOPLEFT", 16, -35)
@@ -133,7 +134,7 @@ local function SkinTitanPanel(self)
 			end
 		EnableBars.Title:SetPoint("LEFT", EnableBars, "RIGHT", 5, 0)
 		EnableBars.Title:SetText("Enable Top Bar 2 and Bottom Bar 2 at top")
-		cSkinCheckBox(EnableBars)
+		U.SkinCheckBox(EnableBars)
 		EnableBars:SetScript("OnClick" or "OnUpdate", function(frame)
 				if frame:GetChecked() then
 					if Titan_Bar__Display_Bar2 and Titan_Bar__Display_AuxBar2 then
@@ -285,4 +286,4 @@ local AceGUI = LibStub("AceGUI-3.0")
 	end
 end
 
-cRegisterSkin(name,SkinTitanPanel)
+U.RegisterSkin(name,SkinTitanPanel)

@@ -64,7 +64,7 @@ local function LoadSkin()
 						--frame:SetScale(1)
 						frame.SetScale=s.dummy
 						frame:SetHeight(buttonsize)
-						if (cCheckOption("DBMSkinHalf")) then frame:SetHeight(buttonsize/3) end
+						if (U.CheckOption("DBMSkinHalf")) then frame:SetHeight(buttonsize/3) end
 						frame:SetTemplate("Transparent")
 						frame.styled=true
 					end
@@ -106,7 +106,7 @@ local function LoadSkin()
 					if not name.styled then
 						name:ClearAllPoints()
 						name:Point("LEFT", frame, "LEFT", 4, 0)
-						if (cCheckOption("DBMSkinHalf")) then name:Point("BOTTOMLEFT", frame, "TOPLEFT", 0, 4) end
+						if (U.CheckOption("DBMSkinHalf")) then name:Point("BOTTOMLEFT", frame, "TOPLEFT", 0, 4) end
 						name:SetWidth(165)
 						name:SetHeight(8)
 						if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
@@ -121,7 +121,7 @@ local function LoadSkin()
 					if not timer.styled then	
 						timer:ClearAllPoints()
 						timer:Point("RIGHT", frame, "RIGHT", -4, 0)
-						if (cCheckOption("DBMSkinHalf")) then timer:Point("BOTTOMRIGHT", frame, "TOPRIGHT", -1, 2) end
+						if (U.CheckOption("DBMSkinHalf")) then timer:Point("BOTTOMRIGHT", frame, "TOPRIGHT", -1, 2) end
 						if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
 						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(nil, 12, 'OUTLINE') end
 						if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
@@ -192,7 +192,7 @@ local function LoadSkin()
 
 			if not bar.styled then
 				bar:SetHeight(buttonsize)
-				if (cCheckOption("DBMSkinHalf")) then bar:SetHeight(buttonsize/3) end
+				if (U.CheckOption("DBMSkinHalf")) then bar:SetHeight(buttonsize/3) end
 				bar:SetTemplate("Transparent")
 				background:SetNormalTexture(nil)
 				bar.styled=true
@@ -209,7 +209,7 @@ local function LoadSkin()
 			if not name.styled then
 				name:ClearAllPoints()
 				name:Point("LEFT", bar, "LEFT", 4, 0)
-				if (cCheckOption("DBMSkinHalf")) then name:Point("BOTTOMLEFT", bar, "TOPLEFT", 1, 4) end
+				if (U.CheckOption("DBMSkinHalf")) then name:Point("BOTTOMLEFT", bar, "TOPLEFT", 1, 4) end
 				if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
 				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(nil, 12, 'OUTLINE') end
 				if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
@@ -221,7 +221,7 @@ local function LoadSkin()
 			if not timer.styled then
 				timer:ClearAllPoints()
 				timer:Point("RIGHT", bar, "RIGHT", -4, 0)
-				if (cCheckOption("DBMSkinHalf")) then timer:Point("BOTTOMLEFT", bar, "TOPLEFT", 0, 2) end
+				if (U.CheckOption("DBMSkinHalf")) then timer:Point("BOTTOMLEFT", bar, "TOPLEFT", 0, 2) end
 				if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
 				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(nil, 12, 'OUTLINE') end
 				if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
@@ -268,11 +268,11 @@ local function LoadSkinOptions()
 	DBM_GUI_OptionsFrameDBMOptions:SetTemplate("Transparent")
 	DBM_GUI_OptionsFramePanelContainer:SetTemplate("Transparent")
 	end)
-	cSkinTab(DBM_GUI_OptionsFrameTab1)
-	cSkinTab(DBM_GUI_OptionsFrameTab2)
-	cSkinButton(DBM_GUI_OptionsFrameOkay, true)
+	U.SkinTab(DBM_GUI_OptionsFrameTab1)
+	U.SkinTab(DBM_GUI_OptionsFrameTab2)
+	U.SkinButton(DBM_GUI_OptionsFrameOkay, true)
 	
-	cSkinScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
+	U.SkinScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
 end
 
 if IsAddOnLoaded("Tukui") then 
@@ -302,7 +302,7 @@ end
 		if IsAddOnLoaded("Tukui") then DBT_SavedOptions["DBM"].Font = c.media.font end
 		if IsAddOnLoaded("ElvUI") then DBT_SavedOptions["DBM"].Font = "ElvUI Font" end
 	end
-	cRegisterSkin(name,SkinDBM)
+	U.RegisterSkin(name,SkinDBM)
 --end
 
 --local loadOptions = CreateFrame("Frame")

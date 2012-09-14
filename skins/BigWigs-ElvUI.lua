@@ -170,4 +170,4 @@ local function SkinBigWigs(self)
 	s:RegisterSkin('BigWigs_Plugins', RegisterStyle, nil, true)
 end
 
-cRegisterSkin(name,SkinBigWigs)
+U.RegisterSkin(name,SkinBigWigs)

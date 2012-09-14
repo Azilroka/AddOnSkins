@@ -1,40 +1,41 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MinimalArchaeology") then return end
+local U = unpack(select(2,...))
 local name = "MinimalArchaeologySkin"
 local function SkinMinimalArchaeology(self)
 	if IsAddOnLoaded("Tukui") then UIFont = c["media"].pixelfont UIFontSize = 12 end
 	if IsAddOnLoaded("ElvUI") then UIFont = [[Interface\AddOns\ElvUI\media\fonts\Homespun.ttf]] UIFontSize = 10 end
-	cSkinFrame(MinArchMain)
-	cSkinStatusBar(MinArchMainSkillBar)
+	U.SkinFrame(MinArchMain)
+	U.SkinStatusBar(MinArchMainSkillBar)
 	MinArchMainSkillBar:Point("TOP", MinArchMain, "TOP", 2, -24)
 	MinArchMainSkillBar:Width(253)
 
-	cDesaturate(MinArchMainButtonOpenADI)
-	cDesaturate(MinArchMainButtonOpenHist)
-	cDesaturate(MinArchMainButtonOpenArch)
-	cSkinCloseButton(MinArchMainButtonClose)
+	U.Desaturate(MinArchMainButtonOpenADI)
+	U.Desaturate(MinArchMainButtonOpenHist)
+	U.Desaturate(MinArchMainButtonOpenArch)
+	U.SkinCloseButton(MinArchMainButtonClose)
 	MinArchMainButtonOpenADI:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", -66, -1)
 	MinArchMainButtonOpenHist:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", -46, -1)
 	MinArchMainButtonOpenArch:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", -26, -1)
 	MinArchMainButtonClose:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", 2, 2)
 
-	cSkinFrame(MinArchDigsites)
-	cSkinCloseButton(MinArchDigsitesButtonClose)
+	U.SkinFrame(MinArchDigsites)
+	U.SkinCloseButton(MinArchDigsitesButtonClose)
 
-	cSkinFrame(MinArchHist)
-	cSkinCloseButton(MinArchHistButtonClose)
+	U.SkinFrame(MinArchHist)
+	U.SkinCloseButton(MinArchHistButtonClose)
 
 	for i = 1, 10 do
-		cSkinStatusBar(_G["MinArchMainArtifactBar"..i])
+		U.SkinStatusBar(_G["MinArchMainArtifactBar"..i])
 		_G["MinArchMainArtifactBar"..i]:SetStatusBarColor(1.0, 0.4, 0)
-		cSkinButton(_G["MinArchMainArtifactBar"..i.."ButtonSolve"])
+		U.SkinButton(_G["MinArchMainArtifactBar"..i.."ButtonSolve"])
 		_G["MinArchMainArtifactBar"..i.."ButtonSolve"].text = _G["MinArchMainArtifactBar"..i.."ButtonSolve"]:CreateFontString(nil, "OVERLAY")
 		_G["MinArchMainArtifactBar"..i.."ButtonSolve"].text:SetFont(UIFont, UIFontSize, "OUTLINE")
 		_G["MinArchMainArtifactBar"..i.."ButtonSolve"].text:SetPoint("CENTER", 1, 1)
 		_G["MinArchMainArtifactBar"..i.."ButtonSolve"].text:SetText("Solve")
 		--Min Arch Options
-		cSkinCheckBox(_G["MinArchOptionPanelHideArtifact"..i])
-		cSkinCheckBox(_G["MinArchOptionPanelFragmentCap"..i])
-		if _G["MinArchOptionPanelUseKeystones"..i] then cSkinCheckBox(_G["MinArchOptionPanelUseKeystones"..i]) end
+		U.SkinCheckBox(_G["MinArchOptionPanelHideArtifact"..i])
+		U.SkinCheckBox(_G["MinArchOptionPanelFragmentCap"..i])
+		if _G["MinArchOptionPanelUseKeystones"..i] then U.SkinCheckBox(_G["MinArchOptionPanelUseKeystones"..i]) end
 	end
 
 	local checkbox = {
@@ -46,10 +47,10 @@ local function SkinMinimalArchaeology(self)
 	}
 
 	for _,boxes in pairs(checkbox) do
-		cSkinCheckBox(boxes)
+		U.SkinCheckBox(boxes)
 	end
 
-	cSkinSliderFrame(MinArchOptionPanelFrameScaleSlider)
+	U.SkinSliderFrame(MinArchOptionPanelFrameScaleSlider)
 	MinArchOptionPanelFrameScaleSliderLow:ClearAllPoints()
 	MinArchOptionPanelFrameScaleSliderLow:SetPoint("BOTTOMLEFT", MinArchOptionPanelFrameScale, "BOTTOMLEFT", 3, 3)
 	MinArchOptionPanelFrameScaleSliderHigh:ClearAllPoints()
@@ -95,4 +96,4 @@ local function SkinMinimalArchaeology(self)
 
 end
 
-cRegisterSkin(name,SkinMinimalArchaeology)
+U.RegisterSkin(name,SkinMinimalArchaeology)

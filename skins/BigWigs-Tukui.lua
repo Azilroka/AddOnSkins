@@ -259,4 +259,4 @@ local function SkinBigWigs(self)
 	}
 end
 
-cRegisterSkin(name,SkinBigWigs)
+U.RegisterSkin(name,SkinBigWigs)

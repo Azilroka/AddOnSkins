@@ -1,4 +1,5 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Auc-Advanced") then return end
+local U = unpack(select(2,...))
 local name = 'AuctioneerSkin'
 local function AuctioneerSkin(self,event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
@@ -44,8 +45,8 @@ local function AuctioneerSkin(self,event)
 	BidQualitySort:Point("TOPLEFT", AuctionFrameBid, "TOPLEFT", 65, -50)
 	AuctionFrameTab1:ClearAllPoints()
 	AuctionFrameTab1:Point("TOPLEFT", AuctionFrame, "BOTTOMLEFT", -5, 2)
-	cSkinNextPrevButton(BrowseNextPageButton)
-	cSkinNextPrevButton(BrowsePrevPageButton)
+	U.SkinNextPrevButton(BrowseNextPageButton)
+	U.SkinNextPrevButton(BrowsePrevPageButton)
 	BrowseNextPageButton:Size(20, 20)
 	BrowsePrevPageButton:Size(20, 20)
 	if IsAddOnLoaded("Auc-Stat-Purchased") then
@@ -59,11 +60,11 @@ local function AuctioneerSkin(self,event)
 	if AucAdvScanButton then cSkinButton(AucAdvScanButton) end
 	if AucAdvSimpFrameCreate then cSkinButton(AucAdvSimpFrameCreate) end
 	if AucAdvSimpFrameRemember then cSkinButton(AucAdvSimpFrameRemember) end
-	if AuctionFrameTabUtilAppraiser then cSkinTab(AuctionFrameTabUtilAppraiser) end
-	if AuctionFrameTabUtilSearchUi then cSkinTab(AuctionFrameTabUtilSearchUi) end
-	if AuctionFrameTabUtilSimple then cSkinTab(AuctionFrameTabUtilSimple) end
-	if AuctionFrameTabUtilBeanCounter then cSkinTab(AuctionFrameTabUtilBeanCounter) end
-	cUnregisterEvent(name,self,"AUCTION_HOUSE_SHOW")
+	if AuctionFrameTabUtilAppraiser then U.SkinTab(AuctionFrameTabUtilAppraiser) end
+	if AuctionFrameTabUtilSearchUi then U.SkinTab(AuctionFrameTabUtilSearchUi) end
+	if AuctionFrameTabUtilSimple then U.SkinTab(AuctionFrameTabUtilSimple) end
+	if AuctionFrameTabUtilBeanCounter then U.SkinTab(AuctionFrameTabUtilBeanCounter) end
+	U.UnregisterEvent(name,self,"AUCTION_HOUSE_SHOW")
 end
 
-cRegisterSkin(name,AuctioneerSkin,'AUCTION_HOUSE_SHOW')
+U.RegisterSkin(name,AuctioneerSkin,'AUCTION_HOUSE_SHOW')

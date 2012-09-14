@@ -85,8 +85,8 @@ local function SkinSkada(self)
 			skada.backdrop:Point("TOPLEFT", skada, "TOPLEFT", -2, 2)
 		end
 		skada.backdrop:Point("BOTTOMRIGHT", skada, "BOTTOMRIGHT", 2, -2)
-		if (not cCheckOption("SkadaBackdrop")) then skada.backdrop:Hide() end
-		if (cCheckOption("EmbedSkada")) then
+		if (not U.CheckOption("SkadaBackdrop")) then skada.backdrop:Hide() end
+		if (U.CheckOption("EmbedSkada")) then
 			win.bargroup.button:SetFrameStrata("MEDIUM")
 			win.bargroup.button:SetFrameLevel(5)	
 			win.bargroup:SetFrameStrata("MEDIUM")
@@ -94,7 +94,7 @@ local function SkinSkada(self)
 	end
 end
 
-cRegisterSkin(name,SkinSkada)
+U.RegisterSkin(name,SkinSkada)
 local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 	window.db.barwidth = width
 	window.db.background.height = height
@@ -134,7 +134,7 @@ function Skada:CreateWindow(name, db)
 	for _, window in ipairs(Skada:GetWindows()) do
 		tinsert(windows, window)
 	end	
-	if(cCheckOption("EmbedSkada")) then
+	if(U.CheckOption("EmbedSkada")) then
 		EmbedSkada()
 	end
 end
@@ -146,7 +146,7 @@ function Skada:DeleteWindow( name )
 	for _, window in ipairs( Skada:GetWindows() ) do
 		tinsert( windows, window )
 	end	
-	if(cCheckOption("EmbedSkada")) then
+	if(U.CheckOption("EmbedSkada")) then
 		EmbedSkada()
 	end
 end
@@ -156,7 +156,7 @@ end
 		Skada_Skin:SetScript("OnEvent", function(self)
 		self:UnregisterAllEvents()
 		self = nil
-	if(cCheckOption("EmbedSkada")) then
+	if(U.CheckOption("EmbedSkada")) then
 		EmbedSkada()
 	end
 
@@ -190,17 +190,17 @@ StaticPopupDialogs["SKADA_RELOADUI"] = {
 
 SLASH_SKADAEMBEDDED1, SLASH_SKADAEMBEDDED2 = '/es', '/embedskada';
 function SlashCmdList.SKADAEMBEDDED(msg, editbox)
-	if(not cCheckOption("EmbedSkada")) then
-		cEnableOption("EmbedSkada")
+	if(not U.CheckOption("EmbedSkada")) then
+		U.EnableOption("EmbedSkada")
 		EmbedSkada()
 	else
-		cDisableOption("EmbedSkada")
+		U.DisableOption("EmbedSkada")
 		StaticPopup_Show("SKADA_RELOADUI")
 	end
-	if(cCheckOption("EmbedSkada")) then
+	if(U.CheckOption("EmbedSkada")) then
 	print("Skada Embedding to Embed Window is |cff00ff00"..UISkinOptions.EmbedSkada.."|r.")
 	end
-	if(not cCheckOption("EmbedSkada")) then
+	if(not U.CheckOption("EmbedSkada")) then
 	print("Skada Embedding to Embed Window is |cffff2020"..UISkinOptions.EmbedSkada.."|r.")
 	print("Need to Reload UI to take effect /rl ")
 	end
@@ -208,10 +208,10 @@ end
 
 SLASH_SKADABACKDROP1 = '/skadabackdrop';
 function SlashCmdList.SKADABACKDROP(msg, editbox)
-	if(not cCheckOption("SkadaBackdrop")) then
-		cEnableOption("SkadaBackdrop")
+	if(not U.CheckOption("SkadaBackdrop")) then
+		U.EnableOption("SkadaBackdrop")
 	else
-		cDisableOption("SkadaBackdrop")
+		U.DisableOption("SkadaBackdrop")
 	end
 end
 

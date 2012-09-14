@@ -3,13 +3,13 @@ local U = unpack(select(2,...))
 local c = U.c
 local name = "ReforgenatorSkin"
 local function SkinReforgenator(self)
-	cSkinFrame(ReforgenatorPanel)
-	cSkinFrame(ReforgenatorMessageFrame)
-	cSkinFrame(ReforgenatorMessageTextFrame)
-	cSkinDropDownBox(ReforgenatorPanel_ModelSelection)
-	cSkinDropDownBox(ReforgenatorPanel_SandboxSelection)
-	cSkinDropDownBox(ReforgenatorPanel_TargetLevelSelection)
-	cSkinCloseButton(ReforgenatorPanel_CloseButton)
+	U.SkinFrame(ReforgenatorPanel)
+	U.SkinFrame(ReforgenatorMessageFrame)
+	U.SkinFrame(ReforgenatorMessageTextFrame)
+	U.SkinDropDownBox(ReforgenatorPanel_ModelSelection)
+	U.SkinDropDownBox(ReforgenatorPanel_SandboxSelection)
+	U.SkinDropDownBox(ReforgenatorPanel_TargetLevelSelection)
+	U.SkinCloseButton(ReforgenatorPanel_CloseButton)
 	hooksecurefunc(Reforgenator,"UpdateWindowItem",function(self, index, itemDescriptor)
 		if not itemDescriptor then return end
 		local item = _G["ReforgenatorPanel_Item"..index]
@@ -19,8 +19,8 @@ local function SkinReforgenator(self)
 		item:CreateBackdrop("Default")
 	    local texture = select(10, GetItemInfo(itemDescriptor.itemLink))
 	    iconTexture:SetTexture(texture)
-		cSkinCheckBox(checked)
+		U.SkinCheckBox(checked)
 	end)
 end
 
-cRegisterSkin(name,SkinReforgenator)
+U.RegisterSkin(name,SkinReforgenator)

@@ -9,5 +9,5 @@ local function SkinEnergyWatch(self)
 	EnergyWatchStatusBar:SetStatusBarTexture(c["media"].normTex)
 end
 
-cRegisterSkin(name,SkinEnergyWatch)
+U.RegisterSkin(name,SkinEnergyWatch)
 

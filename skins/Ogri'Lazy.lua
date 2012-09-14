@@ -5,8 +5,8 @@ local function SkinOgriLazy(self)
 	local s = U.s
 	local c = U.c
 
-	cSkinFrame(Relic_View)
-	cSkinCloseButton(Relic_ViewCloseButton)
+	U.SkinFrame(Relic_View)
+	U.SkinCloseButton(Relic_ViewCloseButton)
 end
 
-cRegisterSkin(name,SkinOgriLazy)
+U.RegisterSkin(name,SkinOgriLazy)

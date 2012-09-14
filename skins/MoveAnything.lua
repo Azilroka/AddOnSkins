@@ -5,42 +5,42 @@ local function SkinMoveAnything(self)
 	local s = U.s
 	local c = U.c
 
-	cSkinFrame(MAOptions)
+	U.SkinFrame(MAOptions)
 	MAScrollBorder:StripTextures(True)
 
-	cSkinScrollBar(MAScrollFrameScrollBar)
-	cSkinButton(MAOptionsSync)
-	cSkinButton(MAOptionsOpenBlizzardOptions)
-	cSkinButton(MAOptionsClose)
-	cSkinButton(GameMenuButtonMoveAnything)
+	U.SkinScrollBar(MAScrollFrameScrollBar)
+	U.SkinButton(MAOptionsSync)
+	U.SkinButton(MAOptionsOpenBlizzardOptions)
+	U.SkinButton(MAOptionsClose)
+	U.SkinButton(GameMenuButtonMoveAnything)
 	GameMenuButtonMoveAnything:CreateBackdrop("Transparent")
 	GameMenuButtonMoveAnything:ClearAllPoints()
 	GameMenuButtonMoveAnything:Point("TOP", GameMenuFrame, "BOTTOM", 0, -3)
 
-	cSkinCheckBox(MAOptionsToggleModifiedFramesOnly)
-	cSkinCheckBox(MAOptionsToggleCategories)
-	cSkinCheckBox(MAOptionsToggleFrameStack)
-	cSkinCheckBox(MAOptionsToggleMovers)
-	cSkinCheckBox(MAOptionsToggleFrameEditors)
+	U.SkinCheckBox(MAOptionsToggleModifiedFramesOnly)
+	U.SkinCheckBox(MAOptionsToggleCategories)
+	U.SkinCheckBox(MAOptionsToggleFrameStack)
+	U.SkinCheckBox(MAOptionsToggleMovers)
+	U.SkinCheckBox(MAOptionsToggleFrameEditors)
 
 	for i = 1, 100 do
-		if _G["MAMove"..i.."Reset"] then cSkinButton(_G["MAMove"..i.."Reset"]) end
-		if _G["MAMove"..i.."Reset"] then cSkinButton(_G["MAMove"..i.."Reset"]) end
-		if _G["MAMove"..i.."Backdrop"] then cSkinFrame(_G["MAMove"..i.."Backdrop"]) end
-		if _G["MAMove"..i.."Move"] then cSkinCheckBox(_G["MAMove"..i.."Move"]) end
-		if _G["MAMove"..i.."Hide"] then cSkinCheckBox(_G["MAMove"..i.."Hide"]) end
+		if _G["MAMove"..i.."Reset"] then U.SkinButton(_G["MAMove"..i.."Reset"]) end
+		if _G["MAMove"..i.."Reset"] then U.SkinButton(_G["MAMove"..i.."Reset"]) end
+		if _G["MAMove"..i.."Backdrop"] then U.SkinFrame(_G["MAMove"..i.."Backdrop"]) end
+		if _G["MAMove"..i.."Move"] then U.SkinCheckBox(_G["MAMove"..i.."Move"]) end
+		if _G["MAMove"..i.."Hide"] then U.SkinCheckBox(_G["MAMove"..i.."Hide"]) end
 	end
 
-	cSkinFrame(MANudger)
-	cSkinButton(MANudger_CenterMe)
-	cSkinButton(MANudger_CenterH)
-	cSkinButton(MANudger_CenterV)
-	cSkinButton(MANudger_NudgeUp)
-	cSkinButton(MANudger_NudgeDown)
-	cSkinButton(MANudger_NudgeLeft)
-	cSkinButton(MANudger_NudgeRight)
-	cSkinButton(MANudger_Detach)
-	cSkinButton(MANudger_Hide)
+	U.SkinFrame(MANudger)
+	U.SkinButton(MANudger_CenterMe)
+	U.SkinButton(MANudger_CenterH)
+	U.SkinButton(MANudger_CenterV)
+	U.SkinButton(MANudger_NudgeUp)
+	U.SkinButton(MANudger_NudgeDown)
+	U.SkinButton(MANudger_NudgeLeft)
+	U.SkinButton(MANudger_NudgeRight)
+	U.SkinButton(MANudger_Detach)
+	U.SkinButton(MANudger_Hide)
 end
 
-cRegisterSkin(name,SkinMoveAnything)
+U.RegisterSkin(name,SkinMoveAnything)

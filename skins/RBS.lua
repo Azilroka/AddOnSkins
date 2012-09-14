@@ -5,15 +5,15 @@ local function SkinRBS(self)
 	local s = U.s
 	local c = U.c
 
-	cSkinFrame(RBSFrame)
-	cSkinButton(RaidBuffStatus.scanbutton)
-	cSkinButton(RaidBuffStatus.readybutton)
-	cSkinButton(RaidBuffStatus.bossbutton)
-	cSkinButton(RaidBuffStatus.trashbutton)
-	cSkinNextPrevButton(optionsbutton)
-	cSkinNextPrevButton(talentsbutton)
+	U.SkinFrame(RBSFrame)
+	U.SkinButton(RaidBuffStatus.scanbutton)
+	U.SkinButton(RaidBuffStatus.readybutton)
+	U.SkinButton(RaidBuffStatus.bossbutton)
+	U.SkinButton(RaidBuffStatus.trashbutton)
+	U.SkinNextPrevButton(optionsbutton)
+	U.SkinNextPrevButton(talentsbutton)
 	optionsbutton:Size(20)
 	talentsbutton:Size(20)
 end
 
-cRegisterSkin(name,SkinRBS)
+U.RegisterSkin(name,SkinRBS)

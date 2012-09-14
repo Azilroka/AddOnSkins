@@ -97,5 +97,5 @@ frame:SetScript("OnEnter", StyleTooltip)
 frame:SetScript("OnLeave", OnLeave)
 
 GeneralDockManagerOverflowButtonList:SetTemplate()
-cSkinCloseButton(TokenFramePopupCloseButton)
-cSkinCloseButton(RolePollPopupCloseButton)
+U.SkinCloseButton(TokenFramePopupCloseButton)
+U.SkinCloseButton(RolePollPopupCloseButton)

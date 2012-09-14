@@ -6,7 +6,7 @@ local function SkinArchy(self)
 	local c = U.c
 
 	local function SkinArchyArtifactFrame()
-		cSkinFrame(ArchyArtifactFrame)
+		U.SkinFrame(ArchyArtifactFrame)
 		ArchyArtifactFrame:SetParent(UIParent)
 		ArchyArtifactFrame:SetScale(1)
 		--ArchyArtifactFrame:CreateBackdrop()
@@ -18,7 +18,7 @@ local function SkinArchy(self)
 	hooksecurefunc(Archy, "UpdateRacesFrame", SkinArchyArtifactFrame)
 
 	local function SkinArchyDigSiteFrame()
-		cSkinFrame(ArchyDigSiteFrame)
+		U.SkinFrame(ArchyDigSiteFrame)
 		ArchyDigSiteFrame:SetParent(UIParent)
 		ArchyDigSiteFrame:SetScale(1)
 		--ArchyDigSiteFrame:CreateBackdrop()
@@ -30,9 +30,9 @@ local function SkinArchy(self)
 	hooksecurefunc(Archy, "UpdateDigSiteFrame", SkinArchyDigSiteFrame)
 
 	if ArchyArtifactFrameSkillBar then
-		cSkinStatusBar(ArchyArtifactFrameSkillBar)
+		U.SkinStatusBar(ArchyArtifactFrameSkillBar)
 	end
-	cSkinButton(ArchyDistanceIndicatorFrameSurveyButton)
+	U.SkinButton(ArchyDistanceIndicatorFrameSurveyButton)
 end
 
-cRegisterSkin(name,SkinArchy)
+U.RegisterSkin(name,SkinArchy)

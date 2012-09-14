@@ -32,20 +32,20 @@ if event == "PLAYER_ENTERING_WORLD" then
 		local E, L, V, P, G, DF = unpack(ElvUI)
 		RightChatToggleButton:SetScript("OnClick", function(self, btn)
 				if btn == 'RightButton' then
-				if IsAddOnLoaded("Recount") and ((cCheckOption("EmbedRecount")) or (cCheckOption("EmbedRO"))) then
+				if IsAddOnLoaded("Recount") and ((U.CheckOption("EmbedRecount")) or (U.CheckOption("EmbedRO"))) then
 					ToggleFrame(Recount_MainWindow)
 				end
-				if IsAddOnLoaded("Skada") and ((cCheckOption("EmbedSkada"))) then
+				if IsAddOnLoaded("Skada") and ((U.CheckOption("EmbedSkada"))) then
 					Skada:ToggleWindow()
 				end
-				if IsAddOnLoaded("Omen") and ((cCheckOption("EmbedOmen")) or (cCheckOption("EmbedRO"))) then
+				if IsAddOnLoaded("Omen") and ((U.CheckOption("EmbedOmen")) or (U.CheckOption("EmbedRO"))) then
 					if OmenBarList:IsShown() then
 						OmenBarList:Hide()
 					else
 						OmenBarList:Show()
 					end
 				end
-				if IsAddOnLoaded("TinyDPS") and (cCheckOption("EmbedTDPS")) then
+				if IsAddOnLoaded("TinyDPS") and (U.CheckOption("EmbedTDPS")) then
 					if tdpsFrame:IsShown() then
 						tdpsFrame:Hide()
 					else
@@ -76,191 +76,191 @@ if event == "PLAYER_ENTERING_WORLD" then
 	end
 
 --Embed Check
-	if not IsAddOnLoaded("Omen") then cDisableOption("EmbedRO") cDisableOption("EmbedOmen") end
-	if not IsAddOnLoaded("Recount") then cDisableOption("EmbedRO") end
-	if cCheckOption("EmbedRO") then EmbedRecountOmen() end
-	if cCheckOption("EmbedOmen") then EmbedOmen() end
+	if not IsAddOnLoaded("Omen") then U.DisableOption("EmbedRO") U.DisableOption("EmbedOmen") end
+	if not IsAddOnLoaded("Recount") then U.DisableOption("EmbedRO") end
+	if U.CheckOption("EmbedRO") then EmbedRecountOmen() end
+	if U.CheckOption("EmbedOmen") then EmbedOmen() end
 --Embed Check Finished
 if IsAddOnLoaded("Tukui") then
 	RecountEmbedButton = CreateFrame("Button", "RecountEmbedButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	RecountEmbedButton:SetPoint("TOPLEFT", 10, -50)
 	RecountEmbedButton:Size(170,24)
-	cSkinButton(RecountEmbedButton)
+	U.SkinButton(RecountEmbedButton)
 	RecountEmbedButton.text = RecountEmbedButton:CreateFontString(nil, "OVERLAY")
 	RecountEmbedButton.text:SetFont(UIFont, 12, "OUTLINE")
 	RecountEmbedButton.text:SetPoint("CENTER", RecountEmbedButton, 0, 0)
-	if (cCheckOption("EmbedRecount")) then RecountEmbedButton.text:SetText("Recount : |cff00ff00Enabled|r") end
-	if (not cCheckOption("EmbedRecount")) then RecountEmbedButton.text:SetText("Recount : |cffff2020Disabled|r") end
+	if (U.CheckOption("EmbedRecount")) then RecountEmbedButton.text:SetText("Recount : |cff00ff00Enabled|r") end
+	if (not U.CheckOption("EmbedRecount")) then RecountEmbedButton.text:SetText("Recount : |cffff2020Disabled|r") end
 	if not IsAddOnLoaded("Recount") then RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
 	RecountEmbedButton:SetScript("OnClick", function()
-		if (cCheckOption("EmbedRecount")) then
-			cDisableOption("EmbedRecount")
+		if (U.CheckOption("EmbedRecount")) then
+			U.DisableOption("EmbedRecount")
 			Recount:LockWindows(false)
 			RecountEmbedButton.text:SetText("Recount : |cffff2020Disabled|r")
 		else
 			EmbedRecount()
-			cEnableOption("EmbedRecount")
-			cDisableOption("EmbedSkada")
-			cDisableOption("EmbedRO")
-			cDisableOption("EmbedOmen")
+			U.EnableOption("EmbedRecount")
+			U.DisableOption("EmbedSkada")
+			U.DisableOption("EmbedRO")
+			U.DisableOption("EmbedOmen")
 			EmbedROButton.text:SetText("Recount & Omen : |cffff2020Disabled|r")
 			EmbedOmenButton.text:SetText("Omen : |cffff2020Disabled|r")
 			RecountEmbedButton.text:SetText("Recount : |cff00ff00Enabled|r")
 			SkadaEmbedButton.text:SetText("Skada : |cffff2020Disabled|r")
 		end
-		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
+		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|U.FF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
 		if not IsAddOnLoaded("Skada") then SkadaEmbedButton:Disable() SkadaEmbedButton.text:SetText("|cFF808080Skada Not Detected|r") end
-		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
+		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|U.FF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
 	end)
 	SkadaEmbedButton = CreateFrame("Button", "SkadaEmbedButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	SkadaEmbedButton:SetPoint("TOPRIGHT", -10, -50)
 	SkadaEmbedButton:Size(170,24)
-	cSkinButton(SkadaEmbedButton)
+	U.SkinButton(SkadaEmbedButton)
 	SkadaEmbedButton.text = SkadaEmbedButton:CreateFontString(nil, "OVERLAY")
 	SkadaEmbedButton.text:SetFont(UIFont, 12, "OUTLINE")
 	SkadaEmbedButton.text:SetPoint("CENTER", SkadaEmbedButton, 0, 0)
-	if (cCheckOption("EmbedSkada")) then SkadaEmbedButton.text:SetText("Skada : |cff00ff00Enabled|r") end
-	if (not cCheckOption("EmbedSkada")) then SkadaEmbedButton.text:SetText("Skada : |cffff2020Disabled|r") end
+	if (U.CheckOption("EmbedSkada")) then SkadaEmbedButton.text:SetText("Skada : |cff00ff00Enabled|r") end
+	if (not U.CheckOption("EmbedSkada")) then SkadaEmbedButton.text:SetText("Skada : |cffff2020Disabled|r") end
 	if not IsAddOnLoaded("Skada") then SkadaEmbedButton:Disable() SkadaEmbedButton.text:SetText("|cFF808080Skada Not Detected|r") end
 	SkadaEmbedButton:SetScript("OnClick", function()
-		if (cCheckOption("EmbedSkada")) then
-			cDisableOption("EmbedSkada")
+		if (U.CheckOption("EmbedSkada")) then
+			U.DisableOption("EmbedSkada")
 			SkadaEmbedButton.text:SetText("Skada : |cffff2020Disabled|r")
 		else
 			EmbedSkada()
-			cEnableOption("EmbedSkada")
-			cDisableOption("EmbedRecount")
-			cDisableOption("EmbedRO")
-			cDisableOption("EmbedOmen")
+			U.EnableOption("EmbedSkada")
+			U.DisableOption("EmbedRecount")
+			U.DisableOption("EmbedRO")
+			U.DisableOption("EmbedOmen")
 			EmbedROButton.text:SetText("Recount & Omen : |cffff2020Disabled|r")
 			EmbedOmenButton.text:SetText("Omen : |cffff2020Disabled|r")
 			RecountEmbedButton.text:SetText("Recount : |cffff2020Disabled|r")
 			SkadaEmbedButton.text:SetText("Skada : |cff00ff00Enabled|r")
 		end
-		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
+		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|U.FF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
 		if not IsAddOnLoaded("Skada") then SkadaEmbedButton:Disable() SkadaEmbedButton.text:SetText("|cFF808080Skada Not Detected|r") end
-		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
+		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|U.FF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
 	end)
 	RecountEmbedBackdropButton = CreateFrame("Button", "RecountEmbedBackdropButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	RecountEmbedBackdropButton:SetPoint("TOPLEFT", 10, -80)
 	RecountEmbedBackdropButton:Size(170,24)
-	cSkinButton(RecountEmbedBackdropButton)
+	U.SkinButton(RecountEmbedBackdropButton)
 	RecountEmbedBackdropButton.text = RecountEmbedBackdropButton:CreateFontString(nil, "OVERLAY")
 	RecountEmbedBackdropButton.text:SetFont(UIFont, 12, "OUTLINE")
 	RecountEmbedBackdropButton.text:SetPoint("CENTER", RecountEmbedBackdropButton, 0, 0)
-	if (cCheckOption("RecountBackdrop")) then RecountEmbedBackdropButton.text:SetText("Recount Backdrop : |cff00ff00Enabled|r") end
-	if (not cCheckOption("RecountBackdrop")) then RecountEmbedBackdropButton.text:SetText("Recount Backdrop : |cffff2020Disabled|r") end
-	if (not cCheckOption("RecountSkin")) then RecountEmbedBackdropButton:Disable() RecountEmbedBackdropButton.text:SetText("|cFF808080Recount Backdrop: Disabled|r") end
+	if (U.CheckOption("RecountBackdrop")) then RecountEmbedBackdropButton.text:SetText("Recount Backdrop : |cff00ff00Enabled|r") end
+	if (not U.CheckOption("RecountBackdrop")) then RecountEmbedBackdropButton.text:SetText("Recount Backdrop : |cffff2020Disabled|r") end
+	if (not U.CheckOption("RecountSkin")) then RecountEmbedBackdropButton:Disable() RecountEmbedBackdropButton.text:SetText("|cFF808080Recount Backdrop: Disabled|r") end
 	RecountEmbedBackdropButton:SetScript("OnClick", function()
-		if (cCheckOption("RecountBackdrop")) then
-			cDisableOption("RecountBackdrop")
+		if (U.CheckOption("RecountBackdrop")) then
+			U.DisableOption("RecountBackdrop")
 			RecountEmbedBackdropButton.text:SetText("Recount Backdrop : |cffff2020Disabled|r")
 		else
-			cEnableOption("RecountBackdrop")
+			U.EnableOption("RecountBackdrop")
 			RecountEmbedBackdropButton.text:SetText("Recount Backdrop : |cff00ff00Enabled|r")
 		end
 	end)
 	SkadaEmbedBackdropButton = CreateFrame("Button", "SkadaEmbedBackdropButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	SkadaEmbedBackdropButton:SetPoint("TOPRIGHT", -10, -80)
 	SkadaEmbedBackdropButton:Size(170,24)
-	cSkinButton(SkadaEmbedBackdropButton)
+	U.SkinButton(SkadaEmbedBackdropButton)
 	SkadaEmbedBackdropButton.text = SkadaEmbedBackdropButton:CreateFontString(nil, "OVERLAY")
 	SkadaEmbedBackdropButton.text:SetFont(UIFont, 12, "OUTLINE")
 	SkadaEmbedBackdropButton.text:SetPoint("CENTER", SkadaEmbedBackdropButton, 0, 0)
-	if (cCheckOption("SkadaBackdrop")) then SkadaEmbedBackdropButton.text:SetText("Skada Backdrop : |cff00ff00Enabled|r") end
-	if (not cCheckOption("SkadaBackdrop")) then SkadaEmbedBackdropButton.text:SetText("Skada Backdrop : |cffff2020Disabled|r") end
-	if (not cCheckOption("SkadaSkin")) then SkadaEmbedBackdropButton:Disable() SkadaEmbedBackdropButton.text:SetText("|cFF808080Skada Backdrop: Disabled|r") end
+	if (U.CheckOption("SkadaBackdrop")) then SkadaEmbedBackdropButton.text:SetText("Skada Backdrop : |cff00ff00Enabled|r") end
+	if (not U.CheckOption("SkadaBackdrop")) then SkadaEmbedBackdropButton.text:SetText("Skada Backdrop : |cffff2020Disabled|r") end
+	if (not U.CheckOption("SkadaSkin")) then SkadaEmbedBackdropButton:Disable() SkadaEmbedBackdropButton.text:SetText("|cFF808080Skada Backdrop: Disabled|r") end
 	SkadaEmbedBackdropButton:SetScript("OnClick", function()
-		if (cCheckOption("SkadaBackdrop")) then
-			cDisableOption("SkadaBackdrop")
+		if (U.CheckOption("SkadaBackdrop")) then
+			U.DisableOption("SkadaBackdrop")
 			SkadaEmbedBackdropButton.text:SetText("Skada Backdrop : |cffff2020Disabled|r")
 		else
-			cEnableOption("SkadaBackdrop")
+			U.EnableOption("SkadaBackdrop")
 			SkadaEmbedBackdropButton.text:SetText("Skada Backdrop : |cff00ff00Enabled|r")
 		end
 	end)
 	EmbedOoCButton = CreateFrame("Button", "EmbedOoCButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	EmbedOoCButton:SetPoint("TOPLEFT", 10, -110)
 	EmbedOoCButton:Size(170,24)
-	cSkinButton(EmbedOoCButton)
+	U.SkinButton(EmbedOoCButton)
 	EmbedOoCButton.text = EmbedOoCButton:CreateFontString(nil, "OVERLAY")
 	EmbedOoCButton.text:SetFont(UIFont, 12, "OUTLINE")
 	EmbedOoCButton.text:SetPoint("CENTER", EmbedOoCButton, 0, 0)
-	if (cCheckOption("EmbedOoC")) then EmbedOoCButton.text:SetText("OoC Hide : |cff00ff00Enabled|r") end
-	if (not cCheckOption("EmbedOoC")) then EmbedOoCButton.text:SetText("OoC Hide : |cffff2020Disabled|r") end
+	if (U.CheckOption("EmbedOoC")) then EmbedOoCButton.text:SetText("OoC Hide : |cff00ff00Enabled|r") end
+	if (not U.CheckOption("EmbedOoC")) then EmbedOoCButton.text:SetText("OoC Hide : |cffff2020Disabled|r") end
 	EmbedOoCButton:SetScript("OnClick", function()
-		if (cCheckOption("EmbedOoC")) then
-			cDisableOption("EmbedOoC")
+		if (U.CheckOption("EmbedOoC")) then
+			U.DisableOption("EmbedOoC")
 			EmbedOoCButton.text:SetText("OoC Hide : |cffff2020Disabled|r")
 		else
-			cEnableOption("EmbedOoC")
+			U.EnableOption("EmbedOoC")
 			EmbedOoCButton.text:SetText("OoC Hide : |cff00ff00Enabled|r")
 		end
 	end)
 	EmbedROButton = CreateFrame("Button", "EmbedROButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	EmbedROButton:SetPoint("TOPLEFT", 10, -20)
 	EmbedROButton:Size(170,24)
-	cSkinButton(EmbedROButton)
+	U.SkinButton(EmbedROButton)
 	EmbedROButton.text = EmbedROButton:CreateFontString(nil, "OVERLAY")
 	EmbedROButton.text:SetFont(UIFont, 12, "OUTLINE")
 	EmbedROButton.text:SetPoint("CENTER", EmbedROButton, 0, 0)
-	if (cCheckOption("EmbedRO")) then EmbedROButton.text:SetText("Recount & Omen : |cff00ff00Enabled|r") end
-	if (not cCheckOption("EmbedRO")) then EmbedROButton.text:SetText("Recount & Omen : |cffff2020Disabled|r") end
+	if (U.CheckOption("EmbedRO")) then EmbedROButton.text:SetText("Recount & Omen : |cff00ff00Enabled|r") end
+	if (not U.CheckOption("EmbedRO")) then EmbedROButton.text:SetText("Recount & Omen : |cffff2020Disabled|r") end
 	if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") end
 	if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") end
 	EmbedROButton:SetScript("OnClick", function()
-		if (cCheckOption("EmbedRO")) then
-			cDisableOption("EmbedRO")
+		if (U.CheckOption("EmbedRO")) then
+			U.DisableOption("EmbedRO")
 			EmbedROButton.text:SetText("Recount & Omen : |cffff2020Disabled|r")
 		else
 			EmbedRecountOmen()
-			cEnableOption("EmbedRO")
-			cDisableOption("EmbedSkada")
-			cDisableOption("EmbedRecount")
-			cDisableOption("EmbedOmen")
+			U.EnableOption("EmbedRO")
+			U.DisableOption("EmbedSkada")
+			U.DisableOption("EmbedRecount")
+			U.DisableOption("EmbedOmen")
 			EmbedOmenButton.text:SetText("Omen : |cffff2020Disabled|r")
 			RecountEmbedButton.text:SetText("Recount : |cffff2020Disabled|r")
 			SkadaEmbedButton.text:SetText("Skada : |cffff2020Disabled|r")
 			EmbedROButton.text:SetText("Recount & Omen : |cff00ff00Enabled|r")
 		end
-		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
+		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|U.FF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
 		if not IsAddOnLoaded("Skada") then SkadaEmbedButton:Disable() SkadaEmbedButton.text:SetText("|cFF808080Skada Not Detected|r") end
-		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
+		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|U.FF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
 	end)
 
 	EmbedOmenButton = CreateFrame("Button", "EmbedOmenButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	EmbedOmenButton:SetPoint("TOPRIGHT", -10, -20)
 	EmbedOmenButton:Size(170,24)
-	cSkinButton(EmbedOmenButton)
+	U.SkinButton(EmbedOmenButton)
 	EmbedOmenButton.text = EmbedOmenButton:CreateFontString(nil, "OVERLAY")
 	EmbedOmenButton.text:SetFont(UIFont, 12, "OUTLINE")
 	EmbedOmenButton.text:SetPoint("CENTER", EmbedOmenButton, 0, 0)
-	if (cCheckOption("EmbedOmen")) then EmbedOmenButton.text:SetText("Omen : |cff00ff00Enabled|r") end
-	if (not cCheckOption("EmbedOmen")) then EmbedOmenButton.text:SetText("Omen : |cffff2020Disabled|r") end
+	if (U.CheckOption("EmbedOmen")) then EmbedOmenButton.text:SetText("Omen : |cff00ff00Enabled|r") end
+	if (not U.CheckOption("EmbedOmen")) then EmbedOmenButton.text:SetText("Omen : |cffff2020Disabled|r") end
 	if not IsAddOnLoaded("Omen") then EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
 	EmbedOmenButton:SetScript("OnClick", function()
-		if (cCheckOption("EmbedOmen")) then
-			cDisableOption("EmbedOmen")
+		if (U.CheckOption("EmbedOmen")) then
+			U.DisableOption("EmbedOmen")
 			EmbedOmenButton.text:SetText("Omen : |cffff2020Disabled|r")
 		else
 			EmbedOmen()
-			cDisableOption("EmbedRO")
-			cDisableOption("EmbedSkada")
-			cDisableOption("EmbedRecount")
-			cEnableOption("EmbedOmen")
+			U.DisableOption("EmbedRO")
+			U.DisableOption("EmbedSkada")
+			U.DisableOption("EmbedRecount")
+			U.EnableOption("EmbedOmen")
 			RecountEmbedButton.text:SetText("Recount : |cffff2020Disabled|r")
 			SkadaEmbedButton.text:SetText("Skada : |cffff2020Disabled|r")
 			EmbedROButton.text:SetText("Recount & Omen : |cffff2020Disabled|r")
 			EmbedOmenButton.text:SetText("Omen : |cff00ff00Enabled|r")
 		end
-		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
+		if not IsAddOnLoaded("Omen") then EmbedROButton:Disable() EmbedROButton.text:SetText("|U.FF808080Recount & Omen Not Detected|r") EmbedOmenButton:Disable() EmbedOmenButton.text:SetText("|cFF808080Omen Not Detected|r") end
 		if not IsAddOnLoaded("Skada") then SkadaEmbedButton:Disable() SkadaEmbedButton.text:SetText("|cFF808080Skada Not Detected|r") end
-		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|cFF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
+		if not IsAddOnLoaded("Recount") then EmbedROButton:Disable() EmbedROButton.text:SetText("|U.FF808080Recount & Omen Not Detected|r") RecountEmbedButton:Disable() RecountEmbedButton.text:SetText("|cFF808080Recount Not Detected|r") end
 	end)
 	CloseEmbedWindowButton = CreateFrame("Button", "CloseEmbedWindowButton", EmbeddingWindow, "UIPanelButtonTemplate")
 	CloseEmbedWindowButton:SetPoint("TOPRIGHT", -10, -110)
 	CloseEmbedWindowButton:Size(170,24)
-	cSkinButton(CloseEmbedWindowButton)
+	U.SkinButton(CloseEmbedWindowButton)
 	CloseEmbedWindowButton.text = CloseEmbedWindowButton:CreateFontString(nil, "OVERLAY")
 	CloseEmbedWindowButton.text:SetFont(UIFont, 12, "OUTLINE")
 	CloseEmbedWindowButton.text:SetPoint("CENTER", CloseEmbedWindowButton, 0, 0)
@@ -349,47 +349,47 @@ end
 
 if event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_ENTER_COMBAT" or InCombatLockdown() then
 --	print("Entering Combat")
-	if (cCheckOption("EmbedOoC")) then
-		if (IsAddOnLoaded("Recount") and (cCheckOption("EmbedRecount"))) then
+	if (U.CheckOption("EmbedOoC")) then
+		if (IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRecount"))) then
 			Recount_MainWindow:Show()
 		end
-		if (IsAddOnLoaded("Skada") and (cCheckOption("EmbedSkada"))) then
+		if (IsAddOnLoaded("Skada") and (U.CheckOption("EmbedSkada"))) then
 			if Skada.db.profile.hidesolo then return end
 			if Skada.db.profile.hidecombat then return end
 			for _, window in ipairs(Skada:GetWindows()) do
 				window:Show()
 			end
 		end
-		if (IsAddOnLoaded("Omen") and IsAddOnLoaded("Recount") and (cCheckOption("EmbedRO"))) then
+		if (IsAddOnLoaded("Omen") and IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRO"))) then
 			Recount_MainWindow:Show()
 			OmenBarList:Show()
 		end
-		if (IsAddOnLoaded("Omen") and (cCheckOption("EmbedOmen"))) then
+		if (IsAddOnLoaded("Omen") and (U.CheckOption("EmbedOmen"))) then
 			OmenBarList:Show()
 		end
-		if (IsAddOnLoaded("TinyDPS") and (cCheckOption("EmbedTDPS"))) then
+		if (IsAddOnLoaded("TinyDPS") and (U.CheckOption("EmbedTDPS"))) then
 			tdpsFrame:Show()
 		end
 	end
 else
 --	print("Exiting Combat")
-	if (cCheckOption("EmbedOoC")) then
-		if (IsAddOnLoaded("Recount") and (cCheckOption("EmbedRecount"))) then
+	if (U.CheckOption("EmbedOoC")) then
+		if (IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRecount"))) then
 			Recount_MainWindow:Hide()
 		end
-		if (IsAddOnLoaded("Skada") and (cCheckOption("EmbedSkada"))) then
+		if (IsAddOnLoaded("Skada") and (U.CheckOption("EmbedSkada"))) then
 			for _, window in ipairs(Skada:GetWindows()) do
 				window:Hide()
 			end
 		end
-		if (IsAddOnLoaded("Omen") and IsAddOnLoaded("Recount") and (cCheckOption("EmbedRO"))) then
+		if (IsAddOnLoaded("Omen") and IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRO"))) then
 			Recount_MainWindow:Hide()
 			OmenBarList:Hide()
 		end
-		if (IsAddOnLoaded("Omen") and (cCheckOption("EmbedOmen"))) then
+		if (IsAddOnLoaded("Omen") and (U.CheckOption("EmbedOmen"))) then
 			OmenBarList:Hide()
 		end
-		if (IsAddOnLoaded("TinyDPS") and (cCheckOption("EmbedTDPS"))) then
+		if (IsAddOnLoaded("TinyDPS") and (U.CheckOption("EmbedTDPS"))) then
 			tdpsFrame:Hide()
 		end
 	end
@@ -437,10 +437,10 @@ function SlashCmdList.EMBEDDINGWINDOW(msg, editbox)
 end
 
 function EmbedRecountOmen()
-		if not IsAddOnLoaded("Omen") then cDisableOption("EmbedRO") return end
-		if not IsAddOnLoaded("Recount") then cDisableOption("EmbedRO") return end
-	if (cCheckOption("EmbedOoC")) then
-		if (cCheckOption("EmbedRO")) then
+		if not IsAddOnLoaded("Omen") then U.DisableOption("EmbedRO") return end
+		if not IsAddOnLoaded("Recount") then U.DisableOption("EmbedRO") return end
+	if (U.CheckOption("EmbedOoC")) then
+		if (U.CheckOption("EmbedRO")) then
 			Recount_MainWindow:Hide()
 			OmenBarList:Hide()
 		end
@@ -480,7 +480,7 @@ function EmbedRecountOmen()
 end
 
 function EmbedRecountOmenResize()
-	if IsAddOnLoaded("Tukui") then
+	if U.tuk then
 		if TukuiChatBackgroundRight then
 			OmenAnchor:SetWidth((TukuiChatBackgroundRight:GetWidth() / 3) - ( 10 + s.mult))
 			OmenAnchor:SetHeight(TukuiChatBackgroundRight:GetHeight() - 20)
@@ -498,7 +498,7 @@ function EmbedRecountOmenResize()
 		end
 	end
 
-	if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then
+	if U.elv and not U.sle then
 		OmenAnchor:SetWidth((RightChatPanel:GetWidth() / 3) - ( 8 + c.mult))
 		OmenAnchor:SetHeight(RightChatPanel:GetHeight() - 12)
 		OmenAnchor:SetPoint("TOPLEFT", RightChatPanel, "TOPLEFT", 5, 16)
@@ -506,7 +506,7 @@ function EmbedRecountOmenResize()
 		Recount_MainWindow:SetHeight(RightChatPanel:GetHeight() - 26)
 		Recount_MainWindow:SetPoint("TOPRIGHT", RightChatPanel,"TOPRIGHT", -5, 2)
 	end
-	if IsAddOnLoaded("ElvUI_SLE") then
+	if U.sle then
 		OmenAnchor:SetWidth((RightChatPanel:GetWidth() / 3) - ( 3 + c.mult))
 		OmenAnchor:SetHeight(RightChatPanel:GetHeight() - 4)
 		OmenAnchor:SetPoint("TOPLEFT", RightChatPanel, "TOPLEFT", 2, -2)

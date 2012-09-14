@@ -1,4 +1,5 @@
 ﻿if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Lightheaded") then return end
+local U = unpack(select(2,...))
 local function DoDis(self, event, ...)
 
 		QuestNPCModel:ClearAllPoints()
@@ -15,7 +16,7 @@ local function SkinOptions(self, event, ...)-- Skin the Options Frame
 
 		for i = 1, 9 do
 			local cbox = _G["LightHeaded_Panel_Toggle"..i]
-			cSkinCheckBox(cbox)
+			U.SkinCheckBox(cbox)
 		end
 
 		local buttons = {
@@ -24,7 +25,7 @@ local function SkinOptions(self, event, ...)-- Skin the Options Frame
 			}
 	
 		for _, button in pairs(buttons) do
-			cSkinButton(_G[button])
+			U.SkinButton(_G[button])
 		end
 		
 		LightHeaded_Panel_Button2:Disable()
@@ -44,21 +45,21 @@ end
 
 local name = "LightheadedSkin"
 local function SkinLightHeaded(self)
-	cSkinFrame(LightHeadedFrame)
-	cSkinFrame(LightHeadedFrameSub)
-	cSkinFrame(LightHeadedSearchBox)
+	U.SkinFrame(LightHeadedFrame)
+	U.SkinFrame(LightHeadedFrameSub)
+	U.SkinFrame(LightHeadedSearchBox)
 	LightHeadedTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 						
 	LightHeadedScrollFrame:StripTextures()
 	
 	local lhframe = LightHeadedFrame		
 	lhframe.close:Hide()
-	cSkinCloseButton(lhframe.close)
+	U.SkinCloseButton(lhframe.close)
 	lhframe.handle:Hide()
 	
 	local lhframe = LightHeadedFrameSub
-	cSkinNextPrevButton(lhframe.prev)
-	cSkinNextPrevButton(lhframe.next)
+	U.SkinNextPrevButton(lhframe.prev)
+	U.SkinNextPrevButton(lhframe.next)
 
 	lhframe.prev:SetWidth(16)
 	lhframe.prev:SetHeight(16)
@@ -67,7 +68,7 @@ local function SkinLightHeaded(self)
 	lhframe.prev:SetPoint("RIGHT", lhframe.page, "LEFT", -25, 0)
 	lhframe.next:SetPoint("LEFT", lhframe.page, "RIGHT", 25, 0)
 
-	cSkinScrollBar(LightHeadedScrollFrameScrollBar, 5)
+	U.SkinScrollBar(LightHeadedScrollFrameScrollBar, 5)
 
 	lhframe.title:SetTextColor(23/255, 132/255, 209/255)	
 
@@ -77,4 +78,4 @@ local function SkinLightHeaded(self)
 	local LH_Options = _G["LightHeaded_Panel"]
 end
 
-cRegisterSkin(name,SkinLightHeaded)
+U.RegisterSkin(name,SkinLightHeaded)

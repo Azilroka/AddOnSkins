@@ -12,46 +12,46 @@ local function SkinOdyssey(self)
 
 	OdysseyFramePortrait:Kill()
 
-	cSkinFrame(OdysseyFrame)
-	cSkinFrame(OdysseyFrameRealmSummaryScrollFrame)
+	U.SkinFrame(OdysseyFrame)
+	U.SkinFrame(OdysseyFrameRealmSummaryScrollFrame)
 	OdysseyFrameQuestDB:SetTemplate("Transparent")
 	OdysseyFrameQuestDBScrollFrame:SetTemplate("Transparent")
 	OdysseyFrameQuestDetails:SetTemplate("Transparent")
 	OdysseyFrameZoneMaps:SetTemplate("Transparent")
 
-	cSkinScrollBar(OdysseyFrameQuestDBScrollFrameScrollBar)
-	cSkinScrollBar(OdysseyFrameRealmSummaryScrollFrameScrollBar)
-	cSkinScrollBar(OdysseyMapsMenuScrollFrameScrollBar)
-	cSkinEditBox(OdysseyFrame_SearchEditBox)
-	cSkinEditBox(OdysseyFrameQuestDB_MinLevel)
-	cSkinEditBox(OdysseyFrameQuestDB_MaxLevel)
+	U.SkinScrollBar(OdysseyFrameQuestDBScrollFrameScrollBar)
+	U.SkinScrollBar(OdysseyFrameRealmSummaryScrollFrameScrollBar)
+	U.SkinScrollBar(OdysseyMapsMenuScrollFrameScrollBar)
+	U.SkinEditBox(OdysseyFrame_SearchEditBox)
+	U.SkinEditBox(OdysseyFrameQuestDB_MinLevel)
+	U.SkinEditBox(OdysseyFrameQuestDB_MaxLevel)
 	
 	OdysseyFrame_ResetButton:Point("TOPLEFT", OdysseyFrame, "TOPLEFT", 55, -77)
 	OdysseyFrameTab1:Point("TOPLEFT", OdysseyFrame, "BOTTOMLEFT", -5, 2)
-	cSkinButton(OdysseyFrame_ResetButton)
-	cSkinButton(OdysseyFrame_SearchButton)
-	cSkinButton(OdysseyFrameQuestDB_GetHistory)
-	cSkinCloseButton(OdysseyFrameCloseButton)
-	cSkinNextPrevButton(OdysseyFrameQuestDetailsGoBack)
-	cSkinNextPrevButton(OdysseyFrameQuestDetailsGoForward)
-	cSkinDropDownBox(OdysseyFrameRealmSummary_SelectContinent)
-	cSkinScrollBar(OdysseyFrameSearchScrollFrameScrollBar)
+	U.SkinButton(OdysseyFrame_ResetButton)
+	U.SkinButton(OdysseyFrame_SearchButton)
+	U.SkinButton(OdysseyFrameQuestDB_GetHistory)
+	U.SkinCloseButton(OdysseyFrameCloseButton)
+	U.SkinNextPrevButton(OdysseyFrameQuestDetailsGoBack)
+	U.SkinNextPrevButton(OdysseyFrameQuestDetailsGoForward)
+	U.SkinDropDownBox(OdysseyFrameRealmSummary_SelectContinent)
+	U.SkinScrollBar(OdysseyFrameSearchScrollFrameScrollBar)
 
 	for i = 1, 3 do
-		cSkinTab(_G["OdysseyFrameTab"..i])
-		cSkinFrame(_G["OdysseyTabQuestsMenuItem"..i])
+		U.SkinTab(_G["OdysseyFrameTab"..i])
+		U.SkinFrame(_G["OdysseyTabQuestsMenuItem"..i])
 	end
 
 	for i = 1, 5 do
-		cSkinFrame(_G["OdysseyTabQuests_Sort"..i])
+		U.SkinFrame(_G["OdysseyTabQuests_Sort"..i])
 	end
 
 	for i = 1, 15 do
-		cSkinFrame(_G["OdysseyTabMapsMenuItem"..i])
+		U.SkinFrame(_G["OdysseyTabMapsMenuItem"..i])
 	end
 
 	for i = 1, 4 do
-		cSkinFrame(_G["OdysseyTabSearchMenuItem"..i])
+		U.SkinFrame(_G["OdysseyTabSearchMenuItem"..i])
 	end
 
 	for i = 1, 10 do
@@ -69,4 +69,4 @@ local function SkinOdyssey(self)
 
 end
 
-cRegisterSkin(name,SkinOdyssey)
+U.RegisterSkin(name,SkinOdyssey)

@@ -27,7 +27,7 @@ else
 	s = T
 end
 
-function cSkinButton(self)
+local function cSkinButton(self)
 	if ElvUI then
 		s:HandleButton(self)
 	else
@@ -35,7 +35,9 @@ function cSkinButton(self)
 	end
 end
 
-function cSkinScrollBar(self)
+AddOn.SkinButton = cSkinButton
+
+local function cSkinScrollBar(self)
 	if ElvUI then
 		s:HandleScrollBar(self)
 	else
@@ -43,7 +45,9 @@ function cSkinScrollBar(self)
 	end
 end
 
-function cSkinTab(self)
+AddOn.SkinScrollBar = cSkinScrollBar
+
+local function cSkinTab(self)
 	if ElvUI then
 		s:HandleTab(self)
 	else
@@ -51,7 +55,9 @@ function cSkinTab(self)
 	end
 end
 
-function cSkinNextPrevButton(self)
+AddOn.SkinTab = cSkinTab
+
+local function cSkinNextPrevButton(self)
 	if ElvUI then
 		s:HandleNextPrevButton(self)
 	else
@@ -59,7 +65,9 @@ function cSkinNextPrevButton(self)
 	end
 end
 
-function cSkinRotateButton(self)
+AddOn.SkinNextPrevButton = cSkinNextPrevButton
+
+local function cSkinRotateButton(self)
 	if ElvUI then
 		s:HandleRotateButton(self)
 	else
@@ -67,7 +75,9 @@ function cSkinRotateButton(self)
 	end
 end
 
-function cSkinEditBox(self)
+AddOn.SkinRotateButton = cSkinRotateButton
+
+local function cSkinEditBox(self)
 	if ElvUI then
 		s:HandleEditBox(self)
 	else
@@ -75,7 +85,9 @@ function cSkinEditBox(self)
 	end
 end
 
-function cSkinDropDownBox(self)
+AddOn.SkinEditBox = cSkinEditBox
+
+local function cSkinDropDownBox(self)
 	if ElvUI then
 		s:HandleDropDownBox(self)
 	else
@@ -83,7 +95,9 @@ function cSkinDropDownBox(self)
 	end
 end
 
-function cSkinCheckBox(self)
+AddOn.SkinDropDownBox = cSkinDropDownBox
+
+local function cSkinCheckBox(self)
 	if ElvUI then
 		s:HandleCheckBox(self)
 	else
@@ -91,7 +105,9 @@ function cSkinCheckBox(self)
 	end
 end
 
-function cSkinCloseButton(self)
+AddOn.SkinCheckBox = cSkinCheckBox
+
+local function cSkinCloseButton(self)
 	if ElvUI then
 		s:HandleCloseButton(self)
 	else
@@ -99,7 +115,9 @@ function cSkinCloseButton(self)
 	end
 end
 
-function cSkinSliderFrame(self, height)
+AddOn.SkinCloseButton = cSkinCloseButton
+
+local function cSkinSliderFrame(self, height)
 	if ElvUI then
 		s:HandleSliderFrame(self)
 	else
@@ -107,22 +125,30 @@ function cSkinSliderFrame(self, height)
 	end
 end
 
-function cSkinFrame(self)
+AddOn.SkinSliderFrame = cSkinSliderFrame
+
+local function cSkinFrame(self)
 	self:StripTextures(True)
 	self:SetTemplate("Transparent")
 end
 
-function cSkinBackdropFrame(self)
+AddOn.SkinFrame = cSkinFrame
+
+local function cSkinBackdropFrame(self)
 	self:StripTextures(True)
 	self:CreateBackdrop("Transparent")
 end
 
-function cSkinFrameD(self)
+AddOn.SkinBackdropFrame = cSkinBackdropFrame
+
+local function cSkinFrameD(self)
 	self:StripTextures(True)
 	self:SetTemplate("Default")
 end
 
-function cSkinStatusBar(self)
+AddOn.SkinFrameD = cSkinFrameD
+
+local function cSkinStatusBar(self)
 	local s = AddOn.s
 	local c = AddOn.c
 	self:StripTextures(True)
@@ -130,7 +156,9 @@ function cSkinStatusBar(self)
 	self:SetStatusBarTexture(c["media"].normTex)
 end
 
-function cSkinCCStatusBar(self)
+AddOn.SkinStatusBar = cSkinStatusBar
+
+local function cSkinCCStatusBar(self)
 	local s = AddOn.s
 	local c = AddOn.c
 	self:StripTextures(True)
@@ -140,7 +168,9 @@ function cSkinCCStatusBar(self)
 	self:SetStatusBarColor(color.r, color.g, color.b)
 end
 
-function cDesaturate(f, point)
+AddOn.SkinCCStatusBar = cSkinCCStatusBar
+
+local function cDesaturate(f, point)
 	for i=1, f:GetNumRegions() do
 		local region = select(i, f:GetRegions())
 		if region:GetObjectType() == "Texture" then
@@ -157,7 +187,9 @@ function cDesaturate(f, point)
 	end
 end
 
-function cCheckOption(optionName)
+AddOn.Desaturate = cDesaturate
+
+local function cCheckOption(optionName)
 	if IsAddOnLoaded("ElvUI") then
 		local c = AddOn.c
 		return c.db.skins[optionName]
@@ -166,7 +198,9 @@ function cCheckOption(optionName)
 	end
 end
 
-function cDisableOption(optionName)
+AddOn.CheckOption = cCheckOption
+
+local function cDisableOption(optionName)
 	if IsAddOnLoaded("ElvUI") then
 		local c = AddOn.c
 		c.db.skins[optionName] = false
@@ -175,7 +209,9 @@ function cDisableOption(optionName)
 	end
 end
 
-function cEnableOption(optionName)
+AddOn.DisableOption = cDisableOption
+
+local function cEnableOption(optionName)
 	if IsAddOnLoaded("ElvUI") then
 		local c = AddOn.c
 		c.db.skins[optionName] = true
@@ -184,7 +220,19 @@ function cEnableOption(optionName)
 	end
 end
 
-function cRegisterSkin(skinName,skinFunc,...)
+AddOn.EnableOption = cEnableOption
+
+local function cToggleOption(optionName)
+	if cCheckOption(optionName) then
+		cDisableOption(optionName)
+	else
+		cEnableOption(optionName)
+	end
+end
+
+AddOn.ToggleOption = cToggleOption
+
+local function cRegisterSkin(skinName,skinFunc,...)
 	local events = ...
 	local XS = AddOn.x
 	local registerMe = { func = skinFunc, events = events or {} }
@@ -192,9 +240,38 @@ function cRegisterSkin(skinName,skinFunc,...)
 	XS.register[skinName][skinFunc] = registerMe
 end
 
-function cUnregisterEvent(skinName,frame,event)
+AddOn.RegisterSkin = cRegisterSkin
+
+local function cUnregisterEvent(skinName,frame,event)
 	local XS = AddOn.x
 	XS:UnregisterEvent(skinName,event)
+end
+
+AddOn.UnregisterEvent = cUnregisterEvent
+
+function AzilCompatMode()
+	_G["cSkinButton"] = cSkinButton
+	_G["cSkinScrollBar"] = cSkinScrollBar
+	_G["cSkinTab"] = cSkinTab
+	_G["cSkinNextPrevButton"] = cSkinNextPrevButton
+	_G["cSkinRotateButton"] = cSkinRotateButton
+	_G["cSkinEditBox"] = cSkinEditBox
+	_G["cSkinDropDownBox"] = cSkinDropDownBox
+	_G["cSkinCheckBox"] = cSkinCheckBox
+	_G["cSkinCloseButton"] = cSkinCloseButton
+	_G["cSkinSliderFrame"] = cSkinSliderFrame
+	_G["cSkinFrame"] = cSkinFrame
+	_G["cSkinBackdropFrame"] = cSkinBackdropFrame
+	_G["cSkinFrameD"] = cSkinFrameD
+	_G["cSkinStatusBar"] = cSkinStatusBar
+	_G["cSkinCCStatusBar"] = cSkinCCStatusBar
+	_G["cDesaturate"] = cDesaturate
+	_G["cCheckOption"] = cCheckOption
+	_G["cDisableOption"] = cDisableOption
+	_G["cEnableOption"] = cEnableOption
+	_G["cToggleOption"] = cToggleOption
+	_G["cRegisterSkin"] = cRegisterSkin
+	_G["cUnregisterEvent"] = cUnregisterEvent
 end
 
 if IsAddOnLoaded("Tukui") then

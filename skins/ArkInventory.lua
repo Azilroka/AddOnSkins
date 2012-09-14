@@ -16,7 +16,7 @@ local function SkinArkInventory(self)
 				if _G[name.."ArkBorder"] then _G[name.."ArkBorder"]:Hide() end
 				if _G[name.."Background"] then _G[name.."Background"]:Hide() end
 			end
-			cSkinFrame(subframe)
+			U.SkinFrame(subframe)
 		end
 	end
 	
@@ -91,7 +91,7 @@ local function SkinArkInventory(self)
 		local name = bar:GetName()
 		if _G[name.."ArkBorder"] then _G[name.."ArkBorder"]:Hide() end
 		if _G[name.."Background"] then _G[name.."Background"]:Hide() end
-		cSkinFrame(bar)
+		U.SkinFrame(bar)
 
 		if ArkInventory.Global.Mode.Edit then
 			bar:SetBackdropBorderColor(1,0,0,1)
@@ -128,4 +128,4 @@ local function SkinArkInventory(self)
 	end
 end
 
-cRegisterSkin(name,SkinArkInventory)
+U.RegisterSkin(name,SkinArkInventory)

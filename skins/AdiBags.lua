@@ -10,9 +10,9 @@ local function SkinFrame(frame)
 	frame:SetTemplate('Transparent')
 	_G[frame:GetName()..'Bags']:StripTextures()
 	_G[frame:GetName()..'Bags']:SetTemplate('Transparent')
-	cSkinCloseButton(frame.CloseButton)
+	U.SkinCloseButton(frame.CloseButton)
 	for i = 1, 3 do
-		cSkinButton(region.widgets[i].widget, true)
+		U.SkinButton(region.widgets[i].widget, true)
 	end
 end
 
@@ -25,7 +25,7 @@ local function AdiSkin(self,event,addon)
 		local A = LibStub('AceAddon-3.0'):GetAddon('AdiBags', true)
 		local f = AdiBagsContainer1
 		SkinFrame(f)
-		cSkinEditBox(AdiBagsSearchFrame)
+		U.SkinEditBox(AdiBagsSearchFrame)
 	if IsAddOnLoaded("Tukui") then
 		AdiBagsSearchFrame:Point("TOPRIGHT", AdiBagsSimpleLayeredRegion2, "TOPRIGHT", -75, -1)
 	end
@@ -42,7 +42,7 @@ local function AdiSkin(self,event,addon)
 			'Hold Shift:' ..' ' .. 'Delete Grays',
 		}, 'ANCHOR_TOPLEFT', 0, 8)
 		vendorButton:SetScript('OnClick', function() B:VendorGrayCheck() end)
-		cSkinButton(vendorButton, true)
+		U.SkinButton(vendorButton, true)
 		f:AddHeaderWidget(vendorButton, -5)
 	end
 	--elseif event == 'BANKFRAME_OPENED' then
@@ -52,4 +52,4 @@ local function AdiSkin(self,event,addon)
 	end
 end
 
-cRegisterSkin(name,AdiSkin,"BANKFRAME_OPENED")
+U.RegisterSkin(name,AdiSkin,"BANKFRAME_OPENED")

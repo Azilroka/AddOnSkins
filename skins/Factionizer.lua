@@ -1,11 +1,12 @@
 ﻿if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Factionizer") then return end
+local U = unpack(select(2,...))
 local function desat(self, event, ...)
 	for i = 1, 15 do
-		cDesaturate(_G["ReputationBar"..i.."ExpandOrCollapseButton"])
+		U.Desaturate(_G["ReputationBar"..i.."ExpandOrCollapseButton"])
 	end
 
 	for i = 1, 13 do
-		cDesaturate(_G["FIZ_UpdateEntry"..i])
+		U.Desaturate(_G["FIZ_UpdateEntry"..i])
 	end
 end
 
@@ -62,11 +63,11 @@ local function SkinFactionizer(self)
 		end			
 
 		for _, button in pairs(buttons) do
-			cSkinButton(_G[button])
+			U.SkinButton(_G[button])
 		end		
 
 		for _, checkbox in pairs(checkboxes) do
-			cSkinCheckBox(_G[checkbox])
+			U.SkinCheckBox(_G[checkbox])
 		end	
 
 		FIZ_ReputationDetailAtWarCheckBox:SetScript("OnUpdate", function(frame)
@@ -86,10 +87,10 @@ local function SkinFactionizer(self)
 
 	FIZ_OptionsFrame:CreateShadow("Default")
 
-	cSkinCloseButton(FIZ_OptionsFrameClose)
-	cSkinCloseButton(FIZ_ReputationDetailCloseButton)
+	U.SkinCloseButton(FIZ_OptionsFrameClose)
+	U.SkinCloseButton(FIZ_ReputationDetailCloseButton)
 
-	cSkinScrollBar(FIZ_UpdateListScrollFrameScrollBar, 5)
+	U.SkinScrollBar(FIZ_UpdateListScrollFrameScrollBar, 5)
 
 	repFrame = _G["ReputationFrame"]
 	repFrame:SetScript("OnUpdate", desat)
@@ -103,4 +104,4 @@ local function SkinFactionizer(self)
 	FIZ_OptionsFrame:Point("TOPLEFT",   ReputationFrame, "TOPRIGHT", 5, 0)
 end
 
-cRegisterSkin(name,SkinFactionizer)
+U.RegisterSkin(name,SkinFactionizer)

@@ -1,11 +1,11 @@
 ﻿if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("ChocolateBar") then return end
-
+local U = unpack(select(2,...))
 local name = "ChocolateBarSkin"
 local function SkinCB(self)
 		for i = 1, 20 do   	
 		local f = _G["ChocolateBar"..i]
 			if f then
-				cSkinFrameD(f)
+				U.SkinFrameD(f)
 			end
 		end
 
@@ -97,10 +97,10 @@ local function SkinCB(self)
 		CB_Skin_OptionsFrame.btn3:SetAlpha(1)
 		CB_Skin_OptionsFrame.btn3:Show()
 
-		cSkinButton(CB_Skin_OptionsFrame.btn)
-		cSkinButton(CB_Skin_OptionsFrame.btn2)
-		cSkinButton(CB_Skin_OptionsFrame.btn3)
-		cSkinButton(CB_Skin_PreviewFrame.btn)
+		U.SkinButton(CB_Skin_OptionsFrame.btn)
+		U.SkinButton(CB_Skin_OptionsFrame.btn2)
+		U.SkinButton(CB_Skin_OptionsFrame.btn3)
+		U.SkinButton(CB_Skin_PreviewFrame.btn)
 
 		local EnableBars = CreateFrame("CheckButton", "cbskin_checkbox", CB_Skin_OptionsFrame, "OptionsBaseCheckButtonTemplate")
 		EnableBars:SetPoint("TOPLEFT", CB_Skin_OptionsFrame, "TOPLEFT", 16, -35)
@@ -112,7 +112,7 @@ local function SkinCB(self)
 			end
 		EnableBars.Title:SetPoint("LEFT", EnableBars, "RIGHT", 5, 0)
 		EnableBars.Title:SetText("Enable Bar 2 and Bar 3 at top")
-		cSkinCheckBox(EnableBars)
+		U.SkinCheckBox(EnableBars)
 		EnableBars:SetScript("OnClick" or "OnUpdate", function(frame)
 				if frame:GetChecked() then
 					if ChocolateBar2 and ChocolateBar3 then
@@ -250,4 +250,4 @@ end
 	end
 end
 
-cRegisterSkin(name,SkinCB)
+U.RegisterSkin(name,SkinCB)

@@ -42,12 +42,12 @@ local function SkinClique(self)
 	}
 	for _, object in pairs(CliqueButtons) do
 		_G[object]:StripTextures(True)
-		cSkinButton(_G[object])
+		U.SkinButton(_G[object])
 	end
 	
-	cSkinCloseButton(CliqueConfigCloseButton)
-	if CliqueDialog.CloseButton then cSkinCloseButton(CliqueDialog.CloseButton) end
-	if CliqueDialogCloseButton then cSkinCloseButton(CliqueDialogCloseButton) end
+	U.SkinCloseButton(CliqueConfigCloseButton)
+	if CliqueDialog.CloseButton then U.SkinCloseButton(CliqueDialog.CloseButton) end
+	if CliqueDialogCloseButton then U.SkinCloseButton(CliqueDialogCloseButton) end
 
 	local CliqueTabs = {
 	"CliqueConfigPage1Column1",
@@ -96,4 +96,4 @@ local function SkinClique(self)
 
 end
 
-cRegisterSkin(name,SkinClique)
+U.RegisterSkin(name,SkinClique)

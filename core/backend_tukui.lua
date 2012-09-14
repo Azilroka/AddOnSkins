@@ -23,7 +23,7 @@ XS.Init = function(self)
 		end
 	end
 	for skin,funcs in pairs(XS.skins) do
-		if cCheckOption(skin) then
+		if U.CheckOption(skin) then
 			for func,_ in pairs(funcs) do
 				func(f,"PLAYER_ENTERING_WORLD")
 			end
@@ -31,7 +31,7 @@ XS.Init = function(self)
 	end
 	f:SetScript("OnEvent", function(self,event)
 		for skin,funcs in pairs(XS.skins) do
-			if cCheckOption(skin) and XS.events[event][skin] then
+			if U.CheckOption(skin) and XS.events[event][skin] then
 				for func,_ in pairs(funcs) do
 					func(f,event)
 				end
@@ -189,7 +189,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	ApplySkinSettingsButton = CreateFrame("Button", "ApplySkinSettingsButton", SkinOptions, "UIPanelButtonTemplate")
 	ApplySkinSettingsButton:SetPoint("BOTTOMLEFT", 0, -26)
 	ApplySkinSettingsButton:Size(217,24)
-	cSkinButton(ApplySkinSettingsButton)
+	U.SkinButton(ApplySkinSettingsButton)
 	ApplySkinSettingsButton.text = ApplySkinSettingsButton:CreateFontString(nil, "OVERLAY")
 	ApplySkinSettingsButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
 	ApplySkinSettingsButton.text:SetPoint("CENTER", ApplySkinSettingsButton, 0, 0)
@@ -199,7 +199,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	EmbedWindowSettingsButton = CreateFrame("Button", "EmbedWindowSettingsButton", SkinOptions, "UIPanelButtonTemplate")
 	EmbedWindowSettingsButton:SetPoint("BOTTOM", 0, -26)
 	EmbedWindowSettingsButton:Size(212,24)
-	cSkinButton(EmbedWindowSettingsButton)
+	U.SkinButton(EmbedWindowSettingsButton)
 	EmbedWindowSettingsButton.text = ApplySkinSettingsButton:CreateFontString(nil, "OVERLAY")
 	EmbedWindowSettingsButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
 	EmbedWindowSettingsButton.text:SetPoint("CENTER", EmbedWindowSettingsButton, 0, 0)
@@ -217,7 +217,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptionsCloseButton = CreateFrame("Button", "SkinOptionsCloseButton", SkinOptions, "UIPanelButtonTemplate")
 	SkinOptionsCloseButton:SetPoint("BOTTOMRIGHT", 0, -26)
 	SkinOptionsCloseButton:Size(217,24)
-	cSkinButton(SkinOptionsCloseButton)
+	U.SkinButton(SkinOptionsCloseButton)
 	SkinOptionsCloseButton.text = SkinOptionsCloseButton:CreateFontString(nil, "OVERLAY")
 	SkinOptionsCloseButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
 	SkinOptionsCloseButton.text:SetPoint("CENTER", SkinOptionsCloseButton, 0, 0)
@@ -228,7 +228,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptionsButton = CreateFrame("Button", "SkinOptionsButton", GameMenuFrame, "GameMenuButtonTemplate")
 	SkinOptionsButton:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -1)
 	SkinOptionsButton:Size(144,21)
-	cSkinButton(SkinOptionsButton)
+	U.SkinButton(SkinOptionsButton)
 	SkinOptionsButton.text = SkinOptionsButton:CreateFontString(nil, "OVERLAY")
 	SkinOptionsButton.text:SetFont(UIFont, 12)
 	if IsAddOnLoaded("ElvUI") then SkinOptionsButton.text:SetFont(c["media"].normFont, 12) end
@@ -252,7 +252,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		}
 		button:SetPoint(xTable[x].point, xTable[x].offset, yOffset)
 		button:Size(skinOptions2 and 175 or 200,20)
-		cSkinButton(button)
+		U.SkinButton(button)
 		button.text = button:CreateFontString(nil, "OVERLAY")
 		button.text:SetFont(UIFont, UIFontSize, "OUTLINE")
 		button.text:SetPoint("CENTER", button, 0, 0)

@@ -177,7 +177,7 @@ local function CLCInfo()
 		mod.oldNew = mod.New
 		mod.New = New
 	end
-	cRegisterSkin(name,SkinCLCInfo)
+	U.RegisterSkin(name,SkinCLCInfo)
 end
 
 local function CLCInfo_Options()
@@ -197,7 +197,7 @@ local function CLCInfo_Options()
 		mod.OldUpdateMIconList = mod.UpdateMIconList
 		mod.UpdateMIconList = UpdateMIconList
 	end
-	cRegisterSkin(name,SkinCLCInfo2)
+	U.RegisterSkin(name,SkinCLCInfo2)
 end
 
 s:RegisterSkin('clcInfo_Options', CLCInfo_Options)

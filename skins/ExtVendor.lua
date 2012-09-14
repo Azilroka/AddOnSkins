@@ -7,9 +7,9 @@ local function SkinExtVendor(self)
 	if IsAddOnLoaded("ElvUI") then
 		if c.private.skins.blizzard.enable ~= true or c.private.skins.blizzard.merchant ~= true then return end
 	end
-	if IsAddOnLoaded("Tukui") then cSkinFrame(MerchantFrame) end
-	cSkinButton(MerchantFrameFilterButton)
-	cSkinButton(MerchantFrameSellJunkButton)
+	if IsAddOnLoaded("Tukui") then U.SkinFrame(MerchantFrame) end
+	U.SkinButton(MerchantFrameFilterButton)
+	U.SkinButton(MerchantFrameSellJunkButton)
 
 	for i = 1, 20 do
 		local b = _G["MerchantItem"..i.."ItemButton"]
@@ -38,5 +38,5 @@ local function SkinExtVendor(self)
 	MerchantFrame:Width(690)
 end
 
-cRegisterSkin(name,SkinExtVendor)
+U.RegisterSkin(name,SkinExtVendor)
 

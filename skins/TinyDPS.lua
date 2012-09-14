@@ -11,7 +11,7 @@ local function SkinTinyDps(self)
 	local font = tdpsFont
 	local position = tdpsPosition
 	local template
-	if cCheckOption("EmbedTDPS") then template = "Default" else template = "Transparent" end
+	if U.CheckOption("EmbedTDPS") then template = "Default" else template = "Transparent" end
 	frame:SetTemplate(template, true)
 	frame:CreateShadow("Default")
 if IsAddOnLoaded("ElvUI") then
@@ -51,10 +51,10 @@ end
 		tdpsStatusBar:SetStatusBarTexture(c["media"].normTex)
 	end
 end
-cRegisterSkin(name,SkinTinyDps)
+U.RegisterSkin(name,SkinTinyDps)
 
 function EmbedTDPS()
-	if not IsAddOnLoaded("TinyDPS") then cDisableOption("EmbedTDPS") return end
+	if not IsAddOnLoaded("TinyDPS") then U.DisableOption("EmbedTDPS") return end
 	local visibleBars = U.sle and 9 or 8
 	tdps.spacing = 1
 	tdps.barHeight = 16
@@ -62,8 +62,8 @@ function EmbedTDPS()
 	tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
 	tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
 	tdpsRefresh()
-	if (cCheckOption("EmbedOoC")) then
-		if (cCheckOption("EmbedTDPS")) then
+	if (U.CheckOption("EmbedOoC")) then
+		if (U.CheckOption("EmbedTDPS")) then
 			tdpsFrame:Hide()
 		end
 	end
@@ -72,7 +72,7 @@ end
 local TinyDPS_Embed = CreateFrame("Frame",nil)
 	TinyDPS_Embed:RegisterEvent("PLAYER_ENTERING_WORLD")
 	TinyDPS_Embed:SetScript("OnEvent", function(self)
-		if(cCheckOption("EmbedTDPS")) then
+		if(U.CheckOption("EmbedTDPS")) then
 			EmbedTDPS()
 		end
 	end)
