@@ -294,26 +294,12 @@ else
 				order = 2,
 				disabled = function() return not IsAddOnLoaded("Recount") end,
 			},
-			RecountBackdrop = {
-				type = 'toggle',
-				name = 'Recount Backdrop',
-				desc = L['TOGGLESKIN_DESC'],
-				order = 3,
-				disabled = function() return not IsAddOnLoaded("Recount") or not E.db.skins["EmbedRecount"] end,
-			},
 			EmbedSkada = {
 				type = 'toggle',
 				name = 'Skada',
 				desc = L['TOGGLESKIN_DESC'],
 				order = 4,
 				disabled = function() return not IsAddOnLoaded("Skada") end,
-			},
-			SkadaBackdrop = {
-				type = 'toggle',
-				name = 'Skada Backdrop',
-				desc = L['TOGGLESKIN_DESC'],
-				order = 5,
-				disabled = function() return not IsAddOnLoaded("Skada") or not E.db.skins["EmbedSkada"] end,
 			},
 			EmbedOmen = {
 				type = 'toggle',

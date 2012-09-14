@@ -60,7 +60,7 @@ P["skins"] = {
 	["OutfitterSkin"] = true,
 	["PlayerScoreSkin"] = true,
 	["PoisonerSkin"] = true,
-	["PoMTackerSkin"] = true,
+	["PoMTrackerSkin"] = true,
 	["PostalSkin"] = true,
 	["PowerAurasSkin"] = true,
 	["PowerAurasIconsSkin"] = true,
@@ -215,7 +215,7 @@ function XS:GenerateOptions()
 		args = {
 			desc = {
 				type = 'description',
-				name = 'AddOn Skins by Azilroka & Sortokk',
+				name = 'AddOn Skins by Azilroka & Sortokk - v'..U.Version,
 				order = 1
 			},
 			misc = {
@@ -241,7 +241,21 @@ function XS:GenerateOptions()
 						desc = L["TOGGLESKIN_DESC"],
 						order = 3,
 						disabled = function() return not E.db.skins['DBMSkin'] end
-					}
+					},
+					RecountBackdrop = {
+						type = 'toggle',
+						name = 'Recount Backdrop',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 4,
+						disabled = function() return not IsAddOnLoaded("Recount") or not E.db.skins["RecountSkin"] end,
+					},
+					SkadaBackdrop = {
+						type = 'toggle',
+						name = 'Skada Backdrop',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 5,
+						disabled = function() return not IsAddOnLoaded("Skada") or not E.db.skins["SkadaSkin"] end,
+					},
 				}
 			}
 		}
