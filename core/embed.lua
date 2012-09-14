@@ -329,17 +329,24 @@ else
 				order = 8,
 				disabled = function() return not IsAddOnLoaded("Omen") or not IsAddOnLoaded("Recount") end,
 			},
+			EmbedTDPS = {
+				type = 'toggle',
+				name = 'TinyDPS',
+				desc = L['TOGGLESKIN_DESC'],
+				order = 9,
+				disabled = function() return not IsAddOnLoaded("TinyDPS") end,
+			},
 			EmbedOoC = {
 				type = 'toggle',
 				name = 'Hide while out of combat',
 				desc = L['TOGGLESKIN_DESC'],
-				order = 9,
+				order = 10,
 			},
 			EmbedSexyCooldown = {
 				type = 'toggle',
 				name = 'Attach SexyCD to action bar',
 				desc = L['TOGGLESKIN_DESC'],
-				order = 10,
+				order = 11,
 				disabled = function() return not IsAddOnLoaded("SexyCooldown2") end,
 			}
 		}
