@@ -36,13 +36,15 @@ local function SkinPowerAuras(self, aura, elapsed)
 	return returnValue
 end
 
-local function PowerAuras_LoadSkin()
-	local name = "PowerAurasIconsSkin"
-	local function SkinPowerAurasIcons(self)
-		PowaAuras.OldUpdateAura = PowaAuras.UpdateAura
-		PowaAuras.UpdateAura = SkinPowerAuras
+if U.elv then
+	local function PowerAuras_LoadSkin()
+		local name = "PowerAurasIconsSkin"
+		local function SkinPowerAurasIcons(self)
+			PowaAuras.OldUpdateAura = PowaAuras.UpdateAura
+			PowaAuras.UpdateAura = SkinPowerAuras
+		end
+		U.RegisterSkin(name,SkinPowerAurasIcons)
 	end
-	U.RegisterSkin(name,SkinPowerAurasIcons)
 end
 
 s:RegisterSkin('PowerAuras', PowerAuras_LoadSkin)
