@@ -86,8 +86,8 @@ local function SkinSkada(self)
 			skada.backdrop:Point("TOPLEFT", skada, "TOPLEFT", -2, 2)
 		end
 		skada.backdrop:Point("BOTTOMRIGHT", skada, "BOTTOMRIGHT", 2, -2)
-		if (UISkinOptions.SkadaBackdrop == "Disabled") then skada.backdrop:Hide() end
-		if (UISkinOptions.EmbedSkada == "Enabled") then
+		if (not cCheckOption("SkadaBackdrop")) then skada.backdrop:Hide() end
+		if (cCheckOption("EmbedSkada")) then
 			win.bargroup.button:SetFrameStrata("MEDIUM")
 			win.bargroup.button:SetFrameLevel(5)	
 			win.bargroup:SetFrameStrata("MEDIUM")
