@@ -50,7 +50,7 @@ local function SkinMinimalArchaeology(self)
 		U.SkinCheckBox(boxes)
 	end
 
-	U.SkinSliderFrame(MinArchOptionPanelFrameScaleSlider)
+	--U.SkinSliderFrame(MinArchOptionPanelFrameScaleSlider)
 	MinArchOptionPanelFrameScaleSliderLow:ClearAllPoints()
 	MinArchOptionPanelFrameScaleSliderLow:SetPoint("BOTTOMLEFT", MinArchOptionPanelFrameScale, "BOTTOMLEFT", 3, 3)
 	MinArchOptionPanelFrameScaleSliderHigh:ClearAllPoints()
