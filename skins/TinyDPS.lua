@@ -19,9 +19,19 @@ if IsAddOnLoaded("ElvUI") then
 		tdps.width = Minimap:GetWidth()
 		tdps.spacing = 1
 		tdps.barHeight = 14
-		font.name = [[Interface\AddOns\ElvUI\media\fonts\Homespun.ttf]]
+		font.name = U.x.datatext_font
 		font.size = 12
 		font.outline = "THIN"
+	end
+end
+if IsAddOnLoaded("Tukui") then
+	if(tdps) then
+		tdps.width = TukuiMinimap:GetWidth()
+		tdps.spacing = 1
+		tdps.barHeight = 14
+		font.name = c["media"].pixelfont
+		font.size = 12
+		font.outline = "MONOCHROMEOUTLINE"
 	end
 end
 	if(status) then
@@ -40,41 +50,11 @@ end
 		})
 		tdpsStatusBar:SetStatusBarTexture(c["media"].normTex)
 	end
-if IsAddOnLoaded("Tukui") then
-	if(tdps) then
-		tdps.width = TukuiMinimap:GetWidth()
-		tdps.spacing = 1
-		tdps.barHeight = 14
-		font.name = c["media"].pixelfont
-		font.size = 12
-		font.outline = "MONOCHROMEOUTLINE"
-	end
-	--anchor:Point("BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -26)
-	--frame:SetWidth(TukuiMinimap:GetWidth())
-	--position = { x = 0, y = -6 }
-
-	--local button = TukuiRaidUtilityShowButton
-	--if(button) then
-	--	button:HookScript("OnShow", function(self) 
-	--		anchor:ClearAllPoints()
-	--		anchor:Point("BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -49)
-	--	end)
-	--	button:HookScript("OnHide", function(self) 
-	--		anchor:ClearAllPoints()
-	--		anchor:Point("BOTTOMLEFT", TukuiMinimap, "BOTTOMLEFT", 0, -26)
-	--	end)
-	--end
 end
-	if cCheckOption('EmbedTDPS') then EmbedTDPS() end
-end
+cRegisterSkin(name,SkinTinyDps)
 
 function EmbedTDPS()
 	if not IsAddOnLoaded("TinyDPS") then cDisableOption("EmbedTDPS") return end
-	if (cCheckOption("EmbedOoC")) then
-		if (cCheckOption("EmbedTDPS")) then
-			tdpsFrame:Hide()
-		end
-	end
 	local visibleBars = U.sle and 9 or 8
 	tdps.spacing = 1
 	tdps.barHeight = 16
@@ -82,6 +62,17 @@ function EmbedTDPS()
 	tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
 	tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
 	tdpsRefresh()
+	if (cCheckOption("EmbedOoC")) then
+		if (cCheckOption("EmbedTDPS")) then
+			tdpsFrame:Hide()
+		end
+	end
 end
 
-cRegisterSkin(name,SkinTinyDps)
+local TinyDPS_Embed = CreateFrame("Frame",nil)
+	TinyDPS_Embed:RegisterEvent("PLAYER_ENTERING_WORLD")
+	TinyDPS_Embed:SetScript("OnEvent", function(self)
+		if(cCheckOption("EmbedTDPS")) then
+			EmbedTDPS()
+		end
+	end)
