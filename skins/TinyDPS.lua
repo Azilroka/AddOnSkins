@@ -13,7 +13,7 @@ local function SkinTinyDps(self)
 	local template
 	if U.CheckOption("EmbedTDPS") then template = "Default" else template = "Transparent" end
 	frame:SetTemplate(template, true)
-	if IsAddOnLoaded("ElvUI") then
+	if U.elv then
 		if(tdps) then
 			tdps.width = Minimap:GetWidth()
 			tdps.spacing = 1
@@ -23,7 +23,7 @@ local function SkinTinyDps(self)
 			font.outline = ""
 		end
 	end
-	if IsAddOnLoaded("Tukui") then
+	if U.tuk then
 		if(tdps) then
 			tdps.width = TukuiMinimap:GetWidth()
 			tdps.spacing = 1
@@ -60,13 +60,13 @@ function EmbedTDPS()
 	tdpsVisibleBars = visibleBars
 	tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
 	tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
-if IsAddOnLoaded("ElvUI") then
+if U.elv then
 	tdpsFont.name = U.x.datatext_font
 	tdpsFont.size = 12
 	tdpsFont.outline = "THIN"
 	tdpsFont.shadow = 0
 end
-if IsAddOnLoaded("Tukui") then
+if U.tuk then
 	tdpsFont.name = c["media"].pixelfont
 	tdpsFont.size = 12
 	tdpsFont.outline = "MONOCHROMEOUTLINE"
