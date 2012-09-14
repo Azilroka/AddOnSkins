@@ -9,6 +9,7 @@ local addon,Engine = ...
 local AddOn = {};
 
 Engine[1] = AddOn
+UISkins = Engine
 
 local s
 if ElvUI then
