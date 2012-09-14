@@ -45,9 +45,8 @@ if U.elv then
 		end
 		U.RegisterSkin(name,SkinPowerAurasIcons)
 	end
+	s:RegisterSkin('PowerAuras', PowerAuras_LoadSkin)
 end
-
-s:RegisterSkin('PowerAuras', PowerAuras_LoadSkin)
 
 local name = "PowerAurasSkin"
 local function SkinPowerAuras(self)
