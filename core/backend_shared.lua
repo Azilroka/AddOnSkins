@@ -55,6 +55,18 @@ U.Skins = {
 	["ChocolateBarSkin"] = {
 		["addon"] = "ChocolateBar"
 	},
+	["CLCInfoSkin"] = {
+		["addon"] = "CLCInfo",
+		["ui"] = "ElvUI"
+	},
+	["CLCProtSkin"] = {
+		["addon"] = "CLCProt",
+		["ui"] = "ElvUI"
+	},
+	["CLCRetSkin"] = {
+		["addon"] = "CLCRet",
+		["ui"] = "ElvUI"
+	},
 	["CliqueSkin"] = {
 		["addon"] = "Clique"
 	},
@@ -130,7 +142,13 @@ U.Skins = {
 		["addon"] = "Postal"
 	},
 	["PowerAurasSkin"] = {
-		["addon"] = "PowerAuras"
+		["addon"] = "PowerAuras",
+		["ui"] = "ElvUI"
+	},
+	["PowerAurasIconsSkin"] = {
+		["buttonText"] = "PowerAuras Icons",
+		["addon"] = "PowerAuras",
+		["ui"] = "ElvUI"
 	},
 	["QuartzSkin"] = {
 		["addon"] = "Quartz"
@@ -186,6 +204,10 @@ U.Skins = {
 	["TitanPanelSkin"] = {
 		["buttonText"] = "TitanPanel",
 		["addon"] = "Titan"
+	},
+	["WeakAurasSkin"] = {
+		["addon"] = "WeakAuras",
+		["ui"] = "ElvUI"
 	},
 	["WowLuaSkin"] = {
 		["addon"] = "WowLua"

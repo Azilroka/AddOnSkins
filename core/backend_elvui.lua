@@ -9,6 +9,7 @@ local LSM = LibStub("LibSharedMedia-3.0");
 local Skins = U.Skins
 XS.LSM = LSM
 XS.skins = {}
+XS.embeds = {}
 XS.events = {}
 XS.register = {}
 
@@ -215,6 +216,32 @@ function XS:GenerateOptions()
 				type = 'description',
 				name = 'AddOn Skins by Azilroka & Sortokk',
 				order = 1
+			},
+			misc = {
+				type = 'group',
+				name = 'Misc Options',
+				order = 5,
+				args = {
+					LootConfirmer = {
+						type = 'toggle',
+						name = 'Auto confirm loot',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 1,
+					},
+					UISkinMinimap = {
+						type = 'toggle',
+						name = 'Square minimap icons',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 2,
+					},
+					DBMSkinHalf = {
+						type = 'toggle',
+						name = 'DBM Half-bar Skin',
+						desc = L["TOGGLESKIN_DESC"],
+						order = 3,
+						disabled = function() return not E.db.skins['DBMSkin'] end
+					}
+				}
 			}
 		}
 	}
