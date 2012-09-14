@@ -198,10 +198,10 @@ function SlashCmdList.SKADAEMBEDDED(msg, editbox)
 		StaticPopup_Show("SKADA_RELOADUI")
 	end
 	if(U.CheckOption("EmbedSkada")) then
-	print("Skada Embedding to Embed Window is |cff00ff00"..UISkinOptions.EmbedSkada.."|r.")
+	print("Skada Embedding to Embed Window is |cff00ff00Enabled|r.")
 	end
 	if(not U.CheckOption("EmbedSkada")) then
-	print("Skada Embedding to Embed Window is |cffff2020"..UISkinOptions.EmbedSkada.."|r.")
+	print("Skada Embedding to Embed Window is |cffff2020Disabled|r.")
 	print("Need to Reload UI to take effect /rl ")
 	end
 end
