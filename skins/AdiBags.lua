@@ -1,4 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("AdiBags") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("BROKENPIECEOFSHIT") then return end
 local U = unpack(select(2,...))
 local s = U.s
 local c = U.c
@@ -17,7 +17,6 @@ local function SkinFrame(frame)
 end
 
 local function AdiSkin(self,event)
-	return
 	if event == 'PLAYER_ENTERING_WORLD' then
 		while not AdiBagsContainer1 do
 			ToggleBackpack()

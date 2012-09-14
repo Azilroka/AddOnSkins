@@ -10,7 +10,7 @@ U.Skins = {
 		["addon"] = "ACP",
 	},
 	["AdiBagsSkin"] = {
-		["addon"] = "AdiBags",
+		["addon"] = "BROKENPIECEOFSHIT",
 	},
 	["AltoholicSkin"] = {
 		["addon"] = "Altoholic",
