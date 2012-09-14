@@ -126,6 +126,7 @@ function XS:Initialize()
 	if IsAddOnLoaded("Tukui_UIPackages_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
 	self.font = E["media"].normFont
 	self.pixelFont = LSM:Fetch("font","ElvUI Pixel")
+	self.datatext_font = LSM:Fetch("font",E.db.datatext.font)
 
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
