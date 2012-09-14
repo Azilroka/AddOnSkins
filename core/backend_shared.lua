@@ -102,7 +102,7 @@ U.Skins = {
 		["addon"] = "LootCouncil_Lite"
 	},
 	["MageNuggetsSkin"] = {
-		["addon"] = "MageNuggests"
+		["addon"] = "MageNuggets"
 	},
 	["MasterLootManagerRemixSkin"] = {
 		["addon"] = "MasterLootManagerRemix"
