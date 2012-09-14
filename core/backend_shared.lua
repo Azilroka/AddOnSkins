@@ -153,6 +153,9 @@ U.Skins = {
 		["buttonText"] = "Searing Plasma Tracker",
 		["addon"] = "SearingPlasmaTracker"
 	},
+	["SexyCooldownSkin"] = {
+		["addon"] = "SexyCooldown"
+	},
 	["SkadaSkin"] = {
 		["addon"] = "Skada"
 	},
