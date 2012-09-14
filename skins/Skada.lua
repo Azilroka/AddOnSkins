@@ -95,6 +95,7 @@ local function SkinSkada(self)
 	end
 end
 
+cRegisterSkin(name,SkinSkada)
 local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 	window.db.barwidth = width
 	window.db.background.height = height
@@ -151,9 +152,9 @@ function Skada:DeleteWindow( name )
 	end
 end
 
-local Skada_Skin = CreateFrame("Frame")
-	Skada_Skin:RegisterEvent("PLAYER_ENTERING_WORLD")
-	Skada_Skin:SetScript("OnEvent", function(self)
+	local Skada_Skin = CreateFrame("Frame",nil)
+		Skada_Skin:RegisterEvent("PLAYER_ENTERING_WORLD")
+		Skada_Skin:SetScript("OnEvent", function(self)
 		self:UnregisterAllEvents()
 		self = nil
 	if(cCheckOption("EmbedSkada")) then
@@ -190,17 +191,17 @@ StaticPopupDialogs["SKADA_RELOADUI"] = {
 
 SLASH_SKADAEMBEDDED1, SLASH_SKADAEMBEDDED2 = '/es', '/embedskada';
 function SlashCmdList.SKADAEMBEDDED(msg, editbox)
-	if(UISkinOptions.EmbedSkada == "Disabled") then
-		UISkinOptions.EmbedSkada = "Enabled";
+	if(not cCheckOption("EmbedSkada")) then
+		cEnableOption("EmbedSkada")
 		EmbedSkada()
 	else
-		UISkinOptions.EmbedSkada = "Disabled";
+		cDisableOption("EmbedSkada")
 		StaticPopup_Show("SKADA_RELOADUI")
 	end
-	if(UISkinOptions.EmbedSkada == "Enabled") then
+	if(cCheckOption("EmbedSkada")) then
 	print("Skada Embedding to Embed Window is |cff00ff00"..UISkinOptions.EmbedSkada.."|r.")
 	end
-	if(UISkinOptions.EmbedSkada == "Disabled") then
+	if(not cCheckOption("EmbedSkada")) then
 	print("Skada Embedding to Embed Window is |cffff2020"..UISkinOptions.EmbedSkada.."|r.")
 	print("Need to Reload UI to take effect /rl ")
 	end
@@ -208,10 +209,10 @@ end
 
 SLASH_SKADABACKDROP1 = '/skadabackdrop';
 function SlashCmdList.SKADABACKDROP(msg, editbox)
-	if(UISkinOptions.SkadaBackdrop == "Disabled") then
-		UISkinOptions.SkadaBackdrop = "Enabled"
+	if(not cCheckOption("SkadaBackdrop")) then
+		cEnableOption("SkadaBackdrop")
 	else
-		UISkinOptions.SkadaBackdrop = "Disabled"
+		cDisableOption("SkadaBackdrop")
 	end
 end
 
