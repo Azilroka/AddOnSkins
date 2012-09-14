@@ -8,5 +8,6 @@
 
 embeds.xml
 
+init.lua
 core\load_core.xml
 skins\load_skins.xml

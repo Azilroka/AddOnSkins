@@ -4,28 +4,8 @@
 -- Added Skinning features for ease of skinning and smaller size skins. - Azilroka
 
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-local addon,Engine = ...
-
-local AddOn = {};
-
-Engine[1] = AddOn
-UISkins = Engine
-
-local s
-if ElvUI then
-	local E, L, V, P, G, DF = unpack(ElvUI)
-	local S = E:GetModule('Skins')
-	AddOn.s = S
-	AddOn.c = E
-	AddOn.ccolor = E.myclass
-	s = S
-else
-	local T, C, L = unpack(Tukui)
-	AddOn.s = T
-	AddOn.c = C
-	AddOn.ccolor = T.myclass
-	s = T
-end
+local U = unpack(select(2,...))
+local s = U.s
 
 local function cSkinButton(self)
 	if ElvUI then
@@ -35,7 +15,7 @@ local function cSkinButton(self)
 	end
 end
 
-AddOn.SkinButton = cSkinButton
+U.SkinButton = cSkinButton
 
 local function cSkinScrollBar(self)
 	if ElvUI then
@@ -45,7 +25,7 @@ local function cSkinScrollBar(self)
 	end
 end
 
-AddOn.SkinScrollBar = cSkinScrollBar
+U.SkinScrollBar = cSkinScrollBar
 
 local function cSkinTab(self)
 	if ElvUI then
@@ -55,7 +35,7 @@ local function cSkinTab(self)
 	end
 end
 
-AddOn.SkinTab = cSkinTab
+U.SkinTab = cSkinTab
 
 local function cSkinNextPrevButton(self)
 	if ElvUI then
@@ -65,7 +45,7 @@ local function cSkinNextPrevButton(self)
 	end
 end
 
-AddOn.SkinNextPrevButton = cSkinNextPrevButton
+U.SkinNextPrevButton = cSkinNextPrevButton
 
 local function cSkinRotateButton(self)
 	if ElvUI then
@@ -75,7 +55,7 @@ local function cSkinRotateButton(self)
 	end
 end
 
-AddOn.SkinRotateButton = cSkinRotateButton
+U.SkinRotateButton = cSkinRotateButton
 
 local function cSkinEditBox(self)
 	if ElvUI then
@@ -85,7 +65,7 @@ local function cSkinEditBox(self)
 	end
 end
 
-AddOn.SkinEditBox = cSkinEditBox
+U.SkinEditBox = cSkinEditBox
 
 local function cSkinDropDownBox(self)
 	if ElvUI then
@@ -95,7 +75,7 @@ local function cSkinDropDownBox(self)
 	end
 end
 
-AddOn.SkinDropDownBox = cSkinDropDownBox
+U.SkinDropDownBox = cSkinDropDownBox
 
 local function cSkinCheckBox(self)
 	if ElvUI then
@@ -105,7 +85,7 @@ local function cSkinCheckBox(self)
 	end
 end
 
-AddOn.SkinCheckBox = cSkinCheckBox
+U.SkinCheckBox = cSkinCheckBox
 
 local function cSkinCloseButton(self)
 	if ElvUI then
@@ -115,7 +95,7 @@ local function cSkinCloseButton(self)
 	end
 end
 
-AddOn.SkinCloseButton = cSkinCloseButton
+U.SkinCloseButton = cSkinCloseButton
 
 local function cSkinSliderFrame(self, height)
 	if ElvUI then
@@ -125,50 +105,50 @@ local function cSkinSliderFrame(self, height)
 	end
 end
 
-AddOn.SkinSliderFrame = cSkinSliderFrame
+U.SkinSliderFrame = cSkinSliderFrame
 
 local function cSkinFrame(self)
 	self:StripTextures(True)
 	self:SetTemplate("Transparent")
 end
 
-AddOn.SkinFrame = cSkinFrame
+U.SkinFrame = cSkinFrame
 
 local function cSkinBackdropFrame(self)
 	self:StripTextures(True)
 	self:CreateBackdrop("Transparent")
 end
 
-AddOn.SkinBackdropFrame = cSkinBackdropFrame
+U.SkinBackdropFrame = cSkinBackdropFrame
 
 local function cSkinFrameD(self)
 	self:StripTextures(True)
 	self:SetTemplate("Default")
 end
 
-AddOn.SkinFrameD = cSkinFrameD
+U.SkinFrameD = cSkinFrameD
 
 local function cSkinStatusBar(self)
-	local s = AddOn.s
-	local c = AddOn.c
+	local s = U.s
+	local c = U.c
 	self:StripTextures(True)
 	self:CreateBackdrop()
 	self:SetStatusBarTexture(c["media"].normTex)
 end
 
-AddOn.SkinStatusBar = cSkinStatusBar
+U.SkinStatusBar = cSkinStatusBar
 
 local function cSkinCCStatusBar(self)
-	local s = AddOn.s
-	local c = AddOn.c
+	local s = U.s
+	local c = U.c
 	self:StripTextures(True)
 	self:CreateBackdrop("ClassColor")
 	self:SetStatusBarTexture(c["media"].normTex)
-	local color = RAID_CLASS_COLORS[AddOn.ccolor]
+	local color = RAID_CLASS_COLORS[U.ccolor]
 	self:SetStatusBarColor(color.r, color.g, color.b)
 end
 
-AddOn.SkinCCStatusBar = cSkinCCStatusBar
+U.SkinCCStatusBar = cSkinCCStatusBar
 
 local function cDesaturate(f, point)
 	for i=1, f:GetNumRegions() do
@@ -187,40 +167,40 @@ local function cDesaturate(f, point)
 	end
 end
 
-AddOn.Desaturate = cDesaturate
+U.Desaturate = cDesaturate
 
 local function cCheckOption(optionName)
 	if IsAddOnLoaded("ElvUI") then
-		local c = AddOn.c
+		local c = U.c
 		return c.db.skins[optionName]
 	else
 		return UISkinOptions[optionName] == "Enabled"
 	end
 end
 
-AddOn.CheckOption = cCheckOption
+U.CheckOption = cCheckOption
 
 local function cDisableOption(optionName)
 	if IsAddOnLoaded("ElvUI") then
-		local c = AddOn.c
+		local c = U.c
 		c.db.skins[optionName] = false
 	else
 		UISkinOptions[optionName] = "Disabled"
 	end
 end
 
-AddOn.DisableOption = cDisableOption
+U.DisableOption = cDisableOption
 
 local function cEnableOption(optionName)
 	if IsAddOnLoaded("ElvUI") then
-		local c = AddOn.c
+		local c = U.c
 		c.db.skins[optionName] = true
 	else
 		UISkinOptions[optionName] = "Enabled"
 	end
 end
 
-AddOn.EnableOption = cEnableOption
+U.EnableOption = cEnableOption
 
 local function cToggleOption(optionName)
 	if cCheckOption(optionName) then
@@ -230,24 +210,24 @@ local function cToggleOption(optionName)
 	end
 end
 
-AddOn.ToggleOption = cToggleOption
+U.ToggleOption = cToggleOption
 
 local function cRegisterSkin(skinName,skinFunc,...)
 	local events = ...
-	local XS = AddOn.x
+	local XS = U.x
 	local registerMe = { func = skinFunc, events = events or {} }
 	if not XS.register[skinName] then XS.register[skinName] = {} end
 	XS.register[skinName][skinFunc] = registerMe
 end
 
-AddOn.RegisterSkin = cRegisterSkin
+U.RegisterSkin = cRegisterSkin
 
 local function cUnregisterEvent(skinName,frame,event)
-	local XS = AddOn.x
+	local XS = U.x
 	XS:UnregisterEvent(skinName,event)
 end
 
-AddOn.UnregisterEvent = cUnregisterEvent
+U.UnregisterEvent = cUnregisterEvent
 
 function AzilCompatMode()
 	_G["cSkinButton"] = cSkinButton
