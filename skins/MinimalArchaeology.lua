@@ -1,5 +1,7 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MinimalArchaeology") then return end
 local U = unpack(select(2,...))
+local s = U.s
+local c = U.c
 local name = "MinimalArchaeologySkin"
 local function SkinMinimalArchaeology(self)
 	if IsAddOnLoaded("Tukui") then UIFont = c["media"].pixelfont UIFontSize = 12 end
