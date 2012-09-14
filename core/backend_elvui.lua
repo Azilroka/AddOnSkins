@@ -241,7 +241,21 @@ function XS:GenerateOptions()
 						desc = L["TOGGLESKIN_DESC"],
 						order = 3,
 						disabled = function() return not E.db.skins['DBMSkin'] end
-					}
+					},
+					RecountBackdrop = {
+						type = 'toggle',
+						name = 'Recount Backdrop',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 4,
+						disabled = function() return not IsAddOnLoaded("Recount") or not E.db.skins["RecountSkin"] end,
+					},
+					SkadaBackdrop = {
+						type = 'toggle',
+						name = 'Skada Backdrop',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 5,
+						disabled = function() return not IsAddOnLoaded("Skada") or not E.db.skins["SkadaSkin"] end,
+					},
 				}
 			}
 		}
