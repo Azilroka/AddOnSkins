@@ -215,7 +215,7 @@ function XS:GenerateOptions()
 		args = {
 			desc = {
 				type = 'description',
-				name = 'AddOn Skins by Azilroka & Sortokk',
+				name = 'AddOn Skins by Azilroka & Sortokk - v'..U.Version,
 				order = 1
 			},
 			misc = {
