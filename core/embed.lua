@@ -322,13 +322,6 @@ else
 				order = 6,
 				disabled = function() return not IsAddOnLoaded("Omen") end,
 			},
-			EmbedTDPS = {
-				type = 'toggle',
-				name = 'TinyDPS',
-				desc = L['TOGGLESKIN_DESC'],
-				order = 7,
-				disabled = function() return not IsAddOnLoaded("TinyDPS") end,
-			},
 			EmbedRO = {
 				type = 'toggle',
 				name = 'Recount & Omen',
