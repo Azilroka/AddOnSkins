@@ -16,7 +16,8 @@ local function SkinFrame(frame)
 	end
 end
 
-local function AdiSkin(self,event,addon)
+local function AdiSkin(self,event)
+	return
 	if event == 'PLAYER_ENTERING_WORLD' then
 		while not AdiBagsContainer1 do
 			ToggleBackpack()
@@ -26,29 +27,28 @@ local function AdiSkin(self,event,addon)
 		local f = AdiBagsContainer1
 		SkinFrame(f)
 		U.SkinEditBox(AdiBagsSearchFrame)
-	if IsAddOnLoaded("Tukui") then
-		AdiBagsSearchFrame:Point("TOPRIGHT", AdiBagsSimpleLayeredRegion2, "TOPRIGHT", -75, -1)
-	end
-	if IsAddOnLoaded("ElvUI") then
-		local B = c:GetModule('Bags')
+		if IsAddOnLoaded("Tukui") then
+			AdiBagsSearchFrame:Point("TOPRIGHT", AdiBagsSimpleLayeredRegion2, "TOPRIGHT", -75, -1)
+		end
+		if IsAddOnLoaded("ElvUI") then
+			local B = c:GetModule('Bags')
 
-		local vendorButton = CreateFrame('Button', nil, f, 'UIPanelButtonTemplate')
-		vendorButton.bagName = f.bagName
-		vendorButton:SetText('S')
-		vendorButton:SetWidth(20)
-		vendorButton:SetHeight(20)
-		A.SetupTooltip(vendorButton, {
-			'Vendor Grays',
-			'Hold Shift:' ..' ' .. 'Delete Grays',
-		}, 'ANCHOR_TOPLEFT', 0, 8)
-		vendorButton:SetScript('OnClick', function() B:VendorGrayCheck() end)
-		U.SkinButton(vendorButton, true)
-		f:AddHeaderWidget(vendorButton, -5)
-	end
-	--elseif event == 'BANKFRAME_OPENED' then
-	--	SkinFrame(AdiBagsContainer2)
-	--	AdiSkin:UnregisterEvent('BANKFRAME_OPENED')
-	--end
+			local vendorButton = CreateFrame('Button', nil, f, 'UIPanelButtonTemplate')
+			vendorButton.bagName = f.bagName
+			vendorButton:SetText('S')
+			vendorButton:SetWidth(20)
+			vendorButton:SetHeight(20)
+			A.SetupTooltip(vendorButton, {
+				'Vendor Grays',
+				'Hold Shift:' ..' ' .. 'Delete Grays',
+			}, 'ANCHOR_TOPLEFT', 0, 8)
+			vendorButton:SetScript('OnClick', function() B:VendorGrayCheck() end)
+			U.SkinButton(vendorButton, true)
+			f:AddHeaderWidget(vendorButton, -5)
+		end
+	elseif event == 'BANKFRAME_OPENED' then
+		SkinFrame(AdiBagsContainer2)
+		U.UnregisterEvent("BANKFRAME_OPENED")
 	end
 end
 
