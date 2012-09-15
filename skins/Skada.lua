@@ -95,6 +95,7 @@ local function SkinSkada(self)
 end
 
 U.RegisterSkin(name,SkinSkada)
+
 local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 	window.db.barwidth = width
 	window.db.background.height = height
@@ -133,10 +134,12 @@ function Skada:CreateWindow(name, db)
 	windows = {}
 	for _, window in ipairs(Skada:GetWindows()) do
 		tinsert(windows, window)
-	end	
-	if(U.CheckOption("EmbedSkada")) then
+	end
+	hooksecurefunc(Skada, "CreateWindow", function()	
+	if U.CheckOption("EmbedSkada") then
 		EmbedSkada()
 	end
+	end)
 end
 
 Skada.DeleteWindow_ = Skada.DeleteWindow
@@ -156,9 +159,10 @@ end
 		Skada_Skin:SetScript("OnEvent", function(self)
 		self:UnregisterAllEvents()
 		self = nil
-	if(U.CheckOption("EmbedSkada")) then
+	if U.CheckOption("EmbedSkada") then
 		EmbedSkada()
 	end
+	end)
 
 StaticPopupDialogs["SKADA_RELOADUI"] = {
 	text = "Reload your User Interface?",
@@ -214,5 +218,3 @@ function SlashCmdList.SKADABACKDROP(msg, editbox)
 		U.DisableOption("SkadaBackdrop")
 	end
 end
-
-end )
