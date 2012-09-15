@@ -59,6 +59,16 @@ local buttons = {
 	"ElvConfigToggle",
 	"DBMMinimapButton",
 	"ZygorGuidesViewerMapIcon",
+	"GatherMatePin1",
+	"GatherMatePin2",
+	"GatherMatePin3",
+	"GatherMatePin4",
+	"GatherMatePin5",
+	"GatherMatePin6",
+	"GatherMatePin7",
+	"GatherMatePin8",
+	"GatherMatePin9",
+	"GatherMatePin10",
 }
 
 local function SkinButton(frame)

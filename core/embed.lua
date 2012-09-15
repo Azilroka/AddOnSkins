@@ -348,14 +348,16 @@ StaticPopupDialogs["RELOADUI"] = {
         whileDead = 1
 }
 
-SLASH_EMBEDDINGWINDOW1 = '/embed';
-function SlashCmdList.EMBEDDINGWINDOW(msg, editbox)
-	if EmbeddingWindow:IsVisible() then
-		EmbeddingWindow:Hide()
-		print("Embedding Window is now |cffff2020Hidden|r.");
-	else
-		EmbeddingWindow:Show()
-		print("Embedding Window is now |cff00ff00Shown|r.");
+if U.tuk then
+	SLASH_EMBEDDINGWINDOW1 = '/embed';
+	function SlashCmdList.EMBEDDINGWINDOW(msg, editbox)
+		if EmbeddingWindow:IsVisible() then
+			EmbeddingWindow:Hide()
+			print("Embedding Window is now |cffff2020Hidden|r.");
+		else
+			EmbeddingWindow:Show()
+			print("Embedding Window is now |cff00ff00Shown|r.");
+		end
 	end
 end
 
