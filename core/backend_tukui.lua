@@ -183,7 +183,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions2 = CreateFrame("Frame", "SkinOptions2", SkinOptions)
 	SkinOptions2:SetTemplate("Transparent")
 	SkinOptions2:Point("TOPLEFT", SkinOptions, "TOPLEFT", -202, -125)
-	SkinOptions2:SetFrameStrata("MEDIUM")
+	SkinOptions2:SetFrameStrata("DIALOG")
 	SkinOptions2:Width(200)
 	SkinOptions2:Height(265)
 

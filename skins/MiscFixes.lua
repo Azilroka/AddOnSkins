@@ -69,6 +69,7 @@ local buttons = {
 	"GatherMatePin8",
 	"GatherMatePin9",
 	"GatherMatePin10",
+
 }
 
 local function SkinButton(frame)
