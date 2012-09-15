@@ -257,6 +257,68 @@ function XS:GenerateOptions()
 						disabled = function() return not IsAddOnLoaded("Skada") or not E.db.skins["SkadaSkin"] end,
 					},
 				}
+			},
+			embed = {
+				order = 10,
+				type = 'group',
+				name = 'Embed Settings',
+				get = function(info) return E.db.skins[ info[#info] ] end,
+				set = function(info,value)  E.db.skins[ info[#info] ] = value; E:StaticPopup_Show("CONFIG_RL") end,
+				args = {
+					desc = {
+						type = 'description',
+						name = 'Settings to control addons embedded in right chat panel',
+						order = 1
+					},
+					EmbedRecount = {
+						type = 'toggle',
+						name = 'Recount',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 2,
+						disabled = function() return not IsAddOnLoaded("Recount") end,
+					},
+					EmbedSkada = {
+						type = 'toggle',
+						name = 'Skada',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 4,
+						disabled = function() return not IsAddOnLoaded("Skada") end,
+					},
+					EmbedOmen = {
+						type = 'toggle',
+						name = 'Omen',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 6,
+						disabled = function() return not IsAddOnLoaded("Omen") end,
+					},
+					EmbedRO = {
+						type = 'toggle',
+						name = 'Recount & Omen',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 8,
+						disabled = function() return not IsAddOnLoaded("Omen") or not IsAddOnLoaded("Recount") end,
+					},
+					EmbedTDPS = {
+						type = 'toggle',
+						name = 'TinyDPS',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 9,
+						disabled = function() return not IsAddOnLoaded("TinyDPS") end,
+					},
+					EmbedOoC = {
+						type = 'toggle',
+						name = 'Hide while out of combat',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 10,
+					},
+					EmbedSexyCooldown = {
+						type = 'toggle',
+						name = 'Attach SexyCD to action bar',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 11,
+						disabled = function() return not IsAddOnLoaded("SexyCooldown2") end,
+					}
+				}
 			}
 		}
 	}
