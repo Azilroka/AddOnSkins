@@ -30,7 +30,7 @@ LootConfirmer:SetScript("OnEvent",
 		if (U.CheckOption("LootConfirmer")) then
 		if event == "PLAYER_ENTERING_WORLD" then
 			StaticPopupDialogs["CONFIRM_LOOT_ROLL"] = nil
-			StaticPopupDialogs["LOOT_BIND"] = nil
+			--StaticPopupDialogs["LOOT_BIND"] = nil
 		elseif event == "CONFIRM_LOOT_ROLL" or event == "CONFIRM_DISENCHANT_ROLL" then
 			local arg1, arg2 = ...;
 			ConfirmLootRoll(arg1, arg2);
@@ -46,6 +46,33 @@ LootConfirmer:SetScript("OnEvent",
 		end
 	end
 end)
+local ChatLootIcons = CreateFrame("Frame")
+ChatLootIcons:RegisterEvent("PLAYER_ENTERING_WORLD");
+ChatLootIcons:SetScript("OnEvent", function() 
+	if (U.CheckOption("ChatLootIcons")) then
+		EnableLootIcons()
+	else
+		DisableLootIcons()
+	end
+end)
+
+local function AddLootIcons(self, event, message, ...)
+	local _, fontSize = GetChatWindowInfo(self:GetID())
+	local function IconForLink(link)
+		local texture = GetItemIcon(link)
+		return "\124T" .. texture .. ":" .. fontSize .. "\124t" .. link
+	end
+	message = message:gsub("(\124c%x+\124Hitem:.-\124h\124r)", IconForLink)
+	return false, message, ...
+end
+
+function EnableLootIcons()
+	ChatFrame_AddMessageEventFilter("CHAT_MSG_LOOT", AddLootIcons)
+end
+
+function DisableLootIcons()
+	ChatFrame_RemoveMessageEventFilter("CHAT_MSG_LOOT", AddLootIcons)
+end
 
 --Minimap Button Skinning thanks to Sinaris
 

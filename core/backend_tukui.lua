@@ -154,6 +154,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.ZygorSkin == nil) then UISkinOptions.ZygorSkin = "Enabled" end
 	if(UISkinOptions.UISkinMinimap == nil) then UISkinOptions.UISkinMinimap = "Enabled" end
 	if(UISkinOptions.LootConfirmer == nil) then UISkinOptions.LootConfirmer = "Enabled" end
+	if(UISkinOptions.LootIconsChat == nil) then UISkinOptions.LootIconsChat = "Enabled" end
 	if(UISkinOptions.EmbedOoC == nil) then UISkinOptions.EmbedOoC = "Disabled" end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
@@ -162,34 +163,34 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions:RegisterEvent("PLAYER_ENTERING_WORLD")
 	SkinOptions:SetScript("OnEvent", function(self)
 	if IsAddOnLoaded("Tukui") then UIFont = [[Interface\AddOns\Tukui\medias\fonts\normal_font.ttf]] UIFontSize = 12 end
-	if IsAddOnLoaded("ElvUI") then UIFont = [[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]] UIFontSize = 12 end
 	SkinOptions:Hide()
 	SkinOptions:SetTemplate("Transparent")
 	SkinOptions:Point("CENTER", UIParent, "CENTER", 0, 0)
 	SkinOptions:SetFrameStrata("DIALOG")
-	SkinOptions:Width(648)
-	SkinOptions:Height(540)
+	SkinOptions:Width(650)
+	SkinOptions:Height(650)
 	SkinOptions:SetClampedToScreen(true)
 	SkinOptions:SetMovable(true)
 	SkinOptions.text = SkinOptions:CreateFontString(nil, "OVERLAY")
 	SkinOptions.text:SetFont(UIFont, 14, "OUTLINE")
 	SkinOptions.text:SetPoint("TOP", SkinOptions, 0, -6)
-	SkinOptions.text:SetText("|cffC495DDTukui|r & |cff1784d1ElvUI|r Skin Options - v"..U.Version)
+	SkinOptions.text:SetText("|cffC495DDTukui|r Skin Options - Version "..U.Version)
 	SkinOptions:EnableMouse(true)
 	SkinOptions:RegisterForDrag("LeftButton");
 	SkinOptions:SetScript("OnDragStart", function(self) self:StartMoving() end)
 	SkinOptions:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
 
-	SkinOptions2 = CreateFrame("Frame", "SkinOptions2", SkinOptions)
+	SkinOptions2 = CreateFrame("Frame", "SkinOptions2", UIParent)
 	SkinOptions2:SetTemplate("Transparent")
-	SkinOptions2:Point("TOPLEFT", SkinOptions, "TOPLEFT", -202, -125)
+	SkinOptions2:Point("TOPLEFT", SkinOptions, "TOPLEFT", 0, 0)
 	SkinOptions2:SetFrameStrata("DIALOG")
-	SkinOptions2:Width(200)
-	SkinOptions2:Height(265)
+	SkinOptions2:Width(SkinOptions:GetWidth())
+	SkinOptions2:Height(SkinOptions:GetHeight())
+	SkinOptions2:Hide()
 
 	ApplySkinSettingsButton = CreateFrame("Button", "ApplySkinSettingsButton", SkinOptions, "UIPanelButtonTemplate")
-	ApplySkinSettingsButton:SetPoint("BOTTOMLEFT", 0, -26)
-	ApplySkinSettingsButton:Size(217,24)
+	ApplySkinSettingsButton:SetPoint("BOTTOMLEFT", 60, -26)
+	ApplySkinSettingsButton:Size(100,24)
 	U.SkinButton(ApplySkinSettingsButton)
 	ApplySkinSettingsButton.text = ApplySkinSettingsButton:CreateFontString(nil, "OVERLAY")
 	ApplySkinSettingsButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
@@ -198,32 +199,74 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	ApplySkinSettingsButton:HookScript("OnClick", function() ReloadUI() end)
 
 	EmbedWindowSettingsButton = CreateFrame("Button", "EmbedWindowSettingsButton", SkinOptions, "UIPanelButtonTemplate")
-	EmbedWindowSettingsButton:SetPoint("BOTTOM", 0, -26)
-	EmbedWindowSettingsButton:Size(212,24)
+	EmbedWindowSettingsButton:SetPoint("RIGHT", ApplySkinSettingsButton, "RIGHT", 102, 0)
+	EmbedWindowSettingsButton:Size(100,24)
 	U.SkinButton(EmbedWindowSettingsButton)
 	EmbedWindowSettingsButton.text = ApplySkinSettingsButton:CreateFontString(nil, "OVERLAY")
 	EmbedWindowSettingsButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
 	EmbedWindowSettingsButton.text:SetPoint("CENTER", EmbedWindowSettingsButton, 0, 0)
-	EmbedWindowSettingsButton.text:SetText("Embedding Window Settings")
+	EmbedWindowSettingsButton.text:SetText("Embed Options")
 	EmbedWindowSettingsButton:HookScript("OnClick", function()
 		if EmbeddingWindow:IsVisible() then
 			EmbeddingWindow:Hide()
-			print("Embedding Window is now |cffff2020Hidden|r.");
 		else
 			EmbeddingWindow:Show()
-			print("Embedding Window is now |cff00ff00Shown|r.");
+		end
+	end)
+	SkinOptions1Button = CreateFrame("Button", "SkinOptions1Button", SkinOptions, "UIPanelButtonTemplate")
+	SkinOptions1Button:SetPoint("RIGHT", EmbedWindowSettingsButton, "RIGHT", 102, 0)
+	SkinOptions1Button:Size(100,24)
+	U.SkinButton(SkinOptions1Button)
+	SkinOptions1Button.text = SkinOptions1Button:CreateFontString(nil, "OVERLAY")
+	SkinOptions1Button.text:SetFont(UIFont, UIFontSize, "OUTLINE")
+	SkinOptions1Button.text:SetPoint("CENTER", SkinOptions1Button, 0, 0)
+	SkinOptions1Button.text:SetText("Skin Options")
+	SkinOptions1Button:HookScript("OnClick", function()
+			SkinOptions1Button:SetParent(SkinOptions)
+			SkinOptions2Button:SetParent(SkinOptions)
+			EmbedWindowSettingsButton:SetParent(SkinOptions)
+			ApplySkinSettingsButton:SetParent(SkinOptions)
+			SkinOptionsCloseButton:SetParent(SkinOptions)
+			SkinOptions2:Hide()
+			SkinOptions:Show()
+	end)
+	SkinOptions2Button = CreateFrame("Button", "SkinOptions2Button", SkinOptions, "UIPanelButtonTemplate")
+	SkinOptions2Button:SetPoint("RIGHT", SkinOptions1Button, "RIGHT", 102, 0)
+	SkinOptions2Button:Size(100,24)
+	U.SkinButton(SkinOptions2Button)
+	SkinOptions2Button.text = SkinOptions2Button:CreateFontString(nil, "OVERLAY")
+	SkinOptions2Button.text:SetFont(UIFont, UIFontSize, "OUTLINE")
+	SkinOptions2Button.text:SetPoint("CENTER", SkinOptions2Button, 0, 0)
+	SkinOptions2Button.text:SetText("Module Options")
+	SkinOptions2Button:HookScript("OnClick", function() 
+		if SkinOptions2:IsVisible() then
+			SkinOptions1Button:SetParent(SkinOptions)
+			SkinOptions2Button:SetParent(SkinOptions)
+			EmbedWindowSettingsButton:SetParent(SkinOptions)
+			ApplySkinSettingsButton:SetParent(SkinOptions)
+			SkinOptionsCloseButton:SetParent(SkinOptions)
+			SkinOptions2:Hide()
+			SkinOptions:Show()
+		else
+			SkinOptions1Button:SetParent(SkinOptions2)
+			SkinOptions2Button:SetParent(SkinOptions2)
+			EmbedWindowSettingsButton:SetParent(SkinOptions2)
+			ApplySkinSettingsButton:SetParent(SkinOptions2)
+			SkinOptionsCloseButton:SetParent(SkinOptions2)
+			SkinOptions2:Show()
+			SkinOptions:Hide()
 		end
 	end)
 
 	SkinOptionsCloseButton = CreateFrame("Button", "SkinOptionsCloseButton", SkinOptions, "UIPanelButtonTemplate")
-	SkinOptionsCloseButton:SetPoint("BOTTOMRIGHT", 0, -26)
-	SkinOptionsCloseButton:Size(217,24)
+	SkinOptionsCloseButton:SetPoint("RIGHT", SkinOptions2Button, "RIGHT", 102, 0)
+	SkinOptionsCloseButton:Size(100,24)
 	U.SkinButton(SkinOptionsCloseButton)
 	SkinOptionsCloseButton.text = SkinOptionsCloseButton:CreateFontString(nil, "OVERLAY")
 	SkinOptionsCloseButton.text:SetFont(UIFont, UIFontSize, "OUTLINE")
 	SkinOptionsCloseButton.text:SetPoint("CENTER", SkinOptionsCloseButton, 0, 0)
 	SkinOptionsCloseButton.text:SetText("Close Options")
-	SkinOptionsCloseButton:HookScript("OnClick", function() SkinOptions:Hide() end)
+	SkinOptionsCloseButton:HookScript("OnClick", function() SkinOptions:Hide() SkinOptions2:Hide() end)
 
 --Buttons
 	SkinOptionsButton = CreateFrame("Button", "SkinOptionsButton", GameMenuFrame, "GameMenuButtonTemplate")
@@ -243,7 +286,8 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		SkinOptionsButton:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -23)
 		GameMenuButtonLogout:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -60)
 	end
-	local function CreateButton(name,buttonText,addon,option,x,y,skinOptions2)
+-- Long Button
+	--[[local function CreateButton(name,buttonText,addon,option,x,y,skinOptions2)
 		local button = CreateFrame("Button", name, skinOptions2 and SkinOptions2 or SkinOptions, "UIPanelButtonTemplate")
 		local yOffset = -30 - (25*(y-1))
 		local xTable = {
@@ -271,6 +315,42 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 				button.text:SetText(string.format("|cff00ff00%s|r",buttonText))
 			end
 		end)
+	end--]]
+--Box Button
+--Overlord Red (0.68,0.14,0.14)
+--VIP Green (0.11,0.66,0.11)
+--Grey (0.8,0.8,0.8)
+	local function CreateButton(name,buttonText,addon,option,x,y,skinOptions2)
+		local button = CreateFrame("Button", name, skinOptions2 and SkinOptions2 or SkinOptions)
+		local yOffset = -30 - (25*(y-1))
+		local xTable = {
+			[1] = { point = "TOPLEFT", offset = 12 },
+			[2] = { point = "TOP", offset = -68 },
+			[3] = { point = "TOPRIGHT", offset = -178 }
+		}
+		button:SetPoint(xTable[x].point, xTable[x].offset, yOffset)
+		button:Size(16)
+		button:CreateBackdrop()
+		button:SetBackdrop({bgFile = c.media.normTex, edgeFile = nil, tile = false, tileSize = 0, edgeSize = 0, insets = { left = 0, right = 0, top = 0, bottom = 0 }});
+
+		button.text = button:CreateFontString(nil, "OVERLAY")
+		button.text:SetFont(UIFont, UIFontSize, "OUTLINE")
+		button.text:SetPoint("LEFT", button, "RIGHT", 10, 0)
+		button.text:SetText(buttonText)
+		if (UISkinOptions[option] == "Enabled") then button:SetBackdropColor(0.11,0.66,0.11,1); end
+		if (UISkinOptions[option] == "Disabled") then button:SetBackdropColor(0.68,0.14,0.14,1); end
+		if addon then
+			if not IsAddOnLoaded(addon) then button:Disable() button:SetBackdropColor(0.8,0.8,0.8,1); end
+		end
+		button:HookScript("OnClick", function()
+			if (UISkinOptions[option] == "Enabled") then
+				UISkinOptions[option] = "Disabled"
+				button:SetBackdropColor(0.68,0.14,0.14,1);
+			else
+				UISkinOptions[option] = "Enabled"
+				button:SetBackdropColor(0.11,0.66,0.11,1);
+			end
+		end)
 	end
 	
 	--local function CreateButton(name,buttonText,addon,option,x,y)
@@ -287,7 +367,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
       end
       return iter
     end
-    local curX,curY,maxY=1,1,20
+    local curX,curY,maxY=1,1,22
 	for skin,options in pairsByKeys(Skins) do
 		local addon = options.addon
 		local buttonText = options.buttonText or addon
@@ -303,8 +383,8 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 
 	SkinOptions2.text = SkinOptions2:CreateFontString(nil, "OVERLAY")
 	SkinOptions2.text:SetFont(UIFont, 14, "OUTLINE")
-	SkinOptions2.text:SetPoint("TOP", SkinOptions2, 0, -8)
-	SkinOptions2.text:SetText("|cffC495DDTukui|r & |cff1784d1ElvUI|r Module Options")
+	SkinOptions2.text:SetPoint("TOP", SkinOptions2, 0, -6)
+	SkinOptions2.text:SetText("|cffC495DDTukui|r Module Options - Version "..U.Version)
 
 	local Skins2 = {
 		["LootConfirmer"] = {
@@ -316,13 +396,16 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		["DBMSkinHalf"] = {
 			["buttonText"] = "DBM Half-Bar Skin"
 		},
+		["LootIconsChat"] = {
+			["buttonText"] = "Loot Icons in Loot Window"
+		},
 	}
 
 	curY = 1
 	for skin,options in pairsByKeys(Skins2) do
 		local addon = nil
 		local buttonText = options.buttonText
-		CreateButton(string.format('%sButton',skin),buttonText,addon,skin,2,curY,true)
+		CreateButton(string.format('%sButton',skin),buttonText,addon,skin,1,curY,true)
 		curY = curY + 1
 	end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")

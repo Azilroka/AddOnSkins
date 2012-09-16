@@ -10,6 +10,7 @@ U.Skins = {
 		["addon"] = "ACP",
 	},
 	["AdiBagsSkin"] = {
+		["buttonText"] = "AdiBags : Disabled"
 		["addon"] = "BROKENPIECEOFSHIT",
 	},
 	["AltoholicSkin"] = {
@@ -207,6 +208,9 @@ U.Skins = {
 	["TitanPanelSkin"] = {
 		["buttonText"] = "TitanPanel",
 		["addon"] = "Titan"
+	},
+	["TradeSkillDWSkin"] = {
+		["addon"] = "TradeSkillDW"
 	},
 	["WeakAurasSkin"] = {
 		["addon"] = "WeakAuras",
