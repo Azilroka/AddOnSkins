@@ -17,86 +17,25 @@ U.x = XS
 U.elv = true
 U.sle = IsAddOnLoaded("ElvUI_SLE")
 
-P["skins"] = {
-	["ACPSkin"] = true,
-	["AdiBagsSkin"] = true,
-	["AltoholicSkin"] = true,
-	["ArchySkin"] = true,
-	["ArhSkin"] = true,
-	["ArkInventorySkin"] = true,
-	["AtlasLootSkin"] = true,
-	["ATSWSkin"] = true,
-	["AuctionatorSkin"] = true,
-	["AuctioneerSkin"] = true,
-	["BPTSkin"] = true,
-	["BigWigsSkin"] = true,
-	["BGDefenderSkin"] = true,
-	["BuyEmAllSkin"] = true,
-	["ChocolateBarSkin"] = true,
-	["CliqueSkin"] = true,
-	["CLCInfoSkin"] = true,
-	["CLCProtSkin"] = true,
-	["CLCRetSkin"] = true,
-	["DBMSkin"] = true,
-	["DBMSkinHalf"] = false,
-	["DXESkin"] = false,
-	["EasyMailSkin"] = true,
-	["EnergyWatchSkin"] = true,
-	["ExtVendorSkin"] = true,
-	["FactionizerSkin"] = true,
-	["FlightMapSkin"] = true,
-	["KarniCrapSkin"] = true,
-	["LightheadedSkin"] = true,
-	["LootCouncilLiteSkin"] = true,
-	["MageNuggetsSkin"] = true,
-	["MasterLootManagerRemixSkin"] = true,
-	["MinimalArchaeologySkin"] = true,
-	["MoveAnythingSkin"] = true,
-	["MRTSkin"] = true,
-	["MyRolePlaySkin"] = true,
-	["OdysseySkin"] = true,
-	["OgriLazySkin"] = true,
-	["OmenSkin"] = true,	
-	["OutfitterSkin"] = true,
-	["PlayerScoreSkin"] = true,
-	["PoisonerSkin"] = true,
-	["PoMTrackerSkin"] = true,
-	["PostalSkin"] = true,
-	["PowerAurasSkin"] = true,
-	["PowerAurasIconsSkin"] = true,
-	["ProfessionTabsSkin"] = true,
-	["QuartzSkin"] = true,
-	["RaidInviteOrganizerSkin"] = true,
-	["RaidBuffStatusSkin"] = true,
-	["RecountSkin"] = true,
-	["ReforgenatorSkin"] = true,
-	["SearingPlasmaTrackerSkin"] = true,
-	["SexyCooldownSkin"] = true,
-	["SkadaSkin"] = true,
-	["SkilletSkin"] = true,
-	["SpineCounterSkin"] = true,
-	["SpySkin"] = true,
-	["stAddonManagerSkin"] = true,
-	["SwatterSkin"] = true,
-	["TellMeWhenSkin"] = true,
-	["TinyDPSSkin"] = true,
-	["TitanPanelSkin"] = true,
-	["WeakAurasSkin"] = true,
-	["WowLuaSkin"] = true,
-	["ZygorSkin"] = true,
-	["UISkinMinimap"] = true,
-	["LootConfirmer"] = true,
-	["EmbedOoC"] = false,
-	["EmbedRecount"] = false,
-	["EmbedSkada"] = false,
-	["EmbedOmen"] = false,
-	["EmbedRO"] = false,
-	["EmbedTDPS"] = false,
-	["EmbedSexyCooldown"] = false,
-	["RecountBackdrop"] = true,
-	["SkadaBackdrop"] = true,
-
+local exceptions = {
+	"EmbedOoC", 
+	"EmbedRecount", 
+	"EmbedSkada", 
+	"EmbedOmen", 
+	"EmbedRO", 
+	"EmbedTDPS", 
+	"EmbedSexyCooldown"
 }
+P["skins"] = {
+}
+
+for k, _ in pairs(Skins) do
+	P.skins[k] = true
+end
+
+for k, _ in pairs(exceptions) do
+	P.skins[k] = false
+end
 
 E.PopupDialogs["OLD_SKIN_PACKAGE"] = {
 	text = "You have the old Tukui_UIPackages_Skins addon.  This addon replaces and will conflict with it.  Press accept to disable this addon and reload your UI.",
