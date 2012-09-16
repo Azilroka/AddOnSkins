@@ -90,6 +90,9 @@ U.Skins = {
 	["FlightMapSkin"] = {
 		["addon"] = "FlightMap"
 	},
+	["IncomingSkin"] = {
+		["addon"] = "Incoming"
+	},
 	["KarniCrapSkin"] = {
 		["buttonText"] = "Karni's Crap Filter",
 		["addon"] = "KarniCrap"
@@ -208,6 +211,9 @@ U.Skins = {
 	["WeakAurasSkin"] = {
 		["addon"] = "WeakAuras",
 		["ui"] = "ElvUI"
+	},
+	["WhollySkin"] = {
+		["addon"] = "Wholly",
 	},
 	["WowLuaSkin"] = {
 		["addon"] = "WowLua"

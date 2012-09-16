@@ -26,6 +26,7 @@
 	<Script file="ExtVendor.lua"/>
 	<Script file="Factionizer.lua"/>
 	<Script file="FlightMap.lua"/>
+	<Script file="Incoming.lua"/>
 	<Script file="KarniCrap.lua"/>
 	<Script file="Lightheaded.lua"/>
 	<Script file="LootCouncilLite.lua"/>
