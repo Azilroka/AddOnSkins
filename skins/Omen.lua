@@ -35,12 +35,14 @@ function EmbedOmen()
 		OmenBarList:StripTextures()
 		OmenBarList:SetTemplate("Default")
 		OmenAnchor:ClearAllPoints()
-		OmenAnchor:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 16)
-
-		OmenAnchor:SetWidth(EmbeddingWindow:GetWidth())
-		OmenAnchor:SetHeight(EmbeddingWindow:GetHeight() + 12)
-
-		OmenAnchor:SetFrameStrata("MEDIUM")
+		if not U.sle then
+		OmenBarList:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
+		OmenBarList:SetPoint("BOTTOMRIGHT", EmbeddingWindow, "BOTTOMRIGHT", 0, 4)
+		else
+		OmenBarList:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", -1, 1)
+		OmenBarList:SetPoint("BOTTOMRIGHT", EmbeddingWindow, "BOTTOMRIGHT", 0, 2)
+		end
+		OmenAnchor:SetFrameStrata("DIALOG")
 end
 
 local name = "OmenSkin"
