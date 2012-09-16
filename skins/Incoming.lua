@@ -15,7 +15,7 @@ local function SkinIncoming(self)
 		"AllClear",
 		"Incoming",
 		"SendMore",
-		}
+	}
 
 	for _, button in pairs(buttons) do
 		U.SkinButton(_G[button])

@@ -26,7 +26,13 @@ local exceptions = {
 	"EmbedTDPS", 
 	"EmbedSexyCooldown"
 }
+
 P["skins"] = {
+	["LootConfirmer"] = true,
+	["UISkinMinimap"] = true,
+	["DBMSkinHalf"] = true,
+	["RecountBackdrop"] = true,
+	["SkadaBackdrop"] = true,
 }
 
 for k, _ in pairs(Skins) do

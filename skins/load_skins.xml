@@ -62,6 +62,7 @@
 	<Script file="TitanPanel.lua"/>
 	<Script file="TradeSkillDW.lua"/>
 	<Script file="WeakAuras.lua"/>
+	<Script file="Wholly.lua"/>
 	<Script file="WowLua.lua"/>
 	<Script file="Zygor.lua"/>
 	<Script file="stAddonManager.lua"/>

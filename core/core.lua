@@ -172,7 +172,7 @@ U.Desaturate = cDesaturate
 local function cCheckOption(optionName)
 	if IsAddOnLoaded("ElvUI") then
 		local c = U.c
-		if not c.db or not c.db.skins then return false end
+		if not c.db or not c.db.skins then c:Initialize() end
 		return c.db.skins[optionName]
 	else
 		return UISkinOptions[optionName] == "Enabled"
