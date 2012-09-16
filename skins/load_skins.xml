@@ -60,6 +60,7 @@
 	<Script file="TellMeWhen.lua"/>
 	<Script file="TinyDPS.lua"/>
 	<Script file="TitanPanel.lua"/>
+	<Script file="TradeSkillDW.lua"/>
 	<Script file="WeakAuras.lua"/>
 	<Script file="WowLua.lua"/>
 	<Script file="Zygor.lua"/>
