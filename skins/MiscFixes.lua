@@ -59,17 +59,6 @@ local buttons = {
 	"ElvConfigToggle",
 	"DBMMinimapButton",
 	"ZygorGuidesViewerMapIcon",
-	"GatherMatePin1",
-	"GatherMatePin2",
-	"GatherMatePin3",
-	"GatherMatePin4",
-	"GatherMatePin5",
-	"GatherMatePin6",
-	"GatherMatePin7",
-	"GatherMatePin8",
-	"GatherMatePin9",
-	"GatherMatePin10",
-
 }
 
 local function SkinButton(frame)
@@ -79,6 +68,9 @@ local function SkinButton(frame)
 	for i, buttons in pairs(buttons) do
 		if(frame:GetName() ~= nil) then
 			if(frame:GetName():match(buttons)) then return end
+			for z = 1,999 do
+				if _G["GatherMatePin"..z] then return end
+			end
 		end
 	end
 
