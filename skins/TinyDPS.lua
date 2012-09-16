@@ -20,7 +20,7 @@ local function SkinTinyDps(self)
 			tdps.barHeight = 14
 			font.name = U.x.datatext_font
 			font.size = 12
-			font.outline = ""
+			font.outline = "OUTLINE"
 		end
 	end
 	if U.tuk then
