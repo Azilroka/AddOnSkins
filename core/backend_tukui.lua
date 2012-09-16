@@ -239,15 +239,6 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions2Button.text:SetPoint("CENTER", SkinOptions2Button, 0, 0)
 	SkinOptions2Button.text:SetText("Module Options")
 	SkinOptions2Button:HookScript("OnClick", function() 
-		if SkinOptions2:IsVisible() then
-			SkinOptions1Button:SetParent(SkinOptions)
-			SkinOptions2Button:SetParent(SkinOptions)
-			EmbedWindowSettingsButton:SetParent(SkinOptions)
-			ApplySkinSettingsButton:SetParent(SkinOptions)
-			SkinOptionsCloseButton:SetParent(SkinOptions)
-			SkinOptions2:Hide()
-			SkinOptions:Show()
-		else
 			SkinOptions1Button:SetParent(SkinOptions2)
 			SkinOptions2Button:SetParent(SkinOptions2)
 			EmbedWindowSettingsButton:SetParent(SkinOptions2)
@@ -255,7 +246,6 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 			SkinOptionsCloseButton:SetParent(SkinOptions2)
 			SkinOptions2:Show()
 			SkinOptions:Hide()
-		end
 	end)
 
 	SkinOptionsCloseButton = CreateFrame("Button", "SkinOptionsCloseButton", SkinOptions, "UIPanelButtonTemplate")
