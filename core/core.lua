@@ -7,11 +7,11 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 local U = unpack(select(2,...))
 local s = U.s
 
-local function cSkinButton(self)
+local function cSkinButton(self,strip)
 	if ElvUI then
-		s:HandleButton(self)
+		s:HandleButton(self,strip)
 	else
-		self:SkinButton()
+		self:SkinButton(strip)
 	end
 end
 
@@ -37,11 +37,11 @@ end
 
 U.SkinTab = cSkinTab
 
-local function cSkinNextPrevButton(self)
+local function cSkinNextPrevButton(self, horizonal)
 	if ElvUI then
-		s:HandleNextPrevButton(self)
+		s:HandleNextPrevButton(self, horizonal)
 	else
-		s.SkinNextPrevButton(self)
+		self:SkinNextPrevButton(horizonal)
 	end
 end
 
@@ -67,11 +67,11 @@ end
 
 U.SkinEditBox = cSkinEditBox
 
-local function cSkinDropDownBox(self)
+local function cSkinDropDownBox(self, width)
 	if ElvUI then
-		s:HandleDropDownBox(self)
+		s:HandleDropDownBox(self, width)
 	else
-		self:SkinDropDownBox()
+		self:SkinDropDownBox(width)
 	end
 end
 
