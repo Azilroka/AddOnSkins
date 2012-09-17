@@ -348,9 +348,9 @@ StaticPopupDialogs["RELOADUI"] = {
         whileDead = 1
 }
 
-if U.tuk then
 	SLASH_EMBEDDINGWINDOW1 = '/embed';
 	function SlashCmdList.EMBEDDINGWINDOW(msg, editbox)
+	if U.tuk then
 		if EmbeddingWindow:IsVisible() then
 			EmbeddingWindow:Hide()
 			print("Embedding Window is now |cffff2020Hidden|r.");
@@ -359,7 +359,11 @@ if U.tuk then
 			print("Embedding Window is now |cff00ff00Shown|r.");
 		end
 	end
-end
+		if U.elv then
+			print("Embed window setting are in /ec")
+		end
+	end
+
 
 function EmbedRecountOmen()
 		if not IsAddOnLoaded("Omen") then U.DisableOption("EmbedRO") return end
