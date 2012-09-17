@@ -57,9 +57,9 @@ local function AuctioneerSkin(self,event)
 		BrowsePrevPageButton:Point("BOTTOMRIGHT", BrowseScrollFrame, "BOTTOMRIGHT", -160, 0)
 	end
 
-	if AucAdvScanButton then cSkinButton(AucAdvScanButton) end
-	if AucAdvSimpFrameCreate then cSkinButton(AucAdvSimpFrameCreate) end
-	if AucAdvSimpFrameRemember then cSkinButton(AucAdvSimpFrameRemember) end
+	if AucAdvScanButton then U.SkinButton(AucAdvScanButton) end
+	if AucAdvSimpFrameCreate then U.SkinButton(AucAdvSimpFrameCreate) end
+	if AucAdvSimpFrameRemember then U.SkinButton(AucAdvSimpFrameRemember) end
 	if AuctionFrameTabUtilAppraiser then U.SkinTab(AuctionFrameTabUtilAppraiser) end
 	if AuctionFrameTabUtilSearchUi then U.SkinTab(AuctionFrameTabUtilSearchUi) end
 	if AuctionFrameTabUtilSimple then U.SkinTab(AuctionFrameTabUtilSimple) end
