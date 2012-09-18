@@ -131,22 +131,22 @@ local AceGUI = LibStub("AceGUI-3.0")
 	slider.frame:SetParent("CB_Skin_OptionsFrame")
 	slider:SetPoint("TOPLEFT", cbskin_zoom, "BOTTOMLEFT", 0, -10)
 	slider:SetLabel("Set Width of Bar 2 and 3.")
-	slider:SetSliderValues(10,300,1)
-	slider:SetCallback("OnValueChanged", function(self, value) CBBar2and3Width = self.value end)
+	slider:SetSliderValues(75,300,1)
+	slider:SetCallback("OnValueChanged", function(self, value) CBBar2and3Width = self.value ChocolateBar3:SetWidth(CBBar2and3Width) ChocolateBar2:SetWidth(CBBar2and3Width)end)
 
 	local slider2 = AceGUI:Create("Slider")
 	slider2.frame:SetParent("CB_Skin_OptionsFrame")
 	slider2:SetPoint("TOPLEFT", cbskin_zoom, "BOTTOMLEFT", 0, -70)
 	slider2:SetLabel("Set Position of Bar 2 and 3. from center")
 	slider2:SetSliderValues(10,500,1)
-	slider2:SetCallback("OnValueChanged", function(self, value) CBBar2and3Position = self.value end)
+	slider2:SetCallback("OnValueChanged", function(self, value) CBBar2and3Position = self.value local x = CBBar2and3Position local y = ChocolateBar1:GetHeight() + ChocolateBar2:GetHeight()/2 + 1 ChocolateBar2:SetPoint("TOPRIGHT", WorldFrame, "TOP", -x, -y) ChocolateBar3:SetPoint("TOPLEFT", WorldFrame, "TOP", x, -y) end)
 
 	local slider3 = AceGUI:Create("Slider")
 	slider3.frame:SetParent("CB_Skin_OptionsFrame")
 	slider3:SetPoint("TOPLEFT", cbskin_zoom, "BOTTOMLEFT", 0, -130)
 	slider3:SetLabel("Set Location of Raid Control Button")
 	if RaidUtility_ShowButton then slider3:SetSliderValues(ceil(RaidUtility_ShowButton:GetWidth()/4)-1,ceil(UIParent:GetWidth())-1-ceil(RaidUtility_ShowButton:GetWidth()/1.25)-1,1) end
-	slider3:SetCallback("OnValueChanged", function(self, value) CBShowButtonPosition = self.value end)
+	slider3:SetCallback("OnValueChanged", function(self, value) CBShowButtonPosition = self.value RaidUtility_ShowButton:SetPoint("TOPLEFT", ChocolateBar1, "BOTTOMLEFT", CBShowButtonPosition, -2) end)
 	if Tukui then slider3.frame:Hide() end
 	if CBEnableSpecialBars == true then
 	if ChocolateBar2 and ChocolateBar3 then -- Do they really exist!
@@ -236,11 +236,11 @@ end
 		if IsAddOnLoaded("ElvUI") then
 			if CBShowButtonPosition == nil then
 				x = ElvUIParent:GetWidth()/4			
-				RaidUtility_ShowButton:SetPoint("TOP", ChocolateBar1, "BOTTOM", -x, 0)
+				RaidUtility_ShowButton:SetPoint("TOP", ChocolateBar1, "BOTTOM", -x, -2)
 				slider3:SetValue(x)			
 			else
 				slider3:SetValue(CBShowButtonPosition)
-				RaidUtility_ShowButton:SetPoint("TOPLEFT", ChocolateBar1, "BOTTOMLEFT", CBShowButtonPosition, 0)
+				RaidUtility_ShowButton:SetPoint("TOPLEFT", ChocolateBar1, "BOTTOMLEFT", CBShowButtonPosition, -2)
 			end
 		end	
 	
