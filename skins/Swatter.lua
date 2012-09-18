@@ -2,7 +2,16 @@ if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("
 local U = unpack(select(2,...))
 local name = "SwatterSkin"
 local function SkinSwatter(self)
-	SwatterErrorFrame:SetTemplate("Transparent")
+	for addon, name in pairs({
+		['!buggrabber'] = 'BugGrabber',
+		['!improvederrorframe'] = 'ImprovedErrorFrame',
+	}) do
+	  local enabled = select(4, GetAddOnInfo(addon))
+	  if enabled then
+		  return
+	  end
+	end
+	U.SkinFrame(SwatterErrorFrame)
 	U.SkinButton(Swatter.Error.Done)
 	U.SkinButton(Swatter.Error.Next)
 	U.SkinButton(Swatter.Error.Prev)
