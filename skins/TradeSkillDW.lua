@@ -19,7 +19,7 @@ U.SkinFrame(TradeSkillGuildFrameContainer)
 
 TradeSkillGuildFrame:Point("BOTTOMLEFT", TradeSkillFrame, "BOTTOMRIGHT", 3, 19)
 U.SkinCloseButton(TradeSkillGuildFrameCloseButton)
-TradeSkillFrame:HookScript("OnShow", function() U.SkinFrame(TradeSkillFrame) TradeSkillListScrollFrame:StripTextures() if not TradeSkillDWExpandButton then return end if not TradeSkillDWExpandButton.skinned then TradeSkillDWExpandButton:SkinNextPrevButton() TradeSkillDWExpandButton.skinned = true end end)
+TradeSkillFrame:HookScript("OnShow", function() U.SkinFrame(TradeSkillFrame) TradeSkillListScrollFrame:StripTextures() if not TradeSkillDWExpandButton then return end if not TradeSkillDWExpandButton.skinned then U.SkinNextPrevButton(TradeSkillDWExpandButton) TradeSkillDWExpandButton.skinned = true end end)
 TradeSkillFrame:Height(TradeSkillFrame:GetHeight() + 12)
 U.SkinStatusBar(TradeSkillRankFrame)
 
