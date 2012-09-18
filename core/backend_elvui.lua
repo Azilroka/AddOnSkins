@@ -73,6 +73,8 @@ function XS:Initialize()
 	self.pixelFont = LSM:Fetch("font","ElvUI Pixel")
 	self.datatext_font = LSM:Fetch("font",E.db.datatexts.font)
 
+	self:GenerateOptions()
+
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
 			self:RegisterSkin(skin,data.func,data.events)
@@ -86,8 +88,6 @@ function XS:Initialize()
 			end
 		end
 	end
-
-	self:GenerateOptions()
 end
 
 function XS:RegisterSkin(skinName,func,...)
