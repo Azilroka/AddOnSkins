@@ -4,7 +4,6 @@ local s = U.s
 local c = U.c
 
 local function UpdateButtonLayout(self, button, opt)
-print("CLC Skinning Start")
 	button:Size(opt.size)
 	button:ClearAllPoints()
 	button:SetPoint(opt.point, clcretFrame, opt.pointParent, opt.x, opt.y)
