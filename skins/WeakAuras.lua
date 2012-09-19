@@ -1,4 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("WeakAuras") then return end
+if not IsAddOnLoaded("ElvUI") then return end
 local U = unpack(select(2,...))
 local s = U.s
 local c = U.c
@@ -13,9 +13,8 @@ local function Skin_WeakAuras(frame)
 		end
 	end
 
-	frame.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-	if ElvUI then frame.icon.SetTexCoord = c.noop end
-	if Tukui then frame.icon.SetTexCoord = s.dummy end
+	frame.icon:SetTexCoord(unpack(c.TexCoords))
+	frame.icon.SetTexCoord = c.noop
 end
 
 local function Create_WeakAuras(parent, data)
@@ -31,6 +30,7 @@ local function Modify_WeakAuras(parent, region, data)
 	Skin_WeakAuras(region)
 end
 
+local function WeakAuras_LoadSkin()
 	local name = "WeakAurasSkin"
 	local function SkinWeakAuras(self)
 		WeakAuras.regionTypes.icon.OldCreate = WeakAuras.regionTypes.icon.create
@@ -47,3 +47,6 @@ end
 	end
 
 	U.RegisterSkin(name,SkinWeakAuras)
+end
+
+s:RegisterSkin('WeakAuras', WeakAuras_LoadSkin)
