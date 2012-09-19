@@ -229,10 +229,10 @@ local function SkinAL(self)
 	U.SkinEditBox(AtlasLootPanelSearch_Box)
 	U.SkinEditBox(AtlasLootCompareFrameSearch_Box)
 
-	U.SkinCheckBox(AtlasLootFilterCheck)
-	U.SkinCheckBox(AtlasLootItemsFrame_Heroic)
-	U.SkinCheckBox(AtlasLootCompareFrameSearch_FilterCheck)
-	U.SkinCheckBox(AtlasLootItemsFrame_RaidFinder)
+	if AtlasLootFilterCheck then U.SkinCheckBox(AtlasLootFilterCheck) end
+	if AtlasLootItemsFrame_Heroic then U.SkinCheckBox(AtlasLootItemsFrame_Heroic) end
+	if AtlasLootCompareFrameSearch_FilterCheck then U.SkinCheckBox(AtlasLootCompareFrameSearch_FilterCheck) end
+	if AtlasLootItemsFrame_RaidFinder then U.SkinCheckBox(AtlasLootItemsFrame_RaidFinder) end
 
 	local Frame = AtlasLootPanel
 	Frame.Titel:SetTextColor(23/255, 132/255, 209/255)
