@@ -7,10 +7,10 @@ local function SkinArchy(self)
 	local c = U.c
 	
 	local function SkinArchyArtifactFrame()
-		if not InCombatLockdown() then
 			U.SkinFrame(ArchyArtifactFrame)
-			ArchyArtifactFrame:SetScale(1)
-			ArchyArtifactFrame:Size(300, 210)			
+			if not InCombatLockdown() then ArchyArtifactFrame:SetScale(1) end
+			--ArchyArtifactFrame:Size(300, 210)
+			ArchyArtifactFrame:Width(300)
 			ArchyArtifactFrameSkillBar:Size(285, 20)	
 			ArchyArtifactFrameSkillBar.text:SetTextColor(1, 1, 1)
 			
@@ -29,7 +29,7 @@ local function SkinArchy(self)
 				local icon = _G['ArchyArtifactChildFrame'..i..'Icon']
 				local fragmentBar = _G['ArchyArtifactChildFrame'..i..'FragmentBar']
 				local solveButton = _G['ArchyArtifactChildFrame'..i..'SolveButton']
-				
+
 				if containerFrame then
 					containerFrame:Width(285)
 				end
@@ -66,7 +66,6 @@ local function SkinArchy(self)
 					end					
 				end
 			end	
-		end
 	end
 	hooksecurefunc(Archy, 'RefreshRacesDisplay', SkinArchyArtifactFrame)
 	hooksecurefunc(Archy, "UpdateRacesFrame", SkinArchyArtifactFrame)
@@ -74,10 +73,8 @@ local function SkinArchy(self)
 	Archy:RefreshRacesDisplay()
 	
 	local function SkinArchyDigSiteFrame()
-		if not InCombatLockdown() then
 			U.SkinFrame(ArchyDigSiteFrame)
-			ArchyDigSiteFrame:SetScale(1)
-		end
+			if not InCombatLockdown() then ArchyDigSiteFrame:SetScale(1) end
 	end
 
 	hooksecurefunc(Archy, "UpdateDigSiteFrame", SkinArchyDigSiteFrame)
