@@ -65,8 +65,7 @@ U.Skins = {
 		["ui"] = "ElvUI"
 	},
 	["CLCRetSkin"] = {
-		["addon"] = "CLCRet",
-		["ui"] = "ElvUI"
+		["addon"] = "CLCRet"
 	},
 	["CliqueSkin"] = {
 		["addon"] = "Clique"
@@ -176,7 +175,8 @@ U.Skins = {
 		["addon"] = "SearingPlasmaTracker"
 	},
 	["SexyCooldownSkin"] = {
-		["addon"] = "SexyCooldown"
+		["buttonText"] = "SexyCooldown",
+		["addon"] = "SexyCooldown2"
 	},
 	["SkadaSkin"] = {
 		["addon"] = "Skada"
