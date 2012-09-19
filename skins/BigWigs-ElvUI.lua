@@ -111,12 +111,12 @@ local function SkinBigWigs(self)
 		end
 
 		-- setup timer and bar name fonts and positions
-		bar.candyBarLabel:FontTemplate(nil, nil, 'OUTLINE')
+		bar.candyBarLabel:FontTemplate([[Interface\AddOns\ElvUI\media\fonts\Homespun.ttf]], 10, 'MONOCHROMEOUTLINE')
 		bar.candyBarLabel:SetJustifyH("LEFT")
 		bar.candyBarLabel:ClearAllPoints()
 		bar.candyBarLabel:Point("LEFT", bar, "LEFT", 4, 0)
 
-		bar.candyBarDuration:FontTemplate(nil, nil, 'OUTLINE')
+		bar.candyBarDuration:FontTemplate([[Interface\AddOns\ElvUI\media\fonts\Homespun.ttf]], 10, 'MONOCHROMEOUTLINE')
 		bar.candyBarDuration:SetJustifyH("RIGHT")
 		bar.candyBarDuration:ClearAllPoints()
 		bar.candyBarDuration:Point("RIGHT", bar, "RIGHT", -4, 0)
@@ -137,7 +137,7 @@ local function SkinBigWigs(self)
 		bar.candyBarIconFrame.OldSetWidth = bar.candyBarIconFrame.SetWidth
 		bar.candyBarIconFrame.SetWidth=c.noop
 		bar.candyBarIconFrame:ClearAllPoints()
-		bar.candyBarIconFrame:Point("BOTTOMLEFT", bar, "BOTTOMLEFT", -(buttonsize + 7), 0)
+		bar.candyBarIconFrame:Point("BOTTOMLEFT", bar, "BOTTOMLEFT", -(buttonsize + 5), 0)
 		bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
 		bar.candyBarIconFrame:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 	end
