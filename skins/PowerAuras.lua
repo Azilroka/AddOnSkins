@@ -27,7 +27,7 @@ local function SkinPowerAuras(self, aura, elapsed)
 			if not frame.backdrop:IsShown() then
 				frame.backdrop:Show()
 			end
-			texture:SetTexCoord(unpack(c.TexCoords))
+			texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 		elseif frame and frame.backdrop:IsShown() then
 			frame.backdrop:Hide()
 		end
@@ -36,7 +36,6 @@ local function SkinPowerAuras(self, aura, elapsed)
 	return returnValue
 end
 
-if U.elv then
 	local function PowerAuras_LoadSkin()
 		local name = "PowerAurasIconsSkin"
 		local function SkinPowerAurasIcons(self)
@@ -45,8 +44,7 @@ if U.elv then
 		end
 		U.RegisterSkin(name,SkinPowerAurasIcons)
 	end
-	s:RegisterSkin('PowerAuras', PowerAuras_LoadSkin)
-end
+
 
 local name = "PowerAurasSkin"
 local function SkinPowerAuras(self)
