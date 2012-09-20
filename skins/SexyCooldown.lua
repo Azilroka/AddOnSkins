@@ -45,24 +45,29 @@ end
 
 -- Skin Icons
 local function SkinSexyCooldownIcon(bar, icon)
-	U.SkinFrame(icon)
-	icon.overlay:CreateBackdrop("Default")
-	icon.tex:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-	if ElvUI then icon.tex.SetTexCoord = c.noop end
-	if Tukui then icon.tex.SetTexCoord = s.dummy end
-	icon.overlay:SetBackdropColor(0,0,0,0)
-	-- Default no background/border
-	icon:SetBackdropColor(0,0,0,0)
-	icon:SetBackdropBorderColor(c["media"].bordercolor)
-	icon.overlay:SetBackdropBorderColor(c["media"].bordercolor)
+	if not icon.skinned then
+		U.SkinFrame(icon)
+		icon.overlay:CreateBackdrop("Default")
+		icon.tex:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+		if ElvUI then icon.tex.SetTexCoord = c.noop end
+		if Tukui then icon.tex.SetTexCoord = s.dummy end	
+		icon.overlay:SetBackdropColor(0,0,0,0)
+		-- Default no background/border
+		icon:SetBackdropColor(0,0,0,0)
+		icon:SetBackdropBorderColor(c["media"].bordercolor)
+		icon.overlay:SetBackdropBorderColor(c["media"].bordercolor)
+		icon.skinned = true
+	end
 end
 
 local function SkinSexyCooldownLabel(bar,label,store)
-	if IsAddOnLoaded("ElvUI") then
-		local x = U.x
-		label:SetFont(x.pixelFont, store.fontsize, "OUTLINE")
-	else
-		label:SetFont(c["media"].pixelfont, store.fontsize, "OUTLINE")
+	if not label.skinned then
+		if IsAddOnLoaded("ElvUI") then
+			local x = U.x
+			label:SetFont(x.pixelFont, store.fontsize, "OUTLINE")
+		else
+			label:SetFont(c["media"].pixelfont, store.fontsize, "OUTLINE")
+		end
 	end
 end
 
