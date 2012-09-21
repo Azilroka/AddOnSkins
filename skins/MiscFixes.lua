@@ -2,6 +2,7 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 local U = unpack(select(2,...))
 if IsAddOnLoaded("TomTom") then if TomTomBlock then TomTomBlock:SetTemplate("Transparent") end end
 if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
+if IsAddOnLoaded("VengeanceStatus") then U.SkinStatusBar(VengeanceStatus_StatusBar) end
 LoadAddOn("acb_CastBar")
 if IsAddOnLoaded("acb_CastBar") then
 local SkinAZCastBar = CreateFrame("Frame")
