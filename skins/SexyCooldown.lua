@@ -26,7 +26,7 @@ end
 -- Skin Bars
 local function SkinSexyCooldownBar(bar)
 	SCDStripSkinSettings(bar)
-	U.SkinFrame(bar)
+	if not bar.skinned then U.SkinFrame(bar) bar.skinned = true end
 	if(U.CheckOption("EmbedSexyCooldown")) then
 		bar:ClearAllPoints()
 		if IsAddOnLoaded("ElvUI") then
