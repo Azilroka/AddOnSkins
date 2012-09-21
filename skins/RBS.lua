@@ -14,10 +14,6 @@ local function SkinRBS(self)
 	U.SkinNextPrevButton(RBSFrameTalentsButton)
 	RBSFrameOptionsButton:Size(20)
 	RBSFrameTalentsButton:Size(20)
-	U.SkinFrame(RBSOptionsFrame)
-	U.SkinButton(RBSOptionsFrameButton)
-	U.SkinFrame(RBSTalentsFrame)
-	U.SkinButton(RBSTalentsFrameButton)
 end
 
 U.RegisterSkin(name,SkinRBS)
