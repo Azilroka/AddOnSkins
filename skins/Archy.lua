@@ -11,16 +11,20 @@ local function SkinArchy(self)
 			if not InCombatLockdown() then ArchyArtifactFrame:SetScale(1) end
 			--ArchyArtifactFrame:Size(300, 210)
 			ArchyArtifactFrame:Width(300)
-			ArchyArtifactFrameSkillBar:Size(285, 20)	
-			ArchyArtifactFrameSkillBar.text:SetTextColor(1, 1, 1)
+
+			if ArchyArtifactFrameSkillBar then
+
+				ArchyArtifactFrameSkillBar:Size(285, 20)	
+				ArchyArtifactFrameSkillBar.text:SetTextColor(1, 1, 1)
 			
-			if IsAddOnLoaded("ElvUI") then
-				local x = U.x
-				ArchyArtifactFrameSkillBar.text:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
-			else
-				ArchyArtifactFrameSkillBar.text:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-			end					
-			
+				if IsAddOnLoaded("ElvUI") then
+					local x = U.x
+					ArchyArtifactFrameSkillBar.text:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
+				else
+					ArchyArtifactFrameSkillBar.text:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+				end					
+			end
+
 			ArchyArtifactFrameContainer:Width(285)
 			ArchyArtifactFrameContainer:ClearAllPoints()
 			ArchyArtifactFrameContainer:SetPoint('TOP', ArchyArtifactFrameSkillBar, 'BOTTOM', 0, -5)
@@ -63,7 +67,7 @@ local function SkinArchy(self)
 						fragmentBar.artifact:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 						fragmentBar.fragments:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 						fragmentBar.keystones.count:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-					end					
+					end
 				end
 			end	
 	end
