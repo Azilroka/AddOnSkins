@@ -262,20 +262,20 @@ local AceGUI = LibStub("AceGUI-3.0")
 		if IsAddOnLoaded("ElvUI") then
 			if TPShowButtonPosition == nil then
 				x = ElvUIParent:GetWidth()/4
-					Bar2Height = Titan_Bar__Display_Bar2:GetHeight()
-					if Bar2Height == 0 or TPEnableSpecialBars == true then
+					BarHeight = Titan_Bar__Display_Bar:GetHeight()
+					if BarHeight == 0 or TPEnableSpecialBars == true then
 						RaidUtility_ShowButton:SetPoint("TOP", Titan_Bar__Display_Bar, "BOTTOM", -x, 0)
 					else
-						RaidUtility_ShowButton:SetPoint("TOP", Titan_Bar__Display_Bar2, "BOTTOM", -x, 0)
+						RaidUtility_ShowButton:SetPoint("TOP", Titan_Bar__Display_Bar, "BOTTOM", -x, 0)
 					end
 				slider3:SetValue(x)
 			else
 				slider3:SetValue(TPShowButtonPosition)
-					Bar2Height = Titan_Bar__Display_Bar2:GetHeight()
+					Bar2Height = Titan_Bar__Display_Bar:GetHeight()
 					if Bar2Height == 0 or TPEnableSpecialBars == true then
 						RaidUtility_ShowButton:SetPoint("TOPLEFT", Titan_Bar__Display_Bar, "BOTTOMLEFT", TPShowButtonPosition, 0)
 					else
-						RaidUtility_ShowButton:SetPoint("TOPLEFT", Titan_Bar__Display_Bar2, "BOTTOMLEFT", TPShowButtonPosition, 0)
+						RaidUtility_ShowButton:SetPoint("TOPLEFT", Titan_Bar__Display_Bar, "BOTTOMLEFT", TPShowButtonPosition, 0)
 					end
 			end
 		end
