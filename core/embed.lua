@@ -36,9 +36,21 @@ if event == "PLAYER_ENTERING_WORLD" then
 		EmbedToggleButton.text:SetText(">")
 		EmbedToggleButton.text:SetPoint("CENTER", 2, 2)
 		EmbedToggleButton:Point("RIGHT", TukuiInfoRight, "RIGHT", -2, 0)
+		EmbedToggleButton:RegisterForClicks("LeftButtonDown", "RightButtonDown");
 		EmbedToggleButton:SetScript("OnClick", function(self, btn)
 			if btn == 'RightButton' then
-				SkinOptions:Show()
+				if SkinOptions:IsShown() or SkinOptions2:IsShown() or SkinOptions3:IsShown() then
+					SkinOptions:Hide()
+					SkinOptions2:Hide()
+					SkinOptions3:Hide()
+					SkinOptions1Button:SetParent(SkinOptions)
+					SkinOptions2Button:SetParent(SkinOptions)
+					EmbedWindowSettingsButton:SetParent(SkinOptions)
+					ApplySkinSettingsButton:SetParent(SkinOptions)
+					SkinOptionsCloseButton:SetParent(SkinOptions)
+				else
+					SkinOptions:Show()
+				end
 			else
 				if IsAddOnLoaded("Recount") and ((U.CheckOption("EmbedRecount")) or (U.CheckOption("EmbedRO"))) then
 					ToggleFrame(Recount_MainWindow)
@@ -374,6 +386,28 @@ if IsAddOnLoaded("Tukui") then
 		end
 	end)
 
+	EmbedSexyCooldownButton = CreateFrame("Button", "EmbedSexyCooldownButton", SkinOptions3)
+	EmbedSexyCooldownButton:SetPoint("TOPLEFT", 12, -155)
+	EmbedSexyCooldownButton:Size(16)
+	EmbedSexyCooldownButton:CreateBackdrop()
+	EmbedSexyCooldownButton:SetBackdrop({bgFile = c.media.normTex, edgeFile = nil, tile = false, tileSize = 0, edgeSize = 0, insets = { left = 0, right = 0, top = 0, bottom = 0 }});
+
+	EmbedSexyCooldownButton.text = EmbedSexyCooldownButton:CreateFontString(nil, "OVERLAY")
+	EmbedSexyCooldownButton.text:SetFont(UIFont, 12, "OUTLINE")
+	EmbedSexyCooldownButton.text:SetPoint("LEFT", EmbedSexyCooldownButton, "RIGHT", 10, 0)
+	EmbedSexyCooldownButton.text:SetText("SexyCooldown")
+	if (U.CheckOption("EmbedSexyCooldown")) then EmbedSexyCooldownButton:SetBackdropColor(0.11,0.66,0.11,1) end
+	if (not U.CheckOption("EmbedSexyCooldown")) then EmbedSexyCooldownButton:SetBackdropColor(0.68,0.14,0.14,1) end
+	EmbedSexyCooldownButton:SetScript("OnClick", function()
+		if (U.CheckOption("EmbedSexyCooldown")) then
+			U.DisableOption("EmbedSexyCooldown")
+			EmbedSexyCooldownButton:SetBackdropColor(0.68,0.14,0.14,1)
+		else
+			U.EnableOption("EmbedSexyCooldown")
+			EmbedSexyCooldownButton:SetBackdropColor(0.11,0.66,0.11,1)
+		end
+	end)
+
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end
 end
@@ -425,7 +459,14 @@ else
 		end
 	end
 end
-
+if TukuiChatBackgroundLeft then
+	TukuiChatBackgroundLeft.bg = TukuiChatBackgroundLeft:CreateTexture(nil, 'LOW')
+	TukuiChatBackgroundLeft.bg:SetInside()
+	TukuiChatBackgroundLeft.bg:SetTexture([[Interface\AddOns\Tukui_ElvUI_Skins\media\horde.tga]])
+	TukuiChatBackgroundLeft.bg:SetAlpha(0.8)
+	TukuiInfoLeft:StripTextures()
+	TukuiTabsLeftBackground:Hide()
+end
 end)
 
 StaticPopupDialogs["RELOADUI"] = {
