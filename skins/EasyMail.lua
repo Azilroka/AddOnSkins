@@ -24,7 +24,10 @@ local function SkinEasyMail(self,event)
 	EasyMail_MailButton:Size(22)
 	EasyMail_MailDropdownBackdrop:SetTemplate("Transparent")
 	OpenMailCancelButton:Point("BOTTOMRIGHT", OpenMailFrame, "BOTTOMRIGHT", -3, 3)
-	OpenMailFrame:HookScript("OnShow", function() EasyMail_AttButton:SetPoint("TOPRIGHT", OpenMailFrame, "TOPRIGHT", -120, -328) end)
+	hooksecurefunc("OpenMail_Update", function()
+		EasyMail_AttButton:ClearAllPoints()
+		EasyMail_AttButton:Point("TOP", OpenMailScrollFrame, "BOTTOM", 13, -5)
+	end)
 	for i = 1, 7 do	
 		local t = _G["MailItem"..i.."ExpireTime"]
 			if t then

@@ -459,14 +459,14 @@ else
 		end
 	end
 end
-if TukuiChatBackgroundLeft then
-	TukuiChatBackgroundLeft.bg = TukuiChatBackgroundLeft:CreateTexture(nil, 'LOW')
-	TukuiChatBackgroundLeft.bg:SetInside()
-	TukuiChatBackgroundLeft.bg:SetTexture([[Interface\AddOns\Tukui_ElvUI_Skins\media\horde.tga]])
-	TukuiChatBackgroundLeft.bg:SetAlpha(0.8)
-	TukuiInfoLeft:StripTextures()
-	TukuiTabsLeftBackground:Hide()
-end
+--if TukuiChatBackgroundLeft then
+--	TukuiChatBackgroundLeft.bg = TukuiChatBackgroundLeft:CreateTexture(nil, 'LOW')
+--	TukuiChatBackgroundLeft.bg:SetInside()
+--	TukuiChatBackgroundLeft.bg:SetTexture([[Interface\AddOns\Tukui_ElvUI_Skins\media\horde.tga]])
+--	TukuiChatBackgroundLeft.bg:SetAlpha(0.8)
+--	TukuiInfoLeft:StripTextures()
+--	TukuiTabsLeftBackground:Hide()
+--end
 end)
 
 StaticPopupDialogs["RELOADUI"] = {
