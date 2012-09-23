@@ -64,9 +64,11 @@ U.Skins = {
 	},
 	["CLCProtSkin"] = {
 		["addon"] = "CLCProt",
+		["ui"] = "ElvUI"
 	},
 	["CLCRetSkin"] = {
-		["addon"] = "CLCRet"
+		["addon"] = "CLCRet",
+		["ui"] = "ElvUI"
 	},
 	["CliqueSkin"] = {
 		["addon"] = "Clique"
@@ -151,6 +153,7 @@ U.Skins = {
 	["PowerAurasIconsSkin"] = {
 		["buttonText"] = "PowerAuras Icons",
 		["addon"] = "PowerAuras",
+		["ui"] = "ElvUI"
 	},
 	["QuartzSkin"] = {
 		["addon"] = "Quartz"
@@ -213,6 +216,7 @@ U.Skins = {
 	},
 	["WeakAurasSkin"] = {
 		["addon"] = "WeakAuras",
+		["ui"] = "ElvUI",
 	},
 	["WhollySkin"] = {
 		["addon"] = "Wholly",

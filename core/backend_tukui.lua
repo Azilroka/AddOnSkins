@@ -136,6 +136,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.PoMTrackerSkin == nil) then UISkinOptions.PoMTrackerSkin = "Enabled" end
 	if(UISkinOptions.PostalSkin == nil) then UISkinOptions.PostalSkin = "Enabled" end
 	if(UISkinOptions.PowerAurasSkin == nil) then UISkinOptions.PowerAurasSkin = "Enabled" end
+	if(UISkinOptions.PowerAurasIconsSkin == nil) then UISkinOptions.PowerAurasIconsSkin = "Enabled" end
 	if(UISkinOptions.ProfessionTabsSkin == nil) then UISkinOptions.ProfessionTabsSkin = "Enabled" end
 	if(UISkinOptions.QuartzSkin == nil) then UISkinOptions.QuartzSkin = "Enabled" end
 	if(UISkinOptions.RaidInviteOrganizerSkin == nil) then UISkinOptions.RaidInviteOrganizerSkin = "Enabled" end
@@ -154,6 +155,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.TellMeWhenSkin == nil) then UISkinOptions.TellMeWhenSkin = "Enabled" end
 	if(UISkinOptions.TinyDPSSkin == nil) then UISkinOptions.TinyDPSSkin = "Enabled" end
 	if(UISkinOptions.TitanPanelSkin == nil) then UISkinOptions.TitanPanelSkin = "Enabled" end
+	if(UISkinOptions.WeakAurasSkin == nil) then UISkinOptions.WeakAurasSkin = "Enabled" end
 	if(UISkinOptions.WhollySkin == nil) then UISkinOptions.WhollySkin = "Enabled" end
 	if(UISkinOptions.WowLuaSkin == nil) then UISkinOptions.WowLuaSkin = "Enabled" end
 	if(UISkinOptions.ZygorSkin == nil) then UISkinOptions.ZygorSkin = "Enabled" end
@@ -413,16 +415,33 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 
 	local Skins2 = {
 		["LootConfirmer"] = {
-			["buttonText"] = "Loot Confirm"
+			["buttonText"] = "Loot Confirm",
 		},
 		["UISkinMinimap"] = {
-			["buttonText"] = "Square Minimap Buttons"
+			["buttonText"] = "Square Minimap Buttons",
 		},
 		["DBMSkinHalf"] = {
-			["buttonText"] = "DBM Half-Bar Skin"
+			["buttonText"] = "DBM Half-Bar Skin",
+			["addon"] = "DBM-Core",
 		},
 		["LootIconsChat"] = {
-			["buttonText"] = "Loot Icons in Loot Window"
+			["buttonText"] = "Loot Icons in Loot Window",
+		},
+		["CLCProtSkin"] = {
+			["buttonText"] = "CLCProt Icons",
+			["addon"] = "CLCProt",
+		},
+		["CLCRetSkin"] = {
+			["buttonText"] = "CLCRet Icons",
+			["addon"] = "CLCRet",
+		},
+		["PowerAurasIconsSkin"] = {
+			["buttonText"] = "PowerAuras Icons",
+			["addon"] = "PowerAuras",
+		},
+		["WeakAurasSkin"] = {
+			["buttonText"] = "WeakAuras Icons",
+			["addon"] = "WeakAuras",
 		},
 	}
 
