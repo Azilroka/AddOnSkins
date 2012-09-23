@@ -58,16 +58,16 @@ local function SkinArchy(self)
 				if fragmentBar then
 					U.SkinStatusBar(fragmentBar)	
 					fragmentBar:Size(180, 24)
-					if IsAddOnLoaded("ElvUI") then
-						local x = U.x
-						fragmentBar.artifact:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
-						fragmentBar.fragments:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
-						fragmentBar.keystones.count:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
-					else
-						fragmentBar.artifact:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-						fragmentBar.fragments:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-						fragmentBar.keystones.count:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-					end
+					--if IsAddOnLoaded("ElvUI") then
+					--	local x = U.x
+					--	fragmentBar.artifact:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
+					--	fragmentBar.fragments:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
+					--	fragmentBar.keystones.count:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
+					--else
+					--	fragmentBar.artifact:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+					--	fragmentBar.fragments:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+					--	fragmentBar.keystones.count:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+					--end
 				end
 			end	
 	end
