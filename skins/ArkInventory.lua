@@ -23,7 +23,7 @@ local function SkinArkInventory(self)
 	ArkInventory.Frame_Container_Draw_ = ArkInventory.Frame_Container_Draw
 	ArkInventory.Frame_Container_Draw = function(frame)
 		local loc_id = frame.ARK_Data.loc_id
-		ArkInventory.LocationOptionSet(loc_id, "bar", "pad", "external", 2)
+		--ArkInventory.LocationOptionSet(loc_id, "bar", "pad", "external", 2)
 		ArkInventory.LocationOptionSet(loc_id, "window", "pad", 0)
 		return ArkInventory.Frame_Container_Draw_(frame)
 	end
@@ -84,7 +84,7 @@ local function SkinArkInventory(self)
 	ArkInventory.Frame_Bar_Paint = function(bar)
 
 		local loc_id = bar.ARK_Data.loc_id
-		ArkInventory.LocationOptionSet(loc_id, "bar", "pad", "internal" , 2)
+		--ArkInventory.LocationOptionSet(loc_id, "bar", "pad", "internal" , 2)
 		ArkInventory.LocationOptionSet(loc_id, "bar", "name", "height", 18)
 		ArkInventory.Frame_Bar_Paint_(bar)
 		if not bar then return end
