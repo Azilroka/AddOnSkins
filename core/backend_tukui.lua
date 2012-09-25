@@ -164,6 +164,9 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.LootIconsChat == nil) then UISkinOptions.LootIconsChat = "Enabled" end
 	if(UISkinOptions.EmbedOoC == nil) then UISkinOptions.EmbedOoC = "Disabled" end
 	if(UISkinOptions.EmbedTDPS == nil) then UISkinOptions.EmbedTDPS = "Disabled" end
+	if(UISkinOptions.TukuiChatBackground == nil) then UISkinOptions.TukuiChatBackground = "Disabled" end
+	if(UISkinOptions.LeftChatBackground == nil) then UISkinOptions.LeftChatBackground = "Interface\\AddOns\\Tukui_ElvUI_Skins\\media\\horde.tga" end
+	if(UISkinOptions.RightChatBackground == nil) then UISkinOptions.RightChatBackground = "Interface\\AddOns\\Tukui_ElvUI_Skins\\media\\horde.tga" end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 
@@ -184,7 +187,7 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions.text:SetPoint("TOP", SkinOptions, 0, -6)
 	SkinOptions.text:SetText("|cffC495DDTukui|r Skin Options - Version "..U.Version)
 	SkinOptions:EnableMouse(true)
-	SkinOptions:RegisterForDrag("LeftButton");
+	SkinOptions:RegisterForDrag("LeftButton")
 	SkinOptions:SetScript("OnDragStart", function(self) self:StartMoving() end)
 	SkinOptions:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
 
@@ -194,6 +197,10 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions2:SetFrameStrata("DIALOG")
 	SkinOptions2:Width(SkinOptions:GetWidth())
 	SkinOptions2:Height(SkinOptions:GetHeight())
+	SkinOptions2:SetClampedToScreen(true)
+	SkinOptions2:SetMovable(true)
+	SkinOptions2:EnableMouse(true)
+	SkinOptions2:RegisterForDrag("LeftButton")
 	SkinOptions2:Hide()
 	SkinOptions2.text = SkinOptions2:CreateFontString(nil, "OVERLAY")
 	SkinOptions2.text:SetFont(UIFont, 14, "OUTLINE")
@@ -206,6 +213,10 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	SkinOptions3:SetFrameStrata("DIALOG")
 	SkinOptions3:Width(SkinOptions:GetWidth())
 	SkinOptions3:Height(SkinOptions:GetHeight())
+	SkinOptions3:SetClampedToScreen(true)
+	SkinOptions3:SetMovable(true)
+	SkinOptions3:EnableMouse(true)
+	SkinOptions3:RegisterForDrag("LeftButton")
 	SkinOptions3:Hide()
 	SkinOptions3.text = SkinOptions3:CreateFontString(nil, "OVERLAY")
 	SkinOptions3.text:SetFont(UIFont, 14, "OUTLINE")
@@ -452,6 +463,139 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		CreateButton(string.format('%sButton',skin),buttonText,addon,skin,1,curY,true)
 		curY = curY + 1
 	end
+
+--Chat Background Start
+LeftChatBackgroundEditBox = CreateFrame("EditBox", LeftChatBackgroundEditBox, SkinOptions2)
+	LeftChatBackgroundEditBox.text = SkinOptions2:CreateFontString(nil, "OVERLAY")
+	LeftChatBackgroundEditBox.text:SetFont(UIFont, UIFontSize, "OUTLINE")
+	LeftChatBackgroundEditBox.text:SetPoint("LEFT", LeftChatBackgroundEditBox, "LEFT", 0, 20)
+	LeftChatBackgroundEditBox.text:SetText("Left Chat Background")
+	LeftChatBackgroundEditBox:SetAutoFocus(false)
+	LeftChatBackgroundEditBox:SetMultiLine(false)
+	LeftChatBackgroundEditBox:SetWidth(280)
+	LeftChatBackgroundEditBox:SetHeight(20)
+	LeftChatBackgroundEditBox:SetMaxLetters(255)
+	LeftChatBackgroundEditBox:SetTextInsets(3,0,0,0)
+	LeftChatBackgroundEditBox:SetBackdrop({
+		bgFile = [=[Interface\Addons\Tukui\media\textures\blank]=], 
+		tiled = false,
+	})
+	LeftChatBackgroundEditBox:SetBackdropColor(0,0,0,0.5)
+	LeftChatBackgroundEditBox:SetBackdropBorderColor(0,0,0,1)
+	LeftChatBackgroundEditBox:SetFontObject(GameFontHighlight)
+	LeftChatBackgroundEditBox:SetPoint("BOTTOMLEFT", SkinOptions2, 12, 80)
+	LeftChatBackgroundEditBox:SetText(UISkinOptions.LeftChatBackground)
+	LeftChatBackgroundEditBox:SetScript("OnEscapePressed", function(self) self:ClearFocus() self:SetText(UISkinOptions.LeftChatBackground) end)
+	LeftChatBackgroundEditBox:SetScript("OnEnterPressed", function(self)
+		self:ClearFocus()
+		UISkinOptions.LeftChatBackground = self:GetText()
+		ApplyLeftChatBackground()
+		end)
+	LeftChatBackgroundEditBox:SetTemplate("Default")
+
+function ApplyLeftChatBackground()
+	if not TukuiChatBackgroundLeft.bg then
+		TukuiChatBackgroundLeft.bg = TukuiChatBackgroundLeft:CreateTexture(nil, 'LOW')
+		TukuiChatBackgroundLeft.bg:SetInside()
+	end
+	TukuiChatBackgroundLeft.bg:SetTexture(UISkinOptions.LeftChatBackground)
+	TukuiChatBackgroundLeft.bg:SetAlpha(0.7)
+	TukuiInfoLeft:StripTextures()
+	TukuiTabsLeftBackground:Hide()
+end
+
+RightChatBackgroundEditBox = CreateFrame("EditBox", RightChatBackgroundEditBox, SkinOptions2)
+	RightChatBackgroundEditBox.text = SkinOptions2:CreateFontString(nil, "OVERLAY")
+	RightChatBackgroundEditBox.text:SetFont(UIFont, UIFontSize, "OUTLINE")
+	RightChatBackgroundEditBox.text:SetPoint("LEFT", RightChatBackgroundEditBox, "LEFT", 0, 20)
+	RightChatBackgroundEditBox.text:SetText("Right Chat Background")
+	RightChatBackgroundEditBox:SetAutoFocus(false)
+	RightChatBackgroundEditBox:SetMultiLine(false)
+	RightChatBackgroundEditBox:SetWidth(280)
+	RightChatBackgroundEditBox:SetHeight(20)
+	RightChatBackgroundEditBox:SetMaxLetters(255)
+	RightChatBackgroundEditBox:SetTextInsets(3,0,0,0)
+	RightChatBackgroundEditBox:SetBackdrop({
+		bgFile = [=[Interface\Addons\Tukui\media\textures\blank]=], 
+		tiled = false,
+	})
+	RightChatBackgroundEditBox:SetBackdropColor(0,0,0,0.5)
+	RightChatBackgroundEditBox:SetBackdropBorderColor(0,0,0,1)
+	RightChatBackgroundEditBox:SetFontObject(GameFontHighlight)
+	RightChatBackgroundEditBox:SetPoint("BOTTOMRIGHT", SkinOptions2, -12, 80)
+	RightChatBackgroundEditBox:SetText(UISkinOptions.RightChatBackground)
+	RightChatBackgroundEditBox:SetScript("OnEscapePressed", function(self) self:ClearFocus() self:SetText(UISkinOptions.RightChatBackground) end)
+	RightChatBackgroundEditBox:SetScript("OnEnterPressed", function(self)
+		self:ClearFocus()
+		UISkinOptions.RightChatBackground = self:GetText()
+		ApplyRightChatBackground()
+		end)
+	RightChatBackgroundEditBox:SetTemplate("Default")
+
+function ApplyRightChatBackground()
+	if not TukuiChatBackgroundRight.bg then
+		TukuiChatBackgroundRight.bg = TukuiChatBackgroundRight:CreateTexture(nil, 'LOW')
+		TukuiChatBackgroundRight.bg:SetInside()
+	end
+	TukuiChatBackgroundRight.bg:SetTexture(UISkinOptions.RightChatBackground)
+	TukuiChatBackgroundRight.bg:SetAlpha(0.7)
+	TukuiInfoRight:StripTextures()
+	TukuiTabsRightBackground:Hide()
+end
+	TukuiChatBackgroundButton = CreateFrame("Button", "TukuiChatBackgroundButton", SkinOptions2)
+	TukuiChatBackgroundButton:SetPoint("BOTTOM", SkinOptions2, -80, 150)
+	TukuiChatBackgroundButton:Size(16)
+	TukuiChatBackgroundButton:CreateBackdrop()
+	TukuiChatBackgroundButton:SetBackdrop({bgFile = c.media.normTex, edgeFile = nil, tile = false, tileSize = 0, edgeSize = 0, insets = { left = 0, right = 0, top = 0, bottom = 0 }});
+
+	TukuiChatBackgroundButton.text = TukuiChatBackgroundButton:CreateFontString(nil, "OVERLAY")
+	TukuiChatBackgroundButton.text:SetFont(UIFont, 14, "OUTLINE")
+	TukuiChatBackgroundButton.text:SetPoint("LEFT", TukuiChatBackgroundButton, "RIGHT", 12, 0)
+	TukuiChatBackgroundButton.text:SetText("|cffC495DDTukui|r Chat Background")
+	if (U.CheckOption("TukuiChatBackground")) then TukuiChatBackgroundButton:SetBackdropColor(0.11,0.66,0.11,1) end
+	if (not U.CheckOption("TukuiChatBackground")) then TukuiChatBackgroundButton:SetBackdropColor(0.68,0.14,0.14,1) end
+	TukuiChatBackgroundButton:SetScript("OnClick", function()
+		if (U.CheckOption("TukuiChatBackground")) then
+			U.DisableOption("TukuiChatBackground")
+			LeftChatBackgroundEditBox:Disable()
+			RightChatBackgroundEditBox:Disable()
+			LeftChatBackgroundEditBox:SetAlpha(0)
+			LeftChatBackgroundEditBox.text:SetAlpha(0)
+			RightChatBackgroundEditBox:SetAlpha(0)
+			RightChatBackgroundEditBox.text:SetAlpha(0)
+			TukuiChatBackgroundButton:SetBackdropColor(0.68,0.14,0.14,1)
+		else
+			LeftChatBackgroundEditBox:Enable()
+			RightChatBackgroundEditBox:Enable()
+			LeftChatBackgroundEditBox:SetAlpha(1)
+			LeftChatBackgroundEditBox.text:SetAlpha(1)
+			RightChatBackgroundEditBox:SetAlpha(1)
+			RightChatBackgroundEditBox.text:SetAlpha(1)
+			U.EnableOption("TukuiChatBackground")
+			TukuiChatBackgroundButton:SetBackdropColor(0.11,0.66,0.11,1)
+		end
+	end)
+
+if not TukuiChatBackgroundLeft then
+	LeftChatBackgroundEditBox:Disable()
+	RightChatBackgroundEditBox:Disable()
+	LeftChatBackgroundEditBox:SetAlpha(0)
+	LeftChatBackgroundEditBox.text:SetAlpha(0)
+	RightChatBackgroundEditBox:SetAlpha(0)
+	RightChatBackgroundEditBox.text:SetAlpha(0)
+	SkinOptions2.text3 = SkinOptions2:CreateFontString(nil, "OVERLAY")
+	SkinOptions2.text3:SetFont(UIFont, 14, "OUTLINE")
+	SkinOptions2.text3:SetPoint("BOTTOM", SkinOptions2, 0, 80)
+	SkinOptions2.text3:SetText("You must have Chat Backgrounds Enabled in Tukui. \n\n Tukui -> Chat -> Enable Chat Panel Background")
+end
+
+if (U.CheckOption("TukuiChatBackground")) then
+	ApplyLeftChatBackground()
+	ApplyRightChatBackground()
+end
+
+--Chat Background End
+
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 
 SLASH_SKINOPTIONSWINDOW1 = '/skinoptions';
