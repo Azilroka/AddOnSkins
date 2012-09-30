@@ -1,22 +1,23 @@
 if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 local U = unpack(select(2,...))
-if IsAddOnLoaded("TomTom") then if TomTomBlock then TomTomBlock:SetTemplate("Transparent") end end
-if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
-if IsAddOnLoaded("VengeanceStatus") then U.SkinStatusBar(VengeanceStatus_StatusBar) end
+local MiscFixes = CreateFrame("Frame")
+	MiscFixes:RegisterEvent("PLAYER_ENTERING_WORLD")
+	MiscFixes:SetScript("OnEvent", function(self)
+
+	if IsAddOnLoaded("TomTom") then if TomTomBlock then TomTomBlock:SetTemplate("Transparent") end end
+	if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
+	if IsAddOnLoaded("VengeanceStatus") then U.SkinStatusBar(VengeanceStatus_StatusBar) end
+
 LoadAddOn("acb_CastBar")
 if IsAddOnLoaded("acb_CastBar") then
-local SkinAZCastBar = CreateFrame("Frame")
-	SkinAZCastBar:RegisterEvent("PLAYER_ENTERING_WORLD")
-	SkinAZCastBar:SetScript("OnEvent", function(self)
 	AzCastBarPluginPlayer:StripTextures() AzCastBarPluginPlayer:CreateBackdrop()
 	AzCastBarPluginTarget:StripTextures() AzCastBarPluginTarget:CreateBackdrop()
 	AzCastBarPluginFocus:StripTextures() AzCastBarPluginFocus:CreateBackdrop()
 	AzCastBarPluginMirror:StripTextures() AzCastBarPluginMirror:CreateBackdrop()
 	AzCastBarPluginPet:StripTextures() AzCastBarPluginPet:CreateBackdrop()
+end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
-end
-
 -----------------------------------------
 -- Loot auto confirm
 -----------------------------------------
