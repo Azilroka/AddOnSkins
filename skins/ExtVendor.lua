@@ -36,6 +36,9 @@ local function SkinExtVendor(self)
 
 	end
 	MerchantFrame:Width(690)
+	ExtVendor_SellJunkPopup:SetTemplate("Transparent")
+	U.SkinButton(ExtVendor_SellJunkPopupYesButton)
+	U.SkinButton(ExtVendor_SellJunkPopupNoButton)
 end
 
 U.RegisterSkin(name,SkinExtVendor)
