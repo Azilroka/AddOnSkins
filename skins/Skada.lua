@@ -90,6 +90,8 @@ local function SkinSkada(self)
 			win.bargroup.button:SetFrameStrata("MEDIUM")
 			win.bargroup.button:SetFrameLevel(5)	
 			win.bargroup:SetFrameStrata("MEDIUM")
+			if U.elv then win.bargroup:SetParent(RightChatPanel) end
+			if U.tuk then win.bargroup:SetParent(TukuiChatBackgroundRight) end
 		end
 	end
 end
