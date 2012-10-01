@@ -228,6 +228,15 @@ if event == "PLAYER_ENTERING_WORLD" then
 			GameTooltip:AddDoubleLine(L['Right Click:'], 'Toggle Embedded Addon', 1, 1, 1)
 			GameTooltip:Show()
 		end)
+		RightChatToggleButton:SetScript("OnLeave", function(self, ...)
+			if E.db[self.parent:GetName()..'Faded'] then
+				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
+				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
+			end
+			GameTooltip:Hide()
+		end
+
 	end
 
 --Embed Check
