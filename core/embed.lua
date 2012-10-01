@@ -203,12 +203,12 @@ if event == "PLAYER_ENTERING_WORLD" then
 					end
 				end
 			else
-			if c.db[self.parent:GetName()..'Faded'] then
-				c.db[self.parent:GetName()..'Faded'] = nil
+			if E.db[self.parent:GetName()..'Faded'] then
+				E.db[self.parent:GetName()..'Faded'] = nil
 				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
 				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
 			else
-				c.db[self.parent:GetName()..'Faded'] = true
+				E.db[self.parent:GetName()..'Faded'] = true
 				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
 				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
 				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
@@ -217,6 +217,11 @@ if event == "PLAYER_ENTERING_WORLD" then
 		end)
 	
 		RightChatToggleButton:SetScript("OnEnter", function(self, ...)
+		if E.db[self.parent:GetName()..'Faded'] then
+			self.parent:Show()
+			UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
+			UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+		end
 			GameTooltip:SetOwner(self, 'ANCHOR_TOPRIGHT', 0, 4)
 			GameTooltip:ClearLines()
 			GameTooltip:AddDoubleLine(L['Left Click:'], L['Toggle Chat Frame'], 1, 1, 1)
