@@ -24,6 +24,8 @@ local function AL_OnShow(self, event, ...)
 	if AtlasLoot_PanelButton_12 then AtlasLoot_PanelButton_12:Point("LEFT", AtlasLoot_PanelButton_11, "RIGHT", 1, 0) end
 
 	AtlasLootCompareFrameSortButton_Rarity:Point("LEFT", AtlasLootCompareFrameSortButton_Name, "RIGHT", 1, 0)
+	AtlasLootCompareFrameSortButton_Rarity:Width(80)
+	AtlasLootCompareFrameSortButton_Name:Width(80)
 	AtlasLootCompareFrameSortButton_1:Point("LEFT", AtlasLootCompareFrameSortButton_Rarity, "RIGHT", 1, 0)
 	AtlasLootCompareFrameSortButton_2:Point("LEFT", AtlasLootCompareFrameSortButton_1, "RIGHT", 1, 0)
 	AtlasLootCompareFrameSortButton_3:Point("LEFT", AtlasLootCompareFrameSortButton_2, "RIGHT", 1, 0)
@@ -37,16 +39,16 @@ local function AL_OnShow(self, event, ...)
 	AtlasLootDefaultFrame_CloseButton:ClearAllPoints()
 	AtlasLootDefaultFrame_CloseButton:SetPoint("TOPRIGHT",  AtlasLootDefaultFrame, "TOPRIGHT", -5 -2)
 
-	AtlasLootDefaultFrame:SetFrameStrata("Medium")
-	AtlasLootItemsFrame:SetFrameStrata("High")
+	AtlasLootDefaultFrame:SetFrameLevel(0)
+	AtlasLootItemsFrame:SetFrameLevel(AtlasLootDefaultFrame:GetFrameLevel()+1)
 
 	for i = 1, 30 do
-		if _G["AtlasLootDefaultFrame_ScrollLine"..i] then _G["AtlasLootDefaultFrame_ScrollLine"..i]:SetFrameStrata("HIGH") end
+		if _G["AtlasLootDefaultFrame_ScrollLine"..i] then _G["AtlasLootDefaultFrame_ScrollLine"..i]:SetFrameLevel(AtlasLootDefaultFrame:GetFrameLevel()+1) end
 	end
-	AtlasLootDefaultFrame_ModuleSelect:SetFrameStrata("High")
-	AtlasLootDefaultFrame_InstanceSelect:SetFrameStrata("High")
-	AtlasLoot_AtlasInfoFrame_ToggleALButton:SetFrameStrata("High")
-	AtlasLootDefaultFrame_CompareFrame:SetFrameStrata("High")
+	AtlasLootDefaultFrame_ModuleSelect:SetFrameLevel(AtlasLootDefaultFrame:GetFrameLevel()+1)
+	AtlasLootDefaultFrame_InstanceSelect:SetFrameLevel(AtlasLootDefaultFrame:GetFrameLevel()+1)
+	AtlasLoot_AtlasInfoFrame_ToggleALButton:SetFrameLevel(AtlasLootDefaultFrame:GetFrameLevel()+1)
+	AtlasLootDefaultFrame_CompareFrame:SetFrameLevel(AtlasLootDefaultFrame:GetFrameLevel()+1)
 
 	local AL = ""
 		if AL == "" then
@@ -54,7 +56,7 @@ local function AL_OnShow(self, event, ...)
 			AtlasLootPanel:SetWidth(921)
 		end
 		
-				U.Desaturate(AtlasLootDefaultFrame_LockButton)
+	U.Desaturate(AtlasLootDefaultFrame_LockButton)
 				
 end
 
@@ -92,17 +94,14 @@ end
 
 local function Compare_OnShow(self, event, ...)
 	for i = 1, 6 do 
-		local f = _G["AtlasLootCompareFrameSortButton_"..i]
-		f:SetWidth(67.17)
+		_G["AtlasLootCompareFrameSortButton_"..i]:SetWidth(40)
 	end
 	
 	local Nine = AtlasLootCompareFrameSortButton_9
 		if Nine ~= nil then
 			Nine:SetScript("OnUpdate", Nine_IsThere)
-			else
-			end	
-		U.SkinScrollBar(AtlasLootCompareFrame_ScrollFrameItemFrameScrollBar)
-		U.SkinScrollBar(AtlasLootCompareFrame_WishlistScrollFrameScrollBar)
+		else
+		end	
 end
 
 local name = 'AtlasLootSkin'
@@ -113,7 +112,7 @@ local function SkinAL(self)
 	FrameShow:SetScript("OnUpdate", AL_OnShow)
 		
 	local CompareFrameShow = AtlasLootCompareFrame
-	CompareFrameShow:SetScript("OnUpdate", Compare_OnShow)
+	CompareFrameShow:SetScript("OnShow", Compare_OnShow)
 
 	local StripAllTextures = {
                 "AtlasLootDefaultFrame",
@@ -237,6 +236,9 @@ local function SkinAL(self)
 	local Frame = AtlasLootPanel
 	Frame.Titel:SetTextColor(23/255, 132/255, 209/255)
 	Frame.Titel:SetPoint("BOTTOM", Frame.TitelBg, "BOTTOM", 0, 40)
+
+	U.SkinScrollBar(AtlasLootCompareFrame_ScrollFrameItemFrameScrollBar)
+	U.SkinScrollBar(AtlasLootCompareFrame_WishlistScrollFrameScrollBar)
 end
 
 U.RegisterSkin(name,SkinAL)
