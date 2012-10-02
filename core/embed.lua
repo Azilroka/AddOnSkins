@@ -52,19 +52,25 @@ if event == "PLAYER_ENTERING_WORLD" then
 		end
 		EmbedToggleButton:SetScript("OnClick", function(self, btn)
 			if btn == 'LeftButton' then
+			if TukuiChatBackgroundLeft then
 			if not InCombatLockdown() then
 				if TukuiInfoRight.Faded then
 					TukuiInfoRight.Faded = nil
 					TukuiChatBackgroundRight:Show()
+					TukuiTabsRightBackground:Show()
 					UIFrameFadeIn(TukuiInfoRight, 0.2, TukuiInfoRight:GetAlpha(), 1)
+					UIFrameFadeIn(TukuiTabsRightBackground, 0.2, TukuiTabsRightBackground:GetAlpha(), 1)
+					UIFrameFadeIn(TukuiChatBackgroundRight, 0.2, TukuiChatBackgroundRight:GetAlpha(), 1)
 					TukuiInfoRight:Point("BOTTOM", TukuiChatBackgroundRight, "BOTTOM", 0, 5)
 				else
 					TukuiInfoRight.Faded = true
 					UIFrameFadeOut(TukuiInfoRight, 0.2, TukuiInfoRight:GetAlpha(), 0)
-					TukuiChatBackgroundRight:Hide()
 					TukuiInfoRight:Point("BOTTOM", TukuiChatBackgroundRight, "BOTTOM", UIParent:GetWidth(), 5)
+					TukuiTabsRightBackground:Hide()
+					TukuiChatBackgroundRight:Hide()
 					TukuiInfoRight.fadeInfo.finishedFunc = TukuiInfoRight.fadeFunc
 				end
+			end
 			end
 			else
 				if IsAddOnLoaded("Recount") and ((U.CheckOption("EmbedRecount")) or (U.CheckOption("EmbedRO"))) then
@@ -101,22 +107,30 @@ if event == "PLAYER_ENTERING_WORLD" then
 		LeftChatToggleButton:SetScript("OnClick", function(self, btn)
 		if not InCombatLockdown() then
 			if btn == 'LeftButton' then
+			if TukuiChatBackgroundLeft then
 				if TukuiInfoLeft.Faded then
 					TukuiInfoLeft.Faded = nil
 					TukuiChatBackgroundLeft:Show()
+					TukuiTabsLeftBackground:Show()
 					GeneralDockManager:Show()
+					if AsphyxiaUIChatBar then AsphyxiaUIChatBar:Show() end
 					UIFrameFadeIn(TukuiInfoLeft, 0.2, TukuiInfoLeft:GetAlpha(), 1)
 					UIFrameFadeIn(GeneralDockManager, 0.2, GeneralDockManager:GetAlpha(), 1)
+					UIFrameFadeIn(TukuiTabsLeftBackground, 0.2, TukuiTabsLeftBackground:GetAlpha(), 1)
+					UIFrameFadeIn(TukuiChatBackgroundLeft, 0.2, TukuiChatBackgroundLeft:GetAlpha(), 1)
 					TukuiInfoLeft:Point("BOTTOM", TukuiChatBackgroundLeft, "BOTTOM", 0, 5)
 				else
 					TukuiInfoLeft.Faded = true
 					UIFrameFadeOut(TukuiInfoLeft, 0.2, TukuiInfoLeft:GetAlpha(), 0)
 					UIFrameFadeOut(GeneralDockManager, 0.2, GeneralDockManager:GetAlpha(), 0)
+					TukuiInfoLeft:Point("BOTTOM", TukuiChatBackgroundLeft, "BOTTOM", -UIParent:GetWidth(), 5)
 					TukuiChatBackgroundLeft:Hide()
 					GeneralDockManager:Hide()
-					TukuiInfoLeft:Point("BOTTOM", TukuiChatBackgroundLeft, "BOTTOM", -UIParent:GetWidth(), 5)
+					TukuiTabsLeftBackground:Hide()
+					if AsphyxiaUIChatBar then AsphyxiaUIChatBar:Hide() end
 					TukuiInfoLeft.fadeInfo.finishedFunc = TukuiInfoLeft.fadeFunc
 				end
+			end
 			else
 				if SkinOptions:IsShown() or SkinOptions2:IsShown() or SkinOptions3:IsShown() then
 					SkinOptions:Hide()
@@ -133,49 +147,43 @@ if event == "PLAYER_ENTERING_WORLD" then
 			end
 		end
 		end)
-		for i=1, 3 do
-			chat = _G[format("ChatFrame%d", i)]
-			tab = _G[format("ChatFrame%sTab", i)]
-			chat:SetParent(TukuiChatBackgroundLeft)
-			tab:SetParent(GeneralDockManager)
-		end
-		for i=5, NUM_CHAT_WINDOWS do
-			chat = _G[format("ChatFrame%d", i)]
-			tab = _G[format("ChatFrame%sTab", i)]
-			chat:SetParent(TukuiChatBackgroundLeft)
-			tab:SetParent(GeneralDockManager)
+		if TukuiChatBackgroundLeft then
+			for i=1, 3 do
+				chat = _G[format("ChatFrame%d", i)]
+				tab = _G[format("ChatFrame%sTab", i)]
+				chat:SetParent(TukuiChatBackgroundLeft)
+				tab:SetParent(GeneralDockManager)
+			end
+			for i=5, NUM_CHAT_WINDOWS do
+				chat = _G[format("ChatFrame%d", i)]
+				tab = _G[format("ChatFrame%sTab", i)]
+				chat:SetParent(TukuiChatBackgroundLeft)
+				tab:SetParent(GeneralDockManager)
+			end
 		end
 		EmbedToggleButton:SetScript("OnEnter", function(self, ...)
-		if not InCombatLockdown() then
 			UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
 			GameTooltip:SetOwner(self, 'ANCHOR_TOPRIGHT', 0, 4)
 			GameTooltip:ClearLines()
-			GameTooltip:AddDoubleLine('Left Click:', 'Toggle Right Chat Panel', 1, 1, 1)
+			if TukuiChatBackgroundLeft then GameTooltip:AddDoubleLine('Left Click:', 'Toggle Right Chat Panel', 1, 1, 1) end
 			GameTooltip:AddDoubleLine('Right Click:', 'Toggle Embedded Addon', 1, 1, 1)
 			GameTooltip:Show()
-		end
 		end)
 		EmbedToggleButton:SetScript("OnLeave", function(self, ...)
-		if not InCombatLockdown() then
 			UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
 			GameTooltip:Hide()
-		end
 		end)
 		LeftChatToggleButton:SetScript("OnEnter", function(self, ...)
-		if not InCombatLockdown() then
 			UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
 			GameTooltip:SetOwner(self, 'ANCHOR_TOPRIGHT', 0, 4)
 			GameTooltip:ClearLines()
-			GameTooltip:AddDoubleLine('Left Click:', 'Toggle Left Chat Panel', 1, 1, 1)
+			if TukuiChatBackgroundLeft then GameTooltip:AddDoubleLine('Left Click:', 'Toggle Left Chat Panel', 1, 1, 1) end
 			GameTooltip:AddDoubleLine('Right Click:', 'Toggle Extra Skins/Options', 1, 1, 1)
 			GameTooltip:Show()
-		end
 		end)
 		LeftChatToggleButton:SetScript("OnLeave", function(self, ...)
-		if not InCombatLockdown() then
 			UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
 			GameTooltip:Hide()
-		end
 		end)
 	end
 	if IsAddOnLoaded("ElvUI") then
@@ -228,15 +236,6 @@ if event == "PLAYER_ENTERING_WORLD" then
 			GameTooltip:AddDoubleLine(L['Right Click:'], 'Toggle Embedded Addon', 1, 1, 1)
 			GameTooltip:Show()
 		end)
-		RightChatToggleButton:SetScript("OnLeave", function(self, ...)
-			if E.db[self.parent:GetName()..'Faded'] then
-				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
-				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
-				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
-			end
-			GameTooltip:Hide()
-		end
-
 	end
 
 --Embed Check
@@ -522,6 +521,7 @@ end
 if event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_ENTER_COMBAT" or InCombatLockdown() then
 --	print("Entering Combat")
 	if (U.CheckOption("EmbedOoC")) then
+		ChatFrame4:Hide()
 		if (IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRecount"))) then
 			Recount_MainWindow:Show()
 		end
@@ -546,6 +546,7 @@ if event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_ENTER_COMBAT" or InComba
 else
 --	print("Exiting Combat")
 	if (U.CheckOption("EmbedOoC")) then
+		ChatFrame4:Show()
 		if (IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRecount"))) then
 			Recount_MainWindow:Hide()
 		end
@@ -650,9 +651,14 @@ function EmbedRecountOmen()
 		OmenBarList:StripTextures()
 		OmenBarList:SetTemplate("Default")
 		OmenAnchor:ClearAllPoints()
-		OmenAnchor:SetFrameStrata("MEDIUM")
 		Recount:LockWindows(true)
 		Recount_MainWindow:ClearAllPoints()
+		if U.elv then OmenBarList:SetParent(RightChatPanel) end
+		if U.tuk then OmenBarList:SetParent(TukuiChatBackgroundRight) end
+		if U.elv then Recount_MainWindow:SetParent(RightChatPanel) end
+		if U.tuk then Recount_MainWindow:SetParent(TukuiChatBackgroundRight) end
+		Recount_MainWindow:SetFrameStrata("MEDIUM")
+		OmenBarList:SetFrameStrata("MEDIUM")
 		EmbedRecountOmenResize()
 		if IsAddOnLoaded("ElvUI") then hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedRecountOmenResize() end) end
 end
