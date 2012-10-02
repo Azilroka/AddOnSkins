@@ -588,10 +588,17 @@ if not TukuiChatBackgroundLeft then
 	SkinOptions2.text3:SetPoint("BOTTOM", SkinOptions2, 0, 80)
 	SkinOptions2.text3:SetText("You must have Chat Backgrounds Enabled in Tukui. \n\n Tukui -> Chat -> Enable Chat Panel Background")
 end
-
+if TukuiChatBackgroundLeft and not U.CheckOption("TukuiChatBackground") then
+	LeftChatBackgroundEditBox:Disable()
+	RightChatBackgroundEditBox:Disable()
+	LeftChatBackgroundEditBox:SetAlpha(0)
+	LeftChatBackgroundEditBox.text:SetAlpha(0)
+	RightChatBackgroundEditBox:SetAlpha(0)
+	RightChatBackgroundEditBox.text:SetAlpha(0)
+end
 if (U.CheckOption("TukuiChatBackground")) then
-	ApplyLeftChatBackground()
-	ApplyRightChatBackground()
+	if TukuiChatBackgroundLeft then	ApplyLeftChatBackground() end
+	if TukuiChatBackgroundRight then ApplyRightChatBackground() end
 end
 
 --Chat Background End
