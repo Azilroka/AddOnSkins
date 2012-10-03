@@ -265,6 +265,4 @@ UISkinMinimapButtons:SetScript("OnEvent", function(self, event)
 	for i = 1, Minimap:GetNumChildren() do
 		SkinButton(select(i, Minimap:GetChildren()))
 	end
-
-	self = nil
 end )
