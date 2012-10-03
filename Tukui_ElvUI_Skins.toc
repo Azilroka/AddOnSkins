@@ -1,5 +1,5 @@
 ## Interface: 50001
-## Title: |cffC495DDTukui|r & |cff1784d1ElvUI |rSkin Options
+## Title: |cffC495DDTukui|r & |cff1784d1ElvUI |rSkin/Options
 ## Version: 3.14
 ## Author: See Credits
 ## OptionalDeps: Tukui, ElvUI, Ace3, ElvUI_SLE
