@@ -16,8 +16,16 @@ if IsAddOnLoaded("acb_CastBar") then
 	AzCastBarPluginMirror:StripTextures() AzCastBarPluginMirror:CreateBackdrop()
 	AzCastBarPluginPet:StripTextures() AzCastBarPluginPet:CreateBackdrop()
 end
+--if TukuiPlayer_Experience then
+--	TukuiPlayer_Experience:ClearAllPoints()
+--	TukuiPlayer_Experience:Point('BOTTOM', InvTukuiActionBarBackground, 'TOP', 0, 4)
+--	TukuiPlayer_Experience:Height(8)
+--	TukuiPlayer_Experience:SetFrameStrata("BACKGROUND")
+--end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
+
+
 -----------------------------------------
 -- Loot auto confirm
 -----------------------------------------
@@ -75,6 +83,124 @@ end
 function DisableLootIcons()
 	ChatFrame_RemoveMessageEventFilter("CHAT_MSG_LOOT", AddLootIcons)
 end
+
+
+--local T, C, L, G = unpack(Tukui)
+
+local _
+
+----------------------------------------
+-- Credit to PetBattleQualityGlow addon
+----------------------------------------
+
+local function GetPetDumpList(targetID)
+	local returned = nil
+
+	for i=1,C_PetJournal.GetNumPets(false) do 
+		id,speciesID,_,_,_,_,_,n,_,_,_,d=C_PetJournal.GetPetInfoByIndex(i)
+		
+		if speciesID == targetID then
+			if returned == nil then
+				returned = C_PetJournal.GetBattlePetLink(id)
+			else
+				returned = returned..", "..C_PetJournal.GetBattlePetLink(id)
+			end
+		end
+	end
+	
+	return returned
+end
+
+local function GetZoneDumpList()
+	local returned = nil
+	local x={}
+	
+	for i=1,C_PetJournal.GetNumPets(false) do 
+		id,speciesID,_,_,_,_,_,n,_,_,_,d=C_PetJournal.GetPetInfoByIndex(i)
+		
+		if string.find(d, GetZoneText()) and not x[n] then
+			if id>0 then
+				if returned == nil then returned = C_PetJournal.GetBattlePetLink(id) else returned = returned..", "..C_PetJournal.GetBattlePetLink(id) end
+			else
+				if returned == nil then returned = n else returned = returned..", "..n end
+				x[n]=1
+			end
+		end
+	end
+	
+	return returned
+end
+
+local function PetDump()
+	local isWildPetBattle = (C_PetBattles.IsInBattle() and C_PetBattles.IsWildBattle())
+	
+	if (isWildPetBattle) then 
+		local activePet = C_PetBattles.GetActivePet(LE_BATTLE_PET_ENEMY)
+		local targetID = C_PetBattles.GetPetSpeciesID(LE_BATTLE_PET_ENEMY, activePet)
+		
+		local ownedDump = GetPetDumpList(targetID)
+--		if ownedDump == nil then print("You do not own this pet.") else print("Owned: "..ownedDump) end
+		if ownedDump == nil then RaidNotice_AddMessage(RaidWarningFrame, "You do not own this pet.", ChatTypeInfo["RAID_WARNING"]) else RaidNotice_AddMessage(RaidWarningFrame, "Owned: "..ownedDump, ChatTypeInfo["RAID_WARNING"]) end
+	else
+		local zoneDump = GetZoneDumpList()
+		if zoneDump ~= nil then print("Zone: "..GetZoneDumpList()) end
+	end
+end
+
+function KyleuiPetBattleGlow_Update(self)
+	-- There must be a petOwner and a petIndex
+	if (not self.petOwner) or (not self.petIndex) then return end
+	
+	
+	-- Check if this is the Tooltip
+	local isTooltip = false
+	if (self:GetName() == "PetBattlePrimaryUnitTooltip") then isTooltip = true end
+	
+	-- if not isTooltip then
+		-- local species = C_PetBattles.GetPetSpeciesID(self.petOwner, self.petIndex)
+		-- if not species then
+			-- print("Fighting unknown species!")
+		-- else
+			-- print("Fighting species "..species)
+		-- end
+	-- end
+	
+	-- Set the color for the Glow
+	local nQuality = C_PetBattles.GetBreedQuality(self.petOwner, self.petIndex) - 1
+	local r, g, b, hex = GetItemQualityColor(nQuality)
+	
+	if self.petOwner == LE_BATTLE_PET_ENEMY then
+		if self.IconBackdrop then
+			self.IconBackdrop:SetBackdropBorderColor(r,g,b)
+			self.IconBackdrop:SetFrameLevel(2)
+		else
+			self:SetBackdropBorderColor(r,g,b)
+		end
+	end
+	
+	-- Color the non-active Health Bars with the Quality color
+	if (self.ActualHealthBar) and (not isTooltip) then
+		if (self.petIndex ~= 1) then
+			-- Fix by: Nullberri
+			-- self.ActualHealthBar:SetVertexColor(r, g, b)
+			if (self.petIndex ~= C_PetBattles.GetActivePet(self.petOwner)) then
+				self.ActualHealthBar:SetVertexColor(r, g, b)
+			else
+				self.ActualHealthBar:SetVertexColor(0, 1, 0)
+			end
+		end
+	end
+end
+
+SLASH_KYLEPETDUMP1 = "/bp"
+SLASH_KYLEPETDUMP2 = "/battlepetdump"
+SlashCmdList.KYLEPETDUMP = function()
+	PetDump(nil)
+end
+
+hooksecurefunc("PetBattleFrame_Display", PetDump)
+hooksecurefunc("PetBattleUnitFrame_UpdateDisplay", KyleuiPetBattleGlow_Update)
+
 
 --Minimap Button Skinning thanks to Sinaris
 

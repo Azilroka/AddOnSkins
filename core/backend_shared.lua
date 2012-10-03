@@ -228,4 +228,8 @@ U.Skins = {
 		["buttonText"] = "Zygor",
 		["addon"] = "ZygorGuidesViewer"
 	},
+	["PetBattleTeamsSkin"] = {
+		["buttonText"] = "PetBattleTeams",
+		["addon"] = "PetBattleTeams"
+	},
 }
