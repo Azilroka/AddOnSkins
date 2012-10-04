@@ -42,7 +42,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 		EmbedToggleButton:FontString("text", c["media"].pixelfont, 14, "MONOCHROMEOUTLINE")
 		EmbedToggleButton.text:SetText(">")
 		EmbedToggleButton.text:SetPoint("CENTER", 2, 2)
-		EmbedToggleButton:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -28, 22)
+		if TukuiChatBackgroundRight then EmbedToggleButton:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -28, 22) else EmbedToggleButton:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -38, 22) end
 		if IsAddOnLoaded("AsphyxiaUI") then EmbedToggleButton:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -9, 9) end
 		EmbedToggleButton:RegisterForClicks("LeftButtonDown", "RightButtonDown");
 		UIFrameFadeOut(EmbedToggleButton, 0.2, EmbedToggleButton:GetAlpha(), 0)
@@ -101,7 +101,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 		LeftChatToggleButton:FontString("text", c["media"].pixelfont, 14, "MONOCHROMEOUTLINE")
 		LeftChatToggleButton.text:SetText("<")
 		LeftChatToggleButton.text:SetPoint("CENTER", 2, 2)
-		LeftChatToggleButton:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 22)
+		if TukuiChatBackgroundLeft then LeftChatToggleButton:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 22) else LeftChatToggleButton:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 38, 22) end
 		if IsAddOnLoaded("AsphyxiaUI") then LeftChatToggleButton:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 9, 9) end
 		LeftChatToggleButton:RegisterForClicks("LeftButtonDown", "RightButtonDown");
 		UIFrameFadeOut(LeftChatToggleButton, 0.2, LeftChatToggleButton:GetAlpha(), 0)
