@@ -498,6 +498,8 @@ function ApplyLeftChatBackground()
 		TukuiChatBackgroundLeft.bg = TukuiChatBackgroundLeft:CreateTexture(nil, 'LOW')
 		TukuiChatBackgroundLeft.bg:SetInside()
 	end
+	if TukuiLineToABLeft then TukuiLineToABLeft:Hide() end
+	if TukuiLineToABLeftAlt then TukuiLineToABLeftAlt:Hide() end
 	TukuiChatBackgroundLeft.bg:SetTexture(UISkinOptions.LeftChatBackground)
 	TukuiChatBackgroundLeft.bg:SetAlpha(0.7)
 	TukuiInfoLeft:StripTextures()
@@ -537,6 +539,8 @@ function ApplyRightChatBackground()
 		TukuiChatBackgroundRight.bg = TukuiChatBackgroundRight:CreateTexture(nil, 'LOW')
 		TukuiChatBackgroundRight.bg:SetInside()
 	end
+	if TukuiLineToABRight then TukuiLineToABRight:Hide() end
+	if TukuiLineToABRightAlt then TukuiLineToABRightAlt:Hide() end
 	TukuiChatBackgroundRight.bg:SetTexture(UISkinOptions.RightChatBackground)
 	TukuiChatBackgroundRight.bg:SetAlpha(0.7)
 	TukuiInfoRight:StripTextures()

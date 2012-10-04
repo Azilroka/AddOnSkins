@@ -42,7 +42,8 @@ if event == "PLAYER_ENTERING_WORLD" then
 		EmbedToggleButton:FontString("text", c["media"].pixelfont, 14, "MONOCHROMEOUTLINE")
 		EmbedToggleButton.text:SetText(">")
 		EmbedToggleButton.text:SetPoint("CENTER", 2, 2)
-		EmbedToggleButton:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -9, 9)
+		EmbedToggleButton:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -28, 22)
+		if IsAddOnLoaded("AsphyxiaUI") then EmbedToggleButton:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -9, 9) end
 		EmbedToggleButton:RegisterForClicks("LeftButtonDown", "RightButtonDown");
 		UIFrameFadeOut(EmbedToggleButton, 0.2, EmbedToggleButton:GetAlpha(), 0)
 		if AsphyxiaUILayoutSwitchButton then AsphyxiaUILayoutSwitchButton:SetParent(TukuiChatBackgroundRight) AsphyxiaUILayoutSwitchIcon:SetParent(AsphyxiaUILayoutSwitchButton) end
@@ -57,16 +58,15 @@ if event == "PLAYER_ENTERING_WORLD" then
 				if TukuiInfoRight.Faded then
 					TukuiInfoRight.Faded = nil
 					TukuiChatBackgroundRight:Show()
-					TukuiTabsRightBackground:Show()
 					UIFrameFadeIn(TukuiInfoRight, 0.2, TukuiInfoRight:GetAlpha(), 1)
-					UIFrameFadeIn(TukuiTabsRightBackground, 0.2, TukuiTabsRightBackground:GetAlpha(), 1)
 					UIFrameFadeIn(TukuiChatBackgroundRight, 0.2, TukuiChatBackgroundRight:GetAlpha(), 1)
 					TukuiInfoRight:Point("BOTTOM", TukuiChatBackgroundRight, "BOTTOM", 0, 5)
 				else
 					TukuiInfoRight.Faded = true
+					TukuiChatBackgroundRight:SetParent(UIParent)
+					TukuiChatBackgroundRight:SetFrameStrata("Background")
 					UIFrameFadeOut(TukuiInfoRight, 0.2, TukuiInfoRight:GetAlpha(), 0)
 					TukuiInfoRight:Point("BOTTOM", TukuiChatBackgroundRight, "BOTTOM", UIParent:GetWidth(), 5)
-					TukuiTabsRightBackground:Hide()
 					TukuiChatBackgroundRight:Hide()
 					TukuiInfoRight.fadeInfo.finishedFunc = TukuiInfoRight.fadeFunc
 				end
@@ -101,7 +101,8 @@ if event == "PLAYER_ENTERING_WORLD" then
 		LeftChatToggleButton:FontString("text", c["media"].pixelfont, 14, "MONOCHROMEOUTLINE")
 		LeftChatToggleButton.text:SetText("<")
 		LeftChatToggleButton.text:SetPoint("CENTER", 2, 2)
-		LeftChatToggleButton:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 9, 9)
+		LeftChatToggleButton:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 22)
+		if IsAddOnLoaded("AsphyxiaUI") then LeftChatToggleButton:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 9, 9) end
 		LeftChatToggleButton:RegisterForClicks("LeftButtonDown", "RightButtonDown");
 		UIFrameFadeOut(LeftChatToggleButton, 0.2, LeftChatToggleButton:GetAlpha(), 0)
 		LeftChatToggleButton:SetScript("OnClick", function(self, btn)
@@ -111,22 +112,21 @@ if event == "PLAYER_ENTERING_WORLD" then
 				if TukuiInfoLeft.Faded then
 					TukuiInfoLeft.Faded = nil
 					TukuiChatBackgroundLeft:Show()
-					TukuiTabsLeftBackground:Show()
 					GeneralDockManager:Show()
 					if AsphyxiaUIChatBar then AsphyxiaUIChatBar:Show() end
 					UIFrameFadeIn(TukuiInfoLeft, 0.2, TukuiInfoLeft:GetAlpha(), 1)
 					UIFrameFadeIn(GeneralDockManager, 0.2, GeneralDockManager:GetAlpha(), 1)
-					UIFrameFadeIn(TukuiTabsLeftBackground, 0.2, TukuiTabsLeftBackground:GetAlpha(), 1)
 					UIFrameFadeIn(TukuiChatBackgroundLeft, 0.2, TukuiChatBackgroundLeft:GetAlpha(), 1)
 					TukuiInfoLeft:Point("BOTTOM", TukuiChatBackgroundLeft, "BOTTOM", 0, 5)
 				else
 					TukuiInfoLeft.Faded = true
+					TukuiChatBackgroundLeft:SetParent(UIParent)
+					TukuiChatBackgroundLeft:SetFrameStrata("Background")
+					TukuiInfoLeft:Point("BOTTOM", TukuiChatBackgroundLeft, "BOTTOM", -UIParent:GetWidth(), 5)
 					UIFrameFadeOut(TukuiInfoLeft, 0.2, TukuiInfoLeft:GetAlpha(), 0)
 					UIFrameFadeOut(GeneralDockManager, 0.2, GeneralDockManager:GetAlpha(), 0)
-					TukuiInfoLeft:Point("BOTTOM", TukuiChatBackgroundLeft, "BOTTOM", -UIParent:GetWidth(), 5)
 					TukuiChatBackgroundLeft:Hide()
 					GeneralDockManager:Hide()
-					TukuiTabsLeftBackground:Hide()
 					if AsphyxiaUIChatBar then AsphyxiaUIChatBar:Hide() end
 					TukuiInfoLeft.fadeInfo.finishedFunc = TukuiInfoLeft.fadeFunc
 				end
