@@ -1,6 +1,9 @@
 if not IsAddOnLoaded("ElvUI") then return end
 if not IsAddOnLoaded("BigWigs") then return end
 local U = unpack(select(2,...))
+local s = U.s
+local c = U.c
+
 local name = "BigWigsSkin"
 local function SkinBigWigs(self)
 	local s = U.s
@@ -111,12 +114,12 @@ local function SkinBigWigs(self)
 		end
 
 		-- setup timer and bar name fonts and positions
-		bar.candyBarLabel:FontTemplate(nil, nil, 'OUTLINE')
+		bar.candyBarLabel:FontTemplate([[Interface\AddOns\ElvUI\media\fonts\Homespun.ttf]], 10, 'MONOCHROMEOUTLINE')
 		bar.candyBarLabel:SetJustifyH("LEFT")
 		bar.candyBarLabel:ClearAllPoints()
 		bar.candyBarLabel:Point("LEFT", bar, "LEFT", 4, 0)
 
-		bar.candyBarDuration:FontTemplate(nil, nil, 'OUTLINE')
+		bar.candyBarDuration:FontTemplate([[Interface\AddOns\ElvUI\media\fonts\Homespun.ttf]], 10, 'MONOCHROMEOUTLINE')
 		bar.candyBarDuration:SetJustifyH("RIGHT")
 		bar.candyBarDuration:ClearAllPoints()
 		bar.candyBarDuration:Point("RIGHT", bar, "RIGHT", -4, 0)
@@ -141,33 +144,26 @@ local function SkinBigWigs(self)
 		bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
 		bar.candyBarIconFrame:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 	end
-
-	--[[
-		BigWigs load process
-		-BigWigs
-		-BigWigs_Core (Global 'BigWigs' is set here)
-		-BigWigs_Plugins
-		
-		Note to self: BigWigs_Core as an OptionalDep breaks ElvUI saved variables if BigWigs isn't loaded.
-	]]
-	local function RegisterStyle()
-		if not BigWigs then return end
-		local bars = BigWigs:GetPlugin("Bars", true)
-		local prox = BigWigs:GetPlugin("Proximity", true)
-		if bars then
-		bars:RegisterBarStyle("ElvUI", {
-			apiVersion = 1,
-			version = 1,
-			GetSpacing = function(bar) return 8 end,
-			ApplyStyle = applystyle,
-			BarStopped = freestyle,
-			GetStyleName = function() return "ElvUI" end,
-		})
-		end
-		hooksecurefunc(BigWigs.pluginCore.modules.Proximity, "RestyleWindow", function() BigWigsProximityAnchor:SetTemplate("Transparent") end)
-	end
-
-	s:RegisterSkin('BigWigs_Plugins', RegisterStyle, nil, true)
+	--Backup if the new events dont work [ DONT UNCOMMENT ]
+	--self:SetScript("OnEvent", function(self, event) if event == "ZONE_CHANGED" or event == "ZONE_CHANGED_INDOORS" or event == "ZONE_CHANGED_NEW_AREA" then RegisterStyle() end)
+local function RegisterStyle()
+	if not BigWigs then return end
+	local bars = BigWigs:GetPlugin("Bars", true)
+	local prox = BigWigs:GetPlugin("Proximity", true)
+	if bars then
+	bars:RegisterBarStyle("ElvUI", {
+		apiVersion = 1,
+		version = 1,
+		GetSpacing = function(bar) return 8 end,
+		ApplyStyle = applystyle,
+		BarStopped = freestyle,
+		GetStyleName = function() return "ElvUI" end,
+	})
+end
+	hooksecurefunc(BigWigs.pluginCore.modules.Proximity, "RestyleWindow", function() BigWigsProximityAnchor:SetTemplate("Transparent") end)
+end
+s:RegisterSkin('BigWigs_Plugins', RegisterStyle, nil, true)
 end
 
-U.RegisterSkin(name,SkinBigWigs)
+U.RegisterSkin(name,SkinBigWigs,"ZONE_CHANGED","ZONE_CHANGED_INDOORS","ZONE_CHANGED_NEW_AREA")
+

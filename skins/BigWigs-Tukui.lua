@@ -259,4 +259,4 @@ local function SkinBigWigs(self)
 	}
 end
 
-U.RegisterSkin(name,SkinBigWigs)
+U.RegisterSkin(name,SkinBigWigs,"ZONE_CHANGED","ZONE_CHANGED_INDOORS","ZONE_CHANGED_NEW_AREA")
