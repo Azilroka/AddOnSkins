@@ -16,7 +16,7 @@ if IsAddOnLoaded("acb_CastBar") then
 	AzCastBarPluginMirror:StripTextures() AzCastBarPluginMirror:CreateBackdrop()
 	AzCastBarPluginPet:StripTextures() AzCastBarPluginPet:CreateBackdrop()
 end
---if TukuiPlayer_Experience then
+--if (IsAddOnLoaded("AsphyxiaUI") and TukuiPlayer_Experience) then
 --	TukuiPlayer_Experience:ClearAllPoints()
 --	TukuiPlayer_Experience:Point('BOTTOM', InvTukuiActionBarBackground, 'TOP', 0, 4)
 --	TukuiPlayer_Experience:Height(8)
@@ -265,4 +265,6 @@ UISkinMinimapButtons:SetScript("OnEvent", function(self, event)
 	for i = 1, Minimap:GetNumChildren() do
 		SkinButton(select(i, Minimap:GetChildren()))
 	end
+
+	self = nil
 end )

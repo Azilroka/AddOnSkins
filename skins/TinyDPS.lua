@@ -60,12 +60,14 @@ function EmbedTDPS()
 	tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
 	tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
 if U.elv then
+	if RightChatPanel then tdpsFrame:SetParent(RightChatPanel) end
 	tdpsFont.name = U.x.datatext_font
 	tdpsFont.size = 12
 	tdpsFont.outline = "THIN"
 	tdpsFont.shadow = 0
 end
 if U.tuk then
+	if TukuiChatBackgroundRight then tdpsFrame:SetParent(TukuiChatBackgroundRight) end
 	local c = U.c
 	tdpsFont.name = c["media"].pixelfont
 	tdpsFont.size = 12

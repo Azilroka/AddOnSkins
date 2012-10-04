@@ -653,10 +653,18 @@ function EmbedRecountOmen()
 		OmenAnchor:ClearAllPoints()
 		Recount:LockWindows(true)
 		Recount_MainWindow:ClearAllPoints()
-		if U.elv then OmenBarList:SetParent(RightChatPanel) end
-		if U.tuk then OmenBarList:SetParent(TukuiChatBackgroundRight) end
-		if U.elv then Recount_MainWindow:SetParent(RightChatPanel) end
-		if U.tuk then Recount_MainWindow:SetParent(TukuiChatBackgroundRight) end
+		if U.elv then
+			if RightChatPanel then
+				OmenBarList:SetParent(RightChatPanel)
+				Recount_MainWindow:SetParent(RightChatPanel)
+			end
+		end
+		if U.tuk then
+			if TukuiChatBackgroundRight then
+				OmenBarList:SetParent(TukuiChatBackgroundRight)
+				Recount_MainWindow:SetParent(TukuiChatBackgroundRight)
+			end
+		end
 		Recount_MainWindow:SetFrameStrata("MEDIUM")
 		OmenBarList:SetFrameStrata("MEDIUM")
 		EmbedRecountOmenResize()
