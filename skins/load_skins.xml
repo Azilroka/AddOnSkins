@@ -65,5 +65,4 @@
 	<Script file="Wholly.lua"/>
 	<Script file="WowLua.lua"/>
 	<Script file="Zygor.lua"/>
-	<Script file="stAddonManager.lua"/>
 </Ui>
