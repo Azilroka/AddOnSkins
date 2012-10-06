@@ -31,14 +31,19 @@ local function SkinSexyCooldownBar(bar)
 		bar:ClearAllPoints()
 		if IsAddOnLoaded("ElvUI") then
 			bar:Point('BOTTOM', ElvUI_Bar1, 'TOP', 0, 1)
+			bar:CreateShadow()
 			bar:SetHeight(ElvUI_Bar1:GetHeight())
 			bar:SetWidth(ElvUI_Bar1:GetWidth())
 		else
 			bar:Point('BOTTOM', InvTukuiActionBarBackground, 'TOP', 0, 1)
+			if(U.CheckOption("AzilSettings")) then bar:Point('BOTTOM', InvTukuiActionBarBackground, 'TOP', 0, 16) end
+			bar:CreateShadow()
 			bar:SetHeight(ActionButton1:GetHeight())
 			bar:SetWidth(TukuiBar1:GetWidth())
 		end
 		bar:EnableMouse(false)
+		PetBattleFrame:HookScript("OnShow",function() bar:Hide() end)
+		PetBattleFrame:HookScript("OnHide",function() bar:Show() end)
 	end
 end
 
