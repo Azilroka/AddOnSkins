@@ -2,27 +2,41 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
 local U = unpack(select(2,...))
 local MiscFixes = CreateFrame("Frame")
 	MiscFixes:RegisterEvent("PLAYER_ENTERING_WORLD")
-	MiscFixes:SetScript("OnEvent", function(self)
+	MiscFixes:RegisterEvent("PLAYER_REGEN_ENABLED")
+	MiscFixes:RegisterEvent("PLAYER_REGEN_DISABLED")
+	MiscFixes:SetScript("OnEvent", function(self, event)
+	if event == "PLAYER_REGEN_ENABLED" or event == "PLAYER_REGEN_DISABLED" then
+		if IsAddOnLoaded("tCombo") then
+			tComboPoints:SetTemplate("Transparent")
+			tComboEnergyBar:SetTemplate("Transparent")
+		end
+	else
 
 	if IsAddOnLoaded("TomTom") then if TomTomBlock then TomTomBlock:SetTemplate("Transparent") end end
 	if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
 	if IsAddOnLoaded("VengeanceStatus") then U.SkinStatusBar(VengeanceStatus_StatusBar) end
+	
+	LoadAddOn("acb_CastBar")
+	if IsAddOnLoaded("acb_CastBar") then
+		AzCastBarPluginPlayer:StripTextures() AzCastBarPluginPlayer:CreateBackdrop()
+		AzCastBarPluginTarget:StripTextures() AzCastBarPluginTarget:CreateBackdrop()
+		AzCastBarPluginFocus:StripTextures() AzCastBarPluginFocus:CreateBackdrop()
+		AzCastBarPluginMirror:StripTextures() AzCastBarPluginMirror:CreateBackdrop()
+		AzCastBarPluginPet:StripTextures() AzCastBarPluginPet:CreateBackdrop()
+	end
 
-LoadAddOn("acb_CastBar")
-if IsAddOnLoaded("acb_CastBar") then
-	AzCastBarPluginPlayer:StripTextures() AzCastBarPluginPlayer:CreateBackdrop()
-	AzCastBarPluginTarget:StripTextures() AzCastBarPluginTarget:CreateBackdrop()
-	AzCastBarPluginFocus:StripTextures() AzCastBarPluginFocus:CreateBackdrop()
-	AzCastBarPluginMirror:StripTextures() AzCastBarPluginMirror:CreateBackdrop()
-	AzCastBarPluginPet:StripTextures() AzCastBarPluginPet:CreateBackdrop()
-end
---if (IsAddOnLoaded("AsphyxiaUI") and TukuiPlayer_Experience) then
---	TukuiPlayer_Experience:ClearAllPoints()
---	TukuiPlayer_Experience:Point('BOTTOM', InvTukuiActionBarBackground, 'TOP', 0, 4)
---	TukuiPlayer_Experience:Height(8)
---	TukuiPlayer_Experience:SetFrameStrata("BACKGROUND")
---end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	if (U.CheckOption("AzilSettings")) then
+		TukuiPlayer_Experience:ClearAllPoints()
+		TukuiPlayer_Experience:Point('BOTTOM', InvTukuiActionBarBackground, 'TOP', 0, 4)
+		TukuiPlayer_Experience:Height(8)
+		TukuiPlayer_Experience:SetFrameStrata("BACKGROUND")
+
+		if (select(2, UnitClass("player")) == "ROGUE") then
+			TukuiStance:SetParent(TukuiUIHider)
+		end
+	end
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	end
 end)
 
 
