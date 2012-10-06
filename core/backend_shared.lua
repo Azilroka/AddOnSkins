@@ -193,10 +193,6 @@ U.Skins = {
 	["SpySkin"] = {
 		["addon"] = "Spy"
 	},
-	["stAddonManagerSkin"] = {
-		["buttonText"] = "stAddonManager",
-		["addon"] = "stAddonmanager"
-	},
 	["SwatterSkin"] = {
 		["buttonText"] = "Swatter",
 		["addon"] = "!Swatter"
