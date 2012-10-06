@@ -44,6 +44,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 		EmbedToggleButton.text:SetPoint("CENTER", 2, 2)
 		if TukuiChatBackgroundRight then EmbedToggleButton:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -28, 22) else EmbedToggleButton:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -38, 22) end
 		if IsAddOnLoaded("AsphyxiaUI") then EmbedToggleButton:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -9, 9) end
+		if IsAddOnLoaded("FlyingUI") then EmbedToggleButton:Point("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", -10, 9) end
 		EmbedToggleButton:RegisterForClicks("LeftButtonDown", "RightButtonDown");
 		UIFrameFadeOut(EmbedToggleButton, 0.2, EmbedToggleButton:GetAlpha(), 0)
 		if AsphyxiaUILayoutSwitchButton then AsphyxiaUILayoutSwitchButton:SetParent(TukuiChatBackgroundRight) AsphyxiaUILayoutSwitchIcon:SetParent(AsphyxiaUILayoutSwitchButton) end
@@ -60,13 +61,15 @@ if event == "PLAYER_ENTERING_WORLD" then
 					TukuiChatBackgroundRight:Show()
 					UIFrameFadeIn(TukuiInfoRight, 0.2, TukuiInfoRight:GetAlpha(), 1)
 					UIFrameFadeIn(TukuiChatBackgroundRight, 0.2, TukuiChatBackgroundRight:GetAlpha(), 1)
-					TukuiInfoRight:Point("BOTTOM", TukuiChatBackgroundRight, "BOTTOM", 0, 5)
+					TukuiInfoRight:SetPoint("BOTTOM", TukuiChatBackgroundRight, "BOTTOM", 0, 5)
 				else
 					TukuiInfoRight.Faded = true
 					TukuiChatBackgroundRight:SetParent(UIParent)
 					TukuiChatBackgroundRight:SetFrameStrata("Background")
+					TukuiChatBackgroundRight:ClearAllPoints()
+					TukuiInfoRight:ClearAllPoints()
 					UIFrameFadeOut(TukuiInfoRight, 0.2, TukuiInfoRight:GetAlpha(), 0)
-					TukuiInfoRight:Point("BOTTOM", TukuiChatBackgroundRight, "BOTTOM", UIParent:GetWidth(), 5)
+					TukuiInfoRight:SetPoint("BOTTOM", TukuiChatBackgroundRight, "BOTTOM", UIParent:GetWidth(), 5)
 					TukuiChatBackgroundRight:Hide()
 					TukuiInfoRight.fadeInfo.finishedFunc = TukuiInfoRight.fadeFunc
 				end
@@ -103,6 +106,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 		LeftChatToggleButton.text:SetPoint("CENTER", 2, 2)
 		if TukuiChatBackgroundLeft then LeftChatToggleButton:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 28, 22) else LeftChatToggleButton:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 38, 22) end
 		if IsAddOnLoaded("AsphyxiaUI") then LeftChatToggleButton:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 9, 9) end
+		if IsAddOnLoaded("FlyingUI") then LeftChatToggleButton:Point("BOTTOMLEFT", UIParent, "BOTTOMLEFT", 10, 9) end
 		LeftChatToggleButton:RegisterForClicks("LeftButtonDown", "RightButtonDown");
 		UIFrameFadeOut(LeftChatToggleButton, 0.2, LeftChatToggleButton:GetAlpha(), 0)
 		LeftChatToggleButton:SetScript("OnClick", function(self, btn)
@@ -122,6 +126,8 @@ if event == "PLAYER_ENTERING_WORLD" then
 					TukuiInfoLeft.Faded = true
 					TukuiChatBackgroundLeft:SetParent(UIParent)
 					TukuiChatBackgroundLeft:SetFrameStrata("Background")
+					TukuiChatBackgroundLeft:ClearAllPoints()
+					TukuiInfoLeft:ClearAllPoints()
 					TukuiInfoLeft:Point("BOTTOM", TukuiChatBackgroundLeft, "BOTTOM", -UIParent:GetWidth(), 5)
 					UIFrameFadeOut(TukuiInfoLeft, 0.2, TukuiInfoLeft:GetAlpha(), 0)
 					UIFrameFadeOut(GeneralDockManager, 0.2, GeneralDockManager:GetAlpha(), 0)
@@ -521,7 +527,7 @@ end
 if event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_ENTER_COMBAT" or InCombatLockdown() then
 --	print("Entering Combat")
 	if (U.CheckOption("EmbedOoC")) then
-		if U.elv then ChatFrame3:Hide() end
+		if U.elv then ChatFrame3Tab:Hide() end
 		if U.tuk then ChatFrame4:Hide() end
 		if (IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRecount"))) then
 			Recount_MainWindow:Show()
@@ -547,7 +553,7 @@ if event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_ENTER_COMBAT" or InComba
 else
 --	print("Exiting Combat")
 	if (U.CheckOption("EmbedOoC")) then
-		if U.elv then ChatFrame3:Show() end
+		if U.elv then ChatFrame3Tab:Show() end
 		if U.tuk then ChatFrame4:Show() end
 		if (IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRecount"))) then
 			Recount_MainWindow:Hide()
