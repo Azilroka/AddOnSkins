@@ -521,7 +521,8 @@ end
 if event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_ENTER_COMBAT" or InCombatLockdown() then
 --	print("Entering Combat")
 	if (U.CheckOption("EmbedOoC")) then
-		ChatFrame4:Hide()
+		if U.elv then ChatFrame3:Hide() end
+		if U.tuk then ChatFrame4:Hide() end
 		if (IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRecount"))) then
 			Recount_MainWindow:Show()
 		end
@@ -546,7 +547,8 @@ if event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_ENTER_COMBAT" or InComba
 else
 --	print("Exiting Combat")
 	if (U.CheckOption("EmbedOoC")) then
-		ChatFrame4:Show()
+		if U.elv then ChatFrame3:Show() end
+		if U.tuk then ChatFrame4:Show() end
 		if (IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRecount"))) then
 			Recount_MainWindow:Hide()
 		end
