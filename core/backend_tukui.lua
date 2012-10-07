@@ -321,9 +321,11 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 
 	GameMenuButtonLogout:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -38)
 	GameMenuFrame:Height(GameMenuFrame:GetHeight() + 26)
-	if IsAddOnLoaded("stAddonmanager") then  
+	if IsAddOnLoaded("stAddonmanager") then 
+		GameMenuFrame:HookScript("OnShow",function()
 		SkinOptionsButton:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -23)
 		GameMenuButtonLogout:Point("TOP", GameMenuButtonMacros, "BOTTOM", 0 , -60)
+		end)
 	end
 -- Long Button
 	--[[local function CreateButton(name,buttonText,addon,option,x,y,skinOptions2)
