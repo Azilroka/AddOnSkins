@@ -11,28 +11,27 @@ local function SkinPoMTracker(self)
 	pomtracker1:CreateBackdrop("Transparent")
 	pomtracker1:Size(85,15)
 
-	-- pomtracker2 point configuration added by MaXiMiUS
 	pomtracker2:ClearAllPoints()
-	pomtracker2:Point("TOP", pomtracker1, "BOTTOM", 0, -3)
-	pomtracker2:Size(154,20)
-
-	U.SkinFrame(pomtracker2)
+	pomtracker2:Point("TOP", pomtracker1, "BOTTOM", 0, -5)
+	pomtracker2:StripTextures(True)
+	pomtracker2:CreateBackdrop("Transparent")
 
 	pomtracker3:CreateBackdrop("Transparent")
 	pomtracker3:ClearAllPoints()
-	pomtracker3:Point("TOPLEFT", pomtracker2, "BOTTOMLEFT", 2, -12) -- Changed from 5, -10 by MaXiMiUS
-	pomtracker3:Size(150,15)
+	pomtracker3:Point("TOP", pomtrackerstatusBar, "BOTTOM", 0, -5)
+	pomtracker3:Height(15)
 
 	U.SkinButton(pomtracker3_Button1)
 
 	pomtrackerstatusBar:ClearAllPoints()
-	pomtrackerstatusBar:Point("TOPLEFT", pomtracker2, "BOTTOMLEFT", 2, -3) -- Changed from 5, -2 by MaXiMiUS
+	pomtrackerstatusBar:Point("TOP", pomtracker2, "BOTTOM", 0, -5)
 	pomtrackerstatusBar:CreateBackdrop("Transparent")
+	pomtrackerstatusBar:SetStatusBarTexture(c["media"].normTex)
 
 	for i = 1,6 do
 		U.SkinCheckBox(_G["PoMOptionFrame_CheckButton"..i])
 	end
-
+	pomtracker2:HookScript("OnUpdate", function() pomtrackerstatusBar:Width(pomtracker2:GetWidth()+1) pomtracker3:Width(pomtracker2:GetWidth()+1) end)
 end
 
 U.RegisterSkin(name,SkinPoMTracker)
