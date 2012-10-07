@@ -31,7 +31,7 @@ local function SkinPoMTracker(self)
 	for i = 1,6 do
 		U.SkinCheckBox(_G["PoMOptionFrame_CheckButton"..i])
 	end
-	pomtracker2:HookScript("OnUpdate", function() pomtrackerstatusBar:Width(pomtracker2:GetWidth()+1) pomtracker3:Width(pomtracker2:GetWidth()+1) end)
+	pomtracker2:HookScript("OnUpdate", function() pomtrackerstatusBar:Width(pomtracker2:GetWidth()) pomtracker3:Width(pomtracker2:GetWidth()) end)
 end
 
 U.RegisterSkin(name,SkinPoMTracker)
