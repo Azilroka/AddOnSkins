@@ -11,6 +11,7 @@ local MiscFixes = CreateFrame("Frame")
 			if tComboEnergyBar then tComboEnergyBar:SetTemplate("Transparent") end
 		end
 	else
+	Minimap:SetMaskTexture("Interface\\AddOns\\Tukui_ElvUI_Skins\\media\\MinimapMaskSquare")
 	if U.elv then if IsAddOnLoaded("stAddonmanager") then GameMenuFrame:HookScript("OnShow", function() U.SkinButton(GameMenuButtonAddons) end) end end
 	if IsAddOnLoaded("TomTom") then if TomTomBlock then TomTomBlock:SetTemplate("Transparent") end end
 	if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
