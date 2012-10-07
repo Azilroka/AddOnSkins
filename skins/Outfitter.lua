@@ -112,7 +112,7 @@ OutfitterFrame:HookScript("OnShow", function(self)
 	U.SkinCloseButton(OutfitterEditScriptDialog.CloseButton)
 	U.SkinTab(OutfitterEditScriptDialogTab1)
 	U.SkinTab(OutfitterEditScriptDialogTab2)
-	U.SkinDropDownBox(OutfitterEditScriptDialogPresetScript)
+	--U.SkinDropDownBox(OutfitterEditScriptDialogPresetScript)
 
 end
 
