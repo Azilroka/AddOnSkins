@@ -87,9 +87,9 @@ local function SkinSkada(self)
 		skada.backdrop:Point("BOTTOMRIGHT", skada, "BOTTOMRIGHT", 2, -2)
 		if (not U.CheckOption("SkadaBackdrop")) then skada.backdrop:Hide() end
 		if (U.CheckOption("EmbedSkada")) then
-			win.bargroup.button:SetFrameStrata("MEDIUM")
+			win.bargroup.button:SetFrameStrata("DIALOG")
 			win.bargroup.button:SetFrameLevel(5)	
-			win.bargroup:SetFrameStrata("MEDIUM")
+			win.bargroup:SetFrameStrata("DIALOG")
 			if U.elv then if RightChatPanel then win.bargroup:SetParent(RightChatPanel) end end
 			if U.tuk then if TukuiChatBackgroundRight then win.bargroup:SetParent(TukuiChatBackgroundRight) end end
 		end
