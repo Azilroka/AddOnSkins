@@ -28,9 +28,9 @@ local exceptions = {
 }
 
 P["skins"] = {
-	["LootConfirmer"] = true,
+	["LootConfirmer"] = false,
 	["UISkinMinimap"] = true,
-	["DBMSkinHalf"] = true,
+	["DBMSkinHalf"] = false,
 	["RecountBackdrop"] = true,
 	["SkadaBackdrop"] = true,
 }

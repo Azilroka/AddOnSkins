@@ -7,8 +7,12 @@ local MiscFixes = CreateFrame("Frame")
 	MiscFixes:SetScript("OnEvent", function(self, event)
 	if event == "PLAYER_REGEN_ENABLED" or event == "PLAYER_REGEN_DISABLED" then
 		if IsAddOnLoaded("tCombo") then
-			if tComboPoints then tComboPoints:SetTemplate("Transparent") end
-			if tComboEnergyBar then tComboEnergyBar:SetTemplate("Transparent") end
+			if (tComboPoints and not tComboPoints.skinned) then 
+				tComboPoints.skinned = true
+				print("Skinned Hydra's Combo Points)
+				tComboPoints:SetTemplate("Transparent")
+				tComboEnergyBar:SetTemplate("Transparent")
+			end
 		end
 	else
 	if TukuiMinimap then Minimap:SetMaskTexture(c["media"].blank) end
