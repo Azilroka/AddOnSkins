@@ -9,7 +9,6 @@ local MiscFixes = CreateFrame("Frame")
 		if IsAddOnLoaded("tCombo") then
 			if (tComboPoints and not tComboPoints.skinned) then 
 				tComboPoints.skinned = true
-				print("Skinned Hydra's Combo Points)
 				tComboPoints:SetTemplate("Transparent")
 				tComboEnergyBar:SetTemplate("Transparent")
 			end
