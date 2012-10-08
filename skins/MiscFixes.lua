@@ -4,6 +4,8 @@ local MiscFixes = CreateFrame("Frame")
 	MiscFixes:RegisterEvent("PLAYER_ENTERING_WORLD")
 	MiscFixes:RegisterEvent("PLAYER_REGEN_ENABLED")
 	MiscFixes:RegisterEvent("PLAYER_REGEN_DISABLED")
+	local s = U.s
+	local c = U.c 
 	MiscFixes:SetScript("OnEvent", function(self, event)
 	if event == "PLAYER_REGEN_ENABLED" or event == "PLAYER_REGEN_DISABLED" then
 		if IsAddOnLoaded("tCombo") then
