@@ -673,8 +673,8 @@ function EmbedRecountOmen()
 				Recount_MainWindow:SetParent(TukuiChatBackgroundRight)
 			end
 		end
-		Recount_MainWindow:SetFrameStrata("DIALOG")
-		OmenBarList:SetFrameStrata("DIALOG")
+		Recount_MainWindow:SetFrameStrata("HIGH")
+		OmenBarList:SetFrameStrata("HIGH")
 		EmbedRecountOmenResize()
 		if IsAddOnLoaded("ElvUI") then hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedRecountOmenResize() end) end
 end

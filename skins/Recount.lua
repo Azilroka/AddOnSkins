@@ -268,9 +268,9 @@ function EmbedRecount()
 	Recount_MainWindow:ClearAllPoints()
 	Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 6)
 	Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 5)
-	Recount_MainWindow:SetFrameStrata("DIALOG")
 	if U.elv then if RightChatPanel then Recount_MainWindow:SetParent(RightChatPanel) end end
 	if U.tuk then if TukuiChatBackgroundRight then Recount_MainWindow:SetParent(TukuiChatBackgroundRight) end end
+	Recount.MainWindow:SetFrameStrata("HIGH")
 end
 
 SLASH_RECOUNTEMBEDDED1, SLASH_RECOUNTEMBEDDED2 = '/er', '/embedrecount';

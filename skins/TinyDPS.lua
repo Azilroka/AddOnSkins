@@ -54,25 +54,26 @@ U.RegisterSkin(name,SkinTinyDps)
 
 function EmbedTDPS()
 	if not IsAddOnLoaded("TinyDPS") then U.DisableOption("EmbedTDPS") return end
+	if TukuiChatBackgroundRight then tdpsFrame:SetParent(TukuiChatBackgroundRight) tdpsFrame:SetFrameStrata("HIGH") end
+	if RightChatPanel then tdpsFrame:SetParent(RightChatPanel) tdpsFrame:SetFrameStrata("HIGH") end
 	tdpsFrame.spacing = 0
 	tdpsFrame.barHeight = 14
 	tdpsVisibleBars = 9
 	tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
 	tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
 if U.elv then
-	if RightChatPanel then tdpsFrame:SetParent(RightChatPanel) end
 	tdpsFont.name = U.x.datatext_font
 	tdpsFont.size = 12
 	tdpsFont.outline = "THIN"
 	tdpsFont.shadow = 0
 end
 if U.tuk then
-	if TukuiChatBackgroundRight then tdpsFrame:SetParent(TukuiChatBackgroundRight) end
 	local c = U.c
 	tdpsFont.name = c["media"].pixelfont
 	tdpsFont.size = 12
 	tdpsFont.outline = "MONOCHROMEOUTLINE"
 end
+
 --Positions Go here / Going to bed gnight
 
 	tdpsRefresh()
