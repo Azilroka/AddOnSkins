@@ -13,10 +13,6 @@ OutfitterFrame:HookScript("OnShow", function(self)
 	OutfitterFrameTab3:Size(60,25)
 	OutfitterMainFrame:StripTextures(True)
 	for i = 0,13 do
-		if _G["OutfitterItem"..i.."OutfitMenu"] then 
-			U.SkinNextPrevButton(_G["OutfitterItem"..i.."OutfitMenu"])
-			_G["OutfitterItem"..i.."OutfitMenu"]:Size(16)
-		end
 		if _G["OutfitterItem"..i.."OutfitSelected"] then 
 			U.SkinButton(_G["OutfitterItem"..i.."OutfitSelected"])
 			_G["OutfitterItem"..i.."OutfitSelected"]:ClearAllPoints()
@@ -24,24 +20,7 @@ OutfitterFrame:HookScript("OnShow", function(self)
 			_G["OutfitterItem"..i.."OutfitSelected"]:Point("LEFT", _G["OutfitterItem"..i.."Outfit"], "LEFT", 8, 0)
 		end
 	end
---		Outfitter.NameOutfitDialog.DoneButton:StripTextures(True)
---		Outfitter.NameOutfitDialog.CancelButton:StripTextures(True)
---		U.SkinFrame(Outfitter.NameOutfitDialog)
---		U.SkinFrame(Outfitter.NameOutfitDialog.InfoSection)
---		U.SkinFrame(Outfitter.NameOutfitDialog.BuildSection)
---		U.SkinFrame(Outfitter.NameOutfitDialog.StatsSection)
---		U.SkinButton(Outfitter.NameOutfitDialog.EmptyOutfitCheckButton)
---		U.SkinButton(Outfitter.NameOutfitDialog.ExistingOutfitCheckButton)
---		U.SkinButton(Outfitter.NameOutfitDialog.GenerateOutfitCheckButton)
---		U.SkinButton(Outfitter.NameOutfitDialog.DoneButton)
---		U.SkinButton(Outfitter.NameOutfitDialog.CancelButton)
---		U.SkinFrame(Outfitter.RebuildOutfitDialog)
---		U.SkinFrame(Outfitter.RebuildOutfitDialog.StatsSection)
---		Outfitter.RebuildOutfitDialog.DoneButton:StripTextures(True)
---		Outfitter.RebuildOutfitDialog.CancelButton:StripTextures(True)
---		U.SkinButton(Outfitter.RebuildOutfitDialog.DoneButton)
---		U.SkinButton(Outfitter.RebuildOutfitDialog.CancelButton)
-	end)
+end)
 
 
 	OutfitterMainFrameScrollbarTrench:StripTextures(True)
