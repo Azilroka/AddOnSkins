@@ -42,9 +42,9 @@ function EmbedOmen()
 		OmenBarList:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", -1, 1)
 		OmenBarList:SetPoint("BOTTOMRIGHT", EmbeddingWindow, "BOTTOMRIGHT", 0, 2)
 		end
-		OmenAnchor:SetFrameStrata("HIGH")
 		if U.elv then if RightChatPanel then OmenBarList:SetParent(RightChatPanel) end end
 		if U.tuk then if TukuiChatBackgroundRight then OmenBarList:SetParent(TukuiChatBackgroundRight) end end
+		OmenAnchor:SetFrameStrata("HIGH")
 end
 
 local name = "OmenSkin"
