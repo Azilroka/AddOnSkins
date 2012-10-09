@@ -13,16 +13,8 @@ local function SkinArchy(self)
 			ArchyArtifactFrame:Width(300)
 
 			if ArchyArtifactFrameSkillBar then
-
 				ArchyArtifactFrameSkillBar:Size(285, 20)	
 				ArchyArtifactFrameSkillBar.text:SetTextColor(1, 1, 1)
-			
-				if IsAddOnLoaded("ElvUI") then
-					local x = U.x
-					ArchyArtifactFrameSkillBar.text:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
-				else
-					ArchyArtifactFrameSkillBar.text:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-				end					
 			end
 
 			ArchyArtifactFrameContainer:Width(285)
