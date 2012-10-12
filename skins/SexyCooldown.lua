@@ -76,25 +76,8 @@ local function SkinSexyCooldownLabel(bar,label,store)
 	end
 end
 local function SkinSexyCooldownBackdrop(bar)
-	local backdrop =
-	{
-		bgFile = nil,
-		edgeFile = nil,
-		insets = {left = 2, top = 2, right = 2, bottom = 2},
-		edgeSize = 8,
-		tile = false
-	}
-		backdrop.bgFile = backdrop.bgFile
-		backdrop.edgeFile = backdrop.border
-		backdrop.edgeSize = backdrop.edgeSize
-		backdrop.insets.left = backdrop.insets.left
-		backdrop.insets.top = backdrop.insets.top
-		backdrop.insets.right = backdrop.insets.right
-		backdrop.insets.bottom = backdrop.insets.bottom
-		bar:SetBackdrop(backdrop)
 		bar:SetTemplate("Transparent")
 end
---[[ Hook bar creation to add skinning ]]
 
 local function HookSCDBar(bar)
 	hooksecurefunc(bar,"UpdateBarLook",SkinSexyCooldownBar)
