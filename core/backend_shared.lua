@@ -12,8 +12,8 @@ U.Skins = {
 		["addon"] = "ACP",
 	},
 	["AdiBagsSkin"] = {
-		["buttonText"] = "AdiBags : Disabled",
-		["addon"] = "BROKENPIECEOFSHIT",
+		["buttonText"] = "AdiBags",
+		["addon"] = "AdiBags",
 	},
 	["AltoholicSkin"] = {
 		["addon"] = "Altoholic",

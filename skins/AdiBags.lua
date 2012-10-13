@@ -1,4 +1,4 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("BROKENPIECEOFSHIT") then return end
+if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("AdiBags") then return end
 local U = unpack(select(2,...))
 local s = U.s
 local c = U.c
@@ -25,9 +25,9 @@ local function AdiSkin(self,event)
 		local A = LibStub('AceAddon-3.0'):GetAddon('AdiBags', true)
 		local f = AdiBagsContainer1
 		SkinFrame(f)
-		U.SkinEditBox(AdiBagsSearchFrame)
+		U.SkinEditBox(AdiBagsContainer1SearchBox)
 		if IsAddOnLoaded("Tukui") then
-			AdiBagsSearchFrame:Point("TOPRIGHT", AdiBagsSimpleLayeredRegion2, "TOPRIGHT", -75, -1)
+			AdiBagsContainer1SearchBox:Point("TOPRIGHT", AdiBagsSimpleLayeredRegion2, "TOPRIGHT", -75, -1)
 		end
 		if IsAddOnLoaded("ElvUI") then
 			local B = c:GetModule('Bags')
