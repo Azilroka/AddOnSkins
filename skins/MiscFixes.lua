@@ -16,7 +16,7 @@ local MiscFixes = CreateFrame("Frame")
 			end
 		end
 	else
-	if (not IsAddOnLoaded("SexyMap")) then if TukuiMinimap then Minimap:SetMaskTexture(c["media"].blank) end end
+	if not IsAddOnLoaded("SexyMap") then if TukuiMinimap then Minimap:SetMaskTexture(c["media"].blank) end end
 	if U.elv then if IsAddOnLoaded("stAddonmanager") then GameMenuFrame:HookScript("OnShow", function() U.SkinButton(GameMenuButtonAddons) end) end end
 	if IsAddOnLoaded("TomTom") then if TomTomBlock then TomTomBlock:SetTemplate("Transparent") end end
 	if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
@@ -32,11 +32,18 @@ local MiscFixes = CreateFrame("Frame")
 	end
 
 	if (U.CheckOption("AzilSettings")) then
-		TukuiPlayer_Experience:ClearAllPoints()
-		TukuiPlayer_Experience:Point('BOTTOM', InvTukuiActionBarBackground, 'TOP', 0, 4)
-		TukuiPlayer_Experience:Height(8)
-		TukuiPlayer_Experience:SetFrameStrata("BACKGROUND")
-
+		if TukuiPlayer_Experience then
+			TukuiPlayer_Experience:ClearAllPoints()
+			TukuiPlayer_Experience:Point('BOTTOM', InvTukuiActionBarBackground, 'TOP', 0, 4)
+			TukuiPlayer_Experience:Height(8)
+			TukuiPlayer_Experience:SetFrameStrata("BACKGROUND")
+		end
+		if TukuiPlayer_Reputation then
+			TukuiPlayer_Reputation:ClearAllPoints()
+			TukuiPlayer_Reputation:Point('BOTTOM', InvTukuiActionBarBackground, 'TOP', 0, 4)
+			TukuiPlayer_Reputation:Height(8)
+			TukuiPlayer_Reputation:SetFrameStrata("BACKGROUND")
+		end
 		if (select(2, UnitClass("player")) == "ROGUE") then
 			TukuiStance:SetParent(TukuiUIHider)
 		end
