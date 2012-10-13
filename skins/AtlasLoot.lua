@@ -108,12 +108,6 @@ local name = 'AtlasLootSkin'
 local function SkinAL(self)
 	LoadAddOn("AtlasLoot")
 
-	local FrameShow = AtlasLootDefaultFrame
-	FrameShow:SetScript("OnUpdate", AL_OnShow)
-		
-	local CompareFrameShow = AtlasLootCompareFrame
-	CompareFrameShow:SetScript("OnShow", Compare_OnShow)
-
 	local StripAllTextures = {
                 "AtlasLootDefaultFrame",
                 "AtlasLootItemsFrame",
@@ -239,6 +233,9 @@ local function SkinAL(self)
 
 	U.SkinScrollBar(AtlasLootCompareFrame_ScrollFrameItemFrameScrollBar)
 	U.SkinScrollBar(AtlasLootCompareFrame_WishlistScrollFrameScrollBar)
+	AtlasLootDefaultFrame:HookScript("OnShow", AL_OnShow)
+	AtlasLootCompareFrame:HookScript("OnShow", Compare_OnShow)
+	AtlasLootPanel:HookScript("OnUpdate", function(self) self:SetWidth(AtlasLootDefaultFrame:GetWidth()) end)
 end
 
 U.RegisterSkin(name,SkinAL)
