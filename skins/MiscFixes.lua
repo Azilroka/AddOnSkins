@@ -16,7 +16,7 @@ local MiscFixes = CreateFrame("Frame")
 			end
 		end
 	else
-	if if (not IsAddOnLoaded("SexyMap")) then TukuiMinimap then Minimap:SetMaskTexture(c["media"].blank) end end
+	if (not IsAddOnLoaded("SexyMap")) then if TukuiMinimap then Minimap:SetMaskTexture(c["media"].blank) end end
 	if U.elv then if IsAddOnLoaded("stAddonmanager") then GameMenuFrame:HookScript("OnShow", function() U.SkinButton(GameMenuButtonAddons) end) end end
 	if IsAddOnLoaded("TomTom") then if TomTomBlock then TomTomBlock:SetTemplate("Transparent") end end
 	if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
