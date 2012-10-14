@@ -228,4 +228,13 @@ U.Skins = {
 		["buttonText"] = "PetBattleTeams",
 		["addon"] = "PetBattleTeams"
 	},
+	["BagnonSkin"] = {
+		["addon"] = "Bagnon",
+	},
+	["VengeanceStatusSkin"] = {
+		["addon"] = "VengeanceStatus",
+	},
+	["TomTomSkin"] = {
+		["addon"] = "TomTom",
+	},
 }

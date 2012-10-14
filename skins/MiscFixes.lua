@@ -16,11 +16,19 @@ local MiscFixes = CreateFrame("Frame")
 			end
 		end
 	else
-	if not IsAddOnLoaded("SexyMap") then if TukuiMinimap then Minimap:SetMaskTexture(c["media"].blank) end end
+	if TukuiMinimap then Minimap:SetMaskTexture(c["media"].blank) end
 	if U.elv then if IsAddOnLoaded("stAddonmanager") then GameMenuFrame:HookScript("OnShow", function() U.SkinButton(GameMenuButtonAddons) end) end end
-	if IsAddOnLoaded("TomTom") then if TomTomBlock then TomTomBlock:SetTemplate("Transparent") end end
-	if IsAddOnLoaded("SymbiosisTip") then SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end) end
-	if IsAddOnLoaded("VengeanceStatus") then U.SkinStatusBar(VengeanceStatus_StatusBar) end
+	if IsAddOnLoaded("TomTom") and (U.CheckOption("TomTomSkin")) then
+		if TomTomBlock then
+			TomTomBlock:SetTemplate("Transparent")
+		end
+	end
+	if IsAddOnLoaded("SymbiosisTip") then
+		SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
+	end
+	if IsAddOnLoaded("VengeanceStatus") and (U.CheckOption("bluewolfapple!!6")) then
+			U.SkinStatusBar(VengeanceStatus_StatusBar)
+	end
 	
 	LoadAddOn("acb_CastBar")
 	if IsAddOnLoaded("acb_CastBar") then
@@ -112,14 +120,10 @@ function DisableLootIcons()
 end
 
 
---local T, C, L, G = unpack(Tukui)
-
-local _
-
 ----------------------------------------
 -- Credit to PetBattleQualityGlow addon
 ----------------------------------------
-
+local _
 local function GetPetDumpList(targetID)
 	local returned = nil
 
@@ -166,7 +170,6 @@ local function PetDump()
 		local targetID = C_PetBattles.GetPetSpeciesID(LE_BATTLE_PET_ENEMY, activePet)
 		
 		local ownedDump = GetPetDumpList(targetID)
---		if ownedDump == nil then print("You do not own this pet.") else print("Owned: "..ownedDump) end
 		if ownedDump == nil then RaidNotice_AddMessage(RaidWarningFrame, "You do not own this pet.", ChatTypeInfo["RAID_WARNING"]) else RaidNotice_AddMessage(RaidWarningFrame, "Owned: "..ownedDump, ChatTypeInfo["RAID_WARNING"]) end
 	else
 		local zoneDump = GetZoneDumpList()
@@ -175,24 +178,11 @@ local function PetDump()
 end
 
 function KyleuiPetBattleGlow_Update(self)
-	-- There must be a petOwner and a petIndex
 	if (not self.petOwner) or (not self.petIndex) then return end
-	
-	
-	-- Check if this is the Tooltip
+
 	local isTooltip = false
 	if (self:GetName() == "PetBattlePrimaryUnitTooltip") then isTooltip = true end
-	
-	-- if not isTooltip then
-		-- local species = C_PetBattles.GetPetSpeciesID(self.petOwner, self.petIndex)
-		-- if not species then
-			-- print("Fighting unknown species!")
-		-- else
-			-- print("Fighting species "..species)
-		-- end
-	-- end
-	
-	-- Set the color for the Glow
+
 	local nQuality = C_PetBattles.GetBreedQuality(self.petOwner, self.petIndex) - 1
 	local r, g, b, hex = GetItemQualityColor(nQuality)
 	
@@ -205,11 +195,8 @@ function KyleuiPetBattleGlow_Update(self)
 		end
 	end
 	
-	-- Color the non-active Health Bars with the Quality color
 	if (self.ActualHealthBar) and (not isTooltip) then
 		if (self.petIndex ~= 1) then
-			-- Fix by: Nullberri
-			-- self.ActualHealthBar:SetVertexColor(r, g, b)
 			if (self.petIndex ~= C_PetBattles.GetActivePet(self.petOwner)) then
 				self.ActualHealthBar:SetVertexColor(r, g, b)
 			else
@@ -217,12 +204,6 @@ function KyleuiPetBattleGlow_Update(self)
 			end
 		end
 	end
-end
-
-SLASH_KYLEPETDUMP1 = "/bp"
-SLASH_KYLEPETDUMP2 = "/battlepetdump"
-SlashCmdList.KYLEPETDUMP = function()
-	PetDump(nil)
 end
 
 hooksecurefunc("PetBattleFrame_Display", PetDump)

@@ -170,6 +170,9 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.ClassChatBackgroundPath == nil) then UISkinOptions.ClassChatBackgroundPath = "Interface\\AddOns\\Tukui_ElvUI_Skins\\media\\" end
 	if(UISkinOptions.LeftClassChatBackground == nil) then UISkinOptions.LeftClassChatBackground = "Disabled" end
 	if(UISkinOptions.RightClassChatBackground == nil) then UISkinOptions.RightClassChatBackground = "Disabled" end
+	if(UISkinOptions.BagnonSkin == nil) then UISkinOptions.BagnonSkin = "Enabled" end
+	if(UISkinOptions.TomTomSkin == nil) then UISkinOptions.TomTomSkin = "Enabled" end
+	if(UISkinOptions.VengeanceStatusSkin == nil) then UISkinOptions.VengeanceStatusSkin = "Enabled" end
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 
