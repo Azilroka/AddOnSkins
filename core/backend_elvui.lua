@@ -90,12 +90,10 @@ function XS:Initialize()
 	end
 end
 
-function XS:RegisterSkin(skinName,func,...)
+function XS:RegisterSkin(skinName,func,events)
 	if not self.skins[skinName] then self.skins[skinName] = {} end
 	self.skins[skinName][func] = true
-	local n = select('#', ...)
-  	for i = 1,n do
-    	local event = select(i, ...)
+	for event,_ in pairs(events) do
     	if not self.events[event] then
 			self[event] = GenerateEventFunction(event)
 			self:RegisterEvent(event); 

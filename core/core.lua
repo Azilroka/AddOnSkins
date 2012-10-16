@@ -214,9 +214,14 @@ end
 U.ToggleOption = cToggleOption
 
 local function cRegisterSkin(skinName,skinFunc,...)
-	local events = ...
 	local XS = U.x
-	local registerMe = { func = skinFunc, events = events or {} }
+	local events = {}
+	for i = 1,select('#',...) do
+		local event = select(i,...)
+		if not event then break end
+		events[event] = true
+	end
+	local registerMe = { func = skinFunc, events = events }
 	if not XS.register[skinName] then XS.register[skinName] = {} end
 	XS.register[skinName][skinFunc] = registerMe
 end
