@@ -2,8 +2,6 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local U = unpack(select(2,...))
 local name = 'BagnonSkin'
 local function SkinBagnon(self,event)
-	U.SkinFrame(BagnonFrameinventory)
-	U.SkinCloseButton(BagnonFrameinventoryCloseButton)
 	if event == "BANKFRAME_OPENED" then
 		U.SkinFrame(BagnonFramebank)
 		U.SkinCloseButton(BagnonFramebankCloseButton)
@@ -14,6 +12,13 @@ local function SkinBagnon(self,event)
 	elseif event == "VOID_STORAGE_OPEN" then
 		U.SkinFrame(BagnonFramevoidstorage)
 		U.SkinCloseButton(BagnonFramevoidstorageCloseButton)
+	elseif event == "BAG_UPDATE" then
+		U.SkinFrame(BagnonFrameinventory)
+		U.SkinCloseButton(BagnonFrameinventoryCloseButton)
 	end
+		ToggleBackpack()
+		BagnonFrameinventory:HookScript("OnShow", function() U.SkinFrame(BagnonFrameinventory) end)
+		U.SkinCloseButton(BagnonFrameinventoryCloseButton)
+		ToggleBackpack()
 end
-U.RegisterSkin(name,SkinBagnon,"BANKFRAME_OPENED","GUILDBANKFRAME_OPENED","VOID_STORAGE_OPEN")
+U.RegisterSkin(name,SkinBagnon,"BAG_UPDATE","BANKFRAME_OPENED","GUILDBANKFRAME_OPENED","VOID_STORAGE_OPEN")
