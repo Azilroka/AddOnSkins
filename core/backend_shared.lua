@@ -11,10 +11,10 @@ U.Skins = {
 		["buttonText"] = "Addon Control Panel",
 		["addon"] = "ACP",
 	},
-	--["AdiBagsSkin"] = {
-	--	["buttonText"] = "AdiBags",
-	--	["addon"] = "AdiBags",
-	--},
+	["AdiBagsSkin"] = {
+		["buttonText"] = "AdiBags",
+		["addon"] = "AdiBags",
+	},
 	["AltoholicSkin"] = {
 		["addon"] = "Altoholic",
 	},
@@ -138,9 +138,9 @@ U.Skins = {
 	["OutfitterSkin"] = {
 		["addon"] = "Outfitter"
 	},
-	["PoisonerSkin"] = {
-		["addon"] = "Poisoner"
-	},
+	--["PoisonerSkin"] = {
+	--	["addon"] = "Poisoner"
+	--},
 	["PoMTrackerSkin"] = {
 		["addon"] = "PoMTracker"
 	},
