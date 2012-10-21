@@ -30,7 +30,7 @@ local MiscFixes = CreateFrame("Frame")
 	if IsAddOnLoaded("SymbiosisTip") then
 		SymbiosisTip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 	end
-	if IsAddOnLoaded("VengeanceStatus") and (U.CheckOption("bluewolfapple!!6")) then
+	if IsAddOnLoaded("VengeanceStatus") and (U.CheckOption("VengeanceStatusSkin")) then
 			U.SkinStatusBar(VengeanceStatus_StatusBar)
 	end
 	
@@ -168,7 +168,7 @@ end
 
 local function PetDump()
 	local isWildPetBattle = (C_PetBattles.IsInBattle() and C_PetBattles.IsWildBattle())
-	
+
 	if (isWildPetBattle) then 
 		local activePet = C_PetBattles.GetActivePet(LE_BATTLE_PET_ENEMY)
 		local targetID = C_PetBattles.GetPetSpeciesID(LE_BATTLE_PET_ENEMY, activePet)
@@ -209,6 +209,9 @@ function KyleuiPetBattleGlow_Update(self)
 		end
 	end
 end
+local PetBattlePetDumpChanger = CreateFrame("Frame")
+PetBattlePetDumpChanger:RegisterEvent("PET_BATTLE_PET_CHANGED")
+PetBattlePetDumpChanger:SetScript("OnEvent", PetDump)
 
 hooksecurefunc("PetBattleFrame_Display", PetDump)
 hooksecurefunc("PetBattleUnitFrame_UpdateDisplay", KyleuiPetBattleGlow_Update)
