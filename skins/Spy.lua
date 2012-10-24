@@ -8,6 +8,7 @@ local function SkinSpy(self)
 	U.Desaturate(Spy_MainWindow.ClearButton)
 	U.Desaturate(Spy_MainWindow.LeftButton)
 	U.Desaturate(Spy_MainWindow.RightButton)
+	Spy_AlertWindow:Point("TOP", UIParent, "TOP", 0, -130)
 end
 
 U.RegisterSkin(name,SkinSpy)
