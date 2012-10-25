@@ -38,30 +38,30 @@ local function freestyle(bar)
 	bar.candyBarBar.SetPoint=bar.candyBarBar.OldSetPoint
 	bar.candyBarIconFrame.SetWidth=bar.candyBarIconFrame.OldSetWidth
 	bar.SetScale=bar.OldSetScale
-	
+
 	--Reset Positions
 	--Icon
 	bar.candyBarIconFrame:ClearAllPoints()
 	bar.candyBarIconFrame:SetPoint("TOPLEFT")
 	bar.candyBarIconFrame:SetPoint("BOTTOMLEFT")
-	bar.candyBarIconFrame:SetTexCoord(0.07, 0.93, 0.07, 0.93)
-	
+	bar.candyBarIconFrame:SetTexCoord(unpack(E.TexCoords))
+
 	--Status Bar
 	bar.candyBarBar:ClearAllPoints()
 	bar.candyBarBar:SetPoint("TOPRIGHT")
 	bar.candyBarBar:SetPoint("BOTTOMRIGHT")
-	
+
 	--BG
 	bar.candyBarBackground:SetAllPoints()
-	
+
 	--Duration
 	bar.candyBarDuration:ClearAllPoints()
 	bar.candyBarDuration:SetPoint("RIGHT", bar.candyBarBar, "RIGHT", -2, 0)
-	
+
 	--Name
 	bar.candyBarLabel:ClearAllPoints()
 	bar.candyBarLabel:SetPoint("LEFT", bar.candyBarBar, "LEFT", 2, 0)
-	bar.candyBarLabel:SetPoint("RIGHT", bar.candyBarBar, "RIGHT", -2, 0)	
+	bar.candyBarLabel:SetPoint("RIGHT", bar.candyBarBar, "RIGHT", -2, 0)
 end
 
 local applystyle = function(bar)
@@ -73,7 +73,7 @@ local applystyle = function(bar)
 	bar.SetScale=E.noop
 	bar:Height(buttonsize)
 	bar:SetScale(1)
-	
+
 	-- create or reparent and use bar background
 	local bg = nil
 	if #freebg > 0 then
@@ -83,9 +83,7 @@ local applystyle = function(bar)
 	end
 
 	bg:SetParent(bar)
-	bg:ClearAllPoints()
-	bg:Point("TOPLEFT", bar, "TOPLEFT", -2, 2)
-	bg:Point("BOTTOMRIGHT", bar, "BOTTOMRIGHT", 2, -2)
+	bg:SetOutside(bar)
 	bg:SetFrameStrata("BACKGROUND")
 	bg:Show()
 	bar:Set("bigwigs:elvui:barbg", bg)
@@ -99,21 +97,17 @@ local applystyle = function(bar)
 			ibg = createbg()
 		end
 		ibg:SetParent(bar)
-		ibg:ClearAllPoints()
-		ibg:Point("TOPLEFT", bar.candyBarIconFrame, "TOPLEFT", -2, 2)
-		ibg:Point("BOTTOMRIGHT", bar.candyBarIconFrame, "BOTTOMRIGHT", 2, -2)
+		ibg:SetOutside(bar.candyBarIconFrame)
 		ibg:SetFrameStrata("BACKGROUND")
 		ibg:Show()
 		bar:Set("bigwigs:elvui:iconbg", ibg)
 	end
 
 	-- setup timer and bar name fonts and positions
-	bar.candyBarLabel:FontTemplate(nil, nil, 'OUTLINE')
 	bar.candyBarLabel:SetJustifyH("LEFT")
 	bar.candyBarLabel:ClearAllPoints()
 	bar.candyBarLabel:Point("LEFT", bar, "LEFT", 4, 0)
 
-	bar.candyBarDuration:FontTemplate(nil, nil, 'OUTLINE')
 	bar.candyBarDuration:SetJustifyH("RIGHT")
 	bar.candyBarDuration:ClearAllPoints()
 	bar.candyBarDuration:Point("RIGHT", bar, "RIGHT", -4, 0)
@@ -134,9 +128,9 @@ local applystyle = function(bar)
 	bar.candyBarIconFrame.OldSetWidth = bar.candyBarIconFrame.SetWidth
 	bar.candyBarIconFrame.SetWidth=E.noop
 	bar.candyBarIconFrame:ClearAllPoints()
-	bar.candyBarIconFrame:Point("BOTTOMRIGHT", bar, "BOTTOMLEFT", -5, 0)	
+	bar.candyBarIconFrame:Point("BOTTOMRIGHT", bar, "BOTTOMLEFT", -(E.PixelMode and 1 or 5), 0)
 	bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
-	bar.candyBarIconFrame:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+	bar.candyBarIconFrame:SetTexCoord(unpack(E.TexCoords))
 end
 
 --[[
@@ -144,16 +138,16 @@ end
 	-BigWigs
 	-BigWigs_Core (Global 'BigWigs' is set here)
 	-BigWigs_Plugins
-	
+
 	Note to self: BigWigs_Core as an OptionalDep breaks ElvUI saved variables if BigWigs isn't loaded.
 ]]
 local function RegisterStyle()
 	if not BigWigs then return end
-	
+
 	local bars = BigWigs:GetPlugin("Bars", true)
-	
+
 	if not bars then return end
-	
+
 	bars:RegisterBarStyle("ElvUI", {
 		apiVersion = 1,
 		version = 1,
@@ -162,19 +156,6 @@ local function RegisterStyle()
 		BarStopped = freestyle,
 		GetStyleName = function() return "ElvUI" end,
 	})
-
-	
-	local path = bars.db.profile
-	
-	path.texture = "ElvUI Norm"
-	path.barStyle = "ElvUI"
-	path.font = "ElvUI Font"
-	
-	path = BigWigs:GetPlugin("Messages", true).db.profile
-	path.font = "ElvUI Font"
-	
-	path = BigWigs:GetPlugin("Proximity", true).db.profile
-	path.font = "ElvUI Font"
 end
 
 S:RegisterSkin('BigWigs_Plugins', RegisterStyle, nil, true)
