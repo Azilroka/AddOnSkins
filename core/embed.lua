@@ -714,10 +714,12 @@ function EmbedRecountOmenResize()
 end
 
 function EmbedWindowResize()
-	if not c.db.datatexts.rightChatPanel then
-		RDTS = 22
-	else
-		RDTS = 0
+	if U.elv then
+		if not c.db.datatexts.rightChatPanel then
+			RDTS = 22
+		else
+			RDTS = 0
+		end
 	end
 	if U.elv and not U.sle then
 		if c.PixelMode then
