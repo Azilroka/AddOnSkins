@@ -19,7 +19,7 @@ local MiscFixes = CreateFrame("Frame")
 	if TukuiMinimap then Minimap:SetMaskTexture(c["media"].blank) end
 	if U.elv then
 		if IsAddOnLoaded("stAddonManager") then
-			GameMenuFrame:HookScript("OnShow", function() U.SkinButton(GameMenuButtonAddons) end)
+			GameMenuFrame:HookScript("OnShow", function() if GameMenuButtonAddons then U.SkinButton(GameMenuButtonAddons) end end)
 		end
 	end
 	if IsAddOnLoaded("TomTom") and (U.CheckOption("TomTomSkin")) then

@@ -5,7 +5,7 @@ FishingButton:SetMovable(true)
 FishingButton:SetTemplate("Default")
 FishingButton:SetAttribute("type", "spell");
 FishingButton:SetAttribute("spell", "Fishing");
-FishingButton:Hide()
+UIFrameFadeOut(FishingButton, 0.2, FishingButton:GetAlpha(), 0)
 FishingButton.icon = FishingButton:CreateTexture(nil, "OVERLAY")
 FishingButton.icon:SetPoint("CENTER")
 FishingButton.icon:SetTexture(select(3, GetSpellInfo(131474)))
@@ -17,9 +17,9 @@ FishingButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
 FishingButton:SetScript("OnEvent", function(self)
 	if not InCombatLockdown() then
 		if IsEquippedItemType("Fishing Poles") then
-			FishingButton:Show()
+			UIFrameFadeIn(FishingButton, 0.2, FishingButton:GetAlpha(), 1)
 		else
-			FishingButton:Hide()
+			UIFrameFadeOut(FishingButton, 0.2, FishingButton:GetAlpha(), 0)
 		end
 	end
 end)
@@ -31,7 +31,7 @@ local SurveyButton = CreateFrame("Button", "SurveyButton", UIParent, "SecureActi
 	SurveyButton:SetTemplate("Default")
 	SurveyButton:SetAttribute("type", "spell");
 	SurveyButton:SetAttribute("spell", "Survey");
-	--SurveyButton:Hide()
+	SurveyButton:Hide()
 	SurveyButton.icon = SurveyButton:CreateTexture(nil, "OVERLAY")
 	SurveyButton.icon:SetPoint("CENTER")
 	SurveyButton.icon:SetTexture(select(3, GetSpellInfo(80451)))

@@ -25,17 +25,9 @@ local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 
 if event == "PLAYER_ENTERING_WORLD" then
 	
-	if IsAddOnLoaded("ElvUI") then EmbeddingWindow:SetPoint("BOTTOMRIGHT", RightChatDataPanel, "BOTTOMRIGHT", 16, 22) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 10),(RightChatPanel:GetHeight() - 32)) end
-	if IsAddOnLoaded("ElvUI_SLE") then EmbeddingWindow:SetPoint("BOTTOMRIGHT", RightChatPanel, "BOTTOMRIGHT", -2, 0) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 5),(RightChatPanel:GetHeight() - 24)) end
-	if IsAddOnLoaded("Tukui") then
-		if not TukuiChatBackgroundRight then
-			EmbeddingWindow:SetPoint("BOTTOMRIGHT", TukuiInfoRight, "BOTTOMRIGHT", 0, 24)
-		else
-			EmbeddingWindow:SetPoint("TOPRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", -6, -5)
-		end
-		EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiInfoRight:GetHeight() * 6) + 4)
-	end
-	if IsAddOnLoaded("Tukui") then
+	EmbedWindowResize()
+	if U.elv then hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedWindowResize() end) end
+	if U.tuk then
 		EmbedToggleButton = CreateFrame("Button", "EmbedToggleButton", UIParent)
 		EmbedToggleButton:SetTemplate("Transparent")
 		EmbedToggleButton:Size(TukuiInfoRight:GetHeight()-4)
@@ -59,6 +51,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 				if TukuiInfoRight.Faded then
 					TukuiInfoRight.Faded = nil
 					TukuiChatBackgroundRight:Show()
+					TukuiTabsRightBackground:Show()
 					UIFrameFadeIn(TukuiInfoRight, 0.2, TukuiInfoRight:GetAlpha(), 1)
 					UIFrameFadeIn(TukuiChatBackgroundRight, 0.2, TukuiChatBackgroundRight:GetAlpha(), 1)
 					TukuiInfoRight:SetPoint("BOTTOM", TukuiChatBackgroundRight, "BOTTOM", 0, 5)
@@ -71,11 +64,14 @@ if event == "PLAYER_ENTERING_WORLD" then
 					UIFrameFadeOut(TukuiInfoRight, 0.2, TukuiInfoRight:GetAlpha(), 0)
 					TukuiInfoRight:SetPoint("BOTTOM", TukuiChatBackgroundRight, "BOTTOM", UIParent:GetWidth(), 5)
 					TukuiChatBackgroundRight:Hide()
+					TukuiTabsRightBackground:Hide()
 					TukuiInfoRight.fadeInfo.finishedFunc = TukuiInfoRight.fadeFunc
 				end
 			end
 			end
 			else
+				if U.elv then if ChatFrame3Tab:IsShown() then ChatFrame3Tab:Hide() else ChatFrame3Tab:Show() end end
+				if U.tuk then if ChatFrame4:IsShown() then ChatFrame4:Hide() else ChatFrame4:Show() end end
 				if IsAddOnLoaded("Recount") and ((U.CheckOption("EmbedRecount")) or (U.CheckOption("EmbedRO"))) then
 					ToggleFrame(Recount_MainWindow)
 				end
@@ -116,6 +112,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 				if TukuiInfoLeft.Faded then
 					TukuiInfoLeft.Faded = nil
 					TukuiChatBackgroundLeft:Show()
+					TukuiTabsLeftBackground:Show()
 					GeneralDockManager:Show()
 					if AsphyxiaUIChatBar then AsphyxiaUIChatBar:Show() end
 					UIFrameFadeIn(TukuiInfoLeft, 0.2, TukuiInfoLeft:GetAlpha(), 1)
@@ -132,6 +129,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 					UIFrameFadeOut(TukuiInfoLeft, 0.2, TukuiInfoLeft:GetAlpha(), 0)
 					UIFrameFadeOut(GeneralDockManager, 0.2, GeneralDockManager:GetAlpha(), 0)
 					TukuiChatBackgroundLeft:Hide()
+					TukuiTabsLeftBackground:Hide()
 					GeneralDockManager:Hide()
 					if AsphyxiaUIChatBar then AsphyxiaUIChatBar:Hide() end
 					TukuiInfoLeft.fadeInfo.finishedFunc = TukuiInfoLeft.fadeFunc
@@ -184,7 +182,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 			GameTooltip:SetOwner(self, 'ANCHOR_TOPRIGHT', 0, 4)
 			GameTooltip:ClearLines()
 			if TukuiChatBackgroundLeft then GameTooltip:AddDoubleLine('Left Click:', 'Toggle Left Chat Panel', 1, 1, 1) end
-			GameTooltip:AddDoubleLine('Right Click:', 'Toggle Extra Skins/Options', 1, 1, 1)
+			GameTooltip:AddDoubleLine('Right Click:','Toggle Extra Skins/Options', 1, 1, 1)
 			GameTooltip:Show()
 		end)
 		LeftChatToggleButton:SetScript("OnLeave", function(self, ...)
@@ -192,7 +190,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 			GameTooltip:Hide()
 		end)
 	end
-	if IsAddOnLoaded("ElvUI") then
+	if U.elv then
 		local E, L, V, P, G, DF = unpack(ElvUI)
 		RightChatToggleButton:SetScript("OnClick", function(self, btn)
 				if btn == 'RightButton' then
@@ -239,7 +237,7 @@ if event == "PLAYER_ENTERING_WORLD" then
 			GameTooltip:SetOwner(self, 'ANCHOR_TOPRIGHT', 0, 4)
 			GameTooltip:ClearLines()
 			GameTooltip:AddDoubleLine(L['Left Click:'], L['Toggle Chat Frame'], 1, 1, 1)
-			GameTooltip:AddDoubleLine(L['Right Click:'], 'Toggle Embedded Addon', 1, 1, 1)
+			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
 			GameTooltip:Show()
 		end)
 	end
@@ -676,7 +674,6 @@ function EmbedRecountOmen()
 		Recount_MainWindow:SetFrameStrata("HIGH")
 		OmenBarList:SetFrameStrata("HIGH")
 		EmbedRecountOmenResize()
-		if IsAddOnLoaded("ElvUI") then hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedRecountOmenResize() end) end
 end
 
 function EmbedRecountOmenResize()
@@ -689,29 +686,54 @@ function EmbedRecountOmenResize()
 			Recount_MainWindow:SetHeight(TukuiChatBackgroundRight:GetHeight() - 28)
 			Recount_MainWindow:SetPoint("TOPRIGHT", TukuiChatBackgroundRight,"TOPRIGHT", -6, 2)
 		else
-			OmenAnchor:SetWidth((TukuiInfoRight:GetWidth() / 3) + 1)
-			OmenAnchor:SetHeight((TukuiInfoRight:GetHeight() * 6) + 4)
-			OmenAnchor:SetPoint("TOPLEFT", TukuiInfoRight, "TOPLEFT", 0, 144)
-			Recount_MainWindow:SetWidth(((TukuiInfoRight:GetWidth() / 3) + (TukuiInfoRight:GetWidth() / 3)) - ( 1 + s.mult))
-			Recount_MainWindow:SetHeight((TukuiInfoRight:GetHeight() * 6) - 4)
-			Recount_MainWindow:SetPoint("TOPRIGHT", TukuiInfoRight,"TOPRIGHT", 0, 136)
+			OmenAnchor:SetWidth((EmbeddingWindow:GetWidth() / 3) - 2)
+			OmenAnchor:SetHeight(EmbeddingWindow:GetHeight() + 4)
+			OmenAnchor:SetPoint("BOTTOMLEFT", EmbeddingWindow, "BOTTOMLEFT", 0, 0)
+			Recount_MainWindow:SetWidth((EmbeddingWindow:GetWidth() / 3) + (EmbeddingWindow:GetWidth() / 3))
+			Recount_MainWindow:SetHeight(EmbeddingWindow:GetHeight() - 4)
+			Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 0)
 		end
 	end
+	if U.elv then
+		if c.PixelMode then
+			OmenAnchor:SetWidth((EmbeddingWindow:GetWidth() / 3))
+			OmenAnchor:SetHeight((EmbeddingWindow:GetHeight() + 21))
+			OmenAnchor:SetPoint("BOTTOMLEFT", EmbeddingWindow, "BOTTOMLEFT", 0, 0)
+			Recount_MainWindow:SetWidth((EmbeddingWindow:GetWidth() / 3) + (EmbeddingWindow:GetWidth() / 3))
+			Recount_MainWindow:SetHeight((EmbeddingWindow:GetHeight()+7))
+			Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 0)
+		else
+			OmenAnchor:SetWidth((EmbeddingWindow:GetWidth() / 3) - 1)
+			OmenAnchor:SetHeight((EmbeddingWindow:GetHeight() + 21))
+			OmenAnchor:SetPoint("BOTTOMLEFT", EmbeddingWindow, "BOTTOMLEFT", 0, 1)
+			Recount_MainWindow:SetWidth((EmbeddingWindow:GetWidth() / 3) + (EmbeddingWindow:GetWidth() / 3))
+			Recount_MainWindow:SetHeight((EmbeddingWindow:GetHeight()+7))
+			Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 1)
+		end
+	end
+end
 
+function EmbedWindowResize()
 	if U.elv and not U.sle then
-		OmenAnchor:SetWidth((RightChatPanel:GetWidth() / 3) - ( 8 + c.mult))
-		OmenAnchor:SetHeight(RightChatPanel:GetHeight() - 12)
-		OmenAnchor:SetPoint("TOPLEFT", RightChatPanel, "TOPLEFT", 5, 16)
-		Recount_MainWindow:SetWidth(((RightChatPanel:GetWidth() / 3) + (RightChatPanel:GetWidth() / 3)) - ( 1 + c.mult))
-		Recount_MainWindow:SetHeight(RightChatPanel:GetHeight() - 26)
-		Recount_MainWindow:SetPoint("TOPRIGHT", RightChatPanel,"TOPRIGHT", -5, 2)
+		if c.PixelMode then
+			EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, -3) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 6),(RightChatPanel:GetHeight() - 28))
+		else
+			EmbeddingWindow:SetPoint("BOTTOM", RightChatDataPanel, "TOP", 8, 0) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 10),(RightChatPanel:GetHeight() - 32))
+		end
 	end
 	if U.sle then
-		OmenAnchor:SetWidth((RightChatPanel:GetWidth() / 3) - ( 3 + c.mult))
-		OmenAnchor:SetHeight(RightChatPanel:GetHeight() - 4)
-		OmenAnchor:SetPoint("TOPLEFT", RightChatPanel, "TOPLEFT", 2, -2)
-		Recount_MainWindow:SetWidth(((RightChatPanel:GetWidth() / 3) + (RightChatPanel:GetWidth() / 3)) - ( 0 + c.mult))
-		Recount_MainWindow:SetHeight(RightChatPanel:GetHeight() - 18)
-		Recount_MainWindow:SetPoint("TOPRIGHT", RightChatPanel,"TOPRIGHT", -2, -16)
+		EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, 0) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 1),RightChatPanel:GetHeight() - 1)
 	end
+	if U.tuk then
+		if not TukuiChatBackgroundRight then
+			EmbeddingWindow:SetPoint("BOTTOM", TukuiInfoRight, "TOP", 0, 2)
+			EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), 142)			
+		else
+			EmbeddingWindow:SetPoint("TOP", TukuiChatBackgroundRight, "TOP", 0, -5)
+			EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiChatBackgroundRight:GetHeight() - 34))
+		end
+	end
+	if (U.CheckOption("EmbedRO")) then EmbedRecountOmenResize() end
+	if (U.CheckOption("EmbedTDPS")) then EmbedTDPSResize() end
+	if (U.CheckOption("EmbedRecount")) then EmbedRecountResize() end
 end

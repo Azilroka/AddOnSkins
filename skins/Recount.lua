@@ -225,9 +225,11 @@ local function SkinRecount(self)
 	end
 
 	if U.CheckOption("EmbedRecount") then EmbedRecount() end
+	
 end
 
 U.RegisterSkin(name,SkinRecount)
+
 
 StaticPopupDialogs["RECOUNT_RELOADUI"] = {
 	text = "Reload your User Interface?",
@@ -258,7 +260,6 @@ StaticPopupDialogs["RECOUNT_RELOADUI"] = {
 }
 
 function EmbedRecount()
-	U.EnableOption("EmbedRecount")
 	if (U.CheckOption("EmbedOoC")) then
 		if (U.CheckOption("EmbedRecount")) then
 			Recount_MainWindow:Hide()
@@ -266,11 +267,15 @@ function EmbedRecount()
 	end
 	Recount:LockWindows(true)
 	Recount_MainWindow:ClearAllPoints()
-	Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 6)
-	Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 5)
+	EmbedRecountResize()
 	if U.elv then if RightChatPanel then Recount_MainWindow:SetParent(RightChatPanel) end end
 	if U.tuk then if TukuiChatBackgroundRight then Recount_MainWindow:SetParent(TukuiChatBackgroundRight) end end
 	Recount.MainWindow:SetFrameStrata("HIGH")
+end
+
+function EmbedRecountResize()
+	Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 7)
+	Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 2)
 end
 
 SLASH_RECOUNTEMBEDDED1, SLASH_RECOUNTEMBEDDED2 = '/er', '/embedrecount';

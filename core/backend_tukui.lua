@@ -526,7 +526,7 @@ function ApplyLeftChatBackground()
 	end
 	TukuiChatBackgroundLeft.bg:SetAlpha(0.7)
 	TukuiInfoLeft:StripTextures()
-	TukuiTabsLeftBackground:Hide()
+	TukuiTabsLeftBackground:Kill()
 end
 
 RightChatBackgroundEditBox = CreateFrame("EditBox", RightChatBackgroundEditBox, SkinOptions2)
@@ -584,7 +584,7 @@ function ApplyRightChatBackground()
 	end
 	TukuiChatBackgroundRight.bg:SetAlpha(0.7)
 	TukuiInfoRight:StripTextures()
-	TukuiTabsRightBackground:Hide()
+	TukuiTabsRightBackground:Kill()
 end
 	TukuiChatBackgroundButton = CreateFrame("Button", "TukuiChatBackgroundButton", SkinOptions2)
 	TukuiChatBackgroundButton:SetPoint("BOTTOM", SkinOptions2, -80, 150)
