@@ -714,11 +714,16 @@ function EmbedRecountOmenResize()
 end
 
 function EmbedWindowResize()
+	if not c.db.datatexts.rightChatPanel then
+		RDTS = 22
+	else
+		RDTS = 0
+	end
 	if U.elv and not U.sle then
 		if c.PixelMode then
-			EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, -3) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 6),(RightChatPanel:GetHeight() - 28))
+			EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, -3) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 6),(RightChatPanel:GetHeight() - (28 - RDTS)))
 		else
-			EmbeddingWindow:SetPoint("BOTTOM", RightChatDataPanel, "TOP", 8, 0) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 10),(RightChatPanel:GetHeight() - 32))
+			EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, -5) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 10),(RightChatPanel:GetHeight() - (32 - RDTS)))
 		end
 	end
 	if U.sle then
