@@ -28,27 +28,17 @@ local function LoadSkin()
 					if not (icon1.overlay) then
 						icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
 						icon1.overlay:CreateBackdrop()
-						icon1.overlay:Size(buttonsize - 4)
-						icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -5, 2)
-
-					--	local backdroptex = icon1.overlay:CreateTexture(nil, "BORDER")
-					--	backdroptex:SetTexture([=[Interface\Icons\Spell_Nature_WispSplode]=])
-					--	backdroptex:Point("TOPLEFT", icon1.overlay, "TOPLEFT", 2, -2)
-					--	backdroptex:Point("BOTTOMRIGHT", icon1.overlay, "BOTTOMRIGHT", -2, 2)
-					--	backdroptex:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+						if U.elv and c.PixelMode then icon1.overlay:Size(buttonsize-2) else icon1.overlay:Size(buttonsize-4) end
+						if U.elv then icon1.overlay:Point("RIGHT", frame, "LEFT", -(c.PixelMode and 2 or 5), 0) end
+						if U.tuk then icon1.overlay:Point("RIGHT", frame, "LEFT", -5, 0) end
 					end
 
 					if not (icon2.overlay) then
 						icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
 						icon2.overlay:CreateBackdrop()
-						icon2.overlay:Size(buttonsize - 4)
-						icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", 5, 2)
-						
-					--	local backdroptex = icon2.overlay:CreateTexture(nil, "BORDER")
-					--	backdroptex:SetTexture([=[Interface\Icons\Spell_Nature_WispSplode]=])
-					--	backdroptex:Point("TOPLEFT", icon2.overlay, "TOPLEFT", 2, -2)
-					--	backdroptex:Point("BOTTOMRIGHT", icon2.overlay, "BOTTOMRIGHT", -2, 2)
-					--	backdroptex:SetTexCoord(0.08, 0.92, 0.08, 0.92)					
+						if U.elv and c.PixelMode then icon2.overlay:Size(buttonsize-2) else icon2.overlay:Size(buttonsize-4) end
+						if U.elv then icon2.overlay:Point("LEFT", frame, "RIGHT", (c.PixelMode and 2 or 5), 0) end
+						if U.tuk then icon2.overlay:Point("LEFT", frame, "RIGHT", -5, 0) end						
 					end
 
 					if bar.color then
@@ -98,8 +88,9 @@ local function LoadSkin()
 					
 					if not tbar.styled then
 						tbar:SetStatusBarTexture(c["media"].normTex)
-						tbar:Point("TOPLEFT", frame, "TOPLEFT", 2, -2)
-						tbar:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
+						tbar:SetInside(frame)
+						--tbar:Point("TOPLEFT", frame, "TOPLEFT", 2, -2)
+						--tbar:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
 						tbar.styled=true
 					end
 
@@ -209,7 +200,9 @@ local function LoadSkin()
 			if not name.styled then
 				name:ClearAllPoints()
 				name:Point("LEFT", bar, "LEFT", 4, 0)
-				if (U.CheckOption("DBMSkinHalf")) then name:Point("BOTTOMLEFT", bar, "TOPLEFT", 1, 4) end
+				if (U.CheckOption("DBMSkinHalf")) then
+					name:Point("BOTTOMLEFT", bar, "TOPLEFT", 1, 4)
+				end
 				if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
 				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(nil, 12, 'OUTLINE') end
 				if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
@@ -287,7 +280,6 @@ if IsAddOnLoaded("ElvUI") then
 	s:RegisterSkin('DBM-GUI', LoadSkinOptions)
 end
 
---local Init = function()
 	local name = "DBMSkin"
 	local function SkinDBM(self)
 		local s = U.s
@@ -296,15 +288,8 @@ end
 		DBM_SavedOptions.Enabled=true
 		DBT_SavedOptions["DBM"].Scale = 1
 		DBT_SavedOptions["DBM"].HugeScale = 1
-		--DBT_SavedOptions["DBM"].BarXOffset = 0
-		--DBT_SavedOptions["DBM"].BarYOffset = 2
 		DBT_SavedOptions["DBM"].Texture = c.media.normTex
 		if IsAddOnLoaded("Tukui") then DBT_SavedOptions["DBM"].Font = c.media.font end
 		if IsAddOnLoaded("ElvUI") then DBT_SavedOptions["DBM"].Font = "ElvUI Font" end
 	end
 	U.RegisterSkin(name,SkinDBM)
---end
-
---local loadOptions = CreateFrame("Frame")
---loadOptions:RegisterEvent("PLAYER_ENTERING_WORLD")
---loadOptions:SetScript("OnEvent", Init)
