@@ -29,16 +29,16 @@ local function LoadSkin()
 						icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
 						icon1.overlay:CreateBackdrop()
 						if U.elv and c.PixelMode then icon1.overlay:Size(buttonsize-2) else icon1.overlay:Size(buttonsize-4) end
-						if U.elv then icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -(c.PixelMode and 2 or 5), 0) end
-						if U.tuk then icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -5, 0) end
+						if U.elv then icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -(c.PixelMode and 2 or 5), (c.PixelMode and 1 or 2)) end
+						if U.tuk then icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -5, 2) end
 					end
 
 					if not (icon2.overlay) then
 						icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
 						icon2.overlay:CreateBackdrop()
 						if U.elv and c.PixelMode then icon2.overlay:Size(buttonsize-2) else icon2.overlay:Size(buttonsize-4) end
-						if U.elv then icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", (c.PixelMode and 2 or 5), 0) end
-						if U.tuk then icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", -5, 0) end						
+						if U.elv then icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", (c.PixelMode and 2 or 5), (c.PixelMode and 1 or 2)) end
+						if U.tuk then icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", 5, 2) end						
 					end
 
 					if bar.color then
