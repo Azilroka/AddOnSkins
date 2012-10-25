@@ -26,7 +26,6 @@ local function SkinRecount(self)
 		frame.Title:ClearAllPoints()
 		frame.Title:SetPoint("LEFT", 4, 0)
 		if IsAddOnLoaded("Tukui") then
-			frame.Title:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
 			frame.CloseButton:SetNormalTexture("")
 			frame.CloseButton:SetPushedTexture("")
 			frame.CloseButton:SetHighlightTexture("")
@@ -59,7 +58,6 @@ local function SkinRecount(self)
 		frame.Title:ClearAllPoints()
 		frame.Title:SetPoint("LEFT", 4, 0)
 		if IsAddOnLoaded("Tukui") then
-			frame.Title:SetFont(c["media"].font, c["datatext"].fontsize, "OUTLINE")
 			frame.CloseButton:SetNormalTexture("")
 			frame.CloseButton:SetPushedTexture("")
 			frame.CloseButton:SetHighlightTexture("")
@@ -80,8 +78,6 @@ local function SkinRecount(self)
 			if IsAddOnLoaded("Tukui") then
 				v.LeftText:SetPoint("LEFT", 4, 0)
 				v.RightText:SetPoint("RIGHT", -4, 0)
-				v.LeftText:SetFont(c["media"].font, c["datatext"].fontsize)
-				v.RightText:SetFont(c["media"].font, c["datatext"].fontsize)
 			end
 		end
 	end
