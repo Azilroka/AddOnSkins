@@ -740,7 +740,20 @@ function EmbedWindowResize()
 			EmbeddingWindow:Size(TukuiInfoRight:GetWidth(), (TukuiChatBackgroundRight:GetHeight() - 34))
 		end
 	end
-	if (U.CheckOption("EmbedRO")) then EmbedRecountOmenResize() end
-	if (U.CheckOption("EmbedTDPS")) then EmbedTDPSResize() end
-	if (U.CheckOption("EmbedRecount")) then EmbedRecountResize() end
+	if U.CheckOption("EmbedRO") then
+		if (IsAddOnLoaded("Omen") and IsAddOnLoaded("Recount")) then
+			EmbedRecountOmenResize()
+		end
+	end
+	if U.CheckOption("EmbedTDPS") then
+		if IsAddOnLoaded("TinyDPS") then
+			EmbedTDPSResize()
+		end
+	end
+	if U.CheckOption("EmbedRecount") then
+		if IsAddOnLoaded("Recount") then
+			EmbedRecountResize()
+		end
+	end
+
 end
