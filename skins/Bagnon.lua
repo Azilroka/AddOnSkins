@@ -35,4 +35,4 @@ local function SkinBagnon(self,event)
 		ToggleBackpack()
 	end
 end
-U.RegisterSkin(name,SkinBagnon,"BANKFRAME_OPENED","GUILDBANKFRAME_OPENED","VOID_STORAGE_OPEN")
+U.RegisterSkin(name,SkinBagnon,"BANKFRAME_OPENED","GUILDBANKFRAME_OPENED","VOID_STORAGE_OPEN","UNIT_AURA")
