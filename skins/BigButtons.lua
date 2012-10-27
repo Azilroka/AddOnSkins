@@ -1,6 +1,5 @@
 local FishingButton = CreateFrame("Button", "FishingButton", UIParent, "SecureActionButtonTemplate")
 FishingButton:Size(50)
-FishingButton:SetPoint("BOTTOM", 0, 350)
 FishingButton:SetMovable(true)
 FishingButton:SetTemplate("Default")
 FishingButton:SetAttribute("type", "spell");
@@ -11,24 +10,25 @@ FishingButton.icon:SetPoint("CENTER")
 FishingButton.icon:SetTexture(select(3, GetSpellInfo(131474)))
 FishingButton.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 FishingButton.icon:Size(46)
-
 FishingButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 FishingButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
 FishingButton:SetScript("OnEvent", function(self)
+	self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", 0, 0)
 	if not InCombatLockdown() then
 		if IsEquippedItemType("Fishing Poles") then
-			FishingButton:Show()
-			UIFrameFadeIn(FishingButton, 0.2, FishingButton:GetAlpha(), 1)
+			self:Show()
+			UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
 		else
-			UIFrameFadeOut(FishingButton, 0.2, FishingButton:GetAlpha(), 0)
-			FishingButton:Hide()
+			UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+			self:Hide()
 		end
 	end
+	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 end)
 
 local SurveyButton = CreateFrame("Button", "SurveyButton", UIParent, "SecureActionButtonTemplate")
 	SurveyButton:Size(50)
-	SurveyButton:SetPoint("BOTTOM", 0, 350)
+	SurveyButton:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", 0, 0)
 	SurveyButton:SetMovable(true)
 	SurveyButton:SetTemplate("Default")
 	SurveyButton:SetAttribute("type", "spell");
@@ -40,11 +40,16 @@ local SurveyButton = CreateFrame("Button", "SurveyButton", UIParent, "SecureActi
 	SurveyButton.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	SurveyButton.icon:Size(46)
 	SurveyButton:RegisterEvent("ARTIFACT_DIG_SITE_UPDATED");
+	SurveyButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+	SurveyButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
+	SurveyButton:SetScript("OnEvent", function(self)
+		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", 0, 0)
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	end)
 
 -- Sunsong Ranch
 local RustyWateringCanButton = CreateFrame("Button", "RustyWateringCanButton", UIParent, "SecureActionButtonTemplate")
 	RustyWateringCanButton:Size(50)
-	RustyWateringCanButton:SetPoint("CENTER", UIParent, "BOTTOM", -53, 350)
 	RustyWateringCanButton:SetMovable(true)
 	RustyWateringCanButton:SetTemplate("Default")
 	RustyWateringCanButton:SetAttribute("type", "item");
@@ -59,18 +64,20 @@ local RustyWateringCanButton = CreateFrame("Button", "RustyWateringCanButton", U
 	RustyWateringCanButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 	RustyWateringCanButton:RegisterEvent("ZONE_CHANGED")
 	RustyWateringCanButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
-	RustyWateringCanButton:HookScript("OnEvent", function(self) 
+	RustyWateringCanButton:HookScript("OnEvent", function(self)
+		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "BOTTOM", -53, 0)
 		if (GetSubZoneText() == "Sunsong Ranch" and GetItemCount(79104) == 1) then
-			RustyWateringCanButton:Show()
+			self:Show()
+			UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
 		else
-			RustyWateringCanButton:Hide()
+			UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+			self:Hide()
 		end
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end)
 
 local VintageBugSprayerButton = CreateFrame("Button", "VintageBugSprayerButton", UIParent, "SecureActionButtonTemplate")
 	VintageBugSprayerButton:Size(50)
-	VintageBugSprayerButton:SetPoint("CENTER", UIParent, "BOTTOM", 0, 350)
 	VintageBugSprayerButton:SetMovable(true)
 	VintageBugSprayerButton:SetTemplate("Default")
 	VintageBugSprayerButton:SetAttribute("type", "item");
@@ -85,18 +92,20 @@ local VintageBugSprayerButton = CreateFrame("Button", "VintageBugSprayerButton",
 	VintageBugSprayerButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 	VintageBugSprayerButton:RegisterEvent("ZONE_CHANGED")
 	VintageBugSprayerButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
-	VintageBugSprayerButton:HookScript("OnEvent", function(self) 
+	VintageBugSprayerButton:HookScript("OnEvent", function(self)
+		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "BOTTOM", 0, 0)
 		if (GetSubZoneText() == "Sunsong Ranch" and GetItemCount(80513) == 1) then
-			VintageBugSprayerButton:Show()
+			self:Show()
+			UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
 		else
-			VintageBugSprayerButton:Hide()
+			UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+			self:Hide()
 		end
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end)
 
 local DentedShovelButton = CreateFrame("Button", "DentedShovelButton", UIParent, "SecureActionButtonTemplate")
 	DentedShovelButton:Size(50)
-	DentedShovelButton:SetPoint("CENTER", UIParent, "BOTTOM", 53, 350)
 	DentedShovelButton:SetMovable(true)
 	DentedShovelButton:SetTemplate("Default")
 	DentedShovelButton:SetAttribute("type", "item");
@@ -112,10 +121,13 @@ local DentedShovelButton = CreateFrame("Button", "DentedShovelButton", UIParent,
 	DentedShovelButton:RegisterEvent("ZONE_CHANGED")
 	DentedShovelButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
 	DentedShovelButton:HookScript("OnEvent", function(self) 
+		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "BOTTOM", 53, 0)
 		if (GetSubZoneText() == "Sunsong Ranch" and GetItemCount(89880) == 1) then
-			DentedShovelButton:Show()
+			self:Show()
+			UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
 		else
-			DentedShovelButton:Hide()
+			UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+			self:Hide()
 		end
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end)
