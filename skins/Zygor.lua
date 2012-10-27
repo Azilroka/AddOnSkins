@@ -12,14 +12,6 @@ local function SkinZygor(self)
 		_G["ZygorGuidesViewerFrame_Step"..i]:CreateBackdrop()
 	end
 
-	for i = 1, 25 do
-		if _G["ZygorGuidesViewerFrame_Step1_Line"..i.."Back"] then _G["ZygorGuidesViewerFrame_Step1_Line"..i.."Back"]:StripTextures(True) end
-		if _G["ZygorGuidesViewerFrame_Step2_Line"..i.."Back"] then _G["ZygorGuidesViewerFrame_Step2_Line"..i.."Back"]:StripTextures(True) end
-		if _G["ZygorGuidesViewerFrame_Step3_Line"..i.."Back"] then _G["ZygorGuidesViewerFrame_Step3_Line"..i.."Back"]:StripTextures(True) end
-		if _G["ZygorGuidesViewerFrame_Step4_Line"..i.."Back"] then _G["ZygorGuidesViewerFrame_Step4_Line"..i.."Back"]:StripTextures(True) end
-		if _G["ZygorGuidesViewerFrame_Step5_Line"..i.."Back"] then _G["ZygorGuidesViewerFrame_Step5_Line"..i.."Back"]:StripTextures(True) end
-		if _G["ZygorGuidesViewerFrame_Step6_Line"..i.."Back"] then _G["ZygorGuidesViewerFrame_Step6_Line"..i.."Back"]:StripTextures(True) end
-	end
 	if ZygorGuidesViewerFrame:IsShown() then ZygorGuidesViewerFrame_Border:SetTemplate("Transparent") end
 	ZygorGuidesViewerFrame_Border:HookScript("OnHide", function(self) self:StripTextures(True) end)
 	ZygorGuidesViewerFrame_Border:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
