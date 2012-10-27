@@ -38,3 +38,19 @@ local SurveyButton = CreateFrame("Button", "SurveyButton", UIParent, "SecureActi
 	SurveyButton.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	SurveyButton.icon:Size(46)
 	SurveyButton:RegisterEvent("ARTIFACT_DIG_SITE_UPDATED");
+
+local WaterCanButton = CreateFrame("Button", "WaterCanButton", UIParent, "SecureActionButtonTemplate")
+	WaterCanButton:Size(50)
+	WaterCanButton:SetPoint("BOTTOM", 0, 350)
+	WaterCanButton:SetMovable(true)
+	WaterCanButton:SetTemplate("Default")
+	WaterCanButton:SetAttribute("type", "spell");
+	WaterCanButton:SetAttribute("spell", "Survey");
+	--WaterCanButton:Hide()
+	WaterCanButton.icon = SurveyButton:CreateTexture(nil, "OVERLAY")
+	WaterCanButton.icon:SetPoint("CENTER")
+	WaterCanButton.icon:SetTexture(select(3, GetSpellInfo(79104)))
+	WaterCanButton.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	WaterCanButton.icon:Size(46)
+
+if GetZoneText() == "Sunsong Ranch" then WaterCanButton:Show() else WaterCanButton:Hide() end
