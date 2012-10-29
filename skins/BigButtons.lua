@@ -127,8 +127,8 @@ DentedShovelButton:RegisterEvent("ZONE_CHANGED")
 DentedShovelButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
 DentedShovelButton:HookScript("OnEvent", function(self)
 	if not InCombatLockdown() then
+		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", 53, 0)
 		if (GetSubZoneText() == "Sunsong Ranch" and GetItemCount(89880) == 1) then
-			self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", 53, 0)
 			self:Show()
 			UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
 		else
