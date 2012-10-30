@@ -27,7 +27,16 @@ local function SkinBagnon(self,event)
 			end
 		end
 	end
-	if not bagnononce then
+	if U.elv then c:Delay(1, function()
+		if not bagnononce then
+			bagnononce = true
+			ToggleBackpack()
+			U.SkinFrame(BagnonFrameinventory)
+			U.SkinCloseButton(BagnonFrameinventoryCloseButton)
+			ToggleBackpack()
+		end
+	end)
+	if U.tuk then
 		bagnononce = true
 		ToggleBackpack()
 		U.SkinFrame(BagnonFrameinventory)
@@ -35,4 +44,4 @@ local function SkinBagnon(self,event)
 		ToggleBackpack()
 	end
 end
-U.RegisterSkin(name,SkinBagnon,"BANKFRAME_OPENED","GUILDBANKFRAME_OPENED","VOID_STORAGE_OPEN","UNIT_AURA")
+U.RegisterSkin(name,SkinBagnon,"BANKFRAME_OPENED","GUILDBANKFRAME_OPENED","VOID_STORAGE_OPEN")
