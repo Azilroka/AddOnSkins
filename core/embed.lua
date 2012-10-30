@@ -72,20 +72,20 @@ if event == "PLAYER_ENTERING_WORLD" then
 			else
 				if U.elv then if ChatFrame3Tab:IsShown() then ChatFrame3Tab:Hide() else ChatFrame3Tab:Show() end end
 				if U.tuk then if ChatFrame4:IsShown() then ChatFrame4:Hide() else ChatFrame4:Show() end end
-				if IsAddOnLoaded("Recount") and ((U.CheckOption("EmbedRecount")) or (U.CheckOption("EmbedRO"))) then
+				if (U.CheckOption("EmbedRecount","Recount")) or (U.CheckOption("EmbedRO")) then
 					ToggleFrame(Recount_MainWindow)
 				end
-				if IsAddOnLoaded("Skada") and ((U.CheckOption("EmbedSkada"))) then
+				if (U.CheckOption("EmbedSkada","Skada")) then
 					Skada:ToggleWindow()
 				end
-				if IsAddOnLoaded("Omen") and ((U.CheckOption("EmbedOmen")) or (U.CheckOption("EmbedRO"))) then
+				if (U.CheckOption("EmbedOmen","Omen")) or (U.CheckOption("EmbedRO")) then
 					if OmenBarList:IsShown() then
 						OmenBarList:Hide()
 					else
 						OmenBarList:Show()
 					end
 				end
-				if IsAddOnLoaded("TinyDPS") and (U.CheckOption("EmbedTDPS")) then
+				if (U.CheckOption("EmbedTDPS","TinyDPS")) then
 					if tdpsFrame:IsShown() then
 						tdpsFrame:Hide()
 					else
@@ -194,20 +194,20 @@ if event == "PLAYER_ENTERING_WORLD" then
 		local E, L, V, P, G, DF = unpack(ElvUI)
 		RightChatToggleButton:SetScript("OnClick", function(self, btn)
 				if btn == 'RightButton' then
-				if IsAddOnLoaded("Recount") and ((U.CheckOption("EmbedRecount")) or (U.CheckOption("EmbedRO"))) then
+				if (U.CheckOption("EmbedRecount","Recount")) or (U.CheckOption("EmbedRO")) then
 					ToggleFrame(Recount_MainWindow)
 				end
-				if IsAddOnLoaded("Skada") and ((U.CheckOption("EmbedSkada"))) then
+				if (U.CheckOption("EmbedSkada","Skada")) then
 					Skada:ToggleWindow()
 				end
-				if IsAddOnLoaded("Omen") and ((U.CheckOption("EmbedOmen")) or (U.CheckOption("EmbedRO"))) then
+				if (U.CheckOption("EmbedOmen","Omen")) or (U.CheckOption("EmbedRO")) then
 					if OmenBarList:IsShown() then
 						OmenBarList:Hide()
 					else
 						OmenBarList:Show()
 					end
 				end
-				if IsAddOnLoaded("TinyDPS") and (U.CheckOption("EmbedTDPS")) then
+				if (U.CheckOption("EmbedTDPS","TinyDPS")) then
 					if tdpsFrame:IsShown() then
 						tdpsFrame:Hide()
 					else
@@ -527,24 +527,24 @@ if event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_ENTER_COMBAT" or InComba
 	if (U.CheckOption("EmbedOoC")) then
 		if U.elv then ChatFrame3Tab:Hide() end
 		if U.tuk then ChatFrame4:Hide() end
-		if (IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRecount"))) then
+		if (U.CheckOption("EmbedRecount","Recount"))  then
 			Recount_MainWindow:Show()
 		end
-		if (IsAddOnLoaded("Skada") and (U.CheckOption("EmbedSkada"))) then
+		if (U.CheckOption("EmbedSkada","Skada"))  then
 			if Skada.db.profile.hidesolo then return end
 			if Skada.db.profile.hidecombat then return end
 			for _, window in ipairs(Skada:GetWindows()) do
 				window:Show()
 			end
 		end
-		if (IsAddOnLoaded("Omen") and IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRO"))) then
+		if (U.CheckOption("EmbedRO","Recount","Omen")) then
 			Recount_MainWindow:Show()
 			OmenBarList:Show()
 		end
-		if (IsAddOnLoaded("Omen") and (U.CheckOption("EmbedOmen"))) then
+		if (U.CheckOption("EmbedOmen","Omen"))  then
 			OmenBarList:Show()
 		end
-		if (IsAddOnLoaded("TinyDPS") and (U.CheckOption("EmbedTDPS"))) then
+		if (U.CheckOption("EmbedTDPS","TinyDPS")) then
 			tdpsFrame:Show()
 		end
 	end
@@ -553,22 +553,22 @@ else
 	if (U.CheckOption("EmbedOoC")) then
 		if U.elv then ChatFrame3Tab:Show() end
 		if U.tuk then ChatFrame4:Show() end
-		if (IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRecount"))) then
+		if (U.CheckOption("EmbedRecount","Recount")) then
 			Recount_MainWindow:Hide()
 		end
-		if (IsAddOnLoaded("Skada") and (U.CheckOption("EmbedSkada"))) then
+		if (U.CheckOption("EmbedSkada","Skada")) then
 			for _, window in ipairs(Skada:GetWindows()) do
 				window:Hide()
 			end
 		end
-		if (IsAddOnLoaded("Omen") and IsAddOnLoaded("Recount") and (U.CheckOption("EmbedRO"))) then
+		if (U.CheckOption("EmbedRO","Recount","Omen")) then
 			Recount_MainWindow:Hide()
 			OmenBarList:Hide()
 		end
-		if (IsAddOnLoaded("Omen") and (U.CheckOption("EmbedOmen"))) then
+		if (U.CheckOption("EmbedOmen","Omen"))  then
 			OmenBarList:Hide()
 		end
-		if (IsAddOnLoaded("TinyDPS") and (U.CheckOption("EmbedTDPS"))) then
+		if (U.CheckOption("EmbedTDPS","TinyDPS")) then
 			tdpsFrame:Hide()
 		end
 	end
@@ -622,8 +622,7 @@ StaticPopupDialogs["RELOADUI"] = {
 
 
 function EmbedRecountOmen()
-		if not IsAddOnLoaded("Omen") then U.DisableOption("EmbedRO") return end
-		if not IsAddOnLoaded("Recount") then U.DisableOption("EmbedRO") return end
+		if not (U.CheckOption("EmbedRO","Recount","Omen")) then U.DisableOption("EmbedRO") return end
 	if (U.CheckOption("EmbedOoC")) then
 		if (U.CheckOption("EmbedRO")) then
 			Recount_MainWindow:Hide()
@@ -741,6 +740,6 @@ function EmbedWindowResize()
 		end
 	end
 	if (U.CheckOption("EmbedRO","Recount","Omen")) then EmbedRecountOmenResize() end
-	if (U.CheckOption("EmbedTDPS","TinyDps")) then EmbedTDPSResize() end
+	if (U.CheckOption("EmbedTDPS","TinyDPS")) then EmbedTDPSResize() end
 	if (U.CheckOption("EmbedRecount","Recount")) then EmbedRecountResize() end
 end
