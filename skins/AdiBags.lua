@@ -18,6 +18,7 @@ end
 
 local function AdiSkin(self,event)
 	if event == 'PLAYER_ENTERING_WORLD' or event == 'BANKFRAME_OPENED' or event == "PLAYER_REGEN_DISABLED" or event == "PLAYER_REGEN_ENABLED" or event == "PLAYER_UPDATE_RESTING" or event == "UNIT_AURA" then
+		print(event)
 		if not AdiBagsContainer1 then ToggleBackpack() ToggleBackpack() end
 		if AdiBagsContainer1 then
 			SkinFrame(AdiBagsContainer1)
