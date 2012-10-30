@@ -169,7 +169,12 @@ end
 
 U.Desaturate = cDesaturate
 
-local function cCheckOption(optionName)
+local function cCheckOption(optionName,...)
+	for i = 1,select('#',...) do
+		local addon = select(i,...)
+		if not IsAddOnLoaded(addon) then return false end
+	end
+	
 	if IsAddOnLoaded("ElvUI") then
 		local c = U.c
 		if not c.db or not c.db.skins then return false end
