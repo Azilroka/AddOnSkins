@@ -3,6 +3,7 @@ local U = unpack(select(2,...))
 local name = 'BagnonSkin'
 local function SkinBagnon(self,event)
 	if event == "BANKFRAME_OPENED" then
+	if U.elv then c:Delay(0, function()
 		if BagnonFramebank then
 			if not bagnonbankonce then
 				bagnonbankonce = true
@@ -10,6 +11,17 @@ local function SkinBagnon(self,event)
 				U.SkinCloseButton(BagnonFramebankCloseButton)
 			end
 		end
+		end)
+	end
+	if U.tuk then
+		if BagnonFramebank then
+			if not bagnonbankonce then
+				bagnonbankonce = true
+				U.SkinFrame(BagnonFramebank)
+				U.SkinCloseButton(BagnonFramebankCloseButton)
+			end
+		end
+	end
 	elseif event == "GUILDBANKFRAME_OPENED" then
 		if BagnonFrameguildbank then
 			if not bagnonguildonce then
@@ -27,7 +39,7 @@ local function SkinBagnon(self,event)
 			end
 		end
 	end
-	if U.elv then c:Delay(1, function()
+	if U.elv then c:Delay(0, function()
 		if not bagnononce then
 			bagnononce = true
 			ToggleBackpack()
