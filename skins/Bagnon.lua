@@ -47,7 +47,8 @@ local function SkinBagnon(self,event)
 			U.SkinCloseButton(BagnonFrameinventoryCloseButton)
 			ToggleBackpack()
 		end
-	end)
+		end)
+	end
 	if U.tuk then
 		bagnononce = true
 		ToggleBackpack()
