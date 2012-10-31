@@ -18,6 +18,10 @@ U.Skins = {
 	["AltoholicSkin"] = {
 		["addon"] = "Altoholic",
 	},
+	["AraBrokerGuildFriendsSkin"] = {
+		["buttonText"] = "Ara Broker Guild Friends",
+		["addon"] = "Ara_Broker_Guild_Friends"
+	},
 	["ArchySkin"] = {
 		["addon"] = "Archy"
 	},

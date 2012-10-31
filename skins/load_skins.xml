@@ -3,6 +3,7 @@
 	<Script file="AdiBags.lua"/>
 	<Script file="ATSW.lua"/>
 	<Script file="Altoholic.lua"/>
+	<Script file="AraBrokerGuildFriends.lua"/>
 	<Script file="Archy.lua"/>
 	<Script file="Arh.lua"/>
 	<Script file="ArkInventory.lua"/>
