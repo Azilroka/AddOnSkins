@@ -68,6 +68,9 @@ end
 function XS:Initialize()
 	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
+	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix') and E.myrealm == 'Emerald Dream' then
+		E.db.skins['SortSettings'] = true
+	end
 	if IsAddOnLoaded("Tukui_UIPackages_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
 	self.font = E["media"].normFont
 	self.pixelFont = LSM:Fetch("font","ElvUI Pixel")
