@@ -107,9 +107,16 @@ end
 
 U.SkinSliderFrame = cSkinSliderFrame
 
+function cRegisterForPetBattleHide(frame)
+	if frame.IsVisible then
+		U.FrameLocks[frame:GetName()] = { shown = false }
+	end
+end
+
 local function cSkinFrame(self)
 	self:StripTextures(True)
 	self:SetTemplate("Transparent")
+	cRegisterForPetBattleHide(self)
 end
 
 U.SkinFrame = cSkinFrame
@@ -117,6 +124,7 @@ U.SkinFrame = cSkinFrame
 local function cSkinBackdropFrame(self)
 	self:StripTextures(True)
 	self:CreateBackdrop("Transparent")
+	cRegisterForPetBattleHide(self)
 end
 
 U.SkinBackdropFrame = cSkinBackdropFrame
@@ -124,6 +132,7 @@ U.SkinBackdropFrame = cSkinBackdropFrame
 local function cSkinFrameD(self)
 	self:StripTextures(True)
 	self:SetTemplate("Default")
+	cRegisterForPetBattleHide(self)
 end
 
 U.SkinFrameD = cSkinFrameD
@@ -172,6 +181,7 @@ U.Desaturate = cDesaturate
 local function cCheckOption(optionName,...)
 	for i = 1,select('#',...) do
 		local addon = select(i,...)
+		if not addon then break end
 		if not IsAddOnLoaded(addon) then return false end
 	end
 	
@@ -239,6 +249,29 @@ local function cUnregisterEvent(skinName,frame,event)
 end
 
 U.UnregisterEvent = cUnregisterEvent
+
+function cAddNonPetBattleFrames()
+	for frame,data in pairs(U.FrameLocks) do
+		if data.shown then
+			_G[frame]:Show()
+		end
+	end
+end
+
+U.AddNonPetBattleFrames = cAddNonPetBattleFrames
+
+function cRemoveNonPetBattleFrames()
+	for frame,data in pairs(U.FrameLocks) do
+		if(_G[frame]:IsVisible()) then
+			data.shown = true
+			_G[frame]:Hide()
+		else
+			data.shown = false
+		end
+	end
+end
+
+U.RemoveNonPetBattleFrames = cRemoveNonPetBattleFrames
 
 function AzilCompatMode()
 	_G["cSkinButton"] = cSkinButton

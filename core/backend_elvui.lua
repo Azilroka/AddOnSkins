@@ -78,6 +78,12 @@ function XS:Initialize()
 
 	self:GenerateOptions()
 
+	self.AddNonPetBattleFrames = function(self) U.AddNonPetBattleFrames() end
+	self.RemoveNonPetBattleFrames = function(self) U.RemoveNonPetBattleFrames() end
+
+	self:RegisterEvent("PET_BATTLE_CLOSE", 'AddNonPetBattleFrames')
+	self:RegisterEvent('PET_BATTLE_OPENING_START', "RemoveNonPetBattleFrames")
+	
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
 			self:RegisterSkin(skin,data.func,data.events)

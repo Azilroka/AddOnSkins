@@ -8,6 +8,8 @@ local AddOn = {};
 Engine[1] = AddOn
 UISkins = Engine
 
+AddOn.FrameLocks = {}
+
 local s
 if ElvUI then
 	local E, L, V, P, G, DF = unpack(ElvUI)

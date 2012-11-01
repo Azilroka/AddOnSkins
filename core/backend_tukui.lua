@@ -15,7 +15,8 @@ XS.Init = function(self)
 	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
 	local f = CreateFrame("Frame",nil)
-
+	f:RegisterEvent("PET_BATTLE_CLOSE")
+	f:RegisterEvent("PET_BATTLE_OPENING_START")
 	self.frame = f
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
@@ -30,6 +31,11 @@ XS.Init = function(self)
 		end
 	end
 	f:SetScript("OnEvent", function(self,event)
+		if event == "PET_BATTLE_CLOSE" then
+			U.AddNonPetBattleFrames()
+		elseif event == "PET_BATTLE_OPENING_START" then
+			U.RemoveNonPetBattleFrames()
+		end 
 		for skin,funcs in pairs(XS.skins) do
 			if U.CheckOption(skin) and XS.events[event][skin] then
 				for func,_ in pairs(funcs) do
