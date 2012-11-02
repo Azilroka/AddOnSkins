@@ -108,7 +108,7 @@ end
 U.SkinSliderFrame = cSkinSliderFrame
 
 function cRegisterForPetBattleHide(frame)
-	if frame.IsVisible then
+	if frame.IsVisible and frame:GetName() then
 		U.FrameLocks[frame:GetName()] = { shown = false }
 	end
 end
