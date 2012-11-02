@@ -18,9 +18,9 @@ local function SkinTinyDps(self)
 			tdps.width = Minimap:GetWidth()
 			tdps.spacing = 1
 			tdps.barHeight = 14
-			font.name = U.x.datatext_font
-			font.size = 12
-			font.outline = "OUTLINE"
+			--font.name = U.x.datatext_font
+			--font.size = 12
+			--font.outline = "OUTLINE"
 		end
 	end
 	if U.tuk then
@@ -28,9 +28,9 @@ local function SkinTinyDps(self)
 			tdps.width = TukuiMinimap:GetWidth()
 			tdps.spacing = 1
 			tdps.barHeight = 14
-			font.name = c["media"].pixelfont
-			font.size = 12
-			font.outline = "MONOCHROMEOUTLINE"
+			--font.name = c["media"].pixelfont
+			--font.size = 12
+			--font.outline = "MONOCHROMEOUTLINE"
 		end
 	end
 	if(status) then
@@ -63,16 +63,16 @@ function EmbedTDPS()
 	EmbedTDPSResize()
 	tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
 if U.elv then
-	tdpsFont.name = U.x.datatext_font
-	tdpsFont.size = 12
-	tdpsFont.outline = "THIN"
-	tdpsFont.shadow = 0
+	--tdpsFont.name = U.x.datatext_font
+	--tdpsFont.size = 12
+	--tdpsFont.outline = "THIN"
+	--tdpsFont.shadow = 0
 end
 if U.tuk then
 	local c = U.c
-	tdpsFont.name = c["media"].pixelfont
-	tdpsFont.size = 12
-	tdpsFont.outline = "MONOCHROMEOUTLINE"
+	--tdpsFont.name = c["media"].pixelfont
+	--tdpsFont.size = 12
+	--tdpsFont.outline = "MONOCHROMEOUTLINE"
 end
 	tdpsRefresh()
 	if (U.CheckOption("EmbedOoC")) then
