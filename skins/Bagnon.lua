@@ -2,6 +2,8 @@ if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("
 local U = unpack(select(2,...))
 local name = 'BagnonSkin'
 local function SkinBagnon(self,event)
+	local s = U.s
+	local c = U.c
 	if event == "BANKFRAME_OPENED" then
 	if U.elv then c:Delay(0, function()
 		if BagnonFramebank then
