@@ -52,7 +52,7 @@ local function LoadSkin()
 
 					if not frame.styled then
 						--frame:SetScale(1)
-						frame.SetScale=s.dummy
+						--frame.SetScale=s.dummy
 						frame:SetHeight(buttonsize)
 						if (U.CheckOption("DBMSkinHalf")) then frame:SetHeight(buttonsize/3) end
 						frame:SetTemplate("Transparent")
@@ -286,8 +286,8 @@ end
 		local c = U.c
 		LoadSkin()
 		DBM_SavedOptions.Enabled=true
-		DBT_SavedOptions["DBM"].Scale = 1
-		DBT_SavedOptions["DBM"].HugeScale = 1
+		--DBT_SavedOptions["DBM"].Scale = 1
+		--DBT_SavedOptions["DBM"].HugeScale = 1
 		DBT_SavedOptions["DBM"].Texture = c.media.normTex
 		if IsAddOnLoaded("Tukui") then DBT_SavedOptions["DBM"].Font = c.media.font end
 		if IsAddOnLoaded("ElvUI") then DBT_SavedOptions["DBM"].Font = "ElvUI Font" end

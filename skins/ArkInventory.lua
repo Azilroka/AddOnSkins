@@ -24,15 +24,15 @@ local function SkinArkInventory(self)
 	ArkInventory.Frame_Container_Draw = function(frame)
 		local loc_id = frame.ARK_Data.loc_id
 		--ArkInventory.LocationOptionSet(loc_id, "bar", "pad", "external", 2)
-		ArkInventory.LocationOptionSet(loc_id, "window", "pad", 0)
+		--ArkInventory.LocationOptionSet(loc_id, "window", "pad", 0)
 		return ArkInventory.Frame_Container_Draw_(frame)
 	end
 	
-	ArkInventory.Frame_Main_Scale_ = ArkInventory.Frame_Main_Scale
-	ArkInventory.Frame_Main_Scale = function(loc_id)
-		ArkInventory.Frame_Main_Get( loc_id ):SetScale(1)
-		ArkInventory.Frame_Main_Anchor_Set(loc_id)
-	end
+	--ArkInventory.Frame_Main_Scale_ = ArkInventory.Frame_Main_Scale
+	--ArkInventory.Frame_Main_Scale = function(loc_id)
+		--ArkInventory.Frame_Main_Get( loc_id ):SetScale(1)
+		--ArkInventory.Frame_Main_Anchor_Set(loc_id)
+	--end
 	
 	ArkInventory.Frame_Main_Anchor_Set_ = ArkInventory.Frame_Main_Anchor_Set
 	ArkInventory.Frame_Main_Anchor_Set = function(loc_id)
@@ -60,7 +60,7 @@ local function SkinArkInventory(self)
 		status:SetPoint("TOPLEFT",changer,"BOTTOMLEFT",0,-2)
 		status:SetPoint("TOPRIGHT",changer,"BOTTOMRIGHT",0,-2)
 
-		ArkInventory.Const.Frame.Status.Height = 30
+		--ArkInventory.Const.Frame.Status.Height = 30
 		_G[status:GetName().."EmptyText"]:SetPoint("LEFT",2,0)
 		if IsAddOnLoaded("ElvUI") then _G[status:GetName().."EmptyText"]:SetFont(c["media"].normFont, 12) end
 		if IsAddOnLoaded("Tukui") then _G[status:GetName().."EmptyText"]:SetFont(c["media"].font, 12) end
@@ -78,7 +78,7 @@ local function SkinArkInventory(self)
 		if IsAddOnLoaded("Tukui") then _G[status:GetName().."GoldGoldButtonText"]:SetFont(c["media"].font,12) end
 	end
 	
-	ArkInventory.Const.Frame.Title.Height2 = 32
+	--ArkInventory.Const.Frame.Title.Height2 = 32
 	
 	ArkInventory.Frame_Bar_Paint_ = ArkInventory.Frame_Bar_Paint
 	ArkInventory.Frame_Bar_Paint = function(bar)
