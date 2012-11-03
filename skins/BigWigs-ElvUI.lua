@@ -67,9 +67,9 @@ end
 local applystyle = function(bar)
 
 	-- general bar settings
-	bar.OldHeight = bar:GetHeight()
-	bar.OldScale = bar:GetScale()
-	bar.OldSetScale=bar.SetScale
+	--bar.OldHeight = bar:GetHeight()
+	--bar.OldScale = bar:GetScale()
+	--bar.OldSetScale=bar.SetScale
 	--bar.SetScale=E.noop
 	bar:Height(buttonsize)
 	--bar:SetScale(1)
