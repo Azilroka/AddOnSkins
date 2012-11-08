@@ -56,6 +56,8 @@ local function SkinQuartz(self)
 	end
 
 	Q3:ApplySettings()
+
+	print("If you have performance issue's while using the Quartz Skin. Please disable the Quartz skin.")
 end
 
 U.RegisterSkin(name,SkinQuartz)
