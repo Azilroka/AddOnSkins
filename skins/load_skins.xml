@@ -44,8 +44,10 @@
 	<Script file="Omen.lua"/>
 	<Script file="Outfitter.lua"/>
 	<Script file="PoMTracker.lua"/>
+	<Script file="Poisoner.lua"/>
 	<Script file="Postal.lua"/>
 	<Script file="PowerAuras.lua"/>
+	<Script file="Quartz.lua"/>
 	<Script file="RBS.lua"/>
 	<Script file="RaidInviteOrganizer.lua"/>
 	<Script file="Recount.lua"/>

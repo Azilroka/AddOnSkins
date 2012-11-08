@@ -142,6 +142,9 @@ U.Skins = {
 	["OutfitterSkin"] = {
 		["addon"] = "Outfitter"
 	},
+	--["PoisonerSkin"] = {
+	--	["addon"] = "Poisoner"
+	--},
 	["PoMTrackerSkin"] = {
 		["addon"] = "PoMTracker"
 	},
@@ -155,6 +158,9 @@ U.Skins = {
 		["buttonText"] = "PowerAuras Icons",
 		["addon"] = "PowerAuras",
 		["ui"] = "ElvUI"
+	},
+	["QuartzSkin"] = {
+		["addon"] = "Quartz"
 	},
 	["RaidInviteOrganizerSkin"] = {
 		["buttonText"] = "Raid Invite Organizer",
