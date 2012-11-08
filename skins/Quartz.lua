@@ -57,7 +57,7 @@ local function SkinQuartz(self)
 
 	Q3:ApplySettings()
 
-	print("If you have performance issue's while using the Quartz Skin. Please disable the Quartz skin.")
+	print("If you are experiencing performance issue's (eg. locking spellcasts, extereme lag spikes) while using the Quartz Skin. Please disable the Quartz skin.")
 end
 
 U.RegisterSkin(name,SkinQuartz)
