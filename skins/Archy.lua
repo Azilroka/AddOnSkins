@@ -8,37 +8,34 @@ local function SkinArchy(self)
 	
 	local function SkinArchyArtifactFrame()
 			U.SkinFrame(ArchyArtifactFrame)
-			if not InCombatLockdown() then ArchyArtifactFrame:SetScale(1) end
-			--ArchyArtifactFrame:Size(300, 210)
-			ArchyArtifactFrame:Width(300)
 
 			if ArchyArtifactFrameSkillBar then
-				ArchyArtifactFrameSkillBar:Size(285, 20)	
+				--ArchyArtifactFrameSkillBar:Size(285, 20)	
 				ArchyArtifactFrameSkillBar.text:SetTextColor(1, 1, 1)
 			end
 
-			ArchyArtifactFrameContainer:Width(285)
-			ArchyArtifactFrameContainer:ClearAllPoints()
-			ArchyArtifactFrameContainer:SetPoint('TOP', ArchyArtifactFrameSkillBar, 'BOTTOM', 0, -5)
+			--ArchyArtifactFrameContainer:Width(285)
+			--ArchyArtifactFrameContainer:ClearAllPoints()
+			--ArchyArtifactFrameContainer:SetPoint('TOP', ArchyArtifactFrameSkillBar, 'BOTTOM', 0, -5)
 			for i, child in pairs(ArchyArtifactFrame.children) do
 				local containerFrame = _G['ArchyArtifactChildFrame'..i]
 				local icon = _G['ArchyArtifactChildFrame'..i..'Icon']
 				local fragmentBar = _G['ArchyArtifactChildFrame'..i..'FragmentBar']
 				local solveButton = _G['ArchyArtifactChildFrame'..i..'SolveButton']
 
-				if containerFrame then
-					containerFrame:Width(285)
-				end
+				--if containerFrame then
+				--	containerFrame:Width(285)
+				--end
 				
 				if icon then
 					icon:SetTemplate('Default')
-					icon:Size(26)
+					--icon:Size(26)
 					icon.texture:SetTexCoord(.08, .92, .08, .92)
 					icon.texture:SetInside()
 				end
 				
 				if solveButton then
-					solveButton:Size(26)
+					--solveButton:Size(26)
 					solveButton:SetTemplate('Default')
 					solveButton:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
 					solveButton:GetNormalTexture():SetInside()	
@@ -49,7 +46,7 @@ local function SkinArchy(self)
 				
 				if fragmentBar then
 					U.SkinStatusBar(fragmentBar)	
-					fragmentBar:Size(180, 24)
+					--fragmentBar:Size(180, 24)
 					--if IsAddOnLoaded("ElvUI") then
 					--	local x = U.x
 					--	fragmentBar.artifact:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
@@ -70,7 +67,7 @@ local function SkinArchy(self)
 	
 	local function SkinArchyDigSiteFrame()
 			U.SkinFrame(ArchyDigSiteFrame)
-			if not InCombatLockdown() then ArchyDigSiteFrame:SetScale(1) end
+			--if not InCombatLockdown() then ArchyDigSiteFrame:SetScale(1) end
 	end
 
 	hooksecurefunc(Archy, "UpdateDigSiteFrame", SkinArchyDigSiteFrame)
