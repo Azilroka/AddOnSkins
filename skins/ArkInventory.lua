@@ -59,6 +59,8 @@ local function SkinArkInventory(self)
 		status:ClearAllPoints()
 		status:SetPoint("TOPLEFT",changer,"BOTTOMLEFT",0,-2)
 		status:SetPoint("TOPRIGHT",changer,"BOTTOMRIGHT",0,-2)
+		ARKINV_Frame4ChangerWindowPurchaseInfo:ClearAllPoints()
+		ARKINV_Frame4ChangerWindowPurchaseInfo:SetPoint("TOP", ARKINV_Frame4ChangerWindowGoldAvailable, "BOTTOM", 0, -12)
 
 		--ArkInventory.Const.Frame.Status.Height = 30
 		_G[status:GetName().."EmptyText"]:SetPoint("LEFT",2,0)
@@ -126,6 +128,7 @@ local function SkinArkInventory(self)
 		frame:SetBackdropBorderColor(r,g,b,a)
 
 	end
+
 end
 
 U.RegisterSkin(name,SkinArkInventory)
