@@ -192,7 +192,7 @@ function XS:GenerateOptions()
 						name = 'Pet Battle Dump/Glow',
 						desc = L['TOGGLESKIN_DESC'],
 						order = 3,
-					}
+					},
 					DBMSkinHalf = {
 						type = 'toggle',
 						name = 'DBM Half-bar Skin',
