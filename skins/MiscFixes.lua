@@ -175,7 +175,19 @@ local function PetDump()
 		local targetID = C_PetBattles.GetPetSpeciesID(LE_BATTLE_PET_ENEMY, activePet)
 		
 		local ownedDump = GetPetDumpList(targetID)
-		if ownedDump == nil then RaidNotice_AddMessage(RaidWarningFrame, "You do not own this pet.", ChatTypeInfo["RAID_WARNING"]) else RaidNotice_AddMessage(RaidWarningFrame, "Owned: "..ownedDump, ChatTypeInfo["RAID_WARNING"]) end
+		if GetPetDumpList(targetID) ~= ownedDump then local ownedDump = GetPetDumpList(targetID) end
+		if GetPetDumpList(targetID) == ownedDump then
+			if dumpedonce == nil then
+				if ownedDump == nil then
+					RaidNotice_AddMessage(RaidWarningFrame, "You do not own this pet.", ChatTypeInfo["RAID_WARNING"])
+					dumpedonce = true
+				else
+					RaidNotice_AddMessage(RaidWarningFrame, "Owned: "..ownedDump, ChatTypeInfo["RAID_WARNING"])
+					dumpedonce = true
+				end
+			end
+		else
+		end
 	else
 		local zoneDump = GetZoneDumpList()
 		if zoneDump ~= nil then print("Zone: "..GetZoneDumpList()) end
@@ -214,6 +226,10 @@ end
 local PetBattlePetDumpChanger = CreateFrame("Frame")
 PetBattlePetDumpChanger:RegisterEvent("PET_BATTLE_PET_CHANGED")
 PetBattlePetDumpChanger:SetScript("OnEvent", PetDump)
+
+local PetBattlePetDumpReset = CreateFrame("Frame")
+PetBattlePetDumpReset:RegisterEvent("PET_BATTLE_CLOSE")
+PetBattlePetDumpReset:SetScript("OnEvent", function() dumpedonce = nil end)
 
 hooksecurefunc("PetBattleFrame_Display", PetDump)
 hooksecurefunc("PetBattleUnitFrame_UpdateDisplay", KyleuiPetBattleGlow_Update)
