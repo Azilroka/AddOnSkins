@@ -167,6 +167,7 @@ local function GetZoneDumpList()
 end
 
 local function PetDump()
+	if not U.CheckOption('PetBattles') then return end
 	local isWildPetBattle = (C_PetBattles.IsInBattle() and C_PetBattles.IsWildBattle())
 
 	if (isWildPetBattle) then 
@@ -182,6 +183,7 @@ local function PetDump()
 end
 
 function KyleuiPetBattleGlow_Update(self)
+	if not U.CheckOption('PetBattles') then return end
 	if (not self.petOwner) or (not self.petIndex) then return end
 
 	local isTooltip = false

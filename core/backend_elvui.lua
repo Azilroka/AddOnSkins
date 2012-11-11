@@ -33,6 +33,7 @@ P["skins"] = {
 	["DBMSkinHalf"] = false,
 	["RecountBackdrop"] = true,
 	["SkadaBackdrop"] = true,
+	["PetBattles"] = false,
 }
 
 for k, _ in pairs(Skins) do
@@ -186,25 +187,31 @@ function XS:GenerateOptions()
 						desc = L['TOGGLESKIN_DESC'],
 						order = 2,
 					},
+					PetBattles = {
+						type = 'toggle',
+						name = 'Pet Battle Dump/Glow',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 3,
+					}
 					DBMSkinHalf = {
 						type = 'toggle',
 						name = 'DBM Half-bar Skin',
 						desc = L["TOGGLESKIN_DESC"],
-						order = 3,
+						order = 4,
 						disabled = function() return not E.db.skins['DBMSkin'] end
 					},
 					RecountBackdrop = {
 						type = 'toggle',
 						name = 'Recount Backdrop',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 4,
+						order = 5,
 						disabled = function() return not IsAddOnLoaded("Recount") or not E.db.skins["RecountSkin"] end,
 					},
 					SkadaBackdrop = {
 						type = 'toggle',
 						name = 'Skada Backdrop',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 5,
+						order = 6,
 						disabled = function() return not IsAddOnLoaded("Skada") or not E.db.skins["SkadaSkin"] end,
 					},
 				}

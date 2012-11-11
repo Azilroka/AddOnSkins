@@ -167,6 +167,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.LootIconsChat == nil) then UISkinOptions.LootIconsChat = "Enabled" end
 	if(UISkinOptions.EmbedOoC == nil) then UISkinOptions.EmbedOoC = "Disabled" end
 	if(UISkinOptions.EmbedTDPS == nil) then UISkinOptions.EmbedTDPS = "Disabled" end
+	if(UISkinOptions.PetBattles == nil) then UISkinOptions.PetBattles = "Disabled" end
 	if(UISkinOptions.TukuiChatBackground == nil) then UISkinOptions.TukuiChatBackground = "Disabled" end
 	if(UISkinOptions.LeftChatBackground == nil) then UISkinOptions.LeftChatBackground = "horde.tga" end
 	if(UISkinOptions.RightChatBackground == nil) then UISkinOptions.RightChatBackground = "horde.tga" end
@@ -445,6 +446,9 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 		["DBMSkinHalf"] = {
 			["buttonText"] = "DBM Half-Bar Skin",
 			["addon"] = "DBM-Core",
+		},
+		["PetBattles"] = {
+			["buttonText"] = "Pet Battle Dump/Glow",
 		},
 		["LootIconsChat"] = {
 			["buttonText"] = "Loot Icons in Loot Window",
