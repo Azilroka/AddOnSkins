@@ -1,0 +1,10 @@
+## Interface: 50001
+## Title: |cff1784d1ElvUI |rSkins
+## Version: 3.40
+## Author: Sortokk, Azilroka, others in Credits.txt
+## RequiredDeps: ElvUI
+## OptionalDeps: ElvUI_SLE
+
+init.lua
+core\load_core.xml
+skins\load_skins.xml

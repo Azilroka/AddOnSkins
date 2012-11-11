@@ -1,12 +1,7 @@
--- Shared backend for both UIs
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local XS = E:GetModule('ExtraSkins')
 
-local addon = select(1,...)
-local U = unpack(select(2,...))
-
-U.Version = GetAddOnMetadata(addon,"Version")
-
-U.Skins = {
+local Skins = {
 	["ACPSkin"] = {
 		["buttonText"] = "Addon Control Panel",
 		["addon"] = "ACP",
@@ -242,3 +237,29 @@ U.Skins = {
 		["addon"] = "TomTom",
 	},
 }
+
+XS.Skins = Skins
+
+local exceptions = {
+	"EmbedOoC", 
+	"EmbedRecount", 
+	"EmbedSkada", 
+	"EmbedOmen", 
+	"EmbedRO", 
+	"EmbedTDPS", 
+	"EmbedSexyCooldown"
+}
+
+P["skins"] = {
+	["DBMSkinHalf"] = false,
+	["RecountBackdrop"] = true,
+	["SkadaBackdrop"] = true,
+}
+
+for k, _ in pairs(Skins) do
+	P.skins[k] = true
+end
+
+for k, _ in pairs(exceptions) do
+	P.skins[k] = false
+end

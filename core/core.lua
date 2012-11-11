@@ -3,163 +3,188 @@
 -- Restructured Functions file. - Azilroka
 -- Added Skinning features for ease of skinning and smaller size skins. - Azilroka
 
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) then return end
-local U = unpack(select(2,...))
-local s = U.s
+local addon = select(1,...)
+local E, L, V, P, G,_ = unpack(ElvUI)
+local XS = E:NewModule('ExtraSkins','AceTimer-3.0','AceEvent-3.0')
+local S = E:GetModule('Skins')
+local LSM = LibStub("LibSharedMedia-3.0");
 
-local function cSkinButton(self,strip)
-	if ElvUI then
-		s:HandleButton(self,strip)
-	else
-		self:SkinButton(strip)
+XS.LSM = LSM
+XS.skins = {}
+XS.embeds = {}
+XS.events = {}
+XS.register = {}
+XS.ccolor = E.myclass
+
+XS.sle = IsAddOnLoaded("ElvUI_SLE")
+
+XS.Version = GetAddOnMetadata(addon,"Version")
+
+E.PopupDialogs["OLD_SKIN_PACKAGE"] = {
+	text = "You have one of the old skin addons installed.  This addon replaces and will conflict with it.  Press accept to disable the old addon and reload your UI.",
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function() DisableAddOn("Tukui_UIPackages_Skins"); ReloadUI() end,
+	timeout = 0,
+	whileDead = 1,
+}
+
+local function GenerateEventFunction(event)
+	local eventHandler = function(self,event)
+		for skin,funcs in pairs(self.skins) do
+			if XS:CheckOption(skin) and self.events[event][skin] then
+				for func,_ in pairs(funcs) do
+					func(f,event)
+				end
+			end
+		end
+	end
+	return eventHandler
+end
+
+function XS:Initialize()
+	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
+
+	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix') and E.myrealm == 'Emerald Dream' then
+		E.db.skins['SortSettings'] = true
+	end
+	if IsAddOnLoaded("Tukui_UIPackages_Skins") or IsAddOnLoaded("Tukui_ElvUI_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
+	self.font = E["media"].normFont
+	self.pixelFont = LSM:Fetch("font","ElvUI Pixel")
+	self.datatext_font = LSM:Fetch("font",E.db.datatexts.font)
+
+	self:GenerateOptions()
+
+	self:RegisterEvent("PET_BATTLE_CLOSE", 'AddNonPetBattleFrames')
+	self:RegisterEvent('PET_BATTLE_OPENING_START', "RemoveNonPetBattleFrames")
+	self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
+	self:RegisterEvent('PLAYER_ENTER_COMBAT','EmbedEnterCombat')
+	self:RegisterEvent('PLAYER_REGEN_ENABLED','EmbedExitComat')
+	
+	for skin,alldata in pairs(self.register) do
+		for _,data in pairs(alldata) do
+			self:RegisterSkin(skin,data.func,data.events)
+		end
+	end
+
+	for skin,funcs in pairs(XS.skins) do
+		if XS:CheckOption(skin) then
+			for func,_ in pairs(funcs) do
+				func(f,"PLAYER_ENTERING_WORLD")
+			end
+		end
 	end
 end
 
-U.SkinButton = cSkinButton
-
-local function cSkinScrollBar(self)
-	if ElvUI then
-		s:HandleScrollBar(self)
-	else
-		self:SkinScrollBar()
+function XS:RegisterSkin(skinName,func,events)
+	if not self.skins[skinName] then self.skins[skinName] = {} end
+	self.skins[skinName][func] = true
+	for event,_ in pairs(events) do
+    	if not self.events[event] then
+			self[event] = GenerateEventFunction(event)
+			self:RegisterEvent(event); 
+			self.events[event] = {} 
+		end
+		self.events[event][skinName] = true
 	end
 end
 
-U.SkinScrollBar = cSkinScrollBar
+function XS:UnregisterEvent(skinName,event)
+	if not self.events[event] then return end
+	if not self.events[event][skinName] then return end
 
-local function cSkinTab(self)
-	if ElvUI then
-		s:HandleTab(self)
-	else
-		self:SkinTab()
+	self.events[event][skinName] = nil
+	local found = false
+	for skin,_ in pairs(self.events[event]) do
+		if skin then
+			found = true
+			break
+		end
+	end
+	if not found then
+		self:UnregisterEvent(event)
 	end
 end
 
-U.SkinTab = cSkinTab
-
-local function cSkinNextPrevButton(self, horizonal)
-	if ElvUI then
-		s:HandleNextPrevButton(self, horizonal)
-	else
-		self:SkinNextPrevButton(horizonal)
-	end
+function XS:SkinButton(button,strip)
+	S:HandleButton(button,strip)
 end
 
-U.SkinNextPrevButton = cSkinNextPrevButton
-
-local function cSkinRotateButton(self)
-	if ElvUI then
-		s:HandleRotateButton(self)
-	else
-		self:SkinRotateButton()
-	end
+function XS:SkinScrollBar(bar)
+	S:HandleScrollBar(bar)
 end
 
-U.SkinRotateButton = cSkinRotateButton
-
-local function cSkinEditBox(self)
-	if ElvUI then
-		s:HandleEditBox(self)
-	else
-		self:SkinEditBox()
-	end
+function XS:SkinTab(tab)
+	S:HandleTab(tab)
 end
 
-U.SkinEditBox = cSkinEditBox
-
-local function cSkinDropDownBox(self, width)
-	if ElvUI then
-		s:HandleDropDownBox(self, width)
-	else
-		self:SkinDropDownBox(width)
-	end
+function XS:SkinNextPrevButton(button,horizontal)
+	S:HandleNextPrevButton(button,horizontal)
 end
 
-U.SkinDropDownBox = cSkinDropDownBox
-
-local function cSkinCheckBox(self)
-	if ElvUI then
-		s:HandleCheckBox(self)
-	else
-		self:SkinCheckBox()
-	end
+function XS:SkinRotateButton(button)
+	S:HandleRotateButton(button)
 end
 
-U.SkinCheckBox = cSkinCheckBox
-
-local function cSkinCloseButton(self)
-	if ElvUI then
-		s:HandleCloseButton(self)
-	else
-		s.SkinCloseButton(self)
-	end
+function XS:SkinEditBox(editBox)
+	S:HandleEditBox(editBox)
 end
 
-U.SkinCloseButton = cSkinCloseButton
-
-local function cSkinSliderFrame(self, height)
-	if ElvUI then
-		s:HandleSliderFrame(self)
-	else
-		SkinSlideBar(self, height, movetext)
-	end
+function XS:SkinDropDownBox(box, width)
+	S:HandleDropDownBox(box, width)
 end
 
-U.SkinSliderFrame = cSkinSliderFrame
+function XS:SkinCheckBox(checkBox)
+	S:HandleCheckBox(checkBox)
+end
 
-function cRegisterForPetBattleHide(frame)
+function XS:SkinCloseButton(button)
+	S:HandleCloseButton(button)
+end
+
+function XS:SkinSliderFrame(frame, height)
+	S:HandleSliderFrame(frame, height)
+end
+
+function XS:RegisterForPetBattleHide(frame)
 	if frame.IsVisible and frame:GetName() then
-		U.FrameLocks[frame:GetName()] = { shown = false }
+		XS.FrameLocks[frame:GetName()] = { shown = false }
 	end
 end
 
-local function cSkinFrame(self)
-	self:StripTextures(True)
-	self:SetTemplate("Transparent")
-	cRegisterForPetBattleHide(self)
+function XS:SkinFrame(frame)
+	frame:StripTextures(true)
+	frame:SetTemplate("Transparent")
+	self:RegisterForPetBattleHide(frame)
 end
 
-U.SkinFrame = cSkinFrame
-
-local function cSkinBackdropFrame(self)
-	self:StripTextures(True)
-	self:CreateBackdrop("Transparent")
-	cRegisterForPetBattleHide(self)
+function XS:SkinBackdropFrame(frame)
+	frame:StripTextures(true)
+	frame:CreateBackdrop("Transparent")
+	self:RegisterForPetBattleHide(frame)
 end
 
-U.SkinBackdropFrame = cSkinBackdropFrame
-
-local function cSkinFrameD(self)
-	self:StripTextures(True)
-	self:SetTemplate("Default")
-	cRegisterForPetBattleHide(self)
+function XS:SkinFrameD(frame)
+	frame:StripTextures(true)
+	frame:SetTemplate("Default")
+	self:RegisterForPetBattleHide(frame)
 end
 
-U.SkinFrameD = cSkinFrameD
-
-local function cSkinStatusBar(self)
-	local s = U.s
-	local c = U.c
-	self:StripTextures(True)
-	self:CreateBackdrop()
-	self:SetStatusBarTexture(c["media"].normTex)
+function XS:SkinStatusBar(bar)
+	frame:StripTextures(true)
+	frame:CreateBackdrop()
+	frame:SetStatusBarTexture(E["media"].normTex)
 end
 
-U.SkinStatusBar = cSkinStatusBar
-
-local function cSkinCCStatusBar(self)
-	local s = U.s
-	local c = U.c
-	self:StripTextures(True)
-	self:CreateBackdrop("ClassColor")
-	self:SetStatusBarTexture(c["media"].normTex)
-	local color = RAID_CLASS_COLORS[U.ccolor]
-	self:SetStatusBarColor(color.r, color.g, color.b)
+function XS:SkinCCStatusBar(bar)
+	frame:StripTextures(true)
+	frame:CreateBackdrop("ClassColor")
+	frame:SetStatusBarTexture(E["media"].normTex)
+	local color = RAID_CLASS_COLORS[XS.ccolor]
+	frame:SetStatusBarColor(color.r, color.g, color.b)
 end
 
-U.SkinCCStatusBar = cSkinCCStatusBar
-
-local function cDesaturate(f, point)
+function XS:Desaturate(f, point)
 	for i=1, f:GetNumRegions() do
 		local region = select(i, f:GetRegions())
 		if region:GetObjectType() == "Texture" then
@@ -169,67 +194,36 @@ local function cDesaturate(f, point)
 				region:Kill()
 			end
 		end
-	end	
+	end
 
 	if point then
 		f:Point("TOPRIGHT", point, "TOPRIGHT", 2, 2)
 	end
 end
 
-U.Desaturate = cDesaturate
-
-local function cCheckOption(optionName,...)
+function XS:CheckOption(optionName,...)
 	for i = 1,select('#',...) do
 		local addon = select(i,...)
 		if not addon then break end
 		if not IsAddOnLoaded(addon) then return false end
 	end
 	
-	if IsAddOnLoaded("ElvUI") then
-		local c = U.c
-		if not c.db or not c.db.skins then return false end
-		return c.db.skins[optionName]
-	else
-		return UISkinOptions[optionName] == "Enabled"
-	end
+	return E.db.skins[optionName]
 end
 
-U.CheckOption = cCheckOption
-
-local function cDisableOption(optionName)
-	if IsAddOnLoaded("ElvUI") then
-		local c = U.c
-		c.db.skins[optionName] = false
-	else
-		UISkinOptions[optionName] = "Disabled"
-	end
+function XS:DisableOption(optionName)
+	E.db.skins[optionName] = false
 end
 
-U.DisableOption = cDisableOption
-
-local function cEnableOption(optionName)
-	if IsAddOnLoaded("ElvUI") then
-		local c = U.c
-		c.db.skins[optionName] = true
-	else
-		UISkinOptions[optionName] = "Enabled"
-	end
+function XS:EnableOption(optionName)
+	E.db.skins[optionName] = true
 end
 
-U.EnableOption = cEnableOption
-
-local function cToggleOption(optionName)
-	if cCheckOption(optionName) then
-		cDisableOption(optionName)
-	else
-		cEnableOption(optionName)
-	end
+function XS:ToggleOption(optionName)
+	E.db.skins[optionName] = not E.db.skins[optionName]
 end
 
-U.ToggleOption = cToggleOption
-
-local function cRegisterSkin(skinName,skinFunc,...)
-	local XS = U.x
+function XS:RegisterSkin(skinName,skinFunc,...)
 	local events = {}
 	for i = 1,select('#',...) do
 		local event = select(i,...)
@@ -237,20 +231,11 @@ local function cRegisterSkin(skinName,skinFunc,...)
 		events[event] = true
 	end
 	local registerMe = { func = skinFunc, events = events }
-	if not XS.register[skinName] then XS.register[skinName] = {} end
-	XS.register[skinName][skinFunc] = registerMe
+	if not self.register[skinName] then self.register[skinName] = {} end
+	self.register[skinName][skinFunc] = registerMe
 end
 
-U.RegisterSkin = cRegisterSkin
-
-local function cUnregisterEvent(skinName,frame,event)
-	local XS = U.x
-	XS:UnregisterEvent(skinName,event)
-end
-
-U.UnregisterEvent = cUnregisterEvent
-
-function cAddNonPetBattleFrames()
+function XS:AddNonPetBattleFrames()
 	for frame,data in pairs(U.FrameLocks) do
 		if data.shown then
 			_G[frame]:Show()
@@ -258,9 +243,7 @@ function cAddNonPetBattleFrames()
 	end
 end
 
-U.AddNonPetBattleFrames = cAddNonPetBattleFrames
-
-function cRemoveNonPetBattleFrames()
+function XS:RemoveNonPetBattleFrames()
 	for frame,data in pairs(U.FrameLocks) do
 		if(_G[frame]:IsVisible()) then
 			data.shown = true
@@ -271,71 +254,4 @@ function cRemoveNonPetBattleFrames()
 	end
 end
 
-U.RemoveNonPetBattleFrames = cRemoveNonPetBattleFrames
-
-function AzilCompatMode()
-	_G["cSkinButton"] = cSkinButton
-	_G["cSkinScrollBar"] = cSkinScrollBar
-	_G["cSkinTab"] = cSkinTab
-	_G["cSkinNextPrevButton"] = cSkinNextPrevButton
-	_G["cSkinRotateButton"] = cSkinRotateButton
-	_G["cSkinEditBox"] = cSkinEditBox
-	_G["cSkinDropDownBox"] = cSkinDropDownBox
-	_G["cSkinCheckBox"] = cSkinCheckBox
-	_G["cSkinCloseButton"] = cSkinCloseButton
-	_G["cSkinSliderFrame"] = cSkinSliderFrame
-	_G["cSkinFrame"] = cSkinFrame
-	_G["cSkinBackdropFrame"] = cSkinBackdropFrame
-	_G["cSkinFrameD"] = cSkinFrameD
-	_G["cSkinStatusBar"] = cSkinStatusBar
-	_G["cSkinCCStatusBar"] = cSkinCCStatusBar
-	_G["cDesaturate"] = cDesaturate
-	_G["cCheckOption"] = cCheckOption
-	_G["cDisableOption"] = cDisableOption
-	_G["cEnableOption"] = cEnableOption
-	_G["cToggleOption"] = cToggleOption
-	_G["cRegisterSkin"] = cRegisterSkin
-	_G["cUnregisterEvent"] = cUnregisterEvent
-end
-
-if IsAddOnLoaded("Tukui") then
-
-SLASH_FRAME1 = "/frame"
-SlashCmdList["FRAME"] = function(arg)
-	if arg ~= "" then
-		arg = _G[arg]
-	else
-		arg = GetMouseFocus()
-	end
-
-	if arg ~= nil and arg:GetName() ~= nil then
-		local point, relativeTo, relativePoint, xOfs, yOfs = arg:GetPoint()
-		ChatFrame1:AddMessage("|cffCC0000~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-		ChatFrame1:AddMessage("Name: |cffFFD100"..arg:GetName())
-		if arg:GetParent() then
-			ChatFrame1:AddMessage("Parent: |cffFFD100"..arg:GetParent():GetName())
-		end
-
-		ChatFrame1:AddMessage("Width: |cffFFD100"..format("%.2f",arg:GetWidth()))
-		ChatFrame1:AddMessage("Height: |cffFFD100"..format("%.2f",arg:GetHeight()))
-		ChatFrame1:AddMessage("Strata: |cffFFD100"..arg:GetFrameStrata())
-		ChatFrame1:AddMessage("Level: |cffFFD100"..arg:GetFrameLevel())
-
-		if xOfs then
-			ChatFrame1:AddMessage("X: |cffFFD100"..format("%.2f",xOfs))
-		end
-		if yOfs then
-			ChatFrame1:AddMessage("Y: |cffFFD100"..format("%.2f",yOfs))
-		end
-		if relativeTo then
-			ChatFrame1:AddMessage("Point: |cffFFD100"..point.."|r anchored to "..relativeTo:GetName().."'s |cffFFD100"..relativePoint)
-		end
-		ChatFrame1:AddMessage("|cffCC0000~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-	elseif arg == nil then
-		ChatFrame1:AddMessage("Invalid frame name")
-	else
-		ChatFrame1:AddMessage("Could not find frame info")
-	end
-end
-
-end
+E:RegisterModule(XS:GetName())
