@@ -13,6 +13,7 @@ FishingButton.icon:Size(46)
 FishingButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 FishingButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
 FishingButton:SetScript("OnEvent", function(self)
+	if not U.CheckOption("BigButtons") then return end
 	if not InCombatLockdown() then
 		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", 0, 0)
 		if IsEquippedItemType("Fishing Poles") then
@@ -42,6 +43,7 @@ SurveyButton:RegisterEvent("ARTIFACT_DIG_SITE_UPDATED");
 SurveyButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 SurveyButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
 SurveyButton:SetScript("OnEvent", function(self)
+	if not U.CheckOption("BigButtons") then return end
 	if not InCombatLockdown() then
 		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", 0, 0)
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
@@ -66,6 +68,7 @@ RustyWateringCanButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 RustyWateringCanButton:RegisterEvent("ZONE_CHANGED")
 RustyWateringCanButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
 RustyWateringCanButton:HookScript("OnEvent", function(self)
+	if not U.CheckOption("BigButtons") then return end
 	if not InCombatLockdown() then
 		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", -53, 0)
 		if (GetSubZoneText() == "Sunsong Ranch" and GetItemCount(79104) == 1) then
@@ -96,6 +99,7 @@ VintageBugSprayerButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 VintageBugSprayerButton:RegisterEvent("ZONE_CHANGED")
 VintageBugSprayerButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
 VintageBugSprayerButton:HookScript("OnEvent", function(self)
+	if not U.CheckOption("BigButtons") then return end
 	if not InCombatLockdown() then
 		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", 0, 0)
 		if (GetSubZoneText() == "Sunsong Ranch" and GetItemCount(80513) == 1) then
@@ -126,6 +130,7 @@ DentedShovelButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 DentedShovelButton:RegisterEvent("ZONE_CHANGED")
 DentedShovelButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
 DentedShovelButton:HookScript("OnEvent", function(self)
+	if not U.CheckOption("BigButtons") then return end
 	if not InCombatLockdown() then
 		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", 53, 0)
 		if (GetSubZoneText() == "Sunsong Ranch" and GetItemCount(89880) == 1) then
@@ -156,6 +161,7 @@ MasterPlowButton:RegisterEvent("PLAYER_ENTERING_WORLD")
 MasterPlowButton:RegisterEvent("ZONE_CHANGED")
 MasterPlowButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
 MasterPlowButton:HookScript("OnEvent", function(self)
+	if not U.CheckOption("BigButtons") then return end
 	if not InCombatLockdown() then
 		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", 106, 0)
 		if (GetSubZoneText() == "Sunsong Ranch" and GetItemCount(89815) == 1) then

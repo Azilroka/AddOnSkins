@@ -165,6 +165,7 @@ local DefaultSetSkin = CreateFrame("Frame")
 	if(UISkinOptions.UISkinMinimap == nil) then UISkinOptions.UISkinMinimap = "Enabled" end
 	if(UISkinOptions.LootConfirmer == nil) then UISkinOptions.LootConfirmer = "Enabled" end
 	if(UISkinOptions.LootIconsChat == nil) then UISkinOptions.LootIconsChat = "Enabled" end
+	if(UISkinOptions.BigButtons == nil) then UISkinOptions.BigButtons = "Disabled" end
 	if(UISkinOptions.EmbedOoC == nil) then UISkinOptions.EmbedOoC = "Disabled" end
 	if(UISkinOptions.EmbedTDPS == nil) then UISkinOptions.EmbedTDPS = "Disabled" end
 	if(UISkinOptions.PetBattles == nil) then UISkinOptions.PetBattles = "Disabled" end
@@ -439,6 +440,9 @@ local SkinOptions = CreateFrame("Frame", "SkinOptions", UIParent)
 	local Skins2 = {
 		["LootConfirmer"] = {
 			["buttonText"] = "Loot Confirm",
+		},
+		["BigButtons"] = {
+			["buttonText"] = "Big Buttons",
 		},
 		["UISkinMinimap"] = {
 			["buttonText"] = "Square Minimap Buttons",

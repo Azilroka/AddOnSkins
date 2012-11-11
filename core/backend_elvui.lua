@@ -34,6 +34,7 @@ P["skins"] = {
 	["RecountBackdrop"] = true,
 	["SkadaBackdrop"] = true,
 	["PetBattles"] = false,
+	["BigButtons"] = false,
 }
 
 for k, _ in pairs(Skins) do
@@ -181,37 +182,43 @@ function XS:GenerateOptions()
 						desc = L['TOGGLESKIN_DESC'],
 						order = 1,
 					},
+					BigButtons = {
+						type = 'toggle',
+						name = 'Big Buttons',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 2,
+					},
 					UISkinMinimap = {
 						type = 'toggle',
 						name = 'Square minimap icons',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 2,
+						order = 3,
 					},
 					PetBattles = {
 						type = 'toggle',
 						name = 'Pet Battle Dump/Glow',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 3,
+						order = 4,
 					},
 					DBMSkinHalf = {
 						type = 'toggle',
 						name = 'DBM Half-bar Skin',
 						desc = L["TOGGLESKIN_DESC"],
-						order = 4,
-						disabled = function() return not E.db.skins['DBMSkin'] end
+						order = 5,
+						disabled = function() return not IsAddOnLoaded("DBM-Core") or not E.db.skins['DBMSkin'] end
 					},
 					RecountBackdrop = {
 						type = 'toggle',
 						name = 'Recount Backdrop',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 5,
+						order = 6,
 						disabled = function() return not IsAddOnLoaded("Recount") or not E.db.skins["RecountSkin"] end,
 					},
 					SkadaBackdrop = {
 						type = 'toggle',
 						name = 'Skada Backdrop',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 6,
+						order = 7,
 						disabled = function() return not IsAddOnLoaded("Skada") or not E.db.skins["SkadaSkin"] end,
 					},
 				}
