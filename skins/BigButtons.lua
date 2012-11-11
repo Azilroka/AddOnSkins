@@ -138,3 +138,33 @@ DentedShovelButton:HookScript("OnEvent", function(self)
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	end
 end)
+
+local MasterPlowButton = CreateFrame("Button", "MasterPlowButton", UIParent, "SecureActionButtonTemplate")
+MasterPlowButton:Size(50)
+MasterPlowButton:SetMovable(true)
+MasterPlowButton:SetTemplate("Default")
+MasterPlowButton:SetAttribute("type", "item");
+MasterPlowButton:SetAttribute("item", "Dented Shovel");
+MasterPlowButton:CreateShadow()
+MasterPlowButton:Hide()
+MasterPlowButton.icon = MasterPlowButton:CreateTexture(nil, "OVERLAY")
+MasterPlowButton.icon:SetPoint("CENTER")
+MasterPlowButton.icon:SetTexture(select(10, GetItemInfo(89815)))
+MasterPlowButton.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+MasterPlowButton.icon:Size(46)
+MasterPlowButton:RegisterEvent("PLAYER_ENTERING_WORLD")
+MasterPlowButton:RegisterEvent("ZONE_CHANGED")
+MasterPlowButton:RegisterEvent("UNIT_INVENTORY_CHANGED")
+MasterPlowButton:HookScript("OnEvent", function(self)
+	if not InCombatLockdown() then
+		self:SetPoint("CENTER", BossButton or TukuiExtraActionBarFrameHolder, "CENTER", 106, 0)
+		if (GetSubZoneText() == "Sunsong Ranch" and GetItemCount(89815) == 1) then
+			self:Show()
+			UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+		else
+			UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+			self:Hide()
+		end
+		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	end
+end)
