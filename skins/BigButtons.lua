@@ -1,4 +1,6 @@
 local U = unpack(select(2,...))
+local s = U.s
+local c = U.c 
 
 U.numBigButtons = 0
 local buttons = {}
@@ -40,6 +42,14 @@ local function CreateBigButton(name,itemId,type,action,check,...)
 	button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 	local iconSize = U.elv and U.c.PixelMode and button:GetSize()-1 or button:GetSize()-4
 	button.icon:Size(iconSize)
+	button.text = _G[name.."Button"]:CreateFontString(nil, "OVERLAY")
+	if IsAddOnLoaded("Tukui") then UIFont = c["media"].font else UIFont = c["media"].normFont end
+	button.text:SetFont(UIFont, 12, "OUTLINE")
+	button.text:SetPoint("BOTTOMRIGHT", name.."Button", 1, -1)
+	local count = GetItemCount(itemId)
+	if count > 1 then
+		button.text:SetText(count)
+	end
 	for i = 1,select('#',...) do
 		local event = select(i,...)
 		button:RegisterEvent(event)
@@ -53,6 +63,10 @@ local function CreateBigButton(name,itemId,type,action,check,...)
 				if not buttons[name] then buttons[name] = true; U.numBigButtons = U.numBigButtons + 1 end
 				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
 				self:SetPoint("LEFT", BigButtonHolder, "LEFT", (U.numBigButtons -1) * size, 0)
+				local count = GetItemCount(itemId)
+				if count > 1 then
+					button.text:SetText(count)
+				end
 			else
 				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
 				if buttons[name] then buttons[name] = false; U.numBigButtons = U.numBigButtons - 1 end
@@ -64,6 +78,12 @@ local function CreateBigButton(name,itemId,type,action,check,...)
 		end
 		if event == "PLAYER_REGEN_ENABLED" then self:UnregisterEvent("PLAYER_REGEN_ENABLED") end
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+	end)
+	button:HookScript("OnClick", function()
+		local count = GetItemCount(itemId)
+			if count > 1 then
+				button.text:SetText(count)
+			end
 	end)
 end
 
