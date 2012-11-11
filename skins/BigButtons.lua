@@ -3,12 +3,12 @@ local U = unpack(select(2,...))
 U.numBigButtons = 0
 local buttons = {}
 local function CreateBigButton(name,itemId,type,action,check,...)
-	local size = 53
-	if U.elv and U.c.PixelMode then size = 51 end
+	local size = 33
+	if U.elv and U.c.PixelMode then size = 31 end
 	
 	if not BigButtonHolder then
 		local bbholder = CreateFrame("Frame","BigButtonHolder",U.elv and U.c.UIParent or UIParent)
-		bbholder:Size(50)
+		bbholder:Size(30)
 		bbholder:Point('TOP', U.elv and U.c.UIParent or UIParent, 'TOP', 0, -250)
 
 		if U.elv then U.c:CreateMover(bbholder, 'BigButtons', 'Big Buttons', nil, nil, nil, 'ALL,ACTIONBARS') end
@@ -26,7 +26,7 @@ local function CreateBigButton(name,itemId,type,action,check,...)
 	end
 
 	local button = CreateFrame("Button", name.."Button", bbholder, "SecureActionButtonTemplate")
-	button:Size(50)
+	button:Size(30)
 	button:SetMovable(true)
 	button:SetTemplate("Default")
 	button:SetAttribute("type", type);
@@ -38,7 +38,8 @@ local function CreateBigButton(name,itemId,type,action,check,...)
 	local index = type == 'spell' and 3 or 10
 	button.icon:SetTexture(select(index, func(itemId)))
 	button.icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-	button.icon:Size(46)
+	local iconSize = U.elv and U.c.PixelMode and button:GetSize()-1 or button:GetSize()-4
+	button.icon:Size(iconSize)
 	for i = 1,select('#',...) do
 		local event = select(i,...)
 		button:RegisterEvent(event)
