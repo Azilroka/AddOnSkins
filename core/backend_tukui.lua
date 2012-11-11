@@ -37,7 +37,7 @@ XS.Init = function(self)
 			U.RemoveNonPetBattleFrames()
 		end 
 		for skin,funcs in pairs(XS.skins) do
-			if U.CheckOption(skin) and XS.events[event][skin] then
+			if U.CheckOption(skin) and XS.events[event] and XS.events[event][skin] then
 				for func,_ in pairs(funcs) do
 					func(f,event)
 				end
