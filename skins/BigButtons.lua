@@ -1,3 +1,5 @@
+local U = unpack(select(2,...))
+
 local FishingButton = CreateFrame("Button", "FishingButton", UIParent, "SecureActionButtonTemplate")
 FishingButton:Size(50)
 FishingButton:SetMovable(true)
