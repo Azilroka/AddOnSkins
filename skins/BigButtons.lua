@@ -151,7 +151,7 @@ MasterPlowButton:Size(50)
 MasterPlowButton:SetMovable(true)
 MasterPlowButton:SetTemplate("Default")
 MasterPlowButton:SetAttribute("type", "item");
-MasterPlowButton:SetAttribute("item", "Dented Shovel");
+MasterPlowButton:SetAttribute("item", "Master Plow");
 MasterPlowButton:CreateShadow()
 MasterPlowButton:Hide()
 MasterPlowButton.icon = MasterPlowButton:CreateTexture(nil, "OVERLAY")
