@@ -122,6 +122,7 @@ local function SkinSkada(self)
 	end
 
 	if(AS:CheckOption("EmbedSkada")) then
+		hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedSkada() end)
 		AS:EmbedSkada()
 	end
 end
@@ -131,7 +132,7 @@ AS:RegisterSkin(name,SkinSkada)
 local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 	local Skada = Skada
 	local barmod = Skada.displays["bar"]
-	
+
 	window.db.barwidth = width
 	window.db.background.height = height
 	window.db.spark = false

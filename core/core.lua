@@ -50,6 +50,8 @@ function AS:Initialize()
 		E.db.skins['SortSettings'] = true
 	end
 
+	E.db.skins['AlwaysTrue'] = true
+	
 	if IsAddOnLoaded("Tukui_UIPackages_Skins") or IsAddOnLoaded("Tukui_ElvUI_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
 	self.font = E["media"].normFont
 	self.pixelFont = LSM:Fetch("font","ElvUI Pixel")
@@ -73,7 +75,7 @@ function AS:Initialize()
 	end
 
 	self:EmbedInit()
-	
+
 	for skin,funcs in pairs(AS.skins) do
 		if AS:CheckOption(skin) then
 			for func,_ in pairs(funcs) do
