@@ -2,7 +2,7 @@ local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
 LoadAddOn("WowLua")
-
+if not IsAddOnLoaded("WowLua") then return end
 
 AS:SkinFrame(WowLuaFrame)
 WowLuaFrameLineNumScrollFrame:StripTextures(True)

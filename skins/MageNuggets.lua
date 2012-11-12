@@ -159,7 +159,7 @@ local function SkinMageNuggets(self)
 	}
 		
 	for _,b in pairs(checkbuttons) do
-		XS:SkinCheckBox(b)
+		AS:SkinCheckBox(b)
 	end
 	
 	-- Slider frames
@@ -179,7 +179,7 @@ local function SkinMageNuggets(self)
 	}
 	
 	for _,s in pairs(sliders) do
-		XS:SkinSliderFrame(s)
+		AS:SkinSliderFrame(s)
 	end
 	
 	-- Edit Boxes
@@ -213,16 +213,16 @@ local function SkinMageNuggets(self)
 	}
 	
 	for _,f in pairs(editbox) do
-		XS:SkinEditBox(f)
+		AS:SkinEditBox(f)
 		f:SetHeight(15)
 	end
 	
 	-- Buttons
-	XS:SkinButton(MageNugStatMonOptionFrameBlackBackdropButton)
-	XS:SkinButton(MageNugMoonkinOptionFrame_Button)
-	XS:SkinButton(MageNugOption2FrameButton1)
-	XS:SkinButton(MageNugOption2FrameButton2)
-	XS:SkinButton(MageNugOption2FrameButton3)
+	AS:SkinButton(MageNugStatMonOptionFrameBlackBackdropButton)
+	AS:SkinButton(MageNugMoonkinOptionFrame_Button)
+	AS:SkinButton(MageNugOption2FrameButton1)
+	AS:SkinButton(MageNugOption2FrameButton2)
+	AS:SkinButton(MageNugOption2FrameButton3)
 	
 end
 
