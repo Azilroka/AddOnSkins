@@ -9,6 +9,8 @@ local function SkinWhollyFrame()
    AS:SkinCloseButton(com_mithrandir_whollyFrameCloseButton)
    AS:SkinScrollBar(com_mithrandir_whollyFrameScrollFrameScrollBar)
    AS:SkinDropDownBox(com_mithrandir_whollyFrameZoneButton)
+   com_mithrandir_whollyFrameZoneButton:ClearAllPoints()
+   com_mithrandir_whollyFrameZoneButton:Point("TOP",com_mithrandir_whollyFrame,"TOP",60,-40)
    local buttons = {
       "SwitchZoneButton",
       "PreferencesButton",
