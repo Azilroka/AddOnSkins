@@ -231,14 +231,14 @@ function AS:ToggleOption(optionName)
 	E.db.skins[optionName] = not E.db.skins[optionName]
 end
 
-function AS:RegisterSkin(skinName,skinFunc,addon,...)
+function AS:RegisterSkin(skinName,skinFunc,...)
 	local events = {}
 	for i = 1,select('#',...) do
 		local event = select(i,...)
 		if not event then break end
 		events[event] = true
 	end
-	local registerMe = { func = skinFunc, events = events, addon = addon }
+	local registerMe = { func = skinFunc, events = events }
 	if not self.register[skinName] then self.register[skinName] = {} end
 	self.register[skinName][skinFunc] = registerMe
 end
