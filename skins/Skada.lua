@@ -2,13 +2,15 @@
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
-local Skada = Skada
-local barSpacing = 1
-local borderWidth = 1
-local barmod = Skada.displays["bar"]
 local name = "SkadaSkin"
+local windows = {}
 
 local function SkinSkada(self)
+	local Skada = Skada
+	local barSpacing = 1
+	local borderWidth = 1
+	local barmod = Skada.displays["bar"]
+
 	local function StripOptions(options)
 		options.baroptions.args.barspacing = nil
 		options.titleoptions.args.texture = nil
@@ -86,6 +88,37 @@ local function SkinSkada(self)
 			if RightChatPanel then win.bargroup:SetParent(RightChatPanel) end
 		end
 	end
+
+	for _, window in ipairs( Skada:GetWindows() ) do
+		window:UpdateDisplay()
+	end
+
+	Skada.CreateWindow_ = Skada.CreateWindow
+	function Skada:CreateWindow(name, db)
+		Skada:CreateWindow_(name, db)
+
+		windows = {}
+		for _, window in ipairs(Skada:GetWindows()) do
+			tinsert(windows, window)
+		end
+		hooksecurefunc(Skada, "CreateWindow", function()	
+		if AS:CheckOption("EmbedSkada") then
+			EmbedSkada()
+		end
+		end)
+	end
+
+	Skada.DeleteWindow_ = Skada.DeleteWindow
+	function Skada:DeleteWindow( name )
+		Skada:DeleteWindow_( name )
+		windows = {}
+		for _, window in ipairs( Skada:GetWindows() ) do
+			tinsert( windows, window )
+		end	
+		if(AS:CheckOption("EmbedSkada")) then
+			EmbedSkada()
+		end
+	end
 end
 
 AS:RegisterSkin(name,SkinSkada)
@@ -101,7 +134,6 @@ local function EmbedWindow(window, width, height, point, relativeFrame, relative
 	barmod.ApplySettings(barmod, window)
 end
 
-local windows = {}
 function EmbedSkada()
 	if(#windows == 1) then
 		if E.PixelMode then
@@ -117,37 +149,6 @@ function EmbedSkada()
 			EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), EmbeddingWindow:GetHeight() - 20, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
 			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + c.mult), EmbeddingWindow:GetHeight() - 20, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -17)
 		end
-	end
-end
-
-for _, window in ipairs( Skada:GetWindows() ) do
-	window:UpdateDisplay()
-end
-
-Skada.CreateWindow_ = Skada.CreateWindow
-function Skada:CreateWindow(name, db)
-	Skada:CreateWindow_(name, db)
-
-	windows = {}
-	for _, window in ipairs(Skada:GetWindows()) do
-		tinsert(windows, window)
-	end
-	hooksecurefunc(Skada, "CreateWindow", function()	
-	if AS:CheckOption("EmbedSkada") then
-		EmbedSkada()
-	end
-	end)
-end
-
-Skada.DeleteWindow_ = Skada.DeleteWindow
-function Skada:DeleteWindow( name )
-	Skada:DeleteWindow_( name )
-	windows = {}
-	for _, window in ipairs( Skada:GetWindows() ) do
-		tinsert( windows, window )
-	end	
-	if(AS:CheckOption("EmbedSkada")) then
-		EmbedSkada()
 	end
 end
 
