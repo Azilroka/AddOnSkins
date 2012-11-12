@@ -9,17 +9,8 @@ function SetModifiedBackdrop(self)
 end
 
 function SetOriginalBackdrop(self)
-	if Tukui then
-		local color = RAID_CLASS_COLORS[AS:ccolor]
-		if c["general"].classcolortheme == true then
-			self:SetBackdropBorderColor(color.r, color.g, color.b)
-		else
-			self:SetTemplate("Default")
-		end
-	else
-		if self.backdrop then self = self.backdrop end
-		self:SetBackdropBorderColor(unpack(E["media"].bordercolor))
-	end
+	if self.backdrop then self = self.backdrop end
+	self:SetBackdropBorderColor(unpack(E["media"].bordercolor))
 end
 
 local function SkinButton(ButtonOrSpellID) -- Thanks to SinaC

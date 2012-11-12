@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
 local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
@@ -42,25 +42,26 @@ function AS:EmbedRecountOmen()
 	Omen:UpdateGrips()
 	Omen.UpdateGrips = function(...)
 		local db = Omen.db.profile
-			Omen.VGrip1:ClearAllPoints()
-			Omen.VGrip1:SetPoint("TOPLEFT", Omen.BarList, "TOPLEFT", db.VGrip1, 0)
-			Omen.VGrip1:SetPoint("BOTTOMLEFT", Omen.BarList, "BOTTOMLEFT", db.VGrip1, 0)
-			Omen.VGrip2:ClearAllPoints()
-			Omen.VGrip2:SetPoint("TOPLEFT", Omen.BarList, "TOPLEFT", db.VGrip2, 0)
-			Omen.VGrip2:SetPoint("BOTTOMLEFT", Omen.BarList, "BOTTOMLEFT", db.VGrip2, 0)
-			Omen.Grip:Hide()
-			if db.Locked then
-				Omen.VGrip1:Hide()
-				Omen.VGrip2:Hide()
+		Omen.VGrip1:ClearAllPoints()
+		Omen.VGrip1:SetPoint("TOPLEFT", Omen.BarList, "TOPLEFT", db.VGrip1, 0)
+		Omen.VGrip1:SetPoint("BOTTOMLEFT", Omen.BarList, "BOTTOMLEFT", db.VGrip1, 0)
+		Omen.VGrip2:ClearAllPoints()
+		Omen.VGrip2:SetPoint("TOPLEFT", Omen.BarList, "TOPLEFT", db.VGrip2, 0)
+		Omen.VGrip2:SetPoint("BOTTOMLEFT", Omen.BarList, "BOTTOMLEFT", db.VGrip2, 0)
+		Omen.Grip:Hide()
+		if db.Locked then
+			Omen.VGrip1:Hide()
+			Omen.VGrip2:Hide()
+		else
+			Omen.VGrip1:Show()
+			if db.Bar.ShowTPS then
+				Omen.VGrip2:Show()
 			else
-				Omen.VGrip1:Show()
-				if db.Bar.ShowTPS then
-					Omen.VGrip2:Show()
-				else
-					Omen.VGrip2:Hide()
-				end
+				Omen.VGrip2:Hide()
 			end
+		end
 	end
+
 	OmenBarList:StripTextures()
 	OmenBarList:SetTemplate("Default")
 	OmenAnchor:ClearAllPoints()
@@ -96,24 +97,24 @@ end
 
 function AS:EmbedInit()
 	self:EmbedWindowResize()
-	hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedWindowResize() end)
+	hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) AS:EmbedWindowResize() end)
 
 	RightChatToggleButton:SetScript("OnClick", function(self, btn)
 			if btn == 'RightButton' then
-			if (self:CheckOption("EmbedRecount","Recount")) or (self:CheckOption("EmbedRO")) then
+			if (AS:CheckOption("EmbedRecount","Recount")) or (AS:CheckOption("EmbedRO")) then
 				ToggleFrame(Recount_MainWindow)
 			end
-			if (self:CheckOption("EmbedSkada","Skada")) then
+			if (AS:CheckOption("EmbedSkada","Skada")) then
 				Skada:ToggleWindow()
 			end
-			if (self:CheckOption("EmbedOmen","Omen")) or (self:CheckOption("EmbedRO")) then
+			if (AS:CheckOption("EmbedOmen","Omen")) or (AS:CheckOption("EmbedRO")) then
 				if OmenBarList:IsShown() then
 					OmenBarList:Hide()
 				else
 					OmenBarList:Show()
 				end
 			end
-			if (self:CheckOption("EmbedTDPS","TinyDPS")) then
+			if (AS:CheckOption("EmbedTDPS","TinyDPS")) then
 				if tdpsFrame:IsShown() then
 					tdpsFrame:Hide()
 				else
@@ -145,9 +146,8 @@ function AS:EmbedInit()
 			GameTooltip:AddDoubleLine(L['Left Click:'], L['Toggle Chat Frame'], 1, 1, 1)
 			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
 			GameTooltip:Show()
-		end)
-	end
-
+	end)
+	
 --Embed Check
 	if not IsAddOnLoaded("Omen") then self:DisableOption("EmbedRO") self:DisableOption("EmbedOmen") end
 	if not IsAddOnLoaded("Recount") then self:DisableOption("EmbedRO") end

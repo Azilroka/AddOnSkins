@@ -1,13 +1,10 @@
-if not IsAddOnLoaded("ArkInventory") then return end
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
-local ArkInventory = LibStub("AceAddon-3.0"):GetAddon("ArkInventory")
 local name = "ArkInventorySkin"
 local function SkinArkInventory(self)
+	local ArkInventory = LibStub("AceAddon-3.0"):GetAddon("ArkInventory")
 	local _G = _G
-	local s = AS:s
-	local c = AS:c
 	ArkInventory.Frame_Main_Paint_ = ArkInventory.Frame_Main_Paint
 	ArkInventory.Frame_Main_Paint = function(frame)
 		if not ArkInventory.ValidFrame(frame, true) then return	end

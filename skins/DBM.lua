@@ -3,7 +3,7 @@
 	Modified: Elv, Azilroka
 	All rights reserved.
 ]]--
-if not IsAddOnLoaded("DBM-Core") then return end
+
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 

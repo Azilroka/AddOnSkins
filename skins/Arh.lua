@@ -1,4 +1,3 @@
-if not IsAddOnLoaded("Arh") then return end
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 

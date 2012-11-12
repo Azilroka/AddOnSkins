@@ -1,4 +1,3 @@
-if not IsAddOnLoaded("ACP") then return end
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 

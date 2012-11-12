@@ -1,4 +1,4 @@
-if not IsAddOnLoaded("Tukui") then return end
+
 if UnitLevel("player") <= 10 then return end
 local s = U.s
 local c = U.c

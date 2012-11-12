@@ -1,5 +1,5 @@
-if not IsAddOnLoaded("Spy") then return end
-local E, L, V, P, G,_ = unpack(ElvUI)
+
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
 local name = "SpySkin"

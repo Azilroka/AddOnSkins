@@ -1,4 +1,4 @@
-if IsAddOnLoaded("!Swatter") then return end
+
 if IsAddOnLoaded("!BugGrabber") then return end
 if IsAddOnLoaded("!ImprovedErrorFrame") then return end
 local E, L, V, P, G,_ = unpack(ElvUI)

@@ -1,4 +1,4 @@
-if not IsAddOnLoaded("Wholly") then return end
+
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
@@ -7,13 +7,14 @@ local name = "WhollySkin"
 local function SkinWhollyFrame()
    AS:SkinFrame(com_mithrandir_whollyFrame)
    AS:SkinCloseButton(com_mithrandir_whollyFrameCloseButton)
-   AS:SkinScrollBar(com_mithrandir_whollyFrameScrollBar)
+   AS:SkinScrollBar(com_mithrandir_whollyFrameScrollFrameScrollBar)
+   AS:SkinDropDownBox(com_mithrandir_whollyFrameZoneButton)
    local buttons = {
       "SwitchZoneButton",
       "PreferencesButton",
       "SortButton"
    }
-   for button,_ in pairs(buttons) do
+   for _,button in pairs(buttons) do
       AS:SkinButton(_G["com_mithrandir_whollyFrame"..button])
    end
 end

@@ -1,4 +1,4 @@
-if not IsAddOnLoaded("CLCProt") then return end
+
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
@@ -15,7 +15,7 @@ end
 local function CreateButton(self, name, size, point, parent, pointParent, offsetx, offsety, bfGroup, isChecked)
 	local db = self.db.profile
 	clcprotFrame:SetScale(1)
-	]clcprotFrame.SetScale = E.noop
+	clcprotFrame.SetScale = E.noop
 	
 	name = "clcprot" .. name
 	local button

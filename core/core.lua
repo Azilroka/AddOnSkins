@@ -15,6 +15,7 @@ AS.embeds = {}
 AS.events = {}
 AS.register = {}
 AS.ccolor = E.myclass
+AS.FrameLocks = {}
 
 AS.sle = IsAddOnLoaded("ElvUI_SLE")
 
@@ -48,6 +49,7 @@ function AS:Initialize()
 	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix') and E.myrealm == 'Emerald Dream' then
 		E.db.skins['SortSettings'] = true
 	end
+
 	if IsAddOnLoaded("Tukui_UIPackages_Skins") or IsAddOnLoaded("Tukui_ElvUI_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
 	self.font = E["media"].normFont
 	self.pixelFont = LSM:Fetch("font","ElvUI Pixel")
@@ -64,11 +66,14 @@ function AS:Initialize()
 	
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
-			self:RegisterSkin(skin,data.func,data.events)
+			if IsAddOnLoaded(self.Skins[skin].addon) then
+				self:RegisterSkin_(skin,data.func,data.events)
+			end
 		end
 	end
 
 	for skin,funcs in pairs(AS.skins) do
+		print(skin,AS:CheckOption(skin))
 		if AS:CheckOption(skin) then
 			for func,_ in pairs(funcs) do
 				func(f,"PLAYER_ENTERING_WORLD")
@@ -76,10 +81,10 @@ function AS:Initialize()
 		end
 	end
 
-	AS:EmbedInit()
+	self:EmbedInit()
 end
 
-function AS:RegisterSkin(skinName,func,events)
+function AS:RegisterSkin_(skinName,func,events)
 	if not self.skins[skinName] then self.skins[skinName] = {} end
 	self.skins[skinName][func] = true
 	for event,_ in pairs(events) do
@@ -174,17 +179,17 @@ function AS:SkinFrameD(frame)
 end
 
 function AS:SkinStatusBar(bar)
-	frame:StripTextures(true)
-	frame:CreateBackdrop()
-	frame:SetStatusBarTexture(E["media"].normTex)
+	bar:StripTextures(true)
+	bar:CreateBackdrop()
+	bar:SetStatusBarTexture(E["media"].normTex)
 end
 
 function AS:SkinCCStatusBar(bar)
-	frame:StripTextures(true)
-	frame:CreateBackdrop("ClassColor")
-	frame:SetStatusBarTexture(E["media"].normTex)
+	bar:StripTextures(true)
+	bar:CreateBackdrop("ClassColor")
+	bar:SetStatusBarTexture(E["media"].normTex)
 	local color = RAID_CLASS_COLORS[AS.ccolor]
-	frame:SetStatusBarColor(color.r, color.g, color.b)
+	bar:SetStatusBarColor(color.r, color.g, color.b)
 end
 
 function AS:Desaturate(f, point)
@@ -226,20 +231,20 @@ function AS:ToggleOption(optionName)
 	E.db.skins[optionName] = not E.db.skins[optionName]
 end
 
-function AS:RegisterSkin(skinName,skinFunc,...)
+function AS:RegisterSkin(skinName,skinFunc,addon,...)
 	local events = {}
 	for i = 1,select('#',...) do
 		local event = select(i,...)
 		if not event then break end
 		events[event] = true
 	end
-	local registerMe = { func = skinFunc, events = events }
+	local registerMe = { func = skinFunc, events = events, addon = addon }
 	if not self.register[skinName] then self.register[skinName] = {} end
 	self.register[skinName][skinFunc] = registerMe
 end
 
 function AS:AddNonPetBattleFrames()
-	for frame,data in pairs(AS:FrameLocks) do
+	for frame,data in pairs(AS.FrameLocks) do
 		if data.shown then
 			_G[frame]:Show()
 		end
@@ -247,7 +252,7 @@ function AS:AddNonPetBattleFrames()
 end
 
 function AS:RemoveNonPetBattleFrames()
-	for frame,data in pairs(AS:FrameLocks) do
+	for frame,data in pairs(AS.FrameLocks) do
 		if(_G[frame]:IsVisible()) then
 			data.shown = true
 			_G[frame]:Hide()

@@ -1,11 +1,12 @@
-﻿if not IsAddOnLoaded("Quartz") then return end
+﻿
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
-local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
-if not Q3 then return end
 local name = "QuartzSkin"
 local function SkinQuartz(self)
+	local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
+	if not Q3 then return end
+	
 	local font = E["media"].normFont 
 	local fontSize = 12
 

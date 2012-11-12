@@ -1,11 +1,9 @@
-if not IsAddOnLoaded("AdvancedTradeSkillWindow") then return end
+
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
 local name = 'ATSWSkin'
 local function SkinATSW(self)
-	local s = AS:s
-	local c = AS:c
 	AS:SkinFrame(ATSWFrame)
 	ATSWSkillIcon:StripTextures(True)
 	ATSWListScrollFrame:StripTextures(True)

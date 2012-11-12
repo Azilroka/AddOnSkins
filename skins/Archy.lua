@@ -1,5 +1,6 @@
-if not IsAddOnLoaded("Archy") then return end
-local U = unpack(select(2,...))
+
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
 local name = "ArchySkin"
 
 local function SkinArchy(self)

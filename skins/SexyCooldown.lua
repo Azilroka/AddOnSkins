@@ -1,11 +1,8 @@
-if not IsAddOnLoaded("SexyCooldown2") then return end
+
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
 local name = "SexyCooldownSkin"
-local scd = SexyCooldown2
-local LSM = LibStub("LibSharedMedia-3.0")
-
 -- Strip skinning settings from in-game GUI
 local function SCDStripSkinSettings(bar)
 	-- Remove conflicting options
@@ -82,6 +79,9 @@ local function HookSCDBar(bar)
 end
 
 local function SkinSexyCooldown(self)
+	local scd = SexyCooldown2
+	local LSM = LibStub("LibSharedMedia-3.0")
+
 	scd.CreateBar_ = scd.CreateBar
 	scd.CreateBar = function(self, settings, name)
 		local bar = scd:CreateBar_(settings,name)
