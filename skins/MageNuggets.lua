@@ -42,6 +42,7 @@ local function SkinMageNuggets(self)
 		"MNmoonFire_Frame",
 		"MNinsectSwarm_Frame",
 		"MNstarSurge_Frame",
+		"MageNugProcHUFrame",
 	}
 	for i = 1, #sframes do
 		_G[sframes[i]]:SetBackdrop({bgFile = nil, edgeFile = nil, tile = false, tileSize = 0, edgeSize = 0, insets = { left = 0, right = 0, top = 0, bottom = 0 }});
@@ -62,8 +63,17 @@ local function SkinMageNuggets(self)
 	MageNugLB2_Frame_Bar:SetStatusBarTexture(E["media"].normTex)
 	MageNugLB3_Frame_Bar:SetStatusBarTexture(E["media"].normTex)
 	MageNugLB4_Frame_Bar:SetStatusBarTexture(E["media"].normTex)
+	MageNugProcHUFrame_ProcBar:SetStatusBarTexture(E["media"].normTex)
+ 	MageNugInvokers_Frame_Bar:SetStatusBarTexture(E["media"].normTex)
 	MageNugMI_Frame_MiBar:CreateBackdrop("Transparent")
 	MageNugCauterize_Frame_Bar:CreateBackdrop("Transparent")
+
+	for i=1, MageNugCD_Frame:GetNumChildren() do
+		_G["MageNugCD"..i.."_Frame_Bar"]:SetStatusBarTexture(E["media"].normTex)
+		_G["MageNugCD"..i.."_Frame_Bar"]:CreateBackdrop("Transparent")
+		_G["MageNugCD"..i.."_Frame_Bar"].backdrop:Point("TOPLEFT", 0, 0)
+		_G["MageNugCD"..i.."_Frame_Bar"].backdrop:Point("BOTTOMRIGHT", 0, 0)
+ 	end
 
 	AS:SkinButton(MageNugHordeFrameClose)
 	AS:SkinButton(MageNugHordeFrameShowOptions)
