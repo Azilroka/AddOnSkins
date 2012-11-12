@@ -72,16 +72,15 @@ function AS:Initialize()
 		end
 	end
 
+	self:EmbedInit()
+	
 	for skin,funcs in pairs(AS.skins) do
-		print(skin,AS:CheckOption(skin))
 		if AS:CheckOption(skin) then
 			for func,_ in pairs(funcs) do
 				func(f,"PLAYER_ENTERING_WORLD")
 			end
 		end
 	end
-
-	self:EmbedInit()
 end
 
 function AS:RegisterSkin_(skinName,func,events)

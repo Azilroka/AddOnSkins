@@ -90,6 +90,7 @@ local function SkinSkada(self)
 	end
 
 	for _, window in ipairs( Skada:GetWindows() ) do
+		tinsert(windows, window)
 		window:UpdateDisplay()
 	end
 
@@ -102,9 +103,9 @@ local function SkinSkada(self)
 			tinsert(windows, window)
 		end
 		hooksecurefunc(Skada, "CreateWindow", function()	
-		if AS:CheckOption("EmbedSkada") then
-			EmbedSkada()
-		end
+			if AS:CheckOption("EmbedSkada") then
+				AS:EmbedSkada()
+			end
 		end)
 	end
 
@@ -116,19 +117,21 @@ local function SkinSkada(self)
 			tinsert( windows, window )
 		end	
 		if(AS:CheckOption("EmbedSkada")) then
-			EmbedSkada()
+			AS:EmbedSkada()
 		end
 	end
 
-	if AS:CheckOption("EmbedSkada") then
-		EmbedSkada()
-		hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedSkada() end)
+	if(AS:CheckOption("EmbedSkada")) then
+		AS:EmbedSkada()
 	end
 end
 
 AS:RegisterSkin(name,SkinSkada)
 
 local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+	local Skada = Skada
+	local barmod = Skada.displays["bar"]
+	
 	window.db.barwidth = width
 	window.db.background.height = height
 	window.db.spark = false
@@ -139,7 +142,7 @@ local function EmbedWindow(window, width, height, point, relativeFrame, relative
 	barmod.ApplySettings(barmod, window)
 end
 
-function EmbedSkada()
+function AS:EmbedSkada()
 	if(#windows == 1) then
 		if E.PixelMode then
 			EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 18), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
