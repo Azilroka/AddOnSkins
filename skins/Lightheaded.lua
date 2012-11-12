@@ -1,5 +1,7 @@
-﻿if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Lightheaded") then return end
-local U = unpack(select(2,...))
+﻿if not IsAddOnLoaded("Lightheaded") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local function DoDis(self, event, ...)
 
 		QuestNPCModel:ClearAllPoints()
@@ -16,7 +18,7 @@ local function SkinOptions(self, event, ...)-- Skin the Options Frame
 
 		for i = 1, 9 do
 			local cbox = _G["LightHeaded_Panel_Toggle"..i]
-			U.SkinCheckBox(cbox)
+			AS:SkinCheckBox(cbox)
 		end
 
 		local buttons = {
@@ -25,7 +27,7 @@ local function SkinOptions(self, event, ...)-- Skin the Options Frame
 			}
 	
 		for _, button in pairs(buttons) do
-			U.SkinButton(_G[button])
+			AS:SkinButton(_G[button])
 		end
 		
 		LightHeaded_Panel_Button2:Disable()
@@ -45,21 +47,21 @@ end
 
 local name = "LightheadedSkin"
 local function SkinLightHeaded(self)
-	U.SkinFrame(LightHeadedFrame)
-	U.SkinFrame(LightHeadedFrameSub)
-	U.SkinFrame(LightHeadedSearchBox)
+	AS:SkinFrame(LightHeadedFrame)
+	AS:SkinFrame(LightHeadedFrameSub)
+	AS:SkinFrame(LightHeadedSearchBox)
 	LightHeadedTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 						
 	LightHeadedScrollFrame:StripTextures()
 	
 	local lhframe = LightHeadedFrame		
 	lhframe.close:Hide()
-	U.SkinCloseButton(lhframe.close)
+	AS:SkinCloseButton(lhframe.close)
 	lhframe.handle:Hide()
 	
 	local lhframe = LightHeadedFrameSub
-	U.SkinNextPrevButton(lhframe.prev)
-	U.SkinNextPrevButton(lhframe.next)
+	AS:SkinNextPrevButton(lhframe.prev)
+	AS:SkinNextPrevButton(lhframe.next)
 
 	lhframe.prev:SetWidth(16)
 	lhframe.prev:SetHeight(16)
@@ -68,7 +70,7 @@ local function SkinLightHeaded(self)
 	lhframe.prev:SetPoint("RIGHT", lhframe.page, "LEFT", -25, 0)
 	lhframe.next:SetPoint("LEFT", lhframe.page, "RIGHT", 25, 0)
 
-	U.SkinScrollBar(LightHeadedScrollFrameScrollBar, 5)
+	AS:SkinScrollBar(LightHeadedScrollFrameScrollBar, 5)
 
 	lhframe.title:SetTextColor(23/255, 132/255, 209/255)	
 
@@ -78,4 +80,4 @@ local function SkinLightHeaded(self)
 	local LH_Options = _G["LightHeaded_Panel"]
 end
 
-U.RegisterSkin(name,SkinLightHeaded)
+AS:RegisterSkin(name,SkinLightHeaded)

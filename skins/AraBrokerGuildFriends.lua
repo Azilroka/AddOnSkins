@@ -1,13 +1,16 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Ara_Broker_Guild_Friends") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("Ara_Broker_Guild_Friends") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local function SkinAraGF(self, event, ...)
     local AraGuildFriends = _G["AraBrokerGuildFriends"]
-        AraGuildFriends:StripTextures()
-        AraGuildFriends:SetTemplate("Default")
+    AraGuildFriends:StripTextures()
+    AraGuildFriends:SetTemplate("Default")
 end
+
 local name = "AraBrokerGuildFriendsSkin"
 local function SkinAraBrokerGuildFriends(self)
     local AraGuildFriends = _G["AraBrokerGuildFriends"]
     AraGuildFriends:SetScript("OnUpdate", SkinAraGF)
 end
-U.RegisterSkin(name,SkinAraBrokerGuildFriends)
+AS:RegisterSkin(name,SkinAraBrokerGuildFriends)

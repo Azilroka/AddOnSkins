@@ -1,7 +1,7 @@
 if not IsAddOnLoaded("ElvUI") then return end
-local U = unpack(select(2,...))
-local s = U.s
-local c = U.c
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local function Skin_WeakAuras(frame)
 	if not frame.backdrop then
@@ -46,7 +46,7 @@ local function WeakAuras_LoadSkin()
 		end
 	end
 
-	U.RegisterSkin(name,SkinWeakAuras)
+	AS:RegisterSkin(name,SkinWeakAuras)
 end
 
-s:RegisterSkin('WeakAuras', WeakAuras_LoadSkin)
+S:RegisterSkin('WeakAuras', WeakAuras_LoadSkin)

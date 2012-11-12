@@ -1,13 +1,13 @@
-if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("EnergyWatch") then return end
-local U = unpack(select(2,...))
+if IsAddOnLoaded("EnergyWatch") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "EnergyWatchSkin"
 local function SkinEnergyWatch(self)
-	local s = U.s
-	local c = U.c
 	EnergyWatchBar:StripTextures(True)
 	EnergyWatchStatusBar:CreateBackdrop()
-	EnergyWatchStatusBar:SetStatusBarTexture(c["media"].normTex)
+	EnergyWatchStatusBar:SetStatusBarTexture(E["media"].normTex)
 end
 
-U.RegisterSkin(name,SkinEnergyWatch)
+AS:RegisterSkin(name,SkinEnergyWatch)
 

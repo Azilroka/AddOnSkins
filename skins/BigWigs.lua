@@ -1,14 +1,8 @@
-if not IsAddOnLoaded("Tukui") then return end
---[[
-	Author: Affli@RU-Howling Fjord, 
-	All rights reserved.
---]]
-
-local T, C, L = unpack(Tukui)
-
 if not IsAddOnLoaded("BigWigs") then return end
+local E, L, V, P, G = unpack(ElvUI); --Inport: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
+local S = E:GetModule('Skins')
 
-local buttonsize = 19
+local buttonsize = 20
 
 -- init some tables to store backgrounds
 local freebg = {}
@@ -22,19 +16,19 @@ end
 
 local function freestyle(bar)
 	-- reparent and hide bar background
-	local bg = bar:Get("bigwigs:Tukui:bg")
+	local bg = bar:Get("bigwigs:elvui:barbg")
 	if bg then
 		bg:ClearAllPoints()
-		bg:SetParent(UIParent)
+		bg:SetParent(E.UIParent)
 		bg:Hide()
 		freebg[#freebg + 1] = bg
 	end
 
 	-- reparent and hide icon background
-	local ibg = bar:Get("bigwigs:Tukui:ibg")
+	local ibg = bar:Get("bigwigs:elvui:iconbg")
 	if ibg then
 		ibg:ClearAllPoints()
-		ibg:SetParent(UIParent)
+		ibg:SetParent(E.UIParent)
 		ibg:Hide()
 		freebg[#freebg + 1] = ibg
 	end
@@ -43,13 +37,13 @@ local function freestyle(bar)
 	bar.candyBarBar.SetPoint=bar.candyBarBar.OldSetPoint
 	bar.candyBarIconFrame.SetWidth=bar.candyBarIconFrame.OldSetWidth
 	bar.SetScale=bar.OldSetScale
-	
+
 	--Reset Positions
 	--Icon
 	bar.candyBarIconFrame:ClearAllPoints()
 	bar.candyBarIconFrame:SetPoint("TOPLEFT")
 	bar.candyBarIconFrame:SetPoint("BOTTOMLEFT")
-	bar.candyBarIconFrame:SetTexCoord(0.07, 0.93, 0.07, 0.93)
+	bar.candyBarIconFrame:SetTexCoord(unpack(E.TexCoords))
 
 	--Status Bar
 	bar.candyBarBar:ClearAllPoints()
@@ -70,11 +64,14 @@ local function freestyle(bar)
 end
 
 local applystyle = function(bar)
+
 	-- general bar settings
-	bar:SetHeight(buttonsize)
-	--bar:SetScale(1)
+	--bar.OldHeight = bar:GetHeight()
+	--bar.OldScale = bar:GetScale()
 	--bar.OldSetScale=bar.SetScale
-	--bar.SetScale=T.dummy
+	--bar.SetScale=E.noop
+	bar:Height(buttonsize)
+	--bar:SetScale(1)
 
 	-- create or reparent and use bar background
 	local bg = nil
@@ -83,14 +80,12 @@ local applystyle = function(bar)
 	else
 		bg = createbg()
 	end
-	
+
 	bg:SetParent(bar)
-	bg:ClearAllPoints()
-	bg:Point("TOPLEFT", bar, "TOPLEFT", -2, 2)
-	bg:Point("BOTTOMRIGHT", bar, "BOTTOMRIGHT", 2, -2)
+	bg:SetOutside(bar)
 	bg:SetFrameStrata("BACKGROUND")
 	bg:Show()
-	bar:Set("bigwigs:Tukui:bg", bg)
+	bar:Set("bigwigs:elvui:barbg", bg)
 
 	-- create or reparent and use icon background
 	local ibg = nil
@@ -101,82 +96,65 @@ local applystyle = function(bar)
 			ibg = createbg()
 		end
 		ibg:SetParent(bar)
-		ibg:ClearAllPoints()
-		ibg:Point("TOPLEFT", bar.candyBarIconFrame, "TOPLEFT", -2, 2)
-		ibg:Point("BOTTOMRIGHT", bar.candyBarIconFrame, "BOTTOMRIGHT", 2, -2)
+		ibg:SetOutside(bar.candyBarIconFrame)
 		ibg:SetFrameStrata("BACKGROUND")
 		ibg:Show()
-		bar:Set("bigwigs:Tukui:ibg", ibg)
+		bar:Set("bigwigs:elvui:iconbg", ibg)
 	end
 
 	-- setup timer and bar name fonts and positions
-	bar.candyBarLabel:SetFont(C.media.font, 12, "OUTLINE")
-	bar.candyBarLabel:SetShadowColor(0, 0, 0, 0)
 	bar.candyBarLabel:SetJustifyH("LEFT")
 	bar.candyBarLabel:ClearAllPoints()
 	bar.candyBarLabel:Point("LEFT", bar, "LEFT", 4, 0)
-	
-	bar.candyBarDuration:SetFont(C.media.font, 12, "OUTLINE")
-	bar.candyBarDuration:SetShadowColor(0, 0, 0, 0)
+
 	bar.candyBarDuration:SetJustifyH("RIGHT")
 	bar.candyBarDuration:ClearAllPoints()
 	bar.candyBarDuration:Point("RIGHT", bar, "RIGHT", -4, 0)
 
 	-- setup bar positions and look
+	bar.candyBarBar.OldPoint, bar.candyBarBar.Anchor, bar.candyBarBar.OldPoint2, bar.candyBarBar.XPoint, bar.candyBarBar.YPoint  = bar.candyBarBar:GetPoint()
 	bar.candyBarBar:ClearAllPoints()
 	bar.candyBarBar:SetAllPoints(bar)
 	bar.candyBarBar.OldSetPoint = bar.candyBarBar.SetPoint
-	bar.candyBarBar.SetPoint=T.dummy
-	bar.candyBarBar:SetStatusBarTexture(C["media"].normTex)
-	bar.candyBarBackground:SetTexture(unpack(C.media.backdropcolor))
-	
+	bar.candyBarBar.SetPoint=E.noop
+	bar.candyBarBar:SetStatusBarTexture(E["media"].normTex)
+	bar.candyBarBackground:SetTexture(unpack(E.media.backdropcolor))
+
 	-- setup icon positions and other things
-	bar.candyBarIconFrame:ClearAllPoints()
-	bar.candyBarIconFrame:Point("BOTTOMRIGHT", bar, "BOTTOMLEFT", -7, 0)
-	bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
+	bar.candyBarIconFrame.OldPoint, bar.candyBarIconFrame.Anchor, bar.candyBarIconFrame.OldPoint2, bar.candyBarIconFrame.XPoint, bar.candyBarIconFrame.YPoint  = bar.candyBarIconFrame:GetPoint()
+	bar.candyBarIconFrame.OldWidth = bar.candyBarIconFrame:GetWidth()
+	bar.candyBarIconFrame.OldHeight = bar.candyBarIconFrame:GetHeight()
 	bar.candyBarIconFrame.OldSetWidth = bar.candyBarIconFrame.SetWidth
-	bar.candyBarIconFrame.SetWidth=T.dummy
-	bar.candyBarIconFrame:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+	bar.candyBarIconFrame.SetWidth=E.noop
+	bar.candyBarIconFrame:ClearAllPoints()
+	bar.candyBarIconFrame:Point("BOTTOMRIGHT", bar, "BOTTOMLEFT", -(E.PixelMode and 1 or 5), 0)
+	bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
+	bar.candyBarIconFrame:SetTexCoord(unpack(E.TexCoords))
 end
-	
 
-local f = CreateFrame("Frame")
+--[[
+	BigWigs load process
+	-BigWigs
+	-BigWigs_Core (Global 'BigWigs' is set here)
+	-BigWigs_Plugins
 
+	Note to self: BigWigs_Core as an OptionalDep breaks ElvUI saved variables if BigWigs isn't loaded.
+]]
 local function RegisterStyle()
 	if not BigWigs then return end
+
 	local bars = BigWigs:GetPlugin("Bars", true)
-	local prox = BigWigs:GetPlugin("Proximity", true)
-	if bars then
-		bars:RegisterBarStyle("Tukui", {
-			apiVersion = 1,
-			version = 1,
-			GetSpacing = function(bar) return 7 end,
-			ApplyStyle = applystyle,
-			BarStopped = freestyle,
-			GetStyleName = function() return "Tukui" end,
-		})
-	end
-	if prox and BigWigs.pluginCore.modules.Bars.db.profile.barStyle == "Tukui" then
-		hooksecurefunc(BigWigs.pluginCore.modules.Proximity, "RestyleWindow", function()
-			BigWigsProximityAnchor:SetTemplate("Transparent")
-		end)
-	end
+
+	if not bars then return end
+
+	bars:RegisterBarStyle("ElvUI", {
+		apiVersion = 1,
+		version = 1,
+		GetSpacing = function(bar) return 8 end,
+		ApplyStyle = applystyle,
+		BarStopped = freestyle,
+		GetStyleName = function() return "ElvUI" end,
+	})
 end
 
-f:RegisterEvent("ADDON_LOADED")
-f:SetScript("OnEvent", function(self, event, addon)
-	if IsAddOnLoaded("Tukui_BigWigs") then return end
-	if addon == "BigWigs_Plugins" then
-		RegisterStyle()
-		local profile = BigWigs3DB["profileKeys"][T.myname.." - "..T.myrealm]
-		local path = BigWigs3DB["namespaces"]["BigWigs_Plugins_Bars"]["profiles"][profile]
-		path.texture = C.media.normTex
-		path.barStyle = "Tukui"
-		path.font = C.media.font
-		
-		path = BigWigs3DB["namespaces"]["BigWigs_Plugins_Proximity"]["profiles"][profile]
-		path.font = C.media.font
-		
-		self:UnregisterEvent("ADDON_LOADED")
-	end
-end)
+S:RegisterSkin('BigWigs_Plugins', RegisterStyle, nil, true)

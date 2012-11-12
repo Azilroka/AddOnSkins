@@ -1,19 +1,18 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("RaidBuffStatus") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("RaidBuffStatus") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "RaidBuffStatusSkin"
 local function SkinRBS(self)
-	local s = U.s
-	local c = U.c
-
-	U.SkinFrame(RBSFrame)
-	U.SkinButton(RBSFrameScanButton)
-	U.SkinButton(RBSFrameReadyCheckButton)
-	U.SkinButton(RBSFrameBossButton)
-	U.SkinButton(RBSFrameTrashButton)
-	U.SkinNextPrevButton(RBSFrameOptionsButton)
-	U.SkinNextPrevButton(RBSFrameTalentsButton)
+	AS:SkinFrame(RBSFrame)
+	AS:SkinButton(RBSFrameScanButton)
+	AS:SkinButton(RBSFrameReadyCheckButton)
+	AS:SkinButton(RBSFrameBossButton)
+	AS:SkinButton(RBSFrameTrashButton)
+	AS:SkinNextPrevButton(RBSFrameOptionsButton)
+	AS:SkinNextPrevButton(RBSFrameTalentsButton)
 	RBSFrameOptionsButton:Size(20)
 	RBSFrameTalentsButton:Size(20)
 end
 
-U.RegisterSkin(name,SkinRBS)
+AS:RegisterSkin(name,SkinRBS)

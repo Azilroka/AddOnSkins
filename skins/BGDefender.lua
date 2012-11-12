@@ -1,5 +1,7 @@
-﻿if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("BGDefender") then return end
-local U = unpack(select(2,...))
+﻿if not IsAddOnLoaded("BGDefender") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local function OnEnter11(Self)
   GameTooltip:SetOwner(Self, "ANCHOR_CURSOR")
   GameTooltip:AddLine("Lock or Make Moveable", 1, 1, 1)
@@ -24,7 +26,7 @@ end
 
 local name = 'BGDefenderSkin'
 local function SkinBGDefender(self)
-	U.SkinFrame(BGDefenderFrame)
+	AS:SkinFrame(BGDefenderFrame)
 
 	local StripAllTextures = {
 		"Button9",
@@ -51,7 +53,7 @@ local function SkinBGDefender(self)
 	end	
 
 	for _, button in pairs(buttons) do
-		U.SkinButton(_G[button])
+		AS:SkinButton(_G[button])
 	end	
 	
 	BGDefenderFrame:SetWidth(160)
@@ -73,11 +75,11 @@ local function SkinBGDefender(self)
 	Button7:Point("TOPLEFT", BGDefenderFrame, "TOPLEFT", 5, -48)
 	Button8:Point("TOPLEFT", BGDefenderFrame, "TOPLEFT", 97, -48)
 	
-	U.SkinDropDownBox(DropDown1, 200)
-	U.SkinDropDownBox(DropDown2, 200)
-	U.SkinDropDownBox(DropDown3, 200)
+	AS:SkinDropDownBox(DropDown1, 200)
+	AS:SkinDropDownBox(DropDown2, 200)
+	AS:SkinDropDownBox(DropDown3, 200)
 	
-	U.SkinCheckBox(BGDefenderPrefaceButton)
+	AS:SkinCheckBox(BGDefenderPrefaceButton)
 	
 	Text1:SetTextColor(23/255, 132/255, 209/255)
 		
@@ -94,4 +96,4 @@ local function SkinBGDefender(self)
 	Button11:SetScript("OnLeave", OnLeave)
 end
 
-U.RegisterSkin(name,SkinBGDefender)
+AS:RegisterSkin(name,SkinBGDefender)

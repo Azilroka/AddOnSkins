@@ -1,9 +1,11 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("FlightMap") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("FlightMap") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local function SkinFM(self,event)
-	U.SkinStatusBar(FlightMapTimesFrame)
+	AS:SkinStatusBar(FlightMapTimesFrame)
 	FlightMapTimesText:ClearAllPoints()
 	FlightMapTimesText:SetPoint("CENTER", FlightMapTimesFrame, "CENTER", 0, 0)
 end
 
-U.RegisterSkin('FlightMapSkin',SkinFM)
+AS:RegisterSkin('FlightMapSkin',SkinFM)

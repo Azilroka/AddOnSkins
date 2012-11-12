@@ -1,10 +1,11 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("SexyCooldown2") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("SexyCooldown2") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "SexyCooldownSkin"
 local scd = SexyCooldown2
-local c = U.c
-local s = U.s
 local LSM = LibStub("LibSharedMedia-3.0")
+
 -- Strip skinning settings from in-game GUI
 local function SCDStripSkinSettings(bar)
 	-- Remove conflicting options
@@ -26,25 +27,19 @@ end
 -- Skin Bars
 local function SkinSexyCooldownBar(bar)
 	SCDStripSkinSettings(bar)
-	U.SkinFrame(bar)
-	if(U.CheckOption("EmbedSexyCooldown")) then
+	AS:SkinFrame(bar)
+	if(AS:CheckOption("EmbedSexyCooldown")) then
 		bar:ClearAllPoints()
-		if IsAddOnLoaded("ElvUI") then
-			bar:Point('BOTTOM', ElvUI_Bar1, 'TOP', 0, 1)
-			bar:CreateShadow()
-			bar:SetHeight(ElvUI_Bar1:GetHeight())
-			if(U.CheckOption("SortSettings")) then
-				bar:Point('BOTTOM', ElvUI_Bar1, 'TOP', 0, 4)
-				bar:SetHeight(ElvUI_Bar1:GetHeight()*.8)
-			end
-			bar:SetWidth(ElvUI_Bar1:GetWidth())
-		else
-			bar:Point('BOTTOM', InvTukuiActionBarBackground, 'TOP', 0, 1)
-			if(U.CheckOption("AzilSettings")) then bar:Point('BOTTOM', InvTukuiActionBarBackground, 'TOP', 0, 16) end
-			bar:CreateShadow()
-			bar:SetHeight(ActionButton1:GetHeight())
-			bar:SetWidth(TukuiBar1:GetWidth())
+	
+		bar:Point('BOTTOM', ElvUI_Bar1, 'TOP', 0, 1)
+		bar:CreateShadow()
+		bar:SetHeight(ElvUI_Bar1:GetHeight())
+		if(AS:CheckOption("SortSettings")) then
+			bar:Point('BOTTOM', ElvUI_Bar1, 'TOP', 0, 4)
+			bar:SetHeight(ElvUI_Bar1:GetHeight()*.8)
 		end
+		bar:SetWidth(ElvUI_Bar1:GetWidth())
+	
 		bar:EnableMouse(false)
 		PetBattleFrame:HookScript("OnShow",function() bar:Hide() end)
 		PetBattleFrame:HookScript("OnHide",function() bar:Show() end)
@@ -55,28 +50,22 @@ end
 -- Skin Icons
 local function SkinSexyCooldownIcon(bar, icon)
 	if not icon.skinned then
-		U.SkinFrame(icon)
+		AS:SkinFrame(icon)
 		icon.overlay:CreateBackdrop("Default")
 		icon.tex:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-		if ElvUI then icon.tex.SetTexCoord = c.noop end
-		if Tukui then icon.tex.SetTexCoord = s.dummy end	
+		icon.tex.SetTexCoord = E.noop
 		icon.overlay:SetBackdropColor(0,0,0,0)
 		-- Default no background/border
 		icon:SetBackdropColor(0,0,0,0)
-		icon:SetBackdropBorderColor(c["media"].bordercolor)
-		icon.overlay:SetBackdropBorderColor(c["media"].bordercolor)
+		icon:SetBackdropBorderColor(E["media"].bordercolor)
+		icon.overlay:SetBackdropBorderColor(E["media"].bordercolor)
 		icon.skinned = true
 	end
 end
 
 local function SkinSexyCooldownLabel(bar,label,store)
 	if not label.skinned then
-		if IsAddOnLoaded("ElvUI") then
-			local x = U.x
-			label:SetFont(x.pixelFont, store.fontsize, "OUTLINE")
-		else
-			label:SetFont(c["media"].pixelfont, store.fontsize, "OUTLINE")
-		end
+		label:SetFont(AS.pixelFont, store.fontsize, "OUTLINE")
 	end
 end
 local function SkinSexyCooldownBackdrop(bar)
@@ -108,4 +97,4 @@ local function SkinSexyCooldown(self)
 	end
 end
 
-U.RegisterSkin(name,SkinSexyCooldown)
+AS:RegisterSkin(name,SkinSexyCooldown)

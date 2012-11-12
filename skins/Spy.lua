@@ -1,14 +1,18 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Spy") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("Spy") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "SpySkin"
 local function SkinSpy(self)
-	U.SkinFrame(Spy_MainWindow)
-	U.SkinFrame(Spy_AlertWindow)
-	U.SkinCloseButton(Spy_MainWindow.CloseButton)
-	U.Desaturate(Spy_MainWindow.ClearButton)
-	U.Desaturate(Spy_MainWindow.LeftButton)
-	U.Desaturate(Spy_MainWindow.RightButton)
+	AS:SkinFrame(Spy_MainWindow)
+	AS:SkinFrame(Spy_AlertWindow)
+	AS:SkinCloseButton(Spy_MainWindow.CloseButton)
+	AS:Desaturate(Spy_MainWindow.ClearButton)
+	AS:Desaturate(Spy_MainWindow.LeftButton)
+	AS:Desaturate(Spy_MainWindow.RightButton)
 	Spy_AlertWindow:Point("TOP", UIParent, "TOP", 0, -130)
+
+	E:CreateMover(Spy_AlertWindow,"SpyAlertWindowMover","Spy Alert Window",nil,nil,nil,'ALL,GENERAL')
 end
 
-U.RegisterSkin(name,SkinSpy)
+AS:RegisterSkin(name,SkinSpy)

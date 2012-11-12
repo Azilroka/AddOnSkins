@@ -1,24 +1,26 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("LootCouncil_Lite") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("LootCouncil_Lite") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "LootCouncilLiteSkin"
 local function SkinLootCouncilLite(self)
-	U.SkinFrame(RankFrame)
-	U.SkinDropDownBox(RankDropDown)
-	U.SkinButton(RankAcceptButton)
-	U.SkinButton(RankCancelButton)
-	U.SkinFrame(MainFrame)
-	U.SkinFrame(EntryFrame)
-	U.SkinFrame(LCTestFrame)
-	U.SkinButton(CloseButton)
-	U.SkinButton(RunTestButton)
-	U.SkinButton(TestCancelButton)
-	U.SkinButton(AbortButton)
+	AS:SkinFrame(RankFrame)
+	AS:SkinDropDownBox(RankDropDown)
+	AS:SkinButton(RankAcceptButton)
+	AS:SkinButton(RankCancelButton)
+	AS:SkinFrame(MainFrame)
+	AS:SkinFrame(EntryFrame)
+	AS:SkinFrame(LCTestFrame)
+	AS:SkinButton(CloseButton)
+	AS:SkinButton(RunTestButton)
+	AS:SkinButton(TestCancelButton)
+	AS:SkinButton(AbortButton)
 
 	for i = 1,40 do
-		if _G["EntryFrameEntry"..i.."AgainstButton"] then U.SkinCloseButton(_G["EntryFrameEntry"..i.."AgainstButton"]) end
-		if _G["EntryFrameEntry"..i.."ForButton"] then U.Desaturate(_G["EntryFrameEntry"..i.."ForButton"]) end
-		if _G["EntryFrameEntry"..i.."CancelButton"] then U.Desaturate(_G["EntryFrameEntry"..i.."CancelButton"]) end
+		if _G["EntryFrameEntry"..i.."AgainstButton"] then AS:SkinCloseButton(_G["EntryFrameEntry"..i.."AgainstButton"]) end
+		if _G["EntryFrameEntry"..i.."ForButton"] then AS:Desaturate(_G["EntryFrameEntry"..i.."ForButton"]) end
+		if _G["EntryFrameEntry"..i.."CancelButton"] then AS:Desaturate(_G["EntryFrameEntry"..i.."CancelButton"]) end
 	end
 end
 
-U.RegisterSkin(name,SkinLootCouncilLite)
+AS:RegisterSkin(name,SkinLootCouncilLite)

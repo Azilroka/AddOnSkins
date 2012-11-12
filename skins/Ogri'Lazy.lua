@@ -1,12 +1,11 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Ogri'Lazy") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("Ogri'Lazy") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "OgriLazySkin"
 local function SkinOgriLazy(self)
-	local s = U.s
-	local c = U.c
-
-	U.SkinFrame(Relic_View)
-	U.SkinCloseButton(Relic_ViewCloseButton)
+	AS:SkinFrame(Relic_View)
+	AS:SkinCloseButton(Relic_ViewCloseButton)
 end
 
-U.RegisterSkin(name,SkinOgriLazy)
+AS:RegisterSkin(name,SkinOgriLazy)

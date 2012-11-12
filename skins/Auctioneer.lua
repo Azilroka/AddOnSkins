@@ -1,5 +1,7 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Auc-Advanced") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("Auc-Advanced") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = 'AuctioneerSkin'
 local function AuctioneerSkin(self,event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
@@ -45,8 +47,8 @@ local function AuctioneerSkin(self,event)
 	BidQualitySort:Point("TOPLEFT", AuctionFrameBid, "TOPLEFT", 65, -50)
 	AuctionFrameTab1:ClearAllPoints()
 	AuctionFrameTab1:Point("TOPLEFT", AuctionFrame, "BOTTOMLEFT", -5, 2)
-	U.SkinNextPrevButton(BrowseNextPageButton)
-	U.SkinNextPrevButton(BrowsePrevPageButton)
+	AS:SkinNextPrevButton(BrowseNextPageButton)
+	AS:SkinNextPrevButton(BrowsePrevPageButton)
 	BrowseNextPageButton:Size(20, 20)
 	BrowsePrevPageButton:Size(20, 20)
 	if IsAddOnLoaded("Auc-Stat-Purchased") then
@@ -57,14 +59,14 @@ local function AuctioneerSkin(self,event)
 		BrowsePrevPageButton:Point("BOTTOMRIGHT", BrowseScrollFrame, "BOTTOMRIGHT", -160, 0)
 	end
 
-	if AucAdvScanButton then U.SkinButton(AucAdvScanButton) end
-	if AucAdvSimpFrameCreate then U.SkinButton(AucAdvSimpFrameCreate) end
-	if AucAdvSimpFrameRemember then U.SkinButton(AucAdvSimpFrameRemember) end
-	if AuctionFrameTabUtilAppraiser then U.SkinTab(AuctionFrameTabUtilAppraiser) end
-	if AuctionFrameTabUtilSearchUi then U.SkinTab(AuctionFrameTabUtilSearchUi) end
-	if AuctionFrameTabUtilSimple then U.SkinTab(AuctionFrameTabUtilSimple) end
-	if AuctionFrameTabUtilBeanCounter then U.SkinTab(AuctionFrameTabUtilBeanCounter) end
-	U.UnregisterEvent(name,self,"AUCTION_HOUSE_SHOW")
+	if AucAdvScanButton then AS:SkinButton(AucAdvScanButton) end
+	if AucAdvSimpFrameCreate then AS:SkinButton(AucAdvSimpFrameCreate) end
+	if AucAdvSimpFrameRemember then AS:SkinButton(AucAdvSimpFrameRemember) end
+	if AuctionFrameTabUtilAppraiser then AS:SkinTab(AuctionFrameTabUtilAppraiser) end
+	if AuctionFrameTabUtilSearchUi then AS:SkinTab(AuctionFrameTabUtilSearchUi) end
+	if AuctionFrameTabUtilSimple then AS:SkinTab(AuctionFrameTabUtilSimple) end
+	if AuctionFrameTabUtilBeanCounter then AS:SkinTab(AuctionFrameTabUtilBeanCounter) end
+	AS:UnregisterEvent(name,self,"AUCTION_HOUSE_SHOW")
 end
 
-U.RegisterSkin(name,AuctioneerSkin,'AUCTION_HOUSE_SHOW')
+AS:RegisterSkin(name,AuctioneerSkin,'AUCTION_HOUSE_SHOW')

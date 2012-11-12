@@ -1,13 +1,10 @@
-if not(IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("Archy") then return end
+if not IsAddOnLoaded("Archy") then return end
 local U = unpack(select(2,...))
 local name = "ArchySkin"
 
 local function SkinArchy(self)
-	local s = U.s
-	local c = U.c
-	
 	local function SkinArchyArtifactFrame()
-			U.SkinFrame(ArchyArtifactFrame)
+			AS:SkinFrame(ArchyArtifactFrame)
 
 			if ArchyArtifactFrameSkillBar then
 				--ArchyArtifactFrameSkillBar:Size(285, 20)	
@@ -45,17 +42,17 @@ local function SkinArchy(self)
 				end
 				
 				if fragmentBar then
-					U.SkinStatusBar(fragmentBar)	
+					AS:SkinStatusBar(fragmentBar)	
 					--fragmentBar:Size(180, 24)
 					--if IsAddOnLoaded("ElvUI") then
-					--	local x = U.x
+					--	local x = AS:x
 					--	fragmentBar.artifact:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
 					--	fragmentBar.fragments:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
 					--	fragmentBar.keystones.count:SetFont(x.pixelFont, 10, "MONOCHROMEOUTLINE")
 					--else
-					--	fragmentBar.artifact:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-					--	fragmentBar.fragments:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
-					--	fragmentBar.keystones.count:SetFont(c["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+					--	fragmentBar.artifact:SetFont(E["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+					--	fragmentBar.fragments:SetFont(E["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
+					--	fragmentBar.keystones.count:SetFont(E["media"].pixelfont, 10, "MONOCHROMEOUTLINE")
 					--end
 				end
 			end	
@@ -66,17 +63,17 @@ local function SkinArchy(self)
 	Archy:RefreshRacesDisplay()
 	
 	local function SkinArchyDigSiteFrame()
-			U.SkinFrame(ArchyDigSiteFrame)
-			--if not InCombatLockdown() then ArchyDigSiteFrame:SetScale(1) end
+		AS:SkinFrame(ArchyDigSiteFrame)
+		--if not InCombatLockdown() then ArchyDigSiteFrame:SetScale(1) end
 	end
 
 	hooksecurefunc(Archy, "UpdateDigSiteFrame", SkinArchyDigSiteFrame)
 
 	if ArchyArtifactFrameSkillBar then
-		U.SkinStatusBar(ArchyArtifactFrameSkillBar)	
+		AS:SkinStatusBar(ArchyArtifactFrameSkillBar)	
 	end
-	U.SkinButton(ArchyDistanceIndicatorFrameSurveyButton)
+	AS:SkinButton(ArchyDistanceIndicatorFrameSurveyButton)
 	ArchyDistanceIndicatorFrameSurveyButton:SetFrameLevel(ArchyDistanceIndicatorFrameSurveyButton:GetFrameLevel() + 5)
 end
 
-U.RegisterSkin(name,SkinArchy)
+AS:RegisterSkin(name,SkinArchy)

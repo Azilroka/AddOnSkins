@@ -1,7 +1,9 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("SearingPlasmaTracker") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("SearingPlasmaTracker") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "SearingPlasmaTrackerSkin"
 local function SkinSearingPlasmaTracker(self)
-	U.SkinFrame(SearingPlasmaTrackerFrame)
+	AS:SkinFrame(SearingPlasmaTrackerFrame)
 end
-U.RegisterSkin(name,SkinSearingPlasmaTracker)
+AS:RegisterSkin(name,SkinSearingPlasmaTracker)

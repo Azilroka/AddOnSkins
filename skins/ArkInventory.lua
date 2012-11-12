@@ -1,11 +1,13 @@
 if not IsAddOnLoaded("ArkInventory") then return end
-local U = unpack(select(2,...))
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local ArkInventory = LibStub("AceAddon-3.0"):GetAddon("ArkInventory")
 local name = "ArkInventorySkin"
 local function SkinArkInventory(self)
 	local _G = _G
-	local s = U.s
-	local c = U.c
+	local s = AS:s
+	local c = AS:c
 	ArkInventory.Frame_Main_Paint_ = ArkInventory.Frame_Main_Paint
 	ArkInventory.Frame_Main_Paint = function(frame)
 		if not ArkInventory.ValidFrame(frame, true) then return	end
@@ -16,7 +18,7 @@ local function SkinArkInventory(self)
 				if _G[name.."ArkBorder"] then _G[name.."ArkBorder"]:Hide() end
 				if _G[name.."Background"] then _G[name.."Background"]:Hide() end
 			end
-			U.SkinFrame(subframe)
+			AS:SkinFrame(subframe)
 		end
 	end
 	
@@ -64,20 +66,16 @@ local function SkinArkInventory(self)
 
 		--ArkInventory.Const.Frame.Status.Height = 30
 		_G[status:GetName().."EmptyText"]:SetPoint("LEFT",2,0)
-		if IsAddOnLoaded("ElvUI") then _G[status:GetName().."EmptyText"]:SetFont(c["media"].normFont, 12) end
-		if IsAddOnLoaded("Tukui") then _G[status:GetName().."EmptyText"]:SetFont(c["media"].font, 12) end
+		_G[status:GetName().."EmptyText"]:SetFont(E["media"].normFont, 12)
 
 		_G[status:GetName().."GoldCopperButton"]:SetPoint("RIGHT",-1,0)
-		if IsAddOnLoaded("ElvUI") then _G[status:GetName().."GoldCopperButtonText"]:SetFont(c["media"].normFont, 12) end
-		if IsAddOnLoaded("Tukui") then _G[status:GetName().."GoldCopperButtonText"]:SetFont(c["media"].font,12) end
-
+		_G[status:GetName().."GoldCopperButtonText"]:SetFont(E["media"].normFont, 12)
+		
 		_G[status:GetName().."GoldSilverButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldCopperButtonText"],"LEFT",-1,0)
-		if IsAddOnLoaded("ElvUI") then _G[status:GetName().."GoldSilverButtonText"]:SetFont(c["media"].normFont, 12) end
-		if IsAddOnLoaded("Tukui") then _G[status:GetName().."GoldSilverButtonText"]:SetFont(c["media"].font,12) end
+		_G[status:GetName().."GoldSilverButtonText"]:SetFont(E["media"].normFont, 12)
 		
 		_G[status:GetName().."GoldGoldButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldSilverButtonText"],"LEFT",-1,0)
-		if IsAddOnLoaded("ElvUI") then _G[status:GetName().."GoldGoldButtonText"]:SetFont(c["media"].normFont, 12) end
-		if IsAddOnLoaded("Tukui") then _G[status:GetName().."GoldGoldButtonText"]:SetFont(c["media"].font,12) end
+		_G[status:GetName().."GoldGoldButtonText"]:SetFont(E["media"].normFont, 12)
 	end
 	
 	--ArkInventory.Const.Frame.Title.Height2 = 32
@@ -93,7 +91,7 @@ local function SkinArkInventory(self)
 		local name = bar:GetName()
 		if _G[name.."ArkBorder"] then _G[name.."ArkBorder"]:Hide() end
 		if _G[name.."Background"] then _G[name.."Background"]:Hide() end
-		U.SkinFrame(bar)
+		AS:SkinFrame(bar)
 
 		if ArkInventory.Global.Mode.Edit then
 			bar:SetBackdropBorderColor(1,0,0,1)
@@ -131,4 +129,4 @@ local function SkinArkInventory(self)
 
 end
 
-U.RegisterSkin(name,SkinArkInventory)
+AS:RegisterSkin(name,SkinArkInventory)

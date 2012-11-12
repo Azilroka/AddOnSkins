@@ -5,20 +5,20 @@
 
 local addon = select(1,...)
 local E, L, V, P, G,_ = unpack(ElvUI)
-local XS = E:NewModule('ExtraSkins','AceTimer-3.0','AceEvent-3.0')
+local AS = E:NewModule('AddOnSkins','AceTimer-3.0','AceEvent-3.0')
 local S = E:GetModule('Skins')
 local LSM = LibStub("LibSharedMedia-3.0");
 
-XS.LSM = LSM
-XS.skins = {}
-XS.embeds = {}
-XS.events = {}
-XS.register = {}
-XS.ccolor = E.myclass
+AS.LSM = LSM
+AS.skins = {}
+AS.embeds = {}
+AS.events = {}
+AS.register = {}
+AS.ccolor = E.myclass
 
-XS.sle = IsAddOnLoaded("ElvUI_SLE")
+AS.sle = IsAddOnLoaded("ElvUI_SLE")
 
-XS.Version = GetAddOnMetadata(addon,"Version")
+AS.Version = GetAddOnMetadata(addon,"Version")
 
 E.PopupDialogs["OLD_SKIN_PACKAGE"] = {
 	text = "You have one of the old skin addons installed.  This addon replaces and will conflict with it.  Press accept to disable the old addon and reload your UI.",
@@ -32,7 +32,7 @@ E.PopupDialogs["OLD_SKIN_PACKAGE"] = {
 local function GenerateEventFunction(event)
 	local eventHandler = function(self,event)
 		for skin,funcs in pairs(self.skins) do
-			if XS:CheckOption(skin) and self.events[event][skin] then
+			if AS:CheckOption(skin) and self.events[event][skin] then
 				for func,_ in pairs(funcs) do
 					func(f,event)
 				end
@@ -42,7 +42,7 @@ local function GenerateEventFunction(event)
 	return eventHandler
 end
 
-function XS:Initialize()
+function AS:Initialize()
 	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
 	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix') and E.myrealm == 'Emerald Dream' then
@@ -67,8 +67,8 @@ function XS:Initialize()
 		end
 	end
 
-	for skin,funcs in pairs(XS.skins) do
-		if XS:CheckOption(skin) then
+	for skin,funcs in pairs(AS.skins) do
+		if AS:CheckOption(skin) then
 			for func,_ in pairs(funcs) do
 				func(f,"PLAYER_ENTERING_WORLD")
 			end
@@ -76,7 +76,7 @@ function XS:Initialize()
 	end
 end
 
-function XS:RegisterSkin(skinName,func,events)
+function AS:RegisterSkin(skinName,func,events)
 	if not self.skins[skinName] then self.skins[skinName] = {} end
 	self.skins[skinName][func] = true
 	for event,_ in pairs(events) do
@@ -89,7 +89,7 @@ function XS:RegisterSkin(skinName,func,events)
 	end
 end
 
-function XS:UnregisterEvent(skinName,event)
+function AS:UnregisterEvent(skinName,event)
 	if not self.events[event] then return end
 	if not self.events[event][skinName] then return end
 
@@ -106,85 +106,85 @@ function XS:UnregisterEvent(skinName,event)
 	end
 end
 
-function XS:SkinButton(button,strip)
+function AS:SkinButton(button,strip)
 	S:HandleButton(button,strip)
 end
 
-function XS:SkinScrollBar(bar)
+function AS:SkinScrollBar(bar)
 	S:HandleScrollBar(bar)
 end
 
-function XS:SkinTab(tab)
+function AS:SkinTab(tab)
 	S:HandleTab(tab)
 end
 
-function XS:SkinNextPrevButton(button,horizontal)
+function AS:SkinNextPrevButton(button,horizontal)
 	S:HandleNextPrevButton(button,horizontal)
 end
 
-function XS:SkinRotateButton(button)
+function AS:SkinRotateButton(button)
 	S:HandleRotateButton(button)
 end
 
-function XS:SkinEditBox(editBox)
+function AS:SkinEditBox(editBox)
 	S:HandleEditBox(editBox)
 end
 
-function XS:SkinDropDownBox(box, width)
+function AS:SkinDropDownBox(box, width)
 	S:HandleDropDownBox(box, width)
 end
 
-function XS:SkinCheckBox(checkBox)
+function AS:SkinCheckBox(checkBox)
 	S:HandleCheckBox(checkBox)
 end
 
-function XS:SkinCloseButton(button)
+function AS:SkinCloseButton(button)
 	S:HandleCloseButton(button)
 end
 
-function XS:SkinSliderFrame(frame, height)
+function AS:SkinSliderFrame(frame, height)
 	S:HandleSliderFrame(frame, height)
 end
 
-function XS:RegisterForPetBattleHide(frame)
+function AS:RegisterForPetBattleHide(frame)
 	if frame.IsVisible and frame:GetName() then
-		XS.FrameLocks[frame:GetName()] = { shown = false }
+		AS.FrameLocks[frame:GetName()] = { shown = false }
 	end
 end
 
-function XS:SkinFrame(frame)
+function AS:SkinFrame(frame)
 	frame:StripTextures(true)
 	frame:SetTemplate("Transparent")
 	self:RegisterForPetBattleHide(frame)
 end
 
-function XS:SkinBackdropFrame(frame)
+function AS:SkinBackdropFrame(frame)
 	frame:StripTextures(true)
 	frame:CreateBackdrop("Transparent")
 	self:RegisterForPetBattleHide(frame)
 end
 
-function XS:SkinFrameD(frame)
+function AS:SkinFrameD(frame)
 	frame:StripTextures(true)
 	frame:SetTemplate("Default")
 	self:RegisterForPetBattleHide(frame)
 end
 
-function XS:SkinStatusBar(bar)
+function AS:SkinStatusBar(bar)
 	frame:StripTextures(true)
 	frame:CreateBackdrop()
 	frame:SetStatusBarTexture(E["media"].normTex)
 end
 
-function XS:SkinCCStatusBar(bar)
+function AS:SkinCCStatusBar(bar)
 	frame:StripTextures(true)
 	frame:CreateBackdrop("ClassColor")
 	frame:SetStatusBarTexture(E["media"].normTex)
-	local color = RAID_CLASS_COLORS[XS.ccolor]
+	local color = RAID_CLASS_COLORS[AS.ccolor]
 	frame:SetStatusBarColor(color.r, color.g, color.b)
 end
 
-function XS:Desaturate(f, point)
+function AS:Desaturate(f, point)
 	for i=1, f:GetNumRegions() do
 		local region = select(i, f:GetRegions())
 		if region:GetObjectType() == "Texture" then
@@ -201,7 +201,7 @@ function XS:Desaturate(f, point)
 	end
 end
 
-function XS:CheckOption(optionName,...)
+function AS:CheckOption(optionName,...)
 	for i = 1,select('#',...) do
 		local addon = select(i,...)
 		if not addon then break end
@@ -211,19 +211,19 @@ function XS:CheckOption(optionName,...)
 	return E.db.skins[optionName]
 end
 
-function XS:DisableOption(optionName)
+function AS:DisableOption(optionName)
 	E.db.skins[optionName] = false
 end
 
-function XS:EnableOption(optionName)
+function AS:EnableOption(optionName)
 	E.db.skins[optionName] = true
 end
 
-function XS:ToggleOption(optionName)
+function AS:ToggleOption(optionName)
 	E.db.skins[optionName] = not E.db.skins[optionName]
 end
 
-function XS:RegisterSkin(skinName,skinFunc,...)
+function AS:RegisterSkin(skinName,skinFunc,...)
 	local events = {}
 	for i = 1,select('#',...) do
 		local event = select(i,...)
@@ -235,16 +235,16 @@ function XS:RegisterSkin(skinName,skinFunc,...)
 	self.register[skinName][skinFunc] = registerMe
 end
 
-function XS:AddNonPetBattleFrames()
-	for frame,data in pairs(U.FrameLocks) do
+function AS:AddNonPetBattleFrames()
+	for frame,data in pairs(AS:FrameLocks) do
 		if data.shown then
 			_G[frame]:Show()
 		end
 	end
 end
 
-function XS:RemoveNonPetBattleFrames()
-	for frame,data in pairs(U.FrameLocks) do
+function AS:RemoveNonPetBattleFrames()
+	for frame,data in pairs(AS:FrameLocks) do
 		if(_G[frame]:IsVisible()) then
 			data.shown = true
 			_G[frame]:Hide()
@@ -254,4 +254,4 @@ function XS:RemoveNonPetBattleFrames()
 	end
 end
 
-E:RegisterModule(XS:GetName())
+E:RegisterModule(AS:GetName())

@@ -1,23 +1,16 @@
 ﻿if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Skillet") then return end
-local U = unpack(select(2,...))
-local s = U.s
-local c = U.c
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
 local Skillet = _G.Skillet
 
 function SetModifiedBackdrop(self)
-	if Tukui then
-		local color = RAID_CLASS_COLORS[U.ccolor]
-		self:SetBackdropColor(color.r*.15, color.g*.15, color.b*.15)
-		self:SetBackdropBorderColor(color.r, color.g, color.b)
-	else
-		if self.backdrop then self = self.backdrop end
-		self:SetBackdropBorderColor(unpack(c["media"].rgbvaluecolor))
-	end
+	if self.backdrop then self = self.backdrop end
+	self:SetBackdropBorderColor(unpack(E["media"].rgbvaluecolor))
 end
 
 function SetOriginalBackdrop(self)
 	if Tukui then
-		local color = RAID_CLASS_COLORS[U.ccolor]
+		local color = RAID_CLASS_COLORS[AS:ccolor]
 		if c["general"].classcolortheme == true then
 			self:SetBackdropBorderColor(color.r, color.g, color.b)
 		else
@@ -25,7 +18,7 @@ function SetOriginalBackdrop(self)
 		end
 	else
 		if self.backdrop then self = self.backdrop end
-		self:SetBackdropBorderColor(unpack(c["media"].bordercolor))
+		self:SetBackdropBorderColor(unpack(E["media"].bordercolor))
 	end
 end
 
@@ -138,18 +131,15 @@ local function SkinIcon(self)
 	SkinButton(SkilletRecipeDifficultyButton)
 	SkinButton(SkilletExpandAllButton)
 	SkinButton(SkilletCollapseAllButton)
-	U.SkinButton(SkilletShowOptionsButton)
+	AS:SkinButton(SkilletShowOptionsButton)
 	SkilletShowOptionsButton:SetHeight(16)
 	SkilletShowOptionsButton:SetWidth(12)
 	SkilletShowOptionsButton:SetPoint("RIGHT", SkilletFrameCloseButton, "LEFT", 3, 0)
 	
 	if not SkilletShowOptionsButton.text then
 		SkilletShowOptionsButton.text = SkilletShowOptionsButton:CreateFontString(nil, 'OVERLAY')
-		if ElvUI then
-			SkilletShowOptionsButton.text:SetFont([[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]], 12, 'OUTLINE')
-			else
-			SkilletShowOptionsButton.text:SetFont([[Interface\AddOns\Tukui\medias\fonts\normal_font.ttf]], 12, 'OUTLINE')
-		end
+	
+		SkilletShowOptionsButton.text:SetFont([[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]], 12, 'OUTLINE')
 		SkilletShowOptionsButton.text:SetText(" ?")
 		SkilletShowOptionsButton.text:SetTextColor(1, 0, 0)	
 		SkilletShowOptionsButton.text:SetJustifyH('CENTER')
@@ -162,18 +152,18 @@ local function SkinShopping(self)
 	SkilletShoppingList:SetTemplate("Transparent")
 	SkilletShoppingListParent:StripTextures()
 	SkilletShoppingListParent:SetTemplate("Default")
-	U.SkinCloseButton(SkilletShoppingListCloseButton)
-	U.SkinCheckBox(SkilletShowQueuesFromAllAlts)
-	U.SkinScrollBar(SkilletShoppingListListScrollBar)
+	AS:SkinCloseButton(SkilletShoppingListCloseButton)
+	AS:SkinCheckBox(SkilletShowQueuesFromAllAlts)
+	AS:SkinScrollBar(SkilletShoppingListListScrollBar)
 end
 
 local function SkinPluginButtons(self)
 
 		if SkilletPluginDropdown1 then
-			U.SkinButton(_G["SkilletPluginDropdown1"])
+			AS:SkinButton(_G["SkilletPluginDropdown1"])
 		end
 		if SkilletPluginDropdown2 then
-			U.SkinButton(_G["SkilletPluginDropdown2"])
+			AS:SkinButton(_G["SkilletPluginDropdown2"])
 		end
 end	
 
@@ -218,7 +208,7 @@ local function SkilletFrameOnShow(self)
 					_G[object]:SetTemplate("Transparent")
 		end	
 
-		U.SkinCloseButton(SkilletNotesCloseButton)
+		AS:SkinCloseButton(SkilletNotesCloseButton)
 
 		SkilletSkillListParent:SetPoint("TOPLEFT", SkilletFrame, "TOPLEFT", 5, -100)
 		SkilletRankFrame:SetPoint("TOPRIGHT", SkilletFrame, "TOPRIGHT", -12, -57)
@@ -244,11 +234,11 @@ local function SkilletFrameOnShow(self)
 		SkilletTradeskillTooltip:StripTextures()
 		SkilletTradeskillTooltip:SetTemplate("Default")
 
-		U.SkinScrollBar(SkilletQueueListScrollBar)
+		AS:SkinScrollBar(SkilletQueueListScrollBar)
 
 	for i=1,3 do
 		local queDelete = _G["SkilletQueueButton"..i.."DeleteButton"]
-			U.SkinButton(queDelete)
+			AS:SkinButton(queDelete)
 			queDelete:SetWidth(14)
 			queDelete:SetHeight(14)
 	end
@@ -260,18 +250,18 @@ local function SkilletFrameOnShow(self)
 
 		for i=1,4 do 
 			tabs = _G["Enchantrix_BarkerOptions_FrameTab"..i]
-				U.SkinTab(tabs)
+				AS:SkinTab(tabs)
 		end
 
 		Enchantrix_BarkerOptions_FrameTab1:ClearAllPoints()
 		Enchantrix_BarkerOptions_FrameTab1:SetPoint("TOPLEFT", Enchantrix_BarkerOptions_Frame, "BOTTOMLEFT", 11, 1)
 		Enchantrix_BarkerOptions_CloseButton:SetPoint("TOPRIGHT", Enchantrix_BarkerOptions_Frame, "TOPRIGHT", -5, -2)
 
-		U.SkinButton(Enchantrix_BarkerOptionsBark_Button)
-		U.SkinButton(Enchantrix_BarkerOptionsReset_Button)
-		U.SkinButton(Enchantrix_BarkerOptionsTest_Button)
+		AS:SkinButton(Enchantrix_BarkerOptionsBark_Button)
+		AS:SkinButton(Enchantrix_BarkerOptionsReset_Button)
+		AS:SkinButton(Enchantrix_BarkerOptionsTest_Button)
 
-		U.SkinCloseButton(Enchantrix_BarkerOptions_CloseButton)
+		AS:SkinCloseButton(Enchantrix_BarkerOptions_CloseButton)
 	end
 end
 
@@ -352,63 +342,63 @@ local function SkilletFrameOnUpdate(self, event, ...)
 				tradeLink = nil
 			end
 		end
-			if ranks then
-				local spellName, _, spellIcon = GetSpellInfo(tradeID)
-					local buttonName = "SkilletFrameTradeButton-"..player.."-"..tradeID
-					local bName = _G[buttonName]
-						if not bName then
-							bName = CreateFrame("CheckButton",bName,nil,UIParent)--CreateFrame("CheckButton", buttonName, frame, "SkilletTradeButtonTemplate")
-						end 
-					bName:ClearAllPoints()
-					bName:SetPoint("BOTTOMLEFT", SkilletRankFrame, "TOPLEFT", x, 3)
-					x = x + bName:GetWidth() + 1
-					
-			end
+		
+		if ranks then
+			local spellName, _, spellIcon = GetSpellInfo(tradeID)
+			local buttonName = "SkilletFrameTradeButton-"..player.."-"..tradeID
+			local bName = _G[buttonName]
+				if not bName then
+					bName = CreateFrame("CheckButton",bName,nil,UIParent)--CreateFrame("CheckButton", buttonName, frame, "SkilletTradeButtonTemplate")
+				end 
+			bName:ClearAllPoints()
+			bName:SetPoint("BOTTOMLEFT", SkilletRankFrame, "TOPLEFT", x, 3)
+			x = x + bName:GetWidth() + 1
+		end
 	end
 
 	if SkilletQueueButton13DeleteButton then
-			for i=1,13 do
+		for i=1,13 do
 			local queDelete = _G["SkilletQueueButton"..i.."DeleteButton"]
-				U.SkinButton(queDelete)
-				queDelete:SetWidth(14)
-				queDelete:SetHeight(14)
-			end
+			AS:SkinButton(queDelete)
+			queDelete:SetWidth(14)
+			queDelete:SetHeight(14)
+		end
 	end
 end
 
 local name = "SkilletSkin"
 local function SkinSkillet(Self)
 		local buttons = {
-				"SkilletQueueAllButton",
-				"SkilletCreateAllButton",
-				"SkilletQueueButton",
-				"SkilletCreateButton",
-				"SkilletQueueManagementButton",
-				"SkilletPluginButton",
-				"SkilletShoppingListButton",
-				"SkilletEmptyQueueButton",
-				"SkilletStartQueueButton",
-				"SkilletQueueOnlyButton",
-				"SkilletQueueLoadButton",
-				"SkilletQueueDeleteButton",
-				"SkilletQueueSaveButton",
-				"SkilletRecipeNotesButton",
-				"SkilletViewCraftersButton",
-				"SkilletMerchantBuyFrameButton",
-				}
+			"SkilletQueueAllButton",
+			"SkilletCreateAllButton",
+			"SkilletQueueButton",
+			"SkilletCreateButton",
+			"SkilletQueueManagementButton",
+			"SkilletPluginButton",
+			"SkilletShoppingListButton",
+			"SkilletEmptyQueueButton",
+			"SkilletStartQueueButton",
+			"SkilletQueueOnlyButton",
+			"SkilletQueueLoadButton",
+			"SkilletQueueDeleteButton",
+			"SkilletQueueSaveButton",
+			"SkilletRecipeNotesButton",
+			"SkilletViewCraftersButton",
+			"SkilletMerchantBuyFrameButton",
+		}
 
 		for _, button in pairs(buttons) do
-						U.SkinButton(_G[button])
+			AS:SkinButton(_G[button])
 		end	
 
-		U.SkinCloseButton(SkilletFrameCloseButton)
-		U.SkinCloseButton(SkilletStandalonQueueCloseButton)
+		AS:SkinCloseButton(SkilletFrameCloseButton)
+		AS:SkinCloseButton(SkilletStandalonQueueCloseButton)
 
-		U.SkinDropDownBox(SkilletRecipeGroupDropdown)
-		U.SkinDropDownBox(SkilletSortDropdown)
-		U.SkinDropDownBox(SkilletQueueLoadDropdown)
+		AS:SkinDropDownBox(SkilletRecipeGroupDropdown)
+		AS:SkinDropDownBox(SkilletSortDropdown)
+		AS:SkinDropDownBox(SkilletQueueLoadDropdown)
 
-		U.Desaturate(SkilletSearchFilterClear)
+		AS:Desaturate(SkilletSearchFilterClear)
 
 		SkilletSortAscButton:StripTextures()
 		SkilletSortAscButton:SetTemplate("Default", true)
@@ -416,12 +406,8 @@ local function SkinSkillet(Self)
 			SkilletSortAscButton.texture = SkilletSortAscButton:CreateTexture(nil, 'OVERLAY')
 			SkilletSortAscButton.texture:Point("TOPLEFT", 2, -2)
 			SkilletSortAscButton.texture:Point("BOTTOMRIGHT", -2, 2)
-			if ElvUI then
-				SkilletSortAscButton.texture:SetTexture([[Interface\AddOns\ElvUI\media\textures\arrowup.tga]])
-			else
-				SkilletSortAscButton.texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowup.tga]])
-			end
-			SkilletSortAscButton.texture:SetVertexColor(unpack(c["media"].bordercolor))
+			SkilletSortAscButton.texture:SetTexture([[Interface\AddOns\ElvUI\media\textures\arrowup.tga]])
+			SkilletSortAscButton.texture:SetVertexColor(unpack(E["media"].bordercolor))
 		end
 
 		SkilletSortDescButton:StripTextures()
@@ -430,28 +416,24 @@ local function SkinSkillet(Self)
 			SkilletSortDescButton.texture = SkilletSortDescButton:CreateTexture(nil, 'OVERLAY')
 			SkilletSortDescButton.texture:Point("TOPLEFT", 2, -2)
 			SkilletSortDescButton.texture:Point("BOTTOMRIGHT", -2, 2)
-			if ElvUI then
-				SkilletSortDescButton.texture:SetTexture([[Interface\AddOns\ElvUI\media\textures\arrowdown.tga]])
-			else
-				SkilletSortDescButton.texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowdown.tga]])
-			end
-			SkilletSortDescButton.texture:SetVertexColor(unpack(c["media"].bordercolor))
+			SkilletSortDescButton.texture:SetTexture([[Interface\AddOns\ElvUI\media\textures\arrowdown.tga]])
+			SkilletSortDescButton.texture:SetVertexColor(unpack(E["media"].bordercolor))
 		end
 
-		U.SkinNextPrevButton(SkilletRecipeGroupOperations)
+		AS:SkinNextPrevButton(SkilletRecipeGroupOperations)
 
-		U.SkinEditBox(SkilletItemCountInputBox)
-		U.SkinEditBox(SkillButtonNameEdit)
-		U.SkinEditBox(GroupButtonNameEdit)
-		U.SkinEditBox(SkilletFilterBox)
+		AS:SkinEditBox(SkilletItemCountInputBox)
+		AS:SkinEditBox(SkillButtonNameEdit)
+		AS:SkinEditBox(GroupButtonNameEdit)
+		AS:SkinEditBox(SkilletFilterBox)
 		SkilletFilterBox:SetHeight(20)
-		U.SkinEditBox(SkilletQueueSaveEditBox)
+		AS:SkinEditBox(SkilletQueueSaveEditBox)
 	
 		SkilletRankFrameBorder:StripTextures()
-		U.SkinStatusBar(SkilletRankFrame)
+		AS:SkinStatusBar(SkilletRankFrame)
 		SkilletRankFrame:SetHeight(10)		
 	
-		U.SkinScrollBar(SkilletSkillListScrollBar, 5)
+		AS:SkinScrollBar(SkilletSkillListScrollBar, 5)
 
 		local SkilletOnload = _G["SkilletSkillListParent"]
 		SkilletOnload:SetScript("OnShow", SkilletFrameOnShow)
@@ -470,4 +452,4 @@ local function SkinSkillet(Self)
 		local plugin = _G["SkilletPluginButton"]
 		plugin:SetScript("PostClick", SkinPluginButtons)
 end
-U.RegisterSkin(name,SkinSkillet)
+AS:RegisterSkin(name,SkinSkillet)

@@ -3,15 +3,15 @@
 	Modified: Elv, Azilroka
 	All rights reserved.
 ]]--
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("DBM-Core") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("DBM-Core") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local croprwicons = true			-- crops blizz shitty borders from icons in RaidWarning messages
 local rwiconsize = 18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
 local buttonsize = 22
 
 local function LoadSkin()
-	local s = U.s
-	local c = U.c
 	local function SkinBars(self)
 		for bar in self:GetBarIterator() do
 			if not bar.injected then
@@ -28,17 +28,15 @@ local function LoadSkin()
 					if not (icon1.overlay) then
 						icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
 						icon1.overlay:CreateBackdrop()
-						if U.elv and c.PixelMode then icon1.overlay:Size(buttonsize-2) else icon1.overlay:Size(buttonsize-4) end
-						if U.elv then icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -(c.PixelMode and 2 or 5), (c.PixelMode and 1 or 2)) end
-						if U.tuk then icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -5, 2) end
+						if E.PixelMode then icon1.overlay:Size(buttonsize-2) else icon1.overlay:Size(buttonsize-4) end
+						icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -(E.PixelMode and 2 or 5), (E.PixelMode and 1 or 2))
 					end
 
 					if not (icon2.overlay) then
 						icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
 						icon2.overlay:CreateBackdrop()
-						if U.elv and c.PixelMode then icon2.overlay:Size(buttonsize-2) else icon2.overlay:Size(buttonsize-4) end
-						if U.elv then icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", (c.PixelMode and 2 or 5), (c.PixelMode and 1 or 2)) end
-						if U.tuk then icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", 5, 2) end						
+						if E.PixelMode then icon2.overlay:Size(buttonsize-2) else icon2.overlay:Size(buttonsize-4) end
+						icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", (c.PixelMode and 2 or 5), (c.PixelMode and 1 or 2))				
 					end
 
 					if bar.color then
@@ -54,7 +52,7 @@ local function LoadSkin()
 						--frame:SetScale(1)
 						--frame.SetScale=s.dummy
 						frame:SetHeight(buttonsize)
-						if (U.CheckOption("DBMSkinHalf")) then frame:SetHeight(buttonsize/3) end
+						if (AS:CheckOption("DBMSkinHalf")) then frame:SetHeight(buttonsize/3) end
 						frame:SetTemplate("Transparent")
 						frame.styled=true
 					end
@@ -82,12 +80,12 @@ local function LoadSkin()
 					end
 
 					if not texture.styled then
-						texture:SetTexture(c["media"].normTex)
+						texture:SetTexture(E["media"].normTex)
 						texture.styled=true
 					end
 					
 					if not tbar.styled then
-						tbar:SetStatusBarTexture(c["media"].normTex)
+						tbar:SetStatusBarTexture(E["media"].normTex)
 						tbar:SetInside(frame)
 						--tbar:Point("TOPLEFT", frame, "TOPLEFT", 2, -2)
 						--tbar:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
@@ -97,12 +95,11 @@ local function LoadSkin()
 					if not name.styled then
 						name:ClearAllPoints()
 						name:Point("LEFT", frame, "LEFT", 4, 0)
-						if (U.CheckOption("DBMSkinHalf")) then name:Point("BOTTOMLEFT", frame, "TOPLEFT", 0, 4) end
+						if (AS:CheckOption("DBMSkinHalf")) then name:Point("BOTTOMLEFT", frame, "TOPLEFT", 0, 4) end
 						name:SetWidth(165)
 						name:SetHeight(8)
-						if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
 						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(nil, 12, 'OUTLINE') end
-						if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
+						if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, E.private.sle.dbm.size, 'OUTLINE') end
 						name:SetJustifyH("LEFT")
 						name:SetShadowColor(0, 0, 0, 0)
 						name.SetFont = s.dummy
@@ -112,10 +109,9 @@ local function LoadSkin()
 					if not timer.styled then	
 						timer:ClearAllPoints()
 						timer:Point("RIGHT", frame, "RIGHT", -4, 0)
-						if (U.CheckOption("DBMSkinHalf")) then timer:Point("BOTTOMRIGHT", frame, "TOPRIGHT", -1, 2) end
-						if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
+						if (AS:CheckOption("DBMSkinHalf")) then timer:Point("BOTTOMRIGHT", frame, "TOPRIGHT", -1, 2) end
 						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(nil, 12, 'OUTLINE') end
-						if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
+						if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, E.private.sle.dbm.size, 'OUTLINE') end
 						timer:SetJustifyH("RIGHT")
 						timer:SetShadowColor(0, 0, 0, 0)
 						timer.SetFont = s.dummy
@@ -142,7 +138,6 @@ local function LoadSkin()
 		if not anchor.styled then
 			local header={anchor:GetRegions()}
 				if header[1]:IsObjectType("FontString") then
-					if IsAddOnLoaded("Tukui") then header[1]:SetFont(c["media"].font, 12, "OUTLINE") end
 					if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then header[1]:FontTemplate(nil, 12, 'OUTLINE') end
 					if IsAddOnLoaded("ElvUI_SLE") then header[1]:FontTemplate(nil, 8, 'OUTLINE') end
 					header[1]:SetTextColor(1,1,1,1)
@@ -183,14 +178,14 @@ local function LoadSkin()
 
 			if not bar.styled then
 				bar:SetHeight(buttonsize)
-				if (U.CheckOption("DBMSkinHalf")) then bar:SetHeight(buttonsize/3) end
+				if (AS:CheckOption("DBMSkinHalf")) then bar:SetHeight(buttonsize/3) end
 				bar:SetTemplate("Transparent")
 				background:SetNormalTexture(nil)
 				bar.styled=true
 			end	
 			
 			if not progress.styled then
-				progress:SetStatusBarTexture(c["media"].normTex)
+				progress:SetStatusBarTexture(E["media"].normTex)
 				progress.styled=true
 			end				
 			progress:ClearAllPoints()
@@ -200,12 +195,11 @@ local function LoadSkin()
 			if not name.styled then
 				name:ClearAllPoints()
 				name:Point("LEFT", bar, "LEFT", 4, 0)
-				if (U.CheckOption("DBMSkinHalf")) then
+				if (AS:CheckOption("DBMSkinHalf")) then
 					name:Point("BOTTOMLEFT", bar, "TOPLEFT", 1, 4)
 				end
-				if IsAddOnLoaded("Tukui") then name:SetFont(c["media"].font, 12, "OUTLINE") end
 				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(nil, 12, 'OUTLINE') end
-				if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
+				if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, E.private.sle.dbm.size, 'OUTLINE') end
 				name:SetJustifyH("LEFT")
 				name:SetShadowColor(0, 0, 0, 0)
 				name.styled=true
@@ -214,10 +208,9 @@ local function LoadSkin()
 			if not timer.styled then
 				timer:ClearAllPoints()
 				timer:Point("RIGHT", bar, "RIGHT", -4, 0)
-				if (U.CheckOption("DBMSkinHalf")) then timer:Point("BOTTOMLEFT", bar, "TOPLEFT", 0, 2) end
-				if IsAddOnLoaded("Tukui") then timer:SetFont(c["media"].font, 12, "OUTLINE") end
+				if (AS:CheckOption("DBMSkinHalf")) then timer:Point("BOTTOMLEFT", bar, "TOPLEFT", 0, 2) end
 				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(nil, 12, 'OUTLINE') end
-				if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, c.private.sle.dbm.size, 'OUTLINE') end
+				if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, E.private.sle.dbm.size, 'OUTLINE') end
 				timer:SetJustifyH("RIGHT")
 				timer:SetShadowColor(0, 0, 0, 0)
 				timer.styled=true
@@ -261,35 +254,23 @@ local function LoadSkinOptions()
 	DBM_GUI_OptionsFrameDBMOptions:SetTemplate("Transparent")
 	DBM_GUI_OptionsFramePanelContainer:SetTemplate("Transparent")
 	end)
-	U.SkinTab(DBM_GUI_OptionsFrameTab1)
-	U.SkinTab(DBM_GUI_OptionsFrameTab2)
-	U.SkinButton(DBM_GUI_OptionsFrameOkay, true)
+	AS:SkinTab(DBM_GUI_OptionsFrameTab1)
+	AS:SkinTab(DBM_GUI_OptionsFrameTab2)
+	AS:SkinButton(DBM_GUI_OptionsFrameOkay, true)
 	
-	U.SkinScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
+	AS:SkinScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
 end
 
-if IsAddOnLoaded("Tukui") then 
-	local s = U.s
-	local c = U.c
-	s.SkinFuncs["DBM-GUI"] = LoadSkinOptions
-end
-if IsAddOnLoaded("ElvUI") then 
-	local s = U.s
-	local c = U.c
-	c:GetModule('Skins')
-	s:RegisterSkin('DBM-GUI', LoadSkinOptions)
-end
+local S = E:GetModule('Skins')
+S:RegisterSkin('DBM-GUI', LoadSkinOptions)
 
-	local name = "DBMSkin"
-	local function SkinDBM(self)
-		local s = U.s
-		local c = U.c
-		LoadSkin()
-		DBM_SavedOptions.Enabled=true
-		--DBT_SavedOptions["DBM"].Scale = 1
-		--DBT_SavedOptions["DBM"].HugeScale = 1
-		DBT_SavedOptions["DBM"].Texture = c.media.normTex
-		if IsAddOnLoaded("Tukui") then DBT_SavedOptions["DBM"].Font = c.media.font end
-		if IsAddOnLoaded("ElvUI") then DBT_SavedOptions["DBM"].Font = "ElvUI Font" end
-	end
-	U.RegisterSkin(name,SkinDBM)
+local name = "DBMSkin"
+local function SkinDBM(self)
+	LoadSkin()
+	DBM_SavedOptions.Enabled=true
+	--DBT_SavedOptions["DBM"].Scale = 1
+	--DBT_SavedOptions["DBM"].HugeScale = 1
+	DBT_SavedOptions["DBM"].Texture = E.media.normTex
+	DBT_SavedOptions["DBM"].Font = "ElvUI Font"
+end
+AS:RegisterSkin(name,SkinDBM)

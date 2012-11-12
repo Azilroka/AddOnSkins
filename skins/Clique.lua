@@ -1,10 +1,9 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Clique") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("Clique") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "CliqueSkin"
 local function SkinClique(self)
-	local s = U.s
-	local c = U.c
-
 	local Frames = {
 	"CliqueDialog",
 	"CliqueConfig",
@@ -42,12 +41,12 @@ local function SkinClique(self)
 	}
 	for _, object in pairs(CliqueButtons) do
 		_G[object]:StripTextures(True)
-		U.SkinButton(_G[object])
+		AS:SkinButton(_G[object])
 	end
 	
-	U.SkinCloseButton(CliqueConfigCloseButton)
-	if CliqueDialog.CloseButton then U.SkinCloseButton(CliqueDialog.CloseButton) end
-	if CliqueDialogCloseButton then U.SkinCloseButton(CliqueDialogCloseButton) end
+	AS:SkinCloseButton(CliqueConfigCloseButton)
+	if CliqueDialog.CloseButton then AS:SkinCloseButton(CliqueDialog.CloseButton) end
+	if CliqueDialogCloseButton then AS:SkinCloseButton(CliqueDialogCloseButton) end
 
 	local CliqueTabs = {
 	"CliqueConfigPage1Column1",
@@ -96,4 +95,4 @@ local function SkinClique(self)
 
 end
 
-U.RegisterSkin(name,SkinClique)
+AS:RegisterSkin(name,SkinClique)

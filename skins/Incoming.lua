@@ -1,10 +1,11 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Incoming") then return end
+if not IsAddOnLoaded("Incoming") then return end
 
-local U = unpack(select(2,...))
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
 
 local name = 'IncomingSkin'
 local function SkinIncoming(self)
-	U.SkinFrame(LocationMessageView)
+	AS:SkinFrame(LocationMessageView)
 
 	local buttons = {
 		"Incoming1",
@@ -18,7 +19,7 @@ local function SkinIncoming(self)
 	}
 
 	for _, button in pairs(buttons) do
-		U.SkinButton(_G[button])
+		AS:SkinButton(_G[button])
 	end	
 	
 	LocationMessageView:SetWidth(99)
@@ -36,4 +37,4 @@ local function SkinIncoming(self)
 	
 end
 
-U.RegisterSkin(name,SkinIncoming)
+AS:RegisterSkin(name,SkinIncoming)

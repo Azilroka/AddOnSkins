@@ -5,6 +5,6 @@
 ## RequiredDeps: ElvUI
 ## OptionalDeps: ElvUI_SLE
 
-init.lua
 core\load_core.xml
+config\load_config.xml
 skins\load_skins.xml

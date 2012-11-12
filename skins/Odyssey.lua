@@ -1,10 +1,9 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Odyssey") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("Odyssey") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "OdysseySkin"
 local function SkinOdyssey(self)
-	local s = U.s
-	local c = U.c
-
 	OdysseyFrameQuestDBScrollFrame:StripTextures(True)
 	OdysseyMapsMenuScrollFrame:StripTextures(True)
 	OdysseyFrameQuestDetailsSeries:StripTextures(True)
@@ -12,46 +11,46 @@ local function SkinOdyssey(self)
 
 	OdysseyFramePortrait:Kill()
 
-	U.SkinFrame(OdysseyFrame)
-	U.SkinFrame(OdysseyFrameRealmSummaryScrollFrame)
+	AS:SkinFrame(OdysseyFrame)
+	AS:SkinFrame(OdysseyFrameRealmSummaryScrollFrame)
 	OdysseyFrameQuestDB:SetTemplate("Transparent")
 	OdysseyFrameQuestDBScrollFrame:SetTemplate("Transparent")
 	OdysseyFrameQuestDetails:SetTemplate("Transparent")
 	OdysseyFrameZoneMaps:SetTemplate("Transparent")
 
-	U.SkinScrollBar(OdysseyFrameQuestDBScrollFrameScrollBar)
-	U.SkinScrollBar(OdysseyFrameRealmSummaryScrollFrameScrollBar)
-	U.SkinScrollBar(OdysseyMapsMenuScrollFrameScrollBar)
-	U.SkinEditBox(OdysseyFrame_SearchEditBox)
-	U.SkinEditBox(OdysseyFrameQuestDB_MinLevel)
-	U.SkinEditBox(OdysseyFrameQuestDB_MaxLevel)
+	AS:SkinScrollBar(OdysseyFrameQuestDBScrollFrameScrollBar)
+	AS:SkinScrollBar(OdysseyFrameRealmSummaryScrollFrameScrollBar)
+	AS:SkinScrollBar(OdysseyMapsMenuScrollFrameScrollBar)
+	AS:SkinEditBox(OdysseyFrame_SearchEditBox)
+	AS:SkinEditBox(OdysseyFrameQuestDB_MinLevel)
+	AS:SkinEditBox(OdysseyFrameQuestDB_MaxLevel)
 	
 	OdysseyFrame_ResetButton:Point("TOPLEFT", OdysseyFrame, "TOPLEFT", 55, -77)
 	OdysseyFrameTab1:Point("TOPLEFT", OdysseyFrame, "BOTTOMLEFT", -5, 2)
-	U.SkinButton(OdysseyFrame_ResetButton)
-	U.SkinButton(OdysseyFrame_SearchButton)
-	U.SkinButton(OdysseyFrameQuestDB_GetHistory)
-	U.SkinCloseButton(OdysseyFrameCloseButton)
-	U.SkinNextPrevButton(OdysseyFrameQuestDetailsGoBack)
-	U.SkinNextPrevButton(OdysseyFrameQuestDetailsGoForward)
-	U.SkinDropDownBox(OdysseyFrameRealmSummary_SelectContinent)
-	U.SkinScrollBar(OdysseyFrameSearchScrollFrameScrollBar)
+	AS:SkinButton(OdysseyFrame_ResetButton)
+	AS:SkinButton(OdysseyFrame_SearchButton)
+	AS:SkinButton(OdysseyFrameQuestDB_GetHistory)
+	AS:SkinCloseButton(OdysseyFrameCloseButton)
+	AS:SkinNextPrevButton(OdysseyFrameQuestDetailsGoBack)
+	AS:SkinNextPrevButton(OdysseyFrameQuestDetailsGoForward)
+	AS:SkinDropDownBox(OdysseyFrameRealmSummary_SelectContinent)
+	AS:SkinScrollBar(OdysseyFrameSearchScrollFrameScrollBar)
 
 	for i = 1, 3 do
-		U.SkinTab(_G["OdysseyFrameTab"..i])
-		U.SkinFrame(_G["OdysseyTabQuestsMenuItem"..i])
+		AS:SkinTab(_G["OdysseyFrameTab"..i])
+		AS:SkinFrame(_G["OdysseyTabQuestsMenuItem"..i])
 	end
 
 	for i = 1, 5 do
-		U.SkinFrame(_G["OdysseyTabQuests_Sort"..i])
+		AS:SkinFrame(_G["OdysseyTabQuests_Sort"..i])
 	end
 
 	for i = 1, 15 do
-		U.SkinFrame(_G["OdysseyTabMapsMenuItem"..i])
+		AS:SkinFrame(_G["OdysseyTabMapsMenuItem"..i])
 	end
 
 	for i = 1, 4 do
-		U.SkinFrame(_G["OdysseyTabSearchMenuItem"..i])
+		AS:SkinFrame(_G["OdysseyTabSearchMenuItem"..i])
 	end
 
 	for i = 1, 10 do
@@ -69,4 +68,4 @@ local function SkinOdyssey(self)
 
 end
 
-U.RegisterSkin(name,SkinOdyssey)
+AS:RegisterSkin(name,SkinOdyssey)

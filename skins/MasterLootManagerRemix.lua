@@ -1,5 +1,7 @@
-if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MasterLootManagerRemix") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("MasterLootManagerRemix") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "MasterLootManagerRemixSkin"
 local function SkinMLM(self)
 	local StripAllTextures = {
@@ -70,12 +72,12 @@ local function SkinMLM(self)
 
 	-- Skin Buttons
 	for _, button in pairs(buttons) do
-					U.SkinButton(_G[button])
+					AS:SkinButton(_G[button])
 	end	
 
 	-- Skin CheckBoxes
 	for _, button in pairs(checkboxes) do
-					U.SkinCheckBox(_G[button])
+					AS:SkinCheckBox(_G[button])
 	end	
 
 	-- Move this
@@ -112,17 +114,17 @@ local function SkinMLM(self)
 		MasterLootLoggerAddEditFrameMinute:SetWidth(25)
 		
 	-- Skin Dropdowns 
-		U.SkinDropDownBox(MasterLootManagerMain_SelectDE, 150)
-		U.SkinDropDownBox(MasterLootManagerMain_SelectBank, 150)
-		U.SkinDropDownBox(MasterLootLoggerAddEditFrameType, 150)
+		AS:SkinDropDownBox(MasterLootManagerMain_SelectDE, 150)
+		AS:SkinDropDownBox(MasterLootManagerMain_SelectBank, 150)
+		AS:SkinDropDownBox(MasterLootLoggerAddEditFrameType, 150)
 
 	-- Scrollbar
-		U.SkinScrollBar(MasterLootManagerMain_ScrollFrame_Slider, 5)
-		U.SkinScrollBar(MasterLootLoggerFrameContentScrollFrameScrollBar)
+		AS:SkinScrollBar(MasterLootManagerMain_ScrollFrame_Slider, 5)
+		AS:SkinScrollBar(MasterLootLoggerFrameContentScrollFrameScrollBar)
 
 	-- Skin CloseButtons
-		U.SkinCloseButton(MasterLootLoggerFrameCloseButton)
-		U.SkinCloseButton(MasterLootLoggerAddEditFrameCloseButton)
+		AS:SkinCloseButton(MasterLootLoggerFrameCloseButton)
+		AS:SkinCloseButton(MasterLootLoggerAddEditFrameCloseButton)
 end
 
-U.RegisterSkin(name,SkinMLM)
+AS:RegisterSkin(name,SkinMLM)

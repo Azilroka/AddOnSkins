@@ -1,15 +1,14 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("BuyEmAll") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("BuyEmAll") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "BuyEmAllSkin"
 local function SkinBuyEmAll(self)
-	local s = U.s
-	local c = U.c
-
-	U.SkinFrame(BuyEmAllFrame)
-	U.SkinButton(BuyEmAllStackButton)
-	U.SkinButton(BuyEmAllMaxButton)
-	U.SkinButton(BuyEmAllCancelButton)
-	U.SkinButton(BuyEmAllOkayButton)
+	AS:SkinFrame(BuyEmAllFrame)
+	AS:SkinButton(BuyEmAllStackButton)
+	AS:SkinButton(BuyEmAllMaxButton)
+	AS:SkinButton(BuyEmAllCancelButton)
+	AS:SkinButton(BuyEmAllOkayButton)
 end
 
-U.RegisterSkin(name,SkinBuyEmAll)
+AS:RegisterSkin(name,SkinBuyEmAll)

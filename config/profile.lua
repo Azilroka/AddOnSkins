@@ -1,5 +1,5 @@
 local E, L, V, P, G,_ = unpack(ElvUI)
-local XS = E:GetModule('ExtraSkins')
+local AS = E:GetModule('AddOnSkins')
 
 local Skins = {
 	["ACPSkin"] = {
@@ -238,7 +238,7 @@ local Skins = {
 	},
 }
 
-XS.Skins = Skins
+AS.Skins = Skins
 
 local exceptions = {
 	"EmbedOoC", 

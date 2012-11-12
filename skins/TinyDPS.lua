@@ -1,9 +1,9 @@
-if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("TinyDPS") then return end
-local U = unpack(select(2,...))
+if IsAddOnLoaded("TinyDPS") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "TinyDPSSkin"
 local function SkinTinyDps(self)
-	local s = U.s
-	local c = U.c
 	local frame = tdpsFrame
 	local anchor = tdpsAnchor
 	local status = tdpsStatusBar
@@ -11,32 +11,22 @@ local function SkinTinyDps(self)
 	local font = tdpsFont
 	local position = tdpsPosition
 	local template
-	if U.CheckOption("EmbedTDPS") then template = "Default" else template = "Transparent" end
+	if AS:CheckOption("EmbedTDPS") then template = "Default" else template = "Transparent" end
 	frame:SetTemplate(template, true)
-	if U.elv then
-		if(tdps) then
-			tdps.width = Minimap:GetWidth()
-			tdps.spacing = 1
-			tdps.barHeight = 14
-			--font.name = U.x.datatext_font
-			--font.size = 12
-			--font.outline = "OUTLINE"
-		end
+	
+	if(tdps) then
+		tdps.width = Minimap:GetWidth()
+		tdps.spacing = 1
+		tdps.barHeight = 14
+		--font.name = AS:x.datatext_font
+		--font.size = 12
+		--font.outline = "OUTLINE"
 	end
-	if U.tuk then
-		if(tdps) then
-			tdps.width = TukuiMinimap:GetWidth()
-			tdps.spacing = 1
-			tdps.barHeight = 14
-			--font.name = c["media"].pixelfont
-			--font.size = 12
-			--font.outline = "MONOCHROMEOUTLINE"
-		end
-	end
+
 	if(status) then
 		tdpsStatusBar:SetBackdrop( {
-			bgFile = c["media"].normTex,
-			edgeFile = c["media"].blank,
+			bgFile = E["media"].normTex,
+			edgeFile = E["media"].blank,
 			tile = false,
 			tileSize = 0,
 			edgeSize = 1,
@@ -47,13 +37,13 @@ local function SkinTinyDps(self)
 				bottom = 0
 			}
 		})
-		tdpsStatusBar:SetStatusBarTexture(c["media"].normTex)
+		tdpsStatusBar:SetStatusBarTexture(E["media"].normTex)
 	end
 end
-U.RegisterSkin(name,SkinTinyDps)
+AS:RegisterSkin(name,SkinTinyDps)
 
 function EmbedTDPS()
-	if not IsAddOnLoaded("TinyDPS") then U.DisableOption("EmbedTDPS") return end
+	if not IsAddOnLoaded("TinyDPS") then AS:DisableOption("EmbedTDPS") return end
 	if TukuiChatBackgroundRight then tdpsFrame:SetParent(TukuiChatBackgroundRight) end
 	if RightChatPanel then tdpsFrame:SetParent(RightChatPanel) end
 	tdpsFrame:SetFrameStrata("MEDIUM")
@@ -62,21 +52,10 @@ function EmbedTDPS()
 	tdpsVisibleBars = 9
 	EmbedTDPSResize()
 	tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
-if U.elv then
-	--tdpsFont.name = U.x.datatext_font
-	--tdpsFont.size = 12
-	--tdpsFont.outline = "THIN"
-	--tdpsFont.shadow = 0
-end
-if U.tuk then
-	local c = U.c
-	--tdpsFont.name = c["media"].pixelfont
-	--tdpsFont.size = 12
-	--tdpsFont.outline = "MONOCHROMEOUTLINE"
-end
+
 	tdpsRefresh()
-	if (U.CheckOption("EmbedOoC")) then
-		if (U.CheckOption("EmbedTDPS")) then
+	if (AS:CheckOption("EmbedOoC")) then
+		if (AS:CheckOption("EmbedTDPS")) then
 			tdpsFrame:Hide()
 		end
 	end
@@ -90,7 +69,7 @@ end
 local TinyDPS_Embed = CreateFrame("Frame",nil)
 	TinyDPS_Embed:RegisterEvent("PLAYER_ENTERING_WORLD")
 	TinyDPS_Embed:SetScript("OnEvent", function(self)
-		if(U.CheckOption("EmbedTDPS")) then
+		if(AS:CheckOption("EmbedTDPS")) then
 			EmbedTDPS()
 		end
 	end)

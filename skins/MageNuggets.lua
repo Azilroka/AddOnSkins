@@ -1,10 +1,9 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("MageNuggets") then return end
-local U = unpack(select(2,...))
+if not IsAddOnLoaded("MageNuggets") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "MageNuggetsSkin"
 local function SkinMageNuggets(self)
-	local s = U.s
-	local c = U.c
-
 	local frames = {
 		"MNSpellSteal_Frame",
 		"MNSpellStealFocus_Frame",
@@ -48,28 +47,28 @@ local function SkinMageNuggets(self)
 		_G[sframes[i]]:SetBackdrop({bgFile = nil, edgeFile = nil, tile = false, tileSize = 0, edgeSize = 0, insets = { left = 0, right = 0, top = 0, bottom = 0 }});
 	end
 
-	MageNugCauterize_Frame_Bar:SetStatusBarTexture(c["media"].normTex)
-	MageNugMI_Frame_MiBar:SetStatusBarTexture(c["media"].normTex)
-	MageNugManaGem_Frame_Bar:SetStatusBarTexture(c["media"].normTex)
-	MageNugIgnite_Frame_Bar:SetStatusBarTexture(c["media"].normTex)
-	MageNugAB_Frame_ABBar:SetStatusBarTexture(c["media"].normTex)
-	MageNugMBProcFrame_ProcBar:SetStatusBarTexture(c["media"].normTex)
-	MageNugProcFrame_ProcBar:SetStatusBarTexture(c["media"].normTex)
-	MageNugPolyFrame_Bar:SetStatusBarTexture(c["media"].normTex)
-	MageNugImpactProcFrame_ProcBar:SetStatusBarTexture(c["media"].normTex)
-	MageNugBFProcFrame_ProcBar:SetStatusBarTexture(c["media"].normTex)
-	MageNugFoFProcFrame_ProcBar:SetStatusBarTexture(c["media"].normTex)
-	MageNugLB1_Frame_Bar:SetStatusBarTexture(c["media"].normTex)
-	MageNugLB2_Frame_Bar:SetStatusBarTexture(c["media"].normTex)
-	MageNugLB3_Frame_Bar:SetStatusBarTexture(c["media"].normTex)
-	MageNugLB4_Frame_Bar:SetStatusBarTexture(c["media"].normTex)
+	MageNugCauterize_Frame_Bar:SetStatusBarTexture(E["media"].normTex)
+	MageNugMI_Frame_MiBar:SetStatusBarTexture(E["media"].normTex)
+	MageNugManaGem_Frame_Bar:SetStatusBarTexture(E["media"].normTex)
+	MageNugIgnite_Frame_Bar:SetStatusBarTexture(E["media"].normTex)
+	MageNugAB_Frame_ABBar:SetStatusBarTexture(E["media"].normTex)
+	MageNugMBProcFrame_ProcBar:SetStatusBarTexture(E["media"].normTex)
+	MageNugProcFrame_ProcBar:SetStatusBarTexture(E["media"].normTex)
+	MageNugPolyFrame_Bar:SetStatusBarTexture(E["media"].normTex)
+	MageNugImpactProcFrame_ProcBar:SetStatusBarTexture(E["media"].normTex)
+	MageNugBFProcFrame_ProcBar:SetStatusBarTexture(E["media"].normTex)
+	MageNugFoFProcFrame_ProcBar:SetStatusBarTexture(E["media"].normTex)
+	MageNugLB1_Frame_Bar:SetStatusBarTexture(E["media"].normTex)
+	MageNugLB2_Frame_Bar:SetStatusBarTexture(E["media"].normTex)
+	MageNugLB3_Frame_Bar:SetStatusBarTexture(E["media"].normTex)
+	MageNugLB4_Frame_Bar:SetStatusBarTexture(E["media"].normTex)
 	MageNugMI_Frame_MiBar:CreateBackdrop("Transparent")
 	MageNugCauterize_Frame_Bar:CreateBackdrop("Transparent")
 
-	U.SkinButton(MageNugHordeFrameClose)
-	U.SkinButton(MageNugHordeFrameShowOptions)
-	U.SkinButton(MageNugAlliFrameClose)
-	U.SkinButton(MageNugAlliFrameShowOptions)
+	AS:SkinButton(MageNugHordeFrameClose)
+	AS:SkinButton(MageNugHordeFrameShowOptions)
+	AS:SkinButton(MageNugAlliFrameClose)
+	AS:SkinButton(MageNugAlliFrameShowOptions)
 
 	MageNugAB_Frame_ABBar:CreateBackdrop("Transparent")
 	MageNugAB_Frame_ABBar:ClearAllPoints()
@@ -87,4 +86,4 @@ local function SkinMageNuggets(self)
 
 end
 
-U.RegisterSkin(name,SkinMageNuggets)
+AS:RegisterSkin(name,SkinMageNuggets)

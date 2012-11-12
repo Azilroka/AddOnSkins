@@ -1,8 +1,8 @@
 local E, L, V, P, G,_ = unpack(ElvUI)
-local XS = E:NewModule('ExtraSkins','AceTimer-3.0','AceEvent-3.0')
+local AS = E:GetModule('AddOnSkins')
 
-function XS:GenerateOptionTable(skinName,order)
-	local data = Skins[skinName]
+function AS:GenerateOptionTable(skinName,order)
+	local data = self.Skins[skinName]
 	local addon = data.addon
 	local text = data.buttonText or addon
 	local options = {
@@ -15,7 +15,7 @@ function XS:GenerateOptionTable(skinName,order)
 	return options
 end
 
-function XS:GenerateOptions()
+function AS:GenerateOptions()
 	local function pairsByKeys (t, f)
       local a = {}
       for n in pairs(t) do table.insert(a, n) end

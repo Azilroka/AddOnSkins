@@ -1,15 +1,17 @@
-if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("!Swatter") then return end
+if IsAddOnLoaded("!Swatter") then return end
 if IsAddOnLoaded("!BugGrabber") then return end
 if IsAddOnLoaded("!ImprovedErrorFrame") then return end
-local U = unpack(select(2,...))
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "SwatterSkin"
 local function SkinSwatter(self)
-	U.SkinFrame(SwatterErrorFrame)
-	U.SkinButton(Swatter.Error.Done)
-	U.SkinButton(Swatter.Error.Next)
-	U.SkinButton(Swatter.Error.Prev)
-	U.SkinButton(Swatter.Drag)
-	U.SkinScrollBar(SwatterErrorInputScrollScrollBar)
+	AS:SkinFrame(SwatterErrorFrame)
+	AS:SkinButton(Swatter.Error.Done)
+	AS:SkinButton(Swatter.Error.Next)
+	AS:SkinButton(Swatter.Error.Prev)
+	AS:SkinButton(Swatter.Drag)
+	AS:SkinScrollBar(SwatterErrorInputScrollScrollBar)
 end
 
-U.RegisterSkin(name,SkinSwatter)
+AS:RegisterSkin(name,SkinSwatter)

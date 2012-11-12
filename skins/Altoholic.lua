@@ -1,54 +1,54 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Altoholic") then return end
-local U = unpack(select(2,...))
-local s = U.s
-local c = U.c 
+if not IsAddOnLoaded("Altoholic") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "AltoholicSkin"
 local function SkinAltoholic(self)
 	LoadAddOn("Altoholic_Characters")
 	AltoholicFrame.IsSkinned = "False"
 	AltoTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 	AltoholicFramePortrait:Kill()
-	U.SkinFrame(AltoholicFrame)
+	AS:SkinFrame(AltoholicFrame)
 	AltoholicFrame:HookScript("OnShow", function(self) if AltoholicFrame.IsSkinned == "True" then return end
 		AltoholicFrame.IsSkinned = "True"
-		U.SkinFrame(AltoholicFrameSummary)
-		U.SkinFrame(AltoholicFrameActivity)
-		U.SkinFrame(AltoholicFrameBagUsage)
-		U.SkinFrame(AltoholicFrameSkills)
-		U.SkinFrame(AltoMsgBox)
-		U.SkinFrame(AltoholicFrameContainers)
-		U.SkinFrame(AltoholicFrameRecipes)
-		U.SkinFrame(AltoholicFrameQuests)
-		U.SkinFrame(AltoholicFrameGlyphs)
-		U.SkinFrame(AltoholicFrameMail)
-		U.SkinFrame(AltoholicFrameSpellbook)
-		U.SkinFrame(AltoholicFramePets)
-		U.SkinFrame(AltoholicFrameAuctions)
-		U.SkinCloseButton(AltoholicFrameCloseButton)
-		U.SkinDropDownBox(AltoholicTabSummary_SelectLocation)
-		U.SkinEditBox(AltoholicFrame_SearchEditBox)
-		U.SkinScrollBar(AltoholicFrameSummaryScrollFrameScrollBar)
-		U.SkinScrollBar(AltoholicFrameBagUsageScrollFrameScrollBar)
-		U.SkinScrollBar(AltoholicFrameSkillsScrollFrameScrollBar)
-		U.SkinScrollBar(AltoholicFrameActivityScrollFrameScrollBar)
-		U.SkinScrollBar(AltoholicFrameContainersScrollFrameScrollBar)
-		U.SkinScrollBar(AltoholicFrameQuestsScrollFrameScrollBar)
-		U.SkinScrollBar(AltoholicFrameRecipesScrollFrameScrollBar)
-		U.SkinDropDownBox(AltoholicFrameTalents_SelectMember)
-		U.SkinDropDownBox(AltoholicTabCharacters_SelectRealm)
-		U.SkinNextPrevButton(AltoholicFrameSpellbookPrevPage)
-		U.SkinNextPrevButton(AltoholicFrameSpellbookNextPage)
-		U.SkinNextPrevButton(AltoholicFramePetsNormalPrevPage)
-		U.SkinNextPrevButton(AltoholicFramePetsNormalNextPage)
-		U.SkinRotateButton(AltoholicFramePetsNormal_ModelFrameRotateLeftButton)
-		U.SkinRotateButton(AltoholicFramePetsNormal_ModelFrameRotateRightButton)
-		U.SkinButton(AltoMsgBoxYesButton)
-		U.SkinButton(AltoMsgBoxNoButton)
-		U.SkinButton(AltoholicFrame_ResetButton)
-		U.SkinButton(AltoholicFrame_SearchButton)
-		U.SkinButton(AltoholicTabCharacters_Sort1)
-		U.SkinButton(AltoholicTabCharacters_Sort2)
-		U.SkinButton(AltoholicTabCharacters_Sort3)
+		AS:SkinFrame(AltoholicFrameSummary)
+		AS:SkinFrame(AltoholicFrameActivity)
+		AS:SkinFrame(AltoholicFrameBagUsage)
+		AS:SkinFrame(AltoholicFrameSkills)
+		AS:SkinFrame(AltoMsgBox)
+		AS:SkinFrame(AltoholicFrameContainers)
+		AS:SkinFrame(AltoholicFrameRecipes)
+		AS:SkinFrame(AltoholicFrameQuests)
+		AS:SkinFrame(AltoholicFrameGlyphs)
+		AS:SkinFrame(AltoholicFrameMail)
+		AS:SkinFrame(AltoholicFrameSpellbook)
+		AS:SkinFrame(AltoholicFramePets)
+		AS:SkinFrame(AltoholicFrameAuctions)
+		AS:SkinCloseButton(AltoholicFrameCloseButton)
+		AS:SkinDropDownBox(AltoholicTabSummary_SelectLocation)
+		AS:SkinEditBox(AltoholicFrame_SearchEditBox)
+		AS:SkinScrollBar(AltoholicFrameSummaryScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameBagUsageScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameSkillsScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameActivityScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameContainersScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameQuestsScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameRecipesScrollFrameScrollBar)
+		AS:SkinDropDownBox(AltoholicFrameTalents_SelectMember)
+		AS:SkinDropDownBox(AltoholicTabCharacters_SelectRealm)
+		AS:SkinNextPrevButton(AltoholicFrameSpellbookPrevPage)
+		AS:SkinNextPrevButton(AltoholicFrameSpellbookNextPage)
+		AS:SkinNextPrevButton(AltoholicFramePetsNormalPrevPage)
+		AS:SkinNextPrevButton(AltoholicFramePetsNormalNextPage)
+		AS:SkinRotateButton(AltoholicFramePetsNormal_ModelFrameRotateLeftButton)
+		AS:SkinRotateButton(AltoholicFramePetsNormal_ModelFrameRotateRightButton)
+		AS:SkinButton(AltoMsgBoxYesButton)
+		AS:SkinButton(AltoMsgBoxNoButton)
+		AS:SkinButton(AltoholicFrame_ResetButton)
+		AS:SkinButton(AltoholicFrame_SearchButton)
+		AS:SkinButton(AltoholicTabCharacters_Sort1)
+		AS:SkinButton(AltoholicTabCharacters_Sort2)
+		AS:SkinButton(AltoholicTabCharacters_Sort3)
 
 		AltoholicFrameContainersScrollFrame:StripTextures(True)
 		AltoholicFrameQuestsScrollFrame:StripTextures(True)
@@ -69,17 +69,17 @@ local function SkinAltoholic(self)
 
 		for i = 1, 4 do
 			_G["AltoholicTabSummaryMenuItem"..i]:StripTextures(True)
-			U.SkinButton(_G["AltoholicTabSummaryMenuItem"..i])
+			AS:SkinButton(_G["AltoholicTabSummaryMenuItem"..i])
 		end
 
 		for i = 1, 8 do
 			_G["AltoholicTabSummary_Sort"..i]:StripTextures(True)
-			U.SkinButton(_G["AltoholicTabSummary_Sort"..i])
+			AS:SkinButton(_G["AltoholicTabSummary_Sort"..i])
 		end
 
 		for i = 1, 7 do
 			_G["AltoholicFrameTab"..i]:StripTextures(True)
-			U.SkinTab(_G["AltoholicFrameTab"..i])
+			AS:SkinTab(_G["AltoholicFrameTab"..i])
 		end
 
 		for i = 1, 14 do
@@ -99,14 +99,14 @@ local function SkinAltoholic(self)
 		AltoholicFrameAchievements:CreateBackdrop("Transparent")
 		AltoholicFrameAchievementsScrollFrame:StripTextures(True)
 		AltoholicAchievementsMenuScrollFrame:StripTextures(True)
-		U.SkinScrollBar(AltoholicFrameAchievementsScrollFrameScrollBar)
-		U.SkinScrollBar(AltoholicAchievementsMenuScrollFrameScrollBar)
-		U.SkinDropDownBox(AltoholicTabAchievements_SelectRealm)
+		AS:SkinScrollBar(AltoholicFrameAchievementsScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicAchievementsMenuScrollFrameScrollBar)
+		AS:SkinDropDownBox(AltoholicTabAchievements_SelectRealm)
 		AltoholicTabAchievements_SelectRealm:Point("TOPLEFT", AltoholicFrame, "TOPLEFT", 205, -57)
 
 		for i = 1, 15 do
 			_G["AltoholicTabAchievementsMenuItem"..i]:StripTextures(True)
-			U.SkinButton(_G["AltoholicTabAchievementsMenuItem"..i])
+			AS:SkinButton(_G["AltoholicTabAchievementsMenuItem"..i])
 		end
 
 		for i = 1, 10 do
@@ -124,16 +124,16 @@ local function SkinAltoholic(self)
 
 	local function LoadSkinAgenda()
 
-		U.SkinFrame(AltoholicFrameCalendarScrollFrame)
-		U.SkinFrame(AltoholicTabAgendaMenuItem1)
-		U.SkinScrollBar(AltoholicFrameCalendarScrollFrameScrollBar)
-		U.SkinNextPrevButton(AltoholicFrameCalendar_NextMonth)
-		U.SkinNextPrevButton(AltoholicFrameCalendar_PrevMonth)
+		AS:SkinFrame(AltoholicFrameCalendarScrollFrame)
+		AS:SkinFrame(AltoholicTabAgendaMenuItem1)
+		AS:SkinScrollBar(AltoholicFrameCalendarScrollFrameScrollBar)
+		AS:SkinNextPrevButton(AltoholicFrameCalendar_NextMonth)
+		AS:SkinNextPrevButton(AltoholicFrameCalendar_PrevMonth)
 		AltoholicTabAgendaMenuItem1:SetTemplate("Transparent")
 
 		for i = 1, 14 do
 			_G["AltoholicFrameCalendarEntry"..i]:StripTextures(True)
-			U.SkinFrame(_G["AltoholicFrameCalendarEntry"..i])
+			AS:SkinFrame(_G["AltoholicFrameCalendarEntry"..i])
 		end
 	end
 
@@ -141,9 +141,9 @@ local function SkinAltoholic(self)
 
 		AltoholicFrameGridsScrollFrame:StripTextures(True)
 		AltoholicFrameGrids:CreateBackdrop("Transparent")
-		U.SkinScrollBar(AltoholicFrameGridsScrollFrameScrollBar)
-		U.SkinDropDownBox(AltoholicTabGrids_SelectRealm)
-		U.SkinDropDownBox(AltoholicTabGrids_SelectView)
+		AS:SkinScrollBar(AltoholicFrameGridsScrollFrameScrollBar)
+		AS:SkinDropDownBox(AltoholicTabGrids_SelectRealm)
+		AS:SkinDropDownBox(AltoholicTabGrids_SelectView)
 
 		for i = 1, 10 do
 			_G["AltoholicFrameGridsEntry1Item"..i]:StripTextures(True)
@@ -159,14 +159,14 @@ local function SkinAltoholic(self)
 
 	local function LoadSkinGuild()
 
-		U.SkinFrame(AltoholicFrameGuildMembers)
-		U.SkinFrame(AltoholicFrameGuildBank)
-		U.SkinScrollBar(AltoholicFrameGuildMembersScrollFrameScrollBar)
+		AS:SkinFrame(AltoholicFrameGuildMembers)
+		AS:SkinFrame(AltoholicFrameGuildBank)
+		AS:SkinScrollBar(AltoholicFrameGuildMembersScrollFrameScrollBar)
 		AltoholicFrameGuildMembersScrollFrame:StripTextures(True)
 
 		for i = 1, 2 do
 			_G["AltoholicTabGuildMenuItem"..i]:StripTextures(True)
-			U.SkinButton(_G["AltoholicTabGuildMenuItem"..i])
+			AS:SkinButton(_G["AltoholicTabGuildMenuItem"..i])
 		end
 
 		for i = 1, 14 do
@@ -185,7 +185,7 @@ local function SkinAltoholic(self)
 
 		for i = 1, 5 do
 			_G["AltoholicTabGuild_Sort"..i]:StripTextures(True)
-			U.SkinButton(_G["AltoholicTabGuild_Sort"..i])
+			AS:SkinButton(_G["AltoholicTabGuild_Sort"..i])
 		end
 	end
 
@@ -195,43 +195,34 @@ local function SkinAltoholic(self)
 		AltoholicFrameSearch:CreateBackdrop("Transparent")
 		AltoholicFrameSearchScrollFrame:StripTextures(True)
 		AltoholicSearchMenuScrollFrame:StripTextures(True)
-		U.SkinScrollBar(AltoholicFrameSearchScrollFrameScrollBar)
-		U.SkinScrollBar(AltoholicSearchMenuScrollFrameScrollBar)
-		U.SkinDropDownBox(AltoholicTabSearch_SelectRarity)
-		U.SkinDropDownBox(AltoholicTabSearch_SelectSlot)
-		U.SkinDropDownBox(AltoholicTabSearch_SelectLocation)
+		AS:SkinScrollBar(AltoholicFrameSearchScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicSearchMenuScrollFrameScrollBar)
+		AS:SkinDropDownBox(AltoholicTabSearch_SelectRarity)
+		AS:SkinDropDownBox(AltoholicTabSearch_SelectSlot)
+		AS:SkinDropDownBox(AltoholicTabSearch_SelectLocation)
 		AltoholicTabSearch_SelectRarity:Size(125, 32)
 		AltoholicTabSearch_SelectSlot:Size(125, 32)
 		AltoholicTabSearch_SelectLocation:Size(175, 32)
-		U.SkinEditBox(_G["AltoholicTabSearch_MinLevel"])
-		U.SkinEditBox(_G["AltoholicTabSearch_MaxLevel"])
+		AS:SkinEditBox(_G["AltoholicTabSearch_MinLevel"])
+		AS:SkinEditBox(_G["AltoholicTabSearch_MaxLevel"])
 
 		for i = 1, 15 do
 			_G["AltoholicTabSearchMenuItem"..i]:StripTextures(True)
-			U.SkinButton(_G["AltoholicTabSearchMenuItem"..i])
+			AS:SkinButton(_G["AltoholicTabSearchMenuItem"..i])
 		end
 
 		for i = 1, 8 do
 			_G["AltoholicTabSearch_Sort"..i]:StripTextures(True)
-			U.SkinButton(_G["AltoholicTabSearch_Sort"..i])
+			AS:SkinButton(_G["AltoholicTabSearch_Sort"..i])
 		end
 	end
 
-	if IsAddOnLoaded("Tukui") then 
-		s.SkinFuncs["Altoholic_Achievements"] = LoadSkinAchievements
-		s.SkinFuncs["Altoholic_Agenda"] = LoadSkinAgenda
-		s.SkinFuncs["Altoholic_Grids"] = LoadSkinGrids
-		s.SkinFuncs["Altoholic_Guild"] = LoadSkinGuild
-		s.SkinFuncs["Altoholic_Search"] = LoadSkinSearch
-	end
-	if IsAddOnLoaded("ElvUI") then 
-		c:GetModule('Skins')
-		s:RegisterSkin('Altoholic_Achievements', LoadSkinAchievements)
-		s:RegisterSkin('Altoholic_Agenda', LoadSkinAgenda)
-		s:RegisterSkin('Altoholic_Grids', LoadSkinGrids)
-		s:RegisterSkin('Altoholic_Guild', LoadSkinGuild)
-		s:RegisterSkin('Altoholic_Search', LoadSkinSearch)
-	end
+	local S = E:GetModule('Skins')
+	S:RegisterSkin('Altoholic_Achievements', LoadSkinAchievements)
+	S:RegisterSkin('Altoholic_Agenda', LoadSkinAgenda)
+	S:RegisterSkin('Altoholic_Grids', LoadSkinGrids)
+	S:RegisterSkin('Altoholic_Guild', LoadSkinGuild)
+	S:RegisterSkin('Altoholic_Search', LoadSkinSearch)
 end
 
-U.RegisterSkin(name,SkinAltoholic)
+AS:RegisterSkin(name,SkinAltoholic)

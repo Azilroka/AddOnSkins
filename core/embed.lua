@@ -1,7 +1,7 @@
 local E, L, V, P, G,_ = unpack(ElvUI)
-local XS = E:NewModule('ExtraSkins','AceTimer-3.0','AceEvent-3.0')
+local AS = E:GetModule('AddOnSkins')
 
-function XS:EmbedWindowResize()
+function AS:EmbedWindowResize()
 	if not E.db.datatexts.rightChatPanel then
 		RDTS = 22
 	else
@@ -23,7 +23,7 @@ function XS:EmbedWindowResize()
 	if (self.CheckOption("EmbedRecount","Recount")) then self:EmbedRecountResize() end
 end
 
-function XS:EmbedRecountOmen()
+function AS:EmbedRecountOmen()
 	if not (self:CheckOption("EmbedRO","Recount","Omen")) then self:DisableOption("EmbedRO") return end
 	if (self:CheckOption("EmbedOoC")) then
 		if (self:CheckOption("EmbedRO")) then
@@ -71,7 +71,7 @@ function XS:EmbedRecountOmen()
 	self:EmbedRecountOmenResize()
 end
 
-function XS:EmbedRecountOmenResize()
+function AS:EmbedRecountOmenResize()
 	if E.PixelMode then
 		OmenAnchor:SetWidth((EmbeddingWindow:GetWidth() / 3))
 		OmenAnchor:SetHeight((EmbeddingWindow:GetHeight() + 21))
@@ -89,7 +89,7 @@ function XS:EmbedRecountOmenResize()
 	end
 end
 
-function XS:InitEmbed()
+function AS:InitEmbed()
 	self:EmbedWindowResize()
 	hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedWindowResize() end)
 
@@ -151,7 +151,7 @@ function XS:InitEmbed()
 --Embed Check Finished
 end
 
-function XS:EmbedEnterCombat(event)
+function AS:EmbedEnterCombat(event)
 	--	print("Entering Combat")
 	if (self:CheckOption("EmbedOoC")) then
 		ChatFrame3Tab:Hide()
@@ -178,7 +178,7 @@ function XS:EmbedEnterCombat(event)
 	end
 end
 
-function XS:EmbedExitCombat(event)
+function AS:EmbedExitCombat(event)
 	--	print("Exiting Combat")
 	if (self:CheckOption("EmbedOoC")) then
 		ChatFrame3Tab:Show()

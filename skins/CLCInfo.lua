@@ -1,7 +1,6 @@
-if not IsAddOnLoaded("ElvUI") then return end
-local U = unpack(select(2,...))
-local s = U.s
-local c = U.c
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local function ApplyMySkin(self)
 	local xScale = self.db.width / 36
@@ -177,7 +176,7 @@ local function CLCInfo()
 		mod.oldNew = mod.New
 		mod.New = New
 	end
-	U.RegisterSkin(name,SkinCLCInfo)
+	AS:RegisterSkin(name,SkinCLCInfo)
 end
 
 local function CLCInfo_Options()
@@ -197,8 +196,8 @@ local function CLCInfo_Options()
 		mod.OldUpdateMIconList = mod.UpdateMIconList
 		mod.UpdateMIconList = UpdateMIconList
 	end
-	U.RegisterSkin(name,SkinCLCInfo2)
+	AS:RegisterSkin(name,SkinCLCInfo2)
 end
 
-s:RegisterSkin('clcInfo_Options', CLCInfo_Options)
-s:RegisterSkin('clcInfo', CLCInfo)
+S:RegisterSkin('clcInfo_Options', CLCInfo_Options)
+S:RegisterSkin('clcInfo', CLCInfo)

@@ -1,11 +1,11 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("TellMeWhen") then return end
-local U = unpack(select(2,...))
-local s = U.s
-local c = U.c
+if not IsAddOnLoaded("TellMeWhen") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local function LoadSkin()
 	LoadAddOn("TellMeWhen_Options")
-	if (not U.CheckOption("TellMeWhenSkin")) then return end
+	if (not AS:CheckOption("TellMeWhenSkin")) then return end
 	TellMeWhen_IconEditorMain:StripTextures()
 	TellMeWhen_IconEditorConditions:StripTextures()
 	TellMeWhen_IconEditor:StripTextures()
@@ -14,23 +14,23 @@ local function LoadSkin()
 	TellMeWhen_IconEditor:SetTemplate("Transparent")
 	TellMeWhen_IconEditorMainOptions:SetTemplate("Transparent")
 	
-	U.SkinButton(TellMeWhen_IconEditorReset, true)
-	U.SkinButton(TellMeWhen_IconEditorUndo, true)
-	U.SkinButton(TellMeWhen_IconEditorRedo, true)
+	AS:SkinButton(TellMeWhen_IconEditorReset, true)
+	AS:SkinButton(TellMeWhen_IconEditorUndo, true)
+	AS:SkinButton(TellMeWhen_IconEditorRedo, true)
 
-	U.SkinTab(TellMeWhen_IconEditorTab1)
-	U.SkinTab(TellMeWhen_IconEditorTab2)
-	U.SkinTab(TellMeWhen_IconEditorTab3)
-	U.SkinTab(TellMeWhen_IconEditorTab4)
-	U.SkinTab(TellMeWhen_IconEditorTab5)
+	AS:SkinTab(TellMeWhen_IconEditorTab1)
+	AS:SkinTab(TellMeWhen_IconEditorTab2)
+	AS:SkinTab(TellMeWhen_IconEditorTab3)
+	AS:SkinTab(TellMeWhen_IconEditorTab4)
+	AS:SkinTab(TellMeWhen_IconEditorTab5)
 
-	U.SkinButton(TellMeWhen_IconEditorOkay, true)
-	U.SkinCloseButton(TellMeWhen_IconEditorClose, true)
+	AS:SkinButton(TellMeWhen_IconEditorOkay, true)
+	AS:SkinCloseButton(TellMeWhen_IconEditorClose, true)
 	
 	TellMeWhen_ConfigWarning:StripTextures()
 	TellMeWhen_ConfigWarning:SetTemplate("Transparent")
-	U.SkinButton(TellMeWhen_ConfigWarningExit, true)
-	U.SkinButton(TellMeWhen_ConfigWarningNeverAgain, true)
+	AS:SkinButton(TellMeWhen_ConfigWarningExit, true)
+	AS:SkinButton(TellMeWhen_ConfigWarningNeverAgain, true)
 	
 	
 	TellMeWhen_IconEditorSuggest:ClearAllPoints()
@@ -53,15 +53,10 @@ local function LoadSkin()
 	TellMeWhen_IconEditorTab4:Point("LEFT", TellMeWhen_IconEditorTab3, "RIGHT", -19, 0)
 	TellMeWhen_IconEditorTab5:Point("LEFT", TellMeWhen_IconEditorTab4, "RIGHT", -19, 0)
 	
-	--U.SkinScrollBar(TellMeWhen_IconEditorEventsSoundSoundsScrollBar)
-	U.SkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsPassThrough)
-	U.SkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsOnlyShown)
+	--AS:SkinScrollBar(TellMeWhen_IconEditorEventsSoundSoundsScrollBar)
+	AS:SkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsPassThrough)
+	AS:SkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsOnlyShown)
 end
 
-if IsAddOnLoaded("Tukui") then
-	s.SkinFuncs["TellMeWhen_Options"] = LoadSkin
-end
-if IsAddOnLoaded("ElvUI") then 
-	c:GetModule('Skins')
-	s:RegisterSkin('TellMeWhen_Options', LoadSkin)
-end
+S:RegisterSkin('TellMeWhen_Options', LoadSkin)
+

@@ -1,7 +1,6 @@
-if not (IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("CLCProt") then return end
-local U = unpack(select(2,...))
-local s = U.s
-local c = U.c
+if not IsAddOnLoaded("CLCProt") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
 
 local function UpdateButtonLayout(self, button, opt)
 	button:Size(opt.size)
@@ -16,8 +15,7 @@ end
 local function CreateButton(self, name, size, point, parent, pointParent, offsetx, offsety, bfGroup, isChecked)
 	local db = self.db.profile
 	clcprotFrame:SetScale(1)
-	if ElvUI then clcprotFrame.SetScale = c.noop end
-	if Tukui then clcprotFrame.SetScale = s.dummy end
+	]clcprotFrame.SetScale = E.noop
 	
 	name = "clcprot" .. name
 	local button
@@ -40,8 +38,7 @@ local function CreateButton(self, name, size, point, parent, pointParent, offset
 	button.texture:Point("BOTTOMRIGHT", -2, 2)
 	button.texture:SetTexture(BGTEX)
 	button.texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-	if ElvUI then button.texture.SetTexCoord = c.noop end
-	if Tukui then button.texture.SetTexCoord = s.dummy end
+	button.texture.SetTexCoord = E.noop
 	
 	button.texture.OldSetTexture = button.texture.SetTexture
 	button.texture.SetTexture = function(self, tex, ...)
@@ -71,8 +68,7 @@ local function CreateButton(self, name, size, point, parent, pointParent, offset
 	
 	button.defaultSize = button:GetWidth()
 	
-	if ElvUI then button.SetScale = c.noop end
-	if Tukui then button.SetScale = s.dummy end
+	button.SetScale = E.noop
 	button:ClearAllPoints()
 	button:SetPoint(point, parent, pointParent, offsetx, offsety)
 	
@@ -93,4 +89,4 @@ end
 		clcprot.CreateButton = CreateButton
 		clcprot.UpdateButtonLayout = UpdateButtonLayout
 	end
-	U.RegisterSkin(name,SkinCLCProt)
+	AS:RegisterSkin(name,SkinCLCProt)

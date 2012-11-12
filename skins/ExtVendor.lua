@@ -1,15 +1,14 @@
-if not (IsAddOnLoaded("Tukui") or IsAddOnLoaded("ElvUI")) or not IsAddOnLoaded("ExtVendor") then return end
-local U = unpack(select(2,...))
+if IsAddOnLoaded("ExtVendor") then return end
+
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local name = "ExtVendorSkin"
 local function SkinExtVendor(self)
-	local s = U.s
-	local c = U.c
-	if IsAddOnLoaded("ElvUI") then
-		if c.private.skins.blizzard.enable ~= true or c.private.skins.blizzard.merchant ~= true then return end
-	end
-	if IsAddOnLoaded("Tukui") then U.SkinFrame(MerchantFrame) end
-	U.SkinButton(MerchantFrameFilterButton)
-	U.SkinButton(MerchantFrameSellJunkButton)
+	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.merchant ~= true then return end
+
+	AS:SkinButton(MerchantFrameFilterButton)
+	AS:SkinButton(MerchantFrameSellJunkButton)
 
 	for i = 1, 20 do
 		local b = _G["MerchantItem"..i.."ItemButton"]
@@ -24,22 +23,15 @@ local function SkinExtVendor(self)
 		t:Point("TOPLEFT", 2, -2)
 		t:Point("BOTTOMRIGHT", -2, 2)
 
-		if IsAddOnLoaded("Tukui") then
-			item_bar:CreateBackdrop("Transparent")
-			b:SetTemplate("Transparent", true)
-		end
-
-		if IsAddOnLoaded("ElvUI") then
-			item_bar:CreateBackdrop("Default")
-			b:SetTemplate("Default", true)
-		end
+		item_bar:CreateBackdrop("Default")
+		b:SetTemplate("Default", true)
 
 	end
 	MerchantFrame:Width(690)
 	ExtVendor_SellJunkPopup:SetTemplate("Transparent")
-	U.SkinButton(ExtVendor_SellJunkPopupYesButton)
-	U.SkinButton(ExtVendor_SellJunkPopupNoButton)
+	AS:SkinButton(ExtVendor_SellJunkPopupYesButton)
+	AS:SkinButton(ExtVendor_SellJunkPopupNoButton)
 end
 
-U.RegisterSkin(name,SkinExtVendor)
+AS:RegisterSkin(name,SkinExtVendor)
 

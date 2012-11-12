@@ -1,14 +1,13 @@
-﻿if not (IsAddOnLoaded( "ElvUI" ) or IsAddOnLoaded("Tukui")) then return end
-if not IsAddOnLoaded("Quartz") then return end
-local U = unpack(select(2,...))
+﻿if not IsAddOnLoaded("Quartz") then return end
+local E, L, V, P, G,_ = unpack(ElvUI)
+local AS = E:GetModule('AddOnSkins')
+
 local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
 if not Q3 then return end
 local name = "QuartzSkin"
 local function SkinQuartz(self)
-	local s = U.s
-	local c = U.c
-	if IsAddOnLoaded("Tukui") then UIFont = c["media"].font UIFontSize = 12 end
-	if IsAddOnLoaded("ElvUI") then UIFont = c["media"].normFont UIFontSize = 12 end
+	local font = E["media"].normFont 
+	local fontSize = 12
 
 	SkinQuartzBar = function(self, bar)
 		if not self.IconBorder then
@@ -24,7 +23,7 @@ local function SkinQuartz(self)
 		end
 		--self.Text:SetFont(UIFont, UIFontSize, "OUTLINE")
 		--self.TimeText:SetFont(UIFont, UIFontSize, "OUTLINE")
-		--self.Bar:SetStatusBarTexture(c["media"].normTex)
+		--self.Bar:SetStatusBarTexture(E["media"].normTex)
 		self.Bar:CreateBackdrop()
 	end
 
@@ -60,4 +59,4 @@ local function SkinQuartz(self)
 	print("If you are experiencing performance issue's (eg. locking spellcasts, extereme lag spikes) while using the Quartz Skin. Please disable the Quartz skin.")
 end
 
-U.RegisterSkin(name,SkinQuartz)
+AS:RegisterSkin(name,SkinQuartz)
