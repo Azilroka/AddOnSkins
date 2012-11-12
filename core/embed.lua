@@ -1,6 +1,11 @@
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
+local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
+EmbeddingWindow:SetTemplate("Transparent")
+EmbeddingWindow:SetFrameStrata("HIGH")
+EmbeddingWindow:Hide()
+
 function AS:EmbedWindowResize()
 	if not E.db.datatexts.rightChatPanel then
 		RDTS = 22
@@ -89,7 +94,7 @@ function AS:EmbedRecountOmenResize()
 	end
 end
 
-function AS:InitEmbed()
+function AS:EmbedInit()
 	self:EmbedWindowResize()
 	hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedWindowResize() end)
 
@@ -151,7 +156,7 @@ function AS:InitEmbed()
 --Embed Check Finished
 end
 
-function AS:EmbedEnterCombat(event)
+function AS:EmbedEnterCombat()
 	--	print("Entering Combat")
 	if (self:CheckOption("EmbedOoC")) then
 		ChatFrame3Tab:Hide()
@@ -178,7 +183,7 @@ function AS:EmbedEnterCombat(event)
 	end
 end
 
-function AS:EmbedExitCombat(event)
+function AS:EmbedExitCombat()
 	--	print("Exiting Combat")
 	if (self:CheckOption("EmbedOoC")) then
 		ChatFrame3Tab:Show()

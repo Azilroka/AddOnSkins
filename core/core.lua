@@ -24,7 +24,7 @@ E.PopupDialogs["OLD_SKIN_PACKAGE"] = {
 	text = "You have one of the old skin addons installed.  This addon replaces and will conflict with it.  Press accept to disable the old addon and reload your UI.",
 	button1 = ACCEPT,
 	button2 = CANCEL,
-	OnAccept = function() DisableAddOn("Tukui_UIPackages_Skins"); ReloadUI() end,
+	OnAccept = function() DisableAddOn("Tukui_UIPackages_Skins"); DisableAddOn("Tukui_ElvUI_Skins"); ReloadUI() end,
 	timeout = 0,
 	whileDead = 1,
 }
@@ -59,7 +59,8 @@ function AS:Initialize()
 	self:RegisterEvent('PET_BATTLE_OPENING_START', "RemoveNonPetBattleFrames")
 	self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
 	self:RegisterEvent('PLAYER_ENTER_COMBAT','EmbedEnterCombat')
-	self:RegisterEvent('PLAYER_REGEN_ENABLED','EmbedExitComat')
+	self:RegisterEvent('PLAYER_REGEN_ENABLED','EmbedExitCombat')
+	self:RegisterEvent('PLAYER_LEAVE_COMBAT','EmbedExitCombat')
 	
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
@@ -74,6 +75,8 @@ function AS:Initialize()
 			end
 		end
 	end
+
+	AS:EmbedInit()
 end
 
 function AS:RegisterSkin(skinName,func,events)
