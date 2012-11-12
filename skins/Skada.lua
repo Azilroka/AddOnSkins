@@ -119,6 +119,11 @@ local function SkinSkada(self)
 			EmbedSkada()
 		end
 	end
+
+	if AS:CheckOption("EmbedSkada") then
+		EmbedSkada()
+		hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedSkada() end)
+	end
 end
 
 AS:RegisterSkin(name,SkinSkada)
@@ -151,13 +156,3 @@ function EmbedSkada()
 		end
 	end
 end
-
-local Skada_Skin = CreateFrame("Frame",nil)
-	Skada_Skin:RegisterEvent("PLAYER_ENTERING_WORLD")
-	Skada_Skin:SetScript("OnEvent", function(self)
-		if AS:CheckOption("EmbedSkada") then
-			EmbedSkada()
-			hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedSkada() end)
-		end
-	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
-end)
