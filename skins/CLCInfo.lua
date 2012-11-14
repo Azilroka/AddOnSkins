@@ -10,7 +10,7 @@ local function ApplyMySkin(self)
 	t:ClearAllPoints()
 	t:SetPoint("TOPLEFT", self, "TOPLEFT", 2, -2)
 	t:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", -2, 2)
-	t:SetTexCoord(unpack(c.TexCoords))
+	t:SetTexCoord(unpack(E.TexCoords))
 
 	t = self.elements.texNormal
 	t:Hide()

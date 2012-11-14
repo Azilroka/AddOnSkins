@@ -38,7 +38,7 @@ local function CreateButton(self, name, size, point, parent, pointParent, offset
 	button.texture:Point("BOTTOMRIGHT", -2, 2)
 	button.texture:SetTexture(BGTEX)
 	button.texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-	button.texture.SetTexCoord = c.noop
+	button.texture.SetTexCoord = E.noop
 	
 	button.texture.OldSetTexture = button.texture.SetTexture
 	button.texture.SetTexture = function(self, tex, ...)

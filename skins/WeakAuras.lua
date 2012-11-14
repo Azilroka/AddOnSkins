@@ -13,8 +13,8 @@ local function Skin_WeakAuras(frame)
 		end
 	end
 
-	frame.icon:SetTexCoord(unpack(c.TexCoords))
-	frame.icon.SetTexCoord = c.noop
+	frame.icon:SetTexCoord(unpack(E.TexCoords))
+	frame.icon.SetTexCoord = E.noop
 end
 
 local function Create_WeakAuras(parent, data)
