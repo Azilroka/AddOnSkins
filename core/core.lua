@@ -9,6 +9,8 @@ local AS = E:NewModule('AddOnSkins','AceTimer-3.0','AceEvent-3.0')
 local S = E:GetModule('Skins')
 local LSM = LibStub("LibSharedMedia-3.0");
 
+E.AddOnSkins = AS
+
 AS.LSM = LSM
 AS.skins = {}
 AS.embeds = {}
@@ -44,6 +46,7 @@ local function GenerateEventFunction(event)
 end
 
 function AS:Initialize()
+	if not E.private.skins.addons.enable then return end
 	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
 	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix') and E.myrealm == 'Emerald Dream' then
@@ -51,7 +54,7 @@ function AS:Initialize()
 	end
 
 	E.db.skins['AlwaysTrue'] = true
-	
+
 	if IsAddOnLoaded("Tukui_UIPackages_Skins") or IsAddOnLoaded("Tukui_ElvUI_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
 	self.font = E["media"].normFont
 	self.pixelFont = LSM:Fetch("font","ElvUI Pixel")
@@ -68,7 +71,7 @@ function AS:Initialize()
 	
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
-			if IsAddOnLoaded(self.Skins[skin].addon) then
+			if skin == "AlwaysTrue" or IsAddOnLoaded(self.Skins[skin].addon) then
 				self:RegisterSkin_(skin,data.func,data.events)
 			end
 		end
@@ -217,19 +220,19 @@ function AS:CheckOption(optionName,...)
 		if not IsAddOnLoaded(addon) then return false end
 	end
 	
-	return E.db.skins[optionName]
+	return E.private.skins.addons[optionName]
 end
 
 function AS:DisableOption(optionName)
-	E.db.skins[optionName] = false
+	E.private.skins.addons[optionName] = false
 end
 
 function AS:EnableOption(optionName)
-	E.db.skins[optionName] = true
+	E.private.skins.addons[optionName] = true
 end
 
 function AS:ToggleOption(optionName)
-	E.db.skins[optionName] = not E.db.skins[optionName]
+	E.private.skins.addons[optionName] = not E.private.skins.addons[optionName]
 end
 
 function AS:RegisterSkin(skinName,skinFunc,...)

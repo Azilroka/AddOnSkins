@@ -122,7 +122,7 @@ local function SkinSkada(self)
 	end
 
 	if(AS:CheckOption("EmbedSkada")) then
-		hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) EmbedSkada() end)
+		hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) AS:EmbedSkada() end)
 		AS:EmbedSkada()
 	end
 end

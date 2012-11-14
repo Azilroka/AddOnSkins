@@ -1,6 +1,7 @@
 local E, L, V, P, G,_ = unpack(ElvUI)
 
-P["skins"] = {
+V["skins"]["addons"] = {
+	["enable"] = true,
 	["ACPSkin"] = true,
 	["AdiBagsSkin"] = true,
 	["AltoholicSkin"] = true,

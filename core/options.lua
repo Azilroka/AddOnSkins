@@ -257,12 +257,21 @@ function AS:GenerateOptions()
       end
       return iter
     end
-	E.Options.args.skins.args.addonSkins = {
-		order = 10,
+    E.Options.args.skins.args.addonEnable = {
+    	order = 4,
+		type = 'toggle',
+		name = 'AddOns',
+		get = function(info) return E.private.skins.addons.enable end,
+		set = function(info, value) E.private.skins.adoons.enable = value; E:StaticPopup_Show("PRIVATE_RL") end,
+	}
+	E.Options.args.skins.args.addons = {
+		order = 1000,
 		type = 'group',
 		name = 'AddOns',
-		get = function(info) return E.db.skins[ info[#info] ] end,
-		set = function(info,value)  E.db.skins[ info[#info] ] = value; E:StaticPopup_Show("CONFIG_RL") end,
+		get = function(info) return E.private.skins.addons[ info[#info] ] end,
+		set = function(info,value)  E.private.skins.addons[ info[#info] ] = value; E:StaticPopup_Show("PRIVATE_RL") end,
+		disabled = function() return not E.private.skins.addons.enable end,
+		guiInline = true,
 		args = {
 			desc = {
 				type = 'description',
@@ -272,37 +281,37 @@ function AS:GenerateOptions()
 			misc = {
 				type = 'group',
 				name = 'Misc Options',
-				order = 5,
+				order = 500,
 				args = {
 					DBMSkinHalf = {
 						type = 'toggle',
 						name = 'DBM Half-bar Skin',
 						desc = L["TOGGLESKIN_DESC"],
 						order = 1,
-						disabled = function() return not IsAddOnLoaded("DBM-Core") or not E.db.skins['DBMSkin'] end
+						disabled = function() return not IsAddOnLoaded("DBM-Core") or not E.private.skins.addons['DBMSkin'] end
 					},
 					RecountBackdrop = {
 						type = 'toggle',
 						name = 'Recount Backdrop',
 						desc = L['TOGGLESKIN_DESC'],
 						order = 2,
-						disabled = function() return not IsAddOnLoaded("Recount") or not E.db.skins["RecountSkin"] end,
+						disabled = function() return not IsAddOnLoaded("Recount") or not E.private.skins.addons["RecountSkin"] end,
 					},
 					SkadaBackdrop = {
 						type = 'toggle',
 						name = 'Skada Backdrop',
 						desc = L['TOGGLESKIN_DESC'],
 						order = 3,
-						disabled = function() return not IsAddOnLoaded("Skada") or not E.db.skins["SkadaSkin"] end,
+						disabled = function() return not IsAddOnLoaded("Skada") or not E.private.skins.addons["SkadaSkin"] end,
 					},
 				}
 			},
 			embed = {
-				order = 10,
+				order = 1000,
 				type = 'group',
 				name = 'Embed Settings',
-				get = function(info) return E.db.skins[ info[#info] ] end,
-				set = function(info,value)  E.db.skins[ info[#info] ] = value; E:StaticPopup_Show("CONFIG_RL") end,
+				get = function(info) return E.private.skins.addons[ info[#info] ] end,
+				set = function(info,value)  E.private.skins.addons[ info[#info] ] = value; E:StaticPopup_Show("CONFIG_RL") end,
 				args = {
 					desc = {
 						type = 'description',
@@ -364,7 +373,7 @@ function AS:GenerateOptions()
 
 	local order = 2
 	for skinName,_ in pairsByKeys(Skins) do
-		E.Options.args.skins.args.addonSkins.args[skinName] = self:GenerateOptionTable(skinName,order)
+		E.Options.args.skins.args.addons.args[skinName] = self:GenerateOptionTable(skinName,order)
 		order = order + 1
 	end
 end
