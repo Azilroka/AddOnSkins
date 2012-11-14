@@ -50,10 +50,10 @@ function AS:Initialize()
 	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
 	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix') and E.myrealm == 'Emerald Dream' then
-		E.db.skins['SortSettings'] = true
+		E.private.skins.addons['SortSettings'] = true
 	end
 
-	E.db.skins['AlwaysTrue'] = true
+	E.private.skins.addons['AlwaysTrue'] = true
 
 	if IsAddOnLoaded("Tukui_UIPackages_Skins") or IsAddOnLoaded("Tukui_ElvUI_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
 	self.font = E["media"].normFont

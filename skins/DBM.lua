@@ -102,7 +102,7 @@ local function LoadSkin()
 						if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, E.private.sle.dbm.size, 'OUTLINE') end
 						name:SetJustifyH("LEFT")
 						name:SetShadowColor(0, 0, 0, 0)
-						name.SetFont = s.dummy
+						name.SetFont = E.noop
 						name.styled=true
 					end
 					
@@ -114,7 +114,7 @@ local function LoadSkin()
 						if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, E.private.sle.dbm.size, 'OUTLINE') end
 						timer:SetJustifyH("RIGHT")
 						timer:SetShadowColor(0, 0, 0, 0)
-						timer.SetFont = s.dummy
+						timer.SetFont = E.noop
 						timer.styled=true
 					end
 
