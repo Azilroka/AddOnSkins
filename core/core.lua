@@ -92,7 +92,7 @@ function AS:RegisterSkin_(skinName,func,events)
 	local events = events
 	for c,_ in pairs(events) do -- check for conflicting addons
 		if string.find(c,'%[') then
-			local conflict = string.match(c,'%[([!%a]+)%]')
+			local conflict = string.match(c,'%[([!%w_]+)%]')
 			if IsAddOnLoaded(conflict) then return end
 		end
 	end
