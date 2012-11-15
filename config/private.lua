@@ -76,6 +76,7 @@ V["skins"]["addons"] = {
 	["EmbedRO"] = false, 
 	["EmbedTDPS"] = false, 
 	["EmbedSexyCooldown"] = false,
+	["EmbedRight"] = true,
 	["DBMSkinHalf"] = false,
 	["RecountBackdrop"] = true,
 	["SkadaBackdrop"] = true,
