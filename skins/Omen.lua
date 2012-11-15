@@ -2,7 +2,7 @@ local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
-function EmbedOmen()
+function AS:EmbedOmen()
 	if not IsAddOnLoaded("Omen") then AS:DisableOption("EmbedOmen") return end
 	if (AS:CheckOption("EmbedOoC")) then
 		if (AS:CheckOption("EmbedOmen")) then

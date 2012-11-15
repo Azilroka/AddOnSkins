@@ -124,13 +124,13 @@ local function SkinRecount(self)
 	AS:Desaturate(Recount.DetailWindow.ReportButton)
 	AS:Desaturate(Recount.DetailWindow.SummaryButton)
 
-	if AS:CheckOption("EmbedRecount") then EmbedRecount() end
+	if AS:CheckOption("EmbedRecount") then AS:EmbedRecount() end
 	
 end
 
 AS:RegisterSkin(name,SkinRecount)
 
-function EmbedRecount()
+function AS:EmbedRecount()
 	local Recount = _G.Recount
 
 	if (AS:CheckOption("EmbedOoC")) then
@@ -145,7 +145,7 @@ function EmbedRecount()
 	Recount.MainWindow:SetFrameStrata("HIGH")
 end
 
-function EmbedRecountResize()
+function AS:EmbedRecountResize()
 	Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 7)
 	Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 2)
 end
