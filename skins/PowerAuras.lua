@@ -37,14 +37,14 @@ local function SkinPowerAuras(self, aura, elapsed)
 	return returnValue
 end
 
-	local function PowerAuras_LoadSkin()
-		local name = "PowerAurasIconsSkin"
-		local function SkinPowerAurasIcons(self)
-			PowaAuras.OldUpdateAura = PowaAuras.UpdateAura
-			PowaAuras.UpdateAura = SkinPowerAuras
-		end
-		AS:RegisterSkin(name,SkinPowerAurasIcons)
+local function PowerAuras_LoadSkin()
+	local name = "PowerAurasIconsSkin"
+	local function SkinPowerAurasIcons(self)
+		PowaAuras.OldUpdateAura = PowaAuras.UpdateAura
+		PowaAuras.UpdateAura = SkinPowerAuras
 	end
+	AS:RegisterSkin(name,SkinPowerAurasIcons)
+end
 
 
 local name = "PowerAurasSkin"
@@ -92,8 +92,8 @@ local function SkinPowerAuras(self)
 	S:HandleButton(PowaBarAuraAnimSpeedSliderMinus)
 	S:HandleButton(PowaBarAuraDurationSliderMinus)
 	S:HandleButton(PowaBarAuraDurationSliderPlus)
-	S:HandleButton(PowaTimerCoordASliderMinus)
-	S:HandleButton(PowaTimerCoordASliderPlus)
+	S:HandleButton(PowaTimerCoordXSliderMinus)
+	S:HandleButton(PowaTimerCoordXSliderPlus)
 	S:HandleButton(PowaTimerCoordSliderMinus)
 	S:HandleButton(PowaTimerCoordSliderPlus)
 	S:HandleButton(PowaTimerSizeSliderMinus)
