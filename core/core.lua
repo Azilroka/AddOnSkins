@@ -89,15 +89,24 @@ function AS:Initialize()
 end
 
 function AS:RegisterSkin_(skinName,func,events)
+	local events = events
+	for c,_ in pairs(events) do -- check for conflicting addons
+		if string.find(c,'%[') then
+			local conflict = string.match(c,'%[([!%a]+)%]')
+			if IsAddOnLoaded(conflict) then return end
+		end
+	end
 	if not self.skins[skinName] then self.skins[skinName] = {} end
 	self.skins[skinName][func] = true
 	for event,_ in pairs(events) do
-    	if not self.events[event] then
-			self[event] = GenerateEventFunction(event)
-			self:RegisterEvent(event); 
-			self.events[event] = {} 
+		if not string.find(event,'%[') then
+			if not self.events[event] then
+				self[event] = GenerateEventFunction(event)
+				self:RegisterEvent(event); 
+				self.events[event] = {} 
+			end
+			self.events[event][skinName] = true
 		end
-		self.events[event][skinName] = true
 	end
 end
 

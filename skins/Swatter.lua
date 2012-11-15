@@ -1,6 +1,3 @@
-
-if IsAddOnLoaded("!BugGrabber") then return end
-if IsAddOnLoaded("!ImprovedErrorFrame") then return end
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
@@ -14,4 +11,4 @@ local function SkinSwatter(self)
 	AS:SkinScrollBar(SwatterErrorInputScrollScrollBar)
 end
 
-AS:RegisterSkin(name,SkinSwatter)
+AS:RegisterSkin(name,SkinSwatter,'[!BugGrabber]','[!ImprovedErrorFrame]')
