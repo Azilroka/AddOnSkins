@@ -1,7 +1,6 @@
-
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = 'IncomingSkin'
 local function SkinIncoming(self)
@@ -19,7 +18,7 @@ local function SkinIncoming(self)
 	}
 
 	for _, button in pairs(buttons) do
-		AS:SkinButton(_G[button])
+		S:HandleButton(_G[button])
 	end	
 	
 	LocationMessageView:SetWidth(99)

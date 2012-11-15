@@ -1,11 +1,11 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "PoMTrackerSkin"
 local function SkinPoMTracker(self)
 	AS:SkinFrame(PoMOptionFrame)
-	AS:SkinCloseButton(PoMOptionFrame_CloseButton)
+	S:HandleCloseButton(PoMOptionFrame_CloseButton)
 
 	pomtracker1:CreateBackdrop("Transparent")
 	pomtracker1:Size(85,15)
@@ -20,7 +20,7 @@ local function SkinPoMTracker(self)
 	pomtracker3:Point("TOP", pomtrackerstatusBar, "BOTTOM", 0, -5)
 	pomtracker3:Height(15)
 
-	AS:SkinButton(pomtracker3_Button1)
+	S:HandleButton(pomtracker3_Button1)
 
 	pomtrackerstatusBar:ClearAllPoints()
 	pomtrackerstatusBar:Point("TOP", pomtracker2, "BOTTOM", 0, -5)
@@ -28,7 +28,7 @@ local function SkinPoMTracker(self)
 	pomtrackerstatusBar:SetStatusBarTexture(E["media"].normTex)
 
 	for i = 1,6 do
-		AS:SkinCheckBox(_G["PoMOptionFrame_CheckButton"..i])
+		S:HandleCheckBox(_G["PoMOptionFrame_CheckButton"..i])
 	end
 	pomtracker2:HookScript("OnUpdate", function() pomtrackerstatusBar:Width(pomtracker2:GetWidth()) pomtracker3:Width(pomtracker2:GetWidth()) end)
 end

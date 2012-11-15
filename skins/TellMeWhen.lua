@@ -1,4 +1,3 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
@@ -14,23 +13,23 @@ local function LoadSkin()
 	TellMeWhen_IconEditor:SetTemplate("Transparent")
 	TellMeWhen_IconEditorMainOptions:SetTemplate("Transparent")
 	
-	AS:SkinButton(TellMeWhen_IconEditorReset, true)
-	AS:SkinButton(TellMeWhen_IconEditorUndo, true)
-	AS:SkinButton(TellMeWhen_IconEditorRedo, true)
+	S:HandleButton(TellMeWhen_IconEditorReset, true)
+	S:HandleButton(TellMeWhen_IconEditorUndo, true)
+	S:HandleButton(TellMeWhen_IconEditorRedo, true)
 
-	AS:SkinTab(TellMeWhen_IconEditorTab1)
-	AS:SkinTab(TellMeWhen_IconEditorTab2)
-	AS:SkinTab(TellMeWhen_IconEditorTab3)
-	AS:SkinTab(TellMeWhen_IconEditorTab4)
-	AS:SkinTab(TellMeWhen_IconEditorTab5)
+	S:HandleTab(TellMeWhen_IconEditorTab1)
+	S:HandleTab(TellMeWhen_IconEditorTab2)
+	S:HandleTab(TellMeWhen_IconEditorTab3)
+	S:HandleTab(TellMeWhen_IconEditorTab4)
+	S:HandleTab(TellMeWhen_IconEditorTab5)
 
-	AS:SkinButton(TellMeWhen_IconEditorOkay, true)
-	AS:SkinCloseButton(TellMeWhen_IconEditorClose, true)
+	S:HandleButton(TellMeWhen_IconEditorOkay, true)
+	S:HandleCloseButton(TellMeWhen_IconEditorClose, true)
 	
 	TellMeWhen_ConfigWarning:StripTextures()
 	TellMeWhen_ConfigWarning:SetTemplate("Transparent")
-	AS:SkinButton(TellMeWhen_ConfigWarningExit, true)
-	AS:SkinButton(TellMeWhen_ConfigWarningNeverAgain, true)
+	S:HandleButton(TellMeWhen_ConfigWarningExit, true)
+	S:HandleButton(TellMeWhen_ConfigWarningNeverAgain, true)
 	
 	
 	TellMeWhen_IconEditorSuggest:ClearAllPoints()
@@ -53,9 +52,9 @@ local function LoadSkin()
 	TellMeWhen_IconEditorTab4:Point("LEFT", TellMeWhen_IconEditorTab3, "RIGHT", -19, 0)
 	TellMeWhen_IconEditorTab5:Point("LEFT", TellMeWhen_IconEditorTab4, "RIGHT", -19, 0)
 	
-	--AS:SkinScrollBar(TellMeWhen_IconEditorEventsSoundSoundsScrollBar)
-	AS:SkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsPassThrough)
-	AS:SkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsOnlyShown)
+	--S:HandleScrollBar(TellMeWhen_IconEditorEventsSoundSoundsScrollBar)
+	S:HandleCheckBox(TellMeWhen_IconEditorEventsEventSettingsPassThrough)
+	S:HandleCheckBox(TellMeWhen_IconEditorEventsEventSettingsOnlyShown)
 end
 
 S:RegisterSkin('TellMeWhen_Options', LoadSkin)

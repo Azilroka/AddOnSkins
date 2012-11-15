@@ -1,5 +1,6 @@
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "WowLuaSkin"
 local function SkinWowLua(self)
@@ -7,9 +8,9 @@ local function SkinWowLua(self)
 	WowLuaFrameLineNumScrollFrame:StripTextures(True)
 	WowLuaFrameResizeBar:StripTextures(True)
 	WowLuaFrameResizeBar:Height(10)
-	AS:SkinCloseButton(WowLuaButton_Close)
+	S:HandleCloseButton(WowLuaButton_Close)
 	WowLuaButton_Close:Point("TOPRIGHT", WowLuaFrame, "TOPRIGHT", 0 , 0)
-	AS:SkinScrollBar(WowLuaFrameEditScrollFrameScrollBar)
+	S:HandleScrollBar(WowLuaFrameEditScrollFrameScrollBar)
 	WowLuaButton_New:Point("LEFT", WowLuaFrameToolbar, "LEFT", 60, 0)
 
 	WowLuaFrameEditFocusGrabber.bg1 = CreateFrame("Frame", nil, WowLuaFrameEditFocusGrabber)

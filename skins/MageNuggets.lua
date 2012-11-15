@@ -1,6 +1,6 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "MageNuggetsSkin"
 local function SkinMageNuggets(self)
@@ -75,10 +75,10 @@ local function SkinMageNuggets(self)
 		_G["MageNugCD"..i.."_Frame_Bar"].backdrop:Point("BOTTOMRIGHT", 0, 0)
  	end
 
-	AS:SkinButton(MageNugHordeFrameClose)
-	AS:SkinButton(MageNugHordeFrameShowOptions)
-	AS:SkinButton(MageNugAlliFrameClose)
-	AS:SkinButton(MageNugAlliFrameShowOptions)
+	S:HandleButton(MageNugHordeFrameClose)
+	S:HandleButton(MageNugHordeFrameShowOptions)
+	S:HandleButton(MageNugAlliFrameClose)
+	S:HandleButton(MageNugAlliFrameShowOptions)
 
 	MageNugAB_Frame_ABBar:CreateBackdrop("Transparent")
 	MageNugAB_Frame_ABBar:ClearAllPoints()
@@ -169,7 +169,7 @@ local function SkinMageNuggets(self)
 	}
 		
 	for _,b in pairs(checkbuttons) do
-		AS:SkinCheckBox(b)
+		S:HandleCheckBox(b)
 	end
 	
 	-- Slider frames
@@ -189,7 +189,7 @@ local function SkinMageNuggets(self)
 	}
 	
 	for _,s in pairs(sliders) do
-		AS:SkinSliderFrame(s)
+		S:HandleSliderFrame(s)
 	end
 	
 	-- Edit Boxes
@@ -223,16 +223,16 @@ local function SkinMageNuggets(self)
 	}
 	
 	for _,f in pairs(editbox) do
-		AS:SkinEditBox(f)
+		S:HandleEditBox(f)
 		f:SetHeight(15)
 	end
 	
 	-- Buttons
-	AS:SkinButton(MageNugStatMonOptionFrameBlackBackdropButton)
-	AS:SkinButton(MageNugMoonkinOptionFrame_Button)
-	AS:SkinButton(MageNugOption2FrameButton1)
-	AS:SkinButton(MageNugOption2FrameButton2)
-	AS:SkinButton(MageNugOption2FrameButton3)
+	S:HandleButton(MageNugStatMonOptionFrameBlackBackdropButton)
+	S:HandleButton(MageNugMoonkinOptionFrame_Button)
+	S:HandleButton(MageNugOption2FrameButton1)
+	S:HandleButton(MageNugOption2FrameButton2)
+	S:HandleButton(MageNugOption2FrameButton3)
 	
 end
 

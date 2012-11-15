@@ -1,6 +1,6 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "PostalSkin"
 local function SkinPostal(self)
@@ -15,40 +15,40 @@ local function SkinPostal(self)
 		b.returnicon:SetPoint("TOPRIGHT", b, "TOPRIGHT", 20, 0)	
 		
 		if _G['PostalInboxCB'..i] then
-			AS:SkinCheckBox(_G['PostalInboxCB'..i])
+			S:HandleCheckBox(_G['PostalInboxCB'..i])
 		end
 	end
 
 	if PostalSelectOpenButton and not PostalSelectOpenButton.handled then
-		AS:SkinButton(PostalSelectOpenButton, true)
+		S:HandleButton(PostalSelectOpenButton, true)
 		PostalSelectOpenButton.handled = true;
 		PostalSelectOpenButton:Point("RIGHT", InboxFrame, "TOP", -41, -48)
 	end	
 	
 	if Postal_OpenAllMenuButton and not Postal_OpenAllMenuButton.handled then
-		AS:SkinNextPrevButton(Postal_OpenAllMenuButton, true)
+		S:HandleNextPrevButton(Postal_OpenAllMenuButton, true)
 		Postal_OpenAllMenuButton:SetPoint('LEFT', PostalOpenAllButton, 'RIGHT', 5, 0)
 		Postal_OpenAllMenuButton.handled = true;
 	end	
 
 	if PostalOpenAllButton and not PostalOpenAllButton.handled then
-		AS:SkinButton(PostalOpenAllButton, true)
+		S:HandleButton(PostalOpenAllButton, true)
 		PostalOpenAllButton.handled = true;
 		PostalOpenAllButton:Point("Center", InboxFrame, "TOP", -34, -400)
 	end	
 	
 	if PostalSelectReturnButton then
-		AS:SkinButton(PostalSelectReturnButton, true)
+		S:HandleButton(PostalSelectReturnButton, true)
 		PostalSelectReturnButton:Point("LEFT", InboxFrame, "TOP", -5, -48)
 	end
 
 	if Postal_ModuleMenuButton then
-		AS:SkinNextPrevButton(Postal_ModuleMenuButton, true)
+		S:HandleNextPrevButton(Postal_ModuleMenuButton, true)
 		Postal_ModuleMenuButton:SetPoint('TOPRIGHT', MailFrame, -53, -6)
 	end
 	
 	if Postal_BlackBookButton then
-		AS:SkinNextPrevButton(Postal_BlackBookButton, true)
+		S:HandleNextPrevButton(Postal_BlackBookButton, true)
 		Postal_BlackBookButton:SetPoint('LEFT', SendMailNameEditBox, 'RIGHT', 5, 2)
 	end
 		
@@ -58,13 +58,13 @@ local function SkinPostal(self)
 	function Postal_OpenAll:OnEnable(self)
 		Postal_OpenAll.OnEnable_(self)
 		if Postal_OpenAllMenuButton and not Postal_OpenAllMenuButton.handled then
-			AS:SkinNextPrevButton(Postal_OpenAllMenuButton, true)
+			S:HandleNextPrevButton(Postal_OpenAllMenuButton, true)
 			Postal_OpenAllMenuButton:SetPoint('LEFT', PostalOpenAllButton, 'RIGHT', 5, 0)
 			Postal_OpenAllMenuButton.handled = true;
 		end
 
 		if PostalOpenAllButton and not PostalOpenAllButton.handled then
-			AS:SkinButton(PostalOpenAllButton, true)
+			S:HandleButton(PostalOpenAllButton, true)
 			PostalOpenAllButton.handled = true;
 		end
 	end
@@ -76,7 +76,7 @@ local function SkinPostal(self)
 		
 		for i = 1, INBOXITEMS_TO_DISPLAY do
 			if _G['PostalInboxCB'..i] and not _G['PostalInboxCB'..i].handled then
-				AS:SkinCheckBox(_G['PostalInboxCB'..i])
+				S:HandleCheckBox(_G['PostalInboxCB'..i])
 				_G['PostalInboxCB'..i].handled = true;
 			end
 		end		

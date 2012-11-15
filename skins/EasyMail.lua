@@ -1,19 +1,20 @@
 ﻿
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "EasyMailSkin"
 local function SkinEasyMail(self,event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
 	MailFrame:Size(360,440)
-	AS:SkinButton(EasyMail_CheckAllButton)
-	AS:SkinButton(EasyMail_GetAllButton)
-	AS:SkinButton(EasyMail_AttButton)
-	AS:SkinButton(EasyMail_ForwardButton)
-	AS:SkinNextPrevButton(EasyMail_MailButton)
+	S:HandleButton(EasyMail_CheckAllButton)
+	S:HandleButton(EasyMail_GetAllButton)
+	S:HandleButton(EasyMail_AttButton)
+	S:HandleButton(EasyMail_ForwardButton)
+	S:HandleNextPrevButton(EasyMail_MailButton)
 
 	for i = 1, 7 do
-		AS:SkinCheckBox(_G["EasyMail_CheckButton"..i])
+		S:HandleCheckBox(_G["EasyMail_CheckButton"..i])
 	end
 
 	EasyMail_ForwardButton:Point("RIGHT", OpenMailReplyButton, "LEFT", -2, 0)

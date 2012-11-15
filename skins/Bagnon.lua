@@ -1,6 +1,7 @@
 
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = 'BagnonSkin'
 local function SkinBagnon(self,event)
@@ -10,7 +11,7 @@ local function SkinBagnon(self,event)
 				if not bagnonbankonce then
 					bagnonbankonce = true
 					AS:SkinFrame(BagnonFramebank)
-					AS:SkinCloseButton(BagnonFramebankCloseButton)
+					S:HandleCloseButton(BagnonFramebankCloseButton)
 				end
 			end
 		end)
@@ -19,7 +20,7 @@ local function SkinBagnon(self,event)
 			if not bagnonguildonce then
 				bagnonguildonce = true
 				AS:SkinFrame(BagnonFrameguildbank)
-				AS:SkinCloseButton(BagnonFrameguildbankCloseButton)
+				S:HandleCloseButton(BagnonFrameguildbankCloseButton)
 			end
 		end
 	elseif event == "VOID_STORAGE_OPEN" then
@@ -27,7 +28,7 @@ local function SkinBagnon(self,event)
 			if not bagnonvoidonce then
 				bagnonvoidonce = true
 				AS:SkinFrame(BagnonFramevoidstorage)
-				AS:SkinCloseButton(BagnonFramevoidstorageCloseButton)
+				S:HandleCloseButton(BagnonFramevoidstorageCloseButton)
 			end
 		end
 	end
@@ -36,7 +37,7 @@ local function SkinBagnon(self,event)
 			bagnononce = true
 			ToggleBackpack()
 			AS:SkinFrame(BagnonFrameinventory)
-			AS:SkinCloseButton(BagnonFrameinventoryCloseButton)
+			S:HandleCloseButton(BagnonFrameinventoryCloseButton)
 			ToggleBackpack()
 		end
 	end)

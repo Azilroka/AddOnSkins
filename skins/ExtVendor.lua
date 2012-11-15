@@ -1,14 +1,13 @@
-
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "ExtVendorSkin"
 local function SkinExtVendor(self)
 	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.merchant ~= true then return end
 
-	AS:SkinButton(MerchantFrameFilterButton)
-	AS:SkinButton(MerchantFrameSellJunkButton)
+	S:HandleButton(MerchantFrameFilterButton)
+	S:HandleButton(MerchantFrameSellJunkButton)
 
 	for i = 1, 20 do
 		local b = _G["MerchantItem"..i.."ItemButton"]
@@ -29,8 +28,8 @@ local function SkinExtVendor(self)
 	end
 	MerchantFrame:Width(690)
 	ExtVendor_SellJunkPopup:SetTemplate("Transparent")
-	AS:SkinButton(ExtVendor_SellJunkPopupYesButton)
-	AS:SkinButton(ExtVendor_SellJunkPopupNoButton)
+	S:HandleButton(ExtVendor_SellJunkPopupYesButton)
+	S:HandleButton(ExtVendor_SellJunkPopupNoButton)
 end
 
 AS:RegisterSkin(name,SkinExtVendor)

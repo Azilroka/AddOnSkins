@@ -6,6 +6,7 @@
 
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local croprwicons = true			-- crops blizz shitty borders from icons in RaidWarning messages
 local rwiconsize = 18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
@@ -254,14 +255,13 @@ local function LoadSkinOptions()
 	DBM_GUI_OptionsFrameDBMOptions:SetTemplate("Transparent")
 	DBM_GUI_OptionsFramePanelContainer:SetTemplate("Transparent")
 	end)
-	AS:SkinTab(DBM_GUI_OptionsFrameTab1)
-	AS:SkinTab(DBM_GUI_OptionsFrameTab2)
-	AS:SkinButton(DBM_GUI_OptionsFrameOkay, true)
+	S:HandleTab(DBM_GUI_OptionsFrameTab1)
+	S:HandleTab(DBM_GUI_OptionsFrameTab2)
+	S:HandleButton(DBM_GUI_OptionsFrameOkay, true)
 	
-	AS:SkinScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
+	S:HandleScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
 end
 
-local S = E:GetModule('Skins')
 S:RegisterSkin('DBM-GUI', LoadSkinOptions)
 
 local name = "DBMSkin"

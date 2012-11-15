@@ -1,12 +1,11 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
-
-local Recount = _G.Recount
+local S = E:GetModule('Skins')
 
 local name = "RecountSkin"
 local function SkinRecount(self)
-	
+	local Recount = _G.Recount
+
 	local function SkinFrame(frame)
 		frame.bgMain = CreateFrame("Frame", nil, frame)
 		frame.bgMain:SetTemplate("Transparent")
@@ -25,7 +24,7 @@ local function SkinRecount(self)
 		frame.Title:SetParent(frame.TitleBackground)
 		frame.Title:ClearAllPoints()
 		frame.Title:SetPoint("LEFT", 4, 0)
-		if not Recount_MainWindow then AS:SkinCloseButton(frame.CloseButton) end
+		if not Recount_MainWindow then S:HandleCloseButton(frame.CloseButton) end
 	end
 
 	local function SkinMainFrame(frame)
@@ -47,7 +46,7 @@ local function SkinRecount(self)
 		frame.Title:SetParent(frame.TitleBackground)
 		frame.Title:ClearAllPoints()
 		frame.Title:SetPoint("LEFT", 4, 0)
-		if not Recount_MainWindow then AS:SkinCloseButton(frame.CloseButton) end
+		if not Recount_MainWindow then S:HandleCloseButton(frame.CloseButton) end
 	end
 
 	Recount.UpdateBarTextures = function(self)
@@ -93,7 +92,7 @@ local function SkinRecount(self)
 
 	Recount:UpdateBarTextures()
 
-	AS:SkinScrollBar(Recount_MainWindow_ScrollBarScrollBar)
+	S:HandleScrollBar(Recount_MainWindow_ScrollBarScrollBar)
 	hooksecurefunc(Recount,"RefreshMainWindow",function(self,datarefresh)
 	 	if not Recount.db.profile.MainWindow.ShowScrollbar then
 			Recount_MainWindow_ScrollBarScrollBar:Hide()
@@ -132,6 +131,8 @@ end
 AS:RegisterSkin(name,SkinRecount)
 
 function EmbedRecount()
+	local Recount = _G.Recount
+
 	if (AS:CheckOption("EmbedOoC")) then
 		if (AS:CheckOption("EmbedRecount")) then
 			Recount_MainWindow:Hide()

@@ -1,6 +1,6 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "OdysseySkin"
 local function SkinOdyssey(self)
@@ -18,26 +18,26 @@ local function SkinOdyssey(self)
 	OdysseyFrameQuestDetails:SetTemplate("Transparent")
 	OdysseyFrameZoneMaps:SetTemplate("Transparent")
 
-	AS:SkinScrollBar(OdysseyFrameQuestDBScrollFrameScrollBar)
-	AS:SkinScrollBar(OdysseyFrameRealmSummaryScrollFrameScrollBar)
-	AS:SkinScrollBar(OdysseyMapsMenuScrollFrameScrollBar)
-	AS:SkinEditBox(OdysseyFrame_SearchEditBox)
-	AS:SkinEditBox(OdysseyFrameQuestDB_MinLevel)
-	AS:SkinEditBox(OdysseyFrameQuestDB_MaxLevel)
+	S:HandleScrollBar(OdysseyFrameQuestDBScrollFrameScrollBar)
+	S:HandleScrollBar(OdysseyFrameRealmSummaryScrollFrameScrollBar)
+	S:HandleScrollBar(OdysseyMapsMenuScrollFrameScrollBar)
+	S:HandleEditBox(OdysseyFrame_SearchEditBox)
+	S:HandleEditBox(OdysseyFrameQuestDB_MinLevel)
+	S:HandleEditBox(OdysseyFrameQuestDB_MaxLevel)
 	
 	OdysseyFrame_ResetButton:Point("TOPLEFT", OdysseyFrame, "TOPLEFT", 55, -77)
 	OdysseyFrameTab1:Point("TOPLEFT", OdysseyFrame, "BOTTOMLEFT", -5, 2)
-	AS:SkinButton(OdysseyFrame_ResetButton)
-	AS:SkinButton(OdysseyFrame_SearchButton)
-	AS:SkinButton(OdysseyFrameQuestDB_GetHistory)
-	AS:SkinCloseButton(OdysseyFrameCloseButton)
-	AS:SkinNextPrevButton(OdysseyFrameQuestDetailsGoBack)
-	AS:SkinNextPrevButton(OdysseyFrameQuestDetailsGoForward)
-	AS:SkinDropDownBox(OdysseyFrameRealmSummary_SelectContinent)
-	AS:SkinScrollBar(OdysseyFrameSearchScrollFrameScrollBar)
+	S:HandleButton(OdysseyFrame_ResetButton)
+	S:HandleButton(OdysseyFrame_SearchButton)
+	S:HandleButton(OdysseyFrameQuestDB_GetHistory)
+	S:HandleCloseButton(OdysseyFrameCloseButton)
+	S:HandleNextPrevButton(OdysseyFrameQuestDetailsGoBack)
+	S:HandleNextPrevButton(OdysseyFrameQuestDetailsGoForward)
+	S:HandleDropDownBox(OdysseyFrameRealmSummary_SelectContinent)
+	S:HandleScrollBar(OdysseyFrameSearchScrollFrameScrollBar)
 
 	for i = 1, 3 do
-		AS:SkinTab(_G["OdysseyFrameTab"..i])
+		S:HandleTab(_G["OdysseyFrameTab"..i])
 		AS:SkinFrame(_G["OdysseyTabQuestsMenuItem"..i])
 	end
 

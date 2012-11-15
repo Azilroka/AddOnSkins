@@ -1,6 +1,7 @@
 ﻿
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local function OnEnter11(Self)
   GameTooltip:SetOwner(Self, "ANCHOR_CURSOR")
@@ -53,7 +54,7 @@ local function SkinBGDefender(self)
 	end	
 
 	for _, button in pairs(buttons) do
-		AS:SkinButton(_G[button])
+		S:HandleButton(_G[button])
 	end	
 	
 	BGDefenderFrame:SetWidth(160)
@@ -75,11 +76,11 @@ local function SkinBGDefender(self)
 	Button7:Point("TOPLEFT", BGDefenderFrame, "TOPLEFT", 5, -48)
 	Button8:Point("TOPLEFT", BGDefenderFrame, "TOPLEFT", 97, -48)
 	
-	AS:SkinDropDownBox(DropDown1, 200)
-	AS:SkinDropDownBox(DropDown2, 200)
-	AS:SkinDropDownBox(DropDown3, 200)
+	S:HandleDropDownBox(DropDown1, 200)
+	S:HandleDropDownBox(DropDown2, 200)
+	S:HandleDropDownBox(DropDown3, 200)
 	
-	AS:SkinCheckBox(BGDefenderPrefaceButton)
+	S:HandleCheckBox(BGDefenderPrefaceButton)
 	
 	Text1:SetTextColor(23/255, 132/255, 209/255)
 		

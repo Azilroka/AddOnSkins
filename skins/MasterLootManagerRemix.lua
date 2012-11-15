@@ -1,6 +1,6 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "MasterLootManagerRemixSkin"
 local function SkinMLM(self)
@@ -72,12 +72,12 @@ local function SkinMLM(self)
 
 	-- Skin Buttons
 	for _, button in pairs(buttons) do
-					AS:SkinButton(_G[button])
+					S:HandleButton(_G[button])
 	end	
 
 	-- Skin CheckBoxes
 	for _, button in pairs(checkboxes) do
-					AS:SkinCheckBox(_G[button])
+					S:HandleCheckBox(_G[button])
 	end	
 
 	-- Move this
@@ -114,17 +114,17 @@ local function SkinMLM(self)
 		MasterLootLoggerAddEditFrameMinute:SetWidth(25)
 		
 	-- Skin Dropdowns 
-		AS:SkinDropDownBox(MasterLootManagerMain_SelectDE, 150)
-		AS:SkinDropDownBox(MasterLootManagerMain_SelectBank, 150)
-		AS:SkinDropDownBox(MasterLootLoggerAddEditFrameType, 150)
+		S:HandleDropDownBox(MasterLootManagerMain_SelectDE, 150)
+		S:HandleDropDownBox(MasterLootManagerMain_SelectBank, 150)
+		S:HandleDropDownBox(MasterLootLoggerAddEditFrameType, 150)
 
 	-- Scrollbar
-		AS:SkinScrollBar(MasterLootManagerMain_ScrollFrame_Slider, 5)
-		AS:SkinScrollBar(MasterLootLoggerFrameContentScrollFrameScrollBar)
+		S:HandleScrollBar(MasterLootManagerMain_ScrollFrame_Slider, 5)
+		S:HandleScrollBar(MasterLootLoggerFrameContentScrollFrameScrollBar)
 
 	-- Skin CloseButtons
-		AS:SkinCloseButton(MasterLootLoggerFrameCloseButton)
-		AS:SkinCloseButton(MasterLootLoggerAddEditFrameCloseButton)
+		S:HandleCloseButton(MasterLootLoggerFrameCloseButton)
+		S:HandleCloseButton(MasterLootLoggerAddEditFrameCloseButton)
 end
 
 AS:RegisterSkin(name,SkinMLM)

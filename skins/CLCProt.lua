@@ -1,6 +1,6 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local function UpdateButtonLayout(self, button, opt)
 	button:Size(opt.size)
@@ -83,10 +83,11 @@ end
 if (select(2, UnitClass("player")) ~= "PALADIN") then
 	return
 end
-	local name = "CLCProtSkin"
-	local function SkinCLCProt(self)
-		local clcprot = LibStub("AceAddon-3.0"):GetAddon("clcprot")
-		clcprot.CreateButton = CreateButton
-		clcprot.UpdateButtonLayout = UpdateButtonLayout
-	end
-	AS:RegisterSkin(name,SkinCLCProt)
+
+local name = "CLCProtSkin"
+local function SkinCLCProt(self)
+	local clcprot = LibStub("AceAddon-3.0"):GetAddon("clcprot")
+	clcprot.CreateButton = CreateButton
+	clcprot.UpdateButtonLayout = UpdateButtonLayout
+end
+AS:RegisterSkin(name,SkinCLCProt)

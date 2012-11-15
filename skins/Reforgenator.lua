@@ -1,16 +1,16 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "ReforgenatorSkin"
 local function SkinReforgenator(self)
 	AS:SkinFrame(ReforgenatorPanel)
 	AS:SkinFrame(ReforgenatorMessageFrame)
 	AS:SkinFrame(ReforgenatorMessageTextFrame)
-	AS:SkinDropDownBox(ReforgenatorPanel_ModelSelection)
-	AS:SkinDropDownBox(ReforgenatorPanel_SandboxSelection)
-	AS:SkinDropDownBox(ReforgenatorPanel_TargetLevelSelection)
-	AS:SkinCloseButton(ReforgenatorPanel_CloseButton)
+	S:HandleDropDownBox(ReforgenatorPanel_ModelSelection)
+	S:HandleDropDownBox(ReforgenatorPanel_SandboxSelection)
+	S:HandleDropDownBox(ReforgenatorPanel_TargetLevelSelection)
+	S:HandleCloseButton(ReforgenatorPanel_CloseButton)
 	hooksecurefunc(Reforgenator,"UpdateWindowItem",function(self, index, itemDescriptor)
 		if not itemDescriptor then return end
 		local item = _G["ReforgenatorPanel_Item"..index]
@@ -20,7 +20,7 @@ local function SkinReforgenator(self)
 		item:CreateBackdrop("Default")
 	    local texture = select(10, GetItemInfo(itemDescriptor.itemLink))
 	    iconTexture:SetTexture(texture)
-		AS:SkinCheckBox(checked)
+		S:HandleCheckBox(checked)
 	end)
 end
 

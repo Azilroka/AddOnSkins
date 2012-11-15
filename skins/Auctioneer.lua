@@ -1,6 +1,6 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = 'AuctioneerSkin'
 local function AuctioneerSkin(self,event)
@@ -47,8 +47,8 @@ local function AuctioneerSkin(self,event)
 	BidQualitySort:Point("TOPLEFT", AuctionFrameBid, "TOPLEFT", 65, -50)
 	AuctionFrameTab1:ClearAllPoints()
 	AuctionFrameTab1:Point("TOPLEFT", AuctionFrame, "BOTTOMLEFT", -5, 2)
-	AS:SkinNextPrevButton(BrowseNextPageButton)
-	AS:SkinNextPrevButton(BrowsePrevPageButton)
+	S:HandleNextPrevButton(BrowseNextPageButton)
+	S:HandleNextPrevButton(BrowsePrevPageButton)
 	BrowseNextPageButton:Size(20, 20)
 	BrowsePrevPageButton:Size(20, 20)
 	if IsAddOnLoaded("Auc-Stat-Purchased") then
@@ -59,13 +59,13 @@ local function AuctioneerSkin(self,event)
 		BrowsePrevPageButton:Point("BOTTOMRIGHT", BrowseScrollFrame, "BOTTOMRIGHT", -160, 0)
 	end
 
-	if AucAdvScanButton then AS:SkinButton(AucAdvScanButton) end
-	if AucAdvSimpFrameCreate then AS:SkinButton(AucAdvSimpFrameCreate) end
-	if AucAdvSimpFrameRemember then AS:SkinButton(AucAdvSimpFrameRemember) end
-	if AuctionFrameTabUtilAppraiser then AS:SkinTab(AuctionFrameTabUtilAppraiser) end
-	if AuctionFrameTabUtilSearchUi then AS:SkinTab(AuctionFrameTabUtilSearchUi) end
-	if AuctionFrameTabUtilSimple then AS:SkinTab(AuctionFrameTabUtilSimple) end
-	if AuctionFrameTabUtilBeanCounter then AS:SkinTab(AuctionFrameTabUtilBeanCounter) end
+	if AucAdvScanButton then S:HandleButton(AucAdvScanButton) end
+	if AucAdvSimpFrameCreate then S:HandleButton(AucAdvSimpFrameCreate) end
+	if AucAdvSimpFrameRemember then S:HandleButton(AucAdvSimpFrameRemember) end
+	if AuctionFrameTabUtilAppraiser then S:HandleTab(AuctionFrameTabUtilAppraiser) end
+	if AuctionFrameTabUtilSearchUi then S:HandleTab(AuctionFrameTabUtilSearchUi) end
+	if AuctionFrameTabUtilSimple then S:HandleTab(AuctionFrameTabUtilSimple) end
+	if AuctionFrameTabUtilBeanCounter then S:HandleTab(AuctionFrameTabUtilBeanCounter) end
 	AS:UnregisterEvent(name,self,"AUCTION_HOUSE_SHOW")
 end
 

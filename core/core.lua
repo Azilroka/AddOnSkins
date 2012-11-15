@@ -127,46 +127,6 @@ function AS:UnregisterEvent(skinName,event)
 	end
 end
 
-function AS:SkinButton(button,strip)
-	S:HandleButton(button,strip)
-end
-
-function AS:SkinScrollBar(bar)
-	S:HandleScrollBar(bar)
-end
-
-function AS:SkinTab(tab)
-	S:HandleTab(tab)
-end
-
-function AS:SkinNextPrevButton(button,horizontal)
-	S:HandleNextPrevButton(button,horizontal)
-end
-
-function AS:SkinRotateButton(button)
-	S:HandleRotateButton(button)
-end
-
-function AS:SkinEditBox(editBox)
-	S:HandleEditBox(editBox)
-end
-
-function AS:SkinDropDownBox(box, width)
-	S:HandleDropDownBox(box, width)
-end
-
-function AS:SkinCheckBox(checkBox)
-	S:HandleCheckBox(checkBox)
-end
-
-function AS:SkinCloseButton(button)
-	S:HandleCloseButton(button)
-end
-
-function AS:SkinSliderFrame(frame, height)
-	S:HandleSliderFrame(frame, height)
-end
-
 function AS:RegisterForPetBattleHide(frame)
 	if frame.IsVisible and frame:GetName() then
 		AS.FrameLocks[frame:GetName()] = { shown = false }

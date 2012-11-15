@@ -1,6 +1,6 @@
-﻿
-local E, L, V, P, G,_ = unpack(ElvUI)
+﻿local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local function desat(self, event, ...)
 	for i = 1, 15 do
@@ -65,11 +65,11 @@ local function SkinFactionizer(self)
 		end			
 
 		for _, button in pairs(buttons) do
-			AS:SkinButton(_G[button])
+			S:HandleButton(_G[button])
 		end		
 
 		for _, checkbox in pairs(checkboxes) do
-			AS:SkinCheckBox(_G[checkbox])
+			S:HandleCheckBox(_G[checkbox])
 		end	
 
 		FIZ_ReputationDetailAtWarCheckBox:SetScript("OnUpdate", function(frame)
@@ -89,10 +89,10 @@ local function SkinFactionizer(self)
 
 	FIZ_OptionsFrame:CreateShadow("Default")
 
-	AS:SkinCloseButton(FIZ_OptionsFrameClose)
-	AS:SkinCloseButton(FIZ_ReputationDetailCloseButton)
+	S:HandleCloseButton(FIZ_OptionsFrameClose)
+	S:HandleCloseButton(FIZ_ReputationDetailCloseButton)
 
-	AS:SkinScrollBar(FIZ_UpdateListScrollFrameScrollBar, 5)
+	S:HandleScrollBar(FIZ_UpdateListScrollFrameScrollBar, 5)
 
 	repFrame = _G["ReputationFrame"]
 	repFrame:SetScript("OnUpdate", desat)

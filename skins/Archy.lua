@@ -1,6 +1,8 @@
 
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
+
 local name = "ArchySkin"
 
 local function SkinArchy(self)
@@ -73,9 +75,9 @@ local function SkinArchy(self)
 	if ArchyArtifactFrameSkillBar then
 		AS:SkinStatusBar(ArchyArtifactFrameSkillBar)	
 	end
-	AS:SkinButton(ArchyDistanceIndicatorFrameSurveyButton)
+	S:HandleButton(ArchyDistanceIndicatorFrameSurveyButton)
 	ArchyDistanceIndicatorFrameSurveyButton:SetFrameLevel(ArchyDistanceIndicatorFrameSurveyButton:GetFrameLevel() + 5)
-	AS:SkinButton(ArchyDistanceIndicatorFrameCrateButton)
+	S:HandleButton(ArchyDistanceIndicatorFrameCrateButton)
  	ArchyDistanceIndicatorFrameCrateButton:SetFrameLevel(ArchyDistanceIndicatorFrameCrateButton:GetFrameLevel() + 5)
 end
 

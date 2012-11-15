@@ -1,6 +1,6 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "TinyDPSSkin"
 local function SkinTinyDps(self)
@@ -39,13 +39,16 @@ local function SkinTinyDps(self)
 		})
 		tdpsStatusBar:SetStatusBarTexture(E["media"].normTex)
 	end
+
+	if(AS:CheckOption("EmbedTDPS")) then
+		EmbedTDPS()
+	end	
 end
 AS:RegisterSkin(name,SkinTinyDps)
 
 function EmbedTDPS()
 	if not IsAddOnLoaded("TinyDPS") then AS:DisableOption("EmbedTDPS") return end
-	if TukuiChatBackgroundRight then tdpsFrame:SetParent(TukuiChatBackgroundRight) end
-	if RightChatPanel then tdpsFrame:SetParent(RightChatPanel) end
+	tdpsFrame:SetParent(RightChatPanel)
 	tdpsFrame:SetFrameStrata("MEDIUM")
 	tdpsFrame.spacing = 0
 	tdpsFrame.barHeight = 14
@@ -65,11 +68,3 @@ function EmbedTDPSResize()
 	tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
 	tdpsRefresh()
 end
-
-local TinyDPS_Embed = CreateFrame("Frame",nil)
-	TinyDPS_Embed:RegisterEvent("PLAYER_ENTERING_WORLD")
-	TinyDPS_Embed:SetScript("OnEvent", function(self)
-		if(AS:CheckOption("EmbedTDPS")) then
-			EmbedTDPS()
-		end
-	end)

@@ -1,6 +1,6 @@
-﻿
-local E, L, V, P, G,_ = unpack(ElvUI)
+﻿local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local function DoDis(self, event, ...)
 
@@ -18,7 +18,7 @@ local function SkinOptions(self, event, ...)-- Skin the Options Frame
 
 		for i = 1, 9 do
 			local cbox = _G["LightHeaded_Panel_Toggle"..i]
-			AS:SkinCheckBox(cbox)
+			S:HandleCheckBox(cbox)
 		end
 
 		local buttons = {
@@ -27,7 +27,7 @@ local function SkinOptions(self, event, ...)-- Skin the Options Frame
 			}
 	
 		for _, button in pairs(buttons) do
-			AS:SkinButton(_G[button])
+			S:HandleButton(_G[button])
 		end
 		
 		LightHeaded_Panel_Button2:Disable()
@@ -56,12 +56,12 @@ local function SkinLightHeaded(self)
 	
 	local lhframe = LightHeadedFrame		
 	lhframe.close:Hide()
-	AS:SkinCloseButton(lhframe.close)
+	S:HandleCloseButton(lhframe.close)
 	lhframe.handle:Hide()
 	
 	local lhframe = LightHeadedFrameSub
-	AS:SkinNextPrevButton(lhframe.prev)
-	AS:SkinNextPrevButton(lhframe.next)
+	S:HandleNextPrevButton(lhframe.prev)
+	S:HandleNextPrevButton(lhframe.next)
 
 	lhframe.prev:SetWidth(16)
 	lhframe.prev:SetHeight(16)
@@ -70,7 +70,7 @@ local function SkinLightHeaded(self)
 	lhframe.prev:SetPoint("RIGHT", lhframe.page, "LEFT", -25, 0)
 	lhframe.next:SetPoint("LEFT", lhframe.page, "RIGHT", 25, 0)
 
-	AS:SkinScrollBar(LightHeadedScrollFrameScrollBar, 5)
+	S:HandleScrollBar(LightHeadedScrollFrameScrollBar, 5)
 
 	lhframe.title:SetTextColor(23/255, 132/255, 209/255)	
 

@@ -1,6 +1,6 @@
-
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "MinimalArchaeologySkin"
 local function SkinMinimalArchaeology(self)
@@ -14,30 +14,30 @@ local function SkinMinimalArchaeology(self)
 	AS:Desaturate(MinArchMainButtonOpenADI)
 	AS:Desaturate(MinArchMainButtonOpenHist)
 	AS:Desaturate(MinArchMainButtonOpenArch)
-	AS:SkinCloseButton(MinArchMainButtonClose)
+	S:HandleCloseButton(MinArchMainButtonClose)
 	MinArchMainButtonOpenADI:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", -66, -1)
 	MinArchMainButtonOpenHist:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", -46, -1)
 	MinArchMainButtonOpenArch:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", -26, -1)
 	MinArchMainButtonClose:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", 2, 2)
 
 	AS:SkinFrame(MinArchDigsites)
-	AS:SkinCloseButton(MinArchDigsitesButtonClose)
+	S:HandleCloseButton(MinArchDigsitesButtonClose)
 
 	AS:SkinFrame(MinArchHist)
-	AS:SkinCloseButton(MinArchHistButtonClose)
+	S:HandleCloseButton(MinArchHistButtonClose)
 
 	for i = 1, 10 do
 		AS:SkinStatusBar(_G["MinArchMainArtifactBar"..i])
 		_G["MinArchMainArtifactBar"..i]:SetStatusBarColor(1.0, 0.4, 0)
-		AS:SkinButton(_G["MinArchMainArtifactBar"..i.."ButtonSolve"])
+		S:HandleButton(_G["MinArchMainArtifactBar"..i.."ButtonSolve"])
 		_G["MinArchMainArtifactBar"..i.."ButtonSolve"].text = _G["MinArchMainArtifactBar"..i.."ButtonSolve"]:CreateFontString(nil, "OVERLAY")
 		_G["MinArchMainArtifactBar"..i.."ButtonSolve"].text:SetFont(font, fontSize, "OUTLINE")
 		_G["MinArchMainArtifactBar"..i.."ButtonSolve"].text:SetPoint("CENTER", 1, 1)
 		_G["MinArchMainArtifactBar"..i.."ButtonSolve"].text:SetText("Solve")
 		--Min Arch Options
-		AS:SkinCheckBox(_G["MinArchOptionPanelHideArtifact"..i])
-		AS:SkinCheckBox(_G["MinArchOptionPanelFragmentCap"..i])
-		if _G["MinArchOptionPanelUseKeystones"..i] then AS:SkinCheckBox(_G["MinArchOptionPanelUseKeystones"..i]) end
+		S:HandleCheckBox(_G["MinArchOptionPanelHideArtifact"..i])
+		S:HandleCheckBox(_G["MinArchOptionPanelFragmentCap"..i])
+		if _G["MinArchOptionPanelUseKeystones"..i] then S:HandleCheckBox(_G["MinArchOptionPanelUseKeystones"..i]) end
 	end
 
 	local checkbox = {
@@ -49,10 +49,10 @@ local function SkinMinimalArchaeology(self)
 	}
 
 	for _,boxes in pairs(checkbox) do
-		AS:SkinCheckBox(boxes)
+		S:HandleCheckBox(boxes)
 	end
 
-	--AS:SkinSliderFrame(MinArchOptionPanelFrameScaleSlider)
+	--S:HandleSliderFrame(MinArchOptionPanelFrameScaleSlider)
 	MinArchOptionPanelFrameScaleSliderLow:ClearAllPoints()
 	MinArchOptionPanelFrameScaleSliderLow:SetPoint("BOTTOMLEFT", MinArchOptionPanelFrameScale, "BOTTOMLEFT", 3, 3)
 	MinArchOptionPanelFrameScaleSliderHigh:ClearAllPoints()

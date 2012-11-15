@@ -1,5 +1,6 @@
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "ACPSkin"
 local function cbResize(self, event, ...)
@@ -41,13 +42,13 @@ local function SkinACP(self)
 	}
 
 	for _, button in pairs(buttons) do
-		AS:SkinButton(_G[button])
+		S:HandleButton(_G[button])
 	end	
 	for i = 1, 20 do
-		AS:SkinButton(_G["ACP_AddonListEntry"..i.."LoadNow"])
+		S:HandleButton(_G["ACP_AddonListEntry"..i.."LoadNow"])
 	end	
 
-	AS:SkinCloseButton(ACP_AddonListCloseButton)
+	S:HandleCloseButton(ACP_AddonListCloseButton)
 
 	for i=1,20,1 do
 		local ACP_OnLoad = _G["ACP_AddonList"]
@@ -55,12 +56,12 @@ local function SkinACP(self)
 	end
 
 	for i = 1, 20 do
-		AS:SkinCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
+		S:HandleCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
 	end
-	AS:SkinCheckBox(ACP_AddonList_NoRecurse)
+	S:HandleCheckBox(ACP_AddonList_NoRecurse)
 
-	AS:SkinScrollBar(ACP_AddonList_ScrollFrameScrollBar)
-	AS:SkinDropDownBox(ACP_AddonListSortDropDown)
+	S:HandleScrollBar(ACP_AddonList_ScrollFrameScrollBar)
+	S:HandleDropDownBox(ACP_AddonListSortDropDown)
 	ACP_AddonListSortDropDown:Width(130)
 
 	ACP_AddonList_ScrollFrame:SetWidth(590)

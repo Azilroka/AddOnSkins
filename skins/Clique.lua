@@ -1,6 +1,7 @@
 
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local S = E:GetModule('Skins')
 
 local name = "CliqueSkin"
 local function SkinClique(self)
@@ -41,12 +42,12 @@ local function SkinClique(self)
 	}
 	for _, object in pairs(CliqueButtons) do
 		_G[object]:StripTextures(True)
-		AS:SkinButton(_G[object])
+		S:HandleButton(_G[object])
 	end
 	
-	AS:SkinCloseButton(CliqueConfigCloseButton)
-	if CliqueDialog.CloseButton then AS:SkinCloseButton(CliqueDialog.CloseButton) end
-	if CliqueDialogCloseButton then AS:SkinCloseButton(CliqueDialogCloseButton) end
+	S:HandleCloseButton(CliqueConfigCloseButton)
+	if CliqueDialog.CloseButton then S:HandleCloseButton(CliqueDialog.CloseButton) end
+	if CliqueDialogCloseButton then S:HandleCloseButton(CliqueDialogCloseButton) end
 
 	local CliqueTabs = {
 	"CliqueConfigPage1Column1",

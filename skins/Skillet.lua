@@ -1,7 +1,6 @@
-﻿if not(IsAddOnLoaded("ElvUI") or IsAddOnLoaded("Tukui")) or not IsAddOnLoaded("Skillet") then return end
-local E, L, V, P, G,_ = unpack(ElvUI)
+﻿local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
-local Skillet = _G.Skillet
+local S = E:GetModule('Skins')
 
 function SetModifiedBackdrop(self)
 	if self.backdrop then self = self.backdrop end
@@ -14,6 +13,7 @@ function SetOriginalBackdrop(self)
 end
 
 local function SkinButton(ButtonOrSpellID) -- Thanks to SinaC
+	local Skillet = _G.Skillet
 	if not ButtonOrSpellID then return end
 	local button
 		if type(ButtonOrSpellID) == "number" then
@@ -122,7 +122,7 @@ local function SkinIcon(self)
 	SkinButton(SkilletRecipeDifficultyButton)
 	SkinButton(SkilletExpandAllButton)
 	SkinButton(SkilletCollapseAllButton)
-	AS:SkinButton(SkilletShowOptionsButton)
+	S:HandleButton(SkilletShowOptionsButton)
 	SkilletShowOptionsButton:SetHeight(16)
 	SkilletShowOptionsButton:SetWidth(12)
 	SkilletShowOptionsButton:SetPoint("RIGHT", SkilletFrameCloseButton, "LEFT", 3, 0)
@@ -143,18 +143,18 @@ local function SkinShopping(self)
 	SkilletShoppingList:SetTemplate("Transparent")
 	SkilletShoppingListParent:StripTextures()
 	SkilletShoppingListParent:SetTemplate("Default")
-	AS:SkinCloseButton(SkilletShoppingListCloseButton)
-	AS:SkinCheckBox(SkilletShowQueuesFromAllAlts)
-	AS:SkinScrollBar(SkilletShoppingListListScrollBar)
+	S:HandleCloseButton(SkilletShoppingListCloseButton)
+	S:HandleCheckBox(SkilletShowQueuesFromAllAlts)
+	S:HandleScrollBar(SkilletShoppingListListScrollBar)
 end
 
 local function SkinPluginButtons(self)
 
 		if SkilletPluginDropdown1 then
-			AS:SkinButton(_G["SkilletPluginDropdown1"])
+			S:HandleButton(_G["SkilletPluginDropdown1"])
 		end
 		if SkilletPluginDropdown2 then
-			AS:SkinButton(_G["SkilletPluginDropdown2"])
+			S:HandleButton(_G["SkilletPluginDropdown2"])
 		end
 end	
 
@@ -199,7 +199,7 @@ local function SkilletFrameOnShow(self)
 					_G[object]:SetTemplate("Transparent")
 		end	
 
-		AS:SkinCloseButton(SkilletNotesCloseButton)
+		S:HandleCloseButton(SkilletNotesCloseButton)
 
 		SkilletSkillListParent:SetPoint("TOPLEFT", SkilletFrame, "TOPLEFT", 5, -100)
 		SkilletRankFrame:SetPoint("TOPRIGHT", SkilletFrame, "TOPRIGHT", -12, -57)
@@ -225,11 +225,11 @@ local function SkilletFrameOnShow(self)
 		SkilletTradeskillTooltip:StripTextures()
 		SkilletTradeskillTooltip:SetTemplate("Default")
 
-		AS:SkinScrollBar(SkilletQueueListScrollBar)
+		S:HandleScrollBar(SkilletQueueListScrollBar)
 
 	for i=1,3 do
 		local queDelete = _G["SkilletQueueButton"..i.."DeleteButton"]
-			AS:SkinButton(queDelete)
+			S:HandleButton(queDelete)
 			queDelete:SetWidth(14)
 			queDelete:SetHeight(14)
 	end
@@ -241,18 +241,18 @@ local function SkilletFrameOnShow(self)
 
 		for i=1,4 do 
 			tabs = _G["Enchantrix_BarkerOptions_FrameTab"..i]
-				AS:SkinTab(tabs)
+				S:HandleTab(tabs)
 		end
 
 		Enchantrix_BarkerOptions_FrameTab1:ClearAllPoints()
 		Enchantrix_BarkerOptions_FrameTab1:SetPoint("TOPLEFT", Enchantrix_BarkerOptions_Frame, "BOTTOMLEFT", 11, 1)
 		Enchantrix_BarkerOptions_CloseButton:SetPoint("TOPRIGHT", Enchantrix_BarkerOptions_Frame, "TOPRIGHT", -5, -2)
 
-		AS:SkinButton(Enchantrix_BarkerOptionsBark_Button)
-		AS:SkinButton(Enchantrix_BarkerOptionsReset_Button)
-		AS:SkinButton(Enchantrix_BarkerOptionsTest_Button)
+		S:HandleButton(Enchantrix_BarkerOptionsBark_Button)
+		S:HandleButton(Enchantrix_BarkerOptionsReset_Button)
+		S:HandleButton(Enchantrix_BarkerOptionsTest_Button)
 
-		AS:SkinCloseButton(Enchantrix_BarkerOptions_CloseButton)
+		S:HandleCloseButton(Enchantrix_BarkerOptions_CloseButton)
 	end
 end
 
@@ -279,6 +279,7 @@ local function SkinReagentIcon(self, event, ...)
 end
 
 local function SkilletFrameOnUpdate(self, event, ...)
+	local Skillet = _G.Skillet
 
 	SkilletRecipeNotesButton:SetPoint("BOTTOMRIGHT", SkilletReagentParent, "TOPRIGHT", 0, 2)
 	SkilletQueueManagementButton:SetPoint("RIGHT", SkilletRecipeNotesButton, "LEFT", -5, 0)
@@ -313,8 +314,7 @@ local function SkilletFrameOnUpdate(self, event, ...)
 	SkinGuildRecipes(53428)-- Runeforging
 	SkinGuildRecipes(3273) -- Firstaid
 	SkinGuildRecipes(2550) -- Cooking
-
-	local Skillet = _G.Skillet
+	
 	x = 0
 	local player = UnitName("player")
 	icon = "SkilletFrameTradeButtons-"..player
@@ -350,7 +350,7 @@ local function SkilletFrameOnUpdate(self, event, ...)
 	if SkilletQueueButton13DeleteButton then
 		for i=1,13 do
 			local queDelete = _G["SkilletQueueButton"..i.."DeleteButton"]
-			AS:SkinButton(queDelete)
+			S:HandleButton(queDelete)
 			queDelete:SetWidth(14)
 			queDelete:SetHeight(14)
 		end
@@ -379,15 +379,15 @@ local function SkinSkillet(Self)
 		}
 
 		for _, button in pairs(buttons) do
-			AS:SkinButton(_G[button])
+			S:HandleButton(_G[button])
 		end	
 
-		AS:SkinCloseButton(SkilletFrameCloseButton)
-		AS:SkinCloseButton(SkilletStandalonQueueCloseButton)
+		S:HandleCloseButton(SkilletFrameCloseButton)
+		S:HandleCloseButton(SkilletStandalonQueueCloseButton)
 
-		AS:SkinDropDownBox(SkilletRecipeGroupDropdown)
-		AS:SkinDropDownBox(SkilletSortDropdown)
-		AS:SkinDropDownBox(SkilletQueueLoadDropdown)
+		S:HandleDropDownBox(SkilletRecipeGroupDropdown)
+		S:HandleDropDownBox(SkilletSortDropdown)
+		S:HandleDropDownBox(SkilletQueueLoadDropdown)
 
 		AS:Desaturate(SkilletSearchFilterClear)
 
@@ -411,20 +411,20 @@ local function SkinSkillet(Self)
 			SkilletSortDescButton.texture:SetVertexColor(unpack(E["media"].bordercolor))
 		end
 
-		AS:SkinNextPrevButton(SkilletRecipeGroupOperations)
+		S:HandleNextPrevButton(SkilletRecipeGroupOperations)
 
-		AS:SkinEditBox(SkilletItemCountInputBox)
-		AS:SkinEditBox(SkillButtonNameEdit)
-		AS:SkinEditBox(GroupButtonNameEdit)
-		AS:SkinEditBox(SkilletFilterBox)
+		S:HandleEditBox(SkilletItemCountInputBox)
+		S:HandleEditBox(SkillButtonNameEdit)
+		S:HandleEditBox(GroupButtonNameEdit)
+		S:HandleEditBox(SkilletFilterBox)
 		SkilletFilterBox:SetHeight(20)
-		AS:SkinEditBox(SkilletQueueSaveEditBox)
+		S:HandleEditBox(SkilletQueueSaveEditBox)
 	
 		SkilletRankFrameBorder:StripTextures()
 		AS:SkinStatusBar(SkilletRankFrame)
 		SkilletRankFrame:SetHeight(10)		
 	
-		AS:SkinScrollBar(SkilletSkillListScrollBar, 5)
+		S:HandleScrollBar(SkilletSkillListScrollBar, 5)
 
 		local SkilletOnload = _G["SkilletSkillListParent"]
 		SkilletOnload:SetScript("OnShow", SkilletFrameOnShow)
