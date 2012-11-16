@@ -322,11 +322,17 @@ function AS:GenerateOptions()
 						name = 'Settings to control addons embedded in right chat panel',
 						order = 1
 					},
+					EmbedRight = {
+						type = 'toggle',
+						name = 'Embed to Right Chat Panel',
+						desc = 'Embed to right chat panel, otherwise left chat panel',
+						order = 2
+					},
 					EmbedRecount = {
 						type = 'toggle',
 						name = 'Recount',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 2,
+						order = 3,
 						disabled = function() return not IsAddOnLoaded("Recount") end,
 					},
 					EmbedSkada = {
@@ -369,7 +375,7 @@ function AS:GenerateOptions()
 						desc = L['TOGGLESKIN_DESC'],
 						order = 11,
 						disabled = function() return not IsAddOnLoaded("SexyCooldown2") end,
-					}
+					},
 				}
 			}
 		}

@@ -140,8 +140,8 @@ function AS:EmbedRecount()
 	end
 	Recount:LockWindows(true)
 	Recount_MainWindow:ClearAllPoints()
-	self:EmbedRecountResize()
-	if RightChatPanel then Recount_MainWindow:SetParent(RightChatPanel) end
+	EmbedRecountResize()
+	if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then Recount_MainWindow:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
 	Recount.MainWindow:SetFrameStrata("HIGH")
 end
 

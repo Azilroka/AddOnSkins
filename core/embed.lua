@@ -7,7 +7,7 @@ EmbeddingWindow:SetFrameStrata("HIGH")
 EmbeddingWindow:Hide()
 
 function AS:EmbedWindowResize()
-	if not E.db.datatexts.rightChatPanel then
+	if (AS:CheckOption("EmbedRight") and not E.db.datatexts.rightChatPanel) or (not AS:CheckOption("EmbedRight") and not E.db.datatexts.leftChatPanel) then
 		RDTS = 22
 	else
 		RDTS = 0
@@ -15,12 +15,12 @@ function AS:EmbedWindowResize()
 
 	if not self.sle then
 		if E.PixelMode then
-			EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, -3) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 6),(RightChatPanel:GetHeight() - (28 - RDTS)))
+			EmbeddingWindow:SetPoint("TOP", (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "TOP", 0, -3) EmbeddingWindow:Size(((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetWidth() - 6),((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetHeight() - (28 - RDTS)))
 		else
-			EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, -5) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 10),(RightChatPanel:GetHeight() - (32 - RDTS)))
+			EmbeddingWindow:SetPoint("TOP", (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "TOP", 0, -5) EmbeddingWindow:Size(((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetWidth() - 10),((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetHeight() - (32 - RDTS)))
 		end
 	else
-		EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, 0) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 1),RightChatPanel:GetHeight() - 1)
+		EmbeddingWindow:SetPoint("TOP", (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "TOP", 0, 0) EmbeddingWindow:Size(((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetWidth() - 1),(AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetHeight() - 1)
 	end
 	
 	if (self.CheckOption("EmbedRO","Recount","Omen")) then self:EmbedRecountOmenResize() end
@@ -67,9 +67,9 @@ function AS:EmbedRecountOmen()
 	OmenAnchor:ClearAllPoints()
 	Recount:LockWindows(true)
 	Recount_MainWindow:ClearAllPoints()
-	if RightChatPanel then
-		OmenBarList:SetParent(RightChatPanel)
-		Recount_MainWindow:SetParent(RightChatPanel)
+	if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then
+		OmenBarList:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel))
+		Recount_MainWindow:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel))
 	end
 	
 	Recount_MainWindow:SetFrameStrata("HIGH")
@@ -97,7 +97,7 @@ end
 
 function AS:EmbedInit()
 	self:EmbedWindowResize()
-	hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) AS:EmbedWindowResize() end)
+	hooksecurefunc((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "SetSize", function(self, width, height) AS:EmbedWindowResize() end)
 
 	RightChatToggleButton:SetScript("OnClick", function(self, btn)
 			if btn == 'RightButton' then

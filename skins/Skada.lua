@@ -85,7 +85,7 @@ local function SkinSkada(self)
 			win.bargroup.button:SetFrameStrata("HIGH")
 			win.bargroup.button:SetFrameLevel(5)	
 			win.bargroup:SetFrameStrata("HIGH")
-			if RightChatPanel then win.bargroup:SetParent(RightChatPanel) end
+			if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then win.bargroup:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
 		end
 	end
 
@@ -122,7 +122,7 @@ local function SkinSkada(self)
 	end
 
 	if(AS:CheckOption("EmbedSkada")) then
-		hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) AS:EmbedSkada() end)
+		hooksecurefunc((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "SetSize", function(self, width, height) AS:EmbedSkada() end)
 		AS:EmbedSkada()
 	end
 end

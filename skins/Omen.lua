@@ -38,7 +38,7 @@ function AS:EmbedOmen()
 		OmenAnchor:ClearAllPoints()
 		OmenBarList:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
 		OmenBarList:SetPoint("BOTTOMRIGHT", EmbeddingWindow, "BOTTOMRIGHT", 0, 2)
-		if RightChatPanel then OmenBarList:SetParent(RightChatPanel) end
+		if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then OmenBarList:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
 		OmenBarList:SetFrameStrata("HIGH")
 end
 

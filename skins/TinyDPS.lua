@@ -48,7 +48,7 @@ AS:RegisterSkin(name,SkinTinyDps)
 
 function AS:EmbedTDPS()
 	if not IsAddOnLoaded("TinyDPS") then AS:DisableOption("EmbedTDPS") return end
-	tdpsFrame:SetParent(RightChatPanel)
+	tdpsFrame:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel))
 	tdpsFrame:SetFrameStrata("MEDIUM")
 	tdpsFrame.spacing = 0
 	tdpsFrame.barHeight = 14
