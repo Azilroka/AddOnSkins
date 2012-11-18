@@ -7,11 +7,11 @@ local function SkinShieldMonitor(self)
 
 	AS:SkinFrameD(shieldmonitor_Frame)
 	shieldmonitor_Frame:HookScript("OnShow", function(self)
-		AS:SkinFrameD(self)
+		self:SetTemplate()
 	end)
 	shieldmonitor_Frame:RegisterEvent("UNIT_AURA")
 	shieldmonitor_Frame:HookScript("OnEvent", function(self)
-		AS:SkinFrameD(self)
+		self:SetTemplate()
 	end)
 	shieldmonitor_Frame:SetSize(209, 20)
 
