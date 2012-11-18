@@ -5,7 +5,7 @@ local S = E:GetModule('Skins')
 local name = "ShieldMonitorSkin"
 local function SkinShieldMonitor(self)
 
-	AS:SkinFrameD(shieldmonitor_Frame)
+	shieldmonitor_Frame:SetTemplate()
 	shieldmonitor_Frame:HookScript("OnShow", function(self)
 		self:SetTemplate()
 	end)
