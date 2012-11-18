@@ -99,8 +99,8 @@ local function LoadSkin()
 						if (AS:CheckOption("DBMSkinHalf")) then name:Point("BOTTOMLEFT", frame, "TOPLEFT", 0, 4) end
 						name:SetWidth(165)
 						name:SetHeight(8)
-						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(nil, 12, 'OUTLINE') end
-						if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, E.private.sle.dbm.size, 'OUTLINE') end
+						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE') end
+						if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE') end
 						name:SetJustifyH("LEFT")
 						name:SetShadowColor(0, 0, 0, 0)
 						name.SetFont = E.noop
@@ -111,8 +111,8 @@ local function LoadSkin()
 						timer:ClearAllPoints()
 						timer:Point("RIGHT", frame, "RIGHT", -4, 0)
 						if (AS:CheckOption("DBMSkinHalf")) then timer:Point("BOTTOMRIGHT", frame, "TOPRIGHT", -1, 2) end
-						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(nil, 12, 'OUTLINE') end
-						if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, E.private.sle.dbm.size, 'OUTLINE') end
+						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE') end
+						if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE') end
 						timer:SetJustifyH("RIGHT")
 						timer:SetShadowColor(0, 0, 0, 0)
 						timer.SetFont = E.noop
@@ -139,8 +139,8 @@ local function LoadSkin()
 		if not anchor.styled then
 			local header={anchor:GetRegions()}
 				if header[1]:IsObjectType("FontString") then
-					if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then header[1]:FontTemplate(nil, 12, 'OUTLINE') end
-					if IsAddOnLoaded("ElvUI_SLE") then header[1]:FontTemplate(nil, 8, 'OUTLINE') end
+					if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then header[1]:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE') end
+					if IsAddOnLoaded("ElvUI_SLE") then header[1]:FontTemplate(DBT_SavedOptions["DBM"].Font, 8, 'OUTLINE') end
 					header[1]:SetTextColor(1,1,1,1)
 					header[1]:SetShadowColor(0, 0, 0, 0)
 					anchor.styled=true	
@@ -199,8 +199,8 @@ local function LoadSkin()
 				if (AS:CheckOption("DBMSkinHalf")) then
 					name:Point("BOTTOMLEFT", bar, "TOPLEFT", 1, 4)
 				end
-				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(nil, 12, 'OUTLINE') end
-				if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(nil, E.private.sle.dbm.size, 'OUTLINE') end
+				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE') end
+				if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE') end
 				name:SetJustifyH("LEFT")
 				name:SetShadowColor(0, 0, 0, 0)
 				name.styled=true
@@ -210,8 +210,8 @@ local function LoadSkin()
 				timer:ClearAllPoints()
 				timer:Point("RIGHT", bar, "RIGHT", -4, 0)
 				if (AS:CheckOption("DBMSkinHalf")) then timer:Point("BOTTOMLEFT", bar, "TOPLEFT", 0, 2) end
-				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(nil, 12, 'OUTLINE') end
-				if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(nil, E.private.sle.dbm.size, 'OUTLINE') end
+				if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE') end
+				if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE') end
 				timer:SetJustifyH("RIGHT")
 				timer:SetShadowColor(0, 0, 0, 0)
 				timer.styled=true
@@ -271,6 +271,6 @@ local function SkinDBM(self)
 	--DBT_SavedOptions["DBM"].Scale = 1
 	--DBT_SavedOptions["DBM"].HugeScale = 1
 	DBT_SavedOptions["DBM"].Texture = E.media.normTex
-	DBT_SavedOptions["DBM"].Font = "ElvUI Font"
+	--DBT_SavedOptions["DBM"].Font = "ElvUI Font"
 end
 AS:RegisterSkin(name,SkinDBM)
