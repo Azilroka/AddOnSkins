@@ -66,7 +66,7 @@ local function AuctioneerSkin(self,event)
 	if AuctionFrameTabUtilSearchUi then S:HandleTab(AuctionFrameTabUtilSearchUi) end
 	if AuctionFrameTabUtilSimple then S:HandleTab(AuctionFrameTabUtilSimple) end
 	if AuctionFrameTabUtilBeanCounter then S:HandleTab(AuctionFrameTabUtilBeanCounter) end
-	AS:UnregisterEvent(name,self,"AUCTION_HOUSE_SHOW")
+	self:UnregisterEvent("AUCTION_HOUSE_SHOW")
 end
 
 AS:RegisterSkin(name,AuctioneerSkin,'AUCTION_HOUSE_SHOW')

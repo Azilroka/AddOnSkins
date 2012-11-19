@@ -172,7 +172,7 @@ local function SkinATSW(self)
 	S:HandleButton(ATSWScanDelayFrameSkipButton)
 	S:HandleButton(ATSWScanDelayFrameAbortButton)
 	AS:SkinFrame(ATSWScanDelayFrame)
-	AS:SkinCCStatusBar(ATSWScanDelayFrameBar)
+	AS:SkinStatusBar(ATSWScanDelayFrameBar, true)
 end
 
 AS:RegisterSkin(name,SkinATSW)
