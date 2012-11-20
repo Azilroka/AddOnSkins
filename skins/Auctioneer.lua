@@ -5,6 +5,7 @@ local S = E:GetModule('Skins')
 local name = 'AuctioneerSkin'
 local function AuctioneerSkin(self,event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
+	if not auctioneerskinned then
 	AuctionsCancelAuctionButton:Point("RIGHT", AuctionFrameMoneyFrame, "RIGHT", 554, 0)
 	AuctionsCloseButton:ClearAllPoints()
 	AuctionsCloseButton:Point("RIGHT", AuctionsCancelAuctionButton, "RIGHT", 86, 0)
@@ -66,7 +67,9 @@ local function AuctioneerSkin(self,event)
 	if AuctionFrameTabUtilSearchUi then S:HandleTab(AuctionFrameTabUtilSearchUi) end
 	if AuctionFrameTabUtilSimple then S:HandleTab(AuctionFrameTabUtilSimple) end
 	if AuctionFrameTabUtilBeanCounter then S:HandleTab(AuctionFrameTabUtilBeanCounter) end
-	AS:UnregisterEvent(name,self,"AUCTION_HOUSE_SHOW")
+		auctioneerskinned = true
+	end
+	--AS:UnregisterEvent(name,self,"AUCTION_HOUSE_SHOW")
 end
 
 AS:RegisterSkin(name,AuctioneerSkin,'AUCTION_HOUSE_SHOW')

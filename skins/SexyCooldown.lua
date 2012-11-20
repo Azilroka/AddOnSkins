@@ -48,7 +48,7 @@ end
 -- Skin Icons
 local function SkinSexyCooldownIcon(bar, icon)
 	if not icon.skinned then
-		AS:SkinFrame(icon)
+		AS:SkinFrame(icon, true)
 		icon.overlay:CreateBackdrop("Default")
 		icon.tex:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 		icon.tex.SetTexCoord = E.noop

@@ -133,36 +133,34 @@ function AS:RegisterForPetBattleHide(frame)
 	end
 end
 
-function AS:SkinFrame(frame)
-	frame:StripTextures(true)
+function AS:SkinFrame(frame, override)
+	if not override then frame:StripTextures(true) end
 	frame:SetTemplate("Transparent")
 	self:RegisterForPetBattleHide(frame)
 end
 
-function AS:SkinBackdropFrame(frame)
-	frame:StripTextures(true)
+function AS:SkinBackdropFrame(frame, override)
+	if not override then frame:StripTextures(true) end
 	frame:CreateBackdrop("Transparent")
 	self:RegisterForPetBattleHide(frame)
 end
 
-function AS:SkinFrameD(frame)
-	frame:StripTextures(true)
+function AS:SkinFrameD(frame, override)
+	if not override then frame:StripTextures(true) end
 	frame:SetTemplate("Default")
 	self:RegisterForPetBattleHide(frame)
 end
 
-function AS:SkinStatusBar(bar)
+function AS:SkinStatusBar(bar, ClassColor)
 	bar:StripTextures(true)
-	bar:CreateBackdrop()
 	bar:SetStatusBarTexture(E["media"].normTex)
-end
-
-function AS:SkinCCStatusBar(bar)
-	bar:StripTextures(true)
-	bar:CreateBackdrop("ClassColor")
-	bar:SetStatusBarTexture(E["media"].normTex)
-	local color = RAID_CLASS_COLORS[AS.ccolor]
-	bar:SetStatusBarColor(color.r, color.g, color.b)
+	if ClassColor then
+		bar:CreateBackdrop("ClassColor")
+		local color = RAID_CLASS_COLORS[AS.ccolor]
+		bar:SetStatusBarColor(color.r, color.g, color.b)
+	else
+		bar:CreateBackdrop()
+	end
 end
 
 function AS:Desaturate(f, point)

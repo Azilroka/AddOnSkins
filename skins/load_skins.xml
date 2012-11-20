@@ -51,6 +51,7 @@
 	<Script file="Reforgenator.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
 	<Script file="SexyCooldown.lua"/>
+	<Script file="ShieldMonitor.lua"/>
 	<Script file="Skada.lua"/>
 	<Script file="Skillet.lua"/>
 	<Script file="SpineCounter.lua"/>

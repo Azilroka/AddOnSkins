@@ -226,6 +226,10 @@ local Skins = {
 	["TomTomSkin"] = {
 		["addon"] = "TomTom",
 	},
+	["ShieldMonitorSkin"] = {
+		["buttonText"] = "Shield Monitor",
+		["addon"] = "shieldmonitor",
+	},
 }
 
 AS.Skins = Skins
