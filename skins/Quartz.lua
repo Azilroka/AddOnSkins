@@ -22,10 +22,7 @@ local function SkinQuartz(self)
 		else
 			self.IconBorder:Show()
 		end
-		--self.Text:SetFont(UIFont, UIFontSize, "OUTLINE")
-		--self.TimeText:SetFont(UIFont, UIFontSize, "OUTLINE")
-		--self.Bar:SetStatusBarTexture(E["media"].normTex)
-		self.Bar:CreateBackdrop()
+		if not self.Bar.backdrop then self.Bar:CreateBackdrop() end
 	end
 
 	local template = Q3.CastBarTemplate.template
