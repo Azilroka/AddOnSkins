@@ -163,6 +163,34 @@ function AS:SkinStatusBar(bar, ClassColor)
 	end
 end
 
+function AS:SkinIconButton(self, strip, style, shrinkIcon)
+	if self.isSkinned then return end
+
+	if strip then self:StripTextures() end
+	self:CreateBackdrop("Default", true)
+	if style then self:StyleButton() end
+
+	local icon = self.icon
+	if self:GetName() and _G[self:GetName().."IconTexture"] then
+		icon = _G[self:GetName().."IconTexture"]
+	elseif self:GetName() and _G[self:GetName().."Icon"] then
+		icon = _G[self:GetName().."Icon"]
+	end
+
+	if icon then
+		icon:SetTexCoord(.08,.88,.08,.88)
+
+		if shrinkIcon then
+			self.backdrop:SetAllPoints()
+			icon:SetInside(self)
+		else
+			self.backdrop:SetOutside(icon)
+		end
+		icon:SetParent(self.backdrop)
+	end
+	self.isSkinned = true
+end
+
 function AS:Desaturate(f, point)
 	for i=1, f:GetNumRegions() do
 		local region = select(i, f:GetRegions())
