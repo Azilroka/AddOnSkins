@@ -140,14 +140,6 @@ local Skins = {
 	["PostalSkin"] = {
 		["addon"] = "Postal"
 	},
-	["PowerAurasSkin"] = {
-		["addon"] = "PowerAuras",
-	},
-	["PowerAurasIconsSkin"] = {
-		["buttonText"] = "PowerAuras Icons",
-		["addon"] = "PowerAuras",
-		["ui"] = "ElvUI"
-	},
 	["QuartzSkin"] = {
 		["addon"] = "Quartz"
 	},

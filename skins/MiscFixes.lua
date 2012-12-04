@@ -27,5 +27,13 @@ function SkinMisc()
 		AzCastBarPluginMirror:StripTextures() AzCastBarPluginMirror:CreateBackdrop()
 		AzCastBarPluginPet:StripTextures() AzCastBarPluginPet:CreateBackdrop()
 	end
+	for i = 1, 10 do
+		if _G["StaticPopup"..i] then
+			_G["StaticPopup"..i]:SetTemplate("Transparent")
+			if _G["StaticPopup"..i.."Button1"] then S:HandleButton(_G["StaticPopup"..i.."Button1"]) end
+			if _G["StaticPopup"..i.."Button2"] then S:HandleButton(_G["StaticPopup"..i.."Button2"]) end
+			if _G["StaticPopup"..i.."CloseButton"] then S:HandleCloseButton(_G["StaticPopup"..i.."CloseButton"]) end
+		end
+	end
 end
 AS:RegisterSkin(name, SkinMisc)

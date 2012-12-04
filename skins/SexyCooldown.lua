@@ -31,7 +31,7 @@ local function SkinSexyCooldownBar(bar)
 	
 		bar:Point('BOTTOM', ElvUI_Bar1, 'TOP', 0, 1)
 		bar:CreateShadow()
-		bar:SetHeight(ElvUI_Bar1:GetHeight())
+		bar:SetHeight(ElvUI_Bar1Button1:GetHeight())
 		if(AS:CheckOption("SortSettings")) then
 			bar:Point('BOTTOM', ElvUI_Bar1, 'TOP', 0, 4)
 			bar:SetHeight(ElvUI_Bar1:GetHeight()*.8)
