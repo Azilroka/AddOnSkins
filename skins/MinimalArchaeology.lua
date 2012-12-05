@@ -26,7 +26,7 @@ local function SkinMinimalArchaeology(self)
 	AS:SkinFrame(MinArchHist)
 	S:HandleCloseButton(MinArchHistButtonClose)
 
-	for i = 1, 10 do
+	for i = 1, 11 do
 		AS:SkinStatusBar(_G["MinArchMainArtifactBar"..i])
 		_G["MinArchMainArtifactBar"..i]:SetStatusBarColor(1.0, 0.4, 0)
 		S:HandleButton(_G["MinArchMainArtifactBar"..i.."ButtonSolve"])

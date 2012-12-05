@@ -30,4 +30,4 @@ local function SkinQuestCompletist(self)
 	qcMenuSlider:Height(256)
 end
 
-U.RegisterSkin(name,SkinQuestCompletist)
+AS:RegisterSkin(name,SkinQuestCompletist)
