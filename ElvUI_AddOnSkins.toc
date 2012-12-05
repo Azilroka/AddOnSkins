@@ -1,6 +1,6 @@
-## Interface: 50001
+## Interface: 50100
 ## Title: |cff1784d1ElvUI |rAddOnSkins
-## Version: 1.06
+## Version: 1.06a
 ## Author: Sortokk, Azilroka, others in Credits.txt
 ## RequiredDeps: ElvUI
 ## OptionalDeps: ElvUI_SLE

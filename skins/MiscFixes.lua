@@ -12,6 +12,17 @@ AS:RegisterSkin(name, SkinTomTom)
 
 name = "AlwaysTrue"
 function SkinMisc()
+	if IsAddOnLoaded("Numeration") and AS:CheckOption("NumerationSkin") then
+		AS:SkinFrame(NumerationFrame)
+	end
+	if IsAddOnLoaded("Critline") and AS:CheckOption("CritlineSkin") then
+		AS:SkinBackdropFrame(Critline.display)
+		Critline.display.backdrop:SetFrameStrata("BACKGROUND")
+	end	
+	if IsAddOnLoaded("InspectEquip") and AS:CheckOption("InspectEquipSkin") then
+		AS:SkinFrame(InspectEquip_InfoWindow)
+		S:HandleCloseButton(InspectEquip_InfoWindow_CloseButton)
+	end
 	if IsAddOnLoaded("stAddonManager") then
 		GameMenuFrame:HookScript("OnShow", function() if GameMenuButtonAddons then S:HandleButton(GameMenuButtonAddons) end end)
 	end

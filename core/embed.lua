@@ -98,7 +98,15 @@ end
 function AS:EmbedInit()
 	self:EmbedWindowResize()
 	hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) AS:EmbedWindowResize() end)
-
+	if AS:CheckOption("EmbedCoolLine") then
+		if not CoolLineDB.vertical then
+			CoolLine:SetPoint('BOTTOMRIGHT', ElvUI_Bar1, 'TOPRIGHT', 0, 4)
+			CoolLine:SetPoint("BOTTOMLEFT", ElvUI_Bar1, "TOPLEFT", 0, 4)
+		else
+			print("Sorry will not embed a vertical frame.")
+		end
+		CoolLine.updatelook()
+	end
 	RightChatToggleButton:SetScript("OnClick", function(self, btn)
 			if btn == 'RightButton' then
 			if (AS:CheckOption("EmbedRecount","Recount")) or (AS:CheckOption("EmbedRO")) then
