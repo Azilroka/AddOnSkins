@@ -442,7 +442,7 @@ function AS:GenerateOptions()
 						name = 'Attach CoolLine to action bar',
 						desc = L['TOGGLESKIN_DESC'],
 						order = 12,
-						disabled = function() return not IsAddOnLoaded("SexyCooldown2") end,
+						disabled = function() return not IsAddOnLoaded("CoolLine") end,
 					},
 				}
 			}
