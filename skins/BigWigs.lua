@@ -117,7 +117,7 @@ local applystyle = function(bar)
 	bar.candyBarBar:SetAllPoints(bar)
 	bar.candyBarBar.OldSetPoint = bar.candyBarBar.SetPoint
 	bar.candyBarBar.SetPoint=E.noop
-	bar.candyBarBar:SetStatusBarTexture(E["media"].normTex)
+	bar.candyBarBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 	bar.candyBarBackground:SetTexture(unpack(E.media.backdropcolor))
 
 	-- setup icon positions and other things

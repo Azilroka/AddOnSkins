@@ -49,7 +49,7 @@ local function SkinOmen(self)
 	Omen.UpdateBarTextureSettings_ = Omen.UpdateBarTextureSettings
 	Omen.UpdateBarTextureSettings = function(self)
 		for i, v in ipairs(self.Bars) do
-			v.texture:SetTexture(E["media"].normTex)
+			v.texture:SetTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 		end
 	end
 

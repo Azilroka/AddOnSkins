@@ -37,7 +37,7 @@ local function SkinTinyDps(self)
 				bottom = 0
 			}
 		})
-		tdpsStatusBar:SetStatusBarTexture(E["media"].normTex)
+		tdpsStatusBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 	end
 
 	if(AS:CheckOption("EmbedTDPS")) then

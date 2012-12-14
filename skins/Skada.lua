@@ -52,7 +52,7 @@ local function SkinSkada(self)
 			skada.button:SetBackdrop(titleBG)
 		end
 
-		skada:SetTexture(E["media"].normTex)
+		skada:SetTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 		skada:SetSpacing(barSpacing)
 		skada:SetFrameLevel(5)
 		

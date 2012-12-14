@@ -29,10 +29,10 @@ local function SkinShieldMonitor(self)
 	shieldmonitor_FrameIcon1:SetParent(IconBorder)
 	shieldmonitor_FrameIcon1:SetInside()
 
-	shieldmonitor_BarText:SetFont(E["media"].normFont, 12, "OUTLINE")
+	shieldmonitor_BarText:SetFont(AS.LSM:Fetch("font",E.db.general.font), 12, "OUTLINE")
 	shieldmonitor_BarText:SetPoint("CENTER", shieldmonitor_Bar, "CENTER", 0, 0)
 
-	shieldmonitor_FrameDuration:SetFont(E["media"].normFont, 12, "OUTLINE")
+	shieldmonitor_FrameDuration:SetFont(AS.LSM:Fetch("font",E.db.general.font), 12, "OUTLINE")
 	shieldmonitor_FrameDuration:SetParent(shieldmonitor_Bar)
 	shieldmonitor_FrameDuration:ClearAllPoints()
 	shieldmonitor_FrameDuration:SetPoint("RIGHT", shieldmonitor_Frame, "RIGHT", -2, 0)

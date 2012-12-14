@@ -56,8 +56,8 @@ function AS:Initialize()
 	E.private.skins.addons['AlwaysTrue'] = true
 
 	if IsAddOnLoaded("Tukui_UIPackages_Skins") or IsAddOnLoaded("Tukui_ElvUI_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
-	self.font = E["media"].normFont
-	self.pixelFont = LSM:Fetch("font","ElvUI Pixel")
+	self.font = LSM:Fetch("font",E.db.general.font)
+	self.pixelFont = IsAddOnLoaded("DSM") and LSM:Fetch("font","Tukui Pixel") or LSM:Fetch("font","ElvUI Pixel")
 	self.datatext_font = LSM:Fetch("font",E.db.datatexts.font)
 
 	self:GenerateOptions()
@@ -153,7 +153,7 @@ end
 
 function AS:SkinStatusBar(bar, ClassColor)
 	bar:StripTextures(true)
-	bar:SetStatusBarTexture(E["media"].normTex)
+	bar:SetStatusBarTexture(LSM:Fetch("statusbar",E.private.general.normTex))
 	if ClassColor then
 		bar:CreateBackdrop("ClassColor")
 		local color = RAID_CLASS_COLORS[AS.ccolor]

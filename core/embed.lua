@@ -136,7 +136,7 @@ function AS:EmbedInit()
 		end
 	end)
 
-	RightChatToggleButton:SetScript("OnEnter", function(self, ...)
+	button:SetScript("OnEnter", function(self, ...)
 		if E.db[self.parent:GetName()..'Faded'] then
 			self.parent:Show()
 			UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
