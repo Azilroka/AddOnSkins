@@ -241,9 +241,9 @@ local Skins = {
 		["buttonText"] = "Tukui Combo",
 		["addon"] = "tCombo",
 	},
-	["TellMeWhenSkin"] = {
-		["addon"] = "TellMeWhen",
-	},
+	--["TellMeWhenSkin"] = {
+	--	["addon"] = "TellMeWhen",
+	--},
 	["TinyDPSSkin"] = {
 		["addon"] = "TinyDPS",
 	},

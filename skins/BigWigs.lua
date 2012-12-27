@@ -1,4 +1,3 @@
-
 local E, L, V, P, G = unpack(ElvUI); --Inport: Engine, Locales, PrivateDB, ProfileDB, GlobalDB
 local S = E:GetModule('Skins')
 
@@ -155,6 +154,11 @@ local function RegisterStyle()
 		BarStopped = freestyle,
 		GetStyleName = function() return "ElvUI" end,
 	})
+	if prox and BigWigs.pluginCore.modules.Bars.db.profile.barStyle == "ElvUI" then
+		hooksecurefunc(BigWigs.pluginCore.modules.Proximity, "RestyleWindow", function()
+			BigWigsProximityAnchor:SetTemplate("Transparent")
+		end)
+	end
 end
 
 S:RegisterSkin('BigWigs_Plugins', RegisterStyle, nil, true)
