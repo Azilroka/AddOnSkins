@@ -123,29 +123,6 @@ local function SkinRecount(self)
 	AS:Desaturate(Recount.DetailWindow.LeftButton)
 	AS:Desaturate(Recount.DetailWindow.ReportButton)
 	AS:Desaturate(Recount.DetailWindow.SummaryButton)
-
-	if AS:CheckOption("EmbedRecount") then AS:EmbedRecount() end
-	
 end
 
 AS:RegisterSkin(name,SkinRecount)
-
-function AS:EmbedRecount()
-	local Recount = _G.Recount
-
-	if (AS:CheckOption("EmbedOoC")) then
-		if (AS:CheckOption("EmbedRecount")) then
-			Recount_MainWindow:Hide()
-		end
-	end
-	Recount:LockWindows(true)
-	Recount_MainWindow:ClearAllPoints()
-	EmbedRecountResize()
-	if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then Recount_MainWindow:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
-	Recount.MainWindow:SetFrameStrata("HIGH")
-end
-
-function AS:EmbedRecountResize()
-	Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 7)
-	Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 2)
-end

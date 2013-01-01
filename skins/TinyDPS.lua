@@ -45,26 +45,3 @@ local function SkinTinyDps(self)
 	end	
 end
 AS:RegisterSkin(name,SkinTinyDps)
-
-function AS:EmbedTDPS()
-	if not IsAddOnLoaded("TinyDPS") then AS:DisableOption("EmbedTDPS") return end
-	tdpsFrame:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel))
-	tdpsFrame:SetFrameStrata("MEDIUM")
-	tdpsFrame.spacing = 0
-	tdpsFrame.barHeight = 14
-	tdpsVisibleBars = 9
-	self:EmbedTDPSResize()
-	tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
-
-	tdpsRefresh()
-	if (AS:CheckOption("EmbedOoC")) then
-		if (AS:CheckOption("EmbedTDPS")) then
-			tdpsFrame:Hide()
-		end
-	end
-end
-
-function AS:EmbedTDPSResize()
-	tdpsFrame:SetWidth(EmbeddingWindow:GetWidth())
-	tdpsRefresh()
-end
