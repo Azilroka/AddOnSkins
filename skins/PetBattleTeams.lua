@@ -4,6 +4,7 @@ local S = E:GetModule('Skins')
 
 local name = "PetBattleTeamsSkin"
 local function SkinPetBattleTeams(self)
+	E:Delay(6, function()
 		AS:SkinFrame(PetBattleTeamFrame)
 		S:HandleScrollBar(PetBattleTeamsScrollFrameScrollBar)
 
@@ -21,7 +22,7 @@ local function SkinPetBattleTeams(self)
 			self.BorderBottomLeft:SetTexture(nil)
 			AS:SkinFrame(self, true)
 		end)
-
+	end)
 end
 
 AS:RegisterSkin(name,SkinPetBattleTeams)
