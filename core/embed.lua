@@ -23,9 +23,10 @@ function AS:EmbedWindowResize()
 		EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, 0) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 1),RightChatPanel:GetHeight() - 1)
 	end
 	
-	if (self.CheckOption("EmbedRO","Recount","Omen")) then self:EmbedRecountOmenResize() end
-	if (self.CheckOption("EmbedTDPS","TinyDPS")) then self:EmbedTDPSResize() end
-	if (self.CheckOption("EmbedRecount","Recount")) then self:EmbedRecountResize() end
+	if (self:CheckOption("EmbedRO","Recount","Omen")) then self:EmbedRecountOmenResize() end
+	if (self:CheckOption("EmbedTDPS","TinyDPS")) then self:EmbedTDPSResize() end
+	if (self:CheckOption("EmbedRecount","Recount")) then self:EmbedRecountResize() end
+	if (self:CheckOption("EmbedOmen","Omen")) then self:EmbedOmenResize() end
 end
 
 function AS:EmbedRecountOmen()

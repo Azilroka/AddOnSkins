@@ -34,34 +34,21 @@ function AS:EmbedOmen()
 		end
 		OmenTitle:Kill()
 		OmenBarList:StripTextures()
-		OmenBarList:SetTemplate("Default")
-		OmenAnchor:ClearAllPoints()
-		OmenBarList:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
-		OmenBarList:SetPoint("BOTTOMRIGHT", EmbeddingWindow, "BOTTOMRIGHT", 0, 2)
+		OmenBarList:SetTemplate("Transparent")
+		self:EmbedOmenResize()
 		if RightChatPanel then OmenBarList:SetParent(RightChatPanel) end
 		OmenBarList:SetFrameStrata("HIGH")
+end
+
+function AS:EmbedOmenResize()
+		OmenBarList:ClearAllPoints()
+		OmenBarList:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
+		OmenBarList:SetPoint("BOTTOMRIGHT", EmbeddingWindow, "BOTTOMRIGHT", 0, 2)
 end
 
 local name = "OmenSkin"
 local function SkinOmen(self)
 	local borderWidth = 2
-
-	Omen.UpdateBarTextureSettings_ = Omen.UpdateBarTextureSettings
-	Omen.UpdateBarTextureSettings = function(self)
-		for i, v in ipairs(self.Bars) do
-			v.texture:SetTexture(E["media"].normTex)
-		end
-	end
-
-	Omen.UpdateBarLabelSettings_ = Omen.UpdateBarLabelSettings
-	Omen.UpdateBarLabelSettings = function(self)
-		self:UpdateBarLabelSettings_()
-		for i, v in ipairs(self.Bars) do
-			v.Text1:FontTemplate(nil, self.db.profile.Bar.FontSize)
-			v.Text2:FontTemplate(nil, self.db.profile.Bar.FontSize)
-			v.Text3:FontTemplate(nil, self.db.profile.Bar.FontSize)
-		end
-	end
 
 	Omen.UpdateTitleBar_ = Omen.UpdateTitleBar
 	Omen.UpdateTitleBar = function(self)
@@ -71,7 +58,6 @@ local function SkinOmen(self)
 		Omen.db.profile.TitleBar.UseSameBG = true
 		self:UpdateTitleBar_()
 
-		self.TitleText:FontTemplate(nil, self.db.profile.TitleBar.FontSize)
 		self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, 1)
 	end
 
@@ -81,8 +67,10 @@ local function SkinOmen(self)
 		Omen.db.profile.Background.EdgeSize = 1
 		Omen.db.profile.Background.BarInset = borderWidth
 		self:UpdateBackdrop_()
-		self.BarList:SetTemplate("Default")
-		self.Title:SetTemplate("Default", True)
+		if not (AS:CheckOption("EmbedOmen")) then
+			self.BarList:SetTemplate("Default")
+			self.Title:SetTemplate("Default", True)
+		end
 		self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, 1)
 	end
 
