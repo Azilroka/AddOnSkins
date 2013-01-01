@@ -7,7 +7,7 @@ local name = "EnergyWatchSkin"
 local function SkinEnergyWatch(self)
 	EnergyWatchBar:StripTextures(True)
 	EnergyWatchStatusBar:CreateBackdrop()
-	EnergyWatchStatusBar:SetStatusBarTexture(E["media"].normTex)
+	EnergyWatchStatusBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 end
 
 AS:RegisterSkin(name,SkinEnergyWatch)

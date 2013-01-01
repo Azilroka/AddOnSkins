@@ -64,16 +64,16 @@ local function SkinArkInventory(self)
 
 		--ArkInventory.Const.Frame.Status.Height = 30
 		_G[status:GetName().."EmptyText"]:SetPoint("LEFT",2,0)
-		_G[status:GetName().."EmptyText"]:SetFont(E["media"].normFont, 12)
+		_G[status:GetName().."EmptyText"]:SetFont(AS.LSM:Fetch("font",E.db.general.font), 12)
 
 		_G[status:GetName().."GoldCopperButton"]:SetPoint("RIGHT",-1,0)
-		_G[status:GetName().."GoldCopperButtonText"]:SetFont(E["media"].normFont, 12)
+		_G[status:GetName().."GoldCopperButtonText"]:SetFont(AS.LSM:Fetch("font",E.db.general.font), 12)
 		
 		_G[status:GetName().."GoldSilverButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldCopperButtonText"],"LEFT",-1,0)
-		_G[status:GetName().."GoldSilverButtonText"]:SetFont(E["media"].normFont, 12)
+		_G[status:GetName().."GoldSilverButtonText"]:SetFont(AS.LSM:Fetch("font",E.db.general.font), 12)
 		
 		_G[status:GetName().."GoldGoldButton"]:SetPoint("RIGHT",_G[status:GetName().."GoldSilverButtonText"],"LEFT",-1,0)
-		_G[status:GetName().."GoldGoldButtonText"]:SetFont(E["media"].normFont, 12)
+		_G[status:GetName().."GoldGoldButtonText"]:SetFont(AS.LSM:Fetch("font",E.db.general.font), 12)
 	end
 	
 	--ArkInventory.Const.Frame.Title.Height2 = 32

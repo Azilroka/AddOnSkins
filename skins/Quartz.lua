@@ -7,7 +7,7 @@ local function SkinQuartz(self)
 	local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
 	if not Q3 then return end
 	
-	local font = E["media"].normFont 
+	local font = AS.LSM:Fetch("font",E.db.general.font) 
 	local fontSize = 12
 
 	SkinQuartzBar = function(self, bar)

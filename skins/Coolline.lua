@@ -10,6 +10,16 @@ local function SkinCoolLine(self)
 	AS:SkinBackdropFrame(CoolLine)
 	CoolLine.backdrop:SetAllPoints(CoolLine)
 	CoolLine.backdrop:CreateShadow()
+
+	if AS:CheckOption("EmbedCoolLine") then
+		if not CoolLineDB.vertical then
+			CoolLine:SetPoint('BOTTOMRIGHT', ElvUI_Bar1, 'TOPRIGHT', 0, 4)
+			CoolLine:SetPoint("BOTTOMLEFT", ElvUI_Bar1, "TOPLEFT", 0, 4)
+		else
+			print("Sorry will not embed a vertical frame.")
+		end
+		CoolLine.updatelook()
+	end
 end
 
 AS:RegisterSkin(name,SkinCoolLine)

@@ -7,7 +7,8 @@ EmbeddingWindow:SetFrameStrata("HIGH")
 EmbeddingWindow:Hide()
 
 function AS:EmbedWindowResize()
-	if not E.db.datatexts.rightChatPanel then
+	local RDTS
+	if (AS:CheckOption("EmbedRight") and not E.db.datatexts.rightChatPanel) or (not AS:CheckOption("EmbedRight") and not E.db.datatexts.leftChatPanel) then
 		RDTS = 22
 	else
 		RDTS = 0
@@ -15,12 +16,12 @@ function AS:EmbedWindowResize()
 
 	if not self.sle then
 		if E.PixelMode then
-			EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, -3) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 6),(RightChatPanel:GetHeight() - (28 - RDTS)))
+			EmbeddingWindow:SetPoint("TOP", (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "TOP", 0, -3) EmbeddingWindow:Size(((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetWidth() - 6),((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetHeight() - (28 - RDTS)))
 		else
-			EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, -5) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 10),(RightChatPanel:GetHeight() - (32 - RDTS)))
+			EmbeddingWindow:SetPoint("TOP", (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "TOP", 0, -5) EmbeddingWindow:Size(((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetWidth() - 10),((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetHeight() - (32 - RDTS)))
 		end
 	else
-		EmbeddingWindow:SetPoint("TOP", RightChatPanel, "TOP", 0, 0) EmbeddingWindow:Size((RightChatPanel:GetWidth() - 1),RightChatPanel:GetHeight() - 1)
+		EmbeddingWindow:SetPoint("TOP", (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "TOP", 0, 0) EmbeddingWindow:Size(((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetWidth() - 1),(AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetHeight() - 1)
 	end
 	
 	if (self:CheckOption("EmbedRO","Recount","Omen")) then self:EmbedRecountOmenResize() end
@@ -68,9 +69,9 @@ function AS:EmbedRecountOmen()
 	OmenAnchor:ClearAllPoints()
 	Recount:LockWindows(true)
 	Recount_MainWindow:ClearAllPoints()
-	if RightChatPanel then
-		OmenBarList:SetParent(RightChatPanel)
-		Recount_MainWindow:SetParent(RightChatPanel)
+	if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then
+		OmenBarList:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel))
+		Recount_MainWindow:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel))
 	end
 	
 	Recount_MainWindow:SetFrameStrata("HIGH")
@@ -98,17 +99,10 @@ end
 
 function AS:EmbedInit()
 	self:EmbedWindowResize()
-	hooksecurefunc(RightChatPanel, "SetSize", function(self, width, height) AS:EmbedWindowResize() end)
-	if AS:CheckOption("EmbedCoolLine") then
-		if not CoolLineDB.vertical then
-			CoolLine:SetPoint('BOTTOMRIGHT', ElvUI_Bar1, 'TOPRIGHT', 0, 4)
-			CoolLine:SetPoint("BOTTOMLEFT", ElvUI_Bar1, "TOPLEFT", 0, 4)
-		else
-			print("Sorry will not embed a vertical frame.")
-		end
-		CoolLine.updatelook()
-	end
-	RightChatToggleButton:SetScript("OnClick", function(self, btn)
+	hooksecurefunc((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "SetSize", function(self, width, height) AS:EmbedWindowResize() end)
+
+	local button = AS:CheckOption("EmbedRight") and RightChatToggleButton or LeftChatToggleButton
+	button:SetScript("OnClick", function(self, btn)
 			if btn == 'RightButton' then
 			if (AS:CheckOption("EmbedRecount","Recount")) or (AS:CheckOption("EmbedRO")) then
 				ToggleFrame(Recount_MainWindow)
@@ -144,7 +138,7 @@ function AS:EmbedInit()
 		end
 	end)
 
-	RightChatToggleButton:SetScript("OnEnter", function(self, ...)
+	button:SetScript("OnEnter", function(self, ...)
 		if E.db[self.parent:GetName()..'Faded'] then
 			self.parent:Show()
 			UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
@@ -156,17 +150,14 @@ function AS:EmbedInit()
 			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
 			GameTooltip:Show()
 	end)
-	
---Embed Check
-	if not IsAddOnLoaded("Omen") then self:DisableOption("EmbedRO") self:DisableOption("EmbedOmen") end
-	if not IsAddOnLoaded("Recount") then self:DisableOption("EmbedRO") end
-	if self:CheckOption("EmbedRO") then self:EmbedRecountOmen() end
-	if self:CheckOption("EmbedOmen") then self:EmbedOmen() end
---Embed Check Finished
+
+	if (self:CheckOption("EmbedRO","Recount","Omen")) then self:EmbedRecountOmen() end
+	if (self:CheckOption("EmbedOmen","Omen")) then self:EmbedOmen() end
+	if (self:CheckOption("EmbedSkada","Skada")) then self:EmbedSkada() end
+	if (self:CheckOption("EmbedTDPS","TinyDPS")) then self:EmbedTDPS() end
 end
 
 function AS:EmbedEnterCombat()
-	--	print("Entering Combat")
 	if (self:CheckOption("EmbedOoC")) then
 		ChatFrame3Tab:Hide()
 		if (self:CheckOption("EmbedRecount","Recount"))  then
@@ -193,7 +184,6 @@ function AS:EmbedEnterCombat()
 end
 
 function AS:EmbedExitCombat()
-	--	print("Exiting Combat")
 	if (self:CheckOption("EmbedOoC")) then
 		ChatFrame3Tab:Show()
 		if (self:CheckOption("EmbedRecount","Recount")) then

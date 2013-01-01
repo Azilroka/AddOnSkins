@@ -81,12 +81,12 @@ local function LoadSkin()
 					end
 
 					if not texture.styled then
-						texture:SetTexture(E["media"].normTex)
+						texture:SetTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 						texture.styled=true
 					end
 					
 					if not tbar.styled then
-						tbar:SetStatusBarTexture(E["media"].normTex)
+						tbar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 						tbar:SetInside(frame)
 						--tbar:Point("TOPLEFT", frame, "TOPLEFT", 2, -2)
 						--tbar:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
@@ -186,7 +186,7 @@ local function LoadSkin()
 			end	
 			
 			if not progress.styled then
-				progress:SetStatusBarTexture(E["media"].normTex)
+				progress:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 				progress.styled=true
 			end				
 			progress:ClearAllPoints()

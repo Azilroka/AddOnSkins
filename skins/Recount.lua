@@ -51,7 +51,7 @@ local function SkinRecount(self)
 
 	Recount.UpdateBarTextures = function(self)
 		for k, v in pairs(Recount.MainWindow.Rows) do
-			v.StatusBar:SetStatusBarTexture(E["media"].normTex)
+			v.StatusBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 			v.StatusBar:GetStatusBarTexture():SetHorizTile(false)
 			v.StatusBar:GetStatusBarTexture():SetVertTile(false)
 			if IsAddOnLoaded("Tukui") then
@@ -65,7 +65,7 @@ local function SkinRecount(self)
 	Recount.SetupBar_ = Recount.SetupBar
 	Recount.SetupBar = function(self, bar)
 		self:SetupBar_(bar)
-		bar.StatusBar:SetStatusBarTexture(E["media"].normTex)
+		bar.StatusBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 	end
 
 	Recount.CreateFrame_ = Recount.CreateFrame
@@ -140,8 +140,8 @@ function AS:EmbedRecount()
 	end
 	Recount:LockWindows(true)
 	Recount_MainWindow:ClearAllPoints()
-	self:EmbedRecountResize()
-	if RightChatPanel then Recount_MainWindow:SetParent(RightChatPanel) end
+	EmbedRecountResize()
+	if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then Recount_MainWindow:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
 	Recount.MainWindow:SetFrameStrata("HIGH")
 end
 

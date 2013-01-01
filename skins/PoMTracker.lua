@@ -25,7 +25,7 @@ local function SkinPoMTracker(self)
 	pomtrackerstatusBar:ClearAllPoints()
 	pomtrackerstatusBar:Point("TOP", pomtracker2, "BOTTOM", 0, -5)
 	pomtrackerstatusBar:CreateBackdrop("Transparent")
-	pomtrackerstatusBar:SetStatusBarTexture(E["media"].normTex)
+	pomtrackerstatusBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 
 	for i = 1,6 do
 		S:HandleCheckBox(_G["PoMOptionFrame_CheckButton"..i])

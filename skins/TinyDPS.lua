@@ -37,7 +37,7 @@ local function SkinTinyDps(self)
 				bottom = 0
 			}
 		})
-		tdpsStatusBar:SetStatusBarTexture(E["media"].normTex)
+		tdpsStatusBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 	end
 
 	if(AS:CheckOption("EmbedTDPS")) then
@@ -48,7 +48,7 @@ AS:RegisterSkin(name,SkinTinyDps)
 
 function AS:EmbedTDPS()
 	if not IsAddOnLoaded("TinyDPS") then AS:DisableOption("EmbedTDPS") return end
-	tdpsFrame:SetParent(RightChatPanel)
+	tdpsFrame:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel))
 	tdpsFrame:SetFrameStrata("MEDIUM")
 	tdpsFrame.spacing = 0
 	tdpsFrame.barHeight = 14
