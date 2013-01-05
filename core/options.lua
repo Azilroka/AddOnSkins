@@ -170,9 +170,6 @@ local Skins = {
 	["PetBattleTeamsSkin"] = {
 		["addon"] = "PetBattleTeams",
 	},
-	--["PoisonerSkin"] = {
-	--	["addon"] = "Poisoner",
-	--},
 	["PoMTrackerSkin"] = {
 		["addon"] = "PoMTracker",
 	},
@@ -195,9 +192,6 @@ local Skins = {
 	["RaidBuffStatusSkin"] = {
 		["buttonText"] = "Raid Buff Status",
 		["addon"] = "RaidBuffStatus",
-	},
-	["RavenSkin"] = {
-		["addon"] = "Raven",
 	},
 	["RecountSkin"] = {
 		["addon"] = "Recount",
@@ -241,9 +235,6 @@ local Skins = {
 		["buttonText"] = "Tukui Combo",
 		["addon"] = "tCombo",
 	},
-	--["TellMeWhenSkin"] = {
-	--	["addon"] = "TellMeWhen",
-	--},
 	["TinyDPSSkin"] = {
 		["addon"] = "TinyDPS",
 	},

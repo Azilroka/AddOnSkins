@@ -7,7 +7,6 @@ EmbeddingWindow:SetFrameStrata("HIGH")
 EmbeddingWindow:Hide()
 
 function AS:EmbedWindowResize()
-	self:EnableOption("EmbedRight") --Temporary
 	local RDTS
 	if (AS:CheckOption("EmbedRight") and not E.db.datatexts.rightChatPanel) or (not AS:CheckOption("EmbedRight") and not E.db.datatexts.leftChatPanel) then
 		RDTS = 22

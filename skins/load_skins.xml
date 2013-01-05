@@ -58,7 +58,6 @@
 	<Script file="QuestItemBar.lua"/>
 	<Script file="RBS.lua"/>
 	<Script file="RaidInviteOrganizer.lua"/>
-	<Script file="Raven.lua"/>
 	<Script file="Recount.lua"/>
 	<Script file="Reforgenator.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
