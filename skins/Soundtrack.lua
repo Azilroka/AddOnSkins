@@ -80,7 +80,7 @@ local function SkinSoundtrack(self)
 
 	for _, object in pairs(frames) do
 		if _G[object] then
-			S:HandleFrame(_G[object])
+			AS:SkinFrame(_G[object])
 		end
 	end
 
