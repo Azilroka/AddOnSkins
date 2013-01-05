@@ -5,6 +5,7 @@ local S = E:GetModule('Skins')
 local name = 'AuctioneerSkin'
 local function AuctioneerSkin(self,event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
+	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.auctionhouse ~= true then return end
 	if not auctioneerskinned then
 	AuctionsCancelAuctionButton:Point("RIGHT", AuctionFrameMoneyFrame, "RIGHT", 554, 0)
 	AuctionsCloseButton:ClearAllPoints()
@@ -48,8 +49,6 @@ local function AuctioneerSkin(self,event)
 	BidQualitySort:Point("TOPLEFT", AuctionFrameBid, "TOPLEFT", 65, -50)
 	AuctionFrameTab1:ClearAllPoints()
 	AuctionFrameTab1:Point("TOPLEFT", AuctionFrame, "BOTTOMLEFT", -5, 2)
-	S:HandleNextPrevButton(BrowseNextPageButton)
-	S:HandleNextPrevButton(BrowsePrevPageButton)
 	BrowseNextPageButton:Size(20, 20)
 	BrowsePrevPageButton:Size(20, 20)
 	if IsAddOnLoaded("Auc-Stat-Purchased") then
