@@ -36,8 +36,10 @@ local function SkinBagnon(self,event)
 		if not bagnononce then
 			bagnononce = true
 			ToggleBackpack()
-			AS:SkinFrame(BagnonFrameinventory)
-			S:HandleCloseButton(BagnonFrameinventoryCloseButton)
+			if BagnonFrameinventory then
+				AS:SkinFrame(BagnonFrameinventory)
+				S:HandleCloseButton(BagnonFrameinventoryCloseButton)
+			end
 			ToggleBackpack()
 		end
 	end)
