@@ -8,8 +8,7 @@ local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
-local croprwicons = true			-- crops blizz shitty borders from icons in RaidWarning messages
-local rwiconsize = 18			-- RaidWarning icon size, because 12 is small for me. Works only if croprwicons=true
+local croprwicons = true	-- crops blizz shitty borders from icons in RaidWarning messages
 local buttonsize = 22
 
 local function LoadSkin()
@@ -236,12 +235,14 @@ local function LoadSkin()
 	DBMInfoFrame:HookScript("OnShow",function(self)
 		self:SetTemplate("Transparent")
 	end)
-	local RaidNotice_AddMessage_=RaidNotice_AddMessage
-	RaidNotice_AddMessage=function(noticeFrame, textString, colorInfo)
-		if textString:find(" |T") then
-			textString = string.gsub(textString,"(:12:12)",":18:18:0:0:64:64:5:59:5:59")
+	if croprwicons then
+		local RaidNotice_AddMessage_=RaidNotice_AddMessage
+		RaidNotice_AddMessage=function(noticeFrame, textString, colorInfo)
+			if textString:find(" |T") then
+				textString = string.gsub(textString,"(:12:12)",":18:18:0:0:64:64:5:59:5:59")
+			end
+			return RaidNotice_AddMessage_(noticeFrame, textString, colorInfo)
 		end
-		return RaidNotice_AddMessage_(noticeFrame, textString, colorInfo)
 	end
 end
 
