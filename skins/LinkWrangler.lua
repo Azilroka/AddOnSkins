@@ -4,7 +4,7 @@ local S = E:GetModule('Skins')
 
 local name = "LinkWranglerSkin"
 local function SkinLinkWrangler(self, event)
-	LWTukuiSkinner_Path = "Interface\\AddOns\\Tukui_Skins\\skins\\"
+	LWTukuiSkinner_Path = "Interface\\AddOns\\ElvUI_AddOnSkins\\skins\\"
 	LWTukuiSkinner_Close = LWTukuiSkinner_Path.."Buttons\\close"
 	LWTukuiSkinner_Min = LWTukuiSkinner_Path.."Buttons\\min"
 	LWTukuiSkinner_Compare = LWTukuiSkinner_Path.."Buttons\\compare"

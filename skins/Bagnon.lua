@@ -1,5 +1,4 @@
-
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -44,4 +43,5 @@ local function SkinBagnon(self,event)
 		end
 	end)
 end
+
 AS:RegisterSkin(name,SkinBagnon,"BANKFRAME_OPENED","GUILDBANKFRAME_OPENED","VOID_STORAGE_OPEN")

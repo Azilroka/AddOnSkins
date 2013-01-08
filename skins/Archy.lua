@@ -76,9 +76,9 @@ local function SkinArchy(self)
 		AS:SkinStatusBar(ArchyArtifactFrameSkillBar)	
 	end
 	S:HandleButton(ArchyDistanceIndicatorFrameSurveyButton)
-	ArchyDistanceIndicatorFrameSurveyButton:SetFrameLevel(ArchyDistanceIndicatorFrameSurveyButton:GetFrameLevel() + 5)
+	ArchyDistanceIndicatorFrameSurveyButtonIcon:SetDrawLayer("OVERLAY")
 	S:HandleButton(ArchyDistanceIndicatorFrameCrateButton)
- 	ArchyDistanceIndicatorFrameCrateButton:SetFrameLevel(ArchyDistanceIndicatorFrameCrateButton:GetFrameLevel() + 5)
+ 	ArchyDistanceIndicatorFrameCrateButtonIcon:SetDrawLayer("OVERLAY")
 	hooksecurefunc(Archy, "LDBTooltipShow", function(self) self.LDB_Tooltip:SetTemplate("Transparent") end)
 end
 

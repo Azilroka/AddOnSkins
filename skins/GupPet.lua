@@ -4,6 +4,7 @@ local S = E:GetModule('Skins')
 
 local name = "GupPetSkin"
 local function SkinGupPet(self,event)
+	if IsAddOnLoaded("GupPet_ButtonFacade") then DisableAddOn("GupPet_ButtonFacade") print("Incompatable AddOn Detected: GupPet ButtonFacade - Disabling. Please Reload.") end
 	AS:SkinFrame(GupPet_InterfaceOptionsFrame)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameOptions)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameMountsCompanions)
@@ -16,7 +17,7 @@ local function SkinGupPet(self,event)
 
 	AS:SkinIconButton(GupPet_IngameFrameTemplateAuto, true, true)
 	AS:SkinIconButton(GupPet_IngameFrameTemplateCompanion, true, true)
-
+	
 	S:HandleTab(GupPet_InterfaceOptionsFrameTab1)
 	S:HandleTab(GupPet_InterfaceOptionsFrameTab2)
 	S:HandleTab(GupPet_InterfaceOptionsFrameTab3)

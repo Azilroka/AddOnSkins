@@ -159,41 +159,6 @@ function AS:EmbedRecountOmenResize()
 		Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 1)
 	end
 end
-
-if IsAddOnLoaded("Skada") then
-	local Skada = Skada
-	for _, window in ipairs( Skada:GetWindows() ) do
-		tinsert(windows, window)
-		window:UpdateDisplay()
-	end
-
-	Skada.CreateWindow_ = Skada.CreateWindow
-	function Skada:CreateWindow(name, db)
-		Skada:CreateWindow_(name, db)
-
-		windows = {}
-		for _, window in ipairs(Skada:GetWindows()) do
-			tinsert(windows, window)
-		end
-		hooksecurefunc(Skada, "CreateWindow", function()	
-			if AS:CheckOption("EmbedSkada") then
-				AS:EmbedSkada()
-			end
-		end)
-	end
-
-	Skada.DeleteWindow_ = Skada.DeleteWindow
-	function Skada:DeleteWindow( name )
-		Skada:DeleteWindow_( name )
-		windows = {}
-		for _, window in ipairs( Skada:GetWindows() ) do
-			tinsert( windows, window )
-		end
-		if(AS:CheckOption("EmbedSkada")) then
-			AS:EmbedSkada()
-		end
-	end
-end
 	
 local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 	local Skada = Skada
