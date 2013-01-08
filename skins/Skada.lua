@@ -88,40 +88,6 @@ local function SkinSkada(self)
 			if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then win.bargroup:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
 		end
 	end
-
-	local Skada = Skada
-	for _, window in ipairs( Skada:GetWindows() ) do
-		tinsert(windows, window)
-		window:UpdateDisplay()
-	end
-
-	Skada.CreateWindow_ = Skada.CreateWindow
-	function Skada:CreateWindow(name, db)
-		Skada:CreateWindow_(name, db)
-
-		windows = {}
-		for _, window in ipairs(Skada:GetWindows()) do
-			tinsert(windows, window)
-		end
-		hooksecurefunc(Skada, "CreateWindow", function()	
-			if AS:CheckOption("EmbedSkada") then
-				AS:EmbedSkada()
-			end
-		end)
-	end
-
-	Skada.DeleteWindow_ = Skada.DeleteWindow
-	function Skada:DeleteWindow( name )
-		Skada:DeleteWindow_( name )
-		windows = {}
-		for _, window in ipairs( Skada:GetWindows() ) do
-			tinsert( windows, window )
-		end
-		if(AS:CheckOption("EmbedSkada")) then
-			AS:EmbedSkada()
-		end
-	end
-	
 end
 
 AS:RegisterSkin(name,SkinSkada)
