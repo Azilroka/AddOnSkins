@@ -435,6 +435,12 @@ function AS:GenerateOptions()
 						order = 12,
 						disabled = function() return not IsAddOnLoaded("CoolLine") end,
 					},
+					EmbedRight = {
+						type = 'toggle',
+						name = 'Embed Right',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 13,
+					},
 				}
 			}
 		}
