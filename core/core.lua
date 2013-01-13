@@ -190,6 +190,10 @@ function AS:SkinIconButton(self, strip, style, shrinkIcon)
 	self.isSkinned = true
 end
 
+local function AS:SkinTooltip(tooltip)
+	tooltip:HookScript("OnShow", function(self)	self:SetTemplate("Transparent") end)
+end
+
 function AS:Desaturate(f, point)
 	for i=1, f:GetNumRegions() do
 		local region = select(i, f:GetRegions())

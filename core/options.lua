@@ -7,11 +7,16 @@ local Skins = {
 		["addon"] = "ACP",
 	},
 	["AdiBagsSkin"] = {
-		["buttonText"] = "AdiBags",
 		["addon"] = "AdiBags",
+	},
+	["AffDotsSkin"] = {
+		["addon"] = "AffDots",
 	},
 	["AltoholicSkin"] = {
 		["addon"] = "Altoholic",
+	},
+	["AnalystSkin"] = {
+		["addon"] = "Analyst",
 	},
 	["AraBrokerGuildFriendsSkin"] = {
 		["buttonText"] = "Ara Broker Guild Friends",
@@ -21,7 +26,7 @@ local Skins = {
 		["addon"] = "Archy",
 	},
 	['ArhSkin'] = {
-		["buttonText"] = "ArchaeologyHelper",
+		["buttonText"] = "Archaeology Helper",
 		["addon"] = "Arh",
 	},
 	["ArkInventorySkin"] = {
@@ -63,6 +68,9 @@ local Skins = {
 	["BuyEmAllSkin"] = {
 		["addon"] = "BuyEmAll",
 	},
+	["ChocolateBarSkin"] = {
+		["addon"] = "ChocolateBar",
+	},
 	["CliqueSkin"] = {
 		["addon"] = "Clique",
 	},
@@ -71,6 +79,9 @@ local Skins = {
 	},
 	["CoolLineSkin"] = {
 		["addon"] = "CoolLine",
+	},
+	["CorkSkin"] = {
+		["addon"] = "Cork",
 	},
 	["CritlineSkin"] = {
 		["addon"] = "Critline",
@@ -85,6 +96,9 @@ local Skins = {
 	["EasyMailSkin"] = {
 		["addon"] = "EasyMail",
 	},
+	["EavesDropSkin"] = {
+		["addon"] = "EavesDrop",
+	},
 	["EnergyWatchSkin"] = {
 		["addon"] = "EnergyWatch",
 	},
@@ -95,11 +109,20 @@ local Skins = {
 		["buttonText"] = "Extended Vendor",
 		["addon"] = "ExtVendor",
 	},
+	["EveryGoldToBankerSkin"] = {
+		["addon"] = "EveryGoldToBanker",
+	},
 	["FactionizerSkin"] = {
 		["addon"] = "Factionizer",
 	},
 	["FlightMapSkin"] = {
 		["addon"] = "FlightMap",
+	},
+	["FlightMapEnhancedSkin"] = {
+		["addon"] = "FlightMapEnhanced",
+	},
+	["GuildMemberInfo_TradeSkillsSkin"] = {
+		["addon"] = "GuildMemberInfo_TradeSkills",
 	},
 	["GupPetSkin"] = {
 		["addon"] = "GupPet",
@@ -167,6 +190,9 @@ local Skins = {
 	["OutfitterSkin"] = {
 		["addon"] = "Outfitter",
 	},
+	["OvaleSkin"] = {
+		["addon"] = "Ovale",
+	},
 	["PetBattleTeamsSkin"] = {
 		["addon"] = "PetBattleTeams",
 	},
@@ -199,6 +225,9 @@ local Skins = {
 	["ReforgenatorSkin"] = {
 		["addon"] = "Reforgenator",
 	},
+	["ReforgeradeSkin"] = {
+		["addon"] = "Reforgerade",
+	},
 	["SearingPlasmaTrackerSkin"] = {
 		["buttonText"] = "Searing Plasma Tracker",
 		["addon"] = "SearingPlasmaTracker",
@@ -206,6 +235,9 @@ local Skins = {
 	["SexyCooldownSkin"] = {
 		["buttonText"] = "SexyCooldown 2",
 		["addon"] = "SexyCooldown2",
+	},
+	["ShieldBarsSkin"] = {
+		["addon"] = "ShieldBars",
 	},
 	["ShieldMonitorSkin"] = {
 		["buttonText"] = "Shield Monitor",
@@ -231,12 +263,18 @@ local Skins = {
 		["buttonText"] = "Swatter",
 		["addon"] = "!Swatter",
 	},
-	["tComboSkin"] = {
-		["buttonText"] = "Tukui Combo",
-		["addon"] = "tCombo",
+	["SymbiosisTipSkin"] = {
+		["addon"] = "SymbiosisTip",
+	},
+	["TellMeWhenSkin"] = {
+		["addon"] = "TellMeWhen",
 	},
 	["TinyDPSSkin"] = {
 		["addon"] = "TinyDPS",
+	},
+	["TitanPanelSkin"] = {
+		["buttonText"] = "TitanPanel",
+		["addon"] = "Titan",
 	},
 	["TomTomSkin"] = {
 		["addon"] = "TomTom",
