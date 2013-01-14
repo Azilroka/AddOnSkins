@@ -4,7 +4,7 @@ local S = E:GetModule('Skins')
 
 local name = "OvaleSkin"
 local function SkinOvale(self)
-	E.Delay(5, function()
+	E.Delay(15, function()
 		Icon1n1:GetParent():StripTextures()
 		for i = 1, 3 do
 			AS:SkinBackdropFrame(_G["Icon"..i.."n1"], true)
