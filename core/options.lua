@@ -44,7 +44,7 @@ local Skins = {
 	},
 	["AuctioneerSkin"] = {
 		["buttonText"] = "Auctioneer",
-		["addon"] = "Auc-Advanced"
+		["addon"] = "Auc-Advanced",
 	},
 	["AuctionLiteSkin"] = {
 		["addon"] = "AuctionLite",
@@ -56,14 +56,11 @@ local Skins = {
 		["addon"] = "BGDefender",
 	},
 	["BigBrotherSkin"] = {
-		["addon"] = "BigBrother"
-	},
-	["BigWigsSkin"] = {
-		["addon"] = "BigWigs",
+		["addon"] = "BigBrother",
 	},
 	["BPTSkin"] = {
 		["buttonText"] = "Balance Power Tracker",
-		["addon"] = "BalancePowerTracker"
+		["addon"] = "BalancePowerTracker",
 	},
 	["BuyEmAllSkin"] = {
 		["addon"] = "BuyEmAll",
@@ -222,9 +219,6 @@ local Skins = {
 	["ReforgenatorSkin"] = {
 		["addon"] = "Reforgenator",
 	},
-	["ReforgeradeSkin"] = {
-		["addon"] = "Reforgerade",
-	},
 	["SearingPlasmaTrackerSkin"] = {
 		["buttonText"] = "Searing Plasma Tracker",
 		["addon"] = "SearingPlasmaTracker",
@@ -307,11 +301,6 @@ local Skins = {
 	["CLCRetSkin"] = {
 		["buttonText"] = "CLCRet Icons",
 		["addon"] = "CLCRet",
-		["ui"] = "ElvUI",
-	},
-	["PowerAurasIconsSkin"] = {
-		["buttonText"] = "PowerAuras Icons",
-		["addon"] = "PowerAuras",
 		["ui"] = "ElvUI",
 	},
 	["WeakAurasSkin"] = {
