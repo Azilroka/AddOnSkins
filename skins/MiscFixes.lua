@@ -2,10 +2,10 @@ local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
-name = "AlwaysTrue"
-function SkinMisc()
-	
-	LoadAddOn("acb_CastBar")
+local name = "AlwaysTrue"
+function SkinMisc(self, event)
+	if event == "PLAYER_ENTERING_WORLD" then return end
+
 	if IsAddOnLoaded("acb_CastBar") then
 		AzCastBarPluginPlayer:StripTextures() AzCastBarPluginPlayer:CreateBackdrop()
 		AzCastBarPluginTarget:StripTextures() AzCastBarPluginTarget:CreateBackdrop()
@@ -13,6 +13,7 @@ function SkinMisc()
 		AzCastBarPluginMirror:StripTextures() AzCastBarPluginMirror:CreateBackdrop()
 		AzCastBarPluginPet:StripTextures() AzCastBarPluginPet:CreateBackdrop()
 	end
+	
 	for i = 1, 10 do
 		if _G["StaticPopup"..i] then
 			_G["StaticPopup"..i]:SetTemplate("Transparent")
@@ -22,9 +23,8 @@ function SkinMisc()
 		end
 	end
 	
-	if IsAddOnLoaded("PetJournalEnhanced") then LoadAddOn("Blizzard_PetJournal") PetJournal:HookScript("OnShow", function() PJEUniquePetCount:StripTextures() end) end
+	if IsAddOnLoaded("PetJournalEnhanced") then PetJournal:HookScript("OnShow", function() PJEUniquePetCount:StripTextures() end) end
 	
-	LoadAddOn("Blizzard_TradeSkillUI")
 	if IsAddOnLoaded("DoubleWideTradeSkills") then
 		TradeSkillListScrollFrame:StripTextures()
 		AS:SkinFrame(TradeSkillFrame)
@@ -32,12 +32,13 @@ function SkinMisc()
 	end
 	
 	--TrainAll
-	LoadAddOn("Blizzard_TrainerUI")
-	ClassTrainerFrame:HookScript("OnShow", function()
-		if ClassTrainerTrainAllButton then
-			AS:SkinFrameD(ClassTrainerTrainAllButton)
-			AS:SkinFrameD(ClassTrainerTrainButton)
-		end
-	end)
+	if IsAddOnLoaded("Blizzard_TrainerUI") then
+		ClassTrainerFrame:HookScript("OnShow", function()
+			if ClassTrainerTrainAllButton then
+				AS:SkinFrameD(ClassTrainerTrainAllButton)
+				AS:SkinFrameD(ClassTrainerTrainButton)
+			end
+		end)
+	end
 end
-AS:RegisterSkin(name, SkinMisc)
+AS:RegisterSkin(name, SkinMisc, "ADDON_LOADED")
