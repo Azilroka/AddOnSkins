@@ -68,9 +68,6 @@ local Skins = {
 	["BuyEmAllSkin"] = {
 		["addon"] = "BuyEmAll",
 	},
-	["ChocolateBarSkin"] = {
-		["addon"] = "ChocolateBar",
-	},
 	["CliqueSkin"] = {
 		["addon"] = "Clique",
 	},
@@ -271,10 +268,6 @@ local Skins = {
 	},
 	["TinyDPSSkin"] = {
 		["addon"] = "TinyDPS",
-	},
-	["TitanPanelSkin"] = {
-		["buttonText"] = "TitanPanel",
-		["addon"] = "Titan",
 	},
 	["TomTomSkin"] = {
 		["addon"] = "TomTom",

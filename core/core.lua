@@ -190,7 +190,7 @@ function AS:SkinIconButton(self, strip, style, shrinkIcon)
 	self.isSkinned = true
 end
 
-local function AS:SkinTooltip(tooltip)
+function AS:SkinTooltip(tooltip)
 	tooltip:HookScript("OnShow", function(self)	self:SetTemplate("Transparent") end)
 end
 
