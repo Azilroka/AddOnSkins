@@ -24,6 +24,11 @@ function AS:EmbedWindowResize()
 		EmbeddingWindow:SetPoint("TOP", (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "TOP", 0, 0) EmbeddingWindow:Size(((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetWidth() - 1),(AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel):GetHeight() - 1)
 	end
 	
+	local OrigHeight, OrigWidth
+	if OrigHeight == nil then OrigHeight = EmbeddingWindow:GetHeight() end
+	if OrigWidth == nil then OrigWidth = EmbeddingWindow:GetWidth() end
+	if EmbeddingWindow:GetHeight() == OrigHeight and EmbeddingWindow:GetWidth() == OrigWidth then return end
+	
 	if (self:CheckOption("EmbedRO","Recount","Omen")) then self:EmbedRecountOmenResize() end
 	if (self:CheckOption("EmbedTDPS","TinyDPS")) then self:EmbedTDPSResize() end
 	if (self:CheckOption("EmbedRecount","Recount")) then self:EmbedRecountResize() end
