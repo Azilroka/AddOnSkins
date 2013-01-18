@@ -28,6 +28,8 @@ function AS:EmbedWindowResize()
 	if OrigHeight == nil then OrigHeight = EmbeddingWindow:GetHeight() end
 	if OrigWidth == nil then OrigWidth = EmbeddingWindow:GetWidth() end
 	if EmbeddingWindow:GetHeight() == OrigHeight and EmbeddingWindow:GetWidth() == OrigWidth then return end
+	OrigHeight = EmbeddingWindow:GetHeight()
+	OrigWidth = EmbeddingWindow:GetWidth()
 	
 	if (self:CheckOption("EmbedRO","Recount","Omen")) then self:EmbedRecountOmenResize() end
 	if (self:CheckOption("EmbedTDPS","TinyDPS")) then self:EmbedTDPSResize() end
