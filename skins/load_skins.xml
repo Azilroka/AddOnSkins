@@ -19,6 +19,7 @@
 	<Script file="BigWigs.lua"/>
 	<Script file="BPT.lua"/>
 	<Script file="BuyEmAll.lua"/>
+	<Script file="CLCInfo.lua"/>
 	<Script file="CLCProt.lua"/>
 	<Script file="CLCRet.lua"/>
 	<Script file="Clique.lua"/>

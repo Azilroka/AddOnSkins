@@ -293,6 +293,11 @@ local Skins = {
 		["addon"] = "DBM-Core",
 		["ui"] = "ElvUI",
 	},
+	["CLCInfoSkin"] = {
+		["buttonText"] = "CLCInfo Icons",
+		["addon"] = "CLCInfo",
+		["ui"] = "ElvUI",
+	},
 	["CLCProtSkin"] = {
 		["buttonText"] = "CLCProt Icons",
 		["addon"] = "CLCProt",
