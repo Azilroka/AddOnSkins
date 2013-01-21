@@ -22,7 +22,7 @@ local Skins = {
 		["buttonText"] = "Ara Broker Guild Friends",
 		["addon"] = "Ara_Broker_Guild_Friends",
 	},
-	["AraTradeskillsSkin"] = {
+	["AraBrokerTradeskillsSkin"] = {
 		["buttonText"] = "Ara Broker Tradeskills",
 		["addon"] = "Ara_Broker_Tradeskills",
 	},
@@ -260,9 +260,6 @@ local Skins = {
 	},
 	["SymbiosisTipSkin"] = {
 		["addon"] = "SymbiosisTip",
-	},
-	["TellMeWhenSkin"] = {
-		["addon"] = "TellMeWhen",
 	},
 	["TinyDPSSkin"] = {
 		["addon"] = "TinyDPS",
