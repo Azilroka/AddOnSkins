@@ -19,8 +19,6 @@ local function SkinSkada(self)
 		options.titleoptions.args.margin = nil
 		options.titleoptions.args.color = nil
 		options.windowoptions = nil
-	--	options.baroptions.args.barfont = nil
-	--	options.titleoptions.args.font = nil
 	end
 
 	local ResetFrame = CreateFrame("Frame", nil, UIParent)
@@ -34,7 +32,7 @@ local function SkinSkada(self)
 	ResetText:SetPoint("TOP", ResetFrame, "TOP", 0, -10)
 	ResetText:SetText("Do you want to reset Skada?")
 	local ResetAccept = CreateFrame("Button", nil, ResetFrame)
-	U.SkinButton(ResetAccept)
+	S:HandleButton(ResetAccept)
 	ResetAccept:SetSize(70, 25)
 	ResetAccept:SetPoint("RIGHT", ResetFrame, "BOTTOM", -1, 20)
 	ResetAccept:SetScript("OnClick", function(self) Skada:Reset() self:GetParent():Hide() end)
@@ -43,7 +41,7 @@ local function SkinSkada(self)
 	ResetAcceptText:SetPoint("CENTER")
 	ResetAcceptText:SetText("Yes")
 	local ResetClose = CreateFrame("Button", nil, ResetFrame)
-	U.SkinButton(ResetClose)
+	S:HandleButton(ResetClose)
 	ResetClose:SetSize(70, 25)
 	ResetClose:SetPoint("LEFT", ResetFrame, "BOTTOM", 1, 20)
 	ResetClose:SetScript("OnClick", function(self) self:GetParent():Hide() end)
@@ -115,10 +113,9 @@ local function SkinSkada(self)
 		skada.backdrop:Point("BOTTOMRIGHT", skada, "BOTTOMRIGHT", 2, -2)
 		if (not AS:CheckOption("SkadaBackdrop")) then skada.backdrop:Hide() end
 		if (AS:CheckOption("EmbedSkada")) then
-			win.bargroup.button:SetFrameStrata("HIGH")
-			win.bargroup.button:SetFrameLevel(5)	
-			win.bargroup:SetFrameStrata("HIGH")
 			if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then win.bargroup:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
+			win.bargroup:SetFrameLevel(10)
+			win.bargroup.button:SetFrameLevel(11)
 		end
 	end
 end
