@@ -23,6 +23,39 @@ local function SkinSkada(self)
 	--	options.titleoptions.args.font = nil
 	end
 
+	local ResetFrame = CreateFrame("Frame", nil, UIParent)
+	ResetFrame:SetTemplate("Transparent")
+	ResetFrame:SetSize(250, 70)
+	ResetFrame:SetPoint("CENTER", UIParent, "CENTER")
+	ResetFrame:SetFrameStrata("DIALOG")
+	ResetFrame:Hide()
+	local ResetText = ResetFrame:CreateFontString(nil, "Overlay")
+	ResetText:SetFontObject(ChatFontNormal)
+	ResetText:SetPoint("TOP", ResetFrame, "TOP", 0, -10)
+	ResetText:SetText("Do you want to reset Skada?")
+	local ResetAccept = CreateFrame("Button", nil, ResetFrame)
+	U.SkinButton(ResetAccept)
+	ResetAccept:SetSize(70, 25)
+	ResetAccept:SetPoint("RIGHT", ResetFrame, "BOTTOM", -1, 20)
+	ResetAccept:SetScript("OnClick", function(self) Skada:Reset() self:GetParent():Hide() end)
+	local ResetAcceptText = ResetAccept:CreateFontString(nil, "Overlay")
+	ResetAcceptText:SetFontObject(ChatFontNormal)
+	ResetAcceptText:SetPoint("CENTER")
+	ResetAcceptText:SetText("Yes")
+	local ResetClose = CreateFrame("Button", nil, ResetFrame)
+	U.SkinButton(ResetClose)
+	ResetClose:SetSize(70, 25)
+	ResetClose:SetPoint("LEFT", ResetFrame, "BOTTOM", 1, 20)
+	ResetClose:SetScript("OnClick", function(self) self:GetParent():Hide() end)
+	local ResetCloseText = ResetClose:CreateFontString(nil, "Overlay")
+	ResetCloseText:SetFontObject(ChatFontNormal)
+	ResetCloseText:SetPoint("CENTER")
+	ResetCloseText:SetText("No")
+	
+	function Skada:ShowPopup()
+		ResetFrame:Show()
+	end
+	
 	local barmod = Skada.displays["bar"]
 	barmod.AddDisplayOptions_ = barmod.AddDisplayOptions
 	barmod.AddDisplayOptions = function(self, win, options)
