@@ -22,6 +22,10 @@ local Skins = {
 		["buttonText"] = "Ara Broker Guild Friends",
 		["addon"] = "Ara_Broker_Guild_Friends",
 	},
+	["AraTradeskillsSkin"] = {
+		["buttonText"] = "Ara Broker Tradeskills",
+		["addon"] = "Ara_Broker_Tradeskills",
+	},
 	["ArchySkin"] = {
 		["addon"] = "Archy",
 	},

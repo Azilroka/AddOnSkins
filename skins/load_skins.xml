@@ -5,6 +5,7 @@
 	<Script file="Altoholic.lua"/>
 	<Script file="Analyst.lua"/>
 	<Script file="AraBrokerGuildFriends.lua"/>
+	<Script file="AraBrokerTradeskills.lua"/>
 	<Script file="Archy.lua"/>
 	<Script file="Arh.lua"/>
 	<Script file="ArkInventory.lua"/>
