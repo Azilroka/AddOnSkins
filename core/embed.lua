@@ -50,7 +50,7 @@ function AS:EmbedRecount()
 	Recount_MainWindow:ClearAllPoints()
 	self:EmbedRecountResize()
 	if (self:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then Recount_MainWindow:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
-	Recount.MainWindow:SetFrameLevel(10)
+	Recount.MainWindow:SetFrameStrata("LOW")
 end
 
 function AS:EmbedRecountResize()
@@ -92,7 +92,7 @@ function AS:EmbedOmen()
 		OmenBarList:SetTemplate("Transparent")
 		self:EmbedOmenResize()
 		if RightChatPanel then OmenBarList:SetParent(RightChatPanel) end
-		OmenBarList:SetFrameLevel(10)
+		OmenBarList:SetFrameStrata("LOW")
 end
 
 function AS:EmbedOmenResize()
@@ -144,8 +144,8 @@ function AS:EmbedRecountOmen()
 		Recount_MainWindow:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel))
 	end
 	
-	Recount_MainWindow:SetFrameLevel(10)
-	OmenBarList:SetFrameLevel(10)
+	Recount_MainWindow:SetFrameStrata("LOW")
+	OmenBarList:SetFrameStrata("LOW")
 	self:EmbedRecountOmenResize()
 end
 
@@ -238,7 +238,7 @@ end
 
 function AS:EmbedTDPS()
 	tdpsFrame:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel))
-	tdpsFrame:SetFrameLevel(10)
+	tdpsFrame:SetFrameStrata("LOW")
 	tdpsFrame.spacing = 0
 	tdpsFrame.barHeight = 14
 	tdpsVisibleBars = 9

@@ -114,8 +114,8 @@ local function SkinSkada(self)
 		if (not AS:CheckOption("SkadaBackdrop")) then skada.backdrop:Hide() end
 		if (AS:CheckOption("EmbedSkada")) then
 			if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then win.bargroup:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
-			win.bargroup:SetFrameLevel(10)
-			win.bargroup.button:SetFrameLevel(11)
+			win.bargroup:SetFrameStrata("LOW")
+			win.bargroup.button:SetFrameStrata("LOW")
 		end
 	end
 end
