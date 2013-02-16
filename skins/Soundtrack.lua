@@ -9,6 +9,7 @@ local function SkinSoundtrack(self)
 		"SoundtrackFrameEventList",
 		"SoundtrackFrameTrackList",
 		"SoundtrackFrame_AssignedFrame",
+		"SoundtrackReportFrame",
 	}
 
 	local buttons = {
@@ -34,6 +35,12 @@ local function SkinSoundtrack(self)
 		"SoundtrackFrameAddPlaylistButton",
 		"SoundtrackFrame_LoadProject",
 		"SoundtrackFrame_RemoveProject",
+		"SoundtrackReportFrame_Say",
+		"SoundtrackReportFrame_Party",
+		"SoundtrackReportFrame_Guild",
+		"SoundtrackReportFrame_Whisper",
+		"SoundtrackReportFrame_Channel",
+		"SoundtrackReportFrame_Cancel",
 	}
 
 	local cboxes = {
@@ -80,7 +87,7 @@ local function SkinSoundtrack(self)
 
 	for _, object in pairs(frames) do
 		if _G[object] then
-			S:HandleFrame(_G[object])
+			AS:SkinFrame(_G[object])
 		end
 	end
 
@@ -121,12 +128,18 @@ local function SkinSoundtrack(self)
 	S:HandleDropDownBox(SoundtrackFrame_LowHealthPercentDropDown)
 	S:HandleDropDownBox(SoundtrackFrame_SilenceDropDown)
 	S:HandleDropDownBox(SoundtrackFrame_ProjectDropDown)
-
+	AS:SkinBackdropFrame(SoundtrackControlFrame)
+	AS:SkinStatusBar(SoundtrackControlFrame_StatusBarTrack)
+	SoundtrackControlFrame_StatusBarTrackBorder:Kill()
+	AS:SkinStatusBar(SoundtrackControlFrame_StatusBarEvent)
+	SoundtrackControlFrame_StatusBarEventBorder:Kill()
+	S:HandleEditBox(SoundtrackReportFrame_WhisperEditBox)
+	S:HandleEditBox(SoundtrackReportFrame_ChannelEditBox)
+	
 	SoundtrackTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 	NowPlayingTextFrame:Show()
 	NowPlayingTextFrame:Hide()
 	NowPlayingTextFrame:Size(200, 40)
-
 end
 
 AS:RegisterSkin(name,SkinSoundtrack)

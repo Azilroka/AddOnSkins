@@ -19,10 +19,41 @@ local function SkinSkada(self)
 		options.titleoptions.args.margin = nil
 		options.titleoptions.args.color = nil
 		options.windowoptions = nil
-	--	options.baroptions.args.barfont = nil
-	--	options.titleoptions.args.font = nil
 	end
 
+	local ResetFrame = CreateFrame("Frame", nil, UIParent)
+	ResetFrame:SetTemplate("Transparent")
+	ResetFrame:SetSize(250, 70)
+	ResetFrame:SetPoint("CENTER", UIParent, "CENTER")
+	ResetFrame:SetFrameStrata("DIALOG")
+	ResetFrame:Hide()
+	local ResetText = ResetFrame:CreateFontString(nil, "Overlay")
+	ResetText:SetFontObject(ChatFontNormal)
+	ResetText:SetPoint("TOP", ResetFrame, "TOP", 0, -10)
+	ResetText:SetText("Do you want to reset Skada?")
+	local ResetAccept = CreateFrame("Button", nil, ResetFrame)
+	S:HandleButton(ResetAccept)
+	ResetAccept:SetSize(70, 25)
+	ResetAccept:SetPoint("RIGHT", ResetFrame, "BOTTOM", -1, 20)
+	ResetAccept:SetScript("OnClick", function(self) Skada:Reset() self:GetParent():Hide() end)
+	local ResetAcceptText = ResetAccept:CreateFontString(nil, "Overlay")
+	ResetAcceptText:SetFontObject(ChatFontNormal)
+	ResetAcceptText:SetPoint("CENTER")
+	ResetAcceptText:SetText("Yes")
+	local ResetClose = CreateFrame("Button", nil, ResetFrame)
+	S:HandleButton(ResetClose)
+	ResetClose:SetSize(70, 25)
+	ResetClose:SetPoint("LEFT", ResetFrame, "BOTTOM", 1, 20)
+	ResetClose:SetScript("OnClick", function(self) self:GetParent():Hide() end)
+	local ResetCloseText = ResetClose:CreateFontString(nil, "Overlay")
+	ResetCloseText:SetFontObject(ChatFontNormal)
+	ResetCloseText:SetPoint("CENTER")
+	ResetCloseText:SetText("No")
+	
+	function Skada:ShowPopup()
+		ResetFrame:Show()
+	end
+	
 	local barmod = Skada.displays["bar"]
 	barmod.AddDisplayOptions_ = barmod.AddDisplayOptions
 	barmod.AddDisplayOptions = function(self, win, options)
@@ -82,83 +113,11 @@ local function SkinSkada(self)
 		skada.backdrop:Point("BOTTOMRIGHT", skada, "BOTTOMRIGHT", 2, -2)
 		if (not AS:CheckOption("SkadaBackdrop")) then skada.backdrop:Hide() end
 		if (AS:CheckOption("EmbedSkada")) then
-			win.bargroup.button:SetFrameStrata("HIGH")
-			win.bargroup.button:SetFrameLevel(5)	
-			win.bargroup:SetFrameStrata("HIGH")
 			if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then win.bargroup:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
+			win.bargroup:SetFrameStrata("LOW")
+			win.bargroup.button:SetFrameStrata("LOW")
 		end
-	end
-
-	for _, window in ipairs( Skada:GetWindows() ) do
-		tinsert(windows, window)
-		window:UpdateDisplay()
-	end
-
-	Skada.CreateWindow_ = Skada.CreateWindow
-	function Skada:CreateWindow(name, db)
-		Skada:CreateWindow_(name, db)
-
-		windows = {}
-		for _, window in ipairs(Skada:GetWindows()) do
-			tinsert(windows, window)
-		end
-		hooksecurefunc(Skada, "CreateWindow", function()	
-			if AS:CheckOption("EmbedSkada") then
-				AS:EmbedSkada()
-			end
-		end)
-	end
-
-	Skada.DeleteWindow_ = Skada.DeleteWindow
-	function Skada:DeleteWindow( name )
-		Skada:DeleteWindow_( name )
-		windows = {}
-		for _, window in ipairs( Skada:GetWindows() ) do
-			tinsert( windows, window )
-		end	
-		if(AS:CheckOption("EmbedSkada")) then
-			AS:EmbedSkada()
-		end
-	end
-
-	if(AS:CheckOption("EmbedSkada")) then
-		hooksecurefunc((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "SetSize", function(self, width, height) AS:EmbedSkada() end)
-		AS:EmbedSkada()
 	end
 end
 
 AS:RegisterSkin(name,SkinSkada)
-
-local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
-	local Skada = Skada
-	local barmod = Skada.displays["bar"]
-
-	window.db.barwidth = width
-	window.db.background.height = height
-	window.db.spark = false
-	window.db.barslocked = true
-	window.bargroup:ClearAllPoints()
-	window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, ofsy)
-	
-	barmod.ApplySettings(barmod, window)
-end
-
-function AS:EmbedSkada()
-	if(#windows == 1) then
-		if E.PixelMode then
-			EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 18), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
-		else
-			EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 20), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
-		end
-	elseif(#windows == 2) then
-		local borderWidth = 1
-		local borderWidth = 1
-		if E.PixelMode then
-			EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - 18, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
-			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - 18, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -17)
-		else
-			EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - 20, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
-			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - 20, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -17)
-		end
-	end
-end

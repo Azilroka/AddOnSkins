@@ -49,8 +49,6 @@ local function AtrSkin(self,event)
 	BidQualitySort:Point("TOPLEFT", AuctionFrameBid, "TOPLEFT", 65, -50)
 	AuctionFrameTab1:ClearAllPoints()
 	AuctionFrameTab1:Point("TOPLEFT", AuctionFrame, "BOTTOMLEFT", -5, 2)
-	S:HandleNextPrevButton(BrowseNextPageButton)
-	S:HandleNextPrevButton(BrowsePrevPageButton)
 	BrowseNextPageButton:Size(20, 20)
 	BrowsePrevPageButton:Size(20, 20)
 

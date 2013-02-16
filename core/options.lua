@@ -7,21 +7,30 @@ local Skins = {
 		["addon"] = "ACP",
 	},
 	["AdiBagsSkin"] = {
-		["buttonText"] = "AdiBags",
 		["addon"] = "AdiBags",
+	},
+	["AffDotsSkin"] = {
+		["addon"] = "AffDots",
 	},
 	["AltoholicSkin"] = {
 		["addon"] = "Altoholic",
+	},
+	["AnalystSkin"] = {
+		["addon"] = "Analyst",
 	},
 	["AraBrokerGuildFriendsSkin"] = {
 		["buttonText"] = "Ara Broker Guild Friends",
 		["addon"] = "Ara_Broker_Guild_Friends",
 	},
+	["AraBrokerTradeskillsSkin"] = {
+		["buttonText"] = "Ara Broker Tradeskills",
+		["addon"] = "Ara_Broker_Tradeskills",
+	},
 	["ArchySkin"] = {
 		["addon"] = "Archy",
 	},
 	['ArhSkin'] = {
-		["buttonText"] = "ArchaeologyHelper",
+		["buttonText"] = "Archaeology Helper",
 		["addon"] = "Arh",
 	},
 	["ArkInventorySkin"] = {
@@ -39,7 +48,7 @@ local Skins = {
 	},
 	["AuctioneerSkin"] = {
 		["buttonText"] = "Auctioneer",
-		["addon"] = "Auc-Advanced"
+		["addon"] = "Auc-Advanced",
 	},
 	["AuctionLiteSkin"] = {
 		["addon"] = "AuctionLite",
@@ -51,14 +60,11 @@ local Skins = {
 		["addon"] = "BGDefender",
 	},
 	["BigBrotherSkin"] = {
-		["addon"] = "BigBrother"
-	},
-	["BigWigsSkin"] = {
-		["addon"] = "BigWigs",
+		["addon"] = "BigBrother",
 	},
 	["BPTSkin"] = {
 		["buttonText"] = "Balance Power Tracker",
-		["addon"] = "BalancePowerTracker"
+		["addon"] = "BalancePowerTracker",
 	},
 	["BuyEmAllSkin"] = {
 		["addon"] = "BuyEmAll",
@@ -71,6 +77,9 @@ local Skins = {
 	},
 	["CoolLineSkin"] = {
 		["addon"] = "CoolLine",
+	},
+	["CorkSkin"] = {
+		["addon"] = "Cork",
 	},
 	["CritlineSkin"] = {
 		["addon"] = "Critline",
@@ -85,6 +94,9 @@ local Skins = {
 	["EasyMailSkin"] = {
 		["addon"] = "EasyMail",
 	},
+	["EavesDropSkin"] = {
+		["addon"] = "EavesDrop",
+	},
 	["EnergyWatchSkin"] = {
 		["addon"] = "EnergyWatch",
 	},
@@ -95,11 +107,20 @@ local Skins = {
 		["buttonText"] = "Extended Vendor",
 		["addon"] = "ExtVendor",
 	},
+	["EveryGoldToBankerSkin"] = {
+		["addon"] = "EveryGoldToBanker",
+	},
 	["FactionizerSkin"] = {
 		["addon"] = "Factionizer",
 	},
 	["FlightMapSkin"] = {
 		["addon"] = "FlightMap",
+	},
+	["FlightMapEnhancedSkin"] = {
+		["addon"] = "FlightMapEnhanced",
+	},
+	["GuildMemberInfo_TradeSkillsSkin"] = {
+		["addon"] = "GuildMemberInfo_TradeSkills",
 	},
 	["GupPetSkin"] = {
 		["addon"] = "GupPet",
@@ -167,12 +188,12 @@ local Skins = {
 	["OutfitterSkin"] = {
 		["addon"] = "Outfitter",
 	},
+	["OvaleSkin"] = {
+		["addon"] = "Ovale",
+	},
 	["PetBattleTeamsSkin"] = {
 		["addon"] = "PetBattleTeams",
 	},
-	--["PoisonerSkin"] = {
-	--	["addon"] = "Poisoner",
-	--},
 	["PoMTrackerSkin"] = {
 		["addon"] = "PoMTracker",
 	},
@@ -213,6 +234,9 @@ local Skins = {
 		["buttonText"] = "SexyCooldown 2",
 		["addon"] = "SexyCooldown2",
 	},
+	["ShieldBarsSkin"] = {
+		["addon"] = "ShieldBars",
+	},
 	["ShieldMonitorSkin"] = {
 		["buttonText"] = "Shield Monitor",
 		["addon"] = "shieldmonitor",
@@ -237,12 +261,8 @@ local Skins = {
 		["buttonText"] = "Swatter",
 		["addon"] = "!Swatter",
 	},
-	["tComboSkin"] = {
-		["buttonText"] = "Tukui Combo",
-		["addon"] = "tCombo",
-	},
-	["TellMeWhenSkin"] = {
-		["addon"] = "TellMeWhen",
+	["SymbiosisTipSkin"] = {
+		["addon"] = "SymbiosisTip",
 	},
 	["TinyDPSSkin"] = {
 		["addon"] = "TinyDPS",
@@ -277,6 +297,11 @@ local Skins = {
 		["addon"] = "DBM-Core",
 		["ui"] = "ElvUI",
 	},
+	["CLCInfoSkin"] = {
+		["buttonText"] = "CLCInfo Icons",
+		["addon"] = "CLCInfo",
+		["ui"] = "ElvUI",
+	},
 	["CLCProtSkin"] = {
 		["buttonText"] = "CLCProt Icons",
 		["addon"] = "CLCProt",
@@ -285,11 +310,6 @@ local Skins = {
 	["CLCRetSkin"] = {
 		["buttonText"] = "CLCRet Icons",
 		["addon"] = "CLCRet",
-		["ui"] = "ElvUI",
-	},
-	["PowerAurasIconsSkin"] = {
-		["buttonText"] = "PowerAuras Icons",
-		["addon"] = "PowerAuras",
 		["ui"] = "ElvUI",
 	},
 	["WeakAurasSkin"] = {
@@ -449,6 +469,12 @@ function AS:GenerateOptions()
 						desc = L['TOGGLESKIN_DESC'],
 						order = 12,
 						disabled = function() return not IsAddOnLoaded("CoolLine") end,
+					},
+					EmbedRight = {
+						type = 'toggle',
+						name = 'Embed Right',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 13,
 					},
 				}
 			}

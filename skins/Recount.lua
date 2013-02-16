@@ -123,29 +123,39 @@ local function SkinRecount(self)
 	AS:Desaturate(Recount.DetailWindow.LeftButton)
 	AS:Desaturate(Recount.DetailWindow.ReportButton)
 	AS:Desaturate(Recount.DetailWindow.SummaryButton)
-
-	if AS:CheckOption("EmbedRecount") then AS:EmbedRecount() end
 	
+	local ResetFrame = CreateFrame("Frame", nil, UIParent)
+	ResetFrame:SetTemplate("Transparent")
+	ResetFrame:SetSize(250, 70)
+	ResetFrame:SetPoint("CENTER", UIParent, "CENTER")
+	ResetFrame:SetFrameStrata("DIALOG")
+	ResetFrame:Hide()
+	local ResetText = ResetFrame:CreateFontString(nil, "Overlay")
+	ResetText:SetFontObject(ChatFontNormal)
+	ResetText:SetPoint("TOP", ResetFrame, "TOP", 0, -10)
+	ResetText:SetText("Do you want to reset Recount?")
+	local ResetAccept = CreateFrame("Button", nil, ResetFrame)
+	S:HandleButton(ResetAccept)
+	ResetAccept:SetSize(70, 25)
+	ResetAccept:SetPoint("RIGHT", ResetFrame, "BOTTOM", -1, 20)
+	ResetAccept:SetScript("OnClick", function(self) Recount:ResetData() self:GetParent():Hide() end)
+	local ResetAcceptText = ResetAccept:CreateFontString(nil, "Overlay")
+	ResetAcceptText:SetFontObject(ChatFontNormal)
+	ResetAcceptText:SetPoint("CENTER")
+	ResetAcceptText:SetText("Yes")
+	local ResetClose = CreateFrame("Button", nil, ResetFrame)
+	S:HandleButton(ResetClose)
+	ResetClose:SetSize(70, 25)
+	ResetClose:SetPoint("LEFT", ResetFrame, "BOTTOM", 1, 20)
+	ResetClose:SetScript("OnClick", function(self) self:GetParent():Hide() end)
+	local ResetCloseText = ResetClose:CreateFontString(nil, "Overlay")
+	ResetCloseText:SetFontObject(ChatFontNormal)
+	ResetCloseText:SetPoint("CENTER")
+	ResetCloseText:SetText("No")
+	
+	function Recount:ShowReset()
+		ResetFrame:Show()
+	end
 end
 
 AS:RegisterSkin(name,SkinRecount)
-
-function AS:EmbedRecount()
-	local Recount = _G.Recount
-
-	if (AS:CheckOption("EmbedOoC")) then
-		if (AS:CheckOption("EmbedRecount")) then
-			Recount_MainWindow:Hide()
-		end
-	end
-	Recount:LockWindows(true)
-	Recount_MainWindow:ClearAllPoints()
-	EmbedRecountResize()
-	if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then Recount_MainWindow:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
-	Recount.MainWindow:SetFrameStrata("HIGH")
-end
-
-function AS:EmbedRecountResize()
-	Recount_MainWindow:SetPoint("TOPLEFT", EmbeddingWindow,"TOPLEFT", 0, 7)
-	Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 2)
-end

@@ -4,7 +4,7 @@ local S = E:GetModule('Skins')
 
 local name = "LinkWranglerSkin"
 local function SkinLinkWrangler(self, event)
-	LWTukuiSkinner_Path = "Interface\\AddOns\\Tukui_Skins\\skins\\"
+	LWTukuiSkinner_Path = "Interface\\AddOns\\ElvUI_AddOnSkins\\skins\\"
 	LWTukuiSkinner_Close = LWTukuiSkinner_Path.."Buttons\\close"
 	LWTukuiSkinner_Min = LWTukuiSkinner_Path.."Buttons\\min"
 	LWTukuiSkinner_Compare = LWTukuiSkinner_Path.."Buttons\\compare"
@@ -14,9 +14,11 @@ local function SkinLinkWrangler(self, event)
 	LWTukuiSkinner_Dress = LWTukuiSkinner_Path.."Buttons\\dress"
 
 	function LWTukuiSkinner(frame, link)
-		local r, g, b = GetItemQualityColor(select(3,GetItemInfo(link)))
 		frame:SetTemplate("Default")
-		frame:SetBackdropBorderColor(r,g,b)
+		if link then
+			local r, g, b = GetItemQualityColor(select(3,GetItemInfo(link)))
+			frame:SetBackdropBorderColor(r,g,b)
+		end
 
 		local closeButton = _G[frame:GetName().."CloseButton"]
 		LWTukuiSkinner_SkinButton(closeButton,LWTukuiSkinner_Close)
