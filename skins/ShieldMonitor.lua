@@ -15,7 +15,7 @@ local function SkinShieldMonitor(self)
 	end)
 	shieldmonitor_Frame:SetSize(209, 20)
 
-	shieldmonitor_Bar:SetStatusBarTexture(E["media"].normTex)
+	shieldmonitor_Bar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 	shieldmonitor_Bar:ClearAllPoints()
 	shieldmonitor_Bar:SetInside()
 

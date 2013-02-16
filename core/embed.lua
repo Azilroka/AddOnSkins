@@ -100,6 +100,7 @@ function AS:EmbedInit()
 	hooksecurefunc((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel), "SetSize", function(self, width, height) AS:EmbedWindowResize() end)
 
 	local button = AS:CheckOption("EmbedRight") and RightChatToggleButton or LeftChatToggleButton
+	button:RegisterForClicks('AnyUp')
 	button:SetScript("OnClick", function(self, btn)
 			if btn == 'RightButton' then
 			if (AS:CheckOption("EmbedRecount","Recount")) or (AS:CheckOption("EmbedRO")) then

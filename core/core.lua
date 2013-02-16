@@ -49,7 +49,8 @@ function AS:Initialize()
 	if not E.private.skins.addons.enable then return end
 	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
-	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix') and E.myrealm == 'Emerald Dream' then
+	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix' or E.myname == "Hakbek") 
+		and E.myrealm == 'Emerald Dream' then
 		E.private.skins.addons['SortSettings'] = true
 	end
 
@@ -135,7 +136,7 @@ end
 
 function AS:SkinFrame(frame, override)
 	if not override then frame:StripTextures(true) end
-	frame:SetTemplate("Transparent")
+	frame:CreateBackdrop("Transparent")
 	self:RegisterForPetBattleHide(frame)
 end
 
@@ -147,7 +148,7 @@ end
 
 function AS:SkinFrameD(frame, override)
 	if not override then frame:StripTextures(true) end
-	frame:SetTemplate("Default")
+	frame:CreateBackdrop("Default")
 	self:RegisterForPetBattleHide(frame)
 end
 
