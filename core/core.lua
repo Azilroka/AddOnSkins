@@ -38,13 +38,17 @@ end
 
 function AS:Initialize()
 	if not E.private.skins.addons.enable then return end
-	if self.frame then return end
 
-	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix') and E.myrealm == 'Emerald Dream' then
+	if self.initialized then return end -- In case this gets called twice as can sometimes happen with ElvUI
+
+	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix' or E.myname == "Hakbek") 
+		and E.myrealm == 'Emerald Dream' then
 		E.private.skins.addons['SortSettings'] = true
 	end
 
 	E.private.skins.addons['AlwaysTrue'] = true
+
+	if IsAddOnLoaded("Tukui_UIPackages_Skins") or IsAddOnLoaded("Tukui_ElvUI_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
 
 	self.font = LSM:Fetch("font",E.db.general.font)
 	self.pixelFont = IsAddOnLoaded("DSM") and LSM:Fetch("font","Tukui Pixel") or LSM:Fetch("font","ElvUI Pixel")
@@ -76,6 +80,8 @@ function AS:Initialize()
 			end
 		end
 	end
+
+	self.initialized = true
 end
 
 function AS:RegisterSkin_(skinName,func,events)
@@ -126,18 +132,31 @@ end
 function AS:SkinFrame(frame, template, override)
 	if not template then template = 'Transparent' end
 	if not override then frame:StripTextures(true) end
+
 	frame:SetTemplate(template)
+
 	self:RegisterForPetBattleHide(frame)
 end
 
 function AS:SkinBackdropFrame(frame, template, override)
 	if not template then template = "Transparent" end
 	if not override then frame:StripTextures(true) end
+
 	frame:CreateBackdrop(template)
+
+	self:RegisterForPetBattleHide(frame)
+end
+
+function AS:SkinFrameD(frame, override)
+	if not override then frame:StripTextures(true) end
+	frame:CreateBackdrop("Default")
 	self:RegisterForPetBattleHide(frame)
 end
 
 function AS:SkinStatusBar(bar, ClassColor)
+	bar:StripTextures(true)
+	bar:SetStatusBarTexture(LSM:Fetch("statusbar",E.private.general.normTex))
+
 	if ClassColor then
 		AS:SkinBackdropFrame(bar, "ClassColor")
 		local color = RAID_CLASS_COLORS[AS.ccolor]

@@ -271,7 +271,7 @@ local function SkinDBM(self)
 	DBM_SavedOptions.Enabled=true
 	--DBT_SavedOptions["DBM"].Scale = 1
 	--DBT_SavedOptions["DBM"].HugeScale = 1
-	DBT_SavedOptions["DBM"].Texture = E.media.normTex
+	DBT_SavedOptions["DBM"].Texture = AS.LSM:Fetch("statusbar",E.private.general.normTex)
 	--DBT_SavedOptions["DBM"].Font = "ElvUI Font"
 end
 AS:RegisterSkin(name,SkinDBM)

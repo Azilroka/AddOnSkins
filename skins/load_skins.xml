@@ -20,7 +20,6 @@
 	<Script file="BigWigs.lua"/>
 	<Script file="BPT.lua"/>
 	<Script file="BuyEmAll.lua"/>
-	<Script file="CLCInfo.lua"/>
 	<Script file="CLCProt.lua"/>
 	<Script file="CLCRet.lua"/>
 	<Script file="Clique.lua"/>
@@ -64,6 +63,7 @@
 	<Script file="Outfitter.lua"/>
 	<Script file="Ovale.lua"/>
 	<Script file="PetBattleTeams.lua"/>
+	<Script file="PetTracker.lua"/>
 	<Script file="PoMTracker.lua"/>
 	<Script file="Postal.lua"/>
 	<Script file="Quartz.lua"/>
