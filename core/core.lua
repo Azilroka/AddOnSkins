@@ -47,7 +47,7 @@ end
 
 function AS:Initialize()
 	if not E.private.skins.addons.enable then return end
-	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
+	if self.initialized then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
 	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix' or E.myname == "Hakbek") 
 		and E.myrealm == 'Emerald Dream' then
@@ -55,6 +55,7 @@ function AS:Initialize()
 	end
 
 	E.private.skins.addons['AlwaysTrue'] = true
+
 
 	if IsAddOnLoaded("Tukui_UIPackages_Skins") or IsAddOnLoaded("Tukui_ElvUI_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
 	self.font = LSM:Fetch("font",E.db.general.font)
@@ -87,6 +88,8 @@ function AS:Initialize()
 			end
 		end
 	end
+
+	self.initialized = true
 end
 
 function AS:RegisterSkin_(skinName,func,events)

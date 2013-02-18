@@ -194,6 +194,9 @@ local Skins = {
 	["PetBattleTeamsSkin"] = {
 		["addon"] = "PetBattleTeams",
 	},
+	["PetTrackerSkin"] = {
+		["addon"] = "PetTracker",
+	},
 	["PoMTrackerSkin"] = {
 		["addon"] = "PoMTracker",
 	},
@@ -483,6 +486,9 @@ function AS:GenerateOptions()
 
 	local order = 2
 	for skinName,_ in pairsByKeys(Skins) do
+		if not V.skins.addons[skinName] == nil then
+			print("No default option for", skinName)
+		end
 		E.Options.args.skins.args.addons.args[skinName] = self:GenerateOptionTable(skinName,order)
 		order = order + 1
 	end
