@@ -182,11 +182,9 @@ if IsAddOnLoaded("Skada") then
 		for _, window in ipairs(Skada:GetWindows()) do
 			tinsert(windows, window)
 		end
-		hooksecurefunc(Skada, "CreateWindow", function()	
-			if AS:CheckOption("EmbedSkada") then
-				AS:EmbedSkada()
-			end
-		end)
+		if AS:CheckOption("EmbedSkada") then
+			AS:EmbedSkada()
+		end
 	end
 
 	Skada.DeleteWindow_ = Skada.DeleteWindow
@@ -194,7 +192,7 @@ if IsAddOnLoaded("Skada") then
 		Skada:DeleteWindow_( name )
 		windows = {}
 		for _, window in ipairs( Skada:GetWindows() ) do
-			tinsert( windows, window )
+			tinsert(windows, window)
 		end
 		if(AS:CheckOption("EmbedSkada")) then
 			AS:EmbedSkada()
@@ -265,13 +263,23 @@ function AS:EmbedInit()
 	local button = AS:CheckOption("EmbedRight") and RightChatToggleButton or LeftChatToggleButton
 	button:SetScript("OnClick", function(self, btn)
 			if btn == 'RightButton' then
-			if (AS:CheckOption("EmbedRecount","Recount")) or (AS:CheckOption("EmbedRO")) then
-				ToggleFrame(Recount_MainWindow)
+			if (AS:CheckOption("EmbedRecount","Recount")) or (AS:CheckOption("EmbedRO","Recount","Omen")) then
+				if Recount_MainWindow:IsShown() then
+					Recount_MainWindow:Hide()
+				else
+					Recount_MainWindow:Show()
+				end
 			end
 			if (AS:CheckOption("EmbedSkada","Skada")) then
-				Skada:ToggleWindow()
+				for _, window in ipairs(Skada:GetWindows()) do
+					if window:IsShown() then
+						window:Hide()
+					else
+						window:Show()
+					end
+				end
 			end
-			if (AS:CheckOption("EmbedOmen","Omen")) or (AS:CheckOption("EmbedRO")) then
+			if (AS:CheckOption("EmbedOmen","Omen")) or (AS:CheckOption("EmbedRO","Recount","Omen")) then
 				if OmenBarList:IsVisible() then
 					OmenBarList:Hide()
 				else
@@ -321,8 +329,7 @@ end
 
 function AS:EmbedEnterCombat()
 	if (self:CheckOption("EmbedOoC")) then
-		ChatFrame3Tab:Hide()
-		if (self:CheckOption("EmbedRecount","Recount"))  then
+		if (self:CheckOption("EmbedRecount","Recount")) or (self:CheckOption("EmbedRO","Recount","Omen")) then
 			Recount_MainWindow:Show()
 		end
 		if (self:CheckOption("EmbedSkada","Skada"))  then
@@ -332,11 +339,7 @@ function AS:EmbedEnterCombat()
 				window:Show()
 			end
 		end
-		if (self:CheckOption("EmbedRO","Recount","Omen")) then
-			Recount_MainWindow:Show()
-			OmenBarList:Show()
-		end
-		if (self:CheckOption("EmbedOmen","Omen"))  then
+		if (self:CheckOption("EmbedOmen","Omen")) or (self:CheckOption("EmbedRO","Recount","Omen")) then
 			OmenBarList:Show()
 		end
 		if (self:CheckOption("EmbedTDPS","TinyDPS")) then
@@ -347,8 +350,7 @@ end
 
 function AS:EmbedExitCombat()
 	if (self:CheckOption("EmbedOoC")) then
-		ChatFrame3Tab:Show()
-		if (self:CheckOption("EmbedRecount","Recount")) then
+		if (self:CheckOption("EmbedRecount","Recount")) or (self:CheckOption("EmbedRO","Recount","Omen")) then
 			Recount_MainWindow:Hide()
 		end
 		if (self:CheckOption("EmbedSkada","Skada")) then
@@ -356,11 +358,7 @@ function AS:EmbedExitCombat()
 				window:Hide()
 			end
 		end
-		if (self:CheckOption("EmbedRO","Recount","Omen")) then
-			Recount_MainWindow:Hide()
-			OmenBarList:Hide()
-		end
-		if (self:CheckOption("EmbedOmen","Omen"))  then
+		if (self:CheckOption("EmbedOmen","Omen")) or (self:CheckOption("EmbedRO","Recount","Omen")) then
 			OmenBarList:Hide()
 		end
 		if (self:CheckOption("EmbedTDPS","TinyDPS")) then

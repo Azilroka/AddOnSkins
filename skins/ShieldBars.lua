@@ -4,6 +4,6 @@ local S = E:GetModule('Skins')
 
 local name = "ShieldBarsSkin"
 local function SkinShieldBars()
-	hooksecurefunc(ShieldBars, "DisplayShields", function() for i = 1, 20 do if _G["ShieldBarsStatusBar"..i.."Frame"] then AS:SkinFrame(_G["ShieldBarsStatusBar"..i.."Frame"], true) end end end)
+	hooksecurefunc(ShieldBars, "DisplayShields", function() for i = 1, 20 do if _G["ShieldBarsStatusBar"..i.."Frame"] then AS:SkinFrame(_G["ShieldBarsStatusBar"..i.."Frame"], 'Default', true) end end end)
 end
 AS:RegisterSkin(name, SkinShieldBars)

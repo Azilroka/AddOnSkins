@@ -14,11 +14,9 @@ local function SkinLinkWrangler(self, event)
 	LWTukuiSkinner_Dress = LWTukuiSkinner_Path.."Buttons\\dress"
 
 	function LWTukuiSkinner(frame, link)
+		local r, g, b = GetItemInfo(link) and GetItemQualityColor(select(3,GetItemInfo(link))) or 1, 1, 0
 		frame:SetTemplate("Default")
-		if link then
-			local r, g, b = GetItemQualityColor(select(3,GetItemInfo(link)))
-			frame:SetBackdropBorderColor(r,g,b)
-		end
+		frame:SetBackdropBorderColor(r,g,b)
 
 		local closeButton = _G[frame:GetName().."CloseButton"]
 		LWTukuiSkinner_SkinButton(closeButton,LWTukuiSkinner_Close)

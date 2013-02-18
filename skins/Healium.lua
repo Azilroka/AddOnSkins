@@ -36,7 +36,7 @@ local function SkinHealium(self)
 		local captiontext = self.CaptionBar.Caption
 		local closebutton = self.CaptionBar.CloseButton
 
-		AS:SkinFrame(captionbar, true)
+		AS:SkinFrame(captionbar, 'Default', true)
 		S:HandleCloseButton(closebutton)
 
 		skinnedFrames[self:GetName()] = true

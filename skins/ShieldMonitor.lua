@@ -5,13 +5,13 @@ local S = E:GetModule('Skins')
 local name = "ShieldMonitorSkin"
 local function SkinShieldMonitor(self)
 
-	AS:SkinFrameD(shieldmonitor_Frame, true)
+	AS:SkinFrame(shieldmonitor_Frame, 'Default', true)
 	shieldmonitor_Frame:HookScript("OnShow", function(self)
-		AS:SkinFrameD(shieldmonitor_Frame, true)
+		AS:SkinFrameD(shieldmonitor_Frame, 'Default', true)
 	end)
 	shieldmonitor_Frame:RegisterEvent("UNIT_AURA")
 	shieldmonitor_Frame:HookScript("OnEvent", function(self)
-		AS:SkinFrameD(shieldmonitor_Frame, true)
+		AS:SkinFrame(shieldmonitor_Frame, 'Default', true)
 	end)
 	shieldmonitor_Frame:SetSize(209, 20)
 
@@ -20,7 +20,7 @@ local function SkinShieldMonitor(self)
 	shieldmonitor_Bar:SetInside()
 
 	local IconBorder = CreateFrame("Frame", "ShieldIconBorder", shieldmonitor_Frame)
-	AS:SkinFrameD(IconBorder)
+	AS:SkinFrame(IconBorder, 'Default')
 	IconBorder:SetSize(20, 20)
 	IconBorder:SetPoint("RIGHT", shieldmonitor_Frame, "LEFT", -3, 0)
 

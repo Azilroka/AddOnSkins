@@ -6,8 +6,7 @@ local name = 'xMerchantSkin'
 local function SkinxMerchant(self)
 
 	S:HandleCheckBox(NuuhMerchantFrameTooltipSearching)
-	AS:SkinFrameD(NuuhMerchantFrameSearch)
-	S:HandleScrollBar(NuuhMerchantScrollFrameScrollBar)
+	AS:SkinFrame(NuuhMerchantFrameSearch, 'Default') S:HandleScrollBar(NuuhMerchantScrollFrameScrollBar)
 
 end
 

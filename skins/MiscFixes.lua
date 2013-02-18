@@ -35,8 +35,8 @@ function SkinMisc(self, event)
 	if IsAddOnLoaded("Blizzard_TrainerUI") then
 		ClassTrainerFrame:HookScript("OnShow", function()
 			if ClassTrainerTrainAllButton then
-				AS:SkinFrameD(ClassTrainerTrainAllButton)
-				AS:SkinFrameD(ClassTrainerTrainButton)
+				AS:SkinFrame(ClassTrainerTrainAllButton, 'Default')
+				AS:SkinFrame(ClassTrainerTrainButton, 'Default')
 			end
 		end)
 	end

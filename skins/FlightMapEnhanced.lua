@@ -4,6 +4,7 @@ local S = E:GetModule('Skins')
 
 local name = "FlightMapEnhancedSkin"
 local function SkinFlightMapEnhanced()
+	if not FlightMapEnhancedTaxiChoice then return end
 	AS:SkinBackdropFrame(FlightMapEnhancedTaxiChoice, true)
 	AS:SkinCloseButton(FlightMapEnhancedTaxiChoice.CloseButton)
 	AS:SkinScrollBar(FlightMapEnhancedTaxiChoiceContainerScrollBar)

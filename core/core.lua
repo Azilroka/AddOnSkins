@@ -23,15 +23,6 @@ AS.sle = IsAddOnLoaded("ElvUI_SLE")
 
 AS.Version = GetAddOnMetadata(addon,"Version")
 
-E.PopupDialogs["OLD_SKIN_PACKAGE"] = {
-	text = "You have one of the old skin addons installed.  This addon replaces and will conflict with it.  Press accept to disable the old addon and reload your UI.",
-	button1 = ACCEPT,
-	button2 = CANCEL,
-	OnAccept = function() DisableAddOn("Tukui_UIPackages_Skins"); DisableAddOn("Tukui_ElvUI_Skins"); ReloadUI() end,
-	timeout = 0,
-	whileDead = 1,
-}
-
 local function GenerateEventFunction(event)
 	local eventHandler = function(self,event)
 		for skin,funcs in pairs(self.skins) do
@@ -47,7 +38,7 @@ end
 
 function AS:Initialize()
 	if not E.private.skins.addons.enable then return end
-	if self.frame then return end -- In case this gets called twice as can sometimes happen with ElvUI
+	if self.frame then return end
 
 	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix') and E.myrealm == 'Emerald Dream' then
 		E.private.skins.addons['SortSettings'] = true
@@ -55,7 +46,6 @@ function AS:Initialize()
 
 	E.private.skins.addons['AlwaysTrue'] = true
 
-	if IsAddOnLoaded("Tukui_UIPackages_Skins") or IsAddOnLoaded("Tukui_ElvUI_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
 	self.font = LSM:Fetch("font",E.db.general.font)
 	self.pixelFont = IsAddOnLoaded("DSM") and LSM:Fetch("font","Tukui Pixel") or LSM:Fetch("font","ElvUI Pixel")
 	self.datatext_font = LSM:Fetch("font",E.db.datatexts.font)
@@ -90,7 +80,7 @@ end
 
 function AS:RegisterSkin_(skinName,func,events)
 	local events = events
-	for c,_ in pairs(events) do -- check for conflicting addons
+	for c,_ in pairs(events) do
 		if string.find(c,'%[') then
 			local conflict = string.match(c,'%[([!%w_]+)%]')
 			if IsAddOnLoaded(conflict) then return end
@@ -133,33 +123,29 @@ function AS:RegisterForPetBattleHide(frame)
 	end
 end
 
-function AS:SkinFrame(frame, override)
+function AS:SkinFrame(frame, template, override)
+	if not template then template = 'Transparent' end
 	if not override then frame:StripTextures(true) end
-	frame:SetTemplate("Transparent")
+	frame:SetTemplate(template)
 	self:RegisterForPetBattleHide(frame)
 end
 
-function AS:SkinBackdropFrame(frame, override)
+function AS:SkinBackdropFrame(frame, template, override)
+	if not template then template = "Transparent" end
 	if not override then frame:StripTextures(true) end
-	frame:CreateBackdrop("Transparent")
-	self:RegisterForPetBattleHide(frame)
-end
-
-function AS:SkinFrameD(frame, override)
-	if not override then frame:StripTextures(true) end
-	frame:SetTemplate("Default")
+	frame:CreateBackdrop(template)
 	self:RegisterForPetBattleHide(frame)
 end
 
 function AS:SkinStatusBar(bar, ClassColor)
-	bar:SetStatusBarTexture(LSM:Fetch("statusbar",E.private.general.normTex))
 	if ClassColor then
-		bar:CreateBackdrop("ClassColor")
+		AS:SkinBackdropFrame(bar, "ClassColor")
 		local color = RAID_CLASS_COLORS[AS.ccolor]
 		bar:SetStatusBarColor(color.r, color.g, color.b)
 	else
-		bar:CreateBackdrop()
+		AS:SkinBackdropFrame(bar)
 	end
+	bar:SetStatusBarTexture(LSM:Fetch("statusbar",E.private.general.normTex))
 end
 
 function AS:SkinIconButton(self, strip, style, shrinkIcon)
@@ -191,7 +177,7 @@ function AS:SkinIconButton(self, strip, style, shrinkIcon)
 end
 
 function AS:SkinTooltip(tooltip)
-	tooltip:HookScript("OnShow", function(self)	self:SetTemplate("Transparent") end)
+	tooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 end
 
 function AS:Desaturate(f, point)
