@@ -369,7 +369,7 @@ function AS:GenerateOptions()
 		args = {
 			desc = {
 				type = 'description',
-				name = 'AddOn Skins by Sortokk (based on work by Azilroka) - v'..self.Version,
+				name = 'AddOn Skins by Sortokk (based on work by Azilroka) - v'..AS.Version,
 				order = 1
 			},
 			misc = {
@@ -489,7 +489,7 @@ function AS:GenerateOptions()
 		if not V.skins.addons[skinName] == nil then
 			print("No default option for", skinName)
 		end
-		E.Options.args.skins.args.addons.args[skinName] = self:GenerateOptionTable(skinName,order)
+		E.Options.args.skins.args.addons.args[skinName] = AS:GenerateOptionTable(skinName,order)
 		order = order + 1
 	end
 end

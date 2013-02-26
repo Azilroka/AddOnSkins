@@ -7,7 +7,8 @@ local addon = select(1,...)
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:NewModule('AddOnSkins','AceTimer-3.0','AceEvent-3.0')
 local S = E:GetModule('Skins')
-local LSM = LibStub("LibSharedMedia-3.0");
+local LSM = LibStub("LibSharedMedia-3.0")
+local EP = LibStub("LibElvUIPlugin-1.0")
 
 E.AddOnSkins = AS
 
@@ -54,7 +55,7 @@ function AS:Initialize()
 	self.pixelFont = IsAddOnLoaded("DSM") and LSM:Fetch("font","Tukui Pixel") or LSM:Fetch("font","ElvUI Pixel")
 	self.datatext_font = LSM:Fetch("font",E.db.datatexts.font)
 
-	self:GenerateOptions()
+	EP:RegisterPlugin(addon, AS.GenerateOptions)
 
 	self:RegisterEvent("PET_BATTLE_CLOSE", 'AddNonPetBattleFrames')
 	self:RegisterEvent('PET_BATTLE_OPENING_START', "RemoveNonPetBattleFrames")
