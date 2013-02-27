@@ -1,10 +1,11 @@
 if not ElvUI then return end
 
-local MAJOR, MINOR = "LibElvUIPlugin-1.0", 3
+local MAJOR, MINOR = "LibElvUIPlugin-1.0", 4
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 
 if not lib then return end
 lib.plugins = {}
+lib.index = 0
 --
 -- GLOBALS:
 --
@@ -56,12 +57,13 @@ function lib:RegisterPlugin(name,callback)
 	end
 
 	lib:SetupVersionCheck(plugin)
+	lib.index = lib.index + 1
 	
 	return plugin
 end
 
 function lib:SetupVersionCheck(plugin)
-	local prefix = "ElvUIPlugin"..plugin.name.."VC"
+	local prefix = "EPVC"..lib.index
 	E["Send"..plugin.name.."VersionCheck"] = function()
 		local _, instanceType = IsInInstance()
 		if IsInRaid() then
@@ -76,10 +78,10 @@ function lib:SetupVersionCheck(plugin)
 		end
 	end
 	RegisterAddonMessagePrefix(prefix)
-	local function SendRecieve(self, event, prefix, message, channel, sender)
+	local function SendRecieve(self, event, mprefix, message, channel, sender)
 		if event == "CHAT_MSG_ADDON" then
-			if sender == E.myname then return end
-
+			if sender == E.myname or not sender or mprefix ~= prefix then return end
+			
 			if not E[plugin.name.."recievedOutOfDateMessage"] then
 				if plugin.version ~= 'BETA' and tonumber(message) ~= nil and tonumber(message) > tonumber(plugin.version) then
 					E:Print("Your version of " .. plugin.name .. " is out of date. You can download the latest version from http://www.tukui.org")
