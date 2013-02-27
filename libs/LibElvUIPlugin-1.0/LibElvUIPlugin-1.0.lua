@@ -1,6 +1,6 @@
 if not ElvUI then return end
 
-local MAJOR, MINOR = "LibElvUIPlugin-1.0", 4
+local MAJOR, MINOR = "LibElvUIPlugin-1.0", 5
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 
 if not lib then return end
@@ -67,9 +67,9 @@ function lib:SetupVersionCheck(plugin)
 	E["Send"..plugin.name.."VersionCheck"] = function()
 		local _, instanceType = IsInInstance()
 		if IsInRaid() then
-			SendAddonMessage(prefix, E.version, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "RAID")
+			SendAddonMessage(prefix, plugin.version, (not IsInRaid(LE_PARTY_CATEGORY_HOME) and IsInRaid(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "RAID")
 		elseif IsInGroup() then
-			SendAddonMessage(prefix, E.version, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "PARTY")
+			SendAddonMessage(prefix, plugin.version, (not IsInGroup(LE_PARTY_CATEGORY_HOME) and IsInGroup(LE_PARTY_CATEGORY_INSTANCE)) and "INSTANCE_CHAT" or "PARTY")
 		end
 		
 		if E["Send"..plugin.name.."MSGTimer"] then
