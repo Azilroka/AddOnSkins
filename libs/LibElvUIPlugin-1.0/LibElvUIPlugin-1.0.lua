@@ -1,6 +1,6 @@
 if not ElvUI then return end
 
-local MAJOR, MINOR = "LibElvUIPlugin-1.0", 5
+local MAJOR, MINOR = "LibElvUIPlugin-1.0", 6
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 
 if not lib then return end
@@ -73,7 +73,7 @@ function lib:SetupVersionCheck(plugin)
 		end
 		
 		if E["Send"..plugin.name.."MSGTimer"] then
-			self:CancelTimer(E["Send"..plugin.name.."MSGTimer"])
+			E:CancelTimer(E["Send"..plugin.name.."MSGTimer"])
 			E["Send"..plugin.name.."MSGTimer"] = nil
 		end
 	end
