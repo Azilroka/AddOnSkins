@@ -19,7 +19,7 @@ AS.events = {}
 AS.register = {}
 AS.ccolor = E.myclass
 AS.FrameLocks = {}
-
+E.private.skins.addons = {}
 AS.sle = IsAddOnLoaded("ElvUI_SLE")
 
 AS.Version = GetAddOnMetadata(addon,"Version")
