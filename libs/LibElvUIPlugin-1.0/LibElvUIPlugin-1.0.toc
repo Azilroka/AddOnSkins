@@ -1,7 +1,7 @@
 ## Interface: 50100
 ## LoadOnDemand: 1
-## Title: Lib: LibPetBreedInfo-1.0
+## Title: Lib: LibElvUIPlugin-1.0
 ## Notes: 
-## Author: Nullberri
+## Author: Sortokk
 LibStub.lua
-LibPetBreedInfo-1.0.lua
+LibElvUIPlugin-1.0.lua
