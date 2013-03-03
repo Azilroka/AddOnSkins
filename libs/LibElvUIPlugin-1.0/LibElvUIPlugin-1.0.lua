@@ -1,6 +1,6 @@
 if not ElvUI then return end
 
-local MAJOR, MINOR = "LibElvUIPlugin-1.0", 6
+local MAJOR, MINOR = "LibElvUIPlugin-1.0", 7
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 
 if not lib then return end
@@ -109,7 +109,7 @@ function lib:GetPluginOptions()
             pluginheader = {
                 order = 1,
                 type = "header",
-                name = "Plugins Loaded",
+                name = "LibElvUIPlugin-1.0 version "..MINOR.." - Plugins Loaded",
             },
             plugins = {
                 order = 2,
@@ -124,11 +124,13 @@ end
 function lib:GeneratePluginList()
 	list = ""
 	for _, plugin in pairs(lib.plugins) do
-		local author = GetAddOnMetadata(plugin.name, "Author")
-		if(author) then
-			list = list .. plugin.name .. " Version " .. plugin.version .. " by " .. author .. "\n"
-		else
-			list = list .. plugin.name .. " Version " .. plugin.version .. "\n"
+		if plugin.name ~= MAJOR then
+			local author = GetAddOnMetadata(plugin.name, "Author")
+			if(author) then
+				list = list .. plugin.name .. " Version " .. plugin.version .. " by " .. author .. "\n"
+			else
+				list = list .. plugin.name .. " Version " .. plugin.version .. "\n"
+			end
 		end
 	end
 	return list
