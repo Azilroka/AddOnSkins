@@ -224,6 +224,7 @@ function AS:CheckOption(optionName,...)
 		if not IsAddOnLoaded(addon) then return false end
 	end
 	
+	if not E.private.skins.addons then return V["skins"]["addons"]["optionName"] end -- return default if we don't have a table for whatever reason
 	return E.private.skins.addons[optionName]
 end
 

@@ -1,5 +1,6 @@
 local E, L, V, P, G,_ = unpack(ElvUI)
 
+if not V["skins"] then V["skins"] = {} end
 V["skins"]["addons"] = {
 	["enable"] = true,
 	["ACPSkin"] = true,
