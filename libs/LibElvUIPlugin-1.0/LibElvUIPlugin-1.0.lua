@@ -1,6 +1,6 @@
 if not ElvUI then return end
 
-local MAJOR, MINOR = "LibElvUIPlugin-1.0", 6
+local MAJOR, MINOR = "LibElvUIPlugin-1.0", 7
 local lib, oldminor = LibStub:NewLibrary(MAJOR, MINOR)
 
 if not lib then return end
@@ -84,6 +84,8 @@ function lib:SetupVersionCheck(plugin)
 			
 			if not E[plugin.name.."recievedOutOfDateMessage"] then
 				if plugin.version ~= 'BETA' and tonumber(message) ~= nil and tonumber(message) > tonumber(plugin.version) then
+					plugin.old = true
+					plugin.newversion = tonumber(message)
 					E:Print("Your version of " .. plugin.name .. " is out of date. You can download the latest version from http://www.tukui.org")
 					E[plugin.name.."recievedOutOfDateMessage"] = true
 				end
@@ -109,7 +111,7 @@ function lib:GetPluginOptions()
             pluginheader = {
                 order = 1,
                 type = "header",
-                name = "Plugins Loaded",
+                name = "LibElvUIPlugin-1.0."..MINOR.." - Plugins Loaded  (Green means you have current version, Red means out of date)",
             },
             plugins = {
                 order = 2,
@@ -124,11 +126,17 @@ end
 function lib:GeneratePluginList()
 	list = ""
 	for _, plugin in pairs(lib.plugins) do
-		local author = GetAddOnMetadata(plugin.name, "Author")
-		if(author) then
-			list = list .. plugin.name .. " Version " .. plugin.version .. " by " .. author .. "\n"
-		else
-			list = list .. plugin.name .. " Version " .. plugin.version .. "\n"
+		if plugin.name ~= MAJOR then
+			local author = GetAddOnMetadata(plugin.name, "Author")
+			local color = plugin.old and E:RGBToHex(1,0,0) or E:RGBToHex(0,1,0)
+			list = list .. color .. plugin.name .. " Version " .. plugin.version
+			if author then
+			  list = list .. " by " .. author
+			end
+			if plugin.old then
+			  list = list .. " (Newest: " .. plugin.newversion .. ")"
+			end
+			list = list .. "|r\n"
 		end
 	end
 	return list
