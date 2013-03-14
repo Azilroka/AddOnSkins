@@ -49,8 +49,6 @@ function AS:Initialize()
 
 	E.private.skins.addons['AlwaysTrue'] = true
 
-	if IsAddOnLoaded("Tukui_UIPackages_Skins") or IsAddOnLoaded("Tukui_ElvUI_Skins") then E:StaticPopup_Show("OLD_SKIN_PACKAGE") end
-
 	self.font = LSM:Fetch("font",E.db.general.font)
 	self.pixelFont = IsAddOnLoaded("DSM") and LSM:Fetch("font","Tukui Pixel") or LSM:Fetch("font","ElvUI Pixel")
 	self.datatext_font = LSM:Fetch("font",E.db.datatexts.font)
