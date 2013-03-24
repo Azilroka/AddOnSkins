@@ -356,7 +356,7 @@ function AS:GenerateOptions()
 		type = 'toggle',
 		name = 'AddOns',
 		get = function(info) return E.private.skins.addons.enable end,
-		set = function(info, value) E.private.skins.adoons.enable = value; E:StaticPopup_Show("PRIVATE_RL") end,
+		set = function(info, value) E.private.skins.addons.enable = value; E:StaticPopup_Show("PRIVATE_RL") end,
 	}
 	E.Options.args.skins.args.addons = {
 		order = 1000,

@@ -6,8 +6,8 @@ local name = "FlightMapEnhancedSkin"
 local function SkinFlightMapEnhanced()
 	if not FlightMapEnhancedTaxiChoice then return end
 	AS:SkinBackdropFrame(FlightMapEnhancedTaxiChoice, true)
-	AS:SkinCloseButton(FlightMapEnhancedTaxiChoice.CloseButton)
-	AS:SkinScrollBar(FlightMapEnhancedTaxiChoiceContainerScrollBar)
+	S:HandleCloseButton(FlightMapEnhancedTaxiChoice.CloseButton)
+	S:HandleScrollBar(FlightMapEnhancedTaxiChoiceContainerScrollBar)
 	FlightMapEnhancedTaxiChoice:HookScript("OnShow", function()
 		for i = 1, 34 do
 			if _G["FlightMapEnhancedTaxiChoiceContainerButton"..i] then _G["FlightMapEnhancedTaxiChoiceContainerButton"..i]:StripTextures() end

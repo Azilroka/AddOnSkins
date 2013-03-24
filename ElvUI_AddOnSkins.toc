@@ -1,11 +1,10 @@
 ## Interface: 50200
 ## Title: |cff1784d1ElvUI |rAddOnSkins
-## Version: 1.16
+## Version: 1.19
 ## Author: Sortokk, Azilroka, others in Credits.txt
 ## RequiredDeps: ElvUI
 ## OptionalDeps: Skada, ElvUI_SLE
 
-libs\load_libs.xml
 config\load_config.xml
 core\load_core.xml
 skins\load_skins.xml
