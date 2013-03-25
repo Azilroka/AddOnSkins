@@ -12,7 +12,7 @@ local function DoDis(self, event, ...)
 			
 end
 
-local function SkinOptions(self, event, ...)-- Skin the Options Frame
+function AS:SkinOptions(self, event, ...)-- Skin the Options Frame
 		local lhp = _G["LightHeaded_Panel"]
 		if lhp:IsVisible() then
 
@@ -46,7 +46,7 @@ local function SkinOptions(self, event, ...)-- Skin the Options Frame
 end
 
 local name = "LightheadedSkin"
-local function SkinLightHeaded(self)
+function AS:SkinLightHeaded(self)
 	AS:SkinFrame(LightHeadedFrame)
 	AS:SkinFrame(LightHeadedFrameSub)
 	AS:SkinFrame(LightHeadedSearchBox)
@@ -80,4 +80,4 @@ local function SkinLightHeaded(self)
 	local LH_Options = _G["LightHeaded_Panel"]
 end
 
-AS:RegisterSkin(name,SkinLightHeaded)
+AS:RegisterSkin(name,AS.SkinLightHeaded)

@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "EasyMailSkin"
-local function SkinEasyMail(self,event)
+function AS:SkinEasyMail(self,event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
 	MailFrame:Size(360,440)
 	AS:Desaturate(EasyMail_CheckAllButton)
@@ -43,4 +43,4 @@ local function SkinEasyMail(self,event)
 	end
 end
 
-AS:RegisterSkin(name,SkinEasyMail,"MAIL_SHOW")
+AS:RegisterSkin(name,AS.SkinEasyMail,"MAIL_SHOW")

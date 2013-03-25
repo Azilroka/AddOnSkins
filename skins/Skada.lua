@@ -5,7 +5,7 @@ local S = E:GetModule('Skins')
 local name = "SkadaSkin"
 local windows = {}
 
-local function SkinSkada(self)
+function AS:SkinSkada(self)
 	local Skada = Skada
 	local barSpacing = 1
 	local borderWidth = 1
@@ -120,4 +120,4 @@ local function SkinSkada(self)
 	end
 end
 
-AS:RegisterSkin(name,SkinSkada)
+AS:RegisterSkin(name,AS.SkinSkada)

@@ -3,9 +3,9 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "OgriLazySkin"
-local function SkinOgriLazy(self)
+function AS:SkinOgriLazy(self)
 	AS:SkinFrame(Relic_View)
 	S:HandleCloseButton(Relic_ViewCloseButton)
 end
 
-AS:RegisterSkin(name,SkinOgriLazy)
+AS:RegisterSkin(name,AS.SkinOgriLazy)

@@ -3,10 +3,10 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = 'FlightMapSkin'
-local function SkinFM(self,event)
+function AS:SkinFM(self,event)
 	AS:SkinStatusBar(FlightMapTimesFrame)
 	FlightMapTimesText:ClearAllPoints()
 	FlightMapTimesText:SetPoint("CENTER", FlightMapTimesFrame, "CENTER", 0, 0)
 end
 
-AS:RegisterSkin(name,SkinFM)
+AS:RegisterSkin(name,AS.SkinFM)

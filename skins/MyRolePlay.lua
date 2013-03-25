@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "MyRolePlaySkin"
-local function SkinMyRolePlay(self)
+function AS:SkinMyRolePlay(self)
 	hooksecurefunc(mrp, "CreateBrowseFrame", function()
 		if (AS:CheckOption("MyRolePlaySkin")) then 
 			local bg = CreateFrame("Frame", nil, MyRolePlayBrowseFrame)
@@ -127,4 +127,4 @@ local function SkinMyRolePlay(self)
 	hooksecurefunc(mrp, "CreateBFpfield", reskinHeader)
 end
 
-AS:RegisterSkin(name,SkinMyRolePlay)
+AS:RegisterSkin(name,AS.SkinMyRolePlay)

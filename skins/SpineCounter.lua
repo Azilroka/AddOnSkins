@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "SpineCounterSkin"
-local function SkinSpineCounter(self)
+function AS:SkinSpineCounter(self)
 	AS:SkinFrame(SCOutput)
 end
-AS:RegisterSkin(name,SkinSpineCounter)
+AS:RegisterSkin(name,AS.SkinSpineCounter)

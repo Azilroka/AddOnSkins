@@ -3,11 +3,11 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = 'xMerchantSkin'
-local function SkinxMerchant(self)
+function AS:SkinxMerchant(self)
 
 	S:HandleCheckBox(NuuhMerchantFrameTooltipSearching)
 	AS:SkinFrame(NuuhMerchantFrameSearch, 'Default') S:HandleScrollBar(NuuhMerchantScrollFrameScrollBar)
 
 end
 
-AS:RegisterSkin(name, SkinxMerchant)
+AS:RegisterSkin(name, AS.SkinxMerchant)

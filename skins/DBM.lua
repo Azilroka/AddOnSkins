@@ -12,7 +12,7 @@ local croprwicons = true	-- crops blizz shitty borders from icons in RaidWarning
 local buttonsize = 22
 
 local function LoadSkin()
-	local function SkinBars(self)
+	function AS:SkinBars(self)
 		for bar in self:GetBarIterator() do
 			if not bar.injected then
 					bar.ApplyStyle=function()
@@ -266,7 +266,7 @@ end
 S:RegisterSkin('DBM-GUI', LoadSkinOptions)
 
 local name = "DBMSkin"
-local function SkinDBM(self)
+function AS:SkinDBM(self)
 	LoadSkin()
 	DBM_SavedOptions.Enabled=true
 	--DBT_SavedOptions["DBM"].Scale = 1
@@ -274,4 +274,4 @@ local function SkinDBM(self)
 	DBT_SavedOptions["DBM"].Texture = AS.LSM:Fetch("statusbar",E.private.general.normTex)
 	--DBT_SavedOptions["DBM"].Font = "ElvUI Font"
 end
-AS:RegisterSkin(name,SkinDBM)
+AS:RegisterSkin(name,AS.SkinDBM)

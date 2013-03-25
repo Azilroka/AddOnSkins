@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "PostalSkin"
-local function SkinPostal(self)
+function AS:SkinPostal(self)
 	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.mail ~= true then return end
 
 	InboxPrevPageButton:Point("CENTER", InboxFrame, "BOTTOMLEFT", 45, 112)
@@ -83,4 +83,4 @@ local function SkinPostal(self)
 	end
 end
 
-AS:RegisterSkin(name,SkinPostal)
+AS:RegisterSkin(name,AS.SkinPostal)

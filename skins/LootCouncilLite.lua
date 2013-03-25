@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "LootCouncilLiteSkin"
-local function SkinLootCouncilLite(self)
+function AS:SkinLootCouncilLite(self)
 	AS:SkinFrame(RankFrame)
 	S:HandleDropDownBox(RankDropDown)
 	S:HandleButton(RankAcceptButton)
@@ -23,4 +23,4 @@ local function SkinLootCouncilLite(self)
 	end
 end
 
-AS:RegisterSkin(name,SkinLootCouncilLite)
+AS:RegisterSkin(name,AS.SkinLootCouncilLite)

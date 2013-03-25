@@ -108,7 +108,7 @@ local function Compare_OnShow(self, event, ...)
 end
 
 local name = 'AtlasLootSkin'
-local function SkinAL(self)
+function AS:SkinAL(self)
 	LoadAddOn("AtlasLoot")
 
 	local StripAllTextures = {
@@ -241,4 +241,4 @@ local function SkinAL(self)
 	AtlasLootPanel:HookScript("OnUpdate", function(self) self:SetWidth(AtlasLootDefaultFrame:GetWidth()) end)
 end
 
-AS:RegisterSkin(name,SkinAL)
+AS:RegisterSkin(name,AS.SkinAL)

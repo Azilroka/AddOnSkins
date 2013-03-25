@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "SpySkin"
-local function SkinSpy(self)
+function AS:SkinSpy(self)
 	AS:SkinFrame(Spy_MainWindow)
 	AS:SkinFrame(Spy_AlertWindow)
 	S:HandleCloseButton(Spy_MainWindow.CloseButton)
@@ -15,4 +15,4 @@ local function SkinSpy(self)
 	E:CreateMover(Spy_AlertWindow,"SpyAlertWindowMover","Spy Alert Window",nil,nil,nil,'ALL,GENERAL')
 end
 
-AS:RegisterSkin(name,SkinSpy)
+AS:RegisterSkin(name,AS.SkinSpy)

@@ -3,9 +3,9 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = 'ArhSkin'
-local function SkinArh(self,event)
+function AS:SkinArh(self,event)
 	AS:SkinFrame(Arh_MainFrame)
 	Arh_Tooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 end
 
-AS:RegisterSkin(name,SkinArh)
+AS:RegisterSkin(name,AS.SkinArh)

@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "PoMTrackerSkin"
-local function SkinPoMTracker(self)
+function AS:SkinPoMTracker(self)
 	AS:SkinFrame(PoMOptionFrame)
 	S:HandleCloseButton(PoMOptionFrame_CloseButton)
 
@@ -33,4 +33,4 @@ local function SkinPoMTracker(self)
 	pomtracker2:HookScript("OnUpdate", function() pomtrackerstatusBar:Width(pomtracker2:GetWidth()) pomtracker3:Width(pomtracker2:GetWidth()) end)
 end
 
-AS:RegisterSkin(name,SkinPoMTracker)
+AS:RegisterSkin(name,AS.SkinPoMTracker)

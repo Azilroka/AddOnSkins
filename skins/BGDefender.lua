@@ -26,7 +26,7 @@ local function OnLeave(Self)
 end
 
 local name = 'BGDefenderSkin'
-local function SkinBGDefender(self)
+function AS:SkinBGDefender(self)
 	AS:SkinFrame(BGDefenderFrame)
 
 	local StripAllTextures = {
@@ -97,4 +97,4 @@ local function SkinBGDefender(self)
 	Button11:SetScript("OnLeave", OnLeave)
 end
 
-AS:RegisterSkin(name,SkinBGDefender)
+AS:RegisterSkin(name,AS.SkinBGDefender)

@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "OdysseySkin"
-local function SkinOdyssey(self)
+function AS:SkinOdyssey(self)
 	OdysseyFrameQuestDBScrollFrame:StripTextures(True)
 	OdysseyMapsMenuScrollFrame:StripTextures(True)
 	OdysseyFrameQuestDetailsSeries:StripTextures(True)
@@ -68,4 +68,4 @@ local function SkinOdyssey(self)
 
 end
 
-AS:RegisterSkin(name,SkinOdyssey)
+AS:RegisterSkin(name,AS.SkinOdyssey)

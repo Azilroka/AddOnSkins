@@ -95,7 +95,7 @@ local function SkinReagentButton(ButtonName)
 	end
 end
 
-local function SkinIcon(self)
+function AS:SkinIcon(self)
 
 	if SkilletDoBasic_Campfire then SkinButton(SkilletDoBasic_Campfire) end
 	if SkilletDoProspecting    then SkinButton(SkilletDoProspecting)    end
@@ -138,7 +138,7 @@ local function SkinIcon(self)
 	end
 end
 
-local function SkinShopping(self)
+function AS:SkinShopping(self)
 	SkilletShoppingList:StripTextures()
 	SkilletShoppingList:SetTemplate("Transparent")
 	SkilletShoppingListParent:StripTextures()
@@ -148,7 +148,7 @@ local function SkinShopping(self)
 	S:HandleScrollBar(SkilletShoppingListListScrollBar)
 end
 
-local function SkinPluginButtons(self)
+function AS:SkinPluginButtons(self)
 
 		if SkilletPluginDropdown1 then
 			S:HandleButton(_G["SkilletPluginDropdown1"])
@@ -256,7 +256,7 @@ local function SkilletFrameOnShow(self)
 	end
 end
 
-local function SkinReagentIcon(self, event, ...)
+function AS:SkinReagentIcon(self, event, ...)
 	
 	local ReagentIcons = {
 		"SkilletSkillIcon",
@@ -443,4 +443,4 @@ local function SkinSkillet(Self)
 		local plugin = _G["SkilletPluginButton"]
 		plugin:SetScript("PostClick", SkinPluginButtons)
 end
-AS:RegisterSkin(name,SkinSkillet)
+AS:RegisterSkin(name,AS.SkinSkillet)

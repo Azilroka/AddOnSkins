@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "SoundtrackSkin"
-local function SkinSoundtrack(self)
+function AS:SkinSoundtrack(self)
 	local frames = {
 		"SoundtrackFrame",
 		"SoundtrackFrameEventList",
@@ -142,4 +142,4 @@ local function SkinSoundtrack(self)
 	NowPlayingTextFrame:Size(200, 40)
 end
 
-AS:RegisterSkin(name,SkinSoundtrack)
+AS:RegisterSkin(name,AS.SkinSoundtrack)

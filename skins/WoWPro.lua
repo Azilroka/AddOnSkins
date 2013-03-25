@@ -4,10 +4,10 @@ local S = E:GetModule('Skins')
 
 local name = "WoWProSkin"
 
-local function SkinWoWPro(self)
+function AS:SkinWoWPro(self)
 	AS:SkinFrame(Titlebar)
 	AS:SkinBackdropFrame(WoWPro.MainFrame)
 	_G["Mouseover Note Tooltip"]:HookScript("OnShow", function(self) self:SetTemplate() end)
 end
 
-AS:RegisterSkin(name,SkinWoWPro)
+AS:RegisterSkin(name,AS.SkinWoWPro)

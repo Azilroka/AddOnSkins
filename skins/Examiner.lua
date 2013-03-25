@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "ExaminerSkin"
-local function SkinExaminer(self)
+function AS:SkinExaminer(self)
 
 	-- Skin Examiner Frame
 	AS:SkinFrame(Examiner)
@@ -21,4 +21,4 @@ local function SkinExaminer(self)
 	end
 end
 
-AS:RegisterSkin(name,SkinExaminer)
+AS:RegisterSkin(name,AS.SkinExaminer)

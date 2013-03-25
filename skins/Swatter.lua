@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "SwatterSkin"
-local function SkinSwatter(self)
+function AS:SkinSwatter(self)
 	AS:SkinFrame(SwatterErrorFrame)
 	S:HandleButton(Swatter.Error.Done)
 	S:HandleButton(Swatter.Error.Next)
@@ -12,4 +12,4 @@ local function SkinSwatter(self)
 	S:HandleScrollBar(SwatterErrorInputScrollScrollBar)
 end
 
-AS:RegisterSkin(name,SkinSwatter,'[!BugGrabber]','[!ImprovedErrorFrame]')
+AS:RegisterSkin(name,AS.SkinSwatter,'[!BugGrabber]','[!ImprovedErrorFrame]')

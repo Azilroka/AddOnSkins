@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "PetBattleTeamsSkin"
-local function SkinPetBattleTeams(self)
+function AS:SkinPetBattleTeams(self)
 	E:Delay(6, function()
 		AS:SkinFrame(PetBattleTeamFrame)
 		S:HandleScrollBar(PetBattleTeamsScrollFrameScrollBar)
@@ -25,4 +25,4 @@ local function SkinPetBattleTeams(self)
 	end)
 end
 
-AS:RegisterSkin(name,SkinPetBattleTeams)
+AS:RegisterSkin(name,AS.SkinPetBattleTeams)

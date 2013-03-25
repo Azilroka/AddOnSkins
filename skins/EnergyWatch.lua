@@ -4,11 +4,11 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "EnergyWatchSkin"
-local function SkinEnergyWatch(self)
+function AS:SkinEnergyWatch(self)
 	EnergyWatchBar:StripTextures(True)
 	EnergyWatchStatusBar:CreateBackdrop()
 	EnergyWatchStatusBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 end
 
-AS:RegisterSkin(name,SkinEnergyWatch)
+AS:RegisterSkin(name,AS.SkinEnergyWatch)
 

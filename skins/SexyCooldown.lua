@@ -75,7 +75,7 @@ local function HookSCDBar(bar)
 	bar.settings.icon.borderInset = 0
 end
 
-local function SkinSexyCooldown(self)
+function AS:SkinSexyCooldown(self)
 	local scd = SexyCooldown2
 	local LSM = LibStub("LibSharedMedia-3.0")
 
@@ -94,4 +94,4 @@ local function SkinSexyCooldown(self)
 	end
 end
 
-AS:RegisterSkin(name,SkinSexyCooldown)
+AS:RegisterSkin(name,AS.SkinSexyCooldown)

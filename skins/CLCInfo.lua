@@ -170,20 +170,20 @@ end
 local function CLCInfo()
 	if not clcInfo then return; end
 	local name = 'CLCInfoSkin'
-	local function SkinCLCInfo(self)
+	function AS:SkinCLCInfo(self)
 		local mod = clcInfo.display['icons']
 		if not mod then return; end
 		mod.oldNew = mod.New
 		mod.New = New
 	end
-	AS:RegisterSkin(name,SkinCLCInfo)
+	AS:RegisterSkin(name,AS.SkinCLCInfo)
 end
 
 local function CLCInfo_Options()
 	local mod = clcInfo_Options
 	if not mod then return; end
 	local name = 'CLCInfoSkin'
-	local function SkinCLCInfo2(self)
+	function AS:SkinCLCInfo2(self)
 		mod.OldLoadActiveTemplate = mod.LoadActiveTemplate
 		mod.LoadActiveTemplate = LoadActiveTemplate
 		
@@ -196,7 +196,7 @@ local function CLCInfo_Options()
 		mod.OldUpdateMIconList = mod.UpdateMIconList
 		mod.UpdateMIconList = UpdateMIconList
 	end
-	AS:RegisterSkin(name,SkinCLCInfo2)
+	AS:RegisterSkin(name,AS.SkinCLCInfo2)
 end
 
 S:RegisterSkin('clcInfo_Options', CLCInfo_Options)

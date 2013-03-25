@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "MasterLootManagerRemixSkin"
-local function SkinMLM(self)
+function AS:SkinMLM(self)
 	local StripAllTextures = {
 		"MasterLootManagerMain",
 		"MasterLootLoggerFrame",
@@ -127,4 +127,4 @@ local function SkinMLM(self)
 	S:HandleCloseButton(MasterLootLoggerAddEditFrameCloseButton)
 end
 
-AS:RegisterSkin(name,SkinMLM)
+AS:RegisterSkin(name,AS.SkinMLM)

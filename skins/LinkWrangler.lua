@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "LinkWranglerSkin"
-local function SkinLinkWrangler(self, event)
+function AS:SkinLinkWrangler(self, event)
 	LWTukuiSkinner_Path = "Interface\\AddOns\\ElvUI_AddOnSkins\\skins\\"
 	LWTukuiSkinner_Close = LWTukuiSkinner_Path.."Buttons\\close"
 	LWTukuiSkinner_Min = LWTukuiSkinner_Path.."Buttons\\min"
@@ -68,4 +68,4 @@ local function SkinLinkWrangler(self, event)
 
 end
 
-AS:RegisterSkin(name,SkinLinkWrangler)
+AS:RegisterSkin(name,AS.SkinLinkWrangler)

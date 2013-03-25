@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "WowLuaSkin"
-local function SkinWowLua(self)
+function AS:SkinWowLua(self)
 	AS:SkinFrame(WowLuaFrame)
 	WowLuaFrameLineNumScrollFrame:StripTextures(True)
 	WowLuaFrameResizeBar:StripTextures(True)
@@ -29,4 +29,4 @@ local function SkinWowLua(self)
 	WowLuaFrameCommand.bg1:Point("TOPLEFT", 0, -4)
 	WowLuaFrameCommand.bg1:Point("BOTTOMRIGHT", -12, 2)
 end
-AS:RegisterSkin(name,SkinWowLua)
+AS:RegisterSkin(name,AS.SkinWowLua)

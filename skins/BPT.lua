@@ -4,7 +4,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "BPTSkin"
-local function SkinBPT(self)
+function AS:SkinBPT(self)
 	if (select(2, UnitClass("player")) ~= "DRUID") then
 		return
 	end
@@ -17,4 +17,4 @@ local function SkinBPT(self)
 	hooksecurefunc(BalancePowerTracker.modules.eclipse_bar,"ReDraw", function() BalancePowerTracker_Eclipse_Bar_Frame:SetTemplate("Transparent") end)
 end
 
-AS:RegisterSkin(name,SkinBPT)
+AS:RegisterSkin(name,AS.SkinBPT)

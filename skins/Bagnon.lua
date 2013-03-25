@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = 'BagnonSkin'
-local function SkinBagnon(self,event)
+function AS:SkinBagnon(self,event)
 	if event == "BANKFRAME_OPENED" then
 		E:Delay(0, function()
 			if BagnonFramebank then
@@ -44,4 +44,4 @@ local function SkinBagnon(self,event)
 	end)
 end
 
-AS:RegisterSkin(name,SkinBagnon,"BANKFRAME_OPENED","GUILDBANKFRAME_OPENED","VOID_STORAGE_OPEN")
+AS:RegisterSkin(name,AS.SkinBagnon,"BANKFRAME_OPENED","GUILDBANKFRAME_OPENED","VOID_STORAGE_OPEN")

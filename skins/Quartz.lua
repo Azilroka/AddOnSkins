@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "QuartzSkin"
-local function SkinQuartz(self)
+function AS:SkinQuartz(self)
 	local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
 	if not Q3 then return end
 	
@@ -57,4 +57,4 @@ local function SkinQuartz(self)
 	print("If you are experiencing performance issue's (eg. locking spellcasts, extereme lag spikes) while using the Quartz Skin. Please disable the Quartz skin.")
 end
 
-AS:RegisterSkin(name,SkinQuartz)
+AS:RegisterSkin(name,AS.SkinQuartz)

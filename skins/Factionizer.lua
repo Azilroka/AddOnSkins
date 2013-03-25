@@ -13,7 +13,7 @@ local function desat(self, event, ...)
 end
 
 local name = "FactionizerSkin"
-local function SkinFactionizer(self)
+function AS:SkinFactionizer(self)
 	local StripAllTextures = {
                 "FIZ_ReputationDetailFrame",
                 "FIZ_OptionsFrame",
@@ -106,4 +106,4 @@ local function SkinFactionizer(self)
 	FIZ_OptionsFrame:Point("TOPLEFT",   ReputationFrame, "TOPRIGHT", 5, 0)
 end
 
-AS:RegisterSkin(name,SkinFactionizer)
+AS:RegisterSkin(name,AS.SkinFactionizer)

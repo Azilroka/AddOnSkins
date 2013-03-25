@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "QuestCompletistSkin"
-local function SkinQuestCompletist(self)
+function AS:SkinQuestCompletist(self)
 	local tooltips = {
 		"qcMapTooltip",
 		"qcQuestInformationTooltip",
@@ -30,4 +30,4 @@ local function SkinQuestCompletist(self)
 	qcMenuSlider:Height(256)
 end
 
-AS:RegisterSkin(name,SkinQuestCompletist)
+AS:RegisterSkin(name,AS.SkinQuestCompletist)

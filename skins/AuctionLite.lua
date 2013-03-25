@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 local name = "AuctionLiteSkin"
 
-local function SkinAuctionLite(self,event)
+function AS:SkinAuctionLite(self,event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
 	S:HandleTab(AuctionFrameTab4)
 	S:HandleTab(AuctionFrameTab5)
@@ -27,4 +27,4 @@ local function SkinAuctionLite(self,event)
 	S:HandleEditBox(SellBuyoutPriceCopper)
 	S:HandleButton(SellCreateAuctionButton)
 end
-AS:RegisterSkin(name,SkinAuctionLite,"AUCTION_HOUSE_SHOW")
+AS:RegisterSkin(name,AS.SkinAuctionLite,"AUCTION_HOUSE_SHOW")

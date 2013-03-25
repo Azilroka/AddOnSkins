@@ -29,7 +29,7 @@ local function cbResize(self, event, ...)
    end
 end 
 
-local function SkinACP(self)
+function AS:SkinACP(self)
 	AS:SkinFrame(ACP_AddonList)
     AS:SkinFrame(ACP_AddonList_ScrollFrame)
 	
@@ -82,4 +82,4 @@ local function SkinACP(self)
 	ACP_AddonList:SetParent(UIParent)
  end
 
- AS:RegisterSkin(name, SkinACP)
+ AS:RegisterSkin(name, AS.SkinACP)

@@ -4,7 +4,7 @@ local S = E:GetModule('Skins')
 
 local name = "ArchySkin"
 
-local function SkinArchy(self)
+function AS:SkinArchy(self)
 	local function SkinArchyArtifactFrame()
 		AS:SkinFrame(ArchyArtifactFrame)
 
@@ -58,4 +58,4 @@ local function SkinArchy(self)
  	ArchyDistanceIndicatorFrameCrateButtonIcon:SetDrawLayer("OVERLAY")
 end
 
-AS:RegisterSkin(name,SkinArchy)
+AS:RegisterSkin(name,AS.SkinArchy)

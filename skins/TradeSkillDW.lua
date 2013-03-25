@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "TradeSkillDWSkin"
-local function SkinTradeSkillDW(self)
+function AS:SkinTradeSkillDW(self)
 
 TradeSkillFrame:StripTextures(True)
 AS:SkinFrame(TradeSkillFrame)
@@ -115,4 +115,4 @@ TradeSkillDW_QueueFrameDetailScrollFrameChildFrameReagent8:StripTextures()
 S:HandleScrollBar(TradeSkillDW_QueueFrameDetailScrollFrameScrollBar)
 end
 
-AS:RegisterSkin(name,SkinTradeSkillDW)
+AS:RegisterSkin(name,AS.SkinTradeSkillDW)

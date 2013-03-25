@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "BigBrotherSkin"
-local function SkinBigBrother(self)
+function AS:SkinBigBrother(self)
 	BigBrother:ToggleBuffWindow()
 	AS:SkinFrame(BigBrother_BuffWindow)
 	S:HandleCloseButton(BigBrother_BuffWindow.CloseButton)
@@ -20,4 +20,4 @@ local function SkinBigBrother(self)
 	BigBrother:ToggleBuffWindow()
 end
 
-AS:RegisterSkin(name,SkinBigBrother)
+AS:RegisterSkin(name,AS.SkinBigBrother)

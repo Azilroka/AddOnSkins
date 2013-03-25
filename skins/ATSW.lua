@@ -4,7 +4,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = 'ATSWSkin'
-local function SkinATSW(self)
+function AS:SkinATSW(self)
 	AS:SkinFrame(ATSWFrame)
 	ATSWSkillIcon:StripTextures(True)
 	ATSWListScrollFrame:StripTextures(True)
@@ -175,4 +175,4 @@ local function SkinATSW(self)
 	AS:SkinStatusBar(ATSWScanDelayFrameBar, true)
 end
 
-AS:RegisterSkin(name,SkinATSW)
+AS:RegisterSkin(name,AS.SkinATSW)

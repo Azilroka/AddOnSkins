@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "HealiumSkin"
-local function SkinHealium(self)
+function AS:SkinHealium(self)
 	local captionFrames = {
 		"HealiumPartyFrame",
 		"HealiumPetFrame",
@@ -154,4 +154,4 @@ local function SkinHealium(self)
 	hooksecurefunc("HealiumUnitFrames_Button_OnLoad", skinUnitFrame)
 end
 
-AS:RegisterSkin(name,SkinHealium)
+AS:RegisterSkin(name,AS.SkinHealium)

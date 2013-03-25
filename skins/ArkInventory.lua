@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "ArkInventorySkin"
-local function SkinArkInventory(self)
+function AS:SkinArkInventory(self)
 	local ArkInventory = LibStub("AceAddon-3.0"):GetAddon("ArkInventory")
 	local _G = _G
 	ArkInventory.Frame_Main_Paint_ = ArkInventory.Frame_Main_Paint
@@ -127,4 +127,4 @@ local function SkinArkInventory(self)
 
 end
 
-AS:RegisterSkin(name,SkinArkInventory)
+AS:RegisterSkin(name,AS.SkinArkInventory)

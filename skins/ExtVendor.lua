@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "ExtVendorSkin"
-local function SkinExtVendor(self)
+function AS:SkinExtVendor(self)
 	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.merchant ~= true then return end
 
 	S:HandleButton(MerchantFrameFilterButton)
@@ -32,5 +32,5 @@ local function SkinExtVendor(self)
 	S:HandleButton(ExtVendor_SellJunkPopupNoButton)
 end
 
-AS:RegisterSkin(name,SkinExtVendor)
+AS:RegisterSkin(name,AS.SkinExtVendor)
 

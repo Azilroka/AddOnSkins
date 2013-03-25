@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "SearingPlasmaTrackerSkin"
-local function SkinSearingPlasmaTracker(self)
+function AS:SkinSearingPlasmaTracker(self)
 	AS:SkinFrame(SearingPlasmaTrackerFrame)
 end
-AS:RegisterSkin(name,SkinSearingPlasmaTracker)
+AS:RegisterSkin(name,AS.SkinSearingPlasmaTracker)

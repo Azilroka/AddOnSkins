@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "RaidInviteOrganizerSkin"
-local function SkinRIO(self)
+function AS:SkinRIO(self)
 	AS:SkinFrame(RIO_MainFrame)
 	AS:SkinFrame(RIO_GuildMemberFrame)
 	AS:SkinFrame(RIO_CodeWordsContainer)
@@ -41,4 +41,4 @@ local function SkinRIO(self)
 
 end
 
-AS:RegisterSkin(name,SkinRIO)
+AS:RegisterSkin(name,AS.SkinRIO)

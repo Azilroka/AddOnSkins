@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "MRTSkin"
-local function SkinMRT(self)
+function AS:SkinMRT(self)
 	AS:SkinFrame(MRT_GUIFrame)
 	AS:SkinFrame(MRT_GUI_FourRowDialog)
 	S:HandleCloseButton(MRT_GUIFrame_CloseButton)
@@ -39,4 +39,4 @@ local function SkinMRT(self)
 	MRT_GUI_TT:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
 end
 
-AS:RegisterSkin(name,SkinMRT)
+AS:RegisterSkin(name,AS.SkinMRT)

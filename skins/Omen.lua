@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "OmenSkin"
-local function SkinOmen(self)
+function AS:SkinOmen(self)
 	local borderWidth = 2
 
 	Omen.UpdateTitleBar_ = Omen.UpdateTitleBar
@@ -51,4 +51,4 @@ local function SkinOmen(self)
 	Omen:ResizeBars()
 end
 
-AS:RegisterSkin(name,SkinOmen)
+AS:RegisterSkin(name,AS.SkinOmen)

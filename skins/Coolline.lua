@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "CoolLineSkin"
-local function SkinCoolLine(self)
+function AS:SkinCoolLine(self)
 	CoolLineDB.bgcolor = { r = 0, g = 0, b = 0, a = 0, }
 	CoolLineDB.border  = "None"
 	CoolLine.updatelook()
@@ -22,4 +22,4 @@ local function SkinCoolLine(self)
 	end
 end
 
-AS:RegisterSkin(name,SkinCoolLine)
+AS:RegisterSkin(name,AS.SkinCoolLine)
