@@ -12,7 +12,7 @@ local croprwicons = true	-- crops blizz shitty borders from icons in RaidWarning
 local buttonsize = 22
 
 local function LoadSkin()
-	function AS:SkinBars(self)
+	local function SkinBars(self)
 		for bar in self:GetBarIterator() do
 			if not bar.injected then
 					bar.ApplyStyle=function()
