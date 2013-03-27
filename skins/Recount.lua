@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "RecountSkin"
-function AS:SkinRecount(self)
+function AS:SkinRecount()
 	local Recount = _G.Recount
 
 	local function SkinFrame(frame)

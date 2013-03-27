@@ -13,7 +13,7 @@ local function desat(self, event, ...)
 end
 
 local name = "FactionizerSkin"
-function AS:SkinFactionizer(self)
+function AS:SkinFactionizer()
 	local StripAllTextures = {
                 "FIZ_ReputationDetailFrame",
                 "FIZ_OptionsFrame",

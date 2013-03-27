@@ -15,7 +15,7 @@ local function SkinFrame(frame)
 	end
 end
 
-local function AdiSkin(self,event)
+function AS:SkinAdiBags(event)
 	E:Delay(0, function()
 		if event == 'PLAYER_ENTERING_WORLD' then
 			if not AdiBagsContainer1 then ToggleBackpack() ToggleBackpack() end
@@ -34,4 +34,4 @@ local function AdiSkin(self,event)
 	end
 end
 
-AS:RegisterSkin(name,AdiSkin,"BANKFRAME_OPENED")
+AS:RegisterSkin(name,AS.SkinAdiBags,"BANKFRAME_OPENED")

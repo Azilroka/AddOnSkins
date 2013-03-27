@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "QuestCompletistSkin"
-function AS:SkinQuestCompletist(self)
+function AS:SkinQuestCompletist()
 	local tooltips = {
 		"qcMapTooltip",
 		"qcQuestInformationTooltip",

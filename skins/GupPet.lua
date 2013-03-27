@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "GupPetSkin"
-function AS:SkinGupPet(self,event)
+function AS:SkinGupPet(event)
 	if IsAddOnLoaded("GupPet_ButtonFacade") then DisableAddOn("GupPet_ButtonFacade") print("Incompatable AddOn Detected: GupPet ButtonFacade - Disabling. Please Reload.") end
 	AS:SkinFrame(GupPet_InterfaceOptionsFrame)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameOptions)

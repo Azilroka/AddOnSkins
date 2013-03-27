@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "MRTSkin"
-function AS:SkinMRT(self)
+function AS:SkinMRT()
 	AS:SkinFrame(MRT_GUIFrame)
 	AS:SkinFrame(MRT_GUI_FourRowDialog)
 	S:HandleCloseButton(MRT_GUIFrame_CloseButton)

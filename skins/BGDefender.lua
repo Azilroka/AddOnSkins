@@ -26,7 +26,7 @@ local function OnLeave(Self)
 end
 
 local name = 'BGDefenderSkin'
-function AS:SkinBGDefender(self)
+function AS:SkinBGDefender()
 	AS:SkinFrame(BGDefenderFrame)
 
 	local StripAllTextures = {

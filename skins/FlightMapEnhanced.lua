@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "FlightMapEnhancedSkin"
-local function SkinFlightMapEnhanced()
+function AS:SkinFlightMapEnhanced()
 	if not FlightMapEnhancedTaxiChoice then return end
 	AS:SkinBackdropFrame(FlightMapEnhancedTaxiChoice, true)
 	S:HandleCloseButton(FlightMapEnhancedTaxiChoice.CloseButton)
@@ -15,4 +15,4 @@ local function SkinFlightMapEnhanced()
 	end)
 	hooksecurefunc("FlightMapEnhancedTaxiChoiceButton_OnEnter", function() GameTooltip:Show() end)
 end
-AS:RegisterSkin(name, SkinFlightMapEnhanced)
+AS:RegisterSkin(name, AS.SkinFlightMapEnhanced)

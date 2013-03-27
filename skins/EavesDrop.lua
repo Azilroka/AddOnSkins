@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "EavesDropSkin"
-local function SkinEavesDrop()
+function AS:SkinEavesDrop()
 	AS:SkinFrame(EavesDropFrame)
 	AS:SkinFrame(EavesDropHistoryFrame)
 	S:HandleTab(EavesDropTab)
@@ -14,4 +14,4 @@ local function SkinEavesDrop()
 	S:HandleButton(EavesDropHistoryFrameReset)
 	S:HandleCloseButton(EavesDropHistoryFrameClose)
 end
-AS:RegisterSkin(name, SkinEavesDrop)
+AS:RegisterSkin(name, AS.SkinEavesDrop)

@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "PetBattleTeamsSkin"
-function AS:SkinPetBattleTeams(self)
+function AS:SkinPetBattleTeams()
 	E:Delay(6, function()
 		AS:SkinFrame(PetBattleTeamFrame)
 		S:HandleScrollBar(PetBattleTeamsScrollFrameScrollBar)

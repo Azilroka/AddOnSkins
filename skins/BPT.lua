@@ -4,7 +4,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "BPTSkin"
-function AS:SkinBPT(self)
+function AS:SkinBPT()
 	if (select(2, UnitClass("player")) ~= "DRUID") then
 		return
 	end

@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "EveryGoldToBankerSkin"
-local function SkinEveryGoldToBanker()
+function AS:SkinEveryGoldToBanker()
 	AS:SkinFrame(EveryGoldToBankerCalculator)
 	AS:SkinFrame(SettingFrame)
 	S:HandleEditBox(AmountEditBox)
@@ -25,4 +25,4 @@ local function SkinEveryGoldToBanker()
 	DefaultAmountFrame:StripTextures()
 	DefaultReceiverFrame:StripTextures()
 end
-AS:RegisterSkin(name, SkinEveryGoldToBanker)
+AS:RegisterSkin(name, AS.SkinEveryGoldToBanker)

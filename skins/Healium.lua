@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "HealiumSkin"
-function AS:SkinHealium(self)
+function AS:SkinHealium()
 	local captionFrames = {
 		"HealiumPartyFrame",
 		"HealiumPetFrame",

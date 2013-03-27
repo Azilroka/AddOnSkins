@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "ShieldMonitorSkin"
-function AS:SkinShieldMonitor(self)
+function AS:SkinShieldMonitor()
 
 	AS:SkinFrame(shieldmonitor_Frame, 'Default', true)
 	shieldmonitor_Frame:HookScript("OnShow", function(self)

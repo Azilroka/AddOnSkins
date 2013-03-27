@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "QuestItemBarSkin"
-function AS:SkinQuestItemBar(self)
+function AS:SkinQuestItemBar()
 	hooksecurefunc(QuestItemBar,"LibQuestItem_Update", function()
 		for i = 1, 99 do
 			if _G["QuestItemBarButton"..i] then AS:SkinIconButton(_G["QuestItemBarButton"..i], true, true, true) end

@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "RaidBuffStatusSkin"
-function AS:SkinRBS(self)
+function AS:SkinRBS()
 	AS:SkinFrame(RBSFrame)
 	S:HandleButton(RBSFrameScanButton)
 	S:HandleButton(RBSFrameReadyCheckButton)

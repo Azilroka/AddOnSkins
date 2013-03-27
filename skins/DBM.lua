@@ -266,7 +266,7 @@ end
 S:RegisterSkin('DBM-GUI', LoadSkinOptions)
 
 local name = "DBMSkin"
-function AS:SkinDBM(self)
+function AS:SkinDBM()
 	LoadSkin()
 	DBM_SavedOptions.Enabled=true
 	--DBT_SavedOptions["DBM"].Scale = 1

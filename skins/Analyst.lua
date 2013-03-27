@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "AnalystSkin"
-local function SkinAnalyst()
+function AS:SkinAnalyst()
 	AS:SkinFrame(EconomyFrame)
 	EconomyFrame:SetHeight(450)
 	EconomyFrame:SetWidth(364)
@@ -18,4 +18,4 @@ local function SkinAnalyst()
 	S:HandleDropDownBox(EconomyFrameRightStatsReportDropDown)
 	S:HandleCheckBox(EconomyFrameAllCharacters)
 end
-AS:RegisterSkin(name, SkinAnalyst)
+AS:RegisterSkin(name, AS.SkinAnalyst)

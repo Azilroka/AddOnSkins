@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "TradeSkillDWSkin"
-function AS:SkinTradeSkillDW(self)
+function AS:SkinTradeSkillDW()
 
 TradeSkillFrame:StripTextures(True)
 AS:SkinFrame(TradeSkillFrame)

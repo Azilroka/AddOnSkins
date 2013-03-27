@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "AlwaysTrue"
-function SkinMisc(self, event)
+function AS:SkinMisc(event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
 
 	if IsAddOnLoaded("acb_CastBar") then
@@ -41,4 +41,4 @@ function SkinMisc(self, event)
 		end)
 	end
 end
-AS:RegisterSkin(name, SkinMisc, "ADDON_LOADED")
+AS:RegisterSkin(name, AS.SkinMisc, "ADDON_LOADED")

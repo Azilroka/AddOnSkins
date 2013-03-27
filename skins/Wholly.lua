@@ -21,7 +21,7 @@ local function SkinWhollyFrame()
    end
 end
 
-function AS:SkinWholly(self)
+function AS:SkinWholly()
    com_mithrandir_whollyFrame:HookScript("OnShow",function(self) SkinWhollyFrame() end)
 end
 

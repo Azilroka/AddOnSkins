@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "MasterLootManagerRemixSkin"
-function AS:SkinMLM(self)
+function AS:SkinMLM()
 	local StripAllTextures = {
 		"MasterLootManagerMain",
 		"MasterLootLoggerFrame",

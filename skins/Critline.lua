@@ -3,8 +3,8 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "CritlineSkin"
-local function SkinCritline()
+function AS:SkinCritline()
 	AS:SkinBackdropFrame(Critline.display, true)
 	Critline.display.backdrop:SetFrameStrata("BACKGROUND")
 end
-AS:RegisterSkin(name, SkinCritline)
+AS:RegisterSkin(name, AS.SkinCritline)

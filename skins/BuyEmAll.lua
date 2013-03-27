@@ -4,7 +4,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "BuyEmAllSkin"
-function AS:SkinBuyEmAll(self)
+function AS:SkinBuyEmAll()
 	AS:SkinFrame(BuyEmAllFrame)
 	S:HandleButton(BuyEmAllStackButton)
 	S:HandleButton(BuyEmAllMaxButton)

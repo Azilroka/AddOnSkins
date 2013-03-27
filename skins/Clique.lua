@@ -4,7 +4,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "CliqueSkin"
-function AS:SkinClique(self)
+function AS:SkinClique()
 	local Frames = {
 	"CliqueDialog",
 	"CliqueConfig",

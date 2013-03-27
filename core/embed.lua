@@ -169,7 +169,7 @@ end
 
 if IsAddOnLoaded("Skada") then
 	local Skada = Skada
-	for _, window in ipairs( Skada:GetWindows() ) do
+	for _, window in ipairs(Skada:GetWindows() ) do
 		tinsert(windows, window)
 		window:UpdateDisplay()
 	end
@@ -191,7 +191,7 @@ if IsAddOnLoaded("Skada") then
 	function Skada:DeleteWindow( name )
 		Skada:DeleteWindow_( name )
 		windows = {}
-		for _, window in ipairs( Skada:GetWindows() ) do
+		for _, window in ipairs(Skada:GetWindows() ) do
 			tinsert(windows, window)
 		end
 		if(AS:CheckOption("EmbedSkada")) then

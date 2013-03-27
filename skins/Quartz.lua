@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "QuartzSkin"
-function AS:SkinQuartz(self)
+function AS:SkinQuartz()
 	local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
 	if not Q3 then return end
 	

@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "DresserSkin"
-function AS:SkinDresser(self)
+function AS:SkinDresser()
 	-- Dresser Skin
 	S:HandleButton(DresserButton1)
 	S:HandleButton(DresserButton2)

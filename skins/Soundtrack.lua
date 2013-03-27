@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "SoundtrackSkin"
-function AS:SkinSoundtrack(self)
+function AS:SkinSoundtrack()
 	local frames = {
 		"SoundtrackFrame",
 		"SoundtrackFrameEventList",

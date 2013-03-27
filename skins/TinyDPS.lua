@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "TinyDPSSkin"
-function AS:SkinTinyDps(self)
+function AS:SkinTinyDps()
 	local frame = tdpsFrame
 	local anchor = tdpsAnchor
 	local status = tdpsStatusBar

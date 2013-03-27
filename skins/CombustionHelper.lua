@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "CombustionHelperSkin"
-function AS:SkinCombustionHelper(self)
+function AS:SkinCombustionHelper()
 	AS:SkinBackdropFrame(CombustionFrame)
 	--CombustionFrame:HookScript("OnUpdate", function(self) self:StripTextures() end)
 	CombuMBTrackerBorderFrame:Kill()

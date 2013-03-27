@@ -4,7 +4,7 @@ local S = E:GetModule('Skins')
 
 local name = "ArchySkin"
 
-function AS:SkinArchy(self)
+function AS:SkinArchy()
 	local function SkinArchyArtifactFrame()
 		AS:SkinFrame(ArchyArtifactFrame)
 

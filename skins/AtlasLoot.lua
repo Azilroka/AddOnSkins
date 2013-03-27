@@ -108,7 +108,7 @@ local function Compare_OnShow(self, event, ...)
 end
 
 local name = 'AtlasLootSkin'
-function AS:SkinAL(self)
+function AS:SkinAL()
 	LoadAddOn("AtlasLoot")
 
 	local StripAllTextures = {
@@ -198,7 +198,7 @@ function AS:SkinAL(self)
 
 	S:HandleCloseButton(AtlasLootDefaultFrame_CloseButton)
 	S:HandleCloseButton(AtlasLootCompareFrame_CloseButton)
-	S:HandleCloseButton( AtlasLootCompareFrame_CloseButton_Wishlist)
+	S:HandleCloseButton(AtlasLootCompareFrame_CloseButton_Wishlist)
 
 	AS:Desaturate(AtlasLootDefaultFrame_LockButton)
 

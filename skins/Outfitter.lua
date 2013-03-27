@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "OutfitterSkin"
-function AS:SkinOutfitter(self)
+function AS:SkinOutfitter()
 CharacterFrame:HookScript("OnShow", function(self) PaperDollSidebarTabs:SetPoint("BOTTOMRIGHT", CharacterFrameInsetRight, "TOPRIGHT", -14, 0) end)
 OutfitterFrame:HookScript("OnShow", function(self) 
 	AS:SkinFrame(OutfitterFrame)

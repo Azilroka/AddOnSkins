@@ -29,7 +29,7 @@ local function cbResize(self, event, ...)
    end
 end 
 
-function AS:SkinACP(self)
+function AS:SkinACP()
 	AS:SkinFrame(ACP_AddonList)
     AS:SkinFrame(ACP_AddonList_ScrollFrame)
 	

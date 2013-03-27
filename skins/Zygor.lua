@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "ZygorSkin"
-function AS:SkinZygor(self)
+function AS:SkinZygor()
 	ZygorGuidesViewerFrame:StripTextures(True)
 	ZygorGuidesViewerFrame_Border:StripTextures(True)
 	ZygorGuidesViewer_CreatureViewer:SetTemplate("Transparent")

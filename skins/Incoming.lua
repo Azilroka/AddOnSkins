@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = 'IncomingSkin'
-function AS:SkinIncoming(self)
+function AS:SkinIncoming()
 	AS:SkinFrame(LocationMessageView)
 
 	local buttons = {

@@ -166,7 +166,7 @@ function AS:SkinStatusBar(bar, ClassColor)
 	bar:SetStatusBarTexture(LSM:Fetch("statusbar",E.private.general.normTex))
 end
 
-function AS:SkinIconButton(self, strip, style, shrinkIcon)
+function AS:SkinIconButton( strip, style, shrinkIcon)
 	if self.isSkinned then return end
 
 	if strip then self:StripTextures() end

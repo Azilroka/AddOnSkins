@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "AraBrokerTradeskillsSkin"
-function AS:SkinAraTradeskills(self)
+function AS:SkinAraTradeskills()
 	AraSkills:HookScript("OnUpdate", function(self) AS:SkinFrame(self) end)
 end
 

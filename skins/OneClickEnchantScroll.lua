@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = 'OneClickEnchantScrollSkin'
-function AS:SkinOneClickEnchantScroll(self)
+function AS:SkinOneClickEnchantScroll()
 
 	S:HandleButton(TradeSkillCreateScrollButton, true)
 	TradeSkillCreateScrollButton:ClearAllPoints()

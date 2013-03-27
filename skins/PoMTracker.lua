@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "PoMTrackerSkin"
-function AS:SkinPoMTracker(self)
+function AS:SkinPoMTracker()
 	AS:SkinFrame(PoMOptionFrame)
 	S:HandleCloseButton(PoMOptionFrame_CloseButton)
 

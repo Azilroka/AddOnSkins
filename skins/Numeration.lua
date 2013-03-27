@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "NumerationSkin"
-local function SkinNumeration()
+function AS:SkinNumeration()
 	AS:SkinFrame(NumerationFrame)
 end
-AS:RegisterSkin(name, SkinNumeration)
+AS:RegisterSkin(name, AS.SkinNumeration)

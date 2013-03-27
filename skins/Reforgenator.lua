@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "ReforgenatorSkin"
-function AS:SkinReforgenator(self)
+function AS:SkinReforgenator()
 	AS:SkinFrame(ReforgenatorPanel)
 	AS:SkinFrame(ReforgenatorMessageFrame)
 	AS:SkinFrame(ReforgenatorMessageTextFrame)

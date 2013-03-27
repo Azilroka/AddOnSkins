@@ -85,7 +85,7 @@ if (select(2, UnitClass("player")) ~= "PALADIN") then
 end
 
 local name = "CLCProtSkin"
-function AS:SkinCLCProt(self)
+function AS:SkinCLCProt()
 	local clcprot = LibStub("AceAddon-3.0"):GetAddon("clcprot")
 	clcprot.CreateButton = CreateButton
 	clcprot.UpdateButtonLayout = UpdateButtonLayout

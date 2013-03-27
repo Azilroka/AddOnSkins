@@ -86,7 +86,7 @@ if (select(2, UnitClass("player")) ~= "PALADIN") then
 end
 
 local name = "CLCRetSkin"
-function AS:SkinCLCRet(self)
+function AS:SkinCLCRet()
 	local clcret = LibStub("AceAddon-3.0"):GetAddon("clcret")
 	clcret.CreateButton = CreateButton
 	clcret.UpdateButtonLayout = UpdateButtonLayout

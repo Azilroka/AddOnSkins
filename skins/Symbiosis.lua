@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "SymbiosisTipSkin"
-local function SkinSymbiosisTip()
+function AS:SkinSymbiosisTip()
 	AS:SkinTooltip(SymbiosisTip)
 end
-AS:RegisterSkin(name, SkinSymbiosisTip)
+AS:RegisterSkin(name, AS.SkinSymbiosisTip)

@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "MoveAnythingSkin"
-function AS:SkinMoveAnything(self)
+function AS:SkinMoveAnything()
 	AS:SkinFrame(MAOptions)
 	MAScrollBorder:StripTextures(True)
 

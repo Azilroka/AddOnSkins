@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "KarniCrapSkin"
-function AS:SkinKarniCrap(self)
+function AS:SkinKarniCrap()
 	AS:SkinFrame(KarniCrap)
 	AS:SkinFrame(KarniCrap_CategoryFrame)
 	AS:SkinFrame(KarniCrap_OptionsFrame)

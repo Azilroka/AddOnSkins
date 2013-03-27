@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "OvaleSkin"
-function AS:SkinOvale(self, event)
+function AS:SkinOvale(event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
 	if not IsAddOnLoaded("Ovale") then return end
 	E:Delay(15, function()

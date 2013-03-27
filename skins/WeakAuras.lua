@@ -31,7 +31,7 @@ end
 
 local function WeakAuras_LoadSkin()
 	local name = "WeakAurasSkin"
-	function AS:SkinWeakAuras(self)
+	function AS:SkinWeakAuras()
 		WeakAuras.regionTypes.icon.OldCreate = WeakAuras.regionTypes.icon.create
 		WeakAuras.regionTypes.icon.create = Create_WeakAuras
 		

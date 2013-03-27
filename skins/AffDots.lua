@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "AffDotsSkin"
-local function SkinAffDots()
+function AS:SkinAffDots()
 	AS:SkinBackdropFrame(AffDotsTarget)
 end
-AS:RegisterSkin(name, SkinAffDots)
+AS:RegisterSkin(name, AS.SkinAffDots)

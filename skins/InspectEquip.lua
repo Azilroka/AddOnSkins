@@ -3,8 +3,8 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "InspectEquipSkin"
-local function SkinInspectEquip()
+function AS:SkinInspectEquip()
 	AS:SkinFrame(InspectEquip_InfoWindow)
 	S:HandleCloseButton(InspectEquip_InfoWindow_CloseButton)
 end
-AS:RegisterSkin(name, SkinInspectEquip)
+AS:RegisterSkin(name, AS.SkinInspectEquip)

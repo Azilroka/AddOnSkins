@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "AltoholicSkin"
-function AS:SkinAltoholic(self)
+function AS:SkinAltoholic()
 	LoadAddOn("Altoholic_Characters")
 	AltoholicFrame.IsSkinned = "False"
 	AltoTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)

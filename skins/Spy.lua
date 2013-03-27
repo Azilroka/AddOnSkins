@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "SpySkin"
-function AS:SkinSpy(self)
+function AS:SkinSpy()
 	AS:SkinFrame(Spy_MainWindow)
 	AS:SkinFrame(Spy_AlertWindow)
 	S:HandleCloseButton(Spy_MainWindow.CloseButton)

@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "SwatterSkin"
-function AS:SkinSwatter(self)
+function AS:SkinSwatter()
 	AS:SkinFrame(SwatterErrorFrame)
 	S:HandleButton(Swatter.Error.Done)
 	S:HandleButton(Swatter.Error.Next)

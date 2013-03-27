@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "WowLuaSkin"
-function AS:SkinWowLua(self)
+function AS:SkinWowLua()
 	AS:SkinFrame(WowLuaFrame)
 	WowLuaFrameLineNumScrollFrame:StripTextures(True)
 	WowLuaFrameResizeBar:StripTextures(True)

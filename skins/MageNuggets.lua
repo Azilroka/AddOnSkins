@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "MageNuggetsSkin"
-function AS:SkinMageNuggets(self)
+function AS:SkinMageNuggets()
 	local frames = {
 		"MNSpellSteal_Frame",
 		"MNSpellStealFocus_Frame",

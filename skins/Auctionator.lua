@@ -4,7 +4,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "AuctionatorSkin"
-local function AtrSkin(self,event)
+function AS:SkinAuctionator(event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
 	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.auctionhouse ~= true then return end
 	AuctionsCancelAuctionButton:Point("RIGHT", AuctionFrameMoneyFrame, "RIGHT", 554, 0)
@@ -199,4 +199,4 @@ local function AtrSkin(self,event)
 	AS:UnregisterEvent(name,"AUCTION_HOUSE_SHOW")
 end
 
-AS:RegisterSkin(name,AtrSkin,'AUCTION_HOUSE_SHOW')
+AS:RegisterSkin(name,AS.SkinAuctionator,'AUCTION_HOUSE_SHOW')

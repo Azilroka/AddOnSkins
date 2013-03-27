@@ -3,7 +3,7 @@ local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "MinimalArchaeologySkin"
-function AS:SkinMinimalArchaeology(self)
+function AS:SkinMinimalArchaeology()
 	local font = [[Interface\AddOns\ElvUI\media\fonts\Homespun.ttf]] 
 	local fontSize = 10
 	AS:SkinFrame(MinArchMain)
