@@ -33,7 +33,8 @@ function AS:SkinArchy()
 				solveButton:StyleButton()
 			end
 
-			if fragmentBar then
+			if fragmentBar and not fragmentBar.skinned then
+				fragmentBar.skinned = true
 				AS:SkinStatusBar(fragmentBar)	
 			end
 		end	
