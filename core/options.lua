@@ -2,6 +2,10 @@ local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
 local Skins = {
+	["AchieveItSkin"] = {
+		["buttonText"] = "Achieve It",
+		["addon"] = "AchieveIt",
+	},
 	["ACPSkin"] = {
 		["buttonText"] = "Addon Control Panel",
 		["addon"] = "ACP",
@@ -83,6 +87,10 @@ local Skins = {
 	},
 	["CritlineSkin"] = {
 		["addon"] = "Critline",
+	},
+	["DailyTamerCheckSkin"] = {
+		["buttonText"] = "Daily Tamer Check",
+		["addon"] = "DailyTamerCheck",
 	},
 	["DBMSkin"] = {
 		["buttonText"] = "DBM",

@@ -4,7 +4,6 @@ local S = E:GetModule('Skins')
 
 local name = "MogItSkin"
 function AS:SkinMogIt()
-
 	AS:SkinFrame(MogItFrame)
 	MogItFrameInset:StripTextures(True)
 

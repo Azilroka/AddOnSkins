@@ -17,6 +17,7 @@ AS.skins = {}
 AS.embeds = {}
 AS.events = {}
 AS.register = {}
+AS.addOnWatch = {}
 AS.ccolor = E.myclass
 AS.FrameLocks = {}
 E.private.skins.addons = {}
@@ -166,32 +167,32 @@ function AS:SkinStatusBar(bar, ClassColor)
 	bar:SetStatusBarTexture(LSM:Fetch("statusbar",E.private.general.normTex))
 end
 
-function AS:SkinIconButton( strip, style, shrinkIcon)
+function AS:SkinIconButton( iconButton, strip, style, shrinkIcon)
 	if self.isSkinned then return end
 
-	if strip then self:StripTextures() end
-	self:CreateBackdrop("Default", true)
-	if style then self:StyleButton() end
+	if strip then iconButton:StripTextures() end
+	iconButton:CreateBackdrop("Default", true)
+	if style then iconButton:StyleButton() end
 
-	local icon = self.icon
-	if self:GetName() and _G[self:GetName().."IconTexture"] then
-		icon = _G[self:GetName().."IconTexture"]
-	elseif self:GetName() and _G[self:GetName().."Icon"] then
-		icon = _G[self:GetName().."Icon"]
+	local icon = iconButton.icon
+	if iconButton:GetName() and _G[iconButton:GetName().."IconTexture"] then
+		icon = _G[iconButton:GetName().."IconTexture"]
+	elseif self:GetName() and _G[iconButton:GetName().."Icon"] then
+		icon = _G[iconButton:GetName().."Icon"]
 	end
-	icon:SetDrawLayer("OVERLAY")
 	if icon then
+		icon:SetDrawLayer("OVERLAY")
 		icon:SetTexCoord(.08,.88,.08,.88)
 
 		if shrinkIcon then
-			self.backdrop:SetAllPoints()
-			icon:SetInside(self)
+			iconButton.backdrop:SetAllPoints()
+			icon:SetInside(iconButton)
 		else
-			self.backdrop:SetOutside(icon)
+			iconButton.backdrop:SetOutside(icon)
 		end
-		icon:SetParent(self.backdrop)
+		icon:SetParent(iconButton.backdrop)
 	end
-	self.isSkinned = true
+	iconButton.isSkinned = true
 end
 
 function AS:SkinTooltip(tooltip)

@@ -2,6 +2,7 @@ local E, L, V, P, G,_ = unpack(ElvUI)
 
 V["skins"]["addons"] = {
 	["enable"] = true,
+	["AchieveItSkin"] = true,
 	["ACPSkin"] = true,
 	["AdiBagsSkin"] = true,
 	["AffDotsSkin"] = true,
@@ -29,6 +30,7 @@ V["skins"]["addons"] = {
 	["CombustionHelperSkin"] = true,
 	["CorkSkin"] = true,
 	["CritlineSkin"] = true,
+	["DailyTamerCheckSkin"] = true,
 	["DBMSkin"] = true,
 	["DresserSkin"] = true,
 	["EasyMailSkin"] = true,
