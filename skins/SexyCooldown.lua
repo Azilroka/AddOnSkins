@@ -29,10 +29,10 @@ local function SkinSexyCooldownBar(bar)
 	if(AS:CheckOption("EmbedSexyCooldown")) then
 		bar:ClearAllPoints()
 	
-		bar:Point('BOTTOM', ElvUI_Bar1, 'TOP', 0, 1)
+		bar:Point('BOTTOMRIGHT', ElvUI_Bar1, 'TOPRIGHT', 0, 2)
+		bar:Point("BOTTOMLEFT", ElvUI_Bar1, "TOPLEFT", 0, 2)
 		--bar:CreateShadow()
 		bar:SetHeight(ElvUI_Bar1Button1:GetHeight())
-		bar:SetWidth(ElvUI_Bar1:GetWidth() - (E.PixelMode and 4 or 0))
 	
 		bar:EnableMouse(false)
 		PetBattleFrame:HookScript("OnShow",function() bar:Hide() end)
@@ -59,7 +59,7 @@ end
 
 local function SkinSexyCooldownLabel(bar,label,store)
 	if not label.skinned then
-		label:SetFont(AS.pixelFont, AS:CheckOption("SortSettings") and 13 or store.fontsize, "OUTLINE")
+		label:SetFont(AS.pixelFont, store.fontsize, "OUTLINE")
 	end
 end
 local function SkinSexyCooldownBackdrop(bar)

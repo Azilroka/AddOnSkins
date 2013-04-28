@@ -26,7 +26,13 @@ function AS:SkinMinimalArchaeology()
 	AS:SkinFrame(MinArchHist)
 	S:HandleCloseButton(MinArchHistButtonClose)
 
-	for i = 1, 11 do
+	AS:SkinFrame(MinArchOptionPanelHideArtifact)
+	AS:SkinFrame(MinArchOptionPanelFragmentCap)
+	AS:SkinFrame(MinArchOptionPanelUseKeystones)
+	AS:SkinFrame(MinArchOptionPanelMiscOptions)
+	AS:SkinFrame(MinArchOptionPanelFrameScale)
+	
+	for i = 1, 12 do
 		AS:SkinStatusBar(_G["MinArchMainArtifactBar"..i])
 		_G["MinArchMainArtifactBar"..i]:SetStatusBarColor(1.0, 0.4, 0)
 		S:HandleButton(_G["MinArchMainArtifactBar"..i.."ButtonSolve"])
@@ -52,7 +58,7 @@ function AS:SkinMinimalArchaeology()
 		S:HandleCheckBox(boxes)
 	end
 
-	--S:HandleSliderFrame(MinArchOptionPanelFrameScaleSlider)
+	S:HandleSliderFrame(MinArchOptionPanelFrameScaleSlider)
 	MinArchOptionPanelFrameScaleSliderLow:ClearAllPoints()
 	MinArchOptionPanelFrameScaleSliderLow:SetPoint("BOTTOMLEFT", MinArchOptionPanelFrameScale, "BOTTOMLEFT", 3, 3)
 	MinArchOptionPanelFrameScaleSliderHigh:ClearAllPoints()

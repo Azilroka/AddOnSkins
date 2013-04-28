@@ -17,9 +17,11 @@ function AS:SkinAchieveIt(event)
 				frame:StyleButton()				
 			end
 		end)
-		S:HandleButton(AchieveIt_Locate_Button)
-		AchieveIt_Locate_Button:ClearAllPoints()
-		AchieveIt_Locate_Button:SetPoint("TOPLEFT", AchievementFrame, 250, 5)
+		if AchieveIt_Locate_Button then
+			S:HandleButton(AchieveIt_Locate_Button)
+			AchieveIt_Locate_Button:ClearAllPoints()
+			AchieveIt_Locate_Button:SetPoint("TOPLEFT", AchievementFrame, 250, 5)
+		end
 	end
 end
 

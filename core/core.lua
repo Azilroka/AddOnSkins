@@ -39,22 +39,17 @@ local function GenerateEventFunction(event)
 end
 
 function AS:Initialize()
-	if not E.private.skins.addons.enable then return end
-
 	if self.initialized then return end -- In case this gets called twice as can sometimes happen with ElvUI
 
-	if (E.myname == 'Sortokk' or E.myname == 'Sagome' or E.myname == 'Norinael' or E.myname == 'Pornix' or E.myname == 'Hioxy' or E.myname == 'Gorbilix' or E.myname == "Hakbek") 
-		and E.myrealm == 'Emerald Dream' then
-		E.private.skins.addons['SortSettings'] = true
-	end
+	EP:RegisterPlugin(addon, AS.GenerateOptions)
+
+	if not E.private.skins.addons.enable then return end
 
 	E.private.skins.addons['AlwaysTrue'] = true
 
 	self.font = LSM:Fetch("font",E.db.general.font)
 	self.pixelFont = IsAddOnLoaded("DSM") and LSM:Fetch("font","Tukui Pixel") or LSM:Fetch("font","ElvUI Pixel")
 	self.datatext_font = LSM:Fetch("font",E.db.datatexts.font)
-
-	EP:RegisterPlugin(addon, AS.GenerateOptions)
 
 	self:RegisterEvent("PET_BATTLE_CLOSE", 'AddNonPetBattleFrames')
 	self:RegisterEvent('PET_BATTLE_OPENING_START', "RemoveNonPetBattleFrames")
@@ -177,7 +172,7 @@ function AS:SkinIconButton( iconButton, strip, style, shrinkIcon)
 	local icon = iconButton.icon
 	if iconButton:GetName() and _G[iconButton:GetName().."IconTexture"] then
 		icon = _G[iconButton:GetName().."IconTexture"]
-	elseif self:GetName() and _G[iconButton:GetName().."Icon"] then
+	elseif iconButton:GetName() and _G[iconButton:GetName().."Icon"] then
 		icon = _G[iconButton:GetName().."Icon"]
 	end
 	if icon then
