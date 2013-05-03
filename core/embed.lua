@@ -64,41 +64,41 @@ function AS:EmbedOmen()
 			OmenBarList:Hide()
 		end
 	end
-		Omen.db.profile.Locked = true
-		Omen:UpdateGrips()
-		Omen.UpdateGrips = function(...)
-			local db = Omen.db.profile
-				Omen.VGrip1:ClearAllPoints()
-				Omen.VGrip1:SetPoint("TOPLEFT", Omen.BarList, "TOPLEFT", db.VGrip1, 0)
-				Omen.VGrip1:SetPoint("BOTTOMLEFT", Omen.BarList, "BOTTOMLEFT", db.VGrip1, 0)
-				Omen.VGrip2:ClearAllPoints()
-				Omen.VGrip2:SetPoint("TOPLEFT", Omen.BarList, "TOPLEFT", db.VGrip2, 0)
-				Omen.VGrip2:SetPoint("BOTTOMLEFT", Omen.BarList, "BOTTOMLEFT", db.VGrip2, 0)
-				Omen.Grip:Hide()
-				if db.Locked then
-					Omen.VGrip1:Hide()
-					Omen.VGrip2:Hide()
-				else
-					Omen.VGrip1:Show()
-					if db.Bar.ShowTPS then
-						Omen.VGrip2:Show()
-					else
-						Omen.VGrip2:Hide()
-					end
-				end
+	Omen.db.profile.Locked = true
+	Omen:UpdateGrips()
+	Omen.UpdateGrips = function(...)
+		local db = Omen.db.profile
+		Omen.VGrip1:ClearAllPoints()
+		Omen.VGrip1:SetPoint("TOPLEFT", Omen.BarList, "TOPLEFT", db.VGrip1, 0)
+		Omen.VGrip1:SetPoint("BOTTOMLEFT", Omen.BarList, "BOTTOMLEFT", db.VGrip1, 0)
+		Omen.VGrip2:ClearAllPoints()
+		Omen.VGrip2:SetPoint("TOPLEFT", Omen.BarList, "TOPLEFT", db.VGrip2, 0)
+		Omen.VGrip2:SetPoint("BOTTOMLEFT", Omen.BarList, "BOTTOMLEFT", db.VGrip2, 0)
+		Omen.Grip:Hide()
+		if db.Locked then
+			Omen.VGrip1:Hide()
+			Omen.VGrip2:Hide()
+		else
+			Omen.VGrip1:Show()
+			if db.Bar.ShowTPS then
+				Omen.VGrip2:Show()
+			else
+				Omen.VGrip2:Hide()
+			end
 		end
-		OmenTitle:Kill()
-		OmenBarList:StripTextures()
-		OmenBarList:SetTemplate("Transparent")
-		self:EmbedOmenResize()
-		if RightChatPanel then OmenBarList:SetParent(RightChatPanel) end
-		OmenBarList:SetFrameStrata("LOW")
+	end
+	OmenTitle:Kill()
+	OmenBarList:StripTextures()
+	OmenBarList:SetTemplate("Transparent")
+	self:EmbedOmenResize()
+	if RightChatPanel then OmenBarList:SetParent(RightChatPanel) end
+	OmenBarList:SetFrameStrata("LOW")
 end
 
 function AS:EmbedOmenResize()
-		OmenBarList:ClearAllPoints()
-		OmenBarList:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
-		OmenBarList:SetPoint("BOTTOMRIGHT", EmbeddingWindow, "BOTTOMRIGHT", 0, 2)
+	OmenBarList:ClearAllPoints()
+	OmenBarList:SetPoint("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
+	OmenBarList:SetPoint("BOTTOMRIGHT", EmbeddingWindow, "BOTTOMRIGHT", 0, 2)
 end
 
 function AS:EmbedRecountOmen()
@@ -166,42 +166,8 @@ function AS:EmbedRecountOmenResize()
 		Recount_MainWindow:SetPoint("BOTTOMRIGHT", EmbeddingWindow,"BOTTOMRIGHT", 0, 1)
 	end
 end
-
-if IsAddOnLoaded("Skada") then
-	local Skada = Skada
-	for _, window in ipairs(Skada:GetWindows() ) do
-		tinsert(windows, window)
-		window:UpdateDisplay()
-	end
-
-	Skada.CreateWindow_ = Skada.CreateWindow
-	function Skada:CreateWindow(name, db)
-		Skada:CreateWindow_(name, db)
-
-		windows = {}
-		for _, window in ipairs(Skada:GetWindows()) do
-			tinsert(windows, window)
-		end
-		if AS:CheckOption("EmbedSkada") then
-			AS:EmbedSkada()
-		end
-	end
-
-	Skada.DeleteWindow_ = Skada.DeleteWindow
-	function Skada:DeleteWindow( name )
-		Skada:DeleteWindow_( name )
-		windows = {}
-		for _, window in ipairs(Skada:GetWindows() ) do
-			tinsert(windows, window)
-		end
-		if(AS:CheckOption("EmbedSkada")) then
-			AS:EmbedSkada()
-		end
-	end
-end
 	
 local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
-	local Skada = Skada
 	local barmod = Skada.displays["bar"]
 
 	window.db.barwidth = width
@@ -215,15 +181,18 @@ local function EmbedWindow(window, width, height, point, relativeFrame, relative
 end
 
 function AS:EmbedSkada()
+	windows = {}
+	for _, window in ipairs(Skada:GetWindows()) do
+		tinsert(windows, window)
+	end
+	local borderWidth = 1
 	if(#windows == 1) then
 		if E.PixelMode then
 			EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 18), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
 		else
 			EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 20), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
 		end
-	elseif(#windows == 2) then
-		local borderWidth = 1
-		local borderWidth = 1
+	elseif(#windows >= 2) then
 		if E.PixelMode then
 			EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - 18, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
 			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - 18, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -17)
@@ -262,7 +231,7 @@ function AS:EmbedInit()
 
 	local button = AS:CheckOption("EmbedRight") and RightChatToggleButton or LeftChatToggleButton
 	button:SetScript("OnClick", function(self, btn)
-			if btn == 'RightButton' then
+		if btn == 'RightButton' then
 			if (AS:CheckOption("EmbedRecount","Recount")) or (AS:CheckOption("EmbedRO","Recount","Omen")) then
 				if Recount_MainWindow:IsShown() then
 					Recount_MainWindow:Hide()
@@ -294,15 +263,15 @@ function AS:EmbedInit()
 				end
 			end
 		else
-		if E.db[self.parent:GetName()..'Faded'] then
-			E.db[self.parent:GetName()..'Faded'] = nil
-			UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
-			UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
-		else
-			E.db[self.parent:GetName()..'Faded'] = true
-			UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
-			UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
-			self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
+			if E.db[self.parent:GetName()..'Faded'] then
+				E.db[self.parent:GetName()..'Faded'] = nil
+				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
+				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+			else
+				E.db[self.parent:GetName()..'Faded'] = true
+				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
+				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
 			end
 		end
 	end)
@@ -313,16 +282,20 @@ function AS:EmbedInit()
 			UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
 			UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
 		end
-			GameTooltip:SetOwner(self, 'ANCHOR_TOPRIGHT', 0, 4)
-			GameTooltip:ClearLines()
-			GameTooltip:AddDoubleLine(L['Left Click:'], L['Toggle Chat Frame'], 1, 1, 1)
-			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
-			GameTooltip:Show()
+		GameTooltip:SetOwner(self, 'ANCHOR_TOPRIGHT', 0, 4)
+		GameTooltip:ClearLines()
+		GameTooltip:AddDoubleLine(L['Left Click:'], L['Toggle Chat Frame'], 1, 1, 1)
+		GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
+		GameTooltip:Show()
 	end)
 
 	if (self:CheckOption("EmbedRO","Recount","Omen")) then self:EmbedRecountOmen() end
 	if (self:CheckOption("EmbedOmen","Omen")) then self:EmbedOmen() end
-	if (self:CheckOption("EmbedSkada","Skada")) then self:EmbedSkada() end
+	if (self:CheckOption("EmbedSkada","Skada")) then
+		self:EmbedSkada()
+		hooksecurefunc(Skada, "CreateWindow", self.EmbedSkada)
+		hooksecurefunc(Skada, "DeleteWindow", self.EmbedSkada)
+	end
 	if (self:CheckOption("EmbedTDPS","TinyDPS")) then self:EmbedTDPS() end
 	if (self:CheckOption("EmbedRecount","Recount")) then self:EmbedRecount() end
 end
