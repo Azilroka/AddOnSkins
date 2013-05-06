@@ -95,7 +95,6 @@ function AS:RegisterSkin_(skinName,priority,func,events)
 		end
 	end
 	if not self.skins[skinName] then self.skins[skinName] = {} end
-	self.skins[skinName][priority] = {}
 	self.skins[skinName][priority] = func
 	for event,_ in pairs(events) do
 		if not string.find(event,'%[') then
