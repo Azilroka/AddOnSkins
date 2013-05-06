@@ -29,7 +29,7 @@ local function GenerateEventFunction(event)
 	local eventHandler = function(self,event)
 		for skin,funcs in pairs(self.skins) do
 			if AS:CheckOption(skin) and self.events[event][skin] then
-				for func,_ in pairs(funcs) do
+				for _,func in ipairs(funcs) do
 					func(f,event)
 				end
 			end
@@ -68,7 +68,7 @@ function AS:Initialize()
 				addon = skin:gsub("Skin","")
 			end
 			if skin == "AlwaysTrue" or IsAddOnLoaded(addon) then
-				self:RegisterSkin_(skin,data.func,data.events)
+				self:RegisterSkin_(skin,data.priority,data.func,data.events)
 			end
 		end
 	end
@@ -77,7 +77,7 @@ function AS:Initialize()
 
 	for skin,funcs in pairs(AS.skins) do
 		if AS:CheckOption(skin) then
-			for func,_ in pairs(funcs) do
+			for _,func in ipairs(funcs) do
 				func(f,"PLAYER_ENTERING_WORLD")
 			end
 		end
@@ -86,7 +86,7 @@ function AS:Initialize()
 	self.initialized = true
 end
 
-function AS:RegisterSkin_(skinName,func,events)
+function AS:RegisterSkin_(skinName,priority,func,events)
 	local events = events
 	for c,_ in pairs(events) do
 		if string.find(c,'%[') then
@@ -95,7 +95,8 @@ function AS:RegisterSkin_(skinName,func,events)
 		end
 	end
 	if not self.skins[skinName] then self.skins[skinName] = {} end
-	self.skins[skinName][func] = true
+	self.skins[skinName][priority] = {}
+	self.skins[skinName][priority] = func
 	for event,_ in pairs(events) do
 		if not string.find(event,'%[') then
 			if not self.events[event] then
@@ -242,12 +243,17 @@ end
 
 function AS:RegisterSkin(skinName,skinFunc,...)
 	local events = {}
+	local priority = 1
 	for i = 1,select('#',...) do
 		local event = select(i,...)
 		if not event then break end
-		events[event] = true
+		if type(event) == 'number' then
+			priority = event
+		else
+			events[event] = true
+		end
 	end
-	local registerMe = { func = skinFunc, events = events }
+	local registerMe = { func = skinFunc, events = events, priority = priority }
 	if not self.register[skinName] then self.register[skinName] = {} end
 	self.register[skinName][skinFunc] = registerMe
 end
