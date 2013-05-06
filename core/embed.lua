@@ -187,17 +187,21 @@ function AS:EmbedSkada()
 	end
 	local borderWidth = 1
 	local height = AS:CheckOption("SkadaBelowTop") and 43 or E.PixelMode and 20 or 18
+	local notitleheight = height - 15
 	local yoffset = AS:CheckOption("SkadaBelowTop") and -40 or -17
-	
+	local notitleoffset = yoffset + 15
+
 	if(#windows == 1) then
 		EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - height), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, yoffset)
 	elseif(#windows >= 2) then
+		local w2height = windows[2].db.enabletitle and height or notitleheight
+		local w2yoffset = windows[2].db.enabletitle and yoffset or notitleoffset
 		if AS:CheckOption("SkadaTwoThirds") then
 			EmbedWindow(windows[1], (((EmbeddingWindow:GetWidth() - 4) / 3) * 2) - (borderWidth*1.5 + E.mult), EmbeddingWindow:GetHeight() - height, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, yoffset)
-			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 3) - (borderWidth*1.5 + E.mult), EmbeddingWindow:GetHeight() - height, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, yoffset)
+			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 3) - (borderWidth*1.5 + E.mult), EmbeddingWindow:GetHeight() - w2height, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, w2yoffset)
 		else
 			EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - height, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, yoffset)
-			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - height, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, yoffset)
+			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - w2height, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, w2yoffset)
 		end
 	end
 end
