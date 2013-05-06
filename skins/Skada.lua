@@ -116,6 +116,7 @@ function AS:SkinSkada()
 			if (AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel) then win.bargroup:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)) end
 			win.bargroup:SetFrameStrata("LOW")
 			win.bargroup.button:SetFrameStrata("LOW")
+			AS:EmbedSkada()
 		end
 	end
 end

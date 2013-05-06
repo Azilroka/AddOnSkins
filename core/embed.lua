@@ -181,6 +181,8 @@ local function EmbedWindow(window, width, height, point, relativeFrame, relative
 end
 
 function AS:EmbedSkada()
+	if self.embeddingskada then return end
+	self.embeddingskada = true
 	windows = {}
 	for _, window in ipairs(Skada:GetWindows()) do
 		tinsert(windows, window)
@@ -204,6 +206,7 @@ function AS:EmbedSkada()
 			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - w2height, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, w2yoffset)
 		end
 	end
+	self.embeddingskada = false
 end
 
 function AS:EmbedTDPS()
