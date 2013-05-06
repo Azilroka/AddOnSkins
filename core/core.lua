@@ -60,7 +60,14 @@ function AS:Initialize()
 	
 	for skin,alldata in pairs(self.register) do
 		for _,data in pairs(alldata) do
-			if skin == "AlwaysTrue" or IsAddOnLoaded(self.Skins[skin].addon) then
+			local addon
+			local sdata = self.Skins[skin]
+			if sdata and sdata.addon then
+				addon = sdata.addon
+			else
+				addon = skin:gsub("Skin","")
+			end
+			if skin == "AlwaysTrue" or IsAddOnLoaded(addon) then
 				self:RegisterSkin_(skin,data.func,data.events)
 			end
 		end

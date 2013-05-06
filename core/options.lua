@@ -4,23 +4,9 @@ local AS = E:GetModule('AddOnSkins')
 local Skins = {
 	["AchieveItSkin"] = {
 		["buttonText"] = "Achieve It",
-		["addon"] = "AchieveIt",
 	},
 	["ACPSkin"] = {
 		["buttonText"] = "Addon Control Panel",
-		["addon"] = "ACP",
-	},
-	["AdiBagsSkin"] = {
-		["addon"] = "AdiBags",
-	},
-	["AffDotsSkin"] = {
-		["addon"] = "AffDots",
-	},
-	["AltoholicSkin"] = {
-		["addon"] = "Altoholic",
-	},
-	["AnalystSkin"] = {
-		["addon"] = "Analyst",
 	},
 	["AraBrokerGuildFriendsSkin"] = {
 		["buttonText"] = "Ara Broker Guild Friends",
@@ -30,15 +16,8 @@ local Skins = {
 		["buttonText"] = "Ara Broker Tradeskills",
 		["addon"] = "Ara_Broker_Tradeskills",
 	},
-	["ArchySkin"] = {
-		["addon"] = "Archy",
-	},
 	['ArhSkin'] = {
 		["buttonText"] = "Archaeology Helper",
-		["addon"] = "Arh",
-	},
-	["ArkInventorySkin"] = {
-		["addon"] = "ArkInventory",
 	},
 	["AtlasLootSkin"] = {
 		["buttonText"] = "AtlasLoot",
@@ -47,294 +26,90 @@ local Skins = {
 	["ATSWSkin"] = {
 		["addon"] = "AdvancedTradeSkillWindow",
 	},
-	["AuctionatorSkin"] = {
-		["addon"] = "Auctionator",
-	},
 	["AuctioneerSkin"] = {
 		["buttonText"] = "Auctioneer",
 		["addon"] = "Auc-Advanced",
-	},
-	["AuctionLiteSkin"] = {
-		["addon"] = "AuctionLite",
-	},
-	["BagnonSkin"] = {
-		["addon"] = "Bagnon",
-	},
-	["BGDefenderSkin"] = {
-		["addon"] = "BGDefender",
-	},
-	["BigBrotherSkin"] = {
-		["addon"] = "BigBrother",
 	},
 	["BPTSkin"] = {
 		["buttonText"] = "Balance Power Tracker",
 		["addon"] = "BalancePowerTracker",
 	},
-	["BuyEmAllSkin"] = {
-		["addon"] = "BuyEmAll",
-	},
-	["CliqueSkin"] = {
-		["addon"] = "Clique",
-	},
-	["CombustionHelperSkin"] = {
-		["addon"] = "CombustionHelper",
-	},
-	["CoolLineSkin"] = {
-		["addon"] = "CoolLine",
-	},
-	["CorkSkin"] = {
-		["addon"] = "Cork",
-	},
-	["CritlineSkin"] = {
-		["addon"] = "Critline",
-	},
 	["DailyTamerCheckSkin"] = {
 		["buttonText"] = "Daily Tamer Check",
-		["addon"] = "DailyTamerCheck",
 	},
 	["DBMSkin"] = {
 		["buttonText"] = "DBM",
 		["addon"] = "DBM-Core",
 	},
-	["DresserSkin"] = {
-		["addon"] = "Dresser",
-	},
-	["EasyMailSkin"] = {
-		["addon"] = "EasyMail",
-	},
-	["EavesDropSkin"] = {
-		["addon"] = "EavesDrop",
-	},
-	["EnergyWatchSkin"] = {
-		["addon"] = "EnergyWatch",
-	},
-	["ExaminerSkin"] = {
-		["addon"] = "Examiner",
-	},
 	["ExtVendorSkin"] = {
 		["buttonText"] = "Extended Vendor",
-		["addon"] = "ExtVendor",
-	},
-	["EveryGoldToBankerSkin"] = {
-		["addon"] = "EveryGoldToBanker",
-	},
-	["FactionizerSkin"] = {
-		["addon"] = "Factionizer",
-	},
-	["FlightMapSkin"] = {
-		["addon"] = "FlightMap",
-	},
-	["FlightMapEnhancedSkin"] = {
-		["addon"] = "FlightMapEnhanced",
-	},
-	["GuildMemberInfo_TradeSkillsSkin"] = {
-		["addon"] = "GuildMemberInfo_TradeSkills",
-	},
-	["GupPetSkin"] = {
-		["addon"] = "GupPet",
-	},
-	["HealiumSkin"] = {
-		["addon"] = "Healium",
-	},
-	["IncomingSkin"] = {
-		["addon"] = "Incoming",
-	},
-	["InspectEquipSkin"] = {
-		["addon"] = "InspectEquip",
 	},
 	["KarniCrapSkin"] = {
 		["buttonText"] = "Karni's Crap Filter",
-		["addon"] = "KarniCrap",
-	},
-	["LightheadedSkin"] = {
-		["addon"] = "Lightheaded",
-	},
-	["LinkWranglerSkin"] = {
-		["addon"] = "LinkWrangler",
 	},
 	["LootCouncilLiteSkin"] = {
 		["buttonText"] = "LootCouncilLite",
 		["addon"] = "LootCouncil_Lite",
 	},
-	["MageNuggetsSkin"] = {
-		["addon"] = "MageNuggets",
-	},
-	["MasterLootManagerRemixSkin"] = {
-		["addon"] = "MasterLootManagerRemix",
-	},
-	["MinimalArchaeologySkin"] = {
-		["addon"] = "MinimalArchaeology",
-	},
-	["MogItSkin"] = {
-		["addon"] = "MogIt",
-	},
-	["MoveAnythingSkin"] = {
-		["addon"] = "MoveAnything",
-	},
 	["MRTSkin"] = {
 		["buttonText"] = "Mizus Raid Tracker",
 		["addon"] = "MizusRaidTracker",
 	},
-	["MyRolePlaySkin"] = {
-		["addon"] = "MyRolePlay",
-	},
-	["NumerationSkin"] = {
-		["addon"] = "Numeration",
-	},
-	["OdysseySkin"] = {
-		["addon"] = "Odyssey",
-	},
 	["OgriLazySkin"] = {
 		["addon"] = "Ogri'Lazy",
 	},
-	["OmenSkin"] = {
-		["addon"] = "Omen",
-	},
-	["OneClickEnchantScrollSkin"] = {
-		["addon"] = "OneClickEnchantScroll",
-	},
-	["OutfitterSkin"] = {
-		["addon"] = "Outfitter",
-	},
-	["OvaleSkin"] = {
-		["addon"] = "Ovale",
-	},
-	["PetBattleTeamsSkin"] = {
-		["addon"] = "PetBattleTeams",
-	},
-	["PetTrackerSkin"] = {
-		["addon"] = "PetTracker",
-	},
-	["PoMTrackerSkin"] = {
-		["addon"] = "PoMTracker",
-	},
-	["PostalSkin"] = {
-		["addon"] = "Postal",
-	},
-	["QuartzSkin"] = {
-		["addon"] = "Quartz",
-	},
-	["QuestCompletistSkin"] = {
-		["addon"] = "QuestCompletist",
-	},
-	["QuestItemBarSkin"] = {
-		["addon"] = "QuestItemBar",
-	},
 	["RaidInviteOrganizerSkin"] = {
 		["buttonText"] = "Raid Invite Organizer",
-		["addon"] = "RaidInviteOrganizer",
 	},
 	["RaidBuffStatusSkin"] = {
 		["buttonText"] = "Raid Buff Status",
-		["addon"] = "RaidBuffStatus",
-	},
-	["RavenSkin"] = {
-		["addon"] = "Raven",
-	},
-	["RecountSkin"] = {
-		["addon"] = "Recount",
-	},
-	["ReforgenatorSkin"] = {
-		["addon"] = "Reforgenator",
 	},
 	["SearingPlasmaTrackerSkin"] = {
 		["buttonText"] = "Searing Plasma Tracker",
-		["addon"] = "SearingPlasmaTracker",
 	},
 	["SexyCooldownSkin"] = {
 		["buttonText"] = "SexyCooldown 2",
 		["addon"] = "SexyCooldown2",
 	},
-	["ShieldBarsSkin"] = {
-		["addon"] = "ShieldBars",
-	},
 	["ShieldMonitorSkin"] = {
 		["buttonText"] = "Shield Monitor",
 		["addon"] = "shieldmonitor",
 	},
-	["SkadaSkin"] = {
-		["addon"] = "Skada",
-	},
-	["SkilletSkin"] = {
-		["addon"] = "Skillet",
-	},
-	["SoundtrackSkin"] = {
-		["addon"] = "Soundtrack",
-	},
 	["SpineCounterSkin"] = {
 		["buttonText"] = "Spine Blood Counter",
-		["addon"] = "SpineCounter",
-	},
-	["SpySkin"] = {
-		["addon"] = "Spy",
 	},
 	["SwatterSkin"] = {
 		["buttonText"] = "Swatter",
 		["addon"] = "!Swatter",
 	},
-	["SymbiosisTipSkin"] = {
-		["addon"] = "SymbiosisTip",
-	},
-	["TinyDPSSkin"] = {
-		["addon"] = "TinyDPS",
-	},
-	["TomTomSkin"] = {
-		["addon"] = "TomTom",
-	},
-	["TradeSkillDWSkin"] = {
-		["addon"] = "TradeSkillDW",
-	},
-	["VengeanceStatusSkin"] = {
-		["addon"] = "VengeanceStatus",
-	},
-	["WhollySkin"] = {
-		["addon"] = "Wholly",
-	},
-	["WowLuaSkin"] = {
-		["addon"] = "WowLua",
-	},
-	["WoWProSkin"] = {
-		["addon"] = "WowPro",
-	},
-	["xMerchantSkin"] = {
-		["addon"] = "xMerchant",
-	},
 	["ZygorSkin"] = {
 		["buttonText"] = "Zygor",
 		["addon"] = "ZygorGuidesViewer",
 	},
-	["DBMSkinHalf"] = {
-		["buttonText"] = "DBM Half-Bar Skin",
-		["addon"] = "DBM-Core",
-		["ui"] = "ElvUI",
-	},
 	["CLCInfoSkin"] = {
 		["buttonText"] = "CLCInfo Icons",
-		["addon"] = "CLCInfo",
-		["ui"] = "ElvUI",
 	},
 	["CLCProtSkin"] = {
 		["buttonText"] = "CLCProt Icons",
-		["addon"] = "CLCProt",
-		["ui"] = "ElvUI",
 	},
 	["CLCRetSkin"] = {
 		["buttonText"] = "CLCRet Icons",
-		["addon"] = "CLCRet",
-		["ui"] = "ElvUI",
 	},
 	["WeakAurasSkin"] = {
 		["buttonText"] = "WeakAuras Icons",
-		["addon"] = "WeakAuras",
-		["ui"] = "ElvUI",
 	},
 }
 
 AS.Skins = Skins
 function AS:GenerateOptionTable(skinName,order)
 	local data = Skins[skinName]
-	local addon = data.addon
-	local text = data.buttonText or addon
+	local addon
+	if data and data.addon then
+		addon = data.addon
+	else
+		addon = skinName:gsub("Skin","")
+	end
+	local text = data and data.buttonText or addon
 	local options = {
 		type = 'toggle',
 		name = text,
@@ -493,7 +268,7 @@ function AS:GenerateOptions()
 	}
 
 	local order = 2
-	for skinName,_ in pairsByKeys(Skins) do
+	for skinName,_ in pairsByKeys(AS.register) do
 		if not V.skins.addons[skinName] == nil then
 			print("No default option for", skinName)
 		end

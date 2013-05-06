@@ -30,7 +30,9 @@
 	<Script file="Critline.lua"/>
 	<Script file="DailyTamerCheck.lua"/>
 	<Script file="DBM.lua"/>
+	<Script file="DKDots.lua"/>
 	<Script file="Dresser.lua"/>
+	<Script file="DXE.lua"/>
 	<Script file="EasyMail.lua"/>
 	<Script file="EavesDrop.lua"/>
 	<Script file="EnergyWatch.lua"/>
@@ -43,6 +45,7 @@
 	<Script file="GuildMemberInfo_TradeSkills.lua"/>
 	<Script file="GupPet.lua"/>
 	<Script file="Healium.lua"/>
+	<Script file="InboxMailBag.lua"/>
 	<Script file="Incoming.lua"/>
 	<Script file="InspectEquip.lua"/>
 	<Script file="KarniCrap.lua"/>
