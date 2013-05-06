@@ -181,6 +181,20 @@ function AS:GenerateOptions()
 						order = 3,
 						disabled = function() return not IsAddOnLoaded("Skada") or not E.private.skins.addons["SkadaSkin"] end,
 					},
+					SkadaBelowTop = {
+						type = 'toggle',
+						name = 'Embed Skada below the top chat panel',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 4,
+						disabled = function() return not IsAddOnLoaded("Skada") or not E.private.skins.addons["SkadaSkin"] end,
+					},
+					SkadaTwoThirds = {
+						type = 'toggle',
+						name = 'Skada Windows 1/3 and 2/3 instead of 1/2 and 1/2',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 5,
+						disabled = function() return not IsAddOnLoaded("Skada") or not E.private.skins.addons["SkadaSkin"] end,
+					},	
 				}
 			},
 			embed = {

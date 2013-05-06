@@ -117,5 +117,7 @@ V["skins"]["addons"] = {
 	["DBMSkinHalf"] = false,
 	["RecountBackdrop"] = true,
 	["SkadaBackdrop"] = true,
+	["SkadaBelowTop"] = false,
+	["SkadaTwoThirds"] = false,
 	["EmbedRight"] = true,
 }

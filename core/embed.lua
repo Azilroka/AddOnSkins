@@ -186,19 +186,18 @@ function AS:EmbedSkada()
 		tinsert(windows, window)
 	end
 	local borderWidth = 1
+	local height = AS:CheckOption("SkadaBelowTop") and 43 or E.PixelMode and 20 or 18
+	local yoffset = AS:CheckOption("SkadaBelowTop") and -40 or -17
+	
 	if(#windows == 1) then
-		if E.PixelMode then
-			EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 18), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
-		else
-			EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - 20), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
-		end
+		EmbedWindow(windows[1], EmbeddingWindow:GetWidth() - 4, (EmbeddingWindow:GetHeight() - height), "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, yoffset)
 	elseif(#windows >= 2) then
-		if E.PixelMode then
-			EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - 18, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
-			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - 18, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -17)
+		if AS:CheckOption("SkadaTwoThirds") then
+			EmbedWindow(windows[1], (((EmbeddingWindow:GetWidth() - 4) / 3) * 2) - (borderWidth*1.5 + E.mult), EmbeddingWindow:GetHeight() - height, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, yoffset)
+			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 3) - (borderWidth*1.5 + E.mult), EmbeddingWindow:GetHeight() - height, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, yoffset)
 		else
-			EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - 20, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, -17)
-			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - 20, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, -17)
+			EmbedWindow(windows[1], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - height, "TOPRIGHT", EmbeddingWindow, "TOPRIGHT", -2, yoffset)
+			EmbedWindow(windows[2], ((EmbeddingWindow:GetWidth() - 4) / 2) - (borderWidth + E.mult), EmbeddingWindow:GetHeight() - height, "TOPLEFT", EmbeddingWindow, "TOPLEFT", 2, yoffset)
 		end
 	end
 end

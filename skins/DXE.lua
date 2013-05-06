@@ -38,6 +38,7 @@ function AS:SkinDXE()
 
 	DXE.LayoutHealthWatchers_ = DXE.LayoutHealthWatchers
 	DXE.LayoutHealthWatchers = function(self)
+		DXE.LayoutHealthWatchers_()
 		for i,hw in ipairs(self.HW) do
 			if hw:IsShown() then
 				hw:SetTemplate("Transparent")
