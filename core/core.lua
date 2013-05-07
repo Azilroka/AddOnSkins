@@ -26,11 +26,18 @@ AS.sle = IsAddOnLoaded("ElvUI_SLE")
 AS.Version = GetAddOnMetadata(addon,"Version")
 
 local function GenerateEventFunction(event)
-	local eventHandler = function(self,event)
+	local eventHandler = function(self,event,...)
 		for skin,funcs in pairs(self.skins) do
 			if AS:CheckOption(skin) and self.events[event][skin] then
+				-- pack event args
+				local args = {}
+				for i = 1,select('#',...) do
+					local arg = select(i,...)
+					if not arg then break end
+					tinsert(args,arg)
+				end
 				for _,func in ipairs(funcs) do
-					func(f,event)
+					func(f,event,unpack(args))
 				end
 			end
 		end
