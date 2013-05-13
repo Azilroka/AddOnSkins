@@ -1,4 +1,4 @@
-﻿local E, L, V, P, G,_ = unpack(ElvUI)
+﻿local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -56,25 +56,25 @@ function AS:SkinHealium()
 		local predictbar = self.PredictBar
 		local healthbar = self.HealthBar
 		local manabar = self.ManaBar
-			
+
 		self:StripTextures()
 
 		AS:SkinStatusBar(predictbar)
 		AS:SkinStatusBar(healthbar)
 		AS:SkinStatusBar(manabar)
-			
+
 		predictbar:SetHeight(24)
 		healthbar:SetHeight(24)
 		manabar:SetHeight(24)
-			
+
 		predictbar:SetPoint("TOPLEFT", 7, 0)
 		healthbar:SetPoint("TOPLEFT", 7, 0)
 		manabar:ClearAllPoints()
 		manabar:SetPoint("TOPLEFT", -4, 0)
-			
+
 		skinnedFrames[self:GetName()] = true
 	end
-		
+
 	local skinHeal = function(self)
 		if not(self) or (skinnedFrames[self:GetName()]) then
 			return
@@ -91,12 +91,12 @@ function AS:SkinHealium()
 
 		skinnedFrames[self:GetName()] = true
 	end
-		
+
 	local skinBuff = function(self)
 		if not(self) or (skinnedFrames[self:GetName()]) then
 			return
 		end
-			
+
 		local icon = self.icon
 		local cooldown = self.cooldown
 		local count = self.count 
@@ -113,12 +113,12 @@ function AS:SkinHealium()
 
 		skinnedFrames[self:GetName()] = true
 	end
-		
+
 	local skinAllHealiumFrames = function()
 		if not(Healium_Frames) then
 			return
 		end
-			
+
 		for i,frameName in pairs(captionFrames) do
 			if (_G[frameName]) then
 				skinHeader(_G[frameName])
@@ -154,4 +154,4 @@ function AS:SkinHealium()
 	hooksecurefunc("HealiumUnitFrames_Button_OnLoad", skinUnitFrame)
 end
 
-AS:RegisterSkin(name,AS.SkinHealium)
+AS:RegisterSkin(name, AS.SkinHealium)

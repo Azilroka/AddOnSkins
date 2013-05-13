@@ -1,11 +1,11 @@
-﻿local E, L, V, P, G,_ = unpack(ElvUI)
+﻿local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "EasyMailSkin"
 function AS:SkinEasyMail(event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
-	MailFrame:Size(360,440)
+	MailFrame:Size(360, 440)
 	AS:Desaturate(EasyMail_CheckAllButton)
 	AS:Desaturate(EasyMail_ClearAllButton)
 	AS:Desaturate(EasyMail_CheckPageButton)
@@ -36,11 +36,12 @@ function AS:SkinEasyMail(event)
 	end)
 	for i = 1, 7 do	
 		local t = _G["MailItem"..i.."ExpireTime"]
-			if t then
-				t:ClearAllPoints()
-				t:Point("TOPRIGHT", -10, -4)
-			end				
+		if t then
+			t:ClearAllPoints()
+			t:Point("TOPRIGHT", -10, -4)
+		end				
 	end
+	AS:UnregisterEvent(name, event)
 end
 
-AS:RegisterSkin(name,AS.SkinEasyMail,"MAIL_SHOW")
+AS:RegisterSkin(name, AS.SkinEasyMail, "MAIL_SHOW")

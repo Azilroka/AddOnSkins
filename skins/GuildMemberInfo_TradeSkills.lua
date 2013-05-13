@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -10,4 +10,5 @@ function AS:SkinGuildMemberInfo_TradeSkills()
 	GMItsIcon1:SetTexCoord(0.12, 0.88, 0.12, 0.88)
 	GMItsIcon2:SetTexCoord(0.12, 0.88, 0.12, 0.88)
 end
+
 AS:RegisterSkin(name, AS.SkinGuildMemberInfo_TradeSkills)

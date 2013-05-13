@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -32,5 +32,4 @@ function AS:SkinExtVendor()
 	S:HandleButton(ExtVendor_SellJunkPopupNoButton)
 end
 
-AS:RegisterSkin(name,AS.SkinExtVendor)
-
+AS:RegisterSkin(name, AS.SkinExtVendor)

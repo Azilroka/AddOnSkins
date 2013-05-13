@@ -1,16 +1,15 @@
-
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "CliqueSkin"
 function AS:SkinClique()
 	local Frames = {
-	"CliqueDialog",
-	"CliqueConfig",
-	"CliqueConfigPage1",
-	"CliqueConfigPage2",
-	"CliqueClickGrabber",
+		"CliqueDialog",
+		"CliqueConfig",
+		"CliqueConfigPage1",
+		"CliqueConfigPage2",
+		"CliqueClickGrabber",
 	}
 	for _, object in pairs(Frames) do
 		_G[object]:StripTextures(True)
@@ -31,14 +30,14 @@ function AS:SkinClique()
 	end
 	
 	local CliqueButtons = {
-	"CliqueConfigPage1ButtonSpell",
-	"CliqueConfigPage1ButtonOther",
-	"CliqueConfigPage1ButtonOptions",
-	"CliqueConfigPage2ButtonBinding",
-	"CliqueDialogButtonAccept",
-	"CliqueDialogButtonBinding",
-	"CliqueConfigPage2ButtonSave",
-	"CliqueConfigPage2ButtonCancel",
+		"CliqueConfigPage1ButtonSpell",
+		"CliqueConfigPage1ButtonOther",
+		"CliqueConfigPage1ButtonOptions",
+		"CliqueConfigPage2ButtonBinding",
+		"CliqueDialogButtonAccept",
+		"CliqueDialogButtonBinding",
+		"CliqueConfigPage2ButtonSave",
+		"CliqueConfigPage2ButtonCancel",
 	}
 	for _, object in pairs(CliqueButtons) do
 		_G[object]:StripTextures(True)
@@ -50,8 +49,8 @@ function AS:SkinClique()
 	if CliqueDialogCloseButton then S:HandleCloseButton(CliqueDialogCloseButton) end
 
 	local CliqueTabs = {
-	"CliqueConfigPage1Column1",
-	"CliqueConfigPage1Column2",
+		"CliqueConfigPage1Column1",
+		"CliqueConfigPage1Column2",
 	}
 	for _, object in pairs(CliqueTabs) do
 		_G[object]:StripTextures(True)
@@ -93,7 +92,6 @@ function AS:SkinClique()
 	CliqueSpellTab:CreateBackdrop("Transparent")
 	CliqueSpellTab.backdrop:SetAllPoints()
 	CliqueSpellTab:StyleButton(True)
-
 end
 
-AS:RegisterSkin(name,AS.SkinClique)
+AS:RegisterSkin(name, AS.SkinClique)

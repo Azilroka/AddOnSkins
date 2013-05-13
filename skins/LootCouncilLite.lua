@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -23,4 +23,4 @@ function AS:SkinLootCouncilLite()
 	end
 end
 
-AS:RegisterSkin(name,AS.SkinLootCouncilLite)
+AS:RegisterSkin(name, AS.SkinLootCouncilLite)

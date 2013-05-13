@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -29,4 +29,5 @@ function AS:SkinWowLua()
 	WowLuaFrameCommand.bg1:Point("TOPLEFT", 0, -4)
 	WowLuaFrameCommand.bg1:Point("BOTTOMRIGHT", -12, 2)
 end
-AS:RegisterSkin(name,AS.SkinWowLua)
+
+AS:RegisterSkin(name, AS.SkinWowLua)

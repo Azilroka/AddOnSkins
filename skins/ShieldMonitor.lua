@@ -7,7 +7,7 @@ function AS:SkinShieldMonitor()
 
 	AS:SkinFrame(shieldmonitor_Frame, 'Default', true)
 	shieldmonitor_Frame:HookScript("OnShow", function(self)
-		AS:SkinFrameD(shieldmonitor_Frame, 'Default', true)
+		AS:SkinFrame(shieldmonitor_Frame, 'Default', true)
 	end)
 	shieldmonitor_Frame:RegisterEvent("UNIT_AURA")
 	shieldmonitor_Frame:HookScript("OnEvent", function(self)
@@ -39,4 +39,4 @@ function AS:SkinShieldMonitor()
 
 end
 
-AS:RegisterSkin(name,AS.SkinShieldMonitor)
+AS:RegisterSkin(name, AS.SkinShieldMonitor)

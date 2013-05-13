@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -83,4 +83,4 @@ function AS:SkinPostal()
 	end
 end
 
-AS:RegisterSkin(name,AS.SkinPostal)
+AS:RegisterSkin(name, AS.SkinPostal)

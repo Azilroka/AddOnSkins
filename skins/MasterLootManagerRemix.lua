@@ -1,9 +1,9 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "MasterLootManagerRemixSkin"
-function AS:SkinMLM()
+function AS:SkinMasterLootManagerRemix()
 	local StripAllTextures = {
 		"MasterLootManagerMain",
 		"MasterLootLoggerFrame",
@@ -100,8 +100,6 @@ function AS:SkinMLM()
 	MasterLootLoggerAddEditFrameYear:Point("LEFT", MasterLootLoggerAddEditFrameDay, "RIGHT", 2, 0)
 	MasterLootLoggerAddEditFrameHour:Point("TOPLEFT", MasterLootLoggerAddEditFrameTimeLabel, "BOTTOMLEFT", 0, 0)
 	MasterLootLoggerAddEditFrameMinute:Point("LEFT", MasterLootLoggerAddEditFrameHour, "RIGHT", 0, 0)
-		
-	-- Change Size
 	MasterLootLoggerAddEditFrameMonth:SetJustifyH("CENTER")
 	MasterLootLoggerAddEditFrameMonth:SetWidth(25)
 	MasterLootLoggerAddEditFrameDay:SetJustifyH("CENTER")
@@ -112,19 +110,13 @@ function AS:SkinMLM()
 	MasterLootLoggerAddEditFrameHour:SetWidth(25)
 	MasterLootLoggerAddEditFrameMinute:SetJustifyH("CENTER")
 	MasterLootLoggerAddEditFrameMinute:SetWidth(25)
-		
-	-- Skin Dropdowns 
 	S:HandleDropDownBox(MasterLootManagerMain_SelectDE, 150)
 	S:HandleDropDownBox(MasterLootManagerMain_SelectBank, 150)
 	S:HandleDropDownBox(MasterLootLoggerAddEditFrameType, 150)
-
-	-- Scrollbar
 	S:HandleScrollBar(MasterLootManagerMain_ScrollFrame_Slider, 5)
 	S:HandleScrollBar(MasterLootLoggerFrameContentScrollFrameScrollBar)
-
-	-- Skin CloseButtons
 	S:HandleCloseButton(MasterLootLoggerFrameCloseButton)
 	S:HandleCloseButton(MasterLootLoggerAddEditFrameCloseButton)
 end
 
-AS:RegisterSkin(name,AS.SkinMLM)
+AS:RegisterSkin(name, AS.SkinMasterLootManagerRemix)

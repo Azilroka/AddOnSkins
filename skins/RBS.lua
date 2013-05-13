@@ -1,9 +1,9 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "RaidBuffStatusSkin"
-function AS:SkinRBS()
+function AS:SkinRaidBuffStatus()
 	AS:SkinFrame(RBSFrame)
 	S:HandleButton(RBSFrameScanButton)
 	S:HandleButton(RBSFrameReadyCheckButton)
@@ -15,4 +15,4 @@ function AS:SkinRBS()
 	RBSFrameTalentsButton:Size(20)
 end
 
-AS:RegisterSkin(name,AS.SkinRBS)
+AS:RegisterSkin(name, AS.SkinRaidBuffStatus)

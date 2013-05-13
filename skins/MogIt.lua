@@ -1,4 +1,4 @@
-﻿local E, L, V, P, G,_ = unpack(ElvUI)
+﻿local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -42,17 +42,13 @@ function AS:SkinMogIt()
 	end
 
 	hooksecurefunc(MogIt, "CreatePreview", SkinMogItPreview)
-
 	AS:SkinTooltip(MogItTooltip)
-
 	S:HandleCloseButton(MogItFrameCloseButton)
 	S:HandleCloseButton(MogItFiltersCloseButton)
 	MogItFrameFiltersDefaults:StripTextures(True)
 	S:HandleButton(MogItFrameFiltersDefaults, true)
-
 	S:HandleScrollBar(MogItScroll)
 	S:HandleScrollBar(MogItFiltersScrollScrollBar)
-
 end
 
-AS:RegisterSkin(name,AS.SkinMogIt)
+AS:RegisterSkin(name, AS.SkinMogIt)

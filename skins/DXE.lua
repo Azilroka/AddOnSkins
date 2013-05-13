@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -38,8 +38,8 @@ function AS:SkinDXE()
 
 	DXE.LayoutHealthWatchers_ = DXE.LayoutHealthWatchers
 	DXE.LayoutHealthWatchers = function(self)
-		DXE.LayoutHealthWatchers_()
-		for i,hw in ipairs(self.HW) do
+		DXE:LayoutHealthWatchers_()
+		for i, hw in ipairs(self.HW) do
 			if hw:IsShown() then
 				hw:SetTemplate("Transparent")
 				hw.border.Show = function() end

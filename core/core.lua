@@ -156,12 +156,6 @@ function AS:SkinBackdropFrame(frame, template, override)
 	self:RegisterForPetBattleHide(frame)
 end
 
-function AS:SkinFrameD(frame, override)
-	if not override then frame:StripTextures(true) end
-	frame:CreateBackdrop("Default")
-	self:RegisterForPetBattleHide(frame)
-end
-
 function AS:SkinStatusBar(bar, ClassColor)
 	bar:StripTextures(true)
 	bar:SetStatusBarTexture(LSM:Fetch("statusbar",E.private.general.normTex))

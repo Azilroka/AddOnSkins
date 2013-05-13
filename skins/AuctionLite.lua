@@ -1,8 +1,8 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
-local name = "AuctionLiteSkin"
 
+local name = "AuctionLiteSkin"
 function AS:SkinAuctionLite(event)
 	if event == "PLAYER_ENTERING_WORLD" then return end
 	S:HandleTab(AuctionFrameTab4)
@@ -26,5 +26,7 @@ function AS:SkinAuctionLite(event)
 	S:HandleEditBox(SellBuyoutPriceSilver)
 	S:HandleEditBox(SellBuyoutPriceCopper)
 	S:HandleButton(SellCreateAuctionButton)
+	AS:UnregisterEvent(name, event)
 end
-AS:RegisterSkin(name,AS.SkinAuctionLite,"AUCTION_HOUSE_SHOW")
+
+AS:RegisterSkin(name, AS.SkinAuctionLite, "AUCTION_HOUSE_SHOW")

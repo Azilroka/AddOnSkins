@@ -1,4 +1,4 @@
-﻿local E, L, V, P, G,_ = unpack(ElvUI)
+﻿local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -53,8 +53,6 @@ function AS:SkinQuartz()
 	end
 
 	Q3:ApplySettings()
-
-	print("If you are experiencing performance issue's (eg. locking spellcasts, extereme lag spikes) while using the Quartz Skin. Please disable the Quartz skin.")
 end
 
-AS:RegisterSkin(name,AS.SkinQuartz)
+AS:RegisterSkin(name, AS.SkinQuartz)

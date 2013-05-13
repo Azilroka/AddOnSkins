@@ -1,9 +1,8 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "ArchySkin"
-
 function AS:SkinArchy()
 	local function SkinArchyArtifactFrame()
 		AS:SkinFrame(ArchyArtifactFrame)
@@ -63,4 +62,4 @@ function AS:SkinArchy()
 	end
 end
 
-AS:RegisterSkin(name,AS.SkinArchy)
+AS:RegisterSkin(name, AS.SkinArchy)

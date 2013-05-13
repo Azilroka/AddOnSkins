@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -41,4 +41,5 @@ function AS:SkinMisc(event)
 		end)
 	end
 end
+
 AS:RegisterSkin(name, AS.SkinMisc, "ADDON_LOADED")

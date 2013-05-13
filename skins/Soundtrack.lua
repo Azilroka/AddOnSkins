@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -142,4 +142,4 @@ function AS:SkinSoundtrack()
 	NowPlayingTextFrame:Size(200, 40)
 end
 
-AS:RegisterSkin(name,AS.SkinSoundtrack)
+AS:RegisterSkin(name, AS.SkinSoundtrack)

@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -10,4 +10,4 @@ function AS:SkinCombustionHelper()
 	CombuMBTrackerFrame:HookScript("OnUpdate", function(self) self:SetTemplate("Transparent") self:SetPoint("BOTTOM", CombustionFrame, "TOP", 0, 4) end)
 end
 
-AS:RegisterSkin(name,AS.SkinCombustionHelper)
+AS:RegisterSkin(name, AS.SkinCombustionHelper)

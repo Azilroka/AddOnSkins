@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -124,7 +124,6 @@ function AS:SkinArkInventory()
 		frame:SetBackdropBorderColor(r,g,b,a)
 
 	end
-
 end
 
-AS:RegisterSkin(name,AS.SkinArkInventory)
+AS:RegisterSkin(name, AS.SkinArkInventory)

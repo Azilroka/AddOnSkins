@@ -1,10 +1,8 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "SkadaSkin"
-local windows = {}
-
 function AS:SkinSkada()
 	local Skada = Skada
 	local barSpacing = 1
@@ -121,4 +119,4 @@ function AS:SkinSkada()
 	end
 end
 
-AS:RegisterSkin(name,AS.SkinSkada)
+AS:RegisterSkin(name, AS.SkinSkada)

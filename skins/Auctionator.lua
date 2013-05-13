@@ -1,5 +1,4 @@
-
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -62,14 +61,12 @@ function AS:SkinAuctionator(event)
 	AS:SkinFrame(AuctionatorDescriptionFrame)
 	AS:SkinFrame(Atr_Stacking_List)
 	AS:SkinFrame(Atr_ShpList_Frame)
-		
 	S:HandleCheckBox(AuctionatorOption_Enable_Alt_CB)
 	S:HandleCheckBox(AuctionatorOption_Open_All_Bags_CB)
 	S:HandleCheckBox(AuctionatorOption_Show_StartingPrice_CB)
 	S:HandleCheckBox(ATR_tipsVendorOpt_CB)
 	S:HandleCheckBox(ATR_tipsAuctionOpt_CB)
 	S:HandleCheckBox(ATR_tipsDisenchantOpt_CB)
-		
 	S:HandleDropDownBox(AuctionatorOption_Deftab)
 	S:HandleDropDownBox(Atr_tipsShiftDD)
 	S:HandleDropDownBox(Atr_deDetailsDD)
@@ -94,7 +91,6 @@ function AS:SkinAuctionator(event)
 
 	S:HandleEditBox(Atr_Starting_Discount)
 	S:HandleEditBox(Atr_ScanOpts_MaxHistAge)
-		
 	S:HandleButton(Atr_UCConfigFrame_Reset)
 	S:HandleButton(Atr_StackingOptionsFrame_Edit)
 	S:HandleButton(Atr_StackingOptionsFrame_New)
@@ -195,8 +191,7 @@ function AS:SkinAuctionator(event)
 		S:HandleTab(_G["AuctionFrameTab"..i])
 	end
 	AuctionFrameTab1:Point("TOPLEFT", AuctionFrame, "BOTTOMLEFT", 5, 2)
-
-	AS:UnregisterEvent(name,"AUCTION_HOUSE_SHOW")
+	AS:UnregisterEvent(name, event)
 end
 
-AS:RegisterSkin(name,AS.SkinAuctionator,'AUCTION_HOUSE_SHOW')
+AS:RegisterSkin(name, AS.SkinAuctionator, 'AUCTION_HOUSE_SHOW')

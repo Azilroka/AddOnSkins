@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -13,10 +13,19 @@ function AS:SkinLinkWrangler(event)
 	LWTukuiSkinner_Relink = LWTukuiSkinner_Path.."Buttons\\relink"
 	LWTukuiSkinner_Dress = LWTukuiSkinner_Path.."Buttons\\dress"
 
+	function LWTukuiSkinner_SkinButton(button, tex, distex)
+		if button == nil then return end
+		button:SetNormalTexture(tex)
+		button:SetDisabledTexture(distex)
+		button:SetPushedTexture(tex)
+		button:SetHighlightTexture(tex)
+		return button
+	end
+
 	function LWTukuiSkinner(frame, link)
 		local r, g, b = GetItemInfo(link) and GetItemQualityColor(select(3,GetItemInfo(link))) or 1, 1, 0
 		frame:SetTemplate("Default")
-		frame:SetBackdropBorderColor(r,g,b)
+		frame:SetBackdropBorderColor(r, g, b)
 
 		local closeButton = _G[frame:GetName().."CloseButton"]
 		LWTukuiSkinner_SkinButton(closeButton,LWTukuiSkinner_Close)
@@ -40,32 +49,7 @@ function AS:SkinLinkWrangler(event)
 		LWTukuiSkinner_SkinButton(captureButton,LWTukuiSkinner_Compare)
 	end
 
-	function LWTukuiSkinner_PrintTable(t)
-		for k,v in pairs(t) do
-			if (type(v) == "table") then
-				DEFAULT_CHAT_FRAME:AddMessage(k .. ":")
-				EIICPrintTable(v)
-			else
-				DEFAULT_CHAT_FRAME:AddMessage(k .. "(" .. type(v) ..") = " .. tostring(v))
-			end
-		end
-	end
-
-	function LWTukuiSkinner_SkinButton(button, tex, distex)
-		if (button == nil) then
-			return
-		end
-
-		button:SetNormalTexture(tex)
-		button:SetDisabledTexture(distex)
-		button:SetPushedTexture(tex)
-		button:SetHighlightTexture(tex)
-
-		return button
-	end
-
-	LinkWrangler.RegisterCallback("Tukui_LinkWrangler_Skin",LWTukuiSkinner,"show","showcomp")
-
+	LinkWrangler.RegisterCallback("Tukui_LinkWrangler_Skin", LWTukuiSkinner, "show", "showcomp")
 end
 
-AS:RegisterSkin(name,AS.SkinLinkWrangler)
+AS:RegisterSkin(name, AS.SkinLinkWrangler)

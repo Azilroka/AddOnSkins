@@ -1,9 +1,8 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = 'AchieveItSkin'
-
 function AS:SkinAchieveIt(event,addonName)
 	if event == "PLAYER_ENTERING_WORLD" then return end
 
@@ -34,4 +33,4 @@ function AS:SkinAchieveIt(event,addonName)
 	end
 end
 
-AS:RegisterSkin(name,AS.SkinAchieveIt,"ADDON_LOADED")
+AS:RegisterSkin(name, AS.SkinAchieveIt, "ADDON_LOADED")

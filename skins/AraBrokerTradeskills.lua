@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -7,4 +7,4 @@ function AS:SkinAraTradeskills()
 	AraSkills:HookScript("OnUpdate", function(self) AS:SkinFrame(self) end)
 end
 
-AS:RegisterSkin(name,AS.SkinAraTradeskills)
+AS:RegisterSkin(name, AS.SkinAraTradeskills)

@@ -1,5 +1,4 @@
-
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -12,4 +11,4 @@ function AS:SkinBuyEmAll()
 	S:HandleButton(BuyEmAllOkayButton)
 end
 
-AS:RegisterSkin(name,AS.SkinBuyEmAll)
+AS:RegisterSkin(name, AS.SkinBuyEmAll)

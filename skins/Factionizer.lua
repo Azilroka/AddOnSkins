@@ -1,45 +1,45 @@
-﻿local E, L, V, P, G,_ = unpack(ElvUI)
+﻿local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
-local function desat(self, event, ...)
-	for i = 1, 15 do
-		AS:Desaturate(_G["ReputationBar"..i.."ExpandOrCollapseButton"])
-	end
-
-	for i = 1, 13 do
-		AS:Desaturate(_G["FIZ_UpdateEntry"..i])
-	end
-end
-
 local name = "FactionizerSkin"
 function AS:SkinFactionizer()
+	local function desat()
+		for i = 1, 15 do
+			AS:Desaturate(_G["ReputationBar"..i.."ExpandOrCollapseButton"])
+		end
+
+		for i = 1, 13 do
+			AS:Desaturate(_G["FIZ_UpdateEntry"..i])
+		end
+	end
+
 	local StripAllTextures = {
-                "FIZ_ReputationDetailFrame",
-                "FIZ_OptionsFrame",
-		}
+		"FIZ_ReputationDetailFrame",
+		"FIZ_OptionsFrame",
+	}
 
 	local SetTemplateT = {
-                "FIZ_OptionsFrame",
-                "FIZ_ReputationDetailFrame",
-		}	
+		"FIZ_OptionsFrame",
+		"FIZ_ReputationDetailFrame",
+	}	
 
 	local buttons = {
-                "FIZ_OptionsButton",
-                "FIZ_ShowAllButton",
-                "FIZ_ExpandButton",
-                "FIZ_ShowNoneButton",
+		"FIZ_OptionsButton",
+		"FIZ_ShowAllButton",
+		"FIZ_ExpandButton",
+		"FIZ_ShowNoneButton",
 		"FIZ_CollapseButton",
 		"FIZ_SupressNoneFactionButton",
 		"FIZ_SupressNoneGlobalButton",
 		"FIZ_ClearSessionGainButton",
-		}
+	}
 
 	local checkboxes = {
-                "FIZ_OrderByStandingCheckBox",
-                "FIZ_ShowQuestButton",
-                "FIZ_ShowInstancesButton",
-                "FIZ_ShowMobsButton",
+		"FIZ_OrderByStandingCheckBox",
+		"FIZ_ShowQuestButton",
+		"FIZ_ShowInstancesButton",
+		"FIZ_ShowMobsButton",
 		"FIZ_ShowItemsButton",
 		"FIZ_ShowGeneralButton",
 		"FIZ_ReputationDetailInactiveCheckBox",
@@ -54,25 +54,25 @@ function AS:SkinFactionizer()
 		"FIZ_ExtendDetailsBox",
 		"FIZ_GainToChatBox",
 		"FIZ_NoGuildGainBox",
-		}
+	}
 
-		for _, object in pairs(StripAllTextures) do
-			_G[object]:StripTextures()
-		end	
+	for _, object in pairs(StripAllTextures) do
+		_G[object]:StripTextures()
+	end	
 
-		for _, object in pairs(SetTemplateT) do
-			_G[object]:SetTemplate("Transparent")
-		end			
+	for _, object in pairs(SetTemplateT) do
+		_G[object]:SetTemplate("Transparent")
+	end			
 
-		for _, button in pairs(buttons) do
-			S:HandleButton(_G[button])
-		end		
+	for _, button in pairs(buttons) do
+		S:HandleButton(_G[button])
+	end		
 
-		for _, checkbox in pairs(checkboxes) do
-			S:HandleCheckBox(_G[checkbox])
-		end	
+	for _, checkbox in pairs(checkboxes) do
+		S:HandleCheckBox(_G[checkbox])
+	end	
 
-		FIZ_ReputationDetailAtWarCheckBox:SetScript("OnUpdate", function(frame)
+	FIZ_ReputationDetailAtWarCheckBox:SetScript("OnUpdate", function(frame)
 		frame:StripTextures()
 		frame:CreateBackdrop("Default")
 		frame.backdrop:Point("TOPLEFT", 4, -4)
@@ -106,4 +106,4 @@ function AS:SkinFactionizer()
 	FIZ_OptionsFrame:Point("TOPLEFT",   ReputationFrame, "TOPRIGHT", 5, 0)
 end
 
-AS:RegisterSkin(name,AS.SkinFactionizer)
+AS:RegisterSkin(name, AS.SkinFactionizer)

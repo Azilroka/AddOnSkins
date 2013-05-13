@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -20,4 +20,4 @@ function AS:SkinBigBrother()
 	BigBrother:ToggleBuffWindow()
 end
 
-AS:RegisterSkin(name,AS.SkinBigBrother)
+AS:RegisterSkin(name, AS.SkinBigBrother)

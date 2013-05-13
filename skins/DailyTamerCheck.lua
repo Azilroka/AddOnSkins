@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
@@ -21,4 +21,4 @@ function AS:SkinDailyTamerCheck(event)
 	end
 end
 
-AS:RegisterSkin(name,AS.SkinDailyTamerCheck)
+AS:RegisterSkin(name, AS.SkinDailyTamerCheck)

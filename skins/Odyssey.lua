@@ -1,30 +1,26 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "OdysseySkin"
 function AS:SkinOdyssey()
-	OdysseyFrameQuestDBScrollFrame:StripTextures(True)
-	OdysseyMapsMenuScrollFrame:StripTextures(True)
-	OdysseyFrameQuestDetailsSeries:StripTextures(True)
-	OdysseyFrameSearchScrollFrame:StripTextures(True)
-
+	OdysseyFrameQuestDBScrollFrame:StripTextures(true)
+	OdysseyMapsMenuScrollFrame:StripTextures(true)
+	OdysseyFrameQuestDetailsSeries:StripTextures(true)
+	OdysseyFrameSearchScrollFrame:StripTextures(true)
 	OdysseyFramePortrait:Kill()
-
 	AS:SkinFrame(OdysseyFrame)
 	AS:SkinFrame(OdysseyFrameRealmSummaryScrollFrame)
 	OdysseyFrameQuestDB:SetTemplate("Transparent")
 	OdysseyFrameQuestDBScrollFrame:SetTemplate("Transparent")
 	OdysseyFrameQuestDetails:SetTemplate("Transparent")
 	OdysseyFrameZoneMaps:SetTemplate("Transparent")
-
 	S:HandleScrollBar(OdysseyFrameQuestDBScrollFrameScrollBar)
 	S:HandleScrollBar(OdysseyFrameRealmSummaryScrollFrameScrollBar)
 	S:HandleScrollBar(OdysseyMapsMenuScrollFrameScrollBar)
 	S:HandleEditBox(OdysseyFrame_SearchEditBox)
 	S:HandleEditBox(OdysseyFrameQuestDB_MinLevel)
 	S:HandleEditBox(OdysseyFrameQuestDB_MaxLevel)
-	
 	OdysseyFrame_ResetButton:Point("TOPLEFT", OdysseyFrame, "TOPLEFT", 55, -77)
 	OdysseyFrameTab1:Point("TOPLEFT", OdysseyFrame, "BOTTOMLEFT", -5, 2)
 	S:HandleButton(OdysseyFrame_ResetButton)
@@ -35,24 +31,19 @@ function AS:SkinOdyssey()
 	S:HandleNextPrevButton(OdysseyFrameQuestDetailsGoForward)
 	S:HandleDropDownBox(OdysseyFrameRealmSummary_SelectContinent)
 	S:HandleScrollBar(OdysseyFrameSearchScrollFrameScrollBar)
-
 	for i = 1, 3 do
 		S:HandleTab(_G["OdysseyFrameTab"..i])
 		AS:SkinFrame(_G["OdysseyTabQuestsMenuItem"..i])
 	end
-
 	for i = 1, 5 do
 		AS:SkinFrame(_G["OdysseyTabQuests_Sort"..i])
 	end
-
 	for i = 1, 15 do
 		AS:SkinFrame(_G["OdysseyTabMapsMenuItem"..i])
 	end
-
 	for i = 1, 4 do
 		AS:SkinFrame(_G["OdysseyTabSearchMenuItem"..i])
 	end
-
 	for i = 1, 10 do
 		_G["OdysseyFrameRealmSummaryEntry1Item"..i]:StripTextures(True)
 		_G["OdysseyFrameRealmSummaryEntry2Item"..i]:StripTextures(True)
@@ -63,9 +54,7 @@ function AS:SkinOdyssey()
 		_G["OdysseyFrameRealmSummaryEntry7Item"..i]:StripTextures(True)
 		_G["OdysseyFrameRealmSummaryEntry8Item"..i]:StripTextures(True)
 	end
-
 	OdyTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
-
 end
 
-AS:RegisterSkin(name,AS.SkinOdyssey)
+AS:RegisterSkin(name, AS.SkinOdyssey)

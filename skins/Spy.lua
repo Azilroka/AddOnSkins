@@ -15,4 +15,4 @@ function AS:SkinSpy()
 	E:CreateMover(Spy_AlertWindow,"SpyAlertWindowMover","Spy Alert Window",nil,nil,nil,'ALL,GENERAL')
 end
 
-AS:RegisterSkin(name,AS.SkinSpy)
+AS:RegisterSkin(name, AS.SkinSpy)

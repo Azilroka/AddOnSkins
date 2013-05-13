@@ -1,10 +1,10 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "GupPetSkin"
 function AS:SkinGupPet(event)
-	if IsAddOnLoaded("GupPet_ButtonFacade") then DisableAddOn("GupPet_ButtonFacade") print("Incompatable AddOn Detected: GupPet ButtonFacade - Disabling. Please Reload.") end
+	if IsAddOnLoaded("GupPet_ButtonFacade") then DisableAddOn("GupPet_ButtonFacade") print("Incompatable AddOn Detected: GupPet ButtonFacade - Disabling. Please Reload.") return end
 	AS:SkinFrame(GupPet_InterfaceOptionsFrame)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameOptions)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameMountsCompanions)
@@ -31,4 +31,4 @@ function AS:SkinGupPet(event)
 	S:HandleTab(GupPet_InterfaceOptionsFrameMountsCompanionsMainTabCompanion)
 end
 
-AS:RegisterSkin(name,AS.SkinGupPet)
+AS:RegisterSkin(name, AS.SkinGupPet)

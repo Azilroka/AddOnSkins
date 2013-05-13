@@ -1,26 +1,25 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "OutfitterSkin"
 function AS:SkinOutfitter()
-CharacterFrame:HookScript("OnShow", function(self) PaperDollSidebarTabs:SetPoint("BOTTOMRIGHT", CharacterFrameInsetRight, "TOPRIGHT", -14, 0) end)
-OutfitterFrame:HookScript("OnShow", function(self) 
-	AS:SkinFrame(OutfitterFrame)
-	OutfitterFrameTab1:Size(60,25)
-	OutfitterFrameTab2:Size(60,25)
-	OutfitterFrameTab3:Size(60,25)
-	OutfitterMainFrame:StripTextures(True)
-	for i = 0,13 do
-		if _G["OutfitterItem"..i.."OutfitSelected"] then 
-			S:HandleButton(_G["OutfitterItem"..i.."OutfitSelected"])
-			_G["OutfitterItem"..i.."OutfitSelected"]:ClearAllPoints()
-			_G["OutfitterItem"..i.."OutfitSelected"]:Size(16)
-			_G["OutfitterItem"..i.."OutfitSelected"]:Point("LEFT", _G["OutfitterItem"..i.."Outfit"], "LEFT", 8, 0)
+	CharacterFrame:HookScript("OnShow", function(self) PaperDollSidebarTabs:SetPoint("BOTTOMRIGHT", CharacterFrameInsetRight, "TOPRIGHT", -14, 0) end)
+	OutfitterFrame:HookScript("OnShow", function(self) 
+		AS:SkinFrame(OutfitterFrame)
+		OutfitterFrameTab1:Size(60,25)
+		OutfitterFrameTab2:Size(60,25)
+		OutfitterFrameTab3:Size(60,25)
+		OutfitterMainFrame:StripTextures(True)
+		for i = 0,13 do
+			if _G["OutfitterItem"..i.."OutfitSelected"] then 
+				S:HandleButton(_G["OutfitterItem"..i.."OutfitSelected"])
+				_G["OutfitterItem"..i.."OutfitSelected"]:ClearAllPoints()
+				_G["OutfitterItem"..i.."OutfitSelected"]:Size(16)
+				_G["OutfitterItem"..i.."OutfitSelected"]:Point("LEFT", _G["OutfitterItem"..i.."Outfit"], "LEFT", 8, 0)
+			end
 		end
-	end
-end)
-
+	end)
 
 	OutfitterMainFrameScrollbarTrench:StripTextures(True)
 	OutfitterFrameTab1:StripTextures(True)
@@ -91,7 +90,6 @@ end)
 	S:HandleTab(OutfitterEditScriptDialogTab1)
 	S:HandleTab(OutfitterEditScriptDialogTab2)
 	--S:HandleDropDownBox(OutfitterEditScriptDialogPresetScript)
-
 end
 
-AS:RegisterSkin(name,AS.SkinOutfitter)
+AS:RegisterSkin(name, AS.SkinOutfitter)

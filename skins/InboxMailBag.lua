@@ -1,4 +1,4 @@
-﻿local E, L, V, P, G,_ = unpack(ElvUI)
+﻿local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -14,6 +14,7 @@ function AS:SkinInboxMailBag(event)
 		if not name then return end
 		AS:SkinIconButton(name, true, true)
 	end
+	AS:UnregisterEvent(name, event)
 end
 
 AS:RegisterSkin(name, AS.SkinInboxMailBag, "MAIL_SHOW")

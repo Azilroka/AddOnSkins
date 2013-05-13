@@ -1,43 +1,42 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
 local name = "ACPSkin"
-local function cbResize(self, event, ...)
-    for i=1,20,1 do
-        local checkbox = _G["ACP_AddonListEntry" .. i .. "Enabled"]
-        local collapse = _G["ACP_AddonListEntry" .. i .. "Collapse"]
-        local security = _G["ACP_AddonListEntry" .. i .. "Security"]
-        local curr_category = ""
-
-            if curr_category == "" then
-                checkbox:SetPoint("LEFT", 5, 0)
-                    if collapse:IsShown() then
-                        checkbox:SetWidth(26)
-                        checkbox:SetHeight(26)
-                    else
-                        checkbox:SetPoint("LEFT", 15, 0)
-                        checkbox:SetWidth(20)
-                        checkbox:SetHeight(20)
-                    end
-            end
-                    if security:IsShown() then
-                        checkbox:SetPoint("LEFT", 5, 0)
-                        checkbox:SetWidth(26)
-                        checkbox:SetHeight(26)
-                    end
-   end
-end 
-
 function AS:SkinACP()
+	local function cbResize(self, event, ...)
+		for i = 1, 20, 1 do
+			local checkbox = _G["ACP_AddonListEntry" .. i .. "Enabled"]
+			local collapse = _G["ACP_AddonListEntry" .. i .. "Collapse"]
+			local security = _G["ACP_AddonListEntry" .. i .. "Security"]
+			local curr_category = ""
+
+			if curr_category == "" then
+				checkbox:SetPoint("LEFT", 5, 0)
+				if collapse:IsShown() then
+					checkbox:SetWidth(26)
+					checkbox:SetHeight(26)
+				else
+					checkbox:SetPoint("LEFT", 15, 0)
+					checkbox:SetWidth(20)
+					checkbox:SetHeight(20)
+				end
+			end
+			if security:IsShown() then
+				checkbox:SetPoint("LEFT", 5, 0)
+				checkbox:SetWidth(26)
+				checkbox:SetHeight(26)
+			end
+		end
+	end
 	AS:SkinFrame(ACP_AddonList)
-    AS:SkinFrame(ACP_AddonList_ScrollFrame)
+	AS:SkinFrame(ACP_AddonList_ScrollFrame)
 	
 	local buttons = {
-        "ACP_AddonListSetButton",
-        "ACP_AddonListDisableAll",
-        "ACP_AddonListEnableAll",
-        "ACP_AddonList_ReloadUI",
+		"ACP_AddonListSetButton",
+		"ACP_AddonListDisableAll",
+		"ACP_AddonListEnableAll",
+		"ACP_AddonList_ReloadUI",
 		"ACP_AddonListBottomClose",
 	}
 
@@ -80,6 +79,6 @@ function AS:SkinACP()
 	ACP_AddonListBottomClose:Point("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -50, 8)
 	ACP_AddonListBottomClose:SetHeight(25)
 	ACP_AddonList:SetParent(UIParent)
- end
+end
 
- AS:RegisterSkin(name, AS.SkinACP)
+AS:RegisterSkin(name, AS.SkinACP)

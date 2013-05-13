@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -29,9 +29,10 @@ function AS:SkinMageNuggets()
 	}
 
 	for i = 1, #frames do
-		_G[frames[i]]:SetBackdrop({bgFile = nil, edgeFile = nil, tile = false, tileSize = 0, edgeSize = 0, insets = { left = 0, right = 0, top = 0, bottom = 0 }});
+		_G[frames[i]]:SetBackdrop(nil)
 		_G[frames[i]]:CreateBackdrop("Transparent")
 	end
+
 	local sframes = {
 		"MNcritMass_Frame",
 		"MNcombust_Frame",
@@ -44,8 +45,9 @@ function AS:SkinMageNuggets()
 		"MNstarSurge_Frame",
 		"MageNugProcHUFrame",
 	}
+
 	for i = 1, #sframes do
-		_G[sframes[i]]:SetBackdrop({bgFile = nil, edgeFile = nil, tile = false, tileSize = 0, edgeSize = 0, insets = { left = 0, right = 0, top = 0, bottom = 0 }});
+		_G[sframes[i]]:SetBackdrop(nil)
 	end
 
 	MageNugCauterize_Frame_Bar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
@@ -233,7 +235,6 @@ function AS:SkinMageNuggets()
 	S:HandleButton(MageNugOption2FrameButton1)
 	S:HandleButton(MageNugOption2FrameButton2)
 	S:HandleButton(MageNugOption2FrameButton3)
-	
 end
 
-AS:RegisterSkin(name,AS.SkinMageNuggets)
+AS:RegisterSkin(name, AS.SkinMageNuggets)

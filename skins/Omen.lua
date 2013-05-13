@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -30,25 +30,13 @@ function AS:SkinOmen()
 		self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, 1)
 	end
 
-	local omen_mt = getmetatable(Omen.Bars)
-	local oldidx = omen_mt.__index
-	omen_mt.__index = function(self, barID)
-		local bar = oldidx(self, barID)
-		Omen:UpdateBarTextureSettings()
-		Omen:UpdateBarLabelSettings()
-		return bar
-	end
-
 	Omen.db.profile.Bar.Spacing = 1
-
 	Omen.db.profile.Background.Texture = "ElvUI Blank"
 
-	Omen:UpdateBarTextureSettings()
-	Omen:UpdateBarLabelSettings()
 	Omen:UpdateTitleBar()
 	Omen:UpdateBackdrop()
 	Omen:ReAnchorBars()
 	Omen:ResizeBars()
 end
 
-AS:RegisterSkin(name,AS.SkinOmen)
+AS:RegisterSkin(name, AS.SkinOmen)

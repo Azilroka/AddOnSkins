@@ -1,64 +1,59 @@
-﻿local E, L, V, P, G,_ = unpack(ElvUI)
+﻿local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
-local function DoDis(self, event, ...)
-
+local name = "LightheadedSkin"
+function AS:SkinLightHeaded()
+	local function DoDis(self, event, ...)
 		QuestNPCModel:ClearAllPoints()
 		QuestNPCModel:SetPoint("TOPLEFT", LightHeadedFrame, "TOPRIGHT", 5, -10)
 		QuestNPCModel:SetAlpha(0.85)
-
 		LightHeadedFrame:Point("LEFT",  QuestLogFrame, "RIGHT", 2, 0)
-			
-end
+	end
 
-local function SkinOptions(self, event, ...)-- Skin the Options Frame
+	local function SkinOptions(self, event, ...)
 		local lhp = _G["LightHeaded_Panel"]
 		if lhp:IsVisible() then
+			for i = 1, 9 do
+				local cbox = _G["LightHeaded_Panel_Toggle"..i]
+				S:HandleCheckBox(cbox)
+			end
 
-		for i = 1, 9 do
-			local cbox = _G["LightHeaded_Panel_Toggle"..i]
-			S:HandleCheckBox(cbox)
-		end
-
-		local buttons = {
-			"LightHeaded_Panel_Button1",
-			"LightHeaded_Panel_Button2",
+			local buttons = {
+				"LightHeaded_Panel_Button1",
+				"LightHeaded_Panel_Button2",
 			}
-	
-		for _, button in pairs(buttons) do
-			S:HandleButton(_G[button])
-		end
 		
-		LightHeaded_Panel_Button2:Disable()
-	
-		local detachwarn = CreateFrame("Frame", "DetachWarning", LightHeaded_Panel)
-				detachwarn:SetWidth(280)	
-				detachwarn.title = detachwarn:CreateFontString(nil, "ARTWORK")
-				detachwarn.title2 = detachwarn:CreateFontString(nil, "ARTWORK")
-				detachwarn.title:SetFontObject(GameFontHighlight)
-				detachwarn.title2:SetFontObject(GameFontHighlight)
-				detachwarn.title:SetPoint("LEFT", LightHeaded_Panel_Button2, "RIGHT", 10, 5)
-				detachwarn.title2:SetPoint("LEFT", LightHeaded_Panel_Button2, "RIGHT", 12, -7)
-				detachwarn.title:SetText("Detach Mode is buggy with Lightheaded Skin!")
-				detachwarn.title2:SetText("Type /lh detach to use at your own risk.")
+			for _, button in pairs(buttons) do
+				S:HandleButton(_G[button])
+			end
+			
+			LightHeaded_Panel_Button2:Disable()
+		
+			local detachwarn = CreateFrame("Frame", "DetachWarning", LightHeaded_Panel)
+			detachwarn:SetWidth(280)	
+			detachwarn.title = detachwarn:CreateFontString(nil, "ARTWORK")
+			detachwarn.title2 = detachwarn:CreateFontString(nil, "ARTWORK")
+			detachwarn.title:SetFontObject(GameFontHighlight)
+			detachwarn.title2:SetFontObject(GameFontHighlight)
+			detachwarn.title:SetPoint("LEFT", LightHeaded_Panel_Button2, "RIGHT", 10, 5)
+			detachwarn.title2:SetPoint("LEFT", LightHeaded_Panel_Button2, "RIGHT", 12, -7)
+			detachwarn.title:SetText("Detach Mode is buggy with Lightheaded Skin!")
+			detachwarn.title2:SetText("Type /lh detach to use at your own risk.")
+		end
 	end
-end
-
-local name = "LightheadedSkin"
-function AS:SkinLightHeaded()
 	AS:SkinFrame(LightHeadedFrame)
 	AS:SkinFrame(LightHeadedFrameSub)
 	AS:SkinFrame(LightHeadedSearchBox)
 	LightHeadedTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
-						
+
 	LightHeadedScrollFrame:StripTextures()
-	
+
 	local lhframe = LightHeadedFrame		
 	lhframe.close:Hide()
 	S:HandleCloseButton(lhframe.close)
 	lhframe.handle:Hide()
-	
+
 	local lhframe = LightHeadedFrameSub
 	S:HandleNextPrevButton(lhframe.prev)
 	S:HandleNextPrevButton(lhframe.next)
@@ -80,4 +75,4 @@ function AS:SkinLightHeaded()
 	local LH_Options = _G["LightHeaded_Panel"]
 end
 
-AS:RegisterSkin(name,AS.SkinLightHeaded)
+AS:RegisterSkin(name, AS.SkinLightHeaded)

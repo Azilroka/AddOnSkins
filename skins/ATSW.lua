@@ -1,5 +1,4 @@
-
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local S = E:GetModule('Skins')
 
@@ -110,33 +109,31 @@ function AS:SkinATSW()
 	ATSWCSUListScrollFrame:StripTextures(True)
 	ATSWCSSListScrollFrame:StripTextures(True)
 
-		local once = false
-			for i=1, ATSW_MAX_TRADE_SKILL_REAGENTS do
-				local button = _G["ATSWReagent"..i]
-				local icon = _G["ATSWReagent"..i.."IconTexture"]
-				local count = _G["ATSWReagent"..i.."Count"]
+	for i = 1, ATSW_MAX_TRADE_SKILL_REAGENTS do
+		local button = _G["ATSWReagent"..i]
+		local icon = _G["ATSWReagent"..i.."IconTexture"]
+		local count = _G["ATSWReagent"..i.."Count"]
 
-			icon:SetTexCoord(.08, .92, .08, .92)
-			icon:SetDrawLayer("OVERLAY")
+		icon:SetTexCoord(.08, .92, .08, .92)
+		icon:SetDrawLayer("OVERLAY")
 
-			if not icon.backdrop then
-				icon.backdrop = CreateFrame("Frame", nil, button)
-				icon.backdrop:SetFrameLevel(button:GetFrameLevel() - 1)
-				icon.backdrop:SetTemplate("Default")
-				icon.backdrop:Point("TOPLEFT", icon, "TOPLEFT", -2, 2)
-				icon.backdrop:Point("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 2, -2)
-			end
+		if not icon.backdrop then
+			icon.backdrop = CreateFrame("Frame", nil, button)
+			icon.backdrop:SetFrameLevel(button:GetFrameLevel() - 1)
+			icon.backdrop:SetTemplate("Default")
+			icon.backdrop:Point("TOPLEFT", icon, "TOPLEFT", -2, 2)
+			icon.backdrop:Point("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 2, -2)
+		end
 
-			icon:SetParent(icon.backdrop)
-			count:SetParent(icon.backdrop)
-			count:SetDrawLayer("OVERLAY")
+		icon:SetParent(icon.backdrop)
+		count:SetParent(icon.backdrop)
+		count:SetDrawLayer("OVERLAY")
 
-			if i > 2 and once == false then
+		if i > 2 then
 			local point, anchoredto, point2, x, y = button:GetPoint()
 			button:ClearAllPoints()
 			button:Point(point, anchoredto, point2, x, y - .8)
 		end
-
 		_G["ATSWReagent"..i.."NameFrame"]:Kill()
 	end
 
@@ -158,7 +155,6 @@ function AS:SkinATSW()
 	S:HandleNextPrevButton(ATSWIncrementButton)
 	S:HandleNextPrevButton(ATSWDecrementButton)
 	S:HandleButton(ATSWAutoBuyButton)
-
 	AS:SkinFrame(ATSWShoppingListFrame)
 	ATSWShoppingListFrame:Size(475,150)
 	ATSWShoppingListFrame:ClearAllPoints()
@@ -168,11 +164,10 @@ function AS:SkinATSW()
 	ATSWSLCloseButton:Point("TOPRIGHT", ATSWShoppingListFrame, "TOPRIGHT", -5, -5)
 	ATSWSLScrollFrame:StripTextures(True)
 	S:HandleScrollBar(ATSWSLScrollFrameScrollBar)
-
 	S:HandleButton(ATSWScanDelayFrameSkipButton)
 	S:HandleButton(ATSWScanDelayFrameAbortButton)
 	AS:SkinFrame(ATSWScanDelayFrame)
 	AS:SkinStatusBar(ATSWScanDelayFrameBar, true)
 end
 
-AS:RegisterSkin(name,AS.SkinATSW)
+AS:RegisterSkin(name, AS.SkinATSW)
