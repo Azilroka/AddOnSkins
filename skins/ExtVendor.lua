@@ -8,6 +8,8 @@ function AS:SkinExtVendor()
 
 	S:HandleButton(MerchantFrameFilterButton)
 	S:HandleButton(MerchantFrameSellJunkButton)
+	MerchantFrameSellJunkButtonIcon:SetTexCoord(.07, .93, .07, .93)
+	S:HandleEditBox(MerchantFrameSearchBox)
 
 	for i = 1, 20 do
 		local b = _G["MerchantItem"..i.."ItemButton"]

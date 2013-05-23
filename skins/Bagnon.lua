@@ -7,20 +7,24 @@ function AS:SkinBagnon(event)
 	if event == "PLAYER_ENTERING_WORLD" then
 		ToggleBackpack()
 		AS:SkinFrame(BagnonFrameinventory)
-		AS:SkinCloseButton(BagnonFrameinventoryCloseButton)
+		S:HandleCloseButton(BagnonFrameinventoryCloseButton)
 		ToggleBackpack()
 	elseif event == "BANKFRAME_OPENED" then
 		AS:SkinFrame(BagnonFramebank)
-		AS:SkinCloseButton(BagnonFramebankCloseButton)
+		S:HandleCloseButton(BagnonFramebankCloseButton)
 		AS:UnregisterEvent(name, event)
-	elseif event == "GUILDBANKFRAME_OPENED" and addon == "Bagnon_GuildBank" then
-		AS:SkinFrame(BagnonFrameguildbank)
-		AS:SkinCloseButton(BagnonFrameguildbankCloseButton)
-		AS:UnregisterEvent(name, "GUILDBANKFRAME_OPENED")
-	elseif event == "VOID_STORAGE_OPEN" and addon == "Bagnon_VoidStorage" then
-		AS:SkinFrame(BagnonFramevoidstorage)
-		AS:SkinCloseButton(BagnonFramevoidstorageCloseButton)
-		AS:UnregisterEvent(name, "VOID_STORAGE_OPEN")
+	elseif event == "GUILDBANKFRAME_OPENED" and IsAddOnLoaded("Bagnon_GuildBank") then
+		E:Delay(0, function()
+			AS:SkinFrame(BagnonFrameguildbank)
+			S:HandleCloseButton(BagnonFrameguildbankCloseButton)
+			AS:UnregisterEvent(name, "GUILDBANKFRAME_OPENED")
+		end)
+	elseif event == "VOID_STORAGE_OPEN" and IsAddOnLoaded("Bagnon_VoidStorage") then
+		E:Delay(0, function()
+			AS:SkinFrame(BagnonFramevoidstorage)
+			S:HandleCloseButton(BagnonFramevoidstorageCloseButton)
+			AS:UnregisterEvent(name, "VOID_STORAGE_OPEN")
+		end)
 	end
 end
 
