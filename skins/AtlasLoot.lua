@@ -208,6 +208,7 @@ function AS:SkinAtlasLoot()
 	if AtlasLootItemsFrame_Heroic then S:HandleCheckBox(AtlasLootItemsFrame_Heroic) end
 	if AtlasLootCompareFrameSearch_FilterCheck then S:HandleCheckBox(AtlasLootCompareFrameSearch_FilterCheck) end
 	if AtlasLootItemsFrame_RaidFinder then S:HandleCheckBox(AtlasLootItemsFrame_RaidFinder) end
+	if AtlasLootItemsFrame_Thunderforged then S:HandleCheckBox(AtlasLootItemsFrame_Thunderforged) end
 
 	local Frame = AtlasLootPanel
 	Frame.Titel:SetTextColor(23/255, 132/255, 209/255)
