@@ -37,12 +37,26 @@ local function GenerateEventFunction(event)
 					tinsert(args,arg)
 				end
 				for _,func in ipairs(funcs) do
-					func(f,event,unpack(args))
+					AS:Call_(skin,func,event,unpack(args))
 				end
 			end
 		end
 	end
 	return eventHandler
+end
+
+function AS:Call_(skin,func,event,...)
+	-- pack event args
+	local args = {}
+	for i = 1,select('#',...) do
+		local arg = select(i,...)
+		if not arg then break end
+		tinsert(args,arg)
+	end
+	if not pcall(func,self,event,unpack(args)) then
+		local message = "|cff1784d1ElvUI |rAddOnSkins: |cffff0000There was an error in the|r |cff0affff%s|r |cffff0000skin|r.  Please report this to the developers immediately."
+		print(message:format(skin:gsub("Skin","")))
+	end
 end
 
 function AS:Initialize()
@@ -85,7 +99,7 @@ function AS:Initialize()
 	for skin,funcs in pairs(AS.skins) do
 		if AS:CheckOption(skin) then
 			for _,func in ipairs(funcs) do
-				func(f,"PLAYER_ENTERING_WORLD")
+				AS:Call_(skin,func,"PLAYER_ENTERING_WORLD")
 			end
 		end
 	end

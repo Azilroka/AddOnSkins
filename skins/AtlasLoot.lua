@@ -180,7 +180,7 @@ function AS:SkinAtlasLoot()
 	S:HandleCloseButton(AtlasLootCompareFrame_CloseButton_Wishlist)
 
 	AS:Desaturate(AtlasLootDefaultFrame_LockButton)
-
+	
 	S:HandleNextPrevButton(AtlasLootQuickLooksButton)
 	S:HandleNextPrevButton(AtlasLootItemsFrame_NEXT)
 	AtlasLootItemsFrame_NEXT:SetWidth(25)
