@@ -49,7 +49,6 @@ function AS:SkinFactionizer()
 		"FIZ_SwitchFactionBarBox",
 		"FIZ_SilentSwitchBox",
 		"FIZ_NoGuildSwitchBox",
-		"FIZ_GuildCapBox",
 		"FIZ_EnableMissingBox",
 		"FIZ_ExtendDetailsBox",
 		"FIZ_GainToChatBox",
