@@ -30,7 +30,7 @@ function AS:SkinMisc(event)
 		AS:SkinFrame(TradeSkillFrame)
 		AS:SkinStatusBar(TradeSkillRankFrame)
 	end
-	
+	if XPBarNoneXPBar then XPBarNoneXPBar:CreateBackdrop() end
 	--TrainAll
 	if IsAddOnLoaded("Blizzard_TrainerUI") then
 		ClassTrainerFrame:HookScript("OnShow", function()
