@@ -38,7 +38,7 @@ function AS:SkinRCLootCouncil()
 	S:HandleScrollBar(RCLootHistoryFrameScrollFrameScrollBar)
 
 	--CheckVersionFrame
-	AS:SkinFrame(RCVersionFrame1)
+	AS:SkinFrame(RCVersionFrame)
 	AS:SkinFrame(RCVersionFrameContentFrame, "Default")
 
 	S:HandleButton(ButtonGuild)
