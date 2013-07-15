@@ -5,9 +5,8 @@ local S = E:GetModule('Skins')
 local name = "RCLootCouncilSkin"
 function AS:SkinRCLootCouncil()
 
-	--Mainframe
-	AS:SkinFrame(MainFrame,"Transparent",true)
-	AS:SkinFrame(ContentFrame,"Default")
+	AS:SkinFrame(MainFrame, "Transparent", true)
+	AS:SkinFrame(ContentFrame, "Default")
 	S:HandleButton(BtClose)
 	if _G["BtAward"] then S:HandleButton(BtAward) end
 	if _G["BtRemove"] then S:HandleButton(BtRemove) end
@@ -29,28 +28,23 @@ function AS:SkinRCLootCouncil()
 	end	
 
 	for i = 1,10 do
-		if _G["RCLootFrameEntry"..i] then AS:SkinFrame(_G["RCLootFrameEntry"..i],"Transparent",true) end
+		if _G["RCLootFrameEntry"..i] then AS:SkinFrame(_G["RCLootFrameEntry"..i], "Transparent", true) end
 	end	
 
 	--LootHistoryFrame
 	AS:SkinFrame(RCLootHistoryFrame)
-	AS:SkinFrame(RCLootHistoryFrameContent1,"Default")
-	AS:SkinFrame(RCLootHistoryFrameContent2Scroll,"Default")
-	RCLootHistoryFrameContent2Scroll:Size(394, 263)
-	RCLootHistoryFrameContent2Scroll:Point("TOPLEFT", RCLootHistoryFrameContent1, "TOPRIGHT", 5, 0)
-	S:HandleButton(RCLootHistoryFrameButtonAll)
+	AS:SkinFrame(RCLootHistoryFrameScrollFrame, "Default")
 	S:HandleButton(RCLootHistoryFrameButtonClose)
-	S:HandleScrollBar(RCLootHistoryFrameContent2ScrollScrollBar)
+	S:HandleScrollBar(RCLootHistoryFrameScrollFrameScrollBar)
 
 	--CheckVersionFrame
-	AS:SkinFrame(RCVersionFrame)
-	AS:SkinFrame(RCVersionFrameContentFrame,"Default")
+	AS:SkinFrame(RCVersionFrame1)
+	AS:SkinFrame(RCVersionFrameContentFrame, "Default")
 
 	S:HandleButton(ButtonGuild)
 	S:HandleButton(RaidButton)
 	S:HandleButton(CloseButton)
 	S:HandleScrollBar(RCVersionFrameContentFrameScrollBar)
-
 end
 
 AS:RegisterSkin(name, AS.SkinRCLootCouncil)

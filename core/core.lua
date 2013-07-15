@@ -53,9 +53,12 @@ function AS:Call_(skin,func,event,...)
 		if not arg then break end
 		tinsert(args,arg)
 	end
-	if not pcall(func,self,event,unpack(args)) then
+	local pass, error = pcall(func,self,event,unpack(args))
+	if not pass then
 		local message = "|cff1784d1ElvUI |rAddOnSkins: |cffff0000There was an error in the|r |cff0affff%s|r |cffff0000skin|r.  Please report this to the developers immediately."
-		print(message:format(skin:gsub("Skin","")))
+		local errormessage = "%s Error: %s"
+		print(format(message, gsub(skin, "Skin", "")))
+		print(format(errormessage, gsub(skin, "Skin", ""), error))
 	end
 end
 

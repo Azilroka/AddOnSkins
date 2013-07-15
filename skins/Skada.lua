@@ -11,7 +11,6 @@ function AS:SkinSkada()
 
 	local function StripOptions(options)
 		options.baroptions.args.barspacing = nil
-		options.titleoptions.args.texture = nil
 		options.titleoptions.args.bordertexture = nil
 		options.titleoptions.args.thickness = nil
 		options.titleoptions.args.margin = nil
@@ -37,7 +36,7 @@ function AS:SkinSkada()
 	local ResetAcceptText = ResetAccept:CreateFontString(nil, "Overlay")
 	ResetAcceptText:SetFontObject(ChatFontNormal)
 	ResetAcceptText:SetPoint("CENTER")
-	ResetAcceptText:SetText("Yes")
+	ResetAcceptText:SetText(YES)
 	local ResetClose = CreateFrame("Button", nil, ResetFrame)
 	S:HandleButton(ResetClose)
 	ResetClose:SetSize(70, 25)
@@ -46,7 +45,7 @@ function AS:SkinSkada()
 	local ResetCloseText = ResetClose:CreateFontString(nil, "Overlay")
 	ResetCloseText:SetFontObject(ChatFontNormal)
 	ResetCloseText:SetPoint("CENTER")
-	ResetCloseText:SetText("No")
+	ResetCloseText:SetText(NO)
 	
 	function Skada:ShowPopup()
 		ResetFrame:Show()
@@ -74,17 +73,12 @@ function AS:SkinSkada()
 	barmod.ApplySettings_ = barmod.ApplySettings
 	barmod.ApplySettings = function(self, win)
 		barmod.ApplySettings_(self, win)
-
 		local skada = win.bargroup
-
 		if(win.db.enabletitle) then
 			skada.button:SetBackdrop(titleBG)
 		end
-
-		skada:SetTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 		skada:SetSpacing(barSpacing)
 		skada:SetFrameLevel(5)
-		
 		if not skada.TitleBackGround then
 			skada.TitleBackGround = CreateFrame("Frame", nil, skada.button)
 			skada.TitleBackGround:SetPoint("TOP")
@@ -94,10 +88,9 @@ function AS:SkinSkada()
 			skada.TitleBackGround:SetTemplate("Default")
 			skada.TitleBackGround:SetFrameLevel(skada.button:GetFrameLevel() -1)
 		end
-		
 		local titlefont = CreateFont("TitleFont" .. win.db.name)
 		skada.button:SetNormalFontObject(titlefont)
-		win.bargroup.button:SetBackdropColor(unpack(E["media"].backdropcolor))
+		skada.button:SetBackdropColor(unpack(E["media"].backdropcolor))
 		skada:SetBackdrop(nil)
 		if not skada.backdrop then
 			skada:CreateBackdrop("Default")
