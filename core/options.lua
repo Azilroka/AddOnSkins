@@ -98,6 +98,10 @@ local Skins = {
 	["WeakAurasSkin"] = {
 		["buttonText"] = "WeakAuras Icons",
 	},
+	["ParchmentRemover"] = {
+		["buttonText"] = "Parchment Remover",
+		["addon"] = "ElvUI_AddOnSkins"
+	},
 }
 
 AS.Skins = Skins
