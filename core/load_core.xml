@@ -2,4 +2,5 @@
     <Script file="core.lua"/>
     <Script file="embed.lua"/>
     <Script file="options.lua"/>
+    <Script file="ParchmentRemover.lua"/>
 </Ui>
