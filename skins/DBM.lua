@@ -239,11 +239,11 @@ function AS:SkinDBM(event, addon)
 			end
 		end
 		DBM_SavedOptions.Enabled = true
-		DBT_SavedOptions["DBM"]["Scale"] = 1
-		DBT_SavedOptions["DBM"]["HugeScale"] = 1
-		if AS:CheckOption("DBMSkinHalf") then
-			DBT_SavedOptions["DBM"]["BarYOffset"] = 15
-		end
+		-- DBT_SavedOptions["DBM"]["Scale"] = 1
+		-- DBT_SavedOptions["DBM"]["HugeScale"] = 1
+		-- if AS:CheckOption("DBMSkinHalf") then
+			-- DBT_SavedOptions["DBM"]["BarYOffset"] = 15
+		-- end
 		DBT_SavedOptions["DBM"]["Texture"] = AS.LSM:Fetch("statusbar", E.private.general.normTex)
 		--DBT_SavedOptions["DBM"].Font = "ElvUI Font"
 	end
