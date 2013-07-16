@@ -1,5 +1,32 @@
 local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local DT = E:GetModule('DataTexts')
+
+local function OnClick(self, button)
+	if button == 'LeftButton' then
+		if AS:CheckOption("EmbedSkada","Skada") then for _, window in ipairs(Skada:GetWindows()) do window:Show() end end
+		if AS:CheckOption("EmbedRecount","Recount") or AS:CheckOption("EmbedRO","Recount","Omen") then Recount_MainWindow:Show() end
+		if AS:CheckOption("EmbedOmen","Omen") or AS:CheckOption("EmbedRO","Recount","Omen") then OmenBarList:Show() end
+		if AS:CheckOption("EmbedTDPS","TinyDPS") then tdpsFrame:Show() end
+	elseif button == 'RightButton' then
+		if AS:CheckOption("EmbedSkada","Skada") then for _, window in ipairs(Skada:GetWindows()) do window:Hide() end end
+		if AS:CheckOption("EmbedRecount","Recount") or AS:CheckOption("EmbedRO","Recount","Omen") then Recount_MainWindow:Hide() end
+		if AS:CheckOption("EmbedOmen","Omen") or AS:CheckOption("EmbedRO","Recount","Omen") then OmenBarList:Hide() end
+		if AS:CheckOption("EmbedTDPS","TinyDPS") then tdpsFrame:Hide() end
+	end
+end
+
+local function OnEvent(self, event)
+	local Text
+	if AS:CheckOption("EmbedRecount","Recount") then Text = 'Recount' end
+	if AS:CheckOption("EmbedRO","Recount","Omen") then Text = 'Recount/Omen' end
+	if AS:CheckOption("EmbedSkada","Skada") then Text = 'Skada' end
+	if AS:CheckOption("EmbedOmen","Omen") then Text = 'Omen' end
+	if AS:CheckOption("EmbedTDPS","TinyDPS") then Text = 'TinyDPS' end
+	self.text:SetText(format('%s %s', 'Toggle', Text))
+end
+
+DT:RegisterDatatext('AddOnSkins', {"PLAYER_ENTERING_WORLD"}, OnEvent, nil, OnClick, nil, nil)
 
 local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 EmbeddingWindow:SetTemplate("Transparent")
