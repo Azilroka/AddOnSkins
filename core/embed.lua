@@ -16,6 +16,13 @@ local function OnClick(self, button)
 	end
 end
 
+local function OnEnter(self)
+	DT:SetupTooltip(self)
+	DT.tooltip:AddLine('Left Click to Show')
+	DT.tooltip:AddLine('Right Click to Hide')
+	DT.tooltip:Show()
+end
+
 local function OnEvent(self, event)
 	local Text
 	if AS:CheckOption("EmbedRecount","Recount") then Text = 'Recount' end
@@ -26,7 +33,7 @@ local function OnEvent(self, event)
 	self.text:SetText(format('%s %s', 'Toggle', Text))
 end
 
-DT:RegisterDatatext('AddOnSkins', {"PLAYER_ENTERING_WORLD"}, OnEvent, nil, OnClick, nil, nil)
+DT:RegisterDatatext('AddOnSkins', {"PLAYER_ENTERING_WORLD"}, OnEvent, nil, OnClick, OnEnter)
 
 local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 EmbeddingWindow:SetTemplate("Transparent")
