@@ -267,8 +267,8 @@ function AS:EmbedInit()
 	AS:EmbedExitCombat(true) -- Force Hide on All Embedded AddOn's
 end
 
-function AS:EmbedEnterCombat(Forced)
-	if self:CheckOption("EmbedOoC") or Forced then
+function AS:EmbedEnterCombat(event)
+	if self:CheckOption("EmbedOoC") or event == true then
 		if self:CheckOption("EmbedRecount", "Recount") or self:CheckOption("EmbedRO", "Recount", "Omen") then
 			Recount_MainWindow:Show()
 		end
@@ -288,8 +288,8 @@ function AS:EmbedEnterCombat(Forced)
 	end
 end
 
-function AS:EmbedExitCombat(Forced)
-	if self:CheckOption("EmbedOoC") or Forced then
+function AS:EmbedExitCombat(event)
+	if self:CheckOption("EmbedOoC") or event == true then
 		if self:CheckOption("EmbedRecount", "Recount") or self:CheckOption("EmbedRO", "Recount", "Omen") then
 			Recount_MainWindow:Hide()
 		end
