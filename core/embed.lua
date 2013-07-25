@@ -45,7 +45,7 @@ function AS:EmbedWindowResize()
 
 	local Panel = AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel
 
-	if not self.sle then
+	if not AS.sle then
 		local Offset = E.PixelMode and -3 or -5
 		local Height = E.PixelMode and 28 or 32
 		local Width = E.PixelMode and 6 or 10
@@ -57,23 +57,27 @@ function AS:EmbedWindowResize()
 		EmbeddingWindow:Width(Panel:GetWidth() - 1)
 		EmbeddingWindow:Height(Panel:GetHeight() - 1)
 	end
-	
+
 	if OrigHeight == nil then OrigHeight = EmbeddingWindow:GetHeight() end
 	if OrigWidth == nil then OrigWidth = EmbeddingWindow:GetWidth() end
 	if EmbeddingWindow:GetHeight() == OrigHeight and EmbeddingWindow:GetWidth() == OrigWidth then return end
+
+	AS:EmbedCheck()
 	OrigHeight = EmbeddingWindow:GetHeight()
 	OrigWidth = EmbeddingWindow:GetWidth()
-	
-	if self:CheckOption("EmbedRO", "Recount", "Omen") then self:EmbedRecountOmenResize() end
-	if self:CheckOption("EmbedTDPS", "TinyDPS") then self:EmbedTDPSResize() end
-	if self:CheckOption("EmbedRecount", "Recount") then self:EmbedRecountResize() end
-	if self:CheckOption("EmbedOmen", "Omen") then self:EmbedOmenResize() end
-	if self:CheckOption("EmbedSkada", "Skada") then self:EmbedSkada() end
+end
+
+function AS:EmbedCheck()
+	if AS:CheckOption("EmbedRO", "Recount", "Omen") then AS:EmbedRecountOmenResize() end
+	if AS:CheckOption("EmbedTDPS", "TinyDPS") then AS:EmbedTDPSResize() end
+	if AS:CheckOption("EmbedRecount", "Recount") then AS:EmbedRecountResize() end
+	if AS:CheckOption("EmbedOmen", "Omen") then AS:EmbedOmenResize() end
+	if AS:CheckOption("EmbedSkada", "Skada") then AS:EmbedSkada() end
 end
 
 function AS:EmbedRecount()
 	Recount:LockWindows(true)
-	self:EmbedRecountResize()
+	AS:EmbedRecountResize()
 	Recount_MainWindow:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel))
 	Recount.MainWindow:SetFrameStrata("LOW")
 end
@@ -111,9 +115,9 @@ function AS:EmbedOmen()
 	OmenTitle:Kill()
 	OmenBarList:StripTextures()
 	OmenBarList:SetTemplate("Transparent")
-	AS:EmbedOmenResize()
 	OmenBarList:SetParent(AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)
 	OmenBarList:SetFrameStrata("LOW")
+	AS:EmbedOmenResize()
 end
 
 function AS:EmbedOmenResize()
@@ -133,7 +137,7 @@ function AS:EmbedRecountOmenResize()
 	Recount_MainWindow:ClearAllPoints()
 	local Offset = E.PixelMode and 0 or 1
 	OmenBarList:SetWidth((EmbeddingWindow:GetWidth() / 3) - Offset)
-	OmenBarList:SetHeight((EmbeddingWindow:GetHeight() + 21))
+	OmenBarList:SetHeight(EmbeddingWindow:GetHeight())
 	OmenBarList:SetPoint("BOTTOMLEFT", EmbeddingWindow, "BOTTOMLEFT", 0, Offset)
 	Recount_MainWindow:SetWidth((EmbeddingWindow:GetWidth() / 3) + (EmbeddingWindow:GetWidth() / 3))
 	Recount_MainWindow:SetHeight((EmbeddingWindow:GetHeight() + 7))
@@ -214,6 +218,7 @@ function AS:EmbedInit()
 
 	ChatToggle:SetScript("OnClick", function(self, btn)
 		if btn == 'RightButton' then
+			AS:EmbedCheck()
 			if AS:CheckOption("EmbedRecount", "Recount") or AS:CheckOption("EmbedRO", "Recount", "Omen") then
 				AS:ToggleFrame(Recount_MainWindow)
 			end
@@ -264,44 +269,45 @@ function AS:EmbedInit()
 	end
 	if self:CheckOption("EmbedTDPS", "TinyDPS") then self:EmbedTDPS() end
 	if self:CheckOption("EmbedRecount", "Recount") then self:EmbedRecount() end
-	AS:EmbedExitCombat(true) -- Force Hide on All Embedded AddOn's
+	AS:EmbedCheck()
+	AS:EmbedExitCombat(true)
 end
 
 function AS:EmbedEnterCombat(event)
-	if self:CheckOption("EmbedOoC") or event == true then
-		if self:CheckOption("EmbedRecount", "Recount") or self:CheckOption("EmbedRO", "Recount", "Omen") then
+	if AS:CheckOption("EmbedOoC") or event == true then
+		if AS:CheckOption("EmbedRecount", "Recount") or AS:CheckOption("EmbedRO", "Recount", "Omen") then
 			Recount_MainWindow:Show()
 		end
-		if self:CheckOption("EmbedSkada", "Skada")  then
+		if AS:CheckOption("EmbedSkada", "Skada")  then
 			if Skada.db.profile.hidesolo then return end
 			if Skada.db.profile.hidecombat then return end
 			for _, window in ipairs(Skada:GetWindows()) do
 				window:Show()
 			end
 		end
-		if self:CheckOption("EmbedOmen", "Omen") or self:CheckOption("EmbedRO", "Recount", "Omen") then
+		if AS:CheckOption("EmbedOmen", "Omen") or AS:CheckOption("EmbedRO", "Recount", "Omen") then
 			OmenBarList:Show()
 		end
-		if self:CheckOption("EmbedTDPS", "TinyDPS") then
+		if AS:CheckOption("EmbedTDPS", "TinyDPS") then
 			tdpsFrame:Show()
 		end
 	end
 end
 
 function AS:EmbedExitCombat(event)
-	if self:CheckOption("EmbedOoC") or event == true then
-		if self:CheckOption("EmbedRecount", "Recount") or self:CheckOption("EmbedRO", "Recount", "Omen") then
+	if AS:CheckOption("EmbedOoC") or event == true then
+		if AS:CheckOption("EmbedRecount", "Recount") or AS:CheckOption("EmbedRO", "Recount", "Omen") then
 			Recount_MainWindow:Hide()
 		end
-		if self:CheckOption("EmbedSkada", "Skada") then
+		if AS:CheckOption("EmbedSkada", "Skada") then
 			for _, window in ipairs(Skada:GetWindows()) do
 				window:Hide()
 			end
 		end
-		if self:CheckOption("EmbedOmen", "Omen") or self:CheckOption("EmbedRO", "Recount", "Omen") then
+		if AS:CheckOption("EmbedOmen", "Omen") or AS:CheckOption("EmbedRO", "Recount", "Omen") then
 			OmenBarList:Hide()
 		end
-		if self:CheckOption("EmbedTDPS", "TinyDPS") then
+		if AS:CheckOption("EmbedTDPS", "TinyDPS") then
 			tdpsFrame:Hide()
 		end
 	end
