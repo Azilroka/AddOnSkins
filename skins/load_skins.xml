@@ -78,6 +78,7 @@
 	<Script file="RBS.lua"/>
 	<Script file="RCLootCouncil.lua"/>
 	<Script file="Recount.lua"/>
+	<Script file="ReforgeLite.lua"/>
 	<Script file="Reforgenator.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
 	<Script file="SexyCooldown.lua"/>
