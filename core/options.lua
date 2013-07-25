@@ -1,5 +1,6 @@
 local E, L, V, P, G,_ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
+local format, gsub, pairs, ipairs, tinsert, sort = format, gsub, pairs, ipairs, tinsert, sort
 
 local Skins = {
 	["AchieveItSkin"] = {
@@ -105,13 +106,13 @@ local Skins = {
 }
 
 AS.Skins = Skins
-function AS:GenerateOptionTable(skinName,order)
+function AS:GenerateOptionTable(skinName, order)
 	local data = Skins[skinName]
 	local addon
 	if data and data.addon then
 		addon = data.addon
 	else
-		addon = skinName:gsub("Skin","")
+		addon = gsub(skinName, "Skin", "")
 	end
 	local text = data and data.buttonText or addon
 	local options = {
@@ -125,18 +126,18 @@ function AS:GenerateOptionTable(skinName,order)
 end
 
 function AS:GenerateOptions()
-	local function pairsByKeys (t, f)
-      local a = {}
-      for n in pairs(t) do table.insert(a, n) end
-      table.sort(a, f)
-      local i = 0      -- iterator variable
-      local iter = function ()   -- iterator function
-        i = i + 1
-        if a[i] == nil then return nil
-        else return a[i], t[a[i]]
-        end
-      end
-      return iter
+	local function pairsByKeys(t, f)
+		local a = {}
+		for n in pairs(t) do tinsert(a, n) end
+			sort(a, f)
+			local i = 0
+			local iter = function()
+				i = i + 1
+				if a[i] == nil then return nil
+				else return a[i], t[a[i]]
+			end
+		end
+		return iter
     end
     E.Options.args.skins.args.addonEnable = {
     	order = 4,
@@ -150,13 +151,13 @@ function AS:GenerateOptions()
 		type = 'group',
 		name = 'AddOns',
 		get = function(info) return E.private.skins.addons[ info[#info] ] end,
-		set = function(info,value)  E.private.skins.addons[ info[#info] ] = value; E:StaticPopup_Show("PRIVATE_RL") end,
+		set = function(info, value)  E.private.skins.addons[ info[#info] ] = value; E:StaticPopup_Show("PRIVATE_RL") end,
 		disabled = function() return not E.private.skins.addons.enable end,
 		guiInline = true,
 		args = {
 			desc = {
 				type = 'description',
-				name = 'AddOn Skins by Sortokk (based on work by Azilroka) - v'..AS.Version,
+				name = 'AddOn Skins - v'..AS.Version,
 				order = 1
 			},
 			misc = {
@@ -286,9 +287,9 @@ function AS:GenerateOptions()
 	}
 
 	local order = 2
-	for skinName,_ in pairsByKeys(AS.register) do
-		if not V.skins.addons[skinName] == nil then
-			print("No default option for", skinName)
+	for skinName, _ in pairsByKeys(AS.register) do
+		if V.skins.addons[skinName] == nil then
+			print(format("%s %s: No default option for %s", AS.Title, AS.Version, skinName))
 		end
 		E.Options.args.skins.args.addons.args[skinName] = AS:GenerateOptionTable(skinName,order)
 		order = order + 1
