@@ -187,12 +187,8 @@ end
 function AS:EmbedTDPS()
 	tdpsFrame:SetParent(AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)
 	tdpsFrame:SetFrameStrata("LOW")
-	tdpsFrame.spacing = 0
-	tdpsFrame.barHeight = 14
-	tdpsVisibleBars = 9
 	AS:EmbedTDPSResize()
 	tdpsAnchor:Point("TOPLEFT", EmbeddingWindow, "TOPLEFT", 0, 0)
-
 	tdpsRefresh()
 end
 
