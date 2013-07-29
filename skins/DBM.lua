@@ -43,33 +43,21 @@ function AS:SkinDBM(event, addon)
 						if bar.enlarged then frame:Width(bar.owner.options.HugeWidth) else frame:SetWidth(bar.owner.options.Width) end
 						if bar.enlarged then tbar:Width(bar.owner.options.HugeWidth) else tbar:SetWidth(bar.owner.options.Width) end
 
-						if not spark.killed then
-							spark:SetAlpha(0)
-							spark:SetTexture(nil)
-							spark.killed = true
-						end
+						spark:SetAlpha(0)
+						spark:SetTexture(nil)
 
-						if not icon1.styled then
-							icon1:SetTexCoord(unpack(E.TexCoords))
-							icon1:ClearAllPoints()
-							icon1:SetInside(icon1.overlay, 0, 0)
-							icon1.styled = true
-						end
-						
-						if not icon2.styled then
-							icon2:SetTexCoord(unpack(E.TexCoords))
-							icon2:ClearAllPoints()
-							icon2:SetInside(icon2.overlay, 0, 0)
-							icon2.styled = true
-						end
+						icon1:SetTexCoord(unpack(E.TexCoords))
+						icon1:ClearAllPoints()
+						icon1:SetInside(icon1.overlay, 0, 0)
+
+						icon2:SetTexCoord(unpack(E.TexCoords))
+						icon2:ClearAllPoints()
+						icon2:SetInside(icon2.overlay, 0, 0)
 
 						texture:SetTexture(AS.LSM:Fetch("statusbar", E.private.general.normTex))
 						tbar:SetStatusBarTexture(AS.LSM:Fetch("statusbar", E.private.general.normTex))
 
-						if not tbar.styled then
-							tbar:SetInside(frame)
-							tbar.styled = true
-						end
+						tbar:SetInside(frame)
 
 						frame:SetTemplate()
 
