@@ -18,7 +18,7 @@ local function OnEnter(self)
 end
 
 local function OnEvent(self, event)
-	local Text
+	local Text = ''
 	if AS:CheckOption("EmbedRecount", "Recount") then Text = 'Recount' end
 	if AS:CheckOption("EmbedRO", "Recount", "Omen") then Text = 'Recount/Omen' end
 	if AS:CheckOption("EmbedSkada", "Skada") then Text = 'Skada' end
@@ -27,7 +27,7 @@ local function OnEvent(self, event)
 	self.text:SetText(format('%s %s', 'Toggle', Text))
 end
 
-DT:RegisterDatatext('AddOnSkins', {"PLAYER_ENTERING_WORLD"}, OnEvent, nil, OnClick, OnEnter)
+DT:RegisterDatatext('AddOnSkins', { "PLAYER_ENTERING_WORLD" }, OnEvent, nil, OnClick, OnEnter)
 
 local EmbeddingWindow = CreateFrame("Frame", "EmbeddingWindow", UIParent)
 --EmbeddingWindow:SetTemplate("ClassColor")
@@ -45,7 +45,7 @@ function AS:EmbedWindowResize()
 
 	local Panel = AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel
 
-	if not AS.sle then
+	if not AS.SLE then
 		local Offset = E.PixelMode and -3 or -5
 		local Height = E.PixelMode and 28 or 32
 		local Width = E.PixelMode and 6 or 10
@@ -58,13 +58,7 @@ function AS:EmbedWindowResize()
 		EmbeddingWindow:Height(Panel:GetHeight() - 1)
 	end
 
-	if OrigHeight == nil then OrigHeight = EmbeddingWindow:GetHeight() end
-	if OrigWidth == nil then OrigWidth = EmbeddingWindow:GetWidth() end
-	if EmbeddingWindow:GetHeight() == OrigHeight and EmbeddingWindow:GetWidth() == OrigWidth then return end
-
 	AS:EmbedCheck()
-	OrigHeight = EmbeddingWindow:GetHeight()
-	OrigWidth = EmbeddingWindow:GetWidth()
 end
 
 function AS:EmbedCheck()
@@ -72,6 +66,12 @@ function AS:EmbedCheck()
 	if AS:CheckOption("EmbedTDPS", "TinyDPS") then AS:EmbedTDPSResize() end
 	if AS:CheckOption("EmbedRecount", "Recount") then AS:EmbedRecountResize() end
 	if AS:CheckOption("EmbedOmen", "Omen") then AS:EmbedOmenResize() end
+
+	if OrigHeight == nil then OrigHeight = EmbeddingWindow:GetHeight() end
+	if OrigWidth == nil then OrigWidth = EmbeddingWindow:GetWidth() end
+	if EmbeddingWindow:GetHeight() == OrigHeight and EmbeddingWindow:GetWidth() == OrigWidth then return end
+	OrigHeight = EmbeddingWindow:GetHeight()
+	OrigWidth = EmbeddingWindow:GetWidth()
 	if AS:CheckOption("EmbedSkada", "Skada") then AS:EmbedSkada() end
 end
 
@@ -214,7 +214,6 @@ function AS:EmbedInit()
 
 	ChatToggle:SetScript("OnClick", function(self, btn)
 		if btn == 'RightButton' then
-			AS:EmbedCheck()
 			if AS:CheckOption("EmbedRecount", "Recount") or AS:CheckOption("EmbedRO", "Recount", "Omen") then
 				AS:ToggleFrame(Recount_MainWindow)
 			end
@@ -265,7 +264,6 @@ function AS:EmbedInit()
 	end
 	if self:CheckOption("EmbedTDPS", "TinyDPS") then self:EmbedTDPS() end
 	if self:CheckOption("EmbedRecount", "Recount") then self:EmbedRecount() end
-	AS:EmbedCheck()
 	AS:EmbedExitCombat(true)
 end
 

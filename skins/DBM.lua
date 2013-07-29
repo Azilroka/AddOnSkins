@@ -10,7 +10,7 @@ function AS:SkinDBM(event, addon)
 		local function SkinBars(self)
 			for bar in self:GetBarIterator() do
 				if not bar.injected then
-						bar.ApplyStyle=function()
+						bar.ApplyStyle = function()
 						local frame = bar.frame
 						local tbar = _G[frame:GetName().."Bar"]
 						local spark = _G[frame:GetName().."BarSpark"]
@@ -19,18 +19,18 @@ function AS:SkinDBM(event, addon)
 						local icon2 = _G[frame:GetName().."BarIcon2"]
 						local name = _G[frame:GetName().."BarName"]
 						local timer = _G[frame:GetName().."BarTimer"]
-						
-						if not (icon1.overlay) then
+
+						if not icon1.overlay then
 							icon1.overlay = CreateFrame("Frame", "$parentIcon1Overlay", tbar)
 							icon1.overlay:CreateBackdrop()
-							if E.PixelMode then icon1.overlay:Size(buttonsize-2) else icon1.overlay:Size(buttonsize-4) end
+							if E.PixelMode then icon1.overlay:Size(buttonsize - 2) else icon1.overlay:Size(buttonsize - 4) end
 							icon1.overlay:Point("BOTTOMRIGHT", frame, "BOTTOMLEFT", -(E.PixelMode and 2 or 5), (E.PixelMode and 1 or 2))
 						end
 
-						if not (icon2.overlay) then
+						if not icon2.overlay then
 							icon2.overlay = CreateFrame("Frame", "$parentIcon2Overlay", tbar)
 							icon2.overlay:CreateBackdrop()
-							if E.PixelMode then icon2.overlay:Size(buttonsize-2) else icon2.overlay:Size(buttonsize-4) end
+							if E.PixelMode then icon2.overlay:Size(buttonsize - 2) else icon2.overlay:Size(buttonsize - 4) end
 							icon2.overlay:Point("BOTTOMLEFT", frame, "BOTTOMRIGHT", (E.PixelMode and 2 or 5), (E.PixelMode and 1 or 2))				
 						end
 
@@ -39,78 +39,66 @@ function AS:SkinDBM(event, addon)
 						else
 							tbar:SetStatusBarColor(bar.owner.options.StartColorR, bar.owner.options.StartColorG, bar.owner.options.StartColorB)
 						end
-						
+
 						if bar.enlarged then frame:Width(bar.owner.options.HugeWidth) else frame:SetWidth(bar.owner.options.Width) end
 						if bar.enlarged then tbar:Width(bar.owner.options.HugeWidth) else tbar:SetWidth(bar.owner.options.Width) end
-
-						if not frame.styled then
-							--frame:SetScale(1)
-							--frame.SetScale=s.dummy
-							frame:SetHeight(buttonsize)
-							if (AS:CheckOption("DBMSkinHalf")) then frame:SetHeight(buttonsize/3) end
-							frame:SetTemplate("Transparent")
-							frame.styled=true
-						end
 
 						if not spark.killed then
 							spark:SetAlpha(0)
 							spark:SetTexture(nil)
-							spark.killed=true
+							spark.killed = true
 						end
-			
+
 						if not icon1.styled then
-							icon1:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+							icon1:SetTexCoord(unpack(E.TexCoords))
 							icon1:ClearAllPoints()
-							icon1:Point("TOPLEFT", icon1.overlay, 0, 0)
-							icon1:Point("BOTTOMRIGHT", icon1.overlay, 0, 0)
-							icon1.styled=true
+							icon1:SetInside(icon1.overlay, 0, 0)
+							icon1.styled = true
 						end
 						
 						if not icon2.styled then
-							icon2:SetTexCoord(0.08, 0.92, 0.08, 0.92)
+							icon2:SetTexCoord(unpack(E.TexCoords))
 							icon2:ClearAllPoints()
-							icon2:Point("TOPLEFT", icon2.overlay, 0, 0)
-							icon2:Point("BOTTOMRIGHT", icon2.overlay, 0, 0)
-							icon2.styled=true
+							icon2:SetInside(icon2.overlay, 0, 0)
+							icon2.styled = true
 						end
 
-						if not texture.styled then
-							texture:SetTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-							texture.styled=true
-						end
-						
+						texture:SetTexture(AS.LSM:Fetch("statusbar", E.private.general.normTex))
+						tbar:SetStatusBarTexture(AS.LSM:Fetch("statusbar", E.private.general.normTex))
+
 						if not tbar.styled then
-							tbar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
 							tbar:SetInside(frame)
-							--tbar:Point("TOPLEFT", frame, "TOPLEFT", 2, -2)
-							--tbar:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 2)
-							tbar.styled=true
+							tbar.styled = true
 						end
 
-						if not name.styled then
-							name:ClearAllPoints()
+						frame:SetTemplate()
+
+						name:ClearAllPoints()
+						name:SetWidth(165)
+						name:SetHeight(8)
+						name:SetJustifyH("LEFT")
+						name:SetShadowColor(0, 0, 0, 0)
+
+						timer:ClearAllPoints()
+						timer:SetJustifyH("RIGHT")
+						timer:SetShadowColor(0, 0, 0, 0)
+
+						if AS:CheckOption("DBMSkinHalf") then
+							frame:SetHeight(buttonsize / 3)
+							name:Point("BOTTOMLEFT", frame, "TOPLEFT", 0, 4)
+							timer:Point("BOTTOMRIGHT", frame, "TOPRIGHT", -1, 2)
+						else
+							frame:SetHeight(buttonsize)
 							name:Point("LEFT", frame, "LEFT", 4, 0)
-							if (AS:CheckOption("DBMSkinHalf")) then name:Point("BOTTOMLEFT", frame, "TOPLEFT", 0, 4) end
-							name:SetWidth(165)
-							name:SetHeight(8)
-							if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE') end
-							if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE') end
-							name:SetJustifyH("LEFT")
-							name:SetShadowColor(0, 0, 0, 0)
-							name.SetFont = E.noop
-							name.styled=true
-						end
-						
-						if not timer.styled then	
-							timer:ClearAllPoints()
 							timer:Point("RIGHT", frame, "RIGHT", -4, 0)
-							if (AS:CheckOption("DBMSkinHalf")) then timer:Point("BOTTOMRIGHT", frame, "TOPRIGHT", -1, 2) end
-							if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE') end
-							if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE') end
-							timer:SetJustifyH("RIGHT")
-							timer:SetShadowColor(0, 0, 0, 0)
-							timer.SetFont = E.noop
-							timer.styled=true
+						end
+
+						if AS.SLE then
+							name:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE')
+							timer:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE')
+						else
+							name:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE')
+							timer:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE')
 						end
 
 						if bar.owner.options.IconLeft then icon1:Show() icon1.overlay:Show() else icon1:Hide() icon1.overlay:Hide() end
@@ -120,7 +108,7 @@ function AS:SkinDBM(event, addon)
 						texture:SetAlpha(1)
 						frame:Show()
 						bar:Update(0)
-						bar.injected=true
+						bar.injected = true
 					end
 					bar:ApplyStyle()
 				end
@@ -128,25 +116,28 @@ function AS:SkinDBM(event, addon)
 			end
 		end
 		 
-		local SkinBossTitle=function()
-			local anchor=DBMBossHealthDropdown:GetParent()
+		local SkinBossTitle = function()
+			local anchor = DBMBossHealthDropdown:GetParent()
 			if not anchor.styled then
-				local header={anchor:GetRegions()}
-					if header[1]:IsObjectType("FontString") then
-						if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then header[1]:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE') end
-						if IsAddOnLoaded("ElvUI_SLE") then header[1]:FontTemplate(DBT_SavedOptions["DBM"].Font, 8, 'OUTLINE') end
-						header[1]:SetTextColor(1,1,1,1)
-						header[1]:SetShadowColor(0, 0, 0, 0)
-						anchor.styled=true	
+				local header = {anchor:GetRegions()}
+				if header[1]:IsObjectType("FontString") then
+					if AS.SLE then
+						header[1]:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE')
+					else
+						header[1]:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE')
 					end
-				header=nil
+					header[1]:SetTextColor(1, 1, 1)
+					header[1]:SetShadowColor(0, 0, 0, 0)
+					anchor.styled = true	
+				end
+				header = nil
 			end
-			anchor=nil
+			anchor = nil
 		end
 
-		local SkinBoss=function()
+		local SkinBoss = function()
 			local count = 1
-			while (_G[format("DBM_BossHealth_Bar_%d", count)]) do
+			while _G[format("DBM_BossHealth_Bar_%d", count)] do
 				local bar = _G[format("DBM_BossHealth_Bar_%d", count)]
 				local background = _G[bar:GetName().."BarBorder"]
 				local progress = _G[bar:GetName().."Bar"]
@@ -154,62 +145,56 @@ function AS:SkinDBM(event, addon)
 				local timer = _G[bar:GetName().."BarTimer"]
 				local prev = _G[format("DBM_BossHealth_Bar_%d", count-1)]	
 
-				if (count == 1) then
+				bar:ClearAllPoints()
+				if count == 1 then
 					local	_, anch, _ ,_, _ = bar:GetPoint()
-					bar:ClearAllPoints()
 					if DBM_SavedOptions.HealthFrameGrowUp then
 						bar:Point("BOTTOM", anch, "TOP" , 0 , 12)
 					else
 						bar:Point("TOP", anch, "BOTTOM" , 0, -buttonsize)
 					end
 				else
-					bar:ClearAllPoints()
 					if DBM_SavedOptions.HealthFrameGrowUp then
-						bar:Point("TOPLEFT", prev, "TOPLEFT", 0, buttonsize+4)
+						bar:Point("TOPLEFT", prev, "TOPLEFT", 0, buttonsize + 4)
 					else
-						bar:Point("TOPLEFT", prev, "TOPLEFT", 0, -(buttonsize+4))
+						bar:Point("TOPLEFT", prev, "TOPLEFT", 0, -(buttonsize + 4))
 					end
 				end
 
-				if not bar.styled then
-					bar:SetHeight(buttonsize)
-					if (AS:CheckOption("DBMSkinHalf")) then bar:SetHeight(buttonsize/3) end
-					bar:SetTemplate("Transparent")
-					background:SetNormalTexture(nil)
-					bar.styled=true
-				end	
-				
-				if not progress.styled then
-					progress:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-					progress.styled=true
-				end				
+				bar:SetTemplate("Transparent")
+
+				background:SetNormalTexture(nil)
+
+				progress:SetStatusBarTexture(AS.LSM:Fetch("statusbar", E.private.general.normTex))
 				progress:ClearAllPoints()
-				progress:Point("TOPLEFT", bar, "TOPLEFT", 2, -2)
-				progress:Point("BOTTOMRIGHT", bar, "BOTTOMRIGHT", -2, 2)
+				progress:SetInside(bar)
 
-				if not name.styled then
-					name:ClearAllPoints()
+				name:ClearAllPoints()
+				name:SetJustifyH("LEFT")
+				name:SetShadowColor(0, 0, 0, 0)
+
+				timer:ClearAllPoints()
+				timer:SetJustifyH("RIGHT")
+				timer:SetShadowColor(0, 0, 0, 0)
+
+				if AS:CheckOption("DBMSkinHalf") then
+					bar:SetHeight(buttonsize / 3)
+					name:Point("BOTTOMLEFT", bar, "TOPLEFT", 1, 4)
+					timer:Point("BOTTOMLEFT", bar, "TOPLEFT", 0, 2)
+				else
+					bar:SetHeight(buttonsize)
 					name:Point("LEFT", bar, "LEFT", 4, 0)
-					if (AS:CheckOption("DBMSkinHalf")) then
-						name:Point("BOTTOMLEFT", bar, "TOPLEFT", 1, 4)
-					end
-					if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then name:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE') end
-					if IsAddOnLoaded("ElvUI_SLE") then name:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE') end
-					name:SetJustifyH("LEFT")
-					name:SetShadowColor(0, 0, 0, 0)
-					name.styled=true
-				end
-				
-				if not timer.styled then
-					timer:ClearAllPoints()
 					timer:Point("RIGHT", bar, "RIGHT", -4, 0)
-					if (AS:CheckOption("DBMSkinHalf")) then timer:Point("BOTTOMLEFT", bar, "TOPLEFT", 0, 2) end
-					if (IsAddOnLoaded("ElvUI") and not IsAddOnLoaded("ElvUI_SLE")) then timer:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE') end
-					if IsAddOnLoaded("ElvUI_SLE") then timer:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE') end
-					timer:SetJustifyH("RIGHT")
-					timer:SetShadowColor(0, 0, 0, 0)
-					timer.styled=true
 				end
+
+				if AS.SLE then
+					name:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE')
+					timer:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE')
+				else
+					name:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE')
+					timer:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE')
+				end
+
 				count = count + 1
 			end
 		end

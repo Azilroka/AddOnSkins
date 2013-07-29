@@ -18,7 +18,7 @@ AS.register = {}
 AS.addOnWatch = {}
 AS.FrameLocks = {}
 E.private.skins.addons = {}
-AS.sle = IsAddOnLoaded("ElvUI_SLE")
+AS.SLE = IsAddOnLoaded("ElvUI_SLE")
 
 AS.Title = select(2, GetAddOnInfo(addon))
 AS.Version = GetAddOnMetadata(addon, "Version")
