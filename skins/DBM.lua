@@ -132,10 +132,10 @@ function AS:SkinDBM(event, addon)
 				local name = _G[bar:GetName().."BarName"]
 				local timer = _G[bar:GetName().."BarTimer"]
 				local prev = _G[format("DBM_BossHealth_Bar_%d", count-1)]	
+				local _, anch, _ ,_, _ = bar:GetPoint()
 
 				bar:ClearAllPoints()
 				if count == 1 then
-					local	_, anch, _ ,_, _ = bar:GetPoint()
 					if DBM_SavedOptions.HealthFrameGrowUp then
 						bar:Point("BOTTOM", anch, "TOP" , 0 , 12)
 					else
@@ -167,8 +167,8 @@ function AS:SkinDBM(event, addon)
 
 				if AS:CheckOption("DBMSkinHalf") then
 					bar:SetHeight(buttonsize / 3)
-					name:Point("BOTTOMLEFT", bar, "TOPLEFT", 1, 4)
-					timer:Point("BOTTOMLEFT", bar, "TOPLEFT", 0, 2)
+					name:Point("BOTTOMLEFT", bar, "TOPLEFT", 4, 0)
+					timer:Point("BOTTOMRIGHT", bar, "TOPRIGHT", -4, 0)
 				else
 					bar:SetHeight(buttonsize)
 					name:Point("LEFT", bar, "LEFT", 4, 0)
@@ -217,7 +217,7 @@ function AS:SkinDBM(event, addon)
 		-- if AS:CheckOption("DBMSkinHalf") then
 			-- DBT_SavedOptions["DBM"]["BarYOffset"] = 15
 		-- end
-		DBT_SavedOptions["DBM"]["Texture"] = AS.LSM:Fetch("statusbar", E.private.general.normTex)
+		--DBT_SavedOptions["DBM"]["Texture"] = AS.LSM:Fetch("statusbar", E.private.general.normTex)
 		--DBT_SavedOptions["DBM"].Font = "ElvUI Font"
 	end
 	if addon == "DBM-GUI" then
