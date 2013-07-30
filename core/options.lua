@@ -199,7 +199,13 @@ function AS:GenerateOptions()
 						desc = L['TOGGLESKIN_DESC'],
 						order = 5,
 						disabled = function() return not IsAddOnLoaded("Skada") or not E.private.skins.addons["SkadaSkin"] end,
-					},	
+					},
+					TransparentEmbed = {
+						type = 'toggle',
+						name = 'Embed Transparancy',
+						desc = L['TOGGLESKIN_DESC'],
+						order = 6,
+					},
 				}
 			},
 			embed = {

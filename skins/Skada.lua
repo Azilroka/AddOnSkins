@@ -93,7 +93,7 @@ function AS:SkinSkada()
 		skada.button:SetBackdropColor(unpack(E["media"].backdropcolor))
 		skada:SetBackdrop(nil)
 		if not skada.backdrop then
-			skada:CreateBackdrop("Default")
+			skada:CreateBackdrop(AS:CheckOption("TransparentEmbed") and "Transparent" or "Default")
 		end
 		skada.backdrop:ClearAllPoints()
 		if(win.db.enabletitle) then

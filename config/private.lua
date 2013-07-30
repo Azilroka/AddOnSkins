@@ -119,6 +119,7 @@ V["skins"]["addons"] = {
 	["EmbedSkada"] = false, 
 	["EmbedTDPS"] = false, 
 -- Misc
+	["TransparentEmbed"] = false,
 	["AlwaysTrue"] = true,
 	["DBMSkinHalf"] = false,
 	["ParchmentRemover"] = false,

@@ -23,10 +23,8 @@ function AS:SkinOmen()
 		Omen.db.profile.Background.EdgeSize = 1
 		Omen.db.profile.Background.BarInset = borderWidth
 		self:UpdateBackdrop_()
-		if not (AS:CheckOption("EmbedOmen")) then
-			self.BarList:SetTemplate("Default")
-			self.Title:SetTemplate("Default", True)
-		end
+		self.BarList:SetTemplate("Transparent")
+		self.Title:SetTemplate("Transparent")
 		self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, 1)
 	end
 

@@ -10,7 +10,7 @@ function AS:SkinDBM(event, addon)
 		local function SkinBars(self)
 			for bar in self:GetBarIterator() do
 				if not bar.injected then
-						bar.ApplyStyle = function()
+					bar.ApplyStyle = function()
 						local frame = bar.frame
 						local tbar = _G[frame:GetName().."Bar"]
 						local spark = _G[frame:GetName().."BarSpark"]

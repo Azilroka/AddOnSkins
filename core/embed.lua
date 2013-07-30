@@ -79,7 +79,7 @@ function AS:EmbedRecount()
 	Recount:LockWindows(true)
 	AS:EmbedRecountResize()
 	Recount_MainWindow:SetParent((AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel))
-	Recount.MainWindow:SetFrameStrata("LOW")
+	Recount_MainWindow:SetFrameStrata("LOW")
 end
 
 function AS:EmbedRecountResize()
@@ -114,7 +114,7 @@ function AS:EmbedOmen()
 	end
 	OmenTitle:Kill()
 	OmenBarList:StripTextures()
-	OmenBarList:SetTemplate("Transparent")
+	OmenBarList:SetTemplate(AS:CheckOption("TransparentEmbed") and "Transparent" or "Default")
 	OmenBarList:SetParent(AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)
 	OmenBarList:SetFrameStrata("LOW")
 	AS:EmbedOmenResize()
@@ -151,7 +151,7 @@ function AS:EmbedSkada()
 	end
 
 	local borderWidth = 1
-	local height = AS:CheckOption("SkadaBelowTop") and 43 or E.PixelMode and 20 or 18
+	local height = AS:CheckOption("SkadaBelowTop") and 43 or E.PixelMode and 20 or 21
 	local notitleheight = height - 15
 	local yoffset = AS:CheckOption("SkadaBelowTop") and -40 or -17
 	local notitleoffset = yoffset + 15
@@ -185,6 +185,7 @@ function AS:EmbedSkada()
 end
 
 function AS:EmbedTDPS()
+	tdpsFrame:SetTemplate(AS:CheckOption("TransparentEmbed") and "Transparent" or "Default")
 	tdpsFrame:SetParent(AS:CheckOption("EmbedRight") and RightChatPanel or LeftChatPanel)
 	tdpsFrame:SetFrameStrata("LOW")
 	AS:EmbedTDPSResize()
