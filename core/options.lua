@@ -125,6 +125,39 @@ function AS:GenerateOptionTable(skinName, order)
 	return options
 end
 
+local DEVELOPER_STRING = ""
+local LINE_BREAK = "\n"
+
+local DEVELOPERS = {
+	"Affli",
+	"Azilroka",
+	"Blazeflack",
+	"Cadayron",
+	"Camealion",
+	"Catok",
+	"Darth Predator",
+	"Dec",
+	"Edoc",
+	"Elv",
+	"Jasje",
+	"Kkthnx",
+	"Konungr",
+	"Lockslap",
+	"Lolarennt",
+	"Outofammo",
+	"Pat",
+	"Repooc",
+	"Shadowcall",
+	"Sinaris",
+	"Sortokk",
+	"Tukz",
+}
+
+sort(DEVELOPERS)
+for _, devName in pairs(DEVELOPERS) do
+	DEVELOPER_STRING = DEVELOPER_STRING..LINE_BREAK..devName
+end
+
 function AS:GenerateOptions()
 	local function pairsByKeys(t, f)
 		local a = {}
@@ -165,46 +198,76 @@ function AS:GenerateOptions()
 				name = 'Misc Options',
 				order = 500,
 				args = {
+					DBMFont = {
+						type = "select", dialogControl = 'LSM30_Font',
+						order = 1,
+						name = "DBM Font",
+						desc = "DBM Font",
+						values = AceGUIWidgetLSMlists.font, 
+						disabled = function() return not IsAddOnLoaded("DBM-Core") or not E.private.skins.addons['DBMSkin'] end
+					},
+					DBMFontSize = {
+						type = 'range',
+						order = 2,
+						name = "DBM Font Size",
+						desc = "DBM Font Size",
+						min = 8, max = 18, step = 1, 
+						disabled = function() return not IsAddOnLoaded("DBM-Core") or not E.private.skins.addons['DBMSkin'] end
+					},
+					DBMFontFlag = {
+						name = 'DBM Font Flag',
+						desc = 'Font Flag',
+						order = 3,
+						type = "select",
+						values = {
+							['NONE'] = 'None',
+							['OUTLINE'] = 'OUTLINE',
+							['THICKOUTLINE'] = 'THICKOUTLINE',
+							['MONOCHROME'] = 'MONOCHROME',
+							['MONOCHROMEOUTLINE'] = 'MONOCHROMEOUTLINE',
+						},
+						disabled = function() return not IsAddOnLoaded("DBM-Core") or not E.private.skins.addons['DBMSkin'] end
+					},
 					DBMSkinHalf = {
 						type = 'toggle',
 						name = 'DBM Half-bar Skin',
 						desc = L["TOGGLESKIN_DESC"],
-						order = 1,
+						order = 4,
 						disabled = function() return not IsAddOnLoaded("DBM-Core") or not E.private.skins.addons['DBMSkin'] end
 					},
 					RecountBackdrop = {
 						type = 'toggle',
 						name = 'Recount Backdrop',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 2,
+						order = 5,
 						disabled = function() return not IsAddOnLoaded("Recount") or not E.private.skins.addons["RecountSkin"] end,
 					},
 					SkadaBackdrop = {
 						type = 'toggle',
 						name = 'Skada Backdrop',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 3,
+						order = 6,
 						disabled = function() return not IsAddOnLoaded("Skada") or not E.private.skins.addons["SkadaSkin"] end,
 					},
 					SkadaBelowTop = {
 						type = 'toggle',
 						name = 'Embed Skada below the top chat panel',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 4,
+						order = 7,
 						disabled = function() return not IsAddOnLoaded("Skada") or not E.private.skins.addons["SkadaSkin"] end,
 					},
 					SkadaTwoThirds = {
 						type = 'toggle',
 						name = 'Skada Windows 1/3 and 2/3 instead of 1/2 and 1/2',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 5,
+						order = 8,
 						disabled = function() return not IsAddOnLoaded("Skada") or not E.private.skins.addons["SkadaSkin"] end,
 					},
 					TransparentEmbed = {
 						type = 'toggle',
 						name = 'Embed Transparancy',
 						desc = L['TOGGLESKIN_DESC'],
-						order = 6,
+						order = 9,
 					},
 				}
 			},
@@ -291,7 +354,18 @@ function AS:GenerateOptions()
 			}
 		}
 	}
-
+	E.Options.args.credits.args.addonskins = {
+		type = "group",
+		name = "AddOnSkin's",
+		order = -1,
+		args = {
+			text = {
+				order = 1,
+				type = "description",
+				name = L['Coding:']..LINE_BREAK..DEVELOPER_STRING,
+			},
+		},
+	}
 	local order = 2
 	for skinName, _ in pairsByKeys(AS.register) do
 		if V.skins.addons[skinName] == nil then

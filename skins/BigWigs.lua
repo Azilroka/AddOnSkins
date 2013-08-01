@@ -83,7 +83,7 @@ local applystyle = function(bar)
 
 	bg:SetParent(bar)
 	bg:SetOutside(bar)
-	bg:SetFrameStrata("BACKGROUND")
+	--bg:SetFrameStrata("BACKGROUND")
 	bg:Show()
 	bar:Set("bigwigs:elvui:barbg", bg)
 
@@ -97,7 +97,7 @@ local applystyle = function(bar)
 		end
 		ibg:SetParent(bar)
 		ibg:SetOutside(bar.candyBarIconFrame)
-		ibg:SetFrameStrata("BACKGROUND")
+		--ibg:SetFrameStrata("BACKGROUND")
 		ibg:Show()
 		bar:Set("bigwigs:elvui:iconbg", ibg)
 	end

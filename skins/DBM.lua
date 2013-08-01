@@ -81,13 +81,8 @@ function AS:SkinDBM(event, addon)
 							timer:Point("RIGHT", frame, "RIGHT", -4, 0)
 						end
 
-						if AS.SLE then
-							name:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE')
-							timer:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE')
-						else
-							name:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE')
-							timer:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE')
-						end
+						name:FontTemplate(AS.LSM:Fetch("font", E.private.skins.addons.DBMFont),  E.private.skins.addons.DBMFontSize, E.private.skins.addons.DBMFontFlag)
+						timer:FontTemplate(AS.LSM:Fetch("font", E.private.skins.addons.DBMFont), E.private.skins.addons.DBMFontSize, E.private.skins.addons.DBMFontFlag)
 
 						if bar.owner.options.IconLeft then icon1:Show() icon1.overlay:Show() else icon1:Hide() icon1.overlay:Hide() end
 						if bar.owner.options.IconRight then icon2:Show() icon2.overlay:Show() else icon2:Hide() icon2.overlay:Hide() end
@@ -109,11 +104,7 @@ function AS:SkinDBM(event, addon)
 			if not anchor.styled then
 				local header = {anchor:GetRegions()}
 				if header[1]:IsObjectType("FontString") then
-					if AS.SLE then
-						header[1]:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE')
-					else
-						header[1]:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE')
-					end
+					header[1]:FontTemplate(AS.LSM:Fetch("font", E.private.skins.addons.DBMFont), E.private.skins.addons.DBMFontSize, E.private.skins.addons.DBMFontFlag)
 					header[1]:SetTextColor(1, 1, 1)
 					header[1]:SetShadowColor(0, 0, 0, 0)
 					anchor.styled = true	
@@ -175,13 +166,8 @@ function AS:SkinDBM(event, addon)
 					timer:Point("RIGHT", bar, "RIGHT", -4, 0)
 				end
 
-				if AS.SLE then
-					name:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE')
-					timer:FontTemplate(DBT_SavedOptions["DBM"].Font, E.private.sle.dbm.size, 'OUTLINE')
-				else
-					name:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE')
-					timer:FontTemplate(DBT_SavedOptions["DBM"].Font, 12, 'OUTLINE')
-				end
+				name:FontTemplate(AS.LSM:Fetch("font", E.private.skins.addons.DBMFont), E.private.skins.addons.DBMFontSize, E.private.skins.addons.DBMFontFlag)
+				timer:FontTemplate(AS.LSM:Fetch("font", E.private.skins.addons.DBMFont), E.private.skins.addons.DBMFontSize, E.private.skins.addons.DBMFontFlag)
 
 				count = count + 1
 			end
@@ -206,7 +192,7 @@ function AS:SkinDBM(event, addon)
 			local RaidNotice_AddMessage_ = RaidNotice_AddMessage
 			RaidNotice_AddMessage = function(noticeFrame, textString, colorInfo)
 				if textString:find(" |T") then
-					textString = string.gsub(textString,"(:12:12)",":18:18:0:0:64:64:5:59:5:59")
+					textString = gsub(textString,"(:12:12)",":18:18:0:0:64:64:5:59:5:59")
 				end
 				return RaidNotice_AddMessage_(noticeFrame, textString, colorInfo)
 			end
