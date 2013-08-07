@@ -1,4 +1,4 @@
-local E, L, V, P, G,_ = unpack(ElvUI)
+local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local format, gsub, pairs, ipairs, tinsert, sort = format, gsub, pairs, ipairs, tinsert, sort
 

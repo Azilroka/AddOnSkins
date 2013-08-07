@@ -34,9 +34,9 @@ local function freestyle(bar)
 	end
 
 	-- replace dummies with original method functions
-	bar.candyBarBar.SetPoint=bar.candyBarBar.OldSetPoint
-	bar.candyBarIconFrame.SetWidth=bar.candyBarIconFrame.OldSetWidth
-	bar.SetScale=bar.OldSetScale
+	bar.candyBarBar.SetPoint = bar.candyBarBar.OldSetPoint
+	bar.candyBarIconFrame.SetWidth = bar.candyBarIconFrame.OldSetWidth
+	bar.SetScale = bar.OldSetScale
 
 	--Reset Positions
 	--Icon
@@ -76,14 +76,13 @@ local applystyle = function(bar)
 	-- create or reparent and use bar background
 	local bg = nil
 	if #freebg > 0 then
-		bg = table.remove(freebg)
+		bg = tremove(freebg)
 	else
 		bg = createbg()
 	end
-
+	bg:SetBackdropColor(unpack(E.media.backdropcolor))
 	bg:SetParent(bar)
 	bg:SetOutside(bar)
-	--bg:SetFrameStrata("BACKGROUND")
 	bg:Show()
 	bar:Set("bigwigs:elvui:barbg", bg)
 
@@ -91,13 +90,13 @@ local applystyle = function(bar)
 	local ibg = nil
 	if bar.candyBarIconFrame:GetTexture() then
 		if #freebg > 0 then
-			ibg = table.remove(freebg)
+			ibg = tremove(freebg)
 		else
 			ibg = createbg()
 		end
 		ibg:SetParent(bar)
+		ibg:SetBackdropColor(0, 0, 0, 0)
 		ibg:SetOutside(bar.candyBarIconFrame)
-		--ibg:SetFrameStrata("BACKGROUND")
 		ibg:Show()
 		bar:Set("bigwigs:elvui:iconbg", ibg)
 	end
@@ -116,7 +115,7 @@ local applystyle = function(bar)
 	bar.candyBarBar:ClearAllPoints()
 	bar.candyBarBar:SetAllPoints(bar)
 	bar.candyBarBar.OldSetPoint = bar.candyBarBar.SetPoint
-	bar.candyBarBar.SetPoint=E.noop
+	bar.candyBarBar.SetPoint = E.noop
 	bar.candyBarBar:SetStatusBarTexture(LSM:Fetch("statusbar",E.private.general.normTex))
 	bar.candyBarBackground:SetTexture(unpack(E.media.backdropcolor))
 

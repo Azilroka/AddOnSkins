@@ -15,7 +15,7 @@ function AS:SkinOvale(event)
 			_G["Icon"..i.."n1"].backdrop:SetBackdropColor(0,0,0,0)
 			_G["Icon"..i.."n1"].icone:SetTexCoord(0.12, 0.88, 0.12, 0.88)
 			_G["Icon"..i.."n1"].icone:SetInside(_G["Icon"..i.."n1"].backdrop, 1, 1)
-			Icon1n1:HookScript("OnUpdate", function(s) s:GetParent():StripTextures() end)
+			Icon1n1:GetParent():HookScript("OnUpdate", function(self) self:StripTextures() end)
 			i = i + 1
 		end
 	end)

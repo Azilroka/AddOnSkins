@@ -1,6 +1,5 @@
 local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local DT = E:GetModule('DataTexts')
+local AS, DT = E:GetModule('AddOnSkins'), E:GetModule('DataTexts')
 
 local function OnClick(self, button)
 	if button == 'LeftButton' then
@@ -256,16 +255,18 @@ function AS:EmbedInit()
 		GameTooltip:Show()
 	end)
 
-	if self:CheckOption("EmbedRO", "Recount", "Omen") then self:EmbedRecountOmen() end
-	if self:CheckOption("EmbedOmen", "Omen") then self:EmbedOmen() end
-	if self:CheckOption("EmbedSkada", "Skada") then
-		self:EmbedSkada()
-		hooksecurefunc(Skada, "CreateWindow", self.EmbedSkada)
-		hooksecurefunc(Skada, "DeleteWindow", self.EmbedSkada)
+	if AS:CheckOption("EmbedRO", "Recount", "Omen") then
+		AS:EmbedRecountOmen()
+		AS:EmbedExitCombat(true)
 	end
-	if self:CheckOption("EmbedTDPS", "TinyDPS") then self:EmbedTDPS() end
-	if self:CheckOption("EmbedRecount", "Recount") then self:EmbedRecount() end
-	AS:EmbedExitCombat(true)
+	if AS:CheckOption("EmbedOmen", "Omen") then AS:EmbedOmen() end
+	if AS:CheckOption("EmbedSkada", "Skada") then
+		AS:EmbedSkada()
+		hooksecurefunc(Skada, "CreateWindow", AS.EmbedSkada)
+		hooksecurefunc(Skada, "DeleteWindow", AS.EmbedSkada)
+	end
+	if AS:CheckOption("EmbedTDPS", "TinyDPS") then AS:EmbedTDPS() end
+	if AS:CheckOption("EmbedRecount", "Recount") then AS:EmbedRecount() end
 end
 
 function AS:EmbedEnterCombat(event)
