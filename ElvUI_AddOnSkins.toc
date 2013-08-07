@@ -1,6 +1,6 @@
 ## Interface: 50300
 ## Title: |cff1784d1ElvUI |rAddOnSkins
-## Version: 1.38
+## Version: 1.39
 ## Author: Sortokk, Azilroka, others in Credits.txt
 ## RequiredDeps: ElvUI
 ## OptionalDeps: Skada, ElvUI_SLE
