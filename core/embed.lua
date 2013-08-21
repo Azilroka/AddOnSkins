@@ -46,8 +46,8 @@ function AS:EmbedSystem_WindowResize()
 	local ChatTabSize = AS:CheckOption('EmbedBelowTop') and 22 or 0
 	local Width = E.PixelMode and 6 or 10
 	local Height = E.PixelMode and 2 or 4
-	local Spacing = E.PixelMode and 3 or 6
-	local Total = AS.SLE and ((E.PixelMode and 4 or 6) + ChatTabSize) or ((E.PixelMode and 5 or 7) + ChatTabSize + DataTextSize)
+	local Spacing = E.PixelMode and 3 or 7
+	local Total = AS.SLE and ((E.PixelMode and 4 or 6) + ChatTabSize) or ((E.PixelMode and 6 or 12) + ChatTabSize + DataTextSize)
 
 	EmbedSystem_MainWindow:SetSize(RightChatPanel:GetWidth() - Width, RightChatPanel:GetHeight() - Total)
 	EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth') + (E.PixelMode and 1 or 0), EmbedSystem_MainWindow:GetHeight() - Height)
@@ -246,9 +246,9 @@ function AS:Embed_Skada(Login)
 
 	local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 		local barmod = Skada.displays['bar']
-		local offsety = (window.db.enabletitle and window.db.title.height or 0) + 2
+		local offsety = (window.db.enabletitle and window.db.title.height or 0) + (E.PixelMode and 1 or 0)
 		window.db.barwidth = width - 4
-		window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - 4
+		window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - (E.PixelMode and 2 or 0)
 		window.db.spark = false
 		window.db.barslocked = true
 		window.bargroup:ClearAllPoints()
