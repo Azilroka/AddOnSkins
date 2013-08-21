@@ -128,16 +128,15 @@ V['skins']['addons'] = {
 	['EmbedRight'] = 'Skada',
 	['EmbedLeftWidth'] = 200,
 	['EmbedBelowTop'] = false,
--- Misc
+	['RecountBackdrop'] = true,
+	['SkadaBackdrop'] = true,
+	['OmenBackdrop'] = true,
 	['TransparentEmbed'] = false,
+-- Misc
 	['MiscFixes'] = true,
 	['DBMSkinHalf'] = false,
 	['DBMFont'] = 'ElvUI Norm',
 	['DBMFontSize'] = 12,
 	['DBMFontFlag'] = 'OUTLINE',
 	['ParchmentRemover'] = false,
-	['RecountBackdrop'] = true,
-	['SkadaBackdrop'] = true,
-	['SkadaBelowTop'] = false,
-	['SkadaTwoThirds'] = false,
 }
