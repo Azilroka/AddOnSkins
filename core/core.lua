@@ -282,7 +282,7 @@ end
 
 function AS:SkinStatusBar(bar, ClassColor)
 	AS:SkinBackdropFrame(bar, ClassColor and 'ClassColor' or 'Default')
-	bar:SetStatusBarTexture(LSM:Fetch('statusbar', E.private.general.normTex))
+	bar:SetStatusBarTexture(LSM:Fetch('statusbar', AS.NormTex))
 	if ClassColor then
 		local color = RAID_CLASS_COLORS[AS.MyClass]
 		bar:SetStatusBarColor(color.r, color.g, color.b)
