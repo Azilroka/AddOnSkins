@@ -250,14 +250,14 @@ function AS:GenerateOptions()
 			EmbedLeft = {
 				type = 'input',
 				width = 'full',
-				name = 'Embed for Left Panel',
+				name = 'Embed for Left Window',
 				disabled = function() return not AS:CheckOption('EmbedSystemDual') end,
 				order = 5,
 			},
 			EmbedRight = {
 				type = 'input',
 				width = 'full',
-				name = 'Embed to Right Panel',
+				name = 'Embed for Right Window',
 				disabled = function() return not AS:CheckOption('EmbedSystemDual') end,
 				order = 6,
 			},
