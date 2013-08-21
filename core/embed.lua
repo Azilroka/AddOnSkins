@@ -59,7 +59,6 @@ function AS:EmbedSystem_WindowResize()
 
 	local min, max = floor(EmbedSystem_MainWindow:GetWidth() * .25), floor(EmbedSystem_MainWindow:GetWidth() * .75)
 	EmbedSystem_WidthSlider:SetMinMaxValues(min, max)
-	EmbedSystem_WidthSlider:SetValue(AS:CheckOption('EmbedLeftWidth'))
 	EmbedSystem_WidthSlider:Size(RightChatDataPanel:GetSize())
 end
 
@@ -287,6 +286,7 @@ function AS:EmbedInit()
 	EmbedSystem_WidthSliderLow:SetText('')
 	EmbedSystem_WidthSliderHigh:SetText('')
 	EmbedSystem_WidthSliderText:SetText('')
+	EmbedSystem_WidthSlider:SetValue(AS:CheckOption('EmbedLeftWidth'))
 	EmbedSystem_WidthSlider:SetScript('OnValueChanged', function(self, value)
 		AS:SetOption('EmbedLeftWidth', value)
 		AS:EmbedSystem_WindowResize()
