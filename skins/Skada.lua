@@ -28,10 +28,6 @@ function AS:SkinSkada()
 		if win.db.enabletitle then
 			skada.button:SetTemplate()
 		end
-		if not skada.button.backdrop then
-			AS:SkinBackdropFrame(skada.button)
-			skada.button.backdrop:SetAllPoints()
-		end
 		if not skada.backdrop then
 			AS:SkinBackdropFrame(skada)
 		end
