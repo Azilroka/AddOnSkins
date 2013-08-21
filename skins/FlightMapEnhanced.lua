@@ -1,13 +1,10 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "FlightMapEnhancedSkin"
 function AS:SkinFlightMapEnhanced()
-	if not FlightMapEnhancedTaxiChoice then return end
-	AS:SkinBackdropFrame(FlightMapEnhancedTaxiChoice, true)
-	S:HandleCloseButton(FlightMapEnhancedTaxiChoice.CloseButton)
-	S:HandleScrollBar(FlightMapEnhancedTaxiChoiceContainerScrollBar)
+	AS:SkinBackdropFrame(FlightMapEnhancedTaxiChoice)
+	AS:SkinCloseButton(FlightMapEnhancedTaxiChoice.CloseButton)
+	AS:SkinScrollBar(FlightMapEnhancedTaxiChoiceContainerScrollBar)
 	FlightMapEnhancedTaxiChoice:HookScript("OnShow", function()
 		for i = 1, 34 do
 			if _G["FlightMapEnhancedTaxiChoiceContainerButton"..i] then _G["FlightMapEnhancedTaxiChoiceContainerButton"..i]:StripTextures() end

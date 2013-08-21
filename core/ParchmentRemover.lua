@@ -66,7 +66,7 @@ function AS:ParchmentRemover(event, addon)
 		GlyphFrame.background.Hide = function() end
 		GlyphFrame:StripTextures()
 		GlyphFrame:CreateBackdrop('Transparent')
-		SetPortraitToTexture(GlyphFrame.specIcon,icon)
+		SetPortraitToTexture(GlyphFrame.specIcon, icon)
 		GlyphFrame.specIcon:SetTexCoord(unpack(E.TexCoords))
 		GlyphFrame.specIcon:SetDrawLayer('OVERLAY')
 

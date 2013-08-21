@@ -1,9 +1,7 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
-local name = 'FlightMapSkin'
-function AS:SkinFlightMap(event)
+local name = "FlightMapSkin"
+function AS:SkinFlightMap()
 	AS:SkinStatusBar(FlightMapTimesFrame)
 	FlightMapTimesText:ClearAllPoints()
 	FlightMapTimesText:SetPoint("CENTER", FlightMapTimesFrame, "CENTER", 0, 0)

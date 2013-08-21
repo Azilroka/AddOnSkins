@@ -1,6 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "RCLootCouncilSkin"
 function AS:SkinRCLootCouncil()
@@ -8,16 +6,16 @@ function AS:SkinRCLootCouncil()
 	--MainFrame:SetScale(1)
 	AS:SkinFrame(MainFrame, "Transparent", true)
 	AS:SkinFrame(ContentFrame, "Default")
-	S:HandleButton(BtClose)
-	if _G["BtAward"] then S:HandleButton(BtAward) end
-	if _G["BtRemove"] then S:HandleButton(BtRemove) end
-	if _G["BtClear"] then S:HandleButton(BtClear) end
-	S:HandleCheckBox(MainFrameFilterPasses)
-	S:HandleScrollBar(ContentFrameScrollBar)
+	AS:SkinButton(BtClose)
+	if _G["BtAward"] then AS:SkinButton(BtAward) end
+	if _G["BtRemove"] then AS:SkinButton(BtRemove) end
+	if _G["BtClear"] then AS:SkinButton(BtClear) end
+	AS:SkinCheckBox(MainFrameFilterPasses)
+	AS:SkinScrollBar(ContentFrameScrollBar)
 
 	for i = 1,10 do
 		if _G["ContentFrameEntry"..i.."BtVote"] then
-			S:HandleButton(_G["ContentFrameEntry"..i.."BtVote"])
+			AS:SkinButton(_G["ContentFrameEntry"..i.."BtVote"])
 		end
 	end	
 
@@ -30,7 +28,7 @@ function AS:SkinRCLootCouncil()
 				
 				for j = 1,8 do
 					if _G["RCLootFrameEntry"..i.."Button"..j] then
-						S:HandleButton(_G["RCLootFrameEntry"..i.."Button"..j])
+						AS:SkinButton(_G["RCLootFrameEntry"..i.."Button"..j])
 					end
 				end
 			end
@@ -40,16 +38,16 @@ function AS:SkinRCLootCouncil()
 
 	AS:SkinFrame(RCLootHistoryFrame)
 	AS:SkinFrame(RCLootHistoryFrameScrollFrame, "Default")
-	S:HandleCheckBox(RCLootHistoryFrameFilterPasses)
-	S:HandleButton(RCLootHistoryFrameButtonClose)
-	S:HandleScrollBar(RCLootHistoryFrameScrollFrameScrollBar)
+	AS:SkinCheckBox(RCLootHistoryFrameFilterPasses)
+	AS:SkinButton(RCLootHistoryFrameButtonClose)
+	AS:SkinScrollBar(RCLootHistoryFrameScrollFrameScrollBar)
 
 	AS:SkinFrame(RCVersionFrame)
 	AS:SkinFrame(RCVersionFrameContentFrame, "Default")
-	S:HandleButton(ButtonGuild)
-	S:HandleButton(RaidButton)
-	S:HandleButton(CloseButton)
-	S:HandleScrollBar(RCVersionFrameContentFrameScrollBar)
+	AS:SkinButton(ButtonGuild)
+	AS:SkinButton(RaidButton)
+	AS:SkinButton(CloseButton)
+	AS:SkinScrollBar(RCVersionFrameContentFrameScrollBar)
 end
 
 AS:RegisterSkin(name, AS.SkinRCLootCouncil)

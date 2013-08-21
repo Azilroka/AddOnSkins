@@ -1,37 +1,20 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
-local name = "OmenSkin"
+local name = 'OmenSkin'
 function AS:SkinOmen()
-	local borderWidth = 2
-
-	Omen.UpdateTitleBar_ = Omen.UpdateTitleBar
-	Omen.UpdateTitleBar = function(self)
-		Omen.db.profile.Scale = 1
-		Omen.db.profile.Background.EdgeSize = 1
-		Omen.db.profile.Background.BarInset = borderWidth
-		Omen.db.profile.TitleBar.UseSameBG = true
-		self:UpdateTitleBar_()
-
-		self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, 1)
-	end
-
-	Omen.UpdateBackdrop_ = Omen.UpdateBackdrop
-	Omen.UpdateBackdrop = function(self)
-		Omen.db.profile.Scale = 1
-		Omen.db.profile.Background.EdgeSize = 1
-		Omen.db.profile.Background.BarInset = borderWidth
-		self:UpdateBackdrop_()
-		self.BarList:SetTemplate("Transparent")
-		self.Title:SetTemplate("Transparent")
-		self.BarList:SetPoint("TOPLEFT", self.Title, "BOTTOMLEFT", 0, 1)
-	end
-
+	if TukuiThreatBar then TukuiThreatBar:Kill() end
+	Omen.db.profile.Scale = 1
 	Omen.db.profile.Bar.Spacing = 1
-	Omen.db.profile.Background.Texture = "ElvUI Blank"
+	Omen.db.profile.Background.EdgeSize = 2
+	Omen.db.profile.Background.BarInset = 2
+	Omen.db.profile.TitleBar.UseSameBG = true
 
-	Omen:UpdateTitleBar()
+	hooksecurefunc(Omen, 'UpdateBackdrop', function(self)
+		AS:SkinFrame(self.BarList, 'Default')
+		AS:SkinFrame(self.Title, 'Default')
+		self.BarList:SetPoint('TOPLEFT', self.Title, 'BOTTOMLEFT', 0, 1)
+	end)
+
 	Omen:UpdateBackdrop()
 	Omen:ReAnchorBars()
 	Omen:ResizeBars()

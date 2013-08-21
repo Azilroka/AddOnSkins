@@ -1,6 +1,4 @@
-﻿local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "FactionizerSkin"
 function AS:SkinFactionizer()
@@ -37,22 +35,22 @@ function AS:SkinFactionizer()
 
 	local checkboxes = {
 		"FIZ_OrderByStandingCheckBox",
-		"FIZ_ShowQuestButton",
-		"FIZ_ShowInstancesButton",
-		"FIZ_ShowMobsButton",
-		"FIZ_ShowItemsButton",
-		"FIZ_ShowGeneralButton",
-		"FIZ_ReputationDetailInactiveCheckBox",
-		"FIZ_ReputationDetailMainScreenCheckBox",
+		"FIZ_EnableMissingBox",
+		"FIZ_ExtendDetailsBox",
+		"FIZ_GainToChatBox",
+		"FIZ_NoGuildGainBox",
 		"FIZ_SupressOriginalGainBox",
 		"FIZ_ShowPreviewRepBox",
 		"FIZ_SwitchFactionBarBox",
 		"FIZ_SilentSwitchBox",
 		"FIZ_NoGuildSwitchBox",
-		"FIZ_EnableMissingBox",
-		"FIZ_ExtendDetailsBox",
-		"FIZ_GainToChatBox",
-		"FIZ_NoGuildGainBox",
+		"FIZ_ReputationDetailInactiveCheckBox",
+		"FIZ_ReputationDetailMainScreenCheckBox",
+		"FIZ_ShowQuestButton",
+		"FIZ_ShowInstancesButton",
+		"FIZ_ShowMobsButton",
+		"FIZ_ShowItemsButton",
+		"FIZ_ShowGeneralButton",
 	}
 
 	for _, object in pairs(StripAllTextures) do
@@ -60,42 +58,36 @@ function AS:SkinFactionizer()
 	end	
 
 	for _, object in pairs(SetTemplateT) do
-		_G[object]:SetTemplate("Transparent")
+		AS:SkinFrame(_G[object])
 	end			
 
 	for _, button in pairs(buttons) do
-		S:HandleButton(_G[button])
+		AS:SkinButton(_G[button])
 	end		
 
 	for _, checkbox in pairs(checkboxes) do
-		S:HandleCheckBox(_G[checkbox])
+		AS:SkinCheckBox(_G[checkbox])
 	end	
 
 	FIZ_ReputationDetailAtWarCheckBox:SetScript("OnUpdate", function(frame)
 		frame:StripTextures()
-		frame:CreateBackdrop("Default")
+		frame:CreateBackdrop()
 		frame.backdrop:Point("TOPLEFT", 4, -4)
 		frame.backdrop:Point("BOTTOMRIGHT", -4, 4)
-
 		if frame.SetCheckedTexture then
 			frame:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
 		end
-
 		if frame.SetDisabledCheckedTexture then
 			frame:SetDisabledCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
 		end
 	end)
 
 	FIZ_OptionsFrame:CreateShadow("Default")
-
-	S:HandleCloseButton(FIZ_OptionsFrameClose)
-	S:HandleCloseButton(FIZ_ReputationDetailCloseButton)
-
-	S:HandleScrollBar(FIZ_UpdateListScrollFrameScrollBar, 5)
-
-	repFrame = _G["ReputationFrame"]
+	AS:SkinCloseButton(FIZ_OptionsFrameClose)
+	AS:SkinCloseButton(FIZ_ReputationDetailCloseButton)
+	AS:SkinScrollBar(FIZ_UpdateListScrollFrameScrollBar, 5)
+	local repFrame = _G["ReputationFrame"]
 	repFrame:SetScript("OnUpdate", desat)
-
 	FIZ_OptionsFrameClose:Point("TOPRIGHT", FIZ_OptionsFrame, "TOPRIGHT", 4, 5)
 	FIZ_OptionsFrame:SetWidth(360)
 	FIZ_ReputationDetailCloseButton:Point("TOPRIGHT", FIZ_ReputationDetailFrame, "TOPRIGHT", 4, 5)

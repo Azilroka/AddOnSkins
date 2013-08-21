@@ -1,13 +1,11 @@
-﻿local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "DresserSkin"
 function AS:SkinDresser()
-	S:HandleButton(DresserButton1)
-	S:HandleButton(DresserButton2)
-	S:HandleButton(DresserButton3)
-	S:HandleButton(DresserButton4)
+	AS:SkinButton(DresserButton1)
+	AS:SkinButton(DresserButton2)
+	AS:SkinButton(DresserButton3)
+	AS:SkinButton(DresserButton4)
 	DresserButton1:ClearAllPoints()
 	DresserButton1:Point("BOTTOMLEFT", DressUpFrame, "BOTTOMLEFT", 138, 79)
 	DresserButton2:ClearAllPoints()

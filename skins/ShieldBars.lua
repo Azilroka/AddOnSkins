@@ -1,17 +1,14 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "ShieldBarsSkin"
 function AS:SkinShieldBars()
-	local function SkinBars()
+	hooksecurefunc(ShieldBars, "DisplayShields", function()
 		local i = 1
 		while _G["ShieldBarsStatusBar"..i.."Frame"] do
-			AS:SkinFrame(_G["ShieldBarsStatusBar"..i.."Frame"], 'Default', true)
+			AS:SkinFrame(_G["ShieldBarsStatusBar"..i.."Frame"], false, true)
 			i = i + 1
 		end
-	end
-	hooksecurefunc(ShieldBars, "DisplayShields", SkinBars)
+	end)
 end
 
-AS:RegisterSkin(name, AS.SkinShieldBars)
+AS:RegisterSkin(name, AS.SkinShieldBars)	

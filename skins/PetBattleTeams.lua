@@ -1,15 +1,13 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "PetBattleTeamsSkin"
 function AS:SkinPetBattleTeams()
-	E:Delay(6, function()
+	AS:Delay(6, function()
 		AS:SkinFrame(PetBattleTeamFrame)
-		S:HandleScrollBar(PetBattleTeamsScrollFrameScrollBar)
+		AS:SkinScrollBar(PetBattleTeamsScrollFrameScrollBar)
 
 		PetBattleTeamsTooltip:HookScript("OnShow", function(self)
-			self.Icon:SetTexCoord(0.12, 0.88, 0.12, 0.88)
+			AS:SkinTexture(self.Icon)
 			self.rarityGlow:SetTexture(nil)
 			self.Background:SetTexture(nil)
 			self.BorderTop:SetTexture(nil)
@@ -20,7 +18,7 @@ function AS:SkinPetBattleTeams()
 			self.BorderBottom:SetTexture(nil)
 			self.BorderBottomRight:SetTexture(nil)
 			self.BorderBottomLeft:SetTexture(nil)
-			self:SetTemplate('Transparent')
+			AS:SkinFrame(self, false, true)
 		end)
 	end)
 end

@@ -1,6 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "ArchySkin"
 function AS:SkinArchy()
@@ -13,51 +11,56 @@ function AS:SkinArchy()
 
 		for i, child in pairs(ArchyArtifactFrame.children) do
 			local containerFrame = _G['ArchyArtifactChildFrame'..i]
+			local crest = _G['ArchyArtifactChildFrame'..i..'Crest']
 			local icon = _G['ArchyArtifactChildFrame'..i..'Icon']
 			local fragmentBar = _G['ArchyArtifactChildFrame'..i..'FragmentBar']
 			local solveButton = _G['ArchyArtifactChildFrame'..i..'SolveButton']
 
 			if icon then
-				icon:SetTemplate('Default')
-				icon.texture:SetTexCoord(.08, .92, .08, .92)
+				AS:SkinFrame(icon, false, true)
+				icon:SetSize(solveButton:GetHeight(),solveButton:GetHeight())
+				AS:SkinTexture(icon.texture)
 				icon.texture:SetInside()
 			end
-				
+
 			if solveButton then
-				solveButton:SetTemplate('Default')
-				solveButton:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
+				AS:SkinFrame(solveButton, false, true)
+				AS:SkinTexture(solveButton:GetNormalTexture())
 				solveButton:GetNormalTexture():SetInside()	
-				solveButton:GetDisabledTexture():SetTexCoord(.08, .92, .08, .92)
+				AS:SkinTexture(solveButton:GetDisabledTexture())
 				solveButton:GetDisabledTexture():SetInside()		
 				solveButton:StyleButton()
 			end
 
-			if fragmentBar and not fragmentBar.skinned then
-				fragmentBar.skinned = true
-				AS:SkinStatusBar(fragmentBar)	
+			if fragmentBar then
+				AS:SkinStatusBar(fragmentBar)
+				fragmentBar:SetPoint("TOPLEFT", icon, "TOPRIGHT", 7, -2)
 			end
-		end	
+		end
 	end
+
 	hooksecurefunc(Archy, 'RefreshRacesDisplay', SkinArchyArtifactFrame)
-	hooksecurefunc(Archy, "UpdateRacesFrame", SkinArchyArtifactFrame)
+	hooksecurefunc(Archy, 'UpdateRacesFrame', SkinArchyArtifactFrame)
+
 	Archy:UpdateRacesFrame()
 	Archy:RefreshRacesDisplay()
-	
+
 	local function SkinArchyDigSiteFrame()
 		AS:SkinFrame(ArchyDigSiteFrame)
 	end
 
-	hooksecurefunc(Archy, "UpdateDigSiteFrame", SkinArchyDigSiteFrame)
+	hooksecurefunc(Archy, 'UpdateDigSiteFrame', SkinArchyDigSiteFrame)
 
 	if ArchyArtifactFrameSkillBar then
 		AS:SkinStatusBar(ArchyArtifactFrameSkillBar)	
 	end
-	S:HandleButton(ArchyDistanceIndicatorFrameSurveyButton)
+
+	AS:SkinButton(ArchyDistanceIndicatorFrameSurveyButton)
 	ArchyDistanceIndicatorFrameSurveyButtonIcon:SetDrawLayer("OVERLAY")
-	S:HandleButton(ArchyDistanceIndicatorFrameCrateButton)
+	AS:SkinButton(ArchyDistanceIndicatorFrameCrateButton)
  	ArchyDistanceIndicatorFrameCrateButtonIcon:SetDrawLayer("OVERLAY")
  	if ArchyDistanceIndicatorFrameLorItemButton then
-	 	S:HandleButton(ArchyDistanceIndicatorFrameLorItemButton)
+		AS:SkinButton(ArchyDistanceIndicatorFrameLorItemButton)
 		ArchyDistanceIndicatorFrameLorItemButtonIcon:SetDrawLayer("OVERLAY")
 	end
 end

@@ -1,37 +1,37 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "ExtVendorSkin"
 function AS:SkinExtVendor()
-	if E.private.skins.blizzard.enable ~= true or E.private.skins.blizzard.merchant ~= true then return end
-
-	S:HandleButton(MerchantFrameFilterButton)
-	S:HandleButton(MerchantFrameSellJunkButton)
-	MerchantFrameSellJunkButtonIcon:SetTexCoord(.07, .93, .07, .93)
-	S:HandleEditBox(MerchantFrameSearchBox)
+	AS:SkinFrame(MerchantFrame)
+	AS:SkinButton(MerchantFrameFilterButton)
+	AS:SkinBackdropFrame(MerchantFrameSellJunkButton)
+	AS:SkinEditBox(MerchantFrameSearchBox)
 
 	for i = 1, 20 do
 		local b = _G["MerchantItem"..i.."ItemButton"]
 		local t = _G["MerchantItem"..i.."ItemButtonIconTexture"]
 		local item_bar = _G["MerchantItem"..i]
-		item_bar:StripTextures(true)
 		b:StripTextures()
 		b:StyleButton(false)
 		b:Point("TOPLEFT", item_bar, "TOPLEFT", 4, -4)
-		t:SetTexCoord(.08, .92, .08, .92)
+		AS:SkinTexture(t)
 		t:ClearAllPoints()
 		t:Point("TOPLEFT", 2, -2)
 		t:Point("BOTTOMRIGHT", -2, 2)
-
-		item_bar:CreateBackdrop("Default")
-		b:SetTemplate("Default", true)
-
+		AS:SkinFrame(item_bar)
+		b:SetTemplate("Transparent", true)
 	end
+	MerchantFrame:HookScript("OnUpdate", function()
+		for i = 1, 20 do
+			if _G["MerchantItem"..i.."AltCurrencyFrame"] then
+				_G["MerchantItem"..i.."AltCurrencyFrame"]:SetPoint("BOTTOMLEFT", _G["MerchantItem"..i.."NameFrame"], "BOTTOMLEFT", 3, 34)
+			end
+		end
+	end)
 	MerchantFrame:Width(690)
 	ExtVendor_SellJunkPopup:SetTemplate("Transparent")
-	S:HandleButton(ExtVendor_SellJunkPopupYesButton)
-	S:HandleButton(ExtVendor_SellJunkPopupNoButton)
+	AS:SkinButton(ExtVendor_SellJunkPopupYesButton)
+	AS:SkinButton(ExtVendor_SellJunkPopupNoButton)
 end
 
 AS:RegisterSkin(name, AS.SkinExtVendor)

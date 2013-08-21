@@ -1,6 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "RaidInviteOrganizerSkin"
 function AS:SkinRaidInviteOrganizer()
@@ -8,30 +6,33 @@ function AS:SkinRaidInviteOrganizer()
 	AS:SkinFrame(RIO_GuildMemberFrame)
 	AS:SkinFrame(RIO_CodeWordsContainer)
 	RIO_SliderContainer:StripTextures(True)
-	S:HandleScrollBar(RIO_GuildSlider)
-	S:HandleCloseButton(RIO_CloseButtonThing)
-	S:HandleButton(RIO_SelectAll)
-	S:HandleButton(RIO_SelectNone)
-	S:HandleButton(RIO_SendMassInvites)
-	S:HandleButton(RIO_SaveCodeWordList)
-	S:HandleButton(RIO_ToggleCodewordInvites)
-	S:HandleCheckBox(RIO_ShowOfflineBox)
-	S:HandleCheckBox(RIO_GuildMessageAtStart)
-	S:HandleCheckBox(RIO_NotifyWhenTimerDone)
-	S:HandleCheckBox(RIO_OnlyGuildMembers)
-	S:HandleCheckBox(RIO_AlwaysInviteListen)
-	S:HandleCheckBox(RIO_ShowMinimapIconConfig)
-	S:HandleCheckBox(RIO_AutoSet25manBox)
-	S:HandleCheckBox(RIO_AutoSetDifficultyBox)
-	S:HandleCheckBox(RIO_AutoSetMasterLooter)
+	AS:SkinScrollBar(RIO_GuildSlider)
+	AS:SkinCloseButton(RIO_CloseButtonThing)
+	AS:SkinButton(RIO_SelectAll)
+	AS:SkinButton(RIO_SelectNone)
+	AS:SkinButton(RIO_SendMassInvites)
+	AS:SkinButton(RIO_SaveCodeWordList)
+	AS:SkinButton(RIO_ToggleCodewordInvites)
+	AS:SkinCheckBox(RIO_ShowOfflineBox)
+	AS:SkinCheckBox(RIO_GuildMessageAtStart)
+	AS:SkinCheckBox(RIO_NotifyWhenTimerDone)
+	AS:SkinCheckBox(RIO_OnlyGuildMembers)
+	AS:SkinCheckBox(RIO_AlwaysInviteListen)
+	AS:SkinCheckBox(RIO_ShowMinimapIconConfig)
+	AS:SkinCheckBox(RIO_AutoSet25manBox)
+	AS:SkinCheckBox(RIO_AutoSetDifficultyBox)
+	AS:SkinCheckBox(RIO_AutoSetMasterLooter)
+
 	RIO_MainFrameTab1:Point("TOPLEFT", RIO_MainFrame, "BOTTOMLEFT", -5, 2)
 	RIO_MainFrameTab2:Point("LEFT", RIO_MainFrameTab1, "RIGHT", -2, 0)
 	RIO_MainFrameTab3:Point("LEFT", RIO_MainFrameTab2, "RIGHT", -2, 0)
- 	for i = 1, 3 do
-		S:HandleTab(_G["RIO_MainFrameTab"..i])
+
+	for i = 1, 3 do
+		AS:SkinTab(_G["RIO_MainFrameTab"..i])
 	end
+
 	for i = 1, 10 do
-		S:HandleCheckBox(_G["RIO_ShowRank"..i])
+		AS:SkinCheckBox(_G["RIO_ShowRank"..i])
 	end
 end
 

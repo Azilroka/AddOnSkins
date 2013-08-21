@@ -1,32 +1,38 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = 'BagnonSkin'
-function AS:SkinBagnon(event)
+function AS:SkinBagnon(event, addon)
 	if event == "PLAYER_ENTERING_WORLD" then
 		ToggleBackpack()
-		AS:SkinFrame(BagnonFrameinventory)
-		S:HandleCloseButton(BagnonFrameinventoryCloseButton)
+		if BagnonFrameinventory then
+			AS:SkinFrame(BagnonFrameinventory)
+			AS:SkinCloseButton(BagnonFrameinventoryCloseButton)
+		end
 		ToggleBackpack()
 	elseif event == "BANKFRAME_OPENED" then
-		E:Delay(0, function()
-			AS:SkinFrame(BagnonFramebank)
-			S:HandleCloseButton(BagnonFramebankCloseButton)
-			AS:UnregisterEvent(name, event)
+		AS:Delay(0, function()
+			if BagnonFramebank then
+				AS:SkinFrame(BagnonFramebank)
+				AS:SkinCloseButton(BagnonFramebankCloseButton)
+			end
 		end)
-	elseif event == "GUILDBANKFRAME_OPENED" and IsAddOnLoaded("Bagnon_GuildBank") then
-		E:Delay(0, function()
-			AS:SkinFrame(BagnonFrameguildbank)
-			S:HandleCloseButton(BagnonFrameguildbankCloseButton)
-			AS:UnregisterEvent(name, "GUILDBANKFRAME_OPENED")
+		AS:UnregisterEvent(name, event)
+	elseif event == "GUILDBANKFRAME_OPENED" and addon == "Bagnon_GuildBank" then
+		AS:Delay(0, function()
+			if BagnonFrameguildbank then
+				AS:SkinFrame(BagnonFrameguildbank)
+				AS:SkinCloseButton(BagnonFrameguildbankCloseButton)
+			end
 		end)
-	elseif event == "VOID_STORAGE_OPEN" and IsAddOnLoaded("Bagnon_VoidStorage") then
-		E:Delay(0, function()
-			AS:SkinFrame(BagnonFramevoidstorage)
-			S:HandleCloseButton(BagnonFramevoidstorageCloseButton)
-			AS:UnregisterEvent(name, "VOID_STORAGE_OPEN")
+		AS:UnregisterEvent(name, event)
+	elseif event == "VOID_STORAGE_OPEN" and addon == "Bagnon_VoidStorage" then
+		AS:Delay(0, function()
+			if BagnonFramevoidstorage then
+				AS:SkinFrame(BagnonFramevoidstorage)
+				AS:SkinCloseButton(BagnonFramevoidstorageCloseButton)
+			end
 		end)
+		AS:UnregisterEvent(name, event)
 	end
 end
 

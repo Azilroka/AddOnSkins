@@ -1,6 +1,4 @@
-﻿local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = 'BGDefenderSkin'
 function AS:SkinBGDefender()
@@ -21,6 +19,7 @@ function AS:SkinBGDefender()
 	local function OnLeave()
 	  GameTooltip:Hide()
 	end
+
 	AS:SkinFrame(BGDefenderFrame)
 
 	local StripAllTextures = {
@@ -41,14 +40,14 @@ function AS:SkinBGDefender()
 		"Button9",
 		"Button10",
 		"Button11",
-		}
+	}
 
 	for _, object in pairs(StripAllTextures) do
 		_G[object]:StripTextures()
 	end	
 
 	for _, button in pairs(buttons) do
-		S:HandleButton(_G[button])
+		AS:SkinButton(_G[button])
 	end	
 
 	BGDefenderFrame:SetWidth(160)
@@ -70,16 +69,15 @@ function AS:SkinBGDefender()
 	Button7:Point("TOPLEFT", BGDefenderFrame, "TOPLEFT", 5, -48)
 	Button8:Point("TOPLEFT", BGDefenderFrame, "TOPLEFT", 97, -48)
 
-	S:HandleDropDownBox(DropDown1, 200)
-	S:HandleDropDownBox(DropDown2, 200)
-	S:HandleDropDownBox(DropDown3, 200)
-	S:HandleCheckBox(BGDefenderPrefaceButton)
+	AS:SkinDropDownBox(DropDown1, 200)
+	AS:SkinDropDownBox(DropDown2, 200)
+	AS:SkinDropDownBox(DropDown3, 200)
+	AS:SkinCheckBox(BGDefenderPrefaceButton)
 	Text1:SetTextColor(23/255, 132/255, 209/255)
 	Button1:SetNormalFontObject("GameFontHighlight")
 	local font = Button1:GetNormalFontObject()
 	font:SetTextColor(1, 1, 1, 1)
 	Button1:SetNormalFontObject(font)
-
 	Button9:SetScript("OnEnter", OnEnter)
 	Button9:SetScript("OnLeave", OnLeave)
 	Button10:SetScript("OnEnter", OnEnter)

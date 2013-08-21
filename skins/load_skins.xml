@@ -3,6 +3,7 @@
 	<Script file="ACP.lua"/>
 	<Script file="AdiBags.lua"/>
 	<Script file="AffDots.lua"/>
+	<Script file="alDamageMeter.lua"/>
 	<Script file="Altoholic.lua"/>
 	<Script file="Analyst.lua"/>
 	<Script file="AraBrokerGuildFriends.lua"/>
@@ -21,6 +22,7 @@
 	<Script file="BigWigs.lua"/>
 	<Script file="BPT.lua"/>
 	<Script file="BuyEmAll.lua"/>
+	<Script file="CLCInfo.lua"/>
 	<Script file="CLCProt.lua"/>
 	<Script file="CLCRet.lua"/>
 	<Script file="Clique.lua"/>
@@ -45,6 +47,7 @@
 	<Script file="GuildMemberInfo_TradeSkills.lua"/>
 	<Script file="GupPet.lua"/>
 	<Script file="Healium.lua"/>
+	<Script file="Ignition.lua"/>
 	<Script file="InboxMailBag.lua"/>
 	<Script file="Incoming.lua"/>
 	<Script file="InspectEquip.lua"/>
@@ -80,6 +83,7 @@
 	<Script file="Recount.lua"/>
 	<Script file="ReforgeLite.lua"/>
 	<Script file="Reforgenator.lua"/>
+	<Script file="Reforgerade.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
 	<Script file="SexyCooldown.lua"/>
 	<Script file="ShieldBars.lua"/>
@@ -92,6 +96,7 @@
 	<Script file="Swatter.lua"/>
 	<Script file="Symbiosis.lua"/>
 	<Script file="TinyDPS.lua"/>
+	<Script file="TitanPanel.lua"/>
 	<Script file="TomTom.lua"/>
 	<Script file="TradeSkillDW.lua"/>
 	<Script file="VengeanceStatus.lua"/>

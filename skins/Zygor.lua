@@ -1,19 +1,18 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "ZygorSkin"
 function AS:SkinZygor()
 	ZygorGuidesViewerFrame:StripTextures(True)
-	ZygorGuidesViewerFrame_Border:StripTextures(True)
-	ZygorGuidesViewer_CreatureViewer:SetTemplate("Transparent")
+	AS:SkinFrame(ZygorGuidesViewerFrame_Border)
+	AS:SkinFrame(ZygorGuidesViewer_CreatureViewer, true)
+
 	for i = 1, 6 do
-		_G["ZygorGuidesViewerFrame_Step"..i]:StripTextures(True)
-		_G["ZygorGuidesViewerFrame_Step"..i]:CreateBackdrop()
+		AS:SkinBackdropFrame(_G["ZygorGuidesViewerFrame_Step"..i])
 	end
-	if ZygorGuidesViewerFrame:IsShown() then ZygorGuidesViewerFrame_Border:SetTemplate("Transparent") end
+
+	if ZygorGuidesViewerFrame:IsShown() then AS:SkinFrame(ZygorGuidesViewerFrame_Border) end
 	ZygorGuidesViewerFrame_Border:HookScript("OnHide", function(self) self:StripTextures(True) end)
-	ZygorGuidesViewerFrame_Border:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
+	ZygorGuidesViewerFrame_Border:HookScript("OnShow", function(self) AS:SkinFrame(self) end)
 end
 
 AS:RegisterSkin(name, AS.SkinZygor)

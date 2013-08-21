@@ -1,14 +1,12 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "BuyEmAllSkin"
 function AS:SkinBuyEmAll()
 	AS:SkinFrame(BuyEmAllFrame)
-	S:HandleButton(BuyEmAllStackButton)
-	S:HandleButton(BuyEmAllMaxButton)
-	S:HandleButton(BuyEmAllCancelButton)
-	S:HandleButton(BuyEmAllOkayButton)
+	AS:SkinButton(BuyEmAllStackButton)
+	AS:SkinButton(BuyEmAllMaxButton)
+	AS:SkinButton(BuyEmAllCancelButton)
+	AS:SkinButton(BuyEmAllOkayButton)
 end
 
 AS:RegisterSkin(name, AS.SkinBuyEmAll)

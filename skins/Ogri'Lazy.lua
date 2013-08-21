@@ -1,11 +1,9 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "OgriLazySkin"
 function AS:SkinOgriLazy()
 	AS:SkinFrame(Relic_View)
-	S:HandleCloseButton(Relic_ViewCloseButton)
+	AS:SkinCloseButton(Relic_ViewCloseButton)
 end
 
 AS:RegisterSkin(name, AS.SkinOgriLazy)

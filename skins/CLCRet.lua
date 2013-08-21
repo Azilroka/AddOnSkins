@@ -1,24 +1,22 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "CLCRetSkin"
 function AS:SkinCLCRet()
-	if select(2, UnitClass("player")) ~= "PALADIN" then return end
-	local function UpdateButtonLayout(self, button, opt)
+	if AS.MyClass ~= "PALADIN" then return end
+
+	local function UpdateButtonLayout(frame, button, opt)
 		button:Size(opt.size)
 		button:ClearAllPoints()
 		button:SetPoint(opt.point, clcretFrame, opt.pointParent, opt.x, opt.y)
 		button:SetAlpha(opt.alpha)
-
 		button.stack:ClearAllPoints()
 		button.stack:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 4, 0)	
 	end
 
-	local function CreateButton(self, name, size, point, parent, pointParent, offsetx, offsety, bfGroup, isChecked)
+	local function CreateButton(frame, name, size, point, parent, pointParent, offsetx, offsety, bfGroup, isChecked)
 		clcretFrame:SetScale(1)
-		clcretFrame.SetScale = E.noop
-		
+		clcretFrame.SetScale = AS.Noop
+
 		name = "clcret" .. name
 		local button
 		if isChecked then
@@ -29,61 +27,53 @@ function AS:SkinCLCRet()
 			button = CreateFrame("Button", name , parent)
 			button:CreateBackdrop("Default")
 		end
-		
+
 		button.backdrop:SetAllPoints()
-		
 		button:EnableMouse(false)
-		
 		button:Size(size)
-		
 		button.texture = button:CreateTexture("$parentIcon", "OVERLAY")
 		button.texture:Point("TOPLEFT", 2, -2)
 		button.texture:Point("BOTTOMRIGHT", -2, 2)
 		button.texture:SetTexture(BGTEX)
-		button.texture:SetTexCoord(0.08, 0.92, 0.08, 0.92)
-		button.texture.SetTexCoord = E.noop
-		
+		AS:SkinTexture(button.texture)
+		button.texture.SetTexCoord = AS.Noop
 		button.texture.OldSetTexture = button.texture.SetTexture
-		button.texture.SetTexture = function(self, tex, ...)
-			button.texture.OldSetTexture(self, tex, ...)
-			
+		button.texture.SetTexture = function(frame, tex, ...)
+			button.texture.OldSetTexture(frame, tex, ...)
 			if tex ~= nil then
 				button.backdrop:Show();
 			else
 				button.backdrop:Hide()
 			end
 		end
-		
+
 		button.border = button:CreateTexture(nil, "BORDER")
 		button.border:Kill()
-		
 		button.cooldown = CreateFrame("Cooldown", "$parentCooldown", button)
 		button.cooldown:Point("TOPLEFT", 2, -2)
 		button.cooldown:Point("BOTTOMRIGHT", -2, 2)
-		
 		button.stack = button:CreateFontString("$parentCount", "OVERLAY", "TextStatusBarText")
-		
+
 		local fontFace, _, fontFlags = button.stack:GetFont()
 		button.stack:SetFont(fontFace, 30, fontFlags)
 		button.stack:SetJustifyH("RIGHT")
 		button.stack:ClearAllPoints()
 		button.stack:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT", 4, 0)
-		
 		button.defaultSize = button:GetWidth()
-
-		button.SetScale = E.noop
+		button.SetScale = AS.Noop
 		button:ClearAllPoints()
 		button:SetPoint(point, parent, pointParent, offsetx, offsety)
-		
-		if self.LBF then
-			self.LBF:Group("clcret", bfGroup):AddButton(button)
+
+		if frame.LBF then
+			frame.LBF:Group("clcret", bfGroup):AddButton(button)
 		end
-			
 		button:Hide()
 		return button
 	end
+
 	local clcret = LibStub("AceAddon-3.0"):GetAddon("clcret")
 	clcret.CreateButton = CreateButton
 	clcret.UpdateButtonLayout = UpdateButtonLayout
 end
+
 AS:RegisterSkin(name, AS.SkinCLCRet)

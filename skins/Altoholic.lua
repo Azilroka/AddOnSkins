@@ -1,6 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "AltoholicSkin"
 function AS:SkinAltoholic(event, addon)
@@ -9,18 +7,17 @@ function AS:SkinAltoholic(event, addon)
 		AltoholicFramePortrait:Kill()
 		AS:SkinFrame(AltoholicFrame)
 		AS:SkinFrame(AltoMsgBox)
-		S:HandleButton(AltoMsgBoxYesButton)
-		S:HandleButton(AltoMsgBoxNoButton)
-		S:HandleCloseButton(AltoholicFrameCloseButton)
-		S:HandleEditBox(AltoholicFrame_SearchEditBox)
-		S:HandleButton(AltoholicFrame_ResetButton)
-		S:HandleButton(AltoholicFrame_SearchButton)
+		AS:SkinButton(AltoMsgBoxYesButton)
+		AS:SkinButton(AltoMsgBoxNoButton)
+		AS:SkinCloseButton(AltoholicFrameCloseButton)
+		AS:SkinEditBox(AltoholicFrame_SearchEditBox, 175, 15)
+		AS:SkinButton(AltoholicFrame_ResetButton)
+		AS:SkinButton(AltoholicFrame_SearchButton)
 		AltoholicFrameTab1:Point("TOPLEFT", AltoholicFrame, "BOTTOMLEFT", -5, 2)
 		AltoholicFrame_ResetButton:Point("TOPLEFT", AltoholicFrame, "TOPLEFT", 25, -77)
 		AltoholicFrame_SearchEditBox:Point("TOPLEFT", AltoholicFrame, "TOPLEFT", 37, -56)
 		AltoholicFrame_ResetButton:Size(85, 24)
 		AltoholicFrame_SearchButton:Size(85, 24)
-		AltoholicFrame_SearchEditBox:Size(175, 15)
 	end
 
 	if addon == "Altoholic_Summary" then
@@ -28,24 +25,24 @@ function AS:SkinAltoholic(event, addon)
 		AS:SkinFrame(AltoholicFrameBagUsage)
 		AS:SkinFrame(AltoholicFrameSkills)
 		AS:SkinFrame(AltoholicFrameActivity)
-		S:HandleScrollBar(AltoholicFrameSummaryScrollFrameScrollBar)
-		S:HandleScrollBar(AltoholicFrameBagUsageScrollFrameScrollBar)
-		S:HandleScrollBar(AltoholicFrameSkillsScrollFrameScrollBar)
-		S:HandleScrollBar(AltoholicFrameActivityScrollFrameScrollBar)
-		S:HandleDropDownBox(AltoholicTabSummary_SelectLocation)
+		AS:SkinScrollBar(AltoholicFrameSummaryScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameBagUsageScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameSkillsScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameActivityScrollFrameScrollBar)
+		AS:SkinDropDownBox(AltoholicTabSummary_SelectLocation)
 		AltoholicTabSummary_SelectLocation:Width(200)
 		AltoholicFrameSummaryScrollFrame:StripTextures(true)
 		AltoholicFrameBagUsageScrollFrame:StripTextures(true)
 		AltoholicFrameSkillsScrollFrame:StripTextures(true)
 		AltoholicFrameActivityScrollFrame:StripTextures(true)
 		for i = 1, 4 do
-			S:HandleButton(_G["AltoholicTabSummaryMenuItem"..i], true)
+			AS:SkinButton(_G["AltoholicTabSummaryMenuItem"..i], true)
 		end
 		for i = 1, 8 do
-			S:HandleButton(_G["AltoholicTabSummary_Sort"..i], true)
+			AS:SkinButton(_G["AltoholicTabSummary_Sort"..i], true)
 		end
 		for i = 1, 7 do
-			S:HandleTab(_G["AltoholicFrameTab"..i], true)
+			AS:SkinTab(_G["AltoholicFrameTab"..i], true)
 		end
 	end
 	
@@ -58,66 +55,66 @@ function AS:SkinAltoholic(event, addon)
 		AS:SkinFrame(AltoholicFrameSpellbook)
 		AS:SkinFrame(AltoholicFramePets)
 		AS:SkinFrame(AltoholicFrameAuctions)
-		S:HandleScrollBar(AltoholicFrameContainersScrollFrameScrollBar)
-		S:HandleScrollBar(AltoholicFrameQuestsScrollFrameScrollBar)
-		S:HandleScrollBar(AltoholicFrameRecipesScrollFrameScrollBar)
-		S:HandleDropDownBox(AltoholicFrameTalents_SelectMember)
-		S:HandleDropDownBox(AltoholicTabCharacters_SelectRealm)
-		S:HandleNextPrevButton(AltoholicFrameSpellbookPrevPage)
-		S:HandleNextPrevButton(AltoholicFrameSpellbookNextPage)
-		S:HandleNextPrevButton(AltoholicFramePetsNormalPrevPage)
-		S:HandleNextPrevButton(AltoholicFramePetsNormalNextPage)
-		S:HandleRotateButton(AltoholicFramePetsNormal_ModelFrameRotateLeftButton)
-		S:HandleRotateButton(AltoholicFramePetsNormal_ModelFrameRotateRightButton)
-		S:HandleButton(AltoholicTabCharacters_Sort1)
-		S:HandleButton(AltoholicTabCharacters_Sort2)
-		S:HandleButton(AltoholicTabCharacters_Sort3)
+		AS:SkinScrollBar(AltoholicFrameContainersScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameQuestsScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameRecipesScrollFrameScrollBar)
+		AS:SkinDropDownBox(AltoholicFrameTalents_SelectMember)
+		AS:SkinDropDownBox(AltoholicTabCharacters_SelectRealm)
+		AS:SkinNextPrevButton(AltoholicFrameSpellbookPrevPage)
+		AS:SkinNextPrevButton(AltoholicFrameSpellbookNextPage)
+		AS:SkinNextPrevButton(AltoholicFramePetsNormalPrevPage)
+		AS:SkinNextPrevButton(AltoholicFramePetsNormalNextPage)
+		AS:SkinRotateButton(AltoholicFramePetsNormal_ModelFrameRotateLeftButton)
+		AS:SkinRotateButton(AltoholicFramePetsNormal_ModelFrameRotateRightButton)
+		AS:SkinButton(AltoholicTabCharacters_Sort1)
+		AS:SkinButton(AltoholicTabCharacters_Sort2)
+		AS:SkinButton(AltoholicTabCharacters_Sort3)
 		AltoholicFrameContainersScrollFrame:StripTextures(true)
 		AltoholicFrameQuestsScrollFrame:StripTextures(true)
 		AltoholicFrameRecipesScrollFrame:StripTextures(true)
 		for i = 1, 14 do
-			_G["AltoholicFrameContainersEntry1Item"..i]:StripTextures()
-			_G["AltoholicFrameContainersEntry2Item"..i]:StripTextures()
-			_G["AltoholicFrameContainersEntry3Item"..i]:StripTextures()
-			_G["AltoholicFrameContainersEntry4Item"..i]:StripTextures()
-			_G["AltoholicFrameContainersEntry5Item"..i]:StripTextures()
-			_G["AltoholicFrameContainersEntry6Item"..i]:StripTextures()
-			_G["AltoholicFrameContainersEntry7Item"..i]:StripTextures()
+			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry1Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry2Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry3Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry4Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry5Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry6Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry7Item"..i])
 		end
 	end
 
 	if addon == "Altoholic_Achievements" then
-		AS:SkinBackdropFrame(AltoholicFrameAchievements, true)
+		AS:SkinBackdropFrame(AltoholicFrameAchievements)
 		AltoholicFrameAchievementsScrollFrame:StripTextures(true)
 		AltoholicAchievementsMenuScrollFrame:StripTextures(true)
-		S:HandleScrollBar(AltoholicFrameAchievementsScrollFrameScrollBar)
-		S:HandleScrollBar(AltoholicAchievementsMenuScrollFrameScrollBar)
-		S:HandleDropDownBox(AltoholicTabAchievements_SelectRealm)
+		AS:SkinScrollBar(AltoholicFrameAchievementsScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicAchievementsMenuScrollFrameScrollBar)
+		AS:SkinDropDownBox(AltoholicTabAchievements_SelectRealm)
 		AltoholicTabAchievements_SelectRealm:Point("TOPLEFT", AltoholicFrame, "TOPLEFT", 205, -57)
 
 		for i = 1, 15 do
-			S:HandleButton(_G["AltoholicTabAchievementsMenuItem"..i], true)
+			AS:SkinButton(_G["AltoholicTabAchievementsMenuItem"..i], true)
 		end
 
 		for i = 1, 10 do
-			_G["AltoholicFrameAchievementsEntry1Item"..i]:StripTextures()
-			_G["AltoholicFrameAchievementsEntry2Item"..i]:StripTextures()
-			_G["AltoholicFrameAchievementsEntry3Item"..i]:StripTextures()
-			_G["AltoholicFrameAchievementsEntry4Item"..i]:StripTextures()
-			_G["AltoholicFrameAchievementsEntry5Item"..i]:StripTextures()
-			_G["AltoholicFrameAchievementsEntry6Item"..i]:StripTextures()
-			_G["AltoholicFrameAchievementsEntry7Item"..i]:StripTextures()
-			_G["AltoholicFrameAchievementsEntry8Item"..i]:StripTextures()
+			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry1Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry2Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry3Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry4Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry5Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry6Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry7Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry8Item"..i])
 		end
 	end
 
 	if addon == "Altoholic_Agenda" then
 		AS:SkinFrame(AltoholicFrameCalendarScrollFrame)
 		AS:SkinFrame(AltoholicTabAgendaMenuItem1)
-		S:HandleScrollBar(AltoholicFrameCalendarScrollFrameScrollBar)
-		S:HandleNextPrevButton(AltoholicFrameCalendar_NextMonth)
-		S:HandleNextPrevButton(AltoholicFrameCalendar_PrevMonth)
-		S:HandleButton(AltoholicTabAgendaMenuItem1, true)
+		AS:SkinScrollBar(AltoholicFrameCalendarScrollFrameScrollBar)
+		AS:SkinNextPrevButton(AltoholicFrameCalendar_NextMonth)
+		AS:SkinNextPrevButton(AltoholicFrameCalendar_PrevMonth)
+		AS:SkinButton(AltoholicTabAgendaMenuItem1, true)
 
 		for i = 1, 14 do
 			AS:SkinFrame(_G["AltoholicFrameCalendarEntry"..i])
@@ -127,50 +124,48 @@ function AS:SkinAltoholic(event, addon)
 	if addon == "Altoholic_Grids" then
 		AltoholicFrameGridsScrollFrame:StripTextures(true)
 		AS:SkinBackdropFrame(AltoholicFrameGrids)
-		S:HandleScrollBar(AltoholicFrameGridsScrollFrameScrollBar)
-		S:HandleDropDownBox(AltoholicTabGrids_SelectRealm)
-		S:HandleDropDownBox(AltoholicTabGrids_SelectView)
+		AS:SkinScrollBar(AltoholicFrameGridsScrollFrameScrollBar)
+		AS:SkinDropDownBox(AltoholicTabGrids_SelectRealm)
+		AS:SkinDropDownBox(AltoholicTabGrids_SelectView)
 
 		for i = 1, 10 do
-			_G["AltoholicFrameGridsEntry1Item"..i]:StripTextures()
-			_G["AltoholicFrameGridsEntry2Item"..i]:StripTextures()
-			_G["AltoholicFrameGridsEntry3Item"..i]:StripTextures()
-			_G["AltoholicFrameGridsEntry4Item"..i]:StripTextures()
-			_G["AltoholicFrameGridsEntry5Item"..i]:StripTextures()
-			_G["AltoholicFrameGridsEntry6Item"..i]:StripTextures()
-			_G["AltoholicFrameGridsEntry7Item"..i]:StripTextures()
-			_G["AltoholicFrameGridsEntry8Item"..i]:StripTextures()
+			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry1Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry2Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry3Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry4Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry5Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry6Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry7Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry8Item"..i])
 		end
 	end
 
 	if addon == "Altoholic_Guild" then
 		AS:SkinFrame(AltoholicFrameGuildMembers)
 		AS:SkinFrame(AltoholicFrameGuildBank)
-		S:HandleScrollBar(AltoholicFrameGuildMembersScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameGuildMembersScrollFrameScrollBar)
 		AltoholicFrameGuildMembersScrollFrame:StripTextures(true)
 
 		for i = 1, 2 do
-			_G["AltoholicTabGuildMenuItem"..i]:StripTextures()
-			S:HandleButton(_G["AltoholicTabGuildMenuItem"..i])
+			AS:SkinButton(_G["AltoholicTabGuildMenuItem"..i])
 		end
 
 		for i = 1, 14 do
-			_G["AltoholicFrameGuildBankEntry1Item"..i]:StripTextures()
-			_G["AltoholicFrameGuildBankEntry2Item"..i]:StripTextures()
-			_G["AltoholicFrameGuildBankEntry3Item"..i]:StripTextures()
-			_G["AltoholicFrameGuildBankEntry4Item"..i]:StripTextures()
-			_G["AltoholicFrameGuildBankEntry5Item"..i]:StripTextures()
-			_G["AltoholicFrameGuildBankEntry6Item"..i]:StripTextures()
-			_G["AltoholicFrameGuildBankEntry7Item"..i]:StripTextures()
+			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry1Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry2Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry3Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry4Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry5Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry6Item"..i])
+			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry7Item"..i])
 		end
 
 		for i = 1, 19 do
-			_G["AltoholicFrameGuildMembersItem"..i]:StripTextures()
+			AS:SkinBackdropFrame(_G["AltoholicFrameGuildMembersItem"..i])
 		end
 
 		for i = 1, 5 do
-			_G["AltoholicTabGuild_Sort"..i]:StripTextures()
-			S:HandleButton(_G["AltoholicTabGuild_Sort"..i])
+			AS:SkinButton(_G["AltoholicTabGuild_Sort"..i])
 		end
 	end
 
@@ -178,23 +173,23 @@ function AS:SkinAltoholic(event, addon)
 		AS:SkinBackdropFrame(AltoholicFrameSearch, true)
 		AltoholicFrameSearchScrollFrame:StripTextures(true)
 		AltoholicSearchMenuScrollFrame:StripTextures(true)
-		S:HandleScrollBar(AltoholicFrameSearchScrollFrameScrollBar)
-		S:HandleScrollBar(AltoholicSearchMenuScrollFrameScrollBar)
-		S:HandleDropDownBox(AltoholicTabSearch_SelectRarity)
-		S:HandleDropDownBox(AltoholicTabSearch_SelectSlot)
-		S:HandleDropDownBox(AltoholicTabSearch_SelectLocation)
+		AS:SkinScrollBar(AltoholicFrameSearchScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicSearchMenuScrollFrameScrollBar)
+		AS:SkinDropDownBox(AltoholicTabSearch_SelectRarity)
+		AS:SkinDropDownBox(AltoholicTabSearch_SelectSlot)
+		AS:SkinDropDownBox(AltoholicTabSearch_SelectLocation)
 		AltoholicTabSearch_SelectRarity:Size(125, 32)
 		AltoholicTabSearch_SelectSlot:Size(125, 32)
 		AltoholicTabSearch_SelectLocation:Size(175, 32)
-		S:HandleEditBox(_G["AltoholicTabSearch_MinLevel"])
-		S:HandleEditBox(_G["AltoholicTabSearch_MaxLevel"])
+		AS:SkinEditBox(_G["AltoholicTabSearch_MinLevel"])
+		AS:SkinEditBox(_G["AltoholicTabSearch_MaxLevel"])
 
 		for i = 1, 15 do
-			S:HandleButton(_G["AltoholicTabSearchMenuItem"..i])
+			AS:SkinButton(_G["AltoholicTabSearchMenuItem"..i])
 		end
 
 		for i = 1, 8 do
-			S:HandleButton(_G["AltoholicTabSearch_Sort"..i])
+			AS:SkinButton(_G["AltoholicTabSearch_Sort"..i])
 		end
 	end
 end

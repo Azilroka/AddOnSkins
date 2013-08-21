@@ -1,18 +1,14 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "SpySkin"
 function AS:SkinSpy()
 	AS:SkinFrame(Spy_MainWindow)
 	AS:SkinFrame(Spy_AlertWindow)
-	S:HandleCloseButton(Spy_MainWindow.CloseButton)
+	AS:SkinCloseButton(Spy_MainWindow.CloseButton)
 	AS:Desaturate(Spy_MainWindow.ClearButton)
 	AS:Desaturate(Spy_MainWindow.LeftButton)
 	AS:Desaturate(Spy_MainWindow.RightButton)
 	Spy_AlertWindow:Point("TOP", UIParent, "TOP", 0, -130)
-
-	E:CreateMover(Spy_AlertWindow,"SpyAlertWindowMover","Spy Alert Window",nil,nil,nil,'ALL,GENERAL')
 end
 
 AS:RegisterSkin(name, AS.SkinSpy)

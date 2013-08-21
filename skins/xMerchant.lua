@@ -1,11 +1,10 @@
-﻿local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = 'xMerchantSkin'
 function AS:SkinxMerchant()
-	S:HandleCheckBox(NuuhMerchantFrameTooltipSearching)
-	AS:SkinFrame(NuuhMerchantFrameSearch, 'Default') S:HandleScrollBar(NuuhMerchantScrollFrameScrollBar)
+	AS:SkinCheckBox(NuuhMerchantFrameTooltipSearching)
+	AS:SkinFrameD(NuuhMerchantFrameSearch)
+	AS:SkinScrollBar(NuuhMerchantScrollFrameScrollBar)
 end
 
 AS:RegisterSkin(name, AS.SkinxMerchant)

@@ -1,6 +1,4 @@
-﻿local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "HealiumSkin"
 function AS:SkinHealium()
@@ -29,16 +27,12 @@ function AS:SkinHealium()
 		if not(self) or (skinnedFrames[self:GetName()]) then
 			return
 		end
-
 		local frameName = self:GetName()
-
 		local captionbar = self.CaptionBar
 		local captiontext = self.CaptionBar.Caption
 		local closebutton = self.CaptionBar.CloseButton
-
-		AS:SkinFrame(captionbar, 'Default', true)
-		S:HandleCloseButton(closebutton)
-
+		AS:SkinFrame(captionbar, false, true)
+		AS:SkinCloseButton(closebutton)
 		skinnedFrames[self:GetName()] = true
 	end
 
@@ -46,7 +40,6 @@ function AS:SkinHealium()
 		if not(self) or (skinnedFrames[self:GetName()]) then
 			return
 		end
-
 		local frameName = self:GetName()
 		local name = self.name
 		local hptext = self.HPText
@@ -56,22 +49,17 @@ function AS:SkinHealium()
 		local predictbar = self.PredictBar
 		local healthbar = self.HealthBar
 		local manabar = self.ManaBar
-
 		self:StripTextures()
-
 		AS:SkinStatusBar(predictbar)
 		AS:SkinStatusBar(healthbar)
 		AS:SkinStatusBar(manabar)
-
 		predictbar:SetHeight(24)
 		healthbar:SetHeight(24)
 		manabar:SetHeight(24)
-
 		predictbar:SetPoint("TOPLEFT", 7, 0)
 		healthbar:SetPoint("TOPLEFT", 7, 0)
 		manabar:ClearAllPoints()
 		manabar:SetPoint("TOPLEFT", -4, 0)
-
 		skinnedFrames[self:GetName()] = true
 	end
 
@@ -79,16 +67,13 @@ function AS:SkinHealium()
 		if not(self) or (skinnedFrames[self:GetName()]) then
 			return
 		end
-
 		local icon = self.icon
 		local texture = icon:GetTexture()
-		AS:SkinIconButton(self, true, true, true)
-
+		AS:SkinIconButton(self, true)
 		icon:SetTexture(texture)
 		icon:SetDrawLayer("OVERLAY")
 		icon:ClearAllPoints()
 		icon:SetInside()
-
 		skinnedFrames[self:GetName()] = true
 	end
 
@@ -96,21 +81,17 @@ function AS:SkinHealium()
 		if not(self) or (skinnedFrames[self:GetName()]) then
 			return
 		end
-
 		local icon = self.icon
 		local cooldown = self.cooldown
 		local count = self.count 
 		local border = self.border 
-
-		AS:SkinIconButton(self, false, true, true)
+		AS:SkinIconButton(self, true)
 		self:SetSize(28,28)			
 		icon:SetDrawLayer("OVERLAY")
 		icon:ClearAllPoints()
 		icon:SetInside()
-
 		count:ClearAllPoints()
 		count:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", -1, 1)
-
 		skinnedFrames[self:GetName()] = true
 	end
 
@@ -118,14 +99,12 @@ function AS:SkinHealium()
 		if not(Healium_Frames) then
 			return
 		end
-
 		for i,frameName in pairs(captionFrames) do
 			if (_G[frameName]) then
 				skinHeader(_G[frameName])
 			end
 			for i,frame in pairs(Healium_Frames) do
 				skinUnitFrame(frame)
-
 				for v = 1, Healium_MaxButtons do
 					skinHeal(_G[frame:GetName().. "_Heal" .. v])
 					if v == 1 then
@@ -134,7 +113,6 @@ function AS:SkinHealium()
 						_G[frame:GetName().. "_Heal" .. v]:SetPoint("LEFT", _G[frame:GetName().. "_Heal".. (v-1)], "RIGHT", 2, 0)
 					end
 				end
-
 				for v = 1, 6 do
 					skinBuff(_G[frame:GetName() .. "_Buff" .. v])
 					if v == 1 then

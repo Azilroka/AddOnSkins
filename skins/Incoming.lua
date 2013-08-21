@@ -1,9 +1,9 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = 'IncomingSkin'
-function AS:SkinIncoming()
+function AS:SkinIncoming(self)
+	AS:SkinFrame(LocationMessageView)
+
 	local buttons = {
 		"Incoming1",
 		"Incoming2",
@@ -16,13 +16,13 @@ function AS:SkinIncoming()
 	}
 
 	for _, button in pairs(buttons) do
-		S:HandleButton(_G[button])
+		AS:SkinButton(_G[button])
 	end	
 
-	AS:SkinFrame(LocationMessageView)
 	LocationMessageView:SetWidth(99)
 	LocationMessageView:SetHeight(130)
 	Incoming5:SetWidth(29)
+
 	Incoming1:Point("TOPLEFT", LocationMessageView, "TOPLEFT", 3, -3)
 	Incoming2:Point("TOPLEFT", LocationMessageView, "TOPLEFT", 19, -3)
 	Incoming3:Point("TOPLEFT", LocationMessageView, "TOPLEFT", 35, -3)

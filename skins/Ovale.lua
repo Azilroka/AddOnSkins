@@ -1,22 +1,20 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "OvaleSkin"
-function AS:SkinOvale(event)
-	E:Delay(15, function()
-		if not IsAddOnLoaded("Ovale") then return end
-		local i = 1
-		while _G["Icon"..i.."n1"] do
-			_G["Icon"..i.."n1"]:StripTextures()
-			_G["Icon"..i.."n1"]:CreateBackdrop()
+function AS:SkinOvale()
+	AS:Delay(5, function()
+		if not Icon1n1 then return end
+		Icon1n1:GetParent():StripTextures()
+		for i = 1, 10 do
+			if not _G["Icon"..i.."n1"] then return end
+			AS:SkinBackdropFrame(_G["Icon"..i.."n1"], true)
 			_G["Icon"..i.."n1"].backdrop:SetFrameLevel(0)
 			_G["Icon"..i.."n1"].backdrop:SetAllPoints()
-			_G["Icon"..i.."n1"].backdrop:SetBackdropColor(0,0,0,0)
-			_G["Icon"..i.."n1"].icone:SetTexCoord(0.12, 0.88, 0.12, 0.88)
+			_G["Icon"..i.."n1"].backdrop:SetScale(AS.UIScale)
+			_G["Icon"..i.."n1"].icone:SetDrawLayer("OVERLAY")
+			AS:SkinTexture(_G["Icon"..i.."n1"].icone)
 			_G["Icon"..i.."n1"].icone:SetInside(_G["Icon"..i.."n1"].backdrop, 1, 1)
 			Icon1n1:GetParent():HookScript("OnUpdate", function(self) self:StripTextures() end)
-			i = i + 1
 		end
 	end)
 end

@@ -1,10 +1,8 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
-local name = 'OneClickEnchantScrollSkin'
+local name = "OneClickEnchantScrollSkin"
 function AS:SkinOneClickEnchantScroll()
-	S:HandleButton(TradeSkillCreateScrollButton, true)
+	AS:SkinButton(TradeSkillCreateScrollButton, true)
 	TradeSkillCreateScrollButton:ClearAllPoints()
 	TradeSkillCreateScrollButton:Point("RIGHT", TradeSkillCreateButton, "LEFT", -2, 0)
 end

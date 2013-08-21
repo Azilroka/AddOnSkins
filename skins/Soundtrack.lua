@@ -1,6 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "SoundtrackSkin"
 function AS:SkinSoundtrack()
@@ -93,50 +91,50 @@ function AS:SkinSoundtrack()
 
 	for _, object in pairs(buttons) do
 		if _G[object] then
-			S:HandleButton(_G[object])
+			AS:SkinButton(_G[object])
 		end
 	end
 
 	for _, object in pairs(cboxes) do
 		if _G[object] then
-			S:HandleCheckBox(_G[object])
+			AS:SkinCheckBox(_G[object])
 		end
 	end
 
 	for i = 1, 10 do
-		S:HandleTab(_G["SoundtrackFrameTab"..i])
+		AS:SkinTab(_G["SoundtrackFrameTab"..i])
 	end
 
 	SoundtrackFrameTab1:SetPoint("TOPLEFT", SoundtrackFrame, "BOTTOMLEFT", 10, 2)
 	SoundtrackFrame_CloseButton:SetPoint("BOTTOMRIGHT", SoundtrackFrame, "BOTTOMRIGHT", -15, 5)
 
-	S:HandleCloseButton(SoundtrackFrame_TopCloseButton)
+	AS:SkinCloseButton(SoundtrackFrame_TopCloseButton)
 	AS:SkinStatusBar(SoundtrackFrame_StatusBarTrack)
 	SoundtrackFrame_StatusBarTrackBorder:Kill()
 	AS:SkinStatusBar(SoundtrackFrame_StatusBarEvent)
 	SoundtrackFrame_StatusBarEventBorder:Kill()
 	SoundtrackFrame_TrackFilter:StripTextures()
 	SoundtrackFrame_TrackFilter:SetHeight(18)
-	S:HandleEditBox(SoundtrackFrame_TrackFilter)
+	AS:SkinEditBox(SoundtrackFrame_TrackFilter)
 	AS:SkinBackdropFrame(NowPlayingTextFrame)
-	S:HandleScrollBar(SoundtrackFrameTrackScrollFrameScrollBar)
-	S:HandleScrollBar(SoundtrackFrameAssignedTracksScrollFrameScrollBar)
-	S:HandleScrollBar(SoundtrackFrameEventScrollFrameScrollBar)
-	S:HandleDropDownBox(SoundtrackFrame_ColumnHeaderNameDropDown)
-	S:HandleDropDownBox(SoundtrackFrame_PlaybackButtonsLocationDropDown)
-	S:HandleDropDownBox(SoundtrackFrame_BattleCooldownDropDown)
-	S:HandleDropDownBox(SoundtrackFrame_LowHealthPercentDropDown)
-	S:HandleDropDownBox(SoundtrackFrame_SilenceDropDown)
-	S:HandleDropDownBox(SoundtrackFrame_ProjectDropDown)
+	AS:SkinScrollBar(SoundtrackFrameTrackScrollFrameScrollBar)
+	AS:SkinScrollBar(SoundtrackFrameAssignedTracksScrollFrameScrollBar)
+	AS:SkinScrollBar(SoundtrackFrameEventScrollFrameScrollBar)
+	AS:SkinDropDownBox(SoundtrackFrame_ColumnHeaderNameDropDown)
+	AS:SkinDropDownBox(SoundtrackFrame_PlaybackButtonsLocationDropDown)
+	AS:SkinDropDownBox(SoundtrackFrame_BattleCooldownDropDown)
+	AS:SkinDropDownBox(SoundtrackFrame_LowHealthPercentDropDown)
+	AS:SkinDropDownBox(SoundtrackFrame_SilenceDropDown)
+	AS:SkinDropDownBox(SoundtrackFrame_ProjectDropDown)
 	AS:SkinBackdropFrame(SoundtrackControlFrame)
 	AS:SkinStatusBar(SoundtrackControlFrame_StatusBarTrack)
 	SoundtrackControlFrame_StatusBarTrackBorder:Kill()
 	AS:SkinStatusBar(SoundtrackControlFrame_StatusBarEvent)
 	SoundtrackControlFrame_StatusBarEventBorder:Kill()
-	S:HandleEditBox(SoundtrackReportFrame_WhisperEditBox)
-	S:HandleEditBox(SoundtrackReportFrame_ChannelEditBox)
+	AS:SkinEditBox(SoundtrackReportFrame_WhisperEditBox)
+	AS:SkinEditBox(SoundtrackReportFrame_ChannelEditBox)
 	
-	SoundtrackTooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
+	AS:SkinTooltip(SoundtrackTooltip)
 	NowPlayingTextFrame:Show()
 	NowPlayingTextFrame:Hide()
 	NowPlayingTextFrame:Size(200, 40)

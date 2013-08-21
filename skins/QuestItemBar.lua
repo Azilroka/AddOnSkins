@@ -1,12 +1,10 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "QuestItemBarSkin"
 function AS:SkinQuestItemBar()
 	hooksecurefunc(QuestItemBar,"LibQuestItem_Update", function()
 		for i = 1, 99 do
-			if _G["QuestItemBarButton"..i] then AS:SkinIconButton(_G["QuestItemBarButton"..i], true, true, true) end
+			if _G["QuestItemBarButton"..i] then AS:SkinIconButton(_G["QuestItemBarButton"..i], true) end
 		end
 		QuestItemBar:UpdateBar()
 	end)

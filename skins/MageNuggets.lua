@@ -1,10 +1,8 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "MageNuggetsSkin"
 function AS:SkinMageNuggets()
-	local frames = {
+	local Frames = {
 		"MNSpellSteal_Frame",
 		"MNSpellStealFocus_Frame",
 		"MageNugPolyFrame",
@@ -13,6 +11,7 @@ function AS:SkinMageNuggets()
 		"MageNugImpactProcFrame",
 		"MageNugBFProcFrame",
 		"MageNugProcFrame",
+		"MageNugProcHUFrame",
 		"MageNugSSProcFrame",
 		"MageNugBFProcFrame",
 		"MageNugMoonkin_Frame",
@@ -26,14 +25,17 @@ function AS:SkinMageNuggets()
 		"MageNugLB_Frame",
 		"MageNugSP_Frame",
 		"MNabCast_Frame",
+		"MageNugFrostBomb_Frame",
 	}
 
-	for i = 1, #frames do
-		_G[frames[i]]:SetBackdrop(nil)
-		_G[frames[i]]:CreateBackdrop("Transparent")
+	for _, object in pairs(Frames) do
+		if _G[object] then
+			_G[object]:SetBackdrop(nil)
+			AS:SkinBackdropFrame(_G[object])
+		end
 	end
 
-	local sframes = {
+	local SmallIcons = {
 		"MNcritMass_Frame",
 		"MNcombust_Frame",
 		"MNicyveins_Frame",
@@ -43,61 +45,105 @@ function AS:SkinMageNuggets()
 		"MNmoonFire_Frame",
 		"MNinsectSwarm_Frame",
 		"MNstarSurge_Frame",
-		"MageNugProcHUFrame",
 	}
 
-	for i = 1, #sframes do
-		_G[sframes[i]]:SetBackdrop(nil)
+	for _, object in pairs(SmallIcons) do
+		if _G[object] then
+			_G[object]:SetBackdrop(nil)
+		end
 	end
 
-	MageNugCauterize_Frame_Bar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugMI_Frame_MiBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugManaGem_Frame_Bar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugIgnite_Frame_Bar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugAB_Frame_ABBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugMBProcFrame_ProcBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugProcFrame_ProcBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugPolyFrame_Bar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugImpactProcFrame_ProcBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugBFProcFrame_ProcBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugFoFProcFrame_ProcBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugLB1_Frame_Bar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugLB2_Frame_Bar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugLB3_Frame_Bar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugLB4_Frame_Bar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugProcHUFrame_ProcBar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
- 	MageNugInvokers_Frame_Bar:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-	MageNugMI_Frame_MiBar:CreateBackdrop("Transparent")
-	MageNugCauterize_Frame_Bar:CreateBackdrop("Transparent")
+	local LBF = {
+		"MageNugLB1_Frame",
+		"MageNugLB2_Frame",
+		"MageNugLB3_Frame",
+		"MageNugLB4_Frame",
+	}
 
-	for i=1, MageNugCD_Frame:GetNumChildren() do
-		_G["MageNugCD"..i.."_Frame_Bar"]:SetStatusBarTexture(AS.LSM:Fetch("statusbar",E.private.general.normTex))
-		_G["MageNugCD"..i.."_Frame_Bar"]:CreateBackdrop("Transparent")
-		_G["MageNugCD"..i.."_Frame_Bar"].backdrop:Point("TOPLEFT", 0, 0)
-		_G["MageNugCD"..i.."_Frame_Bar"].backdrop:Point("BOTTOMRIGHT", 0, 0)
- 	end
+	for _, object in pairs(LBF) do
+		if _G[object] then
+			_G[object]:ClearAllPoints()
+			_G[object]:SetBackdrop(nil)
+			_G[object.."_Text"]:SetDrawLayer("OVERLAY", 8)
+			_G[object.."_Text2"]:SetDrawLayer("OVERLAY", 8)
+			_G[object.."_Bar"]:SetStatusBarTexture(AS.NormTex)
+			_G[object.."_Bar"]:CreateBackdrop()
+			_G[object.."_Bar"].backdrop:SetPoint("TOPLEFT", -2, 2)
+			_G[object.."_Bar"].backdrop:SetPoint("BOTTOMRIGHT", 2, -2)
+		end
+	end
 
-	S:HandleButton(MageNugHordeFrameClose)
-	S:HandleButton(MageNugHordeFrameShowOptions)
-	S:HandleButton(MageNugAlliFrameClose)
-	S:HandleButton(MageNugAlliFrameShowOptions)
-
-	MageNugAB_Frame_ABBar:CreateBackdrop("Transparent")
+	MageNugLB1_Frame:SetPoint("BOTTOMLEFT", MageNugLB_Frame, "BOTTOMRIGHT", 6, -1)
+	MageNugLB2_Frame:SetPoint("BOTTOM", MageNugLB1_Frame, "TOP", 0, 4)
+	MageNugLB3_Frame:SetPoint("BOTTOM", MageNugLB2_Frame, "TOP", 0, 4)
+	MageNugLB4_Frame:SetPoint("BOTTOM", MageNugLB3_Frame, "TOP", 0, 4)
+	AS:SkinStatusBar(MageNugCauterize_Frame_Bar)
+	AS:SkinStatusBar(MageNugMI_Frame_MiBar)
+	AS:SkinStatusBar(MageNugInvokers_Frame_Bar)
+	AS:SkinStatusBar(MageNugManaGem_Frame_Bar)
+	AS:SkinStatusBar(MageNugIgnite_Frame_Bar)
+	AS:SkinStatusBar(MageNugAB_Frame_ABBar)
+	AS:SkinStatusBar(MageNugClearcast_Frame_Bar)
+	MageNugMBProcFrame_ProcBar:SetStatusBarTexture(AS.NormTex)
+	MageNugProcFrame_ProcBar:SetStatusBarTexture(AS.NormTex)
+	MageNugProcHUFrame_ProcBar:SetStatusBarTexture(AS.NormTex)
+	MageNugPolyFrame_Bar:SetStatusBarTexture(AS.NormTex)
+	MageNugImpactProcFrame_ProcBar:SetStatusBarTexture(AS.NormTex)
+	MageNugBFProcFrame_ProcBar:SetStatusBarTexture(AS.NormTex)
+	MageNugFoFProcFrame_ProcBar:SetStatusBarTexture(AS.NormTex)
+	MageNugMI_FrameTexture1BG = CreateFrame("Frame", nil, MageNugMI_Frame)
+	MageNugMI_FrameTexture1BG:CreateBackdrop()
+	MageNugMI_FrameTexture1BG.backdrop:SetOutside(MageNugMI_FrameTexture1)
+	MageNugMI_FrameTexture1:SetDrawLayer("OVERLAY")
+	AS:SkinTexture(MageNugMI_FrameTexture1)
+	MageNugMI_Frame_MiBar:SetPoint("LEFT", MageNugMI_FrameTexture1, "LEFT", 20, 0)
+	MageNugCauterize_FrameTexture1BG = CreateFrame("Frame", nil, MageNugCauterize_Frame)
+	MageNugCauterize_FrameTexture1BG:CreateBackdrop()
+	MageNugCauterize_FrameTexture1BG.backdrop:SetOutside(MageNugCauterize_FrameTexture1)
+	MageNugCauterize_FrameTexture1:SetDrawLayer("OVERLAY")
+	AS:SkinTexture(MageNugCauterize_FrameTexture1)
+	MageNugCauterize_Frame_Bar:SetPoint("LEFT", MageNugCauterize_FrameTexture1, "LEFT", 20, 0)
+	MageNugInvokers_FrameTexture1BG = CreateFrame("Frame", nil, MageNugInvokers_Frame)
+	MageNugInvokers_FrameTexture1BG:CreateBackdrop()
+	MageNugInvokers_FrameTexture1BG.backdrop:SetOutside(MageNugInvokers_FrameTexture1)
+	MageNugInvokers_FrameTexture1:SetDrawLayer("OVERLAY")
+	AS:SkinTexture(MageNugInvokers_FrameTexture1)
+	MageNugInvokers_Frame_Bar:SetPoint("LEFT", MageNugInvokers_FrameTexture1, "LEFT", 20, 0)
+	AS:SkinTexture(MageNugAB_FrameTexture)
+	AS:SkinTexture(MageNugLB_FrameTexture)
+	AS:SkinTexture(MageNugIgnite_FrameTexture)
+	AS:SkinTexture(MageNugManaGem_FrameTexture)
+	AS:SkinTexture(MageNugClearcast_FrameTexture)
+	MageNugManaGem_Frame_Text2:ClearAllPoints()
+	MageNugManaGem_Frame_Text2:SetPoint("CENTER", MageNugManaGem_Frame_Bar, "CENTER", 0, 0)
+	MageNugIgnite_FrameText2:ClearAllPoints()
+	MageNugIgnite_FrameText2:SetPoint("CENTER", MageNugIgnite_Frame_Bar, "CENTER", 0, 0)
+	MageNugIgnite_FrameText2:SetFont("Fonts\\FRIZQT__.TTF", 8)
+	MageNugClearcast_FrameText2:ClearAllPoints()
+	MageNugClearcast_FrameText2:SetPoint("CENTER", MageNugClearcast_Frame_Bar, "CENTER", 0, 0)
+	MageNugClearcast_FrameText2:SetFont("Fonts\\FRIZQT__.TTF", 8)
+	MageNugAB_FrameText2:ClearAllPoints()
+	MageNugAB_FrameText2:SetPoint("CENTER", MageNugAB_Frame_ABBar, "CENTER", 0, 0)
+	MageNugAB_FrameText2:SetFont("Fonts\\FRIZQT__.TTF", 8)
+	AS:SkinButton(MageNugHordeFrameClose)
+	AS:SkinButton(MageNugHordeFrameShowOptions)
+	AS:SkinButton(MageNugAlliFrameClose)
+	AS:SkinButton(MageNugAlliFrameShowOptions)
 	MageNugAB_Frame_ABBar:ClearAllPoints()
-	MageNugAB_Frame_ABBar:Point("TOPLEFT", MageNugAB_Frame, "TOPLEFT", 1, -42)
-	MageNugIgnite_Frame_Bar:CreateBackdrop("Transparent")
+	MageNugAB_Frame_ABBar:SetWidth(MageNugAB_Frame:GetWidth())
+	MageNugAB_Frame_ABBar:Point("TOP", MageNugAB_Frame, "BOTTOM", 0, -6)
 	MageNugIgnite_Frame_Bar:ClearAllPoints()
-	MageNugIgnite_Frame_Bar:Point("TOPLEFT", MageNugIgnite_Frame, "TOPLEFT", 1, -42)
-	MageNugManaGem_Frame_Bar:CreateBackdrop("Transparent")
+	MageNugIgnite_Frame_Bar:SetWidth(MageNugIgnite_Frame:GetWidth())
+	MageNugIgnite_Frame_Bar:Point("TOP", MageNugIgnite_Frame, "BOTTOM", 0, -6)
 	MageNugManaGem_Frame_Bar:ClearAllPoints()
-	MageNugManaGem_Frame_Bar:Point("TOPLEFT", MageNugManaGem_Frame, "TOPLEFT", 1, -42)
-	MageNugClearcast_Frame_Bar:CreateBackdrop("Transparent")
+	MageNugManaGem_Frame_Bar:SetWidth(MageNugManaGem_Frame:GetWidth())
+	MageNugManaGem_Frame_Bar:Point("TOP", MageNugManaGem_Frame, "BOTTOM", 0, -6)
 	MageNugClearcast_Frame_Bar:ClearAllPoints()
-	MageNugClearcast_Frame_Bar:Point("TOPLEFT", MageNugClearcast_Frame, "TOPLEFT", 1, -42)
-	MNabCast_Frame:Point("TOPLEFT", MageNugAB_Frame, "TOPLEFT", 0, 18)
-	
-	
-	--stupid ass amount of check boxes
+	MageNugClearcast_Frame_Bar:SetWidth(MageNugClearcast_Frame:GetWidth())
+	MageNugClearcast_Frame_Bar:Point("TOP", MageNugClearcast_Frame, "BOTTOM", 0, -6)
+	MNabCast_Frame:ClearAllPoints()
+	MNabCast_Frame:Point("BOTTOM", MageNugAB_Frame, "TOP", 0, 6)
+
 	local checkbuttons = {
 		MageNugOptionsFrame_CheckButtonCC,
 		MageNugOptionsFrame_CheckButton6,
@@ -169,12 +215,11 @@ function AS:SkinMageNuggets()
 		MageNugCooldownFrame_treantButton,
 		MageNugCooldownFrame_miButton,
 	}
-		
+
 	for _,b in pairs(checkbuttons) do
-		S:HandleCheckBox(b)
+		AS:SkinCheckBox(b)
 	end
-	
-	-- Slider frames
+
 	local sliders = {
 		MageNugOptionsFrame_Slider5,
 		MageNugOptionsFrame_InvokersSlider,
@@ -189,12 +234,11 @@ function AS:SkinMageNuggets()
 		MageNugMoonkinOptionFrame_Slider1,
 		MageNugCooldownFrame_Slider1,
 	}
-	
+
 	for _,s in pairs(sliders) do
-		S:HandleSliderFrame(s)
+		AS:SkinSlideBar(s, 8, true)
 	end
-	
-	-- Edit Boxes
+
 	local editbox = {
 		SlowFallMsgEditBox,
 		SlowFallMsgEditBox2,
@@ -223,18 +267,16 @@ function AS:SkinMageNuggets()
 		MageNugMoonkinOptionFrame_SoundEditBox,
 		MageNugMoonkinOptionFrame_InnervateEditBox,
 	}
-	
+
 	for _,f in pairs(editbox) do
-		S:HandleEditBox(f)
-		f:SetHeight(15)
+		AS:SkinEditBox(f, false, 15)
 	end
 	
-	-- Buttons
-	S:HandleButton(MageNugStatMonOptionFrameBlackBackdropButton)
-	S:HandleButton(MageNugMoonkinOptionFrame_Button)
-	S:HandleButton(MageNugOption2FrameButton1)
-	S:HandleButton(MageNugOption2FrameButton2)
-	S:HandleButton(MageNugOption2FrameButton3)
+	AS:SkinButton(MageNugStatMonOptionFrameBlackBackdropButton)
+	AS:SkinButton(MageNugMoonkinOptionFrame_Button)
+	AS:SkinButton(MageNugOption2FrameButton1)
+	AS:SkinButton(MageNugOption2FrameButton2)
+	AS:SkinButton(MageNugOption2FrameButton3)
 end
 
 AS:RegisterSkin(name, AS.SkinMageNuggets)

@@ -1,34 +1,27 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "GupPetSkin"
-function AS:SkinGupPet(event)
-	if IsAddOnLoaded("GupPet_ButtonFacade") then DisableAddOn("GupPet_ButtonFacade") print("Incompatable AddOn Detected: GupPet ButtonFacade - Disabling. Please Reload.") return end
+function AS:SkinGupPet()
 	AS:SkinFrame(GupPet_InterfaceOptionsFrame)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameOptions)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameMountsCompanions)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameHelp)
-
-	S:HandleButton(GupPet_IngameFrameTemplateMoveBottomRight)
-	S:HandleButton(GupPet_IngameFrameTemplateMoveTopRight)
-	S:HandleButton(GupPet_IngameFrameTemplateMoveBottomLeft)
-	S:HandleButton(GupPet_IngameFrameTemplateMoveTopLeft)
-
-	AS:SkinIconButton(GupPet_IngameFrameTemplateAuto, true, true)
-	AS:SkinIconButton(GupPet_IngameFrameTemplateCompanion, true, true)
-	
-	S:HandleTab(GupPet_InterfaceOptionsFrameTab1)
-	S:HandleTab(GupPet_InterfaceOptionsFrameTab2)
-	S:HandleTab(GupPet_InterfaceOptionsFrameTab3)
-	S:HandleTab(GupPet_InterfaceOptionsFrameTab4)
-
-	S:HandleTab(GupPet_InterfaceOptionsFrameMountsCompanionsLocationsTabAdd)
-	S:HandleTab(GupPet_InterfaceOptionsFrameMountsCompanionsLocationsTabRemove)
-	S:HandleTab(GupPet_InterfaceOptionsFrameMountsCompanionsMainTabAquatic)
-	S:HandleTab(GupPet_InterfaceOptionsFrameMountsCompanionsMainTabGround)
-	S:HandleTab(GupPet_InterfaceOptionsFrameMountsCompanionsMainTabFly)
-	S:HandleTab(GupPet_InterfaceOptionsFrameMountsCompanionsMainTabCompanion)
+	AS:SkinButton(GupPet_IngameFrameTemplateMoveBottomRight)
+	AS:SkinButton(GupPet_IngameFrameTemplateMoveTopRight)
+	AS:SkinButton(GupPet_IngameFrameTemplateMoveBottomLeft)
+	AS:SkinButton(GupPet_IngameFrameTemplateMoveTopLeft)
+	AS:SkinIconButton(GupPet_IngameFrameTemplateAuto)
+	AS:SkinIconButton(GupPet_IngameFrameTemplateCompanion)
+	AS:SkinTab(GupPet_InterfaceOptionsFrameTab1)
+	AS:SkinTab(GupPet_InterfaceOptionsFrameTab2)
+	AS:SkinTab(GupPet_InterfaceOptionsFrameTab3)
+	AS:SkinTab(GupPet_InterfaceOptionsFrameTab4)
+	AS:SkinTab(GupPet_InterfaceOptionsFrameMountsCompanionsLocationsTabAdd)
+	AS:SkinTab(GupPet_InterfaceOptionsFrameMountsCompanionsLocationsTabRemove)
+	AS:SkinTab(GupPet_InterfaceOptionsFrameMountsCompanionsMainTabAquatic)
+	AS:SkinTab(GupPet_InterfaceOptionsFrameMountsCompanionsMainTabGround)
+	AS:SkinTab(GupPet_InterfaceOptionsFrameMountsCompanionsMainTabFly)
+	AS:SkinTab(GupPet_InterfaceOptionsFrameMountsCompanionsMainTabCompanion)
 end
 
 AS:RegisterSkin(name, AS.SkinGupPet)

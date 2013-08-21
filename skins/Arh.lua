@@ -1,11 +1,9 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = 'ArhSkin'
-function AS:SkinArh(event)
+function AS:SkinArh()
 	AS:SkinFrame(Arh_MainFrame)
-	Arh_Tooltip:HookScript("OnShow", function(self) self:SetTemplate("Transparent") end)
+	AS:SkinTooltip(Arh_Tooltip, true)
 end
 
 AS:RegisterSkin(name, AS.SkinArh)

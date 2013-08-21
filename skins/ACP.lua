@@ -1,7 +1,5 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
-
+local AS = ElvUI[1]:GetModule('AddOnSkins')
+--FIX ME
 local name = "ACPSkin"
 function AS:SkinACP()
 	local function cbResize(self, event, ...)
@@ -29,40 +27,41 @@ function AS:SkinACP()
 			end
 		end
 	end
+
 	AS:SkinFrame(ACP_AddonList)
 	AS:SkinFrame(ACP_AddonList_ScrollFrame)
-	
+
 	local buttons = {
 		"ACP_AddonListSetButton",
-		"ACP_AddonListDisableAll",
+	    "ACP_AddonListDisableAll",
 		"ACP_AddonListEnableAll",
-		"ACP_AddonList_ReloadUI",
+	    "ACP_AddonList_ReloadUI",
 		"ACP_AddonListBottomClose",
 	}
 
 	for _, button in pairs(buttons) do
-		S:HandleButton(_G[button])
+		AS:SkinButton(_G[button])
 	end	
+
 	for i = 1, 20 do
-		S:HandleButton(_G["ACP_AddonListEntry"..i.."LoadNow"])
+		AS:SkinButton(_G["ACP_AddonListEntry"..i.."LoadNow"])
 	end	
 
-	S:HandleCloseButton(ACP_AddonListCloseButton)
+	AS:SkinCloseButton(ACP_AddonListCloseButton)
 
-	for i=1,20,1 do
+	for i = 1, 20, 1 do
 		local ACP_OnLoad = _G["ACP_AddonList"]
 		ACP_OnLoad:SetScript("OnUpdate", cbResize)
 	end
 
 	for i = 1, 20 do
-		S:HandleCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
+		AS:SkinCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
 	end
-	S:HandleCheckBox(ACP_AddonList_NoRecurse)
+	AS:SkinCheckBox(ACP_AddonList_NoRecurse)
 
-	S:HandleScrollBar(ACP_AddonList_ScrollFrameScrollBar)
-	S:HandleDropDownBox(ACP_AddonListSortDropDown)
+	AS:SkinScrollBar(ACP_AddonList_ScrollFrameScrollBar)
+	AS:SkinDropDownBox(ACP_AddonListSortDropDown)
 	ACP_AddonListSortDropDown:Width(130)
-
 	ACP_AddonList_ScrollFrame:SetWidth(590)
 	ACP_AddonList_ScrollFrame:SetHeight(412)
 	ACP_AddonList:SetHeight(502)
@@ -79,6 +78,6 @@ function AS:SkinACP()
 	ACP_AddonListBottomClose:Point("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -50, 8)
 	ACP_AddonListBottomClose:SetHeight(25)
 	ACP_AddonList:SetParent(UIParent)
-end
+ end
 
-AS:RegisterSkin(name, AS.SkinACP)
+ AS:RegisterSkin(name, AS.SkinACP)

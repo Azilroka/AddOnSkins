@@ -1,6 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "AnalystSkin"
 function AS:SkinAnalyst()
@@ -9,14 +7,14 @@ function AS:SkinAnalyst()
 	EconomyFrame:SetWidth(364)
 	EconomyFrameTitleFrame:ClearAllPoints()
 	EconomyFrameTitleFrame:SetPoint("TOP", EconomyFrame, "TOP", 0, -5)
-	S:HandleCloseButton(EconomyFrameCloseButton)
+	AS:SkinCloseButton(EconomyFrameCloseButton)
 	AS:SkinFrame(EconomyFrameTopStats)
 	AS:SkinFrame(EconomyFrameLeftStats)
 	AS:SkinFrame(EconomyFrameRightStats)
-	S:HandleDropDownBox(EconomyFramePeriodDropDown)
-	S:HandleDropDownBox(EconomyFrameLeftStatsReportDropDown)
-	S:HandleDropDownBox(EconomyFrameRightStatsReportDropDown)
-	S:HandleCheckBox(EconomyFrameAllCharacters)
+	AS:SkinDropDownBox(EconomyFramePeriodDropDown)
+	AS:SkinDropDownBox(EconomyFrameLeftStatsReportDropDown)
+	AS:SkinDropDownBox(EconomyFrameRightStatsReportDropDown)
+	AS:SkinCheckBox(EconomyFrameAllCharacters)
 end
 
 AS:RegisterSkin(name, AS.SkinAnalyst)

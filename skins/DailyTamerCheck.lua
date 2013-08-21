@@ -1,12 +1,9 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
-local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
-local name = 'DailyTamerCheckSkin'
-local _tamerquestcheck
-function AS:SkinDailyTamerCheck(event)
-	-- Stupid hacks we need because of stupid addons :p
+local name = "DailyTamerCheckSkin"
+function AS:SkinDailyTamerCheck()
+	local ldb = LibStub:GetLibrary("LibDataBroker-1.1")
+	local _tamerquestcheck
 	if not _tamerquestcheck then
 		_tamerquestcheck = SlashCmdList["DAILYTAMERCHECK"]
 		SlashCmdList["DAILYTAMERCHECK"] = function()
@@ -14,7 +11,7 @@ function AS:SkinDailyTamerCheck(event)
 			AS:SkinFrame(DailyTamerCheck_mainframe)
 		end
 		local DTC = ldb:GetDataObjectByName("DailyTamerCheck")
-		DTC.OnClick = function(self,button)
+		DTC.OnClick = function(frame, button)
 			_tamerquestcheck()
 			AS:SkinFrame(DailyTamerCheck_mainframe)
 		end

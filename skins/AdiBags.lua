@@ -1,34 +1,31 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
-local name = 'AdiBagsSkin'
+local name = "AdiBagsSkin"
 function AS:SkinAdiBags(event)
+
 	local function SkinFrame(frame)
 		local region = frame.HeaderRightRegion
-		frame:StripTextures()
-		frame:SetTemplate('Transparent')
-		_G[frame:GetName()..'Bags']:StripTextures()
-		_G[frame:GetName()..'Bags']:SetTemplate('Transparent')
-		S:HandleCloseButton(frame.CloseButton)
+		AS:SkinFrame(frame)
+		AS:SkinFrame(_G[frame:GetName()..'Bags'], "Default", true)
+		AS:SkinCloseButton(frame.CloseButton)
 		for i = 1, 3 do
-			S:HandleButton(region.widgets[i].widget, true)
+			AS:SkinButton(region.widgets[i].widget, true)
 		end
 	end
-	E:Delay(0, function()
-		if event == 'PLAYER_ENTERING_WORLD' then
-			if not AdiBagsContainer1 then ToggleBackpack() ToggleBackpack() end
-			if AdiBagsContainer1 then
-				SkinFrame(AdiBagsContainer1)
-				S:HandleEditBox(AdiBagsContainer1SearchBox)
-				AdiBagsContainer1SearchBox:Point("TOPRIGHT", AdiBagsSimpleLayeredRegion2, "TOPRIGHT", -75, -1)
-			end
+
+	if event == "PLAYER_ENTERING_WORLD" then
+		if not AdiBagsContainer1 then ToggleBackpack() ToggleBackpack() end
+		if AdiBagsContainer1 then
+			SkinFrame(AdiBagsContainer1)
+			AS:SkinEditBox(AdiBagsContainer1SearchBox)
+			AdiBagsContainer1SearchBox:Point("TOPRIGHT", AdiBagsSimpleLayeredRegion2, "TOPRIGHT", -75, -1)
 		end
-	end)
-	if event == 'BANKFRAME_OPENED' then
-		E:Delay(0, function()
-			SkinFrame(AdiBagsContainer2)
-			AS:UnregisterEvent(name, event)
+	elseif event == "BANKFRAME_OPENED" then
+		AS.Delay(2, function()
+			if AdiBagsContainer2 then
+				SkinFrame(AdiBagsContainer2)
+				AS:UnregisterEvent(name, event)
+			end
 		end)
 	end
 end

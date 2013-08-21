@@ -1,6 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "CoolLineSkin"
 function AS:SkinCoolLine()
@@ -10,6 +8,7 @@ function AS:SkinCoolLine()
 	AS:SkinBackdropFrame(CoolLine)
 	CoolLine.backdrop:SetAllPoints(CoolLine)
 	CoolLine.backdrop:CreateShadow()
+	AS:RegisterForPetBattleHide(CoolLine)
 
 	if AS:CheckOption("EmbedCoolLine") then
 		if not CoolLineDB.vertical then

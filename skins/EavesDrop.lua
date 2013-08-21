@@ -1,18 +1,15 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "EavesDropSkin"
 function AS:SkinEavesDrop()
 	AS:SkinFrame(EavesDropFrame)
 	AS:SkinFrame(EavesDropHistoryFrame)
-	S:HandleTab(EavesDropTab)
+	AS:SkinTab(EavesDropTab)
 	EavesDropTab.backdrop:Point("TOPLEFT", 0, -5)
 	EavesDropTab.backdrop:Point("BOTTOMRIGHT", 0, 2)
 	EavesDropTabText:ClearAllPoints()
 	EavesDropTabText:SetPoint("CENTER", EavesDropTab, "CENTER", 0, -2)
-	S:HandleButton(EavesDropHistoryFrameReset)
-	S:HandleCloseButton(EavesDropHistoryFrameClose)
+	AS:SkinButton(EavesDropHistoryFrameReset)
+	AS:SkinCloseButton(EavesDropHistoryFrameClose)
 end
-
 AS:RegisterSkin(name, AS.SkinEavesDrop)

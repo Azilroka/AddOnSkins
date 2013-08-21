@@ -1,6 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "MasterLootManagerRemixSkin"
 function AS:SkinMasterLootManagerRemix()
@@ -11,7 +9,7 @@ function AS:SkinMasterLootManagerRemix()
 		"MasterLootLoggerAddEditFrame",
 	}
 
-	local SetTemplateD = {
+	local SetTemplateD = { 
 		"MasterLootLoggerFrameContentColumnHeader1",
 		"MasterLootLoggerFrameContentColumnHeader2",
 		"MasterLootLoggerFrameContentColumnHeader3",
@@ -63,24 +61,21 @@ function AS:SkinMasterLootManagerRemix()
 	end	
 
 	for _, object in pairs(SetTemplateD) do
-		_G[object]:SetTemplate("Default")
+		AS:SkinFrame(_G[object],"Default",true)
 	end	
 
 	for _, object in pairs(SetTemplateT) do
-		_G[object]:SetTemplate("Transparent")
+		AS:SkinFrame(_G[object], false, true)
 	end	
 
-	-- Skin Buttons
 	for _, button in pairs(buttons) do
-		if _G[button] then S:HandleButton(_G[button]) end
+		AS:SkinButton(_G[button])
 	end	
 
-	-- Skin CheckBoxes
 	for _, button in pairs(checkboxes) do
-		if _G[button] then S:HandleButton(_G[button]) end
+		AS:SkinCheckBox(_G[button])
 	end	
 
-	-- Move this
 	MasterLootManagerMain_AssignDE:Point("TOPLEFT",  MasterLootManagerMain_SelectDE, "TOPRIGHT", 10, -2)
 	MasterLootManagerMain_AssignBank:Point("TOPLEFT",  MasterLootManagerMain_SelectBank, "TOPRIGHT", 10, -2)
 	MasterLootManagerMain_ScrollFrame:Point("TOPLEFT", MasterLootManagerMain, "TOPLEFT", 10, -105)
@@ -110,13 +105,13 @@ function AS:SkinMasterLootManagerRemix()
 	MasterLootLoggerAddEditFrameHour:SetWidth(25)
 	MasterLootLoggerAddEditFrameMinute:SetJustifyH("CENTER")
 	MasterLootLoggerAddEditFrameMinute:SetWidth(25)
-	S:HandleDropDownBox(MasterLootManagerMain_SelectDE, 150)
-	S:HandleDropDownBox(MasterLootManagerMain_SelectBank, 150)
-	S:HandleDropDownBox(MasterLootLoggerAddEditFrameType, 150)
-	S:HandleScrollBar(MasterLootManagerMain_ScrollFrame_Slider, 5)
-	S:HandleScrollBar(MasterLootLoggerFrameContentScrollFrameScrollBar)
-	S:HandleCloseButton(MasterLootLoggerFrameCloseButton)
-	S:HandleCloseButton(MasterLootLoggerAddEditFrameCloseButton)
+	AS:SkinDropDownBox(MasterLootManagerMain_SelectDE, 150)
+	AS:SkinDropDownBox(MasterLootManagerMain_SelectBank, 150)
+	AS:SkinDropDownBox(MasterLootLoggerAddEditFrameType, 150)
+	AS:SkinScrollBar(MasterLootManagerMain_ScrollFrame_Slider, 5)
+	AS:SkinScrollBar(MasterLootLoggerFrameContentScrollFrameScrollBar)
+	AS:SkinCloseButton(MasterLootLoggerFrameCloseButton)
+	AS:SkinCloseButton(MasterLootLoggerAddEditFrameCloseButton)
 end
 
 AS:RegisterSkin(name, AS.SkinMasterLootManagerRemix)

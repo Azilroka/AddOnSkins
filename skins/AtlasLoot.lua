@@ -1,6 +1,4 @@
-﻿local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = 'AtlasLootSkin'
 function AS:SkinAtlasLoot()
@@ -59,7 +57,7 @@ function AS:SkinAtlasLoot()
 		AS:Desaturate(AtlasLootDefaultFrame_LockButton)
 	end
 
-	local function Nine_IsThere(Self, event, ...)
+	local function Nine_IsThere(self, event, ...)
 		for i = 1, 9 do 
 			local f = _G["AtlasLootCompareFrameSortButton_"..i]
 			f:SetWidth(44.44)
@@ -126,7 +124,7 @@ function AS:SkinAtlasLoot()
 		"AtlasLootPanel",
 		"AtlasLootCompareFrame",
 	}	
-
+	
 	local buttons = {
 		"AtlasLoot_AtlasInfoFrame_ToggleALButton",
 		"AtlasLootPanelSearch_SearchButton",
@@ -146,79 +144,75 @@ function AS:SkinAtlasLoot()
 	end
 
 	for _, object in pairs(SetTemplateD) do
-		AS:SkinFrame(_G[object],"Default")
+		AS:SkinFrame(_G[object], "Default")
 	end
 
 	for _, object in pairs(SetTemplateT) do
 		AS:SkinFrame(_G[object])
-	end	
+	end
 
 	for _, button in pairs(buttons) do
-		S:HandleButton(_G[button])
-	end	
+		AS:SkinButton(_G[button])
+	end
 
-	if AtlasLoot_PanelButton_1 then S:HandleButton(AtlasLoot_PanelButton_1) end
-	if AtlasLoot_PanelButton_2 then S:HandleButton(AtlasLoot_PanelButton_2) end
-	if AtlasLoot_PanelButton_3 then S:HandleButton(AtlasLoot_PanelButton_3) end
-	if AtlasLoot_PanelButton_4 then S:HandleButton(AtlasLoot_PanelButton_4) end
-	if AtlasLoot_PanelButton_5 then S:HandleButton(AtlasLoot_PanelButton_5) end
-	if AtlasLoot_PanelButton_6 then S:HandleButton(AtlasLoot_PanelButton_6) end
-	if AtlasLoot_PanelButton_7 then S:HandleButton(AtlasLoot_PanelButton_7) end
-	if AtlasLoot_PanelButton_8 then S:HandleButton(AtlasLoot_PanelButton_8) end
-	if AtlasLoot_PanelButton_9 then S:HandleButton(AtlasLoot_PanelButton_9) end
-	if AtlasLoot_PanelButton_10 then S:HandleButton(AtlasLoot_PanelButton_10) end
-	if AtlasLoot_PanelButton_11 then S:HandleButton(AtlasLoot_PanelButton_11) end
-	if AtlasLoot_PanelButton_12 then S:HandleButton(AtlasLoot_PanelButton_12) end
+	if AtlasLoot_PanelButton_1 then AS:SkinButton(AtlasLoot_PanelButton_1) end
+	if AtlasLoot_PanelButton_2 then AS:SkinButton(AtlasLoot_PanelButton_2) end
+	if AtlasLoot_PanelButton_3 then AS:SkinButton(AtlasLoot_PanelButton_3) end
+	if AtlasLoot_PanelButton_4 then AS:SkinButton(AtlasLoot_PanelButton_4) end
+	if AtlasLoot_PanelButton_5 then AS:SkinButton(AtlasLoot_PanelButton_5) end
+	if AtlasLoot_PanelButton_6 then AS:SkinButton(AtlasLoot_PanelButton_6) end
+	if AtlasLoot_PanelButton_7 then AS:SkinButton(AtlasLoot_PanelButton_7) end
+	if AtlasLoot_PanelButton_8 then AS:SkinButton(AtlasLoot_PanelButton_8) end
+	if AtlasLoot_PanelButton_9 then AS:SkinButton(AtlasLoot_PanelButton_9) end
+	if AtlasLoot_PanelButton_10 then AS:SkinButton(AtlasLoot_PanelButton_10) end
+	if AtlasLoot_PanelButton_11 then AS:SkinButton(AtlasLoot_PanelButton_11) end
+	if AtlasLoot_PanelButton_12 then AS:SkinButton(AtlasLoot_PanelButton_12) end
 
 	for i = 1, 15 do
 		local f = _G["AtlasLootCompareFrameMainFilterButton"..i]
 		f:StripTextures()
 	end
 
-	S:HandleCloseButton(AtlasLootDefaultFrame_CloseButton)
-	S:HandleCloseButton(AtlasLootCompareFrame_CloseButton)
-	S:HandleCloseButton(AtlasLootCompareFrame_CloseButton_Wishlist)
-
+	AS:SkinCloseButton(AtlasLootDefaultFrame_CloseButton)
+	AS:SkinCloseButton(AtlasLootCompareFrame_CloseButton)
+	AS:SkinCloseButton(AtlasLootCompareFrame_CloseButton_Wishlist)
 	AS:Desaturate(AtlasLootDefaultFrame_LockButton)
-	
-	S:HandleNextPrevButton(AtlasLootQuickLooksButton)
-	S:HandleNextPrevButton(AtlasLootItemsFrame_NEXT)
+	AS:SkinNextPrevButton(AtlasLootQuickLooksButton)
+	AS:SkinNextPrevButton(AtlasLootItemsFrame_NEXT)
 	AtlasLootItemsFrame_NEXT:SetWidth(25)
 	AtlasLootItemsFrame_NEXT:SetHeight(25)
-	S:HandleNextPrevButton(AtlasLootItemsFrame_PREV)
+	AS:SkinNextPrevButton(AtlasLootItemsFrame_PREV)
 	AtlasLootItemsFrame_PREV:SetWidth(25)
 	AtlasLootItemsFrame_PREV:SetHeight(25)
-	S:HandleNextPrevButton(AtlasLootPanelSearch_SelectModuel)	
-	S:HandleNextPrevButton(AtlasLootCompareFrameSearch_SelectModuel)		
-
-	S:HandleDropDownBox(AtlasLootDefaultFrame_ModuleSelect)
+	AS:SkinNextPrevButton(AtlasLootPanelSearch_SelectModuel)	
+	AS:SkinNextPrevButton(AtlasLootCompareFrameSearch_SelectModuel)		
+	AS:SkinDropDownBox(AtlasLootDefaultFrame_ModuleSelect)
 	AtlasLootDefaultFrame_ModuleSelect:SetWidth(240)
 	AtlasLootDefaultFrame_ModuleSelect:SetPoint("TOPLEFT", AtlasLootDefaultFrame, "TOPLEFT", 50, -50)
-	S:HandleDropDownBox(AtlasLootDefaultFrame_InstanceSelect)
+	AS:SkinDropDownBox(AtlasLootDefaultFrame_InstanceSelect)
 	AtlasLootDefaultFrame_InstanceSelect:SetWidth(240)
-	S:HandleDropDownBox(AtlasLootCompareFrameSearch_StatsListDropDown)
+	AS:SkinDropDownBox(AtlasLootCompareFrameSearch_StatsListDropDown)
 	AtlasLootCompareFrameSearch_StatsListDropDown:SetWidth(240)
-	S:HandleDropDownBox(AtlasLootCompareFrame_WishlistDropDown)
+	AS:SkinDropDownBox(AtlasLootCompareFrame_WishlistDropDown)
 	AtlasLootCompareFrame_WishlistDropDown:SetWidth(240)
+	AS:SkinEditBox(AtlasLootPanelSearch_Box)
+	AS:SkinEditBox(AtlasLootCompareFrameSearch_Box)
 
-	S:HandleEditBox(AtlasLootPanelSearch_Box)
-	S:HandleEditBox(AtlasLootCompareFrameSearch_Box)
+	if AtlasLootFilterCheck then AS:SkinCheckBox(AtlasLootFilterCheck) end
+	if AtlasLootItemsFrame_Heroic then AS:SkinCheckBox(AtlasLootItemsFrame_Heroic) end
+	if AtlasLootCompareFrameSearch_FilterCheck then AS:SkinCheckBox(AtlasLootCompareFrameSearch_FilterCheck) end
+	if AtlasLootItemsFrame_RaidFinder then AS:SkinCheckBox(AtlasLootItemsFrame_RaidFinder) end
+	if AtlasLootItemsFrame_Thunderforged then AS:SkinCheckBox(AtlasLootItemsFrame_Thunderforged) end
 
-	if AtlasLootFilterCheck then S:HandleCheckBox(AtlasLootFilterCheck) end
-	if AtlasLootItemsFrame_Heroic then S:HandleCheckBox(AtlasLootItemsFrame_Heroic) end
-	if AtlasLootCompareFrameSearch_FilterCheck then S:HandleCheckBox(AtlasLootCompareFrameSearch_FilterCheck) end
-	if AtlasLootItemsFrame_RaidFinder then S:HandleCheckBox(AtlasLootItemsFrame_RaidFinder) end
-	if AtlasLootItemsFrame_Thunderforged then S:HandleCheckBox(AtlasLootItemsFrame_Thunderforged) end
+	AtlasLootPanel.Titel:SetTextColor(23/255, 132/255, 209/255)
+	AtlasLootPanel.Titel:SetPoint("BOTTOM", AtlasLootPanel.TitelBg, "BOTTOM", 0, 40)
 
-	local Frame = AtlasLootPanel
-	Frame.Titel:SetTextColor(23/255, 132/255, 209/255)
-	Frame.Titel:SetPoint("BOTTOM", Frame.TitelBg, "BOTTOM", 0, 40)
-
-	S:HandleScrollBar(AtlasLootCompareFrame_ScrollFrameItemFrameScrollBar)
-	S:HandleScrollBar(AtlasLootCompareFrame_WishlistScrollFrameScrollBar)
+	AS:SkinScrollBar(AtlasLootCompareFrame_ScrollFrameItemFrameScrollBar)
+	AS:SkinScrollBar(AtlasLootCompareFrame_WishlistScrollFrameScrollBar)
 	AtlasLootDefaultFrame:HookScript("OnShow", AL_OnShow)
 	AtlasLootCompareFrame:HookScript("OnShow", Compare_OnShow)
 	AtlasLootPanel:HookScript("OnUpdate", function(self) self:SetWidth(AtlasLootDefaultFrame:GetWidth()) end)
+	if AtlasLootTooltip:GetName() ~= "GameTooltip" then AS:SkinTooltip(AtlasLootTooltip) end
 end
 
 AS:RegisterSkin(name, AS.SkinAtlasLoot)

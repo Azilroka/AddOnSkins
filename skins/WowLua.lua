@@ -1,6 +1,4 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "WowLuaSkin"
 function AS:SkinWowLua()
@@ -8,24 +6,24 @@ function AS:SkinWowLua()
 	WowLuaFrameLineNumScrollFrame:StripTextures(True)
 	WowLuaFrameResizeBar:StripTextures(True)
 	WowLuaFrameResizeBar:Height(10)
-	S:HandleCloseButton(WowLuaButton_Close)
+	AS:SkinCloseButton(WowLuaButton_Close)
 	WowLuaButton_Close:Point("TOPRIGHT", WowLuaFrame, "TOPRIGHT", 0 , 0)
-	S:HandleScrollBar(WowLuaFrameEditScrollFrameScrollBar)
+	AS:SkinScrollBar(WowLuaFrameEditScrollFrameScrollBar)
 	WowLuaButton_New:Point("LEFT", WowLuaFrameToolbar, "LEFT", 60, 0)
 
 	WowLuaFrameEditFocusGrabber.bg1 = CreateFrame("Frame", nil, WowLuaFrameEditFocusGrabber)
-	WowLuaFrameEditFocusGrabber.bg1:CreateBackdrop()
+	AS:SkinBackdropFrame(WowLuaFrameEditFocusGrabber.bg1)
 	WowLuaFrameEditFocusGrabber.bg1:Point("TOPLEFT", 0, 0)
 	WowLuaFrameEditFocusGrabber.bg1:Point("BOTTOMRIGHT", 5, -5)
 
 	WowLuaFrameResizeBar.bg1 = CreateFrame("Frame", nil, WowLuaFrameResizeBar)
-	WowLuaFrameResizeBar.bg1:SetTemplate()
+	AS:SkinFrame(WowLuaFrameResizeBar.bg1)
 	WowLuaFrameResizeBar.bg1:Point("TOPLEFT", 6, -2)
 	WowLuaFrameResizeBar.bg1:Point("BOTTOMRIGHT", -27, 0)
 
 	WowLuaFrameCommand:StripTextures()
 	WowLuaFrameCommand.bg1 = CreateFrame("Frame", nil, WowLuaFrameCommand)
-	WowLuaFrameCommand.bg1:CreateBackdrop()
+	AS:SkinBackdropFrame(WowLuaFrameCommand.bg1)
 	WowLuaFrameCommand.bg1:Point("TOPLEFT", 0, -4)
 	WowLuaFrameCommand.bg1:Point("BOTTOMRIGHT", -12, 2)
 end

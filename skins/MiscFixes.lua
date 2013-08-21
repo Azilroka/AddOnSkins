@@ -1,45 +1,47 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
-local name = "AlwaysTrue"
-function AS:SkinMisc(event)
-	if event == "PLAYER_ENTERING_WORLD" then return end
+local name = 'MiscFixes'
+function AS:MiscFixes(event, addon)
 
-	if IsAddOnLoaded("acb_CastBar") then
-		AzCastBarPluginPlayer:StripTextures() AzCastBarPluginPlayer:CreateBackdrop()
-		AzCastBarPluginTarget:StripTextures() AzCastBarPluginTarget:CreateBackdrop()
-		AzCastBarPluginFocus:StripTextures() AzCastBarPluginFocus:CreateBackdrop()
-		AzCastBarPluginMirror:StripTextures() AzCastBarPluginMirror:CreateBackdrop()
-		AzCastBarPluginPet:StripTextures() AzCastBarPluginPet:CreateBackdrop()
+	if addon == 'Blizzard_PetJournal' and IsAddOnLoaded('PetJournalEnhanced') then
+		PetJournal:HookScript('OnShow', function() PJEUniquePetCount:StripTextures() end)
 	end
-	
-	for i = 1, 10 do
-		if _G["StaticPopup"..i] then
-			_G["StaticPopup"..i]:SetTemplate("Transparent")
-			if _G["StaticPopup"..i.."Button1"] then S:HandleButton(_G["StaticPopup"..i.."Button1"]) end
-			if _G["StaticPopup"..i.."Button2"] then S:HandleButton(_G["StaticPopup"..i.."Button2"]) end
-			if _G["StaticPopup"..i.."CloseButton"] then S:HandleCloseButton(_G["StaticPopup"..i.."CloseButton"]) end
-		end
+
+	if IsAddOnLoaded('acb_CastBar') then
+		AS:SkinBackdropFrame(AzCastBarPluginPlayer)
+		AS:SkinBackdropFrame(AzCastBarPluginTarget)
+		AS:SkinBackdropFrame(AzCastBarPluginFocus)
+		AS:SkinBackdropFrame(AzCastBarPluginMirror)
+		AS:SkinBackdropFrame(AzCastBarPluginPet)
 	end
-	
-	if IsAddOnLoaded("PetJournalEnhanced") then PetJournal:HookScript("OnShow", function() PJEUniquePetCount:StripTextures() end) end
-	
-	if IsAddOnLoaded("DoubleWideTradeSkills") then
+
+	if IsAddOnLoaded('DoubleWideTradeSkills') then
 		TradeSkillListScrollFrame:StripTextures()
 		AS:SkinFrame(TradeSkillFrame)
 		AS:SkinStatusBar(TradeSkillRankFrame)
 	end
-	if XPBarNoneXPBar then XPBarNoneXPBar:CreateBackdrop() end
-	--TrainAll
-	if IsAddOnLoaded("Blizzard_TrainerUI") then
-		ClassTrainerFrame:HookScript("OnShow", function()
-			if ClassTrainerTrainAllButton then
-				AS:SkinFrame(ClassTrainerTrainAllButton, 'Default')
-				AS:SkinFrame(ClassTrainerTrainButton, 'Default')
-			end
+
+	if addon == 'Blizzard_TradeSkillUI' and IsAddOnLoaded('Auctionator') then 
+		TradeSkillFrame:HookScript('OnShow', function() AS:SkinButton(Auctionator_Search, true) end)
+	end
+
+	if addon == 'Blizzard_TrainerUI' and IsAddOnLoaded('TrainAll') then
+		ClassTrainerFrame:HookScript('OnShow', function()
+			AS:SkinFrame(ClassTrainerTrainAllButton, 'Default')
+			AS:SkinFrame(ClassTrainerTrainButton, 'Default')
 		end)
+	end
+
+	if XPBarNoneXPBar then XPBarNoneXPBar:CreateBackdrop('Transparent') end
+
+	for i = 1, 10 do
+		if _G['StaticPopup'..i] then
+			_G['StaticPopup'..i]:SetTemplate('Transparent')
+			if _G['StaticPopup'..i..'Button1'] then AS:SkinButton(_G['StaticPopup'..i..'Button1']) end
+			if _G['StaticPopup'..i..'Button2'] then AS:SkinButton(_G['StaticPopup'..i..'Button2']) end
+			if _G['StaticPopup'..i..'CloseButton'] then AS:SkinCloseButton(_G['StaticPopup'..i..'CloseButton']) end
+		end
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinMisc, "ADDON_LOADED")
+AS:RegisterSkin(name, AS.MiscFixes, 'ADDON_LOADED')

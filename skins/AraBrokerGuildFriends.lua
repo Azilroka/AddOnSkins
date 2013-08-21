@@ -1,10 +1,8 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "AraBrokerGuildFriendsSkin"
 function AS:SkinAraBrokerGuildFriends()
-    AraBrokerGuildFriends:HookScript("OnUpdate", function(self) AS:SkinFrame(self) end)
+	AraBrokerGuildFriends:HookScript("OnUpdate", function(f) AS:SkinFrame(f) end)
 end
 
 AS:RegisterSkin(name, AS.SkinAraBrokerGuildFriends)

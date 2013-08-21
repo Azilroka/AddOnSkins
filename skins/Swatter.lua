@@ -1,15 +1,15 @@
-local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:GetModule('AddOnSkins')
-local S = E:GetModule('Skins')
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "SwatterSkin"
 function AS:SkinSwatter()
-	AS:SkinFrame(SwatterErrorFrame)
-	S:HandleButton(Swatter.Error.Done)
-	S:HandleButton(Swatter.Error.Next)
-	S:HandleButton(Swatter.Error.Prev)
-	S:HandleButton(Swatter.Drag)
-	S:HandleScrollBar(SwatterErrorInputScrollScrollBar)
+	if SwatterErrorFrame then
+		AS:SkinFrame(SwatterErrorFrame)
+		AS:SkinButton(Swatter.Error.Done)
+		AS:SkinButton(Swatter.Error.Next)
+		AS:SkinButton(Swatter.Error.Prev)
+		AS:SkinButton(Swatter.Drag)
+		AS:SkinScrollBar(SwatterErrorInputScrollScrollBar)
+	end
 end
 
-AS:RegisterSkin(name, AS.SkinSwatter, '[!BugGrabber]', '[!ImprovedErrorFrame]')
+AS:RegisterSkin(name, AS.SkinSwatter, "[!BugGrabber]", "[!ImprovedErrorFrame]")

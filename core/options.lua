@@ -24,9 +24,6 @@ local Skins = {
 		["buttonText"] = "AtlasLoot",
 		["addon"] = "AtlasLoot_Loader",
 	},
-	["ATSWSkin"] = {
-		["addon"] = "AdvancedTradeSkillWindow",
-	},
 	["AuctioneerSkin"] = {
 		["buttonText"] = "Auctioneer",
 		["addon"] = "Auc-Advanced",
@@ -130,6 +127,7 @@ local LINE_BREAK = "\n"
 
 local DEVELOPERS = {
 	"Affli",
+	"Arstraea",
 	"Azilroka",
 	"Blazeflack",
 	"Cadayron",
@@ -159,219 +157,178 @@ for _, devName in pairs(DEVELOPERS) do
 end
 
 function AS:GenerateOptions()
-	local function pairsByKeys(t, f)
-		local a = {}
-		for n in pairs(t) do tinsert(a, n) end
-			sort(a, f)
-			local i = 0
-			local iter = function()
-				i = i + 1
-				if a[i] == nil then return nil
-				else return a[i], t[a[i]]
-			end
-		end
-		return iter
-    end
-    E.Options.args.skins.args.addonEnable = {
-    	order = 4,
-		type = 'toggle',
-		name = 'AddOns',
-		get = function(info) return E.private.skins.addons.enable end,
-		set = function(info, value) E.private.skins.addons.enable = value; E:StaticPopup_Show("PRIVATE_RL") end,
-	}
-	E.Options.args.skins.args.addons = {
-		order = 1000,
+	E.Options.args.addonskins = {
+		order = 100,
 		type = 'group',
-		name = 'AddOns',
-		get = function(info) return E.private.skins.addons[ info[#info] ] end,
-		set = function(info, value)  E.private.skins.addons[ info[#info] ] = value; E:StaticPopup_Show("PRIVATE_RL") end,
-		disabled = function() return not E.private.skins.addons.enable end,
+		name = format('AddOnSkins v%s', AS.Version),
+		args = {},
+	}
+	E.Options.args.addonskins.args.addons = {
+		order = 0,
+		type = 'group',
+		name = 'Skins',
+		get = function(info) return AS:CheckOption(info[#info]) end,
+		set = function(info, value) AS:SetOption(info[#info], value) end,
 		guiInline = true,
+		args = {},
+	}
+	E.Options.args.addonskins.args.dbm = {
+		type = 'group',
+		name = 'DBM Options',
+		order = 1,
+		get = function(info) return AS:CheckOption(info[#info]) end,
+		set = function(info, value) AS:SetOption(info[#info], value) end,
+		guiInline = false,
+		args = {
+			DBMFont = {
+				type = "select", dialogControl = 'LSM30_Font',
+				order = 1,
+				name = "DBM Font",
+				values = AceGUIWidgetLSMlists.font, 
+				disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
+			},
+			DBMFontSize = {
+				type = 'range',
+				order = 2,
+				name = "DBM Font Size",
+				min = 8, max = 18, step = 1, 
+				disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
+			},
+			DBMFontFlag = {
+				name = 'DBM Font Flag',
+				order = 3,
+				type = "select",
+				values = {
+					['NONE'] = 'None',
+					['OUTLINE'] = 'OUTLINE',
+					['THICKOUTLINE'] = 'THICKOUTLINE',
+					['MONOCHROME'] = 'MONOCHROME',
+					['MONOCHROMEOUTLINE'] = 'MONOCHROMEOUTLINE',
+				},
+				disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
+			},
+			DBMSkinHalf = {
+				type = 'toggle',
+				name = 'DBM Half-bar Skin',
+				order = 4,
+				disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
+			},
+		}
+	}
+	E.Options.args.addonskins.args.embed = {
+		order = 2,
+		type = 'group',
+		name = 'Embed Settings',
+		get = function(info) return AS:CheckOption(info[#info]) end,
+		set = function(info, value) AS:SetOption(info[#info], value) AS:EmbedSystem_WindowResize() AS:Embed_Check(nil, true) end,
+		guiInline = false,
 		args = {
 			desc = {
 				type = 'description',
-				name = 'AddOn Skins - v'..AS.Version,
+				name = 'Settings to control Embedded AddOns:\n\nAvailable Embeds: alDamageMeter | Omen | Skada | Recount | TinyDPS',
 				order = 1
 			},
-			misc = {
-				type = 'group',
-				name = 'Misc Options',
-				order = 500,
-				args = {
-					DBMFont = {
-						type = "select", dialogControl = 'LSM30_Font',
-						order = 1,
-						name = "DBM Font",
-						desc = "DBM Font",
-						values = AceGUIWidgetLSMlists.font, 
-						disabled = function() return not IsAddOnLoaded("DBM-Core") or not E.private.skins.addons['DBMSkin'] end
-					},
-					DBMFontSize = {
-						type = 'range',
-						order = 2,
-						name = "DBM Font Size",
-						desc = "DBM Font Size",
-						min = 8, max = 18, step = 1, 
-						disabled = function() return not IsAddOnLoaded("DBM-Core") or not E.private.skins.addons['DBMSkin'] end
-					},
-					DBMFontFlag = {
-						name = 'DBM Font Flag',
-						desc = 'Font Flag',
-						order = 3,
-						type = "select",
-						values = {
-							['NONE'] = 'None',
-							['OUTLINE'] = 'OUTLINE',
-							['THICKOUTLINE'] = 'THICKOUTLINE',
-							['MONOCHROME'] = 'MONOCHROME',
-							['MONOCHROMEOUTLINE'] = 'MONOCHROMEOUTLINE',
-						},
-						disabled = function() return not IsAddOnLoaded("DBM-Core") or not E.private.skins.addons['DBMSkin'] end
-					},
-					DBMSkinHalf = {
-						type = 'toggle',
-						name = 'DBM Half-bar Skin',
-						desc = L["TOGGLESKIN_DESC"],
-						order = 4,
-						disabled = function() return not IsAddOnLoaded("DBM-Core") or not E.private.skins.addons['DBMSkin'] end
-					},
-					RecountBackdrop = {
-						type = 'toggle',
-						name = 'Recount Backdrop',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 5,
-						disabled = function() return not IsAddOnLoaded("Recount") or not E.private.skins.addons["RecountSkin"] end,
-					},
-					SkadaBackdrop = {
-						type = 'toggle',
-						name = 'Skada Backdrop',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 6,
-						disabled = function() return not IsAddOnLoaded("Skada") or not E.private.skins.addons["SkadaSkin"] end,
-					},
-					SkadaBelowTop = {
-						type = 'toggle',
-						name = 'Embed Skada below the top chat panel',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 7,
-						disabled = function() return not IsAddOnLoaded("Skada") or not E.private.skins.addons["SkadaSkin"] end,
-					},
-					SkadaTwoThirds = {
-						type = 'toggle',
-						name = 'Skada Windows 1/3 and 2/3 instead of 1/2 and 1/2',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 8,
-						disabled = function() return not IsAddOnLoaded("Skada") or not E.private.skins.addons["SkadaSkin"] end,
-					},
-					TransparentEmbed = {
-						type = 'toggle',
-						name = 'Embed Transparancy',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 9,
-					},
-				}
+			EmbedSystem = {
+				type = 'toggle',
+				name = 'Single Embed System',
+				order = 2,
+				disabled = function() return AS:CheckOption('EmbedSystemDual') end,
 			},
-			embed = {
-				order = 1000,
-				type = 'group',
-				name = 'Embed Settings',
-				get = function(info) return E.private.skins.addons[ info[#info] ] end,
-				set = function(info,value)  E.private.skins.addons[ info[#info] ] = value; E:StaticPopup_Show("CONFIG_RL") end,
-				args = {
-					desc = {
-						type = 'description',
-						name = 'Settings to control addons embedded in right chat panel',
-						order = 1
-					},
-					EmbedRight = {
-						type = 'toggle',
-						name = 'Embed to Right Chat Panel',
-						desc = 'Embed to right chat panel, otherwise left chat panel',
-						order = 2
-					},
-					EmbedRecount = {
-						type = 'toggle',
-						name = 'Recount',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 3,
-						disabled = function() return not IsAddOnLoaded("Recount") end,
-					},
-					EmbedSkada = {
-						type = 'toggle',
-						name = 'Skada',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 4,
-						disabled = function() return not IsAddOnLoaded("Skada") end,
-					},
-					EmbedOmen = {
-						type = 'toggle',
-						name = 'Omen',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 6,
-						disabled = function() return not IsAddOnLoaded("Omen") end,
-					},
-					EmbedRO = {
-						type = 'toggle',
-						name = 'Recount & Omen',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 8,
-						disabled = function() return not IsAddOnLoaded("Omen") or not IsAddOnLoaded("Recount") end,
-					},
-					EmbedTDPS = {
-						type = 'toggle',
-						name = 'TinyDPS',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 9,
-						disabled = function() return not IsAddOnLoaded("TinyDPS") end,
-					},
-					EmbedOoC = {
-						type = 'toggle',
-						name = 'Hide while out of combat',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 10,
-					},
-					EmbedSexyCooldown = {
-						type = 'toggle',
-						name = 'Attach SexyCD to action bar',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 11,
-						disabled = function() return not IsAddOnLoaded("SexyCooldown2") end,
-					},
-					EmbedCoolLine = {
-						type = 'toggle',
-						name = 'Attach CoolLine to action bar',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 12,
-						disabled = function() return not IsAddOnLoaded("CoolLine") end,
-					},
-					EmbedRight = {
-						type = 'toggle',
-						name = 'Embed Right',
-						desc = L['TOGGLESKIN_DESC'],
-						order = 13,
-					},
-				}
-			}
+			EmbedMain = {
+				type = 'input',
+				width = 'full',
+				name = 'Embed for Main Panel',
+				disabled = function() return not AS:CheckOption('EmbedSystem') end,
+				order = 3,
+			},
+			EmbedSystemDual = {
+				type = 'toggle',
+				name = 'Dual Embed System',
+				order = 4,
+				disabled = function() return AS:CheckOption('EmbedSystem') end,
+			},
+			EmbedLeft = {
+				type = 'input',
+				width = 'full',
+				name = 'Embed for Left Panel',
+				disabled = function() return not AS:CheckOption('EmbedSystemDual') end,
+				order = 5,
+			},
+			EmbedRight = {
+				type = 'input',
+				width = 'full',
+				name = 'Embed to Right Panel',
+				disabled = function() return not AS:CheckOption('EmbedSystemDual') end,
+				order = 6,
+			},
+			EmbedOoC = {
+				type = 'toggle',
+				name = 'Out of Combat (Hide)',
+				order = 7,
+			},
+			EmbedSexyCooldown = {
+				type = 'toggle',
+				name = 'Attach SexyCD to action bar',
+				order = 8,
+				disabled = function() return not AS:CheckOption('SexyCooldownSkin', 'SexyCooldown2') end,
+			},
+			EmbedCoolLine = {
+				type = 'toggle',
+				name = 'Attach CoolLine to action bar',
+				order = 9,
+				disabled = function() return not AS:CheckOption('CoolLineSkin', 'CoolLine') end,
+			},
+			TransparentEmbed = {
+				type = 'toggle',
+				name = 'Embed Transparancy',
+				order = 10,
+			},
+			EmbedBelowTop = {
+				type = 'toggle',
+				name = 'Embed Below Top Tab',
+				order = 11,
+			},
+			RecountBackdrop = {
+				type = 'toggle',
+				name = 'Recount Backdrop',
+				order = 12,
+				disabled = function() return not AS:CheckOption('RecountSkin', 'Recount') end
+			},
+			SkadaBackdrop = {
+				type = 'toggle',
+				name = 'Skada Backdrop',
+				order = 13,
+				disabled = function() return not AS:CheckOption('SkadaSkin', 'Skada') end
+			},
+			OmenBackdrop = {
+				type = 'toggle',
+				name = 'Omen Backdrop',
+				order = 14,
+				disabled = function() return not AS:CheckOption('OmenSkin', 'Omen') end
+			},
 		}
 	}
-	E.Options.args.credits.args.addonskins = {
+	E.Options.args.addonskins.args.credits = {
 		type = "group",
-		name = "AddOnSkin's",
+		name = "Credits",
 		order = -1,
 		args = {
-			text = {
+			desc = {
 				order = 1,
 				type = "description",
+				fontSize = Large,
 				name = L['Coding:']..LINE_BREAK..DEVELOPER_STRING,
 			},
 		},
 	}
 	local order = 2
-	for skinName, _ in pairsByKeys(AS.register) do
-		if V.skins.addons[skinName] == nil then
-			print(format("%s %s: No default option for %s", AS.Title, AS.Version, skinName))
+	for skinName, _ in AS:OrderedPairs(AS.register) do
+		if skinName ~= 'MiscFixes' then
+			if V.skins.addons[skinName] == nil then
+				print(format("%s %s: No default option for %s", AS.Title, AS.Version, skinName))
+			end
+			E.Options.args.addonskins.args.addons.args[skinName] = AS:GenerateOptionTable(skinName, order)
+			order = order + 1
 		end
-		E.Options.args.skins.args.addons.args[skinName] = AS:GenerateOptionTable(skinName,order)
-		order = order + 1
 	end
 end
