@@ -21,17 +21,17 @@ function AS:SkinDBM(event, addon)
 						if not icon1.overlay then
 							icon1.overlay = CreateFrame('Frame', '$parentIcon1Overlay', tbar)
 							icon1.overlay:SetTemplate()
-							icon1.overlay:SetBackdropColor(0, 0, 0, 0)
+							icon1.overlay:SetFrameLevel(0)
 							icon1.overlay:Size(buttonsize)
-							icon1.overlay:Point('BOTTOMRIGHT', frame, 'BOTTOMLEFT', -(E.PixelMode and 2 or 3), 0)
+							icon1.overlay:Point('BOTTOMRIGHT', frame, 'BOTTOMLEFT', -(ElvUI[1].PixelMode and 2 or 3), 0)
 						end
 
 						if not icon2.overlay then
 							icon2.overlay = CreateFrame('Frame', '$parentIcon2Overlay', tbar)
 							icon2.overlay:SetTemplate()
-							icon2.overlay:SetBackdropColor(0, 0, 0, 0)
+							icon2.overlay:SetFrameLevel(0)
 							icon2.overlay:Size(buttonsize)
-							icon2.overlay:Point('BOTTOMLEFT', frame, 'BOTTOMRIGHT', (E.PixelMode and 2 or 3), 0)
+							icon2.overlay:Point('BOTTOMLEFT', frame, 'BOTTOMRIGHT', (ElvUI[1].PixelMode and 2 or 3), 0)
 						end
 
 						if bar.color then
@@ -40,8 +40,15 @@ function AS:SkinDBM(event, addon)
 							tbar:SetStatusBarColor(bar.owner.options.StartColorR, bar.owner.options.StartColorG, bar.owner.options.StartColorB)
 						end
 
-						if bar.enlarged then frame:Width(bar.owner.options.HugeWidth) else frame:SetWidth(bar.owner.options.Width) end
-						if bar.enlarged then tbar:Width(bar.owner.options.HugeWidth) else tbar:SetWidth(bar.owner.options.Width) end
+						if bar.enlarged then
+							frame:SetWidth(bar.owner.options.HugeWidth)
+							tbar:SetWidth(bar.owner.options.HugeWidth)
+							frame:SetScale(bar.owner.options.HugeScale)
+						else
+							frame:SetWidth(bar.owner.options.Width)
+							tbar:SetWidth(bar.owner.options.Width)
+							frame:SetScale(bar.owner.options.Scale)
+						end
 
 						spark:SetAlpha(0)
 						spark:SetTexture(nil)
@@ -54,8 +61,8 @@ function AS:SkinDBM(event, addon)
 						icon2:ClearAllPoints()
 						icon2:SetInside(icon2.overlay, 0, 0)
 
-						texture:SetTexture(AS.LSM:Fetch('statusbar', E.private.general.normTex))
-						tbar:SetStatusBarTexture(AS.LSM:Fetch('statusbar', E.private.general.normTex))
+						texture:SetTexture(AS.NormTex)
+						--tbar:SetStatusBarTexture(AS.NormTex)
 
 						tbar:SetInside(frame)
 
@@ -81,8 +88,10 @@ function AS:SkinDBM(event, addon)
 							timer:Point('RIGHT', frame, 'RIGHT', -4, 0)
 						end
 
-						name:FontTemplate(AS.LSM:Fetch('font', E.private.skins.addons.DBMFont), E.private.skins.addons.DBMFontSize, E.private.skins.addons.DBMFontFlag)
-						timer:FontTemplate(AS.LSM:Fetch('font', E.private.skins.addons.DBMFont), E.private.skins.addons.DBMFontSize, E.private.skins.addons.DBMFontFlag)
+						name:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+						timer:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+						name:SetTextColor(bar.owner.options.TextColorR, bar.owner.options.TextColorG, bar.owner.options.TextColorB)
+						timer:SetTextColor(bar.owner.options.TextColorR, bar.owner.options.TextColorG, bar.owner.options.TextColorB)
 
 						if bar.owner.options.IconLeft then icon1:Show() icon1.overlay:Show() else icon1:Hide() icon1.overlay:Hide() end
 						if bar.owner.options.IconRight then icon2:Show() icon2.overlay:Show() else icon2:Hide() icon2.overlay:Hide() end
@@ -103,7 +112,7 @@ function AS:SkinDBM(event, addon)
 			if not anchor.styled then
 				local header = {anchor:GetRegions()}
 				if header[1]:IsObjectType('FontString') then
-					header[1]:FontTemplate(AS.LSM:Fetch('font', E.private.skins.addons.DBMFont), E.private.skins.addons.DBMFontSize, E.private.skins.addons.DBMFontFlag)
+					header[1]:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 					header[1]:SetTextColor(1, 1, 1)
 					header[1]:SetShadowColor(0, 0, 0, 0)
 					anchor.styled = true	
@@ -143,7 +152,7 @@ function AS:SkinDBM(event, addon)
 
 				background:SetNormalTexture(nil)
 
-				progress:SetStatusBarTexture(AS.LSM:Fetch('statusbar', E.private.general.normTex))
+				progress:SetStatusBarTexture(AS.NormTex)
 				progress:ClearAllPoints()
 				progress:SetInside(bar)
 
@@ -165,8 +174,8 @@ function AS:SkinDBM(event, addon)
 					timer:Point('RIGHT', bar, 'RIGHT', -4, 0)
 				end
 
-				name:FontTemplate(AS.LSM:Fetch('font', E.private.skins.addons.DBMFont), E.private.skins.addons.DBMFontSize, E.private.skins.addons.DBMFontFlag)
-				timer:FontTemplate(AS.LSM:Fetch('font', E.private.skins.addons.DBMFont), E.private.skins.addons.DBMFontSize, E.private.skins.addons.DBMFontFlag)
+				name:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+				timer:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 
 				count = count + 1
 			end
@@ -196,29 +205,18 @@ function AS:SkinDBM(event, addon)
 				return RaidNotice_AddMessage_(noticeFrame, textString, colorInfo)
 			end
 		end
-		DBM_SavedOptions.Enabled = true
-		-- DBT_SavedOptions['DBM']['Scale'] = 1
-		-- DBT_SavedOptions['DBM']['HugeScale'] = 1
-		-- if AS:CheckOption('DBMSkinHalf') then
-			-- DBT_SavedOptions['DBM']['BarYOffset'] = 15
-		-- end
-		--DBT_SavedOptions['DBM']['Texture'] = AS.LSM:Fetch('statusbar', E.private.general.normTex)
-		--DBT_SavedOptions['DBM'].Font = 'ElvUI Font'
 	end
 	if addon == 'DBM-GUI' then
 		DBM_GUI_OptionsFrame:HookScript('OnShow', function()
-			DBM_GUI_OptionsFrame:StripTextures()
-			DBM_GUI_OptionsFrameBossMods:StripTextures()
-			DBM_GUI_OptionsFrameDBMOptions:StripTextures()
-			DBM_GUI_OptionsFrame:SetTemplate('Transparent')
-			DBM_GUI_OptionsFrameBossMods:SetTemplate('Transparent')
-			DBM_GUI_OptionsFrameDBMOptions:SetTemplate('Transparent')
-			DBM_GUI_OptionsFramePanelContainer:SetTemplate('Transparent')
+			AS:SkinFrame(DBM_GUI_OptionsFrame)
+			AS:SkinFrame(DBM_GUI_OptionsFrameBossMods)
+			AS:SkinFrame(DBM_GUI_OptionsFrameDBMOptions)
+			AS:SkinFrame(DBM_GUI_OptionsFramePanelContainer, 'Transparent', true)
 		end)
-		S:HandleTab(DBM_GUI_OptionsFrameTab1)
-		S:HandleTab(DBM_GUI_OptionsFrameTab2)
-		S:HandleButton(DBM_GUI_OptionsFrameOkay, true)
-		S:HandleScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
+		AS:SkinTab(DBM_GUI_OptionsFrameTab1)
+		AS:SkinTab(DBM_GUI_OptionsFrameTab2)
+		AS:SkinButton(DBM_GUI_OptionsFrameOkay, true)
+		AS:SkinScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
 		AS:UnregisterEvent(name, event)
 	end
 end

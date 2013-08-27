@@ -20,7 +20,6 @@
 	<Script file="BGDefender.lua"/>
 	<Script file="BigBrother.lua"/>
 	<Script file="BigWigs.lua"/>
-	<Script file="BloodShieldTracker.lua"/>
 	<Script file="BPT.lua"/>
 	<Script file="BuyEmAll.lua"/>
 	<Script file="ChocolateBar.lua"/>

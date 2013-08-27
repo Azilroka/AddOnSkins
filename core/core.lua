@@ -1,7 +1,7 @@
 local AddOnName = select(1, ...)
 local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:NewModule('AddOnSkins','AceTimer-3.0','AceEvent-3.0')
-local S, CH = E:GetModule('Skins'), E:GetModule('Chat')
+local S = E:GetModule('Skins')
 local LSM, EP = LibStub('LibSharedMedia-3.0'), LibStub('LibElvUIPlugin-1.0')
 
 local tinsert, pairs, ipairs, unpack, pcall, select = tinsert, pairs, ipairs, unpack, pcall, select
@@ -207,8 +207,8 @@ function AS:OrderedPairs(t, f)
 	return iter
 end
 
-function AS:PrintURL(...)
-	CH:PrintURL(...)
+function AS:PrintURL(url)
+	return format("|cFFFFFFFF[|Hurl:%s|h%s|h]|r", url, url)
 end
 
 function AS:Round(...)
@@ -281,8 +281,8 @@ function AS:SkinBackdropFrame(frame, template, override)
 end
 
 function AS:SkinStatusBar(bar, ClassColor)
-	AS:SkinBackdropFrame(bar, ClassColor and 'ClassColor' or 'Default')
-	bar:SetStatusBarTexture(LSM:Fetch('statusbar', AS.NormTex))
+	AS:SkinBackdropFrame(bar, 'Transparent')
+	bar:SetStatusBarTexture(AS.NormTex)
 	if ClassColor then
 		local color = RAID_CLASS_COLORS[AS.MyClass]
 		bar:SetStatusBarColor(color.r, color.g, color.b)

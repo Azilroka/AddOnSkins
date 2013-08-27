@@ -32,7 +32,7 @@ function AS:SkinPostal()
 	if PostalOpenAllButton and not PostalOpenAllButton.handled then
 		AS:SkinButton(PostalOpenAllButton, true)
 		PostalOpenAllButton.handled = true
-		PostalOpenAllButton:Point("Center", InboxFrame, "TOP", -34, -400)
+		PostalOpenAllButton:Point("CENTER", InboxFrame, "TOP", -34, -400)
 	end
 
 	if PostalSelectReturnButton and not PostalSelectReturnButton.handled then
