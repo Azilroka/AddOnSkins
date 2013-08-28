@@ -32,8 +32,8 @@ function AS:SkinSexyCooldown()
 
 	local function SkinSexyCooldownIcon(bar, icon)
 		if not icon.skinned then
-			AS:SkinFrame(icon)
-			AS:SkinBackdropFrame(icon.overlay, false)
+			AS:SkinFrame(icon, false, true)
+			icon.overlay:StripTextures(true)
 			AS:SkinTexture(icon.tex)
 			icon.tex.SetTexCoord = function() end
 			icon.skinned = true
@@ -46,29 +46,32 @@ function AS:SkinSexyCooldown()
 			label.skinned = true
 		end
 	end
+
 	local function SkinSexyCooldownBackdrop(bar)
 		bar:SetTemplate("Transparent")
 	end
 
 	local function HookSCDBar(bar)
+		if bar.hooked then return end
 		hooksecurefunc(bar, "UpdateBarLook", SkinSexyCooldownBar)
 		hooksecurefunc(bar, "UpdateSingleIconLook", SkinSexyCooldownIcon)
 		hooksecurefunc(bar, "UpdateLabel", SkinSexyCooldownLabel)
 		hooksecurefunc(bar, "UpdateBarBackdrop", SkinSexyCooldownBackdrop)
 		bar.settings.icon.borderInset = 0
-	end
-	local scd = SexyCooldown2
-	scd.CreateBar_ = scd.CreateBar
-	scd.CreateBar = function(self, settings, name)
-		local bar = scd:CreateBar_(settings,name)
-		HookSCDBar(bar)
-		return bar
+		bar.hooked = true
 	end
 
-	for _, bar in ipairs(scd.bars) do
+	for _, bar in ipairs(SexyCooldown2.bars) do
 		HookSCDBar(bar)
 		bar:UpdateBarLook()
 	end
+
+	hooksecurefunc(SexyCooldown2, 'CreateBar', function(self)
+		for _, bar in ipairs(self.bars) do
+			HookSCDBar(bar)
+			bar:UpdateBarLook()
+		end
+	end)
 end
 
 AS:RegisterSkin(name, AS.SkinSexyCooldown)

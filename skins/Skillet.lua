@@ -337,14 +337,16 @@ function AS:SkinSkillet()
 	SkilletSortAscButton:StripTextures()
 	SkilletSortAscButton:SetTemplate("Default", true)
 	if not SkilletSortAscButton.text then
-		SkilletSortAscButton:FontString("text", AS.PixelFont, AS.DataTextFontSize)
+		SkilletSortAscButton.text = SkilletSortAscButton:CreateFontString(nil, 'OVERLAY')
+		SkilletSortAscButton.text:SetFont(AS.PixelFont, 12)
 		SkilletSortAscButton.text:Point("CENTER", 0, 0)
 		SkilletSortAscButton.text:SetText("^")
 	end
 	SkilletSortDescButton:StripTextures()
 	SkilletSortDescButton:SetTemplate("Default", true)
 	if not SkilletSortDescButton.text then
-		SkilletSortDescButton:FontString("text", AS.PixelFont, AS.DataTextFontSize)
+		SkilletSortDescButton.text = SkilletSortDescButton:CreateFontString(nil, 'OVERLAY')
+		SkilletSortDescButton.text:SetFont(AS.PixelFont, 12)
 		SkilletSortDescButton.text:Point("CENTER", 0, 0)
 		SkilletSortDescButton.text:SetText("^")
 	end
