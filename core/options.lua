@@ -160,7 +160,7 @@ function AS:GenerateOptions()
 	E.Options.args.addonskins = {
 		order = 100,
 		type = 'group',
-		name = format('AddOnSkins v%s', AS.Version),
+		name = AS.Title,
 		args = {},
 	}
 	E.Options.args.addonskins.args.addons = {

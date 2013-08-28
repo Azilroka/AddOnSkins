@@ -55,7 +55,7 @@ function AS:EmbedSystem_WindowResize()
 
 	EmbedSystem_LeftWindow:SetPoint('RIGHT', EmbedSystem_RightWindow, 'LEFT', (E.PixelMode and 0 or -1), 0)
 	EmbedSystem_RightWindow:SetPoint('RIGHT', EmbedSystem_MainWindow, 'RIGHT', 0, 0)
-	EmbedSystem_MainWindow:SetPoint('BOTTOM', RightChatPanel, 'BOTTOM', 0, Spacing + DataTextSize)
+	EmbedSystem_MainWindow:SetPoint('BOTTOM', RightChatPanel, 'BOTTOM', 0, (AS.SLE and Spacing or (Spacing + DataTextSize)))
 
 	local min, max = floor(EmbedSystem_MainWindow:GetWidth() * .25), floor(EmbedSystem_MainWindow:GetWidth() * .75)
 	EmbedSystem_WidthSlider:SetMinMaxValues(min, max)
