@@ -28,7 +28,7 @@ AS.Locale = L
 AS.MyClass = E.myclass
 AS.MyName = E.myname
 AS.MyRealm = E.myrealm
-AS.Noop = E.Noop
+AS.Noop = function() return end
 
 local function GenerateEventFunction(event)
 	local eventHandler = function(self, event, ...)
@@ -140,8 +140,6 @@ function AS:Initialize()
 		end
 	end
 
-	self:EmbedInit()
-
 	for skin, funcs in pairs(AS.skins) do
 		if AS:CheckOption(skin) then
 			for _, func in ipairs(funcs) do
@@ -149,6 +147,8 @@ function AS:Initialize()
 			end
 		end
 	end
+
+	self:EmbedInit()
 end
 
 function AS:UnregisterEvent(skinName, event)
@@ -208,7 +208,7 @@ function AS:OrderedPairs(t, f)
 end
 
 function AS:PrintURL(url)
-	return format("|cFFFFFFFF[|Hurl:%s|h%s|h]|r", url, url)
+	return format("|cFF00AAFF[|Hurl:%s|h%s|h]|r", url, url)
 end
 
 function AS:Round(...)
@@ -281,8 +281,8 @@ function AS:SkinBackdropFrame(frame, template, override)
 end
 
 function AS:SkinStatusBar(bar, ClassColor)
-	AS:SkinBackdropFrame(bar, 'Transparent')
-	bar:SetStatusBarTexture(AS.NormTex)
+	AS:SkinBackdropFrame(bar, ClassColor and 'ClassColor' or 'Default')
+	bar:SetStatusBarTexture(LSM:Fetch('statusbar', AS.NormTex))
 	if ClassColor then
 		local color = RAID_CLASS_COLORS[AS.MyClass]
 		bar:SetStatusBarColor(color.r, color.g, color.b)
