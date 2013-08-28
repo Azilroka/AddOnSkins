@@ -65,15 +65,22 @@ end
 
 function AS:Embed_Check(Login, NoMessage)
 	if not (AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual')) then return end
-	AS:Embed_Toggle(Login or NoMessage)
+	AS:Embed_Toggle(Login, NoMessage)
 	if AS:CheckOption('EmbedOmen', 'Omen') then AS:Embed_Omen() end
-	if AS:CheckOption('EmbedSkada', 'Skada') then AS:Embed_Skada(Login) end
+	if AS:CheckOption('EmbedSkada', 'Skada') then
+		AS:Embed_Skada()
+		if Login then
+			hooksecurefunc(Skada, 'CreateWindow', AS.Embed_Skada)
+			hooksecurefunc(Skada, 'DeleteWindow', AS.Embed_Skada)
+			hooksecurefunc(Skada, 'UpdateDisplay', AS.Embed_Skada)
+		end
+	end
 	if AS:CheckOption('EmbedTinyDPS', 'TinyDPS') then AS:Embed_TinyDPS() end
 	if AS:CheckOption('EmbedRecount', 'Recount') then AS:Embed_Recount() end
 	if AS:CheckOption('EmbedalDamageMeter', 'alDamageMeter') then AS:Embed_alDamageMeter() end
 end
 
-function AS:Embed_Toggle(NoMessage)
+function AS:Embed_Toggle(Login, NoMessage)
 	local MainEmbed, LeftEmbed, RightEmbed = 'NONE', 'NONE', 'NONE'
 	EmbedSystem_MainWindow.FrameName = nil
 	EmbedSystem_LeftWindow.FrameName = nil
@@ -135,7 +142,7 @@ function AS:Embed_Toggle(NoMessage)
 	if MainEmbed == 'alDamageMeter' or LeftEmbed  == 'alDamageMeter' or RightEmbed == 'alDamageMeter' then
 		AS:EnableOption('EmbedalDamageMeter')
 	end
-	if not NoMessage then
+	if Login or not NoMessage then
 		local Message = format("%s Embed System: - Main: '%s'", AS.Title, AS:CheckOption('EmbedMain'))
 		if AS:CheckOption('EmbedSystemDual') then Message = format("%s Embed System: Left: '%s' | Right: '%s'", AS.Title, AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')) end
 		print(Message)
@@ -273,11 +280,6 @@ function AS:Embed_Skada(Login)
 		EmbedWindow(SkadaWindows[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPLEFT', EmbedSystem_RightWindow, 'TOPLEFT', 2, 0)
 		EmbedSystem_RightWindow.FrameName = SkadaWindows[2]
 	end
-	if Login then
-		hooksecurefunc(Skada, 'CreateWindow', AS.Embed_Skada)
-		hooksecurefunc(Skada, 'DeleteWindow', AS.Embed_Skada)
-		hooksecurefunc(Skada, 'UpdateDisplay', AS.Embed_Skada)
-	end
 end
 
 function AS:EmbedInit()
@@ -294,7 +296,7 @@ function AS:EmbedInit()
 	end)
 	AS:SkinSlideBar(EmbedSystem_WidthSlider, 22, true)
 	AS:EmbedSystem_WindowResize()
-	AS:Embed_Check()
+	AS:Embed_Check(true)
 	EmbedSystem_MainWindow:SetScript('OnShow', AS.Embed_Show)
 	EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
 	if AS:CheckOption('EmbedOoC') and not InCombatLockdown() then AS:Embed_Hide() end

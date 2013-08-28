@@ -40,13 +40,6 @@ function AS:SkinSexyCooldown()
 		AS:SkinTexture(icon.tex)
 	end
 
-	local function SkinSexyCooldownLabel(bar,label,store)
-		if not label.skinned then
-			label:SetFont(AS.PixelFont, store.fontsize, "OUTLINE")
-			label.skinned = true
-		end
-	end
-
 	local function SkinSexyCooldownBackdrop(bar)
 		bar:SetTemplate("Transparent")
 	end
@@ -55,7 +48,6 @@ function AS:SkinSexyCooldown()
 		if bar.hooked then return end
 		hooksecurefunc(bar, "UpdateBarLook", SkinSexyCooldownBar)
 		hooksecurefunc(bar, "UpdateSingleIconLook", SkinSexyCooldownIcon)
-		hooksecurefunc(bar, "UpdateLabel", SkinSexyCooldownLabel)
 		hooksecurefunc(bar, "UpdateBarBackdrop", SkinSexyCooldownBackdrop)
 		bar.settings.icon.borderInset = 0
 		bar.hooked = true
