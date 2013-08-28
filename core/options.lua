@@ -100,6 +100,10 @@ local Skins = {
 		["buttonText"] = "Parchment Remover",
 		["addon"] = "ElvUI_AddOnSkins"
 	},
+	['TitanPanelSkin'] = {
+		['buttonText'] = 'Titan Panel',
+		['addon'] = 'Titan',
+	}
 }
 
 AS.Skins = Skins
