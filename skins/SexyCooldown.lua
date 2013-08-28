@@ -33,11 +33,11 @@ function AS:SkinSexyCooldown()
 	local function SkinSexyCooldownIcon(bar, icon)
 		if not icon.skinned then
 			AS:SkinFrame(icon, false, true)
-			icon.overlay:StripTextures(true)
-			AS:SkinTexture(icon.tex)
-			icon.tex.SetTexCoord = function() end
+			AS:SkinBackdropFrame(icon.overlay, false, true)
 			icon.skinned = true
 		end
+		AS:SkinTexture(icon.overlay.tex)
+		AS:SkinTexture(icon.tex)
 	end
 
 	local function SkinSexyCooldownLabel(bar,label,store)
