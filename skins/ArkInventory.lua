@@ -2,7 +2,7 @@ local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "ArkInventorySkin"
 function AS:SkinArkInventory()
-	hooksecurefunc(ArkInventory, 'Frame_Main_Paint', function(self, frame)
+	hooksecurefunc(ArkInventory, 'Frame_Main_Paint', function(frame)
 		if not ArkInventory.ValidFrame(frame, true) then return	end
 		for i = 1, select('#', frame:GetChildren()) do
 			local subframe = select(i, frame:GetChildren())
@@ -15,7 +15,7 @@ function AS:SkinArkInventory()
 		end
 	end)
 
-	hooksecurefunc(ArkInventory, 'Frame_Main_Anchor_Set', function(self, loc_id)
+	hooksecurefunc(ArkInventory, 'Frame_Main_Anchor_Set', function(loc_id)
 		local frame = ArkInventory.Frame_Main_Get(loc_id):GetName()
 		local title = _G[frame..ArkInventory.Const.Frame.Title.Name]
 		local search = _G[frame..ArkInventory.Const.Frame.Search.Name]
@@ -49,7 +49,7 @@ function AS:SkinArkInventory()
 		_G[status:GetName().."GoldGoldButtonText"]:SetFont(AS.Font, 12)
 	end)
 
-	hooksecurefunc(ArkInventory, 'Frame_Bar_Paint', function(self, bar)
+	hooksecurefunc(ArkInventory, 'Frame_Bar_Paint', function(bar)
 		local loc_id = bar.ARK_Data.loc_id
 		ArkInventory.LocationOptionSet(loc_id, "bar", "name", "height", 18)
 		local name = bar:GetName()
@@ -63,7 +63,7 @@ function AS:SkinArkInventory()
 		end
 	end)
 
-	hooksecurefunc(ArkInventory, 'SetItemButtonTexture', function(self, frame, texture, r, g, b)
+	hooksecurefunc(ArkInventory, 'SetItemButtonTexture', function(frame, texture, r, g, b)
 		local obj = _G[frame:GetName().."IconTexture"]
 		if not texture then
 			obj:Hide()
@@ -76,7 +76,7 @@ function AS:SkinArkInventory()
 		end
 	end)
 
-	hooksecurefunc(ArkInventory, 'Frame_Item_Update_Border', function(self, frame)
+	hooksecurefunc(ArkInventory, 'Frame_Item_Update_Border', function(frame)
 		local obj = _G[frame:GetName().."ArkBorder"]
 		local r, g, b, a = obj:GetBackdropBorderColor()
 		obj:Hide()
