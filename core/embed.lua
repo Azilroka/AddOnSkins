@@ -152,7 +152,6 @@ end
 function AS:Embed_Recount()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Recount' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = Recount_MainWindow
 
 	Recount_MainWindow:SetParent(EmbedParent)
 	Recount_MainWindow:ClearAllPoints()
@@ -173,7 +172,6 @@ end
 function AS:Embed_Omen()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Omen' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = OmenAnchor
 
 	local db = Omen.db
 	db.profile.Scale = 1
@@ -201,7 +199,6 @@ end
 function AS:Embed_TinyDPS()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'TinyDPS' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = tdpsFrame
 
 	AS:SkinFrame(tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 	tdpsFrame:SetParent(EmbedParent)
@@ -220,7 +217,6 @@ end
 function AS:Embed_alDamageMeter()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'alDamageMeter' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = alDamageMeterFrame
 
 	dmconf.maxbars = AS:Round(EmbedParent:GetHeight() / (dmconf.barheight + dmconf.spacing))
 	dmconf.width = EmbedParent:GetWidth()
@@ -271,12 +267,9 @@ function AS:Embed_Skada(Login)
 		local EmbedParent = EmbedSystem_MainWindow
 		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Skada' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
 		EmbedWindow(SkadaWindows[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
-		EmbedParent.FrameName = SkadaWindows[1]
 	elseif NumberToEmbed == 2 then
 		EmbedWindow(SkadaWindows[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
-		EmbedSystem_LeftWindow.FrameName = SkadaWindows[1]
 		EmbedWindow(SkadaWindows[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPLEFT', EmbedSystem_RightWindow, 'TOPLEFT', 2, 0)
-		EmbedSystem_RightWindow.FrameName = SkadaWindows[2]
 	end
 end
 
