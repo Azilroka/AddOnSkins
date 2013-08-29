@@ -10,10 +10,10 @@ function AS:SkinMinimalArchaeology()
 	AS:Desaturate(MinArchMainButtonOpenHist)
 	AS:Desaturate(MinArchMainButtonOpenArch)
 	AS:SkinCloseButton(MinArchMainButtonClose)
-	MinArchMainButtonOpenADI:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", -66, -1)
-	MinArchMainButtonOpenHist:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", -46, -1)
-	MinArchMainButtonOpenArch:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", -26, -1)
 	MinArchMainButtonClose:Point("TOPRIGHT", MinArchMain, "TOPRIGHT", 2, 2)
+	MinArchMainButtonOpenADI:Point("RIGHT", MinArchMainButtonOpenHist, "LEFT", -3, 0)
+	MinArchMainButtonOpenHist:Point("RIGHT", MinArchMainButtonOpenArch, "LEFT", -3, 0)
+	MinArchMainButtonOpenArch:Point("RIGHT", MinArchMainButtonClose, "LEFT", -3, 0)
 	AS:SkinFrame(MinArchDigsites)
 	AS:SkinCloseButton(MinArchDigsitesButtonClose)
 	AS:SkinFrame(MinArchHist)
@@ -31,14 +31,14 @@ function AS:SkinMinimalArchaeology()
 	end
 
 	local checkbox = {
-		"MinArchOptionPanelMiscOptionsHideMinimap",
-		"MinArchOptionPanelMiscOptionsDisableSound",
-		"MinArchOptionPanelMiscOptionsStartHidden",
-		"MinArchOptionPanelMiscOptionsHideAfter",
-		"MinArchOptionPanelMiscOptionsWaitForSolve",
+		MinArchOptionPanelMiscOptionsHideMinimap,
+		MinArchOptionPanelMiscOptionsDisableSound,
+		MinArchOptionPanelMiscOptionsStartHidden,
+		MinArchOptionPanelMiscOptionsHideAfter,
+		MinArchOptionPanelMiscOptionsWaitForSolve,
 	}
 
-	for _,boxes in pairs(checkbox) do
+	for _, boxes in pairs(checkbox) do
 		AS:SkinCheckBox(boxes)
 	end
 
@@ -48,43 +48,6 @@ function AS:SkinMinimalArchaeology()
 	MinArchOptionPanelFrameScaleSliderHigh:ClearAllPoints()
 	MinArchOptionPanelFrameScaleSliderHigh:SetPoint("BOTTOMRIGHT", MinArchOptionPanelFrameScale, "BOTTOMRIGHT", -3, 3)
 
-	AS:SkinFrame(MinArchMainButtonOpenADI,"Default")
-	MinArchMainButtonOpenADI:SetNormalTexture("")
-	MinArchMainButtonOpenADI:SetPushedTexture("")
-	MinArchMainButtonOpenADI:SetHighlightTexture("")
-	MinArchMainButtonOpenADI:SetSize(14, 14)
-	MinArchMainButtonOpenADI:ClearAllPoints()
-
-	AS:SkinFrame(MinArchMainButtonOpenHist,"Default")
-	MinArchMainButtonOpenHist:SetNormalTexture("")
-	MinArchMainButtonOpenHist:SetPushedTexture("")
-	MinArchMainButtonOpenHist:SetHighlightTexture("")
-	MinArchMainButtonOpenHist:SetSize(14, 14)
-	MinArchMainButtonOpenHist:ClearAllPoints()
-
-	AS:SkinFrame(MinArchMainButtonOpenArch,"Default")
-	MinArchMainButtonOpenArch:SetNormalTexture("")
-	MinArchMainButtonOpenArch:SetPushedTexture("")
-	MinArchMainButtonOpenArch:SetHighlightTexture("")
-	MinArchMainButtonOpenArch:SetSize(14, 14)
-	MinArchMainButtonOpenArch:ClearAllPoints()
-
-	MinArchMainButtonOpenArch.text = MinArchMainButtonOpenArch:CreateFontString(nil, "OVERLAY")
-	MinArchMainButtonOpenArch.text:SetFont(AS.Font, AS.DataTextFontSize, "OUTLINE")
-	MinArchMainButtonOpenArch.text:SetPoint("CENTER", 2, 1)
-	MinArchMainButtonOpenArch.text:SetText("A")
-	MinArchMainButtonOpenHist.text = MinArchMainButtonOpenHist:CreateFontString(nil, "OVERLAY")
-	MinArchMainButtonOpenHist.text:SetFont(AS.Font, AS.DataTextFontSize, "OUTLINE")
-	MinArchMainButtonOpenHist.text:SetPoint("CENTER", 2, 1)
-	MinArchMainButtonOpenHist.text:SetText("H")
-	MinArchMainButtonOpenADI.text = MinArchMainButtonOpenADI:CreateFontString(nil, "OVERLAY")
-	MinArchMainButtonOpenADI.text:SetFont(AS.Font, AS.DataTextFontSize, "OUTLINE")
-	MinArchMainButtonOpenADI.text:SetPoint("CENTER", 2, 1)
-	MinArchMainButtonOpenADI.text:SetText("D")
-
-	MinArchMainButtonOpenADI:Point("RIGHT", MinArchMainButtonOpenHist, "LEFT", -3, 0)
-	MinArchMainButtonOpenHist:Point("RIGHT", MinArchMainButtonOpenArch, "LEFT", -3, 0)
-	MinArchMainButtonOpenArch:Point("BOTTOMRIGHT", MinArchMain, "BOTTOMRIGHT", -6, 3)
 	AS:SkinFrame(MinArchOptionPanelHideArtifact)
 	AS:SkinFrame(MinArchOptionPanelFragmentCap)
 	AS:SkinFrame(MinArchOptionPanelUseKeystones)

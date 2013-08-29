@@ -256,7 +256,9 @@ end
 
 function AS:SkinSlideBar(frame, size)
 	S:HandleSliderFrame(frame)
-	frame:GetThumbTexture():Size(size-2,size-2)
+	if size then
+		frame:GetThumbTexture():Size(size-2,size-2)
+	end
 end
 
 function AS:SkinIconButton(...)
