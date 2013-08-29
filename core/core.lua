@@ -100,9 +100,10 @@ end
 
 function AS:UpdateMedia()
 	AS.Blank = LSM:Fetch('background', 'ElvUI Blank')
-	AS.Font = LSM:Fetch('font', 'ElvUI Font')
+	AS.Font = LSM:Fetch("font", E.db.general.font)
 	AS.PixelFont = LSM:Fetch('font', 'ElvUI Pixel')
 	AS.NormTex = LSM:Fetch('statusbar', E.private.general.normTex)
+	AS.GlossTex = LSM:Fetch("statusbar", E.private.general.glossTex)
 	AS.BackdropColor = E['media'].backdropcolor
 	AS.BorderColor = E['media'].bordercolor
 end
