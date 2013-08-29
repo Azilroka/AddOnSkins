@@ -70,14 +70,14 @@ function AS:ParchmentRemover(event, addon)
 		GlyphFrame.specIcon:SetTexCoord(unpack(E.TexCoords))
 		GlyphFrame.specIcon:SetDrawLayer('OVERLAY')
 
-		hooksecurefunc(_G,'GlyphFrame_Update',function(self)
+		hooksecurefunc(_G, 'GlyphFrame_Update', function(self)
 			local specialization = GetSpecialization(false, false, PlayerTalentFrame.talentGroup)
 			local _, _, _, icon = GetSpecializationInfo(specialization, false, false)
 			local isActiveTalentGroup = PlayerTalentFrame and PlayerTalentFrame.talentGroup == GetActiveSpecGroup()
 			GlyphFrame.specIcon:SetDesaturated(not isActiveTalentGroup)
 		end)
 		
-		hooksecurefunc(_G,'GlyphFrameGlyph_UpdateSlot',function(self)
+		hooksecurefunc(_G, 'GlyphFrameGlyph_UpdateSlot', function(self)
 			local id = self:GetID();
 			local talentGroup = PlayerTalentFrame and PlayerTalentFrame.talentGroup;
 			local enabled, glyphType, glyphTooltipIndex, glyphSpell, iconFilename = GetGlyphSocketInfo(id, talentGroup);
@@ -88,7 +88,7 @@ function AS:ParchmentRemover(event, addon)
 			self.ring:Hide()
 			if id % 2 == 1 and not self.resized then
 				self.resized = true
-				self:Size(self:GetWidth()*.8,self:GetHeight()*.8)
+				self:Size(self:GetWidth() * .8, self:GetHeight() * .8)
 			end
 			self.glyph:SetTexCoord(unpack(E.TexCoords))
 			self.glyph:ClearAllPoints()
@@ -100,7 +100,7 @@ function AS:ParchmentRemover(event, addon)
 		if E.private.skins.blizzard.gossip == true then
 			GossipGreetingScrollFrame.spellTex:Hide()
 			for i = 1, NUMGOSSIPBUTTONS do
-				obj = select(3,_G['GossipTitleButton'..i]:GetRegions())
+				obj = select(3, _G['GossipTitleButton'..i]:GetRegions())
 				obj:SetTextColor(1,1,1)
 			end
 
@@ -188,21 +188,18 @@ function AS:ParchmentRemover(event, addon)
 			end
 
 			hooksecurefunc('QuestInfo_Display', function(template, parentFrame, acceptButton, material)
-				local textColor = {1, 1, 1}
-				local titleTextColor = {1, 1, 0}
-
-				QuestInfoTitleHeader:SetTextColor(unpack(titleTextColor))
-				QuestInfoDescriptionHeader:SetTextColor(unpack(titleTextColor))
-				QuestInfoObjectivesHeader:SetTextColor(unpack(titleTextColor))
-				QuestInfoRewardsHeader:SetTextColor(unpack(titleTextColor))
-				QuestInfoDescriptionText:SetTextColor(unpack(textColor))
-				QuestInfoObjectivesText:SetTextColor(unpack(textColor))
-				QuestInfoGroupSize:SetTextColor(unpack(textColor))
-				QuestInfoRewardText:SetTextColor(unpack(textColor))
-				QuestInfoItemChooseText:SetTextColor(unpack(textColor))
-				QuestInfoItemReceiveText:SetTextColor(unpack(textColor))
-				QuestInfoSpellLearnText:SetTextColor(unpack(textColor))
-				QuestInfoXPFrameReceiveText:SetTextColor(unpack(textColor))	
+				QuestInfoTitleHeader:SetTextColor(1, 1, 0)
+				QuestInfoDescriptionHeader:SetTextColor(1, 1, 0)
+				QuestInfoObjectivesHeader:SetTextColor(1, 1, 0)
+				QuestInfoRewardsHeader:SetTextColor(1, 1, 0)
+				QuestInfoDescriptionText:SetTextColor(1, 1, 1)
+				QuestInfoObjectivesText:SetTextColor(1, 1, 1)
+				QuestInfoGroupSize:SetTextColor(1, 1, 1)
+				QuestInfoRewardText:SetTextColor(1, 1, 1)
+				QuestInfoItemChooseText:SetTextColor(1, 1, 1)
+				QuestInfoItemReceiveText:SetTextColor(1, 1, 1)
+				QuestInfoSpellLearnText:SetTextColor(1, 1, 1)
+				QuestInfoXPFrameReceiveText:SetTextColor(1, 1, 1)	
 				QuestObjectiveText()
 			end)
 
