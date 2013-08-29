@@ -17,6 +17,7 @@
 	<Script file="Auctioneer.lua"/>
 	<Script file="AuctionLite.lua"/>
 	<Script file="Bagnon.lua"/>
+	<Script file="BagSync.lua"/>
 	<Script file="BGDefender.lua"/>
 	<Script file="BigBrother.lua"/>
 	<Script file="BigWigs.lua"/>
