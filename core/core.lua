@@ -1,6 +1,6 @@
 local AddOnName = select(1, ...)
 local E, L, V, P, G, _ = unpack(ElvUI)
-local AS = E:NewModule('AddOnSkins','AceTimer-3.0','AceEvent-3.0')
+local AS = E:NewModule('AddOnSkins', 'AceTimer-3.0', 'AceEvent-3.0')
 local S = E:GetModule('Skins')
 local LSM, EP = LibStub('LibSharedMedia-3.0'), LibStub('LibElvUIPlugin-1.0')
 
@@ -91,11 +91,20 @@ end
 function AS:CallSkin(skin, func, event, ...)
 	local pass, error = pcall(func, self, event, ...)
 	if not pass then
-		local message = '%s %s: |cffff0000There was an error in the|r |cff0affff%s|r |cffff0000skin|r.  Please report this to Azilroka immediately @ %s'
+		local message = '%s: |cffff0000There was an error in the|r |cff0affff%s|r |cffff0000skin|r.  Please report this to Azilroka immediately @ %s'
 		local errormessage = '%s Error: %s'
-		print(format(message, AS.Title, AS.Version, gsub(skin, 'Skin', ''), AS:PrintURL(AS.TicketTracker)))
-		print(format(errormessage, gsub(skin, 'Skin', ''), error))
+		AS:Print(format(message, AS.Version, gsub(skin, 'Skin', ''), AS:PrintURL(AS.TicketTracker)))
+		AS:Print(format(errormessage, gsub(skin, 'Skin', ''), error))
 	end
+end
+
+function AS:UpdateMedia()
+	AS.Blank = LSM:Fetch('background', 'ElvUI Blank')
+	AS.Font = LSM:Fetch('font', 'ElvUI Font')
+	AS.PixelFont = LSM:Fetch('font', 'ElvUI Pixel')
+	AS.NormTex = LSM:Fetch('statusbar', E.private.general.normTex)
+	AS.BackdropColor = E['media'].backdropcolor
+	AS.BorderColor = E['media'].bordercolor
 end
 
 function AS:Initialize()
@@ -105,18 +114,10 @@ function AS:Initialize()
 	EP:RegisterPlugin(AddOnName, AS.GenerateOptions)
 	self:CheckConflicts()
 
-	AS.Blank = LSM:Fetch('background', 'ElvUI Blank')
-	AS.Font = LSM:Fetch('font', 'ElvUI Font')
-	AS.PixelFont = LSM:Fetch('font', 'ElvUI Pixel')
-	AS.NormTex = LSM:Fetch('statusbar', E.private.general.normTex)
-	AS.BackdropColor = E['media'].backdropcolor
-	AS.BorderColor = E['media'].bordercolor
+	hooksecurefunc(E, 'UpdateMedia', AS.UpdateMedia)
+	E:UpdateMedia()
 
 	E.private.skins.addons['MiscFixes'] = true
-
-	self.font = LSM:Fetch('font', E.db.general.font)
-	self.pixelFont = IsAddOnLoaded('DSM') and LSM:Fetch('font', 'Tukui Pixel') or LSM:Fetch('font', 'ElvUI Pixel')
-	self.datatext_font = LSM:Fetch('font', E.db.datatexts.font)
 
 	self:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 	self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
@@ -124,7 +125,8 @@ function AS:Initialize()
 	self:RegisterEvent('PLAYER_ENTER_COMBAT', 'EmbedEnterCombat')
 	self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
 	self:RegisterEvent('PLAYER_LEAVE_COMBAT', 'EmbedExitCombat')
-	
+
+	-- Register Only Skins that AddOn's are loaded for.
 	for skin, alldata in pairs(self.register) do
 		for _, data in pairs(alldata) do
 			local addon
@@ -140,6 +142,7 @@ function AS:Initialize()
 		end
 	end
 
+	-- Need to check PLAYER_LOGIN - If it works it will speed it up and will prevent double calling.
 	for skin, funcs in pairs(AS.skins) do
 		if AS:CheckOption(skin) then
 			for _, func in ipairs(funcs) do
@@ -207,6 +210,10 @@ function AS:OrderedPairs(t, f)
 	return iter
 end
 
+function AS:Print(string)
+	print(format('%s %s', AS.Title, string))
+end
+
 function AS:PrintURL(url)
 	return format("|cFF00AAFF[|Hurl:%s|h%s|h]|r", url, url)
 end
@@ -256,8 +263,8 @@ function AS:SkinIconButton(...)
 	S:HandleItemButton(...)
 end
 
-function AS:Delay(...)
-	E:Delay(...)
+function AS:Delay(delay, func, ...)
+	E:Delay(delay, func, ...)
 end
 
 function AS:SkinEditBox(frame, width, height)
@@ -282,7 +289,7 @@ end
 
 function AS:SkinStatusBar(bar, ClassColor)
 	AS:SkinBackdropFrame(bar, ClassColor and 'ClassColor' or 'Default')
-	bar:SetStatusBarTexture(LSM:Fetch('statusbar', AS.NormTex))
+	bar:SetStatusBarTexture(AS.NormTex)
 	if ClassColor then
 		local color = RAID_CLASS_COLORS[AS.MyClass]
 		bar:SetStatusBarColor(color.r, color.g, color.b)
@@ -309,15 +316,17 @@ function AS:Desaturate(frame)
 			end
 		end
 	end
-	if frame:GetNormalTexture() then
-		frame:GetNormalTexture():SetDesaturated(true)
-	end
-	if frame:GetPushedTexture() then
-		frame:GetPushedTexture():SetDesaturated(true)
-	end
-	if frame:GetHighlightTexture() then
-		frame:GetHighlightTexture():SetDesaturated(true)
-	end
+	frame:HookScript('OnUpdate', function(self)
+		if self:GetNormalTexture() then
+			self:GetNormalTexture():SetDesaturated(true)
+		end
+		if self:GetPushedTexture() then
+			self:GetPushedTexture():SetDesaturated(true)
+		end
+		if self:GetHighlightTexture() then
+			self:GetHighlightTexture():SetDesaturated(true)
+		end
+	end)
 end
 
 local AcceptFrame
@@ -329,7 +338,7 @@ function AS:AcceptFrame(MainText, Function)
 		AcceptFrame:SetPoint('CENTER', UIParent, 'CENTER')
 		AcceptFrame:SetFrameStrata('DIALOG')
 		AcceptFrame.Text = AcceptFrame:CreateFontString(nil, "OVERLAY")
-		AcceptFrame.Text:SetFont(AS.Font, 10)
+		AcceptFrame.Text:SetFont(AS.Font, 12)
 		AcceptFrame.Text:SetPoint('TOP', AcceptFrame, 'TOP', 0, -10)
 		AcceptFrame.Accept = CreateFrame('Button', nil, AcceptFrame)
 		AS:SkinButton(AcceptFrame.Accept)

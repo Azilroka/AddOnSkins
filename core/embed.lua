@@ -7,7 +7,6 @@ local SkadaWindows = {}
 local EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
 local EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
 local EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
-local EmbedSystem_WidthSlider = CreateFrame('Slider', 'EmbedSystem_WidthSlider', EmbedSystem_MainWindow, 'OptionsSliderTemplate')
 
 function AS:Embed_Show()
 	EmbedSystem_MainWindow:Show()
@@ -47,7 +46,7 @@ function AS:EmbedSystem_WindowResize()
 	local Width = E.PixelMode and 6 or 10
 	local Height = E.PixelMode and 2 or 4
 	local Spacing = E.PixelMode and 3 or 7
-	local Total = AS.SLE and ((E.PixelMode and 4 or 6) + ChatTabSize) or ((E.PixelMode and 6 or 12) + ChatTabSize + DataTextSize)
+	local Total = AS.SLE and (Spacing + ChatTabSize) or ((E.PixelMode and 6 or 12) + ChatTabSize + DataTextSize)
 
 	EmbedSystem_MainWindow:SetSize(RightChatPanel:GetWidth() - Width, RightChatPanel:GetHeight() - Total)
 	EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth') + (E.PixelMode and 1 or 0), EmbedSystem_MainWindow:GetHeight() - Height)
@@ -55,12 +54,13 @@ function AS:EmbedSystem_WindowResize()
 
 	EmbedSystem_LeftWindow:SetPoint('RIGHT', EmbedSystem_RightWindow, 'LEFT', (E.PixelMode and 0 or -1), 0)
 	EmbedSystem_RightWindow:SetPoint('RIGHT', EmbedSystem_MainWindow, 'RIGHT', 0, 0)
-	EmbedSystem_MainWindow:SetPoint('BOTTOM', RightChatPanel, 'BOTTOM', 0, (AS.SLE and Spacing or (Spacing + DataTextSize)))
+	EmbedSystem_MainWindow:SetPoint('BOTTOM', RightChatPanel, 'BOTTOM', 0, (AS.SLE and (Spacing - 1) or (Spacing + DataTextSize)))
 
-	local min, max = floor(EmbedSystem_MainWindow:GetWidth() * .25), floor(EmbedSystem_MainWindow:GetWidth() * .75)
-	EmbedSystem_WidthSlider:SetMinMaxValues(min, max)
-	EmbedSystem_WidthSlider:SetValue(AS:CheckOption('EmbedLeftWidth'))
-	EmbedSystem_WidthSlider:Size(RightChatDataPanel:GetSize())
+	-- Dynamic Range
+	if IsAddOnLoaded("ElvUI_Config") then
+		E.Options.args.addonskins.args.embed.args.EmbedLeftWidth.min = floor(EmbedSystem_MainWindow:GetWidth() * .25)
+		E.Options.args.addonskins.args.embed.args.EmbedLeftWidth.max = floor(EmbedSystem_MainWindow:GetWidth() * .75)
+	end
 end
 
 function AS:Embed_Check(Login, NoMessage)
@@ -143,9 +143,9 @@ function AS:Embed_Toggle(Login, NoMessage)
 		AS:EnableOption('EmbedalDamageMeter')
 	end
 	if Login or not NoMessage then
-		local Message = format("%s Embed System: - Main: '%s'", AS.Title, AS:CheckOption('EmbedMain'))
-		if AS:CheckOption('EmbedSystemDual') then Message = format("%s Embed System: Left: '%s' | Right: '%s'", AS.Title, AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')) end
-		print(Message)
+		local Message = format("Main: '%s'", AS:CheckOption('EmbedMain'))
+		if AS:CheckOption('EmbedSystemDual') then Message = format("Left: '%s' | Right: '%s'", AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')) end
+		AS:Print(format("Embed System: - %s", Message))
 	end
 end
 
@@ -175,10 +175,6 @@ function AS:Embed_Omen()
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Omen' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
 	EmbedParent.FrameName = OmenAnchor
 
-	AS:SkinFrame(OmenTitle, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-	AS:SkinFrame(OmenBarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-	if not AS:CheckOption('OmenBackdrop') then OmenBarList:StripTextures() end
-
 	local db = Omen.db
 	db.profile.Scale = 1
 	db.profile.Bar.Spacing = 1
@@ -191,14 +187,15 @@ function AS:Embed_Omen()
 	db.profile.FrameStrata = '2-LOW'
 	Omen:OnProfileChanged(nil, db)
 
+	OmenAnchor:StripTextures()
+	AS:SkinFrame(OmenTitle, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+	AS:SkinFrame(OmenBarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+	if not AS:CheckOption('OmenBackdrop') then OmenBarList:StripTextures() end
+
 	OmenAnchor:SetParent(EmbedParent)
 	OmenAnchor:ClearAllPoints()
 	OmenAnchor:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
 	OmenAnchor:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
-	if not OmenAnchor.backdrop then
-		OmenAnchor:CreateBackdrop()
-		OmenAnchor.backdrop:SetOutside(OmenAnchor, 0, 0)
-	end
 end
 
 function AS:Embed_TinyDPS()
@@ -252,6 +249,7 @@ function AS:Embed_Skada(Login)
 	end
 
 	local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+		if not window then return end
 		local barmod = Skada.displays['bar']
 		local offsety = (window.db.enabletitle and window.db.title.height or 0) + (E.PixelMode and 1 or 0)
 		window.db.barwidth = width - 4
@@ -283,18 +281,6 @@ function AS:Embed_Skada(Login)
 end
 
 function AS:EmbedInit()
-	EmbedSystem_WidthSlider:Hide()
-	EmbedSystem_WidthSlider:SetPoint('RIGHT', RightChatToggleButton, 'LEFT', E.PixelMode and 1 or -1, 0)
-	EmbedSystem_WidthSlider:SetValueStep(1)
-	EmbedSystem_WidthSliderLow:SetText('')
-	EmbedSystem_WidthSliderHigh:SetText('')
-	EmbedSystem_WidthSliderText:SetText('')
-	EmbedSystem_WidthSlider:SetScript('OnValueChanged', function(self, value)
-		AS:SetOption('EmbedLeftWidth', value)
-		AS:EmbedSystem_WindowResize()
-		AS:Embed_Check(nil, true)
-	end)
-	AS:SkinSlideBar(EmbedSystem_WidthSlider, 22, true)
 	AS:EmbedSystem_WindowResize()
 	AS:Embed_Check(true)
 	EmbedSystem_MainWindow:SetScript('OnShow', AS.Embed_Show)
@@ -304,21 +290,12 @@ function AS:EmbedInit()
 	hooksecurefunc(RightChatPanel, 'SetSize', AS.EmbedSystem_WindowResize)
 	RightChatToggleButton:SetScript('OnClick', function(self, btn)
 		if btn == 'RightButton' then
-			if IsAltKeyDown() then
-				if EmbedSystem_WidthSlider:IsShown() then
-					EmbedSystem_WidthSlider:Hide()
-				else
-					EmbedSystem_MainWindow:Show()
-					EmbedSystem_WidthSlider:Show()
-				end
+			if EmbedSystem_MainWindow:IsShown() then
+				EmbedSystem_MainWindow:Hide()
+				if ChatFrame4Hide then ChatFrame4Tab:Show() end
 			else
-				if EmbedSystem_MainWindow:IsShown() then
-					EmbedSystem_MainWindow:Hide()
-					if ChatFrame4Hide then ChatFrame4Tab:Show() end
-				else
-					EmbedSystem_MainWindow:Show()
-					if ChatFrame4Hide then ChatFrame4Tab:Hide() end
-				end
+				EmbedSystem_MainWindow:Show()
+				if ChatFrame4Hide then ChatFrame4Tab:Hide() end
 			end
 		else
 			if E.db[self.parent:GetName()..'Faded'] then
@@ -344,7 +321,6 @@ function AS:EmbedInit()
 		GameTooltip:ClearLines()
 		GameTooltip:AddDoubleLine(L['Left Click:'], L['Toggle Chat Frame'], 1, 1, 1)
 		GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
-		GameTooltip:AddDoubleLine(L['Alt + Right Click:'], L['Toggle Embed Resize'], 1, 1, 1)
 		GameTooltip:Show()
 	end)
 end

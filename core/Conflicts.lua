@@ -1,10 +1,18 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
-local format, pairs, print, GetAddOnInfo = format, pairs, print, GetAddOnInfo
+local format, pairs, GetAddOnInfo = format, pairs, GetAddOnInfo
 
 function AS:CheckConflicts()
 	local Disabled
 
 	local Conflicts = {
+		'DecUI_BagSync_Skin',
+		'DecUI_Dresser_Skin',
+		'DecUI_Examiner_Skin',
+		'DecUI_GupPet_Skin',
+		'DecUI_MogIt_Skin',
+		'DecUI_Numeration_Skin',
+		'DecUI_OneClickEnchantScroll_Skin',
+		'DecUI_xMerchant_Skin',
 		'ElvUI_AtlasLoot_Skin',
 		'ElvUI_BGDefender_Skin',
 		'ElvUI_CB_Skin',
@@ -15,13 +23,14 @@ function AS:CheckConflicts()
 		'ElvUI_TitanPanel_Skin',
 		'Tukui_ACP_Skin',
 		'Tukui_ElvUI_Skins',
+		'Tukui_LinkWrangler_Skin',
 		'Tukui_UIPackages_Skins',
 	}
 
 	for _, AddOnName in pairs(Conflicts) do
 		local _, Title, _, Enabled, _, Reason = GetAddOnInfo(AddOnName)
 		if Reason ~= "MISSING" then
-			print(format("%s: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory. As it will create conflicts if enabled.", AS.Title, AddOnName))
+			AS:Print(format("Conflict System: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory. It will create conflicts when Enabled.", AddOnName))
 			if Enabled then
 				DisableAddOn(AddOnName)
 				Disabled = true
@@ -30,6 +39,6 @@ function AS:CheckConflicts()
 	end
 
 	if Disabled then
-		print(format("%s: Disabled conflicting AddOn's. If you recieved any lua error's. You will have to reload. To reload type '/rl'.", AS.Title))
+		AS:Print("Conflict System: Disabled Conflict's. If you received ANY lua error's. You will have to reload. To reload type '/rl'.")
 	end
 end
