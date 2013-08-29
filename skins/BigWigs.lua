@@ -2,6 +2,7 @@ local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "BigWigsSkin"
 function AS:SkinBigWigs(event, addon)
+	if event == "PLAYER_ENTERING_WORLD" then return end
 	if addon == "BigWigs_Plugins" then
 		local buttonsize = 20
 		local freebg = {}
@@ -110,7 +111,7 @@ function AS:SkinBigWigs(event, addon)
 			GetStyleName = function() return "ElvUI" end,
 		})
 		hooksecurefunc(BigWigsProximity, 'RestyleWindow', function()
-			if BigWigs.pluginCore.modules.Bars.db.profile.barStyle == 'Tukui' then
+			if BigWigs.pluginCore.modules.Bars.db.profile.barStyle == 'ElvUI' then
 				BigWigsProximityAnchor:SetTemplate('Transparent')
 			end
 		end)
