@@ -1,9 +1,9 @@
 ## Interface: 50300
 ## Title: |cff1784d1ElvUI |r|cffFFFFFFAddOnSkins|r
-## Version: 1.45
-## Author: Sortokk, Azilroka
+## Version: 1.46
+## Author: Azilroka, Sortokk
 ## RequiredDeps: ElvUI
-## OptionalDeps: Skada, ElvUI_SLE
+## OptionalDeps: ElvUI_SLE
 ## X-Tukui-ProjectID: 128
 ## X-Tukui-ProjectFolders: ElvUI_AddOnSkins
 
