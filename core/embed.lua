@@ -11,16 +11,16 @@ local EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', 
 function AS:Embed_Show()
 	EmbedSystem_MainWindow:Show()
 	if EmbedSystem_MainWindow.FrameName ~= nil then
-		EmbedSystem_MainWindow.FrameName:Show()
+		_G[EmbedSystem_MainWindow.FrameName]:Show()
 	end
 	if AS:CheckOption('EmbedSystemDual') then
 		EmbedSystem_LeftWindow:Show()
 		EmbedSystem_RightWindow:Show()
 		if EmbedSystem_LeftWindow.FrameName ~= nil then
-			EmbedSystem_LeftWindow.FrameName:Show()
+			_G[EmbedSystem_LeftWindow.FrameName]:Show()
 		end
 		if EmbedSystem_RightWindow.FrameName ~= nil then
-			EmbedSystem_RightWindow.FrameName:Show()
+			_G[EmbedSystem_RightWindow.FrameName]:Show()
 		end
 	end
 end
@@ -30,13 +30,13 @@ function AS:Embed_Hide()
 	EmbedSystem_LeftWindow:Hide()
 	EmbedSystem_RightWindow:Hide()
 	if EmbedSystem_MainWindow.FrameName ~= nil then
-		EmbedSystem_MainWindow.FrameName:Hide()
+		_G[EmbedSystem_MainWindow.FrameName]:Hide()
 	end
 	if EmbedSystem_LeftWindow.FrameName ~= nil then
-		EmbedSystem_LeftWindow.FrameName:Hide()
+		_G[EmbedSystem_LeftWindow.FrameName]:Hide()
 	end
 	if EmbedSystem_RightWindow.FrameName ~= nil then
-		EmbedSystem_RightWindow.FrameName:Hide()
+		_G[EmbedSystem_RightWindow.FrameName]:Hide()
 	end
 end
 
