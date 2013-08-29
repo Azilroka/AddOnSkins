@@ -107,22 +107,22 @@ function AS:Embed_Toggle(Login, NoMessage)
 	AS:DisableOption('EmbedSkada')
 	local Frame = nil
 	if EmbedSystem_MainWindow.FrameName ~= nil then
-		Frame = EmbedSystem_MainWindow.FrameName
-		if Frame:IsObjectType('Frame') and not Frame:IsProtected() then
+		Frame = _G[EmbedSystem_MainWindow.FrameName]
+		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
 			Frame:ClearAllPoints()
 			Frame:SetInside(EmbedSystem_MainWindow, 0, 0)
 		end
 	end
 	if EmbedSystem_LeftWindow.FrameName ~= nil then
-		Frame = EmbedSystem_LeftWindow.FrameName
-		if Frame:IsObjectType('Frame') and not Frame:IsProtected() then
+		Frame = _G[EmbedSystem_LeftWindow.FrameName]
+		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
 			Frame:ClearAllPoints()
 			Frame:SetInside(EmbedSystem_LeftWindow, 0, 0)
 		end
 	end
 	if EmbedSystem_RightWindow.FrameName ~= nil then
-		Frame = EmbedSystem_RightWindow.FrameName
-		if Frame:IsObjectType('Frame') and not Frame:IsProtected() then
+		Frame = _G[EmbedSystem_RightWindow.FrameName]
+		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
 			Frame:ClearAllPoints()
 			Frame:SetInside(EmbedSystem_RightWindow, 0, 0)
 		end
