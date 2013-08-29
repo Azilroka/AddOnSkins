@@ -27,4 +27,4 @@ function AS:SkinAuctionLite(event)
 	AS:UnregisterEvent(name, event)
 end
 
-AS:RegisterSkin(name, AS.SkinAuctionLite, "AUCTION_HOASE_SHOW")
+AS:RegisterSkin(name, AS.SkinAuctionLite, "AUCTION_HOUSE_SHOW")
