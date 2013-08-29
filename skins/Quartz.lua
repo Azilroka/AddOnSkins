@@ -3,50 +3,27 @@
 local name = "QuartzSkin"
 function AS:SkinQuartz()
 	local Q3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
-	SkinQuartzBar = function(self, bar)
+	local Q3CastBar = Q3.CastBarTemplate.template
+
+	local function SkinQuartzBar(self)
 		if not self.IconBorder then
 			self.IconBorder = CreateFrame("Frame", nil, self)
-			AS:SkinBackdropFrame(self.IconBorder)
-			self.IconBorder:SetPoint("TOPLEFT",self.Icon, "TOPLEFT", 0, 0)
-			self.IconBorder:SetPoint("BOTTOMRIGHT", self.Icon, "BOTTOMRIGHT", 0, 0)
+			AS:SkinFrame(self.IconBorder)
+			self.IconBorder:SetFrameLevel(0)
+			self.IconBorder:SetOutside(self.Icon, 2, 2)
 		end
 		if self.config.hideicon then
 			self.IconBorder:Hide()
 		else
 			self.IconBorder:Show()
 		end
-		if not self.Bar.backdrop then AS:SkinBackdropFrame(self.Bar) end
+		if not self.Bar.backdrop then AS:SkinBackdropFrame(self.Bar, nil, true) end
+		if not Quartz3GCDBar.backdrop then AS:SkinBackdropFrame(Quartz3GCDBar, nil, true) end
 	end
 
-	local template = Q3.CastBarTemplate.template
-
-	template.ApplySettings_ = template.ApplySettings
-	template.ApplySettings = function (self)
-		self:ApplySettings_()
-		self:SetWidth(self.config.w + 2 * 2)
-		self:SetHeight(self.config.h + 2 * 2)
-
-		self.Bar:SetFrameStrata("HIGH")
-		self:SetFrameStrata("HIGH")
-	end
-
-	template.UNIT_SPELLCAST_NOT_INTERRUPTIBLE_ = template.UNIT_SPELLCAST_NOT_INTERRUPTIBLE
-	template.UNIT_SPELLCAST_NOT_INTERRUPTIBLE = function(self, event, unit)
-		self:UNIT_SPELLCAST_NOT_INTERRUPTIBLE_(event, unit)
-		SkinQuartzBar(self)
-	end
-
-	template.UNIT_SPELLCAST_START_ = template.UNIT_SPELLCAST_START
-	template.UNIT_SPELLCAST_START = function(self, event, unit)
-		self:UNIT_SPELLCAST_START_(event, unit)
-		SkinQuartzBar(self)
-	end
-
-	template.UNIT_SPELLCAST_CHANNEL_START_ = template.UNIT_SPELLCAST_CHANNEL_START
-	template.UNIT_SPELLCAST_CHANNEL_START = function(self, event, unit)
-		self:UNIT_SPELLCAST_CHANNEL_START_(event, unit)
-		SkinQuartzBar(self)
-	end
+	hooksecurefunc(Q3CastBar, 'UNIT_SPELLCAST_NOT_INTERRUPTIBLE', SkinQuartzBar)
+	hooksecurefunc(Q3CastBar, 'UNIT_SPELLCAST_START', SkinQuartzBar)
+	hooksecurefunc(Q3CastBar, 'UNIT_SPELLCAST_CHANNEL_START', SkinQuartzBar)
 
 	Q3:ApplySettings()
 end
