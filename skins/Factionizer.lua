@@ -92,9 +92,9 @@ function AS:SkinFactionizer()
 	FIZ_OptionsFrame:SetWidth(360)
 	FIZ_ReputationDetailCloseButton:Point("TOPRIGHT", FIZ_ReputationDetailFrame, "TOPRIGHT", 4, 5)
 	FIZ_ShowNoneButton:Point("TOPLEFT", FIZ_ReputationDetailDivider3, "BOTTOMLEFT", 230, -5)
-	FIZ_SupressNoneGlobalButton:Point("TOPLEFT",  FIZ_SupressNoneFactionButton, "BOTTOMLEFT", 0, -5)
-	FIZ_ReputationDetailFrame:Point("TOPLEFT",   ReputationFrame, "TOPRIGHT", 5, 0)
-	FIZ_OptionsFrame:Point("TOPLEFT",   ReputationFrame, "TOPRIGHT", 5, 0)
+	FIZ_SupressNoneGlobalButton:Point("TOPLEFT", FIZ_SupressNoneFactionButton, "BOTTOMLEFT", 0, -5)
+	FIZ_ReputationDetailFrame:Point("TOPLEFT", ReputationFrame, "TOPRIGHT", 5, 0)
+	FIZ_OptionsFrame:Point("TOPLEFT", ReputationFrame, "TOPRIGHT", 5, 0)
 end
 
 AS:RegisterSkin(name, AS.SkinFactionizer)

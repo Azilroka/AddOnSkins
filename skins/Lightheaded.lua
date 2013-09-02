@@ -6,7 +6,7 @@ function AS:SkinLightHeaded()
 		QuestNPCModel:ClearAllPoints()
 		QuestNPCModel:SetPoint("TOPLEFT", LightHeadedFrame, "TOPRIGHT", 5, -10)
 		QuestNPCModel:SetAlpha(0.85)
-		LightHeadedFrame:Point("LEFT",  QuestLogFrame, "RIGHT", 2, 0)
+		LightHeadedFrame:Point("LEFT", QuestLogFrame, "RIGHT", 2, 0)
 	end
 
 	local function SkinOptions(self, event, ...)

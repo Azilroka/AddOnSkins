@@ -1,7 +1,6 @@
 local E, L, V, P, G, _ = unpack(ElvUI)
 
-V['skins']['addons'] = {
-	['enable'] = true,
+V['addonskins'] = {
 -- Skins
 	['AchieveItSkin'] = true,
 	['ACPSkin'] = true,
@@ -139,4 +138,5 @@ V['skins']['addons'] = {
 	['DBMFontSize'] = 12,
 	['DBMFontFlag'] = 'OUTLINE',
 	['ParchmentRemover'] = false,
+	['EmbedLeftChat'] = false,
 }

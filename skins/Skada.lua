@@ -8,9 +8,9 @@ function AS:SkinSkada()
 		AS:AcceptFrame(L['Do you want to reset Skada?'], function(self) Skada:Reset() self:GetParent():Hide() end)
 	end
 	
-	local barmod = Skada.displays['bar']
+	local SkadaDisplayBar = Skada.displays['bar']
 
-	hooksecurefunc(barmod, 'AddDisplayOptions', function(self, win, options)
+	hooksecurefunc(SkadaDisplayBar, 'AddDisplayOptions', function(self, win, options)
 		options.baroptions.args.barspacing = nil
 		options.titleoptions.args.texture = nil
 		options.titleoptions.args.bordertexture = nil
@@ -20,7 +20,7 @@ function AS:SkinSkada()
 		options.windowoptions = nil
 	end)
 
-	hooksecurefunc(barmod, 'ApplySettings', function(self, win)
+	hooksecurefunc(SkadaDisplayBar, 'ApplySettings', function(self, win)
 		local skada = win.bargroup
 		skada:SetSpacing(1)
 		skada:SetFrameLevel(5)

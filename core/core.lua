@@ -16,13 +16,12 @@ AS.events = {}
 AS.register = {}
 AS.addOnWatch = {}
 AS.FrameLocks = {}
-E.private.skins.addons = {}
+E.private.addonskins = {}
 
 AS.SLE = IsAddOnLoaded('ElvUI_SLE')
 AS.Title = select(2, GetAddOnInfo(AddOnName))
 AS.Version = GetAddOnMetadata(AddOnName, 'Version')
 AS.TicketTracker = 'http://www.tukui.org/tickets/elvuiskins/'
-
 AS.TexCoords = E.TexCoords
 AS.Locale = L
 AS.MyClass = E.myclass
@@ -106,6 +105,7 @@ function AS:UpdateMedia()
 	AS.GlossTex = LSM:Fetch("statusbar", E.private.general.glossTex)
 	AS.BackdropColor = E['media'].backdropcolor
 	AS.BorderColor = E['media'].bordercolor
+	AS.UIScale = UIParent:GetScale()
 end
 
 function AS:Initialize()
@@ -219,8 +219,9 @@ function AS:PrintURL(url)
 	return format("|cFF00AAFF[|Hurl:%s|h%s|h]|r", url, url)
 end
 
-function AS:Round(...)
-	E:Round(...)
+function AS:Round(num, idp)
+	local mult = 10^(idp or 0)
+	return math.floor(num * mult + 0.5) / mult
 end
 
 function AS:SkinButton(...)
@@ -276,18 +277,25 @@ function AS:SkinEditBox(frame, width, height)
 	if height then frame:Height(height) end
 end
 
-function AS:SkinFrame(frame, template, override)
+function AS:SkinFrame(frame, template, override, kill)
 	if not template then template = 'Transparent' end
-	if not override then frame:StripTextures(true) end
+	if not override then frame:StripTextures(kill) end
 	frame:SetTemplate(template)
 	AS:RegisterForPetBattleHide(frame)
 end
 
-function AS:SkinBackdropFrame(frame, template, override)
+function AS:SkinBackdropFrame(frame, template, override, kill, setpoints)
 	if not template then template = 'Transparent' end
-	if not override then frame:StripTextures(true) end
+	if not override then frame:StripTextures(kill) end
 	frame:CreateBackdrop(template)
+	if setpoints then frame.backdrop:SetAllPoints() end
 	AS:RegisterForPetBattleHide(frame)
+end
+
+function AS:SkinTitleBar(frame, template, override, kill)
+	if not template then template = 'Transparent' end
+	if not override then frame:StripTextures(kill) end
+	frame:SetTemplate(template, true)
 end
 
 function AS:SkinStatusBar(bar, ClassColor)
@@ -373,15 +381,15 @@ function AS:CheckOption(optionName, ...)
 		if not IsAddOnLoaded(addon) then return false end
 	end
 	
-	return E.private.skins.addons[optionName]
+	return E.private.addonskins[optionName]
 end
 
 function AS:SetOption(optionName, value)
-	E.private.skins.addons[optionName] = value
+	E.private.addonskins[optionName] = value
 end
 
 function AS:ToggleOption(optionName)
-	E.private.skins.addons[optionName] = not E.private.skins.addons[optionName]
+	E.private.addonskins[optionName] = not E.private.addonskins[optionName]
 end
 
 function AS:DisableOption(optionName)

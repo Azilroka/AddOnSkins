@@ -76,8 +76,8 @@ function AS:SkinMasterLootManagerRemix()
 		AS:SkinCheckBox(_G[button])
 	end	
 
-	MasterLootManagerMain_AssignDE:Point("TOPLEFT",  MasterLootManagerMain_SelectDE, "TOPRIGHT", 10, -2)
-	MasterLootManagerMain_AssignBank:Point("TOPLEFT",  MasterLootManagerMain_SelectBank, "TOPRIGHT", 10, -2)
+	MasterLootManagerMain_AssignDE:Point("TOPLEFT", MasterLootManagerMain_SelectDE, "TOPRIGHT", 10, -2)
+	MasterLootManagerMain_AssignBank:Point("TOPLEFT", MasterLootManagerMain_SelectBank, "TOPRIGHT", 10, -2)
 	MasterLootManagerMain_ScrollFrame:Point("TOPLEFT", MasterLootManagerMain, "TOPLEFT", 10, -105)
 	MasterLootManagerMain_ScrollFrame:Point("TOPRIGHT", MasterLootManagerMain, "TOPRIGHT", -26, -105)
 	MasterLootLoggerFrameContentColumnHeader1:ClearAllPoints()

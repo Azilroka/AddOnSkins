@@ -48,13 +48,15 @@ function AS:EmbedSystem_WindowResize()
 	local Spacing = E.PixelMode and 3 or 7
 	local Total = AS.SLE and (Spacing + ChatTabSize) or ((E.PixelMode and 6 or 12) + ChatTabSize + DataTextSize)
 
-	EmbedSystem_MainWindow:SetSize(RightChatPanel:GetWidth() - Width, RightChatPanel:GetHeight() - Total)
+	local ChatPanel = AS:CheckOption('EmbedLeftChat') and LeftChatPanel or RightChatPanel
+
+	EmbedSystem_MainWindow:SetSize(ChatPanel:GetWidth() - Width, ChatPanel:GetHeight() - Total)
 	EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth') + (E.PixelMode and 1 or 0), EmbedSystem_MainWindow:GetHeight() - Height)
 	EmbedSystem_RightWindow:SetSize((EmbedSystem_MainWindow:GetWidth() - AS:CheckOption('EmbedLeftWidth')) - 1, EmbedSystem_MainWindow:GetHeight() - Height)
 
 	EmbedSystem_LeftWindow:SetPoint('RIGHT', EmbedSystem_RightWindow, 'LEFT', (E.PixelMode and 0 or -1), 0)
 	EmbedSystem_RightWindow:SetPoint('RIGHT', EmbedSystem_MainWindow, 'RIGHT', 0, 0)
-	EmbedSystem_MainWindow:SetPoint('BOTTOM', RightChatPanel, 'BOTTOM', 0, (AS.SLE and (Spacing - 1) or (Spacing + DataTextSize)))
+	EmbedSystem_MainWindow:SetPoint('BOTTOM', ChatPanel, 'BOTTOM', 0, (AS.SLE and (Spacing - 1) or (Spacing + DataTextSize)))
 
 	-- Dynamic Range
 	if IsAddOnLoaded("ElvUI_Config") then
@@ -157,6 +159,7 @@ function AS:Embed_Recount()
 	Recount_MainWindow:ClearAllPoints()
 	Recount_MainWindow:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 6)
 	Recount_MainWindow:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
+	AS:SkinTitleBar(Recount_MainWindow.TitleBackground, 'Default')
 	if Recount.MainWindow.backdrop then Recount.MainWindow.backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default') end
 	if not AS:CheckOption('RecountBackdrop') then Recount.MainWindow.backdrop:Hide() end
 
@@ -186,7 +189,7 @@ function AS:Embed_Omen()
 	Omen:OnProfileChanged(nil, db)
 
 	OmenAnchor:StripTextures()
-	AS:SkinFrame(OmenTitle, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+	AS:SkinTitleBar(OmenTitle, 'Default')
 	AS:SkinFrame(OmenBarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 	if not AS:CheckOption('OmenBackdrop') then OmenBarList:StripTextures() end
 
@@ -280,8 +283,11 @@ function AS:EmbedInit()
 	EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
 	if AS:CheckOption('EmbedOoC') and not InCombatLockdown() then AS:Embed_Hide() end
 
-	hooksecurefunc(RightChatPanel, 'SetSize', AS.EmbedSystem_WindowResize)
-	RightChatToggleButton:SetScript('OnClick', function(self, btn)
+	local ChatPanel = AS:CheckOption('EmbedLeftChat') and LeftChatPanel or RightChatPanel
+	local ToggleButton = AS:CheckOption('EmbedLeftChat') and LeftChatToggleButton or RightChatToggleButtton
+
+	hooksecurefunc(ChatPanel, 'SetSize', AS.EmbedSystem_WindowResize)
+	ToggleButton:SetScript('OnClick', function(self, btn)
 		if btn == 'RightButton' then
 			if EmbedSystem_MainWindow:IsShown() then
 				EmbedSystem_MainWindow:Hide()
@@ -304,7 +310,7 @@ function AS:EmbedInit()
 		end
 	end)
 
-	RightChatToggleButton:SetScript('OnEnter', function(self, ...)
+	ToggleButton:SetScript('OnEnter', function(self, ...)
 		if E.db[self.parent:GetName()..'Faded'] then
 			self.parent:Show()
 			UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)

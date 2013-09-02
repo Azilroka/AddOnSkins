@@ -70,21 +70,21 @@ function AS:SkinSkillet()
 	local function SkinIcon(self)
 
 		if SkilletDoBasic_Campfire then SkinButton(SkilletDoBasic_Campfire) end
-		if SkilletDoProspecting    then SkinButton(SkilletDoProspecting)    end
-		if SkilletDoDisenchant     then SkinButton(SkilletDoDisenchant)     end
-		if SkilletDoMilling        then SkinButton(SkilletDoMilling)        end
+		if SkilletDoProspecting then SkinButton(SkilletDoProspecting) end
+		if SkilletDoDisenchant then SkinButton(SkilletDoDisenchant) end
+		if SkilletDoMilling then SkinButton(SkilletDoMilling) end
 
-		if 2259  then SkinButton(2259)  end -- Alchemy	
-		if 2018  then SkinButton(2018)  end -- Blacksmithing
-		if 7411  then SkinButton(7411)  end -- Enchanting
-		if 4036  then SkinButton(4036)  end -- Engineering	
+		if 2259 then SkinButton(2259) end -- Alchemy	
+		if 2018 then SkinButton(2018) end -- Blacksmithing
+		if 7411 then SkinButton(7411) end -- Enchanting
+		if 4036 then SkinButton(4036) end -- Engineering	
 		if 45357 then SkinButton(45357) end -- Inscription
 		if 25229 then SkinButton(25229) end -- Jewelcrafting
-		if 2108  then SkinButton(2108)  end -- Leatherworking
-		if 2656  then SkinButton(2656)  end -- Smelting
-		if 3908  then SkinButton(3908)  end -- Tailoring
-		if 2550  then SkinButton(2550)  end -- Cooking
-		if 3273  then SkinButton(3273)  end -- Firstaid
+		if 2108 then SkinButton(2108) end -- Leatherworking
+		if 2656 then SkinButton(2656) end -- Smelting
+		if 3908 then SkinButton(3908) end -- Tailoring
+		if 2550 then SkinButton(2550) end -- Cooking
+		if 3273 then SkinButton(3273) end -- Firstaid
 		if 53428 then SkinButton(53428) end -- Runeforging
 
 		_G["SkilletHideUncraftableRecipes"]:SetScript("OnUpdate", nil)

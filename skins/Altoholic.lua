@@ -2,6 +2,14 @@ local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = "AltoholicSkin"
 function AS:SkinAltoholic(event, addon)
+
+	local function ColorAltoBorder(self)
+		if self.border then
+			local r, g, b = self.border:GetVertexColor()
+			self.backdrop:SetBackdropBorderColor(r, g, b, 1)
+		end
+	end
+
 	if event == "PLAYER_ENTERING_WORLD" then
 		AS:SkinTooltip(AltoTooltip)
 		AltoholicFramePortrait:Kill()
@@ -35,6 +43,17 @@ function AS:SkinAltoholic(event, addon)
 		AltoholicFrameBagUsageScrollFrame:StripTextures(true)
 		AltoholicFrameSkillsScrollFrame:StripTextures(true)
 		AltoholicFrameActivityScrollFrame:StripTextures(true)
+
+		AS:SkinTexture(AltoholicTabSummary_RequestSharingIconTexture)
+		AltoholicTabSummary_RequestSharing:StyleButton()
+		AltoholicTabSummary_RequestSharing:CreateBackdrop()
+		AS:SkinTexture(AltoholicTabSummary_OptionsIconTexture)
+		AltoholicTabSummary_Options:StyleButton()
+		AltoholicTabSummary_Options:CreateBackdrop()
+		AS:SkinTexture(AltoholicTabSummary_OptionsDataStoreIconTexture)
+		AltoholicTabSummary_OptionsDataStore:StyleButton()
+		AltoholicTabSummary_OptionsDataStore:CreateBackdrop()
+
 		for i = 1, 4 do
 			AS:SkinButton(_G["AltoholicTabSummaryMenuItem"..i], true)
 		end
@@ -72,14 +91,40 @@ function AS:SkinAltoholic(event, addon)
 		AltoholicFrameContainersScrollFrame:StripTextures(true)
 		AltoholicFrameQuestsScrollFrame:StripTextures(true)
 		AltoholicFrameRecipesScrollFrame:StripTextures(true)
-		for i = 1, 14 do
-			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry1Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry2Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry3Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry4Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry5Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry6Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameContainersEntry7Item"..i])
+
+		AS:SkinTexture(AltoholicTabCharacters_CharactersIconTexture)
+		AltoholicTabCharacters_Characters:StyleButton()
+		AltoholicTabCharacters_Characters:CreateBackdrop()
+		AS:SkinTexture(AltoholicTabCharacters_CharactersIconIconTexture)
+		AltoholicTabCharacters_CharactersIcon:StyleButton()
+		AltoholicTabCharacters_CharactersIcon:CreateBackdrop()
+		AS:SkinTexture(AltoholicTabCharacters_BagsIconIconTexture)
+		AltoholicTabCharacters_BagsIcon:StyleButton()
+		AltoholicTabCharacters_BagsIcon:CreateBackdrop()
+		AS:SkinTexture(AltoholicTabCharacters_QuestsIconIconTexture)
+		AltoholicTabCharacters_QuestsIcon:StyleButton()
+		AltoholicTabCharacters_QuestsIcon:CreateBackdrop()
+		AS:SkinTexture(AltoholicTabCharacters_TalentsIconIconTexture)
+		AltoholicTabCharacters_TalentsIcon:StyleButton()
+		AltoholicTabCharacters_TalentsIcon:CreateBackdrop()
+		AS:SkinTexture(AltoholicTabCharacters_AuctionIconIconTexture)
+		AltoholicTabCharacters_AuctionIcon:StyleButton()
+		AltoholicTabCharacters_AuctionIcon:CreateBackdrop()
+		AS:SkinTexture(AltoholicTabCharacters_MailIconIconTexture)
+		AltoholicTabCharacters_MailIcon:StyleButton()
+		AltoholicTabCharacters_MailIcon:CreateBackdrop()
+		AS:SkinTexture(AltoholicTabCharacters_SpellbookIconIconTexture)
+		AltoholicTabCharacters_SpellbookIcon:StyleButton()
+		AltoholicTabCharacters_SpellbookIcon:CreateBackdrop()
+		AS:SkinTexture(AltoholicTabCharacters_ProfessionsIconIconTexture)
+		AltoholicTabCharacters_ProfessionsIcon:StyleButton()
+		AltoholicTabCharacters_ProfessionsIcon:CreateBackdrop()
+
+		for i = 1, 7 do
+			for j = 1, 14 do
+				AS:SkinIconButton(_G["AltoholicFrameContainersEntry"..i.."Item"..j])
+				_G["AltoholicFrameContainersEntry"..i.."Item"..j]:HookScript('OnShow', ColorAltoBorder)
+			end
 		end
 	end
 
@@ -96,15 +141,12 @@ function AS:SkinAltoholic(event, addon)
 			AS:SkinButton(_G["AltoholicTabAchievementsMenuItem"..i], true)
 		end
 
-		for i = 1, 10 do
-			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry1Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry2Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry3Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry4Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry5Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry6Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry7Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry8Item"..i])
+		for i = 1, 8 do
+			for j = 1, 10 do
+				AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry"..i.."Item"..j])
+				AS:SkinTexture(_G["AltoholicFrameAchievementsEntry"..i.."Item"..j..'_Background'])
+				_G["AltoholicFrameAchievementsEntry"..i.."Item"..j..'_Background']:SetInside(_G["AltoholicFrameAchievementsEntry"..i.."Item"..j].backdrop)
+			end
 		end
 	end
 
@@ -128,16 +170,23 @@ function AS:SkinAltoholic(event, addon)
 		AS:SkinDropDownBox(AltoholicTabGrids_SelectRealm)
 		AS:SkinDropDownBox(AltoholicTabGrids_SelectView)
 
-		for i = 1, 10 do
-			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry1Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry2Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry3Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry4Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry5Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry6Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry7Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry8Item"..i])
+		for i = 1, 8 do
+			for j = 1, 10 do
+				AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry"..i.."Item"..j], nil, nil, nil, true)
+				_G["AltoholicFrameGridsEntry"..i.."Item"..j]:HookScript('OnShow', ColorAltoBorder)
+			end
 		end
+
+		AltoholicFrameGrids:HookScript('OnUpdate', function()
+			for i = 1, 10 do
+				for j = 1, 10 do
+					if _G["AltoholicFrameGridsEntry"..i.."Item"..j.."_Background"] then
+						_G["AltoholicFrameGridsEntry"..i.."Item"..j.."_Background"]:SetTexCoord(.08, .92, .08, .82)
+					end
+				end
+			end
+		end)
+
 	end
 
 	if addon == "Altoholic_Guild" then
@@ -150,18 +199,14 @@ function AS:SkinAltoholic(event, addon)
 			AS:SkinButton(_G["AltoholicTabGuildMenuItem"..i])
 		end
 
-		for i = 1, 14 do
-			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry1Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry2Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry3Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry4Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry5Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry6Item"..i])
-			AS:SkinBackdropFrame(_G["AltoholicFrameGuildBankEntry7Item"..i])
+		for i = 1, 7 do
+			for j = 1, 14 do
+				AS:SkinIconButton(_G["AltoholicFrameGuildBankEntry"..i.."Item"..j])
+			end
 		end
 
 		for i = 1, 19 do
-			AS:SkinBackdropFrame(_G["AltoholicFrameGuildMembersItem"..i])
+			AS:SkinIconButton(_G["AltoholicFrameGuildMembersItem"..i])
 		end
 
 		for i = 1, 5 do

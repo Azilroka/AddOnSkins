@@ -17,7 +17,7 @@ function AS:SkinBGDefender()
 	end
 
 	local function OnLeave()
-	  GameTooltip:Hide()
+		GameTooltip:Hide()
 	end
 
 	AS:SkinFrame(BGDefenderFrame)

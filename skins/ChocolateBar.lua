@@ -2,7 +2,7 @@
 
 local name = "ChocolateBarSkin"
 function AS:SkinChocolateBar()
-	for i = 1, 20 do   	
+	for i = 1, 20 do 	
 		local f = _G["ChocolateBar"..i]
 		if f then
 			AS:SkinFrame(f, "Default")

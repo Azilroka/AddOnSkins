@@ -302,22 +302,27 @@ function AS:GenerateOptions()
 				name = 'Embed Below Top Tab',
 				order = 12,
 			},
+			EmbedLeftChat = {
+				type = 'toggle',
+				name = 'Embed to Left Chat Window',
+				order = 12,
+			},
 			RecountBackdrop = {
 				type = 'toggle',
 				name = 'Recount Backdrop',
-				order = 13,
+				order = 14,
 				disabled = function() return not AS:CheckOption('RecountSkin', 'Recount') end
 			},
 			SkadaBackdrop = {
 				type = 'toggle',
 				name = 'Skada Backdrop',
-				order = 14,
+				order = 15,
 				disabled = function() return not AS:CheckOption('SkadaSkin', 'Skada') end
 			},
 			OmenBackdrop = {
 				type = 'toggle',
 				name = 'Omen Backdrop',
-				order = 15,
+				order = 16,
 				disabled = function() return not AS:CheckOption('OmenSkin', 'Omen') end
 			},
 		}
