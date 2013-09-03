@@ -7,6 +7,7 @@ local SkadaWindows = {}
 local EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
 local EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
 local EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
+local ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
 
 function AS:Embed_Show()
 	if AS:CheckOption('EmbedSystemDual') then
@@ -204,7 +205,7 @@ function AS:Embed_alDamageMeter()
 	alDamageMeterFrame.backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 	alDamageMeterFrame.bg:Kill()
 	alDamageMeterFrame:ClearAllPoints()
-	alDamageMeterFrame:SetInside(EmbedParent, 2, 2)
+	alDamageMeterFrame:SetInside(EmbedParent)
 	alDamageMeterFrame:SetParent(EmbedParent)
 	alDamageMeterFrame:SetFrameStrata('LOW')
 end
@@ -263,7 +264,13 @@ function AS:EmbedInit()
 	local ChatPanel = AS:CheckOption('EmbedLeftChat') and LeftChatPanel or RightChatPanel
 	local ToggleButton = AS:CheckOption('EmbedLeftChat') and LeftChatToggleButton or RightChatToggleButton
 
-	hooksecurefunc(ChatPanel, 'SetSize', AS.EmbedSystem_WindowResize)
+	hooksecurefunc(ChatPanel, 'SetSize', function()
+		if ChatHeight ~= E.db.chat.panelHeight or ChatWidth ~= E.db.chat.panelWidth then
+			ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
+			AS:EmbedSystem_WindowResize()
+			AS:Embed_Check()
+		end
+	end)
 	ToggleButton:SetScript('OnClick', function(self, btn)
 		if btn == 'RightButton' then
 			if EmbedSystem_MainWindow:IsShown() then
