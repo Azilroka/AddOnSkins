@@ -21,6 +21,7 @@ function AS:Embed_Hide()
 end
 
 function AS:EmbedSystem_WindowResize()
+	if InCombatLockdown() then return end
 	local DataTextSize = AS:CheckOption('EmbedLeftChat') and E.db.datatexts.leftChatPanel and LeftChatDataPanel:GetHeight() or E.db.datatexts.rightChatPanel and RightChatDataPanel:GetHeight() or 0
 	local ChatTabSize = AS:CheckOption('EmbedBelowTop') and RightChatTab:GetHeight() or 0
 	local Width = AS.SLE and (E.PixelMode and 4 or 6) or E.PixelMode and 6 or 10
@@ -197,7 +198,7 @@ function AS:Embed_alDamageMeter()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'alDamageMeter' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
 
-	dmconf.maxbars = AS:Round(EmbedParent:GetHeight() / (dmconf.barheight + dmconf.spacing))
+	dmconf.barheight = floor((EmbedParent:GetHeight() / dmconf.maxbars) - dmconf.spacing)
 	dmconf.width = EmbedParent:GetWidth()
 
 	alDamageMeterFrame.backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
