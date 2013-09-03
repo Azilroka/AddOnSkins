@@ -1,10 +1,10 @@
 local AS, DT = ElvUI[1]:GetModule('AddOnSkins'), ElvUI[1]:GetModule('DataTexts')
 
 local function OnClick(self, button)
-	if button == 'LeftButton' then
-		AS:EmbedEnterCombat(true)
-	elseif button == 'RightButton' then
-		AS:EmbedExitCombat(true)
+	if EmbedSystem_MainWindow:IsShown() then
+		EmbedSystem_MainWindow:Hide()
+	else
+		EmbedSystem_MainWindow:Show()
 	end
 end
 
