@@ -55,11 +55,11 @@ function AS:SkinDBM(event, addon)
 
 						icon1:SetTexCoord(unpack(AS.TexCoords))
 						icon1:ClearAllPoints()
-						icon1:SetInside(icon1.overlay, 0, 0)
+						icon1:SetInside(icon1.overlay)
 
 						icon2:SetTexCoord(unpack(AS.TexCoords))
 						icon2:ClearAllPoints()
-						icon2:SetInside(icon2.overlay, 0, 0)
+						icon2:SetInside(icon2.overlay)
 
 						texture:SetTexture(AS.NormTex)
 						--tbar:SetStatusBarTexture(AS.NormTex)

@@ -123,9 +123,7 @@ function AS:Initialize()
 	self:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 	self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
 	self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
-	self:RegisterEvent('PLAYER_ENTER_COMBAT', 'EmbedEnterCombat')
 	self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
-	self:RegisterEvent('PLAYER_LEAVE_COMBAT', 'EmbedExitCombat')
 
 	-- Register Only Skins that AddOn's are loaded for.
 	for skin, alldata in pairs(self.register) do
