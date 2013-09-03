@@ -9,19 +9,9 @@ local EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', Em
 local EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
 
 function AS:Embed_Show()
-	EmbedSystem_MainWindow:Show()
-	if EmbedSystem_MainWindow.FrameName ~= nil then
-		_G[EmbedSystem_MainWindow.FrameName]:Show()
-	end
 	if AS:CheckOption('EmbedSystemDual') then
 		EmbedSystem_LeftWindow:Show()
 		EmbedSystem_RightWindow:Show()
-		if EmbedSystem_LeftWindow.FrameName ~= nil then
-			_G[EmbedSystem_LeftWindow.FrameName]:Show()
-		end
-		if EmbedSystem_RightWindow.FrameName ~= nil then
-			_G[EmbedSystem_RightWindow.FrameName]:Show()
-		end
 	end
 end
 
@@ -306,7 +296,7 @@ local EmbedOoCCombatStart
 function AS:EmbedEnterCombat(event)
 	EmbedOoCCombatStart = true
 	if AS:CheckOption('EmbedOoC') then
-		AS:Embed_Show()
+		EmbedSystem_MainWindow:Show()
 	end
 end
 
@@ -315,7 +305,7 @@ function AS:EmbedExitCombat(event)
 	if AS:CheckOption('EmbedOoC') then
 		AS:Delay(10, function()
 			if not EmbedOoCCombatStart then
-				AS:Embed_Hide()
+				EmbedSystem_MainWindow:Hide()
 			end
 		end)
 	end
