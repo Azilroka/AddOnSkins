@@ -15,17 +15,17 @@ function AS:SkinQuartz()
 			AS:SkinBackdropFrame(self.Bar, nil, true)
 			self.isSkinned = true
 		end
-	end
-
-	hooksecurefunc(CastBar, 'ApplySettings', SkinQuartzBar)
-	hooksecurefunc(GCD, 'ApplySettings', function()
 		if not Quartz3GCDBar.backdrop then
 			AS:SkinBackdropFrame(Quartz3GCDBar, nil, true)
 		end
-	end)
-	--hooksecurefunc(CastBar, 'UNIT_SPELLCAST_NOT_INTERRUPTIBLE', SkinQuartzBar)
-	--hooksecurefunc(CastBar, 'UNIT_SPELLCAST_START', SkinQuartzBar)
-	--hooksecurefunc(CastBar, 'UNIT_SPELLCAST_CHANNEL_START', SkinQuartzBar)
+	end
+
+	hooksecurefunc(CastBar, 'ApplySettings', SkinQuartzBar)
+	--[[hooksecurefunc(GCD, 'ApplySettings', function()
+		if not Quartz3GCDBar.backdrop then
+			AS:SkinBackdropFrame(Quartz3GCDBar, nil, true)
+		end
+	end)]]
 end
 
 AS:RegisterSkin(name, AS.SkinQuartz)
