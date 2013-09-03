@@ -118,7 +118,7 @@ function AS:Initialize()
 	hooksecurefunc(E, 'UpdateMedia', AS.UpdateMedia)
 	E:UpdateMedia()
 
-	E.private.skins.addons['MiscFixes'] = true
+	E.private.addonskins['MiscFixes'] = true
 
 	self:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 	self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
