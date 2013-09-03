@@ -26,18 +26,8 @@ function AS:Embed_Show()
 end
 
 function AS:Embed_Hide()
-	EmbedSystem_MainWindow:Hide()
 	EmbedSystem_LeftWindow:Hide()
 	EmbedSystem_RightWindow:Hide()
-	if EmbedSystem_MainWindow.FrameName ~= nil then
-		_G[EmbedSystem_MainWindow.FrameName]:Hide()
-	end
-	if EmbedSystem_LeftWindow.FrameName ~= nil then
-		_G[EmbedSystem_LeftWindow.FrameName]:Hide()
-	end
-	if EmbedSystem_RightWindow.FrameName ~= nil then
-		_G[EmbedSystem_RightWindow.FrameName]:Hide()
-	end
 end
 
 function AS:EmbedSystem_WindowResize()
@@ -105,6 +95,7 @@ function AS:Embed_Toggle(Message)
 		Frame = _G[EmbedSystem_MainWindow.FrameName]
 		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
 			Frame:ClearAllPoints()
+			Frame:SetParent(EmbedSystem_MainWindow)
 			Frame:SetInside(EmbedSystem_MainWindow, 0, 0)
 		end
 	end
@@ -112,6 +103,7 @@ function AS:Embed_Toggle(Message)
 		Frame = _G[EmbedSystem_LeftWindow.FrameName]
 		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
 			Frame:ClearAllPoints()
+			Frame:SetParent(EmbedSystem_LeftWindow)
 			Frame:SetInside(EmbedSystem_LeftWindow, 0, 0)
 		end
 	end
@@ -119,6 +111,7 @@ function AS:Embed_Toggle(Message)
 		Frame = _G[EmbedSystem_RightWindow.FrameName]
 		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
 			Frame:ClearAllPoints()
+			Frame:SetParent(EmbedSystem_RightWindow)
 			Frame:SetInside(EmbedSystem_RightWindow, 0, 0)
 		end
 	end
