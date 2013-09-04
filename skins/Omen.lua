@@ -16,6 +16,15 @@ function AS:SkinOmen()
 		self.BarList:SetPoint('TOPLEFT', self.Title, 'BOTTOMLEFT', 0, 1)
 	end)
 
+	hooksecurefunc(Omen, 'Toggle', function(self)
+		if not AS:CheckOption('EmbedOmen') then return end
+		if self.Anchor:IsShown() then
+			EmbedSystem_MainWindow:Show()
+		else
+			EmbedSystem_MainWindow:Hide()
+		end
+	end)
+
 	Omen:UpdateBackdrop()
 	Omen:ReAnchorBars()
 	Omen:ResizeBars()

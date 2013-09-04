@@ -137,7 +137,6 @@ function AS:Embed_Recount()
 	Recount_MainWindow:ClearAllPoints()
 	Recount_MainWindow:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 6)
 	Recount_MainWindow:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
-	AS:SkinTitleBar(Recount_MainWindow.TitleBackground, 'Default')
 	if Recount.MainWindow.backdrop then Recount.MainWindow.backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default') end
 	if not AS:CheckOption('RecountBackdrop') then Recount.MainWindow.backdrop:Hide() end
 
@@ -275,10 +274,8 @@ function AS:EmbedInit()
 		if btn == 'RightButton' then
 			if EmbedSystem_MainWindow:IsShown() then
 				EmbedSystem_MainWindow:Hide()
-				if ChatFrame4Hide then ChatFrame4Tab:Show() end
 			else
 				EmbedSystem_MainWindow:Show()
-				if ChatFrame4Hide then ChatFrame4Tab:Hide() end
 			end
 		else
 			if E.db[self.parent:GetName()..'Faded'] then

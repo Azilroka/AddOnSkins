@@ -18,7 +18,7 @@ end
 local function OnEvent(self, event)
 	local Text = ''
 	if AS:CheckOption('EmbedRecount', 'Recount') then Text = 'Recount' end
-	if AS:CheckOption('EmbedRO', 'Recount', 'Omen') then Text = 'Recount/Omen' end
+	if AS:CheckOption('EmbedalDamageMeter', 'alDamageMeter') then Text = 'alDamageMeter' end
 	if AS:CheckOption('EmbedSkada', 'Skada') then Text = 'Skada' end
 	if AS:CheckOption('EmbedOmen', 'Omen') then Text = 'Omen' end
 	if AS:CheckOption('EmbedTDPS', 'TinyDPS') then Text = 'TinyDPS' end

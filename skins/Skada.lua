@@ -38,6 +38,17 @@ function AS:SkinSkada()
 		end
 	end)
 
+	hooksecurefunc(Skada, 'ToggleWindow', function()
+		if not AS:CheckOption('EmbedSkada') then return end
+		for i, win in ipairs(Skada:GetWindows()) do
+			if win:IsShown() then
+				EmbedSystem_MainWindow:Show()
+			else
+				EmbedSystem_MainWindow:Hide()
+			end
+		end
+	end)
+
 	hooksecurefunc(Skada, 'CreateWindow', AS.Embed_Skada)
 	hooksecurefunc(Skada, 'DeleteWindow', AS.Embed_Skada)
 	hooksecurefunc(Skada, 'UpdateDisplay', function()
