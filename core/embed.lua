@@ -10,9 +10,14 @@ local EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', 
 local ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
 
 function AS:Embed_Show()
+	if AS:CheckOption('EmbedSystem') then
+		_G[EmbedSystem_MainWindow.FrameName]:Show()
+	end
 	if AS:CheckOption('EmbedSystemDual') then
 		EmbedSystem_LeftWindow:Show()
 		EmbedSystem_RightWindow:Show()
+		_G[EmbedSystem_LeftWindow.FrameName]:Show()
+		_G[EmbedSystem_RightWindow.FrameName]:Show()
 	end
 end
 
@@ -132,6 +137,7 @@ end
 function AS:Embed_Recount()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Recount' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
+	EmbedParent.FrameName = "Recount_MainWindow"
 
 	Recount_MainWindow:SetParent(EmbedParent)
 	Recount_MainWindow:ClearAllPoints()
@@ -152,6 +158,7 @@ end
 function AS:Embed_Omen()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Omen' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
+	EmbedParent.FrameName = "OmenAnchor"
 
 	local db = Omen.db
 	db.profile.Scale = 1
@@ -179,6 +186,7 @@ end
 function AS:Embed_TinyDPS()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'TinyDPS' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
+	EmbedParent.FrameName = "tdpsFrame"
 
 	AS:SkinFrame(tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 	tdpsFrame:SetParent(EmbedParent)
@@ -197,6 +205,7 @@ end
 function AS:Embed_alDamageMeter()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'alDamageMeter' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
+	EmbedParent.FrameName = "alDamagerMeterFrame"
 
 	dmconf.barheight = floor((EmbedParent:GetHeight() / dmconf.maxbars) - dmconf.spacing)
 	dmconf.width = EmbedParent:GetWidth()
@@ -209,7 +218,7 @@ function AS:Embed_alDamageMeter()
 	alDamageMeterFrame:SetFrameStrata('LOW')
 end
 
-function AS:Embed_Skada(Login)
+function AS:Embed_Skada()
 	wipe(SkadaWindows)
 	for k, window in pairs(Skada:GetWindows()) do
 		tinsert(SkadaWindows, window)

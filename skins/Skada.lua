@@ -49,10 +49,18 @@ function AS:SkinSkada()
 		end
 	end)
 
-	hooksecurefunc(Skada, 'CreateWindow', AS.Embed_Skada)
-	hooksecurefunc(Skada, 'DeleteWindow', AS.Embed_Skada)
+	hooksecurefunc(Skada, 'CreateWindow', function()
+		if AS:CheckOption('EmbedSkada') then
+			AS:Embed_Skada()
+		end
+	end)
+	hooksecurefunc(Skada, 'DeleteWindow', function()
+		if AS:CheckOption('EmbedSkada') then
+			AS:Embed_Skada()
+		end
+	end)
 	hooksecurefunc(Skada, 'UpdateDisplay', function()
-		if not InCombatLockdown() then
+		if AS:CheckOption('EmbedSkada') and not InCombatLockdown() then
 			AS:Embed_Skada()
 		end
 	end)

@@ -1,5 +1,6 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+local Loaded
 local name = "BigWigsSkin"
 function AS:SkinBigWigs(event, addon)
 	local ButtonSize = 20
@@ -95,12 +96,13 @@ function AS:SkinBigWigs(event, addon)
 		bar.candyBarIconFrame:SetTexCoord(unpack(AS.TexCoords))
 	end
 
-	local Loaded = false
+	local BigWigsBars
+	local BigWigsProximity
 	if (IsAddOnLoaded('BigWigs_Plugins') or event == "ADDON_LOADED" and addon == 'BigWigs_Plugins') then
+		BigWigsBars = BigWigs:GetPlugin('Bars')
+		BigWigsProximity = BigWigs:GetPlugin('Proximity')
 		if Loaded then return end
 		Loaded = true
-		local BigWigsBars = BigWigs:GetPlugin('Bars')
-		local BigWigsProximity = BigWigs:GetPlugin('Proximity')
 		BigWigsBars:RegisterBarStyle("ElvUI", {
 			apiVersion = 1,
 			version = 1,
@@ -115,8 +117,12 @@ function AS:SkinBigWigs(event, addon)
 				BigWigsProximityAnchor:SetTemplate('Transparent')
 			end
 		end)
-		BigWigsProximity:RestyleWindow()
 		AS:UnregisterEvent(name, "ADDON_LOADED")
+	end
+	if event == "PLAYER_ENTERING_WORLD" then
+		if BigWigsProximity then
+			BigWigsProximity:RestyleWindow()
+		end
 	end
 end
 
