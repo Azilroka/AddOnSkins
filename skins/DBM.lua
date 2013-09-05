@@ -216,6 +216,7 @@ function AS:SkinDBM(event, addon)
 		AS:SkinTab(DBM_GUI_OptionsFrameTab1)
 		AS:SkinTab(DBM_GUI_OptionsFrameTab2)
 		AS:SkinButton(DBM_GUI_OptionsFrameOkay, true)
+		AS:SkinButton(DBM_GUI_OptionsFrameWebsiteButton, true)
 		AS:SkinScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
 		AS:UnregisterEvent(name, event)
 	end
