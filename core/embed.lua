@@ -11,13 +11,13 @@ local ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
 
 function AS:Embed_Show()
 	if AS:CheckOption('EmbedSystem') then
-		_G[EmbedSystem_MainWindow.FrameName]:Show()
+		if EmbedSystem_MainWindow.FrameName ~= nil then _G[EmbedSystem_MainWindow.FrameName]:Show() end
 	end
 	if AS:CheckOption('EmbedSystemDual') then
 		EmbedSystem_LeftWindow:Show()
 		EmbedSystem_RightWindow:Show()
-		_G[EmbedSystem_LeftWindow.FrameName]:Show()
-		_G[EmbedSystem_RightWindow.FrameName]:Show()
+		if EmbedSystem_LeftWindow.FrameName ~= nil then _G[EmbedSystem_LeftWindow.FrameName]:Show() end
+		if EmbedSystem_RightWindow.FrameName ~= nil then _G[EmbedSystem_RightWindow.FrameName]:Show() end
 	end
 end
 
