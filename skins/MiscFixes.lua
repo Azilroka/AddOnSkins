@@ -7,13 +7,13 @@ function AS:MiscFixes(event, addon)
 		PetJournal:HookScript('OnShow', function() PJEUniquePetCount:StripTextures() end)
 	end
 
-	if IsAddOnLoaded('acb_CastBar') then
+	--[[if IsAddOnLoaded('acb_CastBar') then
 		AS:SkinBackdropFrame(AzCastBarPluginPlayer)
 		AS:SkinBackdropFrame(AzCastBarPluginTarget)
 		AS:SkinBackdropFrame(AzCastBarPluginFocus)
 		AS:SkinBackdropFrame(AzCastBarPluginMirror)
 		AS:SkinBackdropFrame(AzCastBarPluginPet)
-	end
+	end]]
 
 	if IsAddOnLoaded('DoubleWideTradeSkills') then
 		TradeSkillListScrollFrame:StripTextures()

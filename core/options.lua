@@ -217,6 +217,12 @@ function AS:GenerateOptions()
 				order = 4,
 				disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
 			},
+			BigWigsHalfBar = {
+				type = 'toggle',
+				name = 'BigWigs Half-bar Skin',
+				order = 4,
+				--disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
+			},
 		}
 	}
 	E.Options.args.addonskins.args.embed = {

@@ -1,6 +1,6 @@
-## Interface: 50300
+## Interface: 50400
 ## Title: |cff1784d1ElvUI |r|cffFFFFFFAddOnSkins|r
-## Version: 1.56
+## Version: 1.57
 ## Author: Azilroka, Sortokk
 ## RequiredDeps: ElvUI
 ## OptionalDeps: ElvUI_SLE

@@ -16,17 +16,7 @@ local function OnEnter(self)
 end
 
 local function OnEvent(self, event)
-	local Text = ''
-	if AS:CheckOption('EmbedRecount', 'Recount') then Text = 'Recount' end
-	if AS:CheckOption('EmbedalDamageMeter', 'alDamageMeter') then Text = 'alDamageMeter' end
-	if AS:CheckOption('EmbedSkada', 'Skada') then Text = 'Skada' end
-	if AS:CheckOption('EmbedOmen', 'Omen') then Text = 'Omen' end
-	if AS:CheckOption('EmbedTDPS', 'TinyDPS') then Text = 'TinyDPS' end
-	if Text == '' then
-		self.text:SetText(format('%s %s', 'AddOnSkins', AS.Version))
-	else
-		self.text:SetText(format('%s %s', 'Toggle', Text))
-	end
+	self.text:SetText('Toggle Embed')
 end
 
 DT:RegisterDatatext('AddOnSkins', { 'PLAYER_ENTERING_WORLD' }, OnEvent, nil, OnClick, OnEnter)

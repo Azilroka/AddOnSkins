@@ -6,12 +6,6 @@ function AS:SkinBigWigs(event, addon)
 	local ButtonSize = 20
 	local FreeBG = {}
 
-	local function CreateBG()
-		local bg = CreateFrame("Frame")
-		bg:SetTemplate("Transparent")
-		return bg
-	end
-
 	local function freestyle(bar)
 		local bg = bar:Get("bigwigs:elvui:barbg")
 		if bg then
@@ -47,14 +41,18 @@ function AS:SkinBigWigs(event, addon)
 	end
 
 	local function applystyle(bar)
-		bar:Height(ButtonSize)
+		if AS:CheckOption('BigWigsHalfBar') then
+			bar:Height(ButtonSize/3)
+		else
+			bar:Height(ButtonSize)
+		end
 		local bg = nil
 		if #FreeBG > 0 then
 			bg = tremove(FreeBG)
 		else
-			bg = CreateBG()
+			bg = CreateFrame("Frame")
 		end
-		bg:SetBackdropColor(unpack(AS.BackdropColor))
+		bg:SetTemplate('Transparent', true)
 		bg:SetParent(bar)
 		bg:SetOutside(bar)
 		bg:SetFrameLevel(bar:GetFrameLevel() - 1)
@@ -67,9 +65,10 @@ function AS:SkinBigWigs(event, addon)
 			if #FreeBG > 0 then
 				ibg = tremove(FreeBG)
 			else
-				ibg = CreateBG()
+				ibg = CreateFrame("Frame")
 			end
 			ibg:SetParent(bar)
+			ibg:SetTemplate('Transparent', true)
 			ibg:SetBackdropColor(0, 0, 0, 0)
 			ibg:SetOutside(bar.candyBarIconFrame)
 			ibg:SetFrameLevel(bar:GetFrameLevel() - 1)
@@ -80,10 +79,15 @@ function AS:SkinBigWigs(event, addon)
 
 		bar.candyBarLabel:SetJustifyH("LEFT")
 		bar.candyBarLabel:ClearAllPoints()
-		bar.candyBarLabel:Point("LEFT", bar, "LEFT", 4, 0)
 		bar.candyBarDuration:SetJustifyH("RIGHT")
 		bar.candyBarDuration:ClearAllPoints()
-		bar.candyBarDuration:Point("RIGHT", bar, "RIGHT", -4, 0)
+		if AS:CheckOption('BigWigsHalfBar') then
+			bar.candyBarLabel:Point('BOTTOMLEFT', bar, 'TOPLEFT', 0, 4)
+			bar.candyBarDuration:Point('BOTTOMRIGHT', bar, 'TOPRIGHT', -1, 2)
+		else
+			bar.candyBarLabel:Point("LEFT", bar, "LEFT", 4, 0)
+			bar.candyBarDuration:Point("RIGHT", bar, "RIGHT", -4, 0)
+		end
 		bar.candyBarBar:ClearAllPoints()
 		bar.candyBarBar:SetAllPoints(bar)
 		bar.candyBarBar.OldSetPoint = bar.candyBarBar.SetPoint
@@ -103,7 +107,7 @@ function AS:SkinBigWigs(event, addon)
 		BigWigsBars:RegisterBarStyle("ElvUI", {
 			apiVersion = 1,
 			version = 1,
-			GetSpacing = function(bar) return 4 end,
+			GetSpacing = function(bar) return (ElvUI[1].PixelMode and 4 or 8) end,
 			ApplyStyle = applystyle,
 			BarStopped = freestyle,
 			GetStyleName = function() return "ElvUI" end,

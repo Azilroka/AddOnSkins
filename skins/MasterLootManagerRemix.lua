@@ -61,7 +61,7 @@ function AS:SkinMasterLootManagerRemix()
 	end	
 
 	for _, object in pairs(SetTemplateD) do
-		AS:SkinFrame(_G[object],"Default",true)
+		AS:SkinFrame(_G[object], "Default", true)
 	end	
 
 	for _, object in pairs(SetTemplateT) do
@@ -73,7 +73,7 @@ function AS:SkinMasterLootManagerRemix()
 	end	
 
 	for _, button in pairs(checkboxes) do
-		AS:SkinCheckBox(_G[button])
+		--AS:SkinCheckBox(_G[button])
 	end	
 
 	MasterLootManagerMain_AssignDE:Point("TOPLEFT", MasterLootManagerMain_SelectDE, "TOPRIGHT", 10, -2)
