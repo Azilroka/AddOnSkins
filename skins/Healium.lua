@@ -85,7 +85,7 @@ function AS:SkinHealium()
 		local cooldown = self.cooldown
 		local count = self.count
 		local border = self.border
-		ElvUI[1]:GetModule("ActionBars"):RegisterCooldown(cooldown)
+		ElvUI[1]:RegisterCooldown(cooldown)
 		AS:SkinIconButton(self, true)
 		self:SetSize(28,28)			
 		icon:SetDrawLayer("OVERLAY")

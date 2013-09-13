@@ -7,7 +7,7 @@ function AS:SkinAffDots()
 		for k,v in pairs(AffDots.track) do
 			local c = AffDots.track[k]
 			if not c.f.cd.isRegistered then
-				ElvUI[1]:GetModule("ActionBars"):RegisterCooldown(c.f.cd)
+				ElvUI[1]:RegisterCooldown(c.f.cd)
 				c.f.cd.isRegistered = true
 			end
 		end
@@ -15,7 +15,7 @@ function AS:SkinAffDots()
 	for k,v in pairs(AffDots.track) do
 		local c = AffDots.track[k]
 		if not c.f.cd.isRegistered then
-			ElvUI[1]:GetModule("ActionBars"):RegisterCooldown(c.f.cd)
+			ElvUI[1]:RegisterCooldown(c.f.cd)
 			c.f.cd.isRegistered = true
 		end
 	end

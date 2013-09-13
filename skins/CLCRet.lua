@@ -50,7 +50,7 @@ function AS:SkinCLCRet()
 		button.border:Kill()
 		button.cooldown = CreateFrame("Cooldown", "$parentCooldown", button)
 		button.cooldown:SetInside()
-		ElvUI[1]:GetModule("ActionBars"):RegisterCooldown(button.cooldown)
+		ElvUI[1]:RegisterCooldown(button.cooldown)
 		button.stack = button:CreateFontString("$parentCount", "OVERLAY", "TextStatusBarText")
 
 		local fontFace, _, fontFlags = button.stack:GetFont()

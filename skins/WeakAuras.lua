@@ -12,9 +12,7 @@ function AS:SkinWeakAuras()
 			end
 		end
 
-		if frame.cooldown then
-			ElvUI[1]:GetModule("ActionBars"):RegisterCooldown(frame.cooldown)
-		end
+		ElvUI[1]:RegisterCooldown(frame.cooldown)
 
 		AS:SkinTexture(frame.icon)
 		frame.icon.SetTexCoord = function() end
