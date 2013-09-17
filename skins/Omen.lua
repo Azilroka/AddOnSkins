@@ -10,7 +10,7 @@ function AS:SkinOmen()
 
 	hooksecurefunc(Omen, 'UpdateBackdrop', function(self)
 		if not AS:CheckOption('EmbedOmen') then
-			AS:SkinFrame(self.BarList, 'Default')
+			AS:SkinFrame(self.BarList, 'Transparent')
 			AS:SkinTitleBar(self.Title, 'Default')
 		end
 		self.BarList:SetPoint('TOPLEFT', self.Title, 'BOTTOMLEFT', 0, 1)

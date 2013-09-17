@@ -278,16 +278,14 @@ end
 function AS:SkinFrame(frame, template, override, kill)
 	if not template then template = 'Transparent' end
 	if not override then frame:StripTextures(kill) end
-	frame:SetTemplate(template)
-	AS:RegisterForPetBattleHide(frame)
+	frame:SetTemplate(template, true)
 end
 
 function AS:SkinBackdropFrame(frame, template, override, kill, setpoints)
 	if not template then template = 'Transparent' end
 	if not override then frame:StripTextures(kill) end
-	frame:CreateBackdrop(template)
+	frame:CreateBackdrop(template, true)
 	if setpoints then frame.backdrop:SetAllPoints() end
-	AS:RegisterForPetBattleHide(frame)
 end
 
 function AS:SkinTitleBar(frame, template, override, kill)

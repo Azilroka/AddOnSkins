@@ -85,6 +85,7 @@ local Skins = {
 		["addon"] = "ZygorGuidesViewer",
 	},
 	["CLCInfoSkin"] = {
+		['addon'] = 'clcInfo',
 		["buttonText"] = "CLCInfo Icons",
 	},
 	["CLCProtSkin"] = {
@@ -130,29 +131,32 @@ local DEVELOPER_STRING = ""
 local LINE_BREAK = "\n"
 
 local DEVELOPERS = {
-	"Affli",
-	"Arstraea",
-	"Azilroka",
-	"Blazeflack",
-	"Cadayron",
-	"Camealion",
-	"Catok",
-	"Darth Predator",
-	"Dec",
-	"Edoc",
-	"Elv",
-	"Jasje",
-	"Kkthnx",
-	"Konungr",
-	"Lockslap",
-	"Lolarennt",
-	"Outofammo",
-	"Pat",
-	"Repooc",
-	"Shadowcall",
-	"Sinaris",
-	"Sortokk",
-	"Tukz",
+	'Affli',
+	'Arstraea',
+	'Azilroka',
+	'Blazeflack',
+	'Cadayron',
+	'Camealion',
+	'Catok',
+	'Darth Predator',
+	'Dec',
+	'Driizt',
+	'Edoc',
+	'Elv',
+	'Jasje',
+	'Kkthnx',
+	'Konungr',
+	'Lockslap',
+	'lolarennt',
+	'MaXiMUS',
+	'Outofammo',
+	'Pat',
+	'Repooc',
+	'Shadowcall',
+	'Sinaris',
+	'Sortokk',
+	'Tukz',
+	'Warmexx',
 }
 
 sort(DEVELOPERS)
@@ -317,19 +321,19 @@ function AS:GenerateOptions()
 				type = 'toggle',
 				name = 'Recount Backdrop',
 				order = 14,
-				disabled = function() return not AS:CheckOption('RecountSkin', 'Recount') end
+				disabled = function() return not (AS:CheckOption('RecountSkin', 'Recount') and AS:CheckOption('EmbedRecount')) end
 			},
 			SkadaBackdrop = {
 				type = 'toggle',
 				name = 'Skada Backdrop',
 				order = 15,
-				disabled = function() return not AS:CheckOption('SkadaSkin', 'Skada') end
+				disabled = function() return not (AS:CheckOption('SkadaSkin', 'Skada') and AS:CheckOption('EmbedSkada')) end
 			},
 			OmenBackdrop = {
 				type = 'toggle',
 				name = 'Omen Backdrop',
 				order = 16,
-				disabled = function() return not AS:CheckOption('OmenSkin', 'Omen') end
+				disabled = function() return not (AS:CheckOption('OmenSkin', 'Omen') and AS:CheckOption('EmbedOmen'))end
 			},
 		}
 	}
