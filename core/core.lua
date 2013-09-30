@@ -112,11 +112,25 @@ function AS:Initialize()
 	if self.initialized then return end
 	self.initialized = true
 
-	EP:RegisterPlugin(AddOnName, AS.GenerateOptions)
-	self:CheckConflicts()
-
 	hooksecurefunc(E, 'UpdateMedia', AS.UpdateMedia)
 	E:UpdateMedia()
+
+	local ElvUIVersion, MinElvUIVersion = tonumber(GetAddOnMetadata('ElvUI', 'Version')), 6.54
+	if ElvUIVersion < MinElvUIVersion then
+		local UpdateElvUIFrame = CreateFrame('Button', nil, UIParent)
+		UpdateElvUIFrame:SetPoint('CENTER', UIParent, 'CENTER')
+		UpdateElvUIFrame:SetFrameStrata('DIALOG')
+		UpdateElvUIFrame.Text = UpdateElvUIFrame:CreateFontString(nil, "OVERLAY")
+		UpdateElvUIFrame.Text:SetFont(AS.Font, 18, 'OUTLINE')
+		UpdateElvUIFrame.Text:SetPoint('TOP', UpdateElvUIFrame, 'TOP', 0, -10)
+		UpdateElvUIFrame.Text:SetText(format('%s - Required ElvUI Version is %s. You currently have %s. Download ElvUI @ %s.', AS.Title, MinElvUIVersion, ElvUIVersion, AS:PrintURL('http://www.tukui.org/dl.php')))
+		UpdateElvUIFrame:SetScript('OnClick', function() print(AS:PrintURL('http://www.tukui.org/dl.php')) end)
+		UpdateElvUIFrame:SetSize(UpdateElvUIFrame.Text:GetWidth(), 70)
+		return
+	end
+
+	EP:RegisterPlugin(AddOnName, AS.GenerateOptions)
+	self:CheckConflicts()
 
 	E.private.addonskins['MiscFixes'] = true
 

@@ -9,7 +9,11 @@ function AS:SkinExaminer()
 	for i = 1, Examiner:GetNumChildren() do
 		local object = select(i, Examiner:GetChildren())
 		if object:GetObjectType() == 'Button' then
-			AS:SkinButton(object, true)
+			if object:GetText() ~= nil then
+				AS:SkinButton(object, true)
+			else
+				AS:SkinCloseButton(object, true)
+			end
 		end
 	end
 end
