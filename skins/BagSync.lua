@@ -1,5 +1,4 @@
-if not (Tukui or AsphyxiaUI or DuffedUI) then return end
-local AS = unpack(select(2,...))
+local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = 'BagSyncSkin'
 function AS:SkinBagSync()
