@@ -104,7 +104,7 @@ local Skins = {
 	['TitanPanelSkin'] = {
 		['buttonText'] = 'Titan Panel',
 		['addon'] = 'Titan',
-	}
+	},
 	["VEMSkin"] = {
 		["buttonText"] = "VEM",
 		["addon"] = "VEM-Core",
