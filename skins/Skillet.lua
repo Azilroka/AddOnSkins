@@ -277,7 +277,7 @@ function AS:SkinSkillet()
 			local ranks = Skillet:GetSkillRanks(player, tradeID)
 			local tradeLink
 
-			if Skillet.db.realm.linkDB[player] then
+			if Skillet.db.realm.linkDB and Skillet.db.realm.linkDB[player] then
 				tradeLink = Skillet.db.realm.linkDB[player][tradeID]
 				if nonLinkingTrade[tradeID] then
 					tradeLink = nil

@@ -37,6 +37,7 @@
 	<Script file="DKDots.lua"/>
 	<Script file="Dresser.lua"/>
 	<Script file="DXE.lua"/>
+	<Script file="EarthWindAndFire.lua"/>
 	<Script file="EasyMail.lua"/>
 	<Script file="EavesDrop.lua"/>
 	<Script file="EnergyWatch.lua"/>
@@ -101,6 +102,7 @@
 	<Script file="TitanPanel.lua"/>
 	<Script file="TomTom.lua"/>
 	<Script file="TradeSkillDW.lua"/>
+	<Script file="VEM.lua"/>
 	<Script file="VengeanceStatus.lua"/>
 	<Script file="WeakAuras.lua"/>
 	<Script file="Wholly.lua"/>
