@@ -146,6 +146,7 @@ local DEVELOPERS = {
 	'Dec',
 	'Driizt',
 	'Edoc',
+	'efaref',
 	'Elv',
 	'Jasje',
 	'Kkthnx',
