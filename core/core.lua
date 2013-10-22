@@ -71,6 +71,28 @@ function AS:RegisterSkin(skinName, skinFunc, ...)
 	self.register[skinName][skinFunc] = registerMe
 end
 
+function AS:RegisteredSkin(skinName, priority, func, events)
+	local events = events
+	for c, _ in pairs(events) do
+		if strfind(c, '%[') then
+			local conflict = strmatch(c, '%[([!%w_]+)%]')
+			if IsAddOnLoaded(conflict) then return end
+		end
+	end
+	if not self.skins[skinName] then self.skins[skinName] = {} end
+	self.skins[skinName][priority] = func
+	for event, _ in pairs(events) do
+		if not strfind(event, '%[') then
+			if not self.events[event] then
+				self[event] = GenerateEventFunction(event)
+				self:RegisterEvent(event); 
+				self.events[event] = {} 
+			end
+			self.events[event][skinName] = true
+		end
+	end
+end
+
 function AS:CallSkin(skin, func, event, ...)
 	local pass, error = pcall(func, self, event, ...)
 	if not pass then
