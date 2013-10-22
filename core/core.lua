@@ -44,20 +44,9 @@ local function GenerateEventFunction(event)
 	local eventHandler = function(self, event, ...)
 		for skin, funcs in pairs(self.skins) do
 			if AS:CheckOption(skin) and self.events[event][skin] then
-<<<<<<< local
 				local args = pack(...)
 				for _,func in ipairs(funcs) do
-					AS:Call_(skin,func,event,unpack(args))
-=======
-				local args = {}
-				for i = 1, select('#', ...) do
-					local arg = select(i, ...)
-					if not arg then break end
-					tinsert(args, arg)
-				end
-				for _, func in ipairs(funcs) do
 					AS:CallSkin(skin, func, event, unpack(args))
->>>>>>> other
 				end
 			end
 		end
@@ -65,13 +54,6 @@ local function GenerateEventFunction(event)
 	return eventHandler
 end
 
-<<<<<<< local
-function AS:Call_(skin,func,event,...)
-	local args = pack(...)	
-	if not pcall(func,self,event,unpack(args)) then
-		local message = "|cff1784d1ElvUI |rAddOnSkins: |cffff0000There was an error in the|r |cff0affff%s|r |cffff0000skin|r.  Please report this to the developers immediately."
-		print(message:format(skin:gsub("Skin","")))
-=======
 function AS:RegisterSkin(skinName, skinFunc, ...)
 	local events = {}
 	local priority = 1
@@ -83,14 +65,10 @@ function AS:RegisterSkin(skinName, skinFunc, ...)
 		else
 			events[event] = true
 		end
->>>>>>> other
 	end
-<<<<<<< local
-=======
 	local registerMe = { func = skinFunc, events = events, priority = priority }
 	if not self.register[skinName] then self.register[skinName] = {} end
 	self.register[skinName][skinFunc] = registerMe
->>>>>>> other
 end
 
 function AS:RegisteredSkin(skinName, priority, func, events)
