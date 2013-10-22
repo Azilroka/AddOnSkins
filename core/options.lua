@@ -232,6 +232,39 @@ function AS:GenerateOptions()
 				order = 4,
 				--disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
 			},
+			VEMSkinHalf = {
+				type = 'toggle',
+				name = 'VEM Half-bar Skin',
+				order = 4,
+				disabled = function() return not AS:CheckOption('VEMSkin', 'VEM-Core') end
+			},
+			VEMFont = {
+				type = "select", dialogControl = 'LSM30_Font',
+				order = 1,
+				name = "VEM Font",
+				values = AceGUIWidgetLSMlists.font, 
+				disabled = function() return not AS:CheckOption('VEMSkin', 'VEM-Core') end
+			},
+			VEMFontSize = {
+				type = 'range',
+				order = 2,
+				name = "VEM Font Size",
+				min = 8, max = 18, step = 1, 
+				disabled = function() return not AS:CheckOption('VEMSkin', 'VEM-Core') end
+			},
+			VEMFontFlag = {
+				name = 'VEM Font Flag',
+				order = 3,
+				type = "select",
+				values = {
+					['NONE'] = 'None',
+					['OUTLINE'] = 'OUTLINE',
+					['THICKOUTLINE'] = 'THICKOUTLINE',
+					['MONOCHROME'] = 'MONOCHROME',
+					['MONOCHROMEOUTLINE'] = 'MONOCHROMEOUTLINE',
+				},
+				disabled = function() return not AS:CheckOption('VEMSkin', 'VEM-Core') end
+			},
 		}
 	}
 	E.Options.args.addonskins.args.embed = {
