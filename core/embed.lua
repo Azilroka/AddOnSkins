@@ -256,11 +256,13 @@ function AS:Embed_Skada()
 		window.bargroup:SetParent(relativeFrame)
 		window.bargroup:SetFrameStrata('LOW')
 		local Backdrop = window.bargroup.backdrop
-		if AS:CheckOption('SkadaBackdrop') then
-			Backdrop:Show()
-			Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-		else
-			Backdrop:Hide()
+		if Backdrop then
+			if AS:CheckOption('SkadaBackdrop') then
+				Backdrop:Show()
+				Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+			else
+				Backdrop:Hide()
+			end
 		end
 		barmod.ApplySettings(barmod, window)
 	end
