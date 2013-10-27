@@ -22,7 +22,6 @@ function AS:SkinSkada()
 
 	hooksecurefunc(SkadaDisplayBar, 'ApplySettings', function(self, win)
 		local skada = win.bargroup
-		skada:SetSpacing(1)
 		skada:SetFrameLevel(5)
 		skada:SetBackdrop(nil)
 		if win.db.enabletitle then

@@ -32,7 +32,7 @@ function AS:EmbedSystem_WindowResize()
 	local ChatTabSize = AS:CheckOption('EmbedBelowTop') and RightChatTab:GetHeight() or 0
 	local Width = AS.SLE and (E.PixelMode and 4 or 6) or E.PixelMode and 6 or 10
 	local Height = E.PixelMode and 2 or 4
-	local Spacing = AS.SLE and (E.PixelMode and 2 or 3) or E.PixelMode and 3 or 7
+	local Spacing = AS.SLE and (E.PixelMode and 2 or 3) or E.PixelMode and 2 or 7
 	local Total = AS.SLE and ((E.PixelMode and 4 or 6) + ChatTabSize) or ((E.PixelMode and 6 or 12) + ChatTabSize + DataTextSize)
 
 	local ChatPanel = AS:CheckOption('EmbedLeftChat') and LeftChatPanel or RightChatPanel
@@ -143,8 +143,14 @@ function AS:Embed_Recount()
 	Recount_MainWindow:ClearAllPoints()
 	Recount_MainWindow:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 6)
 	Recount_MainWindow:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
-	if Recount.MainWindow.backdrop then Recount.MainWindow.backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default') end
-	if not AS:CheckOption('RecountBackdrop') then Recount.MainWindow.backdrop:Hide() end
+
+	local Backdrop = Recount.MainWindow.backdrop
+	if AS:CheckOption('RecountBackdrop') then
+		Backdrop:Show()
+		Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+	else
+		Backdrop:Hide()
+	end
 
 	Recount.db.profile.Locked = true
 	Recount.db.profile.Scaling = 1
@@ -174,8 +180,11 @@ function AS:Embed_Omen()
 
 	OmenAnchor:StripTextures()
 	AS:SkinTitleBar(OmenTitle, 'Default')
-	AS:SkinFrame(OmenBarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-	if not AS:CheckOption('OmenBackdrop') then OmenBarList:StripTextures() end
+	if AS:CheckOption('OmenBackdrop') then
+		AS:SkinFrame(OmenBarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+	else
+		OmenBarList:StripTextures()
+	end
 
 	OmenAnchor:SetParent(EmbedParent)
 	OmenAnchor:ClearAllPoints()
@@ -237,6 +246,7 @@ function AS:Embed_Skada()
 		if not window then return end
 		local barmod = Skada.displays['bar']
 		local offsety = (window.db.enabletitle and window.db.title.height or 0) + (E.PixelMode and 1 or 0)
+		window.db.barspacing = 1
 		window.db.barwidth = width - 4
 		window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - (E.PixelMode and 1 or 0)
 		window.db.spark = false
@@ -245,9 +255,12 @@ function AS:Embed_Skada()
 		window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
 		window.bargroup:SetParent(relativeFrame)
 		window.bargroup:SetFrameStrata('LOW')
-		if window.bargroup.backdrop then
-			window.bargroup.backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-			if not AS:CheckOption('SkadaBackdrop') then window.bargroup.backdrop:Hide() else window.bargroup.backdrop:Show() end
+		local Backdrop = window.bargroup.backdrop
+		if AS:CheckOption('SkadaBackdrop') then
+			Backdrop:Show()
+			Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+		else
+			Backdrop:Hide()
 		end
 		barmod.ApplySettings(barmod, window)
 	end

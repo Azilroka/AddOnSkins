@@ -78,7 +78,7 @@ function AS:SkinVEM(event, addon)
 						timer:SetJustifyH('RIGHT')
 						timer:SetShadowColor(0, 0, 0, 0)
 
-						if AS:CheckOption('VEMSkinHalf') then
+						if AS:CheckOption('DBMSkinHalf') then
 							frame:SetHeight(buttonsize / 3)
 							name:Point('BOTTOMLEFT', frame, 'TOPLEFT', 0, 4)
 							timer:Point('BOTTOMRIGHT', frame, 'TOPRIGHT', -1, 2)
@@ -88,8 +88,8 @@ function AS:SkinVEM(event, addon)
 							timer:Point('RIGHT', frame, 'RIGHT', -4, 0)
 						end
 
-						name:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('VEMFont')), AS:CheckOption('VEMFontSize'), AS:CheckOption('VEMFontFlag'))
-						timer:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('VEMFont')), AS:CheckOption('VEMFontSize'), AS:CheckOption('VEMFontFlag'))
+						name:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+						timer:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 						name:SetTextColor(bar.owner.options.TextColorR, bar.owner.options.TextColorG, bar.owner.options.TextColorB)
 						timer:SetTextColor(bar.owner.options.TextColorR, bar.owner.options.TextColorG, bar.owner.options.TextColorB)
 
@@ -112,7 +112,7 @@ function AS:SkinVEM(event, addon)
 			if not anchor.styled then
 				local header = {anchor:GetRegions()}
 				if header[1]:IsObjectType('FontString') then
-					header[1]:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('VEMFont')), AS:CheckOption('VEMFontSize'), AS:CheckOption('VEMFontFlag'))
+					header[1]:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 					header[1]:SetTextColor(1, 1, 1)
 					header[1]:SetShadowColor(0, 0, 0, 0)
 					anchor.styled = true	
@@ -164,7 +164,7 @@ function AS:SkinVEM(event, addon)
 				timer:SetJustifyH('RIGHT')
 				timer:SetShadowColor(0, 0, 0, 0)
 
-				if AS:CheckOption('VEMSkinHalf') then
+				if AS:CheckOption('DBMSkinHalf') then
 					bar:SetHeight(buttonsize / 3)
 					name:Point('BOTTOMLEFT', bar, 'TOPLEFT', 4, 0)
 					timer:Point('BOTTOMRIGHT', bar, 'TOPRIGHT', -4, 0)
@@ -174,8 +174,8 @@ function AS:SkinVEM(event, addon)
 					timer:Point('RIGHT', bar, 'RIGHT', -4, 0)
 				end
 
-				name:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('VEMFont')), AS:CheckOption('VEMFontSize'), AS:CheckOption('VEMFontFlag'))
-				timer:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('VEMFont')), AS:CheckOption('VEMFontSize'), AS:CheckOption('VEMFontFlag'))
+				name:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+				timer:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 
 				count = count + 1
 			end

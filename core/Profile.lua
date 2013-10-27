@@ -137,13 +137,9 @@ V['addonskins'] = {
 -- Misc
 	['MiscFixes'] = true,
 	['DBMSkinHalf'] = false,
-	['VEMSkinHalf'] = false,
 	['DBMFont'] = 'ElvUI Norm',
 	['DBMFontSize'] = 12,
 	['DBMFontFlag'] = 'OUTLINE',
-	['VENFont'] = 'ElvUI Norm',
-	['VEMFontSize'] = 12,
-	['VEMFontFlag'] = 'OUTLINE',
 	['ParchmentRemover'] = false,
 	['EmbedLeftChat'] = false,
 }

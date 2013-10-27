@@ -3,111 +3,111 @@ local AS = E:GetModule('AddOnSkins')
 local format, gsub, pairs, ipairs, tinsert, sort = format, gsub, pairs, ipairs, tinsert, sort
 
 local Skins = {
-	["AchieveItSkin"] = {
-		["buttonText"] = "Achieve It",
+	['AchieveItSkin'] = {
+		['buttonText'] = 'Achieve It',
 	},
-	["ACPSkin"] = {
-		["buttonText"] = "Addon Control Panel",
+	['ACPSkin'] = {
+		['buttonText'] = 'Addon Control Panel',
 	},
-	["AraBrokerGuildFriendsSkin"] = {
-		["buttonText"] = "Ara Broker Guild Friends",
-		["addon"] = "Ara_Broker_Guild_Friends",
+	['AraBrokerGuildFriendsSkin'] = {
+		['buttonText'] = 'Ara Broker Guild Friends',
+		['addon'] = 'Ara_Broker_Guild_Friends',
 	},
-	["AraBrokerTradeskillsSkin"] = {
-		["buttonText"] = "Ara Broker Tradeskills",
-		["addon"] = "Ara_Broker_Tradeskills",
+	['AraBrokerTradeskillsSkin'] = {
+		['buttonText'] = 'Ara Broker Tradeskills',
+		['addon'] = 'Ara_Broker_Tradeskills',
 	},
 	['ArhSkin'] = {
-		["buttonText"] = "Archaeology Helper",
+		['buttonText'] = 'Archaeology Helper',
 	},
-	["AtlasLootSkin"] = {
-		["buttonText"] = "AtlasLoot",
-		["addon"] = "AtlasLoot_Loader",
+	['AtlasLootSkin'] = {
+		['buttonText'] = 'AtlasLoot',
+		['addon'] = 'AtlasLoot_Loader',
 	},
-	["AuctioneerSkin"] = {
-		["buttonText"] = "Auctioneer",
-		["addon"] = "Auc-Advanced",
+	['AuctioneerSkin'] = {
+		['buttonText'] = 'Auctioneer',
+		['addon'] = 'Auc-Advanced',
 	},
-	["BPTSkin"] = {
-		["buttonText"] = "Balance Power Tracker",
-		["addon"] = "BalancePowerTracker",
+	['BPTSkin'] = {
+		['buttonText'] = 'Balance Power Tracker',
+		['addon'] = 'BalancePowerTracker',
 	},
-	["DailyTamerCheckSkin"] = {
-		["buttonText"] = "Daily Tamer Check",
+	['DailyTamerCheckSkin'] = {
+		['buttonText'] = 'Daily Tamer Check',
 	},
-	["DBMSkin"] = {
-		["buttonText"] = "DBM",
-		["addon"] = "DBM-Core",
+	['DBMSkin'] = {
+		['buttonText'] = 'DBM',
+		['addon'] = 'DBM-Core',
 	},
-	["ExtVendorSkin"] = {
-		["buttonText"] = "Extended Vendor",
+	['ExtVendorSkin'] = {
+		['buttonText'] = 'Extended Vendor',
 	},
-	["KarniCrapSkin"] = {
-		["buttonText"] = "Karni's Crap Filter",
+	['KarniCrapSkin'] = {
+		['buttonText'] = "Karni's Crap Filter",
 	},
-	["LootCouncilLiteSkin"] = {
-		["buttonText"] = "LootCouncilLite",
-		["addon"] = "LootCouncil_Lite",
+	['LootCouncilLiteSkin'] = {
+		['buttonText'] = 'LootCouncilLite',
+		['addon'] = 'LootCouncil_Lite',
 	},
-	["MRTSkin"] = {
-		["buttonText"] = "Mizus Raid Tracker",
-		["addon"] = "MizusRaidTracker",
+	['MRTSkin'] = {
+		['buttonText'] = 'Mizus Raid Tracker',
+		['addon'] = 'MizusRaidTracker',
 	},
-	["OgriLazySkin"] = {
-		["addon"] = "Ogri'Lazy",
+	['OgriLazySkin'] = {
+		['addon'] = "Ogri'Lazy",
 	},
-	["RaidInviteOrganizerSkin"] = {
-		["buttonText"] = "Raid Invite Organizer",
+	['RaidInviteOrganizerSkin'] = {
+		['buttonText'] = 'Raid Invite Organizer',
 	},
-	["RaidBuffStatusSkin"] = {
-		["buttonText"] = "Raid Buff Status",
+	['RaidBuffStatusSkin'] = {
+		['buttonText'] = 'Raid Buff Status',
 	},
-	["SearingPlasmaTrackerSkin"] = {
-		["buttonText"] = "Searing Plasma Tracker",
+	['SearingPlasmaTrackerSkin'] = {
+		['buttonText'] = 'Searing Plasma Tracker',
 	},
-	["SexyCooldownSkin"] = {
-		["buttonText"] = "SexyCooldown 2",
-		["addon"] = "SexyCooldown2",
+	['SexyCooldownSkin'] = {
+		['buttonText'] = 'SexyCooldown 2',
+		['addon'] = 'SexyCooldown2',
 	},
-	["ShieldMonitorSkin"] = {
-		["buttonText"] = "Shield Monitor",
-		["addon"] = "shieldmonitor",
+	['ShieldMonitorSkin'] = {
+		['buttonText'] = 'Shield Monitor',
+		['addon'] = 'shieldmonitor',
 	},
-	["SpineCounterSkin"] = {
-		["buttonText"] = "Spine Blood Counter",
+	['SpineCounterSkin'] = {
+		['buttonText'] = 'Spine Blood Counter',
 	},
-	["SwatterSkin"] = {
-		["buttonText"] = "Swatter",
-		["addon"] = "!Swatter",
+	['SwatterSkin'] = {
+		['buttonText'] = 'Swatter',
+		['addon'] = '!Swatter',
 	},
-	["ZygorSkin"] = {
-		["buttonText"] = "Zygor",
-		["addon"] = "ZygorGuidesViewer",
+	['ZygorSkin'] = {
+		['buttonText'] = 'Zygor',
+		['addon'] = 'ZygorGuidesViewer',
 	},
-	["CLCInfoSkin"] = {
+	['CLCInfoSkin'] = {
 		['addon'] = 'clcInfo',
-		["buttonText"] = "CLCInfo Icons",
+		['buttonText'] = 'CLCInfo Icons',
 	},
-	["CLCProtSkin"] = {
-		["buttonText"] = "CLCProt Icons",
+	['CLCProtSkin'] = {
+		['buttonText'] = 'CLCProt Icons',
 	},
-	["CLCRetSkin"] = {
-		["buttonText"] = "CLCRet Icons",
+	['CLCRetSkin'] = {
+		['buttonText'] = 'CLCRet Icons',
 	},
-	["WeakAurasSkin"] = {
-		["buttonText"] = "WeakAuras Icons",
+	['WeakAurasSkin'] = {
+		['buttonText'] = 'WeakAuras Icons',
 	},
-	["ParchmentRemover"] = {
-		["buttonText"] = "Parchment Remover",
-		["addon"] = "ElvUI_AddOnSkins"
+	['ParchmentRemover'] = {
+		['buttonText'] = 'Parchment Remover',
+		['addon'] = 'ElvUI_AddOnSkins'
 	},
 	['TitanPanelSkin'] = {
 		['buttonText'] = 'Titan Panel',
 		['addon'] = 'Titan',
 	},
-	["VEMSkin"] = {
-		["buttonText"] = "VEM",
-		["addon"] = "VEM-Core",
+	['VEMSkin'] = {
+		['buttonText'] = 'VEM',
+		['addon'] = 'VEM-Core',
 	},
 }
 
@@ -118,7 +118,7 @@ function AS:GenerateOptionTable(skinName, order)
 	if data and data.addon then
 		addon = data.addon
 	else
-		addon = gsub(skinName, "Skin", "")
+		addon = gsub(skinName, 'Skin', '')
 	end
 	local text = data and data.buttonText or addon
 	local options = {
@@ -131,8 +131,8 @@ function AS:GenerateOptionTable(skinName, order)
 	return options
 end
 
-local DEVELOPER_STRING = ""
-local LINE_BREAK = "\n"
+local DEVELOPER_STRING = ''
+local LINE_BREAK = '\n'
 
 local DEVELOPERS = {
 	'Affli',
@@ -164,7 +164,7 @@ local DEVELOPERS = {
 	'Warmexx',
 }
 
-sort(DEVELOPERS)
+sort(DEVELOPERS, function(a, b) return strlower(a) < strlower(b) end)
 for _, devName in pairs(DEVELOPERS) do
 	DEVELOPER_STRING = DEVELOPER_STRING..LINE_BREAK..devName
 end
@@ -185,32 +185,30 @@ function AS:GenerateOptions()
 		guiInline = true,
 		args = {},
 	}
-	E.Options.args.addonskins.args.dbm = {
+	E.Options.args.addonskins.args.bossmods = {
 		type = 'group',
-		name = 'DBM Options',
+		name = 'BossMod Options',
 		order = 1,
 		get = function(info) return AS:CheckOption(info[#info]) end,
 		set = function(info, value) AS:SetOption(info[#info], value) end,
 		guiInline = false,
 		args = {
 			DBMFont = {
-				type = "select", dialogControl = 'LSM30_Font',
+				type = 'select', dialogControl = 'LSM30_Font',
 				order = 1,
-				name = "DBM Font",
+				name = 'DBM/VEM Font',
 				values = AceGUIWidgetLSMlists.font, 
-				disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
 			},
 			DBMFontSize = {
 				type = 'range',
 				order = 2,
-				name = "DBM Font Size",
+				name = 'DBM/VEM Font Size',
 				min = 8, max = 18, step = 1, 
-				disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
 			},
 			DBMFontFlag = {
-				name = 'DBM Font Flag',
+				name = 'DBM/VEM Font Flag',
 				order = 3,
-				type = "select",
+				type = 'select',
 				values = {
 					['NONE'] = 'None',
 					['OUTLINE'] = 'OUTLINE',
@@ -218,52 +216,16 @@ function AS:GenerateOptions()
 					['MONOCHROME'] = 'MONOCHROME',
 					['MONOCHROMEOUTLINE'] = 'MONOCHROMEOUTLINE',
 				},
-				disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
 			},
 			DBMSkinHalf = {
 				type = 'toggle',
-				name = 'DBM Half-bar Skin',
+				name = 'DBM/VEM Half-bar Skin',
 				order = 4,
-				disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
 			},
 			BigWigsHalfBar = {
 				type = 'toggle',
 				name = 'BigWigs Half-bar Skin',
-				order = 4,
-				--disabled = function() return not AS:CheckOption('DBMSkin', 'DBM-Core') end
-			},
-			VEMSkinHalf = {
-				type = 'toggle',
-				name = 'VEM Half-bar Skin',
-				order = 4,
-				disabled = function() return not AS:CheckOption('VEMSkin', 'VEM-Core') end
-			},
-			VEMFont = {
-				type = "select", dialogControl = 'LSM30_Font',
-				order = 1,
-				name = "VEM Font",
-				values = AceGUIWidgetLSMlists.font, 
-				disabled = function() return not AS:CheckOption('VEMSkin', 'VEM-Core') end
-			},
-			VEMFontSize = {
-				type = 'range',
-				order = 2,
-				name = "VEM Font Size",
-				min = 8, max = 18, step = 1, 
-				disabled = function() return not AS:CheckOption('VEMSkin', 'VEM-Core') end
-			},
-			VEMFontFlag = {
-				name = 'VEM Font Flag',
-				order = 3,
-				type = "select",
-				values = {
-					['NONE'] = 'None',
-					['OUTLINE'] = 'OUTLINE',
-					['THICKOUTLINE'] = 'THICKOUTLINE',
-					['MONOCHROME'] = 'MONOCHROME',
-					['MONOCHROMEOUTLINE'] = 'MONOCHROMEOUTLINE',
-				},
-				disabled = function() return not AS:CheckOption('VEMSkin', 'VEM-Core') end
+				order = 5,
 			},
 		}
 	}
@@ -316,7 +278,7 @@ function AS:GenerateOptions()
 			EmbedLeftWidth = {
 				type = 'range',
 				order = 7,
-				name = "Embed Left Window Width",
+				name = 'Embed Left Window Width',
 				min = floor(EmbedSystem_MainWindow:GetWidth() * .25),
 				max = floor(EmbedSystem_MainWindow:GetWidth() * .75),
 				step = 1,
@@ -375,15 +337,34 @@ function AS:GenerateOptions()
 			},
 		}
 	}
+	E.Options.args.addonskins.args.faq = {
+		type = 'group',
+		name = "FAQ's",
+		order = 3,
+		args = {
+			question1 = {
+				type = 'description',
+				name = '|cffc41f3b[Q] DBM/VEM Half-Bar Skin Spacing looks wrong. How can I fix it?|r',
+				order = 1,
+				fontSize = 'medium',
+			},
+			answer1 = {
+				type = 'description',
+				name = '|cffabd473[A] To use the DBM/VEM Half-Bar skin. You must change the DBM/VEM Options. Offset Y needs to be at least 15.',
+				order = 2,
+				fontSize = 'medium',
+			},
+		},
+	}
 	E.Options.args.addonskins.args.credits = {
-		type = "group",
-		name = "Credits",
+		type = 'group',
+		name = 'Credits',
 		order = -1,
 		args = {
 			desc = {
 				order = 1,
-				type = "description",
-				fontSize = Large,
+				type = 'description',
+				fontSize = 'medium',
 				name = L['Coding:']..LINE_BREAK..DEVELOPER_STRING,
 			},
 		},
@@ -392,7 +373,7 @@ function AS:GenerateOptions()
 	for skinName, _ in AS:OrderedPairs(AS.register) do
 		if skinName ~= 'MiscFixes' then
 			if V.addonskins[skinName] == nil then
-				AS:Print(format("Config: No default option for %s", skinName))
+				AS:Print(format('Config: No default option for %s', skinName))
 			end
 			E.Options.args.addonskins.args.addons.args[skinName] = AS:GenerateOptionTable(skinName, order)
 			order = order + 1
