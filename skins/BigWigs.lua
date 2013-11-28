@@ -106,7 +106,7 @@ function AS:SkinBigWigs(event, addon)
 		Loaded = true
 		BigWigsBars:RegisterBarStyle("ElvUI", {
 			apiVersion = 1,
-			version = 1,
+			version = 3,
 			GetSpacing = function(bar)
 				local Spacing = 0
 				if AS:CheckOption('BigWigsHalfBar') then

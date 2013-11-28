@@ -2,14 +2,13 @@
 
 local name = "FactionizerSkin"
 function AS:SkinFactionizer()
-	local function desat()
-		for i = 1, 15 do
-			AS:Desaturate(_G["ReputationBar"..i.."ExpandOrCollapseButton"])
-		end
 
-		for i = 1, 13 do
-			AS:Desaturate(_G["FIZ_UpdateEntry"..i])
-		end
+	for i = 1, 15 do
+		AS:Desaturate(_G["ReputationBar"..i.."ExpandOrCollapseButton"])
+	end
+
+	for i = 1, 13 do
+		AS:Desaturate(_G["FIZ_UpdateEntry"..i])
 	end
 
 	local StripAllTextures = {
@@ -69,25 +68,16 @@ function AS:SkinFactionizer()
 		AS:SkinCheckBox(_G[checkbox])
 	end	
 
-	FIZ_ReputationDetailAtWarCheckBox:SetScript("OnUpdate", function(frame)
-		frame:StripTextures()
-		frame:CreateBackdrop()
-		frame.backdrop:Point("TOPLEFT", 4, -4)
-		frame.backdrop:Point("BOTTOMRIGHT", -4, 4)
-		if frame.SetCheckedTexture then
-			frame:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
-		end
-		if frame.SetDisabledCheckedTexture then
-			frame:SetDisabledCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
-		end
-	end)
+	FIZ_ReputationDetailAtWarCheckBox:StripTextures()
+	FIZ_ReputationDetailAtWarCheckBox:CreateBackdrop()
+	FIZ_ReputationDetailAtWarCheckBox.backdrop:SetInside(FIZ_ReputationDetailAtWarCheckBox, 4, 4)
+	FIZ_ReputationDetailAtWarCheckBox:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
+	FIZ_ReputationDetailAtWarCheckBox:SetDisabledCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
 
 	FIZ_OptionsFrame:CreateShadow("Default")
 	AS:SkinCloseButton(FIZ_OptionsFrameClose)
 	AS:SkinCloseButton(FIZ_ReputationDetailCloseButton)
 	AS:SkinScrollBar(FIZ_UpdateListScrollFrameScrollBar, 5)
-	local repFrame = _G["ReputationFrame"]
-	repFrame:SetScript("OnUpdate", desat)
 	FIZ_OptionsFrameClose:Point("TOPRIGHT", FIZ_OptionsFrame, "TOPRIGHT", 4, 5)
 	FIZ_OptionsFrame:SetWidth(360)
 	FIZ_ReputationDetailCloseButton:Point("TOPRIGHT", FIZ_ReputationDetailFrame, "TOPRIGHT", 4, 5)

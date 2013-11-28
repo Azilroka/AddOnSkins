@@ -135,13 +135,13 @@ function AS:SkinVEM(event, addon)
 
 				bar:ClearAllPoints()
 				if count == 1 then
-					if DBM_SavedOptions.HealthFrameGrowUp then
+					if VEM_SavedOptions.HealthFrameGrowUp then
 						bar:Point('BOTTOM', anch, 'TOP' , 0 , 12)
 					else
 						bar:Point('TOP', anch, 'BOTTOM' , 0, -buttonsize)
 					end
 				else
-					if DBM_SavedOptions.HealthFrameGrowUp then
+					if VEM_SavedOptions.HealthFrameGrowUp then
 						bar:Point('TOPLEFT', prev, 'TOPLEFT', 0, buttonsize + 4)
 					else
 						bar:Point('TOPLEFT', prev, 'TOPLEFT', 0, -(buttonsize + 4))

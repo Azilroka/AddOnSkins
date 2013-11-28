@@ -29,23 +29,17 @@ AS.MyName = E.myname
 AS.MyRealm = E.myrealm
 AS.Noop = function() return end
 
-local function pack(...)
-	-- pack args
-	local args = {}
-	for i = 1,select('#',...) do
-		local arg = select(i,...)
-		if not arg then break end
-		tinsert(args,arg)
-	end
-	return args
-end
-
 local function GenerateEventFunction(event)
 	local eventHandler = function(self, event, ...)
 		for skin, funcs in pairs(self.skins) do
 			if AS:CheckOption(skin) and self.events[event][skin] then
-				local args = pack(...)
-				for _,func in ipairs(funcs) do
+				local args = {}
+				for i = 1, select('#', ...) do
+					local arg = select(i, ...)
+					if not arg then break end
+					tinsert(args, arg)
+				end
+				for _, func in ipairs(funcs) do
 					AS:CallSkin(skin, func, event, unpack(args))
 				end
 			end

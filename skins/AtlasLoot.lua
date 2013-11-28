@@ -140,7 +140,9 @@ function AS:SkinAtlasLoot()
 	}
 
 	for _, object in pairs(StripAllTextures) do
-		_G[object]:StripTextures()
+		if object then
+			_G[object]:StripTextures()
+		end
 	end
 
 	for _, object in pairs(SetTemplateD) do
