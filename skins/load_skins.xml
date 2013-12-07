@@ -91,6 +91,7 @@
 	<Script file="SexyCooldown.lua"/>
 	<Script file="ShieldBars.lua"/>
 	<Script file="ShieldMonitor.lua"/>
+	<Script file="SilverDragon.lua"/>
 	<Script file="Skada.lua"/>
 	<Script file="Skillet.lua"/>
 	<Script file="Soundtrack.lua"/>
