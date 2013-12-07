@@ -3,6 +3,16 @@ local AS = ElvUI[1]:GetModule('AddOnSkins')
 local Loaded
 local name = "BigWigsSkin"
 function AS:SkinBigWigs(event, addon)
+	if event == 'LFG_PROPOSAL_SHOW' then
+			for i = 1, LFGDungeonReadyPopup:GetNumChildren() do
+			local object = select(i, LFGDungeonReadyPopup:GetChildren())
+			if object:GetObjectType() == 'StatusBar' then
+				AS:SkinStatusBar(object)
+			end
+		end
+		AS:UnregisterEvent(name, event)
+		return
+	end
 	local ButtonSize = 20
 	local FreeBG = {}
 
@@ -126,4 +136,4 @@ function AS:SkinBigWigs(event, addon)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinBigWigs, "ADDON_LOADED")
+AS:RegisterSkin(name, AS.SkinBigWigs, "ADDON_LOADED", 'LFG_PROPOSAL_SHOW')
