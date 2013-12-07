@@ -142,6 +142,7 @@ local DEVELOPERS = {
 	'Cadayron',
 	'Camealion',
 	'Catok',
+	'CJO',
 	'Darth Predator',
 	'Dec',
 	'Driizt',
