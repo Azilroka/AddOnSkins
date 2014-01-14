@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('AdiBags') then return end
+
 local name = "AdiBagsSkin"
 function AS:SkinAdiBags(event)
 	local AdiBags = LibStub('AceAddon-3.0'):GetAddon('AdiBags')

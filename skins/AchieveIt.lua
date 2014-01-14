@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('AchieveIt') then return end
+
 local name = "AchieveItSkin"
 function AS:SkinAchieveIt(event, addon)
 	if addon == "Blizzard_AchievementUI" then

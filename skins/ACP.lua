@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 --FIX ME
+if not AS:CheckAddOn('ACP') then return end
+
 local name = "ACPSkin"
 function AS:SkinACP()
 	local function cbResize(self, event, ...)

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('AffDots') then return end
+
 local name = "AffDotsSkin"
 function AS:SkinAffDots()
 	AS:SkinBackdropFrame(AffDotsTarget)

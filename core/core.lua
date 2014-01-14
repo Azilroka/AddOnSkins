@@ -22,7 +22,7 @@ E.private.addonskins = {}
 AS.SLE = IsAddOnLoaded('ElvUI_SLE')
 AS.Title = select(2, GetAddOnInfo(AddOnName))
 AS.Version = GetAddOnMetadata(AddOnName, 'Version')
-AS.TicketTracker = 'http://www.tukui.org/tickets/elvuiskins/'
+AS.TicketTracker = 'http://git.tukui.org/Azilroka/addonskins_elvui'
 AS.TexCoords = E.TexCoords
 AS.Locale = L
 AS.MyClass = E.myclass
@@ -153,7 +153,9 @@ function AS:Initialize()
 			else
 				addon = gsub(skin, 'Skin', '')
 			end
-			self:RegisteredSkin(skin, data.priority, data.func, data.events)
+			if skin == 'MiscFixes' or IsAddOnLoaded(addon) then
+				self:RegisteredSkin(skin, data.priority, data.func, data.events)
+			end
 		end
 	end
 
