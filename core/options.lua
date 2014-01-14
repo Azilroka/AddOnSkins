@@ -157,6 +157,7 @@ local DEVELOPERS = {
 	'MaXiMUS',
 	'Outofammo',
 	'Pat',
+	'Rakkhin',
 	'Repooc',
 	'Shadowcall',
 	'Sinaris',

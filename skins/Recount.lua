@@ -41,6 +41,16 @@ function AS:SkinRecount()
 		if frame then SkinFrame(frame) end
 	end
 
+	SkinFrame(_G["Recount_Realtime_!RAID_DAMAGE"].Window)
+	SkinFrame(_G["Recount_Realtime_!RAID_HEALING"].Window)
+	SkinFrame(_G["Recount_Realtime_!RAID_HEALINGTAKEN"].Window)
+	SkinFrame(_G["Recount_Realtime_!RAID_DAMAGETAKEN"].Window)
+	SkinFrame(_G["Recount_Realtime_Bandwidth Available_AVAILABLE_BANDWIDTH"].Window)
+	SkinFrame(_G["Recount_Realtime_FPS_FPS"].Window)
+	SkinFrame(_G["Recount_Realtime_Latency_LAG"].Window)
+	SkinFrame(_G["Recount_Realtime_Downstream Traffic_DOWN_TRAFFIC"].Window)
+	SkinFrame(_G["Recount_Realtime_Downstream Traffic_UP_TRAFFIC"].Window)
+
 	AS:SkinScrollBar(Recount_MainWindow_ScrollBarScrollBar)
 
 	Recount_MainWindow:HookScript('OnShow', function(self) if AS:CheckOption('EmbedRecount') then EmbedSystem_MainWindow:Show() end end)

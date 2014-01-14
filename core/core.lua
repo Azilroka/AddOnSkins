@@ -6,6 +6,7 @@ local LSM, EP = LibStub('LibSharedMedia-3.0'), LibStub('LibElvUIPlugin-1.0')
 
 local tinsert, pairs, ipairs, unpack, pcall, select = tinsert, pairs, ipairs, unpack, pcall, select
 local format, gsub, strfind, strmatch = format, gsub, strfind, strmatch
+local GetAddOnInfo = GetAddOnInfo
 
 E.AddOnSkins = AS
 
@@ -48,6 +49,10 @@ local function GenerateEventFunction(event)
 	return eventHandler
 end
 
+function AS:CheckAddOn(addon)
+	return select(4, GetAddOnInfo(addon))
+end
+
 function AS:RegisterSkin(skinName, skinFunc, ...)
 	local events = {}
 	local priority = 1
@@ -70,7 +75,7 @@ function AS:RegisteredSkin(skinName, priority, func, events)
 	for c, _ in pairs(events) do
 		if strfind(c, '%[') then
 			local conflict = strmatch(c, '%[([!%w_]+)%]')
-			if IsAddOnLoaded(conflict) then return end
+			if select(4, GetAddOnInfo(conflict)) then return end
 		end
 	end
 	if not self.skins[skinName] then self.skins[skinName] = {} end
@@ -139,7 +144,6 @@ function AS:Initialize()
 	self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
 	self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
 
-	-- Register Only Skins that AddOn's are loaded for.
 	for skin, alldata in pairs(self.register) do
 		for _, data in pairs(alldata) do
 			local addon
@@ -149,13 +153,10 @@ function AS:Initialize()
 			else
 				addon = gsub(skin, 'Skin', '')
 			end
-			if skin == 'MiscFixes' or IsAddOnLoaded(addon) then
-				self:RegisteredSkin(skin, data.priority, data.func, data.events)
-			end
+			self:RegisteredSkin(skin, data.priority, data.func, data.events)
 		end
 	end
 
-	-- Need to check PLAYER_LOGIN - If it works it will speed it up and will prevent double calling.
 	for skin, funcs in pairs(AS.skins) do
 		if AS:CheckOption(skin) then
 			for _, func in ipairs(funcs) do

@@ -48,7 +48,7 @@ function AS:EmbedSystem_WindowResize()
 	EmbedSystem_MainWindow:SetPoint('BOTTOM', ChatPanel, 'BOTTOM', 0, (AS.SLE and Spacing or (Spacing + DataTextSize)))
 
 	-- Dynamic Range
-	if IsAddOnLoaded("ElvUI_Config") then
+	if IsAddOnLoaded('ElvUI_Config') then
 		E.Options.args.addonskins.args.embed.args.EmbedLeftWidth.min = floor(EmbedSystem_MainWindow:GetWidth() * .25)
 		E.Options.args.addonskins.args.embed.args.EmbedLeftWidth.max = floor(EmbedSystem_MainWindow:GetWidth() * .75)
 	end
@@ -70,12 +70,20 @@ function AS:Embed_Toggle(Message)
 	EmbedSystem_LeftWindow.FrameName = nil
 	EmbedSystem_RightWindow.FrameName = nil
 	if AS:CheckOption('EmbedSystem') then
+		local MainLowered = strlower(AS:CheckOption('EmbedMain'))
+		local MainOption = MainLowered == 'skada' and 'Skada' or MainLowered == 'omen' and 'Omen' or MainLowered == 'recount' and 'Recount' or MainLowered == 'tinydps' and 'TinyDPS' or MainLowered == 'aldamagemeter' and 'alDamaageMeter' or nil
+		if MainOption then AS:SetOption('EmbedMain', MainOption) end
 		MainEmbed = AS:CheckOption('EmbedMain')
 		if MainEmbed ~= 'Skada' and MainEmbed ~= 'Omen' and MainEmbed ~= 'Recount' and MainEmbed ~= 'TinyDPS' and MainEmbed ~= 'alDamageMeter' then
 			EmbedSystem_MainWindow.FrameName = MainEmbed
 		end
 	end
 	if AS:CheckOption('EmbedSystemDual') then
+		local LeftLowered, RightLowered = strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight'))
+		local LeftOption = LeftLowered == 'skada' and 'Skada' or LeftLowered == 'omen' and 'Omen' or LeftLowered == 'recount' and 'Recount' or LeftLowered == 'tinydps' and 'TinyDPS' or LeftLowered == 'aldamagemeter' and 'alDamaageMeter' or nil
+		local RightOption = RightLowered == 'skada' and 'Skada' or RightLowered == 'omen' and 'Omen' or RightLowered == 'recount' and 'Recount' or RightLowered == 'tinydps' and 'TinyDPS' or RightLowered == 'aldamagemeter' and 'alDamaageMeter' or nil
+		if LeftOption then AS:SetOption('EmbedLeft', LeftOption) end
+		if RightOption then AS:SetOption('EmbedLeft', RightOption) end
 		LeftEmbed, RightEmbed = AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')
 		if LeftEmbed ~= 'Skada' and LeftEmbed ~= 'Omen' and LeftEmbed ~= 'Recount' and LeftEmbed ~= 'TinyDPS' and LeftEmbed ~= 'alDamageMeter' then
 			EmbedSystem_LeftWindow.FrameName = LeftEmbed
@@ -132,14 +140,14 @@ function AS:Embed_Toggle(Message)
 	if Message then
 		local Message = format("Main: '%s'", AS:CheckOption('EmbedMain'))
 		if AS:CheckOption('EmbedSystemDual') then Message = format("Left: '%s' | Right: '%s'", AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')) end
-		AS:Print(format("Embed System: - %s", Message))
+		AS:Print(format('Embed System: - %s', Message))
 	end
 end
 
 function AS:Embed_Recount()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Recount' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = "Recount_MainWindow"
+	EmbedParent.FrameName = 'Recount_MainWindow'
 
 	Recount_MainWindow:SetParent(EmbedParent)
 	Recount_MainWindow:ClearAllPoints()
@@ -166,7 +174,7 @@ end
 function AS:Embed_Omen()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Omen' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = "OmenAnchor"
+	EmbedParent.FrameName = 'OmenAnchor'
 
 	local db = Omen.db
 	db.profile.Scale = 1
@@ -199,7 +207,7 @@ end
 function AS:Embed_TinyDPS()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'TinyDPS' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = "tdpsFrame"
+	EmbedParent.FrameName = 'tdpsFrame'
 
 	AS:SkinFrame(tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 	tdpsFrame:SetParent(EmbedParent)
@@ -218,7 +226,7 @@ end
 function AS:Embed_alDamageMeter()
 	local EmbedParent = EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'alDamageMeter' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = "alDamagerMeterFrame"
+	EmbedParent.FrameName = 'alDamagerMeterFrame'
 
 	dmconf.barheight = floor((EmbedParent:GetHeight() / dmconf.maxbars) - dmconf.spacing)
 	dmconf.width = EmbedParent:GetWidth()
