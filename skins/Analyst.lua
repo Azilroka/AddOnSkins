@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Analyst') then return end
+
 local name = "AnalystSkin"
 function AS:SkinAnalyst()
 	AS:SkinFrame(EconomyFrame)

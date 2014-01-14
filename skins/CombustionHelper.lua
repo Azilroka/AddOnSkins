@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('CombustionHelper') then return end
+
 local name = "CombustionHelperSkin"
 function AS:SkinCombustionHelper()
 	CombustionFrame:CreateBackdrop()

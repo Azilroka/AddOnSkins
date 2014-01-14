@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('BigBrother') then return end
+
 local name = "BigBrotherSkin"
 function AS:SkinBigBrother()
 	hooksecurefunc(BigBrother, 'ToggleBuffWindow', function()

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('RaidInviteOrganizer') then return end
+
 local name = "RaidInviteOrganizerSkin"
 function AS:SkinRaidInviteOrganizer()
 	AS:SkinFrame(RIO_MainFrame)

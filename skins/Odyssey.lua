@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Odyssey') then return end
+
 local name = "OdysseySkin"
 function AS:SkinOdyssey()
 	OdysseyMapsMenuScrollFrame:StripTextures(true)

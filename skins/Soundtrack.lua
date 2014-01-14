@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Soundtrack') then return end
+
 local name = "SoundtrackSkin"
 function AS:SkinSoundtrack()
 	local frames = {

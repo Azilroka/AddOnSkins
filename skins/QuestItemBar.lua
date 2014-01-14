@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('QuestItemBar') then return end
+
 local name = "QuestItemBarSkin"
 function AS:SkinQuestItemBar()
 	hooksecurefunc(QuestItemBar,"LibQuestItem_Update", function()

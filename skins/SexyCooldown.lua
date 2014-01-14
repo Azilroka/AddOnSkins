@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('SexyCooldown2') then return end
+
 local name = "SexyCooldownSkin"
 function AS:SkinSexyCooldown()
 	local function SCDStripSkinSettings(bar)

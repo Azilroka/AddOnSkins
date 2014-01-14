@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('EavesDrop') then return end
+
 local name = "EavesDropSkin"
 function AS:SkinEavesDrop()
 	AS:SkinFrame(EavesDropFrame)

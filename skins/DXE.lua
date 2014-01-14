@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('DXE') then return end
+
 LoadAddOn("DXE")
 local name = "DXESkin"
 function AS:SkinDXE()

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('QuestCompletist') then return end
+
 local name = "QuestCompletistSkin"
 function AS:SkinQuestCompletist()
 	local tooltips = {

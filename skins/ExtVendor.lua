@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('ExtVendor') then return end
+
 local name = "ExtVendorSkin"
 function AS:SkinExtVendor()
 	AS:SkinFrame(MerchantFrame)

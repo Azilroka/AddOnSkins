@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Examiner') then return end
+
 local name = "ExaminerSkin"
 function AS:SkinExaminer()
 	AS:SkinFrame(Examiner)

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('PetBattleTeams') then return end
+
 local name = "PetBattleTeamsSkin"
 function AS:SkinPetBattleTeams()
 	AS:Delay(6, function()

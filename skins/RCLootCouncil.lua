@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('RCLootCouncil') then return end
+
 local name = "RCLootCouncilSkin"
 function AS:SkinRCLootCouncil()
 

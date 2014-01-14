@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('InboxMailBag') then return end
+
 local name = "InboxMailBagSkin"
 function AS:SkinInboxMailBag(event)
 	if event == "PLAYER_ENTERING_WORLD" then return end

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Skada') then return end
+
 local name = 'SkadaSkin'
 function AS:SkinSkada()
 	local L = LibStub('AceLocale-3.0'):GetLocale('Skada', false)

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('WowLua') then return end
+
 local name = "WowLuaSkin"
 function AS:SkinWowLua()
 	AS:SkinFrame(WowLuaFrame)

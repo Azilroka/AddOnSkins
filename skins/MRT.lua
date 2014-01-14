@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('MizusRaidTracker') then return end
+
 local name = "MRTSkin"
 function AS:SkinMRT()
 	AS:SkinFrame(MRT_GUIFrame)

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('TomTom') then return end
+
 local name = "TomTomSkin"
 function AS:SkinTomTom()
 	if TomTomBlock then

@@ -1,6 +1,8 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 local AddOnName = ...
 
+if not AS:CheckAddOn('LinkWrangler') then return end
+
 local name = "LinkWranglerSkin"
 function AS:SkinLinkWrangler()
 	local Path = "Interface\\AddOns\\"..AddOnName.."\\Skins\\Buttons\\"

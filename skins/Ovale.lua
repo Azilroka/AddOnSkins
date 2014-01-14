@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Ovale') then return end
+
 local name = "OvaleSkin"
 function AS:SkinOvale()
 	hooksecurefunc(Ovale, 'UpdateFrame', function(self)

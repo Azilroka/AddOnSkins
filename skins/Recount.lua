@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('RCLootCouncil') then return end
+
 local name = 'RecountSkin'
 function AS:SkinRecount()
 	local L = LibStub('AceLocale-3.0'):GetLocale('Recount')

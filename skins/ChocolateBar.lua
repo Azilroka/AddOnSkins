@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('ChocolateBar') then return end
+
 local name = "ChocolateBarSkin"
 function AS:SkinChocolateBar()
 	for i = 1, 20 do 	

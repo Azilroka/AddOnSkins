@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('ReforgeLite') then return end
+
 local name = "ReforgeLiteSkin"
 function AS:SkinReforgeLite()
 	ReforgeLite:StripTextures()

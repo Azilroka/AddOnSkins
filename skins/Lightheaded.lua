@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Lightheaded') then return end
+
 local name = "LightheadedSkin"
 function AS:SkinLightHeaded()
 	local function DoDis()

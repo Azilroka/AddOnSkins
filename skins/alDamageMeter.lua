@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('alDamageMeter') then return end
+
 local name = "alDamageMeterSkin"
 function AS:SkinALDamageMeter()
 	alDamageMeterFrame.bg:Kill()

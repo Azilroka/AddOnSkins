@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('shieldmonitor') then return end
+
 local name = "ShieldMonitorSkin"
 function AS:SkinShieldMonitor()
 	AS:SkinFrame(shieldmonitor_Frame,"Default")

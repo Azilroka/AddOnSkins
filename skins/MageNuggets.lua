@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('MageNuggets') then return end
+
 local name = "MageNuggetsSkin"
 function AS:SkinMageNuggets()
 	local Frames = {

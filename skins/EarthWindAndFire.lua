@@ -1,7 +1,8 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
-local name = "StormEarthAndFireSkin"
+if not AS:CheckAddOn('StormEarthAndFire') then return end
 
+local name = "StormEarthAndFireSkin"
 function AS:SkinStormEarthAndFire()
 	for i = 1, 2 do 	
 		local f = _G["StormEarthAndFireFrame"..i]

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Clique') then return end
+
 local name = "CliqueSkin"
 function AS:SkinClique()
 	local Frames = {

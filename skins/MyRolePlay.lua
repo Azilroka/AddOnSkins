@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('MyRolePlay') then return end
+
 local name = "MyRolePlaySkin"
 function AS:SkinMyRolePlay()
 	hooksecurefunc(mrp, "CreateBrowseFrame", function()

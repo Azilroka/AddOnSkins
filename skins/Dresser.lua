@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Dresser') then return end
+
 local name = "DresserSkin"
 function AS:SkinDresser()
 	AS:SkinButton(DresserButton1)

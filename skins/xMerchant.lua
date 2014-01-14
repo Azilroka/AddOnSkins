@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('xMerchant') then return end
+
 local name = 'xMerchantSkin'
 function AS:SkinxMerchant()
 	AS:SkinCheckBox(NuuhMerchantFrameTooltipSearching)

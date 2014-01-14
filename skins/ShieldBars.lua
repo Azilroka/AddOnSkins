@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('ShieldBars') then return end
+
 local name = "ShieldBarsSkin"
 function AS:SkinShieldBars()
 	hooksecurefunc(ShieldBars, "DisplayShields", function()

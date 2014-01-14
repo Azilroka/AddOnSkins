@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('ZygorGuidesViewer') then return end
+
 local name = "ZygorSkin"
 function AS:SkinZygor()
 	ZygorGuidesViewerFrame:StripTextures(True)

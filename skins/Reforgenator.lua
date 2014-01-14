@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Reforgenator') then return end
+
 local name = "ReforgenatorSkin"
 function AS:SkinReforgenator()
 	AS:SkinFrame(ReforgenatorPanel)

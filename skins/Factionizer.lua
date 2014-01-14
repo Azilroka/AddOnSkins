@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Factionizer') then return end
+
 local name = "FactionizerSkin"
 function AS:SkinFactionizer()
 

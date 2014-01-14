@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Incoming') then return end
+
 local name = 'IncomingSkin'
 function AS:SkinIncoming(self)
 	AS:SkinFrame(LocationMessageView)

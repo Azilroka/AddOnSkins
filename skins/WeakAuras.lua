@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('WeakAuras') then return end
+
 local name = "WeakAurasSkin"
 function AS:SkinWeakAuras()
 	local function Skin_WeakAuras(frame, ftype)

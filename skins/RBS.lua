@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('RaidBuffStatus') then return end
+
 local name = "RaidBuffStatusSkin"
 function AS:SkinRaidBuffStatus()
 	AS:SkinFrame(RBSFrame)

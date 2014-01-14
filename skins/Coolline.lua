@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('CoolLine') then return end
+
 local name = "CoolLineSkin"
 function AS:SkinCoolLine()
 	CoolLineDB.bgcolor = { r = 0, g = 0, b = 0, a = 0, }

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('BuyEmAll') then return end
+
 local name = "BuyEmAllSkin"
 function AS:SkinBuyEmAll()
 	AS:SkinFrame(BuyEmAllFrame)

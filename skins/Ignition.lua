@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Ignition') then return end
+
 local name = "IgnitionSkin"
 function AS:SkinIgnition()
 	ignTimeBar:StripTextures(true)

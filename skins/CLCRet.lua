@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('CLCRet') then return end
+
 local name = "CLCRetSkin"
 function AS:SkinCLCRet()
 	if AS.MyClass ~= "PALADIN" then return end

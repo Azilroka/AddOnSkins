@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('MinimalArchaeology') then return end
+
 local name = "MinimalArchaeologySkin"
 function AS:SkinMinimalArchaeology()
 	AS:SkinFrame(MinArchMain)

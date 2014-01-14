@@ -153,9 +153,7 @@ function AS:Initialize()
 			else
 				addon = gsub(skin, 'Skin', '')
 			end
-			if skin == 'MiscFixes' or IsAddOnLoaded(addon) then
-				self:RegisteredSkin(skin, data.priority, data.func, data.events)
-			end
+			self:RegisteredSkin(skin, data.priority, data.func, data.events)
 		end
 	end
 

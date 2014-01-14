@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('KarniCrap') then return end
+
 local name = "KarniCrapSkin"
 function AS:SkinKarniCrap()
 	AS:SkinFrame(KarniCrap)

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('TinyDPS') then return end
+
 local name = "TinyDPSSkin"
 function AS:SkinTinyDPS()
 	AS:SkinFrame(tdpsFrame)

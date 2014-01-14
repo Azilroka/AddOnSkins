@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Auctionator') then return end
+
 local name = "AuctionatorSkin"
 function AS:SkinAuctionator(event)
 	if event == "PLAYER_ENTERING_WORLD" then return end

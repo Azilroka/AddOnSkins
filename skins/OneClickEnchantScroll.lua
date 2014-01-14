@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('OneClickEnchantScroll') then return end
+
 local name = "OneClickEnchantScrollSkin"
 function AS:SkinOneClickEnchantScroll()
 	AS:SkinButton(TradeSkillCreateScrollButton, true)

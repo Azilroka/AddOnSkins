@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('EveryGoldToBanker') then return end
+
 local name = "EveryGoldToBankerSkin"
 function AS:SkinEveryGoldToBanker()
 	AS:SkinFrame(EveryGoldToBankerCalculator)

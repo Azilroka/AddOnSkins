@@ -126,7 +126,6 @@ function AS:GenerateOptionTable(skinName, order)
 		name = text,
 		desc = L['TOGGLESKIN_DESC'],
 		order = order,
-		disabled = function() if addon then return not IsAddOnLoaded(addon) else return false end end,
 	}
 	return options
 end

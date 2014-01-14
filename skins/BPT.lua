@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('BalancePowerTracker') then return end
+
 local name = "BPTSkin"
 function AS:SkinBPT()
 	if AS.MyClass ~= "DRUID" then return end

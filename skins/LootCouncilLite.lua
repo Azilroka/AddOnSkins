@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('LootCouncil_Lite') then return end
+
 local name = "LootCouncilLiteSkin"
 function AS:SkinLootCouncilLite()
 	AS:SkinFrame(RankFrame)

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Wholly') then return end
+
 local name = "WhollySkin"
 function AS:SkinWholly()
 	local function SkinWhollyFrame()

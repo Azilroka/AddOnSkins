@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('BGDefender') then return end
+
 local name = 'BGDefenderSkin'
 function AS:SkinBGDefender()
 	local function OnEnter(f)

@@ -1,6 +1,8 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
-local name = 'SilverDragonSkin'
 
+if not AS:CheckAddOn('SilverDragon') then return end
+
+local name = 'SilverDragonSkin'
 function AS:SkinSilverDragon()
 	AS:SkinFrame(SilverDragonPopupButton)
 	AS:SkinCloseButton(SilverDragonPopupButton.close)

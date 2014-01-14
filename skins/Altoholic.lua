@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Altoholic') then return end
+
 local name = "AltoholicSkin"
 function AS:SkinAltoholic(event, addon)
 

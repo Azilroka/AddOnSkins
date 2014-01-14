@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Archy') then return end
+
 local name = "ArchySkin"
 function AS:SkinArchy()
 	local function SkinArchyArtifactFrame()

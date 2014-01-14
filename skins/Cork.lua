@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Cork') then return end
+
 local name = "CorkSkin"
 function AS:SkinCork()
 	AS:SkinBackdropFrame(Corkboard)

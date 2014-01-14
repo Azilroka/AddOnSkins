@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('BagSync') then return end
+
 local name = 'BagSyncSkin'
 function AS:SkinBagSync()
 	local Frames = {

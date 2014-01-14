@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('FlightMapEnhanced') then return end
+
 local name = "FlightMapEnhancedSkin"
 function AS:SkinFlightMapEnhanced()
 	AS:SkinBackdropFrame(FlightMapEnhancedTaxiChoice)

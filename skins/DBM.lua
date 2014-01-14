@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('DBM-Core') then return end
+
 local name = 'DBMSkin'
 function AS:SkinDBM(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then

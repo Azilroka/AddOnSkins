@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('GuildMemberInfo_TradeSkills') then return end
+
 local name = "GuildMemberInfo_TradeSkillsSkin"
 function AS:SkinGuildMemberInfo_TradeSkills()
 	AS:SkinFrame(GMIFrame)

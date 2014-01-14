@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Quartz') then return end
+
 local name = "QuartzSkin"
 function AS:SkinQuartz()
 	local Quartz3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")

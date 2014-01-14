@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('MogIt') then return end
+
 local name = "MogItSkin"
 function AS:SkinMogIt()
 	AS:SkinFrame(MogItFrame)

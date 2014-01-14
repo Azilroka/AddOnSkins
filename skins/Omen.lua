@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Omen') then return end
+
 local name = 'OmenSkin'
 function AS:SkinOmen()
 	Omen.db.profile.Scale = 1

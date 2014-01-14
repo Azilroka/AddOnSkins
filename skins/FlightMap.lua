@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('FlightMap') then return end
+
 local name = "FlightMapSkin"
 function AS:SkinFlightMap()
 	AS:SkinStatusBar(FlightMapTimesFrame)

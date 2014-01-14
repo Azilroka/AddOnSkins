@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('MoveAnything') then return end
+
 local name = "MoveAnythingSkin"
 function AS:SkinMoveAnything()
 	AS:SkinFrame(MAOptions)

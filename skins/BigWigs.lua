@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('BigWigs') then return end
+
 local Loaded
 local name = "BigWigsSkin"
 function AS:SkinBigWigs(event, addon)

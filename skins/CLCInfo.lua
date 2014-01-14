@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('clcInfo') then return end
+
 local name = 'CLCInfoSkin'
 function AS:SkinCLCInfo(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('PoMTracker') then return end
+
 local name = "PoMTrackerSkin"
 function AS:SkinPoMTracker()
 	AS:SkinFrame(PoMOptionFrame)

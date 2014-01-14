@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('GupPet') then return end
+
 local name = "GupPetSkin"
 function AS:SkinGupPet()
 	AS:SkinFrame(GupPet_InterfaceOptionsFrame)

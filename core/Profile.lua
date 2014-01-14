@@ -95,6 +95,7 @@ V['addonskins'] = {
 	['SexyCooldownSkin'] = true,
 	['ShieldBarsSkin'] = true,
 	['ShieldMonitorSkin'] = true,
+	['SilverDragonSkin'] = true,
 	['SkadaSkin'] = true,
 	['SkilletSkin'] = true,
 	['SoundtrackSkin'] = true,

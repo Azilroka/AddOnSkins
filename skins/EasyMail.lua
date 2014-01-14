@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('EasyMail') then return end
+
 local name = "EasyMailSkin"
 function AS:SkinEasyMail(event)
 	if event == "PLAYER_ENTERING_WORLD" then return end

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('ArkInventory') then return end
+
 local name = "ArkInventorySkin"
 function AS:SkinArkInventory()
 	hooksecurefunc(ArkInventory, 'Frame_Main_Paint', function(frame)

@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Titan') then return end
+
 local name = "TitanPanelSkin"
 function AS:SkinTitanPanel()
 	AS:SkinFrame(Titan_Bar__Display_Bar, "Default")

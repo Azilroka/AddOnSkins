@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Arh') then return end
+
 local name = 'ArhSkin'
 function AS:SkinArh()
 	AS:SkinFrame(Arh_MainFrame)

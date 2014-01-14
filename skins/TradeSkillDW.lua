@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('TradeSkillDW') then return end
+
 local name = "TradeSkillDWSkin"
 function AS:SkinTradeSkillDW()
 	AS:SkinFrame(TradeSkillFrame)

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Spy') then return end
+
 local name = "SpySkin"
 function AS:SkinSpy()
 	AS:SkinFrame(Spy_MainWindow)

@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('CLCProt') then return end
+
 local name = "CLCProtSkin"
 function AS:SkinCLCProt()
 	if AS.MyClass ~= "PALADIN" then return end

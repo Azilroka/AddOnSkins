@@ -1,5 +1,7 @@
 ﻿local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Skillet') then return end
+
 local name = "SkilletSkin"
 function AS:SkinSkillet()
 	local function SkinButton(ButtonOrSpellID)

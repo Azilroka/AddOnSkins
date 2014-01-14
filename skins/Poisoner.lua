@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('Poisoner') then return end
+
 local name = "PoisonerSkin"
 function AS:SkinPoisoner()
 	AS:SkinFrame(PoisonerOptions_SettingsFrame)
