@@ -13,6 +13,7 @@ function AS:CheckConflicts()
 		'DecUI_Numeration_Skin',
 		'DecUI_OneClickEnchantScroll_Skin',
 		'DecUI_xMerchant_Skin',
+		'ElvUI_AddOnSkins',
 		'ElvUI_AtlasLoot_Skin',
 		'ElvUI_BGDefender_Skin',
 		'ElvUI_CB_Skin',
@@ -39,6 +40,8 @@ function AS:CheckConflicts()
 	end
 
 	if Disabled then
-		AS:Print("Conflict System: Disabled Conflict's. If you received ANY lua error's. You will have to reload. To reload type '/rl'.")
+		AS:AcceptFrame(AS.Title.." Conflict System: Disabled Conflict's. If you received ANY lua error's. You will have to reload.", function(self) ReloadUI() end)
 	end
 end
+
+AS:CheckConflicts()

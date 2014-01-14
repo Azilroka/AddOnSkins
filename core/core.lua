@@ -135,7 +135,6 @@ function AS:Initialize()
 	end
 
 	EP:RegisterPlugin(AddOnName, AS.GenerateOptions)
-	self:CheckConflicts()
 
 	E.private.addonskins['MiscFixes'] = true
 
@@ -354,20 +353,23 @@ end
 local AcceptFrame
 function AS:AcceptFrame(MainText, Function)
 	if not AcceptFrame then
+		local Font = LSM:Fetch("font", E.db.general.font)
 		AcceptFrame = CreateFrame('Frame', nil, UIParent)
 		AcceptFrame:SetTemplate('Transparent')
-		AcceptFrame:SetSize(250, 70)
+		AcceptFrame:SetSize(250, 100)
 		AcceptFrame:SetPoint('CENTER', UIParent, 'CENTER')
 		AcceptFrame:SetFrameStrata('DIALOG')
 		AcceptFrame.Text = AcceptFrame:CreateFontString(nil, "OVERLAY")
-		AcceptFrame.Text:SetFont(AS.Font, 12)
+		AcceptFrame.Text:SetWordWrap(true)
+		AcceptFrame.Text:SetWidth(200)
+		AcceptFrame.Text:SetFont(Font, 12)
 		AcceptFrame.Text:SetPoint('TOP', AcceptFrame, 'TOP', 0, -10)
 		AcceptFrame.Accept = CreateFrame('Button', nil, AcceptFrame)
 		AS:SkinButton(AcceptFrame.Accept)
 		AcceptFrame.Accept:SetSize(70, 25)
 		AcceptFrame.Accept:SetPoint('RIGHT', AcceptFrame, 'BOTTOM', -10, 20)
 		AcceptFrame.Accept.Text = AcceptFrame.Accept:CreateFontString(nil, "OVERLAY")
-		AcceptFrame.Accept.Text:SetFont(AS.Font, 10)
+		AcceptFrame.Accept.Text:SetFont(Font, 10)
 		AcceptFrame.Accept.Text:SetPoint('CENTER')
 		AcceptFrame.Accept.Text:SetText(YES)
 		AcceptFrame.Close = CreateFrame('Button', nil, AcceptFrame)
@@ -376,7 +378,7 @@ function AS:AcceptFrame(MainText, Function)
 		AcceptFrame.Close:SetPoint('LEFT', AcceptFrame, 'BOTTOM', 10, 20)
 		AcceptFrame.Close:SetScript('OnClick', function(self) self:GetParent():Hide() end)
 		AcceptFrame.Close.Text = AcceptFrame.Close:CreateFontString(nil, "OVERLAY")
-		AcceptFrame.Close.Text:SetFont(AS.Font, 10)
+		AcceptFrame.Close.Text:SetFont(Font, 10)
 		AcceptFrame.Close.Text:SetPoint('CENTER')
 		AcceptFrame.Close.Text:SetText(NO)
 	end
