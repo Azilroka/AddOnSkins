@@ -1,6 +1,6 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
-if not AS:CheckAddOn('RCLootCouncil') then return end
+if not AS:CheckAddOn('Recount') then return end
 
 local name = 'RecountSkin'
 function AS:SkinRecount()
