@@ -83,7 +83,7 @@ function AS:Embed_Toggle(Message)
 		local LeftOption = LeftLowered == 'skada' and 'Skada' or LeftLowered == 'omen' and 'Omen' or LeftLowered == 'recount' and 'Recount' or LeftLowered == 'tinydps' and 'TinyDPS' or LeftLowered == 'aldamagemeter' and 'alDamaageMeter' or nil
 		local RightOption = RightLowered == 'skada' and 'Skada' or RightLowered == 'omen' and 'Omen' or RightLowered == 'recount' and 'Recount' or RightLowered == 'tinydps' and 'TinyDPS' or RightLowered == 'aldamagemeter' and 'alDamaageMeter' or nil
 		if LeftOption then AS:SetOption('EmbedLeft', LeftOption) end
-		if RightOption then AS:SetOption('EmbedLeft', RightOption) end
+		if RightOption then AS:SetOption('EmbedRight', RightOption) end
 		LeftEmbed, RightEmbed = AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')
 		if LeftEmbed ~= 'Skada' and LeftEmbed ~= 'Omen' and LeftEmbed ~= 'Recount' and LeftEmbed ~= 'TinyDPS' and LeftEmbed ~= 'alDamageMeter' then
 			EmbedSystem_LeftWindow.FrameName = LeftEmbed
