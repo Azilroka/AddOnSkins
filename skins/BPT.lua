@@ -3,20 +3,23 @@ local AS = ElvUI[1]:GetModule('AddOnSkins')
 if not AS:CheckAddOn('BalancePowerTracker') then return end
 
 local name = "BPTSkin"
-function AS:SkinBPT()
+function AS:SkinBPT(event, addon)
 	if AS.MyClass ~= "DRUID" then return end
+	local BPT = BalancePowerTracker.modules.eclipse_bar
 	BalancePowerTracker_Options.global.enabled = true
 	BalancePowerTracker.CheckAll()
-	AS:SkinFrame(BalancePowerTracker_Eclipse_Bar_Frame, false, true)
-	AS:SkinFrame(BalancePowerTracker_SolarEclipseIcon, false, true)
-	AS:SkinFrame(BalancePowerTracker_LunarEclipseIcon, false, true)
-	hooksecurefunc(BalancePowerTracker.modules.eclipse_bar, "ReDraw", function() 
-		AS:SkinFrame(BalancePowerTracker_Eclipse_Bar_Frame, false, true)
-		AS:SkinFrame(BalancePowerTracker_SolarEclipseIcon, false, true)
-		AS:SkinFrame(BalancePowerTracker_LunarEclipseIcon, false, true)
-		BalancePowerTracker_Eclipse_Bar_Frame:SetTemplate("Transparent")
+	hooksecurefunc(BPT, "ReDraw", function()
+		if BPT.UIcreated then
+			AS:SkinBackdropFrame(BPT.frame, 'Default', true, false, true)
+			AS:SkinFrame(BPT.lframe, 'Default', true)
+			AS:SkinFrame(BPT.sframe, 'Default', true)
+			AS:SkinTexture(BPT.lframetexture)
+			AS:SkinTexture(BPT.sframetexture)
+			BPT.lframetexture:SetInside()
+			BPT.sframetexture:SetInside()
+		end
 	end)
-	BalancePowerTracker.modules.eclipse_bar:ReDraw()
+	BPT:ReDraw()
 end
 
 AS:RegisterSkin(name, AS.SkinBPT)

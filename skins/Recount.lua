@@ -43,16 +43,14 @@ function AS:SkinRecount()
 		if frame then SkinFrame(frame) end
 	end
 
-	SkinFrame(_G["Recount_Realtime_!RAID_DAMAGE"].Window)
-	SkinFrame(_G["Recount_Realtime_!RAID_HEALING"].Window)
-	SkinFrame(_G["Recount_Realtime_!RAID_HEALINGTAKEN"].Window)
-	SkinFrame(_G["Recount_Realtime_!RAID_DAMAGETAKEN"].Window)
-	SkinFrame(_G["Recount_Realtime_Bandwidth Available_AVAILABLE_BANDWIDTH"].Window)
-	SkinFrame(_G["Recount_Realtime_FPS_FPS"].Window)
-	SkinFrame(_G["Recount_Realtime_Latency_LAG"].Window)
-	SkinFrame(_G["Recount_Realtime_Downstream Traffic_DOWN_TRAFFIC"].Window)
-	SkinFrame(_G["Recount_Realtime_Downstream Traffic_UP_TRAFFIC"].Window)
-
+	if _G["Recount_Realtime_!RAID_HEALING"] then SkinFrame(_G["Recount_Realtime_!RAID_HEALING"].Window) end
+	if _G["Recount_Realtime_!RAID_HEALINGTAKEN"] then SkinFrame(_G["Recount_Realtime_!RAID_HEALINGTAKEN"].Window) end
+	if _G["Recount_Realtime_!RAID_DAMAGETAKEN"] then SkinFrame(_G["Recount_Realtime_!RAID_DAMAGETAKEN"].Window) end
+	if _G["Recount_Realtime_Bandwidth Available_AVAILABLE_BANDWIDTH"] then SkinFrame(_G["Recount_Realtime_Bandwidth Available_AVAILABLE_BANDWIDTH"].Window) end
+	if _G["Recount_Realtime_FPS_FPS"] then SkinFrame(_G["Recount_Realtime_FPS_FPS"].Window) end
+	if _G["Recount_Realtime_Latency_LAG"] then SkinFrame(_G["Recount_Realtime_Latency_LAG"].Window) end
+	if _G["Recount_Realtime_Downstream Traffic_DOWN_TRAFFIC"] then SkinFrame(_G["Recount_Realtime_Downstream Traffic_DOWN_TRAFFIC"].Window) end
+	if _G["Recount_Realtime_Downstream Traffic_UP_TRAFFIC"] then SkinFrame(_G["Recount_Realtime_Downstream Traffic_UP_TRAFFIC"].Window) end
 	AS:SkinScrollBar(Recount_MainWindow_ScrollBarScrollBar)
 
 	Recount_MainWindow:HookScript('OnShow', function(self) if AS:CheckOption('EmbedRecount') then EmbedSystem_MainWindow:Show() end end)
@@ -60,7 +58,7 @@ function AS:SkinRecount()
 
 	hooksecurefunc(Recount, 'ShowScrollbarElements', function(self, name) Recount_MainWindow_ScrollBarScrollBar:Show() end)
 	hooksecurefunc(Recount, 'HideScrollbarElements', function(self, name) Recount_MainWindow_ScrollBarScrollBar:Hide() end)
-	hooksecurefunc(Recount, 'CreateFrame', function(self, frame) SkinFrame(_G[frame]) end)
+	hooksecurefunc(Recount, 'CreateFrame', function(self, frame) if frame then SkinFrame(_G[frame]) end end)
 
 	hooksecurefunc(Recount, 'ShowReport', function(self)
 		if Recount_ReportWindow.isSkinned then return end
