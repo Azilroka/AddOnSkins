@@ -19,7 +19,7 @@ AS.addOnWatch = {}
 AS.FrameLocks = {}
 E.private.addonskins = {}
 
-AS.SLE = IsAddOnLoaded('ElvUI_SLE')
+AS.SLE = select(4, GetAddOnInfo('ElvUI_SLE'))
 AS.Title = select(2, GetAddOnInfo(AddOnName))
 AS.Version = GetAddOnMetadata(AddOnName, 'Version')
 AS.TicketTracker = 'http://git.tukui.org/Azilroka/addonskins_elvui'

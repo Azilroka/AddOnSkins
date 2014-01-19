@@ -4,8 +4,7 @@ if not AS:CheckAddOn('AtlasLoot') then return end
 
 local name = 'AtlasLootSkin'
 function AS:SkinAtlasLoot(event, addon)
-	if event == 'PLAYER_ENTERING_WORLD' then return end
-	if addon ~= 'AtlasLoot' then return end
+	if addon ~= 'AtlasLoot' or IsAddOnLoaded('AtlasLoot') then return end
 
 	local function AL_OnShow(self, event, ...)
 		AtlasLootPanel:SetPoint('TOP', AtlasLootDefaultFrame, 'BOTTOM', 0, -1)

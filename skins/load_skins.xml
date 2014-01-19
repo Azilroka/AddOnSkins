@@ -71,6 +71,7 @@
 	<Script file="Ogri'Lazy.lua"/>
 	<Script file="Omen.lua"/>
 	<Script file="OneClickEnchantScroll.lua"/>
+	<Script file="oRA3.lua"/>
 	<Script file="Outfitter.lua"/>
 	<Script file="Ovale.lua"/>
 	<Script file="PetBattleTeams.lua"/>
@@ -87,6 +88,7 @@
 	<Script file="ReforgeLite.lua"/>
 	<Script file="Reforgenator.lua"/>
 	<Script file="Reforgerade.lua"/>
+	<Script file="Scrap.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
 	<Script file="SexyCooldown.lua"/>
 	<Script file="ShieldBars.lua"/>
