@@ -1,6 +1,6 @@
 ## Interface: 50400
 ## Title: |cff1784d1ElvUI |r|cffFFFFFFAddOnSkins|r
-## Version: 1.78
+## Version: 1.79
 ## Author: Azilroka, Sortokk
 ## LoadOnDemand: 1
 ## LoadWith: ElvUI, ElvUI_SLE
