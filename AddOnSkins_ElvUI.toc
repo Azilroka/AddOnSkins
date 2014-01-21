@@ -1,9 +1,8 @@
 ## Interface: 50400
 ## Title: |cff1784d1ElvUI |r|cffFFFFFFAddOnSkins|r
-## Version: 1.79
+## Version: 1.83
 ## Author: Azilroka, Sortokk
-## LoadOnDemand: 1
-## LoadWith: ElvUI, ElvUI_SLE
+## RequiredDep: ElvUI
 ## X-Tukui-ProjectID: 128
 ## X-Tukui-ProjectFolders: AddOnSkins_ElvUI
 
