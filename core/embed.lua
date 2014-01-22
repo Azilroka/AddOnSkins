@@ -30,22 +30,22 @@ function AS:EmbedSystem_WindowResize()
 	if InCombatLockdown() then return end
 	local DataTextSize = AS:CheckOption('EmbedLeftChat') and E.db.datatexts.leftChatPanel and LeftChatDataPanel:GetHeight() or E.db.datatexts.rightChatPanel and RightChatDataPanel:GetHeight() or 0
 	local ChatTabSize = AS:CheckOption('EmbedBelowTop') and RightChatTab:GetHeight() or 0
-	local Width = AS.SLE and (E.PixelMode and 4 or 6) or E.PixelMode and 6 or 10
+	local Width = E.PixelMode and 6 or 10
 	local Height = E.PixelMode and 2 or 4
-	local Spacing = AS.SLE and (E.PixelMode and 2 or 3) or E.PixelMode and 3 or 7
-	local Total = AS.SLE and ((E.PixelMode and 4 or 6) + ChatTabSize) or ((E.PixelMode and 6 or 12) + ChatTabSize + DataTextSize)
+	local Spacing = E.PixelMode and 6 or 8
+	local Total = AS.SLE and (Spacing + ChatTabSize) or ((E.PixelMode and 11 or 16) + ChatTabSize + DataTextSize)
 
 	local ChatPanel = AS:CheckOption('EmbedLeftChat') and LeftChatPanel or RightChatPanel
 
 	EmbedSystem_MainWindow:SetParent(ChatPanel)
 
 	EmbedSystem_MainWindow:SetSize(ChatPanel:GetWidth() - Width, ChatPanel:GetHeight() - Total)
-	EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth') + (E.PixelMode and 1 or 0), EmbedSystem_MainWindow:GetHeight() - Height)
-	EmbedSystem_RightWindow:SetSize((EmbedSystem_MainWindow:GetWidth() - AS:CheckOption('EmbedLeftWidth')) - 1, EmbedSystem_MainWindow:GetHeight() - Height)
+	EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth'), EmbedSystem_MainWindow:GetHeight())
+	EmbedSystem_RightWindow:SetSize((EmbedSystem_MainWindow:GetWidth() - AS:CheckOption('EmbedLeftWidth')) - 1, EmbedSystem_MainWindow:GetHeight())
 
-	EmbedSystem_LeftWindow:SetPoint('RIGHT', EmbedSystem_RightWindow, 'LEFT', (E.PixelMode and 0 or -1), 0)
+	EmbedSystem_LeftWindow:SetPoint('LEFT', EmbedSystem_MainWindow, 'LEFT', 0, 0)
 	EmbedSystem_RightWindow:SetPoint('RIGHT', EmbedSystem_MainWindow, 'RIGHT', 0, 0)
-	EmbedSystem_MainWindow:SetPoint('BOTTOM', ChatPanel, 'BOTTOM', 0, (AS.SLE and Spacing or (Spacing + DataTextSize)))
+	EmbedSystem_MainWindow:SetPoint('BOTTOM', ChatPanel, 'BOTTOM', 0, (AS.SLE and (Spacing - 1) or (Spacing + DataTextSize)))
 
 	-- Dynamic Range
 	if IsAddOnLoaded('ElvUI_Config') then

@@ -5,16 +5,19 @@ if not AS:CheckAddOn('BigWigs') then return end
 local Loaded
 local name = "BigWigsSkin"
 function AS:SkinBigWigs(event, addon)
-	if event == 'LFG_PROPOSAL_SHOW' then
-			for i = 1, LFGDungeonReadyPopup:GetNumChildren() do
-			local object = select(i, LFGDungeonReadyPopup:GetChildren())
-			if object:GetObjectType() == 'StatusBar' then
+	LFGDungeonReadyPopup:HookScript('OnUpdate', function(self)
+		for i = 1, self:GetNumChildren() do
+			local object = select(i, self:GetChildren())
+			if object:GetObjectType() == 'StatusBar' and not object.IsSkinned then
 				AS:SkinStatusBar(object)
+				object:ClearAllPoints()
+				object:SetPoint('TOP', self, 'BOTTOM', 0, -2)
+				object:SetHeight(16)
+				object.IsSkinned = true
 			end
 		end
-		AS:UnregisterEvent(name, event)
-		return
-	end
+	end)
+
 	local ButtonSize = 20
 	local FreeBG = {}
 
@@ -118,7 +121,7 @@ function AS:SkinBigWigs(event, addon)
 		Loaded = true
 		BigWigsBars:RegisterBarStyle("ElvUI", {
 			apiVersion = 1,
-			version = 3,
+			version = 6,
 			GetSpacing = function(bar)
 				local Spacing = 0
 				if AS:CheckOption('BigWigsHalfBar') then
