@@ -18,6 +18,7 @@
 	<Script file="AuctionLite.lua"/>
 	<Script file="Bagnon.lua"/>
 	<Script file="BagSync.lua"/>
+	<Script file="BattlePetBreedID.lua"/>
 	<Script file="BGDefender.lua"/>
 	<Script file="BigBrother.lua"/>
 	<Script file="BigWigs.lua"/>
@@ -47,6 +48,7 @@
 	<Script file="Factionizer.lua"/>
 	<Script file="FlightMap.lua"/>
 	<Script file="FlightMapEnhanced.lua"/>
+	<Script file="Grinder.lua"/>
 	<Script file="GuildMemberInfo_TradeSkills.lua"/>
 	<Script file="GupPet.lua"/>
 	<Script file="Healium.lua"/>
@@ -104,6 +106,7 @@
 	<Script file="TinyDPS.lua"/>
 	<Script file="TitanPanel.lua"/>
 	<Script file="TomTom.lua"/>
+	<Script file="TomeOfTeleportation.lua"/>
 	<Script file="TradeSkillDW.lua"/>
 	<Script file="VEM.lua"/>
 	<Script file="VengeanceStatus.lua"/>

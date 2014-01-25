@@ -33,7 +33,7 @@ function AS:EmbedSystem_WindowResize()
 	local Width = E.PixelMode and 6 or 10
 	local Height = E.PixelMode and 2 or 4
 	local Spacing = E.PixelMode and 6 or 8
-	local Total = AS.SLE and (Spacing + ChatTabSize) or ((E.PixelMode and 11 or 16) + ChatTabSize + DataTextSize)
+	local Total = AS.SLE and (Spacing + ChatTabSize + (E.PixelMode and 3 or 5)) or ((E.PixelMode and 11 or 16) + ChatTabSize + DataTextSize)
 
 	local ChatPanel = AS:CheckOption('EmbedLeftChat') and LeftChatPanel or RightChatPanel
 
