@@ -197,7 +197,6 @@ function AS:Embed_Omen()
 		OmenBarList:StripTextures()
 	end
 
-
 	OmenAnchor:SetParent(EmbedParent)
 	OmenAnchor:ClearAllPoints()
 	OmenAnchor:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)

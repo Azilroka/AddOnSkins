@@ -94,9 +94,6 @@ local Skins = {
 	['CLCRetSkin'] = {
 		['buttonText'] = 'CLCRet Icons',
 	},
-	['WeakAurasSkin'] = {
-		['buttonText'] = 'WeakAuras Icons',
-	},
 	['ParchmentRemover'] = {
 		['buttonText'] = 'Parchment Remover',
 		['addon'] = 'ElvUI_AddOnSkins'
@@ -144,7 +141,7 @@ local DEVELOPERS = {
 	'CJO',
 	'Darth Predator',
 	'Dec',
-	'Driizt',
+	'Drii',
 	'Edoc',
 	'efaref',
 	'Elv',
@@ -338,10 +335,23 @@ function AS:GenerateOptions()
 			},
 		}
 	}
+	E.Options.args.addonskins.args.misc = {
+		type = 'group',
+		name = MISCELLANEOUS,
+		order = 3,
+		args = {
+			WeakAuraAuraBar = {
+				type = 'toggle',
+				name = 'WeakAura AuraBar',
+				order = 1,
+				disabled = function() return not AS:CheckOption('WeakAuras') end
+			},
+		}
+	}
 	E.Options.args.addonskins.args.faq = {
 		type = 'group',
 		name = "FAQ's",
-		order = 3,
+		order = 4,
 		args = {
 			question1 = {
 				type = 'description',

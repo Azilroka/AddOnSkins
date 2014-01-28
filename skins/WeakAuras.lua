@@ -31,8 +31,9 @@ function AS:SkinWeakAuras()
 	
 	local function Create_Aurabar(parent)
 		local region = WeakAuras.regionTypes.aurabar.OldCreate(parent)
-		Skin_WeakAuras(region, 'aurabar')
-		
+		if AS:CheckOption('WeakAuraAuraBar') then
+			Skin_WeakAuras(region, 'aurabar')
+		end
 		return region
 	end
 
@@ -44,8 +45,9 @@ function AS:SkinWeakAuras()
 	
 	local function Modify_Aurabar(parent, region, data)
 		WeakAuras.regionTypes.aurabar.OldModify(parent, region, data)
-
-		Skin_WeakAuras(region, 'aurabar')
+		if AS:CheckOption('WeakAuraAuraBar') then
+			Skin_WeakAuras(region, 'aurabar')
+		end
 	end
 	
 	WeakAuras.regionTypes.icon.OldCreate = WeakAuras.regionTypes.icon.create
