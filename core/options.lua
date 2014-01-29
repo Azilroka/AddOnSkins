@@ -339,12 +339,14 @@ function AS:GenerateOptions()
 		type = 'group',
 		name = MISCELLANEOUS,
 		order = 3,
+		get = function(info) return AS:CheckOption(info[#info]) end,
+		set = function(info, value) AS:SetOption(info[#info], value) AS:EmbedSystem_WindowResize() AS:Embed_Check() end,
 		args = {
 			WeakAuraAuraBar = {
 				type = 'toggle',
 				name = 'WeakAura AuraBar',
 				order = 1,
-				disabled = function() return not AS:CheckOption('WeakAuras') end
+				disabled = function() return not AS:CheckOption('WeakAurasSkin', 'WeakAuras') end
 			},
 		}
 	}

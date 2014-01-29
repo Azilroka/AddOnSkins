@@ -5,9 +5,10 @@ if not AS:CheckAddOn('PetTracker') then return end
 local name = "PetTrackerSkin"
 function AS:SkinPetTracker()
 	local frame = PetTracker.Tracker.usedFrames[1].Anchor -- Used to just be Anchor, but he overwrote __index and now we have to do this
-	AS:SkinFrame(frame.Overlay)
+	AS:SkinBackdropFrame(frame)
+	frame.Overlay:StripTextures(true)
 	for i = 1, PetTracker.MaxQuality do
-		AS:SkinStatusBar(frame[i])
+		frame[i]:SetStatusBarTexture(AS.NormTex)
 	end
 
 	AS:SkinFrame(PetTrackerSwap)
@@ -55,6 +56,27 @@ function AS:SkinPetTracker()
 			AS:SkinTexture(button.Icon)
         end
     end
+	AS:SkinEditBox(PetTrackerMapFilter)
+	AS:SkinTooltip(PetTrackerMapFilterSuggestions)
+	AS:SkinTooltip(PetTrackerMapTip1)
+	AS:SkinTooltip(PetTrackerMapTip2)
+	for i = 1, PetTrackerMapFilterSuggestions:GetNumChildren() do
+		local Button = select(i, PetTrackerMapFilterSuggestions:GetChildren())
+		Button:SetFrameLevel(PetTrackerMapFilterSuggestions:GetFrameLevel() + 1)
+	end
+	WorldMapShowDropDownButton:HookScript('OnClick', function()
+		if SushiDropdownFrame1.IsDone then return end
+		for i = 1, SushiDropdownFrame1:GetNumChildren() do
+			local Region = select(i, SushiDropdownFrame1:GetChildren())
+			if Region:GetObjectType() == 'Frame' then
+				Region:StripTextures()
+				SushiDropdownFrame1:ClearAllPoints()
+				SushiDropdownFrame1:SetPoint('BOTTOMRIGHT', WorldMapShowDropDownButton, 'TOPRIGHT', 0, 4)
+				SushiDropdownFrame1:CreateBackdrop('Transparent')
+				SushiDropdownFrame1.IsDone = true
+			end
+		end
+	end)
 end
 
 AS:RegisterSkin(name, AS.SkinPetTracker)

@@ -1,5 +1,5 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
---FIX ME
+
 if not AS:CheckAddOn('ACP') then return end
 
 local name = "ACPSkin"
@@ -8,62 +8,35 @@ function AS:SkinACP()
 		for i = 1, 20, 1 do
 			local checkbox = _G["ACP_AddonListEntry" .. i .. "Enabled"]
 			local collapse = _G["ACP_AddonListEntry" .. i .. "Collapse"]
-			local security = _G["ACP_AddonListEntry" .. i .. "Security"]
-			local curr_category = ""
-
-			if curr_category == "" then
-				checkbox:SetPoint("LEFT", 5, 0)
-				if collapse:IsShown() then
-					checkbox:SetWidth(26)
-					checkbox:SetHeight(26)
-				else
-					checkbox:SetPoint("LEFT", 15, 0)
-					checkbox:SetWidth(20)
-					checkbox:SetHeight(20)
-				end
-			end
-			if security:IsShown() then
-				checkbox:SetPoint("LEFT", 5, 0)
-				checkbox:SetWidth(26)
-				checkbox:SetHeight(26)
+			checkbox:SetPoint("LEFT", 5, 0)
+			checkbox:Size(26)
+	
+			if not collapse:IsShown() then
+				checkbox:SetPoint("LEFT", 15, 0)
+				checkbox:Size(20)
 			end
 		end
 	end
 
+	ACP_AddonList_ScrollFrame:HookScript('OnUpdate', cbResize)
+
 	AS:SkinFrame(ACP_AddonList)
 	AS:SkinFrame(ACP_AddonList_ScrollFrame)
-
-	local buttons = {
-		"ACP_AddonListSetButton",
-		"ACP_AddonListDisableAll",
-		"ACP_AddonListEnableAll",
-		"ACP_AddonList_ReloadUI",
-		"ACP_AddonListBottomClose",
-	}
-
-	for _, button in pairs(buttons) do
-		AS:SkinButton(_G[button])
-	end	
+	AS:SkinButton(ACP_AddonListSetButton)
+	AS:SkinButton(ACP_AddonListDisableAll)
+	AS:SkinButton(ACP_AddonListEnableAll)
+	AS:SkinButton(ACP_AddonList_ReloadUI)
+	AS:SkinButton(ACP_AddonListBottomClose)
+	AS:SkinCloseButton(ACP_AddonListCloseButton)
+	AS:SkinCheckBox(ACP_AddonList_NoRecurse)
+	AS:SkinScrollBar(ACP_AddonList_ScrollFrameScrollBar)
+	AS:SkinDropDownBox(ACP_AddonListSortDropDown, 130)
 
 	for i = 1, 20 do
 		AS:SkinButton(_G["ACP_AddonListEntry"..i.."LoadNow"])
+		AS:SkinCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
 	end	
 
-	AS:SkinCloseButton(ACP_AddonListCloseButton)
-
-	for i = 1, 20, 1 do
-		local ACP_OnLoad = _G["ACP_AddonList"]
-		ACP_OnLoad:SetScript("OnUpdate", cbResize)
-	end
-
-	for i = 1, 20 do
-		AS:SkinCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
-	end
-	AS:SkinCheckBox(ACP_AddonList_NoRecurse)
-
-	AS:SkinScrollBar(ACP_AddonList_ScrollFrameScrollBar)
-	AS:SkinDropDownBox(ACP_AddonListSortDropDown)
-	ACP_AddonListSortDropDown:Width(130)
 	ACP_AddonList_ScrollFrame:SetWidth(590)
 	ACP_AddonList_ScrollFrame:SetHeight(412)
 	ACP_AddonList:SetHeight(502)
@@ -71,15 +44,10 @@ function AS:SkinACP()
 	ACP_AddonList_ScrollFrame:Point("TOPLEFT", ACP_AddonList, "TOPLEFT", 20, -53)
 	ACP_AddonListCloseButton:Point("TOPRIGHT", ACP_AddonList, "TOPRIGHT", 4, 5)
 	ACP_AddonListSetButton:Point("BOTTOMLEFT", ACP_AddonList, "BOTTOMLEFT", 20, 8)
-	ACP_AddonListSetButton:SetHeight(25)
 	ACP_AddonListDisableAll:Point("BOTTOMLEFT", ACP_AddonList, "BOTTOMLEFT", 90, 8)
-	ACP_AddonListDisableAll:SetHeight(25)
 	ACP_AddonListEnableAll:Point("BOTTOMLEFT", ACP_AddonList, "BOTTOMLEFT", 175, 8)
-	ACP_AddonListEnableAll:SetHeight(25)
 	ACP_AddonList_ReloadUI:Point("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -160, 8)
 	ACP_AddonListBottomClose:Point("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -50, 8)
-	ACP_AddonListBottomClose:SetHeight(25)
-	ACP_AddonList:SetParent(UIParent)
- end
+end
 
- AS:RegisterSkin(name, AS.SkinACP)
+AS:RegisterSkin(name, AS.SkinACP)
