@@ -6,11 +6,21 @@ local name = "WeakAurasSkin"
 function AS:SkinWeakAuras()
 	local function Skin_WeakAuras(frame, ftype)
 		if not frame.backdrop then
-			frame:CreateBackdrop('Default')
-			frame.icon.OldAlpha = frame.icon.SetAlpha
-			frame.icon.SetAlpha = function(self, ...)
-				frame.icon.OldAlpha(self, ...)
-				frame.backdrop:SetAlpha(...)
+			frame:CreateBackdrop('Transparent')
+			if ftype == 'icon' then
+				frame.icon.OldAlpha = frame.icon.SetAlpha
+				frame.icon.SetAlpha = function(self, ...)
+					frame.icon.OldAlpha(self, ...)
+					frame.backdrop:SetAlpha(...)
+				end
+			end
+		end
+
+		if ftype == 'aurabar' then
+			if not AS:CheckOption('WeakAuraAuraBar')then
+				frame.backdrop:Hide()
+			else
+				frame.backdrop:Show()
 			end
 		end
 
@@ -31,9 +41,8 @@ function AS:SkinWeakAuras()
 	
 	local function Create_Aurabar(parent)
 		local region = WeakAuras.regionTypes.aurabar.OldCreate(parent)
-		if AS:CheckOption('WeakAuraAuraBar') then
-			Skin_WeakAuras(region, 'aurabar')
-		end
+		Skin_WeakAuras(region, 'aurabar')
+
 		return region
 	end
 
@@ -45,9 +54,8 @@ function AS:SkinWeakAuras()
 	
 	local function Modify_Aurabar(parent, region, data)
 		WeakAuras.regionTypes.aurabar.OldModify(parent, region, data)
-		if AS:CheckOption('WeakAuraAuraBar') then
-			Skin_WeakAuras(region, 'aurabar')
-		end
+
+		Skin_WeakAuras(region, 'aurabar')
 	end
 	
 	WeakAuras.regionTypes.icon.OldCreate = WeakAuras.regionTypes.icon.create
