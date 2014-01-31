@@ -113,6 +113,11 @@ function AS:UpdateMedia()
 	AS.UIScale = UIParent:GetScale()
 end
 
+function AS:UpdateDataTexts()
+	E:GetModule('DataTexts'):RegisterLDB()
+	E:GetModule('DataTexts'):LoadDataTexts()
+end
+
 function AS:Initialize()
 	if self.initialized then return end
 	self.initialized = true
@@ -142,6 +147,7 @@ function AS:Initialize()
 	self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
 	self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
 	self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
+	self:RegisterEvent('PLAYER_ENTERING_WORLD', 'UpdateDataTexts')
 
 	for skin, alldata in pairs(self.register) do
 		for _, data in pairs(alldata) do

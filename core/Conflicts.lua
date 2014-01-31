@@ -39,5 +39,5 @@ for _, AddOnName in pairs(Conflicts) do
 end
 
 if Disabled then
-	AS:AcceptFrame(AS.Title.." Conflict System: Disabled Conflict's. If you received ANY lua error's. You will have to reload.", function(self) ReloadUI() end)
+	AS:AcceptFrame(AS.Title.." Conflict System: Disabled Conflict's. If you received ANY lua error's. You will have to reload. Reload?", function(self) ReloadUI() end)
 end
