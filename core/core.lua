@@ -4,8 +4,8 @@ local AS = E:NewModule('AddOnSkins', 'AceTimer-3.0', 'AceEvent-3.0')
 local S = E:GetModule('Skins')
 local LSM, EP = LibStub('LibSharedMedia-3.0'), LibStub('LibElvUIPlugin-1.0')
 
-local tinsert, pairs, ipairs, unpack, pcall, select = tinsert, pairs, ipairs, unpack, pcall, select
-local format, gsub, strfind, strmatch = format, gsub, strfind, strmatch
+local tinsert, pairs, ipairs, unpack, pcall, select, type = tinsert, pairs, ipairs, unpack, pcall, select, type
+local format, gsub, strfind, strmatch, floor = format, gsub, strfind, strmatch, floor
 local GetAddOnInfo = GetAddOnInfo
 
 E.AddOnSkins = AS
@@ -97,8 +97,9 @@ function AS:CallSkin(skin, func, event, ...)
 	if not pass then
 		local message = '%s: |cffff0000There was an error in the|r |cff0affff%s|r |cffff0000skin|r.  Please report this to Azilroka immediately @ %s'
 		local errormessage = '%s Error: %s'
-		AS:Print(format(message, AS.Version, gsub(skin, 'Skin', ''), AS:PrintURL(AS.TicketTracker)))
-		AS:Print(format(errormessage, gsub(skin, 'Skin', ''), error))
+		local skin = gsub(skin, 'Skin', '')
+		AS:Print(format(message, AS.Version, skin, AS:PrintURL(AS.TicketTracker)))
+		AS:Print(format(errormessage, skin, error))
 	end
 end
 
@@ -151,13 +152,6 @@ function AS:Initialize()
 
 	for skin, alldata in pairs(self.register) do
 		for _, data in pairs(alldata) do
-			local addon
-			local sdata = self.Skins[skin]
-			if sdata and sdata.addon then
-				addon = sdata.addon
-			else
-				addon = gsub(skin, 'Skin', '')
-			end
 			self:RegisteredSkin(skin, data.priority, data.func, data.events)
 		end
 	end
@@ -239,7 +233,7 @@ end
 
 function AS:Round(num, idp)
 	local mult = 10^(idp or 0)
-	return math.floor(num * mult + 0.5) / mult
+	return floor(num * mult + 0.5) / mult
 end
 
 function AS:SkinButton(...)

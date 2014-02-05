@@ -2,122 +2,8 @@ local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 local format, gsub, pairs, ipairs, tinsert, sort = format, gsub, pairs, ipairs, tinsert, sort
 
-local Skins = {
-	['AchieveItSkin'] = {
-		['buttonText'] = 'Achieve It',
-	},
-	['ACPSkin'] = {
-		['buttonText'] = 'Addon Control Panel',
-	},
-	['AraBrokerGuildFriendsSkin'] = {
-		['buttonText'] = 'Ara Broker Guild Friends',
-		['addon'] = 'Ara_Broker_Guild_Friends',
-	},
-	['AraBrokerTradeskillsSkin'] = {
-		['buttonText'] = 'Ara Broker Tradeskills',
-		['addon'] = 'Ara_Broker_Tradeskills',
-	},
-	['ArhSkin'] = {
-		['buttonText'] = 'Archaeology Helper',
-	},
-	['AtlasLootSkin'] = {
-		['buttonText'] = 'AtlasLoot',
-		['addon'] = 'AtlasLoot_Loader',
-	},
-	['AuctioneerSkin'] = {
-		['buttonText'] = 'Auctioneer',
-		['addon'] = 'Auc-Advanced',
-	},
-	['BPTSkin'] = {
-		['buttonText'] = 'Balance Power Tracker',
-		['addon'] = 'BalancePowerTracker',
-	},
-	['DailyTamerCheckSkin'] = {
-		['buttonText'] = 'Daily Tamer Check',
-	},
-	['DBMSkin'] = {
-		['buttonText'] = 'DBM',
-		['addon'] = 'DBM-Core',
-	},
-	['ExtVendorSkin'] = {
-		['buttonText'] = 'Extended Vendor',
-	},
-	['KarniCrapSkin'] = {
-		['buttonText'] = "Karni's Crap Filter",
-	},
-	['LootCouncilLiteSkin'] = {
-		['buttonText'] = 'LootCouncilLite',
-		['addon'] = 'LootCouncil_Lite',
-	},
-	['MRTSkin'] = {
-		['buttonText'] = 'Mizus Raid Tracker',
-		['addon'] = 'MizusRaidTracker',
-	},
-	['OgriLazySkin'] = {
-		['addon'] = "Ogri'Lazy",
-	},
-	['RaidInviteOrganizerSkin'] = {
-		['buttonText'] = 'Raid Invite Organizer',
-	},
-	['RaidBuffStatusSkin'] = {
-		['buttonText'] = 'Raid Buff Status',
-	},
-	['SearingPlasmaTrackerSkin'] = {
-		['buttonText'] = 'Searing Plasma Tracker',
-	},
-	['SexyCooldownSkin'] = {
-		['buttonText'] = 'SexyCooldown 2',
-		['addon'] = 'SexyCooldown2',
-	},
-	['ShieldMonitorSkin'] = {
-		['buttonText'] = 'Shield Monitor',
-		['addon'] = 'shieldmonitor',
-	},
-	['SpineCounterSkin'] = {
-		['buttonText'] = 'Spine Blood Counter',
-	},
-	['SwatterSkin'] = {
-		['buttonText'] = 'Swatter',
-		['addon'] = '!Swatter',
-	},
-	['ZygorSkin'] = {
-		['buttonText'] = 'Zygor',
-		['addon'] = 'ZygorGuidesViewer',
-	},
-	['CLCInfoSkin'] = {
-		['addon'] = 'clcInfo',
-		['buttonText'] = 'CLCInfo Icons',
-	},
-	['CLCProtSkin'] = {
-		['buttonText'] = 'CLCProt Icons',
-	},
-	['CLCRetSkin'] = {
-		['buttonText'] = 'CLCRet Icons',
-	},
-	['ParchmentRemover'] = {
-		['buttonText'] = 'Parchment Remover',
-		['addon'] = 'ElvUI_AddOnSkins'
-	},
-	['TitanPanelSkin'] = {
-		['buttonText'] = 'Titan Panel',
-		['addon'] = 'Titan',
-	},
-	['VEMSkin'] = {
-		['buttonText'] = 'VEM',
-		['addon'] = 'VEM-Core',
-	},
-}
-
-AS.Skins = Skins
 function AS:GenerateOptionTable(skinName, order)
-	local data = Skins[skinName]
-	local addon
-	if data and data.addon then
-		addon = data.addon
-	else
-		addon = gsub(skinName, 'Skin', '')
-	end
-	local text = data and data.buttonText or addon
+	local text = gsub(skinName, 'Skin', '')
 	local options = {
 		type = 'toggle',
 		name = text,
@@ -390,9 +276,6 @@ function AS:GenerateOptions()
 	local order = 2
 	for skinName, _ in AS:OrderedPairs(AS.register) do
 		if skinName ~= 'MiscFixes' then
-			if V.addonskins[skinName] == nil then
-				AS:Print(format('Config: No default option for %s', skinName))
-			end
 			E.Options.args.addonskins.args.addons.args[skinName] = AS:GenerateOptionTable(skinName, order)
 			order = order + 1
 		end
