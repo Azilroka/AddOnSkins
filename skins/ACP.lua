@@ -18,8 +18,7 @@ function AS:SkinACP()
 		end
 	end
 
-	ACP_AddonList_ScrollFrame:HookScript('OnUpdate', cbResize)
-
+	hooksecurefunc(ACP, 'AddonList_OnShow_Fast', cbResize)
 	AS:SkinFrame(ACP_AddonList)
 	AS:SkinFrame(ACP_AddonList_ScrollFrame)
 	AS:SkinButton(ACP_AddonListSetButton)
@@ -35,7 +34,7 @@ function AS:SkinACP()
 	for i = 1, 20 do
 		AS:SkinButton(_G["ACP_AddonListEntry"..i.."LoadNow"])
 		AS:SkinCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
-	end	
+	end
 
 	ACP_AddonList_ScrollFrame:SetWidth(590)
 	ACP_AddonList_ScrollFrame:SetHeight(412)
@@ -48,6 +47,7 @@ function AS:SkinACP()
 	ACP_AddonListEnableAll:Point("BOTTOMLEFT", ACP_AddonList, "BOTTOMLEFT", 175, 8)
 	ACP_AddonList_ReloadUI:Point("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -160, 8)
 	ACP_AddonListBottomClose:Point("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -50, 8)
+	ACP_AddonList:SetScale(AS.UIScale)
 end
 
 AS:RegisterSkin(name, AS.SkinACP)

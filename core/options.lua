@@ -348,6 +348,11 @@ function AS:GenerateOptions()
 				order = 1,
 				disabled = function() return not AS:CheckOption('WeakAurasSkin', 'WeakAuras') end
 			},
+			AuctionHouse = {
+				type = 'toggle',
+				name = 'Auction House',
+				order = 2,
+			}
 		}
 	}
 	E.Options.args.addonskins.args.faq = {

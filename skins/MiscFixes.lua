@@ -2,38 +2,6 @@ local AS = ElvUI[1]:GetModule('AddOnSkins')
 
 local name = 'MiscFixes'
 function AS:MiscFixes(event, addon)
-
-	if addon == 'Blizzard_PetJournal' and IsAddOnLoaded('PetJournalEnhanced') then
-		PetJournal:HookScript('OnShow', function() PJEUniquePetCount:StripTextures() end)
-	end
-
-	--[[if IsAddOnLoaded('acb_CastBar') then
-		AS:SkinBackdropFrame(AzCastBarPluginPlayer)
-		AS:SkinBackdropFrame(AzCastBarPluginTarget)
-		AS:SkinBackdropFrame(AzCastBarPluginFocus)
-		AS:SkinBackdropFrame(AzCastBarPluginMirror)
-		AS:SkinBackdropFrame(AzCastBarPluginPet)
-	end]]
-
-	if IsAddOnLoaded('DoubleWideTradeSkills') then
-		TradeSkillListScrollFrame:StripTextures()
-		AS:SkinFrame(TradeSkillFrame)
-		AS:SkinStatusBar(TradeSkillRankFrame)
-	end
-
-	if addon == 'Blizzard_TradeSkillUI' and IsAddOnLoaded('Auctionator') then 
-		TradeSkillFrame:HookScript('OnShow', function() AS:SkinButton(Auctionator_Search, true) end)
-	end
-
-	if addon == 'Blizzard_TrainerUI' and IsAddOnLoaded('TrainAll') then
-		ClassTrainerFrame:HookScript('OnShow', function()
-			AS:SkinFrame(ClassTrainerTrainAllButton, 'Default')
-			AS:SkinFrame(ClassTrainerTrainButton, 'Default')
-		end)
-	end
-
-	if XPBarNoneXPBar then XPBarNoneXPBar:CreateBackdrop('Transparent') end
-
 	for i = 1, 10 do
 		if _G['StaticPopup'..i] then
 			_G['StaticPopup'..i]:SetTemplate('Transparent')
@@ -44,7 +12,7 @@ function AS:MiscFixes(event, addon)
 	end
 
 	if event == 'AUCTION_HOUSE_SHOW' then
-		if ElvUI[1].private.skins.blizzard.enable == true and ElvUI[1].private.skins.blizzard.auctionhouse == true then
+		if ElvUI[1].private.skins.blizzard.enable and ElvUI[1].private.skins.blizzard.auctionhouse and AS:CheckOption('AuctionHouse') then
 			BrowseNameText:Point('TOPLEFT', 20, -39)
 			BrowseName:SetHeight(17)
 			BrowseName:Point('TOPLEFT', BrowseNameText, 'BOTTOMLEFT', 2, -3)
@@ -57,7 +25,7 @@ function AS:MiscFixes(event, addon)
 			BrowseDropDown:Point('TOPLEFT', BrowseLevelText, 'BOTTOMRIGHT', -5, -2)
 			BrowseResetButton:Point('TOPLEFT', AuctionFrameBrowse, 'TOPLEFT', 20, -78)
 			BrowseSearchButton:ClearAllPoints()
-			BrowseSearchButton:Point('LEFT', BrowseResetButton, 'RIGHT', 3, 0)
+			BrowseSearchButton:Point('LEFT', BrowsePrevPageButton, 'RIGHT', 24, 0)
 			BrowseCloseButton:Point('BOTTOMRIGHT', AuctionFrameBrowse, 'BOTTOMRIGHT', 66, 6)
 			AuctionFrameMoneyFrame:Point('BOTTOMRIGHT', AuctionFrame, 'BOTTOMLEFT', 181, 10)
 			BrowseBidPrice:Point('BOTTOM', AuctionFrameBrowse, 'BOTTOM', 25, 10)

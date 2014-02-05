@@ -1,5 +1,4 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="Profile.lua"/>
 	<Script file="Core.lua"/>
 	<Script file="Conflicts.lua"/>
 	<Script file="Embed.lua"/>

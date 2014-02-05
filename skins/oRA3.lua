@@ -86,15 +86,17 @@ function AS:SkinoRA3(event, addon)
 		end
 
 		if module == "readycheck" and not oRA3ReadyCheck.IsSkinned then
-			oRA3ReadyCheck:StripTextures(true)
-			oRA3ReadyCheck:CreateBackdrop("Transparent")
-			for i,child in ipairs({oRA3ReadyCheck:GetChildren()}) do
-				if child:IsObjectType("Button") and not (child:GetScript("OnDragStart") or child == oRA3ReadyCheck.bar) then
-					AS:SkinCloseButton(child)
-					break
+			if oRA3ReadyCheck then
+				oRA3ReadyCheck:StripTextures(true)
+				oRA3ReadyCheck:CreateBackdrop("Transparent")
+				for i,child in ipairs({oRA3ReadyCheck:GetChildren()}) do
+					if child:IsObjectType("Button") and not (child:GetScript("OnDragStart") or child == oRA3ReadyCheck.bar) then
+						AS:SkinCloseButton(child)
+						break
+					end
 				end
+				oRA3ReadyCheck.IsSkinned = true
 			end
-			oRA3ReadyCheck.IsSkinned = true
 		end
 	end
 	hooksecurefunc(oRA3, "ToggleFrame", function() SkinOra("main") end)

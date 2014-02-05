@@ -1,4 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="acb_Castbar.lua"/>
 	<Script file="AchieveIt.lua"/>
 	<Script file="ACP.lua"/>
 	<Script file="AdiBags.lua"/>
@@ -11,6 +12,7 @@
 	<Script file="Archy.lua"/>
 	<Script file="Arh.lua"/>
 	<Script file="ArkInventory.lua"/>
+	<Script file="AskMrRobot.lua"/>
 	<Script file="AtlasLoot.lua"/>
 	<Script file="ATSW.lua"/>
 	<Script file="Auctionator.lua"/>
@@ -36,9 +38,9 @@
 	<Script file="DailyTamerCheck.lua"/>
 	<Script file="DBM.lua"/>
 	<Script file="DKDots.lua"/>
+	<Script file="DoubleWideTradeSkills.lua"/>
 	<Script file="Dresser.lua"/>
 	<Script file="DXE.lua"/>
-	<Script file="EarthWindAndFire.lua"/>
 	<Script file="EasyMail.lua"/>
 	<Script file="EavesDrop.lua"/>
 	<Script file="EnergyWatch.lua"/>
@@ -77,7 +79,9 @@
 	<Script file="Outfitter.lua"/>
 	<Script file="Ovale.lua"/>
 	<Script file="PetBattleTeams.lua"/>
+	<Script file="PetJournalEnhanced.lua"/>
 	<Script file="PetTracker.lua"/>
+	<Script file="Poisoner.lua"/>
 	<Script file="PoMTracker.lua"/>
 	<Script file="Postal.lua"/>
 	<Script file="Quartz.lua"/>
@@ -101,13 +105,15 @@
 	<Script file="Soundtrack.lua"/>
 	<Script file="SpineCounter.lua"/>
 	<Script file="Spy.lua"/>
+	<Script file="StormEarthAndFire.lua"/>
 	<Script file="Swatter.lua"/>
 	<Script file="Symbiosis.lua"/>
 	<Script file="TinyDPS.lua"/>
 	<Script file="TitanPanel.lua"/>
-	<Script file="TomTom.lua"/>
 	<Script file="TomeOfTeleportation.lua"/>
+	<Script file="TomTom.lua"/>
 	<Script file="TradeSkillDW.lua"/>
+	<Script file="TrainAll.lua"/>
 	<Script file="VEM.lua"/>
 	<Script file="VengeanceStatus.lua"/>
 	<Script file="WeakAuras.lua"/>
@@ -115,5 +121,6 @@
 	<Script file="WowLua.lua"/>
 	<Script file="WoWPro.lua"/>
 	<Script file="xMerchant.lua"/>
+	<Script file="XPBarNone.lua"/>
 	<Script file="Zygor.lua"/>
 </Ui>

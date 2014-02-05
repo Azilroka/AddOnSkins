@@ -133,7 +133,7 @@ function AS:Initialize()
 		UpdateElvUIFrame.Text = UpdateElvUIFrame:CreateFontString(nil, "OVERLAY")
 		UpdateElvUIFrame.Text:SetFont(AS.Font, 18, 'OUTLINE')
 		UpdateElvUIFrame.Text:SetPoint('TOP', UpdateElvUIFrame, 'TOP', 0, -10)
-		UpdateElvUIFrame.Text:SetText(format('%s - Required ElvUI Version is %s. You currently have %s. Download ElvUI @ %s.', AS.Title, MinElvUIVersion, ElvUIVersion, AS:PrintURL('http://www.tukui.org/dl.php')))
+		UpdateElvUIFrame.Text:SetText(format('%s - Required ElvUI Version %s. You currently have %s. Download ElvUI @ %s.', AS.Title, MinElvUIVersion, ElvUIVersion, AS:PrintURL('http://www.tukui.org/dl.php')))
 		UpdateElvUIFrame:SetScript('OnClick', function() print(AS:PrintURL('http://www.tukui.org/dl.php')) end)
 		UpdateElvUIFrame:SetSize(UpdateElvUIFrame.Text:GetWidth(), 70)
 		return
