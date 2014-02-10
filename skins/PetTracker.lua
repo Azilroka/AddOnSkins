@@ -1,7 +1,5 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
-if not AS:CheckAddOn('PetTracker') then return end
-
 local name = "PetTrackerSkin"
 function AS:SkinPetTracker()
 	AS:SkinBackdropFrame(PetTrackerProgressBar1)
@@ -12,10 +10,10 @@ function AS:SkinPetTracker()
 
 	AS:SkinEditBox(PetTrackerMapFilter)
 	AS:SkinTooltip(PetTrackerMapFilterSuggestions)
-	for i = 1, PetTrackerMapFilterSuggestions:GetNumChildren() do
+	--[[for i = 1, PetTrackerMapFilterSuggestions:GetNumChildren() do
 		local Button = select(i, PetTrackerMapFilterSuggestions:GetChildren())
 		Button:SetFrameLevel(PetTrackerMapFilterSuggestions:GetFrameLevel() + 1)
-	end
+	end]]
 	WorldMapShowDropDownButton:HookScript('OnClick', function()
 		if SushiDropdownFrame1.IsDone then return end
 		for i = 1, SushiDropdownFrame1:GetNumChildren() do
@@ -29,7 +27,7 @@ function AS:SkinPetTracker()
 			end
 		end
 	end)
-	for i = 1, 3 do
+	for i = 1, 6 do
         local button = _G[("PetTrackerAbilityAction%d"):format(i)]
         if button then
             AS:SkinIconButton(button)
@@ -58,21 +56,28 @@ function AS:SkinPetTracker()
 					_G['PetTrackerBattleSlot'..i].Bg:Hide()
 					AS:SkinTexture(_G['PetTrackerBattleSlot'..i].Icon)
 					_G['PetTrackerBattleSlot'..i].IconBorder:Hide()
+					_G['PetTrackerBattleSlot'..i].Quality:Hide()
+					_G['PetTrackerBattleSlot'..i].Highlight:StripTextures()
+					_G['PetTrackerBattleSlot'..i].Highlight:HookScript('OnShow', function() _G['PetTrackerBattleSlot'..i]:SetBackdropBorderColor(1, 1, 0) end)
+					_G['PetTrackerBattleSlot'..i].Highlight:HookScript('OnHide', function() _G['PetTrackerBattleSlot'..i]:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 					AS:SkinStatusBar(_G['PetTrackerBattleSlot'..i].Health)
 					AS:SkinStatusBar(_G['PetTrackerBattleSlot'..i].Xp)
 					_G['PetTrackerBattleSlot'..i].IsSkinned = true
-					for i = 1, 18 do
-						local Ability = _G['PetTrackerAbilityButton'..i]
-						for i = 1, Ability:GetNumRegions() do
-							local Region = select(i, Ability:GetRegions())
-							if Region and Region:GetObjectType() == 'Texture' then
-								if Region:GetTexture() == 'Interface\\Spellbook\\Spellbook-Parts' then
-									Region:SetTexture(nil)
-								end
+				end
+			end
+			for i = 1, 45 do
+				local Ability = _G['PetTrackerAbilityButton'..i]
+				if Ability and not Ability.IsSkinned then
+					for i = 1, Ability:GetNumRegions() do
+						local Region = select(i, Ability:GetRegions())
+						if Region and Region:GetObjectType() == 'Texture' then
+							if Region:GetTexture() == 'Interface\\Spellbook\\Spellbook-Parts' then
+								Region:SetTexture(nil)
 							end
 						end
-						AS:SkinTexture(_G['PetTrackerAbilityButton'..i].Icon)
 					end
+					AS:SkinTexture(Ability.Icon)
+					Ability.IsSkinned = true
 				end
 			end
 		end)

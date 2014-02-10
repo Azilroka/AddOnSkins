@@ -114,6 +114,7 @@
 	<Script file="TomTom.lua"/>
 	<Script file="TradeSkillDW.lua"/>
 	<Script file="TrainAll.lua"/>
+	<Script file="Vendomatic.lua"/>
 	<Script file="VEM.lua"/>
 	<Script file="VengeanceStatus.lua"/>
 	<Script file="WeakAuras.lua"/>
