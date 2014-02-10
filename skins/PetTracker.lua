@@ -10,10 +10,10 @@ function AS:SkinPetTracker()
 
 	AS:SkinEditBox(PetTrackerMapFilter)
 	AS:SkinTooltip(PetTrackerMapFilterSuggestions)
-	--[[for i = 1, PetTrackerMapFilterSuggestions:GetNumChildren() do
+	for i = 1, PetTrackerMapFilterSuggestions:GetNumChildren() do
 		local Button = select(i, PetTrackerMapFilterSuggestions:GetChildren())
 		Button:SetFrameLevel(PetTrackerMapFilterSuggestions:GetFrameLevel() + 1)
-	end]]
+	end
 	WorldMapShowDropDownButton:HookScript('OnClick', function()
 		if SushiDropdownFrame1.IsDone then return end
 		for i = 1, SushiDropdownFrame1:GetNumChildren() do
@@ -28,7 +28,7 @@ function AS:SkinPetTracker()
 		end
 	end)
 	for i = 1, 6 do
-        local button = _G[("PetTrackerAbilityAction%d"):format(i)]
+        local button = _G["PetTrackerAbilityAction"..i]
         if button then
             AS:SkinIconButton(button)
 			AS:SkinTexture(button.Icon)
