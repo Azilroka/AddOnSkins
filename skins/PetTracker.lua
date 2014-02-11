@@ -1,5 +1,7 @@
 local AS = ElvUI[1]:GetModule('AddOnSkins')
 
+if not AS:CheckAddOn('PetTracker') then return end
+
 local name = "PetTrackerSkin"
 function AS:SkinPetTracker()
 	AS:SkinBackdropFrame(PetTrackerProgressBar1)
