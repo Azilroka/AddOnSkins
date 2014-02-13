@@ -1,0 +1,4 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Locale\Global.lua"/>
+	<Script file="Locale\English.lua"/>
+</Ui>
