@@ -31,17 +31,17 @@ AddOn.BackdropColor = { Frame:GetBackdropColor() }
 AddOn.BorderColor = { Frame:GetBackdropBorderColor() }
 
 AddOn.DataTextFontSize = 12
-AddOn.InfoLeft = A['Layouts']['DataTextLeft']
-AddOn.InfoRight = A['Layouts']['DataTextRight']
-AddOn.ChatBackgroundRight = A['Layouts']['ChatRight']
-AddOn.ChatBackgroundLeft = A['Layouts']['ChatLeft']
-AddOn.TabsRightBackground = A['Layouts']['ChatRightTab']
-AddOn.TabsLeftBackground = A['Layouts']['ChatLeftTab']
-AddOn.Minimap = A['Minimap']
-AddOn.ActionBar1 = A['Layouts']['ActionBars1']
-AddOn.ActionBar2 = A['Layouts']['ActionBars2']
-AddOn.ActionBar3 = A['Layouts']['ActionBars3']
-AddOn.ActionBar4 = A['Layouts']['ActionBars4']
+AddOn.InfoLeft = ChatFramesLeftDataTextBackground
+AddOn.InfoRight = ChatFramesRightDataTextBackground
+AddOn.ChatBackgroundRight = ChatFramesRightBackground
+AddOn.ChatBackgroundLeft = ChatFramesLeftBackground
+AddOn.TabsRightBackground = ChatFramesRightTabBackground
+AddOn.TabsLeftBackground = ChatFramesLeftTabBackground
+AddOn.Minimap = Mover_Minimap
+AddOn.ActionBar1 = ActionBarsActionBars1
+AddOn.ActionBar2 = ActionBarsActionBars2
+AddOn.ActionBar3 = ActionBarsActionBars3
+AddOn.ActionBar4 = ActionBarsActionBars4
 
 function AddOn:Delay(delay, func, ...)
 	A.Delay(delay, func, ...)
