@@ -1,4 +1,4 @@
-local AS = unpack:GetModule('AddOnSkins')
+local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('PetJournalEnhanced') then return end
 
