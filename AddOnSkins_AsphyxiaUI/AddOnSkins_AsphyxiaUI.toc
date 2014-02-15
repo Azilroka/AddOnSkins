@@ -6,7 +6,7 @@
 ## OptionalDeps: Tukui_ChatTweaks
 ## RequiredDeps: AsphyxiaUI, Enhanced_Config
 ## SavedVariables: UISkinOptions
-## X-Tukui-ProjectID: 128
-## X-Tukui-ProjectFolders: AddOnSkins_AsphyxiaUI, AddOnSkins_Tukui, AddOnSkins_DuffedUI, AddOnSkins_ElvUI, AddOnSkins_Skins, AddOnSkins_Systems
+## X-Tukui-ProjectID: 127
+## X-Tukui-ProjectFolders: AddOnSkins_AsphyxiaUI, AddOnSkins_Tukui, AddOnSkins_DuffedUI, AddOnSkins_Skins, AddOnSkins_Systems
 
 Load_AddOnSkins.xml
