@@ -7,7 +7,7 @@ local GetAddOnInfo = GetAddOnInfo
 AS.skins = {}
 AS.events = {}
 AS.register = {}
-AS.TicketTracker = 'http://www.tukui.org/tickets/tukuiskins/'
+AS.TicketTracker = 'http://git.tukui.org/Azilroka/addonskins'
 
 function AS:CheckAddOn(addon)
 	return select(4, GetAddOnInfo(addon))
