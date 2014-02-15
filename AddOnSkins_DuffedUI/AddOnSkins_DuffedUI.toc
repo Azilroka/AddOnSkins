@@ -1,5 +1,5 @@
 ## Interface: 50400
-## Title: |cffC41F3BDuffedUI|r |cFFFF7D0AAddOnSkins|r
+## Title: |cffC41F3BDuffedUI|r |cFFFFFFFFAddOnSkins|r
 ## Version: 2.00
 ## Author: Azilroka, Sortokk
 ## Url: http://www.tukui.org/addons/index.php?act=view&id=127

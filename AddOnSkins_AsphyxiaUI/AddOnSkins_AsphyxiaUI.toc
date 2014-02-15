@@ -1,5 +1,5 @@
 ## Interface: 50400
-## Title: |cFFFF6347AsphyxiaUI|r |cFFFF7D0AAddOnSkins|r
+## Title: |cFFFF6347AsphyxiaUI|r |cFFFFFFFFAddOnSkins|r
 ## Version: 2.00
 ## Author: Azilroka, Sortokk
 ## Url: http://www.tukui.org/addons/index.php?act=view&id=127
