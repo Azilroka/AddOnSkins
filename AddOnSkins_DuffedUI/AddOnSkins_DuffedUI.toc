@@ -1,16 +1,12 @@
 ## Interface: 50400
 ## Title: |cffC41F3BDuffedUI|r |cFFFF7D0AAddOnSkins|r
-## Version: 1.62
+## Version: 2.00
 ## Author: Azilroka, Sortokk
 ## Url: http://www.tukui.org/addons/index.php?act=view&id=127
 ## OptionalDeps: Tukui_ChatTweaks
 ## RequiredDeps: DuffedUI, Enhanced_Config
 ## SavedVariables: UISkinOptions
-## X-Tukui-ProjectID: 127
-## X-Tukui-ProjectFolders: AddOnSkins_AsphyxiaUI, AddOnSkins_Tukui, AddOnSkins_DuffedUI, AddOnSkins_Skins
+## X-Tukui-ProjectID: 128
+## X-Tukui-ProjectFolders: AddOnSkins_AsphyxiaUI, AddOnSkins_Tukui, AddOnSkins_DuffedUI, AddOnSkins_ElvUI, AddOnSkins_Skins, AddOnSkins_Systems
 
-Init.lua
-Load_Locale.xml
-Load_Core.xml
 Load_AddOnSkins.xml
-Load_BlizzardSkins.xml

@@ -2,7 +2,10 @@ local AS = unpack(AddOnSkins)
 local L = AS.Locale
 local tinsert, sort, pairs, format, gsub, strfind = tinsert, sort, pairs, format, gsub, strfind
 
-AS.Credits = {
+local DEVELOPER_STRING = ''
+local LINE_BREAK = '\n'
+
+local DEVELOPERS = {
 	'Affli',
 	'Arstraea',
 	'Azilroka',
@@ -10,10 +13,12 @@ AS.Credits = {
 	'Cadayron',
 	'Camealion',
 	'Catok',
+	'CJO',
 	'Darth Predator',
 	'Dec',
-	'Driizt',
+	'Drii',
 	'Edoc',
+	'efaref',
 	'Elv',
 	'Jasje',
 	'Kkthnx',
@@ -23,6 +28,8 @@ AS.Credits = {
 	'MaXiMUS',
 	'Outofammo',
 	'Pat',
+	'Pezzer13',
+	'Rakkhin',
 	'Repooc',
 	'Shadowcall',
 	'Sinaris',
@@ -31,15 +38,10 @@ AS.Credits = {
 	'Warmexx',
 }
 
-AS.CreditsString = ''
-
-sort(AS.Credits)
-for Key, Person in pairs(AS.Credits) do
-	AS.CreditsString = AS.CreditsString..'\n'..Person
+sort(DEVELOPERS, function(a, b) return strlower(a) < strlower(b) end)
+for _, devName in pairs(DEVELOPERS) do
+	DEVELOPER_STRING = DEVELOPER_STRING..LINE_BREAK..devName
 end
-
-if not (Tukui or AsphyxiaUI or DuffedUI) then return end
-local AS = unpack(select(2,...))
 
 function AS:Ace3Options()
 	local Ace3OptionsPanel = IsAddOnLoaded('Enhanced_Config') and Enhanced_Config[1] or nil
@@ -69,7 +71,7 @@ function AS:Ace3Options()
 		args = {},
 	}
 	Ace3OptionsPanel.Options.args.skins.args.blizzard = {
-		order = 0,
+		order = 1,
 		type = 'group',
 		name = 'Blizzard Skins',
 		get = function(info) return AS:CheckOption(info[#info]) end,
@@ -229,15 +231,55 @@ function AS:Ace3Options()
 			},
 		}
 	}
+	Ace3OptionsPanel.Options.args.skins.args.misc = {
+		type = 'group',
+		name = MISCELLANEOUS,
+		order = 3,
+		get = function(info) return AS:CheckOption(info[#info]) end,
+		set = function(info, value) AS:SetOption(info[#info], value) AS:EmbedSystem_WindowResize() AS:Embed_Check() end,
+		args = {
+			WeakAuraAuraBar = {
+				type = 'toggle',
+				name = 'WeakAura AuraBar',
+				order = 1,
+				disabled = function() return not AS:CheckOption('WeakAurasSkin', 'WeakAuras') end,
+			},
+			AuctionHouse = {
+				type = 'toggle',
+				name = 'Auction House',
+				order = 2,
+			}
+		}
+	}
+	Ace3OptionsPanel.Options.args.skins.args.faq = {
+		type = 'group',
+		name = "FAQ's",
+		order = 4,
+		args = {
+			question1 = {
+				type = 'description',
+				name = '|cffc41f3b[Q] DBM/VEM Half-Bar Skin Spacing looks wrong. How can I fix it?|r',
+				order = 1,
+				fontSize = 'medium',
+			},
+			answer1 = {
+				type = 'description',
+				name = '|cffabd473[A] To use the DBM/VEM Half-Bar skin. You must change the DBM/VEM Options. Offset Y needs to be at least 15.',
+				order = 2,
+				fontSize = 'medium',
+			},
+		},
+	}
 	Ace3OptionsPanel.Options.args.skins.args.credits = {
 		type = "group",
 		name = "Credits",
-		order = 3,
+		order = -1,
 		args = {
 			desc = {
 				order = 1,
 				type = "description",
-				name = format('Credits:\n%s', AS.CreditsString),
+				name = format('Credits:\n%s', DEVELOPER_STRING),
+				fontSize = 'medium',
 			},
 		},
 	}

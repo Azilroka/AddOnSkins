@@ -5,90 +5,73 @@ if not AS:CheckAddOn('Clique') then return end
 local name = 'CliqueSkin'
 function AS:SkinClique()
 	local Frames = {
-		'CliqueDialog',
-		'CliqueConfig',
-		'CliqueConfigPage1',
-		'CliqueConfigPage2',
-		'CliqueClickGrabber',
+		CliqueDialog,
+		CliqueConfig,
+		CliqueConfigPage1,
+		CliqueConfigPage2,
+		CliqueClickGrabber,
 	}
 
 	for _, object in pairs(Frames) do
-		AS:SkinBackdropFrame(_G[object])
-		local Backdrop = _G[object].backdrop or _G[object].Backdrop
-		if _G[object] == CliqueConfig then
-			Backdrop:SetPoint('TOPLEFT', 0, 0)
-			Backdrop:SetPoint('BOTTOMRIGHT', 0, -5)
-		elseif _G[object] == CliqueClickGrabber or _G[object] == CliqueScrollFrame then
-			Backdrop:SetPoint('TOPLEFT', 4, 0)
-			Backdrop:SetPoint('BOTTOMRIGHT', -2, 4)
-		else
-			_G[object]:SetFrameLevel(_G[object]:GetFrameLevel() + 1)
-			Backdrop:SetPoint('TOPLEFT', 0, 0)
-			Backdrop:SetPoint('BOTTOMRIGHT', 2, 0)
-		end
+		AS:SkinBackdropFrame(object)
 	end
 	
 	local CliqueButtons = {
-		'CliqueConfigPage1ButtonSpell',
-		'CliqueConfigPage1ButtonOther',
-		'CliqueConfigPage1ButtonOptions',
-		'CliqueConfigPage2ButtonBinding',
-		'CliqueDialogButtonAccept',
-		'CliqueDialogButtonBinding',
-		'CliqueConfigPage2ButtonSave',
-		'CliqueConfigPage2ButtonCancel',
+		CliqueConfigPage1ButtonSpell,
+		CliqueConfigPage1ButtonOther,
+		CliqueConfigPage1ButtonOptions,
+		CliqueConfigPage2ButtonBinding,
+		CliqueDialogButtonAccept,
+		CliqueDialogButtonBinding,
+		CliqueConfigPage2ButtonSave,
+		CliqueConfigPage2ButtonCancel,
 	}
 
 	for _, object in pairs(CliqueButtons) do
-		AS:SkinButton(_G[object], true)
+		AS:SkinButton(object, true)
 	end
 
 	AS:SkinCloseButton(CliqueDialog.CloseButton)
+	AS:SkinCloseButton(CliqueConfigCloseButton)
 
 	local CliqueTabs = {
-		'CliqueConfigPage1Column1',
-		'CliqueConfigPage1Column2',
+		CliqueConfigPage1Column1,
+		CliqueConfigPage1Column2,
 	}
 
 	for _, object in pairs(CliqueTabs) do
-		_G[object]:StripTextures(true)
+		object:StripTextures(true)
 	end
 
-	CliqueConfigPage1:SetScript('OnShow', function(self)
+	CliqueConfigPage1:SetScript("OnShow", function(self)
 		for i = 1, 12 do
-			if _G['CliqueRow'..i] then
-				AS:SkinTexture(_G['CliqueRow'..i..'Icon'])
-				_G['CliqueRow'..i..'Bind']:ClearAllPoints()
-				if _G['CliqueRow'..i] == CliqueRow1 then
-					_G['CliqueRow'..i..'Bind']:SetPoint('RIGHT', _G['CliqueRow'..i], 8, 0)
+			if _G["CliqueRow"..i] then
+				AS:SkinTexture(_G["CliqueRow"..i.."Icon"])
+				_G["CliqueRow"..i.."Bind"]:ClearAllPoints()
+				if _G["CliqueRow"..i] == CliqueRow1 then
+					_G["CliqueRow"..i.."Bind"]:SetPoint("RIGHT", _G["CliqueRow"..i], 8,0)
 				else
-					_G['CliqueRow'..i..'Bind']:SetPoint('RIGHT', _G['CliqueRow'..i], -9, 0)
+					_G["CliqueRow"..i.."Bind"]:SetPoint("RIGHT", _G["CliqueRow"..i], -9,0)
 				end
-				_G['CliqueRow'..i]:GetHighlightTexture():SetDesaturated(true)
+				_G["CliqueRow"..i]:GetHighlightTexture():SetDesaturated(1)
 			end
 		end
 		CliqueRow1:ClearAllPoints()
-		CliqueRow1:SetPoint('TOPLEFT', 5, -(CliqueConfigPage1Column1:GetHeight() +3))
+		CliqueRow1:SetPoint("TOPLEFT",5,-(CliqueConfigPage1Column1:GetHeight() +3))
 	end)
 
 	CliqueConfigPage1_VSlider:StripTextures(true)
-	CliqueDialog:SetSize(CliqueDialog:GetWidth() - 1, CliqueDialog:GetHeight() - 1)
-	CliqueConfigPage1ButtonSpell:ClearAllPoints()
-	CliqueConfigPage1ButtonOptions:ClearAllPoints()
-	CliqueConfigPage1ButtonSpell:SetPoint('TOPLEFT', CliqueConfigPage1, 'BOTTOMLEFT', 0, -4)
-	CliqueConfigPage1ButtonOptions:SetPoint('TOPRIGHT', CliqueConfigPage1, 'BOTTOMRIGHT', 2, -4)
-	CliqueConfigPage2ButtonSave:ClearAllPoints()
-	CliqueConfigPage2ButtonCancel:ClearAllPoints()
-	CliqueConfigPage2ButtonSave:SetPoint('TOPLEFT', CliqueConfigPage2, 'BOTTOMLEFT', 0, -4)
-	CliqueConfigPage2ButtonCancel:SetPoint('TOPRIGHT', CliqueConfigPage2, 'BOTTOMRIGHT', 2, -4)
-	CliqueSpellTab:GetRegions():SetSize(.1, .1)
+	CliqueConfigPage1ButtonSpell:SetPoint('BOTTOMLEFT', CliqueConfig, 'BOTTOMLEFT', 3, 2)
+	CliqueConfigPage1ButtonOptions:SetPoint('BOTTOMRIGHT', CliqueConfig, 'BOTTOMRIGHT', -5, 2)
+	CliqueConfigPage2ButtonSave:SetPoint("BOTTOMLEFT", CliqueConfig,"BOTTOMLEFT", 3, 2)
+	CliqueConfigPage2ButtonCancel:SetPoint('BOTTOMRIGHT', CliqueConfig, 'BOTTOMRIGHT', -5, 2)
+	AS:SkinScrollBar(CliqueScrollFrameScrollBar)
+	AS:SkinIconButton(CliqueSpellTab)
+	CliqueSpellTab:SetNormalTexture([[Interface\AddOns\Clique\images\icon_square_64]])
 	AS:SkinTexture(CliqueSpellTab:GetNormalTexture())
 	CliqueSpellTab:GetNormalTexture():ClearAllPoints()
 	CliqueSpellTab:GetNormalTexture():SetInside()
-	AS:SkinBackdropFrame(CliqueSpellTab)
-	local Backdrop = CliqueSpellTab.backdrop or CliqueSpellTab.Backdrop
-	Backdrop:SetAllPoints()
-	CliqueSpellTab:StyleButton(true)
+	CliqueConfigInset:StripTextures()
 end
 
 AS:RegisterSkin(name, AS.SkinClique)

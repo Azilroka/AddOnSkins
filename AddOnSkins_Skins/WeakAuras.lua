@@ -4,42 +4,76 @@ if not AS:CheckAddOn('WeakAuras') then return end
 
 local name = 'WeakAurasSkin'
 function AS:SkinWeakAuras()
-	local function Skin_WeakAuras(frame)
-		if not frame.isSkinned then
-			frame:CreateBackdrop('Default')
-			frame.icon.OldAlpha = frame.icon.SetAlpha
-			frame.icon.SetAlpha = function(self, ...)
-				frame.icon.OldAlpha(self, ...)
-				frame.backdrop:SetAlpha(...)
+	local function Skin_WeakAuras(frame, ftype)
+		if not frame.backdrop then
+			frame:CreateBackdrop('Transparent')
+			if ftype == 'icon' then
+				frame.icon.OldAlpha = frame.icon.SetAlpha
+				frame.icon.SetAlpha = function(self, ...)
+					frame.icon.OldAlpha(self, ...)
+					frame.backdrop:SetAlpha(...)
+				end
 			end
-			frame.isSkinned = true
+		end
+
+		if ftype == 'aurabar' then
+			if not AS:CheckOption('WeakAuraAuraBar')then
+				frame.backdrop:Hide()
+			else
+				frame.backdrop:Show()
+			end
+		end
+
+		if ftype == 'icon' then
+			if IsAddOnLoaded('ElvUI') then ElvUI[1]:RegisterCooldown(frame.cooldown) end
 		end
 
 		AS:SkinTexture(frame.icon)
 		frame.icon.SetTexCoord = function() end
 	end
-
-	local function Create_WeakAuras(parent, data)
+	
+	local function Create_Icon(parent, data)
 		local region = WeakAuras.regionTypes.icon.OldCreate(parent, data)
-		Skin_WeakAuras(region)
+		Skin_WeakAuras(region, 'icon')
 		
 		return region
 	end
+	
+	local function Create_Aurabar(parent)
+		local region = WeakAuras.regionTypes.aurabar.OldCreate(parent)
+		Skin_WeakAuras(region, 'aurabar')
 
-	local function Modify_WeakAuras(parent, region, data)
+		return region
+	end
+
+	local function Modify_Icon(parent, region, data)
 		WeakAuras.regionTypes.icon.OldModify(parent, region, data)
 
-		Skin_WeakAuras(region)
+		Skin_WeakAuras(region, 'icon')
 	end
+	
+	local function Modify_Aurabar(parent, region, data)
+		WeakAuras.regionTypes.aurabar.OldModify(parent, region, data)
+
+		Skin_WeakAuras(region, 'aurabar')
+	end
+	
 	WeakAuras.regionTypes.icon.OldCreate = WeakAuras.regionTypes.icon.create
-	WeakAuras.regionTypes.icon.create = Create_WeakAuras
+	WeakAuras.regionTypes.icon.create = Create_Icon
+	
+	WeakAuras.regionTypes.aurabar.OldCreate = WeakAuras.regionTypes.aurabar.create
+	WeakAuras.regionTypes.aurabar.create = Create_Aurabar
 	
 	WeakAuras.regionTypes.icon.OldModify = WeakAuras.regionTypes.icon.modify
-	WeakAuras.regionTypes.icon.modify = Modify_WeakAuras
+	WeakAuras.regionTypes.icon.modify = Modify_Icon
+	
+	WeakAuras.regionTypes.aurabar.OldModify = WeakAuras.regionTypes.aurabar.modify
+	WeakAuras.regionTypes.aurabar.modify = Modify_Aurabar
 	
 	for weakAura, _ in pairs(WeakAuras.regions) do
-		if WeakAuras.regions[weakAura].regionType == 'icon' then
-			Skin_WeakAuras(WeakAuras.regions[weakAura].region)
+		if WeakAuras.regions[weakAura].regionType == 'icon'
+		   or WeakAuras.regions[weakAura].regionType == 'aurabar' then
+			Skin_WeakAuras(WeakAuras.regions[weakAura].region, WeakAuras.regions[weakAura].regionType)
 		end
 	end
 end

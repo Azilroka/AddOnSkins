@@ -1,11 +1,12 @@
 local AS = unpack(select(2, ...))
+local AddOnName = ...
 
 local name = 'Blizzard_WorldStateCaptureBar'
 function AS:Blizzard_WorldStateCaptureBar(event, addon)
-	local Horde = [[Interface\AddOns\Tukui_Skins\Media\Icons\Gloss-Horde]]
-	local Alliance = [[Interface\AddOns\Tukui_Skins\Media\Icons\Gloss-Alliance]]
-	local FFA = [[Interface\AddOns\Tukui_Skins\Media\Icons\FFA]]
-	local BarTexture = [[Interface\AddOns\Tukui\medias\textures\normTex]]
+	local Horde = "Interface\\AddOns\\"..AddOnName.."\\Media\\Icons\\Gloss-Horde"
+	local Alliance = "Interface\\AddOns\\"..AddOnName.."\\Media\\Icons\\Gloss-Alliance"
+	local FFA = "Interface\\AddOns\\"..AddOnName.."\\Media\\Icons\\FFA"
+	local BarTexture = AS.NormTex
 
 	local CreateCaptureBar = function(ID)
 		if not _G['WorldStateCaptureBar'..ID] then return end

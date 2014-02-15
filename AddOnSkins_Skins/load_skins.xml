@@ -24,7 +24,6 @@
 	<Script file="BattlePetBreedID.lua"/>
 	<Script file="BGDefender.lua"/>
 	<Script file="BigBrother.lua"/>
-	<Script file="BigWigs.lua"/>
 	<Script file="BPT.lua"/>
 	<Script file="BuyEmAll.lua"/>
 	<Script file="ChocolateBar.lua"/>
@@ -33,15 +32,12 @@
 	<Script file="CLCRet.lua"/>
 	<Script file="Clique.lua"/>
 	<Script file="CombustionHelper.lua"/>
-	<Script file="Coolline.lua"/>
 	<Script file="Cork.lua"/>
 	<Script file="Critline.lua"/>
 	<Script file="DailyTamerCheck.lua"/>
-	<Script file="DBM.lua"/>
 	<Script file="DKDots.lua"/>
 	<Script file="DoubleWideTradeSkills.lua"/>
 	<Script file="Dresser.lua"/>
-	<Script file="DXE.lua"/>
 	<Script file="EasyMail.lua"/>
 	<Script file="EavesDrop.lua"/>
 	<Script file="EnergyWatch.lua"/>
@@ -79,6 +75,7 @@
 	<Script file="oRA3.lua"/>
 	<Script file="Outfitter.lua"/>
 	<Script file="Ovale.lua"/>
+	<Script file="Overachiever.lua"/>
 	<Script file="PetBattleTeams.lua"/>
 	<Script file="PetJournalEnhanced.lua"/>
 	<Script file="PetTracker.lua"/>
@@ -97,7 +94,6 @@
 	<Script file="Reforgerade.lua"/>
 	<Script file="Scrap.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
-	<Script file="SexyCooldown.lua"/>
 	<Script file="ShieldBars.lua"/>
 	<Script file="ShieldMonitor.lua"/>
 	<Script file="SilverDragon.lua"/>
@@ -116,7 +112,6 @@
 	<Script file="TradeSkillDW.lua"/>
 	<Script file="TrainAll.lua"/>
 	<Script file="Vendomatic.lua"/>
-	<Script file="VEM.lua"/>
 	<Script file="VengeanceStatus.lua"/>
 	<Script file="WeakAuras.lua"/>
 	<Script file="Wholly.lua"/>

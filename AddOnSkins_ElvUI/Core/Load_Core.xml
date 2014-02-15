@@ -1,0 +1,8 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="Core.lua"/>
+	<Script file="Conflicts.lua"/>
+	<Script file="Embed.lua"/>
+	<Script file="DataText.lua"/>
+	<Script file="Options.lua"/>
+	<Script file="ParchmentRemover.lua"/>
+</Ui>

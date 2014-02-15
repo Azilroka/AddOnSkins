@@ -5,7 +5,7 @@ if not AS:CheckAddOn('LinkWrangler') then return end
 
 local name = "LinkWranglerSkin"
 function AS:SkinLinkWrangler()
-	local Path = "Interface\\AddOns\\"..AddOnName.."\\Buttons\\"
+	local Path = "Interface\\AddOns\\"..AddOnName.."\\Skins\\Buttons\\"
 
 	local function LWSkin_SkinButton(button, tex, distex)
 		if (button == nil) then
@@ -19,7 +19,11 @@ function AS:SkinLinkWrangler()
 	end
 
 	local function LWSkin(frame, link)
-		local r, g, b = GetItemInfo(link) and GetItemQualityColor(select(3,GetItemInfo(link))) or 1, 1, 0
+		local r, g, b = 1, 1, 0
+		if GetItemInfo(link) then
+			local quality = select(3, GetItemInfo(link))
+			r, g, b = GetItemQualityColor(tonumber(quality))
+		end
 		frame:SetTemplate("Default")
 		frame:SetBackdropBorderColor(r,g,b)
 		LWSkin_SkinButton(_G[frame:GetName().."CloseButton"], Path.."close")
