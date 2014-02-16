@@ -66,6 +66,7 @@
 	<Script file="MogIt.lua"/>
 	<Script file="MoveAnything.lua"/>
 	<Script file="MRT.lua"/>
+	<Script file="MrTrader.lua"/>
 	<Script file="MyRolePlay.lua"/>
 	<Script file="Numeration.lua"/>
 	<Script file="Odyssey.lua"/>
@@ -86,6 +87,8 @@
 	<Script file="QuestCompletist.lua"/>
 	<Script file="QuestItemBar.lua"/>
 	<Script file="RaidInviteOrganizer.lua"/>
+	<Script file="RareAnnouncer.lua"/>
+	<Script file="RareCoordinator.lua"/>
 	<Script file="RBS.lua"/>
 	<Script file="RCLootCouncil.lua"/>
 	<Script file="Recount.lua"/>
