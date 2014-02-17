@@ -26,6 +26,7 @@ local DEVELOPERS = {
 	'Lockslap',
 	'lolarennt',
 	'MaXiMUS',
+	'Merith',
 	'Outofammo',
 	'Pat',
 	'Pezzer13',
