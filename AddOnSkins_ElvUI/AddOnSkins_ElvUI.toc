@@ -5,6 +5,6 @@
 ## RequiredDep: ElvUI
 ## OptionalDep: DSM
 ## X-Tukui-ProjectID: 128
-## X-Tukui-ProjectFolders: AddOnSkins_AsphyxiaUI, AddOnSkins_Tukui, AddOnSkins_DuffedUI, AddOnSkins_ElvUI, AddOnSkins_Skins, AddOnSkins_Systems
+## X-Tukui-ProjectFolders: AddOnSkins_ElvUI, AddOnSkins_Skins
 
 Load_AddOnSkins.xml

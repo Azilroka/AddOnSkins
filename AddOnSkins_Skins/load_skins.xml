@@ -36,6 +36,7 @@
 	<Script file="Critline.lua"/>
 	<Script file="DailyTamerCheck.lua"/>
 	<Script file="DKDots.lua"/>
+	<Script file="Dominos.lua"/>
 	<Script file="DoubleWideTradeSkills.lua"/>
 	<Script file="Dresser.lua"/>
 	<Script file="EasyMail.lua"/>
@@ -44,9 +45,11 @@
 	<Script file="EveryGoldToBanker.lua"/>
 	<Script file="Examiner.lua"/>
 	<Script file="ExtVendor.lua"/>
+	<Script file="FaceShooter.lua"/>
 	<Script file="Factionizer.lua"/>
 	<Script file="FlightMap.lua"/>
 	<Script file="FlightMapEnhanced.lua"/>
+	<Script file="FlyoutButtonCustom.lua"/>
 	<Script file="Grinder.lua"/>
 	<Script file="GuildMemberInfo_TradeSkills.lua"/>
 	<Script file="GupPet.lua"/>
@@ -68,6 +71,8 @@
 	<Script file="MRT.lua"/>
 	<Script file="MrTrader.lua"/>
 	<Script file="MyRolePlay.lua"/>
+	<Script file="NPCScan.lua"/>
+	<Script file="NugRunning.lua"/>
 	<Script file="Numeration.lua"/>
 	<Script file="Odyssey.lua"/>
 	<Script file="Ogri'Lazy.lua"/>
@@ -77,6 +82,7 @@
 	<Script file="Outfitter.lua"/>
 	<Script file="Ovale.lua"/>
 	<Script file="Overachiever.lua"/>
+	<Script file="PallyPower.lua"/>
 	<Script file="PetBattleTeams.lua"/>
 	<Script file="PetJournalEnhanced.lua"/>
 	<Script file="PetTracker.lua"/>
@@ -114,6 +120,7 @@
 	<Script file="TomTom.lua"/>
 	<Script file="TradeSkillDW.lua"/>
 	<Script file="TrainAll.lua"/>
+	<Script file="VanasKoS.lua"/>
 	<Script file="Vendomatic.lua"/>
 	<Script file="VengeanceStatus.lua"/>
 	<Script file="WeakAuras.lua"/>

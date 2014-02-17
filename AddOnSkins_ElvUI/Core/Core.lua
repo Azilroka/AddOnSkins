@@ -3,6 +3,7 @@ local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:NewModule('AddOnSkins', 'AceTimer-3.0', 'AceEvent-3.0')
 local S = E:GetModule('Skins')
 local LSM, EP = LibStub('LibSharedMedia-3.0'), LibStub('LibElvUIPlugin-1.0')
+LSM:Register("font", "PT Sans Narrow Bold", [[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]])
 
 local tinsert, pairs, ipairs, unpack, pcall, select, type = tinsert, pairs, ipairs, unpack, pcall, select, type
 local format, gsub, strfind, strmatch, floor = format, gsub, strfind, strmatch, floor

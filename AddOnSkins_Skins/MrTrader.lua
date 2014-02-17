@@ -66,6 +66,10 @@ function AS:SkinMrTrader()
 			_G["MRTSkillButton"..i.."ReagentLrg"..j.."Border"]:Kill()
 			_G["MRTSkillButton"..i.."ReagentLrg"..j]:StyleButton()
 		end
+		for j = 1, 8 do
+			_G["MRTSkillButton"..i.."ReagentSml"..j.."IconTexture"]:SetTexCoord(unpack(AS.TexCoords))
+			_G["MRTSkillButton"..i.."ReagentSml"..j]:StyleButton()
+		end
 	end
 
 	hooksecurefunc(MRTSkillWindow, "SelectSkill", function(window, selectedButton, skillID)
