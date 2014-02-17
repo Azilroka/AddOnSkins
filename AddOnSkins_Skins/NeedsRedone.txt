@@ -10,3 +10,4 @@ Factionizer
 MageNuggets
 Skillet
 SexyCooldown
+WoWLua
