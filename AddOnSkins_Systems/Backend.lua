@@ -46,7 +46,6 @@ function AS:Init()
 			AS:EnableOption('MiscFixes')
 			for skin, alldata in AS:OrderedPairs(AS.register) do
 				for _, data in pairs(alldata) do
-					local addon = gsub(skin, 'Skin', '')
 					if AS:CheckOption(skin) == nil then AS:EnableOption(skin) end
 					AS:RegisteredSkin(skin, data.priority, data.func, data.events)
 				end

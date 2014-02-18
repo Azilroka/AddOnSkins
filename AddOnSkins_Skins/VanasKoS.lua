@@ -18,9 +18,9 @@ function AS:SkinVanasKoS()
 	Backdrop:SetPoint("BOTTOMRIGHT", -30, 75)
 
 	AS:SkinButton(VanasKoSListFrameChangeButton)
-	AS:SkinButton(VanasKoSListFrameRemoveButton:SkinButton)
+	AS:SkinButton(VanasKoSListFrameRemoveButton)
 	AS:SkinButton(VanasKoSListFrameAddButton)
-	AS:SkinButton(VanasKoSListFrameConfigurationButton:SkinButton)
+	AS:SkinButton(VanasKoSListFrameConfigurationButton)
 
 	AS:SkinCloseButton(VanasKosFrameCloseButton, Backdrop)
 	AS:SkinCheckBox(VanasKoSListFrameCheckBox)

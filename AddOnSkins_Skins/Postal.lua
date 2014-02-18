@@ -45,7 +45,7 @@ function AS:SkinPostal(event, addon)
 		Postal_ModuleMenuButton:SetPoint('TOPRIGHT', MailFrame, -53, -6)
 	end
 
-	if Postal_BlackBookButton and
+	if Postal_BlackBookButton then
 		AS:SkinNextPrevButton(Postal_BlackBookButton, true)
 		Postal_BlackBookButton:SetPoint('LEFT', SendMailNameEditBox, 'RIGHT', 5, 2)
 	end
