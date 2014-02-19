@@ -42,6 +42,9 @@ function AS:SkinSexyCooldown()
 			end)
 			hooksecurefunc(bar, "Deactivate", function()
 				activated = false
+				if (not ElvUI_Bar1:IsShown()) then
+					bar:Hide()
+				end
 				bar:SetAlpha(ElvUI_Bar1:GetAlpha())
 			end)
 		end
