@@ -51,6 +51,7 @@
 	<Script file="FlightMapEnhanced.lua"/>
 	<Script file="FlyoutButtonCustom.lua"/>
 	<Script file="Grinder.lua"/>
+	<Script file="GryphonHeartItems.lua"/>
 	<Script file="GuildMemberInfo_TradeSkills.lua"/>
 	<Script file="GupPet.lua"/>
 	<Script file="Healium.lua"/>
@@ -95,8 +96,10 @@
 	<Script file="RaidInviteOrganizer.lua"/>
 	<Script file="RareAnnouncer.lua"/>
 	<Script file="RareCoordinator.lua"/>
+	<Script file="RaresTip.lua"/>
 	<Script file="RBS.lua"/>
 	<Script file="RCLootCouncil.lua"/>
+	<Script file="ReagentMaker.lua"/>
 	<Script file="Recount.lua"/>
 	<Script file="ReforgeLite.lua"/>
 	<Script file="Reforgenator.lua"/>
@@ -119,6 +122,7 @@
 	<Script file="TitanPanel.lua"/>
 	<Script file="TomeOfTeleportation.lua"/>
 	<Script file="TomTom.lua"/>
+	<Script file="Tongues.lua"/>
 	<Script file="TradeSkillDW.lua"/>
 	<Script file="TrainAll.lua"/>
 	<Script file="VanasKoS.lua"/>

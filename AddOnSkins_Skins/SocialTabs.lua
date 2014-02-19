@@ -1,5 +1,7 @@
 local AS = unpack(AddOnSkins)
 
+if not AS:CheckAddOn('SocialTabs') then return end
+
 local name = 'SocialTabsSkin'
 function AS:SkinSocialTabs(event, addon)
 	local SocialTabs = {
