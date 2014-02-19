@@ -31,6 +31,7 @@ V['addonskins'] = {
 	['EmbedLeftChat'] = false,
 	['WeakAuraAuraBar'] = false,
 	['AuctionHouse'] = true,
+	['IntegrateMyRolePlayTooltip'] = true,
 }
 
 do

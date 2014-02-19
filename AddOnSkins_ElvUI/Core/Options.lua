@@ -240,6 +240,11 @@ function AS:GenerateOptions()
 				type = 'toggle',
 				name = 'Auction House',
 				order = 2,
+			},
+			IntegrateMyRolePlayTooltip = {
+				type = 'toggle',
+				name = 'Integrate the MyRolePlay tooltip with ElvUI\'s tooltip',
+				order = 3,
 			}
 		}
 	}
