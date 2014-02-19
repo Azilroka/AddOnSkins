@@ -29,6 +29,21 @@ function AS:SkinSexyCooldown()
 			bar:Point('BOTTOMRIGHT', ElvUI_Bar1, 'TOPRIGHT', 0, 2)
 			bar:Point("BOTTOMLEFT", ElvUI_Bar1, "TOPLEFT", 0, 2)
 			bar:SetHeight(ElvUI_Bar1Button1:GetHeight())
+			local activated
+			ElvUI_Bar1:HookScript("OnShow", function() bar:Show() end)
+			ElvUI_Bar1:HookScript("OnHide", function() if (not activated) then bar:Hide() end end)
+			hooksecurefunc(ElvUI_Bar1, "SetAlpha", function(_, alpha)
+				if (not activated) then
+					bar:SetAlpha(alpha)
+				end
+			end)
+			hooksecurefunc(bar, "Activate", function()
+				activated = true
+			end)
+			hooksecurefunc(bar, "Deactivate", function()
+				activated = false
+				bar:SetAlpha(ElvUI_Bar1:GetAlpha())
+			end)
 		end
 	end
 
