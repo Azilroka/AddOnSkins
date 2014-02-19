@@ -32,6 +32,7 @@ local DEVELOPERS = {
 	'Pezzer13',
 	'Rakkhin',
 	'Repooc',
+	'Shestak',
 	'Shadowcall',
 	'Sinaris',
 	'Sortokk',
