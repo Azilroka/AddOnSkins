@@ -1,3 +1,4 @@
+package-as
 move-folders:
 	AddOnSkins_ElvUI: AddOnSkins_ElvUI
 	AddOnSkins_Skins: AddOnSkins_Skins
