@@ -1,6 +1,3 @@
-move-folders:
-	elvui_addonskins/mainline/AddOnSkins_ElvUI: AddOnSkins_ElvUI
-	elvui_addonskins/mainline/AddOnSkins_Skins: AddOnSkins_Skins
 ignore:
 	- AddOnSkins_Tukui
 	- AddOnSkins_AsphyxiaUI
