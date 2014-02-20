@@ -1,0 +1,7 @@
+package-as: AddOnSkins_ElvUI
+ignore:
+	- AddOnSkins_Tukui
+	- AddOnSkins_AsphyxiaUI
+	- AddOnSkins_DuffedUI
+	- AddOnSkins_Systems
+	- AddOnSkins_Skins/Tukui
