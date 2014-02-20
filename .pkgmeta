@@ -1,7 +1,6 @@
-package-as
 move-folders:
-	AddOnSkins_ElvUI: AddOnSkins_ElvUI
-	AddOnSkins_Skins: AddOnSkins_Skins
+	elvui_addonskins/AddOnSkins_ElvUI: AddOnSkins_ElvUI
+	elvui_addonskins/AddOnSkins_Skins: AddOnSkins_Skins
 ignore:
 	- AddOnSkins_Tukui
 	- AddOnSkins_AsphyxiaUI
