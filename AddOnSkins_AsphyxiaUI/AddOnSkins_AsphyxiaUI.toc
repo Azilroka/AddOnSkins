@@ -1,6 +1,6 @@
 ## Interface: 50400
 ## Title: |cFFFF6347AsphyxiaUI|r |cFFFFFFFFAddOnSkins|r
-## Version: 2.01
+## Version: 2.02
 ## Author: Azilroka, Sortokk, Sinaris
 ## Url: http://www.tukui.org/addons/index.php?act=view&id=127
 ## OptionalDeps: Tukui_ChatTweaks
