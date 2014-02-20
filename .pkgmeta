@@ -7,5 +7,5 @@ ignore:
 	- AddOnSkins_Tukui.zip
 	- AddOnSkins_ElvUI.zip
 move-folders:
-	AddOnSkins_ElvUI/: AddOnSkins_ElvUI
-	AddOnSkins_Skins/: AddOnSkins_Skins
+	AddOnSkins/AddOnSkins_ElvUI: AddOnSkins_ElvUI
+	AddOnSkins/AddOnSkins_Skins: AddOnSkins_Skins
