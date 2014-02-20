@@ -1,3 +1,4 @@
+package-as: AddOnSkins_ElvUI
 ignore:
 	- AddOnSkins_Tukui
 	- AddOnSkins_AsphyxiaUI
@@ -6,3 +7,7 @@ ignore:
 	- AddOnSkins_Skins/Tukui
 	- AddOnSkins_Tukui.zip
 	- AddOnSkins_ElvUI.zip
+	package-as: ElvUI_SLE
+move-folders:
+	AddOnSkins_ElvUI: AddOnSkins_ElvUI
+	AddOnSkins_Skins: AddOnSkins_Skins
