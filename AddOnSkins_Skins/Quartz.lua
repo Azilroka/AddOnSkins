@@ -22,7 +22,7 @@ function AS:SkinQuartz()
  		else
  			self.IconBorder:Show()
  		end
-		if not Quartz3GCDBar.isSkinned then AS:SkinBackdropFrame(Quartz3GCDBar, nil, true) Quartz3GCDBar.isSkinned = true end
+		if Quartz3GCDBar and not Quartz3GCDBar.isSkinned then AS:SkinBackdropFrame(Quartz3GCDBar, nil, true) Quartz3GCDBar.isSkinned = true end
 	end
 
 	hooksecurefunc(CastBar, 'UNIT_SPELLCAST_START', SkinQuartzBar)

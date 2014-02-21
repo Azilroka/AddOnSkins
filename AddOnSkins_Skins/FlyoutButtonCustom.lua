@@ -11,13 +11,13 @@ function AS:SkinFlyoutButtonCustom()
 	local function CreateBorder(self)
 		local name = self:GetName()
 		local button = self
-		local icon = _G[btn:GetName().."Icon"]
-		local cooldown = _G[btn:GetName().."Cooldown"]
-		local border = _G[btn:GetName().."Border"]
-		local count = _G[btn:GetName().."Count"]
-		local btname = _G[btn:GetName().."Name"]
-		local hotkey = _G[btn:GetName().."HotKey"]
-		local normal = _G[btn:GetName().."NormalTexture"]
+		local icon = _G[name.."Icon"]
+		local cooldown = _G[name.."Cooldown"]
+		local border = _G[name.."Border"]
+		local count = _G[name.."Count"]
+		local btname = _G[name.."Name"]
+		local hotkey = _G[name.."HotKey"]
+		local normal = _G[name.."NormalTexture"]
 
 		button:StyleButton()
 		button:SetNormalTexture("")

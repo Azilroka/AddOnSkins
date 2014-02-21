@@ -2,15 +2,16 @@ local AS = unpack(AddOnSkins)
 
 local name = 'MiscFixes'
 function AS:MiscFixes(event, addon)
-	for i = 1, 4 do
-		_G['StaticPopup'..i]:SetTemplate('Transparent')
-		AS:SkinButton(_G['StaticPopup'..i..'Button1'])
-		AS:SkinButton(_G['StaticPopup'..i..'Button2'])
-		AS:SkinButton(_G['StaticPopup'..i..'Button3'])
-		AS:SkinEditBox(_G['StaticPopup'..i..'EditBox'])
-		AS:SkinCloseButton(_G['StaticPopup'..i..'CloseButton'])
+	if event == 'PLAYER_ENTERING_WORLD' then
+		for i = 1, 4 do
+			_G['StaticPopup'..i]:SetTemplate('Transparent')
+			AS:SkinButton(_G['StaticPopup'..i..'Button1'])
+			AS:SkinButton(_G['StaticPopup'..i..'Button2'])
+			AS:SkinButton(_G['StaticPopup'..i..'Button3'])
+			AS:SkinEditBox(_G['StaticPopup'..i..'EditBox'])
+			AS:SkinCloseButton(_G['StaticPopup'..i..'CloseButton'])
+		end
 	end
-
 	if event == 'AUCTION_HOUSE_SHOW' then
 		if AS:CheckOption('AuctionHouse') then
 			BrowseNameText:Point('TOPLEFT', 20, -39)
@@ -24,8 +25,7 @@ function AS:MiscFixes(event, addon)
 			BrowseMaxLevel:Point('LEFT', BrowseMinLevel, 'RIGHT', 12, 0)
 			BrowseDropDown:Point('TOPLEFT', BrowseLevelText, 'BOTTOMRIGHT', -5, -2)
 			BrowseResetButton:Point('TOPLEFT', AuctionFrameBrowse, 'TOPLEFT', 20, -78)
-			BrowseSearchButton:ClearAllPoints()
-			BrowseSearchButton:Point('LEFT', BrowsePrevPageButton, 'RIGHT', 24, 0)
+			BrowseSearchButton:Point('TOPRIGHT', AuctionFrameBrowse, 'TOPRIGHT', 24, -52)
 			BrowseCloseButton:Point('BOTTOMRIGHT', AuctionFrameBrowse, 'BOTTOMRIGHT', 66, 6)
 			AuctionFrameMoneyFrame:Point('BOTTOMRIGHT', AuctionFrame, 'BOTTOMLEFT', 181, 10)
 			BrowseBidPrice:Point('BOTTOM', AuctionFrameBrowse, 'BOTTOM', 25, 10)
@@ -41,6 +41,13 @@ function AS:MiscFixes(event, addon)
 		end
 		AS:UnregisterEvent(name, event)
 	end
+	if event == 'LFG_PROPOSAL_SHOW' then
+		for i = 1, 2 do
+			_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Border']:Kill()
+			_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Texture']:SetTexCoord(unpack(AS.TexCoords))
+		end
+		AS:UnregisterEvent(name, event)
+	end
 end
 
-AS:RegisterSkin(name, AS.MiscFixes, 'AUCTION_HOUSE_SHOW')
+AS:RegisterSkin(name, AS.MiscFixes, 'AUCTION_HOUSE_SHOW', 'LFG_PROPOSAL_SHOW')

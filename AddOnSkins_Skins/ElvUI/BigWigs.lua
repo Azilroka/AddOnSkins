@@ -5,18 +5,25 @@ if not AS:CheckAddOn('BigWigs') then return end
 local Loaded
 local name = "BigWigsSkin"
 function AS:SkinBigWigs(event, addon)
-	LFGDungeonReadyPopup:HookScript('OnUpdate', function(self)
-		for i = 1, self:GetNumChildren() do
-			local object = select(i, self:GetChildren())
-			if object:GetObjectType() == 'StatusBar' and not object.IsSkinned then
-				AS:SkinStatusBar(object)
-				object:ClearAllPoints()
-				object:SetPoint('TOP', self, 'BOTTOM', 0, -2)
-				object:SetHeight(16)
-				object.IsSkinned = true
-			end
+	if event == 'LFG_PROPOSAL_SHOW' or event == 'PLAYER_ENTERING_WORLD' then
+		if LFGDungeonReadyPopup then
+			LFGDungeonReadyPopup:HookScript('OnUpdate', function(self)
+				for i = 1, self:GetNumChildren() do
+					local object = select(i, self:GetChildren())
+					if object:GetObjectType() == 'StatusBar' and not object.IsSkinned then
+						AS:SkinStatusBar(object)
+						object:ClearAllPoints()
+						object:SetPoint('TOP', self, 'BOTTOM', 0, -2)
+						object:SetHeight(16)
+						object.IsSkinned = true
+					end
+				end
+			end)
+			AS:UnregisterEvent(name, event)
 		end
-	end)
+	end
+
+	if event == 'LFG_PROPOSAL_SHOW' then return end
 
 	local ButtonSize = 20
 	local FreeBG = {}
@@ -141,4 +148,4 @@ function AS:SkinBigWigs(event, addon)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinBigWigs, "ADDON_LOADED")
+AS:RegisterSkin(name, AS.SkinBigWigs, "ADDON_LOADED", 'LFG_PROPOSAL_SHOW')
