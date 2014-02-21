@@ -91,7 +91,7 @@ function AS:SkinCLCInfo(event, addon)
 			end
 			skinType = g.skinType
 
-			if skinType == 'Tukui' then
+			if skinType == 'AddOnSkins' then
 				ApplyIconSkin(self)
 			elseif self.elements.backdropFrame then
 				self.elements.backdropFrame:Hide()
@@ -110,7 +110,7 @@ function AS:SkinCLCInfo(event, addon)
 			end
 			skinType = g.skinType
 
-			if skinType == 'Tukui' then
+			if skinType == 'AddOnSkins' then
 				ApplyBarSkin(self)
 			elseif self.elements.backdropFrame then
 				self.elements.backdropFrame:Hide()
@@ -137,19 +137,24 @@ function AS:SkinCLCInfo(event, addon)
 		hooksecurefunc(clcInfo.display['bars'], 'New', NewBar)
 	end
 	if addon == 'clcInfo_Options' then
+		local function GetSkinTypeList()
+			local list = { ["Default"] = "Default", ["BareBone"] = "BareBone", ['AddOnSkins'] = 'AddOnSkins' }
+			if clcInfo.MSQ then list["Masque"] = "Masque" end
+			return list
+		end
 		hooksecurefunc(clcInfo_Options, 'LoadActiveTemplate', function(self)
 			local options = clcInfo_Options.options
 			if not clcInfo.activeTemplate then return end
-			options.args.activeTemplate.args.skins.args.icons.args.selectType.args.skinType.values['Tukui'] = 'Tukui'
-			options.args.activeTemplate.args.skins.args.micons.args.selectType.args.skinType.values['Tukui'] = 'Tukui'	
+			options.args.activeTemplate.args.skins.args.icons.args.selectType.args.skinType.values = GetSkinTypeList()
+			options.args.activeTemplate.args.skins.args.micons.args.selectType.args.skinType.values = GetSkinTypeList()
 		end)
 		hooksecurefunc(clcInfo_Options, 'UpdateGridList', function(self)
 			local db = clcInfo.display.grids.active
 			local optionsGrids = self.options.args.activeTemplate.args.grids
 			for i = 1, #db do
 				local options = optionsGrids.args[tostring(i)].args.tabSkins.args
-				options.icons.args.selectType.args.skinType.values['Tukui'] = 'Tukui'
-				options.micons.args.selectType.args.skinType.values['Tukui'] = 'Tukui'		
+				options.icons.args.selectType.args.skinType.values = GetSkinTypeList()
+				options.micons.args.selectType.args.skinType.values = GetSkinTypeList()
 			end
 		end)
 		hooksecurefunc(clcInfo_Options, 'UpdateIconList', function(self)
@@ -157,7 +162,7 @@ function AS:SkinCLCInfo(event, addon)
 			local optionsIcons = self.options.args.activeTemplate.args.icons
 			for i = 1, #db do
 				local options = optionsIcons.args[tostring(i)].args.tabSkin.args
-				options.selectType.args.skinType.values['Tukui'] = 'Tukui'
+				options.selectType.args.skinType.values = GetSkinTypeList()
 			end
 		end)
 		hooksecurefunc(clcInfo_Options, 'UpdateMIconList', function(self)
@@ -165,7 +170,7 @@ function AS:SkinCLCInfo(event, addon)
 			local optionsMIcons = self.options.args.activeTemplate.args.micons
 			for i = 1, #db do
 				local options = optionsMIcons.args[tostring(i)].args.tabSkin.args
-				options.selectType.args.skinType.values['Tukui'] = 'Tukui'
+				options.selectType.args.skinType.values = GetSkinTypeList()
 			end
 		end)
 		AS:UnregisterEvent(name, 'ADDON_LOADED')
