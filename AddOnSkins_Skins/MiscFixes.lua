@@ -35,9 +35,9 @@ function AS:MiscFixes(event, addon)
 			AuctionFrameTab1:Point('TOPLEFT', AuctionFrame, 'BOTTOMLEFT', -5, 2)
 			BrowseNextPageButton:Size(20)
 			BrowsePrevPageButton:Size(20)
-			for i = 1, AuctionFrame.numTabs do
-				AS:SkinTab(_G['AuctionFrameTab'..i])
-			end
+		end
+		for i = 1, AuctionFrame.numTabs do
+			AS:SkinTab(_G['AuctionFrameTab'..i])
 		end
 		AS:UnregisterEvent(name, event)
 	end
