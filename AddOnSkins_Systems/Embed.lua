@@ -5,7 +5,6 @@ local format, gsub, pairs, ipairs, select, tinsert, tonumber = format, gsub, pai
 
 local EmbedOoCCombatStart
 local SkadaWindows = {}
-local Ace3Options = IsAddOnLoaded('Enhanced_Config') and true or false
 
 local EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
 local EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
@@ -55,15 +54,7 @@ function AS:Embed_Init()
 	LeftToggleButton:Point('LEFT', AS.InfoLeft, 'LEFT', 2, 0)
 	LeftToggleButton:HookScript('OnClick', function(self, button)
 		if button == 'RightButton' then
-			if not Ace3Options then
-				if SkinOptions_Main:IsShown() then
-					SkinOptions_Main:Hide()
-				else
-					SkinOptions_Main:Show()
-				end
-			else
-				Enhanced_Config[1]:ToggleConfig()
-			end
+			Enhanced_Config[1]:ToggleConfig()
 		end
 	end)
 end
