@@ -6,3 +6,6 @@
 ## SavedVariables: UISkinOptions
 
 Load_AddOnSkins.xml
+
+## X-Tukui-ProjectID: 221
+## X-Tukui-ProjectFolders: AddOnSkins_DuffedUI, AddOnSkins_Skins, AddOnSkins_Systems
