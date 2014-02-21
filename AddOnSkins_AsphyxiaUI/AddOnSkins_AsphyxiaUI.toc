@@ -4,5 +4,7 @@
 ## Author: Azilroka, Sortokk
 ## RequiredDeps: AsphyxiaUI, Enhanced_Config
 ## SavedVariables: UISkinOptions
+## X-Tukui-ProjectID: 222
+## X-Tukui-ProjectFolders: AddOnSkins_AsphyxiaUI
 
 Load_AddOnSkins.xml

@@ -4,8 +4,7 @@
 ## Author: Azilroka, Sortokk
 ## RequiredDeps: DuffedUI, Enhanced_Config
 ## SavedVariables: UISkinOptions
+## X-Tukui-ProjectID: 221
+## X-Tukui-ProjectFolders: AddOnSkins_DuffedUI
 
 Load_AddOnSkins.xml
-
-## X-Tukui-ProjectID: 221
-## X-Tukui-ProjectFolders: AddOnSkins_DuffedUI, AddOnSkins_Skins, AddOnSkins_Systems
