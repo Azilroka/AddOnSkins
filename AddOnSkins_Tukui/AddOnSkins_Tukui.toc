@@ -1,10 +1,8 @@
 ## Interface: 50400
 ## Title: |cFFC495DDTukui|r |cFFFFFFFFAddOnSkins|r
-## Version: 2.03
+## Version: 2.04
 ## Author: Azilroka, Sortokk
 ## RequiredDeps: Tukui, Enhanced_Config
 ## SavedVariables: UISkinOptions
-## X-Tukui-ProjectID: 127
-## X-Tukui-ProjectFolders: AddOnSkins_AsphyxiaUI, AddOnSkins_Tukui, AddOnSkins_DuffedUI, AddOnSkins_Skins, AddOnSkins_Systems
 
 Load_AddOnSkins.xml

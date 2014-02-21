@@ -1,12 +1,8 @@
 ## Interface: 50400
 ## Title: |cffC41F3BDuffedUI|r |cFFFFFFFFAddOnSkins|r
-## Version: 2.03
-## Author: Azilroka, Sortokk, Merith
-## Url: http://www.tukui.org/addons/index.php?act=view&id=127
-## OptionalDeps: Tukui_ChatTweaks
+## Version: 2.04
+## Author: Azilroka, Sortokk
 ## RequiredDeps: DuffedUI, Enhanced_Config
 ## SavedVariables: UISkinOptions
-## X-Tukui-ProjectID: 127
-## X-Tukui-ProjectFolders: AddOnSkins_AsphyxiaUI, AddOnSkins_Tukui, AddOnSkins_DuffedUI, AddOnSkins_Skins, AddOnSkins_Systems
 
 Load_AddOnSkins.xml
