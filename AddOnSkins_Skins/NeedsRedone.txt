@@ -2,9 +2,6 @@ AdiBags
 ArkInventory
 ATSW
 Bagnon
-ClcInfo
-ClcProt
-ClcRet
 Extended Vendor
 Factionizer
 MageNuggets
