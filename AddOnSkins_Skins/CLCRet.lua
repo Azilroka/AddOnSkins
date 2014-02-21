@@ -1,11 +1,9 @@
 local AS = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('CLCRet') then return end
+if not (AS:CheckAddOn('CLCRet') and AS.MyClass == 'PALADIN') then return end
 
 local name = 'CLCRetSkin'
 function AS:SkinCLCRet()
-	if AS.MyClass ~= 'PALADIN' then return end
-
 	local function UpdateButtonLayout(frame, button, opt)
 		button:Size(opt.size)
 		button:ClearAllPoints()
