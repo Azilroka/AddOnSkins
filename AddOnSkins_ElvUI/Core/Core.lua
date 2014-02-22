@@ -296,7 +296,7 @@ function AS:SkinFrame(frame, template, override, kill)
 	if not template then template = 'Transparent' end
 	if not override then frame:StripTextures(kill) end
 	frame:SetTemplate(template, true)
-	if (E:GetModule('EnhancedShadows')) then
+	if (E:GetModule('EnhancedShadows', true)) then
 		local ES = E:GetModule('EnhancedShadows');
 		frame:CreateShadow();
 		ES:RegisterShadow(frame.shadow);
