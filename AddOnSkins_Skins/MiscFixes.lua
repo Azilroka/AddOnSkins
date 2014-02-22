@@ -41,13 +41,16 @@ function AS:MiscFixes(event, addon)
 		end
 		AS:UnregisterEvent(name, event)
 	end
-	if event == 'LFG_PROPOSAL_SHOW' then
-		for i = 1, 2 do
-			_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Border']:Kill()
-			_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Texture']:SetTexCoord(unpack(AS.TexCoords))
+	local function SkinIcons()
+		for i = 1, LFG_ROLE_NUM_SHORTAGE_TYPES do
+			if _G['LFGDungeonReadyDialogRewardsFrameReward'..i] and not _G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone then
+				_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Border']:Kill()
+				_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Texture']:SetTexCoord(unpack(AS.TexCoords))
+				_G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone = true
+			end
 		end
-		AS:UnregisterEvent(name, event)
 	end
+	hooksecurefunc('LFGDungeonReadyDialog_UpdateRewards', SkinIcons)
 end
 
-AS:RegisterSkin(name, AS.MiscFixes, 'AUCTION_HOUSE_SHOW', 'LFG_PROPOSAL_SHOW')
+AS:RegisterSkin(name, AS.MiscFixes, 'AUCTION_HOUSE_SHOW')
