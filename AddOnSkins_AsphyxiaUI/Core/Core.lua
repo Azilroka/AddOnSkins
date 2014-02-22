@@ -1,5 +1,4 @@
 local AS = unpack(select(2, ...))
-local T16 = Tukui and tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16 and true or false
 local pairs, sort, tinsert, tremove, unpack, floor = pairs, sort, tinsert, tremove, unpack, floor
 
 UISkinOptions = {}
@@ -61,11 +60,7 @@ function AS:SkinTab(frame, strip)
 end
 
 function AS:SkinNextPrevButton(frame, horizonal)
-	if T16 then
-		frame:SkinArrowButton(not horizonal)
-	else
-		frame:SkinNextPrevButton(horizonal)
-	end
+	frame:SkinNextPrevButton(horizonal)
 end
 
 function AS:SkinRotateButton(frame)
@@ -79,11 +74,7 @@ function AS:SkinEditBox(frame, width, height)
 end
 
 function AS:SkinDropDownBox(frame, width)
-	if T16 then
-		frame:SkinDropDown(width)
-	else
-		frame:SkinDropDownBox(width)
-	end
+	frame:SkinDropDownBox(width)
 end
 
 function AS:SkinCheckBox(frame)
@@ -124,7 +115,7 @@ function AS:SkinTitleBar(frame, template, override, kill)
 end
 
 function AS:SkinStatusBar(frame, ClassColor)
-	AS:SkinBackdropFrame(frame, true)
+	AS:SkinBackdropFrame(frame)
 	frame:SetStatusBarTexture(AS.NormTex)
 	if ClassColor then
 		local color = RAID_CLASS_COLORS[AS.MyClass]

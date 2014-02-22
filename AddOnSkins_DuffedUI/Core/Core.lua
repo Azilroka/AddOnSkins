@@ -120,7 +120,7 @@ function AS:SkinTitleBar(frame, template, override, kill)
 end
 
 function AS:SkinStatusBar(frame, ClassColor)
-	AS:SkinBackdropFrame(frame, true)
+	AS:SkinBackdropFrame(frame)
 	frame:SetStatusBarTexture(AS.NormTex)
 	if ClassColor then
 		local color = RAID_CLASS_COLORS[AS.MyClass]
