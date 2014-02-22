@@ -28,7 +28,7 @@ function AS:SkinGryphonheartItems()
 
 		AS:SkinFrame(frame, nil, true)
 		AS:SkinCloseButton(_G[name..'CloseButton'])
-
+		print(_G[name..'CloseButton']:GetPoint())
 		AS:SkinTexture(_G[name.."Portrait"])
 		_G[name.."Portrait"]:SetDrawLayer('OVERLAY')
 		_G[name.."Portrait"]:SetInside(_G[name.."PortraitButton"])
@@ -38,11 +38,12 @@ function AS:SkinGryphonheartItems()
 		_G[name..'Plate'].IsSkinned = true
 		_G[name..'PortraitButton'].IsSkinned = true
 		for j = 1, size, 1 do
-			AS:SkinIconButton(_G[name..'Item'..j])
+			AS:SkinIconButton(_G[name..'Item'..j], true)
 			_G[name..'Item'..j].IsSkinned = true
 			_G[name..'Item'..j]:HookScript('OnUpdate', function(self)
 				local itemGuid, texture, count, stacklocked, quality = GHI_ContainerAPI().GetAPI().GHI_GetContainerItemInfo(self.containerGuid, self.slotID)
 				local backdrop = self.backdrop or self.Backdrop
+				backdrop:SetAllPoints()
 				if quality and quality > 1 then
 					local r, g, b = GetItemQualityColor(quality)
 					backdrop:SetBackdropBorderColor(r, g, b)

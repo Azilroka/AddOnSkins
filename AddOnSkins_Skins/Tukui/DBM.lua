@@ -161,26 +161,29 @@ function AS:SkinDBM(event, addon)
 			end
 		end
 
+		local function SkinRange(self, range, filter, forceshow, redCircleNumPlayers)
+			if DBM.Options.DontShowRangeFrame and not forceshow then return end
+			DBMRangeCheck:SetTemplate('Transparent')
+			DBMRangeCheckRadar:SetTemplate('Transparent')
+		end
+
+		local function SkinInfo(self, maxLines, event, ...)
+			if DBM.Options.DontShowInfoFrame and (event or 0) ~= "test" then return end
+			DBMInfoFrame:SetTemplate('Transparent')
+		end
+
 		hooksecurefunc(DBT, 'CreateBar', SkinBars)
 		hooksecurefunc(DBM.BossHealth, 'Show', SkinBossTitle)
 		hooksecurefunc(DBM.BossHealth, 'AddBoss', SkinBoss)
 		hooksecurefunc(DBM.BossHealth, 'UpdateSettings', SkinBoss)
-		if not DBM_SavedOptions['DontShowRangeFrame'] then
-			DBM.RangeCheck:Show()
-			DBM.RangeCheck:Hide()
-			DBMRangeCheck:HookScript('OnShow',function(self) self:SetTemplate('Transparent') end)
-			DBMRangeCheckRadar:SetTemplate('Transparent')
-		end
-		if not DBM_SavedOptions['DontShowInfoFrame'] then
-			DBM.InfoFrame:Show(5, 'test')
-			DBM.InfoFrame:Hide()
-			DBMInfoFrame:HookScript('OnShow',function(self) self:SetTemplate('Transparent') end)
-		end
+		hooksecurefunc(DBM.RangeCheck, 'Show', SkinRange)
+		hooksecurefunc(DBM.InfoFrame, 'Show', SkinInfo)
+
 		if croprwicons then
 			local RaidNotice_AddMessage_ = RaidNotice_AddMessage
 			RaidNotice_AddMessage = function(noticeFrame, textString, colorInfo)
 				if textString:find(' |T') then
-					textString = string.gsub(textString,'(:12:12)',':18:18:0:0:64:64:5:59:5:59')
+					textString = gsub(textString,'(:12:12)',':18:18:0:0:64:64:5:59:5:59')
 				end
 				return RaidNotice_AddMessage_(noticeFrame, textString, colorInfo)
 			end

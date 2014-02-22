@@ -5,8 +5,10 @@ if not AS:CheckAddOn('WeakAuras') then return end
 local name = 'WeakAurasSkin'
 function AS:SkinWeakAuras()
 	local function Skin_WeakAuras(frame, ftype)
-		if not frame.backdrop then
+		local backdrop = frame.backdrop or frame.Backdrop
+		if not backdrop then
 			frame:CreateBackdrop('Transparent')
+			backdrop = frame.backdrop or frame.Backdrop
 			if ftype == 'icon' then
 				frame.icon.OldAlpha = frame.icon.SetAlpha
 				frame.icon.SetAlpha = function(self, ...)
@@ -18,9 +20,9 @@ function AS:SkinWeakAuras()
 
 		if ftype == 'aurabar' then
 			if not AS:CheckOption('WeakAuraAuraBar')then
-				frame.backdrop:Hide()
+				backdrop:Hide()
 			else
-				frame.backdrop:Show()
+				backdrop:Show()
 			end
 		end
 
