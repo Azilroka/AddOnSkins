@@ -38,6 +38,7 @@ local DEVELOPERS = {
 	'lolarennt',
 	'MaXiMUS',
 	'Merith',
+	'MrRuben5',
 	'Outofammo',
 	'Pat',
 	'Pezzer13',
