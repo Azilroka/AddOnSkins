@@ -9,6 +9,16 @@ local EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', Em
 local EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
 local ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
 
+function AS:GetChatWindowInfo()
+	local ChatTabInfo = {}
+	for i = 1, NUM_CHAT_WINDOWS do
+		local tab = _G["ChatFrame"..i.."Tab"];
+
+		ChatTabInfo["ChatFrame"..i] = tab:GetText()
+	end
+	return ChatTabInfo
+end
+
 function AS:Embed_Show()
 	if AS:CheckOption('EmbedSystem') then
 		if _G[EmbedSystem_MainWindow.FrameName] then _G[EmbedSystem_MainWindow.FrameName]:Show() end
