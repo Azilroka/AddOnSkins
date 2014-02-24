@@ -11,6 +11,25 @@ function AS:MiscFixes(event, addon)
 			AS:SkinEditBox(_G['StaticPopup'..i..'EditBox'])
 			AS:SkinCloseButton(_G['StaticPopup'..i..'CloseButton'])
 		end
+
+		local LET = LibStub("LibExtraTip", true)
+		if LET then
+			for _, object in pairs(LET.tooltipRegistry) do
+				AS:SkinTooltip(object)
+			end
+		end
+
+		local function SkinIcons()
+			for i = 1, LFG_ROLE_NUM_SHORTAGE_TYPES do
+				if _G['LFGDungeonReadyDialogRewardsFrameReward'..i] and not _G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone then
+					_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Border']:Kill()
+					_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Texture']:SetTexCoord(unpack(AS.TexCoords))
+					_G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone = true
+				end
+			end
+		end
+
+		hooksecurefunc('LFGDungeonReadyDialog_UpdateRewards', SkinIcons)
 	end
 	if event == 'AUCTION_HOUSE_SHOW' then
 		if AS:CheckOption('AuctionHouse') then
@@ -41,16 +60,6 @@ function AS:MiscFixes(event, addon)
 		end
 		AS:UnregisterEvent(name, event)
 	end
-	local function SkinIcons()
-		for i = 1, LFG_ROLE_NUM_SHORTAGE_TYPES do
-			if _G['LFGDungeonReadyDialogRewardsFrameReward'..i] and not _G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone then
-				_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Border']:Kill()
-				_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Texture']:SetTexCoord(unpack(AS.TexCoords))
-				_G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone = true
-			end
-		end
-	end
-	hooksecurefunc('LFGDungeonReadyDialog_UpdateRewards', SkinIcons)
 end
 
 AS:RegisterSkin(name, AS.MiscFixes, 'AUCTION_HOUSE_SHOW')
