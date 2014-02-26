@@ -43,7 +43,7 @@ function AS:EmbedSystem_WindowResize()
 		EmbedSystem_MainWindow:SetPoint('BOTTOM', AS.InfoRight, 'TOP', 0, 2)
 		EmbedSystem_MainWindow:SetSize(AS.InfoRight:GetWidth(), 142)
 	else
-		EmbedSystem_MainWindow:SetPoint('BOTTOM', AS.InfoRight, 'TOP', 0, 1)
+		EmbedSystem_MainWindow:SetPoint('BOTTOM', AS.InfoRight, 'TOP', 0, 3)
 		EmbedSystem_MainWindow:SetSize(AS.InfoRight:GetWidth(), AS.ChatBackgroundRight:GetHeight() - (AS:CheckOption('EmbedBelowTop') and 60 or 36))
 	end
 

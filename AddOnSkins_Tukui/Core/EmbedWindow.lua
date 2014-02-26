@@ -44,7 +44,7 @@ function AS:EmbedSystem_WindowResize()
 		EmbedSystem_MainWindow:SetSize(AS.InfoRight:GetWidth(), 142)
 	else
 		EmbedSystem_MainWindow:SetPoint('BOTTOM', AS.InfoRight, 'TOP', 0, 3)
-		EmbedSystem_MainWindow:SetSize(AS.InfoRight:GetWidth(), AS.ChatBackgroundRight:GetHeight() - (AS:CheckOption('EmbedBelowTop') and 24 or 0))
+		EmbedSystem_MainWindow:SetSize(AS.InfoRight:GetWidth(), AS.ChatBackgroundRight:GetHeight() - (AS:CheckOption('EmbedBelowTop') and (AS.InfoRight:GetHeight()*3) - 5 or (AS.InfoRight:GetHeight()*2) - 8))
 	end
 	EmbedSystem_LeftWindow:SetPoint('RIGHT', EmbedSystem_RightWindow, 'LEFT', -2, 0)
 	EmbedSystem_RightWindow:SetPoint('RIGHT', EmbedSystem_MainWindow, 'RIGHT', 0, 0)

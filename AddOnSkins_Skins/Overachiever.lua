@@ -38,7 +38,6 @@ function AS:SkinOverachiever(event, addon)
 		for i = 1, 7 do
 			local button = _G[container:GetName().."Button"..i]
 			button:StripTextures(true)
-			button:CreateBackdrop()
 			_G[button:GetName().."Highlight"]:Kill()
 
 			if not ElvUI[1].PixelMode then
@@ -138,8 +137,9 @@ function AS:SkinOverachiever(event, addon)
 		container:StripTextures()
 		frameBorder:StripTextures()
 		scrollFrame:CreateBackdrop("Default")
-		scrollFrame.backdrop:Point("TOPLEFT", 0, 2)
-		scrollFrame.backdrop:Point("BOTTOMRIGHT", -3, -3)
+		local backdrop = scrollFrame.backdrop or scrollFrame.Backdrop
+		backdrop:Point("TOPLEFT", 0, 2)
+		backdrop:Point("BOTTOMRIGHT", -3, -3)
 		AS:SkinScrollBar(scrollBar)
 		skinAchievementButtons(scrollFrame)
 	end
