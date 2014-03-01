@@ -17,7 +17,7 @@ function AS:SkinBugSack(event, addon)
 		AS:SkinButton(BugSackPrevButton)
 		AS:SkinScrollBar(BugSackScrollScrollBar)
 		for _, child in pairs({BugSackFrame:GetChildren()}) do
-			if (child:GetObjectType() == "Button" and child:GetScript("OnClick") == BugSack.CloseSack) then
+			if (child:IsObjectType('Button') and child:GetScript('OnClick') == BugSack.CloseSack) then
 				AS:SkinCloseButton(child)
 			end
 		end

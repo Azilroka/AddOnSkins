@@ -27,7 +27,7 @@ function AS:SkinWeakAuras()
 		end
 
 		if ftype == 'icon' then
-			if IsAddOnLoaded('ElvUI') then ElvUI[1]:RegisterCooldown(frame.cooldown) end
+			if IsAddOnLoaded('ElvUI') and AS:CheckOption('WeakAuraIconCooldown') then ElvUI[1]:RegisterCooldown(frame.cooldown) end
 		end
 
 		AS:SkinTexture(frame.icon)

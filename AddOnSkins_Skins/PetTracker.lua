@@ -20,7 +20,7 @@ function AS:SkinPetTracker()
 		if SushiDropdownFrame1.IsDone then return end
 		for i = 1, SushiDropdownFrame1:GetNumChildren() do
 			local Region = select(i, SushiDropdownFrame1:GetChildren())
-			if Region:GetObjectType() == 'Frame' then
+			if Region:IsObjectType('Frame') then
 				Region:StripTextures()
 				SushiDropdownFrame1:ClearAllPoints()
 				SushiDropdownFrame1:SetPoint('BOTTOMRIGHT', WorldMapShowDropDownButton, 'TOPRIGHT', 0, 4)
@@ -44,7 +44,7 @@ function AS:SkinPetTracker()
 			PetTrackerSwapInset:StripTextures()
 			for i = 1, self:GetNumChildren() do
 				local Region = select(i, self:GetChildren())
-				if Region and Region:GetObjectType() == 'Frame' and not Region.IsSkinned then
+				if Region and Region:IsObjectType('Frame') and not Region.IsSkinned then
 					local a, b, c, d, e = Region:GetPoint()
 					if a == 'TOP' and c == 'TOP' and d == 0 and e == 2 then
 						Region:Kill()
@@ -72,7 +72,7 @@ function AS:SkinPetTracker()
 				if Ability and not Ability.IsSkinned then
 					for i = 1, Ability:GetNumRegions() do
 						local Region = select(i, Ability:GetRegions())
-						if Region and Region:GetObjectType() == 'Texture' then
+						if Region and Region:IsObjectType('Texture') then
 							if Region:GetTexture() == 'Interface\\Spellbook\\Spellbook-Parts' then
 								Region:SetTexture(nil)
 							end
@@ -120,7 +120,7 @@ function AS:SkinPetTracker()
 						local Ability = _G['PetTrackerAbilityButton'..i]
 						for i = 1, Ability:GetNumRegions() do
 							local Region = select(i, Ability:GetRegions())
-							if Region and Region:GetObjectType() == 'Texture' then
+							if Region and Region:IsObjectType('Texture') then
 								if Region:GetTexture() == 'Interface\\Spellbook\\Spellbook-Parts' then
 									Region:SetTexture(nil)
 								end

@@ -10,8 +10,8 @@ function AS:SkinDailyTamerCheck()
 			AS:SkinFrame(self)
 			for i = 1, self:GetNumChildren() do
 				local object = select(i, self:GetChildren())
-				if object:GetObjectType() == 'Button' then AS:SkinButton(object) end
-				if object:GetObjectType() == 'Frame' then
+				if object:IsObjectType('Button') then AS:SkinButton(object) end
+				if object:IsObjectType('Frame') then
 					if not object.texture then AS:SkinFrame(object) else AS:SkinTexture(object.texture) end
 				end
 			end
@@ -20,7 +20,7 @@ function AS:SkinDailyTamerCheck()
 
 	for i = 1, Minimap:GetNumChildren() do
 		local object = select(i, Minimap:GetChildren())
-		if object:GetObjectType() == 'Button' and strfind(object:GetName(), 'DailyTamerCheck') then
+		if object:IsObjectType('Button') and strfind(object:GetName(), 'DailyTamerCheck') then
 			object:HookScript('PostClick', SkinFrame)
 		end
 	end

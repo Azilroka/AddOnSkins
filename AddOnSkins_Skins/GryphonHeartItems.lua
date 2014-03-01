@@ -11,7 +11,7 @@ function AS:SkinGryphonheartItems()
 		if GHI_ContainerFrame1.IsButtonsDone then return end
 		for k = 1, GHI_ContainerFrame1:GetNumChildren() do
 			local Region = select(k, GHI_ContainerFrame1:GetChildren())
-			if Region:GetObjectType() == 'Button' and not Region.IsSkinned then
+			if Region:IsObjectType('Button') and not Region.IsSkinned then
 				AS:SkinButton(Region)
 				Region.IsSkinned = true
 			end

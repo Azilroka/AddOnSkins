@@ -56,13 +56,13 @@ function AS:SkinAuctionator(event)
 
 		for i = 1, Atr_ShpList_Options_Frame:GetNumChildren() do
 			local object = select(i, Atr_ShpList_Options_Frame:GetChildren())
-			if object:GetObjectType() == 'Button' then
+			if object:IsObjectType('Button') then
 				AS:SkinButton(object)
 			end
 		end
 		for i = 1, AuctionatorResetsFrame:GetNumChildren() do
 			local object = select(i, AuctionatorResetsFrame:GetChildren())
-			if object:GetObjectType() == 'Button' then
+			if object:IsObjectType('Button') then
 				AS:SkinButton(object)
 			end
 		end

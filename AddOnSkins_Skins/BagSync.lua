@@ -31,7 +31,7 @@ function AS:SkinBagSync()
 		end)
 		for i = 1, frame:GetNumChildren() do
 			local object = select(i, frame:GetChildren())
-			if object:GetObjectType() == 'Button' then
+			if object:IsObjectType('Button') then
 				if object:GetText() ~= nil then
 					AS:SkinButton(object, true)
 				else
@@ -48,7 +48,7 @@ function AS:SkinBagSync()
 			BagSyncMoneyTooltip.isSkinned = true
 			for i = 1, BagSyncMoneyTooltip:GetNumChildren() do
 				local object = select(i, BagSyncMoneyTooltip:GetChildren())
-				if object:GetObjectType() == "Button" then AS:SkinCloseButton(object) end
+				if object:IsObjectType('Button') then AS:SkinCloseButton(object) end
 			end
 		end
 	end)

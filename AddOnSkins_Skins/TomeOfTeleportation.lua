@@ -14,7 +14,7 @@ function AS:SkinTomeOfTeleportation()
 		AS:SkinButton(TeleporterCloseButton)
 		for i = 1, TeleporterFrame:GetNumChildren() do
 			local Region = select(i, TeleporterFrame:GetChildren())
-			if Region and Region:GetObjectType() == 'Frame' and not Region.IsSkinned then
+			if Region and Region:IsObjectType('Frame') and not Region.IsSkinned then
 				AS:SkinFrame(Region)
 				Region:SetSize(TeleporterFrame:GetWidth(), 18)
 				Region:ClearAllPoints()

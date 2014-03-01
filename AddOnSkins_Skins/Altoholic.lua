@@ -95,33 +95,23 @@ function AS:SkinAltoholic(event, addon)
 		AltoholicFrameQuestsScrollFrame:StripTextures(true)
 		AltoholicFrameRecipesScrollFrame:StripTextures(true)
 
-		AS:SkinTexture(AltoholicTabCharacters_CharactersIconTexture)
-		AltoholicTabCharacters_Characters:StyleButton()
-		AltoholicTabCharacters_Characters:CreateBackdrop()
-		AS:SkinTexture(AltoholicTabCharacters_CharactersIconIconTexture)
-		AltoholicTabCharacters_CharactersIcon:StyleButton()
-		AltoholicTabCharacters_CharactersIcon:CreateBackdrop()
-		AS:SkinTexture(AltoholicTabCharacters_BagsIconIconTexture)
-		AltoholicTabCharacters_BagsIcon:StyleButton()
-		AltoholicTabCharacters_BagsIcon:CreateBackdrop()
-		AS:SkinTexture(AltoholicTabCharacters_QuestsIconIconTexture)
-		AltoholicTabCharacters_QuestsIcon:StyleButton()
-		AltoholicTabCharacters_QuestsIcon:CreateBackdrop()
-		AS:SkinTexture(AltoholicTabCharacters_TalentsIconIconTexture)
-		AltoholicTabCharacters_TalentsIcon:StyleButton()
-		AltoholicTabCharacters_TalentsIcon:CreateBackdrop()
-		AS:SkinTexture(AltoholicTabCharacters_AuctionIconIconTexture)
-		AltoholicTabCharacters_AuctionIcon:StyleButton()
-		AltoholicTabCharacters_AuctionIcon:CreateBackdrop()
-		AS:SkinTexture(AltoholicTabCharacters_MailIconIconTexture)
-		AltoholicTabCharacters_MailIcon:StyleButton()
-		AltoholicTabCharacters_MailIcon:CreateBackdrop()
-		AS:SkinTexture(AltoholicTabCharacters_SpellbookIconIconTexture)
-		AltoholicTabCharacters_SpellbookIcon:StyleButton()
-		AltoholicTabCharacters_SpellbookIcon:CreateBackdrop()
-		AS:SkinTexture(AltoholicTabCharacters_ProfessionsIconIconTexture)
-		AltoholicTabCharacters_ProfessionsIcon:StyleButton()
-		AltoholicTabCharacters_ProfessionsIcon:CreateBackdrop()
+		local Buttons = {
+			'AltoholicTabCharacters_Characters',
+			'AltoholicTabCharacters_CharactersIcon',
+			'AltoholicTabCharacters_BagsIcon',
+			'AltoholicTabCharacters_QuestsIcon',
+			'AltoholicTabCharacters_TalentsIcon',
+			'AltoholicTabCharacters_AuctionIcon',
+			'AltoholicTabCharacters_MailIcon',
+			'AltoholicTabCharacters_SpellbookIcon',
+			'AltoholicTabCharacters_ProfessionsIcon',
+		}
+
+		for _, object in pairs(Buttons) do
+			AS:SkinTexture(_G[object..'IconTexture'])
+			_G[object]:StyleButton()
+			_G[object]:CreateBackdrop()
+		end
 
 		for i = 1, 7 do
 			for j = 1, 14 do

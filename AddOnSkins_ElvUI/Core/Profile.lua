@@ -30,6 +30,7 @@ V['addonskins'] = {
 	['ParchmentRemover'] = false,
 	['EmbedLeftChat'] = false,
 	['WeakAuraAuraBar'] = false,
+	['WeakAuraIconCooldown'] = true,
 	['AuctionHouse'] = true,
 	['IntegrateMyRolePlayTooltip'] = true,
 }

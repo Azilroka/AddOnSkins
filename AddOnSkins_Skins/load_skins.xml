@@ -9,6 +9,7 @@
 	<Script file="Analyst.lua"/>
 	<Script file="AraBrokerGuildFriends.lua"/>
 	<Script file="AraBrokerTradeskills.lua"/>
+	<Script file="Arcanometer.lua"/>
 	<Script file="Archy.lua"/>
 	<Script file="Arh.lua"/>
 	<Script file="ArkInventory.lua"/>
@@ -61,6 +62,7 @@
 	<Script file="Incoming.lua"/>
 	<Script file="InspectEquip.lua"/>
 	<Script file="KarniCrap.lua"/>
+	<Script file="KeepingTabs.lua"/>
 	<Script file="Lightheaded.lua"/>
 	<Script file="LinkWrangler.lua"/>
 	<Script file="LootCouncilLite.lua"/>
@@ -126,6 +128,7 @@
 	<Script file="TomTom.lua"/>
 	<Script file="Tongues.lua"/>
 	<Script file="TradeSkillDW.lua"/>
+	<Script file="TradeTabs.lua"/>
 	<Script file="TrainAll.lua"/>
 	<Script file="VanasKoS.lua"/>
 	<Script file="Vendomatic.lua"/>

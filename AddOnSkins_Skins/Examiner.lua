@@ -10,7 +10,7 @@ function AS:SkinExaminer()
 	AS:SkinScrollBar(ExaminerGearScrollScrollBar)
 	for i = 1, Examiner:GetNumChildren() do
 		local object = select(i, Examiner:GetChildren())
-		if object:GetObjectType() == 'Button' then
+		if object:IsObjectType('Button') then
 			if object:GetText() ~= nil then
 				AS:SkinButton(object, true)
 			else

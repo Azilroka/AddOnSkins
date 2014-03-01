@@ -4,17 +4,16 @@ if not AS:CheckAddOn('ProfessionTabs') then return end
 
 local name = 'ProfessionTabsSkin'
 function AS:SkinProfessionTabs(event, addon)
-	function ProfessionTabs:CreateTab(Table, Parent)
-		local Tab = CreateFrame('CheckButton', nil, Parent, 'SpellBookSkillLineTabTemplate SecureActionButtonTemplate')
-		Tab:SetPoint('TOPLEFT', Parent, 'TOPRIGHT', (Parent == ATSWFrame or Parent == TradeFrame) and -32 or 2, (Parent == TradeFrame and -32 or -24) + -44 * #Table)
-		AS:SkinIconButton(Tab)
-
-		Tab:SetScript('OnEnter', Tab_OnEnter)
-		Tab:SetScript('OnLeave', Tab_OnLeave)
-		
-		Table[#Table + 1] = Tab
-		return Tab
-	end
+	local Frame = ATSWFrame or MRTSkillFrame or SkilletFrame or TradeSkillFrame
+	Frame:HookScript('OnShow', function(self)
+		for i = 1, self:GetNumChildren() do
+			local Child = select(i, self:GetChildren())
+			if Child:IsObjectType('CheckButton') and not Child.IsSkinned then
+				AS:SkinIconButton(Child)
+				Child.IsSkinned = true
+			end
+		end
+	end)
 end
 
 AS:RegisterSkin(name, AS.SkinProfessionTabs)
