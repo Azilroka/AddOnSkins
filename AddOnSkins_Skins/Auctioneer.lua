@@ -7,6 +7,8 @@ function AS:SkinAuctioneer(event)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 	if IsAddOnLoaded('Auc-Stat-Purchased') then
 		BrowsePrevPageButton:Point('BOTTOMRIGHT', BrowseScrollFrame, 'BOTTOMRIGHT', -160, 0)
+		local a, b, c, d, e = BrowseNextPageButton:GetPoint()
+		BrowseNextPageButton:SetPoint(a, b, c, d, 3)
 	end
 	if AucAdvScanButton then AS:SkinButton(AucAdvScanButton) end
 	if AucAdvSimpFrameCreate then AS:SkinButton(AucAdvSimpFrameCreate) end

@@ -72,6 +72,7 @@
 	<Script file="MoveAnything.lua"/>
 	<Script file="MRT.lua"/>
 	<Script file="MrTrader.lua"/>
+	<Script file="NirritisNotes.lua"/>
 	<Script file="NPCScan.lua"/>
 	<Script file="NugRunning.lua"/>
 	<Script file="Numeration.lua"/>
@@ -93,6 +94,7 @@
 	<Script file="Quartz.lua"/>
 	<Script file="QuestCompletist.lua"/>
 	<Script file="QuestItemBar.lua"/>
+	<Script file="QuestPointer.lua"/>
 	<Script file="RaidInviteOrganizer.lua"/>
 	<Script file="RareAnnouncer.lua"/>
 	<Script file="RareCoordinator.lua"/>
