@@ -60,7 +60,7 @@ function AS:SkinArchy()
 	AS:SkinButton(ArchyDistanceIndicatorSurveyButton)
 	ArchyDistanceIndicatorSurveyButtonIcon:SetDrawLayer('OVERLAY')
 	AS:SkinButton(ArchyDistanceIndicatorCrateButton)
- 	ArchyDistanceIndicatorCrateButtonIcon:SetDrawLayer('OVERLAY')
+	ArchyDistanceIndicatorCrateButtonIcon:SetDrawLayer('OVERLAY')
 	AS:SkinButton(ArchyDistanceIndicatorLorItemButton)
 	ArchyDistanceIndicatorLorItemButtonIcon:SetDrawLayer('OVERLAY')
 end
