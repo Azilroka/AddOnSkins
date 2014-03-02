@@ -4,10 +4,18 @@ if not AS:CheckAddOn('TradeTabs') then return end
 
 local name = 'TradeTabsSkin'
 function AS:SkinTradeTabs(event, addon)
-	hooksecurefunc(TradeTabs, 'CreateTab', function(self, i, parent, spellID)
-		AS:SkinIconButton(_G["TradeTabsTab"..i])
-		_G["TradeTabsTab"..i]:SetNormalTexture(select(3, GetSpellInfo(spellID)))
-	end)
+	if addon ~= 'TradeTabs' then return end
+	local Frame = ATSWFrame or MRTSkillFrame or SkilletFrame or TradeSkillFrame
+	for i = 1, Frame:GetNumChildren() do
+		local Child = select(i, Frame:GetChildren())
+		if Child:IsObjectType('CheckButton') and not Child.IsSkinned then
+			Child:CreateBackdrop()
+			AS:SkinTexture(Child:GetNormalTexture())
+			Child:StyleButton()
+			Child:DisableDrawLayer('BACKGROUND')
+			Child.IsSkinned = true
+		end
+	end
 end
 
-AS:RegisterSkin(name, AS.SkinTradeTabs)
+AS:RegisterSkin(name, AS.SkinTradeTabs, 'ADDON_LOADED')

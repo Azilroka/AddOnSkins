@@ -93,6 +93,7 @@
 	<Script file="Poisoner.lua"/>
 	<Script file="PoMTracker.lua"/>
 	<Script file="Postal.lua"/>
+	<Script file="ProfessionTabs.lua"/>
 	<Script file="Quartz.lua"/>
 	<Script file="QuestCompletist.lua"/>
 	<Script file="QuestItemBar.lua"/>
