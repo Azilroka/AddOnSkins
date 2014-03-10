@@ -45,6 +45,7 @@ function AS:SkinDominos()
 
 		if not button.isSkinned then
 			button:CreateBackdrop("Transparent")
+			button:StyleButton()
 			local backdrop = button.backdrop or button.Backdrop
 			backdrop:SetAllPoints()
 
@@ -81,6 +82,7 @@ function AS:SkinDominos()
 
 		if not button.isSkinned then
 			button:CreateBackdrop("Transparent")
+			button:StyleButton()
 			button.backdrop:SetAllPoints()
 
 			icon:SetTexCoord(unpack(AS.TexCoords))
@@ -101,25 +103,38 @@ function AS:SkinDominos()
 		end
 	end
 
+	hooksecurefunc("ActionButton_Update", StyleNormalButton)
+
 	do
 		for i = 1, 60 do
-			_G["DominosActionButton"..i]:StyleButton()
+			if _G["DominosActionButton"..i] then
+				ActionButton_Update(_G["DominosActionButton"..i])
+			end
 		end
 
 		for i = 1, 12 do
-			_G["ActionButton"..i]:StyleButton()
-			_G["MultiBarBottomLeftButton"..i]:StyleButton()
-			_G["MultiBarBottomRightButton"..i]:StyleButton()
-			_G["MultiBarLeftButton"..i]:StyleButton()
-			_G["MultiBarRightButton"..i]:StyleButton()
+			ActionButton_Update(_G["ActionButton"..i])
+			ActionButton_Update(_G["MultiBarBottomLeftButton"..i])
+			ActionButton_Update(_G["MultiBarBottomRightButton"..i])
+			ActionButton_Update(_G["MultiBarLeftButton"..i])
+			ActionButton_Update(_G["MultiBarRightButton"..i])
 		end
 
 		for i = 1, NUM_STANCE_SLOTS do
-			local name = "DominosClassButton"..i
+			local name = "StanceButton"..i
 			local button = _G[name]
 			local icon = _G[name.."Icon"]
 			local hotkey = _G[name.."HotKey"]
 			StyleSmallButton(button, icon, name, hotkey)
+		end
+
+		if MainMenuBarBackpackButton then
+			local Texture = MainMenuBarBackpackButton.icon:GetTexture()
+			AS:SkinIconButton(MainMenuBarBackpackButton, true)
+			MainMenuBarBackpackButton.icon:SetTexture(Texture)
+			for i = 0, 3 do
+				AS:SkinIconButton(_G['CharacterBag'..i..'Slot'], true)
+			end
 		end
 
 		for i = 1, NUM_PET_ACTION_SLOTS do
@@ -129,9 +144,11 @@ function AS:SkinDominos()
 			local hotkey = _G[name.."HotKey"]
 			StyleSmallButton(button, icon, name, hotkey, true)
 		end
-	end
 
-	hooksecurefunc("ActionButton_Update", StyleNormalButton)
+		if DominosFramexp then
+			DominosFramexp:CreateBackdrop('Transparent')
+		end
+	end
 end
 
 AS:RegisterSkin(name, AS.SkinDominos)

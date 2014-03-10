@@ -57,12 +57,17 @@ function AS:SkinArchy()
 		AS:SkinStatusBar(ArchyArtifactFrameSkillBar)	
 	end
 
-	AS:SkinButton(ArchyDistanceIndicatorSurveyButton)
-	ArchyDistanceIndicatorSurveyButtonIcon:SetDrawLayer('OVERLAY')
-	AS:SkinButton(ArchyDistanceIndicatorCrateButton)
-	ArchyDistanceIndicatorCrateButtonIcon:SetDrawLayer('OVERLAY')
-	AS:SkinButton(ArchyDistanceIndicatorLorItemButton)
-	ArchyDistanceIndicatorLorItemButtonIcon:SetDrawLayer('OVERLAY')
+	if ArchyDistanceIndicatorFrame then
+		ArchyDistanceIndicatorFrame.surveyButton:StripTextures()
+		ArchyDistanceIndicatorFrame.surveyButton.icon:SetTexture("Interface\\Icons\\inv_misc_shovel_01")
+		AS:SkinTexture(ArchyDistanceIndicatorFrame.surveyButton.icon)
+		ArchyDistanceIndicatorFrame.crateButton:StripTextures()
+		ArchyDistanceIndicatorFrame.crateButton.icon:SetTexture("Interface\\Icons\\inv_crate_04")
+		AS:SkinTexture(ArchyDistanceIndicatorFrame.crateButton.icon)
+		ArchyDistanceIndicatorFrame.loritemButton:StripTextures()
+		ArchyDistanceIndicatorFrame.loritemButton.icon:SetTexture("Interface\\Icons\\inv_misc_map08")
+		AS:SkinTexture(ArchyDistanceIndicatorFrame.loritemButton.icon)
+	end
 end
 
 AS:RegisterSkin(name, AS.SkinArchy)
