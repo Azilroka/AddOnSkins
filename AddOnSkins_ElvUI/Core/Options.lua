@@ -79,7 +79,6 @@ function AS:GenerateOptions()
 		order = 1,
 		get = function(info) return AS:CheckOption(info[#info]) end,
 		set = function(info, value) AS:SetOption(info[#info], value) end,
-		guiInline = false,
 		args = {
 			DBMFont = {
 				type = 'select', dialogControl = 'LSM30_Font',
@@ -123,7 +122,6 @@ function AS:GenerateOptions()
 		name = 'Embed Settings',
 		get = function(info) return AS:CheckOption(info[#info]) end,
 		set = function(info, value) AS:SetOption(info[#info], value) AS:EmbedSystem_WindowResize() AS:Embed_Check() end,
-		guiInline = false,
 		args = {
 			desc = {
 				type = 'description',

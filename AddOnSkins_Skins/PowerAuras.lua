@@ -17,8 +17,7 @@ function AS:SkinPowerAuras(event, addon)
 				end
 
 				local backdrop = frame.backdrop or frame.Backdrop
-
-				if frame and not frame.backdrop then
+				if frame and not backdrop then
 					frame:CreateBackdrop()
 					backdrop = frame.backdrop or frame.Backdrop
 					backdrop:Hide()
@@ -41,7 +40,7 @@ function AS:SkinPowerAuras(event, addon)
 		PowaAuras.OldUpdateAura = PowaAuras.UpdateAura
 		PowaAuras.UpdateAura = SkinPowerAuras
 	end
-	if event == 'ADDON_LOADED' and addon == 'PowerAurasOptions' then
+	if addon == 'PowerAurasOptions' then
 		AS:SkinFrame(PowaOptionsFrame)
 		AS:SkinFrame(PowaBarConfigFrame)
 		AS:SkinFrame(PowaOptionsFrame)

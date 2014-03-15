@@ -35,6 +35,16 @@ function AS:MiscFixes(event, addon)
 				end
 			end
 		end)
+
+		AS:SkinFrame(ProductChoiceFrame)
+		ProductChoiceFrame.Inset:StripTextures()
+		AS:SkinButton(ProductChoiceFrame.Inset.ClaimButton)
+		AS:SkinCloseButton(ProductChoiceFrameCloseButton)
+		ProductChoiceFrame:HookScript('OnShow', function(self)
+			for i = 1, 8 do
+				self.Inset.Buttons[i]:StripTextures()
+			end
+		end)
 	end
 	if event == 'AUCTION_HOUSE_SHOW' then
 		if AS:CheckOption('AuctionHouse') then
