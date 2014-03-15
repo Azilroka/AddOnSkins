@@ -99,6 +99,7 @@
 	<Script file="QuestItemBar.lua"/>
 	<Script file="QuestPointer.lua"/>
 	<Script file="RaidInviteOrganizer.lua"/>
+	<Script file="RaidTargets.lua"/>
 	<Script file="RareAnnouncer.lua"/>
 	<Script file="RareCoordinator.lua"/>
 	<Script file="RaresTip.lua"/>
