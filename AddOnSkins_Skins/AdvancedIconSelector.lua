@@ -13,12 +13,17 @@ function AS:SkinAdvancedIconSelector()
 		AS:SkinScrollBar(Popup.iconsFrame.scrollFrame.ScrollBar)
 		Popup.iconsFrame:HookScript('OnUpdate', function(self)
 			for i = 1, 1024 do
-				if self.icons[i] and self.icons[i]:GetNormalTexture() then
-					AS:SkinTexture(self.icons[i]:GetNormalTexture())
-				end
 				if self.icons[i] and not self.icons[i].IsStyled then
-					self.icons[i]:StyleButton()
+					self.icons[i]:SetTemplate()
+					self.icons[i]:StyleButton(true)
 					self.icons[i].IsStyled = true
+				end
+				if self.icons[i] and self.icons[i]:GetNormalTexture() and not self.icons[i].IsTextureDone then
+					AS:SkinTexture(self.icons[i]:GetNormalTexture())
+					self.icons[i]:GetNormalTexture():SetInside()
+					self.icons[i]:GetNormalTexture().SetTexCoord = function() end
+					self.icons[i]:GetNormalTexture().SetPoint = function() end
+					self.icons[i].IsTextureDone = true
 				end
 			end
 		end)
