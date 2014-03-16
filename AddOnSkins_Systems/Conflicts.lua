@@ -1,8 +1,6 @@
 local AS = unpack(AddOnSkins)
 local format, pairs, print, GetAddOnInfo = format, pairs, print, GetAddOnInfo
 
-local Disabled
-
 local Conflicts = {
 	'DecUI_BagSync_Skin',
 	'DecUI_Dresser_Skin',
@@ -33,11 +31,6 @@ for _, AddOnName in pairs(Conflicts) do
 		AS:Print(format("Conflict System: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory.", AddOnName))
 		if Enabled then
 			DisableAddOn(AddOnName)
-			Disabled = true
 		end
 	end
-end
-
-if Disabled then
-	AS:AcceptFrame(AS.Title.." Conflict System: Disabled Conflict's. If you received ANY lua error's. You will have to reload.", function(self) ReloadUI() end)
 end

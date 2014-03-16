@@ -172,7 +172,8 @@ function AS:SkinDBM(event, addon)
 			DBMInfoFrame:SetTemplate('Transparent')
 		end
 
-		hooksecurefunc(DBT, 'CreateBar', SkinBars)
+		if AS:CheckAddOn('DBM-StatusBarTimers') then hooksecurefunc(DBT, 'CreateBar', SkinBars) end
+
 		hooksecurefunc(DBM.BossHealth, 'Show', SkinBossTitle)
 		hooksecurefunc(DBM.BossHealth, 'AddBoss', SkinBoss)
 		hooksecurefunc(DBM.BossHealth, 'UpdateSettings', SkinBoss)
