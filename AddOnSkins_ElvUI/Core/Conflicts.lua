@@ -14,6 +14,7 @@ local Conflicts = {
 	'ElvUI_AtlasLoot_Skin',
 	'ElvUI_BGDefender_Skin',
 	'ElvUI_CB_Skin',
+	'ElvUI_CoolLine',
 	'ElvUI_EasyMail_Skin',
 	'ElvUI_Factionizer_Skin',
 	'ElvUI_Lightheaded_Skin',
