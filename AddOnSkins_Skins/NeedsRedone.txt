@@ -3,8 +3,5 @@ ArkInventory
 ATSW
 Bagnon
 Extended Vendor
-Factionizer
 MageNuggets
 Skillet
-SexyCooldown
-WoWLua
