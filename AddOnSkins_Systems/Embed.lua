@@ -92,12 +92,20 @@ function AS:Embed_Toggle(Message)
 	EmbedSystem_LeftWindow.FrameName = nil
 	EmbedSystem_RightWindow.FrameName = nil
 	if AS:CheckOption('EmbedSystem') then
+		local MainLowered = strlower(AS:CheckOption('EmbedMain'))
+		local MainOption = MainLowered == 'skada' and 'Skada' or MainLowered == 'omen' and 'Omen' or MainLowered == 'recount' and 'Recount' or MainLowered == 'tinydps' and 'TinyDPS' or MainLowered == 'aldamagemeter' and 'alDamageMeter' or nil
+		if MainOption then AS:SetOption('EmbedMain', MainOption) end
 		MainEmbed = AS:CheckOption('EmbedMain')
 		if MainEmbed ~= 'Skada' and MainEmbed ~= 'Omen' and MainEmbed ~= 'Recount' and MainEmbed ~= 'TinyDPS' and MainEmbed ~= 'alDamageMeter' then
 			EmbedSystem_MainWindow.FrameName = MainEmbed
 		end
 	end
 	if AS:CheckOption('EmbedSystemDual') then
+		local LeftLowered, RightLowered = strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight'))
+		local LeftOption = LeftLowered == 'skada' and 'Skada' or LeftLowered == 'omen' and 'Omen' or LeftLowered == 'recount' and 'Recount' or LeftLowered == 'tinydps' and 'TinyDPS' or LeftLowered == 'aldamagemeter' and 'alDamageMeter' or nil
+		local RightOption = RightLowered == 'skada' and 'Skada' or RightLowered == 'omen' and 'Omen' or RightLowered == 'recount' and 'Recount' or RightLowered == 'tinydps' and 'TinyDPS' or RightLowered == 'aldamagemeter' and 'alDamageMeter' or nil
+		if LeftOption then AS:SetOption('EmbedLeft', LeftOption) end
+		if RightOption then AS:SetOption('EmbedRight', RightOption) end
 		LeftEmbed, RightEmbed = AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')
 		if LeftEmbed ~= 'Skada' and LeftEmbed ~= 'Omen' and LeftEmbed ~= 'Recount' and LeftEmbed ~= 'TinyDPS' and LeftEmbed ~= 'alDamageMeter' then
 			EmbedSystem_LeftWindow.FrameName = LeftEmbed
@@ -106,11 +114,6 @@ function AS:Embed_Toggle(Message)
 			EmbedSystem_RightWindow.FrameName = RightEmbed
 		end
 	end
-	AS:DisableOption('EmbedalDamageMeter')
-	AS:DisableOption('EmbedOmen')
-	AS:DisableOption('EmbedRecount')
-	AS:DisableOption('EmbedTinyDPS')
-	AS:DisableOption('EmbedSkada')
 	local Frame = nil
 	if EmbedSystem_MainWindow.FrameName ~= nil then
 		Frame = _G[EmbedSystem_MainWindow.FrameName]
@@ -136,6 +139,11 @@ function AS:Embed_Toggle(Message)
 			Frame:SetInside(EmbedSystem_RightWindow, 0, 0)
 		end
 	end
+	AS:DisableOption('EmbedalDamageMeter')
+	AS:DisableOption('EmbedOmen')
+	AS:DisableOption('EmbedRecount')
+	AS:DisableOption('EmbedTinyDPS')
+	AS:DisableOption('EmbedSkada')
 	if MainEmbed == 'Skada' or LeftEmbed == 'Skada' or RightEmbed == 'Skada' then
 		AS:EnableOption('EmbedSkada')
 	end

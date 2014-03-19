@@ -81,7 +81,7 @@ function AS:Embed_Toggle(Message)
 	EmbedSystem_RightWindow.FrameName = nil
 	if AS:CheckOption('EmbedSystem') then
 		local MainLowered = strlower(AS:CheckOption('EmbedMain'))
-		local MainOption = MainLowered == 'skada' and 'Skada' or MainLowered == 'omen' and 'Omen' or MainLowered == 'recount' and 'Recount' or MainLowered == 'tinydps' and 'TinyDPS' or MainLowered == 'aldamagemeter' and 'alDamaageMeter' or nil
+		local MainOption = MainLowered == 'skada' and 'Skada' or MainLowered == 'omen' and 'Omen' or MainLowered == 'recount' and 'Recount' or MainLowered == 'tinydps' and 'TinyDPS' or MainLowered == 'aldamagemeter' and 'alDamageMeter' or nil
 		if MainOption then AS:SetOption('EmbedMain', MainOption) end
 		MainEmbed = AS:CheckOption('EmbedMain')
 		if MainEmbed ~= 'Skada' and MainEmbed ~= 'Omen' and MainEmbed ~= 'Recount' and MainEmbed ~= 'TinyDPS' and MainEmbed ~= 'alDamageMeter' then
@@ -90,8 +90,8 @@ function AS:Embed_Toggle(Message)
 	end
 	if AS:CheckOption('EmbedSystemDual') then
 		local LeftLowered, RightLowered = strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight'))
-		local LeftOption = LeftLowered == 'skada' and 'Skada' or LeftLowered == 'omen' and 'Omen' or LeftLowered == 'recount' and 'Recount' or LeftLowered == 'tinydps' and 'TinyDPS' or LeftLowered == 'aldamagemeter' and 'alDamaageMeter' or nil
-		local RightOption = RightLowered == 'skada' and 'Skada' or RightLowered == 'omen' and 'Omen' or RightLowered == 'recount' and 'Recount' or RightLowered == 'tinydps' and 'TinyDPS' or RightLowered == 'aldamagemeter' and 'alDamaageMeter' or nil
+		local LeftOption = LeftLowered == 'skada' and 'Skada' or LeftLowered == 'omen' and 'Omen' or LeftLowered == 'recount' and 'Recount' or LeftLowered == 'tinydps' and 'TinyDPS' or LeftLowered == 'aldamagemeter' and 'alDamageMeter' or nil
+		local RightOption = RightLowered == 'skada' and 'Skada' or RightLowered == 'omen' and 'Omen' or RightLowered == 'recount' and 'Recount' or RightLowered == 'tinydps' and 'TinyDPS' or RightLowered == 'aldamagemeter' and 'alDamageMeter' or nil
 		if LeftOption then AS:SetOption('EmbedLeft', LeftOption) end
 		if RightOption then AS:SetOption('EmbedRight', RightOption) end
 		LeftEmbed, RightEmbed = AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')
@@ -102,11 +102,6 @@ function AS:Embed_Toggle(Message)
 			EmbedSystem_RightWindow.FrameName = RightEmbed
 		end
 	end
-	AS:DisableOption('EmbedalDamageMeter')
-	AS:DisableOption('EmbedOmen')
-	AS:DisableOption('EmbedRecount')
-	AS:DisableOption('EmbedTinyDPS')
-	AS:DisableOption('EmbedSkada')
 	local Frame = nil
 	if EmbedSystem_MainWindow.FrameName ~= nil then
 		Frame = _G[EmbedSystem_MainWindow.FrameName]
@@ -132,6 +127,11 @@ function AS:Embed_Toggle(Message)
 			Frame:SetInside(EmbedSystem_RightWindow, 0, 0)
 		end
 	end
+	AS:DisableOption('EmbedalDamageMeter')
+	AS:DisableOption('EmbedOmen')
+	AS:DisableOption('EmbedRecount')
+	AS:DisableOption('EmbedTinyDPS')
+	AS:DisableOption('EmbedSkada')
 	if MainEmbed == 'Skada' or LeftEmbed == 'Skada' or RightEmbed == 'Skada' then
 		AS:EnableOption('EmbedSkada')
 	end
@@ -304,22 +304,22 @@ function AS:EmbedInit()
 	EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
 	if AS:CheckOption('EmbedOoC') and not InCombatLockdown() then AS:Embed_Hide() end
 
-	local ChatPanel = AS:CheckOption('EmbedLeftChat') and LeftChatPanel or RightChatPanel
-	local ToggleButton = AS:CheckOption('EmbedLeftChat') and LeftChatToggleButton or RightChatToggleButton
-
-	hooksecurefunc(ChatPanel, 'SetSize', function()
+	hooksecurefunc(RightChatPanel, 'SetSize', function()
 		if ChatHeight ~= E.db.chat.panelHeight or ChatWidth ~= E.db.chat.panelWidth then
 			ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
 			AS:EmbedSystem_WindowResize()
 			AS:Embed_Check()
 		end
 	end)
-	ToggleButton:SetScript('OnClick', function(self, btn)
+
+	RightChatToggleButton:SetScript('OnClick', function(self, btn)
 		if btn == 'RightButton' then
-			if EmbedSystem_MainWindow:IsShown() then
-				EmbedSystem_MainWindow:Hide()
-			else
-				EmbedSystem_MainWindow:Show()
+			if not AS:CheckOption('EmbedLeftChat') then
+				if EmbedSystem_MainWindow:IsShown() then
+					EmbedSystem_MainWindow:Hide()
+				else
+					EmbedSystem_MainWindow:Show()
+				end
 			end
 		else
 			if E.db[self.parent:GetName()..'Faded'] then
@@ -335,9 +335,41 @@ function AS:EmbedInit()
 		end
 	end)
 
-	ToggleButton:HookScript('OnEnter', function(self, ...)
-		GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
-		GameTooltip:Show()
+	RightChatToggleButton:HookScript('OnEnter', function(self, ...)
+		if not AS:CheckOption('EmbedLeftChat') then
+			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
+			GameTooltip:Show()
+		end
+	end)
+
+	LeftChatToggleButton:SetScript('OnClick', function(self, btn)
+		if btn == 'RightButton' then
+			if AS:CheckOption('EmbedLeftChat') then
+				if EmbedSystem_MainWindow:IsShown() then
+					EmbedSystem_MainWindow:Hide()
+				else
+					EmbedSystem_MainWindow:Show()
+				end
+			end
+		else
+			if E.db[self.parent:GetName()..'Faded'] then
+				E.db[self.parent:GetName()..'Faded'] = nil
+				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
+				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+			else
+				E.db[self.parent:GetName()..'Faded'] = true
+				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
+				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
+			end
+		end
+	end)
+
+	LeftChatToggleButton:HookScript('OnEnter', function(self, ...)
+		if AS:CheckOption('EmbedLeftChat') then
+			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
+			GameTooltip:Show()
+		end
 	end)
 end
 
