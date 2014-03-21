@@ -27,6 +27,7 @@
 	<Script file="BagSync.lua"/>
 	<Script file="Bartender4.lua"/>
 	<Script file="BattlePetBreedID.lua"/>
+	<Script file="BetterQuest.lua"/>
 	<Script file="BGDefender.lua"/>
 	<Script file="BigBrother.lua"/>
 	<Script file="BPT.lua"/>
