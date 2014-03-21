@@ -2,8 +2,8 @@ local AddOnName = select(1, ...)
 local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:NewModule('AddOnSkins', 'AceTimer-3.0', 'AceEvent-3.0')
 local S = E:GetModule('Skins')
-local LSM, EP = LibStub('LibSharedMedia-3.0'), LibStub('LibElvUIPlugin-1.0')
-LSM:Register("font", "PT Sans Narrow Bold", [[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]])
+local LSM, EP, ES = LibStub('LibSharedMedia-3.0'), LibStub('LibElvUIPlugin-1.0'), nil
+LSM:Register('font', 'PT Sans Narrow Bold', [[Interface\AddOns\ElvUI\media\fonts\PT_Sans_Narrow.ttf]])
 
 local tinsert, pairs, ipairs, unpack, pcall, select, type = tinsert, pairs, ipairs, unpack, pcall, select, type
 local format, gsub, strfind, strmatch, floor = format, gsub, strfind, strmatch, floor
@@ -17,7 +17,6 @@ AS.skins = {}
 AS.embeds = {}
 AS.events = {}
 AS.register = {}
-AS.addOnWatch = {}
 AS.FrameLocks = {}
 E.private.addonskins = {}
 
@@ -108,10 +107,10 @@ end
 
 function AS:UpdateMedia()
 	AS.Blank = LSM:Fetch('background', 'ElvUI Blank')
-	AS.Font = LSM:Fetch("font", E.db.general.font)
+	AS.Font = LSM:Fetch('font', E.db.general.font)
 	AS.PixelFont = LSM:Fetch('font', 'ElvUI Pixel')
 	AS.NormTex = LSM:Fetch('statusbar', E.private.general.normTex)
-	AS.GlossTex = LSM:Fetch("statusbar", E.private.general.glossTex)
+	AS.GlossTex = LSM:Fetch('statusbar', E.private.general.glossTex)
 	AS.BackdropColor = E['media'].backdropcolor
 	AS.BorderColor = E['media'].bordercolor
 	AS.UIScale = UIParent:GetScale()
@@ -131,19 +130,13 @@ function AS:Initialize()
 
 	local ElvUIVersion, MinElvUIVersion = tonumber(GetAddOnMetadata('ElvUI', 'Version')), 6.54
 	if ElvUIVersion < MinElvUIVersion then
-		local UpdateElvUIFrame = CreateFrame('Button', nil, UIParent)
-		UpdateElvUIFrame:SetPoint('CENTER', UIParent, 'CENTER')
-		UpdateElvUIFrame:SetFrameStrata('DIALOG')
-		UpdateElvUIFrame.Text = UpdateElvUIFrame:CreateFontString(nil, "OVERLAY")
-		UpdateElvUIFrame.Text:SetFont(AS.Font, 18, 'OUTLINE')
-		UpdateElvUIFrame.Text:SetPoint('TOP', UpdateElvUIFrame, 'TOP', 0, -10)
-		UpdateElvUIFrame.Text:SetText(format('%s - Required ElvUI Version %s. You currently have %s. Download ElvUI @ %s.', AS.Title, MinElvUIVersion, ElvUIVersion, AS:PrintURL('http://www.tukui.org/dl.php')))
-		UpdateElvUIFrame:SetScript('OnClick', function() print(AS:PrintURL('http://www.tukui.org/dl.php')) end)
-		UpdateElvUIFrame:SetSize(UpdateElvUIFrame.Text:GetWidth(), 70)
+		AS:AcceptFrame(format('%s - Required ElvUI Version %s. You currently have %s. Download ElvUI @ %s.', AS.Title, MinElvUIVersion, ElvUIVersion, AS:PrintURL('http://www.tukui.org/dl.php')), function(self) print(AS:PrintURL('http://www.tukui.org/dl.php')) end)
+		AS:Print('Loading Aborted')
 		return
 	end
 
 	EP:RegisterPlugin(AddOnName, AS.GenerateOptions)
+	ES = E:GetModule('EnhancedShadows', true)
 
 	E.private.addonskins['MiscFixes'] = true
 
@@ -231,7 +224,7 @@ function AS:Print(string)
 end
 
 function AS:PrintURL(url)
-	return format("|cFF00AAFF[|Hurl:%s|h%s|h]|r", url, url)
+	return format('|cFF00AAFF[|Hurl:%s|h%s|h]|r', url, url)
 end
 
 function AS:Round(num, idp)
@@ -296,10 +289,9 @@ function AS:SkinFrame(frame, template, override, kill)
 	if not template then template = 'Transparent' end
 	if not override then frame:StripTextures(kill) end
 	frame:SetTemplate(template, true)
-	if (E:GetModule('EnhancedShadows', true)) then
-		local ES = E:GetModule('EnhancedShadows');
-		frame:CreateShadow();
-		ES:RegisterShadow(frame.shadow);
+	if ES then
+		frame:CreateShadow()
+		ES:RegisterShadow(frame.shadow)
 	end
 end
 
@@ -361,13 +353,13 @@ end
 local AcceptFrame
 function AS:AcceptFrame(MainText, Function)
 	if not AcceptFrame then
-		local Font = LSM:Fetch("font", E.db.general.font)
+		local Font = LSM:Fetch('font', E.db.general.font)
 		AcceptFrame = CreateFrame('Frame', nil, UIParent)
 		AcceptFrame:SetTemplate('Transparent')
 		AcceptFrame:SetSize(250, 100)
 		AcceptFrame:SetPoint('CENTER', UIParent, 'CENTER')
 		AcceptFrame:SetFrameStrata('DIALOG')
-		AcceptFrame.Text = AcceptFrame:CreateFontString(nil, "OVERLAY")
+		AcceptFrame.Text = AcceptFrame:CreateFontString(nil, 'OVERLAY')
 		AcceptFrame.Text:SetWordWrap(true)
 		AcceptFrame.Text:SetWidth(200)
 		AcceptFrame.Text:SetFont(Font, 12)
@@ -376,7 +368,7 @@ function AS:AcceptFrame(MainText, Function)
 		AS:SkinButton(AcceptFrame.Accept)
 		AcceptFrame.Accept:SetSize(70, 25)
 		AcceptFrame.Accept:SetPoint('RIGHT', AcceptFrame, 'BOTTOM', -10, 20)
-		AcceptFrame.Accept.Text = AcceptFrame.Accept:CreateFontString(nil, "OVERLAY")
+		AcceptFrame.Accept.Text = AcceptFrame.Accept:CreateFontString(nil, 'OVERLAY')
 		AcceptFrame.Accept.Text:SetFont(Font, 10)
 		AcceptFrame.Accept.Text:SetPoint('CENTER')
 		AcceptFrame.Accept.Text:SetText(YES)
@@ -385,7 +377,7 @@ function AS:AcceptFrame(MainText, Function)
 		AcceptFrame.Close:SetSize(70, 25)
 		AcceptFrame.Close:SetPoint('LEFT', AcceptFrame, 'BOTTOM', 10, 20)
 		AcceptFrame.Close:SetScript('OnClick', function(self) self:GetParent():Hide() end)
-		AcceptFrame.Close.Text = AcceptFrame.Close:CreateFontString(nil, "OVERLAY")
+		AcceptFrame.Close.Text = AcceptFrame.Close:CreateFontString(nil, 'OVERLAY')
 		AcceptFrame.Close.Text:SetFont(Font, 10)
 		AcceptFrame.Close.Text:SetPoint('CENTER')
 		AcceptFrame.Close.Text:SetText(NO)
