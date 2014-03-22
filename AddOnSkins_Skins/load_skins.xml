@@ -66,6 +66,7 @@
 	<Script file="InboxMailBag.lua"/>
 	<Script file="Incoming.lua"/>
 	<Script file="InspectEquip.lua"/>
+	<Script file="InvenMount.lua"/>
 	<Script file="KarniCrap.lua"/>
 	<Script file="KeepingTabs.lua"/>
 	<Script file="Lightheaded.lua"/>
