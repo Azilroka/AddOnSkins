@@ -10,6 +10,9 @@ function AS:SkinChocolateBar()
 			AS:SkinFrame(f, 'Default')
 		end
 	end
+	if RaidUtility_ShowButton then
+		RaidUtility_ShowButton:SetFrameStrata('TOOLTIP')
+	end
 end
 
 AS:RegisterSkin(name, AS.SkinChocolateBar)
