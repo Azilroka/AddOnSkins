@@ -328,8 +328,9 @@ end
 function AS:Desaturate(frame)
 	for i = 1, frame:GetNumRegions() do
 		local region = select(i, frame:GetRegions())
-		if region:GetObjectType() == 'Texture' then
-			if strlower(region:GetTexture()) == 'interface\\dialogframe\\ui-dialogbox-corner' then
+		if region:IsObjectType('Texture') then
+			local Texture = region:GetTexture()
+			if type(Texture) == 'string' and strlower(Texture) == 'interface\\dialogframe\\ui-dialogbox-corner' then
 				region:SetTexture(nil)
 				region:Kill()
 			else

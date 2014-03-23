@@ -1,6 +1,6 @@
 ## Interface: 50400
 ## Title: |cffC41F3BDuffedUI|r |cFFFFFFFFAddOnSkins|r
-## Version: 2.11
+## Version: 2.13
 ## Author: Azilroka, Sortokk
 ## RequiredDeps: DuffedUI, Enhanced_Config
 ## SavedVariables: UISkinOptions

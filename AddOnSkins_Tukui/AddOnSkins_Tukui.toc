@@ -1,6 +1,6 @@
 ## Interface: 50400
 ## Title: |cFFC495DDTukui|r |cFFFFFFFFAddOnSkins|r
-## Version: 2.11
+## Version: 2.13
 ## Author: Azilroka, Sortokk
 ## RequiredDeps: Tukui, Enhanced_Config
 ## SavedVariables: UISkinOptions
