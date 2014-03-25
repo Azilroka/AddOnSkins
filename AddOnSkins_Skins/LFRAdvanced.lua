@@ -6,7 +6,6 @@ local name = 'LFRAdvancedSkin'
 function AS:SkinLFRAdvanced()
 	AS:SkinButton(PVEFrameRaidBrowserButton)
 	AS:SkinButton(LFRBrowseFrameCopyNameButton)
-	AS:SkinDropDownBox(LFRBrowseFrameClassDropDown)
 	AS:SkinButton(LFRBrowseFrameCreateRaidButton)
 	LFRBrowseFrameColumnHeader8:DisableDrawLayer('BACKGROUND')
 end
