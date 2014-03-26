@@ -116,9 +116,21 @@ function AS:UpdateMedia()
 	AS.UIScale = UIParent:GetScale()
 end
 
-function AS:UpdateDataTexts()
+function AS:StartSkinning(event)
+	-- Update DataTexts
 	E:GetModule('DataTexts'):RegisterLDB()
 	E:GetModule('DataTexts'):LoadDataTexts()
+
+	for skin, funcs in pairs(self.skins) do
+		if self:CheckOption(skin) then
+			for _, func in ipairs(funcs) do
+				self:CallSkin(skin, func, event)
+			end
+		end
+	end
+
+	self:EmbedInit()
+	self:UnregisterEvent(event)
 end
 
 function AS:Initialize()
@@ -138,29 +150,17 @@ function AS:Initialize()
 	EP:RegisterPlugin(AddOnName, AS.GenerateOptions)
 	ES = E:GetModule('EnhancedShadows', true)
 
-	E.private.addonskins['MiscFixes'] = true
-
-	self:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
-	self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
-	self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
-	self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
-	self:RegisterEvent('PLAYER_ENTERING_WORLD', 'UpdateDataTexts')
-
 	for skin, alldata in pairs(self.register) do
 		for _, data in pairs(alldata) do
 			self:RegisteredSkin(skin, data.priority, data.func, data.events)
 		end
 	end
 
-	for skin, funcs in pairs(AS.skins) do
-		if AS:CheckOption(skin) then
-			for _, func in ipairs(funcs) do
-				AS:CallSkin(skin, func, 'PLAYER_ENTERING_WORLD')
-			end
-		end
-	end
-
-	self:EmbedInit()
+	self:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
+	self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
+	self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
+	self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
+	self:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
 end
 
 function AS:UnregisterEvent(skinName, event)

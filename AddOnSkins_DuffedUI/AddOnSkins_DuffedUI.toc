@@ -1,9 +1,9 @@
 ## Interface: 50400
 ## Title: |cffC41F3BDuffedUI|r |cFFFFFFFFAddOnSkins|r
-## Version: 2.13
+## Version: 2.14
 ## Author: Azilroka, Sortokk
 ## RequiredDeps: DuffedUI, Enhanced_Config
-## SavedVariables: UISkinOptions
+## SavedVariables: AddOnSkins_Options
 ## X-Tukui-ProjectID: 221
 ## X-Tukui-ProjectFolders: AddOnSkins_DuffedUI
 

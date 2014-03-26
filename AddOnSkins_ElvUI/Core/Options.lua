@@ -121,7 +121,7 @@ function AS:GenerateOptions()
 		type = 'group',
 		name = 'Embed Settings',
 		get = function(info) return AS:CheckOption(info[#info]) end,
-		set = function(info, value) AS:SetOption(info[#info], value) AS:EmbedSystem_WindowResize() AS:Embed_Check() end,
+		set = function(info, value) AS:SetOption(info[#info], value) AS:Embed_Check() end,
 		args = {
 			desc = {
 				type = 'description',
@@ -165,8 +165,8 @@ function AS:GenerateOptions()
 				type = 'range',
 				order = 7,
 				name = 'Embed Left Window Width',
-				min = floor(EmbedSystem_MainWindow:GetWidth() * .25),
-				max = floor(EmbedSystem_MainWindow:GetWidth() * .75),
+				min = 100,
+				max = 300,
 				step = 1,
 				disabled = function() return not AS:CheckOption('EmbedSystemDual') end,
 				width = 'full',
@@ -228,7 +228,7 @@ function AS:GenerateOptions()
 		name = MISCELLANEOUS,
 		order = 3,
 		get = function(info) return AS:CheckOption(info[#info]) end,
-		set = function(info, value) AS:SetOption(info[#info], value) AS:EmbedSystem_WindowResize() AS:Embed_Check() end,
+		set = function(info, value) AS:SetOption(info[#info], value) end,
 		args = {
 			WeakAuraAuraBar = {
 				type = 'toggle',
@@ -286,6 +286,7 @@ function AS:GenerateOptions()
 			},
 		},
 	}
+
 	local order = 2
 	for skinName, _ in AS:OrderedPairs(AS.register) do
 		if skinName ~= 'MiscFixes' then

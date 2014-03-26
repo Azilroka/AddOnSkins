@@ -2,11 +2,8 @@ local E, L, V, P, G, _ = unpack(ElvUI)
 local AS = E:GetModule('AddOnSkins')
 
 local format, gsub, pairs, ipairs, select, tinsert, tonumber = format, gsub, pairs, ipairs, select, tinsert, tonumber
+local EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow
 
-AS.SkadaWindows = {}
-local EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
-local EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
-local EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
 local ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
 
 function AS:GetChatWindowInfo()
@@ -17,6 +14,93 @@ function AS:GetChatWindowInfo()
 		ChatTabInfo["ChatFrame"..i] = tab:GetText()
 	end
 	return ChatTabInfo
+end
+
+function AS:CreateEmbedSystem()
+	if not AS.EmbedSystemCreated then
+		EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
+		EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
+		EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
+
+		EmbedSystem_MainWindow:SetScript('OnShow', AS.Embed_Show)
+		EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
+
+		hooksecurefunc(RightChatPanel, 'SetSize', function()
+			if ChatHeight ~= E.db.chat.panelHeight or ChatWidth ~= E.db.chat.panelWidth then
+				ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
+				AS:EmbedSystem_WindowResize()
+				AS:Embed_Check()
+			end
+		end)
+
+		RightChatToggleButton:SetScript('OnClick', function(self, btn)
+			if btn == 'RightButton' then
+				if not AS:CheckOption('EmbedLeftChat') then
+					if EmbedSystem_MainWindow:IsShown() then
+						EmbedSystem_MainWindow:Hide()
+					else
+						EmbedSystem_MainWindow:Show()
+					end
+				end
+			else
+				if E.db[self.parent:GetName()..'Faded'] then
+					E.db[self.parent:GetName()..'Faded'] = nil
+					UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
+					UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+				else
+					E.db[self.parent:GetName()..'Faded'] = true
+					UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
+					UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+					self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
+				end
+			end
+		end)
+
+		RightChatToggleButton:HookScript('OnEnter', function(self, ...)
+			if not AS:CheckOption('EmbedLeftChat') then
+				GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
+				GameTooltip:Show()
+			end
+		end)
+
+		LeftChatToggleButton:SetScript('OnClick', function(self, btn)
+			if btn == 'RightButton' then
+				if AS:CheckOption('EmbedLeftChat') then
+					if EmbedSystem_MainWindow:IsShown() then
+						EmbedSystem_MainWindow:Hide()
+					else
+						EmbedSystem_MainWindow:Show()
+					end
+				end
+			else
+				if E.db[self.parent:GetName()..'Faded'] then
+					E.db[self.parent:GetName()..'Faded'] = nil
+					UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
+					UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+				else
+					E.db[self.parent:GetName()..'Faded'] = true
+					UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
+					UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
+					self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
+				end
+			end
+		end)
+
+		LeftChatToggleButton:HookScript('OnEnter', function(self, ...)
+			if AS:CheckOption('EmbedLeftChat') then
+				GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
+				GameTooltip:Show()
+			end
+		end)
+		AS.EmbedSystemCreated = true
+	end
+end
+
+function AS:EmbedInit()
+	if AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual') then
+		AS:CreateEmbedSystem()
+		AS:Embed_Check(true)
+	end
 end
 
 function AS:Embed_Show()
@@ -37,7 +121,7 @@ function AS:Embed_Hide()
 end
 
 function AS:EmbedSystem_WindowResize()
-	if InCombatLockdown() then return end
+	if UnitAffectingCombat('player') then return end
 	local DataTextSize = AS:CheckOption('EmbedLeftChat') and E.db.datatexts.leftChatPanel and LeftChatDataPanel:GetHeight() or E.db.datatexts.rightChatPanel and RightChatDataPanel:GetHeight() or 0
 	local ChatTabSize = AS:CheckOption('EmbedBelowTop') and RightChatTab:GetHeight() or 0
 	local Width = E.PixelMode and 6 or 10
@@ -66,12 +150,25 @@ end
 
 function AS:Embed_Check(Message)
 	if not (AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual')) then return end
+	if not AS.EmbedSystemCreated then
+		AS:CreateEmbedSystem()
+		Message = true
+	end
 	AS:Embed_Toggle(Message)
-	if AS:CheckOption('EmbedOmen', 'Omen') then AS:Embed_Omen() end
-	if AS:CheckOption('EmbedSkada', 'Skada') then AS:Embed_Skada() end
-	if AS:CheckOption('EmbedTinyDPS', 'TinyDPS') then AS:Embed_TinyDPS() end
-	if AS:CheckOption('EmbedRecount', 'Recount') then AS:Embed_Recount() end
-	if AS:CheckOption('EmbedalDamageMeter', 'alDamageMeter') then AS:Embed_alDamageMeter() end
+	if not UnitAffectingCombat('player') then
+		if AS:CheckOption('EmbedOoC') then
+			AS:Embed_Hide()
+		else
+			AS:Embed_Show()
+		end
+	end
+	local MainEmbed, LeftEmbed, RightEmbed = AS:CheckOption('EmbedMain'), AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')
+	if AS:CheckOption('EmbedOmen', 'Omen') and (strmatch(MainEmbed, 'Omen') or strmatch(LeftEmbed, 'Omen') or strmatch(RightEmbed, 'Omen')) then AS:Embed_Omen() end
+	if AS:CheckOption('EmbedSkada', 'Skada') and (strmatch(MainEmbed, 'Skada') or strmatch(LeftEmbed, 'Skada') or strmatch(RightEmbed, 'Skada')) then AS:Embed_Skada() end
+	if AS:CheckOption('EmbedTinyDPS', 'TinyDPS') and (strmatch(MainEmbed, 'TinyDPS') or strmatch(LeftEmbed, 'TinyDPS') or strmatch(RightEmbed, 'TinyDPS')) then AS:Embed_TinyDPS() end
+	if AS:CheckOption('EmbedRecount', 'Recount') and (strmatch(MainEmbed, 'Recount') or strmatch(LeftEmbed, 'Recount') or strmatch(RightEmbed, 'Recount')) then AS:Embed_Recount() end
+	if AS:CheckOption('EmbedalDamageMeter', 'alDamageMeter') and (strmatch(MainEmbed, 'alDamageMeter') or strmatch(LeftEmbed, 'alDamageMeter') or strmatch(RightEmbed, 'alDamageMeter')) then AS:Embed_alDamageMeter() end
+	AS:EmbedSystem_WindowResize()
 end
 
 function AS:Embed_Toggle(Message)
@@ -249,7 +346,7 @@ function AS:Embed_alDamageMeter()
 end
 
 function AS:Embed_Skada()
-	wipe(AS.SkadaWindows)
+	AS.SkadaWindows = {}
 	for k, window in pairs(Skada:GetWindows()) do
 		tinsert(AS.SkadaWindows, window)
 	end
@@ -295,82 +392,6 @@ function AS:Embed_Skada()
 		EmbedWindow(AS.SkadaWindows[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
 		EmbedWindow(AS.SkadaWindows[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPLEFT', EmbedSystem_RightWindow, 'TOPLEFT', 2, 0)
 	end
-end
-
-function AS:EmbedInit()
-	AS:EmbedSystem_WindowResize()
-	AS:Embed_Check(true)
-	EmbedSystem_MainWindow:SetScript('OnShow', AS.Embed_Show)
-	EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
-	if AS:CheckOption('EmbedOoC') and not InCombatLockdown() then AS:Embed_Hide() end
-
-	hooksecurefunc(RightChatPanel, 'SetSize', function()
-		if ChatHeight ~= E.db.chat.panelHeight or ChatWidth ~= E.db.chat.panelWidth then
-			ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
-			AS:EmbedSystem_WindowResize()
-			AS:Embed_Check()
-		end
-	end)
-
-	RightChatToggleButton:SetScript('OnClick', function(self, btn)
-		if btn == 'RightButton' then
-			if not AS:CheckOption('EmbedLeftChat') then
-				if EmbedSystem_MainWindow:IsShown() then
-					EmbedSystem_MainWindow:Hide()
-				else
-					EmbedSystem_MainWindow:Show()
-				end
-			end
-		else
-			if E.db[self.parent:GetName()..'Faded'] then
-				E.db[self.parent:GetName()..'Faded'] = nil
-				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
-				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
-			else
-				E.db[self.parent:GetName()..'Faded'] = true
-				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
-				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
-				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
-			end
-		end
-	end)
-
-	RightChatToggleButton:HookScript('OnEnter', function(self, ...)
-		if not AS:CheckOption('EmbedLeftChat') then
-			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
-			GameTooltip:Show()
-		end
-	end)
-
-	LeftChatToggleButton:SetScript('OnClick', function(self, btn)
-		if btn == 'RightButton' then
-			if AS:CheckOption('EmbedLeftChat') then
-				if EmbedSystem_MainWindow:IsShown() then
-					EmbedSystem_MainWindow:Hide()
-				else
-					EmbedSystem_MainWindow:Show()
-				end
-			end
-		else
-			if E.db[self.parent:GetName()..'Faded'] then
-				E.db[self.parent:GetName()..'Faded'] = nil
-				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
-				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
-			else
-				E.db[self.parent:GetName()..'Faded'] = true
-				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
-				UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
-				self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
-			end
-		end
-	end)
-
-	LeftChatToggleButton:HookScript('OnEnter', function(self, ...)
-		if AS:CheckOption('EmbedLeftChat') then
-			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
-			GameTooltip:Show()
-		end
-	end)
 end
 
 local EmbedOoCCombatStart

@@ -1,10 +1,9 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="API.lua"/>
 	<Script file="Core.lua"/>
+	<Script file="..\..\AddOnSkins_Systems\Backend.lua"/>
 	<Script file="EmbedWindow.lua"/>
 	<Script file="..\..\AddOnSkins_Systems\Conflicts.lua"/>
-	<Script file="..\..\AddOnSkins_Skins\Skins.lua"/>
 	<Script file="..\..\AddOnSkins_Systems\Options.lua"/>
 	<Script file="..\..\AddOnSkins_Systems\Embed.lua"/>
-	<Script file="..\..\AddOnSkins_Systems\Backend.lua"/>
 </Ui>

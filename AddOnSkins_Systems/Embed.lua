@@ -2,61 +2,52 @@ local AS = unpack(AddOnSkins)
 local L = AS.Locale
 
 local format, gsub, pairs, ipairs, select, tinsert, tonumber = format, gsub, pairs, ipairs, select, tinsert, tonumber
+local EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow
 
-local EmbedOoCCombatStart
-AS.SkadaWindows = {}
+function AS:CreateEmbedSystem()
+	if not AS.EmbedSystemCreated then
+		EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
+		EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
+		EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
 
-local EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
-local EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
-local EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
+		AS.SkadaWindows = {}
 
-function AS:Embed_Init()
-	EmbedSystem_MainWindow:RegisterEvent('PLAYER_REGEN_DISABLED')
-	EmbedSystem_MainWindow:RegisterEvent('PLAYER_REGEN_ENABLED')
-	EmbedSystem_MainWindow:SetScript('OnShow', AS.Embed_Show)
-	EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
-	EmbedSystem_MainWindow:SetScript('OnEvent', function(self, event)
-		if event == 'PLAYER_REGEN_DISABLED' then
-			EmbedOoCCombatStart = true
-			if AS:CheckOption('EmbedOoC') then
-				EmbedSystem_MainWindow:Show()
+		self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
+		self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
+
+		EmbedSystem_MainWindow:SetScript('OnShow', AS.Embed_Show)
+		EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
+
+		AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, AS.ChatBackgroundRight, L.Skins.ToggleRightChat, L.Skins.ToggleEmbed)
+		RightToggleButton:Point('RIGHT', AS.InfoRight, 'RIGHT', -2, 0)
+
+		RightToggleButton:HookScript('OnClick', function(self, button)
+			if button == 'RightButton' then
+				if EmbedSystem_MainWindow:IsShown() then
+					EmbedSystem_MainWindow:Hide()
+				else
+					EmbedSystem_MainWindow:Show()
+				end
 			end
-		else
-			EmbedOoCCombatStart = false
-			if AS:CheckOption('EmbedOoC') then
-				AS:Delay(10, function()
-					if not EmbedOoCCombatStart then
-						EmbedSystem_MainWindow:Hide()
-					end
-				end)
+		end)
+
+		AS:CreateToggleButton('LeftToggleButton', '◄', AS.InfoLeft, AS.ChatBackgroundLeft, L.Skins.ToggleLeftChat, L.Skins.ToggleOptions)
+		LeftToggleButton:Point('LEFT', AS.InfoLeft, 'LEFT', 2, 0)
+		LeftToggleButton:HookScript('OnClick', function(self, button)
+			if button == 'RightButton' then
+				Enhanced_Config[1]:ToggleConfig()
 			end
-		end
-	end)
+		end)
 
-	AS:EmbedSystem_WindowResize()
-	AS:Embed_Check(true)
-	if AS:CheckOption('EmbedOoC') and not InCombatLockdown() then AS:Embed_Hide() end
+		AS.EmbedSystemCreated = true
+	end
+end
 
-	AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, AS.ChatBackgroundRight, L.Skins.ToggleRightChat, L.Skins.ToggleEmbed)
-	RightToggleButton:Point('RIGHT', AS.InfoRight, 'RIGHT', -2, 0)
-
-	RightToggleButton:HookScript('OnClick', function(self, button)
-		if button == 'RightButton' then
-			if EmbedSystem_MainWindow:IsShown() then
-				EmbedSystem_MainWindow:Hide()
-			else
-				EmbedSystem_MainWindow:Show()
-			end
-		end
-	end)
-
-	AS:CreateToggleButton('LeftToggleButton', '◄', AS.InfoLeft, AS.ChatBackgroundLeft, L.Skins.ToggleLeftChat, L.Skins.ToggleOptions)
-	LeftToggleButton:Point('LEFT', AS.InfoLeft, 'LEFT', 2, 0)
-	LeftToggleButton:HookScript('OnClick', function(self, button)
-		if button == 'RightButton' then
-			Enhanced_Config[1]:ToggleConfig()
-		end
-	end)
+function AS:EmbedInit()
+	if AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual') then
+		AS:CreateEmbedSystem()
+		AS:Embed_Check(true)
+	end
 end
 
 function AS:Embed_Show()
@@ -78,12 +69,24 @@ end
 
 function AS:Embed_Check(Message)
 	if not (AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual')) then return end
+	if not AS.EmbedSystemCreated then
+		AS:CreateEmbedSystem()
+		Message = true
+	end
 	AS:Embed_Toggle(Message)
-	if AS:CheckOption('EmbedOmen', 'Omen') then AS:Embed_Omen() end
-	if AS:CheckOption('EmbedSkada', 'Skada') then AS:Embed_Skada() end
-	if AS:CheckOption('EmbedTinyDPS', 'TinyDPS') then AS:Embed_TinyDPS() end
-	if AS:CheckOption('EmbedRecount', 'Recount') then AS:Embed_Recount() end
-	if AS:CheckOption('EmbedalDamageMeter', 'alDamageMeter') then AS:Embed_alDamageMeter() end
+	if not UnitAffectingCombat('player') then
+		if AS:CheckOption('EmbedOoC') then
+			AS:Embed_Hide()
+		else
+			AS:Embed_Show()
+		end
+	end
+	local MainEmbed, LeftEmbed, RightEmbed = AS:CheckOption('EmbedMain'), AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')
+	if AS:CheckOption('EmbedOmen', 'Omen') and (strmatch(MainEmbed, 'Omen') or strmatch(LeftEmbed, 'Omen') or strmatch(RightEmbed, 'Omen')) then AS:Embed_Omen() end
+	if AS:CheckOption('EmbedSkada', 'Skada') and (strmatch(MainEmbed, 'Skada') or strmatch(LeftEmbed, 'Skada') or strmatch(RightEmbed, 'Skada')) then AS:Embed_Skada() end
+	if AS:CheckOption('EmbedTinyDPS', 'TinyDPS') and (strmatch(MainEmbed, 'TinyDPS') or strmatch(LeftEmbed, 'TinyDPS') or strmatch(RightEmbed, 'TinyDPS')) then AS:Embed_TinyDPS() end
+	if AS:CheckOption('EmbedRecount', 'Recount') and (strmatch(MainEmbed, 'Recount') or strmatch(LeftEmbed, 'Recount') or strmatch(RightEmbed, 'Recount')) then AS:Embed_Recount() end
+	if AS:CheckOption('EmbedalDamageMeter', 'alDamageMeter') and (strmatch(MainEmbed, 'alDamageMeter') or strmatch(LeftEmbed, 'alDamageMeter') or strmatch(RightEmbed, 'alDamageMeter')) then AS:Embed_alDamageMeter() end
 end
 
 function AS:Embed_Toggle(Message)
@@ -298,5 +301,24 @@ function AS:Embed_Skada()
 	elseif NumberToEmbed == 2 then
 		EmbedWindow(AS.SkadaWindows[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
 		EmbedWindow(AS.SkadaWindows[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPLEFT', EmbedSystem_RightWindow, 'TOPLEFT', 2, 0)
+	end
+end
+
+local EmbedOoCCombatStart
+function AS:EmbedEnterCombat(event)
+	EmbedOoCCombatStart = true
+	if AS:CheckOption('EmbedOoC') then
+		EmbedSystem_MainWindow:Show()
+	end
+end
+
+function AS:EmbedExitCombat(event)
+	EmbedOoCCombatStart = false
+	if AS:CheckOption('EmbedOoC') then
+		AS:Delay(10, function()
+			if not EmbedOoCCombatStart then
+				EmbedSystem_MainWindow:Hide()
+			end
+		end)
 	end
 end
