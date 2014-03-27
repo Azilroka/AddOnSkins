@@ -177,6 +177,9 @@ function AS:AcceptFrame(MainText, Function)
 end
 
 function AS:StartSkinning(event)
+	if self.enteredworld then return end
+	self.enteredworld = true
+
 	for skin, alldata in pairs(AS.register) do
 		for _, data in pairs(alldata) do
 			if AS:CheckOption(skin) == nil then AS:EnableOption(skin) end
@@ -195,7 +198,7 @@ function AS:StartSkinning(event)
 	self:EmbedInit()
 	self:Ace3Options()
 	self:Print(format("by |cFFFF7D0AAzilroka|r - Version: |cFF1784D1%s|r Loaded!", self.Version))
-	self:UnregisterEvent(event)
+	--self:UnregisterEvent(event)
 end
 
 function AS:CallSkin(skin, func, event, ...)

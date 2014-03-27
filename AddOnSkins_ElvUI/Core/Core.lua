@@ -117,9 +117,17 @@ function AS:UpdateMedia()
 end
 
 function AS:StartSkinning(event)
-	-- Update DataTexts
+	if self.enteredworld then return end
+	self.enteredworld = true
+
 	E:GetModule('DataTexts'):RegisterLDB()
 	E:GetModule('DataTexts'):LoadDataTexts()
+
+	for skin, alldata in pairs(self.register) do
+		for _, data in pairs(alldata) do
+			self:RegisteredSkin(skin, data.priority, data.func, data.events)
+		end
+	end
 
 	for skin, funcs in pairs(self.skins) do
 		if self:CheckOption(skin) then
@@ -129,8 +137,8 @@ function AS:StartSkinning(event)
 		end
 	end
 
-	self:EmbedInit()
-	self:UnregisterEvent(event)
+	AS:EmbedInit()
+	-- AS:UnregisterEvent('PLAYER_ENTERING_WORLD') -- AceEvent is not unregistering this for some reason.
 end
 
 function AS:Initialize()
@@ -149,12 +157,6 @@ function AS:Initialize()
 
 	EP:RegisterPlugin(AddOnName, AS.GenerateOptions)
 	ES = E:GetModule('EnhancedShadows', true)
-
-	for skin, alldata in pairs(self.register) do
-		for _, data in pairs(alldata) do
-			self:RegisteredSkin(skin, data.priority, data.func, data.events)
-		end
-	end
 
 	self:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 	self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
