@@ -3,13 +3,9 @@ local AS = E:GetModule('AddOnSkins')
 
 V['addonskins'] = {
 -- Embeds
-	['EmbedCoolLine'] = false,
 	['EmbedOoC'] = false, 
-	['EmbedOmen'] = false, 
-	['EmbedRecount'] = false, 
+	['EmbedCoolLine'] = false,
 	['EmbedSexyCooldown'] = false,
-	['EmbedSkada'] = false, 
-	['EmbedTinyDPS'] = false,
 	['EmbedSystem'] = false,
 	['EmbedSystemDual'] = false,
 	['EmbedMain'] = 'Skada',
@@ -17,21 +13,21 @@ V['addonskins'] = {
 	['EmbedRight'] = 'Skada',
 	['EmbedLeftWidth'] = 200,
 	['EmbedBelowTop'] = false,
+	['TransparentEmbed'] = false,
+-- Misc
 	['RecountBackdrop'] = true,
 	['SkadaBackdrop'] = true,
 	['OmenBackdrop'] = true,
-	['TransparentEmbed'] = false,
--- Misc
 	['MiscFixes'] = true,
 	['DBMSkinHalf'] = false,
 	['DBMFont'] = 'ElvUI Norm',
 	['DBMFontSize'] = 12,
 	['DBMFontFlag'] = 'OUTLINE',
-	['ParchmentRemover'] = false,
 	['EmbedLeftChat'] = false,
 	['WeakAuraAuraBar'] = false,
 	['WeakAuraIconCooldown'] = true,
 	['AuctionHouse'] = true,
+	['ParchmentRemover'] = false,
 	['IntegrateMyRolePlayTooltip'] = true,
 }
 

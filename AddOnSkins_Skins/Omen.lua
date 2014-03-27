@@ -11,7 +11,7 @@ function AS:SkinOmen()
 	Omen.db.profile.TitleBar.UseSameBG = true
 
 	hooksecurefunc(Omen, 'UpdateBackdrop', function(self)
-		if not AS:CheckOption('EmbedOmen') then
+		if not AS:CheckEmbed('Omen') then
 			AS:SkinFrame(self.BarList, 'Default')
 			AS:SkinTitleBar(self.Title, 'Default')
 		end
@@ -19,7 +19,7 @@ function AS:SkinOmen()
 	end)
 
 	hooksecurefunc(Omen, 'Toggle', function(self)
-		if not AS:CheckOption('EmbedOmen') then return end
+		if not AS:CheckEmbed('Omen') then return end
 		if self.Anchor:IsShown() then
 			EmbedSystem_MainWindow:Show()
 		else

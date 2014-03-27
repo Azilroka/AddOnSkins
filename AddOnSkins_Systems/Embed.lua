@@ -67,6 +67,15 @@ function AS:Embed_Hide()
 	EmbedSystem_RightWindow:Hide()
 end
 
+function AS:CheckEmbed(Embed)
+	local MainEmbed, LeftEmbed, RightEmbed, Embed = strlower(AS:CheckOption('EmbedMain')), strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight')), strlower(Embed)
+	if AS:CheckAddOn(Embed) and (strmatch(MainEmbed, Embed) or strmatch(LeftEmbed, Embed) or strmatch(RightEmbed, Embed)) then
+		return true
+	else
+		return false
+	end
+end
+
 function AS:Embed_Check(Message)
 	if not (AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual')) then return end
 	if not AS.EmbedSystemCreated then
@@ -81,12 +90,12 @@ function AS:Embed_Check(Message)
 			AS:Embed_Show()
 		end
 	end
-	local MainEmbed, LeftEmbed, RightEmbed = AS:CheckOption('EmbedMain'), AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')
-	if AS:CheckOption('EmbedOmen', 'Omen') and (strmatch(MainEmbed, 'Omen') or strmatch(LeftEmbed, 'Omen') or strmatch(RightEmbed, 'Omen')) then AS:Embed_Omen() end
-	if AS:CheckOption('EmbedSkada', 'Skada') and (strmatch(MainEmbed, 'Skada') or strmatch(LeftEmbed, 'Skada') or strmatch(RightEmbed, 'Skada')) then AS:Embed_Skada() end
-	if AS:CheckOption('EmbedTinyDPS', 'TinyDPS') and (strmatch(MainEmbed, 'TinyDPS') or strmatch(LeftEmbed, 'TinyDPS') or strmatch(RightEmbed, 'TinyDPS')) then AS:Embed_TinyDPS() end
-	if AS:CheckOption('EmbedRecount', 'Recount') and (strmatch(MainEmbed, 'Recount') or strmatch(LeftEmbed, 'Recount') or strmatch(RightEmbed, 'Recount')) then AS:Embed_Recount() end
-	if AS:CheckOption('EmbedalDamageMeter', 'alDamageMeter') and (strmatch(MainEmbed, 'alDamageMeter') or strmatch(LeftEmbed, 'alDamageMeter') or strmatch(RightEmbed, 'alDamageMeter')) then AS:Embed_alDamageMeter() end
+	if AS:CheckEmbed('Omen') then AS:Embed_Omen() end
+	if AS:CheckEmbed('Skada') then AS:Embed_Skada() end
+	if AS:CheckEmbed('TinyDPS') then AS:Embed_TinyDPS() end
+	if AS:CheckEmbed('Recount') then AS:Embed_Recount() end
+	if AS:CheckEmbed('alDamageMeter') then AS:Embed_alDamageMeter() end
+	AS:EmbedSystem_WindowResize()
 end
 
 function AS:Embed_Toggle(Message)
@@ -95,31 +104,22 @@ function AS:Embed_Toggle(Message)
 	EmbedSystem_LeftWindow.FrameName = nil
 	EmbedSystem_RightWindow.FrameName = nil
 	if AS:CheckOption('EmbedSystem') then
-		local MainLowered = strlower(AS:CheckOption('EmbedMain'))
-		local MainOption = MainLowered == 'skada' and 'Skada' or MainLowered == 'omen' and 'Omen' or MainLowered == 'recount' and 'Recount' or MainLowered == 'tinydps' and 'TinyDPS' or MainLowered == 'aldamagemeter' and 'alDamageMeter' or nil
-		if MainOption then AS:SetOption('EmbedMain', MainOption) end
-		MainEmbed = AS:CheckOption('EmbedMain')
-		if MainEmbed ~= 'Skada' and MainEmbed ~= 'Omen' and MainEmbed ~= 'Recount' and MainEmbed ~= 'TinyDPS' and MainEmbed ~= 'alDamageMeter' then
-			EmbedSystem_MainWindow.FrameName = MainEmbed
+		local MainEmbed = strlower(AS:CheckOption('EmbedMain'))
+		if MainEmbed ~= 'skada' and MainEmbed ~= 'omen' and MainEmbed ~= 'recount' and MainEmbed ~= 'tinydps' and MainEmbed ~= 'aldamagemeter' then
+			EmbedSystem_MainWindow.FrameName = AS:CheckOption('EmbedMain')
 		end
 	end
 	if AS:CheckOption('EmbedSystemDual') then
-		local LeftLowered, RightLowered = strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight'))
-		local LeftOption = LeftLowered == 'skada' and 'Skada' or LeftLowered == 'omen' and 'Omen' or LeftLowered == 'recount' and 'Recount' or LeftLowered == 'tinydps' and 'TinyDPS' or LeftLowered == 'aldamagemeter' and 'alDamageMeter' or nil
-		local RightOption = RightLowered == 'skada' and 'Skada' or RightLowered == 'omen' and 'Omen' or RightLowered == 'recount' and 'Recount' or RightLowered == 'tinydps' and 'TinyDPS' or RightLowered == 'aldamagemeter' and 'alDamageMeter' or nil
-		if LeftOption then AS:SetOption('EmbedLeft', LeftOption) end
-		if RightOption then AS:SetOption('EmbedRight', RightOption) end
-		LeftEmbed, RightEmbed = AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')
-		if LeftEmbed ~= 'Skada' and LeftEmbed ~= 'Omen' and LeftEmbed ~= 'Recount' and LeftEmbed ~= 'TinyDPS' and LeftEmbed ~= 'alDamageMeter' then
-			EmbedSystem_LeftWindow.FrameName = LeftEmbed
+		local LeftEmbed, RightEmbed = strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight'))
+		if LeftEmbed ~= 'skada' and LeftEmbed ~= 'omen' and LeftEmbed ~= 'recount' and LeftEmbed ~= 'tinydps' and LeftEmbed ~= 'aldamagemeter' then
+			EmbedSystem_LeftWindow.FrameName = AS:CheckOption('EmbedLeft')
 		end
-		if RightEmbed ~= 'Skada' and RightEmbed ~= 'Omen' and RightEmbed ~= 'Recount' and RightEmbed ~= 'TinyDPS' and RightEmbed ~= 'alDamageMeter' then
-			EmbedSystem_RightWindow.FrameName = RightEmbed
+		if RightEmbed ~= 'skada' and RightEmbed ~= 'omen' and RightEmbed ~= 'recount' and RightEmbed ~= 'tinydps' and RightEmbed ~= 'aldamagemeter' then
+			EmbedSystem_RightWindow.FrameName = AS:CheckOption('EmbedRight')
 		end
 	end
-	local Frame = nil
 	if EmbedSystem_MainWindow.FrameName ~= nil then
-		Frame = _G[EmbedSystem_MainWindow.FrameName]
+		local Frame = _G[EmbedSystem_MainWindow.FrameName]
 		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
 			Frame:ClearAllPoints()
 			Frame:SetParent(EmbedSystem_MainWindow)
@@ -127,7 +127,7 @@ function AS:Embed_Toggle(Message)
 		end
 	end
 	if EmbedSystem_LeftWindow.FrameName ~= nil then
-		Frame = _G[EmbedSystem_LeftWindow.FrameName]
+		local Frame = _G[EmbedSystem_LeftWindow.FrameName]
 		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
 			Frame:ClearAllPoints()
 			Frame:SetParent(EmbedSystem_LeftWindow)
@@ -135,37 +135,17 @@ function AS:Embed_Toggle(Message)
 		end
 	end
 	if EmbedSystem_RightWindow.FrameName ~= nil then
-		Frame = _G[EmbedSystem_RightWindow.FrameName]
+		local Frame = _G[EmbedSystem_RightWindow.FrameName]
 		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
 			Frame:ClearAllPoints()
 			Frame:SetParent(EmbedSystem_RightWindow)
 			Frame:SetInside(EmbedSystem_RightWindow, 0, 0)
 		end
 	end
-	AS:DisableOption('EmbedalDamageMeter')
-	AS:DisableOption('EmbedOmen')
-	AS:DisableOption('EmbedRecount')
-	AS:DisableOption('EmbedTinyDPS')
-	AS:DisableOption('EmbedSkada')
-	if MainEmbed == 'Skada' or LeftEmbed == 'Skada' or RightEmbed == 'Skada' then
-		AS:EnableOption('EmbedSkada')
-	end
-	if MainEmbed == 'Omen' or LeftEmbed == 'Omen' or RightEmbed == 'Omen' then
-		AS:EnableOption('EmbedOmen')
-	end
-	if MainEmbed == 'Recount' or LeftEmbed == 'Recount' or RightEmbed == 'Recount' then
-		AS:EnableOption('EmbedRecount')
-	end
-	if MainEmbed == 'TinyDPS' or LeftEmbed  == 'TinyDPS' or RightEmbed == 'TinyDPS' then
-		AS:EnableOption('EmbedTinyDPS')
-	end
-	if MainEmbed == 'alDamageMeter' or LeftEmbed  == 'alDamageMeter' or RightEmbed == 'alDamageMeter' then
-		AS:EnableOption('EmbedalDamageMeter')
-	end
 	if Message then
 		local Message = format("Main: '%s'", AS:CheckOption('EmbedMain'))
 		if AS:CheckOption('EmbedSystemDual') then Message = format("Left: '%s' | Right: '%s'", AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')) end
-		AS:Print(format("Embed System: %s", Message))
+		AS:Print(format('Embed System: - %s', Message))
 	end
 end
 

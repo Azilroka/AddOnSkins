@@ -7,7 +7,7 @@ function AS:SkinALDamageMeter()
 	alDamageMeterFrame.bg:Kill()
 	AS:SkinBackdropFrame(alDamageMeterFrame, 'Transparent')
 	alDamageMeterFrame:HookScript('OnShow', function()
-		if AS:CheckOption('EmbedalDamageMeter') then
+		if AS:CheckEmbed('alDamageMeter') then
 			EmbedSystem_MainWindow:Show()
 		end
 	end)

@@ -201,25 +201,25 @@ function AS:GenerateOptions()
 			EmbedLeftChat = {
 				type = 'toggle',
 				name = 'Embed to Left Chat Window',
-				order = 12,
+				order = 13,
 			},
 			RecountBackdrop = {
 				type = 'toggle',
 				name = 'Recount Backdrop',
 				order = 14,
-				disabled = function() return not (AS:CheckOption('RecountSkin', 'Recount') and AS:CheckOption('EmbedRecount')) end
+				disabled = function() return not (AS:CheckOption('RecountSkin', 'Recount') and AS:CheckEmbed('Recount')) end
 			},
 			SkadaBackdrop = {
 				type = 'toggle',
 				name = 'Skada Backdrop',
 				order = 15,
-				disabled = function() return not (AS:CheckOption('SkadaSkin', 'Skada') and AS:CheckOption('EmbedSkada')) end
+				disabled = function() return not (AS:CheckOption('SkadaSkin', 'Skada') and AS:CheckEmbed('Skada')) end
 			},
 			OmenBackdrop = {
 				type = 'toggle',
 				name = 'Omen Backdrop',
 				order = 16,
-				disabled = function() return not (AS:CheckOption('OmenSkin', 'Omen') and AS:CheckOption('EmbedOmen'))end
+				disabled = function() return not (AS:CheckOption('OmenSkin', 'Omen') and AS:CheckEmbed('Omen')) end
 			},
 		}
 	}

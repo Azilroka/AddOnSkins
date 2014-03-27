@@ -43,7 +43,7 @@ function AS:SkinSkada()
 	end)
 
 	hooksecurefunc(Skada, 'ToggleWindow', function()
-		if not AS:CheckOption('EmbedSkada') then return end
+		if not AS:CheckEmbed('Skada') then return end
 		for i, win in ipairs(Skada:GetWindows()) do
 			if win:IsShown() then
 				EmbedSystem_MainWindow:Show()
@@ -54,17 +54,17 @@ function AS:SkinSkada()
 	end)
 
 	hooksecurefunc(Skada, 'CreateWindow', function()
-		if AS:CheckOption('EmbedSkada') then
+		if AS:CheckEmbed('Skada') then
 			AS:Embed_Skada()
 		end
 	end)
 	hooksecurefunc(Skada, 'DeleteWindow', function()
-		if AS:CheckOption('EmbedSkada') then
+		if AS:CheckEmbed('Skada') then
 			AS:Embed_Skada()
 		end
 	end)
 	hooksecurefunc(Skada, 'UpdateDisplay', function()
-		if AS:CheckOption('EmbedSkada') and not InCombatLockdown() then
+		if AS:CheckEmbed('Skada') and not InCombatLockdown() then
 			AS:Embed_Skada()
 		end
 	end)

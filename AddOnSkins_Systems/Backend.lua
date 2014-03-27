@@ -5,13 +5,10 @@ local tinsert, pairs, ipairs, unpack, select, pcall = tinsert, pairs, ipairs, un
 local GetAddOnInfo = GetAddOnInfo
 
 AddOnSkins_Options = {
-	['EmbedCoolLine'] = false,
+-- Embeds
 	['EmbedOoC'] = false, 
-	['EmbedOmen'] = false, 
-	['EmbedRecount'] = false, 
+	['EmbedCoolLine'] = false,
 	['EmbedSexyCooldown'] = false,
-	['EmbedSkada'] = false, 
-	['EmbedTinyDPS'] = false,
 	['EmbedSystem'] = false,
 	['EmbedSystemDual'] = false,
 	['EmbedMain'] = 'Skada',
@@ -19,21 +16,20 @@ AddOnSkins_Options = {
 	['EmbedRight'] = 'Skada',
 	['EmbedLeftWidth'] = 200,
 	['EmbedBelowTop'] = false,
+	['TransparentEmbed'] = false,
+-- Misc
 	['RecountBackdrop'] = true,
 	['SkadaBackdrop'] = true,
 	['OmenBackdrop'] = true,
-	['TransparentEmbed'] = false,
 	['MiscFixes'] = true,
 	['DBMSkinHalf'] = false,
 	['DBMFont'] = 'Tukui',
 	['DBMFontSize'] = 12,
 	['DBMFontFlag'] = 'OUTLINE',
-	['ParchmentRemover'] = false,
 	['EmbedLeftChat'] = false,
 	['WeakAuraAuraBar'] = false,
 	['WeakAuraIconCooldown'] = true,
 	['AuctionHouse'] = true,
-	['IntegrateMyRolePlayTooltip'] = true,
 }
 
 AS.skins = {}

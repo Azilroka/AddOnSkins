@@ -137,7 +137,6 @@ function AS:Ace3Options()
 		name = 'Embed Settings',
 		get = function(info) return AS:CheckOption(info[#info]) end,
 		set = function(info, value) AS:SetOption(info[#info], value) AS:Embed_Check() end,
-		guiInline = false,
 		args = {
 			desc = {
 				type = 'description',
@@ -218,19 +217,19 @@ function AS:Ace3Options()
 				type = 'toggle',
 				name = 'Recount Backdrop',
 				order = 13,
-				disabled = function() return not AS:CheckOption('RecountSkin', 'Recount') end
+				disabled = function() return not (AS:CheckOption('RecountSkin', 'Recount') and AS:CheckEmbed('Recount')) end
 			},
 			SkadaBackdrop = {
 				type = 'toggle',
 				name = 'Skada Backdrop',
 				order = 14,
-				disabled = function() return not AS:CheckOption('SkadaSkin', 'Skada') end
+				disabled = function() return not (AS:CheckOption('SkadaSkin', 'Skada') and AS:CheckEmbed('Skada')) end
 			},
 			OmenBackdrop = {
 				type = 'toggle',
 				name = 'Omen Backdrop',
 				order = 15,
-				disabled = function() return not AS:CheckOption('OmenSkin', 'Omen') end
+				disabled = function() return not (AS:CheckOption('OmenSkin', 'Omen') and AS:CheckEmbed('Omen')) end
 			},
 		}
 	}

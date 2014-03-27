@@ -7,7 +7,7 @@ function AS:SkinTinyDPS()
 	AS:SkinFrame(tdpsFrame)
 
 	tdpsFrame:HookScript('OnShow', function()
-		if AS:CheckOption('EmbedTinyDPS') then
+		if AS:CheckEmbed('TinyDPS') then
 			EmbedSystem_MainWindow:Show()
 		end
 	end)
