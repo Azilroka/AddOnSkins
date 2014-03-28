@@ -10,8 +10,6 @@ function AS:CreateEmbedSystem()
 		EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
 		EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
 
-		AS.SkadaWindows = {}
-
 		self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
 		self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
 
@@ -239,7 +237,7 @@ function AS:Embed_alDamageMeter()
 end
 
 function AS:Embed_Skada()
-	wipe(AS.SkadaWindows)
+	AS.SkadaWindows = {}
 	for k, window in pairs(Skada:GetWindows()) do
 		tinsert(AS.SkadaWindows, window)
 	end

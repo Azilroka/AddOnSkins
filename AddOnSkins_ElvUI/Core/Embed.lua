@@ -25,8 +25,6 @@ function AS:CreateEmbedSystem()
 		EmbedSystem_MainWindow:SetScript('OnShow', AS.Embed_Show)
 		EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
 
-		AS.SkadaWindows = {}
-
 		hooksecurefunc(RightChatPanel, 'SetSize', function()
 			if ChatHeight ~= E.db.chat.panelHeight or ChatWidth ~= E.db.chat.panelWidth then
 				ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
@@ -327,7 +325,7 @@ function AS:Embed_alDamageMeter()
 end
 
 function AS:Embed_Skada()
-	wipe(AS.SkadaWindows)
+	AS.SkadaWindows = {}
 	for k, window in pairs(Skada:GetWindows()) do
 		tinsert(AS.SkadaWindows, window)
 	end
