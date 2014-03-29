@@ -1,8 +1,0 @@
-## Interface: 50400
-## Title: |cFFC495DDShestakUI|r |cFFFFFFFFAddOnSkins|r
-## Version: 2.04
-## Author: Azilroka, Sortokk
-## RequiredDeps: Enhanced_Config, ShestakUI
-## SavedVariables: UISkinOptions
-
-Load_AddOnSkins.xml

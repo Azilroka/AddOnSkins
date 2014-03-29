@@ -1,4 +1,0 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file="Calendar.lua"/>
-	<Script file="WorldStateCaptureBar.lua"/>
-</Ui>
