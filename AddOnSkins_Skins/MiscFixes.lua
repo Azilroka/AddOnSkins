@@ -2,7 +2,7 @@ local AS = unpack(AddOnSkins)
 
 local name = 'MiscFixes'
 function AS:MiscFixes(event, addon)
-	if event == 'PLAYER_ENTERING_WORLD' then
+	if event == 'PLAYER_LOGIN' then
 		for i = 1, 4 do
 			_G['StaticPopup'..i]:SetTemplate('Transparent')
 			AS:SkinButton(_G['StaticPopup'..i..'Button1'])
@@ -70,8 +70,10 @@ function AS:MiscFixes(event, addon)
 			BrowseNextPageButton:Size(20)
 			BrowsePrevPageButton:Size(20)
 		end
-		for i = 1, AuctionFrame.numTabs do
-			AS:SkinTab(_G['AuctionFrameTab'..i])
+		if not AS:CheckAddOn('ElvUI') or ElvUI[1].private.skins.blizzard.enable == true and ElvUI[1].private.skins.blizzard.auctionhouse == true then
+			for i = 1, AuctionFrame.numTabs do
+				AS:SkinTab(_G['AuctionFrameTab'..i])
+			end
 		end
 		AS:UnregisterEvent(name, event)
 	end

@@ -4,7 +4,7 @@ if not AS:CheckAddOn('CLCInfo') then return end
 
 local name = 'CLCInfoSkin'
 function AS:SkinCLCInfo(event, addon)
-	if event == 'PLAYER_ENTERING_WORLD' then
+	if event == 'PLAYER_LOGIN' then
 		local function ApplyIconSkin(self)
 			local Font, FontSize = NumberFontNormal:GetFont()
 			local xScale = self.db.width / 36

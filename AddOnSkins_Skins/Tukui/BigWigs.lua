@@ -5,7 +5,7 @@ if not AS:CheckAddOn('BigWigs') then return end
 local Loaded
 local name = 'BigWigsSkin'
 function AS:SkinBigWigs(event, addon)
-	if event == 'LFG_PROPOSAL_SHOW' or event == 'PLAYER_ENTERING_WORLD' then
+	if event == 'LFG_PROPOSAL_SHOW' or event == 'PLAYER_LOGIN' then
 		if LFGDungeonReadyPopup then
 			LFGDungeonReadyPopup:HookScript('OnUpdate', function(self)
 				for i = 1, self:GetNumChildren() do

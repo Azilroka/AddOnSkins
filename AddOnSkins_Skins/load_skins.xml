@@ -57,6 +57,7 @@
 	<Script file="FlightMap.lua"/>
 	<Script file="FlightMapEnhanced.lua"/>
 	<Script file="FlyoutButtonCustom.lua"/>
+	<Script file="GCGambler.lua"/>
 	<Script file="Grinder.lua"/>
 	<Script file="GryphonHeartItems.lua"/>
 	<Script file="GuildMemberInfo_TradeSkills.lua"/>

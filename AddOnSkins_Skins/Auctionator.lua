@@ -8,7 +8,7 @@ function AS:SkinAuctionator(event)
 		TradeSkillFrame:HookScript('OnShow', function() AS:SkinButton(Auctionator_Search, true) end)
 		AS:UnregisterEvent(name, event)
 	end
-	if event == 'PLAYER_ENTERING_WORLD' then return end
+	if event == 'PLAYER_LOGIN' then return end
 	if event == 'AUCTION_HOUSE_SHOW' then
 		AS:SkinFrame(Atr_BasicOptionsFrame)
 		AS:SkinFrame(Atr_TooltipsOptionsFrame)

@@ -4,7 +4,7 @@ if not AS:CheckAddOn('Auc-Advanced') then return end
 
 local name = 'AuctioneerSkin'
 function AS:SkinAuctioneer(event)
-	if event == 'PLAYER_ENTERING_WORLD' then return end
+	if event == 'PLAYER_LOGIN' then return end
 	if IsAddOnLoaded('Auc-Stat-Purchased') then
 		BrowsePrevPageButton:Point('BOTTOMRIGHT', BrowseScrollFrame, 'BOTTOMRIGHT', -160, 0)
 		local a, b, c, d, e = BrowseNextPageButton:GetPoint()

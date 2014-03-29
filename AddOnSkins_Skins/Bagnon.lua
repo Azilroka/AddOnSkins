@@ -4,7 +4,7 @@ if not AS:CheckAddOn('Bagnon') then return end
 
 local name = 'BagnonSkin'
 function AS:SkinBagnon(event, addon)
-	if event == 'PLAYER_ENTERING_WORLD' then
+	if event == 'PLAYER_LOGIN' then
 		ToggleBackpack()
 		if BagnonFrameinventory then
 			AS:SkinFrame(BagnonFrameinventory)

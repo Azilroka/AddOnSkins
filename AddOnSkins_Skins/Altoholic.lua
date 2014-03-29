@@ -13,7 +13,7 @@ function AS:SkinAltoholic(event, addon)
 		end
 	end
 
-	if event == "PLAYER_ENTERING_WORLD" then
+	if event == "PLAYER_LOGIN" then
 		AS:SkinTooltip(AltoTooltip)
 		AltoholicFramePortrait:Kill()
 		AS:SkinFrame(AltoholicFrame)

@@ -4,7 +4,7 @@ if not AS:CheckAddOn('DBM-Core') then return end
 
 local name = 'DBMSkin'
 function AS:SkinDBM(event, addon)
-	if event == 'PLAYER_ENTERING_WORLD' then
+	if event == 'PLAYER_LOGIN' then
 		local croprwicons = true
 		local buttonsize = 22
 		local function SkinBars(self)

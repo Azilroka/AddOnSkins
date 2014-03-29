@@ -18,7 +18,7 @@ function AS:SkinAdiBags(event)
 		end
 	end
 
-	if event == 'PLAYER_ENTERING_WORLD' then
+	if event == 'PLAYER_LOGIN' then
 		AS:Delay(1, function()
 			if not AdiBagsContainer1 then ToggleBackpack() ToggleBackpack() end
 			if AdiBagsContainer1 then
