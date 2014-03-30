@@ -11,9 +11,11 @@ function AS:SkinPostal(event, addon)
 
 	for i = 1, INBOXITEMS_TO_DISPLAY do
 		local b = _G['MailItem'..i..'ExpireTime']
-		b:SetPoint('TOPRIGHT', 'MailItem'..i, 'TOPRIGHT', -5, -10)
-		if b.returnicon then
-			b.returnicon:SetPoint('TOPRIGHT', b, 'TOPRIGHT', 20, 0)
+		if b then
+			b:SetPoint('TOPRIGHT', 'MailItem'..i, 'TOPRIGHT', -5, -10)
+			if b.returnicon then
+				b.returnicon:SetPoint('TOPRIGHT', b, 'TOPRIGHT', 20, 0)
+			end
 		end
 		if _G['PostalInboxCB'..i] then
 			AS:SkinCheckBox(_G['PostalInboxCB'..i])
