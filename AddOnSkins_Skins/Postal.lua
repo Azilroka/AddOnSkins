@@ -4,7 +4,7 @@ if not AS:CheckAddOn('Postal') then return end
 
 local name = 'PostalSkin'
 function AS:SkinPostal(event, addon)
-	if event == 'PLAYER_LOGIN' then return end
+	if event == 'PLAYER_ENTERING_WORLD' then return end
 
 	InboxPrevPageButton:Point('CENTER', InboxFrame, 'BOTTOMLEFT', 45, 112)
 	InboxNextPageButton:Point('CENTER', InboxFrame, 'BOTTOMLEFT', 295, 112)

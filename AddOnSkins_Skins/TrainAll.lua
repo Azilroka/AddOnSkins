@@ -9,7 +9,7 @@ function AS:SkinTrainAll(event, addon)
 			AS:SkinFrame(ClassTrainerTrainAllButton, 'Default')
 			AS:SkinFrame(ClassTrainerTrainButton, 'Default')
 		end)
-		AS:UnregisterEvent(name, event)
+		AS:UnregisterSkinEvent(name, event)
 	end
 end
 

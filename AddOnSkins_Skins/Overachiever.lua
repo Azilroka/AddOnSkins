@@ -144,7 +144,7 @@ function AS:SkinOverachiever(event, addon)
 		skinAchievementButtons(scrollFrame)
 	end
 
-	AS:UnregisterEvent(name, event)
+	AS:UnregisterSkinEvent(name, event)
 end
 
 AS:RegisterSkin(name, AS.SkinOverachiever, "ADDON_LOADED")

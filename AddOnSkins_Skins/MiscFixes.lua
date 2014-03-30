@@ -2,7 +2,7 @@ local AS = unpack(AddOnSkins)
 
 local name = 'MiscFixes'
 function AS:MiscFixes(event, addon)
-	if event == 'PLAYER_LOGIN' then
+	if event == 'PLAYER_ENTERING_WORLD' then
 		for i = 1, 4 do
 			_G['StaticPopup'..i]:SetTemplate('Transparent')
 			AS:SkinButton(_G['StaticPopup'..i..'Button1'])
@@ -75,7 +75,7 @@ function AS:MiscFixes(event, addon)
 				AS:SkinTab(_G['AuctionFrameTab'..i])
 			end
 		end
-		AS:UnregisterEvent(name, event)
+		AS:UnregisterSkinEvent(name, event)
 	end
 end
 

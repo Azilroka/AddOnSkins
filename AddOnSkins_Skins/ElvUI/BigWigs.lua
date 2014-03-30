@@ -5,7 +5,7 @@ if not AS:CheckAddOn('BigWigs') then return end
 local Loaded
 local name = "BigWigsSkin"
 function AS:SkinBigWigs(event, addon)
-	if event == 'LFG_PROPOSAL_SHOW' or event == 'PLAYER_LOGIN' then
+	if event == 'LFG_PROPOSAL_SHOW' or event == 'PLAYER_ENTERING_WORLD' then
 		if LFGDungeonReadyPopup then
 			LFGDungeonReadyPopup:HookScript('OnUpdate', function(self)
 				for i = 1, self:GetNumChildren() do
@@ -19,7 +19,7 @@ function AS:SkinBigWigs(event, addon)
 					end
 				end
 			end)
-			AS:UnregisterEvent(name, event)
+			AS:UnregisterSkinEvent(name, event)
 		end
 	end
 
@@ -143,8 +143,8 @@ function AS:SkinBigWigs(event, addon)
 			GetStyleName = function() return "ElvUI" end,
 		})
 		BigWigsBars:SetBarStyle("ElvUI")
-		AS:UnregisterEvent(name, "ADDON_LOADED")
-		AS:UnregisterEvent(name, "PLAYER_LOGIN")
+		AS:UnregisterSkinEvent(name, "ADDON_LOADED")
+		AS:UnregisterSkinEvent(name, "PLAYER_ENTERING_WORLD")
 	end
 end
 

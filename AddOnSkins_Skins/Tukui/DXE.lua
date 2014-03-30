@@ -4,7 +4,7 @@ if not AS:CheckAddOn('DXE') then return end
 
 local name = 'DXESkin'
 function AS:SkinDXE(event, addon)
-	if event == 'PLAYER_LOGIN' then return end
+	if event == 'PLAYER_ENTERING_WORLD' then return end
 	if addon ~= 'DXE' then return end
 	DXE.NotifyBarTextureChanged = AS.Noop
 	DXE.NotifyBorderChanged = AS.Noop

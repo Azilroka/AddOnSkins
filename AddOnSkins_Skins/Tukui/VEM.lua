@@ -4,7 +4,7 @@ if not AS:CheckAddOn('VEM-Core') then return end
 
 local name = 'VEMSkin'
 function AS:SkinVEM(event, addon)
-	if event == 'PLAYER_LOGIN' then
+	if event == 'PLAYER_ENTERING_WORLD' then
 		local croprwicons = true
 		local buttonsize = 22
 		local function SkinBars(self)
@@ -198,7 +198,7 @@ function AS:SkinVEM(event, addon)
 		AS:SkinButton(VEM_GUI_OptionsFrameOkay, true)
 		AS:SkinButton(VEM_GUI_OptionsFrameWebsiteButton, true)
 		AS:SkinScrollBar(VEM_GUI_OptionsFramePanelContainerFOVScrollBar)
-		AS:UnregisterEvent(name, event)
+		AS:UnregisterSkinEvent(name, event)
 	end
 end
 

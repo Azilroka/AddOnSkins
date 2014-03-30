@@ -187,7 +187,7 @@ function AS:CallSkin(skin, func, event, ...)
 	end
 end
 
-function AS:UnregisterEvent(skinName, event)
+function AS:UnregisterSkinEvent(skinName, event)
 	if not self.events[event] then return end
 	if not self.events[event][skinName] then return end
 	self.events[event][skinName] = nil
@@ -204,6 +204,16 @@ function AS:UnregisterEvent(skinName, event)
 end
 
 function AS:StartSkinning(event)
+	if self.enteredworld then return end
+	self.enteredworld = true
+
+	for skin, alldata in pairs(AS.register) do
+		for _, data in pairs(alldata) do
+			if AS:CheckOption(skin) == nil then AS:EnableOption(skin) end
+			AS:RegisteredSkin(skin, data.priority, data.func, data.events)
+		end
+	end
+
 	for skin, funcs in pairs(self.skins) do
 		if self:CheckOption(skin) then
 			for _, func in ipairs(funcs) do
@@ -215,20 +225,14 @@ function AS:StartSkinning(event)
 	self:EmbedInit()
 	self:Ace3Options()
 	self:Print(format("by |cFFFF7D0AAzilroka|r - Version: |cFF1784D1%s|r Loaded!", self.Version))
+	self:UnregisterEvent(event)
 end
 
 function AS:Init(event, addon)
 	if addon == AddOnName then
-		for skin, alldata in pairs(AS.register) do
-			for _, data in pairs(alldata) do
-				if AS:CheckOption(skin) == nil then AS:EnableOption(skin) end
-				AS:RegisteredSkin(skin, data.priority, data.func, data.events)
-			end
-		end
-
 		self:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 		self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
-		self:RegisterEvent('PLAYER_LOGIN', 'StartSkinning')
+		self:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
 		self:UnregisterEvent(event)
 	end
 end

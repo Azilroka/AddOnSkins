@@ -164,6 +164,7 @@ function AS:Embed_Check(Message)
 		Message = true
 	end
 	AS:Embed_Toggle(Message)
+	AS:EmbedSystem_WindowResize()
 	if not UnitAffectingCombat('player') then
 		if AS:CheckOption('EmbedOoC') then
 			AS:Embed_Hide()
@@ -176,7 +177,6 @@ function AS:Embed_Check(Message)
 	if AS:CheckEmbed('TinyDPS') then AS:Embed_TinyDPS() end
 	if AS:CheckEmbed('Recount') then AS:Embed_Recount() end
 	if AS:CheckEmbed('alDamageMeter') then AS:Embed_alDamageMeter() end
-	AS:EmbedSystem_WindowResize()
 end
 
 function AS:Embed_Toggle(Message)

@@ -177,7 +177,7 @@ function AS:CallSkin(skin, func, event, ...)
 	end
 end
 
-function AS:UnregisterEvent(skinName, event)
+function AS:UnregisterSkinEvent(skinName, event)
 	if not self.events[event] then return end
 	if not self.events[event][skinName] then return end
 
@@ -206,8 +206,12 @@ function AS:UpdateMedia()
 end
 
 function AS:StartSkinning(event)
+	if self.enteredworld then return end
+	self.enteredworld = true
+
 	E:GetModule('DataTexts'):RegisterLDB()
 	E:GetModule('DataTexts'):LoadDataTexts()
+	E:UpdateMedia()
 
 	for skin, alldata in pairs(self.register) do
 		for _, data in pairs(alldata) do
@@ -224,6 +228,7 @@ function AS:StartSkinning(event)
 	end
 
 	AS:EmbedInit()
+	self:UnregisterEvent(event)
 end
 
 function AS:Initialize()
@@ -247,7 +252,7 @@ function AS:Initialize()
 	self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
 	self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
 	self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
-	self:RegisterEvent('PLAYER_LOGIN', 'StartSkinning')
+	self:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
 end
 
 function AS:SkinButton(...)
