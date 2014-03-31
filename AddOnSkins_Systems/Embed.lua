@@ -9,6 +9,7 @@ function AS:CreateEmbedSystem()
 		EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
 		EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
 		EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
+		AS:EmbedSystem_WindowResize()
 
 		self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
 		self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')

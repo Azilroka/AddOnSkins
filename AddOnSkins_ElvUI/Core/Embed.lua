@@ -21,6 +21,7 @@ function AS:CreateEmbedSystem()
 		EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
 		EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
 		EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
+		AS:EmbedSystem_WindowResize()
 
 		EmbedSystem_MainWindow:SetScript('OnShow', AS.Embed_Show)
 		EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
@@ -28,7 +29,6 @@ function AS:CreateEmbedSystem()
 		hooksecurefunc(RightChatPanel, 'SetSize', function()
 			if ChatHeight ~= E.db.chat.panelHeight or ChatWidth ~= E.db.chat.panelWidth then
 				ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
-				AS:EmbedSystem_WindowResize()
 				AS:Embed_Check()
 			end
 		end)
