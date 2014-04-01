@@ -8,6 +8,8 @@ LSM:Register('font', 'PT Sans Narrow Bold', [[Interface\AddOns\ElvUI\media\fonts
 local tinsert, pairs, ipairs, unpack, pcall, select, type = tinsert, pairs, ipairs, unpack, pcall, select, type
 local format, gsub, strfind, strmatch, floor = format, gsub, strfind, strmatch, floor
 local GetAddOnInfo = GetAddOnInfo
+local FoundError = false
+local Debug = false
 
 AddOnSkins = {}
 AddOnSkins[1] = AS
@@ -169,11 +171,14 @@ end
 function AS:CallSkin(skin, func, event, ...)
 	local pass, error = pcall(func, self, event, ...)
 	if not pass then
-		local message = '%s: |cffff0000There was an error in the|r |cff0affff%s|r |cffff0000skin|r.  Please report this to Azilroka immediately @ %s'
+		local message = '%s: |cffff0000There was an error in the|r |cff0affff%s|r |cffff0000skin|r.'
 		local errormessage = '%s Error: %s'
 		local skin = gsub(skin, 'Skin', '')
-		AS:Print(format(message, AS.Version, skin, AS:PrintURL(AS.TicketTracker)))
-		AS:Print(format(errormessage, skin, error))
+		AS:Print(format(message, AS.Version, skin))
+		FoundError = true
+		if Debug then
+			AS:Print(format(errormessage, skin, error))
+		end
 	end
 end
 
@@ -225,6 +230,14 @@ function AS:StartSkinning(event)
 				self:CallSkin(skin, func, event)
 			end
 		end
+	end
+
+	if FoundError then
+		AS:Print(format('%s: ElvUI Version %s', AS.Version, GetAddOnMetadata('ElvUI', 'Version')))
+		if AS.SLE then
+			AS:Print(format('%s: ElvUI S&L Version %s', AS.Version, GetAddOnMetadata('ElvUI_SLE', 'Version')))
+		end
+		AS:Print(format('%s: Please report this to Azilroka immediately @ %s', AS.Version, AS:PrintURL(AS.TicketTracker)))
 	end
 
 	AS:EmbedInit()

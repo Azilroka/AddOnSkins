@@ -3,6 +3,8 @@ local AddOnName = ...
 local format, gsub, strmatch, strfind, floor = format, gsub, strmatch, strfind, floor
 local tinsert, pairs, ipairs, unpack, select, pcall = tinsert, pairs, ipairs, unpack, select, pcall
 local GetAddOnInfo = GetAddOnInfo
+local FoundError = false
+local Debug = false
 
 AddOnSkins_Options = {
 -- Embeds
@@ -179,11 +181,14 @@ end
 function AS:CallSkin(skin, func, event, ...)
 	local pass, error = pcall(func, self, event, ...)
 	if not pass then
-		local message = '%s %s: |cfFFF0000There was an error in the|r |cff0AFFFF%s|r |cffFF0000skin|r.  Please report this to Azilroka immediately @ %s'
+		local message = '%s %s: |cfFFF0000There was an error in the|r |cff0AFFFF%s|r |cffFF0000skin|r.'
 		local errormessage = '%s Error: %s'
 		local Skin = gsub(skin, 'Skin', '')
-		print(format(message, AS.Title, AS.Version, Skin, AS:PrintURL(AS.TicketTracker)))
-		print(format(errormessage, Skin, error))
+		print(format(message, AS.Title, AS.Version, Skin))
+		FoundError = true
+		if Debug then
+			print(format(errormessage, Skin, error))
+		end
 	end
 end
 
@@ -220,6 +225,12 @@ function AS:StartSkinning(event)
 				self:CallSkin(skin, func, event)
 			end
 		end
+	end
+
+	if FoundError then
+		local UI = gsub(tostring(AddOnName), 'AddOnSkins_', '')
+		AS:Print(format('%s: %s Version %s', AS.Version, UI, GetAddOnMetadata(UI, 'Version')))
+		AS:Print(format('%s: Please report this to Azilroka immediately @ %s', AS.Version, AS:PrintURL(AS.TicketTracker)))
 	end
 
 	self:EmbedInit()

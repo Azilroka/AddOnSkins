@@ -13,6 +13,7 @@ local Frame = CreateFrame('Frame')
 Frame:Hide()
 Frame:SetTemplate()
 
+AddOn.DownloadLink = 'http://www.tukui.org/addons/index.php?act=view&id=221'
 AddOn.LSM = LibStub('LibSharedMedia-3.0')
 AddOn.Blank = AddOn.LSM:Fetch('background', 'Solid')
 AddOn.NormTex = AddOn.LSM:Fetch('statusbar', 'Duffed')
