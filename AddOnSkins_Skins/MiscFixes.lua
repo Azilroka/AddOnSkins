@@ -36,6 +36,7 @@ function AS:MiscFixes(event, addon)
 			end
 		end)
 
+		--[[ -- RAF Reward Frame
 		AS:SkinFrame(ProductChoiceFrame)
 		ProductChoiceFrame.Inset:StripTextures()
 		AS:SkinButton(ProductChoiceFrame.Inset.ClaimButton)
@@ -45,6 +46,7 @@ function AS:MiscFixes(event, addon)
 				self.Inset.Buttons[i]:StripTextures()
 			end
 		end)
+		]]
 	end
 	if event == 'AUCTION_HOUSE_SHOW' then
 		if not AS:CheckAddOn('ElvUI') or ElvUI[1].private.skins.blizzard.enable == true and ElvUI[1].private.skins.blizzard.auctionhouse == true then

@@ -303,19 +303,26 @@ function AS:Ace3Options()
 				get = function(info) return AS.DownloadLink end,
 				order = 2,
 			},
+			changeloglink = {
+				type = 'input',
+				width = 'full',
+				name = 'Changelog Link',
+				get = function(info) return 'http://www.tukui.org/forums/topic.php?id=30607' end,
+				order = 3,
+			},
 			gitlablink = {
 				type = 'input',
 				width = 'full',
 				name = 'GitLab Link / Report Errors',
 				get = function(info) return 'http://git.tukui.org/Azilroka/addonskins' end,
-				order = 3,
+				order = 4,
 			},
 			skinlink = {
 				type = 'input',
 				width = 'full',
 				name = 'Available Skins / Skin Requests',
 				get = function(info) return 'http://www.tukui.org/forums/topic.php?id=28550' end,
-				order = 3,
+				order = 5,
 			},
 		},
 	}
