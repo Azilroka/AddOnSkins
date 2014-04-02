@@ -4,7 +4,6 @@
 	<Script file="Coolline.lua"/>
 	<Script file="DBM.lua"/>
 	<Script file="DXE.lua"/>
-	<Script file="MyRolePlay.lua"/>
 	<Script file="SexyCooldown.lua"/>
 	<Script file="VEM.lua"/>
 </Ui>
