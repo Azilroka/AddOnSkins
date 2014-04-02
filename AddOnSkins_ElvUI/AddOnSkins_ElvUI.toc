@@ -1,6 +1,6 @@
 ## Interface: 50400
 ## Title: |cff1784d1ElvUI |r|cffFFFFFFAddOnSkins|r
-## Version: 2.17
+## Version: 2.18
 ## Author: Azilroka, Sortokk
 ## RequiredDep: ElvUI
 ## OptionalDep: DSM
