@@ -16,19 +16,22 @@ function AS:SkinPetTracker()
 		local Button = select(i, PetTrackerMapFilterSuggestions:GetChildren())
 		Button:SetFrameLevel(PetTrackerMapFilterSuggestions:GetFrameLevel() + 1)
 	end
+
 	WorldMapShowDropDownButton:HookScript('OnClick', function()
+		SushiDropdownFrame1:ClearAllPoints()
+		SushiDropdownFrame1:SetPoint('BOTTOMRIGHT', WorldMapShowDropDownButton, 'TOPRIGHT', 0, 4)
 		if SushiDropdownFrame1.IsDone then return end
 		for i = 1, SushiDropdownFrame1:GetNumChildren() do
 			local Region = select(i, SushiDropdownFrame1:GetChildren())
 			if Region:IsObjectType('Frame') then
-				Region:StripTextures()
-				SushiDropdownFrame1:ClearAllPoints()
-				SushiDropdownFrame1:SetPoint('BOTTOMRIGHT', WorldMapShowDropDownButton, 'TOPRIGHT', 0, 4)
-				SushiDropdownFrame1:CreateBackdrop('Transparent')
+				Region:SetBackdrop(nil)
+				Region.SetBackdrop = AS.Noop
+				SushiDropdownFrame1:CreateBackdrop()
 				SushiDropdownFrame1.IsDone = true
 			end
 		end
 	end)
+
 	for i = 1, 6 do
         local button = _G["PetTrackerAbilityAction"..i]
         if button then

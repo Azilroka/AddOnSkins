@@ -8,36 +8,21 @@ function AS:SkinMogIt()
 	MogItFrameInset:StripTextures(true)
 	AS:SkinFrame(MogItFilters)
 	MogItFiltersInset:StripTextures(true)
+
 	local function SkinMogItPreview()
 		for i = 1, 99 do
-			local MogItGearSlots = {
-				'HeadSlot',
-				'ShoulderSlot',
-				'BackSlot',
-				'ChestSlot',
-				'ShirtSlot',
-				'TabardSlot',
-				'WristSlot',
-				'HandsSlot',
-				'WaistSlot',
-				'LegsSlot',
-				'FeetSlot',
-				'MainHandSlot',
-				'SecondaryHandSlot',
-			}
-
-			for _, object in pairs(MogItGearSlots) do
-				if _G['MogItPreview'..i..object] then
-					AS:SkinIconButton(_G['MogItPreview'..i..object])
-					_G['MogItPreview'..i..object]:SetPushedTexture(nil)
-					_G['MogItPreview'..i..object]:SetHighlightTexture(nil)
+			if _G['MogItPreview'..i] and not _G['MogItPreview'..i].isSkinned then
+				for _, object in pairs(_G['MogItPreview'..i].slots) do
+					AS:SkinIconButton(object)
+					object:StyleButton()
 				end
-			end
 
-			if _G['MogItPreview'..i] then AS:SkinFrame(_G['MogItPreview'..i]) end
-			if _G['MogItPreview'..i..'CloseButton'] then AS:SkinCloseButton(_G['MogItPreview'..i..'CloseButton']) end
-			if _G['MogItPreview'..i..'Inset'] then _G['MogItPreview'..i..'Inset']:StripTextures(true) end
-			if _G['MogItPreview'..i..'Activate'] then AS:SkinButton(_G['MogItPreview'..i..'Activate'], true) end
+				if _G['MogItPreview'..i] then AS:SkinFrame(_G['MogItPreview'..i]) end
+				if _G['MogItPreview'..i..'CloseButton'] then AS:SkinCloseButton(_G['MogItPreview'..i..'CloseButton']) end
+				if _G['MogItPreview'..i..'Inset'] then _G['MogItPreview'..i..'Inset']:StripTextures(true) end
+				if _G['MogItPreview'..i..'Activate'] then AS:SkinButton(_G['MogItPreview'..i..'Activate'], true) end
+				_G['MogItPreview'..i].isSkinned = true
+			end
 		end
 	end
 

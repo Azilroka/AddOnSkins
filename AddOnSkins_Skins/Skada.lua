@@ -43,7 +43,7 @@ function AS:SkinSkada()
 	end)
 
 	hooksecurefunc(Skada, 'ToggleWindow', function()
-		if not AS:CheckEmbed('Skada') then return end
+		if not (AS:CheckEmbed('Skada') and AS.EmbedSystemCreated) then return end
 		for i, win in ipairs(Skada:GetWindows()) do
 			if win:IsShown() then
 				EmbedSystem_MainWindow:Show()
