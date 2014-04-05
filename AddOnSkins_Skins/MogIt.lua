@@ -14,7 +14,6 @@ function AS:SkinMogIt()
 			if _G['MogItPreview'..i] and not _G['MogItPreview'..i].isSkinned then
 				for _, object in pairs(_G['MogItPreview'..i].slots) do
 					AS:SkinIconButton(object)
-					object:StyleButton()
 				end
 
 				if _G['MogItPreview'..i] then AS:SkinFrame(_G['MogItPreview'..i]) end
