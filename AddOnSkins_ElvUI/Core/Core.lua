@@ -263,8 +263,6 @@ function AS:Initialize()
 
 	self:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 	self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
-	self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
-	self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
 	self:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
 end
 

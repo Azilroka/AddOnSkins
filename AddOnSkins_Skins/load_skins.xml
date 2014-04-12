@@ -39,6 +39,7 @@
 	<Script file="CLCRet.lua"/>
 	<Script file="Clique.lua"/>
 	<Script file="CombustionHelper.lua"/>
+	<Script file="Coolline.lua"/>
 	<Script file="Cork.lua"/>
 	<Script file="Critline.lua"/>
 	<Script file="DailyTamerCheck.lua"/>

@@ -13,7 +13,13 @@ function AS:SkinMogIt()
 		for i = 1, 99 do
 			if _G['MogItPreview'..i] and not _G['MogItPreview'..i].isSkinned then
 				for _, object in pairs(_G['MogItPreview'..i].slots) do
-					AS:SkinIconButton(object)
+					object:CreateBackdrop()
+					local Backdrop = object.backdrop or object.Backdrop
+					object.icon:ClearAllPoints()
+					AS:SkinTexture(object.icon)
+					object.icon:SetInside(Backdrop)
+					object:SetNormalTexture(nil)
+					object:StyleButton()
 				end
 
 				if _G['MogItPreview'..i] then AS:SkinFrame(_G['MogItPreview'..i]) end
@@ -26,6 +32,7 @@ function AS:SkinMogIt()
 	end
 
 	hooksecurefunc(MogIt, 'CreatePreview', SkinMogItPreview)
+	SkinMogItPreview()
 	AS:SkinTooltip(MogItTooltip)
 	AS:SkinCloseButton(MogItFrameCloseButton)
 	AS:SkinCloseButton(MogItFiltersCloseButton)

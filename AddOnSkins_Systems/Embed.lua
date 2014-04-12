@@ -95,6 +95,7 @@ function AS:Embed_Check(Message)
 	if AS:CheckEmbed('TinyDPS') then AS:Embed_TinyDPS() end
 	if AS:CheckEmbed('Recount') then AS:Embed_Recount() end
 	if AS:CheckEmbed('alDamageMeter') then AS:Embed_alDamageMeter() end
+	if AS:CheckOption('EmbedCoolLine') then AS:Embed_CoolLine() end
 end
 
 function AS:Embed_Toggle(Message)
@@ -148,138 +149,183 @@ function AS:Embed_Toggle(Message)
 	end
 end
 
-function AS:Embed_Recount()
-	local EmbedParent = EmbedSystem_MainWindow
-	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Recount' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = "Recount_MainWindow"
-
-	Recount_MainWindow:SetParent(EmbedParent)
-	Recount_MainWindow:ClearAllPoints()
-	Recount_MainWindow:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 6)
-	Recount_MainWindow:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
-	if Recount.MainWindow.backdrop then Recount.MainWindow.backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default') end
-	if not AS:CheckOption('RecountBackdrop') then Recount.MainWindow.backdrop:Hide() end
-
-	Recount.db.profile.Locked = true
-	Recount.db.profile.Scaling = 1
-	Recount.db.profile.ClampToScreen = true
-	Recount.db.profile.FrameStrata = '2-LOW'
-	Recount:SetStrataAndClamp()
-	Recount:LockWindows(true)
-	Recount:ResizeMainWindow()
-end
-
-function AS:Embed_Omen()
-	local EmbedParent = EmbedSystem_MainWindow
-	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Omen' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = "OmenAnchor"
-
-	AS:SkinTitleBar(OmenTitle, 'Default')
-	AS:SkinFrame(OmenBarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-	if not AS:CheckOption('OmenBackdrop') then OmenBarList:StripTextures() end
-
-	local db = Omen.db
-	db.profile.Scale = 1
-	db.profile.Bar.Spacing = 1
-	db.profile.Background.EdgeSize = 2
-	db.profile.Background.BarInset = 2
-	db.profile.TitleBar.UseSameBG = true
-	db.profile.ShowWith.UseShowWith = false
-	db.profile.Locked = true
-	db.profile.TitleBar.ShowTitleBar = true
-	db.profile.FrameStrata = '2-LOW'
-	Omen:OnProfileChanged(nil, db)
-
-	OmenAnchor:SetParent(EmbedParent)
-	OmenAnchor:ClearAllPoints()
-	OmenAnchor:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
-	OmenAnchor:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
-	local Backdrop = OmenAnchor.backdrop or OmenAnchor.Backdrop
-	if not Backdrop then
-		OmenAnchor:CreateBackdrop()
-		Backdrop = OmenAnchor.backdrop or OmenAnchor.Backdrop
-		Backdrop:SetOutside(OmenAnchor, 0, 0)
-	end
-end
-
-function AS:Embed_TinyDPS()
-	local EmbedParent = EmbedSystem_MainWindow
-	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'TinyDPS' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = "tdpsFrame"
-
-	AS:SkinFrame(tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-	tdpsFrame:SetParent(EmbedParent)
-	tdpsFrame:SetFrameStrata('LOW')
-	tdpsAnchor:ClearAllPoints()
-	tdpsAnchor:Point('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
-	tdpsAnchor:Point('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
-
-	tdps.hideOOC = false
-	tdps.hideIC = false
-	tdps.hideSolo = false
-	tdps.hidePvP = false
-	tdpsRefresh()
-end
-
-function AS:Embed_alDamageMeter()
-	local EmbedParent = EmbedSystem_MainWindow
-	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'alDamageMeter' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = "alDamageMeterFrame"
-
-	dmconf.barheight = floor((EmbedParent:GetHeight() / dmconf.maxbars) - dmconf.spacing)
-	dmconf.width = EmbedParent:GetWidth()
-	local Backdrop = alDamageMeterFrame.backdrop or alDamageMeterFrame.Backdrop
-	Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-	alDamageMeterFrame.bg:Kill()
-	alDamageMeterFrame:ClearAllPoints()
-	alDamageMeterFrame:SetInside(EmbedParent, 2, 2)
-	alDamageMeterFrame:SetParent(EmbedParent)
-	alDamageMeterFrame:SetFrameStrata('LOW')
-end
-
-function AS:Embed_Skada()
-	AS.SkadaWindows = {}
-	for k, window in pairs(Skada:GetWindows()) do
-		tinsert(AS.SkadaWindows, window)
-	end
-
-	local NumberToEmbed = 0
-	if AS:CheckOption('EmbedSystem') then
-		NumberToEmbed = 1
-	end
-	if AS:CheckOption('EmbedSystemDual') then
-		if AS:CheckOption('EmbedRight') == 'Skada' then NumberToEmbed = NumberToEmbed + 1 end
-		if AS:CheckOption('EmbedLeft') == 'Skada' then NumberToEmbed = NumberToEmbed + 1 end
-	end
-
-	local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
-		if not window then return end
-		local barmod = Skada.displays['bar']
-		local offsety = (window.db.enabletitle and window.db.title.height or 0) + 2
-		window.db.barwidth = width - 4
-		window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - 4
-		window.db.spark = false
-		window.db.barslocked = true
-		window.bargroup:ClearAllPoints()
-		window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
-		window.bargroup:SetParent(relativeFrame)
-		window.bargroup:SetFrameStrata('LOW')
-		window.bargroup:SetBackdrop(nil)
-		local Backdrop = window.bargroup.backdrop or window.bargroup.Backdrop
-		if Backdrop then
-			Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and "Transparent" or 'Default')
-			if not AS:CheckOption('SkadaBackdrop') then Backdrop:Hide() else Backdrop:Show() end
-		end
-		barmod.ApplySettings(barmod, window)
-	end
-	
-	if NumberToEmbed == 1 then
+if AS:CheckAddOn('Recount') then
+	function AS:Embed_Recount()
 		local EmbedParent = EmbedSystem_MainWindow
-		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Skada' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-		EmbedWindow(AS.SkadaWindows[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
-	elseif NumberToEmbed == 2 then
-		EmbedWindow(AS.SkadaWindows[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
-		EmbedWindow(AS.SkadaWindows[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPLEFT', EmbedSystem_RightWindow, 'TOPLEFT', 2, 0)
+		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Recount' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
+		EmbedParent.FrameName = "Recount_MainWindow"
+
+		Recount_MainWindow:SetParent(EmbedParent)
+		Recount_MainWindow:ClearAllPoints()
+		Recount_MainWindow:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 6)
+		Recount_MainWindow:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
+		if Recount.MainWindow.backdrop then Recount.MainWindow.backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default') end
+		if not AS:CheckOption('RecountBackdrop') then Recount.MainWindow.backdrop:Hide() end
+
+		Recount.db.profile.Locked = true
+		Recount.db.profile.Scaling = 1
+		Recount.db.profile.ClampToScreen = true
+		Recount.db.profile.FrameStrata = '2-LOW'
+		Recount:SetStrataAndClamp()
+		Recount:LockWindows(true)
+		Recount:ResizeMainWindow()
+	end
+end
+
+if AS:CheckAddOn('Omen') then
+	function AS:Embed_Omen()
+		local EmbedParent = EmbedSystem_MainWindow
+		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Omen' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
+		EmbedParent.FrameName = "OmenAnchor"
+
+		AS:SkinTitleBar(OmenTitle, 'Default')
+		AS:SkinFrame(OmenBarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+		if not AS:CheckOption('OmenBackdrop') then OmenBarList:StripTextures() end
+
+		local db = Omen.db
+		db.profile.Scale = 1
+		db.profile.Bar.Spacing = 1
+		db.profile.Background.EdgeSize = 2
+		db.profile.Background.BarInset = 2
+		db.profile.TitleBar.UseSameBG = true
+		db.profile.ShowWith.UseShowWith = false
+		db.profile.Locked = true
+		db.profile.TitleBar.ShowTitleBar = true
+		db.profile.FrameStrata = '2-LOW'
+		Omen:OnProfileChanged(nil, db)
+
+		OmenAnchor:SetParent(EmbedParent)
+		OmenAnchor:ClearAllPoints()
+		OmenAnchor:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
+		OmenAnchor:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
+		local Backdrop = OmenAnchor.backdrop or OmenAnchor.Backdrop
+		if not Backdrop then
+			OmenAnchor:CreateBackdrop()
+			Backdrop = OmenAnchor.backdrop or OmenAnchor.Backdrop
+			Backdrop:SetOutside(OmenAnchor, 0, 0)
+		end
+	end
+end
+
+if AS:CheckAddOn('TinyDPS') then
+	function AS:Embed_TinyDPS()
+		local EmbedParent = EmbedSystem_MainWindow
+		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'TinyDPS' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
+		EmbedParent.FrameName = "tdpsFrame"
+
+		AS:SkinFrame(tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+		tdpsFrame:SetParent(EmbedParent)
+		tdpsFrame:SetFrameStrata('LOW')
+		tdpsAnchor:ClearAllPoints()
+		tdpsAnchor:Point('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
+		tdpsAnchor:Point('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
+
+		tdps.hideOOC = false
+		tdps.hideIC = false
+		tdps.hideSolo = false
+		tdps.hidePvP = false
+		tdpsRefresh()
+	end
+end
+
+if AS:CheckAddOn('alDamageMeter') then
+	function AS:Embed_alDamageMeter()
+		local EmbedParent = EmbedSystem_MainWindow
+		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'alDamageMeter' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
+		EmbedParent.FrameName = "alDamageMeterFrame"
+
+		dmconf.barheight = floor((EmbedParent:GetHeight() / dmconf.maxbars) - dmconf.spacing)
+		dmconf.width = EmbedParent:GetWidth()
+		local Backdrop = alDamageMeterFrame.backdrop or alDamageMeterFrame.Backdrop
+		Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+		alDamageMeterFrame.bg:Kill()
+		alDamageMeterFrame:ClearAllPoints()
+		alDamageMeterFrame:SetInside(EmbedParent, 2, 2)
+		alDamageMeterFrame:SetParent(EmbedParent)
+		alDamageMeterFrame:SetFrameStrata('LOW')
+	end
+end
+
+if AS:CheckAddOn('Skada') then
+	function AS:Embed_Skada()
+		AS.SkadaWindows = {}
+		for k, window in pairs(Skada:GetWindows()) do
+			tinsert(AS.SkadaWindows, window)
+		end
+
+		local NumberToEmbed = 0
+		if AS:CheckOption('EmbedSystem') then
+			NumberToEmbed = 1
+		end
+		if AS:CheckOption('EmbedSystemDual') then
+			if AS:CheckOption('EmbedRight') == 'Skada' then NumberToEmbed = NumberToEmbed + 1 end
+			if AS:CheckOption('EmbedLeft') == 'Skada' then NumberToEmbed = NumberToEmbed + 1 end
+		end
+
+		local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+			if not window then return end
+			local barmod = Skada.displays['bar']
+			local offsety = (window.db.enabletitle and window.db.title.height or 0) + 2
+			window.db.barwidth = width - 4
+			window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - 4
+			window.db.spark = false
+			window.db.barslocked = true
+			window.bargroup:ClearAllPoints()
+			window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
+			window.bargroup:SetParent(relativeFrame)
+			window.bargroup:SetFrameStrata('LOW')
+			window.bargroup:SetBackdrop(nil)
+			local Backdrop = window.bargroup.backdrop or window.bargroup.Backdrop
+			if Backdrop then
+				Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and "Transparent" or 'Default')
+				if not AS:CheckOption('SkadaBackdrop') then Backdrop:Hide() else Backdrop:Show() end
+			end
+			barmod.ApplySettings(barmod, window)
+		end
+		
+		if NumberToEmbed == 1 then
+			local EmbedParent = EmbedSystem_MainWindow
+			if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Skada' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
+			EmbedWindow(AS.SkadaWindows[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
+		elseif NumberToEmbed == 2 then
+			EmbedWindow(AS.SkadaWindows[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
+			EmbedWindow(AS.SkadaWindows[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPLEFT', EmbedSystem_RightWindow, 'TOPLEFT', 2, 0)
+		end
+	end
+end
+
+if AS:CheckAddOn('CoolLine') then
+	function AS:Embed_CoolLine()
+		if not CoolLineDB.vertical then
+			if DuffedUI then
+				CoolLine:Point('BOTTOM', AS.ActionBar2, 'TOP', 0, 3)
+				CoolLineDB.h = ActionButton1:GetHeight()
+				CoolLineDB.w = AS.ActionBar2:GetWidth()
+			elseif Tukui then
+				local function OnShow()
+					CoolLine:Point('BOTTOM', AS.ActionBar4, 'TOP', 0, 1)
+					CoolLineDB.h = ActionButton1:GetHeight()
+					CoolLineDB.w = AS.ActionBar4:GetWidth()
+					CoolLine.updatelook()
+				end
+
+				local function OnHide()
+					CoolLine:Point('BOTTOM', AS.ActionBar1, 'TOP', 0, 1)
+					CoolLineDB.h = ActionButton1:GetHeight()
+					CoolLineDB.w = AS.ActionBar1:GetWidth()
+					CoolLine.updatelook()
+				end
+
+				if AS.ActionBar4:IsShown() then
+					OnShow()
+				else
+					OnHide()
+				end
+				AS.ActionBar4:HookScript('OnShow', OnShow)
+				AS.ActionBar4:HookScript('OnHide', OnHide)
+			end
+			CoolLine.updatelook()
+		end
 	end
 end
 

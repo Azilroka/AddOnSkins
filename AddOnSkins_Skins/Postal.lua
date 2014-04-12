@@ -52,7 +52,7 @@ function AS:SkinPostal(event, addon)
 		Postal_BlackBookButton:SetPoint('LEFT', SendMailNameEditBox, 'RIGHT', 5, 2)
 	end
 
-	AS:UnregisterEvent(name, event)
+	AS:UnregisterSkinEvent(name, event)
 end
 
 AS:RegisterSkin(name, AS.SkinPostal, 'MAIL_SHOW')

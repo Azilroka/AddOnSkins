@@ -16,14 +16,14 @@ function AS:SkinMyRolePlayElvUI()
 
 		mrp._UpdateTooltip = mrp.UpdateTooltip;
 		mrp.UpdateTooltip = function(self, player, unit)
-			if not msp.char[player].supported then return end;
+			if not (msp.char and msp.char[player] and msp.char[player].supported) then return end;
 			self:_UpdateTooltip(player, unit);
 		end
 
 		hooksecurefunc(TT, "GameTooltip_OnTooltipSetUnit", function()
 			if( UnitExists("mouseover")) then -- flag style
 				local player = UnitName("mouseover");
-				if not msp.char[player].supported then return end;
+				if not (msp.char and msp.char[player] and msp.char[player].supported) then return end;
 				local unit = "mouseover";
 				mrp:UpdateTooltip( player, unit );
 			end
@@ -35,7 +35,7 @@ function AS:SkinMyRolePlayElvUI()
 
 			if (not UnitExists("mouseover")) then return end;
 			local player = UnitName("mouseover");
-			if not msp.char[player].supported then return end;
+			if not (msp.char and msp.char[player] and msp.char[player].supported) then return end;
 			local unit = "mouseover"
 			local r, g, b = mrp:UnitColour( unit )
 			GameTooltipTextLeft1:_SetTextColor( r, g, b )
