@@ -10,9 +10,27 @@ function AS:SkinInboxMailBag(event)
 	AS:SkinCheckBox(InboxMailbagFrameItemGroupStacksCheckBox)
 	AS:SkinTab(MailFrameTab3)
 	for i = 1, 99 do
-		local name = _G['InboxMailbagFrameItem'..i]
-		if not name then return end
-		AS:SkinIconButton(name)
+		local button = _G['InboxMailbagFrameItem'..i]
+		if not button then return end
+		button:CreateBackdrop('Default', true)
+		button:StyleButton()
+		button:DisableDrawLayer('BORDER')
+		button.icon:SetDrawLayer('ARTWORK')
+		button.icon:SetTexCoord(unpack(AS.TexCoords))
+		button.qualityOverlay:SetTexture(nil)
+		button.qualityOverlay.SetTexture = AS.Noop
+		local backdrop = button.backdrop or button.Backdrop
+		button:SetNormalTexture(nil)
+		button.SetNormalTexture = AS.Noop
+		backdrop:SetOutside(button.icon)
+		button.icon:SetParent(backdrop)
+		button:HookScript('OnUpdate', function()
+			if MAILBAGDB["QUALITY_COLORS"] and button.qualityOverlay:IsShown() then
+				backdrop:SetBackdropBorderColor(button.qualityOverlay:GetVertexColor())
+			else
+				backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end)
 	end
 	AS:UnregisterEvent(name, event)
 end
