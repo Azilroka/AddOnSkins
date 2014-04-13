@@ -9,6 +9,7 @@ function AS:SkinInboxMailBag(event)
 	AS:SkinEditBox(InboxMailbagFrameItemSearchBox)
 	AS:SkinCheckBox(InboxMailbagFrameItemGroupStacksCheckBox)
 	AS:SkinTab(MailFrameTab3)
+	AS:SkinScrollBar(InboxMailbagFrameScrollFrameScrollBar)
 	for i = 1, 99 do
 		local button = _G['InboxMailbagFrameItem'..i]
 		if not button then return end
@@ -25,14 +26,14 @@ function AS:SkinInboxMailBag(event)
 		backdrop:SetOutside(button.icon)
 		button.icon:SetParent(backdrop)
 		button:HookScript('OnUpdate', function()
-			if MAILBAGDB["QUALITY_COLORS"] and button.qualityOverlay:IsShown() then
+			if MAILBAGDB["QUALITY_COLORS"] and button.qualityOverlay:IsShown() and not button.searchOverlay:IsShown() athen
 				backdrop:SetBackdropBorderColor(button.qualityOverlay:GetVertexColor())
 			else
 				backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		end)
 	end
-	AS:UnregisterEvent(name, event)
+	AS:UnregisterSkinEvent(name, event)
 end
 
 AS:RegisterSkin(name, AS.SkinInboxMailBag, 'MAIL_SHOW')
