@@ -1,6 +1,6 @@
 ## Interface: 50400
 ## Title: |cFFFF6347AsphyxiaUI|r |cFFFFFFFFAddOnSkins|r
-## Version: 2.18
+## Version: 2.19
 ## Author: Azilroka, Sortokk
 ## RequiredDeps: AsphyxiaUI, Enhanced_Config
 ## SavedVariables: AddOnSkins_Options
