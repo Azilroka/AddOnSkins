@@ -26,7 +26,7 @@ function AS:SkinInboxMailBag(event)
 		backdrop:SetOutside(button.icon)
 		button.icon:SetParent(backdrop)
 		button:HookScript('OnUpdate', function()
-			if MAILBAGDB["QUALITY_COLORS"] and button.qualityOverlay:IsShown() and not button.searchOverlay:IsShown() athen
+			if MAILBAGDB["QUALITY_COLORS"] and button.qualityOverlay:IsShown() and not button.searchOverlay:IsShown() then
 				backdrop:SetBackdropBorderColor(button.qualityOverlay:GetVertexColor())
 			else
 				backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
