@@ -3,15 +3,6 @@ local AS = unpack(AddOnSkins)
 local name = 'MiscFixes'
 function AS:MiscFixes(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
-		for i = 1, 4 do
-			_G['StaticPopup'..i]:SetTemplate('Transparent')
-			AS:SkinButton(_G['StaticPopup'..i..'Button1'])
-			AS:SkinButton(_G['StaticPopup'..i..'Button2'])
-			AS:SkinButton(_G['StaticPopup'..i..'Button3'])
-			AS:SkinEditBox(_G['StaticPopup'..i..'EditBox'])
-			AS:SkinCloseButton(_G['StaticPopup'..i..'CloseButton'])
-		end
-
 		local function SkinIcons()
 			for i = 1, LFG_ROLE_NUM_SHORTAGE_TYPES do
 				if _G['LFGDungeonReadyDialogRewardsFrameReward'..i] and not _G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone then
@@ -42,8 +33,8 @@ function AS:MiscFixes(event, addon)
 		AS:SkinButton(ProductChoiceFrame.Inset.ClaimButton)
 		AS:SkinCloseButton(ProductChoiceFrameCloseButton)
 		ProductChoiceFrame:HookScript('OnShow', function(self)
-			for i = 1, 8 do
-				self.Inset.Buttons[i]:StripTextures()
+			for _, object in pairs(self.Inset.Buttons) do
+				object:StripTextures()
 			end
 		end)
 		]]
