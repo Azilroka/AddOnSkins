@@ -38,14 +38,18 @@ function AS:SkinTradeSkillDW()
 	TradeSkillFrame:HookScript('OnUpdate', function(self)
 		if not TradeSkillDWExpandButton then return end
 		if self.isSkinned then return end
-		AS:SkinNextPrevButton(TradeSkillDWExpandButton)
+		AS:SkinButton(TradeSkillDWExpandButton)
+		TradeSkillDWExpandButton.Text = TradeSkillDWExpandButton:CreateFontString(nil, 'OVERLAY')
+		TradeSkillDWExpandButton.Text:SetFont(AS.LSM:Fetch('font', 'Arial Narrow'), 24)
 		TradeSkillDWExpandButton.SetNormalTexture = AS.Noop
 		TradeSkillDWExpandButton.SetPushedTexture = AS.Noop
 		TradeSkillDWExpandButton:HookScript('OnUpdate', function(self)
 			if self.expanded then
-				SquareButton_SetIcon(self, 'LEFT')
+				self.Text:SetText('◄')
+				self.Text:SetPoint('CENTER', -2, 0)
 			else
-				SquareButton_SetIcon(self, 'RIGHT')
+				self.Text:SetText('►')
+				self.Text:SetPoint('CENTER', -1, 0)
 			end
 		end)
 		TradeSkillListScrollFrame:StripTextures(true)
