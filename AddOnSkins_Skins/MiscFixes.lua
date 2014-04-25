@@ -61,6 +61,7 @@ function AS:MiscFixes(event, addon)
 				BidCloseButton:Point('BOTTOMRIGHT', AuctionFrameBid, 'BOTTOMRIGHT', 66, 6)
 				AuctionsCloseButton:Point('BOTTOMRIGHT', AuctionFrameAuctions, 'BOTTOMRIGHT', 66, 6)
 				AuctionFrameTab1:Point('TOPLEFT', AuctionFrame, 'BOTTOMLEFT', -5, 2)
+				AuctionFrameTab1.SetPoint = AS.Noop -- Fix for TSM moving the tabs
 				BrowseNextPageButton:Size(20)
 				BrowsePrevPageButton:Size(20)
 			end
