@@ -142,9 +142,7 @@ function AS:SkinBigWigs(event, addon)
 			BarStopped = freestyle,
 			GetStyleName = function() return "ElvUI" end,
 		})
-		BigWigsBars:SetBarStyle("ElvUI")
 		AS:UnregisterSkinEvent(name, "ADDON_LOADED")
-		AS:UnregisterSkinEvent(name, "PLAYER_ENTERING_WORLD")
 	end
 end
 
