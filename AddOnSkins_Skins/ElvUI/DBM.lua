@@ -87,21 +87,6 @@ function AS:SkinDBM(event, addon)
 			end
 		end
 
-		local SkinBossTitle = function()
-			local anchor = DBMBossHealthDropdown:GetParent()
-			if not anchor.styled then
-				local header = {anchor:GetRegions()}
-				if header[1]:IsObjectType('FontString') then
-					header[1]:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
-					header[1]:SetTextColor(1, 1, 1)
-					header[1]:SetShadowColor(0, 0, 0, 0)
-					anchor.styled = true	
-				end
-				header = nil
-			end
-			anchor = nil
-		end
-
 		local SkinBoss = function()
 			local count = 1
 			while _G[format('DBM_BossHealth_Bar_%d', count)] do
@@ -111,14 +96,14 @@ function AS:SkinDBM(event, addon)
 				local name = _G[bar:GetName()..'BarName']
 				local timer = _G[bar:GetName()..'BarTimer']
 				local prev = _G[format('DBM_BossHealth_Bar_%d', count-1)]	
-				local _, anch, _ ,_, _ = bar:GetPoint()
+				local _, anchor, _ ,_, _ = bar:GetPoint()
 
 				bar:ClearAllPoints()
 				if count == 1 then
 					if DBM_SavedOptions.HealthFrameGrowUp then
-						bar:Point('BOTTOM', anch, 'TOP' , 0 , 12)
+						bar:Point('BOTTOM', anchor, 'TOP' , 0 , 12)
 					else
-						bar:Point('TOP', anch, 'BOTTOM' , 0, -buttonsize)
+						bar:Point('TOP', anchor, 'BOTTOM' , 0, -buttonsize)
 					end
 				else
 					if DBM_SavedOptions.HealthFrameGrowUp then
@@ -154,6 +139,13 @@ function AS:SkinDBM(event, addon)
 					timer:Point('RIGHT', bar, 'RIGHT', -4, 0)
 				end
 
+				local header = {anchor:GetRegions()}
+				if header and header[1]:IsObjectType('FontString') then
+					header[1]:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+					header[1]:SetTextColor(1, 1, 1)
+					header[1]:SetShadowColor(0, 0, 0, 0)
+				end
+
 				name:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 				timer:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 
@@ -174,7 +166,7 @@ function AS:SkinDBM(event, addon)
 
 		if AS:CheckAddOn('DBM-StatusBarTimers') then hooksecurefunc(DBT, 'CreateBar', SkinBars) end
 
-		hooksecurefunc(DBM.BossHealth, 'Show', SkinBossTitle)
+		hooksecurefunc(DBM.BossHealth, 'Show', SkinBoss)
 		hooksecurefunc(DBM.BossHealth, 'AddBoss', SkinBoss)
 		hooksecurefunc(DBM.BossHealth, 'UpdateSettings', SkinBoss)
 		hooksecurefunc(DBM.RangeCheck, 'Show', SkinRange)
