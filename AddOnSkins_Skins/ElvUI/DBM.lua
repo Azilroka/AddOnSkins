@@ -139,7 +139,7 @@ function AS:SkinDBM(event, addon)
 					timer:Point('RIGHT', bar, 'RIGHT', -4, 0)
 				end
 
-				local header = {anchor:GetRegions()}
+				local header = {bar:GetParent():GetRegions()}
 				if header and header[1]:IsObjectType('FontString') then
 					header[1]:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 					header[1]:SetTextColor(1, 1, 1)
