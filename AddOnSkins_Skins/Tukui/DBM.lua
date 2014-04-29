@@ -87,45 +87,23 @@ function AS:SkinDBM(event, addon)
 			end
 		end
 
-		local SkinBossTitle = function()
-			local anchor = DBMBossHealthDropdown:GetParent()
-			if not anchor.styled then
-				local header = {anchor:GetRegions()}
-					if header[1]:IsObjectType('FontString') then
-						header[1]:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
-						header[1]:SetTextColor(1, 1, 1, 1)
-						header[1]:SetShadowColor(0, 0, 0, 0)
-						anchor.styled = true	
-					end
-				header = nil
-			end
-			anchor = nil
-		end
-
 		local SkinBoss = function()
 			local count = 1
 			while (_G[format('DBM_BossHealth_Bar_%d', count)]) do
 				local bar = _G[format('DBM_BossHealth_Bar_%d', count)]
-				local background = _G[bar:GetName()..'BarBorder']
-				local progress = _G[bar:GetName()..'Bar']
-				local name = _G[bar:GetName()..'BarName']
-				local timer = _G[bar:GetName()..'BarTimer']
-				local prev = _G[format('DBM_BossHealth_Bar_%d', count-1)]	
-				local _, anch, _ ,_, _ = bar:GetPoint()
+				local barname = bar:GetName()
+				local background = _G[barname..'BarBorder']
+				local progress = _G[barname..'Bar']
+				local name = _G[barname..'BarName']
+				local timer = _G[barname..'BarTimer']
+				local pointa, anchor, pointb, _, _ = bar:GetPoint()
 
 				bar:ClearAllPoints()
-				if count == 1 then
-					if DBM_SavedOptions.HealthFrameGrowUp then
-						bar:Point('BOTTOM', anch, 'TOP' , 0 , 12)
-					else
-						bar:Point('TOP', anch, 'BOTTOM' , 0, -buttonsize)
-					end
+
+				if DBM_SavedOptions.HealthFrameGrowUp or (DBMProfiles and DBMProfiles.db.profile.HealthFrameGrowUp) then
+					bar:Point(pointa, anchor, pointb, 0, (count == 1 and 12) or buttonsize + 4)
 				else
-					if DBM_SavedOptions.HealthFrameGrowUp then
-						bar:Point('TOPLEFT', prev, 'TOPLEFT', 0, buttonsize + 4)
-					else
-						bar:Point('TOPLEFT', prev, 'TOPLEFT', 0, -(buttonsize + 4))
-					end
+					bar:Point(pointa, anchor, pointb, 0, -(count == 1 and buttonsize or buttonsize + 4))
 				end
 
 				bar:SetTemplate('Transparent')
@@ -154,6 +132,13 @@ function AS:SkinDBM(event, addon)
 					timer:Point('RIGHT', bar, 'RIGHT', -4, 0)
 				end
 
+				local header = {bar:GetParent():GetRegions()}
+				if header and header[1]:IsObjectType('FontString') then
+					header[1]:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+					header[1]:SetTextColor(1, 1, 1)
+					header[1]:SetShadowColor(0, 0, 0, 0)
+				end
+
 				name:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 				timer:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 
@@ -172,8 +157,9 @@ function AS:SkinDBM(event, addon)
 			DBMInfoFrame:SetTemplate('Transparent')
 		end
 
-		hooksecurefunc(DBT, 'CreateBar', SkinBars)
-		hooksecurefunc(DBM.BossHealth, 'Show', SkinBossTitle)
+		if AS:CheckAddOn('DBM-StatusBarTimers') then hooksecurefunc(DBT, 'CreateBar', SkinBars) end
+
+		hooksecurefunc(DBM.BossHealth, 'Show', SkinBoss)
 		hooksecurefunc(DBM.BossHealth, 'AddBoss', SkinBoss)
 		hooksecurefunc(DBM.BossHealth, 'UpdateSettings', SkinBoss)
 		hooksecurefunc(DBM.RangeCheck, 'Show', SkinRange)
