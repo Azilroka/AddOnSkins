@@ -91,26 +91,19 @@ function AS:SkinDBM(event, addon)
 			local count = 1
 			while _G[format('DBM_BossHealth_Bar_%d', count)] do
 				local bar = _G[format('DBM_BossHealth_Bar_%d', count)]
-				local background = _G[bar:GetName()..'BarBorder']
-				local progress = _G[bar:GetName()..'Bar']
-				local name = _G[bar:GetName()..'BarName']
-				local timer = _G[bar:GetName()..'BarTimer']
-				local prev = _G[format('DBM_BossHealth_Bar_%d', count-1)]	
-				local _, anchor, _ ,_, _ = bar:GetPoint()
+				local barname = bar:GetName()
+				local background = _G[barname..'BarBorder']
+				local progress = _G[barname..'Bar']
+				local name = _G[barname..'BarName']
+				local timer = _G[barname..'BarTimer']
+				local pointa, anchor, pointb, _, _ = bar:GetPoint()
 
 				bar:ClearAllPoints()
-				if count == 1 then
-					if DBM_SavedOptions.HealthFrameGrowUp then
-						bar:Point('BOTTOM', anchor, 'TOP' , 0 , 12)
-					else
-						bar:Point('TOP', anchor, 'BOTTOM' , 0, -buttonsize)
-					end
+
+				if DBM_SavedOptions.HealthFrameGrowUp or (DBMProfiles and DBMProfiles.db.profile.HealthFrameGrowUp) then
+					bar:Point(pointa, anchor, pointb, 0, (count == 1 and 12) or buttonsize + 4)
 				else
-					if DBM_SavedOptions.HealthFrameGrowUp then
-						bar:Point('TOPLEFT', prev, 'TOPLEFT', 0, buttonsize + 4)
-					else
-						bar:Point('TOPLEFT', prev, 'TOPLEFT', 0, -(buttonsize + 4))
-					end
+					bar:Point(pointa, anchor, pointb, 0, -(count == 1 and buttonsize or buttonsize + 4))
 				end
 
 				bar:SetTemplate('Transparent')
