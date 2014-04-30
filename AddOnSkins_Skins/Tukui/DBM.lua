@@ -98,12 +98,12 @@ function AS:SkinDBM(event, addon)
 				local timer = _G[barname..'BarTimer']
 				local pointa, anchor, pointb, _, _ = bar:GetPoint()
 
+				if not pointa then return end
 				bar:ClearAllPoints()
-
 				if DBM_SavedOptions.HealthFrameGrowUp or (DBMProfiles and DBMProfiles.db.profile.HealthFrameGrowUp) then
-					bar:Point(pointa, anchor, pointb, 0, (count == 1 and 12) or buttonsize + 4)
+					bar:Point(pointa, anchor, pointb, 0, count == 1 and 12 or 4)
 				else
-					bar:Point(pointa, anchor, pointb, 0, -(count == 1 and buttonsize or buttonsize + 4))
+					bar:Point(pointa, anchor, pointb, 0, -(count == 1 and 12 or 4))
 				end
 
 				bar:SetTemplate('Transparent')
