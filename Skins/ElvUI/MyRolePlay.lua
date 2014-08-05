@@ -1,0 +1,55 @@
+local AS = unpack(AddOnSkins)
+
+if not (AS:CheckAddOn('MyRolePlay') and AS:CheckAddOn('ElvUI')) then return end
+
+local name = "MyRolePlaySkin"
+function AS:SkinMyRolePlayElvUI()
+	if (AS:CheckOption("IntegrateMyRolePlayTooltip")) then
+		local TT = ElvUI[1]:GetModule('Tooltip')
+
+		mrpSaved.Options.TooltipStyle = 6
+
+		-- Just in case we haven't loaded the options yet
+		mrp:CreateOptionsPanel()
+		local f = MyRolePlayOptionsPanel
+		f.ttstyle.Enable = f.ttstyle.Disable
+		f.ttstyle:Disable();
+
+		mrp._UpdateTooltip = mrp.UpdateTooltip;
+		mrp.UpdateTooltip = function(self, player, unit)
+			if not player then
+				player = UnitExists('mouseover') and UnitName('mouseover') or UnitExists('target') and UnitName('target') or UnitName('player')
+				unit = UnitExists('mouseover') and 'mouseover' or UnitExists('target') and 'target' or 'player'
+			end
+			if not msp.char[player] then return end
+			if not msp.char[player].supported then return end
+			if not player and unit then return end
+			self:_UpdateTooltip(player, unit);
+		end
+
+		hooksecurefunc(TT, "GameTooltip_OnTooltipSetUnit", function()
+			if( UnitExists("mouseover")) then -- flag style
+				local player = UnitName("mouseover");
+				if not msp.char[player] then return end
+				if not msp.char[player].supported then return end
+				local unit = "mouseover";
+				mrp:UpdateTooltip( player, unit );
+			end
+		end)
+
+		GameTooltipTextLeft1._SetTextColor = GameTooltipTextLeft1.SetTextColor;
+		GameTooltipTextLeft1.SetTextColor = function(self, r, g, b, a)
+			GameTooltipTextLeft1:_SetTextColor(r, g, b, a);
+
+			if (not UnitExists("mouseover")) then return end;
+			local player = UnitName("mouseover");
+			if not msp.char[player] then return end
+			if not msp.char[player].supported then return end
+			local unit = "mouseover"
+			local r, g, b = mrp:UnitColour( unit )
+			GameTooltipTextLeft1:_SetTextColor( r, g, b )
+		end
+	end
+end
+
+AS:RegisterSkin(name, AS.SkinMyRolePlayElvUI, 2)
