@@ -1,0 +1,10 @@
+## Interface: 50400
+## Title: |cff1784d1AddOnSkins|r
+## Version: 3.00
+## Author: Azilroka, Sortokk
+## SavedVariables: AddOnSkins_Options
+## OptionalDep: DSM
+## X-Tukui-ProjectID: 128
+## X-Tukui-ProjectFolders: AddOnSkins
+
+Load_AddOnSkins.xml
