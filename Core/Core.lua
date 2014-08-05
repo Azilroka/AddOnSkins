@@ -321,6 +321,10 @@ function AS:SkinIconButton(frame, shrinkIcon)
 	end
 end
 
+function AS:SkinTexture(frame)
+	frame:SetTexCoord(unpack(AS.TexCoords))
+end
+
 function AS:Desaturate(frame, point)
 	for i = 1, frame:GetNumRegions() do
 		local region = select(i, frame:GetRegions())

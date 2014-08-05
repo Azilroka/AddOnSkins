@@ -533,6 +533,7 @@ function AS:InitAPI()
 
 		b:StripTextures()
 		b:CreateBackdrop("Default", true)
+		local backdrop = b.backdrop or b.Backdrop
 		b:StyleButton()
 
 		local icon = b.icon
@@ -548,12 +549,12 @@ function AS:InitAPI()
 			-- create a backdrop around the icon
 
 			if shrinkIcon then
-				b.Backdrop:SetAllPoints()
+				backdrop:SetAllPoints()
 				icon:SetInside(b)
 			else
-				b.Backdrop:SetOutside(icon)
+				backdrop:SetOutside(icon)
 			end
-			icon:SetParent(b.Backdrop)
+			icon:SetParent(backdrop)
 		end
 		b.isSkinned = true
 	end
