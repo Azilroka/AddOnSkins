@@ -31,6 +31,8 @@ function AS:EnableOption(optionName)
 end
 
 function AS:InjectProfile()
+	E, L, V, P, G = unpack(ElvUI)
+
 	V['addonskins'] = {
 	-- Embeds
 		['EmbedOoC'] = false, 
@@ -73,9 +75,6 @@ function AS:InjectProfile()
 end
 
 function AS:UpdateMedia()
-	E, L, V, P, G = unpack(ElvUI)
-	AS:InjectProfile()
-
 	LSM, ES = AS.LSM, E:GetModule('EnhancedShadows', true)
 	AS.Blank = LSM:Fetch('background', 'ElvUI Blank')
 	AS.Font = LSM:Fetch('font', E.db.general.font)

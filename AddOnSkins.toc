@@ -3,7 +3,7 @@
 ## Version: 3.00
 ## Author: Azilroka, Sortokk
 ## SavedVariables: AddOnSkins_Options
-## OptionalDep: DSM
+## OptionalDep: DSM, ElvUI, Tukui
 ## X-Tukui-ProjectID: 128
 ## X-Tukui-ProjectFolders: AddOnSkins
 

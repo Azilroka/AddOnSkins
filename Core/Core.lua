@@ -182,8 +182,9 @@ function AS:StartSkinning(event)
 end
 
 function AS:Init(event, addon)
-	if (addon == 'Tukui' or addon == 'ElvUI') then
+	if (IsAddOnLoaded('Tukui') or IsAddOnLoaded('ElvUI')) then
 		T16 = AS:CheckAddOn('Tukui') and tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16.00 and true or false
+		if IsAddOnLoaded('ElvUI') then self:InjectProfile() end
 		self:UpdateMedia()
 		self:InitAPI()
 		self:UpdateLocale()
