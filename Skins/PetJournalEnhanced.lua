@@ -7,7 +7,11 @@ function AS:SkinPetJournalEnhanced(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 	end
 	if addon == 'Blizzard_PetJournal' or IsAddOnLoaded('Blizzard_PetJournal') then
-		PetJournal:HookScript('OnShow', function() PJEUniquePetCount:StripTextures() end)
+		PetJournal:HookScript('OnShow', function()
+            PJEUniquePetCount:StripTextures()
+            AS:SkinScrollBar(PetJournalEnhancedListScrollFrameScrollBar)
+            AS:SkinButton(PetJournalEnhancedFilterButton)
+        end)
 		AS:UnregisterSkinEvent(name, 'ADDON_LOADED')
 	end
 end

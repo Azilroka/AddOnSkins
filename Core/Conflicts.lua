@@ -1,7 +1,11 @@
 local AS = unpack(AddOnSkins)
-local format, pairs, print, GetAddOnInfo = format, pairs, print, GetAddOnInfo
+local format, pairs, GetAddOnInfo = format, pairs, GetAddOnInfo
 
 local Conflicts = {
+	'AddOnSkins_ElvUI',
+	'AddOnSkins_Tukui',
+	'AddOnSkins_AsphyxiaUI',
+	'AddOnSkins_DuffedUI',
 	'DecUI_BagSync_Skin',
 	'DecUI_Dresser_Skin',
 	'DecUI_Examiner_Skin',

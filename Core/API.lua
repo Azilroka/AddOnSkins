@@ -360,9 +360,9 @@ function AS:InitAPI()
 		if Mid then Mid:Kill() end
 
 		Frame:CreateBackdrop()
-
+		local Backdrop = Frame.Backdrop or Frame.backdrop
 		if Frame:GetName() and Frame:GetName():find("Silver") or Frame:GetName():find("Copper") then
-			Frame.Backdrop:Point("BOTTOMRIGHT", -12, -2)
+			Backdrop:Point("BOTTOMRIGHT", -12, -2)
 		end
 	end
 
