@@ -18,25 +18,28 @@ function AS:SkinArchy()
 			local fragmentBar = _G['ArchyArtifactChildFrame'..i..'FragmentBar']
 			local solveButton = _G['ArchyArtifactChildFrame'..i..'SolveButton']
 
-			if icon then
+			if not icon.isSkinned then
 				AS:SkinFrame(icon, false, true)
 				icon:SetSize(solveButton:GetHeight(),solveButton:GetHeight())
 				AS:SkinTexture(icon.texture)
 				icon.texture:SetInside()
+				solveButton.isSkinned = true
 			end
 
-			if solveButton then
+			if not solveButton.isSkinned then
 				AS:SkinFrame(solveButton, false, true)
 				AS:SkinTexture(solveButton:GetNormalTexture())
 				solveButton:GetNormalTexture():SetInside()	
 				AS:SkinTexture(solveButton:GetDisabledTexture())
 				solveButton:GetDisabledTexture():SetInside()		
 				solveButton:StyleButton()
+				solveButton.isSkinned = true
 			end
 
-			if fragmentBar then
+			if not fragmentBar.isSkineed then
 				AS:SkinStatusBar(fragmentBar)
 				fragmentBar:SetPoint('TOPLEFT', icon, 'TOPRIGHT', 7, -2)
+				fragmentBar.isSkinned = true
 			end
 		end
 	end
