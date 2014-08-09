@@ -4,10 +4,12 @@ if not AS:CheckAddOn('PetTracker') then return end
 
 local name = "PetTrackerSkin"
 function AS:SkinPetTracker()
-	AS:SkinBackdropFrame(PetTrackerProgressBar1)
-	PetTrackerProgressBar1.Overlay:StripTextures(true)
-	for i = 1, PetTracker.MaxQuality do
-		PetTrackerProgressBar1[i]:SetStatusBarTexture(AS.NormTex)
+	if not IsAddOnLoaded('Carbonite.Quests') then
+		AS:SkinBackdropFrame(PetTrackerProgressBar1)
+		PetTrackerProgressBar1.Overlay:StripTextures(true)
+		for i = 1, PetTracker.MaxQuality do
+			PetTrackerProgressBar1[i]:SetStatusBarTexture(AS.NormTex)
+		end
 	end
 
 	AS:SkinEditBox(PetTrackerMapFilter)
@@ -88,6 +90,7 @@ function AS:SkinPetTracker()
 		end)
 	end
 	if AS:CheckAddOn('PetTracker_Journal') then
+		LoadAddOn('Blizzard_PetJournal')
 		AS:SkinCheckBox(PetTracker_JournalTrackToggle)
 		AS:SkinTab(PetJournalParentTab3)
 		PetTrackerTamerJournal:HookScript('OnShow', function(self)
