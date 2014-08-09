@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Wholly') then return end
+if not (AS:CheckAddOn('Wholly') and AS:CheckAddOn('Grail')) then return end
 
 local name = 'WhollySkin'
 function AS:SkinWholly()
@@ -9,8 +9,10 @@ function AS:SkinWholly()
 		if not self.isSkinned then
 			AS:SkinFrame(self)
 			AS:SkinCloseButton(com_mithrandir_whollyFrameCloseButton)
-			com_mithrandir_whollyFrameZoneButton:ClearAllPoints()
-			com_mithrandir_whollyFrameZoneButton:Point('TOP', com_mithrandir_whollyFrame, 'TOP', 60, -40)
+			AS:SkinDropDownBox(com_mithrandir_whollyFrameZoneButton, 285)
+			com_mithrandir_whollyFrameZoneButtonText:ClearAllPoints()
+			com_mithrandir_whollyFrameZoneButtonText:SetPoint('LEFT', com_mithrandir_whollyFrameZoneButton, 'LEFT', 32, 2)
+			com_mithrandir_whollyFrameZoneButtonText:SetDrawLayer('OVERLAY')
 
 			local buttons = {
 				'SwitchZoneButton',
@@ -18,16 +20,19 @@ function AS:SkinWholly()
 				'SortButton'
 			}
 
-			for button, _ in pairs(buttons) do
-				AS:SkinButton(_G['com_mithrandir_whollyFrame'..button])
+			for _, button in pairs(buttons) do
+				local btn = _G['com_mithrandir_whollyFrame'..button]
+				if btn then
+					AS:SkinButton(btn)
+				end
 			end
 
 			self.isSkinned = true
 		end
-
-		if com_mithrandir_whollyFrameScrollBar and not com_mithrandir_whollyFrameScrollBar.isDone then
-			AS:SkinScrollBar(com_mithrandir_whollyFrameScrollBar)
-			com_mithrandir_whollyFrameScrollBar.isDone = true
+		local ScrollBar = com_mithrandir_whollyFrameScrollFrameScrollBar
+		if ScrollBar and not ScrollBar.isDone then
+			AS:SkinScrollBar(ScrollBar)
+			ScrollBar.isDone = true
 		end
 	end)
 end

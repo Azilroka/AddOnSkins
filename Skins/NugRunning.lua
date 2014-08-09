@@ -4,57 +4,44 @@ if not AS:CheckAddOn('NugRunning') then return end
 
 local name = 'NugRunningSkin'
 function AS:SkinNugRunning()
-	local NugRunning = NugRunning
-	local TimerBar = NugRunning.TimerBar
-	local _ConstructTimerBar = NugRunning.ConstructTimerBar
+	hooksecurefunc(NugRunning, 'ActivateTimer', function(self, w, h)
+		for _, timer in pairs(self.timers) do
+			if not timer.isSkinned then
+				timer:SetBackdrop(nil)
 
-	function NugRunning.ConstructTimerBar(w, h)
-		local f = _ConstructTimerBar(w, h)
+				local ic = timer.icon:GetParent()
+				ic:CreateBackdrop("Default")
+				ic:ClearAllPoints()
+				ic:SetPoint("TOPLEFT", timer, 1, -1)
+				ic:SetPoint("BOTTOMLEFT", timer, 1, 0)
 
-		f:SetBackdrop(nil)
+				timer.bar:CreateBackdrop("Default")
+				timer.bar:ClearAllPoints()
+				timer.bar:SetPoint("TOPRIGHT", timer, -1, -1)
+				timer.bar:SetPoint("BOTTOMRIGHT", timer, -1, 0)
+				timer.bar:SetPoint("LEFT", ic, "RIGHT", 5, 0)
 
-		local ic = f.icon:GetParent()
-		ic:CreateBackdrop("Default")
+				timer.bar:SetStatusBarTexture(AS.NormTex)
+				timer.bar:GetStatusBarTexture():SetDrawLayer("ARTWORK")
+				timer.bar.bg:SetTexture(AS.NormTex)
+				timer.bar.bg:SetAlpha(0.3)
 
-		f.bar:CreateBackdrop("Default")
+				timer.timeText:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
+				timer.timeText:SetJustifyH("RIGHT")
+				timer.timeText:ClearAllPoints()
+				timer.timeText:SetPoint("RIGHT", 1, 0)
 
-		f.bar:SetStatusBarTexture(AS.NormTex)
-		f.bar:GetStatusBarTexture():SetDrawLayer("ARTWORK")
-		f.bar.bg:SetTexture(AS.NormTex)
-		f.bar.bg:SetAlpha(0.3)
+				timer.spellText:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
+				timer.spellText:SetJustifyH("LEFT")
+				timer.spellText:ClearAllPoints()
+				timer.spellText:SetPoint("LEFT", 2, 0)
+				timer.spellText:SetWidth(timer.bar:GetWidth() - 10)
 
-		f.timeText:SetFont(AS.PixelFont, 8, "MONOCHROMEOUTLINE")
-		f.spellText:SetFont(AS.PixelFont, 8, "MONOCHROMEOUTLINE")
-		f.stacktext:SetFont(AS.PixelFont, 8, "MONOCHROMEOUTLINE")
-
-		TimerBar.Resize(f, w, h)
-
-		return f
-	end
-
-	local _Resize = TimerBar.VScale
-	function TimerBar.Resize(f, w, h)
-		_Resize(f, w, h)
-
-		local ic = f.icon:GetParent()
-		ic:ClearAllPoints()
-		ic:SetPoint("TOPLEFT", f, 1, -1)
-		ic:SetPoint("BOTTOMLEFT", f, 1, 0)
-
-		f.bar:ClearAllPoints()
-		f.bar:SetPoint("TOPRIGHT", f, -1, -1)
-		f.bar:SetPoint("BOTTOMRIGHT", f, -1, 0)
-		f.bar:SetPoint("LEFT", ic, "RIGHT", 5, 0)
-
-		f.timeText:SetJustifyH("RIGHT")
-		f.timeText:ClearAllPoints()
-		f.timeText:SetPoint("RIGHT", 1, 0)
-
-		f.spellText:SetJustifyH("LEFT")
-		f.spellText:ClearAllPoints()
-		f.spellText:SetPoint("LEFT", 2, 0)
-		f.spellText:SetWidth(f.bar:GetWidth() - 10)
-	end
+				timer.stacktext:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
+				timer.isSkinned = true
+			end
+		end
+	end)
 end
 
 AS:RegisterSkin(name, AS.SkinNugRunning)

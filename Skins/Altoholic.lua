@@ -36,6 +36,7 @@ function AS:SkinAltoholic(event, addon)
 		AS:SkinFrame(AltoholicFrameBagUsage)
 		AS:SkinFrame(AltoholicFrameSkills)
 		AS:SkinFrame(AltoholicFrameActivity)
+		AS:SkinFrame(AltoholicFrameCurrencies)
 		AS:SkinScrollBar(AltoholicFrameSummaryScrollFrameScrollBar)
 		AS:SkinScrollBar(AltoholicFrameBagUsageScrollFrameScrollBar)
 		AS:SkinScrollBar(AltoholicFrameSkillsScrollFrameScrollBar)
@@ -57,7 +58,7 @@ function AS:SkinAltoholic(event, addon)
 		AltoholicTabSummary_OptionsDataStore:StyleButton()
 		AltoholicTabSummary_OptionsDataStore:CreateBackdrop()
 
-		for i = 1, 4 do
+		for i = 1, 5 do
 			AS:SkinButton(_G["AltoholicTabSummaryMenuItem"..i], true)
 		end
 		for i = 1, 8 do

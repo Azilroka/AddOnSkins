@@ -182,7 +182,7 @@ function AS:StartSkinning(event)
 end
 
 function AS:Init(event, addon)
-	if (IsAddOnLoaded('Tukui') or IsAddOnLoaded('ElvUI')) then
+	if (IsAddOnLoaded('Tukui') or IsAddOnLoaded('ElvUI')) and not self.Initialized then
 		T16 = AS:CheckAddOn('Tukui') and tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16.00 and true or false
 		if IsAddOnLoaded('ElvUI') then self:InjectProfile() end
 		self:UpdateMedia()
@@ -192,7 +192,7 @@ function AS:Init(event, addon)
 		self:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 		self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
 		self:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
-		self:UnregisterEvent(event)
+		self.Initialized = true
 	end
 end
 
