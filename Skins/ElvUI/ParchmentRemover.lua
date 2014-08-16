@@ -130,9 +130,17 @@ function AS:ParchmentRemover(event, addon)
 				self.spellTex:Hide()
 			end)
 
-			QuestDetailScrollFrame.spellTex:Hide()
-			QuestProgressScrollFrame.spellTex:Hide()
-			QuestGreetingScrollFrame.spellTex:Hide()
+			if QuestDetailScrollFrame.spellTex then
+				QuestDetailScrollFrame.spellTex:Hide()
+			end
+
+			if QuestProgressScrollFrame.spellTex then
+				QuestProgressScrollFrame.spellTex:Hide()
+			end
+
+			if QuestGreetingScrollFrame.spellTex then
+				QuestGreetingScrollFrame.spellTex:Hide()
+			end
 
 			hooksecurefunc('QuestInfoItem_OnClick', function(self)
 				QuestInfoItemHighlight:ClearAllPoints()
