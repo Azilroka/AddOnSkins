@@ -501,8 +501,8 @@ function AS:InitAPI()
 			if(_G[frame:GetName() .. "Text"]) then _G[frame:GetName() .. "Text"]:Point("TOP", 0, 19) end
 		end
 
-		_G[frame:GetName()]:SetThumbTexture( [[Interface\AddOns\Tukui\medias\textures\blank.tga]] )
-		_G[frame:GetName()]:GetThumbTexture():SetVertexColor(unpack( C["media"].bordercolor))
+		_G[frame:GetName()]:SetThumbTexture(AS.Blank)
+		_G[frame:GetName()]:GetThumbTexture():SetVertexColor(unpack(AS.BorderColor))
 		if( frame:GetWidth() < frame:GetHeight() ) then
 			frame:Width(height)
 			_G[frame:GetName()]:GetThumbTexture():Size(frame:GetWidth(), frame:GetWidth() + 4)

@@ -89,6 +89,10 @@ function AS:UpdateMedia()
 	AS.PixelPerfect = E.PixelMode
 	AS.HideShadows = false
 	AS.Locale = L
+
+	E:GetModule('DataTexts'):RegisterLDB()
+	E:GetModule('DataTexts'):LoadDataTexts()
+	E:UpdateMedia()
 end
 
 function AS:Delay(delay, func, ...)

@@ -112,15 +112,19 @@ function AS:RegisteredSkin(skinName, priority, func, events)
 end
 
 function AS:CallSkin(skin, func, event, ...)
-	local pass, error = pcall(func, self, event, ...)
+	local pass, errormsg = pcall(func, self, event, ...)
 	if not pass then
 		local message = '%s %s: |cfFFF0000There was an error in the|r |cff0AFFFF%s|r |cffFF0000skin|r.'
 		local errormessage = '%s Error: %s'
 		local Skin = gsub(skin, 'Skin', '')
-		print(format(message, AS.Title, AS.Version, Skin))
+		DEFAULT_CHAT_FRAME:AddMessage(format(message, AS.Title, AS.Version, Skin))
 		FoundError = true
 		if Debug then
-			print(format(errormessage, Skin, error))
+			if GetCVarBool('scriptErrors') then
+				ScriptErrorsFrame_OnError(errormsg, false)
+			else
+				DEFAULT_CHAT_FRAME:AddMessage(format(errormessage, Skin, errormsg))
+			end
 		end
 	end
 end
