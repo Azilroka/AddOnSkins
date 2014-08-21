@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 --if AS:CheckAddOn('Tukui') then return end
 
 function AS:InitAPI()
-	local Mult = AS.Mult
-	local Scale = function(x) return Mult * math.floor (x/Mult+.5) end
+	local Scale = function(x) return AS.Mult * math.floor (x/AS.Mult+.5) end
 	local floor = math.floor
 	local class = AS.MyClass
 	local texture = AS.Blank
@@ -77,7 +76,7 @@ function AS:InitAPI()
 		  bgFile = "Interface\\BUTTONS\\WHITE8X8",
 		  --edgeFile = AS.Blank,
 		  edgeFile = "Interface\\BUTTONS\\WHITE8X8",
-		  tile = false, tileSize = 0, edgeSize = Mult,
+		  tile = false, tileSize = 0, edgeSize = AS.Mult,
 		})
 
 		if AS.PixelPerfect and not f.isInsetDone then
@@ -253,7 +252,7 @@ function AS:InitAPI()
 		fs:SetFont(fontName, fontHeight, fontStyle)
 		fs:SetJustifyH("LEFT")
 		fs:SetShadowColor(0, 0, 0)
-		fs:SetShadowOffset(Mult, -Mult)
+		fs:SetShadowOffset(AS.Mult, -AS.Mult)
 
 		if not name then
 			parent.Text = fs
