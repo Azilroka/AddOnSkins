@@ -97,16 +97,16 @@ function AS:RegisteredSkin(skinName, priority, func, events)
 			if AS:CheckAddOn(conflict) then return end
 		end
 	end
-	if not self.skins[skinName] then self.skins[skinName] = {} end
-	self.skins[skinName][priority] = func
+	if not AS.skins[skinName] then AS.skins[skinName] = {} end
+	AS.skins[skinName][priority] = func
 	for event, _ in pairs(events) do
 		if not strfind(event, '%[') then
-			if not self.events[event] then
-				self[event] = GenerateEventFunction(event)
-				self:RegisterEvent(event); 
-				self.events[event] = {} 
+			if not AS.events[event] then
+				AS[event] = GenerateEventFunction(event)
+				AS:RegisterEvent(event); 
+				AS.events[event] = {} 
 			end
-			self.events[event][skinName] = true
+			AS.events[event][skinName] = true
 		end
 	end
 end
@@ -130,24 +130,24 @@ function AS:CallSkin(skin, func, event, ...)
 end
 
 function AS:UnregisterSkinEvent(skinName, event)
-	if not self.events[event] then return end
-	if not self.events[event][skinName] then return end
-	self.events[event][skinName] = nil
+	if not AS.events[event] then return end
+	if not AS.events[event][skinName] then return end
+	AS.events[event][skinName] = nil
 	local found = false
-	for skin,_ in pairs(self.events[event]) do
+	for skin,_ in pairs(AS.events[event]) do
 		if skin then
 			found = true
 			break
 		end
 	end
 	if not found then
-		self:UnregisterEvent(event)
+		AS:UnregisterEvent(event)
 	end
 end
 
 function AS:StartSkinning(event)
-	if self.enteredworld then return end
-	self.enteredworld = true
+	if AS.enteredworld then return end
+	AS.enteredworld = true
 
 	AS:UpdateMedia()
 
@@ -162,10 +162,10 @@ function AS:StartSkinning(event)
 		end
 	end
 
-	for skin, funcs in pairs(self.skins) do
-		if self:CheckOption(skin) then
+	for skin, funcs in pairs(AS.skins) do
+		if AS:CheckOption(skin) then
 			for _, func in ipairs(funcs) do
-				self:CallSkin(skin, func, event)
+				AS:CallSkin(skin, func, event)
 			end
 		end
 	end
@@ -174,29 +174,29 @@ function AS:StartSkinning(event)
 		AS:Print(format('%s: Please report this to Azilroka immediately @ %s', AS.Version, AS:PrintURL(AS.TicketTracker)))
 	end
 
-	self:EmbedInit()
+	AS:EmbedInit()
 
 	local EP = LibStub('LibElvUIPlugin-1.0', true)
 	if EP then
 		EP:RegisterPlugin(AddOnName, AS.Ace3Options)
 	end
 
-	self:Print(format("Version: |cFF1784D1%s|r Loaded!", self.Version))
-	self:UnregisterEvent(event)
+	AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
+	AS:UnregisterEvent(event)
 end
 
 function AS:Init(event, addon)
-	if (IsAddOnLoaded('Tukui') or IsAddOnLoaded('ElvUI')) and not self.Initialized then
+	if (IsAddOnLoaded('Tukui') or IsAddOnLoaded('ElvUI')) and not AS.Initialized then
 		T16 = AS:CheckAddOn('Tukui') and tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16.00 and true or false
-		if IsAddOnLoaded('ElvUI') then self:InjectProfile() end
-		self:UpdateMedia()
-		self:InitAPI()
-		self:UpdateLocale()
-		self:CreateDataText()
-		self:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
-		self:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
-		self:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
-		self.Initialized = true
+		if IsAddOnLoaded('ElvUI') then AS:InjectProfile() end
+		AS:UpdateMedia()
+		AS:InitAPI()
+		AS:UpdateLocale()
+		AS:CreateDataText()
+		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
+		AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
+		AS:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
+		AS.Initialized = true
 	end
 end
 
