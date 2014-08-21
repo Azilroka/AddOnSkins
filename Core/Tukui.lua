@@ -30,6 +30,7 @@ AddOnSkins_Options = {
 	['WeakAuraAuraBar'] = false,
 	['WeakAuraIconCooldown'] = true,
 	['AuctionHouse'] = true,
+	['SkinTemplate'] = 'Transparent',
 }
 
 function AS:UpdateMedia()

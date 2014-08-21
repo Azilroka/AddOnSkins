@@ -286,7 +286,7 @@ function AS:SkinIconButton(frame, shrinkIcon)
 end
 
 function AS:SkinFrame(frame, template, override, kill)
-	if not template then template = 'Transparent' end
+	if not template then template = AS:CheckOption('SkinTemplate') end
 	if not override then frame:StripTextures(kill) end
 	frame:SetTemplate(template)
 	if ES then
@@ -296,7 +296,7 @@ function AS:SkinFrame(frame, template, override, kill)
 end
 
 function AS:SkinBackdropFrame(frame, template, override, kill, setpoints)
-	if not template then template = 'Transparent' end
+	if not template then template = AS:CheckOption('SkinTemplate') end
 	if not override then frame:StripTextures(kill) end
 	frame:CreateBackdrop(template)
 	if setpoints then
@@ -306,7 +306,7 @@ function AS:SkinBackdropFrame(frame, template, override, kill, setpoints)
 end
 
 function AS:SkinTitleBar(frame, template, override, kill)
-	if not template then template = 'Transparent' end
+	if not template then template = AS:CheckOption('SkinTemplate') end
 	if not override then frame:StripTextures(kill) end
 	frame:SetTemplate(template, true)
 end

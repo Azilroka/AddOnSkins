@@ -254,7 +254,16 @@ function AS:Ace3Options()
 				type = 'toggle',
 				name = 'Auction House',
 				order = 2,
-			}
+			},
+			SkinTemplate = {
+				name = 'Skin Template',
+				order = 3,
+				type = "select",
+				values = {
+					['Transparent'] = 'Transparent',
+					['Default'] = 'Default',
+				}
+			},
 		}
 	}
 	Ace3OptionsPanel.Options.args.addonskins.args.faq = {

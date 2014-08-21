@@ -61,6 +61,7 @@ function AS:InjectProfile()
 		['AuctionHouse'] = true,
 		['ParchmentRemover'] = false,
 		['IntegrateMyRolePlayTooltip'] = true,
+		['SkinTemplate'] = 'Transparent',
 	}
 
 	do
