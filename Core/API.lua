@@ -288,7 +288,7 @@ function AS:InitAPI()
 	end
 
 	local function StripTextures(Object, Kill, Text)
-		for i=1, Object:GetNumRegions() do
+		for i = 1, Object:GetNumRegions() do
 			local Region = select(i, Object:GetRegions())
 			if Region:GetObjectType() == "Texture" then
 				if Kill then
@@ -319,7 +319,7 @@ function AS:InitAPI()
 		if Frame.SetPushedTexture then Frame:SetPushedTexture("") end	
 		if Frame.SetDisabledTexture then Frame:SetDisabledTexture("") end
 
-		if Strip then StripTextures(Frame) end
+		if Strip then Frame:StripTextures() end
 
 		Frame:SetTemplate()
 
@@ -348,7 +348,8 @@ function AS:InitAPI()
 		Frame.Text:SetFont(AS.Font, 12, "OUTLINE")
 		Frame.Text:SetPoint("CENTER", 0, 1)
 		Frame.Text:SetText("X")
-		Frame.Text:SetTextColor(.5, .5, .5)
+		Frame:HookScript('OnEnter', function(self) self.Text:SetTextColor(Color.r, Color.g, Color.b) end)
+		Frame:HookScript('OnLeave', function(self) self.Text:SetTextColor(1, 1, 1) end)
 	end
 
 	local function SkinEditBox(Frame)
@@ -513,8 +514,8 @@ function AS:InitAPI()
 	end
 
 	local function SkinRotateButton(btn)
-		SetTemplate(btn, "Default")
-		Size(btn, btn:GetWidth() - 14, btn:GetHeight() - 14)	
+		btn:SetTemplate("Default")
+		btn:Size(btn:GetWidth() - 14, btn:GetHeight() - 14)	
 		
 		btn:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)
 		btn:GetPushedTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)	
@@ -522,8 +523,8 @@ function AS:InitAPI()
 		btn:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
 		
 		btn:GetNormalTexture():ClearAllPoints()
-		Point(btn:GetNormalTexture(), "TOPLEFT", 2, -2)
-		Point(btn:GetNormalTexture(), "BOTTOMRIGHT", -2, 2)
+		btn:GetNormalTexture():Point("TOPLEFT", 2, -2)
+		btn:GetNormalTexture():Point("BOTTOMRIGHT", -2, 2)
 		btn:GetPushedTexture():SetAllPoints(btn:GetNormalTexture())	
 		btn:GetHighlightTexture():SetAllPoints(btn:GetNormalTexture())
 	end
@@ -576,32 +577,32 @@ function AS:InitAPI()
 		end
 
 		if _G[frame:GetName().."ScrollUpButton"] and _G[frame:GetName().."ScrollDownButton"] then
-			StripTextures(_G[frame:GetName().."ScrollUpButton"])
-			SetTemplate(_G[frame:GetName().."ScrollUpButton"], "Default", true)
-			if not _G[frame:GetName().."ScrollUpButton"].texture then
-				_G[frame:GetName().."ScrollUpButton"].texture = _G[frame:GetName().."ScrollUpButton"]:CreateTexture(nil, "OVERLAY")
-				Point(_G[frame:GetName().."ScrollUpButton"].texture, "TOPLEFT", 2, -2)
-				Point(_G[frame:GetName().."ScrollUpButton"].texture, "BOTTOMRIGHT", -2, 2)
-				_G[frame:GetName().."ScrollUpButton"].texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowup.tga]])
-				_G[frame:GetName().."ScrollUpButton"].texture:SetVertexColor(unpack(AS.BorderColor))
+			_G[frame:GetName().."ScrollUpButton"]:StripTextures()
+			_G[frame:GetName().."ScrollUpButton"]:SetTemplate("Default", true)
+			if not _G[frame:GetName().."ScrollUpButton"].text then
+				_G[frame:GetName().."ScrollUpButton"]:FontString("text", AS.ActionBarFont, 12)
+				_G[frame:GetName().."ScrollUpButton"].text:SetText("▲")
+				_G[frame:GetName().."ScrollUpButton"].text:SetPoint("CENTER", 0, 0)
+				_G[frame:GetName().."ScrollUpButton"]:HookScript('OnEnter', function(self) self.text:SetTextColor(Color.r, Color.g, Color.b) end)
+				_G[frame:GetName().."ScrollUpButton"]:HookScript('OnLeave', function(self) self.text:SetTextColor(1, 1, 1) end)
 			end	
-			
-			StripTextures(_G[frame:GetName().."ScrollDownButton"])
-			SetTemplate(_G[frame:GetName().."ScrollDownButton"], "Default", true)
+
+			_G[frame:GetName().."ScrollDownButton"]:StripTextures()
+			_G[frame:GetName().."ScrollDownButton"]:SetTemplate("Default", true)
 		
-			if not _G[frame:GetName().."ScrollDownButton"].texture then
-				_G[frame:GetName().."ScrollDownButton"].texture = _G[frame:GetName().."ScrollDownButton"]:CreateTexture(nil, "OVERLAY")
-				Point(_G[frame:GetName().."ScrollDownButton"].texture, "TOPLEFT", 2, -2)
-				Point(_G[frame:GetName().."ScrollDownButton"].texture, "BOTTOMRIGHT", -2, 2)
-				_G[frame:GetName().."ScrollDownButton"].texture:SetTexture([[Interface\AddOns\Tukui\medias\textures\arrowdown.tga]])
-				_G[frame:GetName().."ScrollDownButton"].texture:SetVertexColor(unpack(AS.BorderColor))
-			end				
+			if not _G[frame:GetName().."ScrollDownButton"].text then
+				_G[frame:GetName().."ScrollDownButton"]:FontString("text", AS.ActionBarFont, 12)
+				_G[frame:GetName().."ScrollDownButton"].text:SetText("▼")
+				_G[frame:GetName().."ScrollDownButton"].text:SetPoint("CENTER", 0, 0)
+				_G[frame:GetName().."ScrollDownButton"]:HookScript('OnEnter', function(self) self.text:SetTextColor(Color.r, Color.g, Color.b) end)
+				_G[frame:GetName().."ScrollDownButton"]:HookScript('OnLeave', function(self) self.text:SetTextColor(1, 1, 1) end)
+			end
 			
 			if not frame.trackbg then
 				frame.trackbg = CreateFrame("Frame", nil, frame)
-				Point(frame.trackbg, "TOPLEFT", _G[frame:GetName().."ScrollUpButton"], "BOTTOMLEFT", 0, -1)
-				Point(frame.trackbg, "BOTTOMRIGHT", _G[frame:GetName().."ScrollDownButton"], "TOPRIGHT", 0, 1)
-				SetTemplate(frame.trackbg, "Transparent")
+				frame.trackbg:Point("TOPLEFT", _G[frame:GetName().."ScrollUpButton"], "BOTTOMLEFT", 0, -1)
+				frame.trackbg:Point("BOTTOMRIGHT", _G[frame:GetName().."ScrollDownButton"], "TOPRIGHT", 0, 1)
+				frame.trackbg:SetTemplate("Transparent")
 			end
 			
 			if frame:GetThumbTexture() then
@@ -609,9 +610,9 @@ function AS:InitAPI()
 				frame:GetThumbTexture():SetTexture(nil)
 				if not frame.thumbbg then
 					frame.thumbbg = CreateFrame("Frame", nil, frame)
-					Point(frame.thumbbg, "TOPLEFT", frame:GetThumbTexture(), "TOPLEFT", 2, -thumbTrim)
-					Point(frame.thumbbg, "BOTTOMRIGHT", frame:GetThumbTexture(), "BOTTOMRIGHT", -2, thumbTrim)
-					SetTemplate(frame.thumbbg, "Default", true)
+					frame.thumbbg:Point("TOPLEFT", frame:GetThumbTexture(), "TOPLEFT", 2, -thumbTrim)
+					frame.thumbbg:Point("BOTTOMRIGHT", frame:GetThumbTexture(), "BOTTOMRIGHT", -2, thumbTrim)
+					frame.thumbbg:SetTemplate("Default", true)
 					if frame.trackbg then
 						frame.thumbbg:SetFrameLevel(frame.trackbg:GetFrameLevel())
 					end

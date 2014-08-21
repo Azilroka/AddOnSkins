@@ -214,13 +214,15 @@ function AS:SkinScrollBar(frame)
 		_G[frame:GetName().."ScrollUpButton"]:FontString("text", AS.ActionBarFont, 12)
 		_G[frame:GetName().."ScrollUpButton"].text:SetText("▲")
 		_G[frame:GetName().."ScrollUpButton"].text:SetPoint("CENTER", 0, 0)
-		_G[frame:GetName().."ScrollUpButton"].text:SetTextColor(unpack(AS.BorderColor))
+		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnEnter', function(self) self.text:SetTextColor(Color.r, Color.g, Color.b) end)
+		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnLeave', function(self) self.text:SetTextColor(1, 1, 1) end)
 	end	
 	if not _G[frame:GetName().."ScrollDownButton"].text then
 		_G[frame:GetName().."ScrollDownButton"]:FontString("text", AS.ActionBarFont, 12)
 		_G[frame:GetName().."ScrollDownButton"].text:SetText("▼")
 		_G[frame:GetName().."ScrollDownButton"].text:SetPoint("CENTER", 0, 0)
-		_G[frame:GetName().."ScrollDownButton"].text:SetTextColor(unpack(AS.BorderColor))
+		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnEnter', function(self) self.text:SetTextColor(Color.r, Color.g, Color.b) end)
+		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnLeave', function(self) self.text:SetTextColor(1, 1, 1) end)
 	end
 end
 
