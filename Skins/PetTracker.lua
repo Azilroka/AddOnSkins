@@ -96,12 +96,11 @@ function AS:SkinPetTracker()
 		PetTrackerTamerJournal:HookScript('OnShow', function(self)
 			if not self.IsSkinned then
 				PetTrackerTamerJournal.Count:StripTextures()
-				PetTrackerTamerJournalLeftInset:StripTextures()
-				PetTrackerTamerJournalRightInset:StripTextures()
+				PetTrackerTamerJournal.ListInset:StripTextures()
 				AS:SkinEditBox(PetTrackerTamerJournalSearchBox)
 				AS:SkinScrollBar(PetTrackerTamerJournalListScrollBar)
 				AS:SkinFrame(PetTrackerTamerJournalCard)
-				PetTrackerTamerJournal.TeamBorder:StripTextures()
+				PetTrackerTamerJournal.Team.Border:StripTextures()
 				for i = 1, 11 do
 					local b = _G["PetTrackerTamerJournalListButton"..i]
 					b:StripTextures()
@@ -109,7 +108,7 @@ function AS:SkinPetTracker()
 					b.model:SetTemplate()
 					b.model.quality:Hide()
 					hooksecurefunc(PetTrackerTamerJournalList, 'update', function(...) b.model:SetBackdropBorderColor(b.model.quality:GetVertexColor()) end)
-					b.model.levelBG:SetAlpha(0)
+					b.model.levelRing:SetAlpha(0)
 				end
 				self.IsSkinned = true
 				for i = 1, 3 do
@@ -117,12 +116,12 @@ function AS:SkinPetTracker()
 					_G['PetTrackerJournalSlot'..i].Bg:Hide()
 					_G['PetTrackerJournalSlot'..i].Quality:Hide()
 					_G['PetTrackerJournalSlot'..i].Hover:Kill()
-					_G['PetTrackerJournalSlot'..i].Highlight:Kill()
+					--_G['PetTrackerJournalSlot'..i..'Highlight']:Kill()
  					AS:SkinTexture(_G['PetTrackerJournalSlot'..i].Icon)
 					_G['PetTrackerJournalSlot'..i].IconBorder:Hide()
 					_G['PetTrackerJournalSlot'..i].LevelBG:Hide()
 					_G['PetTrackerJournalSlot'..i].IsSkinned = true
-					for i = 1, 9 do
+					for i = 1, 15 do
 						local Ability = _G['PetTrackerAbilityButton'..i]
 						for i = 1, Ability:GetNumRegions() do
 							local Region = select(i, Ability:GetRegions())
@@ -132,6 +131,7 @@ function AS:SkinPetTracker()
 								end
 							end
 						end
+						_G['PetTrackerAbilityButton'..i]:StyleButton()
 						AS:SkinTexture(_G['PetTrackerAbilityButton'..i].Icon)
 					end
 				end
