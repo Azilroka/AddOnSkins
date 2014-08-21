@@ -1,7 +1,7 @@
 local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('ElvUI') then return end
 
-local E, L, V, P, G, LSM, ES
+local E, L, V, P, G, LSM, ES, S
 local select = select
 
 function AS:CheckOption(optionName, ...)
@@ -74,8 +74,69 @@ function AS:InjectProfile()
 	end
 end
 
+function AS:SkinButton(frame, strip)
+	S:HandleButton(frame, strip)
+end
+
+function AS:SkinScrollBar(frame)
+	S:HandleScrollBar(frame)
+end
+
+function AS:SkinTab(tab, strip)
+	if strip then tab:StripTextures(true) end
+	S:HandleTab(tab)
+end
+
+function AS:SkinNextPrevButton(frame, horizonal)
+	S:HandleNextPrevButton(frame)
+end
+
+function AS:SkinRotateButton(btn)
+	S:HandleRotateButton(btn)
+end
+
+function AS:SkinEditBox(frame, width, height)
+	S:HandleEditBox(frame)
+	if width then frame:Width(width) end
+	if height then frame:Height(height) end
+end
+
+function AS:SkinDropDownBox(frame, width)
+	S:HandleDropDownBox(frame, width)
+end
+
+function AS:SkinCheckBox(frame)
+	S:HandleCheckBox(frame)
+end
+
+function AS:SkinCloseButton(frame, point)
+	S:HandleCloseButton(frame, point)
+end
+
+function AS:SkinSlideBar(frame, height, movetext)
+	S:HandleSliderFrame(frame)
+	if height then
+		frame:GetThumbTexture():Size(height-2,height-2)
+	end
+end
+
+function AS:SkinIconButton(frame, shrinkIcon)
+	S:HandleItemButton(frame, shrinkIcon)
+	local icon = frame.icon
+	if frame:GetName() and _G[frame:GetName()..'IconTexture'] then
+		icon = _G[frame:GetName()..'IconTexture']
+	elseif frame:GetName() and _G[frame:GetName()..'Icon'] then
+		icon = _G[frame:GetName()..'Icon']
+	end
+
+	if icon then
+		AS:SkinTexture(icon)
+	end
+end
+
 function AS:UpdateMedia()
 	LSM, ES = AS.LSM, E:GetModule('EnhancedShadows', true)
+	S = E:GetModule('Skins')
 	AS.Blank = LSM:Fetch('background', 'ElvUI Blank')
 	AS.Font = LSM:Fetch('font', E.db.general.font)
 	AS.ActionBarFont = LSM:Fetch('font', 'Arial')

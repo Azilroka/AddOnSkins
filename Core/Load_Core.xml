@@ -5,5 +5,4 @@
 	<Script file="Conflicts.lua"/>
 	<Script file="Embed.lua"/>
 	<Script file="Options.lua"/>
-	<Script file="API.lua"/>
 </Ui>

@@ -190,7 +190,6 @@ function AS:Init(event, addon)
 		T16 = AS:CheckAddOn('Tukui') and tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16.00 and true or false
 		if IsAddOnLoaded('ElvUI') then AS:InjectProfile() end
 		AS:UpdateMedia()
-		AS:InitAPI()
 		AS:UpdateLocale()
 		AS:CreateDataText()
 		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
@@ -272,6 +271,20 @@ function AS:SkinSlideBar(frame, height, movetext)
 	end
 end
 
+function AS:SkinIconButton(frame, shrinkIcon)
+	frame:SkinIconButton(shrinkIcon)
+	local icon = frame.icon
+	if frame:GetName() and _G[frame:GetName()..'IconTexture'] then
+		icon = _G[frame:GetName()..'IconTexture']
+	elseif frame:GetName() and _G[frame:GetName()..'Icon'] then
+		icon = _G[frame:GetName()..'Icon']
+	end
+
+	if icon then
+		AS:SkinTexture(icon)
+	end
+end
+
 function AS:SkinFrame(frame, template, override, kill)
 	if not template then template = 'Transparent' end
 	if not override then frame:StripTextures(kill) end
@@ -312,20 +325,6 @@ function AS:SkinTooltip(tooltip, scale)
 		frame:SetTemplate('Transparent')
 		if scale then frame:SetScale(AS.UIScale) end
 	end)
-end
-
-function AS:SkinIconButton(frame, shrinkIcon)
-	frame:SkinIconButton(shrinkIcon)
-	local icon = frame.icon
-	if frame:GetName() and _G[frame:GetName()..'IconTexture'] then
-		icon = _G[frame:GetName()..'IconTexture']
-	elseif frame:GetName() and _G[frame:GetName()..'Icon'] then
-		icon = _G[frame:GetName()..'Icon']
-	end
-
-	if icon then
-		AS:SkinTexture(icon)
-	end
 end
 
 function AS:SkinTexture(frame)
