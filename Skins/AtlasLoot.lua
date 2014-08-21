@@ -201,7 +201,7 @@ function AS:SkinAtlasLoot(event, addon)
 				end
 			end
 		end)
-		AtlasLootPanel1:SetWidth(AtlasLootDefaultFrame:GetWidth())
+		AtlasLootPanel:SetWidth(AtlasLootDefaultFrame:GetWidth())
 		AtlasLootPanel.SetWidth = function() end
 
 		if AtlasLootTooltip:GetName() ~= 'GameTooltip' then AS:SkinTooltip(AtlasLootTooltip) end
