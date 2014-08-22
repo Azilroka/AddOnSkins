@@ -153,7 +153,6 @@ function AS:UpdateMedia()
 	AS.UIScale = UIParent:GetScale()
 	AS.PixelPerfect = E.PixelMode
 	AS.HideShadows = false
-	AS.Locale = L
 
 	E:GetModule('DataTexts'):RegisterLDB()
 	E:GetModule('DataTexts'):LoadDataTexts()
@@ -308,13 +307,13 @@ function AS:CreateDataText()
 
 	local function OnEnter(self)
 		DT:SetupTooltip(self)
-		DT.tooltip:AddLine('Left Click to Show')
-		DT.tooltip:AddLine('Right Click to Hide')
+		DT.tooltip:AddLine(ASL.DataText.LeftClick)
+		DT.tooltip:AddLine(ASL.DataText.RightClick)
 		DT.tooltip:Show()
 	end
 
 	local function OnEvent(self, event)
-		self.text:SetText('Toggle Embed')
+		self.text:SetText(ASL.DataText.ToggleEmbed)
 	end
 
 	DT:RegisterDatatext('AddOnSkins', { 'PLAYER_ENTERING_WORLD' }, OnEvent, nil, OnClick, OnEnter)

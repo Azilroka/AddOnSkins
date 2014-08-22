@@ -328,7 +328,7 @@ function AS:Ace3Options()
 				type = 'input',
 				width = 'full',
 				name = 'Download Link',
-				get = function(info) return AS.DownloadLink end,
+				get = function(info) return 'http://www.tukui.org/addons/index.php?act=view&id=128' end,
 				order = 2,
 			},
 			changeloglink = {

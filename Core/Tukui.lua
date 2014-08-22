@@ -247,16 +247,15 @@ function AS:CreateDataText()
 	end
 
 	local Update = function(self)
-		local L = AS.Locale
-		self.Text:SetText(format('%s %s', L.DataTextToggle, L.DataTextEmbed))
+		self.Text:SetText(ASL.DataText.ToggleEmbed)
 	end
 
 	local OnEnter = function(self)
 		local Panel, Anchor, xOff, yOff = self:GetTooltipAnchor()
 		GameTooltip:SetOwner(Panel, Anchor, xOff, yOff)
 		GameTooltip:ClearLines()
-		GameTooltip:AddLine('Left Click to Show')
-		GameTooltip:AddLine('Right Click to Hide')
+		GameTooltip:AddLine(ASL.DataText.LeftClick)
+		GameTooltip:AddLine(ASL.DataText.RightClick)
 		GameTooltip:Show()
 	end
 
@@ -275,5 +274,5 @@ function AS:CreateDataText()
 		self:UnregisterAllEvents()
 	end
 
-	DataText:Register('EmbedSystem', Enable, Disable, Update)
+	DataText:Register('AddOnSkins', Enable, Disable, Update)
 end

@@ -1,8 +1,9 @@
 local AS, ASL = unpack(AddOnSkins)
 
 function AS:UpdateLocale_itIT()
-	ASL.DataText.Toggle = "Alterna"
-	ASL.DataText.Embed = "Integra"
+	ASL.DataText.ToggleEmbed = 'Alterna Integrazione' -- Hopefully right
+	ASL.DataText.LeftClick = 'Left Click to Show'
+	ASL.DataText.RightClick = 'Right Click to Hide'
 
 	ASL.EmbedSystem.ToggleLeftChat = "Alterna Pannello Sinistro della Chat"
 	ASL.EmbedSystem.ToggleRightChat = "Alterna Pannello Destro della Chat"

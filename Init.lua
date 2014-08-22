@@ -8,7 +8,6 @@ AddOnSkins = Engine
 
 AddOn.Title = select(2, GetAddOnInfo(AddOnName))
 AddOn.Version = GetAddOnMetadata(AddOnName, 'Version')
-AddOn.DownloadLink = 'http://www.tukui.org/addons/index.php?act=view&id=127'
 AddOn.LSM = LibStub('LibSharedMedia-3.0')
 AddOn.SLE = select(4, GetAddOnInfo('ElvUI_SLE'))
 AddOn.TicketTracker = 'http://git.tukui.org/Azilroka/addonskins'

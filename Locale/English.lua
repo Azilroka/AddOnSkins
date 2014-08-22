@@ -1,8 +1,9 @@
 local AS, ASL = unpack(AddOnSkins)
 
 function AS:UpdateLocale_enUS()
-	ASL.DataText.Toggle = 'Toggle'
-	ASL.DataText.Embed = 'Embed'
+	ASL.DataText.ToggleEmbed = 'Toggle Embed'
+	ASL.DataText.LeftClick = 'Left Click to Show'
+	ASL.DataText.RightClick = 'Right Click to Hide'
 
 	ASL.EmbedSystem.ToggleLeftChat = 'Toggle Left Chat Panel'
 	ASL.EmbedSystem.ToggleRightChat = 'Toggle Right Chat Panel'
