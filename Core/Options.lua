@@ -195,44 +195,60 @@ function AS:Ace3Options()
 				name = 'Out of Combat (Hide)',
 				order = 8,
 			},
+			EmbedOoCDelay = {
+				name = 'Embed OoC Delay',
+				order = 9,
+				type = 'range',
+				min = 1,
+				max = 30,
+				step = 1,
+				disabled = function() return not ((AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) and AS:CheckOption('EmbedOoC')) end,
+			},
+			HideChatFrame = {
+				name = 'Hide Chat Frame',
+				order = 10,
+				type = "select",
+				values = AS:GetChatWindowInfo(),
+				disabled = function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end,
+			},
 			EmbedSexyCooldown = {
 				type = 'toggle',
 				name = 'Attach SexyCD to action bar',
-				order = 9,
+				order = 11,
 				disabled = function() return not AS:CheckOption('SexyCooldownSkin', 'SexyCooldown2') end,
 			},
 			EmbedCoolLine = {
 				type = 'toggle',
 				name = 'Attach CoolLine to action bar',
-				order = 10,
+				order = 12,
 				disabled = function() return not AS:CheckOption('CoolLineSkin', 'CoolLine') end,
 			},
 			TransparentEmbed = {
 				type = 'toggle',
 				name = 'Embed Transparancy',
-				order = 11,
+				order = 13,
 			},
 			EmbedBelowTop = {
 				type = 'toggle',
 				name = 'Embed Below Top Tab',
-				order = 12,
+				order = 14,
 			},
 			RecountBackdrop = {
 				type = 'toggle',
 				name = 'Recount Backdrop',
-				order = 13,
+				order = 15,
 				disabled = function() return not (AS:CheckOption('RecountSkin', 'Recount') and AS:CheckEmbed('Recount')) end
 			},
 			SkadaBackdrop = {
 				type = 'toggle',
 				name = 'Skada Backdrop',
-				order = 14,
+				order = 16,
 				disabled = function() return not (AS:CheckOption('SkadaSkin', 'Skada') and AS:CheckEmbed('Skada')) end
 			},
 			OmenBackdrop = {
 				type = 'toggle',
 				name = 'Omen Backdrop',
-				order = 15,
+				order = 17,
 				disabled = function() return not (AS:CheckOption('OmenSkin', 'Omen') and AS:CheckEmbed('Omen')) end
 			},
 		}
@@ -253,22 +269,16 @@ function AS:Ace3Options()
 					['Default'] = 'Default',
 				}
 			},
-			HideChatFrame = {
-				name = 'Hide Chat Frame',
-				order = 2,
-				type = "select",
-				values = AS:GetChatWindowInfo()
-			},
 			WeakAuraAuraBar = {
 				type = 'toggle',
 				name = 'WeakAura AuraBar',
-				order = 3,
+				order = 2,
 				disabled = function() return not AS:CheckOption('WeakAurasSkin', 'WeakAuras') end,
 			},
 			AuctionHouse = {
 				type = 'toggle',
 				name = 'Auction House',
-				order = 4,
+				order = 3,
 			},
 		}
 	}

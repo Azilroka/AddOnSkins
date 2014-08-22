@@ -4,7 +4,7 @@ local L = AS.Locale
 local format, gsub, pairs, ipairs, select, tinsert, tonumber = format, gsub, pairs, ipairs, select, tinsert, tonumber
 
 function AS:GetChatWindowInfo()
-	local ChatTabInfo = {}
+	local ChatTabInfo = {['NONE'] = 'NONE'}
 	for i = 1, NUM_CHAT_WINDOWS do
 		local tab = _G["ChatFrame"..i.."Tab"];
 
@@ -276,15 +276,21 @@ function AS:EmbedEnterCombat(event)
 	EmbedOoCCombatStart = true
 	if AS:CheckOption('EmbedOoC') then
 		EmbedSystem_MainWindow:Show()
+		if AS:CheckOption('HideChatFrame') ~= 'NONE' then
+			_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
+		end
 	end
 end
 
 function AS:EmbedExitCombat(event)
 	EmbedOoCCombatStart = false
 	if AS:CheckOption('EmbedOoC') then
-		AS:Delay(10, function()
+		AS:Delay(AS:CheckOption('EmbedOoCDelay'), function()
 			if not EmbedOoCCombatStart then
 				EmbedSystem_MainWindow:Hide()
+				if AS:CheckOption('HideChatFrame') ~= 'NONE' then
+					_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
+				end
 			end
 		end)
 	end

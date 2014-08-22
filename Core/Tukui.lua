@@ -6,7 +6,8 @@ local T, C, L
 
 AddOnSkins_Options = {
 -- Embeds
-	['EmbedOoC'] = false, 
+	['EmbedOoC'] = false,
+	['EmbedOoCDelay'] = 10,
 	['EmbedCoolLine'] = false,
 	['EmbedSexyCooldown'] = false,
 	['EmbedSystem'] = false,
@@ -31,6 +32,8 @@ AddOnSkins_Options = {
 	['WeakAuraIconCooldown'] = true,
 	['AuctionHouse'] = true,
 	['SkinTemplate'] = 'Transparent',
+	['HideChatFrame'] = 'NONE',
+	['SkinDebug'] = false,
 }
 
 function AS:UpdateMedia()
@@ -115,8 +118,14 @@ function AS:CreateEmbedSystem()
 			if button == 'RightButton' then
 				if EmbedSystem_MainWindow:IsShown() then
 					EmbedSystem_MainWindow:Hide()
+					if AS:CheckOption('HideChatFrame') ~= 'NONE' then
+						_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
+					end
 				else
 					EmbedSystem_MainWindow:Show()
+					if AS:CheckOption('HideChatFrame') ~= 'NONE' then
+						_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
+					end
 				end
 			end
 		end)
@@ -125,7 +134,9 @@ function AS:CreateEmbedSystem()
 		LeftToggleButton:Point('LEFT', AS.InfoLeft, 'LEFT', 2, 0)
 		LeftToggleButton:HookScript('OnClick', function(self, button)
 			if button == 'RightButton' then
-				Enhanced_Config[1]:ToggleConfig()
+				if IsAddOnLoaded('Enhanced_Config') then
+					Enhanced_Config[1]:ToggleConfig()
+				end
 			end
 		end)
 

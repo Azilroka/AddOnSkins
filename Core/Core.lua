@@ -1,7 +1,6 @@
 local AS = unpack(AddOnSkins)
 local AddOnName = ...
 local T16, ES
-local Debug = true
 
 function AS:OrderedPairs(t, f)
 	local a = {}
@@ -119,7 +118,7 @@ function AS:CallSkin(skin, func, event, ...)
 		local Skin = gsub(skin, 'Skin', '')
 		DEFAULT_CHAT_FRAME:AddMessage(format(message, AS.Title, AS.Version, Skin))
 		FoundError = true
-		if Debug then
+		if AS:CheckOption('SkinDebug') then
 			if GetCVarBool('scriptErrors') then
 				ScriptErrorsFrame_OnError(errormsg, false)
 			else

@@ -36,6 +36,7 @@ function AS:InjectProfile()
 	V['addonskins'] = {
 	-- Embeds
 		['EmbedOoC'] = false, 
+		['EmbedOoCDelay'] = 10,
 		['EmbedCoolLine'] = false,
 		['EmbedSexyCooldown'] = false,
 		['EmbedSystem'] = false,
@@ -62,6 +63,8 @@ function AS:InjectProfile()
 		['ParchmentRemover'] = false,
 		['IntegrateMyRolePlayTooltip'] = true,
 		['SkinTemplate'] = 'Transparent',
+		['HideChatFrame'] = 'NONE',
+		['SkinDebug'] = false,
 	}
 
 	do
@@ -182,8 +185,14 @@ function AS:CreateEmbedSystem()
 				if not AS:CheckOption('EmbedLeftChat') then
 					if EmbedSystem_MainWindow:IsShown() then
 						EmbedSystem_MainWindow:Hide()
+						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
+							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
+						end
 					else
 						EmbedSystem_MainWindow:Show()
+						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
+							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
+						end
 					end
 				end
 			else
@@ -212,8 +221,14 @@ function AS:CreateEmbedSystem()
 				if AS:CheckOption('EmbedLeftChat') then
 					if EmbedSystem_MainWindow:IsShown() then
 						EmbedSystem_MainWindow:Hide()
+						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
+							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
+						end
 					else
 						EmbedSystem_MainWindow:Show()
+						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
+							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
+						end
 					end
 				end
 			else
