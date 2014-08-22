@@ -1,8 +1,8 @@
-local AS = unpack(AddOnSkins)
+local AS, ASL = unpack(AddOnSkins)
 if not AS:CheckAddOn('Tukui') then return end
 
 local select = select
-local T, C, L
+local T, C
 
 AddOnSkins_Options = {
 -- Embeds
@@ -37,8 +37,7 @@ AddOnSkins_Options = {
 }
 
 function AS:UpdateMedia()
-	T, C, L = Tukui:unpack()
-	AS.Locale = L
+	T, C = unpack(Tukui) -- FIX ME T16
 	AS.PixelPerfect = C['General']['InOut']
 	AS.HideShadows = C['General']['HideShadows']
 
@@ -111,7 +110,7 @@ function AS:CreateEmbedSystem()
 		EmbedSystem_MainWindow:SetScript('OnShow', AS.Embed_Show)
 		EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
 
-		AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, AS.ChatBackgroundRight, L.ToggleRightChat, L.ToggleEmbed)
+		AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, AS.ChatBackgroundRight, ASL.EmbedSystem.ToggleRightChat, ASL.EmbedSystem.Toggle)
 		RightToggleButton:Point('RIGHT', AS.InfoRight, 'RIGHT', -2, 0)
 
 		RightToggleButton:HookScript('OnClick', function(self, button)
@@ -130,7 +129,7 @@ function AS:CreateEmbedSystem()
 			end
 		end)
 
-		AS:CreateToggleButton('LeftToggleButton', '◄', AS.InfoLeft, AS.ChatBackgroundLeft, L.ToggleLeftChat, L.ToggleOptions)
+		AS:CreateToggleButton('LeftToggleButton', '◄', AS.InfoLeft, AS.ChatBackgroundLeft, ASL.EmbedSystem.ToggleLeftChat, ASL.ToggleOptions)
 		LeftToggleButton:Point('LEFT', AS.InfoLeft, 'LEFT', 2, 0)
 		LeftToggleButton:HookScript('OnClick', function(self, button)
 			if button == 'RightButton' then

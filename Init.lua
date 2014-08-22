@@ -2,6 +2,8 @@ local AddOnName, Engine = ...
 local AddOn = LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceConsole-3.0', 'AceEvent-3.0', 'AceTimer-3.0', 'AceHook-3.0')
 
 Engine[1] = AddOn
+Engine[2] = {}	-- Media
+Engine[3] = {}	-- Locale
 AddOnSkins = Engine
 
 AddOn.Title = select(2, GetAddOnInfo(AddOnName))

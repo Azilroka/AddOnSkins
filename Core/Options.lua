@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, ASL = unpack(AddOnSkins)
 local tinsert, sort, pairs, format, gsub, strfind = tinsert, sort, pairs, format, gsub, strfind
 
 local DEVELOPER_STRING = ''
@@ -46,8 +46,6 @@ for _, devName in pairs(DEVELOPERS) do
 end
 
 function AS:Ace3Options()
-	local L = AS.Locale
-
 	local Ace3OptionsPanel = IsAddOnLoaded('ElvUI') and ElvUI[1] or Enhanced_Config and Enhanced_Config[1] or nil
 
 	if not Ace3OptionsPanel then return end

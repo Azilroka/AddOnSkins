@@ -1,17 +1,16 @@
-local AS = unpack(AddOnSkins)
+local AS, ASL = unpack(AddOnSkins)
 
 function AS:UpdateLocale_enUS()
-	local L = AS.Locale
+	ASL.DataText.Toggle = 'Toggle'
+	ASL.DataText.Embed = 'Embed'
 
-	L.DataTextToggle = 'Toggle'
-	L.DataTextEmbed = 'Embed'
+	ASL.EmbedSystem.ToggleLeftChat = 'Toggle Left Chat Panel'
+	ASL.EmbedSystem.ToggleRightChat = 'Toggle Right Chat Panel'
+	ASL.EmbedSystem.ToggleEmbed = 'Toggle Embedded AddOn'
+	ASL.EmbedSystem.ToggleOptions = 'Toggle Extra Skins/Options'
 
-	L.ToggleSkinDesc = 'Enable/Disable this skin.'
-	L.ToggleEmbedDesc = 'Enable/Disable this embed.'
-	L.ToggleOptionDesc = 'Enable/Disable this option.'
-	L.MiscellaneousOptions = 'Miscellaneous Options'
-	L.ToggleLeftChat = 'Toggle Left Chat Panel'
-	L.ToggleRightChat = 'Toggle Right Chat Panel'
-	L.ToggleEmbed = 'Toggle Embedded AddOn'
-	L.ToggleOptions = 'Toggle Extra Skins/Options'
+	ASL.OptionsPanel.SkinDesc = 'Enable/Disable this skin.'
+	ASL.OptionsPanel.EmbedDesc = 'Enable/Disable this embed.'
+	ASL.OptionsPanel.OptionDesc = 'Enable/Disable this option.'
+	ASL.OptionsPanel.MiscellaneousOptions = 'Miscellaneous Options'
 end
