@@ -1,17 +1,15 @@
-local AS = unpack(AddOnSkins)
+local AS, ASL = unpack(AddOnSkins)
 
 function AS:UpdateLocale_itIT()
-    local L = AS.Locale
+	ASL.DataText.Toggle = "Alterna"
+	ASL.DataText.Embed = "Integra"
 
-    L.DataTextToggle = "Alterna"
-    L.DataTextEmbed = "Integra"
+	ASL.EmbedSystem.ToggleLeftChat = "Alterna Pannello Sinistro della Chat"
+	ASL.EmbedSystem.ToggleRightChat = "Alterna Pannello Destro della Chat"
+	ASL.EmbedSystem.ToggleEmbed = "Alterna Integrazione dell AddOn"
+	ASL.EmbedSystem.ToggleOptions = "Alterna Customizzazioni/Opzioni Aggiuntive"
 
-    L.ToggleSkinDesc = "Abilita/Disabilita questa customizzazione."
-    L.ToggleEmbedDesc = "Abilita/Disabilita questa integrazione."
-    L.ToggleOptionDesc = "Abilita/Disabilita questa opzione."
-    L.MiscellaneousOptions = "Opzioni Generiche"
-    L.ToggleLeftChat = "Alterna Pannello Sinistro della Chat"
-    L.ToggleRightChat = "Alterna Pannello Destro della Chat"
-    L.ToggleEmbed = "Alterna Integrazione dell AddOn"
-    L.ToggleOptions = "Alterna Customizzazioni/Opzioni Aggiuntive"
+	ASL.OptionsPanel.SkinDesc = "Abilita/Disabilita questa customizzazione."
+	ASL.OptionsPanel.EmbedDesc = "Abilita/Disabilita questa integrazione."
+	ASL.OptionsPanel.OptionDesc = "Abilita/Disabilita questa opzione."
 end

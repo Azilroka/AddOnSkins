@@ -12,5 +12,4 @@ function AS:UpdateLocale_enUS()
 	ASL.OptionsPanel.SkinDesc = 'Enable/Disable this skin.'
 	ASL.OptionsPanel.EmbedDesc = 'Enable/Disable this embed.'
 	ASL.OptionsPanel.OptionDesc = 'Enable/Disable this option.'
-	ASL.OptionsPanel.MiscellaneousOptions = 'Miscellaneous Options'
 end

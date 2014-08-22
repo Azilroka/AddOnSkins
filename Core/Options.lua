@@ -56,6 +56,7 @@ function AS:Ace3Options()
 			type = 'toggle',
 			name = text,
 			order = order,
+			desc = ASL.OptionsPanel.SkinDesc,
 		}
 		return options
 	end
