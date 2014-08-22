@@ -189,6 +189,7 @@ function AS:Init(event, addon)
 		T16 = AS:CheckAddOn('Tukui') and tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16.00 and true or false
 		if IsAddOnLoaded('ElvUI') then AS:InjectProfile() end
 		AS:UpdateMedia()
+		AS:InitAPI()
 		AS:UpdateLocale()
 		AS:CreateDataText()
 		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
