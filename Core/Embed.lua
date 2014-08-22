@@ -3,6 +3,16 @@ local L = AS.Locale
 
 local format, gsub, pairs, ipairs, select, tinsert, tonumber = format, gsub, pairs, ipairs, select, tinsert, tonumber
 
+function AS:GetChatWindowInfo()
+	local ChatTabInfo = {}
+	for i = 1, NUM_CHAT_WINDOWS do
+		local tab = _G["ChatFrame"..i.."Tab"];
+
+		ChatTabInfo["ChatFrame"..i] = tab:GetText()
+	end
+	return ChatTabInfo
+end
+
 function AS:EmbedInit()
 	if AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual') then
 		AS:CreateEmbedSystem()

@@ -244,25 +244,31 @@ function AS:Ace3Options()
 		get = function(info) return AS:CheckOption(info[#info]) end,
 		set = function(info, value) AS:SetOption(info[#info], value) end,
 		args = {
-			WeakAuraAuraBar = {
-				type = 'toggle',
-				name = 'WeakAura AuraBar',
-				order = 1,
-				disabled = function() return not AS:CheckOption('WeakAurasSkin', 'WeakAuras') end,
-			},
-			AuctionHouse = {
-				type = 'toggle',
-				name = 'Auction House',
-				order = 2,
-			},
 			SkinTemplate = {
 				name = 'Skin Template',
-				order = 3,
+				order = 1,
 				type = "select",
 				values = {
 					['Transparent'] = 'Transparent',
 					['Default'] = 'Default',
 				}
+			},
+			HideChatFrame = {
+				name = 'Hide Chat Frame',
+				order = 2,
+				type = "select",
+				values = AS:GetChatWindowInfo()
+			},
+			WeakAuraAuraBar = {
+				type = 'toggle',
+				name = 'WeakAura AuraBar',
+				order = 3,
+				disabled = function() return not AS:CheckOption('WeakAurasSkin', 'WeakAuras') end,
+			},
+			AuctionHouse = {
+				type = 'toggle',
+				name = 'Auction House',
+				order = 4,
 			},
 		}
 	}
