@@ -2,7 +2,8 @@ local AS, ASL = unpack(AddOnSkins)
 if not AS:CheckAddOn('Tukui') then return end
 
 local select = select
-local T, C
+local T, C, L, G
+local T16 = AS:CheckAddOn('Tukui') and tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16.00 and true or false
 
 AddOnSkins_Options = {
 -- Embeds
@@ -37,34 +38,62 @@ AddOnSkins_Options = {
 }
 
 function AS:UpdateMedia()
-	T, C = unpack(Tukui) -- FIX ME T16
-	AS.PixelPerfect = C['General']['InOut']
-	AS.HideShadows = C['General']['HideShadows']
+	if T16 then
+		T, C = Tukui:unpack()
+		AS.PixelPerfect = C['General']['InOut']
+		AS.HideShadows = C['General']['HideShadows']
 
-	AS.DataTextFontSize = 12 -- T['DataTexts']['Size']
-	AS.DataTexts = T['DataTexts']
-	AS.InfoLeft = T['Panels']['DataTextLeft']
-	AS.InfoRight = T['Panels']['DataTextRight']
-	AS.ChatBackgroundRight = T['Panels']['RightChatBG']
-	AS.ChatBackgroundLeft = T['Panels']['LeftChatBG']
-	AS.TabsRightBackground = T['Panels']['TabsBGRight']
-	AS.TabsLeftBackground = T['Panels']['TabsBGLeft']
-	AS.Minimap = T['Minimap']
-	AS.ActionBar1 = T['ActionBar1']
-	AS.ActionBar2 = T['ActionBar2']
-	AS.ActionBar3 = T['ActionBar3']
-	AS.ActionBar4 = T['ActionBar4']
+		AS.DataTextFontSize = 12 -- T['DataTexts']['Size']
+		AS.DataTexts = T['DataTexts']
+		AS.InfoLeft = T['Panels']['DataTextLeft']
+		AS.InfoRight = T['Panels']['DataTextRight']
+		AS.ChatBackgroundRight = T['Panels']['RightChatBG']
+		AS.ChatBackgroundLeft = T['Panels']['LeftChatBG']
+		AS.TabsRightBackground = T['Panels']['TabsBGRight']
+		AS.TabsLeftBackground = T['Panels']['TabsBGLeft']
+		AS.Minimap = T['Minimap']
+		AS.ActionBar1 = T['ActionBar1']
+		AS.ActionBar2 = T['ActionBar2']
+		AS.ActionBar3 = T['ActionBar3']
+		AS.ActionBar4 = T['ActionBar4']
 
-	AS.GlossTex = C['Medias']['Normal']
-	AS.Blank = C['Medias']['Blank']
-	AS.NormTex = C['Medias']['Normal']
-	AS.GlowTex = C['Medias']['Glow']
-	AS.Font = C['Medias']['Font']
-	AS.PixelFont = C['Medias']['PixelFont']
-	AS.ActionBarFont = C['Medias']['ActionBarFont']
-	AS.UIScale = UIParent:GetScale()
-	AS.BackdropColor = C['General']['BackdropColor']
-	AS.BorderColor = C['General']['BorderColor']
+		AS.GlossTex = C['Medias']['Normal']
+		AS.Blank = C['Medias']['Blank']
+		AS.NormTex = C['Medias']['Normal']
+		AS.GlowTex = C['Medias']['Glow']
+		AS.Font = C['Medias']['Font']
+		AS.PixelFont = C['Medias']['PixelFont']
+		AS.ActionBarFont = C['Medias']['ActionBarFont']
+		AS.UIScale = UIParent:GetScale()
+		AS.BackdropColor = C['General']['BackdropColor']
+		AS.BorderColor = C['General']['BorderColor']
+	else
+		T, C, L, G = unpack(Tukui)
+		AS.DataTextFontSize = C['datatext'].fontsize
+
+		AS.InfoLeft = G.Panels.DataTextLeft
+		AS.InfoRight = G.Panels.DataTextRight
+		AS.ChatBackgroundRight = G.Panels.RightChatBackground
+		AS.ChatBackgroundLeft = G.Panels.LeftChatBackground
+		AS.TabsRightBackground = G.Panels.RightChatTabsBackground
+		AS.TabsLeftBackground = G.Panels.LeftChatTabsBackground
+		AS.Minimap = G.Maps.Minimap
+		AS.ActionBar1 = G.ActionBars.Bar1
+		AS.ActionBar2 = G.ActionBars.Bar2
+		AS.ActionBar3 = G.ActionBars.Bar3
+		AS.ActionBar4 = G.ActionBars.Bar4
+
+		AS.GlossTex = C['media']['normTex']
+		AS.Blank = C['media']['blank']
+		AS.NormTex = C['media']['normTex']
+		AS.GlowTex = C['media']['glowTex']
+		AS.Font = C['media']['font']
+		AS.PixelFont = C['media']['pixelfont']
+		AS.ActionBarFont = [[Fonts\ARIALN.TTF]]
+		AS.UIScale = UIParent:GetScale()
+		AS.BackdropColor = C['general']['backdropcolor']
+		AS.BorderColor = C['general']['bordercolor']
+	end
 end
 
 function AS:CheckOption(optionName, ...)
@@ -236,6 +265,7 @@ if AS:CheckAddOn('CoolLine') then
 end
 
 function AS:CreateDataText()
+	if not T16 then return end
 	local DataText = AS["DataTexts"]
 
 	local OnClick = function(self, button)
