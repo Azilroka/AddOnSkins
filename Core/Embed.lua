@@ -130,8 +130,14 @@ if AS:CheckAddOn('Recount') then
 		Recount_MainWindow:ClearAllPoints()
 		Recount_MainWindow:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 6)
 		Recount_MainWindow:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
-		if Recount.MainWindow.backdrop then Recount.MainWindow.backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default') end
-		if not AS:CheckOption('RecountBackdrop') then Recount.MainWindow.backdrop:Hide() end
+		local Backdrop = Recount_MainWindow.backdrop or Recount_MainWindow.Backdrop
+		if Backdrop then Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default') end
+
+		if AS:CheckOption('RecountBackdrop') then
+			Backdrop:Show()
+		else
+			Backdrop:Hide()
+		end
 
 		Recount.db.profile.Locked = true
 		Recount.db.profile.Scaling = 1
@@ -151,7 +157,9 @@ if AS:CheckAddOn('Omen') then
 
 		AS:SkinTitleBar(OmenTitle, 'Default')
 		AS:SkinFrame(OmenBarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-		if not AS:CheckOption('OmenBackdrop') then OmenBarList:StripTextures() end
+		if not AS:CheckOption('OmenBackdrop') then
+			OmenBarList:StripTextures()
+		end
 
 		local db = Omen.db
 		db.profile.Scale = 1

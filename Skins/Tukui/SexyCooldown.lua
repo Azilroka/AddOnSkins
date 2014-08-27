@@ -51,7 +51,7 @@ function AS:SkinSexyCooldown()
 	end
 
 	local function SkinSexyCooldownBackdrop(bar)
-		bar:SetTemplate('Transparent')
+		AS:SkinFrame(bar, nil, true)
 	end
 
 	local function HookSCDBar(bar)

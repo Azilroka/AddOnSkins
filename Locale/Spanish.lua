@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, ASL = unpack(AddOnSkins)
 
 function AS:UpdateLocale_esES()
 	ASL.DataText.ToggleEmbed = 'Toggle Embed'

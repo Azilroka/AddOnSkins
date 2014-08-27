@@ -9,7 +9,7 @@
 -- make into AceEvent.
 -- @class file
 -- @name AceEvent-3.0
--- @release $Id: AceEvent-3.0.lua 975 2010-10-23 11:26:18Z nevcairiel $
+-- @release $Id$
 local MAJOR, MINOR = "AceEvent-3.0", 3
 local AceEvent = LibStub:NewLibrary(MAJOR, MINOR)
 
