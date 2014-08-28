@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, ASL = unpack(AddOnSkins)
 if not AS:CheckAddOn('ElvUI') then return end
 
 local E, L, V, P, G, LSM, ES, S
