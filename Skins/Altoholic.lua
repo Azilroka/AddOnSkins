@@ -6,10 +6,17 @@ local name = "AltoholicSkin"
 function AS:SkinAltoholic(event, addon)
 
 	local function ColorAltoBorder(self)
-		if self.border then
-			local r, g, b = self.border:GetVertexColor()
-			local Backdrop = self.backdrop or self.Backdrop
-			Backdrop:SetBackdropBorderColor(r, g, b, 1)
+		local Backdrop = self.backdrop or self.Backdrop
+		if self.id then
+			local quality = select(3, GetItemInfo(self.id))
+			if quality > 1 then
+				local r, g, b = GetItemQualityColor(quality)
+				Backdrop:SetBackdropBorderColor(r, g, b, 1)
+			else
+				Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		else
+			Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end
 	end
 
@@ -117,7 +124,7 @@ function AS:SkinAltoholic(event, addon)
 		for i = 1, 7 do
 			for j = 1, 14 do
 				AS:SkinIconButton(_G["AltoholicFrameContainersEntry"..i.."Item"..j])
-				_G["AltoholicFrameContainersEntry"..i.."Item"..j]:HookScript('OnShow', ColorAltoBorder)
+				_G["AltoholicFrameContainersEntry"..i.."Item"..j]:HookScript('OnUpdate', ColorAltoBorder)
 			end
 		end
 	end
@@ -168,7 +175,7 @@ function AS:SkinAltoholic(event, addon)
 		for i = 1, 8 do
 			for j = 1, 10 do
 				AS:SkinBackdropFrame(_G["AltoholicFrameGridsEntry"..i.."Item"..j], nil, nil, nil, true)
-				_G["AltoholicFrameGridsEntry"..i.."Item"..j]:HookScript('OnShow', ColorAltoBorder)
+				_G["AltoholicFrameGridsEntry"..i.."Item"..j]:HookScript('OnUpdate', ColorAltoBorder)
 			end
 		end
 
