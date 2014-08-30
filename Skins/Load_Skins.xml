@@ -118,9 +118,6 @@
 	<Script file="RCLootCouncil.lua"/>
 	<Script file="ReagentMaker.lua"/>
 	<Script file="Recount.lua"/>
-	<Script file="ReforgeLite.lua"/>
-	<Script file="Reforgenator.lua"/>
-	<Script file="Reforgerade.lua"/>
 	<Script file="Scrap.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
 	<Script file="ShieldBars.lua"/>
@@ -134,8 +131,6 @@
 	<Script file="Spy.lua"/>
 	<Script file="StormEarthAndFire.lua"/>
 	<Script file="Swatter.lua"/>
-	<Script file="Symbiosis.lua"/>
-	<Script file="SymbiosisTip.lua"/>
 	<Script file="TinyDPS.lua"/>
 	<Script file="TitanPanel.lua"/>
 	<Script file="TomeOfTeleportation.lua"/>
