@@ -30,12 +30,14 @@ local Conflicts = {
 	'Tukui_Skins',
 }
 
-for _, AddOnName in pairs(Conflicts) do
-	local _, Title, _, Enabled, _, Reason = GetAddOnInfo(AddOnName)
-	if Reason ~= "MISSING" then
-		AS:Print(format("Conflict System: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory.", AddOnName))
-		if Enabled then
-			DisableAddOn(AddOnName)
+for i = 1, GetNumAddOns() do
+	local Name, Title, _, Enabled, _, Reason = GetAddOnInfo(i)
+	for _, AddOnName in pairs(Conflicts) do
+		if Name == AddOnName and Reason ~= "MISSING" then
+			AS:Print(format("Conflict System: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory.", AddOnName))
+			if Enabled then
+				DisableAddOn(AddOnName)
+			end
 		end
 	end
 end
