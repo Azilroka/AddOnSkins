@@ -17,7 +17,7 @@ function AS:OrderedPairs(t, f)
 end
 
 function AS:CheckAddOn(addon)
-	return select(4, GetAddOnInfo(addon))
+	return AS.AddOns[addon] or false
 end
 
 function AS:Print(string)

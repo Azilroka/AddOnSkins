@@ -22,3 +22,10 @@ AddOn.skins = {}
 AddOn.events = {}
 AddOn.register = {}
 AddOn.FrameLocks = {}
+
+AddOn.AddOns = {}
+
+for i = 1, GetNumAddOns() do
+	local Name, _, _, Enabled = GetAddOnInfo(i)
+	AddOn.AddOns[Name] = Enabled
+end
