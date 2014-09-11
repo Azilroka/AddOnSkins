@@ -89,9 +89,9 @@ function AS:SkinAce3()
 		elseif TYPE == 'EditBox' then
 			local frame = widget.editbox
 			local button = widget.button
-			_G[frame:GetName()..'Left']:Kill()
-			_G[frame:GetName()..'Middle']:Kill()
-			_G[frame:GetName()..'Right']:Kill()
+			frame.Left:Kill()
+			frame.Middle:Kill()
+			frame.Right:Kill()
 			frame:Height(17)
 			frame:CreateBackdrop('Default')
 			local Backdrop = frame.backdrop or frame.Backdrop

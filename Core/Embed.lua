@@ -37,9 +37,9 @@ function AS:Embed_Hide()
 	EmbedSystem_RightWindow:Hide()
 end
 
-function AS:CheckEmbed(Embed)
-	local MainEmbed, LeftEmbed, RightEmbed, Embed = strlower(AS:CheckOption('EmbedMain')), strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight')), strlower(Embed)
-	if AS:CheckAddOn(Embed) and (strmatch(MainEmbed, Embed) or strmatch(LeftEmbed, Embed) or strmatch(RightEmbed, Embed)) then
+function AS:CheckEmbed(AddOn)
+	local MainEmbed, LeftEmbed, RightEmbed, Embed = strlower(AS:CheckOption('EmbedMain')), strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight')), strlower(AddOn)
+	if AS:CheckAddOn(AddOn) and (strmatch(MainEmbed, Embed) or strmatch(LeftEmbed, Embed) or strmatch(RightEmbed, Embed)) then
 		return true
 	else
 		return false
