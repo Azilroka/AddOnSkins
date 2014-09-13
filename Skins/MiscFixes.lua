@@ -14,18 +14,26 @@ function AS:MiscFixes(event, addon)
 		end
 
 		hooksecurefunc('LFGDungeonReadyDialog_UpdateRewards', SkinIcons)
-		GameTooltip:HookScript('OnShow', function()
-			for i = 1, 5 do
-				if _G['LibExtraTip_1_329Tooltip'..i] and not _G['LibExtraTip_1_329Tooltip'..i].IsDone then
-					_G['LibExtraTip_1_329Tooltip'..i]:HookScript('OnShow', function(self)
-						self:SetTemplate('Transparent')
-						local a, b, c, d, e = self:GetPoint()
-						self:SetPoint(a, b, c, d, e-2)
-					end)
-					_G['LibExtraTip_1_329Tooltip'..i].IsDone = true
+
+		local LT = LibStub('LibExtraTip-1', true)
+
+		for _, Tooltip in pairs({GameTooltip, ItemRefTooltip}) do
+			Tooltip:HookScript('OnUpdate', function(self)
+				if not LT then return end
+				local ExtraTip = LT:GetExtraTip(self)
+				if ExtraTip then
+					if not ExtraTip.IsDone then
+						ExtraTip:HookScript('OnShow', function(tt)
+							tt:SetTemplate('Transparent')
+							local a, b, c, d, e = tt:GetPoint()
+							tt:SetPoint(a, b, c, d, e-2)
+						end)
+						ExtraTip.IsDone = true
+					end
+					ExtraTip:SetBackdropBorderColor(Tooltip:GetBackdropBorderColor())
 				end
-			end
-		end)
+			end)
+		end
 
 		--[[ -- RAF Reward Frame
 		AS:SkinFrame(ProductChoiceFrame)
