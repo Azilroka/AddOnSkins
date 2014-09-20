@@ -56,9 +56,7 @@ function AS:Embed_Check(Message)
 	AS:EmbedSystem_WindowResize()
 	if not UnitAffectingCombat('player') then
 		if AS:CheckOption('EmbedOoC') then
-			AS:Embed_Hide()
-		else
-			AS:Embed_Show()
+			EmbedSystem_MainWindow:Hide();
 		end
 	end
 	if AS:CheckEmbed('Omen') then AS:Embed_Omen() end
