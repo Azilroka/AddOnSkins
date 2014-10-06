@@ -119,11 +119,11 @@ function AS:CallSkin(skin, func, event, ...)
 		DEFAULT_CHAT_FRAME:AddMessage(format(message, AS.Title, AS.Version, Skin))
 		FoundError = true
 		if AS:CheckOption('SkinDebug') then
-			if GetCVarBool('scriptErrors') then
-				ScriptErrorsFrame_OnError(errormsg, false)
-			else
+--			if GetCVarBool('scriptErrors') then
+				--ScriptErrorsFrame_OnError(errormsg, false)
+			--else
 				DEFAULT_CHAT_FRAME:AddMessage(format(errormessage, Skin, errormsg))
-			end
+			--end
 		end
 	end
 end
@@ -187,7 +187,7 @@ end
 function AS:Init(event, addon)
 	if (IsAddOnLoaded('Tukui') or IsAddOnLoaded('ElvUI')) and not AS.Initialized then
 		T16 = AS:CheckAddOn('Tukui') and tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16.00 and true or false
-		if IsAddOnLoaded('ElvUI') then AS:InjectProfile() end
+		if AS:CheckAddOn('ElvUI') then AS:InjectProfile() end
 		AS:UpdateMedia()
 		AS:InitAPI()
 		AS:UpdateLocale()

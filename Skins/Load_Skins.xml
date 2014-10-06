@@ -3,6 +3,7 @@
 	<Script file="AchieveIt.lua"/>
 	<Script file="ACP.lua"/>
 	<Script file="AdiBags.lua"/>
+	<Script file="AdiCastBar.lua"/>
 	<Script file="AdvancedIconSelector.lua"/>
 	<Script file="AffDots.lua"/>
 	<Script file="alDamageMeter.lua"/>

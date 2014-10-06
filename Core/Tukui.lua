@@ -3,7 +3,7 @@ if not AS:CheckAddOn('Tukui') then return end
 
 local select = select
 local T, C, L, G
-local T16 = AS:CheckAddOn('Tukui') and tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16.00 and true or false
+local T16 = tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16.00 and true or false
 
 AddOnSkins_Options = {
 -- Embeds

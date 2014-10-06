@@ -2,10 +2,9 @@ local AS = unpack(AddOnSkins)
 
 local name = 'Blizzard_WorldStateCaptureBar'
 function AS:Blizzard_WorldStateCaptureBar(event, addon)
-	local Horde = "Interface\\AddOns\\"..AddOnName.."\\Media\\Icons\\Gloss-Horde"
-	local Alliance = "Interface\\AddOns\\"..AddOnName.."\\Media\\Icons\\Gloss-Alliance"
-	local FFA = "Interface\\AddOns\\"..AddOnName.."\\Media\\Icons\\FFA"
-	local BarTexture = AS.NormTex
+	local Horde = "Interface\\AddOns\\AddOnSkins\\Media\\Icons\\Horde"
+	local Alliance = "Interface\\AddOns\\AddOnSkins\\Media\\Icons\\Alliance"
+	local FFA = "Interface\\AddOns\\AddOnSkins\\Media\\Icons\\FFA"
 
 	local CreateCaptureBar = function(ID)
 		if not _G['WorldStateCaptureBar'..ID] then return end
@@ -27,7 +26,7 @@ function AS:Blizzard_WorldStateCaptureBar(event, addon)
 		Bar:SetPoint('CENTER', UIParent, 'CENTER', 0, 360)
 		Bar:CreateBackdrop()
 		Bar:SetSize(160, 16)
-		Bar:SetStatusBarTexture(BarTexture)
+		Bar:SetStatusBarTexture(AS.NormTex)
 		Bar:SetStatusBarColor(1, 1, 1)
 		Bar:SetMinMaxValues(0, 100)
 		Bar:SetValue(100)
@@ -36,7 +35,7 @@ function AS:Blizzard_WorldStateCaptureBar(event, addon)
 		Bar.AllianceBar:SetFrameLevel(1)
 		Bar.AllianceBar:SetPoint('LEFT', Bar, 'LEFT', 0, 0)
 		Bar.AllianceBar:SetSize(160, 16)
-		Bar.AllianceBar:SetStatusBarTexture(BarTexture)
+		Bar.AllianceBar:SetStatusBarTexture(AS.NormTex)
 		Bar.AllianceBar:SetStatusBarColor(0, .44, .87)
 		Bar.AllianceBar:SetMinMaxValues(0, 100)
 
@@ -49,7 +48,7 @@ function AS:Blizzard_WorldStateCaptureBar(event, addon)
 		Bar.HordeBar:SetFrameLevel(1)
 		Bar.HordeBar:SetPoint('LEFT', Bar, 'LEFT', 0, 0)
 		Bar.HordeBar:SetSize(160, 16)
-		Bar.HordeBar:SetStatusBarTexture(BarTexture)
+		Bar.HordeBar:SetStatusBarTexture(AS.NormTex)
 		Bar.HordeBar:SetStatusBarColor(.77, .12, .23)
 		Bar.HordeBar:SetMinMaxValues(0, 100)
 		Bar.HordeBar:SetReverseFill(true)
@@ -78,7 +77,7 @@ function AS:Blizzard_WorldStateCaptureBar(event, addon)
 		Bar.SparkBar.Spark.Texture:SetSize(32, 32)
 	end
 
-	local style = 4
+	local style = 1
 	local UpdateCaptureBar = function(ID, Current, Neutral)
 		local Bar = _G['CaptureBar'..ID]
 		if not Bar then CreateCaptureBar(ID) end
