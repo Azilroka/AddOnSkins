@@ -22,6 +22,7 @@ end
 
 function AS:Embed_Show()
 	if AS:CheckOption('EmbedSystem') then
+		EmbedSystem_MainWindow:Show();
 		if _G[EmbedSystem_MainWindow.FrameName] then _G[EmbedSystem_MainWindow.FrameName]:Show() end
 	end
 	if AS:CheckOption('EmbedSystemDual') then
@@ -33,8 +34,16 @@ function AS:Embed_Show()
 end
 
 function AS:Embed_Hide()
-	EmbedSystem_LeftWindow:Hide()
-	EmbedSystem_RightWindow:Hide()
+	if AS:CheckOption('EmbedSystem') then
+		EmbedSystem_MainWindow:Hide();
+		if _G[EmbedSystem_MainWindow.FrameName] then _G[EmbedSystem_MainWindow.FrameName]:Hide() end
+	end
+	if AS:CheckOption('EmbedSystemDual') then
+		EmbedSystem_LeftWindow:Hide()
+		EmbedSystem_RightWindow:Hide()
+		if _G[EmbedSystem_LeftWindow.FrameName] then _G[EmbedSystem_LeftWindow.FrameName]:Hide() end
+		if _G[EmbedSystem_RightWindow.FrameName] then _G[EmbedSystem_RightWindow.FrameName]:Hide() end
+	end
 end
 
 function AS:CheckEmbed(AddOn)
@@ -56,9 +65,9 @@ function AS:Embed_Check(Message)
 	AS:EmbedSystem_WindowResize()
 	if not UnitAffectingCombat('player') then
 		if AS:CheckOption('EmbedOoC') then
-			AS:Embed_Hide()
+			AS:Embed_Hide();
 		else
-			AS:Embed_Show()
+			AS:Embed_Show();
 		end
 	end
 	if AS:CheckEmbed('Omen') then AS:Embed_Omen() end
