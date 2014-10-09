@@ -25,6 +25,7 @@ AddOn.FrameLocks = {}
 AddOn.AddOns = {}
 
 for i = 1, GetNumAddOns() do
-	local Name, _, _, Enabled = GetAddOnInfo(i)
-	AddOn.AddOns[Name] = Enabled
+	local Name = GetAddOnInfo(i)
+	AddOn.AddOns[Name] = select(4, GetAddOnInfo(Name))
+	--GetAddOnEnableState(AddOn.MyName, Name) > 0
 end

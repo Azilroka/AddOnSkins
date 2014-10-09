@@ -119,11 +119,11 @@ function AS:CallSkin(skin, func, event, ...)
 		DEFAULT_CHAT_FRAME:AddMessage(format(message, AS.Title, AS.Version, Skin))
 		FoundError = true
 		if AS:CheckOption('SkinDebug') then
---			if GetCVarBool('scriptErrors') then
-				--ScriptErrorsFrame_OnError(errormsg, false)
-			--else
+			if GetCVarBool('scriptErrors') then
+				ScriptErrorsFrame_OnError(errormsg, false)
+			else
 				DEFAULT_CHAT_FRAME:AddMessage(format(errormessage, Skin, errormsg))
-			--end
+			end
 		end
 	end
 end
