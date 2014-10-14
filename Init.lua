@@ -26,6 +26,5 @@ AddOn.AddOns = {}
 
 for i = 1, GetNumAddOns() do
 	local Name = GetAddOnInfo(i)
-	AddOn.AddOns[Name] = select(4, GetAddOnInfo(Name))
-	--GetAddOnEnableState(AddOn.MyName, Name) > 0
+	AddOn.AddOns[Name] = GetAddOnEnableState(AddOn.MyName, Name) > 0
 end
