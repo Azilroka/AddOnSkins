@@ -1,6 +1,7 @@
 local AS = unpack(AddOnSkins)
 local AddOnName = ...
 local T16, ES
+local Color = RAID_CLASS_COLORS[AS.MyClass]
 
 function AS:OrderedPairs(t, f)
 	local a = {}
