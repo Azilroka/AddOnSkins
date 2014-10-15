@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 local AddOnName = ...
-local T16, ES
+local ES
 local Color = RAID_CLASS_COLORS[AS.MyClass]
 
 function AS:OrderedPairs(t, f)
@@ -187,7 +187,6 @@ end
 
 function AS:Init(event, addon)
 	if (IsAddOnLoaded('Tukui') or IsAddOnLoaded('ElvUI')) and not AS.Initialized then
-		T16 = AS:CheckAddOn('Tukui') and tonumber(GetAddOnMetadata('Tukui', 'Version')) >= 16.00 and true or false
 		if AS:CheckAddOn('ElvUI') then AS:InjectProfile() end
 		AS:UpdateMedia()
 		AS:InitAPI()
@@ -232,11 +231,7 @@ function AS:SkinTab(frame, strip)
 end
 
 function AS:SkinNextPrevButton(frame, horizonal)
-	if T16 then
-		frame:SkinArrowButton(not horizonal)
-	else
-		frame:SkinNextPrevButton(horizonal)
-	end
+	frame:SkinArrowButton(not horizonal)
 end
 
 function AS:SkinRotateButton(frame)
@@ -250,11 +245,7 @@ function AS:SkinEditBox(frame, width, height)
 end
 
 function AS:SkinDropDownBox(frame, width)
-	if T16 then
-		frame:SkinDropDown(width)
-	else
-		frame:SkinDropDownBox(width)
-	end
+	frame:SkinDropDown(width)
 end
 
 function AS:SkinCheckBox(frame)

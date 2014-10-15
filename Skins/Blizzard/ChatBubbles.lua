@@ -3,7 +3,7 @@ local AS = unpack(select(2, ...))
 
 local name = 'Blizzard_ChatBubbles'
 function AS:Blizzard_ChatBubbles()
-	local noscalemult = AS.Mult * UIParent:GetScale()
+	--local noscalemult = AS.Mult * UIParent:GetScale()
 	local tslu = 0
 	local numkids = 0
 	local bubbles = {}
@@ -21,8 +21,8 @@ function AS:Blizzard_ChatBubbles()
 		frame:SetBackdrop({
 			bgFile = AS.Blank,
 			edgeFile = AS.Blank,
-			tile = false, tileSize = 0, edgeSize = noscalemult,
-			insets = {left = -noscalemult, right = -noscalemult, top = -noscalemult, bottom = -noscalemult}
+			tile = false, tileSize = 0, edgeSize = AS.Mult,
+			insets = {left = -AS.Mult, right = -AS.Mult, top = -AS.Mult, bottom = -AS.Mult}
 		})
 		frame:SetBackdropBorderColor(unpack(AS.BorderColor))
 		frame:SetBackdropColor(.1, .1, .1, .8)
