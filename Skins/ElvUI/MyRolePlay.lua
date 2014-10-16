@@ -4,6 +4,7 @@ if not (AS:CheckAddOn('MyRolePlay') and AS:CheckAddOn('ElvUI')) then return end
 
 local name = "MyRolePlaySkin"
 function AS:SkinMyRolePlayElvUI()
+	if ElvUI[1].private.tooltip.enable ~= true then return end
 	local TT = ElvUI[1]:GetModule('Tooltip')
 
 	mrpSaved.Options.TooltipStyle = 6
