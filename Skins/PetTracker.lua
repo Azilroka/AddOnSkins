@@ -5,13 +5,19 @@ if not AS:CheckAddOn('PetTracker') then return end
 local name = "PetTrackerSkin"
 function AS:SkinPetTracker()
 	if not IsAddOnLoaded('Carbonite.Quests') then
-		AS:SkinBackdropFrame(PetTrackerProgressBar1)
-		PetTrackerProgressBar1.Overlay:StripTextures(true)
-		for i = 1, PetTracker.MaxQuality do
-			PetTrackerProgressBar1[i]:SetStatusBarTexture(AS.NormTex)
-		end
+		--PetTrackerProgressBar:CreateBackdrop()
+		AS:Delay(1, function()
+			PetTrackerProgressBar1.Overlay:StripTextures(true)
+			PetTrackerProgressBar1.Overlay:CreateBackdrop()
+			local Backdrop = PetTrackerProgressBar1.Overlay.backdrop or PetTrackerProgressBar1.Overlay.Backdrop
+			Backdrop:SetBackdropColor(0,0,0,0)
+			for i = 1, PetTracker.MaxQuality do
+				PetTrackerProgressBar1[i]:SetStatusBarTexture(AS.NormTex)
+			end
+		end)
 	end
 
+	PetTrackerMapFilter:StripTextures(true)
 	AS:SkinEditBox(PetTrackerMapFilter)
 	AS:SkinTooltip(PetTrackerMapFilterSuggestions)
 	for i = 1, PetTrackerMapFilterSuggestions:GetNumChildren() do
@@ -19,9 +25,9 @@ function AS:SkinPetTracker()
 		Button:SetFrameLevel(PetTrackerMapFilterSuggestions:GetFrameLevel() + 1)
 	end
 
-	WorldMapShowDropDownButton:HookScript('OnClick', function()
+	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button:HookScript('OnClick', function(self)
 		SushiDropdownFrame1:ClearAllPoints()
-		SushiDropdownFrame1:SetPoint('BOTTOMRIGHT', WorldMapShowDropDownButton, 'TOPRIGHT', 0, 4)
+		SushiDropdownFrame1:SetPoint('BOTTOMRIGHT', self, 'TOPRIGHT', 0, 4)
 		if SushiDropdownFrame1.IsDone then return end
 		for i = 1, SushiDropdownFrame1:GetNumChildren() do
 			local Region = select(i, SushiDropdownFrame1:GetChildren())
@@ -139,8 +145,19 @@ function AS:SkinPetTracker()
 		end)
 	end
 	for i = 1, 2 do
-		if _G['PetTrackerMapTip'..i] then
-			AS:SkinTooltip(_G['PetTrackerMapTip'..i])
+		local MapTip = _G['PetTrackerMapTip'..i]
+		if MapTip then
+			AS:SkinTooltip(MapTip)
+			MapTip:HookScript('OnUpdate', function(self)
+				for i = 1, self:NumLines() do
+					local Line = self:GetLine(i)
+					local Texture, Text = strmatch(Line:GetText(), '^|T(.-)|t(.+)')
+					if Texture then
+						Texture = strsplit(':', Texture)
+						self:GetLine(i):SetFormattedText('|T%s:20:20:0:0:64:64:4:60:4:60|t %s', Texture, Text)
+					end
+				end
+			end)
 		end
 	end
 end
