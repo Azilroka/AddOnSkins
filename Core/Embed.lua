@@ -1,5 +1,4 @@
-local AS = unpack(AddOnSkins)
-local L = AS.Locale
+local AS, ASL = unpack(AddOnSkins)
 
 local format, gsub, pairs, ipairs, select, tinsert, tonumber = format, gsub, pairs, ipairs, select, tinsert, tonumber
 
