@@ -44,8 +44,8 @@ function AS:SkinArchy()
 		end
 	end
 
-	hooksecurefunc(Archy, 'RefreshRacesDisplay', SkinArchyArtifactFrame)
-	hooksecurefunc(Archy, 'UpdateRacesFrame', SkinArchyArtifactFrame)
+	--hooksecurefunc(Archy, 'RefreshRacesDisplay', SkinArchyArtifactFrame)
+	--hooksecurefunc(Archy, 'UpdateRacesFrame', SkinArchyArtifactFrame)
 
 	Archy:UpdateRacesFrame()
 	Archy:RefreshRacesDisplay()
@@ -54,7 +54,7 @@ function AS:SkinArchy()
 		AS:SkinFrame(ArchyDigSiteFrame)
 	end
 
-	hooksecurefunc(Archy, 'UpdateDigSiteFrame', SkinArchyDigSiteFrame)
+	--hooksecurefunc(Archy, 'UpdateDigSiteFrame', SkinArchyDigSiteFrame)
 
 	if ArchyArtifactFrameSkillBar then
 		AS:SkinStatusBar(ArchyArtifactFrameSkillBar)	

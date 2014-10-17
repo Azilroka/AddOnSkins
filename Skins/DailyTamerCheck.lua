@@ -5,17 +5,27 @@ if not AS:CheckAddOn('DailyTamerCheck') then return end
 local name = 'DailyTamerCheckSkin'
 function AS:SkinDailyTamerCheck()
 	local function SkinFrame()
-		DailyTamerCheck_mainframe:SetScale(1)
+		if DailyTamerCheck_mainframe.IsHooked then return end
 		DailyTamerCheck_mainframe:HookScript('OnUpdate', function(self)
 			AS:SkinFrame(self)
+			self:SetScale(UIParent:GetScale())
 			for i = 1, self:GetNumChildren() do
 				local object = select(i, self:GetChildren())
-				if object:IsObjectType('Button') then AS:SkinButton(object) end
+				if object:IsObjectType('Button') and not object.IsSkinned then
+					AS:SkinButton(object)
+					object.IsSkinned = true
+				end
 				if object:IsObjectType('Frame') then
-					if not object.texture then AS:SkinFrame(object) else AS:SkinTexture(object.texture) end
+					if not object.texture then
+						AS:SkinFrame(object)
+					else
+						AS:SkinTexture(object.texture)
+					end
 				end
 			end
+			self.IsSkinned = true
 		end)
+		DailyTamerCheck_mainframe.IsHooked = true
 	end
 
 	for i = 1, Minimap:GetNumChildren() do
@@ -24,6 +34,8 @@ function AS:SkinDailyTamerCheck()
 			object:HookScript('PostClick', SkinFrame)
 		end
 	end
+
+	hooksecurefunc(SlashCmdList, "DAILYTAMERCHECK", SkinFrame)
 end
 
 AS:RegisterSkin(name, AS.SkinDailyTamerCheck)

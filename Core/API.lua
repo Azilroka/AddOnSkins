@@ -65,6 +65,31 @@ function AS:InitAPI()
 		return fs
 	end
 
+	local function SkinSlideBar(frame, height, movetext)
+		frame:SetTemplate("Default")
+		frame:SetBackdropColor(0, 0, 0, .8)
+
+		if not height then
+			height = frame:GetHeight()
+		end
+
+		if movetext then
+			if(_G[frame:GetName() .. "Low"]) then _G[frame:GetName() .. "Low"]:Point("BOTTOM", 0, -18) end
+			if(_G[frame:GetName() .. "High"]) then _G[frame:GetName() .. "High"]:Point("BOTTOM", 0, -18) end
+			if(_G[frame:GetName() .. "Text"]) then _G[frame:GetName() .. "Text"]:Point("TOP", 0, 19) end
+		end
+
+		_G[frame:GetName()]:SetThumbTexture(AS.Blank)
+		_G[frame:GetName()]:GetThumbTexture():SetVertexColor(unpack(AS.BorderColor))
+		if( frame:GetWidth() < frame:GetHeight() ) then
+			frame:Width(height)
+			_G[frame:GetName()]:GetThumbTexture():Size(frame:GetWidth(), frame:GetWidth() + 4)
+		else
+			frame:Height(height)
+			_G[frame:GetName()]:GetThumbTexture():Size(height + 4, height)
+		end
+	end
+
 	local function AddAPI(object)
 		local mt = getmetatable(object).__index
 
@@ -73,6 +98,7 @@ function AS:InitAPI()
 		-- Remove these once implemented in Tukui 16
 		if not object.SkinIconButton then mt.SkinIconButton = SkinIconButton end
 		if not object.SkinRotateButton then mt.SkinRotateButton = SkinRotateButton end
+		if not object.SkinSlideBar then mt.SkinSlideBar = SkinSlideBar end
 	end
 
 	local Handled = {["Frame"] = true}
