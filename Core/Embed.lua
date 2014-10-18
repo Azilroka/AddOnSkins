@@ -254,9 +254,9 @@ if AS:CheckAddOn('Skada') then
 		local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 			if not window then return end
 			local barmod = Skada.displays['bar']
-			local offsety = (window.db.enabletitle and window.db.title.height or 0) + (AS.PixelPerfect and 1 or 0)
+			local offsety = (window.db.enabletitle and window.db.title.height or 0) + (AS.PixelPerfect and 0 or -1)
 			window.db.barwidth = width - 4
-			window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - (AS.PixelPerfect and 1 or 0)
+			window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0)
 			window.db.spark = false
 			window.db.barslocked = true
 			window.bargroup.ClearAllPoints = nil

@@ -1,7 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-if AS:CheckAddOn('ElvUI') then return end
-if not AS:CheckAddOn('DBM-Core') then return end
+if not (AS:CheckAddOn('DBM-Core') and AS:CheckAddOn('DBM-StatusBarTimers') and AS:CheckAddOn('Tukui')) then return end
 
 local name = 'DBMSkin'
 function AS:SkinDBM(event, addon)
@@ -158,8 +157,7 @@ function AS:SkinDBM(event, addon)
 			DBMInfoFrame:SetTemplate('Transparent')
 		end
 
-		if AS:CheckAddOn('DBM-StatusBarTimers') then hooksecurefunc(DBT, 'CreateBar', SkinBars) end
-
+		hooksecurefunc(DBT, 'CreateBar', SkinBars)
 		hooksecurefunc(DBM.BossHealth, 'Show', SkinBoss)
 		hooksecurefunc(DBM.BossHealth, 'AddBoss', SkinBoss)
 		hooksecurefunc(DBM.BossHealth, 'UpdateSettings', SkinBoss)
@@ -169,7 +167,7 @@ function AS:SkinDBM(event, addon)
 		if croprwicons then
 			local RaidNotice_AddMessage_ = RaidNotice_AddMessage
 			RaidNotice_AddMessage = function(noticeFrame, textString, colorInfo)
-				if textString:find(' |T') then
+				if textString:find('|T') then
 					textString = gsub(textString,'(:12:12)',':18:18:0:0:64:64:5:59:5:59')
 				end
 				return RaidNotice_AddMessage_(noticeFrame, textString, colorInfo)

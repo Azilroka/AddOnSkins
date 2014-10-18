@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-if not (AS:CheckAddOn('DBM-Core') and AS:CheckAddOn('ElvUI')) then return end
+if not (AS:CheckAddOn('DBM-Core') and AS:CheckAddOn('DBM-StatusBarTimers') and AS:CheckAddOn('ElvUI')) then return end
 
 local name = 'DBMSkin'
 function AS:SkinDBM(event, addon)
@@ -157,8 +157,7 @@ function AS:SkinDBM(event, addon)
 			DBMInfoFrame:SetTemplate('Transparent')
 		end
 
-		if AS:CheckAddOn('DBM-StatusBarTimers') then hooksecurefunc(DBT, 'CreateBar', SkinBars) end
-
+		hooksecurefunc(DBT, 'CreateBar', SkinBars)
 		hooksecurefunc(DBM.BossHealth, 'Show', SkinBoss)
 		hooksecurefunc(DBM.BossHealth, 'AddBoss', SkinBoss)
 		hooksecurefunc(DBM.BossHealth, 'UpdateSettings', SkinBoss)
