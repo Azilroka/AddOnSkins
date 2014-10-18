@@ -54,11 +54,14 @@ function AS:Blizzard_Calendar(event, addon)
 		end
 
 		AS:SkinFrame(CalendarTodayFrame)
-		CalendarTodayFrame:CreateShadow()
 		CalendarTodayFrame:Size(CalendarDayButton1:GetWidth(), CalendarDayButton1:GetHeight())
 		CalendarTodayFrame:SetBackdropBorderColor(0, 0.44, .87, 1)
 		CalendarTodayFrame:SetBackdropColor(0, 0, 0, 0)
 		CalendarTodayFrame:HookScript('OnUpdate', function(self) self:SetAlpha(CalendarTodayTextureGlow:GetAlpha()) end)
+		CalendarTodayFrame:CreateBackdrop()
+		CalendarTodayFrame.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+		CalendarTodayFrame.Backdrop:SetBackdropColor(0, 0, 0, 0)
+		CalendarTodayFrame.Backdrop:CreateShadow()
 
 		AS:SkinFrame(CalendarCreateEventFrame)
 		CalendarCreateEventFrame:Point("TOPLEFT", CalendarFrame, "TOPRIGHT", 3, -24)

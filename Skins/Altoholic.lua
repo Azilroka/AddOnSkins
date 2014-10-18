@@ -9,7 +9,7 @@ function AS:SkinAltoholic(event, addon)
 		local Backdrop = self.backdrop or self.Backdrop
 		if self.id then
 			local quality = select(3, GetItemInfo(self.id))
-			if quality > 1 then
+			if quality and quality > 1 then
 				local r, g, b = GetItemQualityColor(quality)
 				Backdrop:SetBackdropBorderColor(r, g, b, 1)
 			else
