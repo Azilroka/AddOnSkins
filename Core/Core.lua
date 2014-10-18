@@ -188,9 +188,18 @@ end
 
 function AS:Init(event, addon)
 	if (IsAddOnLoaded('Tukui') or IsAddOnLoaded('ElvUI')) and not AS.Initialized then
-		if AS:CheckAddOn('ElvUI') then AS:InjectProfile() end
 		AS:UpdateMedia()
 		AS:InitAPI()
+		if AS:CheckAddOn('ElvUI') then
+			local ElvUIVersion, MinElvUIVersion = tonumber(GetAddOnMetadata('ElvUI', 'Version')), 7.13
+			if ElvUIVersion < MinElvUIVersion then
+				AS:AcceptFrame(format('%s - Required ElvUI Version %s. You currently have %s.\n Download ElvUI @ %s', AS.Title, MinElvUIVersion, ElvUIVersion, AS:PrintURL('http://www.tukui.org/dl.php')), function(self) print(AS:PrintURL('http://www.tukui.org/dl.php')) self:Hide() end)
+				AS:Print('Loading Aborted')
+				AS:UnregisterEvent(event)
+				return
+			end
+			AS:InjectProfile()
+		end
 		AS:UpdateLocale()
 		AS:CreateDataText()
 		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
@@ -372,7 +381,7 @@ function AS:AcceptFrame(MainText, Function)
 		AcceptFrame.Close:SetFormattedText('|cFFFFFFFF%s|r', NO)
 	end
 	AcceptFrame.Text:SetText(MainText)
-	AcceptFrame:SetSize(250, AcceptFrame.Text:GetStringHeight() + 60)
+	AcceptFrame:SetSize(AcceptFrame.Text:GetStringWidth() + 50, AcceptFrame.Text:GetStringHeight() + 60)
 	AcceptFrame.Accept:SetScript('OnClick', Function)
 	AcceptFrame:Show()
 end

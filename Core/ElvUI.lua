@@ -139,6 +139,8 @@ function AS:SkinIconButton(frame, shrinkIcon)
 end
 
 function AS:UpdateMedia()
+	E, L, V, P, G = unpack(ElvUI)
+
 	LSM, ES = AS.LSM, E:GetModule('EnhancedShadows', true)
 	AS.SLE = AS:CheckAddOn('ElvUI_SLE')
 	S = E:GetModule('Skins')
