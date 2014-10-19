@@ -17,6 +17,10 @@ function AS:OrderedPairs(t, f)
 	return iter
 end
 
+function AS:Delay(delay, func)
+	C_Timer.After(delay, func)
+end
+
 function AS:CheckAddOn(addon)
 	return AS.AddOns[addon] or false
 end
@@ -187,7 +191,8 @@ function AS:StartSkinning(event)
 end
 
 function AS:Init(event, addon)
-	if (IsAddOnLoaded('Tukui') or IsAddOnLoaded('ElvUI')) and not AS.Initialized then
+	if event == 'ADDON_LOADED' and addon == AddOnName then
+		if not (AS:CheckAddOn('Tukui') or AS:CheckAddOn('ElvUI')) then return end
 		AS:UpdateMedia()
 		AS:InitAPI()
 		if AS:CheckAddOn('ElvUI') then
@@ -205,7 +210,6 @@ function AS:Init(event, addon)
 		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 		AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
 		AS:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
-		AS.Initialized = true
 	end
 end
 

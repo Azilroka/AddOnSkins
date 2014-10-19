@@ -97,8 +97,8 @@ function AS:SkinPetTracker()
 	end
 	if AS:CheckAddOn('PetTracker_Journal') then
 		LoadAddOn('Blizzard_PetJournal')
-		AS:SkinCheckBox(PetTracker_JournalTrackToggle)
-		AS:SkinTab(PetJournalParentTab3)
+		AS:SkinCheckBox(PetTrackerTrackToggle)
+		AS:SkinTab(PetJournalParentTab4)
 		PetTrackerTamerJournal:HookScript('OnShow', function(self)
 			if not self.IsSkinned then
 				PetTrackerTamerJournal.Count:StripTextures()
@@ -107,6 +107,15 @@ function AS:SkinPetTracker()
 				AS:SkinScrollBar(PetTrackerTamerJournalListScrollBar)
 				AS:SkinFrame(PetTrackerTamerJournalCard)
 				PetTrackerTamerJournal.Team.Border:StripTextures()
+				PetTrackerTamerJournal.Team:DisableDrawLayer('BORDER')
+				PetTrackerTamerJournalMap:CreateBackdrop()
+				PetTrackerTamerJournalMapBorder:Kill()
+				PetTrackerTamerJournalHistory:StripTextures()
+				PetTrackerTamerJournalHistoryLoadButton:StripTextures(true)
+				AS:SkinButton(PetTrackerTamerJournalHistoryLoadButton)
+				for i = 1, 4 do
+					AS:SkinIconButton(_G['PetTrackerTamerJournalCardLoot'..i])
+				end
 				for i = 1, 11 do
 					local b = _G["PetTrackerTamerJournalListButton"..i]
 					b:StripTextures()
@@ -127,6 +136,15 @@ function AS:SkinPetTracker()
 					_G['PetTrackerJournalSlot'..i].IconBorder:Hide()
 					_G['PetTrackerJournalSlot'..i].LevelBG:Hide()
 					_G['PetTrackerJournalSlot'..i].IsSkinned = true
+					if PetTrackerTamerJournal['Tab'..i] then
+						PetTrackerTamerJournal['Tab'..i]:SetTemplate()
+						PetTrackerTamerJournal['Tab'..i].TabBg:Kill()
+						AS:SkinTexture(PetTrackerTamerJournal['Tab'..i].Icon)
+						PetTrackerTamerJournal['Tab'..i].Icon:SetAllPoints()
+						PetTrackerTamerJournal['Tab'..i]:StyleButton()
+						PetTrackerTamerJournal['Tab'..i].Highlight:SetTexture(nil)
+						PetTrackerTamerJournal['Tab'..i].Highlight:Kill()
+					end
 					for i = 1, 15 do
 						local Ability = _G['PetTrackerAbilityButton'..i]
 						for i = 1, Ability:GetNumRegions() do

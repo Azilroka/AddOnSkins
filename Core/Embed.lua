@@ -138,13 +138,17 @@ if AS:CheckAddOn('Recount') then
 		Recount_MainWindow:ClearAllPoints()
 		Recount_MainWindow:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 6)
 		Recount_MainWindow:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
-		local Backdrop = Recount_MainWindow.backdrop or Recount_MainWindow.Backdrop
-		if Backdrop then Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default') end
 
-		if AS:CheckOption('RecountBackdrop') then
-			Backdrop:Show()
-		else
-			Backdrop:Hide()
+		if AS:CheckOption('RecountSkin') then
+			local Backdrop = Recount_MainWindow.backdrop or Recount_MainWindow.Backdrop
+			if Backdrop then
+				Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+				if AS:CheckOption('RecountBackdrop') then
+					Backdrop:Show()
+				else
+					Backdrop:Hide()
+				end
+			end
 		end
 
 		Recount.db.profile.Locked = true
@@ -163,10 +167,21 @@ if AS:CheckAddOn('Omen') then
 		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Omen' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
 		EmbedParent.FrameName = "OmenAnchor"
 
-		AS:SkinTitleBar(OmenTitle, 'Default')
-		AS:SkinFrame(OmenBarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-		if not AS:CheckOption('OmenBackdrop') then
-			OmenBarList:StripTextures()
+		if AS:CheckOption('OmenSkin') then
+			AS:SkinTitleBar(OmenTitle, 'Default')
+			if AS:CheckOption('OmenBackdrop') then
+				AS:SkinFrame(OmenBarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+			else
+				OmenBarList:StripTextures()
+			end
+			local Backdrop = OmenAnchor.backdrop or OmenAnchor.Backdrop
+			if not Backdrop then
+				OmenAnchor:CreateBackdrop()
+				Backdrop = OmenAnchor.backdrop or OmenAnchor.Backdrop
+			end
+			if Backdrop then 
+				Backdrop:SetOutside(OmenAnchor, 0, 0)
+			end
 		end
 
 		local db = Omen.db
@@ -185,12 +200,6 @@ if AS:CheckAddOn('Omen') then
 		OmenAnchor:ClearAllPoints()
 		OmenAnchor:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
 		OmenAnchor:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
-		local Backdrop = OmenAnchor.backdrop or OmenAnchor.Backdrop
-		if not Backdrop then
-			OmenAnchor:CreateBackdrop()
-			Backdrop = OmenAnchor.backdrop or OmenAnchor.Backdrop
-			Backdrop:SetOutside(OmenAnchor, 0, 0)
-		end
 	end
 end
 
@@ -200,7 +209,10 @@ if AS:CheckAddOn('TinyDPS') then
 		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'TinyDPS' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
 		EmbedParent.FrameName = "tdpsFrame"
 
-		AS:SkinFrame(tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+		if AS:CheckOption('TinyDPSSkin') then
+			AS:SkinFrame(tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+		end
+
 		tdpsFrame:SetParent(EmbedParent)
 		tdpsFrame:SetFrameStrata('LOW')
 		tdpsAnchor:ClearAllPoints()
@@ -224,9 +236,11 @@ if AS:CheckAddOn('alDamageMeter') then
 
 		dmconf.barheight = floor((EmbedParent:GetHeight() / dmconf.maxbars) - dmconf.spacing)
 		dmconf.width = EmbedParent:GetWidth()
-		local Backdrop = alDamageMeterFrame.backdrop or alDamageMeterFrame.Backdrop
-		Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-		alDamageMeterFrame.bg:Kill()
+		if AS:CheckOption('TinyDPSSkin') then
+			local Backdrop = alDamageMeterFrame.backdrop or alDamageMeterFrame.Backdrop
+			Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+			alDamageMeterFrame.bg:Kill()
+		end
 		alDamageMeterFrame:ClearAllPoints()
 		alDamageMeterFrame:SetInside(EmbedParent, 2, 2)
 		alDamageMeterFrame:SetParent(EmbedParent)

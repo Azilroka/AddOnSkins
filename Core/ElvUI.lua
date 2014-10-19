@@ -162,10 +162,6 @@ function AS:UpdateMedia()
 	E:UpdateMedia()
 end
 
-function AS:Delay(delay, func, ...)
-	E:Delay(delay, func, ...)
-end
-
 function AS:CreateEmbedSystem()
 	if not AS.EmbedSystemCreated then
 		local EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)

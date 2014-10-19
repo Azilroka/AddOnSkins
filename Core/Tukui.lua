@@ -92,10 +92,6 @@ function AS:ToggleOption(optionName)
 	AddOnSkins_Options[optionName] = not AddOnSkins_Options[optionName]
 end
 
-function AS:Delay(delay, func, ...)
-	T.Delay(delay, func, ...)
-end
-
 function AS:CreateEmbedSystem()
 	if not AS.EmbedSystemCreated then
 		local EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
