@@ -116,6 +116,114 @@ function AS:ParchmentRemover(event, addon)
 				end
 			end)
 		end
+		if ElvUI[1].private.skins.blizzard.quest == true then
+			QuestScrollFrame:HookScript('OnUpdate', function(self)
+				if self.spellTex and self.spellTex2 then
+					self.spellTex:Hide()
+					self.spellTex2:Hide()
+				end
+			end)
+			QuestDetailScrollFrame:HookScript('OnUpdate', function(self)
+				self.spellTex:Hide()
+			end)
+			QuestRewardScrollFrame:HookScript('OnUpdate', function(self)
+				self.spellTex:Hide()
+			end)
+
+			if QuestDetailScrollFrame.spellTex then
+				QuestDetailScrollFrame.spellTex:Hide()
+			end
+
+			if QuestProgressScrollFrame.spellTex then
+				QuestProgressScrollFrame.spellTex:Hide()
+			end
+
+			if QuestGreetingScrollFrame.spellTex then
+				QuestGreetingScrollFrame.spellTex:Hide()
+			end
+
+			hooksecurefunc('QuestInfoItem_OnClick', function(self)
+				QuestInfoItemHighlight:ClearAllPoints()
+				QuestInfoItemHighlight:SetAllPoints(self)
+			end)
+
+			hooksecurefunc('QuestFrameProgressItems_Update', function()
+				QuestProgressTitleText:SetTextColor(1, 1, 0)
+				QuestProgressText:SetTextColor(1, 1, 1)
+				QuestProgressRequiredItemsText:SetTextColor(1, 1, 0)
+				QuestProgressRequiredMoneyText:SetTextColor(1, 1, 0)
+			end)
+
+			QuestFrameGreetingPanel:StripTextures()
+			QuestGreetingScrollFrame:StripTextures()
+			QuestGreetingFrameHorizontalBreak:Kill()
+			GreetingText:SetTextColor(1, 1, 1)
+			GreetingText.SetTextColor = AS.Noop
+			CurrentQuestsText:SetTextColor(1, 1, 0)
+			CurrentQuestsText.SetTextColor = AS.Noop
+			AvailableQuestsText:SetTextColor(1, 1, 0)
+			AvailableQuestsText.SetTextColor = AS.Noop
+			for i = 1, MAX_NUM_QUESTS do
+				local button = _G['QuestTitleButton'..i]
+				if button then
+					hooksecurefunc(button, 'SetFormattedText', function()
+						if button:GetFontString() then
+							if button:GetFontString():GetText() and button:GetFontString():GetText():find('|cff000000') then
+								button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), '|cff000000', '|cffFFFF00'))
+							end
+						end
+					end)
+				end
+			end
+
+			local function QuestObjectiveText()
+				local numObjectives = GetNumQuestLeaderBoards()
+				local objective
+				local numVisibleObjectives = 0
+				for i = 1, numObjectives do
+					local _, type, finished = GetQuestLogLeaderBoard(i)
+					if type ~= 'spell' then
+						numVisibleObjectives = numVisibleObjectives+1
+						objective = _G['QuestInfoObjective'..numVisibleObjectives]
+						if finished then
+							objective:SetTextColor(1, 1, 0)
+						else
+							objective:SetTextColor(0.6, 0.6, 0.6)
+						end
+					end
+				end			
+			end
+
+			hooksecurefunc('QuestInfo_Display', function(template, parentFrame, acceptButton, material)
+				QuestInfoTitleHeader:SetTextColor(1, 1, 0)
+				QuestInfoDescriptionHeader:SetTextColor(1, 1, 0)
+				QuestInfoObjectivesHeader:SetTextColor(1, 1, 0)
+				QuestInfoRewardsFrame.Header:SetTextColor(1, 1, 0)
+				QuestInfoDescriptionText:SetTextColor(1, 1, 1)
+				QuestInfoObjectivesText:SetTextColor(1, 1, 1)
+				QuestInfoGroupSize:SetTextColor(1, 1, 1)
+				QuestInfoRewardText:SetTextColor(1, 1, 1)
+				QuestInfoRewardsFrame.ItemChooseText:SetTextColor(1, 1, 1);
+				QuestInfoRewardsFrame.ItemReceiveText:SetTextColor(1, 1, 1);
+				QuestInfoRewardsFrame.SpellLearnText:SetTextColor(1, 1, 1);
+				QuestInfoRewardsFrame.PlayerTitleText:SetTextColor(1, 1, 1);
+				QuestInfoRewardsFrame.XPFrame.ReceiveText:SetTextColor(1, 1, 1);
+				QuestObjectiveText()
+			end)
+
+			hooksecurefunc('QuestInfo_ShowRequiredMoney', function()
+				local requiredMoney = GetQuestLogRequiredMoney()
+				if requiredMoney > 0 then
+					if requiredMoney > GetMoney() then
+						QuestInfoRequiredMoneyText:SetTextColor(0.6, 0.6, 0.6)
+					else
+						QuestInfoRequiredMoneyText:SetTextColor(1, 1, 0)
+					end
+				end
+			end)
+
+			QuestFrameInset:StripTextures()
+		end
 		if ElvUI[1].private.skins.blizzard.spellbook == true then
 			SpellBookPage1:Kill()
 			SpellBookPage2:Kill()
