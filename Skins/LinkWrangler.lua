@@ -4,7 +4,7 @@ if not AS:CheckAddOn('LinkWrangler') then return end
 
 local name = "LinkWranglerSkin"
 function AS:SkinLinkWrangler()
-	local Path = "Interface\\AddOns\\AddOnSkins_Skins\\Buttons\\"
+	local Path = "Interface\\AddOns\\AddOnSkins\\Skins\\Buttons\\"
 
 	local function LWSkin_SkinButton(button, tex, distex)
 		if (button == nil) then
