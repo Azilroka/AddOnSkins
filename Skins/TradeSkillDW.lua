@@ -4,7 +4,24 @@ if not AS:CheckAddOn('TradeSkillDW') then return end
 
 local name = 'TradeSkillDWSkin'
 function AS:SkinTradeSkillDW()
+	local HORZ_BAR_FNAME = [[Interface\ClassTrainerFrame\UI-ClassTrainer-HorizontalBar]]
+	local TradeSkillHorizontalBarRight
+	for i, region in ipairs({TradeSkillFrame:GetRegions()}) do
+		if region:IsObjectType("Texture") then
+			if (region:GetTexture() == HORZ_BAR_FNAME) then
+				if not(region:GetName()) then
+					TradeSkillHorizontalBarRight = region
+					break
+				end
+			end
+		end
+	end
+
 	AS:SkinFrame(TradeSkillFrame)
+
+	TradeSkillHorizontalBarRight:SetTexture(HORZ_BAR_FNAME)
+	TradeSkillHorizontalBarRight:Kill()
+
 	AS:SkinCloseButton(TradeSkillFrameCloseButton)
 
 	AS:SkinFrame(TradeSkillGuildFrame)
@@ -13,11 +30,14 @@ function AS:SkinTradeSkillDW()
 
 	AS:SkinStatusBar(TradeSkillRankFrame)
 	AS:SkinButton(TradeSkillCreateButton, true)
+	AS:SkinNextPrevButton(TradeSkillDecrementButton)
+	AS:SkinNextPrevButton(TradeSkillIncrementButton)
 	AS:SkinButton(TradeSkillCancelButton, true)
 	AS:SkinButton(TradeSkillFilterButton, true)
 	AS:SkinButton(TradeSkillCreateAllButton, true)
 	AS:SkinButton(TradeSkillViewGuildCraftersButton, true)
 	AS:SkinScrollBar(TradeSkillDetailScrollFrameScrollBar)
+	AS:SkinScrollBar(TradeSkillListScrollFrameScrollBar)
 
 	local function SkinTabs(self)
 		for i = 1, self:GetNumChildren() do
