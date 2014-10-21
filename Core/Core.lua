@@ -3,6 +3,8 @@ local AddOnName = ...
 local ES
 local Color = RAID_CLASS_COLORS[AS.MyClass]
 
+AS:UpdateLocale()
+
 function AS:OrderedPairs(t, f)
 	local a = {}
 	for n in pairs(t) do tinsert(a, n) end
@@ -205,7 +207,6 @@ function AS:Init(event, addon)
 			end
 			AS:InjectProfile()
 		end
-		AS:UpdateLocale()
 		AS:CreateDataText()
 		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 		AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
