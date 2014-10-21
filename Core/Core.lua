@@ -185,7 +185,9 @@ function AS:StartSkinning(event)
 
 	local EP = LibStub('LibElvUIPlugin-1.0', true)
 	if EP then
-		EP:RegisterPlugin(AddOnName, AS.Ace3Options)
+		EP:RegisterPlugin(AddOnName, AS.GetOptions)
+	else
+		AS:GetOptions()
 	end
 
 	AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
