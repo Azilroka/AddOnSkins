@@ -84,7 +84,7 @@ function AS:GetOptions()
 			bossmods = {
 				type = "group",
 				name = ASL["BossMod Options"],
-				order = 1,
+				order = 2,
 				get = function(info) return AS:CheckOption(info[#info]) end,
 				set = function(info, value) AS:SetOption(info[#info], value) end,
 				guiInline = false,
@@ -127,7 +127,7 @@ function AS:GetOptions()
 				},
 			},
 			embed = {
-				order = 2,
+				order = 3,
 				type = "group",
 				name = ASL["Embed Settings"],
 				get = function(info) return AS:CheckOption(info[#info]) end,
@@ -247,7 +247,7 @@ function AS:GetOptions()
 			misc = {
 				type = "group",
 				name = MISCELLANEOUS,
-				order = 3,
+				order = 4,
 				get = function(info) return AS:CheckOption(info[#info]) end,
 				set = function(info, value) AS:SetOption(info[#info], value) end,
 				args = {
@@ -276,7 +276,7 @@ function AS:GetOptions()
 			faq = {
 				type = "group",
 				name = ASL["FAQ's"],
-				order = 4,
+				order = 5,
 				args = {
 					question1 = {
 						type = "description",
