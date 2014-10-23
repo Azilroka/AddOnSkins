@@ -61,7 +61,6 @@ function AS:InjectProfile()
 		['WeakAuraIconCooldown'] = true,
 		['AuctionHouse'] = true,
 		['ParchmentRemover'] = false,
-		['IntegrateMyRolePlayTooltip'] = true,
 		['SkinTemplate'] = 'Transparent',
 		['HideChatFrame'] = 'NONE',
 		['SkinDebug'] = false,

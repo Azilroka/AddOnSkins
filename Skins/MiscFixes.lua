@@ -48,7 +48,7 @@ function AS:MiscFixes(event, addon)
 		]]
 	end
 	if event == 'AUCTION_HOUSE_SHOW' then
-		if not AS:CheckAddOn('ElvUI') or ElvUI[1].private.skins.blizzard.enable == true and ElvUI[1].private.skins.blizzard.auctionhouse == true then
+		if AS:CheckAddOn('ElvUI') and ElvUI[1].private.skins.blizzard.enable == true and ElvUI[1].private.skins.blizzard.auctionhouse == true then
 			if AS:CheckOption('AuctionHouse') then
 				BrowseNameText:Point('TOPLEFT', 20, -39)
 				BrowseName:SetHeight(17)

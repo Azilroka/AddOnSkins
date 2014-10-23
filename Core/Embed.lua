@@ -20,8 +20,8 @@ function AS:EmbedInit()
 end
 
 function AS:Embed_Show()
+	EmbedSystem_MainWindow:Show();
 	if AS:CheckOption('EmbedSystem') then
-		EmbedSystem_MainWindow:Show();
 		if _G[EmbedSystem_MainWindow.FrameName] then _G[EmbedSystem_MainWindow.FrameName]:Show() end
 	end
 	if AS:CheckOption('EmbedSystemDual') then
@@ -33,8 +33,8 @@ function AS:Embed_Show()
 end
 
 function AS:Embed_Hide()
+	EmbedSystem_MainWindow:Hide();
 	if AS:CheckOption('EmbedSystem') then
-		EmbedSystem_MainWindow:Hide();
 		if _G[EmbedSystem_MainWindow.FrameName] then _G[EmbedSystem_MainWindow.FrameName]:Hide() end
 	end
 	if AS:CheckOption('EmbedSystemDual') then
