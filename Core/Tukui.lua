@@ -29,7 +29,6 @@ AddOnSkins_Options = {
 	['DBMFontFlag'] = 'OUTLINE',
 	['EmbedLeftChat'] = false,
 	['WeakAuraAuraBar'] = false,
-	['WeakAuraIconCooldown'] = true,
 	['AuctionHouse'] = true,
 	['SkinTemplate'] = 'Transparent',
 	['HideChatFrame'] = 'NONE',

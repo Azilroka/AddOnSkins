@@ -58,7 +58,6 @@ function AS:InjectProfile()
 		['DBMFontFlag'] = 'OUTLINE',
 		['EmbedLeftChat'] = false,
 		['WeakAuraAuraBar'] = false,
-		['WeakAuraIconCooldown'] = true,
 		['AuctionHouse'] = true,
 		['ParchmentRemover'] = false,
 		['SkinTemplate'] = 'Transparent',
