@@ -51,7 +51,6 @@ function AS:SkinGryphonheartItems()
 					backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 				end
 			end)
-			if IsAddOnLoaded('ElvUI') then ElvUI[1]:RegisterCooldown(_G[name.."Item".. j.."Cooldown"]) end
 		end
 	end)
 end

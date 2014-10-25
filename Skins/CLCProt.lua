@@ -51,7 +51,6 @@ function AS:SkinCLCProt()
 		button.border:Kill()
 		button.cooldown = CreateFrame('Cooldown', '$parentCooldown', button)
 		button.cooldown:SetInside()
-		if IsAddOnLoaded('ElvUI') then ElvUI[1]:RegisterCooldown(button.cooldown) end
 		button.stack = button:CreateFontString('$parentCount', 'OVERLAY', 'TextStatusBarText')
 		local fontFace, _, fontFlags = button.stack:GetFont()
 		button.stack:SetFont(fontFace, 30, fontFlags)

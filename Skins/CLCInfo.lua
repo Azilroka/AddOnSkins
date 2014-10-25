@@ -34,9 +34,6 @@ function AS:SkinCLCInfo(event, addon)
 			else
 				self.elements.backdropFrame:Show()
 			end
-			if IsAddOnLoaded('ElvUI') then
-				ElvUI[1]:RegisterCooldown(cooldown)
-			end
 			count:ClearAllPoints()
 			count:SetPoint('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 4, 0)
 			count:SetFont(Font, FontSize, 'OUTLINE')
