@@ -23,6 +23,7 @@ function AS:SkinArkInventory()
 		local frame = ArkInventory.Frame_Main_Get(loc_id):GetName()
 		local title = _G[frame..ArkInventory.Const.Frame.Title.Name]
 		local search = _G[frame..ArkInventory.Const.Frame.Search.Name]
+		local searchfilter = _G[frame..ArkInventory.Const.Frame.Search.Name..'Filter']
 		local container = _G[frame..ArkInventory.Const.Frame.Container.Name]
 		local changer = _G[frame..ArkInventory.Const.Frame.Changer.Name]
 		local status = _G[frame..ArkInventory.Const.Frame.Status.Name]
@@ -51,15 +52,23 @@ function AS:SkinArkInventory()
 		_G[status:GetName()..'GoldSilverButtonText']:SetFont(AS.Font, 12)
 		_G[status:GetName()..'GoldGoldButton']:SetPoint('RIGHT', _G[status:GetName()..'GoldSilverButtonText'], 'LEFT', -1, 0)
 		_G[status:GetName()..'GoldGoldButtonText']:SetFont(AS.Font, 12)
+		if not searchfilter.IsSkinned then
+			AS:SkinEditBox(searchfilter)
+			searchfilter.IsSkinned = true
+		end
 	end)
 
 	hooksecurefunc(ArkInventory, 'Frame_Bar_Paint', function(bar)
 		local loc_id = bar.ARK_Data.loc_id
 		ArkInventory.LocationOptionSet(loc_id, 'bar', 'name', 'height', 18)
-		local name = bar:GetName()
-		if _G[name..'ArkBorder'] then _G[name..'ArkBorder']:Kill() end
-		if _G[name..'Background'] then _G[name..'Background']:Kill() end
-		AS:SkinFrame(bar)
+
+		if not bar.IsSkinned then
+			local name = bar:GetName()
+			if _G[name..'ArkBorder'] then _G[name..'ArkBorder']:Kill() end
+			if _G[name..'Background'] then _G[name..'Background']:Kill() end
+			AS:SkinFrame(bar)
+			bar.IsSkinned = true
+		end
 
 		if ArkInventory.Global.Mode.Edit then
 			bar:SetBackdropBorderColor(1, 0, 0, 1)
@@ -80,11 +89,9 @@ function AS:SkinArkInventory()
 		if not ArkInventory.ValidFrame(frame, true) then return end
 		local obj = _G[frame:GetName()..'ArkBorder']
 		if not obj then return end
+		obj:Hide()
 
 		local r, g, b, a = obj:GetBackdropBorderColor()
-		obj:Kill()
-		if _G[frame:GetName()..'Background'] then _G[frame:GetName()..'Background']:Kill() end
-		if _G[frame:GetName()] == ARKINV_Frame1ChangerWindowBag1 then ARKINV_Frame1ChangerWindowBag1IconTexture:SetTexture('interface\\icons\\inv_misc_bag_07_green') end
 		AS:SkinIconButton(frame, true)
 		local Backdrop = frame.backdrop or frame.Backdrop
 		Backdrop:SetBackdropBorderColor(r,g,b,a)
