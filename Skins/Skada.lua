@@ -37,8 +37,13 @@ function AS:SkinSkada()
 		end
 		if Backdrop then
 			Backdrop:ClearAllPoints()
-			Backdrop:Point('TOPLEFT', win.db.enabletitle and skada.button or skada, 'TOPLEFT', -2, 2)
-			Backdrop:Point('BOTTOMRIGHT', skada, 'BOTTOMRIGHT', 2, -2)
+			if win.db.reversegrowth then
+				Backdrop:Point('TOPLEFT', skada, 'TOPLEFT', -2, 2)
+				Backdrop:Point('BOTTOMRIGHT', win.db.enabletitle and skada.button or skada, 'BOTTOMRIGHT', 2, -2)
+			else
+				Backdrop:Point('TOPLEFT', win.db.enabletitle and skada.button or skada, 'TOPLEFT', -2, 2)
+				Backdrop:Point('BOTTOMRIGHT', skada, 'BOTTOMRIGHT', 2, -2)
+			end
 		end
 	end)
 

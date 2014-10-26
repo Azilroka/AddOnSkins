@@ -271,7 +271,7 @@ function AS:EmbedSystem_WindowResize()
 
 	if E.PixelMode then
 		Width = 6
-		Height = (E.Border * 3) + ChatTabSize + DataTextSize + 2 
+		Height = (E.Border * 3) + ChatTabSize + DataTextSize + 3 
 		X = 0
 		Y = E.Border + DataTextSize + 2
 	else
@@ -280,6 +280,9 @@ function AS:EmbedSystem_WindowResize()
 		X = 0
 		Y = E.Border + DataTextSize + 2
 	end
+
+	EmbedSystem_MainWindow:SetTemplate()
+	EmbedSystem_MainWindow:SetBackdropBorderColor(1,0,0)
 
 	EmbedSystem_MainWindow:SetParent(ChatPanel)
 
