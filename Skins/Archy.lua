@@ -4,13 +4,15 @@ if not AS:CheckAddOn('Archy') then return end
 
 local name = 'ArchySkin'
 function AS:SkinArchy()
+	-- Archy.db.profile.general.theme
+	for _, object in pairs({ArchyArtifactFrame, ArchyDigSiteFrame}) do
+		AS:SkinFrame(object)
+		object.SetBackdrop = AS.Noop
+		object.SetBackdropColor = AS.Noop
+		object.SetBackdropBorderColor = AS.Noop
+	end
+
 	local function SkinArchyArtifactFrame()
-		AS:SkinFrame(ArchyArtifactFrame)
-
-		if ArchyArtifactFrameSkillBar then
-			ArchyArtifactFrameSkillBar.text:SetTextColor(1, 1, 1)
-		end
-
 		for i, child in pairs(ArchyArtifactFrame.children) do
 			local containerFrame = _G['ArchyArtifactChildFrame'..i]
 			local crest = _G['ArchyArtifactChildFrame'..i..'Crest']
@@ -18,15 +20,7 @@ function AS:SkinArchy()
 			local fragmentBar = _G['ArchyArtifactChildFrame'..i..'FragmentBar']
 			local solveButton = _G['ArchyArtifactChildFrame'..i..'SolveButton']
 
-			if not icon.isSkinned then
-				AS:SkinFrame(icon, false, true)
-				icon:SetSize(solveButton:GetHeight(),solveButton:GetHeight())
-				AS:SkinTexture(icon.texture)
-				icon.texture:SetInside()
-				solveButton.isSkinned = true
-			end
-
-			if not solveButton.isSkinned then
+			if not solveButton.IsSkinned then
 				AS:SkinFrame(solveButton, false, true)
 				AS:SkinTexture(solveButton:GetNormalTexture())
 				solveButton:GetNormalTexture():SetInside()	
@@ -36,40 +30,43 @@ function AS:SkinArchy()
 				solveButton.isSkinned = true
 			end
 
-			if not fragmentBar.isSkineed then
-				AS:SkinStatusBar(fragmentBar)
-				fragmentBar:SetPoint('TOPLEFT', icon, 'TOPRIGHT', 7, -2)
+			if not icon.isSkinned then
+				AS:SkinFrame(icon, false, true)
+				AS:SkinTexture(icon.texture)
+				icon.texture:SetInside()
+				icon.isSkinned = true
+			end
+
+			if not fragmentBar.isSkinned then
+				fragmentBar:CreateBackdrop()
 				fragmentBar.isSkinned = true
 			end
+
+			icon:SetSize(solveButton:GetHeight(),solveButton:GetHeight())
+			fragmentBar:SetPoint('TOPLEFT', icon, 'TOPRIGHT', 7, -2)
 		end
 	end
 
-	--hooksecurefunc(Archy, 'RefreshRacesDisplay', SkinArchyArtifactFrame)
-	--hooksecurefunc(Archy, 'UpdateRacesFrame', SkinArchyArtifactFrame)
+	hooksecurefunc(Archy, 'RefreshRacesDisplay', SkinArchyArtifactFrame)
+	hooksecurefunc(Archy, 'UpdateRacesFrame', SkinArchyArtifactFrame)
 
 	Archy:UpdateRacesFrame()
 	Archy:RefreshRacesDisplay()
 
-	local function SkinArchyDigSiteFrame()
-		AS:SkinFrame(ArchyDigSiteFrame)
-	end
-
-	--hooksecurefunc(Archy, 'UpdateDigSiteFrame', SkinArchyDigSiteFrame)
-
 	if ArchyArtifactFrameSkillBar then
-		AS:SkinStatusBar(ArchyArtifactFrameSkillBar)	
+		AS:SkinStatusBar(ArchyArtifactFrameSkillBar)
+		ArchyArtifactFrameSkillBar.text:SetTextColor(1, 1, 1)
+		ArchyArtifactFrameSkillBar.text.SetTextColor = AS.Noop
 	end
 
 	if ArchyDistanceIndicatorFrame then
-		ArchyDistanceIndicatorFrame.surveyButton:StripTextures()
-		ArchyDistanceIndicatorFrame.surveyButton.icon:SetTexture("Interface\\Icons\\inv_misc_shovel_01")
-		AS:SkinTexture(ArchyDistanceIndicatorFrame.surveyButton.icon)
-		ArchyDistanceIndicatorFrame.crateButton:StripTextures()
-		ArchyDistanceIndicatorFrame.crateButton.icon:SetTexture("Interface\\Icons\\inv_crate_04")
-		AS:SkinTexture(ArchyDistanceIndicatorFrame.crateButton.icon)
-		ArchyDistanceIndicatorFrame.loritemButton:StripTextures()
-		ArchyDistanceIndicatorFrame.loritemButton.icon:SetTexture("Interface\\Icons\\inv_misc_map08")
-		AS:SkinTexture(ArchyDistanceIndicatorFrame.loritemButton.icon)
+		for _, object in pairs({"surveyButton", "crateButton", "loritemButton"}) do
+			AS:SkinButton(ArchyDistanceIndicatorFrame[object])
+			ArchyDistanceIndicatorFrame[object]:SetFrameLevel(ArchyDistanceIndicatorFrame:GetFrameLevel() + 3)
+			AS:SkinTexture(ArchyDistanceIndicatorFrame[object].icon)
+			ArchyDistanceIndicatorFrame[object].icon:SetInside()
+			ArchyDistanceIndicatorFrame[object].icon:SetDrawLayer('OVERLAY')
+		end
 	end
 end
 
