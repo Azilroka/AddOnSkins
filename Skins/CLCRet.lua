@@ -21,19 +21,16 @@ function AS:SkinCLCRet()
 		local button
 		if isChecked then
 			button = CreateFrame('CheckButton', name , parent)
-			button:CreateBackdrop('Default')
 			button:StyleButton(true)
 		else
 			button = CreateFrame('Button', name , parent)
-			button:CreateBackdrop('Default')
 		end
+		AS:SkinButton(button)
 
-		button.backdrop:SetAllPoints()
 		button:EnableMouse(false)
 		button:Size(size)
 		button.texture = button:CreateTexture('$parentIcon', 'OVERLAY')
 		button.texture:SetInside()
-		button.texture:SetTexture(BGTEX)
 		AS:SkinTexture(button.texture)
 		button.texture.SetTexCoord = AS.Noop
 		button.texture.OldSetTexture = button.texture.SetTexture
@@ -48,8 +45,10 @@ function AS:SkinCLCRet()
 
 		button.border = button:CreateTexture(nil, 'BORDER')
 		button.border:Kill()
-		button.cooldown = CreateFrame('Cooldown', '$parentCooldown', button)
+
+		button.cooldown = CreateFrame('Cooldown', '$parentCooldown', button, "CooldownFrameTemplate")
 		button.cooldown:SetInside()
+
 		button.stack = button:CreateFontString('$parentCount', 'OVERLAY', 'TextStatusBarText')
 
 		local fontFace, _, fontFlags = button.stack:GetFont()

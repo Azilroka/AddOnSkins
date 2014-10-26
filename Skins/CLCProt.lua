@@ -49,7 +49,7 @@ function AS:SkinCLCProt()
 
 		button.border = button:CreateTexture(nil, 'BORDER')
 		button.border:Kill()
-		button.cooldown = CreateFrame('Cooldown', '$parentCooldown', button)
+		button.cooldown = CreateFrame('Cooldown', '$parentCooldown', button, "CooldownFrameTemplate")
 		button.cooldown:SetInside()
 		button.stack = button:CreateFontString('$parentCount', 'OVERLAY', 'TextStatusBarText')
 		local fontFace, _, fontFlags = button.stack:GetFont()
