@@ -281,9 +281,6 @@ function AS:EmbedSystem_WindowResize()
 		Y = E.Border + DataTextSize + 2
 	end
 
-	EmbedSystem_MainWindow:SetTemplate()
-	EmbedSystem_MainWindow:SetBackdropBorderColor(1,0,0)
-
 	EmbedSystem_MainWindow:SetParent(ChatPanel)
 
 	EmbedSystem_MainWindow:SetSize(ChatPanel:GetWidth() - Width, ChatPanel:GetHeight() - Height)
