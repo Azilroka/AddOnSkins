@@ -15,6 +15,7 @@ AddOnSkins_Options = {
 	['EmbedMain'] = 'Skada',
 	['EmbedLeft'] = 'Skada',
 	['EmbedRight'] = 'Skada',
+	['EmbedRightChat'] = 'Skada',
 	['EmbedLeftWidth'] = 200,
 	['EmbedBelowTop'] = false,
 	['TransparentEmbed'] = false,

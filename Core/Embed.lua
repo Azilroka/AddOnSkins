@@ -47,7 +47,7 @@ end
 
 function AS:CheckEmbed(AddOn)
 	local MainEmbed, LeftEmbed, RightEmbed, Embed = strlower(AS:CheckOption('EmbedMain')), strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight')), strlower(AddOn)
-	if AS:CheckAddOn(AddOn) and (strmatch(MainEmbed, Embed) or strmatch(LeftEmbed, Embed) or strmatch(RightEmbed, Embed)) then
+	if AS:CheckAddOn(AddOn) and ((AS:CheckOption('EmbedSystem') and strmatch(MainEmbed, Embed)) or AS:CheckOption('EmbedSystemDual') and (strmatch(LeftEmbed, Embed) or strmatch(RightEmbed, Embed))) then
 		return true
 	else
 		return false
@@ -268,9 +268,9 @@ if AS:CheckAddOn('Skada') then
 		local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 			if not window then return end
 			local barmod = Skada.displays['bar']
-			local offsety = (window.db.enabletitle and window.db.title.height or 0) + (AS.PixelPerfect and 0 or -1)
+			local offsety = window.db.enabletitle and window.db.title.height + ((IsAddOnLoaded('ElvUI') and ElvUI[1].PixelMode and 0 or 2) or 0) or ((IsAddOnLoaded('ElvUI') and ElvUI[1].PixelMode and 0 or 3) or 0)
 			window.db.barwidth = width - 4
-			window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0)
+			window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - ((IsAddOnLoaded('ElvUI') and ElvUI[1].PixelMode and 0 or 5) or 0)
 			window.db.spark = false
 			window.db.barslocked = true
 			window.bargroup.ClearAllPoints = nil
@@ -296,7 +296,7 @@ if AS:CheckAddOn('Skada') then
 			EmbedWindow(AS.SkadaWindows[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
 		elseif NumberToEmbed == 2 then
 			EmbedWindow(AS.SkadaWindows[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
-			EmbedWindow(AS.SkadaWindows[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPLEFT', EmbedSystem_RightWindow, 'TOPLEFT', 2, 0)
+			EmbedWindow(AS.SkadaWindows[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
 		end
 	end
 end
