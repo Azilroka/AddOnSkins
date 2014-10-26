@@ -36,11 +36,6 @@ function AS:SkinCLCRet()
 		button.texture.OldSetTexture = button.texture.SetTexture
 		button.texture.SetTexture = function(frame, tex, ...)
 			button.texture.OldSetTexture(frame, tex, ...)
-			if tex ~= nil then
-				button.backdrop:Show();
-			else
-				button.backdrop:Hide()
-			end
 		end
 
 		button.border = button:CreateTexture(nil, 'BORDER')

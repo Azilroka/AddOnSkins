@@ -22,12 +22,12 @@ function AS:SkinCLCProt()
 		local button
 		if isChecked then
 			button = CreateFrame('CheckButton', name , parent)
-			button:CreateBackdrop('Default')
 			button:StyleButton(true)
 		else
 			button = CreateFrame('Button', name , parent)
-			button:CreateBackdrop('Default')
 		end
+		AS:SkinButton(button)
+
 		local Backdrop = button.backdrop or button.Backdrop
 		Backdrop:SetAllPoints()
 		button:EnableMouse(false)
@@ -40,11 +40,6 @@ function AS:SkinCLCProt()
 		button.texture.OldSetTexture = button.texture.SetTexture
 		button.texture.SetTexture = function(frame, tex, ...)
 			button.texture.OldSetTexture(frame, tex, ...)
-			if tex ~= nil then
-				button.backdrop:Show();
-			else
-				button.backdrop:Hide()
-			end
 		end
 
 		button.border = button:CreateTexture(nil, 'BORDER')

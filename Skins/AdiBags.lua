@@ -6,16 +6,25 @@ local name = 'AdiBagsSkin'
 function AS:SkinAdiBags(event)
 	local AdiBags = LibStub('AceAddon-3.0'):GetAddon('AdiBags')
 
-	--hooksecurefunc(AdiBags, 'HookBagFrameCreation', function(self) print(self) end)
-
 	local function SkinFrame(frame)
 		local region = frame.HeaderRightRegion
 		AS:SkinFrame(frame)
 		AS:SkinFrame(_G[frame:GetName()..'Bags'], 'Default', true)
 		AS:SkinCloseButton(frame.CloseButton)
-		for i = 1, 3 do
-			AS:SkinButton(region.widgets[i].widget, true)
+		for i = 1, 5 do
+			local widget = region.widgets[i] and region.widgets[i].widget
+			if widget then
+				if widget:IsObjectType('Button') then
+					AS:SkinButton(widget, true)
+				elseif widget:IsObjectType('EditBox') then
+					widget.Left:Kill()
+					widget.Middle:Kill()
+					widget.Right:Kill()
+					AS:SkinEditBox(widget)
+				end
+			end
 		end
+		AS:SkinTexture(frame.BagSlotButton:GetNormalTexture())
 	end
 
 	if event == 'PLAYER_ENTERING_WORLD' then
@@ -23,7 +32,6 @@ function AS:SkinAdiBags(event)
 			if not AdiBagsContainer1 then ToggleBackpack() ToggleBackpack() end
 			if AdiBagsContainer1 then
 				SkinFrame(AdiBagsContainer1)
-				AS:SkinEditBox(AdiBagsContainer1SearchBox)
 				AdiBagsContainer1SearchBox:Point('TOPRIGHT', AdiBagsSimpleLayeredRegion2, 'TOPRIGHT', -75, -1)
 			end
 		end)
