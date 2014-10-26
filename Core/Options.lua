@@ -1,6 +1,38 @@
 local AS, ASL = unpack(AddOnSkins)
 local tinsert, sort, pairs, format, gsub, strfind = tinsert, sort, pairs, format, gsub, strfind
 
+local Defaults = {
+-- Embeds
+	['EmbedOoC'] = false,
+	['EmbedOoCDelay'] = 10,
+	['EmbedCoolLine'] = false,
+	['EmbedSexyCooldown'] = false,
+	['EmbedSystem'] = false,
+	['EmbedSystemDual'] = false,
+	['EmbedMain'] = 'Skada',
+	['EmbedLeft'] = 'Skada',
+	['EmbedRight'] = 'Skada',
+	['EmbedRightChat'] = 'Skada',
+	['EmbedLeftWidth'] = 200,
+	['EmbedBelowTop'] = false,
+	['TransparentEmbed'] = false,
+-- Misc
+	['RecountBackdrop'] = true,
+	['SkadaBackdrop'] = true,
+	['OmenBackdrop'] = true,
+	['MiscFixes'] = true,
+	['DBMSkinHalf'] = false,
+	['DBMFont'] = 'Tukui',
+	['DBMFontSize'] = 12,
+	['DBMFontFlag'] = 'OUTLINE',
+	['EmbedLeftChat'] = false,
+	['WeakAuraAuraBar'] = false,
+	['AuctionHouse'] = true,
+	['SkinTemplate'] = 'Transparent',
+	['HideChatFrame'] = 'NONE',
+	['SkinDebug'] = false,
+}
+
 local DEVELOPER_STRING = ""
 local LINE_BREAK = "\n"
 
@@ -343,6 +375,30 @@ function AS:GetOptions()
 						name = ASL["Available Skins / Skin Requests"],
 						get = function(info) return "http://www.tukui.org/forums/topic.php?id=28550" end,
 						order = 5,
+					},
+					header = {
+						order = 6,
+						type = 'header',
+						name = '',
+					},
+					desc = {
+						order = 7,
+						type = "description",
+						fontSize = "medium",
+						name = CONFIRM_RESET_SETTINGS,
+					},
+					resetsettings = {
+						type = 'execute',
+						order = 8,
+						name = ASL['Reset Settings'],
+						confirm = true,
+						func = function()
+							if IsAddOnLoaded('Tukui') then
+								AddOnSkins_Options = CopyTable(Defaults)
+							elseif IsAddOnLoaded('ElvUI') then
+								ElvUI[1].private.addonskins = CopyTable(Defaults)
+							end
+						end,
 					},
 				},
 			},

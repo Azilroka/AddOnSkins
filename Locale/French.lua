@@ -65,4 +65,5 @@ function AS:UpdateLocale_frFR()
 	ASL["Skin Template"] = "Modèle de Skin"
 	ASL["Hide Chat Frame"] = "Cacher le panneau de discussion"
 	ASL["Embed OoC Delay"] = "Délais Hors Combat de l'intégration"
+	ASL['Reset Settings'] = 'Reset Settings'
 end

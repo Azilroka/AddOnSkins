@@ -65,4 +65,5 @@ function AS:UpdateLocale_zhTW()
 	ASL["Skin Template"] = "Skin Template"
 	ASL["Hide Chat Frame"] = "Hide Chat Frame"
 	ASL["Embed OoC Delay"] = "Embed OoC Delay"
+	ASL['Reset Settings'] = 'Reset Settings'
 end
