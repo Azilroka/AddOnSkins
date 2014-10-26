@@ -20,7 +20,7 @@ function AS:SkinArchy()
 			local fragmentBar = _G['ArchyArtifactChildFrame'..i..'FragmentBar']
 			local solveButton = _G['ArchyArtifactChildFrame'..i..'SolveButton']
 
-			if not solveButton.IsSkinned then
+			if not solveButton.isSkinned then
 				AS:SkinFrame(solveButton, false, true)
 				AS:SkinTexture(solveButton:GetNormalTexture())
 				solveButton:GetNormalTexture():SetInside()	
