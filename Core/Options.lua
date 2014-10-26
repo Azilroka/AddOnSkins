@@ -393,10 +393,10 @@ function AS:GetOptions()
 						name = ASL['Reset Settings'],
 						confirm = true,
 						func = function()
-							if IsAddOnLoaded('Tukui') then
-								AddOnSkins_Options = CopyTable(Defaults)
-							elseif IsAddOnLoaded('ElvUI') then
+							if IsAddOnLoaded('ElvUI') then
 								ElvUI[1].private.addonskins = CopyTable(Defaults)
+							else
+								AddOnSkinsOptions = CopyTable(Defaults)
 							end
 						end,
 					},

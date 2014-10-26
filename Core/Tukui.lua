@@ -4,7 +4,7 @@ if not AS:CheckAddOn('Tukui') then return end
 local select = select
 local T, C
 
-AddOnSkins_Options = {
+AddOnSkinsOptions = {
 -- Embeds
 	['EmbedOoC'] = false,
 	['EmbedOoCDelay'] = 10,
@@ -73,11 +73,11 @@ function AS:CheckOption(optionName, ...)
 		if not addon then break end
 		if not IsAddOnLoaded(addon) then return false end
 	end
-	return AddOnSkins_Options[optionName]
+	return AddOnSkinsOptions[optionName]
 end
 
 function AS:SetOption(optionName, value)
-	AddOnSkins_Options[optionName] = value
+	AddOnSkinsOptions[optionName] = value
 end
 
 function AS:DisableOption(optionName)
@@ -89,7 +89,7 @@ function AS:EnableOption(optionName)
 end
 
 function AS:ToggleOption(optionName)
-	AddOnSkins_Options[optionName] = not AddOnSkins_Options[optionName]
+	AddOnSkinsOptions[optionName] = not AddOnSkinsOptions[optionName]
 end
 
 function AS:CreateEmbedSystem()

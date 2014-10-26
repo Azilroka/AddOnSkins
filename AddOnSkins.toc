@@ -2,7 +2,7 @@
 ## Title: |cff1784d1AddOnSkins|r
 ## Version: 3.04
 ## Author: Azilroka, Sortokk
-## SavedVariablesPerCharacter: AddOnSkins_Options
+## SavedVariablesPerCharacter: AddOnSkinsOptions
 ## OptionalDep: DSM, ElvUI, Tukui
 ## X-Tukui-ProjectID: 128
 ## X-Tukui-ProjectFolders: AddOnSkins
