@@ -60,8 +60,7 @@ function AS:SkinAtlasLoot(event, addon)
 	end
 
 	local AtlasLootItemFrame = _G["AtlasLoot_GUI-ItemFrame"]
-	AtlasLootItemFrame:SetTemplate()
-	AtlasLootItemFrame:SetBackdropColor(0,0,0,0)
+	AtlasLootItemFrame:CreateBackdrop()
 	AS:SkinNextPrevButton(AtlasLootItemFrame.nextPageButton)		
 	AS:SkinButton(AtlasLootItemFrame.modelButton)
 	AS:SkinButton(AtlasLootItemFrame.soundsButton)
