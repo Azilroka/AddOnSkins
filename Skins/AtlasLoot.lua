@@ -22,7 +22,7 @@ function AS:SkinAtlasLoot(event, addon)
 	AS:SkinCloseButton(AtlasLootFrame.CloseButton)
 	AtlasLootFrame.titleFrame:StripTextures()
 
-	local function SkinDropDown(Frame, Width)
+	local function SkinDropDown(Frame)
 		AS:SkinFrame(_G[Frame])
 		AS:SkinNextPrevButton(_G[Frame..'-button'])
 		local a, b, c, d, e = _G[Frame..'-button']:GetPoint()
