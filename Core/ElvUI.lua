@@ -170,12 +170,8 @@ function AS:CreateEmbedSystem()
 		EmbedSystem_MainWindow:HookScript('OnShow', AS.Embed_Show)
 		EmbedSystem_MainWindow:HookScript('OnHide', AS.Embed_Hide)
 
-		hooksecurefunc(RightChatPanel, 'SetSize', function()
-			if ChatHeight ~= E.db.chat.panelHeight or ChatWidth ~= E.db.chat.panelWidth then
-				ChatHeight, ChatWidth = E.db.chat.panelHeight, E.db.chat.panelWidth
-				AS:Embed_Check()
-			end
-		end)
+		hooksecurefunc(E:GetModule('Chat'), 'PositionChat', function() AS:Embed_Check() end)
+		hooksecurefunc(E:GetModule('Layout'), 'ToggleChatPanels', function() AS:Embed_Check() end)
 
 		RightChatToggleButton:SetScript('OnClick', function(self, btn)
 			if btn == 'RightButton' then
