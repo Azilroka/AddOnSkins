@@ -74,7 +74,7 @@ function AS:Embed_Check(Message)
 	if AS:CheckEmbed('TinyDPS') then AS:Embed_TinyDPS() end
 	if AS:CheckEmbed('Recount') then AS:Embed_Recount() end
 	if AS:CheckEmbed('alDamageMeter') then AS:Embed_alDamageMeter() end
-	if AS:CheckOption('EmbedCoolLine') then AS:Embed_CoolLine() end
+	if AS:CheckOption('EmbedCoolLine', 'CoolLine') then AS:Embed_CoolLine() end
 end
 
 function AS:Embed_Toggle(Message)
