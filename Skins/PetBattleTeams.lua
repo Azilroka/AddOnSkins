@@ -19,6 +19,22 @@ function AS:SkinPetBattleTeams()
 		PBT.menuButton.overlay:Kill()
 	end
 
+	PetBattleTeamsTooltip:HookScript('OnShow', function(self)
+		AS:SkinTexture(self.Icon)
+		self.Border:SetTexture(nil)
+		self.rarityGlow:SetTexture(nil)
+		self.Background:SetTexture(nil)
+		self.BorderTop:SetTexture(nil)
+		self.BorderTopLeft:SetTexture(nil)
+		self.BorderTopRight:SetTexture(nil)
+		self.BorderLeft:SetTexture(nil)
+		self.BorderRight:SetTexture(nil)
+		self.BorderBottom:SetTexture(nil)
+		self.BorderBottomRight:SetTexture(nil)
+		self.BorderBottomLeft:SetTexture(nil)
+		AS:SkinFrame(self, false, true)
+	end)
+
 	if PBT.mainFrame then
 		SkinPBT()
 	else
