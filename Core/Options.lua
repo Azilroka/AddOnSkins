@@ -27,6 +27,7 @@ local Defaults = {
 	['DBMFontFlag'] = 'OUTLINE',
 	['EmbedLeftChat'] = false,
 	['WeakAuraAuraBar'] = false,
+	['WeakAuraIconCooldown'] = false,
 	['AuctionHouse'] = true,
 	['SkinTemplate'] = 'Transparent',
 	['HideChatFrame'] = 'NONE',
@@ -285,7 +286,7 @@ function AS:GetOptions()
 				args = {
 					SkinTemplate = {
 						name = ASL["Skin Template"],
-						order = 1,
+						order = 0,
 						type = "select",
 						values = {
 							["Transparent"] = "Transparent",
@@ -419,6 +420,15 @@ function AS:GetOptions()
 	end
 	if blizzorder == 0 then
 		Options.args.blizzard = nil
+	end
+
+	if IsAddOnLoaded("ElvUI") then
+		Options.args.misc.args.WeakAuraIconCooldown = {
+			type = "toggle",
+			name = ASL["WeakAura Cooldowns"],
+			order = 1,
+			disabled = function() return not AS:CheckOption("WeakAurasSkin", "WeakAuras") end,
+		}
 	end
 
 	local EP = LibStub('LibElvUIPlugin-1.0', true)

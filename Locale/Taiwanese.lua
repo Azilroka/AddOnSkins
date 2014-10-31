@@ -66,4 +66,5 @@ function AS:UpdateLocale_zhTW()
 	ASL["Hide Chat Frame"] = "Hide Chat Frame"
 	ASL["Embed OoC Delay"] = "Embed OoC Delay"
 	ASL['Reset Settings'] = 'Reset Settings'
+	ASL["WeakAura Cooldowns"] = "WeakAura Cooldowns"
 end

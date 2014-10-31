@@ -66,4 +66,5 @@ function AS:UpdateLocale_ruRU()
 	ASL["Hide Chat Frame"] = "Скрыть фрейм чата"
 	ASL["Embed OoC Delay"] = "Embed OoC Delay"
 	ASL['Reset Settings'] = 'Reset Settings'
+	ASL["WeakAura Cooldowns"] = "WeakAura Cooldowns"
 end

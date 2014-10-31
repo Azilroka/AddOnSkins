@@ -66,4 +66,5 @@ function AS:UpdateLocale_frFR()
 	ASL["Hide Chat Frame"] = "Cacher le panneau de discussion"
 	ASL["Embed OoC Delay"] = "Délais Hors Combat de l'intégration"
 	ASL['Reset Settings'] = 'Reset Settings'
+	ASL["WeakAura Cooldowns"] = "WeakAura Cooldowns"
 end

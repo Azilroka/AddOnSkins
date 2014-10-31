@@ -68,4 +68,5 @@ function AS:UpdateLocale_itIT()
 	ASL["Hide Chat Frame"] = "Hide Chat Frame"
 	ASL["Embed OoC Delay"] = "Embed OoC Delay"
 	ASL['Reset Settings'] = 'Reset Settings'
+	ASL["WeakAura Cooldowns"] = "WeakAura Cooldowns"
 end
