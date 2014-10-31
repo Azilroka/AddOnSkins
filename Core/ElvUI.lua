@@ -171,7 +171,11 @@ function AS:CreateEmbedSystem()
 		EmbedSystem_MainWindow:HookScript('OnShow', AS.Embed_Show)
 		EmbedSystem_MainWindow:HookScript('OnHide', AS.Embed_Hide)
 
-		hooksecurefunc(E:GetModule('Chat'), 'PositionChat', function() AS:Embed_Check() end)
+		hooksecurefunc(E:GetModule('Chat'), 'PositionChat', function(self, override)
+			if override then
+				AS:Embed_Check()
+			end
+		end)
 		hooksecurefunc(E:GetModule('Layout'), 'ToggleChatPanels', function() AS:Embed_Check() end)
 
 		RightChatToggleButton:SetScript('OnClick', function(self, btn)
@@ -245,10 +249,19 @@ function AS:CreateEmbedSystem()
 				GameTooltip:Show()
 			end
 		end)
-		AS.EmbedSystemCreated = true
 
 		AS:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
 		AS:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
+
+		if not UnitAffectingCombat('player') then
+			if AS:CheckOption('EmbedOoC') then
+				AS:Embed_Hide();
+			else
+				AS:Embed_Show();
+			end
+		end
+
+		AS.EmbedSystemCreated = true
 	end
 end
 

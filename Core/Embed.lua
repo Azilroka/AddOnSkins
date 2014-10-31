@@ -62,13 +62,6 @@ function AS:Embed_Check(Message)
 	end
 	AS:Embed_Toggle(Message)
 	AS:EmbedSystem_WindowResize()
-	if not UnitAffectingCombat('player') then
-		if AS:CheckOption('EmbedOoC') then
-			AS:Embed_Hide();
-		else
-			AS:Embed_Show();
-		end
-	end
 	if AS:CheckEmbed('Omen') then AS:Embed_Omen() end
 	if AS:CheckEmbed('Skada') then AS:Embed_Skada() end
 	if AS:CheckEmbed('TinyDPS') then AS:Embed_TinyDPS() end

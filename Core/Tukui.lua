@@ -135,6 +135,14 @@ function AS:CreateEmbedSystem()
 			end
 		end)
 
+		if not UnitAffectingCombat('player') then
+			if AS:CheckOption('EmbedOoC') then
+				AS:Embed_Hide();
+			else
+				AS:Embed_Show();
+			end
+		end
+
 		AS.EmbedSystemCreated = true
 	end
 end
