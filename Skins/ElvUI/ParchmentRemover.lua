@@ -119,27 +119,26 @@ function AS:ParchmentRemover(event, addon)
 		if ElvUI[1].private.skins.blizzard.quest == true then
 			QuestScrollFrame:HookScript('OnUpdate', function(self)
 				if self.spellTex and self.spellTex2 then
-					self.spellTex:Hide()
-					self.spellTex2:Hide()
+					self.spellTex:SetTexture("")
+					self.spellTex:SetTexture("")
 				end
 			end)
 			QuestDetailScrollFrame:HookScript('OnUpdate', function(self)
-				self.spellTex:Hide()
+				self.spellTex:SetTexture("")
 			end)
 			QuestRewardScrollFrame:HookScript('OnUpdate', function(self)
-				self.spellTex:Hide()
+				self.spellTex:SetTexture("")
+			end)
+			QuestLogPopupDetailFrameScrollFrame:HookScript('OnUpdate', function(self)
+				self.spellTex:SetTexture("")
 			end)
 
-			if QuestDetailScrollFrame.spellTex then
-				QuestDetailScrollFrame.spellTex:Hide()
-			end
-
 			if QuestProgressScrollFrame.spellTex then
-				QuestProgressScrollFrame.spellTex:Hide()
+				QuestProgressScrollFrame.spellTex:SetTexture("")
 			end
 
 			if QuestGreetingScrollFrame.spellTex then
-				QuestGreetingScrollFrame.spellTex:Hide()
+				QuestGreetingScrollFrame.spellTex:SetTexture("")
 			end
 
 			hooksecurefunc('QuestInfoItem_OnClick', function(self)
