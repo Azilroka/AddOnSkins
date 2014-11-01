@@ -133,6 +133,8 @@ function AS:ParchmentRemover(event, addon)
 				self.spellTex:SetTexture("")
 			end)
 
+			QuestMapFrame.DetailsFrame:StripTextures(true)
+
 			if QuestProgressScrollFrame.spellTex then
 				QuestProgressScrollFrame.spellTex:SetTexture("")
 			end
