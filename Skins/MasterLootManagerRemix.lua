@@ -4,6 +4,7 @@ if not AS:CheckAddOn('MasterLootManagerRemix') then return end
 
 local name = 'MasterLootManagerRemixSkin'
 function AS:SkinMasterLootManagerRemix()
+	if not strfind(GetAddOnMetadata('MasterLootManagerRemix', 'Version'), '2.4') then AS:Print('MasterLootManagerRemix Aborted due to incompatible version.') return end
 	local StripAllTextures = {
 		MasterLootManagerMain,
 		MasterLootLoggerFrame,
