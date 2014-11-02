@@ -271,12 +271,8 @@ if AS:CheckAddOn('Skada') then
 			window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - (IsAddOnLoaded('ElvUI') and ElvUI[1].PixelMode and 4 or 5)
 			window.db.spark = false
 			window.db.barslocked = true
-			window.bargroup.ClearAllPoints = nil
 			window.bargroup:ClearAllPoints()
-			window.bargroup.ClearAllPoints = function() end
-			window.bargroup.SetPoint = nil
 			window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
-			window.bargroup.SetPoint = function() end
 			window.bargroup:SetParent(relativeFrame)
 			window.bargroup:SetFrameStrata('LOW')
 			window.bargroup:SetBackdrop(nil)

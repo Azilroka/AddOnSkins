@@ -28,7 +28,6 @@ AddOnSkinsOptions = {
 	['DBMFont'] = 'Tukui',
 	['DBMFontSize'] = 12,
 	['DBMFontFlag'] = 'OUTLINE',
-	['EmbedLeftChat'] = false,
 	['WeakAuraAuraBar'] = false,
 	['AuctionHouse'] = true,
 	['SkinTemplate'] = 'Transparent',
@@ -132,6 +131,21 @@ function AS:CreateEmbedSystem()
 				if IsAddOnLoaded('Enhanced_Config') then
 					Enhanced_Config[1]:ToggleConfig()
 				end
+			end
+		end)
+
+		local ShowEmbed = false
+		UIParent:HookScript('OnShow', function()
+			if not ShowEmbed then return end
+			if AS:CheckOption('EmbedOoC') then
+				AS:Embed_Hide();
+			else
+				AS:Embed_Show();
+			end
+		end)
+		UIParent:HookScript('OnHide', function()
+			if EmbedSystem_MainWindow:IsShown() then
+				ShowEmbed = true
 			end
 		end)
 
