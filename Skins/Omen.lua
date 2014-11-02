@@ -6,17 +6,18 @@ local name = 'OmenSkin'
 function AS:SkinOmen()
 	Omen.db.profile.Scale = 1
 	Omen.db.profile.Bar.Spacing = 1
-	Omen.db.profile.Background.EdgeSize = 2
+	Omen.db.profile.Background.EdgeSize = 1
 	Omen.db.profile.Background.BarInset = 2
 	Omen.db.profile.TitleBar.UseSameBG = true
 
-	hooksecurefunc(Omen, 'UpdateBackdrop', function(self)
-		if not AS:CheckEmbed('Omen') then
-			AS:SkinFrame(self.BarList, 'Default')
-			AS:SkinTitleBar(self.Title, 'Default')
-		end
-		self.BarList:SetPoint('TOPLEFT', self.Title, 'BOTTOMLEFT', 0, 1)
-	end)
+	AS:SkinFrame(Omen.BarList, 'Default')
+	AS:SkinTitleBar(Omen.Title, 'Default')
+	Omen.BarList.SetBackdrop = AS.Noop
+	Omen.BarList.SetBackdropColor = AS.Noop
+	Omen.BarList.SetBackdropBorderColor = AS.Noop
+	Omen.Title.SetBackdrop = AS.Noop
+	Omen.Title.SetBackdropColor = AS.Noop
+	Omen.Title.SetBackdropBorderColor = AS.Noop
 
 	hooksecurefunc(Omen, 'Toggle', function(self)
 		if not AS:CheckEmbed('Omen') then return end
@@ -27,7 +28,6 @@ function AS:SkinOmen()
 		end
 	end)
 
-	Omen:UpdateBackdrop()
 	Omen:ReAnchorBars()
 	Omen:ResizeBars()
 end

@@ -188,13 +188,6 @@ function AS:StartSkinning(event)
 		AS:Print(format('%s: Please report this to Azilroka immediately @ %s', AS.Version, AS:PrintURL(AS.TicketTracker)))
 	end
 	
-	if AS:CheckEmbed('Skada') then
-		-- Seriously Fuck Off.
-		local LibWindow = LibStub('LibWindow-1.1')
-		LibWindow.SavePosition = function() return end
-		LibWindow.RestorePosition = function() return end
-	end
-
 	AS:EmbedInit()
 
 	AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))

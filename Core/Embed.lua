@@ -160,27 +160,20 @@ if AS:CheckAddOn('Omen') then
 		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Omen' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
 		EmbedParent.FrameName = "OmenAnchor"
 
-		if AS:CheckOption('OmenSkin') then
-			AS:SkinTitleBar(OmenTitle, 'Default')
-			if AS:CheckOption('OmenBackdrop') then
-				AS:SkinFrame(OmenBarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-			else
-				OmenBarList:StripTextures()
-			end
-			local Backdrop = OmenAnchor.backdrop or OmenAnchor.Backdrop
-			if not Backdrop then
-				OmenAnchor:CreateBackdrop()
-				Backdrop = OmenAnchor.backdrop or OmenAnchor.Backdrop
-			end
-			if Backdrop then 
-				Backdrop:SetOutside(OmenAnchor, 0, 0)
-			end
-		end
+		Omen.BarList.SetBackdrop = nil
+		Omen.BarList.SetBackdropColor = nil
+		Omen.BarList.SetBackdropBorderColor = nil
+
+		AS:SkinFrame(Omen.BarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+
+		Omen.BarList.SetBackdrop = AS.Noop
+		Omen.BarList.SetBackdropColor = AS.Noop
+		Omen.BarList.SetBackdropBorderColor = AS.Noop
 
 		local db = Omen.db
 		db.profile.Scale = 1
 		db.profile.Bar.Spacing = 1
-		db.profile.Background.EdgeSize = 2
+		db.profile.Background.EdgeSize = 1
 		db.profile.Background.BarInset = 2
 		db.profile.TitleBar.UseSameBG = true
 		db.profile.ShowWith.UseShowWith = false
@@ -190,6 +183,8 @@ if AS:CheckAddOn('Omen') then
 		Omen:OnProfileChanged(nil, db)
 
 		OmenAnchor:SetParent(EmbedParent)
+		OmenAnchor:SetTemplate()
+		OmenAnchor:SetBackdropColor(0,0,0,0)
 		OmenAnchor:ClearAllPoints()
 		OmenAnchor:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
 		OmenAnchor:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
