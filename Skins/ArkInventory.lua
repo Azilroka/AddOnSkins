@@ -53,6 +53,9 @@ function AS:SkinArkInventory()
 		_G[status:GetName()..'GoldGoldButton']:SetPoint('RIGHT', _G[status:GetName()..'GoldSilverButtonText'], 'LEFT', -1, 0)
 		_G[status:GetName()..'GoldGoldButtonText']:SetFont(AS.Font, 12)
 		if not searchfilter.IsSkinned then
+			searchfilter.Left:SetTexture(nil)
+			searchfilter.Middle:SetTexture(nil)
+			searchfilter.Right:SetTexture(nil)
 			AS:SkinEditBox(searchfilter)
 			searchfilter.IsSkinned = true
 		end
@@ -73,6 +76,9 @@ function AS:SkinArkInventory()
 		if ArkInventory.Global.Mode.Edit then
 			bar:SetBackdropBorderColor(1, 0, 0, 1)
 			bar:SetBackdropColor(1, 0, 0, .1)
+		else
+			bar:SetBackdropBorderColor(unpack(AS.BorderColor))
+			bar:SetBackdropColor(unpack(AS.BackdropColor))
 		end
 	end)
 
@@ -93,6 +99,7 @@ function AS:SkinArkInventory()
 
 		local r, g, b, a = obj:GetBackdropBorderColor()
 		AS:SkinIconButton(frame, true)
+		if _G[frame:GetName()] == ARKINV_Frame1ChangerWindowBag1 then ARKINV_Frame1ChangerWindowBag1IconTexture:SetTexture('interface\\icons\\inv_misc_bag_07_green') end
 		local Backdrop = frame.backdrop or frame.Backdrop
 		Backdrop:SetBackdropBorderColor(r,g,b,a)
 	end)
