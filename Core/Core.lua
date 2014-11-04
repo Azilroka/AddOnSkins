@@ -222,10 +222,8 @@ end
 
 function AS:SkinScrollBar(frame)
 	frame:SkinScrollBar()
-	_G[frame:GetName().."ScrollUpButton"]:StripTextures()
-	_G[frame:GetName().."ScrollUpButton"]:SetTemplate("Default", true)
-	_G[frame:GetName().."ScrollDownButton"]:StripTextures()
-	_G[frame:GetName().."ScrollDownButton"]:SetTemplate("Default", true)
+	_G[frame:GetName().."ScrollUpButton"].texture:SetTexture(nil)
+	_G[frame:GetName().."ScrollDownButton"].texture:SetTexture(nil)
 	if not _G[frame:GetName().."ScrollUpButton"].text then
 		_G[frame:GetName().."ScrollUpButton"]:FontString("text", AS.ActionBarFont, 12)
 		_G[frame:GetName().."ScrollUpButton"].text:SetText("▲")
