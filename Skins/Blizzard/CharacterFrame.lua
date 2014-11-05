@@ -63,7 +63,7 @@ function AS:Blizzard_CharacterFrame()
 				button:StyleButton(false)
 				button.IconBorder:SetTexture(nil)
 				button:HookScript('OnUpdate', function(self)
-					if button.IconBorder:IsShown() then
+					if self.IconBorder:IsShown() then
 						self:SetBackdropBorderColor(self.IconBorder:GetVertexColor())
 					end
 				end)
@@ -82,7 +82,6 @@ function AS:Blizzard_CharacterFrame()
 	end
 
 	-- Swap item flyout frame (shown when holding alt over a slot)
-	EquipmentFlyoutFrame:HookScript("OnShow", SkinItemFlyouts)
 	hooksecurefunc("EquipmentFlyout_Show", SkinItemFlyouts)
 
 	local ScrollBars = {
@@ -137,7 +136,7 @@ function AS:Blizzard_CharacterFrame()
 		GearManagerDialogPopupEditBox:SetTemplate("Default")
 		GearManagerDialogPopupOkay:SkinButton()
 		GearManagerDialogPopupCancel:SkinButton()
-		
+
 		for i = 1, NUM_GEARSET_ICONS_SHOWN do
 			local button = _G["GearManagerDialogPopupButton"..i]
 			local icon = button.icon
@@ -145,10 +144,10 @@ function AS:Blizzard_CharacterFrame()
 			if button then
 				button:StripTextures()
 				button:StyleButton()
-				
+
 				icon:SetTexCoord(.08, .92, .08, .92)
 				_G["GearManagerDialogPopupButton"..i.."Icon"]:SetTexture(nil)
-				
+
 				icon:ClearAllPoints()
 				icon:Point("TOPLEFT", 2, -2)
 				icon:Point("BOTTOMRIGHT", -2, 2)	
@@ -226,24 +225,25 @@ function AS:Blizzard_CharacterFrame()
 
 	local function UpdateFaction()
 		local factionOffset = FauxScrollFrame_GetOffset(ReputationListScrollFrame)
-		for i = 1, NUM_FACTIONS_DISPLAYED do
+		local numFactions = GetNumFactions()
+		for i = 1, NUM_FACTIONS_DISPLAYED, 1 do
 			local Bar = _G["ReputationBar"..i]
 			local Button = _G["ReputationBar"..i.."ExpandOrCollapseButton"]
-			Button:SetNormalTexture("Interface\\Buttons\\UI-PlusMinus-Buttons")
-			Button:GetNormalTexture():SetInside()
-			Button:SetHighlightTexture(nil)
-
-			if Bar.isCollapsed then
-				Button:GetNormalTexture():SetTexCoord(0, 0.4375, 0, 0.4375)
-			else
-				Button:GetNormalTexture():SetTexCoord(0.5625, 1, 0, 0.4375)
-			end
-
+			local FactionName = _G["ReputationBar"..i.."FactionName"]
 			local factionIndex = factionOffset + i
-			if (factionIndex <= GetNumFactions()) then
-				local name, description, standingID, barMin, barMax, barValue, atWarWith, canToggleAtWar, isHeader, isCollapsed, hasRep, isWatched, isChild, factionID, hasBonusRepGain, canBeLFGBonus = GetFactionInfo(factionIndex);
+			if ( factionIndex <= numFactions ) then
+				local name, _, _, _, _, _, atWarWith, canToggleAtWar, _, isCollapsed = GetFactionInfo(factionIndex);
 
-				local FactionName = _G["ReputationBar"..i.."FactionName"]
+				Button:SetNormalTexture("Interface\\Buttons\\UI-PlusMinus-Buttons")
+				Button:GetNormalTexture():SetInside()
+				Button:SetHighlightTexture(nil)
+
+				if isCollapsed then
+					Button:GetNormalTexture():SetTexCoord(0, 0.4375, 0, 0.4375)
+				else
+					Button:GetNormalTexture():SetTexCoord(0.5625, 1, 0, 0.4375)
+				end
+
 				FactionName:SetText(name)
 				if atWarWith and canToggleAtWar then
 					FactionName:SetFormattedText("%s|TInterface\\Buttons\\UI-CheckBox-SwordCheck:16:16:%d:0:32:32:0:16:0:16|t", name, -(16 + FactionName:GetStringWidth()))
@@ -262,14 +262,14 @@ function AS:Blizzard_CharacterFrame()
 	AS:SkinCheckBox(ReputationDetailLFGBonusReputationCheckBox)
 	AS:SkinCheckBox(ReputationDetailInactiveCheckBox)
 	AS:SkinCheckBox(ReputationDetailMainScreenCheckBox)
-	
+
 	--Currency
 	AS:SkinFrame(TokenFramePopup)
 	TokenFramePopup:Point("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)				
 	TokenFrame:HookScript("OnShow", function()
 		for i=1, GetCurrencyListSize() do
 			local button = _G["TokenFrameContainerButton"..i]
-			
+
 			if button then
 				button.highlight:Kill()
 				button.categoryMiddle:Kill()	
