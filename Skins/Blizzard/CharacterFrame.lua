@@ -1,5 +1,4 @@
 if not Tukui then return end
-local T, C, L, G = unpack(Tukui)
 local AS = unpack(AddOnSkins)
 
 local name = 'Blizzard_CharacterFrame'
@@ -182,7 +181,7 @@ function AS:Blizzard_CharacterFrame()
 					for i=1, tab:GetNumRegions() do
 						local region = select(i, tab:GetRegions())
 						region:SetTexCoord(0.16, 0.86, 0.16, 0.86)
-						region.SetTexCoord = T.dummy
+						region.SetTexCoord = AS.Noop
 					end
 				end
 				tab:CreateBackdrop("Default")
