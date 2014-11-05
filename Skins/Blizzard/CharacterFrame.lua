@@ -111,9 +111,15 @@ function AS:Blizzard_CharacterFrame()
 	end)
 
 	--Equipement Manager
-	PaperDollEquipmentManagerPaneEquipSet:SkinButton()
-	PaperDollEquipmentManagerPaneSaveSet:SkinButton()
-	GearManagerDialogPopupScrollFrameScrollBar:SkinScrollBar()
+	AS:SkinButton(PaperDollEquipmentManagerPaneEquipSet)
+	AS:SkinButton(PaperDollEquipmentManagerPaneSaveSet)
+	AS:SkinScrollBar(GearManagerDialogPopupScrollFrameScrollBar)
+	AS:SkinFrame(GearManagerDialogPopup)
+	GearManagerDialogPopup:Point("LEFT", PaperDollFrame, "RIGHT", 4, 0)
+	GearManagerDialogPopupScrollFrame:StripTextures()
+	AS:SkinEditBox(GearManagerDialogPopupEditBox)
+	AS:SkinButton(GearManagerDialogPopupOkay)
+	AS:SkinButton(GearManagerDialogPopupCancel)
 	PaperDollEquipmentManagerPaneEquipSet:Width(PaperDollEquipmentManagerPaneEquipSet:GetWidth() - 8)
 	PaperDollEquipmentManagerPaneSaveSet:Width(PaperDollEquipmentManagerPaneSaveSet:GetWidth() - 8)
 	PaperDollEquipmentManagerPaneEquipSet:Point("TOPLEFT", PaperDollEquipmentManagerPane, "TOPLEFT", 8, 0)
@@ -121,44 +127,20 @@ function AS:Blizzard_CharacterFrame()
 	PaperDollEquipmentManagerPaneEquipSet.ButtonBackground:SetTexture(nil)
 	PaperDollEquipmentManagerPane:HookScript("OnShow", function(self)
 		for x, object in pairs(PaperDollEquipmentManagerPane.buttons) do
+			AS:SkinFrame(object, nil, true)
 			object.BgTop:SetTexture(nil)
+			object.HighlightBar:SetInside()
+			object.SelectedBar:SetInside()
 			object.BgBottom:SetTexture(nil)
 			object.BgMiddle:SetTexture(nil)
 
 			object.icon:SetTexCoord(.08, .92, .08, .92)
-			object:SetTemplate("Default")
-		end
-		GearManagerDialogPopup:StripTextures()
-		GearManagerDialogPopup:SetTemplate("Default")
-		GearManagerDialogPopup:Point("LEFT", PaperDollFrame, "RIGHT", 4, 0)
-		GearManagerDialogPopupScrollFrame:StripTextures()
-		GearManagerDialogPopupEditBox:StripTextures()
-		GearManagerDialogPopupEditBox:SetTemplate("Default")
-		GearManagerDialogPopupOkay:SkinButton()
-		GearManagerDialogPopupCancel:SkinButton()
-
-		for i = 1, NUM_GEARSET_ICONS_SHOWN do
-			local button = _G["GearManagerDialogPopupButton"..i]
-			local icon = button.icon
-			
-			if button then
-				button:StripTextures()
-				button:StyleButton()
-
-				icon:SetTexCoord(.08, .92, .08, .92)
-				_G["GearManagerDialogPopupButton"..i.."Icon"]:SetTexture(nil)
-
-				icon:ClearAllPoints()
-				icon:Point("TOPLEFT", 2, -2)
-				icon:Point("BOTTOMRIGHT", -2, 2)	
-				button:SetFrameLevel(button:GetFrameLevel() + 2)
-				if not button.Backdrop then
-					button:CreateBackdrop("Default")
-					button.Backdrop:SetAllPoints()			
-				end
-			end
 		end
 	end)
+
+	for i = 1, NUM_GEARSET_ICONS_SHOWN do
+		AS:SkinIconButton(_G["GearManagerDialogPopupButton"..i], true)
+	end
 
 	for i = 1, 4 do
 		AS:SkinTab(_G["CharacterFrameTab"..i])
@@ -221,6 +203,10 @@ function AS:Blizzard_CharacterFrame()
 		_G["ReputationBar"..i.."ReputationBarAtWarHighlight2"]:SetTexture(nil)
 		_G["ReputationBar"..i.."ReputationBarLeftTexture"]:SetTexture(nil)
 		_G["ReputationBar"..i.."ReputationBarRightTexture"]:SetTexture(nil)
+		_G["ReputationBar"..i.."ExpandOrCollapseButton"]:SetNormalTexture("Interface\\Buttons\\UI-PlusMinus-Buttons")
+		_G["ReputationBar"..i.."ExpandOrCollapseButton"].SetNormalTexture = function() end
+		_G["ReputationBar"..i.."ExpandOrCollapseButton"]:GetNormalTexture():SetInside()
+		_G["ReputationBar"..i.."ExpandOrCollapseButton"]:SetHighlightTexture(nil)
 	end
 
 	local function UpdateFaction()
@@ -233,10 +219,6 @@ function AS:Blizzard_CharacterFrame()
 			local factionIndex = factionOffset + i
 			if ( factionIndex <= numFactions ) then
 				local name, _, _, _, _, _, atWarWith, canToggleAtWar, _, isCollapsed = GetFactionInfo(factionIndex);
-
-				Button:SetNormalTexture("Interface\\Buttons\\UI-PlusMinus-Buttons")
-				Button:GetNormalTexture():SetInside()
-				Button:SetHighlightTexture(nil)
 
 				if isCollapsed then
 					Button:GetNormalTexture():SetTexCoord(0, 0.4375, 0, 0.4375)
