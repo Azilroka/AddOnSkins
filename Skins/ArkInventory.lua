@@ -92,6 +92,7 @@ function AS:ArkInventory()
 
 		local r, g, b, a = obj:GetBackdropBorderColor()
 		AS:SkinIconButton(frame, true)
+		frame.count:SetDrawLayer('OVERLAY')
 		if _G[frame:GetName()] == ARKINV_Frame1ChangerWindowBag1 then ARKINV_Frame1ChangerWindowBag1IconTexture:SetTexture('interface\\icons\\inv_misc_bag_07_green') end
 		local Backdrop = frame.backdrop or frame.Backdrop
 		Backdrop:SetBackdropBorderColor(r,g,b,a)
