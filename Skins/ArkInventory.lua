@@ -88,14 +88,22 @@ function AS:ArkInventory()
 		if not ArkInventory.ValidFrame(frame, true) then return end
 		local obj = _G[frame:GetName()..'ArkBorder']
 		if not obj then return end
-		obj:Hide()
+		obj:Kill()
 
 		local r, g, b, a = obj:GetBackdropBorderColor()
-		AS:SkinIconButton(frame, true)
-		frame.count:SetDrawLayer('OVERLAY')
-		if _G[frame:GetName()] == ARKINV_Frame1ChangerWindowBag1 then ARKINV_Frame1ChangerWindowBag1IconTexture:SetTexture('interface\\icons\\inv_misc_bag_07_green') end
-		local Backdrop = frame.backdrop or frame.Backdrop
-		Backdrop:SetBackdropBorderColor(r,g,b,a)
+		if not frame.isStyled then
+			AS:SkinFrame(frame)
+			AS:SkinTexture(frame.icon)
+			frame:SetNormalTexture(nil)
+			frame.SetNormalTexture = AS.Noop
+			frame.isStyled = true
+			if _G[frame:GetName()] == ARKINV_Frame1ChangerWindowBag1 then
+				ARKINV_Frame1ChangerWindowBag1IconTexture:SetTexture('interface\\icons\\inv_misc_bag_07_green')
+				AS:SkinTexture(ARKINV_Frame1ChangerWindowBag1IconTexture)
+				ARKINV_Frame1ChangerWindowBag1IconTexture:SetInside()
+			end
+		end
+		frame:SetBackdropBorderColor(r,g,b,a)
 	end)
 
 	hooksecurefunc(ArkInventory, 'Frame_Border_Paint', function(border, slot, file, size, offset, scale, r, g, b, a)
