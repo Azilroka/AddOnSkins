@@ -18,6 +18,7 @@ AddOnSkinsOptions = {
 	['EmbedRightChat'] = 'Skada',
 	['EmbedLeftWidth'] = 200,
 	['EmbedBelowTop'] = false,
+	['EmbedIsHidden'] = false,
 	['TransparentEmbed'] = false,
 -- Misc
 	['RecountBackdrop'] = true,
@@ -107,17 +108,16 @@ function AS:CreateEmbedSystem()
 
 		AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, AS.ChatBackgroundRight, ASL.EmbedSystem.ToggleRightChat, ASL.EmbedSystem.ToggleEmbed)
 		RightToggleButton:Point('RIGHT', AS.InfoRight, 'RIGHT', -2, 0)
-		local EmbedHidden = false
 		RightToggleButton:HookScript('OnClick', function(self, button)
 			if button == 'RightButton' then
 				if EmbedSystem_MainWindow:IsShown() then
 					EmbedSystem_MainWindow:Hide()
-					EmbedHidden = true
+					AS:SetOption('EmbedIsHidden', true)
 					if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 						_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
 					end
 				else
-					EmbedHidden = false
+					AS:SetOption('EmbedIsHidden', false)
 					EmbedSystem_MainWindow:Show()
 					if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 						_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
@@ -137,7 +137,7 @@ function AS:CreateEmbedSystem()
 		end)
 
 		UIParent:HookScript('OnShow', function()
-			if EmbedHidden then
+			if AS:CheckOption('EmbedIsHidden') then
 				AS:Embed_Hide();
 			else
 				AS:Embed_Show();
@@ -145,7 +145,7 @@ function AS:CreateEmbedSystem()
 		end)
 
 		if not UnitAffectingCombat('player') then
-			if AS:CheckOption('EmbedOoC') then
+			if AS:CheckOption('EmbedIsHidden') or AS:CheckOption('EmbedOoC') then
 				AS:Embed_Hide();
 			else
 				AS:Embed_Show();

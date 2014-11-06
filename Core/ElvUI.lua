@@ -47,6 +47,7 @@ function AS:InjectProfile()
 		['EmbedRightChat'] = true,
 		['EmbedLeftWidth'] = 200,
 		['EmbedBelowTop'] = false,
+		['EmbedIsHidden'] = false,
 		['TransparentEmbed'] = false,
 	-- Misc
 		['RecountBackdrop'] = true,
@@ -180,18 +181,17 @@ function AS:CreateEmbedSystem()
 		end)
 		hooksecurefunc(E:GetModule('Layout'), 'ToggleChatPanels', function() AS:Embed_Check() end)
 
-		local EmbedHidden = false
 		RightChatToggleButton:SetScript('OnClick', function(self, btn)
 			if btn == 'RightButton' then
 				if AS:CheckOption('EmbedRightChat') then
 					if EmbedSystem_MainWindow:IsShown() then
-						EmbedHidden = true
+						AS:SetOption('EmbedIsHidden', true)
 						EmbedSystem_MainWindow:Hide()
 						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
 						end
 					else
-						EmbedHidden = false
+						AS:SetOption('EmbedIsHidden', false)
 						EmbedSystem_MainWindow:Show()
 						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
@@ -223,13 +223,13 @@ function AS:CreateEmbedSystem()
 			if btn == 'RightButton' then
 				if not AS:CheckOption('EmbedRightChat') then
 					if EmbedSystem_MainWindow:IsShown() then
-						EmbedHidden = true
+						AS:SetOption('EmbedIsHidden', true)
 						EmbedSystem_MainWindow:Hide()
 						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
 						end
 					else
-						EmbedHidden = false
+						AS:SetOption('EmbedIsHidden', false)
 						EmbedSystem_MainWindow:Show()
 						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
@@ -269,7 +269,7 @@ function AS:CreateEmbedSystem()
 		end)
 
 		if not UnitAffectingCombat('player') then
-			if AS:CheckOption('EmbedOoC') then
+			if AS:CheckOption('EmbedIsHidden') or AS:CheckOption('EmbedOoC') then
 				AS:Embed_Hide();
 			else
 				AS:Embed_Show();
