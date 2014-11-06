@@ -105,17 +105,19 @@ function AS:CreateEmbedSystem()
 		EmbedSystem_MainWindow:SetScript('OnShow', AS.Embed_Show)
 		EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
 
-		AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, AS.ChatBackgroundRight, ASL.EmbedSystem.ToggleRightChat, ASL.EmbedSystem.Toggle)
+		AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, AS.ChatBackgroundRight, ASL.EmbedSystem.ToggleRightChat, ASL.EmbedSystem.ToggleEmbed)
 		RightToggleButton:Point('RIGHT', AS.InfoRight, 'RIGHT', -2, 0)
-
+		local EmbedHidden = false
 		RightToggleButton:HookScript('OnClick', function(self, button)
 			if button == 'RightButton' then
 				if EmbedSystem_MainWindow:IsShown() then
 					EmbedSystem_MainWindow:Hide()
+					EmbedHidden = true
 					if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 						_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
 					end
 				else
+					EmbedHidden = false
 					EmbedSystem_MainWindow:Show()
 					if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 						_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
@@ -134,18 +136,11 @@ function AS:CreateEmbedSystem()
 			end
 		end)
 
-		local ShowEmbed = false
 		UIParent:HookScript('OnShow', function()
-			if not ShowEmbed then return end
-			if AS:CheckOption('EmbedOoC') then
+			if EmbedHidden then
 				AS:Embed_Hide();
 			else
 				AS:Embed_Show();
-			end
-		end)
-		UIParent:HookScript('OnHide', function()
-			if EmbedSystem_MainWindow:IsShown() then
-				ShowEmbed = true
 			end
 		end)
 

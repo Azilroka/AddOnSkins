@@ -180,15 +180,18 @@ function AS:CreateEmbedSystem()
 		end)
 		hooksecurefunc(E:GetModule('Layout'), 'ToggleChatPanels', function() AS:Embed_Check() end)
 
+		local EmbedHidden = false
 		RightChatToggleButton:SetScript('OnClick', function(self, btn)
 			if btn == 'RightButton' then
 				if AS:CheckOption('EmbedRightChat') then
 					if EmbedSystem_MainWindow:IsShown() then
+						EmbedHidden = true
 						EmbedSystem_MainWindow:Hide()
 						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
 						end
 					else
+						EmbedHidden = false
 						EmbedSystem_MainWindow:Show()
 						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
@@ -220,11 +223,13 @@ function AS:CreateEmbedSystem()
 			if btn == 'RightButton' then
 				if not AS:CheckOption('EmbedRightChat') then
 					if EmbedSystem_MainWindow:IsShown() then
+						EmbedHidden = true
 						EmbedSystem_MainWindow:Hide()
 						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
 						end
 					else
+						EmbedHidden = false
 						EmbedSystem_MainWindow:Show()
 						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
 							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
@@ -255,18 +260,11 @@ function AS:CreateEmbedSystem()
 		AS:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
 		AS:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
 
-		local ShowEmbed = false
 		UIParent:HookScript('OnShow', function()
-			if not ShowEmbed then return end
-			if AS:CheckOption('EmbedOoC') then
+			if EmbedHidden then
 				AS:Embed_Hide();
 			else
 				AS:Embed_Show();
-			end
-		end)
-		UIParent:HookScript('OnHide', function()
-			if EmbedSystem_MainWindow:IsShown() then
-				ShowEmbed = true
 			end
 		end)
 
