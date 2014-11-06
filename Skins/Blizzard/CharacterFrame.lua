@@ -34,6 +34,7 @@ function AS:Blizzard_CharacterFrame()
 		AS:SkinTexture(Slot.icon)
 		AS:SkinFrame(Slot)
 		Slot.icon:SetInside()
+		Slot.ignoreTexture:SetTexture([[Interface\PaperDollInfoFrame\UI-GearManager-LeaveItem-Transparent]])
 		Slot.IconBorder:SetTexture(nil)
 		hooksecurefunc(Slot.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
 			self:GetParent():SetBackdropBorderColor(r, g, b)
@@ -96,15 +97,18 @@ function AS:Blizzard_CharacterFrame()
 	end
 
 	--Titles
-	PaperDollTitlesPane:HookScript("OnShow", function(self)
+	PaperDollTitlesPane:HookScript('OnShow', function(self)
 		for x, object in pairs(PaperDollTitlesPane.buttons) do
-			object.BgTop:SetTexture(nil)
-			object.BgBottom:SetTexture(nil)
-			object.BgMiddle:SetTexture(nil)
-			object.SelectedBar:SetTexture(nil)
-			object:SetHighlightTexture(nil)
-			object:HookScript('OnEnter', function(self) self.text:SetTextColor(0, 0.44, .87) end)
-			object:HookScript('OnLeave', function(self) self.text:SetTextColor(1, .82, 0) end)
+			if not object.isStyled then
+				object.BgTop:SetTexture(nil)
+				object.BgBottom:SetTexture(nil)
+				object.BgMiddle:SetTexture(nil)
+				object.SelectedBar:SetTexture(nil)
+				object:SetHighlightTexture(nil)
+				object:HookScript('OnEnter', function(self) self.text:SetTextColor(0, 0.44, .87) end)
+				object:HookScript('OnLeave', function(self) self.text:SetTextColor(1, .82, 0) end)
+				object.isStyled = true
+			end
 
 			object.text:SetFont(AS.Font, 12)
 		end

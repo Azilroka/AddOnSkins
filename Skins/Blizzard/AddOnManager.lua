@@ -1,7 +1,7 @@
 if not Tukui then return end
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_AddOnManager()
+function AS:Blizzard_AddonManager()
 	AS:SkinFrame(AddonList)
 	AddonListInset:StripTextures()	
 
@@ -24,4 +24,4 @@ function AS:Blizzard_AddOnManager()
 	end
 end
 
-AS:RegisterSkin('Blizzard_AddOnManager', AS.Blizzard_AddOnManager)
+AS:RegisterSkin('Blizzard_AddonManager', AS.Blizzard_AddonManager)

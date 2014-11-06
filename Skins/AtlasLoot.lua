@@ -33,17 +33,12 @@ function AS:AtlasLoot(event, addon)
 				if Frame and not Frame.IsSkinned then
 					local r, g, b = Frame:GetBackdropColor()
 					AS:SkinFrame(Frame)
-					Frame:SetBackdropBorderColor(r, g, b)
-					Frame:SetBackdropColor(unpack(AS.BackdropColor))
-					local a, f, c, d, e = Frame:GetPoint()
+					Frame:SetBackdropColor(r, g, b)
 					Frame:SetPoint(a, f, c, d, e - 3)
 
 					Frame:HookScript('OnShow', function(self)
 						local a, f, c, d, e = Frame:GetPoint()
 						Frame:SetPoint(a, f, c, d, e - 3)
-						local r, g, b = Frame:GetBackdropColor()
-						Frame:SetBackdropBorderColor(r, g, b)
-						Frame:SetBackdropColor(unpack(AS.BackdropColor))
 					end)
 
 					Frame.IsSkinned = true
