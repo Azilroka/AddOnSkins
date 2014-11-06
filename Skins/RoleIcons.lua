@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('RoleIcons') then return end
 
-local name = "RoleIconsSkin"
-function AS:SkinRoleIcons(event, addon)
+function AS:RoleIcons(event, addon)
 	if (event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_RaidUI')) or addon == "Blizzard_RaidUI" then
 		AS:Delay(1, function() --Skin()
 			local icon, idx, role, button, i, class
@@ -35,4 +34,4 @@ function AS:SkinRoleIcons(event, addon)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinRoleIcons, 'ADDON_LOADED')
+AS:RegisterSkin('RoleIcons', AS.RoleIcons, 'ADDON_LOADED')

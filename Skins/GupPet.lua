@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('GupPet') then return end
 
-local name = 'GupPetSkin'
-function AS:SkinGupPet()
+function AS:GupPet()
 	AS:SkinFrame(GupPet_InterfaceOptionsFrame)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameOptions)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameMountsCompanions)
@@ -36,4 +35,4 @@ function AS:SkinGupPet()
 	AS:SkinTab(GupPet_InterfaceOptionsFrameMountsCompanionsMainTabCompanion)
 end
 
-AS:RegisterSkin(name, AS.SkinGupPet)
+AS:RegisterSkin('GupPet', AS.GupPet)

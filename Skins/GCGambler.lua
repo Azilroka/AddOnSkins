@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('GCGambler') then return end
 
-local name = "GCGamblerSkin"
-function AS:SkinGCGambler()
+function AS:GCGambler()
 	AS:SkinFrame(GCGambler_Frame)
 	AS:SkinButton(GCGambler_CHAT_Button)
 	AS:SkinEditBox(GCGambler_EditBox)
@@ -21,4 +20,4 @@ function AS:SkinGCGambler()
 	GCGambler_Close:SetPoint('TOPRIGHT', GCGambler_Frame, 'TOPRIGHT', 11, 7)
 end
 
-AS:RegisterSkin(name, AS.SkinGCGambler)
+AS:RegisterSkin('GCGambler', AS.GCGambler)

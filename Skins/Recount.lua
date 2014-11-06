@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Recount') then return end
 
-local name = 'RecountSkin'
-function AS:SkinRecount()
+function AS:Recount()
 	local L = LibStub('AceLocale-3.0'):GetLocale('Recount')
 
 	function Recount:ShowReset()
@@ -71,4 +70,4 @@ function AS:SkinRecount()
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinRecount)
+AS:RegisterSkin('Recount', AS.Recount)

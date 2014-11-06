@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Bagnon') then return end
 
-local name = 'BagnonSkin'
-function AS:SkinBagnon(event, addon)
+function AS:Bagnon(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		ToggleBackpack()
 		if BagnonFrameinventory then
@@ -18,7 +17,7 @@ function AS:SkinBagnon(event, addon)
 				AS:SkinCloseButton(BagnonFramebankCloseButton)
 			end
 		end)
-		AS:UnregisterSkinEvent(name, event)
+		AS:UnregisterSkinEvent('Bagnon', event)
 	elseif event == 'GUILDBANKFRAME_OPENED' and addon == 'Bagnon_GuildBank' then
 		AS:Delay(0, function()
 			if BagnonFrameguildbank then
@@ -26,7 +25,7 @@ function AS:SkinBagnon(event, addon)
 				AS:SkinCloseButton(BagnonFrameguildbankCloseButton)
 			end
 		end)
-		AS:UnregisterSkinEvent(name, event)
+		AS:UnregisterSkinEvent('Bagnon', event)
 	elseif event == 'VOID_STORAGE_OPEN' and addon == 'Bagnon_VoidStorage' then
 		AS:Delay(0, function()
 			if BagnonFramevoidstorage then
@@ -34,8 +33,8 @@ function AS:SkinBagnon(event, addon)
 				AS:SkinCloseButton(BagnonFramevoidstorageCloseButton)
 			end
 		end)
-		AS:UnregisterSkinEvent(name, event)
+		AS:UnregisterSkinEvent('Bagnon', event)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinBagnon, 'ADDON_LOADED', 'BANKFRAME_OPENED', 'GUILDBANKFRAME_OPENED', 'VOID_STORAGE_OPEN')
+AS:RegisterSkin('Bagnon', AS.Bagnon, 'ADDON_LOADED', 'BANKFRAME_OPENED', 'GUILDBANKFRAME_OPENED', 'VOID_STORAGE_OPEN')

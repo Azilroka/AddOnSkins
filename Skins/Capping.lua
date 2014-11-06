@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Capping') then return end
 
-local name = 'CappingSkin'
-function AS:SkinCapping(event)
+function AS:Capping(event)
 	hooksecurefunc(Capping, "StartBar",	function(self, name)
 		local bar = self:GetBar(name, true)
 		local Backdrop = bar.backdrop or bar.Backdrop
@@ -16,4 +15,4 @@ function AS:SkinCapping(event)
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinCapping)
+AS:RegisterSkin('Capping', AS.Capping)

@@ -257,6 +257,11 @@ function AS:SkinEditBox(frame, width, height)
 	frame:SkinEditBox()
 	if width then frame:Width(width) end
 	if height then frame:Height(height) end
+	if frame.Left then
+		frame.Left:Kill()
+		frame.Middle:Kill()
+		frame.Right:Kill()
+	end
 end
 
 function AS:SkinDropDownBox(frame, width)

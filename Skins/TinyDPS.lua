@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('TinyDPS') then return end
 
-local name = 'TinyDPSSkin'
-function AS:SkinTinyDPS()
+function AS:TinyDPS()
 	AS:SkinFrame(tdpsFrame)
 
 	tdpsFrame:HookScript('OnShow', function()
@@ -20,4 +19,4 @@ function AS:SkinTinyDPS()
 	tdpsRefresh()
 end
 
-AS:RegisterSkin(name, AS.SkinTinyDPS)
+AS:RegisterSkin('TinyDPS', AS.TinyDPS)

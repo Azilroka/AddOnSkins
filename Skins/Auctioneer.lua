@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Auc-Advanced') then return end
 
-local name = 'AuctioneerSkin'
-function AS:SkinAuctioneer(event)
+function AS:Auctioneer(event)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 	if IsAddOnLoaded('Auc-Stat-Purchased') then
 		BrowsePrevPageButton:Point('BOTTOMRIGHT', BrowseScrollFrame, 'BOTTOMRIGHT', -160, 0)
@@ -16,4 +15,4 @@ function AS:SkinAuctioneer(event)
 	AS:UnregisterSkinEvent(name, event)
 end
 
-AS:RegisterSkin(name, AS.SkinAuctioneer, 'AUCTION_HOUSE_SHOW')
+AS:RegisterSkin('Auctioneer', AS.Auctioneer, 'AUCTION_HOUSE_SHOW')

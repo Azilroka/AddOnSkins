@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Spy') then return end
 
-local name = 'SpySkin'
-function AS:SkinSpy()
+function AS:Spy()
 	AS:SkinFrame(Spy_MainWindow)
 	AS:SkinFrame(Spy_AlertWindow)
 	AS:SkinCloseButton(Spy_MainWindow.CloseButton)
@@ -13,4 +12,4 @@ function AS:SkinSpy()
 	Spy_AlertWindow:Point('TOP', UIParent, 'TOP', 0, -130)
 end
 
-AS:RegisterSkin(name, AS.SkinSpy)
+AS:RegisterSkin('Spy', AS.Spy)

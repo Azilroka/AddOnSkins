@@ -2,9 +2,8 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('SpineCounter') then return end
 
-local name = 'SpineCounterSkin'
-function AS:SkinSpineCounter()
+function AS:SpineCounter()
 	AS:SkinFrame(SCOutput)
 end
 
-AS:RegisterSkin(name, AS.SkinSpineCounter)
+AS:RegisterSkin('SpineCounter', AS.SpineCounter)

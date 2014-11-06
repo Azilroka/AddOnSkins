@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('!Swatter') then return end
 
-local name = 'SwatterSkin'
-function AS:SkinSwatter()
+function AS:Swatter()
 	if SwatterErrorFrame then
 		AS:SkinFrame(SwatterErrorFrame)
 		AS:SkinButton(Swatter.Error.Done)
@@ -14,4 +13,4 @@ function AS:SkinSwatter()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinSwatter, '[!BugGrabber]', '[!ImprovedErrorFrame]')
+AS:RegisterSkin('Swatter', AS.Swatter, '[!BugGrabber]', '[!ImprovedErrorFrame]')

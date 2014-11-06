@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('AuctionLite') then return end
 
-local name = 'AuctionLiteSkin'
-function AS:SkinAuctionLite(event)
+function AS:AuctionLite(event)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 	AS:SkinTab(AuctionFrameTab4)
 	AS:SkinTab(AuctionFrameTab5)
@@ -26,7 +25,7 @@ function AS:SkinAuctionLite(event)
 	AS:SkinEditBox(SellBuyoutPriceSilver)
 	AS:SkinEditBox(SellBuyoutPriceCopper)
 	AS:SkinButton(SellCreateAuctionButton)
-	AS:UnregisterSkinEvent(name, event)
+	AS:UnregisterSkinEvent('AuctionLite', event)
 end
 
-AS:RegisterSkin(name, AS.SkinAuctionLite, 'AUCTION_HOUSE_SHOW')
+AS:RegisterSkin('AuctionLite', AS.AuctionLite, 'AUCTION_HOUSE_SHOW')

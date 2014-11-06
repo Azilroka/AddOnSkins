@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('NugRunning') then return end
 
-local name = 'NugRunningSkin'
-function AS:SkinNugRunning()
+function AS:NugRunning()
 	hooksecurefunc(NugRunning, 'ActivateTimer', function(self, w, h)
 		for _, timer in pairs(self.timers) do
 			if not timer.isSkinned then
@@ -44,4 +43,4 @@ function AS:SkinNugRunning()
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinNugRunning)
+AS:RegisterSkin('NugRunning', AS.NugRunning)

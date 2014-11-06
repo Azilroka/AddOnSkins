@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BigBrother') then return end
 
-local name = 'BigBrotherSkin'
-function AS:SkinBigBrother()
+function AS:BigBrother()
 	hooksecurefunc(BigBrother, 'ToggleBuffWindow', function()
 		if BigBrother_BuffWindow.isSkinned then return end
 		AS:SkinFrame(BigBrother_BuffWindow)
@@ -14,4 +13,4 @@ function AS:SkinBigBrother()
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinBigBrother)
+AS:RegisterSkin('BigBrother', AS.BigBrother)

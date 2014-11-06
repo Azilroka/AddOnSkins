@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('PetTracker') then return end
 
-local name = "PetTrackerSkin"
-function AS:SkinPetTracker()
+function AS:PetTracker()
 	if not IsAddOnLoaded('Carbonite.Quests') then
 		--PetTrackerProgressBar:CreateBackdrop()
 		AS:Delay(1, function()
@@ -180,4 +179,4 @@ function AS:SkinPetTracker()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinPetTracker)
+AS:RegisterSkin('PetTracker', AS.PetTracker)

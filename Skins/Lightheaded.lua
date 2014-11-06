@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('Lightheaded') then return end
 
-local name = 'LightheadedSkin'
-function AS:SkinLightHeaded()
+function AS:LightHeaded()
 	local function DoDis()
 		QuestNPCModel:ClearAllPoints()
 		QuestNPCModel:SetPoint('TOPLEFT', LightHeadedFrame, 'TOPRIGHT', 5, -10)
@@ -55,4 +54,4 @@ function AS:SkinLightHeaded()
 	local LH_Options = _G['LightHeaded_Panel']
 end
 
-AS:RegisterSkin(name, AS.SkinLightHeaded)
+AS:RegisterSkin('Lightheaded', AS.LightHeaded)

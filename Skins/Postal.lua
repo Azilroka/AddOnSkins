@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Postal') then return end
 
-local name = 'PostalSkin'
-function AS:SkinPostal(event, addon)
+function AS:Postal(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 
 	InboxPrevPageButton:Point('CENTER', InboxFrame, 'BOTTOMLEFT', 45, 112)
@@ -52,7 +51,7 @@ function AS:SkinPostal(event, addon)
 		Postal_BlackBookButton:SetPoint('LEFT', SendMailNameEditBox, 'RIGHT', 5, 2)
 	end
 
-	AS:UnregisterSkinEvent(name, event)
+	AS:UnregisterSkinEvent('Postal', event)
 end
 
-AS:RegisterSkin(name, AS.SkinPostal, 'MAIL_SHOW')
+AS:RegisterSkin('Postal', AS.Postal, 'MAIL_SHOW')

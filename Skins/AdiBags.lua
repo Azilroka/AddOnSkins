@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('AdiBags') then return end
 
-local name = 'AdiBagsSkin'
-function AS:SkinAdiBags(event)
+function AS:AdiBags(event)
 	local AdiBags = LibStub('AceAddon-3.0'):GetAddon('AdiBags')
 
 	local function SkinFrame(frame)
@@ -17,9 +16,6 @@ function AS:SkinAdiBags(event)
 				if widget:IsObjectType('Button') then
 					AS:SkinButton(widget, true)
 				elseif widget:IsObjectType('EditBox') then
-					widget.Left:Kill()
-					widget.Middle:Kill()
-					widget.Right:Kill()
 					AS:SkinEditBox(widget)
 				end
 			end
@@ -39,10 +35,10 @@ function AS:SkinAdiBags(event)
 		AS:Delay(1, function()
 			if AdiBagsContainer2 then
 				SkinFrame(AdiBagsContainer2)
-				AS:UnregisterSkinEvent(name, event)
+				AS:UnregisterSkinEvent('AdiBags', event)
 			end
 		end)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinAdiBags, 'BANKFRAME_OPENED')
+AS:RegisterSkin('AdiBags', AS.AdiBags, 'BANKFRAME_OPENED')

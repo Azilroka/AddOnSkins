@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('AdiCastBar') then return end
 
-local name = 'AdiCastBarSkin'
-function AS:SkinAdiCastBar()
+function AS:AdiCastBar()
 	local frames = {
 		AdiCastBar_player,
 		AdiCastBar_pet,
@@ -20,4 +19,4 @@ function AS:SkinAdiCastBar()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinAdiCastBar)
+AS:RegisterSkin('AdiCastBar', AS.AdiCastBar)

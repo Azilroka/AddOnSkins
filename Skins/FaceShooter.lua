@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('FaceShooter') then return end
 
-local name = 'FaceShooterSkin'
-function AS:SkinFaceShooter()
+function AS:FaceShooter()
 	if button1Mover then
 	button1Button.texture:SetTexCoord(unpack(AS.TexCoords))
 
@@ -29,4 +28,4 @@ function AS:SkinFaceShooter()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinFaceShooter)
+AS:RegisterSkin('FaceShooter', AS.FaceShooter)

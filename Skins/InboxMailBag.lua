@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('InboxMailBag') then return end
 
-local name = 'InboxMailBagSkin'
-function AS:SkinInboxMailBag(event)
+function AS:InboxMailBag(event)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 	InboxMailbagFrame:StripTextures()
 	AS:SkinEditBox(InboxMailbagFrameItemSearchBox)
@@ -33,7 +32,7 @@ function AS:SkinInboxMailBag(event)
 			end
 		end)
 	end
-	AS:UnregisterSkinEvent(name, event)
+	AS:UnregisterSkinEvent('InboxMailBag', event)
 end
 
-AS:RegisterSkin(name, AS.SkinInboxMailBag, 'MAIL_SHOW')
+AS:RegisterSkin('InboxMailBag', AS.InboxMailBag, 'MAIL_SHOW')

@@ -1,7 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-local name = 'MiscFixes'
-function AS:MiscFixes(event, addon)
+function AS:MiscellaneousFixes(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		local function SkinIcons()
 			for i = 1, LFG_ROLE_NUM_SHORTAGE_TYPES do
@@ -74,8 +73,8 @@ function AS:MiscFixes(event, addon)
 				AS:SkinTab(_G['AuctionFrameTab'..i])
 			end
 		end
-		AS:UnregisterSkinEvent(name, event)
+		AS:UnregisterSkinEvent('MiscellaneousFixes', event)
 	end
 end
 
-AS:RegisterSkin(name, AS.MiscFixes, 'AUCTION_HOUSE_SHOW')
+AS:RegisterSkin('MiscellaneousFixes', AS.MiscellaneousFixes, 'AUCTION_HOUSE_SHOW')

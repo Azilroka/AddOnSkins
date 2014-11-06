@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('MinimalArchaeology') then return end
 
-local name = 'MinimalArchaeologySkin'
-function AS:SkinMinimalArchaeology()
+function AS:MinimalArchaeology()
 	AS:SkinFrame(MinArchMain)
 	AS:SkinStatusBar(MinArchMainSkillBar)
 	MinArchMainSkillBar:Point('TOP', MinArchMain, 'TOP', 2, -24)
@@ -57,4 +56,4 @@ function AS:SkinMinimalArchaeology()
 	AS:SkinFrame(MinArchOptionPanelFrameScale)
 end
 
-AS:RegisterSkin(name, AS.SkinMinimalArchaeology)
+AS:RegisterSkin('MinimalArchaeology', AS.MinimalArchaeology)

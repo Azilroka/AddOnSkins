@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Altoholic') then return end
 
-local name = "AltoholicSkin"
-function AS:SkinAltoholic(event, addon)
+function AS:Altoholic(event, addon)
 
 	local function ColorAltoBorder(self)
 		local Backdrop = self.backdrop or self.Backdrop
@@ -241,4 +240,4 @@ function AS:SkinAltoholic(event, addon)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinAltoholic, "ADDON_LOADED")
+AS:RegisterSkin('Altoholic', AS.Altoholic, "ADDON_LOADED")

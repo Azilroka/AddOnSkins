@@ -3,8 +3,7 @@ local AS = unpack(AddOnSkins)
 if AS:CheckAddOn('ElvUI') then return end
 
 local Color = RAID_CLASS_COLORS[AS.MyClass]
-local name = 'Ace3Skin'
-function AS:SkinAce3()
+function AS:Ace3()
 	local AceGUI = LibStub('AceGUI-3.0', true)
 	if not AceGUI then return end
 	local oldRegisterAsWidget = AceGUI.RegisterAsWidget
@@ -214,4 +213,4 @@ function AS:SkinAce3()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinAce3)
+AS:RegisterSkin('Ace3', AS.Ace3)

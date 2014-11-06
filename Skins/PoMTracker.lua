@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('PoMTracker') then return end
 
-local name = 'PoMTrackerSkin'
-function AS:SkinPoMTracker()
+function AS:PoMTracker()
 	AS:SkinFrame(PoMOptionFrame)
 	AS:SkinCloseButton(PoMOptionFrame_CloseButton)
 	AS:SkinBackdropFrame(pomtracker1)
@@ -26,4 +25,4 @@ function AS:SkinPoMTracker()
 	pomtracker2:HookScript('OnUpdate', function() pomtrackerstatusBar:Width(pomtracker2:GetWidth()) pomtracker3:Width(pomtracker2:GetWidth()) end)
 end
 
-AS:RegisterSkin(name, AS.SkinPoMTracker)
+AS:RegisterSkin('PoMTracker', AS.PoMTracker)

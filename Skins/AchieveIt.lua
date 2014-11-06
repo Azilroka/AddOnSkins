@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('AchieveIt') then return end
 
-local name = 'AchieveItSkin'
-function AS:SkinAchieveIt(event, addon)
+function AS:AchieveIt(event, addon)
 	if addon == 'Blizzard_AchievementUI' then
 		AS:Delay(1, function()
 			for i = 1, 20 do
@@ -18,4 +17,4 @@ function AS:SkinAchieveIt(event, addon)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinAchieveIt, 'ADDON_LOADED')
+AS:RegisterSkin('AchieveIt', AS.AchieveIt, 'ADDON_LOADED')

@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('AdvancedTradeSkillWindow') then return end
 
-local name = 'AdvancedTradeSkillWindowSkin'
-function AS:SkinAdvancedTradeSkillWindow()
+function AS:AdvancedTradeSkillWindow()
 	AS:SkinFrame(ATSWFrame)
 	ATSWSkillIcon:StripTextures(true)
 	ATSWListScrollFrame:StripTextures(true)
@@ -176,4 +175,4 @@ function AS:SkinAdvancedTradeSkillWindow()
 	ATSWInputBox:SetJustifyH('CENTER')
 end
 
-AS:RegisterSkin(name, AS.SkinAdvancedTradeSkillWindow)
+AS:RegisterSkin('AdvancedTradeSkillWindow', AS.AdvancedTradeSkillWindow)

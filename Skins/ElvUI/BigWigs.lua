@@ -3,8 +3,7 @@ local AS = unpack(AddOnSkins)
 if not (AS:CheckAddOn('BigWigs') and AS:CheckAddOn('ElvUI')) then return end
 
 local Loaded
-local name = "BigWigsSkin"
-function AS:SkinBigWigs(event, addon)
+function AS:BigWigs(event, addon)
 	if event == 'LFG_PROPOSAL_SHOW' or event == 'PLAYER_ENTERING_WORLD' then
 		if LFGDungeonReadyPopup then
 			LFGDungeonReadyPopup:HookScript('OnUpdate', function(self)
@@ -142,8 +141,8 @@ function AS:SkinBigWigs(event, addon)
 			BarStopped = freestyle,
 			GetStyleName = function() return "ElvUI" end,
 		})
-		AS:UnregisterSkinEvent(name, "ADDON_LOADED")
+		AS:UnregisterSkinEvent('BigWigs', "ADDON_LOADED")
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinBigWigs, "ADDON_LOADED", 'LFG_PROPOSAL_SHOW')
+AS:RegisterSkin('BigWigs', AS.BigWigs, "ADDON_LOADED", 'LFG_PROPOSAL_SHOW')

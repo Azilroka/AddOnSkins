@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('MyRolePlay') then return end
 
-local name = 'MyRolePlaySkin'
-function AS:SkinMyRolePlay()
+function AS:MyRolePlay()
 	AS:SkinFrame(MyRolePlayBrowseFrame)
 	MyRolePlayBrowseFramePortraitFrame:Hide()
 	MyRolePlayBrowseFrameTopBorder:Hide()
@@ -82,4 +81,4 @@ function AS:SkinMyRolePlay()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinMyRolePlay)
+AS:RegisterSkin('MyRolePlay', AS.MyRolePlay)

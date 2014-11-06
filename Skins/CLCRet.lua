@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not (AS:CheckAddOn('CLCRet') and AS.MyClass == 'PALADIN') then return end
 
-local name = 'CLCRetSkin'
-function AS:SkinCLCRet()
+function AS:CLCRet()
 	local function UpdateButtonLayout(frame, button, opt)
 		button:Size(opt.size)
 		button:ClearAllPoints()
@@ -68,4 +67,4 @@ function AS:SkinCLCRet()
 	clcret.UpdateButtonLayout = UpdateButtonLayout
 end
 
-AS:RegisterSkin(name, AS.SkinCLCRet)
+AS:RegisterSkin('CLCRet', AS.CLCRet)

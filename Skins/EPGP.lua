@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('EPGP') then return end
 
-local name = 'EPGPSkin'
-function AS:SkinEPGP(event, addon)
+function AS:EPGP(event, addon)
 	local function SkinEPGP()
 		AS:SkinFrame(EPGPFrame)
 		AS:SkinFrame(EPGPLogFrame, nil, true)
@@ -22,4 +21,4 @@ function AS:SkinEPGP(event, addon)
 	hooksecurefunc(EPGP, 'ToggleUI', SkinEPGP)
 end
 
-AS:RegisterSkin(name, AS.SkinEPGP)
+AS:RegisterSkin('EPGP', AS.EPGP)

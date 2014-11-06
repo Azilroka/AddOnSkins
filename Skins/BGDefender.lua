@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('BGDefender') then return end
 
-local name = 'BGDefenderSkin'
-function AS:SkinBGDefender()
+function AS:BGDefender()
 	local function OnEnter(f)
 		local text
 		if f:GetName() == 'Button9' then
@@ -88,4 +87,4 @@ function AS:SkinBGDefender()
 	Button11:SetScript('OnLeave', OnLeave)
 end
 
-AS:RegisterSkin(name, AS.SkinBGDefender)
+AS:RegisterSkin('BGDefender', AS.BGDefender)

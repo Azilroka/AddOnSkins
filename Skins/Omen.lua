@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Omen') then return end
 
-local name = 'OmenSkin'
-function AS:SkinOmen()
+function AS:Omen()
 	Omen.db.profile.Scale = 1
 	Omen.db.profile.Bar.Spacing = 1
 	Omen.db.profile.Background.EdgeSize = 1
@@ -32,4 +31,4 @@ function AS:SkinOmen()
 	Omen:ResizeBars()
 end
 
-AS:RegisterSkin(name, AS.SkinOmen)
+AS:RegisterSkin('Omen', AS.Omen)

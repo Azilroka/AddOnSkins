@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('CombustionHelper') then return end
 
-local name = 'CombustionHelperSkin'
-function AS:SkinCombustionHelper()
+function AS:CombustionHelper()
 	CombustionFrame:CreateBackdrop()
 	if combusettingstable then
 		combusettingstable["bgcolornormal"] = AS.BackdropColor
@@ -14,4 +13,4 @@ function AS:SkinCombustionHelper()
 	hooksecurefunc('CombuMBTrackerBackdropBuild', function() CombuMBTrackerFrame:SetTemplate('Transparent') end)
 end
 
-AS:RegisterSkin(name, AS.SkinCombustionHelper)
+AS:RegisterSkin('CombustionHelper', AS.CombustionHelper)

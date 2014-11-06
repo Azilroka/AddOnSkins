@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('MogIt') then return end
 
-local name = 'MogItSkin'
-function AS:SkinMogIt()
+function AS:MogIt()
 	AS:SkinFrame(MogItFrame)
 	MogItFrameInset:StripTextures(true)
 	AS:SkinFrame(MogItFilters)
@@ -42,4 +41,4 @@ function AS:SkinMogIt()
 	AS:SkinScrollBar(MogItFiltersScrollScrollBar)
 end
 
-AS:RegisterSkin(name, AS.SkinMogIt)
+AS:RegisterSkin('MogIt', AS.MogIt)

@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('WeakAuras') then return end
 
-local name = 'WeakAurasSkin'
-function AS:SkinWeakAuras()
+function AS:WeakAuras()
 	local function Skin_WeakAuras(frame, ftype)
 		local backdrop = frame.backdrop or frame.Backdrop
 		if not backdrop then
@@ -78,4 +77,4 @@ function AS:SkinWeakAuras()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinWeakAuras)
+AS:RegisterSkin('WeakAuras', AS.WeakAuras)

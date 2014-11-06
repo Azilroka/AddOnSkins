@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('MoveAnything') then return end
 
-local name = 'MoveAnythingSkin'
-function AS:SkinMoveAnything()
+function AS:MoveAnything()
 	AS:SkinFrame(MAOptions)
 	MAScrollBorder:StripTextures(true)
 	AS:SkinScrollBar(MAScrollFrameScrollBar)
@@ -36,4 +35,4 @@ function AS:SkinMoveAnything()
 	AS:SkinButton(MANudger_Hide)
 end
 
-AS:RegisterSkin(name, AS.SkinMoveAnything)
+AS:RegisterSkin('MoveAnything', AS.MoveAnything)

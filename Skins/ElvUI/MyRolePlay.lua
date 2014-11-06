@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not (AS:CheckAddOn('MyRolePlay') and AS:CheckAddOn('ElvUI')) then return end
 
-local name = "MyRolePlaySkin"
-function AS:SkinMyRolePlayElvUI()
+function AS:MyRolePlayElvUI()
 	if ElvUI[1].private.tooltip.enable ~= true then return end
 	local TT = ElvUI[1]:GetModule('Tooltip')
 
@@ -51,4 +50,4 @@ function AS:SkinMyRolePlayElvUI()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinMyRolePlayElvUI, 2)
+AS:RegisterSkin('MyRolePlay', AS.MyRolePlayElvUI, 2)

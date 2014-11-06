@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('MrTrader') then return end
 
-local name = "MrTraderSkin"
-function AS:SkinMrTrader()
+function AS:MrTrader()
 	AS:SkinFrame(MRTSkillFrame, 'Transparent', nil, true)
 	MRTSkillFrameInset:StripTextures()
 
@@ -118,4 +117,4 @@ function AS:SkinMrTrader()
 	AS:SkinButton(MRTNewCategoryFrameCancelButton)
 end
 
-AS:RegisterSkin(name, AS.SkinMrTrader)
+AS:RegisterSkin('MrTrader', AS.MrTrader)

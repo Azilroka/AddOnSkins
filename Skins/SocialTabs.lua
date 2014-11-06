@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('SocialTabs') then return end
 
-local name = 'SocialTabsSkin'
-function AS:SkinSocialTabs(event, addon)
+function AS:SocialTabs(event, addon)
 	local SocialTabs = {
 		'FriendsFrame',
 		'GuildFrame',
@@ -40,4 +39,4 @@ function AS:SkinSocialTabs(event, addon)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinSocialTabs, 'ADDON_LOADED')
+AS:RegisterSkin('SocialTabs', AS.SocialTabs, 'ADDON_LOADED')

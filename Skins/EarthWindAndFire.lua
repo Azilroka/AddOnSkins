@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('StormEarthAndFire') then return end
 
-local name = "StormEarthAndFireSkin"
-function AS:SkinStormEarthAndFire()
+function AS:StormEarthAndFire()
 	for i = 1, 2 do 	
 		local f = _G["StormEarthAndFireFrame"..i]
 		if f then
@@ -22,4 +21,4 @@ function AS:SkinStormEarthAndFire()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinStormEarthAndFire)
+AS:RegisterSkin('StormEarthAndFire', AS.StormEarthAndFire)

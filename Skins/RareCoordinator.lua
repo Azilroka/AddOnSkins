@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('RareCoordinator') then return end
 
-local name = 'RareCoordinatorSkin'
-function AS:SkinRareCoordinator()
+function AS:RareCoordinator()
 	AS:SkinFrame(RC)
 	AS:SkinFrame(RC.opt)
 	AS:SkinFrame(RCnotify)
@@ -21,4 +20,4 @@ function AS:SkinRareCoordinator()
 	RC.opt.sort:StripTextures()
 end
 
-AS:RegisterSkin(name, AS.SkinRareCoordinator)
+AS:RegisterSkin('RareCoordinator', AS.RareCoordinator)

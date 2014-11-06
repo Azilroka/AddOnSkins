@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Archy') then return end
 
-local name = 'ArchySkin'
-function AS:SkinArchy()
+function AS:Archy()
 	-- Archy.db.profile.general.theme
 	for _, object in pairs({ArchyArtifactFrame, ArchyDigSiteFrame}) do
 		AS:SkinFrame(object)
@@ -70,4 +69,4 @@ function AS:SkinArchy()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinArchy)
+AS:RegisterSkin('Archy', AS.Archy)

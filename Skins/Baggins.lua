@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Baggins') then return end
 
-local name = 'BagginsSkin'
-function AS:SkinBaggins()
+function AS:Baggins()
 	local AddOnSkins_BagginsSkin = {
 		BagLeftPadding = 10,
 		BagRightPadding = 10,
@@ -61,4 +60,4 @@ function AS:SkinBaggins()
 	Baggins:ApplySkin('AddOnSkins')
 end
 
-AS:RegisterSkin(name, AS.SkinBaggins)
+AS:RegisterSkin('Baggins', AS.Baggins)

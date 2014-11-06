@@ -3,8 +3,7 @@ local AS = unpack(AddOnSkins)
 if AS:CheckAddOn('ElvUI') then return end
 if not AS:CheckAddOn('SexyCooldown2') then return end
 
-local name = 'SexyCooldownSkin'
-function AS:SkinSexyCooldown()
+function AS:SexyCooldown()
 	local function SCDStripSkinSettings(bar)
 		bar.optionsTable.args.icon.args.borderheader = nil
 		bar.optionsTable.args.icon.args.border = nil
@@ -76,4 +75,4 @@ function AS:SkinSexyCooldown()
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinSexyCooldown)
+AS:RegisterSkin('SexyCooldown', AS.SexyCooldown)

@@ -1,7 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-local name = 'PowerAurasSkin'
-function AS:SkinPowerAuras(event, addon)
+function AS:PowerAuras(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		local function SkinPowerAuras(self, aura, elapsed)
 			local returnValue = PowaAuras.OldUpdateAura(self, aura, elapsed)
@@ -208,4 +207,4 @@ function AS:SkinPowerAuras(event, addon)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinPowerAuras, 'ADDON_LOADED')
+AS:RegisterSkin('PowerAuras', AS.PowerAuras, 'ADDON_LOADED')

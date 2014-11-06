@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('xMerchant') then return end
 
-local name = 'xMerchantSkin'
-function AS:SkinxMerchant()
+function AS:xMerchant()
 	AS:SkinCheckBox(NuuhMerchantFrameTooltipSearching)
 	NuuhMerchantFrame:StripTextures(true)
 	AS:SkinFrame(NuuhMerchantFrameSearch, 'Default')
@@ -13,4 +12,4 @@ function AS:SkinxMerchant()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinxMerchant)
+AS:RegisterSkin('xMerchant', AS.xMerchant)

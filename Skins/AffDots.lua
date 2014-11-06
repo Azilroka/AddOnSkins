@@ -2,9 +2,8 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('AffDots') then return end
 
-local name = 'AffDotsSkin'
-function AS:SkinAffDots()
+function AS:AffDots()
 	AS:SkinBackdropFrame(AffDotsTarget)
 end
 
-AS:RegisterSkin(name, AS.SkinAffDots)
+AS:RegisterSkin('AffDots', AS.AffDots)

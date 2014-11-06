@@ -2,18 +2,15 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('PetJournalEnhanced') then return end
 
-local name = 'PetJournalEnhancedSkin'
-function AS:SkinPetJournalEnhanced(event, addon)
-	if event == 'PLAYER_ENTERING_WORLD' then
-	end
+function AS:PetJournalEnhanced(event, addon)
 	if addon == 'Blizzard_PetJournal' or IsAddOnLoaded('Blizzard_PetJournal') then
 		PetJournal:HookScript('OnShow', function()
             PJEUniquePetCount:StripTextures()
             AS:SkinScrollBar(PetJournalEnhancedListScrollFrameScrollBar)
             AS:SkinButton(PetJournalEnhancedFilterButton)
         end)
-		AS:UnregisterSkinEvent(name, 'ADDON_LOADED')
+		AS:UnregisterSkinEvent('PetJournalEnhanced', 'ADDON_LOADED')
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinPetJournalEnhanced, 'ADDON_LOADED')
+AS:RegisterSkin('PetJournalEnhanced', AS.PetJournalEnhanced, 'ADDON_LOADED')

@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('ChocolateBar') then return end
 
-local name = 'ChocolateBarSkin'
-function AS:SkinChocolateBar()
+function AS:ChocolateBar()
 	for i = 1, 20 do 	
 		local f = _G['ChocolateBar'..i]
 		if f then
@@ -15,4 +14,4 @@ function AS:SkinChocolateBar()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinChocolateBar)
+AS:RegisterSkin('ChocolateBar', AS.ChocolateBar)

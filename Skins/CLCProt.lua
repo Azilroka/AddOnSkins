@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not (AS:CheckAddOn('CLCProt') and AS.MyClass == 'PALADIN') then return end
 
-local name = 'CLCProtSkin'
-function AS:SkinCLCProt()
+function AS:CLCProt()
 	local function UpdateButtonLayout(frame, button, opt)
 		button:Size(opt.size)
 		button:ClearAllPoints()
@@ -69,4 +68,4 @@ function AS:SkinCLCProt()
 	clcprot.UpdateButtonLayout = UpdateButtonLayout
 end
 
-AS:RegisterSkin(name, AS.SkinCLCProt)
+AS:RegisterSkin('CLCProt', AS.CLCProt)

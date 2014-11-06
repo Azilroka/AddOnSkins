@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not (AS:CheckAddOn('VEM-Core') and AS:CheckAddOn('ElvUI')) then return end
 
-local name = 'VEMSkin'
-function AS:SkinVEM(event, addon)
+function AS:VEM(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		local croprwicons = true
 		local buttonsize = 22
@@ -198,8 +197,8 @@ function AS:SkinVEM(event, addon)
 		AS:SkinButton(VEM_GUI_OptionsFrameOkay, true)
 		AS:SkinButton(VEM_GUI_OptionsFrameWebsiteButton, true)
 		AS:SkinScrollBar(VEM_GUI_OptionsFramePanelContainerFOVScrollBar)
-		AS:UnregisterSkinEvent(name, event)
+		AS:UnregisterSkinEvent('VEM', event)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinVEM, 'ADDON_LOADED')
+AS:RegisterSkin('VEM', AS.VEM, 'ADDON_LOADED')

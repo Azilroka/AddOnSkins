@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ZygorGuidesViewer') then return end
 
-local name = 'ZygorSkin'
-function AS:SkinZygor()
+function AS:Zygor()
 	ZygorGuidesViewerFrame:StripTextures(true)
 	AS:SkinFrame(ZygorGuidesViewerFrame_Border)
 	AS:SkinFrame(ZygorGuidesViewer_CreatureViewer, 'Transparent', true)
@@ -17,4 +16,4 @@ function AS:SkinZygor()
 	ZygorGuidesViewerFrame_Border:HookScript('OnShow', function(self) AS:SkinFrame(self) end)
 end
 
-AS:RegisterSkin(name, AS.SkinZygor)
+AS:RegisterSkin('Zygor', AS.Zygor)

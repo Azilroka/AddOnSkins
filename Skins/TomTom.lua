@@ -2,11 +2,10 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('TomTom') then return end
 
-local name = 'TomTomSkin'
-function AS:SkinTomTom()
+function AS:TomTom()
 	if TomTomBlock then
 		AS:SkinFrame(TomTomBlock)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinTomTom)
+AS:RegisterSkin('TomTom', AS.TomTom)

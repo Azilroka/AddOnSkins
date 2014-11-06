@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BetterQuest') then return end
 
-local name = 'BetterQuestSkin'
-function AS:SkinBetterQuest()
+function AS:BetterQuest()
 	local BetterQuest = LibStub("AceAddon-3.0"):GetAddon("BetterQuest")
 	hooksecurefunc(BetterQuest, 'UpdateTrackers', function(self)
 		for id, _ in pairs(self.db.profile.trackerNames) do
@@ -32,4 +31,4 @@ function AS:SkinBetterQuest()
 	BetterQuest:UpdateTrackers()
 end
 
-AS:RegisterSkin(name, AS.SkinBetterQuest)
+AS:RegisterSkin('BetterQuest', AS.BetterQuest)

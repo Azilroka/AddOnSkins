@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Analyst') then return end
 
-local name = 'AnalystSkin'
-function AS:SkinAnalyst()
+function AS:Analyst()
 	AS:SkinFrame(EconomyFrame)
 	EconomyFrame:SetHeight(450)
 	EconomyFrame:SetWidth(364)
@@ -19,4 +18,4 @@ function AS:SkinAnalyst()
 	AS:SkinCheckBox(EconomyFrameAllCharacters)
 end
 
-AS:RegisterSkin(name, AS.SkinAnalyst)
+AS:RegisterSkin('Analyst', AS.Analyst)

@@ -68,10 +68,8 @@ function AS:InjectProfile()
 
 	do
 		for k, _ in pairs(AS.register) do
-			if k:match('.+Skin') then
-				if not V['addonskins'][k] then
-					V['addonskins'][k] = true
-				end
+			if not V['addonskins'][k] then
+				V['addonskins'][k] = true
 			end
 		end
 	end
@@ -102,6 +100,11 @@ function AS:SkinEditBox(frame, width, height)
 	S:HandleEditBox(frame)
 	if width then frame:Width(width) end
 	if height then frame:Height(height) end
+	if frame.Left then
+		frame.Left:Kill()
+		frame.Middle:Kill()
+		frame.Right:Kill()
+	end
 end
 
 function AS:SkinDropDownBox(frame, width)

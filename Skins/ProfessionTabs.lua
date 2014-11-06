@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ProfessionTabs') then return end
 
-local name = 'ProfessionTabsSkin'
-function AS:SkinProfessionTabs(event, addon)
+function AS:ProfessionTabs(event, addon)
 	if addon ~= 'Blizzard_TradeSkillUI' then return end
 	local Frame = ATSWFrame or MRTSkillFrame or SkilletFrame or TradeSkillFrame
 	Frame:HookScript('OnUpdate', function(self)
@@ -20,4 +19,4 @@ function AS:SkinProfessionTabs(event, addon)
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinProfessionTabs, 'ADDON_LOADED')
+AS:RegisterSkin('ProfessionTabs', AS.ProfessionTabs, 'ADDON_LOADED')

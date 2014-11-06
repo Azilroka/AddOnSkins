@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('QuestCompletist') then return end
 
-local name = 'QuestCompletistSkin'
-function AS:SkinQuestCompletist()
+function AS:QuestCompletist()
 	local tooltips = {
 		'qcMapTooltip',
 		'qcQuestInformationTooltip',
@@ -31,4 +30,4 @@ function AS:SkinQuestCompletist()
 	qcMenuSlider:Height(256)
 end
 
-AS:RegisterSkin(name, AS.SkinQuestCompletist)
+AS:RegisterSkin('QuestCompletist', AS.QuestCompletist)

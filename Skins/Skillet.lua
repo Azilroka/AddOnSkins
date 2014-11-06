@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('Skillet') then return end
 
-local name = 'SkilletSkin'
-function AS:SkinSkillet()
+function AS:Skillet()
 	local function SkinButton(ButtonOrSpellID, Guild)
 		if not ButtonOrSpellID then return end
 		local button
@@ -338,4 +337,4 @@ function AS:SkinSkillet()
 	_G['SkilletPluginButton']:SetScript('PostClick', SkinPluginButtons)
 end
 
-AS:RegisterSkin(name, AS.SkinSkillet)
+AS:RegisterSkin('Skillet', AS.Skillet)

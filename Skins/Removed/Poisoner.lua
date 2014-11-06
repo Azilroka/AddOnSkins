@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Poisoner') then return end
 
-local name = 'PoisonerSkin'
-function AS:SkinPoisoner()
+function AS:Poisoner()
 	AS:SkinFrame(PoisonerOptions_SettingsFrame)
 	AS:SkinButton(PoisonerOptions_MenuSortingButton)
 	AS:SkinButton(PoisonerOptions_SettingsSave)
@@ -52,4 +51,4 @@ function AS:SkinPoisoner()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinPoisoner)
+AS:RegisterSkin('Poisoner', AS.Poisoner)

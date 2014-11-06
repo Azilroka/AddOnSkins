@@ -1,7 +1,6 @@
 if not Tukui then return end
-local AS = unpack(select(2, ...))
+local AS = unpack(AddOnSkins)
 
-local name = 'Blizzard_ChatBubbles'
 function AS:Blizzard_ChatBubbles()
 	--local noscalemult = AS.Mult * UIParent:GetScale()
 	local tslu = 0
@@ -66,4 +65,4 @@ function AS:Blizzard_ChatBubbles()
 	end)
 end
 
-AS:RegisterSkin(name, AS.Blizzard_ChatBubbles)
+AS:RegisterSkin('Blizzard_ChatBubbles', AS.Blizzard_ChatBubbles)

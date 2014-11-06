@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('LootCouncil_Lite') then return end
 
-local name = 'LootCouncilLiteSkin'
-function AS:SkinLootCouncilLite()
+function AS:LootCouncil_Lite()
 	AS:SkinFrame(RankFrame)
 	AS:SkinDropDownBox(RankDropDown)
 	AS:SkinButton(RankAcceptButton)
@@ -22,4 +21,4 @@ function AS:SkinLootCouncilLite()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinLootCouncilLite)
+AS:RegisterSkin('LootCouncil_Lite', AS.LootCouncil_Lite)

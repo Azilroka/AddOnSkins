@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BalancePowerTracker') then return end
 
-local name = 'BPTSkin'
-function AS:SkinBPT()
+function AS:BalancePowerTracker()
 	if AS.MyClass ~= 'DRUID' then return end
 	local BPT = BalancePowerTracker.modules.eclipse_bar
 	BalancePowerTracker_Options.global.enabled = true
@@ -22,4 +21,4 @@ function AS:SkinBPT()
 	BPT:ReDraw()
 end
 
-AS:RegisterSkin(name, AS.SkinBPT)
+AS:RegisterSkin('BalancePowerTracker', AS.BalancePowerTracker)

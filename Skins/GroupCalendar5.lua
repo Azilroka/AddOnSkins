@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('GroupCalendar5') then return end
 
-local name = 'GroupCalendar5Skin'
-function AS:SkinGroupCalendar5(event, addon)
+function AS:GroupCalendar5(event, addon)
     GroupCalendar5Window:HookScript('OnShow', function(self)
         AS:SkinFrame(self)
         AS:SkinCloseButton(self.CloseButton)
@@ -30,4 +29,4 @@ function AS:SkinGroupCalendar5(event, addon)
     end)
 end
 
-AS:RegisterSkin(name, AS.SkinGroupCalendar5)
+AS:RegisterSkin('GroupCalendar5', AS.GroupCalendar5)

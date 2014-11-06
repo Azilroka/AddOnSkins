@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('VanasKoS') then return end
 
-local name = 'VanasKoSSkin'
-function AS:SkinVanasKoS()
+function AS:VanasKoS()
 	VanasKoS_WarnFrame:SetTemplate("Transparent")
 	VanasKoS_WarnFrame.SetBackdropBorderColor = AS.Noop
 
@@ -55,4 +54,4 @@ function AS:SkinVanasKoS()
 	VanasKoSListFrameSearchBox:SetPoint("RIGHT", VanasKoSListFrameConfigurationButton, "LEFT", -5, 0)
 end
 
-AS:RegisterSkin(name, AS.SkinVanasKoS)
+AS:RegisterSkin('VanasKoS', AS.VanasKoS)

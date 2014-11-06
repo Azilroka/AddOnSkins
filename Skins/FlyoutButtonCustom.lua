@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('FlyoutButtonCustom') then return end
 
-local name = 'FlyoutButtonCustomSkin'
-function AS:SkinFlyoutButtonCustom()
+function AS:FlyoutButtonCustom()
 	FlyoutButtonCustom_Settings.Highlight = false
 	FlyoutButtonCustom_Settings.ShowBorders = false
 	FlyoutButtonCustom_Settings.ButtonsScale = 1
@@ -66,4 +65,4 @@ function AS:SkinFlyoutButtonCustom()
 	hooksecurefunc(FlyoutListButton, "UpdateTexture", CreateBorder)
 end
 
-AS:RegisterSkin(name, AS.SkinFlyoutButtonCustom)
+AS:RegisterSkin('FlyoutButtonCustom', AS.FlyoutButtonCustom)

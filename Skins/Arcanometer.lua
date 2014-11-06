@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Arcanometer') then return end
 
-local name = 'ArcanometerSkin'
-function AS:SkinArcanometer(event, addon)
+function AS:Arcanometer(event, addon)
 	uiAmtrFrameBG:Kill()
 	uiAmtrBorder:Kill()
 
@@ -27,4 +26,4 @@ function AS:SkinArcanometer(event, addon)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinArcanometer)
+AS:RegisterSkin('Arcanometer', AS.Arcanometer)

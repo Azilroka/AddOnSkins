@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('GearScore') then return end
 
-local name = 'GearScoreSkin'
-function AS:SkinGearScore(event, addon)
+function AS:GearScore(event, addon)
 	AS:SkinFrame(TenTonHammer)
 	AS:SkinFrame(TenTonHammer_TitleFrame)
 	AS:SkinFrame(TenTonHammer_QuickRateFrame)
@@ -31,4 +30,4 @@ function AS:SkinGearScore(event, addon)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinGearScore)
+AS:RegisterSkin('GearScore', AS.GearScore)

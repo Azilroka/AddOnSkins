@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('Dresser') then return end
 
-local name = 'DresserSkin'
-function AS:SkinDresser()
+function AS:Dresser()
 	AS:SkinButton(DresserButton1)
 	AS:SkinButton(DresserButton2)
 	AS:SkinButton(DresserButton3)
@@ -22,4 +21,4 @@ function AS:SkinDresser()
 	DresserButton4:Size(38, 22)
 end
 
-AS:RegisterSkin(name, AS.SkinDresser)
+AS:RegisterSkin('Dresser', AS.Dresser)

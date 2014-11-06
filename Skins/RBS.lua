@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('RaidBuffStatus') then return end
 
-local name = 'RaidBuffStatusSkin'
-function AS:SkinRaidBuffStatus()
+function AS:RaidBuffStatus()
 	AS:SkinFrame(RBSFrame)
 	AS:SkinButton(RBSFrameScanButton)
 	AS:SkinButton(RBSFrameReadyCheckButton)
@@ -16,4 +15,4 @@ function AS:SkinRaidBuffStatus()
 	RBSFrameTalentsButton:Size(20)
 end
 
-AS:RegisterSkin(name, AS.SkinRaidBuffStatus)
+AS:RegisterSkin('RaidBuffStatus', AS.RaidBuffStatus)

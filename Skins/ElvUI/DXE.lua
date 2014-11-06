@@ -3,8 +3,7 @@ local AS = unpack(AddOnSkins)
 if not (AS:CheckAddOn('DXE') and AS:CheckAddOn('ElvUI')) then return end
 
 LoadAddOn("DXE")
-local name = "DXESkin"
-function AS:SkinDXE()
+function AS:DXE()
 	-- DXE.NotifyBarTextureChanged = AS.Noop
 	-- DXE.NotifyBorderChanged = AS.Noop
 	-- DXE.NotifyBorderColorChanged = AS.Noop
@@ -102,4 +101,4 @@ function AS:SkinDXE()
 	DXEDB["profiles"][AS.MyName.." - "..AS.MyRealm]["Globals"]["TimerFont"] = AS.Font
 end
 
-AS:RegisterSkin(name, AS.SkinDXE)
+AS:RegisterSkin('DXE', AS.DXE)

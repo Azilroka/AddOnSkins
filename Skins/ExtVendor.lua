@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ExtVendor') then return end
 
-local name = 'ExtVendorSkin'
-function AS:SkinExtVendor()
+function AS:ExtVendor()
 	AS:SkinFrame(MerchantFrame)
 	AS:SkinButton(MerchantFrameFilterButton)
 	AS:SkinBackdropFrame(MerchantFrameSellJunkButton)
@@ -36,4 +35,4 @@ function AS:SkinExtVendor()
 	AS:SkinButton(ExtVendor_SellJunkPopupNoButton)
 end
 
-AS:RegisterSkin(name, AS.SkinExtVendor)
+AS:RegisterSkin('ExtVendor', AS.ExtVendor)

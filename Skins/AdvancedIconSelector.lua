@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('AdvancedIconSelector') then return end
 
-local name = "AdvancedIconSelectorSkin"
-function AS:SkinAdvancedIconSelector()
+function AS:AdvancedIconSelector()
 	local function SkinPopup(Name)
 		local Popup = Name
 		if Popup.IsSkinned then return end
@@ -48,4 +47,4 @@ function AS:SkinAdvancedIconSelector()
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinAdvancedIconSelector)
+AS:RegisterSkin('AdvancedIconSelector', AS.AdvancedIconSelector)

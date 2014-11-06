@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('Dominos') then return end
 
-local name = 'DominosSkin'
-function AS:SkinDominos()
+function AS:Dominos()
 	local function StyleNormalButton(self)
 		local name = self:GetName()
 		if strmatch(name, "ExtraActionButton") then return end
@@ -151,4 +150,4 @@ function AS:SkinDominos()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinDominos)
+AS:RegisterSkin('Dominos', AS.Dominos)

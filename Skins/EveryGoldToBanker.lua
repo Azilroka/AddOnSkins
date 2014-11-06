@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('EveryGoldToBanker') then return end
 
-local name = 'EveryGoldToBankerSkin'
-function AS:SkinEveryGoldToBanker()
+function AS:EveryGoldToBanker()
 	AS:SkinFrame(EveryGoldToBankerCalculator)
 	AS:SkinFrame(SettingFrame)
 	AS:SkinEditBox(AmountEditBox)
@@ -26,4 +25,4 @@ function AS:SkinEveryGoldToBanker()
 	DefaultReceiverFrame:StripTextures()
 end
 
-AS:RegisterSkin(name, AS.SkinEveryGoldToBanker)
+AS:RegisterSkin('EveryGoldToBanker', AS.EveryGoldToBanker)

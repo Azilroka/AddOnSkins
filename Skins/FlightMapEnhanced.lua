@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('FlightMapEnhanced') then return end
 
-local name = 'FlightMapEnhancedSkin'
-function AS:SkinFlightMapEnhanced()
+function AS:FlightMapEnhanced()
 	AS:SkinBackdropFrame(FlightMapEnhancedTaxiChoice)
 	AS:SkinCloseButton(FlightMapEnhancedTaxiChoice.CloseButton)
 	AS:SkinScrollBar(FlightMapEnhancedTaxiChoiceContainerScrollBar)
@@ -15,4 +14,4 @@ function AS:SkinFlightMapEnhanced()
 	hooksecurefunc('FlightMapEnhancedTaxiChoiceButton_OnEnter', function() GameTooltip:Show() end)
 end
 
-AS:RegisterSkin(name, AS.SkinFlightMapEnhanced)
+AS:RegisterSkin('FlightMapEnhanced', AS.FlightMapEnhanced)

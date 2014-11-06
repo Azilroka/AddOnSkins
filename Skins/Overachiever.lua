@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Overachiever_Tabs') then return end
 
-local name = 'OverachieverSkin'
-function AS:SkinOverachiever(event, addon)
+function AS:Overachiever(event, addon)
 	if addon ~= "Overachiever_Tabs" then return end
 
 	for i = 4, 6 do
@@ -144,7 +143,7 @@ function AS:SkinOverachiever(event, addon)
 		skinAchievementButtons(scrollFrame)
 	end
 
-	AS:UnregisterSkinEvent(name, event)
+	AS:UnregisterSkinEvent('Overachiever', event)
 end
 
-AS:RegisterSkin(name, AS.SkinOverachiever, "ADDON_LOADED")
+AS:RegisterSkin('Overachiever', AS.Overachiever, "ADDON_LOADED")

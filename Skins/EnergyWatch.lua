@@ -2,10 +2,9 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('EnergyWatch') then return end
 
-local name = 'EnergyWatchSkin'
-function AS:SkinEnergyWatch()
+function AS:EnergyWatch()
 	EnergyWatchBar:StripTextures(true)
 	AS:SkinStatusBar(EnergyWatchStatusBar)
 end
 
-AS:RegisterSkin(name, AS.SkinEnergyWatch)
+AS:RegisterSkin('EnergyWatch', AS.EnergyWatch)

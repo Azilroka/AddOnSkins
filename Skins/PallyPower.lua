@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('PallyPower') then return end
 
-local name = 'PallyPowerSkin'
-function AS:SkinPallyPower()
+function AS:PallyPower()
 	self.db = LibStub("AceDB-3.0"):New("PallyPowerDB", PallyPower.defaults, "Default")
 	local settings = self.db.profile
 	settings.buffscale = 1
@@ -112,4 +111,4 @@ function AS:SkinPallyPower()
 	PallyPower:UpdateLayout()
 end
 
-AS:RegisterSkin(name, AS.SkinPallyPower)
+AS:RegisterSkin('PallyPower', AS.PallyPower)

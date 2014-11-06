@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('Examiner') then return end
 
-local name = 'ExaminerSkin'
-function AS:SkinExaminer()
+function AS:Examiner()
 	AS:SkinFrame(Examiner)
 	AS:SkinScrollBar(ExaminerStatsScrollScrollBar)
 	AS:SkinScrollBar(ExaminerFeatsScrollScrollBar)
@@ -20,4 +19,4 @@ function AS:SkinExaminer()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinExaminer)
+AS:RegisterSkin('Examiner', AS.Examiner)

@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('KeepingTabs') then return end
 
-local name = 'KeepingTabsSkin'
-function AS:SkinProfessionTabs(event, addon)
+function AS:ProfessionTabs(event, addon)
 	local function SkinTabs(self)
 		for i = 1, self:GetNumChildren() do
 			local Child = select(i, self:GetChildren())
@@ -26,4 +25,4 @@ function AS:SkinProfessionTabs(event, addon)
 	PVPUIFrame:HookScript('OnShow', SkinTabs)
 end
 
-AS:RegisterSkin(name, AS.SkinProfessionTabs)
+AS:RegisterSkin('KeepingTabs', AS.ProfessionTabs)

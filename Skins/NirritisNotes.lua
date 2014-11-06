@@ -1,9 +1,8 @@
 local AS = unpack(AddOnSkins)
 
-if not AS:CheckAddOn("Notes") then return end
+if not AS:CheckAddOn('Notes') then return end
 
-local name = 'NirritisNotesSkin'
-function AS:SkinNirritisNotes(event, addon)
+function AS:NirritisNotes(event, addon)
 	AS:SkinFrame(NotesFrame)
 	AS:SkinFrame(NotesFrameScrollFrame)
 	AS:SkinFrame(TextScrollFrame)
@@ -59,4 +58,4 @@ function AS:SkinNirritisNotes(event, addon)
 	Notes_TypeDropDown:Point("RIGHT", ConfigNotesFrame, "RIGHT", -5, -4)
 end
 
-AS:RegisterSkin(name, AS.SkinNirritisNotes)
+AS:RegisterSkin('NirritisNotes', AS.NirritisNotes)

@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('LinkWrangler') then return end
 
-local name = "LinkWranglerSkin"
-function AS:SkinLinkWrangler()
+function AS:LinkWrangler()
 	local Path = "Interface\\AddOns\\AddOnSkins\\Skins\\Buttons\\"
 
 	local function LWSkin_SkinButton(button, tex, distex)
@@ -38,4 +37,4 @@ function AS:SkinLinkWrangler()
 	LinkWrangler.RegisterCallback("LinkWrangler_Skin", LWSkin, "show", "showcomp")
 end
 
-AS:RegisterSkin(name, AS.SkinLinkWrangler)
+AS:RegisterSkin('LinkWrangler', AS.LinkWrangler)

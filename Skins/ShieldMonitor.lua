@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ShieldMonitor') then return end
 
-local name = 'ShieldMonitorSkin'
-function AS:SkinShieldMonitor()
+function AS:ShieldMonitor()
 	AS:SkinFrame(shieldmonitor_Frame,'Default')
 	shieldmonitor_Frame:HookScript('OnShow', function(self)	AS:SkinFrame(self, 'Default', true) end)
 	shieldmonitor_Frame:RegisterEvent('UNIT_AURA')
@@ -29,4 +28,4 @@ function AS:SkinShieldMonitor()
 	shieldmonitor_FrameDuration:SetPoint('RIGHT', shieldmonitor_Frame, 'RIGHT', -2, 0)
 end
 
-AS:RegisterSkin(name, AS.SkinShieldMonitor)
+AS:RegisterSkin('ShieldMonitor', AS.ShieldMonitor)

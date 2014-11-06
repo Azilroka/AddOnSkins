@@ -2,9 +2,8 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('DKDots') then return end
 
-local name = 'DKDotsSkin'
-function AS:SkinDKDots()
+function AS:DKDots()
 	AS:SkinBackdropFrame(DKDotsTarget)
 end
 
-AS:RegisterSkin(name, AS.SkinDKDots)
+AS:RegisterSkin('DKDots', AS.DKDots)

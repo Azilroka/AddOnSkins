@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('MageNuggets') then return end
 
-local name = 'MageNuggetsSkin'
-function AS:SkinMageNuggets()
+function AS:MageNuggets()
 	local Frames = {
 		'MNSpellSteal_Frame',
 		'MNSpellStealFocus_Frame',
@@ -15,7 +14,6 @@ function AS:SkinMageNuggets()
 		'MageNugProcFrame',
 		'MageNugProcHUFrame',
 		'MageNugSSProcFrame',
-		'MageNugBFProcFrame',
 		'MageNugMoonkin_Frame',
 		'MageNugHordeFrame',
 		'MageNugAlliFrame',
@@ -33,7 +31,7 @@ function AS:SkinMageNuggets()
 	for _, object in pairs(Frames) do
 		if _G[object] then
 			_G[object]:SetBackdrop(nil)
-			AS:SkinBackdropFrame(_G[object])
+			AS:SkinBackdropFrame(_G[object], nil, true)
 		end
 	end
 
@@ -289,4 +287,4 @@ function AS:SkinMageNuggets()
 	AS:SkinButton(MageNugOption2FrameButton3)
 end
 
-AS:RegisterSkin(name, AS.SkinMageNuggets)
+AS:RegisterSkin('MageNuggets', AS.MageNuggets)

@@ -1,7 +1,6 @@
 local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('ElvUI') then return end
 
-local name = 'ParchmentRemover'
 function AS:ParchmentRemover(event, addon)
 	if ElvUI[1].private.skins.blizzard.enable ~= true then return end
 	if addon == 'Blizzard_ArchaeologyUI' and ElvUI[1].private.skins.blizzard.archaeology == true then
@@ -288,4 +287,4 @@ function AS:ParchmentRemover(event, addon)
 	end
 end
 
-AS:RegisterSkin(name, AS.ParchmentRemover, 'ADDON_LOADED')
+AS:RegisterSkin('ParchmentRemover', AS.ParchmentRemover, 'ADDON_LOADED')

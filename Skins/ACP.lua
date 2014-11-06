@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ACP') then return end
 
-local name = "ACPSkin"
-function AS:SkinACP()
+function AS:ACP()
 	local function cbResize(self, event, ...)
 		for i = 1, 20, 1 do
 			local checkbox = _G["ACP_AddonListEntry" .. i .. "Enabled"]
@@ -50,4 +49,4 @@ function AS:SkinACP()
 	ACP_AddonList:SetScale(AS.UIScale)
 end
 
-AS:RegisterSkin(name, AS.SkinACP)
+AS:RegisterSkin('ACP', AS.ACP)

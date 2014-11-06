@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('InvenMount') then return end
 
-local name = 'InvenMountSkin'
-function AS:SkinInvenMount(event, addon)
+function AS:InvenMount(event, addon)
 	if addon == "Blizzard_PetJournal" or event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded("Blizzard_PetJournal") then
 		for i = 1, #MountJournal.ListScrollFrame.buttons do
 			local Button = _G["MountJournalListScrollFrameButton"..i]
@@ -45,8 +44,8 @@ function AS:SkinInvenMount(event, addon)
 		AS:SkinButton(InvenMountFilterButton)
 		local a, b, c, d, e = InvenMountFilterButton:GetPoint()
 		InvenMountFilterButton:SetPoint(a, b, c, -2, -8)
-		AS:UnregisterSkinEvent(name, 'ADDON_LOADED')
+		AS:UnregisterSkinEvent('InvenMount', 'ADDON_LOADED')
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinInvenMount, 'ADDON_LOADED')
+AS:RegisterSkin('InvenMount', AS.InvenMount, 'ADDON_LOADED')

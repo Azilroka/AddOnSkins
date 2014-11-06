@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Coolline') then return end
 
-local name = 'CoolLineSkin'
-function AS:SkinCoolLine()
+function AS:CoolLine()
 	CoolLineDB.bgcolor = { r = 0, g = 0, b = 0, a = 0, }
 	CoolLineDB.border = 'None'
 	CoolLine.updatelook()
@@ -14,4 +13,4 @@ function AS:SkinCoolLine()
 	AS:RegisterForPetBattleHide(CoolLine)
 end
 
-AS:RegisterSkin(name, AS.SkinCoolLine)
+AS:RegisterSkin('CoolLine', AS.CoolLine)

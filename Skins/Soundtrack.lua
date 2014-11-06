@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Soundtrack') then return end
 
-local name = 'SoundtrackSkin'
-function AS:SkinSoundtrack()
+function AS:Soundtrack()
 	local frames = {
 		'SoundtrackFrame',
 		'SoundtrackFrameEventList',
@@ -142,4 +141,4 @@ function AS:SkinSoundtrack()
 	NowPlayingTextFrame:Size(200, 40)
 end
 
-AS:RegisterSkin(name, AS.SkinSoundtrack)
+AS:RegisterSkin('Soundtrack', AS.Soundtrack)

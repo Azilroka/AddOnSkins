@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('DailyTamerCheck') then return end
 
-local name = 'DailyTamerCheckSkin'
-function AS:SkinDailyTamerCheck()
+function AS:DailyTamerCheck()
 	local function SkinFrame()
 		if DailyTamerCheck_mainframe.IsHooked then return end
 		DailyTamerCheck_mainframe:HookScript('OnUpdate', function(self)
@@ -38,4 +37,4 @@ function AS:SkinDailyTamerCheck()
 	hooksecurefunc(SlashCmdList, "DAILYTAMERCHECK", SkinFrame)
 end
 
-AS:RegisterSkin(name, AS.SkinDailyTamerCheck)
+AS:RegisterSkin('DailyTamerCheck', AS.DailyTamerCheck)

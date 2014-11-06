@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('CLCInfo') then return end
 
-local name = 'CLCInfoSkin'
-function AS:SkinCLCInfo(event, addon)
+function AS:CLCInfo(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		local function ApplyIconSkin(self)
 			local Font, FontSize = NumberFontNormal:GetFont()
@@ -172,8 +171,8 @@ function AS:SkinCLCInfo(event, addon)
 				options.selectType.args.skinType.values = GetSkinTypeList()
 			end
 		end)
-		AS:UnregisterSkinEvent(name, 'ADDON_LOADED')
+		AS:UnregisterSkinEvent('CLCInfo', 'ADDON_LOADED')
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinCLCInfo, 'ADDON_LOADED')
+AS:RegisterSkin('CLCInfo', AS.CLCInfo, 'ADDON_LOADED')

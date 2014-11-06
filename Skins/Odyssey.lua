@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Odyssey') then return end
 
-local name = 'OdysseySkin'
-function AS:SkinOdyssey()
+function AS:Odyssey()
 	OdysseyMapsMenuScrollFrame:StripTextures(true)
 	OdysseyFrameQuestDetailsSeries:StripTextures(true)
 	OdysseyFrameSearchScrollFrame:StripTextures(true)
@@ -56,4 +55,4 @@ function AS:SkinOdyssey()
 	AS:SkinTooltip(OdyTooltip)
 end
 
-AS:RegisterSkin(name, AS.SkinOdyssey)
+AS:RegisterSkin('Odyssey', AS.Odyssey)

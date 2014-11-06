@@ -1,7 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-local name = 'TellMeWhenSkin'
-function AS:SkinTellMeWhen(event, addon)
+function AS:TellMeWhen(event, addon)
 	AS:SkinFrame(TellMeWhen_IconEditor)
 	AS:SkinFrame(TellMeWhen_IconEditorMainOptions)
 	TellMeWhen_IconEditorMain:StripTextures()
@@ -41,4 +40,4 @@ function AS:SkinTellMeWhen(event, addon)
 	AS:SkinCheckBox(TellMeWhen_IconEditorEventsEventSettingsOnlyShown)
 end
 
-AS:RegisterSkin(name, AS.SkinTellMeWhen, 'ADDON_LOADED')
+AS:RegisterSkin('TellMeWhen', AS.TellMeWhen, 'ADDON_LOADED')

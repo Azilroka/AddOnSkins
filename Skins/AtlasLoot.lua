@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('AtlasLoot') then return end
 
-local name = 'AtlasLootSkin'
-function AS:SkinAtlasLoot(event, addon)
+function AS:AtlasLoot(event, addon)
 	if not strfind(GetAddOnMetadata('AtlasLoot', 'Version'), 'v8') then AS:Print('AtlasLoot Aborted due to incompatible version.') return end
 	AS:SkinFrame(AtlasLootTooltip)
 	AtlasLootTooltip:HookScript('OnShow', function(self)
@@ -78,4 +77,4 @@ function AS:SkinAtlasLoot(event, addon)
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinAtlasLoot)
+AS:RegisterSkin('AtlasLoot', AS.AtlasLoot)

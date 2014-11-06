@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ArkInventory') then return end
 
-local name = 'ArkInventorySkin'
-function AS:SkinArkInventory()
+function AS:ArkInventory()
 	hooksecurefunc(ArkInventory, 'Frame_Main_Paint', function(frame)
 		if not ArkInventory.ValidFrame(frame, true) then return	end
 		for i = 1, select('#', frame:GetChildren()) do
@@ -52,13 +51,7 @@ function AS:SkinArkInventory()
 		_G[status:GetName()..'GoldSilverButtonText']:SetFont(AS.Font, 12)
 		_G[status:GetName()..'GoldGoldButton']:SetPoint('RIGHT', _G[status:GetName()..'GoldSilverButtonText'], 'LEFT', -1, 0)
 		_G[status:GetName()..'GoldGoldButtonText']:SetFont(AS.Font, 12)
-		if not searchfilter.IsSkinned then
-			searchfilter.Left:SetTexture(nil)
-			searchfilter.Middle:SetTexture(nil)
-			searchfilter.Right:SetTexture(nil)
-			AS:SkinEditBox(searchfilter)
-			searchfilter.IsSkinned = true
-		end
+		AS:SkinEditBox(searchfilter)
 	end)
 
 	hooksecurefunc(ArkInventory, 'Frame_Bar_Paint', function(bar)
@@ -110,4 +103,4 @@ function AS:SkinArkInventory()
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinArkInventory)
+AS:RegisterSkin('ArkInventory', AS.ArkInventory)

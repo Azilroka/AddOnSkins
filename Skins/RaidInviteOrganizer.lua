@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('RaidInviteOrganizer') then return end
 
-local name = 'RaidInviteOrganizerSkin'
-function AS:SkinRaidInviteOrganizer()
+function AS:RaidInviteOrganizer()
 	AS:SkinFrame(RIO_MainFrame)
 	AS:SkinFrame(RIO_GuildMemberFrame)
 	AS:SkinFrame(RIO_CodeWordsContainer)
@@ -38,4 +37,4 @@ function AS:SkinRaidInviteOrganizer()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinRaidInviteOrganizer)
+AS:RegisterSkin('RaidInviteOrganizer', AS.RaidInviteOrganizer)

@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('Factionizer') then return end
 
-local name = 'FactionizerSkin'
-function AS:SkinFactionizer()
+function AS:Factionizer()
 
 	for i = 1, 15 do
 		AS:Desaturate(_G['ReputationBar'..i..'ExpandOrCollapseButton'])
@@ -75,4 +74,4 @@ function AS:SkinFactionizer()
 	FIZ_OptionsFrame:Point('TOPLEFT', ReputationFrame, 'TOPRIGHT', 5, 0)
 end
 
-AS:RegisterSkin(name, AS.SkinFactionizer)
+AS:RegisterSkin('Factionizer', AS.Factionizer)

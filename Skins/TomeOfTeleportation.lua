@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('TomeOfTeleportation') then return end
 
-local name = "TomeOfTeleportationSkin"
-function AS:SkinTomeOfTeleportation()
+function AS:TomeOfTeleportation()
 	local function SkinFrame()
 		AS:SkinFrame(TeleporterFrame)
 		for i = 0, 15 do
@@ -29,4 +28,4 @@ function AS:SkinTomeOfTeleportation()
 	TeleporterTooltip:HookScript('OnShow', function(self) self:SetTemplate('Transparent') end)
 end
 
-AS:RegisterSkin(name, AS.SkinTomeOfTeleportation)
+AS:RegisterSkin('TomeOfTeleportation', AS.TomeOfTeleportation)

@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not (AS:CheckAddOn('DBM-Core') and AS:CheckAddOn('DBM-StatusBarTimers') and AS:CheckAddOn('Tukui')) then return end
 
-local name = 'DBMSkin'
-function AS:SkinDBM(event, addon)
+function AS:DBM(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		local croprwicons = true
 		local buttonsize = 22
@@ -187,8 +186,8 @@ function AS:SkinDBM(event, addon)
 		AS:SkinButton(DBM_GUI_OptionsFrameOkay, true)
 		AS:SkinButton(DBM_GUI_OptionsFrameWebsiteButton, true)
 		AS:SkinScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
-		AS:UnregisterSkinEvent(name, event)
+		AS:UnregisterSkinEvent('DBM', event)
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinDBM, 'ADDON_LOADED')
+AS:RegisterSkin('DBM', AS.DBM, 'ADDON_LOADED')

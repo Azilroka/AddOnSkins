@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn("Ogri'Lazy") then return end
 
-local name = 'OgriLazySkin'
-function AS:SkinOgriLazy()
+function AS:OgriLazy()
 	AS:SkinFrame(Relic_View)
 	AS:SkinCloseButton(Relic_View.close)
 	for i = 1, 4 do
@@ -14,4 +13,4 @@ function AS:SkinOgriLazy()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinOgriLazy)
+AS:RegisterSkin('OgriLazy', AS.OgriLazy)

@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('PetBattleTeams') then return end
 
-local name = 'PetBattleTeamsSkin'
-function AS:SkinPetBattleTeams()
+function AS:PetBattleTeams()
 	LoadAddOn('Blizzard_PetJournal')
 	local PBT = LibStub("AceAddon-3.0"):GetAddon("PetBattleTeams"):GetModule("GUI")
 
@@ -49,4 +48,4 @@ function AS:SkinPetBattleTeams()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinPetBattleTeams)
+AS:RegisterSkin('PetBattleTeams', AS.PetBattleTeams)

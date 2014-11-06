@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ReagentMaker') then return end
 
-local name = 'ReagentMakerSkin'
-function AS:SkinReagentMaker()
+function AS:ReagentMaker()
 	GameTooltip:HookScript('OnShow', function()
 		if ReagentMaker_tooltipRecipe and not ReagentMaker_tooltipRecipe.IsSkinned then
 			AS:SkinTooltip(ReagentMaker_tooltipRecipe)
@@ -13,4 +12,4 @@ function AS:SkinReagentMaker()
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinReagentMaker)
+AS:RegisterSkin('ReagentMaker', AS.ReagentMaker)

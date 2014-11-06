@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Grinder') then return end
 
-local name = "GrinderSkin"
-function AS:SkinGrinder()
+function AS:Grinder()
 	AS:SkinTab(CharacterFrameTab5)
 	AS:SkinButton(GrinderModuleSelectButton)
 	GrinderListScrollFrame:StripTextures(true)
@@ -17,4 +16,4 @@ function AS:SkinGrinder()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinGrinder)
+AS:RegisterSkin('Grinder', AS.Grinder)

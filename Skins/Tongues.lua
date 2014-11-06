@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Tongues') then return end
 
-local name = 'TonguesSkin'
-function AS:SkinTongues()
+function AS:Tongues()
 	AS:SkinFrame(Tongues.UI.MainMenu.Frame)
 	AS:SkinFrame(Tongues.UI.MainMenu.AdvancedOptions.Frame)
 	AS:SkinButton(Tongues.UI.MiniMenu.Frame)
@@ -56,4 +55,4 @@ function AS:SkinTongues()
 	Tongues.UI.MainMenu.Minimize.texture[1]:SetTexCoord(unpack(AS.TexCoords))
 end
 
-AS:RegisterSkin(name, AS.SkinTongues)
+AS:RegisterSkin('Tongues', AS.Tongues)

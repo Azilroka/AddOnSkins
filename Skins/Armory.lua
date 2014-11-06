@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Armory') then return end
 
-local name = 'ArmorySkin'
-function AS:SkinArmory()
+function AS:Armory()
 
 	local hideParchment = true
 
@@ -1609,4 +1608,4 @@ function AS:SkinArmory()
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinArmory)
+AS:RegisterSkin('Armory', AS.Armory)

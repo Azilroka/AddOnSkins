@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Wowlua') then return end
 
-local name = 'WowLuaSkin'
-function AS:SkinWowLua()
+function AS:WowLua()
 	AS:SkinFrame(WowLuaFrame)
 	WowLuaFrameLineNumScrollFrame:StripTextures(true)
 	WowLuaFrameResizeBar:StripTextures(true)
@@ -54,4 +53,4 @@ function AS:SkinWowLua()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinWowLua)
+AS:RegisterSkin('WowLua', AS.WowLua)

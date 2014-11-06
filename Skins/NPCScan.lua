@@ -2,8 +2,7 @@
 
 if not AS:CheckAddOn('_NPCScan') then return end
 
-local name = '_NPCScanSkin'
-function AS:Skin_NPCScan()
+function AS:_NPCScan()
 	AS:SkinFrame(_NPCScanButton)
 	_NPCScanButton:SetScale(1)
 	_NPCScanButton.SetScale = AS.Noop
@@ -23,4 +22,4 @@ function AS:Skin_NPCScan()
 	_NPCScanButton:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 end
 
-AS:RegisterSkin(name, AS.Skin_NPCScan)
+AS:RegisterSkin('_NPCScan', AS._NPCScan)

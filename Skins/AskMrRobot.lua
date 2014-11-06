@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('AskMrRobot') then return end
 
-local name = 'AskMrRobotSkin'
-function AS:SkinAskMrRobot(event, addon)
+function AS:AskMrRobot(event, addon)
 	AS:SkinFrame(AskMrRobot_Dialog)
 	AS:SkinCloseButton(AskMrRobot_Dialog.CloseButton)
 	AskMrRobot_Dialog:HookScript('OnShow', function(self)
@@ -33,4 +32,4 @@ function AS:SkinAskMrRobot(event, addon)
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinAskMrRobot)
+AS:RegisterSkin('AskMrRobot', AS.AskMrRobot)

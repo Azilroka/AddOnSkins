@@ -1,6 +1,5 @@
 local AS = unpack(AddOnSkins)
 
-local name = 'Blizzard_WorldStateCaptureBar'
 function AS:Blizzard_WorldStateCaptureBar(event, addon)
 	local Horde = "Interface\\AddOns\\AddOnSkins\\Media\\Icons\\Horde"
 	local Alliance = "Interface\\AddOns\\AddOnSkins\\Media\\Icons\\Alliance"
@@ -120,4 +119,4 @@ function AS:Blizzard_WorldStateCaptureBar(event, addon)
 	hooksecurefunc(ExtendedUI['CAPTUREPOINT'], 'update', UpdateCaptureBar)
 end
 
-AS:RegisterSkin(name, AS.Blizzard_WorldStateCaptureBar)
+AS:RegisterSkin('Blizzard_WorldStateCaptureBar', AS.Blizzard_WorldStateCaptureBar)

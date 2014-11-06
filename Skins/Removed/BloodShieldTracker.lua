@@ -3,8 +3,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BloodShieldTracker') then return end
 
-local name = 'BloodShieldTrackerSkin'
-function AS:SkinBloodShieldTracker()
+function AS:BloodShieldTracker()
 	local Bars = {
 		BloodShieldTracker_AMSBar,
 		BloodShieldTracker_BloodChargeBar,
@@ -22,4 +21,4 @@ function AS:SkinBloodShieldTracker()
 	end
 end
 
-AS:RegisterSkin(name, AS.SkinBloodShieldTracker)
+AS:RegisterSkin('BloodShieldTracker', AS.BloodShieldTracker)

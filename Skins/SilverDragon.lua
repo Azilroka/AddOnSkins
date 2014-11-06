@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('SilverDragon') then return end
 
-local name = 'SilverDragonSkin'
-function AS:SkinSilverDragon()
+function AS:SilverDragon()
 	AS:SkinFrame(SilverDragonPopupButton)
 	AS:SkinCloseButton(SilverDragonPopupButton.close)
 	SilverDragonPopupButton.close:ClearAllPoints()
@@ -15,4 +14,4 @@ function AS:SkinSilverDragon()
 	SilverDragonPopupButton.subtitle:SetTextColor(1.0, 1.0, 1.0)
 end
 
-AS:RegisterSkin(name, AS.SkinSilverDragon)
+AS:RegisterSkin('SilverDragon', AS.SilverDragon)

@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Incoming') then return end
 
-local name = 'IncomingSkin'
-function AS:SkinIncoming(self)
+function AS:Incoming(self)
 	AS:SkinFrame(LocationMessageView)
 
 	local buttons = {
@@ -35,4 +34,4 @@ function AS:SkinIncoming(self)
 	SendMore:Point('TOPLEFT', LocationMessageView, 'TOPLEFT', 3, -100)
 end
 
-AS:RegisterSkin(name, AS.SkinIncoming)
+AS:RegisterSkin('Incoming', AS.Incoming)

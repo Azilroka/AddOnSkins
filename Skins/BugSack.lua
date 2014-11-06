@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BugSack') then return end
 
-local name = 'BugSackSkin'
-function AS:SkinBugSack(event, addon)
+function AS:BugSack(event, addon)
 
 	hooksecurefunc(BugSack, "OpenSack", function()
 		if BugSackFrame.IsSkinned then return end
@@ -25,4 +24,4 @@ function AS:SkinBugSack(event, addon)
 	end)
 end
 
-AS:RegisterSkin(name, AS.SkinBugSack)
+AS:RegisterSkin('BugSack', AS.BugSack)

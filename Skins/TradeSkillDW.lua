@@ -2,8 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('TradeSkillDW') then return end
 
-local name = 'TradeSkillDWSkin'
-function AS:SkinTradeSkillDW()
+function AS:TradeSkillDW()
 	local HORZ_BAR_FNAME = [[Interface\ClassTrainerFrame\UI-ClassTrainer-HorizontalBar]]
 	local TradeSkillHorizontalBarRight
 	for i, region in ipairs({TradeSkillFrame:GetRegions()}) do
@@ -153,4 +152,4 @@ function AS:SkinTradeSkillDW()
 	AS:SkinScrollBar(TradeSkillDW_QueueFrameDetailScrollFrameScrollBar)
 end
 
-AS:RegisterSkin(name, AS.SkinTradeSkillDW)
+AS:RegisterSkin('TradeSkillDW', AS.TradeSkillDW)
