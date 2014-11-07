@@ -12,7 +12,7 @@ local Defaults = {
 	['EmbedMain'] = 'Skada',
 	['EmbedLeft'] = 'Skada',
 	['EmbedRight'] = 'Skada',
-	['EmbedRightChat'] = 'Skada',
+	['EmbedRightChat'] = true,
 	['EmbedLeftWidth'] = 200,
 	['EmbedBelowTop'] = false,
 	['TransparentEmbed'] = false,
@@ -246,32 +246,37 @@ function AS:GetOptions()
 						order = 12,
 						disabled = function() return not AS:CheckOption("CoolLineSkin", "CoolLine") end,
 					},
+					EmbedRightChat = {
+						type = "toggle",
+						name = ASL["Embed into Right Chat Panel"],
+						order = 13,
+					}
 					TransparentEmbed = {
 						type = "toggle",
 						name = ASL["Embed Transparancy"],
-						order = 13,
+						order = 14,
 					},
 					EmbedBelowTop = {
 						type = "toggle",
 						name = ASL["Embed Below Top Tab"],
-						order = 14,
+						order = 15,
 					},
 					RecountBackdrop = {
 						type = "toggle",
 						name = ASL["Recount Backdrop"],
-						order = 15,
+						order = 16,
 						disabled = function() return not (AS:CheckOption("RecountSkin", "Recount") and AS:CheckEmbed("Recount")) end
 					},
 					SkadaBackdrop = {
 						type = "toggle",
 						name = ASL["Skada Backdrop"],
-						order = 16,
+						order = 17,
 						disabled = function() return not (AS:CheckOption("SkadaSkin", "Skada") and AS:CheckEmbed("Skada")) end
 					},
 					OmenBackdrop = {
 						type = "toggle",
 						name = ASL["Omen Backdrop"],
-						order = 17,
+						order = 18,
 						disabled = function() return not (AS:CheckOption("OmenSkin", "Omen") and AS:CheckEmbed("Omen")) end
 					},
 				},

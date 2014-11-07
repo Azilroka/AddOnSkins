@@ -67,4 +67,5 @@ function AS:UpdateLocale_frFR()
 	ASL["Embed OoC Delay"] = "Délais Hors Combat de l'intégration"
 	ASL['Reset Settings'] = 'Reset Settings'
 	ASL["WeakAura Cooldowns"] = "WeakAura Cooldowns"
+	ASL["Embed into Right Chat Panel"] = "Embed into Right Chat Panel"
 end
