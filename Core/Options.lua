@@ -250,7 +250,7 @@ function AS:GetOptions()
 						type = "toggle",
 						name = ASL["Embed into Right Chat Panel"],
 						order = 13,
-					}
+					},
 					TransparentEmbed = {
 						type = "toggle",
 						name = ASL["Embed Transparancy"],
