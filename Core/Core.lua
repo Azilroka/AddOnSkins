@@ -333,10 +333,15 @@ function AS:SkinStatusBar(frame, ClassColor)
 end
 
 function AS:SkinTooltip(tooltip, scale)
-	tooltip:HookScript('OnShow', function(frame)
-		frame:SetTemplate('Transparent')
-		if scale then frame:SetScale(AS.UIScale) end
-	end)
+	AS:SkinFrame(tooltip)
+	tooltip.SetBackdrop = AS.Noop
+	tooltip.SetBackdropColor = AS.Noop
+	tooltip.SetBackdropBorderColor = AS.Noop
+	if scale then
+		tooltip:HookScript('OnShow', function(self)
+			self:SetScale(AS.UIScale)
+		end)
+	end
 end
 
 function AS:SkinTexture(frame)

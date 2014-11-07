@@ -258,7 +258,7 @@ if AS:CheckAddOn('Skada') then
 			local barmod = Skada.displays['bar']
 			local offsety
 			if window.db.reversegrowth then
-				offsety = 17 - (window.db.enabletitle and window.db.title.height or 0)
+				offsety = 2
 			else
 				offsety = 2 + (window.db.enabletitle and window.db.title.height or 0)
 			end

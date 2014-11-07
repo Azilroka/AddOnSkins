@@ -7,6 +7,7 @@ function AS:Blizzard_CharacterFrame()
 	AS:SkinFrame(CharacterFrame)
 	AS:SkinFrame(CharacterModelFrame)
 	CharacterFramePortrait:Kill()
+	PaperDollSidebarTabs:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -29, -1)
 
 	local CharacterSlots = {
 		CharacterHeadSlot,

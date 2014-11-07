@@ -4,6 +4,8 @@
 	<Script file="Calendar.lua"/>
 	<Script file="CharacterFrame.lua"/>
 	<Script file="ChatBubbles.lua"/>
+	<Script file="DebugTools.lua"/>
 	<Script file="DressUpFrame.lua"/>
+	<Script file="ItemSocketing.lua"/>
 	<Script file="WorldStateCaptureBar.lua"/>
 </Ui>
