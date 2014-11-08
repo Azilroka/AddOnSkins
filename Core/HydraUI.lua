@@ -100,7 +100,7 @@ end
 
 function AS:SkinFrame(frame, template, override, kill)
 	if not template then template = AS:CheckOption('SkinTemplate') end
-	if template and type(template) == string then
+	if template and type(template) == 'string' then
 		template = template == 'Transparent' and .8 or 1
 	end
 	if not override then frame:StripTextures(kill) end
@@ -113,7 +113,7 @@ end
 
 function AS:SkinBackdropFrame(frame, template, override, kill, setpoints)
 	if not template then template = AS:CheckOption('SkinTemplate') end
-	if template and type(template) == string then
+	if template and type(template) == 'string' then
 		template = template == 'Transparent' and .8 or 1
 	end
 	if not override then frame:StripTextures(kill) end
@@ -126,7 +126,7 @@ end
 
 function AS:SkinTitleBar(frame, template, override, kill)
 	if not template then template = AS:CheckOption('SkinTemplate') end
-	if template and type(template) == string then
+	if template and type(template) == 'string' then
 		template = template == 'Transparent' and .8 or 1
 	end
 	if not override then frame:StripTextures(kill) end
