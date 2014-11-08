@@ -30,9 +30,9 @@ function AS:ArkInventory()
 		a, b, c, d, e = title:GetPoint()
 		title:SetPoint(a, b, c, d, e - 2)
 
-		search:ClearAllPoints()
-		search:SetPoint('TOPLEFT', title, 'BOTTOMLEFT', 0, -2)
-		search:SetPoint('TOPRIGHT', title, 'BOTTOMRIGHT', 0, -2)
+		a, b, c, d, e = search:GetPoint()
+		search:SetPoint(a, b, c, d, e - 2)
+
 		container:ClearAllPoints()
 		container:SetPoint('TOPLEFT', search, 'BOTTOMLEFT', 0, -2)
 		container:SetPoint('TOPRIGHT', search, 'BOTTOMRIGHT', 0, -2)

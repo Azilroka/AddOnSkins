@@ -70,7 +70,11 @@ function AS:InjectProfile()
 	do
 		for k, _ in pairs(AS.register) do
 			if not V['addonskins'][k] then
-				V['addonskins'][k] = true
+				if strfind(k, 'Blizzard_') then
+					V['addonskins'][k] = false
+				else
+					V['addonskins'][k] = true
+				end
 			end
 		end
 	end
@@ -89,8 +93,33 @@ function AS:SkinTab(tab, strip)
 	S:HandleTab(tab)
 end
 
-function AS:SkinNextPrevButton(frame, horizonal)
-	S:HandleNextPrevButton(frame)
+function AS:SkinNextPrevButton(Button)
+	Button:SetTemplate()
+	Button:Size(Button:GetWidth() - 7, Button:GetHeight() - 7)
+	
+	Button:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
+
+	if Button:GetPushedTexture() then
+		Button:GetPushedTexture():SetTexCoord(0.3, 0.35, 0.3, 0.81, 0.65, 0.35, 0.65, 0.81)
+	end
+
+	if Button:GetDisabledTexture() then
+		Button:GetDisabledTexture():SetTexCoord(0.3, 0.29, 0.3, 0.75, 0.65, 0.29, 0.65, 0.75)
+	end
+	
+	Button:GetNormalTexture():ClearAllPoints()
+	Button:GetNormalTexture():SetInside()
+
+	if Button:GetDisabledTexture() then
+		Button:GetDisabledTexture():SetAllPoints(Button:GetNormalTexture())
+	end
+	
+	if Button:GetPushedTexture() then
+		Button:GetPushedTexture():SetAllPoints(Button:GetNormalTexture())
+	end
+	
+	Button:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
+	Button:GetHighlightTexture():SetAllPoints(Button:GetNormalTexture())
 end
 
 function AS:SkinRotateButton(btn)
@@ -152,8 +181,6 @@ function AS:UpdateMedia()
 	AS.ActionBarFont = LSM:Fetch('font', 'Arial')
 	AS.PixelFont = LSM:Fetch('font', 'ElvUI Pixel')
 	AS.NormTex = LSM:Fetch('statusbar', E.private.general.normTex)
-	AS.GlossTex = LSM:Fetch('statusbar', E.private.general.glossTex)
-	AS.GlowTex = LSM:Fetch('border', "ElvUI GlowBorder")
 	AS.BackdropColor = E['media'].backdropcolor
 	AS.BorderColor = E['media'].bordercolor
 	AS.UIScale = UIParent:GetScale()

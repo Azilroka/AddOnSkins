@@ -5,6 +5,40 @@ local Color = RAID_CLASS_COLORS[AS.MyClass]
 
 AS:UpdateLocale()
 
+if Tukui or HydraUI then
+	AddOnSkinsOptions = {
+	-- Embeds
+		['EmbedOoC'] = false,
+		['EmbedOoCDelay'] = 10,
+		['EmbedCoolLine'] = false,
+		['EmbedSexyCooldown'] = false,
+		['EmbedSystem'] = false,
+		['EmbedSystemDual'] = false,
+		['EmbedMain'] = 'Skada',
+		['EmbedLeft'] = 'Skada',
+		['EmbedRight'] = 'Skada',
+		['EmbedRightChat'] = 'Skada',
+		['EmbedLeftWidth'] = 200,
+		['EmbedBelowTop'] = false,
+		['EmbedIsHidden'] = false,
+		['TransparentEmbed'] = false,
+	-- Misc
+		['RecountBackdrop'] = true,
+		['SkadaBackdrop'] = true,
+		['OmenBackdrop'] = true,
+		['MiscFixes'] = true,
+		['DBMSkinHalf'] = false,
+		['DBMFont'] = 'Tukui',
+		['DBMFontSize'] = 12,
+		['DBMFontFlag'] = 'OUTLINE',
+		['WeakAuraAuraBar'] = false,
+		['AuctionHouse'] = true,
+		['SkinTemplate'] = 'Transparent',
+		['HideChatFrame'] = 'NONE',
+		['SkinDebug'] = false,
+	}
+end
+
 function AS:OrderedPairs(t, f)
 	local a = {}
 	for n in pairs(t) do tinsert(a, n) end
@@ -196,7 +230,7 @@ end
 
 function AS:Init(event, addon)
 	if event == 'ADDON_LOADED' and addon == AddOnName then
-		if not (AS:CheckAddOn('Tukui') or AS:CheckAddOn('ElvUI')) then return end
+		if not (AS:CheckAddOn('Tukui') or AS:CheckAddOn('ElvUI') or AS:CheckAddOn('HydraUI')) then return end
 		AS:UpdateMedia()
 		AS:InitAPI()
 		if AS:CheckAddOn('ElvUI') then
@@ -225,14 +259,16 @@ function AS:SkinScrollBar(frame)
 	_G[frame:GetName().."ScrollUpButton"].texture:SetTexture(nil)
 	_G[frame:GetName().."ScrollDownButton"].texture:SetTexture(nil)
 	if not _G[frame:GetName().."ScrollUpButton"].text then
-		_G[frame:GetName().."ScrollUpButton"]:FontString("text", AS.ActionBarFont, 12)
+		_G[frame:GetName().."ScrollUpButton"].text = _G[frame:GetName().."ScrollUpButton"]:CreateFontString(nil, "OVERLAY")
+		_G[frame:GetName().."ScrollUpButton"].text:SetFont(AS.ActionBarFont, 12)
 		_G[frame:GetName().."ScrollUpButton"].text:SetText("▲")
 		_G[frame:GetName().."ScrollUpButton"].text:SetPoint("CENTER", 0, 0)
 		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnEnter', function(self) self.text:SetTextColor(Color.r, Color.g, Color.b) end)
 		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnLeave', function(self) self.text:SetTextColor(1, 1, 1) end)
 	end	
 	if not _G[frame:GetName().."ScrollDownButton"].text then
-		_G[frame:GetName().."ScrollDownButton"]:FontString("text", AS.ActionBarFont, 12)
+		_G[frame:GetName().."ScrollDownButton"].text = _G[frame:GetName().."ScrollDownButton"]:CreateFontString(nil, "OVERLAY")
+		_G[frame:GetName().."ScrollDownButton"].text:SetFont(AS.ActionBarFont, 12)
 		_G[frame:GetName().."ScrollDownButton"].text:SetText("▼")
 		_G[frame:GetName().."ScrollDownButton"].text:SetPoint("CENTER", 0, 0)
 		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnEnter', function(self) self.text:SetTextColor(Color.r, Color.g, Color.b) end)
@@ -376,7 +412,8 @@ function AS:AcceptFrame(MainText, Function)
 		AcceptFrame:SetTemplate('Transparent')
 		AcceptFrame:SetPoint('CENTER', UIParent, 'CENTER')
 		AcceptFrame:SetFrameStrata('DIALOG')
-		AcceptFrame:FontString('Text', AS.Font, 14)
+		AcceptFrame.Text = AcceptFrame:CreateFontString(nil, "OVERLAY")
+		AcceptFrame.Text:SetFont(AS.Font, 14)
 		AcceptFrame.Text:SetPoint('TOP', AcceptFrame, 'TOP', 0, -10)
 		AcceptFrame.Accept = CreateFrame('Button', nil, AcceptFrame, 'OptionsButtonTemplate')
 		AS:SkinButton(AcceptFrame.Accept)

@@ -1,4 +1,3 @@
-if not Tukui then return end
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_ChatBubbles()

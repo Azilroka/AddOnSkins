@@ -49,22 +49,6 @@ function AS:InitAPI()
 		btn:GetHighlightTexture():SetAllPoints(btn:GetNormalTexture())
 	end
 
-	local function FontString(parent, name, fontName, fontHeight, fontStyle)
-		local fs = parent:CreateFontString(nil, "OVERLAY")
-		fs:SetFont(fontName, fontHeight, fontStyle)
-		fs:SetJustifyH("LEFT")
-		fs:SetShadowColor(0, 0, 0)
-		fs:SetShadowOffset(AS.Mult, -AS.Mult)
-
-		if not name then
-			parent.Text = fs
-		else
-			parent[name] = fs
-		end
-
-		return fs
-	end
-
 	local function SkinSlideBar(frame, height, movetext)
 		frame:SetTemplate("Default")
 		frame:SetBackdropColor(0, 0, 0, .8)
@@ -93,8 +77,6 @@ function AS:InitAPI()
 	local function AddAPI(object)
 		local mt = getmetatable(object).__index
 
-		-- Need for ElvUI
-		if not object.FontString then mt.FontString = FontString end
 		-- Remove these once implemented in Tukui 16
 		if not object.SkinIconButton then mt.SkinIconButton = SkinIconButton end
 		if not object.SkinRotateButton then mt.SkinRotateButton = SkinRotateButton end
@@ -111,7 +93,7 @@ function AS:InitAPI()
 	Object = EnumerateFrames()
 
 	while Object do
-		if (not Handled[Object:GetObjectType()]) then
+		if Object.GetObjectType and (not Handled[Object:GetObjectType()]) then
 			AddAPI(Object)
 			Handled[Object:GetObjectType()] = true
 		end

@@ -1,4 +1,3 @@
-if not Tukui then return end
 local AS = unpack(AddOnSkins)
 
 local name = 'Blizzard_CharacterFrame'
@@ -6,6 +5,7 @@ function AS:Blizzard_CharacterFrame()
 	AS:SkinCloseButton(CharacterFrameCloseButton)
 	AS:SkinFrame(CharacterFrame)
 	AS:SkinFrame(CharacterModelFrame)
+	CharacterModelFrame:SetBackdropColor(0,0,0,0)
 	CharacterFramePortrait:Kill()
 	PaperDollSidebarTabs:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -29, -1)
 
@@ -37,6 +37,7 @@ function AS:Blizzard_CharacterFrame()
 		Slot.icon:SetInside()
 		Slot.ignoreTexture:SetTexture([[Interface\PaperDollInfoFrame\UI-GearManager-LeaveItem-Transparent]])
 		Slot.IconBorder:SetTexture(nil)
+		Slot:SetFrameLevel(Slot:GetFrameLevel() + 2)
 		hooksecurefunc(Slot.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
 			self:GetParent():SetBackdropBorderColor(r, g, b)
 		end)
@@ -144,7 +145,10 @@ function AS:Blizzard_CharacterFrame()
 	end)
 
 	for i = 1, NUM_GEARSET_ICONS_SHOWN do
-		AS:SkinIconButton(_G["GearManagerDialogPopupButton"..i], true)
+		local Button = _G["GearManagerDialogPopupButton"..i]
+		AS:SkinFrame(Button)
+		AS:SkinTexture(Button.icon)
+		Button.icon:SetInside()
 	end
 
 	for i = 1, 4 do
@@ -163,8 +167,9 @@ function AS:Blizzard_CharacterFrame()
 				tab.Hider:Point("BOTTOMRIGHT", -1, 0)
 				tab.TabBg:Kill()
 				tab:CreateBackdrop("Default")
-				tab.Backdrop:Point("TOPLEFT", 1, -2)
-				tab.Backdrop:Point("BOTTOMRIGHT", 1, -2)
+				local Backdrop = tab.Backdrop or tab.backdrop
+				Backdrop:Point("TOPLEFT", 1, -2)
+				Backdrop:Point("BOTTOMRIGHT", 1, -2)
 
 				if i == 1 then
 					for i = 1, tab:GetNumRegions() do

@@ -4,38 +4,6 @@ if not AS:CheckAddOn('Tukui') then return end
 local select = select
 local T, C
 
-AddOnSkinsOptions = {
--- Embeds
-	['EmbedOoC'] = false,
-	['EmbedOoCDelay'] = 10,
-	['EmbedCoolLine'] = false,
-	['EmbedSexyCooldown'] = false,
-	['EmbedSystem'] = false,
-	['EmbedSystemDual'] = false,
-	['EmbedMain'] = 'Skada',
-	['EmbedLeft'] = 'Skada',
-	['EmbedRight'] = 'Skada',
-	['EmbedRightChat'] = 'Skada',
-	['EmbedLeftWidth'] = 200,
-	['EmbedBelowTop'] = false,
-	['EmbedIsHidden'] = false,
-	['TransparentEmbed'] = false,
--- Misc
-	['RecountBackdrop'] = true,
-	['SkadaBackdrop'] = true,
-	['OmenBackdrop'] = true,
-	['MiscFixes'] = true,
-	['DBMSkinHalf'] = false,
-	['DBMFont'] = 'Tukui',
-	['DBMFontSize'] = 12,
-	['DBMFontFlag'] = 'OUTLINE',
-	['WeakAuraAuraBar'] = false,
-	['AuctionHouse'] = true,
-	['SkinTemplate'] = 'Transparent',
-	['HideChatFrame'] = 'NONE',
-	['SkinDebug'] = false,
-}
-
 function AS:UpdateMedia()
 	T, C = Tukui:unpack()
 	AS.PixelPerfect = C['General']['InOut']
@@ -55,10 +23,8 @@ function AS:UpdateMedia()
 	AS.ActionBar3 = T['ActionBar3']
 	AS.ActionBar4 = T['ActionBar4']
 
-	AS.GlossTex = C['Medias']['Normal']
 	AS.Blank = C['Medias']['Blank']
 	AS.NormTex = C['Medias']['Normal']
-	AS.GlowTex = C['Medias']['Glow']
 	AS.Font = C['Medias']['Font']
 	AS.PixelFont = C['Medias']['PixelFont']
 	AS.ActionBarFont = C['Medias']['ActionBarFont']

@@ -1,8 +1,9 @@
-if not Tukui then return end
 local AS = unpack(AddOnSkins)
 
 local name = 'Blizzard_Bags'
 function AS:Blizzard_Bags()
+	if Tukui and Tukui[2]["Bags"]["Enable"] then return end
+
 	for i = 1, 12 do -- There is 13 Total..
 		local Bag = _G["ContainerFrame"..i]
 		AS:SkinBackdropFrame(Bag, nil, true)
@@ -27,12 +28,12 @@ function AS:Blizzard_Bags()
 			Backdrop:SetAllPoints()
 			Backdrop:SetFrameStrata(ItemButton:GetFrameStrata())
 			Backdrop:SetFrameLevel(ItemButton:GetFrameLevel() + 4)
+			Backdrop:SetBackdropColor(0, 0, 0, 0)
 			Backdrop:SetScript('OnUpdate', function(self)
 				local r, g, b = ItemButton.IconBorder:GetVertexColor()
 				local a = ItemButton.NewItemTexture:GetAlpha()
 				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self:SetBackdropBorderColor(r, g, b, a)
-				self:SetBackdropColor(0, 0, 0, 0)
 			end)
 			Backdrop:SetScript('OnHide', function(self)
 				ItemButton:SetBackdropBorderColor(ItemButton.IconBorder:GetVertexColor())
