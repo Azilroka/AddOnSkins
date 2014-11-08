@@ -195,12 +195,20 @@ function AS:CreateToggleButton(Name, Text, Panel1, Panel2, TooltipText1, Tooltip
 end
 
 function AS:EmbedSystem_WindowResize()
-	if not AS.ChatBackgroundRight then
-		EmbedSystem_MainWindow:SetPoint('BOTTOM', AS.InfoRight, 'TOP', 0, 2)
-		EmbedSystem_MainWindow:SetSize(AS.InfoRight:GetWidth(), 142)
+	local ChatPanel = AS:CheckOption('EmbedRightChat') and AS.InfoRight or AS.InfoLeft
+	local ChatTab = AS:CheckOption('EmbedRightChat') and AS.TabsRightBackground or AS.TabsLeftBackground
+	if Tukui[2]['Chat']['Background'] then
+		local FramePoint, OffsetY
+		if AS:CheckOption('EmbedBelowTop') then
+			FramePoint, OffsetY = 'BOTTOMLEFT', -2
+		else
+			FramePoint, OffsetY = 'TOPLEFT', 0
+		end
+		EmbedSystem_MainWindow:SetPoint('TOPLEFT', ChatTab, FramePoint, 0, OffsetY)
+		EmbedSystem_MainWindow:SetPoint('BOTTOMRIGHT', ChatPanel, 'TOPRIGHT', 0, 0)
 	else
-		EmbedSystem_MainWindow:SetPoint('BOTTOM', AS.InfoRight, 'TOP', 0, 3)
-		EmbedSystem_MainWindow:SetSize(AS.InfoRight:GetWidth(), AS.ChatBackgroundRight:GetHeight() - (AS:CheckOption('EmbedBelowTop') and (AS.InfoRight:GetHeight()*3) - 5 or (AS.InfoRight:GetHeight()*2) - 8))
+		EmbedSystem_MainWindow:SetPoint('BOTTOM', ChatPanel, 'TOP', 0, 2)
+		EmbedSystem_MainWindow:SetSize(ChatPanel:GetWidth(), 142)
 	end
 	EmbedSystem_LeftWindow:SetPoint('RIGHT', EmbedSystem_RightWindow, 'LEFT', -2, 0)
 	EmbedSystem_RightWindow:SetPoint('RIGHT', EmbedSystem_MainWindow, 'RIGHT', 0, 0)
