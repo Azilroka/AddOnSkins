@@ -8,7 +8,7 @@ function AS:UpdateLocale_frFR()
 	ASL.EmbedSystem.ToggleLeftChat = 'Basculer le panneau de chat Gauche'
 	ASL.EmbedSystem.ToggleRightChat = 'Basculer le panneau de chat Droit'
 	ASL.EmbedSystem.ToggleEmbed = "Basculer l'AddOn Intégré"
-	ASL.EmbedSystem.ToggleOptions = 'Basculer les Options/Skins Additionnels'
+	ASL.EmbedSystem.ToggleOptions = 'Basculer les Options'
 
 	ASL.OptionsPanel.SkinDesc = 'Activer/Désactiver ce skin.'
 	ASL.OptionsPanel.EmbedDesc = 'Activer/Désactiver cette intégration.'

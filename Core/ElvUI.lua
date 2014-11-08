@@ -214,15 +214,9 @@ function AS:CreateEmbedSystem()
 					if EmbedSystem_MainWindow:IsShown() then
 						AS:SetOption('EmbedIsHidden', true)
 						EmbedSystem_MainWindow:Hide()
-						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
-							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
-						end
 					else
 						AS:SetOption('EmbedIsHidden', false)
 						EmbedSystem_MainWindow:Show()
-						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
-							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
-						end
 					end
 				end
 			else
@@ -252,15 +246,9 @@ function AS:CreateEmbedSystem()
 					if EmbedSystem_MainWindow:IsShown() then
 						AS:SetOption('EmbedIsHidden', true)
 						EmbedSystem_MainWindow:Hide()
-						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
-							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(1)
-						end
 					else
 						AS:SetOption('EmbedIsHidden', false)
 						EmbedSystem_MainWindow:Show()
-						if AS:CheckOption('HideChatFrame') ~= 'NONE' then
-							_G[AS:CheckOption('HideChatFrame')]:SetAlpha(0)
-						end
 					end
 				end
 			else

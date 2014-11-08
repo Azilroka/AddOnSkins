@@ -8,7 +8,7 @@ function AS:UpdateLocale_ruRU()
 	ASL.EmbedSystem.ToggleLeftChat = 'Показать/скрыть левую панель чата'
 	ASL.EmbedSystem.ToggleRightChat = 'Показать/ скрыть правую панель чата'
 	ASL.EmbedSystem.ToggleEmbed = 'Показать/скрыть встроенный аддон'
-	ASL.EmbedSystem.ToggleOptions = 'Toggle Extra Skins/Options'
+	ASL.EmbedSystem.ToggleOptions = 'Toggle Options'
 
 	ASL.OptionsPanel.SkinDesc = 'Включить/выключить этот скин.'
 	ASL.OptionsPanel.EmbedDesc = 'Enable/Disable this embed.'
