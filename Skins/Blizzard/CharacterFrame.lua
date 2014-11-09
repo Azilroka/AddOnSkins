@@ -260,11 +260,13 @@ function AS:Blizzard_CharacterFrame()
 	hooksecurefunc('TokenFrame_Update', function()
 		for i = 1, GetCurrencyListSize() do
 			local button = _G["TokenFrameContainerButton"..i]
-			button.highlight:Hide()
-			button.categoryMiddle:Hide()	
-			button.categoryLeft:Hide()	
-			button.categoryRight:Hide()
-			AS:SkinTexture(button.icon)
+			if button then
+				button.highlight:Hide()
+				button.categoryMiddle:Hide()	
+				button.categoryLeft:Hide()	
+				button.categoryRight:Hide()
+				AS:SkinTexture(button.icon)
+			end
 		end
 	end)
 end
