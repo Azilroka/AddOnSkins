@@ -57,9 +57,10 @@ function AS:Blizzard_Calendar(event, addon)
 	CalendarTodayFrame:SetBackdropColor(0, 0, 0, 0)
 	CalendarTodayFrame:HookScript('OnUpdate', function(self) self:SetAlpha(CalendarTodayTextureGlow:GetAlpha()) end)
 	CalendarTodayFrame:CreateBackdrop()
-	CalendarTodayFrame.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
-	CalendarTodayFrame.Backdrop:SetBackdropColor(0, 0, 0, 0)
-	CalendarTodayFrame.Backdrop:CreateShadow()
+	local Backdrop = CalendarTodayFrame.backdrop or CalendarTodayFrame.Backdrop
+	Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+	Backdrop:SetBackdropColor(0, 0, 0, 0)
+	Backdrop:CreateShadow()
 
 	AS:SkinFrame(CalendarCreateEventFrame)
 	CalendarCreateEventFrame:Point("TOPLEFT", CalendarFrame, "TOPRIGHT", 3, -24)
@@ -106,10 +107,9 @@ function AS:Blizzard_Calendar(event, addon)
 		end
 
 		CalendarClassButton1:Point("TOPLEFT", CalendarClassButtonContainer, "TOPLEFT", 5, 0)
-
-		CalendarClassTotalsButton:StripTextures()
-		CalendarClassTotalsButton:CreateBackdrop("Default")
 	end)
+
+	AS:SkinButton(CalendarClassTotalsButton)
 
 	AS:SkinFrame(CalendarTexturePickerFrame)
 	CalendarTexturePickerTitleFrame:StripTextures()

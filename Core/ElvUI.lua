@@ -61,7 +61,6 @@ function AS:InjectProfile()
 		['WeakAuraAuraBar'] = false,
 		['WeakAuraIconCooldown'] = true,
 		['AuctionHouse'] = true,
-		['ParchmentRemover'] = false,
 		['SkinTemplate'] = 'Transparent',
 		['HideChatFrame'] = 'NONE',
 		['SkinDebug'] = false,
@@ -77,6 +76,7 @@ function AS:InjectProfile()
 				end
 			end
 		end
+		V['addonskins']['ParchmentRemover'] = false
 	end
 end
 
