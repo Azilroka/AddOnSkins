@@ -258,7 +258,7 @@ function AS:Blizzard_CharacterFrame()
 	AS:SkinCheckBox(TokenFramePopupBackpackCheckBox)
 	TokenFramePopup:Point("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)				
 	hooksecurefunc('TokenFrame_Update', function()
-		for i = 1, #TokenFrameContainer.buttons do
+		for i = 1, GetCurrencyListSize() do
 			local button = _G["TokenFrameContainerButton"..i]
 			button.highlight:Hide()
 			button.categoryMiddle:Hide()	

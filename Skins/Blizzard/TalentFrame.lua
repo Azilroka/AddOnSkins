@@ -30,18 +30,19 @@ function AS:Blizzard_Talent(event, addon)
 		AS:SkinTexture(PlayerTalentFrameTalentsClearInfoFrameIcon)
 		PlayerTalentFrameTalentsClearInfoFrameIcon:SetInside()
 
+
 		for i = 1, 6 do
 			select(i, PlayerTalentFrameSpecialization:GetRegions()):Hide()
 			select(i, PlayerTalentFramePetSpecialization:GetRegions()):Hide()
 		end
 
-		select(7, PlayerTalentFrameSpecialization:GetChildren()):DisableDrawLayer("OVERLAY")
-		select(7, PlayerTalentFramePetSpecialization:GetChildren()):DisableDrawLayer("OVERLAY")
-
 		for i = 1, 5 do
 			select(i, PlayerTalentFrameSpecializationSpellScrollFrameScrollChild:GetRegions()):Hide()
 			select(i, PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild:GetRegions()):Hide()
 		end
+
+		select(7, PlayerTalentFrameSpecialization:GetChildren()):DisableDrawLayer("OVERLAY")
+		select(7, PlayerTalentFramePetSpecialization:GetChildren()):DisableDrawLayer("OVERLAY")
 
 		PlayerTalentFrameSpecializationSpellScrollFrameScrollChild.Seperator:SetTexture(1, 1, 1)
 		PlayerTalentFrameSpecializationSpellScrollFrameScrollChild.Seperator:SetAlpha(0.2)
@@ -207,8 +208,9 @@ function AS:Blizzard_Talent(event, addon)
 			tab:StyleButton()
 		end
 
-		PlayerSpecTab1:SetPoint('TOPLEFT', PlayerTalentFrame, 'TOPRIGHT', 1, -36)
-		PlayerSpecTab1.SetPoint = AS.Noop
+		hooksecurefunc('PlayerTalentFrame_UpdateTabs', function()
+			PlayerSpecTab1:SetPoint('TOPLEFT', PlayerTalentFrame, 'TOPRIGHT', 1, -36)
+		end)
 		
 		AS:SkinFrame(TalentMicroButtonAlert)
 		TalentMicroButtonAlert:SetBackdropBorderColor(1, 1, 0)

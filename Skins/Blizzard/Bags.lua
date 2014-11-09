@@ -9,6 +9,7 @@ function AS:Blizzard_Bags()
 		AS:SkinBackdropFrame(Bag, nil, true)
 		for j = 1, 36 do
 			local ItemButton = _G["ContainerFrame"..i.."Item"..j]
+--			AS:SkinTexture(_G["ContainerFrame"..i.."Item"..j..'IconQuestTexture'])
 			AS:SkinFrame(ItemButton)
 			AS:SkinTexture(ItemButton.icon)
 			ItemButton.icon:SetInside()
@@ -48,7 +49,7 @@ function AS:Blizzard_Bags()
 			hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
 				ItemButton:SetBackdropBorderColor(r, g, b)
 			end)
-			hooksecurefunc(_G["ContainerFrame"..i.."Item"..j].IconBorder, 'Hide', function(self)
+			hooksecurefunc(ItemButton.IconBorder, 'Hide', function(self)
 				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end)
 		end
@@ -111,6 +112,67 @@ function AS:Blizzard_Bags()
 		Backdrop:SetOutside(Token.icon)
 		Token.icon:Point("LEFT", Token.count, "RIGHT", 3, 0)
 	end
+
+	AS:SkinFrame(BankFrame, nil, nil, true)
+	AS:SkinCloseButton(BankFrameCloseButton)
+	BankFrameMoneyFrameBorder:StripTextures()
+	BankFrameMoneyFrameInset:StripTextures()
+	BankSlotsFrame:StripTextures()
+
+	BankFramePurchaseButton:SkinButton()
+	BankFramePurchaseButton:Height(22)
+	
+	BankItemSearchBox:Size(159, 16)
+	AS:SkinEditBox(BankItemSearchBox)
+
+	AS:SkinButton(BankItemAutoSortButton)
+	BankItemAutoSortButton:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
+	BankItemAutoSortButton:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
+	AS:SkinTexture(BankItemAutoSortButton:GetNormalTexture())
+	BankItemAutoSortButton:GetNormalTexture():SetInside()
+	AS:SkinTexture(BankItemAutoSortButton:GetPushedTexture())
+	BankItemAutoSortButton:GetPushedTexture():SetInside()
+	BankItemAutoSortButton:Size(20)
+	BankItemAutoSortButton:SetPoint("LEFT", BankItemSearchBox, "RIGHT", 4, 0)
+
+	-- Bank Bags
+	for i = 1, 7 do
+		local BankBag = BankSlotsFrame['Bag'..i]
+		AS:SkinFrame(BankBag)
+		BankBag.HighlightFrame.HighlightTexture:SetTexture(1, 1, 1, .2)
+		BankBag:StyleButton()
+		AS:SkinTexture(BankBag.icon)
+		BankBag.icon:SetInside()
+		hooksecurefunc(BankBag.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
+			BankBag:SetBackdropBorderColor(r, g, b)
+		end)
+		hooksecurefunc(BankBag.IconBorder, 'Hide', function(self)
+			BankBag:SetBackdropBorderColor(unpack(AS.BorderColor))
+		end)
+	end
+
+	-- Bank Slots
+	for i = 1, 28 do
+		local ItemButton = _G["BankFrameItem"..i]
+		AS:SkinFrame(ItemButton)
+		AS:SkinTexture(ItemButton.icon)
+		ItemButton.icon:SetInside()
+
+		ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
+		ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
+
+		ItemButton:SetNormalTexture(nil)
+		ItemButton:StyleButton()
+		hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
+			ItemButton:SetBackdropBorderColor(r, g, b)
+		end)
+		hooksecurefunc(ItemButton.IconBorder, 'Hide', function(self)
+			ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
+		end)
+	end
+
+	AS:SkinTab(BankFrameTab1)
+	AS:SkinTab(BankFrameTab2)
 end
 
 AS:RegisterSkin(name, AS.Blizzard_Bags)
