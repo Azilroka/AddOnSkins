@@ -155,34 +155,28 @@ function AS:Blizzard_CharacterFrame()
 		AS:SkinTab(_G["CharacterFrameTab"..i])
 	end
 
-	local function FixSidebarTabCoords()
-		for i = 1, #PAPERDOLL_SIDEBARS do
-			local tab = _G["PaperDollSidebarTab"..i]
-			if not tab.isSkinned then
-				tab.Highlight:SetTexture(1, 1, 1, 0.3)
-				tab.Highlight:Point("TOPLEFT", 3, -4)
-				tab.Highlight:Point("BOTTOMRIGHT", -1, 0)
-				tab.Hider:SetTexture(0.4,0.4,0.4,0.4)
-				tab.Hider:Point("TOPLEFT", 3, -4)
-				tab.Hider:Point("BOTTOMRIGHT", -1, 0)
-				tab.TabBg:Kill()
-				tab:CreateBackdrop("Default")
-				local Backdrop = tab.Backdrop or tab.backdrop
-				Backdrop:Point("TOPLEFT", 1, -2)
-				Backdrop:Point("BOTTOMRIGHT", 1, -2)
+	for i = 1, #PAPERDOLL_SIDEBARS do
+		local tab = _G["PaperDollSidebarTab"..i]
+		tab.Highlight:SetTexture(1, 1, 1, 0.3)
+		tab.Highlight:Point("TOPLEFT", 3, -4)
+		tab.Highlight:Point("BOTTOMRIGHT", -1, 0)
+		tab.Hider:SetTexture(0.4,0.4,0.4,0.4)
+		tab.Hider:Point("TOPLEFT", 3, -4)
+		tab.Hider:Point("BOTTOMRIGHT", -1, 0)
+		tab.TabBg:Kill()
+		tab:CreateBackdrop("Default")
+		local Backdrop = tab.Backdrop or tab.backdrop
+		Backdrop:Point("TOPLEFT", 1, -2)
+		Backdrop:Point("BOTTOMRIGHT", 1, -2)
 
-				if i == 1 then
-					for i = 1, tab:GetNumRegions() do
-						local region = select(i, tab:GetRegions())
-						region:SetTexCoord(0.16, 0.86, 0.16, 0.86)
-						region.SetTexCoord = AS.Noop
-					end
-				end
-				tab.isSkinned = true
+		if i == 1 then
+			for i = 1, tab:GetNumRegions() do
+				local region = select(i, tab:GetRegions())
+				region:SetTexCoord(0.16, 0.86, 0.16, 0.86)
+				region.SetTexCoord = AS.Noop
 			end
 		end
 	end
-	hooksecurefunc("PaperDollFrame_UpdateSidebarTabs", FixSidebarTabCoords)
 
 	for i = 1, 7 do
 		local Frame = _G["CharacterStatsPaneCategory"..i]
@@ -258,26 +252,21 @@ function AS:Blizzard_CharacterFrame()
 
 	--Currency
 	AS:SkinFrame(TokenFramePopup)
-	TokenFramePopup:Point("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)				
-	TokenFrame:HookScript("OnShow", function()
-		for i = 1, GetCurrencyListSize() do
-			local button = _G["TokenFrameContainerButton"..i]
-
-			if button then
-				button.highlight:Kill()
-				button.categoryMiddle:Kill()	
-				button.categoryLeft:Kill()	
-				button.categoryRight:Kill()
-				if button.icon then
-					button.icon:SetTexCoord(.08, .92, .08, .92)
-				end
-			end
-		end
-	end)
 	AS:SkinScrollBar(TokenFrameContainerScrollBar)
 	AS:SkinCloseButton(TokenFramePopupCloseButton)
 	AS:SkinCheckBox(TokenFramePopupInactiveCheckBox)
 	AS:SkinCheckBox(TokenFramePopupBackpackCheckBox)
+	TokenFramePopup:Point("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)				
+	hooksecurefunc('TokenFrame_Update', function()
+		for i = 1, #TokenFrameContainer.buttons do
+			local button = _G["TokenFrameContainerButton"..i]
+			button.highlight:Hide()
+			button.categoryMiddle:Hide()	
+			button.categoryLeft:Hide()	
+			button.categoryRight:Hide()
+			AS:SkinTexture(button.icon)
+		end
+	end)
 end
 
 AS:RegisterSkin(name, AS.Blizzard_CharacterFrame)
