@@ -7,5 +7,6 @@
 	<Script file="DebugTools.lua"/>
 	<Script file="DressUpFrame.lua"/>
 	<Script file="ItemSocketing.lua"/>
+	<Script file="TalentFrame.lua"/>
 	<Script file="WorldStateCaptureBar.lua"/>
 </Ui>

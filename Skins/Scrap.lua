@@ -42,7 +42,7 @@ function AS:Scrap(event, addon)
 	end
 
 	if AddOnCount == 2 then
-		AS:UnregisterEvent('Scrap', 'ADDON_LOADED')
+		AS:UnregisterSkinEvent('Scrap', 'ADDON_LOADED')
 	end
 end
 

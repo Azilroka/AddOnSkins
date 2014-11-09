@@ -31,7 +31,7 @@ function AS:Blizzard_ItemSocketing(event, addon)
 	AS:SkinButton(ItemSocketingSocketButton)
 	AS:SkinCloseButton(ItemSocketingFrameCloseButton)
 	AS:SkinScrollBar(ItemSocketingScrollFrameScrollBar)
-	AS:UnregisterEvent('Blizzard_ItemSocketing', 'ADDON_LOADED')
+	AS:UnregisterSkinEvent('Blizzard_ItemSocketing', 'ADDON_LOADED')
 end
 
 AS:RegisterSkin('Blizzard_ItemSocketing', AS.Blizzard_ItemSocketing, 'ADDON_LOADED')

@@ -28,7 +28,7 @@ function AS:Blizzard_DebugTools(event, addon)
 		FrameStackTooltip:SetFrameStrata('TOOLTIP')
 		FrameStackTooltip:SetFrameLevel(255)
 
-		AS:UnregisterEvent('Blizzard_DebugTools', 'ADDON_LOADED')
+		AS:UnregisterSkinEvent('Blizzard_DebugTools', 'ADDON_LOADED')
 	end
 end
 

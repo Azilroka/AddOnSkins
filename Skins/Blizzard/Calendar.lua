@@ -1,7 +1,6 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Calendar(event, addon)
-	if event == 'PLAYER_ENTERING_WORLD' then return end
 	if addon ~= 'Blizzard_Calendar' then return end
 	AS:SkinFrame(CalendarFrame)
 	AS:SkinCloseButton(CalendarCloseButton)
@@ -97,28 +96,34 @@ function AS:Blizzard_Calendar(event, addon)
 	CalendarClassButtonContainer:HookScript("OnShow", function()
 		for i, class in ipairs(CLASS_SORT_ORDER) do
 			local button = _G["CalendarClassButton"..i]
-			button:StripTextures()
-			button:CreateBackdrop("Default")
-
 			local tcoords = CLASS_ICON_TCOORDS[class]
 			local buttonIcon = button:GetNormalTexture()
 			buttonIcon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
 			buttonIcon:SetTexCoord(tcoords[1] + 0.015, tcoords[2] - 0.02, tcoords[3] + 0.018, tcoords[4] - 0.02)
+			buttonIcon:SetInside()
 		end
-
-		CalendarClassButton1:Point("TOPLEFT", CalendarClassButtonContainer, "TOPLEFT", 5, 0)
 	end)
 
+	CalendarClassButton1:Point("TOPLEFT", CalendarClassButtonContainer, "TOPLEFT", 4, 0)
+
+	for i = 1, 11 do
+		_G["CalendarClassButton"..i]:StripTextures()
+		AS:SkinButton(_G["CalendarClassButton"..i])
+		_G["CalendarClassButton"..i]:Size(24)
+	end
+
+	CalendarClassTotalsButton:StripTextures()
 	AS:SkinButton(CalendarClassTotalsButton)
+	CalendarClassTotalsButton:SetWidth(24)
 
 	AS:SkinFrame(CalendarTexturePickerFrame)
 	CalendarTexturePickerTitleFrame:StripTextures()
 
 	AS:SkinScrollBar(CalendarTexturePickerScrollBar)
-	AS:SkinButton(CalendarTexturePickerAcceptButton, true)
-	AS:SkinButton(CalendarTexturePickerCancelButton, true)
-	AS:SkinButton(CalendarCreateEventInviteButton, true)
-	AS:SkinButton(CalendarCreateEventRaidInviteButton, true)
+	AS:SkinButton(CalendarTexturePickerAcceptButton)
+	AS:SkinButton(CalendarTexturePickerCancelButton)
+	AS:SkinButton(CalendarCreateEventInviteButton)
+	AS:SkinButton(CalendarCreateEventRaidInviteButton)
 
 	AS:SkinFrame(CalendarMassInviteFrame)
 	CalendarMassInviteTitleFrame:StripTextures()
