@@ -61,6 +61,10 @@ function AS:Recount()
 	hooksecurefunc(Recount, 'ShowScrollbarElements', function(self, name) Recount_MainWindow_ScrollBarScrollBar:Show() end)
 	hooksecurefunc(Recount, 'HideScrollbarElements', function(self, name) Recount_MainWindow_ScrollBarScrollBar:Hide() end)
 
+	if Recount.db.profile.MainWindow.ShowScrollbar == false then
+		Recount:HideScrollbarElements("Recount_MainWindow_ScrollBar")
+	end
+
 	hooksecurefunc(Recount, 'ShowReport', function(self)
 		if Recount_ReportWindow.isSkinned then return end
 		Recount_ReportWindow.isSkinned = true
