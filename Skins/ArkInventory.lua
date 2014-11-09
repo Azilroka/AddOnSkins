@@ -92,7 +92,7 @@ function AS:ArkInventory()
 		if not obj then return end
 		obj:Kill()
 
-		frame:SetTemplate(AS:CheckOption('SkinTemplate'))
+		frame:SetTemplate()
 		frame:SetBackdropBorderColor(obj:GetBackdropBorderColor())
 		AS:SkinTexture(frame.icon)
 		frame:SetNormalTexture(nil)
