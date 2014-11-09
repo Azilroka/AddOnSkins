@@ -173,7 +173,7 @@ function AS:Blizzard_Talent(event, addon)
 				AS:SkinFrame(bu.bg)
 				bu.bg:SetBackdropColor(0, 0, 0, 0)
 				bu.bg:SetOutside(ic)
-				ic:Size(30)
+				ic:Size(32)
 				ic:SetDrawLayer("ARTWORK")
 				AS:SkinTexture(ic)
 			end

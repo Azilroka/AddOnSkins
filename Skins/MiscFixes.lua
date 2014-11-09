@@ -44,6 +44,15 @@ function AS:MiscellaneousFixes(event, addon)
 		end
 	end)
 	]]
+
+	if event == 'AUCTION_HOUSE_SHOW' then
+		if AS:CheckAddOn('ElvUI') and ElvUI[1].private.skins.blizzard.enable == true and ElvUI[1].private.skins.blizzard.auctionhouse == true then
+			for i = 1, AuctionFrame.numTabs do
+				AS:SkinTab(_G['AuctionFrameTab'..i])
+			end
+		end
+		AS:UnregisterSkinEvent('MiscellaneousFixes', event)
+	end
 end
 
-AS:RegisterSkin('MiscellaneousFixes', AS.MiscellaneousFixes)
+AS:RegisterSkin('MiscellaneousFixes', AS.MiscellaneousFixes, 'AUCTION_HOUSE_SHOW')
