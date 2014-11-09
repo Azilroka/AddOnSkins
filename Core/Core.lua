@@ -32,7 +32,6 @@ if Tukui or HydraUI then
 		['DBMFontSize'] = 12,
 		['DBMFontFlag'] = 'OUTLINE',
 		['WeakAuraAuraBar'] = false,
-		['AuctionHouse'] = true,
 		['SkinTemplate'] = 'Transparent',
 		['HideChatFrame'] = 'NONE',
 		['SkinDebug'] = false,
