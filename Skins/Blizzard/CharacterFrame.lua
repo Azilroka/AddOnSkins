@@ -140,7 +140,7 @@ function AS:Blizzard_CharacterFrame()
 			object.BgBottom:SetTexture(nil)
 			object.BgMiddle:SetTexture(nil)
 
-			object.icon:SetTexCoord(.08, .92, .08, .92)
+			AS:SkinTexture(object.icon)
 		end
 	end)
 

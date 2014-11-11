@@ -50,6 +50,26 @@ function AS:Blizzard_Talent(event, addon)
 		PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild.Seperator:SetTexture(1, 1, 1)
 		PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild.Seperator:SetAlpha(0.2)
 
+		local buttons = {"PlayerTalentFrameSpecializationSpecButton", "PlayerTalentFramePetSpecializationSpecButton"}
+
+		for _, name in pairs(buttons) do
+			for i = 1, 4 do
+				local bu = _G[name..i]
+				_G["PlayerTalentFrameSpecializationSpecButton"..i.."Glow"]:SetTexture(nil)
+
+				bu:SetHighlightTexture("")
+				bu.bg:SetAlpha(0)
+				bu.learnedTex:SetAlpha(0)
+				bu.selectedTex:SetAlpha(0)
+				AS:SkinFrame(bu, nil, true)
+
+				bu.border = CreateFrame("Frame", nil, bu)
+				AS:SkinFrame(bu.border)
+				bu.border:SetBackdropColor(0, 0, 0, 0)
+				bu.border:SetOutside(bu.specIcon)
+			end
+		end
+
 		for i = 1, GetNumSpecializations(false, true) do
 			local bu = PlayerTalentFramePetSpecialization["specButton"..i]
 			local _, _, _, icon = GetSpecializationInfo(i, false, true)
@@ -59,6 +79,44 @@ function AS:Blizzard_Talent(event, addon)
 			AS:SkinTexture(bu.specIcon)
 			bu.specIcon:SetSize(50, 50)
 			bu.specIcon:Point("LEFT", bu, "LEFT", 15, 0)
+			bu:HookScript('OnEnter', function(self)
+				self:SetBackdropBorderColor(1, .82, 0)
+				self.border:SetBackdropBorderColor(1, .82, 0)
+			end)
+			bu:HookScript('OnLeave', function(self) 
+				if self.selected then
+					self:SetBackdropBorderColor(0, 0.44, .87, 1)
+					self.border:SetBackdropBorderColor(0, 0.44, .87, 1)
+				else
+					self:SetBackdropBorderColor(unpack(AS.BorderColor))
+					self.border:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end
+			end)
+		end
+
+		for i = 1, GetNumSpecializations(false, nil) do
+			local bu = PlayerTalentFrameSpecialization["specButton"..i]
+			local _, _, _, icon = GetSpecializationInfo(i, false, nil)
+
+			bu.ring:Hide()
+
+			bu.specIcon:SetTexture(icon)
+			AS:SkinTexture(bu.specIcon)
+			bu.specIcon:SetSize(50, 50)
+			bu.specIcon:Point("LEFT", bu, "LEFT", 15, 0)
+			bu:HookScript('OnEnter', function(self)
+				self:SetBackdropBorderColor(1, .82, 0)
+				self.border:SetBackdropBorderColor(1, .82, 0)
+			end)
+			bu:HookScript('OnLeave', function(self) 
+				if self.selected then
+					self:SetBackdropBorderColor(0, 0.44, .87, 1)
+					self.border:SetBackdropBorderColor(0, 0.44, .87, 1)
+				else
+					self:SetBackdropBorderColor(unpack(AS.BorderColor))
+					self.border:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end
+			end)
 		end
 
 		for i = 1, NUM_TALENT_FRAME_TABS do
@@ -106,7 +164,7 @@ function AS:Blizzard_Talent(event, addon)
 					frame.reskinned = true
 					frame:Size(30, 30)
 					frame.ring:Hide()
-					frame:SetTemplate("Default")
+					frame:SetTemplate()
 					AS:SkinTexture(frame.icon)
 					frame.icon:SetInside()			
 				end
@@ -126,38 +184,6 @@ function AS:Blizzard_Talent(event, addon)
 			end
 		end)
 
-		for i = 1, GetNumSpecializations(false, nil) do
-			local bu = PlayerTalentFrameSpecialization["specButton"..i]
-			local _, _, _, icon = GetSpecializationInfo(i, false, nil)
-
-			bu.ring:Hide()
-
-			bu.specIcon:SetTexture(icon)
-			AS:SkinTexture(bu.specIcon)
-			bu.specIcon:SetSize(50, 50)
-			bu.specIcon:Point("LEFT", bu, "LEFT", 15, 0)
-		end
-
-		local buttons = {"PlayerTalentFrameSpecializationSpecButton", "PlayerTalentFramePetSpecializationSpecButton"}
-
-		for _, name in pairs(buttons) do
-			for i = 1, 4 do
-				local bu = _G[name..i]
-				_G["PlayerTalentFrameSpecializationSpecButton"..i.."Glow"]:SetTexture(nil)
-
-				bu:SetHighlightTexture("")
-				bu.bg:SetAlpha(0)
-				bu.learnedTex:SetAlpha(0)
-				bu.selectedTex:SetAlpha(0)
-				AS:SkinFrame(bu, nil, true)
-
-				bu.border = CreateFrame("Frame", nil, bu)
-				AS:SkinFrame(bu.border)
-				bu.border:SetBackdropColor(0, 0, 0, 0)
-				bu.border:SetOutside(bu.specIcon)
-			end
-		end
-
 		for i = 1, MAX_TALENT_TIERS do
 			local row = _G["PlayerTalentFrameTalentsTalentRow"..i]
 			row:StripTextures(true)
@@ -169,13 +195,29 @@ function AS:Blizzard_Talent(event, addon)
 				AS:SkinFrame(bu)
 				bu:SetFrameLevel(bu:GetFrameLevel() + 2)
 
-				bu.bg = CreateFrame("Frame", nil, bu)
-				AS:SkinFrame(bu.bg)
-				bu.bg:SetBackdropColor(0, 0, 0, 0)
-				bu.bg:SetOutside(ic)
+				bu.border = CreateFrame("Frame", nil, bu)
+				AS:SkinFrame(bu.border)
+				bu.border:SetBackdropColor(0, 0, 0, 0)
+				bu.border:SetOutside(ic)
 				ic:Size(32)
 				ic:SetDrawLayer("ARTWORK")
 				AS:SkinTexture(ic)
+				bu:HookScript('OnEnter', function(self)
+					self:SetBackdropBorderColor(1, .82, 0)
+					self.border:SetBackdropBorderColor(1, .82, 0)
+				end)
+				bu:HookScript('OnLeave', function(self) 
+					if bu.knownSelection:IsShown() then
+						bu:SetBackdropBorderColor(0, 0.44, .87, 1)
+						bu.border:SetBackdropBorderColor(0, 0.44, .87, 1)
+					elseif bu.learnSelection:IsShown() then
+						bu:SetBackdropBorderColor(1, 0.82, 0, 1)
+						bu.border:SetBackdropBorderColor(1, 0.82, 0, 1)
+					else
+						bu:SetBackdropBorderColor(unpack(AS.BorderColor))
+						bu.border:SetBackdropBorderColor(unpack(AS.BorderColor))
+					end
+				end)
 			end
 		end
 
@@ -185,14 +227,13 @@ function AS:Blizzard_Talent(event, addon)
 					local bu = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j]
 					if bu.knownSelection:IsShown() then
 						bu:SetBackdropBorderColor(0, 0.44, .87, 1)
-						bu.bg:SetBackdropBorderColor(0, 0.44, .87, 1)
+						bu.border:SetBackdropBorderColor(0, 0.44, .87, 1)
+					elseif bu.learnSelection:IsShown() then
+						bu:SetBackdropBorderColor(1, 0.82, 0, 1)
+						bu.border:SetBackdropBorderColor(1, 0.82, 0, 1)
 					else
 						bu:SetBackdropBorderColor(unpack(AS.BorderColor))
-						bu.bg:SetBackdropBorderColor(unpack(AS.BorderColor))
-					end
-					if bu.learnSelection:IsShown() then
-						bu:SetBackdropBorderColor(1, 0.82, 0, 1)
-						bu.bg:SetBackdropBorderColor(1, 0.82, 0, 1)
+						bu.border:SetBackdropBorderColor(unpack(AS.BorderColor))
 					end
 				end
 			end
