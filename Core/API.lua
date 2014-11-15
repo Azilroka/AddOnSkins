@@ -121,22 +121,34 @@ function AS:StripTextures(Object, Kill)
 	end
 end
 
+local BlizzardRegions = {
+	'Left',
+	'Middle',
+	'Right',
+	'Mid'
+	'LeftDisabled',
+	'MiddleDisabled',
+	'RightDisabled',
+}
+
 function AS:SkinButton(Button, Strip)
 	if Button.isSkinned then return end
+	local ButtonName = Button:GetName()
 
-	if Button:GetName() then
-		local Left = _G[Button:GetName().."Left"]
-		local Middle = _G[Button:GetName().."Middle"]
-		local Right = _G[Button:GetName().."Right"]
-
-		if Left then Left:SetAlpha(0) end
-		if Middle then Middle:SetAlpha(0) end
-		if Right then Right:SetAlpha(0) end
+	if ButtonName then
+		for _, Region in pairs(BlizzardRegions) do
+			if _G[ButtonName..Region] then
+				_G[ButtonName..Region]:SetAlpha(0)
+			end
+		end
 	end
 
-	if Button.Left then Button.Left:SetAlpha(0) end
-	if Button.Right then Button.Right:SetAlpha(0) end	
-	if Button.Middle then Button.Middle:SetAlpha(0) end
+	for _, Region in pairs(BlizzardRegions) do
+		if Button[Region] then
+			Button[Region]:SetAlpha(0)
+		end
+	end
+
 	if Button.SetNormalTexture then Button:SetNormalTexture("") end	
 	if Button.SetHighlightTexture then Button:SetHighlightTexture("") end
 	if Button.SetPushedTexture then Button:SetPushedTexture("") end	
@@ -242,26 +254,19 @@ function AS:SkinCloseButton(CloseButton, Reposition)
 	CloseButton.isSkinned = true
 end
 
-local EditBoxRegions = {
-	'Left',
-	'Middle',
-	'Right',
-	'Mid'
-}
-
 function AS:SkinEditBox(EditBox, Width, Height)
 	if EditBox.isSkinned then return end
 
 	local EditBoxName = EditBox:GetName()
 	if EditBoxName then
-		for _, Region in pairs(EditBoxRegions) do
+		for _, Region in pairs(BlizzardRegions) do
 			if _G[EditBoxName..Region] then
 				_G[EditBoxName..Region]:Kill()
 			end
 		end
 	end
 
-	for _, Region in pairs(EditBoxRegions) do
+	for _, Region in pairs(BlizzardRegions) do
 		if EditBox[Region] then
 			EditBox[Region]:Kill()
 		end
@@ -309,36 +314,27 @@ function AS:SkinCheckBox(CheckBox)
 	CheckBox.isSkinned = true
 end
 
-local Tabs = {
-	"LeftDisabled",
-	"MiddleDisabled",
-	"RightDisabled",
-	"Left",
-	"Middle",
-	"Right",
-}
+function AS:SkinTab(Tab)
+	if Tab.isSkinned then return end
 
-function AS:SkinTab(tab)
-	if tab.isSkinned then return end
-
-	for _, object in pairs(Tabs) do
-		local Texture = _G[tab:GetName()..object]
-		if (Texture) then
-			Texture:SetTexture(nil)
+	local TabName = Tab:GetName()
+	for _, Region in pairs(BlizzardRegions) do
+		if _G[TabName..Region] then
+			_G[TabName..Region]:SetTexture(nil)
 		end
 	end
 
-	if tab.GetHighlightTexture and tab:GetHighlightTexture() then
-		tab:GetHighlightTexture():SetTexture(nil)
+	if Tab.GetHighlightTexture and Tab:GetHighlightTexture() then
+		Tab:GetHighlightTexture():SetTexture(nil)
 	else
-		AS:StripTextures(tab)
+		AS:StripTextures(Tab)
 	end
 
-	AS:CreateBackdrop(tab)
-	tab.Backdrop:Point("TOPLEFT", 10, AS.PixelPerfect and -1 or -3)
-	tab.Backdrop:Point("BOTTOMRIGHT", -10, 3)
+	AS:CreateBackdrop(Tab)
+	Tab.Backdrop:Point("TOPLEFT", 10, AS.PixelPerfect and -1 or -3)
+	Tab.Backdrop:Point("BOTTOMRIGHT", -10, 3)
 
-	tab.isSkinned = true
+	Tab.isSkinned = true
 end
 
 local ScrollBarElements = {
