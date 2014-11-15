@@ -28,7 +28,7 @@ function AS:Skillet()
 			end
 		end
 		if not texture then return end
-		button:SetTemplate()
+		AS:SetTemplate(button)
 		texture:SetDrawLayer('OVERLAY')
 		texture:ClearAllPoints()
 		texture:SetInside()
@@ -104,7 +104,7 @@ function AS:Skillet()
 		}
 
 		for _, object in pairs(StripAllTextures) do
-			_G[object]:StripTextures()
+			AS:StripTextures(_G[object])
 		end	
 
 		local SetTemplateD = {
@@ -301,7 +301,7 @@ function AS:Skillet()
 	AS:SkinDropDownBox(SkilletSortDropdown)
 	AS:SkinDropDownBox(SkilletQueueLoadDropdown)
 	AS:Desaturate(SkilletSearchFilterClear)
-	SkilletSortAscButton:StripTextures()
+	AS:StripTextures(SkilletSortAscButton)
 	SkilletSortAscButton:SetTemplate('Default', true)
 	if not SkilletSortAscButton.text then
 		SkilletSortAscButton.text = SkilletSortAscButton:CreateFontString(nil, 'OVERLAY')
@@ -309,7 +309,7 @@ function AS:Skillet()
 		SkilletSortAscButton.text:Point('CENTER', 0, 0)
 		SkilletSortAscButton.text:SetText("▲")
 	end
-	SkilletSortDescButton:StripTextures()
+	AS:StripTextures(SkilletSortDescButton)
 	SkilletSortDescButton:SetTemplate('Default', true)
 	if not SkilletSortDescButton.text then
 		SkilletSortDescButton.text = SkilletSortDescButton:CreateFontString(nil, 'OVERLAY')
@@ -324,7 +324,7 @@ function AS:Skillet()
 	AS:SkinEditBox(SkilletFilterBox)
 	SkilletFilterBox:SetHeight(20)
 	AS:SkinEditBox(SkilletQueueSaveEditBox)
-	SkilletRankFrameBorder:StripTextures()
+	AS:StripTextures(SkilletRankFrameBorder)
 	AS:SkinStatusBar(SkilletRankFrame)
 	SkilletRankFrame:SetHeight(10)		
 	AS:SkinScrollBar(SkilletSkillListScrollBar, 5)

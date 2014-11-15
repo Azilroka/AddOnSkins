@@ -29,7 +29,7 @@ function AS:MizusRaidTracker()
 	AS:SkinButton(MRT_GUI_FourRowDialog_CancelButton)
 	for i = 1, 6 do
 		AS:SkinFrame(_G['ScrollTable'..i])
-		_G['ScrollTable'..i..'ScrollFrameScrollBar']:StripTextures(true)
+		AS:StripTextures(_G['ScrollTable'..i..'ScrollFrameScrollBar'], true)
 		AS:SkinScrollBar(_G['ScrollTable'..i..'ScrollFrameScrollBar'])
 	end
 	AS:SkinTooltip(MRT_GUI_ItemTT)

@@ -20,7 +20,7 @@ function AS:AtlasLoot(event, addon)
 	local AtlasLootFrame = _G["AtlasLoot_GUI-Frame"]
 	AS:SkinFrame(AtlasLootFrame)
 	AS:SkinCloseButton(AtlasLootFrame.CloseButton)
-	AtlasLootFrame.titleFrame:StripTextures()
+	AS:StripTextures(AtlasLootFrame.titleFrame)
 
 	local function SkinDropDown(Frame)
 		AS:SkinFrame(_G[Frame])
@@ -55,7 +55,7 @@ function AS:AtlasLoot(event, addon)
 	end
 
 	local AtlasLootItemFrame = _G["AtlasLoot_GUI-ItemFrame"]
-	AtlasLootItemFrame:CreateBackdrop()
+	AS:CreateBackdrop(AtlasLootItemFrame)
 	AS:SkinNextPrevButton(AtlasLootItemFrame.nextPageButton)		
 	AS:SkinButton(AtlasLootItemFrame.modelButton)
 	AS:SkinButton(AtlasLootItemFrame.soundsButton)

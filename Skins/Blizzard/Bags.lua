@@ -18,7 +18,7 @@ function AS:Blizzard_Bags()
 			ItemButton.NewItemTexture.SetAtlas = AS.Noop
 
 			-- This shit is hax.
-			ItemButton:CreateBackdrop()
+			AS:CreateBackdrop(ItemButton)
 			local Backdrop = ItemButton.Backdrop or ItemButton.backdrop
 			hooksecurefunc(ItemButton.NewItemTexture, 'Show', function()
 				Backdrop:Show()
@@ -45,7 +45,7 @@ function AS:Blizzard_Bags()
 			ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
 
 			ItemButton:SetNormalTexture(nil)
-			ItemButton:StyleButton()
+			AS:StyleButton(ItemButton)
 			hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
 				ItemButton:SetBackdropBorderColor(r, g, b)
 			end)
@@ -86,7 +86,7 @@ function AS:Blizzard_Bags()
 	hooksecurefunc('ContainerFrame_Update', UpdateBagIcon)
 
 	AS:SkinEditBox(BagItemSearchBox)
-	BackpackTokenFrame:StripTextures()
+	AS:StripTextures(BackpackTokenFrame)
 
 	AS:SkinButton(BagItemAutoSortButton)
 	BagItemAutoSortButton:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
@@ -107,19 +107,18 @@ function AS:Blizzard_Bags()
 	for i = 1, 3 do
 		local Token = _G["BackpackTokenFrameToken"..i]
 		AS:SkinTexture(Token.icon)
-		Token:CreateBackdrop("Default")
-		local Backdrop = Token.Backdrop or Token.backdrop
-		Backdrop:SetOutside(Token.icon)
+		AS:CreateBackdrop(Token, 'Default')
+		Token.Backdrop:SetOutside(Token.icon)
 		Token.icon:Point("LEFT", Token.count, "RIGHT", 3, 0)
 	end
 
 	AS:SkinFrame(BankFrame, nil, nil, true)
 	AS:SkinCloseButton(BankFrameCloseButton)
-	BankFrameMoneyFrameBorder:StripTextures()
-	BankFrameMoneyFrameInset:StripTextures()
-	BankSlotsFrame:StripTextures()
+	AS:StripTextures(BankFrameMoneyFrameBorder)
+	AS:StripTextures(BankFrameMoneyFrameInset)
+	AS:StripTextures(BankSlotsFrame)
 
-	BankFramePurchaseButton:SkinButton()
+	AS:SkinButton(BankFramePurchaseButton)
 	BankFramePurchaseButton:Height(22)
 	
 	BankItemSearchBox:Size(159, 16)
@@ -140,7 +139,7 @@ function AS:Blizzard_Bags()
 		local BankBag = BankSlotsFrame['Bag'..i]
 		AS:SkinFrame(BankBag)
 		BankBag.HighlightFrame.HighlightTexture:SetTexture(1, 1, 1, .2)
-		BankBag:StyleButton()
+		AS:StyleButton(BankBag)
 		AS:SkinTexture(BankBag.icon)
 		BankBag.icon:SetInside()
 		hooksecurefunc(BankBag.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
@@ -162,7 +161,7 @@ function AS:Blizzard_Bags()
 		ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
 
 		ItemButton:SetNormalTexture(nil)
-		ItemButton:StyleButton()
+		AS:StyleButton(ItemButton)
 		hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
 			ItemButton:SetBackdropBorderColor(r, g, b)
 		end)

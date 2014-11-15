@@ -18,7 +18,7 @@ function AS:FlyoutButtonCustom()
 		local hotkey = _G[name.."HotKey"]
 		local normal = _G[name.."NormalTexture"]
 
-		button:StyleButton()
+		AS:StyleButton(button)
 		button:SetNormalTexture("")
 
 		if border then
@@ -43,11 +43,10 @@ function AS:FlyoutButtonCustom()
 		hotkey.SetPoint = AS.Noop
 
 		if not button.isSkinned then
-			button:CreateBackdrop("Transparent")
-			local backdrop = button.backdrop or button.Backdrop
-			backdrop:SetAllPoints()
+			AS:CreateBackdrop(button, 'Transparent')
+			button.Backdrop:SetAllPoints()
 
-			icon:SetTexCoord(unpack(AS.TexCoords))
+			AS:SkinTexture(icon)
 			icon:SetInside()
 
 			button.isSkinned = true

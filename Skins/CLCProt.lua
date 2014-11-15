@@ -21,7 +21,7 @@ function AS:CLCProt()
 		local button
 		if isChecked then
 			button = CreateFrame('CheckButton', name , parent)
-			button:StyleButton(true)
+			AS:StyleButton(button)
 		else
 			button = CreateFrame('Button', name , parent)
 		end

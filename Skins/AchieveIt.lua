@@ -7,8 +7,8 @@ function AS:AchieveIt(event, addon)
 		AS:Delay(1, function()
 			for i = 1, 20 do
 				local frame = _G['AchievementFrameCategoriesContainerButton'..i]
-				frame:StripTextures()
-				frame:StyleButton()				
+				AS:StripTextures(frame)
+				AS:StyleButton(frame)				
 			end
 			AS:SkinButton(AchieveIt_Locate_Button)
 			AchieveIt_Locate_Button:ClearAllPoints()

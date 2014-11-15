@@ -6,8 +6,8 @@ function AS:oRA3(event, addon)
 	local SkinOra = function(module)
 		if module == "main" and not oRA3Frame.IsSkinned then
 			local buttonNames = {["oRA3Disband"] = true, ["oRA3Options"] = true}
-			oRA3Frame:StripTextures(true)
-			oRA3Frame:CreateBackdrop("Transparent")
+			AS:StripTextures(oRA3Frame, true)
+			AS:CreateBackdrop(oRA3Frame, 'Transparent')
 			oRA3Frame:SetSize(oRA3Frame:GetWidth()-30, oRA3Frame:GetHeight()-45)
 			oRA3Frame:SetHitRectInsets(0,0,0,0)
 			for i, child in ipairs({oRA3Frame:GetChildren()}) do
@@ -38,7 +38,7 @@ function AS:oRA3(event, addon)
 				end
 				if otype == "ScrollFrame" then
 					if name and name == "oRA3ScrollFrame" then
-						child:StripTextures()
+						AS:StripTextures(child)
 						AS:SkinScrollBar(oRA3ScrollFrameScrollBar)
 					end
 				end
@@ -54,8 +54,8 @@ function AS:oRA3(event, addon)
 					AS:SkinButton(child)
 				end
 				if otype == "ScrollFrame" and name and name == "oRA3ScrollFrame" then
-					child:StripTextures()
-					child:CreateBackdrop('Transparent')
+					AS:StripTextures(child)
+					AS:CreateBackdrop(child, 'Transparent')
 					AS:SkinScrollBar(oRA3ScrollFrameScrollBar)
 				end
 			end
@@ -74,8 +74,8 @@ function AS:oRA3(event, addon)
 		end
 
 		if module == "tanks" and not oRA3TankTopScrollFrame.IsSkinned then
-			oRA3TankTopScrollFrame:StripTextures()
-			oRA3TankBottomScrollFrame:StripTextures()
+			AS:StripTextures(oRA3TankTopScrollFrame)
+			AS:StripTextures(oRA3TankBottomScrollFrame)
 			AS:SkinScrollBar(oRA3TankTopScrollFrameScrollBar)
 			AS:SkinScrollBar(oRA3TankBottomScrollFrameScrollBar)
 			for i = 1, 10 do
@@ -85,8 +85,8 @@ function AS:oRA3(event, addon)
 		end
 
 		if module == "readycheck" and not oRA3ReadyCheck.IsSkinned then
-			oRA3ReadyCheck:StripTextures(true)
-			oRA3ReadyCheck:CreateBackdrop("Transparent")
+			AS:StripTextures(oRA3ReadyCheck, true)
+			AS:CreateBackdrop(oRA3ReadyCheck, 'Transparent')
 			for i,child in ipairs({oRA3ReadyCheck:GetChildren()}) do
 				if child:IsObjectType("Button") and not (child:GetScript("OnDragStart") or child == oRA3ReadyCheck.bar) then
 					AS:SkinCloseButton(child)

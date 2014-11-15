@@ -5,17 +5,16 @@ if not AS:CheckAddOn('Altoholic') then return end
 function AS:Altoholic(event, addon)
 
 	local function ColorAltoBorder(self)
-		local Backdrop = self.backdrop or self.Backdrop
 		if self.id then
 			local quality = select(3, GetItemInfo(self.id))
 			if quality and quality > 1 then
 				local r, g, b = GetItemQualityColor(quality)
-				Backdrop:SetBackdropBorderColor(r, g, b, 1)
+				self.Backdrop:SetBackdropBorderColor(r, g, b, 1)
 			else
-				Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		else
-			Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end
 	end
 
@@ -49,20 +48,20 @@ function AS:Altoholic(event, addon)
 		AS:SkinScrollBar(AltoholicFrameActivityScrollFrameScrollBar)
 		AS:SkinDropDownBox(AltoholicTabSummary_SelectLocation)
 		AltoholicTabSummary_SelectLocation:Width(200)
-		AltoholicFrameSummaryScrollFrame:StripTextures(true)
-		AltoholicFrameBagUsageScrollFrame:StripTextures(true)
-		AltoholicFrameSkillsScrollFrame:StripTextures(true)
-		AltoholicFrameActivityScrollFrame:StripTextures(true)
+		AS:StripTextures(AltoholicFrameSummaryScrollFrame, true)
+		AS:StripTextures(AltoholicFrameBagUsageScrollFrame, true)
+		AS:StripTextures(AltoholicFrameSkillsScrollFrame, true)
+		AS:StripTextures(AltoholicFrameActivityScrollFrame, true)
 
 		AS:SkinTexture(AltoholicTabSummary_RequestSharingIconTexture)
-		AltoholicTabSummary_RequestSharing:StyleButton()
-		AltoholicTabSummary_RequestSharing:CreateBackdrop()
+		AS:StyleButton(AltoholicTabSummary_RequestSharing)
+		AS:CreateBackdrop(AltoholicTabSummary_RequestSharing)
 		AS:SkinTexture(AltoholicTabSummary_OptionsIconTexture)
-		AltoholicTabSummary_Options:StyleButton()
-		AltoholicTabSummary_Options:CreateBackdrop()
+		AS:StyleButton(AltoholicTabSummary_Options)
+		AS:CreateBackdrop(AltoholicTabSummary_Options)
 		AS:SkinTexture(AltoholicTabSummary_OptionsDataStoreIconTexture)
-		AltoholicTabSummary_OptionsDataStore:StyleButton()
-		AltoholicTabSummary_OptionsDataStore:CreateBackdrop()
+		AS:StyleButton(AltoholicTabSummary_OptionsDataStore)
+		AS:CreateBackdrop(AltoholicTabSummary_OptionsDataStore)
 
 		for i = 1, 5 do
 			AS:SkinButton(_G["AltoholicTabSummaryMenuItem"..i], true)
@@ -98,9 +97,9 @@ function AS:Altoholic(event, addon)
 		AS:SkinButton(AltoholicTabCharacters_Sort1)
 		AS:SkinButton(AltoholicTabCharacters_Sort2)
 		AS:SkinButton(AltoholicTabCharacters_Sort3)
-		AltoholicFrameContainersScrollFrame:StripTextures(true)
-		AltoholicFrameQuestsScrollFrame:StripTextures(true)
-		AltoholicFrameRecipesScrollFrame:StripTextures(true)
+		AS:StripTextures(AltoholicFrameContainersScrollFrame, true)
+		AS:StripTextures(AltoholicFrameQuestsScrollFrame, true)
+		AS:StripTextures(AltoholicFrameRecipesScrollFrame, true)
 
 		local Buttons = {
 			'AltoholicTabCharacters_Characters',
@@ -116,8 +115,8 @@ function AS:Altoholic(event, addon)
 
 		for _, object in pairs(Buttons) do
 			AS:SkinTexture(_G[object..'IconTexture'])
-			_G[object]:StyleButton()
-			_G[object]:CreateBackdrop()
+			AS:StyleButton(_G[object])
+			AS:CreateBackdrop(_G[object])
 		end
 
 		for i = 1, 7 do
@@ -130,8 +129,8 @@ function AS:Altoholic(event, addon)
 
 	if addon == "Altoholic_Achievements" then
 		AS:SkinBackdropFrame(AltoholicFrameAchievements)
-		AltoholicFrameAchievementsScrollFrame:StripTextures(true)
-		AltoholicAchievementsMenuScrollFrame:StripTextures(true)
+		AS:StripTextures(AltoholicFrameAchievementsScrollFrame, true)
+		AS:StripTextures(AltoholicAchievementsMenuScrollFrame, true)
 		AS:SkinScrollBar(AltoholicFrameAchievementsScrollFrameScrollBar)
 		AS:SkinScrollBar(AltoholicAchievementsMenuScrollFrameScrollBar)
 		AS:SkinDropDownBox(AltoholicTabAchievements_SelectRealm)
@@ -144,9 +143,8 @@ function AS:Altoholic(event, addon)
 		for i = 1, 8 do
 			for j = 1, 10 do
 				AS:SkinBackdropFrame(_G["AltoholicFrameAchievementsEntry"..i.."Item"..j])
-				local Backdrop = _G["AltoholicFrameAchievementsEntry"..i.."Item"..j].backdrop or _G["AltoholicFrameAchievementsEntry"..i.."Item"..j].Backdrop
 				AS:SkinTexture(_G["AltoholicFrameAchievementsEntry"..i.."Item"..j..'_Background'])
-				_G["AltoholicFrameAchievementsEntry"..i.."Item"..j..'_Background']:SetInside(Backdrop)
+				_G["AltoholicFrameAchievementsEntry"..i.."Item"..j..'_Background']:SetInside(_G["AltoholicFrameAchievementsEntry"..i.."Item"..j].Backdrop)
 			end
 		end
 	end
@@ -165,7 +163,7 @@ function AS:Altoholic(event, addon)
 	end
 
 	if addon == "Altoholic_Grids" then
-		AltoholicFrameGridsScrollFrame:StripTextures(true)
+		AS:StripTextures(AltoholicFrameGridsScrollFrame, true)
 		AS:SkinBackdropFrame(AltoholicFrameGrids)
 		AS:SkinScrollBar(AltoholicFrameGridsScrollFrameScrollBar)
 		AS:SkinDropDownBox(AltoholicTabGrids_SelectRealm)
@@ -182,7 +180,7 @@ function AS:Altoholic(event, addon)
 			for i = 1, 10 do
 				for j = 1, 10 do
 					if _G["AltoholicFrameGridsEntry"..i.."Item"..j.."_Background"] then
-						_G["AltoholicFrameGridsEntry"..i.."Item"..j.."_Background"]:SetTexCoord(.08, .92, .08, .82)
+						AS:SkinTexture(_G["AltoholicFrameGridsEntry"..i.."Item"..j.."_Background"])
 					end
 				end
 			end
@@ -194,7 +192,7 @@ function AS:Altoholic(event, addon)
 		AS:SkinFrame(AltoholicFrameGuildMembers)
 		AS:SkinFrame(AltoholicFrameGuildBank)
 		AS:SkinScrollBar(AltoholicFrameGuildMembersScrollFrameScrollBar)
-		AltoholicFrameGuildMembersScrollFrame:StripTextures(true)
+		AS:StripTextures(AltoholicFrameGuildMembersScrollFrame, true)
 
 		for i = 1, 2 do
 			AS:SkinButton(_G["AltoholicTabGuildMenuItem"..i])
@@ -217,8 +215,8 @@ function AS:Altoholic(event, addon)
 
 	if addon == "Altoholic_Search" then
 		AS:SkinBackdropFrame(AltoholicFrameSearch, true)
-		AltoholicFrameSearchScrollFrame:StripTextures(true)
-		AltoholicSearchMenuScrollFrame:StripTextures(true)
+		AS:StripTextures(AltoholicFrameSearchScrollFrame, true)
+		AS:StripTextures(AltoholicSearchMenuScrollFrame, true)
 		AS:SkinScrollBar(AltoholicFrameSearchScrollFrameScrollBar)
 		AS:SkinScrollBar(AltoholicSearchMenuScrollFrameScrollBar)
 		AS:SkinDropDownBox(AltoholicTabSearch_SelectRarity)

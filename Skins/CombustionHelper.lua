@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('CombustionHelper') then return end
 
 function AS:CombustionHelper()
-	CombustionFrame:CreateBackdrop()
+	AS:CreateBackdrop(CombustionFrame)
 	if combusettingstable then
 		combusettingstable["bgcolornormal"] = AS.BackdropColor
 		combusettingstable["edgecolornormal"] = AS.BackdropColor

@@ -9,7 +9,7 @@ function AS:Outfitter()
 		OutfitterFrameTab1:Size(60, 25)
 		OutfitterFrameTab2:Size(60, 25)
 		OutfitterFrameTab3:Size(60, 25)
-		OutfitterMainFrame:StripTextures(true)
+		AS:StripTextures(OutfitterMainFrame, true)
 		for i = 0, 13 do
 			if _G['OutfitterItem'..i..'OutfitSelected'] then 
 				AS:SkinButton(_G['OutfitterItem'..i..'OutfitSelected'])
@@ -20,7 +20,7 @@ function AS:Outfitter()
 		end
 	end)
 
-	OutfitterMainFrameScrollbarTrench:StripTextures(true)
+	AS:StripTextures(OutfitterMainFrameScrollbarTrench, true)
 	OutfitterFrameTab1:ClearAllPoints()
 	OutfitterFrameTab2:ClearAllPoints()
 	OutfitterFrameTab3:ClearAllPoints()

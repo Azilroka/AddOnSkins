@@ -49,7 +49,7 @@ function AS:BigWigs(event, addon)
 		bar.candyBarIconFrame:ClearAllPoints()
 		bar.candyBarIconFrame:SetPoint("TOPLEFT")
 		bar.candyBarIconFrame:SetPoint("BOTTOMLEFT")
-		bar.candyBarIconFrame:SetTexCoord(unpack(AS.TexCoords))
+		AS:SkinTexture(bar.candyBarIconFrame)
 		bar.candyBarBar:ClearAllPoints()
 		bar.candyBarBar:SetPoint("TOPRIGHT")
 		bar.candyBarBar:SetPoint("BOTTOMRIGHT")
@@ -118,7 +118,7 @@ function AS:BigWigs(event, addon)
 		bar.candyBarIconFrame:ClearAllPoints()
 		bar.candyBarIconFrame:Point("BOTTOMRIGHT", bar, "BOTTOMLEFT", -(ElvUI[1].PixelMode and 1 or 5), 0)
 		bar.candyBarIconFrame:SetSize(ButtonSize, ButtonSize)
-		bar.candyBarIconFrame:SetTexCoord(unpack(AS.TexCoords))
+		AS:SkinTexture(bar.candyBarIconFrame)
 	end
 
 	if (IsAddOnLoaded('BigWigs_Plugins') or event == "ADDON_LOADED" and addon == 'BigWigs_Plugins') then

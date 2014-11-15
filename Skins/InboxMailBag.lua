@@ -3,34 +3,28 @@
 if not AS:CheckAddOn('InboxMailBag') then return end
 
 function AS:InboxMailBag(event)
-	if event == 'PLAYER_ENTERING_WORLD' then return end
-	InboxMailbagFrame:StripTextures()
+	if event ~= 'MAIL_SHOW' then return end
+	AS:StripTextures(InboxMailbagFrame)
 	AS:SkinEditBox(InboxMailbagFrameItemSearchBox)
 	AS:SkinCheckBox(InboxMailbagFrameItemGroupStacksCheckBox)
 	AS:SkinTab(MailFrameTab3)
 	AS:SkinScrollBar(InboxMailbagFrameScrollFrameScrollBar)
-	for i = 1, 99 do
+
+	for i = 1, 42 do
 		local button = _G['InboxMailbagFrameItem'..i]
-		if not button then return end
-		button:CreateBackdrop('Default', true)
-		button:StyleButton()
-		button:DisableDrawLayer('BORDER')
-		button.icon:SetDrawLayer('ARTWORK')
-		button.icon:SetTexCoord(unpack(AS.TexCoords))
-		button.qualityOverlay:SetTexture(nil)
-		button.qualityOverlay.SetTexture = AS.Noop
-		local backdrop = button.backdrop or button.Backdrop
-		button:SetNormalTexture(nil)
-		button.SetNormalTexture = AS.Noop
-		backdrop:SetOutside(button.icon)
-		button.icon:SetParent(backdrop)
-		button:HookScript('OnUpdate', function()
-			if MAILBAGDB["QUALITY_COLORS"] and button.qualityOverlay:IsShown() and not button.searchOverlay:IsShown() then
-				backdrop:SetBackdropBorderColor(button.qualityOverlay:GetVertexColor())
-			else
-				backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end
-		end)
+		if button then
+			AS:SkinFrame(button)
+			button.icon:SetInside()
+			AS:SkinTexture(button.icon)
+			button.qualityOverlay:SetTexture(nil)
+			button:SetNormalTexture(nil)
+			hooksecurefunc(button.qualityOverlay, 'SetVertexColor', function(self, r, g, b, a)
+				button:SetBackdropBorderColor(r, g, b)
+			end)
+			hooksecurefunc(button.qualityOverlay, 'Hide', function(self)
+				button:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end)
+		end
 	end
 	AS:UnregisterSkinEvent('InboxMailBag', event)
 end

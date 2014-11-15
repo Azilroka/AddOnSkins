@@ -13,8 +13,8 @@ function AS:AdvancedIconSelector()
 		Popup.iconsFrame:HookScript('OnUpdate', function(self)
 			for i = 1, 1024 do
 				if self.icons[i] and not self.icons[i].IsStyled then
-					self.icons[i]:SetTemplate()
-					self.icons[i]:StyleButton()
+					AS:SetTemplate(self.icons[i])
+					AS:StyleButton(self.icons[i])
 					self.icons[i].IsStyled = true
 				end
 				if self.icons[i] and self.icons[i]:GetNormalTexture() and not self.icons[i].IsTextureDone then

@@ -6,7 +6,7 @@ function AS:DoubleWideTradeSkills(event, addon)
 	if addon ~= 'DoubleWideTradeSkills' then return end
 	AS:SkinFrame(TradeSkillFrame)
 	AS:SkinStatusBar(TradeSkillRankFrame)
-	TradeSkillListScrollFrame:StripTextures()
+	AS:StripTextures(TradeSkillListScrollFrame)
 end
 
 AS:RegisterSkin('DoubleWideTradeSkills', AS.DoubleWideTradeSkills, 'ADDON_LOADED')

@@ -129,7 +129,7 @@ function AS:KarniCrap()
 		AS:SkinEditBox(object)
 	end]]
 
-	KarniCrap_Inventory_ScrollBar:StripTextures(true)
+	AS:StripTextures(KarniCrap_Inventory_ScrollBar, true)
 	KarniCrapTab1:Point('BOTTOMLEFT', KarniCrap, 'BOTTOMLEFT',0,-30)
 	AS:SkinScrollBar(KarniCrap_Inventory_ScrollBarScrollBar)
 	AS:SkinCloseButton(KarniCrapCloseButton)

@@ -22,7 +22,7 @@ function AS:LinkWrangler()
 			local quality = select(3, GetItemInfo(link))
 			r, g, b = GetItemQualityColor(tonumber(quality))
 		end
-		frame:SetTemplate("Default")
+		AS:SetTemplate(frame, 'Default')
 		frame:SetBackdropBorderColor(r,g,b)
 		local framename = frame:GetName()
 		LWSkin_SkinButton(_G[framename.."CloseButton"], Path.."close")

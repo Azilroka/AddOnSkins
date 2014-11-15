@@ -12,7 +12,7 @@ function AS:AdiCastBar()
 
 	for _, frame in pairs(frames) do
 		AS:SkinBackdropFrame(frame)
-		frame.Border:StripTextures()
+		AS:StripTextures(frame.Border)
 		frame.Bar:SetStatusBarTexture(AS.NormTex)
 		frame.Text:SetFont(AS.Font, 12, 'THINOUTLINE')
 		frame.Bar.TimeText:SetFont(AS.Font, 12, 'THINOUTLINE')

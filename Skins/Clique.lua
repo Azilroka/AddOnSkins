@@ -39,7 +39,7 @@ function AS:Clique()
 	}
 
 	for _, object in pairs(CliqueTabs) do
-		object:StripTextures(true)
+		AS:StripTextures(object, true)
 	end
 
 	CliqueConfigPage1:SetScript("OnShow", function(self)
@@ -59,7 +59,7 @@ function AS:Clique()
 		CliqueRow1:SetPoint("TOPLEFT",5,-(CliqueConfigPage1Column1:GetHeight() +3))
 	end)
 
-	CliqueConfigPage1_VSlider:StripTextures(true)
+	AS:StripTextures(CliqueConfigPage1_VSlider, true)
 	CliqueConfigPage1ButtonSpell:SetPoint('BOTTOMLEFT', CliqueConfig, 'BOTTOMLEFT', 3, 2)
 	CliqueConfigPage1ButtonOptions:SetPoint('BOTTOMRIGHT', CliqueConfig, 'BOTTOMRIGHT', -5, 2)
 	CliqueConfigPage2ButtonSave:SetPoint("BOTTOMLEFT", CliqueConfig,"BOTTOMLEFT", 3, 2)
@@ -70,7 +70,7 @@ function AS:Clique()
 	AS:SkinTexture(CliqueSpellTab:GetNormalTexture())
 	CliqueSpellTab:GetNormalTexture():ClearAllPoints()
 	CliqueSpellTab:GetNormalTexture():SetInside()
-	CliqueConfigInset:StripTextures()
+	AS:StripTextures(CliqueConfigInset)
 end
 
 AS:RegisterSkin('Clique', AS.Clique)

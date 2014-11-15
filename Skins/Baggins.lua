@@ -36,8 +36,8 @@ function AS:Baggins()
 
 		button:SetNormalTexture("")
 		button:SetPushedTexture("")
-		button:SetTemplate()
-		button:StyleButton()
+		AS:SetTemplate(button)
+		AS:StyleButton(button)
 		button.IsSkinned = true
 	end
 

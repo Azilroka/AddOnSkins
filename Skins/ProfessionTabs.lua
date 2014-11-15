@@ -9,9 +9,9 @@ function AS:ProfessionTabs(event, addon)
 		for i = 1, self:GetNumChildren() do
 			local Child = select(i, self:GetChildren())
 			if Child:IsObjectType('CheckButton') and not Child.IsSkinned then
-				Child:CreateBackdrop()
+				AS:CreateBackdrop(Child)
 				AS:SkinTexture(Child:GetNormalTexture())
-				Child:StyleButton()
+				AS:StyleButton(Child)
 				Child:DisableDrawLayer('BACKGROUND')
 				Child.IsSkinned = true
 			end

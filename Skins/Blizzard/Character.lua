@@ -1,6 +1,5 @@
 local AS = unpack(AddOnSkins)
 
-local name = 'Blizzard_CharacterFrame'
 function AS:Blizzard_CharacterFrame()
 	AS:SkinCloseButton(CharacterFrameCloseButton)
 	AS:SkinFrame(CharacterFrame)
@@ -44,12 +43,12 @@ function AS:Blizzard_CharacterFrame()
 		hooksecurefunc(Slot.IconBorder, 'Hide', function(self)
 			self:GetParent():SetBackdropBorderColor(unpack(AS.BorderColor))
 		end)
-		Slot:StyleButton(false)
+		AS:StyleButton(Slot)
 	end
 
-	CharacterFrameInset:StripTextures()
-	CharacterFrameInsetRight:StripTextures()
-	CharacterStatsPane:StripTextures()
+	AS:StripTextures(CharacterFrameInset)
+	AS:StripTextures(CharacterFrameInsetRight)
+	AS:StripTextures(CharacterStatsPane)
 
 	CharacterFrameExpandButton:Size(CharacterFrameExpandButton:GetWidth() - 5, CharacterFrameExpandButton:GetHeight() - 5)
 	AS:SkinNextPrevButton(CharacterFrameExpandButton)
@@ -58,12 +57,12 @@ function AS:Blizzard_CharacterFrame()
 	EquipmentFlyoutFrameHighlight:Kill()
 
 	local function SkinItemFlyouts()
-		EquipmentFlyoutFrame.buttonFrame:StripTextures()
+		AS:StripTextures(EquipmentFlyoutFrame.buttonFrame)
 		for i = 1, #EquipmentFlyoutFrame.buttons do
 			local button = _G["EquipmentFlyoutFrameButton"..i]
 			if not button.isStyled then
-				button:SetTemplate()
-				button:StyleButton(false)
+				AS:SetTemplate(button)
+				AS:StyleButton(button)
 				button.IconBorder:SetTexture(nil)
 				button:HookScript('OnUpdate', function(self)
 					if self.IconBorder:IsShown() then
@@ -122,7 +121,7 @@ function AS:Blizzard_CharacterFrame()
 	AS:SkinScrollBar(GearManagerDialogPopupScrollFrameScrollBar)
 	AS:SkinFrame(GearManagerDialogPopup)
 	GearManagerDialogPopup:Point("LEFT", PaperDollFrame, "RIGHT", 4, 0)
-	GearManagerDialogPopupScrollFrame:StripTextures()
+	AS:StripTextures(GearManagerDialogPopupScrollFrame)
 	AS:SkinEditBox(GearManagerDialogPopupEditBox)
 	AS:SkinButton(GearManagerDialogPopupOkay)
 	AS:SkinButton(GearManagerDialogPopupCancel)
@@ -133,7 +132,7 @@ function AS:Blizzard_CharacterFrame()
 	PaperDollEquipmentManagerPaneEquipSet.ButtonBackground:SetTexture(nil)
 	PaperDollEquipmentManagerPane:HookScript("OnShow", function(self)
 		for x, object in pairs(PaperDollEquipmentManagerPane.buttons) do
-			AS:SkinFrame(object, nil, true)
+			AS:SetTemplate(object)
 			object.BgTop:SetTexture(nil)
 			object.HighlightBar:SetInside()
 			object.SelectedBar:SetInside()
@@ -164,10 +163,9 @@ function AS:Blizzard_CharacterFrame()
 		tab.Hider:Point("TOPLEFT", 3, -4)
 		tab.Hider:Point("BOTTOMRIGHT", -1, 0)
 		tab.TabBg:Kill()
-		tab:CreateBackdrop("Default")
-		local Backdrop = tab.Backdrop or tab.backdrop
-		Backdrop:Point("TOPLEFT", 1, -2)
-		Backdrop:Point("BOTTOMRIGHT", 1, -2)
+		AS:CreateBackdrop(tab, 'Default')
+		tab.Backdrop:Point("TOPLEFT", 1, -2)
+		tab.Backdrop:Point("BOTTOMRIGHT", 1, -2)
 
 		if i == 1 then
 			for i = 1, tab:GetNumRegions() do
@@ -188,13 +186,13 @@ function AS:Blizzard_CharacterFrame()
 	end
 
 	-- Pet
-	PetModelFrame:CreateBackdrop("Default")
+	AS:CreateBackdrop(PetModelFrame, 'Default')
 	AS:SkinNextPrevButton(PetModelFrameRotateRightButton)
 	AS:SkinNextPrevButton(PetModelFrameRotateLeftButton)
 	PetModelFrameRotateRightButton:ClearAllPoints()
 	PetModelFrameRotateRightButton:Point("LEFT", PetModelFrameRotateLeftButton, "RIGHT", 4, 0)
 
-	PetPaperDollPetInfo:CreateBackdrop("Default")
+	AS:CreateBackdrop(PetPaperDollPetInfo, 'Default')
 	PetPaperDollPetInfo:Size(24, 24)
 	PetPaperDollPetInfo:GetRegions():SetTexCoord(.12, .63, .15, .55)
 
@@ -239,7 +237,7 @@ function AS:Blizzard_CharacterFrame()
 		end
 	end
 
-	ReputationListScrollFrame:StripTextures()
+	AS:StripTextures(ReputationListScrollFrame)
 	AS:SkinFrame(ReputationDetailFrame)
 	ReputationDetailFrame:Point("TOPLEFT", ReputationFrame, "TOPRIGHT", 4, -28)
 	hooksecurefunc("ReputationFrame_Update", UpdateFaction)
@@ -260,15 +258,16 @@ function AS:Blizzard_CharacterFrame()
 	hooksecurefunc('TokenFrame_Update', function()
 		for i = 1, GetCurrencyListSize() do
 			local button = _G["TokenFrameContainerButton"..i]
-			if button then
-				button.highlight:Hide()
-				button.categoryMiddle:Hide()	
-				button.categoryLeft:Hide()	
-				button.categoryRight:Hide()
+			if button and not button.isSkinned then
+				button.highlight:Kill()
+				button.categoryMiddle:Kill()
+				button.categoryLeft:Kill()
+				button.categoryRight:Kill()
 				AS:SkinTexture(button.icon)
+				button.isSkinned = true
 			end
 		end
 	end)
 end
 
-AS:RegisterSkin(name, AS.Blizzard_CharacterFrame)
+AS:RegisterSkin('Blizzard_CharacterFrame', AS.Blizzard_CharacterFrame)

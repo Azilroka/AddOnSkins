@@ -43,12 +43,12 @@ function AS:TradeSkillDW()
 			local Child = select(i, self:GetChildren())
 			if Child:IsObjectType('CheckButton') and not Child.IsSkinned then
 				Child:DisableDrawLayer('BACKGROUND')
-				Child:CreateBackdrop()
+				AS:CreateBackdrop(Child)
 				AS:SkinTexture(Child:GetNormalTexture())
 				Child:GetNormalTexture():SetInside()
 				Child:GetNormalTexture().SetPoint = AS.Noop
 				Child:GetNormalTexture().SetTexCoord = AS.Noop
-				Child:StyleButton()
+				AS:StyleButton(Child)
 				Child.IsSkinned = true
 			end
 		end
@@ -71,7 +71,7 @@ function AS:TradeSkillDW()
 				self.Text:SetPoint('CENTER', -1, 0)
 			end
 		end)
-		TradeSkillListScrollFrame:StripTextures(true)
+		AS:StripTextures(TradeSkillListScrollFrame, true)
 		SkinTabs(self)
 		self.isSkinned = true
 	end)
@@ -79,10 +79,10 @@ function AS:TradeSkillDW()
 	AS:SkinEditBox(TradeSkillFrameSearchBox)
 	AS:SkinEditBox(TradeSkillInputBox)
 
-	TradeSkillDetailScrollFrame:StripTextures(true)
-	TradeSkillFrameInset:StripTextures(true)
-	TradeSkillExpandButtonFrame:StripTextures(true)
-	TradeSkillDetailScrollChildFrame:StripTextures(true)
+	AS:StripTextures(TradeSkillDetailScrollFrame, true)
+	AS:StripTextures(TradeSkillFrameInset, true)
+	AS:StripTextures(TradeSkillExpandButtonFrame, true)
+	AS:StripTextures(TradeSkillDetailScrollChildFrame, true)
 
 	TradeSkillGuildFrame:Point('BOTTOMLEFT', TradeSkillFrame, 'BOTTOMRIGHT', 3, 19)
 
@@ -97,8 +97,8 @@ function AS:TradeSkillDW()
 	local once = false
 	hooksecurefunc('TradeSkillFrame_SetSelection', function(id)
 		if not TradeSkillSkillIcon.isSkinned then
-			TradeSkillSkillIcon:StyleButton()
-			TradeSkillSkillIcon:SetTemplate('Default')
+			AS:StyleButton(TradeSkillSkillIcon)
+			AS:SetTemplate(TradeSkillSkillIcon, 'Default')
 			TradeSkillSkillIcon.isSkinned = true
 		end
 		if TradeSkillSkillIcon:GetNormalTexture() then
@@ -136,16 +136,16 @@ function AS:TradeSkillDW()
 
 	AS:SkinFrame(TradeSkillDW_QueueFrame, nil, nil, true)
 	AS:SkinCloseButton(TradeSkillDW_QueueFrameCloseButton)
-	TradeSkillDW_QueueFrameInset:StripTextures(true)
+	AS:StripTextures(TradeSkillDW_QueueFrameInset, true)
 	AS:SkinButton(TradeSkillDW_QueueFrameClear, true)
 	AS:SkinButton(TradeSkillDW_QueueFrameDown, true)
 	AS:SkinButton(TradeSkillDW_QueueFrameUp, true)
 	AS:SkinButton(TradeSkillDW_QueueFrameDo, true)
-	TradeSkillDW_QueueFrameDetailScrollFrame:StripTextures()
-	TradeSkillDW_QueueFrameDetailScrollFrameChildFrame:StripTextures()
+	AS:StripTextures(TradeSkillDW_QueueFrameDetailScrollFrame)
+	AS:StripTextures(TradeSkillDW_QueueFrameDetailScrollFrameChildFrame)
 
 	for i = 1, 8 do
-		_G['TradeSkillDW_QueueFrameDetailScrollFrameChildFrameReagent'..i]:StripTextures()
+		AS:StripTextures(_G['TradeSkillDW_QueueFrameDetailScrollFrameChildFrameReagent'..i])
 		AS:SkinTexture(_G['TradeSkillDW_QueueFrameDetailScrollFrameChildFrameReagent'..i..'IconTexture'])
 	end
 

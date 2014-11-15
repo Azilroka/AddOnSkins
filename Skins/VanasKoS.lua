@@ -3,7 +3,7 @@
 if not AS:CheckAddOn('VanasKoS') then return end
 
 function AS:VanasKoS()
-	VanasKoS_WarnFrame:SetTemplate("Transparent")
+	AS:SetTemplate(VanasKoS_WarnFrame, 'Transparent')
 	VanasKoS_WarnFrame.SetBackdropBorderColor = AS.Noop
 
 	VanasKoS_FontKos:SetFont(AS.PixelFont, 8, "MONOCHROMEOUTLINE")
@@ -35,7 +35,7 @@ function AS:VanasKoS()
 	end
 
 	for i = 1, 5 do
-		_G["VanasKoSListFrameColButton"..i]:StripTextures()
+		AS:StripTextures(_G["VanasKoSListFrameColButton"..i])
 	end
 
 	VanasKoSPvPStatsCharacterDropDown:ClearAllPoints()

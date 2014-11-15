@@ -17,7 +17,7 @@ function AS:CLCInfo(event, addon)
 
 			texMain:ClearAllPoints()
 			texMain:SetInside(self)
-			texMain:SetTexCoord(unpack(AS.TexCoords))
+			AS:SkinTexture(texMain)
 
 			texNormal:Hide()
 			texHighlight:Hide()
@@ -25,7 +25,7 @@ function AS:CLCInfo(event, addon)
 
 			if not self.elements.backdropFrame then
 				local bg = CreateFrame('Frame', nil, self.elements)
-				bg:SetTemplate('Default')
+				AS:SetTemplate(bg, 'Default')
 				bg:SetOutside(self)
 				bg:SetFrameLevel(self:GetFrameLevel() - 1)
 				bg:Show()
@@ -44,7 +44,7 @@ function AS:CLCInfo(event, addon)
 
 			if not bar.backdropFrame then
 				local bg = CreateFrame('Frame', nil, bar)
-				bg:SetTemplate('Default')
+				AS:SetTemplate(bg, 'Default')
 				bg:SetOutside(self)
 				bg:SetFrameLevel(self:GetFrameLevel() - 1)
 				bg:Show()
@@ -53,7 +53,7 @@ function AS:CLCInfo(event, addon)
 				bar.backdropFrame:Show()
 			end
 
-			bar.iconFrame:SetTemplate()
+			AS:SetTemplate(bar.iconFrame)
 		end
 
 		local function TryGridPositioning(self)
@@ -136,7 +136,7 @@ function AS:CLCInfo(event, addon)
 	end
 	if addon == 'clcInfo_Options' then
 		local function GetSkinTypeList()
-			local list = { ["Default"] = "Default", ["BareBone"] = "BareBone", ['AddOnSkins'] = 'AddOnSkins' }
+			local list = { ['Default'] = 'Default', ["BareBone"] = "BareBone", ['AddOnSkins'] = 'AddOnSkins' }
 			if clcInfo.MSQ then list["Masque"] = "Masque" end
 			return list
 		end

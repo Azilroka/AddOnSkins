@@ -44,7 +44,7 @@ function AS:BGDefender()
 	}
 
 	for _, object in pairs(StripAllTextures) do
-		_G[object]:StripTextures()
+		AS:StripTextures(_G[object])
 	end	
 
 	for _, button in pairs(buttons) do

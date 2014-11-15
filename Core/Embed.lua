@@ -4,6 +4,7 @@ local format, gsub, pairs, ipairs, select, tinsert, tonumber = format, gsub, pai
 
 AS.ChatFrameHider = CreateFrame('Frame')
 AS.ChatFrameHider:Hide()
+local EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow
 
 function AS:GetChatWindowInfo()
 	local ChatTabInfo = {['NONE'] = 'NONE'}
@@ -26,8 +27,33 @@ end
 
 function AS:EmbedInit()
 	if AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual') then
-		AS:CreateEmbedSystem()
-		AS:Embed_Check(true)
+		if not AS.EmbedSystemCreated then
+			EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
+			EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
+			EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
+
+			AS.EmbedSystemCreated = true
+
+			AS:EmbedSystemHooks()
+			AS:Embed_Check(true)
+
+			EmbedSystem_MainWindow:HookScript('OnShow', AS.Embed_Show)
+			EmbedSystem_MainWindow:HookScript('OnHide', AS.Embed_Hide)
+			AS:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
+			AS:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
+
+			UIParent:HookScript('OnShow', function()
+				if not UnitAffectingCombat('player') then
+					if AS:CheckOption('EmbedIsHidden') or AS:CheckOption('EmbedOoC') then
+						AS:Embed_Hide()
+					else
+						AS:Embed_Show()
+					end
+				end
+			end)
+
+			UIParent:GetScript('OnShow')(UIParent)
+		end
 	end
 end
 
@@ -71,7 +97,7 @@ end
 function AS:Embed_Check(Message)
 	if not (AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual')) then return end
 	if not AS.EmbedSystemCreated then
-		AS:CreateEmbedSystem()
+		AS:EmbedInit()
 		Message = true
 	end
 	AS:Embed_Toggle(Message)

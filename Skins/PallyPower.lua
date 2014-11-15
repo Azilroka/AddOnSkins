@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('PallyPower') then return end
 
 function AS:PallyPower()
-	self.db = LibStub("AceDB-3.0"):New("PallyPowerDB", PallyPower.defaults, "Default")
+	self.db = LibStub("AceDB-3.0"):New("PallyPowerDB", PallyPower.defaults, 'Default')
 	local settings = self.db.profile
 	settings.buffscale = 1
 	settings.display.buttonWidth = 103
@@ -24,7 +24,7 @@ function AS:PallyPower()
 				frame.bg = CreateFrame("Frame", nil, frame)
 				frame.bg:SetAllPoints(frame)
 				frame.bg:SetFrameLevel(frame:GetFrameLevel() - 1)
-				frame.bg:SetTemplate("Transparent")
+				AS:SetTemplate(frame.bg, 'Transparent')
 			end
 
 			local fname = frame:GetName()
@@ -68,14 +68,14 @@ function AS:PallyPower()
 
 					local panel = CreateFrame("Frame", fname.."New"..tex, frame)
 					panel:SetAllPoints(oldicon)
-					panel:SetTemplate("Default")
+					AS:SetTemplate(panel, 'Default')
 
 					local icon = panel:CreateTexture()
 					panel.icon = panel
 
 					icon:SetPoint("TOPLEFT", panel, 2, -2)
 					icon:SetPoint("BOTTOMRIGHT", panel, -2, 2)
-					icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+					AS:SkinTexture(icon)
 					icon:SetTexture(oldicon:GetTexture())
 
 					oldicon.SetTexture = function(tex, texstring)

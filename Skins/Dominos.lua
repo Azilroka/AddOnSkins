@@ -43,12 +43,11 @@ function AS:Dominos()
 		end
 
 		if not button.isSkinned then
-			button:CreateBackdrop("Transparent")
-			button:StyleButton()
-			local backdrop = button.backdrop or button.Backdrop
-			backdrop:SetAllPoints()
+			AS:CreateBackdrop(button, 'Transparent')
+			AS:StyleButton(button)
+			button.Backdrop:SetAllPoints()
 
-			icon:SetTexCoord(unpack(AS.TexCoords))
+			AS:SkinTexture(icon)
 			icon:SetInside()
 
 			button.isSkinned = true
@@ -64,7 +63,7 @@ function AS:Dominos()
 	local function StyleSmallButton(button, icon, name, hotkey, pet)
 		if not button then return end
 		local flash = _G[name.."Flash"]
-		button:StyleButton()
+		AS:StyleButton(button)
 		button:SetNormalTexture("")
 
 		if flash then
@@ -80,11 +79,11 @@ function AS:Dominos()
 		end
 
 		if not button.isSkinned then
-			button:CreateBackdrop("Transparent")
-			button:StyleButton()
+			AS:CreateBackdrop(button, 'Transparent')
+			AS:StyleButton(button)
 			button.backdrop:SetAllPoints()
 
-			icon:SetTexCoord(unpack(AS.TexCoords))
+			AS:SkinTexture(icon)
 			icon:ClearAllPoints()
 			icon:SetInside()
 
@@ -145,7 +144,7 @@ function AS:Dominos()
 		end
 
 		if DominosFramexp then
-			DominosFramexp:CreateBackdrop('Transparent')
+			AS:CreateBackdrop(DominosFramexp, 'Transparent')
 		end
 	end
 end

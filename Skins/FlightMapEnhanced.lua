@@ -8,7 +8,7 @@ function AS:FlightMapEnhanced()
 	AS:SkinScrollBar(FlightMapEnhancedTaxiChoiceContainerScrollBar)
 	FlightMapEnhancedTaxiChoice:HookScript('OnShow', function()
 		for i = 1, 34 do
-			if _G['FlightMapEnhancedTaxiChoiceContainerButton'..i] then _G['FlightMapEnhancedTaxiChoiceContainerButton'..i]:StripTextures() end
+			if _G['FlightMapEnhancedTaxiChoiceContainerButton'..i] then AS:StripTextures(_G['FlightMapEnhancedTaxiChoiceContainerButton'..i]) end
 		end
 	end)
 	hooksecurefunc('FlightMapEnhancedTaxiChoiceButton_OnEnter', function() GameTooltip:Show() end)

@@ -42,12 +42,11 @@ function AS:Bartender4()
 		end
 
 		if not button.isSkinned then
-			button:CreateBackdrop("Transparent")
-			button:StyleButton()
-			local backdrop = button.backdrop or button.Backdrop
-			backdrop:SetAllPoints()
+			AS:CreateBackdrop(button, 'Transparent')
+			AS:StyleButton(button)
+			button.Backdrop:SetAllPoints()
 
-			icon:SetTexCoord(unpack(AS.TexCoords))
+			AS:SkinTexture(icon)
 			icon.SetTexCoord = function() end
 			icon:SetInside()
 

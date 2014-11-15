@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('ZygorGuidesViewer') then return end
 
 function AS:Zygor()
-	ZygorGuidesViewerFrame:StripTextures(true)
+	AS:StripTextures(ZygorGuidesViewerFrame, true)
 	AS:SkinFrame(ZygorGuidesViewerFrame_Border)
 	AS:SkinFrame(ZygorGuidesViewer_CreatureViewer, 'Transparent', true)
 
@@ -12,7 +12,7 @@ function AS:Zygor()
 	end
 
 	if ZygorGuidesViewerFrame:IsShown() then AS:SkinFrame(ZygorGuidesViewerFrame_Border) end
-	ZygorGuidesViewerFrame_Border:HookScript('OnHide', function(self) self:StripTextures(true) end)
+	ZygorGuidesViewerFrame_Border:HookScript('OnHide', function(self) AS:StripTextures(self, true) end)
 	ZygorGuidesViewerFrame_Border:HookScript('OnShow', function(self) AS:SkinFrame(self) end)
 end
 

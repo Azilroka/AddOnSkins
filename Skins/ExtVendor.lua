@@ -12,8 +12,8 @@ function AS:ExtVendor()
 		local b = _G['MerchantItem'..i..'ItemButton']
 		local t = _G['MerchantItem'..i..'ItemButtonIconTexture']
 		local item_bar = _G['MerchantItem'..i]
-		b:StripTextures()
-		b:StyleButton(false)
+		AS:StripTextures(b)
+		AS:StyleButton(b)
 		b:Point('TOPLEFT', item_bar, 'TOPLEFT', 4, -4)
 		AS:SkinTexture(t)
 		t:ClearAllPoints()

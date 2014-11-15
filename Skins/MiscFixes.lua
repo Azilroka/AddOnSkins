@@ -5,7 +5,7 @@ function AS:MiscellaneousFixes(event, addon)
 		for i = 1, LFG_ROLE_NUM_SHORTAGE_TYPES do
 			if _G['LFGDungeonReadyDialogRewardsFrameReward'..i] and not _G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone then
 				_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Border']:Kill()
-				_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Texture']:SetTexCoord(unpack(AS.TexCoords))
+				AS:SkinTexture(_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Texture'])
 				_G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone = true
 			end
 		end
@@ -35,12 +35,12 @@ function AS:MiscellaneousFixes(event, addon)
 
 	--[[ -- RAF Reward Frame
 	AS:SkinFrame(ProductChoiceFrame)
-	ProductChoiceFrame.Inset:StripTextures()
+	AS:StripTextures(ProductChoiceFrame.Inset)
 	AS:SkinButton(ProductChoiceFrame.Inset.ClaimButton)
 	AS:SkinCloseButton(ProductChoiceFrameCloseButton)
 	ProductChoiceFrame:HookScript('OnShow', function(self)
 		for _, object in pairs(self.Inset.Buttons) do
-			object:StripTextures()
+			AS:StripTextures(object)
 		end
 	end)
 	]]

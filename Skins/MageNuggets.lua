@@ -67,10 +67,7 @@ function AS:MageNuggets()
 			_G[object..'_Text']:SetDrawLayer('OVERLAY', 8)
 			_G[object..'_Text2']:SetDrawLayer('OVERLAY', 8)
 			_G[object..'_Bar']:SetStatusBarTexture(AS.NormTex)
-			_G[object..'_Bar']:CreateBackdrop()
-			local Backdrop = _G[object..'_Bar'].backdrop or _G[object..'_Bar'].Backdrop
-			Backdrop:SetPoint('TOPLEFT', -2, 2)
-			Backdrop:SetPoint('BOTTOMRIGHT', 2, -2)
+			AS:CreateBackdrop(_G[object..'_Bar'])
 		end
 	end
 
@@ -94,7 +91,7 @@ function AS:MageNuggets()
 	MageNugFoFProcFrame_ProcBar:SetStatusBarTexture(AS.NormTex)
 
 	MageNugMI_FrameTexture1BG = CreateFrame('Frame', nil, MageNugMI_Frame)
-	MageNugMI_FrameTexture1BG:SetTemplate('Default')
+	AS:SetTemplate(MageNugMI_FrameTexture1BG, 'Default')
 	MageNugMI_FrameTexture1BG:SetOutside(MageNugMI_FrameTexture1)
 	MageNugMI_FrameTexture1BG:SetFrameLevel(MageNugMI_Frame:GetFrameLevel() + 1)
 	MageNugMI_FrameTexture1:SetDrawLayer('OVERLAY')
@@ -102,7 +99,7 @@ function AS:MageNuggets()
 	MageNugMI_Frame_MiBar:SetPoint('LEFT', MageNugMI_FrameTexture1, 'LEFT', 20, 0)
 
 	MageNugCauterize_FrameTexture1BG = CreateFrame('Frame', nil, MageNugCauterize_Frame)
-	MageNugCauterize_FrameTexture1BG:SetTemplate('Default')
+	AS:SetTemplate(MageNugCauterize_FrameTexture1BG, 'Default')
 	MageNugCauterize_FrameTexture1BG:SetOutside(MageNugCauterize_FrameTexture1)
 	MageNugCauterize_FrameTexture1BG:SetFrameLevel(MageNugMI_Frame:GetFrameLevel() + 1)
 	MageNugCauterize_FrameTexture1:SetDrawLayer('OVERLAY')
@@ -110,7 +107,7 @@ function AS:MageNuggets()
 	MageNugCauterize_Frame_Bar:SetPoint('LEFT', MageNugCauterize_FrameTexture1, 'LEFT', 20, 0)
 
 	MageNugInvokers_FrameTexture1BG = CreateFrame('Frame', nil, MageNugInvokers_Frame)
-	MageNugInvokers_FrameTexture1BG:SetTemplate('Default')
+	AS:SetTemplate(MageNugInvokers_FrameTexture1BG, 'Default')
 	MageNugInvokers_FrameTexture1BG:SetOutside(MageNugInvokers_FrameTexture1)
 	MageNugInvokers_FrameTexture1BG:SetFrameLevel(MageNugMI_Frame:GetFrameLevel() + 1)
 	MageNugInvokers_FrameTexture1:SetDrawLayer('OVERLAY')

@@ -51,8 +51,8 @@ function AS:Tongues()
 	AS:SkinButton(Tongues.UI.MainMenu.Translators.ClearTranslatorButton.Frame)
 	AS:SkinButton(Tongues.UI.MainMenu.Translators.ListTranslatorButton.Frame)
 	Tongues.UI.MainMenu.Minimize.Frame:SetPoint("TOPLEFT", Tongues.UI.MainMenu.Frame, 2, -2)
-	Tongues.UI.MainMenu.Minimize.Frame:CreateBackdrop()
-	Tongues.UI.MainMenu.Minimize.texture[1]:SetTexCoord(unpack(AS.TexCoords))
+	AS:CreateBackdrop(Tongues.UI.MainMenu.Minimize.Frame)
+	AS:SkinTexture(Tongues.UI.MainMenu.Minimize.texture[1])
 end
 
 AS:RegisterSkin('Tongues', AS.Tongues)

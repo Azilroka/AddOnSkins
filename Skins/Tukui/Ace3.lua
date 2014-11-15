@@ -10,7 +10,7 @@ function AS:Ace3()
 	AceGUI.RegisterAsWidget = function(self, widget)
 		local TYPE = widget.type
 		if TYPE == 'MultiLineEditBox' then
-			widget.scrollBG:SetTemplate('Default')
+			AS:SetTemplate(widget.scrollBG, 'Default')
 			AS:SkinButton(widget.button)
 			AS:SkinScrollBar(widget.scrollBar)
 			widget.scrollBar:SetPoint('RIGHT', widget.frame, 'RIGHT', 0 -4)
@@ -23,7 +23,7 @@ function AS:Ace3()
 
 			if not widget.skinnedCheckBG then
 				widget.skinnedCheckBG = CreateFrame('Frame', nil, widget.frame)
-				widget.skinnedCheckBG:SetTemplate('Default', true)
+				AS:SetTemplate(widget.skinnedCheckBG, 'Default', true)
 				widget.skinnedCheckBG:SetInside(widget.checkbg, 4, 4)
 				widget.skinnedCheckBG:SetScript('OnShow', function() widget.check:SetInside() widget.check:SetTexture(AS.NormTex) widget.check:SetVertexColor(0, .44, .87) end)
 			end
@@ -39,14 +39,13 @@ function AS:Ace3()
 			button:Point('RIGHT', frame, 'RIGHT', -20, 0)
 
 			AS:SkinNextPrevButton(button, true)
-			local Backdrop = frame.backdrop or frame.Backdrop
-			Backdrop:Point('TOPLEFT', 20, -2)
-			Backdrop:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
-			button:SetParent(Backdrop)
-			text:SetParent(Backdrop)
+			frame.Backdrop:Point('TOPLEFT', 20, -2)
+			frame.Backdrop:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
+			button:SetParent(frame.Backdrop)
+			text:SetParent(frame.Backdrop)
 			button:HookScript('OnClick', function(this)
 				local self = this.obj
-				self.pullout.frame:SetTemplate('Default', true)
+				AS:SetTemplate(self.pullout.frame, 'Default', true)
 			end)
 		elseif TYPE == 'LSM30_Font' or TYPE == 'LSM30_Sound' or TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' or TYPE == 'LSM30_Statusbar' then
 			local frame = widget.frame
@@ -61,67 +60,48 @@ function AS:Ace3()
 			button:ClearAllPoints()
 			button:Point('RIGHT', frame, 'RIGHT', -10, -6)
 
-			local Backdrop = frame.backdrop or frame.Backdrop
 			if TYPE == 'LSM30_Font' then
-				Backdrop:Point('TOPLEFT', 20, -17)
+				frame.Backdrop:Point('TOPLEFT', 20, -17)
 			elseif TYPE == 'LSM30_Sound' then
-				Backdrop:Point('TOPLEFT', 20, -17)
-				widget.soundbutton:SetParent(Backdrop)
+				frame.Backdrop:Point('TOPLEFT', 20, -17)
+				widget.soundbutton:SetParent(frame.Backdrop)
 				widget.soundbutton:ClearAllPoints()
-				widget.soundbutton:Point('LEFT', Backdrop, 'LEFT', 2, 0)
+				widget.soundbutton:Point('LEFT', frame.Backdrop, 'LEFT', 2, 0)
 			elseif TYPE == 'LSM30_Statusbar' then
-				Backdrop:Point('TOPLEFT', 20, -17)
-				widget.bar:SetParent(Backdrop)
+				frame.Backdrop:Point('TOPLEFT', 20, -17)
+				widget.bar:SetParent(frame.Backdrop)
 				widget.bar:SetInside()
 			elseif TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' then
-				Backdrop:Point('TOPLEFT', 42, -16)
+				frame.Backdrop:Point('TOPLEFT', 42, -16)
 			end
-			Backdrop:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
-			button:SetParent(Backdrop)
-			text:SetParent(Backdrop)
+			frame.Backdrop:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
+			button:SetParent(frame.Backdrop)
+			text:SetParent(frame.Backdrop)
 			button:HookScript('OnClick', function(this, button)
 				local self = this.obj
 				if self.dropdown then
-					self.dropdown:SetTemplate('Default', true)
+					AS:SetTemplate(self.dropdown, 'Default', true)
 				end
 			end)
 		elseif TYPE == 'EditBox' then
 			local frame = widget.editbox
 			local button = widget.button
-			frame.Left:Kill()
-			frame.Middle:Kill()
-			frame.Right:Kill()
+
+			AS:SkinEditBox(frame)
 			frame:Height(17)
-			frame:CreateBackdrop('Default')
-			local Backdrop = frame.backdrop or frame.Backdrop
-			Backdrop:Point('TOPLEFT', -2, 0)
-			Backdrop:Point('BOTTOMRIGHT', 2, 0)
-			Backdrop:SetParent(widget.frame)
-			frame:SetParent(Backdrop)
-			button:SkinButton()
+			AS:SkinButton(button)
 		elseif TYPE == 'Button' then
 			local frame = widget.frame
-			frame:StripTextures(true)
-			frame:CreateBackdrop('Default', true)
-			local Backdrop = frame.backdrop or frame.Backdrop
-			Backdrop:SetInside()
-			Backdrop:SetBackdropColor(0,0,0,0)
-			frame:SetScript('OnEnter', function() Backdrop:SetBackdropBorderColor(Color.r, Color.g, Color.b) end)
-			frame:SetScript('OnLeave', function() Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+			AS:SkinButton(frame)
 		elseif TYPE == 'Slider' then
 			local frame = widget.slider
 			local editbox = widget.editbox
 			local lowtext = widget.lowtext
 			local hightext = widget.hightext
-			local HEIGHT = 12
 
-			AS:SkinFrame(frame)
-			frame:Height(HEIGHT)
-			frame:SetThumbTexture('Interface\\ChatFrame\\ChatFrameBackground')
-			frame:GetThumbTexture():SetVertexColor(0.3, 0.3, 0.3)
-			frame:GetThumbTexture():Size(HEIGHT-2,HEIGHT+2)
+			AS:SkinSlideBar(frame)
 
-			editbox:SetTemplate('Default')
+			AS:SetTemplate(editbox, 'Default')
 			editbox:Height(15)
 			editbox:Point('TOP', frame, 'BOTTOM', 0, -1)
 
@@ -145,26 +125,26 @@ function AS:Ace3()
 		elseif TYPE == 'InlineGroup' or TYPE == 'TreeGroup' or TYPE == 'TabGroup' or TYPE == 'SimpleGroup' or TYPE == 'Frame' or TYPE == 'DropdownGroup' then
 			local frame = widget.content:GetParent()
 			if TYPE == 'Frame' then
-				frame:StripTextures()
+				AS:StripTextures(frame)
 				for i=1, frame:GetNumChildren() do
 					local child = select(i, frame:GetChildren())
 					if child:GetObjectType() == 'Button' and child:GetText() then
 						AS:SkinButton(child)
 					else
-						child:StripTextures()
+						AS:StripTextures(child)
 					end
 				end
 			end
-			frame:SetTemplate('Transparent')
+			AS:SetTemplate(frame, 'Transparent')
 
 			if widget.treeframe then
-				widget.treeframe:SetTemplate('Transparent')
+				AS:SetTemplate(widget.treeframe, 'Transparent')
 				frame:Point('TOPLEFT', widget.treeframe, 'TOPRIGHT', 1, 0)
 
 				local oldCreateButton = widget.CreateButton
 				widget.CreateButton = function(self)
 					local button = oldCreateButton(self)
-					button.toggle:StripTextures()
+					AS:StripTextures(button.toggle)
 					button.toggle.SetNormalTexture = AS.Noop
 					button.toggle.SetPushedTexture = AS.Noop
 					button.toggleText = button.toggle:CreateFontString(nil, 'OVERLAY')
@@ -198,7 +178,7 @@ function AS:Ace3()
 				local oldCreateTab = widget.CreateTab
 				widget.CreateTab = function(self, id)
 					local tab = oldCreateTab(self, id)
-					tab:StripTextures()
+					AS:StripTextures(tab)
 					return tab
 				end
 			end

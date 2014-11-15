@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('EnergyWatch') then return end
 
 function AS:EnergyWatch()
-	EnergyWatchBar:StripTextures(true)
+	AS:StripTextures(EnergyWatchBar, true)
 	AS:SkinStatusBar(EnergyWatchStatusBar)
 end
 

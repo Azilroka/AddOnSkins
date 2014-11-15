@@ -4,10 +4,10 @@ if not AS:CheckAddOn('AdvancedTradeSkillWindow') then return end
 
 function AS:AdvancedTradeSkillWindow()
 	AS:SkinFrame(ATSWFrame)
-	ATSWSkillIcon:StripTextures(true)
-	ATSWListScrollFrame:StripTextures(true)
-	ATSWExpandButtonFrame:StripTextures(true)
-	ATSWRankFrameBorder:StripTextures(true)
+	AS:StripTextures(ATSWSkillIcon, true)
+	AS:StripTextures(ATSWListScrollFrame, true)
+	AS:StripTextures(ATSWExpandButtonFrame, true)
+	AS:StripTextures(ATSWRankFrameBorder, true)
 	AS:SkinStatusBar(ATSWRankFrame)
 	ATSWRankFrame:Size(398, 20)
 	ATSWRankFrame:ClearAllPoints()
@@ -106,8 +106,8 @@ function AS:AdvancedTradeSkillWindow()
 	ATSWOptionsFrame:SetScale(AS.UIScale)
 
 	AS:SkinFrame(ATSWCSFrame)
-	ATSWCSUListScrollFrame:StripTextures(true)
-	ATSWCSSListScrollFrame:StripTextures(true)
+	AS:StripTextures(ATSWCSUListScrollFrame, true)
+	AS:StripTextures(ATSWCSSListScrollFrame, true)
 
 	local once = false
 	for i = 1, ATSW_MAX_TRADE_SKILL_REAGENTS do
@@ -120,7 +120,7 @@ function AS:AdvancedTradeSkillWindow()
 		if not icon.backdrop then
 			icon.backdrop = CreateFrame('Frame', nil, button)
 			icon.backdrop:SetFrameLevel(button:GetFrameLevel() - 1)
-			icon.backdrop:SetTemplate('Default')
+			AS:SetTemplate(icon.backdrop, 'Default')
 			icon.backdrop:SetOutside(icon)
 		end
 
@@ -149,7 +149,7 @@ function AS:AdvancedTradeSkillWindow()
 	ATSWAddCategoryButton:Point('LEFT', ATSWCSNewCategoryBox, 'RIGHT', 5, 0)
 	ATSWFrameCloseButton:Point('TOPRIGHT', ATSWFrame, 'TOPRIGHT', -5, -5)
 	ATSWBuyReagentsButton:Point('CENTER', ATSWReagentFrame, 'BOTTOMLEFT', 246, 50)
-	ATSWQueueScrollFrame:StripTextures(true)
+	AS:StripTextures(ATSWQueueScrollFrame, true)
 	ATSWQueueScrollFrame:Width(52)
 	AS:SkinScrollBar(ATSWQueueScrollFrameScrollBar)
 	AS:SkinNextPrevButton(ATSWIncrementButton)
@@ -165,7 +165,7 @@ function AS:AdvancedTradeSkillWindow()
 	AS:SkinButton(ATSWSLCloseButton, true)
 	ATSWSLCloseButton:ClearAllPoints()
 	ATSWSLCloseButton:Point('TOPRIGHT', ATSWShoppingListFrame, 'TOPRIGHT', -5, -5)
-	ATSWSLScrollFrame:StripTextures(true)
+	AS:StripTextures(ATSWSLScrollFrame, true)
 	AS:SkinScrollBar(ATSWSLScrollFrameScrollBar)
 
 	AS:SkinButton(ATSWScanDelayFrameSkipButton)

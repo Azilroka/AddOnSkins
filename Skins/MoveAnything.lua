@@ -4,7 +4,7 @@ if not AS:CheckAddOn('MoveAnything') then return end
 
 function AS:MoveAnything()
 	AS:SkinFrame(MAOptions)
-	MAScrollBorder:StripTextures(true)
+	AS:StripTextures(MAScrollBorder, true)
 	AS:SkinScrollBar(MAScrollFrameScrollBar)
 	AS:SkinButton(MAOptionsSync)
 	AS:SkinButton(MAOptionsOpenBlizzardOptions)

@@ -14,7 +14,7 @@ function AS:BagSync()
 		AS:SkinFrame(frame)
 		frame:HookScript('OnShow', function(self)
 			if self.scrollbar and not self.scrollbar.isSkinned then
-				self.scrollbar:CreateBackdrop()
+				AS:CreateBackdrop(self.scrollbar)
 				self.scrollbar:SetThumbTexture(AS.Blank)
 				self.scrollbar:GetThumbTexture():SetVertexColor(unpack(AS.BorderColor))
 				self.scrollbar:HookScript('OnUpdate', function()

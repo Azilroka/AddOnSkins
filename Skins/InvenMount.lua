@@ -8,8 +8,8 @@ function AS:InvenMount(event, addon)
 			local Button = _G["MountJournalListScrollFrameButton"..i]
 			Button.checkbox:ClearAllPoints()
 			Button.checkbox:SetPoint("RIGHT", Button, "RIGHT", 0, 0)
-			Button.checkbox:StripTextures()
-			Button.checkbox:SetTemplate("Default")
+			AS:StripTextures(Button.checkbox)
+			AS:SetTemplate(Button.checkbox, 'Default')
 			Button.checkbox:Size(12)
 
 			if Button.checkbox.SetCheckedTexture then

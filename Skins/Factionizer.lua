@@ -54,8 +54,8 @@ function AS:Factionizer()
 		AS:SkinCheckBox(checkbox)
 	end
 
-	FIZ_ReputationDetailAtWarCheckBox:StripTextures()
-	FIZ_ReputationDetailAtWarCheckBox:CreateBackdrop()
+	AS:StripTextures(FIZ_ReputationDetailAtWarCheckBox)
+	AS:CreateBackdrop(FIZ_ReputationDetailAtWarCheckBox)
 	local Backdrop = FIZ_ReputationDetailAtWarCheckBox.backdrop or FIZ_ReputationDetailAtWarCheckBox.Backdrop
 	Backdrop:SetInside(FIZ_ReputationDetailAtWarCheckBox, 4, 4)
 	FIZ_ReputationDetailAtWarCheckBox:SetCheckedTexture('Interface\\Buttons\\UI-CheckBox-SwordCheck')

@@ -17,7 +17,7 @@ function AS:PowerAuras(event, addon)
 
 				local backdrop = frame.backdrop or frame.Backdrop
 				if frame and not backdrop then
-					frame:CreateBackdrop()
+					AS:CreateBackdrop(frame)
 					backdrop = frame.backdrop or frame.Backdrop
 					backdrop:Hide()
 				end
@@ -27,7 +27,7 @@ function AS:PowerAuras(event, addon)
 					if not backdrop:IsShown() then
 						backdrop:Show()
 					end
-					texture:SetTexCoord(unpack(AS.TexCoords))
+					AS:SkinTexture(texture)
 				elseif frame and backdrop:IsShown() then
 					backdrop:Hide()
 				end

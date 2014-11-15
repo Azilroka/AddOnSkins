@@ -6,7 +6,7 @@ local T, C
 
 function AS:UpdateMedia()
 	T, C = Tukui:unpack()
-	AS.PixelPerfect = C['General']['InOut']
+	AS.PixelPerfect = false
 	AS.HideShadows = C['General']['HideShadows']
 
 	AS.DataTextFontSize = 12 -- T['DataTexts']['Size']
@@ -28,7 +28,6 @@ function AS:UpdateMedia()
 	AS.Font = C['Medias']['Font']
 	AS.PixelFont = C['Medias']['PixelFont']
 	AS.ActionBarFont = C['Medias']['ActionBarFont']
-	AS.UIScale = UIParent:GetScale()
 	AS.BackdropColor = C['General']['BackdropColor']
 	AS.BorderColor = C['General']['BorderColor']
 end
@@ -58,62 +57,30 @@ function AS:ToggleOption(optionName)
 	AddOnSkinsOptions[optionName] = not AddOnSkinsOptions[optionName]
 end
 
-function AS:CreateEmbedSystem()
-	if not AS.EmbedSystemCreated then
-		local EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
-		local EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)
-		local EmbedSystem_RightWindow = CreateFrame('Frame', 'EmbedSystem_RightWindow', EmbedSystem_MainWindow)
-
-		AS:EmbedSystem_WindowResize()
-
-		self:RegisterEvent('PLAYER_REGEN_DISABLED', 'EmbedEnterCombat')
-		self:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
-
-		EmbedSystem_MainWindow:SetScript('OnShow', AS.Embed_Show)
-		EmbedSystem_MainWindow:SetScript('OnHide', AS.Embed_Hide)
-
-		AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, AS.ChatBackgroundRight, ASL.EmbedSystem.ToggleRightChat, ASL.EmbedSystem.ToggleEmbed)
-		RightToggleButton:Point('RIGHT', AS.InfoRight, 'RIGHT', -2, 0)
-		RightToggleButton:HookScript('OnClick', function(self, button)
-			if button == 'RightButton' then
-				if EmbedSystem_MainWindow:IsShown() then
-					EmbedSystem_MainWindow:Hide()
-					AS:SetOption('EmbedIsHidden', true)
-				else
-					AS:SetOption('EmbedIsHidden', false)
-					EmbedSystem_MainWindow:Show()
-				end
-			end
-		end)
-
-		AS:CreateToggleButton('LeftToggleButton', '◄', AS.InfoLeft, AS.ChatBackgroundLeft, ASL.EmbedSystem.ToggleLeftChat, ASL.EmbedSystem.ToggleOptions)
-		LeftToggleButton:Point('LEFT', AS.InfoLeft, 'LEFT', 2, 0)
-		LeftToggleButton:HookScript('OnClick', function(self, button)
-			if button == 'RightButton' then
-				if IsAddOnLoaded('Enhanced_Config') then
-					Enhanced_Config[1]:ToggleConfig()
-				end
-			end
-		end)
-
-		UIParent:HookScript('OnShow', function()
-			if AS:CheckOption('EmbedIsHidden') then
-				AS:Embed_Hide();
+function AS:EmbedSystemHooks()
+	AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, AS.ChatBackgroundRight, ASL.EmbedSystem.ToggleRightChat, ASL.EmbedSystem.ToggleEmbed)
+	RightToggleButton:Point('RIGHT', AS.InfoRight, 'RIGHT', -2, 0)
+	RightToggleButton:HookScript('OnClick', function(self, button)
+		if button == 'RightButton' then
+			if EmbedSystem_MainWindow:IsShown() then
+				EmbedSystem_MainWindow:Hide()
+				AS:SetOption('EmbedIsHidden', true)
 			else
-				AS:Embed_Show();
-			end
-		end)
-
-		if not UnitAffectingCombat('player') then
-			if AS:CheckOption('EmbedIsHidden') or AS:CheckOption('EmbedOoC') then
-				AS:Embed_Hide();
-			else
-				AS:Embed_Show();
+				AS:SetOption('EmbedIsHidden', false)
+				EmbedSystem_MainWindow:Show()
 			end
 		end
+	end)
 
-		AS.EmbedSystemCreated = true
-	end
+	AS:CreateToggleButton('LeftToggleButton', '◄', AS.InfoLeft, AS.ChatBackgroundLeft, ASL.EmbedSystem.ToggleLeftChat, ASL.EmbedSystem.ToggleOptions)
+	LeftToggleButton:Point('LEFT', AS.InfoLeft, 'LEFT', 2, 0)
+	LeftToggleButton:HookScript('OnClick', function(self, button)
+		if button == 'RightButton' then
+			if IsAddOnLoaded('Enhanced_Config') then
+				Enhanced_Config[1]:ToggleConfig()
+			end
+		end
+	end)
 end
 
 function AS:CreateToggleButton(Name, Text, Panel1, Panel2, TooltipText1, TooltipText2)

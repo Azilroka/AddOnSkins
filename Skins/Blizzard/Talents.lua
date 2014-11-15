@@ -10,8 +10,8 @@ function AS:Blizzard_Talent(event, addon)
 		}
 
 		for _, button in pairs(buttons) do
-			button:StripTextures()
-			button:SkinButton()
+			AS:StripTextures(button)
+			AS:SkinButton(button)
 		end
 
 		PlayerTalentFrameTalentsTutorialButton.Ring:Hide()
@@ -22,14 +22,13 @@ function AS:Blizzard_Talent(event, addon)
 		PlayerTalentFramePetSpecializationTutorialButton:Point("TOPLEFT", PlayerTalentFrame, "TOPLEFT", -12, 12)
 
 		AS:SkinFrame(PlayerTalentFrame)
-		PlayerTalentFrameInset:StripTextures()
-		PlayerTalentFrameTalents:StripTextures(true)
+		AS:StripTextures(PlayerTalentFrameInset)
+		AS:StripTextures(PlayerTalentFrameTalents, true)
 		AS:SkinCloseButton(PlayerTalentFrameCloseButton)
 
 		AS:SkinFrame(PlayerTalentFrameTalentsClearInfoFrame)
 		AS:SkinTexture(PlayerTalentFrameTalentsClearInfoFrameIcon)
 		PlayerTalentFrameTalentsClearInfoFrameIcon:SetInside()
-
 
 		for i = 1, 6 do
 			select(i, PlayerTalentFrameSpecialization:GetRegions()):Hide()
@@ -123,21 +122,13 @@ function AS:Blizzard_Talent(event, addon)
 			AS:SkinTab(_G["PlayerTalentFrameTab"..i])
 		end
 
-		local pspecspell = _G["PlayerTalentFrameSpecializationSpellScrollFrameScrollChild"]
-		pspecspell.ring:Hide()
-		pspecspell:CreateBackdrop("Default")
-		local Backdrop = pspecspell.Backdrop or pspecspell.backdrop
-		Backdrop:SetOutside(pspecspell.specIcon)
-		AS:SkinTexture(pspecspell.specIcon)
-		pspecspell.specIcon:SetParent(Backdrop)
-
-		local specspell2 = _G["PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild"]
-		specspell2.ring:Hide()
-		specspell2:CreateBackdrop("Default")
-		local Backdrop = specspell2.Backdrop or specspell2.backdrop
-		Backdrop:SetOutside(specspell2.specIcon)
-		AS:SkinTexture(specspell2.specIcon)
-		specspell2.specIcon:SetParent(Backdrop)
+		for _, Frame in pairs({ _G["PlayerTalentFrameSpecializationSpellScrollFrameScrollChild"], _G["PlayerTalentFramePetSpecializationSpellScrollFrameScrollChild"] }) do
+			Frame.ring:Hide()
+			AS:CreateBackdrop(Frame)
+			Frame.Backdrop:SetOutside(Frame.specIcon)
+			AS:SkinTexture(Frame.specIcon)
+			Frame.specIcon:SetParent(Frame.Backdrop)
+		end
 
 		hooksecurefunc("PlayerTalentFrame_UpdateSpecFrame", function(self, spec)
 			local playerTalentSpec = GetSpecialization(nil, self.isPet, PlayerSpecTab2:GetChecked() and 2 or 1)
@@ -164,7 +155,7 @@ function AS:Blizzard_Talent(event, addon)
 					frame.reskinned = true
 					frame:Size(30, 30)
 					frame.ring:Hide()
-					frame:SetTemplate()
+					AS:SetTemplate(frame)
 					AS:SkinTexture(frame.icon)
 					frame.icon:SetInside()			
 				end
@@ -186,36 +177,38 @@ function AS:Blizzard_Talent(event, addon)
 
 		for i = 1, MAX_TALENT_TIERS do
 			local row = _G["PlayerTalentFrameTalentsTalentRow"..i]
-			row:StripTextures(true)
+			AS:StripTextures(row, true)
 
 			for j = 1, NUM_TALENT_COLUMNS do
 				local bu = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j]
 				local ic = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j.."IconTexture"]
 
-				AS:SkinFrame(bu)
+				AS:SkinBackdropFrame(bu)
 				bu:SetFrameLevel(bu:GetFrameLevel() + 2)
+				bu.Backdrop:Point("TOPLEFT", 15, -1)
+				bu.Backdrop:Point("BOTTOMRIGHT", -10, 1)
 
-				bu.border = CreateFrame("Frame", nil, bu)
-				AS:SkinFrame(bu.border)
-				bu.border:SetBackdropColor(0, 0, 0, 0)
-				bu.border:SetOutside(ic)
+				bu.Border = CreateFrame("Frame", nil, bu)
+				AS:SkinFrame(bu.Border)
+				bu.Border:SetBackdropColor(0, 0, 0, 0)
+				bu.Border:SetOutside(ic)
 				ic:Size(32)
 				ic:SetDrawLayer("ARTWORK")
 				AS:SkinTexture(ic)
 				bu:HookScript('OnEnter', function(self)
-					self:SetBackdropBorderColor(1, .82, 0)
-					self.border:SetBackdropBorderColor(1, .82, 0)
+					self.Backdrop:SetBackdropBorderColor(1, .82, 0)
+					self.Border:SetBackdropBorderColor(1, .82, 0)
 				end)
 				bu:HookScript('OnLeave', function(self) 
-					if bu.knownSelection:IsShown() then
-						bu:SetBackdropBorderColor(0, 0.44, .87, 1)
-						bu.border:SetBackdropBorderColor(0, 0.44, .87, 1)
-					elseif bu.learnSelection:IsShown() then
-						bu:SetBackdropBorderColor(1, 0.82, 0, 1)
-						bu.border:SetBackdropBorderColor(1, 0.82, 0, 1)
+					if self.knownSelection:IsShown() then
+						self.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+						self.Border:SetBackdropBorderColor(0, 0.44, .87, 1)
+					elseif self.learnSelection:IsShown() then
+						self.Backdrop:SetBackdropBorderColor(1, 0.82, 0, 1)
+						self.Border:SetBackdropBorderColor(1, 0.82, 0, 1)
 					else
-						bu:SetBackdropBorderColor(unpack(AS.BorderColor))
-						bu.border:SetBackdropBorderColor(unpack(AS.BorderColor))
+						self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+						self.Border:SetBackdropBorderColor(unpack(AS.BorderColor))
 					end
 				end)
 			end
@@ -224,29 +217,19 @@ function AS:Blizzard_Talent(event, addon)
 		hooksecurefunc("TalentFrame_Update", function()
 			for i = 1, MAX_TALENT_TIERS do
 				for j = 1, NUM_TALENT_COLUMNS do
-					local bu = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j]
-					if bu.knownSelection:IsShown() then
-						bu:SetBackdropBorderColor(0, 0.44, .87, 1)
-						bu.border:SetBackdropBorderColor(0, 0.44, .87, 1)
-					elseif bu.learnSelection:IsShown() then
-						bu:SetBackdropBorderColor(1, 0.82, 0, 1)
-						bu.border:SetBackdropBorderColor(1, 0.82, 0, 1)
-					else
-						bu:SetBackdropBorderColor(unpack(AS.BorderColor))
-						bu.border:SetBackdropBorderColor(unpack(AS.BorderColor))
-					end
+					_G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j]:GetScript('OnLeave')(_G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j])
 				end
 			end
 		end)
 
 		for i = 1, 2 do
 			local tab = _G["PlayerSpecTab"..i]
-			_G["PlayerSpecTab"..i.."Background"]:Hide()
+			_G["PlayerSpecTab"..i..'Background']:Kill()
 
 			AS:SkinFrame(tab)
 			AS:SkinTexture(tab:GetNormalTexture())
 			tab:GetNormalTexture():SetInside()
-			tab:StyleButton()
+			AS:StyleButton(tab)
 		end
 
 		hooksecurefunc('PlayerTalentFrame_UpdateTabs', function()
@@ -255,7 +238,7 @@ function AS:Blizzard_Talent(event, addon)
 		
 		AS:SkinFrame(TalentMicroButtonAlert)
 		TalentMicroButtonAlert:SetBackdropBorderColor(1, 1, 0)
-		TalentMicroButtonAlert:CreateShadow()
+		AS:CreateShadow(TalentMicroButtonAlert)
 		AS:SkinCloseButton(TalentMicroButtonAlert.CloseButton)
 		TalentMicroButtonAlert.CloseButton:ClearAllPoints()
 		TalentMicroButtonAlert.CloseButton:SetPoint("TOPRIGHT", 6, 1)

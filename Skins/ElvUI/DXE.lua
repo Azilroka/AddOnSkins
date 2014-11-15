@@ -13,7 +13,7 @@ function AS:DXE()
 	-- DXE.NotifyBackgroundColorChanged = AS.Noop
 
 	local function SkinDXEBar(bar)
-		bar:SetTemplate("Transparent")
+		AS:SetTemplate(bar, 'Transparent')
 		bar.bg:SetTexture(nil)
 		bar.border.Show = function() end
 		bar.border:Hide()
@@ -21,7 +21,7 @@ function AS:DXE()
 		bar.statusbar:ClearAllPoints()
 		bar.statusbar:SetInside()
 		
-		bar.righticon:SetTemplate("Default")
+		AS:SetTemplate(bar.righticon, 'Default')
 		bar.righticon.border.Show = function() end
 		bar.righticon.border:Hide()
 		bar.righticon:ClearAllPoints()
@@ -31,7 +31,7 @@ function AS:DXE()
 		bar.righticon.t:SetInside()
 		bar.righticon.t:SetDrawLayer("ARTWORK")
 		
-		bar.lefticon:SetTemplate("Default")
+		AS:SetTemplate(bar.lefticon, 'Default')
 		bar.lefticon.border.Show = function() end
 		bar.lefticon.border:Hide()
 		bar.lefticon:ClearAllPoints()
@@ -47,7 +47,7 @@ function AS:DXE()
 		DXE:LayoutHealthWatchers_()
 		for i,hw in ipairs(frame.HW) do
 			if hw:IsShown() then
-				hw:SetTemplate("Transparent")
+				AS:SetTemplate(hw, 'Transparent')
 				hw.border.Show = function() end
 				hw.border:Hide()
 				hw.healthbar:SetStatusBarTexture(AS.NormTex)

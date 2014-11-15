@@ -2,11 +2,13 @@
 	<Script file="AddOnManager.lua"/>
 	<Script file="Bags.lua"/>
 	<Script file="Calendar.lua"/>
-	<Script file="CharacterFrame.lua"/>
+	<Script file="Character.lua"/>
 	<Script file="ChatBubbles.lua"/>
 	<Script file="DebugTools.lua"/>
-	<Script file="DressUpFrame.lua"/>
+	<Script file="DressUp.lua"/>
+	<Script file="Glyph.lua"/>
 	<Script file="ItemSocketing.lua"/>
-	<Script file="TalentFrame.lua"/>
+	<Script file="Quest.lua"/>
+	<Script file="Talents.lua"/>
 	<Script file="WorldStateCaptureBar.lua"/>
 </Ui>

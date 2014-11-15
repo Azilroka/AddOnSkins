@@ -7,8 +7,8 @@ function AS:StormEarthAndFire()
 		local f = _G["StormEarthAndFireFrame"..i]
 		if f then
 			local color = RAID_CLASS_COLORS[AS.MyClass]
-			AS:SkinFrame(f, "Default")
-			f.icon:SetTexCoord(unpack(AS.TexCoords))
+			AS:SkinFrame(f, 'Default')
+			AS:SkinTexture(f.icon)
 			f.icon:SetDrawLayer("BACKGROUND", 2)
 			f.SetBackdropColor = function(frame, ...)
 				frame:SetBackdropBorderColor(color.r, color.g, color.b)

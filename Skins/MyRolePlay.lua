@@ -36,7 +36,7 @@ function AS:MyRolePlay()
 	AS:SkinButton(MyRolePlayEditFrameInherit)
 	MyRolePlayCharacterFrame_NewProfileButton:Point("LEFT", MyRolePlayCharacterFrame_ProfileComboBox_Button, "RIGHT", 37, 0)
 	MyRolePlayEditFrame.editbox:Height(25)
-	MyRolePlayEditFrame.editbox:SetTemplate()
+	AS:SetTemplate(MyRolePlayEditFrame.editbox)
 	MyRolePlayCharacterFrame_ProfileComboBox:SetPoint("TOP", CharacterFrameInset, "TOP", 0, 22)
 	MyRolePlayCharacterFrame_ProfileComboBox.text:SetPoint("LEFT", MyRolePlayCharacterFrame_ProfileComboBox, "LEFT", 8, 0)
 	AS:SkinNextPrevButton(MyRolePlayCharacterFrame_ProfileComboBox_Button)
@@ -66,7 +66,7 @@ function AS:MyRolePlay()
 		for i = 1, object:GetNumChildren() do
 			local f = select(i, object:GetChildren())
 			if f and not f.reskinned and f:IsObjectType('Frame') then
-				f:StripTextures(true)
+				AS:StripTextures(f, true)
 				if f.h then
 					AS:SkinBackdropFrame(f.h)
 					f.h.SetBackdrop = function() end

@@ -23,7 +23,7 @@ function AS:DXE(event, addon)
 		bar.statusbar:ClearAllPoints()
 		bar.statusbar:SetInside()
 		
-		bar.righticon:SetTemplate('Default')
+		AS:SetTemplate(bar.righticon, 'Default')
 		bar.righticon.border.Show = function() end
 		bar.righticon.border:Hide()
 		bar.righticon:ClearAllPoints()
@@ -33,7 +33,7 @@ function AS:DXE(event, addon)
 		bar.righticon.t:SetInside()
 		bar.righticon.t:SetDrawLayer('ARTWORK')
 		
-		bar.lefticon:SetTemplate('Default')
+		AS:SetTemplate(bar.lefticon, 'Default')
 		bar.lefticon.border.Show = function() end
 		bar.lefticon.border:Hide()
 		bar.lefticon:ClearAllPoints()

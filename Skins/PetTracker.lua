@@ -4,10 +4,10 @@ if not AS:CheckAddOn('PetTracker') then return end
 
 function AS:PetTracker()
 	if not IsAddOnLoaded('Carbonite.Quests') then
-		--PetTrackerProgressBar:CreateBackdrop()
+		--AS:CreateBackdrop(PetTrackerProgressBar)
 		AS:Delay(1, function()
-			PetTrackerProgressBar1.Overlay:StripTextures()
-			PetTrackerProgressBar1.Overlay:CreateBackdrop()
+			AS:StripTextures(PetTrackerProgressBar1.Overlay)
+			AS:CreateBackdrop(PetTrackerProgressBar1.Overlay)
 			local Backdrop = PetTrackerProgressBar1.Overlay.backdrop or PetTrackerProgressBar1.Overlay.Backdrop
 			Backdrop:SetBackdropColor()
 			for i = 1, PetTracker.MaxQuality do
@@ -16,7 +16,7 @@ function AS:PetTracker()
 		end)
 	end
 
-	PetTrackerMapFilter:StripTextures(true)
+	AS:StripTextures(PetTrackerMapFilter, true)
 	AS:SkinEditBox(PetTrackerMapFilter)
 	AS:SkinTooltip(PetTrackerMapFilterSuggestions)
 	for i = 1, PetTrackerMapFilterSuggestions:GetNumChildren() do
@@ -33,7 +33,7 @@ function AS:PetTracker()
 			if Region:IsObjectType('Frame') then
 				Region:SetBackdrop(nil)
 				Region.SetBackdrop = AS.Noop
-				SushiDropdownFrame1:CreateBackdrop()
+				AS:CreateBackdrop(SushiDropdownFrame1)
 				SushiDropdownFrame1.IsDone = true
 			end
 		end
@@ -51,7 +51,7 @@ function AS:PetTracker()
 		AS:SkinFrame(PetTrackerSwap)
 		AS:SkinCloseButton(PetTrackerSwapCloseButton)
 		PetTrackerSwap:HookScript('OnUpdate', function(self)
-			PetTrackerSwapInset:StripTextures()
+			AS:StripTextures(PetTrackerSwapInset)
 			for i = 1, self:GetNumChildren() do
 				local Region = select(i, self:GetChildren())
 				if Region and Region:IsObjectType('Frame') and not Region.IsSkinned then
@@ -69,7 +69,7 @@ function AS:PetTracker()
 					AS:SkinTexture(_G['PetTrackerBattleSlot'..i].Icon)
 					_G['PetTrackerBattleSlot'..i].IconBorder:Hide()
 					_G['PetTrackerBattleSlot'..i].Quality:Hide()
-					_G['PetTrackerBattleSlot'..i].Highlight:StripTextures()
+					AS:StripTextures(_G['PetTrackerBattleSlot'..i].Highlight)
 					_G['PetTrackerBattleSlot'..i].Highlight:HookScript('OnShow', function() _G['PetTrackerBattleSlot'..i]:SetBackdropBorderColor(1, 1, 0) end)
 					_G['PetTrackerBattleSlot'..i].Highlight:HookScript('OnHide', function() _G['PetTrackerBattleSlot'..i]:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 					AS:SkinStatusBar(_G['PetTrackerBattleSlot'..i].Health)
@@ -100,26 +100,26 @@ function AS:PetTracker()
 		AS:SkinTab(PetJournalParentTab4)
 		PetTrackerTamerJournal:HookScript('OnShow', function(self)
 			if not self.IsSkinned then
-				PetTrackerTamerJournal.Count:StripTextures()
-				PetTrackerTamerJournal.ListInset:StripTextures()
+				AS:StripTextures(PetTrackerTamerJournal.Count)
+				AS:StripTextures(PetTrackerTamerJournal.ListInset)
 				AS:SkinEditBox(PetTrackerTamerJournalSearchBox)
 				AS:SkinScrollBar(PetTrackerTamerJournalListScrollBar)
 				AS:SkinFrame(PetTrackerTamerJournalCard)
-				PetTrackerTamerJournal.Team.Border:StripTextures()
+				AS:StripTextures(PetTrackerTamerJournal.Team.Border)
 				PetTrackerTamerJournal.Team:DisableDrawLayer('BORDER')
-				PetTrackerTamerJournalMap:CreateBackdrop()
+				AS:CreateBackdrop(PetTrackerTamerJournalMap)
 				PetTrackerTamerJournalMapBorder:Kill()
-				PetTrackerTamerJournalHistory:StripTextures()
-				PetTrackerTamerJournalHistoryLoadButton:StripTextures(true)
+				AS:StripTextures(PetTrackerTamerJournalHistory)
+				AS:StripTextures(PetTrackerTamerJournalHistoryLoadButton, true)
 				AS:SkinButton(PetTrackerTamerJournalHistoryLoadButton)
 				for i = 1, 4 do
 					AS:SkinIconButton(_G['PetTrackerTamerJournalCardLoot'..i])
 				end
 				for i = 1, 11 do
 					local b = _G["PetTrackerTamerJournalListButton"..i]
-					b:StripTextures()
-					b:StyleButton()
-					b.model:SetTemplate()
+					AS:StripTextures(b)
+					AS:StyleButton(b)
+					AS:SetTemplate(b.model)
 					b.model.quality:Hide()
 					hooksecurefunc(PetTrackerTamerJournalList, 'update', function(...) b.model:SetBackdropBorderColor(b.model.quality:GetVertexColor()) end)
 					b.model.levelRing:SetAlpha(0)
@@ -136,11 +136,11 @@ function AS:PetTracker()
 					_G['PetTrackerJournalSlot'..i].LevelBG:Hide()
 					_G['PetTrackerJournalSlot'..i].IsSkinned = true
 					if PetTrackerTamerJournal['Tab'..i] then
-						PetTrackerTamerJournal['Tab'..i]:SetTemplate()
+						AS:SetTemplate(PetTrackerTamerJournal['Tab'..i])
 						PetTrackerTamerJournal['Tab'..i].TabBg:Kill()
 						AS:SkinTexture(PetTrackerTamerJournal['Tab'..i].Icon)
 						PetTrackerTamerJournal['Tab'..i].Icon:SetAllPoints()
-						PetTrackerTamerJournal['Tab'..i]:StyleButton()
+						AS:StyleButton(PetTrackerTamerJournal['Tab'..i])
 						PetTrackerTamerJournal['Tab'..i].Highlight:SetTexture(nil)
 						PetTrackerTamerJournal['Tab'..i].Highlight:Kill()
 					end
@@ -154,7 +154,7 @@ function AS:PetTracker()
 								end
 							end
 						end
-						_G['PetTrackerAbilityButton'..i]:StyleButton()
+						AS:StyleButton(_G['PetTrackerAbilityButton'..i])
 						AS:SkinTexture(_G['PetTrackerAbilityButton'..i].Icon)
 					end
 				end

@@ -20,7 +20,7 @@ function AS:Arcanometer(event, addon)
 	}
 
 	for _, object in pairs(Icons) do
-		_G['uiAmtrFrame'..object]:CreateBackdrop()
+		AS:CreateBackdrop(_G['uiAmtrFrame'..object])
 		AS:SkinTexture(_G['uiAmtrFrame'..object..'Icon'])
 		_G['uiAmtrFrame'..object..'Overlay']:Kill()
 	end

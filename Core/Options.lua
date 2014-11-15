@@ -79,7 +79,7 @@ end
 
 function AS:GetOptions()
 	local function GenerateOptionTable(skinName, order)
-		local text = strtrim(skinName:gsub("Blizzard_(.+)","%1"):gsub("(%u)"," %1"))
+		local text = strtrim(skinName:gsub("^Blizzard_(.+)","%1"):gsub("(%l)(%u%l)","%1 %2"))
 		local options = {
 			type = "toggle",
 			name = text,

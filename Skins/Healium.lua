@@ -50,7 +50,7 @@ function AS:Healium()
 		local predictbar = self.PredictBar
 		local healthbar = self.HealthBar
 		local manabar = self.ManaBar
-		self:StripTextures()
+		AS:StripTextures(self)
 		AS:SkinStatusBar(predictbar)
 		AS:SkinStatusBar(healthbar)
 		AS:SkinStatusBar(manabar)

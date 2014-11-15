@@ -4,7 +4,7 @@ if not AS:CheckAddOn('xMerchant') then return end
 
 function AS:xMerchant()
 	AS:SkinCheckBox(NuuhMerchantFrameTooltipSearching)
-	NuuhMerchantFrame:StripTextures(true)
+	AS:StripTextures(NuuhMerchantFrame, true)
 	AS:SkinFrame(NuuhMerchantFrameSearch, 'Default')
 	AS:SkinScrollBar(NuuhMerchantScrollFrameScrollBar)
 	for i = 1, 10, 1 do

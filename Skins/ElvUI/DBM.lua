@@ -27,7 +27,7 @@ function AS:DBM(event, addon)
 
 						if not icon1.overlay then
 							icon1.overlay = CreateFrame('Frame', '$parentIcon1Overlay', tbar)
-							icon1.overlay:SetTemplate()
+							AS:SetTemplate(icon1.overlay)
 							icon1.overlay:SetFrameLevel(0)
 							icon1.overlay:Size(buttonsize)
 							icon1.overlay:Point('BOTTOMRIGHT', frame, 'BOTTOMLEFT', -(ElvUI[1].PixelMode and 2 or 3), 0)
@@ -35,17 +35,17 @@ function AS:DBM(event, addon)
 
 						if not icon2.overlay then
 							icon2.overlay = CreateFrame('Frame', '$parentIcon2Overlay', tbar)
-							icon2.overlay:SetTemplate()
+							AS:SetTemplate(icon2.overlay)
 							icon2.overlay:SetFrameLevel(0)
 							icon2.overlay:Size(buttonsize)
 							icon2.overlay:Point('BOTTOMLEFT', frame, 'BOTTOMRIGHT', (ElvUI[1].PixelMode and 2 or 3), 0)
 						end
 
-						icon1:SetTexCoord(unpack(AS.TexCoords))
+						AS:SkinTexture(icon1)
 						icon1:ClearAllPoints()
 						icon1:SetInside(icon1.overlay)
 
-						icon2:SetTexCoord(unpack(AS.TexCoords))
+						AS:SkinTexture(icon2)
 						icon2:ClearAllPoints()
 						icon2:SetInside(icon2.overlay)
 

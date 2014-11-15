@@ -33,7 +33,7 @@ function AS:LightHeaded()
 	AS:SkinFrame(LightHeadedFrameSub)
 	AS:SkinFrame(LightHeadedSearchBox)
 	AS:SkinTooltip(LightHeadedTooltip)
-	LightHeadedScrollFrame:StripTextures()
+	AS:StripTextures(LightHeadedScrollFrame)
 	local lhframe = LightHeadedFrame		
 	lhframe.close:Hide()
 	AS:SkinCloseButton(lhframe.close)

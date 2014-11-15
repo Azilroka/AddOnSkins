@@ -16,8 +16,8 @@ function AS:RoleIcons(event, addon)
 			
 			for i, class in ipairs(CLASS_SORT_ORDER) do
 				local button = _G["RoleIconsRaidClassButton"..i]
-				button:StripTextures()
-				button:CreateBackdrop("Default")
+				AS:StripTextures(button)
+				AS:CreateBackdrop(button, 'Default')
 				
 				local tcoords = CLASS_ICON_TCOORDS[class]
 				local buttonIcon = button:GetNormalTexture()

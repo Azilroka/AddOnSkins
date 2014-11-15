@@ -20,7 +20,7 @@ function AS:RCLootCouncil()
 		end
 	end	
 
-	RCLootFrame:StripTextures()
+	AS:StripTextures(RCLootFrame)
 	local function Loot_OnShow(self, event, ...)
 		for i = 1,5 do
 			if _G['RCLootFrameEntry'..i] then

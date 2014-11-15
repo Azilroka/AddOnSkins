@@ -4,12 +4,12 @@ function AS:Blizzard_ItemSocketing(event, addon)
 	if addon ~= 'Blizzard_ItemSocketingUI' then return end
 	AS:SkinFrame(ItemSocketingFrame)
 	AS:SkinFrame(ItemSocketingScrollFrame)
-	ItemSocketingFrameInset:StripTextures()
+	AS:StripTextures(ItemSocketingFrameInset)
 
 	for i = 1, MAX_NUM_SOCKETS do
 		local button = _G["ItemSocketingSocket"..i]
 		AS:SkinFrame(button)
-		button:StyleButton(false)
+		AS:StyleButton(button)
 		AS:SkinTexture(button.icon)
 		button.icon:ClearAllPoints()
 		button.icon:SetInside()

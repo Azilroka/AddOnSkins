@@ -15,10 +15,9 @@ function AS:Blizzard_DebugTools(event, addon)
 
 		AS:SkinFrame(EventTraceFrame, nil, nil, true)
 		EventTraceFrameScrollBG:SetTexture(nil)
-		EventTraceFrameScroll:CreateBackdrop()
-		local Backdrop = EventTraceFrameScroll.backdrop or EventTraceFrameScroll.Backdrop
+		AS:CreateBackdrop(EventTraceFrameScroll)
+		EventTraceFrameScroll.Backdrop:SetAllPoints(EventTraceFrameScroll.thumb)
 		EventTraceFrameScroll.thumb:SetTexture(nil)
-		Backdrop:SetAllPoints(EventTraceFrameScroll.thumb)
 		AS:SkinCloseButton(EventTraceFrameCloseButton)
 
 		AS:SkinTooltip(EventTraceTooltip)

@@ -1,41 +1,42 @@
 local AS = unpack(AddOnSkins)
 local AddOnName = ...
 local ES
-local Color = RAID_CLASS_COLORS[AS.MyClass]
 
 AS:UpdateLocale()
 
-if Tukui or HydraUI then
-	AddOnSkinsOptions = {
-	-- Embeds
-		['EmbedOoC'] = false,
-		['EmbedOoCDelay'] = 10,
-		['EmbedCoolLine'] = false,
-		['EmbedSexyCooldown'] = false,
-		['EmbedSystem'] = false,
-		['EmbedSystemDual'] = false,
-		['EmbedMain'] = 'Skada',
-		['EmbedLeft'] = 'Skada',
-		['EmbedRight'] = 'Skada',
-		['EmbedRightChat'] = 'Skada',
-		['EmbedLeftWidth'] = 200,
-		['EmbedBelowTop'] = false,
-		['EmbedIsHidden'] = false,
-		['TransparentEmbed'] = false,
-	-- Misc
-		['RecountBackdrop'] = true,
-		['SkadaBackdrop'] = true,
-		['OmenBackdrop'] = true,
-		['MiscFixes'] = true,
-		['DBMSkinHalf'] = false,
-		['DBMFont'] = 'Tukui',
-		['DBMFontSize'] = 12,
-		['DBMFontFlag'] = 'OUTLINE',
-		['WeakAuraAuraBar'] = false,
-		['SkinTemplate'] = 'Transparent',
-		['HideChatFrame'] = 'NONE',
-		['SkinDebug'] = false,
-	}
+AddOnSkinsOptions = {
+-- Embeds
+	['EmbedOoC'] = false,
+	['EmbedOoCDelay'] = 10,
+	['EmbedCoolLine'] = false,
+	['EmbedSexyCooldown'] = false,
+	['EmbedSystem'] = false,
+	['EmbedSystemDual'] = false,
+	['EmbedMain'] = 'Skada',
+	['EmbedLeft'] = 'Skada',
+	['EmbedRight'] = 'Skada',
+	['EmbedRightChat'] = 'Skada',
+	['EmbedLeftWidth'] = 200,
+	['EmbedBelowTop'] = false,
+	['EmbedIsHidden'] = false,
+	['TransparentEmbed'] = false,
+-- Misc
+	['RecountBackdrop'] = true,
+	['SkadaBackdrop'] = true,
+	['OmenBackdrop'] = true,
+	['MiscFixes'] = true,
+	['DBMSkinHalf'] = false,
+	['DBMFont'] = 'Tukui',
+	['DBMFontSize'] = 12,
+	['DBMFontFlag'] = 'OUTLINE',
+	['WeakAuraAuraBar'] = false,
+	['SkinTemplate'] = 'Transparent',
+	['HideChatFrame'] = 'NONE',
+	['SkinDebug'] = false,
+}
+
+function AS:Scale(Number)
+	return AS.Mult * floor(Number/AS.Mult + .5)
 end
 
 function AS:OrderedPairs(t, f)
@@ -155,15 +156,14 @@ function AS:CallSkin(skin, func, event, ...)
 	if not pass then
 		local message = '%s %s: |cfFFF0000There was an error in the|r |cff0AFFFF%s|r |cffFF0000skin|r.'
 		local errormessage = '%s Error: %s'
-		local Skin = gsub(skin, 'Skin', '')
-		DEFAULT_CHAT_FRAME:AddMessage(format(message, AS.Title, AS.Version, Skin))
+		DEFAULT_CHAT_FRAME:AddMessage(format(message, AS.Title, AS.Version, skin))
 		FoundError = true
 		if AS:CheckOption('SkinDebug') then
 			if GetCVarBool('scriptErrors') then
 				LoadAddOn('Blizzard_DebugTools')
 				ScriptErrorsFrame_OnError(errormsg, false)
 			else
-				DEFAULT_CHAT_FRAME:AddMessage(format(errormessage, Skin, errormsg))
+				DEFAULT_CHAT_FRAME:AddMessage(format(errormessage, skin, errormsg))
 			end
 		end
 	end
@@ -202,9 +202,18 @@ function AS:StartSkinning(event)
 		ES = ElvUI[1]:GetModule('EnhancedShadows', true)
 	end
 
+	AS.Mult = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/UIParent:GetScale()
+
+	if not IsAddOnLoaded('ElvUI') then
+		for skin, alldata in pairs(AS.register) do
+			if AS:CheckOption(skin) == nil then
+				AS:EnableOption(skin)
+			end
+		end
+	end
+
 	for skin, alldata in pairs(AS.register) do
 		for _, data in pairs(alldata) do
-			if AS:CheckOption(skin) == nil then AS:EnableOption(skin) end
 			AS:RegisteredSkin(skin, data.priority, data.func, data.events)
 		end
 	end
@@ -229,9 +238,7 @@ end
 
 function AS:Init(event, addon)
 	if event == 'ADDON_LOADED' and addon == AddOnName then
-		if not (AS:CheckAddOn('Tukui') or AS:CheckAddOn('ElvUI') or AS:CheckAddOn('HydraUI')) then return end
 		AS:UpdateMedia()
-		AS:InitAPI()
 		if AS:CheckAddOn('ElvUI') then
 			local ElvUIVersion, MinElvUIVersion = tonumber(GetAddOnMetadata('ElvUI', 'Version')), 7.32
 			if ElvUIVersion < MinElvUIVersion then
@@ -242,6 +249,8 @@ function AS:Init(event, addon)
 			end
 			AS:InjectProfile()
 		end
+	end
+	if event == 'PLAYER_LOGIN' then
 		AS:CreateDataText()
 		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 		AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
@@ -249,166 +258,10 @@ function AS:Init(event, addon)
 	end
 end
 
-function AS:SkinButton(frame, strip)
-	frame:SkinButton(strip)
-end
-
-function AS:SkinScrollBar(frame)
-	frame:SkinScrollBar()
-	_G[frame:GetName().."ScrollUpButton"].texture:SetTexture(nil)
-	_G[frame:GetName().."ScrollDownButton"].texture:SetTexture(nil)
-	if not _G[frame:GetName().."ScrollUpButton"].text then
-		_G[frame:GetName().."ScrollUpButton"].text = _G[frame:GetName().."ScrollUpButton"]:CreateFontString(nil, "OVERLAY")
-		_G[frame:GetName().."ScrollUpButton"].text:SetFont(AS.ActionBarFont, 12)
-		_G[frame:GetName().."ScrollUpButton"].text:SetText("▲")
-		_G[frame:GetName().."ScrollUpButton"].text:SetPoint("CENTER", 0, 0)
-		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnEnter', function(self) self.text:SetTextColor(Color.r, Color.g, Color.b) end)
-		_G[frame:GetName().."ScrollUpButton"]:HookScript('OnLeave', function(self) self.text:SetTextColor(1, 1, 1) end)
-	end	
-	if not _G[frame:GetName().."ScrollDownButton"].text then
-		_G[frame:GetName().."ScrollDownButton"].text = _G[frame:GetName().."ScrollDownButton"]:CreateFontString(nil, "OVERLAY")
-		_G[frame:GetName().."ScrollDownButton"].text:SetFont(AS.ActionBarFont, 12)
-		_G[frame:GetName().."ScrollDownButton"].text:SetText("▼")
-		_G[frame:GetName().."ScrollDownButton"].text:SetPoint("CENTER", 0, 0)
-		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnEnter', function(self) self.text:SetTextColor(Color.r, Color.g, Color.b) end)
-		_G[frame:GetName().."ScrollDownButton"]:HookScript('OnLeave', function(self) self.text:SetTextColor(1, 1, 1) end)
-	end
-end
-
-function AS:SkinTab(frame, strip)
-	if strip then frame:StripTextures(true) end
-	frame:SkinTab()
-end
-
-function AS:SkinNextPrevButton(frame, horizonal)
-	frame:SkinArrowButton(not horizonal)
-end
-
-function AS:SkinRotateButton(frame)
-	frame:SkinRotateButton()
-end
-
-function AS:SkinEditBox(frame, width, height)
-	frame:SkinEditBox()
-	if width then frame:Width(width) end
-	if height then frame:Height(height) end
-	if frame.Left then
-		frame.Left:Kill()
-		frame.Middle:Kill()
-		frame.Right:Kill()
-	end
-end
-
-function AS:SkinDropDownBox(frame, width)
-	frame:SkinDropDown(width)
-end
-
-function AS:SkinCheckBox(frame)
-	frame:SkinCheckBox()
-end
-
-function AS:SkinCloseButton(frame, point)
-	frame:SkinCloseButton(point)
-end
-
-function AS:SkinSlideBar(frame, height, movetext)
-	frame:SkinSlideBar(height, movetext)
-	if height then
-		frame:GetThumbTexture():Size(height-2,height-2)
-	end
-end
-
-function AS:SkinIconButton(frame, shrinkIcon)
-	frame:SkinIconButton(shrinkIcon)
-	local icon = frame.icon
-	if frame:GetName() and _G[frame:GetName()..'IconTexture'] then
-		icon = _G[frame:GetName()..'IconTexture']
-	elseif frame:GetName() and _G[frame:GetName()..'Icon'] then
-		icon = _G[frame:GetName()..'Icon']
-	end
-
-	if icon then
-		AS:SkinTexture(icon)
-	end
-end
-
-function AS:SkinFrame(frame, template, override, kill)
-	if not template then template = AS:CheckOption('SkinTemplate') end
-	if not override then frame:StripTextures(kill) end
-	frame:SetTemplate(template)
-	if ES then
-		frame:CreateShadow()
-		ES:RegisterShadow(frame.shadow)
-	end
-end
-
-function AS:SkinBackdropFrame(frame, template, override, kill, setpoints)
-	if not template then template = AS:CheckOption('SkinTemplate') end
-	if not override then frame:StripTextures(kill) end
-	frame:CreateBackdrop(template)
-	if setpoints then
-		local backdrop = frame.backdrop or frame.Backdrop
-		backdrop:SetAllPoints()
-	end
-end
-
-function AS:SkinTitleBar(frame, template, override, kill)
-	if not template then template = AS:CheckOption('SkinTemplate') end
-	if not override then frame:StripTextures(kill) end
-	frame:SetTemplate(template, true)
-end
-
-function AS:SkinStatusBar(frame, ClassColor)
-	AS:SkinBackdropFrame(frame)
-	frame:SetStatusBarTexture(AS.NormTex)
-	if ClassColor then
-		local color = RAID_CLASS_COLORS[AS.MyClass]
-		frame:SetStatusBarColor(color.r, color.g, color.b)
-	end
-end
-
-function AS:SkinTooltip(tooltip, scale)
-	tooltip:HookScript('OnShow', function(self)
-		AS:SkinFrame(self, nil, true)
-		if scale then self:SetScale(AS.UIScale) end
-	end)
-end
-
-function AS:SkinTexture(frame)
-	frame:SetTexCoord(unpack(AS.TexCoords))
-end
-
-function AS:Desaturate(frame, point)
-	for i = 1, frame:GetNumRegions() do
-		local region = select(i, frame:GetRegions())
-		if region:IsObjectType('Texture') then
-			local Texture = region:GetTexture()
-			if type(Texture) == 'string' and strlower(Texture) == 'interface\\dialogframe\\ui-dialogbox-corner' then
-				region:SetTexture(nil)
-				region:Kill()
-			else
-				region:SetDesaturated(true)
-			end
-		end
-	end	
-	frame:HookScript('OnUpdate', function(self)
-		if self:GetNormalTexture() then
-			self:GetNormalTexture():SetDesaturated(true)
-		end
-		if self:GetPushedTexture() then
-			self:GetPushedTexture():SetDesaturated(true)
-		end
-		if self:GetHighlightTexture() then
-			self:GetHighlightTexture():SetDesaturated(true)
-		end
-	end)
-end
-
-local AcceptFrame
 function AS:AcceptFrame(MainText, Function)
 	if not AcceptFrame then
-		AcceptFrame = CreateFrame('Frame', nil, UIParent)
-		AcceptFrame:SetTemplate('Transparent')
+		AcceptFrame = CreateFrame('Frame', 'AcceptFrame', UIParent)
+		AS:SkinFrame(AcceptFrame)
 		AcceptFrame:SetPoint('CENTER', UIParent, 'CENTER')
 		AcceptFrame:SetFrameStrata('DIALOG')
 		AcceptFrame.Text = AcceptFrame:CreateFontString(nil, "OVERLAY")
@@ -433,3 +286,4 @@ function AS:AcceptFrame(MainText, Function)
 end
 
 AS:RegisterEvent('ADDON_LOADED', 'Init')
+AS:RegisterEvent('PLAYER_LOGIN', 'Init')

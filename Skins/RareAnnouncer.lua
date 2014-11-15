@@ -4,8 +4,8 @@ if not AS:CheckAddOn('RareAnnouncer') then return end
 
 function AS:RareAnnouncer()
 	AS:SkinFrame(rareFrame)
-	rareFrame.npcFrame:StripTextures()
-	rareFrame.timeFrame:StripTextures()
+	AS:StripTextures(rareFrame.npcFrame)
+	AS:StripTextures(rareFrame.timeFrame)
 end
 
 AS:RegisterSkin('RareAnnouncer', AS.RareAnnouncer)

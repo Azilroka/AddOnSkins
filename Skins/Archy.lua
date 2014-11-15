@@ -36,7 +36,7 @@ function AS:Archy()
 					solveButton:GetNormalTexture():SetInside()	
 					AS:SkinTexture(solveButton:GetDisabledTexture())
 					solveButton:GetDisabledTexture():SetInside()		
-					solveButton:StyleButton()
+					AS:StyleButton(solveButton)
 					solveButton.isSkinned = true
 				end
 
@@ -48,7 +48,7 @@ function AS:Archy()
 				end
 
 				if not fragmentBar.isSkinned then
-					fragmentBar:CreateBackdrop()
+					AS:CreateBackdrop(fragmentBar)
 					fragmentBar.isSkinned = true
 				end
 

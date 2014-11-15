@@ -4,8 +4,8 @@ if not AS:CheckAddOn('Wowlua') then return end
 
 function AS:WowLua()
 	AS:SkinFrame(WowLuaFrame)
-	WowLuaFrameLineNumScrollFrame:StripTextures(true)
-	WowLuaFrameResizeBar:StripTextures(true)
+	AS:StripTextures(WowLuaFrameLineNumScrollFrame, true)
+	AS:StripTextures(WowLuaFrameResizeBar, true)
 	WowLuaFrameResizeBar:Height(10)
 	AS:SkinCloseButton(WowLuaButton_Close)
 	WowLuaButton_Close:Point('TOPRIGHT', WowLuaFrame, 'TOPRIGHT', 0 , 0)
@@ -22,7 +22,7 @@ function AS:WowLua()
 	WowLuaFrameResizeBar.bg1:Point('TOPLEFT', 6, -2)
 	WowLuaFrameResizeBar.bg1:Point('BOTTOMRIGHT', -27, 0)
 
-	WowLuaFrameCommand:StripTextures()
+	AS:StripTextures(WowLuaFrameCommand)
 	WowLuaFrameCommand.bg1 = CreateFrame('Frame', nil, WowLuaFrameCommand)
 	AS:SkinBackdropFrame(WowLuaFrameCommand.bg1)
 	WowLuaFrameCommand.bg1:Point('TOPLEFT', 0, -4)
@@ -44,12 +44,12 @@ function AS:WowLua()
 	}
 	
 	for _, object in pairs(Buttons) do
-		object:CreateBackdrop()
-		object:GetNormalTexture():SetTexCoord(.1,.9,.1,.9)
+		AS:CreateBackdrop(object)
+		AS:SkinTexture(object:GetNormalTexture())
 		if object:GetDisabledTexture() then
-			object:GetDisabledTexture():SetTexCoord(.1,.9,.1,.9)
+			AS:SkinTexture(object:GetDisabledTexture())
 		end
-		object:StyleButton()
+		AS:StyleButton(object)
 	end
 end
 

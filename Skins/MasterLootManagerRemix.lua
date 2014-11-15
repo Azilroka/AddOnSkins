@@ -59,7 +59,7 @@ function AS:MasterLootManagerRemix()
 	}
 
 	for _, object in pairs(StripAllTextures) do
-		object:StripTextures()
+		AS:StripTextures(object)
 	end	
 
 	for _, object in pairs(SetTemplateD) do

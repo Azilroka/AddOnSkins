@@ -7,7 +7,7 @@ function AS:Capping(event)
 		local bar = self:GetBar(name, true)
 		local Backdrop = bar.backdrop or bar.Backdrop
 		if not Backdrop then
-			bar:CreateBackdrop()
+			AS:CreateBackdrop(bar)
 			bar.iconbackdrop = CreateFrame('Frame', nil, bar)
 			bar.iconbackdrop:SetOutside(bar.icon)
 			AS:SkinTexture(bar.icon)

@@ -4,7 +4,7 @@ if not AS:CheckAddOn('ElvUI') then return end
 function AS:ParchmentRemover(event, addon)
 	if ElvUI[1].private.skins.blizzard.enable ~= true then return end
 	if addon == 'Blizzard_ArchaeologyUI' and ElvUI[1].private.skins.blizzard.archaeology == true then
-		ArchaeologyFrame:StripTextures(true)
+		AS:StripTextures(ArchaeologyFrame, true)
 		for i = 1, ARCHAEOLOGY_MAX_COMPLETED_SHOWN do
 			local artifact = _G["ArchaeologyFrameCompletedPageArtifact"..i]
 			
@@ -46,15 +46,15 @@ function AS:ParchmentRemover(event, addon)
 	if addon == 'Blizzard_Calendar' and ElvUI[1].private.skins.blizzard.calendar == true then
 	 	for i = 1, 42 do
 			_G['CalendarDayButton'..i]:SetFrameLevel(_G['CalendarDayButton'..i]:GetFrameLevel() + 1)
-			_G['CalendarDayButton'..i]:StripTextures()
-			_G['CalendarDayButton'..i]:SetTemplate('Default')
+			AS:StripTextures(_G['CalendarDayButton'..i])
+			AS:SetTemplate(_G['CalendarDayButton'..i], 'Default')
 			_G['CalendarDayButton'..i..'OverlayFrame']:SetAlpha(1)
-			_G['CalendarDayButton'..i..'DarkFrame']:StripTextures()
+			AS:StripTextures(_G['CalendarDayButton'..i..'DarkFrame'])
 			_G['CalendarDayButton'..i..'EventTexture']:SetAlpha(1)
 			for j = 1, 4 do
 				local b = _G['CalendarDayButton'..i..'EventButton'..j]
-				b:StripTextures()
-				b:StyleButton(true)
+				AS:StripTextures(b)
+				AS:StyleButton(b)
 			end
 		end
 	end
@@ -62,10 +62,10 @@ function AS:ParchmentRemover(event, addon)
 		GlyphFrame.background:Hide()
 		GlyphFrame.background.Show = function() end
 		GlyphFrame.background.Hide = function() end
-		GlyphFrame:StripTextures()
-		GlyphFrame:CreateBackdrop('Transparent')
+		AS:StripTextures(GlyphFrame)
+		AS:CreateBackdrop(GlyphFrame, 'Transparent')
 		SetPortraitToTexture(GlyphFrame.specIcon, icon)
-		GlyphFrame.specIcon:SetTexCoord(unpack(AS.TexCoords))
+		AS:SkinTexture(GlyphFrame.specIcon)
 		GlyphFrame.specIcon:SetDrawLayer('OVERLAY')
 
 		hooksecurefunc(_G, 'GlyphFrame_Update', function(self)
@@ -82,13 +82,15 @@ function AS:ParchmentRemover(event, addon)
 			if not glyphType then
 				return;
 			end
-			self:SetTemplate('Default')
+			AS:SetTemplate(self, 'Default')
 			self.ring:Hide()
 			if id % 2 == 1 and not self.resized then
 				self.resized = true
 				self:Size(self:GetWidth() * .8, self:GetHeight() * .8)
 			end
-			self.glyph:SetTexCoord(unpack(AS.TexCoords))
+			AS:SetTemplate(self, 'Default')
+			self.ring:Hide()
+			AS:SkinTexture(self.glyph)
 			self.glyph:ClearAllPoints()
 			self.glyph:SetInside(self)
 			self.glyph:SetDrawLayer('OVERLAY')
@@ -132,7 +134,7 @@ function AS:ParchmentRemover(event, addon)
 				self.spellTex:SetTexture("")
 			end)
 
-			QuestMapFrame.DetailsFrame:StripTextures(true)
+			AS:StripTextures(QuestMapFrame.DetailsFrame, true)
 
 			if QuestProgressScrollFrame.spellTex then
 				QuestProgressScrollFrame.spellTex:SetTexture("")
@@ -154,8 +156,8 @@ function AS:ParchmentRemover(event, addon)
 				QuestProgressRequiredMoneyText:SetTextColor(1, 1, 0)
 			end)
 
-			QuestFrameGreetingPanel:StripTextures()
-			QuestGreetingScrollFrame:StripTextures()
+			AS:StripTextures(QuestFrameGreetingPanel)
+			AS:StripTextures(QuestGreetingScrollFrame)
 			QuestGreetingFrameHorizontalBreak:Kill()
 			GreetingText:SetTextColor(1, 1, 1)
 			GreetingText.SetTextColor = AS.Noop
@@ -176,24 +178,6 @@ function AS:ParchmentRemover(event, addon)
 				end
 			end
 
-			local function QuestObjectiveText()
-				local numObjectives = GetNumQuestLeaderBoards()
-				local objective
-				local numVisibleObjectives = 0
-				for i = 1, numObjectives do
-					local _, type, finished = GetQuestLogLeaderBoard(i)
-					if type ~= 'spell' then
-						numVisibleObjectives = numVisibleObjectives+1
-						objective = _G['QuestInfoObjective'..numVisibleObjectives]
-						if finished then
-							objective:SetTextColor(1, 1, 0)
-						else
-							objective:SetTextColor(0.6, 0.6, 0.6)
-						end
-					end
-				end			
-			end
-
 			hooksecurefunc('QuestInfo_Display', function(template, parentFrame, acceptButton, material)
 				QuestInfoTitleHeader:SetTextColor(1, 1, 0)
 				QuestInfoDescriptionHeader:SetTextColor(1, 1, 0)
@@ -208,7 +192,22 @@ function AS:ParchmentRemover(event, addon)
 				QuestInfoRewardsFrame.SpellLearnText:SetTextColor(1, 1, 1);
 				QuestInfoRewardsFrame.PlayerTitleText:SetTextColor(1, 1, 1);
 				QuestInfoRewardsFrame.XPFrame.ReceiveText:SetTextColor(1, 1, 1);
-				QuestObjectiveText()
+				local numObjectives = GetNumQuestLeaderBoards()
+				local numVisibleObjectives = 0
+				for i = 1, numObjectives do
+					local _, type, finished = GetQuestLogLeaderBoard(i)
+					if type ~= 'spell' then
+						numVisibleObjectives = numVisibleObjectives + 1
+						local objective = _G['QuestInfoObjective'..numVisibleObjectives]
+						if objective then
+							if finished then
+								objective:SetTextColor(1, 1, 0)
+							else
+								objective:SetTextColor(0.6, 0.6, 0.6)
+							end
+						end
+					end
+				end
 			end)
 
 			hooksecurefunc('QuestInfo_ShowRequiredMoney', function()
@@ -222,7 +221,7 @@ function AS:ParchmentRemover(event, addon)
 				end
 			end)
 
-			QuestFrameInset:StripTextures()
+			AS:StripTextures(QuestFrameInset)
 		end
 		if ElvUI[1].private.skins.blizzard.spellbook == true then
 			SpellBookPage1:Kill()
@@ -260,13 +259,13 @@ function AS:ParchmentRemover(event, addon)
 				for i = 1, #SpellBookCoreAbilitiesFrame.Abilities do
 					local button = SpellBookCoreAbilitiesFrame.Abilities[i]
 					if button and button.isSkinned ~= true then
-						button:SetTemplate()
+						AS:SetTemplate(button)
 
 						button.EmptySlot:SetAlpha(0)
 						button.ActiveTexture:SetAlpha(0)
 						button.FutureTexture:SetAlpha(0)
 
-						button.iconTexture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+						AS:SkinTexture(button.iconTexture)
 						button.iconTexture:SetInside()
 
 						if button.FutureTexture:IsShown() then
@@ -278,7 +277,7 @@ function AS:ParchmentRemover(event, addon)
 							button.InfoText:SetTextColor(0.8, 0.8, 0.8)
 						end
 						
-						button:StyleButton()
+						AS:StyleButton(button)
 						button.isSkinned = true
 					end
 				end

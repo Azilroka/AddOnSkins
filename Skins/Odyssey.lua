@@ -3,9 +3,9 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Odyssey') then return end
 
 function AS:Odyssey()
-	OdysseyMapsMenuScrollFrame:StripTextures(true)
-	OdysseyFrameQuestDetailsSeries:StripTextures(true)
-	OdysseyFrameSearchScrollFrame:StripTextures(true)
+	AS:StripTextures(OdysseyMapsMenuScrollFrame, true)
+	AS:StripTextures(OdysseyFrameQuestDetailsSeries, true)
+	AS:StripTextures(OdysseyFrameSearchScrollFrame, true)
 	OdysseyFramePortrait:Kill()
 	AS:SkinFrame(OdysseyFrame)
 	AS:SkinFrame(OdysseyFrameRealmSummaryScrollFrame)

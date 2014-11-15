@@ -5,14 +5,14 @@ if not AS:CheckAddOn('Grinder') then return end
 function AS:Grinder()
 	AS:SkinTab(CharacterFrameTab5)
 	AS:SkinButton(GrinderModuleSelectButton)
-	GrinderListScrollFrame:StripTextures(true)
+	AS:StripTextures(GrinderListScrollFrame, true)
 	AS:SkinScrollBar(GrinderListScrollFrameScrollBar)
 	for i = 1, 15 do
 		_G['GrindBar'..i].left:Kill()
 		_G['GrindBar'..i].right:Kill()
 		_G['GrindBar'..i].background:Kill()
 		_G['GrindBar'..i..'ProgressBar']:SetStatusBarTexture(AS.NormTex)
-		_G['GrindBar'..i..'ProgressBar']:CreateBackdrop()
+		AS:CreateBackdrop(_G['GrindBar'..i..'ProgressBar'])
 	end
 end
 
