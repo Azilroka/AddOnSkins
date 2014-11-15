@@ -4,14 +4,16 @@ local name = 'Blizzard_GlyphUI'
 function AS:Blizzard_GlyphUI(event, addon)
 	if addon ~= 'Blizzard_GlyphUI' then return end
 
-	AS:CreateBackdrop(GlyphFrame)
-	GlyphFrame.Backdrop:Point("TOPLEFT", GlyphFrame, "TOPLEFT", 3, 2)
-	GlyphFrame.Backdrop:Point("BOTTOMRIGHT", GlyphFrame, "BOTTOMRIGHT", -3, 0)
+	AS:SkinFrame(GlyphFrame)
 	AS:SkinEditBox(GlyphFrameSearchBox)
 	AS:SkinDropDownBox(GlyphFrameFilterDropDown, 212)
 
 	GlyphFrameBackground:SetPoint("TOPLEFT", 5, 0)
 	GlyphFrameBackground:SetPoint("BOTTOMRIGHT", -5, 2)
+	AS:SkinTexture(GlyphFrame.specIcon)
+	GlyphFrame:HookScript('OnUpdate', function(self)
+		self.specIcon:SetAlpha(1 - self.glow:GetAlpha())
+	end)
 
 	for i = 1, 6 do
 		AS:SetTemplate(_G["GlyphFrameGlyph"..i])
@@ -50,24 +52,21 @@ function AS:Blizzard_GlyphUI(event, addon)
 			_G["GlyphFrameGlyph"..i].Backdrop:Show()
 		end)
 
-		hooksecurefunc(_G["GlyphFrameGlyph"..i].glyph, 'SetTexture', function(self, texture)
-			self:Hide()
-			local _, _, _, _, iconFilename = GetGlyphSocketInfo(i, PlayerTalentFrame.talentGroup)
-			if iconFilename then
-				_G["GlyphFrameGlyph"..i].icon:SetTexture(iconFilename)
-			else
-				_G["GlyphFrameGlyph"..i].icon:SetTexture("Interface\\Spellbook\\UI-Glyph-Rune1")
+		hooksecurefunc('GlyphFrame_Update', function(self)
+			local isActiveTalentGroup = PlayerTalentFrame and PlayerTalentFrame.talentGroup == GetActiveSpecGroup();
+			for i = 1, NUM_GLYPH_SLOTS do
+				local GlyphSocket = _G["GlyphFrameGlyph"..i];
+				GlyphSocket.glyph:Hide()
+				local _, _, _, _, iconFilename = GetGlyphSocketInfo(i, PlayerTalentFrame.talentGroup)
+				if iconFilename then
+					GlyphSocket.icon:SetTexture(iconFilename)
+				else
+					GlyphSocket.icon:SetTexture("Interface\\Spellbook\\UI-Glyph-Rune1")
+				end
+				GlyphFrameGlyph_UpdateSlot(GlyphSocket);
+				SetDesaturation(GlyphSocket.icon, not isActiveTalentGroup);
 			end
-		end)
-
-		hooksecurefunc(_G["GlyphFrameGlyph"..i].glyph, 'Show', function(self, texture)
-			self:Hide()
-			local _, _, _, _, iconFilename = GetGlyphSocketInfo(i, PlayerTalentFrame.talentGroup)
-			if iconFilename then
-				_G["GlyphFrameGlyph"..i].icon:SetTexture(iconFilename)
-			else
-				_G["GlyphFrameGlyph"..i].icon:SetTexture("Interface\\Spellbook\\UI-Glyph-Rune1")
-			end
+			SetDesaturation(self.specIcon, not isActiveTalentGroup);
 		end)
 
 		if i % 2 == 1 then
@@ -96,11 +95,6 @@ function AS:Blizzard_GlyphUI(event, addon)
 	AS:SetTemplate(GlyphFrameClearInfoFrame, 'Default')
 	AS:SkinTexture(GlyphFrameClearInfoFrameIcon)
 	GlyphFrameClearInfoFrameIcon:SetInside()
-
-	GlyphFrameLevelOverlay1:SetParent(GlyphFrame.Backdrop)
-	GlyphFrameLevelOverlayText1:SetParent(GlyphFrame.Backdrop)
-	GlyphFrameLevelOverlay2:SetParent(GlyphFrame.Backdrop)
-	GlyphFrameLevelOverlayText2:SetParent(GlyphFrame.Backdrop)
 
 	AS:SkinScrollBar(GlyphFrameScrollFrameScrollBar)
 
