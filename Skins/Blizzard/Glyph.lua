@@ -52,11 +52,13 @@ function AS:Blizzard_GlyphUI(event, addon)
 			_G["GlyphFrameGlyph"..i].Backdrop:Show()
 		end)
 
+		_G["GlyphFrameGlyph"..i].glyph:Hide()
+		hooksecurefunc(_G["GlyphFrameGlyph"..i].glyph, 'Show', function(self) self:Hide() end)
+		
 		hooksecurefunc('GlyphFrame_Update', function(self)
 			local isActiveTalentGroup = PlayerTalentFrame and PlayerTalentFrame.talentGroup == GetActiveSpecGroup();
 			for i = 1, NUM_GLYPH_SLOTS do
 				local GlyphSocket = _G["GlyphFrameGlyph"..i];
-				GlyphSocket.glyph:Hide()
 				local _, _, _, _, iconFilename = GetGlyphSocketInfo(i, PlayerTalentFrame.talentGroup)
 				if iconFilename then
 					GlyphSocket.icon:SetTexture(iconFilename)
