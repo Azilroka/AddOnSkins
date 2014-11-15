@@ -242,20 +242,29 @@ function AS:SkinCloseButton(CloseButton, Reposition)
 	CloseButton.isSkinned = true
 end
 
+local EditBoxRegions = {
+	'Left',
+	'Middle',
+	'Right',
+	'Mid'
+}
+
 function AS:SkinEditBox(EditBox, Width, Height)
 	if EditBox.isSkinned then return end
 
-	local Left, Middle, Right, Mid = _G[EditBox:GetName().."Left"], _G[EditBox:GetName().."Middle"], _G[EditBox:GetName().."Right"], _G[EditBox:GetName().."Mid"]
+	local EditBoxName = EditBox:GetName()
+	if EditBoxName then
+		for _, Region in pairs(EditBoxRegions) do
+			if _G[EditBoxName..Region] then
+				_G[EditBoxName..Region]:Kill()
+			end
+		end
+	end
 
-	if Left then Left:Kill() end
-	if Middle then Middle:Kill() end
-	if Right then Right:Kill() end
-	if Mid then Mid:Kill() end
-
-	if EditBox.Left then
-		EditBox.Left:Kill()
-		EditBox.Middle:Kill()
-		EditBox.Right:Kill()
+	for _, Region in pairs(EditBoxRegions) do
+		if EditBox[Region] then
+			EditBox[Region]:Kill()
+		end
 	end
 
 	AS:CreateBackdrop(EditBox)
@@ -263,7 +272,7 @@ function AS:SkinEditBox(EditBox, Width, Height)
 	if Width then EditBox:Width(Width) end
 	if Height then EditBox:Height(Height) end
 
-	if EditBox:GetName() and EditBox:GetName():find("Silver") or EditBox:GetName():find("Copper") then
+	if EditBoxName and (EditBoxName:find("Silver") or EditBoxName:find("Copper")) then
 		EditBox.Backdrop:Point("BOTTOMRIGHT", -12, -2)
 	end
 
