@@ -15,21 +15,19 @@ function AS:PowerAuras(event, addon)
 					return false
 				end
 
-				local backdrop = frame.backdrop or frame.Backdrop
-				if frame and not backdrop then
+				if frame and not frame.Backdrop then
 					AS:CreateBackdrop(frame)
-					backdrop = frame.backdrop or frame.Backdrop
-					backdrop:Hide()
+					frame.Backdrop:Hide()
 				end
 
 				if frame and aura.owntex then
 					local texture = aura:GetTexture()
-					if not backdrop:IsShown() then
-						backdrop:Show()
+					if not frame.Backdrop:IsShown() then
+						frame.Backdrop:Show()
 					end
 					AS:SkinTexture(texture)
-				elseif frame and backdrop:IsShown() then
-					backdrop:Hide()
+				elseif frame and frame.Backdrop:IsShown() then
+					frame.Backdrop:Hide()
 				end
 			end
 

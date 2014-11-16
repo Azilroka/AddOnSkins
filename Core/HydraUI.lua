@@ -100,7 +100,7 @@ function AS:CreateToggleButton(Name, Text, Panel1, Panel2, TooltipText1, Tooltip
 end
 
 function AS:EmbedSystem_WindowResize()
-	local ChatPanel = AS:CheckOption('EmbedRightChat') and AS.InfoRight or AS.InfoLeft
+--[[	local ChatPanel = AS:CheckOption('EmbedRightChat') and AS.InfoRight or AS.InfoLeft
 	local ChatTab = AS:CheckOption('EmbedRightChat') and AS.TabsRightBackground or AS.TabsLeftBackground
 	if Tukui[2]['Chat']['Background'] then
 		local FramePoint, OffsetY
@@ -123,7 +123,7 @@ function AS:EmbedSystem_WindowResize()
 	if Enhanced_Config and Enhanced_Config[1].Options.args.addonskins then
 		Enhanced_Config[1].Options.args.addonskins.args.embed.args.EmbedLeftWidth.min = floor(EmbedSystem_MainWindow:GetWidth() * .25)
 		Enhanced_Config[1].Options.args.addonskins.args.embed.args.EmbedLeftWidth.max = floor(EmbedSystem_MainWindow:GetWidth() * .75)
-	end
+	end]]
 end
 
 if AS:CheckAddOn('CoolLine') then

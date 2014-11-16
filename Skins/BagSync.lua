@@ -22,8 +22,7 @@ function AS:BagSync()
 						local object = select(i, self.scrollbar:GetChildren())
 						if object then object:Hide() end
 					end
-					local Backdrop = self.scrollbar.backdrop or self.scrollbar.Backdrop
-					Backdrop:Show()
+					self.scrollbar.Backdrop:Show()
 				end)
 				self.scrollbar.isSkinned = true
 			end

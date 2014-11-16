@@ -173,13 +173,12 @@ if AS:CheckAddOn('Recount') then
 		Recount_MainWindow:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
 
 		if AS:CheckOption('Recount') then
-			local Backdrop = Recount_MainWindow.backdrop or Recount_MainWindow.Backdrop
-			if Backdrop then
-				Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+			if Recount_MainWindow.Backdrop then
+				Recount_MainWindow.Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 				if AS:CheckOption('RecountBackdrop') then
-					Backdrop:Show()
+					Recount_MainWindow.Backdrop:Show()
 				else
-					Backdrop:Hide()
+					Recount_MainWindow.Backdrop:Hide()
 				end
 			end
 		end
@@ -265,8 +264,7 @@ if AS:CheckAddOn('alDamageMeter') then
 		dmconf.barheight = floor((EmbedParent:GetHeight() / dmconf.maxbars) - dmconf.spacing)
 		dmconf.width = EmbedParent:GetWidth()
 		if AS:CheckOption('TinyDPS') then
-			local Backdrop = alDamageMeterFrame.backdrop or alDamageMeterFrame.Backdrop
-			Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+			alDamageMeterFrame.Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 			alDamageMeterFrame.bg:Kill()
 		end
 		alDamageMeterFrame:ClearAllPoints()
@@ -315,10 +313,13 @@ if AS:CheckAddOn('Skada') then
 			window.bargroup:SetParent(relativeFrame)
 			window.bargroup:SetFrameStrata('LOW')
 			window.bargroup:SetBackdrop(nil)
-			local Backdrop = window.bargroup.backdrop or window.bargroup.Backdrop
-			if Backdrop then
-				Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and "Transparent" or 'Default')
-				if not AS:CheckOption('SkadaBackdrop') then Backdrop:Hide() else Backdrop:Show() end
+			if window.bargroup.Backdrop then
+				window.bargroup.Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and "Transparent" or 'Default')
+				if AS:CheckOption('SkadaBackdrop') then
+					window.bargroup.Backdrop:Show()
+				else
+					window.bargroup.Backdrop:Hide()
+				end
 			end
 			barmod.ApplySettings(barmod, window)
 		end

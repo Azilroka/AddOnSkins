@@ -8,8 +8,7 @@ function AS:PetTracker()
 		AS:Delay(1, function()
 			AS:StripTextures(PetTrackerProgressBar1.Overlay)
 			AS:CreateBackdrop(PetTrackerProgressBar1.Overlay)
-			local Backdrop = PetTrackerProgressBar1.Overlay.backdrop or PetTrackerProgressBar1.Overlay.Backdrop
-			Backdrop:SetBackdropColor()
+			PetTrackerProgressBar1.Overlay.Backdrop:SetBackdropColor(0,0,0,0)
 			for i = 1, PetTracker.MaxQuality do
 				PetTrackerProgressBar1[i]:SetStatusBarTexture(AS.NormTex)
 			end

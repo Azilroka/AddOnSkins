@@ -27,8 +27,6 @@ function AS:CLCProt()
 		end
 		AS:SkinButton(button)
 
-		local Backdrop = button.backdrop or button.Backdrop
-		Backdrop:SetAllPoints()
 		button:EnableMouse(false)
 		button:Size(size)
 		button.texture = button:CreateTexture('$parentIcon', 'OVERLAY')

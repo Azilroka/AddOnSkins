@@ -12,9 +12,8 @@ function AS:MrTrader()
 
 	MRTSkillFilterButtons:SetWidth(160)
 	AS:SkinBackdropFrame(MRTSkillFilterButtons)
-	local Backdrop = MRTSkillFilterButtons.backdrop or MRTSkillFilterButtons.Backdrop
-	Backdrop:Point("TOPLEFT", 0, 2)
-	Backdrop:Point("BOTTOMRIGHT", -3, -1)
+	MRTSkillFilterButtons.Backdrop:Point("TOPLEFT", 0, 2)
+	MRTSkillFilterButtons.Backdrop:Point("BOTTOMRIGHT", -3, -1)
 
 	AS:StripTextures(MRTSkillFilterScrollFrame)
 	AS:SkinScrollBar(MRTSkillFilterScrollFrameScrollBar)
@@ -57,8 +56,7 @@ function AS:MrTrader()
 		AS:SkinIconButton(_G["MRTSkillButton"..i.."Icon"])
 		_G["MRTSkillButton"..i.."IconBorder"]:Kill()
 		_G["MRTSkillButton"..i.."Icon"]:HookScript('OnUpdate', function(self)
-			local Backdrop = self.backdrop or self.Backdrop
-			Backdrop:SetBackdropBorderColor(_G["MRTSkillButton"..i.."IconBorder"]:GetBackdropBorderColor())
+			self.Backdrop:SetBackdropBorderColor(_G["MRTSkillButton"..i.."IconBorder"]:GetBackdropBorderColor())
 		end)
 		for j = 1, 4 do
 			AS:SkinTexture(_G["MRTSkillButton"..i.."ReagentLrg"..j.."IconTexture"])

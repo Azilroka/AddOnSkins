@@ -1275,8 +1275,7 @@ function AS:Armory()
 			for i = 1, numAchievements do
 				local statusbar = _G["ArmoryAchievementBar"..i.."AchievementBar"]
 				if statusbar then
-					local Backdrop = statusbar.backdrop or statusbar.Backdrop
-					if not Backdrop then
+					if not statusbar.Backdrop then
 						AS:SkinStatusBar(statusbar)
 					end
 					_G["ArmoryAchievementBar"..i.."Background"]:SetTexture(nil)

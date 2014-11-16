@@ -125,7 +125,7 @@ local BlizzardRegions = {
 	'Left',
 	'Middle',
 	'Right',
-	'Mid'
+	'Mid',
 	'LeftDisabled',
 	'MiddleDisabled',
 	'RightDisabled',
@@ -367,6 +367,21 @@ function AS:SkinScrollBar(Frame)
 			ScrollUpButton.Text:SetFont([[Fonts\ARIALN.TTF]], 12)
 			ScrollUpButton.Text:SetText("▲")
 			ScrollUpButton.Text:SetPoint("CENTER", 1, 0)
+
+			ScrollUpButton:HookScript('OnShow', function(self)
+				if not self:IsEnabled() then
+					self.Text:SetTextColor(.3, .3, .3)
+				end
+			end)
+
+			ScrollUpButton:HookScript('OnDisable', function(self)
+				self.Text:SetTextColor(.3, .3, .3)
+			end)
+			
+			ScrollUpButton:HookScript('OnEnable', function(self)
+				self.Text:SetTextColor(1, 1, 1)
+			end)
+
 			ScrollUpButton:HookScript('OnEnter', function(self)
 				self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
 				self.Text:SetTextColor(Color.r, Color.g, Color.b)
@@ -376,15 +391,32 @@ function AS:SkinScrollBar(Frame)
 				self.Text:SetTextColor(1, 1, 1)
 			end)
 		end	
+
 		if not ScrollDownButton.Text then
 			ScrollDownButton.Text = ScrollDownButton:CreateFontString(nil, "OVERLAY")
 			ScrollDownButton.Text:SetFont([[Fonts\ARIALN.TTF]], 12)
 			ScrollDownButton.Text:SetText("▼")
 			ScrollDownButton.Text:SetPoint("CENTER", 1, 0)
+
+			ScrollDownButton:HookScript('OnShow', function(self)
+				if not self:IsEnabled() then
+					self.Text:SetTextColor(.3, .3, .3)
+				end
+			end)
+
+			ScrollDownButton:HookScript('OnDisable', function(self)
+				self.Text:SetTextColor(.3, .3, .3)
+			end)
+			
+			ScrollDownButton:HookScript('OnEnable', function(self)
+				self.Text:SetTextColor(1, 1, 1)
+			end)
+
 			ScrollDownButton:HookScript('OnEnter', function(self)
 				self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
 				self.Text:SetTextColor(Color.r, Color.g, Color.b)
 			end)
+
 			ScrollDownButton:HookScript('OnLeave', function(self)
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self.Text:SetTextColor(1, 1, 1)

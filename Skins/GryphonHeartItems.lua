@@ -41,13 +41,12 @@ function AS:GryphonheartItems()
 			_G[name..'Item'..j].IsSkinned = true
 			_G[name..'Item'..j]:HookScript('OnUpdate', function(self)
 				local itemGuid, texture, count, stacklocked, quality = GHI_ContainerAPI().GetAPI().GHI_GetContainerItemInfo(self.containerGuid, self.slotID)
-				local backdrop = self.backdrop or self.Backdrop
-				backdrop:SetAllPoints()
+				self.Backdrop:SetAllPoints()
 				if quality and quality > 1 then
 					local r, g, b = GetItemQualityColor(quality)
-					backdrop:SetBackdropBorderColor(r, g, b)
+					self.Backdrop:SetBackdropBorderColor(r, g, b)
 				else
-					backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+					self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 				end
 			end)
 		end

@@ -13,10 +13,9 @@ function AS:MogIt()
 			if _G['MogItPreview'..i] and not _G['MogItPreview'..i].isSkinned then
 				for _, object in pairs(_G['MogItPreview'..i].slots) do
 					AS:CreateBackdrop(object)
-					local Backdrop = object.backdrop or object.Backdrop
 					object.icon:ClearAllPoints()
 					AS:SkinTexture(object.icon)
-					object.icon:SetInside(Backdrop)
+					object.icon:SetInside(object.Backdrop)
 					object:SetNormalTexture(nil)
 					AS:StyleButton(object)
 				end

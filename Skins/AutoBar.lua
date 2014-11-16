@@ -7,8 +7,7 @@ function AS:AutoBar(event, addon)
 		for buttonName, button in pairs(AutoBar.buttonList) do
 			if not button.IsStyled then
 				AS:CreateBackdrop(button.frame)
-				local Backdrop = button.frame.backdrop or button.frame.Backdrop
-				Backdrop:SetAllPoints()
+				button.frame.Backdrop:SetAllPoints()
 				AS:StyleButton(button.frame)
 				button.frame:DisableDrawLayer('ARTWORK')
 				AS:SkinTexture(button.frame.icon)
@@ -19,8 +18,7 @@ function AS:AutoBar(event, addon)
 				for key, popup in pairs(button.frame.popupHeader.popupButtonList) do
 					if not button.IsStyled then
 						AS:CreateBackdrop(popup.frame)
-						local Backdrop = popup.frame.backdrop or popup.frame.Backdrop
-						Backdrop:SetAllPoints()
+						button.frame.Backdrop:SetAllPoints()
 						AS:StyleButton(popup.frame)
 						popup.frame:DisableDrawLayer('ARTWORK')
 						AS:SkinTexture(popup.frame.icon)
