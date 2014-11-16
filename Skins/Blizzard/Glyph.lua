@@ -37,7 +37,7 @@ function AS:Blizzard_GlyphUI(event, addon)
 		_G["GlyphFrameGlyph"..i].Backdrop:SetScript('OnUpdate', function(self)
 			local Alpha = _G["GlyphFrameGlyph"..i].highlight:GetAlpha()
 			self:SetAlpha(Alpha)
-			if _G["GlyphFrameGlyph"..i].icon:GetTexture() == "Interface\\Spellbook\\UI-Glyph-Rune1" then
+			if strfind(_G["GlyphFrameGlyph"..i].icon:GetTexture(), "Interface\\Spellbook\\UI%-Glyph%-Rune") then
 				if Alpha == 0 then
 					_G["GlyphFrameGlyph"..i].icon:SetVertexColor(1, 1, 1)
 					_G["GlyphFrameGlyph"..i].icon:SetAlpha(1)
@@ -63,7 +63,7 @@ function AS:Blizzard_GlyphUI(event, addon)
 				if iconFilename then
 					GlyphSocket.icon:SetTexture(iconFilename)
 				else
-					GlyphSocket.icon:SetTexture("Interface\\Spellbook\\UI-Glyph-Rune1")
+					GlyphSocket.icon:SetTexture("Interface\\Spellbook\\UI-Glyph-Rune-"..i)
 				end
 				GlyphFrameGlyph_UpdateSlot(GlyphSocket);
 				SetDesaturation(GlyphSocket.icon, not isActiveTalentGroup);
