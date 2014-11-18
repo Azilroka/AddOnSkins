@@ -2,13 +2,13 @@ local AS = unpack(AddOnSkins)
 
 local Color = RAID_CLASS_COLORS[AS.MyClass]
 
-function AS:SetTemplate(Frame, Template, UseTexture)
+function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 	local r, g, b = unpack(AS.BackdropColor)
 	local alpha = (Template == "Transparent" and .8 or 1)
 	local Texture = AS.Blank
 
 	if UseTexture then 
-		Texture = AS.NormTex
+		Texture = TextureFile or AS.NormTex
 	end
 
 	if AS.PixelPerfect then
@@ -91,13 +91,13 @@ function AS:SetTemplate(Frame, Template, UseTexture)
 	Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
 end
 
-function AS:CreateBackdrop(Frame, Template, UseTexture)
+function AS:CreateBackdrop(Frame, Template, UseTexture, TextureFile)
 	if Frame.Backdrop then return end
 	if not Template then Template = "Default" end
 
 	local Backdrop = CreateFrame("Frame", nil, Frame)
 	Backdrop:SetOutside()
-	AS:SetTemplate(Backdrop, Template, UseTexture)
+	AS:SetTemplate(Backdrop, Template, UseTexture, TextureFile)
 
 	if Frame:GetFrameLevel() - 1 >= 0 then
 		Backdrop:SetFrameLevel(Frame:GetFrameLevel() - 1)

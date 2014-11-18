@@ -26,7 +26,7 @@ function AS:Blizzard_Quest()
 	AS:SkinButton(QuestFrameCompleteQuestButton, true)
 
 	AS:SkinCloseButton(QuestFrameCloseButton)
-
+	QuestInfoItemHighlight:StripTextures()
 	QuestFrame:SetHeight(500)
 
 	for i = 1, 6 do
@@ -37,7 +37,7 @@ function AS:Blizzard_Quest()
 		AS:CreateBackdrop(Button)
 		Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
 		Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
-		Button.Backdrop:SetPoint('RIGHT', Button.NameFrame, 'RIGHT', -10, 0)
+		Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -2, 0)
 		Button.Icon.Backdrop = CreateFrame('Frame', nil, Button)
 		AS:SetTemplate(Button.Icon.Backdrop)
 		Button.Icon.Backdrop:SetBackdropColor(0, 0, 0, 0)
@@ -65,7 +65,7 @@ function AS:Blizzard_Quest()
 			AS:CreateBackdrop(RewardButton)
 			RewardButton.Backdrop:SetPoint('TOPLEFT', RewardButton.Icon, 'TOPRIGHT', 0, 0)
 			RewardButton.Backdrop:SetPoint('BOTTOMLEFT', RewardButton.Icon, 'BOTTOMRIGHT', 0, 0)
-			RewardButton.Backdrop:SetPoint('RIGHT', RewardButton.NameFrame, 'RIGHT', -10, 0)
+			RewardButton.Backdrop:SetPoint('RIGHT', RewardButton, 'RIGHT', -2, 0)
     		AS:SkinTexture(RewardButton.Icon)
 			RewardButton.Icon.Backdrop = CreateFrame('Frame', nil, RewardButton)
 			AS:SetTemplate(RewardButton.Icon.Backdrop)
@@ -86,16 +86,27 @@ function AS:Blizzard_Quest()
 					self:SetBackdropBorderColor(unpack(AS.BorderColor))
 				end
 			end)
+			RewardButton:HookScript('OnUpdate', function(self)
+				if QuestInfoItemHighlight:IsShown() and self:GetID() == QuestInfoFrame.itemChoice then
+					self.Backdrop:SetBackdropBorderColor(1, 1, 0)
+					self.Name:SetTextColor(1, 1, 0)
+				elseif QuestInfoItemHighlight:IsShown() then
+					self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+					self.Name:SetTextColor(1, 1, 1)
+				else
+					self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+					self.Name:SetTextColor(1, 1, 1)
+				end
+			end)
 			RewardButton.skinned = true
     	end
     end)
 
-	AS:StripTextures(QuestNPCModel)
-	AS:CreateBackdrop(QuestNPCModel, 'Default')
-	QuestNPCModel:Point("TOPLEFT", QuestLogDetailFrame, "TOPRIGHT", 4, -34)
-	AS:StripTextures(QuestNPCModelTextFrame)
-	AS:CreateBackdrop(QuestNPCModelTextFrame, 'Default')
-	QuestNPCModelTextFrame.Backdrop:Point("TOPLEFT", QuestNPCModel.Backdrop, "BOTTOMLEFT", 0, -2)
+	AS:SkinFrame(QuestNPCModel)
+	--QuestNPCModel:Point("TOPLEFT", QuestLogDetailFrame, "TOPRIGHT", 4, -34)
+	AS:SkinBackdropFrame(QuestNPCModelTextFrame)
+	QuestNPCModelTextFrame.Backdrop:Point("TOPLEFT", QuestNPCModel, "BOTTOMLEFT", 0, -2)
+	QuestNPCModelTextFrame.Backdrop:Point("TOPRIGHT", QuestNPCModel, "BOTTOMRIGHT", 0, -2)
 
 	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(parentFrame, portrait, text, name, x, y)
 		QuestNPCModel:ClearAllPoints();

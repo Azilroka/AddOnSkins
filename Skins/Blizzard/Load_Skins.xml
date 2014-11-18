@@ -6,7 +6,10 @@
 	<Script file="ChatBubbles.lua"/>
 	<Script file="DebugTools.lua"/>
 	<Script file="DressUp.lua"/>
+	<Script file="DraenorAbilityButton.lua"/>
+	<Script file="ExtraActionButton.lua"/>
 	<Script file="Glyph.lua"/>
+	<Script file="Gossip.lua"/>
 	<Script file="ItemSocketing.lua"/>
 	<Script file="Quest.lua"/>
 	<Script file="Talents.lua"/>
