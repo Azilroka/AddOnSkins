@@ -64,6 +64,41 @@ function AS:Blizzard_Merchant()
 				end
 			end
 		end
+		local buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable = GetBuybackItemInfo(GetNumBuybackItems());
+		MerchantBuyBackItemItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
+		if ( buybackName ) then
+			local link = GetBuybackItemInfo(GetNumBuybackItems())
+			if link then
+				local quality = select(3, GetItemInfo(link))
+				if (quality and quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[quality]) then
+					MerchantBuyBackItemItemButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[quality].r, BAG_ITEM_QUALITY_COLORS[quality].g, BAG_ITEM_QUALITY_COLORS[quality].b)
+				else
+					MerchantBuyBackItemItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end
+			end
+		end
+	end)
+
+	hooksecurefunc('MerchantFrame_UpdateBuybackInfo', function()
+		local numBuybackItems = GetNumBuybackItems();
+		local itemButton, buybackButton;
+		local buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable;
+		for i=1, BUYBACK_ITEMS_PER_PAGE do
+			itemButton = _G["MerchantItem"..i.."ItemButton"];
+			buybackButton = _G["MerchantItem"..i];
+			if ( i <= numBuybackItems ) then
+				buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable = GetBuybackItemInfo(i);
+				local link = GetBuybackItemInfo(i)
+				if link then
+					local quality = select(3, GetItemInfo(link))
+					if (quality and quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[quality]) then
+						itemButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[quality].r, BAG_ITEM_QUALITY_COLORS[quality].g, BAG_ITEM_QUALITY_COLORS[quality].b)
+					else
+						itemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
+					end
+				end
+			end
+		end
 	end)
 
 	hooksecurefunc('MerchantFrame_UpdateCurrencies', function()
@@ -77,7 +112,8 @@ function AS:Blizzard_Merchant()
 		end
 	end)
 
-	AS:StripTextures(MerchantBuyBackItem)
+	AS:SkinBackdropFrame(MerchantBuyBackItem)
+	MerchantBuyBackItem.Backdrop:SetOutside(MerchantBuyBackItem, 6, 6)
 
 	AS:SkinFrame(MerchantBuyBackItemItemButton)
 	AS:StyleButton(MerchantBuyBackItemItemButton)
