@@ -33,27 +33,29 @@ function AS:Blizzard_Calendar(event, addon)
 	CalendarInviteStatusContextMenu.SetBackdropColor = AS.Noop
 	CalendarInviteStatusContextMenu.SetBackdropBorderColor = AS.Noop
 
-	for i = 1, 42 do
-		local Button = _G["CalendarDayButton"..i]
-		Button:SetFrameLevel(Button:GetFrameLevel() + 1)
-		AS:SkinFrame(Button)
-		Button:SetBackdropColor(0,0,0,0)
-		for j = 1, 4 do
-			local EventButton = _G["CalendarDayButton"..i.."EventButton"..j]
-			AS:StripTextures(EventButton)
-			AS:StyleButton(EventButton)
+	if not AS.ParchmentEnabled then
+		for i = 1, 42 do
+			local Button = _G["CalendarDayButton"..i]
+			Button:SetFrameLevel(Button:GetFrameLevel() + 1)
+			AS:SkinFrame(Button)
+			Button:SetBackdropColor(0,0,0,0)
+			for j = 1, 4 do
+				local EventButton = _G["CalendarDayButton"..i.."EventButton"..j]
+				AS:StripTextures(EventButton)
+				AS:StyleButton(EventButton)
+			end
 		end
-	end
 
-	AS:SkinFrame(CalendarTodayFrame)
-	AS:CreateBackdrop(CalendarTodayFrame)
-	CalendarTodayFrame:Size(CalendarDayButton1:GetWidth(), CalendarDayButton1:GetHeight())
-	CalendarTodayFrame:SetBackdropBorderColor(0, 0.44, .87, 1)
-	CalendarTodayFrame:SetBackdropColor(0, 0, 0, 0)
-	CalendarTodayFrame:HookScript('OnUpdate', function(self) self:SetAlpha(CalendarTodayTextureGlow:GetAlpha()) end)
-	CalendarTodayFrame.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
-	CalendarTodayFrame.Backdrop:SetBackdropColor(0, 0, 0, 0)
-	CalendarTodayFrame.Backdrop:CreateShadow()
+		AS:SkinFrame(CalendarTodayFrame)
+		AS:CreateBackdrop(CalendarTodayFrame)
+		CalendarTodayFrame:Size(CalendarDayButton1:GetWidth(), CalendarDayButton1:GetHeight())
+		CalendarTodayFrame:SetBackdropBorderColor(0, 0.44, .87, 1)
+		CalendarTodayFrame:SetBackdropColor(0, 0, 0, 0)
+		CalendarTodayFrame:HookScript('OnUpdate', function(self) self:SetAlpha(CalendarTodayTextureGlow:GetAlpha()) end)
+		CalendarTodayFrame.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+		CalendarTodayFrame.Backdrop:SetBackdropColor(0, 0, 0, 0)
+		CalendarTodayFrame.Backdrop:CreateShadow()
+	end
 
 	AS:SkinFrame(CalendarCreateEventFrame)
 	CalendarCreateEventFrame:Point("TOPLEFT", CalendarFrame, "TOPRIGHT", 3, -24)

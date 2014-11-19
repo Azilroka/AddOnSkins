@@ -83,7 +83,7 @@ function AS:Blizzard_Merchant()
 		local numBuybackItems = GetNumBuybackItems();
 		local itemButton, buybackButton;
 		local buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable;
-		for i=1, BUYBACK_ITEMS_PER_PAGE do
+		for i = 1, BUYBACK_ITEMS_PER_PAGE do
 			itemButton = _G["MerchantItem"..i.."ItemButton"];
 			buybackButton = _G["MerchantItem"..i];
 			if ( i <= numBuybackItems ) then
