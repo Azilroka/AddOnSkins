@@ -203,7 +203,7 @@ function AS:StartSkinning(event)
 	end
 
 	AS.Mult = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/UIParent:GetScale()
-	AS.ParchmentEnabled = false --AS:CheckOption('Parchment')
+	AS.ParchmentEnabled = true --AS:CheckOption('Parchment')
 
 	if not IsAddOnLoaded('ElvUI') then
 		for skin, alldata in pairs(AS.register) do
