@@ -7,6 +7,7 @@ local function DisableTexture(self, texture)
 end
 
 function AS:Blizzard_DraenorAbilityButton()
+	DraenorZoneAbilityFrame.SpellButton:SetNormalTexture('')
 	AS:SetTemplate(DraenorZoneAbilityFrame.SpellButton)
 	AS:StyleButton(DraenorZoneAbilityFrame.SpellButton)
 	AS:SkinTexture(DraenorZoneAbilityFrame.SpellButton.Icon)
@@ -18,6 +19,7 @@ end
 AS:RegisterSkin('Blizzard_DraenorAbilityButton', AS.Blizzard_DraenorAbilityButton)
 
 function AS:Blizzard_ExtraActionButton()
+	ExtraActionButton1:SetNormalTexture('')
 	AS:SetTemplate(ExtraActionButton1)
 	AS:StyleButton(ExtraActionButton1)
 	AS:SkinTexture(ExtraActionButton1.icon)
