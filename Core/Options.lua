@@ -86,6 +86,13 @@ function AS:GetOptions()
 			order = order,
 			desc = ASL.OptionsPanel.SkinDesc,
 		}
+		if AS:CheckAddOn('ElvUI') then
+			options.confirm = true
+			if strfind(skinName, "Blizzard_") then
+				options.desc = ASL.OptionsPanel.ElvUIDesc
+			end
+			options.set = function(info, value) AS:SetOption(info[#info], value) AS:DisableElvUIOption(info[#info]) end
+		end
 		return options
 	end
 
@@ -391,13 +398,7 @@ function AS:GetOptions()
 						order = 8,
 						name = ASL['Reset Settings'],
 						confirm = true,
-						func = function()
-							if IsAddOnLoaded('ElvUI') then
-								ElvUI[1].private.addonskins = CopyTable(Defaults)
-							else
-								AddOnSkinsOptions = CopyTable(Defaults)
-							end
-						end,
+						func = function() AddOnSkinsOptions = CopyTable(Defaults) end,
 					},
 				},
 			},
@@ -426,6 +427,7 @@ function AS:GetOptions()
 			order = 1,
 			disabled = function() return not AS:CheckOption("WeakAuras", "WeakAuras") end,
 		}
+		Options.args.about.args.resetsettings.func = function() ElvUI[1].private.addonskins = CopyTable(Defaults) end
 	end
 
 	local EP = LibStub('LibElvUIPlugin-1.0', true)

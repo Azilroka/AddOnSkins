@@ -13,6 +13,9 @@ function AS:Blizzard_DraenorAbilityButton()
 	AS:SkinTexture(DraenorZoneAbilityFrame.SpellButton.Icon)
 	DraenorZoneAbilityFrame.SpellButton.Icon:SetDrawLayer('ARTWORK')
 	DraenorZoneAbilityFrame.SpellButton.Icon:SetInside()
+	DraenorZoneAbilityFrame.SpellButton.Cooldown:SetInside()
+	DraenorZoneAbilityFrame.SpellButton.Cooldown:SetSwipeColor(0, 0, 0, 1)
+	DraenorZoneAbilityFrame.SpellButton.Cooldown:SetDrawBling(false)
 	hooksecurefunc(DraenorZoneAbilityFrame.SpellButton.Style, 'SetTexture', DisableTexture)
 end
 

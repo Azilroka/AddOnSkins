@@ -30,6 +30,20 @@ function AS:EnableOption(optionName)
 	AS:SetOption(optionName, true)
 end
 
+local ElvUISkinTable = {
+	['Blizzard_CharacterFrame'] = {
+		['blizzard'] = 'character'
+	}
+}
+
+function AS:DisableElvUIOption(skin)
+	if ElvUISkinTable[skin] then
+		for location, option in pairs(ElvUISkinTable[skin]) do
+			E.private.skins[location][option] = false
+		end
+	end
+end
+
 function AS:InjectProfile()
 	E, L, V, P, G = unpack(ElvUI)
 
