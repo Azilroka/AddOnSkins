@@ -18,13 +18,11 @@ function AS:AdvancedIconSelector()
 					self.icons[i].IsStyled = true
 				end
 				if self.icons[i] and self.icons[i]:GetNormalTexture() and not self.icons[i].IsTextureDone then
+					AS:SkinTexture(self.icons[i]:GetNormalTexture())
+					self.icons[i]:GetNormalTexture():SetInside()
 					self.icons[i]:GetNormalTexture().SetTexCoord = function() end
 					self.icons[i]:GetNormalTexture().SetPoint = function() end
 					self.icons[i].IsTextureDone = true
-				end
-				if self.icons[i] then
-					AS:SkinTexture(self.icons[i]:GetNormalTexture())
-					self.icons[i]:GetNormalTexture():SetInside()
 				end
 			end
 		end)
@@ -40,7 +38,7 @@ function AS:AdvancedIconSelector()
 
 	hooksecurefunc(AdvancedIconSelector.MacroPopup, 'ReplaceMacroPopup', function() SkinPopup(_G["MacroPopupFrame"]) end)
 	hooksecurefunc(AdvancedIconSelector.EquipmentSetPopup, 'ReplaceEquipmentSetPopup', function() SkinPopup(_G["GearManagerDialogPopup"]) end)
-	hooksecurefunc(AdvancedIconSelector.GuildBankPopup, 'ReplaceGuildBankPopup', function() SkinPopup(_G["GuildBankPopupFrame"]) end)
+	--hooksecurefunc(AdvancedIconSelector.GuildBankPopup, 'ReplaceGuildBankPopup', function() SkinPopup(_G["GuildBankPopupFrame"]) end)
 end
 
 AS:RegisterSkin('AdvancedIconSelector', AS.AdvancedIconSelector)
