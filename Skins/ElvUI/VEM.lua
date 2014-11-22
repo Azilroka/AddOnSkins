@@ -165,7 +165,7 @@ function AS:VEM(event, addon)
 		hooksecurefunc(VEM.BossHealth, 'AddBoss', SkinBoss)
 		hooksecurefunc(VEM.BossHealth, 'UpdateSettings', SkinBoss)
 		if not VEM_SavedOptions['DontShowRangeFrame'] then
-			VEM.RangeCheck:Show()
+			VEM.RangeCheck:Show(nil, nil, true)
 			VEM.RangeCheck:Hide()
 			VEMRangeCheck:HookScript('OnShow', function(self) self:SetTemplate('Transparent') end)
 			VEMRangeCheckRadar:SetTemplate('Transparent')
