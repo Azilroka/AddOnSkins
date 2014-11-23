@@ -39,18 +39,26 @@ function AS:Blizzard_Bags()
 				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self:SetBackdropBorderColor(r, g, b, a)
 			end)
-			ItemButton.Backdrop:SetScript('OnHide', function(self)
-				ItemButton:SetBackdropBorderColor(ItemButton.IconBorder:GetVertexColor())
+			ItemButton.Backdrop:SetScript('OnHide', function()
+				if select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())) > LE_ITEM_QUALITY_COMMON then
+					ItemButton:SetBackdropBorderColor(ItemButton.IconBorder:GetVertexColor())
+				else
+					ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end
 			end)
 			-- End of hax.
 
 			ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
 			ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
 
-			ItemButton:SetNormalTexture(nil)
+			ItemButton:SetNormalTexture('')
 			AS:StyleButton(ItemButton)
 			hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
-				ItemButton:SetBackdropBorderColor(r, g, b)
+				if select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())) > LE_ITEM_QUALITY_COMMON then
+					ItemButton:SetBackdropBorderColor(r, g, b)
+				else
+					ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end
 			end)
 			hooksecurefunc(ItemButton.IconBorder, 'Hide', function(self)
 				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
