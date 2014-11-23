@@ -10,15 +10,19 @@ function AS:Blizzard_Bags()
 		for j = 1, 36 do
 			local ItemButton = _G["ContainerFrame"..i.."Item"..j]
 --			AS:SkinTexture(_G["ContainerFrame"..i.."Item"..j..'IconQuestTexture'])
-			AS:SkinFrame(ItemButton)
+			AS:SetTemplate(ItemButton, AS:CheckOption('SkinTemplate'))
 			AS:SkinTexture(ItemButton.icon)
+			ItemButton:SetNormalTexture('')
+			ItemButton:SetPushedTexture('')
 			ItemButton.icon:SetInside()
 
+			ItemButton.IconBorder:SetTexture('')
 			ItemButton.NewItemTexture:SetAtlas(nil)
 			ItemButton.NewItemTexture.SetAtlas = AS.Noop
 
 			-- This shit is hax.
 			AS:CreateBackdrop(ItemButton)
+			ItemButton.Backdrop:Hide()
 			hooksecurefunc(ItemButton.NewItemTexture, 'Show', function()
 				ItemButton.Backdrop:Show()
 			end)
