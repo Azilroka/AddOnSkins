@@ -239,8 +239,8 @@ end
 
 function AS:Init(event, addon)
 	if event == 'ADDON_LOADED' and addon == AddOnName then
+		AS:UpdateMedia()
 		if AS:CheckAddOn('ElvUI') then
-			AS:UpdateMedia()
 			local ElvUIVersion, MinElvUIVersion = tonumber(GetAddOnMetadata('ElvUI', 'Version')), 7.32
 			if ElvUIVersion < MinElvUIVersion then
 				AS:AcceptFrame(format('%s - Required ElvUI Version %s. You currently have %s.\n Download ElvUI @ %s', AS.Title, MinElvUIVersion, ElvUIVersion, AS:PrintURL('http://www.tukui.org/dl.php')), function(self) print(AS:PrintURL('http://www.tukui.org/dl.php')) self:Hide() end)
@@ -250,10 +250,9 @@ function AS:Init(event, addon)
 			end
 			AS:InjectProfile()
 		end
+		AS:CreateDataText()
 	end
 	if event == 'PLAYER_LOGIN' then
-		AS:UpdateMedia()
-		AS:CreateDataText()
 		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 		AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
 		AS:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
