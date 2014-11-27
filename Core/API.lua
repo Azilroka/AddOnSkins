@@ -170,7 +170,7 @@ end
 function AS:CreateShadow(Frame)
 	if Frame.Shadow then return end
 
-	local Shadow = CreateFrame("Frame", nil, f)
+	local Shadow = CreateFrame("Frame", nil, Frame)
 	Shadow:SetFrameLevel(1)
 	Shadow:SetFrameStrata(Frame:GetFrameStrata())
 	Shadow:Point("TOPLEFT", -3, 3)
@@ -178,10 +178,10 @@ function AS:CreateShadow(Frame)
 	Shadow:Point("TOPRIGHT", 3, 3)
 	Shadow:Point("BOTTOMRIGHT", 3, -3)
 
-	--[[Shadow:SetBackdrop({ 
-		edgeFile = C.Medias.Glow, edgeSize = AS:Scale(3),
+	Shadow:SetBackdrop({ 
+		edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = AS:Scale(3),
 		insets = {left = AS:Scale(5), right = AS:Scale(5), top = AS:Scale(5), bottom = AS:Scale(5)},
-	})]]
+	})
 
 	Shadow:SetBackdropColor(0, 0, 0, 0)
 	Shadow:SetBackdropBorderColor(0, 0, 0, 0.8)

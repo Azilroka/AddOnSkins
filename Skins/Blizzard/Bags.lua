@@ -22,6 +22,7 @@ function AS:Blizzard_Bags()
 
 			-- This shit is hax.
 			AS:CreateBackdrop(ItemButton)
+			AS:CreateShadow(ItemButton.Backdrop)
 			ItemButton.Backdrop:Hide()
 			hooksecurefunc(ItemButton.NewItemTexture, 'Show', function()
 				ItemButton.Backdrop:Show()
@@ -33,16 +34,20 @@ function AS:Blizzard_Bags()
 			ItemButton.Backdrop:SetFrameStrata(ItemButton:GetFrameStrata())
 			ItemButton.Backdrop:SetFrameLevel(ItemButton:GetFrameLevel() + 4)
 			ItemButton.Backdrop:SetBackdropColor(0, 0, 0, 0)
-			ItemButton.Backdrop:SetScript('OnShow', function(self)
-				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
-				self:SetBackdropBorderColor(ItemButton.IconBorder:GetVertexColor())
-			end)
 			ItemButton.Backdrop:SetScript('OnUpdate', function(self)
-				self:SetAlpha(ItemButton.NewItemTexture:GetAlpha())
+				local Quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
+				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
+				if Quality == LE_ITEM_QUALITY_POOR or Quality == nil then Quality = LE_ITEM_QUALITY_COMMON end
+				if BAG_ITEM_QUALITY_COLORS[Quality] then
+					self:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+					self.Shadow:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+				end
+				self:SetAlpha(self:GetParent().NewItemTexture:GetAlpha())
 			end)
-			ItemButton.Backdrop:SetScript('OnHide', function()
-				if select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())) > LE_ITEM_QUALITY_COMMON then
-					ItemButton:SetBackdropBorderColor(ItemButton.IconBorder:GetVertexColor())
+			ItemButton.Backdrop:SetScript('OnHide', function(self)
+				local Quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
+				if Quality and (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
+					ItemButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 				else
 					ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 				end
