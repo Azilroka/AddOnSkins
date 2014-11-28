@@ -35,17 +35,19 @@ function AS:Blizzard_Bags()
 			ItemButton.Backdrop:SetFrameLevel(ItemButton:GetFrameLevel() + 4)
 			ItemButton.Backdrop:SetBackdropColor(0, 0, 0, 0)
 			ItemButton.Backdrop:SetScript('OnUpdate', function(self)
-				local Quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
+				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
 				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
-				if Quality == LE_ITEM_QUALITY_POOR or Quality == nil then Quality = LE_ITEM_QUALITY_COMMON end
-				if BAG_ITEM_QUALITY_COLORS[Quality] then
+				if Quality and BAG_ITEM_QUALITY_COLORS[Quality] then
 					self:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 					self.Shadow:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+				else
+					self:SetBackdropBorderColor(1, 1, 1)
+					self.Shadow:SetBackdropBorderColor(1, 1, 1)
 				end
 				self:SetAlpha(self:GetParent().NewItemTexture:GetAlpha())
 			end)
 			ItemButton.Backdrop:SetScript('OnHide', function(self)
-				local Quality = select(4, GetContainerItemInfo(self:GetParent():GetID(), self:GetID()))
+				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
 				if Quality and (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
 					ItemButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 				else
@@ -186,6 +188,34 @@ function AS:Blizzard_Bags()
 			ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end)
 	end
+
+	-- Reagent Bank
+	AS:SkinButton(ReagentBankFrame.DespositButton)
+	ReagentBankFrame:HookScript('OnShow', function(self)
+		if ReagentBankFrame.slots_initialized and not ReagentBankFrame.isSkinned then
+			for i = 1, 98 do
+				local ItemButton = _G["ReagentBankFrameItem"..i]
+				AS:SkinFrame(ItemButton)
+				AS:SkinTexture(ItemButton.icon)
+				ItemButton.icon:SetInside()
+
+				ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
+				ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
+
+				ItemButton:SetNormalTexture(nil)
+				AS:StyleButton(ItemButton)
+				hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
+					ItemButton:SetBackdropBorderColor(r, g, b)
+				end)
+				hooksecurefunc(ItemButton.IconBorder, 'Hide', function(self)
+					ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end)
+				BankFrameItemButton_Update(ItemButton)
+			end
+			AS:StripTextures(ReagentBankFrame, true)
+			self.isSkinned = true
+		end
+	end)
 
 	AS:SkinTab(BankFrameTab1)
 	AS:SkinTab(BankFrameTab2)
