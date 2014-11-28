@@ -12,6 +12,7 @@
 	<Script file="ItemSocketing.lua"/>
 	<Script file="Merchant.lua"/>
 	<Script file="Quest.lua"/>
+	<Script file="StackSplit.lua"/>
 	<Script file="Talents.lua"/>
 	<Script file="WorldStateCaptureBar.lua"/>
 </Ui>
