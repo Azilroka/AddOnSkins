@@ -108,7 +108,7 @@ function AS:UpdateMedia()
 	AS.BackdropColor = E['media'].backdropcolor
 	AS.BorderColor = E['media'].bordercolor
 	AS.PixelPerfect = E.PixelMode
-	AS.ValueColor = E.db.general.valuecolor
+	AS.ValueColor = E["media"].rgbvaluecolor
 	AS.HideShadows = false
 
 	E:GetModule('DataTexts'):RegisterLDB()
