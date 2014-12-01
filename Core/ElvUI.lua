@@ -139,6 +139,9 @@ function AS:EmbedSystemHooks()
 				E.db[self.parent:GetName()..'Faded'] = nil
 				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
 				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+				if AS:CheckOption('EmbedRightChat') and not AS:CheckOption('EmbedIsHidden') then
+					EmbedSystem_MainWindow:Show()
+				end
 			else
 				E.db[self.parent:GetName()..'Faded'] = true
 				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
@@ -171,6 +174,9 @@ function AS:EmbedSystemHooks()
 				E.db[self.parent:GetName()..'Faded'] = nil
 				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
 				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+				if not AS:CheckOption('EmbedRightChat') and not AS:CheckOption('EmbedIsHidden') then
+					EmbedSystem_MainWindow:Show()
+				end
 			else
 				E.db[self.parent:GetName()..'Faded'] = true
 				UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)

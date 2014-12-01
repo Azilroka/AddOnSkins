@@ -35,7 +35,8 @@ function AS:EmbedInit()
 			AS.EmbedSystemCreated = true
 
 			AS:EmbedSystemHooks()
-			AS:Embed_Check(true)
+			AS:EmbedSystem_WindowResize()
+			AS:Delay(1, function() AS:Embed_Check(true) end)
 
 			EmbedSystem_MainWindow:HookScript('OnShow', AS.Embed_Show)
 			EmbedSystem_MainWindow:HookScript('OnHide', AS.Embed_Hide)

@@ -11,7 +11,10 @@ function AS:Blizzard_GlyphUI(event, addon)
 	AS:SkinDropDownBox(GlyphFrameFilterDropDown, 212)
 
 	for i = 1, 2 do
-		AS:StripTextures(_G["GlyphFrameHeader"..i])
+		_G["GlyphFrameHeader"..i].middle:SetTexture(nil)
+		_G["GlyphFrameHeader"..i].leftEdge:SetTexture(nil)
+		_G["GlyphFrameHeader"..i].rightEdge:SetTexture(nil)
+		AS:SetTemplate(_G["GlyphFrameHeader"..i])
 	end
 
 	for i = 1, 10 do
