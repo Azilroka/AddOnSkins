@@ -15,6 +15,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 
 	AS:SkinButton(TradeSkillCreateButton, true)
 	AS:SkinButton(TradeSkillCancelButton, true)
+	AS:StripTextures(TradeSkillFilterButton, true)
 	AS:SkinButton(TradeSkillFilterButton, true)
 	AS:SkinButton(TradeSkillCreateAllButton, true)
 	AS:SkinButton(TradeSkillViewGuildCraftersButton, true)
@@ -54,13 +55,42 @@ function AS:Blizzard_TradeSkill(event, addon)
 		AS:SkinStatusBar(Button.SubSkillRankBar)
 	end
 
-	hooksecurefunc("TradeSkillFrame_SetSelection", function()
-		AS:StyleButton(TradeSkillSkillIcon)
-		if TradeSkillSkillIcon:GetNormalTexture() then
-			AS:SkinTexture(TradeSkillSkillIcon:GetNormalTexture())
-			TradeSkillSkillIcon:GetNormalTexture():SetInside()
+	hooksecurefunc("TradeSkillFrame_SetSelection", function(id)
+		if not TradeSkillSkillIcon.isSkinned then
+			if TradeSkillSkillIcon:GetNormalTexture() then
+				AS:StyleButton(TradeSkillSkillIcon)
+				AS:SkinTexture(TradeSkillSkillIcon:GetNormalTexture())
+				TradeSkillSkillIcon:GetNormalTexture():SetInside()
+				AS:SetTemplate(TradeSkillSkillIcon)
+				TradeSkillSkillIcon.isSkinned = true
+			end
 		end
-		AS:SetTemplate(TradeSkillSkillIcon)
+		local skillName, skillType, numAvailable, isExpanded, altVerb, numSkillUps, indentLevel, showProgressBar, currentRank, maxRank, startingRank, displayAsUnavailable, unavailableString = GetTradeSkillInfo(id);
+		local skillLink = GetTradeSkillItemLink(id)
+		if skillLink then
+			local Quality = select(3, GetItemInfo(skillLink))
+			if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then
+				TradeSkillSkillIcon:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+			else
+				TradeSkillSkillIcon:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end
+		local numReagents = GetTradeSkillNumReagents(id);
+		for i = 1, numReagents, 1 do
+			local reagentName, reagentTexture, reagentCount, playerReagentCount = GetTradeSkillReagentInfo(id, i);
+			local reagentLink = GetTradeSkillReagentItemLink(id, i)
+			local reagent = _G["TradeSkillReagent"..i]
+			if reagent:IsShown() then
+				if reagentLink then
+					local Quality = select(3, GetItemInfo(reagentLink))
+					if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then
+						reagent.Backdrop:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+					else
+						reagent.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+					end
+				end
+			end
+		end
 	end)
 
 	hooksecurefunc('TradeSkillFrame_Update', function()

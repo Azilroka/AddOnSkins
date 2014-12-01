@@ -159,7 +159,11 @@ function AS:SkinButton(Button, Strip)
 	AS:SetTemplate(Button)
 
 	Button:HookScript("OnEnter", function(self)
-		self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
+		if AS.ValueColor then
+			self:SetBackdropBorderColor(unpack(AS.ValueColor))
+		else
+			self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
+		end
 	end)
 
 	Button:HookScript("OnLeave", function(self)
