@@ -2,14 +2,18 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_AddonManager()
 	AS:SkinFrame(AddonList)
+
 	AS:StripTextures(AddonListInset)	
 
+	AS:SkinBackdropFrame(AddonListScrollFrame)
+	AddonListScrollFrame.Backdrop:SetPoint('TOPLEFT', -14, 0)
+	AddonListScrollFrame.Backdrop:SetPoint('BOTTOMRIGHT', 0, -1)
 	AS:SkinButton(AddonListEnableAllButton, true)
 	AS:SkinButton(AddonListDisableAllButton, true)
 	AS:SkinButton(AddonListOkayButton, true)
 	AS:SkinButton(AddonListCancelButton, true)
 	
-	AS:SkinScrollBar(AddonListScrollFrameScrollBar, 5)
+	AS:SkinScrollBar(AddonListScrollFrameScrollBar)
 
 	AS:SkinCheckBox(AddonListForceLoad)
 	AddonListForceLoad:SetSize(26, 26)

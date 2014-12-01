@@ -154,9 +154,7 @@ function AS:SkinButton(Button, Strip)
 	if Button.SetPushedTexture then Button:SetPushedTexture("") end	
 	if Button.SetDisabledTexture then Button:SetDisabledTexture("") end
 
-	if Strip then AS:StripTextures(Button) end
-
-	AS:SetTemplate(Button)
+	AS:SkinFrame(Button, nil, not Strip)
 
 	Button:HookScript("OnEnter", function(self)
 		if AS.ValueColor then
