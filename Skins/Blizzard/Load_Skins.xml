@@ -15,5 +15,6 @@
 	<Script file="StackSplit.lua"/>
 	<Script file="Talents.lua"/>
 	<Script file="TradeSkill.lua"/>
+	<Script file="TradeWindow.lua"/>
 	<Script file="WorldStateCaptureBar.lua"/>
 </Ui>
