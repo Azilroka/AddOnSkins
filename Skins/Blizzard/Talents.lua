@@ -217,7 +217,8 @@ function AS:Blizzard_Talent(event, addon)
 		hooksecurefunc("TalentFrame_Update", function()
 			for i = 1, MAX_TALENT_TIERS do
 				for j = 1, NUM_TALENT_COLUMNS do
-					_G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j]:GetScript('OnLeave')(_G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j])
+					local Talent = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j]
+					Talent:GetScript('OnLeave')(Talent)
 				end
 			end
 		end)
