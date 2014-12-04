@@ -12,6 +12,8 @@
 	<Script file="ItemSocketing.lua"/>
 	<Script file="Mail.lua"/>
 	<Script file="Merchant.lua"/>
+	<Script file="PvE.lua"/>
+	<Script file="PvP.lua"/>
 	<Script file="Quest.lua"/>
 	<Script file="StackSplit.lua"/>
 	<Script file="Talents.lua"/>
