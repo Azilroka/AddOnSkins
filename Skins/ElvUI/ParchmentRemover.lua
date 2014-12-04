@@ -98,7 +98,7 @@ function AS:ParchmentRemover(event, addon)
 	end
 	if event == 'PLAYER_ENTERING_WORLD' then
 		if ElvUI[1].private.skins.blizzard.gossip == true then
-			GossipGreetingScrollFrame.spellTex:Hide()
+			GossipGreetingScrollFrame.spellTex:SetTexture('')
 			for i = 1, NUMGOSSIPBUTTONS do
 				obj = select(3, _G['GossipTitleButton'..i]:GetRegions())
 				obj:SetTextColor(1,1,1)
