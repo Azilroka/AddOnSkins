@@ -98,6 +98,7 @@ function AS:Blizzard_Mail(event, addon)
 		for i = 1, INBOXITEMS_TO_DISPLAY do
 			if ( index <= numItems ) then
 				local packageIcon, stationeryIcon, sender, subject, money, CODAmount, daysLeft, itemCount, wasRead, x, y, z, isGM, firstItemQuantity = GetInboxHeaderInfo(index);
+				_G["MailItem"..i.."Button"]:SetBackdropBorderColor(unpack(AS.BorderColor))
 				if ( packageIcon ) and ( not isGM ) then
 					local ItemLink = GetInboxItemLink(index, 1)
 					if ItemLink then
