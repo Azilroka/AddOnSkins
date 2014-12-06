@@ -16,6 +16,7 @@
 	<Script file="PvP.lua"/>
 	<Script file="Quest.lua"/>
 	<Script file="StackSplit.lua"/>
+	<Script file="Spellbook.lua"/>
 	<Script file="Talents.lua"/>
 	<Script file="TradeSkill.lua"/>
 	<Script file="TradeWindow.lua"/>
