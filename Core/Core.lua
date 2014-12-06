@@ -58,7 +58,7 @@ function AS:Delay(delay, func)
 end
 
 function AS:CheckAddOn(addon)
-	return AS.AddOns[addon] or false
+	return AS.AddOns[strlower(addon)] or false
 end
 
 function AS:Print(string)
