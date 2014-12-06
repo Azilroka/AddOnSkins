@@ -13,8 +13,8 @@ function AS:Blizzard_PVPUI(event, addon)
 	for i = 1, 4 do
 		local Button = PVPQueueFrame['CategoryButton'..i]
 		AS:SkinFrame(Button, nil, true)
-		Button.Background:Kill()
-		Button.Ring:Kill()
+		Button.Background:SetTexture('')
+		Button.Ring:SetTexture('')
 		Button.Icon:Size(45)
 		AS:SkinTexture(Button.Icon)
 		AS:CreateBackdrop(Button)

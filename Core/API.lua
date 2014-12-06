@@ -318,11 +318,19 @@ end
 
 function AS:SkinTab(Tab)
 	if Tab.isSkinned then return end
-
 	local TabName = Tab:GetName()
+
+	if TabName then
+		for _, Region in pairs(BlizzardRegions) do
+			if _G[TabName..Region] then
+				_G[TabName..Region]:SetTexture(nil)
+			end
+		end
+	end
+
 	for _, Region in pairs(BlizzardRegions) do
-		if _G[TabName..Region] then
-			_G[TabName..Region]:SetTexture(nil)
+		if Tab[Region] then
+			Tab[Region]:SetAlpha(0)
 		end
 	end
 
