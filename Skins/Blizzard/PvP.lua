@@ -65,60 +65,110 @@ function AS:Blizzard_PVPUI(event, addon)
 	AS:SkinButton(HonorFrameGroupQueueButton, true)
 	AS:StripTextures(HonorFrame.BonusFrame)
 	AS:StripTextures(HonorFrame.BonusFrame.ShadowOverlay)
-	AS:StripTextures(HonorFrame.BonusFrame.RandomBGButton)
-	AS:SkinButton(HonorFrame.BonusFrame.RandomBGButton)
-	HonorFrame.BonusFrame.RandomBGButton.SelectedTexture:ClearAllPoints()
-	HonorFrame.BonusFrame.RandomBGButton.SelectedTexture:SetAllPoints()
-	HonorFrame.BonusFrame.RandomBGButton.SelectedTexture:SetTexture(0, 1, 0, 0.1)
 	AS:StripTextures(ConquestFrame.Inset)
 
-	AS:StripTextures(ConquestFrame)
-	AS:SkinFrame(ConquestPointsBar)
-	ConquestPointsBar.progress:SetTexture(AS.NormTex)
-	AS:StripTextures(ConquestFrame.ShadowOverlay)
-	AS:StripTextures(ConquestFrame.RatedBG)
-	AS:SkinButton(ConquestFrame.RatedBG)
-	ConquestFrame.RatedBG.SelectedTexture:ClearAllPoints()
-	ConquestFrame.RatedBG.SelectedTexture:SetAllPoints()
-	ConquestFrame.RatedBG.SelectedTexture:SetTexture(0, 1, 0, 0.1)	
-	AS:SkinButton(ConquestJoinButton, true)
+	for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'Arena2Button' }) do
+		local Button = HonorFrame.BonusFrame[Section]
+		AS:StripTextures(Button)
+		AS:SkinButton(Button)
+		Button:HookScript('OnEnter', function(self)
+			self:SetBackdropBorderColor(1, .82, 0)
+		end)
+		Button:HookScript('OnLeave', function(self)
+			if self.SelectedTexture:IsShown() then
+				self:SetBackdropBorderColor(0, 0.44, .87, 1)
+			else
+				self:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end)
+		Button.SelectedTexture:SetTexture('')
+	end
 
-	-->>>WARGRAMES FRAME
+	hooksecurefunc('HonorFrame_UpdateQueueButtons', function()
+		for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'Arena2Button' }) do
+			local Button = HonorFrame.BonusFrame[Section]
+			if Button.SelectedTexture:IsShown() then
+				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
+			else
+				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end
+	end)
+
+	AS:StripTextures(ConquestFrame)
+	AS:StripTextures(ConquestFrame.ShadowOverlay)
+	AS:SkinBackdropFrame(ConquestPointsBar)
+	ConquestPointsBar.Backdrop:SetPoint('TOPLEFT', 0, -1)
+	ConquestPointsBar.Backdrop:SetPoint('BOTTOMRIGHT', 0, 1)
+	ConquestPointsBar.progress:SetTexture(AS.NormTex)
+	AS:SkinButton(ConquestJoinButton, true)
+	AS:SkinFrame(ConquestTooltip)
+
+	for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3', 'Arena5v5'}) do
+		local Button = ConquestFrame[Section]
+		AS:StripTextures(Button)
+		AS:SkinButton(Button)
+		Button:HookScript('OnEnter', function(self)
+			self:SetBackdropBorderColor(1, .82, 0)
+		end)
+		Button:HookScript('OnLeave', function(self)
+			if self.SelectedTexture:IsShown() then
+				self:SetBackdropBorderColor(0, 0.44, .87, 1)
+			else
+				self:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end)
+		Button.SelectedTexture:SetTexture('')
+	end
+
+	hooksecurefunc('ConquestFrame_UpdateJoinButton', function()
+		for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3', 'Arena5v5'}) do
+			local Button = ConquestFrame[Section]
+			if Button.SelectedTexture:IsShown() then
+				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
+			else
+				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end
+	end)
+
 	AS:StripTextures(WarGamesFrame)
 	AS:StripTextures(WarGamesFrame.RightInset)
+	AS:StripTextures(WarGamesFrame.HorizontalBar)
 	AS:SkinButton(WarGameStartButton, true)
 	AS:SkinScrollBar(WarGamesFrameScrollFrameScrollBar)
-	AS:StripTextures(WarGamesFrame.HorizontalBar)
+	AS:SkinCheckBox(WarGameTournamentModeCheckButton)
 
-	-->>>ARENATEAMS
-	AS:StripTextures(ConquestFrame.Arena2v2)
-	AS:SkinButton(ConquestFrame.Arena2v2)
-	ConquestFrame.Arena2v2.SelectedTexture:ClearAllPoints()
-	ConquestFrame.Arena2v2.SelectedTexture:SetAllPoints()
-	ConquestFrame.Arena2v2.SelectedTexture:SetTexture(0, 1, 0, 0.1)
-	ConquestFrame.Arena2v2.SelectedTexture:ClearAllPoints()
-	ConquestFrame.Arena2v2.SelectedTexture:SetAllPoints()
-	ConquestFrame.Arena2v2.SelectedTexture:SetTexture(0, 1, 0, 0.1)	
+	hooksecurefunc('WarGamesFrame_Update', function()
+		local scrollFrame = WarGamesFrame.scrollFrame;
+		local offset = HybridScrollFrame_GetOffset(scrollFrame);
+		local buttons = scrollFrame.buttons;
+		local numButtons = #buttons;
+		local numWarGames = GetNumWarGameTypes();
+		local selectedIndex = GetSelectedWarGameType();
 
-	AS:StripTextures(ConquestFrame.Arena3v3)
-	AS:SkinButton(ConquestFrame.Arena3v3)
-	ConquestFrame.Arena3v3.SelectedTexture:ClearAllPoints()
-	ConquestFrame.Arena3v3.SelectedTexture:SetAllPoints()
-	ConquestFrame.Arena3v3.SelectedTexture:SetTexture(0, 1, 0, 0.1)
-	ConquestFrame.Arena3v3.SelectedTexture:ClearAllPoints()
-	ConquestFrame.Arena3v3.SelectedTexture:SetAllPoints()
-	ConquestFrame.Arena3v3.SelectedTexture:SetTexture(0, 1, 0, 0.1)	
-
-	AS:StripTextures(ConquestFrame.Arena5v5)
-	AS:SkinButton(ConquestFrame.Arena5v5)
-	ConquestFrame.Arena5v5.SelectedTexture:ClearAllPoints()
-	ConquestFrame.Arena5v5.SelectedTexture:SetAllPoints()
-	ConquestFrame.Arena5v5.SelectedTexture:SetTexture(0, 1, 0, 0.1)
-	ConquestFrame.Arena5v5.SelectedTexture:ClearAllPoints()
-	ConquestFrame.Arena5v5.SelectedTexture:SetAllPoints()
-	ConquestFrame.Arena5v5.SelectedTexture:SetTexture(0, 1, 0, 0.1)
-
-	AS:SetTemplate(ConquestTooltip)
+		for i = 1, numButtons do
+			local button = buttons[i];
+			local index = offset + i;
+			if index <= numWarGames  then
+				local name, pvpType, collapsed, id, minPlayers, maxPlayers, isRandom, iconTexture = GetWarGameTypeInfo(index);
+				if not button.Entry.isSkinned then
+					button.Entry:SetHighlightTexture('')
+					AS:CreateBackdrop(button.Entry)
+					button.Entry.Backdrop:SetInside(button.Entry, 1, 1)
+					AS:SkinTexture(button.Entry.Icon)
+					button.Entry.Icon:SetPoint("TOPLEFT", 6, -4)
+					button.Entry.Icon.Background = CreateFrame('Frame', nil, button.Entry)
+					AS:CreateBackdrop(button.Entry.Icon.Background)
+					button.Entry.Icon.Background.Backdrop:SetOutside(button.Entry.Icon, 0, 0)
+					button.Entry.Bg:SetTexture('')
+					button.Entry.Border:SetTexture('')
+					button.Entry.SelectedTexture:SetTexture('')
+					button.Entry.isSkinned = true
+				end
+			end
+		end
+	end)
 end
 
 AS:RegisterSkin("Blizzard_PVPUI", AS.Blizzard_PVPUI, 'ADDON_LOADED')
