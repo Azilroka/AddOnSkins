@@ -93,7 +93,7 @@ end
 
 function AS:CreateBackdrop(Frame, Template, UseTexture, TextureFile)
 	if Frame.Backdrop then return end
-	if not Template then Template = "Default" end
+	if not Template then Template = AS:CheckOption('SkinTemplate') end
 
 	local Backdrop = CreateFrame("Frame", nil, Frame)
 	Backdrop:SetOutside()
