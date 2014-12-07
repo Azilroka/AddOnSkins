@@ -29,7 +29,7 @@ AddOn.AddOns = {}
 
 for i = 1, GetNumAddOns() do
 	local Name = GetAddOnInfo(i)
-	AddOn.AddOns[Name] = GetAddOnEnableState(AddOn.MyName, Name) > 0
+	AddOn.AddOns[strlower(Name)] = GetAddOnEnableState(AddOn.MyName, Name) > 0
 end
 
 TEXTURE_ITEM_QUEST_BANG = "Interface\\AddOns\\AddOnSkins\\Media\\Textures\\UI-Icon-QuestBang"
