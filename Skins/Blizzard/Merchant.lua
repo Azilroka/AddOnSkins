@@ -12,7 +12,7 @@ function AS:Blizzard_Merchant()
 	AS:StripTextures(MerchantExtraCurrencyInset)
 
 	-- skin tabs
-	for i= 1, 2 do
+	for i = 1, 2 do
 		AS:SkinTab(_G["MerchantFrameTab"..i])
 	end
 

@@ -3,34 +3,43 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('ExtVendor') then return end
 
 function AS:ExtVendor()
-	AS:SkinFrame(MerchantFrame)
+	AS:StripTextures(MerchantFrameFilterButton, true)
 	AS:SkinButton(MerchantFrameFilterButton)
-	AS:SkinBackdropFrame(MerchantFrameSellJunkButton)
+	AS:SkinButton(MerchantFrameSellJunkButton)
+	AS:SkinTexture(MerchantFrameSellJunkButtonIcon)
+	MerchantFrameSellJunkButtonIcon:SetInside()
 	AS:SkinEditBox(MerchantFrameSearchBox)
 
-	for i = 1, 20 do
-		local b = _G['MerchantItem'..i..'ItemButton']
-		local t = _G['MerchantItem'..i..'ItemButtonIconTexture']
-		local item_bar = _G['MerchantItem'..i]
-		AS:StripTextures(b)
-		AS:StyleButton(b)
-		b:Point('TOPLEFT', item_bar, 'TOPLEFT', 4, -4)
-		AS:SkinTexture(t)
-		t:ClearAllPoints()
-		t:Point('TOPLEFT', 2, -2)
-		t:Point('BOTTOMRIGHT', -2, 2)
-		AS:SkinFrame(item_bar)
-		b:SetTemplate('Transparent', true)
+	for i = 13, 20 do
+		local Slot = _G["MerchantItem"..i]
+		local Button = _G["MerchantItem"..i.."ItemButton"]
+		AS:SkinBackdropFrame(Slot, nil, nil, true)
+		AS:SkinFrame(Button)
+		AS:StyleButton(Button)
+		AS:SkinTexture(Button.icon)
+		Button.icon:SetInside()
+
+		Button:Point("TOPLEFT", Slot, "TOPLEFT", 4, -4)
+
+		_G["MerchantItem"..i.."MoneyFrame"]:ClearAllPoints()
+		_G["MerchantItem"..i.."MoneyFrame"]:Point("BOTTOMLEFT", Button, "BOTTOMRIGHT", 3, 0)
+
+		for j = 1, 3 do
+			AS:CreateBackdrop(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j])
+			_G["MerchantItem"..i.."AltCurrencyFrameItem"..j].Backdrop:SetOutside(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"])
+			AS:SkinTexture(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"])
+		end
 	end
+
 	MerchantFrame:HookScript('OnUpdate', function()
-		for i = 1, 20 do
+		for i = 13, 20 do
 			if _G['MerchantItem'..i..'AltCurrencyFrame'] then
 				_G['MerchantItem'..i..'AltCurrencyFrame']:SetPoint('BOTTOMLEFT', _G['MerchantItem'..i..'NameFrame'], 'BOTTOMLEFT', 3, 34)
 			end
 		end
 	end)
+
 	MerchantFrame:Width(690)
-	ExtVendor_SellJunkPopup:SetTemplate('Transparent')
 	AS:SkinButton(ExtVendor_SellJunkPopupYesButton)
 	AS:SkinButton(ExtVendor_SellJunkPopupNoButton)
 end

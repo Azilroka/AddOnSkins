@@ -461,6 +461,13 @@ function AS:SkinNextPrevButton(Button, Vertical)
 	AS:SetTemplate(Button)
 	Button:Size(Button:GetWidth() - 7, Button:GetHeight() - 7)
 
+	for i = 1, Button:GetNumRegions() do
+		local region = select(i, Button:GetRegions())
+		if region and region:GetObjectType() == "Texture" and region:GetTexture() == "Interface\\Buttons\\UI-PageButton-Background" then
+			region:SetTexture('')
+		end
+	end
+
 	if Vertical then
 		Button:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.72, 0.65, 0.29, 0.65, 0.72)
 

@@ -1,7 +1,7 @@
 local AS = unpack(AddOnSkins)
 
 local function DisableTexture(self, texture)
-	if (string.sub(texture, 1, 9) == "Interface" or string.sub(texture, 1, 9) == "INTERFACE") then
+	if texture ~= "" then
 		self:SetTexture("")
 	end
 end
