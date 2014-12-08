@@ -33,21 +33,21 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 			Frame.InsetTop:Height(1)
 			Frame.InsetTop:SetTexture(0,0,0)	
 			Frame.InsetTop:SetDrawLayer("BORDER", -7)
-			
+
 			Frame.InsetBottom = Frame:CreateTexture(nil, "BORDER")
 			Frame.InsetBottom:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", -1, -1)
 			Frame.InsetBottom:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", 1, -1)
 			Frame.InsetBottom:Height(1)
 			Frame.InsetBottom:SetTexture(0,0,0)	
 			Frame.InsetBottom:SetDrawLayer("BORDER", -7)
-			
+
 			Frame.InsetLeft = Frame:CreateTexture(nil, "BORDER")
 			Frame.InsetLeft:Point("TOPLEFT", Frame, "TOPLEFT", -1, 1)
 			Frame.InsetLeft:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", 1, -1)
 			Frame.InsetLeft:Width(1)
 			Frame.InsetLeft:SetTexture(0,0,0)
 			Frame.InsetLeft:SetDrawLayer("BORDER", -7)
-			
+
 			Frame.InsetRight = Frame:CreateTexture(nil, "BORDER")
 			Frame.InsetRight:Point("TOPRIGHT", Frame, "TOPRIGHT", 1, 1)
 			Frame.InsetRight:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", -1, -1)
@@ -61,21 +61,21 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 			Frame.InsetInsideTop:Height(1)
 			Frame.InsetInsideTop:SetTexture(0,0,0)	
 			Frame.InsetInsideTop:SetDrawLayer("BORDER", -7)
-			
+
 			Frame.InsetInsideBottom = Frame:CreateTexture(nil, "BORDER")
 			Frame.InsetInsideBottom:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", 1, 1)
 			Frame.InsetInsideBottom:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", -1, 1)
 			Frame.InsetInsideBottom:Height(1)
 			Frame.InsetInsideBottom:SetTexture(0,0,0)	
 			Frame.InsetInsideBottom:SetDrawLayer("BORDER", -7)
-			
+
 			Frame.InsetInsideLeft = Frame:CreateTexture(nil, "BORDER")
 			Frame.InsetInsideLeft:Point("TOPLEFT", Frame, "TOPLEFT", 1, -1)
 			Frame.InsetInsideLeft:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", -1, 1)
 			Frame.InsetInsideLeft:Width(1)
 			Frame.InsetInsideLeft:SetTexture(0,0,0)
 			Frame.InsetInsideLeft:SetDrawLayer("BORDER", -7)
-			
+
 			Frame.InsetInsideRight = Frame:CreateTexture(nil, "BORDER")
 			Frame.InsetInsideRight:Point("TOPRIGHT", Frame, "TOPRIGHT", -1, -1)
 			Frame.InsetInsideRight:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", 1, 1)
@@ -387,7 +387,7 @@ function AS:SkinScrollBar(Frame)
 			ScrollUpButton:HookScript('OnDisable', function(self)
 				self.Text:SetTextColor(.3, .3, .3)
 			end)
-			
+
 			ScrollUpButton:HookScript('OnEnable', function(self)
 				self.Text:SetTextColor(1, 1, 1)
 			end)
@@ -417,7 +417,7 @@ function AS:SkinScrollBar(Frame)
 			ScrollDownButton:HookScript('OnDisable', function(self)
 				self.Text:SetTextColor(.3, .3, .3)
 			end)
-			
+
 			ScrollDownButton:HookScript('OnEnable', function(self)
 				self.Text:SetTextColor(1, 1, 1)
 			end)
@@ -447,7 +447,7 @@ function AS:SkinScrollBar(Frame)
 				Frame.ThumbBG:Point("TOPLEFT", Frame:GetThumbTexture(), "TOPLEFT", 2, -3)
 				Frame.ThumbBG:Point("BOTTOMRIGHT", Frame:GetThumbTexture(), "BOTTOMRIGHT", -2, 3)
 				AS:SetTemplate(Frame.ThumbBG, "Default", true)
-				
+
 				if Frame.ThumbBG then
 					Frame.ThumbBG:SetFrameLevel(Frame.TrackBG:GetFrameLevel())
 				end
@@ -574,8 +574,6 @@ function AS:SkinSlideBar(Frame, Height, MoveText)
 		Frame:Height(Height)
 		Frame:GetThumbTexture():Size(Height + 4, Height)
 	end
-
---	Frame:GetThumbTexture():Size(height-2,height-2)
 end
 
 function AS:SkinIconButton(Button, ShrinkIcon)

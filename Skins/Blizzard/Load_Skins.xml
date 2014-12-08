@@ -23,5 +23,6 @@
 	<Script file="Talents.lua"/>
 	<Script file="TradeSkill.lua"/>
 	<Script file="TradeWindow.lua"/>
+	<Script file="VoidStorage.lua"/>
 	<Script file="WorldStateCaptureBar.lua"/>
 </Ui>

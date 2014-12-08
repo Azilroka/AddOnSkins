@@ -117,8 +117,9 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	AuctionsScrollFrame:Height(336)
 
 	AS:SkinFrame(SideDressUpFrame, nil, nil, true)
-	SideDressUpFrame:SetPoint("TOPLEFT", AuctionFrame, "TOPRIGHT", 2, -28)
-	SideDressUpFrame.SetPoint = AS.Noop
+	AuctionFrame:HookScript('OnShow', function(self)
+		SideDressUpFrame:SetPoint("TOPLEFT", self, "TOPRIGHT", 2, -28)
+	end)
 	AS:SkinButton(SideDressUpModelResetButton)
 	AS:SkinCloseButton(SideDressUpModelCloseButton)
 
