@@ -23,6 +23,7 @@
 	<Script file="Talents.lua"/>
 	<Script file="TradeSkill.lua"/>
 	<Script file="TradeWindow.lua"/>
+	<Script file="Transmogrify.lua"/>
 	<Script file="VoidStorage.lua"/>
 	<Script file="WorldStateCaptureBar.lua"/>
 </Ui>
