@@ -45,9 +45,17 @@ function AS:Blizzard_TradeSkill(event, addon)
 			local Button = _G["TradeSkillReagent"..i]
 			AS:StripTextures(Button)
 			AS:SkinTexture(Button.Icon)
+			Button.Icon:Size(Button.Icon:GetSize() - 4)
 			AS:CreateBackdrop(Button)
-			Button.Backdrop:SetOutside(Button.Icon)
+			Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
+			Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
+			Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
+			Button.Icon.Backdrop = CreateFrame('Frame', nil, Button)
+			AS:SetTemplate(Button.Icon.Backdrop)
+			Button.Icon.Backdrop:SetBackdropColor(0, 0, 0, 0)
+			Button.Icon.Backdrop:SetOutside(Button.Icon)
 		end
+
 		TradeSkillReagent1:SetPoint("TOPLEFT", TradeSkillReagentLabel, "BOTTOMLEFT", 1, -3)
 
 		for i = 1, 8 do
@@ -55,15 +63,13 @@ function AS:Blizzard_TradeSkill(event, addon)
 			AS:SkinStatusBar(Button.SubSkillRankBar)
 		end
 
+		AS:SetTemplate(TradeSkillSkillIcon)
+		AS:StyleButton(TradeSkillSkillIcon)
+
 		hooksecurefunc("TradeSkillFrame_SetSelection", function(id)
-			if not TradeSkillSkillIcon.isSkinned then
-				if TradeSkillSkillIcon:GetNormalTexture() then
-					AS:StyleButton(TradeSkillSkillIcon)
-					AS:SkinTexture(TradeSkillSkillIcon:GetNormalTexture())
-					TradeSkillSkillIcon:GetNormalTexture():SetInside()
-					AS:SetTemplate(TradeSkillSkillIcon)
-					TradeSkillSkillIcon.isSkinned = true
-				end
+			if TradeSkillSkillIcon:GetNormalTexture() then
+				AS:SkinTexture(TradeSkillSkillIcon:GetNormalTexture())
+				TradeSkillSkillIcon:GetNormalTexture():SetInside()
 			end
 			local skillName, skillType, numAvailable, isExpanded, altVerb, numSkillUps, indentLevel, showProgressBar, currentRank, maxRank, startingRank, displayAsUnavailable, unavailableString = GetTradeSkillInfo(id);
 			local skillLink = GetTradeSkillItemLink(id)
@@ -84,9 +90,9 @@ function AS:Blizzard_TradeSkill(event, addon)
 					if reagentLink then
 						local Quality = select(3, GetItemInfo(reagentLink))
 						if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then
-							reagent.Backdrop:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+							reagent.Icon.Backdrop:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 						else
-							reagent.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+							reagent.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 						end
 					end
 				end

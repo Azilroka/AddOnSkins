@@ -32,9 +32,9 @@ function AS:Blizzard_Quest()
 
 	for i = 1, 6 do
 		local Button = _G["QuestProgressItem"..i]
-		local Texture = _G["QuestProgressItem"..i.."IconTexture"]
 		AS:StripTextures(Button)
-		AS:SkinTexture(Texture)
+		AS:SkinTexture(Button.Icon)
+		Button.Icon:Size(Button.Icon:GetSize() - 4)
 		AS:CreateBackdrop(Button)
 		Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
 		Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
@@ -55,6 +55,7 @@ function AS:Blizzard_Quest()
 			RewardButton.Backdrop:SetPoint('BOTTOMLEFT', RewardButton.Icon, 'BOTTOMRIGHT', 0, 0)
 			RewardButton.Backdrop:SetPoint('RIGHT', RewardButton, 'RIGHT', -5, 0)
     		AS:SkinTexture(RewardButton.Icon)
+			RewardButton.Icon:Size(RewardButton.Icon:GetSize() - 4)
 			RewardButton.Icon.Backdrop = CreateFrame('Frame', nil, RewardButton)
 			AS:SetTemplate(RewardButton.Icon.Backdrop)
 			RewardButton.Icon.Backdrop:SetBackdropColor(0, 0, 0, 0)
