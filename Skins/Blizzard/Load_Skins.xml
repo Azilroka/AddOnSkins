@@ -12,6 +12,7 @@
 	<Script file="Friends.lua"/>
 	<Script file="Glyph.lua"/>
 	<Script file="Gossip.lua"/>
+	<Script file="Inspect.lua"/>
 	<Script file="ItemSocketing.lua"/>
 	<Script file="Mail.lua"/>
 	<Script file="Merchant.lua"/>

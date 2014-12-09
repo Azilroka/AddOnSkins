@@ -30,7 +30,6 @@ function AS:Blizzard_CharacterFrame()
 	}
 	
 	for _, Slot in pairs(CharacterSlots) do
-		_G[Slot:GetName()..'Frame']:Kill()
 		AS:SkinTexture(Slot.icon)
 		AS:SkinFrame(Slot)
 		Slot.icon:SetInside()
@@ -38,10 +37,10 @@ function AS:Blizzard_CharacterFrame()
 		Slot.IconBorder:SetTexture(nil)
 		Slot:SetFrameLevel(Slot:GetFrameLevel() + 2)
 		hooksecurefunc(Slot.IconBorder, 'SetVertexColor', function(self, r, g, b)
-			self:GetParent():SetBackdropBorderColor(r, g, b)
+			Slot:SetBackdropBorderColor(r, g, b)
 		end)
 		hooksecurefunc(Slot.IconBorder, 'Hide', function(self)
-			self:GetParent():SetBackdropBorderColor(unpack(AS.BorderColor))
+			Slot:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end)
 		AS:StyleButton(Slot)
 	end

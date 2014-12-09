@@ -53,49 +53,51 @@ function AS:Blizzard_GlyphUI(event, addon)
 		end)
 
 		for i = 1, 6 do
-			AS:SetTemplate(_G["GlyphFrameGlyph"..i])
-			_G["GlyphFrameGlyph"..i]:SetBackdropColor(0,0,0,0)
-			_G["GlyphFrameGlyph"..i]:SetFrameLevel(_G["GlyphFrameGlyph"..i]:GetFrameLevel() + 5)
-			_G["GlyphFrameGlyph"..i].ring:Hide()
-			_G["GlyphFrameGlyph"..i].glyph:Hide()
-			_G["GlyphFrameGlyph"..i].highlight:SetTexture(nil)
+			local Glyph = _G["GlyphFrameGlyph"..i]
+			AS:SetTemplate(Glyph)
+			Glyph:SetBackdropColor(0,0,0,0)
+			Glyph:SetFrameLevel(Glyph:GetFrameLevel() + 5)
+			Glyph.ring:Hide()
+			Glyph.glyph:Hide()
+			Glyph.highlight:SetTexture(nil)
 
 			-- This will make the glyphs nice and square.
-			_G["GlyphFrameGlyph"..i].icon = _G["GlyphFrameGlyph"..i]:CreateTexture(nil, 'OVERLAY')
-			_G["GlyphFrameGlyph"..i].icon:SetInside()
-			AS:SkinTexture(_G["GlyphFrameGlyph"..i].icon)
+			Glyph.glyph:Hide()
+			Glyph.icon = Glyph:CreateTexture(nil, 'OVERLAY')
+			Glyph.icon:SetInside()
+			AS:SkinTexture(Glyph.icon)
 
 			-- Real Highlight shit right here.
-			AS:CreateBackdrop(_G["GlyphFrameGlyph"..i])
-			_G["GlyphFrameGlyph"..i].Backdrop:SetAllPoints()
-			_G["GlyphFrameGlyph"..i].Backdrop:SetFrameLevel(_G["GlyphFrameGlyph"..i]:GetFrameLevel() + 1)
-			_G["GlyphFrameGlyph"..i].Backdrop:SetBackdropColor(0, 0, 0, 0)
-			_G["GlyphFrameGlyph"..i].Backdrop:SetBackdropBorderColor(1, 1, 0)
-			_G["GlyphFrameGlyph"..i].Backdrop:SetScript('OnUpdate', function(self)
-				local Alpha = _G["GlyphFrameGlyph"..i].highlight:GetAlpha()
+			AS:CreateBackdrop(Glyph)
+			Glyph.Backdrop:SetAllPoints()
+			Glyph.Backdrop:SetFrameLevel(Glyph:GetFrameLevel() + 1)
+			Glyph.Backdrop:SetBackdropColor(0, 0, 0, 0)
+			Glyph.Backdrop:SetBackdropBorderColor(1, 1, 0)
+			Glyph.Backdrop:SetScript('OnUpdate', function(self)
+				local Alpha = Glyph.highlight:GetAlpha()
 				self:SetAlpha(Alpha)
-				if strfind(_G["GlyphFrameGlyph"..i].icon:GetTexture(), "Interface\\Spellbook\\UI%-Glyph%-Rune") then
+				if strfind(Glyph.icon:GetTexture(), "Interface\\Spellbook\\UI%-Glyph%-Rune") then
 					if Alpha == 0 then
-						_G["GlyphFrameGlyph"..i].icon:SetVertexColor(1, 1, 1)
-						_G["GlyphFrameGlyph"..i].icon:SetAlpha(1)
+						Glyph.icon:SetVertexColor(1, 1, 1)
+						Glyph.icon:SetAlpha(1)
 					else
-						_G["GlyphFrameGlyph"..i].icon:SetVertexColor(1, 1, 0)
-						_G["GlyphFrameGlyph"..i].icon:SetAlpha(Alpha)
+						Glyph.icon:SetVertexColor(1, 1, 0)
+						Glyph.icon:SetAlpha(Alpha)
 					end
 				end
 			end)
 
-			hooksecurefunc(_G["GlyphFrameGlyph"..i].highlight, 'Show', function()
-				_G["GlyphFrameGlyph"..i].Backdrop:Show()
+			hooksecurefunc(Glyph.highlight, 'Show', function()
+				Glyph.Backdrop:Show()
 			end)
 
-			_G["GlyphFrameGlyph"..i].glyph:Hide()
-			hooksecurefunc(_G["GlyphFrameGlyph"..i].glyph, 'Show', function(self) self:Hide() end)
+			Glyph.glyph:Hide()
+			hooksecurefunc(Glyph.glyph, 'Show', function(self) self:Hide() end)
 			
 			hooksecurefunc('GlyphFrame_Update', function(self)
 				local isActiveTalentGroup = PlayerTalentFrame and PlayerTalentFrame.talentGroup == GetActiveSpecGroup();
 				for i = 1, NUM_GLYPH_SLOTS do
-					local GlyphSocket = _G["GlyphFrameGlyph"..i];
+					local GlyphSocket = Glyph;
 					local _, _, _, _, iconFilename = GetGlyphSocketInfo(i, PlayerTalentFrame.talentGroup)
 					if iconFilename then
 						GlyphSocket.icon:SetTexture(iconFilename)
@@ -109,7 +111,7 @@ function AS:Blizzard_GlyphUI(event, addon)
 			end)
 
 			if i % 2 == 1 then
-				_G["GlyphFrameGlyph"..i]:Size(_G["GlyphFrameGlyph"..i]:GetWidth() * .8, _G["GlyphFrameGlyph"..i]:GetHeight() * .8)
+				Glyph:Size(Glyph:GetWidth() * .8, Glyph:GetHeight() * .8)
 			end
 		end
 	end

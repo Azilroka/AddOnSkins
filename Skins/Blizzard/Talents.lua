@@ -176,30 +176,29 @@ function AS:Blizzard_Talent(event, addon)
 		end)
 
 		for i = 1, MAX_TALENT_TIERS do
-			local row = _G["PlayerTalentFrameTalentsTalentRow"..i]
-			AS:StripTextures(row, true)
+			local Row = _G["PlayerTalentFrameTalentsTalentRow"..i]
+			AS:StripTextures(Row, true)
 
 			for j = 1, NUM_TALENT_COLUMNS do
-				local bu = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j]
-				local ic = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j.."IconTexture"]
+				local Button = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j]
 
-				AS:SkinBackdropFrame(bu)
-				bu:SetFrameLevel(bu:GetFrameLevel() + 2)
-				bu.Backdrop:Point("TOPLEFT", 15, -1)
-				bu.Backdrop:Point("BOTTOMRIGHT", -10, 1)
+				AS:SkinBackdropFrame(Button)
+				Button:SetFrameLevel(Button:GetFrameLevel() + 2)
+				Button.Backdrop:Point("TOPLEFT", 15, -1)
+				Button.Backdrop:Point("BOTTOMRIGHT", -10, 1)
 
-				bu.Border = CreateFrame("Frame", nil, bu)
-				AS:SkinFrame(bu.Border)
-				bu.Border:SetBackdropColor(0, 0, 0, 0)
-				bu.Border:SetOutside(ic)
-				ic:Size(32)
-				ic:SetDrawLayer("ARTWORK")
-				AS:SkinTexture(ic)
-				bu:HookScript('OnEnter', function(self)
+				Button.Border = CreateFrame("Frame", nil, Button)
+				AS:SkinFrame(Button.Border)
+				Button.Border:SetBackdropColor(0, 0, 0, 0)
+				Button.Border:SetOutside(Button.icon)
+				Button.icon:Size(32)
+				Button.icon:SetDrawLayer("ARTWORK")
+				AS:SkinTexture(Button.icon)
+				Button:HookScript('OnEnter', function(self)
 					self.Backdrop:SetBackdropBorderColor(1, .82, 0)
 					self.Border:SetBackdropBorderColor(1, .82, 0)
 				end)
-				bu:HookScript('OnLeave', function(self) 
+				Button:HookScript('OnLeave', function(self) 
 					if self.knownSelection:IsShown() then
 						self.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
 						self.Border:SetBackdropBorderColor(0, 0.44, .87, 1)
