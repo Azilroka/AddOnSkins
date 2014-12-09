@@ -21,6 +21,7 @@
 	<Script file="StackSplit.lua"/>
 	<Script file="Spellbook.lua"/>
 	<Script file="Talents.lua"/>
+	<Script file="Taxi.lua"/>
 	<Script file="TradeSkill.lua"/>
 	<Script file="TradeWindow.lua"/>
 	<Script file="Transmogrify.lua"/>
