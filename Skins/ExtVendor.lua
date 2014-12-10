@@ -39,7 +39,8 @@ function AS:ExtVendor()
 		end
 	end)
 
-	MerchantFrame:Width(690)
+	MerchantFrame:HookScript('OnShow', function(self) self:SetWidth(690) end)
+
 	AS:SkinButton(ExtVendor_SellJunkPopupYesButton)
 	AS:SkinButton(ExtVendor_SellJunkPopupNoButton)
 end

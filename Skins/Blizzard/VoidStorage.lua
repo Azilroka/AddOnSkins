@@ -9,6 +9,8 @@ function AS:Blizzard_VoidStorage(event, addon)
 	AS:StripTextures(VoidStorageCostFrame)
 	AS:StripTextures(VoidStorageStorageFrame)
 
+	VoidStoragePurchaseFrame:SetFrameLevel(VoidStorageFrame:GetFrameLevel() + 10)
+
 	AS:SkinFrame(VoidStorageFrame)
 	VoidStorageFrame:CreateShadow()
 	AS:SkinFrame(VoidStoragePurchaseFrame)

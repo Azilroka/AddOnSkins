@@ -136,7 +136,7 @@ function AS:Blizzard_Merchant()
 	MerchantRepairAllIcon:SetInside()
 
 	-- Skin misc frames
-	MerchantFrame:Width(360)
+	MerchantFrame:SetWidth(345)
 	AS:SkinCloseButton(MerchantFrameCloseButton)
 	AS:SkinNextPrevButton(MerchantNextPageButton)
 	AS:SkinNextPrevButton(MerchantPrevPageButton)
