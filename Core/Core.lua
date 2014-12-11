@@ -23,6 +23,7 @@ AddOnSkinsOptions = {
 -- Misc
 	['RecountBackdrop'] = true,
 	['SkadaBackdrop'] = true,
+	['DetailsBackdrop'] = true,
 	['OmenBackdrop'] = true,
 	['MiscFixes'] = true,
 	['DBMSkinHalf'] = false,

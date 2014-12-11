@@ -44,6 +44,7 @@
 	<Script file="Cork.lua"/>
 	<Script file="Critline.lua"/>
 	<Script file="DailyTamerCheck.lua"/>
+	<Script file="Details.lua"/> 
 	<Script file="DKDots.lua"/>
 	<Script file="Dominos.lua"/>
 	<Script file="DoubleWideTradeSkills.lua"/>

@@ -67,6 +67,7 @@ function AS:InjectProfile()
 		['RecountBackdrop'] = true,
 		['SkadaBackdrop'] = true,
 		['OmenBackdrop'] = true,
+		['DetailsBackdrop'] = true,
 		['MiscFixes'] = true,
 		['DBMSkinHalf'] = false,
 		['DBMFont'] = 'ElvUI Norm',

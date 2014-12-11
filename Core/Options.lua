@@ -20,6 +20,7 @@ local Defaults = {
 	['RecountBackdrop'] = true,
 	['SkadaBackdrop'] = true,
 	['OmenBackdrop'] = true,
+	['DetailsBackdrop'] = true,
 	['MiscFixes'] = true,
 	['DBMSkinHalf'] = false,
 	['DBMFont'] = 'Tukui',
@@ -68,6 +69,7 @@ local DEVELOPERS = {
 	"Shadowcall",
 	"Sinaris",
 	"Sortokk",
+	"Tercioo",
 	"Tukz",
 	"Warmexx",
 }
@@ -173,7 +175,7 @@ function AS:GetOptions()
 				args = {
 					desc = {
 						type = "description",
-						name = ASL["Settings to control Embedded AddOns:\n\nAvailable Embeds: alDamageMeter | Omen | Skada | Recount | TinyDPS"],
+						name = ASL["Settings to control Embedded AddOns:\n\nAvailable Embeds: alDamageMeter | Details | Omen | Skada | Recount | TinyDPS"],
 						order = 1
 					},
 					EmbedSystem = {
@@ -266,6 +268,12 @@ function AS:GetOptions()
 						type = "toggle",
 						name = ASL["Embed Below Top Tab"],
 						order = 15,
+					},
+					DetailsBackdrop = { 
+						type = "toggle", 
+						name = ASL["Details Backdrop"], 
+						order = 16, 
+						disabled = function() return not (AS:CheckOption("Details", "Details") and AS:CheckEmbed("Details")) end 
 					},
 					RecountBackdrop = {
 						type = "toggle",

@@ -103,6 +103,7 @@ function AS:Embed_Check(Message)
 	end
 	AS:Embed_Toggle(Message)
 	AS:EmbedSystem_WindowResize()
+	if AS:CheckEmbed('Details') then AS:Embed_Details() end
 	if AS:CheckEmbed('Omen') then AS:Embed_Omen() end
 	if AS:CheckEmbed('Skada') then AS:Embed_Skada() end
 	if AS:CheckEmbed('TinyDPS') then AS:Embed_TinyDPS() end
@@ -118,16 +119,16 @@ function AS:Embed_Toggle(Message)
 	EmbedSystem_RightWindow.FrameName = nil
 	if AS:CheckOption('EmbedSystem') then
 		local MainEmbed = strlower(AS:CheckOption('EmbedMain'))
-		if MainEmbed ~= 'skada' and MainEmbed ~= 'omen' and MainEmbed ~= 'recount' and MainEmbed ~= 'tinydps' and MainEmbed ~= 'aldamagemeter' then
+		if MainEmbed ~= 'details' and MainEmbed ~= 'skada' and MainEmbed ~= 'omen' and MainEmbed ~= 'recount' and MainEmbed ~= 'tinydps' and MainEmbed ~= 'aldamagemeter' then
 			EmbedSystem_MainWindow.FrameName = AS:CheckOption('EmbedMain')
 		end
 	end
 	if AS:CheckOption('EmbedSystemDual') then
 		local LeftEmbed, RightEmbed = strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight'))
-		if LeftEmbed ~= 'skada' and LeftEmbed ~= 'omen' and LeftEmbed ~= 'recount' and LeftEmbed ~= 'tinydps' and LeftEmbed ~= 'aldamagemeter' then
+		if LeftEmbed ~= 'details' and LeftEmbed ~= 'skada' and LeftEmbed ~= 'omen' and LeftEmbed ~= 'recount' and LeftEmbed ~= 'tinydps' and LeftEmbed ~= 'aldamagemeter' then
 			EmbedSystem_LeftWindow.FrameName = AS:CheckOption('EmbedLeft')
 		end
-		if RightEmbed ~= 'skada' and RightEmbed ~= 'omen' and RightEmbed ~= 'recount' and RightEmbed ~= 'tinydps' and RightEmbed ~= 'aldamagemeter' then
+		if RightEmbed ~= 'details' and RightEmbed ~= 'skada' and RightEmbed ~= 'omen' and RightEmbed ~= 'recount' and RightEmbed ~= 'tinydps' and RightEmbed ~= 'aldamagemeter' then
 			EmbedSystem_RightWindow.FrameName = AS:CheckOption('EmbedRight')
 		end
 	end
@@ -332,6 +333,169 @@ if AS:CheckAddOn('Skada') then
 		elseif NumberToEmbed == 2 then
 			EmbedWindow(AS.SkadaWindows[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
 			EmbedWindow(AS.SkadaWindows[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
+		end
+	end
+end
+
+
+if AS:CheckAddOn('Details') then
+	AS['DetailsInstances'] = {}
+	function AS:Embed_Details()
+		wipe(AS['DetailsInstances'])
+		local Details = _G._detalhes --> get the addon object
+		--> internally in Details!, a window is called 'instance'.
+		--> instances can be opened and closed at any time.
+		for inumber, instance in Details:ListInstances() do
+			tinsert (AS.DetailsInstances, instance)
+		end
+
+		local NumberToEmbed = 0
+		if AS:CheckOption('EmbedSystem') then
+			NumberToEmbed = 1
+		end
+
+		if AS:CheckOption('EmbedSystemDual') then
+			if AS:CheckOption('EmbedRight') == 'Details' then NumberToEmbed = NumberToEmbed + 1 end
+			if AS:CheckOption('EmbedLeft') == 'Details' then NumberToEmbed = NumberToEmbed + 1 end
+		end
+
+		--> raise max window amount if ElvUI needs more windows them the limit on Details!
+		--> this limit controls how many windows the player can create, the minimum is 1 the max is 30 the default is 5. The value can be changed on options panel.
+		if (Details:GetMaxInstancesAmount() < NumberToEmbed) then
+			Details:SetMaxInstancesAmount(NumberToEmbed)
+		end
+
+		--> get how many windows already are created
+		local instances_amount = Details:GetNumInstancesAmount()
+
+		--> create extra windows if needed
+		for i = instances_amount+1, NumberToEmbed do
+			local new_instance = Details:CreateInstance (i)
+			--> just check is the instance is created okey
+			if (type (new_instance) == "table") then
+				tinsert (AS.DetailsInstances, new_instance)
+			end
+		end
+
+		--> remove tooltip borders
+		Details:SetTooltipBackdrop ("Blizzard Tooltip", 16, {1, 1, 1, 0})
+		--> use white square borders
+		--Details:SetTooltipBackdrop ("Details BarBorder 2", 24, {1, 1, 1, 1})
+
+		--> enable bar animations and make the update speed faster
+		Details:SetUseAnimations (true)
+		--Details:SetWindowUpdateSpeed (0.3) -- 0.05 to 3.00
+
+		local function EmbedWindow (window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+			if not window then return end
+
+			--> check if the window isn't close.
+			if (not window:IsEnabled()) then
+				window:EnableInstance()
+			end
+
+			window._ElvUIEmbed = true
+
+			local offsety
+			if window.bars_grow_direction == 2 then --> bottom to top (reverse)
+				offsety = 2
+			else
+				offsety = 20  --20 is the default height for the title bar
+			end
+
+			--> break the group or window 2 will mess with the setpoint
+			window:UngroupInstance()
+
+			--> set the skin to ElvUI
+			if (window.skin ~= "ElvUI Frame Style") then
+				window:ChangeSkin("ElvUI Frame Style")
+			end
+
+			--> always show the player's bar even if he/she isn't in the top ranks (for example, the window is showing 1 to 7 players, the player is 12 place, so the window shows 1 to 6 and 12).
+			window:SetBarFollowPlayer(true)
+			--> set the font on the title bar to ElvUI font
+			window:AttributeMenu(true, -20, 5, "ElvUI Font", 11)
+			--> set the font on bars to elvui font
+			window:SetBarTextSettings(10, "ElvUI Font")
+			--> remove the close button
+			window:ToolbarMenuSetButtons(true, true, true, true, true, false)
+
+			--> resize the baseframe // -20 because this size doesn't count the title bar
+			window:SetSize(width, height - 20)
+
+			--> set the point and save the position
+			window:SetFrameStrata('LOW')
+			window.baseframe:ClearAllPoints()
+			window.baseframe:SetParent(relativeFrame)
+
+			ofsx = ofsx - 1 --> wasn't fitting correctly, with -1 it get aligned.
+			window.baseframe:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
+			window:SaveMainWindowPosition()
+			window:RestoreMainWindowPosition()
+
+			--> lock it
+			window:LockInstance(true)
+
+			--> if is this the second window, remake the group with window 1
+			if (window:GetId() == 2) then
+				window:MakeInstanceGroup({1}) --> instance number on [1] left [2] bottom [3] right [4] top
+			end
+
+			--> setting rowframe as a child of baseframe, this makes the show/hide feature possible on embed.
+			if (window:GetId() == 1) then
+				DetailsRowFrame1:SetParent (DetailsBaseFrame1)
+				DetailsRowFrame1:SetFrameLevel (DetailsBaseFrame1:GetFrameLevel()+1)
+			elseif (window:GetId() == 2) then
+				DetailsRowFrame2:SetParent (DetailsBaseFrame2)
+				DetailsRowFrame2:SetFrameLevel (DetailsBaseFrame2:GetFrameLevel()+1)
+			end
+
+			--> reload everything - when calling ChangeSkin without parameter, it uses the same skin and reaply all configs from the window's config table.
+			window:ChangeSkin()
+
+			--> check if the window is in current segment - segment 0 = current / -1 = overall / 1 - 25 = past segments
+			if (window:GetSegment() ~= 0) then
+				window:SetDisplay (0)
+			end
+		end
+		
+		if NumberToEmbed == 1 then
+			local EmbedParent = EmbedSystem_MainWindow
+			if AS:CheckOption('EmbedSystemDual') then 
+				EmbedParent = AS:CheckOption('EmbedRight') == 'Details' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow 
+			end
+			EmbedWindow(AS.DetailsInstances[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
+			
+			if (AS.DetailsInstances[2]) then
+				AS.DetailsInstances[2]._ElvUIEmbed = nil
+			end
+			
+		elseif NumberToEmbed == 2 then
+			EmbedWindow(AS.DetailsInstances[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
+			EmbedWindow(AS.DetailsInstances[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
+		end
+		
+		--> internal events
+		local listener = Details:CreateEventListener()
+		listener:RegisterEvent("DETAILS_INSTANCE_OPEN")
+		listener:RegisterEvent("DETAILS_INSTANCE_CLOSE")
+
+		function listener:OnDetailsEvent (event, ...)
+			if (event == "DETAILS_INSTANCE_CLOSE") then
+				local instance = select (1, ...)
+				--> alert the used about closing an window embed: if the window is hidden from the UI because out of combat on ElvUI, it shows as opened under Details! Options panel.
+				if (instance._ElvUIEmbed) then
+					Details:Msg("You just closed a window Embed on ElvUI, if wasn't intended click on Reopen.") --> need localization
+				end
+			elseif (event == "DETAILS_INSTANCE_OPEN") then
+				local instance = select(1, ...)
+				if (instance._ElvUIEmbed) then
+					--> when a window is closed, it is removed from the window group, we need to add the window back to the group.
+					if (NumberToEmbed == 2) then
+						AS.DetailsInstances[2]:MakeInstanceGroup({1})
+					end
+				end
+			end
 		end
 	end
 end
