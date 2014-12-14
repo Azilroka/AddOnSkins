@@ -1,6 +1,18 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_RaidUI(event, addon)
+	if event == 'PLAYER_ENTERING_WORLD' then
+		AS:SkinButton(RaidFrameConvertToRaidButton)
+		AS:SkinButton(RaidFrameRaidInfoButton)
+		AS:SkinCheckBox(RaidFrameAllAssistCheckButton)
+
+		AS:SkinFrame(RaidInfoFrame)
+		AS:SkinCloseButton(RaidInfoCloseButton)
+		AS:SkinButton(RaidInfoExtendButton)
+		AS:SkinButton(RaidInfoCancelButton)
+		AS:StripTextures(RaidInfoInstanceLabel)
+		AS:StripTextures(RaidInfoIDLabel)
+	end
 	if addon == 'Blizzard_RaidUI' or IsAddOnLoaded('Blizzard_RaidUI') then
 		for i = 1, 8 do
 			AS:SkinFrame(_G["RaidGroup"..i])

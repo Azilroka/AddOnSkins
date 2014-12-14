@@ -143,17 +143,6 @@ function AS:Blizzard_Friends()
 			end
 		end
 	end)
-
-	AS:SkinButton(RaidFrameConvertToRaidButton)
-	AS:SkinButton(RaidFrameRaidInfoButton)
-	AS:SkinCheckBox(RaidFrameAllAssistCheckButton)
-
-	AS:SkinFrame(RaidInfoFrame)
-	AS:SkinCloseButton(RaidInfoCloseButton)
-	AS:SkinButton(RaidInfoExtendButton)
-	AS:SkinButton(RaidInfoCancelButton)
-	AS:StripTextures(RaidInfoInstanceLabel)
-	AS:StripTextures(RaidInfoIDLabel)
 end
 
 AS:RegisterSkin('Blizzard_Friends', AS.Blizzard_Friends)
