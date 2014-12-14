@@ -10,6 +10,7 @@
 	<Script file="DressUp.lua"/>
 	<Script file="ExtraButtons.lua"/>
 	<Script file="Friends.lua"/>
+	<Script file="Garrison.lua"/>
 	<Script file="Glyph.lua"/>
 	<Script file="Gossip.lua"/>
 	<Script file="Inspect.lua"/>
@@ -19,6 +20,7 @@
 	<Script file="PvE.lua"/>
 	<Script file="PvP.lua"/>
 	<Script file="Quest.lua"/>
+	<Script file="Raid.lua"/>
 	<Script file="StackSplit.lua"/>
 	<Script file="Spellbook.lua"/>
 	<Script file="Talents.lua"/>

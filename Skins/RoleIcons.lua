@@ -26,10 +26,6 @@ function AS:RoleIcons(event, addon)
 			end
 
 			AS:SkinButton(_G["RaidIconsRoleCheckBtn"])
-			
-			for i = 1, MAX_RAID_GROUPS * 5 do
-				AS:SkinButton(_G["RaidGroupButton"..i], true)
-			end
 		end)
 	end
 end

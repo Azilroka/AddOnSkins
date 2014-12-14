@@ -1,7 +1,13 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Friends()
-	AS:SkinFrame(FriendsFrame, nil, nil, true)
+	AS:SkinFrame(FriendsFrame)
+	FriendsFrameIcon:SetTexture('')
+	hooksecurefunc(FriendsFrameIcon, 'SetTexture', function(self, texture)
+		if texture ~= '' then
+			self:SetTexture('')
+		end
+	end)
 	AS:SkinBackdropFrame(FriendsFrameFriendsScrollFrame)
 	FriendsFrameFriendsScrollFrame.Backdrop:SetPoint('TOPLEFT', -4, 3)
 	FriendsFrameFriendsScrollFrame.Backdrop:SetPoint('BOTTOMRIGHT', 0, -3)

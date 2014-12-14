@@ -30,6 +30,21 @@ function AS:Blizzard_Quest()
 	QuestInfoItemHighlight:StripTextures()
 	QuestFrame:SetHeight(500)
 
+	AS:StripTextures(QuestInfoRewardsFrame.SkillPointFrame)
+	AS:SkinTexture(QuestInfoRewardsFrame.SkillPointFrame.Icon)
+	QuestInfoRewardsFrame.SkillPointFrame.Icon:Size(QuestInfoRewardsFrame.SkillPointFrame.Icon:GetSize() - 4)
+	AS:CreateBackdrop(QuestInfoRewardsFrame.SkillPointFrame)
+	QuestInfoRewardsFrame.SkillPointFrame.Backdrop:SetPoint('TOPLEFT', QuestInfoRewardsFrame.SkillPointFrame.Icon, 'TOPRIGHT', 0, 0)
+	QuestInfoRewardsFrame.SkillPointFrame.Backdrop:SetPoint('BOTTOMLEFT', QuestInfoRewardsFrame.SkillPointFrame.Icon, 'BOTTOMRIGHT', 0, 0)
+	QuestInfoRewardsFrame.SkillPointFrame.Backdrop:SetPoint('RIGHT', QuestInfoRewardsFrame.SkillPointFrame.NameFrame, 'RIGHT', -12, 0)
+	QuestInfoRewardsFrame.SkillPointFrame.Icon.Backdrop = CreateFrame('Frame', nil, QuestInfoRewardsFrame.SkillPointFrame)
+	QuestInfoRewardsFrame.SkillPointFrame.Icon.Backdrop:SetFrameLevel(QuestInfoRewardsFrame.SkillPointFrame:GetFrameLevel())
+	AS:SetTemplate(QuestInfoRewardsFrame.SkillPointFrame.Icon.Backdrop)
+	QuestInfoRewardsFrame.SkillPointFrame.Icon.Backdrop:SetBackdropColor(0, 0, 0, 0)
+	QuestInfoRewardsFrame.SkillPointFrame.Icon.Backdrop:SetOutside(QuestInfoRewardsFrame.SkillPointFrame.Icon)
+	QuestInfoRewardsFrame.SkillPointFrame:Width(QuestInfoRewardsFrame.SkillPointFrame.Icon:GetWidth() - 4)
+	QuestInfoRewardsFrame.SkillPointFrame.ValueText:SetDrawLayer('OVERLAY', 7)
+
 	for i = 1, 6 do
 		local Button = _G["QuestProgressItem"..i]
 		AS:StripTextures(Button)
