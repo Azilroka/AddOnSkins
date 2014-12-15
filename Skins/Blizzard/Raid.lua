@@ -7,6 +7,7 @@ function AS:Blizzard_RaidUI(event, addon)
 		AS:SkinCheckBox(RaidFrameAllAssistCheckButton)
 
 		AS:SkinFrame(RaidInfoFrame)
+		AS:SkinScrollBar(RaidInfoScrollFrameScrollBar)
 		AS:SkinCloseButton(RaidInfoCloseButton)
 		AS:SkinButton(RaidInfoExtendButton)
 		AS:SkinButton(RaidInfoCancelButton)
