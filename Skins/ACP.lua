@@ -46,7 +46,7 @@ function AS:ACP()
 	ACP_AddonListEnableAll:Point("BOTTOMLEFT", ACP_AddonList, "BOTTOMLEFT", 175, 8)
 	ACP_AddonList_ReloadUI:Point("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -160, 8)
 	ACP_AddonListBottomClose:Point("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -50, 8)
-	ACP_AddonList:SetScale(AS.UIScale)
+	ACP_AddonList:SetScale(UIParent:GetScale())
 end
 
 AS:RegisterSkin('ACP', AS.ACP)

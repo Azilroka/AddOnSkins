@@ -100,7 +100,6 @@ function AS:Skillet()
 			'SkilletQueueManagementParent',
 			'SkilletSkillTooltip',
 			'SkilletStandalonQueue',
-			'SkilletViewCraftersParent',
 		}
 
 		for _, object in pairs(StripAllTextures) do
@@ -112,7 +111,6 @@ function AS:Skillet()
 			'SkilletReagentParent',
 			'SkilletQueueParent',
 			'SkilletQueueManagementParent',
-			'SkilletViewCraftersParent',
 		}
 
 		local SetTemplateT = {
@@ -120,6 +118,7 @@ function AS:Skillet()
 			'SkilletRecipeNotesFrame',
 			'SkilletSkillTooltip',
 			'SkilletStandalonQueue',
+			'SkilletIgnoreList',
 		}	
 
 		for _, object in pairs(SetTemplateD) do
@@ -150,7 +149,7 @@ function AS:Skillet()
 		SkilletFrameCloseButton:ClearAllPoints()
 		SkilletFrameCloseButton:SetPoint('TOPRIGHT', SkilletFrame, 'TOPRIGHT', 0, 0)
 		SkilletTradeSkillLinkButton:SetPoint('RIGHT', SkilletShowOptionsButton, 'LEFT', 0, 0)
-		SkilletViewCraftersButton:SetPoint('RIGHT', SkilletQueueManagementButton, 'LEFT', -5, 0)
+		SkilletIgnoredMatsButton:SetPoint('RIGHT', SkilletQueueManagementButton, 'LEFT', -5, 0)
 
 		AS:SkinTooltip(SkilletTradeskillTooltip)
 		AS:SkinScrollBar(SkilletQueueListScrollBar)
@@ -287,7 +286,7 @@ function AS:Skillet()
 		'SkilletQueueDeleteButton',
 		'SkilletQueueSaveButton',
 		'SkilletRecipeNotesButton',
-		'SkilletViewCraftersButton',
+		'SkilletIgnoredMatsButton',
 		'SkilletMerchantBuyFrameButton',
 	}
 

@@ -143,23 +143,22 @@ function AS:Blizzard_Talent(event, addon)
 
 			local bonuses
 			if self.isPet then
-				bonuses = {GetSpecializationSpells(shownSpec, nil, self.isPet)}
+				bonuses = {GetSpecializationSpells(shownSpec, nil, self.isPet, true)}
 			else
 				bonuses = SPEC_SPELLS_DISPLAY[id]
 			end
 
 			for i = 1, #bonuses, 2 do
 				local frame = scrollChild["abilityButton"..index]
-				local _, icon = GetSpellTexture(bonuses[i])
-				if not frame.reskinned then
-					frame.reskinned = true
-					frame:Size(30, 30)
-					frame.ring:Hide()
+				if frame and not frame.reskinned then
 					AS:SetTemplate(frame)
 					AS:SkinTexture(frame.icon)
+					frame:Size(45, 45)
+					frame.ring:Hide()
 					frame.icon:SetInside()			
+					frame.icon:SetTexture(select(2, GetSpellTexture(bonuses[i])))
+					frame.reskinned = true
 				end
-				frame.icon:SetTexture(icon)
 				index = index + 1
 			end
 
