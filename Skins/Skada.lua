@@ -27,7 +27,7 @@ function AS:Skada()
 		skada:SetFrameLevel(5)
 		skada:SetBackdrop(nil)
 		if win.db.enabletitle then
-			AS:SkinTitleBar(skada.button, 'Default')
+			AS:SkinTitleBar(skada.button, 'Default', true)
 		end
 		if not skada.Backdrop then
 			AS:SkinBackdropFrame(skada)
