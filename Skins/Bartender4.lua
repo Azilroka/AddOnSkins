@@ -4,60 +4,78 @@ if not AS:CheckAddOn('Bartender4') then return end
 
 function AS:Bartender4()
 	local function StyleNormalButton(self)
-		local name = self:GetName()
-		local button = self
-		local icon = _G[name.."Icon"]
-		local count = _G[name.."Count"]
-		local flash = _G[name.."Flash"]
-		local hotkey = _G[name.."HotKey"]
-		local border = _G[name.."Border"]
-		local btname = _G[name.."Name"]
-		local normal = _G[name.."NormalTexture"]
-
-		flash:SetTexture("")
-		button:SetNormalTexture("")
-
-		if border then
-			border:Hide()
-			border = AS.Noop
+		local Name = self:GetName()
+		local Action = self.action
+		local Button = self
+		local Icon = _G[Name.."Icon"]
+		local Count = _G[Name.."Count"]
+		local Flash	 = _G[Name.."Flash"]
+		local HotKey = _G[Name.."HotKey"]
+		local Border  = _G[Name.."Border"]
+		local Btname = _G[Name.."Name"]
+		local Normal  = _G[Name.."NormalTexture"]
+		local BtnBG = _G[Name.."FloatingBG"]
+	 
+		Flash:SetTexture("")
+		Button:SetNormalTexture("")
+	 
+		Count:ClearAllPoints()
+		Count:Point("BOTTOMRIGHT", 0, 2)
+		
+		HotKey:ClearAllPoints()
+		HotKey:Point("TOPRIGHT", 0, -3)
+		
+		if Border and Button.isSkinned then
+			Border:SetTexture('')
+			if Border:IsShown() then
+				Button:SetBackdropBorderColor(.08, .70, 0)
+			else
+				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end
+		
+		if Btname and Normal then
+			local String = GetActionText(Action)
+			
+			if String then
+				local Text = string.sub(String, 1, 5)
+				Btname:SetText(Text)
+			end
+		end
+		
+		if (Button.isSkinned) then
+			return
+		end
+		
+		if (Btname) then
+			Btname:ClearAllPoints()
+			Btname:SetPoint("BOTTOM", 1, 1)
+		end
+		
+		if (BtnBG) then
+			BtnBG:Kill()
 		end
 
-		if count then
-			count:ClearAllPoints()
-			count:SetPoint("BOTTOMRIGHT", 0, 2)
-			count:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
+		AS:SetTemplate(Button)
+		Button:UnregisterEvent("ACTIONBAR_SHOWGRID")
+		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")
+
+		AS:SkinTexture(Icon)
+		Icon:SetInside()
+		Icon:SetDrawLayer('BACKGROUND', 7)
+
+		if (Normal) then
+			Normal:ClearAllPoints()
+			Normal:SetPoint("TOPLEFT")
+			Normal:SetPoint("BOTTOMRIGHT")
+			
+			if (Button:GetChecked()) then
+				ActionButton_UpdateState(Button)
+			end
 		end
 
-		if btname then
-			btname:ClearAllPoints()
-			btname:SetPoint("BOTTOM", 0, 0)
-			btname:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
-		end
-
-		if hotkey then
-			hotkey:ClearAllPoints()
-			hotkey:SetPoint("TOPRIGHT", 0, 0)
-			hotkey:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
-			hotkey:SetWidth(button:GetWidth() - 1)
-		end
-
-		if not button.isSkinned then
-			AS:CreateBackdrop(button, 'Transparent')
-			AS:StyleButton(button)
-			button.Backdrop:SetAllPoints()
-
-			AS:SkinTexture(icon)
-			icon.SetTexCoord = function() end
-			icon:SetInside()
-
-			button.isSkinned = true
-		end
-
-		if normal then
-			normal:ClearAllPoints()
-			normal:SetPoint("TOPLEFT")
-			normal:SetPoint("BOTTOMRIGHT")
-		end
+		AS:StyleButton(Button)
+		Button.isSkinned = true
 	end
 
 	for i = 1, 10 do
