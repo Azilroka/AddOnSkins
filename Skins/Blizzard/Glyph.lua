@@ -94,26 +94,26 @@ function AS:Blizzard_GlyphUI(event, addon)
 			Glyph.glyph:Hide()
 			hooksecurefunc(Glyph.glyph, 'Show', function(self) self:Hide() end)
 			
-			hooksecurefunc('GlyphFrame_Update', function(self)
-				local isActiveTalentGroup = PlayerTalentFrame and PlayerTalentFrame.talentGroup == GetActiveSpecGroup();
-				for i = 1, NUM_GLYPH_SLOTS do
-					local GlyphSocket = Glyph;
-					local _, _, _, _, iconFilename = GetGlyphSocketInfo(i, PlayerTalentFrame.talentGroup)
-					if iconFilename then
-						GlyphSocket.icon:SetTexture(iconFilename)
-					else
-						GlyphSocket.icon:SetTexture("Interface\\Spellbook\\UI-Glyph-Rune-"..i)
-					end
-					GlyphFrameGlyph_UpdateSlot(GlyphSocket);
-					SetDesaturation(GlyphSocket.icon, not isActiveTalentGroup);
-				end
-				SetDesaturation(self.specIcon, not isActiveTalentGroup);
-			end)
-
 			if i % 2 == 1 then
 				Glyph:Size(Glyph:GetWidth() * .8, Glyph:GetHeight() * .8)
 			end
 		end
+
+		hooksecurefunc('GlyphFrame_Update', function(self)
+			local isActiveTalentGroup = PlayerTalentFrame and PlayerTalentFrame.talentGroup == GetActiveSpecGroup();
+			for i = 1, NUM_GLYPH_SLOTS do
+				local GlyphSocket = _G["GlyphFrameGlyph"..i]
+				local _, _, _, _, iconFilename = GetGlyphSocketInfo(i, PlayerTalentFrame.talentGroup)
+				if iconFilename then
+					GlyphSocket.icon:SetTexture(iconFilename)
+				else
+					GlyphSocket.icon:SetTexture("Interface\\Spellbook\\UI-Glyph-Rune-"..i)
+				end
+				GlyphFrameGlyph_UpdateSlot(GlyphSocket);
+				SetDesaturation(GlyphSocket.icon, not isActiveTalentGroup);
+			end
+			SetDesaturation(self.specIcon, not isActiveTalentGroup);
+		end)
 	end
 
 	AS:UnregisterSkinEvent('Blizzard_GlyphUI', 'ADDON_LOADED')
