@@ -346,7 +346,7 @@ if AS:CheckAddOn('Details') then
 		--> internally in Details!, a window is called 'instance'.
 		--> instances can be opened and closed at any time.
 		for inumber, instance in Details:ListInstances() do
-			tinsert (AS.DetailsInstances, instance)
+			tinsert(AS.DetailsInstances, instance)
 		end
 
 		local NumberToEmbed = 0
@@ -372,13 +372,13 @@ if AS:CheckAddOn('Details') then
 		for i = instances_amount+1, NumberToEmbed do
 			local new_instance = Details:CreateInstance (i)
 			--> just check is the instance is created okey
-			if (type (new_instance) == "table") then
-				tinsert (AS.DetailsInstances, new_instance)
+			if (type(new_instance) == "table") then
+				tinsert(AS.DetailsInstances, new_instance)
 			end
 		end
 
 		--> remove tooltip borders
-		Details:SetTooltipBackdrop ("Blizzard Tooltip", 16, {1, 1, 1, 0})
+		Details:SetTooltipBackdrop("Blizzard Tooltip", 16, {1, 1, 1, 0})
 		--> use white square borders
 		--Details:SetTooltipBackdrop ("Details BarBorder 2", 24, {1, 1, 1, 1})
 
@@ -407,7 +407,7 @@ if AS:CheckAddOn('Details') then
 			window:UngroupInstance()
 
 			--> set the skin to ElvUI
-			if (window.skin ~= "ElvUI Frame Style") then
+			if (not window.skin:find("ElvUI")) then
 				window:ChangeSkin("ElvUI Frame Style")
 			end
 
