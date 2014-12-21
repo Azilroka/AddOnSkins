@@ -6,7 +6,6 @@ function AS:WeakAuras()
 	local function Skin_WeakAuras(frame, ftype)
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, 'Transparent')
-			frame.Backdrop:SetFrameStrata(frame:GetFrameStrata())
 			if ftype == 'icon' then
 				frame.Backdrop:HookScript('OnUpdate', function(self)
 					self:SetAlpha(self:GetParent().icon:GetAlpha())

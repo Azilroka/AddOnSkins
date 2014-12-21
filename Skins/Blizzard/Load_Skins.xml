@@ -12,8 +12,8 @@
 	<Script file="ExtraButtons.lua"/>
 	<Script file="Friends.lua"/>
 	<Script file="Garrison.lua"/>
-	<Script file="Glyph.lua"/>
 	<Script file="Gossip.lua"/>
+	<Script file="Guild.lua"/>
 	<Script file="Inspect.lua"/>
 	<Script file="ItemSocketing.lua"/>
 	<Script file="Mail.lua"/>

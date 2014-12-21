@@ -252,15 +252,9 @@ function AS:Blizzard_Talent(event, addon)
 		end
 
 		for i = 1, 10 do
-			local button = _G["GlyphFrameScrollFrameButton"..i]
-			local icon = _G["GlyphFrameScrollFrameButton"..i.."Icon"]
-
-			AS:StripTextures(button)
-
-			if icon then
-				AS:SkinTexture(icon)
-				AS:SkinButton(button)
-			end
+			local Button = _G["GlyphFrameScrollFrameButton"..i]
+			AS:SkinButton(Button, true)
+			AS:SkinTexture(Button.icon)
 		end
 
 		AS:SetTemplate(GlyphFrameClearInfoFrame, 'Default')
@@ -269,15 +263,9 @@ function AS:Blizzard_Talent(event, addon)
 
 		AS:SkinScrollBar(GlyphFrameScrollFrameScrollBar)
 
-		local StripAllTextures = {
-			GlyphFrameScrollFrame,
-			GlyphFrameSideInset,
-			GlyphFrameScrollFrameScrollChild
-		}
-
-		for _, object in pairs(StripAllTextures) do
-			AS:StripTextures(object)
-		end
+		AS:StripTextures(GlyphFrameScrollFrame)
+		AS:StripTextures(GlyphFrameSideInset)
+		AS:StripTextures(GlyphFrameScrollFrameScrollChild)
 
 		if not AS.ParchmentEnabled then
 			AS:StripTextures(GlyphFrame)
