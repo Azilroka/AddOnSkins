@@ -3,8 +3,6 @@ local AS = unpack(AddOnSkins)
 local Color = RAID_CLASS_COLORS[AS.MyClass]
 
 function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
-	local r, g, b = unpack(AS.BackdropColor)
-	local alpha = (Template == "Transparent" and .8 or 1)
 	local Texture = AS.Blank
 
 	if UseTexture then 
@@ -86,9 +84,19 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 			Frame.isInsetDone = true
 		end
 	end
+	local R, G, B = unpack(AS.BackdropColor)
+	local Alpha = (Template == "Transparent" and .8 or 1)
 
-	Frame:SetBackdropColor(r, g, b, alpha)
+	if IsAddOnLoaded('ElvUI') then
+		if Template == "Transparent" then
+			R, G, B, Alpha = unpack(ElvUI[1]["media"].backdropfadecolor)
+		else
+			R, G, B = unpack(ElvUI[1]["media"].backdropcolor)
+		end
+	end
+
 	Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
+	Frame:SetBackdropColor(R, G, B, Alpha)
 end
 
 function AS:CreateBackdrop(Frame, Template, UseTexture, TextureFile)

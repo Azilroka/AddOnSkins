@@ -15,7 +15,13 @@ function AS:AtlasLoot(event, addon)
 			self:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end
 		self:SetBackdropColor(unpack(AS.BackdropColor))
+		if _G["AtlasLoot-MountToolTip"] then
+			AS:SkinFrame(_G["AtlasLoot-MountToolTip"], nil, true)
+			AS:SkinTexture(_G["AtlasLoot-MountToolTip"].icon)
+			_G["AtlasLoot-MountToolTip"]:SetBackdropBorderColor(self:GetBackdropBorderColor())
+		end
 	end)
+
 
 	local AtlasLootFrame = _G["AtlasLoot_GUI-Frame"]
 	AS:SkinFrame(AtlasLootFrame)
@@ -29,19 +35,19 @@ function AS:AtlasLoot(event, addon)
 		_G[Frame..'-button']:SetPoint(a, b, c, d - 4, 0)
 		_G[Frame]:HookScript('OnUpdate', function(self)
 			for i = 1, 3 do
-				local Frame = _G['AtlasLoot-DropDown-CatFrame'..i]
-				if Frame and not Frame.IsSkinned then
-					local r, g, b = Frame:GetBackdropColor()
-					AS:SkinFrame(Frame)
-					Frame:SetBackdropColor(r, g, b)
-					Frame:SetPoint(a, f, c, d, e - 3)
+				local CatFrame = _G['AtlasLoot-DropDown-CatFrame'..i]
+				if CatFrame and not CatFrame.IsSkinned then
+					local r, g, b = CatFrame:GetBackdropColor()
+					AS:SkinFrame(CatFrame)
+					CatFrame:SetBackdropColor(r, g, b)
 
-					Frame:HookScript('OnShow', function(self)
-						local a, f, c, d, e = Frame:GetPoint()
-						Frame:SetPoint(a, f, c, d, e - 3)
+					CatFrame:HookScript('OnShow', function(self)
+						local a, f, c, d, e = self:GetPoint()
+						self:SetPoint(a, f, c, d, e - 3)
 					end)
 
-					Frame.IsSkinned = true
+					CatFrame:GetScript('OnShow')(CatFrame)
+					CatFrame.IsSkinned = true
 				end
 			end
 		end)

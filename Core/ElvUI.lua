@@ -125,6 +125,7 @@ function AS:EmbedSystemHooks()
 	end)
 	hooksecurefunc(E:GetModule('Layout'), 'ToggleChatPanels', function() AS:Embed_Check() end)
 
+	RightChatToggleButton:RegisterForClicks('AnyDown')
 	RightChatToggleButton:SetScript('OnClick', function(self, btn)
 		if btn == 'RightButton' then
 			if AS:CheckOption('EmbedRightChat') then
@@ -160,6 +161,7 @@ function AS:EmbedSystemHooks()
 		end
 	end)
 
+	LeftChatToggleButton:RegisterForClicks('AnyDown')
 	LeftChatToggleButton:SetScript('OnClick', function(self, btn)
 		if btn == 'RightButton' then
 			if not AS:CheckOption('EmbedRightChat') then
@@ -213,9 +215,9 @@ function AS:EmbedSystem_WindowResize()
 	if UnitAffectingCombat('player') or not AS.EmbedSystemCreated then return end
 	local ChatPanel = AS:CheckOption('EmbedRightChat') and RightChatPanel or LeftChatPanel
 	local ChatTab = AS:CheckOption('EmbedRightChat') and RightChatTab or LeftChatTab
-	local ChatData = AS:CheckOption('EmbedRightChat') and RightChatDataPanel or LeftChatDataPanel
-	local TopRight = ChatData == RightChatDataPanel and (E.db.datatexts.rightChatPanel and 'TOPLEFT' or 'BOTTOMLEFT') or ChatData == LeftChatDataPanel and (E.db.datatexts.leftChatPanel and 'TOPLEFT' or 'BOTTOMLEFT')
-	local yOffset = (ChatData == RightChatDataPanel and E.db.datatexts.rightChatPanel and (E.PixelMode and 1 or 0)) or (ChatData == LeftChatDataPanel and E.db.datatexts.leftChatPanel and (E.PixelMode and 1 or 0)) or (E.PixelMode and 0 or -1)
+	local ChatData = AS:CheckOption('EmbedRightChat') and RightChatDataPanel or LeftChatToggleButton
+	local TopRight = ChatData == RightChatDataPanel and (E.db.datatexts.rightChatPanel and 'TOPLEFT' or 'BOTTOMLEFT') or ChatData == LeftChatToggleButton and (E.db.datatexts.leftChatPanel and 'TOPLEFT' or 'BOTTOMLEFT')
+	local yOffset = (ChatData == RightChatDataPanel and E.db.datatexts.rightChatPanel and (E.PixelMode and 1 or 0)) or (ChatData == LeftChatToggleButton and E.db.datatexts.leftChatPanel and (E.PixelMode and 1 or 0)) or (E.PixelMode and 0 or -1)
 
 	EmbedSystem_MainWindow:SetParent(ChatPanel)
 	EmbedSystem_MainWindow:ClearAllPoints()

@@ -6,6 +6,8 @@ function AS:WeakAuras()
 	local function Skin_WeakAuras(frame, ftype)
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, 'Transparent')
+			AS:SkinTexture(frame.icon)
+			frame.icon.SetTexCoord = AS.Noop
 			if ftype == 'icon' then
 				frame.Backdrop:HookScript('OnUpdate', function(self)
 					self:SetAlpha(self:GetParent().icon:GetAlpha())
@@ -24,8 +26,6 @@ function AS:WeakAuras()
 		if ftype == 'icon' then
 			if IsAddOnLoaded('ElvUI') and AS:CheckOption('WeakAuraIconCooldown') then ElvUI[1]:RegisterCooldown(frame.cooldown) end
 		end
-
-		AS:SkinTexture(frame.icon)
 	end
 	
 	local function Create_Icon(parent, data)
