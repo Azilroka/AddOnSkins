@@ -5,5 +5,4 @@
     <Script file="MyRolePlay.lua"/>
     <Script file="ParchmentRemover.lua"/>
     <Script file="SexyCooldown.lua"/>
-	<Script file="VEM.lua"/>
 </Ui>

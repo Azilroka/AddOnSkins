@@ -20,6 +20,16 @@ function AS:AtlasLoot(event, addon)
 			AS:SkinTexture(_G["AtlasLoot-MountToolTip"].icon)
 			_G["AtlasLoot-MountToolTip"]:SetBackdropBorderColor(self:GetBackdropBorderColor())
 		end
+		if _G["AtlasLoot-PetToolTip"] then
+			AS:SkinFrame(_G["AtlasLoot-PetToolTip"], nil, true)
+			AS:SkinTexture(_G["AtlasLoot-PetToolTip"].icon)
+			_G["AtlasLoot-PetToolTip"]:SetBackdropBorderColor(self:GetBackdropBorderColor())
+		end
+		if _G["AtlasLoot-FactionToolTip"] then
+			AS:SkinFrame(_G["AtlasLoot-FactionToolTip"], nil, true)
+			AS:SkinTexture(_G["AtlasLoot-FactionToolTip"].icon)
+			_G["AtlasLoot-FactionToolTip"]:SetBackdropBorderColor(self:GetBackdropBorderColor())
+		end
 	end)
 
 

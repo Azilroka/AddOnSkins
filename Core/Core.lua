@@ -254,6 +254,7 @@ function AS:Init(event, addon)
 		AS:CreateDataText()
 	end
 	if event == 'PLAYER_LOGIN' then
+		AS:UpdateMedia()
 		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 		AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
 		AS:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')

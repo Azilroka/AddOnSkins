@@ -147,13 +147,17 @@ function AS:DBM(event, addon)
 
 		local function SkinRange(self, range, filter, forceshow, redCircleNumPlayers)
 			if DBM.Options.DontShowRangeFrame and not forceshow then return end
-			DBMRangeCheck:SetTemplate('Transparent')
-			DBMRangeCheckRadar:SetTemplate('Transparent')
+			if DBMRangeCheck then
+				DBMRangeCheck:SetTemplate('Transparent')
+				DBMRangeCheckRadar:SetTemplate('Transparent')
+			end
 		end
 
 		local function SkinInfo(self, maxLines, event, ...)
 			if DBM.Options.DontShowInfoFrame and (event or 0) ~= "test" then return end
-			DBMInfoFrame:SetTemplate('Transparent')
+			if DBMInfoFrame then
+				DBMInfoFrame:SetTemplate('Transparent')
+			end
 		end
 
 		hooksecurefunc(DBT, 'CreateBar', SkinBars)

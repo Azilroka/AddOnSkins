@@ -4,5 +4,4 @@
 	<Script file="DBM.lua"/>
 	<Script file="DXE.lua"/>
 	<Script file="SexyCooldown.lua"/>
-	<Script file="VEM.lua"/>
 </Ui>

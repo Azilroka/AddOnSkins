@@ -75,7 +75,6 @@
 	<Script file="KeepingTabs.lua"/>
 	<Script file="Lightheaded.lua"/>
 	<Script file="LinkWrangler.lua"/>
-	<Script file="LFRAdvanced.lua"/>
 	<Script file="LootCouncilLite.lua"/>
 	<Script file="LootLog.lua"/>
 	<Script file="MageNuggets.lua"/>

@@ -19,41 +19,42 @@ function AS:ArkInventory()
 	end)
 
 	hooksecurefunc(ArkInventory, 'Frame_Main_Anchor_Set', function(loc_id)
-		local frame = ArkInventory.Frame_Main_Get(loc_id):GetName()
-		local title = _G[frame..ArkInventory.Const.Frame.Title.Name]
-		local search = _G[frame..ArkInventory.Const.Frame.Search.Name]
-		local container = _G[frame..ArkInventory.Const.Frame.Container.Name]
-		local changer = _G[frame..ArkInventory.Const.Frame.Changer.Name]
-		local status = _G[frame..ArkInventory.Const.Frame.Status.Name]
-		local a, b, c, d, e
-
-		a, b, c, d, e = title:GetPoint()
-		title:SetPoint(a, b, c, d, e - 2)
-
-		a, b, c, d, e = search:GetPoint()
-		search:SetPoint(a, b, c, d, e - 2)
-
-		container:ClearAllPoints()
-		container:SetPoint('TOPLEFT', search, 'BOTTOMLEFT', 0, -2)
-		container:SetPoint('TOPRIGHT', search, 'BOTTOMRIGHT', 0, -2)
-		changer:ClearAllPoints()
-		changer:SetPoint('TOPLEFT', container, 'BOTTOMLEFT', 0, -2)
-		changer:SetPoint('TOPRIGHT', container, 'BOTTOMRIGHT', 0, -2)
-		status:ClearAllPoints()
-		status:SetPoint('TOPLEFT', changer, 'BOTTOMLEFT', 0, -2)
-		status:SetPoint('TOPRIGHT', changer, 'BOTTOMRIGHT', 0, -2)
-
-		ARKINV_Frame4ChangerWindowPurchaseInfo:ClearAllPoints()
-		ARKINV_Frame4ChangerWindowPurchaseInfo:SetPoint('TOP', ARKINV_Frame4ChangerWindowGoldAvailable, 'BOTTOM', 0, -12)
-		_G[status:GetName()..'EmptyText']:SetPoint('LEFT', 2, 0)
-		_G[status:GetName()..'EmptyText']:SetFont(AS.Font, 12)
-		_G[status:GetName()..'GoldCopperButton']:SetPoint('RIGHT', -1, 0)
-		_G[status:GetName()..'GoldCopperButtonText']:SetFont(AS.Font, 12)
-		_G[status:GetName()..'GoldSilverButton']:SetPoint('RIGHT', _G[status:GetName()..'GoldCopperButtonText'], 'LEFT', -1,0)
-		_G[status:GetName()..'GoldSilverButtonText']:SetFont(AS.Font, 12)
-		_G[status:GetName()..'GoldGoldButton']:SetPoint('RIGHT', _G[status:GetName()..'GoldSilverButtonText'], 'LEFT', -1, 0)
-		_G[status:GetName()..'GoldGoldButtonText']:SetFont(AS.Font, 12)
 		AS:SkinEditBox(_G[frame..ArkInventory.Const.Frame.Search.Name..'Filter'])
+
+		-- local frame = ArkInventory.Frame_Main_Get(loc_id):GetName()
+		-- local title = _G[frame..ArkInventory.Const.Frame.Title.Name]
+		-- local search = _G[frame..ArkInventory.Const.Frame.Search.Name]
+		-- local container = _G[frame..ArkInventory.Const.Frame.Container.Name]
+		-- local changer = _G[frame..ArkInventory.Const.Frame.Changer.Name]
+		-- local status = _G[frame..ArkInventory.Const.Frame.Status.Name]
+		-- local a, b, c, d, e
+
+		-- a, b, c, d, e = title:GetPoint()
+		-- title:SetPoint(a, b, c, d, e - 2)
+
+		-- a, b, c, d, e = search:GetPoint()
+		-- search:SetPoint(a, b, c, d, e - 2)
+
+		-- container:ClearAllPoints()
+		-- container:SetPoint('TOPLEFT', search, 'BOTTOMLEFT', 0, -2)
+		-- container:SetPoint('TOPRIGHT', search, 'BOTTOMRIGHT', 0, -2)
+		-- changer:ClearAllPoints()
+		-- changer:SetPoint('TOPLEFT', container, 'BOTTOMLEFT', 0, -2)
+		-- changer:SetPoint('TOPRIGHT', container, 'BOTTOMRIGHT', 0, -2)
+		-- status:ClearAllPoints()
+		-- status:SetPoint('TOPLEFT', changer, 'BOTTOMLEFT', 0, -2)
+		-- status:SetPoint('TOPRIGHT', changer, 'BOTTOMRIGHT', 0, -2)
+
+		-- ARKINV_Frame4ChangerWindowPurchaseInfo:ClearAllPoints()
+		-- ARKINV_Frame4ChangerWindowPurchaseInfo:SetPoint('TOP', ARKINV_Frame4ChangerWindowGoldAvailable, 'BOTTOM', 0, -12)
+		-- _G[status:GetName()..'EmptyText']:SetPoint('LEFT', 2, 0)
+		-- _G[status:GetName()..'EmptyText']:SetFont(AS.Font, 12)
+		-- _G[status:GetName()..'GoldCopperButton']:SetPoint('RIGHT', -1, 0)
+		-- _G[status:GetName()..'GoldCopperButtonText']:SetFont(AS.Font, 12)
+		-- _G[status:GetName()..'GoldSilverButton']:SetPoint('RIGHT', _G[status:GetName()..'GoldCopperButtonText'], 'LEFT', -1,0)
+		-- _G[status:GetName()..'GoldSilverButtonText']:SetFont(AS.Font, 12)
+		-- _G[status:GetName()..'GoldGoldButton']:SetPoint('RIGHT', _G[status:GetName()..'GoldSilverButtonText'], 'LEFT', -1, 0)
+		-- _G[status:GetName()..'GoldGoldButtonText']:SetFont(AS.Font, 12)
 	end)
 
 	hooksecurefunc(ArkInventory, 'Frame_Bar_Paint', function(bar)
