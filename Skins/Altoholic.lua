@@ -42,10 +42,17 @@ function AS:Altoholic(event, addon)
 		AS:SkinFrame(AltoholicFrameSkills)
 		AS:SkinFrame(AltoholicFrameActivity)
 		AS:SkinFrame(AltoholicFrameCurrencies)
+		AS:SkinFrame(AltoholicFrameGarrisonFollowers)
+
+		AS:StripTextures(AltoholicFrameCurrenciesScrollFrame)
+		AS:StripTextures(AltoholicFrameGarrisonFollowersScrollFrame)
+
 		AS:SkinScrollBar(AltoholicFrameSummaryScrollFrameScrollBar)
 		AS:SkinScrollBar(AltoholicFrameBagUsageScrollFrameScrollBar)
 		AS:SkinScrollBar(AltoholicFrameSkillsScrollFrameScrollBar)
 		AS:SkinScrollBar(AltoholicFrameActivityScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameCurrenciesScrollFrameScrollBar)
+		AS:SkinScrollBar(AltoholicFrameGarrisonFollowersScrollFrameScrollBar)
 		AS:SkinDropDownBox(AltoholicTabSummary_SelectLocation)
 		AltoholicTabSummary_SelectLocation:Width(200)
 		AS:StripTextures(AltoholicFrameSummaryScrollFrame, true)
@@ -63,10 +70,10 @@ function AS:Altoholic(event, addon)
 		AS:StyleButton(AltoholicTabSummary_OptionsDataStore)
 		AS:CreateBackdrop(AltoholicTabSummary_OptionsDataStore)
 
-		for i = 1, 5 do
+		for i = 1, 6 do
 			AS:SkinButton(_G["AltoholicTabSummaryMenuItem"..i], true)
 		end
-		for i = 1, 8 do
+		for i = 1, 9 do
 			AS:SkinButton(_G["AltoholicTabSummary_Sort"..i], true)
 		end
 		for i = 1, 7 do

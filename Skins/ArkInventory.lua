@@ -19,9 +19,9 @@ function AS:ArkInventory()
 	end)
 
 	hooksecurefunc(ArkInventory, 'Frame_Main_Anchor_Set', function(loc_id)
+		local frame = ArkInventory.Frame_Main_Get(loc_id):GetName()
 		AS:SkinEditBox(_G[frame..ArkInventory.Const.Frame.Search.Name..'Filter'])
 
-		-- local frame = ArkInventory.Frame_Main_Get(loc_id):GetName()
 		-- local title = _G[frame..ArkInventory.Const.Frame.Title.Name]
 		-- local search = _G[frame..ArkInventory.Const.Frame.Search.Name]
 		-- local container = _G[frame..ArkInventory.Const.Frame.Container.Name]
