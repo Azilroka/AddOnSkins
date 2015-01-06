@@ -16,10 +16,9 @@
 	<Script file="Guild.lua"/>
 	<Script file="Inspect.lua"/>
 	<Script file="ItemSocketing.lua"/>
+	<Script file="LFG.lua"/>
 	<Script file="Mail.lua"/>
 	<Script file="Merchant.lua"/>
-	<Script file="PvE.lua"/>
-	<Script file="PvP.lua"/>
 	<Script file="Quest.lua"/>
 	<Script file="Raid.lua"/>
 	<Script file="StackSplit.lua"/>
@@ -30,6 +29,8 @@
 	<Script file="TradeWindow.lua"/>
 	<Script file="Trainer.lua"/>
 	<Script file="Transmogrify.lua"/>
+	<Script file="Tutorial.lua"/>
 	<Script file="VoidStorage.lua"/>
 	<Script file="WorldStateCaptureBar.lua"/>
+	<Script file="WorldStateScoreFrame.lua"/>
 </Ui>

@@ -33,6 +33,7 @@
 	<Script file="BigBrother.lua"/>
 	<Script file="BPT.lua"/>
 	<Script file="BugSack.lua"/>
+	<Script file="Bulkie.lua"/>
 	<Script file="BuyEmAll.lua"/>
 	<Script file="ChocolateBar.lua"/>
 	<Script file="CLCInfo.lua"/>
@@ -145,6 +146,7 @@
 	<Script file="VengeanceStatus.lua"/>
 	<Script file="WeakAuras.lua"/>
 	<Script file="Wholly.lua"/>
+	<Script file="WorldBossStatus.lua"/>
 	<Script file="WowLua.lua"/>
 	<Script file="WoWPro.lua"/>
 	<Script file="xMerchant.lua"/>
