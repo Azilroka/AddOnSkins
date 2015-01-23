@@ -3,7 +3,7 @@
 ## Version: 3.121
 ## Author: Azilroka, Sortokk
 ## SavedVariablesPerCharacter: AddOnSkinsOptions
-## OptionalDep: BuyEmAll, DSM, ElvUI, Tukui, HydraUI
+## OptionalDep: ElvUI, BuyEmAll, DSM, Tukui, HydraUI
 ## X-Tukui-ProjectID: 128
 ## X-Tukui-ProjectFolders: AddOnSkins
 

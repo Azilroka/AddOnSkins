@@ -414,7 +414,11 @@ if AS:CheckAddOn('Details') then
 			--> always show the player's bar even if he/she isn't in the top ranks (for example, the window is showing 1 to 7 players, the player is 12 place, so the window shows 1 to 6 and 12).
 			window:SetBarFollowPlayer(true)
 			--> set the font on the title bar to ElvUI font
-			window:AttributeMenu(true, -20, 5, "ElvUI Font", 11)
+			if (window.skin == "ElvUI Style II") then 
+				window:AttributeMenu(true, -19, 5, "ElvUI Font", 11) 
+			else 
+				window:AttributeMenu(true, -20, 5, "ElvUI Font", 11) 
+			end
 			--> set the font on bars to elvui font
 			window:SetBarTextSettings(10, "ElvUI Font")
 			--> remove the close button
@@ -473,6 +477,10 @@ if AS:CheckAddOn('Details') then
 		elseif NumberToEmbed == 2 then
 			EmbedWindow(AS.DetailsInstances[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
 			EmbedWindow(AS.DetailsInstances[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
+			if (AS.DetailsInstances[1] and AS.DetailsInstances[2] and AS.DetailsInstances[1].skin == "ElvUI Style II") then 
+				local width = AS.DetailsInstances[1]:GetSize() 
+				AS.DetailsInstances[2]:SetSize(width)
+			end 
 		end
 		
 		--> internal events
@@ -489,7 +497,7 @@ if AS:CheckAddOn('Details') then
 				end
 			elseif (event == "DETAILS_INSTANCE_OPEN") then
 				local instance = select(1, ...)
-				if (instance._ElvUIEmbed) then
+				if (instance._ElvUIEmbed and _G.DetailsOptionsWindow and _G.DetailsOptionsWindow:IsShown()) then
 					--> when a window is closed, it is removed from the window group, we need to add the window back to the group.
 					if (NumberToEmbed == 2) then
 						AS.DetailsInstances[2]:MakeInstanceGroup({1})
