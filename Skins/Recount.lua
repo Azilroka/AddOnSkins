@@ -42,15 +42,23 @@ function AS:Recount()
 		if frame then SkinFrame(frame) end
 	end
 
-	if _G['Recount_Realtime_!RAID_DAMAGE'] then SkinFrame(_G['Recount_Realtime_!RAID_DAMAGE'].Window) end
-	if _G['Recount_Realtime_!RAID_HEALING'] then SkinFrame(_G['Recount_Realtime_!RAID_HEALING'].Window) end
-	if _G['Recount_Realtime_!RAID_HEALINGTAKEN'] then SkinFrame(_G['Recount_Realtime_!RAID_HEALINGTAKEN'].Window) end
-	if _G['Recount_Realtime_!RAID_DAMAGETAKEN'] then SkinFrame(_G['Recount_Realtime_!RAID_DAMAGETAKEN'].Window) end
-	if _G['Recount_Realtime_Bandwidth Available_AVAILABLE_BANDWIDTH'] then SkinFrame(_G['Recount_Realtime_Bandwidth Available_AVAILABLE_BANDWIDTH'].Window) end
-	if _G['Recount_Realtime_FPS_FPS'] then SkinFrame(_G['Recount_Realtime_FPS_FPS'].Window) end
-	if _G['Recount_Realtime_Latency_LAG'] then SkinFrame(_G['Recount_Realtime_Latency_LAG'].Window) end
-	if _G['Recount_Realtime_Downstream Traffic_DOWN_TRAFFIC'] then SkinFrame(_G['Recount_Realtime_Downstream Traffic_DOWN_TRAFFIC'].Window) end
-	if _G['Recount_Realtime_Downstream Traffic_UP_TRAFFIC'] then SkinFrame(_G['Recount_Realtime_Downstream Traffic_UP_TRAFFIC'].Window) end
+	local OtherRecountFrames = {
+		'Recount_Realtime_!RAID_DAMAGE',
+		'Recount_Realtime_!RAID_HEALING',
+		'Recount_Realtime_!RAID_HEALINGTAKEN',
+		'Recount_Realtime_!RAID_DAMAGETAKEN',
+		'Recount_Realtime_Bandwidth Available_AVAILABLE_BANDWIDTH',
+		'Recount_Realtime_FPS_FPS',
+		'Recount_Realtime_Latency_LAG',
+		'Recount_Realtime_Downstream Traffic_DOWN_TRAFFIC',
+		'Recount_Realtime_Downstream Traffic_UP_TRAFFIC'
+	}
+
+	for _, frame in pairs(OtherRecountFrames) do
+		if _G[frame] then
+			SkinFrame(_G[frame].Window)
+		end
+	end
 
 	AS:SkinScrollBar(Recount_MainWindow_ScrollBarScrollBar)
 

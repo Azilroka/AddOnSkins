@@ -472,6 +472,47 @@ if AS:CheckAddOn('Details') then
 
 			--> reload everything - when calling ChangeSkin without parameter, it uses the same skin and reaply all configs from the window's config table.
 			window:ChangeSkin()
+			
+			if (window.skin ~= "Forced Square") then
+				if (AS:CheckOption("DetailsBackdrop")) then
+					window:SetBackgroundAlpha (1)
+					window:ShowSideBars()
+				else
+					window:SetBackgroundAlpha (0)
+					window:HideSideBars()
+					
+					local skin = Details.skins [window.skin]
+					
+					window.row_info.space.left = skin.instance_cprops.row_info.space.left
+					window.row_info.space.right = skin.instance_cprops.row_info.space.right
+					
+					window:InstanceWallpaper (false)
+					
+					window:SetBarGrowDirection()
+				end
+			
+			elseif (window.skin == "Forced Square") then
+				if (AS:CheckOption("DetailsBackdrop")) then
+					window:ShowSideBars()
+					window:InstanceColor (1, 1, 1, 1, nil, true)
+					
+					local skin = Details.skins [window.skin]
+					window:SetBackgroundAlpha (skin.instance_cprops.bg_alpha)
+				else
+					window:HideSideBars()
+					window:InstanceColor (1, 1, 1, 0, nil, true)
+					
+					local skin = Details.skins [window.skin]
+					
+					window.row_info.space.left = skin.instance_cprops.row_info.space.left
+					window.row_info.space.right = skin.instance_cprops.row_info.space.right
+					
+					window:InstanceWallpaper (false)
+					window:SetBackgroundAlpha (0)
+					
+					window:SetBarGrowDirection()
+				end
+			end
 
 			--> check if the window is in current segment - segment 0 = current / -1 = overall / 1 - 25 = past segments
 			if (window:GetSegment() ~= 0) then
