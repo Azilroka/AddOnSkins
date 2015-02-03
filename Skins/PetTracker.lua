@@ -47,9 +47,12 @@ function AS:PetTracker()
     end
 
 	if AS:CheckAddOn('PetTracker_Switcher') then
-		AS:SkinFrame(PetTrackerSwap)
-		AS:SkinCloseButton(PetTrackerSwapCloseButton)
 		PetTrackerSwap:HookScript('OnUpdate', function(self)
+			if not self.IsSkinned then
+				AS:SkinFrame(self)
+				AS:SkinCloseButton(PetTrackerSwapCloseButton)
+				self.IsSkinned = true
+			end
 			AS:StripTextures(PetTrackerSwapInset)
 			for i = 1, self:GetNumChildren() do
 				local Region = select(i, self:GetChildren())

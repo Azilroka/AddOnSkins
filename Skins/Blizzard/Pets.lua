@@ -29,9 +29,11 @@ function AS:Blizzard_PetJournal(event, addon)
 	if IsAddOnLoaded('Blizzard_PetJournal') or addon == 'Blizzard_PetJournal' then
 		AS:SkinFrame(PetJournalParent)
 		PetJournalParentPortrait:Hide()
-		AS:SkinTab(PetJournalParentTab1)
-		AS:SkinTab(PetJournalParentTab2)
-		AS:SkinTab(PetJournalParentTab3)
+
+		for i = 1, 3 do
+			AS:SkinTab(_G["PetJournalParentTab"..i])
+		end
+
 		AS:SkinCloseButton(PetJournalParentCloseButton)
 
 		AS:StripTextures(MountJournal)
@@ -236,10 +238,11 @@ function AS:Blizzard_PetJournal(event, addon)
 		AS:SkinStatusBar(PetJournalPetCardXPBar)
 		PetJournalLoadoutBorder:Height(350)
 
+		AS:StripTextures(ToyBoxFilterButton, true)
 		AS:SkinButton(ToyBoxFilterButton)
 		AS:SkinEditBox(ToyBoxSearchBox)
 
-		ToyBoxFilterButton:SetPoint("TOPRIGHT", ToyBox, "TOPRIGHT", -15, -34)
+		ToyBoxSearchBox:SetPoint("TOPRIGHT", ToyBox, "TOPRIGHT", -117, -34)
 
 		AS:SkinNextPrevButton(ToyBoxNextPageButton)
 		AS:SkinNextPrevButton(ToyBoxPrevPageButton)
