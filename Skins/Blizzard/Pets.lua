@@ -26,8 +26,11 @@ function AS:Blizzard_PetJournal(event, addon)
 			AS:StyleButton(b)
 		end
 	end
-	if IsAddOnLoaded('Blizzard_PetJournal') or addon == 'Blizzard_PetJournal' then
+	if event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_PetJournal') or addon == 'Blizzard_PetJournal' then
+		if PetJournalParent.IsSkinned then return end
+		AS:UnregisterSkinEvent('Blizzard_PetJournal', 'ADDON_LOADED')
 		AS:SkinFrame(PetJournalParent)
+		PetJournalParent.IsSkinned = true
 		PetJournalParentPortrait:Hide()
 
 		for i = 1, 3 do
@@ -65,7 +68,7 @@ function AS:Blizzard_PetJournal(event, addon)
 			AS:CreateBackdrop(Button)
 			AS:SkinFrame(Button.Backdrop)
 			Button.Backdrop:SetInside(Button)
-			Button.Backdrop.Inset:Hide()
+			AS:HideInset(Button.Backdrop)
 			Button.Backdrop:SetBackdropBorderColor(0,0,0,0)
 
 			Button.icon:SetPoint("LEFT", -41, 0)
@@ -130,7 +133,7 @@ function AS:Blizzard_PetJournal(event, addon)
 			AS:CreateBackdrop(Button)
 			AS:SkinFrame(Button.Backdrop)
 			Button.Backdrop:SetInside(Button)
-			Button.Backdrop.Inset:Hide()
+			AS:HideInset(Button.Backdrop)
 			Button.Backdrop:SetBackdropBorderColor(0,0,0,0)
 			AS:StyleButton(Button)
 			AS:SkinTexture(Button.icon)
@@ -275,8 +278,6 @@ function AS:Blizzard_PetJournal(event, addon)
 		end)
 
 		AS:SkinStatusBar(ToyBoxProgressBar)
-	
-		AS:UnregisterSkinEvent('Blizzard_PetJournal', 'ADDON_LOADED')
 	end
 end
 

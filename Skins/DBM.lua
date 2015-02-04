@@ -1,11 +1,11 @@
 local AS = unpack(AddOnSkins)
 
-if not (AS:CheckAddOn('DBM-Core') and AS:CheckAddOn('DBM-StatusBarTimers') and AS:CheckAddOn('ElvUI')) then return end
+if not (AS:CheckAddOn('DBM-Core') and AS:CheckAddOn('DBM-StatusBarTimers') and AS:CheckAddOn('Tukui')) then return end
 
 function AS:DBM(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		local croprwicons = true
-		local buttonsize = 22
+		local BarHeight
 		local function SkinBars(self)
 			for bar in self:GetBarIterator() do
 				if not bar.injected then
@@ -29,16 +29,14 @@ function AS:DBM(event, addon)
 							icon1.overlay = CreateFrame('Frame', '$parentIcon1Overlay', tbar)
 							AS:SetTemplate(icon1.overlay)
 							icon1.overlay:SetFrameLevel(0)
-							icon1.overlay:Size(buttonsize)
-							icon1.overlay:Point('BOTTOMRIGHT', frame, 'BOTTOMLEFT', -(ElvUI[1].PixelMode and 2 or 3), 0)
+							icon1.overlay:Point('BOTTOMRIGHT', frame, 'BOTTOMLEFT', -(AS.PixelMode and 2 or 3), 0)
 						end
 
 						if not icon2.overlay then
 							icon2.overlay = CreateFrame('Frame', '$parentIcon2Overlay', tbar)
 							AS:SetTemplate(icon2.overlay)
 							icon2.overlay:SetFrameLevel(0)
-							icon2.overlay:Size(buttonsize)
-							icon2.overlay:Point('BOTTOMLEFT', frame, 'BOTTOMRIGHT', (ElvUI[1].PixelMode and 2 or 3), 0)
+							icon2.overlay:Point('BOTTOMLEFT', frame, 'BOTTOMRIGHT', (AS.PixelMode and 2 or 3), 0)
 						end
 
 						AS:SkinTexture(icon1)
@@ -49,6 +47,9 @@ function AS:DBM(event, addon)
 						icon2:ClearAllPoints()
 						icon2:SetInside(icon2.overlay)
 
+						icon1.overlay:Size(bar.owner.options.Height)
+						icon2.overlay:Size(bar.owner.options.Height)
+						BarHeight = bar.owner.options.Height
 						tbar:SetInside(frame)
 
 						frame:SetTemplate('Transparent')
@@ -64,17 +65,17 @@ function AS:DBM(event, addon)
 						timer:SetShadowColor(0, 0, 0, 0)
 
 						if AS:CheckOption('DBMSkinHalf') then
-							frame:SetHeight(buttonsize / 3)
-							name:Point('BOTTOMLEFT', frame, 'TOPLEFT', 0, 4)
-							timer:Point('BOTTOMRIGHT', frame, 'TOPRIGHT', -1, 2)
+							frame:SetHeight(bar.owner.options.Height / 3)
+							name:Point('BOTTOMLEFT', frame, 'TOPLEFT', 0, 3)
+							timer:Point('BOTTOMRIGHT', frame, 'TOPRIGHT', -1, 1)
 						else
-							frame:SetHeight(buttonsize)
+							frame:SetHeight(bar.owner.options.Height)
 							name:Point('LEFT', frame, 'LEFT', 4, 0)
 							timer:Point('RIGHT', frame, 'RIGHT', -4, 0)
 						end
 
-						timer:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
-						name:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+						timer:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+						name:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 
 						if bar.owner.options.IconLeft then icon1.overlay:Show() else icon1.overlay:Hide() end
 						if bar.owner.options.IconRight then icon2.overlay:Show() else icon2.overlay:Hide() end
@@ -88,7 +89,7 @@ function AS:DBM(event, addon)
 
 		local SkinBoss = function()
 			local count = 1
-			while _G[format('DBM_BossHealth_Bar_%d', count)] do
+			while (_G[format('DBM_BossHealth_Bar_%d', count)]) do
 				local bar = _G[format('DBM_BossHealth_Bar_%d', count)]
 				local barname = bar:GetName()
 				local background = _G[barname..'BarBorder']
@@ -99,11 +100,6 @@ function AS:DBM(event, addon)
 
 				if not pointa then return end
 				bar:ClearAllPoints()
-				if DBM_SavedOptions.HealthFrameGrowUp or (DBMProfiles and DBMProfiles.db.profile.HealthFrameGrowUp) then
-					bar:Point(pointa, anchor, pointb, 0, count == 1 and 12 or 4)
-				else
-					bar:Point(pointa, anchor, pointb, 0, -(count == 1 and 12 or 4))
-				end
 
 				bar:SetTemplate('Transparent')
 
@@ -121,25 +117,36 @@ function AS:DBM(event, addon)
 				timer:SetJustifyH('RIGHT')
 				timer:SetShadowColor(0, 0, 0, 0)
 
+				local MainOffset, BarOffset
 				if AS:CheckOption('DBMSkinHalf') then
-					bar:SetHeight(buttonsize / 3)
+					bar:SetHeight((BarHeight or 22) / 3)
 					name:Point('BOTTOMLEFT', bar, 'TOPLEFT', 4, 0)
 					timer:Point('BOTTOMRIGHT', bar, 'TOPRIGHT', -4, 0)
+					MainOffset = 16
+					BarOffset = 16
 				else
-					bar:SetHeight(buttonsize)
+					bar:SetHeight(BarHeight or 22)
 					name:Point('LEFT', bar, 'LEFT', 4, 0)
 					timer:Point('RIGHT', bar, 'RIGHT', -4, 0)
+					MainOffset = 8
+					BarOffset = 4
 				end
 
 				local header = {bar:GetParent():GetRegions()}
 				if header and header[1]:IsObjectType('FontString') then
-					header[1]:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+					header[1]:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 					header[1]:SetTextColor(1, 1, 1)
 					header[1]:SetShadowColor(0, 0, 0, 0)
 				end
 
-				name:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
-				timer:FontTemplate(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+				name:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+				timer:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+
+				if DBM.Options.HealthFrameGrowUp then
+					bar:Point(pointa, anchor, pointb, 0, count == 1 and MainOffset or BarOffset)
+				else
+					bar:Point(pointa, anchor, pointb, 0, -(count == 1 and MainOffset or BarOffset))
+				end
 
 				count = count + 1
 			end
@@ -170,19 +177,20 @@ function AS:DBM(event, addon)
 		if croprwicons then
 			local RaidNotice_AddMessage_ = RaidNotice_AddMessage
 			RaidNotice_AddMessage = function(noticeFrame, textString, colorInfo)
-				if textString:find(' |T') then
+				if textString:find('|T') then
 					textString = gsub(textString,'(:12:12)',':18:18:0:0:64:64:5:59:5:59')
 				end
 				return RaidNotice_AddMessage_(noticeFrame, textString, colorInfo)
 			end
 		end
 	end
+
 	if addon == 'DBM-GUI' then
 		DBM_GUI_OptionsFrame:HookScript('OnShow', function()
 			AS:SkinFrame(DBM_GUI_OptionsFrame)
 			AS:SkinFrame(DBM_GUI_OptionsFrameBossMods)
 			AS:SkinFrame(DBM_GUI_OptionsFrameDBMOptions)
-			AS:SkinFrame(DBM_GUI_OptionsFramePanelContainer, 'Transparent', true)
+			AS:SkinFrame(DBM_GUI_OptionsFramePanelContainer)
 		end)
 		AS:SkinTab(DBM_GUI_OptionsFrameTab1)
 		AS:SkinTab(DBM_GUI_OptionsFrameTab2)

@@ -25,63 +25,61 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 		})
 
 		if not Frame.isInsetDone then
-			Frame.Inset = CreateFrame('Frame', nil, Frame)
+			Frame.InsetTop = Frame:CreateTexture(nil, "BORDER")
+			Frame.InsetTop:Point("TOPLEFT", Frame, "TOPLEFT", -1, 1)
+			Frame.InsetTop:Point("TOPRIGHT", Frame, "TOPRIGHT", 1, -1)
+			Frame.InsetTop:Height(1)
+			Frame.InsetTop:SetTexture(0,0,0)	
+			Frame.InsetTop:SetDrawLayer("BORDER", -7)
 
-			Frame.Inset.Top = Frame.Inset:CreateTexture(nil, "BORDER")
-			Frame.Inset.Top:Point("TOPLEFT", Frame, "TOPLEFT", -1, 1)
-			Frame.Inset.Top:Point("TOPRIGHT", Frame, "TOPRIGHT", 1, -1)
-			Frame.Inset.Top:Height(1)
-			Frame.Inset.Top:SetTexture(0,0,0)	
-			Frame.Inset.Top:SetDrawLayer("BORDER", -7)
+			Frame.InsetBottom = Frame:CreateTexture(nil, "BORDER")
+			Frame.InsetBottom:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", -1, -1)
+			Frame.InsetBottom:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", 1, -1)
+			Frame.InsetBottom:Height(1)
+			Frame.InsetBottom:SetTexture(0,0,0)	
+			Frame.InsetBottom:SetDrawLayer("BORDER", -7)
 
-			Frame.Inset.Bottom = Frame.Inset:CreateTexture(nil, "BORDER")
-			Frame.Inset.Bottom:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", -1, -1)
-			Frame.Inset.Bottom:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", 1, -1)
-			Frame.Inset.Bottom:Height(1)
-			Frame.Inset.Bottom:SetTexture(0,0,0)	
-			Frame.Inset.Bottom:SetDrawLayer("BORDER", -7)
+			Frame.InsetLeft = Frame:CreateTexture(nil, "BORDER")
+			Frame.InsetLeft:Point("TOPLEFT", Frame, "TOPLEFT", -1, 1)
+			Frame.InsetLeft:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", 1, -1)
+			Frame.InsetLeft:Width(1)
+			Frame.InsetLeft:SetTexture(0,0,0)
+			Frame.InsetLeft:SetDrawLayer("BORDER", -7)
 
-			Frame.Inset.Left = Frame.Inset:CreateTexture(nil, "BORDER")
-			Frame.Inset.Left:Point("TOPLEFT", Frame, "TOPLEFT", -1, 1)
-			Frame.Inset.Left:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", 1, -1)
-			Frame.Inset.Left:Width(1)
-			Frame.Inset.Left:SetTexture(0,0,0)
-			Frame.Inset.Left:SetDrawLayer("BORDER", -7)
+			Frame.InsetRight = Frame:CreateTexture(nil, "BORDER")
+			Frame.InsetRight:Point("TOPRIGHT", Frame, "TOPRIGHT", 1, 1)
+			Frame.InsetRight:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", -1, -1)
+			Frame.InsetRight:Width(1)
+			Frame.InsetRight:SetTexture(0,0,0)	
+			Frame.InsetRight:SetDrawLayer("BORDER", -7)
 
-			Frame.Inset.Right = Frame.Inset:CreateTexture(nil, "BORDER")
-			Frame.Inset.Right:Point("TOPRIGHT", Frame, "TOPRIGHT", 1, 1)
-			Frame.Inset.Right:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", -1, -1)
-			Frame.Inset.Right:Width(1)
-			Frame.Inset.Right:SetTexture(0,0,0)	
-			Frame.Inset.Right:SetDrawLayer("BORDER", -7)
+			Frame.InsetInsideTop = Frame:CreateTexture(nil, "BORDER")
+			Frame.InsetInsideTop:Point("TOPLEFT", Frame, "TOPLEFT", 1, -1)
+			Frame.InsetInsideTop:Point("TOPRIGHT", Frame, "TOPRIGHT", -1, 1)
+			Frame.InsetInsideTop:Height(1)
+			Frame.InsetInsideTop:SetTexture(0,0,0)	
+			Frame.InsetInsideTop:SetDrawLayer("BORDER", -7)
 
-			Frame.Inset.InsideTop = Frame.Inset:CreateTexture(nil, "BORDER")
-			Frame.Inset.InsideTop:Point("TOPLEFT", Frame, "TOPLEFT", 1, -1)
-			Frame.Inset.InsideTop:Point("TOPRIGHT", Frame, "TOPRIGHT", -1, 1)
-			Frame.Inset.InsideTop:Height(1)
-			Frame.Inset.InsideTop:SetTexture(0,0,0)	
-			Frame.Inset.InsideTop:SetDrawLayer("BORDER", -7)
+			Frame.InsetInsideBottom = Frame:CreateTexture(nil, "BORDER")
+			Frame.InsetInsideBottom:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", 1, 1)
+			Frame.InsetInsideBottom:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", -1, 1)
+			Frame.InsetInsideBottom:Height(1)
+			Frame.InsetInsideBottom:SetTexture(0,0,0)	
+			Frame.InsetInsideBottom:SetDrawLayer("BORDER", -7)
 
-			Frame.Inset.InsideBottom = Frame.Inset:CreateTexture(nil, "BORDER")
-			Frame.Inset.InsideBottom:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", 1, 1)
-			Frame.Inset.InsideBottom:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", -1, 1)
-			Frame.Inset.InsideBottom:Height(1)
-			Frame.Inset.InsideBottom:SetTexture(0,0,0)	
-			Frame.Inset.InsideBottom:SetDrawLayer("BORDER", -7)
+			Frame.InsetInsideLeft = Frame:CreateTexture(nil, "BORDER")
+			Frame.InsetInsideLeft:Point("TOPLEFT", Frame, "TOPLEFT", 1, -1)
+			Frame.InsetInsideLeft:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", -1, 1)
+			Frame.InsetInsideLeft:Width(1)
+			Frame.InsetInsideLeft:SetTexture(0,0,0)
+			Frame.InsetInsideLeft:SetDrawLayer("BORDER", -7)
 
-			Frame.Inset.InsideLeft = Frame.Inset:CreateTexture(nil, "BORDER")
-			Frame.Inset.InsideLeft:Point("TOPLEFT", Frame, "TOPLEFT", 1, -1)
-			Frame.Inset.InsideLeft:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", -1, 1)
-			Frame.Inset.InsideLeft:Width(1)
-			Frame.Inset.InsideLeft:SetTexture(0,0,0)
-			Frame.Inset.InsideLeft:SetDrawLayer("BORDER", -7)
-
-			Frame.Inset.InsideRight = Frame.Inset:CreateTexture(nil, "BORDER")
-			Frame.Inset.InsideRight:Point("TOPRIGHT", Frame, "TOPRIGHT", -1, -1)
-			Frame.Inset.InsideRight:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", 1, 1)
-			Frame.Inset.InsideRight:Width(1)
-			Frame.Inset.InsideRight:SetTexture(0,0,0)	
-			Frame.Inset.InsideRight:SetDrawLayer("BORDER", -7)
+			Frame.InsetInsideRight = Frame:CreateTexture(nil, "BORDER")
+			Frame.InsetInsideRight:Point("TOPRIGHT", Frame, "TOPRIGHT", -1, -1)
+			Frame.InsetInsideRight:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", 1, 1)
+			Frame.InsetInsideRight:Width(1)
+			Frame.InsetInsideRight:SetTexture(0,0,0)	
+			Frame.InsetInsideRight:SetDrawLayer("BORDER", -7)
 
 			Frame.isInsetDone = true
 		end
@@ -99,6 +97,23 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 
 	Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
 	Frame:SetBackdropColor(R, G, B, Alpha)
+end
+
+local Insets = {
+	InsetTop,
+	InsetBottom,
+	InsetLeft,
+	InsetRight,
+	InsetInsideTop,
+	InsetInsideBottom,
+	InsetInsideLeft,
+	InsetInsideRight,
+}
+
+function AS:HideInset(Frame)
+	for _, Inset in pairs(Insets) do
+		Frame[Inset]:Hide()
+	end
 end
 
 function AS:CreateBackdrop(Frame, Template, UseTexture, TextureFile)
