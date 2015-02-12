@@ -34,6 +34,7 @@ AddOnSkinsOptions = {
 	['SkinTemplate'] = 'Transparent',
 	['HideChatFrame'] = 'NONE',
 	['SkinDebug'] = false,
+	['Parchment'] = true,
 }
 
 function AS:Scale(Number)
@@ -204,7 +205,7 @@ function AS:StartSkinning(event)
 	end
 
 	AS.Mult = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/UIParent:GetScale()
-	AS.ParchmentEnabled = true --AS:CheckOption('Parchment')
+	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 
 	if not IsAddOnLoaded('ElvUI') then
 		for skin, alldata in pairs(AS.register) do

@@ -222,6 +222,17 @@ function AS:Blizzard_PvE(event, addon)
 	AS:SkinButton(LFGListFrame.CategorySelection.StartGroupButton, true)
 	AS:SkinButton(LFGListFrame.CategorySelection.FindGroupButton, true)
 
+	AS:StripTextures(LFGListFrame.ApplicationViewer, true)
+	AS:StripTextures(LFGListApplicationViewerScrollFrameScrollBar)
+	AS:SkinScrollBar(LFGListApplicationViewerScrollFrameScrollBar)
+	AS:StripTextures(LFGListFrame.ApplicationViewer.Inset)
+	AS:SkinButton(LFGListFrame.ApplicationViewer.RemoveEntryButton, true)
+	AS:SkinButton(LFGListFrame.ApplicationViewer.EditButton, true)
+	AS:SkinFrame(LFGListFrame.ApplicationViewer.NameColumnHeader)
+	AS:SkinFrame(LFGListFrame.ApplicationViewer.RoleColumnHeader)
+	AS:SkinFrame(LFGListFrame.ApplicationViewer.ItemLevelColumnHeader)
+	AS:SkinButton(LFGListFrame.ApplicationViewer.RefreshButton)
+
 	AS:StripTextures(LFGListFrame.SearchPanel.ResultsInset)
 	AS:SkinButton(LFGListFrame.SearchPanel.BackButton, true)
 	AS:SkinButton(LFGListFrame.SearchPanel.SignUpButton, true)
@@ -234,7 +245,6 @@ function AS:Blizzard_PvE(event, addon)
 	AS:SkinEditBox(LFGListFrame.EntryCreation.Name)
 	AS:StripTextures(LFGListEntryCreationDescription)
 	AS:SkinEditBox(LFGListEntryCreationDescription)
-	AS:SkinButton(LFGListFrame.EntryCreation.ListGroupButton, true)
 	AS:SkinDropDownBox(LFGListEntryCreationCategoryDropDown, 320)
 	AS:SkinDropDownBox(LFGListEntryCreationGroupDropDown, 190)
 	AS:SkinDropDownBox(LFGListEntryCreationActivityDropDown)
@@ -302,6 +312,7 @@ function AS:Blizzard_ChallengesUI(event, addon)
 end
 
 AS:RegisterSkin("Blizzard_ChallengesUI", AS.Blizzard_ChallengesUI, 'ADDON_LOADED')
+
 function AS:Blizzard_PVPUI(event, addon)
 	if addon ~= "Blizzard_PVPUI" then return end
 	AS:StripTextures(PVPUIFrame)

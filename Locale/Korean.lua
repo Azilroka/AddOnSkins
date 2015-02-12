@@ -68,4 +68,6 @@ function AS:UpdateLocale_koKR()
 	ASL['Reset Settings'] = 'Reset Settings'
 	ASL["WeakAura Cooldowns"] = "WeakAura Cooldowns"
 	ASL["Embed into Right Chat Panel"] = "Embed into Right Chat Panel"
+	ASL["Parchment"] = "Parchment"
+	ASL["Enable Skin Debugging"] = "Enable Skin Debugging"
 end

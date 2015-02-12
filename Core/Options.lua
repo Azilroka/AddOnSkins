@@ -316,8 +316,18 @@ function AS:GetOptions()
 					WeakAuraAuraBar = {
 						type = "toggle",
 						name = ASL["WeakAura AuraBar"],
-						order = 2,
+						order = 1,
 						disabled = function() return not AS:CheckOption("WeakAuras", "WeakAuras") end,
+					},
+					Parchment = {
+						type = "toggle",
+						name = ASL["Parchment"],
+						order = 2,
+					},
+					SkinDebug = {
+						type = "toggle",
+						name = ASL["Enable Skin Debugging"],
+						order = 3,
 					},
 				},
 			},

@@ -21,6 +21,15 @@ function AS:Blizzard_Spellbook()
 		Button.TextBackground:SetTexture(nil)
 		Button.TextBackground2:SetTexture(nil)
 		Button.IconTextureBg:SetTexture(nil)
+		Button:SetCheckedTexture(nil)
+		Button:SetPushedTexture(nil)
+		hooksecurefunc(Button, 'SetChecked', function(self, checked)
+			if checked then
+				self:SetBackdropBorderColor(1, 1, 0)
+			else
+				self:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end)
 		_G["SpellButton"..i..'SlotFrame']:SetTexture(nil)
 		Button.UnlearnedFrame:SetTexture(nil)
 		Button.TrainFrame:SetTexture(nil)
@@ -29,6 +38,7 @@ function AS:Blizzard_Spellbook()
 		AS:SkinFrame(Button, nil, true)
 		Button:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
 		Button:GetHighlightTexture():SetInside()
+		Button.cooldown:SetInside()
 		AS:SkinTexture(Icon)
 		Icon:SetInside()
 	end

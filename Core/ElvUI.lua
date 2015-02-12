@@ -79,6 +79,7 @@ function AS:InjectProfile()
 		['SkinTemplate'] = 'Transparent',
 		['HideChatFrame'] = 'NONE',
 		['SkinDebug'] = false,
+		['Parchment'] = true,
 	}
 
 	do
