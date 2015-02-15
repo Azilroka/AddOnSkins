@@ -27,44 +27,31 @@ function AS:WeakAuras()
 			if IsAddOnLoaded('ElvUI') and AS:CheckOption('WeakAuraIconCooldown') then ElvUI[1]:RegisterCooldown(frame.cooldown) end
 		end
 	end
-	
-	local function Create_Icon(parent, data)
-		local region = WeakAuras.regionTypes.icon.OldCreate(parent, data)
+
+	local Create_Icon, Modify_Icon = WeakAuras.regionTypes.icon.create, WeakAuras.regionTypes.icon.modify
+	local Create_AuraBar, Modify_AuraBar = WeakAuras.regionTypes.aurabar.create, WeakAuras.regionTypes.aurabar.modify
+
+	WeakAuras.regionTypes.icon.create = function(parent, data)
+		local region = Create_Icon(parent, data)
 		Skin_WeakAuras(region, 'icon')
-		
 		return region
 	end
 	
-	local function Create_Aurabar(parent)
-		local region = WeakAuras.regionTypes.aurabar.OldCreate(parent)
+	WeakAuras.regionTypes.aurabar.create = function(parent)
+		local region = Create_AuraBar(parent)
 		Skin_WeakAuras(region, 'aurabar')
-
 		return region
 	end
-
-	local function Modify_Icon(parent, region, data)
-		WeakAuras.regionTypes.icon.OldModify(parent, region, data)
-
+	
+	WeakAuras.regionTypes.icon.modify = function(parent, region, data)
+		Modify_Icon(parent, region, data)
 		Skin_WeakAuras(region, 'icon')
 	end
 	
-	local function Modify_Aurabar(parent, region, data)
-		WeakAuras.regionTypes.aurabar.OldModify(parent, region, data)
-
+	WeakAuras.regionTypes.aurabar.modify = function(parent, region, data)
+		Modify_AuraBar(parent, region, data)
 		Skin_WeakAuras(region, 'aurabar')
 	end
-	
-	WeakAuras.regionTypes.icon.OldCreate = WeakAuras.regionTypes.icon.create
-	WeakAuras.regionTypes.icon.create = Create_Icon
-	
-	WeakAuras.regionTypes.aurabar.OldCreate = WeakAuras.regionTypes.aurabar.create
-	WeakAuras.regionTypes.aurabar.create = Create_Aurabar
-	
-	WeakAuras.regionTypes.icon.OldModify = WeakAuras.regionTypes.icon.modify
-	WeakAuras.regionTypes.icon.modify = Modify_Icon
-	
-	WeakAuras.regionTypes.aurabar.OldModify = WeakAuras.regionTypes.aurabar.modify
-	WeakAuras.regionTypes.aurabar.modify = Modify_Aurabar
 	
 	for weakAura, _ in pairs(WeakAuras.regions) do
 		if WeakAuras.regions[weakAura].regionType == 'icon'
