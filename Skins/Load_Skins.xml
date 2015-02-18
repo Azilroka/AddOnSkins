@@ -90,6 +90,7 @@
 	<Script file="MrTrader.lua"/>
 	<Script file="MyRolePlay.lua"/>
 	<Script file="NirritisNotes.lua"/>
+	<Script file="NoNoGoGo.lua"/>
 	<Script file="NPCScan.lua"/>
 	<Script file="NugRunning.lua"/>
 	<Script file="Numeration.lua"/>
