@@ -4,38 +4,30 @@ local ES
 
 AS:UpdateLocale()
 
-AddOnSkinsOptions = {
--- Embeds
-	['EmbedOoC'] = false,
-	['EmbedOoCDelay'] = 10,
-	['EmbedCoolLine'] = false,
-	['EmbedSexyCooldown'] = false,
-	['EmbedSystem'] = false,
-	['EmbedSystemDual'] = false,
-	['EmbedMain'] = 'Skada',
-	['EmbedLeft'] = 'Skada',
-	['EmbedRight'] = 'Skada',
-	['EmbedRightChat'] = 'Skada',
-	['EmbedLeftWidth'] = 200,
-	['EmbedBelowTop'] = false,
-	['EmbedIsHidden'] = false,
-	['TransparentEmbed'] = false,
--- Misc
-	['RecountBackdrop'] = true,
-	['SkadaBackdrop'] = true,
-	['DetailsBackdrop'] = true,
-	['OmenBackdrop'] = true,
-	['MiscFixes'] = true,
-	['DBMSkinHalf'] = false,
-	['DBMFont'] = 'Tukui',
-	['DBMFontSize'] = 12,
-	['DBMFontFlag'] = 'OUTLINE',
-	['WeakAuraAuraBar'] = false,
-	['SkinTemplate'] = 'Transparent',
-	['HideChatFrame'] = 'NONE',
-	['SkinDebug'] = false,
-	['Parchment'] = true,
-}
+function AS:CheckOption(optionName, ...)
+	for i = 1, select('#', ...) do
+		local addon = select(i, ...)
+		if not addon then break end
+		if not IsAddOnLoaded(addon) then return false end
+	end
+	return AddOnSkinsOptions[optionName]
+end
+
+function AS:SetOption(optionName, value)
+	AddOnSkinsOptions[optionName] = value
+end
+
+function AS:DisableOption(optionName)
+	AS:SetOption(optionName, false)
+end
+
+function AS:EnableOption(optionName)
+	AS:SetOption(optionName, true)
+end
+
+function AS:ToggleOption(optionName)
+	AddOnSkinsOptions[optionName] = not AddOnSkinsOptions[optionName]
+end
 
 function AS:Scale(Number)
 	return AS.Mult * floor(Number/AS.Mult + .5)

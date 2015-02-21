@@ -32,31 +32,6 @@ function AS:UpdateMedia()
 	AS.BorderColor = C['General']['BorderColor']
 end
 
-function AS:CheckOption(optionName, ...)
-	for i = 1, select('#', ...) do
-		local addon = select(i, ...)
-		if not addon then break end
-		if not IsAddOnLoaded(addon) then return false end
-	end
-	return AddOnSkinsOptions[optionName]
-end
-
-function AS:SetOption(optionName, value)
-	AddOnSkinsOptions[optionName] = value
-end
-
-function AS:DisableOption(optionName)
-	AS:SetOption(optionName, false)
-end
-
-function AS:EnableOption(optionName)
-	AS:SetOption(optionName, true)
-end
-
-function AS:ToggleOption(optionName)
-	AddOnSkinsOptions[optionName] = not AddOnSkinsOptions[optionName]
-end
-
 function AS:EmbedSystemHooks()
 	AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, AS.ChatBackgroundRight, ASL.EmbedSystem.ToggleRightChat, ASL.EmbedSystem.ToggleEmbed)
 	RightToggleButton:Point('RIGHT', AS.InfoRight, 'RIGHT', -2, 0)
@@ -95,28 +70,13 @@ function AS:CreateToggleButton(Name, Text, Panel1, Panel2, TooltipText1, Tooltip
 	UIFrameFadeOut(Frame, 0.2, Frame:GetAlpha(), 0)
 	Frame:SetScript('OnEnter', function(self, ...)
 		UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
-		if self.Faded then
-			UIFrameFadeIn(Panel1, 0.2, Panel1:GetAlpha(), 1)
-			UIFrameFadeIn(Panel2, 0.2, Panel2:GetAlpha(), 1)
-			if Name == 'LeftToggleButton' then UIFrameFadeIn(GeneralDockManager, 0.2, GeneralDockManager:GetAlpha(), 1) end
-		end
 		GameTooltip:SetOwner(self, Name == 'LeftToggleButton' and 'ANCHOR_TOPLEFT' or 'ANCHOR_TOPRIGHT', 0, 4)
 		GameTooltip:ClearLines()
-		if IsAddOnLoaded('Tukui_ChatTweaks') and ChatTweaksOptions['ChatHider'] then
-			if AS.ChatBackgroundRight then
-				GameTooltip:AddDoubleLine('Left Click:', TooltipText1, 1, 1, 1)
-			end
-		end
 		GameTooltip:AddDoubleLine('Right Click:', TooltipText2, 1, 1, 1)
 		GameTooltip:Show()
 	end)
 	Frame:SetScript('OnLeave', function(self, ...)
 		UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
-		if self.Faded then
-			UIFrameFadeOut(Panel1, 0.2, Panel1:GetAlpha(), 0)
-			UIFrameFadeOut(Panel2, 0.2, Panel2:GetAlpha(), 0)
-			if Name == 'LeftToggleButton' then UIFrameFadeOut(GeneralDockManager, 0.2, GeneralDockManager:GetAlpha(), 0) end
-		end
 		GameTooltip:Hide()
 	end)
 end
@@ -151,33 +111,27 @@ end
 if AS:CheckAddOn('CoolLine') then
 	function AS:Embed_CoolLine()
 		if not CoolLineDB.vertical then
-			if DuffedUI then
-				CoolLine:Point('BOTTOM', AS.ActionBar2, 'TOP', 0, 3)
+			local function OnShow()
+				CoolLine:Point('BOTTOM', AS.ActionBar4, 'TOP', 0, 1)
 				CoolLineDB.h = ActionButton1:GetHeight()
-				CoolLineDB.w = AS.ActionBar2:GetWidth()
-			elseif Tukui then
-				local function OnShow()
-					CoolLine:Point('BOTTOM', AS.ActionBar4, 'TOP', 0, 1)
-					CoolLineDB.h = ActionButton1:GetHeight()
-					CoolLineDB.w = AS.ActionBar4:GetWidth()
-					CoolLine.updatelook()
-				end
-
-				local function OnHide()
-					CoolLine:Point('BOTTOM', AS.ActionBar1, 'TOP', 0, 1)
-					CoolLineDB.h = ActionButton1:GetHeight()
-					CoolLineDB.w = AS.ActionBar1:GetWidth()
-					CoolLine.updatelook()
-				end
-
-				if AS.ActionBar4:IsShown() then
-					OnShow()
-				else
-					OnHide()
-				end
-				AS.ActionBar4:HookScript('OnShow', OnShow)
-				AS.ActionBar4:HookScript('OnHide', OnHide)
+				CoolLineDB.w = AS.ActionBar4:GetWidth()
+				CoolLine.updatelook()
 			end
+
+			local function OnHide()
+				CoolLine:Point('BOTTOM', AS.ActionBar1, 'TOP', 0, 1)
+				CoolLineDB.h = ActionButton1:GetHeight()
+				CoolLineDB.w = AS.ActionBar1:GetWidth()
+				CoolLine.updatelook()
+			end
+
+			if AS.ActionBar4:IsShown() then
+				OnShow()
+			else
+				OnHide()
+			end
+			AS.ActionBar4:HookScript('OnShow', OnShow)
+			AS.ActionBar4:HookScript('OnHide', OnHide)
 			CoolLine.updatelook()
 		end
 	end

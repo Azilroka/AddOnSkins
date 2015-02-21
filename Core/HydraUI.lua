@@ -32,31 +32,6 @@ function AS:UpdateMedia()
 	AS.BorderColor = { C['General']['BorderColor']['Value'].r, C['General']['BorderColor']['Value'].g, C['General']['BorderColor']['Value'].b }
 end
 
-function AS:CheckOption(optionName, ...)
-	for i = 1, select('#', ...) do
-		local addon = select(i, ...)
-		if not addon then break end
-		if not IsAddOnLoaded(addon) then return false end
-	end
-	return AddOnSkinsOptions[optionName]
-end
-
-function AS:SetOption(optionName, value)
-	AddOnSkinsOptions[optionName] = value
-end
-
-function AS:DisableOption(optionName)
-	AS:SetOption(optionName, false)
-end
-
-function AS:EnableOption(optionName)
-	AS:SetOption(optionName, true)
-end
-
-function AS:ToggleOption(optionName)
-	AddOnSkinsOptions[optionName] = not AddOnSkinsOptions[optionName]
-end
-
 function AS:EmbedSystemHooks()
 
 end
@@ -129,33 +104,29 @@ end
 if AS:CheckAddOn('CoolLine') then
 	function AS:Embed_CoolLine()
 		if not CoolLineDB.vertical then
-			if DuffedUI then
-				CoolLine:Point('BOTTOM', AS.ActionBar2, 'TOP', 0, 3)
+			local function OnShow()
+				CoolLine:Point('BOTTOM', AS.ActionBar4, 'TOP', 0, 1)
 				CoolLineDB.h = ActionButton1:GetHeight()
-				CoolLineDB.w = AS.ActionBar2:GetWidth()
-			elseif Tukui then
-				local function OnShow()
-					CoolLine:Point('BOTTOM', AS.ActionBar4, 'TOP', 0, 1)
-					CoolLineDB.h = ActionButton1:GetHeight()
-					CoolLineDB.w = AS.ActionBar4:GetWidth()
-					CoolLine.updatelook()
-				end
-
-				local function OnHide()
-					CoolLine:Point('BOTTOM', AS.ActionBar1, 'TOP', 0, 1)
-					CoolLineDB.h = ActionButton1:GetHeight()
-					CoolLineDB.w = AS.ActionBar1:GetWidth()
-					CoolLine.updatelook()
-				end
-
-				if AS.ActionBar4:IsShown() then
-					OnShow()
-				else
-					OnHide()
-				end
-				AS.ActionBar4:HookScript('OnShow', OnShow)
-				AS.ActionBar4:HookScript('OnHide', OnHide)
+				CoolLineDB.w = AS.ActionBar4:GetWidth()
+				CoolLine.updatelook()
 			end
+
+			local function OnHide()
+				CoolLine:Point('BOTTOM', AS.ActionBar1, 'TOP', 0, 1)
+				CoolLineDB.h = ActionButton1:GetHeight()
+				CoolLineDB.w = AS.ActionBar1:GetWidth()
+				CoolLine.updatelook()
+			end
+
+			if AS.ActionBar4:IsShown() then
+				OnShow()
+			else
+				OnHide()
+			end
+
+			AS.ActionBar4:HookScript('OnShow', OnShow)
+			AS.ActionBar4:HookScript('OnHide', OnHide)
+
 			CoolLine.updatelook()
 		end
 	end

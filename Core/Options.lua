@@ -33,6 +33,8 @@ local Defaults = {
 	['SkinDebug'] = false,
 }
 
+AddOnSkinsOptions = CopyTable(Defaults)
+
 local DEVELOPER_STRING = ""
 local LINE_BREAK = "\n"
 
@@ -434,10 +436,6 @@ function AS:GetOptions()
 			Options.args.addons.args[skinName] = GenerateOptionTable(skinName, order)
 			order = order + 1
 		end
-	end
-
-	if blizzorder == 0 then
-		Options.args.blizzard = nil
 	end
 
 	if IsAddOnLoaded("ElvUI") then
