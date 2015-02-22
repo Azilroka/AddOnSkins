@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_PetJournal(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		AS:StripTextures(PetStableFrame)
-		AS:SetTemplate(PetStableFrame)
+		AS:SkinFrame(PetStableFrame)
 		PetStableFrame:CreateShadow()
 		AS:StripTextures(PetStableFrameInset)
 		AS:StripTextures(PetStableLeftInset)
@@ -11,19 +11,46 @@ function AS:Blizzard_PetJournal(event, addon)
 		AS:SkinCloseButton(PetStableFrameCloseButton)
 		AS:SkinNextPrevButton(PetStablePrevPageButton)
 		AS:SkinNextPrevButton(PetStableNextPageButton)
-		
+
+		AS:CreateBackdrop(PetStableModel)
+		AS:CreateBackdrop(PetStablePetInfo)
+		PetStablePetInfo.Backdrop:SetOutside(PetStableSelectedPetIcon)
+		AS:SkinTexture(PetStableSelectedPetIcon)
+		PetStableSelectedPetIcon:Size(36)
+
 		for i = 1, 5 do
-			local b = _G["PetStableActivePet"..i]
-			b.Border:Hide()
-			b.Background:Hide()
-			AS:SkinButton(b)
+			local Button = _G["PetStableActivePet"..i]
+			local Icon = _G["PetStableActivePet"..i..'IconTexture']
+			AS:SkinTexture(Icon)
+			Icon:SetInside()
+			Button.Border:Hide()
+			Button.Background:Hide()
+			AS:SetTemplate(Button)
+			AS:StyleButton(Button)
+			Button.Checked:SetAlpha(0)
+			hooksecurefunc(Button.Checked, 'Show', function()
+				Button:SetBackdropBorderColor(0, 0.44, .87)
+			end)
+			hooksecurefunc(Button.Checked, 'Hide', function()
+				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end)
 		end
 		
 		for i = 1, 10 do
-			local b = _G["PetStableStabledPet"..i]
-			b.Background:Hide()
-			AS:SkinButton(b)
-			AS:StyleButton(b)
+			local Button = _G["PetStableStabledPet"..i]
+			local Icon = _G["PetStableStabledPet"..i..'IconTexture']
+			AS:SkinTexture(Icon)
+			Icon:SetInside()
+			Button.Background:Hide()
+			AS:SetTemplate(Button)
+			AS:StyleButton(Button)
+			Button.Checked:SetAlpha(0)
+			hooksecurefunc(Button.Checked, 'Show', function()
+				Button:SetBackdropBorderColor(0, 0.44, .87)
+			end)
+			hooksecurefunc(Button.Checked, 'Hide', function()
+				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end)
 		end
 	end
 	if event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_PetJournal') or addon == 'Blizzard_PetJournal' then
