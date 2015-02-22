@@ -27,7 +27,6 @@ function AS:GryphonheartItems()
 
 		AS:SkinFrame(frame, nil, true)
 		AS:SkinCloseButton(_G[name..'CloseButton'])
-		print(_G[name..'CloseButton']:GetPoint())
 		AS:SkinTexture(_G[name.."Portrait"])
 		_G[name.."Portrait"]:SetDrawLayer('OVERLAY')
 		_G[name.."Portrait"]:SetInside(_G[name.."PortraitButton"])
