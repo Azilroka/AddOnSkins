@@ -3,6 +3,11 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('GHI') then return end
 
 function AS:GryphonheartItems()
+	local holder = ExtraActionBarFrame:GetParent()
+	GHI_ExtraButtonFrame:SetParent(holder)
+	GHI_ExtraButtonFrame:ClearAllPoints()
+	GHI_ExtraButtonFrame:SetPoint('CENTER', holder, 'CENTER')
+
 	hooksecurefunc('GHI_ButtonUI', function()
 		AS:SkinIconButton(GHI_ButtonSquared)
 	end)
