@@ -3,6 +3,27 @@ local AS = unpack(AddOnSkins)
 local AddOnSkinned = 0
 function AS:Blizzard_Guild(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
+		AS:SkinFrame(PetitionFrame, nil, nil, true)
+		AS:StripTextures(PetitionFrameInset)
+
+		AS:SkinButton(PetitionFrameRequestButton)
+		PetitionFrameRequestButton:Width(110)
+		AS:SkinButton(PetitionFrameRenameButton)
+		AS:SkinButton(PetitionFrameCancelButton)
+		AS:SkinButton(PetitionFrameSignButton)
+		AS:SkinCloseButton(PetitionFrameCloseButton)
+
+		PetitionFrameCharterTitle:SetTextColor(1, 1, 0)
+		PetitionFrameCharterName:SetTextColor(1, 1, 1)
+		PetitionFrameMasterTitle:SetTextColor(1, 1, 0)
+		PetitionFrameMasterName:SetTextColor(1, 1, 1)
+		PetitionFrameMemberTitle:SetTextColor(1, 1, 0)
+		PetitionFrameInstructions:SetTextColor(1, 1, 1)
+
+		for i = 1, 9 do
+			_G["PetitionFrameMemberName"..i]:SetTextColor(1, 1, 1)
+		end
+
 		AS:SkinFrame(GuildInviteFrame)
 		AS:SkinButton(GuildInviteFrameDeclineButton, true)
 		AS:SkinButton(GuildInviteFrameJoinButton, true)

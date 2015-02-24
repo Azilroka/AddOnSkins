@@ -19,6 +19,7 @@
 	<Script file="LFG.lua"/>
 	<Script file="Mail.lua"/>
 	<Script file="Merchant.lua"/>
+	<Script file="Options.lua"/>
 	<Script file="Pets.lua"/>
 	<Script file="Quest.lua"/>
 	<Script file="Raid.lua"/>

@@ -341,7 +341,7 @@ function AS:SkinCheckBox(CheckBox)
 	CheckBox.isSkinned = true
 end
 
-function AS:SkinTab(Tab)
+function AS:SkinTab(Tab, Strip)
 	if Tab.isSkinned then return end
 	local TabName = Tab:GetName()
 
@@ -362,6 +362,10 @@ function AS:SkinTab(Tab)
 	if Tab.GetHighlightTexture and Tab:GetHighlightTexture() then
 		Tab:GetHighlightTexture():SetTexture(nil)
 	else
+		Strip = true
+	end
+
+	if Strip then
 		AS:StripTextures(Tab)
 	end
 
@@ -582,8 +586,13 @@ function AS:SkinSlideBar(Frame, Height, MoveText)
 	end
 
 	if MoveText then
-		if _G[Frame:GetName().."Low"] then _G[Frame:GetName().."Low"]:Point("BOTTOM", 0, -18) end
-		if _G[Frame:GetName().."High"] then _G[Frame:GetName().."High"]:Point("BOTTOM", 0, -18) end
+		for i = 1, Frame:GetNumRegions() do
+			local Region = select(i, Frame:GetRegions())
+			if Region:IsObjectType('FontString') then
+				local a, b, c, d, e = Region:GetPoint()
+				Region:SetPoint(a, b, c, d, e - 6)
+			end
+		end
 		if _G[Frame:GetName().."Text"] then _G[Frame:GetName().."Text"]:Point("TOP", 0, 19) end
 	end
 
