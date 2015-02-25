@@ -7,6 +7,7 @@
 	<Script file="Calendar.lua"/>
 	<Script file="Character.lua"/>
 	<Script file="ChatBubbles.lua"/>
+	<Script file="Collections.lua"/>
 	<Script file="DebugTools.lua"/>
 	<Script file="DressUp.lua"/>
 	<Script file="ExtraButtons.lua"/>
@@ -20,7 +21,6 @@
 	<Script file="Mail.lua"/>
 	<Script file="Merchant.lua"/>
 	<Script file="Options.lua"/>
-	<Script file="Pets.lua"/>
 	<Script file="Quest.lua"/>
 	<Script file="Raid.lua"/>
 	<Script file="StackSplit.lua"/>

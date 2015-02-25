@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_PetJournal(event, addon)
+function AS:Blizzard_Collections(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		AS:StripTextures(PetStableFrame)
 		AS:SkinFrame(PetStableFrame)
@@ -53,18 +53,18 @@ function AS:Blizzard_PetJournal(event, addon)
 			end)
 		end
 	end
-	if event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_PetJournal') or addon == 'Blizzard_PetJournal' then
-		if PetJournalParent.IsSkinned then return end
-		AS:UnregisterSkinEvent('Blizzard_PetJournal', 'ADDON_LOADED')
-		AS:SkinFrame(PetJournalParent)
-		PetJournalParent.IsSkinned = true
-		PetJournalParentPortrait:Hide()
+	if event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_Collections') or addon == 'Blizzard_Collections' then
+		if CollectionsJournal.IsSkinned then return end
+		AS:UnregisterSkinEvent('Blizzard_Collections', 'ADDON_LOADED')
+		AS:SkinFrame(CollectionsJournal)
+		CollectionsJournal.IsSkinned = true
+		CollectionsJournalPortrait:Hide()
 
-		for i = 1, 3 do
-			AS:SkinTab(_G["PetJournalParentTab"..i])
+		for i = 1, 4 do
+			AS:SkinTab(_G["CollectionsJournalTab"..i])
 		end
 
-		AS:SkinCloseButton(PetJournalParentCloseButton)
+		AS:SkinCloseButton(CollectionsJournalCloseButton)
 
 		AS:StripTextures(MountJournal)
 		AS:StripTextures(MountJournal.LeftInset)
@@ -231,7 +231,7 @@ function AS:Blizzard_PetJournal(event, addon)
 
 		PetJournalTutorialButton.Ring:SetAlpha(0)
 		PetJournalTutorialButton:ClearAllPoints()
-		PetJournalTutorialButton:SetPoint("TOPLEFT", PetJournalParent, 0, 0)
+		PetJournalTutorialButton:SetPoint("TOPLEFT", CollectionsJournal, 0, 0)
 
 		PetJournalPetCardPetInfo.levelBG:SetTexture(nil)
 		AS:SkinTexture(PetJournalPetCardPetInfoIcon)
@@ -270,42 +270,79 @@ function AS:Blizzard_PetJournal(event, addon)
 
 		AS:StripTextures(ToyBoxFilterButton, true)
 		AS:SkinButton(ToyBoxFilterButton)
-		AS:SkinEditBox(ToyBoxSearchBox)
+		AS:SkinEditBox(ToyBox.searchBox)
 
-		ToyBoxSearchBox:SetPoint("TOPRIGHT", ToyBox, "TOPRIGHT", -117, -34)
+		ToyBox.searchBox:SetPoint("TOPRIGHT", ToyBox, "TOPRIGHT", -117, -34)
 
-		AS:SkinNextPrevButton(ToyBoxNextPageButton)
-		AS:SkinNextPrevButton(ToyBoxPrevPageButton)
-
-		AS:StripTextures(ToyBoxIconsFrame)
+		AS:SkinNextPrevButton(ToyBox.navigationFrame.nextPageButton)
+		AS:SkinNextPrevButton(ToyBox.navigationFrame.prevPageButton)
+		AS:StripTextures(ToyBox.iconsFrame)
 
 		for i = 1, 18 do
-			local Button = _G["ToySpellButton"..i]
-			local Icon = _G["ToySpellButton"..i.."IconTexture"]
-			AS:SkinTexture(Icon)
-			Icon:SetInside()
+			local Button = ToyBox.iconsFrame['spellButton'..i]
+			AS:SkinTexture(Button.iconTexture)
+			Button.iconTexture:SetInside()
 			AS:SkinFrame(Button)
 			AS:StyleButton(Button)
-			Button.hover:SetAllPoints(Icon)
-			Button.checked:SetAllPoints(Icon)
-			Button.pushed:SetAllPoints(Icon)
-			_G["ToySpellButton"..i.."Cooldown"]:SetAllPoints(Icon)
+			Button.hover:SetAllPoints(Button.iconTexture)
+			Button.checked:SetAllPoints(Button.iconTexture)
+			Button.pushed:SetAllPoints(Button.iconTexture)
+			Button.cooldown:SetAllPoints(Button.iconTexture)
+			Button:HookScript('OnUpdate', function(self)
+				if (PlayerHasToy(self.itemID)) then
+					local quality = select(3, GetItemInfo(self.itemID))
+					local r, g, b = GetItemQualityColor(quality)
+					self:SetBackdropBorderColor(r, g, b)
+					self.name:SetTextColor(r, g, b)
+				else
+					self:SetBackdropBorderColor(unpack(AS.BorderColor))
+					self.name:SetTextColor(.6, .6, .6)
+				end
+			end)
 		end
 
-		hooksecurefunc("ToySpellButton_UpdateButton", function(self)
-			if (PlayerHasToy(self.itemID)) then
-				local quality = select(3, GetItemInfo(self.itemID))
-				local r, g, b = GetItemQualityColor(quality)
-				_G[self:GetName()]:SetBackdropBorderColor(r, g, b)
-				_G[self:GetName().."ToyName"]:SetTextColor(r, g, b)
-			else
-				_G[self:GetName()]:SetBackdropBorderColor(unpack(AS.BorderColor))
-				_G[self:GetName().."ToyName"]:SetTextColor(0.6, 0.6, 0.6)
+		AS:SkinStatusBar(ToyBox.progressBar)
+
+		AS:StripTextures(HeirloomsJournal.iconsFrame)
+		AS:SkinDropDownBox(HeirloomsJournalClassDropDown)
+
+		AS:SkinEditBox(HeirloomsJournalSearchBox)
+		HeirloomsJournalSearchBox:SetPoint("TOPRIGHT", HeirloomsJournal, "TOPRIGHT", -117, -34)
+
+		AS:SkinStatusBar(HeirloomsJournal.progressBar)
+
+		AS:StripTextures(HeirloomsJournalFilterButton, true)
+		AS:SkinButton(HeirloomsJournalFilterButton)
+		AS:SkinNextPrevButton(HeirloomsJournal.navigationFrame.nextPageButton)
+		AS:SkinNextPrevButton(HeirloomsJournal.navigationFrame.prevPageButton)
+
+		hooksecurefunc(HeirloomsJournal, 'LayoutCurrentPage', function(self)
+			local pageLayoutData = self.heirloomLayoutData[self.currentPage];
+			local numHeadersInUse = 0;
+			if pageLayoutData then
+				for i, layoutData in ipairs(pageLayoutData) do
+					if type(layoutData) == "string" then
+						numHeadersInUse = numHeadersInUse + 1;
+						local header = self:AcquireFrame(self.heirloomHeaderFrames, numHeadersInUse, "FRAME", "HeirloomHeaderTemplate");
+						header.text:SetTextColor(1,1,1);
+					end
+				end
 			end
 		end)
 
-		AS:SkinStatusBar(ToyBoxProgressBar)
+		hooksecurefunc(HeirloomsJournal, 'UpdateButton', function(self, button)
+			if button.isSkinned then return end
+			button.isSkinned = true
+			button.slotFrameCollected:SetAlpha(0)
+			AS:SetTemplate(button)
+			AS:StyleButton(button)
+			AS:SkinTexture(button.iconTexture)
+			button.iconTexture:SetInside()
+			AS:SkinTexture(button.iconTextureUncollected)
+			button.iconTextureUncollected:SetInside()
+			button.slotFrameUncollected:SetAlpha(0)
+		end)
 	end
 end
 
-AS:RegisterSkin("Blizzard_PetJournal", AS.Blizzard_PetJournal, 'ADDON_LOADED')
+AS:RegisterSkin("Blizzard_Collections", AS.Blizzard_Collections, 'ADDON_LOADED')
