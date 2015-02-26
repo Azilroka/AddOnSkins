@@ -122,6 +122,7 @@ function AS:Blizzard_Options(event, addon)
 			InterfaceOptionsCameraPanel,
 			InterfaceOptionsMousePanel,
 			InterfaceOptionsHelpPanel,
+			InterfaceOptionsAccessibilityPanel,
 			VideoOptionsFrame,
 			Display_,
 			Graphics_,
@@ -176,6 +177,7 @@ function AS:Blizzard_Options(event, addon)
 			InterfaceOptionsSocialPanelWhisperMode,
 			InterfaceOptionsSocialPanelBnWhisperMode,
 			InterfaceOptionsSocialPanelConversationMode,
+			Advanced_MultisampleAlphaTest,
 		}
 
 		for _, DropDown in pairs(InterfaceOptionsDropDowns) do
