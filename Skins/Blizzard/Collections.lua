@@ -289,17 +289,21 @@ function AS:Blizzard_Collections(event, addon)
 			Button.pushed:SetAllPoints(Button.iconTexture)
 			Button.cooldown:SetAllPoints(Button.iconTexture)
 			Button:HookScript('OnUpdate', function(self)
-				if (PlayerHasToy(self.itemID)) then
-					local quality = select(3, GetItemInfo(self.itemID))
-					local r, g, b = GetItemQualityColor(quality)
-					self:SetBackdropBorderColor(r, g, b)
-					self.name:SetTextColor(r, g, b)
-				else
-					self:SetBackdropBorderColor(unpack(AS.BorderColor))
-					self.name:SetTextColor(.6, .6, .6)
-				end
+				self.name:SetTextColor(unpack(self.TextColor))
 			end)
 		end
+
+		hooksecurefunc("ToySpellButton_UpdateButton", function(self)
+			if (PlayerHasToy(self.itemID)) then
+				local quality = select(3, GetItemInfo(self.itemID))
+				local r, g, b = GetItemQualityColor(quality)
+				self.TextColor = { r, g, b }
+				self:SetBackdropBorderColor(r, g, b)
+			else
+				self:SetBackdropBorderColor(unpack(AS.BorderColor))
+				self.TextColor = { .6, .6, .6 }
+			end
+		end)
 
 		AS:SkinStatusBar(ToyBox.progressBar)
 
