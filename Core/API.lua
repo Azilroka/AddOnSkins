@@ -385,11 +385,11 @@ local ScrollBarElements = {
 }
 
 function AS:SkinScrollBar(Frame)
-	local ScrollUpButton = _G[Frame:GetName().."ScrollUpButton"]
-	local ScrollDownButton = _G[Frame:GetName().."ScrollDownButton"]
+	local ScrollUpButton = Frame:GetName() and _G[Frame:GetName().."ScrollUpButton"] or Frame.ScrollUpButton
+	local ScrollDownButton = Frame:GetName() and _G[Frame:GetName().."ScrollDownButton"] or Frame.ScrollDownButton
 
 	for _, object in pairs(ScrollBarElements) do
-		if _G[Frame:GetName()..object] then
+		if Frame:GetName() and _G[Frame:GetName()..object] then
 			_G[Frame:GetName()..object]:SetTexture(nil)
 		end
 	end

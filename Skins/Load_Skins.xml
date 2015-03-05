@@ -33,7 +33,6 @@
 	<Script file="BigBrother.lua"/>
 	<Script file="BPT.lua"/>
 	<Script file="BugSack.lua"/>
-	<Script file="Bulkie.lua"/>
 	<Script file="BuyEmAll.lua"/>
 	<Script file="ChocolateBar.lua"/>
 	<Script file="CLCInfo.lua"/>
