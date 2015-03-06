@@ -81,7 +81,7 @@ function AS:Dominos()
 		if not button.isSkinned then
 			AS:CreateBackdrop(button, 'Transparent')
 			AS:StyleButton(button)
-			button.backdrop:SetAllPoints()
+			button.Backdrop:SetAllPoints()
 
 			AS:SkinTexture(icon)
 			icon:ClearAllPoints()
