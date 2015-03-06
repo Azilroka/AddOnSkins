@@ -15,7 +15,7 @@ function AS:Ovale()
 				_G["Icon"..i.."n1"].Backdrop:SetScale(AS.UIScale)
 			end
 			_G['Icon'..i..'n1'].shortcut:ClearAllPoints()
-			_G['Icon'..i..'n1'].shortcut:SetPoint('TOPLEFT', _G['Icon'..i..'n1'], 'BOTTOMLEFT', 2, 0)
+			_G['Icon'..i..'n1'].shortcut:SetPoint('BOTTOMLEFT', _G['Icon'..i..'n1'], 'BOTTOMLEFT', -2, 2)
 			_G["Icon"..i.."n1"].icone:SetDrawLayer("ARTWORK")
 			AS:SkinTexture(_G["Icon"..i.."n1"].icone)
 			_G["Icon"..i.."n1"].icone:SetInside(_G["Icon"..i.."n1"].Backdrop)
