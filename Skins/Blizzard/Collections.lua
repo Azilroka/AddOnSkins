@@ -210,6 +210,10 @@ function AS:Blizzard_Collections(event, addon)
 			AS:SkinStatusBar(Pet.healthFrame.healthBar)
 			AS:SkinStatusBar(Pet.xpBar)
 
+			hooksecurefunc(Pet.qualityBorder, 'SetVertexColor', function(self, r, g, b)
+				Pet.dragButton.Backdrop:SetBackdropBorderColor(r, g, b)
+			end)
+
 			for index = 1, 3 do
 				local Spell = _G["PetJournalLoadoutPet"..i.."Spell"..index]
 				AS:SkinIconButton(Spell)
@@ -237,7 +241,10 @@ function AS:Blizzard_Collections(event, addon)
 		AS:SkinTexture(PetJournalPetCardPetInfoIcon)
 		AS:CreateBackdrop(PetJournalPetCardPetInfo)
 		PetJournalPetCardPetInfo.Backdrop:SetOutside(PetJournalPetCardPetInfoIcon)
-
+		PetJournalPetCardPetInfoQualityBorder:SetAlpha(0)
+		hooksecurefunc(PetJournalPetCardPetInfoQualityBorder, 'SetVertexColor', function(self, r, g, b)
+			PetJournalPetCardPetInfo.Backdrop:SetBackdropBorderColor(r, g, b)
+		end)
 		local tt = PetJournalPrimaryAbilityTooltip
 		tt.Background:SetTexture(nil)
 		if tt.Delimiter1 then
