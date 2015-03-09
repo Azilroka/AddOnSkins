@@ -10,6 +10,7 @@
 	<Script file="Collections.lua"/>
 	<Script file="DebugTools.lua"/>
 	<Script file="DressUp.lua"/>
+	<Script file="EncounterJournal.lua"/>
 	<Script file="ExtraButtons.lua"/>
 	<Script file="Friends.lua"/>
 	<Script file="Garrison.lua"/>
@@ -33,6 +34,7 @@
 	<Script file="Transmogrify.lua"/>
 	<Script file="Tutorial.lua"/>
 	<Script file="VoidStorage.lua"/>
+	<Script file="WorldMap.lua"/>
 	<Script file="WorldStateCaptureBar.lua"/>
 	<Script file="WorldStateScoreFrame.lua"/>
 </Ui>
