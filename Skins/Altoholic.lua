@@ -142,9 +142,9 @@ function AS:Altoholic(event, addon)
 	if addon == "Altoholic_Search" then
 		AS:SkinBackdropFrame(AltoholicFrameSearch, true)
 		AS:StripTextures(AltoholicFrameSearchScrollFrame, true)
-		AS:StripTextures(AltoholicSearchMenuScrollFrame, true)
+		AS:StripTextures(AltoholicTabSearch.ScrollFrame, true)
 		AS:SkinScrollBar(AltoholicFrameSearchScrollFrame.ScrollBar)
-		AS:SkinScrollBar(AltoholicSearchMenuScrollFrame.ScrollBar)
+		AS:SkinScrollBar(AltoholicTabSearch.ScrollFrame.ScrollBar)
 		AS:SkinDropDownBox(AltoholicTabSearch_SelectRarity)
 		AS:SkinDropDownBox(AltoholicTabSearch_SelectSlot)
 		AS:SkinDropDownBox(AltoholicTabSearch_SelectLocation)
@@ -244,9 +244,9 @@ function AS:Altoholic(event, addon)
 
 	if addon == "Altoholic_Achievements" then
 		AS:StripTextures(AltoholicFrameAchievementsScrollFrame, true)
-		AS:StripTextures(AltoholicTabAchievementsScrollFrame, true)
+		AS:StripTextures(AltoholicTabAchievements.ScrollFrame, true)
 		AS:SkinScrollBar(AltoholicFrameAchievementsScrollFrame.ScrollBar)
-		AS:SkinScrollBar(AltoholicTabAchievementsScrollFrame.ScrollBar)
+		AS:SkinScrollBar(AltoholicTabAchievements.ScrollFrame.ScrollBar)
 		AS:SkinDropDownBox(AltoholicTabAchievements_SelectRealm)
 		AltoholicTabAchievements_SelectRealm:Point("TOPLEFT", AltoholicFrame, "TOPLEFT", 205, -57)
 
