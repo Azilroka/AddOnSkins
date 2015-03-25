@@ -11,11 +11,11 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	AS:SkinCheckBox(ExactMatchCheckButton)
 	AS:SkinCheckBox(IsUsableCheckButton)
 	AS:SkinCheckBox(ShowOnPlayerCheckButton)
-	AS:SkinButton(BrowseSearchButton)
-	AS:SkinButton(BrowseResetButton)
-	AS:SkinButton(BrowseBidButton)
-	AS:SkinButton(BrowseBuyoutButton)
-	AS:SkinButton(BrowseCloseButton)
+	AS:SkinButton(BrowseSearchButton, true)
+	AS:SkinButton(BrowseResetButton, true)
+	AS:SkinButton(BrowseBidButton, true)
+	AS:SkinButton(BrowseBuyoutButton, true)
+	AS:SkinButton(BrowseCloseButton, true)
 	AS:StripTextures(BrowseFilterScrollFrame)
 	AS:StripTextures(BrowseScrollFrame)
 	AS:SkinScrollBar(BrowseFilterScrollFrameScrollBar)
@@ -52,9 +52,9 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	AuctionFrameBrowse.RightBackground:Point("BOTTOMRIGHT", AuctionFrame, "BOTTOMRIGHT", -8, 40)
 	BrowseScrollFrame:Height(300)
 
-	AS:SkinButton(BidBidButton)
-	AS:SkinButton(BidBuyoutButton)
-	AS:SkinButton(BidCloseButton)
+	AS:SkinButton(BidBidButton, true)
+	AS:SkinButton(BidBuyoutButton, true)
+	AS:SkinButton(BidCloseButton, true)
 	AS:SkinEditBox(BidBidPriceGold)
 	AS:SkinEditBox(BidBidPriceSilver)
 	AS:SkinEditBox(BidBidPriceCopper)
@@ -178,8 +178,10 @@ function AS:Blizzard_AuctionHouse(event, addon)
 
 	for i = 1, NUM_FILTERS_TO_DISPLAY do
 		local Tab = _G["AuctionFilterButton"..i]
-		AS:StripTextures(Tab)
+		AS:StripTextures(Tab, true)
 		AS:StyleButton(Tab)
+		_G["AuctionFilterButton"..i..'NormalTexture']:SetAlpha(0)
+		_G["AuctionFilterButton"..i..'NormalTexture'].SetAlpha = AS.Noop
 	end
 
 	AuctionsStackSizeEntry.Backdrop:SetAllPoints()
@@ -267,6 +269,15 @@ function AS:Blizzard_AuctionHouse(event, addon)
 		Button:GetHighlightTexture():SetPoint("BOTTOMRIGHT", Button, "BOTTOMRIGHT", -2, 5)
 		Button:GetPushedTexture():SetAllPoints(Button:GetHighlightTexture())
 	end
+
+	AS:SkinButton(BrowseWowTokenResults.Buyout)
+	AS:CreateBackdrop(BrowseWowTokenResultsToken)
+	AS:SkinTexture(BrowseWowTokenResultsTokenIconTexture)
+	BrowseWowTokenResultsToken.Backdrop:SetOutside(BrowseWowTokenResultsTokenIconTexture)
+	BrowseWowTokenResultsToken.Backdrop:SetBackdropBorderColor(BrowseWowTokenResultsToken.IconBorder:GetVertexColor())
+	BrowseWowTokenResultsToken.Backdrop:SetFrameLevel(BrowseWowTokenResultsToken:GetFrameLevel())
+	BrowseWowTokenResultsToken.IconBorder:SetTexture(nil)
+	BrowseWowTokenResultsToken.ItemBorder:SetTexture(nil)
 end
 
 AS:RegisterSkin('Blizzard_AuctionHouse', AS.Blizzard_AuctionHouse, 'ADDON_LOADED')
