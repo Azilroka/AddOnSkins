@@ -219,7 +219,7 @@ function AS:StyleButton(Button)
 	if Button.hasStyle then return end
 
 	if Button.SetHighlightTexture and not Button.hover then
-		local hover = Button:CreateTexture("frame", nil, self)
+		local hover = Button:CreateTexture()
 		hover:SetTexture(1, 1, 1, 0.3)
 		hover:SetInside()
 		Button.hover = hover
@@ -227,7 +227,7 @@ function AS:StyleButton(Button)
 	end
 
 	if Button.SetPushedTexture and not Button.pushed then
-		local pushed = Button:CreateTexture("frame", nil, self)
+		local pushed = Button:CreateTexture()
 		pushed:SetTexture(0.9, 0.8, 0.1, 0.3)
 		pushed:SetInside()
 		Button.pushed = pushed
@@ -235,7 +235,7 @@ function AS:StyleButton(Button)
 	end
 
 	if Button.SetCheckedTexture and not Button.checked then
-		local checked = Button:CreateTexture("frame", nil, self)
+		local checked = Button:CreateTexture()
 		checked:SetTexture(0,1,0,.3)
 		checked:SetInside()
 		Button.checked = checked
