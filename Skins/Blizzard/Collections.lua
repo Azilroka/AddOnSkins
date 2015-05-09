@@ -175,7 +175,7 @@ function AS:Blizzard_Collections(event, addon)
 	
 			Button.icon:SetPoint("LEFT", -41, 0)
 			Button.icon:SetDrawLayer('ARTWORK')
-			LevelBG:SetTexture(nil)
+			--LevelBG:SetTexture(nil)
 
 			hooksecurefunc(Button.iconBorder, 'SetVertexColor', function(self, r, g, b, a)
 				Button.iconbg:SetBackdropBorderColor(r, g, b)
@@ -237,7 +237,7 @@ function AS:Blizzard_Collections(event, addon)
 		PetJournalTutorialButton:ClearAllPoints()
 		PetJournalTutorialButton:SetPoint("TOPLEFT", CollectionsJournal, 0, 0)
 
-		PetJournalPetCardPetInfo.levelBG:SetTexture(nil)
+		--PetJournalPetCardPetInfo.levelBG:SetTexture(nil)
 		AS:SkinTexture(PetJournalPetCardPetInfoIcon)
 		AS:CreateBackdrop(PetJournalPetCardPetInfo)
 		PetJournalPetCardPetInfo.Backdrop:SetOutside(PetJournalPetCardPetInfoIcon)

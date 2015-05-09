@@ -115,8 +115,6 @@ function AS:Blizzard_Guild(event, addon)
 		AS:StripTextures(GuildRecruitmentCommentInputFrame)
 		AS:StripTextures(GuildInfoFrameApplicantsContainer)
 		AS:StripTextures(GuildInfoFrameApplicants)
-		AS:StripTextures(GuildNewsBossModel)
-		AS:StripTextures(GuildNewsBossModelTextFrame)
 		AS:StripTextures(GuildInfoFrameApplicantsContainerScrollBar)
 
 		GuildRewardsFrameVisitText:ClearAllPoints()
@@ -132,11 +130,11 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinButton(GuildAddMemberButton, true)
 		AS:SkinButton(GuildViewLogButton, true)
 		AS:SkinButton(GuildControlButton, true)
-		AS:SkinButton(GuildRecruitmentListGuildButton)
+		AS:SkinButton(GuildRecruitmentListGuildButton, true)
 		AS:SkinButton(GuildTextEditFrameAcceptButton)
-		AS:SkinButton(GuildRecruitmentInviteButton)
-		AS:SkinButton(GuildRecruitmentMessageButton)
-		AS:SkinButton(GuildRecruitmentDeclineButton)
+		AS:SkinButton(GuildRecruitmentInviteButton, true)
+		AS:SkinButton(GuildRecruitmentMessageButton, true)
+		AS:SkinButton(GuildRecruitmentDeclineButton, true)
 
 		local checkbuttons = {
 			"Quest", 
@@ -146,8 +144,6 @@ function AS:Blizzard_Guild(event, addon)
 			"RP",
 			"Weekdays",
 			"Weekends",
-			"LevelAny",
-			"LevelMax",
 		}
 
 		for _, frame in pairs(checkbuttons) do

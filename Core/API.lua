@@ -556,24 +556,34 @@ function AS:SkinRotateButton(Button)
 end
 
 function AS:SkinDropDownBox(Frame, Width)
-	local Button = _G[Frame:GetName().."Button"]
-	local Text = _G[Frame:GetName().."Text"]
+	local Button, Text
+	local FrameName = Frame:GetName()
 
-	AS:StripTextures(Frame)
-	Frame:Width(Width or 155)
+	if FrameName then
+		Button = _G[Frame:GetName().."Button"]
+		Text = _G[Frame:GetName().."Text"]
+	else
+		Button = Frame.Button
+		Text = Frame.Text
+	end
 
-	Text:ClearAllPoints()
-	Text:Point("RIGHT", Button, "LEFT", -2, 0)
+	if Button and Text then
+		AS:StripTextures(Frame)
+		Frame:Width(Width or 155)
 
-	Button:ClearAllPoints()
-	Button:Point("RIGHT", Frame, "RIGHT", -10, 3)
-	Button.SetPoint = AS.Noop
+		Text:ClearAllPoints()
+		Text:Point("RIGHT", Button, "LEFT", -2, 0)
 
-	AS:SkinNextPrevButton(Button, true)
+		Button:ClearAllPoints()
+		Button:Point("RIGHT", Frame, "RIGHT", -10, 3)
+		Button.SetPoint = AS.Noop
 
-	AS:CreateBackdrop(Frame)
-	Frame.Backdrop:Point("TOPLEFT", 20, -2)
-	Frame.Backdrop:Point("BOTTOMRIGHT", Button, "BOTTOMRIGHT", 2, -2)
+		AS:SkinNextPrevButton(Button, true)
+
+		AS:CreateBackdrop(Frame)
+		Frame.Backdrop:Point("TOPLEFT", 20, -2)
+		Frame.Backdrop:Point("BOTTOMRIGHT", Button, "BOTTOMRIGHT", 2, -2)
+	end
 end
 
 function AS:SkinSlideBar(Frame, Height, MoveText)
@@ -613,34 +623,33 @@ end
 function AS:SkinIconButton(Button, ShrinkIcon)
 	if Button.isSkinned then return end
 
-	AS:StripTextures(Button)
-	AS:CreateBackdrop(Button)
-	AS:StyleButton(Button)
-
-	local Icon = Button.icon
+	local Icon, Texture
 	local ButtonName = Button:GetName()
 
-	if ButtonName then
+	if Button.icon then
+		Icon = Button.icon
+		Texture = Button.icon:GetTexture()
+	elseif Button.Icon then
+		Icon = Button.Icon
+		Texture = Button.Icon:GetTexture()
+	elseif ButtonName then
 		if _G[ButtonName.."IconTexture"] then
 			Icon = _G[ButtonName.."IconTexture"]
+			Texture = _G[ButtonName.."IconTexture"]:GetTexture()
 		elseif _G[ButtonName.."Icon"] then
 			Icon = _G[ButtonName.."Icon"]
+			Texture = _G[ButtonName.."Icon"]:GetTexture()
 		end
 	end
 
 	if Icon then
+		AS:SkinFrame(Button)
+		AS:StyleButton(Button)
+		Icon:SetTexture(Texture)
 		AS:SkinTexture(Icon)
-
-		if ShrinkIcon then
-			Button.Backdrop:SetAllPoints()
-			Icon:SetInside(Button)
-		else
-			Button.Backdrop:SetOutside(Icon)
-		end
-		Icon:SetParent(Button.Backdrop)
+		Icon:SetInside(Button)
+		Button.isSkinned = true
 	end
-
-	Button.isSkinned = true
 end
 
 function AS:SkinFrame(frame, template, override, kill)

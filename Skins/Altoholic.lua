@@ -27,18 +27,14 @@ function AS:Altoholic(event, addon)
 		AS:StripTextures(AltoholicFrameSummary.ScrollFrame)
 		AS:SkinScrollBar(AltoholicFrameSummary.ScrollFrame.ScrollBar)
 
-		AS:SkinDropDownBox(AltoholicTabSummary_SelectLocation)
-		AltoholicTabSummary_SelectLocation:Width(200)
-
-		AS:SkinTexture(AltoholicTabSummary_RequestSharingIconTexture)
-		AS:StyleButton(AltoholicTabSummary_RequestSharing)
-		AS:CreateBackdrop(AltoholicTabSummary_RequestSharing)
-		AS:SkinTexture(AltoholicTabSummary_OptionsIconTexture)
-		AS:StyleButton(AltoholicTabSummary_Options)
-		AS:CreateBackdrop(AltoholicTabSummary_Options)
-		AS:SkinTexture(AltoholicTabSummary_OptionsDataStoreIconTexture)
-		AS:StyleButton(AltoholicTabSummary_OptionsDataStore)
-		AS:CreateBackdrop(AltoholicTabSummary_OptionsDataStore)
+		AS:SkinIconButton(AltoholicTabSummary.RealmsIcon)
+		AS:SkinIconButton(AltoholicTabSummary.FactionIcon)
+		AS:SkinIconButton(AltoholicTabSummary.LevelIcon)
+		AS:SkinIconButton(AltoholicTabSummary.ProfessionsIcon)
+		AS:SkinIconButton(AltoholicTabSummary.ClassIcon)
+		AS:SkinIconButton(AltoholicTabSummary.RequestSharing)
+		AS:SkinIconButton(AltoholicTabSummary.AltoholicOptionsIcon)
+		AS:SkinIconButton(AltoholicTabSummary.DataStoreOptionsIcon)
 
 		for i = 1, 6 do
 			AS:SkinButton(AltoholicTabSummary['MenuItem'..i], true)
@@ -229,8 +225,8 @@ function AS:Altoholic(event, addon)
 		AS:StripTextures(AltoholicTabAchievements.ScrollFrame, true)
 		AS:SkinScrollBar(AltoholicFrameAchievements.ScrollFrame.ScrollBar)
 		AS:SkinScrollBar(AltoholicTabAchievements.ScrollFrame.ScrollBar)
-		AS:SkinDropDownBox(AltoholicTabAchievements_SelectRealm)
-		AltoholicTabAchievements_SelectRealm:Point("TOPLEFT", AltoholicFrame, "TOPLEFT", 205, -57)
+		AS:SkinDropDownBox(AltoholicTabAchievements.SelectRealm)
+		AltoholicTabAchievements.SelectRealm:Point("TOPLEFT", AltoholicFrame, "TOPLEFT", 205, -57)
 
 		for i = 1, 15 do
 			AS:SkinButton(AltoholicTabAchievements['Entry'..i], true)
@@ -264,8 +260,7 @@ function AS:Altoholic(event, addon)
 		AS:StripTextures(AltoholicFrameGrids.ScrollFrame, true)
 		AS:SkinBackdropFrame(AltoholicFrameGrids)
 		AS:SkinScrollBar(AltoholicFrameGrids.ScrollFrame.ScrollBar)
-		AS:SkinDropDownBox(AltoholicTabGrids_SelectRealm)
-		AS:SkinDropDownBox(AltoholicTabGrids_SelectView)
+		AS:SkinDropDownBox(AltoholicTabGrids.SelectRealm)
 
 		for i = 1, 8 do
 			for j = 1, 11 do
