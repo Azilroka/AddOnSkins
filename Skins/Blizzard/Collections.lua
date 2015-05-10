@@ -288,7 +288,9 @@ function AS:Blizzard_Collections(event, addon)
 		for i = 1, 18 do
 			local Button = ToyBox.iconsFrame['spellButton'..i]
 			AS:SkinTexture(Button.iconTexture)
+			AS:SkinTexture(Button.iconTextureUncollected)
 			Button.iconTexture:SetInside()
+			Button.iconTextureUncollected:SetInside()
 			AS:SkinFrame(Button)
 			AS:StyleButton(Button)
 			Button.hover:SetAllPoints(Button.iconTexture)

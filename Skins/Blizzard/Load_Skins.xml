@@ -28,6 +28,7 @@
 	<Script file="Spellbook.lua"/>
 	<Script file="Talents.lua"/>
 	<Script file="Taxi.lua"/>
+	<Script file="TimeManager.lua"/>
 	<Script file="TradeSkill.lua"/>
 	<Script file="TradeWindow.lua"/>
 	<Script file="Trainer.lua"/>
