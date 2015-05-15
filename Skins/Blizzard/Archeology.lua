@@ -15,46 +15,29 @@ function AS:Blizzard_Archaeology(event, addon)
 	AS:SkinStatusBar(ArchaeologyFrameArtifactPageSolveFrameStatusBar)
 	ArchaeologyFrameArtifactPageSolveFrameStatusBar:SetStatusBarColor(0.7, 0.2, 0)
 	
-	for i = 1, ARCHAEOLOGY_MAX_COMPLETED_SHOWN do
-		local artifact = _G["ArchaeologyFrameCompletedPageArtifact"..i]
-		
-		if artifact then
-			_G["ArchaeologyFrameCompletedPageArtifact"..i.."Border"]:Kill()
-			_G["ArchaeologyFrameCompletedPageArtifact"..i.."Bg"]:Kill()
-			AS:SkinTexture(_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"])
-			_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"].backdrop = CreateFrame("Frame", nil, artifact)
-			AS:SetTemplate(_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"].backdrop, 'Default')
-			_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"].backdrop:Point("TOPLEFT", _G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"], "TOPLEFT", -2, 2)
-			_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"].backdrop:Point("BOTTOMRIGHT", _G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"], "BOTTOMRIGHT", 2, -2)
-			_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"].backdrop:SetFrameLevel(artifact:GetFrameLevel() - 2)
-			_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"]:SetDrawLayer("OVERLAY")
-			_G["ArchaeologyFrameCompletedPageArtifact"..i.."ArtifactName"]:SetTextColor(1, 1, 0)
-			_G["ArchaeologyFrameCompletedPageArtifact"..i.."ArtifactSubText"]:SetTextColor(0.6, 0.6, 0.6)
-		end
-	end
-	
 	for i = 1, ARCHAEOLOGY_MAX_RACES do
 		local frame = _G["ArchaeologyFrameSummaryPageRace"..i]
-		
-		if frame then
-			frame.raceName:SetTextColor(1, 1, 1)
+		frame.raceName:SetTextColor(1, 1, 1)
+
+		local artifact = _G["ArchaeologyFrameCompletedPageArtifact"..i]
+		artifact.border:SetTexture(nil)
+		_G[artifact:GetName().."Bg"]:Kill()
+		AS:SkinTexture(artifact.icon)
+		AS:CreateBackdrop(artifact)
+		artifact.Backdrop:SetOutside(artifact.icon)
+		artifact.artifactName:SetTextColor(1, 1, 0)
+		artifact.artifactSubText:SetTextColor(0.6, 0.6, 0.6)
+	end
+
+	for _, Frame in pairs({ ArchaeologyFrameCompletedPage, ArchaeologyFrameSummaryPage}) do
+		for i = 1, Frame:GetNumRegions() do
+			local Region = select(i, Frame:GetRegions())
+			if Region:IsObjectType("FontString") then
+				Region:SetTextColor(1, 1, 0)
+			end
 		end
 	end
-	
-	for i = 1, ArchaeologyFrameCompletedPage:GetNumRegions() do
-		local region = select(i, ArchaeologyFrameCompletedPage:GetRegions())
-		if region:GetObjectType() == "FontString" then
-			region:SetTextColor(1, 1, 0)
-		end
-	end
-	
-	for i = 1, ArchaeologyFrameSummaryPage:GetNumRegions() do
-		local region = select(i, ArchaeologyFrameSummaryPage:GetRegions())
-		if region:GetObjectType() == "FontString" then
-			region:SetTextColor(1, 1, 0)
-		end
-	end
-	
+
 	ArchaeologyFrameCompletedPage.infoText:SetTextColor(1, 1, 1)
 	ArchaeologyFrameHelpPageTitle:SetTextColor(1, 1, 0)
 	ArchaeologyFrameHelpPageDigTitle:SetTextColor(1, 1, 0)
@@ -62,13 +45,8 @@ function AS:Blizzard_Archaeology(event, addon)
 	
 	ArchaeologyFrameArtifactPageHistoryTitle:SetTextColor(1, 1, 0)
 	AS:SkinTexture(ArchaeologyFrameArtifactPageIcon)
-	ArchaeologyFrameArtifactPageIcon.backdrop = CreateFrame("Frame", nil, ArchaeologyFrameArtifactPage)
-	AS:SetTemplate(ArchaeologyFrameArtifactPageIcon.backdrop, 'Default')
-	ArchaeologyFrameArtifactPageIcon.backdrop:Point("TOPLEFT", ArchaeologyFrameArtifactPageIcon, "TOPLEFT", -2, 2)
-	ArchaeologyFrameArtifactPageIcon.backdrop:Point("BOTTOMRIGHT", ArchaeologyFrameArtifactPageIcon, "BOTTOMRIGHT", 2, -2)
-	ArchaeologyFrameArtifactPageIcon.backdrop:SetFrameLevel(ArchaeologyFrameArtifactPage:GetFrameLevel())
-	ArchaeologyFrameArtifactPageIcon:SetParent(ArchaeologyFrameArtifactPageIcon.backdrop)
-	ArchaeologyFrameArtifactPageIcon:SetDrawLayer("OVERLAY")	
+	AS:CreateBackdrop(ArchaeologyFrameArtifactPage)
+	ArchaeologyFrameArtifactPage.Backdrop:SetOutside(ArchaeologyFrameArtifactPageIcon)
 	
 	ArchaeologyFrameArtifactPageHistoryScrollChildText:SetTextColor(1, 1, 1)
 	AS:SkinCloseButton(ArchaeologyFrameCloseButton)
