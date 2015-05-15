@@ -2,10 +2,6 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_AchievementUI(event, addon)
 	local function SkinAchievement(Achievement, BiggerIcon)
-		if Achievement.highlight then
-			AS:StripTextures(Achievement.highlight)
-		end
-
 		AS:StripTextures(Achievement, true)
 		AS:CreateBackdrop(Achievement, nil, true)
 		Achievement.Backdrop:SetInside()
@@ -16,6 +12,18 @@ function AS:Blizzard_AchievementUI(event, addon)
 		Achievement.icon.frame:Kill()
 		AS:SkinTexture(Achievement.icon.texture)
 		Achievement.icon.texture:SetInside()
+
+		if Achievement.highlight then
+			AS:StripTextures(Achievement.highlight)
+			Achievement:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(1, 1, 0) end)
+			Achievement:HookScript('OnLeave', function(self)
+				if (self.player and self.player.accountWide or self.accountWide) then
+					self.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+				else
+					self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end
+			end)
+		end
 
 		if Achievement.label then
 			Achievement.label:SetTextColor(1, 1, 1)
