@@ -9,6 +9,7 @@
 	<Script file="Character.lua"/>
 	<Script file="ChatBubbles.lua"/>
 	<Script file="Collections.lua"/>
+	<Script file="DeathRecap.lua"/>
 	<Script file="DebugTools.lua"/>
 	<Script file="DressUp.lua"/>
 	<Script file="EncounterJournal.lua"/>
