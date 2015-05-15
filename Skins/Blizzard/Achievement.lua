@@ -171,6 +171,16 @@ function AS:Blizzard_AchievementUI(event, addon)
 			_G[StatusBar.."Button"]:HookScript('OnLeave', function(self) self:GetParent().Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 		end
 
+		hooksecurefunc('AchievementButton_DisplayAchievement', function(Achievement)
+			if Achievement.Backdrop then
+				if Achievement.accountWide then
+					Achievement.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+				else
+					Achievement.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end
+			end
+		end)
+
 		hooksecurefunc('AchievementFrameSummary_UpdateAchievements', function(...)
 			for i = 1, ACHIEVEMENTUI_MAX_SUMMARY_ACHIEVEMENTS do
 				local Achievement = _G["AchievementFrameSummaryAchievement"..i]
