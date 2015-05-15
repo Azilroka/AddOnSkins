@@ -6,8 +6,9 @@ function AS:Blizzard_AchievementUI(event, addon)
 		AS:CreateBackdrop(Achievement, nil, true)
 		Achievement.Backdrop:SetInside()
 		AS:SetTemplate(Achievement.icon)
-		Achievement.icon:SetSize(BiggerIcon and 71 or 36, BiggerIcon and 71 or 36)
-		Achievement.icon:SetPoint("TOPLEFT", 6, -6)
+		Achievement.icon:SetSize(BiggerIcon and 54 or 36, BiggerIcon and 54 or 36)
+		Achievement.icon:ClearAllPoints()
+		Achievement.icon:Point("LEFT", 8, 0)
 		Achievement.icon.bling:Kill()
 		Achievement.icon.frame:Kill()
 		AS:SkinTexture(Achievement.icon.texture)
@@ -57,30 +58,23 @@ function AS:Blizzard_AchievementUI(event, addon)
 			end
 			if template == "AchievementTemplate" then
 				for _, Achievement in pairs(frame.buttons) do
-					if not Achievement.isSkinned then
-						SkinAchievement(Achievement, true)
-						Achievement.isSkinned = true
-					end
+					SkinAchievement(Achievement, true)
 				end
 			end
 			if template == "ComparisonTemplate" then
 				for _, Achievement in pairs(frame.buttons) do
-					if not Achievement.isSkinned then
-						SkinAchievement(Achievement.player)
-						SkinAchievement(Achievement.friend)
+					SkinAchievement(Achievement.player)
+					SkinAchievement(Achievement.friend)
 
-						hooksecurefunc(Achievement.player, 'Saturate', function()
-							if Achievement.player.accountWide then
-								Achievement.player.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
-								Achievement.friend.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
-							else
-								Achievement.player.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-								Achievement.friend.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-							end
-						end)
-
-						Achievement.isSkinned = true
-					end
+					hooksecurefunc(Achievement.player, 'Saturate', function()
+						if Achievement.player.accountWide then
+							Achievement.player.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+							Achievement.friend.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+						else
+							Achievement.player.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+							Achievement.friend.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+						end
+					end)
 				end
 			end
 			if template == "StatTemplate" then
