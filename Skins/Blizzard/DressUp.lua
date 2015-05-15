@@ -7,7 +7,8 @@ function AS:Blizzard_DressUpFrame()
 
 	AS:SkinButton(DressUpFrameResetButton)
 	AS:SkinButton(DressUpFrameCancelButton)
-	AS:SkinCloseButton(DressUpFrameCloseButton, DressUpFrame.Backdrop)
+	AS:SkinCloseButton(DressUpFrameCloseButton)
+	DressUpFrameCloseButton:Point("TOPRIGHT", DressUpFrame.Backdrop, "TOPRIGHT", -3, -3)
 	DressUpFrameResetButton:Point("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
 end
 

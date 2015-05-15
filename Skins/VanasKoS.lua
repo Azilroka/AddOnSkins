@@ -11,7 +11,7 @@ function AS:VanasKoS()
 	VanasKoS_FontFriendly:SetFont(AS.PixelFont, 8, "MONOCHROMEOUTLINE")
 	VanasKoS_FontNormal:SetFont(AS.PixelFont, 8, "MONOCHROMEOUTLINE")
 
-	AS:SkinBackdropFrame(VanasKoSFrame, 'Transparent', nil, true)
+	AS:SkinBackdropFrame(VanasKoSFrame, nil, nil, true)
 	VanasKoSFrame.Backdrop:SetPoint("TOPLEFT", 16, -12)
 	VanasKoSFrame.Backdrop:SetPoint("BOTTOMRIGHT", -30, 75)
 
@@ -21,6 +21,8 @@ function AS:VanasKoS()
 	AS:SkinButton(VanasKoSListFrameConfigurationButton)
 
 	AS:SkinCloseButton(VanasKosFrameCloseButton, VanasKoSFrame.Backdrop)
+	VanasKosFrameCloseButton:Point("TOPRIGHT", VanasKoSFrame.Backdrop, "TOPRIGHT", -3, -3)
+
 	AS:SkinCheckBox(VanasKoSListFrameCheckBox)
 	AS:SkinNextPrevButton(VanasKoSListFrameToggleRightButton)
 	AS:SkinNextPrevButton(VanasKoSListFrameToggleLeftButton)

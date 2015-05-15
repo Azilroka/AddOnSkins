@@ -254,30 +254,29 @@ end
 
 function AS:SkinCloseButton(CloseButton, Reposition)
 	if CloseButton.isSkinned then return end
-	AS:StripTextures(CloseButton)
-	AS:CreateBackdrop(CloseButton)
-	AS:SetTemplate(CloseButton.Backdrop, nil, true)
-	CloseButton.Backdrop:Point('TOPLEFT', 7, -8)
-	CloseButton.Backdrop:Point('BOTTOMRIGHT', -8, 8)
+	AS:SkinFrame(CloseButton)
+	CloseButton:SetSize(16, 16)
 
 	CloseButton.Text = CloseButton:CreateFontString(nil, "OVERLAY")
 	CloseButton.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\PTSansNarrow.TTF]], 12)
-	CloseButton.Text:SetPoint("CENTER", CloseButton, 'CENTER')
+	CloseButton.Text:SetPoint("LEFT", CloseButton, 'LEFT', 5, 0)
+	CloseButton.Text:SetJustifyH('CENTER')
+	CloseButton.Text:SetJustifyV('MIDDLE')
 	CloseButton.Text:SetText('x')
 
 	CloseButton:HookScript("OnEnter", function(self)
 		self.Text:SetTextColor(1, .2, .2)
-		self.Backdrop:SetBackdropBorderColor(1, .2, .2)
+		self:SetBackdropBorderColor(1, .2, .2)
 	end)
 
 	CloseButton:HookScript("OnLeave", function(self)
 		self.Text:SetTextColor(1, 1, 1)
-		self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+		self:SetBackdropBorderColor(unpack(AS.BorderColor))
 	end)
 
-	if Reposition then
-		CloseButton:Point("TOPRIGHT", Reposition, "TOPRIGHT", 2, 2)
-	end
+	CloseButton:ClearAllPoints()
+	CloseButton:Point("TOPRIGHT", '$parent', "TOPRIGHT", -3, -3)
+
 	CloseButton.isSkinned = true
 end
 

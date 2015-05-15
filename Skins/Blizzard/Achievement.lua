@@ -1,6 +1,44 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_AchievementUI(event, addon)
+	local function SkinAchievement(Achievement, BiggerIcon)
+		if Achievement.highlight then
+			AS:StripTextures(Achievement.highlight)
+		end
+
+		AS:StripTextures(Achievement, true)
+		AS:CreateBackdrop(Achievement, nil, true)
+		Achievement.Backdrop:SetInside()
+		AS:SetTemplate(Achievement.icon)
+		Achievement.icon:SetSize(BiggerIcon and 71 or 36, BiggerIcon and 71 or 36)
+		Achievement.icon:SetPoint("TOPLEFT", 6, -6)
+		Achievement.icon.bling:Kill()
+		Achievement.icon.frame:Kill()
+		AS:SkinTexture(Achievement.icon.texture)
+		Achievement.icon.texture:SetInside()
+
+		if Achievement.label then
+			Achievement.label:SetTextColor(1, 1, 1)
+		end
+
+		if Achievement.description then
+			Achievement.description:SetTextColor(.6, .6, .6)
+			hooksecurefunc(Achievement.description, 'SetTextColor', function(self, r, g, b)
+				if r == 0 and g == 0 and b == 0 then
+					Achievement.description:SetTextColor(.6, .6, .6)
+				end
+			end)
+		end
+
+		if Achievement.hiddenDescription then
+			Achievement.hiddenDescription:SetTextColor(1, 1, 1)
+		end
+
+		if Achievement.tracked then
+			AS:SkinCheckBox(Achievement.tracked)
+		end
+	end
+
 	if event == 'PLAYER_ENTERING_WORLD' then
 		hooksecurefunc('HybridScrollFrame_CreateButtons', function(frame, template)
 			if template == "AchievementCategoryTemplate" then
@@ -12,24 +50,7 @@ function AS:Blizzard_AchievementUI(event, addon)
 			if template == "AchievementTemplate" then
 				for _, Achievement in pairs(frame.buttons) do
 					if not Achievement.isSkinned then
-						AS:StripTextures(Achievement.highlight)
-						AS:SkinBackdropFrame(Achievement, nil, nil, true)
-						Achievement.Backdrop:SetInside()
-						Achievement.label:SetTextColor(1, 1, 1)
-						hooksecurefunc(Achievement.description, 'SetTextColor', function(self, r, g, b)
-							if r == 0 and g == 0 and b == 0 then
-								Achievement.description:SetTextColor(0.6, 0.6, .6)
-							end
-						end)
-						Achievement.hiddenDescription:SetTextColor(1, 1, 1)
-						AS:SetTemplate(Achievement.icon)
-						Achievement.icon:SetSize(36, 36)
-						Achievement.icon:SetPoint("TOPLEFT", 6, -6)
-						Achievement.icon.bling:Kill()
-						Achievement.icon.frame:Kill()
-						AS:SkinTexture(Achievement.icon.texture)
-						Achievement.icon.texture:SetInside()
-						AS:SkinCheckBox(Achievement.tracked)
+						SkinAchievement(Achievement, true)
 						Achievement.isSkinned = true
 					end
 				end
@@ -37,31 +58,8 @@ function AS:Blizzard_AchievementUI(event, addon)
 			if template == "ComparisonTemplate" then
 				for _, Achievement in pairs(frame.buttons) do
 					if not Achievement.isSkinned then
-						AS:SkinBackdropFrame(Achievement.player, nil, nil, true)
-						Achievement.player.Backdrop:SetInside()
-						Achievement.player.label:SetTextColor(1, 1, 1)
-						hooksecurefunc(Achievement.player.description, 'SetTextColor', function(self, r, g, b)
-							if r == 0 and g == 0 and b == 0 then
-								Achievement.player.description:SetTextColor(0.6, 0.6, .6)
-							end
-						end)
-						AS:SetTemplate(Achievement.player.icon)
-						Achievement.player.icon:SetSize(36, 36)
-						Achievement.player.icon:SetPoint("TOPLEFT", 6, -6)
-						Achievement.player.icon.bling:Kill()
-						Achievement.player.icon.frame:Kill()
-						AS:SkinTexture(Achievement.player.icon.texture)
-						Achievement.player.icon.texture:SetInside()
-
-						AS:SkinBackdropFrame(Achievement.friend, nil, nil, true)
-						Achievement.friend.Backdrop:SetInside()
-						AS:SetTemplate(Achievement.friend.icon)
-						Achievement.friend.icon:SetSize(36, 36)
-						Achievement.friend.icon:SetPoint("TOPLEFT", 6, -6)
-						Achievement.friend.icon.bling:Kill()
-						Achievement.friend.icon.frame:Kill()
-						AS:SkinTexture(Achievement.friend.icon.texture)
-						Achievement.friend.icon.texture:SetInside()
+						SkinAchievement(Achievement.player)
+						SkinAchievement(Achievement.friend)
 
 						hooksecurefunc(Achievement.player, 'Saturate', function()
 							if Achievement.player.accountWide then
@@ -169,24 +167,7 @@ function AS:Blizzard_AchievementUI(event, addon)
 			for i = 1, ACHIEVEMENTUI_MAX_SUMMARY_ACHIEVEMENTS do
 				local Achievement = _G["AchievementFrameSummaryAchievement"..i]
 				if not Achievement.isSkinned then
-					AS:StripTextures(Achievement.highlight)
-					AS:SkinBackdropFrame(Achievement, nil, nil, true)
-					Achievement.Backdrop:SetInside()
-					Achievement.label:SetTextColor(1, 1, 1)
-					Achievement.description:SetTextColor(0.6, 0.6, .6)
-					hooksecurefunc(Achievement.description, 'SetTextColor', function(self, r, g, b)
-						if r == 0 and g == 0 and b == 0 then
-							Achievement.description:SetTextColor(0.6, 0.6, .6)
-						end
-					end)
-					AS:SetTemplate(Achievement.icon)
-					Achievement.icon:SetSize(36, 36)
-					Achievement.icon:SetPoint("TOPLEFT", 6, -6)
-					Achievement.icon.bling:Kill()
-					Achievement.icon.frame:Kill()
-					AS:SkinTexture(Achievement.icon.texture)
-					Achievement.icon.texture:SetInside()
-
+					SkinAchievement(Achievement)
 					Achievement.isSkinned = true
 				end
 
