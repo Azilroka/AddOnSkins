@@ -33,7 +33,7 @@ function AS:BagSync()
 				if object:GetText() ~= nil then
 					AS:SkinButton(object, true)
 				else
-					AS:SkinCloseButton(object, true)
+					AS:SkinCloseButton(object)
 				end
 			end
 		end

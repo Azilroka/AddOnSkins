@@ -18,7 +18,7 @@ function AS:NirritisNotes(event, addon)
 	AS:SkinButton(NotesFrameCancelButton, true)
 	AS:SkinScrollBar(NotesFrameScrollFrameScrollBar)
 	AS:SkinScrollBar(TextScrollFrameScrollBar)
-	AS:SkinCloseButton(NotesFrameCloseButton, true)
+	AS:SkinCloseButton(NotesFrameCloseButton)
 	AS:SkinDropDownBox(Notes_AddInfoDropDown)
 	AS:SkinDropDownBox(Notes_TypeDropDown)
 	
