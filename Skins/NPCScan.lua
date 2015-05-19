@@ -10,8 +10,17 @@ function AS:_NPCScan()
 	for i = 1, _NPCScanButton:GetNumChildren() do
 		local Child = select(i, _NPCScanButton:GetChildren())
 		if Child and Child:IsObjectType('Button') then
-			AS:SkinCloseButton(Child)
-			Child:SetPoint("TOPRIGHT", 4, 4)
+			AS:SkinBackdropFrame(Child)
+			Child.Backdrop:Point('TOPLEFT', 7, -8)
+			Child.Backdrop:Point('BOTTOMRIGHT', -8, 8)
+			Child.text = Child:CreateFontString(nil, 'OVERLAY')
+			Child.text:SetFont(AS.Font, 16, 'OUTLINE')
+			Child.text:SetText('x')
+			Child.text:SetJustifyH('CENTER')
+			Child.text:SetPoint('CENTER', Child, 'CENTER')
+			Child:ClearAllPoints()
+			Child:SetFrameLevel(_NPCScanButton:GetFrameLevel() + 2)
+			Child:SetPoint("TOPRIGHT", _NPCScanButton, 'TOPRIGHT', 4, 4)
 			Child:SetScale(1)
 		end
 	end
