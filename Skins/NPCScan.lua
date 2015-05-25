@@ -24,12 +24,12 @@ function AS:_NPCScan()
 			Child:SetScale(1)
 			Child:HookScript("OnEnter", function(self)
 				self.Text:SetTextColor(1, .2, .2)
-				self:SetBackdropBorderColor(1, .2, .2)
+				self.Backdrop:SetBackdropBorderColor(1, .2, .2)
 			end)
 
 			Child:HookScript("OnLeave", function(self)
 				self.Text:SetTextColor(1, 1, 1)
-				self:SetBackdropBorderColor(unpack(AS.BorderColor))
+				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end)
 		end
 	end
