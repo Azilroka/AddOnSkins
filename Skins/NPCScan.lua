@@ -22,6 +22,15 @@ function AS:_NPCScan()
 			Child:SetFrameLevel(_NPCScanButton:GetFrameLevel() + 2)
 			Child:SetPoint("TOPRIGHT", _NPCScanButton, 'TOPRIGHT', 4, 4)
 			Child:SetScale(1)
+			Child:HookScript("OnEnter", function(self)
+				self.Text:SetTextColor(1, .2, .2)
+				self:SetBackdropBorderColor(1, .2, .2)
+			end)
+
+			Child:HookScript("OnLeave", function(self)
+				self.Text:SetTextColor(1, 1, 1)
+				self:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end)
 		end
 	end
 
