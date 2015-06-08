@@ -1,6 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Ace3.lua"/>
-	<Script file="BigWigs.lua"/>
 	<Script file="DXE.lua"/>
 	<Script file="SexyCooldown.lua"/>
 </Ui>

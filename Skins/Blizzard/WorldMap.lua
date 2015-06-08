@@ -29,23 +29,19 @@ function AS:Blizzard_WorldMap()
 	AS:SkinFrame(QuestMapFrame.QuestsFrame.StoryTooltip)
 
 	AS:SkinCloseButton(WorldMapFrameCloseButton)
-	AS:StripTextures(WorldMapFrameSizeDownButton, true)
-	WorldMapFrameSizeDownButton:SetNormalTexture('')
-	WorldMapFrameSizeDownButton:SetPushedTexture('')
-	WorldMapFrameSizeDownButton:SetHighlightTexture('')
-	WorldMapFrameSizeDownButton.Text = WorldMapFrameSizeDownButton:CreateFontString(nil, 'OVERLAY')
-	WorldMapFrameSizeDownButton.Text:SetFont('Interface\\AddOns\\AddOnSkins\\Media\\Fonts\\Arial.ttf', 12)
-	WorldMapFrameSizeDownButton.Text:SetText('▼')
-	WorldMapFrameSizeDownButton.Text:Point('CENTER', WorldMapFrameSizeUpButton)
+	WorldMapFrameCloseButton:SetPoint('TOPRIGHT', WorldMapFrame, 'TOPRIGHT', -1, -3)
 
-	AS:StripTextures(WorldMapFrameSizeUpButton, true)
-	WorldMapFrameSizeUpButton:SetNormalTexture('')
-	WorldMapFrameSizeUpButton:SetPushedTexture('')
-	WorldMapFrameSizeUpButton:SetHighlightTexture('')
-	WorldMapFrameSizeUpButton.Text = WorldMapFrameSizeUpButton:CreateFontString(nil, 'OVERLAY')
-	WorldMapFrameSizeUpButton.Text:SetFont('Interface\\AddOns\\AddOnSkins\\Media\\Fonts\\Arial.ttf', 12)
+	for _, Button in pairs({ WorldMapFrameSizeDownButton, WorldMapFrameSizeUpButton }) do
+		AS:SkinButton(Button, true)
+		Button:SetSize(16, 16)
+		Button.Text = Button:CreateFontString(nil, 'OVERLAY')
+		Button.Text:SetFont('Interface\\AddOns\\AddOnSkins\\Media\\Fonts\\Arial.ttf', 12)
+		Button.Text:Point('CENTER', Button)
+	end
+
+	WorldMapFrameSizeDownButton:SetPoint('RIGHT', WorldMapFrameCloseButton, 'LEFT', -1, 0)
+	WorldMapFrameSizeDownButton.Text:SetText('▼')
 	WorldMapFrameSizeUpButton.Text:SetText('▲')
-	WorldMapFrameSizeUpButton.Text:Point('CENTER', WorldMapFrameSizeUpButton)
 
 	QuestMapFrame.DetailsFrame:DisableDrawLayer('BORDER')
 

@@ -31,6 +31,7 @@
 	<Script file="BetterQuest.lua"/>
 	<Script file="BGDefender.lua"/>
 	<Script file="BigBrother.lua"/>
+	<Script file="BigWigs.lua"/>
 	<Script file="BPT.lua"/>
 	<Script file="BugSack.lua"/>
 	<Script file="BuyEmAll.lua"/>
