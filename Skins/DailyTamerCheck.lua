@@ -6,6 +6,7 @@ function AS:DailyTamerCheck()
 	local function SkinFrame()
 		if DailyTamerCheck_mainframe.IsHooked then return end
 		DailyTamerCheck_mainframe:HookScript('OnUpdate', function(self)
+			if self.IsSkinned then return end
 			AS:SkinFrame(self)
 			self:SetScale(UIParent:GetScale())
 			for i = 1, self:GetNumChildren() do
