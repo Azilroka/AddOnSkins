@@ -168,6 +168,11 @@ function AS:GetOptions()
 						order = 4,
 						disabled = function() return not AS:CheckOption("BigWigs", "BigWigs") end
 					},
+					DBMRadarTrans = {
+						type = "toggle",
+						name = ASL["DBM Transparent Radar"],
+						order = 5,
+					},
 				},
 			},
 			embed = {

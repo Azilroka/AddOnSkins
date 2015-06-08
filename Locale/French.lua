@@ -20,6 +20,7 @@ function AS:UpdateLocale_frFR()
 	ASL["DBM|VEM Font"] = "Police d'écriture DBM|VEM"
 	ASL["DBM|VEM Font Size"] = "Taille de la Police DBM|VEM"
 	ASL["DBM|VEM Font Flag"] = "Effet de la Police DBM|VEM"
+	ASL["DBM Transparent Radar"] = "DBM Transparent Radar"
 	ASL["None"] = "Aucun"
 	ASL["OUTLINE"] = "OUTLINE"
 	ASL["THICKOUTLINE"] = "THICKOUTLINE"

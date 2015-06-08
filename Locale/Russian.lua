@@ -27,6 +27,7 @@ function AS:UpdateLocale_ruRU()
 	ASL["MONOCHROMEOUTLINE"] = "MONOCHROMEOUTLINE"
 	ASL["DBM|VEM Half-bar Skin"] = "DBM|VEM режим тонких полос"
 	ASL["BigWigs Half-Bar"] = "Тонкие полосы BigWigs"
+	ASL["DBM Transparent Radar"] = "DBM Transparent Radar"
 	ASL["Embed Settings"] = "Настройки Встраивания"
 	ASL["Settings to control Embedded AddOns:\n\nAvailable Embeds: alDamageMeter | Omen | Skada | Recount | TinyDPS"] = "Настройки для конктроля встроенных аддонов:\n\nДоступны для встраивания: alDamageMeter | Omen | Skada | Recount | TinyDPS"
 	ASL["Single Embed System"] = "Встроить одно окно"

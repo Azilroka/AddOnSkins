@@ -21,6 +21,7 @@ function AS:UpdateLocale_deDE()
 	ASL["DBM|VEM Font"] = "DBM|VEM Schriftart"
 	ASL["DBM|VEM Font Size"] = "DBM|VEM Schriftgröße"
 	ASL["DBM|VEM Font Flag"] = "DBM|VEM Schriftkontur"
+	ASL["DBM Transparent Radar"] = "DBM Transparent Radar"
 	ASL["None"] = "Nichts"
 	ASL["OUTLINE"] = "UMRISS"
 	ASL["THICKOUTLINE"] = "DICKER UMRISS"
