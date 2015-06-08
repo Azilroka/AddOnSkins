@@ -49,6 +49,7 @@ function AS:BGDefender()
 
 	for _, button in pairs(buttons) do
 		AS:SkinButton(_G[button])
+		_G[button]:SetText('|cFFFFFFFF'.._G[button]:GetText())
 	end	
 
 	BGDefenderFrame:SetWidth(160)
@@ -75,10 +76,6 @@ function AS:BGDefender()
 	AS:SkinDropDownBox(DropDown3, 200)
 	AS:SkinCheckBox(BGDefenderPrefaceButton)
 	Text1:SetTextColor(23/255, 132/255, 209/255)
-	Button1:SetNormalFontObject('GameFontHighlight')
-	local font = Button1:GetNormalFontObject()
-	font:SetTextColor(1, 1, 1, 1)
-	Button1:SetNormalFontObject(font)
 	Button9:SetScript('OnEnter', OnEnter)
 	Button9:SetScript('OnLeave', OnLeave)
 	Button10:SetScript('OnEnter', OnEnter)
