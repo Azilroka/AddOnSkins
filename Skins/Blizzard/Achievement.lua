@@ -45,6 +45,8 @@ function AS:Blizzard_AchievementUI(event, addon)
 
 		if Achievement.tracked then
 			AS:SkinCheckBox(Achievement.tracked)
+			Achievement.tracked:ClearAllPoints()
+			Achievement.tracked:SetPoint('TOPLEFT', Achievement.icon, 'BOTTOMLEFT', 0, 0)
 		end
 	end
 

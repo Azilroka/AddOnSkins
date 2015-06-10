@@ -54,6 +54,10 @@ function AS:Blizzard_Archaeology(event, addon)
 	AS:SkinNextPrevButton(ArchaeologyFrameSummaryPagePrevPageButton)
 	AS:SkinNextPrevButton(ArchaeologyFrameCompletedPageNextPageButton)
 	AS:SkinNextPrevButton(ArchaeologyFrameSummaryPageNextPageButton)
+
+	AS:StripTextures(ArcheologyDigsiteProgressBar)
+	AS:SkinStatusBar(ArcheologyDigsiteProgressBar.FillBar)
+	ArcheologyDigsiteProgressBar.FillBar:SetStatusBarColor(.61, .25, 0)
 end
 
 AS:RegisterSkin("Blizzard_ArchaeologyUI", AS.Blizzard_Archaeology, 'ADDON_LOADED')
