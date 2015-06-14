@@ -1,6 +1,5 @@
 local AS = unpack(AddOnSkins)
 
-if AS:CheckAddOn('ElvUI') then return end
 if not AS:CheckAddOn('BigWigs') then return end
 
 local Loaded
