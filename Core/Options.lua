@@ -163,12 +163,6 @@ function AS:GetOptions()
 						name = ASL["DBM|VEM Half-bar Skin"],
 						order = 4,
 					},
-					BigWigsHalfBar = {
-						type = "toggle",
-						name = ASL["BigWigs Half-Bar"],
-						order = 4,
-						disabled = function() return not AS:CheckOption("BigWigs", "BigWigs") end
-					},
 					DBMRadarTrans = {
 						type = "toggle",
 						name = ASL["DBM Transparent Radar"],
