@@ -26,6 +26,7 @@ local Defaults = {
 	['DBMFont'] = 'Tukui',
 	['DBMFontSize'] = 12,
 	['DBMFontFlag'] = 'OUTLINE',
+	['DBMRadarTrans'] = false,
 	['WeakAuraAuraBar'] = false,
 	['WeakAuraIconCooldown'] = false,
 	['SkinTemplate'] = 'Transparent',
