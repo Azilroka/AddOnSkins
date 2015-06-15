@@ -27,6 +27,7 @@ function AS:UpdateLocale_ptBR()
 	ASL["MONOCHROMEOUTLINE"] = "MONOCHROMEOUTLINE"
 	ASL["DBM|VEM Half-bar Skin"] = "DBM|VEM Half-bar Skin"
 	ASL["BigWigs Half-Bar"] = "BigWigs Half-Bar"
+	ASL["DBM Transparent Radar"] = "DBM Transparent Radar"
 	ASL["Embed Settings"] = "Embed Settings"
 	ASL["Settings to control Embedded AddOns:\n\nAvailable Embeds: alDamageMeter | Omen | Skada | Recount | TinyDPS"] = "Settings to control Embedded AddOns:\n\nAvailable Embeds: alDamageMeter | Omen | Skada | Recount | TinyDPS"
 	ASL["Single Embed System"] = "Single Embed System"

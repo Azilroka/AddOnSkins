@@ -20,6 +20,7 @@ function AS:UpdateLocale_zhTW()
 	ASL["DBM|VEM Font"] = "DBM|VEM 字型"
 	ASL["DBM|VEM Font Size"] = "DBM|VEM 字體大小"
 	ASL["DBM|VEM Font Flag"] = "DBM|VEM 字型描邊"
+	ASL["DBM Transparent Radar"] = "DBM Transparent Radar"
 	ASL["None"] = "無"
 	ASL["OUTLINE"] = "描邊"
 	ASL["THICKOUTLINE"] = "粗邊"

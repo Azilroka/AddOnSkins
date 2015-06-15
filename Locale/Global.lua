@@ -31,6 +31,7 @@ function AS:UpdateLocale()
 	ASL["DBM|VEM Font"] = "DBM|VEM Font"
 	ASL["DBM|VEM Font Size"] = "DBM|VEM Font Size"
 	ASL["DBM|VEM Font Flag"] = "DBM|VEM Font Flag"
+	ASL["DBM Transparent Radar"] = "DBM Transparent Radar"
 	ASL["None"] = "None"
 	ASL["OUTLINE"] = "OUTLINE"
 	ASL["THICKOUTLINE"] = "THICKOUTLINE"

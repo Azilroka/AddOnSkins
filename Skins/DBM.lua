@@ -155,8 +155,12 @@ function AS:DBM(event, addon)
 		local function SkinRange(self, range, filter, forceshow, redCircleNumPlayers)
 			if DBM.Options.DontShowRangeFrame and not forceshow then return end
 			if DBMRangeCheck then
-				DBMRangeCheck:SetTemplate('Transparent')
-				DBMRangeCheckRadar:SetTemplate('Transparent')
+				if AS:CheckOption('DBMRadarTrans') then
+					DBMRangeCheckRadar.background:Hide()
+				else
+					DBMRangeCheck:SetTemplate('Transparent')
+					DBMRangeCheckRadar:SetTemplate('Transparent')				
+				end
 			end
 		end
 
