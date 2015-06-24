@@ -83,7 +83,7 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:SkinDropDownBox(CalendarCreateEventHourDropDown, 68)
 	AS:SkinDropDownBox(CalendarCreateEventMinuteDropDown, 68)
 	AS:SkinDropDownBox(CalendarCreateEventAMPMDropDown, 68)
-	AS:SkinDropDownBox(CalendarCreateEventRepeatOptionDropDown, 120)
+	AS:SkinDropDownBox(CalendarCreateEventDifficultyOptionDropDown, 120)
 	AS:SkinTexture(CalendarCreateEventIcon)
 	CalendarCreateEventIcon.SetTexCoord = AS.Noop
 
@@ -117,8 +117,8 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:StripTextures(CalendarTexturePickerTitleFrame)
 
 	AS:SkinScrollBar(CalendarTexturePickerScrollBar)
-	AS:SkinButton(CalendarTexturePickerAcceptButton)
-	AS:SkinButton(CalendarTexturePickerCancelButton)
+	AS:SkinButton(CalendarTexturePickerAcceptButton, true)
+	AS:SkinButton(CalendarTexturePickerCancelButton, true)
 	AS:SkinButton(CalendarCreateEventInviteButton)
 	AS:SkinButton(CalendarCreateEventRaidInviteButton)
 
