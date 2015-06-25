@@ -154,7 +154,7 @@ function AS:Skillet()
 		AS:SkinTooltip(SkilletTradeskillTooltip)
 		AS:SkinScrollBar(SkilletQueueListScrollBar)
 
-		for i = 1, 3 do
+		for i = 1, 2 do
 			local queDelete = _G['SkilletQueueButton'..i..'DeleteButton']
 			AS:SkinButton(queDelete)
 			queDelete:SetWidth(14)
