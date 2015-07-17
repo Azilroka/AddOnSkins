@@ -144,6 +144,7 @@ function AS:Blizzard_CharacterFrame()
 	for i = 1, NUM_GEARSET_ICONS_SHOWN do
 		local Button = _G["GearManagerDialogPopupButton"..i]
 		AS:SkinFrame(Button)
+		AS:StyleButton(Button)
 		AS:SkinTexture(Button.icon)
 		Button.icon:SetInside()
 	end
