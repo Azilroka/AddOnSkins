@@ -402,9 +402,9 @@ function AS:SkinScrollBar(Frame)
 
 		if not ScrollUpButton.Text then
 			ScrollUpButton.Text = ScrollUpButton:CreateFontString(nil, "OVERLAY")
-			ScrollUpButton.Text:SetFont([[Fonts\ARIALN.TTF]], 12)
+			ScrollUpButton.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\Arial.TTF]], 12)
 			ScrollUpButton.Text:SetText("▲")
-			ScrollUpButton.Text:SetPoint("CENTER", 1, 0)
+			ScrollUpButton.Text:SetPoint("CENTER", 0, 0)
 
 			ScrollUpButton:HookScript('OnShow', function(self)
 				if not self:IsEnabled() then
@@ -432,9 +432,9 @@ function AS:SkinScrollBar(Frame)
 
 		if not ScrollDownButton.Text then
 			ScrollDownButton.Text = ScrollDownButton:CreateFontString(nil, "OVERLAY")
-			ScrollDownButton.Text:SetFont([[Fonts\ARIALN.TTF]], 12)
+			ScrollDownButton.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\Arial.TTF]], 12)
 			ScrollDownButton.Text:SetText("▼")
-			ScrollDownButton.Text:SetPoint("CENTER", 1, 0)
+			ScrollDownButton.Text:SetPoint("CENTER", 0, 0)
 
 			ScrollDownButton:HookScript('OnShow', function(self)
 				if not self:IsEnabled() then

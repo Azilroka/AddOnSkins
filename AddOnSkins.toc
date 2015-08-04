@@ -1,4 +1,4 @@
-## Interface: 60100
+## Interface: 60200
 ## Title: |cff1784d1AddOnSkins|r
 ## Version: 3.21
 ## Author: Azilroka, Sortokk

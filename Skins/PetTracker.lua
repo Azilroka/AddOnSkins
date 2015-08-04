@@ -38,14 +38,6 @@ function AS:PetTracker()
 		end
 	end)
 
-	for i = 1, 6 do
-        local button = _G["PetTrackerAbilityAction"..i]
-        if button then
-            AS:SkinIconButton(button)
-			AS:SkinTexture(button.Icon)
-        end
-    end
-
 	if AS:CheckAddOn('PetTracker_Switcher') then
 		PetTrackerSwap:HookScript('OnUpdate', function(self)
 			if not self.IsSkinned then
@@ -179,6 +171,14 @@ function AS:PetTracker()
 			end)
 		end
 	end
+
+	for i = 1, 6 do
+        local button = _G["PetTrackerAbilityAction"..i]
+        if button then
+            AS:SkinIconButton(button)
+			AS:SkinTexture(button.Icon)
+        end
+    end
 end
 
 AS:RegisterSkin('PetTracker', AS.PetTracker)
