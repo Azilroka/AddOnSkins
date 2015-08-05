@@ -17,11 +17,14 @@ end
 function AS:ToggleChatFrame(Hide)
 	if AS:CheckOption('HideChatFrame') == 'NONE' then return end
 	if Hide then
+		_G[AS:CheckOption('HideChatFrame')].OriginalParent = _G[AS:CheckOption('HideChatFrame')]:GetParent()
 		_G[AS:CheckOption('HideChatFrame')]:SetParent(AS.ChatFrameHider)
+
+		_G[AS:CheckOption('HideChatFrame')..'Tab'].OriginalParent = _G[AS:CheckOption('HideChatFrame')..'Tab']:GetParent()
 		_G[AS:CheckOption('HideChatFrame')..'Tab']:SetParent(AS.ChatFrameHider)
 	else
-		_G[AS:CheckOption('HideChatFrame')]:SetParent(UIParent)
-		_G[AS:CheckOption('HideChatFrame')..'Tab']:SetParent(UIParent)
+		_G[AS:CheckOption('HideChatFrame')]:SetParent(_G[AS:CheckOption('HideChatFrame')].OriginalParent)
+		_G[AS:CheckOption('HideChatFrame')..'Tab']:SetParent(_G[AS:CheckOption('HideChatFrame')..'Tab'].OriginalParent)
 	end
 end
 
