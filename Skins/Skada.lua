@@ -48,8 +48,10 @@ function AS:Skada()
 		if not (AS:CheckEmbed('Skada') and AS.EmbedSystemCreated) then return end
 		for i, win in ipairs(Skada:GetWindows()) do
 			if win:IsShown() then
+				AS:SetOption('EmbedIsHidden', false)
 				EmbedSystem_MainWindow:Show()
 			else
+				AS:SetOption('EmbedIsHidden', true)
 				EmbedSystem_MainWindow:Hide()
 			end
 		end
