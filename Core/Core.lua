@@ -192,14 +192,14 @@ function AS:StartSkinning(event)
 
 	AS:UpdateMedia()
 
-	if IsAddOnLoaded('ElvUI') then
+	if AS:CheckAddOn('ElvUI') then
 		ES = ElvUI[1]:GetModule('EnhancedShadows', true)
 	end
 
 	AS.Mult = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/UIParent:GetScale()
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 
-	if not IsAddOnLoaded('ElvUI') then
+	if not AS:CheckAddOn('ElvUI') then
 		for skin, alldata in pairs(AS.register) do
 			if AS:CheckOption(skin) == nil then
 				AS:EnableOption(skin)
