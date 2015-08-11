@@ -447,7 +447,7 @@ if AS:CheckAddOn('Details') then
 					window:SetSize(width-3, height - 20)
 				else
 					if NumberToEmbed == 1 then
-						window:SetSize(width-6, height - 20)
+						window:SetSize(width-2, height - 20)
 					else
 						window:SetSize(width-2, height - 20)
 					end
