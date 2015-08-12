@@ -1,6 +1,6 @@
 ## Interface: 60200
 ## Title: |cff1784d1AddOnSkins|r
-## Version: 3.22
+## Version: 3.23
 ## Author: Azilroka, Sortokk
 ## SavedVariablesPerCharacter: AddOnSkinsOptions
 ## OptionalDep: ElvUI, BuyEmAll, DSM, Tukui, HydraUI
