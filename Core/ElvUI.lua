@@ -131,8 +131,10 @@ function AS:EmbedSystemHooks()
 		if btn == 'RightButton' then
 			if AS:CheckOption('EmbedRightChat') then
 				if EmbedSystem_MainWindow:IsShown() then
+					AS:SetOption('EmbedIsHidden', true)
 					EmbedSystem_MainWindow:Hide()
 				else
+					AS:SetOption('EmbedIsHidden', false)
 					EmbedSystem_MainWindow:Show()
 				end
 			end
@@ -165,8 +167,10 @@ function AS:EmbedSystemHooks()
 		if btn == 'RightButton' then
 			if not AS:CheckOption('EmbedRightChat') then
 				if EmbedSystem_MainWindow:IsShown() then
+					AS:SetOption('EmbedIsHidden', true)
 					EmbedSystem_MainWindow:Hide()
 				else
+					AS:SetOption('EmbedIsHidden', false)
 					EmbedSystem_MainWindow:Show()
 				end
 			end

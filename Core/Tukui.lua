@@ -39,7 +39,9 @@ function AS:EmbedSystemHooks()
 		if button == 'RightButton' then
 			if EmbedSystem_MainWindow:IsShown() then
 				EmbedSystem_MainWindow:Hide()
+				AS:SetOption('EmbedIsHidden', true)
 			else
+				AS:SetOption('EmbedIsHidden', false)
 				EmbedSystem_MainWindow:Show()
 			end
 		end

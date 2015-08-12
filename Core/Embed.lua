@@ -74,7 +74,6 @@ function AS:Embed_Show()
 		if _G[EmbedSystem_LeftWindow.FrameName] then _G[EmbedSystem_LeftWindow.FrameName]:Show() end
 		if _G[EmbedSystem_RightWindow.FrameName] then _G[EmbedSystem_RightWindow.FrameName]:Show() end
 	end
-	AS:SetOption('EmbedIsHidden', false)
 	AS:ToggleChatFrame(true)
 end
 
@@ -89,7 +88,6 @@ function AS:Embed_Hide()
 		if _G[EmbedSystem_LeftWindow.FrameName] then _G[EmbedSystem_LeftWindow.FrameName]:Hide() end
 		if _G[EmbedSystem_RightWindow.FrameName] then _G[EmbedSystem_RightWindow.FrameName]:Hide() end
 	end
-	AS:SetOption('EmbedIsHidden', true)
 	AS:ToggleChatFrame(false)
 end
 
