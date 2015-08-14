@@ -18,6 +18,7 @@ function AS:PetTracker()
 	AS:StripTextures(PetTrackerMapFilter, true)
 	AS:SkinEditBox(PetTrackerMapFilter)
 	AS:SkinTooltip(PetTrackerMapFilterSuggestions)
+
 	for i = 1, PetTrackerMapFilterSuggestions:GetNumChildren() do
 		local Button = select(i, PetTrackerMapFilterSuggestions:GetChildren())
 		Button:SetFrameLevel(PetTrackerMapFilterSuggestions:GetFrameLevel() + 1)
@@ -172,13 +173,15 @@ function AS:PetTracker()
 		end
 	end
 
-	for i = 1, 6 do
-        local button = _G["PetTrackerAbilityAction"..i]
-        if button then
-            AS:SkinIconButton(button)
-			AS:SkinTexture(button.Icon)
-        end
-    end
+	AS:Delay(5, function()
+		for i = 1, 6 do
+    	    local button = _G["PetTrackerAbilityAction"..i]
+        	if button then
+            	AS:SkinIconButton(button)
+				AS:SkinTexture(button.Icon)
+        	end
+    	end
+    end);
 end
 
 AS:RegisterSkin('PetTracker', AS.PetTracker)
