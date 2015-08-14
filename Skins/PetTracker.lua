@@ -175,13 +175,13 @@ function AS:PetTracker()
 
 	AS:Delay(5, function()
 		for i = 1, 6 do
-    	    local button = _G["PetTrackerAbilityAction"..i]
-        	if button then
-            	AS:SkinIconButton(button)
+			local button = _G["PetTrackerAbilityAction"..i]
+			if button then
+				AS:SkinIconButton(button)
 				AS:SkinTexture(button.Icon)
-        	end
-    	end
-    end);
+			end
+		end
+	end);
 end
 
 AS:RegisterSkin('PetTracker', AS.PetTracker)
