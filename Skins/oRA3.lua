@@ -84,7 +84,7 @@ function AS:oRA3(event, addon)
 			oRA3TankTopScrollFrame.IsSkinned = true
 		end
 
-		if module == "readycheck" and not oRA3ReadyCheck.IsSkinned then
+		if module == "readycheck" and oRA3ReadyCheck and not oRA3ReadyCheck.IsSkinned then
 			AS:StripTextures(oRA3ReadyCheck, true)
 			AS:CreateBackdrop(oRA3ReadyCheck, 'Transparent')
 			for i,child in ipairs({oRA3ReadyCheck:GetChildren()}) do
