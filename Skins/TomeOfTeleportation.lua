@@ -3,29 +3,36 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('TomeOfTeleportation') then return end
 
 function AS:TomeOfTeleportation()
-	local function SkinFrame()
-		AS:SkinFrame(TeleporterFrame)
-		for i = 0, 15 do
-			if _G['TeleporterFrameTeleporterB'..i] then
-				AS:SkinButton(_G['TeleporterFrameTeleporterB'..i])
-			end
-		end
-		AS:SkinButton(TeleporterCloseButton)
-		for i = 1, TeleporterFrame:GetNumChildren() do
-			local Region = select(i, TeleporterFrame:GetChildren())
-			if Region and Region:IsObjectType('Frame') and not Region.IsSkinned then
-				AS:SkinFrame(Region)
-				Region:SetSize(TeleporterFrame:GetWidth(), 18)
-				Region:ClearAllPoints()
-				Region:SetPoint('CENTER', TeleporterFrame, 'TOP', 0, -2)
-				Region:SetFrameLevel(TeleporterFrame:GetFrameLevel() + 1)
-				Region.IsSkinned = true
-			end
+	local R, G, B = unpack(AS.BackdropColor)
+	local Alpha = (AS:CheckOption('SkinTemplate') == "Transparent" and .8 or 1)
+
+	if IsAddOnLoaded('ElvUI') then
+		if AS:CheckOption('SkinTemplate') == "Transparent" then
+			R, G, B, Alpha = unpack(ElvUI[1]["media"].backdropfadecolor)
+		else
+			R, G, B = unpack(ElvUI[1]["media"].backdropcolor)
 		end
 	end
-	hooksecurefunc(_G, "TeleporterOpenFrame", SkinFrame)
 
-	TeleporterTooltip:HookScript('OnShow', function(self) self:SetTemplate('Transparent') end)
+	local Backdrop = { bgFile = AS.Blank, tile = false, tileSize = 0, insets = {left = 4, right = 4, top = 4, bottom = 4} }
+
+	local function SkinFrame()
+		if not TeleporterFrame.IsSkinned then
+			TeleporterFrame:SetBackdrop(Backdrop)
+			TeleporterFrame:SetBackdropColor(R, G, B, Alpha)
+		end
+		local index = 0
+		while _G['TeleporterFrameTeleporterB'..index] do
+			_G['TeleporterFrameTeleporterB'..index]:SetBackdrop(Backdrop)
+			_G['TeleporterFrameTeleporterB'..index]:SetBackdropColor(R, G, B, Alpha)
+			index = index + 1
+		end
+		AS:StripTextures(TeleporterCloseButton, true)
+
+		AS:StripTextures(TeleporterTitleFrame)
+		TeleporterTitleFrame:SetPoint("TOP", "$parent", "TOP", 0, 0)
+	end
+	hooksecurefunc(_G, "TeleporterOpenFrame", SkinFrame)
 end
 
 AS:RegisterSkin('TomeOfTeleportation', AS.TomeOfTeleportation)
