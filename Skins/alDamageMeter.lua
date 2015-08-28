@@ -12,4 +12,4 @@ function AS:alDamageMeter()
 	end)
 end
 
-AS:RegisterSkin(alDamageMeter, AS.ALDamageMeter)
+AS:RegisterSkin('alDamageMeter', AS.ALDamageMeter)
