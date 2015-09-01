@@ -464,7 +464,6 @@ function AS:Blizzard_Options(event, addon)
 		end)
 
 		AS:SkinFrame(HelpFrame, nil, nil, true)
-		AS:SkinScrollBar(HelpFrameTicketScrollFrameScrollBar)
 		AS:SkinCloseButton(HelpFrameCloseButton)
 		AS:SkinCloseButton(HelpFrameKnowledgebaseErrorFrameCloseButton)
 
