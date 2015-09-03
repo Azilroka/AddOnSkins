@@ -29,7 +29,7 @@ function AS:Blizzard_LootFrames()
 		AS:SkinTexture(Frame.IconFrame.Icon)
 		Frame.IconFrame.Icon:SetInside()
 		Frame.IconFrame.Border:SetAlpha(0)
-		Frame.IconFrame:SetTemplate()
+		AS:SetTemplate(Frame.IconFrame)
 
 		for _, Button in pairs({'NeedButton', 'GreedButton', 'PassButton', 'DisenchantButton'}) do
 			Frame[Button]:ClearAllPoints()

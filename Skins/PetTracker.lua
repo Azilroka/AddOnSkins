@@ -59,7 +59,7 @@ function AS:PetTracker()
 			end
 			for i = 1, 6 do
 				if not _G['PetTrackerBattleSlot'..i].IsSkinned then
-					_G['PetTrackerBattleSlot'..i]:SetTemplate('Transparent')
+					AS:SetTemplate(_G['PetTrackerBattleSlot'..i], 'Transparent')
 					_G['PetTrackerBattleSlot'..i].Bg:Hide()
 					AS:SkinTexture(_G['PetTrackerBattleSlot'..i].Icon)
 					_G['PetTrackerBattleSlot'..i].IconBorder:Hide()
@@ -121,7 +121,7 @@ function AS:PetTracker()
 				end
 				self.IsSkinned = true
 				for i = 1, 3 do
-					_G['PetTrackerJournalSlot'..i]:SetTemplate('Transparent')
+					AS:SetTemplate(_G['PetTrackerJournalSlot'..i], 'Transparent')
 					_G['PetTrackerJournalSlot'..i].Bg:Hide()
 					_G['PetTrackerJournalSlot'..i].Quality:Hide()
 					_G['PetTrackerJournalSlot'..i].Hover:Kill()

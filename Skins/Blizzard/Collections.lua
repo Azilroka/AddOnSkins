@@ -4,7 +4,7 @@ function AS:Blizzard_Collections(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		AS:StripTextures(PetStableFrame)
 		AS:SkinFrame(PetStableFrame)
-		PetStableFrame:CreateShadow()
+		AS:CreateShadow(PetStableFrame)
 		AS:StripTextures(PetStableFrameInset)
 		AS:StripTextures(PetStableLeftInset)
 		AS:StripTextures(PetStableBottomInset)
