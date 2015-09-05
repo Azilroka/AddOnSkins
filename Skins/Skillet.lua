@@ -86,8 +86,11 @@ function AS:Skillet()
 	end
 
 	local function SkinPluginButtons(self)
-		AS:SkinButton(_G['SkilletPluginDropdown1'])
-		AS:SkinButton(_G['SkilletPluginDropdown2'])
+		local index = 1
+		while _G['SkilletPluginDropdown'..index] do
+			AS:SkinButton(_G['SkilletPluginDropdown'..index])
+			index = index + 1
+		end
 	end	
 
 	local function SkilletFrameOnShow(self)
