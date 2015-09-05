@@ -6,10 +6,10 @@ function AS:VanasKoS()
 	AS:SetTemplate(VanasKoS_WarnFrame, 'Transparent')
 	VanasKoS_WarnFrame.SetBackdropBorderColor = AS.Noop
 
-	VanasKoS_FontKos:SetFont(AS.PixelFont, 8, "MONOCHROMEOUTLINE")
-	VanasKoS_FontEnemy:SetFont(AS.PixelFont, 8, "MONOCHROMEOUTLINE")
-	VanasKoS_FontFriendly:SetFont(AS.PixelFont, 8, "MONOCHROMEOUTLINE")
-	VanasKoS_FontNormal:SetFont(AS.PixelFont, 8, "MONOCHROMEOUTLINE")
+	VanasKoS_FontKos:SetFont(AS.PixelFont, 10, "MONOCHROMEOUTLINE")
+	VanasKoS_FontEnemy:SetFont(AS.PixelFont, 10, "MONOCHROMEOUTLINE")
+	VanasKoS_FontFriendly:SetFont(AS.PixelFont, 10, "MONOCHROMEOUTLINE")
+	VanasKoS_FontNormal:SetFont(AS.PixelFont, 10, "MONOCHROMEOUTLINE")
 
 	AS:SkinBackdropFrame(VanasKoSFrame, nil, nil, true)
 	VanasKoSFrame.Backdrop:SetPoint("TOPLEFT", 16, -12)
