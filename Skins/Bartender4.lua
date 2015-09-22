@@ -62,7 +62,6 @@ function AS:Bartender4()
 
 		AS:SkinTexture(Icon)
 		Icon:SetInside()
-		Icon:SetDrawLayer('BACKGROUND', 7)
 
 		if (Normal) then
 			Normal:ClearAllPoints()
