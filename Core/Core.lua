@@ -1,6 +1,7 @@
 local AS = unpack(AddOnSkins)
 local AddOnName = ...
 local ES
+local FoundError
 
 AS:UpdateLocale()
 
