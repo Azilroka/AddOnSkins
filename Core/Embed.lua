@@ -385,7 +385,7 @@ if AS:CheckAddOn('Details') then
 		Details:SetTooltipBackdrop("Blizzard Tooltip", 16, {1, 1, 1, 0})
 
 		--> enable bar animations and make the update speed faster
-		Details:SetUseAnimations (true)
+		--Details:SetUseAnimations (true)
 
 		local function EmbedWindow (window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 			if not window then return end
@@ -442,12 +442,12 @@ if AS:CheckAddOn('Details') then
 			
 			elseif (window.skin == "ElvUI Style II") then
 				if (window:GetId() == 2) then
-					window:SetSize(width-3, height - 20)
+					window:SetSize(width, height - 20)
 				else
 					if NumberToEmbed == 1 then
 						window:SetSize(width-2, height - 20)
 					else
-						window:SetSize(width-2, height - 20)
+						window:SetSize(width-1, height - 20)
 					end
 				end
 			else
