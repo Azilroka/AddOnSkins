@@ -232,6 +232,19 @@ function AS:StartSkinning(event)
 	AS:UnregisterEvent(event)
 end
 
+function AS:UpdateMedia()
+	local LSM = AS.LSM
+	AS.Blank = LSM:Fetch('background', "Solid")
+	AS.Font = LSM:Fetch('font', "Arial Narrow")
+	AS.ActionBarFont = LSM:Fetch('font', "Arial Narrow")
+	AS.PixelFont = LSM:Fetch('font', "Arial Narrow")
+	AS.NormTex = LSM:Fetch('statusbar', "Blizzard Character Skills Bar")
+	AS.BackdropColor = { 1, 1, 1 }
+	AS.BorderColor = { 1, 1, 1 }
+	AS.PixelPerfect = false
+	AS.HideShadows = false
+end
+
 function AS:Init(event, addon)
 	if event == 'ADDON_LOADED' and addon == AddOnName then
 		AS:UpdateMedia()
