@@ -10,7 +10,7 @@ function AS:PetTracker()
 			AS:CreateBackdrop(PetTrackerProgressBar1.Overlay)
 			PetTrackerProgressBar1.Overlay.Backdrop:SetBackdropColor(0,0,0,0)
 			for i = 1, PetTracker.MaxQuality do
-				PetTrackerProgressBar1[i]:SetStatusBarTexture(AS.NormTex)
+				PetTrackerProgressBar1.Bars[i]:SetStatusBarTexture(AS.NormTex)
 			end
 		end)
 	end
