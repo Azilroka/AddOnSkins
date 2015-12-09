@@ -210,7 +210,11 @@ if AS:CheckAddOn('Omen') then
 		Omen.BarList.SetBackdropColor = nil
 		Omen.BarList.SetBackdropBorderColor = nil
 
-		AS:SkinFrame(Omen.BarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+		if AS:CheckOption('OmenBackdrop') then
+			AS:SkinFrame(Omen.BarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+		else
+			AS:StripTextures(Omen.BarList)
+		end
 
 		Omen.BarList.SetBackdrop = AS.Noop
 		Omen.BarList.SetBackdropColor = AS.Noop
@@ -243,9 +247,7 @@ if AS:CheckAddOn('TinyDPS') then
 		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'TinyDPS' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
 		EmbedParent.FrameName = "tdpsFrame"
 
-		if AS:CheckOption('TinyDPS') then
-			AS:SkinFrame(tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-		end
+		AS:SkinFrame(tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 
 		tdpsFrame:SetParent(EmbedParent)
 		tdpsFrame:SetFrameStrata('LOW')

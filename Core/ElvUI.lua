@@ -10,7 +10,7 @@ function AS:CheckOption(optionName, ...)
 		if not addon then break end
 		if not IsAddOnLoaded(addon) then return false end
 	end
-	
+
 	return E.private.addonskins[optionName]
 end
 
