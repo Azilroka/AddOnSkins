@@ -122,6 +122,7 @@
 	<Script file="RCLootCouncil.lua"/>
 	<Script file="ReagentMaker.lua"/>
 	<Script file="Recount.lua"/>
+	<Script file="ServerHop.lua"/>
 	<Script file="Scrap.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
 	<Script file="ShieldBars.lua"/>
