@@ -177,7 +177,6 @@ function AS:Blizzard_Options(event, addon)
 			InterfaceOptionsSocialPanelTimestamps,
 			InterfaceOptionsSocialPanelWhisperMode,
 			InterfaceOptionsSocialPanelBnWhisperMode,
-			InterfaceOptionsSocialPanelConversationMode,
 			Advanced_MultisampleAlphaTest,
 		}
 
@@ -379,17 +378,6 @@ function AS:Blizzard_Options(event, addon)
 		AS:SkinEditBox(CombatConfigSettingsNameEditBox)
 
 		AS:SkinScrollBar(ChannelRosterScrollFrameScrollBar)
-		
-		AS:SkinFrame(BNConversationInviteDialog)
-		AS:SkinButton(BNConversationInviteDialogInviteButton)
-		AS:SkinButton(BNConversationInviteDialogCancelButton)
-		AS:StripTextures(BNConversationInviteDialogList)
-		AS:SkinScrollBar(BNConversationInviteDialogListScrollFrameScrollBar)
-		AS:SkinButton(BNConversationInviteDialogInviteButton)
-
-		for i = 1, 7 do
-			AS:SkinCheckBox(_G["BNConversationInviteDialogListFriend"..i].checkButton)
-		end
 		
 		-- Channel Pullout
 		ChannelPulloutBackground:Hide()

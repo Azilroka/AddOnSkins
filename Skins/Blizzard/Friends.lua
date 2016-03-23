@@ -56,7 +56,6 @@ function AS:Blizzard_Friends()
 
 	AS:SkinFrame(FriendsFriendsFrame, nil, nil, true)
 	AS:SkinFrame(FriendsFriendsList)
-	AS:SkinFrame(FriendsFriendsNoteFrame)
 	AS:SkinDropDownBox(FriendsFriendsFrameDropDown, 150)
 	AS:SkinScrollBar(FriendsFriendsScrollFrameScrollBar)
 	AS:SkinButton(FriendsFriendsSendRequestButton)
