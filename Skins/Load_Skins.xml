@@ -82,6 +82,7 @@
 	<Script file="MageNuggets.lua"/>
 	<Script file="MinimalArchaeology.lua"/>
 	<Script file="MasterLootManagerRemix.lua"/>
+	<Script file="MasterPlan.lua"/>
 	<Script file="MiscFixes.lua"/>
 	<Script file="MogIt.lua"/>
 	<Script file="MoveAnything.lua"/>

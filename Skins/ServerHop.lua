@@ -85,14 +85,14 @@ function AS:ServerHop()
 
 	local SearchBoxResults = {ServerHop_SearchBox:GetChildren()}
 	for i=2, #SearchBoxResults do
-	   if SearchBoxResults[i]:GetObjectType() == "Button" then
-	      local regions = {SearchBoxResults[i]:GetRegions()}
-	      SearchBoxResults[i]:DisableDrawLayer("background")
-	      SearchBoxResults[i]:SetWidth(HOPADDON_WIDTH+2)
-	      AS:SkinBackdropFrame(SearchBoxResults[i])
-	      SearchBoxResults[i].Backdrop:SetInside()
-	      SearchBoxResults[i]:SetHeight(25)
-	      AS:StyleButton(SearchBoxResults[i])
+		if SearchBoxResults[i]:IsObjectType("Button") then
+			local regions = {SearchBoxResults[i]:GetRegions()}
+			SearchBoxResults[i]:DisableDrawLayer("background")
+			SearchBoxResults[i]:SetWidth(HOPADDON_WIDTH+2)
+			AS:SkinBackdropFrame(SearchBoxResults[i])
+			SearchBoxResults[i].Backdrop:SetInside()
+			SearchBoxResults[i]:SetHeight(25)
+			AS:StyleButton(SearchBoxResults[i])
 	   end
 	end
 	SearchBoxResults[2]:SetPoint("TOPLEFT", hopAddon.searchFrame.searchBox, "BOTTOMLEFT",-2,-2)
@@ -137,11 +137,12 @@ function AS:ServerHop()
 	AS:SkinSlideBar(hopAddon_sliderBL,16)
 
 	AS:SkinButton(hopOptions.hopSearchOptionsFrame.buttonClearBL, true)
+
 	local HopEditBox = {hopOptions.hopSearchOptionsFrame:GetChildren()}
-	for i=1, #HopEditBox do
-	   if HopEditBox[i]:GetObjectType() == "EditBox" then
-	      AS:SkinEditBox(HopEditBox[i])
-	   end
+	for i = 1, #HopEditBox do
+		if HopEditBox[i]:IsObjectType("EditBox") then
+			AS:SkinEditBox(HopEditBox[i])
+		end
 	end
 
 	AS:StripTextures(hopOptions.tabList.buttonGlobal)
@@ -162,15 +163,14 @@ function AS:ServerHop()
 
 	-- LFGButton
 	local LFGHopeButton = {LFGListFrame:GetChildren()}
-	for i=1, #LFGHopeButton do
-	   if LFGHopeButton[i]:GetObjectType() == "Button" and LFGHopeButton[i]:GetText() == " ServerHop" then
-	      AS:SkinButton(LFGHopeButton[i])
-	      LFGHopeButton[i]:SetText("ServerHop")
-	      LFGHopeButton[i]:SetPoint("BOTTOM",LFGListFrame,"BOTTOM",-3,4)
-	      LFGHopeButton[i]:SetSize(66,22)
-	   end
+	for i = 1, #LFGHopeButton do
+		if LFGHopeButton[i]:IsObjectType("Button") and LFGHopeButton[i]:GetText() == " ServerHop" then
+			AS:SkinButton(LFGHopeButton[i])
+			LFGHopeButton[i]:SetText("ServerHop")
+			LFGHopeButton[i]:SetPoint("BOTTOM",LFGListFrame,"BOTTOM",-3,4)
+			LFGHopeButton[i]:SetSize(66,22)
+		end
 	end
-
 end
 
 AS:RegisterSkin('ServerHop', AS.ServerHop)
