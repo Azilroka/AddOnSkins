@@ -39,6 +39,11 @@ function AS:EmbedInit()
 
 			AS.EmbedSystemCreated = true
 
+			if (AS:CheckOption('EmbedSystem') and AS:CheckOption('EmbedSystemDual')) then
+				AS:DisableOption('EmbedSystem')
+				AS:DisableOption('EmbedSystemDual')
+			end
+
 			AS:EmbedSystemHooks()
 			AS:EmbedSystem_WindowResize()
 			AS:Delay(1, function() AS:Embed_Check(true) end)

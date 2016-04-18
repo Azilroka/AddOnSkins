@@ -13,9 +13,12 @@ function AS:MasterPlan(event, addon)
 		AS:SkinButton(MPLootSummaryDone)
 
 		local kids = {MasterPlanMissionList:GetChildren()}
-		for i=1, #kids do
+		for i = 1, #kids do
 			if kids[i].lootFrame then
 				AS:SkinFrame(kids[i].lootFrame)
+				AS:SkinCloseButton(kids[i].lootFrame.Dismiss2)
+				kids[i].lootFrame.Dismiss2:Point("TOPRIGHT", kids[i].lootFrame, "TOPRIGHT", -3, -3)
+				break
 			end
 		end
 
