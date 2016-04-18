@@ -90,7 +90,7 @@ function AS:Blizzard_Guild(event, addon)
 	end
 	if (addon == "Blizzard_GuildUI" or IsAddOnLoaded("Blizzard_GuildUI")) and not GuildFrame.isSkinned then
 		AS:SkinFrame(GuildFrame, nil, nil, true)
-		GuildFrame:CreateShadow('Default')
+		AS:CreateShadow(GuildFrame)
 
 		AS:SkinCloseButton(GuildMemberDetailCloseButton)
 		AS:SkinCloseButton(GuildFrameCloseButton)
@@ -272,7 +272,7 @@ function AS:Blizzard_Guild(event, addon)
 	if (addon == 'Blizzard_GuildControlUI' or IsAddOnLoaded('Blizzard_GuildControlUI')) and not GuildControlUI.isSkinned then
 		AS:SkinFrame(GuildControlUI)
 		AS:StripTextures(GuildControlUIHbar)
-		GuildControlUI:CreateShadow('Default')
+		AS:CreateShadow(GuildControlUI)
 
 		local function SkinGuildRanks()
 			for i=1, GuildControlGetNumRanks() do
