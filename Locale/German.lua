@@ -73,4 +73,5 @@ function AS:UpdateLocale_deDE()
 	ASL["Embed into Right Chat Panel"] = "Einbettung in das rechte Chatfenster"
 	ASL["Parchment"] = "Pergament"
 	ASL["Enable Skin Debugging"] = "Aktiviere Skin Fehlerbehebung"
+	ASL["Enable the Login Message"] = "Aktiviere die Login Nachricht"
 end
