@@ -32,6 +32,7 @@ local Defaults = {
 	['SkinTemplate'] = 'Transparent',
 	['HideChatFrame'] = 'NONE',
 	['SkinDebug'] = false,
+	['LoginMsg'] = true,
 }
 
 AddOnSkinsOptions = CopyTable(Defaults)
