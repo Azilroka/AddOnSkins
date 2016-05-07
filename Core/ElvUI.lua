@@ -80,6 +80,7 @@ function AS:InjectProfile()
 		['HideChatFrame'] = 'NONE',
 		['SkinDebug'] = false,
 		['Parchment'] = true,
+		['LoginMsg'] = true,
 	}
 
 	do

@@ -331,6 +331,11 @@ function AS:GetOptions()
 						name = ASL["Enable Skin Debugging"],
 						order = 3,
 					},
+					LoginMsg = {
+						type = "toggle",
+						name = ASL["Enable the Login Message"],
+						order = 4,
+					},
 				},
 			},
 			faq = {

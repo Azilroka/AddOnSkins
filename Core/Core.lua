@@ -228,7 +228,9 @@ function AS:StartSkinning(event)
 	
 	AS:EmbedInit()
 
-	AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
+	if AS:CheckOption('LoginMsg') then 
+		AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
+	end
 	AS:UnregisterEvent(event)
 end
 
