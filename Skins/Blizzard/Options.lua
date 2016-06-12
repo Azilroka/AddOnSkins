@@ -163,12 +163,16 @@ function AS:Blizzard_Options(event, addon)
 
 		Graphics_Quality:HookScript('OnUpdate', function()
 			AS:StripTextures(Graphics_Quality, true)
-			AS:StripTextures(Graphics_RightQuality, true)
+			if Graphics_RightQuality then
+				AS:StripTextures(Graphics_RightQuality, true)
+			end
 		end)
 
 		RaidGraphics_Quality:HookScript('OnUpdate', function()
 			AS:StripTextures(RaidGraphics_Quality, true)
-			AS:StripTextures(RaidGraphics_RightQuality, true)
+			if RaidGraphics_RightQuality then
+				AS:StripTextures(RaidGraphics_RightQuality, true)
+			end
 		end)
 
 		local InterfaceOptionsDropDowns = {

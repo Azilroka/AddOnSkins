@@ -474,7 +474,8 @@ function AS:SkinScrollBar(Frame)
 				Frame.ThumbBG = CreateFrame("Frame", nil, Frame)
 				Frame.ThumbBG:Point("TOPLEFT", Frame:GetThumbTexture(), "TOPLEFT", 2, -3)
 				Frame.ThumbBG:Point("BOTTOMRIGHT", Frame:GetThumbTexture(), "BOTTOMRIGHT", -2, 3)
-				AS:SetTemplate(Frame.ThumbBG, "Default", true)
+				AS:SetTemplate(Frame.ThumbBG, "Default")
+				Frame.ThumbBG:SetBackdropColor(unpack(AS.BorderColor))
 
 				if Frame.ThumbBG then
 					Frame.ThumbBG:SetFrameLevel(Frame.TrackBG:GetFrameLevel())

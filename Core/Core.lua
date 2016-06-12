@@ -197,7 +197,7 @@ function AS:StartSkinning(event)
 		ES = ElvUI[1]:GetModule('EnhancedShadows', true)
 	end
 
-	AS.Mult = 768/string.match(GetCVar("gxResolution"), "%d+x(%d+)")/UIParent:GetScale()
+	AS.Mult = 768/AS.ScreenHeight/UIParent:GetScale()
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 
 	if not AS:CheckAddOn('ElvUI') then
