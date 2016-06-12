@@ -19,11 +19,10 @@ AddOn.Noop = function() end
 AddOn.TexCoords = {.08, .92, .08, .92}
 AddOn.UIScale = UIParent:GetScale()
 
-
-if ToCVersion > 60000 then
-	AddOn.Resolution = GetCVar("gxResolution")
-else
+if ToCVersion >= 70000 then
 	AddOn.Resolution = GetCVar("gxWindowedResolution")
+else
+	AddOn.Resolution = GetCVar("gxResolution")
 end
 
 AddOn.ScreenHeight = tonumber(strmatch(AddOn.Resolution, "%d+x(%d+)"))
