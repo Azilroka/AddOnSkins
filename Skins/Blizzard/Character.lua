@@ -48,9 +48,11 @@ function AS:Blizzard_CharacterFrame()
 	AS:StripTextures(CharacterFrameInsetRight)
 	AS:StripTextures(CharacterStatsPane)
 
-	CharacterFrameExpandButton:Size(CharacterFrameExpandButton:GetWidth() - 5, CharacterFrameExpandButton:GetHeight() - 5)
-	AS:SkinNextPrevButton(CharacterFrameExpandButton)
-	CharacterFrameExpandButton:SetPoint('BOTTOMRIGHT', CharacterFrameInset, 'BOTTOMRIGHT', -4, 4)
+	if CharacterFrameExpandButton then
+		CharacterFrameExpandButton:Size(CharacterFrameExpandButton:GetWidth() - 5, CharacterFrameExpandButton:GetHeight() - 5)
+		AS:SkinNextPrevButton(CharacterFrameExpandButton)
+		CharacterFrameExpandButton:SetPoint('BOTTOMRIGHT', CharacterFrameInset, 'BOTTOMRIGHT', -4, 4)
+	end
 
 	EquipmentFlyoutFrameHighlight:Kill()
 
@@ -149,7 +151,7 @@ function AS:Blizzard_CharacterFrame()
 		Button.icon:SetInside()
 	end
 
-	for i = 1, 4 do
+	for i = 1, 2 do
 		AS:SkinTab(_G["CharacterFrameTab"..i])
 	end
 
@@ -175,15 +177,7 @@ function AS:Blizzard_CharacterFrame()
 		end
 	end
 
-	for i = 1, 7 do
-		local Frame = _G["CharacterStatsPaneCategory"..i]
-		Frame.BgTop:SetTexture(nil)
-		Frame.BgBottom:SetTexture(nil)
-		Frame.BgMiddle:SetTexture(nil)
-		Frame.BgMinimized:SetTexture(nil)
-		AS:SkinFrame(Frame, nil, true)
-	end
-
+--[[
 	-- Pet
 	AS:CreateBackdrop(PetModelFrame, 'Default')
 	AS:SkinNextPrevButton(PetModelFrameRotateRightButton)
@@ -194,6 +188,7 @@ function AS:Blizzard_CharacterFrame()
 	AS:CreateBackdrop(PetPaperDollPetInfo, 'Default')
 	PetPaperDollPetInfo:Size(24, 24)
 	PetPaperDollPetInfo:GetRegions():SetTexCoord(.12, .63, .15, .55)
+]]
 
 	-- Reputation
 	for i = 1, 15 do
