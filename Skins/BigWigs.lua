@@ -155,6 +155,10 @@ function AS:BigWigs(event, addon)
 			bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
 			bar.candyBarIconFrame.SetWidth = AS.Noop
 
+			bar.candyBarLabel:ClearAllPoints();
+			bar.candyBarLabel:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", 0, 0);
+			bar.candyBarLabel.SetPoint = AS.Noop
+
 			AS:SkinTexture(bar.candyBarIconFrame)
 		end
 
