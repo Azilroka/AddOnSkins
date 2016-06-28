@@ -24,6 +24,17 @@ function AS:MyRolePlayElvUI()
 		if not msp.char[player].supported then return end
 		if not player and unit then return end
 		self:_UpdateTooltip(player, unit);
+			
+		if (AS:CheckAddOn("ElvUI_SLE") and ElvUI[1].db.sle.tooltip.showFaction) then
+			if (UnitIsPlayer(unit)) then
+				local text = GameTooltipTextLeft1:GetText()
+				local faction = UnitFactionGroup(unit)
+
+				if not faction then faction = "Neutral" end
+
+				GameTooltipTextLeft1:SetText("|T"..[[Interface\AddOns\ElvUI_SLE\media\textures\]]..faction..".blp:15:15:0:0:64:64:2:56:2:56|t "..text)
+			end
+		end
 	end
 
 	hooksecurefunc(TT, "GameTooltip_OnTooltipSetUnit", function()
@@ -34,7 +45,7 @@ function AS:MyRolePlayElvUI()
 			local unit = "mouseover";
 			mrp:UpdateTooltip( player, unit );
 		end
-	end)
+	end);
 
 	GameTooltipTextLeft1._SetTextColor = GameTooltipTextLeft1.SetTextColor;
 	GameTooltipTextLeft1.SetTextColor = function(self, r, g, b, a)

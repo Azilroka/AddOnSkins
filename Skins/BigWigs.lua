@@ -157,6 +157,7 @@ function AS:BigWigs(event, addon)
 
 			bar.candyBarLabel:ClearAllPoints();
 			bar.candyBarLabel:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", 0, 0);
+			bar.candyBarLabel.ClearAllPoints = AS.Noop;
 			bar.candyBarLabel.SetPoint = AS.Noop
 
 			AS:SkinTexture(bar.candyBarIconFrame)
