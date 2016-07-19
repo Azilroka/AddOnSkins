@@ -37,13 +37,6 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinCloseButton(GuildRegistrarFrameCloseButton)
 		AS:SkinEditBox(GuildRegistrarFrameEditBox, nil, 20)
 
---[[		for i = 1, GuildRegistrarFrameEditBox:GetNumRegions() do
-			local region = select(i, GuildRegistrarFrameEditBox:GetRegions())
-			if region:IsObjectType("Texture") and strfind(region:GetTexture(), "Interface\\ChatFrame\\UI%-ChatInputBorder%-") then
-				region:Kill()
-			end
-		end
-]]
 		for i = 1, 2 do
 			_G["GuildRegistrarButton"..i]:GetFontString():SetTextColor(1, 1, 1)
 		end

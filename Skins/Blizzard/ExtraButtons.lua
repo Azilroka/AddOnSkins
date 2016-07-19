@@ -6,20 +6,20 @@ local function DisableTexture(self, texture)
 	end
 end
 
-function AS:Blizzard_DraenorAbilityButton()
-	DraenorZoneAbilityFrame.SpellButton:SetNormalTexture('')
-	AS:SetTemplate(DraenorZoneAbilityFrame.SpellButton)
-	AS:StyleButton(DraenorZoneAbilityFrame.SpellButton)
-	AS:SkinTexture(DraenorZoneAbilityFrame.SpellButton.Icon)
-	DraenorZoneAbilityFrame.SpellButton.Icon:SetDrawLayer('ARTWORK')
-	DraenorZoneAbilityFrame.SpellButton.Icon:SetInside()
-	DraenorZoneAbilityFrame.SpellButton.Cooldown:SetInside()
-	DraenorZoneAbilityFrame.SpellButton.Cooldown:SetSwipeColor(0, 0, 0, 1)
-	DraenorZoneAbilityFrame.SpellButton.Cooldown:SetDrawBling(false)
-	hooksecurefunc(DraenorZoneAbilityFrame.SpellButton.Style, 'SetTexture', DisableTexture)
+function AS:Blizzard_AbilityButton()
+	ZoneAbilityFrame.SpellButton:SetNormalTexture('')
+	AS:SetTemplate(ZoneAbilityFrame.SpellButton)
+	AS:StyleButton(ZoneAbilityFrame.SpellButton)
+	AS:SkinTexture(ZoneAbilityFrame.SpellButton.Icon)
+	ZoneAbilityFrame.SpellButton.Icon:SetDrawLayer('ARTWORK')
+	ZoneAbilityFrame.SpellButton.Icon:SetInside()
+	ZoneAbilityFrame.SpellButton.Cooldown:SetInside()
+	ZoneAbilityFrame.SpellButton.Cooldown:SetSwipeColor(0, 0, 0, 1)
+	ZoneAbilityFrame.SpellButton.Cooldown:SetDrawBling(false)
+	hooksecurefunc(ZoneAbilityFrame.SpellButton.Style, 'SetTexture', DisableTexture)
 end
 
-AS:RegisterSkin('Blizzard_DraenorAbilityButton', AS.Blizzard_DraenorAbilityButton)
+AS:RegisterSkin('Blizzard_AbilityButton', AS.Blizzard_AbilityButton)
 
 function AS:Blizzard_ExtraActionButton()
 	ExtraActionButton1:SetNormalTexture('')

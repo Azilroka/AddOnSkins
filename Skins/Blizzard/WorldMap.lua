@@ -13,13 +13,14 @@ function AS:Blizzard_WorldMap()
 	AS:SkinFrame(WorldMapFrame.BorderFrame.Inset)
 
 	AS:SkinScrollBar(QuestScrollFrameScrollBar)
-	AS:SkinButton(QuestScrollFrame.ViewAll)
+--	AS:SkinButton(QuestScrollFrame.ViewAll)
 
 	WorldMapFrameTutorialButton:Kill()
 
 	AS:SkinButton(QuestMapFrame.DetailsFrame.BackButton)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.AbandonButton)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.ShareButton, true)
+	AS:SkinButton(QuestMapFrame.DetailsFrame.TrackButton, true)
 	AS:SkinButton(WorldMapFrame.UIElementsFrame.TrackingOptionsButton)
 	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Background:SetAlpha(0)
 	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.IconOverlay:SetAlpha(0)
@@ -27,6 +28,9 @@ function AS:Blizzard_WorldMap()
 	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button.Shine:SetAlpha(0)
 	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button:SetHighlightTexture('')
 	AS:SkinFrame(QuestMapFrame.QuestsFrame.StoryTooltip)
+
+	AS:StripTextures(QuestMapFrame.DetailsFrame.CompleteQuestFrame)
+	AS:SkinButton(QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton, true)
 
 	AS:SkinCloseButton(WorldMapFrameCloseButton)
 	WorldMapFrameCloseButton:SetPoint('TOPRIGHT', WorldMapFrame, 'TOPRIGHT', -1, -3)
@@ -45,6 +49,8 @@ function AS:Blizzard_WorldMap()
 
 	QuestMapFrame.DetailsFrame:DisableDrawLayer('BORDER')
 
+	AS:SkinScrollBar(QuestMapDetailsScrollFrameScrollBar)
+
 	if not AS.ParchmentEnabled then
 		AS:StripTextures(QuestMapFrame.DetailsFrame)
 		AS:StripTextures(QuestMapFrame.DetailsFrame.RewardsFrame)
@@ -52,12 +58,14 @@ function AS:Blizzard_WorldMap()
 
 	local rewardFrames = {
 		['MoneyFrame'] = true,
+		['HonorFrame'] = true,
 		['XPFrame'] = true,
 		['SpellFrame'] = true,
 		['SkillPointFrame'] = true,
 	}
 
 	local function HandleReward(frame)
+		if not frame then return end
 		frame.NameFrame:SetAlpha(0)
 		frame.Icon:SetTexCoord(unpack(AS.TexCoords))
 		AS:CreateBackdrop(frame)

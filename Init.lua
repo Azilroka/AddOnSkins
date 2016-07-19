@@ -1,8 +1,6 @@
 local AddOnName, Engine = ...
 local AddOn = LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceConsole-3.0', 'AceEvent-3.0', 'AceTimer-3.0', 'AceHook-3.0')
 
-local ToCVersion = select(4, GetBuildInfo())
-
 Engine[1] = AddOn
 Engine[2] = {}	-- Media
 Engine[3] = {}	-- Locale
@@ -19,11 +17,7 @@ AddOn.Noop = function() end
 AddOn.TexCoords = {.08, .92, .08, .92}
 AddOn.UIScale = UIParent:GetScale()
 
-if ToCVersion >= 70000 then
-	AddOn.Resolution = GetCVar("gxWindowedResolution")
-else
-	AddOn.Resolution = GetCVar("gxResolution")
-end
+AddOn.Resolution = GetCVar("gxWindowedResolution")
 
 AddOn.ScreenHeight = tonumber(strmatch(AddOn.Resolution, "%d+x(%d+)"))
 AddOn.ScreenWidth = tonumber(strmatch(AddOn.Resolution, "(%d+)x+%d"))

@@ -150,51 +150,6 @@ function AS:Blizzard_Spellbook()
 
 	SpellBookFrameTabButton1:ClearAllPoints()
 	SpellBookFrameTabButton1:Point("TOPLEFT", SpellBookFrame, "BOTTOMLEFT", -5, 2)
-
-
-	if SpellBook_UpdateCoreAbilitiesTab then
-		hooksecurefunc("SpellBook_UpdateCoreAbilitiesTab", function()
-			for i = 1, #SpellBookCoreAbilitiesFrame.Abilities do
-				local button = SpellBookCoreAbilitiesFrame.Abilities[i]
-				if button and not button.isSkinned then
-					AS:SetTemplate(button)
-					button.EmptySlot:SetAlpha(0)
-					button.ActiveTexture:SetAlpha(0)
-					button.FutureTexture:SetAlpha(0)
-					AS:SkinTexture(button.iconTexture)
-					button.iconTexture:SetInside()
-					if button.FutureTexture:IsShown() then
-						button.iconTexture:SetDesaturated(true)
-						button.Name:SetTextColor(0.6, 0.6, 0.6)
-						button.InfoText:SetTextColor(0.6, 0.6, 0.6)
-						button.RequiredLevel:SetTextColor(0.6, 0.6, 0.6)
-					else
-						button.Name:SetTextColor(1, 0.82, 0)
-						button.InfoText:SetTextColor(0.8, 0.8, 0.8)
-						button.RequiredLevel:SetTextColor(0.8, 0.8, 0.8)
-					end
-					AS:StyleButton(button)
-					button.isSkinned = true
-				end
-			end
-			for i = 1, #SpellBookCoreAbilitiesFrame.SpecTabs do
-				local Tab = SpellBookCoreAbilitiesFrame.SpecTabs[i]
-				if Tab and not Tab.isSkinned then
-					AS:SkinFrame(Tab)
-					AS:StyleButton(Tab)
-					Tab:SetNormalTexture(select(4, GetSpecializationInfo(i)))
-					Tab:GetNormalTexture():SetInside()
-					AS:SkinTexture(Tab:GetNormalTexture())
-
-					if i == 1 then
-						Tab:SetPoint("TOPLEFT", SpellBookFrame, "TOPRIGHT", 1, 0)
-					end
-					
-					Tab.isSkinned = true
-				end
-			end
-		end)
-	end
 end
 
 AS:RegisterSkin('Blizzard_Spellbook', AS.Blizzard_Spellbook)

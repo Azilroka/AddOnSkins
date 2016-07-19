@@ -48,12 +48,6 @@ function AS:Blizzard_CharacterFrame()
 	AS:StripTextures(CharacterFrameInsetRight)
 	AS:StripTextures(CharacterStatsPane)
 
-	if CharacterFrameExpandButton then
-		CharacterFrameExpandButton:Size(CharacterFrameExpandButton:GetWidth() - 5, CharacterFrameExpandButton:GetHeight() - 5)
-		AS:SkinNextPrevButton(CharacterFrameExpandButton)
-		CharacterFrameExpandButton:SetPoint('BOTTOMRIGHT', CharacterFrameInset, 'BOTTOMRIGHT', -4, 4)
-	end
-
 	EquipmentFlyoutFrameHighlight:Kill()
 
 	local function SkinItemFlyouts()
@@ -151,7 +145,7 @@ function AS:Blizzard_CharacterFrame()
 		Button.icon:SetInside()
 	end
 
-	for i = 1, 2 do
+	for i = 1, 3 do
 		AS:SkinTab(_G["CharacterFrameTab"..i])
 	end
 

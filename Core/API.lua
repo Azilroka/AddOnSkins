@@ -158,6 +158,7 @@ local BlizzardRegions = {
 
 function AS:SkinButton(Button, Strip)
 	if Button.isSkinned then return end
+
 	local ButtonName = Button:GetName()
 
 	if ButtonName then
@@ -192,6 +193,26 @@ function AS:SkinButton(Button, Strip)
 	Button:HookScript("OnLeave", function(self)
 		self:SetBackdropBorderColor(unpack(AS.BorderColor))
 	end)
+
+	if Button.Flash then
+		Button.Flash:SetTexture(0, 0, 0, 0)
+	--[[
+		AS:CreateBackdrop(Button)
+		Button.Backdrop:SetAllPoints()
+		Button.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
+		Button.Backdrop:SetBackdropColor(0, 0, 0, 0)
+		Button.Backdrop:SetFrameStrata(Button:GetFrameStrata())
+		Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 4)
+
+		Button.Backdrop:SetScript('OnUpdate', function(self)
+			if Button.Flash:IsShown() then
+				self:SetAlpha(Button.Flash:GetAlpha())
+			else
+				self:SetAlpha(0)
+			end
+		end)
+	]]
+	end
 end
 
 function AS:CreateShadow(Frame)
