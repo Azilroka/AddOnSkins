@@ -58,44 +58,6 @@ function AS:ParchmentRemover(event, addon)
 			end
 		end
 	end
-	if addon == 'Blizzard_GlyphUI' and ElvUI[1].private.skins.blizzard.talent == true then
-		GlyphFrame.background:Hide()
-		GlyphFrame.background.Show = function() end
-		GlyphFrame.background.Hide = function() end
-		AS:StripTextures(GlyphFrame)
-		AS:CreateBackdrop(GlyphFrame, 'Transparent')
-		SetPortraitToTexture(GlyphFrame.specIcon, icon)
-		AS:SkinTexture(GlyphFrame.specIcon)
-		GlyphFrame.specIcon:SetDrawLayer('OVERLAY')
-
-		hooksecurefunc(_G, 'GlyphFrame_Update', function(self)
-			local specialization = GetSpecialization(false, false, PlayerTalentFrame.talentGroup)
-			local _, _, _, icon = GetSpecializationInfo(specialization, false, false)
-			local isActiveTalentGroup = PlayerTalentFrame and PlayerTalentFrame.talentGroup == GetActiveSpecGroup()
-			GlyphFrame.specIcon:SetDesaturated(not isActiveTalentGroup)
-		end)
-		
-		hooksecurefunc(_G, 'GlyphFrameGlyph_UpdateSlot', function(self)
-			local id = self:GetID();
-			local talentGroup = PlayerTalentFrame and PlayerTalentFrame.talentGroup;
-			local enabled, glyphType, glyphTooltipIndex, glyphSpell, iconFilename = GetGlyphSocketInfo(id, talentGroup);
-			if not glyphType then
-				return;
-			end
-			AS:SetTemplate(self, 'Default')
-			self.ring:Hide()
-			if id % 2 == 1 and not self.resized then
-				self.resized = true
-				self:Size(self:GetWidth() * .8, self:GetHeight() * .8)
-			end
-			AS:SetTemplate(self, 'Default')
-			self.ring:Hide()
-			AS:SkinTexture(self.glyph)
-			self.glyph:ClearAllPoints()
-			self.glyph:SetInside(self)
-			self.glyph:SetDrawLayer('OVERLAY')
-		end)
-	end
 	if event == 'PLAYER_ENTERING_WORLD' then
 		if ElvUI[1].private.skins.blizzard.gossip == true then
 			GossipGreetingScrollFrame.spellTex:SetTexture('')
@@ -271,34 +233,6 @@ function AS:ParchmentRemover(event, addon)
 					end
 					_G["SpellButton"..i.."SubSpellName"]:SetTextColor(0.6, 0.6, 0.6)
 					_G["SpellButton"..i.."RequiredLevelString"]:SetTextColor(0.6, 0.6, 0.6)
-				end
-			end)
-
-			hooksecurefunc("SpellBook_UpdateCoreAbilitiesTab", function()
-				for i = 1, #SpellBookCoreAbilitiesFrame.Abilities do
-					local button = SpellBookCoreAbilitiesFrame.Abilities[i]
-					if button and button.isSkinned ~= true then
-						AS:SetTemplate(button)
-
-						button.EmptySlot:SetAlpha(0)
-						button.ActiveTexture:SetAlpha(0)
-						button.FutureTexture:SetAlpha(0)
-
-						AS:SkinTexture(button.iconTexture)
-						button.iconTexture:SetInside()
-
-						if button.FutureTexture:IsShown() then
-							button.iconTexture:SetDesaturated(true)
-							button.Name:SetTextColor(0.6, 0.6, 0.6)
-							button.InfoText:SetTextColor(0.6, 0.6, 0.6)
-						else
-							button.Name:SetTextColor(1, 0.82, 0)
-							button.InfoText:SetTextColor(0.8, 0.8, 0.8)
-						end
-						
-						AS:StyleButton(button)
-						button.isSkinned = true
-					end
 				end
 			end)
 		end

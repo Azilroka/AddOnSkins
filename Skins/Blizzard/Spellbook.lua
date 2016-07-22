@@ -63,7 +63,6 @@ function AS:Blizzard_Spellbook()
 		local NumSkillLineTabs = GetNumSpellTabs();
 		for i = 1, MAX_SKILLLINE_TABS do
 			local Tab = _G["SpellBookSkillLineTab"..i]
-			_G["SpellBookSkillLineTab"..i.."Flash"]:Hide()
 			if ( i <= NumSkillLineTabs and SpellBookFrame.bookType == BOOKTYPE_SPELL ) then
 				if Tab and not Tab.isSkinned then
 					AS:SkinFrame(Tab)
@@ -71,8 +70,10 @@ function AS:Blizzard_Spellbook()
 
 					local Texture = select(2, GetSpellTabInfo(i))
 					Tab:SetNormalTexture(Texture)
-					Tab:GetNormalTexture():SetInside()
-					AS:SkinTexture(Tab:GetNormalTexture())
+					if Tab:GetNormalTexture() then
+						Tab:GetNormalTexture():SetInside()
+						AS:SkinTexture(Tab:GetNormalTexture())
+					end
 
 					local point, relatedTo, point2, x, y = Tab:GetPoint()
 					Tab:Point(point, relatedTo, point2, 1, y)
@@ -81,6 +82,8 @@ function AS:Blizzard_Spellbook()
 			end
 		end
 	end)
+
+	SpellBookFrame_UpdateSkillLineTabs()
 
 	-- Profession Tab
 	local ProfessionButtons = {

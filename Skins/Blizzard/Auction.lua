@@ -136,13 +136,14 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	AS:CreateBackdrop(AuctionProgressFrame)
 	AuctionProgressFrame.Backdrop:SetOutside(AuctionProgressBarIcon)
 	AuctionProgressFrame.Backdrop:SetFrameLevel(AuctionProgressFrame:GetFrameLevel())
+--[[
 	AuctionProgressBarIcon:SetSize(24, 24)
 	AuctionProgressBarIcon:SetPoint("RIGHT", "$parent", "LEFT", -10, 0)
 	AS:SkinTexture(AuctionProgressBarIcon)
 
 	AuctionProgressBarText:ClearAllPoints()
 	AuctionProgressBarText:SetPoint("CENTER")
-
+]]
 	AS:SkinStatusBar(AuctionProgressBar, true)
 	AuctionProgressBar:SetHeight(24)
 
