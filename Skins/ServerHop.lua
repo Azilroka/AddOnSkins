@@ -32,14 +32,18 @@ function AS:ServerHop()
 	AS:SkinFrame(hopAddon)
 	AS:StripTextures(hopAddon.hopFrame)
 	AS:SkinButton(hopAddon.hopFrame.buttonHop, true)
+	hopAddon.hopFrame.buttonHop:SetPoint("RIGHT",-15,0) --ADDED
 	AS:SkinButton(hopAddon.buttonChangeMode,true)
 	hopAddon.buttonChangeMode:SetHeight(25)
 	hopAddon.buttonChangeMode:SetPoint("TOPLEFT", 40,0)
 	AS:SkinButton(hopAddon.hopFrame.buttonHopBack,true)
+	hopAddon.hopFrame.buttonHopBack:SetPoint("LEFT",42,0) --ADDED
 	AS:SkinButton(helpButton)
 	hopAddon.buttonHelp:SetPoint("TOPRIGHT",-25,0)
 	AS:SkinButton(hopAddon.closeButton)
 	hopAddon.closeButton:SetPoint("TOPRIGHT",0,0)
+	AS:SkinButton(groupOnMain) --ADDED
+	groupOnMain:SetPoint("TOPRIGHT",-50,0) --ADDED
 	AS:SkinButton(hopAddon.buttonOptions)
 	hopAddon.buttonOptions:SetPoint("TOPLEFT",0,0)
 
@@ -63,7 +67,7 @@ function AS:ServerHop()
 	hopAddon.searchFrame.dropDown:SetPoint("BOTTOM",0,8)
 
 	AS:SkinFrame(hopAddon.searchFrame.holderCatFilters, "Default")
-	hopAddon.searchFrame.holderCatFilters:SetSize(200,90)
+	hopAddon.searchFrame.holderCatFilters:SetSize(201,90) --EDITED
 	hopAddon.searchFrame.holderCatFilters:SetPoint("CENTER",-16,-7)
 
 	AS:SkinCheckBox(searchFrameTimeCheck)
@@ -74,6 +78,24 @@ function AS:ServerHop()
 	searchFrameilvlEdit:SetPoint("TOPLEFT",140,-35)
 	searchFrameTimeEdit:SetSize(40,19)
 	searchFrameilvlEdit:SetSize(40,19)
+	
+	-- List Group ADDED
+	AS:SkinFrame(hopAddon.groupCreationHolder, "Default") --ADDED Frame
+	hopAddon.groupCreationHolder:SetPoint("CENTER",0,-12) --ADDED Frame
+	hopAddon.groupCreationHolder:SetWidth(234) --ADDED Frame
+	AS:SkinFrame(hopAddon.groupCreationHolder.editBoxName) --ADDED Tittle
+	hopAddon.groupCreationHolder.editBoxName:SetSize(165,20) --ADDED Tittle
+	hopAddon.groupCreationHolder.editBoxName:SetPoint("TOPLEFT",20,-4) --ADDED Title
+	AS:SkinCheckBox(SHGroupCreateAutoAccept) -- ADDED Checkbox
+	SHGroupCreateAutoAccept:SetPoint("TOPLEFT",195,-2) --ADDED Checkbox
+	AS:SkinFrame(SHGroupCreatedescr) --ADDED Desc
+	SHGroupCreatedescr:SetPoint("TOPLEFT",20,-30) --ADDED Desc
+	SHGroupCreatedescr:SetHeight(56) --ADDED Desc
+	AS:SkinScrollBar(SHGroupCreatedescrScrollBar) --ADDED Scroll Up
+	AS:SkinButton(hopAddon.groupCreationHolder.createGroup) --ADDED "OK" Button
+	hopAddon.groupCreationHolder.createGroup:SetTemplate("Default", true) --ADDED "OK" Button
+	hopAddon.groupCreationHolder.createGroup:SetSize(22,22) --ADDED "OK" Button
+	hopAddon.groupCreationHolder.createGroup:SetPoint("TOPLEFT",196,-47) --ADDED "OK" Button
 
 	-- Search Frame
 	AS:SkinEditBox(ServerHop_SearchBox)
@@ -111,6 +133,9 @@ function AS:ServerHop()
 	AS:SkinCloseButton(optionsInFrameCloseBut)
 	AS:StripTextures(hopOptions.optionsAuthor)
 	AS:SkinEditBox(hopOptions.optionsAuthor.linkBox)
+	
+	SkinDropDownBox(SH_MinimapStrataDrop) --ADDED
+	SkinDropDownBox(SH_StatusFrameDrop) --ADDED
 
 	AS:SkinFrame(hopOptions.tabList)
 	AS:SkinFrame(hopOptions.globalOptionsFrame)
@@ -128,6 +153,7 @@ function AS:ServerHop()
 	AS:SkinCheckBox(CheckBSound)
 	AS:SkinCheckBox(CheckTaskbar)
 	AS:SkinCheckBox(CheckBEndless)
+	AS:SkinCheckBox(SHGroupHoppingButton) --ADDED
 
 	AS:StripTextures(catFiltersBtn, true)
 	AS:SkinButton(catFiltersBtn, true)
@@ -137,6 +163,10 @@ function AS:ServerHop()
 	AS:SkinSlideBar(hopAddon_sliderBL,16)
 
 	AS:SkinButton(hopOptions.hopSearchOptionsFrame.buttonClearBL, true)
+	AS:SkinButton(hopOptions.globalOptionsFrame.buttonClearBL, true) --ADDED
+	AS:SkinButton(sh_clearblbut) --ADDED
+	sh_clearblbut:SetSize(24,24) --ADDED
+	sh_clearblbut:SetPoint("BOTTOMLEFT",15,15) --ADDED
 
 	local HopEditBox = {hopOptions.hopSearchOptionsFrame:GetChildren()}
 	for i = 1, #HopEditBox do
@@ -145,9 +175,9 @@ function AS:ServerHop()
 		end
 	end
 
-	AS:StripTextures(hopOptions.tabList.buttonGlobal)
-	AS:StripTextures(hopOptions.tabList.customButton)
-	AS:StyleButton(hopOptions.tabList.buttonGlobal)
+	--AS:StripTextures(hopOptions.tabList.buttonGlobal)
+	--AS:StripTextures(hopOptions.tabList.customButton)
+	--AS:StyleButton(hopOptions.tabList.buttonGlobal)
 
 	-- Favourites Frame
 	AS:SkinFrame(hopAddonFavourites)
@@ -167,8 +197,8 @@ function AS:ServerHop()
 		if LFGHopeButton[i]:IsObjectType("Button") and LFGHopeButton[i]:GetText() == " ServerHop" then
 			AS:SkinButton(LFGHopeButton[i])
 			LFGHopeButton[i]:SetText("ServerHop")
-			LFGHopeButton[i]:SetPoint("BOTTOM",LFGListFrame,"BOTTOM",-3,4)
-			LFGHopeButton[i]:SetSize(66,22)
+			LFGHopeButton[i]:SetPoint("BOTTOM",LFGListFrame,"BOTTOM",-3,3) --EDITED
+			LFGHopeButton[i]:SetSize(61,22) --EDITED
 		end
 	end
 end

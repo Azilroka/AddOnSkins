@@ -17,7 +17,11 @@ AddOn.Noop = function() end
 AddOn.TexCoords = {.08, .92, .08, .92}
 AddOn.UIScale = UIParent:GetScale()
 
-AddOn.Resolution = GetCVar("gxWindowedResolution")
+local Resolution = select(GetCurrentResolution(), GetScreenResolutions())
+local Windowed = Display_DisplayModeDropDown:windowedmode()
+local Fullscreen = Display_DisplayModeDropDown:fullscreenmode()
+
+AddOn.Resolution = Resolution or (Windowed and GetCVar("gxWindowedResolution")) or GetCVar("gxFullscreenResolution")
 
 AddOn.ScreenHeight = tonumber(strmatch(AddOn.Resolution, "%d+x(%d+)"))
 AddOn.ScreenWidth = tonumber(strmatch(AddOn.Resolution, "(%d+)x+%d"))
