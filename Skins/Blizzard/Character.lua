@@ -50,6 +50,112 @@ function AS:Blizzard_CharacterFrame()
 
 	EquipmentFlyoutFrameHighlight:Kill()
 
+	local function ColorizeStatPane(frame)
+		if(frame.leftGrad) then return end
+		local r, g, b = 0.8, 0.8, 0.8
+		frame.leftGrad = frame:CreateTexture(nil, "BORDER")
+		frame.leftGrad:SetWidth(80)
+		frame.leftGrad:SetHeight(frame:GetHeight())
+		frame.leftGrad:SetPoint("LEFT", frame, "CENTER")
+		frame.leftGrad:SetTexture(AS.Blank)
+		frame.leftGrad:SetGradientAlpha("Horizontal", r, g, b, 0.35, r, g, b, 0)
+
+		frame.rightGrad = frame:CreateTexture(nil, "BORDER")
+		frame.rightGrad:SetWidth(80)
+		frame.rightGrad:SetHeight(frame:GetHeight())
+		frame.rightGrad:SetPoint("RIGHT", frame, "CENTER")
+		frame.rightGrad:SetTexture(AS.Blank)
+		frame.rightGrad:SetGradientAlpha("Horizontal", r, g, b, 0, r, g, b, 0.35)
+	end
+
+	CharacterStatsPane.ItemLevelFrame.Background:SetAlpha(0)
+	ColorizeStatPane(CharacterStatsPane.ItemLevelFrame)
+
+	hooksecurefunc("PaperDollFrame_UpdateStats", function()
+		local level = UnitLevel("player");
+		local categoryYOffset = -5;
+		local statYOffset = 0;
+
+		if ( level >= MIN_PLAYER_LEVEL_FOR_ITEM_LEVEL_DISPLAY ) then
+			PaperDollFrame_SetItemLevel(CharacterStatsPane.ItemLevelFrame, "player");
+			CharacterStatsPane.ItemLevelFrame.Value:SetTextColor(GetItemLevelColor());
+			CharacterStatsPane.ItemLevelCategory:Show();
+			CharacterStatsPane.ItemLevelFrame:Show();
+			CharacterStatsPane.AttributesCategory:SetPoint("TOP", 0, -76);
+		else
+			CharacterStatsPane.ItemLevelCategory:Hide();
+			CharacterStatsPane.ItemLevelFrame:Hide();
+			CharacterStatsPane.AttributesCategory:SetPoint("TOP", 0, -20);
+			categoryYOffset = -12;
+			statYOffset = -6;
+		end
+
+		local spec = GetSpecialization();
+		local role = GetSpecializationRole(spec);
+
+		CharacterStatsPane.statsFramePool:ReleaseAll();
+		local statFrame = CharacterStatsPane.statsFramePool:Acquire();
+
+		local lastAnchor;
+
+		for catIndex = 1, #PAPERDOLL_STATCATEGORIES do
+			local catFrame = CharacterStatsPane[PAPERDOLL_STATCATEGORIES[catIndex].categoryFrame];
+			local numStatInCat = 0;
+			for statIndex = 1, #PAPERDOLL_STATCATEGORIES[catIndex].stats do
+				local stat = PAPERDOLL_STATCATEGORIES[catIndex].stats[statIndex];
+				local showStat = true;
+				if ( showStat and stat.primary ) then
+					local primaryStat = select(7, GetSpecializationInfo(spec, nil, nil, nil, UnitSex("player")));
+					if ( stat.primary ~= primaryStat ) then
+						showStat = false;
+					end
+				end
+				if ( showStat and stat.roles ) then
+					local foundRole = false;
+					for _, statRole in pairs(stat.roles) do
+						if ( role == statRole ) then
+							foundRole = true;
+							break;
+						end
+					end
+					showStat = foundRole;
+				end
+				if ( showStat ) then
+					statFrame.onEnterFunc = nil;
+					PAPERDOLL_STATINFO[stat.stat].updateFunc(statFrame, "player");
+					if ( not stat.hideAt or stat.hideAt ~= statFrame.numericValue ) then
+						if ( numStatInCat == 0 ) then
+							if ( lastAnchor ) then
+								catFrame:SetPoint("TOP", lastAnchor, "BOTTOM", 0, categoryYOffset);
+							end
+							lastAnchor = catFrame;
+							statFrame:SetPoint("TOP", catFrame, "BOTTOM", 0, -2);
+						else
+							statFrame:SetPoint("TOP", lastAnchor, "BOTTOM", 0, statYOffset);
+						end
+						numStatInCat = numStatInCat + 1;
+						statFrame.Background:SetShown(false);
+						ColorizeStatPane(statFrame)
+						statFrame.leftGrad:SetShown((numStatInCat % 2) == 0)
+						statFrame.rightGrad:SetShown((numStatInCat % 2) == 0)
+						lastAnchor = statFrame;
+						statFrame = CharacterStatsPane.statsFramePool:Acquire();
+					end
+				end
+			end
+			catFrame:SetShown(numStatInCat > 0);
+		end
+		CharacterStatsPane.statsFramePool:Release(statFrame);
+	end)
+
+	local function StatsPane(type)
+		AS:StripTextures(CharacterStatsPane[type])
+	end
+
+	StatsPane("EnhancementsCategory")
+	StatsPane("ItemLevelCategory")
+	StatsPane("AttributesCategory")
+
 	local function SkinItemFlyouts()
 		AS:StripTextures(EquipmentFlyoutFrame.buttonFrame)
 		for i = 1, #EquipmentFlyoutFrame.buttons do
