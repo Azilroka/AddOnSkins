@@ -368,7 +368,7 @@ function AS:Blizzard_Guild(event, addon)
 				AS:SetTemplate(Button, 'Default', true)
 				Button.icon:SetInside()
 				AS:SkinTexture(Button.icon)
-				Button.IconBorder:SetTexture(nil)
+				Button.IconBorder:SetAlpha(0)
 				hooksecurefunc(Button.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
 					Button:SetBackdropBorderColor(r, g, b)
 				end)
@@ -409,7 +409,7 @@ function AS:Blizzard_Guild(event, addon)
 		GuildBankPopupNameRight:Kill()
 		GuildBankPopupNameMiddle:Kill()
 
-		for i=1, 16 do
+		for i = 1, 16 do
 			local button = _G["GuildBankPopupButton"..i]
 			local icon = _G[button:GetName().."Icon"]
 			AS:StripTextures(button)
