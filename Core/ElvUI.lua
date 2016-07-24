@@ -81,6 +81,7 @@ function AS:InjectProfile()
 		['SkinDebug'] = false,
 		['Parchment'] = true,
 		['LoginMsg'] = true,
+		['EmbedSystemMessage'] = true,
 	}
 
 	do

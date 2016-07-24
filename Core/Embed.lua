@@ -166,7 +166,7 @@ function AS:Embed_Toggle(Message)
 			Frame:SetInside(EmbedSystem_RightWindow, 0, 0)
 		end
 	end
-	if Message then
+	if Message and AS:CheckOption('EmbedSystemMessage') then
 		local Message = format("Main: '%s'", AS:CheckOption('EmbedMain'))
 		if AS:CheckOption('EmbedSystemDual') then Message = format("Left: '%s' | Right: '%s'", AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')) end
 		AS:Print(format('Embed System: - %s', Message))
