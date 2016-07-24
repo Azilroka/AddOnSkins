@@ -17,24 +17,20 @@ function AS:PetTracker()
 
 	AS:StripTextures(PetTrackerMapFilter, true)
 	AS:SkinEditBox(PetTrackerMapFilter)
-	AS:SkinTooltip(PetTrackerMapFilterSuggestions)
 
-	for i = 1, PetTrackerMapFilterSuggestions:GetNumChildren() do
-		local Button = select(i, PetTrackerMapFilterSuggestions:GetChildren())
-		Button:SetFrameLevel(PetTrackerMapFilterSuggestions:GetFrameLevel() + 1)
-	end
-
-	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button:HookScript('OnClick', function(self)
-		SushiDropdownFrame1:ClearAllPoints()
-		SushiDropdownFrame1:SetPoint('BOTTOMRIGHT', self, 'TOPRIGHT', 0, 4)
-		if SushiDropdownFrame1.IsDone then return end
-		for i = 1, SushiDropdownFrame1:GetNumChildren() do
-			local Region = select(i, SushiDropdownFrame1:GetChildren())
-			if Region:IsObjectType('Frame') then
-				Region:SetBackdrop(nil)
-				Region.SetBackdrop = AS.Noop
-				AS:CreateBackdrop(SushiDropdownFrame1)
-				SushiDropdownFrame1.IsDone = true
+	WorldMapFrame.UIElementsFrame.TrackingOptionsButton.Button:HookScript('OnMouseDown', function(self)
+		if SushiDropdownFrame1 then
+			SushiDropdownFrame1:ClearAllPoints()
+			SushiDropdownFrame1:SetPoint('BOTTOMRIGHT', self, 'TOPRIGHT', 0, 4)
+			if SushiDropdownFrame1.IsDone then return end
+			for i = 1, SushiDropdownFrame1:GetNumChildren() do
+				local Region = select(i, SushiDropdownFrame1:GetChildren())
+				if Region:IsObjectType('Frame') then
+					Region:SetBackdrop(nil)
+					Region.SetBackdrop = AS.Noop
+					AS:CreateBackdrop(SushiDropdownFrame1)
+					SushiDropdownFrame1.IsDone = true
+				end
 			end
 		end
 	end)
