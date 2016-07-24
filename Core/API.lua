@@ -496,7 +496,11 @@ function AS:SkinScrollBar(Frame)
 				Frame.ThumbBG:Point("TOPLEFT", Frame:GetThumbTexture(), "TOPLEFT", 2, -3)
 				Frame.ThumbBG:Point("BOTTOMRIGHT", Frame:GetThumbTexture(), "BOTTOMRIGHT", -2, 3)
 				AS:SetTemplate(Frame.ThumbBG, "Default")
-				Frame.ThumbBG:SetBackdropColor(unpack(AS.BorderColor))
+				if IsAddOnLoaded('ElvUI') then
+					Frame.ThumbBG:SetBackdropColor(0.6, 0.6, 0.6)
+				else
+					Frame.ThumbBG:SetBackdropColor(unpack(AS.BorderColor))
+				end
 
 				if Frame.ThumbBG then
 					Frame.ThumbBG:SetFrameLevel(Frame.TrackBG:GetFrameLevel())
