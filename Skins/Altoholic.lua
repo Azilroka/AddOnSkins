@@ -53,22 +53,16 @@ function AS:Altoholic(event, addon)
 		AS:SkinFrame(AltoholicFrameContainers)
 		AS:SkinFrame(AltoholicFrameRecipes)
 		AS:SkinFrame(AltoholicFrameQuests)
-		AS:SkinFrame(AltoholicFrameGlyphs)
 		AS:SkinFrame(AltoholicFrameMail)
 		AS:SkinFrame(AltoholicFrameSpellbook)
-		AS:SkinFrame(AltoholicFramePets)
 		AS:SkinFrame(AltoholicFrameAuctions)
 		AS:SkinScrollBar(AltoholicFrameContainersScrollFrame.ScrollBar)
 		AS:SkinScrollBar(AltoholicFrameQuestsScrollFrame.ScrollBar)
 		AS:SkinScrollBar(AltoholicFrameRecipesScrollFrame.ScrollBar)
 		AS:SkinDropDownBox(AltoholicFrameTalents_SelectMember)
-		AS:SkinDropDownBox(AltoholicTabCharacters_SelectRealm)
+		AS:SkinDropDownBox(AltoholicTabCharacters.SelectRealm)
 		AS:SkinNextPrevButton(AltoholicFrameSpellbookPrevPage)
 		AS:SkinNextPrevButton(AltoholicFrameSpellbookNextPage)
-		AS:SkinNextPrevButton(AltoholicFramePetsNormalPrevPage)
-		AS:SkinNextPrevButton(AltoholicFramePetsNormalNextPage)
-		AS:SkinRotateButton(AltoholicFramePetsNormal_ModelFrameRotateLeftButton)
-		AS:SkinRotateButton(AltoholicFramePetsNormal_ModelFrameRotateRightButton)
 		AS:StripTextures(AltoholicFrameContainersScrollFrame, true)
 		AS:StripTextures(AltoholicFrameQuestsScrollFrame, true)
 		AS:StripTextures(AltoholicFrameRecipesScrollFrame, true)
@@ -86,6 +80,7 @@ function AS:Altoholic(event, addon)
 			'MailIcon',
 			'SpellbookIcon',
 			'ProfessionsIcon',
+			'GarrisonIcon'
 		}
 
 		for _, Button in pairs(Buttons) do
