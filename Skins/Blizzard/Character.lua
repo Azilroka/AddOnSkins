@@ -52,7 +52,8 @@ function AS:Blizzard_CharacterFrame()
 
 	local function ColorizeStatPane(frame)
 		if(frame.leftGrad) then return end
-		local r, g, b = 0.8, 0.8, 0.8
+		local color = RAID_CLASS_COLORS[AS.MyClass]
+		local r, g, b = color.r, color.g, color.b
 		frame.leftGrad = frame:CreateTexture(nil, "BORDER")
 		frame.leftGrad:SetWidth(80)
 		frame.leftGrad:SetHeight(frame:GetHeight())
@@ -163,7 +164,7 @@ function AS:Blizzard_CharacterFrame()
 			if not button.isStyled then
 				AS:SetTemplate(button)
 				AS:StyleButton(button)
-				button.IconBorder:SetTexture(nil)
+				button.IconBorder:SetAlpha(0)
 				button:HookScript('OnUpdate', function(self)
 					if self.IconBorder:IsShown() then
 						self:SetBackdropBorderColor(self.IconBorder:GetVertexColor())
@@ -257,10 +258,10 @@ function AS:Blizzard_CharacterFrame()
 
 	for i = 1, #PAPERDOLL_SIDEBARS do
 		local tab = _G["PaperDollSidebarTab"..i]
-		tab.Highlight:SetTexture(1, 1, 1, 0.3)
+		tab.Highlight:SetColorTexture(1, 1, 1, 0.3)
 		tab.Highlight:Point("TOPLEFT", 3, -4)
 		tab.Highlight:Point("BOTTOMRIGHT", -1, 0)
-		tab.Hider:SetTexture(0.4,0.4,0.4,0.4)
+		tab.Hider:SetColorTexture(0.4,0.4,0.4,0.4)
 		tab.Hider:Point("TOPLEFT", 3, -4)
 		tab.Hider:Point("BOTTOMRIGHT", -1, 0)
 		tab.TabBg:Kill()

@@ -36,7 +36,7 @@ function AS:Blizzard_Spellbook()
 		Button.TrainTextBackground:SetTexture(nil)
 
 		AS:SkinFrame(Button, nil, true)
-		Button:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
+		Button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
 		Button:GetHighlightTexture():SetInside()
 		Button.cooldown:SetInside()
 		AS:SkinTexture(Icon)
@@ -52,7 +52,7 @@ function AS:Blizzard_Spellbook()
 			end
 			Button.SpellSubName:SetTextColor(0.6, 0.6, 0.6)
 			Button.RequiredLevelString:SetTextColor(0.6, 0.6, 0.6)
-			Button:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
+			Button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
 			Button:GetHighlightTexture():SetInside()
 		end
 	end)
@@ -125,7 +125,7 @@ function AS:Blizzard_Spellbook()
 
 	hooksecurefunc('SpellBook_UpdateProfTab', function()
 		for _, Button in pairs(ProfessionButtons) do
-			Button:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
+			Button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
 			Button:GetHighlightTexture():SetInside()
 		end
 	end)
