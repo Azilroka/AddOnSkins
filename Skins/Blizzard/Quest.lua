@@ -20,6 +20,8 @@ function AS:Blizzard_Quest()
 	AS:SkinScrollBar(QuestRewardScrollFrameScrollBar)
 
 	AS:SkinButton(QuestFrameAcceptButton, true)
+	AS:SkinButton(QuestFrameDetailPanel.IgnoreButton, true)
+	AS:SkinButton(QuestFrameDetailPanel.UnignoreButton, true)
 	AS:SkinButton(QuestFrameDeclineButton, true)
 	AS:SkinButton(QuestFrameCompleteButton, true)
 	AS:SkinButton(QuestFrameGoodbyeButton, true)
