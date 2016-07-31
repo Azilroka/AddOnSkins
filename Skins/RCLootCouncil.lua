@@ -3,8 +3,12 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('RCLootCouncil') then return end
 
 function AS:RCLootCouncil()
-
-	--MainFrame:SetScale(1)
+	local RCSessionFrame = LibStub("AceAddon-3.0"):GetAddon("RCLootCouncil"):GetModule("RCSessionFrame")
+	hooksecurefunc(RCSessionFrame, "Show", function()
+		AS:SkinFrame(DefaultRCSessionSetupFrame, nil, nil, true)
+		AS:StripTextures(DefaultRCSessionSetupFrame.content, true)
+	end)
+--[[	--MainFrame:SetScale(1)
 	AS:SkinFrame(MainFrame, 'Transparent', true)
 	AS:SkinFrame(ContentFrame, 'Default')
 	AS:SkinButton(BtClose)
@@ -49,6 +53,7 @@ function AS:RCLootCouncil()
 	AS:SkinButton(RaidButton)
 	AS:SkinButton(CloseButton)
 	AS:SkinScrollBar(RCVersionFrameContentFrameScrollBar)
+]]
 end
 
 AS:RegisterSkin('RCLootCouncil', AS.RCLootCouncil)
