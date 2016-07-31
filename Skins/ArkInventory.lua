@@ -59,7 +59,8 @@ function AS:ArkInventory()
 
 	hooksecurefunc(ArkInventory, 'Frame_Bar_Paint', function(bar)
 		local loc_id = bar.ARK_Data.loc_id
-		ArkInventory.LocationOptionSet(loc_id, 'bar', 'name', 'height', 18)
+		local player = ArkInventory.LocationPlayerGet( loc_id )
+--		ArkInventory.LocationOptionSet(loc_id, 'bar', 'name', 'height', 18)
 
 		if not bar.IsSkinned then
 			local name = bar:GetName()
