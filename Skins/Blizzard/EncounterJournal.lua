@@ -55,6 +55,8 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	AS:SkinTab(EncounterJournalInstanceSelectSuggestTab)
 	EncounterJournalInstanceSelectSuggestTab.Backdrop:SetPoint('TOPLEFT', -3, -7)
 	EncounterJournalInstanceSelectSuggestTab.Backdrop:SetPoint('BOTTOMRIGHT', 0, -3)
+	AS:SkinTab(EncounterJournalInstanceSelectLootJournalTab)
+	EncounterJournalInstanceSelectLootJournalTab.Backdrop:SetPoint('BOTTOMRIGHT', 0, -3)
 
 	EncounterJournal.instanceSelect.bg:SetAlpha(0)
 
@@ -93,6 +95,14 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	AS:SkinScrollBar(EncounterJournalEncounterFrameInfoDetailsScrollFrameScrollBar)
 	AS:SkinScrollBar(EncounterJournalEncounterFrameInstanceFrameLoreScrollFrameScrollBar)
 	AS:SkinScrollBar(EncounterJournalEncounterFrameInfoBossesScrollFrameScrollBar)
+	
+	EncounterJournalScrollBar:SkinScrollBar()
+	AS:StripTextures(EncounterJournal.LootJournal)
+	AS:SkinButton(EncounterJournal.LootJournal.LegendariesFrame.ClassButton, true)
+	AS:SkinButton(EncounterJournal.LootJournal.LegendariesFrame.SlotButton, true)
+	AS:StripTextures(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton)
+	AS:SkinButton(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton, true)
+	AS:SkinDropDownBox(LootJournalViewDropDown)
 end
 
 AS:RegisterSkin("Blizzard_EncounterJournal", AS.Blizzard_EncounterJournal, 'ADDON_LOADED')

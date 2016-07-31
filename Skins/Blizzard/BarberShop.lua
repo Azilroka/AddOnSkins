@@ -12,17 +12,17 @@ function AS:Blizzard_BarberShop(event, addon)
 	AS:SkinButton(BarberShopFrameCancelButton, true)
 	AS:SkinButton(BarberShopFrameResetButton, true)
 
-	for i = 1, 5 do
-		AS:StripTextures(_G["BarberShopFrameSelector"..i])
-		AS:SkinNextPrevButton(_G["BarberShopFrameSelector"..i.."Prev"])
-		AS:SkinNextPrevButton(_G["BarberShopFrameSelector"..i.."Next"])
+	for i = 1, 4 do
+		local frame = _G["BarberShopFrameSelector"..i]
+		if frame then
+			AS:StripTextures(frame)
+		end
 	end
 
-	BarberShopFrameSelector5:SetPoint("TOP", 0, -42)
-	BarberShopFrameSelector1:SetPoint("TOPLEFT", BarberShopFrameSelector5, "BOTTOMLEFT", 0, -1)
-	BarberShopFrameSelector2:SetPoint("TOPLEFT", BarberShopFrameSelector1, "BOTTOMLEFT", 0, -1)
-	BarberShopFrameSelector3:SetPoint("TOPLEFT", BarberShopFrameSelector2, "BOTTOMLEFT", 0, -1)
-	BarberShopFrameSelector4:SetPoint("TOPLEFT", BarberShopFrameSelector3, "BOTTOMLEFT", 0, 3)
+	BarberShopFrame.FaceSelector:SetPoint("TOP", 0, -42)
+	BarberShopFrame.HairStyleSelector:SetPoint("TOPLEFT", BarberShopFrame.FaceSelector, "BOTTOMLEFT", 0, -1)
+	BarberShopFrame.HairColorSelector:SetPoint("TOPLEFT", BarberShopFrame.HairStyleSelector, "BOTTOMLEFT", 0, -1)
+	BarberShopFrame.FacialHairSelector:SetPoint("TOPLEFT", BarberShopFrame.HairColorSelector, "BOTTOMLEFT", 0, 3)
 
 	BarberShopFrameOkayButton:ClearAllPoints()
 	BarberShopFrameOkayButton:SetPoint("RIGHT", BarberShopFrame, "BOTTOM", 0, 50)
@@ -34,7 +34,6 @@ function AS:Blizzard_BarberShop(event, addon)
 	BarberShopBannerFrame:Kill()
 
 	AS:SkinFrame(BarberShopAltFormFrame)
---	AS:StripTextures(BarberShopAltFormFrameBorder)
 	BarberShopAltFormFrame:Point("BOTTOM", BarberShopFrame, "TOP", 0, 5)
 end
 

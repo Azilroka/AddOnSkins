@@ -374,13 +374,12 @@ function AS:Blizzard_PVPUI(event, addon)
 	AS:StripTextures(HonorFrame.Inset)
 
 	AS:SkinScrollBar(HonorFrameSpecificFrameScrollBar)
-	AS:SkinButton(HonorFrameSoloQueueButton, true)
-	AS:SkinButton(HonorFrameGroupQueueButton, true)
+	AS:SkinButton(HonorFrameQueueButton, true)
 	AS:StripTextures(HonorFrame.BonusFrame)
 	AS:StripTextures(HonorFrame.BonusFrame.ShadowOverlay)
 	AS:StripTextures(ConquestFrame.Inset)
 
-	for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'Arena2Button' }) do
+	for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'AshranButton' }) do
 		local Button = HonorFrame.BonusFrame[Section]
 		AS:StripTextures(Button)
 		AS:SkinButton(Button)
@@ -398,7 +397,7 @@ function AS:Blizzard_PVPUI(event, addon)
 	end
 
 	hooksecurefunc('HonorFrame_UpdateQueueButtons', function()
-		for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'Arena2Button' }) do
+		for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'AshranButton' }) do
 			local Button = HonorFrame.BonusFrame[Section]
 			if Button.SelectedTexture:IsShown() then
 				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
@@ -410,14 +409,16 @@ function AS:Blizzard_PVPUI(event, addon)
 
 	AS:StripTextures(ConquestFrame)
 	AS:StripTextures(ConquestFrame.ShadowOverlay)
-	AS:SkinBackdropFrame(ConquestPointsBar)
-	ConquestPointsBar.Backdrop:SetPoint('TOPLEFT', 0, -1)
-	ConquestPointsBar.Backdrop:SetPoint('BOTTOMRIGHT', 0, 1)
-	ConquestPointsBar.progress:SetTexture(AS.NormTex)
 	AS:SkinButton(ConquestJoinButton, true)
 	AS:SkinFrame(ConquestTooltip)
+	
+	AS:StripTextures(ConquestFrame.RoleInset)
+	
+	AS:SkinCheckBox(ConquestFrame.RoleInset.DPSIcon.checkButton, true)
+	AS:SkinCheckBox(ConquestFrame.RoleInset.TankIcon.checkButton, true)
+	AS:SkinCheckBox(ConquestFrame.RoleInset.HealerIcon.checkButton, true)
 
-	for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3', 'Arena5v5'}) do
+	for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3'}) do
 		local Button = ConquestFrame[Section]
 		AS:StripTextures(Button)
 		AS:SkinButton(Button)
@@ -435,7 +436,7 @@ function AS:Blizzard_PVPUI(event, addon)
 	end
 
 	hooksecurefunc('ConquestFrame_UpdateJoinButton', function()
-		for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3', 'Arena5v5'}) do
+		for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3'}) do
 			local Button = ConquestFrame[Section]
 			if Button.SelectedTexture:IsShown() then
 				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
@@ -448,8 +449,10 @@ function AS:Blizzard_PVPUI(event, addon)
 	AS:StripTextures(WarGamesFrame)
 	AS:StripTextures(WarGamesFrame.RightInset)
 	AS:StripTextures(WarGamesFrame.HorizontalBar)
+	AS:StripTextures(WarGamesFrameInfoScrollFrameScrollBar)
 	AS:SkinButton(WarGameStartButton, true)
 	AS:SkinScrollBar(WarGamesFrameScrollFrameScrollBar)
+	AS:SkinScrollBar(WarGamesFrameInfoScrollFrameScrollBar)
 	AS:SkinCheckBox(WarGameTournamentModeCheckButton)
 
 	hooksecurefunc('WarGamesFrame_Update', function()
