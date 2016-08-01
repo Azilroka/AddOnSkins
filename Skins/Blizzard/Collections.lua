@@ -374,6 +374,15 @@ function AS:Blizzard_Collections(event, addon)
 				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:SetFrameLevel(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:GetFrameLevel() + 2)
 				AS:CreateBackdrop(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j])
 				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j].Border:Kill()
+				hooksecurefunc(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j].Border, 'SetAtlas', function(self, texture)
+					local Color = AS.BorderColor
+					if texture == "transmog-wardrobe-border-uncollected" then
+						Color = { 1, 1, 0}
+					elseif texture == "transmog-wardrobe-border-unusable" then
+						Color = { 1, 0, 0}
+					end
+					self:GetParent().Backdrop:SetBackdropBorderColor(unpack(Color))
+				end)
 			end
 		end
 		
