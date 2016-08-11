@@ -181,8 +181,6 @@ function AS:UnregisterSkinEvent(skinName, event)
 end
 
 function AS:StartSkinning(event)
-	if AS.enteredworld then return end
-	AS.enteredworld = true
 
 	local EP = LibStub('LibElvUIPlugin-1.0', true)
 	if EP then
@@ -261,6 +259,7 @@ function AS:Init(event, addon)
 			AS:InjectProfile()
 		end
 		AS:CreateDataText()
+		AS:UnregisterEvent(event)
 	end
 	if event == 'PLAYER_LOGIN' then
 		AS:UpdateMedia()
