@@ -181,6 +181,7 @@ function AS:UnregisterSkinEvent(skinName, event)
 end
 
 function AS:StartSkinning(event)
+	AS:UnregisterEvent(event)
 
 	local EP = LibStub('LibElvUIPlugin-1.0', true)
 	if EP then
@@ -229,7 +230,6 @@ function AS:StartSkinning(event)
 	if AS:CheckOption('LoginMsg') then 
 		AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
 	end
-	AS:UnregisterEvent(event)
 end
 
 function AS:UpdateMedia()
@@ -259,7 +259,6 @@ function AS:Init(event, addon)
 			AS:InjectProfile()
 		end
 		AS:CreateDataText()
-		AS:UnregisterEvent(event)
 	end
 	if event == 'PLAYER_LOGIN' then
 		AS:UpdateMedia()
