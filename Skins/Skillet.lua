@@ -204,7 +204,7 @@ function AS:Skillet()
 	local function SkilletFrameOnUpdate(self, event, ...)
 		SkilletRecipeNotesButton:SetPoint('BOTTOMRIGHT', SkilletReagentParent, 'TOPRIGHT', 0, 2)
 		SkilletQueueManagementButton:SetPoint('RIGHT', SkilletRecipeNotesButton, 'LEFT', -5, 0)
-		SkilletItemCountInputBox:SetPoint('BOTTOM', SkilletCreateCountSlider, 'TOP', 0, 2)	
+		--SkilletItemCountInputBox:SetPoint('BOTTOM', SkilletCreateCountSlider, 'TOP', 0, 2)	
 
 		if SkilletDoBasic_Campfire then
 			SkilletDoBasic_Campfire:ClearAllPoints()
