@@ -104,6 +104,14 @@ function AS:BigWigs(event, addon)
 			bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
 			bar.candyBarIconFrame.SetWidth = AS.Noop
 
+			bar.candyBarLabel:ClearAllPoints()
+			bar.candyBarLabel:SetPoint("LEFT", bar, "LEFT", 2, 0)
+			bar.candyBarLabel:SetPoint("RIGHT", bar, "RIGHT", -2, 0)
+
+			bar.candyBarDuration:ClearAllPoints()
+			bar.candyBarDuration:SetPoint("RIGHT", bar, "RIGHT", 2, 0)
+			bar.candyBarDuration:SetPoint("LEFT", bar, "LEFT", -2, 0)
+
 			AS:SkinTexture(bar.candyBarIconFrame)
 		end
 
@@ -155,10 +163,13 @@ function AS:BigWigs(event, addon)
 			bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
 			bar.candyBarIconFrame.SetWidth = AS.Noop
 
-			bar.candyBarLabel:ClearAllPoints();
-			bar.candyBarLabel:SetPoint("BOTTOMLEFT", bar, "TOPLEFT", 0, 0);
-			bar.candyBarLabel.ClearAllPoints = AS.Noop;
-			bar.candyBarLabel.SetPoint = AS.Noop
+			bar.candyBarLabel:ClearAllPoints()
+			bar.candyBarLabel:SetPoint("LEFT", bar, "LEFT", 2, 10)
+			bar.candyBarLabel:SetPoint("RIGHT", bar, "RIGHT", -2, 10)
+
+			bar.candyBarDuration:ClearAllPoints()
+			bar.candyBarDuration:SetPoint("LEFT", bar, "LEFT", 2, 10)
+			bar.candyBarDuration:SetPoint("RIGHT", bar, "RIGHT", -2, 10)
 
 			AS:SkinTexture(bar.candyBarIconFrame)
 		end
