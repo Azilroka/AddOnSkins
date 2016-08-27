@@ -106,7 +106,7 @@ function AS:BigWigs(event, addon)
 
 			bar.candyBarLabel:ClearAllPoints()
 			bar.candyBarLabel:SetPoint("LEFT", bar, "LEFT", 2, 0)
-			bar.candyBarLabel:SetPoint("RIGHT", bar.candyBarBar, "RIGHT", -2, 0)
+			bar.candyBarLabel:SetPoint("RIGHT", bar, "RIGHT", -2, 0)
 
 			bar.candyBarDuration:ClearAllPoints()
 			bar.candyBarDuration:SetPoint("RIGHT", bar, "RIGHT", 2, 0)
