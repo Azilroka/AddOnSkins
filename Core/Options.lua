@@ -34,6 +34,7 @@ local Defaults = {
 	['SkinDebug'] = false,
 	['LoginMsg'] = true,
 	['EmbedSystemMessage'] = true,
+	['ElvUISkinModule'] = false,
 }
 
 AddOnSkinsOptions = CopyTable(Defaults)
@@ -457,7 +458,14 @@ function AS:GetOptions()
 			order = 1,
 			disabled = function() return not AS:CheckOption("WeakAuras", "WeakAuras") end,
 		}
+
 		Options.args.about.args.resetsettings.func = function() ElvUI[1].private.addonskins = CopyTable(Defaults) end
+
+		Options.args.misc.args.ElvUISkinModule = {
+			type = "toggle",
+			name = 'Use ElvUI Skin Styling',
+			order = 5,
+		}
 	end
 
 	local EP = LibStub('LibElvUIPlugin-1.0', true)

@@ -62,29 +62,6 @@ function AS:Blizzard_Merchant()
 				elseif Point == "LEFT" then
 					_G["MerchantItem"..i.."AltCurrencyFrame"]:SetPoint("LEFT", merchantMoney:GetName(), "RIGHT", -14, 0);
 				end
-
-				local merchantItemID = GetMerchantItemID(index);
-				local isHeirloom = merchantItemID and C_Heirloom.IsItemHeirloom(merchantItemID);
-				local isKnownHeirloom = isHeirloom and C_Heirloom.PlayerHasHeirloom(merchantItemID);
-				local tintRed = not isUsable and not isHeirloom;
-
-				if ( numAvailable == 0 or isKnownHeirloom ) then
-				-- If not available and not usable
-					if ( tintRed ) then
-						SetItemButtonTextureVertexColor(itemButton, 0.5, 0, 0);
-						SetItemButtonNormalTextureVertexColor(itemButton, 0.5, 0, 0);
-					else
-						SetItemButtonTextureVertexColor(itemButton, 0.5, 0.5, 0.5);
-						SetItemButtonNormalTextureVertexColor(itemButton,0.5, 0.5, 0.5);
-					end
-					
-				elseif ( tintRed ) then
-					SetItemButtonTextureVertexColor(itemButton, 0.9, 0, 0);
-					SetItemButtonNormalTextureVertexColor(itemButton, 0.9, 0, 0);
-				else
-					SetItemButtonTextureVertexColor(itemButton, 1.0, 1.0, 1.0);
-					SetItemButtonNormalTextureVertexColor(itemButton, 1.0, 1.0, 1.0);
-				end
 			end
 		end
 		local buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable = GetBuybackItemInfo(GetNumBuybackItems());

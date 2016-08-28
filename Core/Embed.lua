@@ -318,6 +318,7 @@ if AS:CheckAddOn('Skada') then
 			window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - (AS.PixelMode and 4 or 5)
 			window.db.spark = false
 			window.db.barslocked = true
+			window.db.background.bordertexture = "None"
 			window.bargroup.ClearAllPoints = nil
 			window.bargroup:ClearAllPoints()
 			window.bargroup.ClearAllPoints = function() end

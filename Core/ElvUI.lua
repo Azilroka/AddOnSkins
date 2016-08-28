@@ -82,6 +82,7 @@ function AS:InjectProfile()
 		['Parchment'] = true,
 		['LoginMsg'] = true,
 		['EmbedSystemMessage'] = true,
+		['ElvUISkinModule'] = true,
 	}
 
 	do

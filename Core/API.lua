@@ -93,6 +93,8 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 		else
 			R, G, B = unpack(ElvUI[1]["media"].backdropcolor)
 		end
+
+		ElvUI[1]["frames"][Frame] = true
 	end
 
 	Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -237,66 +239,75 @@ function AS:CreateShadow(Frame)
 end
 
 function AS:StyleButton(Button)
-	if Button.hasStyle then return end
+	if Button.HasStyle then return end
 
-	if Button.SetHighlightTexture and not Button.hover then
-		local hover = Button:CreateTexture()
-		hover:SetColorTexture(1, 1, 1, 0.3)
-		hover:SetInside()
-		Button.hover = hover
-		Button:SetHighlightTexture(hover)
+	if Button.SetHighlightTexture then
+		local Hover = Button:CreateTexture()
+		Hover:SetColorTexture(1, 1, 1, 0.3)
+		Hover:SetInside()
+
+		Button:SetHighlightTexture(Hover)
 	end
 
-	if Button.SetPushedTexture and not Button.pushed then
-		local pushed = Button:CreateTexture()
-		pushed:SetColorTexture(0.9, 0.8, 0.1, 0.3)
-		pushed:SetInside()
-		Button.pushed = pushed
-		Button:SetPushedTexture(pushed)
+	if Button.SetPushedTexture then
+		local Pushed = Button:CreateTexture()
+		Pushed:SetColorTexture(0.9, 0.8, 0.1, 0.3)
+		Pushed:SetInside()
+
+		Button:SetPushedTexture(Pushed)
 	end
 
-	if Button.SetCheckedTexture and not Button.checked then
-		local checked = Button:CreateTexture()
-		checked:SetColorTexture(0,1,0,.3)
-		checked:SetInside()
-		Button.checked = checked
-		Button:SetCheckedTexture(checked)
+	if Button.SetCheckedTexture then
+		local Checked = Button:CreateTexture()
+		Checked:SetColorTexture(0,1,0,.3)
+		Checked:SetInside()
+
+		Button:SetCheckedTexture(Checked)
 	end
 
-	local cooldown = Button:GetName() and _G[Button:GetName().."Cooldown"]
-	if cooldown then
-		cooldown:ClearAllPoints()
-		cooldown:SetInside()
-		cooldown:SetSwipeColor(0, 0, 0, 1)
+	local Cooldown = Button:GetName() and _G[Button:GetName().."Cooldown"]
+
+	if Cooldown then
+		Cooldown:ClearAllPoints()
+		Cooldown:SetInside()
+		Cooldown:SetSwipeColor(0, 0, 0, 1)
 	end
 
-	Button.hasStyle = true
+	Button.HasStyle = true
 end
 
 function AS:SkinCloseButton(CloseButton, Reposition)
 	if CloseButton.isSkinned then return end
-	AS:SkinFrame(CloseButton)
-	CloseButton:SetSize(16, 16)
 
-	CloseButton.Text = CloseButton:CreateFontString(nil, "OVERLAY")
-	CloseButton.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\PTSansNarrow.TTF]], 12)
-	CloseButton.Text:SetPoint("LEFT", CloseButton, 'LEFT', 5, 0)
-	CloseButton.Text:SetJustifyH('CENTER')
-	CloseButton.Text:SetJustifyV('MIDDLE')
-	CloseButton.Text:SetText('x')
+	AS:SkinBackdropFrame(CloseButton)
+
+	CloseButton.Backdrop:Point('TOPLEFT', 7, -8)
+	CloseButton.Backdrop:Point('BOTTOMRIGHT', -8, 8)
 
 	CloseButton:HookScript("OnEnter", function(self)
 		self.Text:SetTextColor(1, .2, .2)
-		self:SetBackdropBorderColor(1, .2, .2)
+		if AS:CheckOption('ElvUISkinModule') then
+			self.Backdrop:SetBackdropBorderColor(unpack(ElvUI[1]["media"].rgbvaluecolor))
+		else
+			self.Backdrop:SetBackdropBorderColor(1, .2, .2)
+		end
 	end)
 
 	CloseButton:HookScript("OnLeave", function(self)
 		self.Text:SetTextColor(1, 1, 1)
-		self:SetBackdropBorderColor(unpack(AS.BorderColor))
+		self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 	end)
 
-	CloseButton:ClearAllPoints()
-	CloseButton:Point("TOPRIGHT", '$parent', "TOPRIGHT", -3, -3)
+	CloseButton.Text = CloseButton:CreateFontString(nil, "OVERLAY")
+	CloseButton.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\PTSansNarrow.TTF]], 16, AS:CheckOption('ElvUISkinModule') and 'OUTLINE' or nil)
+	CloseButton.Text:SetPoint("CENTER", CloseButton, 'CENTER')
+	CloseButton.Text:SetJustifyH('CENTER')
+	CloseButton.Text:SetJustifyV('MIDDLE')
+	CloseButton.Text:SetText('x')
+
+	if Reposition then
+		f:Point("TOPRIGHT", Reposition, "TOPRIGHT", 2, 2)
+	end
 
 	CloseButton.isSkinned = true
 end
@@ -321,6 +332,10 @@ function AS:SkinEditBox(EditBox, Width, Height)
 
 	AS:CreateBackdrop(EditBox)
 
+	if AS:CheckOption('ElvUISkinModule') then
+		AS:SetTemplate(EditBox.Backdrop, 'Default')
+	end
+
 	if Width then EditBox:Width(Width) end
 	if Height then EditBox:Height(Height) end
 
@@ -335,6 +350,11 @@ function AS:SkinCheckBox(CheckBox)
 	if CheckBox.isSkinned then return end
 	AS:StripTextures(CheckBox)
 	AS:CreateBackdrop(CheckBox)
+
+	if AS:CheckOption('ElvUISkinModule') then
+		AS:SetTemplate(CheckBox.Backdrop, 'Default')
+	end
+
 	CheckBox.Backdrop:SetInside(CheckBox, 4, 4)
 
 	if CheckBox.SetCheckedTexture then
@@ -390,6 +410,11 @@ function AS:SkinTab(Tab, Strip)
 	end
 
 	AS:CreateBackdrop(Tab)
+
+	if AS:CheckOption('ElvUISkinModule') then
+		AS:SetTemplate(Tab.Backdrop, 'Default')
+	end
+
 	Tab.Backdrop:Point("TOPLEFT", 10, AS.PixelPerfect and -1 or -3)
 	Tab.Backdrop:Point("BOTTOMRIGHT", -10, 3)
 
@@ -606,6 +631,11 @@ function AS:SkinDropDownBox(Frame, Width)
 		AS:SkinNextPrevButton(Button, true)
 
 		AS:CreateBackdrop(Frame)
+
+		if AS:CheckOption('ElvUISkinModule') then
+			AS:SetTemplate(Frame.Backdrop, 'Default')
+		end
+
 		Frame.Backdrop:Point("TOPLEFT", 20, -2)
 		Frame.Backdrop:Point("BOTTOMRIGHT", Button, "BOTTOMRIGHT", 2, -2)
 	end
@@ -615,6 +645,10 @@ function AS:SkinSlideBar(Frame, Height, MoveText)
 	AS:StripTextures(Frame)
 	AS:CreateBackdrop(Frame)
 	Frame.Backdrop:SetAllPoints()
+
+	if AS:CheckOption('ElvUISkinModule') then
+		AS:SetTemplate(Frame.Backdrop, 'Default')
+	end
 
 	if not Height then
 		Height = Frame:GetHeight()
@@ -705,6 +739,9 @@ function AS:SkinStatusBar(frame, ClassColor)
 		local color = RAID_CLASS_COLORS[AS.MyClass]
 		frame:SetStatusBarColor(color.r, color.g, color.b)
 	end
+	if IsAddOnLoaded('ElvUI') then
+		ElvUI[1]:RegisterStatusBar(Frame)
+	end
 end
 
 function AS:SkinTooltip(tooltip, scale)
@@ -742,4 +779,12 @@ function AS:Desaturate(frame, point)
 			self:GetHighlightTexture():SetDesaturated(true)
 		end
 	end)
+end
+
+function AS:AdjustForPixelPerfect(number)
+	if AS.PixelPerfect then
+		number = number - 1
+	end
+
+	return number
 end
