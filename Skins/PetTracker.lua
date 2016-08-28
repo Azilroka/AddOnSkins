@@ -104,49 +104,58 @@ function AS:PetTracker()
 				AS:StripTextures(PetTrackerTamerJournalHistoryLoadButton, true)
 				AS:SkinButton(PetTrackerTamerJournalHistoryLoadButton)
 				for i = 1, 4 do
-					AS:SkinIconButton(_G['PetTrackerTamerJournalCardLoot'..i])
+					if _G['PetTrackerTamerJournalCardLoot'..i] then
+						AS:SkinIconButton(_G['PetTrackerTamerJournalCardLoot'..i])
+						print(i)
+					end
 				end
 				for i = 1, 11 do
 					local b = _G["PetTrackerTamerJournalListButton"..i]
-					AS:StripTextures(b)
-					AS:StyleButton(b)
-					AS:SetTemplate(b.model)
-					b.model.quality:Hide()
-					hooksecurefunc(PetTrackerTamerJournalList, 'update', function(...) b.model:SetBackdropBorderColor(b.model.quality:GetVertexColor()) end)
-					b.model.levelRing:SetAlpha(0)
+					if b then
+						AS:StripTextures(b)
+						AS:StyleButton(b)
+						AS:SetTemplate(b.model)
+						b.model.quality:Hide()
+						hooksecurefunc(PetTrackerTamerJournalList, 'update', function(...) b.model:SetBackdropBorderColor(b.model.quality:GetVertexColor()) end)
+						b.model.levelRing:SetAlpha(0)
+					end
 				end
 				self.IsSkinned = true
 				for i = 1, 3 do
-					AS:SetTemplate(_G['PetTrackerJournalSlot'..i], 'Transparent')
-					_G['PetTrackerJournalSlot'..i].Bg:Hide()
-					_G['PetTrackerJournalSlot'..i].Quality:Hide()
-					_G['PetTrackerJournalSlot'..i].Hover:Kill()
-					--_G['PetTrackerJournalSlot'..i..'Highlight']:Kill()
- 					AS:SkinTexture(_G['PetTrackerJournalSlot'..i].Icon)
-					_G['PetTrackerJournalSlot'..i].IconBorder:Hide()
-					_G['PetTrackerJournalSlot'..i].LevelBG:Hide()
-					_G['PetTrackerJournalSlot'..i].IsSkinned = true
-					if PetTrackerTamerJournal['Tab'..i] then
-						AS:SetTemplate(PetTrackerTamerJournal['Tab'..i])
-						PetTrackerTamerJournal['Tab'..i].TabBg:Kill()
-						AS:SkinTexture(PetTrackerTamerJournal['Tab'..i].Icon)
-						PetTrackerTamerJournal['Tab'..i].Icon:SetAllPoints()
-						AS:StyleButton(PetTrackerTamerJournal['Tab'..i])
-						PetTrackerTamerJournal['Tab'..i].Highlight:SetTexture(nil)
-						PetTrackerTamerJournal['Tab'..i].Highlight:Kill()
+					if _G['PetTrackerJournalSlot'..i] then
+						AS:SetTemplate(_G['PetTrackerJournalSlot'..i], 'Transparent')
+						_G['PetTrackerJournalSlot'..i].Bg:Hide()
+						_G['PetTrackerJournalSlot'..i].Quality:Hide()
+						_G['PetTrackerJournalSlot'..i].Hover:Kill()
+						--_G['PetTrackerJournalSlot'..i..'Highlight']:Kill()
+						AS:SkinTexture(_G['PetTrackerJournalSlot'..i].Icon)
+						_G['PetTrackerJournalSlot'..i].IconBorder:Hide()
+						_G['PetTrackerJournalSlot'..i].LevelBG:Hide()
+						_G['PetTrackerJournalSlot'..i].IsSkinned = true
+						if PetTrackerTamerJournal['Tab'..i] then
+							AS:SetTemplate(PetTrackerTamerJournal['Tab'..i])
+							PetTrackerTamerJournal['Tab'..i].TabBg:Kill()
+							AS:SkinTexture(PetTrackerTamerJournal['Tab'..i].Icon)
+							PetTrackerTamerJournal['Tab'..i].Icon:SetAllPoints()
+							AS:StyleButton(PetTrackerTamerJournal['Tab'..i])
+							PetTrackerTamerJournal['Tab'..i].Highlight:SetTexture(nil)
+							PetTrackerTamerJournal['Tab'..i].Highlight:Kill()
+						end
 					end
 					for i = 1, 15 do
 						local Ability = _G['PetTrackerAbilityButton'..i]
-						for i = 1, Ability:GetNumRegions() do
-							local Region = select(i, Ability:GetRegions())
-							if Region and Region:IsObjectType('Texture') then
-								if Region:GetTexture() == 'Interface\\Spellbook\\Spellbook-Parts' then
-									Region:SetTexture(nil)
+						if Ability then
+							for i = 1, Ability:GetNumRegions() do
+								local Region = select(i, Ability:GetRegions())
+								if Region and Region:IsObjectType('Texture') then
+									if Region:GetTexture() == 'Interface\\Spellbook\\Spellbook-Parts' then
+										Region:SetTexture(nil)
+									end
 								end
 							end
+							AS:StyleButton(Ability)
+							AS:SkinTexture(Ability.Icon)
 						end
-						AS:StyleButton(_G['PetTrackerAbilityButton'..i])
-						AS:SkinTexture(_G['PetTrackerAbilityButton'..i].Icon)
 					end
 				end
 			end
