@@ -15,7 +15,7 @@ function AS:MyRolePlay()
 	AS:SkinCloseButton(MyRolePlayBrowseFrameCloseButton)
 	AS:SkinScrollBar(MyRolePlayBrowseFrameAScrollFrameScrollBar)
 	AS:SkinScrollBar(MyRolePlayBrowseFrameBScrollFrameScrollBar)
-	AS:SkinTab(CharacterFrameTab5)
+	AS:SkinTab(CharacterFrameTab4)
 
 	MyRolePlayMultiEditFrame:DisableDrawLayer("BORDER")
 	MyRolePlayMultiEditFrameBg:Hide()
