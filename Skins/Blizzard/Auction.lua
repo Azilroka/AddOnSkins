@@ -317,8 +317,6 @@ function AS:Blizzard_BlackMarket(event, addon)
 	AS:StyleButton(BlackMarketFrame.HotDeal.Item)
 	AS:SkinTexture(BlackMarketFrame.HotDeal.Item.IconTexture)
 	BlackMarketFrame.HotDeal.Item.IconTexture:SetInside()
-	BlackMarketFrame.HotDeal.Item.hover:SetInside()
-	BlackMarketFrame.HotDeal.Item.pushed:SetInside()
 
 	local Tabs = {
 		"ColumnName",

@@ -290,7 +290,7 @@ function AS:AcceptFrame(MainText, Function)
 		AcceptFrame.Close:SetFormattedText('|cFFFFFFFF%s|r', NO)
 	end
 	AcceptFrame.Text:SetText(MainText)
-	AcceptFrame:SetSize(AcceptFrame.Text:GetStringWidth() + 50, AcceptFrame.Text:GetStringHeight() + 60)
+	AcceptFrame:SetSize(AcceptFrame.Text:GetStringWidth() + 100, AcceptFrame.Text:GetStringHeight() + 60)
 	AcceptFrame.Accept:SetScript('OnClick', Function)
 	AcceptFrame:Show()
 end
