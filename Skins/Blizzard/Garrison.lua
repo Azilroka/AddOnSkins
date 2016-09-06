@@ -21,6 +21,18 @@ function AS:Blizzard_Garrison(event, addon)
 		AS:StripTextures(GarrisonCapacitiveDisplayFrameInset)
 		AS:SkinCloseButton(GarrisonCapacitiveDisplayFrame.CloseButton)
 		AS:SkinButton(GarrisonCapacitiveDisplayFrame.StartWorkOrderButton, true)
+		AS:SkinButton(GarrisonCapacitiveDisplayFrame.CreateAllWorkOrdersButton, true)
+
+		GarrisonCapacitiveDisplayFramePortrait:Kill()
+		GarrisonCapacitiveDisplayFrameLeft:SetTexture(nil)
+		GarrisonCapacitiveDisplayFrameMiddle:SetTexture(nil)
+		GarrisonCapacitiveDisplayFrameRight:SetTexture(nil)
+
+		GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.IconBG:SetTexture(nil)
+
+		AS:SkinNextPrevButton(GarrisonCapacitiveDisplayFrame.DecrementButton)
+		AS:SkinNextPrevButton(GarrisonCapacitiveDisplayFrame.IncrementButton)
+		AS:SkinEditBox(GarrisonCapacitiveDisplayFrame.Count)
 		AS:UnregisterSkinEvent('Blizzard_Garrison', 'ADDON_LOADED')
 	end
 end
