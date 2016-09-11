@@ -2,8 +2,6 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_ChatBubbles()
 	--local noscalemult = AS.Mult * UIParent:GetScale()
-	local tslu = 0
-	local numkids = 0
 	local bubbles = {}
 
 	local function SkinChatBubble(frame)
@@ -32,34 +30,37 @@ function AS:Blizzard_ChatBubbles()
 
 	local function IsChatBubble(frame)
 		for i = 1, frame:GetNumRegions() do
-			local region = select(i, frame:GetRegions())
-			if (region.GetTexture and region:GetTexture() and type(region:GetTexture() == "string") and strlower(region:GetTexture()) == [[interface\tooltips\chatbubble-background]]) then return true end;
+			local region = select(i, frame:GetRegions()) 
+			if region.GetTexture and region:GetTexture() and type(region:GetTexture() == "string") then
+				if strfind(strlower(region:GetTexture()), "chatbubble%-background") then return true end;
+			end
 		end
 		return false
 	end
 
+	local LastUpdate = -2
+	local Children = 0
+	
 	WorldFrame:HookScript("OnUpdate", function(self, elapsed)
-		tslu = tslu + elapsed
+		LastUpdate = LastUpdate + elapsed
+		if (LastUpdate < .1) then return end
+		LastUpdate = 0
 
-		if tslu > .05 then
-			tslu = 0
-
-			local newnumkids = WorldFrame:GetNumChildren()
-			if newnumkids ~= numkids then
-				for i = numkids + 1, newnumkids do
-					local frame = select(i, WorldFrame:GetChildren())
-
-					if IsChatBubble(frame) then
-						SkinChatBubble(frame)
-					end
+		local Count = WorldFrame:GetNumChildren()
+		if (Count ~= Children) then
+			for i = Children + 1, Count do
+				local frame = select(i, WorldFrame:GetChildren())
+				
+				if IsChatBubble(frame) then
+					SkinChatBubble(frame)
 				end
-				numkids = newnumkids
 			end
+			numChildren = count
+		end
 
-			for i, frame in next, bubbles do
-				local r, g, b = frame.text:GetTextColor()
-				frame:SetBackdropBorderColor(r, g, b, .8)
-			end
+		for i, frame in next, bubbles do
+			local r, g, b = frame.text:GetTextColor()
+			frame:SetBackdropBorderColor(r, g, b, .8)
 		end
 	end)
 end
