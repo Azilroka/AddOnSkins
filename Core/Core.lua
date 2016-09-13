@@ -144,6 +144,18 @@ function AS:RegisteredSkin(skinName, priority, func, events)
 	end
 end
 
+function AS:RunSkinsEvent(event, addon)
+	if event == 'PLAYER_ENTERING_WORLD' or event == 'ADDON_LOADED' then
+		for skin, funcs in pairs(AS.skins) do
+			if AS:CheckOption(skin) then
+				for _, func in ipairs(funcs) do
+					AS:CallSkin(skin, func, event)
+				end
+			end
+		end
+	end
+end
+
 function AS:CallSkin(skin, func, event, ...)
 	local pass, errormsg = pcall(func, self, event, ...)
 	if not pass then
@@ -207,19 +219,7 @@ function AS:StartSkinning(event)
 		end
 	end
 
-	for skin, alldata in pairs(AS.register) do
-		for _, data in pairs(alldata) do
-			AS:RegisteredSkin(skin, data.priority, data.func, data.events)
-		end
-	end
-
-	for skin, funcs in pairs(AS.skins) do
-		if AS:CheckOption(skin) then
-			for _, func in ipairs(funcs) do
-				AS:CallSkin(skin, func, event)
-			end
-		end
-	end
+	AS:RunSkinsEvent(event)
 
 	if FoundError then
 		AS:Print(format('%s: Please report this to Azilroka immediately @ %s', AS.Version, AS:PrintURL(AS.TicketTracker)))
@@ -247,7 +247,9 @@ end
 
 function AS:Init(event, addon)
 	if event == 'ADDON_LOADED' and addon == AddOnName then
+
 		AS:UpdateMedia()
+
 		if AS:CheckAddOn('ElvUI') then
 			local ElvUIVersion, MinElvUIVersion = tonumber(GetAddOnMetadata('ElvUI', 'Version')), 10.00
 			if ElvUIVersion < MinElvUIVersion then
@@ -258,7 +260,19 @@ function AS:Init(event, addon)
 			end
 			AS:InjectProfile()
 		end
+
 		AS:CreateDataText()
+
+		for skin, alldata in pairs(AS.register) do
+			for _, data in pairs(alldata) do
+				AS:RegisteredSkin(skin, data.priority, data.func, data.events)
+			end
+		end
+	end
+	if event == 'ADDON_LOADED' and IsAddOnLoaded(AddOnName) then
+		if addon ~= AddOnName then
+			AS:RunSkinsEvent(event, addon)
+		end
 	end
 	if event == 'PLAYER_LOGIN' then
 		AS:UpdateMedia()
