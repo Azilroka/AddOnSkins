@@ -27,6 +27,8 @@ AddOn.events = {}
 AddOn.register = {}
 AddOn.FrameLocks = {}
 
+AddOn.preload = {}
+
 AddOn.AddOns = {}
 
 for i = 1, GetNumAddOns() do

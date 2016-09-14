@@ -144,15 +144,13 @@ function AS:RegisteredSkin(skinName, priority, func, events)
 	end
 end
 
-function AS:RunSkinsEvent(event, addon)
-	if event == 'PLAYER_ENTERING_WORLD' or event == 'ADDON_LOADED' then
-		for skin, funcs in pairs(AS.skins) do
-			if AS:CheckOption(skin) then
-				for _, func in ipairs(funcs) do
-					AS:CallSkin(skin, func, event)
-				end
-			end
-		end
+function AS:RegisterForPreload(skinName, skinFunc, addonName)
+	AS.preload[addonName] = { func = skinFunc, addon = skinName }
+end
+
+function AS:RunPreload(addonName)
+	if AS.preload[addonName] then
+		AS:CallSkin(AS.preload[addonName].addon, AS.preload[addonName].func, 'ADDON_LOADED', addonName)
 	end
 end
 
@@ -211,6 +209,20 @@ function AS:StartSkinning(event)
 	AS.Mult = 768/AS.ScreenHeight/UIParent:GetScale()
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 
+	for skin, alldata in pairs(AS.register) do
+		for _, data in pairs(alldata) do
+			AS:RegisteredSkin(skin, data.priority, data.func, data.events)
+		end
+	end
+
+	for skin, funcs in pairs(AS.skins) do
+		if AS:CheckOption(skin) then
+			for _, func in ipairs(funcs) do
+				AS:CallSkin(skin, func, event)
+			end
+		end
+	end
+
 	if not AS:CheckAddOn('ElvUI') then
 		for skin, alldata in pairs(AS.register) do
 			if AS:CheckOption(skin) == nil then
@@ -218,8 +230,6 @@ function AS:StartSkinning(event)
 			end
 		end
 	end
-
-	AS:RunSkinsEvent(event)
 
 	if FoundError then
 		AS:Print(format('%s: Please report this to Azilroka immediately @ %s', AS.Version, AS:PrintURL(AS.TicketTracker)))
@@ -262,17 +272,9 @@ function AS:Init(event, addon)
 		end
 
 		AS:CreateDataText()
-
-		for skin, alldata in pairs(AS.register) do
-			for _, data in pairs(alldata) do
-				AS:RegisteredSkin(skin, data.priority, data.func, data.events)
-			end
-		end
 	end
 	if event == 'ADDON_LOADED' and IsAddOnLoaded(AddOnName) then
-		if addon ~= AddOnName then
-			AS:RunSkinsEvent(event, addon)
-		end
+		AS:RunPreload(addon)
 	end
 	if event == 'PLAYER_LOGIN' then
 		AS:UpdateMedia()
