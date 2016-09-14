@@ -11,7 +11,7 @@ function AS:CheckOption(optionName, ...)
 		if not IsAddOnLoaded(addon) then return false end
 	end
 
-	return E.private.addonskins[optionName]
+	return E.private.addonskins[optionName] or V.addonskins[optionName]
 end
 
 function AS:SetOption(optionName, value)
