@@ -215,18 +215,18 @@ function AS:StartSkinning(event)
 		end
 	end
 
-	for skin, funcs in pairs(AS.skins) do
-		if AS:CheckOption(skin) then
-			for _, func in ipairs(funcs) do
-				AS:CallSkin(skin, func, event)
-			end
-		end
-	end
-
 	if not AS:CheckAddOn('ElvUI') then
 		for skin, alldata in pairs(AS.register) do
 			if AS:CheckOption(skin) == nil then
 				AS:EnableOption(skin)
+			end
+		end
+	end
+
+	for skin, funcs in pairs(AS.skins) do
+		if AS:CheckOption(skin) then
+			for _, func in ipairs(funcs) do
+				AS:CallSkin(skin, func, event)
 			end
 		end
 	end
