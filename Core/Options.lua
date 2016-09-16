@@ -235,7 +235,7 @@ function AS:GetOptions()
 					},
 					EmbedSystemMessage = {
 						type = "toggle",
-						name = ASL["Enable the Embed System Message"],
+						name = ASL["Embed System Message"],
 						order = 9,
 					},
 					EmbedOoCDelay = {
@@ -341,7 +341,7 @@ function AS:GetOptions()
 					},
 					LoginMsg = {
 						type = "toggle",
-						name = ASL["Enable the Login Message"],
+						name = ASL["Login Message"],
 						order = 4,
 					},
 				},

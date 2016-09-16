@@ -83,8 +83,8 @@ function AS:UpdateLocale()
 	ASL["Embed into Right Chat Panel"] = "Embed into Right Chat Panel"
 	ASL["Parchment"] = "Parchment"
 	ASL["Enable Skin Debugging"] = "Enable Skin Debugging"
-	ASL["Enable the Login Message"] = "Enable the Login Message"
-	ASL["Enable the Embed System Message"] = "Enable the Embed System Message"
+	ASL["Login Message"] = "Login Message"
+	ASL["Embed System Message"] = "Embed System Message"
 
 	if AS['UpdateLocale_'..Locale] then
 		AS['UpdateLocale_'..Locale]()
