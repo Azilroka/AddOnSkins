@@ -149,7 +149,7 @@ function AS:RegisterForPreload(skinName, skinFunc, addonName)
 end
 
 function AS:RunPreload(addonName)
-	if AS.preload[addonName] then
+	if AS.preload[addonName] and AS:CheckOption(AS.preload[addonName].addon) then
 		AS:CallSkin(AS.preload[addonName].addon, AS.preload[addonName].func, 'ADDON_LOADED', addonName)
 	end
 end
@@ -215,15 +215,10 @@ function AS:StartSkinning(event)
 		end
 	end
 
-	if not AS:CheckAddOn('ElvUI') then
-		for skin, alldata in pairs(AS.register) do
-			if AS:CheckOption(skin) == nil then
-				AS:EnableOption(skin)
-			end
-		end
-	end
-
 	for skin, funcs in pairs(AS.skins) do
+		if (not AS:CheckAddOn('ElvUI')) and (AS:CheckOption(skin) == nil) then
+			AS:EnableOption(skin)
+		end
 		if AS:CheckOption(skin) then
 			for _, func in ipairs(funcs) do
 				AS:CallSkin(skin, func, event)
