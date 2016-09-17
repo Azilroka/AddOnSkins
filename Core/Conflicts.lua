@@ -34,7 +34,6 @@ for i = 1, GetNumAddOns() do
 	local Name, Title, _, _, Reason = GetAddOnInfo(i)
 	for _, AddOnName in pairs(Conflicts) do
 		if Name == AddOnName and Reason ~= "MISSING" then
---			AS:Print(format(ASL["Conflict System: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory."], AddOnName))
 			if GetAddOnEnableState(AS.MyName, Name) > 0 then
 				DisableAddOn(AddOnName)
 			end

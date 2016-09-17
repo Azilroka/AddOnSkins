@@ -4,32 +4,6 @@ if not AS:CheckAddOn('ElvUI') then return end
 local E, L, V, P, G, LSM, ES, S
 local select = select
 
-function AS:CheckOption(optionName, ...)
-	for i = 1, select('#', ...) do
-		local addon = select(i, ...)
-		if not addon then break end
-		if not IsAddOnLoaded(addon) then return false end
-	end
-
-	return E.private.addonskins[optionName]
-end
-
-function AS:SetOption(optionName, value)
-	E.private.addonskins[optionName] = value
-end
-
-function AS:ToggleOption(optionName)
-	E.private.addonskins[optionName] = not E.private.addonskins[optionName]
-end
-
-function AS:DisableOption(optionName)
-	AS:SetOption(optionName, false)
-end
-
-function AS:EnableOption(optionName)
-	AS:SetOption(optionName, true)
-end
-
 local ElvUISkinTable = {
 	['Blizzard_CharacterFrame'] = {
 		['blizzard'] = 'character'

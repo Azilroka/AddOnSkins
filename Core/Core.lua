@@ -9,11 +9,12 @@ function AS:CheckOption(optionName, ...)
 		if not addon then break end
 		if not IsAddOnLoaded(addon) then return false end
 	end
-	return AddOnSkinsOptions[optionName]
+
+	return self.db[optionName]
 end
 
 function AS:SetOption(optionName, value)
-	AddOnSkinsOptions[optionName] = value
+	self.db[optionName] = value
 end
 
 function AS:DisableOption(optionName)
@@ -25,7 +26,7 @@ function AS:EnableOption(optionName)
 end
 
 function AS:ToggleOption(optionName)
-	AddOnSkinsOptions[optionName] = not AddOnSkinsOptions[optionName]
+	self.db[optionName] = not self.db[optionName]
 end
 
 function AS:Scale(Number)
@@ -216,9 +217,6 @@ function AS:StartSkinning(event)
 	end
 
 	for skin, funcs in pairs(AS.skins) do
-		if (not AS:CheckAddOn('ElvUI')) and (AS:CheckOption(skin) == nil) then
-			AS:EnableOption(skin)
-		end
 		if AS:CheckOption(skin) then
 			for _, func in ipairs(funcs) do
 				AS:CallSkin(skin, func, event)
@@ -252,6 +250,17 @@ end
 
 function AS:Init(event, addon)
 	if event == 'ADDON_LOADED' and addon == AddOnName then
+		AS:SetupProfile()
+
+		for skin, alldata in pairs(AS.register) do
+			if (AS:CheckOption(skin) == nil) then
+				if AS:CheckAddOn('ElvUI') and strfind(skin, 'Blizzard_') then
+					AS:DisableOption(skin)
+				else
+					AS:EnableOption(skin)
+				end
+			end
+		end
 
 		AS:UpdateMedia()
 
@@ -263,7 +272,6 @@ function AS:Init(event, addon)
 				AS:UnregisterAllEvents()
 				return
 			end
-			AS:InjectProfile()
 		end
 
 		AS:CreateDataText()

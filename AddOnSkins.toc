@@ -2,8 +2,8 @@
 ## Title: |cff1784d1AddOnSkins|r
 ## Version: 3.39
 ## Author: Azilroka, Sortokk
-## SavedVariablesPerCharacter: AddOnSkinsOptions
-## OptionalDep: ElvUI, BuyEmAll, DSM, Tukui, HydraUI
+## SavedVariables: AddOnSkinsDB
+## OptionalDep: ElvUI, BuyEmAll, DSM, Tukui
 ## X-Tukui-ProjectID: 128
 ## X-Tukui-ProjectFolders: AddOnSkins
 

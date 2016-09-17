@@ -2,7 +2,6 @@
 	<Script file="API.lua"/>
 	<Script file="Options.lua"/>
 	<Script file="Core.lua"/>
-	<Script file="HydraUI.lua"/>
 	<Script file="Tukui.lua"/>
 	<Script file="ElvUI.lua"/>
 	<Script file="Conflicts.lua"/>
