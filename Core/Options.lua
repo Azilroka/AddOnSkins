@@ -17,6 +17,7 @@ local defaults = {
 		['EmbedLeftWidth'] = 200,
 		['EmbedBelowTop'] = false,
 		['TransparentEmbed'] = false,
+		['EmbedIsHidden'] = false,
 	-- Misc
 		['RecountBackdrop'] = true,
 		['SkadaBackdrop'] = true,
@@ -457,7 +458,7 @@ function AS:GetOptions()
 
 	Options.args.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(AS.data);
 	Options.args.profiles.order = -2;
-	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("OzCooldownsProfiles", Options.args.profiles);
+	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("AddOnSkinsProfiles", Options.args.profiles);
 
 	local EP = LibStub('LibElvUIPlugin-1.0', true)
 	if EP then

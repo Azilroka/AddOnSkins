@@ -18,61 +18,6 @@ function AS:DisableElvUIOption(skin)
 	end
 end
 
-function AS:InjectProfile()
-	E, L, V, P, G = unpack(ElvUI)
-
-	V['addonskins'] = {
-	-- Embeds
-		['EmbedOoC'] = false, 
-		['EmbedOoCDelay'] = 10,
-		['EmbedCoolLine'] = false,
-		['EmbedSexyCooldown'] = false,
-		['EmbedSystem'] = false,
-		['EmbedSystemDual'] = false,
-		['EmbedMain'] = 'Skada',
-		['EmbedLeft'] = 'Skada',
-		['EmbedRight'] = 'Skada',
-		['EmbedRightChat'] = true,
-		['EmbedLeftWidth'] = 200,
-		['EmbedBelowTop'] = false,
-		['EmbedIsHidden'] = false,
-		['TransparentEmbed'] = false,
-	-- Misc
-		['RecountBackdrop'] = true,
-		['SkadaBackdrop'] = true,
-		['OmenBackdrop'] = true,
-		['DetailsBackdrop'] = true,
-		['MiscFixes'] = true,
-		['DBMSkinHalf'] = false,
-		['DBMFont'] = 'ElvUI Norm',
-		['DBMFontSize'] = 12,
-		['DBMFontFlag'] = 'OUTLINE',
-		['WeakAuraAuraBar'] = false,
-		['WeakAuraIconCooldown'] = true,
-		['AuctionHouse'] = true,
-		['SkinTemplate'] = 'Transparent',
-		['HideChatFrame'] = 'NONE',
-		['SkinDebug'] = false,
-		['Parchment'] = true,
-		['LoginMsg'] = true,
-		['EmbedSystemMessage'] = true,
-		['ElvUISkinModule'] = true,
-	}
-
-	do
-		for k, _ in pairs(AS.register) do
-			if not V['addonskins'][k] then
-				if strfind(k, 'Blizzard_') then
-					V['addonskins'][k] = false
-				else
-					V['addonskins'][k] = true
-				end
-			end
-		end
-		V['addonskins']['ParchmentRemover'] = false
-	end
-end
-
 function AS:UpdateMedia()
 	E, L, V, P, G = unpack(ElvUI)
 
