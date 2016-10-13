@@ -192,8 +192,6 @@ end
 function AS:StartSkinning(event)
 	AS:UnregisterEvent(event)
 
-	AS:UpdateLocale()
-
 	local EP = LibStub('LibElvUIPlugin-1.0', true)
 	if EP then
 		EP:RegisterPlugin(AddOnName, AS.GetOptions)
@@ -263,6 +261,7 @@ function AS:Init(event, addon)
 		end
 
 		AS:UpdateMedia()
+		AS:UpdateLocale()
 
 		if AS:CheckAddOn('ElvUI') then
 			local ElvUIVersion, MinElvUIVersion = tonumber(GetAddOnMetadata('ElvUI', 'Version')), 10.00
