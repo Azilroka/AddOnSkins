@@ -28,6 +28,19 @@ function AS:Blizzard_Others()
 		-- end
 	-- end
 
+	local function SkinNavBarButtons(self)
+		local navButton = self.navList[#self.navList]
+		if navButton and not navButton.isSkinned then
+			AS:SkinButton(navButton, true)
+			if navButton.MenuArrowButton then
+				AS:SkinNextPrevButton(navButton.MenuArrowButton, true)
+			end
+
+			navButton.isSkinned = true
+		end
+	end
+	hooksecurefunc("NavBar_AddButton", SkinNavBarButtons)
+
 	--LFD Role Picker frame
 	AS:StripTextures(LFDRoleCheckPopup)
 	AS:SetTemplate(LFDRoleCheckPopup, 'Default')

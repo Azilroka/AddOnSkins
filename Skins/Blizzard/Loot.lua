@@ -8,6 +8,8 @@ function AS:Blizzard_LootFrames()
 		local Frame = _G['GroupLootFrame'..i]
 		AS:StripTextures(Frame)
 		Frame:SetSize(328, 28)
+		Frame:SetFrameStrata('MEDIUM')
+		Frame:SetFrameLevel(1)
 
 		Frame.Timer:ClearAllPoints()
 		Frame.Timer:SetInside()
@@ -20,6 +22,10 @@ function AS:Blizzard_LootFrames()
 			self.Name:SetText((bindOnPickUp and "BoP" or "BoE")..' |cFFFFFFFF'..name)
 			self.Name:SetVertexColor(bindOnPickUp and 1 or .3, bindOnPickUp and .3 or 1, bindOnPickUp and .1 or .3)
 			self.Timer:SetStatusBarColor(color.r, color.g, color.b)
+			self.Timer:SetFrameLevel(self:GetFrameLevel() + 1)
+			for _, Button in pairs({'NeedButton', 'GreedButton', 'PassButton', 'DisenchantButton'}) do
+				Frame[Button]:SetFrameLevel(Frame.Timer:GetFrameLevel() + 1)
+			end
 		end)
 
 		Frame.IconFrame:ClearAllPoints()
@@ -45,6 +51,7 @@ function AS:Blizzard_LootFrames()
 		Frame.Name:SetWordWrap(false)
 		Frame.Name:SetWidth(200)
 		Frame.Name:SetPoint('LEFT', Frame.PassButton, 'RIGHT', 5, 0)
+		Frame.Name:SetDrawLayer('OVERLAY')
 	end
 
 	--[[

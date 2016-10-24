@@ -37,3 +37,6 @@ for i = 1, GetNumAddOns() do
 end
 
 TEXTURE_ITEM_QUEST_BANG = "Interface\\AddOns\\AddOnSkins\\Media\\Textures\\UI-Icon-QuestBang"
+
+AddOn.Hider = CreateFrame('Frame', nil, UIParent)
+AddOn.Hider:Hide()

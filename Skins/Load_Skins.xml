@@ -13,6 +13,7 @@
 	<Script file="Archy.lua"/>
 	<Script file="Arh.lua"/>
 	<Script file="ArkInventory.lua"/>
+	<Script file="ArtifactPowerUser.lua"/>
 	<Script file="AtlasLoot.lua"/>
 	<Script file="ATSW.lua"/>
 	<Script file="Auctionator.lua"/>

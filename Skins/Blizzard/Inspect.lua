@@ -10,6 +10,8 @@ function AS:Blizzard_Inspect(event, addon)
 		AS:SkinTab(_G["InspectFrameTab"..i])
 	end
 
+	AS:SkinButton(InspectPaperDollFrame.ViewButton)
+
 	InspectModelFrameBorderTopLeft:SetTexture('')
 	InspectModelFrameBorderTopRight:SetTexture('')
 	InspectModelFrameBorderTop:SetTexture('')
@@ -47,7 +49,7 @@ function AS:Blizzard_Inspect(event, addon)
 		AS:SkinTexture(Slot.icon)
 		AS:SkinFrame(Slot)
 		Slot.icon:SetInside()
-		Slot.IconBorder:SetTexture(nil)
+		Slot.IconBorder:SetAlpha(0)
 		Slot:SetFrameLevel(Slot:GetFrameLevel() + 2)
 		hooksecurefunc(Slot.IconBorder, 'SetVertexColor', function(self, r, g, b)
 			Slot:SetBackdropBorderColor(r, g, b)
@@ -59,7 +61,7 @@ function AS:Blizzard_Inspect(event, addon)
 	end
 
 	AS:StripTextures(InspectPVPFrame)
-	for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3', 'Arena5v5'}) do
+	for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3'}) do
 		local Frame = InspectPVPFrame[Section]
 		AS:SkinFrame(Frame)
 		Frame:EnableMouse(true)
@@ -105,52 +107,6 @@ function AS:Blizzard_Inspect(event, addon)
 		end
 	end
 
-	InspectTalentFrame:HookScript('OnShow', function(self)
-		if self.isGlyphsDone then return end
-		for i = 1, 6 do
-			local Glyph = InspectGlyphs["Glyph"..i]
-			AS:SetTemplate(Glyph)
-			Glyph:SetBackdropColor(0,0,0,0)
-			Glyph:SetFrameLevel(Glyph:GetFrameLevel() + 5)
-			Glyph.ring:Hide()
-			Glyph.highlight:SetTexture(nil)
-			Glyph.glyph:Hide()
-
-			Glyph.icon = Glyph:CreateTexture(nil, 'OVERLAY')
-			Glyph.icon:SetInside()
-			AS:SkinTexture(Glyph.icon)
-			if i % 2 == 1 then
-				Glyph:Size(Glyph:GetWidth() * .8, Glyph:GetHeight() * .8)
-			end
-		end
-		InspectGlyphs.Glyph1:SetPoint("TOPLEFT", 80, -7)
-		InspectGlyphs.Glyph3:SetPoint("TOPLEFT", 80, -97)
-		InspectGlyphs.Glyph5:SetPoint("TOPLEFT", 80, -187)
-		InspectGlyphFrameGlyph_UpdateGlyphs(self.InspectGlyphs, false)
-		self.isGlyphsDone = true
-	end)
-
-	hooksecurefunc('InspectGlyphFrameGlyph_UpdateSlot', function(self)
-		local id = self:GetID();
-		local talentGroup = PlayerTalentFrame and PlayerTalentFrame.talentGroup;
-		local enabled, glyphType, glyphTooltipIndex, glyphSpell, iconFilename, glyphID = GetGlyphSocketInfo(id, talentGroup, true, INSPECTED_UNIT);
-		if self.icon then
-			self.icon:SetTexture("Interface\\Spellbook\\UI-Glyph-Rune1")
-		end
-		if not glyphType then
-			return;
-		end
-		if ( not enabled ) then
-		elseif (not glyphSpell or (clear == true)) then
-		else
-			if self.icon then
-				if (iconFilename) then
-					self.icon:SetTexture(iconFilename);
-				end
-			end
-		end
-	end)
-	
 	InspectGuildFrameBG:SetTexture('')
 end
 
