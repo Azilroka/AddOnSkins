@@ -54,12 +54,10 @@ function AS:EmbedInit()
 			AS:RegisterEvent('PLAYER_REGEN_ENABLED', 'EmbedExitCombat')
 
 			UIParent:HookScript('OnShow', function()
-				if not UnitAffectingCombat('player') then
-					if AS:CheckOption('EmbedIsHidden') or AS:CheckOption('EmbedOoC') then
-						AS:Embed_Hide()
-					else
-						AS:Embed_Show()
-					end
+				if AS:CheckOption('EmbedIsHidden') or AS:CheckOption('EmbedOoC') then
+					AS:Embed_Hide()
+				else
+					AS:Embed_Show()
 				end
 			end)
 
