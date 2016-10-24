@@ -196,7 +196,6 @@ if AS:CheckAddOn('Recount') then
 		Recount.db.profile.Locked = true
 		Recount.db.profile.Scaling = 1
 		Recount.db.profile.ClampToScreen = true
-		Recount.db.profile.FrameStrata = '2-LOW'
 		Recount:SetStrataAndClamp()
 		Recount:LockWindows(true)
 		Recount:ResizeMainWindow()
@@ -232,7 +231,6 @@ if AS:CheckAddOn('Omen') then
 		db.profile.ShowWith.UseShowWith = false
 		db.profile.Locked = true
 		db.profile.TitleBar.ShowTitleBar = true
-		db.profile.FrameStrata = '2-LOW'
 		Omen:OnProfileChanged(nil, db)
 
 		OmenAnchor:SetParent(EmbedParent)
@@ -253,7 +251,6 @@ if AS:CheckAddOn('TinyDPS') then
 		AS:SkinFrame(tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 
 		tdpsFrame:SetParent(EmbedParent)
-		tdpsFrame:SetFrameStrata('LOW')
 		tdpsAnchor:ClearAllPoints()
 		tdpsAnchor:Point('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
 		tdpsAnchor:Point('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
@@ -282,7 +279,6 @@ if AS:CheckAddOn('alDamageMeter') then
 		alDamageMeterFrame:ClearAllPoints()
 		alDamageMeterFrame:SetInside(EmbedParent, 2, 2)
 		alDamageMeterFrame:SetParent(EmbedParent)
-		alDamageMeterFrame:SetFrameStrata('LOW')
 	end
 end
 
@@ -324,7 +320,6 @@ if AS:CheckAddOn('Skada') then
 			window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
 			window.bargroup.SetPoint = function() end
 			window.bargroup:SetParent(relativeFrame)
-			window.bargroup:SetFrameStrata('LOW')
 			window.bargroup:SetBackdrop(nil)
 			if window.bargroup.Backdrop then
 				window.bargroup.Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and "Transparent" or 'Default')
@@ -422,7 +417,6 @@ if AS:CheckAddOn('Details') then
 			end
 
 			--> set the point and save the position
-			window:SetFrameStrata('LOW')
 			window.baseframe:ClearAllPoints()
 			window.baseframe:SetParent(relativeFrame)
 
