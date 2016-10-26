@@ -202,6 +202,7 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinDropDownBox(GuildMemberRankDropdown, 175)
 
 		AS:StripTextures(GuildNewsFrame)
+
 		for i = 1, 17 do
 			_G["GuildNewsContainerButton"..i].header:Kill()
 		end
@@ -209,8 +210,8 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinFrame(GuildNewsFiltersFrame)
 		AS:SkinCloseButton(GuildNewsFiltersFrameCloseButton)
 
-		for i = 1, 6 do
-			AS:SkinCheckBox(_G["GuildNewsFilterButton"..i])
+		for _, CheckBox in pairs({'GuildAchievement', 'Achievement', 'DungeonEncounter', 'EpicItemLooted', 'EpicItemPurchased', 'EpicItemCrafted', 'LegendaryItemLooted' }) do
+			AS:SkinCheckBox(GuildNewsFiltersFrame[CheckBox])
 		end
 
 		GuildNewsFiltersFrame:Point("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -20)

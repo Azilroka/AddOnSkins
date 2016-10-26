@@ -44,15 +44,15 @@ function AS:Blizzard_Friends()
 	FriendsFrameIgnoreScrollFrame:SetHeight(294)
 	FriendsFrameIgnoreScrollFrameScrollBar:SetPoint("TOPLEFT", FriendsFrameIgnoreScrollFrame, "TOPRIGHT", 42, -10)
 
-	AS:StripTextures(PendingListFrame)
-	AS:SkinButton(FriendsFramePendingButton1AcceptButton)
-	AS:SkinButton(FriendsFramePendingButton1DeclineButton)
-	AS:SkinButton(FriendsFramePendingButton2AcceptButton)
-	AS:SkinButton(FriendsFramePendingButton2DeclineButton)
-	AS:SkinButton(FriendsFramePendingButton3AcceptButton)
-	AS:SkinButton(FriendsFramePendingButton3DeclineButton)
-	AS:SkinButton(FriendsFramePendingButton4AcceptButton)
-	AS:SkinButton(FriendsFramePendingButton4DeclineButton)
+	-- AS:StripTextures(PendingListFrame)
+	-- AS:SkinButton(FriendsFramePendingButton1AcceptButton)
+	-- AS:SkinButton(FriendsFramePendingButton1DeclineButton)
+	-- AS:SkinButton(FriendsFramePendingButton2AcceptButton)
+	-- AS:SkinButton(FriendsFramePendingButton2DeclineButton)
+	-- AS:SkinButton(FriendsFramePendingButton3AcceptButton)
+	-- AS:SkinButton(FriendsFramePendingButton3DeclineButton)
+	-- AS:SkinButton(FriendsFramePendingButton4AcceptButton)
+	-- AS:SkinButton(FriendsFramePendingButton4DeclineButton)
 
 	AS:SkinFrame(FriendsFriendsFrame, nil, nil, true)
 	AS:SkinFrame(FriendsFriendsList)
@@ -142,6 +142,10 @@ function AS:Blizzard_Friends()
 			end
 		end
 	end)
+
+	AS:StripTextures(QuickJoinScrollFrame)
+	AS:SkinScrollBar(QuickJoinScrollFrameScrollBar)
+	AS:SkinButton(QuickJoinFrame.JoinQueueButton, true)
 end
 
 AS:RegisterSkin('Blizzard_Friends', AS.Blizzard_Friends)
