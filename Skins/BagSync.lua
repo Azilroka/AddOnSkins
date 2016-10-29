@@ -38,18 +38,18 @@ function AS:BagSync()
 			end
 		end
 	end
-	AS:SkinEditBox(BagSync_SearchFrameEdit1)
+	-- AS:SkinEditBox(BagSync_SearchFrameEdit1)
 
-	hooksecurefunc(BagSync, 'ShowMoneyTooltip', function()
-		if not BagSyncMoneyTooltip.isSkinned then
-			AS:SkinFrame(BagSyncMoneyTooltip)
-			BagSyncMoneyTooltip.isSkinned = true
-			for i = 1, BagSyncMoneyTooltip:GetNumChildren() do
-				local object = select(i, BagSyncMoneyTooltip:GetChildren())
-				if object:IsObjectType('Button') then AS:SkinCloseButton(object) end
-			end
-		end
-	end)
+	-- hooksecurefunc(BagSync, 'ShowMoneyTooltip', function()
+		-- if not BagSyncMoneyTooltip.isSkinned then
+			-- AS:SkinFrame(BagSyncMoneyTooltip)
+			-- BagSyncMoneyTooltip.isSkinned = true
+			-- for i = 1, BagSyncMoneyTooltip:GetNumChildren() do
+				-- local object = select(i, BagSyncMoneyTooltip:GetChildren())
+				-- if object:IsObjectType('Button') then AS:SkinCloseButton(object) end
+			-- end
+		-- end
+	-- end)
 end
 
 AS:RegisterSkin('BagSync', AS.BagSync)
