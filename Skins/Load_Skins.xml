@@ -65,6 +65,7 @@
 	<Script file="GuildMemberInfo_TradeSkills.lua"/>
 	<Script file="GupPet.lua"/>
 	<Script file="Healium.lua"/>
+	<Script file="Hekili.lua"/>
 	<Script file="Ignition.lua"/>
 	<Script file="InboxMailBag.lua"/>
 	<Script file="Incoming.lua"/>
@@ -135,6 +136,7 @@
 	<Script file="Spy.lua"/>
 	<Script file="StormEarthAndFire.lua"/>
 	<Script file="Swatter.lua"/>
+	<Script file="TalentSetManager.lua"/>
 	<Script file="TinyDPS.lua"/>
 	<Script file="TitanPanel.lua"/>
 	<Script file="TomeOfTeleportation.lua"/>
