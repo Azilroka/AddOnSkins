@@ -1,4 +1,4 @@
-clocal AS = unpack(AddOnSkins)
+local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Inspect(event, addon)
 	if addon ~= "Blizzard_InspectUI" then return end
