@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+clocal AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Inspect(event, addon)
 	if addon ~= "Blizzard_InspectUI" then return end
@@ -24,40 +24,41 @@ function AS:Blizzard_Inspect(event, addon)
 	InspectModelFrameBackgroundOverlay:SetTexture('')
 	AS:SkinBackdropFrame(InspectModelFrame, nil, true)
 	
-	local InspectSlots = {
-		InspectHeadSlot,
-		InspectNeckSlot,
-		InspectShoulderSlot,
-		InspectBackSlot,
-		InspectChestSlot,
-		InspectShirtSlot,
-		InspectTabardSlot,
-		InspectWristSlot,
-		InspectHandsSlot,
-		InspectWaistSlot,
-		InspectLegsSlot,
-		InspectFeetSlot,
-		InspectFinger0Slot,
-		InspectFinger1Slot,
-		InspectTrinket0Slot,
-		InspectTrinket1Slot,
-		InspectMainHandSlot,
-		InspectSecondaryHandSlot,
+	local Slots = {
+		Head,
+		Neck,
+		Shoulder,
+		Back,
+		Chest,
+		Shirt,
+		Tabard,
+		Wrist,
+		Hands,
+		Waist,
+		Legs,
+		Feet,
+		Finger0,
+		Finger1,
+		Trinket0,
+		Trinket1,
+		MainHand,
+		SecondaryHand,
 	}
 
-	for _, Slot in pairs(InspectSlots) do
-		AS:SkinTexture(Slot.icon)
-		AS:SkinFrame(Slot)
-		Slot.icon:SetInside()
-		Slot.IconBorder:SetAlpha(0)
-		Slot:SetFrameLevel(Slot:GetFrameLevel() + 2)
-		hooksecurefunc(Slot.IconBorder, 'SetVertexColor', function(self, r, g, b)
-			Slot:SetBackdropBorderColor(r, g, b)
+	for _, Slot in pairs(Slots) do
+		local Button = _G['Inspect'..Slot..'Slot']
+		AS:SkinFrame(Button)
+		AS:SkinTexture(Button.icon)
+		Button.icon:SetInside()
+		Button.IconBorder:SetAlpha(0)
+		Button:SetFrameLevel(Button:GetFrameLevel() + 2)
+		hooksecurefunc(Button.IconBorder, 'SetVertexColor', function(self, r, g, b)
+			Button:SetBackdropBorderColor(r, g, b)
 		end)
-		hooksecurefunc(Slot.IconBorder, 'Hide', function(self)
-			Slot:SetBackdropBorderColor(unpack(AS.BorderColor))
+		hooksecurefunc(Button.IconBorder, 'Hide', function(self)
+			Button:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end)
-		AS:StyleButton(Slot)
+		AS:StyleButton(Button)
 	end
 
 	AS:StripTextures(InspectPVPFrame)

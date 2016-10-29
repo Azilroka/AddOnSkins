@@ -182,9 +182,13 @@ function AS:Blizzard_Quest()
 			QuestInfoRewardsFrame.ItemChooseText:SetTextColor(1, 1, 1);
 			QuestInfoRewardsFrame.ItemReceiveText:SetTextColor(1, 1, 1);
 
+			QuestInfoQuestType:SetTextColor(1, 1, 1)
+
 			if QuestInfoRewardsFrame.SpellLearnText then
 				QuestInfoRewardsFrame.SpellLearnText:SetTextColor(1, 1, 1);
 			end
+
+			QuestInfoRewardsFrame.spellHeaderPool.textR, QuestInfoRewardsFrame.spellHeaderPool.textG, QuestInfoRewardsFrame.spellHeaderPool.textB = 1, 1, 1
 
 			QuestInfoRewardsFrame.PlayerTitleText:SetTextColor(1, 1, 1);
 			QuestInfoRewardsFrame.XPFrame.ReceiveText:SetTextColor(1, 1, 1);

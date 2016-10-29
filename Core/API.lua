@@ -309,7 +309,7 @@ function AS:SkinCloseButton(CloseButton, Reposition)
 	CloseButton.Text:SetText('x')
 
 	if Reposition then
-		f:Point("TOPRIGHT", Reposition, "TOPRIGHT", 2, 2)
+		CloseButton:Point("TOPRIGHT", Reposition, "TOPRIGHT", 2, 2)
 	end
 
 	CloseButton.isSkinned = true
