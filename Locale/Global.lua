@@ -85,6 +85,8 @@ function AS:UpdateLocale()
 	ASL["Enable Skin Debugging"] = "Enable Skin Debugging"
 	ASL["Login Message"] = "Login Message"
 	ASL["Embed System Message"] = "Embed System Message"
+	ASL["Embed Frame Strata"] = "Embed Frame Strata"
+	ASL["Embed Frame Level"] = "Embed Frame Level"
 
 	if AS['UpdateLocale_'..Locale] then
 		AS['UpdateLocale_'..Locale]()

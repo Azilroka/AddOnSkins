@@ -118,6 +118,11 @@ function AS:Embed_Check(Message)
 	if AS:CheckEmbed('Recount') then AS:Embed_Recount() end
 	if AS:CheckEmbed('alDamageMeter') then AS:Embed_alDamageMeter() end
 	if AS:CheckOption('EmbedCoolLine', 'CoolLine') then AS:Embed_CoolLine() end
+
+	for _, Window in pairs({EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow}) do
+		Window:SetFrameStrata(strsub(AS:CheckOption('EmbedFrameStrata'), 3))
+		Window:SetFrameLevel(AS:CheckOption('EmbedFrameLevel'))
+	end
 end
 
 function AS:Embed_Toggle(Message)
