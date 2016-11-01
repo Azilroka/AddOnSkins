@@ -4,7 +4,7 @@ if not AS:CheckAddOn('Scrap') then return end
 
 local AddOnCount = 0
 function AS:Scrap(event, addon)
-	if addon == 'Scrap_Merchant' or AS:CheckAddOn('Scrap_Merchant') then
+	if addon == 'Scrap_Merchant' or IsAddOnLoaded('Scrap_Merchant') then
 		if Scrap and Scrap:IsObjectType('Button') and not Scrap.IsSkinned then
 			AS:StyleButton(Scrap)
 			Scrap:SetTemplate('Default', true)
@@ -28,7 +28,7 @@ function AS:Scrap(event, addon)
 		end
 	end
 	
-	if addon == 'Scrap_Visualizer' or AS:CheckAddOn('Scrap_Visualizer')then
+	if addon == 'Scrap_Visualizer' or IsAddOnLoaded('Scrap_Visualizer')then
 		AS:SkinFrame(ScrapVisualizer, 'Default')
 		AS:StripTextures(ScrapVisualizerInset)
 		AS:StripTextures(ScrapVisualizerScroll)
