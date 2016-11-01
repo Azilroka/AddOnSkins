@@ -14,7 +14,7 @@ function AS:Blizzard_TimeManager(event, addon)
 		AS:SkinEditBox(TimeManagerAlarmMessageEditBox)
 		
 		AS:SkinButton(TimeManagerAlarmEnabledButton)
-		TimeManagerAlarmEnabledButton:SetSize(16)
+		TimeManagerAlarmEnabledButton:SetSize(16, 16)
 		TimeManagerAlarmEnabledButtonText:SetPoint("RIGHT", 76, 0)
 		
 		AS:SkinCheckBox(TimeManagerMilitaryTimeCheck)

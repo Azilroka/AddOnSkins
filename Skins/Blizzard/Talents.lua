@@ -3,6 +3,8 @@ local AS = unpack(AddOnSkins)
 local AddOnSkinned = 0
 function AS:Blizzard_Talent(event, addon)
 	if (addon == 'Blizzard_TalentUI' or IsAddOnLoaded('Blizzard_TalentUI')) then
+		AS:UnregisterSkinEvent('Blizzard_Talent', 'ADDON_LOADED')
+
 		AS:SkinFrame(PlayerTalentFrame, nil, nil, true)
 		AS:StripTextures(PlayerTalentFrameInset)
 		AS:StripTextures(PlayerTalentFrameTalents, true)
@@ -208,7 +210,7 @@ function AS:Blizzard_Talent(event, addon)
 				AS:SkinFrame(Button.Border)
 				Button.Border:SetBackdropColor(0, 0, 0, 0)
 				Button.Border:SetOutside(Button.icon)
-				Button.icon:SetSize(32)
+				Button.icon:SetSize(32, 32)
 				Button.icon:SetDrawLayer("ARTWORK")
 				AS:SkinTexture(Button.icon)
 				Button:HookScript('OnEnter', function(self)
@@ -291,7 +293,7 @@ function AS:Blizzard_Talent(event, addon)
 				AS:SkinFrame(Button.Border)
 				Button.Border:SetBackdropColor(0, 0, 0, 0)
 				Button.Border:SetOutside(Button.Icon)
-				Button.Icon:SetSize(32)
+				Button.Icon:SetSize(32, 32)
 				Button.Icon:SetDrawLayer("ARTWORK")
 				AS:SkinTexture(Button.Icon)
 				Button:HookScript('OnEnter', function(self)
@@ -339,8 +341,6 @@ function AS:Blizzard_Talent(event, addon)
 		AS:SkinButton(PVPTalentPrestigeLevelDialog.Accept)
 		AS:SkinButton(PVPTalentPrestigeLevelDialog.Cancel)
 		AS:SkinCloseButton(PVPTalentPrestigeLevelDialog.CloseButton) --There are 2 buttons with the exact same name, may not be able to skin it properly until fixed by Blizzard.
-
-		AS:UnregisterSkinEvent('Blizzard_Talent', 'ADDON_LOADED')
 	end
 end
 

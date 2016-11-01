@@ -374,8 +374,8 @@ function AS:Blizzard_Options(event, addon)
 
 		AS:SkinNextPrevButton(ChatConfigMoveFilterUpButton, true)
 		AS:SkinNextPrevButton(ChatConfigMoveFilterDownButton, true)
-		ChatConfigMoveFilterUpButton:SetSize(19)
-		ChatConfigMoveFilterDownButton:SetSize(19)
+		ChatConfigMoveFilterUpButton:SetSize(19, 19)
+		ChatConfigMoveFilterDownButton:SetSize(19, 19)
 		ChatConfigMoveFilterUpButton:SetPoint("TOPLEFT", "$parent", "BOTTOMLEFT", 0, -3)
 		ChatConfigMoveFilterDownButton:SetPoint("LEFT", ChatConfigMoveFilterUpButton, "RIGHT", 3, 0)
 
