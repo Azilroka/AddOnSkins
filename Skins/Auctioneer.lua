@@ -4,7 +4,7 @@ if not AS:CheckAddOn('Auc-Advanced') then return end
 
 function AS:Auctioneer(event)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
-	if IsAddOnLoaded('Auc-Stat-Purchased') then
+	if AS:CheckAddOn('Auc-Stat-Purchased') then
 		local a, b, c, d, e = BrowsePrevPageButton:GetPoint()
 		BrowsePrevPageButton:SetPoint(a, b, c, d + 10, 3)
 		a, b, c, d, e = BrowseNextPageButton:GetPoint()

@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Overachiever_Tabs') then return end
 
 function AS:Overachiever(event, addon)
-	if addon == "Overachiever_Tabs" or IsAddOnLoaded("Overachiever_Tabs") then
+	if addon == "Overachiever_Tabs" or AS:CheckAddOn("Overachiever_Tabs") then
 		for i = 4, 6 do
 			AS:SkinTab(_G["AchievementFrameTab"..i])
 		end
