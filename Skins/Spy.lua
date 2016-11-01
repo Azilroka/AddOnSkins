@@ -9,7 +9,7 @@ function AS:Spy()
 	AS:Desaturate(Spy_MainWindow.ClearButton)
 	AS:Desaturate(Spy_MainWindow.LeftButton)
 	AS:Desaturate(Spy_MainWindow.RightButton)
-	Spy_AlertWindow:Point('TOP', UIParent, 'TOP', 0, -130)
+	Spy_AlertWindow:SetPoint('TOP', UIParent, 'TOP', 0, -130)
 end
 
 AS:RegisterSkin('Spy', AS.Spy)

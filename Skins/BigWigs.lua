@@ -100,7 +100,7 @@ function AS:BigWigs(event, addon)
 			bar.candyBarBackground:SetTexture(unpack(AS.BackdropColor))
 
 			bar.candyBarIconFrame:ClearAllPoints()
-			bar.candyBarIconFrame:Point('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
+			bar.candyBarIconFrame:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
 			bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
 			bar.candyBarIconFrame.SetWidth = AS.Noop
 
@@ -159,7 +159,7 @@ function AS:BigWigs(event, addon)
 			bar.candyBarBackground:SetTexture(unpack(AS.BackdropColor))
 
 			bar.candyBarIconFrame:ClearAllPoints()
-			bar.candyBarIconFrame:Point('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
+			bar.candyBarIconFrame:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
 			bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
 			bar.candyBarIconFrame.SetWidth = AS.Noop
 

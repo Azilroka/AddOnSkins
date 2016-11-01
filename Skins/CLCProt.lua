@@ -4,7 +4,7 @@ if not (AS:CheckAddOn('CLCProt') and AS.MyClass == 'PALADIN') then return end
 
 function AS:CLCProt()
 	local function UpdateButtonLayout(frame, button, opt)
-		button:Size(opt.size)
+		button:SetSize(opt.size)
 		button:ClearAllPoints()
 		button:SetPoint(opt.point, clcprotFrame, opt.pointParent, opt.x, opt.y)
 		button:SetAlpha(opt.alpha)
@@ -28,7 +28,7 @@ function AS:CLCProt()
 		AS:SkinButton(button)
 
 		button:EnableMouse(false)
-		button:Size(size)
+		button:SetSize(size)
 		button.texture = button:CreateTexture('$parentIcon', 'OVERLAY')
 		button.texture:SetInside()
 		button.texture:SetTexture(BGTEX)

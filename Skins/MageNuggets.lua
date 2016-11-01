@@ -74,7 +74,7 @@ function AS:MageNuggets()
 	AS:SkinButton(MageNugAlliFrameClose)
 	AS:SkinButton(MageNugAlliFrameShowOptions)
 	MNabCast_Frame:ClearAllPoints()
-	MNabCast_Frame:Point('BOTTOM', MageNugAB_Frame, 'TOP', 0, 6)
+	MNabCast_Frame:SetPoint('BOTTOM', MageNugAB_Frame, 'TOP', 0, 6)
 end
 
 AS:RegisterSkin('MageNuggets', AS.MageNuggets)

@@ -86,8 +86,8 @@ function AS:Blizzard_Bags()
 			end)
 		end
 
-		Bag.Backdrop:Point("TOPLEFT", 4, -2)
-		Bag.Backdrop:Point("BOTTOMRIGHT", 1, 1)
+		Bag.Backdrop:SetPoint("TOPLEFT", 4, -2)
+		Bag.Backdrop:SetPoint("BOTTOMRIGHT", 1, 1)
 		_G["ContainerFrame"..i.."BackgroundTop"]:Kill()
 		_G["ContainerFrame"..i.."BackgroundMiddle1"]:Kill()
 		_G["ContainerFrame"..i.."BackgroundMiddle2"]:Kill()
@@ -139,7 +139,7 @@ function AS:Blizzard_Bags()
 	BagItemAutoSortButton:GetNormalTexture():SetInside()
 	AS:SkinTexture(BagItemAutoSortButton:GetPushedTexture())
 	BagItemAutoSortButton:GetPushedTexture():SetInside()
-	BagItemAutoSortButton:Size(22)
+	BagItemAutoSortButton:SetSize(22)
 
 	BagItemAutoSortButton:SetScript('OnShow', function(self)
 		local a, b, c, d, e = self:GetPoint()
@@ -153,7 +153,7 @@ function AS:Blizzard_Bags()
 		AS:SkinTexture(Token.icon)
 		AS:CreateBackdrop(Token, 'Default')
 		Token.Backdrop:SetOutside(Token.icon)
-		Token.icon:Point("LEFT", Token.count, "RIGHT", 3, 0)
+		Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 3, 0)
 	end
 
 	AS:SkinFrame(BankFrame, nil, nil, true)
@@ -163,9 +163,9 @@ function AS:Blizzard_Bags()
 	AS:StripTextures(BankSlotsFrame)
 
 	AS:SkinButton(BankFramePurchaseButton)
-	BankFramePurchaseButton:Height(22)
+	BankFramePurchaseButton:SetHeight(22)
 	
-	BankItemSearchBox:Size(159, 16)
+	BankItemSearchBox:SetSize(159, 16)
 	AS:SkinEditBox(BankItemSearchBox)
 
 	AS:SkinButton(BankItemAutoSortButton)
@@ -175,7 +175,7 @@ function AS:Blizzard_Bags()
 	BankItemAutoSortButton:GetNormalTexture():SetInside()
 	AS:SkinTexture(BankItemAutoSortButton:GetPushedTexture())
 	BankItemAutoSortButton:GetPushedTexture():SetInside()
-	BankItemAutoSortButton:Size(20)
+	BankItemAutoSortButton:SetSize(20)
 	BankItemAutoSortButton:SetPoint("LEFT", BankItemSearchBox, "RIGHT", 4, 0)
 
 	-- Bank Bags

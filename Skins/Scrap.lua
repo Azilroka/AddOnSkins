@@ -37,7 +37,7 @@ function AS:Scrap(event, addon)
 		AS:SkinTab(ScrapVisualizerTab1)
 		AS:SkinTab(ScrapVisualizerTab2)
 		AS:SkinButton(ScrapVisualizerButton, true)
-		ScrapVisualizer:Width(MerchantFrame:GetWidth()-6)
+		ScrapVisualizer:SetWidth(MerchantFrame:GetWidth()-6)
 		AddOnCount = AddOnCount + 1
 	end
 

@@ -16,7 +16,7 @@ function AS:Blizzard_BindingUI() -- ADDON_LOADED Blizzard_BindingUI
 	
 	AS:SkinCheckBox(KeyBindingFrameCharacterButton)
 	KeyBindingFrameHeaderText:ClearAllPoints()
-	KeyBindingFrameHeaderText:Point("TOP", KeyBindingFrame, "TOP", 0, -4)
+	KeyBindingFrameHeaderText:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
 	AS:StripTextures(KeyBindingFrame)
 	AS:SetTemplate(KeyBindingFrame, 'Default')
 	
@@ -31,8 +31,8 @@ function AS:Blizzard_BindingUI() -- ADDON_LOADED Blizzard_BindingUI
 		AS:SetTemplate(button2, 'Default', true)
 	end
 	
-	KeyBindingFrameUnbindButton:Point("RIGHT", KeyBindingFrameOkayButton, "LEFT", -3, 0)
-	KeyBindingFrameOkayButton:Point("RIGHT", KeyBindingFrameCancelButton, "LEFT", -3, 0)
+	KeyBindingFrameUnbindButton:SetPoint("RIGHT", KeyBindingFrameOkayButton, "LEFT", -3, 0)
+	KeyBindingFrameOkayButton:SetPoint("RIGHT", KeyBindingFrameCancelButton, "LEFT", -3, 0)
 	
 	AS:SkinScrollBar(KeyBindingFrameScrollFrameScrollBar)
 end
@@ -41,8 +41,8 @@ function AS:Blizzard_Options(event, addon)
 	if addon == 'Blizzard_GMSurveyUI' then
 		AS:StripTextures(GMSurveyHeader)
 		AS:SkinBackdropFrame(GMSurveyFrame)
-		GMSurveyFrame.Backdrop:Point("TOPLEFT", 0, 0)
-		GMSurveyFrame.Backdrop:Point("BOTTOMRIGHT", -44, 10)
+		GMSurveyFrame.Backdrop:SetPoint("TOPLEFT", 0, 0)
+		GMSurveyFrame.Backdrop:SetPoint("BOTTOMRIGHT", -44, 10)
 
 		AS:SkinFrame(GMSurveyCommentFrame)
 
@@ -374,8 +374,8 @@ function AS:Blizzard_Options(event, addon)
 
 		AS:SkinNextPrevButton(ChatConfigMoveFilterUpButton, true)
 		AS:SkinNextPrevButton(ChatConfigMoveFilterDownButton, true)
-		ChatConfigMoveFilterUpButton:Size(19)
-		ChatConfigMoveFilterDownButton:Size(19)
+		ChatConfigMoveFilterUpButton:SetSize(19)
+		ChatConfigMoveFilterDownButton:SetSize(19)
 		ChatConfigMoveFilterUpButton:SetPoint("TOPLEFT", "$parent", "BOTTOMLEFT", 0, -3)
 		ChatConfigMoveFilterDownButton:SetPoint("LEFT", ChatConfigMoveFilterUpButton, "RIGHT", 3, 0)
 

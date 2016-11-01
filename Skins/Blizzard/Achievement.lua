@@ -8,7 +8,7 @@ function AS:Blizzard_AchievementUI(event, addon)
 		AS:SetTemplate(Achievement.icon)
 		Achievement.icon:SetSize(BiggerIcon and 54 or 36, BiggerIcon and 54 or 36)
 		Achievement.icon:ClearAllPoints()
-		Achievement.icon:Point("LEFT", 8, 0)
+		Achievement.icon:SetPoint("LEFT", 8, 0)
 		Achievement.icon.bling:Kill()
 		Achievement.icon.frame:Kill()
 		AS:SkinTexture(Achievement.icon.texture)
@@ -93,7 +93,7 @@ function AS:Blizzard_AchievementUI(event, addon)
 
 		AS:SkinDropDownBox(AchievementFrameFilterDropDown)
 		AchievementFrameFilterDropDown:ClearAllPoints()
-		AchievementFrameFilterDropDown:Point("TOPRIGHT", AchievementFrame, "TOPRIGHT", -44, 0)
+		AchievementFrameFilterDropDown:SetPoint("TOPRIGHT", AchievementFrame, "TOPRIGHT", -44, 0)
 
 		AS:SkinBackdropFrame(AchievementFrameCategories, nil, nil, true)
 		AchievementFrameCategories.Backdrop:SetInside()
@@ -109,7 +109,7 @@ function AS:Blizzard_AchievementUI(event, addon)
 		AS:StripTextures(AchievementFrameComparisonSummaryPlayer, true)
 		AS:StripTextures(AchievementFrameComparisonSummaryFriend, true)
 		AS:StripTextures(AchievementFrameComparisonHeader, true)
-		AchievementFrameComparisonHeader:Point("BOTTOMRIGHT", AchievementFrameComparison, "TOPRIGHT", 45, -20)
+		AchievementFrameComparisonHeader:SetPoint("BOTTOMRIGHT", AchievementFrameComparison, "TOPRIGHT", 45, -20)
 
 		local TooltipBorders = {
 			AchievementFrameStats,
@@ -128,13 +128,13 @@ function AS:Blizzard_AchievementUI(event, addon)
 		end
 
 		AchievementFrameHeaderTitle:ClearAllPoints()
-		AchievementFrameHeaderTitle:Point("TOPLEFT", AchievementFrame, "TOP", -50, -6)
+		AchievementFrameHeaderTitle:SetPoint("TOPLEFT", AchievementFrame, "TOP", -50, -6)
 		AchievementFrameHeaderPoints:ClearAllPoints()
-		AchievementFrameHeaderPoints:Point("LEFT", AchievementFrameHeaderTitle, "RIGHT", 2, 0)
+		AchievementFrameHeaderPoints:SetPoint("LEFT", AchievementFrameHeaderTitle, "RIGHT", 2, 0)
 		AS:SkinEditBox(AchievementFrame.searchBox)
 		AchievementFrame.searchBox:SetHeight(18)
 		AchievementFrame.searchBox:ClearAllPoints()
-		AchievementFrame.searchBox:Point("RIGHT", AchievementFrameHeaderTitle, "LEFT", -1, -1)
+		AchievementFrame.searchBox:SetPoint("RIGHT", AchievementFrameHeaderTitle, "LEFT", -1, -1)
 
 		for i = 1, 3 do
 			AS:SkinTab(_G["AchievementFrameTab"..i])
@@ -226,7 +226,7 @@ function AS:Blizzard_AchievementUI(event, addon)
 
 					if index > 1 then
 						frame:ClearAllPoints()
-						frame:Point("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
+						frame:SetPoint("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
 						frame.SetPoint = function() end
 						frame.ClearAllPoints = function() end
 					end

@@ -25,8 +25,8 @@ function AS:SexyCooldown()
 		AS:RegisterForPetBattleHide(bar)
 		if AS:CheckOption("EmbedSexyCooldown") then
 			bar:ClearAllPoints()
-			bar:Point('BOTTOMRIGHT', ElvUI_Bar1, 'TOPRIGHT', 0, 2)
-			bar:Point("BOTTOMLEFT", ElvUI_Bar1, "TOPLEFT", 0, 2)
+			bar:SetPoint('BOTTOMRIGHT', ElvUI_Bar1, 'TOPRIGHT', 0, 2)
+			bar:SetPoint("BOTTOMLEFT", ElvUI_Bar1, "TOPLEFT", 0, 2)
 			bar:SetHeight(ElvUI_Bar1Button1:GetHeight())
 			local activated
 			ElvUI_Bar1:HookScript("OnShow", function() bar:Show() end)

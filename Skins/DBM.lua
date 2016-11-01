@@ -29,14 +29,14 @@ function AS:DBM(event, addon)
 							icon1.overlay = CreateFrame('Frame', '$parentIcon1Overlay', tbar)
 							AS:SetTemplate(icon1.overlay)
 							icon1.overlay:SetFrameLevel(0)
-							icon1.overlay:Point('BOTTOMRIGHT', frame, 'BOTTOMLEFT', -(AS.PixelMode and 2 or 3), 0)
+							icon1.overlay:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMLEFT', -(AS.PixelMode and 2 or 3), 0)
 						end
 
 						if not icon2.overlay then
 							icon2.overlay = CreateFrame('Frame', '$parentIcon2Overlay', tbar)
 							AS:SetTemplate(icon2.overlay)
 							icon2.overlay:SetFrameLevel(0)
-							icon2.overlay:Point('BOTTOMLEFT', frame, 'BOTTOMRIGHT', (AS.PixelMode and 2 or 3), 0)
+							icon2.overlay:SetPoint('BOTTOMLEFT', frame, 'BOTTOMRIGHT', (AS.PixelMode and 2 or 3), 0)
 						end
 
 						AS:SkinTexture(icon1)
@@ -47,8 +47,8 @@ function AS:DBM(event, addon)
 						icon2:ClearAllPoints()
 						icon2:SetInside(icon2.overlay)
 
-						icon1.overlay:Size(bar.owner.options.Height)
-						icon2.overlay:Size(bar.owner.options.Height)
+						icon1.overlay:SetSize(bar.owner.options.Height)
+						icon2.overlay:SetSize(bar.owner.options.Height)
 						BarHeight = bar.owner.options.Height
 						tbar:SetInside(frame)
 
@@ -66,12 +66,12 @@ function AS:DBM(event, addon)
 
 						if AS:CheckOption('DBMSkinHalf') then
 							frame:SetHeight(bar.owner.options.Height / 3)
-							name:Point('BOTTOMLEFT', frame, 'TOPLEFT', 0, 3)
-							timer:Point('BOTTOMRIGHT', frame, 'TOPRIGHT', -1, 1)
+							name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 0, 3)
+							timer:SetPoint('BOTTOMRIGHT', frame, 'TOPRIGHT', -1, 1)
 						else
 							frame:SetHeight(bar.owner.options.Height)
-							name:Point('LEFT', frame, 'LEFT', 4, 0)
-							timer:Point('RIGHT', frame, 'RIGHT', -4, 0)
+							name:SetPoint('LEFT', frame, 'LEFT', 4, 0)
+							timer:SetPoint('RIGHT', frame, 'RIGHT', -4, 0)
 						end
 
 						timer:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
@@ -120,14 +120,14 @@ function AS:DBM(event, addon)
 				local MainOffset, BarOffset
 				if AS:CheckOption('DBMSkinHalf') then
 					bar:SetHeight((BarHeight or 22) / 3)
-					name:Point('BOTTOMLEFT', bar, 'TOPLEFT', 4, 0)
-					timer:Point('BOTTOMRIGHT', bar, 'TOPRIGHT', -4, 0)
+					name:SetPoint('BOTTOMLEFT', bar, 'TOPLEFT', 4, 0)
+					timer:SetPoint('BOTTOMRIGHT', bar, 'TOPRIGHT', -4, 0)
 					MainOffset = 16
 					BarOffset = 16
 				else
 					bar:SetHeight(BarHeight or 22)
-					name:Point('LEFT', bar, 'LEFT', 4, 0)
-					timer:Point('RIGHT', bar, 'RIGHT', -4, 0)
+					name:SetPoint('LEFT', bar, 'LEFT', 4, 0)
+					timer:SetPoint('RIGHT', bar, 'RIGHT', -4, 0)
 					MainOffset = 8
 					BarOffset = 4
 				end
@@ -143,9 +143,9 @@ function AS:DBM(event, addon)
 				timer:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 
 				if DBM.Options.HealthFrameGrowUp then
-					bar:Point(pointa, anchor, pointb, 0, count == 1 and MainOffset or BarOffset)
+					bar:SetPoint(pointa, anchor, pointb, 0, count == 1 and MainOffset or BarOffset)
 				else
-					bar:Point(pointa, anchor, pointb, 0, -(count == 1 and MainOffset or BarOffset))
+					bar:SetPoint(pointa, anchor, pointb, 0, -(count == 1 and MainOffset or BarOffset))
 				end
 
 				count = count + 1

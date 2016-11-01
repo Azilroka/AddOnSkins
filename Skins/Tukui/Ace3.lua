@@ -36,11 +36,11 @@ function AS:Ace3()
 			AS:SkinBackdropFrame(frame, 'Default')
 
 			button:ClearAllPoints()
-			button:Point('RIGHT', frame, 'RIGHT', -20, 0)
+			button:SetPoint('RIGHT', frame, 'RIGHT', -20, 0)
 
 			AS:SkinNextPrevButton(button, true)
-			frame.Backdrop:Point('TOPLEFT', 20, -2)
-			frame.Backdrop:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
+			frame.Backdrop:SetPoint('TOPLEFT', 20, -2)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
 			button:SetParent(frame.Backdrop)
 			text:SetParent(frame.Backdrop)
 			button:HookScript('OnClick', function(this)
@@ -55,26 +55,26 @@ function AS:Ace3()
 
 			AS:SkinNextPrevButton(button, true)
 			frame.text:ClearAllPoints()
-			frame.text:Point('RIGHT', button, 'LEFT', -2, 0)
+			frame.text:SetPoint('RIGHT', button, 'LEFT', -2, 0)
 
 			button:ClearAllPoints()
-			button:Point('RIGHT', frame, 'RIGHT', -10, -6)
+			button:SetPoint('RIGHT', frame, 'RIGHT', -10, -6)
 
 			if TYPE == 'LSM30_Font' then
-				frame.Backdrop:Point('TOPLEFT', 20, -17)
+				frame.Backdrop:SetPoint('TOPLEFT', 20, -17)
 			elseif TYPE == 'LSM30_Sound' then
-				frame.Backdrop:Point('TOPLEFT', 20, -17)
+				frame.Backdrop:SetPoint('TOPLEFT', 20, -17)
 				widget.soundbutton:SetParent(frame.Backdrop)
 				widget.soundbutton:ClearAllPoints()
-				widget.soundbutton:Point('LEFT', frame.Backdrop, 'LEFT', 2, 0)
+				widget.soundbutton:SetPoint('LEFT', frame.Backdrop, 'LEFT', 2, 0)
 			elseif TYPE == 'LSM30_Statusbar' then
-				frame.Backdrop:Point('TOPLEFT', 20, -17)
+				frame.Backdrop:SetPoint('TOPLEFT', 20, -17)
 				widget.bar:SetParent(frame.Backdrop)
 				widget.bar:SetInside()
 			elseif TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' then
-				frame.Backdrop:Point('TOPLEFT', 42, -16)
+				frame.Backdrop:SetPoint('TOPLEFT', 42, -16)
 			end
-			frame.Backdrop:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
 			button:SetParent(frame.Backdrop)
 			text:SetParent(frame.Backdrop)
 			button:HookScript('OnClick', function(this, button)
@@ -88,7 +88,7 @@ function AS:Ace3()
 			local button = widget.button
 
 			AS:SkinEditBox(frame)
-			frame:Height(17)
+			frame:SetHeight(17)
 			AS:SkinButton(button)
 		elseif TYPE == 'Button' then
 			local frame = widget.frame
@@ -102,8 +102,8 @@ function AS:Ace3()
 			AS:SkinSlideBar(frame)
 
 			AS:SetTemplate(editbox, 'Default')
-			editbox:Height(15)
-			editbox:Point('TOP', frame, 'BOTTOM', 0, -1)
+			editbox:SetHeight(15)
+			editbox:SetPoint('TOP', frame, 'BOTTOM', 0, -1)
 
 			lowtext:SetPoint('TOPLEFT', frame, 'BOTTOMLEFT', 2, -2)
 			hightext:SetPoint('TOPRIGHT', frame, 'BOTTOMRIGHT', -2, -2)
@@ -139,7 +139,7 @@ function AS:Ace3()
 
 			if widget.treeframe then
 				AS:SetTemplate(widget.treeframe, 'Transparent')
-				frame:Point('TOPLEFT', widget.treeframe, 'TOPRIGHT', 1, 0)
+				frame:SetPoint('TOPLEFT', widget.treeframe, 'TOPRIGHT', 1, 0)
 
 				local oldCreateButton = widget.CreateButton
 				widget.CreateButton = function(self)

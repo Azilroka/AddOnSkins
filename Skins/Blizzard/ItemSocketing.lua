@@ -27,7 +27,7 @@ function AS:Blizzard_ItemSocketing(event, addon)
 
 	ItemSocketingFramePortrait:Kill()
 	ItemSocketingSocketButton:ClearAllPoints()
-	ItemSocketingSocketButton:Point("BOTTOMRIGHT", ItemSocketingFrame, "BOTTOMRIGHT", -5, 5)
+	ItemSocketingSocketButton:SetPoint("BOTTOMRIGHT", ItemSocketingFrame, "BOTTOMRIGHT", -5, 5)
 	AS:SkinButton(ItemSocketingSocketButton)
 	AS:SkinCloseButton(ItemSocketingFrameCloseButton)
 	AS:SkinScrollBar(ItemSocketingScrollFrameScrollBar)

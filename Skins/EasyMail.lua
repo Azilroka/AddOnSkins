@@ -4,7 +4,7 @@ if not AS:CheckAddOn('EasyMail') then return end
 
 function AS:EasyMail(event)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
-	MailFrame:Size(360, 440)
+	MailFrame:SetSize(360, 440)
 	AS:Desaturate(EasyMail_CheckAllButton)
 	AS:Desaturate(EasyMail_ClearAllButton)
 	AS:Desaturate(EasyMail_CheckPageButton)
@@ -18,26 +18,26 @@ function AS:EasyMail(event)
 		AS:SkinCheckBox(_G['EasyMail_CheckButton'..i])
 	end
 
-	EasyMail_ForwardButton:Point('RIGHT', OpenMailReplyButton, 'LEFT', -2, 0)
-	InboxTooMuchMail:Point('TOPLEFT', MailFrame, 'TOPLEFT', 4, -10)
-	InboxPrevPageButton:Point('BOTTOMLEFT', InboxFrame, 'BOTTOMLEFT', 42, 100)
-	InboxNextPageButton:Point('LEFT', InboxPrevPageButton, 'RIGHT', 215, 0)
-	EasyMail_CheckAllButton:Point('TOPLEFT', InboxFrame, 'TOPLEFT', 42, -30)
-	EasyMail_CheckPageButton:Point('LEFT', EasyMail_CheckAllButton, 'RIGHT', 4, 0)
-	EasyMail_GetAllButton:Point('LEFT', EasyMail_CheckPageButton, 'RIGHT', 4, 0)
-	EasyMail_MailButton:Point('TOPLEFT', SendMailNameEditBox, 'TOPRIGHT', 4, 2)
-	EasyMail_MailButton:Size(22)
+	EasyMail_ForwardButton:SetPoint('RIGHT', OpenMailReplyButton, 'LEFT', -2, 0)
+	InboxTooMuchMail:SetPoint('TOPLEFT', MailFrame, 'TOPLEFT', 4, -10)
+	InboxPrevPageButton:SetPoint('BOTTOMLEFT', InboxFrame, 'BOTTOMLEFT', 42, 100)
+	InboxNextPageButton:SetPoint('LEFT', InboxPrevPageButton, 'RIGHT', 215, 0)
+	EasyMail_CheckAllButton:SetPoint('TOPLEFT', InboxFrame, 'TOPLEFT', 42, -30)
+	EasyMail_CheckPageButton:SetPoint('LEFT', EasyMail_CheckAllButton, 'RIGHT', 4, 0)
+	EasyMail_GetAllButton:SetPoint('LEFT', EasyMail_CheckPageButton, 'RIGHT', 4, 0)
+	EasyMail_MailButton:SetPoint('TOPLEFT', SendMailNameEditBox, 'TOPRIGHT', 4, 2)
+	EasyMail_MailButton:SetSize(22)
 	EasyMail_MailDropdownBackdrop:SetTemplate('Transparent')
-	OpenMailCancelButton:Point('BOTTOMRIGHT', OpenMailFrame, 'BOTTOMRIGHT', -3, 3)
+	OpenMailCancelButton:SetPoint('BOTTOMRIGHT', OpenMailFrame, 'BOTTOMRIGHT', -3, 3)
 	hooksecurefunc('OpenMail_Update', function()
 		EasyMail_AttButton:ClearAllPoints()
-		EasyMail_AttButton:Point('TOP', OpenMailScrollFrame, 'BOTTOM', 13, -5)
+		EasyMail_AttButton:SetPoint('TOP', OpenMailScrollFrame, 'BOTTOM', 13, -5)
 	end)
 	for i = 1, 7 do	
 		local t = _G['MailItem'..i..'ExpireTime']
 		if t then
 			t:ClearAllPoints()
-			t:Point('TOPRIGHT', -10, -4)
+			t:SetPoint('TOPRIGHT', -10, -4)
 		end
 	end
 	AS:UnregisterSkinEvent('EasyMail', event)

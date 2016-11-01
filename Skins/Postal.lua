@@ -5,8 +5,8 @@ if not AS:CheckAddOn('Postal') then return end
 function AS:Postal(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 
-	InboxPrevPageButton:Point('CENTER', InboxFrame, 'BOTTOMLEFT', 45, 112)
-	InboxNextPageButton:Point('CENTER', InboxFrame, 'BOTTOMLEFT', 295, 112)
+	InboxPrevPageButton:SetPoint('CENTER', InboxFrame, 'BOTTOMLEFT', 45, 112)
+	InboxNextPageButton:SetPoint('CENTER', InboxFrame, 'BOTTOMLEFT', 295, 112)
 
 	for i = 1, INBOXITEMS_TO_DISPLAY do
 		local b = _G['MailItem'..i..'ExpireTime']
@@ -23,7 +23,7 @@ function AS:Postal(event, addon)
 
 	if PostalSelectOpenButton then
 		AS:SkinButton(PostalSelectOpenButton, true)
-		PostalSelectOpenButton:Point('RIGHT', InboxFrame, 'TOP', -41, -48)
+		PostalSelectOpenButton:SetPoint('RIGHT', InboxFrame, 'TOP', -41, -48)
 	end
 
 	if Postal_OpenAllMenuButton then
@@ -33,12 +33,12 @@ function AS:Postal(event, addon)
 
 	if PostalOpenAllButton then
 		AS:SkinButton(PostalOpenAllButton, true)
-		PostalOpenAllButton:Point('CENTER', InboxFrame, 'TOP', -34, -400)
+		PostalOpenAllButton:SetPoint('CENTER', InboxFrame, 'TOP', -34, -400)
 	end
 
 	if PostalSelectReturnButton then
 		AS:SkinButton(PostalSelectReturnButton, true)
-		PostalSelectReturnButton:Point('LEFT', InboxFrame, 'TOP', -5, -48)
+		PostalSelectReturnButton:SetPoint('LEFT', InboxFrame, 'TOP', -5, -48)
 	end
 
 	if Postal_ModuleMenuButton then

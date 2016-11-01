@@ -19,7 +19,7 @@ function AS:ExtVendor()
 		AS:SkinTexture(Button.icon)
 		Button.icon:SetInside()
 
-		Button:Point("TOPLEFT", Slot, "TOPLEFT", 4, -4)
+		Button:SetPoint("TOPLEFT", Slot, "TOPLEFT", 4, -4)
 
 		_G["MerchantItem"..i.."MoneyFrame"]:ClearAllPoints()
 		_G["MerchantItem"..i.."MoneyFrame"]:Point("BOTTOMLEFT", Button, "BOTTOMRIGHT", 3, 0)

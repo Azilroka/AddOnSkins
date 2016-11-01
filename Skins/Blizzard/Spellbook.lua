@@ -76,7 +76,7 @@ function AS:Blizzard_Spellbook()
 					end
 
 					local point, relatedTo, point2, x, y = Tab:GetPoint()
-					Tab:Point(point, relatedTo, point2, 1, y)
+					Tab:SetPoint(point, relatedTo, point2, 1, y)
 					Tab.isSkinned = true
 				end
 			end
@@ -152,7 +152,7 @@ function AS:Blizzard_Spellbook()
 	end
 
 	SpellBookFrameTabButton1:ClearAllPoints()
-	SpellBookFrameTabButton1:Point("TOPLEFT", SpellBookFrame, "BOTTOMLEFT", -5, 2)
+	SpellBookFrameTabButton1:SetPoint("TOPLEFT", SpellBookFrame, "BOTTOMLEFT", -5, 2)
 end
 
 AS:RegisterSkin('Blizzard_Spellbook', AS.Blizzard_Spellbook)

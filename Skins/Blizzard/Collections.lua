@@ -16,7 +16,7 @@ function AS:Blizzard_Collections(event, addon)
 		AS:CreateBackdrop(PetStablePetInfo)
 		PetStablePetInfo.Backdrop:SetOutside(PetStableSelectedPetIcon)
 		AS:SkinTexture(PetStableSelectedPetIcon)
-		PetStableSelectedPetIcon:Size(36)
+		PetStableSelectedPetIcon:SetSize(36)
 
 		for i = 1, 5 do
 			local Button = _G["PetStableActivePet"..i]
@@ -271,7 +271,7 @@ function AS:Blizzard_Collections(event, addon)
 
 		AS:SkinStatusBar(PetJournalPetCardHealthFrame.healthBar)
 		AS:SkinStatusBar(PetJournalPetCardXPBar)
-		PetJournalLoadoutBorder:Height(350)
+		PetJournalLoadoutBorder:SetHeight(350)
 
 		AS:StripTextures(ToyBoxFilterButton, true)
 		AS:SkinButton(ToyBoxFilterButton)

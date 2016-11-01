@@ -7,7 +7,7 @@ function AS:Blizzard_Guild(event, addon)
 		AS:StripTextures(PetitionFrameInset)
 
 		AS:SkinButton(PetitionFrameRequestButton)
-		PetitionFrameRequestButton:Width(110)
+		PetitionFrameRequestButton:SetWidth(110)
 		AS:SkinButton(PetitionFrameRenameButton)
 		AS:SkinButton(PetitionFrameCancelButton)
 		AS:SkinButton(PetitionFrameSignButton)
@@ -53,14 +53,14 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinButton(TabardFrameAcceptButton)
 
 		TabardFrameAcceptButton:ClearAllPoints()
-		TabardFrameAcceptButton:Point("RIGHT", TabardFrameCancelButton, "LEFT", -3, 0)
+		TabardFrameAcceptButton:SetPoint("RIGHT", TabardFrameCancelButton, "LEFT", -3, 0)
 
 		AS:SkinRotateButton(TabardCharacterModelRotateLeftButton)
 		AS:SkinRotateButton(TabardCharacterModelRotateRightButton)
 		TabardCharacterModelRotateLeftButton:ClearAllPoints()
-		TabardCharacterModelRotateLeftButton:Point("BOTTOMLEFT", TabardModel, "BOTTOMLEFT", 4, 4)
+		TabardCharacterModelRotateLeftButton:SetPoint("BOTTOMLEFT", TabardModel, "BOTTOMLEFT", 4, 4)
 		TabardCharacterModelRotateRightButton:ClearAllPoints()
-		TabardCharacterModelRotateRightButton:Point("LEFT", TabardCharacterModelRotateLeftButton, "RIGHT", 3, 0)
+		TabardCharacterModelRotateRightButton:SetPoint("LEFT", TabardCharacterModelRotateLeftButton, "RIGHT", 3, 0)
 
 		AS:StripTextures(TabardFrameMoneyBg)
 		AS:StripTextures(TabardFrameMoneyInset)
@@ -75,10 +75,10 @@ function AS:Blizzard_Guild(event, addon)
 
 			if i > 1 then
 				Frame:ClearAllPoints()
-				Frame:Point("TOP", _G["TabardFrameCustomization"..i-1], "BOTTOM", 0, -6)
+				Frame:SetPoint("TOP", _G["TabardFrameCustomization"..i-1], "BOTTOM", 0, -6)
 			else
 				local point, anchor, point2, x, y = Frame:GetPoint()
-				Frame:Point(point, anchor, point2, x, y + 4)
+				Frame:SetPoint(point, anchor, point2, x, y + 4)
 			end
 		end
 	end
@@ -116,8 +116,8 @@ function AS:Blizzard_Guild(event, addon)
 
 		AS:SkinFrame(GuildNewsBossModel)
 		AS:SkinFrame(GuildNewsBossModelTextFrame)
-		GuildNewsBossModelTextFrame:Point("TOPLEFT", GuildNewsBossModel, "BOTTOMLEFT", 0, -1)
-		GuildNewsBossModel:Point("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -43)
+		GuildNewsBossModelTextFrame:SetPoint("TOPLEFT", GuildNewsBossModel, "BOTTOMLEFT", 0, -1)
+		GuildNewsBossModel:SetPoint("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -43)
 
 		AS:SkinButton(GuildMemberRemoveButton)
 		AS:SkinButton(GuildMemberGroupInviteButton)
@@ -156,8 +156,8 @@ function AS:Blizzard_Guild(event, addon)
 
 		AS:SkinBackdropFrame(GuildFactionBar)
 		GuildFactionBar.progress:SetTexture(AS.NormTex)
-		GuildFactionBar.Backdrop:Point("TOPLEFT", GuildFactionBar.progress, "TOPLEFT", -2, 2)
-		GuildFactionBar.Backdrop:Point("BOTTOMRIGHT", GuildFactionBar, "BOTTOMRIGHT", 0, 0)
+		GuildFactionBar.Backdrop:SetPoint("TOPLEFT", GuildFactionBar.progress, "TOPLEFT", -2, 2)
+		GuildFactionBar.Backdrop:SetPoint("BOTTOMRIGHT", GuildFactionBar, "BOTTOMRIGHT", 0, 0)
 
 		for _, Object in pairs({'Rewards', 'Perks'}) do
 			for i = 1, 8 do
@@ -165,7 +165,7 @@ function AS:Blizzard_Guild(event, addon)
 				AS:StripTextures(Button)
 				AS:SkinTexture(Button.icon)
 				Button.icon:ClearAllPoints()
-				Button.icon:Point("TOPLEFT", 2, -2)
+				Button.icon:SetPoint("TOPLEFT", 2, -2)
 				AS:CreateBackdrop(Button, 'Default')
 				Button.Backdrop:SetOutside(Button.icon)
 				if Object == 'Rewards' then
@@ -214,7 +214,7 @@ function AS:Blizzard_Guild(event, addon)
 			AS:SkinCheckBox(GuildNewsFiltersFrame[CheckBox])
 		end
 
-		GuildNewsFiltersFrame:Point("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -20)
+		GuildNewsFiltersFrame:SetPoint("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -20)
 		AS:SkinScrollBar(GuildNewsContainerScrollBar)
 
 		AS:SkinScrollBar(GuildInfoDetailsFrameScrollBar)
@@ -281,8 +281,8 @@ function AS:Blizzard_Guild(event, addon)
 						AS:SkinEditBox(rankFrame.nameBox)
 					end
 
-					rankFrame.nameBox.Backdrop:Point("TOPLEFT", -2, -4)
-					rankFrame.nameBox.Backdrop:Point("BOTTOMRIGHT", -4, 4)
+					rankFrame.nameBox.Backdrop:SetPoint("TOPLEFT", -2, -4)
+					rankFrame.nameBox.Backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
 				end
 			end				
 		end
@@ -294,8 +294,8 @@ function AS:Blizzard_Guild(event, addon)
 
 		AS:SkinDropDownBox(GuildControlUINavigationDropDown)
 		AS:SkinDropDownBox(GuildControlUIRankSettingsFrameRankDropDown, 180)
-		GuildControlUINavigationDropDownButton:Width(20)
-		GuildControlUIRankSettingsFrameRankDropDownButton:Width(20)
+		GuildControlUINavigationDropDownButton:SetWidth(20)
+		GuildControlUIRankSettingsFrameRankDropDownButton:SetWidth(20)
 
 		for i=1, NUM_RANK_FLAGS do
 			if _G["GuildControlUIRankSettingsFrameCheckbox"..i] then
@@ -306,8 +306,8 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinButton(GuildControlUIRankOrderFrameNewButton)
 		
 		AS:SkinEditBox(GuildControlUIRankSettingsFrameGoldBox)
-		GuildControlUIRankSettingsFrameGoldBox.Backdrop:Point("TOPLEFT", -2, -4)
-		GuildControlUIRankSettingsFrameGoldBox.Backdrop:Point("BOTTOMRIGHT", 2, 4)
+		GuildControlUIRankSettingsFrameGoldBox.Backdrop:SetPoint("TOPLEFT", -2, -4)
+		GuildControlUIRankSettingsFrameGoldBox.Backdrop:SetPoint("BOTTOMRIGHT", 2, 4)
 		AS:StripTextures(GuildControlUIRankSettingsFrameGoldBox)
 		
 		AS:StripTextures(GuildControlUIRankBankFrame)
@@ -334,7 +334,7 @@ function AS:Blizzard_Guild(event, addon)
 		end)
 
 		AS:SkinDropDownBox(GuildControlUIRankBankFrameRankDropDown, 180)
-		GuildControlUIRankBankFrameRankDropDownButton:Width(20)
+		GuildControlUIRankBankFrameRankDropDownButton:SetWidth(20)
 		AS:SkinCloseButton(GuildControlUICloseButton)
 		AS:StripTextures(GuildControlUIRankBankFrameInset)
 		AS:StripTextures(GuildControlUIRankBankFrameInsetScrollFrame)
@@ -354,7 +354,7 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinButton(GuildBankFramePurchaseButton, true)
 		AS:SkinScrollBar(GuildBankTransactionsScrollFrameScrollBar)
 
-		GuildBankFrameWithdrawButton:Point("RIGHT", GuildBankFrameDepositButton, "LEFT", -2, 0)
+		GuildBankFrameWithdrawButton:SetPoint("RIGHT", GuildBankFrameDepositButton, "LEFT", -2, 0)
 
 		AS:StripTextures(GuildBankInfoScrollFrame)
 		AS:StripTextures(GuildBankTransactionsScrollFrame)
@@ -389,8 +389,8 @@ function AS:Blizzard_Guild(event, addon)
 			AS:SetTemplate(button, 'Default', true)
 
 			texture:ClearAllPoints()
-			texture:Point("TOPLEFT", 2, -2)
-			texture:Point("BOTTOMRIGHT", -2, 2)
+			texture:SetPoint("TOPLEFT", 2, -2)
+			texture:SetPoint("BOTTOMRIGHT", -2, 2)
 			AS:SkinTexture(texture)
 		end
 
@@ -402,7 +402,7 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinFrame(GuildBankPopupFrame)
 		AS:StripTextures(GuildBankPopupScrollFrame)
 		AS:SkinScrollBar(GuildBankPopupScrollFrameScrollBar)
-		GuildBankPopupFrame:Point("TOPLEFT", GuildBankFrame, "TOPRIGHT", 1, -30)
+		GuildBankPopupFrame:SetPoint("TOPLEFT", GuildBankFrame, "TOPRIGHT", 1, -30)
 		AS:SkinButton(GuildBankPopupOkayButton)
 		AS:SkinButton(GuildBankPopupCancelButton)
 		AS:SkinEditBox(GuildBankPopupEditBox)
@@ -417,8 +417,8 @@ function AS:Blizzard_Guild(event, addon)
 			AS:SetTemplate(button, 'Default')
 			AS:StyleButton(button)
 			icon:ClearAllPoints()
-			icon:Point("TOPLEFT", 2, -2)
-			icon:Point("BOTTOMRIGHT", -2, 2)
+			icon:SetPoint("TOPLEFT", 2, -2)
+			icon:SetPoint("BOTTOMRIGHT", -2, 2)
 			AS:SkinTexture(icon)
 		end
 		

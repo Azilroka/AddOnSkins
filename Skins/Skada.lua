@@ -37,11 +37,11 @@ function AS:Skada()
 		if skada.Backdrop then
 			skada.Backdrop:ClearAllPoints()
 			if win.db.reversegrowth then
-				skada.Backdrop:Point('TOPLEFT', skada, 'TOPLEFT', -2, 2)
-				skada.Backdrop:Point('BOTTOMRIGHT', win.db.enabletitle and skada.button or skada, 'BOTTOMRIGHT', 2, -2)
+				skada.Backdrop:SetPoint('TOPLEFT', skada, 'TOPLEFT', -2, 2)
+				skada.Backdrop:SetPoint('BOTTOMRIGHT', win.db.enabletitle and skada.button or skada, 'BOTTOMRIGHT', 2, -2)
 			else
-				skada.Backdrop:Point('TOPLEFT', win.db.enabletitle and skada.button or skada, 'TOPLEFT', -2, 2)
-				skada.Backdrop:Point('BOTTOMRIGHT', skada, 'BOTTOMRIGHT', 2, -2)
+				skada.Backdrop:SetPoint('TOPLEFT', win.db.enabletitle and skada.button or skada, 'TOPLEFT', -2, 2)
+				skada.Backdrop:SetPoint('BOTTOMRIGHT', skada, 'BOTTOMRIGHT', 2, -2)
 			end
 		end
 	end)

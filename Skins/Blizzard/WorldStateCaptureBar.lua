@@ -69,7 +69,7 @@ function AS:Blizzard_WorldStateCaptureBar(event, addon)
 		Bar.SparkBar.Spark:SetFrameLevel(3)
 		AS:SetTemplate(Bar.SparkBar.Spark)
 		Bar.SparkBar.Spark:SetSize(4, 18)
-		Bar.SparkBar.Spark:Point('CENTER', Bar.SparkBar:GetStatusBarTexture(), 'LEFT', 0, 0)
+		Bar.SparkBar.Spark:SetPoint('CENTER', Bar.SparkBar:GetStatusBarTexture(), 'LEFT', 0, 0)
 
 		Bar.SparkBar.Spark.Texture = Bar.SparkBar.Spark:CreateTexture(nil, 'ARTWORK')
 		Bar.SparkBar.Spark.Texture:SetPoint('CENTER', Bar.SparkBar.Spark, 'CENTER', 0, 0)

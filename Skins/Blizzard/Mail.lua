@@ -64,20 +64,20 @@ function AS:Blizzard_Mail(event, addon)
 	AS:StyleButton(OpenMailLetterButton)
 	AS:SkinTexture(OpenMailLetterButtonIconTexture)
 	OpenMailLetterButtonIconTexture:ClearAllPoints()
-	OpenMailLetterButtonIconTexture:Point("TOPLEFT", 2, -2)
-	OpenMailLetterButtonIconTexture:Point("BOTTOMRIGHT", -2, 2)
+	OpenMailLetterButtonIconTexture:SetPoint("TOPLEFT", 2, -2)
+	OpenMailLetterButtonIconTexture:SetPoint("BOTTOMRIGHT", -2, 2)
 
 	AS:StripTextures(OpenMailMoneyButton)
 	AS:SetTemplate(OpenMailMoneyButton, 'Default', true)
 	AS:StyleButton(OpenMailMoneyButton)
 	AS:SkinTexture(OpenMailMoneyButtonIconTexture)
 	OpenMailMoneyButtonIconTexture:ClearAllPoints()
-	OpenMailMoneyButtonIconTexture:Point("TOPLEFT", 2, -2)
-	OpenMailMoneyButtonIconTexture:Point("BOTTOMRIGHT", -2, 2)
+	OpenMailMoneyButtonIconTexture:SetPoint("TOPLEFT", 2, -2)
+	OpenMailMoneyButtonIconTexture:SetPoint("BOTTOMRIGHT", -2, 2)
 
-	OpenMailReplyButton:Point("RIGHT", OpenMailDeleteButton, "LEFT", -2, 0)
-	OpenMailDeleteButton:Point("RIGHT", OpenMailCancelButton, "LEFT", -2, 0)
-	SendMailMailButton:Point("RIGHT", SendMailCancelButton, "LEFT", -2, 0)
+	OpenMailReplyButton:SetPoint("RIGHT", OpenMailDeleteButton, "LEFT", -2, 0)
+	OpenMailDeleteButton:SetPoint("RIGHT", OpenMailCancelButton, "LEFT", -2, 0)
+	SendMailMailButton:SetPoint("RIGHT", SendMailCancelButton, "LEFT", -2, 0)
 
 	for _, Attachment in pairs({"SendMailAttachment", "OpenMailAttachmentButton"}) do
 		for i = 1, ATTACHMENTS_MAX_SEND do

@@ -20,14 +20,14 @@ function AS:QuestCompletist()
 	end
 
 	AS:SkinFrame(qcQuestCompletistUI)
-	qcQuestCompletistUI:Size(360,450)
+	qcQuestCompletistUI:SetSize(360,450)
 	AS:SkinEditBox(qcSearchBox)
 	AS:SkinButton(qcOptionsButton)
 	AS:SkinButton(qcCategoryDropdownButton)
 	AS:SkinCloseButton(qcXButton)
 	AS:SkinSlideBar(qcMenuSlider, 16)
-	qcMenuSlider:Point('TOPLEFT', qcQuestCompletistUI, 'TOPLEFT', 303, -90)
-	qcMenuSlider:Height(256)
+	qcMenuSlider:SetPoint('TOPLEFT', qcQuestCompletistUI, 'TOPLEFT', 303, -90)
+	qcMenuSlider:SetHeight(256)
 end
 
 AS:RegisterSkin('QuestCompletist', AS.QuestCompletist)

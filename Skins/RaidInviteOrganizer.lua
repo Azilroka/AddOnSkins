@@ -24,9 +24,9 @@ function AS:RaidInviteOrganizer()
 	AS:SkinCheckBox(RIO_AutoSetDifficultyBox)
 	AS:SkinCheckBox(RIO_AutoSetMasterLooter)
 
-	RIO_MainFrameTab1:Point('TOPLEFT', RIO_MainFrame, 'BOTTOMLEFT', -5, 2)
-	RIO_MainFrameTab2:Point('LEFT', RIO_MainFrameTab1, 'RIGHT', -2, 0)
-	RIO_MainFrameTab3:Point('LEFT', RIO_MainFrameTab2, 'RIGHT', -2, 0)
+	RIO_MainFrameTab1:SetPoint('TOPLEFT', RIO_MainFrame, 'BOTTOMLEFT', -5, 2)
+	RIO_MainFrameTab2:SetPoint('LEFT', RIO_MainFrameTab1, 'RIGHT', -2, 0)
+	RIO_MainFrameTab3:SetPoint('LEFT', RIO_MainFrameTab2, 'RIGHT', -2, 0)
 
 	for i = 1, 3 do
 		AS:SkinTab(_G['RIO_MainFrameTab'..i])

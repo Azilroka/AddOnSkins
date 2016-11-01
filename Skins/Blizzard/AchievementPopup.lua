@@ -29,8 +29,8 @@ local function LoadSkin()
 
 				if not frame.backdrop then
 					AS:CreateBackdrop(frame, 'Default')
-					frame.backdrop:Point("TOPLEFT", frame, "TOPLEFT", -2, -6)
-					frame.backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
+					frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -2, -6)
+					frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
 				end
 
 				-- Background
@@ -57,8 +57,8 @@ local function LoadSkin()
 					_G["AchievementAlertFrame"..i.."IconTexture"].b = CreateFrame("Frame", nil, _G["AchievementAlertFrame"..i])
 					_G["AchievementAlertFrame"..i.."IconTexture"].b:SetFrameLevel(0)
 					AS:SetTemplate(_G["AchievementAlertFrame"..i.."IconTexture"].b, 'Default')
-					_G["AchievementAlertFrame"..i.."IconTexture"].b:Point("TOPLEFT", _G["AchievementAlertFrame"..i.."IconTexture"], "TOPLEFT", -2, 2)
-					_G["AchievementAlertFrame"..i.."IconTexture"].b:Point("BOTTOMRIGHT", _G["AchievementAlertFrame"..i.."IconTexture"], "BOTTOMRIGHT", 2, -2)
+					_G["AchievementAlertFrame"..i.."IconTexture"].b:SetPoint("TOPLEFT", _G["AchievementAlertFrame"..i.."IconTexture"], "TOPLEFT", -2, 2)
+					_G["AchievementAlertFrame"..i.."IconTexture"].b:SetPoint("BOTTOMRIGHT", _G["AchievementAlertFrame"..i.."IconTexture"], "BOTTOMRIGHT", 2, -2)
 				end
 			end
 		end
@@ -75,8 +75,8 @@ local function LoadSkin()
 
 				if not frame.backdrop then
 					AS:CreateBackdrop(frame, 'Default')
-					frame.backdrop:Point("TOPLEFT", frame, "TOPLEFT", 16, -6)
-					frame.backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -20, 6)
+					frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", 16, -6)
+					frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -20, 6)
 				end
 
 				-- Background
@@ -105,8 +105,8 @@ local function LoadSkin()
 					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b = CreateFrame("Frame", nil, _G["DungeonCompletionAlertFrame"..i])
 					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:SetFrameLevel(0)
 					AS:SetTemplate(_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b, 'Default')
-					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:Point("TOPLEFT", _G["DungeonCompletionAlertFrame"..i.."DungeonTexture"], "TOPLEFT", -2, 2)
-					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:Point("BOTTOMRIGHT", _G["DungeonCompletionAlertFrame"..i.."DungeonTexture"], "BOTTOMRIGHT", 2, -2)
+					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:SetPoint("TOPLEFT", _G["DungeonCompletionAlertFrame"..i.."DungeonTexture"], "TOPLEFT", -2, 2)
+					_G["DungeonCompletionAlertFrame"..i.."DungeonTexture"].b:SetPoint("BOTTOMRIGHT", _G["DungeonCompletionAlertFrame"..i.."DungeonTexture"], "BOTTOMRIGHT", 2, -2)
 				end
 			end
 		end
@@ -128,8 +128,8 @@ local function LoadSkin()
 
 			if not frame.backdrop then
 				AS:CreateBackdrop(frame, 'Default')
-				frame.backdrop:Point("TOPLEFT", frame, "TOPLEFT", -2, -6)
-				frame.backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
+				frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -2, -6)
+				frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
 			end
 
 			-- Background
@@ -149,8 +149,8 @@ local function LoadSkin()
 				_G["GuildChallengeAlertFrameEmblemIcon"].b = CreateFrame("Frame", nil, _G["GuildChallengeAlertFrame"])
 				_G["GuildChallengeAlertFrameEmblemIcon"].b:SetFrameLevel(0)
 				AS:SetTemplate(_G["GuildChallengeAlertFrameEmblemIcon"].b, 'Default')
-				_G["GuildChallengeAlertFrameEmblemIcon"].b:Point("TOPLEFT", _G["GuildChallengeAlertFrameEmblemIcon"], "TOPLEFT", -3, 3)
-				_G["GuildChallengeAlertFrameEmblemIcon"].b:Point("BOTTOMRIGHT", _G["GuildChallengeAlertFrameEmblemIcon"], "BOTTOMRIGHT", 3, -2)
+				_G["GuildChallengeAlertFrameEmblemIcon"].b:SetPoint("TOPLEFT", _G["GuildChallengeAlertFrameEmblemIcon"], "TOPLEFT", -3, 3)
+				_G["GuildChallengeAlertFrameEmblemIcon"].b:SetPoint("BOTTOMRIGHT", _G["GuildChallengeAlertFrameEmblemIcon"], "BOTTOMRIGHT", 3, -2)
 			end
 		end
 	end
@@ -165,8 +165,8 @@ local function LoadSkin()
 
 			if not frame.backdrop then
 				AS:CreateBackdrop(frame, 'Default')
-				frame.backdrop:Point("TOPLEFT", frame, "TOPLEFT", 19, -6)
-				frame.backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -22, 6)
+				frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", 19, -6)
+				frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -22, 6)
 			end
 
 			-- Background
@@ -194,8 +194,8 @@ local function LoadSkin()
 				_G["ChallengeModeAlertFrame1DungeonTexture"].b = CreateFrame("Frame", nil, _G["ChallengeModeAlertFrame1"])
 				_G["ChallengeModeAlertFrame1DungeonTexture"].b:SetFrameLevel(0)
 				AS:SetTemplate(_G["ChallengeModeAlertFrame1DungeonTexture"].b, 'Default')
-				_G["ChallengeModeAlertFrame1DungeonTexture"].b:Point("TOPLEFT", _G["ChallengeModeAlertFrame1DungeonTexture"], "TOPLEFT", -2, 2)
-				_G["ChallengeModeAlertFrame1DungeonTexture"].b:Point("BOTTOMRIGHT", _G["ChallengeModeAlertFrame1DungeonTexture"], "BOTTOMRIGHT", 2, -2)
+				_G["ChallengeModeAlertFrame1DungeonTexture"].b:SetPoint("TOPLEFT", _G["ChallengeModeAlertFrame1DungeonTexture"], "TOPLEFT", -2, 2)
+				_G["ChallengeModeAlertFrame1DungeonTexture"].b:SetPoint("BOTTOMRIGHT", _G["ChallengeModeAlertFrame1DungeonTexture"], "BOTTOMRIGHT", 2, -2)
 			end
 		end
 	end
@@ -210,8 +210,8 @@ local function LoadSkin()
 
 			if not frame.backdrop then
 				AS:CreateBackdrop(frame, 'Default')
-				frame.backdrop:Point("TOPLEFT", frame, "TOPLEFT", 4, 4)
-				frame.backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -7, 6)
+				frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", 4, 4)
+				frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -7, 6)
 			end
 
 			-- Background
@@ -238,8 +238,8 @@ local function LoadSkin()
 				_G["ScenarioAlertFrame1DungeonTexture"].b = CreateFrame("Frame", nil, _G["ScenarioAlertFrame1"])
 				_G["ScenarioAlertFrame1DungeonTexture"].b:SetFrameLevel(0)
 				AS:SetTemplate(_G["ScenarioAlertFrame1DungeonTexture"].b, 'Default')
-				_G["ScenarioAlertFrame1DungeonTexture"].b:Point("TOPLEFT", _G["ScenarioAlertFrame1DungeonTexture"], "TOPLEFT", -2, 2)
-				_G["ScenarioAlertFrame1DungeonTexture"].b:Point("BOTTOMRIGHT", _G["ScenarioAlertFrame1DungeonTexture"], "BOTTOMRIGHT", 2, -2)
+				_G["ScenarioAlertFrame1DungeonTexture"].b:SetPoint("TOPLEFT", _G["ScenarioAlertFrame1DungeonTexture"], "TOPLEFT", -2, 2)
+				_G["ScenarioAlertFrame1DungeonTexture"].b:SetPoint("BOTTOMRIGHT", _G["ScenarioAlertFrame1DungeonTexture"], "BOTTOMRIGHT", 2, -2)
 			end
 		end
 	end
@@ -254,8 +254,8 @@ local function LoadSkin()
 
 				if not frame.backdrop then
 					AS:CreateBackdrop(frame, 'Default')
-					frame.backdrop:Point("TOPLEFT", frame, "TOPLEFT", -2, -6)
-					frame.backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
+					frame.backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -2, -6)
+					frame.backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
 				end
 
 				_G['CriteriaAlertFrame'..i..'Unlocked']:SetTextColor(1, 1, 1)
@@ -270,8 +270,8 @@ local function LoadSkin()
 				if not _G['CriteriaAlertFrame'..i..'IconTexture'].b then
 					_G['CriteriaAlertFrame'..i..'IconTexture'].b = CreateFrame("Frame", nil, frame)
 					AS:SetTemplate(_G['CriteriaAlertFrame'..i..'IconTexture'].b, 'Default')
-					_G['CriteriaAlertFrame'..i..'IconTexture'].b:Point("TOPLEFT", _G['CriteriaAlertFrame'..i..'IconTexture'], "TOPLEFT", -2, 2)
-					_G['CriteriaAlertFrame'..i..'IconTexture'].b:Point("BOTTOMRIGHT", _G['CriteriaAlertFrame'..i..'IconTexture'], "BOTTOMRIGHT", 2, -2)
+					_G['CriteriaAlertFrame'..i..'IconTexture'].b:SetPoint("TOPLEFT", _G['CriteriaAlertFrame'..i..'IconTexture'], "TOPLEFT", -2, 2)
+					_G['CriteriaAlertFrame'..i..'IconTexture'].b:SetPoint("BOTTOMRIGHT", _G['CriteriaAlertFrame'..i..'IconTexture'], "BOTTOMRIGHT", 2, -2)
 					_G['CriteriaAlertFrame'..i..'IconTexture']:SetParent(_G['CriteriaAlertFrame'..i..'IconTexture'].b)
 					AS:SkinTexture(_G['CriteriaAlertFrame'..i..'IconTexture'])
 
@@ -298,8 +298,8 @@ local function LoadSkin()
 				if not frame.Icon.b then
 					frame.Icon.b = CreateFrame("Frame", nil, frame)
 					AS:SetTemplate(frame.Icon.b, 'Default')
-					frame.Icon.b:Point("TOPLEFT", frame.Icon, "TOPLEFT", -2, 2)
-					frame.Icon.b:Point("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, -2)
+					frame.Icon.b:SetPoint("TOPLEFT", frame.Icon, "TOPLEFT", -2, 2)
+					frame.Icon.b:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, -2)
 					frame.Icon:SetParent(frame.Icon.b)
 				end
 
@@ -328,8 +328,8 @@ local function LoadSkin()
 				if not frame.Icon.b then
 					frame.Icon.b = CreateFrame("Frame", nil, frame)
 					AS:SetTemplate(frame.Icon.b, 'Default')
-					frame.Icon.b:Point("TOPLEFT", frame.Icon, "TOPLEFT", -2, 2)
-					frame.Icon.b:Point("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, -2)
+					frame.Icon.b:SetPoint("TOPLEFT", frame.Icon, "TOPLEFT", -2, 2)
+					frame.Icon.b:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, -2)
 					frame.Icon:SetParent(frame.Icon.b)
 				end
 

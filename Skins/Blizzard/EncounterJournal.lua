@@ -5,7 +5,7 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	AS:SkinBackdropFrame(EncounterJournal)
 
 	AS:SkinBackdropFrame(EncounterJournalNavBar, nil, nil, true)
-	EncounterJournalNavBar.Backdrop:Point("TOPLEFT", -2, 0)
+	EncounterJournalNavBar.Backdrop:SetPoint("TOPLEFT", -2, 0)
 	EncounterJournalNavBar.Backdrop:SetPoint("BOTTOMRIGHT")
 
 	AS:StripTextures(EncounterJournalNavBarOverlay, true)
@@ -35,14 +35,14 @@ function AS:Blizzard_EncounterJournal(event, addon)
 		Tab:GetDisabledTexture():SetTexture(nil)
 		Tab:GetHighlightTexture():SetTexture(nil)
 		AS:SkinBackdropFrame(Tab, nil, true)
-		Tab.Backdrop:Point('TOPLEFT', 11, -8)
-		Tab.Backdrop:Point('BOTTOMRIGHT', -6, 8)
+		Tab.Backdrop:SetPoint('TOPLEFT', 11, -8)
+		Tab.Backdrop:SetPoint('BOTTOMRIGHT', -6, 8)
 	end
 
-	EncounterJournalEncounterFrameInfoOverviewTab:Point('TOPLEFT', EncounterJournalEncounterFrameInfo, 'TOPRIGHT', AS.PixelMode and -3 or 0, -35)
+	EncounterJournalEncounterFrameInfoOverviewTab:SetPoint('TOPLEFT', EncounterJournalEncounterFrameInfo, 'TOPRIGHT', AS.PixelMode and -3 or 0, -35)
 	hooksecurefunc(EncounterJournalEncounterFrameInfoOverviewTab, "SetPoint", function(self, point, attachTo, anchorPoint, xOffset, yOffset)
 		if point ~= "TOPLEFT" or attachTo ~= EncounterJournalEncounterFrameInfo or anchorPoint ~= "TOPRIGHT" or xOffset ~= (AS.PixelMode and -3 or 0) or yOffset ~= -35 then
-			EncounterJournalEncounterFrameInfoOverviewTab:Point('TOPLEFT', EncounterJournalEncounterFrameInfo, 'TOPRIGHT', AS.PixelMode and -3 or 0, -35)
+			EncounterJournalEncounterFrameInfoOverviewTab:SetPoint('TOPLEFT', EncounterJournalEncounterFrameInfo, 'TOPRIGHT', AS.PixelMode and -3 or 0, -35)
 		end
 	end)
 

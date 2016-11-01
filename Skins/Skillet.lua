@@ -308,7 +308,7 @@ function AS:Skillet()
 	if not SkilletSortAscButton.text then
 		SkilletSortAscButton.text = SkilletSortAscButton:CreateFontString(nil, 'OVERLAY')
 		SkilletSortAscButton.text:SetFont(AS.LSM:Fetch('font', 'Arial'), 12)
-		SkilletSortAscButton.text:Point('CENTER', 0, 0)
+		SkilletSortAscButton.text:SetPoint('CENTER', 0, 0)
 		SkilletSortAscButton.text:SetText("▲")
 	end
 	AS:StripTextures(SkilletSortDescButton)
@@ -316,7 +316,7 @@ function AS:Skillet()
 	if not SkilletSortDescButton.text then
 		SkilletSortDescButton.text = SkilletSortDescButton:CreateFontString(nil, 'OVERLAY')
 		SkilletSortDescButton.text:SetFont(AS.LSM:Fetch('font', 'Arial'), 12)
-		SkilletSortDescButton.text:Point('CENTER', 0, 0)
+		SkilletSortDescButton.text:SetPoint('CENTER', 0, 0)
 		SkilletSortDescButton.text:SetText("▼")
 	end
 	AS:SkinNextPrevButton(SkilletRecipeGroupOperations)

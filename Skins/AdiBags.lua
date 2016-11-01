@@ -28,7 +28,7 @@ function AS:AdiBags(event)
 			if not AdiBagsContainer1 then ToggleBackpack() ToggleBackpack() end
 			if AdiBagsContainer1 then
 				SkinFrame(AdiBagsContainer1)
-				AdiBagsContainer1SearchBox:Point('TOPRIGHT', AdiBagsSimpleLayeredRegion2, 'TOPRIGHT', -75, -1)
+				AdiBagsContainer1SearchBox:SetPoint('TOPRIGHT', AdiBagsSimpleLayeredRegion2, 'TOPRIGHT', -75, -1)
 			end
 		end)
 	elseif event == 'BANKFRAME_OPENED' then

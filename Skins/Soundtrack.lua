@@ -138,7 +138,7 @@ function AS:Soundtrack()
 	AS:SkinTooltip(SoundtrackTooltip)
 	NowPlayingTextFrame:Show()
 	NowPlayingTextFrame:Hide()
-	NowPlayingTextFrame:Size(200, 40)
+	NowPlayingTextFrame:SetSize(200, 40)
 end
 
 AS:RegisterSkin('Soundtrack', AS.Soundtrack)

@@ -130,7 +130,7 @@ function AS:KarniCrap()
 	end]]
 
 	AS:StripTextures(KarniCrap_Inventory_ScrollBar, true)
-	KarniCrapTab1:Point('BOTTOMLEFT', KarniCrap, 'BOTTOMLEFT',0,-30)
+	KarniCrapTab1:SetPoint('BOTTOMLEFT', KarniCrap, 'BOTTOMLEFT',0,-30)
 	AS:SkinScrollBar(KarniCrap_Inventory_ScrollBarScrollBar)
 	AS:SkinCloseButton(KarniCrapCloseButton)
 	KarniCrapPortrait:Kill()

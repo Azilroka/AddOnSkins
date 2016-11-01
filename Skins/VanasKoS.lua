@@ -21,7 +21,7 @@ function AS:VanasKoS()
 	AS:SkinButton(VanasKoSListFrameConfigurationButton)
 
 	AS:SkinCloseButton(VanasKosFrameCloseButton, VanasKoSFrame.Backdrop)
-	VanasKosFrameCloseButton:Point("TOPRIGHT", VanasKoSFrame.Backdrop, "TOPRIGHT", -3, -3)
+	VanasKosFrameCloseButton:SetPoint("TOPRIGHT", VanasKoSFrame.Backdrop, "TOPRIGHT", -3, -3)
 
 	AS:SkinCheckBox(VanasKoSListFrameCheckBox)
 	AS:SkinNextPrevButton(VanasKoSListFrameToggleRightButton)

@@ -14,8 +14,9 @@ function AS:Blizzard_LootFrames()
 		Frame.Timer:ClearAllPoints()
 		Frame.Timer:SetInside()
 		AS:SkinStatusBar(Frame.Timer)
+		Frame.Timer.Backdrop:SetBackdropBorderColor(0, 0, 0, 0)
 
-		Frame:HookScript('OnShow', function(self)
+		Frame:HookScript('OnUpdate', function(self)
 			local texture, name, count, quality, bindOnPickUp, canNeed, canGreed, canDisenchant, reasonNeed, reasonGreed, reasonDisenchant, deSkillRequired = GetLootRollItemInfo(self.rollID);
 			if not name then return end
 			local color = ITEM_QUALITY_COLORS[quality];
@@ -24,7 +25,7 @@ function AS:Blizzard_LootFrames()
 			self.Timer:SetStatusBarColor(color.r, color.g, color.b)
 			self.Timer:SetFrameLevel(self:GetFrameLevel() + 1)
 			for _, Button in pairs({'NeedButton', 'GreedButton', 'PassButton', 'DisenchantButton'}) do
-				Frame[Button]:SetFrameLevel(Frame.Timer:GetFrameLevel() + 1)
+				Frame[Button]:SetFrameLevel(Frame.Timer:GetFrameLevel() + 2)
 			end
 		end)
 
@@ -72,8 +73,8 @@ function AS:Blizzard_LootFrames()
 				AS:StyleButton(slot)
 				AS:SkinTexture(icon)
 				icon:ClearAllPoints()
-				icon:Point("TOPLEFT", 2, -2)
-				icon:Point("BOTTOMRIGHT", -2, 2)
+				icon:SetPoint("TOPLEFT", 2, -2)
+				icon:SetPoint("BOTTOMRIGHT", -2, 2)
 				
 				slot.isSkinned = true
 			end
@@ -93,10 +94,10 @@ function AS:Blizzard_LootFrames()
 	AS:SkinCloseButton(LootHistoryFrame.ResizeButton)
 	LootHistoryFrame.ResizeButton.t:SetText("v v v v")
 	AS:SetTemplate(LootHistoryFrame.ResizeButton)
-	LootHistoryFrame.ResizeButton:Width(LootHistoryFrame:GetWidth())
-	LootHistoryFrame.ResizeButton:Height(19)
+	LootHistoryFrame.ResizeButton:SetWidth(LootHistoryFrame:GetWidth())
+	LootHistoryFrame.ResizeButton:SetHeight(19)
 	LootHistoryFrame.ResizeButton:ClearAllPoints()
-	LootHistoryFrame.ResizeButton:Point("TOP", LootHistoryFrame, "BOTTOM", 0, -2)
+	LootHistoryFrame.ResizeButton:SetPoint("TOP", LootHistoryFrame, "BOTTOM", 0, -2)
 	AS:SkinScrollBar(LootHistoryFrameScrollFrameScrollBar)
 	
 	local function UpdateLoots(self)
@@ -116,8 +117,8 @@ function AS:Blizzard_LootFrames()
 				
 				-- create a backdrop around the icon
 				AS:CreateBackdrop(frame, 'Default')
-				frame.backdrop:Point("TOPLEFT", frame.Icon, -2, 2)
-				frame.backdrop:Point("BOTTOMRIGHT", frame.Icon, 2, -2)
+				frame.backdrop:SetPoint("TOPLEFT", frame.Icon, -2, 2)
+				frame.backdrop:SetPoint("BOTTOMRIGHT", frame.Icon, 2, -2)
 				frame.backdrop:SetBackdropColor(0,0,0,0)
 				frame.isSkinned = true
 			end

@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_MacroUI(event, addon)
 	if (addon == 'Blizzard_MacroUI' or IsAddOnLoaded('Blizzard_MacroUI')) then
 		AS:SkinFrame(MacroFrame)
-		MacroFrame:Width(360)
+		MacroFrame:SetWidth(360)
 		AS:SkinCloseButton(MacroFrameCloseButton)
 
 		AS:SkinFrame(MacroPopupFrame)
@@ -37,8 +37,8 @@ function AS:Blizzard_MacroUI(event, addon)
 			_G['MacroFrameTab'..i]:Height(22)
 		end
 
-		MacroFrameTab1:Point("TOPLEFT", MacroFrame, "TOPLEFT", 85, -39)
-		MacroFrameTab2:Point("LEFT", MacroFrameTab1, "RIGHT", 4, 0)
+		MacroFrameTab1:SetPoint("TOPLEFT", MacroFrame, "TOPLEFT", 85, -39)
+		MacroFrameTab2:SetPoint("LEFT", MacroFrameTab1, "RIGHT", 4, 0)
 
 		AS:StripTextures(MacroButtonScrollFrame)
 		AS:SkinScrollBar(MacroButtonScrollFrameScrollBar)
@@ -57,7 +57,7 @@ function AS:Blizzard_MacroUI(event, addon)
 		AS:StripTextures(MacroPopupScrollFrame)
 		
 		MacroEditButton:ClearAllPoints()
-		MacroEditButton:Point("BOTTOMLEFT", MacroFrameSelectedMacroButton, "BOTTOMRIGHT", 10, 0)
+		MacroEditButton:SetPoint("BOTTOMLEFT", MacroFrameSelectedMacroButton, "BOTTOMRIGHT", 10, 0)
 
 		AS:SkinIconButton(MacroFrameSelectedMacroButton)
 	end

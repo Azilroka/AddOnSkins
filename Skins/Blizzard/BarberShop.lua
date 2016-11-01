@@ -4,7 +4,7 @@ function AS:Blizzard_BarberShop(event, addon)
 	if addon ~= "Blizzard_BarbershopUI" then return end
 
 	AS:SkinFrame(BarberShopFrame)
-	BarberShopFrame:Size(BarberShopFrame:GetWidth() - 30, BarberShopFrame:GetHeight() - 56)
+	BarberShopFrame:SetSize(BarberShopFrame:GetWidth() - 30, BarberShopFrame:GetHeight() - 56)
 
 	AS:StripTextures(BarberShopFrameMoneyFrame)
 
@@ -34,7 +34,7 @@ function AS:Blizzard_BarberShop(event, addon)
 	BarberShopBannerFrame:Kill()
 
 	AS:SkinFrame(BarberShopAltFormFrame)
-	BarberShopAltFormFrame:Point("BOTTOM", BarberShopFrame, "TOP", 0, 5)
+	BarberShopAltFormFrame:SetPoint("BOTTOM", BarberShopFrame, "TOP", 0, 5)
 end
 
 AS:RegisterSkin('Blizzard_BarberShop', AS.Blizzard_BarberShop, 'ADDON_LOADED')

@@ -10,7 +10,7 @@ function AS:Blizzard_Transmogrify(event, addon)
 	AS:StripTextures(TransmogrifyFrameButtonFrame)
 
 	AS:SkinButton(TransmogrifyApplyButton, true)
-	TransmogrifyApplyButton:Point("BOTTOMRIGHT", TransmogrifyFrame, "BOTTOMRIGHT", -4, 4)
+	TransmogrifyApplyButton:SetPoint("BOTTOMRIGHT", TransmogrifyFrame, "BOTTOMRIGHT", -4, 4)
 	AS:SkinCloseButton(TransmogrifyArtFrameCloseButton)
 
 	local Slots = {"Head", "Shoulder", "Chest", "Waist", "Legs", "Feet", "Wrist", "Hands", "Back", "MainHand", "SecondaryHand"}

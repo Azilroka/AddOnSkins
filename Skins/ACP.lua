@@ -8,11 +8,11 @@ function AS:ACP()
 			local checkbox = _G["ACP_AddonListEntry" .. i .. "Enabled"]
 			local collapse = _G["ACP_AddonListEntry" .. i .. "Collapse"]
 			checkbox:SetPoint("LEFT", 5, 0)
-			checkbox:Size(26)
+			checkbox:SetSize(26)
 	
 			if not collapse:IsShown() then
 				checkbox:SetPoint("LEFT", 15, 0)
-				checkbox:Size(20)
+				checkbox:SetSize(20)
 			end
 		end
 	end

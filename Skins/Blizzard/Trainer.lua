@@ -15,11 +15,11 @@ function AS:Blizzard_Trainer(event, addon)
 	AS:SkinStatusBar(ClassTrainerStatusBar)
 	--ClassTrainerStatusBar:SetStatusBarColor(0, 1, 0)
 	ClassTrainerStatusBar:ClearAllPoints()
-	ClassTrainerStatusBar:Point("TOPLEFT", ClassTrainerFrame, "TOPLEFT", 15, -35)
+	ClassTrainerStatusBar:SetPoint("TOPLEFT", ClassTrainerFrame, "TOPLEFT", 15, -35)
 
 	AS:SkinDropDownBox(ClassTrainerFrameFilterDropDown, 155)
 	ClassTrainerFrameFilterDropDown:ClearAllPoints()
-	ClassTrainerFrameFilterDropDown:Point("TOPRIGHT", ClassTrainerFrame, "TOPRIGHT", 0, -32)
+	ClassTrainerFrameFilterDropDown:SetPoint("TOPRIGHT", ClassTrainerFrame, "TOPRIGHT", 0, -32)
 	AS:SkinScrollBar(ClassTrainerScrollFrameScrollBar)
 
 	AS:SkinBackdropFrame(ClassTrainerFrameSkillStepButton)

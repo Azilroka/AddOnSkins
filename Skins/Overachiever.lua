@@ -37,8 +37,8 @@ function AS:Overachiever(event, addon)
 			AS:StripTextures(container)
 			AS:StripTextures(frameBorder)
 			AS:SkinBackdropFrame(scrollFrame)
-			scrollFrame.Backdrop:Point("TOPLEFT", 0, 2)
-			scrollFrame.Backdrop:Point("BOTTOMRIGHT", -3, -3)
+			scrollFrame.Backdrop:SetPoint("TOPLEFT", 0, 2)
+			scrollFrame.Backdrop:SetPoint("BOTTOMRIGHT", -3, -3)
 			AS:SkinScrollBar(scrollBar)
 		end
 
