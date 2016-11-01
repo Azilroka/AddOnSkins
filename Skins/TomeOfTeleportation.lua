@@ -6,7 +6,7 @@ function AS:TomeOfTeleportation()
 	local R, G, B = unpack(AS.BackdropColor)
 	local Alpha = (AS:CheckOption('SkinTemplate') == "Transparent" and .8 or 1)
 
-	if IsAddOnLoaded('ElvUI') then
+	if AS:CheckAddOn('ElvUI') then
 		if AS:CheckOption('SkinTemplate') == "Transparent" then
 			R, G, B, Alpha = unpack(ElvUI[1]["media"].backdropfadecolor)
 		else

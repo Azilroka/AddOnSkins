@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('PetTracker') then return end
 
 function AS:PetTracker()
-	if not IsAddOnLoaded('Carbonite.Quests') then
+	if not AS:CheckAddOn('Carbonite.Quests') then
 		--AS:CreateBackdrop(PetTrackerProgressBar)
 		AS:Delay(1, function()
 			AS:StripTextures(PetTrackerProgressBar1.Overlay)
