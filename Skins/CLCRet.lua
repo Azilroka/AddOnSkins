@@ -4,7 +4,7 @@ if not (AS:CheckAddOn('CLCRet') and AS.MyClass == 'PALADIN') then return end
 
 function AS:CLCRet()
 	local function UpdateButtonLayout(frame, button, opt)
-		button:SetSize(opt.size)
+		button:SetSize(opt.size, opt.size)
 		button:ClearAllPoints()
 		button:SetPoint(opt.point, clcretFrame, opt.pointParent, opt.x, opt.y)
 		button:SetAlpha(opt.alpha)
@@ -27,7 +27,7 @@ function AS:CLCRet()
 		AS:SkinButton(button)
 
 		button:EnableMouse(false)
-		button:SetSize(size)
+		button:SetSize(size, size)
 		button.texture = button:CreateTexture('$parentIcon', 'OVERLAY')
 		button.texture:SetInside()
 		AS:SkinTexture(button.texture)

@@ -47,8 +47,8 @@ function AS:DBM(event, addon)
 						icon2:ClearAllPoints()
 						icon2:SetInside(icon2.overlay)
 
-						icon1.overlay:SetSize(bar.owner.options.Height)
-						icon2.overlay:SetSize(bar.owner.options.Height)
+						icon1.overlay:SetSize(bar.owner.options.Height, bar.owner.options.Height)
+						icon2.overlay:SetSize(bar.owner.options.Height, bar.owner.options.Height)
 						BarHeight = bar.owner.options.Height
 						tbar:SetInside(frame)
 

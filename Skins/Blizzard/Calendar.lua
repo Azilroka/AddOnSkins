@@ -106,7 +106,7 @@ function AS:Blizzard_Calendar(event, addon)
 		local Button = _G["CalendarClassButton"..i]
 		AS:StripTextures(Button)
 		AS:SkinButton(Button)
-		Button:SetSize(24)
+		Button:SetSize(24, 24)
 	end
 
 	AS:StripTextures(CalendarClassTotalsButton)

@@ -139,7 +139,7 @@ function AS:Blizzard_Bags()
 	BagItemAutoSortButton:GetNormalTexture():SetInside()
 	AS:SkinTexture(BagItemAutoSortButton:GetPushedTexture())
 	BagItemAutoSortButton:GetPushedTexture():SetInside()
-	BagItemAutoSortButton:SetSize(22)
+	BagItemAutoSortButton:SetSize(22, 22)
 
 	BagItemAutoSortButton:SetScript('OnShow', function(self)
 		local a, b, c, d, e = self:GetPoint()
@@ -175,7 +175,7 @@ function AS:Blizzard_Bags()
 	BankItemAutoSortButton:GetNormalTexture():SetInside()
 	AS:SkinTexture(BankItemAutoSortButton:GetPushedTexture())
 	BankItemAutoSortButton:GetPushedTexture():SetInside()
-	BankItemAutoSortButton:SetSize(20)
+	BankItemAutoSortButton:SetSize(20, 20)
 	BankItemAutoSortButton:SetPoint("LEFT", BankItemSearchBox, "RIGHT", 4, 0)
 
 	-- Bank Bags

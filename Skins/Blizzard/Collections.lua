@@ -16,7 +16,7 @@ function AS:Blizzard_Collections(event, addon)
 		AS:CreateBackdrop(PetStablePetInfo)
 		PetStablePetInfo.Backdrop:SetOutside(PetStableSelectedPetIcon)
 		AS:SkinTexture(PetStableSelectedPetIcon)
-		PetStableSelectedPetIcon:SetSize(36)
+		PetStableSelectedPetIcon:SetSize(36, 36)
 
 		for i = 1, 5 do
 			local Button = _G["PetStableActivePet"..i]
