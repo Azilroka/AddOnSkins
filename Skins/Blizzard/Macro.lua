@@ -2,19 +2,24 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_MacroUI(event, addon)
 	if (addon == 'Blizzard_MacroUI' or IsAddOnLoaded('Blizzard_MacroUI')) then
+		AS:UnregisterSkinEvent('Blizzard_MacroUI', 'ADDON_LOADED')
 		AS:SkinFrame(MacroFrame)
 		MacroFrame:SetWidth(360)
 		AS:SkinCloseButton(MacroFrameCloseButton)
 
-		AS:SkinFrame(MacroPopupFrame)
-		MacroPopupFrame:SetPoint("TOPLEFT", MacroFrame, "TOPRIGHT", 5, 0)
+		AS:SkinFrame(MacroPopupFrame, nil, nil, true)
+		MacroPopupFrame:HookScript('OnShow', function(self)
+			self:SetHeight(515)
+			self.BG:SetAlpha(0)
+			AS:StripTextures(self.BorderBox)
+			self:SetPoint("TOPLEFT", MacroFrame, "TOPRIGHT", 5, 0)
+			for i = 1, 90 do
+				AS:SkinIconButton(_G["MacroPopupButton"..i])
+			end
+		end)
 
 		for i = 1, MAX_ACCOUNT_MACROS do
 			AS:SkinIconButton(_G["MacroButton"..i])
-		end
-
-		for i = 1, 20 do
-			AS:SkinIconButton(_G["MacroPopupButton"..i])
 		end
 
 		local Buttons = {
