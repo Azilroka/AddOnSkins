@@ -72,7 +72,7 @@ function AS:AtlasLoot(event, addon)
 
 	local AtlasLootItemFrame = _G["AtlasLoot_GUI-ItemFrame"]
 	AS:CreateBackdrop(AtlasLootItemFrame)
-	AS:SkinNextPrevButton(AtlasLootItemFrame.nextPageButton)		
+	AS:SkinNextPrevButton(AtlasLootItemFrame.nextPageButton)
 	AS:SkinButton(AtlasLootItemFrame.modelButton)
 	AS:SkinButton(AtlasLootItemFrame.soundsButton)
 	AS:SkinNextPrevButton(AtlasLootItemFrame.prevPageButton)
