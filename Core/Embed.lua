@@ -327,6 +327,7 @@ if AS:CheckAddOn('Skada') then
 			window.db.spark = false
 			window.db.barslocked = true
 			window.db.background.bordertexture = "None"
+			window.db.background.strata = relativeFrame:GetFrameStrata()
 			window.bargroup.ClearAllPoints = nil
 			window.bargroup:ClearAllPoints()
 			window.bargroup.ClearAllPoints = function() end
@@ -334,7 +335,6 @@ if AS:CheckAddOn('Skada') then
 			window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
 			window.bargroup.SetPoint = function() end
 			window.bargroup:SetParent(relativeFrame)
-			window.bargroup:SetFrameStrata(relativeFrame:GetFrameStrata())
 			window.bargroup:SetFrameLevel(relativeFrame:GetFrameLevel())
 			window.bargroup:SetBackdrop(nil)
 			if window.bargroup.Backdrop then
