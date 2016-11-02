@@ -8,24 +8,24 @@ function AS:Examiner()
 	AS:SkinScrollBar(ExaminerGearScrollScrollBar)
 
 	local Slots = {
-		Head,
-		Neck,
-		Shoulder,
-		Back,
-		Chest,
-		Shirt,
-		Tabard,
-		Wrist,
-		Hands,
-		Waist,
-		Legs,
-		Feet,
-		Finger0,
-		Finger1,
-		Trinket0,
-		Trinket1,
-		MainHand,
-		SecondaryHand,
+		'Head',
+		'Neck',
+		'Shoulder',
+		'Back',
+		'Chest',
+		'Shirt',
+		'Tabard',
+		'Wrist',
+		'Hands',
+		'Waist',
+		'Legs',
+		'Feet',
+		'Finger0',
+		'Finger1',
+		'Trinket0',
+		'Trinket1',
+		'MainHand',
+		'SecondaryHand',
 	}
 
 	for _, Slot in pairs(Slots) do
@@ -55,6 +55,23 @@ function AS:Examiner()
 			end
 		end
 	end
+
+	Examiner.portrait:Kill()
+	Examiner.bgBottomLeft:Kill()
+	Examiner.dlgBottomLeft:Kill()
+	Examiner.bgTopLeft:Kill()
+	Examiner.dlgTopLeft:Kill()
+	Examiner.bgBottomRight:Kill()
+	Examiner.dlgBottomRight:Kill()
+	Examiner.bgTopRight:Kill()
+	Examiner.dlgTopRight:Kill()
+
+	--Resize Frame
+	Examiner:Size(360, 464)
+
+	--Reposition Frame
+	Examiner.model:ClearAllPoints()
+	Examiner.model:Point('BOTTOMLEFT', Examiner, 'BOTTOMLEFT', 22, 22)
 end
 
 AS:RegisterSkin('Examiner', AS.Examiner)
