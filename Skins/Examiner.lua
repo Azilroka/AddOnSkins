@@ -57,19 +57,9 @@ function AS:Examiner()
 	end
 
 	Examiner.portrait:Kill()
-	Examiner.bgBottomLeft:Kill()
-	Examiner.dlgBottomLeft:Kill()
-	Examiner.bgTopLeft:Kill()
-	Examiner.dlgTopLeft:Kill()
-	Examiner.bgBottomRight:Kill()
-	Examiner.dlgBottomRight:Kill()
-	Examiner.bgTopRight:Kill()
-	Examiner.dlgTopRight:Kill()
 
-	--Resize Frame
 	Examiner:Size(360, 464)
 
-	--Reposition Frame
 	Examiner.model:ClearAllPoints()
 	Examiner.model:Point('BOTTOMLEFT', Examiner, 'BOTTOMLEFT', 22, 22)
 end
