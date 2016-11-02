@@ -328,6 +328,7 @@ if AS:CheckAddOn('Skada') then
 			window.db.barslocked = true
 			window.db.background.bordertexture = "None"
 			window.db.background.strata = relativeFrame:GetFrameStrata()
+			window.db.strata = relativeFrame:GetFrameStrata()
 			window.bargroup.ClearAllPoints = nil
 			window.bargroup:ClearAllPoints()
 			window.bargroup.ClearAllPoints = function() end
