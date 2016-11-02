@@ -289,7 +289,7 @@ function AS:Blizzard_Guild(event, addon)
 		hooksecurefunc("GuildControlUI_RankOrder_Update", SkinGuildRanks)
 
 		GuildControlUIRankOrderFrameNewButton:HookScript("OnClick", function()
-			T.Delay(1, SkinGuildRanks)
+			AS:Delay(.8, SkinGuildRanks)
 		end)
 
 		AS:SkinDropDownBox(GuildControlUINavigationDropDown)
@@ -297,9 +297,10 @@ function AS:Blizzard_Guild(event, addon)
 		GuildControlUINavigationDropDownButton:SetWidth(20)
 		GuildControlUIRankSettingsFrameRankDropDownButton:SetWidth(20)
 
-		for i=1, NUM_RANK_FLAGS do
-			if _G["GuildControlUIRankSettingsFrameCheckbox"..i] then
-				AS:SkinCheckBox(_G["GuildControlUIRankSettingsFrameCheckbox"..i])
+		for i = 1, NUM_RANK_FLAGS do
+			local CheckBox = _G["GuildControlUIRankSettingsFrameCheckbox"..i]
+			if CheckBox then
+				AS:SkinCheckBox(CheckBox)
 			end
 		end
 
@@ -343,6 +344,7 @@ function AS:Blizzard_Guild(event, addon)
 		AddOnSkinned = AddOnSkinned + 1
 	end
 	if (event == 'Blizzard_GuildBankUI' or IsAddOnLoaded('Blizzard_GuildBankUI')) and not GuildBankFrame.isSkinned then
+		GuildBankFrame.isSkinned = true
 		AS:SkinFrame(GuildBankFrame)
 		AS:StripTextures(GuildBankEmblemFrame, true)
 
@@ -380,18 +382,8 @@ function AS:Blizzard_Guild(event, addon)
 		end
 
 		for i = 1, 8 do
-			local button = _G["GuildBankTab"..i.."Button"]
-			local texture = _G["GuildBankTab"..i.."ButtonIconTexture"]
 			AS:StripTextures(_G["GuildBankTab"..i], true)
-
-			AS:StripTextures(button)
-			AS:StyleButton(button)
-			AS:SetTemplate(button, 'Default', true)
-
-			texture:ClearAllPoints()
-			texture:SetPoint("TOPLEFT", 2, -2)
-			texture:SetPoint("BOTTOMRIGHT", -2, 2)
-			AS:SkinTexture(texture)
+			AS:SkinIconButton(_G["GuildBankTab"..i.."Button"])
 		end
 
 		for i = 1, 4 do
@@ -406,26 +398,20 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinButton(GuildBankPopupOkayButton)
 		AS:SkinButton(GuildBankPopupCancelButton)
 		AS:SkinEditBox(GuildBankPopupEditBox)
-		GuildBankPopupNameLeft:Kill()
-		GuildBankPopupNameRight:Kill()
-		GuildBankPopupNameMiddle:Kill()
 
-		for i = 1, 16 do
-			local button = _G["GuildBankPopupButton"..i]
-			local icon = _G[button:GetName().."Icon"]
-			AS:StripTextures(button)
-			AS:SetTemplate(button, 'Default')
-			AS:StyleButton(button)
-			icon:ClearAllPoints()
-			icon:SetPoint("TOPLEFT", 2, -2)
-			icon:SetPoint("BOTTOMRIGHT", -2, 2)
-			AS:SkinTexture(icon)
-		end
-		
+		GuildBankPopupFrame:HookScript('OnShow', function(self)
+			self:SetHeight(515)
+			self.BG:SetAlpha(0)
+			AS:StripTextures(self.BorderBox)
+			self:SetPoint("TOPLEFT", GuildBankFrame, "TOPRIGHT", 1, -30)
+			for i = 1, 90 do
+				AS:SkinIconButton(_G["GuildBankPopupButton"..i])
+			end
+		end)
+
 		AS:SkinEditBox(GuildItemSearchBox)
 		AS:StripTextures(GuildBankMoneyFrameBackground)
 		AS:SkinScrollBar(GuildBankInfoScrollFrameScrollBar)
-		GuildBankFrame.isSkinned = true
 		AddOnSkinned = AddOnSkinned + 1
 	end
 	if AddOnSkinned == 3 then
