@@ -434,10 +434,10 @@ if AS:CheckAddOn('Details') then
 			end
 
 			--> set the point and save the position
-			window:SetFrameStrata(relativeFrame:GetFrameStrata())
-			window:SetFrameLevel(relativeFrame:GetFrameLevel())
 			window.baseframe:ClearAllPoints()
 			window.baseframe:SetParent(relativeFrame)
+			window.baseframe:SetFrameStrata(relativeFrame:GetFrameStrata())
+			window.baseframe:SetFrameLevel(relativeFrame:GetFrameLevel())
 
 			ofsx = ofsx - 1 --> wasn't fitting correctly, with -1 it get aligned.
 			if (window.skin == "Forced Square") then
