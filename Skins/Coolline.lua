@@ -12,4 +12,4 @@ function AS:CoolLine()
 	AS:RegisterForPetBattleHide(CoolLine)
 end
 
-AS:RegisterSkin('CoolLine', AS.CoolLine)
+AS:RegisterSkin('CoolLine', AS.CoolLine, '[ElvUI_CoolLine]')
