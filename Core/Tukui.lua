@@ -6,7 +6,7 @@ local T, C
 
 function AS:UpdateMedia()
 	T, C = Tukui:unpack()
-	AS.PixelPerfect = false
+	AS.PixelPerfect = AS:CheckOption('ThinBorder')
 	AS.HideShadows = C['General']['HideShadows']
 
 	AS.DataTextFontSize = 12 -- T['DataTexts']['Size']
