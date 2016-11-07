@@ -96,7 +96,7 @@ end
 function AS:RegisterSkin(skinName, skinFunc, ...)
 	local events = {}
 	local priority = 1
-	for i = 1,select('#', ...) do
+	for i = 1, select('#', ...) do
 		local event = select(i, ...)
 		if not event then break end
 		if type(event) == 'number' then
@@ -108,6 +108,16 @@ function AS:RegisterSkin(skinName, skinFunc, ...)
 	local registerMe = { func = skinFunc, events = events, priority = priority }
 	if not AS.register[skinName] then AS.register[skinName] = {} end
 	AS.register[skinName][skinFunc] = registerMe
+end
+
+function AS:UnregisterSkin(skinName, skinFunc)
+	if not AS.register[skinName] then return end
+
+	if skinFunc then
+		AS.register[skinName][skinFunc] = nil
+	else
+		AS.register[skinName] = nil
+	end
 end
 
 local function GenerateEventFunction(event)
