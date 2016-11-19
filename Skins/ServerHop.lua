@@ -194,6 +194,13 @@ function AS:ServerHop()
 	AS:SkinEditBox(hopAddonFavourites.editFrame.editBoxName)
 	AS:SkinFrame(hopfavdescr)
 
+	-- HopList MainFrame
+	AS:SkinFrame(SH_HopListMainFrame)
+	AS:SkinButton(SH_HopListMainFrame.refreshButton)
+	AS:SkinCloseButton(SH_HopListMainFrameClose)
+	AS:SkinScrollBar(SH_HopListScrollScrollBar)
+	AS:SkinCheckBox(SH_OnlyMyZoneCheck)
+
 	-- LFGButton
 	local LFGHopeButton = {LFGListFrame:GetChildren()}
 	for i = 1, #LFGHopeButton do
