@@ -101,6 +101,7 @@
 	<Script file="Outfitter.lua"/>
 	<Script file="Ovale.lua"/>
 	<Script file="Overachiever.lua"/>
+	<Script file="Pawn.lua"/>
 	<Script file="PetBattleTeams.lua"/>
 	<Script file="PetJournalEnhanced.lua"/>
 	<Script file="PetTracker.lua"/>
