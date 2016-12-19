@@ -124,6 +124,12 @@ function AS:Blizzard_Quest()
 	AS:SkinScrollBar(QuestLogPopupDetailFrameScrollFrameScrollBar)
 	AS:SkinCloseButton(QuestLogPopupDetailFrameCloseButton)
 
+	AS:StripTextures(QuestLogPopupDetailFrame.ShowMapButton)
+	AS:SkinButton(QuestLogPopupDetailFrame.ShowMapButton)
+	QuestLogPopupDetailFrame.ShowMapButton.Text:ClearAllPoints()
+	QuestLogPopupDetailFrame.ShowMapButton.Text:SetPoint("CENTER", AS.Mult, 0)
+	QuestLogPopupDetailFrame.ShowMapButton:SetSize(QuestLogPopupDetailFrame.ShowMapButton:GetWidth() - 30, QuestLogPopupDetailFrame.ShowMapButton:GetHeight() - 5)
+
 	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(parentFrame, portrait, text, name, x, y)
 		QuestNPCModel:ClearAllPoints();
 		QuestNPCModel:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x + 18, y);			
