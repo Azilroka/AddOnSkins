@@ -128,6 +128,7 @@
 	<Script file="ShieldBars.lua"/>
 	<Script file="ShieldMonitor.lua"/>
 	<Script file="SilverDragon.lua"/>
+	<Script file="Simulationcraft.lua"/>
 	<Script file="Skada.lua"/>
 	<Script file="Skillet.lua"/>
 	<Script file="SocialTabs.lua"/>

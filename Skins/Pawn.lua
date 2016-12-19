@@ -43,6 +43,7 @@ function AS:Pawn()
 	AS:SkinScrollBar(PawnUICompareScrollFrameScrollBar)
 
 	-- Gems
+	AS:SkinEditBox(PawnUIFrame_GemQualityLevelBox, 40, 20)
 	AS:SkinScrollBar(PawnUIGemScrollFrameScrollBar)
 
 	-- Options
