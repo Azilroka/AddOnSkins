@@ -11,6 +11,7 @@ function AS:REPorter()
 	REPorterTab_SB1:SetPoint("TOPLEFT", REPorterTab, "TOPLEFT", 3, -3)
 	REPorterTab:SetWidth(31)
 	REPorterTab:SetHeight(206)
+	REPorterBorder:SetFrameLevel(2)
 end
 
 AS:RegisterSkin('REPorter', AS.REPorter)
