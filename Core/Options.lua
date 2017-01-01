@@ -92,7 +92,7 @@ for _, devName in pairs(DEVELOPERS) do
 end
 
 function AS:SetupProfile()
-	self.data = LibStub("AceDB-3.0"):New("AddOnSkinsDB", defaults);
+	self.data = LibStub("AceDB-3.0"):New("AddOnSkinsDB", defaults, true);
 	self.data.RegisterCallback(self, "OnProfileChanged", "SetupProfile");
 	self.data.RegisterCallback(self, "OnProfileCopied", "SetupProfile");
 	self.db = self.data.profile;
