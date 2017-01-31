@@ -353,7 +353,7 @@ function AS:SkinEditBox(EditBox, Width, Height)
 	EditBox.isSkinned = true
 end
 
-function AS:SkinCheckBox(CheckBox, noStrip)
+function AS:SkinCheckBox(CheckBox)
 	if CheckBox.isSkinned then return end
 	AS:StripTextures(CheckBox)
 	AS:CreateBackdrop(CheckBox)
