@@ -353,7 +353,7 @@ function AS:SkinEditBox(EditBox, Width, Height)
 	EditBox.isSkinned = true
 end
 
-function AS:SkinCheckBox(CheckBox)
+function AS:SkinCheckBox(CheckBox, noStrip)
 	if CheckBox.isSkinned then return end
 	AS:StripTextures(CheckBox)
 	AS:CreateBackdrop(CheckBox)
@@ -794,4 +794,37 @@ function AS:AdjustForPixelPerfect(number)
 	end
 
 	return number
+end
+
+function AS:EnumObjects(enumFuncs, yieldFunc)
+	if (type(enumFuncs) == "function") then
+		enumFuncs = {enumFuncs}
+	end
+
+	if (#enumFuncs > 2) then
+		error("Only one and two depth supported")
+		return
+	end
+	local depth = #enumFuncs
+	local i = 1
+	local obj
+	repeat
+		obj = enumFuncs[1](i)
+		if (obj) then
+			if (depth == 1) then
+				yieldFunc(obj)
+			else
+				local j = 1
+				local innerObj
+				repeat
+					innerObj = enumFuncs[2](obj, j)
+					if (innerObj) then
+						yieldFunc(innerObj)
+					end
+					j = j + 1
+				until not innerObj
+			end
+		end
+		i = i + 1
+	until not obj
 end

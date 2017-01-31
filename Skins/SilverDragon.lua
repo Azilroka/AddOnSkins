@@ -28,10 +28,10 @@ function AS:SilverDragon()
 	end)
 
 	SilverDragonPopupButton.title:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
-	SilverDragonPopupButton.details:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
-	SilverDragonPopupButton.details:SetTextColor(1.0, 1.0, 1.0)
-	SilverDragonPopupButton.subtitle:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
-	SilverDragonPopupButton.subtitle:SetTextColor(1.0, 1.0, 1.0)
+	SilverDragonPopupButton.source:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+	SilverDragonPopupButton.source:SetTextColor(1.0, 1.0, 1.0)
+	SilverDragonPopupButton.status:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+	SilverDragonPopupButton.status:SetTextColor(1.0, 1.0, 1.0)
 end
 
 AS:RegisterSkin('SilverDragon', AS.SilverDragon)

@@ -2,14 +2,36 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Altoholic') then return end
 
+local function SkinItemButton(obj, itemIDGetFunc)
+	AS:SkinTexture(obj.Icon)
+	AS:SkinFrame(obj)
+	obj.Icon:SetInside()
+	hooksecurefunc(obj:GetParent(), 'Show', function(self)
+		if self:GetID() then
+			local ItemID = itemIDGetFunc and itemIDGetFunc(self) or self.id
+			if ItemID then
+				local Quality = select(3, GetItemInfo(ItemID))
+				if Quality and Quality > 1 then
+					self.Item:SetBackdropBorderColor(GetItemQualityColor(Quality))
+				else
+					self.Item:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end
+			end
+		else
+			self.Item:SetBackdropBorderColor(unpack(AS.BorderColor))
+		end
+	end)
+end
+
 function AS:Altoholic(event, addon)
 	if event == "PLAYER_ENTERING_WORLD" then
 		AS:SkinTooltip(AltoTooltip)
 		AltoholicFramePortrait:Kill()
 		AS:SkinFrame(AltoholicFrame)
-		AS:SkinFrame(AltoMsgBox)
-		AS:SkinButton(AltoMsgBoxYesButton)
-		AS:SkinButton(AltoMsgBoxNoButton)
+		AS:SkinFrame(AltoMessageBox)
+		AS:SkinButton(AltoMessageBox.ButtonYes)
+		-- Bug in Altoholic currently
+		AS:SkinButton(_G["ButtonNo"] or AltoMessageBox.ButtonNo)
 		AS:SkinCloseButton(AltoholicFrameCloseButton)
 		AS:SkinEditBox(AltoholicFrame_SearchEditBox, 175, 15)
 		AS:SkinButton(AltoholicFrame_ResetButton)
@@ -36,17 +58,9 @@ function AS:Altoholic(event, addon)
 		AS:SkinIconButton(AltoholicTabSummary.AltoholicOptionsIcon)
 		AS:SkinIconButton(AltoholicTabSummary.DataStoreOptionsIcon)
 
-		for i = 1, 6 do
-			AS:SkinButton(AltoholicTabSummary['MenuItem'..i], true)
-		end
-
-		for i = 1, 9 do
-			AS:SkinButton(AltoholicTabSummary["SortButtons"]["Sort"..i], true)
-		end
-
-		for i = 1, 7 do
-			AS:SkinTab(_G["AltoholicFrameTab"..i], true)
-		end
+		AS:EnumObjects(function(index) return AltoholicTabSummary['MenuItem'..index] end, function(obj) AS:SkinButton(obj, true) end)
+		AS:EnumObjects(function(index) return AltoholicTabSummary['SortButtons']['Sort'..index] end, function(obj) AS:SkinButton(obj, true) end)
+		AS:EnumObjects(function(index) return _G["AltoholicFrameTab"..index] end, function(obj) AS:SkinTab(obj, true) end)
 	end
 	
 	if addon == "Altoholic_Characters" then
@@ -60,8 +74,8 @@ function AS:Altoholic(event, addon)
 		AS:SkinScrollBar(AltoholicFrameQuestsScrollFrame.ScrollBar)
 		AS:SkinScrollBar(AltoholicFrameRecipesScrollFrame.ScrollBar)
 		AS:SkinDropDownBox(AltoholicTabCharacters.SelectRealm)
-		AS:SkinNextPrevButton(AltoholicFrameSpellbookPrevPage)
-		AS:SkinNextPrevButton(AltoholicFrameSpellbookNextPage)
+		AS:SkinNextPrevButton(AltoholicFrameSpellbook.PrevPage)
+		AS:SkinNextPrevButton(AltoholicFrameSpellbook.NextPage)
 		AS:StripTextures(AltoholicFrameContainersScrollFrame, true)
 		AS:StripTextures(AltoholicFrameQuestsScrollFrame, true)
 		AS:StripTextures(AltoholicFrameRecipesScrollFrame, true)
@@ -88,27 +102,13 @@ function AS:Altoholic(event, addon)
 			AS:SkinTexture(AltoholicTabCharacters_MenuIcons[Button].Icon)
 		end
 
-		for i = 1, 7 do
-			for j = 1, 14 do
-				local Button = AltoholicFrameContainers['Entry'..i]['Item'..j]
-				AS:SkinTexture(Button.Icon)
-				AS:SkinFrame(Button)
-				Button.Icon:SetInside()
-				hooksecurefunc(Button, 'Show', function(self)
-					if self.id then
-						local quality = select(3, GetItemInfo(self.id))
-						if quality and quality > 1 then
-							local r, g, b = GetItemQualityColor(quality)
-							self:SetBackdropBorderColor(r, g, b, 1)
-						else
-							self:SetBackdropBorderColor(unpack(AS.BorderColor))
-						end
-					else
-						self:SetBackdropBorderColor(unpack(AS.BorderColor))
-					end
-				end)
-			end
-		end
+		AS:EnumObjects(
+			{
+				function(index) return AltoholicFrameContainers['Entry'..index] end, 
+				function(obj, index) return obj['Item'..index] end
+			},
+			function(obj) SkinItemButton(obj) end
+		)
 	end
 
 	if addon == "Altoholic_Search" then
@@ -126,35 +126,12 @@ function AS:Altoholic(event, addon)
 		AS:SkinEditBox(AltoholicTabSearch.MinLevel)
 		AS:SkinEditBox(AltoholicTabSearch.MaxLevel)
 
-		for i = 1, 15 do
-			AS:SkinButton(AltoholicTabSearch['Entry'..i], true)
-		end
-
-		for i = 1, 8 do
-			AS:SkinButton(AltoholicTabSearch["SortButtons"]["Sort"..i])
-		end
-
-		for i = 1, 7 do
-			local Button = AltoholicFrameSearch['Entry'..i].Item
-			AS:SkinTexture(Button.Icon)
-			AS:SkinFrame(Button)
-			Button.Icon:SetInside()
-			hooksecurefunc(Button:GetParent(), 'Show', function(self)
-				if self:GetID() then
-					local ItemID = Altoholic.Search:GetResult((self:GetID())).id
-					if ItemID then
-						local Quality = select(3, GetItemInfo(ItemID))
-						if Quality and Quality > 1 then
-							self.Item:SetBackdropBorderColor(GetItemQualityColor(Quality))
-						else
-							self.Item:SetBackdropBorderColor(unpack(AS.BorderColor))
-						end
-					end
-				else
-					self.Item:SetBackdropBorderColor(unpack(AS.BorderColor))
-				end
-			end)
-		end
+		AS:EnumObjects(function(index) return AltoholicTabSearch['Entry'..index] end, function(obj) AS:SkinButton(obj, true) end)
+		AS:EnumObjects(function(index) return AltoholicTabSearch["SortButtons"]["Sort"..index] end, function(obj) AS:SkinButton(obj) end)
+		AS:EnumObjects(
+			function(index) local obj = AltoholicFrameSearch['Entry'..index]; return obj and obj.Item or nil end,
+			function(obj) SkinItemButton(obj, function(self) if (self:GetID()) then return Altoholic.Search:GetResult((self:GetID())).id else return nil end end) end
+		)
 	end
 
 	if addon == "Altoholic_Guild" then
@@ -163,91 +140,51 @@ function AS:Altoholic(event, addon)
 		AS:SkinScrollBar(AltoholicTabGuild.Members.ScrollFrame.ScrollBar)
 		AS:StripTextures(AltoholicTabGuild.Members.ScrollFrame, true)
 
-		for i = 1, 2 do
-			AS:SkinButton(AltoholicTabGuild['MenuItem'..i], true)
-		end
+		AS:EnumObjects(function(index) return AltoholicTabGuild['MenuItem'..index] end, function(obj) AS:SkinButton(obj, true) end)
+		AS:EnumObjects(
+			{
+				function(index) return AltoholicTabGuild.Bank['Entry'..index] end,
+				function(obj, index) return obj['Item'..index] end,
+			},
+			function(obj) SkinItemButton(obj) end
+		)
 
-		for i = 1, 7 do
-			for j = 1, 14 do
-				local Button = AltoholicTabGuild.Bank['Entry'..i]['Item'..j]
-				AS:SkinTexture(Button.Icon)
-				AS:SkinFrame(Button)
-				Button.Icon:SetInside()
-				hooksecurefunc(Button:GetParent(), 'Show', function(self)
-					if self.id then
-						local quality = select(3, GetItemInfo(self.id))
-						if quality and quality > 1 then
-							local r, g, b = GetItemQualityColor(quality)
-							self:SetBackdropBorderColor(r, g, b, 1)
-						else
-							self:SetBackdropBorderColor(unpack(AS.BorderColor))
-						end
-					else
-						self:SetBackdropBorderColor(unpack(AS.BorderColor))
-					end
-				end)
-			end
-		end
-
-		for i = 1, 19 do
-			local Button = AltoholicTabGuild.Members['Item'..i]
-			AS:SkinTexture(Button.Icon)
-			AS:SkinFrame(Button)
-			Button.Icon:SetInside()
-			hooksecurefunc(Button, 'Show', function(self)
-				if self.id then
-					local quality = select(3, GetItemInfo(self.id))
-					if quality and quality > 1 then
-						local r, g, b = GetItemQualityColor(quality)
-						self:SetBackdropBorderColor(r, g, b, 1)
-					else
-						self:SetBackdropBorderColor(unpack(AS.BorderColor))
-					end
-				else
-					self:SetBackdropBorderColor(unpack(AS.BorderColor))
-				end
-			end)
-		end
-
-		for i = 1, 5 do
-			AS:SkinButton(AltoholicTabGuild["SortButtons"]["Sort"..i])
-		end
+		AS:EnumObjects(function(index) return AltoholicTabGuild.Members['Item'..index] end, function(obj) SkinItemButton(obj) end)
+		AS:EnumObjects(function(index) return AltoholicTabGuild["SortButtons"]["Sort"..index] end, function(obj) AS:SkinButton(obj) end)
 	end
 
 	if addon == "Altoholic_Achievements" then
-		AS:StripTextures(AltoholicFrameAchievements.ScrollFrame, true)
+		AS:StripTextures(AltoholicTabAchievements.Achievements.ScrollFrame, true)
 		AS:StripTextures(AltoholicTabAchievements.ScrollFrame, true)
-		AS:SkinScrollBar(AltoholicFrameAchievements.ScrollFrame.ScrollBar)
+		AS:SkinScrollBar(AltoholicTabAchievements.Achievements.ScrollFrame.ScrollBar)
 		AS:SkinScrollBar(AltoholicTabAchievements.ScrollFrame.ScrollBar)
 		AS:SkinDropDownBox(AltoholicTabAchievements.SelectRealm)
 		AltoholicTabAchievements.SelectRealm:SetPoint("TOPLEFT", AltoholicFrame, "TOPLEFT", 205, -57)
 
-		for i = 1, 15 do
-			AS:SkinButton(AltoholicTabAchievements['Entry'..i], true)
-		end
-
-		for i = 1, 8 do
-			for j = 1, 10 do
-				local Button = AltoholicFrameAchievements['Entry'..i]['Item'..j]
-				AS:SetTemplate(Button)
-				Button.IconBorder:SetTexture('')
-				AS:SkinTexture(Button.Background)
-				Button.Background:SetDrawLayer('ARTWORK')
-				Button.Background:SetInside()
+		AS:EnumObjects(function(index) return AltoholicTabAchievements['Entry'..index] end, function(obj) return AS:SkinButton(obj, true) end)
+		AS:EnumObjects(
+			{
+				function(index) return AltoholicTabAchievements.Achievements['Entry'..index] end,
+				function(obj, index) return obj['Item'..index] end,
+			},
+			function(obj)
+				AS:SetTemplate(obj)
+				obj.IconBorder:SetTexture('')
+				AS:SkinTexture(obj.Background)
+				obj.Background:SetDrawLayer('ARTWORK')
+				obj.Background:SetInside()
 			end
-		end
+		)
 	end
 
 	if addon == "Altoholic_Agenda" then
-		AS:SkinFrame(AltoholicFrameCalendarScrollFrame)
-		AS:SkinScrollBar(AltoholicFrameCalendarScrollFrame.ScrollBar)
-		AS:SkinNextPrevButton(AltoholicFrameCalendar_NextMonth)
-		AS:SkinNextPrevButton(AltoholicFrameCalendar_PrevMonth)
+		--AS:SkinFrame(AltoholicFrameCalendarScrollFrame)
+		--AS:SkinScrollBar(AltoholicFrameCalendarScrollFrame.ScrollBar)
+		AS:SkinNextPrevButton(AltoholicTabAgenda.Calendar.NextMonth)
+		AS:SkinNextPrevButton(AltoholicTabAgenda.Calendar.PrevMonth)
 		AS:SkinButton(AltoholicTabAgenda.MenuItem1, true)
 
-		for i = 1, 14 do
-			AS:StripTextures(_G["AltoholicFrameCalendarEntry"..i])
-		end
+		AS:EnumObjects(function(index) return AltoholicTabAgenda.Calendar["Day"..index] end, function(obj) AS:StripTextures(obj) end)
 	end
 
 	if addon == "Altoholic_Grids" then
@@ -256,17 +193,20 @@ function AS:Altoholic(event, addon)
 		AS:SkinScrollBar(AltoholicFrameGrids.ScrollFrame.ScrollBar)
 		AS:SkinDropDownBox(AltoholicTabGrids.SelectRealm)
 
-		for i = 1, 8 do
-			for j = 1, 11 do
-				local Button = AltoholicFrameGrids['Entry'..i]['Item'..j]
-				AS:SetTemplate(Button)
-				Button.IconBorder:SetTexture('')
-				AS:SkinTexture(Button.Background)
-				Button.Background.SetTexCoord = AS.Noop
-				Button.Background:SetDrawLayer('ARTWORK')
-				Button.Background:SetInside()
+		AS:EnumObjects(
+			{
+				function(index) return AltoholicFrameGrids['Entry'..index] end,
+				function(obj, index) return obj['Item'..index] end,
+			},
+			function(obj)
+				AS:SetTemplate(obj)
+				obj.IconBorder:SetTexture('')
+				AS:SkinTexture(obj.Background)
+				obj.Background.SetTexCoord = AS.Noop
+				obj.Background:SetDrawLayer('ARTWORK')
+				obj.Background:SetInside()
 			end
-		end
+		)
 	end
 end
 
