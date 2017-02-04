@@ -94,6 +94,7 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 			R, G, B = unpack(ElvUI[1]["media"].backdropcolor)
 		end
 
+		Frame.template = Template
 		ElvUI[1]["frames"][Frame] = true
 	end
 
