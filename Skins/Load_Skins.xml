@@ -73,11 +73,11 @@
 	<Script file="InvenMount.lua"/>
 	<Script file="KarniCrap.lua"/>
 	<Script file="KeepingTabs.lua"/>
+	<Script file="Keyed.lua"/>
 	<Script file="Lightheaded.lua"/>
 	<Script file="LinkWrangler.lua"/>
 	<Script file="LootCouncilLite.lua"/>
 	<Script file="LootLog.lua"/>
-	<Script file="LuckyCharms2.lua"/>
 	<Script file="Ludwig.lua"/>
 	<Script file="MageNuggets.lua"/>
 	<Script file="MinimalArchaeology.lua"/>
@@ -109,6 +109,7 @@
 	<Script file="Poisoner.lua"/>
 	<Script file="PoMTracker.lua"/>
 	<Script file="Postal.lua"/>
+	<Script file="PremadeGroupsFilter.lua"/>
 	<Script file="ProfessionTabs.lua"/>
 	<Script file="Quartz.lua"/>
 	<Script file="QuestCompletist.lua"/>
@@ -122,6 +123,7 @@
 	<Script file="RCLootCouncil.lua"/>
 	<Script file="ReagentMaker.lua"/>
 	<Script file="Recount.lua"/>
+	<Script file="REFlex.lua"/>
 	<Script file="REPorter.lua"/>
 	<Script file="ServerHop.lua"/>
 	<Script file="Scrap.lua"/>
