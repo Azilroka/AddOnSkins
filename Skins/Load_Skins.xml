@@ -78,6 +78,7 @@
 	<Script file="LinkWrangler.lua"/>
 	<Script file="LootCouncilLite.lua"/>
 	<Script file="LootLog.lua"/>
+	<Script file="LuckyCharms2.lua"/>
 	<Script file="Ludwig.lua"/>
 	<Script file="MageNuggets.lua"/>
 	<Script file="MinimalArchaeology.lua"/>
