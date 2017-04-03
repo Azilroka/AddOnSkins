@@ -49,7 +49,6 @@ function AS:Blizzard_TradeSkill(event, addon)
 				ResultIcon:GetNormalTexture():SetInside()
 			end
 			ResultIcon:SetTemplate("Default")
-			ResultIcon.Background:SetTexture(nil)
 
 			for i = 1, #TradeSkillFrame.DetailsFrame.Contents.Reagents do
 				local Button = TradeSkillFrame.DetailsFrame.Contents.Reagents[i]
