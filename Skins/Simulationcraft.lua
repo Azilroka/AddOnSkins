@@ -1,5 +1,5 @@
 local AS = unpack(AddOnSkins)
- 
+
 if not AS:CheckAddOn('Simulationcraft') then return end
 
 function AS:Simulationcraft()
@@ -8,5 +8,5 @@ function AS:Simulationcraft()
 	AS:SkinButton(SimcCopyFrameButton)
 	AS:SkinScrollBar(SimcCopyFrameScrollScrollBar)
 end
- 
+
 AS:RegisterSkin('Simulationcraft', AS.Simulationcraft)

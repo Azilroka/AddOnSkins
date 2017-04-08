@@ -254,7 +254,7 @@ function AS:Blizzard_Talent(event, addon)
 		
 		AS:SkinFrame(TalentMicroButtonAlert)
 		TalentMicroButtonAlert:SetBackdropBorderColor(1, 1, 0)
-		--AS:CreateShadow(TalentMicroButtonAlert)
+		AS:CreateShadow(TalentMicroButtonAlert)
 		AS:SkinCloseButton(TalentMicroButtonAlert.CloseButton)
 		TalentMicroButtonAlert.CloseButton:ClearAllPoints()
 		TalentMicroButtonAlert.CloseButton:SetPoint("TOPRIGHT", 6, 1)

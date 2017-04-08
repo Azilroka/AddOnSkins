@@ -2,7 +2,7 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Mail(event, addon)
 	AS:SkinFrame(MailFrame, nil, nil, true)
-	--AS:CreateShadow(MailFrame)
+	AS:CreateShadow(MailFrame)
 	AS:SkinCloseButton(MailFrameCloseButton)
 	AS:StripTextures(MailFrameInset)
 	AS:StripTextures(InboxFrame)

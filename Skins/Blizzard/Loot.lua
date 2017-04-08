@@ -57,7 +57,7 @@ function AS:Blizzard_LootFrames()
 
 	--[[
 	AS:SkinFrame(MissingLootFrame)
-	--MissingLootFrame:CreateShadow()
+	MissingLootFrame:CreateShadow()
 
 	AS:SkinCloseButton(MissingLootFramePassButton)
 	

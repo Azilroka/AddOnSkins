@@ -5,7 +5,7 @@ function AS:Blizzard_Archaeology(event, addon)
 
 	AS:SkinFrame(ArchaeologyFrame, nil, nil, true)
 	AS:StripTextures(ArchaeologyFrameInset, true)
-	--AS:CreateShadow(ArchaeologyFrame)
+	AS:CreateShadow(ArchaeologyFrame)
 	
 	AS:SkinButton(ArchaeologyFrameArtifactPageSolveFrameSolveButton, true)
 	AS:SkinDropDownBox(ArchaeologyFrameRaceFilter, 125)

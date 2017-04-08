@@ -483,14 +483,14 @@ function AS:GetOptions()
 			order = 5,
 		}
 	end
-
+	
 	if not AS:CheckAddOn('ElvUI') then
- 		Options.args.misc.args.ThinBorder = {
- 			name = "Thin Border",
- 			order = 1,
- 			type = "toggle",
- 		}
- 	end
+		Options.args.misc.args.ThinBorder = {
+			name = "Thin Border",
+			order = 1,
+			type = "toggle",
+		}
+	end
 
 	Options.args.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(AS.data);
 	Options.args.profiles.order = -2;

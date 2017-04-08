@@ -9,7 +9,7 @@ function AS:Blizzard_Bags()
 		AS:SkinBackdropFrame(Bag, nil, true)
 		for j = 1, 36 do
 			local ItemButton = _G["ContainerFrame"..i.."Item"..j]
-			--AS:SkinTexture(_G["ContainerFrame"..i.."Item"..j..'IconQuestTexture'])
+--			AS:SkinTexture(_G["ContainerFrame"..i.."Item"..j..'IconQuestTexture'])
 			AS:SetTemplate(ItemButton, AS:CheckOption('SkinTemplate'))
 			AS:SkinTexture(ItemButton.icon)
 			ItemButton:SetNormalTexture('')
@@ -65,8 +65,8 @@ function AS:Blizzard_Bags()
 			end)
 			-- End of hax.
 
-			--ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
-			--ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
+			ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
+			ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
 
 			ItemButton:SetNormalTexture('')
 			AS:StyleButton(ItemButton)
@@ -156,7 +156,7 @@ function AS:Blizzard_Bags()
 		Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 3, 0)
 	end
 
-	--AS:SkinFrame(BankFrame, nil, nil, true)
+	AS:SkinFrame(BankFrame, nil, nil, true)
 	AS:SkinCloseButton(BankFrameCloseButton)
 	AS:StripTextures(BankFrameMoneyFrameBorder)
 	AS:StripTextures(BankFrameMoneyFrameInset)
@@ -201,8 +201,8 @@ function AS:Blizzard_Bags()
 		AS:SkinTexture(ItemButton.icon)
 		ItemButton.icon:SetInside()
 
-		--ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
-		--ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
+		ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
+		ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
 
 		ItemButton:SetNormalTexture(nil)
 		AS:StyleButton(ItemButton)
@@ -224,8 +224,8 @@ function AS:Blizzard_Bags()
 				AS:SkinTexture(ItemButton.icon)
 				ItemButton.icon:SetInside()
 
-				--ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
-				--ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
+				ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
+				ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
 
 				ItemButton:SetNormalTexture(nil)
 				AS:StyleButton(ItemButton)
