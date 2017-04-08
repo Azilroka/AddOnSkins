@@ -76,8 +76,8 @@ function AS:Blizzard_Collections(event, addon)
 		AS:StripTextures(MountJournalFilterButton, true)
 		AS:SkinButton(MountJournalFilterButton)
 		AS:SkinScrollBar(MountJournalListScrollFrameScrollBar)
-		AS:SkinRotateButton(MountJournal.MountDisplay.ModelFrame.RotateLeftButton)
-		AS:SkinRotateButton(MountJournal.MountDisplay.ModelFrame.RotateRightButton)
+		AS:SkinRotateButton(MountJournal.MountDisplay.ModelScene.RotateLeftButton)
+		AS:SkinRotateButton(MountJournal.MountDisplay.ModelScene.RotateRightButton)
 		AS:SkinTexture(MountJournal.MountDisplay.InfoButton.Icon)
 		AS:CreateBackdrop(MountJournal.MountDisplay.InfoButton)
 		MountJournal.MountDisplay.InfoButton.Backdrop:SetOutside(MountJournal.MountDisplay.InfoButton.Icon)
@@ -279,8 +279,8 @@ function AS:Blizzard_Collections(event, addon)
 
 		ToyBox.searchBox:SetPoint("TOPRIGHT", ToyBox, "TOPRIGHT", -117, -34)
 
-		AS:SkinNextPrevButton(ToyBox.navigationFrame.nextPageButton)
-		AS:SkinNextPrevButton(ToyBox.navigationFrame.prevPageButton)
+		AS:SkinNextPrevButton(ToyBox.PagingFrame.NextPageButton)
+		AS:SkinNextPrevButton(ToyBox.PagingFrame.PrevPageButton)
 		AS:StripTextures(ToyBox.iconsFrame)
 
 		for i = 1, 18 do
@@ -323,8 +323,8 @@ function AS:Blizzard_Collections(event, addon)
 
 		AS:StripTextures(HeirloomsJournalFilterButton, true)
 		AS:SkinButton(HeirloomsJournalFilterButton)
-		AS:SkinNextPrevButton(HeirloomsJournal.navigationFrame.nextPageButton)
-		AS:SkinNextPrevButton(HeirloomsJournal.navigationFrame.prevPageButton)
+		AS:SkinNextPrevButton(HeirloomsJournal.PagingFrame.NextPageButton)
+		AS:SkinNextPrevButton(HeirloomsJournal.PagingFrame.PrevPageButton)
 
 		hooksecurefunc(HeirloomsJournal, 'LayoutCurrentPage', function(self)
 			local pageLayoutData = self.heirloomLayoutData[self.currentPage];
@@ -358,20 +358,20 @@ function AS:Blizzard_Collections(event, addon)
 		AS:SkinEditBox(WardrobeCollectionFrameSearchBox)
 		AS:SkinButton(WardrobeCollectionFrame.FilterButton)
 		WardrobeCollectionFrame.FilterButton:SetWidth(80)
-		AS:StripTextures(WardrobeCollectionFrame.ModelsFrame)
+		AS:StripTextures(WardrobeCollectionFrame.ItemsCollectionFrame)
 		AS:SkinDropDownBox(WardrobeCollectionFrameWeaponDropDown)
-		AS:SkinNextPrevButton(WardrobeCollectionFrame.NavigationFrame.PrevPageButton)
-		AS:SkinNextPrevButton(WardrobeCollectionFrame.NavigationFrame.NextPageButton)
+		AS:SkinNextPrevButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.PrevPageButton)
+		AS:SkinNextPrevButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.NextPageButton)
 		AS:StripTextures(WardrobeCollectionFrame.FilterButton, true)
 		AS:SkinButton(WardrobeCollectionFrame.FilterButton)
 
 		for i = 1, 3 do
 			for j = 1, 6 do
-				AS:StripTextures(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j])
-				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:SetFrameLevel(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j]:GetFrameLevel() + 2)
-				AS:CreateBackdrop(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j])
-				WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j].Border:Kill()
-				hooksecurefunc(WardrobeCollectionFrame.ModelsFrame["ModelR"..i.."C"..j].Border, 'SetAtlas', function(self, texture)
+				AS:StripTextures(WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j])
+				WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:SetFrameLevel(WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:GetFrameLevel() + 2)
+				AS:CreateBackdrop(WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j])
+				WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j].Border:Kill()
+				hooksecurefunc(WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j].Border, 'SetAtlas', function(self, texture)
 					local Color = AS.BorderColor
 					if texture == "transmog-wardrobe-border-uncollected" then
 						Color = { 1, 1, 0}
