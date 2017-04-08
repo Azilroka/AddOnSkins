@@ -797,6 +797,14 @@ function AS:AdjustForPixelPerfect(number)
 	return number
 end
 
+function AS:AdjustForPixelPerfect(number)
+	if AS.PixelPerfect then
+		number = number - 1
+	end
+
+	return number
+end
+
 local function EnumObjectsHelper(enumFuncs, yieldFunc, iobj)
 	local depth = #enumFuncs
 	local i = 1

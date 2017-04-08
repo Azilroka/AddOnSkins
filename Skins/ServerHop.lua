@@ -195,11 +195,11 @@ function AS:ServerHop()
 	AS:SkinFrame(hopfavdescr)
 
 	-- HopList MainFrame
-	AS:SkinFrame(SH_HopListMainFrame)
-	AS:SkinButton(SH_HopListMainFrame.refreshButton)
-	AS:SkinCloseButton(SH_HopListMainFrameClose)
-	AS:SkinScrollBar(SH_HopListScrollScrollBar)
-	AS:SkinCheckBox(SH_OnlyMyZoneCheck)
+ 	AS:SkinFrame(SH_HopListMainFrame)
+ 	AS:SkinButton(SH_HopListMainFrame.refreshButton)
+ 	AS:SkinCloseButton(SH_HopListMainFrameClose)
+ 	AS:SkinScrollBar(SH_HopListScrollScrollBar)
+ 	AS:SkinCheckBox(SH_OnlyMyZoneCheck)
 
 	-- LFGButton
 	local LFGHopeButton = {LFGListFrame:GetChildren()}

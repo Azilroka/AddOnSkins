@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_Garrison(event, addon)
+--[[function AS:Blizzard_Garrison(event, addon)
 	if (addon == 'Blizzard_GarrisonUI' or event == "PLAYER_ENTERING_WORLD" and IsAddOnLoaded('Blizzard_GarrisonUI')) then
 		AS:SkinFrame(GarrisonMissionFrame, nil, nil, true)
 		AS:StripTextures(GarrisonMissionFrame.GarrCorners)
@@ -37,4 +37,4 @@ function AS:Blizzard_Garrison(event, addon)
 	end
 end
 
-AS:RegisterSkin('Blizzard_Garrison', AS.Blizzard_Garrison, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_Garrison', AS.Blizzard_Garrison, 'ADDON_LOADED')]]--
