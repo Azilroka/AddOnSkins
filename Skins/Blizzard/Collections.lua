@@ -353,6 +353,8 @@ function AS:Blizzard_Collections(event, addon)
 			button.slotFrameUncollected:SetAlpha(0)
 		end)
 		
+		AS:SkinTab(WardrobeCollectionFrameTab1)
+		AS:SkinTab(WardrobeCollectionFrameTab2)
 		AS:StripTextures(WardrobeCollectionFrame.progressBar)
 		AS:SkinStatusBar(WardrobeCollectionFrame.progressBar)
 		AS:SkinEditBox(WardrobeCollectionFrameSearchBox)
@@ -382,6 +384,13 @@ function AS:Blizzard_Collections(event, addon)
 				end)
 			end
 		end
+
+		AS:StripTextures(WardrobeCollectionFrame.SetsCollectionFrame)
+		AS:StripTextures(WardrobeCollectionFrame.SetsCollectionFrame.LeftInset)
+		AS:StripTextures(WardrobeCollectionFrame.SetsCollectionFrame.DetailsFrame)
+		AS:StripTextures(WardrobeCollectionFrame.SetsCollectionFrame.RightInset)
+		AS:SkinScrollBar(WardrobeCollectionFrameScrollFrameScrollBar)
+		AS:SkinButton(WardrobeSetsCollectionVariantSetsButton)
 		
 		AS:StripTextures(WardrobeFrame)
 		WardrobeFrame:SetTemplate("Transparent")
@@ -414,6 +423,17 @@ function AS:Blizzard_Collections(event, addon)
 		WardrobeTransmogFrame.SpecButton:ClearAllPoints()
 		WardrobeTransmogFrame.SpecButton:SetPoint("RIGHT", WardrobeTransmogFrame.ApplyButton, "LEFT", -2, 0)
 		AS:SkinButton(WardrobeTransmogFrame.ApplyButton)
+		
+		AS:StripTextures(WardrobeCollectionFrame.SetsTransmogFrame)
+		AS:SkinNextPrevButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.PrevPageButton)
+		AS:SkinNextPrevButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.NextPageButton)
+
+		for i = 1, 2 do
+			for j = 1, 4 do
+				AS:StripTextures(WardrobeCollectionFrame.SetsTransmogFrame["ModelR"..i.."C"..j])
+				WardrobeCollectionFrame.SetsTransmogFrame["ModelR"..i.."C"..j]:CreateBackdrop("Default")
+			end
+		end
 	end
 end
 
