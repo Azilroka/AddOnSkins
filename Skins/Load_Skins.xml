@@ -37,6 +37,7 @@
 	<Script file="CLCProt.lua"/>
 	<Script file="CLCRet.lua"/>
 	<Script file="Clique.lua"/>
+	<Script file="ColorPickerPlus.lua"/>
 	<Script file="CombustionHelper.lua"/>
 	<Script file="Coolline.lua"/>
 	<Script file="Cork.lua"/>
