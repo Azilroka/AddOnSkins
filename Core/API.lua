@@ -420,7 +420,12 @@ function AS:SkinTab(Tab, Strip)
 	AS:CreateBackdrop(Tab)
 
 	if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
-		AS:SetTemplate(Tab.Backdrop, 'Default')
+		-- Check if ElvUI already provides the backdrop. Otherwise we have two backdrops (e.g. Auctionhouse)
+		if Tab.backdrop then
+			Tab.Backdrop:Hide()
+		else
+			AS:SetTemplate(Tab.Backdrop, 'Transparent')
+		end
 	end
 
 	Tab.Backdrop:Point("TOPLEFT", 10, AS.PixelPerfect and -1 or -3)
