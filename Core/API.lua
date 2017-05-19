@@ -424,7 +424,7 @@ function AS:SkinTab(Tab, Strip)
 		if Tab.backdrop then
 			Tab.Backdrop:Hide()
 		else
-			AS:SetTemplate(Tab.Backdrop, 'Transparent')
+			AS:SetTemplate(Tab.Backdrop, 'Default')
 		end
 	end
 
