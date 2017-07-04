@@ -159,9 +159,11 @@ function AS:Skillet()
 
 		for i = 1, 2 do
 			local queDelete = _G['SkilletQueueButton'..i..'DeleteButton']
-			AS:SkinButton(queDelete)
-			queDelete:SetWidth(14)
-			queDelete:SetHeight(14)
+			if queDelete then
+				AS:SkinButton(queDelete)
+				queDelete:SetWidth(14)
+				queDelete:SetHeight(14)
+			end
 		end
 
 		if Enchantrix_BarkerOptions_Frame then
@@ -268,9 +270,11 @@ function AS:Skillet()
 		if SkilletQueueButton13DeleteButton then
 			for i = 1, 13 do
 				local queDelete = _G['SkilletQueueButton'..i..'DeleteButton']
-				AS:SkinButton(queDelete)
-				queDelete:SetWidth(14)
-				queDelete:SetHeight(14)
+				if queDelete then
+					AS:SkinButton(queDelete)
+					queDelete:SetWidth(14)
+					queDelete:SetHeight(14)
+				end
 			end
 		end
 	end
