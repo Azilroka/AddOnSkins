@@ -29,10 +29,14 @@ function AS:Blizzard_ChatBubbles()
 	end
 
 	local function IsChatBubble(frame)
-		for i = 1, frame:GetNumRegions() do
-			local region = select(i, frame:GetRegions()) 
-			if region.GetTexture and region:GetTexture() and type(region:GetTexture() == "string") then
-				if strfind(strlower(region:GetTexture()), "chatbubble%-background") then return true end;
+		if not frame:IsForbidden() then
+			for i = 1, frame:GetNumRegions() do
+				local region = select(i, frame:GetRegions()) 
+				if region.GetTexture and region:GetTexture() and type(region:GetTexture() == "string") then
+					if strfind(strlower(region:GetTexture()), "chatbubble%-background") then
+						return true
+					end;
+				end
 			end
 		end
 		return false
@@ -50,7 +54,7 @@ function AS:Blizzard_ChatBubbles()
 		if (Count ~= Children) then
 			for i = Children + 1, Count do
 				local frame = select(i, WorldFrame:GetChildren())
-				
+
 				if IsChatBubble(frame) then
 					SkinChatBubble(frame)
 				end
