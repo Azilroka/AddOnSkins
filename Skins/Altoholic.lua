@@ -73,16 +73,11 @@ function AS:Altoholic(event, addon)
 		AS:SkinScrollBar(AltoholicFrameContainersScrollFrame.ScrollBar)
 		AS:SkinScrollBar(AltoholicFrameQuestsScrollFrame.ScrollBar)
 		AS:SkinScrollBar(AltoholicFrameRecipesScrollFrame.ScrollBar)
-		AS:SkinDropDownBox(AltoholicTabCharacters.SelectRealm)
 		AS:SkinNextPrevButton(AltoholicFrameSpellbook.PrevPage)
 		AS:SkinNextPrevButton(AltoholicFrameSpellbook.NextPage)
 		AS:StripTextures(AltoholicFrameContainersScrollFrame, true)
 		AS:StripTextures(AltoholicFrameQuestsScrollFrame, true)
 		AS:StripTextures(AltoholicFrameRecipesScrollFrame, true)
-
-		AS:StyleButton(AltoholicTabCharacters.Characters)
-		AS:CreateBackdrop(AltoholicTabCharacters.Characters)
-		AS:SkinTexture(AltoholicTabCharacters.Characters.Icon)
 
 		local Buttons = {
 			'CharactersIcon',
