@@ -178,11 +178,11 @@ function AS:Blizzard_Others()
 	AS:CreateShadow(RolePollPopup)
 	AS:SkinCloseButton(RolePollPopupCloseButton)
 	
-	AS:StripTextures(BasicScriptErrors)
-	AS:SetTemplate(BasicScriptErrors)
-	AS:CreateShadow(BasicScriptErrors)
-	AS:SkinButton(BasicScriptErrorsButton)
-	BasicScriptErrors:SetScale(AS.UIScale)
+	-- AS:StripTextures(BasicScriptErrors)
+	-- AS:SetTemplate(BasicScriptErrors)
+	-- AS:CreateShadow(BasicScriptErrors)
+	-- AS:SkinButton(BasicScriptErrorsButton)
+	-- BasicScriptErrors:SetScale(AS.UIScale)
 	
 	-- for i = 1, 4 do
 		-- local button = _G["StaticPopup"..i.."CloseButton"]
