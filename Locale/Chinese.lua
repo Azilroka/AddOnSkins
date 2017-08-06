@@ -29,7 +29,7 @@ function AS:UpdateLocale_zhCN()
 	ASL["DBM|VEM Half-bar Skin"] = "DBM|VEM 半高计时条"
 	ASL["BigWigs Half-Bar"] = "BigWigs 半高计时条"
 	ASL["Embed Settings"] = "内嵌设置"
-	ASL["Settings to control Embedded AddOns:\n\nAvailable Embeds: alDamageMeter | Omen | Skada | Recount | TinyDPS"] = "设置内嵌插件:\n\n可用内嵌: alDamageMeter | Omen | Skada | Recount | TinyDPS"
+	ASL["Settings to control Embedded AddOns:\n\nAvailable Embeds: alDamageMeter | Details | Omen | Skada | Recount | TinyDPS"] = "设置内嵌插件:\n\n可用内嵌: alDamageMeter | Details | Omen | Skada | Recount | TinyDPS"
 	ASL["Single Embed System"] = "单内嵌"
 	ASL["Embed for Main Panel"] = "内嵌到主面板"
 	ASL["Dual Embed System"] = "双内嵌"
