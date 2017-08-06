@@ -173,12 +173,7 @@ function AS:CallSkin(skin, func, event, ...)
 		DEFAULT_CHAT_FRAME:AddMessage(format(message, AS.Title, AS.Version, skin))
 		FoundError = true
 		if AS:CheckOption('SkinDebug') then
-			if GetCVarBool('scriptErrors') then
-				LoadAddOn('Blizzard_DebugTools')
-				ScriptErrorsFrame_OnError(errormsg, false)
-			else
-				DEFAULT_CHAT_FRAME:AddMessage(format(errormessage, skin, errormsg))
-			end
+			DEFAULT_CHAT_FRAME:AddMessage(format(errormessage, skin, errormsg))
 		end
 	end
 end
