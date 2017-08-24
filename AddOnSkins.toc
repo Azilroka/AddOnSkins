@@ -4,7 +4,5 @@
 ## Author: Azilroka, Sortokk
 ## SavedVariables: AddOnSkinsDB
 ## OptionalDep: ElvUI, BuyEmAll, DSM, Tukui
-## X-Tukui-ProjectID: 128
-## X-Tukui-ProjectFolders: AddOnSkins
 
 Load_AddOnSkins.xml
