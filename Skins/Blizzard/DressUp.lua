@@ -1,14 +1,17 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_DressUpFrame()
-	AS:SkinBackdropFrame(DressUpFrame, nil, nil, true)
-	DressUpFrame.Backdrop:SetPoint("TOPLEFT", 6, 0)
-	DressUpFrame.Backdrop:SetPoint("BOTTOMRIGHT", -32, 70)
+	AS:StripTextures(DressUpFrame)
+	AS:SetTemplate(DressUpFrame, 'Transparent')
+	AS:StripTextures(DressUpFrameInset)
+	AS:SetTemplate(DressUpFrameInset, 'Default')
+	DressUpFramePortrait:Hide()
+	DressUpFramePortraitFrame:Hide()
 
 	AS:SkinButton(DressUpFrameResetButton)
 	AS:SkinButton(DressUpFrameCancelButton)
 	AS:SkinCloseButton(DressUpFrameCloseButton)
-	DressUpFrameCloseButton:SetPoint("TOPRIGHT", DressUpFrame.Backdrop, "TOPRIGHT", -3, -3)
+	AS:SkinMaxMinFrame(MaximizeMinimizeFrame)
 	DressUpFrameResetButton:SetPoint("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
 
 	AS:SkinDropDownBox(DressUpFrameOutfitDropDown)
