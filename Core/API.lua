@@ -794,6 +794,42 @@ function AS:Desaturate(frame, point)
 	end)
 end
 
+function AS:SkinMaxMinFrame(frame)
+	assert(frame, "does not exist.")
+
+	for _, name in next, {"MaximizeButton", "MinimizeButton"} do
+		if frame then AS:StripTextures(frame, true) end
+
+		local button = frame[name]
+		button:SetSize(16, 16)
+		button:ClearAllPoints()
+		button:SetPoint("CENTER")
+		AS:StripTextures(button, nil, true)
+		AS:SetTemplate(button)
+
+		button.Text = button:CreateFontString(nil, "OVERLAY")
+		button.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\Arial.TTF]], 12)
+		button.Text:SetText(name == "MaximizeButton" and "▲" or "▼")
+		button.Text:SetPoint("CENTER", 0, 0)
+
+		button:HookScript('OnShow', function(self)
+			if not self:IsEnabled() then
+				self.Text:SetTextColor(.3, .3, .3)
+			end
+		end)
+
+		button:HookScript('OnEnter', function(self)
+			self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
+			self.Text:SetTextColor(Color.r, Color.g, Color.b)
+		end)
+
+		button:HookScript('OnLeave', function(self)
+			self:SetBackdropBorderColor(unpack(AS.BorderColor))
+			self.Text:SetTextColor(1, 1, 1)
+		end)
+	end
+end
+
 function AS:AdjustForPixelPerfect(number)
 	if AS.PixelPerfect then
 		number = number - 1

@@ -192,6 +192,7 @@ function AS:Blizzard_Collections(event, addon)
 		PetJournalHealPetButton.texture:SetInside()
 		PetJournalHealPetButtonBorder:SetTexture(nil)
 		AS:StripTextures(PetJournalLoadoutBorder)
+		AS:SkinIconButton(PetJournalSummonRandomFavoritePetButton)
 
 		for i = 1, 3 do
 			local Pet = _G["PetJournalLoadoutPet"..i]

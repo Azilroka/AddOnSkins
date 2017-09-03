@@ -73,14 +73,6 @@ function AS:Blizzard_Others()
 	AS:StripTextures(ReportCheatingDialogCommentFrame)
 	AS:SkinEditBox(ReportCheatingDialogCommentFrameEditBox)
 	
-	-- Report Name
-	AS:StripTextures(ReportPlayerNameDialog)
-	AS:SetTemplate(ReportPlayerNameDialog)
-	AS:SkinButton(ReportPlayerNameDialogReportButton)
-	AS:SkinButton(ReportPlayerNameDialogCancelButton)
-	AS:StripTextures(ReportPlayerNameDialogCommentFrame)
-	AS:SkinEditBox(ReportPlayerNameDialogCommentFrameEditBox)
-	
 	-- -- reskin popup buttons
 	-- for i = 1, 4 do
 		-- for j = 1, 3 do
