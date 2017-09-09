@@ -142,6 +142,7 @@
 	<Script file="Spy.lua"/>
 	<Script file="StormEarthAndFire.lua"/>
 	<Script file="Swatter.lua"/>
+	<Script file="tdBattlePetScript.lua"/>
 	<Script file="TalentSetManager.lua"/>
 	<Script file="TinyDPS.lua"/>
 	<Script file="TitanPanel.lua"/>
