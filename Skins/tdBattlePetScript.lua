@@ -1,5 +1,7 @@
 local AS = unpack(AddOnSkins)
 
+if not AS:CheckAddOn('tdBattlePetScript') then return end
+
 function AS:tdBattlePetScript()
 	--/run LibStub('AceAddon-3.0'):GetAddon('tdBattlePetScript'):GetModule('UI.MainPanel').MainPanel:SetTemplate()
 	local tdBattlePetScript = LibStub('AceAddon-3.0'):GetAddon('tdBattlePetScript'):GetModule('UI.MainPanel')
