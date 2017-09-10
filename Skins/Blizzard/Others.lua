@@ -73,26 +73,26 @@ function AS:Blizzard_Others()
 	AS:StripTextures(ReportCheatingDialogCommentFrame)
 	AS:SkinEditBox(ReportCheatingDialogCommentFrameEditBox)
 	
-	-- -- reskin popup buttons
-	-- for i = 1, 4 do
-		-- for j = 1, 3 do
-			-- AS:SkinButton(_G["StaticPopup"..i.."Button"..j])
-			-- AS:SkinEditBox(_G["StaticPopup"..i.."EditBox"])
-			-- AS:SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameGold"])
-			-- AS:SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameSilver"])
-			-- AS:SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameCopper"])
-			-- _G["StaticPopup"..i.."EditBox"].backdrop:SetPoint("TOPLEFT", -2, -4)
-			-- _G["StaticPopup"..i.."EditBox"].backdrop:SetPoint("BOTTOMRIGHT", 2, 4)
-			-- _G["StaticPopup"..i.."ItemFrameNameFrame"]:Kill()
-			-- _G["StaticPopup"..i.."ItemFrame"]:GetNormalTexture():Kill()
-			-- AS:SetTemplate(_G["StaticPopup"..i.."ItemFrame"], 'Default')
-			-- AS:StyleButton(_G["StaticPopup"..i.."ItemFrame"])
-			-- AS:SkinTexture(_G["StaticPopup"..i.."ItemFrameIconTexture"])
-			-- _G["StaticPopup"..i.."ItemFrameIconTexture"]:ClearAllPoints()
-			-- _G["StaticPopup"..i.."ItemFrameIconTexture"]:Point("TOPLEFT", 2, -2)
-			-- _G["StaticPopup"..i.."ItemFrameIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
-		-- end
-	-- end
+	-- reskin popup buttons
+	for i = 1, 4 do
+		for j = 1, 3 do
+			AS:SkinButton(_G["StaticPopup"..i.."Button"..j])
+			AS:SkinEditBox(_G["StaticPopup"..i.."EditBox"])
+			AS:SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameGold"])
+			AS:SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameSilver"])
+			AS:SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameCopper"])
+			_G["StaticPopup"..i.."EditBox"].Backdrop:SetPoint("TOPLEFT", -2, -4)
+			_G["StaticPopup"..i.."EditBox"].Backdrop:SetPoint("BOTTOMRIGHT", 2, 4)
+			_G["StaticPopup"..i.."ItemFrameNameFrame"]:Kill()
+			_G["StaticPopup"..i.."ItemFrame"]:GetNormalTexture():Kill()
+			AS:SetTemplate(_G["StaticPopup"..i.."ItemFrame"], 'Default')
+			AS:StyleButton(_G["StaticPopup"..i.."ItemFrame"])
+			AS:SkinTexture(_G["StaticPopup"..i.."ItemFrameIconTexture"])
+			_G["StaticPopup"..i.."ItemFrameIconTexture"]:ClearAllPoints()
+			_G["StaticPopup"..i.."ItemFrameIconTexture"]:Point("TOPLEFT", 2, -2)
+			_G["StaticPopup"..i.."ItemFrameIconTexture"]:Point("BOTTOMRIGHT", -2, 2)
+		end
+	end
 
 	-- -- reskin all esc/menu buttons
 	-- local BlizzardMenuButtons = {

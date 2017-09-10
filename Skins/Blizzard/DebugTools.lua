@@ -8,8 +8,6 @@ function AS:Blizzard_DebugTools(event, addon)
 		AS:SkinNextPrevButton(ScriptErrorsFrame.PreviousError) -- must be redone
 		AS:SkinButton(ScriptErrorsFrame.Close)
 		AS:SkinButton(ScriptErrorsFrame.Reload)
-		AS:SkinButton(ScriptErrorsFrame.firstButton)
-		AS:SkinButton(ScriptErrorsFrame.lastButton)
 		AS:SkinCloseButton(ScriptErrorsFrameClose)
 		AS:SkinScrollBar(ScriptErrorsFrameScrollBar)
 		ScriptErrorsFrame.ScrollFrame.Text:FontTemplate(nil, 13)

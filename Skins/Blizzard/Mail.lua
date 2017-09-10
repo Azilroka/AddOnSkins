@@ -48,6 +48,7 @@ function AS:Blizzard_Mail(event, addon)
 	AS:SkinButton(OpenMailReplyButton)
 	AS:SkinButton(OpenMailDeleteButton)
 	AS:SkinButton(OpenMailCancelButton)
+	AS:SkinButton(OpenAllMail)
 
 	AS:StripTextures(OpenMailScrollFrame, true)
 	AS:SetTemplate(OpenMailScrollFrame, 'Default')
