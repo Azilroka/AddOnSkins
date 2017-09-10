@@ -194,4 +194,4 @@ build/
 *.tar.bz2
 xcuserdata/
 releases/
-DXE_5man
+*.ps1
