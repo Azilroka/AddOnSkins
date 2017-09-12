@@ -91,6 +91,7 @@
 	<Script file="MRT.lua"/>
 	<Script file="MrTrader.lua"/>
 	<Script file="MyRolePlay.lua"/>
+	<Script file="MythicKeystoneStatus.lua"/>
 	<Script file="NirritisNotes.lua"/>
 	<Script file="NoNoGoGo.lua"/>
 	<Script file="NPCScan.lua"/>
