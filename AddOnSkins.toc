@@ -1,7 +1,7 @@
 ## Interface: 70300
 ## Title: |cff1784d1AddOnSkins|r
 ## Version: 3.54
-## Author: Azilroka, Sortokk
+## Author: Azilroka, Infinitron
 ## SavedVariables: AddOnSkinsDB
 ## OptionalDep: ElvUI, BuyEmAll, DSM, Tukui
  

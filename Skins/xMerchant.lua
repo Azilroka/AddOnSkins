@@ -1,4 +1,4 @@
-﻿local AS = unpack(AddOnSkins)
+local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('xMerchant') then return end
 

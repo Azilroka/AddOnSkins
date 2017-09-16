@@ -1,4 +1,4 @@
-﻿local AS, ASL = unpack(AddOnSkins)
+local AS, ASL = unpack(AddOnSkins)
 
 function AS:UpdateLocale_ruRU()
 	ASL.DataText.ToggleEmbed = 'Показать/скрыть всроенный'

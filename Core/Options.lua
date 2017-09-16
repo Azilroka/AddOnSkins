@@ -80,7 +80,7 @@ local DEVELOPERS = {
 	"Shestak",
 	"Shadowcall",
 	"Sinaris",
-	"Sortokk",
+	"Infinitron",
 	"Tercioo",
 	"Tukz",
 	"Warmexx",
