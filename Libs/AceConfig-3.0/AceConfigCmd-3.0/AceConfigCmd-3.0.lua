@@ -208,7 +208,7 @@ local function showhelp(info, inputpos, tab, depth, noHead)
 	end
 	
 	local sortTbl = {}	-- [1..n]=name
-	local refTbl = {}   -- [name]=tableref
+	local refTbl = {}	-- [name]=tableref
 	
 	for k,v in iterateargs(tab) do
 		if not refTbl[k] then	-- a plugin overriding something in .args
@@ -237,7 +237,7 @@ local function showhelp(info, inputpos, tab, depth, noHead)
 		if o1<0 and o2<0 then return o1<o2 end
 		if o2<0 then return true end
 		if o1<0 then return false end
-		if o1==o2 then return tostring(one)<tostring(two) end   -- compare names
+		if o1==o2 then return tostring(one)<tostring(two) end	-- compare names
 		return o1<o2
 	end)
 	
@@ -740,12 +740,12 @@ end
 -- 
 -- -- Show the GUI if no input is supplied, otherwise handle the chat input.
 -- function MyAddon:ChatCommand(input)
---   -- Assuming "MyOptions" is the appName of a valid options table
---   if not input or input:trim() == "" then
---     LibStub("AceConfigDialog-3.0"):Open("MyOptions")
---   else
---     LibStub("AceConfigCmd-3.0").HandleCommand(MyAddon, "mychat", "MyOptions", input)
---   end
+--	-- Assuming "MyOptions" is the appName of a valid options table
+--	if not input or input:trim() == "" then
+--	 LibStub("AceConfigDialog-3.0"):Open("MyOptions")
+--	else
+--	 LibStub("AceConfigCmd-3.0").HandleCommand(MyAddon, "mychat", "MyOptions", input)
+--	end
 -- end
 function AceConfigCmd:HandleCommand(slashcmd, appName, input)
 
@@ -755,7 +755,7 @@ function AceConfigCmd:HandleCommand(slashcmd, appName, input)
 	end
 	local options = assert( optgetter("cmd", MAJOR) )
 	
-	local info = {   -- Don't try to recycle this, it gets handed off to callbacks and whatnot
+	local info = {	-- Don't try to recycle this, it gets handed off to callbacks and whatnot
 		[0] = slashcmd,
 		appName = appName,
 		options = options,

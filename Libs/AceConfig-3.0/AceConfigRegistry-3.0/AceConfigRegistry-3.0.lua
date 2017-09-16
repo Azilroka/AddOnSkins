@@ -53,8 +53,8 @@ end
 
 local isstring={["string"]=true, _="string"}
 local isstringfunc={["string"]=true,["function"]=true, _="string or funcref"}
-local istable={["table"]=true,   _="table"}
-local ismethodtable={["table"]=true,["string"]=true,["function"]=true,   _="methodname, funcref or table"}
+local istable={["table"]=true,	_="table"}
+local ismethodtable={["table"]=true,["string"]=true,["function"]=true,	_="methodname, funcref or table"}
 local optstring={["nil"]=true,["string"]=true, _="string"}
 local optstringfunc={["nil"]=true,["string"]=true,["function"]=true, _="string or funcref"}
 local optstringnumberfunc={["nil"]=true,["string"]=true,["number"]=true,["function"]=true, _="string, number or funcref"}

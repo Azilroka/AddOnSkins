@@ -29,14 +29,14 @@
 --
 -- -- declare defaults to be used in the DB
 -- local defaults = {
---   profile = {
---     setting = true,
---   }
+--	profile = {
+--	 setting = true,
+--	}
 -- }
 --
 -- function MyAddon:OnInitialize()
---   -- Assuming the .toc says ## SavedVariables: MyAddonDB
---   self.db = LibStub("AceDB-3.0"):New("MyAddonDB", defaults, true)
+--	-- Assuming the .toc says ## SavedVariables: MyAddonDB
+--	self.db = LibStub("AceDB-3.0"):New("MyAddonDB", defaults, true)
 -- end
 -- @class file
 -- @name AceDB-3.0.lua

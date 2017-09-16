@@ -39,8 +39,8 @@ end
 
 local ItemBase = {
 	-- NOTE: The ItemBase version is added to each item's version number
-	--       to ensure proper updates on ItemBase changes.
-	--       Use at least 1000er steps.
+	--		to ensure proper updates on ItemBase changes.
+	--		Use at least 1000er steps.
 	version = 1000,
 	counter = 0,
 }
@@ -86,7 +86,7 @@ end
 
 -- exported
 -- NOTE: this is called by a Dropdown-Pullout.
---       Do not call this method directly
+--		Do not call this method directly
 function ItemBase.SetPullout(self, pullout)
 	self.pullout = pullout
 	
@@ -135,14 +135,14 @@ end
 
 -- exported
 -- NOTE: this is called by a Dropdown-Pullout.
---       Do not call this method directly
+--		Do not call this method directly
 function ItemBase.SetOnLeave(self, func)
 	self.specialOnLeave = func
 end
 
 -- exported
 -- NOTE: this is called by a Dropdown-Pullout.
---       Do not call this method directly
+--		Do not call this method directly
 function ItemBase.SetOnEnter(self, func)
 	self.specialOnEnter = func
 end
@@ -201,13 +201,13 @@ function ItemBase.Create(type)
 	self.OnRelease = ItemBase.OnRelease
 	
 	self.SetPullout = ItemBase.SetPullout
-	self.GetText    = ItemBase.GetText
-	self.SetText    = ItemBase.SetText
+	self.GetText	= ItemBase.GetText
+	self.SetText	= ItemBase.SetText
 	self.SetDisabled = ItemBase.SetDisabled
 	
-	self.SetPoint   = ItemBase.SetPoint
-	self.Show       = ItemBase.Show
-	self.Hide       = ItemBase.Hide
+	self.SetPoint	= ItemBase.SetPoint
+	self.Show		= ItemBase.Show
+	self.Hide		= ItemBase.Hide
 	
 	self.SetOnLeave = ItemBase.SetOnLeave
 	self.SetOnEnter = ItemBase.SetOnEnter
@@ -426,7 +426,7 @@ do
 		self.frame:SetScript("OnEnter", OnEnter)
 		self.frame:SetScript("OnHide", OnHide)
 		
-		self.SetMenu   = SetMenu
+		self.SetMenu	= SetMenu
 		self.CloseMenu = CloseMenu
 		
 		AceGUI:RegisterAsWidget(self)

@@ -61,15 +61,15 @@ function AS:Blizzard_Quest()
 		Button:SetWidth(_G["QuestProgressItem"..i]:GetWidth() - 4)
 	end
 
-    hooksecurefunc("QuestInfo_GetRewardButton", function(rewardsFrame, index)
-    	local RewardButton = rewardsFrame.RewardButtons[index];
-    	if (not RewardButton.skinned) then
-    		RewardButton.NameFrame:Hide()
+	hooksecurefunc("QuestInfo_GetRewardButton", function(rewardsFrame, index)
+		local RewardButton = rewardsFrame.RewardButtons[index];
+		if (not RewardButton.skinned) then
+			RewardButton.NameFrame:Hide()
 			AS:CreateBackdrop(RewardButton)
 			RewardButton.Backdrop:SetPoint('TOPLEFT', RewardButton.Icon, 'TOPRIGHT', 0, 0)
 			RewardButton.Backdrop:SetPoint('BOTTOMLEFT', RewardButton.Icon, 'BOTTOMRIGHT', 0, 0)
 			RewardButton.Backdrop:SetPoint('RIGHT', RewardButton, 'RIGHT', -5, 0)
-    		AS:SkinTexture(RewardButton.Icon)
+			AS:SkinTexture(RewardButton.Icon)
 			RewardButton.Icon:SetSize(RewardButton.Icon:GetSize() - 4, RewardButton.Icon:GetSize() - 4)
 			RewardButton.Icon.Backdrop = CreateFrame('Frame', nil, RewardButton)
 			AS:SetTemplate(RewardButton.Icon.Backdrop)
@@ -103,8 +103,8 @@ function AS:Blizzard_Quest()
 				end
 			end)
 			RewardButton.skinned = true
-    	end
-    end)
+		end
+	end)
 
 	AS:SkinFrame(QuestNPCModel)
 	AS:SkinBackdropFrame(QuestNPCModelTextFrame)

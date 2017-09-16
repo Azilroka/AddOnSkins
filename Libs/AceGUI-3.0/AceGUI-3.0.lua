@@ -549,7 +549,7 @@ end
 
 
 ------------------
--- Widget API   --
+-- Widget API	--
 ------------------
 
 --- Registers a widget Constructor, this function returns a new instance of the Widget

@@ -138,13 +138,13 @@ local function Constructor()
 	content:SetPoint("BOTTOMRIGHT", -10, 10)
 
 	local widget = {
-		frame       = frame,
+		frame		= frame,
 		localstatus = {},
-		titletext   = titletext,
-		dropdown    = dropdown,
-		border      = border,
-		content     = content,
-		type        = Type
+		titletext	= titletext,
+		dropdown	= dropdown,
+		border	  = border,
+		content	 = content,
+		type		= Type
 	}
 	for method, func in pairs(methods) do
 		widget[method] = func

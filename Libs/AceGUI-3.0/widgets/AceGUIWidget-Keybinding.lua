@@ -231,12 +231,12 @@ local function Constructor()
 	msgframe:Hide()
 
 	local widget = {
-		button      = button,
-		label       = label,
-		msgframe    = msgframe,
-		frame       = frame,
+		button	  = button,
+		label		= label,
+		msgframe	= msgframe,
+		frame		= frame,
 		alignoffset = 30,
-		type        = Type
+		type		= Type
 	}
 	for method, func in pairs(methods) do
 		widget[method] = func

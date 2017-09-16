@@ -187,7 +187,7 @@ function AS:TotalRP3()
 	but there was an error tossed about indexing nil value
 
 	TRP3_RegisterAbout:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
-	                                edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+									edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
 									tile = true, edgeSize = 0});
 	]]--
 

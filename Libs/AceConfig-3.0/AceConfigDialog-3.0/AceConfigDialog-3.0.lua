@@ -140,9 +140,9 @@ end
 -- picks the first non-nil value and returns it
 local function pickfirstset(...)
   for i=1,select("#",...) do
-    if select(i,...)~=nil then
-      return select(i,...)
-    end
+	if select(i,...)~=nil then
+	  return select(i,...)
+	end
   end
 end
 

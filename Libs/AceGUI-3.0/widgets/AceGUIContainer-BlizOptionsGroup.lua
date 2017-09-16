@@ -123,10 +123,10 @@ local function Constructor()
 	content:SetPoint("BOTTOMRIGHT", -10, 10)
 
 	local widget = {
-		label   = label,
-		frame   = frame,
+		label	= label,
+		frame	= frame,
 		content = content,
-		type    = Type
+		type	= Type
 	}
 	for method, func in pairs(methods) do
 		widget[method] = func

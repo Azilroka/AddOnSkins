@@ -11,20 +11,20 @@
 -- local MyAddon = LibStub("AceAddon-3.0"):NewAddon("MyAddon")
 -- 
 -- function MyAddon:OnInitialize()
---   -- do init tasks here, like loading the Saved Variables, 
---   -- or setting up slash commands.
+--	-- do init tasks here, like loading the Saved Variables, 
+--	-- or setting up slash commands.
 -- end
 -- 
 -- function MyAddon:OnEnable()
---   -- Do more initialization here, that really enables the use of your addon.
---   -- Register Events, Hook functions, Create Frames, Get information from 
---   -- the game that wasn't available in OnInitialize
+--	-- Do more initialization here, that really enables the use of your addon.
+--	-- Register Events, Hook functions, Create Frames, Get information from 
+--	-- the game that wasn't available in OnInitialize
 -- end
 --
 -- function MyAddon:OnDisable()
---   -- Unhook, Unregister Events, Hide frames that you created.
---   -- You would probably only use an OnDisable if you want to 
---   -- build a "standby" mode, or be able to toggle modules on/off.
+--	-- Unhook, Unregister Events, Hide frames that you created.
+--	-- You would probably only use an OnDisable if you want to 
+--	-- build a "standby" mode, or be able to toggle modules on/off.
 -- end
 -- @class file
 -- @name AceAddon-3.0.lua
@@ -463,7 +463,7 @@ end
 -- @usage 
 -- -- Enable all modules
 -- for name, module in MyAddon:IterateModules() do
---    module:Enable()
+--	module:Enable()
 -- end
 local function IterateModules(self) return pairs(self.modules) end
 
@@ -477,7 +477,7 @@ local function IterateEmbeds(self) return pairs(AceAddon.embeds[self]) end
 -- @paramsig 
 -- @usage 
 -- if MyAddon:IsEnabled() then
---     MyAddon:Disable()
+--	 MyAddon:Disable()
 -- end
 local function IsEnabled(self) return self.enabledState end
 local mixins = {
@@ -613,7 +613,7 @@ end
 -- @usage 
 -- -- Print a list of all installed AceAddon's
 -- for name, addon in AceAddon:IterateAddons() do
---   print("Addon: " .. name)
+--	print("Addon: " .. name)
 -- end
 function AceAddon:IterateAddons() return pairs(self.addons) end
 
@@ -621,9 +621,9 @@ function AceAddon:IterateAddons() return pairs(self.addons) end
 -- @usage 
 -- -- Print a list of all enabled addons
 -- for name, status in AceAddon:IterateAddonStatus() do
---   if status then
---     print("EnabledAddon: " .. name)
---   end
+--	if status then
+--	 print("EnabledAddon: " .. name)
+--	end
 -- end
 function AceAddon:IterateAddonStatus() return pairs(self.statuses) end
 

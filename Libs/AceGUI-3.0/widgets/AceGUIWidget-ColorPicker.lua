@@ -174,9 +174,9 @@ local function Constructor()
 
 	local widget = {
 		colorSwatch = colorSwatch,
-		text        = text,
-		frame       = frame,
-		type        = Type
+		text		= text,
+		frame		= frame,
+		type		= Type
 	}
 	for method, func in pairs(methods) do
 		widget[method] = func

@@ -265,14 +265,14 @@ local function Constructor()
 	editbox:SetScript("OnEscapePressed", EditBox_OnEscapePressed)
 
 	local widget = {
-		label       = label,
-		slider      = slider,
-		lowtext     = lowtext,
-		hightext    = hightext,
-		editbox     = editbox,
+		label		= label,
+		slider	  = slider,
+		lowtext	 = lowtext,
+		hightext	= hightext,
+		editbox	 = editbox,
 		alignoffset = 25,
-		frame       = frame,
-		type        = Type
+		frame		= frame,
+		type		= Type
 	}
 	for method, func in pairs(methods) do
 		widget[method] = func

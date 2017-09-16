@@ -685,19 +685,19 @@ local function Constructor()
 	content:SetPoint("BOTTOMRIGHT", -10, 10)
 
 	local widget = {
-		frame        = frame,
-		lines        = {},
-		levels       = {},
-		buttons      = {},
+		frame		= frame,
+		lines		= {},
+		levels		= {},
+		buttons	  = {},
 		hasChildren  = {},
 		localstatus  = { groups = {}, scrollvalue = 0 },
-		filter       = false,
-		treeframe    = treeframe,
-		dragger      = dragger,
-		scrollbar    = scrollbar,
-		border       = border,
-		content      = content,
-		type         = Type
+		filter		= false,
+		treeframe	= treeframe,
+		dragger	  = dragger,
+		scrollbar	= scrollbar,
+		border		= border,
+		content	  = content,
+		type		 = Type
 	}
 	for method, func in pairs(methods) do
 		widget[method] = func

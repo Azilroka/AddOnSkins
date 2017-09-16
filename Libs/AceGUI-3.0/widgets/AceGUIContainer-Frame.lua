@@ -87,7 +87,7 @@ local methods = {
 		self:SetStatusText()
 		self:ApplyStatus()
 		self:Show()
-        self:EnableResize(true)
+		self:EnableResize(true)
 	end,
 
 	["OnRelease"] = function(self)
@@ -295,15 +295,15 @@ local function Constructor()
 
 	local widget = {
 		localstatus = {},
-		titletext   = titletext,
+		titletext	= titletext,
 		statustext  = statustext,
-		titlebg     = titlebg,
-		sizer_se    = sizer_se,
-		sizer_s     = sizer_s,
-		sizer_e     = sizer_e,
-		content     = content,
-		frame       = frame,
-		type        = Type
+		titlebg	 = titlebg,
+		sizer_se	= sizer_se,
+		sizer_s	 = sizer_s,
+		sizer_e	 = sizer_e,
+		content	 = content,
+		frame		= frame,
+		type		= Type
 	}
 	for method, func in pairs(methods) do
 		widget[method] = func

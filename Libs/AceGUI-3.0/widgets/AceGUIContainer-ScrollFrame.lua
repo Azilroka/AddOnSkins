@@ -188,10 +188,10 @@ local function Constructor()
 	local widget = {
 		localstatus = { scrollvalue = 0 },
 		scrollframe = scrollframe,
-		scrollbar   = scrollbar,
-		content     = content,
-		frame       = frame,
-		type        = Type
+		scrollbar	= scrollbar,
+		content	 = content,
+		frame		= frame,
+		type		= Type
 	}
 	for method, func in pairs(methods) do
 		widget[method] = func

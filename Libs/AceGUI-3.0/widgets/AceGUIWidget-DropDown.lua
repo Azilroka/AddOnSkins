@@ -64,8 +64,8 @@ do
 	--[[ UI Event Handlers ]]--
 	
 	-- HACK: This should be no part of the pullout, but there
-	--       is no other 'clean' way to response to any item-OnEnter
-	--       Used to close Submenus when an other item is entered
+	--		is no other 'clean' way to response to any item-OnEnter
+	--		Used to close Submenus when an other item is entered
 	local function OnEnter(item)
 		local self = item.pullout
 		for k, v in ipairs(self.items) do
@@ -269,9 +269,9 @@ do
 		self.OnRelease = OnRelease
 
 		self.AddItem = AddItem
-		self.Open    = Open
-		self.Close   = Close
-		self.Clear   = Clear
+		self.Open	= Open
+		self.Close	= Close
+		self.Clear	= Clear
 		self.IterateItems = IterateItems
 		self.SetHideOnLeave = SetHideOnLeave
 
@@ -660,18 +660,18 @@ do
 		frame.obj = self
 		dropdown.obj = self
 		
-		self.OnRelease   = OnRelease
-		self.OnAcquire   = OnAcquire
+		self.OnRelease	= OnRelease
+		self.OnAcquire	= OnAcquire
 		
 		self.ClearFocus  = ClearFocus
 
-		self.SetText     = SetText
-		self.SetValue    = SetValue
-		self.GetValue    = GetValue
-		self.SetList     = SetList
-		self.SetLabel    = SetLabel
+		self.SetText	 = SetText
+		self.SetValue	= SetValue
+		self.GetValue	= GetValue
+		self.SetList	 = SetList
+		self.SetLabel	= SetLabel
 		self.SetDisabled = SetDisabled
-		self.AddItem     = AddItem
+		self.AddItem	 = AddItem
 		self.SetMultiselect = SetMultiselect
 		self.GetMultiselect = GetMultiselect
 		self.SetItemValue = SetItemValue
