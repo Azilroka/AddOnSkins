@@ -32,7 +32,7 @@ function AS:AdiBags(event)
 			end
 		end)
 	elseif event == 'BANKFRAME_OPENED' then
-		AS:Delay(1, function()
+		AS:Delay(0.1, function()
 			if AdiBagsContainer2 then
 				SkinFrame(AdiBagsContainer2)
 				AS:UnregisterSkinEvent('AdiBags', event)

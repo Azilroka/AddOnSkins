@@ -64,6 +64,7 @@
 	<Script file="GryphonHeartItems.lua"/>
 	<Script file="GuildMemberInfo_TradeSkills.lua"/>
 	<Script file="GupPet.lua"/>
+	<Script file="Hack.lua"/>
 	<Script file="Healium.lua"/>
 	<Script file="Hekili.lua"/>
 	<Script file="Ignition.lua"/>
@@ -102,6 +103,7 @@
 	<Script file="Omen.lua"/>
 	<Script file="OneClickEnchantScroll.lua"/>
 	<Script file="oRA3.lua"/>
+	<Script file="OrderHallCommander.lua"/>
 	<Script file="Outfitter.lua"/>
 	<Script file="Ovale.lua"/>
 	<Script file="Overachiever.lua"/>
