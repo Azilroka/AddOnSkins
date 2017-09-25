@@ -143,7 +143,7 @@ function hook(self, obj, method, handler, script, secure, raw, forceSecure, usag
 			error(format("%s: You can only hook a script on a frame object", usage), 3)
 		end
 		if not secure and obj.IsProtected and obj:IsProtected() and protectedScripts[method] then
-			error(format("Cannot hook secure script %q; Use SecureHookScript(obj, method, [handler]) instead.", method), 3)
+			error(format("Cannot hook secure script %q Use SecureHookScript(obj, method, [handler]) instead.", method), 3)
 		end
 	else
 		local issecure 

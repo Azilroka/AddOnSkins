@@ -83,7 +83,7 @@ end
 -- usererr() - produce chatframe message regarding bad slash syntax etc
 
 local function usererr(info,inputpos,msg )
-	local cmdstr=strsub(info.input, 1, inputpos-1);
+	local cmdstr=strsub(info.input, 1, inputpos-1)
 	print("/" ..info[0] .. " "..cmdstr ..": "..(msg or "malformed options table"))
 end
 
@@ -401,7 +401,7 @@ local function handle(info, inputpos, tab, depth, retfalse)
 		return
 	end
 	
-	local str = strsub(info.input,inputpos);
+	local str = strsub(info.input,inputpos)
 	
 	if tab.type=="execute" then
 		------------ execute --------------------------------------------

@@ -92,7 +92,7 @@ function CallbackHandler:New(target, RegisterName, UnregisterName, UnregisterAll
 		registry.recurse = oldrecurse
 
 		if registry.insertQueue and oldrecurse==0 then
-			-- Something in one of our callbacks wanted to register more callbacks; they got queued
+			-- Something in one of our callbacks wanted to register more callbacks they got queued
 			for eventname,callbacks in pairs(registry.insertQueue) do
 				local first = not rawget(events, eventname) or not next(events[eventname])	-- test for empty before. not test for one member after. that one member may have been overwritten.
 				for self,func in pairs(callbacks) do
