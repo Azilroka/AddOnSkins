@@ -3,6 +3,12 @@ local AddOnName = ...
 local ES
 local FoundError
 
+local select, pairs, ipairs, type, pcall = select, pairs, ipairs, type, pcall
+local floor, print, format, strlower, strfind, strmatch = floor, print, format, strlower, strfind, strmatch
+local sort, tinsert, tonumber = sort, tinsert, tonumber
+local _G = _G
+local IsAddOnLoaded, GetAddOnMetadata, C_Timer = IsAddOnLoaded, GetAddOnMetadata, C_Timer
+
 function AS:CheckOption(optionName, ...)
 	for i = 1, select('#', ...) do
 		local addon = select(i, ...)
@@ -147,7 +153,7 @@ function AS:RegisteredSkin(skinName, priority, func, events)
 		if not strfind(event, '%[') then
 			if not AS.events[event] then
 				AS[event] = GenerateEventFunction(event)
-				AS:RegisterEvent(event); 
+				AS:RegisterEvent(event) 
 				AS.events[event] = {} 
 			end
 			AS.events[event][skinName] = true
@@ -293,7 +299,7 @@ end
 
 function AS:AcceptFrame(MainText, Function)
 	if not AcceptFrame then
-		AcceptFrame = CreateFrame('Frame', 'AcceptFrame', UIParent)
+		local AcceptFrame = CreateFrame('Frame', 'AcceptFrame', UIParent)
 		AS:SkinFrame(AcceptFrame)
 		AcceptFrame:SetPoint('CENTER', UIParent, 'CENTER')
 		AcceptFrame:SetFrameStrata('DIALOG')

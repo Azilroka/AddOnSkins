@@ -1,6 +1,8 @@
 local AS, ASL = unpack(AddOnSkins)
 
 local format, gsub, pairs, ipairs, select, tinsert, tonumber = format, gsub, pairs, ipairs, select, tinsert, tonumber
+local strlower, strmatch, strsub, floor, wipe, type = strlower, strmatch, strsub, floor, wipe, type
+local _G, CreateFrame = _G, CreateFrame
 
 AS.ChatFrameHider = CreateFrame('Frame')
 AS.ChatFrameHider:Hide()
@@ -67,7 +69,7 @@ function AS:EmbedInit()
 end
 
 function AS:Embed_Show()
-	EmbedSystem_MainWindow:Show();
+	EmbedSystem_MainWindow:Show()
 	if AS:CheckOption('EmbedSystem') then
 		if _G[EmbedSystem_MainWindow.FrameName] then _G[EmbedSystem_MainWindow.FrameName]:Show() end
 	end
@@ -81,7 +83,7 @@ function AS:Embed_Show()
 end
 
 function AS:Embed_Hide()
-	EmbedSystem_MainWindow:Hide();
+	EmbedSystem_MainWindow:Hide()
 	if AS:CheckOption('EmbedSystem') then
 		if _G[EmbedSystem_MainWindow.FrameName] then _G[EmbedSystem_MainWindow.FrameName]:Hide() end
 	end

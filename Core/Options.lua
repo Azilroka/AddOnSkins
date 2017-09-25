@@ -1,5 +1,5 @@
 local AS, ASL = unpack(AddOnSkins)
-local tinsert, sort, pairs, format, gsub, strfind = tinsert, sort, pairs, format, gsub, strfind
+local tinsert, sort, pairs, format, gsub, strfind, strlower, strtrim = tinsert, sort, pairs, format, gsub, strfind, strlower, strtrim
 
 local defaults = {
 	profile = {
@@ -92,10 +92,10 @@ for _, devName in pairs(DEVELOPERS) do
 end
 
 function AS:SetupProfile()
-	self.data = LibStub("AceDB-3.0"):New("AddOnSkinsDB", defaults, true);
-	self.data.RegisterCallback(self, "OnProfileChanged", "SetupProfile");
-	self.data.RegisterCallback(self, "OnProfileCopied", "SetupProfile");
-	self.db = self.data.profile;
+	self.data = LibStub("AceDB-3.0"):New("AddOnSkinsDB", defaults, true)
+	self.data.RegisterCallback(self, "OnProfileChanged", "SetupProfile")
+	self.data.RegisterCallback(self, "OnProfileCopied", "SetupProfile")
+	self.db = self.data.profile
 end
 
 function AS:GetOptions()
@@ -492,9 +492,9 @@ function AS:GetOptions()
 		}
 	end
 
-	Options.args.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(AS.data);
-	Options.args.profiles.order = -2;
-	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("AddOnSkinsProfiles", Options.args.profiles);
+	Options.args.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(AS.data)
+	Options.args.profiles.order = -2
+	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("AddOnSkinsProfiles", Options.args.profiles)
 
 	local EP = LibStub('LibElvUIPlugin-1.0', true)
 	if EP then

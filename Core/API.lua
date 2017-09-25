@@ -2,6 +2,12 @@ local AS = unpack(AddOnSkins)
 
 local Color = RAID_CLASS_COLORS[AS.MyClass]
 
+local _G, CreateFrame = _G, CreateFrame
+local unpack, pairs, select, type, assert, next = unpack, pairs, select, type, assert, next
+local strlower = strlower
+local CopyTable, tremove = CopyTable, tremove
+local IsAddOnLoaded = IsAddOnLoaded
+
 function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 	local Texture = AS.Blank
 
@@ -753,7 +759,7 @@ function AS:SkinStatusBar(frame, ClassColor)
 		frame:SetStatusBarColor(color.r, color.g, color.b)
 	end
 	if AS:CheckAddOn('ElvUI') then
-		ElvUI[1]:RegisterStatusBar(Frame)
+		ElvUI[1]:RegisterStatusBar(frame)
 	end
 end
 
@@ -852,9 +858,9 @@ local function EnumObjectsHelper(enumFuncs, yieldFunc, iobj)
 			if (depth == 1) then
 				yieldFunc(obj)
 			else
-				local innerEnumFuncs = CopyTable(enumFuncs);
-				tremove(innerEnumFuncs, 1);
-				EnumObjectsHelper(innerEnumFuncs, yieldFunc, obj);
+				local innerEnumFuncs = CopyTable(enumFuncs)
+				tremove(innerEnumFuncs, 1)
+				EnumObjectsHelper(innerEnumFuncs, yieldFunc, obj)
 			end
 		end
 		i = i + 1

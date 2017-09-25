@@ -2,7 +2,10 @@ local AS, ASL = unpack(AddOnSkins)
 if not AS:CheckAddOn('ElvUI') then return end
 
 local E, L, V, P, G, LSM, ES, S
-local select = select
+local select, pairs, unpack, floor = select, pairs, unpack, floor
+local hooksecurefunc = hooksecurefunc
+local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
+local IsAddOnLoaded = IsAddOnLoaded
 
 local ElvUISkinTable = {
 	['Blizzard_CharacterFrame'] = {

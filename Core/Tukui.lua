@@ -1,7 +1,11 @@
 local AS, ASL = unpack(AddOnSkins)
 if not AS:CheckAddOn('Tukui') then return end
 
-local select = select
+local select, floor = select, floor
+local IsAddOnLoaded = IsAddOnLoaded
+local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
+local CreateFrame = CreateFrame
+
 local T, C
 
 function AS:UpdateMedia()
