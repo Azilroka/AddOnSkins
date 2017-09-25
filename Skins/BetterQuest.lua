@@ -20,7 +20,7 @@ function AS:BetterQuest()
 					local Line = i == 1 and _G["BetterQuest_"..id..'_Line'..i..'_Right'] or _G["BetterQuest_"..id..'_Line'..i..'_Left']
 					local LineText = Line and Line:GetText() or nil
 					if LineText then
-						LineText = gsub(LineText, "|TInterface\\Buttons\\UI%-(%a-)Button%-Up:%d-|t", function(x) local z = (x == 'Minus' and '-' or x == 'Plus' and '+'); return z and '|cFFFFFFFF'..z..' |r' or '' end)
+						LineText = gsub(LineText, "|TInterface\\Buttons\\UI%-(%a-)Button%-Up:%d-|t", function(x) local z = (x == 'Minus' and '-' or x == 'Plus' and '+') return z and '|cFFFFFFFF'..z..' |r' or '' end)
 						Line:SetText(LineText)
 					end
 				end

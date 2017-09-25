@@ -60,7 +60,7 @@ function AS:Blizzard_Spellbook()
 	-- Skill Line Tabs
 
 	hooksecurefunc('SpellBookFrame_UpdateSkillLineTabs', function()
-		local NumSkillLineTabs = GetNumSpellTabs();
+		local NumSkillLineTabs = GetNumSpellTabs()
 		for i = 1, MAX_SKILLLINE_TABS do
 			local Tab = _G["SpellBookSkillLineTab"..i]
 			if ( i <= NumSkillLineTabs and SpellBookFrame.bookType == BOOKTYPE_SPELL ) then

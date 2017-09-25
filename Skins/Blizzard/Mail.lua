@@ -93,12 +93,12 @@ function AS:Blizzard_Mail(event, addon)
 	end
 
 	hooksecurefunc("InboxFrame_Update", function()
-		local numItems, totalItems = GetInboxNumItems();
-		local index = ((InboxFrame.pageNum - 1) * INBOXITEMS_TO_DISPLAY) + 1;
+		local numItems, totalItems = GetInboxNumItems()
+		local index = ((InboxFrame.pageNum - 1) * INBOXITEMS_TO_DISPLAY) + 1
 
 		for i = 1, INBOXITEMS_TO_DISPLAY do
 			if ( index <= numItems ) then
-				local packageIcon, stationeryIcon, sender, subject, money, CODAmount, daysLeft, itemCount, wasRead, x, y, z, isGM, firstItemQuantity = GetInboxHeaderInfo(index);
+				local packageIcon, stationeryIcon, sender, subject, money, CODAmount, daysLeft, itemCount, wasRead, x, y, z, isGM, firstItemQuantity = GetInboxHeaderInfo(index)
 				_G["MailItem"..i.."Button"]:SetBackdropBorderColor(unpack(AS.BorderColor))
 				if ( packageIcon ) and ( not isGM ) then
 					local ItemLink = GetInboxItemLink(index, 1)
@@ -123,7 +123,7 @@ function AS:Blizzard_Mail(event, addon)
 			if ItemLink then
 				local Quality = select(3, GetItemInfo(ItemLink))
 				if (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
-					AttachmentButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b);
+					AttachmentButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 				end
 			end
 		end
@@ -132,12 +132,12 @@ function AS:Blizzard_Mail(event, addon)
 	hooksecurefunc("SendMailFrame_Update", function()
 		for i = 1, ATTACHMENTS_MAX_SEND do
 			local ItemLink = GetSendMailItemLink(i)
-			local AttachmentButton = _G["SendMailAttachment"..i];
+			local AttachmentButton = _G["SendMailAttachment"..i]
 			AttachmentButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 			if ItemLink then
 				local Quality = select(3, GetItemInfo(ItemLink))
 				if (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
-					AttachmentButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b);
+					AttachmentButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 				end
 			end
 			local Texture = _G["SendMailAttachment"..i]:GetNormalTexture()

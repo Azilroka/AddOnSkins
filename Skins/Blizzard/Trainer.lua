@@ -70,30 +70,30 @@ function AS:Blizzard_Trainer(event, addon)
 	end
 
 	hooksecurefunc('ClassTrainerFrame_SetServiceButton', function(skillButton, skillIndex, playerMoney, selected, isTradeSkill)
-		local unavailable = false;
-		local serviceName, serviceSubText, serviceType, texture, reqLevel = GetTrainerServiceInfo(skillIndex);
+		local unavailable = false
+		local serviceName, serviceSubText, serviceType, texture, reqLevel = GetTrainerServiceInfo(skillIndex)
 		if ( not serviceName ) then
-			serviceName = UNKNOWN;
+			serviceName = UNKNOWN
 		end
 
-		local moneyCost, isProfession = GetTrainerServiceCost(skillIndex);
+		local moneyCost, isProfession = GetTrainerServiceCost(skillIndex)
 
 		if ( ClassTrainerFrame.selectedService and selected == skillIndex ) then
-			ClassTrainerFrame.showDialog = nil;
+			ClassTrainerFrame.showDialog = nil
 			
 			if isProfession then
-				ClassTrainerFrame.showDialog = true;
-				local _, prof2 = GetProfessions();
+				ClassTrainerFrame.showDialog = true
+				local _, prof2 = GetProfessions()
 				if prof2 then
-					unavailable = true;
+					unavailable = true
 				end
 			end 
 		
 			skillButton.Backdrop:SetBackdropBorderColor(0, 0.44, .87)
 			if ( serviceType == "available" and not unavailable) then
-				ClassTrainerTrainButton:Enable();
+				ClassTrainerTrainButton:Enable()
 			else
-				ClassTrainerTrainButton:Disable();
+				ClassTrainerTrainButton:Disable()
 			end
 		else
 			skillButton.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))

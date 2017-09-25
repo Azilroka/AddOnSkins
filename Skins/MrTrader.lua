@@ -78,7 +78,7 @@ function AS:MrTrader()
 				button:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		end
-	end);
+	end)
 
 	hooksecurefunc(MRTSkillWindow, "AdjustWindow", function()
 		local expandButton = _G["MRTSkillFrameFilterExpandButton"]

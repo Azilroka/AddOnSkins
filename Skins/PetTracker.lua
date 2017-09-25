@@ -186,7 +186,7 @@ function AS:PetTracker()
 				AS:SkinTexture(button.Icon)
 			end
 		end
-	end);
+	end)
 end
 
 AS:RegisterSkin('PetTracker', AS.PetTracker)

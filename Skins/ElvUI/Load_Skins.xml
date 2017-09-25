@@ -1,6 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="DXE.lua"/>
-    <Script file="MyRolePlay.lua"/>
-    <Script file="ParchmentRemover.lua"/>
-    <Script file="SexyCooldown.lua"/>
+	<Script file="MyRolePlay.lua"/>
+	<Script file="ParchmentRemover.lua"/>
+	<Script file="SexyCooldown.lua"/>
 </Ui>

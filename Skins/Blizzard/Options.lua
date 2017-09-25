@@ -266,11 +266,11 @@ function AS:Blizzard_Options(event, addon)
 
 		hooksecurefunc('ChatConfig_UpdateCheckboxes', function(frame)
 			if ( not FCF_GetCurrentChatFrame() ) then
-				return;
+				return
 			end
 			for index, value in ipairs(frame.checkBoxTable) do
-				local checkBoxNameString = frame:GetName().."CheckBox";
-				local checkBoxName = checkBoxNameString..index;
+				local checkBoxNameString = frame:GetName().."CheckBox"
+				local checkBoxName = checkBoxNameString..index
 				local checkBox = _G[checkBoxName]
 				local check = _G[checkBoxName.."Check"]
 				if checkBox and not checkBox.isSkinned then
@@ -285,16 +285,16 @@ function AS:Blizzard_Options(event, addon)
 		end)
 
 		hooksecurefunc('ChatConfig_UpdateTieredCheckboxes', function(frame, index)
-			local group = frame.checkBoxTable[index];
-			local groupChecked;
-			local baseName = frame:GetName().."CheckBox"..index;
-			local checkBox = _G[baseName];
+			local group = frame.checkBoxTable[index]
+			local groupChecked
+			local baseName = frame:GetName().."CheckBox"..index
+			local checkBox = _G[baseName]
 			if ( checkBox ) then
 				AS:SkinCheckBox(checkBox)
 			end
 			if ( group.subTypes ) then
 				for k, v in ipairs(group.subTypes) do
-					local subCheckBox = _G[baseName.."_"..k];
+					local subCheckBox = _G[baseName.."_"..k]
 					AS:SkinCheckBox(subCheckBox)
 				end
 			end
@@ -302,12 +302,12 @@ function AS:Blizzard_Options(event, addon)
 
 		hooksecurefunc('ChatConfig_UpdateSwatches', function(frame)
 			if ( not FCF_GetCurrentChatFrame() ) then
-				return;
+				return
 			end
-			local table = frame.swatchTable;
-			local nameString = frame:GetName().."Swatch";
+			local table = frame.swatchTable
+			local nameString = frame:GetName().."Swatch"
 			for index, value in ipairs(table) do
-				local baseName = nameString..index;
+				local baseName = nameString..index
 				AS:StripTextures(_G[baseName])
 			end
 		end)

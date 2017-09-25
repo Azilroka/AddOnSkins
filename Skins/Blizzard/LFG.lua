@@ -312,7 +312,7 @@ function AS:Blizzard_PVPUI(event, addon)
 
 	hooksecurefunc('PVPQueueFrame_SelectButton', function(index)
 		for i = 1, 4 do
-			local Button = PVPQueueFrame["CategoryButton"..i];
+			local Button = PVPQueueFrame["CategoryButton"..i]
 			if ( i == index ) then
 				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
 				Button.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
@@ -412,18 +412,18 @@ function AS:Blizzard_PVPUI(event, addon)
 	AS:SkinCheckBox(WarGameTournamentModeCheckButton)
 
 	hooksecurefunc('WarGamesFrame_Update', function()
-		local scrollFrame = WarGamesFrame.scrollFrame;
-		local offset = HybridScrollFrame_GetOffset(scrollFrame);
-		local buttons = scrollFrame.buttons;
-		local numButtons = #buttons;
-		local numWarGames = GetNumWarGameTypes();
-		local selectedIndex = GetSelectedWarGameType();
+		local scrollFrame = WarGamesFrame.scrollFrame
+		local offset = HybridScrollFrame_GetOffset(scrollFrame)
+		local buttons = scrollFrame.buttons
+		local numButtons = #buttons
+		local numWarGames = GetNumWarGameTypes()
+		local selectedIndex = GetSelectedWarGameType()
 
 		for i = 1, numButtons do
-			local button = buttons[i];
-			local index = offset + i;
+			local button = buttons[i]
+			local index = offset + i
 			if index <= numWarGames  then
-				local name, pvpType, collapsed, id, minPlayers, maxPlayers, isRandom, iconTexture = GetWarGameTypeInfo(index);
+				local name, pvpType, collapsed, id, minPlayers, maxPlayers, isRandom, iconTexture = GetWarGameTypeInfo(index)
 				if not button.Entry.isSkinned then
 					button.Entry:SetHighlightTexture('')
 					AS:CreateBackdrop(button.Entry)

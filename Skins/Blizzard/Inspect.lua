@@ -82,11 +82,11 @@ function AS:Blizzard_Inspect(event, addon)
 
 	Specialization:HookScript('OnShow', function(self)
 		if(INSPECTED_UNIT ~= nil) then
-			Spec = GetInspectSpecialization(INSPECTED_UNIT);
-			Sex = UnitSex(INSPECTED_UNIT);
+			Spec = GetInspectSpecialization(INSPECTED_UNIT)
+			Sex = UnitSex(INSPECTED_UNIT)
 		end
 		if(Spec ~= nil and Spec > 0 and Sex ~= nil) then
-			local Role = GetSpecializationRoleByID(Spec);
+			local Role = GetSpecializationRoleByID(Spec)
 			if (Role ~= nil) then
 				self.specIcon:SetTexture(select(4, GetSpecializationInfoByID(Spec, Sex)))
 			end

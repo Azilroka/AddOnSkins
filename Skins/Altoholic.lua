@@ -124,7 +124,7 @@ function AS:Altoholic(event, addon)
 		AS:EnumObjects(function(index) return AltoholicTabSearch['Entry'..index] end, function(obj) AS:SkinButton(obj, true) end)
 		AS:EnumObjects(function(index) return AltoholicTabSearch["SortButtons"]["Sort"..index] end, function(obj) AS:SkinButton(obj) end)
 		AS:EnumObjects(
-			function(index) local obj = AltoholicFrameSearch['Entry'..index]; return obj and obj.Item or nil end,
+			function(index) local obj = AltoholicFrameSearch['Entry'..index] return obj and obj.Item or nil end,
 			function(obj) SkinItemButton(obj, function(self) if (self:GetID()) then return Altoholic.Search:GetResult((self:GetID())).id else return nil end end) end
 		)
 	end

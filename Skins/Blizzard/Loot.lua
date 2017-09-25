@@ -17,9 +17,9 @@ function AS:Blizzard_LootFrames()
 		Frame.Timer.Backdrop:SetBackdropBorderColor(0, 0, 0, 0)
 
 		Frame:HookScript('OnUpdate', function(self)
-			local texture, name, count, quality, bindOnPickUp, canNeed, canGreed, canDisenchant, reasonNeed, reasonGreed, reasonDisenchant, deSkillRequired = GetLootRollItemInfo(self.rollID);
+			local texture, name, count, quality, bindOnPickUp, canNeed, canGreed, canDisenchant, reasonNeed, reasonGreed, reasonDisenchant, deSkillRequired = GetLootRollItemInfo(self.rollID)
 			if not name then return end
-			local color = ITEM_QUALITY_COLORS[quality];
+			local color = ITEM_QUALITY_COLORS[quality]
 			self.Name:SetText((bindOnPickUp and "BoP" or "BoE")..' |cFFFFFFFF'..name)
 			self.Name:SetVertexColor(bindOnPickUp and 1 or .3, bindOnPickUp and .3 or 1, bindOnPickUp and .1 or .3)
 			self.Timer:SetStatusBarColor(color.r, color.g, color.b)

@@ -52,7 +52,7 @@ function AS:TotalRP3()
 
 	--Hide Status Panel Header Frame
 	AS:SkinFrame(TRP3_DashboardStatusCaptionPanel)
-	TRP3_DashboardStatusCaptionPanel:Hide();
+	TRP3_DashboardStatusCaptionPanel:Hide()
 
 	--Status Panel Dropdown Boxes
 	AS:SkinDropDownBox(TRP3_DashboardStatus_CharactStatusList)
@@ -62,7 +62,7 @@ function AS:TotalRP3()
 
 	--Hide Notifications Header Frame
 	AS:SkinFrame(TRP3_DashboardNotificationsCaptionPanel)
-	TRP3_DashboardNotificationsCaptionPanel:Hide();
+	TRP3_DashboardNotificationsCaptionPanel:Hide()
 
 	--Notification Panels
 	AS:SkinFrame(TRP3_DashboardNotifications1)
@@ -105,7 +105,7 @@ function AS:TotalRP3()
 
 	-- Add Character Profile Panel
 	AS:SkinFrame(TRP3_ProfileManager)
-	TRP3_ProfileManager:SetBackdrop(nil);
+	TRP3_ProfileManager:SetBackdrop(nil)
 	AS:SkinButton(TRP3_ProfileManagerAdd)
 	AS:SkinFrame(TRP3_ProfileManagerList)
 
@@ -188,7 +188,7 @@ function AS:TotalRP3()
 
 	TRP3_RegisterAbout:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
 									edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-									tile = true, edgeSize = 0});
+									tile = true, edgeSize = 0})
 	]]--
 
 	AS:SkinFrame(TRP3_RegisterAbout_AboutPanel)
@@ -242,10 +242,10 @@ function AS:TotalRP3()
 	A snippet of the code follows:
 
 	if frame == nil then
-		frame = CreateFrame("Frame", "TRP3_RegisterMiscViewRPStyle_line"..index, TRP3_RegisterMiscViewRPStyle, "TRP3_RegisterRPStyleMain_Edit_Line");
-		setupListBox(_G[frame:GetName().."Values"], fieldData.values, onEditStyle, nil, 180, true);
-		frame.fieldData = fieldData;
-		tinsert(styleLines, frame);
+		frame = CreateFrame("Frame", "TRP3_RegisterMiscViewRPStyle_line"..index, TRP3_RegisterMiscViewRPStyle, "TRP3_RegisterRPStyleMain_Edit_Line")
+		setupListBox(_G[frame:GetName().."Values"], fieldData.values, onEditStyle, nil, 180, true)
+		frame.fieldData = fieldData
+		tinsert(styleLines, frame)
 	end
 
 	--RP Line Values Dropdowns
@@ -434,7 +434,7 @@ function AS:TotalRP3()
 	TRP3_TargetFrame:SetBackdropBorderColor(0,0,0,0)
 	TRP3_GlanceBar:SetBackdropBorderColor(0,0,0,0)
 
-	TRP3_TargetFrameCaptionPanel:ClearAllPoints();
+	TRP3_TargetFrameCaptionPanel:ClearAllPoints()
 	TRP3_TargetFrameCaptionPanel:SetPoint("BOTTOM", TRP3_TargetFrame, "TOP", 0, 0)
 	TRP3_TargetFrameCaptionPanel:SetHeight(18)
 
@@ -448,8 +448,8 @@ function AS:TotalRP3()
 	AS:SkinFrame(TRP3_ToolbarTopFrame)
 	AS:SkinFrame(TRP3_ToolbarContainer)
 
-	TRP3_ToolbarTopFrame:ClearAllPoints();
-	TRP3_ToolbarContainer:ClearAllPoints();
+	TRP3_ToolbarTopFrame:ClearAllPoints()
+	TRP3_ToolbarContainer:ClearAllPoints()
 	TRP3_ToolbarTopFrame:SetPoint("TOP", TRP3_Toolbar, "TOP", 0, 0)
 	TRP3_ToolbarContainer:SetPoint("BOTTOM", TRP3_Toolbar, "BOTTOM", 0, 0)
 

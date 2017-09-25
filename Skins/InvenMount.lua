@@ -23,7 +23,7 @@ function AS:InvenMount(event, addon)
 			end
 
 			Button.checkbox:HookScript('OnDisable', function(self)
-				if not self.SetDisabledTexture then return; end
+				if not self.SetDisabledTexture then return end
 				if self:GetChecked() then
 					self:SetDisabledTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
 				else

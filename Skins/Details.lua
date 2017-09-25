@@ -7,7 +7,7 @@ function AS:Details()
 	local Details = _G._detalhes
 
 	function Details:AutoEraseConfirm()
-		AS:AcceptFrame(L["STRING_OPTIONS_CONFIRM_ERASE"], function(self) Details.tabela_historico:resetar(); self:GetParent():Hide() end)
+		AS:AcceptFrame(L["STRING_OPTIONS_CONFIRM_ERASE"], function(self) Details.tabela_historico:resetar() self:GetParent():Hide() end)
 	end
 end
 

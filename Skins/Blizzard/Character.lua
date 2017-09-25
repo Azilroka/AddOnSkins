@@ -73,80 +73,80 @@ function AS:Blizzard_CharacterFrame()
 	ColorizeStatPane(CharacterStatsPane.ItemLevelFrame)
 
 	hooksecurefunc("PaperDollFrame_UpdateStats", function()
-		local level = UnitLevel("player");
-		local categoryYOffset = -5;
-		local statYOffset = 0;
+		local level = UnitLevel("player")
+		local categoryYOffset = -5
+		local statYOffset = 0
 
 		if ( level >= MIN_PLAYER_LEVEL_FOR_ITEM_LEVEL_DISPLAY ) then
-			PaperDollFrame_SetItemLevel(CharacterStatsPane.ItemLevelFrame, "player");
-			CharacterStatsPane.ItemLevelFrame.Value:SetTextColor(GetItemLevelColor());
-			CharacterStatsPane.ItemLevelCategory:Show();
-			CharacterStatsPane.ItemLevelFrame:Show();
-			CharacterStatsPane.AttributesCategory:SetPoint("TOP", 0, -76);
+			PaperDollFrame_SetItemLevel(CharacterStatsPane.ItemLevelFrame, "player")
+			CharacterStatsPane.ItemLevelFrame.Value:SetTextColor(GetItemLevelColor())
+			CharacterStatsPane.ItemLevelCategory:Show()
+			CharacterStatsPane.ItemLevelFrame:Show()
+			CharacterStatsPane.AttributesCategory:SetPoint("TOP", 0, -76)
 		else
-			CharacterStatsPane.ItemLevelCategory:Hide();
-			CharacterStatsPane.ItemLevelFrame:Hide();
-			CharacterStatsPane.AttributesCategory:SetPoint("TOP", 0, -20);
-			categoryYOffset = -12;
-			statYOffset = -6;
+			CharacterStatsPane.ItemLevelCategory:Hide()
+			CharacterStatsPane.ItemLevelFrame:Hide()
+			CharacterStatsPane.AttributesCategory:SetPoint("TOP", 0, -20)
+			categoryYOffset = -12
+			statYOffset = -6
 		end
 
-		local spec = GetSpecialization();
-		local role = GetSpecializationRole(spec);
+		local spec = GetSpecialization()
+		local role = GetSpecializationRole(spec)
 
-		CharacterStatsPane.statsFramePool:ReleaseAll();
-		local statFrame = CharacterStatsPane.statsFramePool:Acquire();
+		CharacterStatsPane.statsFramePool:ReleaseAll()
+		local statFrame = CharacterStatsPane.statsFramePool:Acquire()
 
-		local lastAnchor;
+		local lastAnchor
 
 		for catIndex = 1, #PAPERDOLL_STATCATEGORIES do
-			local catFrame = CharacterStatsPane[PAPERDOLL_STATCATEGORIES[catIndex].categoryFrame];
-			local numStatInCat = 0;
+			local catFrame = CharacterStatsPane[PAPERDOLL_STATCATEGORIES[catIndex].categoryFrame]
+			local numStatInCat = 0
 			for statIndex = 1, #PAPERDOLL_STATCATEGORIES[catIndex].stats do
-				local stat = PAPERDOLL_STATCATEGORIES[catIndex].stats[statIndex];
-				local showStat = true;
+				local stat = PAPERDOLL_STATCATEGORIES[catIndex].stats[statIndex]
+				local showStat = true
 				if ( showStat and stat.primary ) then
-					local primaryStat = select(6, GetSpecializationInfo(spec, nil, nil, nil, UnitSex("player")));
+					local primaryStat = select(6, GetSpecializationInfo(spec, nil, nil, nil, UnitSex("player")))
 					if ( stat.primary ~= primaryStat ) then
-						showStat = false;
+						showStat = false
 					end
 				end
 				if ( showStat and stat.roles ) then
-					local foundRole = false;
+					local foundRole = false
 					for _, statRole in pairs(stat.roles) do
 						if ( role == statRole ) then
-							foundRole = true;
-							break;
+							foundRole = true
+							break
 						end
 					end
-					showStat = foundRole;
+					showStat = foundRole
 				end
 				if ( showStat ) then
-					statFrame.onEnterFunc = nil;
-					PAPERDOLL_STATINFO[stat.stat].updateFunc(statFrame, "player");
+					statFrame.onEnterFunc = nil
+					PAPERDOLL_STATINFO[stat.stat].updateFunc(statFrame, "player")
 					if ( not stat.hideAt or stat.hideAt ~= statFrame.numericValue ) then
 						if ( numStatInCat == 0 ) then
 							if ( lastAnchor ) then
-								catFrame:SetPoint("TOP", lastAnchor, "BOTTOM", 0, categoryYOffset);
+								catFrame:SetPoint("TOP", lastAnchor, "BOTTOM", 0, categoryYOffset)
 							end
-							lastAnchor = catFrame;
-							statFrame:SetPoint("TOP", catFrame, "BOTTOM", 0, -2);
+							lastAnchor = catFrame
+							statFrame:SetPoint("TOP", catFrame, "BOTTOM", 0, -2)
 						else
-							statFrame:SetPoint("TOP", lastAnchor, "BOTTOM", 0, statYOffset);
+							statFrame:SetPoint("TOP", lastAnchor, "BOTTOM", 0, statYOffset)
 						end
-						numStatInCat = numStatInCat + 1;
-						statFrame.Background:SetShown(false);
+						numStatInCat = numStatInCat + 1
+						statFrame.Background:SetShown(false)
 						ColorizeStatPane(statFrame)
 						statFrame.leftGrad:SetShown((numStatInCat % 2) == 0)
 						statFrame.rightGrad:SetShown((numStatInCat % 2) == 0)
-						lastAnchor = statFrame;
-						statFrame = CharacterStatsPane.statsFramePool:Acquire();
+						lastAnchor = statFrame
+						statFrame = CharacterStatsPane.statsFramePool:Acquire()
 					end
 				end
 			end
-			catFrame:SetShown(numStatInCat > 0);
+			catFrame:SetShown(numStatInCat > 0)
 		end
-		CharacterStatsPane.statsFramePool:Release(statFrame);
+		CharacterStatsPane.statsFramePool:Release(statFrame)
 	end)
 
 	local function StatsPane(type)
@@ -317,7 +317,7 @@ function AS:Blizzard_CharacterFrame()
 			local FactionName = _G["ReputationBar"..i.."FactionName"]
 			local factionIndex = factionOffset + i
 			if ( factionIndex <= numFactions ) then
-				local name, _, _, _, _, _, atWarWith, canToggleAtWar, _, isCollapsed = GetFactionInfo(factionIndex);
+				local name, _, _, _, _, _, atWarWith, canToggleAtWar, _, isCollapsed = GetFactionInfo(factionIndex)
 
 				if isCollapsed then
 					Button:GetNormalTexture():SetTexCoord(0, 0.4375, 0, 0.4375)

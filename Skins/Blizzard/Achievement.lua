@@ -243,30 +243,30 @@ function AS:Blizzard_AchievementUI(event, addon)
 				local criteriaString, criteriaType, completed, quantity, reqQuantity, charName, flags, assetID, quantityString = GetAchievementCriteriaInfo(id, i)
 				
 				if ( criteriaType == CRITERIA_TYPE_ACHIEVEMENT and assetID ) then
-					metas = metas + 1;
-					local metaCriteria = AchievementButton_GetMeta(metas);				
+					metas = metas + 1
+					local metaCriteria = AchievementButton_GetMeta(metas)				
 					if ( objectivesFrame.completed and completed ) then
 						metaCriteria.label:SetShadowOffset(0, 0)
-						metaCriteria.label:SetTextColor(1, 1, 1, 1);
+						metaCriteria.label:SetTextColor(1, 1, 1, 1)
 					elseif ( completed ) then
 						metaCriteria.label:SetShadowOffset(1, -1)
-						metaCriteria.label:SetTextColor(0, 1, 0, 1);
+						metaCriteria.label:SetTextColor(0, 1, 0, 1)
 					else
 						metaCriteria.label:SetShadowOffset(1, -1)
-						metaCriteria.label:SetTextColor(.6, .6, .6, 1);
+						metaCriteria.label:SetTextColor(.6, .6, .6, 1)
 					end				
 				elseif criteriaType ~= 1 then
-					textStrings = textStrings + 1;
-					local criteria = AchievementButton_GetCriteria(textStrings);				
+					textStrings = textStrings + 1
+					local criteria = AchievementButton_GetCriteria(textStrings)				
 					if ( objectivesFrame.completed and completed ) then
-						criteria.name:SetTextColor(1, 1, 1, 1);
-						criteria.name:SetShadowOffset(0, 0);
+						criteria.name:SetTextColor(1, 1, 1, 1)
+						criteria.name:SetShadowOffset(0, 0)
 					elseif ( completed ) then
-						criteria.name:SetTextColor(0, 1, 0, 1);
-						criteria.name:SetShadowOffset(1, -1);
+						criteria.name:SetTextColor(0, 1, 0, 1)
+						criteria.name:SetShadowOffset(1, -1)
 					else
-						criteria.name:SetTextColor(.6, .6, .6, 1);
-						criteria.name:SetShadowOffset(1, -1);
+						criteria.name:SetTextColor(.6, .6, .6, 1)
+						criteria.name:SetShadowOffset(1, -1)
 					end		
 				end
 			end

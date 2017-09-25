@@ -78,9 +78,9 @@ function AS:Blizzard_TradeWindow(event, addon)
 	end)
 
 	hooksecurefunc('TradeFrame_UpdatePlayerItem', function(id)
-		local tradeItem = _G["TradePlayerItem"..id.."ItemButton"];
+		local tradeItem = _G["TradePlayerItem"..id.."ItemButton"]
 		tradeItem:SetBackdropBorderColor(unpack(AS.BorderColor))
-		local Link = GetTradePlayerItemLink(id);
+		local Link = GetTradePlayerItemLink(id)
 		if Link then
 			local Quality = select(3, GetItemInfo(Link))
 			if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then
@@ -90,9 +90,9 @@ function AS:Blizzard_TradeWindow(event, addon)
 	end)
 
 	hooksecurefunc('TradeFrame_UpdateTargetItem', function(id)
-		local tradeItem = _G["TradeRecipientItem"..id.."ItemButton"];
+		local tradeItem = _G["TradeRecipientItem"..id.."ItemButton"]
 		tradeItem:SetBackdropBorderColor(unpack(AS.BorderColor))
-		local Link = GetTradeTargetItemLink(id);
+		local Link = GetTradeTargetItemLink(id)
 		if Link then
 			local Quality = select(3, GetItemInfo(Link))
 			if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then

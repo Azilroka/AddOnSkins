@@ -483,13 +483,13 @@ function AS:Armory()
 		button.Backdrop:SetPoint("BOTTOMRIGHT", 1, -2)
 
 		ArmoryGearSetFrame:HookScript("OnShow", function()
-			button.Hider:Hide();
-			button.Highlight:Hide();
+			button.Hider:Hide()
+			button.Highlight:Hide()
 		end)
 
 		ArmoryGearSetFrame:HookScript("OnHide", function()
-			button.Hider:Show();
-			button.Highlight:Show();
+			button.Hider:Show()
+			button.Highlight:Show()
 		end)
 
 		AS:SkinCloseButton(ArmoryGearSetFrameClose)
@@ -1037,7 +1037,7 @@ function AS:Armory()
 			tab.oldtab.Enable = function(self) self.newtab:Enable() end
 
 			tab:SetScript("OnClick", function(self)
-				PanelTemplates_SetTab(ArmorySpellBookFrame, self:GetID());
+				PanelTemplates_SetTab(ArmorySpellBookFrame, self:GetID())
 				ArmoryToggleSpellBook(self.oldtab.bookType)
 			end)
 

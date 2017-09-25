@@ -37,7 +37,7 @@ function AS:Blizzard_Bags()
 			ItemButton.Backdrop:SetFrameLevel(ItemButton:GetFrameLevel() + 4)
 			ItemButton.Backdrop:SetBackdropColor(0, 0, 0, 0)
 			ItemButton.Backdrop:SetScript('OnUpdate', function(self)
-				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID());
+				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
 				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 				if Quality and BAG_ITEM_QUALITY_COLORS[Quality] then
@@ -54,7 +54,7 @@ function AS:Blizzard_Bags()
 			end)
 			ItemButton.Backdrop:SetScript('OnHide', function(self)
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
-				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID());
+				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
 				if Quality and (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
 					ItemButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 				elseif isQuestItem then
@@ -72,7 +72,7 @@ function AS:Blizzard_Bags()
 			AS:StyleButton(ItemButton)
 			hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
-				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID());
+				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
 				if Quality and Quality > LE_ITEM_QUALITY_COMMON then
 					ItemButton:SetBackdropBorderColor(r, g, b)
 				elseif isQuestItem then

@@ -170,7 +170,7 @@ function AS:Blizzard_Guild(event, addon)
 				Button.Backdrop:SetOutside(Button.icon)
 				if Object == 'Rewards' then
 					Button.Backdrop:SetScript('OnUpdate', function(self)
-						local achievementID, itemID, itemName, iconTexture, repLevel, moneyCost = GetGuildRewardInfo(Button.index);
+						local achievementID, itemID, itemName, iconTexture, repLevel, moneyCost = GetGuildRewardInfo(Button.index)
 						self:SetBackdropBorderColor(unpack(AS.BorderColor))
 						if itemID then
 							local Quality = select(3, GetItemInfo(itemID)) 

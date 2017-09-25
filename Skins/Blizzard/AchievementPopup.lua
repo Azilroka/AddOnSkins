@@ -283,7 +283,7 @@ local function LoadSkin()
 	
 	local function SetLootWonAnchors()
 		for i=1, #LOOT_WON_ALERT_FRAMES do
-			local frame = LOOT_WON_ALERT_FRAMES[i];
+			local frame = LOOT_WON_ALERT_FRAMES[i]
 			if frame then
 				frame:SetAlpha(1)
 				frame.SetAlpha = T.dummy
@@ -315,7 +315,7 @@ local function LoadSkin()
 
 	local function SetMoneyWonAnchors()
 		for i=1, #MONEY_WON_ALERT_FRAMES do
-			local frame = MONEY_WON_ALERT_FRAMES[i];
+			local frame = MONEY_WON_ALERT_FRAMES[i]
 			if frame then
 				frame:SetAlpha(1)
 				frame.SetAlpha = T.dummy

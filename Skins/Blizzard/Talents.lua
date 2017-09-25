@@ -282,7 +282,7 @@ function AS:Blizzard_Talent(event, addon)
 			Row.BottomLine:SetPoint("BOTTOM", 0, -4)
 
 			for j = 1, MAX_PVP_TALENT_COLUMNS do
-				local Button = Row["Talent"..j];
+				local Button = Row["Talent"..j]
 
 				AS:SkinBackdropFrame(Button)
 				Button:SetFrameLevel(Button:GetFrameLevel() + 2)
@@ -314,8 +314,8 @@ function AS:Blizzard_Talent(event, addon)
 
 		--Create portrait element for the PvP Talent Frame so we can see prestige
 		local portrait = PlayerTalentFramePVPTalents:CreateTexture(nil, "OVERLAY")
-		portrait:SetSize(57,57);
-		portrait:SetPoint("CENTER", PlayerTalentFramePVPTalents.PortraitBackground, "CENTER", 0, 0);
+		portrait:SetSize(57,57)
+		portrait:SetPoint("CENTER", PlayerTalentFramePVPTalents.PortraitBackground, "CENTER", 0, 0)
 		--Kill background
 		PlayerTalentFramePVPTalents.PortraitBackground:Kill()
 		--Reposition portrait by repositioning the background
@@ -326,9 +326,9 @@ function AS:Blizzard_Talent(event, addon)
 		PlayerTalentFramePVPTalents.SmallWreath:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPLEFT", -2, -25)
 		--Update texture according to prestige
 		hooksecurefunc("PlayerTalentFramePVPTalents_SetUp", function()
-			local prestigeLevel = UnitPrestige("player");
+			local prestigeLevel = UnitPrestige("player")
 			if (prestigeLevel > 0) then
-				portrait:SetTexture(GetPrestigeInfo(prestigeLevel));
+				portrait:SetTexture(GetPrestigeInfo(prestigeLevel))
 			end
 		end)
 

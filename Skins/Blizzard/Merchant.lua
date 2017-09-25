@@ -38,15 +38,15 @@ function AS:Blizzard_Merchant()
 	end
 
 	hooksecurefunc('MerchantFrame_UpdateMerchantInfo', function()
-		local numMerchantItems = GetMerchantNumItems();
+		local numMerchantItems = GetMerchantNumItems()
 		for i = 1, MERCHANT_ITEMS_PER_PAGE, 1 do
-			local index = (((MerchantFrame.page - 1) * MERCHANT_ITEMS_PER_PAGE) + i);
-			local itemButton = _G["MerchantItem"..i.."ItemButton"];
-			local merchantButton = _G["MerchantItem"..i];
-			local merchantMoney = _G["MerchantItem"..i.."MoneyFrame"];
-			local merchantAltCurrency = _G["MerchantItem"..i.."AltCurrencyFrame"];
+			local index = (((MerchantFrame.page - 1) * MERCHANT_ITEMS_PER_PAGE) + i)
+			local itemButton = _G["MerchantItem"..i.."ItemButton"]
+			local merchantButton = _G["MerchantItem"..i]
+			local merchantMoney = _G["MerchantItem"..i.."MoneyFrame"]
+			local merchantAltCurrency = _G["MerchantItem"..i.."AltCurrencyFrame"]
 			if ( index <= numMerchantItems ) then
-				local name, texture, price, stackCount, numAvailable, isUsable, extendedCost = GetMerchantItemInfo(index);
+				local name, texture, price, stackCount, numAvailable, isUsable, extendedCost = GetMerchantItemInfo(index)
 				local link = GetMerchantItemLink(index)
 				if link then
 					local quality = select(3, GetItemInfo(link))
@@ -60,11 +60,11 @@ function AS:Blizzard_Merchant()
 				if Point == "BOTTOMLEFT" then
 					_G["MerchantItem"..i.."AltCurrencyFrame"]:SetPoint("BOTTOMLEFT", _G["MerchantItem"..i.."NameFrame"], "BOTTOMLEFT", 2, 37)
 				elseif Point == "LEFT" then
-					_G["MerchantItem"..i.."AltCurrencyFrame"]:SetPoint("LEFT", merchantMoney:GetName(), "RIGHT", -14, 0);
+					_G["MerchantItem"..i.."AltCurrencyFrame"]:SetPoint("LEFT", merchantMoney:GetName(), "RIGHT", -14, 0)
 				end
 			end
 		end
-		local buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable = GetBuybackItemInfo(GetNumBuybackItems());
+		local buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable = GetBuybackItemInfo(GetNumBuybackItems())
 		MerchantBuyBackItemItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 		if ( buybackName ) then
 			local link = GetBuybackItemInfo(GetNumBuybackItems())
@@ -80,14 +80,14 @@ function AS:Blizzard_Merchant()
 	end)
 
 	hooksecurefunc('MerchantFrame_UpdateBuybackInfo', function()
-		local numBuybackItems = GetNumBuybackItems();
-		local itemButton, buybackButton;
-		local buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable;
+		local numBuybackItems = GetNumBuybackItems()
+		local itemButton, buybackButton
+		local buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable
 		for i = 1, BUYBACK_ITEMS_PER_PAGE do
-			itemButton = _G["MerchantItem"..i.."ItemButton"];
-			buybackButton = _G["MerchantItem"..i];
+			itemButton = _G["MerchantItem"..i.."ItemButton"]
+			buybackButton = _G["MerchantItem"..i]
 			if ( i <= numBuybackItems ) then
-				buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable = GetBuybackItemInfo(i);
+				buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable = GetBuybackItemInfo(i)
 				local link = GetBuybackItemInfo(i)
 				if link then
 					local quality = select(3, GetItemInfo(link))

@@ -23,7 +23,7 @@ function AS:GryphonheartItems()
 		GHI_ContainerFrame1.IsButtonsDone = true
 	end)
  	hooksecurefunc('GHI_ContainerFrame_GenerateFrame', function(frame, size, itemname, icon, specialTexture)
-		local name = frame:GetName();
+		local name = frame:GetName()
 		_G[name.."BackgroundTop"]:Kill()
 		_G[name.."BackgroundMiddle1"]:Kill()
 		_G[name.."BackgroundBottom"]:Kill()

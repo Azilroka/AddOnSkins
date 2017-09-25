@@ -35,7 +35,7 @@ function AS:Blizzard_ChatBubbles()
 				if region.GetTexture and region:GetTexture() and type(region:GetTexture() == "string") then
 					if strfind(strlower(region:GetTexture()), "chatbubble%-background") then
 						return true
-					end;
+					end
 				end
 			end
 		end

@@ -12,9 +12,9 @@ function AS:MyRolePlayElvUI()
 	mrp:CreateOptionsPanel()
 	local f = MyRolePlayOptionsPanel
 	f.ttstyle.Enable = f.ttstyle.Disable
-	f.ttstyle:Disable();
+	f.ttstyle:Disable()
 
-	mrp._UpdateTooltip = mrp.UpdateTooltip;
+	mrp._UpdateTooltip = mrp.UpdateTooltip
 	mrp.UpdateTooltip = function(self, player, unit)
 		if not player then
 			player = UnitExists('mouseover') and UnitName('mouseover') or UnitExists('target') and UnitName('target') or UnitName('player')
@@ -23,7 +23,7 @@ function AS:MyRolePlayElvUI()
 		if not msp.char[player] then return end
 		if not msp.char[player].supported then return end
 		if not player and unit then return end
-		self:_UpdateTooltip(player, unit);
+		self:_UpdateTooltip(player, unit)
 			
 		if (AS:CheckAddOn("ElvUI_SLE") and ElvUI[1].db.sle.tooltip.showFaction) then
 			if (UnitIsPlayer(unit)) then
@@ -39,20 +39,20 @@ function AS:MyRolePlayElvUI()
 
 	hooksecurefunc(TT, "GameTooltip_OnTooltipSetUnit", function()
 		if( UnitExists("mouseover")) then -- flag style
-			local player = UnitName("mouseover");
+			local player = UnitName("mouseover")
 			if not msp.char[player] then return end
 			if not msp.char[player].supported then return end
-			local unit = "mouseover";
-			mrp:UpdateTooltip( player, unit );
+			local unit = "mouseover"
+			mrp:UpdateTooltip( player, unit )
 		end
-	end);
+	end)
 
-	GameTooltipTextLeft1._SetTextColor = GameTooltipTextLeft1.SetTextColor;
+	GameTooltipTextLeft1._SetTextColor = GameTooltipTextLeft1.SetTextColor
 	GameTooltipTextLeft1.SetTextColor = function(self, r, g, b, a)
-		GameTooltipTextLeft1:_SetTextColor(r, g, b, a);
+		GameTooltipTextLeft1:_SetTextColor(r, g, b, a)
 
-		if (not UnitExists("mouseover")) then return end;
-		local player = UnitName("mouseover");
+		if (not UnitExists("mouseover")) then return end
+		local player = UnitName("mouseover")
 		if not msp.char[player] then return end
 		if not msp.char[player].supported then return end
 		local unit = "mouseover"

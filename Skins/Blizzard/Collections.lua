@@ -328,14 +328,14 @@ function AS:Blizzard_Collections(event, addon)
 		AS:SkinNextPrevButton(HeirloomsJournal.PagingFrame.PrevPageButton)
 
 		hooksecurefunc(HeirloomsJournal, 'LayoutCurrentPage', function(self)
-			local pageLayoutData = self.heirloomLayoutData[self.currentPage];
-			local numHeadersInUse = 0;
+			local pageLayoutData = self.heirloomLayoutData[self.currentPage]
+			local numHeadersInUse = 0
 			if pageLayoutData then
 				for i, layoutData in ipairs(pageLayoutData) do
 					if type(layoutData) == "string" then
-						numHeadersInUse = numHeadersInUse + 1;
-						local header = self:AcquireFrame(self.heirloomHeaderFrames, numHeadersInUse, "FRAME", "HeirloomHeaderTemplate");
-						header.text:SetTextColor(1,1,1);
+						numHeadersInUse = numHeadersInUse + 1
+						local header = self:AcquireFrame(self.heirloomHeaderFrames, numHeadersInUse, "FRAME", "HeirloomHeaderTemplate")
+						header.text:SetTextColor(1,1,1)
 					end
 				end
 			end

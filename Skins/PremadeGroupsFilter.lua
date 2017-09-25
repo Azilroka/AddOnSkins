@@ -50,8 +50,8 @@ function AS:PremadeGroupsFilter()
 
 	AS:SkinFrame(PremadeGroupsFilterDialog.Expression)
 	AS:SkinScrollBar(PremadeGroupsFilterDialog.Expression.ScrollBar)
-	PremadeGroupsFilterDialog.Expression.ScrollBar:SetPoint("TOPLEFT", PremadeGroupsFilterDialog.Expression, "TOPRIGHT", -17, -12);
-	PremadeGroupsFilterDialog.Expression.ScrollBar:SetPoint("BOTTOMLEFT", PremadeGroupsFilterDialog.Expression, "BOTTOMRIGHT", -17, 12);
+	PremadeGroupsFilterDialog.Expression.ScrollBar:SetPoint("TOPLEFT", PremadeGroupsFilterDialog.Expression, "TOPRIGHT", -17, -12)
+	PremadeGroupsFilterDialog.Expression.ScrollBar:SetPoint("BOTTOMLEFT", PremadeGroupsFilterDialog.Expression, "BOTTOMRIGHT", -17, 12)
 
 	AS:StripTextures(PremadeGroupsFilterDialog.ResetButton)
 	AS:SkinButton(PremadeGroupsFilterDialog.ResetButton)
