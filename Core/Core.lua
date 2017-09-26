@@ -172,14 +172,14 @@ function AS:RunPreload(addonName)
 end
 
 function AS:CallSkin(skin, func, event, ...)
-	local pass, errormsg = pcall(func, self, event, ...)
-	if not pass then
-		local message = '%s %s: |cfFFF0000There was an error in the|r |cff0AFFFF%s|r |cffFF0000skin|r.'
-		local errormessage = '%s Error: %s'
-		DEFAULT_CHAT_FRAME:AddMessage(format(message, AS.Title, AS.Version, skin))
-		FoundError = true
-		if AS:CheckOption('SkinDebug') then
-			DEFAULT_CHAT_FRAME:AddMessage(format(errormessage, skin, errormsg))
+	if (AS:CheckOption('SkinDebug')) then
+		func(self, event, ...);
+	else
+		local pass, errormsg = pcall(func, self, event, ...)
+		if not pass then
+			local message = '%s %s: |cfFFF0000There was an error in the|r |cff0AFFFF%s|r |cffFF0000skin|r.'
+			DEFAULT_CHAT_FRAME:AddMessage(format(message, AS.Title, AS.Version, skin))
+			FoundError = true
 		end
 	end
 end
