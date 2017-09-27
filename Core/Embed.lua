@@ -501,10 +501,8 @@ if AS:CheckAddOn('Details') then
 			
 			if (window.skin ~= "Forced Square") then
 				if (AS:CheckOption("DetailsBackdrop")) then
-					window:SetBackgroundAlpha (1)
 					window:ShowSideBars()
 				else
-					window:SetBackgroundAlpha (0)
 					window:HideSideBars()
 					
 					local skin = Details.skins [window.skin]
@@ -521,9 +519,6 @@ if AS:CheckAddOn('Details') then
 				if (AS:CheckOption("DetailsBackdrop")) then
 					window:ShowSideBars()
 					window:InstanceColor (1, 1, 1, 1, nil, true)
-					
-					local skin = Details.skins [window.skin]
-					window:SetBackgroundAlpha (skin.instance_cprops.bg_alpha)
 				else
 					window:HideSideBars()
 					window:InstanceColor (1, 1, 1, 0, nil, true)
@@ -534,7 +529,6 @@ if AS:CheckAddOn('Details') then
 					window.row_info.space.right = skin.instance_cprops.row_info.space.right
 					
 					window:InstanceWallpaper (false)
-					window:SetBackgroundAlpha (0)
 					
 					window:SetBarGrowDirection()
 				end
