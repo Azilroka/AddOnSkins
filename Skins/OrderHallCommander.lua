@@ -33,7 +33,7 @@ function AS:OrderHallCommander(event)
 						AS:SkinDropDownBox(LibInitDropdown00016, 200)
 					elseif i > 16 and i < 19 then
 						AS:SkinCheckBox(_G["LibInitCheckbox000"..i])
-					elseif i > 19 and i < 23 then
+					elseif i > 18 and i < 23 then
 						AS:SkinButton(_G["LibInitButton000"..i])
 					end
 				end
