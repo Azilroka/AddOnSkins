@@ -46,8 +46,8 @@ function AS:OrderHallCommander(event)
 				--AS:SkinCloseButton(frame[1])
 				--AS:StripTextures(frame[2])
 
-				--frame = {OrderHallMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:GetChildren()}
-				--AS:SkinButton(frame[1])
+				frame = {OrderHallMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:GetChildren()}
+				AS:SkinButton(frame[1])
 			end)
 		end)
 		AS:UnregisterSkinEvent('OrderHallCommander', event)
