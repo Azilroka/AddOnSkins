@@ -6,7 +6,7 @@ function AS:OrderHallCommander(event)
 	if event == "ADDON_LOADED" then
 		if not OrderHallMissionFrameMissions then return end
 		OrderHallMissionFrameMissions:HookScript('OnShow', function(self)
-			AS:Delay(0.2, function()
+			AS:Delay(0.5, function()
 				local frame = FollowerIcon:GetParent()
 				if frame.IsSkinned then return end
 
