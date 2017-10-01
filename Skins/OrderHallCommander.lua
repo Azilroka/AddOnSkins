@@ -20,28 +20,31 @@ function AS:OrderHallCommander(event)
 				frame = LibInitCheckbox00001:GetParent():GetParent()
 				AS:StripTextures(frame)
 				AS:SetTemplate(frame, 'Transparent')
+				AS:SkinCloseButton(frame.Close)
 
-				for i=1, 21 do
+				for i=1, 24 do
 					if i < 10 then
-					AS:SkinCheckBox(_G["LibInitCheckbox0000"..i])
-					elseif i > 9 and i < 14 then
-					AS:SkinSlideBar(_G["LibInitSlider000"..i])
-					elseif i ~= 17 and i < 20 then
-					AS:SkinCheckBox(_G["LibInitCheckbox000"..i])
-					elseif i > 19 then
-					AS:SkinButton(_G["LibInitButton000"..i])
-					else
-					AS:SkinDropDownBox(LibInitDropdown00017, 200)
+						AS:SkinCheckBox(_G["LibInitCheckbox0000"..i])
+					elseif i > 9 and i < 13 then
+						AS:SkinSlideBar(_G["LibInitSlider000"..i])
+					elseif i > 12 and i < 16 then
+						AS:SkinCheckBox(_G["LibInitCheckbox000"..i])
+					elseif i == 16 then
+						AS:SkinDropDownBox(LibInitDropdown00016, 200)
+					elseif i > 16 and i < 19 then
+						AS:SkinCheckBox(_G["LibInitCheckbox000"..i])
+					elseif i > 18 and i < 23 then
+						AS:SkinButton(_G["LibInitButton000"..i])
 					end
 				end
 
-				frame = {OrderHallMissionFrame.MissionTab:GetChildren()}
-				AS:SkinNextPrevButton(frame[19], true)
-				frame[19]:Size(12, 12)
+				--frame = {OrderHallMissionFrame.MissionTab:GetChildren()}
+				--AS:SkinNextPrevButton(frame[19], true)
+				--frame[19]:Size(12, 12)
 
-				frame = {LibInitCheckbox00001:GetParent():GetParent():GetChildren()}
-				AS:SkinCloseButton(frame[1])
-				AS:StripTextures(frame[2])
+				--frame = {LibInitCheckbox00001:GetParent():GetParent():GetChildren()}
+				--AS:SkinCloseButton(frame[1])
+				--AS:StripTextures(frame[2])
 
 				frame = {OrderHallMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:GetChildren()}
 				AS:SkinButton(frame[1])
