@@ -57,7 +57,7 @@ function AS:OrderHallCommander(event)
 
 		AS:Delay(0.1, function()
 			AS:SkinFrame(OHCGUIContainer1)
-			AS:SkinCloseButton(OHCGUIContainer1.CloseButton)
+			AS:SkinCloseButton(OHCGUIContainer1.Close)
 		end)
 	end
 end
