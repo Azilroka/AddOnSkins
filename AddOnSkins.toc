@@ -1,6 +1,6 @@
 ## Interface: 70300
 ## Title: |cff1784d1AddOnSkins|r
-## Version: 3.55
+## Version: 3.56
 ## Author: Azilroka, Infinitron
 ## SavedVariables: AddOnSkinsDB
 ## OptionalDep: ElvUI, BuyEmAll, DSM, Tukui
