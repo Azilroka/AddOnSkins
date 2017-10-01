@@ -62,7 +62,6 @@ function AS:UpdateLocale_zhTW()
 	ASL["Right Click to Hide"] = "點選右鍵：隱藏"
 	ASL["Left Click:"] = "點選左鍵："
 	ASL["Right Click:"] = "點選右鍵："
-	ASL["Conflict System: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory."] = "系統衝突:請從 World of Warcraft\\Interface\\AddOns\\ 目錄裡移除 %s ."
 	ASL["Skin Template"] = "面板美化樣板"
 	ASL["Hide Chat Frame"] = "隱藏對話框"
 	ASL["Embed OoC Delay"] = "嵌入脫戰延遲時間"

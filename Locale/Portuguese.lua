@@ -62,7 +62,6 @@ function AS:UpdateLocale_ptBR()
 	ASL["Right Click to Hide"] = "Right Click to Hide"
 	ASL["Left Click:"] = "Left Click:"
 	ASL["Right Click:"] = "Right Click:"
-	ASL["Conflict System: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory."] = "Conflict System: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory."
 	ASL["Skin Template"] = "Skin Template"
 	ASL["Hide Chat Frame"] = "Hide Chat Frame"
 	ASL["Embed OoC Delay"] = "Embed OoC Delay"

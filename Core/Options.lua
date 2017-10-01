@@ -89,6 +89,12 @@ local DEVELOPERS = {
 	'Tukz',
 	'Warmexx',
 	'Vito Sansevero',
+	'Brian Thurlow',
+	'Paul',
+	'Jens Jacobsen',
+	'Merathilis',
+	'Torch',
+	'Jason Longwell',
 }
 
 sort(DEVELOPERS, function(a, b) return strlower(a) < strlower(b) end)

@@ -63,7 +63,6 @@ function AS:UpdateLocale_itIT()
 	ASL["Right Click to Hide"] = "Clic destro per nascondere"
 	ASL["Left Click:"] = "Clic sinistro:"
 	ASL["Right Click:"] = "Clic destro:"
-	ASL["Conflict System: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory."] = "Conflitto di Sistema: Sei pregato di rimuovere '%s' dalla cartella 'World of Warcraft\\Interface\\AddOns\\'."
 
 	ASL["Skin Template"] = "Skin Template"
 	ASL["Hide Chat Frame"] = "Hide Chat Frame"

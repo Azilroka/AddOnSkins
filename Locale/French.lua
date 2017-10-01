@@ -62,7 +62,6 @@ function AS:UpdateLocale_frFR()
 	ASL["Right Click to Hide"] = "Click Droit pour Cacher"
 	ASL["Left Click:"] = "Click Gauche:"
 	ASL["Right Click:"] = "Click Droit:"
-	ASL["Conflict System: Please remove '%s' from your 'World of Warcraft\\Interface\\AddOns\\' directory."] = "Conflit Système: Merci de Supprimer '%s' de votre dossier 'World of Warcraft\\Interface\\AddOns\\'."
 	ASL["Skin Template"] = "Modèle de Skin"
 	ASL["Hide Chat Frame"] = "Cacher le panneau de discussion"
 	ASL["Embed OoC Delay"] = "Délais Hors Combat de l'intégration"
