@@ -1,5 +1,6 @@
 local AS, ASL = unpack(AddOnSkins)
 local tinsert, sort, pairs, format, gsub, strfind, strlower, strtrim = tinsert, sort, pairs, format, gsub, strfind, strlower, strtrim
+local ACR, ACD = LibStub("AceConfigRegistry-3.0"), LibStub("AceConfigDialog-3.0")
 
 local defaults = {
 	profile = {
@@ -81,6 +82,7 @@ local DEVELOPERS = {
 	"Shadowcall",
 	"Sinaris",
 	"Infinitron",
+	"Simpy",
 	"Tercioo",
 	"Tukz",
 	"Warmexx",
@@ -108,9 +110,9 @@ function AS:GetOptions()
 			desc = ASL.OptionsPanel.SkinDesc,
 		}
 		if AS:CheckAddOn('ElvUI') then
-			options.confirm = true
 			if strfind(skinName, "Blizzard_") then
 				options.desc = ASL.OptionsPanel.ElvUIDesc
+				options.confirm = true
 			end
 			options.set = function(info, value) AS:SetOption(info[#info], value) AS:DisableElvUIOption(info[#info]) end
 		end
@@ -494,21 +496,19 @@ function AS:GetOptions()
 
 	Options.args.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(AS.data)
 	Options.args.profiles.order = -2
-	LibStub("AceConfigRegistry-3.0"):RegisterOptionsTable("AddOnSkinsProfiles", Options.args.profiles)
+	ACR:RegisterOptionsTable("AddOnSkinsProfiles", Options.args.profiles)
 
 	local EP = LibStub('LibElvUIPlugin-1.0', true)
 	if EP then
 		local Ace3OptionsPanel = IsAddOnLoaded("ElvUI") and ElvUI[1] or Enhanced_Config and Enhanced_Config[1]
 		Ace3OptionsPanel.Options.args.addonskins = Options
-	else
-		local ACR, ACD = LibStub("AceConfigRegistry-3.0", true), LibStub("AceConfigDialog-3.0", true)
-		if not (ACR or ACD) then return end
-		ACR:RegisterOptionsTable("AddOnSkins", Options)
-		ACD:AddToBlizOptions("AddOnSkins", "AddOnSkins", nil, "about")
-		for k, v in AS:OrderedPairs(Options.args) do
-			if k ~= 'about' then
-				ACD:AddToBlizOptions("AddOnSkins", v.name, "AddOnSkins", k)
-			end
+	end
+
+	ACR:RegisterOptionsTable("AddOnSkins", Options)
+	ACD:AddToBlizOptions("AddOnSkins", "AddOnSkins", nil, "about")
+	for k, v in AS:OrderedPairs(Options.args) do
+		if k ~= 'about' then
+			ACD:AddToBlizOptions("AddOnSkins", v.name, "AddOnSkins", k)
 		end
 	end
 end
