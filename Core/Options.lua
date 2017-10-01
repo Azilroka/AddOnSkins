@@ -395,7 +395,7 @@ function AS:GetOptions()
 			},
 			faq = {
 				type = 'group',
-				name = ASL['FAQ's'],
+				name = ASL["FAQ's"],
 				order = 5,
 				args = {
 					question1 = {
