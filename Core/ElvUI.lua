@@ -17,7 +17,7 @@ local ElvUISkinTable = {
 	["Blizzard_BarberShop"] = { ['blizzard'] = 'barber' },
 	["Blizzard_Calendar"] = { ['blizzard'] = 'calendar' },
 	["Blizzard_ChallengesUI"] = { ['blizzard'] = 'lfg'},
-	['Blizzard_CharacterFrame'] = { ['blizzard'] = 'character' }
+	['Blizzard_CharacterFrame'] = { ['blizzard'] = 'character' },
 	["Blizzard_Collections"] = { ['blizzard'] = 'collections' },
 	["Blizzard_DeathRecap"] = { ['blizzard'] = 'deathRecap' },
 	["Blizzard_DebugTools"] = { ['blizzard'] = 'debug' },
