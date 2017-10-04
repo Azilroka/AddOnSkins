@@ -8,9 +8,47 @@ local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
 local IsAddOnLoaded = IsAddOnLoaded
 
 local ElvUISkinTable = {
-	['Blizzard_CharacterFrame'] = {
-		['blizzard'] = 'character'
-	}
+	["Blizzard_AchievementUI"] = { ['blizzard'] = 'achievement' },
+	["Blizzard_AddonManager"] = { ['blizzard'] = 'addonManager' },
+	["Blizzard_ArchaeologyUI"] = { ['blizzard'] = 'archaeology' },
+	["Blizzard_AuctionHouse"] = { ['blizzard'] = 'auctionhouse' },
+	["Blizzard_Bags"] = { ['blizzard'] = 'bags' },
+	["Blizzard_BlackMarket"] = { ['blizzard'] = 'bmah' },
+	["Blizzard_BarberShop"] = { ['blizzard'] = 'barber' },
+	["Blizzard_Calendar"] = { ['blizzard'] = 'calendar' },
+	["Blizzard_ChallengesUI"] = { ['blizzard'] = 'lfg'},
+	['Blizzard_CharacterFrame'] = { ['blizzard'] = 'character' }
+	["Blizzard_Collections"] = { ['blizzard'] = 'collections' },
+	["Blizzard_DeathRecap"] = { ['blizzard'] = 'deathRecap' },
+	["Blizzard_DebugTools"] = { ['blizzard'] = 'debug' },
+	["Blizzard_DressUpFrame"] = { ['blizzard'] = 'dressingroom' },
+	["Blizzard_EncounterJournal"] = { ['blizzard'] = 'encounterjournal' },
+	["Blizzard_Friends"] = { ['blizzard'] = 'friends' },
+	["Blizzard_Garrison"] = { ['blizzard'] = 'garrison' },
+	["Blizzard_Gossip"] = { ['blizzard'] = 'gossip' },
+	["Blizzard_Guild"] = { ['blizzard'] = 'gbank', ['blizzard'] = 'guild', ['blizzard'] = 'guildcontrol', ['blizzard'] = 'guildregistrar' },
+	["Blizzard_Inspect"] = { ['blizzard'] = 'inspect' },
+	["Blizzard_ItemSocketing"] = { ['blizzard'] = 'socket' },
+	["Blizzard_LootFrames"] = { ['blizzard'] = 'loot' },
+	["Blizzard_MacroUI"] = { ['blizzard'] = 'macro' },
+	["Blizzard_Mail"] = { ['blizzard'] = 'mail' },
+	["Blizzard_Merchant"] = { ['blizzard'] = 'merchant' },
+	["Blizzard_Options"] = { ['blizzard'] = 'misc'},
+	["Blizzard_PvE"] = { ['blizzard'] = 'lfg' },
+	["Blizzard_PVPUI"] = { ['blizzard'] = 'pvp' },
+	["Blizzard_Quest"] = { ['blizzard'] = 'quest' },
+	["Blizzard_RaidUI"] = { ['blizzard'] = 'raid' },
+	["Blizzard_Spellbook"] = { ['blizzard'] = 'spellbook' },
+	["Blizzard_StackSplit"] = { ['blizzard'] = 'misc' },
+	["Blizzard_Talent"] = { ['blizzard'] = 'talent' },
+	["Blizzard_Taxi"] = { ['blizzard'] = 'taxi' },
+	["Blizzard_TimeManager"] = { ['blizzard'] = 'timemanager' },
+	["Blizzard_TradeSkill"] = { ['blizzard'] = 'tradeskill' },
+	["Blizzard_TradeWindow"] = { ['blizzard'] = 'trade' },
+	["Blizzard_Trainer"] = { ['blizzard'] = 'trainer' },
+	["Blizzard_VoidStorage"] = { ['blizzard'] = 'voidstorage' },
+	["Blizzard_WorldMap"] = { ['blizzard'] = 'worldmap' },
+	["Blizzard_Others"] = { ['blizzard'] = 'misc' },
 }
 
 function AS:DisableElvUIOption(skin)

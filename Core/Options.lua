@@ -51,7 +51,6 @@ local DEVELOPERS = {
 	'AcidWeb',
 	'Affli',
 	'Arstraea',
-	'Azilroka',
 	'Blazeflack',
 	'Cadayron',
 	'Camealion',
@@ -99,11 +98,11 @@ local DEVELOPERS = {
 
 sort(DEVELOPERS, function(a, b) return strlower(a) < strlower(b) end)
 for _, devName in pairs(DEVELOPERS) do
-	DEVELOPER_STRING = DEVELOPER_STRING..LINE_BREAK..devName
+	DEVELOPER_STRING = DEVELOPER_STRING..devName..LINE_BREAK
 end
 
 function AS:SetupProfile()
-	self.data = LibStub('AceDB-3.0'):New('AddOnSkinsDB', defaults, true)
+	self.data = LibStub('AceDB-3.0'):New('AddOnSkinsDB', defaults)
 	self.data.RegisterCallback(self, 'OnProfileChanged', 'SetupProfile')
 	self.data.RegisterCallback(self, 'OnProfileCopied', 'SetupProfile')
 	self.db = self.data.profile
@@ -132,6 +131,7 @@ function AS:GetOptions()
 		order = 100,
 		type = 'group',
 		name = AS.Title,
+		childGroups = 'tab',
 		args = {
 			addons = {
 				order = 0,
@@ -139,7 +139,6 @@ function AS:GetOptions()
 				name = ASL['AddOn Skins'],
 				get = function(info) return AS:CheckOption(info[#info]) end,
 				set = function(info, value) AS:SetOption(info[#info], value) end,
-				guiInline = true,
 				args = {},
 			},
 			blizzard = {
@@ -148,7 +147,6 @@ function AS:GetOptions()
 				name = ASL['Blizzard Skins'],
 				get = function(info) return AS:CheckOption(info[#info]) end,
 				set = function(info, value) AS:SetOption(info[#info], value) end,
-				guiInline = true,
 				args = {},
 			},
 			bossmods = {
@@ -157,7 +155,6 @@ function AS:GetOptions()
 				order = 2,
 				get = function(info) return AS:CheckOption(info[#info]) end,
 				set = function(info, value) AS:SetOption(info[#info], value) end,
-				guiInline = false,
 				args = {
 					DBMFont = {
 						type = 'select', dialogControl = 'LSM30_Font',
@@ -420,8 +417,8 @@ function AS:GetOptions()
 					desc = {
 						order = 1,
 						type = 'description',
-						name = format(ASL['Credits:']..'%s', DEVELOPER_STRING),
-						fontSize = 'medium',
+						name = DEVELOPER_STRING,
+						fontSize = 'large',
 					},
 				},
 			},
@@ -514,9 +511,9 @@ function AS:GetOptions()
 	end
 
 	ACR:RegisterOptionsTable('AddOnSkins', Options)
-	ACD:AddToBlizOptions('AddOnSkins', 'AddOnSkins', nil, 'about')
+	ACD:AddToBlizOptions('AddOnSkins', 'AddOnSkins', nil, 'addons')
 	for k, v in AS:OrderedPairs(Options.args) do
-		if k ~= 'about' then
+		if k ~= 'addons' then
 			ACD:AddToBlizOptions('AddOnSkins', v.name, 'AddOnSkins', k)
 		end
 	end
