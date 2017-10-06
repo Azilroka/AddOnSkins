@@ -11,7 +11,7 @@ local IsAddOnLoaded = IsAddOnLoaded
 function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 	local Texture = AS.Blank
 
-	if UseTexture then 
+	if UseTexture then
 		Texture = TextureFile or AS.NormTex
 	end
 
@@ -35,14 +35,14 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 			Frame.InsetTop:Point("TOPLEFT", Frame, "TOPLEFT", -1, 1)
 			Frame.InsetTop:Point("TOPRIGHT", Frame, "TOPRIGHT", 1, -1)
 			Frame.InsetTop:Height(1)
-			Frame.InsetTop:SetColorTexture(0,0,0)	
+			Frame.InsetTop:SetColorTexture(0,0,0)
 			Frame.InsetTop:SetDrawLayer("BORDER", -7)
 
 			Frame.InsetBottom = Frame:CreateTexture(nil, "BORDER")
 			Frame.InsetBottom:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", -1, -1)
 			Frame.InsetBottom:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", 1, -1)
 			Frame.InsetBottom:Height(1)
-			Frame.InsetBottom:SetColorTexture(0,0,0)	
+			Frame.InsetBottom:SetColorTexture(0,0,0)
 			Frame.InsetBottom:SetDrawLayer("BORDER", -7)
 
 			Frame.InsetLeft = Frame:CreateTexture(nil, "BORDER")
@@ -56,21 +56,21 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 			Frame.InsetRight:Point("TOPRIGHT", Frame, "TOPRIGHT", 1, 1)
 			Frame.InsetRight:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", -1, -1)
 			Frame.InsetRight:Width(1)
-			Frame.InsetRight:SetColorTexture(0,0,0)	
+			Frame.InsetRight:SetColorTexture(0,0,0)
 			Frame.InsetRight:SetDrawLayer("BORDER", -7)
 
 			Frame.InsetInsideTop = Frame:CreateTexture(nil, "BORDER")
 			Frame.InsetInsideTop:Point("TOPLEFT", Frame, "TOPLEFT", 1, -1)
 			Frame.InsetInsideTop:Point("TOPRIGHT", Frame, "TOPRIGHT", -1, 1)
 			Frame.InsetInsideTop:Height(1)
-			Frame.InsetInsideTop:SetColorTexture(0,0,0)	
+			Frame.InsetInsideTop:SetColorTexture(0,0,0)
 			Frame.InsetInsideTop:SetDrawLayer("BORDER", -7)
 
 			Frame.InsetInsideBottom = Frame:CreateTexture(nil, "BORDER")
 			Frame.InsetInsideBottom:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", 1, 1)
 			Frame.InsetInsideBottom:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", -1, 1)
 			Frame.InsetInsideBottom:Height(1)
-			Frame.InsetInsideBottom:SetColorTexture(0,0,0)	
+			Frame.InsetInsideBottom:SetColorTexture(0,0,0)
 			Frame.InsetInsideBottom:SetDrawLayer("BORDER", -7)
 
 			Frame.InsetInsideLeft = Frame:CreateTexture(nil, "BORDER")
@@ -84,7 +84,7 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 			Frame.InsetInsideRight:Point("TOPRIGHT", Frame, "TOPRIGHT", -1, -1)
 			Frame.InsetInsideRight:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", 1, 1)
 			Frame.InsetInsideRight:Width(1)
-			Frame.InsetInsideRight:SetColorTexture(0,0,0)	
+			Frame.InsetInsideRight:SetColorTexture(0,0,0)
 			Frame.InsetInsideRight:SetDrawLayer("BORDER", -7)
 
 			Frame.isInsetDone = true
@@ -187,9 +187,9 @@ function AS:SkinButton(Button, Strip)
 		end
 	end
 
-	if Button.SetNormalTexture then Button:SetNormalTexture("") end	
+	if Button.SetNormalTexture then Button:SetNormalTexture("") end
 	if Button.SetHighlightTexture then Button:SetHighlightTexture("") end
-	if Button.SetPushedTexture then Button:SetPushedTexture("") end	
+	if Button.SetPushedTexture then Button:SetPushedTexture("") end
 	if Button.SetDisabledTexture then Button:SetDisabledTexture("") end
 
 	AS:SkinFrame(Button, nil, not Strip)
@@ -242,13 +242,18 @@ function AS:CreateShadow(Frame)
 	Shadow:Point("TOPRIGHT", 3, 3)
 	Shadow:Point("BOTTOMRIGHT", 3, -3)
 
-	Shadow:SetBackdrop({ 
+	Shadow:SetBackdrop({
 		edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = AS:Scale(3),
 		insets = {left = AS:Scale(5), right = AS:Scale(5), top = AS:Scale(5), bottom = AS:Scale(5)},
 	})
 
 	Shadow:SetBackdropColor(0, 0, 0, 0)
 	Shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
+
+	if AS.ES then
+		AS.ES:RegisterShadow(Shadow)
+	end
+
 	Frame.Shadow = Shadow
 end
 
@@ -609,16 +614,16 @@ function AS:SkinRotateButton(Button)
 	if Button.isSkinned then return end
 
 	AS:SetTemplate(Button, "Default")
-	Button:Size(Button:GetWidth() - 14, Button:GetHeight() - 14)	
+	Button:Size(Button:GetWidth() - 14, Button:GetHeight() - 14)
 
 	Button:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)
-	Button:GetPushedTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)	
+	Button:GetPushedTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)
 
 	Button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
 
 	Button:GetNormalTexture():ClearAllPoints()
 	Button:GetNormalTexture():SetInside()
-	Button:GetPushedTexture():SetAllPoints(Button:GetNormalTexture())	
+	Button:GetPushedTexture():SetAllPoints(Button:GetNormalTexture())
 	Button:GetHighlightTexture():SetAllPoints(Button:GetNormalTexture())
 
 	Button.isSkinned = true

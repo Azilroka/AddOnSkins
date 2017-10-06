@@ -13,7 +13,7 @@ function AS:UpdateLocale_deDE()
 	ASL.OptionsPanel.SkinDesc = 'Diesen Skin ein-/ausschalten.'
 	ASL.OptionsPanel.EmbedDesc = 'Diese Einbettung ein-/ausschalten.'
 	ASL.OptionsPanel.OptionDesc = 'Diese Option ein-/ausschalten.'
-	ASL.OptionsPanel.ElvUIDesc = 'Diese Option wird die entsprechende ElvUI Option deaktivieren. Akzeptierst du diese Änderung?'
+	ASL.OptionsPanel.ElvUIDesc = 'Diese Option wird die entsprechende ElvUI Option deaktivieren.'
 
 	ASL["AddOn Skins"] = "AddOn Skins"
 	ASL["Blizzard Skins"] = "Blizzard Skins"

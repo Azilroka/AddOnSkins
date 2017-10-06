@@ -1,75 +1,73 @@
 local AS, ASL = unpack(AddOnSkins)
 if not AS:CheckAddOn('ElvUI') then return end
 
-local E, L, V, P, G, LSM, ES, S
-local select, pairs, unpack, floor = select, pairs, unpack, floor
+local E, L
+local pairs, unpack, floor = pairs, unpack, floor
 local hooksecurefunc = hooksecurefunc
 local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
 local IsAddOnLoaded = IsAddOnLoaded
+local UnitAffectingCombat = UnitAffectingCombat
 
 local ElvUISkinTable = {
-	["Blizzard_AchievementUI"] = { ['blizzard'] = 'achievement' },
-	["Blizzard_AddonManager"] = { ['blizzard'] = 'addonManager' },
-	["Blizzard_ArchaeologyUI"] = { ['blizzard'] = 'archaeology' },
-	["Blizzard_AuctionHouse"] = { ['blizzard'] = 'auctionhouse' },
-	["Blizzard_Bags"] = { ['blizzard'] = 'bags' },
-	["Blizzard_BlackMarket"] = { ['blizzard'] = 'bmah' },
-	["Blizzard_BarberShop"] = { ['blizzard'] = 'barber' },
-	["Blizzard_Calendar"] = { ['blizzard'] = 'calendar' },
-	["Blizzard_ChallengesUI"] = { ['blizzard'] = 'lfg'},
-	['Blizzard_CharacterFrame'] = { ['blizzard'] = 'character' },
-	["Blizzard_Collections"] = { ['blizzard'] = 'collections' },
-	["Blizzard_DeathRecap"] = { ['blizzard'] = 'deathRecap' },
-	["Blizzard_DebugTools"] = { ['blizzard'] = 'debug' },
-	["Blizzard_DressUpFrame"] = { ['blizzard'] = 'dressingroom' },
-	["Blizzard_EncounterJournal"] = { ['blizzard'] = 'encounterjournal' },
-	["Blizzard_Friends"] = { ['blizzard'] = 'friends' },
-	["Blizzard_Garrison"] = { ['blizzard'] = 'garrison' },
-	["Blizzard_Gossip"] = { ['blizzard'] = 'gossip' },
-	["Blizzard_Guild"] = { ['blizzard'] = 'gbank', ['blizzard'] = 'guild', ['blizzard'] = 'guildcontrol', ['blizzard'] = 'guildregistrar' },
-	["Blizzard_Inspect"] = { ['blizzard'] = 'inspect' },
-	["Blizzard_ItemSocketing"] = { ['blizzard'] = 'socket' },
-	["Blizzard_LootFrames"] = { ['blizzard'] = 'loot' },
-	["Blizzard_MacroUI"] = { ['blizzard'] = 'macro' },
-	["Blizzard_Mail"] = { ['blizzard'] = 'mail' },
-	["Blizzard_Merchant"] = { ['blizzard'] = 'merchant' },
-	["Blizzard_Options"] = { ['blizzard'] = 'misc'},
-	["Blizzard_PvE"] = { ['blizzard'] = 'lfg' },
-	["Blizzard_PVPUI"] = { ['blizzard'] = 'pvp' },
-	["Blizzard_Quest"] = { ['blizzard'] = 'quest' },
-	["Blizzard_RaidUI"] = { ['blizzard'] = 'raid' },
-	["Blizzard_Spellbook"] = { ['blizzard'] = 'spellbook' },
-	["Blizzard_StackSplit"] = { ['blizzard'] = 'misc' },
-	["Blizzard_Talent"] = { ['blizzard'] = 'talent' },
-	["Blizzard_Taxi"] = { ['blizzard'] = 'taxi' },
-	["Blizzard_TimeManager"] = { ['blizzard'] = 'timemanager' },
-	["Blizzard_TradeSkill"] = { ['blizzard'] = 'tradeskill' },
-	["Blizzard_TradeWindow"] = { ['blizzard'] = 'trade' },
-	["Blizzard_Trainer"] = { ['blizzard'] = 'trainer' },
-	["Blizzard_VoidStorage"] = { ['blizzard'] = 'voidstorage' },
-	["Blizzard_WorldMap"] = { ['blizzard'] = 'worldmap' },
-	["Blizzard_Others"] = { ['blizzard'] = 'misc' },
+	["Blizzard_AchievementUI"] = { 'achievement' },
+	["Blizzard_AddonManager"] = { 'addonManager' },
+	["Blizzard_ArchaeologyUI"] = { 'archaeology' },
+	["Blizzard_AuctionHouse"] = { 'auctionhouse' },
+	["Blizzard_Bags"] = { 'bags' },
+	["Blizzard_BlackMarket"] = { 'bmah' },
+	["Blizzard_BarberShop"] = { 'barber' },
+	["Blizzard_Calendar"] = { 'calendar' },
+	["Blizzard_ChallengesUI"] = { 'lfg'},
+	['Blizzard_CharacterFrame'] = { 'character' },
+	["Blizzard_Collections"] = { 'collections' },
+	["Blizzard_DeathRecap"] = { 'deathRecap' },
+	["Blizzard_DebugTools"] = { 'debug' },
+	["Blizzard_DressUpFrame"] = { 'dressingroom' },
+	["Blizzard_EncounterJournal"] = { 'encounterjournal' },
+	["Blizzard_Friends"] = { 'friends' },
+	["Blizzard_Garrison"] = { 'garrison' },
+	["Blizzard_Gossip"] = { 'gossip' },
+	["Blizzard_Guild"] = { 'gbank', 'guild', 'guildcontrol', 'guildregistrar' },
+	["Blizzard_Inspect"] = { 'inspect' },
+	["Blizzard_ItemSocketing"] = { 'socket' },
+	["Blizzard_LootFrames"] = { 'loot' },
+	["Blizzard_MacroUI"] = { 'macro' },
+	["Blizzard_Mail"] = { 'mail' },
+	["Blizzard_Merchant"] = { 'merchant' },
+	["Blizzard_Options"] = { 'misc'},
+	["Blizzard_PvE"] = { 'lfg' },
+	["Blizzard_PVPUI"] = { 'pvp' },
+	["Blizzard_Quest"] = { 'quest' },
+	["Blizzard_RaidUI"] = { 'raid' },
+	["Blizzard_Spellbook"] = { 'spellbook' },
+	["Blizzard_StackSplit"] = { 'misc' },
+	["Blizzard_Talent"] = { 'talent' },
+	["Blizzard_Taxi"] = { 'taxi' },
+	["Blizzard_TimeManager"] = { 'timemanager' },
+	["Blizzard_TradeSkill"] = { 'tradeskill' },
+	["Blizzard_TradeWindow"] = { 'trade' },
+	["Blizzard_Trainer"] = { 'trainer' },
+	["Blizzard_VoidStorage"] = { 'voidstorage' },
+	["Blizzard_WorldMap"] = { 'worldmap' },
+	["Blizzard_Others"] = { 'misc' },
 }
 
-function AS:DisableElvUIOption(skin)
+function AS:SetElvUIBlizzardSkinOption(skin, value)
 	if ElvUISkinTable[skin] then
-		for location, option in pairs(ElvUISkinTable[skin]) do
-			E.private.skins[location][option] = false
+		for _, option in pairs(ElvUISkinTable[skin]) do
+			E.private.skins.blizzard[option] = value
 		end
 	end
 end
 
 function AS:UpdateMedia()
-	E, L, V, P, G = unpack(ElvUI)
+	E, L = unpack(ElvUI)
 
-	LSM, ES = AS.LSM, E:GetModule('EnhancedShadows', true)
-	AS.SLE = AS:CheckAddOn('ElvUI_SLE')
-	S = E:GetModule('Skins')
-	AS.Blank = LSM:Fetch('background', 'ElvUI Blank')
-	AS.Font = LSM:Fetch('font', E.db.general.font)
-	AS.ActionBarFont = LSM:Fetch('font', 'Arial')
-	AS.PixelFont = LSM:Fetch('font', 'ElvUI Pixel')
-	AS.NormTex = LSM:Fetch('statusbar', E.private.general.normTex)
+	AS.Blank = AS.LSM:Fetch('background', 'ElvUI Blank')
+	AS.Font = AS.LSM:Fetch('font', E.db.general.font)
+	AS.ActionBarFont = AS.LSM:Fetch('font', 'Arial')
+	AS.PixelFont = AS.LSM:Fetch('font', 'ElvUI Pixel')
+	AS.NormTex = AS.LSM:Fetch('statusbar', E.private.general.normTex)
 	AS.BackdropColor = E['media'].backdropcolor
 	AS.BorderColor = E['media'].bordercolor
 	AS.PixelPerfect = E.PixelMode
@@ -213,7 +211,7 @@ if AS:CheckAddOn('CoolLine') then
 end
 
 function AS:CreateDataText()
-	DT = E:GetModule('DataTexts')
+	local DT = E:GetModule('DataTexts')
 
 	local function OnClick(self, button)
 		if EmbedSystem_MainWindow:IsShown() then

@@ -42,8 +42,8 @@ function AS:EmbedInit()
 			AS.EmbedSystemCreated = true
 
 			if (AS:CheckOption('EmbedSystem') and AS:CheckOption('EmbedSystemDual')) then
-				AS:DisableOption('EmbedSystem')
-				AS:DisableOption('EmbedSystemDual')
+				AS:SetOption('EmbedSystem', false)
+				AS:SetOption('EmbedSystemDual', false)
 			end
 
 			AS:EmbedSystemHooks()
