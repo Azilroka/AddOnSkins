@@ -213,12 +213,6 @@ function AS:StartSkinning(event)
 	if FoundError then
 		AS:Print(format('%s: Please report this to Azilroka immediately @ %s', AS.Version, AS:PrintURL(AS.TicketTracker)))
 	end
-
-	AS:EmbedInit()
-
-	if AS:CheckOption('LoginMsg') then
-		AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
-	end
 end
 
 function AS:UpdateMedia()
@@ -240,8 +234,6 @@ function AS:Init(event, addon)
 	if event == 'PLAYER_LOGIN' then
 		AS:SetupProfile()
 
-		AS:UpdateMedia()
-
 		AS:UpdateLocale()
 
 		AS.EP = LibStub('LibElvUIPlugin-1.0', true)
@@ -256,7 +248,11 @@ function AS:Init(event, addon)
 			AS:GetOptions()
 		end
 
-		AS:CreateDataText()
+		AS:EmbedInit()
+
+		if AS:CheckOption('LoginMsg') then
+			AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
+		end
 
 		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 		AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')

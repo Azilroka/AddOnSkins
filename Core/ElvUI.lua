@@ -209,28 +209,3 @@ if AS:CheckAddOn('CoolLine') then
 		end
 	end
 end
-
-function AS:CreateDataText()
-	local DT = E:GetModule('DataTexts')
-
-	local function OnClick(self, button)
-		if EmbedSystem_MainWindow:IsShown() then
-			EmbedSystem_MainWindow:Hide()
-		else
-			EmbedSystem_MainWindow:Show()
-		end
-	end
-
-	local function OnEnter(self)
-		DT:SetupTooltip(self)
-		DT.tooltip:AddLine(ASL.DataText.LeftClick)
-		DT.tooltip:AddLine(ASL.DataText.RightClick)
-		DT.tooltip:Show()
-	end
-
-	local function OnEvent(self, event)
-		self.text:SetText(ASL.DataText.ToggleEmbed)
-	end
-
-	DT:RegisterDatatext('AddOnSkins', { 'PLAYER_ENTERING_WORLD' }, OnEvent, nil, OnClick, OnEnter)
-end

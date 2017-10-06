@@ -1,4 +1,4 @@
-local AS, ASL = unpack(AddOnSkins)
+local AS = unpack(AddOnSkins)
 
 local format, gsub, pairs, ipairs, select, tinsert, tonumber = format, gsub, pairs, ipairs, select, tinsert, tonumber
 local strlower, strmatch, strsub, floor, wipe, type = strlower, strmatch, strsub, floor, wipe, type
@@ -173,7 +173,7 @@ function AS:Embed_Toggle(Message)
 		end
 	end
 	if Message and AS:CheckOption('EmbedSystemMessage') then
-		local Message = format("Main: '%s'", AS:CheckOption('EmbedMain'))
+		Message = format("Main: '%s'", AS:CheckOption('EmbedMain'))
 		if AS:CheckOption('EmbedSystemDual') then Message = format("Left: '%s' | Right: '%s'", AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')) end
 		AS:Print(format('Embed System: - %s', Message))
 	end
@@ -299,6 +299,7 @@ if AS:CheckAddOn('alDamageMeter') then
 end
 
 if AS:CheckAddOn('Skada') then
+	local EmbedSkadaWindow
 	AS['SkadaWindows'] = {}
 	function AS:Embed_Skada()
 		wipe(AS['SkadaWindows'])
@@ -315,61 +316,64 @@ if AS:CheckAddOn('Skada') then
 			if AS:CheckOption('EmbedLeft') == 'Skada' then NumberToEmbed = NumberToEmbed + 1 end
 		end
 
-		local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
-			if not window then return end
-			local barmod = Skada.displays['bar']
-			local offsety
-			if window.db.reversegrowth then
-				offsety = 2
-			else
-				offsety = 2 + (window.db.enabletitle and window.db.title.height or 0)
-			end
-			window.db.barwidth = width - 4
-			window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - (AS.PixelMode and 4 or 5)
-			window.db.spark = false
-			window.db.barslocked = true
-			window.db.background.bordertexture = "None"
-			window.db.background.strata = relativeFrame:GetFrameStrata()
-			window.db.strata = relativeFrame:GetFrameStrata()
-			window.bargroup.ClearAllPoints = nil
-			window.bargroup:ClearAllPoints()
-			window.bargroup.ClearAllPoints = function() end
-			window.bargroup.SetPoint = nil
-			window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
-			window.bargroup.SetPoint = function() end
-			window.bargroup:SetParent(relativeFrame)
-			window.bargroup:SetFrameLevel(relativeFrame:GetFrameLevel())
-			window.bargroup:SetBackdrop(nil)
-			if window.bargroup.Backdrop then
-				window.bargroup.Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and "Transparent" or 'Default')
-				if AS:CheckOption('SkadaBackdrop') then
-					window.bargroup.Backdrop:Show()
+		if not EmbedSkadaWindow then
+			EmbedSkadaWindow = function(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+				if not window then return end
+				local barmod = Skada.displays['bar']
+				local offsety = ofsy
+				if window.db.reversegrowth then
+					offsety = 2
 				else
-					window.bargroup.Backdrop:Hide()
+					offsety = 2 + (window.db.enabletitle and window.db.title.height or 0)
 				end
+				window.db.barwidth = width - 4
+				window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - (AS.PixelMode and 4 or 5)
+				window.db.spark = false
+				window.db.barslocked = true
+				window.db.background.bordertexture = "None"
+				window.db.background.strata = relativeFrame:GetFrameStrata()
+				window.db.strata = relativeFrame:GetFrameStrata()
+				window.bargroup.ClearAllPoints = nil
+				window.bargroup:ClearAllPoints()
+				window.bargroup.ClearAllPoints = function() end
+				window.bargroup.SetPoint = nil
+				window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
+				window.bargroup.SetPoint = function() end
+				window.bargroup:SetParent(relativeFrame)
+				window.bargroup:SetFrameLevel(relativeFrame:GetFrameLevel())
+				window.bargroup:SetBackdrop(nil)
+				if window.bargroup.Backdrop then
+					window.bargroup.Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and "Transparent" or 'Default')
+					if AS:CheckOption('SkadaBackdrop') then
+						window.bargroup.Backdrop:Show()
+					else
+						window.bargroup.Backdrop:Hide()
+					end
+				end
+				barmod.ApplySettings(barmod, window)
 			end
-			barmod.ApplySettings(barmod, window)
 		end
-		
+
 		if NumberToEmbed == 1 then
 			local EmbedParent = EmbedSystem_MainWindow
 			if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Skada' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-			EmbedWindow(AS.SkadaWindows[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
+			EmbedSkadaWindow(AS.SkadaWindows[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
 		elseif NumberToEmbed == 2 then
-			EmbedWindow(AS.SkadaWindows[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
-			EmbedWindow(AS.SkadaWindows[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
+			EmbedSkadaWindow(AS.SkadaWindows[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
+			EmbedSkadaWindow(AS.SkadaWindows[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
 		end
 	end
 end
 
 if AS:CheckAddOn('Details') then
+	local Details, EmbedDetailsWindow = _G._detalhes
+
 	AS['DetailsInstances'] = {}
+
 	function AS:Embed_Details()
 		wipe(AS['DetailsInstances'])
-		local Details = _G._detalhes --> get the addon object
-		--> internally in Details!, a window is called 'instance'.
-		--> instances can be opened and closed at any time.
-		for inumber, instance in Details:ListInstances() do
+
+		for _, instance in Details:ListInstances() do
 			tinsert(AS.DetailsInstances, instance)
 		end
 
@@ -383,208 +387,179 @@ if AS:CheckAddOn('Details') then
 			if AS:CheckOption('EmbedLeft') == 'Details' then NumberToEmbed = NumberToEmbed + 1 end
 		end
 
-		--> raise max window amount if ElvUI needs more windows them the limit on Details!
-		--> this limit controls how many windows the player can create, the minimum is 1 the max is 30 the default is 5. The value can be changed on options panel.
 		if (Details:GetMaxInstancesAmount() < NumberToEmbed) then
 			Details:SetMaxInstancesAmount(NumberToEmbed)
 		end
 
-		--> get how many windows already are created
 		local instances_amount = Details:GetNumInstancesAmount()
 
-		--> create extra windows if needed
 		for i = instances_amount+1, NumberToEmbed do
 			local new_instance = Details:CreateInstance (i)
-			--> just check is the instance is created okey
+
 			if (type(new_instance) == "table") then
 				tinsert(AS.DetailsInstances, new_instance)
 			end
 		end
 
-		--> remove tooltip borders
 		Details:SetTooltipBackdrop("Blizzard Tooltip", 16, {1, 1, 1, 0})
 
-		--> enable bar animations and make the update speed faster
-		--Details:SetUseAnimations (true)
+		if not EmbedDetailsWindow then
+			EmbedDetailsWindow = function(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+				if not window then return end
 
-		local function EmbedWindow (window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
-			if not window then return end
-
-			--> check if the window isn't close.
-			if (not window:IsEnabled()) then
-				window:EnableInstance()
-			end
-
-			window._ElvUIEmbed = true
-
-			local offsety
-			if window.bars_grow_direction == 2 then --> bottom to top (reverse)
-				offsety = 2
-			else
-				offsety = 20  --20 is the default height for the title bar
-			end
-
-			--> break the group or window 2 will mess with the setpoint
-			window:UngroupInstance()
-
-			--> set the skin to ElvUI if not using already
-			if (not window.skin:find("ElvUI") and not window.skin:find("Forced")) then
-				window:ChangeSkin("ElvUI Style II")
-				window:AttributeMenu(true, -19, 5, "ElvUI Font", 11)
-				window:SetBarTextSettings(10, "ElvUI Font")
-				window:ToolbarMenuSetButtons(true, true, true, true, true, false)
-			end
-
-			--> set the point and save the position
-			window.baseframe:ClearAllPoints()
-			window.baseframe:SetParent(relativeFrame)
-			window.baseframe:SetFrameStrata(relativeFrame:GetFrameStrata())
-			window.baseframe:SetFrameLevel(relativeFrame:GetFrameLevel())
-
-			ofsx = ofsx - 1 --> wasn't fitting correctly, with -1 it get aligned.
-			if (window.skin == "Forced Square") then
-				ofsx = ofsx - 1
-				if (window:GetId() == 2) then
-					window:SetSize(width+1, height - 20)
-				else
-					window:SetSize(width, height - 20)
+				if (not window:IsEnabled()) then
+					window:EnableInstance()
 				end
-				
-			elseif (window.skin == "ElvUI Frame Style") then
-				if (window:GetId() == 2) then
-					window:SetSize(width-1, height - 20)
+
+				window._ElvUIEmbed = true
+
+				local offsety = ofsy
+				if window.bars_grow_direction == 2 then
+					offsety = 2
 				else
-					if NumberToEmbed == 1 then
-						window:SetSize(width-2, height - 20)
+					offsety = 20
+				end
+
+				window:UngroupInstance()
+
+				window.baseframe:ClearAllPoints()
+				window.baseframe:SetParent(relativeFrame)
+				window.baseframe:SetFrameStrata(relativeFrame:GetFrameStrata())
+				window.baseframe:SetFrameLevel(relativeFrame:GetFrameLevel())
+
+				ofsx = ofsx - 1
+				if (window.skin == "Forced Square") then
+					ofsx = ofsx - 1
+					if (window:GetId() == 2) then
+						window:SetSize(width+1, height - 20)
 					else
 						window:SetSize(width, height - 20)
 					end
-				end
-			
-			elseif (window.skin == "ElvUI Style II") then
-				if (window:GetId() == 2) then
-					window:SetSize(width, height - 20)
-				else
-					if NumberToEmbed == 1 then
-						window:SetSize(width-2, height - 20)
-					else
+				elseif (window.skin == "ElvUI Frame Style") then
+					if (window:GetId() == 2) then
 						window:SetSize(width-1, height - 20)
+					else
+						if NumberToEmbed == 1 then
+							window:SetSize(width-2, height - 20)
+						else
+							window:SetSize(width, height - 20)
+						end
+					end
+				elseif (window.skin == "ElvUI Style II") then
+					if (window:GetId() == 2) then
+						window:SetSize(width, height - 20)
+					else
+						if NumberToEmbed == 1 then
+							window:SetSize(width-2, height - 20)
+						else
+							window:SetSize(width-1, height - 20)
+						end
+					end
+				else
+					window:SetSize(width, height - 20)
+				end
+
+				window.baseframe:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
+				window:SaveMainWindowPosition()
+				window:RestoreMainWindowPosition()
+
+				window:LockInstance(true)
+
+				if (window:GetId() == 2) then
+					window:MakeInstanceGroup({1})
+				end
+
+				if (window:GetId() == 1) then
+					DetailsRowFrame1:SetParent (DetailsBaseFrame1)
+					DetailsRowFrame1:SetFrameLevel (DetailsBaseFrame1:GetFrameLevel()+1)
+				elseif (window:GetId() == 2) then
+					DetailsRowFrame2:SetParent (DetailsBaseFrame2)
+					DetailsRowFrame2:SetFrameLevel (DetailsBaseFrame2:GetFrameLevel()+1)
+				end
+
+				window:ChangeSkin()
+
+				if (window.skin ~= "Forced Square") then
+					if (AS:CheckOption("DetailsBackdrop")) then
+						window:ShowSideBars()
+					else
+						window:HideSideBars()
+
+						local skin = Details.skins[window.skin]
+
+						window.row_info.space.left = skin.instance_cprops.row_info.space.left
+						window.row_info.space.right = skin.instance_cprops.row_info.space.right
+
+						window:InstanceWallpaper (false)
+
+						window:SetBarGrowDirection()
+					end
+				elseif (window.skin == "Forced Square") then
+					if (AS:CheckOption("DetailsBackdrop")) then
+						window:ShowSideBars()
+						window:InstanceColor (1, 1, 1, 1, nil, true)
+					else
+						window:HideSideBars()
+						window:InstanceColor (1, 1, 1, 0, nil, true)
+
+						local skin = Details.skins[window.skin]
+
+						window.row_info.space.left = skin.instance_cprops.row_info.space.left
+						window.row_info.space.right = skin.instance_cprops.row_info.space.right
+
+						window:InstanceWallpaper (false)
+
+						window:SetBarGrowDirection()
 					end
 				end
-			else
-				window:SetSize(width, height - 20)
-			end
-			
-			window.baseframe:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
-			window:SaveMainWindowPosition()
-			window:RestoreMainWindowPosition()
 
-			--> lock it
-			window:LockInstance(true)
-
-			--> if is this the second window, remake the group with window 1
-			if (window:GetId() == 2) then
-				window:MakeInstanceGroup({1}) --> instance number on [1] left [2] bottom [3] right [4] top
-			end
-
-			--> setting rowframe as a child of baseframe, this makes the show/hide feature possible on embed.
-			if (window:GetId() == 1) then
-				DetailsRowFrame1:SetParent (DetailsBaseFrame1)
-				DetailsRowFrame1:SetFrameLevel (DetailsBaseFrame1:GetFrameLevel()+1)
-			elseif (window:GetId() == 2) then
-				DetailsRowFrame2:SetParent (DetailsBaseFrame2)
-				DetailsRowFrame2:SetFrameLevel (DetailsBaseFrame2:GetFrameLevel()+1)
-			end
-
-			--> reload everything - when calling ChangeSkin without parameter, it uses the same skin and reaply all configs from the window's config table.
-			window:ChangeSkin()
-			
-			if (window.skin ~= "Forced Square") then
-				if (AS:CheckOption("DetailsBackdrop")) then
-					window:ShowSideBars()
-				else
-					window:HideSideBars()
-					
-					local skin = Details.skins [window.skin]
-					
-					window.row_info.space.left = skin.instance_cprops.row_info.space.left
-					window.row_info.space.right = skin.instance_cprops.row_info.space.right
-					
-					window:InstanceWallpaper (false)
-					
-					window:SetBarGrowDirection()
+				if (window:GetSegment() ~= 0) then
+					window:SetDisplay (0)
 				end
-			
-			elseif (window.skin == "Forced Square") then
-				if (AS:CheckOption("DetailsBackdrop")) then
-					window:ShowSideBars()
-					window:InstanceColor (1, 1, 1, 1, nil, true)
-				else
-					window:HideSideBars()
-					window:InstanceColor (1, 1, 1, 0, nil, true)
-					
-					local skin = Details.skins [window.skin]
-					
-					window.row_info.space.left = skin.instance_cprops.row_info.space.left
-					window.row_info.space.right = skin.instance_cprops.row_info.space.right
-					
-					window:InstanceWallpaper (false)
-					
-					window:SetBarGrowDirection()
-				end
-			end
-
-			--> check if the window is in current segment - segment 0 = current / -1 = overall / 1 - 25 = past segments
-			if (window:GetSegment() ~= 0) then
-				window:SetDisplay (0)
 			end
 		end
-		
+
 		if NumberToEmbed == 1 then
 			local EmbedParent = EmbedSystem_MainWindow
-			if AS:CheckOption('EmbedSystemDual') then 
-				EmbedParent = AS:CheckOption('EmbedRight') == 'Details' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow 
+			if AS:CheckOption('EmbedSystemDual') then
+				EmbedParent = AS:CheckOption('EmbedRight') == 'Details' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow
 			end
-			EmbedWindow(AS.DetailsInstances[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
-			
+			EmbedDetailsWindow(AS.DetailsInstances[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
+
 			if (AS.DetailsInstances[2]) then
 				AS.DetailsInstances[2]._ElvUIEmbed = nil
 			end
-			
 		elseif NumberToEmbed == 2 then
-			EmbedWindow(AS.DetailsInstances[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
-			EmbedWindow(AS.DetailsInstances[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
-			
+			EmbedDetailsWindow(AS.DetailsInstances[1], EmbedSystem_LeftWindow:GetWidth(), EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
+			EmbedDetailsWindow(AS.DetailsInstances[2], EmbedSystem_RightWindow:GetWidth(), EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
 		end
-		
-		--> internal events
-		local listener = Details:CreateEventListener()
-		listener:RegisterEvent("DETAILS_INSTANCE_OPEN")
-		listener:RegisterEvent("DETAILS_INSTANCE_CLOSE")
+	end
 
-		function listener:OnDetailsEvent (event, ...)
-			if (event == "DETAILS_INSTANCE_CLOSE") then
-				local instance = select (1, ...)
-				--> alert the used about closing an window embed: if the window is hidden from the UI because out of combat on ElvUI, it shows as opened under Details! Options panel.
-				if (instance._ElvUIEmbed and _G.DetailsOptionsWindow and _G.DetailsOptionsWindow:IsShown()) then
-					Details:Msg("You just closed a window Embed on ElvUI, if wasn't intended click on Reopen.") --> need localization
-				end
-			elseif (event == "DETAILS_INSTANCE_OPEN") then
-				local instance = select(1, ...)
-				if (instance._ElvUIEmbed) then
-					--> when a window is closed, it is removed from the window group, we need to add the window back to the group.
-					if (NumberToEmbed == 2) then
-						AS.DetailsInstances[1]:UngroupInstance()
-						AS.DetailsInstances[2]:UngroupInstance()
-						
-						AS.DetailsInstances[1].baseframe:ClearAllPoints()
-						AS.DetailsInstances[2].baseframe:ClearAllPoints()
-						
-						AS.DetailsInstances[1]:RestoreMainWindowPosition()
-						AS.DetailsInstances[2]:RestoreMainWindowPosition()
+	--> internal events
+	local listener = Details:CreateEventListener()
+	listener:RegisterEvent("DETAILS_INSTANCE_OPEN")
+	listener:RegisterEvent("DETAILS_INSTANCE_CLOSE")
 
-						AS.DetailsInstances[2]:MakeInstanceGroup({1})
-					end
+	function listener:OnDetailsEvent (event, ...)
+		if (event == "DETAILS_INSTANCE_CLOSE") then
+			local instance = select (1, ...)
+			if (instance._ElvUIEmbed and _G.DetailsOptionsWindow and _G.DetailsOptionsWindow:IsShown()) then
+				Details:Msg("You just closed a window Embed on ElvUI, if wasn't intended click on Reopen.") --> need localization
+			end
+		elseif (event == "DETAILS_INSTANCE_OPEN") then
+			local instance = select(1, ...)
+			if (instance._ElvUIEmbed) then
+				if (#AS.DetailsInstances >= 2) then
+					AS.DetailsInstances[1]:UngroupInstance()
+					AS.DetailsInstances[2]:UngroupInstance()
+
+					AS.DetailsInstances[1].baseframe:ClearAllPoints()
+					AS.DetailsInstances[2].baseframe:ClearAllPoints()
+
+					AS.DetailsInstances[1]:RestoreMainWindowPosition()
+					AS.DetailsInstances[2]:RestoreMainWindowPosition()
+
+					AS.DetailsInstances[2]:MakeInstanceGroup({1})
 				end
 			end
 		end
@@ -592,14 +567,14 @@ if AS:CheckAddOn('Details') then
 end
 
 local EmbedOoCCombatStart
-function AS:EmbedEnterCombat(event)
+function AS:EmbedEnterCombat()
 	EmbedOoCCombatStart = true
 	if AS:CheckOption('EmbedOoC') then
 		EmbedSystem_MainWindow:Show()
 	end
 end
 
-function AS:EmbedExitCombat(event)
+function AS:EmbedExitCombat()
 	EmbedOoCCombatStart = false
 	if AS:CheckOption('EmbedOoC') then
 		AS:Delay(AS:CheckOption('EmbedOoCDelay'), function()
