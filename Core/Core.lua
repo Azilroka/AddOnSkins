@@ -234,6 +234,8 @@ function AS:Init(event, addon)
 	if event == 'PLAYER_LOGIN' then
 		AS:SetupProfile()
 
+		AS:UpdateMedia()
+
 		AS:UpdateLocale()
 
 		AS.EP = LibStub('LibElvUIPlugin-1.0', true)
