@@ -109,14 +109,14 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 end
 
 local Insets = {
-	InsetTop,
-	InsetBottom,
-	InsetLeft,
-	InsetRight,
-	InsetInsideTop,
-	InsetInsideBottom,
-	InsetInsideLeft,
-	InsetInsideRight,
+	'InsetTop',
+	'InsetBottom',
+	'InsetLeft',
+	'InsetRight',
+	'InsetInsideTop',
+	'InsetInsideBottom',
+	'InsetInsideLeft',
+	'InsetInsideRight',
 }
 
 function AS:HideInset(Frame)

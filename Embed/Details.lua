@@ -1,0 +1,210 @@
+local AS = unpack(AddOnSkins)
+
+if not AS:CheckAddOn('Details') then return end
+
+local Details
+
+local wipe, pairs, tinsert, select, type = wipe, pairs, tinsert, select, type
+
+local _G = _G
+
+local NumberToEmbed
+
+AS['DetailsInstances'] = {}
+
+hooksecurefunc(AS, 'EmbedInit', function()
+	Details = _G._detalhes
+
+	local listener = Details:CreateEventListener()
+	listener:RegisterEvent("DETAILS_INSTANCE_OPEN")
+	listener:RegisterEvent("DETAILS_INSTANCE_CLOSE")
+
+	function listener:OnDetailsEvent (event, ...)
+		if (event == "DETAILS_INSTANCE_CLOSE") then
+			local instance = select (1, ...)
+			if (instance._ElvUIEmbed and _G.DetailsOptionsWindow and _G.DetailsOptionsWindow:IsShown()) then
+				Details:Msg("You just closed a window Embed on ElvUI, if wasn't intended click on Reopen.") --> need localization
+			end
+		elseif (event == "DETAILS_INSTANCE_OPEN") then
+			local instance = select(1, ...)
+			if (instance._ElvUIEmbed) then
+				if (#AS.DetailsInstances >= 2) then
+					AS.DetailsInstances[1]:UngroupInstance()
+					AS.DetailsInstances[2]:UngroupInstance()
+
+					AS.DetailsInstances[1].baseframe:ClearAllPoints()
+					AS.DetailsInstances[2].baseframe:ClearAllPoints()
+
+					AS.DetailsInstances[1]:RestoreMainWindowPosition()
+					AS.DetailsInstances[2]:RestoreMainWindowPosition()
+
+					AS.DetailsInstances[2]:MakeInstanceGroup({1})
+				end
+			end
+		end
+	end
+end)
+
+function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+	if not window then return end
+
+	if (not window:IsEnabled()) then
+		window:EnableInstance()
+	end
+
+	window._ElvUIEmbed = true
+
+	local offsety = ofsy
+	if window.bars_grow_direction == 2 then
+		offsety = 2
+	else
+		offsety = 20
+	end
+
+	window:UngroupInstance()
+
+	window.baseframe:ClearAllPoints()
+	window.baseframe:SetParent(relativeFrame)
+	window.baseframe:SetFrameStrata(relativeFrame:GetFrameStrata())
+	window.baseframe:SetFrameLevel(relativeFrame:GetFrameLevel())
+
+	ofsx = ofsx - 1
+	if (window.skin == "Forced Square") then
+		ofsx = ofsx - 1
+		if (window:GetId() == 2) then
+			window:SetSize(width+1, height - 20)
+		else
+			window:SetSize(width, height - 20)
+		end
+	elseif (window.skin == "ElvUI Frame Style") then
+		if (window:GetId() == 2) then
+			window:SetSize(width-1, height - 20)
+		else
+			if NumberToEmbed == 1 then
+				window:SetSize(width-2, height - 20)
+			else
+				window:SetSize(width, height - 20)
+			end
+		end
+	elseif (window.skin == "ElvUI Style II") then
+		if (window:GetId() == 2) then
+			window:SetSize(width, height - 20)
+		else
+			if NumberToEmbed == 1 then
+				window:SetSize(width-2, height - 20)
+			else
+				window:SetSize(width-1, height - 20)
+			end
+		end
+	else
+		window:SetSize(width, height - 20)
+	end
+
+	window.baseframe:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
+	window:SaveMainWindowPosition()
+	window:RestoreMainWindowPosition()
+
+	window:LockInstance(true)
+
+	if (window:GetId() == 2) then
+		window:MakeInstanceGroup({1})
+	end
+
+	if (window:GetId() == 1) then
+		_G.DetailsRowFrame1:SetParent(_G.DetailsBaseFrame1)
+		_G.DetailsRowFrame1:SetFrameLevel(_G.DetailsBaseFrame1:GetFrameLevel()+1)
+	elseif (window:GetId() == 2) then
+		_G.DetailsRowFrame2:SetParent(_G.DetailsBaseFrame2)
+		_G.DetailsRowFrame2:SetFrameLevel(_G.DetailsBaseFrame2:GetFrameLevel()+1)
+	end
+
+	window:ChangeSkin()
+
+	if (window.skin ~= "Forced Square") then
+		if (AS:CheckOption("DetailsBackdrop")) then
+			window:ShowSideBars()
+		else
+			window:HideSideBars()
+
+			local skin = Details.skins[window.skin]
+
+			window.row_info.space.left = skin.instance_cprops.row_info.space.left
+			window.row_info.space.right = skin.instance_cprops.row_info.space.right
+
+			window:InstanceWallpaper (false)
+
+			window:SetBarGrowDirection()
+		end
+	elseif (window.skin == "Forced Square") then
+		if (AS:CheckOption("DetailsBackdrop")) then
+			window:ShowSideBars()
+			window:InstanceColor (1, 1, 1, 1, nil, true)
+		else
+			window:HideSideBars()
+			window:InstanceColor (1, 1, 1, 0, nil, true)
+
+			local skin = Details.skins[window.skin]
+
+			window.row_info.space.left = skin.instance_cprops.row_info.space.left
+			window.row_info.space.right = skin.instance_cprops.row_info.space.right
+
+			window:InstanceWallpaper (false)
+
+			window:SetBarGrowDirection()
+		end
+	end
+
+	if (window:GetSegment() ~= 0) then
+		window:SetDisplay (0)
+	end
+end
+
+function AS:Embed_Details()
+	wipe(AS['DetailsInstances'])
+
+	for _, instance in Details:ListInstances() do
+		tinsert(AS.DetailsInstances, instance)
+	end
+
+	NumberToEmbed = 0
+	if AS:CheckOption('EmbedSystem') then
+		NumberToEmbed = 1
+	end
+
+	if AS:CheckOption('EmbedSystemDual') then
+		if AS:CheckOption('EmbedRight') == 'Details' then NumberToEmbed = NumberToEmbed + 1 end
+		if AS:CheckOption('EmbedLeft') == 'Details' then NumberToEmbed = NumberToEmbed + 1 end
+	end
+
+	if (Details:GetMaxInstancesAmount() < NumberToEmbed) then
+		Details:SetMaxInstancesAmount(NumberToEmbed)
+	end
+
+	local instances_amount = Details:GetNumInstancesAmount()
+
+	for i = instances_amount+1, NumberToEmbed do
+		local new_instance = Details:CreateInstance (i)
+
+		if (type(new_instance) == "table") then
+			tinsert(AS.DetailsInstances, new_instance)
+		end
+	end
+
+	Details:SetTooltipBackdrop("Blizzard Tooltip", 16, {1, 1, 1, 0})
+
+	if NumberToEmbed == 1 then
+		local EmbedParent = _G.EmbedSystem_MainWindow
+		if AS:CheckOption('EmbedSystemDual') then
+			EmbedParent = AS:CheckOption('EmbedRight') == 'Details' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow
+		end
+		AS:EmbedDetailsWindow(AS.DetailsInstances[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
+
+		if (AS.DetailsInstances[2]) then
+			AS.DetailsInstances[2]._ElvUIEmbed = nil
+		end
+	elseif NumberToEmbed == 2 then
+		AS:EmbedDetailsWindow(AS.DetailsInstances[1], _G.EmbedSystem_LeftWindow:GetWidth(), _G.EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', _G.EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
+		AS:EmbedDetailsWindow(AS.DetailsInstances[2], _G.EmbedSystem_RightWindow:GetWidth(), _G.EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', _G.EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
+	end
+end
+

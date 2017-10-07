@@ -1,9 +1,9 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
-..\FrameXML\UI.xsd">
+<Ui>
 	<Include file="Libs\Load_Libs.xml"/>
 	<Script file="Init.lua"/>
 	<Include file="Locale\Load_Locale.xml"/>
 	<Include file="Core\Load_Core.xml"/>
+	<Include file="Embed\Load_Embed.xml"/>
 	<Include file="Skins\Load_Skins.xml"/>
 	<Include file="Skins\ElvUI\Load_Skins.xml"/>
 	<Include file="Skins\Tukui\Load_Skins.xml"/>
