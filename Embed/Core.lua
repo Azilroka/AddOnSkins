@@ -2,7 +2,7 @@ local AS = unpack(AddOnSkins)
 
 local format, gsub, pairs, ipairs, select, tinsert, tonumber = format, gsub, pairs, ipairs, select, tinsert, tonumber
 local strlower, strmatch, strsub, floor, wipe, type = strlower, strmatch, strsub, floor, wipe, type
-local _G, CreateFrame = _G, CreateFrame
+local _G, CreateFrame, UIParent = _G, CreateFrame, UIParent
 
 AS.ChatFrameHider = CreateFrame('Frame')
 AS.ChatFrameHider:Hide()
