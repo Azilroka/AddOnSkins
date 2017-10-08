@@ -140,7 +140,7 @@ function AS:GetOptions()
 		order = 100,
 		type = 'group',
 		name = AS.Title,
-		childGroups = 'select',
+		childGroups = 'tab',
 		args = {
 			addons = {
 				order = 0,

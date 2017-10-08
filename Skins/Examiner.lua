@@ -4,6 +4,7 @@ if not AS:CheckAddOn('Examiner') then return end
 
 function AS:Examiner()
 	AS:SkinFrame(Examiner)
+	AS:SkinScrollBar(ExaminerStatsScrollScrollBar)
 	AS:SkinScrollBar(ExaminerFeatsScrollScrollBar)
 	AS:SkinScrollBar(ExaminerGearScrollScrollBar)
 
@@ -57,6 +58,14 @@ function AS:Examiner()
 	end
 
 	Examiner.portrait:Kill()
+	Examiner.bgBottomLeft:Kill()
+	Examiner.dlgBottomLeft:Kill()
+	Examiner.bgTopLeft:Kill()
+	Examiner.dlgTopLeft:Kill()
+	Examiner.bgBottomRight:Kill()
+	Examiner.dlgBottomRight:Kill()
+	Examiner.bgTopRight:Kill()
+	Examiner.dlgTopRight:Kill()
 
 	Examiner:Size(360, 464)
 

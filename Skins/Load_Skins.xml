@@ -1,4 +1,4 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui>
 	<Script file="acb_Castbar.lua"/>
 	<Script file="AchieveIt.lua"/>
 	<Script file="ACP.lua"/>
@@ -14,6 +14,8 @@
 	<Script file="Arh.lua"/>
 	<Script file="ArkInventory.lua"/>
 	<Script file="ArtifactPowerUser.lua"/>
+	<Script file="ArtifactTab.lua"/>
+	<Script file="Atlas.lua"/>
 	<Script file="AtlasLoot.lua"/>
 	<Script file="ATSW.lua"/>
 	<Script file="Auctionator.lua"/>
@@ -23,6 +25,7 @@
 	<Script file="AutoEquipQuestItem.lua"/>
 	<Script file="Baggins.lua"/>
 	<Script file="Bagnon.lua"/>
+	<Script file="BagSync.lua"/>
 	<Script file="Bartender4.lua"/>
 	<Script file="BattlePetBreedID.lua"/>
 	<Script file="BetterQuest.lua"/>
@@ -31,8 +34,11 @@
 	<Script file="BigWigs.lua"/>
 	<Script file="BPT.lua"/>
 	<Script file="BugSack.lua"/>
+	<Script file="BulkOrder.lua"/>
 	<Script file="BuyEmAll.lua"/>
+	<Script file="Capping.lua"/>
 	<Script file="ChocolateBar.lua"/>
+	<Script file="ClassicQuestLog.lua"/>
 	<Script file="CLCInfo.lua"/>
 	<Script file="CLCProt.lua"/>
 	<Script file="CLCRet.lua"/>
@@ -41,24 +47,30 @@
 	<Script file="CombustionHelper.lua"/>
 	<Script file="Coolline.lua"/>
 	<Script file="Cork.lua"/>
+	<Script file="Creator.lua"/>
 	<Script file="Critline.lua"/>
 	<Script file="DailyTamerCheck.lua"/>
 	<Script file="DBM.lua"/>
+	<Script file="DejaCharacterStats.lua"/>
 	<Script file="Details.lua"/>
 	<Script file="DKDots.lua"/>
 	<Script file="Dominos.lua"/>
 	<Script file="Dresser.lua"/>
 	<Script file="EasyMail.lua"/>
+	<Script file="Easy_Obliterate.lua"/>
 	<Script file="EavesDrop.lua"/>
+	<Script file="EnchantCheck.lua"/>
 	<Script file="EnergyWatch.lua"/>
 	<Script file="EveryGoldToBanker.lua"/>
 	<Script file="Examiner.lua"/>
+	<Script file="ExtraQuestButton.lua"/>
 	<Script file="ExtVendor.lua"/>
 	<Script file="FaceShooter.lua"/>
 	<Script file="Factionizer.lua"/>
 	<Script file="FlightMap.lua"/>
 	<Script file="FlightMapEnhanced.lua"/>
 	<Script file="FlyoutButtonCustom.lua"/>
+	<Script file="Foglight.lua"/>
 	<Script file="GCGambler.lua"/>
 	<Script file="Grinder.lua"/>
 	<Script file="GryphonHeartItems.lua"/>
@@ -76,6 +88,7 @@
 	<Script file="KarniCrap.lua"/>
 	<Script file="KeepingTabs.lua"/>
 	<Script file="Keyed.lua"/>
+	<Script file="LegacyQuest.lua"/>
 	<Script file="Lightheaded.lua"/>
 	<Script file="LinkWrangler.lua"/>
 	<Script file="LootCouncilLite.lua"/>
@@ -87,6 +100,7 @@
 	<Script file="MasterPlan.lua"/>
 	<Script file="MinimalArchaeology.lua"/>
 	<Script file="MiscFixes.lua"/>
+	<Script file="ModelPique.lua"/>
 	<Script file="MogIt.lua"/>
 	<Script file="MoveAnything.lua"/>
 	<Script file="MRT.lua"/>
@@ -117,6 +131,7 @@
 	<Script file="ProfessionTabs.lua"/>
 	<Script file="Quartz.lua"/>
 	<Script file="QuestCompletist.lua"/>
+	<Script file="QuestGuru.lua"/>
 	<Script file="QuestItemBar.lua"/>
 	<Script file="QuestPointer.lua"/>
 	<Script file="QuikEmotes.lua"/>
@@ -144,7 +159,9 @@
 	<Script file="SpineCounter.lua"/>
 	<Script file="Spy.lua"/>
 	<Script file="StormEarthAndFire.lua"/>
+	<Script file="Storyline.lua"/>
 	<Script file="Swatter.lua"/>
+	<Script file="Talentless.lua"/>
 	<Script file="TalentSetManager.lua"/>
 	<Script file="tdBattlePetScript.lua"/>
 	<Script file="TinyDPS.lua"/>
@@ -157,12 +174,15 @@
 	<Script file="VanasKoS.lua"/>
 	<Script file="Vendomatic.lua"/>
 	<Script file="VengeanceStatus.lua"/>
+	<Script file="WardrobeSort.lua"/>
 	<Script file="WeakAuras.lua"/>
 	<Script file="Wholly.lua"/>
 	<Script file="WorldBossStatus.lua"/>
+	<Script file="WorldQuestGroupFinder.lua"/>
 	<Script file="WorldQuestTab.lua"/>
 	<Script file="WowLua.lua"/>
 	<Script file="WoWPro.lua"/>
+	<Script file="wTetriNET.lua"/>
 	<Script file="xMerchant.lua"/>
 	<Script file="XPBarNone.lua"/>
 	<Script file="Zygor.lua"/>

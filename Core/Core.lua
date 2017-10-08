@@ -2,7 +2,7 @@ local AS = unpack(AddOnSkins)
 
 local AddOnName = ...
 
-local FoundError, AcceptFrame
+local AcceptFrame
 
 local select, pairs, ipairs, type, pcall = select, pairs, ipairs, type, pcall
 local floor, print, format, strlower, strfind, strmatch = floor, print, format, strlower, strfind, strmatch
@@ -155,7 +155,7 @@ end
 
 function AS:RunPreload(addonName)
 	if AS.preload[addonName] then
-		AS:CallSkin(AS.preload[addonName].addon, AS.preload[addonName].func, 'ADDON_LOADED', addonName)
+		pcall(AS.preload[addonName].func, self, 'ADDON_LOADED', addonName)
 	end
 end
 
@@ -167,7 +167,7 @@ function AS:CallSkin(skin, func, event, ...)
 		if not pass then
 			local message = '%s %s: |cfFFF0000There was an error in the|r |cff0AFFFF%s|r |cffFF0000skin|r.'
 			DEFAULT_CHAT_FRAME:AddMessage(format(message, AS.Title, AS.Version, skin))
-			FoundError = true
+			AS.FoundError = true
 		end
 	end
 end
@@ -210,7 +210,7 @@ function AS:StartSkinning(event)
 		end
 	end
 
-	if FoundError then
+	if AS.FoundError then
 		AS:Print(format('%s: Please report this to Azilroka immediately @ %s', AS.Version, AS:PrintURL(AS.TicketTracker)))
 	end
 end

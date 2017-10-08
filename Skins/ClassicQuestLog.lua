@@ -1,4 +1,3 @@
--- Check these files for DecUI-specific edits - Decard
 local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Classic Quest Log') then return end
@@ -38,7 +37,7 @@ end
 	--Reposition Show Map Button
 	ClassicQuestLog.mapButton:ClearAllPoints()
 	ClassicQuestLog.mapButton:Point('BOTTOMRIGHT', ClassicQuestLog, 'TOPRIGHT', 0, -59)
-	ClassicQuestLog.mapButton.Text:SetFormattedText(TEXT" Map ")
+	ClassicQuestLog.mapButton.Text:SetFormattedText(TEXT" Click ")
 
 	--Resize Expand/Collapse Button
 	ClassicQuestLogScrollFrame.expandAll:Size(120, 30)

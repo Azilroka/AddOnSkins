@@ -7,6 +7,7 @@ function AS:Postal(event, addon)
 
 	InboxPrevPageButton:SetPoint('CENTER', InboxFrame, 'BOTTOMLEFT', 45, 112)
 	InboxNextPageButton:SetPoint('CENTER', InboxFrame, 'BOTTOMLEFT', 295, 112)
+	OpenAllMail:Kill()
 
 	for i = 1, INBOXITEMS_TO_DISPLAY do
 		local b = _G['MailItem'..i..'ExpireTime']

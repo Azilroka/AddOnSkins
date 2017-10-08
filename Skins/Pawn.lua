@@ -3,6 +3,10 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Pawn') then return end
 
 function AS:Pawn()
+	if addon == 'Blizzard_InspectUI' or IsAddOnLoaded('Blizzard_InspectUI') then 
+		InspectFrame:HookScript('OnShow', function() AS:SkinButton(PawnUI_InspectPawnButton, true) PawnUI_InspectPawnButton:SetFormattedText(TEXT" Pawn ") PawnUI_InspectPawnButton:ClearAllPoints() PawnUI_InspectPawnButton:Point('RIGHT', InspectFrameCloseButton, 'LEFT', -8, -4) PawnUI_InspectPawnButton:Size(66, 20)end)
+		AS:UnregisterSkinEvent('Pawn', event)
+	end
 
 	-- General
 	AS:SkinFrame(PawnUIFrame)
@@ -12,6 +16,10 @@ function AS:Pawn()
 	AS:SkinEditBox(PawnUIStringDialog_TextBox)
 	AS:SkinButton(PawnUIStringDialog_OKButton)
 	AS:SkinButton(PawnUIStringDialog_CancelButton)
+
+	AS:SkinButton(PawnUI_InventoryPawnButton)
+	PawnUI_InventoryPawnButton:SetFormattedText(TEXT" Pawn ")
+	-- PawnUI_InspectPawnButton:SetFormattedText(TEXT" Pawn ")
 
 	for i = 1, PawnUIFrame.numTabs do
 		AS:SkinTab(_G["PawnUIFrameTab"..i])
@@ -60,6 +68,9 @@ function AS:Pawn()
 	AS:SkinCheckBox(PawnUIFrame_IgnoreGemsWhileLevelingCheck)
 	AS:SkinCheckBox(PawnUIFrame_DebugCheck)
 	AS:SkinCheckBox(PawnUIFrame_ShowItemIDsCheck)
+
+	--Resize Buttons
+	PawnUI_InventoryPawnButton:Size(112, 20)
 end
 
 AS:RegisterSkin('Pawn', AS.Pawn)

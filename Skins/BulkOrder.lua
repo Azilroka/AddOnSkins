@@ -1,4 +1,3 @@
--- Check these files for DecUI-specific edits - Decard
 local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BulkOrder') then return end

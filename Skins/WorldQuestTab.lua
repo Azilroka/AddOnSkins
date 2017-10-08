@@ -3,17 +3,33 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('WorldQuestTab') then return end
 
 function AS:WorldQuestTab()
-
 	AS:SkinButton(WQT_TabNormal)
-	WQT_TabNormal.TabBg:Hide()
-	WQT_TabNormal.Highlight:SetAlpha(0)
 	AS:SkinButton(WQT_TabWorld)
-	WQT_TabWorld.TabBg:Hide()
-	WQT_TabWorld.Highlight:SetAlpha(0)
-	AS:SkinDropDownBox(WQT_WorldQuestFrameSortButton, 130)
-	WQT_WorldQuestFrameSortButton:ClearAllPoints()
-	WQT_WorldQuestFrameSortButton:SetPoint("LEFT", WQT_TabWorld, "RIGHT", -5, -4)
+	AS:SkinButton(WQT_WorldQuestFrameSortButton)
 	AS:SkinButton(WQT_WorldQuestFrameFilterButton)
+	AS:SkinNextPrevButton(WQT_WorldQuestFrameSortButtonButton)
+	WQT_TabWorld.TabBg:Hide()
+	WQT_TabNormal.TabBg:Hide()
+
+	--Reposition elements
+	WQT_TabNormal:ClearAllPoints()
+	WQT_TabNormal:Point('RIGHT', WorldMapFrameCloseButton, 'LEFT', -231, -36)
+	WQT_TabWorld:ClearAllPoints()
+	WQT_TabWorld:Point('LEFT', WQT_TabNormal, 'RIGHT', 1, 0)
+	WQT_WorldQuestFrameSortButton:ClearAllPoints()
+	WQT_WorldQuestFrameSortButton:Point('LEFT', WQT_TabWorld, 'RIGHT', 18, -2)
+	WQT_WorldQuestFrameSortButtonButton:ClearAllPoints()
+	WQT_WorldQuestFrameSortButtonButton:Point('LEFT', WQT_WorldQuestFrameSortButton, 'RIGHT', -29, 0)
+	WQT_WorldQuestFrameSortButtonText:ClearAllPoints()
+	WQT_WorldQuestFrameSortButtonText:Point('CENTER', WQT_WorldQuestFrameSortButton, 'CENTER', -20, 0)
+	WQT_WorldQuestFrameFilterButton:ClearAllPoints()
+	WQT_WorldQuestFrameFilterButton:Point('LEFT', WQT_WorldQuestFrameSortButton, 'RIGHT', 18, 0)
+
+	--Resize Buttons
+	WQT_WorldQuestFrameSortButton:Size(92, 32)
+	WQT_WorldQuestFrameSortButtonButton:Size(27, 28)
+	WQT_WorldQuestFrameFilterButton:Size(92, 32)
+
 	AS:SkinScrollBar(WQT_QuestScrollFrameScrollBar)
 end
 

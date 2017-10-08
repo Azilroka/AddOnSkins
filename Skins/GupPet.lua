@@ -3,6 +3,7 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('GupPet') then return end
 
 function AS:GupPet()
+--[[
 	if GupPet_IngameFrameTemplateAuto then
 		AS:SkinIconButton(GupPet_IngameFrameTemplateAuto)
 		GupPet_IngameFrameTemplateAutoIcon:SetTexture("Interface\\Icons\\Ability_Mount_Drake_Azure")
@@ -26,15 +27,16 @@ function AS:GupPet()
 		GupPet_IngameFrameTemplateCompanionIcon:SetTexture("Interface\\Icons\\INV_Box_PetCarrier_01")
 		GupPet_IngameFrameTemplateCompanionIcon:SetDrawLayer('ARTWORK')
 	end
+]]
 
 	AS:SkinFrame(GupPet_InterfaceOptionsFrame)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameOptions)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameMountsCompanions)
 	AS:SkinFrame(GupPet_InterfaceOptionsFrameHelp)
-	AS:SkinButton(GupPet_IngameFrameTemplateMoveBottomRight)
-	AS:SkinButton(GupPet_IngameFrameTemplateMoveTopRight)
-	AS:SkinButton(GupPet_IngameFrameTemplateMoveBottomLeft)
-	AS:SkinButton(GupPet_IngameFrameTemplateMoveTopLeft)
+	-- AS:SkinButton(GupPet_IngameFrameTemplateMoveBottomRight)
+	-- AS:SkinButton(GupPet_IngameFrameTemplateMoveTopRight)
+	-- AS:SkinButton(GupPet_IngameFrameTemplateMoveBottomLeft)
+	-- AS:SkinButton(GupPet_IngameFrameTemplateMoveTopLeft)
 	AS:SkinTab(GupPet_InterfaceOptionsFrameTab1)
 	AS:SkinTab(GupPet_InterfaceOptionsFrameTab2)
 	AS:SkinTab(GupPet_InterfaceOptionsFrameTab3)
