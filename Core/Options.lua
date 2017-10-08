@@ -131,7 +131,7 @@ function AS:GetOptions()
 			desc = ASL.OptionsPanel.SkinDesc,
 		}
 		if AS:CheckAddOn('ElvUI') and strfind(skinName, 'Blizzard_') then
-			options.set = function(info, value) AS:SetOption(info[#info], value) AS:SetElvUIBlizzardSkinOption(info[#info], not value) end
+			options.set = function(info, value) AS:SetOption(info[#info], value) AS:SetElvUIBlizzardSkinOption(info[#info], not value) AS.NeedReload = true end
 		end
 		return options
 	end
@@ -147,7 +147,7 @@ function AS:GetOptions()
 				type = 'group',
 				name = ASL['AddOn Skins'],
 				get = function(info) return AS:CheckOption(info[#info]) end,
-				set = function(info, value) AS:SetOption(info[#info], value) end,
+				set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
 				args = {},
 			},
 			blizzard = {
@@ -155,7 +155,7 @@ function AS:GetOptions()
 				type = 'group',
 				name = ASL['Blizzard Skins'],
 				get = function(info) return AS:CheckOption(info[#info]) end,
-				set = function(info, value) AS:SetOption(info[#info], value) end,
+				set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
 				args = {},
 			},
 			bossmods = {
@@ -365,7 +365,7 @@ function AS:GetOptions()
 				name = MISCELLANEOUS,
 				order = 4,
 				get = function(info) return AS:CheckOption(info[#info]) end,
-				set = function(info, value) AS:SetOption(info[#info], value) end,
+				set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
 				args = {
 					SkinTemplate = {
 						name = ASL['Skin Template'],
@@ -513,6 +513,12 @@ function AS:GetOptions()
 			name = 'Use ElvUI Skin Styling',
 			order = 5,
 		}
+
+		hooksecurefunc(LibStub('AceConfigDialog-3.0-ElvUI'), 'CloseAll', function(self, appName)
+			if AS.NeedReload then
+				ElvUI[1]:StaticPopup_Show("PRIVATE_RL")
+			end
+		end)
 	end
 
 	if not AS:CheckAddOn('ElvUI') then
