@@ -40,7 +40,6 @@ local DEVELOPERS = {
 	'Shestak',
 	'Shadowcall',
 	'Sinaris',
-	'Infinitron',
 	'Simpy',
 	'Tercioo',
 	'Tukz',
@@ -56,7 +55,7 @@ local DEVELOPERS = {
 
 sort(DEVELOPERS, function(a, b) return strlower(a) < strlower(b) end)
 for _, devName in pairs(DEVELOPERS) do
-	DEVELOPER_STRING = DEVELOPER_STRING..devName..LINE_BREAK
+	DEVELOPER_STRING = DEVELOPER_STRING..devName..'    '
 end
 
 local Defaults, DebugString = nil, ''
@@ -71,16 +70,16 @@ function AS:SetupProfile()
 				['EmbedSexyCooldown'] = false,
 				['EmbedSystem'] = false,
 				['EmbedSystemDual'] = false,
-				['EmbedMain'] = 'Skada',
-				['EmbedLeft'] = 'Skada',
-				['EmbedRight'] = 'Skada',
+				['EmbedMain'] = 'Details',
+				['EmbedLeft'] = 'Details',
+				['EmbedRight'] = 'Details',
 				['EmbedRightChat'] = true,
 				['EmbedLeftWidth'] = 200,
 				['EmbedBelowTop'] = false,
 				['TransparentEmbed'] = false,
 				['EmbedIsHidden'] = false,
 				['EmbedFrameStrata'] = '3-MEDIUM',
-				['EmbedFrameLevel'] = 1,
+				['EmbedFrameLevel'] = 10,
 			-- Misc
 				['RecountBackdrop'] = true,
 				['SkadaBackdrop'] = true,
@@ -88,7 +87,7 @@ function AS:SetupProfile()
 				['DetailsBackdrop'] = true,
 				['MiscFixes'] = true,
 				['DBMSkinHalf'] = false,
-				['DBMFont'] = 'Tukui',
+				['DBMFont'] = 'Arial Narrow',
 				['DBMFontSize'] = 12,
 				['DBMFontFlag'] = 'OUTLINE',
 				['DBMRadarTrans'] = false,
@@ -131,10 +130,8 @@ function AS:GetOptions()
 			order = order,
 			desc = ASL.OptionsPanel.SkinDesc,
 		}
-		if AS:CheckAddOn('ElvUI') then
-			if strfind(skinName, 'Blizzard_') then
-				options.set = function(info, value) AS:SetOption(info[#info], value) AS:SetElvUIBlizzardSkinOption(info[#info], not value) end
-			end
+		if AS:CheckAddOn('ElvUI') and strfind(skinName, 'Blizzard_') then
+			options.set = function(info, value) AS:SetOption(info[#info], value) AS:SetElvUIBlizzardSkinOption(info[#info], not value) end
 		end
 		return options
 	end
@@ -143,7 +140,7 @@ function AS:GetOptions()
 		order = 100,
 		type = 'group',
 		name = AS.Title,
-		childGroups = 'tab',
+		childGroups = 'select',
 		args = {
 			addons = {
 				order = 0,
@@ -426,12 +423,7 @@ function AS:GetOptions()
 				name = ASL['Credits'],
 				order = -1,
 				args = {
-					desc = {
-						order = 1,
-						type = 'description',
-						name = DEVELOPER_STRING,
-						fontSize = 'large',
-					},
+
 				},
 			},
 			about = {
@@ -439,39 +431,60 @@ function AS:GetOptions()
 				name = ASL['About/Help'],
 				order = -2,
 				args = {
-					desc = {
+					AuthorHeader = {
+						order = 0,
+						type = 'header',
+						name = 'Authors:',
+					},
+					Authors = {
 						order = 1,
 						type = 'description',
-						fontSize = 'medium',
-						name = ASL['This is where you can find out more of AddOnSkins.'],
+						name = AS.Authors,
+						fontSize = 'large',
+					},
+					DevelopersHeader = {
+						order = 2,
+						type = 'header',
+						name = 'Developers:',
+					},
+					Developers = {
+						order = 3,
+						type = 'description',
+						name = DEVELOPER_STRING,
+						fontSize = 'large',
+					},
+					desc = {
+						order = 4,
+						type = 'header',
+						name = ASL['Links'],
 					},
 					tukuilink = {
+						order = 5,
 						type = 'input',
 						width = 'full',
 						name = ASL['Download Link'],
 						get = function() return 'https://www.tukui.org/addons.php?id=3' end,
-						order = 2,
 					},
 					changeloglink = {
+						order = 6,
 						type = 'input',
 						width = 'full',
 						name = ASL['Changelog Link'],
 						get = function() return 'https://www.tukui.org/forum/viewtopic.php?f=35&t=801' end,
-						order = 3,
 					},
 					gitlablink = {
+						order = 7,
 						type = 'input',
 						width = 'full',
 						name = ASL['GitLab Link / Report Errors'],
 						get = function() return 'https://git.tukui.org/Azilroka/AddOnSkins' end,
-						order = 4,
 					},
 					skinlink = {
+						order = 8,
 						type = 'input',
 						width = 'full',
 						name = ASL['Available Skins / Skin Requests'],
 						get = function() return 'https://www.tukui.org/forum/viewforum.php?f=35' end,
-						order = 5,
 					},
 				},
 			},

@@ -52,7 +52,7 @@ function AS:UpdateLocale_koKR()
 	ASL["Credits"] = "Credits"
 	ASL["Credits:"] = "Credits:"
 	ASL["About/Help"] = "About/Help"
-	ASL["This is where you can find out more of AddOnSkins."] = "This is where you can find out more of AddOnSkins."
+	ASL["Links"] = "Links"
 	ASL["Download Link"] = "Download Link"
 	ASL["Changelog Link"] = "Changelog Link"
 	ASL["GitLab Link / Report Errors"] = "GitLab Link / Report Errors"

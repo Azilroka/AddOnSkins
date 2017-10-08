@@ -52,7 +52,7 @@ function AS:UpdateLocale_zhTW()
 	ASL["Credits"] = "特別感謝"
 	ASL["Credits:"] = "特別感謝:"
 	ASL["About/Help"] = "相關資訊/協助"
-	ASL["This is where you can find out more of AddOnSkins."] = "你可以在這裡找到更多 AddOnSkins 的相關資訊."
+	ASL["Links"] = "Links"
 	ASL["Download Link"] = "下載連結"
 	ASL["Changelog Link"] = "更新記錄連結"
 	ASL["GitLab Link / Report Errors"] = "GitLab 連結/回報錯誤"

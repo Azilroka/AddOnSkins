@@ -52,7 +52,7 @@ function AS:UpdateLocale_zhCN()
 	ASL["Credits"] = "鸣谢"
 	ASL["Credits:"] = "鸣谢:"
 	ASL["About/Help"] = "关于/帮助"
-	ASL["This is where you can find out more of AddOnSkins."] = "This is where you can find out more of AddOnSkins."
+	ASL["Links"] = "Links"
 	ASL["Download Link"] = "下载链接"
 	ASL["Changelog Link"] = "更新日志链接"
 	ASL["GitLab Link / Report Errors"] = "GitLab 链接 / 报告错误"

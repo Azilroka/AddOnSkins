@@ -52,7 +52,7 @@ function AS:UpdateLocale_ruRU()
 	ASL["Credits"] = "Благодарности"
 	ASL["Credits:"] = "Благодарности:"
 	ASL["About/Help"] = "Информация/Помощь"
-	ASL["This is where you can find out more of AddOnSkins."] = "По этим ссылкам вы найдете больше информации."
+	ASL["Links"] = "Links"
 	ASL["Download Link"] = "Скачать"
 	ASL["Changelog Link"] = "Изменения"
 	ASL["GitLab Link / Report Errors"] = "GitLab / Сообщить об ошибках"

@@ -53,7 +53,7 @@ function AS:UpdateLocale_itIT()
 	ASL["Credits"] = "Crediti"
 	ASL["Credits:"] = "Crediti:"
 	ASL["About/Help"] = "About/Aiuto"
-	ASL["This is where you can find out more of AddOnSkins."] = "Qui è dove puoi trovare ulteriori informazioni su AddOnSkins."
+	ASL["Links"] = "Links"
 	ASL["Download Link"] = "Collegamento per il Download"
 	ASL["Changelog Link"] = "Collegamento del Changelog"
 	ASL["GitLab Link / Report Errors"] = "Collegamento GitLab / Segnalazione Errori"

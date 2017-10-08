@@ -52,7 +52,7 @@ function AS:UpdateLocale_frFR()
 	ASL["Credits"] = "Crédits"
 	ASL["Credits:"] = "Crédits:"
 	ASL["About/Help"] = "À Propos/Aide"
-	ASL["This is where you can find out more of AddOnSkins."] = "Ici, vous trouverez plus d'information à propos d'AddOnSkins."
+	ASL["Links"] = "Links"
 	ASL["Download Link"] = "Lien de Téléchargement"
 	ASL["Changelog Link"] = "Liens pour les derniers changements"
 	ASL["GitLab Link / Report Errors"] = "Lien vers GitLab / Rapporter des Erreurs"

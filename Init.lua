@@ -8,6 +8,7 @@ _G.AddOnSkins = Engine
 
 AddOn.Title = GetAddOnMetadata(AddOnName, 'Title')
 AddOn.Version = GetAddOnMetadata(AddOnName, 'Version')
+AddOn.Authors = GetAddOnMetadata(AddOnName, 'Author'):gsub(", ", "    ")
 AddOn.LSM = LibStub('LibSharedMedia-3.0')
 AddOn.TicketTracker = 'http://git.tukui.org/Azilroka/addonskins'
 AddOn.MyClass = select(2, UnitClass('player'))
