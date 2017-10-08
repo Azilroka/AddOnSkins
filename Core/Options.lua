@@ -418,14 +418,6 @@ function AS:GetOptions()
 					},
 				},
 			},
-			credits = {
-				type = 'group',
-				name = ASL['Credits'],
-				order = -1,
-				args = {
-
-				},
-			},
 			about = {
 				type = 'group',
 				name = ASL['About/Help'],
