@@ -101,9 +101,6 @@ function AS:Ace3()
 		elseif TYPE == 'Button' then
 			local frame = widget.frame
 			AS:SkinButton(frame)
-			AS:StripTextures(frame)
-			AS:CreateBackdrop(frame, 'Default')
-			frame.Backdrop:SetInside()
 		elseif TYPE == 'Slider' then
 			local frame = widget.slider
 			local editbox = widget.editbox
