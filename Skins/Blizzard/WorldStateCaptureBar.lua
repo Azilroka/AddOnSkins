@@ -6,18 +6,10 @@ function AS:Blizzard_WorldStateCaptureBar(event, addon)
 	local FFA = "Interface\\AddOns\\AddOnSkins\\Media\\Icons\\FFA"
 
 	local CreateCaptureBar = function(ID)
-		if not _G['WorldStateCaptureBar'..ID] then return end
-		AS:StripTextures(_G['WorldStateCaptureBar'..ID], true)
-		AS:StripTextures(_G['WorldStateCaptureBar'..ID..'Indicator'], true)
-		_G['WorldStateCaptureBar'..ID..'LeftBar']:SetTexture(nil)
-		_G['WorldStateCaptureBar'..ID..'RightBar']:SetTexture(nil)
-		_G['WorldStateCaptureBar'..ID..'MiddleBar']:SetTexture(nil)
-		_G['WorldStateCaptureBar'..ID..'IndicatorLeft']:SetTexture(nil)
-		_G['WorldStateCaptureBar'..ID..'IndicatorRight']:SetTexture(nil)
-		_G['WorldStateCaptureBar'..ID..'LeftLine']:SetTexture(nil)
-		_G['WorldStateCaptureBar'..ID..'RightLine']:SetTexture(nil)
-		_G['WorldStateCaptureBar'..ID..'LeftIconHighlight']:SetTexture(nil)
-		_G['WorldStateCaptureBar'..ID..'RightIconHighlight']:SetTexture(nil)
+		local Frame = _G['WorldStateCaptureBar'..ID]
+		if not Frame then return end
+		AS:StripTextures(Frame, true)
+		AS:StripTextures(Frame.Indicator, true)
 
 		if _G['CaptureBar'..ID] then return end
 		local Bar = CreateFrame('StatusBar', 'CaptureBar'..ID, _G['WorldStateCaptureBar'..ID])
@@ -79,7 +71,7 @@ function AS:Blizzard_WorldStateCaptureBar(event, addon)
 	local style = 1
 	local UpdateCaptureBar = function(ID, Current, Neutral)
 		local Bar = _G['CaptureBar'..ID]
-		if not Bar then CreateCaptureBar(ID) end
+		if not Bar then CreateCaptureBar(ID) return end
 		local FactionZone = (100 - Neutral) / 2
 		if style == 1 then
 			Bar.AllianceBar:SetValue(FactionZone)
