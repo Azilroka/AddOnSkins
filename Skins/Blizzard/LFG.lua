@@ -335,7 +335,7 @@ function AS:Blizzard_PVPUI(event, addon)
 	AS:StripTextures(HonorFrame.BonusFrame.ShadowOverlay)
 	AS:StripTextures(ConquestFrame.Inset)
 
-	for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'AshranButton' }) do
+	for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'AshranButton', 'BrawlButton' }) do
 		local Button = HonorFrame.BonusFrame[Section]
 		AS:StripTextures(Button)
 		AS:SkinButton(Button)
@@ -353,7 +353,7 @@ function AS:Blizzard_PVPUI(event, addon)
 	end
 
 	hooksecurefunc('HonorFrame_UpdateQueueButtons', function()
-		for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'AshranButton' }) do
+		for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'AshranButton', 'BrawlButton' }) do
 			local Button = HonorFrame.BonusFrame[Section]
 			if Button.SelectedTexture:IsShown() then
 				Button:SetBackdropBorderColor(0, 0.44, .87, 1)

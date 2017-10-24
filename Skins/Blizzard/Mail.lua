@@ -122,7 +122,7 @@ function AS:Blizzard_Mail(event, addon)
 			AttachmentButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 			if ItemLink then
 				local Quality = select(3, GetItemInfo(ItemLink))
-				if (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
+				if Quality and Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality] then
 					AttachmentButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 				end
 			end
@@ -136,7 +136,7 @@ function AS:Blizzard_Mail(event, addon)
 			AttachmentButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 			if ItemLink then
 				local Quality = select(3, GetItemInfo(ItemLink))
-				if (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
+				if Quality and Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality] then
 					AttachmentButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 				end
 			end

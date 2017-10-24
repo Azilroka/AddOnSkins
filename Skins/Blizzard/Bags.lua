@@ -66,7 +66,7 @@ function AS:Blizzard_Bags()
 			-- End of hax.
 
 			ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
-			ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
+			ItemButton.searchOverlay:SetColorTexture(0, 0, 0, .8)
 
 			ItemButton:SetNormalTexture('')
 			AS:StyleButton(ItemButton)
