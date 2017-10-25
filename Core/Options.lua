@@ -534,7 +534,7 @@ function AS:GetOptions()
 	ACR:RegisterOptionsTable('AddOnSkinsProfiles', Options.args.profiles)
 
 	if AS.EP then
-		local Ace3OptionsPanel = IsAddOnLoaded('ElvUI') and ElvUI[1] or Enhanced_Config and Enhanced_Config[1]
+		local Ace3OptionsPanel = IsAddOnLoaded('ElvUI') and ElvUI[1] or Enhanced_Config
 		Ace3OptionsPanel.Options.args.addonskins = Options
 	end
 
