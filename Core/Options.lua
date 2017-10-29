@@ -137,7 +137,7 @@ function AS:GetOptions()
 	end
 
 	local Options = {
-		order = 100,
+		order = 101,
 		type = 'group',
 		name = AS.Title,
 		childGroups = 'tab',

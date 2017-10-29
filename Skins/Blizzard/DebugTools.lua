@@ -10,7 +10,6 @@ function AS:Blizzard_DebugTools(event, addon)
 		AS:SkinButton(ScriptErrorsFrame.Reload)
 		AS:SkinCloseButton(ScriptErrorsFrameClose)
 		AS:SkinScrollBar(ScriptErrorsFrameScrollBar)
-		ScriptErrorsFrame.ScrollFrame.Text:FontTemplate(nil, 13)
 		ScriptErrorsFrame.ScrollFrame:CreateBackdrop('Default')
 		ScriptErrorsFrame.ScrollFrame:SetFrameLevel(ScriptErrorsFrame.ScrollFrame:GetFrameLevel() + 2)
 
