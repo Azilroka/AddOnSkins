@@ -22,6 +22,24 @@ function AS:OrderHallCommander(event)
 				AS:SetTemplate(frame, 'Transparent')
 				AS:SkinCloseButton(frame.Close)
 
+				for j = 1, 99 do
+					local i = j
+					if (j < 10) then i = "0"..j end
+					if _G["LibInitCheckbox0000"..i] ~= nil then
+						AS:SkinCheckBox(_G["LibInitCheckbox0000"..i])
+					elseif _G["LibInitSlider000"..i] ~= nil then
+						AS:SkinSlideBar(_G["LibInitSlider000"..i])
+					elseif _G["LibInitCheckbox000"..i] ~= nil then
+						AS:SkinCheckBox(_G["LibInitCheckbox000"..i])
+					elseif _G["LibInitDropdown000"..i] ~= nil then
+						AS:SkinDropDownBox(_G["LibInitDropdown000"..i], 200)
+					elseif _G["LibInitCheckbox000"..i] ~= nil then
+						AS:SkinCheckBox(_G["LibInitCheckbox000"..i])
+					elseif _G["LibInitButton000"..i] ~= nil then
+						AS:SkinButton(_G["LibInitButton000"..i])
+					end
+				end
+
 				frame = {OrderHallMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:GetChildren()}
 				AS:SkinButton(frame[1])
 			end)
@@ -31,7 +49,7 @@ function AS:OrderHallCommander(event)
 		if OHCGUIContainer1.IsSkinned then return end
 		AS:UnregisterSkinEvent('OrderHallCommander', event)
 
-		AS:Delay(0.1, function()
+		AS:Delay(0.3, function()
 			AS:SkinFrame(OHCGUIContainer1)
 			AS:SkinCloseButton(OHCGUIContainer1.Close)
 		end)
