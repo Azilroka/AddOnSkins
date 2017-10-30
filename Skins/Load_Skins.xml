@@ -34,6 +34,7 @@
 	<Script file="BigBrother.lua"/>
 	<Script file="BigWigs.lua"/>
 	<Script file="BPT.lua"/>
+	<Script file="BtWQuests.lua"/>
 	<Script file="BugSack.lua"/>
 	<Script file="BulkOrder.lua"/>
 	<Script file="BuyEmAll.lua"/>
