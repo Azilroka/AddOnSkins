@@ -9,10 +9,10 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	EncounterJournalNavBar.Backdrop:SetPoint("BOTTOMRIGHT")
 
 	AS:StripTextures(EncounterJournalNavBarOverlay, true)
-	
+
 	AS:SkinEditBox(EncounterJournalSearchBox)
 	AS:SkinCloseButton(EncounterJournalCloseButton)
-	
+
 	AS:StripTextures(EncounterJournalInset, true)
 	AS:CreateBackdrop(EncounterJournalEncounterFrameInfo)
 
@@ -95,8 +95,8 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	AS:SkinScrollBar(EncounterJournalEncounterFrameInfoDetailsScrollFrameScrollBar)
 	AS:SkinScrollBar(EncounterJournalEncounterFrameInstanceFrameLoreScrollFrameScrollBar)
 	AS:SkinScrollBar(EncounterJournalEncounterFrameInfoBossesScrollFrameScrollBar)
-	
-	EncounterJournalScrollBar:SkinScrollBar()
+
+	AS:SkinScrollBar(EncounterJournalScrollBar)
 	AS:StripTextures(EncounterJournal.LootJournal)
 	AS:SkinButton(EncounterJournal.LootJournal.LegendariesFrame.ClassButton, true)
 	AS:SkinButton(EncounterJournal.LootJournal.LegendariesFrame.SlotButton, true)
