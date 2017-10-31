@@ -25,7 +25,7 @@ function AS:Blizzard_LootFrames()
 			self.Timer:SetStatusBarColor(color.r, color.g, color.b)
 			self.Timer:SetFrameLevel(self:GetFrameLevel() + 1)
 			for _, Button in pairs({'NeedButton', 'GreedButton', 'PassButton', 'DisenchantButton'}) do
-				Frame[Button]:SetFrameLevel(Frame.Timer:GetFrameLevel() + 2)
+				self[Button]:SetFrameLevel(self.Timer:GetFrameLevel() + 2)
 			end
 		end)
 

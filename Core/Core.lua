@@ -55,7 +55,7 @@ function AS:Print(string)
 end
 
 function AS:PrintURL(url)
-	return format("|cFFFFFFFF[|Hurl:%s|h%s|h]|r", url, url)
+	return format("|cFFC495DD[|Hurl:%s|h%s|h]|r", url, url)
 end
 
 function AS:Round(num, idp)

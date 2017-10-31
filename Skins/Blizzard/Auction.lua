@@ -172,7 +172,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	end
 
 	AuctionFrameTab1:SetPoint("TOPLEFT", AuctionFrame, "BOTTOMLEFT", -5, 2)
-	
+
 	for i = 1, AuctionFrame.numTabs do
 		AS:SkinTab(_G["AuctionFrameTab"..i])
 	end
@@ -214,7 +214,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 		Button:GetHighlightTexture():SetPoint("BOTTOMRIGHT", Button, "BOTTOMRIGHT", -2, 5)
 		Button:GetPushedTexture():SetAllPoints(Button:GetHighlightTexture())
 	end
-	
+
 	for i = 1, NUM_AUCTIONS_TO_DISPLAY do
 		local Button = _G["AuctionsButton"..i]
 		local Icon = _G["AuctionsButton"..i.."Item"]

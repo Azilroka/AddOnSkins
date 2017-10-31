@@ -12,7 +12,7 @@ function AS:Blizzard_AddonManager()
 	AS:SkinButton(AddonListDisableAllButton, true)
 	AS:SkinButton(AddonListOkayButton, true)
 	AS:SkinButton(AddonListCancelButton, true)
-	
+
 	AS:SkinScrollBar(AddonListScrollFrameScrollBar)
 
 	AS:SkinCheckBox(AddonListForceLoad)
