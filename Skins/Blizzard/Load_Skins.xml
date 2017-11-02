@@ -41,6 +41,5 @@
 	<Script file="Tutorial.lua"/>
 	<Script file="VoidStorage.lua"/>
 	<Script file="WorldMap.lua"/>
-	<Script file="WorldStateCaptureBar.lua"/>
 	<Script file="WorldStateScoreFrame.lua"/>
 </Ui>
