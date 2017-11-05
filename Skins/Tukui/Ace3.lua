@@ -166,7 +166,7 @@ function AS:Ace3()
 				end
 
 				local oldRefreshTree = widget.RefreshTree
-				widget.RefreshTree = function(self, scrollToSelection)		
+				widget.RefreshTree = function(self, scrollToSelection)
 					oldRefreshTree(self, scrollToSelection)
 					if not self.tree then return end
 					local status = self.status or self.localstatus
