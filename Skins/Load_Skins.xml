@@ -77,6 +77,7 @@
 	<Script file="GCGambler.lua"/>
 	<Script file="Grinder.lua"/>
 	<Script file="GryphonHeartItems.lua"/>
+	<Script file="Guild_Roster_Manager.lua"/>
 	<Script file="GuildMemberInfo_TradeSkills.lua"/>
 	<Script file="GupPet.lua"/>
 	<Script file="Hack.lua"/>
