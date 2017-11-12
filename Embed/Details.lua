@@ -4,7 +4,7 @@ if not AS:CheckAddOn('Details') then return end
 
 local Details
 
-local wipe, pairs, tinsert, select, type = wipe, pairs, tinsert, select, type
+local wipe, tinsert, select, type = wipe, tinsert, select, type
 
 local _G = _G
 
@@ -54,11 +54,10 @@ function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, rela
 
 	window._ElvUIEmbed = true
 
-	local offsety = ofsy
 	if window.bars_grow_direction == 2 then
-		offsety = 2
+		ofsy = -2
 	else
-		offsety = 20
+		ofsy = -20
 	end
 
 	window:UngroupInstance()
@@ -100,7 +99,7 @@ function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, rela
 		window:SetSize(width, height - 20)
 	end
 
-	window.baseframe:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
+	window.baseframe:SetPoint(point, relativeFrame, relativePoint, ofsx, ofsy)
 	window:SaveMainWindowPosition()
 	window:RestoreMainWindowPosition()
 
@@ -182,8 +181,8 @@ function AS:Embed_Details()
 
 	local instances_amount = Details:GetNumInstancesAmount()
 
-	for i = instances_amount+1, NumberToEmbed do
-		local new_instance = Details:CreateInstance (i)
+	for i = instances_amount + 1, NumberToEmbed do
+		local new_instance = Details:CreateInstance(i)
 
 		if (type(new_instance) == "table") then
 			tinsert(AS.DetailsInstances, new_instance)
