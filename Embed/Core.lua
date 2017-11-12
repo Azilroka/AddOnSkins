@@ -1,7 +1,7 @@
 local AS = unpack(AddOnSkins)
 
-local format, gsub, pairs, ipairs, select, tinsert, tonumber = format, gsub, pairs, ipairs, select, tinsert, tonumber
-local strlower, strmatch, strsub, floor, wipe, type = strlower, strmatch, strsub, floor, wipe, type
+local format, pairs = format, pairs
+local strlower, strmatch, strsub = strlower, strmatch, strsub
 local _G, CreateFrame, UIParent = _G, CreateFrame, UIParent
 
 AS.ChatFrameHider = CreateFrame('Frame')
@@ -129,18 +129,18 @@ function AS:Embed_Check(Message)
 end
 
 function AS:Embed_Toggle(Message)
-	local MainEmbed, LeftEmbed, RightEmbed = 'NONE', 'NONE', 'NONE'
+	local MainEmbed, LeftEmbed, RightEmbed
 	EmbedSystem_MainWindow.FrameName = nil
 	EmbedSystem_LeftWindow.FrameName = nil
 	EmbedSystem_RightWindow.FrameName = nil
 	if AS:CheckOption('EmbedSystem') then
-		local MainEmbed = strlower(AS:CheckOption('EmbedMain'))
+		MainEmbed = strlower(AS:CheckOption('EmbedMain'))
 		if MainEmbed ~= 'details' and MainEmbed ~= 'skada' and MainEmbed ~= 'omen' and MainEmbed ~= 'recount' and MainEmbed ~= 'tinydps' and MainEmbed ~= 'aldamagemeter' then
 			EmbedSystem_MainWindow.FrameName = AS:CheckOption('EmbedMain')
 		end
 	end
 	if AS:CheckOption('EmbedSystemDual') then
-		local LeftEmbed, RightEmbed = strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight'))
+		LeftEmbed, RightEmbed = strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight'))
 		if LeftEmbed ~= 'details' and LeftEmbed ~= 'skada' and LeftEmbed ~= 'omen' and LeftEmbed ~= 'recount' and LeftEmbed ~= 'tinydps' and LeftEmbed ~= 'aldamagemeter' then
 			EmbedSystem_LeftWindow.FrameName = AS:CheckOption('EmbedLeft')
 		end

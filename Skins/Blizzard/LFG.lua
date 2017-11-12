@@ -47,7 +47,7 @@ function AS:Blizzard_PvE(event, addon)
 		end)
 	end
 
-	hooksecurefunc('GroupFinderFrame_SelectGroupButton', function(index)
+	hooksecurefunc('GroupFinderFrame_SelectGroupButton', function()
 		for i = 1, 4 do
 			local Button = GroupFinderFrame["groupButton"..i]
 			if GroupFinderFrame.selectionIndex == Button:GetID() then
@@ -112,7 +112,7 @@ function AS:Blizzard_PvE(event, addon)
 
 	for i = 1, NUM_LFD_CHOICE_BUTTONS do
 		AS:SkinCheckBox(_G["LFDQueueFrameSpecificListButton"..i].enableButton)
-	end	
+	end
 
 	AS:StripTextures(RaidFinderFrame)
 	AS:StripTextures(RaidFinderFrameBottomInset)
@@ -265,20 +265,61 @@ end
 
 AS:RegisterSkin("Blizzard_ChallengesUI", AS.Blizzard_ChallengesUI, 'ADDON_LOADED')
 
-function AS:Blizzard_PVPUI(event, addon)
+function AS:Blizzard_PVPUI(_, addon)
 	if addon ~= "Blizzard_PVPUI" then return end
 	AS:StripTextures(PVPUIFrame)
-	
+
 	AS:StripTextures(HonorFrame.RoleInset)
 	AS:SkinStatusBar(HonorFrame.XPBar.Bar)
 
-	HonorFrame.XPBar:StripTextures()
-	HonorFrame.XPBar.Bar.OverlayFrame.Text:SetPoint('CENTER')
+	hooksecurefunc('PVPHonorXPBar_SetNextAvailable', function(self)
+		self:StripTextures()
+
+		if self.Bar and not self.Bar.Backdrop then
+			AS:CreateBackdrop(self.Bar, "Default")
+			if self.Bar.Spark then
+				self.Bar.Spark:SetAlpha(0)
+			end
+			if self.Bar.OverlayFrame and self.Bar.OverlayFrame.Text then
+				self.Bar.OverlayFrame.Text:ClearAllPoints()
+				self.Bar.OverlayFrame.Text:Point("CENTER", self.Bar)
+			end
+		end
+
+		if self.PrestigeReward and self.PrestigeReward.Accept then
+			self.PrestigeReward.Accept:ClearAllPoints()
+			self.PrestigeReward.Accept:SetPoint("TOP", self.PrestigeReward, "BOTTOM", 0, 0)
+			if not self.PrestigeReward.Accept.template then
+				AS:SkinButton(self.PrestigeReward.Accept)
+			end
+		end
+
+		if self.NextAvailable then
+			if self.Bar then
+				self.NextAvailable:ClearAllPoints()
+				self.NextAvailable:SetPoint("LEFT", self.Bar, "RIGHT", 0, -2)
+			end
+
+			if not self.NextAvailable.Backdrop then
+				self.NextAvailable:StripTextures()
+				AS:CreateBackdrop(self.NextAvailable)
+				if self.NextAvailable.Icon then
+					self.NextAvailable.Backdrop:SetPoint("TOPLEFT", self.NextAvailable.Icon, AS:AdjustForPixelPerfect(-2), AS:AdjustForPixelPerfect(2))
+					self.NextAvailable.Backdrop:SetPoint("BOTTOMRIGHT", self.NextAvailable.Icon, AS:AdjustForPixelPerfect(2), AS:AdjustForPixelPerfect(-2))
+				end
+			end
+
+			if self.NextAvailable.Icon then
+				self.NextAvailable.Icon:SetDrawLayer("ARTWORK")
+				self.NextAvailable.Icon:SetTexCoord(unpack(AS.TexCoords))
+			end
+		end
+	end)
 
 	AS:SkinCheckBox(HonorFrame.RoleInset.DPSIcon.checkButton, true)
 	AS:SkinCheckBox(HonorFrame.RoleInset.TankIcon.checkButton, true)
 	AS:SkinCheckBox(HonorFrame.RoleInset.HealerIcon.checkButton, true)
-	
+
 	for i = 1, 4 do
 		local Button = PVPQueueFrame['CategoryButton'..i]
 		AS:SkinFrame(Button, nil, true)
@@ -367,9 +408,9 @@ function AS:Blizzard_PVPUI(event, addon)
 	AS:StripTextures(ConquestFrame.ShadowOverlay)
 	AS:SkinButton(ConquestJoinButton, true)
 	AS:SkinFrame(ConquestTooltip)
-	
+
 	AS:StripTextures(ConquestFrame.RoleInset)
-	
+
 	AS:SkinCheckBox(ConquestFrame.RoleInset.DPSIcon.checkButton, true)
 	AS:SkinCheckBox(ConquestFrame.RoleInset.TankIcon.checkButton, true)
 	AS:SkinCheckBox(ConquestFrame.RoleInset.HealerIcon.checkButton, true)
