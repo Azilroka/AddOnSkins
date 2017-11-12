@@ -60,13 +60,12 @@ function AS:Blizzard_LootFrames()
 	MissingLootFrame:CreateShadow()
 
 	AS:SkinCloseButton(MissingLootFramePassButton)
-	
+
 	local function SkinButton()
 		local number = GetNumMissingLootItems()
 		for i = 1, number do
 			local slot = _G["MissingLootFrameItem"..i]
 			local icon = slot.icon
-			
 			if not slot.isSkinned then
 				AS:StripTextures(slot)
 				AS:SetTemplate(slot, 'Default')
@@ -75,17 +74,17 @@ function AS:Blizzard_LootFrames()
 				icon:ClearAllPoints()
 				icon:SetPoint("TOPLEFT", 2, -2)
 				icon:SetPoint("BOTTOMRIGHT", -2, 2)
-				
+
 				slot.isSkinned = true
 			end
-			
+
 			local quality = select(4, GetMissingLootItemInfo(i))
 			local color = (GetItemQualityColor(quality)) or (unpack(C.media.bordercolor))
 			frame:SetBackdropBorderColor(color)
 		end
 	end
 	hooksecurefunc("MissingLootFrame_Show", SkinButton)
-	
+
 	-- loot history frame
 	AS:StripTextures(LootHistoryFrame)
 	AS:SkinCloseButton(LootHistoryFrame.CloseButton)
@@ -99,12 +98,12 @@ function AS:Blizzard_LootFrames()
 	LootHistoryFrame.ResizeButton:ClearAllPoints()
 	LootHistoryFrame.ResizeButton:SetPoint("TOP", LootHistoryFrame, "BOTTOM", 0, -2)
 	AS:SkinScrollBar(LootHistoryFrameScrollFrameScrollBar)
-	
+
 	local function UpdateLoots(self)
 		local numItems = C_LootHistory.GetNumItems()
 		for i=1, numItems do
 			local frame = self.itemFrames[i]
-			
+
 			if not frame.isSkinned then
 				frame.NameBorderLeft:Hide()
 				frame.NameBorderRight:Hide()
@@ -114,7 +113,7 @@ function AS:Blizzard_LootFrames()
 				frame.ActiveHighlight:Hide()
 				AS:SkinTexture(frame.Icon)
 				frame.Icon:SetDrawLayer("ARTWORK")
-				
+
 				-- create a backdrop around the icon
 				AS:CreateBackdrop(frame, 'Default')
 				frame.backdrop:SetPoint("TOPLEFT", frame.Icon, -2, 2)
@@ -125,18 +124,18 @@ function AS:Blizzard_LootFrames()
 		end
 	end
 	hooksecurefunc("LootHistoryFrame_FullUpdate", UpdateLoots)
-	
+
 	-- master loot frame
 	AS:StripTextures(MasterLooterFrame)
 	AS:SetTemplate(MasterLooterFrame)
-	
+
 	hooksecurefunc("MasterLooterFrame_Show", function()
 		local b = MasterLooterFrame.Item
 		if b then
 			local i = b.Icon
 			local icon = i:GetTexture()
 			local c = ITEM_QUALITY_COLORS[LootFrame.selectedQuality]
-			
+
 			AS:StripTextures(b)
 			i:SetTexture(icon)
 			AS:SkinTexture(i)
@@ -144,7 +143,7 @@ function AS:Blizzard_LootFrames()
 			b.backdrop:SetOutside(i)
 			b.backdrop:SetBackdropBorderColor(c.r, c.g, c.b)
 		end
-		
+
 		for i=1, MasterLooterFrame:GetNumChildren() do
 			local child = select(i, MasterLooterFrame:GetChildren())
 			if child and not child.isSkinned and not child:GetName() then
@@ -153,14 +152,14 @@ function AS:Blizzard_LootFrames()
 						AS:SkinCloseButton(child)
 					else
 						AS:SetTemplate(child)
-						AS:StyleButton(child)		
+						AS:StyleButton(child)
 					end
 					child.isSkinned = true
 				end
 			end
 		end
 	end)
-	
+
 	-- bonus
 	AS:StripTextures(BonusRollFrame)
 	AS:CreateBackdrop(BonusRollFrame)

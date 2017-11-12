@@ -24,14 +24,14 @@ function AS:Blizzard_ChatBubbles()
 		frame:SetBackdropColor(.1, .1, .1, .8)
 
 		frame.text:SetFont(AS.Font, 14)
-		
+
 		tinsert(bubbles, frame)
 	end
 
 	local function IsChatBubble(frame)
 		if not frame:IsForbidden() then
 			for i = 1, frame:GetNumRegions() do
-				local region = select(i, frame:GetRegions()) 
+				local region = select(i, frame:GetRegions())
 				if region.GetTexture and region:GetTexture() and type(region:GetTexture() == "string") then
 					if strfind(strlower(region:GetTexture()), "chatbubble%-background") then
 						return true
@@ -44,7 +44,7 @@ function AS:Blizzard_ChatBubbles()
 
 	local LastUpdate = -2
 	local Children = 0
-	
+
 	WorldFrame:HookScript("OnUpdate", function(self, elapsed)
 		LastUpdate = LastUpdate + elapsed
 		if (LastUpdate < .1) then return end
@@ -59,10 +59,10 @@ function AS:Blizzard_ChatBubbles()
 					SkinChatBubble(frame)
 				end
 			end
-			numChildren = count
+			Children = Count
 		end
 
-		for i, frame in next, bubbles do
+		for _, frame in next, bubbles do
 			local r, g, b = frame.text:GetTextColor()
 			frame:SetBackdropBorderColor(r, g, b, .8)
 		end

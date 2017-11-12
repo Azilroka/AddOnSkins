@@ -72,7 +72,7 @@ function AS:Blizzard_Others()
 	AS:SkinButton(ReportCheatingDialogCancelButton)
 	AS:StripTextures(ReportCheatingDialogCommentFrame)
 	AS:SkinEditBox(ReportCheatingDialogCommentFrameEditBox)
-	
+
 	-- reskin popup buttons
 	for i = 1, 4 do
 		for j = 1, 3 do
@@ -96,16 +96,16 @@ function AS:Blizzard_Others()
 
 	-- -- reskin all esc/menu buttons
 	-- local BlizzardMenuButtons = {
-		-- "Options", 
-		-- "SoundOptions", 
-		-- "UIOptions", 
-		-- "Keybindings", 
+		-- "Options",
+		-- "SoundOptions",
+		-- "UIOptions",
+		-- "Keybindings",
 		-- "Macros",
 		-- "Ratings",
-		-- "AddOns", 
-		-- "Logout", 
-		-- "Quit", 
-		-- "Continue", 
+		-- "AddOns",
+		-- "Logout",
+		-- "Quit",
+		-- "Continue",
 		-- "MacOptions",
 		-- "Help",
 		-- "Store",
@@ -124,11 +124,11 @@ function AS:Blizzard_Others()
 
 	-- -- hide header textures and move text/buttons.
 	-- local BlizzardHeader = {
-		-- "GameMenuFrame", 
+		-- "GameMenuFrame",
 	-- }
 
 	-- for i = 1, getn(BlizzardHeader) do
-		-- local title = _G[BlizzardHeader[i].."Header"]			
+		-- local title = _G[BlizzardHeader[i].."Header"]
 		-- if title then
 			-- title:SetTexture("")
 			-- title:ClearAllPoints()
@@ -160,7 +160,7 @@ function AS:Blizzard_Others()
 	-- _G["ReadyCheckFrameNoButton"]:ClearAllPoints()
 	-- _G["ReadyCheckFrameYesButton"]:SetPoint("RIGHT", _G["ReadyCheckFrame"], "CENTER", -2, -20)
 	-- _G["ReadyCheckFrameNoButton"]:SetPoint("LEFT", _G["ReadyCheckFrameYesButton"], "RIGHT", 3, 0)
-	-- _G["ReadyCheckFrameText"]:SetParent(_G["ReadyCheckFrame"])	
+	-- _G["ReadyCheckFrameText"]:SetParent(_G["ReadyCheckFrame"])
 	-- _G["ReadyCheckFrameText"]:ClearAllPoints()
 	-- _G["ReadyCheckFrameText"]:SetPoint("TOP", 0, -12)
 
@@ -169,13 +169,13 @@ function AS:Blizzard_Others()
 	AS:SetTemplate(RolePollPopup, 'Default')
 	AS:CreateShadow(RolePollPopup)
 	AS:SkinCloseButton(RolePollPopupCloseButton)
-	
+
 	-- AS:StripTextures(BasicScriptErrors)
 	-- AS:SetTemplate(BasicScriptErrors)
 	-- AS:CreateShadow(BasicScriptErrors)
 	-- AS:SkinButton(BasicScriptErrorsButton)
 	-- BasicScriptErrors:SetScale(AS.UIScale)
-	
+
 	-- for i = 1, 4 do
 		-- local button = _G["StaticPopup"..i.."CloseButton"]
 		-- button:SetNormalTexture("")
@@ -184,36 +184,6 @@ function AS:Blizzard_Others()
 		-- button.SetPushedTexture = T.dummy
 		-- AS:SkinCloseButton(button)
 	-- end
-
-	-- -- mac option 
-	-- AS:StripTextures(MacOptionsFrame)
-	-- AS:SetTemplate(MacOptionsFrame)
-	-- AS:SkinButton(MacOptionsButtonCompress)
-	-- AS:SkinButton(MacOptionsButtonKeybindings)
-	-- AS:SkinButton(MacOptionsFrameDefaults)
-	-- AS:SkinButton(MacOptionsFrameOkay)
-	-- AS:SkinButton(MacOptionsFrameCancel)
-	-- AS:StripTextures(MacOptionsFrameMovieRecording)
-	-- AS:StripTextures(MacOptionsITunesRemote)
-	-- AS:StripTextures(MacOptionsFrameMisc)
-
-	-- AS:SkinDropDownBox(MacOptionsFrameResolutionDropDown)
-	-- AS:SkinDropDownBox(MacOptionsFrameFramerateDropDown)
-	-- AS:SkinDropDownBox(MacOptionsFrameCodecDropDown)
-	-- MacOptionsFrameQualitySlider:SkinSlideBar(10)
-
-	-- for i = 1, 11 do
-		-- local b = _G["MacOptionsFrameCheckButton"..i]
-		-- AS:SkinCheckBox(b)
-	-- end
-
-	-- MacOptionsButtonKeybindings:ClearAllPoints()
-	-- MacOptionsButtonKeybindings:SetPoint("LEFT", MacOptionsFrameDefaults, "RIGHT", 2, 0)
-	-- MacOptionsFrameOkay:ClearAllPoints()
-	-- MacOptionsFrameOkay:SetPoint("LEFT", MacOptionsButtonKeybindings, "RIGHT", 2, 0)
-	-- MacOptionsFrameCancel:ClearAllPoints()
-	-- MacOptionsFrameCancel:SetPoint("LEFT", MacOptionsFrameOkay, "RIGHT", 2, 0)
-	-- MacOptionsFrameCancel:SetWidth(MacOptionsFrameCancel:GetWidth() - 6)
 end
 
 AS:RegisterSkin('Blizzard_Others', AS.Blizzard_Others)

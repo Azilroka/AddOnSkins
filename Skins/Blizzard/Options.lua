@@ -8,18 +8,18 @@ function AS:Blizzard_BindingUI() -- ADDON_LOADED Blizzard_BindingUI
 		"KeyBindingFrameOkayButton",
 		"KeyBindingFrameCancelButton",
 	}
-	
+
 	for _, v in pairs(buttons) do
 		AS:StripTextures(_G[v])
 		AS:SkinButton(_G[v])
 	end
-	
+
 	AS:SkinCheckBox(KeyBindingFrameCharacterButton)
 	KeyBindingFrameHeaderText:ClearAllPoints()
 	KeyBindingFrameHeaderText:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
 	AS:StripTextures(KeyBindingFrame)
 	AS:SetTemplate(KeyBindingFrame, 'Default')
-	
+
 	for i = 1, KEY_BINDINGS_DISPLAYED  do
 		local button1 = _G["KeyBindingFrameBinding"..i.."Key1Button"]
 		local button2 = _G["KeyBindingFrameBinding"..i.."Key2Button"]
@@ -30,10 +30,10 @@ function AS:Blizzard_BindingUI() -- ADDON_LOADED Blizzard_BindingUI
 		AS:StyleButton(button2)
 		AS:SetTemplate(button2, 'Default', true)
 	end
-	
+
 	KeyBindingFrameUnbindButton:SetPoint("RIGHT", KeyBindingFrameOkayButton, "LEFT", -3, 0)
 	KeyBindingFrameOkayButton:SetPoint("RIGHT", KeyBindingFrameCancelButton, "LEFT", -3, 0)
-	
+
 	AS:SkinScrollBar(KeyBindingFrameScrollFrameScrollBar)
 end
 ]]
@@ -238,11 +238,11 @@ function AS:Blizzard_Options(event, addon)
 			CombatConfigMessageSourcesDoneTo,
 			CombatConfigColorsUnitColors,
 		}
-		
+
 		for _, Frame in pairs(ChatFrames) do
 			AS:SkinFrame(Frame)
 		end
-		
+
 		AS:StripTextures(ChatConfigChatSettingsClassColorLegend)
 		AS:StripTextures(ChatConfigChannelSettingsClassColorLegend)
 		AS:StripTextures(ChatConfigChatSettingsLeft)
@@ -251,14 +251,14 @@ function AS:Blizzard_Options(event, addon)
 		AS:StripTextures(ChatConfigOtherSettingsPVP)
 		AS:StripTextures(ChatConfigOtherSettingsSystem)
 		AS:StripTextures(ChatConfigOtherSettingsCreature)
-		
+
 		local Colors = {
 			CombatConfigColorsColorizeSpellNames,
 			CombatConfigColorsColorizeDamageNumber,
 			CombatConfigColorsColorizeDamageSchool,
 			CombatConfigColorsColorizeEntireLine,
 		}
-		
+
 		for _, Frame in pairs(Colors) do
 			local point, relativeTo, relativePoint, xOffset, yOffset = Frame:GetPoint()
 			Frame:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset - 2)
@@ -382,7 +382,7 @@ function AS:Blizzard_Options(event, addon)
 		AS:SkinEditBox(CombatConfigSettingsNameEditBox)
 
 		AS:SkinScrollBar(ChannelRosterScrollFrameScrollBar)
-		
+
 		-- Channel Pullout
 		ChannelPulloutBackground:Hide()
 		AS:SkinFrame(ChannelPullout)
@@ -418,11 +418,11 @@ function AS:Blizzard_Options(event, addon)
 
 		for _, Button in pairs(HelpButtons) do
 			AS:SkinButton(Button, true)
-			
+
 			if Button.text then
 				Button.text:ClearAllPoints()
 				Button.text:SetPoint("CENTER")
-				Button.text:SetJustifyH("CENTER")				
+				Button.text:SetJustifyH("CENTER")
 			end
 		end
 

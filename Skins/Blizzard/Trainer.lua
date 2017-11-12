@@ -65,7 +65,7 @@ function AS:Blizzard_Trainer(event, addon)
 		AS:SetTemplate(Button.icon.Backdrop)
 		Button.icon.Backdrop:SetBackdropColor(0, 0, 0, 0)
 		Button.icon.Backdrop:SetOutside(Button.icon)
-	
+
 		Button.selectedTex:SetTexture('')
 	end
 
@@ -80,15 +80,15 @@ function AS:Blizzard_Trainer(event, addon)
 
 		if ( ClassTrainerFrame.selectedService and selected == skillIndex ) then
 			ClassTrainerFrame.showDialog = nil
-			
+
 			if isProfession then
 				ClassTrainerFrame.showDialog = true
 				local _, prof2 = GetProfessions()
 				if prof2 then
 					unavailable = true
 				end
-			end 
-		
+			end
+
 			skillButton.Backdrop:SetBackdropBorderColor(0, 0.44, .87)
 			if ( serviceType == "available" and not unavailable) then
 				ClassTrainerTrainButton:Enable()

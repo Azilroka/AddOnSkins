@@ -6,15 +6,15 @@ function AS:Blizzard_Archaeology(event, addon)
 	AS:SkinFrame(ArchaeologyFrame, nil, nil, true)
 	AS:StripTextures(ArchaeologyFrameInset, true)
 	AS:CreateShadow(ArchaeologyFrame)
-	
+
 	AS:SkinButton(ArchaeologyFrameArtifactPageSolveFrameSolveButton, true)
 	AS:SkinDropDownBox(ArchaeologyFrameRaceFilter, 125)
-	
+
 	AS:SkinStatusBar(ArchaeologyFrameRankBar)
-	
+
 	AS:SkinStatusBar(ArchaeologyFrameArtifactPageSolveFrameStatusBar)
 	ArchaeologyFrameArtifactPageSolveFrameStatusBar:SetStatusBarColor(0.7, 0.2, 0)
-	
+
 	for i = 1, ARCHAEOLOGY_MAX_RACES do
 		local frame = _G["ArchaeologyFrameSummaryPageRace"..i]
 		frame.raceName:SetTextColor(1, 1, 1)
@@ -42,12 +42,12 @@ function AS:Blizzard_Archaeology(event, addon)
 	ArchaeologyFrameHelpPageTitle:SetTextColor(1, 1, 0)
 	ArchaeologyFrameHelpPageDigTitle:SetTextColor(1, 1, 0)
 	ArchaeologyFrameHelpPageHelpScrollHelpText:SetTextColor(1, 1, 1)
-	
+
 	ArchaeologyFrameArtifactPageHistoryTitle:SetTextColor(1, 1, 0)
 	AS:SkinTexture(ArchaeologyFrameArtifactPageIcon)
 	AS:CreateBackdrop(ArchaeologyFrameArtifactPage)
 	ArchaeologyFrameArtifactPage.Backdrop:SetOutside(ArchaeologyFrameArtifactPageIcon)
-	
+
 	ArchaeologyFrameArtifactPageHistoryScrollChildText:SetTextColor(1, 1, 1)
 	AS:SkinCloseButton(ArchaeologyFrameCloseButton)
 	AS:SkinNextPrevButton(ArchaeologyFrameCompletedPagePrevPageButton)

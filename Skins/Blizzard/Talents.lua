@@ -251,7 +251,7 @@ function AS:Blizzard_Talent(event, addon)
 		hooksecurefunc('PlayerTalentFrame_UpdateTabs', function()
 			PlayerSpecTab1:SetPoint('TOPLEFT', PlayerTalentFrame, 'TOPRIGHT', 1, -36)
 		end)
-		
+
 		AS:SkinFrame(TalentMicroButtonAlert)
 		TalentMicroButtonAlert:SetBackdropBorderColor(1, 1, 0)
 		AS:CreateShadow(TalentMicroButtonAlert)

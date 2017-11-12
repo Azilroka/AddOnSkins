@@ -147,7 +147,7 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinCheckBox(GuildRecruitmentTankButton:GetChildren())
 		AS:SkinCheckBox(GuildRecruitmentHealerButton:GetChildren())
 		AS:SkinCheckBox(GuildRecruitmentDamagerButton:GetChildren())
-		
+
 		for i = 1, 5 do
 			AS:SkinTab(_G["GuildFrameTab"..i])
 		end
@@ -284,7 +284,7 @@ function AS:Blizzard_Guild(event, addon)
 					rankFrame.nameBox.Backdrop:SetPoint("TOPLEFT", -2, -4)
 					rankFrame.nameBox.Backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
 				end
-			end				
+			end
 		end
 		hooksecurefunc("GuildControlUI_RankOrder_Update", SkinGuildRanks)
 
@@ -305,14 +305,14 @@ function AS:Blizzard_Guild(event, addon)
 		end
 
 		AS:SkinButton(GuildControlUIRankOrderFrameNewButton)
-		
+
 		AS:SkinEditBox(GuildControlUIRankSettingsFrameGoldBox)
 		GuildControlUIRankSettingsFrameGoldBox.Backdrop:SetPoint("TOPLEFT", -2, -4)
 		GuildControlUIRankSettingsFrameGoldBox.Backdrop:SetPoint("BOTTOMRIGHT", 2, 4)
 		AS:StripTextures(GuildControlUIRankSettingsFrameGoldBox)
-		
+
 		AS:StripTextures(GuildControlUIRankBankFrame)
-		
+
 		hooksecurefunc("GuildControlUI_BankTabPermissions_Update", function()
 			local numTabs = GetNumGuildBankTabs()
 			if numTabs < MAX_BUY_GUILDBANK_TABS then

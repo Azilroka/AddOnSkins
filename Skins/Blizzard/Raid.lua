@@ -21,7 +21,7 @@ function AS:Blizzard_RaidUI(event, addon)
 				AS:StripTextures(_G["RaidGroup"..i.."Slot"..j])
 			end
 		end
-		
+
 		for i = 1, 40 do
 			AS:SkinFrame(_G["RaidGroupButton"..i], 'Default')
 		end

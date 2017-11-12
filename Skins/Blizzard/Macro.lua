@@ -32,11 +32,11 @@ function AS:Blizzard_MacroUI(event, addon)
 			MacroSaveButton,
 			MacroCancelButton,
 		}
-		
+
 		for _, Button in pairs(Buttons) do
 			AS:SkinButton(Button, true)
 		end
-		
+
 		for i = 1, 2 do
 			AS:SkinButton(_G['MacroFrameTab'..i], true)
 			_G['MacroFrameTab'..i]:Height(22)
@@ -60,7 +60,7 @@ function AS:Blizzard_MacroUI(event, addon)
 		MacroFrameTextBackground.Backdrop:SetPoint('TOPLEFT', 6, -3)
 		MacroFrameTextBackground.Backdrop:SetPoint('BOTTOMRIGHT', 0, 1)
 		AS:StripTextures(MacroPopupScrollFrame)
-		
+
 		MacroEditButton:ClearAllPoints()
 		MacroEditButton:SetPoint("BOTTOMLEFT", MacroFrameSelectedMacroButton, "BOTTOMRIGHT", 10, 0)
 

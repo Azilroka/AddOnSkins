@@ -28,7 +28,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	BrowseNextPageButton:SetSize(20, 20)
 	BrowseNextPageButton:SetPoint('TOPRIGHT', "$parent", "TOPRIGHT", 67, -60)
 	BrowseBuyoutButton:SetPoint("RIGHT", BrowseCloseButton, "LEFT", -4, 0)
-	BrowseBidButton:SetPoint("RIGHT", BrowseBuyoutButton, "LEFT", -4, 0)		
+	BrowseBidButton:SetPoint("RIGHT", BrowseBuyoutButton, "LEFT", -4, 0)
 	AS:SkinEditBox(BrowseName)
 	AS:SkinEditBox(BrowseMinLevel)
 	AS:SkinEditBox(BrowseMaxLevel)
@@ -242,7 +242,7 @@ function AS:Blizzard_AuctionHouse(event, addon)
 		Button:GetHighlightTexture():SetPoint("BOTTOMRIGHT", Button, "BOTTOMRIGHT", -2, 5)
 		Button:GetPushedTexture():SetAllPoints(Button:GetHighlightTexture())
 	end
-	
+
 	for i = 1, NUM_BIDS_TO_DISPLAY do
 		local Button = _G["BidButton"..i]
 		local Icon = _G["BidButton"..i.."Item"]
@@ -330,7 +330,7 @@ function AS:Blizzard_BlackMarket(event, addon)
 	for _, Tab in pairs(Tabs) do
 		AS:SkinTab(BlackMarketFrame[Tab])
 		BlackMarketFrame[Tab].Backdrop:SetPoint("TOPLEFT", BlackMarketFrame[Tab], 3, 0)
-		BlackMarketFrame[Tab].Backdrop:SetPoint("BOTTOMRIGHT", BlackMarketFrame[Tab], -3, 0)	
+		BlackMarketFrame[Tab].Backdrop:SetPoint("BOTTOMRIGHT", BlackMarketFrame[Tab], -3, 0)
 	end
 
 	hooksecurefunc("BlackMarketScrollFrame_Update", function()

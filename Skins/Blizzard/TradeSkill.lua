@@ -54,7 +54,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 				local Button = TradeSkillFrame.DetailsFrame.Contents.Reagents[i]
 				local Icon = Button.Icon
 				local Count = Button.Count
-				
+
 				Icon:SetTexCoord(unpack(AS.TexCoords))
 				Icon:SetDrawLayer("OVERLAY")
 				if not Icon.Backdrop then
@@ -63,11 +63,11 @@ function AS:Blizzard_TradeSkill(event, addon)
 					Icon.Backdrop:SetTemplate("Default")
 					Icon.Backdrop:SetOutside(Icon)
 				end
-				
+
 				Icon:SetParent(Icon.Backdrop)
 				Count:SetParent(Icon.Backdrop)
 				Count:SetDrawLayer("OVERLAY")
-				
+
 				Button.NameFrame:Kill()
 			end
 		end)

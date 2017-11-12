@@ -7,7 +7,7 @@ function AS:Blizzard_Merchant()
 	AS:StripTextures(MerchantMoneyBg)
 	AS:StripTextures(MerchantMoneyInset)
 	AS:SkinDropDownBox(MerchantFrameLootFilter)
-	
+
 	AS:StripTextures(MerchantExtraCurrencyBg)
 	AS:StripTextures(MerchantExtraCurrencyInset)
 

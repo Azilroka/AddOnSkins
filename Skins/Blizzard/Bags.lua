@@ -164,7 +164,7 @@ function AS:Blizzard_Bags()
 
 	AS:SkinButton(BankFramePurchaseButton)
 	BankFramePurchaseButton:SetHeight(22)
-	
+
 	BankItemSearchBox:SetSize(159, 16)
 	AS:SkinEditBox(BankItemSearchBox)
 

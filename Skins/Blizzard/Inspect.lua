@@ -23,7 +23,7 @@ function AS:Blizzard_Inspect(event, addon)
 	InspectModelFrameBorderBottom2:SetTexture('')
 	InspectModelFrameBackgroundOverlay:SetTexture('')
 	AS:SkinBackdropFrame(InspectModelFrame, nil, true)
-	
+
 	local Slots = {
 		'Head',
 		'Neck',

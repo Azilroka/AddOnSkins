@@ -21,7 +21,7 @@ function AS:Blizzard_ItemSocketing(event, addon)
 		for i = 1, GetNumSockets() do
 			local color = GEM_TYPE_INFO[GetSocketTypes(i)]
 			_G["ItemSocketingSocket"..i]:SetBackdropColor(color.r, color.g, color.b, 0.15)
-			_G["ItemSocketingSocket"..i]:SetBackdropBorderColor(color.r, color.g, color.b)			
+			_G["ItemSocketingSocket"..i]:SetBackdropBorderColor(color.r, color.g, color.b)
 		end
 	end)
 

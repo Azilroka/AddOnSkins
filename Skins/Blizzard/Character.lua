@@ -28,7 +28,7 @@ function AS:Blizzard_CharacterFrame()
 		CharacterMainHandSlot,
 		CharacterSecondaryHandSlot,
 	}
-	
+
 	for _, Slot in pairs(CharacterSlots) do
 		AS:SkinTexture(Slot.icon)
 		AS:SkinFrame(Slot)
@@ -200,7 +200,7 @@ function AS:Blizzard_CharacterFrame()
 
 	--Titles
 	PaperDollTitlesPane:HookScript('OnShow', function(self)
-		for x, object in pairs(PaperDollTitlesPane.buttons) do
+		for _, object in pairs(PaperDollTitlesPane.buttons) do
 			if not object.isStyled then
 				object.BgTop:SetTexture(nil)
 				object.BgBottom:SetTexture(nil)
@@ -271,8 +271,8 @@ function AS:Blizzard_CharacterFrame()
 		tab.Backdrop:SetPoint("BOTTOMRIGHT", 1, -2)
 
 		if i == 1 then
-			for i = 1, tab:GetNumRegions() do
-				local region = select(i, tab:GetRegions())
+			for j = 1, tab:GetNumRegions() do
+				local region = select(j, tab:GetRegions())
 				region:SetTexCoord(0.16, 0.86, 0.16, 0.86)
 				region.SetTexCoord = AS.Noop
 			end
@@ -350,7 +350,7 @@ function AS:Blizzard_CharacterFrame()
 	AS:SkinCloseButton(TokenFramePopupCloseButton)
 	AS:SkinCheckBox(TokenFramePopupInactiveCheckBox)
 	AS:SkinCheckBox(TokenFramePopupBackpackCheckBox)
-	TokenFramePopup:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)				
+	TokenFramePopup:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)
 	hooksecurefunc('TokenFrame_Update', function()
 		for i = 1, GetCurrencyListSize() do
 			local button = _G["TokenFrameContainerButton"..i]

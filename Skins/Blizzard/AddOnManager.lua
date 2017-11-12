@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_AddonManager()
 	AS:SkinFrame(AddonList)
 
-	AS:StripTextures(AddonListInset)	
+	AS:StripTextures(AddonListInset)
 
 	AS:SkinBackdropFrame(AddonListScrollFrame)
 	AddonListScrollFrame.Backdrop:SetPoint('TOPLEFT', -14, 0)

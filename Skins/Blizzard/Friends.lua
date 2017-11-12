@@ -66,7 +66,7 @@ function AS:Blizzard_Friends()
 	FriendsTabHeaderRecruitAFriendButtonIcon:SetDrawLayer("OVERLAY")
 	AS:SkinTexture(FriendsTabHeaderRecruitAFriendButtonIcon)
 	FriendsTabHeaderRecruitAFriendButtonIcon:SetInside()
-	
+
 	AS:SkinFrame(RecruitAFriendFrame)
 	AS:SkinEditBox(RecruitAFriendNameEditBox)
 	AS:SkinButton(RecruitAFriendFrameSendButton)
@@ -115,8 +115,8 @@ function AS:Blizzard_Friends()
 	AS:SkinScrollBar(ChannelRosterScrollFrameScrollBar)
 	AS:SkinFrame(ChannelFrameDaughterFrame)
 	AS:SkinEditBox(ChannelFrameDaughterFrameChannelName)
-	AS:SkinEditBox(ChannelFrameDaughterFrameChannelPassword)			
-	
+	AS:SkinEditBox(ChannelFrameDaughterFrameChannelPassword)
+
 	AS:SkinCloseButton(ChannelFrameDaughterFrameDetailCloseButton)
 	AS:SkinDropDownBox(WhoFrameDropDown, 150)
 
@@ -137,7 +137,7 @@ function AS:Blizzard_Friends()
 			if button then
 				AS:StripTextures(button)
 				button:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
-				
+
 				_G["ChannelButton"..i.."Text"]:SetFont(AS.Font, 12)
 			end
 		end

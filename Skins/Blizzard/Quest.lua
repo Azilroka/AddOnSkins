@@ -77,7 +77,7 @@ function AS:Blizzard_Quest()
 			RewardButton.Icon.Backdrop:SetOutside(RewardButton.Icon)
 			RewardButton.Icon.Backdrop:SetScript('OnUpdate', function(self)
 				if RewardButton:GetID() == 0 then return end
-				local quality = 0
+				local quality
 				if (QuestInfoFrame.questLog) then
 					quality = select(4, GetQuestLogChoiceInfo(RewardButton:GetID()))
 				else
@@ -122,14 +122,14 @@ function AS:Blizzard_Quest()
 	AS:SkinCloseButton(QuestLogPopupDetailFrameCloseButton)
 
 	AS:StripTextures(QuestLogPopupDetailFrame.ShowMapButton)
- 	AS:SkinButton(QuestLogPopupDetailFrame.ShowMapButton)
- 	QuestLogPopupDetailFrame.ShowMapButton.Text:ClearAllPoints()
- 	QuestLogPopupDetailFrame.ShowMapButton.Text:SetPoint("CENTER", AS.Mult, 0)
- 	QuestLogPopupDetailFrame.ShowMapButton:SetSize(QuestLogPopupDetailFrame.ShowMapButton:GetWidth() - 30, QuestLogPopupDetailFrame.ShowMapButton:GetHeight() - 5)
+	AS:SkinButton(QuestLogPopupDetailFrame.ShowMapButton)
+	QuestLogPopupDetailFrame.ShowMapButton.Text:ClearAllPoints()
+	QuestLogPopupDetailFrame.ShowMapButton.Text:SetPoint("CENTER", AS.Mult, 0)
+	QuestLogPopupDetailFrame.ShowMapButton:SetSize(QuestLogPopupDetailFrame.ShowMapButton:GetWidth() - 30, QuestLogPopupDetailFrame.ShowMapButton:GetHeight() - 5)
 
 	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(parentFrame, portrait, text, name, x, y)
 		QuestNPCModel:ClearAllPoints()
-		QuestNPCModel:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x + 18, y)			
+		QuestNPCModel:SetPoint("TOPLEFT", parentFrame, "TOPRIGHT", x + 18, y)
 	end)
 
 	if AS.ParchmentEnabled then
