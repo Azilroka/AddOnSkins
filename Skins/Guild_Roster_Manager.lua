@@ -48,6 +48,11 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_DateSubmitCancelButton)
 	AS:SkinButton(GRM_AddAltButton)
 	AS:SkinButton(GRM_GroupInviteButton)
+	AS:SkinFrame(GRM_AddAltEditFrame)
+
+	GRM_AddAltEditBox:HookScript("OnShow", function()
+		AS:SkinEditBox(GRM_AddAltEditBox, 120, 15)
+	end)
 
 	GRM_PlayerNoteWindow:HookScript("OnShow", function()
 		AS:SkinFrame(GRM_PlayerNoteWindow)
