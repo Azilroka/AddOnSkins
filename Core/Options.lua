@@ -530,7 +530,6 @@ function AS:GetOptions()
 
 	Options.args.profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(AS.data)
 	Options.args.profiles.order = -2
-	LibStub('AceConfigRegistry-3.0'):RegisterOptionsTable('AddOnSkinsProfiles', Options.args.profiles)
 
 	if AS.EP then
 		local Ace3OptionsPanel = IsAddOnLoaded('ElvUI') and ElvUI[1] or Enhanced_Config
