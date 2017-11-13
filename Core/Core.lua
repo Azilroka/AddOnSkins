@@ -6,9 +6,9 @@ local AcceptFrame
 
 local select, pairs, ipairs, type, pcall = select, pairs, ipairs, type, pcall
 local floor, print, format, strlower, strfind, strmatch = floor, print, format, strlower, strfind, strmatch
-local sort, tinsert, tonumber = sort, tinsert, tonumber
+local sort, tinsert = sort, tinsert
 local _G = _G
-local IsAddOnLoaded, GetAddOnMetadata, C_Timer = IsAddOnLoaded, GetAddOnMetadata, C_Timer
+local IsAddOnLoaded, C_Timer = IsAddOnLoaded, C_Timer
 
 function AS:CheckOption(optionName, ...)
 	for i = 1, select('#', ...) do
@@ -213,18 +213,6 @@ function AS:StartSkinning(event)
 	if AS.FoundError then
 		AS:Print(format('%s: Please report this to Azilroka immediately @ %s', AS.Version, AS:PrintURL(AS.TicketTracker)))
 	end
-end
-
-function AS:UpdateMedia()
-	AS.Blank = AS.LSM:Fetch('background', "Solid")
-	AS.Font = AS.LSM:Fetch('font', "Arial Narrow")
-	AS.ActionBarFont = AS.LSM:Fetch('font', "Arial Narrow")
-	AS.PixelFont = AS.LSM:Fetch('font', "Arial Narrow")
-	AS.NormTex = AS.LSM:Fetch('statusbar', "Blizzard Character Skills Bar")
-	AS.BackdropColor = { 0, 0, 0 }
-	AS.BorderColor = { 1, 1, 1 }
-	AS.PixelPerfect = false
-	AS.HideShadows = false
 end
 
 function AS:Init(event, addon)

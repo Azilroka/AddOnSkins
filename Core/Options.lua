@@ -537,12 +537,4 @@ function AS:GetOptions()
 		local Ace3OptionsPanel = IsAddOnLoaded('ElvUI') and ElvUI[1] or Enhanced_Config
 		Ace3OptionsPanel.Options.args.addonskins = Options
 	end
-
-	ACR:RegisterOptionsTable('AddOnSkins', Options)
-	ACD:AddToBlizOptions('AddOnSkins', 'AddOnSkins', nil, 'addons')
-	for k, v in AS:OrderedPairs(Options.args) do
-		if k ~= 'addons' then
-			ACD:AddToBlizOptions('AddOnSkins', v.name, 'AddOnSkins', k)
-		end
-	end
 end

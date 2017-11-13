@@ -1,5 +1,4 @@
 <Ui>
-	<Include file="Libs\Load_Libs.xml"/>
 	<Script file="Init.lua"/>
 	<Include file="Locale\Load_Locale.xml"/>
 	<Include file="Core\Load_Core.xml"/>

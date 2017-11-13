@@ -13,11 +13,10 @@ AS['SkadaWindows'] = {}
 function AS:EmbedSkadaWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 	if not window then return end
 	local barmod = _G.Skada.displays['bar']
-	local offsety = ofsy
 	if window.db.reversegrowth then
-		offsety = 2
+		ofsy = 2
 	else
-		offsety = 2 + (window.db.enabletitle and window.db.title.height or 0)
+		ofsy = 2 + (window.db.enabletitle and window.db.title.height or 0)
 	end
 	window.db.barwidth = width - 4
 	window.db.background.height = height - (window.db.enabletitle and window.db.title.height or 0) - (AS.PixelMode and 4 or 5)
@@ -30,7 +29,7 @@ function AS:EmbedSkadaWindow(window, width, height, point, relativeFrame, relati
 	window.bargroup:ClearAllPoints()
 	window.bargroup.ClearAllPoints = function() end
 	window.bargroup.SetPoint = nil
-	window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -offsety)
+	window.bargroup:SetPoint(point, relativeFrame, relativePoint, ofsx, -ofsy)
 	window.bargroup.SetPoint = function() end
 	window.bargroup:SetParent(relativeFrame)
 	window.bargroup:SetFrameLevel(relativeFrame:GetFrameLevel())

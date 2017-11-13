@@ -1,7 +1,7 @@
 local AS, ASL = unpack(AddOnSkins)
 if not AS:CheckAddOn('Tukui') then return end
 
-local select, floor = select, floor
+local floor = floor
 local IsAddOnLoaded = IsAddOnLoaded
 local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
 local CreateFrame = CreateFrame
@@ -65,20 +65,20 @@ function AS:EmbedSystem_WindowResize()
 		else
 			FramePoint, OffsetY = 'TOPLEFT', 0
 		end
-		EmbedSystem_MainWindow:SetPoint('TOPLEFT', ChatTab, FramePoint, 0, OffsetY)
-		EmbedSystem_MainWindow:SetPoint('BOTTOMRIGHT', ChatPanel, 'TOPRIGHT', 0, 0)
+		_G.EmbedSystem_MainWindow:SetPoint('TOPLEFT', ChatTab, FramePoint, 0, OffsetY)
+		_G.EmbedSystem_MainWindow:SetPoint('BOTTOMRIGHT', ChatPanel, 'TOPRIGHT', 0, 0)
 	else
-		EmbedSystem_MainWindow:SetPoint('BOTTOM', ChatPanel, 'TOP', 0, 2)
-		EmbedSystem_MainWindow:SetSize(ChatPanel:GetWidth(), 142)
+		_G.EmbedSystem_MainWindow:SetPoint('BOTTOM', ChatPanel, 'TOP', 0, 2)
+		_G.EmbedSystem_MainWindow:SetSize(ChatPanel:GetWidth(), 142)
 	end
-	EmbedSystem_LeftWindow:SetPoint('RIGHT', EmbedSystem_RightWindow, 'LEFT', -2, 0)
-	EmbedSystem_RightWindow:SetPoint('RIGHT', EmbedSystem_MainWindow, 'RIGHT', 0, 0)
-	EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth') - 1, EmbedSystem_MainWindow:GetHeight())
-	EmbedSystem_RightWindow:SetSize((EmbedSystem_MainWindow:GetWidth() - AS:CheckOption('EmbedLeftWidth')) - 1, EmbedSystem_MainWindow:GetHeight())
+	_G.EmbedSystem_LeftWindow:SetPoint('RIGHT', _G.EmbedSystem_RightWindow, 'LEFT', -2, 0)
+	_G.EmbedSystem_RightWindow:SetPoint('RIGHT', _G.EmbedSystem_MainWindow, 'RIGHT', 0, 0)
+	_G.EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth') - 1, _G.EmbedSystem_MainWindow:GetHeight())
+	_G.EmbedSystem_RightWindow:SetSize((_G.EmbedSystem_MainWindow:GetWidth() - AS:CheckOption('EmbedLeftWidth')) - 1, _G.EmbedSystem_MainWindow:GetHeight())
 
-	if Enhanced_Config and Enhanced_Config.Options.args.addonskins then
-		Enhanced_Config.Options.args.addonskins.args.embed.args.EmbedLeftWidth.min = floor(EmbedSystem_MainWindow:GetWidth() * .25)
-		Enhanced_Config.Options.args.addonskins.args.embed.args.EmbedLeftWidth.max = floor(EmbedSystem_MainWindow:GetWidth() * .75)
+	if _G.Enhanced_Config and _G.Enhanced_Config.Options.args.addonskins then
+		_G.Enhanced_Config.Options.args.addonskins.args.embed.args.EmbedLeftWidth.min = floor(_G.EmbedSystem_MainWindow:GetWidth() * .25)
+		_G.Enhanced_Config.Options.args.addonskins.args.embed.args.EmbedLeftWidth.max = floor(_G.EmbedSystem_MainWindow:GetWidth() * .75)
 	end
 end
 

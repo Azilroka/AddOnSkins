@@ -1,14 +1,20 @@
-local AS, ASL = unpack(AddOnSkins)
+local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('ElvUI') then return end
 
 local E, L = unpack(ElvUI)
-local pairs, unpack, floor = pairs, unpack, floor
+local _G = _G
+local floor = floor
 local hooksecurefunc = hooksecurefunc
 local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
 local IsAddOnLoaded = IsAddOnLoaded
 local UnitAffectingCombat = UnitAffectingCombat
+local RightChatToggleButton, LeftChatToggleButton, RightChatPanel, LeftChatPanel, RightChatTab, LeftChatTab, RightChatDataPanel
+local EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow
 
 function AS:EmbedSystemHooks()
+	RightChatToggleButton, LeftChatToggleButton, RightChatPanel, LeftChatPanel, RightChatTab, LeftChatTab, RightChatDataPanel = _G.RightChatToggleButton, _G.LeftChatToggleButton, _G.RightChatPanel, _G.LeftChatPanel, _G.RightChatTab, _G.LeftChatTab, _G.RightChatDataPanel
+	EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow = _G.EmbedSystem_MainWindow, _G.EmbedSystem_LeftWindow, _G.EmbedSystem_RightWindow
+
 	hooksecurefunc(E:GetModule('Chat'), 'PositionChat', function(self, override)
 		if override then
 			AS:Embed_Check()
@@ -46,7 +52,7 @@ function AS:EmbedSystemHooks()
 			end
 		end)
 
-		RightChatToggleButton:HookScript('OnEnter', function(self, ...)
+		RightChatToggleButton:HookScript('OnEnter', function(self)
 			if AS:CheckOption('EmbedRightChat') then
 				GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
 				GameTooltip:Show()
@@ -82,7 +88,7 @@ function AS:EmbedSystemHooks()
 			end
 		end)
 
-		LeftChatToggleButton:HookScript('OnEnter', function(self, ...)
+		LeftChatToggleButton:HookScript('OnEnter', function(self)
 			if not AS:CheckOption('EmbedRightChat') then
 				GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
 				GameTooltip:Show()
@@ -116,7 +122,7 @@ function AS:EmbedSystem_WindowResize()
 	EmbedSystem_MainWindow:ClearAllPoints()
 	EmbedSystem_MainWindow:SetPoint('BOTTOMLEFT', ChatData, TopRight, 0, yOffset)
 	EmbedSystem_MainWindow:SetPoint('TOPRIGHT', ChatTab, AS:CheckOption('EmbedBelowTop') and 'BOTTOMRIGHT' or 'TOPRIGHT', 0, AS:CheckOption('EmbedBelowTop') and -1 or 0)
-	
+
 	EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth'), EmbedSystem_MainWindow:GetHeight())
 	EmbedSystem_RightWindow:SetSize((EmbedSystem_MainWindow:GetWidth() - AS:CheckOption('EmbedLeftWidth')) - 1, EmbedSystem_MainWindow:GetHeight())
 

@@ -499,7 +499,7 @@ function AS:SkinScrollBar(Frame)
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self.Text:SetTextColor(1, 1, 1)
 			end)
-		end	
+		end
 
 		if not ScrollDownButton.Text then
 			ScrollDownButton.Text = ScrollDownButton:CreateFontString(nil, "OVERLAY")
