@@ -70,28 +70,18 @@ end
 
 function AS:Embed_Show()
 	EmbedSystem_MainWindow:Show()
-	if AS:CheckOption('EmbedSystem') then
-		if _G[EmbedSystem_MainWindow.FrameName] then _G[EmbedSystem_MainWindow.FrameName]:Show() end
-	end
 	if AS:CheckOption('EmbedSystemDual') then
 		EmbedSystem_LeftWindow:Show()
 		EmbedSystem_RightWindow:Show()
-		if _G[EmbedSystem_LeftWindow.FrameName] then _G[EmbedSystem_LeftWindow.FrameName]:Show() end
-		if _G[EmbedSystem_RightWindow.FrameName] then _G[EmbedSystem_RightWindow.FrameName]:Show() end
 	end
 	AS:ToggleChatFrame(true)
 end
 
 function AS:Embed_Hide()
 	EmbedSystem_MainWindow:Hide()
-	if AS:CheckOption('EmbedSystem') then
-		if _G[EmbedSystem_MainWindow.FrameName] then _G[EmbedSystem_MainWindow.FrameName]:Hide() end
-	end
 	if AS:CheckOption('EmbedSystemDual') then
 		EmbedSystem_LeftWindow:Hide()
 		EmbedSystem_RightWindow:Hide()
-		if _G[EmbedSystem_LeftWindow.FrameName] then _G[EmbedSystem_LeftWindow.FrameName]:Hide() end
-		if _G[EmbedSystem_RightWindow.FrameName] then _G[EmbedSystem_RightWindow.FrameName]:Hide() end
 	end
 	AS:ToggleChatFrame(false)
 end
@@ -111,7 +101,7 @@ function AS:Embed_Check(Message)
 		AS:EmbedInit()
 		Message = true
 	end
-	AS:Embed_Toggle(Message)
+
 	AS:EmbedSystem_WindowResize()
 
 	for _, Window in pairs({EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow}) do
@@ -126,52 +116,7 @@ function AS:Embed_Check(Message)
 	if AS:CheckEmbed('Recount') then AS:Embed_Recount() end
 	if AS:CheckEmbed('alDamageMeter') then AS:Embed_alDamageMeter() end
 	if AS:CheckOption('EmbedCoolLine', 'CoolLine') then AS:Embed_CoolLine() end
-end
 
-function AS:Embed_Toggle(Message)
-	local MainEmbed, LeftEmbed, RightEmbed
-	EmbedSystem_MainWindow.FrameName = nil
-	EmbedSystem_LeftWindow.FrameName = nil
-	EmbedSystem_RightWindow.FrameName = nil
-	if AS:CheckOption('EmbedSystem') then
-		MainEmbed = strlower(AS:CheckOption('EmbedMain'))
-		if MainEmbed ~= 'details' and MainEmbed ~= 'skada' and MainEmbed ~= 'omen' and MainEmbed ~= 'recount' and MainEmbed ~= 'tinydps' and MainEmbed ~= 'aldamagemeter' then
-			EmbedSystem_MainWindow.FrameName = AS:CheckOption('EmbedMain')
-		end
-	end
-	if AS:CheckOption('EmbedSystemDual') then
-		LeftEmbed, RightEmbed = strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight'))
-		if LeftEmbed ~= 'details' and LeftEmbed ~= 'skada' and LeftEmbed ~= 'omen' and LeftEmbed ~= 'recount' and LeftEmbed ~= 'tinydps' and LeftEmbed ~= 'aldamagemeter' then
-			EmbedSystem_LeftWindow.FrameName = AS:CheckOption('EmbedLeft')
-		end
-		if RightEmbed ~= 'details' and RightEmbed ~= 'skada' and RightEmbed ~= 'omen' and RightEmbed ~= 'recount' and RightEmbed ~= 'tinydps' and RightEmbed ~= 'aldamagemeter' then
-			EmbedSystem_RightWindow.FrameName = AS:CheckOption('EmbedRight')
-		end
-	end
-	if EmbedSystem_MainWindow.FrameName ~= nil then
-		local Frame = _G[EmbedSystem_MainWindow.FrameName]
-		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
-			Frame:ClearAllPoints()
-			Frame:SetParent(EmbedSystem_MainWindow)
-			Frame:SetInside(EmbedSystem_MainWindow, 0, 0)
-		end
-	end
-	if EmbedSystem_LeftWindow.FrameName ~= nil then
-		local Frame = _G[EmbedSystem_LeftWindow.FrameName]
-		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
-			Frame:ClearAllPoints()
-			Frame:SetParent(EmbedSystem_LeftWindow)
-			Frame:SetInside(EmbedSystem_LeftWindow, 0, 0)
-		end
-	end
-	if EmbedSystem_RightWindow.FrameName ~= nil then
-		local Frame = _G[EmbedSystem_RightWindow.FrameName]
-		if Frame and Frame:IsObjectType('Frame') and not Frame:IsProtected() then
-			Frame:ClearAllPoints()
-			Frame:SetParent(EmbedSystem_RightWindow)
-			Frame:SetInside(EmbedSystem_RightWindow, 0, 0)
-		end
-	end
 	if Message and AS:CheckOption('EmbedSystemMessage') then
 		Message = format("Main: '%s'", AS:CheckOption('EmbedMain'))
 		if AS:CheckOption('EmbedSystemDual') then Message = format("Left: '%s' | Right: '%s'", AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight')) end
