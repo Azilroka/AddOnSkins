@@ -147,6 +147,8 @@ function AS:Auctionator(event)
 		AS:SkinFrame(Atr_CheckActives_Frame, 'Default')
 
 		AS:SkinScrollBar(Atr_Hlist_ScrollFrameScrollBar)
+		Atr_Hlist_ScrollFrameScrollBar:SetPoint("TOPLEFT", Atr_Hlist_ScrollFrame, "TOPRIGHT", 4, -13)
+		Atr_Hlist_ScrollFrameScrollBar:SetPoint("BOTTOMLEFT", Atr_Hlist_ScrollFrame, "BOTTOMRIGHT", 4, 31)
 
 		Atr_FullScanButton:ClearAllPoints()
 		Atr_FullScanButton:SetPoint('TOPRIGHT', Auctionator1Button, 'BOTTOMRIGHT', 0, -2)
@@ -154,9 +156,23 @@ function AS:Auctionator(event)
 
 		Atr_HeadingsBar:SetHeight(19)
 
-		Atr_Hlist:SetWidth(196)
+		Atr_Hlist:CreateBackdrop("Overlay")
+		Atr_Hlist.backdrop:SetPoint("TOPLEFT", -2, 0)
+		Atr_Hlist.backdrop:SetPoint("BOTTOMRIGHT", 0, 2)
+		Atr_Hlist:SetWidth(195)
 		Atr_Hlist:ClearAllPoints()
 		Atr_Hlist:SetPoint('TOPLEFT', -195, -75)
+
+		hooksecurefunc("AuctionFrameTab_OnClick", function(self, button, down, index)
+			local index = self:GetID()
+			if index == 4 then
+				Atr_Hlist:SetPoint("TOPLEFT", -193, -67)
+			else
+				Atr_Hlist:SetHeight (337)
+				Atr_Hlist_ScrollFrame:SetHeight (337)
+				Atr_Hlist:SetPoint("TOPLEFT", -193, -75)
+			end
+		end)
 
 		Atr_SrchSListButton:SetWidth(196)
 		Atr_MngSListsButton:SetWidth(196)
