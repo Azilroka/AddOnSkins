@@ -68,7 +68,7 @@ function AS:Blizzard_EncounterJournal(event, addon)
 
 	local function SkinDungeons()
 		local b1 = EncounterJournalInstanceSelectScrollFrameScrollChildInstanceButton1
-		if b1 and not b1.isSkinned then 
+		if b1 and not b1.isSkinned then
 			AS:SkinButton(b1)
 			b1.bgImage:SetInside()
 			b1.bgImage:SetTexCoord(.08, .6, .08, .6)

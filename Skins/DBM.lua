@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-if not (AS:CheckAddOn('DBM-Core') and AS:CheckAddOn('DBM-StatusBarTimers')) then return end
+if not (AS:CheckAddOn('DBM-Core') and AS:CheckAddOn('DBM-StatusBarTimers') and AS:CheckAddOn('DBM-DefaultSkin')) then return end
 
 function AS:DBM(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
@@ -159,7 +159,7 @@ function AS:DBM(event, addon)
 					DBMRangeCheckRadar.background:Hide()
 				else
 					DBMRangeCheck:SetTemplate('Transparent')
-					DBMRangeCheckRadar:SetTemplate('Transparent')				
+					DBMRangeCheckRadar:SetTemplate('Transparent')
 				end
 			end
 		end
