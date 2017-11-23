@@ -168,7 +168,7 @@ function AS:GetOptions()
 						type = 'select', dialogControl = 'LSM30_Font',
 						order = 1,
 						name = ASL['DBM|VEM Font'],
-						values = AceGUIWidgetLSMlists.font,
+						values = AS.LSM:HashTable('font'),
 					},
 					DBMFontSize = {
 						type = 'range',
