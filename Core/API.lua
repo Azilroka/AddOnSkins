@@ -199,10 +199,6 @@ function AS:SkinButton(Button, Strip)
 		AS:SetTemplate(Button, 'Default', true)
 	end
 
-	Button:HookScript("OnShow", function(self)
-		self:SetBackdropBorderColor(unpack(AS.BorderColor))
-	end)
-
 	Button:HookScript("OnEnter", function(self)
 		if AS.ValueColor then
 			self:SetBackdropBorderColor(unpack(AS.ValueColor))
