@@ -206,4 +206,3 @@ function AS:Embed_Details()
 		AS:EmbedDetailsWindow(AS.DetailsInstances[2], _G.EmbedSystem_RightWindow:GetWidth(), _G.EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', _G.EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
 	end
 end
-
