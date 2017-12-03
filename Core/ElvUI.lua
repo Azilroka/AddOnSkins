@@ -60,6 +60,17 @@ function AS:SetElvUIBlizzardSkinOption(skin, value)
 	end
 end
 
+function AS:GetElvUIBlizzardSkinOption(skin)
+	if ElvUISkinTable[skin] then
+		for _, option in pairs(ElvUISkinTable[skin]) do
+			if E.private.skins.blizzard[option] == true then
+				return true
+			end
+		end
+	end
+	return false
+end
+
 function AS:UpdateMedia()
 	AS.Blank = AS.LSM:Fetch('background', 'ElvUI Blank')
 	AS.Font = AS.LSM:Fetch('font', E.db.general.font)

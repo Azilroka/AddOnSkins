@@ -203,6 +203,10 @@ function AS:StartSkinning(event)
 	end
 
 	for skin, funcs in pairs(AS.skins) do
+		if AS:CheckAddOn('ElvUI') and AS:GetElvUIBlizzardSkinOption(skin) then
+			AS:SetOption(skin, false)
+		end
+
 		if AS:CheckOption(skin) then
 			for _, func in ipairs(funcs) do
 				AS:CallSkin(skin, func, event)
@@ -291,8 +295,6 @@ function AS:Init(event, addon)
 
 		if AS.EP then
 			AS.EP:RegisterPlugin(AddOnName, AS.GetOptions)
-		else
-			AS:GetOptions()
 		end
 
 		AS:EmbedInit()
