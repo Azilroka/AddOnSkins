@@ -3,6 +3,6 @@
 ## Version: 3.62
 ## Author: Azilroka, Infinitron
 ## SavedVariables: AddOnSkinsDB
-## OptionalDep: ProjectAzilroka, ElvUI, BuyEmAll, DSM, Tukui
+## OptionalDeps: ProjectAzilroka, ElvUI, BuyEmAll, DSM, Tukui
  
 Load_AddOnSkins.xml
