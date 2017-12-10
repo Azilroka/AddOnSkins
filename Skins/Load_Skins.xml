@@ -7,6 +7,7 @@
 	<Script file="AdvancedIconSelector.lua"/>
 	<Script file="AffDots.lua"/>
 	<Script file="alDamageMeter.lua"/>
+	<Script file="AllTheThings.lua"/>
 	<Script file="Altoholic.lua"/>
 	<Script file="Analyst.lua"/>
 	<Script file="Arcanometer.lua"/>
