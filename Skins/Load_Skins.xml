@@ -38,7 +38,7 @@
 	<Script file="BugSack.lua"/>
 	<Script file="BulkOrder.lua"/>
 	<Script file="BuyEmAll.lua"/>
-	<Script file="Capping.lua"/>
+	<!--Script file="Capping.lua"/-->
 	<Script file="ChocolateBar.lua"/>
 	<Script file="ClassicQuestLog.lua"/>
 	<Script file="ClassOrderHallsComplete.lua"/>
