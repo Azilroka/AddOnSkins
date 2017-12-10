@@ -43,10 +43,10 @@ function AS:Skillet()
 		if SkilletDoDisenchant then SkinButton(SkilletDoDisenchant) end
 		if SkilletDoMilling then SkinButton(SkilletDoMilling) end
 
-		if 2259 then SkinButton(2259) end -- Alchemy	
+		if 2259 then SkinButton(2259) end -- Alchemy
 		if 2018 then SkinButton(2018) end -- Blacksmithing
 		if 7411 then SkinButton(7411) end -- Enchanting
-		if 4036 then SkinButton(4036) end -- Engineering	
+		if 4036 then SkinButton(4036) end -- Engineering
 		if 45357 then SkinButton(45357) end -- Inscription
 		if 25229 then SkinButton(25229) end -- Jewelcrafting
 		if 2108 then SkinButton(2108) end -- Leatherworking
@@ -66,7 +66,7 @@ function AS:Skillet()
 		SkilletShowOptionsButton:SetHeight(16)
 		SkilletShowOptionsButton:SetWidth(12)
 		SkilletShowOptionsButton:SetPoint('RIGHT', SkilletFrameCloseButton, 'LEFT', 3, 0)
-		
+
 		if not SkilletShowOptionsButton.text then
 			SkilletShowOptionsButton.text = SkilletShowOptionsButton:CreateFontString(nil, 'OVERLAY')
 			SkilletShowOptionsButton.text:SetFont(AS.Font, 12, 'OUTLINE')
@@ -91,24 +91,9 @@ function AS:Skillet()
 			AS:SkinButton(_G['SkilletPluginDropdown'..index])
 			index = index + 1
 		end
-	end	
+	end
 
 	local function SkilletFrameOnShow(self)
-		local StripAllTextures = {
-			'SkilletFrame',
-			'SkilletSkillListParent',
-			'SkilletReagentParent',
-			'SkilletQueueParent',
-			'SkilletRecipeNotesFrame',
-			'SkilletQueueManagementParent',
-			'SkilletSkillTooltip',
-			'SkilletStandalonQueue',
-		}
-
-		for _, object in pairs(StripAllTextures) do
-			AS:StripTextures(_G[object])
-		end	
-
 		local SetTemplateD = {
 			'SkilletSkillListParent',
 			'SkilletReagentParent',
@@ -120,17 +105,17 @@ function AS:Skillet()
 			'SkilletFrame',
 			'SkilletRecipeNotesFrame',
 			'SkilletSkillTooltip',
-			'SkilletStandalonQueue',
+			'SkilletStandaloneQueue',
 			'SkilletIgnoreList',
-		}	
+		}
 
 		for _, object in pairs(SetTemplateD) do
-			AS:SkinFrame(_G[object],'Default')
-		end	
+			AS:SkinFrame(_G[object], 'Default')
+		end
 
 		for _, object in pairs(SetTemplateT) do
 			AS:SkinFrame(_G[object])
-		end	
+		end
 
 		AS:SkinCloseButton(SkilletNotesCloseButton)
 		-- SkilletSkillListParent:SetPoint('TOPLEFT', SkilletFrame, 'TOPLEFT', 5, -100)
@@ -215,7 +200,7 @@ function AS:Skillet()
 		if SkilletDoDisenchant then
 			SkilletDoDisenchant:ClearAllPoints()
 			SkilletDoDisenchant:SetPoint('BOTTOMRIGHT', SkilletRankFrame, 'TOPRIGHT', -26, 3)
-		end	
+		end
 		if SkilletDoProspecting then
 			SkilletDoProspecting:ClearAllPoints()
 			SkilletDoProspecting:SetPoint('BOTTOMRIGHT', SkilletRankFrame, 'TOPRIGHT', -52, 3)
@@ -260,7 +245,7 @@ function AS:Skillet()
 				local bName = _G[buttonName]
 				if not bName then
 					bName = CreateFrame('CheckButton', bName, nil, UIParent)
-				end 
+				end
 				bName:ClearAllPoints()
 				bName:SetPoint('BOTTOMLEFT', SkilletRankFrame, 'TOPLEFT', x, 3)
 				x = x + bName:GetWidth() + 1
@@ -299,10 +284,10 @@ function AS:Skillet()
 
 	for _, button in pairs(buttons) do
 		AS:SkinButton(_G[button])
-	end	
+	end
 
 	AS:SkinCloseButton(SkilletFrameCloseButton)
-	AS:SkinCloseButton(SkilletStandalonQueueCloseButton)
+	AS:SkinCloseButton(SkilletStandaloneQueueCloseButton)
 	AS:SkinDropDownBox(SkilletRecipeGroupDropdown)
 	AS:SkinDropDownBox(SkilletSortDropdown)
 	AS:SkinDropDownBox(SkilletQueueLoadDropdown)
@@ -330,7 +315,7 @@ function AS:Skillet()
 	AS:SkinEditBox(SkilletQueueSaveEditBox)
 	AS:StripTextures(SkilletRankFrameBorder)
 	AS:SkinStatusBar(SkilletRankFrame)
-	SkilletRankFrame:SetHeight(10)		
+	SkilletRankFrame:SetHeight(10)
 	AS:SkinScrollBar(SkilletSkillListScrollBar, 5)
 
 	_G['SkilletSkillListParent']:SetScript('OnShow', SkilletFrameOnShow)
