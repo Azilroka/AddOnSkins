@@ -14,8 +14,8 @@ local function SkinDewdrop2()
 			frame:SetTemplate("Transparent")
 
 			select(1, frame:GetChildren()):Hide()
-			frame.SetBackdropColor = E.noop
-			frame.SetBackdropBorderColor = E.noop
+			frame.SetBackdropColor = AS.Noop
+			frame.SetBackdropBorderColor = AS.Noop
 
 			frame.isSkinned = true
 		end
