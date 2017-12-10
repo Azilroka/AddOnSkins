@@ -888,15 +888,15 @@ function AS:FindChildFrameByPoint(parent, objType, point1, relativeTo, point2, x
 	local childPoint1, childParent, childPoint2, childX, childY
 	local childs = {parent:GetChildren()}
 
-	x = E:Round(x)
-	y = E:Round(y)
+	x = AS:Round(x)
+	y = AS:Round(y)
 
 	for id, child in pairs(childs) do
 		if not child:GetName() then
 			if not objType or (objType and child:IsObjectType(objType)) then
 				childPoint1, childParent, childPoint2, childX, childY = child:GetPoint()
-				childX = childX and E:Round(childX) or 0
-				childY = childY and E:Round(childY) or 0
+				childX = childX and AS:Round(childX) or 0
+				childY = childY and AS:Round(childY) or 0
 
 				if childPoint1 == point1
 				and childParent == relativeTo
@@ -920,13 +920,13 @@ function AS:FindChildFrameBySize(parent, objType, width, height)
 	local frame, childID
 	local childs = {parent:GetChildren()}
 
-	width = E:Round(width)
-	height = E:Round(height)
+	width = AS:Round(width)
+	height = AS:Round(height)
 
 	for id, child in pairs(childs) do
 		if not child:GetName() then
 			if not objType or (objType and child:IsObjectType(objType)) then
-				if E:Round(child:GetWidth()) == width and E:Round(child:GetHeight()) == width then
+				if AS:Round(child:GetWidth()) == width and AS:Round(child:GetHeight()) == width then
 					frame, childID = child, id
 					break
 				end
@@ -943,13 +943,13 @@ function AS:FindFrameBySizeChild(childTypes, width, height)
 	local frame
 	local obj = EnumerateFrames()
 
-	width = E:Round(width)
-	height = E:Round(height)
+	width = AS:Round(width)
+	height = AS:Round(height)
 
 	while obj do
 		if obj.IsObjectType and obj:IsObjectType("Frame") then
 			if not (obj:GetName() and obj:GetParent()) then
-				if E:Round(obj:GetWidth()) == width and E:Round(obj:GetHeight()) == height then
+				if AS:Round(obj:GetWidth()) == width and AS:Round(obj:GetHeight()) == height then
 					local childs = {}
 					for _, child in pairs({obj:GetChildren()}) do
 						childs[#childs + 1] = child:GetObjectType()
@@ -989,15 +989,15 @@ function AS:FindFrameByPoint(point1, relativeTo, point2, x, y, multipleFrames)
 	local childPoint1, childParent, childPoint2, childX, childY
 	local obj = EnumerateFrames()
 
-	x = E:Round(x)
-	y = E:Round(y)
+	x = AS:Round(x)
+	y = AS:Round(y)
 
 	while obj do
 		if obj.IsObjectType and obj:IsObjectType("Frame") then
 			if not (obj:GetName() and obj:GetParent()) then
 				childPoint1, childParent, childPoint2, childX, childY = obj:GetPoint()
-				childX = childX and E:Round(childX) or 0
-				childY = childY and E:Round(childY) or 0
+				childX = childX and AS:Round(childX) or 0
+				childY = childY and AS:Round(childY) or 0
 
 				if childPoint1 == point1
 				and childParent == relativeTo

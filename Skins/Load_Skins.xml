@@ -93,6 +93,7 @@
 	<Script file="KeepingTabs.lua"/>
 	<Script file="Keyed.lua"/>
 	<Script file="LegacyQuest.lua"/>
+	<Script file="Libraries.lua"/>
 	<Script file="Lightheaded.lua"/>
 	<Script file="LinkWrangler.lua"/>
 	<Script file="LootCouncilLite.lua"/>

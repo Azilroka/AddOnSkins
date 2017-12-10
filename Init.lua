@@ -1,5 +1,5 @@
 local AddOnName, Engine = ...
-local AddOn = LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceEvent-3.0')
+local AddOn = LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceEvent-3.0', 'AceHook-3.0')
 
 Engine[1] = AddOn
 Engine[2] = {}	-- Media

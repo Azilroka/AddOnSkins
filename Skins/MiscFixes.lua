@@ -1,5 +1,7 @@
 local AS = unpack(AddOnSkins)
 
+local _G = _G
+
 function AS:MiscellaneousFixes(event, addon)
 	local function SkinIcons()
 		for i = 1, LFG_ROLE_NUM_SHORTAGE_TYPES do
@@ -13,26 +15,37 @@ function AS:MiscellaneousFixes(event, addon)
 
 	hooksecurefunc('LFGDungeonReadyDialog_UpdateRewards', SkinIcons)
 
-	local LT = LibStub('LibExtraTip-1', true)
+	-- local LT = LibStub('LibExtraTip-1', true)
 
-	for _, Tooltip in pairs({GameTooltip, ItemRefTooltip}) do
-		Tooltip:HookScript('OnUpdate', function(self)
-			if not LT then return end
-			local ExtraTip = LT:GetExtraTip(self)
-			if ExtraTip then
-				if not ExtraTip.IsDone then
-					ExtraTip:HookScript('OnShow', function(tt)
-						tt:SetTemplate('Transparent')
-						local a, b, c, d, e = tt:GetPoint()
-						tt:SetPoint(a, b, c, d, e-2)
-					end)
-					ExtraTip.IsDone = true
-				end
-				ExtraTip:SetBackdropBorderColor(Tooltip:GetBackdropBorderColor())
+	-- for _, Tooltip in pairs({GameTooltip, ItemRefTooltip}) do
+	-- 	Tooltip:HookScript('OnUpdate', function(self)
+	-- 		if not LT then return end
+	-- 		local ExtraTip = LT:GetExtraTip(self)
+	-- 		if ExtraTip then
+	-- 			if not ExtraTip.IsDone then
+	-- 				ExtraTip:HookScript('OnShow', function(tt)
+	-- 					tt:SetTemplate('Transparent')
+	-- 					local a, b, c, d, e = tt:GetPoint()
+	-- 					tt:SetPoint(a, b, c, d, e-2)
+	-- 				end)
+	-- 				ExtraTip.IsDone = true
+	-- 			end
+	-- 			ExtraTip:SetBackdropBorderColor(Tooltip:GetBackdropBorderColor())
+	-- 		end
+	-- 	end)
+	-- end
+
+
+	local croprwicons = false
+	if croprwicons then
+		local RaidNotice_AddMessage_ = RaidNotice_AddMessage
+		RaidNotice_AddMessage = function(noticeFrame, textString, colorInfo, displayTime)
+			if textString:find('|T') then
+				textString = gsub(textString,'(:12:12)',':18:18:0:0:64:64:5:59:5:59')
 			end
-		end)
+			return RaidNotice_AddMessage_(noticeFrame, textString, colorInfo, displayTime)
+		end
 	end
-
 	--[[ -- RAF Reward Frame
 	AS:SkinFrame(ProductChoiceFrame)
 	AS:StripTextures(ProductChoiceFrame.Inset)
