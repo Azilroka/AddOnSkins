@@ -1,11 +1,13 @@
 local AS = unpack(AddOnSkins)
 
 function AS:AllTheThings()
-	local CurrentInstance = AllTheThings:GetWindow('CurrentInstance')
-	AS:SetTemplate(CurrentInstance, 'Transparent')
-	AS:SkinCloseButton(CurrentInstance.CloseButton)
-	AS:SkinScrollBar(CurrentInstance.ScrollBar)
-	CurrentInstance.Container:SetPoint("RIGHT", CurrentInstance.ScrollBar, "LEFT", -3, 0)
+	for _, Instance in pairs({ 'Prime', 'CurrentInstance' }) do
+		local Window = AllTheThings:GetWindow(Instance)
+		AS:SetTemplate(Window, 'Transparent')
+		AS:SkinCloseButton(Window.CloseButton)
+		AS:SkinScrollBar(Window.ScrollBar)
+		Window.Container:SetPoint("RIGHT", Window.ScrollBar, "LEFT", -3, 0)
+	end
 end
 
 AS:RegisterSkin('AllTheThings', AS.AllTheThings)
