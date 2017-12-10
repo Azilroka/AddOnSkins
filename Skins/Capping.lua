@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Capping') then return end
 
 function AS:Capping(event)
-	hooksecurefunc(Capping, "StartBar",	function(self, name)
+	hooksecurefunc(Capping, "StartBar", function(self, name)
 		local bar = self:GetBar(name, true)
 		if not bar.Backdrop then
 			AS:CreateBackdrop(bar)
