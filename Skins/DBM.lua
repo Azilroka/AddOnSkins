@@ -4,7 +4,6 @@ if not (AS:CheckAddOn('DBM-Core') and AS:CheckAddOn('DBM-StatusBarTimers') and A
 
 function AS:DBM(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
-		local croprwicons = true
 		local BarHeight
 		local function SkinBars(self)
 			for bar in self:GetBarIterator() do
@@ -177,16 +176,6 @@ function AS:DBM(event, addon)
 		hooksecurefunc(DBM.BossHealth, 'UpdateSettings', SkinBoss)
 		hooksecurefunc(DBM.RangeCheck, 'Show', SkinRange)
 		hooksecurefunc(DBM.InfoFrame, 'Show', SkinInfo)
-
-		if croprwicons then
-			local RaidNotice_AddMessage_ = RaidNotice_AddMessage
-			RaidNotice_AddMessage = function(noticeFrame, textString, colorInfo, displayTime)
-				if textString:find('|T') then
-					textString = gsub(textString,'(:12:12)',':18:18:0:0:64:64:5:59:5:59')
-				end
-				return RaidNotice_AddMessage_(noticeFrame, textString, colorInfo, displayTime)
-			end
-		end
 	end
 
 	if addon == 'DBM-GUI' then

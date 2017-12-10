@@ -202,7 +202,7 @@ function AS:StartSkinning(event)
 		end
 	end
 
-	for skin, funcs in pairs(AS.skins) do
+	for skin, funcs in AS:OrderedPairs(AS.skins) do
 		if AS:CheckAddOn('ElvUI') and AS:GetElvUIBlizzardSkinOption(skin) then
 			AS:SetOption(skin, false)
 		end
