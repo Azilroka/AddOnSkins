@@ -40,7 +40,7 @@ function AS:GuildRosterManager()
 	-- GRM_LoadLogButton:SetPoint("RIGHT", BanListButton, "LEFT", 0, 1)
 
 	--Guild Detail Frame
-	AS:SkinFrame(GRM_MemberDetailMetaData)	
+	AS:SkinFrame(GRM_MemberDetailMetaData)
 	AS:SkinCloseButton(GRM_MemberDetailMetaDataCloseButton)
 	AS:SkinButton(GRM_MemberDetailJoinDateButton)
 	AS:SkinButton(GRM_SetPromoDateButton)
@@ -92,24 +92,24 @@ function AS:GuildRosterManager()
 	local isLoaded = false;
 	GRM_MemberDetailMetaData:HookScript("OnShow" , function()
 		if not isLoaded then
-			GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GuildRosterFrame , "TOPRIGHT" , 2 , 0 );
-			GRM_AddAltEditFrame:SetPoint ( "BOTTOMLEFT" , GRM_MemberDetailMetaData , "BOTTOMRIGHT" ,  2 , 0 );
-			isLoaded = true;
+			GRM_MemberDetailMetaData:SetPoint("TOPLEFT", GuildRosterFrame, "TOPRIGHT", 2, 0)
+			GRM_AddAltEditFrame:SetPoint("BOTTOMLEFT", GRM_MemberDetailMetaData, "BOTTOMRIGHT", 2, 0)
+			isLoaded = true
 		end
 	end)
 
-	local isLoaded2 = false;
+	local isLoaded2 = false
 	GRM_RosterCheckBoxSideFrame:HookScript("OnShow" , function()
 		if not isLoaded2 then
-			GRM_RosterCheckBoxSideFrame:SetPoint ( "TOPLEFT" , GRM_RosterChangeLogFrame , "TOPRIGHT" , 2 , 0 );
-			GRM_CoreBanListScrollFrame:SetPoint ( "RIGHT" , GRM_CoreBanListFrame , -25 , -35);
-			GRM_CoreBanListFrameTitleText2:SetPoint ( "BOTTOMLEFT" , GRM_CoreBanListScrollBorderFrame , "TOPLEFT" , 15 , 1 );
-			GRM_CoreBanListFrameTitleText3:SetPoint ( "BOTTOM" , GRM_CoreBanListScrollBorderFrame, "TOP" , 60 , 1 );
-			GRM_CoreBanListFrameTitleText4:SetPoint ( "BOTTOM" , GRM_CoreBanListScrollBorderFrame, "TOPRIGHT" , -54 , 1 );
-			GRM_AddonUsersCoreFrameTitleText:SetPoint ( "BOTTOMLEFT" , GRM_AddonUsersScrollBorderFrame , "TOPLEFT" , 12 , 5 );
-			GRM_AddonUsersCoreFrameTitleText2:SetPoint ( "BOTTOM" , GRM_AddonUsersScrollBorderFrame , "TOP" , 0 , 5 );
-			GRM_AddonUsersCoreFrameTitleText3:SetPoint ( "BOTTOMRIGHT" , GRM_AddonUsersScrollBorderFrame , "TOPRIGHT" , -12 , 5 );
-			isLoaded2 = true;
+			GRM_RosterCheckBoxSideFrame:SetPoint("TOPLEFT", GRM_RosterChangeLogFrame, "TOPRIGHT", 2, 0)
+			GRM_CoreBanListScrollFrame:SetPoint("RIGHT" , GRM_CoreBanListFrame, -25 , -35)
+			GRM_CoreBanListFrameTitleText2:SetPoint("BOTTOMLEFT", GRM_CoreBanListScrollBorderFrame, "TOPLEFT", 15, 1)
+			GRM_CoreBanListFrameTitleText3:SetPoint("BOTTOM", GRM_CoreBanListScrollBorderFrame, "TOP", 60, 1)
+			GRM_CoreBanListFrameTitleText4:SetPoint("BOTTOM", GRM_CoreBanListScrollBorderFrame, "TOPRIGHT", -54, 1)
+			GRM_AddonUsersCoreFrameTitleText:SetPoint("BOTTOMLEFT", GRM_AddonUsersScrollBorderFrame, "TOPLEFT", 12, 5)
+			GRM_AddonUsersCoreFrameTitleText2:SetPoint("BOTTOM", GRM_AddonUsersScrollBorderFrame, "TOP", 0, 5)
+			GRM_AddonUsersCoreFrameTitleText3:SetPoint("BOTTOMRIGHT", GRM_AddonUsersScrollBorderFrame, "TOPRIGHT", -12, 5)
+			isLoaded2 = true
 		end
 	end)
 
