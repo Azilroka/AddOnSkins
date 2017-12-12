@@ -113,7 +113,7 @@ function AS:Auctionator(event)
 		}
 
 		for _, Button in pairs(Buttons) do
- 			AS:SkinButton(Button, true)
+			AS:SkinButton(Button, true)
 		end
 
 		local EditBoxes = {
@@ -130,7 +130,7 @@ function AS:Auctionator(event)
 		}
 
 		for _, EditBox in pairs(EditBoxes) do
- 			AS:SkinEditBox(EditBox)
+			AS:SkinEditBox(EditBox)
 		end
 
 		AS:SkinCheckBox(AuctionatorOption_Enable_Alt_CB)
@@ -156,9 +156,9 @@ function AS:Auctionator(event)
 
 		Atr_HeadingsBar:SetHeight(19)
 
-		Atr_Hlist:CreateBackdrop("Overlay")
-		Atr_Hlist.backdrop:SetPoint("TOPLEFT", -2, 0)
-		Atr_Hlist.backdrop:SetPoint("BOTTOMRIGHT", 0, 2)
+		AS:CreateBackdrop(Atr_Hlist)
+		Atr_Hlist.Backdrop:SetPoint("TOPLEFT", -2, 0)
+		Atr_Hlist.Backdrop:SetPoint("BOTTOMRIGHT", 0, 2)
 		Atr_Hlist:SetWidth(195)
 		Atr_Hlist:ClearAllPoints()
 		Atr_Hlist:SetPoint('TOPLEFT', -195, -75)
@@ -189,7 +189,7 @@ function AS:Auctionator(event)
 
 		AS:StripTextures(Atr_SellControls_Tex)
 		AS:StyleButton(Atr_SellControls_Tex)
-		Atr_SellControls_Tex:SetTemplate('Default', true)
+		AS:SetTemplate(Atr_SellControls_Tex, 'Default')
 
 		AS:UnregisterSkinEvent('Auctionator', 'AUCTION_HOUSE_SHOW')
 
