@@ -58,13 +58,13 @@ function AS:Embed_Skada()
 	end
 
 	if AS:CheckOption('EmbedSystemDual') then
-		if AS:CheckOption('EmbedRight') == 'Skada' then NumberToEmbed = NumberToEmbed + 1 end
-		if AS:CheckOption('EmbedLeft') == 'Skada' then NumberToEmbed = NumberToEmbed + 1 end
+		if strlower(AS:CheckOption('EmbedRight')) == 'skada' then NumberToEmbed = NumberToEmbed + 1 end
+		if strlower(AS:CheckOption('EmbedLeft')) == 'skada' then NumberToEmbed = NumberToEmbed + 1 end
 	end
 
 	if NumberToEmbed == 1 then
 		local EmbedParent = _G.EmbedSystem_MainWindow
-		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Skada' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
+		if AS:CheckOption('EmbedSystemDual') then EmbedParent = strlower(AS:CheckOption('EmbedRight')) == 'skada' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
 		AS:EmbedSkadaWindow(AS.SkadaWindows[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
 	elseif NumberToEmbed == 2 then
 		AS:EmbedSkadaWindow(AS.SkadaWindows[1], _G.EmbedSystem_LeftWindow:GetWidth(), _G.EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', _G.EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)

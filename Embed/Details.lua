@@ -171,8 +171,8 @@ function AS:Embed_Details()
 	end
 
 	if AS:CheckOption('EmbedSystemDual') then
-		if AS:CheckOption('EmbedRight') == 'Details' then NumberToEmbed = NumberToEmbed + 1 end
-		if AS:CheckOption('EmbedLeft') == 'Details' then NumberToEmbed = NumberToEmbed + 1 end
+		if strlower(AS:CheckOption('EmbedRight')) == 'details' then NumberToEmbed = NumberToEmbed + 1 end
+		if strlower(AS:CheckOption('EmbedLeft')) == 'details' then NumberToEmbed = NumberToEmbed + 1 end
 	end
 
 	if (Details:GetMaxInstancesAmount() < NumberToEmbed) then
@@ -194,7 +194,7 @@ function AS:Embed_Details()
 	if NumberToEmbed == 1 then
 		local EmbedParent = _G.EmbedSystem_MainWindow
 		if AS:CheckOption('EmbedSystemDual') then
-			EmbedParent = AS:CheckOption('EmbedRight') == 'Details' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow
+			EmbedParent = strlower(AS:CheckOption('EmbedRight')) == 'details' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow
 		end
 		AS:EmbedDetailsWindow(AS.DetailsInstances[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
 

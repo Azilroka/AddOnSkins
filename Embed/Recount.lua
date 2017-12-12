@@ -6,8 +6,7 @@ local _G = _G
 
 function AS:Embed_Recount()
 	local EmbedParent = _G.EmbedSystem_MainWindow
-	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Recount' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = "Recount_MainWindow"
+	if AS:CheckOption('EmbedSystemDual') then EmbedParent = strlower(AS:CheckOption('EmbedRight')) == 'recount' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
 
 	_G.Recount_MainWindow:SetParent(EmbedParent)
 	_G.Recount_MainWindow:ClearAllPoints()

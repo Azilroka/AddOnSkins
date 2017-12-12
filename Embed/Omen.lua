@@ -6,8 +6,7 @@ local _G = _G
 
 function AS:Embed_Omen()
 	local EmbedParent = _G.EmbedSystem_MainWindow
-	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Omen' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = "OmenAnchor"
+	if AS:CheckOption('EmbedSystemDual') then EmbedParent = strlower(AS:CheckOption('EmbedRight')) == 'omen' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
 
 	_G.Omen.BarList.SetBackdrop = nil
 	_G.Omen.BarList.SetBackdropColor = nil

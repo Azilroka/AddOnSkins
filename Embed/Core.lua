@@ -87,8 +87,8 @@ function AS:Embed_Hide()
 end
 
 function AS:CheckEmbed(AddOn)
-	local MainEmbed, LeftEmbed, RightEmbed, Embed = strlower(AS:CheckOption('EmbedMain')), strlower(AS:CheckOption('EmbedLeft')), strlower(AS:CheckOption('EmbedRight')), strlower(AddOn)
-	if AS:CheckAddOn(AddOn) and ((AS:CheckOption('EmbedSystem') and strmatch(MainEmbed, Embed)) or AS:CheckOption('EmbedSystemDual') and (strmatch(LeftEmbed, Embed) or strmatch(RightEmbed, Embed))) then
+	AddOn = strlower(AddOn)
+	if AS:CheckAddOn(AddOn) and (AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual')) and (strmatch(strlower(AS:CheckOption('EmbedMain')), AddOn) or strmatch(strlower(AS:CheckOption('EmbedLeft')), AddOn) or strmatch(strlower(AS:CheckOption('EmbedRight')), AddOn)) then
 		return true
 	else
 		return false

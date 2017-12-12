@@ -1,25 +1,25 @@
 local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('TinyDPS') then return end
+local _G = _G
 
 function AS:Embed_TinyDPS()
-	local EmbedParent = EmbedSystem_MainWindow
-	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'TinyDPS' and EmbedSystem_RightWindow or EmbedSystem_LeftWindow end
-	EmbedParent.FrameName = "tdpsFrame"
+	local EmbedParent = _G.EmbedSystem_MainWindow
+	if AS:CheckOption('EmbedSystemDual') then EmbedParent = strlower(AS:CheckOption('EmbedRight')) == 'tinydps' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
 
-	AS:SkinFrame(tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+	AS:SkinFrame(_G.tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 
-	tdpsFrame:SetParent(EmbedParent)
-	tdpsFrame:SetFrameStrata(EmbedParent:GetFrameStrata())
-	tdpsFrame:SetFrameLevel(EmbedParent:GetFrameLevel())
-	tdpsAnchor:ClearAllPoints()
-	tdpsAnchor:Point('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
-	tdpsAnchor:Point('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
-	tdpsFrame:SetWidth(tdpsAnchor:GetWidth())
+	_G.tdpsFrame:SetParent(EmbedParent)
+	_G.tdpsFrame:SetFrameStrata(EmbedParent:GetFrameStrata())
+	_G.tdpsFrame:SetFrameLevel(EmbedParent:GetFrameLevel())
+	_G.tdpsAnchor:ClearAllPoints()
+	_G.tdpsAnchor:Point('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
+	_G.tdpsAnchor:Point('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
+	_G.tdpsFrame:SetWidth(_G.tdpsAnchor:GetWidth())
 
-	tdps.hideOOC = false
-	tdps.hideIC = false
-	tdps.hideSolo = false
-	tdps.hidePvP = false
-	tdpsRefresh()
+	_G.tdps.hideOOC = false
+	_G.tdps.hideIC = false
+	_G.tdps.hideSolo = false
+	_G.tdps.hidePvP = false
+	_G.tdpsRefresh()
 end
