@@ -70,7 +70,7 @@ function AS:EmbedInit()
 
 			UIParent:GetScript('OnShow')(UIParent)
 
-			for _, Function in pairs({"FCF_Close", "FCF_OpenNewWindow"}) do
+			for _, Function in pairs({"FCF_Close", "FCF_OpenNewWindow", "FCF_SetWindowName"}) do
 				hooksecurefunc(Function, function()
 					if AS.EP then
 						local Ace3OptionsPanel = AS:CheckAddOn('ElvUI') and ElvUI[1] or Enhanced_Config
