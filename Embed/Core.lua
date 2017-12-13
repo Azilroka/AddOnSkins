@@ -10,24 +10,25 @@ local EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow
 
 function AS:GetChatWindowInfo()
 	local ChatTabInfo = {['NONE'] = 'NONE'}
-	for i = 1, NUM_CHAT_WINDOWS do
+	for i = 1, FCF_GetNumActiveChatFrames() do
 		ChatTabInfo["ChatFrame"..i] = _G["ChatFrame"..i.."Tab"]:GetText()
 	end
 	return ChatTabInfo
 end
 
 function AS:ToggleChatFrame(Hide)
-	if AS:CheckOption('HideChatFrame') == 'NONE' then return end
+	local ChatFrame = AS:CheckOption('HideChatFrame')
+	if ChatFrame == 'NONE' then return end
 	if Hide then
-		_G[AS:CheckOption('HideChatFrame')].OriginalParent = _G[AS:CheckOption('HideChatFrame')]:GetParent()
-		_G[AS:CheckOption('HideChatFrame')]:SetParent(AS.ChatFrameHider)
+		_G[ChatFrame].OriginalParent = _G[ChatFrame]:GetParent()
+		_G[ChatFrame]:SetParent(AS.ChatFrameHider)
 
-		_G[AS:CheckOption('HideChatFrame')..'Tab'].OriginalParent = _G[AS:CheckOption('HideChatFrame')..'Tab']:GetParent()
-		_G[AS:CheckOption('HideChatFrame')..'Tab']:SetParent(AS.ChatFrameHider)
+		_G[ChatFrame..'Tab'].OriginalParent = _G[ChatFrame..'Tab']:GetParent()
+		_G[ChatFrame..'Tab']:SetParent(AS.ChatFrameHider)
 	else
-		if _G[AS:CheckOption('HideChatFrame')].OriginalParent then
-			_G[AS:CheckOption('HideChatFrame')]:SetParent(_G[AS:CheckOption('HideChatFrame')].OriginalParent)
-			_G[AS:CheckOption('HideChatFrame')..'Tab']:SetParent(_G[AS:CheckOption('HideChatFrame')..'Tab'].OriginalParent)
+		if _G[ChatFrame].OriginalParent then
+			_G[ChatFrame]:SetParent(_G[ChatFrame].OriginalParent)
+			_G[ChatFrame..'Tab']:SetParent(_G[ChatFrame..'Tab'].OriginalParent)
 		end
 	end
 end
@@ -44,6 +45,10 @@ function AS:EmbedInit()
 			if (AS:CheckOption('EmbedSystem') and AS:CheckOption('EmbedSystemDual')) then
 				AS:SetOption('EmbedSystem', false)
 				AS:SetOption('EmbedSystemDual', false)
+			end
+
+			if AS:CheckOption('HideChatFrame') ~= 'NONE' and not FCF_IsValidChatFrame(_G[AS:CheckOption('HideChatFrame')]) then
+				AS:SetOption('HideChatFrame', 'NONE')
 			end
 
 			AS:EmbedSystemHooks()
@@ -64,6 +69,15 @@ function AS:EmbedInit()
 			end)
 
 			UIParent:GetScript('OnShow')(UIParent)
+
+			for _, Function in pairs({"FCF_Close", "FCF_OpenNewWindow"}) do
+				hooksecurefunc(Function, function()
+					if AS.EP then
+						local Ace3OptionsPanel = AS:CheckAddOn('ElvUI') and ElvUI[1] or Enhanced_Config
+						Ace3OptionsPanel.Options.args.addonskins.args.embed.args.HideChatFrame.values = AS:GetChatWindowInfo()
+					end
+				end)
+			end
 		end
 	end
 end

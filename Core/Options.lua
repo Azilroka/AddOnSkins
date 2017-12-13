@@ -474,7 +474,7 @@ function AS:GetOptions()
 	Options.args.profiles.order = -2
 
 	if AS.EP then
-		local Ace3OptionsPanel = IsAddOnLoaded('ElvUI') and ElvUI[1] or Enhanced_Config
+		local Ace3OptionsPanel = AS:CheckAddOn('ElvUI') and ElvUI[1] or Enhanced_Config
 		Ace3OptionsPanel.Options.args.addonskins = Options
 	end
 end
