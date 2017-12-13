@@ -32,7 +32,7 @@ function AS:UpdateLocale_itIT()
 	ASL["Embed Settings"] = "Impostazioni di Integrazione"
 	ASL["Settings to control Embedded AddOns:\n\nAvailable Embeds: alDamageMeter | Omen | Skada | Recount | TinyDPS"] = "Impostazioni per controllare l'integrazione degli AddOn:\n\nIntegrazioni Disponibili: alDamageMeter | Omen | Skada | Recount | TinyDPS"
 	ASL["One Window Embed System"] = "One Window Embed System"
-	ASL["Embed for Main Window"] = "Embed for Main Window"
+	ASL["Embed for One Window"] = "Embed for Main Window"
 	ASL["Two Window Embed System"] = "Two Window Embed System"
 	ASL["Window One Embed"] = "Window One Embed"
 	ASL["Window Two Embed"] = "Window Two Embed"

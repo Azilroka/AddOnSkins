@@ -163,7 +163,7 @@ function AS:GetOptions()
 					EmbedMain = {
 						type = 'input',
 						width = 'full',
-						name = ASL['Embed for Main Window'],
+						name = ASL['Embed for One Window'],
 						disabled = function() return not AS:CheckOption('EmbedSystem') end,
 						order = 3,
 					},
