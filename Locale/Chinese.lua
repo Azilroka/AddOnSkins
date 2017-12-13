@@ -13,7 +13,7 @@ function AS:UpdateLocale_zhCN()
 	ASL.OptionsPanel.SkinDesc = '启/禁用此皮肤.'
 	ASL.OptionsPanel.EmbedDesc = '启/禁用此内嵌.'
 	ASL.OptionsPanel.OptionDesc = '启/禁用此选项.'
-	
+
 	ASL["AddOn Skins"] = "插件皮肤"
 	ASL["Blizzard Skins"] = "暴雪皮肤"
 	ASL["BossMod Options"] = "副本预警模块设置"
@@ -30,12 +30,12 @@ function AS:UpdateLocale_zhCN()
 	ASL["BigWigs Half-Bar"] = "BigWigs 半高计时条"
 	ASL["Embed Settings"] = "内嵌设置"
 	ASL["Settings to control Embedded AddOns:\n\nAvailable Embeds: alDamageMeter | Details | Omen | Skada | Recount | TinyDPS"] = "设置内嵌插件:\n\n可用内嵌: alDamageMeter | Details | Omen | Skada | Recount | TinyDPS"
-	ASL["Single Embed System"] = "单内嵌"
-	ASL["Embed for Main Panel"] = "内嵌到主面板"
-	ASL["Dual Embed System"] = "双内嵌"
-	ASL["Embed for Left Window"] = "内嵌的左窗口"
-	ASL["Embed for Right Window"] = "内嵌的右窗口"
-	ASL["Embed Left Window Width"] = "内嵌的左窗口宽度"
+	ASL["One Window Embed System"] = "One Window Embed System"
+	ASL["Embed for Main Window"] = "Embed for Main Window"
+	ASL["Two Window Embed System"] = "Two Window Embed System"
+	ASL["Window One Embed"] = "Window One Embed"
+	ASL["Window Two Embed"] = "Window Two Embed"
+	ASL["Window One Width"] = "Window One Width"
 	ASL["Out of Combat (Hide)"] = "脱战隐藏"
 	ASL["Attach SexyCD to action bar"] = "附加 SexyCD 到动作条"
 	ASL["Attach CoolLine to action bar"] = "附加 CoolLine 到动作条"
