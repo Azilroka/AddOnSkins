@@ -60,6 +60,7 @@
 	<Script file="DKDots.lua"/>
 	<Script file="Dominos.lua"/>
 	<Script file="Dresser.lua"/>
+	<Script file="DressUp.lua"/>
 	<Script file="EasyMail.lua"/>
 	<Script file="Easy_Obliterate.lua"/>
 	<Script file="EavesDrop.lua"/>
@@ -102,6 +103,7 @@
 	<Script file="LuckyCharms2.lua"/>
 	<Script file="Ludwig.lua"/>
 	<Script file="MageNuggets.lua"/>
+	<Script file="MailCommander.lua"/>
 	<Script file="MasterLootManagerRemix.lua"/>
 	<Script file="MasterPlan.lua"/>
 	<Script file="MinimalArchaeology.lua"/>

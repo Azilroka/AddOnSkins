@@ -193,7 +193,7 @@ function AS:StartSkinning(event)
 
 	AS:UpdateMedia()
 
-	AS.Mult = 768/AS.ScreenHeight/UIParent:GetScale()
+	AS.Mult = 768 / AS.ScreenHeight
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 
 	for skin, alldata in pairs(AS.register) do

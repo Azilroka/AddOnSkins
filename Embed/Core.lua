@@ -20,15 +20,20 @@ function AS:ToggleChatFrame(Hide)
 	local ChatFrame = AS:CheckOption('HideChatFrame')
 	if ChatFrame == 'NONE' then return end
 	if Hide then
-		_G[ChatFrame].OriginalParent = _G[ChatFrame]:GetParent()
-		_G[ChatFrame]:SetParent(AS.ChatFrameHider)
+		if _G[ChatFrame]:GetParent() ~= AS.ChatFrameHider and _G[ChatFrame..'Tab']:GetParent() ~= AS.ChatFrameHider then
+			_G[ChatFrame].OriginalParent = _G[ChatFrame]:GetParent()
+			_G[ChatFrame..'Tab'].OriginalParent = _G[ChatFrame..'Tab']:GetParent()
+		end
 
-		_G[ChatFrame..'Tab'].OriginalParent = _G[ChatFrame..'Tab']:GetParent()
+		_G[ChatFrame]:SetParent(AS.ChatFrameHider)
 		_G[ChatFrame..'Tab']:SetParent(AS.ChatFrameHider)
 	else
 		if _G[ChatFrame].OriginalParent then
 			_G[ChatFrame]:SetParent(_G[ChatFrame].OriginalParent)
 			_G[ChatFrame..'Tab']:SetParent(_G[ChatFrame..'Tab'].OriginalParent)
+
+			_G[ChatFrame].OriginalParent = nil
+			_G[ChatFrame..'Tab'].OriginalParent = nil
 		end
 	end
 end
