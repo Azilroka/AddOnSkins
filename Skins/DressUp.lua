@@ -6,9 +6,17 @@ function AS:DressUp()
 	CustomDressUpFrame.portrait:SetAlpha(0)
 
 	AS:SkinButton(CustomDressUpFrame.ResetButton)
-	AS:SkinDropDOwnBox(CustomDressUpFrame.OutfitDropDown)
+	AS:SkinCloseButton(CustomDressUpFrame.CloseButton)
+	AS:SkinDropDownBox(CustomDressUpFrame.OutfitDropDown)
 
 	AS:SkinButton(CustomDressUpFrameCancelButton)
+
+	AS:SkinButton(DressUpHideArmorButton)
+	AS:SkinDropDownBox(DressUpRaceDropdown)
+	AS:SkinCheckBox(DressUpGenderButtonFemale)
+	AS:SkinCheckBox(DressUpGenderButtonMale)
+
+	CustomDressUpFrame.Inset:SetAlpha(0)
 end
 
 AS:RegisterSkin('DressUp', AS.DressUp)
