@@ -20,17 +20,26 @@ function AS:MailCommander()
 	AS:SkinTab(MailCommanderFrame.tabFILTER)
 	AS:SkinTab(MailCommanderFrame.tabCATEGORIES)
 
+	AS:SkinTooltip(MailCommanderTooltip)
 	hooksecurefunc(LibStub('LibInit'):GetAddon('MailCommander'), 'RenderButtonList', function()
 		for _, Table in pairs({'Additional', 'Items'}) do
 			local Button = MailCommanderFrame[Table]
 			for i = 1, #Button do
-				Button[i].Bg:SetTexture(nil)
-				Button[i].NameFrame:SetTexture(nil)
-				Button[i].SlotTexture:SetTexture(nil)
-				AS:SkinTexture(Button[i].ItemButton.icon)
-				Button[i].ItemButton:SetNormalTexture('')
-				Button[i].ItemButton:SetPushedTexture('')
-				Button[i].ItemButton:SetHighlightTexture('')
+				if not Button[i].isSkinned then
+					Button[i].Bg:SetTexture(nil)
+					Button[i].NameFrame:SetTexture(nil)
+					Button[i].SlotTexture:SetTexture(nil)
+					AS:SkinTexture(Button[i].ItemButton.icon)
+					Button[i].ItemButton:SetNormalTexture('')
+					Button[i].ItemButton:SetPushedTexture('')
+					Button[i].ItemButton:SetHighlightTexture('')
+					AS:SkinIconButton(Button[i].ItemButton)
+					AS:CreateBackdrop(Button[i])
+					Button[i].Backdrop:SetPoint('TOPLEFT', Button[i].NameFrame, 'TOPLEFT', -2, -2)
+					Button[i].Backdrop:SetPoint('BOTTOMLEFT', Button[i].NameFrame, 'BOTTOMLEFT', -2, 23)
+					Button[i].Backdrop:SetPoint('RIGHT', Button[i], 'RIGHT', 0, 0)
+					Button[i].isSkinned = true
+				end
 			end
 		end
 	end)
