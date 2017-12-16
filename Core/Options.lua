@@ -62,7 +62,7 @@ function AS:SetupProfile()
 	self.db = self.data.profile
 end
 
-function AS:GetOptions()
+function AS:BuildOptions()
 	local function GenerateOptionTable(skinName, order)
 		local text = strtrim(skinName:gsub('^Blizzard_(.+)','%1'):gsub('(%l)(%u%l)','%1 %2'))
 		local options = {
@@ -77,7 +77,7 @@ function AS:GetOptions()
 		return options
 	end
 
-	local Options = {
+	AS.Options = {
 		order = 101,
 		type = 'group',
 		name = AS.Title,
@@ -427,54 +427,56 @@ function AS:GetOptions()
 	local order, blizzorder = 1, 1
 	for skinName, _ in AS:OrderedPairs(AS.register) do
 		if strfind(skinName, 'Blizzard_') then
-			Options.args.blizzard.args[skinName] = GenerateOptionTable(skinName, blizzorder)
+			AS.Options.args.blizzard.args[skinName] = GenerateOptionTable(skinName, blizzorder)
 			blizzorder = blizzorder + 1
 		else
-			Options.args.addons.args[skinName] = GenerateOptionTable(skinName, order)
+			AS.Options.args.addons.args[skinName] = GenerateOptionTable(skinName, order)
 			order = order + 1
 		end
 	end
 
 	if AS:CheckAddOn('ElvUI') then
-		Options.args.blizzard.args.description ={
+		AS.Options.args.blizzard.args.description ={
 			type = 'header',
 			name = ASL.OptionsPanel.ElvUIDesc,
 			order = 0,
 		}
 
-		Options.args.misc.args.WeakAuraIconCooldown = {
+		AS.Options.args.misc.args.WeakAuraIconCooldown = {
 			type = 'toggle',
 			name = ASL['WeakAura Cooldowns'],
 			order = 1,
 			disabled = function() return not AS:CheckOption('WeakAuras', 'WeakAuras') end,
 		}
 
-		Options.args.misc.args.ElvUISkinModule = {
+		AS.Options.args.misc.args.ElvUISkinModule = {
 			type = 'toggle',
 			name = 'Use ElvUI Skin Styling',
 			order = 5,
 		}
-
-		hooksecurefunc(LibStub('AceConfigDialog-3.0-ElvUI'), 'CloseAll', function(self, appName)
-			if AS.NeedReload then
-				ElvUI[1]:StaticPopup_Show("PRIVATE_RL")
-			end
-		end)
 	end
 
 	if not AS:CheckAddOn('ElvUI') then
-		Options.args.misc.args.ThinBorder = {
+		AS.Options.args.misc.args.ThinBorder = {
 			name = 'Thin Border',
 			order = 1,
 			type = 'toggle',
 		}
 	end
+end
 
-	Options.args.profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(AS.data)
-	Options.args.profiles.order = -2
+function AS:GetOptions()
+	local Ace3OptionsPanel = AS:CheckAddOn('ElvUI') and ElvUI[1] or Enhanced_Config
+	Ace3OptionsPanel.Options.args.addonskins = AS.Options
 
-	if AS.EP then
-		local Ace3OptionsPanel = AS:CheckAddOn('ElvUI') and ElvUI[1] or Enhanced_Config
-		Ace3OptionsPanel.Options.args.addonskins = Options
+	AS.Options.args.profiles = LibStub('AceDBOptions-3.0'):GetOptionsTable(AS.data)
+	AS.Options.args.profiles.order = -2
+
+	if AS:CheckAddOn('ElvUI') then
+			hooksecurefunc(LibStub('AceConfigDialog-3.0-ElvUI'), 'CloseAll', function(self, appName)
+			if AS.NeedReload then
+				ElvUI[1]:StaticPopup_Show("PRIVATE_RL")
+			end
+		end)
 	end
 end

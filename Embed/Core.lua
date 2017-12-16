@@ -75,10 +75,7 @@ function AS:EmbedInit()
 					if AS:CheckOption('HideChatFrame') ~= 'NONE' and not FCF_IsValidChatFrame(_G[AS:CheckOption('HideChatFrame')]) then
 						AS:SetOption('HideChatFrame', 'NONE')
 					end
-					if AS.EP then
-						local Ace3OptionsPanel = AS:CheckAddOn('ElvUI') and ElvUI[1] or Enhanced_Config
-						Ace3OptionsPanel.Options.args.addonskins.args.embed.args.HideChatFrame.values = AS:GetChatWindowInfo()
-					end
+					AS.Options.args.embed.args.HideChatFrame.values = AS:GetChatWindowInfo()
 				end)
 			end
 		end

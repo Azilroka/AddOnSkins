@@ -291,6 +291,8 @@ function AS:Init(event, addon)
 			AS.ES = _G.EnhancedShadows
 		end
 
+		AS:BuildOptions()
+
 		if AS.EP then
 			AS.EP:RegisterPlugin(AddOnName, AS.GetOptions)
 		end
