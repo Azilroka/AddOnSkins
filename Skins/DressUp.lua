@@ -7,7 +7,6 @@ function AS:DressUp()
 
 	AS:SkinButton(CustomDressUpFrame.ResetButton)
 	AS:SkinCloseButton(CustomDressUpFrame.CloseButton)
-	AS:SkinDropDownBox(CustomDressUpFrame.OutfitDropDown)
 
 	AS:SkinButton(CustomDressUpFrameCancelButton)
 
