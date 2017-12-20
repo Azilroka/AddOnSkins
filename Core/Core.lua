@@ -283,8 +283,6 @@ function AS:Init(event, addon)
 
 		AS:UpdateMedia()
 
-		AS:UpdateLocale()
-
 		AS.EP = LibStub('LibElvUIPlugin-1.0', true)
 
 		if _G.EnhancedShadows then

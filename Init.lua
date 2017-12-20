@@ -28,7 +28,8 @@ end
 local AddOn = LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceEvent-3.0', 'AceHook-3.0')
 
 Engine[1] = AddOn
-Engine[2] = {} -- Locale
+Engine[2] = LibStub("AceLocale-3.0"):GetLocale(AddOnName, false);
+
 _G.AddOnSkins = Engine
 
 AddOn.Title = GetAddOnMetadata(AddOnName, 'Title')

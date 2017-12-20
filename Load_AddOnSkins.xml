@@ -1,6 +1,6 @@
 <Ui>
-	<Script file="Init.lua"/>
 	<Include file="Locale\Load_Locale.xml"/>
+	<Script file="Init.lua"/>
 	<Include file="Core\Load_Core.xml"/>
 	<Include file="Embed\Load_Embed.xml"/>
 	<Include file="Skins\Load_Skins.xml"/>
