@@ -438,7 +438,7 @@ function AS:BuildOptions()
 	if AS:CheckAddOn('ElvUI') then
 		AS.Options.args.blizzard.args.description ={
 			type = 'header',
-			name = ASL.OptionsPanel.ElvUIDesc,
+			name = ASL['Blizzard Skins'],
 			order = 0,
 		}
 
