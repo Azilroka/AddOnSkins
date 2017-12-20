@@ -3,7 +3,17 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Guild_Roster_Manager') then return end
 
 function AS:GuildRosterManager()
-	--Event Log
+
+	-- Tabs
+	AS:SkinButton(GRM_LogTab)
+	AS:SkinButton(GRM_AddEventTab)
+	AS:SkinButton(GRM_BanListTab)
+	AS:SkinButton(GRM_AddonUsersTab)
+	AS:SkinButton(GRM_OptionsTab)
+	AS:SkinButton(GRM_GuildAuditTab)
+	GRM_LogTab:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_RosterChangeLogFrame , "TOPLEFT" , -0.5 , 1 )
+	
+	-- Event Log
 	AS:SkinFrame(GRM_RosterChangeLogFrame)
 	GRM_RosterChangeLogScrollBorderFrameBottomBorder:Hide()
 	GRM_RosterChangeLogScrollBorderFrameTopBorder:Hide()
@@ -16,31 +26,106 @@ function AS:GuildRosterManager()
 	AS:SkinScrollBar(GRM_RosterChangeLogScrollFrameSlider)
 	AS:SkinCloseButton(GRM_RosterChangeLogFrame.CloseButton)
 	AS:SkinButton(GRM_RosterClearLogButton)
-	AS:SkinButton(GRM_RosterOptionsButton)
 
-	--Event Log Side Frame
+	-- Side Frame
 	AS:SkinFrame(GRM_RosterCheckBoxSideFrame)
-
-	--Event Log Confirm Frame
-	AS:SkinFrame(GRM_RosterConfirmFrame)
-	AS:SkinCloseButton(GRM_RosterConfirmFrame.CloseButton)
-	AS:SkinButton(GRM_RosterConfirmYesButton)
-	AS:SkinButton(GRM_RosterConfirmCancelButton)
+	GRM_RosterCheckBoxSideFrame:SetPoint ( "TOPLEFT" , GRM_RosterChangeLogFrame , "TOPRIGHT" , 2 , 0 )
 
 	--Options
+	AS:SkinFrame(GRM_OptionsFrame);
+	AS:SkinFrame(GRM_RosterSyncRankDropDownSelected);
+	AS:SkinFrame(GRM_RosterSyncRankDropDownMenu);
+	AS:SkinFrame(GRM_RosterBanListDropDownSelected);
+	AS:SkinFrame(GRM_RosterBanListDropDownMenu);
+	AS:SkinButton(GRM_ScanOptionsButton)
+	AS:SkinButton(GRM_SyncOptionsButton)
+	AS:SkinButton(GRM_CenterOptionsButton)
 	AS:SkinButton(GRM_ResetDefaultOptionsButton)
+	AS:SkinButton(GRM_HelpOptionsButton)
+	AS:SkinButton(GRM_ClearAllOptionsButton)
+	AS:SkinButton(GRM_ClearGuildOptionsButton)
+	AS:SkinButton(GRM_VersionOptionsButton)
 
-	--Guild Frame
-	AS:SkinButton(GRM_AddonUsersButton)
-	AS:SkinButton(GRM_BanListButton)
-	GRM_BanListButton:ClearAllPoints()
-	GRM_BanListButton:Point("RIGHT", GRM_AddonUsersButton, "LEFT", 0, 1)
+
+	-- Add Event to Calendar Frame
+	GRM_AddEventScrollBorderFrameBottomBorder:Hide()
+	GRM_AddEventScrollBorderFrameTopBorder:Hide()
+	GRM_AddEventScrollBorderFrameLeftBorder:Hide()
+	GRM_AddEventScrollBorderFrameRightBorder:Hide()
+	GRM_AddEventScrollBorderFrameTopLeftCorner:Hide()
+	GRM_AddEventScrollBorderFrameTopRightCorner:Hide()
+	GRM_AddEventScrollBorderFrameBottomRightCorner:Hide()
+	GRM_AddEventScrollBorderFrameBottomLeftCorner:Hide()
+	AS:SkinScrollBar(GRM_AddEventScrollFrameSlider)
+	AS:SkinButton(GRM_EventsFrameSetAnnounceButton)
+	AS:SkinButton(GRM_EventsFrameIgnoreButton)
+	
+	-- --Ban List
+	GRM_CoreBanListScrollBorderFrameBottomBorder:Hide()
+	GRM_CoreBanListScrollBorderFrameTopBorder:Hide()
+	GRM_CoreBanListScrollBorderFrameLeftBorder:Hide()
+	GRM_CoreBanListScrollBorderFrameRightBorder:Hide()
+	GRM_CoreBanListScrollBorderFrameTopLeftCorner:Hide()
+	GRM_CoreBanListScrollBorderFrameTopRightCorner:Hide()
+	GRM_CoreBanListScrollBorderFrameBottomRightCorner:Hide()
+	GRM_CoreBanListScrollBorderFrameBottomLeftCorner:Hide()
+	AS:SkinButton(GRM_BanListRemoveButton)
+	AS:SkinButton(GRM_BanListAddButton)
+	AS:SkinScrollBar(GRM_CoreBanListScrollFrameSlider)
+	
+
+	--Ban Frame
+	AS:SkinFrame(GRM_AddBanFrame)
+	AS:SkinCloseButton(GRM_AddBanFrame.CloseButton)
+	AS:SkinButton(GRM_AddBanConfirmButton)
+	AS:SkinEditBox(GRM_AddBanNameSelectionEditBox)
+	AS:SkinEditBox(GRM_AddBanServerSelectionEditBox)
+	AS:SkinEditBox(GRM_AddBanReasonEditBox)
+	AS:SkinFrame(GRM_AddBanDropDownClassSelected);
+	AS:SkinFrame(GRM_AddBanDropDownMenu)
+	-- Ban Frame Confirm Window
+	AS:SkinFrame(GRM_PopupWindowConfirmFrame)
+	AS:SkinButton(GRM_PopupWindowConfirmFrameYesButton)
+	AS:SkinButton(GRM_PopupWindowConfirmFrameCancelButton)
+	GRM_PopupWindowConfirmFrameBottomBorder:Hide()
+	GRM_PopupWindowConfirmFrameTopBorder:Hide()
+	GRM_PopupWindowConfirmFrameLeftBorder:Hide()
+	GRM_PopupWindowConfirmFrameRightBorder:Hide()
+	GRM_PopupWindowConfirmFrameTopLeftCorner:Hide()
+	GRM_PopupWindowConfirmFrameTopRightCorner:Hide()
+	GRM_PopupWindowConfirmFrameBottomRightCorner:Hide()
+	GRM_PopupWindowConfirmFrameBottomLeftCorner:Hide()
+	
+	-- Addon Users Frame
+	-- AS:SkinFrame(GRM_AddonUsersFrame)
+	AS:SkinScrollBar(GRM_AddonUsersScrollFrameSlider)
+	GRM_AddonUsersScrollBorderFrameBottomBorder:Hide()
+	GRM_AddonUsersScrollBorderFrameTopBorder:Hide()
+	GRM_AddonUsersScrollBorderFrameLeftBorder:Hide()
+	GRM_AddonUsersScrollBorderFrameRightBorder:Hide()
+	GRM_AddonUsersScrollBorderFrameTopLeftCorner:Hide()
+	GRM_AddonUsersScrollBorderFrameTopRightCorner:Hide()
+	GRM_AddonUsersScrollBorderFrameBottomRightCorner:Hide()
+	GRM_AddonUsersScrollBorderFrameBottomLeftCorner:Hide()
+
+	-- Audit Frame
+	AS:SkinFrame(GRM_AuditFrame)
+	AS:SkinScrollBar(GRM_AuditScrollFrameSlider)
+	GRM_AuditScrollBorderFrameBottomBorder:Hide()
+	GRM_AuditScrollBorderFrameTopBorder:Hide()
+	GRM_AuditScrollBorderFrameLeftBorder:Hide()
+	GRM_AuditScrollBorderFrameRightBorder:Hide()
+	GRM_AuditScrollBorderFrameTopLeftCorner:Hide()
+	GRM_AuditScrollBorderFrameTopRightCorner:Hide()
+	GRM_AuditScrollBorderFrameBottomRightCorner:Hide()
+	GRM_AuditScrollBorderFrameBottomLeftCorner:Hide()
+	
+
+	-- --Guild Frame
 	AS:SkinButton(GRM_LoadLogButton)
-	-- GRM_LoadLogButton:ClearAllPoints()
-	-- GRM_LoadLogButton:SetPoint("RIGHT", BanListButton, "LEFT", 0, 1)
 
 	--Guild Detail Frame
-	AS:SkinFrame(GRM_MemberDetailMetaData)
+	AS:SkinFrame(GRM_MemberDetailMetaData)	
 	AS:SkinCloseButton(GRM_MemberDetailMetaDataCloseButton)
 	AS:SkinButton(GRM_MemberDetailJoinDateButton)
 	AS:SkinButton(GRM_SetPromoDateButton)
@@ -49,67 +134,59 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_AddAltButton)
 	AS:SkinButton(GRM_GroupInviteButton)
 	AS:SkinFrame(GRM_AddAltEditFrame)
+	AS:SkinFrame(GRM_MonthDropDownMenuSelected)
+	AS:SkinFrame(GRM_MonthDropDownMenu)
+	AS:SkinFrame(GRM_DayDropDownMenuSelected)
+	AS:SkinFrame(GRM_DayDropDownMenu)
+	AS:SkinFrame(GRM_YearDropDownMenuSelected)
+	AS:SkinFrame(GRM_YearDropDownMenu)
 
-	GRM_AddAltEditBox:HookScript("OnShow", function()
-		AS:SkinEditBox(GRM_AddAltEditBox, 120, 15)
-	end)
-
-	GRM_PlayerNoteWindow:HookScript("OnShow", function()
-		AS:SkinFrame(GRM_PlayerNoteWindow)
-		-- AS:SkinEditBox(GRM_PlayerNoteEditBox)
-	end)
-
-	GRM_PlayerOfficerNoteWindow:HookScript("OnShow", function()
-		AS:SkinFrame(GRM_PlayerOfficerNoteWindow)
-		-- AS:SkinEditBox(GRM_PlayerOfficerNoteEditBox)
-	end)
-
-	--Ban List
-	AS:SkinFrame(GRM_CoreBanListFrame)
-	AS:SkinCloseButton(GRM_CoreBanListFrame.CloseButton)
-	AS:SkinButton(GRM_BanListRemoveButton)
-	AS:SkinButton(GRM_BanListAddButton)
-	AS:SkinScrollBar(GRM_CoreBanListScrollFrameSlider)
-	AS:SkinBackdropFrame(GRM_CoreBanListScrollBorderFrame)
-
-	GRM_CoreBanListScrollBorderFrame:HookScript("OnShow", function()
-		GRM_CoreBanListScrollBorderFrame:SetSize(475 , 150)
-	end)
-
-	--Sync Info Frame
-	AS:SkinFrame(GRM_AddonUsersCoreFrame)
-	AS:SkinCloseButton(GRM_AddonUsersCoreFrame.CloseButton)
-	AS:SkinScrollBar(GRM_AddonUsersScrollFrameSlider)
-	AS:SkinFrame(GRM_AddonUsersScrollBorderFrame)
-
-	-- Updates (added by Arkaan).
-	-- Purpose: On frame transformation, some of the allignment changes ever so slightly, so it appears to overlap a little, particularly now
-	--			with the removal of a thick border frame, so in a scroll window, the frame slightly overlaps the text. Very minor changes
-	--			Purely quality of life changes here, but I don't want addon users to miss out on the addon "AddOnSkins" as a result of using GRM,
-	--			or the other way around
-	-- Of note - due to on-demand load order, for frame save positioning, these two need to be triggered seperately.
-	-- the isLoaded booleans are gates to prevent unnecessary re-initialization spam everytime the frame loads.
+	-- Ban Popup Frames
+	AS:SkinFrame(GRM_PopupWindow)
+	AS:SkinFrame(GRM_MemberDetailEditBoxFrame)
+	
 	local isLoaded = false;
 	GRM_MemberDetailMetaData:HookScript("OnShow" , function()
 		if not isLoaded then
-			GRM_MemberDetailMetaData:SetPoint("TOPLEFT", GuildRosterFrame, "TOPRIGHT", 2, 0)
-			GRM_AddAltEditFrame:SetPoint("BOTTOMLEFT", GRM_MemberDetailMetaData, "BOTTOMRIGHT", 2, 0)
-			isLoaded = true
+			GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GuildRosterFrame , "TOPRIGHT" , 2 , 0 );
+			GRM_AddAltEditFrame:SetPoint ( "BOTTOMLEFT" , GRM_MemberDetailMetaData , "BOTTOMRIGHT" ,  2 , 0 );
+			AS:SkinEditBox(GRM_AddAltEditBox, 120, 15)
+			AS:SkinFrame(GRM_PlayerNoteWindow)
+			AS:SkinEditBox(GRM_PlayerNoteEditBox)
+			AS:SkinFrame(GRM_PlayerOfficerNoteWindow)
+			AS:SkinEditBox(GRM_PlayerOfficerNoteEditBox)
+
+			isLoaded = true;
 		end
 	end)
 
-	local isLoaded2 = false
+	local isLoaded2 = false;
 	GRM_RosterCheckBoxSideFrame:HookScript("OnShow" , function()
 		if not isLoaded2 then
-			GRM_RosterCheckBoxSideFrame:SetPoint("TOPLEFT", GRM_RosterChangeLogFrame, "TOPRIGHT", 2, 0)
-			GRM_CoreBanListScrollFrame:SetPoint("RIGHT" , GRM_CoreBanListFrame, -25 , -35)
-			GRM_CoreBanListFrameTitleText2:SetPoint("BOTTOMLEFT", GRM_CoreBanListScrollBorderFrame, "TOPLEFT", 15, 1)
-			GRM_CoreBanListFrameTitleText3:SetPoint("BOTTOM", GRM_CoreBanListScrollBorderFrame, "TOP", 60, 1)
-			GRM_CoreBanListFrameTitleText4:SetPoint("BOTTOM", GRM_CoreBanListScrollBorderFrame, "TOPRIGHT", -54, 1)
-			GRM_AddonUsersCoreFrameTitleText:SetPoint("BOTTOMLEFT", GRM_AddonUsersScrollBorderFrame, "TOPLEFT", 12, 5)
-			GRM_AddonUsersCoreFrameTitleText2:SetPoint("BOTTOM", GRM_AddonUsersScrollBorderFrame, "TOP", 0, 5)
-			GRM_AddonUsersCoreFrameTitleText3:SetPoint("BOTTOMRIGHT", GRM_AddonUsersScrollBorderFrame, "TOPRIGHT", -12, 5)
-			isLoaded2 = true
+			GRM_RosterCheckBoxSideFrame:SetPoint ( "TOPLEFT" , GRM_RosterChangeLogFrame , "TOPRIGHT" , 2 , 0 )
+			--Confirm Frames
+			AS:SkinFrame(GRM_RosterConfirmFrame)
+			AS:SkinCloseButton(GRM_RosterConfirmFrame.CloseButton)
+			AS:SkinButton(GRM_RosterConfirmYesButton)
+			AS:SkinButton(GRM_RosterConfirmCancelButton)
+
+			-- Ban Frames
+			AS:SkinFrame(GRM_AddBanReasonEditBoxFrame)
+			GRM_PopupWindowConfirmFrame:SetSize ( 300 , 100 )
+			GRM_PopupWindowConfirmFrame:SetPoint( "TOP" , GRM_AddBanFrame , "BOTTOM" , 0 , -1 )
+			GRM_CoreBanListFrameTitleText4:SetPoint ( "BOTTOMRIGHT" , GRM_CoreBanListScrollBorderFrame , "TOPRIGHT" , -45 , -4 );
+
+			-- Audit Frames
+			GRM_AuditFrameText2:SetPoint ( "BOTTOMLEFT" , GRM_AuditScrollBorderFrame , "TOP" , -58 , -2 );
+			GRM_AuditFrameText3:SetPoint ( "BOTTOMLEFT" , GRM_AuditScrollBorderFrame , "TOP" , 62 , -2 );
+			GRM_AuditFrameText4:SetPoint ( "BOTTOMRIGHT" , GRM_AuditScrollBorderFrame , "TOPRIGHT" , -29 ,  -2 );
+
+			-- Add Events
+			GRM_EventsFrameNameTitleText3:SetPoint ( "TOPRIGHT" , GRM_AddEventScrollBorderFrame , -218 , 8 )
+
+			-- Addon Users
+			GRM_AddonUsersCoreFrameTitleText3:SetPoint ( "BOTTOMRIGHT" , GRM_AddonUsersScrollBorderFrame , "TOPRIGHT" , -26 , -2 );
+			isLoaded2 = true;
 		end
 	end)
 
