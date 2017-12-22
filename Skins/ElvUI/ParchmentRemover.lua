@@ -7,7 +7,7 @@ function AS:ParchmentRemover(event, addon)
 		AS:StripTextures(ArchaeologyFrame, true)
 		for i = 1, ARCHAEOLOGY_MAX_COMPLETED_SHOWN do
 			local artifact = _G["ArchaeologyFrameCompletedPageArtifact"..i]
-			
+
 			if artifact then
 				_G["ArchaeologyFrameCompletedPageArtifact"..i.."ArtifactName"]:SetTextColor(1, 1, 0)
 				_G["ArchaeologyFrameCompletedPageArtifact"..i.."ArtifactSubText"]:SetTextColor(0.6, 0.6, 0.6)
@@ -44,7 +44,7 @@ function AS:ParchmentRemover(event, addon)
 		ArchaeologyFrameArtifactPageHistoryScrollChildText:SetTextColor(1, 1, 1)
 	end
 	if addon == 'Blizzard_Calendar' and ElvUI[1].private.skins.blizzard.calendar == true then
-	 	for i = 1, 42 do
+		for i = 1, 42 do
 			_G['CalendarDayButton'..i]:SetFrameLevel(_G['CalendarDayButton'..i]:GetFrameLevel() + 1)
 			AS:StripTextures(_G['CalendarDayButton'..i])
 			AS:SetTemplate(_G['CalendarDayButton'..i], 'Default')

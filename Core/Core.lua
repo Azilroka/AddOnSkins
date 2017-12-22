@@ -165,8 +165,7 @@ function AS:CallSkin(skin, func, event, ...)
 	else
 		local pass = pcall(func, self, event, ...)
 		if not pass then
-			local message = '%s %s: |cfFFF0000There was an error in the|r |cff0AFFFF%s|r |cffFF0000skin|r.'
-			DEFAULT_CHAT_FRAME:AddMessage(format(message, AS.Title, AS.Version, skin))
+			DEFAULT_CHAT_FRAME:AddMessage(format('%s %s: |cfFFF0000There was an error in the|r |cff0AFFFF%s|r |cffFF0000skin|r.', AS.Title, AS.Version, skin))
 			AS.FoundError = true
 		end
 	end
@@ -258,6 +257,7 @@ function AS:Init(event, addon)
 				['WeakAuraIconCooldown'] = false,
 				['SkinTemplate'] = 'Transparent',
 				['HideChatFrame'] = 'NONE',
+				['Parchment'] = false,
 				['SkinDebug'] = false,
 				['LoginMsg'] = true,
 				['EmbedSystemMessage'] = true,
