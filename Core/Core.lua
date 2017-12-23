@@ -213,6 +213,10 @@ function AS:StartSkinning(event)
 		end
 	end
 
+	if AS:CheckAddOn('AddonLoader') then
+		AS:AcceptFrame('AddOnSkins is not compatible with AddonLoader.\nPlease remove it if you would like all the skins to function.', function(self) self:GetParent():Hide() end)
+	end
+
 	if AS.FoundError then
 		AS:Print(format('%s: Please report this to Azilroka immediately @ %s', AS.Version, AS:PrintURL(AS.TicketTracker)))
 	end

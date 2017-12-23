@@ -55,4 +55,4 @@ function AS:Postal(event, addon)
 	AS:UnregisterSkinEvent('Postal', event)
 end
 
-AS:RegisterSkin('Postal', AS.Postal, 'MAIL_SHOW')
+AS:RegisterSkin('Postal', AS.Postal, 'MAIL_SHOW', '[AddonLoader]')

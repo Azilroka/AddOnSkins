@@ -7,4 +7,4 @@ function AS:Arh()
 	AS:SkinTooltip(Arh_Tooltip, true)
 end
 
-AS:RegisterSkin('Arh', AS.Arh)
+AS:RegisterSkin('Arh', AS.Arh, '[AddonLoader]')

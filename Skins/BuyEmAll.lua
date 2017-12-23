@@ -10,4 +10,4 @@ function AS:BuyEmAll()
 	AS:SkinButton(BuyEmAllOkayButton)
 end
 
-AS:RegisterSkin('BuyEmAll', AS.BuyEmAll)
+AS:RegisterSkin('BuyEmAll', AS.BuyEmAll, '[AddonLoader]')

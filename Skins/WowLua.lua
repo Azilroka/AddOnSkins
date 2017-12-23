@@ -42,7 +42,7 @@ function AS:WowLua()
 		WowLuaButton_Next,
 		WowLuaButton_Run,
 	}
-	
+
 	for _, object in pairs(Buttons) do
 		AS:CreateBackdrop(object)
 		AS:SkinTexture(object:GetNormalTexture())
@@ -53,4 +53,4 @@ function AS:WowLua()
 	end
 end
 
-AS:RegisterSkin('WowLua', AS.WowLua)
+AS:RegisterSkin('WowLua', AS.WowLua, '[AddonLoader]')

@@ -6,4 +6,4 @@ function AS:QuestPointer(event, addon)
 	AS:SkinTooltip(QuestPointerTooltip)
 end
 
-AS:RegisterSkin('QuestPointer', AS.QuestPointer)
+AS:RegisterSkin('QuestPointer', AS.QuestPointer, '[AddonLoader]')

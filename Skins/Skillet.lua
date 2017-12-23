@@ -326,4 +326,4 @@ function AS:Skillet()
 	_G['SkilletPluginButton']:SetScript('PostClick', SkinPluginButtons)
 end
 
-AS:RegisterSkin('Skillet', AS.Skillet)
+AS:RegisterSkin('Skillet', AS.Skillet, '[AddonLoader]')
