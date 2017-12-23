@@ -77,6 +77,7 @@
 	<Script file="FlyoutButtonCustom.lua"/>
 	<Script file="Foglight.lua"/>
 	<Script file="GCGambler.lua"/>
+	<Script file="GlobalIgnoreList.lua"/>
 	<Script file="Grinder.lua"/>
 	<Script file="GryphonHeartItems.lua"/>
 	<Script file="Guild_Roster_Manager.lua"/>
