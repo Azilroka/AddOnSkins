@@ -174,6 +174,7 @@ function AS:ParchmentRemover(event, addon)
 				QuestInfoObjectivesText:SetTextColor(1, 1, 1)
 				QuestInfoGroupSize:SetTextColor(1, 1, 1)
 				QuestInfoRewardText:SetTextColor(1, 1, 1)
+				QuestInfoQuestType:SetTextColor(1, 1, 1)
 				QuestInfoRewardsFrame.ItemChooseText:SetTextColor(1, 1, 1)
 				QuestInfoRewardsFrame.ItemReceiveText:SetTextColor(1, 1, 1)
 				if (QuestInfoRewardsFrame.SpellLearnText) then
