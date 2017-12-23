@@ -91,6 +91,7 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 			Frame.isInsetDone = true
 		end
 	end
+
 	local R, G, B = unpack(AS.BackdropColor)
 	local Alpha = (Template == "Transparent" and .8 or 1)
 

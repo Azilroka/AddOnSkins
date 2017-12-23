@@ -220,9 +220,6 @@ end
 
 function AS:Init(event, addon)
 	if event == 'ADDON_LOADED' and IsAddOnLoaded(AddOnName) then
-		self:RunPreload(addon)
-	end
-	if event == 'PLAYER_LOGIN' then
 		local Defaults = {
 			profile = {
 			-- Embeds
@@ -283,19 +280,20 @@ function AS:Init(event, addon)
 
 		AS:UpdateMedia()
 
-		AS.EP = LibStub('LibElvUIPlugin-1.0', true)
+		self:RunPreload(addon)
+	end
+	if event == 'PLAYER_LOGIN' then
+		AS:BuildOptions()
+		AS:EmbedInit()
 
 		if _G.EnhancedShadows then
 			AS.ES = _G.EnhancedShadows
 		end
 
-		AS:BuildOptions()
-
+		AS.EP = LibStub('LibElvUIPlugin-1.0', true)
 		if AS.EP then
 			AS.EP:RegisterPlugin(AddOnName, AS.GetOptions)
 		end
-
-		AS:EmbedInit()
 
 		if AS:CheckOption('LoginMsg') then
 			AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
