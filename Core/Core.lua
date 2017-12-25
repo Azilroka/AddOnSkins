@@ -222,65 +222,72 @@ function AS:StartSkinning(event)
 	end
 end
 
+function AS:BuildProfile()
+	local Defaults = {
+		profile = {
+		-- Embeds
+			['EmbedOoC'] = false,
+			['EmbedOoCDelay'] = 10,
+			['EmbedCoolLine'] = false,
+			['EmbedSexyCooldown'] = false,
+			['EmbedSystem'] = false,
+			['EmbedSystemDual'] = false,
+			['EmbedMain'] = 'Details',
+			['EmbedLeft'] = 'Details',
+			['EmbedRight'] = 'Details',
+			['EmbedRightChat'] = true,
+			['EmbedLeftWidth'] = 200,
+			['EmbedBelowTop'] = false,
+			['TransparentEmbed'] = false,
+			['EmbedIsHidden'] = false,
+			['EmbedFrameStrata'] = '3-MEDIUM',
+			['EmbedFrameLevel'] = 10,
+		-- Misc
+			['RecountBackdrop'] = true,
+			['SkadaBackdrop'] = true,
+			['OmenBackdrop'] = true,
+			['DetailsBackdrop'] = true,
+			['MiscFixes'] = true,
+			['DBMSkinHalf'] = false,
+			['DBMFont'] = 'Arial Narrow',
+			['DBMFontSize'] = 12,
+			['DBMFontFlag'] = 'OUTLINE',
+			['DBMRadarTrans'] = false,
+			['WeakAuraAuraBar'] = false,
+			['WeakAuraIconCooldown'] = false,
+			['SkinTemplate'] = 'Transparent',
+			['HideChatFrame'] = 'NONE',
+			['Parchment'] = false,
+			['SkinDebug'] = false,
+			['LoginMsg'] = true,
+			['EmbedSystemMessage'] = true,
+			['ElvUISkinModule'] = false,
+			['ThinBorder'] = false,
+		},
+	}
+
+	for skin in pairs(AS.register) do
+		if AS:CheckAddOn('ElvUI') and strfind(skin, 'Blizzard_') then
+			Defaults.profile[skin] = false
+		else
+			Defaults.profile[skin] = true
+		end
+	end
+
+	self.data = LibStub('AceDB-3.0'):New('AddOnSkinsDB', Defaults)
+
+	self.data.RegisterCallback(AS, 'OnProfileChanged', 'SetupProfile')
+	self.data.RegisterCallback(AS, 'OnProfileCopied', 'SetupProfile')
+	self.db = self.data.profile
+end
+
+function AS:SetupProfile()
+	self.db = self.data.profile
+end
+
 function AS:Init(event, addon)
 	if event == 'ADDON_LOADED' and IsAddOnLoaded(AddOnName) then
-		local Defaults = {
-			profile = {
-			-- Embeds
-				['EmbedOoC'] = false,
-				['EmbedOoCDelay'] = 10,
-				['EmbedCoolLine'] = false,
-				['EmbedSexyCooldown'] = false,
-				['EmbedSystem'] = false,
-				['EmbedSystemDual'] = false,
-				['EmbedMain'] = 'Details',
-				['EmbedLeft'] = 'Details',
-				['EmbedRight'] = 'Details',
-				['EmbedRightChat'] = true,
-				['EmbedLeftWidth'] = 200,
-				['EmbedBelowTop'] = false,
-				['TransparentEmbed'] = false,
-				['EmbedIsHidden'] = false,
-				['EmbedFrameStrata'] = '3-MEDIUM',
-				['EmbedFrameLevel'] = 10,
-			-- Misc
-				['RecountBackdrop'] = true,
-				['SkadaBackdrop'] = true,
-				['OmenBackdrop'] = true,
-				['DetailsBackdrop'] = true,
-				['MiscFixes'] = true,
-				['DBMSkinHalf'] = false,
-				['DBMFont'] = 'Arial Narrow',
-				['DBMFontSize'] = 12,
-				['DBMFontFlag'] = 'OUTLINE',
-				['DBMRadarTrans'] = false,
-				['WeakAuraAuraBar'] = false,
-				['WeakAuraIconCooldown'] = false,
-				['SkinTemplate'] = 'Transparent',
-				['HideChatFrame'] = 'NONE',
-				['Parchment'] = false,
-				['SkinDebug'] = false,
-				['LoginMsg'] = true,
-				['EmbedSystemMessage'] = true,
-				['ElvUISkinModule'] = false,
-				['ThinBorder'] = false,
-			},
-		}
-
-		for skin in pairs(AS.register) do
-			if AS:CheckAddOn('ElvUI') and strfind(skin, 'Blizzard_') then
-				Defaults.profile[skin] = false
-			else
-				Defaults.profile[skin] = true
-			end
-		end
-
-		AS.data = LibStub('AceDB-3.0'):New('AddOnSkinsDB', Defaults)
-
-		AS.data.RegisterCallback(AS, 'OnProfileChanged', 'SetupProfile')
-		AS.data.RegisterCallback(AS, 'OnProfileCopied', 'SetupProfile')
-
-		AS:SetupProfile()
+		AS:BuildProfile()
 
 		AS:UpdateMedia()
 
