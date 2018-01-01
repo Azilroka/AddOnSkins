@@ -12,16 +12,13 @@ function AS:OrderHallCommander(event, addon)
 		TroopFrame:SetPoint("BOTTOM", OrderHallMissionFrame, "TOP", 0, 0)
 		TroopFrame:SetWidth(OrderHallMissionFrame:GetWidth()+2)
 
---[[		if not OrderHallMissionFrameMissions then return end
 		OrderHallMissionFrameMissions:HookScript('OnShow', function(self)
 			AS:Delay(0.5, function()
-				local frame = FollowerIcon:GetParent()
-				if not frame then return end
+				local frame = LibInitCheckbox00001:GetParent():GetParent()
 				if frame.IsSkinned then return end
 
 				frame.IsSkinned = true
 
-				frame = LibInitCheckbox00001:GetParent():GetParent()
 				AS:StripTextures(frame)
 				AS:SetTemplate(frame, 'Transparent')
 				AS:SkinCloseButton(frame.Close)
@@ -47,7 +44,7 @@ function AS:OrderHallCommander(event, addon)
 				frame = {OrderHallMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:GetChildren()}
 				AS:SkinButton(frame[1])
 			end)
-		end)]]
+		end)
 		AS:UnregisterSkinEvent('OrderHallCommander', event)
 --[[	elseif OHCGUIContainer1 and event == "GARRISON_MISSION_COMPLETE_RESPONSE" then
 		if OHCGUIContainer1.IsSkinned then return end
