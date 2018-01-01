@@ -8,6 +8,7 @@ function AS:OrderHallCommander(event)
 		OrderHallMissionFrameMissions:HookScript('OnShow', function(self)
 			AS:Delay(0.5, function()
 				local frame = FollowerIcon:GetParent()
+				if not frame then return end
 				if frame.IsSkinned then return end
 
 				AS:StripTextures(frame)
