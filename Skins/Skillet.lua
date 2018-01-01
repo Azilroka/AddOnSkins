@@ -324,6 +324,57 @@ function AS:Skillet()
 	_G['SkilletHideUncraftableRecipes']:SetScript('OnUpdate', SkinIcon)
 	_G['SkilletReagentParent']:SetScript('OnUpdate', SkinReagentIcon)
 	_G['SkilletPluginButton']:SetScript('PostClick', SkinPluginButtons)
+	
+	-- Fixes by fuba - Begin
+	
+	local point, relativeTo, relativePoint, xOffset, yOffset;	
+	AS:SkinDropDownBox(SkilletFilterDropdown)
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSearchBox:GetPoint();
+	SkilletSearchBox:SetPoint(point, relativeTo, relativePoint, xOffset-1, yOffset);	
+	AS:SkinEditBox(SkilletSearchBox)
+	SkilletSearchBox:SetSize(125,18)
+
+	-- SkilletSearchFilterClear
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSearchFilterClear:GetPoint();
+	SkilletSearchFilterClear:SetPoint(point, relativeTo, relativePoint, xOffset+10, yOffset+2);
+	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletSearchFilterClear)
+	SquareButton_SetIcon(SkilletSearchFilterClear, "DELETE")
+	SkilletSearchFilterClear:Size(18)
+
+	-- SkilletClearNumButton
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletClearNumButton:GetPoint();
+	SkilletClearNumButton:SetPoint(point, relativeTo, relativePoint, xOffset+10, yOffset+2);
+	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletClearNumButton)
+	SquareButton_SetIcon(SkilletClearNumButton, "DELETE")
+	SkilletClearNumButton:Size(18)
+
+	-- SkilletSortAscButton
+	SkilletSortAscButton.text:SetText("")
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSortAscButton:GetPoint();
+	SkilletSortAscButton:SetPoint(point, relativeTo, relativePoint, xOffset+3, yOffset);	
+	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletSortAscButton, true, true)
+	SkilletSortAscButton:Size(18)
+
+	-- SkilletSortDescButton
+	SkilletSortDescButton.text:SetText("")
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSortDescButton:GetPoint();
+	SkilletSortDescButton:SetPoint(point, relativeTo, relativePoint, xOffset+3, yOffset);
+	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletSortDescButton, true, false)
+	SkilletSortDescButton:Size(18)
+
+	-- SkilletFilterOperations
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletFilterOperations:GetPoint();
+	SkilletFilterOperations:SetPoint(point, relativeTo, relativePoint, xOffset+5, yOffset);
+	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletFilterOperations, false, false)
+	SkilletFilterOperations:Size(18)
+
+	-- SkilletRecipeGroupOperations	
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletRecipeGroupOperations:GetPoint();
+	SkilletRecipeGroupOperations:SetPoint(point, relativeTo, relativePoint, xOffset+5, yOffset);
+	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletRecipeGroupOperations, false, false)
+	SkilletRecipeGroupOperations:Size(18)
+
+	-- Fixes by fuba - End
 end
 
 AS:RegisterSkin('Skillet', AS.Skillet, '[AddonLoader]')
