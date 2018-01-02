@@ -52,8 +52,7 @@ function AS:Blizzard_CharacterFrame()
 
 	local function ColorizeStatPane(frame)
 		if(frame.leftGrad) then return end
-		local color = RAID_CLASS_COLORS[AS.MyClass]
-		local r, g, b = color.r, color.g, color.b
+		local r, g, b = unpack(AS.ClassColor)
 		frame.leftGrad = frame:CreateTexture(nil, "BORDER")
 		frame.leftGrad:SetWidth(80)
 		frame.leftGrad:SetHeight(frame:GetHeight())

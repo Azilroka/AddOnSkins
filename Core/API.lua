@@ -1,7 +1,5 @@
 local AS = unpack(AddOnSkins)
 
-local Color = RAID_CLASS_COLORS[AS.MyClass]
-
 local _G, CreateFrame = _G, CreateFrame
 local unpack, pairs, select, type, assert, next = unpack, pairs, select, type, assert, next
 local strlower, strfind = strlower, strfind
@@ -174,15 +172,10 @@ function AS:SkinButton(Button, Strip)
 
 	local ButtonName = Button:GetName()
 
-	if ButtonName then
-		for _, Region in pairs(BlizzardRegions) do
-			if _G[ButtonName..Region] then
-				_G[ButtonName..Region]:SetAlpha(0)
-			end
-		end
-	end
-
 	for _, Region in pairs(BlizzardRegions) do
+		if ButtonName and _G[ButtonName..Region] then
+			_G[ButtonName..Region]:SetAlpha(0)
+		end
 		if Button[Region] then
 			Button[Region]:SetAlpha(0)
 		end
@@ -200,11 +193,7 @@ function AS:SkinButton(Button, Strip)
 	end
 
 	Button:HookScript("OnEnter", function(self)
-		if AS.ValueColor then
-			self:SetBackdropBorderColor(unpack(AS.ValueColor))
-		else
-			self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
-		end
+		self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor))
 	end)
 
 	Button:HookScript("OnLeave", function(self)
@@ -309,7 +298,7 @@ function AS:SkinCloseButton(CloseButton, Reposition)
 	CloseButton:HookScript("OnEnter", function(self)
 		self.Text:SetTextColor(1, .2, .2)
 		if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
-			self.Backdrop:SetBackdropBorderColor(unpack(ElvUI[1]["media"].rgbvaluecolor))
+			self.Backdrop:SetBackdropBorderColor(unpack(AS.ValueColor))
 		else
 			self.Backdrop:SetBackdropBorderColor(1, .2, .2)
 		end
@@ -502,8 +491,8 @@ function AS:SkinScrollBar(Frame)
 			end)
 
 			ScrollUpButton:HookScript('OnEnter', function(self)
-				self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
-				self.Text:SetTextColor(Color.r, Color.g, Color.b)
+				self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor))
+				self.Text:SetTextColor(unpack(AS.ValueColor or AS.ClassColor))
 			end)
 			ScrollUpButton:HookScript('OnLeave', function(self)
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -532,8 +521,8 @@ function AS:SkinScrollBar(Frame)
 			end)
 
 			ScrollDownButton:HookScript('OnEnter', function(self)
-				self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
-				self.Text:SetTextColor(Color.r, Color.g, Color.b)
+				self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor))
+				self.Text:SetTextColor(unpack(AS.ValueColor or AS.ClassColor))
 			end)
 
 			ScrollDownButton:HookScript('OnLeave', function(self)
@@ -557,7 +546,7 @@ function AS:SkinScrollBar(Frame)
 				Frame.ThumbBG:SetPoint("BOTTOMRIGHT", Frame:GetThumbTexture(), "BOTTOMRIGHT", -2, 3)
 				AS:SetTemplate(Frame.ThumbBG, "Default")
 				Frame.ThumbBG:HookScript('OnEnter', function(self)
-					self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
+					self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor))
 				end)
 				Frame.ThumbBG:HookScript('OnLeave', function(self)
 					self:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -750,8 +739,7 @@ function AS:SkinStatusBar(frame, ClassColor)
 	AS:SkinBackdropFrame(frame)
 	frame:SetStatusBarTexture(AS.NormTex)
 	if ClassColor then
-		local color = RAID_CLASS_COLORS[AS.MyClass]
-		frame:SetStatusBarColor(color.r, color.g, color.b)
+		frame:SetStatusBarColor(unpack(AS.ClassColor))
 	end
 	if AS:CheckAddOn('ElvUI') then
 		ElvUI[1]:RegisterStatusBar(frame)
@@ -821,8 +809,8 @@ function AS:SkinMaxMinFrame(frame)
 			end)
 
 			button:HookScript('OnEnter', function(self)
-				self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
-				self.Text:SetTextColor(Color.r, Color.g, Color.b)
+				self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor))
+				self.Text:SetTextColor(unpack(AS.ValueColor or AS.ClassColor))
 			end)
 
 			button:HookScript('OnLeave', function(self)

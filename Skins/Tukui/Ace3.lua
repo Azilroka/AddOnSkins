@@ -2,7 +2,6 @@ local AS = unpack(AddOnSkins)
 
 if AS:CheckAddOn('ElvUI') then return end
 
-local Color = RAID_CLASS_COLORS[AS.MyClass]
 function AS:Ace3()
 	local AceGUI = LibStub('AceGUI-3.0', true)
 	if not AceGUI then return end
