@@ -1,4 +1,5 @@
 local ASL = LibStub("AceLocale-3.0"):NewLocale("AddOnSkins", "enUS", true, true)
+if not ASL then return end
 
 ASL["About/Help"] = true
 ASL["AddOn Skins"] = true
