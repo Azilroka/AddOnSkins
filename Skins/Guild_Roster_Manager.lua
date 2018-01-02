@@ -11,8 +11,8 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_AddonUsersTab)
 	AS:SkinButton(GRM_OptionsTab)
 	AS:SkinButton(GRM_GuildAuditTab)
-	GRM_LogTab:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_RosterChangeLogFrame , "TOPLEFT" , -0.5 , 1 )
-	
+	GRM_LogTab:SetPoint ( "BOTTOMLEFT" , GRM_UI.GRM_RosterChangeLogFrame , "TOPLEFT" , 0 , 1 )
+
 	-- Event Log
 	AS:SkinFrame(GRM_RosterChangeLogFrame)
 	GRM_RosterChangeLogScrollBorderFrameBottomBorder:Hide()
@@ -110,6 +110,8 @@ function AS:GuildRosterManager()
 
 	-- Audit Frame
 	AS:SkinFrame(GRM_AuditFrame)
+	AS:SkinButton(GRM_SetJoinUnkownButton)
+	AS:SkinButton(GRM_SetPromoUnkownButton)
 	AS:SkinScrollBar(GRM_AuditScrollFrameSlider)
 	GRM_AuditScrollBorderFrameBottomBorder:Hide()
 	GRM_AuditScrollBorderFrameTopBorder:Hide()
