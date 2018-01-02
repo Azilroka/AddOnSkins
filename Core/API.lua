@@ -708,29 +708,14 @@ function AS:SkinSlideBar(Frame, Height, MoveText)
 	end
 end
 
-function AS:SkinIconButton(Button, ShrinkIcon)
+function AS:SkinIconButton(Button)
 	if Button.isSkinned then return end
 
-	local Icon, Texture
 	local ButtonName = Button:GetName()
-
-	if Button.icon then
-		Icon = Button.icon
-		Texture = Button.icon:GetTexture()
-	elseif Button.Icon then
-		Icon = Button.Icon
-		Texture = Button.Icon:GetTexture()
-	elseif ButtonName then
-		if _G[ButtonName.."IconTexture"] then
-			Icon = _G[ButtonName.."IconTexture"]
-			Texture = _G[ButtonName.."IconTexture"]:GetTexture()
-		elseif _G[ButtonName.."Icon"] then
-			Icon = _G[ButtonName.."Icon"]
-			Texture = _G[ButtonName.."Icon"]:GetTexture()
-		end
-	end
+	local Icon, Texture = Button.icon or Button.Icon or ButtonName and (_G[ButtonName.."Icon"] or _G[ButtonName.."IconTexture"])
 
 	if Icon then
+		Texture = Icon:GetTexture()
 		AS:SkinFrame(Button)
 		AS:StyleButton(Button)
 		Icon:SetTexture(Texture)
