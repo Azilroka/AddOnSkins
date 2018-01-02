@@ -2,8 +2,8 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('OrderHallCommander') then return end
 
-function AS:OrderHallCommander(event, addon)
-	if event == "ADDON_LOADED" and addon == 'OrderHallCommander' then
+function AS:OrderHallCommander(event)
+	if event == "ADDON_LOADED" then
 		local OHC = LibStub('LibInit'):GetAddon('OrderHallCommander')
 		local OHCCache = OHC:GetCacheModule()
 		local TroopFrame = OHCCache:GetTroopsFrame()
