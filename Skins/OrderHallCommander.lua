@@ -41,12 +41,12 @@ function AS:OrderHallCommander(event, addon)
 					end
 				end
 
-				frame = {OrderHallMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:GetChildren()}
+				frame = {self.CompleteDialog.BorderFrame.ViewButton:GetChildren()}
 				AS:SkinButton(frame[1])
 			end)
 		end)
 		AS:UnregisterSkinEvent('OrderHallCommander', event)
---[[	elseif OHCGUIContainer1 and event == "GARRISON_MISSION_COMPLETE_RESPONSE" then
+	elseif OHCGUIContainer1 and event == "GARRISON_MISSION_COMPLETE_RESPONSE" then
 		if OHCGUIContainer1.IsSkinned then return end
 		AS:UnregisterSkinEvent('OrderHallCommander', event)
 
@@ -54,7 +54,7 @@ function AS:OrderHallCommander(event, addon)
 			AS:SkinFrame(OHCGUIContainer1)
 			AS:SkinCloseButton(OHCGUIContainer1.Close)
 		end)
---]]	end
+	end
 end
 
-AS:RegisterSkin('OrderHallCommander', AS.OrderHallCommander, 'ADDON_LOADED') -- 'GARRISON_MISSION_COMPLETE_RESPONSE'
+AS:RegisterSkin('OrderHallCommander', AS.OrderHallCommander, 'ADDON_LOADED', 'GARRISON_MISSION_COMPLETE_RESPONSE')
