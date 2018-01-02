@@ -19,21 +19,21 @@ function AS:ArkInventory()
 	end)
 
 	hooksecurefunc(ArkInventory, 'Frame_Main_Anchor_Set', function(loc_id)
-        local frame = ArkInventory.Frame_Main_Get(loc_id):GetName()
-        AS:SkinEditBox(_G[frame..ArkInventory.Const.Frame.Search.Name..'Filter'])       
-        local f = _G[frame..ArkInventory.Const.Frame.Search.Name..'Filter']
-        local b = _G[frame..ArkInventory.Const.Frame.Search.Name..'Clear']
-        if f and f.Backdrop then
-            f.Backdrop:SetFrameLevel(0);
-            f.Backdrop:SetOutside(f.Backdrop:GetParent(), 1, -2);
-        end
-        if b then       
-            AS:SkinButton(b);
-            b:SetNormalTexture([[Interface\Buttons\UI-GroupLoot-Pass-Up]])
-            b:SetHighlightTexture([[Interface\Buttons\UI-GroupLoot-Pass-Highlight]])
-            b:SetPushedTexture([[Interface\Buttons\UI-GroupLoot-Pass-Down]])
-        end
-    end)
+		local frame = ArkInventory.Frame_Main_Get(loc_id):GetName()
+		AS:SkinEditBox(_G[frame..ArkInventory.Const.Frame.Search.Name..'Filter'])
+		local f = _G[frame..ArkInventory.Const.Frame.Search.Name..'Filter']
+		local b = _G[frame..ArkInventory.Const.Frame.Search.Name..'Clear']
+		if f and f.Backdrop then
+			f.Backdrop:SetFrameLevel(0)
+			f.Backdrop:SetOutside(f.Backdrop:GetParent(), 1, -2)
+		end
+		if b then
+			AS:SkinButton(b)
+			b:SetNormalTexture([[Interface\Buttons\UI-GroupLoot-Pass-Up]])
+			b:SetHighlightTexture([[Interface\Buttons\UI-GroupLoot-Pass-Highlight]])
+			b:SetPushedTexture([[Interface\Buttons\UI-GroupLoot-Pass-Down]])
+		end
+	end)
 
 	hooksecurefunc(ArkInventory, 'Frame_Bar_Paint', function(bar)
 		local loc_id = bar.ARK_Data.loc_id
