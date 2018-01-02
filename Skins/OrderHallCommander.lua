@@ -4,6 +4,8 @@ if not AS:CheckAddOn('OrderHallCommander') then return end
 
 function AS:OrderHallCommander(event)
 	if event == "ADDON_LOADED" and IsAddOnLoaded('OrderHallCommander') then
+function AS:OrderHallCommander(event, addon)
+	if (event == "ADDON_LOADED" and addon == 'OrderHallCommander') or event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('OrderHallCommander') then
 		local OHC = LibStub('LibInit'):GetAddon('OrderHallCommander')
 		local OHCCache = OHC:GetCacheModule()
 		local TroopFrame = OHCCache:GetTroopsFrame()
