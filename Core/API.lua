@@ -305,6 +305,8 @@ function AS:SkinCloseButton(CloseButton, Reposition)
 	CloseButton.Backdrop:Point('TOPLEFT', 7, -8)
 	CloseButton.Backdrop:Point('BOTTOMRIGHT', -8, 8)
 
+	CloseButton:SetHitRectInsets(6, 6, 7, 7)
+
 	CloseButton:HookScript("OnEnter", function(self)
 		self.Text:SetTextColor(1, .2, .2)
 		if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
@@ -781,7 +783,7 @@ function AS:SkinTexture(frame)
 	frame:SetTexCoord(unpack(AS.TexCoords))
 end
 
-function AS:Desaturate(frame, point)
+function AS:Desaturate(frame)
 	for i = 1, frame:GetNumRegions() do
 		local region = select(i, frame:GetRegions())
 		if region:IsObjectType('Texture') then
@@ -793,7 +795,7 @@ function AS:Desaturate(frame, point)
 				region:SetDesaturated(true)
 			end
 		end
-	end	
+	end
 	frame:HookScript('OnUpdate', function(self)
 		if self:GetNormalTexture() then
 			self:GetNormalTexture():SetDesaturated(true)
@@ -808,38 +810,40 @@ function AS:Desaturate(frame, point)
 end
 
 function AS:SkinMaxMinFrame(frame)
-	assert(frame, "does not exist.")
+	AS:StripTextures(frame, true)
 
-	for _, name in next, {"MaximizeButton", "MinimizeButton"} do
-		if frame then AS:StripTextures(frame, true) end
-
+	for _, name in pairs({"MaximizeButton", "MinimizeButton"}) do
 		local button = frame[name]
-		button:SetSize(16, 16)
-		button:ClearAllPoints()
-		button:SetPoint("CENTER")
-		AS:StripTextures(button, nil, true)
-		AS:SetTemplate(button)
 
-		button.Text = button:CreateFontString(nil, "OVERLAY")
-		button.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\Arial.TTF]], 12)
-		button.Text:SetText(name == "MaximizeButton" and "▲" or "▼")
-		button.Text:SetPoint("CENTER", 0, 0)
+		if button then
+			button:SetSize(16, 16)
+			button:ClearAllPoints()
+			button:SetPoint("CENTER")
+			button:SetHitRectInsets(1, 1, 1, 1)
+			AS:StripTextures(button, nil, true)
+			AS:SetTemplate(button)
 
-		button:HookScript('OnShow', function(self)
-			if not self:IsEnabled() then
-				self.Text:SetTextColor(.3, .3, .3)
-			end
-		end)
+			button.Text = button:CreateFontString(nil, "OVERLAY")
+			button.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\Arial.TTF]], 12)
+			button.Text:SetText(name == "MaximizeButton" and "▲" or "▼")
+			button.Text:SetPoint("CENTER", 0, 0)
 
-		button:HookScript('OnEnter', function(self)
-			self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
-			self.Text:SetTextColor(Color.r, Color.g, Color.b)
-		end)
+			button:HookScript('OnShow', function(self)
+				if not self:IsEnabled() then
+					self.Text:SetTextColor(.3, .3, .3)
+				end
+			end)
 
-		button:HookScript('OnLeave', function(self)
-			self:SetBackdropBorderColor(unpack(AS.BorderColor))
-			self.Text:SetTextColor(1, 1, 1)
-		end)
+			button:HookScript('OnEnter', function(self)
+				self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
+				self.Text:SetTextColor(Color.r, Color.g, Color.b)
+			end)
+
+			button:HookScript('OnLeave', function(self)
+				self:SetBackdropBorderColor(unpack(AS.BorderColor))
+				self.Text:SetTextColor(1, 1, 1)
+			end)
+		end
 	end
 end
 
