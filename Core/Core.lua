@@ -24,6 +24,11 @@ function AS:SetOption(optionName, value)
 	self.db[optionName] = value
 end
 
+function AS:Color(name)
+	local color = '|cff1784d1%s|r'
+	return (color):format(name)
+end
+
 function AS:Scale(Number)
 	return AS.Mult * floor(Number/AS.Mult + .5)
 end
