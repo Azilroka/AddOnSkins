@@ -4,9 +4,8 @@ local Color = RAID_CLASS_COLORS[AS.MyClass]
 
 local _G, CreateFrame = _G, CreateFrame
 local unpack, pairs, select, type, assert, next = unpack, pairs, select, type, assert, next
-local strlower = strlower
+local strlower, strfind = strlower, strfind
 local CopyTable, tremove = CopyTable, tremove
-local IsAddOnLoaded = IsAddOnLoaded
 local EnumerateFrames = EnumerateFrames
 
 function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
@@ -455,19 +454,27 @@ local ScrollBarElements = {
 	'Top',
 	'Bottom',
 	'Middle',
+	'trackBG',
+	'ScrollBarTop',
+	'ScrollBarBottom',
+	'ScrollBarMiddle',
+	'thumbTexture',
 }
 
 function AS:SkinScrollBar(Frame)
-	local ScrollUpButton = Frame:GetName() and _G[Frame:GetName().."ScrollUpButton"] or Frame.ScrollUpButton
-	local ScrollDownButton = Frame:GetName() and _G[Frame:GetName().."ScrollDownButton"] or Frame.ScrollDownButton
-
-	for _, object in pairs(ScrollBarElements) do
-		if Frame:GetName() and _G[Frame:GetName()..object] then
-			_G[Frame:GetName()..object]:SetTexture(nil)
-		end
-	end
+	local ScrollUpButton = Frame:GetName() and _G[Frame:GetName().."ScrollUpButton"] or Frame.ScrollUpButton or Frame.UpButton
+	local ScrollDownButton = Frame:GetName() and _G[Frame:GetName().."ScrollDownButton"] or Frame.ScrollDownButton or Frame.DownButton
 
 	if ScrollUpButton and ScrollDownButton then
+		for _, object in pairs(ScrollBarElements) do
+			if Frame:GetName() and _G[Frame:GetName()..object] then
+				_G[Frame:GetName()..object]:SetTexture(nil)
+			end
+			if Frame[object] then
+				Frame[object]:SetTexture(nil)
+			end
+		end
+
 		AS:StripTextures(ScrollUpButton)
 		AS:SetTemplate(ScrollUpButton, "Default", true)
 
@@ -546,10 +553,17 @@ function AS:SkinScrollBar(Frame)
 			Frame:GetThumbTexture():SetTexture(nil)
 			if not Frame.ThumbBG then
 				Frame.ThumbBG = CreateFrame("Frame", nil, Frame)
-				Frame.ThumbBG:Point("TOPLEFT", Frame:GetThumbTexture(), "TOPLEFT", 2, -3)
-				Frame.ThumbBG:Point("BOTTOMRIGHT", Frame:GetThumbTexture(), "BOTTOMRIGHT", -2, 3)
+				Frame.ThumbBG:SetPoint("TOPLEFT", Frame:GetThumbTexture(), "TOPLEFT", 2, -3)
+				Frame.ThumbBG:SetPoint("BOTTOMRIGHT", Frame:GetThumbTexture(), "BOTTOMRIGHT", -2, 3)
 				AS:SetTemplate(Frame.ThumbBG, "Default")
-				if IsAddOnLoaded('ElvUI') then
+				Frame.ThumbBG:HookScript('OnEnter', function(self)
+					self:SetBackdropBorderColor(Color.r, Color.g, Color.b)
+				end)
+				Frame.ThumbBG:HookScript('OnLeave', function(self)
+					self:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end)
+
+				if AS:CheckAddOn('ElvUI') then
 					Frame.ThumbBG:SetBackdropColor(0.6, 0.6, 0.6)
 				else
 					Frame.ThumbBG:SetBackdropColor(unpack(AS.BorderColor))
@@ -563,60 +577,49 @@ function AS:SkinScrollBar(Frame)
 	end
 end
 
-function AS:SkinNextPrevButton(Button, Vertical)
-	if Button.isSkinned then return end
-	AS:SetTemplate(Button)
-	Button:Size(Button:GetWidth() - 7, Button:GetHeight() - 7)
+function AS:SkinNextPrevButton(Button, Vertical, Inverse)
+	local ButtonName = Button:GetName() and Button:GetName():lower()
+	Inverse = Inverse or ButtonName and (strfind(ButtonName, 'left') or strfind(ButtonName, 'prev') or strfind(ButtonName, 'decrement') or strfind(ButtonName, 'back'))
 
-	for i = 1, Button:GetNumRegions() do
-		local region = select(i, Button:GetRegions())
-		if region and region:GetObjectType() == "Texture" and region:GetTexture() == "Interface\\Buttons\\UI-PageButton-Background" then
-			region:SetTexture('')
+	AS:SkinButton(Button)
+	Button:SetSize(Button:GetWidth() - 7, Button:GetHeight() - 7)
+
+	if not Button.icon then
+		Button.icon = Button:CreateTexture(nil, 'ARTWORK')
+		Button.icon:SetSize(13, 13)
+		Button.icon:SetPoint('CENTER')
+		Button.icon:SetTexture([[Interface\Buttons\SquareButtonTextures]])
+		Button.icon:SetTexCoord(0.01562500, 0.20312500, 0.01562500, 0.20312500)
+
+		Button:HookScript('OnMouseDown', function(self)
+			if self:IsEnabled() then
+				self.icon:SetPoint("CENTER", -1, -1);
+			end
+		end)
+
+		Button:HookScript('OnMouseUp', function(self)
+			self.icon:SetPoint("CENTER", 0, 0);
+		end)
+
+		Button:HookScript('OnDisable', function(self)
+			SetDesaturation(self.icon, true);
+			self.icon:SetAlpha(0.5);
+		end)
+
+		Button:HookScript('OnEnable', function(self)
+			SetDesaturation(self.icon, false);
+			self.icon:SetAlpha(1.0);
+		end)
+
+		if not Button:IsEnabled() then
+			Button:GetScript('OnDisable')(Button)
 		end
 	end
 
-	if Vertical then
-		Button:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.72, 0.65, 0.29, 0.65, 0.72)
-
-		if Button:GetPushedTexture() then
-			Button:GetPushedTexture():SetTexCoord(0.3, 0.35, 0.3, 0.8, 0.65, 0.35, 0.65, 0.8)
-		end
-
-		if Button:GetDisabledTexture() then
-			Button:GetDisabledTexture():SetTexCoord(0.3, 0.29, 0.3, 0.75, 0.65, 0.29, 0.65, 0.75)
-		end
-	else
-		Button:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.81, 0.65, 0.29, 0.65, 0.81)
-
-		if Button:GetPushedTexture() then
-			Button:GetPushedTexture():SetTexCoord(0.3, 0.35, 0.3, 0.81, 0.65, 0.35, 0.65, 0.81)
-		end
-
-		if Button:GetDisabledTexture() then
-			Button:GetDisabledTexture():SetTexCoord(0.3, 0.29, 0.3, 0.75, 0.65, 0.29, 0.65, 0.75)
-		end
-	end
-
-	Button:GetNormalTexture():ClearAllPoints()
-	Button:GetNormalTexture():SetInside()
-
-	if Button:GetDisabledTexture() then
-		Button:GetDisabledTexture():SetAllPoints(Button:GetNormalTexture())
-	end
-
-	if Button:GetPushedTexture() then
-		Button:GetPushedTexture():SetAllPoints(Button:GetNormalTexture())
-	end
-
-	Button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
-	Button:GetHighlightTexture():SetAllPoints(Button:GetNormalTexture())
-
-	Button.isSkinned = true
+	SquareButton_SetIcon(Button, Vertical and (Inverse and 'UP' or 'DOWN') or (Inverse and 'LEFT' or 'RIGHT'))
 end
 
 function AS:SkinRotateButton(Button)
-	if Button.isSkinned then return end
-
 	AS:SetTemplate(Button, "Default")
 	Button:Size(Button:GetWidth() - 14, Button:GetHeight() - 14)
 
@@ -629,8 +632,6 @@ function AS:SkinRotateButton(Button)
 	Button:GetNormalTexture():SetInside()
 	Button:GetPushedTexture():SetAllPoints(Button:GetNormalTexture())
 	Button:GetHighlightTexture():SetAllPoints(Button:GetNormalTexture())
-
-	Button.isSkinned = true
 end
 
 function AS:SkinDropDownBox(Frame, Width)

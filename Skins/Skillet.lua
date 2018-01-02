@@ -118,26 +118,6 @@ function AS:Skillet()
 		end
 
 		AS:SkinCloseButton(SkilletNotesCloseButton)
-		-- SkilletSkillListParent:SetPoint('TOPLEFT', SkilletFrame, 'TOPLEFT', 5, -100)
-		-- SkilletRankFrame:SetPoint('TOPRIGHT', SkilletFrame, 'TOPRIGHT', -12, -57)
-		-- SkilletRankFrameRed:SetPoint('TOPRIGHT', SkilletFrame, 'TOPRIGHT', -12, -70)
-		-- SkilletRankFrameOrange:SetPoint('TOPRIGHT', SkilletFrame, 'TOPRIGHT', -12, -70)
-		-- SkilletRankFrameYellow:SetPoint('TOPRIGHT', SkilletFrame, 'TOPRIGHT', -12, -70)
-		-- SkilletRankFrameGreen:SetPoint('TOPRIGHT', SkilletFrame, 'TOPRIGHT', -12, -70)
-		-- SkilletRankFrameGray:SetPoint('TOPRIGHT', SkilletFrame, 'TOPRIGHT', -12, -70)
-		-- SkilletRecipeGroupDropdown:SetPoint('BOTTOMLEFT', SkilletSkillListParent, 'TOPLEFT', 45, 43)
-		-- SkilletRecipeGroupOperations:SetPoint('LEFT', SkilletRecipeGroupDropdownButton, 'RIGHT', 4, 0)
-		-- SkilletSortAscButton:SetPoint('LEFT', SkilletSortDropdownButton, 'RIGHT', 4, 0)
-		-- SkilletSortDescButton:SetPoint('LEFT', SkilletSortDropdownButton, 'RIGHT', 4, 0)
-		-- SkilletSearchFilterClear:SetPoint('LEFT', SkilletFilterBox, 'RIGHT', -2, 0)
-		-- SkilletQueueSaveButton:SetPoint('LEFT', SkilletQueueSaveEditBox, 'RIGHT', 5, 0)
-		-- SkilletQueueLoadButton:SetPoint('LEFT', SkilletQueueLoadDropdownButton, 'RIGHT', 5, 0)
-		-- SkilletQueueDeleteButton:SetPoint('LEFT', SkilletQueueLoadButton, 'RIGHT', 2, 0)
-		-- SkilletHideUncraftableRecipes:SetPoint('BOTTOMRIGHT', SkilletSkillListParent, 'TOPRIGHT', -5, 5)
-		-- SkilletFrameCloseButton:ClearAllPoints()
-		-- SkilletFrameCloseButton:SetPoint('TOPRIGHT', SkilletFrame, 'TOPRIGHT', 0, 0)
-		-- SkilletTradeSkillLinkButton:SetPoint('RIGHT', SkilletShowOptionsButton, 'LEFT', 0, 0)
-		-- SkilletIgnoredMatsButton:SetPoint('RIGHT', SkilletQueueManagementButton, 'LEFT', -5, 0)
 
 		AS:SkinTooltip(SkilletTradeskillTooltip)
 		AS:SkinScrollBar(SkilletQueueListScrollBar)
@@ -263,6 +243,7 @@ function AS:Skillet()
 			end
 		end
 	end
+
 	local buttons = {
 		'SkilletQueueAllButton',
 		'SkilletCreateAllButton',
@@ -324,57 +305,47 @@ function AS:Skillet()
 	_G['SkilletHideUncraftableRecipes']:SetScript('OnUpdate', SkinIcon)
 	_G['SkilletReagentParent']:SetScript('OnUpdate', SkinReagentIcon)
 	_G['SkilletPluginButton']:SetScript('PostClick', SkinPluginButtons)
-	
-	-- Fixes by fuba - Begin
-	
-	local point, relativeTo, relativePoint, xOffset, yOffset;	
+
+	local point, relativeTo, relativePoint, xOffset, yOffset;
 	AS:SkinDropDownBox(SkilletFilterDropdown)
 	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSearchBox:GetPoint();
-	SkilletSearchBox:SetPoint(point, relativeTo, relativePoint, xOffset-1, yOffset);	
+	SkilletSearchBox:SetPoint(point, relativeTo, relativePoint, xOffset-1, yOffset);
 	AS:SkinEditBox(SkilletSearchBox)
 	SkilletSearchBox:SetSize(125,18)
 
-	-- SkilletSearchFilterClear
 	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSearchFilterClear:GetPoint();
 	SkilletSearchFilterClear:SetPoint(point, relativeTo, relativePoint, xOffset+10, yOffset+2);
-	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletSearchFilterClear)
-	SquareButton_SetIcon(SkilletSearchFilterClear, "DELETE")
+	AS:SkinNextPrevButton(SkilletSearchFilterClear)
+	--SquareButton_SetIcon(SkilletSearchFilterClear, "DELETE")
 	SkilletSearchFilterClear:Size(18)
 
-	-- SkilletClearNumButton
 	point, relativeTo, relativePoint, xOffset, yOffset = SkilletClearNumButton:GetPoint();
 	SkilletClearNumButton:SetPoint(point, relativeTo, relativePoint, xOffset+10, yOffset+2);
-	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletClearNumButton)
-	SquareButton_SetIcon(SkilletClearNumButton, "DELETE")
+	AS:SkinNextPrevButton(SkilletClearNumButton)
+	--SquareButton_SetIcon(SkilletClearNumButton, "DELETE")
 	SkilletClearNumButton:Size(18)
 
-	-- SkilletSortAscButton
 	SkilletSortAscButton.text:SetText("")
 	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSortAscButton:GetPoint();
-	SkilletSortAscButton:SetPoint(point, relativeTo, relativePoint, xOffset+3, yOffset);	
-	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletSortAscButton, true, true)
+	SkilletSortAscButton:SetPoint(point, relativeTo, relativePoint, xOffset+3, yOffset);
+	AS:SkinNextPrevButton(SkilletSortAscButton, true, true)
 	SkilletSortAscButton:Size(18)
 
-	-- SkilletSortDescButton
 	SkilletSortDescButton.text:SetText("")
 	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSortDescButton:GetPoint();
 	SkilletSortDescButton:SetPoint(point, relativeTo, relativePoint, xOffset+3, yOffset);
-	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletSortDescButton, true, false)
+	AS:SkinNextPrevButton(SkilletSortDescButton, true, false)
 	SkilletSortDescButton:Size(18)
 
-	-- SkilletFilterOperations
 	point, relativeTo, relativePoint, xOffset, yOffset = SkilletFilterOperations:GetPoint();
 	SkilletFilterOperations:SetPoint(point, relativeTo, relativePoint, xOffset+5, yOffset);
-	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletFilterOperations, false, false)
+	AS:SkinNextPrevButton(SkilletFilterOperations, false, false)
 	SkilletFilterOperations:Size(18)
 
-	-- SkilletRecipeGroupOperations	
 	point, relativeTo, relativePoint, xOffset, yOffset = SkilletRecipeGroupOperations:GetPoint();
 	SkilletRecipeGroupOperations:SetPoint(point, relativeTo, relativePoint, xOffset+5, yOffset);
-	ElvUI[1]:GetModule('Skins'):HandleNextPrevButton(SkilletRecipeGroupOperations, false, false)
+	AS:SkinNextPrevButton(SkilletRecipeGroupOperations, false, false)
 	SkilletRecipeGroupOperations:Size(18)
-
-	-- Fixes by fuba - End
 end
 
 AS:RegisterSkin('Skillet', AS.Skillet, '[AddonLoader]')
