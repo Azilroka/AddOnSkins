@@ -110,17 +110,17 @@ function AS:BuildOptions()
 					DBMFont = {
 						type = 'select', dialogControl = 'LSM30_Font',
 						order = 1,
-						name = ASL['DBM|VEM Font'],
+						name = ASL['DBM Font'],
 						values = AS.LSM:HashTable('font'),
 					},
 					DBMFontSize = {
 						type = 'range',
 						order = 2,
-						name = ASL['DBM|VEM Font Size'],
+						name = ASL['DBM Font Size'],
 						min = 8, max = 18, step = 1,
 					},
 					DBMFontFlag = {
-						name = ASL['DBM|VEM Font Flag'],
+						name = ASL['DBM Font Flag'],
 						order = 3,
 						type = 'select',
 						values = {
@@ -133,7 +133,7 @@ function AS:BuildOptions()
 					},
 					DBMSkinHalf = {
 						type = 'toggle',
-						name = ASL['DBM|VEM Half-bar Skin'],
+						name = ASL['DBM Half-bar Skin'],
 						order = 4,
 					},
 					DBMRadarTrans = {
@@ -363,13 +363,13 @@ function AS:BuildOptions()
 					},
 					question1 = {
 						type = 'description',
-						name = '|cffc41f3b[Q] '..ASL['DBM/VEM Half-Bar Skin Spacing looks wrong. How can I fix it?'],
+						name = '|cffc41f3b[Q] '..ASL['DBM Half-Bar Skin Spacing looks wrong. How can I fix it?'],
 						order = 1,
 						fontSize = 'medium',
 					},
 					answer1 = {
 						type = 'description',
-						name = '|cffabd473[A] '..ASL['To use the DBM/VEM Half-Bar skin. You must change the DBM/VEM Options. Offset Y needs to be at least 15.'],
+						name = '|cffabd473[A] '..ASL['To use the DBM Half-Bar skin. You must change the DBM Options. Offset Y needs to be at least 15.'],
 						order = 2,
 						fontSize = 'medium',
 					},
