@@ -136,6 +136,7 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_AddAltButton)
 	AS:SkinButton(GRM_GroupInviteButton)
 	AS:SkinButton(GRM_SetUnknownButton)
+	AS:SkinButton(GRM_MemberDetailBannedIgnoreButton)
 	AS:SkinFrame(GRM_AddAltEditFrame)
 	AS:SkinFrame(GRM_MonthDropDownMenuSelected)
 	AS:SkinFrame(GRM_MonthDropDownMenu)
@@ -149,20 +150,38 @@ function AS:GuildRosterManager()
 	AS:SkinFrame(GRM_MemberDetailEditBoxFrame)
 	
 	local isLoaded = false;
-	GRM_MemberDetailMetaData:HookScript("OnShow" , function()
+	GRM_MemberDetailMetaData:HookScript("OnShow" , function( self )
 		if not isLoaded then
-			GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GuildRosterFrame , "TOPRIGHT" , 2 , 0 );
-			GRM_AddAltEditFrame:SetPoint ( "BOTTOMLEFT" , GRM_MemberDetailMetaData , "BOTTOMRIGHT" ,  2 , 0 );
+			self:SetPoint ( "TOPLEFT" , GuildRosterFrame , "TOPRIGHT" , 2 , 0 );
+			GRM_AddAltEditFrame:SetPoint ( "BOTTOMLEFT" , self , "BOTTOMRIGHT" ,  2 , 0 );
 			AS:SkinEditBox(GRM_AddAltEditBox, 120, 15)
 			AS:SkinFrame(GRM_PlayerNoteWindow)
 			AS:SkinEditBox(GRM_PlayerNoteEditBox)
 			AS:SkinFrame(GRM_PlayerOfficerNoteWindow)
 			AS:SkinEditBox(GRM_PlayerOfficerNoteEditBox)
+			AS:SkinFrame(GRM_SyncJoinDateSideFrame)
+			
+			GuildMemberDetailFrame:HookScript ( "OnShow" , function( self )
+				GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , self , "TOPRIGHT" , 1 , 0 )
+				GuildMemberDetailFrame:SetPoint ( "TOPLEFT" , GuildRosterFrame , "TOPRIGHT" , 2 , 0 )
+			end);
+			
+			GuildMemberDetailFrame:HookScript ( "OnHide" , function( self )
+				GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GuildRosterFrame , "TOPRIGHT" , 1 , 0 )
+			end);
+			
+			GRM_PopupWindow:SetPoint ( "TOPLEFT" , StaticPopup1 , "BOTTOMLEFT" , 0 , -1 )
+			GRM_MemberDetailEditBoxFrame:SetPoint ( "TOP" , GRM_PopupWindow , "BOTTOM" , 0 , -1 )
+			GRM_SyncJoinDateSideFrame:SetPoint ( "TOPLEFT" , GRM_MemberDetailMetaData , "TOPRIGHT" , 1 , 0 );
 
+			-- Tooltip Scaling should be a bit bigger
+			GRM_MemberDetailNJDSyncTooltip:SetScale ( 0.85 )
+			GRM_MemberDetailNotifyStatusChangeTooltip:SetScale ( 0.85 )
 			isLoaded = true;
 		end
 	end)
 
+	
 	local isLoaded2 = false;
 	GRM_RosterCheckBoxSideFrame:HookScript("OnShow" , function()
 		if not isLoaded2 then
@@ -189,6 +208,9 @@ function AS:GuildRosterManager()
 
 			-- Addon Users
 			GRM_AddonUsersCoreFrameTitleText3:SetPoint ( "BOTTOMRIGHT" , GRM_AddonUsersScrollBorderFrame , "TOPRIGHT" , -26 , -2 );
+
+			-- Options Frame
+			GRM_OptionsFrame.OptionsHeaderText:SetPoint ( "TOP" , GRM_UI.GRM_RosterChangeLogFrame , 0 , - 25 );
 			isLoaded2 = true;
 		end
 	end)
