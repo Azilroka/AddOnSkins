@@ -1,55 +1,72 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_AchievementUI(event, addon)
-	local function SkinAchievement(Achievement, BiggerIcon)
-		AS:StripTextures(Achievement, true)
-		AS:CreateBackdrop(Achievement, nil, true)
-		Achievement.Backdrop:SetInside()
-		AS:SetTemplate(Achievement.icon)
-		Achievement.icon:SetSize(BiggerIcon and 54 or 36, BiggerIcon and 54 or 36)
-		Achievement.icon:ClearAllPoints()
-		Achievement.icon:SetPoint("LEFT", 8, 0)
-		Achievement.icon.bling:Kill()
-		Achievement.icon.frame:Kill()
-		AS:SkinTexture(Achievement.icon.texture)
-		Achievement.icon.texture:SetInside()
+function AS:SkinAchievement(Achievement, BiggerIcon)
+	AS:StripTextures(Achievement, true)
+	AS:CreateBackdrop(Achievement, nil, true)
+	Achievement.Backdrop:SetInside()
+	AS:SetTemplate(Achievement.icon)
+	Achievement.icon:SetSize(BiggerIcon and 54 or 36, BiggerIcon and 54 or 36)
+	Achievement.icon:ClearAllPoints()
+	Achievement.icon:SetPoint("LEFT", 8, 0)
+	Achievement.icon.bling:Kill()
+	Achievement.icon.frame:Kill()
+	AS:SkinTexture(Achievement.icon.texture)
+	Achievement.icon.texture:SetInside()
 
-		if Achievement.highlight then
-			AS:StripTextures(Achievement.highlight)
-			Achievement:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(1, 1, 0) end)
-			Achievement:HookScript('OnLeave', function(self)
-				if (self.player and self.player.accountWide or self.accountWide) then
-					self.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
-				else
-					self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-				end
-			end)
-		end
-
-		if Achievement.label then
-			Achievement.label:SetTextColor(1, 1, 1)
-		end
-
-		if Achievement.description then
-			Achievement.description:SetTextColor(.6, .6, .6)
-			hooksecurefunc(Achievement.description, 'SetTextColor', function(self, r, g, b)
-				if r == 0 and g == 0 and b == 0 then
-					Achievement.description:SetTextColor(.6, .6, .6)
-				end
-			end)
-		end
-
-		if Achievement.hiddenDescription then
-			Achievement.hiddenDescription:SetTextColor(1, 1, 1)
-		end
-
-		if Achievement.tracked then
-			AS:SkinCheckBox(Achievement.tracked)
-			Achievement.tracked:ClearAllPoints()
-			Achievement.tracked:SetPoint('TOPLEFT', Achievement.icon, 'BOTTOMLEFT', 0, 0)
-		end
+	if Achievement.highlight then
+		AS:StripTextures(Achievement.highlight)
+		Achievement:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(1, 1, 0) end)
+		Achievement:HookScript('OnLeave', function(self)
+			if (self.player and self.player.accountWide or self.accountWide) then
+				self.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+			else
+				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end)
 	end
 
+	if Achievement.label then
+		Achievement.label:SetTextColor(1, 1, 1)
+	end
+
+	if Achievement.description then
+		Achievement.description:SetTextColor(.6, .6, .6)
+		hooksecurefunc(Achievement.description, 'SetTextColor', function(self, r, g, b)
+			if r == 0 and g == 0 and b == 0 then
+				Achievement.description:SetTextColor(.6, .6, .6)
+			end
+		end)
+	end
+
+	if Achievement.hiddenDescription then
+		Achievement.hiddenDescription:SetTextColor(1, 1, 1)
+	end
+
+	if Achievement.tracked then
+		AS:SkinCheckBox(Achievement.tracked)
+		Achievement.tracked:ClearAllPoints()
+		Achievement.tracked:SetPoint('TOPLEFT', Achievement.icon, 'BOTTOMLEFT', 0, 0)
+	end
+end
+
+function AS:SkinAchievementStatusBar(StatusBar)
+	AS:SkinStatusBar(StatusBar)
+	StatusBar:SetStatusBarColor(4/255, 179/255, 30/255)
+
+	if StatusBar.title then
+		StatusBar.title:SetPoint("LEFT", 4, 0)
+	end
+
+	if StatusBar.label then
+		StatusBar.label:SetPoint("LEFT", 4, 0)
+	end
+
+	if StatusBar.text then
+		StatusBar.text:SetPoint("RIGHT", -4, 0)
+	end
+end
+
+function AS:Blizzard_AchievementUI(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		hooksecurefunc('HybridScrollFrame_CreateButtons', function(frame, template)
 			if template == "AchievementCategoryTemplate" then
@@ -60,13 +77,13 @@ function AS:Blizzard_AchievementUI(event, addon)
 			end
 			if template == "AchievementTemplate" then
 				for _, Achievement in pairs(frame.buttons) do
-					SkinAchievement(Achievement, true)
+					AS:SkinAchievement(Achievement, true)
 				end
 			end
 			if template == "ComparisonTemplate" then
 				for _, Achievement in pairs(frame.buttons) do
-					SkinAchievement(Achievement.player)
-					SkinAchievement(Achievement.friend)
+					AS:SkinAchievement(Achievement.player)
+					AS:SkinAchievement(Achievement.friend)
 
 					hooksecurefunc(Achievement.player, 'Saturate', function()
 						if Achievement.player.accountWide then
@@ -141,32 +158,13 @@ function AS:Blizzard_AchievementUI(event, addon)
 			AS:SkinTab(_G["AchievementFrameTab"..i])
 		end
 
-		local function SkinStatusBar(StatusBar)
-			AS:SkinStatusBar(StatusBar)
-			StatusBar:SetStatusBarColor(4/255, 179/255, 30/255)
-
-			local StatusBarName = StatusBar:GetName()
-
-			if _G[StatusBarName.."Title"] then
-				_G[StatusBarName.."Title"]:SetPoint("LEFT", 4, 0)
-			end
-
-			if _G[StatusBarName.."Label"] then
-				_G[StatusBarName.."Label"]:SetPoint("LEFT", 4, 0)
-			end
-
-			if _G[StatusBarName.."Text"] then
-				_G[StatusBarName.."Text"]:SetPoint("RIGHT", -4, 0)
-			end
-		end
-
-		SkinStatusBar(AchievementFrameSummaryCategoriesStatusBar)
-		SkinStatusBar(AchievementFrameComparisonSummaryPlayerStatusBar)
-		SkinStatusBar(AchievementFrameComparisonSummaryFriendStatusBar)
+		AS:SkinAchievementStatusBar(AchievementFrameSummaryCategoriesStatusBar)
+		AS:SkinAchievementStatusBar(AchievementFrameComparisonSummaryPlayerStatusBar)
+		AS:SkinAchievementStatusBar(AchievementFrameComparisonSummaryFriendStatusBar)
 
 		for i = 1, 12 do
 			local StatusBar = "AchievementFrameSummaryCategoriesCategory"..i
-			SkinStatusBar(_G[StatusBar])
+			AS:SkinAchievementStatusBar(_G[StatusBar])
 
 			AS:StripTextures(_G[StatusBar.."ButtonHighlight"])
 			_G[StatusBar.."Button"]:HookScript('OnEnter', function(self) self:GetParent().Backdrop:SetBackdropBorderColor(1, 1, 0) end)
@@ -187,7 +185,7 @@ function AS:Blizzard_AchievementUI(event, addon)
 			for i = 1, ACHIEVEMENTUI_MAX_SUMMARY_ACHIEVEMENTS do
 				local Achievement = _G["AchievementFrameSummaryAchievement"..i]
 				if not Achievement.isSkinned then
-					SkinAchievement(Achievement)
+					AS:SkinAchievement(Achievement)
 					Achievement.isSkinned = true
 				end
 
