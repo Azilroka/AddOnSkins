@@ -88,7 +88,7 @@ function AS:PetTracker()
 	if AS:CheckAddOn('PetTracker_Journal') then
 		LoadAddOn('Blizzard_Collections')
 		AS:SkinCheckBox(PetTrackerTrackToggle)
-		AS:SkinTab(CollectionsJournalTab5)
+--		AS:SkinTab(CollectionsJournalTab5)
 		PetTrackerTamerJournal:HookScript('OnShow', function(self)
 			if not self.IsSkinned then
 				AS:StripTextures(PetTrackerTamerJournal.Count)
@@ -106,7 +106,6 @@ function AS:PetTracker()
 				for i = 1, 4 do
 					if _G['PetTrackerTamerJournalCardLoot'..i] then
 						AS:SkinIconButton(_G['PetTrackerTamerJournalCardLoot'..i])
-						print(i)
 					end
 				end
 				for i = 1, 11 do
