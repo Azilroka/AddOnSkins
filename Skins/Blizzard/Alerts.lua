@@ -174,7 +174,7 @@ function AS:Blizzard_Alerts()
 		-- Icon
 		frame.dungeonTexture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		frame.dungeonTexture:ClearAllPoints()
-		frame.dungeonTexture:Point("LEFT", frame.backdrop, 9, 0)
+		frame.dungeonTexture:Point("LEFT", frame.Backdrop, 9, 0)
 		frame.dungeonTexture:SetDrawLayer("OVERLAY")
 
 		-- Icon border
@@ -230,8 +230,8 @@ function AS:Blizzard_Alerts()
 			end
 			--Create Backdrop
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 16, -3)
-			frame.backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -16, 16)
+			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 16, -3)
+			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -16, 16)
 
 			frame.PortraitFrame.PortraitRing:Hide()
 			frame.PortraitFrame.PortraitRingQuality:SetTexture("")
@@ -531,7 +531,7 @@ function AS:Blizzard_Alerts()
 		-- Icon
 		frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		frame.Icon:ClearAllPoints()
-		frame.Icon:SetPoint("LEFT", frame.backdrop, 9, 0)
+		frame.Icon:SetPoint("LEFT", frame.Backdrop, 9, 0)
 
 		-- Icon border
 		if not frame.Icon.b then
@@ -571,7 +571,7 @@ function AS:Blizzard_Alerts()
 		frame.Icon:SetTexCoord(unpack(AS.TexCoords))
 		frame.Icon:SetDrawLayer("BORDER", 5)
 		frame.Icon:ClearAllPoints()
-		frame.Icon:SetPoint("LEFT", frame.backdrop, 9, 0)
+		frame.Icon:SetPoint("LEFT", frame.Backdrop, 9, 0)
 
 		-- Icon border
 		if not frame.Icon.b then

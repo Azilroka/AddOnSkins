@@ -624,16 +624,10 @@ function AS:SkinRotateButton(Button)
 end
 
 function AS:SkinDropDownBox(Frame, Width)
-	local Button, Text
 	local FrameName = Frame:GetName()
 
-	if FrameName then
-		Button = _G[Frame:GetName().."Button"]
-		Text = _G[Frame:GetName().."Text"]
-	else
-		Button = Frame.Button
-		Text = Frame.Text
-	end
+	local Button = FrameName and _G[FrameName.."Button"] or Frame.Button
+	local Text = FrameName and _G[FrameName.."Text"] or Frame.Text
 
 	if Button and Text then
 		AS:StripTextures(Frame)
