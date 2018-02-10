@@ -300,6 +300,7 @@ function AS:Init(event, addon)
 	end
 	if event == 'PLAYER_LOGIN' then
 		AS:BuildOptions()
+		AS:UpdateMedia()
 		AS:EmbedInit()
 
 		if _G.EnhancedShadows then

@@ -7,7 +7,7 @@ local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
 local CreateFrame = CreateFrame
 
 function AS:EmbedSystemHooks()
-	AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, AS.ChatBackgroundRight, ASL.EmbedSystem.ToggleRightChat, ASL.EmbedSystem.ToggleEmbed)
+	AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, ASL.EmbedSystem.ToggleEmbed)
 	_G.RightToggleButton:Point('RIGHT', AS.InfoRight, 'RIGHT', -2, 0)
 	_G.RightToggleButton:HookScript('OnClick', function(self, button)
 		if button == 'RightButton' then
@@ -21,7 +21,7 @@ function AS:EmbedSystemHooks()
 		end
 	end)
 
-	AS:CreateToggleButton('LeftToggleButton', '◄', AS.InfoLeft, AS.ChatBackgroundLeft, ASL.EmbedSystem.ToggleLeftChat, ASL.EmbedSystem.ToggleOptions)
+	AS:CreateToggleButton('LeftToggleButton', '◄', AS.InfoLeft, ASL.EmbedSystem.ToggleOptions)
 	_G.LeftToggleButton:Point('LEFT', AS.InfoLeft, 'LEFT', 2, 0)
 	_G.LeftToggleButton:HookScript('OnClick', function(self, button)
 		if button == 'RightButton' then
@@ -32,11 +32,11 @@ function AS:EmbedSystemHooks()
 	end)
 end
 
-function AS:CreateToggleButton(Name, Text, Panel1, Panel2, TooltipText1, TooltipText2)
+function AS:CreateToggleButton(Name, Text, Panel, TooltipText)
 	local Frame = CreateFrame('Button', Name, UIParent)
 	Frame:SetFrameStrata("DIALOG")
 	Frame:SetTemplate('Transparent')
-	Frame:Size(17, Panel1:GetHeight() - 4)
+	Frame:Size(17, Panel:GetHeight() - 4)
 	Frame:FontString('Text', AS.ActionBarFont, 12)
 	Frame.Text:SetText(Text)
 	Frame.Text:SetPoint('CENTER', 0, 1)
@@ -46,7 +46,7 @@ function AS:CreateToggleButton(Name, Text, Panel1, Panel2, TooltipText1, Tooltip
 		UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
 		GameTooltip:SetOwner(self, Name == 'LeftToggleButton' and 'ANCHOR_TOPLEFT' or 'ANCHOR_TOPRIGHT', 0, 4)
 		GameTooltip:ClearLines()
-		GameTooltip:AddDoubleLine('Right Click:', TooltipText2, 1, 1, 1)
+		GameTooltip:AddDoubleLine('Right Click:', TooltipText, 1, 1, 1)
 		GameTooltip:Show()
 	end)
 	Frame:SetScript('OnLeave', function(self)
