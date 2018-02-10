@@ -435,6 +435,20 @@ function AS:BuildOptions()
 						name = ASL['Available Skins / Skin Requests'],
 						get = function() return 'https://www.tukui.org/forum/viewforum.php?f=35' end,
 					},
+					version = {
+						order = 9,
+						type = 'group',
+						name = 'Version',
+						guiInline = true,
+						args = {
+							version = {
+								order = 1,
+								type = 'description',
+								fontSize = 'medium',
+								name = AS.Title..AS.Version,
+							},
+						},
+					},
 				},
 			},
 		},
