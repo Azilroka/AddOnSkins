@@ -148,7 +148,7 @@ function AS:GuildRosterManager()
 	-- Ban Popup Frames
 	AS:SkinFrame(GRM_PopupWindow)
 	AS:SkinFrame(GRM_MemberDetailEditBoxFrame)
-	
+
 	local isLoaded = false;
 	GRM_MemberDetailMetaData:HookScript("OnShow" , function( self )
 		if not isLoaded then
@@ -205,9 +205,11 @@ function AS:GuildRosterManager()
 
 			-- Add Events
 			GRM_EventsFrameNameTitleText3:SetPoint ( "TOPRIGHT" , GRM_AddEventScrollBorderFrame , -218 , 8 )
+			GRM_EventsFrameStatusMessageText2:SetPoint ( "TOP" , GRM_EventsFrame , 0 , 58 )
 
 			-- Addon Users
 			GRM_AddonUsersCoreFrameTitleText3:SetPoint ( "BOTTOMRIGHT" , GRM_AddonUsersScrollBorderFrame , "TOPRIGHT" , -26 , -2 );
+			GRM_AddonUsersSyncEnabledText:SetPoint ( "TOP" , GRM_AddonUsersFrame , 0 , 55 )
 
 			-- Options Frame
 			GRM_OptionsFrame.OptionsHeaderText:SetPoint ( "TOP" , GRM_UI.GRM_RosterChangeLogFrame , 0 , - 25 );
