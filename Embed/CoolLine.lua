@@ -3,10 +3,10 @@ local AS = unpack(AddOnSkins)
 if AS:CheckAddOn('CoolLine') then
 	function AS:Embed_CoolLine()
 		if not CoolLineDB.vertical then
-			if AS:CheckAddon('ElvUI') then
+			if AS:CheckAddOn('ElvUI') then
 				CoolLine:SetPoint('BOTTOMRIGHT', ElvUI_Bar1, 'TOPRIGHT', 0, 4)
 				CoolLine:SetPoint("BOTTOMLEFT", ElvUI_Bar1, "TOPLEFT", 0, 4)
-			elseif AS:CheckAddon('Tukui') then
+			elseif AS:CheckAddOn('Tukui') then
 				local function OnShow()
 					CoolLine:Point('BOTTOM', AS.ActionBar4, 'TOP', 0, 1)
 					CoolLineDB.h = ActionButton1:GetHeight()
