@@ -343,6 +343,10 @@ function AS:SkinEditBox(EditBox, Width, Height)
 
 	AS:CreateBackdrop(EditBox)
 
+	if EditBox.SetTextInsets then
+		EditBox:SetTextInsets(1, 1, 3, 3)
+	end
+
 	if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
 		AS:SetTemplate(EditBox.Backdrop, 'Default')
 	end

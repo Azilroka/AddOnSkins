@@ -62,7 +62,7 @@ function AS:Altoholic(event, addon)
 		AS:EnumObjects(function(index) return AltoholicTabSummary['SortButtons']['Sort'..index] end, function(obj) AS:SkinButton(obj, true) end)
 		AS:EnumObjects(function(index) return _G["AltoholicFrameTab"..index] end, function(obj) AS:SkinTab(obj, true) end)
 	end
-	
+
 	if addon == "Altoholic_Characters" then
 		AS:SkinFrame(AltoholicFrameContainers)
 		AS:SkinFrame(AltoholicFrameRecipes)
@@ -99,7 +99,7 @@ function AS:Altoholic(event, addon)
 
 		AS:EnumObjects(
 			{
-				function(index) return AltoholicFrameContainers['Entry'..index] end, 
+				function(index) return AltoholicFrameContainers['Entry'..index] end,
 				function(obj, index) return obj['Item'..index] end
 			},
 			function(obj) SkinItemButton(obj) end

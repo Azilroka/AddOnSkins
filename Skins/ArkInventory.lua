@@ -85,7 +85,7 @@ function AS:ArkInventory()
 		local parent = border:GetParent()
 		parent:SetBackdropBorderColor(r, g, b, a)
 	end)
-	
+
 	hooksecurefunc(ArkInventory, 'Frame_Item_Update_Clickable', function(frame)
 		local obj = _G[frame:GetName()..ArkInventory.Const.Frame.Cooldown.Name]
 		if obj then
