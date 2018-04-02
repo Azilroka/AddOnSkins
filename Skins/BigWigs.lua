@@ -115,6 +115,14 @@ function AS:BigWigs(event, addon)
 			AS:SkinTexture(bar.candyBarIconFrame)
 		end
 
+		local function onEmph(bar)
+			local icon = bar.candyBarIconFrame
+			icon:ClearAllPoints()
+			icon:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
+			icon:SetSize(bar:GetHeight(), bar:GetHeight())
+			icon.SetWidth = AS.Noop
+		end
+
 		local function ApplyStyleHalfBar(bar)
 			local bg
 			if #FreeBackgrounds > 0 then
@@ -174,6 +182,14 @@ function AS:BigWigs(event, addon)
 			AS:SkinTexture(bar.candyBarIconFrame)
 		end
 
+		local function onEmphHalfBar(bar)
+			local icon = bar.candyBarIconFrame
+			icon:ClearAllPoints()
+			icon:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
+			icon:SetSize(bar:GetHeight()*2, bar:GetHeight()*2)
+			icon.SetWidth = AS.Noop
+		end
+
 		local BigWigsBars = BigWigs:GetPlugin('Bars')
 		BigWigsBars:RegisterBarStyle('AddOnSkins', {
 			apiVersion = 1,
@@ -182,6 +198,7 @@ function AS:BigWigs(event, addon)
 			ApplyStyle = ApplyStyle,
 			BarStopped = FreeStyle,
 			GetStyleName = function() return 'AddOnSkins' end,
+			OnEmphasize = onEmph,
 		})
 		BigWigsBars:RegisterBarStyle('AddOnSkins Half-Bar', {
 			apiVersion = 1,
@@ -190,6 +207,7 @@ function AS:BigWigs(event, addon)
 			ApplyStyle = ApplyStyleHalfBar,
 			BarStopped = FreeStyle,
 			GetStyleName = function() return 'AddOnSkins Half-Bar' end,
+			OnEmphasize = onEmphHalfBar,
 		})
 	end
 end
