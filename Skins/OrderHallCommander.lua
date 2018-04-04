@@ -14,7 +14,8 @@ function AS:OrderHallCommander(event, addon)
 
 		OrderHallMissionFrameMissions:HookScript('OnShow', function(self)
 			AS:Delay(0.5, function()
-				local frame = LibInitCheckbox00001:GetParent():GetParent()
+				local frame = LibInitCheckbox00001 and LibInitCheckbox00001:GetParent():GetParent() or nil
+				if not frame then return end
 				if frame.IsSkinned then return end
 
 				frame.IsSkinned = true
