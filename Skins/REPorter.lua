@@ -3,15 +3,15 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('REPorter') then return end
 
 function AS:REPorter()
-	AS:SkinBackdropFrame(REPorterFrameBorder, 'Transparent')
-	AS:SkinFrame(REPorterFrameTab)
-	for _, i in pairs({'SB1', 'SB2', 'SB3', 'SB4', 'SB5', 'SB6', 'BB1', 'BB2'}) do
-		AS:SkinButton(_G['REPorterFrameTab_'..i])
+	AS:StripTextures(REPorterFrameBorder)
+	AS:SkinBackdropFrame(REPorterFrameBG, 'Transparent')
+	REPorterFrameBG:SetOutside(nil, 2, 2)
+	REPorterFrameBorderResize:Point('BOTTOMRIGHT', REPorterFrameBorder, 'BOTTOMRIGHT', 2, -2)
+
+	AS:SkinFrame(REPorterBar)
+	for _, i in pairs({'B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8'}) do
+		AS:SkinButton(_G['REPorterBar'..i])
 	end
-	REPorterFrameTab_SB1:SetPoint("TOPLEFT", REPorterFrameTab, "TOPLEFT", 3, -3)
-	REPorterFrameTab:SetWidth(31)
-	REPorterFrameTab:SetHeight(206)
-	REPorterFrameBorder:SetFrameLevel(2)
 end
 
 AS:RegisterSkin('REPorter', AS.REPorter)
