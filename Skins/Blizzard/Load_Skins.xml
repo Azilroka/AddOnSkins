@@ -38,9 +38,6 @@
 	<Script file="TradeSkill.lua"/>
 	<Script file="TradeWindow.lua"/>
 	<Script file="Trainer.lua"/>
-	<Script file="Transmogrify.lua"/>
-	<Script file="Tutorial.lua"/>
 	<Script file="VoidStorage.lua"/>
 	<Script file="WorldMap.lua"/>
-	<Script file="WorldStateScoreFrame.lua"/>
 </Ui>

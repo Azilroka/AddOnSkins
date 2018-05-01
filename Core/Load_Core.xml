@@ -4,5 +4,4 @@
 	<Script file="Core.lua"/>
 	<Script file="Tukui.lua"/>
 	<Script file="ElvUI.lua"/>
-	<Script file="Embed.lua"/>
 </Ui>

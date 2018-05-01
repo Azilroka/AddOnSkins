@@ -194,5 +194,4 @@
 	<Script file="wTetriNET.lua"/>
 	<Script file="xMerchant.lua"/>
 	<Script file="XPBarNone.lua"/>
-	<Script file="Zygor.lua"/>
 </Ui>
