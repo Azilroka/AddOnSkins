@@ -135,9 +135,8 @@ function AS:ParchmentRemover(event, addon)
 			CurrentQuestsText.SetTextColor = AS.Noop
 			AvailableQuestsText:SetTextColor(1, 1, 0)
 			AvailableQuestsText.SetTextColor = AS.Noop
-			
-			--MAX_NUM_QUESTS is nil for some reason on 8.0.1
-			for i = 1, MAX_NUM_QUESTS or 25 do
+
+			for i = 1, C_QuestLog.GetMaxNumQuestsCanAccept() do
 				local button = _G['QuestTitleButton'..i]
 				if button then
 					hooksecurefunc(button, 'SetFormattedText', function()
