@@ -135,7 +135,9 @@ function AS:ParchmentRemover(event, addon)
 			CurrentQuestsText.SetTextColor = AS.Noop
 			AvailableQuestsText:SetTextColor(1, 1, 0)
 			AvailableQuestsText.SetTextColor = AS.Noop
-			for i = 1, MAX_NUM_QUESTS do
+			
+			--MAX_NUM_QUESTS is nil for some reason on 8.0.1
+			for i = 1, MAX_NUM_QUESTS or 25 do
 				local button = _G['QuestTitleButton'..i]
 				if button then
 					hooksecurefunc(button, 'SetFormattedText', function()
@@ -218,13 +220,13 @@ function AS:ParchmentRemover(event, addon)
 			SpellBookPage2:Kill()
 			SpellBookPageText:SetTextColor(0.6, 0.6, 0.6)
 
+			--First Aid is no more
 			local professionheaders = {
 				"PrimaryProfession1",
 				"PrimaryProfession2",
 				"SecondaryProfession1",
 				"SecondaryProfession2",
-				"SecondaryProfession3",
-				"SecondaryProfession4"
+				"SecondaryProfession3"
 			}
 
 			for _, header in pairs(professionheaders) do
