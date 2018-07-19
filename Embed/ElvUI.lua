@@ -59,6 +59,7 @@ function AS:EmbedSystemHooks()
 			end
 		end)
 
+		--[[
 		LeftChatToggleButton:RegisterForClicks('AnyDown')
 		LeftChatToggleButton:SetScript('OnClick', function(self, btn)
 			if btn == 'RightButton' then
@@ -94,6 +95,7 @@ function AS:EmbedSystemHooks()
 				GameTooltip:Show()
 			end
 		end)
+		]]
 
 		function HideLeftChat()
 			LeftChatToggleButton:Click()
