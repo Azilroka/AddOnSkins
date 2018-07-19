@@ -102,7 +102,7 @@ function AS:Blizzard_Calendar(event, addon)
 
 	CalendarClassButton1:SetPoint("TOPLEFT", CalendarClassButtonContainer, "TOPLEFT", 4, 0)
 
-	for i = 1, 11 do
+	for i = 1, 12 do
 		local Button = _G["CalendarClassButton"..i]
 		AS:StripTextures(Button)
 		AS:SkinButton(Button)
@@ -119,6 +119,7 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:SkinScrollBar(CalendarTexturePickerScrollBar)
 	AS:SkinButton(CalendarTexturePickerAcceptButton, true)
 	AS:SkinButton(CalendarTexturePickerCancelButton, true)
+	CalendarCreateEventRaidInviteButtonBorder:Hide()
 	AS:SkinButton(CalendarCreateEventInviteButton)
 	AS:SkinButton(CalendarCreateEventRaidInviteButton)
 
@@ -126,11 +127,6 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:StripTextures(CalendarMassInviteTitleFrame)
 
 	AS:SkinCloseButton(CalendarMassInviteCloseButton)
-	AS:SkinButton(CalendarMassInviteGuildAcceptButton)
-	AS:SkinDropDownBox(CalendarMassInviteGuildRankMenu, 130)
-
-	AS:SkinEditBox(CalendarMassInviteGuildMinLevelEdit)
-	AS:SkinEditBox(CalendarMassInviteGuildMaxLevelEdit)
 
 	AS:SkinFrame(CalendarViewRaidFrame)
 	CalendarViewRaidFrame:SetPoint("TOPLEFT", CalendarFrame, "TOPRIGHT", 3, -24)
