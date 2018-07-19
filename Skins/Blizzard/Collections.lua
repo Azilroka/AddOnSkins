@@ -95,7 +95,6 @@ function AS:Blizzard_Collections(event, addon)
 			AS:CreateBackdrop(Button)
 			AS:SkinFrame(Button.Backdrop)
 			Button.Backdrop:SetInside(Button)
-			AS:HideInset(Button.Backdrop)
 			Button.Backdrop:SetBackdropBorderColor(0,0,0,0)
 
 			Button.icon:SetPoint("LEFT", -41, 0)
@@ -159,7 +158,6 @@ function AS:Blizzard_Collections(event, addon)
 			AS:CreateBackdrop(Button)
 			AS:SkinFrame(Button.Backdrop)
 			Button.Backdrop:SetInside(Button)
-			AS:HideInset(Button.Backdrop)
 			Button.Backdrop:SetBackdropBorderColor(0,0,0,0)
 			AS:StyleButton(Button)
 			AS:SkinTexture(Button.icon)
@@ -173,7 +171,7 @@ function AS:Blizzard_Collections(event, addon)
 
 			Button.icon:SetPoint("LEFT", -41, 0)
 			Button.icon:SetDrawLayer('ARTWORK')
-			--LevelBG:SetTexture(nil)
+			LevelBG:SetTexture(nil)
 
 			hooksecurefunc(Button.iconBorder, 'SetVertexColor', function(self, r, g, b, a)
 				Button.iconbg:SetBackdropBorderColor(r, g, b)
@@ -293,7 +291,8 @@ function AS:Blizzard_Collections(event, addon)
 			AS:SkinFrame(Button)
 			AS:StyleButton(Button)
 			Button:HookScript('OnUpdate', function(self)
-				self.name:SetTextColor(unpack(self.TextColor))
+				self.name:SetTextColor(1, 1, 1)
+				--self.name:SetTextColor(unpack(self.TextColor)) -- adjust me
 			end)
 		end
 
@@ -353,7 +352,7 @@ function AS:Blizzard_Collections(event, addon)
 			button.iconTextureUncollected:SetInside()
 			button.slotFrameUncollected:SetAlpha(0)
 		end)
-		
+
 		AS:SkinTab(WardrobeCollectionFrameTab1)
 		AS:SkinTab(WardrobeCollectionFrameTab2)
 		AS:StripTextures(WardrobeCollectionFrame.progressBar)
@@ -392,7 +391,7 @@ function AS:Blizzard_Collections(event, addon)
 		AS:StripTextures(WardrobeCollectionFrame.SetsCollectionFrame.RightInset)
 		AS:SkinScrollBar(WardrobeCollectionFrameScrollFrameScrollBar)
 		AS:SkinButton(WardrobeSetsCollectionVariantSetsButton)
-		
+
 		AS:StripTextures(WardrobeFrame)
 		WardrobeFrame:SetTemplate("Transparent")
 		AS:SkinCloseButton(WardrobeFrameCloseButton)
@@ -405,7 +404,7 @@ function AS:Blizzard_Collections(event, addon)
 		WardrobeOutfitDropDown.SaveButton:SetPoint("LEFT", WardrobeOutfitDropDown, "RIGHT", 1, 4)
 		AS:StripTextures(WardrobeOutfitFrame)
 		WardrobeOutfitFrame:SetTemplate("Transparent")
-		
+
 		AS:StripTextures(WardrobeTransmogFrame)
 		AS:StripTextures(WardrobeTransmogFrame.Inset)
 
@@ -416,7 +415,7 @@ function AS:Blizzard_Collections(event, addon)
 			AS:CreateBackdrop(WardrobeTransmogFrame.Model.SlotButtons[i])
 			WardrobeTransmogFrame.Model.SlotButtons[i].Border:Kill()
 		end
-		
+
 		local function OnEnter_Button(self) AS:SkinButton(self) end
 		AS:SkinButton(WardrobeTransmogFrame.SpecButton)
 		WardrobeTransmogFrame.SpecButton:SetScript("OnEnter", OnEnter_Button)
@@ -424,7 +423,7 @@ function AS:Blizzard_Collections(event, addon)
 		WardrobeTransmogFrame.SpecButton:ClearAllPoints()
 		WardrobeTransmogFrame.SpecButton:SetPoint("RIGHT", WardrobeTransmogFrame.ApplyButton, "LEFT", -2, 0)
 		AS:SkinButton(WardrobeTransmogFrame.ApplyButton)
-		
+
 		AS:StripTextures(WardrobeCollectionFrame.SetsTransmogFrame)
 		AS:SkinNextPrevButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.PrevPageButton)
 		AS:SkinNextPrevButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.NextPageButton)
