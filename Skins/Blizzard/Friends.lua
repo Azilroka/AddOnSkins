@@ -16,8 +16,6 @@ function AS:Blizzard_Friends()
 	AS:SkinFrame(FriendsTooltip, nil, true)
 	AS:SkinCloseButton(FriendsFrameCloseButton)
 	AS:SkinDropDownBox(FriendsFrameStatusDropDown, 70)
-	AS:SkinButton(FriendsFrameMutePlayerButton)
-	FriendsFrameMutePlayerButton:SetWidth(107)
 	AS:SkinBackdropFrame(FriendsFrameBattlenetFrame)
 	FriendsFrameBattlenetFrame.Backdrop:SetPoint('TOPLEFT', -1, -3)
 	FriendsFrameBattlenetFrame.Backdrop:SetPoint('BOTTOMRIGHT', -3, 5)
@@ -44,15 +42,17 @@ function AS:Blizzard_Friends()
 	FriendsFrameIgnoreScrollFrame:SetHeight(294)
 	FriendsFrameIgnoreScrollFrameScrollBar:SetPoint("TOPLEFT", FriendsFrameIgnoreScrollFrame, "TOPRIGHT", 42, -10)
 
-	-- AS:StripTextures(PendingListFrame)
-	-- AS:SkinButton(FriendsFramePendingButton1AcceptButton)
-	-- AS:SkinButton(FriendsFramePendingButton1DeclineButton)
-	-- AS:SkinButton(FriendsFramePendingButton2AcceptButton)
-	-- AS:SkinButton(FriendsFramePendingButton2DeclineButton)
-	-- AS:SkinButton(FriendsFramePendingButton3AcceptButton)
-	-- AS:SkinButton(FriendsFramePendingButton3DeclineButton)
-	-- AS:SkinButton(FriendsFramePendingButton4AcceptButton)
-	-- AS:SkinButton(FriendsFramePendingButton4DeclineButton)
+	--[[
+	AS:StripTextures(PendingListFrame)
+	AS:SkinButton(FriendsFramePendingButton1AcceptButton)
+	AS:SkinButton(FriendsFramePendingButton1DeclineButton)
+	AS:SkinButton(FriendsFramePendingButton2AcceptButton)
+	AS:SkinButton(FriendsFramePendingButton2DeclineButton)
+	AS:SkinButton(FriendsFramePendingButton3AcceptButton)
+	AS:SkinButton(FriendsFramePendingButton3DeclineButton)
+	AS:SkinButton(FriendsFramePendingButton4AcceptButton)
+	AS:SkinButton(FriendsFramePendingButton4DeclineButton)
+	]]
 
 	AS:SkinFrame(FriendsFriendsFrame, nil, nil, true)
 	AS:SkinFrame(FriendsFriendsList)
@@ -93,15 +93,6 @@ function AS:Blizzard_Friends()
 	AS:SkinButton(WhoFrameAddFriendButton)
 	AS:SkinButton(WhoFrameGroupInviteButton)
 
-	AS:StripTextures(ChannelListScrollFrame)
-	AS:StripTextures(ChannelRoster)
-	AS:StripTextures(ChannelFrameLeftInset)
-	AS:StripTextures(ChannelFrameRightInset)
-	AS:StripTextures(ChannelFrameDaughterFrame)
-	AS:SkinButton(ChannelFrameNewButton)
-	AS:SkinButton(ChannelFrameDaughterFrameOkayButton)
-	AS:SkinButton(ChannelFrameDaughterFrameCancelButton)
-
 	WhoFrameWhoButton:SetPoint("RIGHT", WhoFrameAddFriendButton, "LEFT", -6, 0)
 	WhoFrameAddFriendButton:SetPoint("RIGHT", WhoFrameGroupInviteButton, "LEFT", -6, 0)
 	WhoFrameWhoButton:SetSize(WhoFrameWhoButton:GetWidth() - 4, WhoFrameWhoButton:GetHeight())
@@ -111,16 +102,9 @@ function AS:Blizzard_Friends()
 	WhoFrameEditBox:SetPoint("BOTTOM", 1, 30)
 	AS:StripTextures(WhoListScrollFrame, true)
 
-	AS:StripTextures(ChannelRosterScrollFrame, true)
-	AS:SkinScrollBar(ChannelRosterScrollFrameScrollBar)
-	AS:SkinFrame(ChannelFrameDaughterFrame)
-	AS:SkinEditBox(ChannelFrameDaughterFrameChannelName)
-	AS:SkinEditBox(ChannelFrameDaughterFrameChannelPassword)
-
-	AS:SkinCloseButton(ChannelFrameDaughterFrameDetailCloseButton)
 	AS:SkinDropDownBox(WhoFrameDropDown, 150)
 
-	for i = 1, 4 do
+	for i = 1, 3 do
 		AS:SkinTab(_G["FriendsFrameTab"..i])
 	end
 
@@ -130,18 +114,6 @@ function AS:Blizzard_Friends()
 		Tab.Backdrop:SetPoint("TOPLEFT", 3, -8)
 		Tab.Backdrop:SetPoint("BOTTOMRIGHT", -6, 0)
 	end
-
-	hooksecurefunc("ChannelList_Update", function()
-		for i = 1, MAX_DISPLAY_CHANNEL_BUTTONS do
-			local button = _G["ChannelButton"..i]
-			if button then
-				AS:StripTextures(button)
-				button:GetHighlightTexture():SetTexture(1, 1, 1, 0.3)
-
-				_G["ChannelButton"..i.."Text"]:SetFont(AS.Font, 12)
-			end
-		end
-	end)
 
 	AS:StripTextures(QuickJoinScrollFrame)
 	AS:SkinScrollBar(QuickJoinScrollFrameScrollBar)
