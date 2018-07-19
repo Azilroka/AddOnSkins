@@ -8,7 +8,7 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	EncounterJournalNavBar.Backdrop:SetPoint("TOPLEFT", -2, 0)
 	EncounterJournalNavBar.Backdrop:SetPoint("BOTTOMRIGHT")
 
-	AS:StripTextures(EncounterJournalNavBarOverlay, true)
+	AS:StripTextures(EncounterJournalNavBar.overlay, true)
 
 	AS:SkinEditBox(EncounterJournalSearchBox)
 	AS:SkinCloseButton(EncounterJournalCloseButton)
@@ -61,10 +61,11 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	EncounterJournal.instanceSelect.bg:SetAlpha(0)
 
 	AS:SkinDropDownBox(EncounterJournalInstanceSelectTierDropDown)
-	-- EncounterJournalInstanceSelectTierDropDownButton:SetScript('OnClick', function(self)
-		-- PlaySound("igMainMenuOptionCheckBoxOn")
-		-- ToggleDropDownMenu(1, nil, EJTierDropDown, self:GetName(), 0, -2)
-	-- end)
+	-- FIX ME
+	--EncounterJournalInstanceSelectTierDropDownButton:SetScript('OnClick', function(self)
+		--PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
+		--ToggleDropDownMenu(1, nil, EJTierDropDown, self:GetName(), 0, -2)
+	--end)
 
 	local function SkinDungeons()
 		local b1 = EncounterJournalInstanceSelectScrollFrameScrollChildInstanceButton1
@@ -98,11 +99,8 @@ function AS:Blizzard_EncounterJournal(event, addon)
 
 	AS:SkinScrollBar(EncounterJournalScrollBar)
 	AS:StripTextures(EncounterJournal.LootJournal)
-	AS:SkinButton(EncounterJournal.LootJournal.LegendariesFrame.ClassButton, true)
-	AS:SkinButton(EncounterJournal.LootJournal.LegendariesFrame.SlotButton, true)
 	AS:StripTextures(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton)
 	AS:SkinButton(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton, true)
-	AS:SkinDropDownBox(LootJournalViewDropDown)
 end
 
 AS:RegisterSkin("Blizzard_EncounterJournal", AS.Blizzard_EncounterJournal, 'ADDON_LOADED')
