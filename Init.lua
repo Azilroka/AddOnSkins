@@ -1,4 +1,4 @@
--- Curseforge test 2: Bitbucket Edition
+-- Curseforge test 3: Curseforge bugaloo
 local AddOnName, Engine = ...
 
 if IsAddOnLoaded('Tukui') and not IsAddOnLoaded('ProjectAzilroka') then
