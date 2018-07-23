@@ -40,15 +40,15 @@ function AS:GuildRosterManager()
 	AS:SkinFrame(GRM_RosterCheckBoxSideFrame)
 	
 	--Options
-	AS:SkinFrame(GRM_OptionsFrame);
-	AS:SkinFrame(GRM_RosterSyncRankDropDownSelected);
-	AS:SkinFrame(GRM_RosterSyncRankDropDownMenu);
-	AS:SkinFrame(GRM_RosterBanListDropDownSelected);
-	AS:SkinFrame(GRM_RosterBanListDropDownMenu);
-	AS:SkinFrame(GRM_LanguageSelected);
-	AS:SkinFrame(GRM_LanguageDropDownMenu);
-	AS:SkinFrame(GRM_MainTagFormatSelected);
-	AS:SkinFrame(GRM_MainTagFormatMenu);
+	AS:SkinFrame(GRM_OptionsFrame)
+	AS:SkinFrame(GRM_RosterSyncRankDropDownSelected)
+	AS:SkinFrame(GRM_RosterSyncRankDropDownMenu)
+	AS:SkinFrame(GRM_RosterBanListDropDownSelected)
+	AS:SkinFrame(GRM_RosterBanListDropDownMenu)
+	AS:SkinFrame(GRM_LanguageSelected)
+	AS:SkinFrame(GRM_LanguageDropDownMenu)
+	AS:SkinFrame(GRM_MainTagFormatSelected)
+	AS:SkinFrame(GRM_MainTagFormatMenu)
 	AS:SkinButton(GRM_ScanOptionsButton)
 	AS:SkinButton(GRM_SyncOptionsButton)
 	AS:SkinButton(GRM_CenterOptionsButton)
@@ -83,6 +83,7 @@ function AS:GuildRosterManager()
 	GRM_CoreBanListScrollBorderFrameBottomLeftCorner:Hide()
 	AS:SkinButton(GRM_BanListRemoveButton)
 	AS:SkinButton(GRM_BanListAddButton)
+	AS:SkinButton(GRM_BanListEditButton)
 	AS:SkinScrollBar(GRM_CoreBanListScrollFrameSlider)
 	
 
@@ -93,7 +94,7 @@ function AS:GuildRosterManager()
 	AS:SkinEditBox(GRM_AddBanNameSelectionEditBox)
 	AS:SkinEditBox(GRM_AddBanServerSelectionEditBox)
 	AS:SkinEditBox(GRM_AddBanReasonEditBox)
-	AS:SkinFrame(GRM_AddBanDropDownClassSelected);
+	AS:SkinFrame(GRM_AddBanDropDownClassSelected)
 	AS:SkinFrame(GRM_AddBanDropDownMenu)
 	-- Ban Frame Confirm Window
 	AS:SkinFrame(GRM_PopupWindowConfirmFrame)
@@ -157,9 +158,12 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_DateSubmitButton)
 	AS:SkinButton(GRM_DateSubmitCancelButton)
 	AS:SkinButton(GRM_AddAltButton)
+	AS:SkinButton(GRM_AddAltButton2)
 	AS:SkinButton(GRM_GroupInviteButton)
 	AS:SkinButton(GRM_SetUnknownButton)
 	AS:SkinButton(GRM_MemberDetailBannedIgnoreButton)
+	AS:SkinButton(GRM_CancelCustomNoteButton)
+	AS:SkinButton(GRM_ConfirmCustomNoteButton)
 	AS:SkinFrame(GRM_AddAltEditFrame)
 	AS:SkinFrame(GRM_MonthDropDownMenuSelected)
 	AS:SkinFrame(GRM_MonthDropDownMenu)
@@ -168,82 +172,133 @@ function AS:GuildRosterManager()
 	AS:SkinFrame(GRM_YearDropDownMenuSelected)
 	AS:SkinFrame(GRM_YearDropDownMenu)
 
-
+	-- Alt grouping frame
+	AS:SkinFrame(GRM_AltGroupingScrollBorderFrame)
+	AS:SkinCloseButton(GRM_AltGroupingScrollBorderFrameCloseButton)
+	AS:SkinScrollBar(GRM_AltGroupingScrollFrameSlider)
+	
 	-- Ban Popup Frames
 	AS:SkinFrame(GRM_PopupWindow)
 	AS:SkinFrame(GRM_MemberDetailEditBoxFrame)
 
-	local isLoaded = false;
+	local sideGroupingLogic = function()
+		GRM_AltGroupingScrollBorderFrame:HookScript ( "OnShow" , function()
+			if GRM_MemberDetailMetaData:IsMouseOver() then
+				GRM_AltGroupingScrollBorderFrame:SetPoint ( "BOTTOMLEFT" , GRM_MemberDetailMetaData , "BOTTOMRIGHT" , 1 , 0 )
+			elseif CalendarViewEventFrame and CalendarViewEventFrame:IsMouseOver() then
+				GRM_AltGroupingScrollBorderFrame:SetPoint ( "BOTTOMLEFT" , CalendarViewEventFrame , "BOTTOMRIGHT" , 22 , 0 )
+				GRM_MemberDetailMetaData:Hide()
+			elseif CalendarCreateEventFrame and CalendarCreateEventFrame:IsMouseOver() then
+				GRM_AltGroupingScrollBorderFrame:SetPoint ( "BOTTOMLEFT" , CalendarCreateEventFrame , "BOTTOMRIGHT" , 22 , 0 )
+				GRM_MemberDetailMetaData:Hide()
+			end
+		end)
+	end
+
+	local isLoaded = false
+	local isLoaded2 = false
+
 	GRM_MemberDetailMetaData:HookScript("OnShow" , function( self )
 		if not isLoaded then
-			self:SetPoint ( "TOPLEFT" , GuildRosterFrame , "TOPRIGHT" , 2 , 0 );
-			GRM_AddAltEditFrame:SetPoint ( "BOTTOMLEFT" , self , "BOTTOMRIGHT" ,  2 , 0 );
+			self:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 25 , 5 )
+			GRM_AddAltEditFrame:SetPoint ( "BOTTOMLEFT" , self , "BOTTOMRIGHT" ,  2 , 0 )
 			AS:SkinEditBox(GRM_AddAltEditBox, 120, 15)
-			AS:SkinFrame(GRM_PlayerNoteWindow)
 			AS:SkinEditBox(GRM_PlayerNoteEditBox)
-			AS:SkinFrame(GRM_PlayerOfficerNoteWindow)
 			AS:SkinEditBox(GRM_PlayerOfficerNoteEditBox)
+			AS:SkinEditBox(GRM_CustomNoteEditBox)
+
+			AS:SkinFrame(GRM_CustomNoteRankDropDownSelected)
+			AS:SkinFrame(GRM_CustomNoteRankDropDownMenu)
+			AS:SkinFrame(GRM_PlayerNoteWindow)
+			AS:SkinFrame(GRM_PlayerOfficerNoteWindow)
 			AS:SkinFrame(GRM_SyncJoinDateSideFrame)
-			
-			GuildMemberDetailFrame:HookScript ( "OnShow" , function( self )
-				GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , self , "TOPRIGHT" , 1 , 0 )
-				GuildMemberDetailFrame:SetPoint ( "TOPLEFT" , GuildRosterFrame , "TOPRIGHT" , 2 , 0 )
-			end);
-			
-			GuildMemberDetailFrame:HookScript ( "OnHide" , function( self )
-				GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GuildRosterFrame , "TOPRIGHT" , 1 , 0 )
-			end);
+			AS:SkinFrame(GRM_CustomNoteEditBoxFrame)
+
+			GRM_MemberDetailRankToolTip:HookScript ( "OnShow" , function()
+				AS:SkinFrame(GRM_MemberDetailRankToolTip)
+			end)
+			GRM_MemberDetailJoinDateToolTip:HookScript ( "OnShow" , function()
+				AS:SkinFrame(GRM_MemberDetailJoinDateToolTip)
+			end)
+			GRM_MemberDetailServerNameToolTip:HookScript ( "OnShow" , function()
+				AS:SkinFrame(GRM_MemberDetailServerNameToolTip)
+			end)
+			GRM_MemberDetailNotifyStatusChangeTooltip:HookScript ( "OnShow" , function()
+				AS:SkinFrame(GRM_MemberDetailNotifyStatusChangeTooltip)
+			end)
+			GRM_MemberDetailNJDSyncTooltip:HookScript ( "OnShow" , function()
+				AS:SkinFrame(GRM_MemberDetailNJDSyncTooltip)
+			end)
+			GRM_AltGroupingTooltip:HookScript ( "OnShow" , function()
+				AS:SkinFrame(GRM_AltGroupingTooltip)
+			end)
 			
 			GRM_PopupWindow:SetPoint ( "TOPLEFT" , StaticPopup1 , "BOTTOMLEFT" , 0 , -1 )
 			GRM_MemberDetailEditBoxFrame:SetPoint ( "TOP" , GRM_PopupWindow , "BOTTOM" , 0 , -1 )
-			GRM_SyncJoinDateSideFrame:SetPoint ( "TOPLEFT" , GRM_MemberDetailMetaData , "TOPRIGHT" , 1 , 0 );
+			GRM_SyncJoinDateSideFrame:SetPoint ( "TOPLEFT" , GRM_MemberDetailMetaData , "TOPRIGHT" , 1 , 0 )
+
+			GRM_AltGroupingScrollFrameSlider:SetPoint ( "TOPLEFT" , GRM_AltGroupingScrollFrame , "TOPRIGHT" , -19 , -14.5 )
+			GRM_AltGroupingScrollBorderFrameCloseButton:SetPoint ( "TOPRIGHT" , GRM_AltGroupingScrollBorderFrame , "TOPRIGHT" , 8 , 7 )
+						
+			CommunitiesFrame.GuildMemberDetailFrame:HookScript ( "OnShow" , function( self )
+				self:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 34 , 0 )
+				GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , self , "TOPRIGHT" , 2 , 0.5 )
+			end)
+			
+			CommunitiesFrame.GuildMemberDetailFrame:HookScript ( "OnHide" , function( self )
+				GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 25 , 5 )
+			end)
+
+			if not isLoaded2 then
+				sideGroupingLogic()
+			end
 
 			-- Tooltip Scaling should be a bit bigger
 			GRM_MemberDetailNJDSyncTooltip:SetScale ( 0.85 )
 			GRM_MemberDetailNotifyStatusChangeTooltip:SetScale ( 0.85 )
-			isLoaded = true;
+			isLoaded = true
 		end
 	end)
 
 	
-	local isLoaded2 = false;
+	
 	GRM_RosterCheckBoxSideFrame:HookScript("OnShow" , function()
 		if not isLoaded2 then
+
+			-- MISC FRAMES
 			GRM_LogTab:SetPoint ( "BOTTOMLEFT" , GRM_RosterChangeLogFrame , "TOPLEFT" , 0 , 1 )
-			GRM_RosterCheckBoxSideFrame:SetPoint ( "TOPLEFT" , GRM_RosterChangeLogFrame , "TOPRIGHT" , 2 , 0 );
+			GRM_RosterCheckBoxSideFrame:SetPoint ( "TOPLEFT" , GRM_RosterChangeLogFrame , "TOPRIGHT" , 2 , 0 )
+
 			--Confirm Frames
-			AS:SkinFrame(GRM_RosterConfirmFrame)
-			AS:SkinCloseButton(GRM_RosterConfirmFrame.CloseButton)
-			AS:SkinButton(GRM_RosterConfirmYesButton)
-			AS:SkinButton(GRM_RosterConfirmCancelButton)
+			C_Timer.After ( 1 , function()
+				AS:SkinFrame(GRM_RosterConfirmFrame)
+				AS:SkinFrame(GRM_AddBanReasonEditBoxFrame)
+				GRM_GuildNameTooltip:HookScript ( "OnShow" , function()
+					AS:SkinFrame(GRM_GuildNameTooltip)
+				end)
+				GRM_AddonUsersTooltip:HookScript ( "OnShow" , function()
+					AS:SkinFrame(GRM_AddonUsersTooltip)
+				end)
+
+				AS:SkinCloseButton(GRM_RosterConfirmFrame.CloseButton)
+
+				AS:SkinButton(GRM_RosterConfirmYesButton)
+				AS:SkinButton(GRM_RosterConfirmCancelButton)
+			end)
 
 			-- Ban Frames
-			AS:SkinFrame(GRM_AddBanReasonEditBoxFrame)
+			GRM_LoadLogButton:SetPoint ( "BOTTOMRIGHT" , CommunitiesFrame , "TOPRIGHT" , 1 , 1.25)
 			GRM_PopupWindowConfirmFrame:SetSize ( 300 , 100 )
 			GRM_PopupWindowConfirmFrame:SetPoint( "TOP" , GRM_AddBanFrame , "BOTTOM" , 0 , -1 )
-			GRM_CoreBanListFrameTitleText4:SetPoint ( "BOTTOMRIGHT" , GRM_CoreBanListScrollBorderFrame , "TOPRIGHT" , -45 , -4 );
-
-			-- Audit Frames
-			GRM_AuditFrameText2:SetPoint ( "BOTTOMLEFT" , GRM_AuditScrollBorderFrame , "TOP" , -58 , -2 );
-			GRM_AuditFrameText3:SetPoint ( "BOTTOMLEFT" , GRM_AuditScrollBorderFrame , "TOP" , 62 , -2 );
-			GRM_AuditFrameText4:SetPoint ( "BOTTOMRIGHT" , GRM_AuditScrollBorderFrame , "TOPRIGHT" , -29 ,  -2 );
-
-			-- Add Events
-			GRM_EventsFrameNameTitleText3:SetPoint ( "TOPRIGHT" , GRM_AddEventScrollBorderFrame , -218 , 8 )
-			GRM_EventsFrameStatusMessageText2:SetPoint ( "TOP" , GRM_EventsFrame , 0 , 58 )
-
-			-- Addon Users
-			GRM_AddonUsersCoreFrameTitleText3:SetPoint ( "BOTTOMRIGHT" , GRM_AddonUsersScrollBorderFrame , "TOPRIGHT" , -26 , -2 );
-			GRM_AddonUsersSyncEnabledText:SetPoint ( "TOP" , GRM_AddonUsersFrame , 0 , 55 )
-
-			-- Options Frame
-			GRM_OptionsFrame.OptionsHeaderText:SetPoint ( "TOP" , GRM_RosterChangeLogFrame , 0 , - 25 );
 
 			-- Log Frame
 			GRM_LogExtraOptionsFrame:SetPoint ( "TOPLEFT" , GRM_LogFrame , "BOTTOMLEFT" , 0 , -1 )
 			GRM_LogExtraOptionsFrame:SetSize ( 600 , 155 )
-			GRM_LogExtraOptionsButton:SetPoint ( "BOTTOMRIGHT" , GRM_RosterChangeLogFrame.GRM_LogFrame , "BOTTOMLEFT" , -1 , 0 );
-			isLoaded2 = true;
+			GRM_LogExtraOptionsButton:SetPoint ( "BOTTOMRIGHT" , GRM_RosterChangeLogFrame.GRM_LogFrame , "BOTTOMLEFT" , -1 , 0 )
+			
+			if not isLoaded then
+				sideGroupingLogic()
+			end
 
 			GRM_UIOptionsFrame:HookScript ( "OnShow" , function()
 				C_Timer.After( 0.25 , function()
@@ -251,14 +306,14 @@ function AS:GuildRosterManager()
 						for i = 1 , #GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_CoreBackupScrollChildFrame.AllBackupButtons do
 							for j = 12 , #GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_CoreBackupScrollChildFrame.AllBackupButtons[i] do
 								if GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_CoreBackupScrollChildFrame.AllBackupButtons[i][j]:IsVisible() then
-									AS:SkinButton ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_CoreBackupScrollChildFrame.AllBackupButtons[i][j] );
+									AS:SkinButton ( GRM_UI.GRM_RosterChangeLogFrame.GRM_OptionsFrame.GRM_UIOptionsFrame.GRM_CoreBackupScrollChildFrame.AllBackupButtons[i][j] )
 								end
 							end
 						end
 					end
-				end);
-			end);
-
+				end)
+			end)
+			isLoaded2 = true
 		end
 	end)
 
