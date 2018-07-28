@@ -172,10 +172,8 @@ function AS:CallSkin(skin, func, event, ...)
 	else
 		local pass = pcall(func, self, event, ...)
 		if not pass then
-			local Version = tonumber(AS.Version)
-			tinsert(SkinErrors, skin)
-			AddOnSkinsDS[Version] = AddOnSkinsDS[Version] or {}
-			AddOnSkinsDS[Version][skin] = true
+			AddOnSkinsDS[AS.Version] = AddOnSkinsDS[AS.Version] or {}
+			AddOnSkinsDS[AS.Version][skin] = true
 			AS:SetOption(skin, false)
 			tinsert(SkinErrors, skin)
 			AS.FoundError = true

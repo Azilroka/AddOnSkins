@@ -35,7 +35,7 @@ _G.AddOnSkins = Engine
 AddOnSkinsDS = {}
 
 AddOn.Title = GetAddOnMetadata('AddOnSkins', 'Title')
-AddOn.Version = GetAddOnMetadata('AddOnSkins', 'Version')
+AddOn.Version = tonumber(GetAddOnMetadata('AddOnSkins', 'Version'))
 AddOn.Authors = GetAddOnMetadata('AddOnSkins', 'Author'):gsub(", ", "    ")
 AddOn.LSM = LibStub('LibSharedMedia-3.0')
 AddOn.TicketTracker = 'https://git.tukui.org/Azilroka/AddOnSkins/issues'
