@@ -190,25 +190,21 @@ function AS:Blizzard_Options(event, addon)
 
 		InterfaceOptionsDisplayPanelOutlineDropDown:SetWidth(210)
 		InterfaceOptionsNamesPanelUnitNameplatesMotionDropDown:SetWidth(190)
-		AudioOptionsVoicePanelChatModeDropDown:SetWidth(190)
 		AudioOptionsSoundPanelHardwareDropDown:SetWidth(190)
 		AudioOptionsSoundPanelSoundChannelsDropDown:SetWidth(190)
 
-		AS:StripTextures(LoopbackVUMeter:GetParent())
-		AS:SkinStatusBar(LoopbackVUMeter)
+		-- -- Color Picker
+		-- AS:SkinFrame(ColorPickerFrame, nil, true)
+		-- AS:SkinButton(ColorPickerOkayButton)
+		-- AS:SkinButton(ColorPickerCancelButton)
+		-- ColorPickerCancelButton:SetPoint("BOTTOMRIGHT", -11, 6)
+		-- ColorPickerOkayButton:SetPoint("RIGHT", ColorPickerCancelButton, "LEFT", -3, 0)
+		-- AS:SkinFrame(OpacitySliderFrame)
+		-- OpacitySliderFrame:GetThumbTexture():Size(14)
+		-- OpacitySliderFrame:GetThumbTexture():SetTexture(unpack(AS.BorderColor))
+		-- ColorPickerFrameHeader:SetTexture(nil)
 
-		-- Color Picker
-		AS:SkinFrame(ColorPickerFrame, nil, true)
-		AS:SkinButton(ColorPickerOkayButton)
-		AS:SkinButton(ColorPickerCancelButton)
-		ColorPickerCancelButton:SetPoint("BOTTOMRIGHT", -11, 6)
-		ColorPickerOkayButton:SetPoint("RIGHT", ColorPickerCancelButton, "LEFT", -3, 0)
-		AS:SkinFrame(OpacitySliderFrame)
-		OpacitySliderFrame:GetThumbTexture():Size(14)
-		OpacitySliderFrame:GetThumbTexture():SetTexture(unpack(AS.BorderColor))
-		ColorPickerFrameHeader:SetTexture(nil)
-
-		AS:SkinFrame(OpacityFrame)
+		-- AS:SkinFrame(OpacityFrame)
 
 		-- Item Text Frame -- Needs Parchment
 		AS:SkinFrame(ItemTextFrame, nil, nil, true)
@@ -243,14 +239,14 @@ function AS:Blizzard_Options(event, addon)
 			AS:SkinFrame(Frame)
 		end
 
-		AS:StripTextures(ChatConfigChatSettingsClassColorLegend)
-		AS:StripTextures(ChatConfigChannelSettingsClassColorLegend)
-		AS:StripTextures(ChatConfigChatSettingsLeft)
-		AS:StripTextures(ChatConfigChannelSettingsLeft)
-		AS:StripTextures(ChatConfigOtherSettingsCombat)
-		AS:StripTextures(ChatConfigOtherSettingsPVP)
-		AS:StripTextures(ChatConfigOtherSettingsSystem)
-		AS:StripTextures(ChatConfigOtherSettingsCreature)
+		-- AS:StripTextures(ChatConfigChatSettingsClassColorLegend)
+		-- AS:StripTextures(ChatConfigChannelSettingsClassColorLegend)
+		-- AS:StripTextures(ChatConfigChatSettingsLeft)
+		-- AS:StripTextures(ChatConfigChannelSettingsLeft)
+		-- AS:StripTextures(ChatConfigOtherSettingsCombat)
+		-- AS:StripTextures(ChatConfigOtherSettingsPVP)
+		-- AS:StripTextures(ChatConfigOtherSettingsSystem)
+		-- AS:StripTextures(ChatConfigOtherSettingsCreature)
 
 		local Colors = {
 			CombatConfigColorsColorizeSpellNames,
@@ -381,13 +377,7 @@ function AS:Blizzard_Options(event, addon)
 
 		AS:SkinEditBox(CombatConfigSettingsNameEditBox)
 
-		AS:SkinScrollBar(ChannelRosterScrollFrameScrollBar)
-
-		-- Channel Pullout
-		ChannelPulloutBackground:Hide()
-		AS:SkinFrame(ChannelPullout)
-		AS:SkinCloseButton(ChannelPulloutCloseButton)
-		AS:SkinTab(ChannelPulloutTab)
+		-- AS:SkinScrollBar(ChannelRosterScrollFrameScrollBar)
 
 		-- Help
 		local HelpFrames = {

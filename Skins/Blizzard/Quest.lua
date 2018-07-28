@@ -160,7 +160,7 @@ function AS:Blizzard_Quest()
 		CurrentQuestsText.SetTextColor = AS.Noop
 		AvailableQuestsText:SetTextColor(1, 1, 0)
 		AvailableQuestsText.SetTextColor = AS.Noop
-		for i = 1, MAX_NUM_QUESTS do
+		for i = 1, 16 do
 			local button = _G['QuestTitleButton'..i]
 			if button then
 				hooksecurefunc(button, 'SetFormattedText', function()

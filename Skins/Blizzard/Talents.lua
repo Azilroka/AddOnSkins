@@ -160,14 +160,10 @@ function AS:Blizzard_Talent(event, addon)
 
 			local index = 1
 
-			local bonuses
-			if self.isPet then
-				bonuses = {GetSpecializationSpells(shownSpec, nil, self.isPet, true)}
-			else
-				bonuses = SPEC_SPELLS_DISPLAY[id]
-			end
+			local bonuses = self.isPet and {GetSpecializationSpells(shownSpec, nil, self.isPet, true)} or C_SpecializationInfo.GetSpellsDisplay(id)
+			local bonusesIncrement = self.isPet and 2 or 1
 
-			for i = 1, #bonuses, 2 do
+			for i = 1, #bonuses, bonusesIncrement do
 				local frame = scrollChild["abilityButton"..index]
 				if frame and not frame.reskinned then
 					AS:SetTemplate(frame)
@@ -261,86 +257,6 @@ function AS:Blizzard_Talent(event, addon)
 		TalentMicroButtonAlert.Text:SetTextColor(1, 1, 0)
 		TalentMicroButtonAlert:ClearAllPoints()
 		TalentMicroButtonAlert:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -6)
-
-		AS:StripTextures(PlayerTalentFramePVPTalents.Talents)
-
-		PlayerTalentFramePVPTalents.XPBar:StripTextures()
-		PlayerTalentFramePVPTalents.XPBar.PrestigeReward.Accept:ClearAllPoints()
-		PlayerTalentFramePVPTalents.XPBar.PrestigeReward.Accept:SetPoint("TOP", PlayerTalentFramePVPTalents.XPBar.PrestigeReward, "BOTTOM", 0, 0)
-		AS:SkinButton(PlayerTalentFramePVPTalents.XPBar.PrestigeReward.Accept)
-
-		AS:SkinStatusBar(PlayerTalentFramePVPTalents.XPBar.Bar)
-
-		for i = 1, MAX_PVP_TALENT_TIERS do
-			local Row = PlayerTalentFramePVPTalents.Talents["Tier"..i]
-			Row.Bg:Hide()
-			Row:DisableDrawLayer("BORDER")
-			Row:StripTextures()
-			Row.GlowFrame:Kill()
-
-			Row.TopLine:SetPoint("TOP", 0, 4)
-			Row.BottomLine:SetPoint("BOTTOM", 0, -4)
-
-			for j = 1, MAX_PVP_TALENT_COLUMNS do
-				local Button = Row["Talent"..j]
-
-				AS:SkinBackdropFrame(Button)
-				Button:SetFrameLevel(Button:GetFrameLevel() + 2)
-				Button.Backdrop:SetPoint("TOPLEFT", 15, -1)
-				Button.Backdrop:SetPoint("BOTTOMRIGHT", -10, 1)
-
-				Button.Border = CreateFrame("Frame", nil, Button)
-				AS:SkinFrame(Button.Border)
-				Button.Border:SetBackdropColor(0, 0, 0, 0)
-				Button.Border:SetOutside(Button.Icon)
-				Button.Icon:SetSize(32, 32)
-				Button.Icon:SetDrawLayer("ARTWORK")
-				AS:SkinTexture(Button.Icon)
-				Button:HookScript('OnEnter', function(self)
-					self.Backdrop:SetBackdropBorderColor(1, .82, 0)
-					self.Border:SetBackdropBorderColor(1, .82, 0)
-				end)
-				Button:HookScript('OnLeave', function(self) 
-					if self.knownSelection:IsShown() then
-						self.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
-						self.Border:SetBackdropBorderColor(0, 0.44, .87, 1)
-					else
-						self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-						self.Border:SetBackdropBorderColor(unpack(AS.BorderColor))
-					end
-				end)
-			end
-		end
-
-		--Create portrait element for the PvP Talent Frame so we can see prestige
-		local portrait = PlayerTalentFramePVPTalents:CreateTexture(nil, "OVERLAY")
-		portrait:SetSize(57,57)
-		portrait:SetPoint("CENTER", PlayerTalentFramePVPTalents.PortraitBackground, "CENTER", 0, 0)
-		--Kill background
-		PlayerTalentFramePVPTalents.PortraitBackground:Kill()
-		--Reposition portrait by repositioning the background
-		PlayerTalentFramePVPTalents.PortraitBackground:ClearAllPoints()
-		PlayerTalentFramePVPTalents.PortraitBackground:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPLEFT", 5, -5)
-		--Reposition the wreath
-		PlayerTalentFramePVPTalents.SmallWreath:ClearAllPoints()
-		PlayerTalentFramePVPTalents.SmallWreath:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPLEFT", -2, -25)
-		--Update texture according to prestige
-		hooksecurefunc("PlayerTalentFramePVPTalents_SetUp", function()
-			local prestigeLevel = UnitPrestige("player")
-			if (prestigeLevel > 0) then
-				portrait:SetTexture(GetPrestigeInfo(prestigeLevel))
-			end
-		end)
-
-		-- Prestige Level Dialog
-		PVPTalentPrestigeLevelDialog:StripTextures()
-		PVPTalentPrestigeLevelDialog:CreateBackdrop('Transparent')
-		PVPTalentPrestigeLevelDialog.Laurel:SetAtlas("honorsystem-prestige-laurel", true) --Re-add textures removed by StripTextures()
-		PVPTalentPrestigeLevelDialog.TopDivider:SetAtlas("honorsystem-prestige-rewardline", true)
-		PVPTalentPrestigeLevelDialog.BottomDivider:SetAtlas("honorsystem-prestige-rewardline", true)
-		AS:SkinButton(PVPTalentPrestigeLevelDialog.Accept)
-		AS:SkinButton(PVPTalentPrestigeLevelDialog.Cancel)
-		AS:SkinCloseButton(PVPTalentPrestigeLevelDialog.CloseButton) --There are 2 buttons with the exact same name, may not be able to skin it properly until fixed by Blizzard.
 	end
 end
 
