@@ -30,7 +30,7 @@ function AS:AutoBar(event, addon)
 		end
 	end
 
-	hooksecurefunc(AutoBar, 'UpdateSpells', AutoBarSkin)
+	hooksecurefunc(AutoBarGlobalCodeSpace, 'UpdateSpells', AutoBarSkin)
 end
 
 AS:RegisterSkin('AutoBar', AS.AutoBar)
