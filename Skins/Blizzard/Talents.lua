@@ -168,7 +168,6 @@ function AS:Blizzard_Talent(event, addon)
 				if frame and not frame.reskinned then
 					AS:SetTemplate(frame)
 					AS:SkinTexture(frame.icon)
-					frame:SetSize(45, 45)
 					frame.ring:Hide()
 					frame.icon:SetInside()			
 					frame.icon:SetTexture(select(2, GetSpellTexture(bonuses[i])))
