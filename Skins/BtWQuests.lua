@@ -5,26 +5,26 @@ if not AS:CheckAddOn('BtWQuests') then return end
 local _G = _G
 
 function AS:BtWQuests()
-	AS:SkinBackdropFrame(BtWQuests)
+	AS:SkinBackdropFrame(BtWQuestsFrame)
 
-	AS:SkinBackdropFrame(BtWQuestsNavBar, nil, nil, true)
-	AS:StripTextures(BtWQuestsNavBarOverlay, true)
-	BtWQuestsNavBar.Backdrop:SetPoint("TOPLEFT", -2, 0)
-	BtWQuestsNavBar.Backdrop:SetPoint("BOTTOMRIGHT")
+	AS:SkinBackdropFrame(BtWQuestsFrame.navBar, nil, nil, true)
+	AS:StripTextures(BtWQuestsFrame.navBar.overlay, true)
+	BtWQuestsFrame.navBar.Backdrop:SetPoint("TOPLEFT", -2, 0)
+	BtWQuestsFrame.navBar.Backdrop:SetPoint("BOTTOMRIGHT")
 
-	AS:SkinButton(BtWQuestsNavBarHomeButton, true)
-	BtWQuestsNavBarHomeButton.xoffset = 1
-	BtWQuestsNavBarHomeButton.isSkinned = true
+	AS:SkinButton(BtWQuestsFrameHomeButton, true)
+	BtWQuestsFrameHomeButton.xoffset = 1
+	BtWQuestsFrameHomeButton.isSkinned = true
 
-	AS:StripTextures(BtWQuestsInset, true)
+	AS:StripTextures(BtWQuestsFrame.Inset, true)
 
-	AS:SkinCloseButton(BtWQuestsCloseButton)
-	AS:SkinScrollBar(BtWQuestsQuestSelectScrollFrameScrollBar)
+	AS:SkinCloseButton(BtWQuestsFrame.CloseButton)
 
-	AS:SkinScrollBar(BtWQuestsChainFrameScrollFrameScrollBar)
+	AS:SkinScrollBar(BtWQuestsChainScrollFrameScrollBar)
+	AS:SkinScrollBar(BtWQuestsFrameCategoryScrollBar)
 
 	local function SkinQuests()
-		local b1 = _G["BtWQuestsQuestSelectScrollFrameScrollChildCategory1"]
+		local b1 = _G["BtWQuestsFrameQuestSelectScrollFrameScrollChildCategory1"]
 		if b1 and not b1.isSkinned then
 			AS:SkinButton(b1)
 			b1.bgImage:SetInside()
@@ -33,7 +33,7 @@ function AS:BtWQuests()
 			b1.isSkinned = true
 		end
 
-		local b2 = _G["BtWQuestsQuestSelectScrollFrameScrollChildChain1"]
+		local b2 = _G["BtWQuestsFrameQuestSelectScrollFrameScrollChildChain1"]
 		if b2 and not b2.isSkinned then
 			AS:SkinButton(b2)
 			b2.bgImage:SetInside()
@@ -43,30 +43,30 @@ function AS:BtWQuests()
 		end
 
 		for i = 1, 10 do
-			local BtWQuestsCategory = _G["BtWQuestsQuestSelectScrollFramecategory"..i]
-			if BtWQuestsCategory and not BtWQuestsCategory.isSkinned then
-				AS:SkinButton(BtWQuestsCategory)
-				BtWQuestsCategory.bgImage:SetInside()
-				BtWQuestsCategory.bgImage:SetTexCoord(.08, .6, .08, .6)
-				BtWQuestsCategory.bgImage:SetDrawLayer("ARTWORK")
-				BtWQuestsCategory.isSkinned = true
+			local BtWQuestsFrameCategory = _G["BtWQuestsFrameQuestSelectScrollFramecategory"..i]
+			if BtWQuestsFrameCategory and not BtWQuestsFrameCategory.isSkinned then
+				AS:SkinButton(BtWQuestsFrameCategory)
+				BtWQuestsFrameCategory.bgImage:SetInside()
+				BtWQuestsFrameCategory.bgImage:SetTexCoord(.08, .6, .08, .6)
+				BtWQuestsFrameCategory.bgImage:SetDrawLayer("ARTWORK")
+				BtWQuestsFrameCategory.isSkinned = true
 			end
 		end
 
 		for i = 1, 10 do
-			local BtWQuestsChain = _G["BtWQuestsQuestSelectScrollFramechain"..i]
-			if BtWQuestsChain and not BtWQuestsChain.isSkinned then
-				AS:SkinButton(BtWQuestsChain)
-				BtWQuestsChain.bgImage:SetInside()
-				BtWQuestsChain.bgImage:SetTexCoord(.08, .6, .08, .6)
-				BtWQuestsChain.bgImage:SetDrawLayer("ARTWORK")
-				BtWQuestsChain.isSkinned = true
+			local BtWQuestsFrameChain = _G["BtWQuestsFrameQuestSelectScrollFramechain"..i]
+			if BtWQuestsFrameChain and not BtWQuestsFrameChain.isSkinned then
+				AS:SkinButton(BtWQuestsFrameChain)
+				BtWQuestsFrameChain.bgImage:SetInside()
+				BtWQuestsFrameChain.bgImage:SetTexCoord(.08, .6, .08, .6)
+				BtWQuestsFrameChain.bgImage:SetDrawLayer("ARTWORK")
+				BtWQuestsFrameChain.isSkinned = true
 			end
 		end
 	end
-	hooksecurefunc("BtWQuests_ListCategories", SkinQuests)
-	BtWQuests_ListCategories()
 
+--	hooksecurefunc("BtWQuests_ListCategories", SkinQuests)
+--	BtWQuests_ListCategories()
 end
 
 AS:RegisterSkin('BtWQuests', AS.BtWQuests)
