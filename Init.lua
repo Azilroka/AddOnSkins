@@ -32,6 +32,7 @@ Engine[1] = AddOn
 Engine[2] = LibStub("AceLocale-3.0"):GetLocale('AddOnSkins', false);
 
 _G.AddOnSkins = Engine
+AddOnSkinsDS = {}
 
 AddOn.Title = GetAddOnMetadata('AddOnSkins', 'Title')
 AddOn.Version = GetAddOnMetadata('AddOnSkins', 'Version')

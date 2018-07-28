@@ -10,6 +10,8 @@ local sort, tinsert = sort, tinsert
 local _G = _G
 local IsAddOnLoaded, C_Timer = IsAddOnLoaded, C_Timer
 
+local SkinErrors = {}
+
 function AS:CheckOption(optionName, ...)
 	for i = 1, select('#', ...) do
 		local addon = select(i, ...)
@@ -170,7 +172,12 @@ function AS:CallSkin(skin, func, event, ...)
 	else
 		local pass = pcall(func, self, event, ...)
 		if not pass then
-			DEFAULT_CHAT_FRAME:AddMessage(format('%s %s: |cfFFF0000There was an error in the|r |cff0AFFFF%s|r |cffFF0000skin|r.', AS.Title, AS.Version, skin))
+			local Version = tonumber(AS.Version)
+			tinsert(SkinErrors, skin)
+			AddOnSkinsDS[Version] = AddOnSkinsDS[Version] or {}
+			AddOnSkinsDS[Version][skin] = true
+			AS:SetOption(skin, false)
+			tinsert(SkinErrors, skin)
 			AS.FoundError = true
 		end
 	end
@@ -180,16 +187,12 @@ function AS:UnregisterSkinEvent(skinName, event)
 	if not AS.events[event] then return end
 	if not AS.events[event][skinName] then return end
 	AS.events[event][skinName] = nil
-	local found = false
-	for skin,_ in pairs(AS.events[event]) do
+	for skin, _ in pairs(AS.events[event]) do
 		if skin then
-			found = true
-			break
+			return
 		end
 	end
-	if not found then
-		AS:UnregisterEvent(event)
-	end
+	AS:UnregisterEvent(event)
 end
 
 function AS:StartSkinning(event)
@@ -203,6 +206,19 @@ function AS:StartSkinning(event)
 	for skin, alldata in pairs(AS.register) do
 		for _, data in pairs(alldata) do
 			AS:RegisteredSkin(skin, data.priority, data.func, data.events)
+		end
+	end
+
+	if not AS:CheckOption('SkinDebug') then
+		for Version, SkinTable in pairs(AddOnSkinsDS) do
+			if Version == AS.Version or Version < AS.Version then
+				for skin, _ in pairs(SkinTable) do
+					AS:SetOption(skin, (Version == AS.Version and false or true))
+				end
+				if Version < AS.Version then
+					AddOnSkinsDS[Version] = nil
+				end
+			end
 		end
 	end
 
@@ -223,7 +239,8 @@ function AS:StartSkinning(event)
 	end
 
 	if AS.FoundError then
-		AS:Print(format('%s: Please report this to Azilroka immediately @ %s', AS.Version, AS:PrintURL(AS.TicketTracker)))
+		AS:Print(format('%s: There was an error in the following skin(s): %s', AS.Version, table.concat(SkinErrors, ", ")))
+		AS:Print(format('Please report this to Azilroka immediately @ %s', AS:PrintURL(AS.TicketTracker)))
 	end
 end
 
