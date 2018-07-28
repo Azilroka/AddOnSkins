@@ -22,25 +22,23 @@ function AS:EmbedSystemHooks()
 	end)
 	hooksecurefunc(E:GetModule('Layout'), 'ToggleChatPanels', function() AS:Embed_Check() end)
 
-	if RightChatToggleButton and LeftChatToggleButton then
+	if RightChatToggleButton then
 		RightChatToggleButton:RegisterForClicks('AnyDown')
 		RightChatToggleButton:SetScript('OnClick', function(self, btn)
 			if btn == 'RightButton' then
-				if AS:CheckOption('EmbedRightChat') then
-					if EmbedSystem_MainWindow:IsShown() then
-						AS:SetOption('EmbedIsHidden', true)
-						EmbedSystem_MainWindow:Hide()
-					else
-						AS:SetOption('EmbedIsHidden', false)
-						EmbedSystem_MainWindow:Show()
-					end
+				if EmbedSystem_MainWindow:IsShown() then
+					AS:SetOption('EmbedIsHidden', true)
+					EmbedSystem_MainWindow:Hide()
+				else
+					AS:SetOption('EmbedIsHidden', false)
+					EmbedSystem_MainWindow:Show()
 				end
 			else
 				if E.db[self.parent:GetName()..'Faded'] then
 					E.db[self.parent:GetName()..'Faded'] = nil
 					UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
 					UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
-					if AS:CheckOption('EmbedRightChat') and not AS:CheckOption('EmbedIsHidden') then
+					if not AS:CheckOption('EmbedIsHidden') then
 						EmbedSystem_MainWindow:Show()
 					end
 				else
@@ -53,62 +51,9 @@ function AS:EmbedSystemHooks()
 		end)
 
 		RightChatToggleButton:HookScript('OnEnter', function(self)
-			if AS:CheckOption('EmbedRightChat') then
-				GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
-				GameTooltip:Show()
-			end
+			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
+			GameTooltip:Show()
 		end)
-
-		--[[
-		LeftChatToggleButton:RegisterForClicks('AnyDown')
-		LeftChatToggleButton:SetScript('OnClick', function(self, btn)
-			if btn == 'RightButton' then
-				if not AS:CheckOption('EmbedRightChat') then
-					if EmbedSystem_MainWindow:IsShown() then
-						AS:SetOption('EmbedIsHidden', true)
-						EmbedSystem_MainWindow:Hide()
-					else
-						AS:SetOption('EmbedIsHidden', false)
-						EmbedSystem_MainWindow:Show()
-					end
-				end
-			else
-				if E.db[self.parent:GetName()..'Faded'] then
-					E.db[self.parent:GetName()..'Faded'] = nil
-					UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
-					UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
-					if not AS:CheckOption('EmbedRightChat') and not AS:CheckOption('EmbedIsHidden') then
-						EmbedSystem_MainWindow:Show()
-					end
-				else
-					E.db[self.parent:GetName()..'Faded'] = true
-					UIFrameFadeOut(self.parent, 0.2, self.parent:GetAlpha(), 0)
-					UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
-					self.parent.fadeInfo.finishedFunc = self.parent.fadeFunc
-				end
-			end
-		end)
-
-		LeftChatToggleButton:HookScript('OnEnter', function(self)
-			if not AS:CheckOption('EmbedRightChat') then
-				GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
-				GameTooltip:Show()
-			end
-		end)
-		]]
-
-		function HideLeftChat()
-			LeftChatToggleButton:Click()
-		end
-
-		function HideRightChat()
-			RightChatToggleButton:Click()
-		end
-
-		function HideBothChat()
-			LeftChatToggleButton:Click()
-			RightChatToggleButton:Click()
-		end
 	end
 end
 
