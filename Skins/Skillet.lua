@@ -173,23 +173,6 @@ function AS:Skillet()
 		SkilletQueueManagementButton:SetPoint('RIGHT', SkilletRecipeNotesButton, 'LEFT', -5, 0)
 		--SkilletItemCountInputBox:SetPoint('BOTTOM', SkilletCreateCountSlider, 'TOP', 0, 2)
 
-		if SkilletDoBasic_Campfire then
-			SkilletDoBasic_Campfire:ClearAllPoints()
-			SkilletDoBasic_Campfire:SetPoint('BOTTOMRIGHT', SkilletRankFrame, 'TOPRIGHT', 0, 3)
-		end
-		if SkilletDoDisenchant then
-			SkilletDoDisenchant:ClearAllPoints()
-			SkilletDoDisenchant:SetPoint('BOTTOMRIGHT', SkilletRankFrame, 'TOPRIGHT', -26, 3)
-		end
-		if SkilletDoProspecting then
-			SkilletDoProspecting:ClearAllPoints()
-			SkilletDoProspecting:SetPoint('BOTTOMRIGHT', SkilletRankFrame, 'TOPRIGHT', -52, 3)
-		end
-		if SkilletDoMilling then
-			SkilletDoMilling:ClearAllPoints()
-			SkilletDoMilling:SetPoint('BOTTOMRIGHT', SkilletRankFrame, 'TOPRIGHT', -78, 3)
-		end
-
 		SkinButton(2259, true)
 		SkinButton(2018, true)
 		SkinButton(7411, true)
