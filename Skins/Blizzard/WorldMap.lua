@@ -92,7 +92,7 @@ function AS:Blizzard_WorldMap()
 			label:SetDrawLayer("OVERLAY")
 		end
 	end
-	hooksecurefunc("TaskPOI_OnEnter", HandleTooltipStatusBar)
+	--hooksecurefunc("TaskPOI_OnEnter", HandleTooltipStatusBar)
 
 	if not AS.ParchmentEnabled then
 		AS:SkinScrollBar(QuestMapDetailsScrollFrameScrollBar)
