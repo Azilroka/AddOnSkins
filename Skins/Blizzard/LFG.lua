@@ -269,9 +269,6 @@ function AS:Blizzard_PVPUI(_, addon)
 	if addon ~= "Blizzard_PVPUI" then return end
 	AS:StripTextures(PVPUIFrame)
 
-	AS:StripTextures(HonorFrame.RoleInset)
-	AS:SkinStatusBar(HonorFrame.XPBar.Bar)
-
 	hooksecurefunc('PVPHonorXPBar_SetNextAvailable', function(self)
 		self:StripTextures()
 
@@ -316,11 +313,11 @@ function AS:Blizzard_PVPUI(_, addon)
 		end
 	end)
 
-	AS:SkinCheckBox(HonorFrame.RoleInset.DPSIcon.checkButton, true)
-	AS:SkinCheckBox(HonorFrame.RoleInset.TankIcon.checkButton, true)
-	AS:SkinCheckBox(HonorFrame.RoleInset.HealerIcon.checkButton, true)
+	AS:SkinCheckBox(HonorFrame.DPSIcon.checkButton, true)
+	AS:SkinCheckBox(HonorFrame.TankIcon.checkButton, true)
+	AS:SkinCheckBox(HonorFrame.HealerIcon.checkButton, true)
 
-	for i = 1, 4 do
+	for i = 1, 3 do
 		local Button = PVPQueueFrame['CategoryButton'..i]
 		AS:SkinFrame(Button, nil, true)
 		Button.Background:SetTexture('')
@@ -349,10 +346,9 @@ function AS:Blizzard_PVPUI(_, addon)
 	PVPQueueFrame.CategoryButton1.Icon:SetTexture("Interface\\Icons\\achievement_bg_winwsg")
 	PVPQueueFrame.CategoryButton2.Icon:SetTexture("Interface\\Icons\\achievement_bg_killxenemies_generalsroom")
 	PVPQueueFrame.CategoryButton3.Icon:SetTexture("Interface\\Icons\\ability_warrior_offensivestance")
-	PVPQueueFrame.CategoryButton4.Icon:SetTexture("Interface\\Icons\\Achievement_General_StayClassy")
 
 	hooksecurefunc('PVPQueueFrame_SelectButton', function(index)
-		for i = 1, 4 do
+		for i = 1, 3 do
 			local Button = PVPQueueFrame["CategoryButton"..i]
 			if ( i == index ) then
 				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
@@ -376,7 +372,7 @@ function AS:Blizzard_PVPUI(_, addon)
 	AS:StripTextures(HonorFrame.BonusFrame.ShadowOverlay)
 	AS:StripTextures(ConquestFrame.Inset)
 
-	for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'AshranButton', 'BrawlButton' }) do
+	for _, Section in pairs({ 'RandomBGButton', 'RandomEpicBGButton', 'Arena1Button', 'BrawlButton' }) do
 		local Button = HonorFrame.BonusFrame[Section]
 		AS:StripTextures(Button)
 		AS:SkinButton(Button)
@@ -394,7 +390,7 @@ function AS:Blizzard_PVPUI(_, addon)
 	end
 
 	hooksecurefunc('HonorFrame_UpdateQueueButtons', function()
-		for _, Section in pairs({ 'RandomBGButton', 'Arena1Button', 'AshranButton', 'BrawlButton' }) do
+		for _, Section in pairs({ 'RandomBGButton', 'RandomEpicBGButton', 'Arena1Button', 'BrawlButton' }) do
 			local Button = HonorFrame.BonusFrame[Section]
 			if Button.SelectedTexture:IsShown() then
 				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
@@ -409,11 +405,9 @@ function AS:Blizzard_PVPUI(_, addon)
 	AS:SkinButton(ConquestJoinButton, true)
 	AS:SkinFrame(ConquestTooltip)
 
-	AS:StripTextures(ConquestFrame.RoleInset)
-
-	AS:SkinCheckBox(ConquestFrame.RoleInset.DPSIcon.checkButton, true)
-	AS:SkinCheckBox(ConquestFrame.RoleInset.TankIcon.checkButton, true)
-	AS:SkinCheckBox(ConquestFrame.RoleInset.HealerIcon.checkButton, true)
+	AS:SkinCheckBox(ConquestFrame.DPSIcon.checkButton, true)
+	AS:SkinCheckBox(ConquestFrame.TankIcon.checkButton, true)
+	AS:SkinCheckBox(ConquestFrame.HealerIcon.checkButton, true)
 
 	for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3'}) do
 		local Button = ConquestFrame[Section]
@@ -443,45 +437,8 @@ function AS:Blizzard_PVPUI(_, addon)
 		end
 	end)
 
-	AS:StripTextures(WarGamesFrame)
-	AS:StripTextures(WarGamesFrame.RightInset)
-	AS:StripTextures(WarGamesFrame.HorizontalBar)
-	AS:StripTextures(WarGamesFrameInfoScrollFrameScrollBar)
-	AS:SkinButton(WarGameStartButton, true)
-	AS:SkinScrollBar(WarGamesFrameScrollFrameScrollBar)
-	AS:SkinScrollBar(WarGamesFrameInfoScrollFrameScrollBar)
-	AS:SkinCheckBox(WarGameTournamentModeCheckButton)
-
-	hooksecurefunc('WarGamesFrame_Update', function()
-		local scrollFrame = WarGamesFrame.scrollFrame
-		local offset = HybridScrollFrame_GetOffset(scrollFrame)
-		local buttons = scrollFrame.buttons
-		local numButtons = #buttons
-		local numWarGames = GetNumWarGameTypes()
-		local selectedIndex = GetSelectedWarGameType()
-
-		for i = 1, numButtons do
-			local button = buttons[i]
-			local index = offset + i
-			if index <= numWarGames  then
-				local name, pvpType, collapsed, id, minPlayers, maxPlayers, isRandom, iconTexture = GetWarGameTypeInfo(index)
-				if not button.Entry.isSkinned then
-					button.Entry:SetHighlightTexture('')
-					AS:CreateBackdrop(button.Entry)
-					button.Entry.Backdrop:SetInside(button.Entry, 1, 1)
-					AS:SkinTexture(button.Entry.Icon)
-					button.Entry.Icon:SetPoint("TOPLEFT", 6, -4)
-					button.Entry.Icon.Background = CreateFrame('Frame', nil, button.Entry)
-					AS:CreateBackdrop(button.Entry.Icon.Background)
-					button.Entry.Icon.Background.Backdrop:SetOutside(button.Entry.Icon, 0, 0)
-					button.Entry.Bg:SetTexture('')
-					button.Entry.Border:SetTexture('')
-					button.Entry.SelectedTexture:SetTexture('')
-					button.Entry.isSkinned = true
-				end
-			end
-		end
-	end)
+	AS:StripTextures(PVPQueueFrame.HonorInset)
 end
+
 
 AS:RegisterSkin("Blizzard_PVPUI", AS.Blizzard_PVPUI, 'ADDON_LOADED')
