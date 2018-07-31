@@ -232,6 +232,10 @@ function AS:StartSkinning(event)
 		end
 	end
 
+	if AS:CheckAddOn('ElvUI') then
+		ElvUI[1]:UpdateCooldownSettings('global')
+	end
+
 	if AS:CheckAddOn('AddonLoader') then
 		AS:AcceptFrame('AddOnSkins is not compatible with AddonLoader.\nPlease remove it if you would like all the skins to function.', function(self) self:GetParent():Hide() end)
 	end
