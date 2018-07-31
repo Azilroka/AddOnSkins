@@ -7,6 +7,7 @@ local LINE_BREAK = '\n'
 local DEVELOPERS = {
 	'AcidWeb',
 	'Affli',
+	'Aldarana',
 	'Arstraea',
 	'Blazeflack',
 	'Cadayron',
