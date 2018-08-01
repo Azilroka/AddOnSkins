@@ -15,8 +15,6 @@
 	<Script file="ArgusEliteTracker.lua"/>
 	<Script file="Arh.lua"/>
 	<Script file="ArkInventory.lua"/>
-	<Script file="ArtifactPowerUser.lua"/>
-	<Script file="ArtifactTab.lua"/>
 	<Script file="Atlas.lua"/>
 	<Script file="AtlasLoot.lua"/>
 	<Script file="ATSW.lua"/>
@@ -106,7 +104,6 @@
 	<Script file="Ludwig.lua"/>
 	<Script file="MageNuggets.lua"/>
 	<Script file="MailCommander.lua"/>
-	<Script file="MasterLootManagerRemix.lua"/>
 	<Script file="MasterPlan.lua"/>
 	<Script file="MinimalArchaeology.lua"/>
 	<Script file="MiscFixes.lua"/>

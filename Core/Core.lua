@@ -172,11 +172,17 @@ function AS:CallSkin(skin, func, event, ...)
 	else
 		local pass = pcall(func, self, event, ...)
 		if not pass then
+			local String = AS:CheckAddOn(skin) and format('%s %s', skin, GetAddOnMetadata(skin, 'Version')) or skin
 			AddOnSkinsDS[AS.Version] = AddOnSkinsDS[AS.Version] or {}
 			AddOnSkinsDS[AS.Version][skin] = true
 			AS:SetOption(skin, false)
-			tinsert(SkinErrors, skin)
-			AS.FoundError = true
+			if AS.RunOnce then
+				AS:AcceptFrame(format('%s %s: There was an error in the following skin: %s\n\nMake sure all AddOns are up to date before reporting.\n\nPlease report this to Azilroka immediately @ %s', AS.Title, AS.Version, String, AS:PrintURL(AS.TicketTracker)))
+				AS:Print(AS:PrintURL(AS.TicketTracker)) 
+			else
+				tinsert(SkinErrors, String)
+				AS.FoundError = true
+			end
 		end
 	end
 end
@@ -237,76 +243,15 @@ function AS:StartSkinning(event)
 	end
 
 	if AS:CheckAddOn('AddonLoader') then
-		AS:AcceptFrame('AddOnSkins is not compatible with AddonLoader.\nPlease remove it if you would like all the skins to function.', function(self) self:GetParent():Hide() end)
+		AS:AcceptFrame('AddOnSkins is not compatible with AddonLoader.\nPlease remove it if you would like all the skins to function.')
 	end
 
 	if AS.FoundError then
-		AS:Print(format('%s: There was an error in the following skin(s): %s', AS.Version, table.concat(SkinErrors, ", ")))
-		AS:Print(format('Please report this to Azilroka immediately @ %s', AS:PrintURL(AS.TicketTracker)))
-	end
-end
-
-function AS:BuildProfile()
-	local Defaults = {
-		profile = {
-		-- Embeds
-			['EmbedOoC'] = false,
-			['EmbedOoCDelay'] = 10,
-			['EmbedCoolLine'] = false,
-			['EmbedSexyCooldown'] = false,
-			['EmbedSystem'] = false,
-			['EmbedSystemDual'] = false,
-			['EmbedMain'] = 'Details',
-			['EmbedLeft'] = 'Details',
-			['EmbedRight'] = 'Details',
-			['EmbedRightChat'] = true,
-			['EmbedLeftWidth'] = 200,
-			['EmbedBelowTop'] = false,
-			['TransparentEmbed'] = false,
-			['EmbedIsHidden'] = false,
-			['EmbedFrameStrata'] = '3-MEDIUM',
-			['EmbedFrameLevel'] = 10,
-		-- Misc
-			['RecountBackdrop'] = true,
-			['SkadaBackdrop'] = true,
-			['OmenBackdrop'] = true,
-			['DetailsBackdrop'] = true,
-			['MiscFixes'] = true,
-			['DBMSkinHalf'] = false,
-			['DBMFont'] = 'Arial Narrow',
-			['DBMFontSize'] = 12,
-			['DBMFontFlag'] = 'OUTLINE',
-			['DBMRadarTrans'] = false,
-			['WeakAuraAuraBar'] = false,
-			['WeakAuraIconCooldown'] = false,
-			['SkinTemplate'] = 'Transparent',
-			['HideChatFrame'] = 'NONE',
-			['Parchment'] = false,
-			['SkinDebug'] = false,
-			['LoginMsg'] = true,
-			['EmbedSystemMessage'] = true,
-			['ElvUISkinModule'] = false,
-			['ThinBorder'] = false,
-		},
-	}
-
-	for skin in pairs(AS.register) do
-		if AS:CheckAddOn('ElvUI') and strfind(skin, 'Blizzard_') then
-			Defaults.profile[skin] = false
-		else
-			Defaults.profile[skin] = true
-		end
+		AS:AcceptFrame(format('%s %s: There was an error in the following skin(s): %s\n\nMake sure all AddOns are up to date before reporting.\n\nPlease report this to Azilroka immediately @ %s', AS.Title, AS.Version, table.concat(SkinErrors, ", "), AS:PrintURL(AS.TicketTracker)))
+		AS:Print(AS:PrintURL(AS.TicketTracker))
 	end
 
-	self.data = LibStub('AceDB-3.0'):New('AddOnSkinsDB', Defaults)
-
-	self.data.RegisterCallback(AS, 'OnProfileChanged', 'SetupProfile')
-	self.data.RegisterCallback(AS, 'OnProfileCopied', 'SetupProfile')
-	self.db = self.data.profile
-end
-
-function AS:SetupProfile()
-	self.db = self.data.profile
+	AS.RunOnce = true
 end
 
 function AS:Init(event, addon)
@@ -364,7 +309,7 @@ function AS:AcceptFrame(MainText, Function)
 	end
 	AcceptFrame.Text:SetText(MainText)
 	AcceptFrame:SetSize(AcceptFrame.Text:GetStringWidth() + 100, AcceptFrame.Text:GetStringHeight() + 60)
-	AcceptFrame.Accept:SetScript('OnClick', Function)
+	AcceptFrame.Accept:SetScript('OnClick', Function or function(self) AcceptFrame:Hide() end)
 	AcceptFrame:Show()
 end
 

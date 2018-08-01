@@ -58,10 +58,74 @@ for _, devName in pairs(DEVELOPERS) do
 	DEVELOPER_STRING = DEVELOPER_STRING..devName..'    '
 end
 
-local DebugString = ''
+function AS:BuildProfile()
+	local Embed = AS:CheckAddOn('Details') and 'Details' or AS:CheckAddOn('Skada') and 'Skada' or AS:CheckAddOn('Recount') and 'Recount' or ''
+
+	local Defaults = {
+		profile = {
+		-- Embeds
+			['EmbedOoC'] = false,
+			['EmbedOoCDelay'] = 10,
+			['EmbedCoolLine'] = false,
+			['EmbedSexyCooldown'] = false,
+			['EmbedSystem'] = false,
+			['EmbedSystemDual'] = false,
+			['EmbedMain'] = Embed,
+			['EmbedLeft'] = Embed,
+			['EmbedRight'] = Embed,
+			['EmbedRightChat'] = true,
+			['EmbedLeftWidth'] = 200,
+			['EmbedBelowTop'] = false,
+			['TransparentEmbed'] = false,
+			['EmbedIsHidden'] = false,
+			['EmbedFrameStrata'] = '3-MEDIUM',
+			['EmbedFrameLevel'] = 10,
+		-- Misc
+			['RecountBackdrop'] = true,
+			['SkadaBackdrop'] = true,
+			['OmenBackdrop'] = true,
+			['DetailsBackdrop'] = true,
+			['MiscFixes'] = true,
+			['DBMSkinHalf'] = false,
+			['DBMFont'] = 'Arial Narrow',
+			['DBMFontSize'] = 12,
+			['DBMFontFlag'] = 'OUTLINE',
+			['DBMRadarTrans'] = false,
+			['WeakAuraAuraBar'] = false,
+			['WeakAuraIconCooldown'] = false,
+			['SkinTemplate'] = 'Transparent',
+			['HideChatFrame'] = 'NONE',
+			['Parchment'] = false,
+			['SkinDebug'] = false,
+			['LoginMsg'] = true,
+			['EmbedSystemMessage'] = true,
+			['ElvUISkinModule'] = false,
+			['ThinBorder'] = false,
+		},
+	}
+
+	for skin in pairs(AS.register) do
+		if AS:CheckAddOn('ElvUI') and strfind(skin, 'Blizzard_') then
+			Defaults.profile[skin] = false
+		else
+			Defaults.profile[skin] = true
+		end
+	end
+
+	self.data = LibStub('AceDB-3.0'):New('AddOnSkinsDB', Defaults)
+
+	self.data.RegisterCallback(AS, 'OnProfileChanged', 'SetupProfile')
+	self.data.RegisterCallback(AS, 'OnProfileCopied', 'SetupProfile')
+	self.db = self.data.profile
+end
+
+function AS:SetupProfile()
+	self.db = self.data.profile
+end
+
 function AS:BuildOptions()
 	local function GenerateOptionTable(skinName, order)
-		local text = strtrim(skinName:gsub('^Blizzard_(.+)','%1'):gsub('(%l)(%u%l)','%1 %2'))
+		local text = strfind(skinName, 'Blizzard_') and strtrim(skinName:gsub('^Blizzard_(.+)','%1'):gsub('(%l)(%u%l)','%1 %2')) or GetAddOnMetadata(skinName, 'Title') or strtrim(skinName:gsub('(%l)(%u%l)','%1 %2'))
 		local options = {
 			type = 'toggle',
 			name = text,
@@ -509,7 +573,7 @@ function AS:GetOptions()
 	AS.Options.args.profiles.order = -2
 
 	if AS:CheckAddOn('ElvUI') then
-			hooksecurefunc(LibStub('AceConfigDialog-3.0-ElvUI'), 'CloseAll', function(self, appName)
+		hooksecurefunc(LibStub('AceConfigDialog-3.0-ElvUI'), 'CloseAll', function(self, appName)
 			if AS.NeedReload then
 				ElvUI[1]:StaticPopup_Show("PRIVATE_RL")
 			end

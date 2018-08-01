@@ -124,4 +124,4 @@ function AS:DBM(event, addon)
 	end
 end
 
-AS:RegisterSkin('DBM', AS.DBM, 'ADDON_LOADED')
+AS:RegisterSkin('DBM-Core', AS.DBM, 'ADDON_LOADED')
