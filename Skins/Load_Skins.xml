@@ -166,6 +166,7 @@
 	<Script file="StormEarthAndFire.lua"/>
 	<Script file="Storyline.lua"/>
 	<Script file="Swatter.lua"/>
+	<Script file="Talented.lua"/>
 	<Script file="Talentless.lua"/>
 	<Script file="TalentSetManager.lua"/>
 	<Script file="tdBattlePetScript.lua"/>
