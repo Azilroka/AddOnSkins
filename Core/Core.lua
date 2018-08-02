@@ -95,7 +95,7 @@ function AS:RemoveNonPetBattleFrames()
 	end
 end
 
-function AS:RegisterSkin(skinName, skinFunc, ...)
+function AS:RegisterSkin(addonName, skinFunc, ...)
 	local events = {}
 	local priority = 1
 	for i = 1, select('#', ...) do
@@ -108,17 +108,17 @@ function AS:RegisterSkin(skinName, skinFunc, ...)
 		end
 	end
 	local registerMe = { func = skinFunc, events = events, priority = priority }
-	if not AS.register[skinName] then AS.register[skinName] = {} end
-	AS.register[skinName][skinFunc] = registerMe
+	if not AS.register[addonName] then AS.register[addonName] = {} end
+	AS.register[addonName][skinFunc] = registerMe
 end
 
-function AS:UnregisterSkin(skinName, skinFunc)
-	if not AS.register[skinName] then return end
+function AS:UnregisterSkin(addonName, skinFunc)
+	if not AS.register[addonName] then return end
 
 	if skinFunc then
-		AS.register[skinName][skinFunc] = nil
+		AS.register[addonName][skinFunc] = nil
 	else
-		AS.register[skinName] = nil
+		AS.register[addonName] = nil
 	end
 end
 
@@ -135,15 +135,15 @@ local function GenerateEventFunction()
 	return eventHandler
 end
 
-function AS:RegisteredSkin(skinName, priority, func, events)
+function AS:RegisteredSkin(addonName, priority, func, events)
 	for c, _ in pairs(events) do
 		if strfind(c, '%[') then
 			local conflict = strmatch(c, '%[([!%w_]+)%]')
 			if AS:CheckAddOn(conflict) then return end
 		end
 	end
-	if not AS.skins[skinName] then AS.skins[skinName] = {} end
-	AS.skins[skinName][priority] = func
+	if not AS.skins[addonName] then AS.skins[addonName] = {} end
+	AS.skins[addonName][priority] = func
 	for event, _ in pairs(events) do
 		if not strfind(event, '%[') then
 			if not AS.events[event] then
@@ -151,13 +151,13 @@ function AS:RegisteredSkin(skinName, priority, func, events)
 				AS:RegisterEvent(event)
 				AS.events[event] = {}
 			end
-			AS.events[event][skinName] = true
+			AS.events[event][addonName] = true
 		end
 	end
 end
 
-function AS:RegisterForPreload(skinName, skinFunc, addonName)
-	AS.preload[addonName] = { func = skinFunc, addon = skinName }
+function AS:RegisterForPreload(addonName, skinFunc)
+	AS.preload[addonName] = { func = skinFunc }
 end
 
 function AS:RunPreload(addonName)
@@ -166,16 +166,19 @@ function AS:RunPreload(addonName)
 	end
 end
 
-function AS:CallSkin(skin, func, event, ...)
+function AS:CallSkin(addonName, func, event, ...)
 	if (AS:CheckOption('SkinDebug')) then
 		func(self, event, ...)
 	else
 		local pass = pcall(func, self, event, ...)
 		if not pass then
-			local String = AS:CheckAddOn(skin) and format('%s %s', skin, GetAddOnMetadata(skin, 'Version')) or skin
+			local String = AS:CheckAddOn(addonName) and format('%s %s', addonName, GetAddOnMetadata(addonName, 'Version')) or addonName
+
+			-- Disable Bad Skin
 			AddOnSkinsDS[AS.Version] = AddOnSkinsDS[AS.Version] or {}
-			AddOnSkinsDS[AS.Version][skin] = true
-			AS:SetOption(skin, false)
+			AddOnSkinsDS[AS.Version][addonName] = true
+			AS:SetOption(addonName, false)
+
 			if AS.RunOnce then
 				AS:AcceptFrame(format('%s %s: There was an error in the following skin: %s\n\nMake sure all AddOns are up to date before reporting.\n\nPlease report this to Azilroka immediately @ %s', AS.Title, AS.Version, String, AS:PrintURL(AS.TicketTracker)))
 				AS:Print(AS:PrintURL(AS.TicketTracker)) 
@@ -187,12 +190,12 @@ function AS:CallSkin(skin, func, event, ...)
 	end
 end
 
-function AS:UnregisterSkinEvent(skinName, event)
+function AS:UnregisterSkinEvent(addonName, event)
 	if not AS.events[event] then return end
-	if not AS.events[event][skinName] then return end
-	AS.events[event][skinName] = nil
-	for skin, _ in pairs(AS.events[event]) do
-		if skin then
+	if not AS.events[event][addonName] then return end
+	AS.events[event][addonName] = nil
+	for addonName, _ in pairs(AS.events[event]) do
+		if addonName then
 			return
 		end
 	end
@@ -207,17 +210,17 @@ function AS:StartSkinning(event)
 	AS.Mult = 768 / AS.ScreenHeight / UIParent:GetScale()
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 
-	for skin, alldata in pairs(AS.register) do
+	for addonName, alldata in pairs(AS.register) do
 		for _, data in pairs(alldata) do
-			AS:RegisteredSkin(skin, data.priority, data.func, data.events)
+			AS:RegisteredSkin(addonName, data.priority, data.func, data.events)
 		end
 	end
 
 	if not AS:CheckOption('SkinDebug') then
 		for Version, SkinTable in pairs(AddOnSkinsDS) do
 			if Version == AS.Version or Version < AS.Version then
-				for skin, _ in pairs(SkinTable) do
-					AS:SetOption(skin, (Version == AS.Version and false or true))
+				for addonName, _ in pairs(SkinTable) do
+					AS:SetOption(addonName, (Version == AS.Version and false or true))
 				end
 				if Version < AS.Version then
 					AddOnSkinsDS[Version] = nil
@@ -226,14 +229,14 @@ function AS:StartSkinning(event)
 		end
 	end
 
-	for skin, funcs in AS:OrderedPairs(AS.skins) do
-		if AS:CheckAddOn('ElvUI') and AS:GetElvUIBlizzardSkinOption(skin) then
-			AS:SetOption(skin, false)
+	for addonName, funcs in AS:OrderedPairs(AS.skins) do
+		if AS:CheckAddOn('ElvUI') and AS:GetElvUIBlizzardSkinOption(addonName) then
+			AS:SetOption(addonName, false)
 		end
 
-		if AS:CheckOption(skin) then
+		if AS:CheckOption(addonName) then
 			for _, func in ipairs(funcs) do
-				AS:CallSkin(skin, func, event)
+				AS:CallSkin(addonName, func, event)
 			end
 		end
 	end
