@@ -17,15 +17,15 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 		Frame:SetBackdrop({
 			bgFile = Texture,
 			edgeFile = AS.Blank,
-			tile = false, tileSize = 0, edgeSize = 1,
+			tile = false, tileSize = 0, edgeSize = AS.Mult,
 			insets = {left = 0, right = 0, top = 0, bottom = 0},
 		})
 	else
 		Frame:SetBackdrop({
 			bgFile = Texture,
 			edgeFile = AS.Blank,
-			tile = false, tileSize = 0, edgeSize = 1,
-			insets = { left = -1, right = -1, top = -1, bottom = -1},
+			tile = false, tileSize = 0, edgeSize = AS.Mult,
+			insets = { left = -AS.Mult, right = -AS.Mult, top = -AS.Mult, bottom = -AS.Mult},
 		})
 
 		if not Frame.isInsetDone then
