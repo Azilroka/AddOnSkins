@@ -180,7 +180,7 @@ function AS:CallSkin(addonName, func, event, ...)
 			AS:SetOption(addonName, false)
 
 			if AS.RunOnce then
-				AS:AcceptFrame(format('%s %s: There was an error in the following skin: %s\n\nMake sure all AddOns are up to date before reporting.\n\nPlease report this to Azilroka immediately @ %s', AS.Title, AS.Version, String, AS:PrintURL(AS.TicketTracker)))
+				AS:AcceptFrame(format('%s %s: There was an error in the following skin: %s\n\nMake sure all AddOns are up to date before reporting.\n\nMake sure it has not been reported already.\n\nIf not report this to Azilroka immediately @ %s', AS.Title, AS.Version, String, AS:PrintURL(AS.TicketTracker)))
 				AS:Print(AS:PrintURL(AS.TicketTracker)) 
 			else
 				tinsert(SkinErrors, String)
@@ -250,7 +250,7 @@ function AS:StartSkinning(event)
 	end
 
 	if AS.FoundError then
-		AS:AcceptFrame(format('%s %s: There was an error in the following skin(s): %s\n\nMake sure all AddOns are up to date before reporting.\n\nPlease report this to Azilroka immediately @ %s', AS.Title, AS.Version, table.concat(SkinErrors, ", "), AS:PrintURL(AS.TicketTracker)))
+		AS:AcceptFrame(format('%s %s: There was an error in the following skin: %s\n\nMake sure all AddOns are up to date before reporting.\n\nMake sure it has not been reported already.\n\nIf not report this to Azilroka immediately @ %s', AS.Title, AS.Version, table.concat(SkinErrors, ", "), AS:PrintURL(AS.TicketTracker)))
 		AS:Print(AS:PrintURL(AS.TicketTracker))
 	end
 

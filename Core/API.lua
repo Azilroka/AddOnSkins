@@ -28,65 +28,18 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 			insets = { left = -AS.Mult, right = -AS.Mult, top = -AS.Mult, bottom = -AS.Mult},
 		})
 
-		if not Frame.isInsetDone then
-			Frame.InsetTop = Frame:CreateTexture(nil, "BORDER")
-			Frame.InsetTop:Point("TOPLEFT", Frame, "TOPLEFT", -1, 1)
-			Frame.InsetTop:Point("TOPRIGHT", Frame, "TOPRIGHT", 1, -1)
-			Frame.InsetTop:Height(1)
-			Frame.InsetTop:SetColorTexture(0,0,0)
-			Frame.InsetTop:SetDrawLayer("BORDER", -7)
+		local Backdrop = { edgeFile = Texture, edgeSize = AS.Mult, insets = { left = AS.Mult, right = AS.Mult, top = AS.Mult, bottom = AS.Mult } }
 
-			Frame.InsetBottom = Frame:CreateTexture(nil, "BORDER")
-			Frame.InsetBottom:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", -1, -1)
-			Frame.InsetBottom:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", 1, -1)
-			Frame.InsetBottom:Height(1)
-			Frame.InsetBottom:SetColorTexture(0,0,0)
-			Frame.InsetBottom:SetDrawLayer("BORDER", -7)
+		Frame.InsideBorder = CreateFrame("Frame", nil, Frame)
+		Frame.InsideBorder:SetInside(Frame, AS.Mult, AS.Mult)
+		Frame.InsideBorder:SetBackdrop(Backdrop)
+		Frame.InsideBorder:SetBackdropBorderColor(0, 0, 0, 1)
 
-			Frame.InsetLeft = Frame:CreateTexture(nil, "BORDER")
-			Frame.InsetLeft:Point("TOPLEFT", Frame, "TOPLEFT", -1, 1)
-			Frame.InsetLeft:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", 1, -1)
-			Frame.InsetLeft:Width(1)
-			Frame.InsetLeft:SetColorTexture(0,0,0)
-			Frame.InsetLeft:SetDrawLayer("BORDER", -7)
-
-			Frame.InsetRight = Frame:CreateTexture(nil, "BORDER")
-			Frame.InsetRight:Point("TOPRIGHT", Frame, "TOPRIGHT", 1, 1)
-			Frame.InsetRight:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", -1, -1)
-			Frame.InsetRight:Width(1)
-			Frame.InsetRight:SetColorTexture(0,0,0)
-			Frame.InsetRight:SetDrawLayer("BORDER", -7)
-
-			Frame.InsetInsideTop = Frame:CreateTexture(nil, "BORDER")
-			Frame.InsetInsideTop:Point("TOPLEFT", Frame, "TOPLEFT", 1, -1)
-			Frame.InsetInsideTop:Point("TOPRIGHT", Frame, "TOPRIGHT", -1, 1)
-			Frame.InsetInsideTop:Height(1)
-			Frame.InsetInsideTop:SetColorTexture(0,0,0)
-			Frame.InsetInsideTop:SetDrawLayer("BORDER", -7)
-
-			Frame.InsetInsideBottom = Frame:CreateTexture(nil, "BORDER")
-			Frame.InsetInsideBottom:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", 1, 1)
-			Frame.InsetInsideBottom:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", -1, 1)
-			Frame.InsetInsideBottom:Height(1)
-			Frame.InsetInsideBottom:SetColorTexture(0,0,0)
-			Frame.InsetInsideBottom:SetDrawLayer("BORDER", -7)
-
-			Frame.InsetInsideLeft = Frame:CreateTexture(nil, "BORDER")
-			Frame.InsetInsideLeft:Point("TOPLEFT", Frame, "TOPLEFT", 1, -1)
-			Frame.InsetInsideLeft:Point("BOTTOMLEFT", Frame, "BOTTOMLEFT", -1, 1)
-			Frame.InsetInsideLeft:Width(1)
-			Frame.InsetInsideLeft:SetColorTexture(0,0,0)
-			Frame.InsetInsideLeft:SetDrawLayer("BORDER", -7)
-
-			Frame.InsetInsideRight = Frame:CreateTexture(nil, "BORDER")
-			Frame.InsetInsideRight:Point("TOPRIGHT", Frame, "TOPRIGHT", -1, -1)
-			Frame.InsetInsideRight:Point("BOTTOMRIGHT", Frame, "BOTTOMRIGHT", 1, 1)
-			Frame.InsetInsideRight:Width(1)
-			Frame.InsetInsideRight:SetColorTexture(0,0,0)
-			Frame.InsetInsideRight:SetDrawLayer("BORDER", -7)
-
-			Frame.isInsetDone = true
-		end
+		Frame.OutsideBorder = CreateFrame("Frame", nil, Frame)
+		Frame.OutsideBorder:SetOutside(Frame, AS.Mult, AS.Mult)
+		Frame.OutsideBorder:SetFrameLevel(Frame:GetFrameLevel() + 1)
+		Frame.OutsideBorder:SetBackdrop(Backdrop)
+		Frame.OutsideBorder:SetBackdropBorderColor(0, 0, 0, 1)
 	end
 
 	local R, G, B = unpack(AS.BackdropColor)
@@ -108,14 +61,8 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 end
 
 local Insets = {
-	'InsetTop',
-	'InsetBottom',
-	'InsetLeft',
-	'InsetRight',
-	'InsetInsideTop',
-	'InsetInsideBottom',
-	'InsetInsideLeft',
-	'InsetInsideRight',
+	'InsideBorder',
+	'OutsideBorder',
 }
 
 function AS:HideInset(Frame)
@@ -227,16 +174,9 @@ function AS:CreateShadow(Frame)
 	local Shadow = CreateFrame("Frame", nil, Frame)
 	Shadow:SetFrameLevel(1)
 	Shadow:SetFrameStrata(Frame:GetFrameStrata())
-	Shadow:Point("TOPLEFT", -3, 3)
-	Shadow:Point("BOTTOMLEFT", -3, -3)
-	Shadow:Point("TOPRIGHT", 3, 3)
-	Shadow:Point("BOTTOMRIGHT", 3, -3)
+	Shadow:SetOutside(Frame, 3, 3)
 
-	Shadow:SetBackdrop({
-		edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = AS:Scale(3),
-		insets = {left = AS:Scale(5), right = AS:Scale(5), top = AS:Scale(5), bottom = AS:Scale(5)},
-	})
-
+	Shadow:SetBackdrop({ edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = AS:Scale(3) })
 	Shadow:SetBackdropColor(0, 0, 0, 0)
 	Shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
 
