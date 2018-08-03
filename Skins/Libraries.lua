@@ -191,6 +191,19 @@ function AS:SkinLibraries()
 			return frame
 		end, true)
 	end
+
+	local Poncho = LibStub('Poncho-1.0', true)
+	if Poncho then
+		if SushiDropFrame then
+			hooksecurefunc(SushiDropFrame, 'SetMenu', function(self)
+				if not self.bg.Backdrop then
+					self.bg:SetBackdrop(nil)
+					self.bg.SetBackdrop = function() end
+					AS:CreateBackdrop(self.bg)
+				end
+			end)
+		end
+	end
 end
 
 AS:RegisterSkin('Libraries', AS.SkinLibraries)
