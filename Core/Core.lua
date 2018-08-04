@@ -1,8 +1,8 @@
-local AS = unpack(AddOnSkins)
+local AS, ASL = unpack(AddOnSkins)
 
 local AddOnName = ...
 
-local AcceptFrame
+local AcceptFrame, BugReportFrame
 
 local select, pairs, ipairs, type, pcall = select, pairs, ipairs, type, pcall
 local floor, print, format, strlower, strfind, strmatch = floor, print, format, strlower, strfind, strmatch
@@ -314,6 +314,50 @@ function AS:AcceptFrame(MainText, Function)
 	AcceptFrame:SetSize(AcceptFrame.Text:GetStringWidth() + 100, AcceptFrame.Text:GetStringHeight() + 60)
 	AcceptFrame.Accept:SetScript('OnClick', Function or function(self) AcceptFrame:Hide() end)
 	AcceptFrame:Show()
+end
+
+function AS:BugReportFrame(BugTitleText, ErrorText)
+	if not BugReportFrame then
+		BugReportFrame = CreateFrame('Frame', 'AddOnSkinsBugReportFrame', UIParent)
+		AS:SkinFrame(BugReportFrame)
+		BugReportFrame:SetPoint('CENTER', UIParent, 'CENTER')
+		BugReportFrame:SetFrameStrata('DIALOG')
+		BugReportFrame:SetSize(480, 640)
+
+		BugReportFrame.Title = BugReportFrame:CreateFontString(nil, "OVERLAY")
+		BugReportFrame.Title:SetFont(AS.Font, 14)
+		BugReportFrame.Title:SetPoint('TOP', BugReportFrame, 'TOP', 0, -4)
+		BugReportFrame.Title:SetText(ASL['AddOnSkins Bug Report'])
+
+		BugReportFrame.BugTitle = CreateFrame("EditBox", nil, BugReportFrame, "InputBoxTemplate")
+		BugReportFrame.BugTitle:SetAutoFocus(false)
+		BugReportFrame.BugTitle:SetFontObject(ChatFontNormal)
+		AS:SkinEditBox(BugReportFrame.BugTitle)
+		BugReportFrame.BugTitle:SetTextInsets(0, 0, 3, 3)
+		BugReportFrame.BugTitle:SetMaxLetters(256)
+		BugReportFrame.BugTitle:SetPoint("TOP", 0, -30)
+		BugReportFrame.BugTitle:SetSize(250, 19)
+
+		BugReportFrame.Text = BugReportFrame:CreateFontString(nil, "OVERLAY")
+		BugReportFrame.Text:SetFont(AS.Font, 14)
+		BugReportFrame.Text:SetPoint('TOP', BugReportFrame, 'TOP', 0, -10)
+
+		BugReportFrame.Accept = CreateFrame('Button', nil, BugReportFrame, 'OptionsButtonTemplate')
+		AS:SkinButton(BugReportFrame.Accept)
+		BugReportFrame.Accept:SetSize(70, 25)
+		BugReportFrame.Accept:SetPoint('RIGHT', BugReportFrame, 'BOTTOM', -10, 20)
+		BugReportFrame.Accept:SetFormattedText('|cFFFFFFFF%s|r', YES)
+
+		BugReportFrame.Close = CreateFrame('Button', nil, BugReportFrame, 'OptionsButtonTemplate')
+		AS:SkinButton(BugReportFrame.Close)
+		BugReportFrame.Close:SetSize(70, 25)
+		BugReportFrame.Close:SetPoint('LEFT', BugReportFrame, 'BOTTOM', 10, 20)
+		BugReportFrame.Close:SetScript('OnClick', function(self) self:GetParent():Hide() end)
+		BugReportFrame.Close:SetFormattedText('|cFFFFFFFF%s|r', NO)
+	end
+
+	BugReportFrame.BugTitle:SetText(BugTitleText)
+	BugReportFrame:Show()
 end
 
 AS:RegisterEvent('ADDON_LOADED', 'Init')

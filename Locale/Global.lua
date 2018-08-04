@@ -69,3 +69,5 @@ ASL['Toggle Embedded AddOn'] = true
 ASL['Toggle Left Chat Panel'] = true
 ASL['Toggle Options'] = true
 ASL['Toggle Right Chat Panel'] = true
+
+ASL['AddOnSkins Bug Report'] = true
