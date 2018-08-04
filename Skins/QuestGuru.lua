@@ -42,9 +42,6 @@ function AS:QuestGuru()
 	QuestGuruInset:StripTextures()
 	QuestGuruDetailScrollFrame:StripTextures()
 	QuestGuruScrollFrame:StripTextures()
-
-	QGC_FramePortrait:Kill()
-	QGC_FrameTitleText:SetFormattedText(" Quest Log ")
 end
 
 AS:RegisterSkin('QuestGuru', AS.QuestGuru)
