@@ -116,7 +116,6 @@
 	<Script file="MythicKeystoneStatus.lua"/>
 	<Script file="NirritisNotes.lua"/>
 	<Script file="NoNoGoGo.lua"/>
-	<Script file="NPCScan.lua"/>
 	<Script file="NugRunning.lua"/>
 	<Script file="Numeration.lua"/>
 	<Script file="Odyssey.lua"/>
