@@ -52,7 +52,6 @@
 	<Script file="Cork.lua"/>
 	<Script file="Creator.lua"/>
 	<Script file="Critline.lua"/>
-	<Script file="DailyTamerCheck.lua"/>
 	<Script file="DBM.lua"/>
 	<Script file="DejaCharacterStats.lua"/>
 	<Script file="Details.lua"/>
