@@ -20,15 +20,12 @@ function AS:MinimalArchaeology()
 	AS:SkinFrame(MinArchHist)
 	AS:SkinCloseButton(MinArchHistButtonClose)
 
-	for i = 1, 12 do
-		AS:SkinStatusBar(_G['MinArchMainArtifactBar'..i])
-		_G['MinArchMainArtifactBar'..i]:SetStatusBarColor(1.0, 0.4, 0)
-		AS:SkinButton(_G['MinArchMainArtifactBar'..i..'ButtonSolve'])
-		_G['MinArchMainArtifactBar'..i..'ButtonSolve']:SetHeight(17)
-		_G['MinArchMainArtifactBar'..i..'ButtonSolve']:SetPoint('TOPLEFT', _G['MinArchMainArtifactBar'..i], 'TOPRIGHT', 5, 2)
-		AS:SkinCheckBox(_G['MinArchOptionPanelHideArtifact'..i])
-		AS:SkinCheckBox(_G['MinArchOptionPanelFragmentCap'..i])
-		if _G['MinArchOptionPanelUseKeystones'..i] then AS:SkinCheckBox(_G['MinArchOptionPanelUseKeystones'..i]) end
+	for i = 1, ARCHAEOLOGY_NUM_RACES do
+		AS:SkinStatusBar(MinArch['artifactbars'][i])
+		MinArch['artifactbars'][i]:SetStatusBarColor(1.0, 0.4, 0)
+		AS:SkinButton(MinArch['artifactbars'][i].buttonSolve)
+		--MinArch['artifactbars'][i].buttonSolve:SetHeight(17)
+		--MinArch['artifactbars'][i].buttonSolve:SetPoint('TOPLEFT', _G['MinArchMainArtifactBar'..i], 'TOPRIGHT', 5, 2)
 	end
 
 	local checkbox = {
