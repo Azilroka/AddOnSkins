@@ -3,9 +3,11 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('FlyoutButtonCustom') then return end
 
 function AS:FlyoutButtonCustom()
-	FlyoutButtonCustom_Settings.Highlight = false
-	FlyoutButtonCustom_Settings.ShowBorders = false
-	FlyoutButtonCustom_Settings.ButtonsScale = 1
+	if FlyoutButtonCustom_Settings then
+		FlyoutButtonCustom_Settings.Highlight = false
+		FlyoutButtonCustom_Settings.ShowBorders = false
+		FlyoutButtonCustom_Settings.ButtonsScale = 1
+	end
 
 	local function CreateBorder(self)
 		local name = self:GetName()
