@@ -9,16 +9,16 @@ function AS:QuestGuru()
 	QuestGuru:SetTemplate("Transparent")
 
 	-- Skin QuestGuru Buttons
-for i = 1, QuestGuru:GetNumChildren() do
-	local object = select(i, QuestGuru:GetChildren())
-	if object:IsObjectType('Button') then
-		if object:GetText() ~= nil then
-			AS:SkinButton(object, true)
-		else
-			AS:SkinCloseButton(object, true)
+	for i = 1, QuestGuru:GetNumChildren() do
+		local object = select(i, QuestGuru:GetChildren())
+		if object:IsObjectType('Button') then
+			if object:GetText() ~= nil then
+				AS:SkinButton(object, true)
+			else
+				AS:SkinCloseButton(object, true)
+			end
 		end
 	end
-end
 
 	--Reposition Expand/Collapse Button
 	QuestGuruScrollFrame.expandAll:ClearAllPoints()
@@ -30,11 +30,11 @@ end
 
 	--Resize Expand/Collapse Button
 	QuestGuruScrollFrame.expandAll:Size(120, 30)
-	QuestGuruScrollFrame.expandAll:SetFormattedText(TEXT" Expand/Collapse ")
+	QuestGuruScrollFrame.expandAll:SetFormattedText(" Expand/Collapse ")
 
 	--Resize Show Map Button
 	QuestGuru.mapButton:Size(50, 40)
-	QuestGuru.mapButton:SetFormattedText(TEXT" Quest Log ")
+	QuestGuru.mapButton:SetFormattedText(" Quest Log ")
 
 	AS:SkinScrollBar(QuestGuruScrollFrameScrollBar)
 	AS:SkinScrollBar(QuestGuruDetailScrollFrameScrollBar)
@@ -44,7 +44,7 @@ end
 	QuestGuruScrollFrame:StripTextures()
 
 	QGC_FramePortrait:Kill()
-	QGC_FrameTitleText:SetFormattedText(TEXT" Quest Log ")
+	QGC_FrameTitleText:SetFormattedText(" Quest Log ")
 end
 
 AS:RegisterSkin('QuestGuru', AS.QuestGuru)
