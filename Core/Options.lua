@@ -100,7 +100,7 @@ function AS:BuildProfile()
 			['LoginMsg'] = true,
 			['EmbedSystemMessage'] = true,
 			['ElvUISkinModule'] = false,
-			['ThinBorder'] = false,
+			['ThinBorder'] = true,
 		},
 	}
 

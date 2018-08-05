@@ -65,19 +65,7 @@ function AS:Altoholic(event, addon)
 
 	if addon == "Altoholic_Characters" then
 		AS:SkinFrame(AltoholicFrameContainers)
-		AS:SkinFrame(AltoholicFrameRecipes)
-		--AS:SkinFrame(AltoholicFrameQuests)
-		AS:SkinFrame(AltoholicFrameMail)
-		AS:SkinFrame(AltoholicFrameSpellbook)
-		AS:SkinFrame(AltoholicFrameAuctions)
 		AS:SkinScrollBar(AltoholicFrameContainersScrollFrame.ScrollBar)
-		--AS:SkinScrollBar(AltoholicFrameQuestsScrollFrame.ScrollBar)
-		AS:SkinScrollBar(AltoholicFrameRecipesScrollFrame.ScrollBar)
-		AS:SkinNextPrevButton(AltoholicFrameSpellbook.PrevPage)
-		AS:SkinNextPrevButton(AltoholicFrameSpellbook.NextPage)
-		AS:StripTextures(AltoholicFrameContainersScrollFrame, true)
-		--AS:StripTextures(AltoholicFrameQuestsScrollFrame, true)
-		AS:StripTextures(AltoholicFrameRecipesScrollFrame, true)
 
 		local Buttons = {
 			'CharactersIcon',
