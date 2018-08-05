@@ -316,47 +316,60 @@ function AS:AcceptFrame(MainText, Function)
 	AcceptFrame:Show()
 end
 
-function AS:BugReportFrame(BugTitleText, ErrorText)
+function AS:BugReportFrame(BugTitleText, BugErrorText)
 	if not BugReportFrame then
 		BugReportFrame = CreateFrame('Frame', 'AddOnSkinsBugReportFrame', UIParent)
 		AS:SkinFrame(BugReportFrame)
+		AS:CreateShadow(BugReportFrame)
 		BugReportFrame:SetPoint('CENTER', UIParent, 'CENTER')
 		BugReportFrame:SetFrameStrata('DIALOG')
-		BugReportFrame:SetSize(480, 640)
+		BugReportFrame:SetSize(480, 260)
 
 		BugReportFrame.Title = BugReportFrame:CreateFontString(nil, "OVERLAY")
 		BugReportFrame.Title:SetFont(AS.Font, 14)
 		BugReportFrame.Title:SetPoint('TOP', BugReportFrame, 'TOP', 0, -4)
 		BugReportFrame.Title:SetText(ASL['AddOnSkins Bug Report'])
 
-		BugReportFrame.BugTitle = CreateFrame("EditBox", nil, BugReportFrame, "InputBoxTemplate")
-		BugReportFrame.BugTitle:SetAutoFocus(false)
-		BugReportFrame.BugTitle:SetFontObject(ChatFontNormal)
-		AS:SkinEditBox(BugReportFrame.BugTitle)
-		BugReportFrame.BugTitle:SetTextInsets(0, 0, 3, 3)
-		BugReportFrame.BugTitle:SetMaxLetters(256)
-		BugReportFrame.BugTitle:SetPoint("TOP", 0, -30)
+		for _, Name in pairs({ 'GitLab', 'BugTitle', 'BugError'}) do
+			BugReportFrame[Name] = CreateFrame("EditBox", nil, BugReportFrame, "InputBoxTemplate")
+			BugReportFrame[Name]:SetAutoFocus(false)
+			BugReportFrame[Name]:SetFontObject(ChatFontNormal)
+			AS:SkinEditBox(BugReportFrame[Name])
+			BugReportFrame[Name]:SetTextInsets(3, 3, 3, 3)
+			BugReportFrame[Name]:SetMaxLetters(0)
+		end
+
+		BugReportFrame.GitLab:SetPoint("TOP", 0, -30)
+		BugReportFrame.GitLab:SetSize(250, 19)
+		BugReportFrame.GitLab:SetText(AS.TicketTracker)
+
+		BugReportFrame.BugTitle:SetPoint("TOP", 0, -60)
 		BugReportFrame.BugTitle:SetSize(250, 19)
+
+		BugReportFrame.BugError:SetPoint("TOP", 0, -90)
+		BugReportFrame.BugError:SetSize(350, 150)
+		BugReportFrame.BugError:SetMultiLine(true)
 
 		BugReportFrame.Text = BugReportFrame:CreateFontString(nil, "OVERLAY")
 		BugReportFrame.Text:SetFont(AS.Font, 14)
 		BugReportFrame.Text:SetPoint('TOP', BugReportFrame, 'TOP', 0, -10)
 
-		BugReportFrame.Accept = CreateFrame('Button', nil, BugReportFrame, 'OptionsButtonTemplate')
-		AS:SkinButton(BugReportFrame.Accept)
-		BugReportFrame.Accept:SetSize(70, 25)
-		BugReportFrame.Accept:SetPoint('RIGHT', BugReportFrame, 'BOTTOM', -10, 20)
-		BugReportFrame.Accept:SetFormattedText('|cFFFFFFFF%s|r', YES)
+		BugReportFrame.Next = CreateFrame('Button', nil, BugReportFrame, 'OptionsButtonTemplate')
+		AS:SkinButton(BugReportFrame.Next)
+		BugReportFrame.Next:SetSize(70, 25)
+		BugReportFrame.Next:SetPoint('RIGHT', BugReportFrame, 'BOTTOM', -10, 20)
+		BugReportFrame.Next:SetFormattedText('|cFFFFFFFF%s|r', NEXT)
 
 		BugReportFrame.Close = CreateFrame('Button', nil, BugReportFrame, 'OptionsButtonTemplate')
 		AS:SkinButton(BugReportFrame.Close)
 		BugReportFrame.Close:SetSize(70, 25)
 		BugReportFrame.Close:SetPoint('LEFT', BugReportFrame, 'BOTTOM', 10, 20)
 		BugReportFrame.Close:SetScript('OnClick', function(self) self:GetParent():Hide() end)
-		BugReportFrame.Close:SetFormattedText('|cFFFFFFFF%s|r', NO)
+		BugReportFrame.Close:SetFormattedText('|cFFFFFFFF%s|r', CLOSE)
 	end
 
 	BugReportFrame.BugTitle:SetText(BugTitleText)
+	BugReportFrame.BugError:SetText(BugErrorText)
 	BugReportFrame:Show()
 end
 
