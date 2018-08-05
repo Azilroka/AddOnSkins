@@ -195,4 +195,4 @@ function AS:BigWigs(event, addon)
 end
 
 AS:RegisterSkin('BigWigs', AS.BigWigs, 'ADDON_LOADED')
-AS:RegisterForPreload('BigWigs', AS.BigWigs, 'BigWigs_Plugins')
+AS:RegisterForPreload('BigWigs_Plugins', AS.BigWigs)
