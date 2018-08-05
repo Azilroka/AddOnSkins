@@ -162,7 +162,7 @@ end
 
 function AS:RunPreload(addonName)
 	if AS.preload[addonName] then
-		pcall(AS.preload[addonName].func, self, 'ADDON_LOADED', addonName)
+		pcall(AS.preload[addonName].func, self, 'ADDON_LOADED', AS.preload[addonName].addon or addonName)
 	end
 end
 
