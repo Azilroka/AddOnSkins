@@ -52,7 +52,7 @@ function AS:AzerothAutoPilot()
 		AAP.OptionsFrame["Slider"..i].High:SetFont(AS.Font, 10, "OUTLINE")
 		AAP.OptionsFrame["Slider"..i].Text:SetFont(AS.Font, 10, "OUTLINE")
 	end
-	for i = 1, 3 do
+	for i = 1, 4 do
 		AS:SkinButton(_G["AAP_OptionsButtons"..i])
 		local text = AAP.OptionsFrame["Button"..i]:GetText()
 		AAP.OptionsFrame["Button"..i]:SetText("")
@@ -62,6 +62,8 @@ function AS:AzerothAutoPilot()
 		AAP.OptionsFrame["Button"..i].Text:SetText(text)
 		AAP.OptionsFrame["Button"..i].Text:SetPoint("CENTER", 0, 0)
 	end
+	AS:SkinDropDownBox(AAP_DropDownList)
+	AS:SkinDropDownBox(AAP_DropDown1)
 	AS:SkinFrame(AAP_AFkFrames)
 	AAP_AfkFrame.Fontstring:SetFont(AS.Font, 20, "OUTLINE")
 	AS:SkinButton(AAP_ArrowActiveButton)
