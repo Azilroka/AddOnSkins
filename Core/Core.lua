@@ -161,7 +161,7 @@ function AS:RegisterForPreload(addonName, skinFunc, addon1)
 end
 
 function AS:RunPreload(addonName)
-	if AS.preload[addonName] then
+	if AS:CheckAddOn(addonName) and AS.preload[addonName] then
 		pcall(AS.preload[addonName].func, self, 'ADDON_LOADED', AS.preload[addonName].addon or addonName)
 	end
 end
@@ -170,7 +170,7 @@ function AS:CallSkin(addonName, func, event, ...)
 	if (AS:CheckOption('SkinDebug')) then
 		func(self, event, ...)
 	else
-		local pass = pcall(func, self, event, ...)
+		local pass, error = pcall(func, self, event, ...)
 		if not pass then
 			local String = AS:CheckAddOn(addonName) and format('%s %s', addonName, GetAddOnMetadata(addonName, 'Version')) or addonName
 
@@ -302,13 +302,13 @@ function AS:AcceptFrame(MainText, Function)
 		AS:SkinButton(AcceptFrame.Accept)
 		AcceptFrame.Accept:SetSize(70, 25)
 		AcceptFrame.Accept:SetPoint('RIGHT', AcceptFrame, 'BOTTOM', -10, 20)
-		AcceptFrame.Accept:SetFormattedText('|cFFFFFFFF%s|r', YES)
+		AcceptFrame.Accept:SetFormattedText('|cFFFFFFFF%s|r', OKAY)
 		AcceptFrame.Close = CreateFrame('Button', nil, AcceptFrame, 'OptionsButtonTemplate')
 		AS:SkinButton(AcceptFrame.Close)
 		AcceptFrame.Close:SetSize(70, 25)
 		AcceptFrame.Close:SetPoint('LEFT', AcceptFrame, 'BOTTOM', 10, 20)
 		AcceptFrame.Close:SetScript('OnClick', function(self) self:GetParent():Hide() end)
-		AcceptFrame.Close:SetFormattedText('|cFFFFFFFF%s|r', NO)
+		AcceptFrame.Close:SetFormattedText('|cFFFFFFFF%s|r', CLOSE)
 	end
 	AcceptFrame.Text:SetText(MainText)
 	AcceptFrame:SetSize(AcceptFrame.Text:GetStringWidth() + 100, AcceptFrame.Text:GetStringHeight() + 60)
