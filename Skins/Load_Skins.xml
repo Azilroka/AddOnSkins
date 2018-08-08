@@ -124,7 +124,7 @@
 	<Script file="oRA3.lua"/>
 	<Script file="OrderHallCommander.lua"/>
 	<Script file="Outfitter.lua"/>
-	<!--Script file="Ovale.lua"/-->
+	<Script file="Ovale.lua"/>
 	<Script file="Overachiever.lua"/>
 	<Script file="Pawn.lua"/>
 	<Script file="PetBattleTeams.lua"/>
