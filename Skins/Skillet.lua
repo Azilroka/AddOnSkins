@@ -289,44 +289,44 @@ function AS:Skillet()
 	_G['SkilletReagentParent']:SetScript('OnUpdate', SkinReagentIcon)
 	_G['SkilletPluginButton']:SetScript('PostClick', SkinPluginButtons)
 
-	local point, relativeTo, relativePoint, xOffset, yOffset;
+	local point, relativeTo, relativePoint, xOffset, yOffset
 	AS:SkinDropDownBox(SkilletFilterDropdown)
-	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSearchBox:GetPoint();
-	SkilletSearchBox:SetPoint(point, relativeTo, relativePoint, xOffset-1, yOffset);
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSearchBox:GetPoint()
+	SkilletSearchBox:SetPoint(point, relativeTo, relativePoint, xOffset-1, yOffset)
 	AS:SkinEditBox(SkilletSearchBox)
 	SkilletSearchBox:SetSize(125,18)
 
-	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSearchFilterClear:GetPoint();
-	SkilletSearchFilterClear:SetPoint(point, relativeTo, relativePoint, xOffset+10, yOffset+2);
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSearchFilterClear:GetPoint()
+	SkilletSearchFilterClear:SetPoint(point, relativeTo, relativePoint, xOffset+10, yOffset+2)
 	AS:SkinNextPrevButton(SkilletSearchFilterClear)
 	--SquareButton_SetIcon(SkilletSearchFilterClear, "DELETE")
 	SkilletSearchFilterClear:Size(18)
 
-	point, relativeTo, relativePoint, xOffset, yOffset = SkilletClearNumButton:GetPoint();
-	SkilletClearNumButton:SetPoint(point, relativeTo, relativePoint, xOffset+10, yOffset+2);
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletClearNumButton:GetPoint()
+	SkilletClearNumButton:SetPoint(point, relativeTo, relativePoint, xOffset+10, yOffset+2)
 	AS:SkinNextPrevButton(SkilletClearNumButton)
 	--SquareButton_SetIcon(SkilletClearNumButton, "DELETE")
 	SkilletClearNumButton:Size(18)
 
 	SkilletSortAscButton.text:SetText("")
-	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSortAscButton:GetPoint();
-	SkilletSortAscButton:SetPoint(point, relativeTo, relativePoint, xOffset+3, yOffset);
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSortAscButton:GetPoint()
+	SkilletSortAscButton:SetPoint(point, relativeTo, relativePoint, xOffset+3, yOffset)
 	AS:SkinNextPrevButton(SkilletSortAscButton, true, true)
 	SkilletSortAscButton:Size(18)
 
 	SkilletSortDescButton.text:SetText("")
-	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSortDescButton:GetPoint();
-	SkilletSortDescButton:SetPoint(point, relativeTo, relativePoint, xOffset+3, yOffset);
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletSortDescButton:GetPoint()
+	SkilletSortDescButton:SetPoint(point, relativeTo, relativePoint, xOffset+3, yOffset)
 	AS:SkinNextPrevButton(SkilletSortDescButton, true, false)
 	SkilletSortDescButton:Size(18)
 
-	point, relativeTo, relativePoint, xOffset, yOffset = SkilletFilterOperations:GetPoint();
-	SkilletFilterOperations:SetPoint(point, relativeTo, relativePoint, xOffset+5, yOffset);
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletFilterOperations:GetPoint()
+	SkilletFilterOperations:SetPoint(point, relativeTo, relativePoint, xOffset+5, yOffset)
 	AS:SkinNextPrevButton(SkilletFilterOperations, false, false)
 	SkilletFilterOperations:Size(18)
 
-	point, relativeTo, relativePoint, xOffset, yOffset = SkilletRecipeGroupOperations:GetPoint();
-	SkilletRecipeGroupOperations:SetPoint(point, relativeTo, relativePoint, xOffset+5, yOffset);
+	point, relativeTo, relativePoint, xOffset, yOffset = SkilletRecipeGroupOperations:GetPoint()
+	SkilletRecipeGroupOperations:SetPoint(point, relativeTo, relativePoint, xOffset+5, yOffset)
 	AS:SkinNextPrevButton(SkilletRecipeGroupOperations, false, false)
 	SkilletRecipeGroupOperations:Size(18)
 end

@@ -526,22 +526,22 @@ function AS:SkinNextPrevButton(Button, Vertical, Inverse)
 
 		Button:HookScript('OnMouseDown', function(self)
 			if self:IsEnabled() then
-				self.icon:SetPoint("CENTER", -1, -1);
+				self.icon:SetPoint("CENTER", -1, -1)
 			end
 		end)
 
 		Button:HookScript('OnMouseUp', function(self)
-			self.icon:SetPoint("CENTER", 0, 0);
+			self.icon:SetPoint("CENTER", 0, 0)
 		end)
 
 		Button:HookScript('OnDisable', function(self)
-			SetDesaturation(self.icon, true);
-			self.icon:SetAlpha(0.5);
+			SetDesaturation(self.icon, true)
+			self.icon:SetAlpha(0.5)
 		end)
 
 		Button:HookScript('OnEnable', function(self)
-			SetDesaturation(self.icon, false);
-			self.icon:SetAlpha(1.0);
+			SetDesaturation(self.icon, false)
+			self.icon:SetAlpha(1.0)
 		end)
 
 		if not Button:IsEnabled() then
