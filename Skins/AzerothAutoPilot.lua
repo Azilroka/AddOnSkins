@@ -41,7 +41,7 @@ function AS:AzerothAutoPilot()
 	AS:SkinFrame(AAP_OptionsMainFrame)
 	AAP.OptionsFrame.FontString1:SetFont(AS.Font, 14, "OUTLINE")
 	local CheckBoxes = {
-		1, 2, 3, 5, 6, 7, 10, 11, 12,
+		1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12,
 	}
 	for _, box in pairs(CheckBoxes) do
 		AS:SkinCheckBox(_G["CLxCheckButton"..box])
