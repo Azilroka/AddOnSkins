@@ -85,6 +85,7 @@
 	<Script file="Healium.lua"/>
 	<Script file="Hekili.lua"/>
 	<Script file="Ignition.lua"/>
+	<!--Script file="Immersion.lua"/-->
 	<Script file="InboxMailBag.lua"/>
 	<Script file="Incoming.lua"/>
 	<Script file="InspectEquip.lua"/>
