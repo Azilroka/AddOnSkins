@@ -41,7 +41,7 @@ function AS:AzerothAutoPilot()
 	AS:SkinFrame(AAP_OptionsMainFrame)
 	AAP.OptionsFrame.FontString1:SetFont(AS.Font, 14, "OUTLINE")
 	local CheckBoxes = {
-		1, 2, 3, 5, 6, 7, 10, 11, 12,
+		1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12,
 	}
 	for _, box in pairs(CheckBoxes) do
 		AS:SkinCheckBox(_G["CLxCheckButton"..box])
@@ -52,7 +52,7 @@ function AS:AzerothAutoPilot()
 		AAP.OptionsFrame["Slider"..i].High:SetFont(AS.Font, 10, "OUTLINE")
 		AAP.OptionsFrame["Slider"..i].Text:SetFont(AS.Font, 10, "OUTLINE")
 	end
-	for i = 1, 3 do
+	for i = 1, 4 do
 		AS:SkinButton(_G["AAP_OptionsButtons"..i])
 		local text = AAP.OptionsFrame["Button"..i]:GetText()
 		AAP.OptionsFrame["Button"..i]:SetText("")
@@ -61,6 +61,20 @@ function AS:AzerothAutoPilot()
 		AAP.OptionsFrame["Button"..i].Text:SetTextColor(255, 255, 0)
 		AAP.OptionsFrame["Button"..i].Text:SetText(text)
 		AAP.OptionsFrame["Button"..i].Text:SetPoint("CENTER", 0, 0)
+	end
+	AS:SkinDropDownBox(AAP_DropDownList)
+	AS:SkinDropDownBox(AAP_DropDown1)
+	AS:SkinFrame(AAP_Warcamp2)
+	AAP.QuestList.WarcampFS2:SetFont(AS.Font, 14, "OUTLINE")
+	for i = 1, 2 do
+		AS:SkinButton(_G["AAP_WarCampB"..i])
+		local text = AAP.QuestList["WarcampB"..i]:GetText()
+		AAP.QuestList["WarcampB"..i]:SetText("")
+		AAP.QuestList["WarcampB"..i].Text = AAP.QuestList["WarcampB"..i]:CreateFontString(nil, "OVERLAY")
+		AAP.QuestList["WarcampB"..i].Text:SetFont(AS.Font, 12, "OUTLINE")
+		AAP.QuestList["WarcampB"..i].Text:SetTextColor(255, 255, 0)
+		AAP.QuestList["WarcampB"..i].Text:SetText(text)
+		AAP.QuestList["WarcampB"..i].Text:SetPoint("CENTER", 0, 0)
 	end
 	AS:SkinFrame(AAP_AFkFrames)
 	AAP_AfkFrame.Fontstring:SetFont(AS.Font, 20, "OUTLINE")
