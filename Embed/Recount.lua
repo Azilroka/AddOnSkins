@@ -29,6 +29,7 @@ function AS:Embed_Recount()
 	Recount.db.profile.Scaling = 1
 	Recount.db.profile.ClampToScreen = true
 	Recount.db.profile.FrameStrata = AS:CheckOption('EmbedFrameStrata')
+	Recount.db.profile.MainWindow.AutoHide = false
 
 	_G.Recount:SetStrataAndClamp()
 	_G.Recount:LockWindows(true)

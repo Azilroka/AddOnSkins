@@ -33,6 +33,7 @@
 	<Script file="StackSplit.lua"/>
 	<Script file="Spellbook.lua"/>
 	<Script file="Talents.lua"/>
+	<Script file="TalkingHead.lua"/>
 	<Script file="Taxi.lua"/>
 	<Script file="TimeManager.lua"/>
 	<Script file="TradeSkill.lua"/>

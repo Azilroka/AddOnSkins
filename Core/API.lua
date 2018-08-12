@@ -33,11 +33,11 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 		Frame.InsideBorder = CreateFrame("Frame", nil, Frame)
 		Frame.InsideBorder:SetInside(Frame, AS.Mult, AS.Mult)
 		Frame.InsideBorder:SetBackdrop(Backdrop)
+		Frame.InsideBorder:SetFrameLevel(Frame:GetFrameLevel() + 1)
 		Frame.InsideBorder:SetBackdropBorderColor(0, 0, 0, 1)
 
 		Frame.OutsideBorder = CreateFrame("Frame", nil, Frame)
 		Frame.OutsideBorder:SetOutside(Frame, AS.Mult, AS.Mult)
-		Frame.OutsideBorder:SetFrameLevel(Frame:GetFrameLevel() + 1)
 		Frame.OutsideBorder:SetBackdrop(Backdrop)
 		Frame.OutsideBorder:SetBackdropBorderColor(0, 0, 0, 1)
 	end
@@ -174,7 +174,7 @@ function AS:CreateShadow(Frame)
 	local Shadow = CreateFrame("Frame", nil, Frame)
 	Shadow:SetFrameLevel(1)
 	Shadow:SetFrameStrata(Frame:GetFrameStrata())
-	Shadow:SetOutside(Frame, 3, 3)
+	Shadow:SetOutside(Frame, AS:Scale(3), AS:Scale(3))
 
 	Shadow:SetBackdrop({ edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = AS:Scale(3) })
 	Shadow:SetBackdropColor(0, 0, 0, 0)
@@ -250,10 +250,9 @@ function AS:SkinCloseButton(CloseButton, Reposition)
 	end)
 
 	CloseButton.Text = CloseButton:CreateFontString(nil, "OVERLAY")
-	CloseButton.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\PTSansNarrow.TTF]], 16, AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') and 'OUTLINE' or nil)
+	CloseButton.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\PTSansNarrow.TTF]], 16, 'OUTLINE')
 	CloseButton.Text:SetPoint("CENTER", CloseButton, 'CENTER')
 	CloseButton.Text:SetJustifyH('CENTER')
-	CloseButton.Text:SetJustifyV('MIDDLE')
 	CloseButton.Text:SetText('x')
 
 	if Reposition then
