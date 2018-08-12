@@ -178,12 +178,11 @@ function AS:CallSkin(addonName, func, event, ...)
 			AddOnSkinsDS[AS.Version] = AddOnSkinsDS[AS.Version] or {}
 			AddOnSkinsDS[AS.Version][addonName] = true
 			AS:SetOption(addonName, false)
+			SkinErrors[String] = error
 
 			if AS.RunOnce then
-				AS:AcceptFrame(format('%s %s: There was an error in the following skin: %s\n\nMake sure all AddOns are up to date before reporting.\n\nMake sure it has not been reported already.\n\nIf not... report to Azilroka immediately @ %s', AS.Title, AS.Version, String, AS:PrintURL(AS.TicketTracker)))
-				AS:Print(AS:PrintURL(AS.TicketTracker)) 
+				AS:BugReportFrame(String, '```lua\n'..error..'\n```')
 			else
-				tinsert(SkinErrors, String)
 				AS.FoundError = true
 			end
 		end
@@ -250,8 +249,9 @@ function AS:StartSkinning(event)
 	end
 
 	if AS.FoundError then
-		AS:AcceptFrame(format('%s %s: There was an error in the following skin: %s\n\nMake sure all AddOns are up to date before reporting.\n\nMake sure it has not been reported already.\n\nIf not... report to Azilroka immediately @ %s', AS.Title, AS.Version, table.concat(SkinErrors, ", "), AS:PrintURL(AS.TicketTracker)))
-		AS:Print(AS:PrintURL(AS.TicketTracker))
+		for String, Error in pairs(SkinErrors) do
+			AS:BugReportFrame(String, '```lua\n'..Error..'\n```')
+		end
 	end
 
 	AS.RunOnce = true
