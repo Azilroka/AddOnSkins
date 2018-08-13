@@ -85,6 +85,7 @@
 	<Script file="Healium.lua"/>
 	<Script file="Hekili.lua"/>
 	<Script file="Ignition.lua"/>
+	<!--Script file="Immersion.lua"/-->
 	<Script file="InboxMailBag.lua"/>
 	<Script file="Incoming.lua"/>
 	<Script file="InspectEquip.lua"/>
@@ -124,7 +125,7 @@
 	<Script file="oRA3.lua"/>
 	<Script file="OrderHallCommander.lua"/>
 	<Script file="Outfitter.lua"/>
-	<!--Script file="Ovale.lua"/-->
+	<Script file="Ovale.lua"/>
 	<Script file="Overachiever.lua"/>
 	<Script file="Pawn.lua"/>
 	<Script file="PetBattleTeams.lua"/>
@@ -182,7 +183,6 @@
 	<Script file="WeakAuras.lua"/>
 	<Script file="Wholly.lua"/>
 	<Script file="WorldBossStatus.lua"/>
-	<Script file="WorldQuestGroupFinder.lua"/>
 	<Script file="WorldQuestTab.lua"/>
 	<Script file="WowLua.lua"/>
 	<Script file="WoWPro.lua"/>

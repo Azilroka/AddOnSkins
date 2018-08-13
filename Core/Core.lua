@@ -10,7 +10,9 @@ local sort, tinsert = sort, tinsert
 local _G = _G
 local IsAddOnLoaded, C_Timer = IsAddOnLoaded, C_Timer
 
-local SkinErrors = {}
+AS.SkinErrors = {}
+AS.ErrorIndex = 0
+AS.ErrorCurrentIndex = 1
 
 function AS:CheckOption(optionName, ...)
 	for i = 1, select('#', ...) do
@@ -161,7 +163,7 @@ function AS:RegisterForPreload(addonName, skinFunc, addon1)
 end
 
 function AS:RunPreload(addonName)
-	if AS.preload[addonName] then
+	if AS:CheckAddOn(addonName) and AS.preload[addonName] then
 		pcall(AS.preload[addonName].func, self, 'ADDON_LOADED', AS.preload[addonName].addon or addonName)
 	end
 end
@@ -170,20 +172,19 @@ function AS:CallSkin(addonName, func, event, ...)
 	if (AS:CheckOption('SkinDebug')) then
 		func(self, event, ...)
 	else
-		local pass = pcall(func, self, event, ...)
+		local pass, error = pcall(func, self, event, ...)
 		if not pass then
-			local String = AS:CheckAddOn(addonName) and format('%s %s', addonName, GetAddOnMetadata(addonName, 'Version')) or addonName
-
-			-- Disable Bad Skin
 			AddOnSkinsDS[AS.Version] = AddOnSkinsDS[AS.Version] or {}
 			AddOnSkinsDS[AS.Version][addonName] = true
 			AS:SetOption(addonName, false)
 
+			AS.ErrorIndex = AS.ErrorIndex + 1
+			AS.SkinErrors[AS.ErrorIndex] = { Name = AS:CheckAddOn(addonName) and format('%s %s', addonName, GetAddOnMetadata(addonName, 'Version')) or addonName, Error = '```lua\n'..error..'\n```' }
+
 			if AS.RunOnce then
-				AS:AcceptFrame(format('%s %s: There was an error in the following skin: %s\n\nMake sure all AddOns are up to date before reporting.\n\nMake sure it has not been reported already.\n\nIf not... report to Azilroka immediately @ %s', AS.Title, AS.Version, String, AS:PrintURL(AS.TicketTracker)))
-				AS:Print(AS:PrintURL(AS.TicketTracker)) 
+				AS.ErrorCurrentIndex = AS.ErrorIndex
+				AS:BugReportFrame(AS.ErrorIndex)
 			else
-				tinsert(SkinErrors, String)
 				AS.FoundError = true
 			end
 		end
@@ -250,8 +251,7 @@ function AS:StartSkinning(event)
 	end
 
 	if AS.FoundError then
-		AS:AcceptFrame(format('%s %s: There was an error in the following skin: %s\n\nMake sure all AddOns are up to date before reporting.\n\nMake sure it has not been reported already.\n\nIf not... report to Azilroka immediately @ %s', AS.Title, AS.Version, table.concat(SkinErrors, ", "), AS:PrintURL(AS.TicketTracker)))
-		AS:Print(AS:PrintURL(AS.TicketTracker))
+		AS:BugReportFrame(1)
 	end
 
 	AS.RunOnce = true
@@ -302,13 +302,13 @@ function AS:AcceptFrame(MainText, Function)
 		AS:SkinButton(AcceptFrame.Accept)
 		AcceptFrame.Accept:SetSize(70, 25)
 		AcceptFrame.Accept:SetPoint('RIGHT', AcceptFrame, 'BOTTOM', -10, 20)
-		AcceptFrame.Accept:SetFormattedText('|cFFFFFFFF%s|r', YES)
+		AcceptFrame.Accept:SetFormattedText('|cFFFFFFFF%s|r', OKAY)
 		AcceptFrame.Close = CreateFrame('Button', nil, AcceptFrame, 'OptionsButtonTemplate')
 		AS:SkinButton(AcceptFrame.Close)
 		AcceptFrame.Close:SetSize(70, 25)
 		AcceptFrame.Close:SetPoint('LEFT', AcceptFrame, 'BOTTOM', 10, 20)
 		AcceptFrame.Close:SetScript('OnClick', function(self) self:GetParent():Hide() end)
-		AcceptFrame.Close:SetFormattedText('|cFFFFFFFF%s|r', NO)
+		AcceptFrame.Close:SetFormattedText('|cFFFFFFFF%s|r', CLOSE)
 	end
 	AcceptFrame.Text:SetText(MainText)
 	AcceptFrame:SetSize(AcceptFrame.Text:GetStringWidth() + 100, AcceptFrame.Text:GetStringHeight() + 60)
@@ -316,7 +316,7 @@ function AS:AcceptFrame(MainText, Function)
 	AcceptFrame:Show()
 end
 
-function AS:BugReportFrame(BugTitleText, BugErrorText)
+function AS:BugReportFrame(ErrorIndex)
 	if not BugReportFrame then
 		BugReportFrame = CreateFrame('Frame', 'AddOnSkinsBugReportFrame', UIParent)
 		AS:SkinFrame(BugReportFrame)
@@ -337,39 +337,72 @@ function AS:BugReportFrame(BugTitleText, BugErrorText)
 			AS:SkinEditBox(BugReportFrame[Name])
 			BugReportFrame[Name]:SetTextInsets(3, 3, 3, 3)
 			BugReportFrame[Name]:SetMaxLetters(0)
+			BugReportFrame[Name].Text = BugReportFrame[Name]:CreateFontString(nil, 'OVERLAY', "ChatFontNormal")
 		end
 
 		BugReportFrame.GitLab:SetPoint("TOP", 0, -30)
 		BugReportFrame.GitLab:SetSize(250, 19)
 		BugReportFrame.GitLab:SetText(AS.TicketTracker)
+		BugReportFrame.GitLab.Text:SetPoint('RIGHT', BugReportFrame.GitLab, 'LEFT', -10, 0)
+		BugReportFrame.GitLab.Text:SetText('GitLab')
 
 		BugReportFrame.BugTitle:SetPoint("TOP", 0, -60)
 		BugReportFrame.BugTitle:SetSize(250, 19)
+		BugReportFrame.BugTitle.Text:SetPoint('RIGHT', BugReportFrame.BugTitle, 'LEFT', -10, 0)
+		BugReportFrame.BugTitle.Text:SetText('Ticket Title')
 
-		BugReportFrame.BugError:SetPoint("TOP", 0, -90)
+		BugReportFrame.BugError:SetPoint("TOP", 0, -110)
 		BugReportFrame.BugError:SetSize(350, 150)
 		BugReportFrame.BugError:SetMultiLine(true)
+		BugReportFrame.BugError.Text:SetPoint('BOTTOM', BugReportFrame.BugError, 'TOP', 0, 5)
+		BugReportFrame.BugError.Text:SetText('Ticket Text')
 
 		BugReportFrame.Text = BugReportFrame:CreateFontString(nil, "OVERLAY")
 		BugReportFrame.Text:SetFont(AS.Font, 14)
 		BugReportFrame.Text:SetPoint('TOP', BugReportFrame, 'TOP', 0, -10)
 
+		BugReportFrame.Prev = CreateFrame('Button', nil, BugReportFrame, 'OptionsButtonTemplate')
+		AS:SkinButton(BugReportFrame.Prev)
+		BugReportFrame.Prev:SetSize(70, 25)
+		AddOnSkinsBugReportFrame.Prev:SetPoint('RIGHT', BugReportFrame, 'BOTTOM', -80, 20)
+		BugReportFrame.Prev:SetFormattedText('|cFFFFFFFF%s|r', PREVIOUS)
+
+		BugReportFrame.Prev:SetScript('OnClick', function()
+			AS.ErrorCurrentIndex = AS.ErrorCurrentIndex - 1
+			if AS.SkinErrors[AS.ErrorCurrentIndex] then
+				BugReportFrame.BugTitle:SetText(AS.SkinErrors[AS.ErrorCurrentIndex].Name)
+				BugReportFrame.BugError:SetText(AS.SkinErrors[AS.ErrorCurrentIndex].Error)
+			else
+				AS.ErrorCurrentIndex = AS.ErrorCurrentIndex + 1
+			end
+		end)
+
 		BugReportFrame.Next = CreateFrame('Button', nil, BugReportFrame, 'OptionsButtonTemplate')
 		AS:SkinButton(BugReportFrame.Next)
 		BugReportFrame.Next:SetSize(70, 25)
-		BugReportFrame.Next:SetPoint('RIGHT', BugReportFrame, 'BOTTOM', -10, 20)
+		BugReportFrame.Next:SetPoint('RIGHT', BugReportFrame, 'BOTTOM', 0, 20)
 		BugReportFrame.Next:SetFormattedText('|cFFFFFFFF%s|r', NEXT)
+
+		BugReportFrame.Next:SetScript('OnClick', function()
+			AS.ErrorCurrentIndex = AS.ErrorCurrentIndex + 1
+			if AS.SkinErrors[AS.ErrorCurrentIndex] then
+				BugReportFrame.BugTitle:SetText(AS.SkinErrors[AS.ErrorCurrentIndex].Name)
+				BugReportFrame.BugError:SetText(AS.SkinErrors[AS.ErrorCurrentIndex].Error)
+			else
+				AS.ErrorCurrentIndex = AS.ErrorCurrentIndex - 1
+			end
+		end)
 
 		BugReportFrame.Close = CreateFrame('Button', nil, BugReportFrame, 'OptionsButtonTemplate')
 		AS:SkinButton(BugReportFrame.Close)
 		BugReportFrame.Close:SetSize(70, 25)
-		BugReportFrame.Close:SetPoint('LEFT', BugReportFrame, 'BOTTOM', 10, 20)
+		BugReportFrame.Close:SetPoint('LEFT', BugReportFrame, 'BOTTOM', 80, 20)
 		BugReportFrame.Close:SetScript('OnClick', function(self) self:GetParent():Hide() end)
 		BugReportFrame.Close:SetFormattedText('|cFFFFFFFF%s|r', CLOSE)
 	end
 
-	BugReportFrame.BugTitle:SetText(BugTitleText)
-	BugReportFrame.BugError:SetText(BugErrorText)
+	BugReportFrame.BugTitle:SetText(AS.SkinErrors[ErrorIndex].Name)
+	BugReportFrame.BugError:SetText(AS.SkinErrors[ErrorIndex].Error)
 	BugReportFrame:Show()
 end
 
