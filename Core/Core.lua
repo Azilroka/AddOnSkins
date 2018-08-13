@@ -168,9 +168,14 @@ function AS:RunPreload(addonName)
 	end
 end
 
+local function errorhandler(err)
+	return geterrorhandler()(err);
+end
+
 function AS:CallSkin(addonName, func, event, ...)
 	if (AS:CheckOption('SkinDebug')) then
-		func(self, event, ...)
+		local args = {...};
+		xpcall(function() func(self, event, unpack(args)) end, errorhandler);
 	else
 		local pass, error = pcall(func, self, event, ...)
 		if not pass then
