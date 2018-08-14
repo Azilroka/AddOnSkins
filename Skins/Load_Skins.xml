@@ -113,7 +113,7 @@
 	<Script file="MrTrader.lua"/>
 	<Script file="MyRolePlay.lua"/>
 	<Script file="MythicKeystoneStatus.lua"/>
-	<Script file="NirritisNotes.lua"/>
+	<Script file="Notes.lua"/>
 	<Script file="NoNoGoGo.lua"/>
 	<Script file="NugRunning.lua"/>
 	<Script file="Numeration.lua"/>

@@ -2,7 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Notes') then return end
 
-function AS:NirritisNotes(event, addon)
+function AS:Notes(event, addon)
 	AS:SkinFrame(NotesFrame)
 	AS:SkinFrame(NotesFrameScrollFrame)
 	AS:SkinFrame(TextScrollFrame)
@@ -58,4 +58,4 @@ function AS:NirritisNotes(event, addon)
 	Notes_TypeDropDown:SetPoint("RIGHT", ConfigNotesFrame, "RIGHT", -5, -4)
 end
 
-AS:RegisterSkin('NirritisNotes', AS.NirritisNotes)
+AS:RegisterSkin('Notes', AS.Notes)
