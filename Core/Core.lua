@@ -184,7 +184,7 @@ function AS:CallSkin(addonName, func, event, ...)
 			AS:SetOption(addonName, false)
 
 			AS.ErrorIndex = AS.ErrorIndex + 1
-			AS.SkinErrors[AS.ErrorIndex] = { Name = AS:CheckAddOn(addonName) and format('%s %s', addonName, GetAddOnMetadata(addonName, 'Version')) or addonName, Error = '```lua\n'..error..'\n```' }
+			AS.SkinErrors[AS.ErrorIndex] = { Name = AS:CheckAddOn(addonName) and format('%s %s', addonName, GetAddOnMetadata(addonName, 'Version')) or addonName, Error = format('```lua\n%s\n```\n\nGenerated with %s %S', error, AS.Title, AS.Version) }
 
 			if AS.RunOnce then
 				AS.ErrorCurrentIndex = AS.ErrorIndex
