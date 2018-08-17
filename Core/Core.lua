@@ -59,6 +59,10 @@ function AS:CheckAddOn(addon)
 	return AS.AddOns[strlower(addon)] or false
 end
 
+function AS:GetAddOnVersion(addon)
+	return AS.AddOnVersion[strlower(addon)] or nil
+end
+
 function AS:Print(string)
 	print(format('%s %s', AS.Title, string))
 end
@@ -184,7 +188,7 @@ function AS:CallSkin(addonName, func, event, ...)
 			AS:SetOption(addonName, false)
 
 			AS.ErrorIndex = AS.ErrorIndex + 1
-			AS.SkinErrors[AS.ErrorIndex] = { Name = AS:CheckAddOn(addonName) and format('%s %s', addonName, GetAddOnMetadata(addonName, 'Version')) or addonName, Error = format('```lua\n%s\n```\n\nGenerated with %s %s', error, AS.Title, AS.Version) }
+			AS.SkinErrors[AS.ErrorIndex] = { Name = AS:CheckAddOn(addonName) and format('%s %s', addonName, AS:GetAddOnVersion(addonName)) or addonName, Error = format('```lua\n%s\n```\n\nGenerated with %s %s', error, AS.Title, AS.Version) }
 
 			if AS.RunOnce then
 				AS.ErrorCurrentIndex = AS.ErrorIndex
@@ -329,6 +333,10 @@ function AS:BugReportFrame(ErrorIndex)
 		BugReportFrame:SetPoint('CENTER', UIParent, 'CENTER')
 		BugReportFrame:SetFrameStrata('DIALOG')
 		BugReportFrame:SetSize(480, 260)
+		BugReportFrame:EnableMouse(true)
+		BugReportFrame:SetMovable(true)
+		BugReportFrame:RegisterForDrag('LeftButton')
+		BugReportFrame:SetClampedToScreen(true)
 
 		BugReportFrame.Title = BugReportFrame:CreateFontString(nil, "OVERLAY")
 		BugReportFrame.Title:SetFont(AS.Font, 14)

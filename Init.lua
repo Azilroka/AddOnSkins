@@ -26,7 +26,7 @@ if IsAddOnLoaded('Tukui') and not IsAddOnLoaded('ProjectAzilroka') then
 	return
 end
 
-local AddOn = LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceEvent-3.0', 'AceHook-3.0')
+local AddOn = LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceEvent-3.0', 'AceHook-3.0', 'AceTimer-3.0')
 
 Engine[1] = AddOn
 Engine[2] = LibStub("AceLocale-3.0"):GetLocale('AddOnSkins', false)
@@ -60,10 +60,12 @@ AddOn.FrameLocks = {}
 AddOn.preload = {}
 
 AddOn.AddOns = {}
+AddOn.AddOnVersion = {}
 
 for i = 1, GetNumAddOns() do
 	local Name = GetAddOnInfo(i)
-	AddOn.AddOns[strlower(Name)] = GetAddOnEnableState(AddOn.MyName, Name) > 0
+	AddOn.AddOns[strlower(Name)] = GetAddOnEnableState(AddOn.MyName, Name) == 2 or false
+	AddOn.AddOnVersion[strlower(Name)] = GetAddOnMetadata(Name, "Version")
 end
 
 TEXTURE_ITEM_QUEST_BANG = "Interface\\AddOns\\AddOnSkins\\Media\\Textures\\UI-Icon-QuestBang"
