@@ -54,6 +54,18 @@ function AS:EmbedSystemHooks()
 			GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
 			GameTooltip:Show()
 		end)
+
+		hooksecurefunc("ChatButton_OnClick", function(button)
+			if button == RightChatToggleButton then
+				if EmbedSystem_MainWindow:IsShown() then
+					AS:SetOption('EmbedIsHidden', true)
+					EmbedSystem_MainWindow:Hide()
+				else
+					AS:SetOption('EmbedIsHidden', false)
+					EmbedSystem_MainWindow:Show()
+				end
+			end
+		end)
 	end
 end
 
