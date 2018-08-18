@@ -55,17 +55,18 @@ function AS:EmbedSystemHooks()
 			GameTooltip:Show()
 		end)
 
-		hooksecurefunc("ChatButton_OnClick", function(button)
-			if button == RightChatToggleButton then
-				if EmbedSystem_MainWindow:IsShown() then
-					AS:SetOption('EmbedIsHidden', true)
-					EmbedSystem_MainWindow:Hide()
-				else
-					AS:SetOption('EmbedIsHidden', false)
-					EmbedSystem_MainWindow:Show()
-				end
+		local RightChatToggle = function()
+			if not E.db[RightChatToggleButton.parent:GetName()..'Faded'] then
+				AS:SetOption('EmbedIsHidden', true)
+				EmbedSystem_MainWindow:Hide()
+			else
+				AS:SetOption('EmbedIsHidden', false)
+				EmbedSystem_MainWindow:Show()
 			end
-		end)
+		end
+
+		hooksecurefunc(_G, "HideRightChat", RightChatToggle)
+		hooksecurefunc(_G, "HideBothChat", RightChatToggle)
 	end
 end
 
