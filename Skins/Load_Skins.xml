@@ -22,7 +22,7 @@
 	<Script file="AuctionLite.lua"/>
 	<Script file="AutoBar.lua"/>
 	<Script file="AutoEquipQuestItem.lua"/>
-	<!--Script file="AzerothAutoPilot.lua"/-->
+	<Script file="AzerothAutoPilot.lua"/>
 	<Script file="Baggins.lua"/>
 	<Script file="Bagnon.lua"/>
 	<Script file="BagSync.lua"/>
