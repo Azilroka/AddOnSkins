@@ -8,6 +8,8 @@ function AS:ExtraQuestButton()
 	ExtraQuestButton.Artwork:Kill()
 	AS:SkinTexture(ExtraQuestButton.Icon)
 	ExtraQuestButton.Icon:SetInside()
+	ExtraQuestButton.Icon:SetDrawLayer("OVERLAY")
+	ExtraQuestButton:SetCheckedTexture("")
 	ExtraQuestButton.HotKey:ClearAllPoints()
 	ExtraQuestButton.HotKey:Point('TOP', ExtraQuestButton, 'TOP', 0, -1)
 end
