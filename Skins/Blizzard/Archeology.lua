@@ -3,25 +3,28 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_Archaeology(event, addon)
 	if addon ~= "Blizzard_ArchaeologyUI" then return end
 
-	AS:SkinFrame(ArchaeologyFrame, nil, nil, true)
-	AS:StripTextures(ArchaeologyFrameInset, true)
+	AS:SkinFrame(ArchaeologyFrame)
 	AS:CreateShadow(ArchaeologyFrame)
+	AS:SkinCloseButton(ArchaeologyFrame.CloseButton)
 
-	AS:SkinButton(ArchaeologyFrameArtifactPageSolveFrameSolveButton, true)
-	AS:SkinDropDownBox(ArchaeologyFrameRaceFilter, 125)
+	ArchaeologyFrame.portrait:Hide()
+	ArchaeologyFrame.Inset:Hide()
+	ArchaeologyFrame.bgLeft:Hide()
+	ArchaeologyFrame.bgRight:Hide()
 
-	AS:SkinStatusBar(ArchaeologyFrameRankBar)
+	AS:SkinDropDownBox(ArchaeologyFrame.raceFilterDropDown, 125)
+	AS:SkinStatusBar(ArchaeologyFrame.rankBar)
 
-	AS:SkinStatusBar(ArchaeologyFrameArtifactPageSolveFrameStatusBar)
-	ArchaeologyFrameArtifactPageSolveFrameStatusBar:SetStatusBarColor(0.7, 0.2, 0)
+	AS:SkinButton(ArchaeologyFrame.artifactPage.solveFrame.solveButton, true)
+	AS:SkinStatusBar(ArchaeologyFrame.artifactPage.solveFrame.statusBar)
+	ArchaeologyFrame.artifactPage.solveFrame.statusBar:SetStatusBarColor(0.03125, .85, 0)
 
 	for i = 1, ARCHAEOLOGY_MAX_RACES do
-		local frame = _G["ArchaeologyFrameSummaryPageRace"..i]
+		local frame = ArchaeologyFrame.summaryPage['race'..i]
+		local artifact = ArchaeologyFrame.completedPage['artifact'..i]
 		frame.raceName:SetTextColor(1, 1, 1)
 
-		local artifact = _G["ArchaeologyFrameCompletedPageArtifact"..i]
 		artifact.border:SetTexture(nil)
-		_G[artifact:GetName().."Bg"]:Kill()
 		AS:SkinTexture(artifact.icon)
 		AS:CreateBackdrop(artifact)
 		artifact.Backdrop:SetOutside(artifact.icon)
@@ -29,7 +32,7 @@ function AS:Blizzard_Archaeology(event, addon)
 		artifact.artifactSubText:SetTextColor(0.6, 0.6, 0.6)
 	end
 
-	for _, Frame in pairs({ ArchaeologyFrameCompletedPage, ArchaeologyFrameSummaryPage}) do
+	for _, Frame in pairs({ ArchaeologyFrame.completedPage, ArchaeologyFrame.summaryPage }) do
 		for i = 1, Frame:GetNumRegions() do
 			local Region = select(i, Frame:GetRegions())
 			if Region:IsObjectType("FontString") then
@@ -38,22 +41,27 @@ function AS:Blizzard_Archaeology(event, addon)
 		end
 	end
 
-	ArchaeologyFrameCompletedPage.infoText:SetTextColor(1, 1, 1)
-	ArchaeologyFrameHelpPageTitle:SetTextColor(1, 1, 0)
+	ArchaeologyFrame.completedPage.infoText:SetTextColor(1, 1, 1)
+
+	ArchaeologyFrame.artifactPage.historyTitle:SetTextColor(1, 1, 0)
+
+	AS:SkinTexture(ArchaeologyFrame.artifactPage.icon)
+
+	AS:CreateBackdrop(ArchaeologyFrame.artifactPage)
+	ArchaeologyFrame.artifactPage.Backdrop:SetOutside(ArchaeologyFrame.artifactPage.icon)
+
+	ArchaeologyFrameArtifactPageHistoryScrollChildText:SetTextColor(1, 1, 1)
+
+	ArchaeologyFrame.helpPage.titleText:SetTextColor(1, 1, 0)
+
 	ArchaeologyFrameHelpPageDigTitle:SetTextColor(1, 1, 0)
 	ArchaeologyFrameHelpPageHelpScrollHelpText:SetTextColor(1, 1, 1)
 
-	ArchaeologyFrameArtifactPageHistoryTitle:SetTextColor(1, 1, 0)
-	AS:SkinTexture(ArchaeologyFrameArtifactPageIcon)
-	AS:CreateBackdrop(ArchaeologyFrameArtifactPage)
-	ArchaeologyFrameArtifactPage.Backdrop:SetOutside(ArchaeologyFrameArtifactPageIcon)
+	AS:SkinNextPrevButton(ArchaeologyFrame.summaryPage.prevPageButton)
+	AS:SkinNextPrevButton(ArchaeologyFrame.summaryPage.nextPageButton)
 
-	ArchaeologyFrameArtifactPageHistoryScrollChildText:SetTextColor(1, 1, 1)
-	AS:SkinCloseButton(ArchaeologyFrameCloseButton)
-	AS:SkinNextPrevButton(ArchaeologyFrameCompletedPagePrevPageButton)
-	AS:SkinNextPrevButton(ArchaeologyFrameSummaryPagePrevPageButton)
-	AS:SkinNextPrevButton(ArchaeologyFrameCompletedPageNextPageButton)
-	AS:SkinNextPrevButton(ArchaeologyFrameSummaryPageNextPageButton)
+	AS:SkinNextPrevButton(ArchaeologyFrame.completedPage.prevPageButton)
+	AS:SkinNextPrevButton(ArchaeologyFrame.completedPage.nextPageButton)
 
 	AS:StripTextures(ArcheologyDigsiteProgressBar)
 	AS:SkinStatusBar(ArcheologyDigsiteProgressBar.FillBar)
