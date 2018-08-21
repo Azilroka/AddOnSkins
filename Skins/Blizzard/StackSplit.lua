@@ -2,6 +2,7 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_StackSplit()
 	AS:SkinFrame(StackSplitFrame)
+	AS:CreateShadow(StackSplitFrame)
 	AS:SkinButton(StackSplitOkayButton)
 	AS:SkinButton(StackSplitCancelButton)
 end
