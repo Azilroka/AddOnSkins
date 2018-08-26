@@ -204,8 +204,8 @@ function AS:UnregisterSkinEvent(addonName, event)
 	if not AS.events[event] then return end
 	if not AS.events[event][addonName] then return end
 	AS.events[event][addonName] = nil
-	for addonName, _ in pairs(AS.events[event]) do
-		if addonName then
+	for addon, _ in pairs(AS.events[event]) do
+		if addon then
 			return
 		end
 	end
@@ -377,7 +377,7 @@ function AS:BugReportFrame(ErrorIndex)
 		BugReportFrame.Prev = CreateFrame('Button', nil, BugReportFrame, 'OptionsButtonTemplate')
 		AS:SkinButton(BugReportFrame.Prev)
 		BugReportFrame.Prev:SetSize(70, 25)
-		AddOnSkinsBugReportFrame.Prev:SetPoint('RIGHT', BugReportFrame, 'BOTTOM', -80, 20)
+		BugReportFrame.Prev:SetPoint('RIGHT', BugReportFrame, 'BOTTOM', -80, 20)
 		BugReportFrame.Prev:SetFormattedText('|cFFFFFFFF%s|r', PREVIOUS)
 
 		BugReportFrame.Prev:SetScript('OnClick', function()
