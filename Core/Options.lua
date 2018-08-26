@@ -226,7 +226,7 @@ function AS:BuildOptions()
 					},
 					desc = {
 						type = 'description',
-						name = ASL['Settings to control Embedded AddOns:\n\nAvailable Embeds: alDamageMeter | Details | Omen | Skada | Recount | TinyDPS'],
+						name = ASL['Settings to control Embedded AddOns:\n\nAvailable Embeds: Details | Omen | Skada | Recount | TinyDPS'],
 						order = 1
 					},
 					EmbedSystem = {
