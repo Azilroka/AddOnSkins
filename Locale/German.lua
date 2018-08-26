@@ -38,6 +38,7 @@ ASL["Left Click to Show"] = "Linksklick um anzuzeigen"
 ASL["Left Click:"] = "Linksklick:"
 ASL["Links"] = "Links"
 ASL["Login Message"] = "Login Nachricht"
+ASL["|cffff7d0aMerathilisUI|r Styling"] = true
 ASL["MONOCHROME"] = "MONOCHROM"
 ASL["MONOCHROMEOUTLINE"] = "MONOCHROMUMRISS"
 ASL["None"] = "Nichts"

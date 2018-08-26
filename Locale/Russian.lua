@@ -38,6 +38,7 @@ ASL["Left Click to Show"] = "ЛКМ для показа"
 ASL["Left Click:"] = "ЛКМ"
 ASL["Links"] = true
 ASL["Login Message"] = true
+ASL["|cffff7d0aMerathilisUI|r Styling"] = true
 ASL["MONOCHROME"] = true
 ASL["MONOCHROMEOUTLINE"] = true
 ASL["None"] = "Нет"

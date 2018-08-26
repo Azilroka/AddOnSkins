@@ -38,6 +38,7 @@ ASL["Left Click to Show"] = "點選左鍵：顯示"
 ASL["Left Click:"] = "點選左鍵："
 ASL["Links"] = "Links"
 ASL["Login Message"] = true
+ASL["|cffff7d0aMerathilisUI|r Styling"] = true
 ASL["MONOCHROME"] = "單線"
 ASL["MONOCHROMEOUTLINE"] = "單線邊"
 ASL["None"] = "無"

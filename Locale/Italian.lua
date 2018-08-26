@@ -38,6 +38,7 @@ ASL["Left Click to Show"] = "Clic sinistro per mostrare"
 ASL["Left Click:"] = "Clic sinistro:"
 ASL["Links"] = "Links"
 ASL["Login Message"] = true
+ASL["|cffff7d0aMerathilisUI|r Styling"] = true
 ASL["MONOCHROME"] = "Monocromatico"
 ASL["MONOCHROMEOUTLINE"] = "Monocromatico spesso"
 ASL["None"] = "Nessuno"

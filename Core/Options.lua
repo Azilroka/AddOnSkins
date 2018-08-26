@@ -104,6 +104,10 @@ function AS:BuildProfile()
 		},
 	}
 
+	if AS:CheckAddOn('ElvUI_MerathilisUI') then
+		Defaults.profile['MerathilisUIStyling'] = false;
+	end
+
 	for skin in pairs(AS.register) do
 		if AS:CheckAddOn('ElvUI') and strfind(skin, 'Blizzard_') then
 			Defaults.profile[skin] = false
@@ -519,6 +523,14 @@ function AS:BuildOptions()
 		},
 	}
 
+	if AS:CheckAddOn("ElvUI_MerathilisUI") then
+		AS.Options.args.misc.args.MerathilisUIStyling = {
+			type = 'toggle',
+			name = ASL["|cffff7d0aMerathilisUI|r Styling"],
+			order = 6
+		}
+	end
+	
 	local order, blizzorder = 1, 1
 	for skinName, _ in AS:OrderedPairs(AS.register) do
 		if strfind(skinName, 'Blizzard_') then
