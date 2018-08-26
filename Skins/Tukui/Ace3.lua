@@ -129,10 +129,11 @@ function AS:Ace3()
 				AS:SkinScrollBar(frame)
 				frame.isSkinned = true
 			end
-		elseif TYPE == 'InlineGroup' or TYPE == 'TreeGroup' or TYPE == 'TabGroup' or TYPE == 'Frame' or TYPE == 'DropdownGroup' then
+		elseif TYPE == 'InlineGroup' or TYPE == 'TreeGroup' or TYPE == 'TabGroup' or TYPE == 'Frame' or TYPE == 'DropdownGroup' or TYPE =="Window" then
 			local frame = widget.content:GetParent()
 			if TYPE == 'Frame' then
 				AS:StripTextures(frame)
+
 				for i=1, frame:GetNumChildren() do
 					local child = select(i, frame:GetChildren())
 					if child:GetObjectType() == 'Button' and child:GetText() then
