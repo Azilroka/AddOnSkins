@@ -25,7 +25,9 @@ end
 
 function AS:Altoholic(event, addon)
 	if event == "PLAYER_ENTERING_WORLD" then
-		AS:SkinTooltip(AltoTooltip)
+		if AltoTooltip then
+			AS:SkinTooltip(AltoTooltip)
+		end
 		AltoholicFramePortrait:Kill()
 		AS:SkinFrame(AltoholicFrame)
 		AS:SkinFrame(AltoMessageBox)

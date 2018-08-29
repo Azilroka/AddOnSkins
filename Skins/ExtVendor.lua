@@ -18,6 +18,7 @@ function AS:ExtVendor()
 		AS:StyleButton(Button)
 		AS:SkinTexture(Button.icon)
 		Button.icon:SetInside()
+		Button.IconBorder:Hide()
 
 		Button:SetPoint("TOPLEFT", Slot, "TOPLEFT", 4, -4)
 
