@@ -11,7 +11,6 @@ function AS:AzerothAutoPilot()
 	AAP.QuestList.Greetings2FS221:SetFont(AS.Font, 14, "OUTLINE")
 	AS:SkinButton(AAP_GreetingsHideB)
 	AS:SkinEditBox(AAPGreetEBox)
-	AS:SkinButton(AAP_SkipActiveButton3)
 	AS:SkinFrame(AAP_SugQuestFrameFrame)
 
 	local function AAP_buttonSkin(self, button)
@@ -25,9 +24,9 @@ function AS:AzerothAutoPilot()
 	end
 
 	local i
-	for i = 1, 20 do
+	for i = 1, 10 do
 		AS:SkinFrame(_G["CLQListF"..i], nil)
-		AS:SkinButton(_G["AAP_SkipActiveButton"..i])
+		AS:SkinButton(_G["AAP.SkipActiveButton"..i])
 		AAP.QuestList2["BF"..i]["AAP_Button"]:HookScript("OnShow", AAP_buttonSkin)
 		AAP.QuestList.QuestFrames["FS"..i]:SetFont(AS.Font, 18, "OUTLINE")
 		AAP.QuestList.QuestFrames["FS"..i]["Fontstring1"]:SetFont(AS.Font, 10)
@@ -42,7 +41,6 @@ function AS:AzerothAutoPilot()
 		AAP.PartyList.PartyFrames2[i]:SetPoint("BOTTOMLEFT", AAP.PartyList.PartyFrame, "BOTTOMLEFT",0,-((26*i)-25))
 	end
 
-	AAP_UpdateQuestList()
 	AS:SkinFrame(AAP_OptionsMainFrame)
 	AAP.OptionsFrame.FontString1:SetFont(AS.Font, 14, "OUTLINE")
 
@@ -106,8 +104,10 @@ function AS:AzerothAutoPilot()
 	AS:SkinButton(AAP_SBX1)
 	AS:SkinButton(AAP_SBX2)
 
-	for i=1, 20 do
-		AAP.QuestList2["BF"..i]["AAP_Button"]:SetPoint("LEFT",AAP.QuestList2["BF"..i],"RIGHT",1,0)
+	for i=1, 10 do
+	    if AAP.QuestList2["BF"..i]["AAP_Button"] then
+		    AAP.QuestList2["BF"..i]["AAP_Button"]:SetPoint("LEFT",AAP.QuestList2["BF"..i],"RIGHT",1,0)
+		end
 	end
 
 	AAP.Banners.BannersFrame.FrameFS1:SetFont(AS.Font, 8, "OUTLINE")
