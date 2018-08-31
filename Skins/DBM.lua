@@ -12,8 +12,8 @@ function AS:DBM(event, addon)
 						if not (AS:CheckOption('DBMSkinHalf') and sparkEnabled) then return end
 						local spark = _G[bar.frame:GetName().."BarSpark"]
 						spark:SetSize(12, bar.owner.options.Height*3/2 - 2)
-						local a,b,c,d = spark:GetPoint()
-						spark:SetPoint(a,b,c,d,0)
+						local a, b, c, d = spark:GetPoint()
+						spark:SetPoint(a, b, c, d, 0)
 					end)
 					hooksecurefunc(bar, "ApplyStyle", function()
 						local frame = bar.frame
@@ -62,6 +62,14 @@ function AS:DBM(event, addon)
 						timer:SetShadowColor(0, 0, 0, 0)
 
 						if AS:CheckOption('DBMSkinHalf') then
+							if (not bar.owner.options.BarYOffset or bar.owner.options.BarYOffset and bar.owner.options.BarYOffset < 13) then
+								bar.owner.options.BarYOffset = 13
+							end
+
+							if (not bar.owner.options.HugeBarYOffset or bar.owner.options.HugeBarYOffset and bar.owner.options.HugeBarYOffset < 13) then
+								bar.owner.options.HugeBarYOffset = 13
+							end
+
 							frame:SetHeight(bar.owner.options.Height / 3)
 							name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 0, 3)
 							timer:SetPoint('BOTTOMRIGHT', frame, 'TOPRIGHT', -1, 1)

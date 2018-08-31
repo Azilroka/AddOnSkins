@@ -78,7 +78,7 @@ function AS:BuildProfile()
 			['EmbedBelowTop'] = false,
 			['TransparentEmbed'] = false,
 			['EmbedIsHidden'] = false,
-			['EmbedFrameStrata'] = '3-MEDIUM',
+			['EmbedFrameStrata'] = '2-LOW',
 			['EmbedFrameLevel'] = 10,
 		-- Misc
 			['RecountBackdrop'] = true,

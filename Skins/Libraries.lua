@@ -204,6 +204,11 @@ function AS:SkinLibraries()
 			end)
 		end
 	end
+
+	local DBIcon = LibStub("LibDBIcon-1.0", true)
+	if DBIcon then
+		AS:SkinTooltip(LibDBIconTooltip)
+	end
 end
 
 AS:RegisterSkin('Libraries', AS.SkinLibraries)
