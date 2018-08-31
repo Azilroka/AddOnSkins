@@ -33,16 +33,18 @@ function AS:Baggins()
 	function AddOnSkins_BagginsSkin:SkinItem(button)
 		if button.IsSkinned then return end
 
-		local Icon = _G[button:GetName().."IconTexture"]
-		AS:SkinTexture(Icon)
-		Icon:SetInside(button)
-
 		button:SetNormalTexture("")
 		button:SetPushedTexture("")
+
 		AS:SetTemplate(button)
 		AS:StyleButton(button)
 
-		if _G.ElvUI then
+		AS:SkinTexture(button.icon)
+		button.icon:SetInside()
+
+		button.IconBorder:SetAlpha(0)
+
+		if AS:CheckAddOn('ElvUI') then
 			_G.ElvUI[1]:RegisterCooldown(_G[button:GetName().."Cooldown"])
 		end
 
