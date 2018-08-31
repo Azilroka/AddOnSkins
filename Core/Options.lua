@@ -116,7 +116,7 @@ function AS:BuildProfile()
 		end
 	end
 
-	self.data = LibStub('AceDB-3.0'):New('AddOnSkinsDB', Defaults)
+	self.data = LibStub('AceDB-3.0'):New('AddOnSkinsDB', Defaults, true)
 
 	self.data.RegisterCallback(AS, 'OnProfileChanged', 'SetupProfile')
 	self.data.RegisterCallback(AS, 'OnProfileCopied', 'SetupProfile')
@@ -530,7 +530,7 @@ function AS:BuildOptions()
 			order = 6
 		}
 	end
-	
+
 	local order, blizzorder = 1, 1
 	for skinName, _ in AS:OrderedPairs(AS.register) do
 		if strfind(skinName, 'Blizzard_') then

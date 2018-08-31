@@ -3,7 +3,6 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('BuyEmAll') then return end
 
 function AS:BuyEmAll()
-	BuyEmAll:OnLoad()
 	AS:SkinFrame(BuyEmAllFrame)
 	AS:SkinButton(BuyEmAllStackButton)
 	AS:SkinButton(BuyEmAllMaxButton)

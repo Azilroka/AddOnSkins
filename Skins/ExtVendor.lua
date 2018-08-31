@@ -12,18 +12,17 @@ function AS:ExtVendor()
 
 	for i = 13, 20 do
 		local Slot = _G["MerchantItem"..i]
-		local Button = _G["MerchantItem"..i.."ItemButton"]
 		AS:SkinBackdropFrame(Slot, nil, nil, true)
-		AS:SkinFrame(Button)
-		AS:StyleButton(Button)
-		AS:SkinTexture(Button.icon)
-		Button.icon:SetInside()
-		Button.IconBorder:Hide()
+		AS:SkinFrame(Slot.ItemButton)
+		AS:StyleButton(Slot.ItemButton)
+		AS:SkinTexture(Slot.ItemButton.icon)
+		Slot.ItemButton.icon:SetInside()
+		Slot.ItemButton.IconBorder:SetAlpha(0)
 
-		Button:SetPoint("TOPLEFT", Slot, "TOPLEFT", 4, -4)
+		Slot.ItemButton:SetPoint("TOPLEFT", Slot, "TOPLEFT", 4, -4)
 
 		_G["MerchantItem"..i.."MoneyFrame"]:ClearAllPoints()
-		_G["MerchantItem"..i.."MoneyFrame"]:Point("BOTTOMLEFT", Button, "BOTTOMRIGHT", 3, 0)
+		_G["MerchantItem"..i.."MoneyFrame"]:SetPoint("BOTTOMLEFT", Slot.ItemButton, "BOTTOMRIGHT", 3, 0)
 
 		for j = 1, 3 do
 			AS:CreateBackdrop(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j])

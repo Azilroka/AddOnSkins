@@ -18,17 +18,17 @@ function AS:Blizzard_Merchant()
 
 	for i = 1, 12 do
 		local Slot = _G["MerchantItem"..i]
-		local Button = _G["MerchantItem"..i.."ItemButton"]
 		AS:SkinBackdropFrame(Slot, nil, nil, true)
-		AS:SkinFrame(Button)
-		AS:StyleButton(Button)
-		AS:SkinTexture(Button.icon)
-		Button.icon:SetInside()
+		AS:SkinFrame(Slot.ItemButton)
+		AS:StyleButton(Slot.ItemButton)
+		AS:SkinTexture(Slot.ItemButton.icon)
+		Slot.ItemButton.icon:SetInside()
+		Slot.ItemButton.IconBorder:SetAlpha(0)
 
-		Button:SetPoint("TOPLEFT", Slot, "TOPLEFT", 4, -4)
+		Slot.ItemButton:SetPoint("TOPLEFT", Slot, "TOPLEFT", 4, -4)
 
 		_G["MerchantItem"..i.."MoneyFrame"]:ClearAllPoints()
-		_G["MerchantItem"..i.."MoneyFrame"]:Point("BOTTOMLEFT", Button, "BOTTOMRIGHT", 3, 0)
+		_G["MerchantItem"..i.."MoneyFrame"]:Point("BOTTOMLEFT", Slot.ItemButton, "BOTTOMRIGHT", 3, 0)
 
 		for j = 1, 3 do
 			AS:CreateBackdrop(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j])
@@ -46,7 +46,6 @@ function AS:Blizzard_Merchant()
 			local merchantMoney = _G["MerchantItem"..i.."MoneyFrame"]
 			local merchantAltCurrency = _G["MerchantItem"..i.."AltCurrencyFrame"]
 			if ( index <= numMerchantItems ) then
-				local name, texture, price, stackCount, numAvailable, isUsable, extendedCost = GetMerchantItemInfo(index)
 				local link = GetMerchantItemLink(index)
 				if link then
 					local quality = select(3, GetItemInfo(link))
@@ -64,7 +63,7 @@ function AS:Blizzard_Merchant()
 				end
 			end
 		end
-		local buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable = GetBuybackItemInfo(GetNumBuybackItems())
+		local buybackName = GetBuybackItemInfo(GetNumBuybackItems())
 		MerchantBuyBackItemItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 		if ( buybackName ) then
 			local link = GetBuybackItemInfo(GetNumBuybackItems())
@@ -81,13 +80,10 @@ function AS:Blizzard_Merchant()
 
 	hooksecurefunc('MerchantFrame_UpdateBuybackInfo', function()
 		local numBuybackItems = GetNumBuybackItems()
-		local itemButton, buybackButton
-		local buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable
+		local itemButton
 		for i = 1, BUYBACK_ITEMS_PER_PAGE do
 			itemButton = _G["MerchantItem"..i.."ItemButton"]
-			buybackButton = _G["MerchantItem"..i]
 			if ( i <= numBuybackItems ) then
-				buybackName, buybackTexture, buybackPrice, buybackQuantity, buybackNumAvailable, buybackIsUsable = GetBuybackItemInfo(i)
 				local link = GetBuybackItemInfo(i)
 				if link then
 					local quality = select(3, GetItemInfo(link))

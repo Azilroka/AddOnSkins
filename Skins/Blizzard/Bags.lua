@@ -39,10 +39,11 @@ function AS:Blizzard_Bags()
 			ItemButton.Backdrop:SetScript('OnUpdate', function(self)
 				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
+				local QualityColor = Quality and BAG_ITEM_QUALITY_COLORS[Quality] or nil
 				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
-				if Quality and BAG_ITEM_QUALITY_COLORS[Quality] then
-					self:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
-					self.Shadow:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+				if QualityColor then
+					self:SetBackdropBorderColor(QualityColor.r, QualityColor.g, QualityColor.b)
+					self.Shadow:SetBackdropBorderColor(QualityColor.r, QualityColor.g, QualityColor.b)
 				elseif isQuestItem then
 					self:SetBackdropBorderColor(1, .82, 0)
 					self.Shadow:SetBackdropBorderColor(1, .82, 0)
@@ -55,8 +56,9 @@ function AS:Blizzard_Bags()
 			ItemButton.Backdrop:SetScript('OnHide', function(self)
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
 				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
-				if Quality and (Quality > LE_ITEM_QUALITY_COMMON and BAG_ITEM_QUALITY_COLORS[Quality]) then
-					ItemButton:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+				local QualityColor = Quality and BAG_ITEM_QUALITY_COLORS[Quality] or nil
+				if (Quality > LE_ITEM_QUALITY_COMMON and QualityColor) then
+					ItemButton:SetBackdropBorderColor(QualityColor.r, QualityColor.g, QualityColor.b)
 				elseif isQuestItem then
 					ItemButton:SetBackdropBorderColor(1, .82, 0)
 				else
@@ -72,7 +74,7 @@ function AS:Blizzard_Bags()
 			AS:StyleButton(ItemButton)
 			hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
-				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
+				local isQuestItem = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
 				if Quality and Quality > LE_ITEM_QUALITY_COMMON then
 					ItemButton:SetBackdropBorderColor(r, g, b)
 				elseif isQuestItem then

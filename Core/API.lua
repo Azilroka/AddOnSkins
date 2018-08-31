@@ -59,7 +59,7 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 	if AS:CheckAddOn('ElvUI_MerathilisUI') and AS:CheckOption("MerathilisUIStyling") then
 		Frame:Styling();
 	end
-	
+
 	Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
 	Frame:SetBackdropColor(R, G, B, Alpha)
 end
@@ -517,7 +517,9 @@ function AS:SkinNextPrevButton(Button, Vertical, Inverse)
 	local ButtonName = Button:GetName() and Button:GetName():lower()
 	Inverse = Inverse or ButtonName and (strfind(ButtonName, 'left') or strfind(ButtonName, 'prev') or strfind(ButtonName, 'decrement') or strfind(ButtonName, 'back'))
 
+	AS:StripTextures(Button)
 	AS:SkinButton(Button)
+
 	Button:SetSize(Button:GetWidth() - 7, Button:GetHeight() - 7)
 
 	if not Button.icon then
