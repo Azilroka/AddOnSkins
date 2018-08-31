@@ -69,6 +69,15 @@ function AS:Baggins()
 	Baggins:RegisterSkin('AddOnSkins', AddOnSkins_BagginsSkin)
 	Baggins:ApplySkin('AddOnSkins')
 
+	hooksecurefunc(Baggins, "CreateMoneyFrame", function()
+		BagginsCopperText:ClearAllPoints()
+		BagginsGoldText:ClearAllPoints()
+		BagginsSilverText:ClearAllPoints()
+		BagginsCopperText:SetPoint("RIGHT", BagginsCopperIcon, "LEFT")
+		BagginsSilverText:SetPoint("RIGHT", BagginsSilverIcon, "LEFT")
+		BagginsGoldText:SetPoint("RIGHT", BagginsGoldIcon, "LEFT")
+	end)
+
 	hooksecurefunc(Baggins, "UpdateItemButton", function(self, _, button, bag, slot)
 		local p = self.db.profile
 		local texture, _, _, quality = GetContainerItemInfo(bag, slot)
@@ -87,6 +96,9 @@ function AS:Baggins()
 		else
 			button:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end
+
+		button.Count:ClearAllPoints()
+		button.Count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT")
 	end)
 end
 
