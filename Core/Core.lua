@@ -162,7 +162,7 @@ function AS:RegisteredSkin(addonName, priority, func, events)
 	end
 end
 
-function AS:RegisterForPreload(addonName, skinFunc, addon1)
+function AS:RegisterSkinForPreload(addonName, skinFunc, addon1)
 	AS.preload[addonName] = { func = skinFunc, addon = addon1 }
 end
 

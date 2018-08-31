@@ -90,4 +90,4 @@ function AS:Baggins()
 	end)
 end
 
-AS:RegisterForPreload('Baggins', AS.Baggins)
+AS:RegisterSkinForPreload('Baggins', AS.Baggins)
