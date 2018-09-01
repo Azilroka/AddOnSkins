@@ -122,7 +122,9 @@
 	<Script file="Talentless.lua"/>
 	<Script file="TalentSetManager.lua"/>
 	<Script file="tdBattlePetScript.lua"/>
+	<Script file="TellMeWhen.lua"/>
 	<Script file="TinyDPS.lua"/>
+	<Script file="TinyInspect.lua"/>
 	<Script file="TitanPanel.lua"/>
 	<Script file="TomeOfTeleportation.lua"/>
 	<Script file="TomTom.lua"/>
@@ -131,6 +133,7 @@
 	<Script file="Vendomatic.lua"/>
 	<Script file="WardrobeSort.lua"/>
 	<Script file="WeakAuras.lua"/>
+	<Script file="WhisperPop.lua"/>
 	<Script file="Wholly.lua"/>
 	<Script file="WorldBossStatus.lua"/>
 	<Script file="WorldQuestTab.lua"/>
