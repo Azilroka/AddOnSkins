@@ -107,9 +107,8 @@ function AS:Soundtrack()
 	end
 
 	SoundtrackFrameTab1:SetPoint('TOPLEFT', SoundtrackFrame, 'BOTTOMLEFT', 10, 2)
-	SoundtrackFrame_CloseButton:SetPoint('BOTTOMRIGHT', SoundtrackFrame, 'BOTTOMRIGHT', -15, 5)
 
-	AS:SkinCloseButton(SoundtrackFrame_TopCloseButton)
+	AS:SkinCloseButton(SoundtrackFrame_CloseButton)
 	AS:SkinStatusBar(SoundtrackFrame_StatusBarTrack)
 	SoundtrackFrame_StatusBarTrackBorder:Kill()
 	AS:SkinStatusBar(SoundtrackFrame_StatusBarEvent)
@@ -134,7 +133,7 @@ function AS:Soundtrack()
 	SoundtrackControlFrame_StatusBarEventBorder:Kill()
 	AS:SkinEditBox(SoundtrackReportFrame_WhisperEditBox)
 	AS:SkinEditBox(SoundtrackReportFrame_ChannelEditBox)
-	
+
 	AS:SkinTooltip(SoundtrackTooltip)
 	NowPlayingTextFrame:Show()
 	NowPlayingTextFrame:Hide()

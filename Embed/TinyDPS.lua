@@ -7,8 +7,7 @@ function AS:Embed_TinyDPS()
 	local EmbedParent = _G.EmbedSystem_MainWindow
 	if AS:CheckOption('EmbedSystemDual') then EmbedParent = strlower(AS:CheckOption('EmbedRight')) == 'tinydps' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
 
-	AS:SkinFrame(_G.tdpsFrame, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
-
+	AS:SetTemplate(_G.tdpsFrame.Backdrop, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 	_G.tdpsFrame:SetParent(EmbedParent)
 	_G.tdpsFrame:SetFrameStrata(EmbedParent:GetFrameStrata())
 	_G.tdpsFrame:SetFrameLevel(EmbedParent:GetFrameLevel())

@@ -3,7 +3,8 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('TinyDPS') then return end
 
 function AS:TinyDPS()
-	AS:SkinFrame(tdpsFrame)
+	AS:SkinBackdropFrame(tdpsFrame)
+	tdpsFrame.Backdrop:SetAllPoints()
 
 	tdpsFrame:HookScript('OnShow', function()
 		if AS:CheckEmbed('TinyDPS') then

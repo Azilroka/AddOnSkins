@@ -27,30 +27,6 @@ function AS:MinimalArchaeology()
 		--MinArch['artifactbars'][i].buttonSolve:SetHeight(17)
 		--MinArch['artifactbars'][i].buttonSolve:SetPoint('TOPLEFT', _G['MinArchMainArtifactBar'..i], 'TOPRIGHT', 5, 2)
 	end
-
-	local checkbox = {
-		MinArchOptionPanelMiscOptionsHideMinimap,
-		MinArchOptionPanelMiscOptionsDisableSound,
-		MinArchOptionPanelMiscOptionsStartHidden,
-		MinArchOptionPanelMiscOptionsHideAfter,
-		MinArchOptionPanelMiscOptionsWaitForSolve,
-	}
-
-	for _, boxes in pairs(checkbox) do
-		AS:SkinCheckBox(boxes)
-	end
-
-	AS:SkinSlideBar(MinArchOptionPanelFrameScaleSlider)
-	MinArchOptionPanelFrameScaleSliderLow:ClearAllPoints()
-	MinArchOptionPanelFrameScaleSliderLow:SetPoint('BOTTOMLEFT', MinArchOptionPanelFrameScale, 'BOTTOMLEFT', 3, 3)
-	MinArchOptionPanelFrameScaleSliderHigh:ClearAllPoints()
-	MinArchOptionPanelFrameScaleSliderHigh:SetPoint('BOTTOMRIGHT', MinArchOptionPanelFrameScale, 'BOTTOMRIGHT', -3, 3)
-
-	AS:SkinFrame(MinArchOptionPanelHideArtifact)
-	AS:SkinFrame(MinArchOptionPanelFragmentCap)
-	AS:SkinFrame(MinArchOptionPanelUseKeystones)
-	AS:SkinFrame(MinArchOptionPanelMiscOptions)
-	AS:SkinFrame(MinArchOptionPanelFrameScale)
 end
 
 AS:RegisterSkin('MinimalArchaeology', AS.MinimalArchaeology)

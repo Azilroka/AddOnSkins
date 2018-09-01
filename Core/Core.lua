@@ -230,7 +230,7 @@ function AS:StartSkinning(event)
 		for Version, SkinTable in pairs(AddOnSkinsDS) do
 			if Version == AS.Version or Version < AS.Version then
 				for addonName, _ in pairs(SkinTable) do
-					AS:SetOption(addonName, (Version == AS.Version and false or true))
+					AS:SetOption(addonName, ((Version == AS.Version) and false or (Version < AS.Version) and true))
 				end
 				if Version < AS.Version then
 					AddOnSkinsDS[Version] = nil
