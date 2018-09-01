@@ -14,7 +14,11 @@ function AS:Baggins()
 	}
 
 	function AddOnSkins_BagginsSkin:SkinBag(frame)
-		AS:SkinFrame(frame)
+		if not frame.Backdrop then
+			AS:SkinBackdropFrame(frame)
+			frame.Backdrop:SetInside()
+		end
+
 		AS:SkinCloseButton(frame.closebutton)
 
 		frame.closebutton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", 0, 0)
@@ -67,7 +71,6 @@ function AS:Baggins()
 	end
 
 	Baggins:RegisterSkin('AddOnSkins', AddOnSkins_BagginsSkin)
-	Baggins:ApplySkin('AddOnSkins')
 
 	hooksecurefunc(Baggins, "CreateMoneyFrame", function()
 		BagginsCopperText:ClearAllPoints()
