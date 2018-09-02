@@ -58,9 +58,7 @@ function AS:Baggins(event)
 	local BankColor = { 0, .5, 1 }
 
 	function AddOnSkins_BagginsSkin:SetBankVisual(frame, isBank)
-		local color = isBank and BankColor or AS.BorderColor
-
-		frame:SetBackdropBorderColor(unpack(color))
+		frame.Backdrop:SetBackdropBorderColor(unpack(isBank and BankColor or AS.BorderColor))
 	end
 
 	function AddOnSkins_BagginsSkin:SkinSection(frame)
