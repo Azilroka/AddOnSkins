@@ -213,10 +213,13 @@ function AS:SkinLibraries()
 	local LET = LibStub('LibExtraTip-1', true)
 	if LET then
 		LET:AddCallback(function(tip,_,_,_,_,quality)
-			AS:SkinTooltip(tip)
-			if quality and quality > 1 then
-				local color = BAG_ITEM_QUALITY_COLORS[quality]
-				tip:SetBackdropBorderColor(color.r, color.g, color.b)
+			local extraTip = LET:GetExtraTip(tip)
+			if extraTip then
+				AS:SetTemplate(extraTip)
+				if quality and quality > 1 then
+					local color = BAG_ITEM_QUALITY_COLORS[quality]
+					extraTip:SetBackdropBorderColor(color.r, color.g, color.b)
+				end
 			end
 		end, 0)
 	end
