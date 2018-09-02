@@ -85,7 +85,6 @@ function AS:BuildProfile()
 			['SkadaBackdrop'] = true,
 			['OmenBackdrop'] = true,
 			['DetailsBackdrop'] = true,
-			['MiscFixes'] = true,
 			['DBMSkinHalf'] = false,
 			['DBMFont'] = 'Arial Narrow',
 			['DBMFontSize'] = 12,
@@ -540,7 +539,19 @@ function AS:BuildOptions()
 	end
 
 	local order, blizzorder = 1, 1
-	for skinName, _ in AS:OrderedPairs(AS.register) do
+	local skins = {}
+
+	for skinName in pairs(AS.register) do
+		tinsert(skins, skinName)
+	end
+
+	for skinName in pairs(AS.preload) do
+		tinsert(skins, skinName)
+	end
+
+	sort(skins)
+
+	for _, skinName in pairs(skins) do
 		if strfind(skinName, 'Blizzard_') then
 			AS.Options.args.blizzard.args[skinName] = GenerateOptionTable(skinName, blizzorder)
 			blizzorder = blizzorder + 1
