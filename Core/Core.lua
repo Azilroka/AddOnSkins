@@ -119,12 +119,15 @@ function AS:RegisterSkin(addonName, skinFunc, ...)
 end
 
 function AS:UnregisterSkin(addonName, skinFunc)
-	if not AS.register[addonName] then return end
+	if (not AS.register[addonName] or not AS.preload[addonName]) then return end
 
 	if skinFunc then
 		AS.register[addonName][skinFunc] = nil
 	else
 		AS.register[addonName] = nil
+	end
+	if AS.preload[addonName] then
+		AS.preload[addonName] = nil
 	end
 end
 
