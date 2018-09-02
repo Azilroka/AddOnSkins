@@ -179,6 +179,18 @@ function AS:Blizzard_PvE(event, addon)
 			end)
 		end
 	end
+
+	local function SkinIcons()
+		for i = 1, LFG_ROLE_NUM_SHORTAGE_TYPES do
+			if _G['LFGDungeonReadyDialogRewardsFrameReward'..i] and not _G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone then
+				_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Border']:Kill()
+				AS:SkinTexture(_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Texture'])
+				_G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone = true
+			end
+		end
+	end
+
+	hooksecurefunc('LFGDungeonReadyDialog_UpdateRewards', SkinIcons)
 ]]
 	local checkButtons = {
 		"LFDQueueFrameRoleButtonTank",

@@ -16,7 +16,7 @@ function AS:Blizzard_Bags()
 			ItemButton:SetPushedTexture('')
 			ItemButton.icon:SetInside()
 
-			ItemButton.IconBorder:SetTexture('')
+			ItemButton.IconBorder:SetAlpha(0)
 			ItemButton.NewItemTexture:SetAtlas(nil)
 			ItemButton.NewItemTexture.SetAtlas = AS.Noop
 
