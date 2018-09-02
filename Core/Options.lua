@@ -116,6 +116,14 @@ function AS:BuildProfile()
 		end
 	end
 
+	for skin in pairs(AS.preload) do
+		if AS:CheckAddOn('ElvUI') and strfind(skin, 'Blizzard_') then
+			Defaults.profile[skin] = false
+		else
+			Defaults.profile[skin] = true
+		end
+	end
+
 	self.data = LibStub('AceDB-3.0'):New('AddOnSkinsDB', Defaults, true)
 
 	self.data.RegisterCallback(AS, 'OnProfileChanged', 'SetupProfile')

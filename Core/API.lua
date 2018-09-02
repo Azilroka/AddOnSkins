@@ -181,8 +181,28 @@ function AS:CreateShadow(Frame)
 	Shadow:SetOutside(Frame, AS:Scale(3), AS:Scale(3))
 
 	Shadow:SetBackdrop({ edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = AS:Scale(3) })
-	Shadow:SetBackdropColor(0, 0, 0, 0)
 	Shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
+
+	if AS.ES then
+		AS.ES:RegisterShadow(Shadow)
+	end
+
+	Frame.Shadow = Shadow
+end
+
+function AS:CreateInvertedShadow(Frame)
+	if Frame.Shadow then return end
+
+	local Shadow = CreateFrame("Frame", nil, Frame)
+	Shadow:SetFrameLevel(Frame:GetFrameLevel() + 2)
+	Shadow:SetFrameStrata(Frame:GetFrameStrata())
+	Shadow:SetInside(Frame)
+	Shadow:SetBackdrop({
+		bgFile = [[Interface\AddOns\AddOnSkins\Media\Textures\InvertedShadow]],
+	})
+	Shadow:SetBackdropColor(0, 0, 0, .8)
+
+	Shadow.Inverted = true
 
 	if AS.ES then
 		AS.ES:RegisterShadow(Shadow)

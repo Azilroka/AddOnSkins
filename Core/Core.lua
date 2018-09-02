@@ -167,7 +167,7 @@ function AS:RegisterSkinForPreload(addonName, skinFunc, addon1)
 end
 
 function AS:RunPreload(addonName)
-	if AS:CheckAddOn(addonName) and AS.preload[addonName] then
+	if AS:CheckAddOn(addonName) and AS:CheckOption(addonName) and AS.preload[addonName] then
 		pcall(AS.preload[addonName].func, self, 'ADDON_LOADED', AS.preload[addonName].addon or addonName)
 	end
 end
@@ -270,6 +270,7 @@ function AS:Init(event, addon)
 
 		self:RunPreload(addon)
 	end
+
 	if event == 'PLAYER_LOGIN' then
 		AS:BuildOptions()
 		AS:UpdateMedia()
