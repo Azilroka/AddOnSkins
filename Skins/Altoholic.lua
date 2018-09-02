@@ -24,16 +24,19 @@ local function SkinItemButton(obj, itemIDGetFunc)
 end
 
 function AS:Altoholic(event, addon)
-	if event == "PLAYER_ENTERING_WORLD" then
+	if addon == "Altoholic_Summary" then
 		if AltoTooltip then
 			AS:SkinTooltip(AltoTooltip)
 		end
-		AltoholicFramePortrait:Kill()
+
 		AS:SkinFrame(AltoholicFrame)
+		AltoholicFramePortrait:Kill()
+
 		AS:SkinFrame(AltoMessageBox)
 		AS:SkinButton(AltoMessageBox.ButtonYes)
 		-- Bug in Altoholic currently
 		AS:SkinButton(_G["ButtonNo"] or AltoMessageBox.ButtonNo)
+
 		AS:SkinCloseButton(AltoholicFrameCloseButton)
 		AS:SkinEditBox(AltoholicFrame_SearchEditBox, 175, 15)
 		AS:SkinButton(AltoholicFrame_ResetButton)
@@ -43,9 +46,7 @@ function AS:Altoholic(event, addon)
 		AltoholicFrame_SearchEditBox:SetPoint("TOPLEFT", AltoholicFrame, "TOPLEFT", 37, -56)
 		AltoholicFrame_ResetButton:SetSize(85, 24)
 		AltoholicFrame_SearchButton:SetSize(85, 24)
-	end
 
-	if addon == "Altoholic_Summary" then
 		AS:SkinFrame(AltoholicFrameSummary)
 
 		AS:StripTextures(AltoholicFrameSummary.ScrollFrame)
