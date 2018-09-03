@@ -49,10 +49,11 @@ function AS:PetTracker(event, addon)
 
 				for i = 1, 45 do
 					local Ability = _G['PetTrackerAbilityButton'..i]
-					if Ability then
+					if Ability and not Ability.isSkinned then
 						Ability:DisableDrawLayer("BACKGROUND")
 						AS:CreateBackdrop(Ability)
 						AS:SkinTexture(Ability.Icon)
+						Ability.isSkinned = true
 					end
 				end
 			end)
@@ -71,21 +72,87 @@ function AS:PetTracker(event, addon)
 	end
 
 	if addon == 'PetTracker_Journal' then
-		hooksecurefunc(PetTrackerRivalJournal, 'Startup', function(self)
-			AS:SkinFrame(PetTrackerRivalJournal)
-			AS:SkinTab(CollectionsJournalTab5)
+		AS:SkinTab(CollectionsJournalSecureTab0)
+		hooksecurefunc(PetTrackerRivalJournal, 'Startup', function()
+			AS:StripTextures(CollectionsJournalCoverTab, true)
+
+			PetTrackerRivalJournal:HookScript("OnShow", function(self)
+				AS:Delay(0, function() _G[CollectionsJournalCoverTab:GetParent():GetName()..'Text']:Hide() end)
+			end)
+
+			PetTrackerRivalJournal:HookScript("OnHide", function(self)
+				for i = 1, 5 do
+					_G['CollectionsJournalTab'..i..'Text']:Show()
+				end
+			end)
+
+			AS:SkinFrame(PetTrackerRivalJournal, 'Default')
+			AS:SkinCloseButton(PetTrackerRivalJournal.CloseButton)
 			AS:SkinCheckBox(PetTrackerTrackToggle)
+			AS:SkinFrame(PetTrackerRivalJournal.Card)
+			AS:StripTextures(PetTrackerRivalJournal.Team)
+			AS:StripTextures(PetTrackerRivalJournal.Team.Border)
+			AS:StripTextures(PetTrackerRivalJournal.ListInset)
+			PetTrackerRivalJournalListButton11:SetFrameLevel(PetTrackerRivalJournal:GetFrameLevel()-1)
+
+			AS:SkinEditBox(PetTrackerRivalJournal.SearchBox)
+			AS:SkinFrame(PetTrackerRivalJournal.Count)
+			AS:SkinScrollBar(PetTrackerRivalJournalListScrollBar)
+
 			for i = 1, 3 do
-				if _G['PetTrackerJournalSlot'..i] then
-					AS:SetTemplate(_G['PetTrackerJournalSlot'..i], 'Transparent')
-					_G['PetTrackerJournalSlot'..i].Bg:Hide()
-					_G['PetTrackerJournalSlot'..i].Quality:Hide()
-					_G['PetTrackerJournalSlot'..i].Hover:Kill()
-					--_G['PetTrackerJournalSlot'..i..'Highlight']:Kill()
-					AS:SkinTexture(_G['PetTrackerJournalSlot'..i].Icon)
-					_G['PetTrackerJournalSlot'..i].IconBorder:Hide()
-					_G['PetTrackerJournalSlot'..i].LevelBG:Hide()
-					_G['PetTrackerJournalSlot'..i].IsSkinned = true
+				local Slot = _G['PetTrackerJournalSlot'..i]
+				AS:SetTemplate(Slot, 'Transparent')
+				Slot.Bg:Hide()
+				Slot.Quality:Hide()
+				Slot.Hover:Kill()
+				--_G['PetTrackerJournalSlot'..i..'Highlight']:Kill()
+				AS:SkinTexture(Slot.Icon)
+				Slot.IconBorder:Hide()
+				Slot.LevelBG:Hide()
+
+				AS:SkinIconButton(PetTrackerRivalJournal['Tab'..i])
+			end
+
+			for i = 1, 11 do
+				local Button = _G["PetTrackerRivalJournalListButton"..i]
+				AS:StripTextures(Button)
+				AS:CreateBackdrop(Button)
+				AS:SkinFrame(Button.Backdrop)
+				Button.Backdrop:SetInside(Button)
+				Button.Backdrop:SetBackdropColor(0, 0, 0, 0)
+				Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 5)
+				AS:StyleButton(Button)
+				AS:SkinTexture(Button.icon)
+				AS:StyleButton(Button.dragButton)
+				Button.dragButton.ActiveTexture:SetAlpha(0)
+
+				Button.iconbg = CreateFrame('Frame', nil, Button)
+				AS:SetTemplate(Button.iconbg)
+				Button.iconbg:SetFrameLevel(Button.dragButton:GetFrameLevel() - 2)
+				Button.iconbg:SetOutside(Button.icon)
+
+				Button.icon:SetPoint("LEFT", -41, 0)
+				Button.icon:SetDrawLayer('ARTWORK')
+
+				Button.model.quality:SetAlpha(0)
+				Button.model.levelRing:SetAlpha(0)
+
+				hooksecurefunc(Button.model.quality, 'SetVertexColor', function(self, r, g, b, a)
+					Button.iconbg:SetBackdropBorderColor(r, g, b)
+				end)
+
+				hooksecurefunc(Button.model.quality, 'Hide', function(self)
+					Button.iconbg:SetBackdropColor(unpack(AS.BorderColor))
+				end)
+			end
+
+			for i = 1, 45 do
+				local Ability = _G['PetTrackerAbilityButton'..i]
+				if Ability and not Ability.isSkinned then
+					Ability:DisableDrawLayer("BACKGROUND")
+					AS:CreateBackdrop(Ability)
+					AS:SkinTexture(Ability.Icon)
+					Ability.isSkinned = true
 				end
 			end
 		end)
