@@ -48,7 +48,7 @@ AddOn.UIScale = UIParent:GetScale()
 AddOn.ScreenWidth, AddOn.ScreenHeight = GetPhysicalScreenSize()
 
 local Color = RAID_CLASS_COLORS[AddOn.MyClass]
-AddOn.ClassColor = {Color.r, Color.g, Color.b}
+AddOn.ClassColor = { Color.r, Color.g, Color.b }
 
 AddOn.Mult = 1
 AddOn.skins = {}
