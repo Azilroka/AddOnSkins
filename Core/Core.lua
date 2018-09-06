@@ -18,7 +18,7 @@ function AS:CheckOption(optionName, ...)
 	for i = 1, select('#', ...) do
 		local addon = select(i, ...)
 		if not addon then break end
-		if not IsAddOnLoaded(addon) then return false end
+		if not AS:CheckAddOn(addon) then return false end
 	end
 
 	return self.db[optionName]
@@ -170,7 +170,7 @@ function AS:RegisterSkinForPreload(addonName, skinFunc, addon1)
 end
 
 function AS:RunPreload(addonName)
-	if AS:CheckAddOn(addonName) and AS:CheckOption(addonName) and AS.preload[addonName] then
+	if AS:CheckOption(addonName, addonName) and AS.preload[addonName] then
 		pcall(AS.preload[addonName].func, self, 'ADDON_LOADED', AS.preload[addonName].addon or addonName)
 	end
 end
@@ -206,12 +206,15 @@ end
 function AS:UnregisterSkinEvent(addonName, event)
 	if not AS.events[event] then return end
 	if not AS.events[event][addonName] then return end
+
 	AS.events[event][addonName] = nil
+
 	for addon, _ in pairs(AS.events[event]) do
 		if addon then
 			return
 		end
 	end
+
 	AS:UnregisterEvent(event)
 end
 
@@ -254,6 +257,10 @@ function AS:StartSkinning(event)
 		end
 	end
 
+	if AS:CheckOption('LoginMsg') then
+		AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
+	end
+
 	if AS:CheckAddOn('AddonLoader') then
 		AS:AcceptFrame('AddOnSkins is not compatible with AddonLoader.\nPlease remove it if you would like all the skins to function.')
 	end
@@ -286,10 +293,6 @@ function AS:Init(event, addon)
 		AS.EP = LibStub('LibElvUIPlugin-1.0', true)
 		if AS.EP then
 			AS.EP:RegisterPlugin(AddOnName, AS.GetOptions)
-		end
-
-		if AS:CheckOption('LoginMsg') then
-			AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
 		end
 
 		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')

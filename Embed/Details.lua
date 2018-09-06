@@ -68,6 +68,11 @@ function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, rela
 	window.baseframe:SetFrameLevel(relativeFrame:GetFrameLevel())
 
 	ofsx = ofsx - 1
+
+	if window.show_statusbar then
+		height = height - 14
+	end
+
 	if (window.skin == "Forced Square") then
 		ofsx = ofsx - 1
 		if (window:GetId() == 2) then
