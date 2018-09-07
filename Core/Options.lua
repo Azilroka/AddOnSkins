@@ -104,7 +104,7 @@ function AS:BuildProfile()
 	}
 
 	if AS:CheckAddOn('ElvUI_MerathilisUI') then
-		Defaults.profile['MerathilisUIStyling'] = false;
+		Defaults.profile['MerathilisUIStyling'] = false
 	end
 
 	for skin in pairs(AS.register) do

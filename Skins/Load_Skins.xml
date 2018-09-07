@@ -49,7 +49,7 @@
 	<Script file="Examiner.lua"/>
 	<Script file="ExtraQuestButton.lua"/>
 	<Script file="ExtVendor.lua"/>
-	<Script file="FlightMaopEnhanced.lua"/>
+	<Script file="FlightMapEnhanced.lua"/>
 	<Script file="FlyoutButtonCustom.lua"/>
 	<Script file="Foglight.lua"/>
 	<Script file="GlobalIgnoreList.lua"/>

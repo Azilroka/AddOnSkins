@@ -70,22 +70,22 @@ function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, rela
 	ofsx = ofsx - 1
 
 	if window.show_statusbar then
-		height = height - 14
+		height = height - 13
 	end
 
 	if (window.skin == "Forced Square") then
 		ofsx = ofsx - 1
 		if (window:GetId() == 2) then
-			window:SetSize(width+1, height - 20)
+			window:SetSize(width + 1, height - 20)
 		else
 			window:SetSize(width, height - 20)
 		end
 	elseif (window.skin == "ElvUI Frame Style") then
 		if (window:GetId() == 2) then
-			window:SetSize(width-1, height - 20)
+			window:SetSize(width - 1, height - 20)
 		else
 			if NumberToEmbed == 1 then
-				window:SetSize(width-2, height - 20)
+				window:SetSize(width - 2, height - 20)
 			else
 				window:SetSize(width, height - 20)
 			end
@@ -95,9 +95,9 @@ function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, rela
 			window:SetSize(width, height - 20)
 		else
 			if NumberToEmbed == 1 then
-				window:SetSize(width-2, height - 20)
+				window:SetSize(width - 2, height - 20)
 			else
-				window:SetSize(width-1, height - 20)
+				window:SetSize(width - 1, height - 20)
 			end
 		end
 	else
@@ -116,10 +116,10 @@ function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, rela
 
 	if (window:GetId() == 1) then
 		_G.DetailsRowFrame1:SetParent(_G.DetailsBaseFrame1)
-		_G.DetailsRowFrame1:SetFrameLevel(_G.DetailsBaseFrame1:GetFrameLevel()+1)
+		_G.DetailsRowFrame1:SetFrameLevel(_G.DetailsBaseFrame1:GetFrameLevel() + 1)
 	elseif (window:GetId() == 2) then
 		_G.DetailsRowFrame2:SetParent(_G.DetailsBaseFrame2)
-		_G.DetailsRowFrame2:SetFrameLevel(_G.DetailsBaseFrame2:GetFrameLevel()+1)
+		_G.DetailsRowFrame2:SetFrameLevel(_G.DetailsBaseFrame2:GetFrameLevel() + 1)
 	end
 
 	window:ChangeSkin()
