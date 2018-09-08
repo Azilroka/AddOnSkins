@@ -3,6 +3,6 @@
 ## Version: 3.92
 ## Author: Azilroka, Whiro
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
-## OptionalDeps: ProjectAzilroka, ElvUI, BuyEmAll, DSM, Tukui, ElvUI_MerathilisUI
+## OptionalDeps: ProjectAzilroka, ElvUI, Tukui
 
 Load_AddOnSkins.xml
