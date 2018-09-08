@@ -80,6 +80,9 @@ function AS:Blizzard_Mail(event, addon)
 	OpenMailDeleteButton:SetPoint("RIGHT", OpenMailCancelButton, "LEFT", -2, 0)
 	SendMailMailButton:SetPoint("RIGHT", SendMailCancelButton, "LEFT", -2, 0)
 
+	AS:SkinRadioButton(SendMailSendMoneyButton)
+	AS:SkinRadioButton(SendMailCODButton)
+
 	for _, Attachment in pairs({"SendMailAttachment", "OpenMailAttachmentButton"}) do
 		for i = 1, ATTACHMENTS_MAX_SEND do
 			local Button = _G[Attachment..i]

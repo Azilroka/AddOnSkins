@@ -324,6 +324,40 @@ function AS:SkinEditBox(EditBox, Width, Height)
 	EditBox.isSkinned = true
 end
 
+function AS:SkinRadioButton(Button)
+	if Button.isSkinned then return end
+
+	Button:SetCheckedTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircleChecked")
+	Button:GetCheckedTexture():SetVertexColor(0, 0.44, .87, 1)
+	Button:GetCheckedTexture():SetTexCoord(0, 1, 0, 1)
+
+	Button:SetHighlightTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircleChecked")
+	Button:GetHighlightTexture():SetTexCoord(0, 1, 0, 1)
+	Button:GetHighlightTexture():SetVertexColor(0, 0.44, .87, 1)
+
+	Button:SetNormalTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircle")
+	Button:GetNormalTexture():SetOutside()
+	Button:GetNormalTexture():SetTexCoord(0, 1, 0, 1)
+	Button:GetNormalTexture():SetVertexColor(unpack(AS.BorderColor))
+
+	Button:HookScript("OnDisable", function(self)
+		if not self.SetDisabledTexture then return end
+
+		if self:GetChecked() then
+			self:SetDisabledTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircle")
+			self:GetDisabledTexture():SetVertexColor(0, 0.44, .87, 1)
+		else
+			self:SetDisabledTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircle")
+			self:GetDisabledTexture():SetVertexColor(unpack(AS.BorderColor))
+		end
+	end)
+
+	Button.SetNormalTexture = AS.Noop
+	Button.SetPushedTexture = AS.Noop
+	Button.SetHighlightTexture = AS.Noop
+	Button.isSkinned = true
+end
+
 function AS:SkinCheckBox(CheckBox)
 	if CheckBox.isSkinned then return end
 	AS:StripTextures(CheckBox)
