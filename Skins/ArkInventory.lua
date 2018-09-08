@@ -42,16 +42,16 @@ function AS:ArkInventory()
 			local name = bar:GetName()
 			if _G[name..'ArkBorder'] then _G[name..'ArkBorder']:Kill() end
 			if _G[name..'Background'] then _G[name..'Background']:Kill() end
-			bar:SetTemplate(AS:CheckOption('SkinTemplate'))
 			bar.IsSkinned = true
 		end
+
+		bar:SetTemplate(AS:CheckOption('SkinTemplate'))
 
 		if ArkInventory.Global.Mode.Edit then
 			bar:SetBackdropBorderColor(1, 0, 0, 1)
 			bar:SetBackdropColor(1, 0, 0, .1)
 		else
-			bar:SetBackdropBorderColor(unpack(AS.BorderColor))
-			bar:SetBackdropColor(unpack(AS.BackdropColor))
+			bar:SetBackdropBorderColor(_G[bar:GetName()..'ArkBorder']:GetBackdropBorderColor())
 		end
 	end)
 
@@ -72,6 +72,7 @@ function AS:ArkInventory()
 
 		AS:SetTemplate(frame)
 		frame:SetBackdropBorderColor(obj:GetBackdropBorderColor())
+		frame:SetBackdropColor(unpack(AS.BorderColor))
 		AS:SkinTexture(frame.icon)
 		frame:SetNormalTexture(nil)
 		if _G[frame:GetName()] == ARKINV_Frame1ChangerWindowBag1 then
@@ -84,6 +85,7 @@ function AS:ArkInventory()
 	hooksecurefunc(ArkInventory, 'Frame_Border_Paint', function(border, slot, file, size, offset, scale, r, g, b, a)
 		local parent = border:GetParent()
 		parent:SetBackdropBorderColor(r, g, b, a)
+		parent:SetBackdropColor(unpack(AS.BackdropColor))
 	end)
 
 	hooksecurefunc(ArkInventory, 'Frame_Item_Update_Clickable', function(frame)
