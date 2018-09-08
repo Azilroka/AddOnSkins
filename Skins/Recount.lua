@@ -60,7 +60,7 @@ function AS:Recount()
 		end
 	end
 
-	AS:SkinScrollBar(Recount_MainWindow_ScrollBarScrollBar)
+	AS:SkinScrollBar(Recount.MainWindow.ScrollBar)
 
 	Recount.MainWindow:HookScript('OnShow', function(self) if AS:CheckEmbed('Recount') then EmbedSystem_MainWindow:Show() end end)
 	Recount.MainWindow.FileButton:HookScript('OnClick', function(self) if LibDropdownFrame0 then AS:SetTemplate(LibDropdownFrame0) end end)
