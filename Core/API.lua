@@ -54,10 +54,10 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 
 		Frame.template = Template
 		ElvUI[1]["frames"][Frame] = true
-	end
 
-	if AS:CheckAddOn('ElvUI_MerathilisUI') and AS:CheckOption("MerathilisUIStyling") then
-		Frame:Styling()
+		if AS:CheckOption('MerathilisUIStyling', 'ElvUI_MerathilisUI') then
+			Frame:Styling()
+		end
 	end
 
 	Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
