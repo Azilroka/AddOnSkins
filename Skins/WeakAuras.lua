@@ -29,7 +29,7 @@ function AS:WeakAuras()
 			else
 				frame.icon.SetTexCoord = nil
 			end
-			if AS:CheckOption('WeakAuraIconCooldown', 'ElvUI') then
+			if frame.cooldown and AS:CheckOption('WeakAuraIconCooldown', 'ElvUI') then
 				ElvUI[1]:RegisterCooldown(frame.cooldown)
 				ElvUI[1]:UpdateCooldownSettings('global')
 			end
