@@ -24,7 +24,7 @@ function AS:Ace3()
 				widget.skinnedCheckBG = CreateFrame('Frame', nil, widget.frame)
 				AS:SetTemplate(widget.skinnedCheckBG, 'Default', true)
 				widget.skinnedCheckBG:SetInside(widget.checkbg, 4, 4)
-				widget.skinnedCheckBG:SetScript('OnShow', function() widget.check:SetInside() widget.check:SetTexture(AS.NormTex) widget.check:SetVertexColor(0, .44, .87) end)
+				widget.skinnedCheckBG:SetScript('OnShow', function() widget.check:SetInside() widget.check:SetTexture(AS.NormTex) widget.check:SetVertexColor(unpack(AS.Color)) end)
 			end
 
 			widget.check:SetParent(widget.skinnedCheckBG)

@@ -15,6 +15,7 @@ function AS:Blizzard_Talent(event, addon)
 		for _, Button in pairs({ PlayerTalentFrameTalentsTutorialButton, PlayerTalentFrameSpecializationTutorialButton, PlayerTalentFramePetSpecializationTutorialButton }) do
 			Button.Ring:Hide()
 			Button:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPLEFT", -12, 12)
+			Button:Kill()
 		end
 
 		AS:SkinButton(PlayerTalentFrameActivateButton, true)
@@ -88,30 +89,6 @@ function AS:Blizzard_Talent(event, addon)
 			end
 		end
 
-		for i = 1, GetNumSpecializations(false, true) do
-			local bu = PlayerTalentFramePetSpecialization["specButton"..i]
-			local _, _, _, icon = GetSpecializationInfo(i, false, true)
-
-			bu.ring:Hide()
-			bu.specIcon:SetTexture(icon)
-			AS:SkinTexture(bu.specIcon)
-			bu.specIcon:SetSize(50, 50)
-			bu.specIcon:SetPoint("LEFT", bu, "LEFT", 15, 0)
-			bu:HookScript('OnEnter', function(self)
-				self:SetBackdropBorderColor(1, .82, 0)
-				self.border:SetBackdropBorderColor(1, .82, 0)
-			end)
-			bu:HookScript('OnLeave', function(self) 
-				if self.selected then
-					self:SetBackdropBorderColor(0, 0.44, .87, 1)
-					self.border:SetBackdropBorderColor(0, 0.44, .87, 1)
-				else
-					self:SetBackdropBorderColor(unpack(AS.BorderColor))
-					self.border:SetBackdropBorderColor(unpack(AS.BorderColor))
-				end
-			end)
-		end
-
 		for i = 1, GetNumSpecializations(false, nil) do
 			local bu = PlayerTalentFrameSpecialization["specButton"..i]
 			local _, _, _, icon = GetSpecializationInfo(i, false, nil)
@@ -126,15 +103,16 @@ function AS:Blizzard_Talent(event, addon)
 				self:SetBackdropBorderColor(1, .82, 0)
 				self.border:SetBackdropBorderColor(1, .82, 0)
 			end)
-			bu:HookScript('OnLeave', function(self) 
+			bu:HookScript('OnLeave', function(self)
 				if self.selected then
-					self:SetBackdropBorderColor(0, 0.44, .87, 1)
-					self.border:SetBackdropBorderColor(0, 0.44, .87, 1)
+					self:SetBackdropBorderColor(unpack(AS.Color))
+					self.border:SetBackdropBorderColor(unpack(AS.Color))
 				else
 					self:SetBackdropBorderColor(unpack(AS.BorderColor))
 					self.border:SetBackdropBorderColor(unpack(AS.BorderColor))
 				end
 			end)
+			AS:Delay(0, function() bu:GetScript('OnLeave')(bu) end)
 		end
 
 		for i = 1, NUM_TALENT_FRAME_TABS do
@@ -152,38 +130,40 @@ function AS:Blizzard_Talent(event, addon)
 		hooksecurefunc("PlayerTalentFrame_UpdateSpecFrame", function(self, spec)
 			local playerTalentSpec = GetSpecialization(nil, self.isPet, PlayerSpecTab2:GetChecked() and 2 or 1)
 			local shownSpec = spec or playerTalentSpec or 1
-
+			local numSpecs = GetNumSpecializations(nil, self.isPet)
 			local id, _, _, icon = GetSpecializationInfo(shownSpec, nil, self.isPet)
 			local scrollChild = self.spellsScroll.child
-
 			scrollChild.specIcon:SetTexture(icon)
 
 			local index = 1
-
-			local bonuses = self.isPet and {GetSpecializationSpells(shownSpec, nil, self.isPet, true)} or C_SpecializationInfo.GetSpellsDisplay(id)
-			local bonusesIncrement = self.isPet and 2 or 1
-
-			for i = 1, #bonuses, bonusesIncrement do
-				local frame = scrollChild["abilityButton"..index]
-				if frame and not frame.reskinned then
-					AS:SetTemplate(frame)
-					AS:SkinTexture(frame.icon)
-					frame.ring:Hide()
-					frame.icon:SetInside()			
-					frame.icon:SetTexture(select(2, GetSpellTexture(bonuses[i])))
-					frame.reskinned = true
-				end
-				index = index + 1
+			local bonuses
+			local bonusesIncrement = 1
+			if self.isPet then
+				bonuses = {GetSpecializationSpells(shownSpec, nil, self.isPet, true)}
+				bonusesIncrement = 2
+			else
+				bonuses = C_SpecializationInfo.GetSpellsDisplay(id)
 			end
 
-			for i = 1, GetNumSpecializations(nil, self.isPet) do
-				local bu = self["specButton"..i]
-				if bu.selected then
-					bu:SetBackdropBorderColor(0, 0.44, .87, 1)
-					bu.border:SetBackdropBorderColor(0, 0.44, .87, 1)
-				else
-					bu:SetBackdropBorderColor(unpack(AS.BorderColor))
-					bu.border:SetBackdropBorderColor(unpack(AS.BorderColor))
+			if bonuses then
+				for i = 1, #bonuses, bonusesIncrement do
+					local frame = scrollChild["abilityButton"..index]
+					if frame then
+						local _, spellTex = GetSpellTexture(bonuses[i])
+						if spellTex then
+							frame.icon:SetTexture(spellTex)
+						end
+
+						if not frame.reskinned then
+							frame.reskinned = true
+							frame.ring:Hide()
+							AS:SkinTexture(frame.icon)
+							frame.icon:SetSize(40, 40)
+							AS:CreateBackdrop(frame)
+							frame.Backdrop:SetOutside(frame.icon)
+						end
+					end
+					index = index + 1
 				end
 			end
 		end)
@@ -191,18 +171,29 @@ function AS:Blizzard_Talent(event, addon)
 		for i = 1, MAX_TALENT_TIERS do
 			local Row = _G["PlayerTalentFrameTalentsTalentRow"..i]
 			AS:StripTextures(Row, true)
+
 			Row.GlowFrame:Kill()
 
 			for j = 1, NUM_TALENT_COLUMNS do
 				local Button = _G["PlayerTalentFrameTalentsTalentRow"..i.."Talent"..j]
 
 				AS:SkinBackdropFrame(Button)
+				AS:CreateShadow(Button.Backdrop, true)
+				Button.Backdrop.Shadow:SetBackdropBorderColor(unpack(AS.Color))
+				Button.GlowFrame.TopGlowLine = Button.Backdrop.Shadow
+				Button.GlowFrame.TopGlowLine:Hide()
+				Button.GlowFrame.BottomGlowLine:Kill()
+
+				Button.GlowFrame:HookScript('OnShow', function(self) self.TopGlowLine:Show() Button.Backdrop.Shadow:Show() end)
+				Button.GlowFrame:HookScript('OnHide', function(self) self.TopGlowLine:Hide() Button.Backdrop.Shadow:Hide() end)
+
 				Button:SetFrameLevel(Button:GetFrameLevel() + 2)
 				Button.Backdrop:SetPoint("TOPLEFT", 15, -1)
 				Button.Backdrop:SetPoint("BOTTOMRIGHT", -10, 1)
 
 				Button.Border = CreateFrame("Frame", nil, Button)
 				AS:SkinFrame(Button.Border)
+				Button.knownSelection:SetAlpha(0)
 				Button.Border:SetBackdropColor(0, 0, 0, 0)
 				Button.Border:SetOutside(Button.icon)
 				Button.icon:SetSize(32, 32)
@@ -212,10 +203,10 @@ function AS:Blizzard_Talent(event, addon)
 					self.Backdrop:SetBackdropBorderColor(1, .82, 0)
 					self.Border:SetBackdropBorderColor(1, .82, 0)
 				end)
-				Button:HookScript('OnLeave', function(self) 
+				Button:HookScript('OnLeave', function(self)
 					if self.knownSelection:IsShown() then
-						self.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
-						self.Border:SetBackdropBorderColor(0, 0.44, .87, 1)
+						self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
+						self.Border:SetBackdropBorderColor(unpack(AS.Color))
 					else
 						self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 						self.Border:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -256,6 +247,124 @@ function AS:Blizzard_Talent(event, addon)
 		TalentMicroButtonAlert.Text:SetTextColor(1, 1, 0)
 		TalentMicroButtonAlert:ClearAllPoints()
 		TalentMicroButtonAlert:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -6)
+
+		-- PVP Talents
+		local function SkinPvpTalentSlots(button)
+			button.Texture.SetAtlas = AS.Noop
+			button.Texture:Show()
+			button.Texture.Hide = AS.Noop
+
+			AS:SkinTexture(button.Texture)
+			AS:CreateBackdrop(button)
+			button.Backdrop:SetAllPoints(button.Texture)
+			SetPortraitToTexture(button.Texture, [[Interface\Icons\INV_Misc_QuestionMark]])
+			button.Arrow:SetPoint("LEFT", button.Texture, "RIGHT", 5, 0)
+			button.Arrow:SetSize(26, 13)
+			button.Border:Hide()
+
+			button:SetSize(button:GetSize())
+			button.Texture:SetSize(32, 32)
+			button.TalentName:SetPoint("TOP", button, "BOTTOM", 0, 0)
+		end
+
+		local function SkinPvpTalentTrinketSlot(button)
+			SkinPvpTalentSlots(button)
+			button.Texture:SetTexture([[Interface\Icons\INV_Jewelry_Trinket_04]])
+			button.Texture:SetSize(48, 48)
+			button.Arrow:SetSize(26, 13)
+		end
+
+		local PvpTalentFrame = PlayerTalentFrameTalents.PvpTalentFrame
+		PvpTalentFrame:StripTextures()
+
+		PvpTalentFrame.Swords:SetSize(72, 67)
+		PvpTalentFrame.Orb:Hide()
+		PvpTalentFrame.Ring:Hide()
+
+		-- Skin the PvP Icons
+		SkinPvpTalentTrinketSlot(PvpTalentFrame.TrinketSlot)
+		SkinPvpTalentSlots(PvpTalentFrame.TalentSlot1)
+		SkinPvpTalentSlots(PvpTalentFrame.TalentSlot2)
+		SkinPvpTalentSlots(PvpTalentFrame.TalentSlot3)
+
+		for k, Slot in pairs({ PvpTalentFrame.TrinketSlot, PvpTalentFrame.TalentSlot1, PvpTalentFrame.TalentSlot2, PvpTalentFrame.TalentSlot3 }) do
+			if not C_SpecializationInfo.GetPvpTalentSlotInfo(k).enabled then
+				Slot:HookScript("OnUpdate", function(self)
+					if not C_SpecializationInfo.GetPvpTalentSlotInfo(k).enabled then
+						self.Backdrop:SetBackdropBorderColor(1, 0, 0)
+					else
+						self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+					end
+				end)
+			end
+		end
+
+		AS:SkinBackdropFrame(PvpTalentFrame.TalentList)
+
+		PvpTalentFrame.TalentList:SetPoint("BOTTOMLEFT", PlayerTalentFrame, "BOTTOMRIGHT", 5, 26)
+		AS:StripTextures(PvpTalentFrame.TalentList.Inset)
+		PvpTalentFrame.TalentList.MyTopLeftCorner:Hide()
+		PvpTalentFrame.TalentList.MyTopRightCorner:Hide()
+		PvpTalentFrame.TalentList.MyTopBorder:Hide()
+
+		local function HandleInsetButton(Button)
+			AS:SkinButton(Button)
+
+			if Button.LeftSeparator then
+				Button.LeftSeparator:Hide()
+			end
+			if Button.RightSeparator then
+				Button.RightSeparator:Hide()
+			end
+		end
+
+		local TalentList_CloseButton = select(4, PlayerTalentFrameTalents.PvpTalentFrame.TalentList:GetChildren())
+		if TalentList_CloseButton and TalentList_CloseButton:HasScript("OnClick") then
+			HandleInsetButton(TalentList_CloseButton)
+		end
+
+		PvpTalentFrame.TalentList.ScrollFrame:SetPoint("TOPLEFT", 5, -5)
+		PvpTalentFrame.TalentList.ScrollFrame:SetPoint("BOTTOMRIGHT", -21, 32)
+		PvpTalentFrame.OrbModelScene:SetAlpha(0)
+
+		PvpTalentFrame:SetSize(131, 379)
+		PvpTalentFrame:SetPoint("LEFT", PlayerTalentFrameTalents, "RIGHT", -135, 0)
+		PvpTalentFrame.Swords:SetPoint("BOTTOM", 0, 30)
+		PvpTalentFrame.Label:SetPoint("BOTTOM", 0, 104)
+		PvpTalentFrame.InvisibleWarmodeButton:SetAllPoints(PvpTalentFrame.Swords)
+
+		PvpTalentFrame.TrinketSlot:SetPoint("TOP", 0, -16)
+		PvpTalentFrame.TalentSlot1:SetPoint("TOP", PvpTalentFrame.TrinketSlot, "BOTTOM", 0, -16)
+		PvpTalentFrame.TalentSlot2:SetPoint("TOP", PvpTalentFrame.TalentSlot1, "BOTTOM", 0, -10)
+		PvpTalentFrame.TalentSlot3:SetPoint("TOP", PvpTalentFrame.TalentSlot2, "BOTTOM", 0, -10)
+
+		for i = 1, 10 do
+			local bu = _G["PlayerTalentFrameTalentsPvpTalentFrameTalentListScrollFrameButton"..i]
+			if bu then
+				local border = bu:GetRegions()
+				if border then border:SetTexture(nil) end
+
+				AS:StyleButton(bu)
+				AS:CreateBackdrop(bu, 'Transparent')
+
+				if bu.Selected then
+					bu.Selected:SetTexture(nil)
+				end
+
+				bu.Backdrop:SetAllPoints()
+
+				if bu.Icon then
+					AS:SkinTexture(bu.Icon)
+					bu.Icon:SetDrawLayer('ARTWORK', 1)
+				end
+			end
+		end
+
+		AS:SkinButton(PlayerTalentFrameTalentsPvpTalentButton)
+		AS:SkinScrollBar(PlayerTalentFrameTalentsPvpTalentFrameTalentListScrollFrameScrollBar)
+
+		AS:SkinCloseButton(PlayerTalentFrameTalentsPvpTalentFrame.TrinketSlot.HelpBox.CloseButton)
+		AS:SkinCloseButton(PlayerTalentFrameTalentsPvpTalentFrame.WarmodeTutorialBox.CloseButton)
 	end
 end
 

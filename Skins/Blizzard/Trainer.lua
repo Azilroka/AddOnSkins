@@ -36,7 +36,7 @@ function AS:Blizzard_Trainer(event, addon)
 	end)
 	ClassTrainerFrameSkillStepButton:HookScript('OnLeave', function(self)
 		if self.selectedTex:IsShown() then
-			self.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+			self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 		else
 			self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end
@@ -56,7 +56,7 @@ function AS:Blizzard_Trainer(event, addon)
 		end)
 		Button:HookScript('OnLeave', function(self)
 			if self.selectedTex:IsShown() then
-				self.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+				self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 			else
 				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end

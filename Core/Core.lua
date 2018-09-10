@@ -226,6 +226,8 @@ function AS:StartSkinning(event)
 	AS.Mult = 768 / AS.ScreenHeight / UIParent:GetScale()
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 
+	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
+
 	for addonName, alldata in pairs(AS.register) do
 		for _, data in pairs(alldata) do
 			AS:RegisteredSkin(addonName, data.priority, data.func, data.events)

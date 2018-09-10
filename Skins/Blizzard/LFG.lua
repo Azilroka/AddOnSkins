@@ -38,8 +38,8 @@ function AS:Blizzard_PvE(event, addon)
 		end)
 		Button:HookScript('OnLeave', function(self) 
 			if self:GetID() == GroupFinderFrame.selectionIndex then
-				self:SetBackdropBorderColor(0, 0.44, .87, 1)
-				self.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+				self:SetBackdropBorderColor(unpack(AS.Color))
+				self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 			else
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -51,8 +51,8 @@ function AS:Blizzard_PvE(event, addon)
 		for i = 1, 4 do
 			local Button = GroupFinderFrame["groupButton"..i]
 			if GroupFinderFrame.selectionIndex == Button:GetID() then
-				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
-				Button.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+				Button:SetBackdropBorderColor(unpack(AS.Color))
+				Button.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 			else
 				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
 				Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -346,8 +346,8 @@ function AS:Blizzard_PVPUI(_, addon)
 		end)
 		Button:HookScript('OnLeave', function(self) 
 			if self:GetID() == self.isSelected then
-				self:SetBackdropBorderColor(0, 0.44, .87, 1)
-				self.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+				self:SetBackdropBorderColor(unpack(AS.Color))
+				self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 			else
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -363,8 +363,8 @@ function AS:Blizzard_PVPUI(_, addon)
 		for i = 1, 3 do
 			local Button = PVPQueueFrame["CategoryButton"..i]
 			if ( i == index ) then
-				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
-				Button.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+				Button:SetBackdropBorderColor(unpack(AS.Color))
+				Button.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 				Button.isSelected = i
 			else
 				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -393,7 +393,7 @@ function AS:Blizzard_PVPUI(_, addon)
 		end)
 		Button:HookScript('OnLeave', function(self)
 			if self.SelectedTexture:IsShown() then
-				self:SetBackdropBorderColor(0, 0.44, .87, 1)
+				self:SetBackdropBorderColor(unpack(AS.Color))
 			else
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
@@ -405,7 +405,7 @@ function AS:Blizzard_PVPUI(_, addon)
 		for _, Section in pairs({ 'RandomBGButton', 'RandomEpicBGButton', 'Arena1Button', 'BrawlButton' }) do
 			local Button = HonorFrame.BonusFrame[Section]
 			if Button.SelectedTexture:IsShown() then
-				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
+				Button:SetBackdropBorderColor(unpack(AS.Color))
 			else
 				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
@@ -430,7 +430,7 @@ function AS:Blizzard_PVPUI(_, addon)
 		end)
 		Button:HookScript('OnLeave', function(self)
 			if self.SelectedTexture:IsShown() then
-				self:SetBackdropBorderColor(0, 0.44, .87, 1)
+				self:SetBackdropBorderColor(unpack(AS.Color))
 			else
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
@@ -442,7 +442,7 @@ function AS:Blizzard_PVPUI(_, addon)
 		for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3'}) do
 			local Button = ConquestFrame[Section]
 			if Button.SelectedTexture:IsShown() then
-				Button:SetBackdropBorderColor(0, 0.44, .87, 1)
+				Button:SetBackdropBorderColor(unpack(AS.Color))
 			else
 				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end

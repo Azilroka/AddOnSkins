@@ -172,7 +172,7 @@ function AS:SkinButton(Button, Strip)
 	end
 end
 
-function AS:CreateShadow(Frame)
+function AS:CreateShadow(Frame, NoRegister)
 	if Frame.Shadow then return end
 
 	local Shadow = CreateFrame("Frame", nil, Frame)
@@ -183,7 +183,7 @@ function AS:CreateShadow(Frame)
 	Shadow:SetBackdrop({ edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = AS:Scale(3) })
 	Shadow:SetBackdropBorderColor(0, 0, 0, 0.8)
 
-	if AS.ES then
+	if (not NoRegister) and AS.ES then
 		AS.ES:RegisterShadow(Shadow)
 	end
 
@@ -328,12 +328,12 @@ function AS:SkinRadioButton(Button)
 	if Button.isSkinned then return end
 
 	Button:SetCheckedTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircleChecked")
-	Button:GetCheckedTexture():SetVertexColor(0, 0.44, .87, 1)
+	Button:GetCheckedTexture():SetVertexColor(unpack(AS.Color))
 	Button:GetCheckedTexture():SetTexCoord(0, 1, 0, 1)
 
 	Button:SetHighlightTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircleChecked")
 	Button:GetHighlightTexture():SetTexCoord(0, 1, 0, 1)
-	Button:GetHighlightTexture():SetVertexColor(0, 0.44, .87, 1)
+	Button:GetHighlightTexture():SetVertexColor(unpack(AS.Color))
 
 	Button:SetNormalTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircle")
 	Button:GetNormalTexture():SetOutside()
@@ -345,7 +345,7 @@ function AS:SkinRadioButton(Button)
 
 		if self:GetChecked() then
 			self:SetDisabledTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircle")
-			self:GetDisabledTexture():SetVertexColor(0, 0.44, .87, 1)
+			self:GetDisabledTexture():SetVertexColor(unpack(AS.Color))
 		else
 			self:SetDisabledTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircle")
 			self:GetDisabledTexture():SetVertexColor(unpack(AS.BorderColor))
@@ -750,8 +750,16 @@ function AS:SkinTooltip(tooltip, scale)
 	end)
 end
 
-function AS:SkinTexture(frame)
-	frame:SetTexCoord(unpack(AS.TexCoords))
+function AS:SkinTexture(icon, parent)
+	icon:SetTexCoord(unpack(AS.TexCoords))
+	if parent then
+		local layer, subLevel = icon:GetDrawLayer()
+		local iconBorder = parent:CreateTexture(nil, layer, nil, subLevel - 1)
+		iconBorder:SetPoint("TOPLEFT", icon, -1, 1)
+		iconBorder:SetPoint("BOTTOMRIGHT", icon, 1, -1)
+		iconBorder:SetColorTexture(0, 0, 0)
+		return iconBorder
+	end
 end
 
 function AS:Desaturate(frame)

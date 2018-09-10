@@ -100,6 +100,7 @@ function AS:BuildProfile()
 			['EmbedSystemMessage'] = true,
 			['ElvUISkinModule'] = false,
 			['ThinBorder'] = true,
+			['ClassColor'] = false,
 		},
 	}
 
@@ -404,26 +405,31 @@ function AS:BuildOptions()
 							['Default'] = 'Default',
 						}
 					},
+					ClassColor = {
+						type = 'toggle',
+						name = ASL['Class Color'],
+						order = 2,
+					},
 					WeakAuraAuraBar = {
 						type = 'toggle',
 						name = ASL['WeakAura AuraBar'],
-						order = 2,
+						order = 3,
 						disabled = function() return not AS:CheckOption('WeakAuras', 'WeakAuras') end,
 					},
 					Parchment = {
 						type = 'toggle',
 						name = ASL['Parchment'],
-						order = 3,
+						order = 4,
 					},
 					SkinDebug = {
 						type = 'toggle',
 						name = ASL['Enable Skin Debugging'],
-						order = 4,
+						order = 5,
 					},
 					LoginMsg = {
 						type = 'toggle',
 						name = ASL['Login Message'],
-						order = 5,
+						order = 6,
 					},
 				},
 			},
