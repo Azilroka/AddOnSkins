@@ -42,7 +42,7 @@ function AS:Blizzard_Talent(event, addon)
 				select(i, PlayerTalentFramePetSpecialization:GetRegions()):Hide()
 			end
 
-			for i=1, PlayerTalentFramePetSpecialization:GetNumChildren() do
+			for i = 1, PlayerTalentFramePetSpecialization:GetNumChildren() do
 				local child = select(i, PlayerTalentFramePetSpecialization:GetChildren())
 				if child and not child:GetName() then
 					child:DisableDrawLayer("OVERLAY")
