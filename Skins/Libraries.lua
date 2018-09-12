@@ -206,7 +206,7 @@ function AS:SkinLibraries()
 	end
 
 	local DBIcon = LibStub("LibDBIcon-1.0", true)
-	if DBIcon then
+	if DBIcon and DBIcon.tooltip then
 		DBIcon.tooltip:HookScript("OnShow", function(self) AS:SetTemplate(self, 'Transparent') end)
 	end
 
