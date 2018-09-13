@@ -36,8 +36,8 @@
 	<Script file="TalkingHead.lua"/>
 	<Script file="Taxi.lua"/>
 	<Script file="TimeManager.lua"/>
+	<Script file="Trade.lua"/>
 	<Script file="TradeSkill.lua"/>
-	<Script file="TradeWindow.lua"/>
 	<Script file="Trainer.lua"/>
 	<Script file="VoidStorage.lua"/>
 	<Script file="WorldMap.lua"/>

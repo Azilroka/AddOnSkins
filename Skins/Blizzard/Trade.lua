@@ -13,25 +13,24 @@ function AS:Blizzard_TradeWindow(event, addon)
 	AS:SkinEditBox(TradePlayerInputMoneyFrameSilver)
 	AS:SkinEditBox(TradePlayerInputMoneyFrameCopper)
 
-	local Insets = {
-		TradePlayerItemsInset,
-		TradeRecipientItemsInset,
-		TradePlayerEnchantInset,
-		TradeRecipientEnchantInset
-	}
+	AS:StripTextures(TradePlayerInputMoneyInset)
+	TradePlayerInputMoneyFrame:SetPoint('TOPLEFT', 8, -59)
+	TradePlayerItem1:SetPoint('TOPLEFT', 8, -89)
 
-	for _, Inset in pairs(Insets) do
+	for _, Inset in pairs({ TradePlayerItemsInset, TradeRecipientItemsInset, TradePlayerEnchantInset, TradeRecipientEnchantInset }) do
 		AS:SkinFrame(Inset)
 	end
 
-	AS:StripTextures(TradePlayerInputMoneyInset)
-	TradePlayerInputMoneyFrame:SetPoint('TOPLEFT', 8, -59)
+	for _, Highlight in pairs({ TradeHighlightPlayer, TradeHighlightRecipient, TradeHighlightPlayerEnchant, TradeHighlightRecipientEnchant }) do
+		Highlight:StripTextures()
+	end
 
 	for _, Frame in pairs({"TradePlayerItem", "TradeRecipientItem"}) do
 		for i = 1, 7 do
 			local ItemBackground = _G[Frame..i]
 			local ItemButton = _G[Frame..i.."ItemButton"]
 			local ItemName = _G[Frame..i.."Name"]
+
 			AS:StripTextures(ItemBackground)
 			AS:SkinFrame(ItemButton)
 			AS:StyleButton(ItemButton)
@@ -39,23 +38,10 @@ function AS:Blizzard_TradeWindow(event, addon)
 			AS:SkinTexture(ItemButton.icon)
 			ItemButton.icon:SetInside()
 			AS:CreateBackdrop(ItemButton)
-			ItemButton.Backdrop:SetBackdropColor(0,0,0,0)
-			ItemButton.Backdrop:SetPoint("TOPLEFT", _G[Frame..i.."ItemButton"], "TOPRIGHT", 4, 0)
+			ItemButton.Backdrop:SetBackdropColor(0, 0, 0, 0)
+			ItemButton.Backdrop:SetPoint("TOPLEFT", ItemButton, "TOPRIGHT", 4, 0)
 			ItemButton.Backdrop:SetPoint("BOTTOMRIGHT", _G[Frame..i.."NameFrame"], "BOTTOMRIGHT", -1, 14)
 		end
-	end
-
-	TradePlayerItem1:SetPoint('TOPLEFT', 8, -89)
-
-	local Highlights = {
-		'TradeHighlightPlayer',
-		'TradeHighlightRecipient',
-		'TradeHighlightPlayerEnchant',
-		'TradeHighlightRecipientEnchant',
-	}
-
-	for _, Highlight in pairs(Highlights) do
-		_G[Highlight]:StripTextures()
 	end
 
 	hooksecurefunc('TradeFrame_SetAcceptState', function(playerState, targetState)
@@ -83,8 +69,8 @@ function AS:Blizzard_TradeWindow(event, addon)
 		local Link = GetTradePlayerItemLink(id)
 		if Link then
 			local Quality = select(3, GetItemInfo(Link))
-			if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then
-				tradeItem:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+			if Quality and Quality > 1 then
+				tradeItem:SetBackdropBorderColor(GetItemQualityColor(Quality))
 			end
 		end
 	end)
@@ -95,8 +81,8 @@ function AS:Blizzard_TradeWindow(event, addon)
 		local Link = GetTradeTargetItemLink(id)
 		if Link then
 			local Quality = select(3, GetItemInfo(Link))
-			if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then
-				tradeItem:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
+			if Quality and Quality > 1 then
+				tradeItem:SetBackdropBorderColor(GetItemQualityColor(Quality))
 			end
 		end
 	end)
