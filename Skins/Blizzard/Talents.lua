@@ -245,7 +245,7 @@ function AS:Blizzard_Talent(event, addon)
 		PvpTalentFrame.TalentList:SetPoint("BOTTOMLEFT", PlayerTalentFrame, "BOTTOMRIGHT", 5, 26)
 
 		PlayerTalentFrameTalents.PvpTalentFrame.TalentList.CloseButton = AS:FindChildFrameBySize(PlayerTalentFrameTalents.PvpTalentFrame.TalentList, 'Button', 100, 22)
-		if CloseButton then
+		if PlayerTalentFrameTalents.PvpTalentFrame.TalentList.CloseButton then
 			AS:SkinButton(PlayerTalentFrameTalents.PvpTalentFrame.TalentList.CloseButton, true)
 		end
 
