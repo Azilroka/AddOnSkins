@@ -46,7 +46,7 @@ function AS:Blizzard_WorldMap()
 		end
 	end
 
-	for frame, _ in pairs({ 'MoneyFrame', 'HonorFrame', 'XPFrame', 'SpellFrame', 'SkillPointFrame' }) do
+	for _, frame in pairs({ 'MoneyFrame', 'HonorFrame', 'XPFrame', 'SpellFrame', 'SkillPointFrame' }) do
 		HandleReward(MapQuestInfoRewardsFrame[frame])
 	end
 
