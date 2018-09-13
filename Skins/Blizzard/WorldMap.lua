@@ -28,38 +28,25 @@ function AS:Blizzard_WorldMap()
 	AS:SkinFrame(QuestMapFrame.QuestsFrame.StoryTooltip)
 	AS:StripTextures(QuestMapFrame.DetailsFrame.CompleteQuestFrame)
 
-	for _, Button in pairs({ WorldMapFrameSizeDownButton, WorldMapFrameSizeUpButton }) do
-		AS:SkinButton(Button, true)
-		Button:SetSize(16, 16)
-		Button.Text = Button:CreateFontString(nil, 'OVERLAY')
-		Button.Text:SetFont('Interface\\AddOns\\AddOnSkins\\Media\\Fonts\\Arial.ttf', 12)
-		Button.Text:SetPoint('CENTER', Button)
-	end
-
-	local rewardFrames = {
-		['MoneyFrame'] = true,
-		['HonorFrame'] = true,
-		['XPFrame'] = true,
-		['SpellFrame'] = true,
-		['SkillPointFrame'] = true,
-	}
-
 	local function HandleReward(frame)
-		if (not frame or frame.isSkinned) then return end
-		frame.NameFrame:SetAlpha(0)
-		AS:SkinTexture(frame.Icon)
+		if (not frame or frame.Backdrop) then return end
 		AS:CreateBackdrop(frame)
 		frame.Backdrop:SetOutside(frame.Icon)
+
+		AS:SkinTexture(frame.Icon)
+
 		frame.Count:ClearAllPoints()
 		frame.Count:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, 0)
+
+		frame.NameFrame:SetAlpha(0)
+
 		if (frame.CircleBackground) then
 			frame.CircleBackground:SetAlpha(0)
 			frame.CircleBackgroundGlow:SetAlpha(0)
 		end
-		frame.isSkinned = true
 	end
 
-	for frame, _ in pairs(rewardFrames) do
+	for frame, _ in pairs({ 'MoneyFrame', 'HonorFrame', 'XPFrame', 'SpellFrame', 'SkillPointFrame' }) do
 		HandleReward(MapQuestInfoRewardsFrame[frame])
 	end
 

@@ -130,6 +130,8 @@ function AS:Blizzard_Talent(event, addon)
 							AS:SkinTexture(frame.icon)
 							frame.icon:SetSize(40, 40)
 						end
+
+						frame.subText:SetTextColor(1, 1, 0)
 					end
 
 					index = index + 1
