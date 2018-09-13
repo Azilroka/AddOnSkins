@@ -23,9 +23,7 @@ function AS:Blizzard_Talent(event, addon)
 			AS:SkinTab(_G["PlayerTalentFrameTab"..i])
 		end
 
-		for Frame, isPet in pairs({ PlayerTalentFrameSpecialization = false, PlayerTalentFramePetSpecialization = true }) do
-			Frame = _G[Frame]
-
+		for _, Frame in pairs({ PlayerTalentFrameSpecialization, PlayerTalentFramePetSpecialization }) do
 			AS:StripTextures(Frame, true)
 
 			for _, Child in pairs({Frame:GetChildren()}) do
@@ -36,7 +34,7 @@ function AS:Blizzard_Talent(event, addon)
 
 			for i = 1, 4 do
 				local Button = Frame['specButton'..i]
-				local _, _, _, icon = GetSpecializationInfo(i, false, isPet)
+				local _, _, _, icon = GetSpecializationInfo(i, false, Frame.isPet)
 
 				_G["PlayerTalentFrameSpecializationSpecButton"..i.."Glow"]:Kill()
 
@@ -188,11 +186,17 @@ function AS:Blizzard_Talent(event, addon)
 			end
 		end
 
-		hooksecurefunc("TalentFrame_Update", function()
+		hooksecurefunc("TalentFrame_Update", function(self)
 			for i = 1, MAX_TALENT_TIERS do
 				for j = 1, NUM_TALENT_COLUMNS do
-					local Talent = PlayerTalentFrameTalents['tier'..i]['talent'..j]
-					Talent:GetScript('OnLeave')(Talent)
+					local Talent = self['tier'..i]['talent'..j]
+					if Talent.knownSelection:IsShown() then
+						Talent.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
+						Talent.Border:SetBackdropBorderColor(unpack(AS.Color))
+					else
+						Talent.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+						Talent.Border:SetBackdropBorderColor(unpack(AS.BorderColor))
+					end
 				end
 			end
 		end)
