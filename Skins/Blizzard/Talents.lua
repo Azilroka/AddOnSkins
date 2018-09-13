@@ -244,10 +244,7 @@ function AS:Blizzard_Talent(event, addon)
 
 		PvpTalentFrame.TalentList:SetPoint("BOTTOMLEFT", PlayerTalentFrame, "BOTTOMRIGHT", 5, 26)
 
-		PlayerTalentFrameTalents.PvpTalentFrame.TalentList.CloseButton = AS:FindChildFrameBySize(PlayerTalentFrameTalents.PvpTalentFrame.TalentList, 'Button', 100, 22)
-		if PlayerTalentFrameTalents.PvpTalentFrame.TalentList.CloseButton then
-			AS:SkinButton(PlayerTalentFrameTalents.PvpTalentFrame.TalentList.CloseButton, true)
-		end
+		AS:SkinButton(AS:FindChildFrameBySize(PlayerTalentFrameTalents.PvpTalentFrame.TalentList, 'Button', 100, 22), true)
 
 		for _, Button in pairs(PvpTalentFrame.TalentList.ScrollFrame.buttons) do
 			Button:DisableDrawLayer("BACKGROUND")
