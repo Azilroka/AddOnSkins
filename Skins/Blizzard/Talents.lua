@@ -18,7 +18,6 @@ function AS:Blizzard_Talent(event, addon)
 		AS:SkinButton(PlayerTalentFrameActivateButton, true)
 		AS:SkinButton(PlayerTalentFrameSpecializationLearnButton, true)
 
-
 		for i = 1, NUM_TALENT_FRAME_TABS do
 			AS:SkinTab(_G["PlayerTalentFrameTab"..i])
 		end
@@ -245,7 +244,10 @@ function AS:Blizzard_Talent(event, addon)
 
 		PvpTalentFrame.TalentList:SetPoint("BOTTOMLEFT", PlayerTalentFrame, "BOTTOMRIGHT", 5, 26)
 
-		AS:SkinButton(AS:FindChildFrameBySize(PlayerTalentFrameTalents.PvpTalentFrame.TalentList, 'Button', 100, 22), true)
+		PlayerTalentFrameTalents.PvpTalentFrame.TalentList.CloseButton = AS:FindChildFrameBySize(PlayerTalentFrameTalents.PvpTalentFrame.TalentList, 'Button', 100, 22)
+		if CloseButton then
+			AS:SkinButton(PlayerTalentFrameTalents.PvpTalentFrame.TalentList.CloseButton, true)
+		end
 
 		for _, Button in pairs(PvpTalentFrame.TalentList.ScrollFrame.buttons) do
 			Button:DisableDrawLayer("BACKGROUND")
