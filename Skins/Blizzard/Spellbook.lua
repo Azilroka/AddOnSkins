@@ -59,8 +59,6 @@ function AS:Blizzard_Spellbook()
 	for i = 1, 8 do
 		local Tab = _G["SpellBookSkillLineTab"..i]
 		AS:SkinFrame(Tab)
-		AS:SkinTexture(Tab:GetNormalTexture())
-		Tab:GetNormalTexture():SetInside()
 
 		Tab:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor)) end)
 		Tab:HookScript("OnLeave", function(self) if self:GetChecked() then self:SetBackdropBorderColor(1, 1, 0) else self:SetBackdropBorderColor(unpack(AS.BorderColor)) end end)
@@ -73,6 +71,14 @@ function AS:Blizzard_Spellbook()
 			end
 		end)
 	end
+
+	hooksecurefunc("SpellBookFrame_UpdateSkillLineTabs", function()
+		for i = 1, 8 do
+			local Tab = _G["SpellBookSkillLineTab"..i]
+			AS:SkinTexture(Tab:GetNormalTexture())
+			Tab:GetNormalTexture():SetInside()
+		end
+	end)
 
 	-- Professions
 
