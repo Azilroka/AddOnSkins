@@ -49,22 +49,19 @@ function AS:Blizzard_Talent(event, addon)
 				AS:SkinTexture(Button.specIcon)
 				Button:SetHighlightTexture(nil)
 
-				Button.specIcon.border = CreateFrame("Frame", nil, Button)
-				Button.specIcon.border:SetOutside(Button.specIcon)
-				AS:SetTemplate(Button.specIcon.border)
-				Button.specIcon.border:SetBackdropColor(0, 0, 0, 0)
+				AS:CreateBackdrop(Button.specIcon)
 
 				Button:HookScript('OnEnter', function(self)
 					self.Backdrop:SetBackdropBorderColor(1, .82, 0)
-					self.specIcon.border:SetBackdropBorderColor(1, .82, 0)
+					self.specIcon.Backdrop:SetBackdropBorderColor(1, .82, 0)
 				end)
 				Button:HookScript('OnLeave', function(self)
 					if self.selected then
 						self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
-						self.specIcon.border:SetBackdropBorderColor(unpack(AS.Color))
+						self.specIcon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 					else
 						self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-						self.specIcon.border:SetBackdropBorderColor(unpack(AS.BorderColor))
+						self.specIcon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 					end
 				end)
 			end
@@ -103,10 +100,10 @@ function AS:Blizzard_Talent(event, addon)
 				local Button = self['specButton'..i]
 				if Button.selected then
 					Button.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
-					Button.specIcon.border:SetBackdropBorderColor(unpack(AS.Color))
+					Button.specIcon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 				else
 					Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-					Button.specIcon.border:SetBackdropBorderColor(unpack(AS.BorderColor))
+					Button.specIcon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 				end
 			end
 
@@ -120,14 +117,11 @@ function AS:Blizzard_Talent(event, addon)
 							frame.icon:SetTexture(spellTex)
 						end
 
-						if not frame.Backdrop then
-							AS:CreateBackdrop(frame)
-							frame.Backdrop:SetOutside(frame.icon)
-							frame.ring:Hide()
-							AS:SkinTexture(frame.icon)
-							frame.icon:SetSize(40, 40)
-						end
+						AS:CreateBackdrop(frame.icon)
+						AS:SkinTexture(frame.icon)
 
+						frame.ring:Hide()
+						frame.icon:SetSize(40, 40)
 						frame.subText:SetTextColor(1, 1, 0)
 					end
 
@@ -149,7 +143,9 @@ function AS:Blizzard_Talent(event, addon)
 
 				AS:SkinBackdropFrame(Button)
 				AS:CreateShadow(Button.Backdrop, true)
+
 				Button.Backdrop.Shadow:SetBackdropBorderColor(unpack(AS.Color))
+
 				Button.GlowFrame.TopGlowLine = Button.Backdrop.Shadow
 				Button.GlowFrame.TopGlowLine:Hide()
 				Button.GlowFrame.BottomGlowLine:Kill()
@@ -161,25 +157,26 @@ function AS:Blizzard_Talent(event, addon)
 				Button.Backdrop:SetPoint("TOPLEFT", 15, -1)
 				Button.Backdrop:SetPoint("BOTTOMRIGHT", -10, 1)
 
-				Button.Border = CreateFrame("Frame", nil, Button)
-				AS:SkinFrame(Button.Border)
 				Button.knownSelection:SetAlpha(0)
-				Button.Border:SetBackdropColor(0, 0, 0, 0)
-				Button.Border:SetOutside(Button.icon)
+
+				AS:CreateBackdrop(Button.icon)
+				AS:SkinTexture(Button.icon)
+
 				Button.icon:SetSize(32, 32)
 				Button.icon:SetDrawLayer("ARTWORK")
-				AS:SkinTexture(Button.icon)
+
 				Button:HookScript('OnEnter', function(self)
 					self.Backdrop:SetBackdropBorderColor(1, .82, 0)
-					self.Border:SetBackdropBorderColor(1, .82, 0)
+					self.icon.Backdrop:SetBackdropBorderColor(1, .82, 0)
 				end)
+
 				Button:HookScript('OnLeave', function(self)
 					if self.knownSelection:IsShown() then
 						self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
-						self.Border:SetBackdropBorderColor(unpack(AS.Color))
+						self.icon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 					else
 						self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-						self.Border:SetBackdropBorderColor(unpack(AS.BorderColor))
+						self.icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 					end
 				end)
 			end
@@ -191,10 +188,10 @@ function AS:Blizzard_Talent(event, addon)
 					local Talent = self['tier'..i]['talent'..j]
 					if Talent.knownSelection:IsShown() then
 						Talent.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
-						Talent.Border:SetBackdropBorderColor(unpack(AS.Color))
+						Talent.icon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 					else
 						Talent.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-						Talent.Border:SetBackdropBorderColor(unpack(AS.BorderColor))
+						Talent.icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 					end
 				end
 			end
@@ -204,8 +201,7 @@ function AS:Blizzard_Talent(event, addon)
 		AS:StripTextures(PvpTalentFrame)
 
 		for _, Button in pairs(PvpTalentFrame.Slots) do
-			AS:CreateBackdrop(Button)
-			Button.Backdrop:SetOutside(Button.Texture)
+			AS:CreateBackdrop(Button.Texture)
 
 			Button.Arrow:SetAlpha(0)
 			Button.Border:Hide()
@@ -220,16 +216,16 @@ function AS:Blizzard_Talent(event, addon)
 					AS:SkinTexture(self.Texture)
 					if (not slotInfo.selectedTalentID) then
 						self.Texture:SetTexture([[Interface\Icons\INV_Misc_QuestionMark]])
-						self.Backdrop:SetBackdropBorderColor(1, 1, 0, 1)
+						self.Texture.Backdrop:SetBackdropBorderColor(1, 1, 0, 1)
 					else
-						self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+						self.Texture.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 					end
 				else
 					self.Texture:SetTexture([[Interface\PetBattles\PetBattle-LockIcon]])
 					self.Texture:SetTexCoord(0, 1, 0, 1)
 					self.Texture:SetDesaturated(true)
 					self.Texture:Show()
-					self.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
+					self.Texture.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
 				end
 			end)
 		end

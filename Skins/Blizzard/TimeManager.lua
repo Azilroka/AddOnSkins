@@ -2,6 +2,8 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_TimeManager(event, addon)
 	if addon == "Blizzard_TimeManager" or IsAddOnLoaded('Blizzard_TimeManager') then
+		AS:UnregisterSkinEvent('Blizzard_TimeManager', 'ADDON_LOADED')
+
 		AS:SkinFrame(TimeManagerFrame)
 
 		AS:StripTextures(TimeManagerFrameInset)
@@ -32,11 +34,12 @@ function AS:Blizzard_TimeManager(event, addon)
 
 		AS:StripTextures(StopwatchTabFrame)
 		AS:SkinCloseButton(StopwatchCloseButton)
+
 		AS:SkinNextPrevButton(StopwatchPlayPauseButton)
 		AS:SkinNextPrevButton(StopwatchResetButton)
+
 		StopwatchPlayPauseButton:SetPoint("RIGHT", StopwatchResetButton, "LEFT", -4, 0)
 		StopwatchResetButton:SetPoint("BOTTOMRIGHT", StopwatchFrame, "BOTTOMRIGHT", -4, 6)
-		AS:UnregisterSkinEvent('Blizzard_TimeManager', 'ADDON_LOADED')
 	end
 end
 

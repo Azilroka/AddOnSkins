@@ -31,7 +31,6 @@ function AS:Blizzard_TradeSkill(event, addon)
 		AS:StripTextures(TradeSkillFrame.RecipeList.UnlearnedTab)
 
 		AS:SkinScrollBar(TradeSkillFrame)
-		AS:SkinScrollBar(TradeSkillFrame.RecipeList.scrollBar)
 
 		AS:StripTextures(TradeSkillFrame.DetailsFrame)
 
@@ -59,25 +58,20 @@ function AS:Blizzard_TradeSkill(event, addon)
 
 		hooksecurefunc(TradeSkillFrame.DetailsFrame, "RefreshDisplay", function(self)
 			AS:StyleButton(self.Contents.ResultIcon)
+			AS:SetTemplate(self.Contents.ResultIcon)
+
 			if self.Contents.ResultIcon:GetNormalTexture() then
 				AS:SkinTexture(self.Contents.ResultIcon:GetNormalTexture())
 				self.Contents.ResultIcon:GetNormalTexture():SetInside()
 			end
+
 			self.Contents.ResultIcon.ResultBorder:SetTexture("")
 			self.Contents.ResultIcon.IconBorder:SetTexture("")
-			AS:SetTemplate(self.Contents.ResultIcon)
 			self.Contents.ResultIcon:SetBackdropBorderColor(self.Contents.ResultIcon.IconBorder:GetVertexColor())
 
 			for _, Button in pairs(self.Contents.Reagents) do
-				if not Button.Icon.Backdrop then
-					Button.Icon.Backdrop = CreateFrame("Frame", nil, Button)
-					Button.Icon.Backdrop:SetFrameLevel(Button:GetFrameLevel() - 1)
-					AS:SetTemplate(Button.Icon.Backdrop)
-					Button.Icon.Backdrop:SetOutside(Button.Icon)
-				end
-
+				AS:CreateBackdrop(Button.Icon)
 				AS:SkinTexture(Button.Icon)
-
 				Button.NameFrame:SetTexture("")
 			end
 		end)

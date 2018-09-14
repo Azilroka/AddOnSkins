@@ -43,7 +43,7 @@ function AS:Blizzard_VoidStorage(event, addon)
 			Button.icon:SetInside()
 			Button.IconBorder:SetAlpha(0)
 			hooksecurefunc(Button.IconBorder, 'SetVertexColor', function(self, r, g, b) Button:SetBackdropBorderColor(r, g, b) end)
-			hooksecurefunc(Button.IconBorder, 'Hide', function(self, r, g, b) Button:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+			hooksecurefunc(Button.IconBorder, 'Hide', function(self) Button:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 		end
 	end
 
