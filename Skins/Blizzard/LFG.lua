@@ -357,33 +357,27 @@ function AS:Blizzard_PVPUI(_, addon)
 	end
 
 	hooksecurefunc('PVPUIFrame_ConfigureRewardFrame', function(rewardFrame, honor, experience, itemRewards, currencyRewards)
-		local itemID, currencyID
-		local rewardTexture, rewardQuaility;
+		local rewardTexture, rewardQuaility = nil, 1
 
 		if currencyRewards then
 			for _, reward in ipairs(currencyRewards) do
 				local name, _, texture, _, _, _, _, quality = GetCurrencyInfo(reward.id);
 				if quality == LE_ITEM_QUALITY_ARTIFACT then
-					name, texture, _, quality = CurrencyContainerUtil.GetCurrencyContainerInfo(reward.id, reward.quantity, name, texture, quality);
-					currencyID = reward.id;
-					rewardTexture = texture
-					rewardQuaility = quality
+					_, rewardTexture, _, rewardQuaility = CurrencyContainerUtil.GetCurrencyContainerInfo(reward.id, reward.quantity, name, texture, quality);
 				end
 			end
 		end
 
-		if not currencyID and itemRewards then
+		if not rewardTexture and itemRewards then
 			local reward = itemRewards[1];
 			if reward then
-				itemID = reward.id;
-				rewardTexture = select(10, GetItemInfo(itemID))
-				rewardQuaility = select(3, GetItemInfo(itemID))
+				_, _, rewardQuaility, _, _, _, _, _, _, rewardTexture = GetItemInfo(reward.id)
 			end
 		end
 
-		if currencyID or itemID then
+		if rewardTexture then
 			rewardFrame.Icon:SetTexture(rewardTexture)
-			rewardFrame.Icon.Backdrop:SetBackdropBorderColor(GetItemQualityColor(rewardQuaility or 1))
+			rewardFrame.Icon.Backdrop:SetBackdropBorderColor(GetItemQualityColor(rewardQuaility))
 		end
 	end)
 
