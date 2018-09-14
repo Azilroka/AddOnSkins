@@ -552,7 +552,7 @@ function AS:SkinScrollBar(Frame)
 		end
 	end
 
-	local Thumb = Frame:GetName() and _G[Frame:GetName().."ThumbTexture"] and Frame.GetThumbTexture and Frame:GetThumbTexture() or Frame.thumbTexture
+	local Thumb = Frame:GetName() and _G[Frame:GetName().."ThumbTexture"] or Frame.GetThumbTexture and Frame:GetThumbTexture() or Frame.thumbTexture
 	if Thumb and not Frame.ThumbBG then
 		Thumb:SetTexture('')
 		Frame.ThumbBG = CreateFrame("Frame", nil, Frame)
