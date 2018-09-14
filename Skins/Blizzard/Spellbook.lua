@@ -2,11 +2,16 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Spellbook()
 	AS:SkinFrame(SpellBookFrame, nil, nil, true)
-	AS:SkinCloseButton(SpellBookFrameCloseButton)
-	AS:StripTextures(SpellBookFrameInset)
+	AS:SkinCloseButton(SpellBookFrame.CloseButton)
+	AS:StripTextures(SpellBookFrame.Inset)
 
-	SpellBookPageText:SetTextColor(0.6, 0.6, 0.6)
+	for i = 1, 5 do
+		AS:SkinTab(_G["SpellBookFrameTabButton"..i])
+	end
+
+	SpellBookPageText:SetTextColor(1, 1, 1)
 	SpellBookPageText:SetPoint("BOTTOMRIGHT", -100, 32)
+
 	AS:SkinNextPrevButton(SpellBookPrevPageButton)
 	AS:SkinNextPrevButton(SpellBookNextPageButton)
 
@@ -17,161 +22,106 @@ function AS:Blizzard_Spellbook()
 		local Button = _G["SpellButton"..i]
 		local Icon = _G["SpellButton"..i.."IconTexture"]
 
-		Button.EmptySlot:SetTexture(nil)
-		Button.TextBackground:SetTexture(nil)
-		Button.TextBackground2:SetTexture(nil)
-		Button.IconTextureBg:SetTexture(nil)
-		Button:SetCheckedTexture(nil)
-		Button:SetPushedTexture(nil)
-		hooksecurefunc(Button, 'SetChecked', function(self, checked)
-			if checked then
-				self:SetBackdropBorderColor(1, 1, 0)
-			else
-				self:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end
-		end)
-		_G["SpellButton"..i..'SlotFrame']:SetTexture(nil)
-		Button.UnlearnedFrame:SetTexture(nil)
-		Button.TrainFrame:SetTexture(nil)
-		Button.TrainTextBackground:SetTexture(nil)
-
-		AS:SkinFrame(Button, nil, true)
-		Button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
-		Button:GetHighlightTexture():SetInside()
-		Button.cooldown:SetInside()
+		AS:SkinFrame(Button)
 		AS:SkinTexture(Icon)
 		Icon:SetInside()
+
+		Button:SetCheckedTexture('')
+		Button:SetPushedTexture('')
+		Button:SetHighlightTexture('')
+
+		Button.cooldown:SetInside()
+
+		Button.AutoCastShine = CreateFrame('Frame', '$parentShine', Button, 'AutoCastShineTemplate')
+		Button.AutoCastShine:SetAllPoints()
+
+		for _, sparks in pairs(Button.AutoCastShine.sparkles) do
+			sparks:SetSize(sparks:GetWidth() * 2, sparks:GetHeight() * 2)
+		end
+
+		hooksecurefunc(Button.SpellHighlightTexture, 'SetShown', function(self, value)
+			if value == true then
+				AutoCastShine_AutoCastStart(Button.AutoCastShine, unpack(AS.Color))
+			end
+		end)
+		hooksecurefunc(Button.SpellHighlightTexture, 'Hide', function() AutoCastShine_AutoCastStop(Button.AutoCastShine) end)
 	end
 
 	hooksecurefunc("SpellButton_UpdateButton", function()
 		for i = 1, SPELLS_PER_PAGE do
 			local Button = _G["SpellButton"..i]
-			Button.SpellName:SetPoint("LEFT", Button, "RIGHT", 8, 10)
-			if Button.SpellName:GetTextColor() < 0.8 then
-				Button.SpellName:SetTextColor(0.6, 0.6, 0.6)
-			end
+			Button.SpellName:SetTextColor(1, 1, 1)
 			Button.SpellSubName:SetTextColor(0.6, 0.6, 0.6)
 			Button.RequiredLevelString:SetTextColor(0.6, 0.6, 0.6)
-			Button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
-			Button:GetHighlightTexture():SetInside()
 		end
 	end)
 
-	-- Skill Line Tabs
-
-	hooksecurefunc('SpellBookFrame_UpdateSkillLineTabs', function()
-		local NumSkillLineTabs = GetNumSpellTabs()
-		for i = 1, MAX_SKILLLINE_TABS do
-			local Tab = _G["SpellBookSkillLineTab"..i]
-			if ( i <= NumSkillLineTabs and SpellBookFrame.bookType == BOOKTYPE_SPELL ) then
-				if Tab and not Tab.isSkinned then
-					AS:SkinFrame(Tab)
-					AS:StyleButton(Tab)
-
-					local Texture = select(2, GetSpellTabInfo(i))
-					Tab:SetNormalTexture(Texture)
-					if Tab:GetNormalTexture() then
-						Tab:GetNormalTexture():SetInside()
-						AS:SkinTexture(Tab:GetNormalTexture())
-					end
-
-					local point, relatedTo, point2, x, y = Tab:GetPoint()
-					Tab:SetPoint(point, relatedTo, point2, 1, y)
-					Tab.isSkinned = true
-				end
-			end
-		end
-	end)
-
-	SpellBookFrame_UpdateSkillLineTabs()
-
-	-- Profession Tab
-	local ProfessionButtons = {
-		PrimaryProfession1SpellButtonTop,
-		PrimaryProfession1SpellButtonBottom,
-		PrimaryProfession2SpellButtonTop,
-		PrimaryProfession2SpellButtonBottom,
-		SecondaryProfession1SpellButtonLeft,
-		SecondaryProfession1SpellButtonRight,
-		SecondaryProfession2SpellButtonLeft,
-		SecondaryProfession2SpellButtonRight,
-		SecondaryProfession3SpellButtonLeft,
-		SecondaryProfession3SpellButtonRight,
-		SecondaryProfession4SpellButtonLeft,
-		SecondaryProfession4SpellButtonRight
-	}
-
-	local ProfessionHeaders = {
-		PrimaryProfession1,
-		PrimaryProfession2,
-		SecondaryProfession1,
-		SecondaryProfession2,
-		SecondaryProfession3,
-		SecondaryProfession4
-	}
-
-	for _, Header in pairs(ProfessionHeaders) do
-		Header.missingHeader:SetTextColor(1, 0.8, 0)
-		Header.missingHeader:SetShadowColor(0, 0, 0)
-		Header.missingHeader:SetShadowOffset(1, -1)
-		Header.missingText:SetTextColor(0.6, 0.6, 0.6)
-	end
-
-	for _, Button in pairs(ProfessionButtons) do
-		AS:SkinFrame(Button)
-		AS:SkinTexture(Button.iconTexture)
-		Button.iconTexture:SetInside()
-	end
-
-	hooksecurefunc('SpellBook_UpdateProfTab', function()
-		for _, Button in pairs(ProfessionButtons) do
-			Button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
-			Button:GetHighlightTexture():SetInside()
-		end
-	end)
-
-	local ProfessionStatusBars = {
-		PrimaryProfession1StatusBar,
-		PrimaryProfession2StatusBar,
-		SecondaryProfession1StatusBar,
-		SecondaryProfession2StatusBar,
-		SecondaryProfession3StatusBar,
-		SecondaryProfession4StatusBar
-	}
-
-	for _, StatusBar in pairs(ProfessionStatusBars) do
-		AS:SkinStatusBar(StatusBar)
-		StatusBar:SetStatusBarColor(0, .8, 0)
-		StatusBar.rankText:ClearAllPoints()
-		StatusBar.rankText:SetPoint("CENTER")
-	end
-
-	-- Bottom Tabs
-	for i = 1, 5 do
-		AS:SkinTab(_G["SpellBookFrameTabButton"..i])
-	end
-
-	SpellBookFrameTabButton1:ClearAllPoints()
-	SpellBookFrameTabButton1:SetPoint("TOPLEFT", SpellBookFrame, "BOTTOMLEFT", -5, 2)
-
-	if not AS:CheckAddOn('ElvUI') then
-		hooksecurefunc('SharedActionButton_RefreshSpellHighlight', function(self, shown)
-			if shown then
-				self.SpellHighlightTexture:Hide()
-				self.SpellHighlightAnim:Stop()
-				if not self.AutoCastShine.Resized then
-					for _, sparks in pairs(self.AutoCastShine.sparkles) do
-						sparks:SetSize(sparks:GetWidth() * 2, sparks:GetHeight() * 2)
-					end
-					self.AutoCastShine.Resized = true
-				end
-				self.AutoCastShine:Show()
-				AutoCastShine_AutoCastStart(self.AutoCastShine, 1, .82, 0)
+	for i = 1, 8 do
+		local Tab = _G["SpellBookSkillLineTab"..i]
+		AS:SkinFrame(Tab)
+		AS:SkinTexture(Tab:GetNormalTexture())
+		Tab:GetNormalTexture():SetInside()
+		hooksecurefunc(Tab, 'SetChecked', function(self, value)
+			if value == true then
+				self:SetBackdropBorderColor(1, 1, 0)
 			else
-				AutoCastShine_AutoCastStop(self.AutoCastShine)
+				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		end)
 	end
+
+	-- Professions
+
+	for _, Button in pairs({ PrimaryProfession1, PrimaryProfession2, SecondaryProfession1, SecondaryProfession2, SecondaryProfession3 }) do
+		Button.professionName:SetTextColor(1, 1, 1)
+		Button.missingHeader:SetTextColor(1, 1, 1)
+		Button.missingText:SetTextColor(1, 1, 1)
+
+		AS:SkinStatusBar(Button.statusBar, true)
+		Button.statusBar.Backdrop:SetOutside(Button.statusBar, 1, 1)
+		Button.statusBar.rankText:SetPoint("CENTER")
+
+		Button.statusBar:SetPoint("TOPLEFT", "$parentRank", "BOTTOMLEFT", 1, -3)
+	end
+
+	for i = 1, 2 do
+		local Button = _G["PrimaryProfession"..i]
+		_G["PrimaryProfession"..i.."IconBorder"]:Hide()
+
+		Button.professionName:SetPoint("TOPLEFT", 100, -4)
+
+		AS:CreateBackdrop(Button.icon)
+		AS:SkinTexture(Button.icon)
+
+		Button.icon:SetAlpha(1)
+		Button.icon:SetDesaturated(false)
+	end
+
+	for _, Button in pairs({ PrimaryProfession1SpellButtonTop, PrimaryProfession1SpellButtonBottom, PrimaryProfession2SpellButtonTop, PrimaryProfession2SpellButtonBottom, SecondaryProfession1SpellButtonLeft, SecondaryProfession1SpellButtonRight, SecondaryProfession2SpellButtonLeft, SecondaryProfession2SpellButtonRight, SecondaryProfession3SpellButtonLeft, SecondaryProfession3SpellButtonRight }) do
+		AS:SkinFrame(Button)
+
+		if Button.iconTexture then
+			AS:SkinTexture(Button.iconTexture)
+			Button.iconTexture:SetInside()
+		end
+	end
+
+	hooksecurefunc("FormatProfession", function(frame, index)
+		if index then
+			local _, texture = GetProfessionInfo(index)
+
+			if frame.icon and texture then
+				frame.icon:SetTexture(texture)
+			end
+		end
+	end)
+
+	hooksecurefunc("UpdateProfessionButton", function(self)
+		self.spellString:SetTextColor(1, 1, 1);
+		self.subSpellString:SetTextColor(1, 1, 1)
+	end)
+
+	SpellBookFrameTabButton1:SetPoint("TOPLEFT", SpellBookFrame, "BOTTOMLEFT", -5, 2)
 end
 
 AS:RegisterSkin('Blizzard_Spellbook', AS.Blizzard_Spellbook)
