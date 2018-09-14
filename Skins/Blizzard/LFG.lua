@@ -383,7 +383,7 @@ function AS:Blizzard_PVPUI(_, addon)
 
 		if currencyID or itemID then
 			rewardFrame.Icon:SetTexture(rewardTexture)
-			rewardFrame.Icon.Backdrop:SetBackdropBorderColor(GetItemQualityColor(rewardQuaility))
+			rewardFrame.Icon.Backdrop:SetBackdropBorderColor(GetItemQualityColor(rewardQuaility or 1))
 		end
 	end)
 
