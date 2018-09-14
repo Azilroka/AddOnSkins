@@ -335,10 +335,19 @@ function AS:Blizzard_PVPUI(_, addon)
 		AS:SkinButton(Button)
 		Button.SelectedTexture:SetTexture('')
 		Button.SelectedTexture:Hide()
-		Button:SetScript('OnEnter', function(self)
+
+		AS:StripTextures(Button.Reward)
+		AS:SkinTexture(Button.Reward.Icon)
+		AS:CreateBackdrop(Button.Reward.Icon)
+
+		AS:StripTextures(Button.Reward.EnlistmentBonus)
+		AS:SkinTexture(Button.Reward.EnlistmentBonus.Icon)
+		AS:CreateBackdrop(Button.Reward.EnlistmentBonus.Icon)
+
+		Button:HookScript('OnEnter', function(self)
 			self:SetBackdropBorderColor(1, .82, 0)
 		end)
-		Button:SetScript('OnLeave', function(self)
+		Button:HookScript('OnLeave', function(self)
 			if self.SelectedTexture:IsShown() then
 				self:SetBackdropBorderColor(unpack(AS.Color))
 			else
@@ -346,6 +355,37 @@ function AS:Blizzard_PVPUI(_, addon)
 			end
 		end)
 	end
+
+	hooksecurefunc('PVPUIFrame_ConfigureRewardFrame', function(rewardFrame, honor, experience, itemRewards, currencyRewards)
+		local itemID, currencyID
+		local rewardTexture, rewardQuaility;
+
+		if currencyRewards then
+			for _, reward in ipairs(currencyRewards) do
+				local name, _, texture, _, _, _, _, quality = GetCurrencyInfo(reward.id);
+				if quality == LE_ITEM_QUALITY_ARTIFACT then
+					name, texture, _, quality = CurrencyContainerUtil.GetCurrencyContainerInfo(reward.id, reward.quantity, name, texture, quality);
+					currencyID = reward.id;
+					rewardTexture = texture
+					rewardQuaility = quality
+				end
+			end
+		end
+
+		if not currencyID and itemRewards then
+			local reward = itemRewards[1];
+			if reward then
+				itemID = reward.id;
+				rewardTexture = select(10, GetItemInfo(itemID))
+				rewardQuaility = select(3, GetItemInfo(itemID))
+			end
+		end
+
+		if currencyID or itemID then
+			rewardFrame.Icon:SetTexture(rewardTexture)
+			rewardFrame.Icon.Backdrop:SetBackdropBorderColor(GetItemQualityColor(rewardQuaility))
+		end
+	end)
 
 	for _, func in pairs({ 'ConquestFrame_UpdateJoinButton', 'HonorFrame_UpdateQueueButtons' }) do
 		hooksecurefunc(func, function()
