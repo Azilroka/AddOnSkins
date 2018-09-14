@@ -279,211 +279,131 @@ AS:RegisterSkin("Blizzard_ChallengesUI", AS.Blizzard_ChallengesUI, 'ADDON_LOADED
 
 function AS:Blizzard_PVPUI(_, addon)
 	if addon ~= "Blizzard_PVPUI" then return end
+
 	AS:StripTextures(PVPUIFrame)
-
-	hooksecurefunc('PVPHonorXPBar_SetNextAvailable', function(self)
-		self:StripTextures()
-
-		if self.Bar and not self.Bar.Backdrop then
-			AS:CreateBackdrop(self.Bar, "Default")
-			if self.Bar.Spark then
-				self.Bar.Spark:SetAlpha(0)
-			end
-			if self.Bar.OverlayFrame and self.Bar.OverlayFrame.Text then
-				self.Bar.OverlayFrame.Text:ClearAllPoints()
-				self.Bar.OverlayFrame.Text:Point("CENTER", self.Bar)
-			end
-		end
-
-		if self.PrestigeReward and self.PrestigeReward.Accept then
-			self.PrestigeReward.Accept:ClearAllPoints()
-			self.PrestigeReward.Accept:SetPoint("TOP", self.PrestigeReward, "BOTTOM", 0, 0)
-			if not self.PrestigeReward.Accept.template then
-				AS:SkinButton(self.PrestigeReward.Accept)
-			end
-		end
-
-		if self.NextAvailable then
-			if self.Bar then
-				self.NextAvailable:ClearAllPoints()
-				self.NextAvailable:SetPoint("LEFT", self.Bar, "RIGHT", 0, -2)
-			end
-
-			if not self.NextAvailable.Backdrop then
-				self.NextAvailable:StripTextures()
-				AS:CreateBackdrop(self.NextAvailable)
-				if self.NextAvailable.Icon then
-					self.NextAvailable.Backdrop:SetPoint("TOPLEFT", self.NextAvailable.Icon, AS:AdjustForPixelPerfect(-2), AS:AdjustForPixelPerfect(2))
-					self.NextAvailable.Backdrop:SetPoint("BOTTOMRIGHT", self.NextAvailable.Icon, AS:AdjustForPixelPerfect(2), AS:AdjustForPixelPerfect(-2))
-				end
-			end
-
-			if self.NextAvailable.Icon then
-				self.NextAvailable.Icon:SetDrawLayer("ARTWORK")
-				self.NextAvailable.Icon:SetTexCoord(unpack(AS.TexCoords))
-			end
-		end
-	end)
-
-	AS:SkinCheckBox(HonorFrame.DPSIcon.checkButton, true)
-	AS:SkinCheckBox(HonorFrame.TankIcon.checkButton, true)
-	AS:SkinCheckBox(HonorFrame.HealerIcon.checkButton, true)
+	AS:StripTextures(PVPQueueFrame.HonorInset)
 
 	for i = 1, 3 do
 		local Button = PVPQueueFrame['CategoryButton'..i]
-		AS:SkinFrame(Button, nil, true)
+		AS:SkinBackdropFrame(Button, nil, true)
 		Button.Background:SetTexture('')
 		Button.Ring:SetTexture('')
 		Button.Icon:SetSize(45, 45)
 		AS:SkinTexture(Button.Icon)
-		AS:CreateBackdrop(Button)
-		Button.Backdrop:SetOutside(Button.Icon)
-		Button.Backdrop:SetFrameLevel(Button:GetFrameLevel())
+		AS:CreateBackdrop(Button.Icon)
 		Button:SetHighlightTexture('')
 		Button:HookScript('OnEnter', function(self)
-			self:SetBackdropBorderColor(1, .82, 0)
 			self.Backdrop:SetBackdropBorderColor(1, .82, 0)
+			self.Icon.Backdrop:SetBackdropBorderColor(1, .82, 0)
 		end)
-		Button:HookScript('OnLeave', function(self) 
+		Button:HookScript('OnLeave', function(self)
 			if self:GetID() == self.isSelected then
-				self:SetBackdropBorderColor(unpack(AS.Color))
 				self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
+				self.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 			else
-				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+				self.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		end)
 	end
 
-	PVPQueueFrame.CategoryButton1.Icon:SetTexture("Interface\\Icons\\achievement_bg_winwsg")
-	PVPQueueFrame.CategoryButton2.Icon:SetTexture("Interface\\Icons\\achievement_bg_killxenemies_generalsroom")
-	PVPQueueFrame.CategoryButton3.Icon:SetTexture("Interface\\Icons\\ability_warrior_offensivestance")
-
 	hooksecurefunc('PVPQueueFrame_SelectButton', function(index)
 		for i = 1, 3 do
 			local Button = PVPQueueFrame["CategoryButton"..i]
+			Button.isSelected = index
 			if ( i == index ) then
-				Button:SetBackdropBorderColor(unpack(AS.Color))
 				Button.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
-				Button.isSelected = i
+				Button.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 			else
-				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
 				Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-				Button.isSelected = 0
+				Button.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		end
 	end)
 
 	AS:SkinDropDownBox(HonorFrameTypeDropDown)
 
-	AS:StripTextures(HonorFrame.Inset)
-
 	AS:SkinScrollBar(HonorFrameSpecificFrameScrollBar)
 	AS:SkinButton(HonorFrameQueueButton, true)
 	AS:StripTextures(HonorFrame.BonusFrame)
 	AS:StripTextures(HonorFrame.BonusFrame.ShadowOverlay)
 
-	AS:SkinStatusBar(HonorFrame.ConquestBar)
-	if (AS.Faction == "Alliance") then
-		HonorFrame.ConquestBar:SetStatusBarColor(0.05, 0.15, 0.36)
-	else
-		HonorFrame.ConquestBar:SetStatusBarColor(0.63, 0.09, 0.09)
-	end
-	HonorFrame.ConquestBar.Reward:SetPoint("LEFT", HonorFrame.ConquestBar, "RIGHT", -8, 0)
+	local Buttons = { ['RandomBGButton'] = HonorFrame.BonusFrame, ['RandomEpicBGButton'] = HonorFrame.BonusFrame, ['Arena1Button'] = HonorFrame.BonusFrame, ['BrawlButton'] = HonorFrame.BonusFrame, ['RatedBG'] = ConquestFrame, ['Arena2v2'] = ConquestFrame, ['Arena3v3'] = ConquestFrame }
 
-	hooksecurefunc(HonorFrame.ConquestBar.Reward.Icon, 'SetTexture', function(self) -- Code taken from :GetConquestLevelInfo the function isn't returning the correct id somehow.
-		local Quality
-		for _, questID in ipairs(C_QuestLine.GetQuestLineQuests(782)) do
-			if not IsQuestFlaggedCompleted(questID) and not C_QuestLog.IsOnQuest(questID) then
-				break;
-			end
-			if HaveQuestRewardData(questID) then
-				local itemID = select(6, GetQuestLogRewardInfo(1, questID))
-				Quality = select(3, GetItemInfo(itemID))
-			else
-				C_TaskQuest.RequestPreloadRewardData(questID) -- Taken from WorldMapFrame
-			end
-		end
-		if Quality then
-			self.Backdrop:SetBackdropBorderColor(GetItemQualityColor(Quality))
-		else
-			self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-		end
-	end)
-
-	HonorFrame.ConquestBar.Reward.Ring:Hide()
-	HonorFrame.ConquestBar.Reward.CircleMask:Hide()
-	AS:SkinTexture(HonorFrame.ConquestBar.Reward.Icon)
-	AS:CreateBackdrop(HonorFrame.ConquestBar.Reward.Icon)
-
-	AS:StripTextures(ConquestFrame.Inset)
-
-	for _, Section in pairs({ 'RandomBGButton', 'RandomEpicBGButton', 'Arena1Button', 'BrawlButton' }) do
-		local Button = HonorFrame.BonusFrame[Section]
-		AS:StripTextures(Button)
+	for Section, Parent in pairs(Buttons) do
+		local Button = Parent[Section]
 		AS:SkinButton(Button)
-		Button:HookScript('OnEnter', function(self)
+		Button.SelectedTexture:SetTexture('')
+		Button.SelectedTexture:Hide()
+		Button:SetScript('OnEnter', function(self)
 			self:SetBackdropBorderColor(1, .82, 0)
 		end)
-		Button:HookScript('OnLeave', function(self)
+		Button:SetScript('OnLeave', function(self)
 			if self.SelectedTexture:IsShown() then
 				self:SetBackdropBorderColor(unpack(AS.Color))
 			else
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		end)
-		Button.SelectedTexture:SetTexture('')
 	end
 
-	hooksecurefunc('HonorFrame_UpdateQueueButtons', function()
-		for _, Section in pairs({ 'RandomBGButton', 'RandomEpicBGButton', 'Arena1Button', 'BrawlButton' }) do
-			local Button = HonorFrame.BonusFrame[Section]
-			if Button.SelectedTexture:IsShown() then
-				Button:SetBackdropBorderColor(unpack(AS.Color))
-			else
-				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+	for _, func in pairs({ 'ConquestFrame_UpdateJoinButton', 'HonorFrame_UpdateQueueButtons' }) do
+		hooksecurefunc(func, function()
+			for Section, Parent in pairs(Buttons) do
+				local Button = Parent[Section]
+				if Button.SelectedTexture:IsShown() then
+					Button:SetBackdropBorderColor(unpack(AS.Color))
+				else
+					Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end
 			end
-		end
-	end)
+		end)
+	end
 
-	AS:StripTextures(ConquestFrame)
-	AS:StripTextures(ConquestFrame.ShadowOverlay)
+	PVPQueueFrame.CategoryButton1.Icon:SetTexture([[Interface\Icons\achievement_bg_winwsg]])
+	PVPQueueFrame.CategoryButton2.Icon:SetTexture([[Interface\Icons\achievement_bg_killxenemies_generalsroom]])
+	PVPQueueFrame.CategoryButton3.Icon:SetTexture([[Interface\Icons\ability_warrior_offensivestance]])
+
 	AS:SkinButton(ConquestJoinButton, true)
+	AS:StripTextures(ConquestFrame.ShadowOverlay)
 	AS:SkinFrame(ConquestTooltip)
 
-	AS:SkinCheckBox(ConquestFrame.DPSIcon.checkButton, true)
-	AS:SkinCheckBox(ConquestFrame.TankIcon.checkButton, true)
-	AS:SkinCheckBox(ConquestFrame.HealerIcon.checkButton, true)
+	for _, Frame in pairs({ HonorFrame, ConquestFrame }) do
+		AS:StripTextures(Frame)
+		AS:StripTextures(Frame.Inset)
 
-	for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3'}) do
-		local Button = ConquestFrame[Section]
-		AS:StripTextures(Button)
-		AS:SkinButton(Button)
-		Button:HookScript('OnEnter', function(self)
-			self:SetBackdropBorderColor(1, .82, 0)
-		end)
-		Button:HookScript('OnLeave', function(self)
-			if self.SelectedTexture:IsShown() then
-				self:SetBackdropBorderColor(unpack(AS.Color))
+		AS:SkinCheckBox(Frame.DPSIcon.checkButton, true)
+		AS:SkinCheckBox(Frame.TankIcon.checkButton, true)
+		AS:SkinCheckBox(Frame.HealerIcon.checkButton, true)
+
+		AS:SkinStatusBar(Frame.ConquestBar)
+		Frame.ConquestBar.Reward.Ring:Hide()
+		Frame.ConquestBar.Reward.CircleMask:Hide()
+		AS:SkinTexture(Frame.ConquestBar.Reward.Icon)
+		AS:CreateBackdrop(Frame.ConquestBar.Reward.Icon)
+		Frame.ConquestBar.Reward:SetPoint("LEFT", Frame.ConquestBar, "RIGHT", -8, 0)
+		Frame.ConquestBar:SetStatusBarColor(unpack(AS.Faction == "Alliance" and {0.05, 0.15, 0.36} or {0.63, 0.09, 0.09}))
+
+		hooksecurefunc(Frame.ConquestBar.Reward.Icon, 'SetTexture', function(self) -- Code taken from :GetConquestLevelInfo the function isn't returning the correct id somehow.
+			local Quality
+			for _, questID in ipairs(C_QuestLine.GetQuestLineQuests(782)) do
+				if not IsQuestFlaggedCompleted(questID) and not C_QuestLog.IsOnQuest(questID) then
+					break;
+				end
+				if HaveQuestRewardData(questID) then
+					local itemID = select(6, GetQuestLogRewardInfo(1, questID))
+					Quality = select(3, GetItemInfo(itemID))
+				else
+					C_TaskQuest.RequestPreloadRewardData(questID) -- Taken from WorldMapFrame
+				end
+			end
+			if Quality then
+				self.Backdrop:SetBackdropBorderColor(GetItemQualityColor(Quality))
 			else
-				self:SetBackdropBorderColor(unpack(AS.BorderColor))
+				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		end)
-		Button.SelectedTexture:SetTexture('')
 	end
-
-	hooksecurefunc('ConquestFrame_UpdateJoinButton', function()
-		for _, Section in pairs({ 'RatedBG', 'Arena2v2', 'Arena3v3'}) do
-			local Button = ConquestFrame[Section]
-			if Button.SelectedTexture:IsShown() then
-				Button:SetBackdropBorderColor(unpack(AS.Color))
-			else
-				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end
-		end
-	end)
-
-	AS:StripTextures(PVPQueueFrame.HonorInset)
 end
 
 
