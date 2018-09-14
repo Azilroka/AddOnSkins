@@ -75,8 +75,10 @@ function AS:Blizzard_Spellbook()
 	hooksecurefunc("SpellBookFrame_UpdateSkillLineTabs", function()
 		for i = 1, 8 do
 			local Tab = _G["SpellBookSkillLineTab"..i]
-			AS:SkinTexture(Tab:GetNormalTexture())
-			Tab:GetNormalTexture():SetInside()
+			if Tab:GetNormalTexture() then
+				AS:SkinTexture(Tab:GetNormalTexture())
+				Tab:GetNormalTexture():SetInside()
+			end
 		end
 	end)
 
