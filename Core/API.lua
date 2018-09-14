@@ -77,14 +77,17 @@ end
 
 function AS:CreateBackdrop(Frame, Template, UseTexture, TextureFile)
 	if Frame.Backdrop then return end
+
 	if not Template then Template = AS:CheckOption('SkinTemplate') end
 
-	local Backdrop = CreateFrame("Frame", nil, Frame)
-	Backdrop:SetOutside()
+	local Parent = Frame:IsObjectType('Texture') and Frame:GetParent() or Frame
+
+	local Backdrop = CreateFrame("Frame", nil, Parent)
+	Backdrop:SetOutside(Frame)
 	AS:SetTemplate(Backdrop, Template, UseTexture, TextureFile)
 
-	if Frame:GetFrameLevel() - 1 >= 0 then
-		Backdrop:SetFrameLevel(Frame:GetFrameLevel() - 1)
+	if (Parent:GetFrameLevel() - 1) >= 0 then
+		Backdrop:SetFrameLevel(Parent:GetFrameLevel() - 1)
 	else
 		Backdrop:SetFrameLevel(0)
 	end
@@ -116,6 +119,15 @@ local BlizzardRegions = {
 	'LeftDisabled',
 	'MiddleDisabled',
 	'RightDisabled',
+	'TopLeft',
+	'TopRight',
+	'BottomLeft',
+	'BottomRight',
+	'TopMiddle',
+	'MiddleLeft',
+	'MiddleRight',
+	'BottomMiddle',
+	'MiddleMiddle',
 }
 
 function AS:SkinButton(Button, Strip)
@@ -538,31 +550,26 @@ function AS:SkinScrollBar(Frame)
 			Frame.TrackBG:Point("BOTTOMRIGHT", ScrollDownButton, "TOPRIGHT", 0, 1)
 			AS:SetTemplate(Frame.TrackBG, "Transparent")
 		end
+	end
 
-		if Frame:GetThumbTexture() then
-			Frame:GetThumbTexture():SetTexture(nil)
-			if not Frame.ThumbBG then
-				Frame.ThumbBG = CreateFrame("Frame", nil, Frame)
-				Frame.ThumbBG:SetPoint("TOPLEFT", Frame:GetThumbTexture(), "TOPLEFT", 2, -3)
-				Frame.ThumbBG:SetPoint("BOTTOMRIGHT", Frame:GetThumbTexture(), "BOTTOMRIGHT", -2, 3)
-				AS:SetTemplate(Frame.ThumbBG, "Default")
-				Frame.ThumbBG:HookScript('OnEnter', function(self)
-					self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor))
-				end)
-				Frame.ThumbBG:HookScript('OnLeave', function(self)
-					self:SetBackdropBorderColor(unpack(AS.BorderColor))
-				end)
+	local Thumb = Frame:GetName() and _G[Frame:GetName().."ThumbTexture"] and Frame.GetThumbTexture and Frame:GetThumbTexture() or Frame.thumbTexture
+	if Thumb and not Frame.ThumbBG then
+		Thumb:SetTexture('')
+		Frame.ThumbBG = CreateFrame("Frame", nil, Frame)
+		Frame.ThumbBG:SetPoint("TOPLEFT", Thumb, "TOPLEFT", 2, -3)
+		Frame.ThumbBG:SetPoint("BOTTOMRIGHT", Thumb, "BOTTOMRIGHT", -2, 3)
+		AS:SetTemplate(Frame.ThumbBG)
+		Frame.ThumbBG:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor)) end)
+		Frame.ThumbBG:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
-				if AS:CheckAddOn('ElvUI') then
-					Frame.ThumbBG:SetBackdropColor(0.6, 0.6, 0.6)
-				else
-					Frame.ThumbBG:SetBackdropColor(unpack(AS.BorderColor))
-				end
+		if AS:CheckAddOn('ElvUI') then
+			Frame.ThumbBG:SetBackdropColor(0.6, 0.6, 0.6)
+		else
+			Frame.ThumbBG:SetBackdropColor(unpack(AS.BorderColor))
+		end
 
-				if Frame.ThumbBG then
-					Frame.ThumbBG:SetFrameLevel(Frame.TrackBG:GetFrameLevel())
-				end
-			end
+		if Frame.ThumbBG and Frame.TrackBG then
+			Frame.ThumbBG:SetFrameLevel(Frame.TrackBG:GetFrameLevel())
 		end
 	end
 end
@@ -733,10 +740,13 @@ function AS:SkinTitleBar(frame, template, override, kill)
 end
 
 function AS:SkinStatusBar(frame, ClassColor)
+	local Color = { frame:GetStatusBarColor() }
 	AS:SkinBackdropFrame(frame)
 	frame:SetStatusBarTexture(AS.NormTex)
 	if ClassColor then
 		frame:SetStatusBarColor(unpack(AS.ClassColor))
+	else
+		frame:SetStatusBarColor(unpack(Color))
 	end
 	if AS:CheckAddOn('ElvUI') then
 		ElvUI[1]:RegisterStatusBar(frame)
