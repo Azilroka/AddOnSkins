@@ -2,6 +2,7 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Merchant()
 	AS:SkinFrame(MerchantFrame, nil, nil, true)
+	AS:SkinCloseButton(MerchantFrame.CloseButton)
 
 	AS:StripTextures(MerchantFrameInset)
 	AS:StripTextures(MerchantMoneyBg)
@@ -48,24 +49,19 @@ function AS:Blizzard_Merchant()
 	hooksecurefunc(MerchantBuyBackItem.ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b) MerchantBuyBackItem.ItemButton:SetBackdropBorderColor(r, g, b) end)
 	hooksecurefunc(MerchantBuyBackItem.ItemButton.IconBorder, 'Hide', function(self) MerchantBuyBackItem.ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
-	AS:StyleButton(MerchantRepairItemButton)
-	AS:SetTemplate(MerchantRepairItemButton, 'Default', true)
+	AS:SkinButton(MerchantRepairItemButton)
 	MerchantRepairItemButton:GetRegions():SetTexCoord(0.04, 0.24, 0.06, 0.5)
 	MerchantRepairItemButton:GetRegions():SetInside()
 
-	AS:StyleButton(MerchantGuildBankRepairButton)
-	AS:SetTemplate(MerchantGuildBankRepairButton, 'Default', true)
+	AS:SkinButton(MerchantGuildBankRepairButton)
 	MerchantGuildBankRepairButtonIcon:SetTexCoord(0.61, 0.82, 0.1, 0.52)
 	MerchantGuildBankRepairButtonIcon:SetInside()
 
-	AS:StyleButton(MerchantRepairAllButton)
-	AS:SetTemplate(MerchantRepairAllButton, 'Default', true)
+	AS:SkinButton(MerchantRepairAllButton)
 	MerchantRepairAllIcon:SetTexCoord(0.34, 0.1, 0.34, 0.535, 0.535, 0.1, 0.535, 0.535)
 	MerchantRepairAllIcon:SetInside()
 
-	-- Skin misc frames
 	MerchantFrame:SetWidth(345)
-	AS:SkinCloseButton(MerchantFrameCloseButton)
 	AS:SkinNextPrevButton(MerchantNextPageButton)
 	AS:SkinNextPrevButton(MerchantPrevPageButton)
 
