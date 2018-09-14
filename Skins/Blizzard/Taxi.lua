@@ -10,3 +10,20 @@ function AS:Blizzard_Taxi()
 end
 
 AS:RegisterSkin('Blizzard_Taxi', AS.Blizzard_Taxi)
+
+function AS:Blizzard_FlightMap(event, addon)
+	if addon ~= 'Blizzard_FlightMap' then return end
+	AS:UnregisterSkinEvent('Blizzard_FlightMap', 'ADDON_LOADED')
+
+	AS:StripTextures(FlightMapFrame)
+	AS:StripTextures(FlightMapFrame.BorderFrame)
+	AS:CreateBackdrop(FlightMapFrame.ScrollContainer)
+	FlightMapFrame.ScrollContainer.Backdrop:SetPoint('TOPLEFT', FlightMapFrame.ScrollContainer, 'TOPLEFT', -1, 0)
+	FlightMapFrame.BorderFrame.TitleText:SetText('')
+
+	AS:StripTextures(FlightMapFrame.BorderFrame)
+	AS:SkinCloseButton(FlightMapFrame.BorderFrame.CloseButton)
+	FlightMapFrame.BorderFrame.CloseButton:SetPoint("TOPRIGHT", 5, -14)
+end
+
+AS:RegisterSkin('Blizzard_FlightMap', AS.Blizzard_FlightMap, 'ADDON_LOADED')

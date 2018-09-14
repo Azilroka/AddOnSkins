@@ -3,72 +3,82 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_TradeSkill(event, addon)
 	if (addon == 'Blizzard_TradeSkillUI' and event == 'PLAYER_ENTERING_WORLD') or IsAddOnLoaded('Blizzard_TradeSkillUI') then
 		AS:UnregisterSkinEvent('Blizzard_TradeSkill', 'ADDON_LOADED')
-		TradeSkillFramePortrait:Kill()
+
 		AS:SkinFrame(TradeSkillFrame, nil, nil, true)
+
 		TradeSkillFrame:SetHeight(TradeSkillFrame:GetHeight() + 12)
+
 		AS:SkinStatusBar(TradeSkillFrame.RankFrame)
-		AS:SkinBackdropFrame(TradeSkillFrame.FilterButton, nil, nil, true)
-		TradeSkillFrame.FilterButton.Backdrop:SetAllPoints()
+
+		AS:SkinButton(TradeSkillFrame.FilterButton)
+
 		TradeSkillFrame.LinkToButton:GetNormalTexture():SetTexCoord(0.25, 0.7, 0.37, 0.75)
 		TradeSkillFrame.LinkToButton:GetPushedTexture():SetTexCoord(0.25, 0.7, 0.45, 0.8)
 		TradeSkillFrame.LinkToButton:GetHighlightTexture():Kill()
-		TradeSkillFrame.LinkToButton:CreateBackdrop("Default")
+		AS:CreateBackdrop(TradeSkillFrame.LinkToButton)
 		TradeSkillFrame.LinkToButton:SetSize(17, 14)
 		TradeSkillFrame.LinkToButton:SetPoint("BOTTOMRIGHT", TradeSkillFrame.FilterButton, "TOPRIGHT", -2, 4)
 
 		AS:SkinEditBox(TradeSkillFrame.SearchBox)
-		AS:SkinCloseButton(TradeSkillFrameCloseButton)
+		AS:SkinCloseButton(TradeSkillFrame.CloseButton)
 
-		-- RecipeList
-		AS:StripTextures(TradeSkillFrame.RecipeInset)
+		AS:SkinBackdropFrame(TradeSkillFrame.RecipeInset)
+		TradeSkillFrame.RecipeInset.Backdrop:SetFrameLevel(TradeSkillFrame.RecipeInset.Backdrop:GetFrameLevel() + 1)
+		TradeSkillFrame.RecipeInset.Backdrop:SetPoint("TOPLEFT", 0, -1)
+		TradeSkillFrame.RecipeInset.Backdrop:SetPoint("BOTTOMRIGHT", 0, -2)
+
 		AS:StripTextures(TradeSkillFrame.RecipeList.LearnedTab)
 		AS:StripTextures(TradeSkillFrame.RecipeList.UnlearnedTab)
 
-		-- DetailsFrame
+		AS:SkinScrollBar(TradeSkillFrame)
+		AS:SkinScrollBar(TradeSkillFrame.RecipeList.scrollBar)
+
 		AS:StripTextures(TradeSkillFrame.DetailsFrame)
-		AS:StripTextures(TradeSkillFrame.DetailsInset)
+
+		AS:SkinBackdropFrame(TradeSkillFrame.DetailsInset)
+		TradeSkillFrame.DetailsInset.Backdrop:SetFrameLevel(TradeSkillFrame.DetailsInset.Backdrop:GetFrameLevel() + 1)
+		TradeSkillFrame.DetailsInset.Backdrop:SetPoint("TOPLEFT", 4, -1)
+		TradeSkillFrame.DetailsInset.Backdrop:SetPoint("BOTTOMRIGHT", 1, 1)
+
+		AS:StripTextures(TradeSkillFrame.DetailsFrame.ScrollBar)
+		AS:SkinScrollBar(TradeSkillFrame.DetailsFrame.ScrollBar)
+
 		TradeSkillFrame.DetailsFrame.Background:Hide()
+
 		AS:SkinEditBox(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox)
+
 		TradeSkillFrame.DetailsFrame.CreateMultipleInputBox:DisableDrawLayer("BACKGROUND")
 
 		AS:SkinButton(TradeSkillFrame.DetailsFrame.CreateAllButton, true)
 		AS:SkinButton(TradeSkillFrame.DetailsFrame.CreateButton, true)
 		AS:SkinButton(TradeSkillFrame.DetailsFrame.ExitButton, true)
 
-		AS:SkinScrollBar(TradeSkillFrame.DetailsFrame.ScrollBar)
-
 		AS:SkinNextPrevButton(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.DecrementButton, nil, true)
 		AS:SkinNextPrevButton(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.IncrementButton)
 		TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.IncrementButton:SetPoint("LEFT", TradeSkillFrame.DetailsFrame.CreateMultipleInputBox, "RIGHT", 4, 0)
 
-		hooksecurefunc(TradeSkillFrame.DetailsFrame, "RefreshDisplay", function()
-			local ResultIcon = TradeSkillFrame.DetailsFrame.Contents.ResultIcon
-			ResultIcon:StyleButton()
-			if ResultIcon:GetNormalTexture() then
-				ResultIcon:GetNormalTexture():SetTexCoord(unpack(AS.TexCoords))
-				ResultIcon:GetNormalTexture():SetInside()
+		hooksecurefunc(TradeSkillFrame.DetailsFrame, "RefreshDisplay", function(self)
+			AS:StyleButton(self.Contents.ResultIcon)
+			if self.Contents.ResultIcon:GetNormalTexture() then
+				AS:SkinTexture(self.Contents.ResultIcon:GetNormalTexture())
+				self.Contents.ResultIcon:GetNormalTexture():SetInside()
 			end
-			ResultIcon:SetTemplate("Default")
+			self.Contents.ResultIcon.ResultBorder:SetTexture("")
+			self.Contents.ResultIcon.IconBorder:SetTexture("")
+			AS:SetTemplate(self.Contents.ResultIcon)
+			self.Contents.ResultIcon:SetBackdropBorderColor(self.Contents.ResultIcon.IconBorder:GetVertexColor())
 
-			for i = 1, #TradeSkillFrame.DetailsFrame.Contents.Reagents do
-				local Button = TradeSkillFrame.DetailsFrame.Contents.Reagents[i]
-				local Icon = Button.Icon
-				local Count = Button.Count
-
-				Icon:SetTexCoord(unpack(AS.TexCoords))
-				Icon:SetDrawLayer("OVERLAY")
-				if not Icon.Backdrop then
-					Icon.Backdrop = CreateFrame("Frame", nil, Button)
-					Icon.Backdrop:SetFrameLevel(Button:GetFrameLevel() - 1)
-					Icon.Backdrop:SetTemplate("Default")
-					Icon.Backdrop:SetOutside(Icon)
+			for _, Button in pairs(self.Contents.Reagents) do
+				if not Button.Icon.Backdrop then
+					Button.Icon.Backdrop = CreateFrame("Frame", nil, Button)
+					Button.Icon.Backdrop:SetFrameLevel(Button:GetFrameLevel() - 1)
+					AS:SetTemplate(Button.Icon.Backdrop)
+					Button.Icon.Backdrop:SetOutside(Button.Icon)
 				end
 
-				Icon:SetParent(Icon.Backdrop)
-				Count:SetParent(Icon.Backdrop)
-				Count:SetDrawLayer("OVERLAY")
+				AS:SkinTexture(Button.Icon)
 
-				Button.NameFrame:Kill()
+				Button.NameFrame:SetTexture("")
 			end
 		end)
 
