@@ -382,6 +382,40 @@ function AS:Blizzard_PVPUI(_, addon)
 	AS:SkinButton(HonorFrameQueueButton, true)
 	AS:StripTextures(HonorFrame.BonusFrame)
 	AS:StripTextures(HonorFrame.BonusFrame.ShadowOverlay)
+
+	AS:SkinStatusBar(HonorFrame.ConquestBar)
+	if (AS.Faction == "Alliance") then
+		HonorFrame.ConquestBar:SetStatusBarColor(0.05, 0.15, 0.36)
+	else
+		HonorFrame.ConquestBar:SetStatusBarColor(0.63, 0.09, 0.09)
+	end
+	HonorFrame.ConquestBar.Reward:SetPoint("LEFT", HonorFrame.ConquestBar, "RIGHT", -8, 0)
+
+	hooksecurefunc(HonorFrame.ConquestBar.Reward.Icon, 'SetTexture', function(self) -- Code taken from :GetConquestLevelInfo the function isn't returning the correct id somehow.
+		local Quality
+		for _, questID in ipairs(C_QuestLine.GetQuestLineQuests(782)) do
+			if not IsQuestFlaggedCompleted(questID) and not C_QuestLog.IsOnQuest(questID) then
+				break;
+			end
+			if HaveQuestRewardData(questID) then
+				local itemID = select(6, GetQuestLogRewardInfo(1, questID))
+				Quality = select(3, GetItemInfo(itemID))
+			else
+				C_TaskQuest.RequestPreloadRewardData(questID) -- Taken from WorldMapFrame
+			end
+		end
+		if Quality then
+			self.Backdrop:SetBackdropBorderColor(GetItemQualityColor(Quality))
+		else
+			self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+		end
+	end)
+
+	HonorFrame.ConquestBar.Reward.Ring:Hide()
+	HonorFrame.ConquestBar.Reward.CircleMask:Hide()
+	AS:SkinTexture(HonorFrame.ConquestBar.Reward.Icon)
+	AS:CreateBackdrop(HonorFrame.ConquestBar.Reward.Icon)
+
 	AS:StripTextures(ConquestFrame.Inset)
 
 	for _, Section in pairs({ 'RandomBGButton', 'RandomEpicBGButton', 'Arena1Button', 'BrawlButton' }) do
