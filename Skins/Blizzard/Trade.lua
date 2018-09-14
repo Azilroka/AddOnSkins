@@ -29,7 +29,6 @@ function AS:Blizzard_TradeWindow(event, addon)
 		for i = 1, 7 do
 			local ItemBackground = _G[Frame..i]
 			local ItemButton = _G[Frame..i.."ItemButton"]
-			local ItemName = _G[Frame..i.."Name"]
 
 			AS:StripTextures(ItemBackground)
 			AS:SkinFrame(ItemButton)

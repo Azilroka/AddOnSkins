@@ -22,13 +22,12 @@ function AS:Blizzard_Spellbook()
 		local Button = _G["SpellButton"..i]
 		local Icon = _G["SpellButton"..i.."IconTexture"]
 
-		AS:SkinFrame(Button)
+		AS:SkinButton(Button, true)
 		AS:SkinTexture(Icon)
 		Icon:SetInside()
 
 		Button:SetCheckedTexture('')
 		Button:SetPushedTexture('')
-		Button:SetHighlightTexture('')
 
 		Button.cooldown:SetInside()
 
@@ -50,6 +49,7 @@ function AS:Blizzard_Spellbook()
 	hooksecurefunc("SpellButton_UpdateButton", function()
 		for i = 1, SPELLS_PER_PAGE do
 			local Button = _G["SpellButton"..i]
+			Button:SetHighlightTexture('')
 			Button.SpellName:SetTextColor(1, 1, 1)
 			Button.SpellSubName:SetTextColor(0.6, 0.6, 0.6)
 			Button.RequiredLevelString:SetTextColor(0.6, 0.6, 0.6)
@@ -61,6 +61,10 @@ function AS:Blizzard_Spellbook()
 		AS:SkinFrame(Tab)
 		AS:SkinTexture(Tab:GetNormalTexture())
 		Tab:GetNormalTexture():SetInside()
+
+		Tab:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor)) end)
+		Tab:HookScript("OnLeave", function(self) if self:GetChecked() then self:SetBackdropBorderColor(1, 1, 0) else self:SetBackdropBorderColor(unpack(AS.BorderColor)) end end)
+
 		hooksecurefunc(Tab, 'SetChecked', function(self, value)
 			if value == true then
 				self:SetBackdropBorderColor(1, 1, 0)
@@ -98,7 +102,7 @@ function AS:Blizzard_Spellbook()
 	end
 
 	for _, Button in pairs({ PrimaryProfession1SpellButtonTop, PrimaryProfession1SpellButtonBottom, PrimaryProfession2SpellButtonTop, PrimaryProfession2SpellButtonBottom, SecondaryProfession1SpellButtonLeft, SecondaryProfession1SpellButtonRight, SecondaryProfession2SpellButtonLeft, SecondaryProfession2SpellButtonRight, SecondaryProfession3SpellButtonLeft, SecondaryProfession3SpellButtonRight }) do
-		AS:SkinFrame(Button)
+		AS:SkinButton(Button, true)
 
 		if Button.iconTexture then
 			AS:SkinTexture(Button.iconTexture)
@@ -117,6 +121,7 @@ function AS:Blizzard_Spellbook()
 	end)
 
 	hooksecurefunc("UpdateProfessionButton", function(self)
+		self:SetHighlightTexture('')
 		self.spellString:SetTextColor(1, 1, 1);
 		self.subSpellString:SetTextColor(1, 1, 1)
 	end)

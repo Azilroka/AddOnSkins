@@ -25,6 +25,7 @@ function AS:Blizzard_RaidUI(event, addon)
 		for i = 1, 40 do
 			AS:SkinFrame(_G["RaidGroupButton"..i], 'Default')
 		end
+
 		AS:UnregisterSkinEvent("Blizzard_RaidUI", 'ADDON_LOADED')
 	end
 end
