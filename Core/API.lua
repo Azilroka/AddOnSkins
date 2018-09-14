@@ -64,13 +64,8 @@ function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
 	Frame:SetBackdropColor(R, G, B, Alpha)
 end
 
-local Insets = {
-	'InsideBorder',
-	'OutsideBorder',
-}
-
 function AS:HideInset(Frame)
-	for _, Inset in pairs(Insets) do
+	for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
 		Frame[Inset]:Hide()
 	end
 end
@@ -95,14 +90,11 @@ function AS:CreateBackdrop(Frame, Template, UseTexture, TextureFile)
 	Frame.Backdrop = Backdrop
 end
 
-function AS:StripTextures(Object, Kill, Alpha)
+function AS:StripTextures(Object, Alpha)
 	for i = 1, Object:GetNumRegions() do
 		local Region = select(i, Object:GetRegions())
-		if Region and Region:GetObjectType() == "Texture" then
-			if Kill then
-				Region:Kill()
-				--Region:SetParent(AS.Hider)
-			elseif Alpha then
+		if Region and Region:IsObjectType("Texture") then
+			if Alpha then
 				Region:SetAlpha(0)
 			else
 				Region:SetTexture(nil)
@@ -135,6 +127,8 @@ function AS:SkinButton(Button, Strip)
 
 	local ButtonName = Button:GetName()
 
+	AS:SkinFrame(Button, nil, not Strip)
+
 	for _, Region in pairs(BlizzardRegions) do
 		if ButtonName and _G[ButtonName..Region] then
 			_G[ButtonName..Region]:SetAlpha(0)
@@ -149,19 +143,12 @@ function AS:SkinButton(Button, Strip)
 	if Button.SetPushedTexture then Button:SetPushedTexture("") end
 	if Button.SetDisabledTexture then Button:SetDisabledTexture("") end
 
-	AS:SkinFrame(Button, nil, not Strip)
-
 	if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
 		AS:SetTemplate(Button, 'Default', true)
 	end
 
-	Button:HookScript("OnEnter", function(self)
-		self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor))
-	end)
-
-	Button:HookScript("OnLeave", function(self)
-		self:SetBackdropBorderColor(unpack(AS.BorderColor))
-	end)
+	Button:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor)) end)
+	Button:HookScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
 	if Button.Flash then
 		Button.Flash:SetTexture(0, 0, 0, 0)
@@ -302,17 +289,13 @@ function AS:SkinEditBox(EditBox, Width, Height)
 	if EditBox.isSkinned then return end
 
 	local EditBoxName = EditBox:GetName()
-	if EditBoxName then
-		for _, Region in pairs(BlizzardRegions) do
-			if _G[EditBoxName..Region] then
-				_G[EditBoxName..Region]:Kill()
-			end
-		end
-	end
 
 	for _, Region in pairs(BlizzardRegions) do
+		if EditBoxName and _G[EditBoxName..Region] then
+			_G[EditBoxName..Region]:SetAlpha(0)
+		end
 		if EditBox[Region] then
-			EditBox[Region]:Kill()
+			EditBox[Region]:SetAlpha(0)
 		end
 	end
 
@@ -372,8 +355,7 @@ end
 
 function AS:SkinCheckBox(CheckBox)
 	if CheckBox.isSkinned then return end
-	AS:StripTextures(CheckBox)
-	AS:CreateBackdrop(CheckBox)
+	AS:SkinBackdropFrame(CheckBox)
 
 	if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
 		AS:SetTemplate(CheckBox.Backdrop, 'Default')
@@ -407,30 +389,24 @@ end
 
 function AS:SkinTab(Tab, Strip)
 	if Tab.isSkinned then return end
+
 	local TabName = Tab:GetName()
 
-	if TabName then
+	if Strip then
+		AS:StripTextures(Tab)
+	else
 		for _, Region in pairs(BlizzardRegions) do
-			if _G[TabName..Region] then
+			if TabName and _G[TabName..Region] then
 				_G[TabName..Region]:SetTexture(nil)
 			end
-		end
-	end
-
-	for _, Region in pairs(BlizzardRegions) do
-		if Tab[Region] then
-			Tab[Region]:SetAlpha(0)
+			if Tab[Region] then
+				Tab[Region]:SetAlpha(0)
+			end
 		end
 	end
 
 	if Tab.GetHighlightTexture and Tab:GetHighlightTexture() then
 		Tab:GetHighlightTexture():SetTexture(nil)
-	else
-		Strip = true
-	end
-
-	if Strip then
-		AS:StripTextures(Tab)
 	end
 
 	AS:CreateBackdrop(Tab)
@@ -553,23 +529,18 @@ function AS:SkinScrollBar(Frame)
 	end
 
 	local Thumb = Frame:GetName() and _G[Frame:GetName().."ThumbTexture"] or Frame.GetThumbTexture and Frame:GetThumbTexture() or Frame.thumbTexture
-	if Thumb and not Frame.ThumbBG then
+	if Thumb and not Thumb.Backdrop then
 		Thumb:SetTexture('')
-		Frame.ThumbBG = CreateFrame("Frame", nil, Frame)
-		Frame.ThumbBG:SetPoint("TOPLEFT", Thumb, "TOPLEFT", 2, -3)
-		Frame.ThumbBG:SetPoint("BOTTOMRIGHT", Thumb, "BOTTOMRIGHT", -2, 3)
-		AS:SetTemplate(Frame.ThumbBG)
-		Frame.ThumbBG:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor)) end)
-		Frame.ThumbBG:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+		AS:CreateBackdrop(Thumb)
+		Thumb.Backdrop:SetPoint("TOPLEFT", Thumb, "TOPLEFT", 2, -4)
+		Thumb.Backdrop:SetPoint("BOTTOMRIGHT", Thumb, "BOTTOMRIGHT", -2, 4)
+		Thumb.Backdrop:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor)) end)
+		Thumb.Backdrop:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
 		if AS:CheckAddOn('ElvUI') then
-			Frame.ThumbBG:SetBackdropColor(0.6, 0.6, 0.6)
+			Thumb.Backdrop:SetBackdropColor(0.6, 0.6, 0.6)
 		else
-			Frame.ThumbBG:SetBackdropColor(unpack(AS.BorderColor))
-		end
-
-		if Frame.ThumbBG and Frame.TrackBG then
-			Frame.ThumbBG:SetFrameLevel(Frame.TrackBG:GetFrameLevel())
+			Thumb.Backdrop:SetBackdropColor(unpack(AS.BorderColor))
 		end
 	end
 end
