@@ -182,7 +182,7 @@ function AS:BuildOptions()
 					BossModHeader = {
 						order = 0,
 						type = 'header',
-						name = AS:Color(ASL['BossMod Options']),
+						name = AS:GetColor(ASL['BossMod Options']),
 					},
 					DBMFont = {
 						type = 'select', dialogControl = 'LSM30_Font',
@@ -230,7 +230,7 @@ function AS:BuildOptions()
 					EmbedHeader = {
 						order = 0,
 						type = 'header',
-						name = AS:Color(ASL['Embed Settings']),
+						name = AS:GetColor(ASL['Embed Settings']),
 					},
 					desc = {
 						type = 'description',
@@ -394,7 +394,7 @@ function AS:BuildOptions()
 					MiscHeader = {
 						order = 0,
 						type = 'header',
-						name = AS:Color(MISCELLANEOUS),
+						name = AS:GetColor(MISCELLANEOUS),
 					},
 					SkinTemplate = {
 						name = ASL['Skin Template'],
@@ -441,7 +441,7 @@ function AS:BuildOptions()
 					FAQHeader = {
 						order = 0,
 						type = 'header',
-						name = AS:Color(ASL["FAQ's"]),
+						name = AS:GetColor(ASL["FAQ's"]),
 					},
 					question1 = {
 						type = 'description',
@@ -564,7 +564,7 @@ function AS:BuildOptions()
 		else
 			AS.Options.args.addons.args.description = {
 				type = 'header',
-				name = AS:Color(ASL['AddOn Skins']),
+				name = AS:GetColor(ASL['AddOn Skins']),
 				order = 0,
 			}
 			AS.Options.args.addons.args[skinName] = GenerateOptionTable(skinName, order)
@@ -575,7 +575,7 @@ function AS:BuildOptions()
 	if AS:CheckAddOn('ElvUI') then
 		AS.Options.args.blizzard.args.description = {
 			type = 'header',
-			name = AS:Color(ASL['Blizzard Skins']),
+			name = AS:GetColor(ASL['Blizzard Skins']),
 			order = 0,
 		}
 

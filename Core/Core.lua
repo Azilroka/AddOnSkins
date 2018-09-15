@@ -28,7 +28,7 @@ function AS:SetOption(optionName, value)
 	self.db[optionName] = value
 end
 
-function AS:Color(name)
+function AS:GetColor(name)
 	local color = '|cff1784d1%s|r'
 	return (color):format(name)
 end
