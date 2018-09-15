@@ -27,7 +27,7 @@ function AS:Skada()
 		skada:SetFrameLevel(5)
 		skada:SetBackdrop(nil)
 		if win.db.enabletitle then
-			AS:SkinTitleBar(skada.button, 'Default', true)
+			AS:SkinFrame(skada.button, 'Default')
 			local color = win.db.title.color
 			skada.button:SetBackdropColor(color.r, color.g, color.b, color.a or 1)
 		end

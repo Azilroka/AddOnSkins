@@ -45,7 +45,7 @@ function AS:ArkInventory()
 			bar.IsSkinned = true
 		end
 
-		bar:SetTemplate(AS:CheckOption('SkinTemplate'))
+		AS:SetTemplate(bar)
 
 		if ArkInventory.Global.Mode.Edit then
 			bar:SetBackdropBorderColor(1, 0, 0, 1)

@@ -368,7 +368,7 @@ function AS:Blizzard_Guild(event, addon)
 				local Button = _G["GuildBankColumn"..i.."Button"..x]
 				Button:SetNormalTexture("")
 				AS:StyleButton(Button)
-				AS:SetTemplate(Button, 'Default', true)
+				AS:SetTemplate(Button, 'Default')
 				Button.icon:SetInside()
 				AS:SkinTexture(Button.icon)
 				Button.IconBorder:SetAlpha(0)

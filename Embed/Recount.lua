@@ -16,7 +16,7 @@ function AS:Embed_Recount()
 
 	if AS:CheckOption('Recount') then
 		if _G.Recount_MainWindow.Backdrop then
-			_G.Recount_MainWindow.Backdrop:SetTemplate(AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+			AS:SetTemplate(_G.Recount_MainWindow.Backdrop, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
 			if AS:CheckOption('RecountBackdrop') then
 				_G.Recount_MainWindow.Backdrop:Show()
 			else

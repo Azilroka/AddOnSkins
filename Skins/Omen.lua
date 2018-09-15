@@ -10,7 +10,7 @@ function AS:Omen()
 	Omen.db.profile.TitleBar.UseSameBG = true
 
 	AS:SkinFrame(Omen.BarList, 'Default')
-	AS:SkinTitleBar(Omen.Title, 'Default')
+	AS:SkinFrame(Omen.Title, 'Default')
 	Omen.BarList.SetBackdrop = AS.Noop
 	Omen.BarList.SetBackdropColor = AS.Noop
 	Omen.BarList.SetBackdropBorderColor = AS.Noop

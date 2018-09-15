@@ -6,12 +6,9 @@ local strlower, strfind = strlower, strfind
 local CopyTable, tremove = CopyTable, tremove
 local EnumerateFrames = EnumerateFrames
 
-function AS:SetTemplate(Frame, Template, UseTexture, TextureFile)
-	local Texture = AS.Blank
-
-	if UseTexture then
-		Texture = TextureFile or AS.NormTex
-	end
+function AS:SetTemplate(Frame, Template, Texture)
+	Texture = Texture or AS.NormTex
+	Template = Template or AS:CheckOption('SkinTemplate')
 
 	if AS.PixelPerfect then
 		Frame:SetBackdrop({
@@ -70,16 +67,14 @@ function AS:HideInset(Frame)
 	end
 end
 
-function AS:CreateBackdrop(Frame, Template, UseTexture, TextureFile)
+function AS:CreateBackdrop(Frame, Template, Texture)
 	if Frame.Backdrop then return end
-
-	if not Template then Template = AS:CheckOption('SkinTemplate') end
 
 	local Parent = Frame:IsObjectType('Texture') and Frame:GetParent() or Frame
 
 	local Backdrop = CreateFrame("Frame", nil, Parent)
 	Backdrop:SetOutside(Frame)
-	AS:SetTemplate(Backdrop, Template, UseTexture, TextureFile)
+	AS:SetTemplate(Backdrop, Template, Texture)
 
 	if (Parent:GetFrameLevel() - 1) >= 0 then
 		Backdrop:SetFrameLevel(Parent:GetFrameLevel() - 1)
@@ -127,7 +122,7 @@ function AS:SkinButton(Button, Strip)
 
 	local ButtonName = Button:GetName()
 
-	AS:SkinFrame(Button, nil, not Strip)
+	AS:SkinFrame(Button, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil, not Strip)
 
 	for _, Region in pairs(BlizzardRegions) do
 		if ButtonName and _G[ButtonName..Region] then
@@ -143,31 +138,17 @@ function AS:SkinButton(Button, Strip)
 	if Button.SetPushedTexture then Button:SetPushedTexture("") end
 	if Button.SetDisabledTexture then Button:SetDisabledTexture("") end
 
-	if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
-		AS:SetTemplate(Button, 'Default', true)
-	end
-
-	Button:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor)) end)
+	Button:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
 	Button:HookScript("OnLeave", function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
 	if Button.Flash then
 		Button.Flash:SetTexture(0, 0, 0, 0)
-	--[[
+
 		AS:CreateBackdrop(Button)
-		Button.Backdrop:SetAllPoints()
 		Button.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
 		Button.Backdrop:SetBackdropColor(0, 0, 0, 0)
-		Button.Backdrop:SetFrameStrata(Button:GetFrameStrata())
-		Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 4)
 
-		Button.Backdrop:SetScript('OnUpdate', function(self)
-			if Button.Flash:IsShown() then
-				self:SetAlpha(Button.Flash:GetAlpha())
-			else
-				self:SetAlpha(0)
-			end
-		end)
-	]]
+		Button.Flash = Button.Backdrop
 	end
 end
 
@@ -249,7 +230,7 @@ function AS:StyleButton(Button)
 end
 
 function AS:SkinCloseButton(CloseButton, Reposition)
-	if CloseButton.isSkinned then return end
+	if CloseButton.Backdrop then return end
 
 	AS:SkinBackdropFrame(CloseButton)
 
@@ -261,7 +242,7 @@ function AS:SkinCloseButton(CloseButton, Reposition)
 	CloseButton:HookScript("OnEnter", function(self)
 		self.Text:SetTextColor(1, .2, .2)
 		if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
-			self.Backdrop:SetBackdropBorderColor(unpack(AS.ValueColor))
+			self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 		else
 			self.Backdrop:SetBackdropBorderColor(1, .2, .2)
 		end
@@ -281,12 +262,10 @@ function AS:SkinCloseButton(CloseButton, Reposition)
 	if Reposition then
 		CloseButton:Point("TOPRIGHT", Reposition, "TOPRIGHT", 2, 2)
 	end
-
-	CloseButton.isSkinned = true
 end
 
 function AS:SkinEditBox(EditBox, Width, Height)
-	if EditBox.isSkinned then return end
+	if EditBox.Backdrop then return end
 
 	local EditBoxName = EditBox:GetName()
 
@@ -299,14 +278,10 @@ function AS:SkinEditBox(EditBox, Width, Height)
 		end
 	end
 
-	AS:CreateBackdrop(EditBox)
+	AS:CreateBackdrop(EditBox, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 
 	if EditBox.SetTextInsets then
 		EditBox:SetTextInsets(1, 1, 3, 3)
-	end
-
-	if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
-		AS:SetTemplate(EditBox.Backdrop, 'Default')
 	end
 
 	if Width then EditBox:Width(Width) end
@@ -315,35 +290,53 @@ function AS:SkinEditBox(EditBox, Width, Height)
 	if EditBoxName and (EditBoxName:find("Silver") or EditBoxName:find("Copper")) then
 		EditBox.Backdrop:Point("BOTTOMRIGHT", -12, -2)
 	end
-
-	EditBox.isSkinned = true
 end
 
 function AS:SkinRadioButton(Button)
 	if Button.isSkinned then return end
 
-	Button:SetCheckedTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircleChecked")
-	Button:GetCheckedTexture():SetVertexColor(unpack(AS.Color))
-	Button:GetCheckedTexture():SetTexCoord(0, 1, 0, 1)
+	local InsideMask = Button:CreateMaskTexture()
+	InsideMask:SetTexture([[Interface\Minimap\UI-Minimap-Background]], "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
+	InsideMask:SetSize(10, 10)
+	InsideMask:SetPoint('CENTER')
 
-	Button:SetHighlightTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircleChecked")
-	Button:GetHighlightTexture():SetTexCoord(0, 1, 0, 1)
-	Button:GetHighlightTexture():SetVertexColor(unpack(AS.Color))
+	Button.InsideMask = InsideMask
 
-	Button:SetNormalTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircle")
-	Button:GetNormalTexture():SetOutside()
-	Button:GetNormalTexture():SetTexCoord(0, 1, 0, 1)
-	Button:GetNormalTexture():SetVertexColor(unpack(AS.BorderColor))
+	local OutsideMask = Button:CreateMaskTexture()
+	OutsideMask:SetTexture([[Interface\Minimap\UI-Minimap-Background]], "CLAMPTOBLACKADDITIVE", "CLAMPTOBLACKADDITIVE")
+	OutsideMask:SetSize(13, 13)
+	OutsideMask:SetPoint('CENTER')
+
+	Button.OutsideMask = OutsideMask
+
+	local Check, Highlight, Normal = Button:GetCheckedTexture(), Button:GetHighlightTexture(), Button:GetNormalTexture()
+
+	Check:SetVertexColor(unpack(AS.Color))
+	Check:SetTexCoord(0, 1, 0, 1)
+	Check:SetInside()
+	Check:AddMaskTexture(InsideMask)
+
+	Highlight:SetTexCoord(0, 1, 0, 1)
+	Highlight:SetVertexColor(unpack(AS.Color))
+	Highlight:AddMaskTexture(InsideMask)
+
+	Normal:SetOutside()
+	Normal:SetTexCoord(0, 1, 0, 1)
+	Normal:SetVertexColor(unpack(AS.BorderColor))
+	Normal:AddMaskTexture(OutsideMask)
+
+	Button:SetCheckedTexture(AS.NormTex)
+	Button:SetNormalTexture(AS.NormTex)
+	Button:SetHighlightTexture(AS.NormTex)
 
 	Button:HookScript("OnDisable", function(self)
 		if not self.SetDisabledTexture then return end
 
 		if self:GetChecked() then
-			self:SetDisabledTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircle")
+			self:SetDisabledTexture(AS.NormTex)
 			self:GetDisabledTexture():SetVertexColor(unpack(AS.Color))
 		else
-			self:SetDisabledTexture("Interface\\AddOns\\AddOnSkins\\Media\\Textures\\RadioCircle")
-			self:GetDisabledTexture():SetVertexColor(unpack(AS.BorderColor))
+			self:SetDisabledTexture('')
 		end
 	end)
 
@@ -355,11 +348,7 @@ end
 
 function AS:SkinCheckBox(CheckBox)
 	if CheckBox.isSkinned then return end
-	AS:SkinBackdropFrame(CheckBox)
-
-	if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
-		AS:SetTemplate(CheckBox.Backdrop, 'Default')
-	end
+	AS:SkinBackdropFrame(CheckBox, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 
 	CheckBox.Backdrop:SetInside(CheckBox, 4, 4)
 
@@ -411,7 +400,7 @@ function AS:SkinTab(Tab, Strip)
 
 	AS:CreateBackdrop(Tab)
 
-	if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
+	if AS:CheckOption('ElvUISkinModule', 'ElvUI') then
 		-- Check if ElvUI already provides the backdrop. Otherwise we have two backdrops (e.g. Auctionhouse)
 		if Tab.backdrop then
 			Tab.Backdrop:Hide()
@@ -440,107 +429,69 @@ local ScrollBarElements = {
 }
 
 function AS:SkinScrollBar(Frame)
-	local ScrollUpButton = Frame:GetName() and _G[Frame:GetName().."ScrollUpButton"] or Frame.ScrollUpButton or Frame.UpButton
-	local ScrollDownButton = Frame:GetName() and _G[Frame:GetName().."ScrollDownButton"] or Frame.ScrollDownButton or Frame.DownButton
+	local FrameName = Frame:GetName()
+	local ScrollUpButton = FrameName and _G[FrameName.."ScrollUpButton"] or Frame.ScrollUpButton or Frame.UpButton
+	local ScrollDownButton = FrameName and _G[FrameName.."ScrollDownButton"] or Frame.ScrollDownButton or Frame.DownButton
+	local Thumb = FrameName and _G[FrameName.."ThumbTexture"] or Frame.GetThumbTexture and Frame:GetThumbTexture() or Frame.thumbTexture
 
-	if ScrollUpButton and ScrollDownButton then
-		for _, object in pairs(ScrollBarElements) do
-			if Frame:GetName() and _G[Frame:GetName()..object] then
-				_G[Frame:GetName()..object]:SetTexture(nil)
-			end
-			if Frame[object] then
-				Frame[object]:SetTexture(nil)
-			end
+	for _, object in pairs(ScrollBarElements) do
+		if FrameName and _G[FrameName..object] then
+			_G[FrameName..object]:SetTexture(nil)
 		end
-
-		AS:StripTextures(ScrollUpButton)
-		AS:SetTemplate(ScrollUpButton, "Default", true)
-
-		AS:StripTextures(ScrollDownButton)
-		AS:SetTemplate(ScrollDownButton, "Default", true)
-
-		if not ScrollUpButton.Text then
-			ScrollUpButton.Text = ScrollUpButton:CreateFontString(nil, "OVERLAY")
-			ScrollUpButton.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\Arial.TTF]], 12)
-			ScrollUpButton.Text:SetText("▲")
-			ScrollUpButton.Text:SetPoint("CENTER", 0, 0)
-
-			ScrollUpButton:HookScript('OnShow', function(self)
-				if not self:IsEnabled() then
-					self.Text:SetTextColor(.3, .3, .3)
-				end
-			end)
-
-			ScrollUpButton:HookScript('OnDisable', function(self)
-				self.Text:SetTextColor(.3, .3, .3)
-			end)
-
-			ScrollUpButton:HookScript('OnEnable', function(self)
-				self.Text:SetTextColor(1, 1, 1)
-			end)
-
-			ScrollUpButton:HookScript('OnEnter', function(self)
-				self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor))
-				self.Text:SetTextColor(unpack(AS.ValueColor or AS.ClassColor))
-			end)
-			ScrollUpButton:HookScript('OnLeave', function(self)
-				self:SetBackdropBorderColor(unpack(AS.BorderColor))
-				self.Text:SetTextColor(1, 1, 1)
-			end)
-		end
-
-		if not ScrollDownButton.Text then
-			ScrollDownButton.Text = ScrollDownButton:CreateFontString(nil, "OVERLAY")
-			ScrollDownButton.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\Arial.TTF]], 12)
-			ScrollDownButton.Text:SetText("▼")
-			ScrollDownButton.Text:SetPoint("CENTER", 0, 0)
-
-			ScrollDownButton:HookScript('OnShow', function(self)
-				if not self:IsEnabled() then
-					self.Text:SetTextColor(.3, .3, .3)
-				end
-			end)
-
-			ScrollDownButton:HookScript('OnDisable', function(self)
-				self.Text:SetTextColor(.3, .3, .3)
-			end)
-
-			ScrollDownButton:HookScript('OnEnable', function(self)
-				self.Text:SetTextColor(1, 1, 1)
-			end)
-
-			ScrollDownButton:HookScript('OnEnter', function(self)
-				self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor))
-				self.Text:SetTextColor(unpack(AS.ValueColor or AS.ClassColor))
-			end)
-
-			ScrollDownButton:HookScript('OnLeave', function(self)
-				self:SetBackdropBorderColor(unpack(AS.BorderColor))
-				self.Text:SetTextColor(1, 1, 1)
-			end)
-		end
-
-		if not Frame.TrackBG then
-			Frame.TrackBG = CreateFrame("Frame", nil, Frame)
-			Frame.TrackBG:Point("TOPLEFT", ScrollUpButton, "BOTTOMLEFT", 0, -1)
-			Frame.TrackBG:Point("BOTTOMRIGHT", ScrollDownButton, "TOPRIGHT", 0, 1)
-			AS:SetTemplate(Frame.TrackBG, "Transparent")
+		if Frame[object] then
+			Frame[object]:SetTexture(nil)
 		end
 	end
 
-	local Thumb = Frame:GetName() and _G[Frame:GetName().."ThumbTexture"] or Frame.GetThumbTexture and Frame:GetThumbTexture() or Frame.thumbTexture
+	for _, Button in pairs({ ScrollUpButton, ScrollDownButton }) do
+		if Button then
+			AS:StripTextures(Button)
+			AS:SetTemplate(Button, "Default")
+
+			if not Button.Text then
+				Button.Text = Button:CreateFontString(nil, "OVERLAY")
+				Button.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\Arial.TTF]], 12)
+				Button.Text:SetText(Button == ScrollUpButton and "▲" or "▼")
+				Button.Text:SetPoint("CENTER", 0, 0)
+
+				Button:HookScript('OnShow', function(self)
+					if not self:IsEnabled() then
+						self.Text:SetTextColor(.3, .3, .3)
+					end
+				end)
+
+				Button:HookScript('OnDisable', function(self) self.Text:SetTextColor(.3, .3, .3) end)
+				Button:HookScript('OnEnable', function(self) self.Text:SetTextColor(1, 1, 1) end)
+				Button:HookScript('OnEnter', function(self)
+					self:SetBackdropBorderColor(unpack(AS.Color))
+					self.Text:SetTextColor(unpack(AS.Color))
+				end)
+				Button:HookScript('OnLeave', function(self)
+					self:SetBackdropBorderColor(unpack(AS.BorderColor))
+					self.Text:SetTextColor(1, 1, 1)
+				end)
+			end
+		end
+	end
+
+	if (not Frame.Backdrop) then
+		AS:CreateBackdrop(Frame)
+		Frame.Backdrop:SetPoint("TOPLEFT", -1, -1)
+		Frame.Backdrop:SetPoint("BOTTOMRIGHT", 1, 1)
+		Frame.Backdrop:SetFrameLevel(Frame.Backdrop:GetFrameLevel() + 1)
+	end
+
 	if Thumb and not Thumb.Backdrop then
 		Thumb:SetTexture('')
 		AS:CreateBackdrop(Thumb)
 		Thumb.Backdrop:SetPoint("TOPLEFT", Thumb, "TOPLEFT", 2, -4)
 		Thumb.Backdrop:SetPoint("BOTTOMRIGHT", Thumb, "BOTTOMRIGHT", -2, 4)
-		Thumb.Backdrop:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor)) end)
+		Thumb.Backdrop:SetFrameLevel(Thumb.Backdrop:GetFrameLevel() + 1)
+		Thumb.Backdrop:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
 		Thumb.Backdrop:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
 		if AS:CheckAddOn('ElvUI') then
 			Thumb.Backdrop:SetBackdropColor(0.6, 0.6, 0.6)
-		else
-			Thumb.Backdrop:SetBackdropColor(unpack(AS.BorderColor))
 		end
 	end
 end
@@ -623,11 +574,7 @@ function AS:SkinDropDownBox(Frame, Width)
 
 		AS:SkinNextPrevButton(Button, true)
 
-		AS:CreateBackdrop(Frame)
-
-		if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
-			AS:SetTemplate(Frame.Backdrop, 'Default')
-		end
+		AS:CreateBackdrop(Frame, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 
 		Frame.Backdrop:Point("TOPLEFT", 20, -2)
 		Frame.Backdrop:Point("BOTTOMRIGHT", Button, "BOTTOMRIGHT", 2, -2)
@@ -635,13 +582,8 @@ function AS:SkinDropDownBox(Frame, Width)
 end
 
 function AS:SkinSlideBar(Frame, Height, MoveText)
-	AS:StripTextures(Frame)
-	AS:CreateBackdrop(Frame)
+	AS:SkinBackdropFrame(Frame, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 	Frame.Backdrop:SetAllPoints()
-
-	if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
-		AS:SetTemplate(Frame.Backdrop, 'Default')
-	end
 
 	if not Height then
 		Height = Frame:GetHeight()
@@ -661,7 +603,7 @@ function AS:SkinSlideBar(Frame, Height, MoveText)
 	Frame.ThumbBG = CreateFrame("Frame", nil, Frame)
 	Frame.ThumbBG:Point("TOPLEFT", Frame:GetThumbTexture(), "TOPLEFT", 2, -3)
 	Frame.ThumbBG:Point("BOTTOMRIGHT", Frame:GetThumbTexture(), "BOTTOMRIGHT", -2, 3)
-	AS:SetTemplate(Frame.ThumbBG, "Default", true)
+	AS:SetTemplate(Frame.ThumbBG, "Default")
 
 	if (Frame:GetWidth() < Frame:GetHeight()) then
 		Frame:Width(Height)
@@ -690,24 +632,16 @@ function AS:SkinIconButton(Button)
 end
 
 function AS:SkinFrame(frame, template, override, kill)
-	if not template then template = AS:CheckOption('SkinTemplate') end
 	if not override then AS:StripTextures(frame, kill) end
 	AS:SetTemplate(frame, template)
 end
 
 function AS:SkinBackdropFrame(frame, template, override, kill, setpoints)
-	if not template then template = AS:CheckOption('SkinTemplate') end
 	if not override then AS:StripTextures(frame, kill) end
 	AS:CreateBackdrop(frame, template)
 	if setpoints then
 		frame.Backdrop:SetAllPoints()
 	end
-end
-
-function AS:SkinTitleBar(frame, template, override, kill)
-	if not template then template = AS:CheckOption('SkinTemplate') end
-	if not override then AS:StripTextures(frame, kill) end
-	AS:SetTemplate(frame, template, true)
 end
 
 function AS:SkinStatusBar(frame, ClassColor)
@@ -756,17 +690,17 @@ function AS:Desaturate(frame)
 			end
 		end
 	end
-	frame:HookScript('OnUpdate', function(self)
-		if self:GetNormalTexture() then
-			self:GetNormalTexture():SetDesaturated(true)
-		end
-		if self:GetPushedTexture() then
-			self:GetPushedTexture():SetDesaturated(true)
-		end
-		if self:GetHighlightTexture() then
-			self:GetHighlightTexture():SetDesaturated(true)
-		end
-	end)
+
+	if frame:IsObjectType("Button") or frame:IsObjectType("CheckButton") then
+		local Normal, Pushed, Highlight = frame:GetNormalTexture(), frame:GetPushedTexture(), frame:GetHighlightTexture()
+		Normal:SetDesaturated(true)
+		Pushed:SetDesaturated(true)
+		Highlight:SetDesaturated(true)
+
+		Normal.SetDesaturated = AS.Noop
+		Pushed.SetDesaturated = AS.Noop
+		Highlight.SetDesaturated = AS.Noop
+	end
 end
 
 function AS:SkinMaxMinFrame(frame)

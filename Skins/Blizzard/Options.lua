@@ -25,10 +25,10 @@ function AS:Blizzard_BindingUI() -- ADDON_LOADED Blizzard_BindingUI
 		local button2 = _G["KeyBindingFrameBinding"..i.."Key2Button"]
 		AS:StripTextures(button1, true)
 		AS:StyleButton(button1)
-		AS:SetTemplate(button1, 'Default', true)
+		AS:SetTemplate(button1, 'Default')
 		AS:StripTextures(button2, true)
 		AS:StyleButton(button2)
-		AS:SetTemplate(button2, 'Default', true)
+		AS:SetTemplate(button2, 'Default')
 	end
 
 	KeyBindingFrameUnbindButton:SetPoint("RIGHT", KeyBindingFrameOkayButton, "LEFT", -3, 0)

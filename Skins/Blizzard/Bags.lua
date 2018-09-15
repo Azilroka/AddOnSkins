@@ -10,7 +10,7 @@ function AS:Blizzard_Bags()
 		for j = 1, 36 do
 			local ItemButton = _G["ContainerFrame"..i.."Item"..j]
 --			AS:SkinTexture(_G["ContainerFrame"..i.."Item"..j..'IconQuestTexture'])
-			AS:SetTemplate(ItemButton, AS:CheckOption('SkinTemplate'))
+			AS:SetTemplate(ItemButton)
 			AS:SkinTexture(ItemButton.icon)
 			ItemButton:SetNormalTexture('')
 			ItemButton:SetPushedTexture('')

@@ -5,8 +5,6 @@ if not AS:CheckAddOn('Atlas') then return end
 function AS:Atlas(event, addon)
 	AS:SkinFrame(AtlasFrame)
 	AS:SkinFrame(AtlasFrameSmall)
-	AtlasFrame:SetTemplate("Transparent")
-	AtlasFrameSmall:SetTemplate("Transparent")
 
 	-- Skin Elements
 	AS:SkinCloseButton(AtlasFrameCloseButton)

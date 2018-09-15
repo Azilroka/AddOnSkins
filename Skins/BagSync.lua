@@ -13,7 +13,6 @@ function AS:BagSync()
 
 	for _, frame in pairs(Frames) do
 		AS:SkinFrame(frame)
-		frame:SetTemplate("Transparent")
 		frame:HookScript('OnShow', function(self)
 			if self.scrollbar and not self.scrollbar.isSkinned then
 				AS:CreateBackdrop(self.scrollbar)

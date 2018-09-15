@@ -35,7 +35,7 @@ end
 function AS:CreateToggleButton(Name, Text, Panel, TooltipText)
 	local Frame = CreateFrame('Button', Name, UIParent)
 	Frame:SetFrameStrata("DIALOG")
-	Frame:SetTemplate('Transparent')
+	AS:SetTemplate(Frame, 'Transparent')
 	Frame:Size(17, Panel:GetHeight() - 4)
 	Frame:FontString('Text', AS.ActionBarFont, 12)
 	Frame.Text:SetText(Text)

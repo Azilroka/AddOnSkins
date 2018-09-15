@@ -44,6 +44,7 @@ AddOn.MyRealm = GetRealmName()
 AddOn.Noop = function() end
 AddOn.TexCoords = {.08, .92, .08, .92}
 AddOn.UIScale = UIParent:GetScale()
+AddOn.Faction = UnitFactionGroup("player")
 
 AddOn.ScreenWidth, AddOn.ScreenHeight = GetPhysicalScreenSize()
 
