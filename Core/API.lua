@@ -636,15 +636,10 @@ function AS:SkinTooltip(tooltip, scale)
 	end)
 end
 
-function AS:SkinTexture(icon, parent)
+function AS:SkinTexture(icon, backdrop)
 	icon:SetTexCoord(unpack(AS.TexCoords))
-	if parent then
-		local layer, subLevel = icon:GetDrawLayer()
-		local iconBorder = parent:CreateTexture(nil, layer, nil, subLevel - 1)
-		iconBorder:SetPoint('TOPLEFT', icon, -1, 1)
-		iconBorder:SetPoint('BOTTOMRIGHT', icon, 1, -1)
-		iconBorder:SetColorTexture(0, 0, 0)
-		return iconBorder
+	if backdrop then
+		AS:CreateBackdrop(icon)
 	end
 end
 
