@@ -39,16 +39,16 @@ function AS:Ace3()
 
 			AS:SkinNextPrevButton(button, true)
 
-			if not frame.Backdrop then
-				AS:CreateBackdrop(frame)
-				frame.Backdrop:Point("TOPLEFT", 20, -2)
-				frame.Backdrop:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
-			end
+			AS:CreateBackdrop(frame)
+			frame.Backdrop:Point("TOPLEFT", 20, -2)
+			frame.Backdrop:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
+
 			button:SetParent(frame.Backdrop)
 			text:SetParent(frame.Backdrop)
+
 			button:HookScript('OnClick', function(this)
 				local self = this.obj
-				AS:SetTemplate(self.pullout.frame, 'Default', true)
+				AS:SetTemplate(self.pullout.frame)
 			end)
 		elseif TYPE == 'LSM30_Font' or TYPE == 'LSM30_Sound' or TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' or TYPE == 'LSM30_Statusbar' then
 			local frame = widget.frame
@@ -87,7 +87,12 @@ function AS:Ace3()
 			button:HookScript('OnClick', function(this, button)
 				local self = this.obj
 				if self.dropdown then
-					AS:SetTemplate(self.dropdown, 'Default', true)
+					AS:SetTemplate(self.dropdown)
+					if self.dropdown.slider then
+						AS:SetTemplate(self.dropdown.slider)
+						self.dropdown.slider:SetThumbTexture([[Interface\Buttons\WHITE8X8]])
+						self.dropdown.slider:GetThumbTexture():SetVertexColor(unpack(AS.Color))
+					end
 				end
 			end)
 		elseif TYPE == 'EditBox' then

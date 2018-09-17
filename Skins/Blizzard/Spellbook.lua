@@ -130,7 +130,7 @@ function AS:Blizzard_Spellbook()
 
 	hooksecurefunc("UpdateProfessionButton", function(self)
 		self:SetHighlightTexture('')
-		self.spellString:SetTextColor(1, 1, 1);
+		self.spellString:SetTextColor(1, 1, 1)
 		self.subSpellString:SetTextColor(1, 1, 1)
 	end)
 

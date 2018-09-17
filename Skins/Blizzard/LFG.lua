@@ -361,15 +361,15 @@ function AS:Blizzard_PVPUI(_, addon)
 
 		if currencyRewards then
 			for _, reward in ipairs(currencyRewards) do
-				local name, _, texture, _, _, _, _, quality = GetCurrencyInfo(reward.id);
+				local name, _, texture, _, _, _, _, quality = GetCurrencyInfo(reward.id)
 				if quality == LE_ITEM_QUALITY_ARTIFACT then
-					_, rewardTexture, _, rewardQuaility = CurrencyContainerUtil.GetCurrencyContainerInfo(reward.id, reward.quantity, name, texture, quality);
+					_, rewardTexture, _, rewardQuaility = CurrencyContainerUtil.GetCurrencyContainerInfo(reward.id, reward.quantity, name, texture, quality)
 				end
 			end
 		end
 
 		if not rewardTexture and itemRewards then
-			local reward = itemRewards[1];
+			local reward = itemRewards[1]
 			if reward then
 				_, _, rewardQuaility, _, _, _, _, _, _, rewardTexture = GetItemInfo(reward.id)
 			end
@@ -424,7 +424,7 @@ function AS:Blizzard_PVPUI(_, addon)
 			local Quality
 			for _, questID in ipairs(C_QuestLine.GetQuestLineQuests(782)) do
 				if not IsQuestFlaggedCompleted(questID) and not C_QuestLog.IsOnQuest(questID) then
-					break;
+					break
 				end
 				if HaveQuestRewardData(questID) then
 					local itemID = select(6, GetQuestLogRewardInfo(1, questID))
