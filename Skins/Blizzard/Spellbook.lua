@@ -60,7 +60,7 @@ function AS:Blizzard_Spellbook()
 		local Tab = _G["SpellBookSkillLineTab"..i]
 		AS:SkinFrame(Tab)
 
-		Tab:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor)) end)
+		Tab:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
 		Tab:HookScript("OnLeave", function(self) if self:GetChecked() then self:SetBackdropBorderColor(1, 1, 0) else self:SetBackdropBorderColor(unpack(AS.BorderColor)) end end)
 
 		hooksecurefunc(Tab, 'SetChecked', function(self, value)

@@ -39,7 +39,6 @@ function AS:Blizzard_TradeSkill(event, addon)
 		TradeSkillFrame.DetailsInset.Backdrop:SetPoint("TOPLEFT", 4, -1)
 		TradeSkillFrame.DetailsInset.Backdrop:SetPoint("BOTTOMRIGHT", 1, 1)
 
-		AS:StripTextures(TradeSkillFrame.DetailsFrame.ScrollBar)
 		AS:SkinScrollBar(TradeSkillFrame.DetailsFrame.ScrollBar)
 
 		TradeSkillFrame.DetailsFrame.Background:Hide()
@@ -70,8 +69,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 			self.Contents.ResultIcon:SetBackdropBorderColor(self.Contents.ResultIcon.IconBorder:GetVertexColor())
 
 			for _, Button in pairs(self.Contents.Reagents) do
-				AS:CreateBackdrop(Button.Icon)
-				AS:SkinTexture(Button.Icon)
+				AS:SkinTexture(Button.Icon, true)
 				Button.NameFrame:SetTexture("")
 			end
 		end)

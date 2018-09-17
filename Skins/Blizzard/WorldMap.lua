@@ -30,10 +30,7 @@ function AS:Blizzard_WorldMap()
 
 	local function HandleReward(frame)
 		if (not frame or frame.Backdrop) then return end
-		AS:CreateBackdrop(frame)
-		frame.Backdrop:SetOutside(frame.Icon)
-
-		AS:SkinTexture(frame.Icon)
+		AS:SkinTexture(frame.Icon, true)
 
 		frame.Count:ClearAllPoints()
 		frame.Count:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, 0)

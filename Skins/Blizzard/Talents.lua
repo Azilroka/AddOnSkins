@@ -46,10 +46,8 @@ function AS:Blizzard_Talent(event, addon)
 				Button.learnedTex:SetAlpha(0)
 				Button.selectedTex:SetAlpha(0)
 				Button.specIcon:SetTexture(icon)
-				AS:SkinTexture(Button.specIcon)
+				AS:SkinTexture(Button.specIcon, true)
 				Button:SetHighlightTexture(nil)
-
-				AS:CreateBackdrop(Button.specIcon)
 
 				Button:HookScript('OnEnter', function(self)
 					self.Backdrop:SetBackdropBorderColor(1, .82, 0)
@@ -117,8 +115,7 @@ function AS:Blizzard_Talent(event, addon)
 							frame.icon:SetTexture(spellTex)
 						end
 
-						AS:CreateBackdrop(frame.icon)
-						AS:SkinTexture(frame.icon)
+						AS:SkinTexture(frame.icon, true)
 
 						frame.ring:Hide()
 						frame.icon:SetSize(40, 40)

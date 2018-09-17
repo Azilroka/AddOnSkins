@@ -33,8 +33,7 @@ function AS:Blizzard_Merchant()
 		_G["MerchantItem"..i.."MoneyFrame"]:Point("BOTTOMLEFT", Slot.ItemButton, "BOTTOMRIGHT", 3, 0)
 
 		for j = 1, 3 do
-			AS:CreateBackdrop(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"])
-			AS:SkinTexture(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"])
+			AS:SkinTexture(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"], true)
 		end
 	end
 
@@ -81,8 +80,7 @@ function AS:Blizzard_Merchant()
 		for i = 1, MAX_MERCHANT_CURRENCIES do
 			local Token = _G["MerchantToken"..i]
 			if Token then
-				AS:CreateBackdrop(Token.icon)
-				AS:SkinTexture(Token.icon)
+				AS:SkinTexture(Token.icon, true)
 				Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 2, 0)
 			end
 		end
