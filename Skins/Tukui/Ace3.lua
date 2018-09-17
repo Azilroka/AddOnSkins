@@ -17,22 +17,26 @@ function AS:Ace3()
 			widget.scrollBG:SetPoint('BOTTOMLEFT', widget.button, 'TOPLEFT')
 			widget.scrollFrame:SetPoint('BOTTOMRIGHT', widget.scrollBG, 'BOTTOMRIGHT', -4, 8)
 		elseif TYPE == 'CheckBox' then
-			widget.checkbg:Kill()
-			widget.highlight:Kill()
+			AS:CreateBackdrop(widget.checkbg)
+			widget.checkbg.Backdrop:SetInside(widget.checkbg, 4, 4)
+			widget.checkbg.Backdrop:SetFrameLevel(widget.checkbg.Backdrop:GetFrameLevel() + 1)
 
-			if not widget.skinnedCheckBG then
-				widget.skinnedCheckBG = CreateFrame('Frame', nil, widget.frame)
-				AS:SetTemplate(widget.skinnedCheckBG, 'Default', true)
-				widget.skinnedCheckBG:SetInside(widget.checkbg, 4, 4)
-				widget.skinnedCheckBG:SetScript('OnShow', function() widget.check:SetInside() widget.check:SetTexture(AS.NormTex) widget.check:SetVertexColor(unpack(AS.Color)) end)
-			end
+			widget.check:SetTexture(AS.NormTex)
+			widget.check:SetVertexColor(unpack(AS.Color))
 
-			widget.check:SetParent(widget.skinnedCheckBG)
+			widget.checkbg:SetTexture('')
+			widget.highlight:SetTexture('')
+
+			widget.check:SetInside(widget.checkbg.Backdrop)
+
+			widget.checkbg.SetTexture = AS.Noop
+			widget.highlight.SetTexture = AS.Noop
+			widget.check.SetTexture = AS.Noop
 		elseif TYPE == 'Dropdown' then
 			local frame = widget.dropdown
 			local button = widget.button
 			local text = widget.text
-			frame:StripTextures()
+			AS:StripTextures(frame)
 
 			button:ClearAllPoints()
 			button:Point('RIGHT', frame, 'RIGHT', -20, 0)
@@ -46,10 +50,7 @@ function AS:Ace3()
 			button:SetParent(frame.Backdrop)
 			text:SetParent(frame.Backdrop)
 
-			button:HookScript('OnClick', function(this)
-				local self = this.obj
-				AS:SetTemplate(self.pullout.frame)
-			end)
+			button:HookScript('OnClick', function(self) AS:SetTemplate(self.obj.pullout.frame) end)
 		elseif TYPE == 'LSM30_Font' or TYPE == 'LSM30_Sound' or TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' or TYPE == 'LSM30_Statusbar' then
 			local frame = widget.frame
 			local button = frame.dropButton
@@ -63,25 +64,22 @@ function AS:Ace3()
 			button:ClearAllPoints()
 			button:Point('RIGHT', frame, 'RIGHT', -10, -6)
 
-			if not frame.Backdrop then
-				AS:CreateBackdrop(frame, "Default")
-				if TYPE == 'LSM30_Font' then
-					frame.Backdrop:Point('TOPLEFT', 0, -17)
-				elseif TYPE == 'LSM30_Sound' then
-					frame.Backdrop:Point('TOPLEFT', 0, -17)
-					widget.soundbutton:SetParent(frame.Backdrop)
-					widget.soundbutton:ClearAllPoints()
-					widget.soundbutton:Point('LEFT', frame.Backdrop, 'LEFT', 2, 0)
-				elseif TYPE == 'LSM30_Statusbar' then
-					frame.Backdrop:Point('TOPLEFT', 0, -17)
-					widget.bar:SetParent(frame.Backdrop)
-					widget.bar:SetInside()
-				elseif TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' then
-					frame.Backdrop:Point('TOPLEFT', 22, -16)
-				end
+			AS:CreateBackdrop(frame, "Default")
+			frame.Backdrop:Point('TOPLEFT', 0, -17)
 
-				frame.Backdrop:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
+			if TYPE == 'LSM30_Sound' then
+				widget.soundbutton:SetParent(frame.Backdrop)
+				widget.soundbutton:ClearAllPoints()
+				widget.soundbutton:Point('LEFT', frame.Backdrop, 'LEFT', 2, 0)
+			elseif TYPE == 'LSM30_Statusbar' then
+				widget.bar:SetParent(frame.Backdrop)
+				widget.bar:SetInside()
+			elseif TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' then
+				frame.Backdrop:Point('TOPLEFT', 22, -16)
 			end
+
+			frame.Backdrop:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
+
 			button:SetParent(frame.Backdrop)
 			text:SetParent(frame.Backdrop)
 			button:HookScript('OnClick', function(this, button)
@@ -96,44 +94,30 @@ function AS:Ace3()
 				end
 			end)
 		elseif TYPE == 'EditBox' then
-			local frame = widget.editbox
-			local button = widget.button
-
-			AS:SkinEditBox(frame)
-			frame:SetHeight(17)
-			AS:SkinButton(button)
+			AS:SkinEditBox(widget.editbox)
+			widget.editbox:SetHeight(17)
+			AS:SkinButton(widget.button)
 		elseif TYPE == 'Button' then
-			local frame = widget.frame
-			AS:SkinButton(frame)
+			AS:SkinButton(widget.frame)
 		elseif TYPE == 'Slider' then
-			local frame = widget.slider
-			local editbox = widget.editbox
-			local lowtext = widget.lowtext
-			local hightext = widget.hightext
+			AS:SkinSlideBar(widget.slider)
 
-			AS:SkinSlideBar(frame)
+			AS:SetTemplate(widget.editbox)
+			widget.editbox:SetHeight(15)
+			widget.editbox:SetPoint('TOP', widget.slider, 'BOTTOM', 0, -1)
 
-			AS:SetTemplate(editbox, 'Default')
-			editbox:SetHeight(15)
-			editbox:SetPoint('TOP', frame, 'BOTTOM', 0, -1)
-
-			lowtext:SetPoint('TOPLEFT', frame, 'BOTTOMLEFT', 2, -2)
-			hightext:SetPoint('TOPRIGHT', frame, 'BOTTOMRIGHT', -2, -2)
+			widget.lowtext:SetPoint('TOPLEFT', widget.slider, 'BOTTOMLEFT', 2, -2)
+			widget.hightext:SetPoint('TOPRIGHT', widget.slider, 'BOTTOMRIGHT', -2, -2)
 		end
 		return oldRegisterAsWidget(self, widget)
 	end
 
 	local oldRegisterAsContainer = AceGUI.RegisterAsContainer
-
 	AceGUI.RegisterAsContainer = function(self, widget)
 		local TYPE = widget.type
 
 		if TYPE == 'ScrollFrame' then
-			local frame = widget.scrollbar
-			if not frame.isSkinned then
-				AS:SkinScrollBar(frame)
-				frame.isSkinned = true
-			end
+			AS:SkinScrollBar(widget.scrollbar)
 		elseif TYPE == 'InlineGroup' or TYPE == 'TreeGroup' or TYPE == 'TabGroup' or TYPE == 'Frame' or TYPE == 'DropdownGroup' or TYPE =="Window" then
 			local frame = widget.content:GetParent()
 			if TYPE == 'Frame' then
@@ -202,14 +186,13 @@ function AS:Ace3()
 				end
 			end
 
-			if widget.scrollbar and not widget.scrollbar.isSkinned then
+			if widget.scrollbar then
 				AS:SkinScrollBar(widget.scrollbar)
-				widget.scrollbar.isSkinned = true
 			end
 		elseif TYPE == "SimpleGroup" then
 			local frame = widget.content:GetParent()
-			frame:SetTemplate("Transparent", nil, true) --ignore border updates
-			frame:SetBackdropBorderColor(0,0,0,0) --Make border completely transparent
+			AS:SetTemplate(frame)
+			frame:SetBackdropBorderColor(0, 0, 0, 0)
 		end
 
 		return oldRegisterAsContainer(self, widget)
