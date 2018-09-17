@@ -29,6 +29,7 @@
 	<Script file="BuyEmAll.lua"/>
 	<Script file="Capping.lua"/>
 	<Script file="ChocolateBar.lua"/>
+	<Script file="ClassicGuildFrame.lua"/>
 	<Script file="ClassicQuestLog.lua"/>
 	<Script file="ClassOrderHallsComplete.lua"/>
 	<Script file="Clique.lua"/>
