@@ -77,8 +77,8 @@ function AS:Blizzard_PvE(event, addon)
 			Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 1, 0)
 			Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 1, 0)
 			Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
-			hooksecurefunc(Button.IconBorder, 'SetVertexColor', function(self, r, g, b) Button.Backdrop:SetBackdropBorderColor(r, g, b) Button.Icon.Backdrop:SetBackdropBorderColor(r, g, b) end)
-			hooksecurefunc(Button.IconBorder, 'Hide', function(self) Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) Button.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+			hooksecurefunc(Button.IconBorder, 'SetVertexColor', function(self, r, g, b) Button.Icon.Backdrop:SetBackdropBorderColor(r, g, b) end)
+			hooksecurefunc(Button.IconBorder, 'Hide', function(self) Button.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 		end
 	end)
 
