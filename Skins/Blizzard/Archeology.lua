@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_Archaeology(event, addon)
+function AS:Blizzard_ArchaeologyUI(event, addon)
 	if addon ~= "Blizzard_ArchaeologyUI" then return end
 
 	AS:SkinFrame(ArchaeologyFrame)
@@ -66,6 +66,8 @@ function AS:Blizzard_Archaeology(event, addon)
 	AS:StripTextures(ArcheologyDigsiteProgressBar)
 	AS:SkinStatusBar(ArcheologyDigsiteProgressBar.FillBar)
 	ArcheologyDigsiteProgressBar.FillBar:SetStatusBarColor(.61, .25, 0)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
-AS:RegisterSkin("Blizzard_ArchaeologyUI", AS.Blizzard_Archaeology, 'ADDON_LOADED')
+AS:RegisterSkin("Blizzard_ArchaeologyUI", AS.Blizzard_ArchaeologyUI, 'ADDON_LOADED')

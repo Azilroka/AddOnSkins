@@ -2,6 +2,7 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Calendar(event, addon)
 	if addon ~= 'Blizzard_Calendar' then return end
+
 	AS:SkinFrame(CalendarFrame)
 	AS:SkinCloseButton(CalendarCloseButton)
 	CalendarCloseButton:SetPoint("TOPRIGHT", CalendarFrame, "TOPRIGHT", -4, -4)
@@ -164,6 +165,8 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:StripTextures(CalendarEventPickerCloseButton)
 	AS:SkinCloseButton(CalendarEventPickerCloseButton)
 	AS:SkinScrollBar(CalendarCreateEventDescriptionScrollFrameScrollBar)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin('Blizzard_Calendar', AS.Blizzard_Calendar, 'ADDON_LOADED')

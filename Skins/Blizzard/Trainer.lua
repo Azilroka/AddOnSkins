@@ -1,8 +1,7 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_Trainer(event, addon)
+function AS:Blizzard_TrainerUI(event, addon)
 	if addon ~= 'Blizzard_TrainerUI' then return end
-	AS:UnregisterSkinEvent("Blizzard_Trainer", event)
 
 	AS:SkinFrame(ClassTrainerFrame, nil, nil, true)
 	AS:SkinCloseButton(ClassTrainerFrame.CloseButton)
@@ -62,6 +61,8 @@ function AS:Blizzard_Trainer(event, addon)
 			skillButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end
 	end)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
-AS:RegisterSkin("Blizzard_Trainer", AS.Blizzard_Trainer, 'ADDON_LOADED')
+AS:RegisterSkin("Blizzard_TrainerUI", AS.Blizzard_TrainerUI, 'ADDON_LOADED')

@@ -1,34 +1,34 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_DebugTools(event, addon)
-	if IsAddOnLoaded('Blizzard_DebugTools') or addon == 'Blizzard_DebugTools' then
-		ScriptErrorsFrame:SetParent(UIParent)
-		AS:SkinFrame(ScriptErrorsFrame, nil, nil, true)
-		AS:SkinNextPrevButton(ScriptErrorsFrame.NextError) -- must be redone
-		AS:SkinNextPrevButton(ScriptErrorsFrame.PreviousError) -- must be redone
-		AS:SkinButton(ScriptErrorsFrame.Close)
-		AS:SkinButton(ScriptErrorsFrame.Reload)
-		AS:SkinCloseButton(ScriptErrorsFrameClose)
-		AS:SkinScrollBar(ScriptErrorsFrameScrollBar)
-		ScriptErrorsFrame.ScrollFrame:CreateBackdrop('Default')
-		ScriptErrorsFrame.ScrollFrame:SetFrameLevel(ScriptErrorsFrame.ScrollFrame:GetFrameLevel() + 2)
+	if addon ~= 'Blizzard_DebugTools' then return end
 
-		AS:SkinFrame(EventTraceFrame, nil, nil, true)
-		EventTraceFrameScrollBG:SetTexture(nil)
-		AS:CreateBackdrop(EventTraceFrameScroll)
-		EventTraceFrameScroll.Backdrop:SetAllPoints(EventTraceFrameScroll.thumb)
-		EventTraceFrameScroll.thumb:SetTexture(nil)
-		AS:SkinCloseButton(EventTraceFrameCloseButton)
+	ScriptErrorsFrame:SetParent(UIParent)
+	AS:SkinFrame(ScriptErrorsFrame, nil, nil, true)
+	AS:SkinNextPrevButton(ScriptErrorsFrame.NextError) -- must be redone
+	AS:SkinNextPrevButton(ScriptErrorsFrame.PreviousError) -- must be redone
+	AS:SkinButton(ScriptErrorsFrame.Close)
+	AS:SkinButton(ScriptErrorsFrame.Reload)
+	AS:SkinCloseButton(ScriptErrorsFrameClose)
+	AS:SkinScrollBar(ScriptErrorsFrameScrollBar)
+	ScriptErrorsFrame.ScrollFrame:CreateBackdrop('Default')
+	ScriptErrorsFrame.ScrollFrame:SetFrameLevel(ScriptErrorsFrame.ScrollFrame:GetFrameLevel() + 2)
 
-		AS:SkinTooltip(EventTraceTooltip)
+	AS:SkinFrame(EventTraceFrame, nil, nil, true)
+	EventTraceFrameScrollBG:SetTexture(nil)
+	AS:CreateBackdrop(EventTraceFrameScroll)
+	EventTraceFrameScroll.Backdrop:SetAllPoints(EventTraceFrameScroll.thumb)
+	EventTraceFrameScroll.thumb:SetTexture(nil)
+	AS:SkinCloseButton(EventTraceFrameCloseButton)
 
-		FrameStackTooltip:SetParent(UIParent)
-		AS:SkinTooltip(FrameStackTooltip)
-		FrameStackTooltip:SetFrameStrata('TOOLTIP')
-		FrameStackTooltip:SetFrameLevel(255)
+	AS:SkinTooltip(EventTraceTooltip)
 
-		AS:UnregisterSkinEvent('Blizzard_DebugTools', 'ADDON_LOADED')
-	end
+	FrameStackTooltip:SetParent(UIParent)
+	AS:SkinTooltip(FrameStackTooltip)
+	FrameStackTooltip:SetFrameStrata('TOOLTIP')
+	FrameStackTooltip:SetFrameLevel(255)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin('Blizzard_DebugTools', AS.Blizzard_DebugTools, 'ADDON_LOADED')

@@ -1,6 +1,6 @@
 	local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_Mail(event, addon)
+function AS:Blizzard_Mail()
 	AS:SkinFrame(MailFrame, nil, nil, true)
 	AS:CreateShadow(MailFrame)
 

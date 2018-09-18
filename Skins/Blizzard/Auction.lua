@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_AuctionHouse(event, addon)
+function AS:Blizzard_AuctionUI(event, addon)
 	if addon ~= "Blizzard_AuctionUI" then return end
 
 	AS:SkinFrame(AuctionFrame, nil, nil, true)
@@ -279,11 +279,11 @@ function AS:Blizzard_AuctionHouse(event, addon)
 	BrowseWowTokenResultsToken.Backdrop:SetFrameLevel(BrowseWowTokenResultsToken:GetFrameLevel())
 	BrowseWowTokenResultsToken.IconBorder:SetTexture(nil)
 	BrowseWowTokenResultsToken.ItemBorder:SetTexture(nil)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
-AS:RegisterSkin('Blizzard_AuctionHouse', AS.Blizzard_AuctionHouse, 'ADDON_LOADED')
-
-function AS:Blizzard_BlackMarket(event, addon)
+function AS:Blizzard_BlackMarketUI(event, addon)
 	if addon ~= "Blizzard_BlackMarketUI" then return end
 	AS:SkinFrame(BlackMarketFrame)
 	AS:StripTextures(BlackMarketFrame.Inset)
@@ -377,6 +377,9 @@ function AS:Blizzard_BlackMarket(event, addon)
 			end
 		end
 	end)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
-AS:RegisterSkin('Blizzard_BlackMarket', AS.Blizzard_BlackMarket, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_AuctionUI', AS.Blizzard_AuctionUI, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_BlackMarketUI', AS.Blizzard_BlackMarketUI, 'ADDON_LOADED')

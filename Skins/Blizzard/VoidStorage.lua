@@ -51,6 +51,8 @@ function AS:Blizzard_VoidStorage(event, addon)
 	VoidStorageFrame:HookScript('OnShow', function(self) SideDressUpFrame:SetPoint("TOPLEFT", self, "TOPRIGHT", 2, -15) end)
 	AS:SkinButton(SideDressUpModelResetButton)
 	AS:SkinCloseButton(SideDressUpModelCloseButton)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin("Blizzard_VoidStorage", AS.Blizzard_VoidStorage, 'ADDON_LOADED')

@@ -2,6 +2,7 @@
 
 function AS:Blizzard_EncounterJournal(event, addon)
 	if addon ~= 'Blizzard_EncounterJournal' then return end
+
 	AS:SkinBackdropFrame(EncounterJournal)
 
 	AS:SkinBackdropFrame(EncounterJournalNavBar, nil, nil, true)
@@ -101,6 +102,8 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	AS:StripTextures(EncounterJournal.LootJournal)
 	AS:StripTextures(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton)
 	AS:SkinButton(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton, true)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin("Blizzard_EncounterJournal", AS.Blizzard_EncounterJournal, 'ADDON_LOADED')

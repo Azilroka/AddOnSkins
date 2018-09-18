@@ -2,6 +2,7 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Inspect(event, addon)
 	if addon ~= "Blizzard_InspectUI" then return end
+
 	AS:SkinFrame(InspectFrame)
 	AS:StripTextures(InspectFrame.Inset)
 	AS:SkinCloseButton(InspectFrame.CloseButton)
@@ -91,6 +92,8 @@ function AS:Blizzard_Inspect(event, addon)
 	end
 
 	InspectGuildFrameBG:SetTexture('')
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin("Blizzard_Inspect", AS.Blizzard_Inspect, 'ADDON_LOADED')

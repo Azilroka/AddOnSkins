@@ -246,6 +246,15 @@ function AS:StartSkinning(event)
 		end
 	end
 
+	-- Check forced Blizzard AddOns
+	for addonName, funcs in AS:OrderedPairs(AS.skins) do
+		if AS:CheckOption(addonName) and strfind(addonName, 'Blizzard_') and IsAddOnLoaded(addonName) then
+			for _, func in ipairs(funcs) do
+				AS:CallSkin(addonName, func, 'ADDON_LOADED', addonName)
+			end
+		end
+	end
+
 	for addonName, funcs in AS:OrderedPairs(AS.skins) do
 		if AS:CheckAddOn('ElvUI') and AS:GetElvUIBlizzardSkinOption(addonName) then
 			AS:SetOption(addonName, false)

@@ -27,6 +27,8 @@ function AS:Blizzard_TalkingHeadUI(event, addon)
 	TalkingHeadFrame.TextFrame.Text.SetTextColor = function() end
 	TalkingHeadFrame.TextFrame.Text:SetShadowColor(0.0, 0.0, 0.0, 1.0)
 	TalkingHeadFrame.TextFrame.Text:SetShadowOffset(2, -2)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin("Blizzard_TalkingHeadUI", AS.Blizzard_TalkingHeadUI, 'ADDON_LOADED')

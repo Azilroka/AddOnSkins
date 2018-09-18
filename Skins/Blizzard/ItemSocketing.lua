@@ -1,7 +1,8 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_ItemSocketing(event, addon)
+function AS:Blizzard_ItemSocketingUI(event, addon)
 	if addon ~= 'Blizzard_ItemSocketingUI' then return end
+
 	AS:SkinFrame(ItemSocketingFrame)
 	ItemSocketingFrame.portrait:SetAlpha(0)
 	AS:SkinFrame(ItemSocketingScrollFrame)
@@ -31,7 +32,8 @@ function AS:Blizzard_ItemSocketing(event, addon)
 	ItemSocketingSocketButton:SetPoint("BOTTOMRIGHT", ItemSocketingFrame, "BOTTOMRIGHT", -5, 5)
 	AS:SkinButton(ItemSocketingSocketButton)
 	AS:SkinScrollBar(ItemSocketingScrollFrameScrollBar)
-	AS:UnregisterSkinEvent('Blizzard_ItemSocketing', 'ADDON_LOADED')
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
-AS:RegisterSkin('Blizzard_ItemSocketing', AS.Blizzard_ItemSocketing, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_ItemSocketingUI', AS.Blizzard_ItemSocketingUI, 'ADDON_LOADED')

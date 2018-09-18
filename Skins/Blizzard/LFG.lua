@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_PvE(event, addon)
+function AS:Blizzard_PvE()
 	AS:SkinFrame(PVEFrame)
 	AS:StripTextures(PVEFrame.Inset)
 	AS:SkinCloseButton(PVEFrame.CloseButton)
@@ -185,18 +185,16 @@ function AS:Blizzard_PvE(event, addon)
 	AS:SkinCloseButton(LFGDungeonReadyStatusCloseButton)
 end
 
-AS:RegisterSkin("Blizzard_PvE", AS.Blizzard_PvE)
-
 function AS:Blizzard_ChallengesUI(event, addon)
 	if addon ~= 'Blizzard_ChallengesUI' then return end
 	AS:StripTextures(ChallengesFrameInset, true)
 	ChallengesFrameInset:Hide()
 	ChallengesFrameInsetBg:Hide()
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
-AS:RegisterSkin("Blizzard_ChallengesUI", AS.Blizzard_ChallengesUI, 'ADDON_LOADED')
-
-function AS:Blizzard_PVPUI(_, addon)
+function AS:Blizzard_PVPUI(event, addon)
 	if addon ~= "Blizzard_PVPUI" then return end
 
 	AS:StripTextures(PVPUIFrame)
@@ -357,6 +355,10 @@ function AS:Blizzard_PVPUI(_, addon)
 			end
 		end)
 	end
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
+AS:RegisterSkin("Blizzard_PvE", AS.Blizzard_PvE)
+AS:RegisterSkin("Blizzard_ChallengesUI", AS.Blizzard_ChallengesUI, 'ADDON_LOADED')
 AS:RegisterSkin("Blizzard_PVPUI", AS.Blizzard_PVPUI, 'ADDON_LOADED')

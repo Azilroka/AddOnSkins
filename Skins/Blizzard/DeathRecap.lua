@@ -2,6 +2,7 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_DeathRecap(event, addon)
 	if addon ~= 'Blizzard_DeathRecap' then return end
+
 	AS:SkinFrame(DeathRecapFrame)
 	AS:SkinCloseButton(DeathRecapFrame.CloseXButton)
 	-- AS:SkinButton(DeathRecapFrame.CloseButton) Broken till 6.2
@@ -11,6 +12,7 @@ function AS:Blizzard_DeathRecap(event, addon)
 			AS:SkinButton(object)
 		end
 	end
+
 	for i = 1, 5 do
 		local Recap = DeathRecapFrame['Recap'..i]
 		AS:CreateBackdrop(Recap.SpellInfo)
@@ -18,6 +20,8 @@ function AS:Blizzard_DeathRecap(event, addon)
 		Recap.SpellInfo.Backdrop:SetOutside(Recap.SpellInfo.Icon)
 		Recap.SpellInfo.IconBorder:SetAlpha(0)
 	end
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin('Blizzard_DeathRecap', AS.Blizzard_DeathRecap, 'ADDON_LOADED')

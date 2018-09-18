@@ -104,100 +104,101 @@ function AS:Blizzard_AchievementUI(event, addon)
 			end
 		end)
 	end
-	if addon == 'Blizzard_AchievementUI' then
-		AS:UnregisterSkinEvent('Blizzard_AchievementUI', 'ADDON_LOADED')
-		AS:SkinFrame(AchievementFrame, nil, nil, true)
-		AS:SkinCloseButton(AchievementFrameCloseButton)
+
+	if addon ~= 'Blizzard_AchievementUI' then return end
+
+	AS:SkinFrame(AchievementFrame, nil, nil, true)
+	AS:SkinCloseButton(AchievementFrameCloseButton)
 
 --		AS:SkinDropDownBox(AchievementFrameFilterDropDown)
-		AchievementFrameFilterDropDown:ClearAllPoints()
-		AchievementFrameFilterDropDown:SetPoint("TOPRIGHT", AchievementFrame, "TOPRIGHT", -44, 0)
+	AchievementFrameFilterDropDown:ClearAllPoints()
+	AchievementFrameFilterDropDown:SetPoint("TOPRIGHT", AchievementFrame, "TOPRIGHT", -44, 0)
 
-		AS:SkinBackdropFrame(AchievementFrameCategories, nil, nil, true)
-		AchievementFrameCategories.Backdrop:SetInside()
-		AS:StripTextures(AchievementFrameSummary, true)
+	AS:SkinBackdropFrame(AchievementFrameCategories, nil, nil, true)
+	AchievementFrameCategories.Backdrop:SetInside()
+	AS:StripTextures(AchievementFrameSummary, true)
 
-		AS:StripTextures(AchievementFrameHeader, true)
-		AS:StripTextures(AchievementFrameSummaryCategoriesHeader, true)
-		AS:StripTextures(AchievementFrameSummaryAchievementsHeader, true)
-		AS:StripTextures(AchievementFrameAchievements, true)
-		AS:StripTextures(AchievementFrameComparison, true)
-		AS:StripTextures(AchievementFrameStatsBG, true)
+	AS:StripTextures(AchievementFrameHeader, true)
+	AS:StripTextures(AchievementFrameSummaryCategoriesHeader, true)
+	AS:StripTextures(AchievementFrameSummaryAchievementsHeader, true)
+	AS:StripTextures(AchievementFrameAchievements, true)
+	AS:StripTextures(AchievementFrameComparison, true)
+	AS:StripTextures(AchievementFrameStatsBG, true)
 
-		AS:StripTextures(AchievementFrameComparisonSummaryPlayer, true)
-		AS:StripTextures(AchievementFrameComparisonSummaryFriend, true)
-		AS:StripTextures(AchievementFrameComparisonHeader, true)
-		AchievementFrameComparisonHeader:SetPoint("BOTTOMRIGHT", AchievementFrameComparison, "TOPRIGHT", 45, -20)
+	AS:StripTextures(AchievementFrameComparisonSummaryPlayer, true)
+	AS:StripTextures(AchievementFrameComparisonSummaryFriend, true)
+	AS:StripTextures(AchievementFrameComparisonHeader, true)
+	AchievementFrameComparisonHeader:SetPoint("BOTTOMRIGHT", AchievementFrameComparison, "TOPRIGHT", 45, -20)
 
-		local TooltipBorders = {
-			AchievementFrameStats,
-			AchievementFrameSummary,
-			AchievementFrameAchievements,
-			AchievementFrameComparison
-		}
+	local TooltipBorders = {
+		AchievementFrameStats,
+		AchievementFrameSummary,
+		AchievementFrameAchievements,
+		AchievementFrameComparison
+	}
 
-		for _, Frame in pairs(TooltipBorders) do
-			for i = 1, Frame:GetNumChildren() do
-				local Child = select(i, Frame:GetChildren())
-				if Child and Child:IsObjectType('Frame') and not Child:GetName() then
-					Child:SetBackdrop(nil)
-				end
+	for _, Frame in pairs(TooltipBorders) do
+		for i = 1, Frame:GetNumChildren() do
+			local Child = select(i, Frame:GetChildren())
+			if Child and Child:IsObjectType('Frame') and not Child:GetName() then
+				Child:SetBackdrop(nil)
 			end
 		end
+	end
 
-		AchievementFrameHeaderTitle:ClearAllPoints()
-		AchievementFrameHeaderTitle:SetPoint("TOPLEFT", AchievementFrame, "TOP", -50, -6)
-		AchievementFrameHeaderPoints:ClearAllPoints()
-		AchievementFrameHeaderPoints:SetPoint("LEFT", AchievementFrameHeaderTitle, "RIGHT", 2, 0)
-		AS:SkinEditBox(AchievementFrame.searchBox)
-		AchievementFrame.searchBox:SetHeight(18)
-		AchievementFrame.searchBox:ClearAllPoints()
-		AchievementFrame.searchBox:SetPoint("RIGHT", AchievementFrameHeaderTitle, "LEFT", -1, -1)
+	AchievementFrameHeaderTitle:ClearAllPoints()
+	AchievementFrameHeaderTitle:SetPoint("TOPLEFT", AchievementFrame, "TOP", -50, -6)
+	AchievementFrameHeaderPoints:ClearAllPoints()
+	AchievementFrameHeaderPoints:SetPoint("LEFT", AchievementFrameHeaderTitle, "RIGHT", 2, 0)
+	AS:SkinEditBox(AchievementFrame.searchBox)
+	AchievementFrame.searchBox:SetHeight(18)
+	AchievementFrame.searchBox:ClearAllPoints()
+	AchievementFrame.searchBox:SetPoint("RIGHT", AchievementFrameHeaderTitle, "LEFT", -1, -1)
 
-		for i = 1, 3 do
-			AS:SkinTab(_G["AchievementFrameTab"..i])
+	for i = 1, 3 do
+		AS:SkinTab(_G["AchievementFrameTab"..i])
+	end
+
+	AS:SkinAchievementStatusBar(AchievementFrameSummaryCategoriesStatusBar)
+	AS:SkinAchievementStatusBar(AchievementFrameComparisonSummaryPlayerStatusBar)
+	AS:SkinAchievementStatusBar(AchievementFrameComparisonSummaryFriendStatusBar)
+
+	for i = 1, 12 do
+		local StatusBar = "AchievementFrameSummaryCategoriesCategory"..i
+		AS:SkinAchievementStatusBar(_G[StatusBar])
+
+		AS:StripTextures(_G[StatusBar.."ButtonHighlight"])
+		_G[StatusBar.."Button"]:HookScript('OnEnter', function(self) self:GetParent().Backdrop:SetBackdropBorderColor(1, 1, 0) end)
+		_G[StatusBar.."Button"]:HookScript('OnLeave', function(self) self:GetParent().Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+	end
+
+	hooksecurefunc('AchievementButton_DisplayAchievement', function(Achievement)
+		if Achievement.Backdrop then
+			if Achievement.accountWide then
+				Achievement.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+			else
+				Achievement.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
 		end
+	end)
 
-		AS:SkinAchievementStatusBar(AchievementFrameSummaryCategoriesStatusBar)
-		AS:SkinAchievementStatusBar(AchievementFrameComparisonSummaryPlayerStatusBar)
-		AS:SkinAchievementStatusBar(AchievementFrameComparisonSummaryFriendStatusBar)
+	hooksecurefunc('AchievementFrameSummary_UpdateAchievements', function(...)
+		for i = 1, ACHIEVEMENTUI_MAX_SUMMARY_ACHIEVEMENTS do
+			local Achievement = _G["AchievementFrameSummaryAchievement"..i]
+			if not Achievement.isSkinned then
+				AS:SkinAchievement(Achievement)
+				Achievement.isSkinned = true
+			end
 
-		for i = 1, 12 do
-			local StatusBar = "AchievementFrameSummaryCategoriesCategory"..i
-			AS:SkinAchievementStatusBar(_G[StatusBar])
-
-			AS:StripTextures(_G[StatusBar.."ButtonHighlight"])
-			_G[StatusBar.."Button"]:HookScript('OnEnter', function(self) self:GetParent().Backdrop:SetBackdropBorderColor(1, 1, 0) end)
-			_G[StatusBar.."Button"]:HookScript('OnLeave', function(self) self:GetParent().Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
-		end
-
-		hooksecurefunc('AchievementButton_DisplayAchievement', function(Achievement)
-			if Achievement.Backdrop then
+			if Achievement.isSkinned then
 				if Achievement.accountWide then
 					Achievement.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
 				else
 					Achievement.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 				end
 			end
-		end)
-
-		hooksecurefunc('AchievementFrameSummary_UpdateAchievements', function(...)
-			for i = 1, ACHIEVEMENTUI_MAX_SUMMARY_ACHIEVEMENTS do
-				local Achievement = _G["AchievementFrameSummaryAchievement"..i]
-				if not Achievement.isSkinned then
-					AS:SkinAchievement(Achievement)
-					Achievement.isSkinned = true
-				end
-
-				if Achievement.isSkinned then
-					if Achievement.accountWide then
-						Achievement.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
-					else
-						Achievement.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-					end
-				end
-			end
-		end)
+		end
+	end)
 
 --		Disabled for now
 --
@@ -205,72 +206,73 @@ function AS:Blizzard_AchievementUI(event, addon)
 --		AchievementFrameAchievementsContainer.Backdrop:SetPoint('TOPLEFT', AchievementFrameCategories, 'TOPRIGHT', 2, 0)
 --		AchievementFrameAchievementsContainer.Backdrop:SetPoint('BOTTOMLEFT', AchievementFrameCategories, 'BOTTOMRIGHT', 2, 0)
 
-		-- ScrollBars
-		AS:SkinScrollBar(AchievementFrameCategoriesContainerScrollBar)
-		AS:SkinScrollBar(AchievementFrameAchievementsContainerScrollBar)
-		AS:SkinScrollBar(AchievementFrameStatsContainerScrollBar)
-		AS:SkinScrollBar(AchievementFrameComparisonContainerScrollBar)
-		AS:SkinScrollBar(AchievementFrameComparisonStatsContainerScrollBar)
+	-- ScrollBars
+	AS:SkinScrollBar(AchievementFrameCategoriesContainerScrollBar)
+	AS:SkinScrollBar(AchievementFrameAchievementsContainerScrollBar)
+	AS:SkinScrollBar(AchievementFrameStatsContainerScrollBar)
+	AS:SkinScrollBar(AchievementFrameComparisonContainerScrollBar)
+	AS:SkinScrollBar(AchievementFrameComparisonStatsContainerScrollBar)
 
-		hooksecurefunc("AchievementButton_GetProgressBar", function(index)
-			local frame = _G["AchievementFrameProgressBar"..index]
-			if frame then
-				if not frame.skinned then
-					AS:SkinStatusBar(frame)
-					frame:SetStatusBarColor(4/255, 179/255, 30/255)
+	hooksecurefunc("AchievementButton_GetProgressBar", function(index)
+		local frame = _G["AchievementFrameProgressBar"..index]
+		if frame then
+			if not frame.skinned then
+				AS:SkinStatusBar(frame)
+				frame:SetStatusBarColor(4/255, 179/255, 30/255)
 
-					frame.text:ClearAllPoints()
-					frame.text:SetPoint("CENTER", frame, "CENTER", 0, -1)
-					frame.text:SetJustifyH("CENTER")
+				frame.text:ClearAllPoints()
+				frame.text:SetPoint("CENTER", frame, "CENTER", 0, -1)
+				frame.text:SetJustifyH("CENTER")
 
-					if index > 1 then
-						frame:ClearAllPoints()
-						frame:SetPoint("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
-						frame.SetPoint = function() end
-						frame.ClearAllPoints = function() end
-					end
+				if index > 1 then
+					frame:ClearAllPoints()
+					frame:SetPoint("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
+					frame.SetPoint = function() end
+					frame.ClearAllPoints = function() end
+				end
 
-					frame.skinned = true
+				frame.skinned = true
+			end
+		end
+	end)
+
+	hooksecurefunc("AchievementObjectives_DisplayCriteria", function(objectivesFrame, id)
+		local numCriteria = GetAchievementNumCriteria(id)
+		local textStrings, metas = 0, 0
+		for i = 1, numCriteria do
+			local criteriaString, criteriaType, completed, quantity, reqQuantity, charName, flags, assetID, quantityString = GetAchievementCriteriaInfo(id, i)
+
+			if ( criteriaType == CRITERIA_TYPE_ACHIEVEMENT and assetID ) then
+				metas = metas + 1
+				local metaCriteria = AchievementButton_GetMeta(metas)
+				if ( objectivesFrame.completed and completed ) then
+					metaCriteria.label:SetShadowOffset(0, 0)
+					metaCriteria.label:SetTextColor(1, 1, 1, 1)
+				elseif ( completed ) then
+					metaCriteria.label:SetShadowOffset(1, -1)
+					metaCriteria.label:SetTextColor(0, 1, 0, 1)
+				else
+					metaCriteria.label:SetShadowOffset(1, -1)
+					metaCriteria.label:SetTextColor(.6, .6, .6, 1)
+				end
+			elseif criteriaType ~= 1 then
+				textStrings = textStrings + 1
+				local criteria = AchievementButton_GetCriteria(textStrings)
+				if ( objectivesFrame.completed and completed ) then
+					criteria.name:SetTextColor(1, 1, 1, 1)
+					criteria.name:SetShadowOffset(0, 0)
+				elseif ( completed ) then
+					criteria.name:SetTextColor(0, 1, 0, 1)
+					criteria.name:SetShadowOffset(1, -1)
+				else
+					criteria.name:SetTextColor(.6, .6, .6, 1)
+					criteria.name:SetShadowOffset(1, -1)
 				end
 			end
-		end)
+		end
+	end)
 
-		hooksecurefunc("AchievementObjectives_DisplayCriteria", function(objectivesFrame, id)
-			local numCriteria = GetAchievementNumCriteria(id)
-			local textStrings, metas = 0, 0
-			for i = 1, numCriteria do
-				local criteriaString, criteriaType, completed, quantity, reqQuantity, charName, flags, assetID, quantityString = GetAchievementCriteriaInfo(id, i)
-
-				if ( criteriaType == CRITERIA_TYPE_ACHIEVEMENT and assetID ) then
-					metas = metas + 1
-					local metaCriteria = AchievementButton_GetMeta(metas)
-					if ( objectivesFrame.completed and completed ) then
-						metaCriteria.label:SetShadowOffset(0, 0)
-						metaCriteria.label:SetTextColor(1, 1, 1, 1)
-					elseif ( completed ) then
-						metaCriteria.label:SetShadowOffset(1, -1)
-						metaCriteria.label:SetTextColor(0, 1, 0, 1)
-					else
-						metaCriteria.label:SetShadowOffset(1, -1)
-						metaCriteria.label:SetTextColor(.6, .6, .6, 1)
-					end
-				elseif criteriaType ~= 1 then
-					textStrings = textStrings + 1
-					local criteria = AchievementButton_GetCriteria(textStrings)
-					if ( objectivesFrame.completed and completed ) then
-						criteria.name:SetTextColor(1, 1, 1, 1)
-						criteria.name:SetShadowOffset(0, 0)
-					elseif ( completed ) then
-						criteria.name:SetTextColor(0, 1, 0, 1)
-						criteria.name:SetShadowOffset(1, -1)
-					else
-						criteria.name:SetTextColor(.6, .6, .6, 1)
-						criteria.name:SetShadowOffset(1, -1)
-					end
-				end
-			end
-		end)
-	end
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin("Blizzard_AchievementUI", AS.Blizzard_AchievementUI, 'ADDON_LOADED')
