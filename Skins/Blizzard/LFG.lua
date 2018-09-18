@@ -1,103 +1,99 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_PvE(event, addon)
-	AS:SkinFrame(PVEFrame, nil, nil, true)
-	AS:StripTextures(PVEFrameLeftInset)
-	AS:SkinCloseButton(PVEFrameCloseButton)
+	AS:SkinFrame(PVEFrame)
+	AS:StripTextures(PVEFrame.Inset)
+	AS:SkinCloseButton(PVEFrame.CloseButton)
+	PVEFrame.portrait:SetAlpha(0)
+	PVEFrame.shadows:SetAlpha(0)
 
-	for i = 1, PVEFrame.numTabs do
-		AS:SkinTab(_G['PVEFrameTab'..i])
+	for i = 1, 3 do
+		AS:SkinTab(PVEFrame['tab'..i])
 	end
 
-	PVEFrame.shadows:Kill()
+	for i = 1, 4 do
+		local Button = GroupFinderFrame["groupButton"..i]
+
+		AS:SkinFrame(Button)
+		Button:SetHighlightTexture('')
+
+		AS:SkinTexture(Button.icon, true)
+		Button.icon:SetSize(45, 45)
+		Button.icon.Backdrop:SetFrameLevel(Button.icon.Backdrop:GetFrameLevel() + 1)
+
+		Button:HookScript('OnEnter', function(self)
+			self:SetBackdropBorderColor(1, .82, 0)
+			self.icon.Backdrop:SetBackdropBorderColor(1, .82, 0)
+		end)
+		Button:HookScript('OnLeave', function(self) 
+			if self:GetID() == GroupFinderFrame.selectionIndex then
+				self:SetBackdropBorderColor(unpack(AS.Color))
+				self.icon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
+			else
+				self:SetBackdropBorderColor(unpack(AS.BorderColor))
+				self.icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end)
+	end
 
 	GroupFinderFrameGroupButton1.icon:SetTexture("Interface\\Icons\\INV_Helmet_08")
 	GroupFinderFrameGroupButton2.icon:SetTexture("Interface\\Icons\\Icon_Scenarios")
 	GroupFinderFrameGroupButton3.icon:SetTexture("Interface\\Icons\\inv_helmet_06")
 	GroupFinderFrameGroupButton4.icon:SetTexture("Interface\\Icons\\Achievement_General_StayClassy")
 
-	for i = 1, 4 do
-		local Button = GroupFinderFrame["groupButton"..i]
-
-		Button.ring:Hide()
-		Button.bg:SetTexture("")
-		Button.bg:SetAllPoints()
-
-		AS:SkinFrame(Button, nil, true)
-		Button:SetHighlightTexture('')
-
-		AS:SkinTexture(Button.icon, true)
-		Button.icon:SetSize(45, 45)
-
-		Button:HookScript('OnEnter', function(self)
-			self:SetBackdropBorderColor(1, .82, 0)
-			self.Backdrop:SetBackdropBorderColor(1, .82, 0)
-		end)
-		Button:HookScript('OnLeave', function(self) 
-			if self:GetID() == GroupFinderFrame.selectionIndex then
-				self:SetBackdropBorderColor(unpack(AS.Color))
-				self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
-			else
-				self:SetBackdropBorderColor(unpack(AS.BorderColor))
-				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end
-		end)
-	end
-
 	hooksecurefunc('GroupFinderFrame_SelectGroupButton', function()
 		for i = 1, 4 do
 			local Button = GroupFinderFrame["groupButton"..i]
 			if GroupFinderFrame.selectionIndex == Button:GetID() then
 				Button:SetBackdropBorderColor(unpack(AS.Color))
-				Button.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
+				Button.icon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 			else
 				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
-				Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+				Button.icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		end
 	end)
 
-	AS:SkinButton(LFDQueueFrameFindGroupButton, true)
-
 	AS:StripTextures(LFDParentFrame)
-	AS:StripTextures(LFDParentFrameInset)
+	AS:StripTextures(LFDParentFrame.Inset)
 	AS:StripTextures(LFDQueueFrame, true)
-	AS:StripTextures(LFDQueueFrameSpecificListScrollFrame, true)
-	AS:SkinScrollBar(LFDQueueFrameSpecificListScrollFrameScrollBar)
 
-	local function ReskinRewards()
-		for i = 1, LFD_MAX_REWARDS do
-			local Button = _G["LFDQueueFrameRandomScrollFrameChildFrameItem"..i]
+	AS:SkinButton(LFDQueueFrameFindGroupButton, true)
+	LFDQueueFrameFindGroupButton:SetPoint('BOTTOM', 0, 2)
 
-			if Button and not Button.reskinned then
-				Button.NameFrame:SetTexture(nil)
-				Button.shortageBorder:SetTexture(nil)
+	AS:SkinScrollBar(LFDQueueFrameSpecificListScrollFrame.ScrollBar)
 
-				AS:SkinTexture(Button.Icon, true)
+	hooksecurefunc("LFGRewardsFrame_SetItemButton", function(parentFrame, dungeonID, index, id, name, texture, numItems, rewardType, rewardID, quality, shortageIndex, showTankIcon, showHealerIcon, showDamageIcon)
+		local parentName = parentFrame:GetName();
+		local Button = _G[parentName.."Item"..index];
+		if Button and not Button.Backdrop then
+			Button.NameFrame:SetTexture(nil)
+			Button.shortageBorder:SetTexture(nil)
 
-				AS:CreateBackdrop(Button)
-				Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
-				Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
-				Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
-				Button:HookScript('OnUpdate', function(self)
-					Button.Border:SetBackdropBorderColor(unpack(AS.BorderColor))
-					if Button.dungeonID then
-						local Link = GetLFGDungeonRewardLink(Button.dungeonID, i)
-						if Link then
-							local Quality = select(3, GetItemInfo(Link))
-							if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then
-								Button.Border:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
-							end
-						end
-					end
-				end)
-				Button.reskinned = true
+			Button.IconBorder:SetAlpha(0)
+			AS:SkinTexture(Button.Icon, true)
+
+			AS:CreateBackdrop(Button)
+			Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 1, 0)
+			Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 1, 0)
+			Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
+			hooksecurefunc(Button.IconBorder, 'SetVertexColor', function(self, r, g, b) Button.Backdrop:SetBackdropBorderColor(r, g, b) Button.Icon.Backdrop:SetBackdropBorderColor(r, g, b) end)
+			hooksecurefunc(Button.IconBorder, 'Hide', function(self) Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) Button.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+		end
+	end)
+
+	AS:SkinScrollBar(LFDQueueFrameRandomScrollFrame.ScrollBar)
+	AS:SkinButton(LFDQueueFrameRandomScrollFrameChildFrameBonusRepFrame.ChooseButton)
+
+	hooksecurefunc('LFGDungeonReadyDialog_UpdateRewards', function()
+		for i = 1, LFG_ROLE_NUM_SHORTAGE_TYPES do
+			local Button = LFGDungeonReadyDialogRewardsFrame.Rewards[i]
+			if Button then
+				AS:SkinTexture(Button.texture, true)
+				Button:DisableDrawLayer('OVERLAY')
 			end
 		end
-		AS:SkinButton(LFDQueueFrameRandomScrollFrameChildFrameBonusRepFrame.ChooseButton)
-	end
-
-	hooksecurefunc("LFDQueueFrameRandom_UpdateFrame", ReskinRewards)
+	end)
 
 	AS:SkinDropDownBox(LFDQueueFrameTypeDropDown)
 	LFDQueueFrameTypeDropDown:SetPoint('BOTTOMLEFT', LFDQueueFrame, 'BOTTOMLEFT', 85, 285)
@@ -108,7 +104,7 @@ function AS:Blizzard_PvE(event, addon)
 
 	AS:StripTextures(RaidFinderFrame)
 	AS:StripTextures(RaidFinderFrameBottomInset)
-	AS:StripTextures(RaidFinderFrameRoleInset)
+	AS:StripTextures(RaidFinderFrame.Inset)
 	RaidFinderFrameBottomInsetBg:Hide()
 	RaidFinderFrameBtnCornerRight:Hide()
 	RaidFinderFrameButtonBottomBorder:Hide()
@@ -122,110 +118,46 @@ function AS:Blizzard_PvE(event, addon)
 	AS:SkinButton(RaidFinderQueueFramePartyBackfillBackfillButton)
 	AS:SkinButton(RaidFinderQueueFramePartyBackfillNoBackfillButton)
 
-	local function SkinMoneyReward(MoneyReward)
-		MoneyReward.NameFrame:SetTexture(nil)
-		AS:SkinTexture(MoneyReward.Icon, true)
-
-		AS:CreateBackdrop(MoneyReward)
-		MoneyReward.Backdrop:SetPoint('TOPLEFT', MoneyReward.Icon, 'TOPRIGHT', 0, 0)
-		MoneyReward.Backdrop:SetPoint('BOTTOMLEFT', MoneyReward.Icon, 'BOTTOMRIGHT', 0, 0)
-		MoneyReward.Backdrop:SetPoint('RIGHT', MoneyReward, 'RIGHT', -5, 0)
-	end
-
-	SkinMoneyReward(LFDQueueFrameRandomScrollFrameChildFrameMoneyReward)
-	SkinMoneyReward(RaidFinderQueueFrameScrollFrameChildFrameMoneyReward)
-	SkinMoneyReward(ScenarioQueueFrameRandomScrollFrameChildFrameMoneyReward)
---[[
-	for i = 1, LFD_MAX_REWARDS do
-		local Button = _G["RaidFinderQueueFrameScrollFrameChildFrameItem"..i]
-
-		if Button then
-			Button.NameFrame:SetTexture(nil)
-			Button.shortageBorder:SetTexture(nil)
-
-			AS:SkinTexture(Button.Icon)
-
-			Button.Border = CreateFrame("Frame", nil, Button)
-			AS:SkinFrame(Button.Border)
-			Button.Border:SetOutside(Button.Icon)
-			Button.Border:SetBackdropColor(0, 0, 0, 0)
-
-			AS:CreateBackdrop(Button, AS:CheckOption('SkinTemplate'))
-			Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
-			Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
-			Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
-			Button:HookScript('OnUpdate', function(self)
-				Button.Border:SetBackdropBorderColor(unpack(AS.BorderColor))
-				if Button.dungeonID then
-					local Link = GetLFGDungeonRewardLink(Button.dungeonID, i)
-					if Link then
-						local Quality = select(3, GetItemInfo(Link))
-						if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then
-							Button.Border:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
-						end
-					end
-				end
-			end)
+	hooksecurefunc('LFGRewardsFrame_UpdateFrame', function(parentFrame, dungeonID, background)
+		if ( not dungeonID ) then
+			return;
 		end
-	end
 
-	local function SkinIcons()
-		for i = 1, LFG_ROLE_NUM_SHORTAGE_TYPES do
-			if _G['LFGDungeonReadyDialogRewardsFrameReward'..i] and not _G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone then
-				_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Border']:Kill()
-				AS:SkinTexture(_G['LFGDungeonReadyDialogRewardsFrameReward'..i..'Texture'])
-				_G['LFGDungeonReadyDialogRewardsFrameReward'..i].IsDone = true
-			end
+		parentFrame.MoneyReward.NameFrame:SetTexture(nil)
+		AS:SkinTexture(parentFrame.MoneyReward.Icon, true)
+
+		AS:CreateBackdrop(parentFrame.MoneyReward)
+		parentFrame.MoneyReward.Backdrop:SetPoint('TOPLEFT', parentFrame.MoneyReward.Icon, 'TOPRIGHT', 1, 0)
+		parentFrame.MoneyReward.Backdrop:SetPoint('BOTTOMLEFT', parentFrame.MoneyReward.Icon, 'BOTTOMRIGHT', 1, 0)
+		parentFrame.MoneyReward.Backdrop:SetPoint('RIGHT', parentFrame.MoneyReward, 'RIGHT', -5, 0)
+
+		--parentFrame.bonusRepFrame
+	end)
+
+	for _, Button in pairs({ 'LFDQueueFrameRoleButton', 'RaidFinderQueueFrameRoleButton' }) do
+		for _, Role in pairs({ 'Tank', 'Healer', 'DPS', 'Leader' }) do
+			AS:SkinCheckBox(_G[Button..Role].checkButton)
+			_G[Button..Role].checkButton:SetFrameLevel(_G[Button..Role].checkButton:GetFrameLevel() + 1)
 		end
-	end
-
-	hooksecurefunc('LFGDungeonReadyDialog_UpdateRewards', SkinIcons)
-]]
-	local checkButtons = {
-		"LFDQueueFrameRoleButtonTank",
-		"LFDQueueFrameRoleButtonHealer",
-		"LFDQueueFrameRoleButtonDPS",
-		"LFDQueueFrameRoleButtonLeader",
-		"RaidFinderQueueFrameRoleButtonTank",
-		"RaidFinderQueueFrameRoleButtonHealer",
-		"RaidFinderQueueFrameRoleButtonDPS",
-		"RaidFinderQueueFrameRoleButtonLeader",
-	}
-
-	for _, object in pairs(checkButtons) do
-		_G[object]:GetChildren():SetFrameLevel(_G[object]:GetChildren():GetFrameLevel() + 2)
-		AS:SkinCheckBox(_G[object]:GetChildren())
 	end
 
 	AS:StripTextures(ScenarioFinderFrame)
-	AS:StripTextures(ScenarioFinderFrameInset)
-	AS:SkinDropDownBox(ScenarioQueueFrameTypeDropDown)
-	ScenarioQueueFrameTypeDropDown:SetPoint('TOPLEFT', ScenarioQueueFrame, 'TOPLEFT', 87, -40)
-	AS:StripTextures(ScenarioQueueFrameSpecificScrollFrame, true)
-	AS:StripTextures(ScenarioQueueFrame, true)
+	AS:StripTextures(ScenarioFinderFrame.Inset)
+
+	AS:StripTextures(ScenarioFinderFrame.Queue, true)
+	AS:SkinDropDownBox(ScenarioFinderFrame.Queue.Dropdown)
+	ScenarioFinderFrame.Queue.Dropdown:SetPoint('TOPLEFT', ScenarioFinderFrame.Queue, 'TOPLEFT', 87, -40)
+	AS:StripTextures(ScenarioFinderFrame.Queue.Specific.ScrollFrame, true)
+	AS:SkinScrollBar(ScenarioFinderFrame.Queue.Specific.ScrollFrame.ScrollBar)
+
 	AS:SkinButton(ScenarioQueueFrameFindGroupButton, true)
-	AS:SkinScrollBar(ScenarioQueueFrameSpecificScrollFrameScrollBar)
-
-	AS:StripTextures(LFGDungeonReadyPopup)
-	AS:SkinFrame(LFGDungeonReadyDialog, nil, nil, true)
-	AS:CreateShadow(LFGDungeonReadyDialog)
-	LFGDungeonReadyDialog.SetBackdrop = AS.Noop
-	AS:SkinButton(LFGDungeonReadyDialogLeaveQueueButton)
-	AS:SkinButton(LFGDungeonReadyDialogEnterDungeonButton)
-	AS:SkinCloseButton(LFGDungeonReadyDialogCloseButton)
-	AS:SkinFrame(LFGDungeonReadyStatus)
-	AS:SkinCloseButton(LFGDungeonReadyStatusCloseButton)
-
-	AS:StripTextures(LFDQueueFrameRandomScrollFrameScrollBar)
-	AS:SkinScrollBar(LFDQueueFrameRandomScrollFrameScrollBar)
 
 	AS:StripTextures(LFGListFrame.CategorySelection.Inset)
 	AS:SkinButton(LFGListFrame.CategorySelection.StartGroupButton, true)
 	AS:SkinButton(LFGListFrame.CategorySelection.FindGroupButton, true)
 
 	AS:StripTextures(LFGListFrame.ApplicationViewer, true)
-	AS:StripTextures(LFGListApplicationViewerScrollFrameScrollBar)
-	AS:SkinScrollBar(LFGListApplicationViewerScrollFrameScrollBar)
+	AS:SkinScrollBar(LFGListFrame.ApplicationViewer.ScrollFrame.scrollBar)
 	AS:StripTextures(LFGListFrame.ApplicationViewer.Inset)
 	AS:SkinButton(LFGListFrame.ApplicationViewer.RemoveEntryButton, true)
 	AS:SkinButton(LFGListFrame.ApplicationViewer.EditButton, true)
@@ -238,7 +170,19 @@ function AS:Blizzard_PvE(event, addon)
 	AS:SkinButton(LFGListFrame.SearchPanel.BackButton, true)
 	AS:SkinButton(LFGListFrame.SearchPanel.SignUpButton, true)
 	AS:SkinEditBox(LFGListFrame.SearchPanel.SearchBox)
-	AS:SkinScrollBar(LFGListSearchPanelScrollFrameScrollBar)
+	AS:SkinScrollBar(LFGListFrame.SearchPanel.ScrollFrame.scrollBar)
+
+	AS:StripTextures(LFGDungeonReadyPopup)
+
+	AS:SkinFrame(LFGDungeonReadyDialog, nil, nil, true)
+	AS:SkinCloseButton(LFGDungeonReadyDialogCloseButton)
+	AS:CreateShadow(LFGDungeonReadyDialog)
+	LFGDungeonReadyDialog.SetBackdrop = AS.Noop
+	AS:SkinButton(LFGDungeonReadyDialog.leaveButton)
+	AS:SkinButton(LFGDungeonReadyDialog.enterButton)
+
+	AS:SkinFrame(LFGDungeonReadyStatus)
+	AS:SkinCloseButton(LFGDungeonReadyStatusCloseButton)
 end
 
 AS:RegisterSkin("Blizzard_PvE", AS.Blizzard_PvE)
@@ -414,6 +358,5 @@ function AS:Blizzard_PVPUI(_, addon)
 		end)
 	end
 end
-
 
 AS:RegisterSkin("Blizzard_PVPUI", AS.Blizzard_PVPUI, 'ADDON_LOADED')

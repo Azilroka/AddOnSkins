@@ -141,15 +141,12 @@ function AS:SkinButton(Button, Strip)
 	Button:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
 	Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
-	if Button.Flash then
-		Button.Flash:SetTexture(0, 0, 0, 0)
-
-		AS:CreateBackdrop(Button)
-		Button.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
-		Button.Backdrop:SetBackdropColor(0, 0, 0, 0)
-
-		Button.Flash = Button.Backdrop
-	end
+	--if Button.Flash then
+	--	Button.Flash:SetTexture(0, 0, 0, 0)
+	--	AS:CreateBackdrop(Button.Flash)
+	--	Button.Flash.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
+	--	Button.Flash.Backdrop:SetBackdropColor(0, 0, 0, 0)
+	--end
 end
 
 function AS:CreateShadow(Frame, NoRegister)
@@ -218,49 +215,65 @@ function AS:StyleButton(Button)
 		Button:SetCheckedTexture(Checked)
 	end
 
-	local Cooldown = Button:GetName() and _G[Button:GetName()..'Cooldown']
+	local Cooldown = Button:GetName() and _G[Button:GetName()..'Cooldown'] or Button.Cooldown or Button.cooldown or nil
 
 	if Cooldown then
 		Cooldown:ClearAllPoints()
 		Cooldown:SetInside()
-		Cooldown:SetSwipeColor(0, 0, 0, 1)
+		if Cooldown.SetSwipeColor then
+			Cooldown:SetSwipeColor(0, 0, 0, 1)
+		end
 	end
 
 	Button.HasStyle = true
 end
 
-function AS:SkinCloseButton(CloseButton, Reposition)
-	if CloseButton.Backdrop then return end
+function AS:SkinCloseButton(Button, Reposition)
+	if Button.Backdrop then return end
 
-	AS:SkinBackdropFrame(CloseButton)
+	AS:SkinBackdropFrame(Button)
 
-	CloseButton.Backdrop:Point('TOPLEFT', 7, -8)
-	CloseButton.Backdrop:Point('BOTTOMRIGHT', -8, 8)
+	Button.Backdrop:Point('TOPLEFT', 7, -8)
+	Button.Backdrop:Point('BOTTOMRIGHT', -7, 8)
 
-	CloseButton:SetHitRectInsets(6, 6, 7, 7)
+	Button:SetHitRectInsets(6, 6, 7, 7)
 
-	CloseButton:HookScript('OnEnter', function(self)
-		self.Text:SetTextColor(1, .2, .2)
-		if AS:CheckAddOn('ElvUI') and AS:CheckOption('ElvUISkinModule') then
+	Button:HookScript('OnEnter', function(self)
+		self:GetNormalTexture():SetVertexColor(1, .2, .2)
+		if AS:CheckOption('ElvUISkinModule', 'ElvUI') then
 			self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 		else
 			self.Backdrop:SetBackdropBorderColor(1, .2, .2)
 		end
 	end)
 
-	CloseButton:HookScript('OnLeave', function(self)
-		self.Text:SetTextColor(1, 1, 1)
+	Button:HookScript('OnLeave', function(self)
+		self:GetNormalTexture():SetVertexColor(1, 1, 1)
 		self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 	end)
 
-	CloseButton.Text = CloseButton:CreateFontString(nil, 'OVERLAY')
-	CloseButton.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\PTSansNarrow.TTF]], 16, 'OUTLINE')
-	CloseButton.Text:SetPoint('CENTER', CloseButton, 'CENTER')
-	CloseButton.Text:SetJustifyH('CENTER')
-	CloseButton.Text:SetText('x')
+	local Mask = Button:CreateMaskTexture()
+	Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Close]], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
+	Mask:SetSize(10, 10)
+	Mask:SetPoint('CENTER')
+
+	Button.Mask = Mask
+
+	Button:SetNormalTexture(AS.NormTex)
+	Button:SetPushedTexture(AS.NormTex)
+
+	local Normal, Pushed = Button:GetNormalTexture(), Button:GetPushedTexture()
+
+	Normal:SetInside(Button.Backdrop)
+	Normal:SetVertexColor(1, 1, 1)
+	Normal:AddMaskTexture(Mask)
+
+	Pushed:SetInside(Button.Backdrop)
+	Pushed:SetVertexColor(1, .2, .2)
+	Pushed:AddMaskTexture(Mask)
 
 	if Reposition then
-		CloseButton:Point('TOPRIGHT', Reposition, 'TOPRIGHT', 2, 2)
+		Button:Point('TOPRIGHT', Reposition, 'TOPRIGHT', 2, 2)
 	end
 end
 
@@ -309,7 +322,12 @@ function AS:SkinRadioButton(Button)
 
 	Button.OutsideMask = OutsideMask
 
-	local Check, Highlight, Normal = Button:GetCheckedTexture(), Button:GetHighlightTexture(), Button:GetNormalTexture()
+	Button:SetCheckedTexture(AS.NormTex)
+	Button:SetNormalTexture(AS.NormTex)
+	Button:SetHighlightTexture(AS.NormTex)
+	Button:SetDisabledTexture(AS.NormTex)
+
+	local Check, Highlight, Normal, Disabled = Button:GetCheckedTexture(), Button:GetHighlightTexture(), Button:GetNormalTexture(), Button:GetDisabledTexture()
 
 	Check:SetVertexColor(unpack(AS.Color))
 	Check:SetTexCoord(0, 1, 0, 1)
@@ -325,13 +343,8 @@ function AS:SkinRadioButton(Button)
 	Normal:SetVertexColor(unpack(AS.BorderColor))
 	Normal:AddMaskTexture(OutsideMask)
 
-	Button:SetCheckedTexture(AS.NormTex)
-	Button:SetNormalTexture(AS.NormTex)
-	Button:SetHighlightTexture(AS.NormTex)
-	Button:SetDisabledTexture(AS.NormTex)
-
-	Button:GetDisabledTexture():SetVertexColor(.3, .3, .3)
-	Button:GetDisabledTexture():AddMaskTexture(OutsideMask)
+	Disabled:SetVertexColor(.3, .3, .3)
+	Disabled:AddMaskTexture(OutsideMask)
 
 	Button.SetNormalTexture = AS.Noop
 	Button.SetDisabledTexture = AS.Noop
@@ -424,35 +437,51 @@ function AS:SkinScrollBar(Frame)
 	for _, Button in pairs({ ScrollUpButton, ScrollDownButton }) do
 		if Button then
 			AS:StripTextures(Button)
-			AS:SetTemplate(Button, 'Default')
+			AS:SetTemplate(Button)
 
-			if not Button.Text then
-				Button.Text = Button:CreateFontString(nil, 'OVERLAY')
-				Button.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\Arial.TTF]], 12)
-				Button.Text:SetText(Button == ScrollUpButton and '▲' or '▼')
-				Button.Text:SetPoint('CENTER', 0, 0)
+			local Mask = Button:CreateMaskTexture()
+			Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..(Button == ScrollUpButton and 'UpArrow' or 'DownArrow'), 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
+			Mask:SetSize(10, 10)
+			Mask:SetPoint('CENTER')
 
-				Button:HookScript('OnShow', function(self)
-					if not self:IsEnabled() then
-						self.Text:SetTextColor(.3, .3, .3)
-					end
-				end)
+			Button.Mask = Mask
 
-				Button:HookScript('OnDisable', function(self) self.Text:SetTextColor(.3, .3, .3) end)
-				Button:HookScript('OnEnable', function(self) self.Text:SetTextColor(1, 1, 1) end)
-				Button:HookScript('OnEnter', function(self)
-					self:SetBackdropBorderColor(unpack(AS.Color))
-					self.Text:SetTextColor(unpack(AS.Color))
-				end)
-				Button:HookScript('OnLeave', function(self)
-					self:SetBackdropBorderColor(unpack(AS.BorderColor))
-					self.Text:SetTextColor(1, 1, 1)
-				end)
-			end
+			Button:SetNormalTexture(AS.NormTex)
+			Button:SetDisabledTexture(AS.NormTex)
+			Button:SetPushedTexture(AS.NormTex)
+
+			local Normal, Disabled, Pushed = Button:GetNormalTexture(), Button:GetDisabledTexture(), Button:GetPushedTexture()
+
+			Normal:SetInside()
+			Normal:SetTexCoord(0, 1, 0, 1)
+			Normal.SetTexCoord = AS.Noop
+			Normal:SetVertexColor(1, 1, 1)
+			Normal:AddMaskTexture(Mask)
+
+			Disabled:SetInside()
+			Disabled:SetTexCoord(0, 1, 0, 1)
+			Disabled.SetTexCoord = AS.Noop
+			Disabled:SetVertexColor(.3, .3, .3)
+			Disabled:AddMaskTexture(Mask)
+
+			Pushed:SetInside()
+			Pushed:SetTexCoord(0, 1, 0, 1)
+			Pushed.SetTexCoord = AS.Noop
+			Pushed:SetVertexColor(unpack(AS.Color))
+			Pushed:AddMaskTexture(Mask)
+
+			Button:HookScript('OnEnter', function(self)
+				self:SetBackdropBorderColor(unpack(AS.Color))
+				Normal:SetVertexColor(unpack(AS.Color))
+			end)
+			Button:HookScript('OnLeave', function(self)
+				self:SetBackdropBorderColor(unpack(AS.BorderColor))
+				Normal:SetVertexColor(1, 1, 1)
+			end)
 		end
 	end
 
-	if Thumb and not Thumb.Backdrop then
+	if Thumb then
 		Thumb:SetTexture('')
 		AS:CreateBackdrop(Thumb)
 		Thumb.Backdrop:SetPoint('TOPLEFT', Thumb, 'TOPLEFT', 2, -4)
@@ -695,8 +724,8 @@ function AS:SkinMaxMinFrame(frame)
 			end)
 
 			button:HookScript('OnEnter', function(self)
-				self:SetBackdropBorderColor(unpack(AS.ValueColor or AS.ClassColor))
-				self.Text:SetTextColor(unpack(AS.ValueColor or AS.ClassColor))
+				self:SetBackdropBorderColor(unpack(AS.Color))
+				self.Text:SetTextColor(unpack(AS.Color))
 			end)
 
 			button:HookScript('OnLeave', function(self)
