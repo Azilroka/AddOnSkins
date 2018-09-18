@@ -1,7 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-local AddOnSkinned = 0
-function AS:Blizzard_Guild(event, addon)
+function AS:Blizzard_GuildUI(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		AS:SkinFrame(PetitionFrame, nil, nil, true)
 		AS:StripTextures(PetitionFrameInset)
@@ -82,7 +81,8 @@ function AS:Blizzard_Guild(event, addon)
 			end
 		end
 	end
-	if (addon == "Blizzard_GuildUI" or IsAddOnLoaded("Blizzard_GuildUI")) and not GuildFrame.isSkinned then
+
+	if (addon == "Blizzard_GuildUI" or IsAddOnLoaded("Blizzard_GuildUI")) then
 		AS:SkinFrame(GuildFrame, nil, nil, true)
 		AS:CreateShadow(GuildFrame)
 
@@ -261,10 +261,15 @@ function AS:Blizzard_Guild(event, addon)
 		end
 
 		AS:SkinScrollBar(GuildRewardsContainerScrollBar)
-		GuildFrame.isSkinned = true
-		AddOnSkinned = AddOnSkinned + 1
+
+		AS:UnregisterSkinEvent('Blizzard_Guild', 'ADDON_LOADED')
 	end
-	if (addon == 'Blizzard_GuildControlUI' or IsAddOnLoaded('Blizzard_GuildControlUI')) and not GuildControlUI.isSkinned then
+end
+
+AS:RegisterSkin('Blizzard_GuildUI', AS.Blizzard_GuildUI, 'ADDON_LOADED')
+
+function AS:Blizzard_GuildControlUI(event, addon)
+	if (addon == 'Blizzard_GuildControlUI' or IsAddOnLoaded('Blizzard_GuildControlUI')) then
 		AS:SkinFrame(GuildControlUI)
 		AS:StripTextures(GuildControlUIHbar)
 		AS:CreateShadow(GuildControlUI)
@@ -340,11 +345,13 @@ function AS:Blizzard_Guild(event, addon)
 		AS:StripTextures(GuildControlUIRankBankFrameInset)
 		AS:StripTextures(GuildControlUIRankBankFrameInsetScrollFrame)
 		AS:SkinScrollBar(GuildControlUIRankBankFrameInsetScrollFrameScrollBar)
-		GuildControlUI.isSkinned = true
-		AddOnSkinned = AddOnSkinned + 1
 	end
-	if (event == 'Blizzard_GuildBankUI' or IsAddOnLoaded('Blizzard_GuildBankUI')) and not GuildBankFrame.isSkinned then
-		GuildBankFrame.isSkinned = true
+end
+
+AS:RegisterSkin('Blizzard_GuildControlUI', AS.Blizzard_GuildControlUI, 'ADDON_LOADED')
+
+function AS:Blizzard_GuildBankUI(event, addon)
+	if (event == 'Blizzard_GuildBankUI' or IsAddOnLoaded('Blizzard_GuildBankUI')) then
 		AS:SkinFrame(GuildBankFrame)
 		AS:StripTextures(GuildBankEmblemFrame, true)
 
@@ -412,11 +419,7 @@ function AS:Blizzard_Guild(event, addon)
 		AS:SkinEditBox(GuildItemSearchBox)
 		AS:StripTextures(GuildBankMoneyFrameBackground)
 		AS:SkinScrollBar(GuildBankInfoScrollFrameScrollBar)
-		AddOnSkinned = AddOnSkinned + 1
-	end
-	if AddOnSkinned == 3 then
-		AS:UnregisterSkinEvent('Blizzard_Guild', 'ADDON_LOADED')
 	end
 end
 
-AS:RegisterSkin('Blizzard_Guild', AS.Blizzard_Guild, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_GuildBankUI', AS.Blizzard_GuildBankUI, 'ADDON_LOADED')
