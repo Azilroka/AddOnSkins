@@ -14,29 +14,15 @@ function AS:Blizzard_LootFrames()
 		Frame.Timer:ClearAllPoints()
 		Frame.Timer:SetInside()
 		AS:SkinStatusBar(Frame.Timer)
-		Frame.Timer.Backdrop:SetBackdropBorderColor(0, 0, 0, 0)
-
-		Frame:HookScript('OnUpdate', function(self)
-			local texture, name, count, quality, bindOnPickUp, canNeed, canGreed, canDisenchant, reasonNeed, reasonGreed, reasonDisenchant, deSkillRequired = GetLootRollItemInfo(self.rollID)
-			if not name then return end
-			local color = ITEM_QUALITY_COLORS[quality]
-			self.Name:SetText((bindOnPickUp and "BoP" or "BoE")..' |cFFFFFFFF'..name)
-			self.Name:SetVertexColor(bindOnPickUp and 1 or .3, bindOnPickUp and .3 or 1, bindOnPickUp and .1 or .3)
-			self.Timer:SetStatusBarColor(color.r, color.g, color.b)
-			self.Timer:SetFrameLevel(self:GetFrameLevel() + 1)
-			for _, Button in pairs({'NeedButton', 'GreedButton', 'PassButton', 'DisenchantButton'}) do
-				self[Button]:SetFrameLevel(self.Timer:GetFrameLevel() + 2)
-			end
-		end)
 
 		Frame.IconFrame:ClearAllPoints()
-		Frame.IconFrame:SetSize(28, 28)	
+		Frame.IconFrame:SetSize(28, 28)
 		Frame.IconFrame:SetPoint('RIGHT', Frame, 'LEFT', -3, 0)
 
+		AS:SetTemplate(Frame.IconFrame)
 		AS:SkinTexture(Frame.IconFrame.Icon)
 		Frame.IconFrame.Icon:SetInside()
 		Frame.IconFrame.Border:SetAlpha(0)
-		AS:SetTemplate(Frame.IconFrame)
 
 		for _, Button in pairs({'NeedButton', 'GreedButton', 'PassButton', 'DisenchantButton'}) do
 			Frame[Button]:ClearAllPoints()
@@ -52,8 +38,18 @@ function AS:Blizzard_LootFrames()
 		Frame.Name:SetWordWrap(false)
 		Frame.Name:SetWidth(200)
 		Frame.Name:SetPoint('LEFT', Frame.PassButton, 'RIGHT', 5, 0)
-		Frame.Name:SetDrawLayer('OVERLAY')
 	end
+
+	hooksecurefunc('GroupLootFrame_OnShow', function(self)
+		local texture, name, count, quality, bindOnPickUp = GetLootRollItemInfo(self.rollID);
+		if (name == nil) then
+			return;
+		end
+
+		self.Name:SetText((bindOnPickUp and "BoP" or "BoE")..' |cFFFFFFFF'..name)
+		self.Name:SetVertexColor(bindOnPickUp and 1 or .3, bindOnPickUp and .3 or 1, bindOnPickUp and .1 or .3)
+		self.Timer:SetStatusBarColor(GetItemQualityColor(quality))
+	end)
 
 	--[[
 	AS:SkinFrame(MissingLootFrame)

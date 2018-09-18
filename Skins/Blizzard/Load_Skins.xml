@@ -22,7 +22,6 @@
 	<Script file="Inspect.lua"/>
 	<Script file="ItemSocketing.lua"/>
 	<Script file="LFG.lua"/>
-	<Script file="Loot.lua"/>
 	<Script file="Macro.lua"/>
 	<Script file="Mail.lua"/>
 	<Script file="Merchant.lua"/>
