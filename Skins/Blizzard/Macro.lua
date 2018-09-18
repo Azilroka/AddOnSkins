@@ -3,38 +3,28 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_MacroUI(event, addon)
 	if (addon == 'Blizzard_MacroUI' or IsAddOnLoaded('Blizzard_MacroUI')) then
 		AS:UnregisterSkinEvent('Blizzard_MacroUI', 'ADDON_LOADED')
+
 		AS:SkinFrame(MacroFrame)
 		MacroFrame:SetWidth(360)
-		AS:SkinCloseButton(MacroFrameCloseButton)
+		AS:SkinCloseButton(MacroFrame.CloseButton)
 
-		AS:SkinFrame(MacroPopupFrame, nil, nil, true)
-		MacroPopupFrame:HookScript('OnShow', function(self)
-			self:SetHeight(515)
-			self.BG:SetAlpha(0)
-			AS:StripTextures(self.BorderBox)
-			self:SetPoint("TOPLEFT", MacroFrame, "TOPRIGHT", 5, 0)
-			for i = 1, 90 do
-				AS:SkinIconButton(_G["MacroPopupButton"..i])
-			end
-		end)
+		AS:SkinFrame(MacroPopupFrame)
+		MacroPopupFrame:SetHeight(MacroPopupFrame:GetHeight() + 15)
+		AS:StripTextures(MacroPopupFrame.BorderBox)
+		AS:SkinButton(MacroPopupFrame.BorderBox.OkayButton)
+		AS:SkinButton(MacroPopupFrame.BorderBox.CancelButton)
+		MacroPopupFrame.BorderBox.CancelButton:SetPoint("BOTTOMRIGHT", -11, 10)
 
 		for i = 1, MAX_ACCOUNT_MACROS do
 			AS:SkinIconButton(_G["MacroButton"..i])
 		end
 
-		local Buttons = {
-			MacroDeleteButton,
-			MacroNewButton,
-			MacroExitButton,
-			MacroEditButton,
-			MacroPopupOkayButton,
-			MacroPopupCancelButton,
-			MacroSaveButton,
-			MacroCancelButton,
-		}
+		AS:Delay(0, function() for i = 1, 90 do AS:SkinIconButton(_G["MacroPopupButton"..i]) end end)
+
+		local Buttons = { MacroDeleteButton, MacroNewButton, MacroExitButton, MacroEditButton, MacroSaveButton, MacroCancelButton }
 
 		for _, Button in pairs(Buttons) do
-			AS:SkinButton(Button, true)
+			AS:SkinButton(Button)
 		end
 
 		for i = 1, 2 do
@@ -49,6 +39,7 @@ function AS:Blizzard_MacroUI(event, addon)
 		AS:SkinScrollBar(MacroButtonScrollFrameScrollBar)
 		AS:SkinScrollBar(MacroFrameScrollFrameScrollBar)
 		AS:SkinScrollBar(MacroPopupScrollFrameScrollBar)
+		MacroPopupScrollFrame:SetHeight(MacroPopupScrollFrame:GetHeight() + 14)
 		AS:StripTextures(MacroFrameInset)
 
 		AS:SkinEditBox(MacroPopupEditBox)
