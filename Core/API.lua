@@ -85,11 +85,14 @@ function AS:CreateBackdrop(Frame, Template, Texture)
 	Frame.Backdrop = Backdrop
 end
 
-function AS:StripTextures(Object, Alpha)
+function AS:StripTextures(Object, Kill, Alpha)
 	for i = 1, Object:GetNumRegions() do
 		local Region = select(i, Object:GetRegions())
 		if Region and Region:IsObjectType('Texture') then
-			if Alpha then
+			if Kill then
+				Region:Hide()
+				Region.Show = AS.Noop
+			elseif Alpha then
 				Region:SetAlpha(0)
 			else
 				Region:SetTexture(nil)
@@ -98,24 +101,7 @@ function AS:StripTextures(Object, Alpha)
 	end
 end
 
-local BlizzardRegions = {
-	'Left',
-	'Middle',
-	'Right',
-	'Mid',
-	'LeftDisabled',
-	'MiddleDisabled',
-	'RightDisabled',
-	'TopLeft',
-	'TopRight',
-	'BottomLeft',
-	'BottomRight',
-	'TopMiddle',
-	'MiddleLeft',
-	'MiddleRight',
-	'BottomMiddle',
-	'MiddleMiddle',
-}
+local BlizzardRegions = { 'Left', 'Middle', 'Right', 'Mid', 'LeftDisabled', 'MiddleDisabled', 'RightDisabled', 'TopLeft', 'TopRight', 'BottomLeft', 'BottomRight', 'TopMiddle', 'MiddleLeft', 'MiddleRight', 'BottomMiddle', 'MiddleMiddle' }
 
 function AS:SkinButton(Button, Strip)
 	if Button.isSkinned then return end
@@ -192,33 +178,26 @@ function AS:StyleButton(Button)
 	if Button.HasStyle then return end
 
 	if Button.SetHighlightTexture then
-		local Hover = Button:CreateTexture()
-		Hover:SetColorTexture(1, 1, 1, 0.3)
-		Hover:SetInside()
-
-		Button:SetHighlightTexture(Hover)
+		Button:SetHighlightTexture(AS.Blank)
+		Button:GetHighlightTexture():SetVertexColor(1, 1, 1, .5)
+		Button:GetHighlightTexture():SetInside()
 	end
 
 	if Button.SetPushedTexture then
-		local Pushed = Button:CreateTexture()
-		Pushed:SetColorTexture(0.9, 0.8, 0.1, 0.3)
-		Pushed:SetInside()
-
-		Button:SetPushedTexture(Pushed)
+		Button:SetPushedTexture(AS.Blank)
+		Button:GetPushedTexture():SetVertexColor(.9, .8, .1, .5)
+		Button:GetPushedTexture():SetInside()
 	end
 
-	if Button.SetCheckedTexture then
-		local Checked = Button:CreateTexture()
-		Checked:SetColorTexture(0,1,0,.3)
-		Checked:SetInside()
-
-		Button:SetCheckedTexture(Checked)
+	if Button.GetCheckedTexture then
+		Button:SetPushedTexture(AS.Blank)
+		Button:GetCheckedTexture():SetVertexColor(0, 1, 0, .5)
+		Button:GetCheckedTexture():SetInside()
 	end
 
 	local Cooldown = Button:GetName() and _G[Button:GetName()..'Cooldown'] or Button.Cooldown or Button.cooldown or nil
 
 	if Cooldown then
-		Cooldown:ClearAllPoints()
 		Cooldown:SetInside()
 		if Cooldown.SetSwipeColor then
 			Cooldown:SetSwipeColor(0, 0, 0, 1)
@@ -379,13 +358,12 @@ function AS:SkinCheckBox(CheckBox)
 end
 
 function AS:SkinTab(Tab, Strip)
-	if Tab.isSkinned then return end
-
-	local TabName = Tab:GetName()
+	if Tab.Backdrop then return end
 
 	if Strip then
 		AS:StripTextures(Tab)
 	else
+		local TabName = Tab:GetName()
 		for _, Region in pairs(BlizzardRegions) do
 			if TabName and _G[TabName..Region] then
 				_G[TabName..Region]:SetTexture(nil)
@@ -402,19 +380,17 @@ function AS:SkinTab(Tab, Strip)
 
 	AS:CreateBackdrop(Tab)
 
-	if AS:CheckOption('ElvUISkinModule', 'ElvUI') then
-		-- Check if ElvUI already provides the backdrop. Otherwise we have two backdrops (e.g. Auctionhouse)
-		if Tab.backdrop then
+	Tab:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.Color)) end)
+	Tab:HookScript('OnLeave', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+
+	if AS:CheckAddOn('ElvUI') or AS:CheckOption('ElvUISkinModule', 'ElvUI') then
+		if Tab.backdrop then -- Check if ElvUI already provides the backdrop. Otherwise we have two backdrops (e.g. Auctionhouse)
 			Tab.Backdrop:Hide()
-		else
-			AS:SetTemplate(Tab.Backdrop, 'Default')
 		end
 	end
 
 	Tab.Backdrop:Point('TOPLEFT', 10, AS.PixelPerfect and -1 or -3)
 	Tab.Backdrop:Point('BOTTOMRIGHT', -10, 3)
-
-	Tab.isSkinned = true
 end
 
 local function GrabScrollBarElement(frame, element)
