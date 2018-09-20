@@ -126,10 +126,10 @@ function AS:SkinButton(Button, Strip)
 
 	if Button.GetFontString and Button:GetFontString() ~= nil then
 		if Button:IsEnabled() then
-		Button:GetFontString():SetTextColor(1, 1, 1)
+			Button:GetFontString():SetTextColor(1, 1, 1)
 		else
 			Button:GetFontString():SetTextColor(.5, .5, .5)
-	end
+		end
 	end
 
 	Button:HookScript("OnEnable", function(self)
