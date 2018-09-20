@@ -1,17 +1,18 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Gossip()
-	AS:StripTextures(GossipFrameGreetingPanel)
-
-	AS:StripTextures(GossipFrameGreetingGoodbyeButton)
-	AS:SkinButton(GossipFrameGreetingGoodbyeButton)
 	AS:SkinFrame(GossipFrame)
 	GossipFrame:SetHeight(500)
-	GossipFramePortrait:Kill()
-	AS:StripTextures(GossipFrameInset)
-	AS:SkinCloseButton(GossipFrameCloseButton)
-	AS:SkinScrollBar(GossipGreetingScrollFrameScrollBar)
+
+	AS:StripTextures(GossipFrame.Inset)
+	AS:SkinCloseButton(GossipFrame.CloseButton)
+	GossipFramePortrait:SetAlpha(0)
+
+	AS:StripTextures(GossipFrameGreetingPanel)
+	AS:SkinButton(GossipFrameGreetingGoodbyeButton)
+
 	AS:SkinFrame(GossipGreetingScrollFrame)
+	AS:SkinScrollBar(GossipGreetingScrollFrame.ScrollBar)
 
 	if AS.ParchmentEnabled then
 		GossipGreetingScrollFrame.Background = GossipGreetingScrollFrame:CreateTexture(nil, 'ARTWORK')
@@ -19,14 +20,18 @@ function AS:Blizzard_Gossip()
 		GossipGreetingScrollFrame.Background:SetInside()
 		GossipGreetingScrollFrame.Background:SetTexCoord(0, .585, 0.02, .655)
 	else
+		local r, g, b = unpack(AS.ClassColor)
+
 		for i = 1, NUMGOSSIPBUTTONS do
-			select(3, _G["GossipTitleButton"..i]:GetRegions()):SetTextColor(1, 1, 1)
+			_G["GossipTitleButton"..i]:GetFontString():SetTextColor(1, 1, 1)
+			_G["GossipTitleButton"..i]:GetHighlightTexture():SetColorTexture(r, g, b, .3)
+			_G["GossipTitleButton"..i]:GetHighlightTexture():SetInside(_G["GossipTitleButton"..i], 2, 0)
 		end
 
-		GossipGreetingText:SetTextColor(1,1,1)
+		GossipGreetingText:SetTextColor(1, 1, 1)
 
 		hooksecurefunc("GossipFrameUpdate", function()
-			for i=1, NUMGOSSIPBUTTONS do
+			for i = 1, NUMGOSSIPBUTTONS do
 				local button = _G["GossipTitleButton"..i]
 				if button:GetFontString() then
 					if button:GetFontString():GetText() and button:GetFontString():GetText():find("|cff000000") then
