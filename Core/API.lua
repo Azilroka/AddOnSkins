@@ -124,6 +124,10 @@ function AS:SkinButton(Button, Strip)
 	if Button.SetPushedTexture then Button:SetPushedTexture('') end
 	if Button.SetDisabledTexture then Button:SetDisabledTexture('') end
 
+	if Button.GetFontString and Button:GetFontString() ~= nil then
+		Button:GetFontString():SetTextColor(1, 1, 1)
+	end
+
 	Button:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
 	Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
