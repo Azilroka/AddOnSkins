@@ -26,6 +26,10 @@ end
 
 function AS:SetOption(optionName, value)
 	self.db[optionName] = value
+
+	if AddOnSkinsDS[AS.Version] and AddOnSkinsDS[AS.Version][optionName] == true then
+		AddOnSkinsDS[AS.Version][optionName] = nil
+	end
 end
 
 function AS:GetColor(name)
