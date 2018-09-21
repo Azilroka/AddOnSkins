@@ -398,6 +398,8 @@ function AS:SkinTab(Tab, Strip)
 
 	AS:CreateBackdrop(Tab)
 
+	Tab:GetFontString():SetTextColor(1, 1, 1)
+
 	Tab:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.Color)) end)
 	Tab:HookScript('OnLeave', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 

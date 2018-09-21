@@ -21,6 +21,8 @@ function AS:Blizzard_PvE()
 		Button.icon:SetSize(45, 45)
 		Button.icon.Backdrop:SetFrameLevel(Button.icon.Backdrop:GetFrameLevel() + 1)
 
+		Button.name:SetTextColor(1, 1, 1)
+
 		Button:HookScript('OnEnter', function(self)
 			self:SetBackdropBorderColor(1, .82, 0)
 			self.icon.Backdrop:SetBackdropBorderColor(1, .82, 0)
@@ -207,6 +209,8 @@ function AS:Blizzard_PVPUI(event, addon)
 		Button.Ring:SetTexture('')
 		Button.Icon:SetSize(45, 45)
 		AS:SkinTexture(Button.Icon, true)
+
+		Button.Name:SetTextColor(1, 1, 1)
 
 		Button:SetHighlightTexture('')
 		Button:HookScript('OnEnter', function(self)
