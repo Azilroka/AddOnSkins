@@ -31,7 +31,6 @@ function AS:WeakAuras()
 			end
 			if frame.cooldown and AS:CheckOption('WeakAuraIconCooldown', 'ElvUI') then
 				ElvUI[1]:RegisterCooldown(frame.cooldown)
-				ElvUI[1]:UpdateCooldownSettings('global')
 			end
 		end
 	end
@@ -66,6 +65,11 @@ function AS:WeakAuras()
 			Skin_WeakAuras(WeakAuras.regions[weakAura].region, WeakAuras.regions[weakAura].regionType)
 		end
 	end
+
+	if AS:CheckAddOn('ElvUI') then
+		local Timer = AS:ScheduleRepeatingTimer(function() ElvUI[1]:UpdateCooldownSettings('global') end, 1)
+		AS:Delay(60, function() AS:CanelTimer(Timer) end)
+	end
 end
 
-AS:RegisterSkin('WeakAuras', AS.WeakAuras)
+AS:RegisterSkinForPreload('WeakAuras', AS.WeakAuras)
