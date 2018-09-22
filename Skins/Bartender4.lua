@@ -15,16 +15,16 @@ function AS:Bartender4()
 		local Btname = _G[Name.."Name"]
 		local Normal  = _G[Name.."NormalTexture"]
 		local BtnBG = _G[Name.."FloatingBG"]
-	 
+
 		Flash:SetTexture("")
 		Button:SetNormalTexture("")
-	 
+
 		Count:ClearAllPoints()
 		Count:SetPoint("BOTTOMRIGHT", 0, 2)
-		
+
 		HotKey:ClearAllPoints()
 		HotKey:SetPoint("TOPRIGHT", 0, -3)
-		
+
 		if Border and Button.isSkinned then
 			Border:SetTexture('')
 			if Border:IsShown() then
@@ -33,25 +33,25 @@ function AS:Bartender4()
 				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		end
-		
+
 		if Btname and Normal then
 			local String = GetActionText(Action)
-			
+
 			if String then
 				local Text = string.sub(String, 1, 5)
 				Btname:SetText(Text)
 			end
 		end
-		
+
 		if (Button.isSkinned) then
 			return
 		end
-		
+
 		if (Btname) then
 			Btname:ClearAllPoints()
 			Btname:SetPoint("BOTTOM", 1, 1)
 		end
-		
+
 		if (BtnBG) then
 			BtnBG:Kill()
 		end
@@ -62,13 +62,13 @@ function AS:Bartender4()
 
 		AS:SkinTexture(Icon)
 		Icon:SetInside()
-		Icon:SetDrawLayer('BACKGROUND', 1)
+		Icon:SetDrawLayer('ARTWORK', 1)
 
 		if (Normal) then
 			Normal:ClearAllPoints()
 			Normal:SetPoint("TOPLEFT")
 			Normal:SetPoint("BOTTOMRIGHT")
-			
+
 			if (Button:GetChecked()) then
 				ActionButton_UpdateState(Button)
 			end

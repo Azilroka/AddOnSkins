@@ -19,8 +19,7 @@ function AS:Dominos()
 		button:SetNormalTexture("")
 
 		if border then
-			border:Hide()
-			border = AS.Noop
+			border:SetAlpha(0)
 		end
 
 		if count then
@@ -49,6 +48,7 @@ function AS:Dominos()
 
 			AS:SkinTexture(icon)
 			icon:SetInside()
+			icon:SetDrawLayer("ARTWORK")
 
 			button.isSkinned = true
 		end
@@ -86,6 +86,7 @@ function AS:Dominos()
 			AS:SkinTexture(icon)
 			icon:ClearAllPoints()
 			icon:SetInside()
+			icon:SetDrawLayer("ARTWORK")
 
 			if pet then
 				local autocast = _G[name.."AutoCastable"]
