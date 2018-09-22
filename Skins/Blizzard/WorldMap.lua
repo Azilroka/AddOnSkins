@@ -11,10 +11,12 @@ function AS:Blizzard_WorldMap()
 	AS:StripTextures(WorldMapFrame.NavBar)
 	AS:StripTextures(WorldMapFrame.NavBar.overlay)
 
-	AS:SkinBackdropFrame(WorldMapFrameHomeButton)
-	WorldMapFrameHomeButton.Backdrop:SetPoint("TOPLEFT", WorldMapFrameHomeButton, "TOPLEFT", 0, 0)
-	WorldMapFrameHomeButton.Backdrop:SetPoint("BOTTOMRIGHT", WorldMapFrameHomeButton, "BOTTOMRIGHT", -15, 0)
-	WorldMapFrameHomeButton:SetFrameLevel(1)
+	AS:SkinButton(WorldMapFrameHomeButton)
+	WorldMapFrameHomeButton.xoffset = 1
+	WorldMapFrameHomeButton:SetPoint('LEFT', -60, 0)
+	WorldMapFrameHomeButton.text:SetFont(AS.Font, 13)
+	WorldMapFrameHomeButton.text:ClearAllPoints()
+	WorldMapFrameHomeButton.text:SetPoint('CENTER')
 
 	AS:SkinScrollBar(QuestScrollFrameScrollBar)
 

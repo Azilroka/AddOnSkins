@@ -1,58 +1,5 @@
 local AS = unpack(AddOnSkins)
 
-	--[[if event == 'PLAYER_ENTERING_WORLD' then
-		AS:StripTextures(PetStableFrame)
-		AS:SkinFrame(PetStableFrame)
-		--AS:CreateShadow(PetStableFrame)
-		AS:StripTextures(PetStableFrameInset)
-		AS:StripTextures(PetStableLeftInset)
-		AS:StripTextures(PetStableBottomInset)
-		AS:SkinCloseButton(PetStableFrameCloseButton)
-		AS:SkinNextPrevButton(PetStablePrevPageButton)
-		AS:SkinNextPrevButton(PetStableNextPageButton)
-
-		AS:CreateBackdrop(PetStableModel)
-		AS:CreateBackdrop(PetStablePetInfo)
-		PetStablePetInfo.Backdrop:SetOutside(PetStableSelectedPetIcon)
-		AS:SkinTexture(PetStableSelectedPetIcon)
-		PetStableSelectedPetIcon:SetSize(36, 36)
-
-		for i = 1, 5 do
-			local Button = _G["PetStableActivePet"..i]
-			local Icon = _G["PetStableActivePet"..i..'IconTexture']
-			AS:SkinTexture(Icon)
-			Icon:SetInside()
-			Button.Border:Hide()
-			Button.Background:Hide()
-			AS:SetTemplate(Button)
-			AS:StyleButton(Button)
-			Button.Checked:SetAlpha(0)
-			hooksecurefunc(Button.Checked, 'Show', function()
-				Button:SetBackdropBorderColor(0, 0.44, .87)
-			end)
-			hooksecurefunc(Button.Checked, 'Hide', function()
-				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end)
-		end
-
-		for i = 1, 10 do
-			local Button = _G["PetStableStabledPet"..i]
-			local Icon = _G["PetStableStabledPet"..i..'IconTexture']
-			AS:SkinTexture(Icon)
-			Icon:SetInside()
-			Button.Background:Hide()
-			AS:SetTemplate(Button)
-			AS:StyleButton(Button)
-			Button.Checked:SetAlpha(0)
-			hooksecurefunc(Button.Checked, 'Show', function()
-				Button:SetBackdropBorderColor(0, 0.44, .87)
-			end)
-			hooksecurefunc(Button.Checked, 'Hide', function()
-				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end)
-		end
-	end]]
-
 function AS:Blizzard_Collections(event, addon)
 	if addon ~= 'Blizzard_Collections' then return end
 	AS:SkinFrame(CollectionsJournal)

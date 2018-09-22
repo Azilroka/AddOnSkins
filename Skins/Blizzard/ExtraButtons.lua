@@ -1,11 +1,5 @@
 local AS = unpack(AddOnSkins)
 
-local function DisableTexture(self, texture)
-	if texture ~= "" then
-		self:SetTexture("")
-	end
-end
-
 function AS:Blizzard_AbilityButton()
 	ZoneAbilityFrame.SpellButton:SetNormalTexture('')
 	AS:SetTemplate(ZoneAbilityFrame.SpellButton)

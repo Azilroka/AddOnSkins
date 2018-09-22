@@ -27,6 +27,7 @@
 	<Script file="Merchant.lua"/>
 	<Script file="Options.lua"/>
 	<Script file="Others.lua"/>
+	<Script file="PetStable.lua"/>
 	<Script file="Quest.lua"/>
 	<Script file="Raid.lua"/>
 	<Script file="StackSplit.lua"/>

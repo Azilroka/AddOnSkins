@@ -29,17 +29,19 @@ function AS:Blizzard_Friends()
 
 	AS:SkinScrollBar(FriendsFrameFriendsScrollFrameScrollBar)
 	AS:SkinDropDownBox(FriendsFrameStatusDropDown, 70)
-	AS:SkinBackdropFrame(FriendsFrameBattlenetFrame)
+	FriendsFrameStatusDropDown:SetPoint('TOPLEFT', 43, -24)
+	FriendsFrameStatusDropDownStatus:SetPoint('LEFT', '$parent', 'LEFT', 23, 0)
 
-	FriendsFrameBattlenetFrame.Backdrop:SetPoint('TOPLEFT', -1, -3)
+	AS:SkinBackdropFrame(FriendsFrameBattlenetFrame)
+	FriendsFrameBattlenetFrame.Backdrop:SetPoint('TOPLEFT', -1, -4)
 	FriendsFrameBattlenetFrame.Backdrop:SetPoint('BOTTOMRIGHT', -3, 5)
 	FriendsFrameBattlenetFrame.Backdrop:SetBackdropColor(24/255, 40/255, 55/255)
-	FriendsFrameBattlenetFrame.BroadcastButton:SetSize(17, 17)
-	FriendsFrameBattlenetFrame.BroadcastButton:SetPoint("LEFT", FriendsFrameBattlenetFrame, "RIGHT", 2, 1)
 
 	AS:SkinButton(FriendsFrameBattlenetFrame.BroadcastButton)
-	FriendsFrameBattlenetFrame.BroadcastButton:SetSize(21, 21)
+	FriendsFrameBattlenetFrame.BroadcastButton:SetPoint("LEFT", FriendsFrameBattlenetFrame, "RIGHT", 2, 0)
+	FriendsFrameBattlenetFrame.BroadcastButton:SetSize(20, 20)
 	FriendsFrameBattlenetFrame.BroadcastButton:SetNormalTexture([[Interface\FriendsFrame\BroadcastIcon]])
+	FriendsFrameBattlenetFrame.BroadcastButton:GetNormalTexture():SetInside()
 	FriendsFrameBattlenetFrame.BroadcastButton:SetPushedTexture([[Interface\FriendsFrame\BroadcastIcon]])
 	FriendsFrameBattlenetFrame.BroadcastButton.SetNormalTexture = AS.Noop
 	FriendsFrameBattlenetFrame.BroadcastButton.SetPushedTexture = AS.Noop
@@ -60,20 +62,7 @@ function AS:Blizzard_Friends()
 	FriendsFrameIgnoreScrollFrame:SetHeight(294)
 	FriendsFrameIgnoreScrollFrameScrollBar:SetPoint("TOPLEFT", FriendsFrameIgnoreScrollFrame, "TOPRIGHT", 42, -10)
 
-	--[[
-	AS:StripTextures(PendingListFrame)
-	AS:SkinButton(FriendsFramePendingButton1AcceptButton)
-	AS:SkinButton(FriendsFramePendingButton1DeclineButton)
-	AS:SkinButton(FriendsFramePendingButton2AcceptButton)
-	AS:SkinButton(FriendsFramePendingButton2DeclineButton)
-	AS:SkinButton(FriendsFramePendingButton3AcceptButton)
-	AS:SkinButton(FriendsFramePendingButton3DeclineButton)
-	AS:SkinButton(FriendsFramePendingButton4AcceptButton)
-	AS:SkinButton(FriendsFramePendingButton4DeclineButton)
-	]]
 
-	--AS:SkinFrame(FriendsFriendsFrame, nil, nil, true)
-	--AS:SkinFrame(FriendsFriendsList)
 	AS:SkinDropDownBox(FriendsFriendsFrameDropDown, 150)
 	AS:SkinScrollBar(FriendsFriendsScrollFrameScrollBar)
 	AS:SkinButton(FriendsFriendsSendRequestButton)

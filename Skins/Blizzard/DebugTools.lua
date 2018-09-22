@@ -4,14 +4,16 @@ function AS:Blizzard_DebugTools(event, addon)
 	if addon ~= 'Blizzard_DebugTools' then return end
 
 	ScriptErrorsFrame:SetParent(UIParent)
+
 	AS:SkinFrame(ScriptErrorsFrame, nil, nil, true)
-	AS:SkinNextPrevButton(ScriptErrorsFrame.NextError) -- must be redone
-	AS:SkinNextPrevButton(ScriptErrorsFrame.PreviousError) -- must be redone
+	AS:SkinNextPrevButton(ScriptErrorsFrame.NextError)
+	AS:SkinNextPrevButton(ScriptErrorsFrame.PreviousError)
 	AS:SkinButton(ScriptErrorsFrame.Close)
 	AS:SkinButton(ScriptErrorsFrame.Reload)
 	AS:SkinCloseButton(ScriptErrorsFrameClose)
 	AS:SkinScrollBar(ScriptErrorsFrameScrollBar)
-	ScriptErrorsFrame.ScrollFrame:CreateBackdrop('Default')
+
+	AS:SkinBackdropFrame(ScriptErrorsFrame.ScrollFrame)
 	ScriptErrorsFrame.ScrollFrame:SetFrameLevel(ScriptErrorsFrame.ScrollFrame:GetFrameLevel() + 2)
 
 	AS:SkinFrame(EventTraceFrame, nil, nil, true)
@@ -24,6 +26,7 @@ function AS:Blizzard_DebugTools(event, addon)
 	AS:SkinTooltip(EventTraceTooltip)
 
 	FrameStackTooltip:SetParent(UIParent)
+
 	AS:SkinTooltip(FrameStackTooltip)
 	FrameStackTooltip:SetFrameStrata('TOOLTIP')
 	FrameStackTooltip:SetFrameLevel(255)
