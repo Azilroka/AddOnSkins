@@ -25,7 +25,7 @@ function AS:QuestCompletist()
 	AS:SkinButton(qcOptionsButton)
 	AS:SkinButton(qcCategoryDropdownButton)
 	AS:SkinCloseButton(qcXButton)
-	AS:SkinSlideBar(qcMenuSlider, 16)
+	AS:SkinSlideBar(qcMenuSlider)
 	qcMenuSlider:SetPoint('TOPLEFT', qcQuestCompletistUI, 'TOPLEFT', 303, -90)
 	qcMenuSlider:SetHeight(256)
 end

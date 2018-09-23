@@ -152,7 +152,7 @@ function AS:Blizzard_Options(event, addon)
 				elseif Child:IsObjectType('Button') then
 					AS:SkinButton(Child)
 				elseif Child:IsObjectType('Slider') then
-					AS:SkinSlideBar(Child, nil, true)
+					AS:SkinSlideBar(Child, true)
 				elseif Child:IsObjectType('Tab') then
 					AS:SkinTab(Child)
 				elseif Child:IsObjectType('Frame') and Child:GetName() and strfind(Child:GetName(), 'DropDown') then
@@ -160,20 +160,6 @@ function AS:Blizzard_Options(event, addon)
 				end
 			end
 		end
-
-		Graphics_Quality:HookScript('OnUpdate', function()
-			AS:StripTextures(Graphics_Quality, true)
-			if Graphics_RightQuality then
-				AS:StripTextures(Graphics_RightQuality, true)
-			end
-		end)
-
-		RaidGraphics_Quality:HookScript('OnUpdate', function()
-			AS:StripTextures(RaidGraphics_Quality, true)
-			if RaidGraphics_RightQuality then
-				AS:StripTextures(RaidGraphics_RightQuality, true)
-			end
-		end)
 
 		local InterfaceOptionsDropDowns = {
 			InterfaceOptionsObjectivesPanelQuestSorting,
@@ -380,6 +366,10 @@ function AS:Blizzard_Options(event, addon)
 		-- AS:SkinScrollBar(ChannelRosterScrollFrameScrollBar)
 
 		-- Help
+		AS:SkinFrame(HelpFrame, nil, nil, true)
+		AS:SkinCloseButton(HelpFrameCloseButton)
+		AS:SkinCloseButton(HelpFrameKnowledgebaseErrorFrameCloseButton)
+
 		local HelpFrames = {
 			HelpFrameLeftInset,
 			HelpFrameMainInset,
@@ -416,17 +406,10 @@ function AS:Blizzard_Options(event, addon)
 			end
 		end
 
-		local HelpSideButtons = {
-			HelpFrameButton1,
-			HelpFrameButton2,
-			HelpFrameButton3,
-			HelpFrameButton4,
-			HelpFrameButton5,
-			HelpFrameButton6,
-			HelpFrameButton16,
-		}
+		local HelpSideButtons = { 1, 2, 3, 4, 5, 6, 16 }
 
-		for _, Button in pairs(HelpSideButtons) do
+		for _, Num in pairs(HelpSideButtons) do
+			local Button = HelpFrame['button'..Num]
 			Button.selected:SetTexture('')
 			Button:SetNormalTexture('')
 			Button:SetPushedTexture('')
@@ -439,15 +422,11 @@ function AS:Blizzard_Options(event, addon)
 		HelpFrameButton6:SetPoint(point, relativeTo, relativePoint, xOffset + 2, yOffset)
 
 		hooksecurefunc('HelpFrame_SetSelectedButton', function(Button)
-			for _, Button in pairs(HelpSideButtons) do
-				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+			for _, Num in pairs(HelpSideButtons) do
+				HelpFrame['button'..Num]:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 			Button:SetBackdropBorderColor(0, 0.44, .87)
 		end)
-
-		AS:SkinFrame(HelpFrame, nil, nil, true)
-		AS:SkinCloseButton(HelpFrameCloseButton)
-		AS:SkinCloseButton(HelpFrameKnowledgebaseErrorFrameCloseButton)
 
 		HelpFrameCharacterStuckHearthstone:SetHighlightTexture(nil)
 		HelpFrameCharacterStuckHearthstone.SetHighlightTexture = AS.Noop

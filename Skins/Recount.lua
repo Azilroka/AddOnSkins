@@ -77,7 +77,7 @@ function AS:Recount()
 		Recount_ReportWindow.isSkinned = true
 		AS:SkinBackdropFrame(Recount_ReportWindow.Whisper)
 		AS:SkinButton(Recount_ReportWindow.ReportButton)
-		AS:SkinSlideBar(Recount_ReportWindow_Slider, 8, true)
+		AS:SkinSlideBar(Recount_ReportWindow_Slider, true)
 	end)
 end
 

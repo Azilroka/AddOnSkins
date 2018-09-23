@@ -14,7 +14,7 @@ function AS:AzerothAutoPilot()
 			Child.Text:SetText(Child:GetText())
 			Child.Text:SetPoint("CENTER", 0, 0)
 		elseif Child:IsObjectType('Slider') then
-			AS:SkinSlideBar(Child, nil, true)
+			AS:SkinSlideBar(Child, true)
 			Child.Low:SetFont(AS.Font, 10, "OUTLINE")
 			Child.High:SetFont(AS.Font, 10, "OUTLINE")
 			Child.Text:SetFont(AS.Font, 10, "OUTLINE")

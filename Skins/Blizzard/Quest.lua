@@ -224,6 +224,8 @@ function AS:Blizzard_Quest()
 					end
 				end
 			end
+
+			QuestInfo_ShowRequiredMoney()
 		end)
 
 		hooksecurefunc('QuestInfo_ShowRequiredMoney', function()

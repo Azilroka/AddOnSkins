@@ -375,22 +375,10 @@ function AS:SkinCheckBox(CheckBox)
 	CheckBox.isSkinned = true
 end
 
-function AS:SkinTab(Tab, Strip)
+function AS:SkinTab(Tab)
 	if Tab.Backdrop then return end
 
-	if Strip then
-		AS:StripTextures(Tab)
-	else
-		local TabName = Tab:GetName()
-		for _, Region in pairs(BlizzardRegions) do
-			if TabName and _G[TabName..Region] then
-				_G[TabName..Region]:SetTexture(nil)
-			end
-			if Tab[Region] then
-				Tab[Region]:SetAlpha(0)
-			end
-		end
-	end
+	AS:StripTextures(Tab)
 
 	if Tab.GetHighlightTexture and Tab:GetHighlightTexture() then
 		Tab:GetHighlightTexture():SetTexture(nil)
@@ -499,8 +487,6 @@ function AS:SkinNextPrevButton(Button, Vertical, Inverse)
 	AS:StripTextures(Button)
 	AS:SkinButton(Button)
 
-	Button:SetSize(Button:GetWidth() - 7, Button:GetHeight() - 7)
-
 	if not Button.icon then
 		Button.icon = Button:CreateTexture(nil, 'ARTWORK')
 		Button.icon:SetSize(13, 13)
@@ -561,52 +547,56 @@ function AS:SkinDropDownBox(Frame, Width)
 		AS:StripTextures(Frame)
 		Frame:Width(Width or 155)
 
-		Text:ClearAllPoints()
-		Text:Point('RIGHT', Button, 'LEFT', -2, 0)
+		Text:SetPoint("RIGHT", -42, 0)
+		Button:SetPoint('TOPRIGHT', -14, -8)
 
-		Button:ClearAllPoints()
-		Button:Point('RIGHT', Frame, 'RIGHT', -10, 3)
-		Button.SetPoint = AS.Noop
+		if Frame.Icon then
+			Frame.Icon:SetPoint('LEFT', 26, 0)
+		end
+
+		Button:SetSize(16, 16)
 
 		AS:SkinNextPrevButton(Button, true)
 
 		AS:CreateBackdrop(Frame, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 
-		Frame.Backdrop:Point('TOPLEFT', 20, -2)
+		Frame.Backdrop:Point('TOPLEFT', 20, -6)
 		Frame.Backdrop:Point('BOTTOMRIGHT', Button, 'BOTTOMRIGHT', 2, -2)
 	end
 end
 
-function AS:SkinSlideBar(Frame, Height, MoveText)
+function AS:SkinSlideBar(Frame, MoveText)
 	AS:SkinBackdropFrame(Frame, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 	Frame.Backdrop:SetAllPoints()
 
-	if not Height then
-		Height = Frame:GetHeight()
-	end
+	hooksecurefunc(Frame, "SetBackdrop", function(self, backdrop) if backdrop ~= nil then self:SetBackdrop(nil) end end)
 
 	if MoveText then
 		for i = 1, Frame:GetNumRegions() do
 			local Region = select(i, Frame:GetRegions())
 			if Region:IsObjectType('FontString') then
 				local a, b, c, d, e = Region:GetPoint()
-				Region:SetPoint(a, b, c, d, e - 6)
+				if a == 'BOTTOM' then e = e + 4 end
+				if a == 'LEFT' then d = d + 3 e = e - 1 end
+				if a == 'RIGHT' then d = d - 3 end
+				if a == 'TOP' then e = e - 3 end
+				if a == 'TOPLEFT' then d = d + 5 if e > -3 then e = e - 6 end end
+				if a == 'TOPRIGHT' then d = d - 3 e = e - 6 end
+				Region:SetPoint(a, b, c, d, e)
 			end
 		end
-		if _G[Frame:GetName()..'Text'] then _G[Frame:GetName()..'Text']:Point('TOP', 0, 19) end
 	end
 
 	Frame.ThumbBG = CreateFrame('Frame', nil, Frame)
-	Frame.ThumbBG:Point('TOPLEFT', Frame:GetThumbTexture(), 'TOPLEFT', 2, -3)
-	Frame.ThumbBG:Point('BOTTOMRIGHT', Frame:GetThumbTexture(), 'BOTTOMRIGHT', -2, 3)
+	Frame.ThumbBG:SetPoint('TOPLEFT', Frame:GetThumbTexture(), 'TOPLEFT', 2, -2)
+	Frame.ThumbBG:SetPoint('BOTTOMRIGHT', Frame:GetThumbTexture(), 'BOTTOMRIGHT', -2, 2)
 	AS:SetTemplate(Frame.ThumbBG, 'Default')
 
-	if (Frame:GetWidth() < Frame:GetHeight()) then
-		Frame:Width(Height)
-		Frame:GetThumbTexture():Size(Frame:GetWidth(), Frame:GetWidth() + 4)
+	local Orientation = Frame:GetOrientation()
+	if Orientation == 'VERTICAL' then
+		Frame:GetThumbTexture():SetSize(Frame:GetWidth(), Frame:GetWidth() + 4)
 	else
-		Frame:Height(Height)
-		Frame:GetThumbTexture():Size(Height + 4, Height)
+		Frame:GetThumbTexture():SetSize(Frame:GetHeight() + 4, Frame:GetHeight())
 	end
 end
 
