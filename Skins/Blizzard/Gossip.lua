@@ -34,8 +34,9 @@ function AS:Blizzard_Gossip()
 			for i = 1, NUMGOSSIPBUTTONS do
 				local button = _G["GossipTitleButton"..i]
 				if button:GetFontString() then
-					if button:GetFontString():GetText() and button:GetFontString():GetText():find("|cff000000") then
-						button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), "|cff000000", "|cffFFFF00"))
+					local Text = button:GetFontString():GetText()
+					if Text and strfind(Text, '|cff000000') then
+						button:GetFontString():SetText(string.gsub(Text, '|cff000000', '|cffFFFF00'))
 					end
 				end
 			end

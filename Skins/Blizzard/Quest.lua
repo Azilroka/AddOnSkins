@@ -1,8 +1,13 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Quest()
-	AS:SkinFrame(QuestFrame, nil, nil, true)
-	AS:StripTextures(QuestFrameInset)
+	AS:SkinFrame(QuestFrame)
+	AS:StripTextures(QuestFrame.Inset)
+	QuestFrame.portrait:SetAlpha(0)
+	QuestFrame:SetHeight(500)
+
+	AS:SkinCloseButton(QuestFrame.CloseButton)
+
 	AS:StripTextures(QuestFrameDetailPanel, true)
 	AS:StripTextures(QuestDetailScrollChildFrame, true)
 	AS:StripTextures(QuestFrameProgressPanel, true)
@@ -19,90 +24,96 @@ function AS:Blizzard_Quest()
 	AS:SkinScrollBar(QuestProgressScrollFrameScrollBar)
 	AS:SkinScrollBar(QuestRewardScrollFrameScrollBar)
 
-	AS:SkinButton(QuestFrameAcceptButton, true)
-	AS:SkinButton(QuestFrameDeclineButton, true)
-	AS:SkinButton(QuestFrameCompleteButton, true)
-	AS:SkinButton(QuestFrameGoodbyeButton, true)
-	AS:SkinButton(QuestFrameGreetingGoodbyeButton, true)
-	AS:SkinButton(QuestFrameCompleteQuestButton, true)
+	AS:SkinButton(QuestFrameAcceptButton)
+	AS:SkinButton(QuestFrameDeclineButton)
+	AS:SkinButton(QuestFrameCompleteButton)
+	AS:SkinButton(QuestFrameGoodbyeButton)
+	AS:SkinButton(QuestFrameGreetingGoodbyeButton)
+	AS:SkinButton(QuestFrameCompleteQuestButton)
 
-	AS:SkinCloseButton(QuestFrameCloseButton)
-	QuestInfoItemHighlight:StripTextures()
-	QuestFrame:SetHeight(500)
+	AS:StripTextures(QuestInfoItemHighlight)
 
-	AS:StripTextures(QuestInfoRewardsFrame.SkillPointFrame)
-	AS:SkinTexture(QuestInfoRewardsFrame.SkillPointFrame.Icon)
-	QuestInfoRewardsFrame.SkillPointFrame.Icon:SetSize(QuestInfoRewardsFrame.SkillPointFrame.Icon:GetSize() - 4, QuestInfoRewardsFrame.SkillPointFrame.Icon:GetSize() - 4)
-	AS:CreateBackdrop(QuestInfoRewardsFrame.SkillPointFrame)
+	AS:SkinBackdropFrame(QuestInfoRewardsFrame.SkillPointFrame)
+	AS:SkinTexture(QuestInfoRewardsFrame.SkillPointFrame.Icon, true)
+
 	QuestInfoRewardsFrame.SkillPointFrame.Backdrop:SetPoint('TOPLEFT', QuestInfoRewardsFrame.SkillPointFrame.Icon, 'TOPRIGHT', 0, 0)
 	QuestInfoRewardsFrame.SkillPointFrame.Backdrop:SetPoint('BOTTOMLEFT', QuestInfoRewardsFrame.SkillPointFrame.Icon, 'BOTTOMRIGHT', 0, 0)
 	QuestInfoRewardsFrame.SkillPointFrame.Backdrop:SetPoint('RIGHT', QuestInfoRewardsFrame.SkillPointFrame.NameFrame, 'RIGHT', -12, 0)
-	QuestInfoRewardsFrame.SkillPointFrame.Icon.Backdrop = CreateFrame('Frame', nil, QuestInfoRewardsFrame.SkillPointFrame)
-	QuestInfoRewardsFrame.SkillPointFrame.Icon.Backdrop:SetFrameLevel(QuestInfoRewardsFrame.SkillPointFrame:GetFrameLevel())
-	AS:SetTemplate(QuestInfoRewardsFrame.SkillPointFrame.Icon.Backdrop)
-	QuestInfoRewardsFrame.SkillPointFrame.Icon.Backdrop:SetBackdropColor(0, 0, 0, 0)
-	QuestInfoRewardsFrame.SkillPointFrame.Icon.Backdrop:SetOutside(QuestInfoRewardsFrame.SkillPointFrame.Icon)
-	QuestInfoRewardsFrame.SkillPointFrame:SetWidth(QuestInfoRewardsFrame.SkillPointFrame.Icon:GetWidth() - 4)
+
 	QuestInfoRewardsFrame.SkillPointFrame.ValueText:SetDrawLayer('OVERLAY', 7)
 
 	for i = 1, 6 do
 		local Button = _G["QuestProgressItem"..i]
-		AS:StripTextures(Button)
-		AS:SkinTexture(Button.Icon)
-		Button.Icon:SetSize(Button.Icon:GetSize() - 4, Button.Icon:GetSize() - 4)
-		AS:CreateBackdrop(Button)
+		AS:SkinBackdropFrame(Button)
+		AS:SkinTexture(Button.Icon, true)
+
 		Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
 		Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
 		Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
-		Button.Icon.Backdrop = CreateFrame('Frame', nil, Button)
-		AS:SetTemplate(Button.Icon.Backdrop)
-		Button.Icon.Backdrop:SetBackdropColor(0, 0, 0, 0)
-		Button.Icon.Backdrop:SetOutside(Button.Icon)
-		Button:SetWidth(_G["QuestProgressItem"..i]:GetWidth() - 4)
 	end
+
+	local function HandleReward(frame)
+		if (not frame) then return end
+		if frame.Backdrop then return end
+
+		AS:CreateBackdrop(frame)
+		AS:SkinTexture(frame.Icon, true)
+
+		frame.Backdrop:SetPoint('TOPLEFT', frame.Icon, 'TOPRIGHT', -1, 0)
+		frame.Backdrop:SetPoint('BOTTOMLEFT', frame.Icon, 'BOTTOMRIGHT', -1, 0)
+		frame.Backdrop:SetPoint('RIGHT', frame, 'RIGHT', -5, 0)
+
+		frame.Count:ClearAllPoints()
+		frame.Count:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, 0)
+
+		frame.NameFrame:SetAlpha(0)
+
+		if (frame.CircleBackground) then
+			frame.CircleBackground:SetAlpha(0)
+			frame.CircleBackgroundGlow:SetAlpha(0)
+		end
+	end
+
+	local Rewards = { 'MoneyFrame', 'HonorFrame', 'XPFrame', 'SpellFrame', 'SkillPointFrame' }
+
+	for _, frame in pairs(Rewards) do
+		HandleReward(MapQuestInfoRewardsFrame[frame])
+	end
+
+	hooksecurefunc('QuestInfo_ShowRewards', function(self)
+		for _, frame in pairs(Rewards) do
+			HandleReward(QuestInfoFrame.rewardsFrame[frame])
+		end
+	end)
 
 	hooksecurefunc("QuestInfo_GetRewardButton", function(rewardsFrame, index)
 		local RewardButton = rewardsFrame.RewardButtons[index]
-		if (not RewardButton.skinned) then
-			RewardButton.NameFrame:Hide()
+
+		if (not RewardButton.Backdrop) then
 			AS:CreateBackdrop(RewardButton)
-			RewardButton.Backdrop:SetPoint('TOPLEFT', RewardButton.Icon, 'TOPRIGHT', 0, 0)
-			RewardButton.Backdrop:SetPoint('BOTTOMLEFT', RewardButton.Icon, 'BOTTOMRIGHT', 0, 0)
+
+			AS:SkinTexture(RewardButton.Icon, true)
+
+			RewardButton.IconBorder:SetAlpha(0)
+			RewardButton.NameFrame:Hide()
+
+			RewardButton.Backdrop:SetPoint('TOPLEFT', RewardButton.Icon.Backdrop, 'TOPRIGHT', 0, 0)
+			RewardButton.Backdrop:SetPoint('BOTTOMLEFT', RewardButton.Icon.Backdrop, 'BOTTOMRIGHT', 0, 0)
 			RewardButton.Backdrop:SetPoint('RIGHT', RewardButton, 'RIGHT', -5, 0)
-			AS:SkinTexture(RewardButton.Icon)
-			RewardButton.Icon:SetSize(RewardButton.Icon:GetSize() - 4, RewardButton.Icon:GetSize() - 4)
-			RewardButton.Icon.Backdrop = CreateFrame('Frame', nil, RewardButton)
-			AS:SetTemplate(RewardButton.Icon.Backdrop)
-			RewardButton.Icon.Backdrop:SetBackdropColor(0, 0, 0, 0)
-			RewardButton.Icon.Backdrop:SetOutside(RewardButton.Icon)
-			RewardButton.Icon.Backdrop:SetScript('OnUpdate', function(self)
-				if RewardButton:GetID() == 0 then return end
-				local quality
-				if (QuestInfoFrame.questLog) then
-					quality = select(4, GetQuestLogChoiceInfo(RewardButton:GetID()))
-				else
-					quality = select(4, GetQuestItemInfo(RewardButton.type, RewardButton:GetID()))
-				end
-				if quality and quality > 1 then
-					local r, g, b = GetItemQualityColor(quality)
-					self:SetBackdropBorderColor(r, g, b, 1)
-				else
-					self:SetBackdropBorderColor(unpack(AS.BorderColor))
+
+			hooksecurefunc(RewardButton.IconBorder, 'SetVertexColor', function(self, r, g, b) RewardButton.Icon.Backdrop:SetBackdropBorderColor(r, g, b) end)
+			hooksecurefunc(RewardButton.IconBorder, 'Hide', function(self) RewardButton.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+		end
+
+		if not rewardsFrame.isHooked and rewardsFrame.ItemHighlight then
+			hooksecurefunc(rewardsFrame.ItemHighlight, 'Show', function(self)
+				if RewardButton:GetID() == QuestInfoFrame.itemChoice then
+					RewardButton.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+					RewardButton.Name:SetTextColor(1, 1, 1)
 				end
 			end)
-			RewardButton:HookScript('OnUpdate', function(self)
-				if QuestInfoItemHighlight:IsShown() and self:GetID() == QuestInfoFrame.itemChoice then
-					self.Backdrop:SetBackdropBorderColor(1, 1, 0)
-					self.Name:SetTextColor(1, 1, 0)
-				elseif QuestInfoItemHighlight:IsShown() then
-					self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-					self.Name:SetTextColor(1, 1, 1)
-				else
-					self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-					self.Name:SetTextColor(1, 1, 1)
-				end
-			end)
-			RewardButton.skinned = true
+			hooksecurefunc(rewardsFrame.ItemHighlight, 'Hide', function(self) RewardButton.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) RewardButton.Name:SetTextColor(1, 1, 1) end)
+			rewardsFrame.isHooked = true
 		end
 	end)
 
@@ -160,13 +171,15 @@ function AS:Blizzard_Quest()
 		CurrentQuestsText.SetTextColor = AS.Noop
 		AvailableQuestsText:SetTextColor(1, 1, 0)
 		AvailableQuestsText.SetTextColor = AS.Noop
+
 		for i = 1, 16 do
 			local button = _G['QuestTitleButton'..i]
 			if button then
-				hooksecurefunc(button, 'SetFormattedText', function()
-					if button:GetFontString() then
-						if button:GetFontString():GetText() and button:GetFontString():GetText():find('|cff000000') then
-							button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), '|cff000000', '|cffFFFF00'))
+				hooksecurefunc(button, 'SetFormattedText', function(self)
+					if self:GetFontString() then
+						local Text = self:GetFontString():GetText()
+						if Text and strfind(Text, '|cff000000') then
+							button:GetFontString():SetText(string.gsub(Text, '|cff000000', '|cffFFFF00'))
 						end
 					end
 				end)

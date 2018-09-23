@@ -30,32 +30,6 @@ function AS:Blizzard_WorldMap()
 	AS:SkinFrame(QuestMapFrame.QuestsFrame.StoryTooltip)
 	AS:StripTextures(QuestMapFrame.DetailsFrame.CompleteQuestFrame)
 
-	local function HandleReward(frame)
-		if (not frame or frame.Backdrop) then return end
-		AS:SkinTexture(frame.Icon, true)
-
-		frame.Count:ClearAllPoints()
-		frame.Count:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, 0)
-
-		frame.NameFrame:SetAlpha(0)
-
-		if (frame.CircleBackground) then
-			frame.CircleBackground:SetAlpha(0)
-			frame.CircleBackgroundGlow:SetAlpha(0)
-		end
-	end
-
-	for _, frame in pairs({ 'MoneyFrame', 'HonorFrame', 'XPFrame', 'SpellFrame', 'SkillPointFrame' }) do
-		HandleReward(MapQuestInfoRewardsFrame[frame])
-	end
-
-	hooksecurefunc('QuestInfo_GetRewardButton', function(rewardsFrame, index)
-		local button = MapQuestInfoRewardsFrame.RewardButtons[index]
-		if (button) then
-			HandleReward(button)
-		end
-	end)
-
 	AS:SkinMaxMinFrame(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame)
 
 	if not AS.ParchmentEnabled then
