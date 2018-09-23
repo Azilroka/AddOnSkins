@@ -25,19 +25,16 @@ function AS:Dominos()
 		if count then
 			count:ClearAllPoints()
 			count:SetPoint("BOTTOMRIGHT", 0, 2)
-			count:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
 		end
 
 		if btname then
 			btname:ClearAllPoints()
 			btname:SetPoint("BOTTOM", 0, 0)
-			btname:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
 		end
 
 		if hotkey then
 			hotkey:ClearAllPoints()
 			hotkey:SetPoint("TOPRIGHT", 0, 0)
-			hotkey:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
 			hotkey:SetWidth(button:GetWidth() - 1)
 		end
 
@@ -74,7 +71,6 @@ function AS:Dominos()
 		if hotkey then
 			hotkey:ClearAllPoints()
 			hotkey:SetPoint("TOPRIGHT", 0, 0)
-			hotkey:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
 			hotkey:SetWidth(button:GetWidth() - 1)
 		end
 
