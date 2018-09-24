@@ -12,7 +12,7 @@ function AS:Blizzard_ArchaeologyUI(event, addon)
 	ArchaeologyFrame.bgLeft:Hide()
 	ArchaeologyFrame.bgRight:Hide()
 
-	AS:SkinDropDownBox(ArchaeologyFrame.raceFilterDropDown, 125)
+	AS:SkinDropDownBox(ArchaeologyFrame.raceFilterDropDown)
 	AS:SkinStatusBar(ArchaeologyFrame.rankBar)
 
 	AS:SkinButton(ArchaeologyFrame.artifactPage.solveFrame.solveButton, true)

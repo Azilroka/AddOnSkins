@@ -72,7 +72,7 @@ function AS:ClassOrderHallsComplete()
 	AS:SkinFrame(ClassOrderHallsCompleteUIMainFrameTab5SubFrame)
 	ClassOrderHallsCompleteUIMainFrameTab5SubFrame:SetPoint('TOPLEFT', ClassOrderHallsCompleteUIMainFrame, 'TOPLEFT', 10, -57)
 	AS:SkinDropDownBox(ClassOrderHallsCompleteUIMainFrameTab5SubFrameSourceDropDownMenu)
-	AS:SkinDropDownBox(ClassOrderHallsCompleteUIMainFrameTab5SubFrameTextFormatDropDownMenu, 210, 10)
+	AS:SkinDropDownBox(ClassOrderHallsCompleteUIMainFrameTab5SubFrameTextFormatDropDownMenu)
 
 	--Help
 	AS:SkinFrame(ClassOrderHallsCompleteUIMainFrameTab6SubFrame)

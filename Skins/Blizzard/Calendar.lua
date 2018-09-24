@@ -72,7 +72,7 @@ function AS:Blizzard_Calendar(event, addon)
 
 	AS:SkinEditBox(CalendarCreateEventInviteEdit)
 	AS:SkinEditBox(CalendarCreateEventTitleEdit)
-	AS:SkinDropDownBox(CalendarCreateEventTypeDropDown, 120)
+	AS:SkinDropDownBox(CalendarCreateEventTypeDropDown)
 
 	AS:SkinFrame(CalendarCreateEventDescriptionContainer)
 
@@ -81,10 +81,10 @@ function AS:Blizzard_Calendar(event, addon)
 
 	AS:SkinCheckBox(CalendarCreateEventLockEventCheck)
 
-	AS:SkinDropDownBox(CalendarCreateEventHourDropDown, 68)
-	AS:SkinDropDownBox(CalendarCreateEventMinuteDropDown, 68)
-	AS:SkinDropDownBox(CalendarCreateEventAMPMDropDown, 68)
-	AS:SkinDropDownBox(CalendarCreateEventDifficultyOptionDropDown, 120)
+	AS:SkinDropDownBox(CalendarCreateEventHourDropDown)
+	AS:SkinDropDownBox(CalendarCreateEventMinuteDropDown)
+	AS:SkinDropDownBox(CalendarCreateEventAMPMDropDown)
+	AS:SkinDropDownBox(CalendarCreateEventDifficultyOptionDropDown)
 	AS:SkinTexture(CalendarCreateEventIcon)
 	CalendarCreateEventIcon.SetTexCoord = AS.Noop
 

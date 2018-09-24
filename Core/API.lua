@@ -397,8 +397,8 @@ function AS:SkinTab(Tab)
 		end
 	end
 
-	Tab.Backdrop:Point('TOPLEFT', 10, AS.PixelPerfect and -1 or -3)
-	Tab.Backdrop:Point('BOTTOMRIGHT', -10, 3)
+	Tab.Backdrop:SetPoint('TOPLEFT', 10, AS.PixelPerfect and -1 or -3)
+	Tab.Backdrop:SetPoint('BOTTOMRIGHT', -10, 3)
 end
 
 local function GrabScrollBarElement(frame, element)
@@ -545,7 +545,10 @@ function AS:SkinDropDownBox(Frame, Width)
 
 	if Button and Text then
 		AS:StripTextures(Frame)
-		Frame:Width(Width or 155)
+
+		if Width then
+			Frame:SetWidth(Width)
+		end
 
 		Text:SetPoint("RIGHT", -42, 0)
 		Button:SetPoint('TOPRIGHT', -14, -8)

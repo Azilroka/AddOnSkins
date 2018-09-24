@@ -34,7 +34,7 @@ function AS:OrderHallCommander(event, addon)
 					elseif _G["LibInitCheckbox000"..i] ~= nil then
 						AS:SkinCheckBox(_G["LibInitCheckbox000"..i])
 					elseif _G["LibInitDropdown000"..i] ~= nil then
-						AS:SkinDropDownBox(_G["LibInitDropdown000"..i], 200)
+						AS:SkinDropDownBox(_G["LibInitDropdown000"..i])
 					elseif _G["LibInitCheckbox000"..i] ~= nil then
 						AS:SkinCheckBox(_G["LibInitCheckbox000"..i])
 					elseif _G["LibInitButton000"..i] ~= nil then

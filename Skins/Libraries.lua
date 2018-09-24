@@ -11,7 +11,7 @@ local function SkinDewdrop2()
 		frame = _G["Dewdrop20Level" .. i]
 
 		if not frame.isSkinned then
-			frame:SetTemplate("Transparent")
+			AS:SetTemplate(frame)
 
 			select(1, frame:GetChildren()):Hide()
 			frame.SetBackdropColor = AS.Noop
@@ -35,7 +35,7 @@ local function SkinDewdrop2()
 						dewdropEditBoxFrame = AS:FindFrameBySizeChild({"EditBox"}, 200, 40)
 
 						if dewdropEditBoxFrame then
-							dewdropEditBoxFrame:SetTemplate("Transparent")
+							AS:SetTemplate(dewdropEditBoxFrame)
 							AS:SkinEditBox(dewdropEditBoxFrame.editBox)
 							dewdropEditBoxFrame.editBox:DisableDrawLayer("BACKGROUND")
 						end
@@ -44,7 +44,7 @@ local function SkinDewdrop2()
 						dewdropSliderFrame = AS:FindFrameBySizeChild({"Slider", "EditBox"}, 100, 170)
 
 						if dewdropSliderFrame then
-							dewdropSliderFrame:SetTemplate("Transparent")
+							AS:SetTemplate(dewdropSliderFrame)
 							AS:SkinSlideBar(dewdropSliderFrame.slider)
 							AS:SkinEditBox(dewdropSliderFrame.currentText)
 							dewdropSliderFrame.currentText:DisableDrawLayer("BACKGROUND")
@@ -107,28 +107,28 @@ local function SkinRockConfig(lib)
 		self.base.header:StripTextures()
 		AS:SkinCloseButton(self.base.closeButton, self.base)
 
-		self.base.treeView:SetTemplate("Transparent")
+		AS:SetTemplate(self.base.treeView)
 		AS:SkinScrollBar(self.base.treeView.scrollBar)
 		AS:SkinDropDownBox(self.base.addonChooser)
 
 		self.base.addonChooser.text:Height(20)
-		self.base.addonChooser.text:SetTemplate("Transparent")
+		AS:SetTemplate(self.base.addonChooser.text)
 		AS:SkinNextPrevButton(self.base.addonChooser.button, true)
 
 		local pullout = _G[self.base.mainPane:GetName().."_ChoicePullout"]
 		if pullout then
-			pullout:SetTemplate("Transparent")
+			AS:SetTemplate(pullout)
 		else
 			AS:SecureHookScript(self.base.addonChooser.button, "OnClick", function(self)
-				_G[lib.base.mainPane:GetName().."_ChoicePullout"]:SetTemplate("Transparent")
+				AS:SetTemplate(_G[lib.base.mainPane:GetName().."_ChoicePullout"])
 				AS:Unhook(self, "OnClick")
 			end)
 		end
 
-		self.base.mainPane:SetTemplate("Transparent")
+		AS:SetTemplate(self.base.mainPane)
 		AS:ScrollBar(self.base.mainPane.scrollBar)
 
-		self.base.treeView.sizer:SetTemplate("Transparent")
+		AS:SetTemplate(self.base.treeView.sizer)
 
 		self.base.isSkinned = true
 	end
@@ -168,7 +168,7 @@ function AS:SkinLibraries()
 			local tooltip = AS.hooks[self].GetFreeExtraTipObject(self)
 
 			if not tooltip.isSkinned then
-				AS:SetTemplate(tooltip, "Transparent")
+				AS:SetTemplate(tooltip)
 				tooltip.isSkinned = true
 			end
 
@@ -185,7 +185,7 @@ function AS:SkinLibraries()
 	if LZF and not AS:IsHooked(LZF, "Create") then
 		AS:RawHook(LZF, "Create", function(self, ...)
 			local frame = AS.hooks[self].Create(self, ...)
-			frame.ZMain:SetTemplate("Transparent")
+			AS:SetTemplate(frame.ZMain)
 			frame.ZMain.close:Size(32)
 			AS:SkinCloseButton(frame.ZMain.close, frame.ZMain)
 			return frame

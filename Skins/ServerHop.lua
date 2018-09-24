@@ -16,8 +16,8 @@ function AS:ServerHop()
 	AS:SkinButton(sh_clearblbut)
 	sh_clearblbut:SetSize(24, 24)
 
-	AS:SkinDropDownBox(hopFramepvpDrop, 128)
-	AS:SkinDropDownBox(CountDrop, 128)
+	AS:SkinDropDownBox(hopFramepvpDrop)
+	AS:SkinDropDownBox(CountDrop)
 
 	-- Options Frame
 	AS:SkinFrame(hopOptions)

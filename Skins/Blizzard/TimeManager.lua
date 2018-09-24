@@ -8,9 +8,9 @@ function AS:Blizzard_TimeManager(event, addon)
 	AS:StripTextures(TimeManagerFrameInset)
 	AS:SkinCloseButton(TimeManagerFrameCloseButton)
 
-	AS:SkinDropDownBox(TimeManagerAlarmHourDropDown, 80)
-	AS:SkinDropDownBox(TimeManagerAlarmMinuteDropDown, 80)
-	AS:SkinDropDownBox(TimeManagerAlarmAMPMDropDown, 80)
+	AS:SkinDropDownBox(TimeManagerAlarmHourDropDown)
+	AS:SkinDropDownBox(TimeManagerAlarmMinuteDropDown)
+	AS:SkinDropDownBox(TimeManagerAlarmAMPMDropDown)
 
 	AS:SkinEditBox(TimeManagerAlarmMessageEditBox)
 

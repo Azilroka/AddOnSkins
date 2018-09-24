@@ -62,8 +62,10 @@ function AS:Blizzard_Friends()
 	FriendsFrameIgnoreScrollFrame:SetHeight(294)
 	FriendsFrameIgnoreScrollFrameScrollBar:SetPoint("TOPLEFT", FriendsFrameIgnoreScrollFrame, "TOPRIGHT", 42, -10)
 
-
-	AS:SkinDropDownBox(FriendsFriendsFrameDropDown, 150)
+	AS:SkinFrame(FriendsFriendsFrame)
+	AS:SkinFrame(FriendsFriendsScrollFrame)
+	AS:StripTextures(FriendsFriendsList)
+	AS:SkinDropDownBox(FriendsFriendsFrameDropDown)
 	AS:SkinScrollBar(FriendsFriendsScrollFrameScrollBar)
 	AS:SkinButton(FriendsFriendsSendRequestButton)
 	AS:SkinButton(FriendsFriendsCloseButton)
@@ -109,7 +111,7 @@ function AS:Blizzard_Friends()
 	WhoFrameEditBox:SetPoint("BOTTOM", 1, 30)
 	AS:StripTextures(WhoListScrollFrame, true)
 
-	AS:SkinDropDownBox(WhoFrameDropDown, 150)
+	AS:SkinDropDownBox(WhoFrameDropDown)
 
 	for i = 1, 3 do
 		AS:SkinTab(_G["FriendsFrameTab"..i])

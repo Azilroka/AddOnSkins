@@ -9,7 +9,7 @@ function AS:ACP()
 			local collapse = _G["ACP_AddonListEntry" .. i .. "Collapse"]
 			checkbox:SetPoint("LEFT", 5, 0)
 			checkbox:SetSize(26, 26)
-	
+
 			if not collapse:IsShown() then
 				checkbox:SetPoint("LEFT", 15, 0)
 				checkbox:SetSize(20, 20)
@@ -29,7 +29,7 @@ function AS:ACP()
 	AS:SkinCheckBox(ACP_AddonList_NoRecurse)
 	AS:SkinCheckBox(ACPAddonListForceLoad)
 	AS:SkinScrollBar(ACP_AddonList_ScrollFrameScrollBar)
-	AS:SkinDropDownBox(ACP_AddonListSortDropDown, 130)
+	AS:SkinDropDownBox(ACP_AddonListSortDropDown)
 
 	for i = 1, 20 do
 		AS:SkinButton(_G["ACP_AddonListEntry"..i.."LoadNow"])

@@ -13,7 +13,7 @@ function AS:Blizzard_TrainerUI(event, addon)
 	AS:SkinButton(ClassTrainerTrainButton, true)
 	AS:StripTextures(ClassTrainerFrame.bottomInset)
 
-	AS:SkinDropDownBox(ClassTrainerFrameFilterDropDown, 155)
+	AS:SkinDropDownBox(ClassTrainerFrameFilterDropDown)
 	ClassTrainerFrameFilterDropDown:SetPoint("TOPRIGHT", ClassTrainerFrame, "TOPRIGHT", -6, -32)
 
 	AS:SkinScrollBar(ClassTrainerScrollFrameScrollBar)

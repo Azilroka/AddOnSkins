@@ -1,42 +1,5 @@
 local AS = unpack(AddOnSkins)
 
---[[
-function AS:Blizzard_BindingUI() -- ADDON_LOADED Blizzard_BindingUI
-	local buttons = {
-		"KeyBindingFrameDefaultButton",
-		"KeyBindingFrameUnbindButton",
-		"KeyBindingFrameOkayButton",
-		"KeyBindingFrameCancelButton",
-	}
-
-	for _, v in pairs(buttons) do
-		AS:StripTextures(_G[v])
-		AS:SkinButton(_G[v])
-	end
-
-	AS:SkinCheckBox(KeyBindingFrameCharacterButton)
-	KeyBindingFrameHeaderText:ClearAllPoints()
-	KeyBindingFrameHeaderText:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
-	AS:StripTextures(KeyBindingFrame)
-	AS:SetTemplate(KeyBindingFrame, 'Default')
-
-	for i = 1, KEY_BINDINGS_DISPLAYED  do
-		local button1 = _G["KeyBindingFrameBinding"..i.."Key1Button"]
-		local button2 = _G["KeyBindingFrameBinding"..i.."Key2Button"]
-		AS:StripTextures(button1, true)
-		AS:StyleButton(button1)
-		AS:SetTemplate(button1, 'Default')
-		AS:StripTextures(button2, true)
-		AS:StyleButton(button2)
-		AS:SetTemplate(button2, 'Default')
-	end
-
-	KeyBindingFrameUnbindButton:SetPoint("RIGHT", KeyBindingFrameOkayButton, "LEFT", -3, 0)
-	KeyBindingFrameOkayButton:SetPoint("RIGHT", KeyBindingFrameCancelButton, "LEFT", -3, 0)
-
-	AS:SkinScrollBar(KeyBindingFrameScrollFrameScrollBar)
-end
-]]
 function AS:Blizzard_Options(event, addon)
 	if addon == 'Blizzard_GMSurveyUI' then
 		AS:StripTextures(GMSurveyHeader)
@@ -60,46 +23,20 @@ function AS:Blizzard_Options(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		-- Sytem / Interface Panel
 
-		local OptionsFrames = {
-			InterfaceOptionsFrame,
-			InterfaceOptionsFrameCategories,
-			InterfaceOptionsFramePanelContainer,
-			InterfaceOptionsFrameAddOns,
-			VideoOptionsFrame,
-			VideoOptionsFrameCategoryFrame,
-			VideoOptionsFramePanelContainer,
-			Display_,
-			Graphics_,
-			RaidGraphics_,
-		}
+		local OptionsFrames = { InterfaceOptionsFrame, InterfaceOptionsFrameCategories, InterfaceOptionsFramePanelContainer, InterfaceOptionsFrameAddOns, VideoOptionsFrame, VideoOptionsFrameCategoryFrame, VideoOptionsFramePanelContainer, Display_, Graphics_, RaidGraphics_ }
+		local OptionsFrameBackdrops = { AudioOptionsSoundPanelHardware, AudioOptionsSoundPanelVolume, AudioOptionsSoundPanelPlayback, AudioOptionsVoicePanelTalking, AudioOptionsVoicePanelListening, AudioOptionsVoicePanelBinding }
+		local OptionsButtons = { GraphicsButton, RaidButton }
 
 		for _, Frame in pairs(OptionsFrames) do
 			AS:SkinFrame(Frame)
 		end
 
-		local OptionsFrameBackdrops = {
-			AudioOptionsSoundPanelHardware,
-			AudioOptionsSoundPanelVolume,
-			AudioOptionsSoundPanelPlayback,
-			AudioOptionsVoicePanelTalking,
-			AudioOptionsVoicePanelListening,
-			AudioOptionsVoicePanelBinding,
-		}
-
 		for _, Frame in pairs(OptionsFrameBackdrops) do
-			AS:SkinBackdropFrame(Frame)
-			Frame.Backdrop:SetAllPoints()
+			AS:SkinBackdropFrame(Frame, nil, nil, nil, true)
 		end
 
-		local OptionsTabs = {
-			InterfaceOptionsFrameTab1,
-			InterfaceOptionsFrameTab2,
-			GraphicsButton,
-			RaidButton,
-		}
-
-		for _, Tab in pairs(OptionsTabs) do
-			AS:SkinTab(Tab, true)
+		for _, Tab in pairs(OptionsButtons) do
+			AS:SkinButton(Tab)
 		end
 
 		local a, b, c, d, e = InterfaceOptionsFrameTab1:GetPoint()
@@ -144,6 +81,9 @@ function AS:Blizzard_Options(event, addon)
 			AudioOptionsVoicePanelChatMode2,
 		}
 
+		AS:StripTextures(InterfaceOptionsFrameTab1)
+		AS:StripTextures(InterfaceOptionsFrameTab2)
+
 		for _, Panel in pairs(InterfaceOptions) do
 			for i = 1, Panel:GetNumChildren() do
 				local Child = select(i, Panel:GetChildren())
@@ -155,29 +95,14 @@ function AS:Blizzard_Options(event, addon)
 					AS:SkinSlideBar(Child, true)
 				elseif Child:IsObjectType('Tab') then
 					AS:SkinTab(Child)
-				elseif Child:IsObjectType('Frame') and Child:GetName() and strfind(Child:GetName(), 'DropDown') then
+				elseif Child:IsObjectType('Frame') and Child.Left and Child.Middle and Child.Right then
 					AS:SkinDropDownBox(Child)
 				end
 			end
 		end
 
-		local InterfaceOptionsDropDowns = {
-			InterfaceOptionsObjectivesPanelQuestSorting,
-			InterfaceOptionsSocialPanelChatStyle,
-			InterfaceOptionsSocialPanelTimestamps,
-			InterfaceOptionsSocialPanelWhisperMode,
-			InterfaceOptionsSocialPanelBnWhisperMode,
-			Advanced_MultisampleAlphaTest,
-		}
-
-		for _, DropDown in pairs(InterfaceOptionsDropDowns) do
-			AS:SkinDropDownBox(DropDown)
-		end
-
-		InterfaceOptionsDisplayPanelOutlineDropDown:SetWidth(210)
-		InterfaceOptionsNamesPanelUnitNameplatesMotionDropDown:SetWidth(190)
-		AudioOptionsSoundPanelHardwareDropDown:SetWidth(190)
-		AudioOptionsSoundPanelSoundChannelsDropDown:SetWidth(190)
+		InterfaceOptionsSocialPanel.EnableTwitter.Logo:SetAtlas("WoWShare-TwitterLogo")
+		InterfaceOptionsFrameTab2:SetPoint('TOPLEFT', InterfaceOptionsFrameTab1, 'TOPRIGHT', 1, 0)
 
 		-- -- Color Picker
 		-- AS:SkinFrame(ColorPickerFrame, nil, true)

@@ -8,7 +8,7 @@ function AS:Wholly()
 		if not self.isSkinned then
 			AS:SkinFrame(self)
 			AS:SkinCloseButton(com_mithrandir_whollyFrameCloseButton)
-			AS:SkinDropDownBox(com_mithrandir_whollyFrameZoneButton, 285)
+			AS:SkinDropDownBox(com_mithrandir_whollyFrameZoneButton)
 			com_mithrandir_whollyFrameZoneButtonText:ClearAllPoints()
 			com_mithrandir_whollyFrameZoneButtonText:SetPoint('LEFT', com_mithrandir_whollyFrameZoneButton, 'LEFT', 32, 2)
 			com_mithrandir_whollyFrameZoneButtonText:SetDrawLayer('OVERLAY')

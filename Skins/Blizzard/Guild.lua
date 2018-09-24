@@ -186,7 +186,7 @@ function AS:Blizzard_GuildUI(event, addon)
 
 	AS:SkinScrollBar(GuildRosterContainerScrollBar)
 	AS:SkinCheckBox(GuildRosterShowOfflineButton)
-	AS:SkinDropDownBox(GuildRosterViewDropdown, 200)
+	AS:SkinDropDownBox(GuildRosterViewDropdown)
 
 	for i = 1, 4 do
 		AS:StripTextures(_G["GuildRosterColumnButton"..i], true)
@@ -200,7 +200,7 @@ function AS:Blizzard_GuildUI(event, addon)
 	AS:StripTextures(GuildMemberNoteBackground)
 	AS:StripTextures(GuildMemberOfficerNoteBackground)
 	GuildMemberRankDropdown:SetFrameLevel(GuildMemberRankDropdown:GetFrameLevel() + 5)
-	AS:SkinDropDownBox(GuildMemberRankDropdown, 175)
+	AS:SkinDropDownBox(GuildMemberRankDropdown)
 
 	AS:StripTextures(GuildNewsFrame)
 
@@ -296,9 +296,7 @@ function AS:Blizzard_GuildControlUI(event, addon)
 	end)
 
 	AS:SkinDropDownBox(GuildControlUINavigationDropDown)
-	AS:SkinDropDownBox(GuildControlUIRankSettingsFrameRankDropDown, 180)
-	GuildControlUINavigationDropDownButton:SetWidth(20)
-	GuildControlUIRankSettingsFrameRankDropDownButton:SetWidth(20)
+	AS:SkinDropDownBox(GuildControlUIRankSettingsFrameRankDropDown)
 
 	for i = 1, NUM_RANK_FLAGS do
 		local CheckBox = _G["GuildControlUIRankSettingsFrameCheckbox"..i]
@@ -337,8 +335,7 @@ function AS:Blizzard_GuildControlUI(event, addon)
 		end
 	end)
 
-	AS:SkinDropDownBox(GuildControlUIRankBankFrameRankDropDown, 180)
-	GuildControlUIRankBankFrameRankDropDownButton:SetWidth(20)
+	AS:SkinDropDownBox(GuildControlUIRankBankFrameRankDropDown)
 	AS:SkinCloseButton(GuildControlUICloseButton)
 	AS:StripTextures(GuildControlUIRankBankFrameInset)
 	AS:StripTextures(GuildControlUIRankBankFrameInsetScrollFrame)

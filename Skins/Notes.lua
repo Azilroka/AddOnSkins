@@ -2,7 +2,7 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Notes') then return end
 
-function AS:Notes(event, addon)
+function AS:Notes()
 	AS:SkinFrame(NotesFrame)
 	AS:SkinFrame(NotesFrameScrollFrame)
 	AS:SkinFrame(TextScrollFrame)
@@ -21,7 +21,7 @@ function AS:Notes(event, addon)
 	AS:SkinCloseButton(NotesFrameCloseButton)
 	AS:SkinDropDownBox(Notes_AddInfoDropDown)
 	AS:SkinDropDownBox(Notes_TypeDropDown)
-	
+
 	TextBodyEditBox:SetTextColor(1, 1, 1)
 
 	NotesFrameScrollFrame:SetSize(305, 336)
