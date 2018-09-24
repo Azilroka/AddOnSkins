@@ -446,17 +446,17 @@ local ArrowTexture = {
 }
 
 function AS:SkinArrowButton(Button, Arrow)
-	local Direction = 'down'
-
 	if (not Arrow) then
 		local ButtonName = Button:GetName() and Button:GetName():lower()
 		if ButtonName then
 			if (strfind(ButtonName, 'left') or strfind(ButtonName, 'prev') or strfind(ButtonName, 'decrement') or strfind(ButtonName, 'back')) then
-				Direction = 'left'
+				Arrow = 'left'
 			elseif (strfind(ButtonName, 'right') or strfind(ButtonName, 'next') or strfind(ButtonName, 'increment') or strfind(ButtonName, 'forward')) then
-				Direction = 'right'
+				Arrow = 'right'
 			elseif (strfind(ButtonName, 'up') or strfind(ButtonName, 'top') or strfind(ButtonName, 'asc') or strfind(ButtonName, 'home')) then
-				Direction = 'up'
+				Arrow = 'up'
+			else
+				Arrow = 'down'
 			end
 		end
 	end
@@ -465,7 +465,7 @@ function AS:SkinArrowButton(Button, Arrow)
 	AS:SetTemplate(Button)
 
 	local Mask = Button:CreateMaskTexture()
-	Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..ArrowTexture[Arrow and strlower(Arrow) or Direction], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
+	Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..ArrowTexture[Arrow], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
 	Mask:SetSize(Button:GetWidth() / 2, Button:GetHeight() / 2)
 	Mask:SetPoint('CENTER')
 
