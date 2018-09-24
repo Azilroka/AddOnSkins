@@ -12,7 +12,7 @@ function AS:WorldQuestTab()
 
 	AS:SkinButton(WQT_WorldQuestFrameFilterButton)
 
-	AS:SkinNextPrevButton(WQT_WorldQuestFrameSortButtonButton)
+	AS:SkinArrowButton(WQT_WorldQuestFrameSortButtonButton)
 
 	WQT_TabWorld.TabBg:Hide()
 	WQT_TabWorld.Highlight:SetTexture("")

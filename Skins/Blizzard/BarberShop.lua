@@ -19,8 +19,8 @@ function AS:Blizzard_BarbershopUI(event, addon)
 		if selector then
 			selector:StripTextures()
 
-			AS:SkinNextPrevButton(selector.Prev, nil, true)
-			AS:SkinNextPrevButton(selector.Next)
+			AS:SkinArrowButton(selector.Prev, nil, true)
+			AS:SkinArrowButton(selector.Next)
 
 			if i ~= 1 then
 				selector:ClearAllPoints()

@@ -422,48 +422,7 @@ function AS:SkinScrollBar(Frame)
 
 	for _, Button in pairs({ ScrollUpButton, ScrollDownButton }) do
 		if Button then
-			AS:StripTextures(Button)
-			AS:SetTemplate(Button)
-
-			local Mask = Button:CreateMaskTexture()
-			Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..(Button == ScrollUpButton and 'UpArrow' or 'DownArrow'), 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
-			Mask:SetSize(10, 10)
-			Mask:SetPoint('CENTER')
-
-			Button.Mask = Mask
-
-			Button:SetNormalTexture(AS.NormTex)
-			Button:SetDisabledTexture(AS.NormTex)
-			Button:SetPushedTexture(AS.NormTex)
-
-			local Normal, Disabled, Pushed = Button:GetNormalTexture(), Button:GetDisabledTexture(), Button:GetPushedTexture()
-
-			Normal:SetInside()
-			Normal:SetTexCoord(0, 1, 0, 1)
-			Normal.SetTexCoord = AS.Noop
-			Normal:SetVertexColor(1, 1, 1)
-			Normal:AddMaskTexture(Mask)
-
-			Disabled:SetInside()
-			Disabled:SetTexCoord(0, 1, 0, 1)
-			Disabled.SetTexCoord = AS.Noop
-			Disabled:SetVertexColor(.3, .3, .3)
-			Disabled:AddMaskTexture(Mask)
-
-			Pushed:SetInside()
-			Pushed:SetTexCoord(0, 1, 0, 1)
-			Pushed.SetTexCoord = AS.Noop
-			Pushed:SetVertexColor(unpack(AS.Color))
-			Pushed:AddMaskTexture(Mask)
-
-			Button:HookScript('OnEnter', function(self)
-				self:SetBackdropBorderColor(unpack(AS.Color))
-				Normal:SetVertexColor(unpack(AS.Color))
-			end)
-			Button:HookScript('OnLeave', function(self)
-				self:SetBackdropBorderColor(unpack(AS.BorderColor))
-				Normal:SetVertexColor(1, 1, 1)
-			end)
+			AS:SkinArrowButton(Button)
 		end
 	end
 
@@ -482,61 +441,69 @@ function AS:SkinScrollBar(Frame)
 	end
 end
 
-function AS:SkinNextPrevButton(Button, Vertical, Inverse)
+local ArrowTexture = {
+	['up'] = 'UpArrow',
+	['down'] = 'DownArrow',
+	['left'] = 'LeftArrow',
+	['right'] = 'RightArrow',
+}
+
+function AS:SkinArrowButton(Button, Arrow)
 	local ButtonName = Button:GetName() and Button:GetName():lower()
-	Inverse = Inverse or ButtonName and (strfind(ButtonName, 'left') or strfind(ButtonName, 'prev') or strfind(ButtonName, 'decrement') or strfind(ButtonName, 'back'))
+	local Direction = 'down'
 
-	AS:StripTextures(Button)
-	AS:SkinButton(Button)
-
-	if not Button.icon then
-		Button.icon = Button:CreateTexture(nil, 'ARTWORK')
-		Button.icon:SetSize(13, 13)
-		Button.icon:SetPoint('CENTER')
-		Button.icon:SetTexture([[Interface\Buttons\SquareButtonTextures]])
-		Button.icon:SetTexCoord(0.01562500, 0.20312500, 0.01562500, 0.20312500)
-
-		Button:HookScript('OnMouseDown', function(self)
-			if self:IsEnabled() then
-				self.icon:SetPoint('CENTER', -1, -1)
-			end
-		end)
-
-		Button:HookScript('OnMouseUp', function(self)
-			self.icon:SetPoint('CENTER', 0, 0)
-		end)
-
-		Button:HookScript('OnDisable', function(self)
-			SetDesaturation(self.icon, true)
-			self.icon:SetAlpha(0.5)
-		end)
-
-		Button:HookScript('OnEnable', function(self)
-			SetDesaturation(self.icon, false)
-			self.icon:SetAlpha(1.0)
-		end)
-
-		if not Button:IsEnabled() then
-			Button:GetScript('OnDisable')(Button)
+	if ButtonName then
+		if (strfind(ButtonName, 'left') or strfind(ButtonName, 'prev') or strfind(ButtonName, 'decrement') or strfind(ButtonName, 'back')) then
+			Direction = 'left'
+		elseif (strfind(ButtonName, 'right') or strfind(ButtonName, 'next') or strfind(ButtonName, 'increment') or strfind(ButtonName, 'forward')) then
+			Direction = 'right'
+		elseif (strfind(ButtonName, 'up') or strfind(ButtonName, 'top') or strfind(ButtonName, 'asc') or strfind(ButtonName, 'home')) then
+			Direction = 'up'
 		end
 	end
 
-	SquareButton_SetIcon(Button, Vertical and (Inverse and 'UP' or 'DOWN') or (Inverse and 'LEFT' or 'RIGHT'))
-end
+	AS:StripTextures(Button)
+	AS:SetTemplate(Button)
 
-function AS:SkinRotateButton(Button)
-	AS:SetTemplate(Button, 'Default')
-	Button:Size(Button:GetWidth() - 14, Button:GetHeight() - 14)
+	local Mask = Button:CreateMaskTexture()
+	Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..ArrowTexture[Arrow and strlower(Arrow) or Direction], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
+	Mask:SetSize(Button:GetWidth() / 2, Button:GetHeight() / 2)
+	Mask:SetPoint('CENTER')
 
-	Button:GetNormalTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)
-	Button:GetPushedTexture():SetTexCoord(0.3, 0.29, 0.3, 0.65, 0.69, 0.29, 0.69, 0.65)
+	Button.Mask = Mask
 
-	Button:GetHighlightTexture():SetColorTexture(1, 1, 1, 0.3)
+	Button:SetNormalTexture(AS.NormTex)
+	Button:SetDisabledTexture(AS.NormTex)
+	Button:SetPushedTexture(AS.NormTex)
 
-	Button:GetNormalTexture():ClearAllPoints()
-	Button:GetNormalTexture():SetInside()
-	Button:GetPushedTexture():SetAllPoints(Button:GetNormalTexture())
-	Button:GetHighlightTexture():SetAllPoints(Button:GetNormalTexture())
+	local Normal, Disabled, Pushed = Button:GetNormalTexture(), Button:GetDisabledTexture(), Button:GetPushedTexture()
+
+	Normal:SetInside()
+	Normal:SetTexCoord(0, 1, 0, 1)
+	Normal.SetTexCoord = AS.Noop
+	Normal:SetVertexColor(1, 1, 1)
+	Normal:AddMaskTexture(Mask)
+
+	Disabled:SetInside()
+	Disabled:SetTexCoord(0, 1, 0, 1)
+	Disabled.SetTexCoord = AS.Noop
+	Disabled:SetVertexColor(.3, .3, .3)
+	Disabled:AddMaskTexture(Mask)
+
+	Pushed:SetInside()
+	Pushed:SetTexCoord(0, 1, 0, 1)
+	Pushed.SetTexCoord = AS.Noop
+	Pushed:SetVertexColor(unpack(AS.Color))
+	Pushed:AddMaskTexture(Mask)
+
+	Button:HookScript('OnEnter', function(self)
+		self:SetBackdropBorderColor(unpack(AS.Color))
+		Normal:SetVertexColor(unpack(AS.Color))
+	end)
+	Button:HookScript('OnLeave', function(self)
+		self:SetBackdropBorderColor(unpack(AS.BorderColor))
+		Normal:SetVertexColor(1, 1, 1)
+	end)
 end
 
 function AS:SkinDropDownBox(Frame, Width)
@@ -561,7 +528,7 @@ function AS:SkinDropDownBox(Frame, Width)
 
 		Button:SetSize(16, 16)
 
-		AS:SkinNextPrevButton(Button, true)
+		AS:SkinArrowButton(Button, 'DOWN')
 
 		AS:CreateBackdrop(Frame, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 

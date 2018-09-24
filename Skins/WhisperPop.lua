@@ -6,9 +6,9 @@ function AS:WhisperPop()
 	AS:SkinFrame(WhisperPopFrame)
 	AS:SkinFrame(WhisperPopMessageFrame)
 
-	AS:SkinNextPrevButton(WhisperPopScrollingMessageFrameButtonDown, true, false)
-	AS:SkinNextPrevButton(WhisperPopScrollingMessageFrameButtonEnd, true, false)
-	AS:SkinNextPrevButton(WhisperPopScrollingMessageFrameButtonUp, true, true)
+	AS:SkinArrowButton(WhisperPopScrollingMessageFrameButtonDown)
+	AS:SkinArrowButton(WhisperPopScrollingMessageFrameButtonEnd)
+	AS:SkinArrowButton(WhisperPopScrollingMessageFrameButtonUp)
 
 	WhisperPopScrollingMessageFrameButtonDown:SetPoint('BOTTOM', WhisperPopScrollingMessageFrameButtonEnd, 'TOP', 0, 0)
 	WhisperPopScrollingMessageFrameButtonUp:SetPoint('BOTTOM', WhisperPopScrollingMessageFrameButtonDown, 'TOP', 0, 0)

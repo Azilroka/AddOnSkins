@@ -12,8 +12,8 @@ function AS:Blizzard_Spellbook()
 	SpellBookPageText:SetTextColor(1, 1, 1)
 	SpellBookPageText:SetPoint("BOTTOMRIGHT", -100, 32)
 
-	AS:SkinNextPrevButton(SpellBookPrevPageButton)
-	AS:SkinNextPrevButton(SpellBookNextPageButton)
+	AS:SkinArrowButton(SpellBookPrevPageButton)
+	AS:SkinArrowButton(SpellBookNextPageButton)
 
 	SpellBookFrameTutorialButton.Ring:Hide()
 	SpellBookFrameTutorialButton:SetPoint("TOPLEFT", SpellBookFrame, "TOPLEFT", -5, 10)

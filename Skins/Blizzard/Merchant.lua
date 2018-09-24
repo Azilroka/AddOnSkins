@@ -61,8 +61,8 @@ function AS:Blizzard_Merchant()
 	MerchantRepairAllIcon:SetInside()
 
 	MerchantFrame:SetWidth(345)
-	AS:SkinNextPrevButton(MerchantNextPageButton)
-	AS:SkinNextPrevButton(MerchantPrevPageButton)
+	AS:SkinArrowButton(MerchantNextPageButton)
+	AS:SkinArrowButton(MerchantPrevPageButton)
 
 	hooksecurefunc('MerchantFrame_UpdateMerchantInfo', function()
 		for i = 1, MERCHANT_ITEMS_PER_PAGE do

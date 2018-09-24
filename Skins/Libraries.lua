@@ -113,7 +113,7 @@ local function SkinRockConfig(lib)
 
 		self.base.addonChooser.text:Height(20)
 		AS:SetTemplate(self.base.addonChooser.text)
-		AS:SkinNextPrevButton(self.base.addonChooser.button, true)
+		AS:SkinArrowButton(self.base.addonChooser.button)
 
 		local pullout = _G[self.base.mainPane:GetName().."_ChoicePullout"]
 		if pullout then

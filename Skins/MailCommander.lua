@@ -5,8 +5,8 @@ if not AS:CheckAddOn('MailCommander') then return end
 function AS:MailCommander()
 	AS:SkinFrame(MailCommanderFrame)
 	AS:SkinCloseButton(MailCommanderFrame.CloseButton)
-	AS:SkinNextPrevButton(MailCommanderFrame.NextPageButton)
-	AS:SkinNextPrevButton(MailCommanderFrame.PrevPageButton)
+	AS:SkinArrowButton(MailCommanderFrame.NextPageButton)
+	AS:SkinArrowButton(MailCommanderFrame.PrevPageButton)
 
 	AS:SkinButton(MailCommanderFrame.Send)
 	AS:SkinButton(MailCommanderFrame.Delete)

@@ -34,8 +34,8 @@ function AS:Blizzard_TimeManager(event, addon)
 	AS:StripTextures(StopwatchTabFrame)
 	AS:SkinCloseButton(StopwatchCloseButton)
 
-	AS:SkinNextPrevButton(StopwatchPlayPauseButton)
-	AS:SkinNextPrevButton(StopwatchResetButton)
+	AS:SkinArrowButton(StopwatchPlayPauseButton)
+	AS:SkinArrowButton(StopwatchResetButton)
 
 	StopwatchPlayPauseButton:SetPoint("RIGHT", StopwatchResetButton, "LEFT", -4, 0)
 	StopwatchResetButton:SetPoint("BOTTOMRIGHT", StopwatchFrame, "BOTTOMRIGHT", -4, 6)

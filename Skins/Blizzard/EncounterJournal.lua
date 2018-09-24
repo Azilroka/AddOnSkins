@@ -62,11 +62,6 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	EncounterJournal.instanceSelect.bg:SetAlpha(0)
 
 	AS:SkinDropDownBox(EncounterJournalInstanceSelectTierDropDown)
-	-- FIX ME
-	--EncounterJournalInstanceSelectTierDropDownButton:SetScript('OnClick', function(self)
-		--PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_ON)
-		--ToggleDropDownMenu(1, nil, EJTierDropDown, self:GetName(), 0, -2)
-	--end)
 
 	local function SkinDungeons()
 		local b1 = EncounterJournalInstanceSelectScrollFrameScrollChildInstanceButton1

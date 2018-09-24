@@ -57,11 +57,11 @@ function AS:Blizzard_ArchaeologyUI(event, addon)
 	ArchaeologyFrameHelpPageDigTitle:SetTextColor(1, 1, 0)
 	ArchaeologyFrameHelpPageHelpScrollHelpText:SetTextColor(1, 1, 1)
 
-	AS:SkinNextPrevButton(ArchaeologyFrame.summaryPage.prevPageButton)
-	AS:SkinNextPrevButton(ArchaeologyFrame.summaryPage.nextPageButton)
+	AS:SkinArrowButton(ArchaeologyFrame.summaryPage.prevPageButton)
+	AS:SkinArrowButton(ArchaeologyFrame.summaryPage.nextPageButton)
 
-	AS:SkinNextPrevButton(ArchaeologyFrame.completedPage.prevPageButton)
-	AS:SkinNextPrevButton(ArchaeologyFrame.completedPage.nextPageButton)
+	AS:SkinArrowButton(ArchaeologyFrame.completedPage.prevPageButton)
+	AS:SkinArrowButton(ArchaeologyFrame.completedPage.nextPageButton)
 
 	AS:StripTextures(ArcheologyDigsiteProgressBar)
 	AS:SkinStatusBar(ArcheologyDigsiteProgressBar.FillBar)

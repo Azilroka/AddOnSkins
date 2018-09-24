@@ -31,8 +31,8 @@ function AS:Blizzard_GarrisonUI(event, addon)
 
 	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.IconBG:SetTexture(nil)
 
-	AS:SkinNextPrevButton(GarrisonCapacitiveDisplayFrame.DecrementButton)
-	AS:SkinNextPrevButton(GarrisonCapacitiveDisplayFrame.IncrementButton)
+	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.DecrementButton)
+	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.IncrementButton)
 	AS:SkinEditBox(GarrisonCapacitiveDisplayFrame.Count)
 
 	AS:UnregisterSkinEvent(addon, event)

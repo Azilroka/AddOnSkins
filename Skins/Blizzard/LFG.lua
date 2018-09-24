@@ -189,9 +189,8 @@ end
 
 function AS:Blizzard_ChallengesUI(event, addon)
 	if addon ~= 'Blizzard_ChallengesUI' then return end
+
 	AS:StripTextures(ChallengesFrameInset, true)
-	ChallengesFrameInset:Hide()
-	ChallengesFrameInsetBg:Hide()
 
 	AS:UnregisterSkinEvent(addon, event)
 end

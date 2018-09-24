@@ -7,8 +7,8 @@ function AS:Blizzard_Calendar(event, addon)
 	AS:SkinCloseButton(CalendarCloseButton)
 	CalendarCloseButton:SetPoint("TOPRIGHT", CalendarFrame, "TOPRIGHT", -4, -4)
 
-	AS:SkinNextPrevButton(CalendarPrevMonthButton)
-	AS:SkinNextPrevButton(CalendarNextMonthButton)
+	AS:SkinArrowButton(CalendarPrevMonthButton)
+	AS:SkinArrowButton(CalendarNextMonthButton)
 
 	AS:StripTextures(CalendarFilterFrame)
 	CalendarFilterFrame:SetWidth(155)
@@ -20,7 +20,7 @@ function AS:Blizzard_Calendar(event, addon)
 	CalendarFilterButton:SetPoint("RIGHT", CalendarFilterFrame, "RIGHT", -10, 3)
 	CalendarFilterButton.SetPoint = AS.Noop
 
-	AS:SkinNextPrevButton(CalendarFilterButton, true)
+	AS:SkinArrowButton(CalendarFilterButton)
 
 	AS:CreateBackdrop(CalendarFilterFrame, 'Default')
 	CalendarFilterFrame.Backdrop:SetPoint("TOPLEFT", 20, 2)

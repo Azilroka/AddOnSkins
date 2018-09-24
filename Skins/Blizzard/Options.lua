@@ -118,8 +118,8 @@ function AS:Blizzard_Options(event, addon)
 		AS:StripTextures(ItemTextScrollFrame)
 		AS:SkinScrollBar(ItemTextScrollFrameScrollBar)
 		AS:SkinCloseButton(ItemTextFrameCloseButton)
-		AS:SkinNextPrevButton(ItemTextPrevPageButton)
-		AS:SkinNextPrevButton(ItemTextNextPageButton)
+		AS:SkinArrowButton(ItemTextPrevPageButton)
+		AS:SkinArrowButton(ItemTextNextPageButton)
 		ItemTextPageText:SetTextColor(1, 1, 1)
 		ItemTextPageText.SetTextColor = AS.Noop
 
@@ -205,8 +205,12 @@ function AS:Blizzard_Options(event, addon)
 		CombatConfigTab1:SetPoint("BOTTOMLEFT", ChatConfigBackgroundFrame, "TOPLEFT", 6, -2)
 
 		AS:SkinEditBox(CombatConfigSettingsNameEditBox)
-		AS:SkinNextPrevButton(ChatConfigMoveFilterUpButton, true)
-		AS:SkinNextPrevButton(ChatConfigMoveFilterDownButton, true)
+		AS:SkinArrowButton(ChatConfigMoveFilterUpButton)
+		AS:SkinArrowButton(ChatConfigMoveFilterDownButton)
+		ChatConfigMoveFilterUpButton:SetSize(19, 19)
+		ChatConfigMoveFilterDownButton:SetSize(19, 19)
+		ChatConfigMoveFilterUpButton:SetPoint("TOPLEFT", "$parent", "BOTTOMLEFT", 0, -3)
+		ChatConfigMoveFilterDownButton:SetPoint("LEFT", ChatConfigMoveFilterUpButton, "RIGHT", 3, 0)
 
 		ChatConfigFrameOkayButton:SetPoint("RIGHT", "$parentCancelButton", "RIGHT", -1, -3)
 		ChatConfigFrameDefaultButton:SetPoint("BOTTOMLEFT", 12, 10)
@@ -361,7 +365,7 @@ function AS:Blizzard_Options(event, addon)
 		end
 
 		for _, Button in pairs({ HelpBrowserNavBack, HelpBrowserNavForward }) do
-			AS:SkinNextPrevButton(Button)
+			AS:SkinArrowButton(Button)
 		end
 
 		AS:SkinFrame(BrowserSettingsTooltip)

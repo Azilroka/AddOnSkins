@@ -166,8 +166,8 @@ function AS:Altoholic(event, addon)
 	if addon == "Altoholic_Agenda" then
 		--AS:SkinFrame(AltoholicFrameCalendarScrollFrame)
 		--AS:SkinScrollBar(AltoholicFrameCalendarScrollFrame.ScrollBar)
-		AS:SkinNextPrevButton(AltoholicTabAgenda.Calendar.NextMonth)
-		AS:SkinNextPrevButton(AltoholicTabAgenda.Calendar.PrevMonth)
+		AS:SkinArrowButton(AltoholicTabAgenda.Calendar.NextMonth)
+		AS:SkinArrowButton(AltoholicTabAgenda.Calendar.PrevMonth)
 		AS:SkinButton(AltoholicTabAgenda.MenuItem1, true)
 
 		AS:EnumObjects(function(index) return AltoholicTabAgenda.Calendar["Day"..index] end, function(obj) AS:StripTextures(obj) end)

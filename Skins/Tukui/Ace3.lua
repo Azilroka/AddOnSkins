@@ -41,7 +41,7 @@ function AS:Ace3()
 			button:ClearAllPoints()
 			button:Point('RIGHT', frame, 'RIGHT', -20, 0)
 
-			AS:SkinNextPrevButton(button, true)
+			AS:SkinArrowButton(button)
 
 			AS:CreateBackdrop(frame)
 			frame.Backdrop:Point("TOPLEFT", 20, -2)
@@ -57,7 +57,7 @@ function AS:Ace3()
 			local text = frame.text
 			AS:StripTextures(frame)
 
-			AS:SkinNextPrevButton(button, true)
+			AS:SkinArrowButton(button)
 			frame.text:ClearAllPoints()
 			frame.text:Point('RIGHT', button, 'LEFT', -2, 0)
 

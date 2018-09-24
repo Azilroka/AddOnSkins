@@ -54,8 +54,8 @@ function AS:Blizzard_GuildUI(event, addon)
 		TabardFrameAcceptButton:ClearAllPoints()
 		TabardFrameAcceptButton:SetPoint("RIGHT", TabardFrameCancelButton, "LEFT", -3, 0)
 
-		AS:SkinRotateButton(TabardCharacterModelRotateLeftButton)
-		AS:SkinRotateButton(TabardCharacterModelRotateRightButton)
+		AS:SkinArrowButton(TabardCharacterModelRotateLeftButton)
+		AS:SkinArrowButton(TabardCharacterModelRotateRightButton)
 		TabardCharacterModelRotateLeftButton:ClearAllPoints()
 		TabardCharacterModelRotateLeftButton:SetPoint("BOTTOMLEFT", TabardModel, "BOTTOMLEFT", 4, 4)
 		TabardCharacterModelRotateRightButton:ClearAllPoints()
@@ -69,8 +69,8 @@ function AS:Blizzard_GuildUI(event, addon)
 		for i = 1, 5 do
 			local Frame = _G["TabardFrameCustomization"..i]
 			AS:StripTextures(Frame)
-			AS:SkinNextPrevButton(_G[Frame:GetName().."LeftButton"])
-			AS:SkinNextPrevButton(_G[Frame:GetName().."RightButton"])
+			AS:SkinArrowButton(_G[Frame:GetName().."LeftButton"])
+			AS:SkinArrowButton(_G[Frame:GetName().."RightButton"])
 
 			if i > 1 then
 				Frame:ClearAllPoints()

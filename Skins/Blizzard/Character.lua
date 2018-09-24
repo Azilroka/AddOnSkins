@@ -281,8 +281,8 @@ function AS:Blizzard_CharacterFrame()
 --[[
 	-- Pet
 	AS:CreateBackdrop(PetModelFrame, 'Default')
-	AS:SkinNextPrevButton(PetModelFrameRotateRightButton)
-	AS:SkinNextPrevButton(PetModelFrameRotateLeftButton)
+	AS:SkinArrowButton(PetModelFrameRotateRightButton)
+	AS:SkinArrowButton(PetModelFrameRotateLeftButton)
 	PetModelFrameRotateRightButton:ClearAllPoints()
 	PetModelFrameRotateRightButton:SetPoint("LEFT", PetModelFrameRotateLeftButton, "RIGHT", 4, 0)
 

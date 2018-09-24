@@ -28,7 +28,7 @@ function AS:Postal(event, addon)
 	end
 
 	if Postal_OpenAllMenuButton then
-		AS:SkinNextPrevButton(Postal_OpenAllMenuButton, true)
+		AS:SkinArrowButton(Postal_OpenAllMenuButton)
 		Postal_OpenAllMenuButton:SetPoint('LEFT', PostalOpenAllButton, 'RIGHT', 5, 0)
 	end
 
@@ -43,12 +43,12 @@ function AS:Postal(event, addon)
 	end
 
 	if Postal_ModuleMenuButton then
-		AS:SkinNextPrevButton(Postal_ModuleMenuButton, true)
+		AS:SkinArrowButton(Postal_ModuleMenuButton)
 		Postal_ModuleMenuButton:SetPoint('TOPRIGHT', MailFrame, -53, -6)
 	end
 
 	if Postal_BlackBookButton then
-		AS:SkinNextPrevButton(Postal_BlackBookButton, true)
+		AS:SkinArrowButton(Postal_BlackBookButton)
 		Postal_BlackBookButton:SetPoint('LEFT', SendMailNameEditBox, 'RIGHT', 5, 2)
 	end
 

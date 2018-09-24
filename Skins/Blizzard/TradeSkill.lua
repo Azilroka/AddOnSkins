@@ -49,8 +49,8 @@ function AS:Blizzard_TradeSkill(event, addon)
 	AS:SkinButton(TradeSkillFrame.DetailsFrame.CreateButton, true)
 	AS:SkinButton(TradeSkillFrame.DetailsFrame.ExitButton, true)
 
-	AS:SkinNextPrevButton(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.DecrementButton, nil, true)
-	AS:SkinNextPrevButton(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.IncrementButton)
+	AS:SkinArrowButton(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.DecrementButton)
+	AS:SkinArrowButton(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.IncrementButton)
 	TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.IncrementButton:SetPoint("LEFT", TradeSkillFrame.DetailsFrame.CreateMultipleInputBox, "RIGHT", 4, 0)
 
 	hooksecurefunc(TradeSkillFrame.DetailsFrame, "RefreshDisplay", function(self)

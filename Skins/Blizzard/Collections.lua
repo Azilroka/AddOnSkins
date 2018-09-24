@@ -21,8 +21,8 @@ function AS:Blizzard_Collections(event, addon)
 	AS:StripTextures(MountJournalFilterButton, true)
 	AS:SkinButton(MountJournalFilterButton)
 	AS:SkinScrollBar(MountJournalListScrollFrameScrollBar)
-	AS:SkinRotateButton(MountJournal.MountDisplay.ModelScene.RotateLeftButton)
-	AS:SkinRotateButton(MountJournal.MountDisplay.ModelScene.RotateRightButton)
+	AS:SkinArrowButton(MountJournal.MountDisplay.ModelScene.RotateLeftButton)
+	AS:SkinArrowButton(MountJournal.MountDisplay.ModelScene.RotateRightButton)
 	AS:SkinTexture(MountJournal.MountDisplay.InfoButton.Icon)
 	AS:CreateBackdrop(MountJournal.MountDisplay.InfoButton)
 	MountJournal.MountDisplay.InfoButton.Backdrop:SetOutside(MountJournal.MountDisplay.InfoButton.Icon)
@@ -223,8 +223,8 @@ function AS:Blizzard_Collections(event, addon)
 
 	ToyBox.searchBox:SetPoint("TOPRIGHT", ToyBox, "TOPRIGHT", -117, -34)
 
-	AS:SkinNextPrevButton(ToyBox.PagingFrame.NextPageButton)
-	AS:SkinNextPrevButton(ToyBox.PagingFrame.PrevPageButton)
+	AS:SkinArrowButton(ToyBox.PagingFrame.NextPageButton)
+	AS:SkinArrowButton(ToyBox.PagingFrame.PrevPageButton)
 	AS:StripTextures(ToyBox.iconsFrame)
 
 	for i = 1, 18 do
@@ -268,8 +268,8 @@ function AS:Blizzard_Collections(event, addon)
 
 	AS:StripTextures(HeirloomsJournalFilterButton, true)
 	AS:SkinButton(HeirloomsJournalFilterButton)
-	AS:SkinNextPrevButton(HeirloomsJournal.PagingFrame.NextPageButton)
-	AS:SkinNextPrevButton(HeirloomsJournal.PagingFrame.PrevPageButton)
+	AS:SkinArrowButton(HeirloomsJournal.PagingFrame.NextPageButton)
+	AS:SkinArrowButton(HeirloomsJournal.PagingFrame.PrevPageButton)
 
 	hooksecurefunc(HeirloomsJournal, 'LayoutCurrentPage', function(self)
 		local pageLayoutData = self.heirloomLayoutData[self.currentPage]
@@ -307,8 +307,8 @@ function AS:Blizzard_Collections(event, addon)
 	WardrobeCollectionFrame.FilterButton:SetWidth(80)
 	AS:StripTextures(WardrobeCollectionFrame.ItemsCollectionFrame)
 	AS:SkinDropDownBox(WardrobeCollectionFrameWeaponDropDown)
-	AS:SkinNextPrevButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.PrevPageButton)
-	AS:SkinNextPrevButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.NextPageButton)
+	AS:SkinArrowButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.PrevPageButton)
+	AS:SkinArrowButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.NextPageButton)
 	AS:StripTextures(WardrobeCollectionFrame.FilterButton, true)
 	AS:SkinButton(WardrobeCollectionFrame.FilterButton)
 
@@ -370,8 +370,8 @@ function AS:Blizzard_Collections(event, addon)
 	AS:SkinButton(WardrobeTransmogFrame.ApplyButton)
 
 	AS:StripTextures(WardrobeCollectionFrame.SetsTransmogFrame)
-	AS:SkinNextPrevButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.PrevPageButton)
-	AS:SkinNextPrevButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.NextPageButton)
+	AS:SkinArrowButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.PrevPageButton)
+	AS:SkinArrowButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.NextPageButton)
 
 	for i = 1, 2 do
 		for j = 1, 4 do

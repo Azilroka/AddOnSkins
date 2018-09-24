@@ -33,8 +33,8 @@ function AS:Blizzard_Mail()
 		end
 	end
 
-	AS:SkinNextPrevButton(InboxPrevPageButton)
-	AS:SkinNextPrevButton(InboxNextPageButton)
+	AS:SkinArrowButton(InboxPrevPageButton)
+	AS:SkinArrowButton(InboxNextPageButton)
 
 	AS:SkinTab(MailFrameTab1)
 	AS:SkinTab(MailFrameTab2)

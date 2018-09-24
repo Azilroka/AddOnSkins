@@ -6,7 +6,7 @@ function AS:Blizzard_Others()
 		if navButton and not navButton.isSkinned then
 			AS:SkinButton(navButton, true)
 			if navButton.MenuArrowButton then
-				AS:SkinNextPrevButton(navButton.MenuArrowButton, true)
+				AS:SkinArrowButton(navButton.MenuArrowButton)
 				navButton.MenuArrowButton:SetBackdrop(nil)
 				navButton.MenuArrowButton:SetSize(22, 22)
 			end
