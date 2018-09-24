@@ -465,7 +465,7 @@ function AS:SkinArrowButton(Button, Arrow)
 	AS:SetTemplate(Button)
 
 	local Mask = Button:CreateMaskTexture()
-	Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..ArrowTexture[Arrow], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
+	Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..ArrowTexture[strlower(Arrow)], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
 	Mask:SetSize(Button:GetWidth() / 2, Button:GetHeight() / 2)
 	Mask:SetPoint('CENTER')
 
