@@ -10,33 +10,24 @@ function AS:SetTemplate(Frame, Template, Texture)
 	Texture = Texture or AS.NormTex
 	Template = Template or AS:CheckOption('SkinTemplate')
 
+	local Backdrop = { bgFile = Texture, edgeFile = AS.Blank, tile = false, tileSize = 0, edgeSize = AS.Mult, insets = { left = 0, right = 0, top = 0, bottom = 0 } }
+	local BorderBackdrop = { edgeFile = AS.Blank, edgeSize = AS.Mult, insets = { left = AS.Mult, right = AS.Mult, top = AS.Mult, bottom = AS.Mult } }
+
+	Frame:SetBackdrop(Backdrop)
+
+	for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
+		Frame[Inset] = CreateFrame('Frame', nil, Frame)
+		Frame[Inset]:SetBackdrop(BorderBackdrop)
+		Frame[Inset]:SetBackdropBorderColor(0, 0, 0, 1)
+	end
+
+	Frame.InsideBorder:SetInside(Frame, AS.Mult, AS.Mult)
+	Frame.InsideBorder:SetFrameLevel(Frame:GetFrameLevel() + 1)
+
+	Frame.OutsideBorder:SetOutside(Frame, AS.Mult, AS.Mult)
+
 	if AS.PixelPerfect then
-		Frame:SetBackdrop({
-			bgFile = Texture,
-			edgeFile = AS.Blank,
-			tile = false, tileSize = 0, edgeSize = AS.Mult,
-			insets = {left = 0, right = 0, top = 0, bottom = 0},
-		})
-	else
-		Frame:SetBackdrop({
-			bgFile = Texture,
-			edgeFile = AS.Blank,
-			tile = false, tileSize = 0, edgeSize = AS.Mult,
-			insets = { left = -AS.Mult, right = -AS.Mult, top = -AS.Mult, bottom = -AS.Mult},
-		})
-
-		local Backdrop = { edgeFile = Texture, edgeSize = AS.Mult, insets = { left = AS.Mult, right = AS.Mult, top = AS.Mult, bottom = AS.Mult } }
-
-		Frame.InsideBorder = CreateFrame('Frame', nil, Frame)
-		Frame.InsideBorder:SetInside(Frame, AS.Mult, AS.Mult)
-		Frame.InsideBorder:SetBackdrop(Backdrop)
-		Frame.InsideBorder:SetFrameLevel(Frame:GetFrameLevel() + 1)
-		Frame.InsideBorder:SetBackdropBorderColor(0, 0, 0, 1)
-
-		Frame.OutsideBorder = CreateFrame('Frame', nil, Frame)
-		Frame.OutsideBorder:SetOutside(Frame, AS.Mult, AS.Mult)
-		Frame.OutsideBorder:SetBackdrop(Backdrop)
-		Frame.OutsideBorder:SetBackdropBorderColor(0, 0, 0, 1)
+		AS:HideInset(Frame)
 	end
 
 	local R, G, B = unpack(AS.BackdropColor)
@@ -64,6 +55,12 @@ end
 function AS:HideInset(Frame)
 	for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
 		Frame[Inset]:Hide()
+	end
+end
+
+function AS:ShowInset(Frame)
+	for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
+		Frame[Inset]:Show()
 	end
 end
 
