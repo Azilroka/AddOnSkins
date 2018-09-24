@@ -447,16 +447,15 @@ local ArrowTexture = {
 
 function AS:SkinArrowButton(Button, Arrow)
 	if (not Arrow) then
+		Arrow = 'down'
 		local ButtonName = Button:GetName() and Button:GetName():lower()
 		if ButtonName then
 			if (strfind(ButtonName, 'left') or strfind(ButtonName, 'prev') or strfind(ButtonName, 'decrement') or strfind(ButtonName, 'back')) then
 				Arrow = 'left'
 			elseif (strfind(ButtonName, 'right') or strfind(ButtonName, 'next') or strfind(ButtonName, 'increment') or strfind(ButtonName, 'forward')) then
 				Arrow = 'right'
-			elseif (strfind(ButtonName, 'up') or strfind(ButtonName, 'top') or strfind(ButtonName, 'asc') or strfind(ButtonName, 'home')) then
+			elseif (strfind(ButtonName, 'up') or strfind(ButtonName, 'top') or strfind(ButtonName, 'asc') or strfind(ButtonName, 'home') or strfind(ButtonName, 'maximize')) then
 				Arrow = 'up'
-			else
-				Arrow = 'down'
 			end
 		end
 	end
@@ -660,29 +659,7 @@ function AS:SkinMaxMinFrame(frame)
 			button:ClearAllPoints()
 			button:SetPoint('CENTER')
 			button:SetHitRectInsets(1, 1, 1, 1)
-			AS:StripTextures(button, nil, true)
-			AS:SetTemplate(button)
-
-			button.Text = button:CreateFontString(nil, 'OVERLAY')
-			button.Text:SetFont([[Interface\AddOns\AddOnSkins\Media\Fonts\Arial.TTF]], 12)
-			button.Text:SetText(name == 'MaximizeButton' and '▲' or '▼')
-			button.Text:SetPoint('CENTER', 0, 0)
-
-			button:HookScript('OnShow', function(self)
-				if not self:IsEnabled() then
-					self.Text:SetTextColor(.3, .3, .3)
-				end
-			end)
-
-			button:HookScript('OnEnter', function(self)
-				self:SetBackdropBorderColor(unpack(AS.Color))
-				self.Text:SetTextColor(unpack(AS.Color))
-			end)
-
-			button:HookScript('OnLeave', function(self)
-				self:SetBackdropBorderColor(unpack(AS.BorderColor))
-				self.Text:SetTextColor(1, 1, 1)
-			end)
+			AS:SkinArrowButton(button)
 		end
 	end
 end
