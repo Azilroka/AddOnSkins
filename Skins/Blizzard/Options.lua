@@ -27,21 +27,6 @@ function AS:Blizzard_Options(event, addon)
 		local OptionsFrameBackdrops = { AudioOptionsSoundPanelHardware, AudioOptionsSoundPanelVolume, AudioOptionsSoundPanelPlayback, AudioOptionsVoicePanelTalking, AudioOptionsVoicePanelListening, AudioOptionsVoicePanelBinding }
 		local OptionsButtons = { GraphicsButton, RaidButton }
 
-		for _, Frame in pairs(OptionsFrames) do
-			AS:SkinFrame(Frame)
-		end
-
-		for _, Frame in pairs(OptionsFrameBackdrops) do
-			AS:SkinBackdropFrame(Frame, nil, nil, nil, true)
-		end
-
-		for _, Tab in pairs(OptionsButtons) do
-			AS:SkinButton(Tab)
-		end
-
-		local a, b, c, d, e = InterfaceOptionsFrameTab1:GetPoint()
-		InterfaceOptionsFrameTab1:SetPoint(a, b, c, d, e + 2)
-
 		local InterfaceOptions = {
 			InterfaceOptionsFrame,
 			InterfaceOptionsControlsPanel,
@@ -81,8 +66,17 @@ function AS:Blizzard_Options(event, addon)
 			AudioOptionsVoicePanelChatMode2,
 		}
 
-		AS:StripTextures(InterfaceOptionsFrameTab1)
-		AS:StripTextures(InterfaceOptionsFrameTab2)
+		for _, Frame in pairs(OptionsFrames) do
+			AS:SkinFrame(Frame)
+		end
+
+		for _, Frame in pairs(OptionsFrameBackdrops) do
+			AS:SkinBackdropFrame(Frame, nil, nil, nil, true)
+		end
+
+		for _, Tab in pairs(OptionsButtons) do
+			AS:SkinButton(Tab)
+		end
 
 		for _, Panel in pairs(InterfaceOptions) do
 			for i = 1, Panel:GetNumChildren() do
@@ -101,8 +95,9 @@ function AS:Blizzard_Options(event, addon)
 			end
 		end
 
-		InterfaceOptionsSocialPanel.EnableTwitter.Logo:SetAtlas("WoWShare-TwitterLogo")
+		InterfaceOptionsFrameTab1:SetPoint('BOTTOMLEFT', InterfaceOptionsFrameCategories, 'TOPLEFT', 6, 1)
 		InterfaceOptionsFrameTab2:SetPoint('TOPLEFT', InterfaceOptionsFrameTab1, 'TOPRIGHT', 1, 0)
+		InterfaceOptionsSocialPanel.EnableTwitter.Logo:SetAtlas("WoWShare-TwitterLogo")
 
 		-- -- Color Picker
 		-- AS:SkinFrame(ColorPickerFrame, nil, true)
@@ -141,115 +136,27 @@ function AS:Blizzard_Options(event, addon)
 			CombatConfigColorsColorizeDamageNumber,
 			CombatConfigColorsColorizeDamageSchool,
 			CombatConfigColorsColorizeEntireLine,
+			ChatConfigChatSettingsLeft,
+			ChatConfigOtherSettingsCombat,
+			ChatConfigOtherSettingsPVP,
+			ChatConfigOtherSettingsSystem,
+			ChatConfigOtherSettingsCreature,
+			ChatConfigChannelSettingsLeft,
 			CombatConfigMessageSourcesDoneBy,
-			CombatConfigMessageSourcesDoneTo,
 			CombatConfigColorsUnitColors,
+			CombatConfigMessageSourcesDoneTo,
 		}
-
-		for _, Frame in pairs(ChatFrames) do
-			AS:SkinFrame(Frame)
-		end
-
-		-- AS:StripTextures(ChatConfigChatSettingsClassColorLegend)
-		-- AS:StripTextures(ChatConfigChannelSettingsClassColorLegend)
-		-- AS:StripTextures(ChatConfigChatSettingsLeft)
-		-- AS:StripTextures(ChatConfigChannelSettingsLeft)
-		-- AS:StripTextures(ChatConfigOtherSettingsCombat)
-		-- AS:StripTextures(ChatConfigOtherSettingsPVP)
-		-- AS:StripTextures(ChatConfigOtherSettingsSystem)
-		-- AS:StripTextures(ChatConfigOtherSettingsCreature)
-
-		local Colors = {
-			CombatConfigColorsColorizeSpellNames,
-			CombatConfigColorsColorizeDamageNumber,
-			CombatConfigColorsColorizeDamageSchool,
-			CombatConfigColorsColorizeEntireLine,
-		}
-
-		for _, Frame in pairs(Colors) do
-			local point, relativeTo, relativePoint, xOffset, yOffset = Frame:GetPoint()
-			Frame:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset - 2)
-		end
-
-		hooksecurefunc('ChatConfig_UpdateCheckboxes', function(frame)
-			if ( not FCF_GetCurrentChatFrame() ) then
-				return
-			end
-			for index, value in ipairs(frame.checkBoxTable) do
-				local checkBoxNameString = frame:GetName().."CheckBox"
-				local checkBoxName = checkBoxNameString..index
-				local checkBox = _G[checkBoxName]
-				local check = _G[checkBoxName.."Check"]
-				if checkBox and not checkBox.isSkinned then
-					AS:StripTextures(checkBox)
-					AS:SkinCheckBox(check)
-					if _G[checkBoxName.."ColorClasses"] then
-						AS:SkinCheckBox(_G[checkBoxName.."ColorClasses"])
-					end
-					checkBox.isSkinned = true
-				end
-			end
-		end)
-
-		hooksecurefunc('ChatConfig_UpdateTieredCheckboxes', function(frame, index)
-			local group = frame.checkBoxTable[index]
-			local groupChecked
-			local baseName = frame:GetName().."CheckBox"..index
-			local checkBox = _G[baseName]
-			if ( checkBox ) then
-				AS:SkinCheckBox(checkBox)
-			end
-			if ( group.subTypes ) then
-				for k, v in ipairs(group.subTypes) do
-					local subCheckBox = _G[baseName.."_"..k]
-					AS:SkinCheckBox(subCheckBox)
-				end
-			end
-		end)
-
-		hooksecurefunc('ChatConfig_UpdateSwatches', function(frame)
-			if ( not FCF_GetCurrentChatFrame() ) then
-				return
-			end
-			local table = frame.swatchTable
-			local nameString = frame:GetName().."Swatch"
-			for index, value in ipairs(table) do
-				local baseName = nameString..index
-				AS:StripTextures(_G[baseName])
-			end
-		end)
-
-		for i = 1, #COMBAT_CONFIG_TABS do
-			local Tab = _G["CombatConfigTab"..i]
-			if Tab then
-				AS:SkinTab(Tab)
-				Tab:SetHeight(Tab:GetHeight()-2)
-				Tab:SetWidth(math.ceil(Tab:GetWidth()+1.6))
-				_G["CombatConfigTab"..i.."Text"]:SetPoint("BOTTOM", 0, 10)
-			end
-		end
-
-		CombatConfigTab1:SetPoint("BOTTOMLEFT", ChatConfigBackgroundFrame, "TOPLEFT", 6, -2)
 
 		local ChatButtons = {
-			ChatConfigFrameOkayButton,
 			ChatConfigFrameDefaultButton,
-			CombatLogDefaultButton,
+			ChatConfigFrameRedockButton,
+			ChatConfigFrameOkayButton,
 			ChatConfigCombatSettingsFiltersDeleteButton,
 			ChatConfigCombatSettingsFiltersAddFilterButton,
 			ChatConfigCombatSettingsFiltersCopyFilterButton,
 			CombatConfigSettingsSaveButton,
+			CombatLogDefaultButton,
 		}
-
-		for _, Button in pairs(ChatButtons) do
-			AS:SkinButton(Button)
-		end
-
-		ChatConfigFrameOkayButton:SetPoint("RIGHT", "$parentCancelButton", "RIGHT", -1, -3)
-		ChatConfigFrameDefaultButton:SetPoint("BOTTOMLEFT", 12, 10)
-		ChatConfigCombatSettingsFiltersDeleteButton:SetPoint("TOPRIGHT", "$parent", "BOTTOMRIGHT", -3, -1)
-		ChatConfigCombatSettingsFiltersAddFilterButton:SetPoint("RIGHT", "$parentDeleteButton", "LEFT", -2, 0)
-		ChatConfigCombatSettingsFiltersCopyFilterButton:SetPoint("RIGHT", "$parentAddFilterButton", "LEFT", -2, 0)
 
 		local ChatCheckBoxs = {
 			CombatConfigColorsHighlightingLine,
@@ -275,20 +182,85 @@ function AS:Blizzard_Options(event, addon)
 			CombatConfigSettingsRaid,
 		}
 
+		for _, Frame in pairs(ChatFrames) do
+			AS:SkinFrame(Frame)
+		end
+
 		for _, CheckBox in pairs(ChatCheckBoxs) do
 			AS:SkinCheckBox(CheckBox)
 		end
 
-		AS:SkinNextPrevButton(ChatConfigMoveFilterUpButton, true)
-		AS:SkinNextPrevButton(ChatConfigMoveFilterDownButton, true)
-		ChatConfigMoveFilterUpButton:SetSize(19, 19)
-		ChatConfigMoveFilterDownButton:SetSize(19, 19)
-		ChatConfigMoveFilterUpButton:SetPoint("TOPLEFT", "$parent", "BOTTOMLEFT", 0, -3)
-		ChatConfigMoveFilterDownButton:SetPoint("LEFT", ChatConfigMoveFilterUpButton, "RIGHT", 3, 0)
+		for _, Button in pairs(ChatButtons) do
+			AS:SkinButton(Button)
+		end
+
+		for i in pairs(COMBAT_CONFIG_TABS) do
+			AS:SkinTab(_G["CombatConfigTab"..i])
+			_G["CombatConfigTab"..i].Backdrop:SetPoint("TOPLEFT", 0, -10)
+			_G["CombatConfigTab"..i].Backdrop:SetPoint("BOTTOMRIGHT", -2, 3)
+			_G["CombatConfigTab"..i.."Text"]:SetPoint("BOTTOM", 0, 10)
+		end
+
+		CombatConfigTab1:ClearAllPoints()
+		CombatConfigTab1:SetPoint("BOTTOMLEFT", ChatConfigBackgroundFrame, "TOPLEFT", 6, -2)
 
 		AS:SkinEditBox(CombatConfigSettingsNameEditBox)
+		AS:SkinNextPrevButton(ChatConfigMoveFilterUpButton, true)
+		AS:SkinNextPrevButton(ChatConfigMoveFilterDownButton, true)
 
-		-- AS:SkinScrollBar(ChannelRosterScrollFrameScrollBar)
+		ChatConfigFrameOkayButton:SetPoint("RIGHT", "$parentCancelButton", "RIGHT", -1, -3)
+		ChatConfigFrameDefaultButton:SetPoint("BOTTOMLEFT", 12, 10)
+		ChatConfigCombatSettingsFiltersDeleteButton:SetPoint("TOPRIGHT", "$parent", "BOTTOMRIGHT", -3, -1)
+		ChatConfigCombatSettingsFiltersAddFilterButton:SetPoint("RIGHT", "$parentDeleteButton", "LEFT", -2, 0)
+		ChatConfigCombatSettingsFiltersCopyFilterButton:SetPoint("RIGHT", "$parentAddFilterButton", "LEFT", -2, 0)
+
+		ChatConfigFrame:HookScript("OnShow", function()
+			for tab in ChatConfigFrameChatTabManager.tabPool:EnumerateActive() do
+				AS:SkinButton(tab, true)
+			end
+		end)
+
+		hooksecurefunc('ChatConfig_UpdateCheckboxes', function(frame)
+			if ( not FCF_GetCurrentChatFrame() ) then
+				return
+			end
+			for index in ipairs(frame.checkBoxTable) do
+				local checkBoxNameString = frame:GetName().."CheckBox"
+				local checkBoxName = checkBoxNameString..index
+				local checkBox = _G[checkBoxName]
+				local check = _G[checkBoxName.."Check"]
+				if checkBox and not checkBox.isSkinned then
+					AS:StripTextures(checkBox)
+					AS:SkinCheckBox(check)
+					if _G[checkBoxName.."ColorClasses"] then
+						AS:SkinCheckBox(_G[checkBoxName.."ColorClasses"])
+					end
+					checkBox.isSkinned = true
+				end
+			end
+		end)
+
+		hooksecurefunc('ChatConfig_UpdateTieredCheckboxes', function(frame, index)
+			local group = frame.checkBoxTable[index]
+			local checkBox = _G[frame:GetName().."CheckBox"..index]
+			if ( checkBox ) then
+				AS:SkinCheckBox(checkBox)
+			end
+			if ( group.subTypes ) then
+				for k in ipairs(group.subTypes) do
+					AS:SkinCheckBox(_G[frame:GetName().."CheckBox"..index.."_"..k])
+				end
+			end
+		end)
+
+		hooksecurefunc('ChatConfig_UpdateSwatches', function(frame)
+			if ( not FCF_GetCurrentChatFrame() ) then
+				return
+			end
+			for index in ipairs(frame.swatchTable) do
+				AS:StripTextures(_G[frame:GetName().."Swatch"..index])
+			end
+		end)
 
 		-- Help
 		AS:SkinFrame(HelpFrame, nil, nil, true)

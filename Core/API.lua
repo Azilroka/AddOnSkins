@@ -101,7 +101,7 @@ function AS:StripTextures(Object, Kill, Alpha)
 	end
 end
 
-local BlizzardRegions = { 'Left', 'Middle', 'Right', 'Mid', 'LeftDisabled', 'MiddleDisabled', 'RightDisabled', 'TopLeft', 'TopRight', 'BottomLeft', 'BottomRight', 'TopMiddle', 'MiddleLeft', 'MiddleRight', 'BottomMiddle', 'MiddleMiddle' }
+local BlizzardRegions = { 'Left', 'Middle', 'Right', 'Mid', 'LeftDisabled', 'MiddleDisabled', 'RightDisabled', 'TopLeft', 'TopRight', 'BottomLeft', 'BottomRight', 'TopMiddle', 'MiddleLeft', 'MiddleRight', 'BottomMiddle', 'MiddleMiddle', 'TabSpacer', 'TabSpacer1', 'TabSpacer2' }
 
 function AS:SkinButton(Button, Strip)
 	if Button.isSkinned then return end
@@ -145,12 +145,14 @@ function AS:SkinButton(Button, Strip)
 	Button:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
 	Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
-	--if Button.Flash then
-	--	Button.Flash:SetTexture(0, 0, 0, 0)
-	--	AS:CreateBackdrop(Button.Flash)
-	--	Button.Flash.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
-	--	Button.Flash.Backdrop:SetBackdropColor(0, 0, 0, 0)
-	--end
+	if Button.Flash then
+		Button.Flash:SetColorTexture(0, 0, 0, 0)
+		AS:CreateBackdrop(Button.Flash)
+		Button.Flash.Backdrop:SetOutside(Button)
+		Button.Flash.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
+		Button.Flash.Backdrop:SetBackdropColor(0, 0, 0, 0)
+		Button.Flash.Backdrop:Hide()
+	end
 end
 
 function AS:CreateShadow(Frame, NoRegister)
