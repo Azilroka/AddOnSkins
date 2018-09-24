@@ -446,16 +446,18 @@ local ArrowTexture = {
 }
 
 function AS:SkinArrowButton(Button, Arrow)
-	local ButtonName = Button:GetName() and Button:GetName():lower()
 	local Direction = 'down'
 
-	if ButtonName then
-		if (strfind(ButtonName, 'left') or strfind(ButtonName, 'prev') or strfind(ButtonName, 'decrement') or strfind(ButtonName, 'back')) then
-			Direction = 'left'
-		elseif (strfind(ButtonName, 'right') or strfind(ButtonName, 'next') or strfind(ButtonName, 'increment') or strfind(ButtonName, 'forward')) then
-			Direction = 'right'
-		elseif (strfind(ButtonName, 'up') or strfind(ButtonName, 'top') or strfind(ButtonName, 'asc') or strfind(ButtonName, 'home')) then
-			Direction = 'up'
+	if (not Arrow) then
+		local ButtonName = Button:GetName() and Button:GetName():lower()
+		if ButtonName then
+			if (strfind(ButtonName, 'left') or strfind(ButtonName, 'prev') or strfind(ButtonName, 'decrement') or strfind(ButtonName, 'back')) then
+				Direction = 'left'
+			elseif (strfind(ButtonName, 'right') or strfind(ButtonName, 'next') or strfind(ButtonName, 'increment') or strfind(ButtonName, 'forward')) then
+				Direction = 'right'
+			elseif (strfind(ButtonName, 'up') or strfind(ButtonName, 'top') or strfind(ButtonName, 'asc') or strfind(ButtonName, 'home')) then
+				Direction = 'up'
+			end
 		end
 	end
 
@@ -493,14 +495,8 @@ function AS:SkinArrowButton(Button, Arrow)
 	Pushed:SetVertexColor(unpack(AS.Color))
 	Pushed:AddMaskTexture(Mask)
 
-	Button:HookScript('OnEnter', function(self)
-		self:SetBackdropBorderColor(unpack(AS.Color))
-		Normal:SetVertexColor(unpack(AS.Color))
-	end)
-	Button:HookScript('OnLeave', function(self)
-		self:SetBackdropBorderColor(unpack(AS.BorderColor))
-		Normal:SetVertexColor(1, 1, 1)
-	end)
+	Button:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) Normal:SetVertexColor(unpack(AS.Color)) end)
+	Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) Normal:SetVertexColor(1, 1, 1) end)
 end
 
 function AS:SkinDropDownBox(Frame, Width)
