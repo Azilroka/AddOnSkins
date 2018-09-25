@@ -275,7 +275,7 @@ function AS:Blizzard_PVPUI(event, addon)
 	end
 
 	hooksecurefunc('PVPUIFrame_ConfigureRewardFrame', function(rewardFrame, honor, experience, itemRewards, currencyRewards)
-		local rewardTexture, rewardQuaility = nil, 1
+		local rewardTexture, rewardQuaility, _ = nil, 1
 
 		if currencyRewards then
 			for _, reward in ipairs(currencyRewards) do
