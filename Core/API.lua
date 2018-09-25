@@ -623,20 +623,22 @@ function AS:SkinTexture(icon, backdrop)
 end
 
 function AS:Desaturate(frame)
-	for i = 1, frame:GetNumRegions() do
-		local region = select(i, frame:GetRegions())
-		if region:IsObjectType('Texture') then
-			local Texture = region:GetTexture()
-			if type(Texture) == 'string' and strlower(Texture) == 'interface\\dialogframe\\ui-dialogbox-corner' then
-				region:SetTexture(nil)
-				region:Kill()
-			else
-				region:SetDesaturated(true)
+	if frame.GetNumRegions then
+		for i = 1, frame:GetNumRegions() do
+			local region = select(i, frame:GetRegions())
+			if region:IsObjectType('Texture') then
+				local Texture = region:GetTexture()
+				if type(Texture) == 'string' and strlower(Texture) == 'interface\\dialogframe\\ui-dialogbox-corner' then
+					region:SetTexture(nil)
+					region:Kill()
+				else
+					region:SetDesaturated(true)
+				end
 			end
 		end
 	end
 
-	if frame:IsObjectType('Button') or frame:IsObjectType('CheckButton') then
+	if frame.IsObjectType and (frame:IsObjectType('Button') or frame:IsObjectType('CheckButton')) then
 		local Normal, Pushed, Highlight = frame:GetNormalTexture(), frame:GetPushedTexture(), frame:GetHighlightTexture()
 		Normal:SetDesaturated(true)
 		Pushed:SetDesaturated(true)
@@ -651,7 +653,7 @@ end
 function AS:SkinMaxMinFrame(frame)
 	AS:StripTextures(frame, true)
 
-	for _, name in pairs({'MaximizeButton', 'MinimizeButton'}) do
+	for _, name in pairs({ 'MaximizeButton', 'MinimizeButton' }) do
 		local button = frame[name]
 
 		if button then
@@ -659,7 +661,24 @@ function AS:SkinMaxMinFrame(frame)
 			button:ClearAllPoints()
 			button:SetPoint('CENTER')
 			button:SetHitRectInsets(1, 1, 1, 1)
-			AS:SkinArrowButton(button)
+
+			AS:SkinButton(button)
+
+			button:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..(name == 'MaximizeButton' and 'MaxArrow' or 'MinArrow'))
+			button:GetNormalTexture():SetInside(button, 2, 2)
+
+			button:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..(name == 'MaximizeButton' and 'MaxArrow' or 'MinArrow'))
+			button:GetPushedTexture():SetInside()
+
+			button:HookScript('OnEnter', function(self)
+				self:SetBackdropBorderColor(unpack(AS.Color))
+				self:GetNormalTexture():SetVertexColor(unpack(AS.Color))
+			end)
+
+			button:HookScript('OnLeave', function(self)
+				self:SetBackdropBorderColor(unpack(AS.BorderColor))
+				self:GetNormalTexture():SetVertexColor(1, 1, 1)
+			end)
 		end
 	end
 end
