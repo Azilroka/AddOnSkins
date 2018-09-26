@@ -158,6 +158,38 @@ function AS:Blizzard_PvE()
 	AS:SkinButton(LFGListFrame.CategorySelection.StartGroupButton, true)
 	AS:SkinButton(LFGListFrame.CategorySelection.FindGroupButton, true)
 
+	hooksecurefunc("LFGListCategorySelection_AddButton", function(self, btnIndex, categoryID, filters)
+		local Button = self.CategoryButtons[btnIndex]
+		if (Button) then
+			if not Button.Backdrop then
+				AS:SkinTexture(Button.Icon, true)
+				Button.Cover:Hide()
+				Button.HighlightTexture:SetColorTexture(1, 1, 1, 0.1)
+				Button.HighlightTexture:SetAllPoints(Button.Icon)
+				Button.Label:SetFontObject(GameFontNormal)
+				Button.SelectedTexture:SetAlpha(0)
+			end
+
+			local selected = self.selectedCategory == categoryID and self.selectedFilters == filters
+			Button.Icon.Backdrop:SetBackdropBorderColor(unpack(selected and AS.Color or AS.BorderColor))
+		end
+	end)
+
+
+	hooksecurefunc('LFGListSearchPanel_UpdateResults', function(self)
+		for _, Button in pairs(self.ScrollFrame.buttons) do
+			if not Button.Backdrop then
+				AS:CreateBackdrop(Button)
+				Button.Backdrop:SetInside(Button, 6, 1)
+				Button.ResultBG:SetAlpha(0)
+				Button.Highlight:SetColorTexture(1, 1, 1, 0.1)
+				Button.Highlight:SetAllPoints(Button.Backdrop)
+				Button.Selected:SetAlpha(0)
+				hooksecurefunc(Button.Selected, 'SetShown', function(self, value) Button.Backdrop:SetBackdropBorderColor(unpack(value == true and AS.Color or AS.BorderColor)) end)
+			end
+		end
+	end)
+
 	AS:StripTextures(LFGListFrame.ApplicationViewer, true)
 	AS:SkinScrollBar(LFGListFrame.ApplicationViewer.ScrollFrame.scrollBar)
 	AS:StripTextures(LFGListFrame.ApplicationViewer.Inset)

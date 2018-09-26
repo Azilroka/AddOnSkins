@@ -126,7 +126,8 @@ function AS:Blizzard_TalentUI(event, addon)
 	end)
 
 	AS:StripTextures(PlayerTalentFrameTalents, true)
-	AS:SkinButton(PlayerTalentFrameTalents.PvpTalentButton)
+	PlayerTalentFrameTalents.PvpTalentButton:HookScript("OnShow", function(self) AS:SkinArrowButton(self, self.currentlyExpanded and 'left' or 'right') end)
+	PlayerTalentFrameTalents.PvpTalentButton:HookScript("PostClick", function(self) AS:SkinArrowButton(self, self.currentlyExpanded and 'left' or 'right') end)
 
 	for i = 1, MAX_TALENT_TIERS do
 		local Row = PlayerTalentFrameTalents['tier'..i]

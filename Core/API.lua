@@ -98,7 +98,7 @@ function AS:StripTextures(Object, Kill, Alpha)
 	end
 end
 
-local BlizzardRegions = { 'Left', 'Middle', 'Right', 'Mid', 'LeftDisabled', 'MiddleDisabled', 'RightDisabled', 'TopLeft', 'TopRight', 'BottomLeft', 'BottomRight', 'TopMiddle', 'MiddleLeft', 'MiddleRight', 'BottomMiddle', 'MiddleMiddle', 'TabSpacer', 'TabSpacer1', 'TabSpacer2' }
+local BlizzardRegions = { 'Left', 'Middle', 'Right', 'Mid', 'LeftDisabled', 'MiddleDisabled', 'RightDisabled', 'TopLeft', 'TopRight', 'BottomLeft', 'BottomRight', 'TopMiddle', 'MiddleLeft', 'MiddleRight', 'BottomMiddle', 'MiddleMiddle', 'TabSpacer', 'TabSpacer1', 'TabSpacer2', 'Cover' }
 
 function AS:SkinButton(Button, Strip)
 	if Button.isSkinned then return end
@@ -460,42 +460,46 @@ function AS:SkinArrowButton(Button, Arrow)
 		end
 	end
 
-	AS:StripTextures(Button)
-	AS:SetTemplate(Button)
+	if not Button.Mask then
+		AS:StripTextures(Button)
+		AS:SetTemplate(Button)
 
-	local Mask = Button:CreateMaskTexture()
-	Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..ArrowTexture[strlower(Arrow)], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
-	Mask:SetSize(Button:GetWidth() / 2, Button:GetHeight() / 2)
-	Mask:SetPoint('CENTER')
+		local Mask = Button:CreateMaskTexture()
+		Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..ArrowTexture[strlower(Arrow)], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
+		Mask:SetSize(Button:GetWidth() / 2, Button:GetHeight() / 2)
+		Mask:SetPoint('CENTER')
 
-	Button.Mask = Mask
+		Button.Mask = Mask
 
-	Button:SetNormalTexture(AS.NormTex)
-	Button:SetDisabledTexture(AS.NormTex)
-	Button:SetPushedTexture(AS.NormTex)
+		Button:SetNormalTexture(AS.NormTex)
+		Button:SetDisabledTexture(AS.NormTex)
+		Button:SetPushedTexture(AS.NormTex)
 
-	local Normal, Disabled, Pushed = Button:GetNormalTexture(), Button:GetDisabledTexture(), Button:GetPushedTexture()
+		local Normal, Disabled, Pushed = Button:GetNormalTexture(), Button:GetDisabledTexture(), Button:GetPushedTexture()
 
-	Normal:SetInside()
-	Normal:SetTexCoord(0, 1, 0, 1)
-	Normal.SetTexCoord = AS.Noop
-	Normal:SetVertexColor(1, 1, 1)
-	Normal:AddMaskTexture(Mask)
+		Normal:SetInside()
+		Normal:SetTexCoord(0, 1, 0, 1)
+		Normal.SetTexCoord = AS.Noop
+		Normal:SetVertexColor(1, 1, 1)
+		Normal:AddMaskTexture(Mask)
 
-	Disabled:SetInside()
-	Disabled:SetTexCoord(0, 1, 0, 1)
-	Disabled.SetTexCoord = AS.Noop
-	Disabled:SetVertexColor(.3, .3, .3)
-	Disabled:AddMaskTexture(Mask)
+		Disabled:SetInside()
+		Disabled:SetTexCoord(0, 1, 0, 1)
+		Disabled.SetTexCoord = AS.Noop
+		Disabled:SetVertexColor(.3, .3, .3)
+		Disabled:AddMaskTexture(Mask)
 
-	Pushed:SetInside()
-	Pushed:SetTexCoord(0, 1, 0, 1)
-	Pushed.SetTexCoord = AS.Noop
-	Pushed:SetVertexColor(unpack(AS.Color))
-	Pushed:AddMaskTexture(Mask)
+		Pushed:SetInside()
+		Pushed:SetTexCoord(0, 1, 0, 1)
+		Pushed.SetTexCoord = AS.Noop
+		Pushed:SetVertexColor(unpack(AS.Color))
+		Pushed:AddMaskTexture(Mask)
 
-	Button:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) Normal:SetVertexColor(unpack(AS.Color)) end)
-	Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) Normal:SetVertexColor(1, 1, 1) end)
+		Button:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) Normal:SetVertexColor(unpack(AS.Color)) end)
+		Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) Normal:SetVertexColor(1, 1, 1) end)
+	end
+
+	Button.Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..ArrowTexture[strlower(Arrow)], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
 end
 
 function AS:SkinDropDownBox(Frame, Width)
