@@ -60,6 +60,12 @@ function AS:Blizzard_PvE()
 	AS:StripTextures(LFDParentFrame.Inset)
 	AS:StripTextures(LFDQueueFrame, true)
 
+	AS:SkinFrame(LFDQueueFrame.PartyBackfill)
+	AS:SkinFrame(LFDQueueFrameNoLFDWhileLFR)
+	AS:SkinButton(LFDQueueFrameNoLFDWhileLFRLeaveQueueButton)
+	AS:SkinButton(LFDQueueFramePartyBackfillBackfillButton)
+	AS:SkinButton(LFDQueueFramePartyBackfillNoBackfillButton)
+
 	AS:SkinButton(LFDQueueFrameFindGroupButton, true)
 	LFDQueueFrameFindGroupButton:SetPoint('BOTTOM', 0, 2)
 

@@ -12,11 +12,11 @@ function AS:Blizzard_GuildUI(event, addon)
 		AS:SkinButton(PetitionFrameSignButton)
 		AS:SkinCloseButton(PetitionFrameCloseButton)
 
-		PetitionFrameCharterTitle:SetTextColor(1, 1, 0)
+		PetitionFrameCharterTitle:SetTextColor(1, .9, .1)
 		PetitionFrameCharterName:SetTextColor(1, 1, 1)
-		PetitionFrameMasterTitle:SetTextColor(1, 1, 0)
+		PetitionFrameMasterTitle:SetTextColor(1, .9, .1)
 		PetitionFrameMasterName:SetTextColor(1, 1, 1)
-		PetitionFrameMemberTitle:SetTextColor(1, 1, 0)
+		PetitionFrameMemberTitle:SetTextColor(1, .9, .1)
 		PetitionFrameInstructions:SetTextColor(1, 1, 1)
 
 		for i = 1, 9 do
@@ -41,7 +41,7 @@ function AS:Blizzard_GuildUI(event, addon)
 		end
 
 		GuildRegistrarPurchaseText:SetTextColor(1, 1, 1)
-		AvailableServicesText:SetTextColor(1, 1, 0)
+		AvailableServicesText:SetTextColor(1, .9, .1)
 
 		AS:SkinFrame(TabardFrame)
 		AS:StripTextures(TabardFrameInset)
@@ -132,7 +132,7 @@ function AS:Blizzard_GuildUI(event, addon)
 	AS:SkinButton(GuildRecruitmentDeclineButton, true)
 
 	local checkbuttons = {
-		"Quest", 
+		"Quest",
 		"Dungeon",
 		"Raid",
 		"PvP",

@@ -67,8 +67,8 @@ function AS:Blizzard_Collections(event, addon)
 				Button.name:SetTextColor(1, 1, 1)
 				Button.iconbg:SetBackdropBorderColor(unpack(AS.BorderColor))
 				if Button.selectedTexture:IsShown() then
-					Button.name:SetTextColor(1, 1, 0)
-					Button.iconbg:SetBackdropBorderColor(1, 1, 0)
+					Button.name:SetTextColor(1, .9, .1)
+					Button.iconbg:SetBackdropBorderColor(1, .9, .1)
 				elseif Button.DragButton.ActiveTexture:IsShown() then
 					Button.name:SetTextColor(0, 0.44, .87)
 					Button.iconbg:SetBackdropBorderColor(0, 0.44, .87)
