@@ -289,8 +289,11 @@ function AS:SkinEditBox(EditBox, Width, Height)
 
 	AS:CreateBackdrop(EditBox, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 
-	if EditBox.SetTextInsets then
-		EditBox:SetTextInsets(1, 1, 3, 3)
+	if EditBox.GetTextInsets and EditBox.SetTextInsets then
+		local Left, Right, Top, Bottom = EditBox:GetTextInsets()
+		if (Left == 0 and Right == 0 and Top == 0 and Bottom == 0) then
+			EditBox:SetTextInsets(3, 3, 3, 3)
+		end
 	end
 
 	if Width then EditBox:Width(Width) end
@@ -438,14 +441,15 @@ function AS:SkinScrollBar(Frame)
 	end
 end
 
-local ArrowTexture = {
-	['up'] = 'UpArrow',
-	['down'] = 'DownArrow',
-	['left'] = 'LeftArrow',
-	['right'] = 'RightArrow',
+local ArrowRotation = {
+	['up'] = 0,
+	['down'] = 3.14,
+	['left'] = 1.57,
+	['right'] = -1.57,
 }
 
 function AS:SkinArrowButton(Button, Arrow)
+	if Arrow then Arrow = strlower(Arrow) end
 	if (not Arrow) then
 		Arrow = 'down'
 		local ButtonName = Button:GetName() and Button:GetName():lower()
@@ -454,7 +458,7 @@ function AS:SkinArrowButton(Button, Arrow)
 				Arrow = 'left'
 			elseif (strfind(ButtonName, 'right') or strfind(ButtonName, 'next') or strfind(ButtonName, 'increment') or strfind(ButtonName, 'forward')) then
 				Arrow = 'right'
-			elseif (strfind(ButtonName, 'up') or strfind(ButtonName, 'top') or strfind(ButtonName, 'asc') or strfind(ButtonName, 'home') or strfind(ButtonName, 'maximize')) then
+			elseif (strfind(ButtonName, 'upbutton') or strfind(ButtonName, 'top') or strfind(ButtonName, 'asc') or strfind(ButtonName, 'home') or strfind(ButtonName, 'maximize')) then
 				Arrow = 'up'
 			end
 		end
@@ -465,7 +469,8 @@ function AS:SkinArrowButton(Button, Arrow)
 		AS:SetTemplate(Button)
 
 		local Mask = Button:CreateMaskTexture()
-		Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..ArrowTexture[strlower(Arrow)], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
+		Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
+		Mask:SetRotation(ArrowRotation[Arrow])
 		Mask:SetSize(Button:GetWidth() / 2, Button:GetHeight() / 2)
 		Mask:SetPoint('CENTER')
 
@@ -499,7 +504,7 @@ function AS:SkinArrowButton(Button, Arrow)
 		Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) Normal:SetVertexColor(1, 1, 1) end)
 	end
 
-	Button.Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..ArrowTexture[strlower(Arrow)], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
+	Button.Mask:SetRotation(ArrowRotation[Arrow])
 end
 
 function AS:SkinDropDownBox(Frame, Width)
@@ -613,10 +618,11 @@ function AS:SkinStatusBar(frame, ClassColor)
 end
 
 function AS:SkinTooltip(tooltip, scale)
-	tooltip:HookScript('OnShow', function(self)
-		AS:SkinFrame(self, nil, true)
-		if scale then self:SetScale(AS.UIScale) end
-	end)
+	AS:SkinFrame(tooltip)
+	tooltip.SetBackdrop = AS.Noop
+	if scale then
+		tooltip:SetScale(AS.UIScale)
+	end
 end
 
 function AS:SkinTexture(icon, backdrop)
@@ -644,42 +650,52 @@ function AS:Desaturate(frame)
 
 	if frame.IsObjectType and (frame:IsObjectType('Button') or frame:IsObjectType('CheckButton')) then
 		local Normal, Pushed, Highlight = frame:GetNormalTexture(), frame:GetPushedTexture(), frame:GetHighlightTexture()
-		Normal:SetDesaturated(true)
-		Pushed:SetDesaturated(true)
-		Highlight:SetDesaturated(true)
 
-		Normal.SetDesaturated = AS.Noop
-		Pushed.SetDesaturated = AS.Noop
-		Highlight.SetDesaturated = AS.Noop
+		if Normal then
+			Normal:SetDesaturated(true)
+			Normal.SetDesaturated = AS.Noop
+		end
+
+		if Pushed then
+			Pushed:SetDesaturated(true)
+			Pushed.SetDesaturated = AS.Noop
+		end
+
+		if Highlight then
+			Highlight:SetDesaturated(true)
+			Highlight.SetDesaturated = AS.Noop
+		end
 	end
 end
 
 function AS:SkinMaxMinFrame(frame)
 	AS:StripTextures(frame, true)
 
-	for _, name in pairs({ 'MaximizeButton', 'MinimizeButton' }) do
-		local button = frame[name]
+	for Name, Direction in pairs({ ['MaximizeButton'] = 'up', ['MinimizeButton'] = 'down' }) do
+		local Button = frame[Name]
 
-		if button then
-			button:SetSize(16, 16)
-			button:ClearAllPoints()
-			button:SetPoint('CENTER')
-			button:SetHitRectInsets(1, 1, 1, 1)
+		if Button then
+			Button:SetSize(16, 16)
+			Button:ClearAllPoints()
+			Button:SetPoint('CENTER')
+			Button:SetHitRectInsets(1, 1, 1, 1)
 
-			AS:SkinButton(button)
+			AS:SkinButton(Button)
 
-			button:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..(name == 'MaximizeButton' and 'MaxArrow' or 'MinArrow'))
-			button:GetNormalTexture():SetInside(button, 2, 2)
+			Button:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
+			Button:GetNormalTexture():SetRotation(ArrowRotation[Direction])
+			Button:GetNormalTexture():SetInside(Button, 2, 2)
 
-			button:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\]]..(name == 'MaximizeButton' and 'MaxArrow' or 'MinArrow'))
-			button:GetPushedTexture():SetInside()
+			Button:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
+			Button:GetPushedTexture():SetRotation(ArrowRotation[Direction])
+			Button:GetPushedTexture():SetInside()
 
-			button:HookScript('OnEnter', function(self)
+			Button:HookScript('OnEnter', function(self)
 				self:SetBackdropBorderColor(unpack(AS.Color))
 				self:GetNormalTexture():SetVertexColor(unpack(AS.Color))
 			end)
 
-			button:HookScript('OnLeave', function(self)
+			Button:HookScript('OnLeave', function(self)
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self:GetNormalTexture():SetVertexColor(1, 1, 1)
 			end)
