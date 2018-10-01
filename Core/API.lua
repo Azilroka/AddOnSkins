@@ -508,34 +508,38 @@ function AS:SkinArrowButton(Button, Arrow)
 end
 
 function AS:SkinDropDownBox(Frame, Width)
+	if Frame.Backdrop then return end
+
 	local FrameName = Frame:GetName()
 
 	local Button = FrameName and _G[FrameName..'Button'] or Frame.Button
 	local Text = FrameName and _G[FrameName..'Text'] or Frame.Text
 
-	if Button and Text then
-		AS:StripTextures(Frame)
+	AS:StripTextures(Frame)
 
-		if Width then
-			Frame:SetWidth(Width)
-		end
-
-		Text:SetPoint("RIGHT", -42, 0)
-		Button:SetPoint('TOPRIGHT', -14, -8)
-
-		if Frame.Icon then
-			Frame.Icon:SetPoint('LEFT', 26, 0)
-		end
-
-		Button:SetSize(16, 16)
-
-		AS:SkinArrowButton(Button, 'DOWN')
-
-		AS:CreateBackdrop(Frame, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
-
-		Frame.Backdrop:Point('TOPLEFT', 20, -6)
-		Frame.Backdrop:Point('BOTTOMRIGHT', Button, 'BOTTOMRIGHT', 2, -2)
+	if Width then
+		Frame:SetWidth(Width)
 	end
+
+	if Text then
+		local a, b, c, d, e = Text:GetPoint()
+		Text:SetPoint(a, b, c, d + 10, e - 4)
+		Text:SetWidth(Frame:GetWidth() / 1.4)
+	end
+
+	Button:SetPoint('TOPRIGHT', -14, -8)
+	Button:SetSize(16, 16)
+
+	AS:SkinArrowButton(Button, 'DOWN')
+
+	if Frame.Icon then
+		Frame.Icon:SetPoint('LEFT', 23, 0)
+	end
+
+	AS:CreateBackdrop(Frame, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
+
+	Frame.Backdrop:Point('TOPLEFT', 20, -6)
+	Frame.Backdrop:Point('BOTTOMRIGHT', Button, 'BOTTOMRIGHT', 2, -2)
 end
 
 function AS:SkinSlideBar(Frame, MoveText)
