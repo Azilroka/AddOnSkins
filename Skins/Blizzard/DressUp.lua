@@ -1,25 +1,33 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_DressUpFrame()
-	AS:StripTextures(DressUpFrame)
-	AS:SetTemplate(DressUpFrame, 'Transparent')
-	AS:StripTextures(DressUpFrameInset)
-	AS:SetTemplate(DressUpFrameInset, 'Default')
-	DressUpFramePortrait:Hide()
-	DressUpFramePortraitFrame:Hide()
+	AS:SkinFrame(SideDressUpFrame, nil, nil, true)
+	AS:SkinButton(SideDressUpModelResetButton)
+	AS:SkinCloseButton(SideDressUpModelCloseButton)
 
-	AS:SkinButton(DressUpFrameResetButton)
-	AS:SkinButton(DressUpFrameCancelButton)
-	AS:SkinCloseButton(DressUpFrameCloseButton)
+	hooksecurefunc("SetUpSideDressUpFrame", function(parentFrame, closedWidth, openWidth, point, relativePoint, offsetX, offsetY)
+		if parentFrame == AuctionFrame then
+			SideDressUpFrame:SetPoint(point, parentFrame, relativePoint, 2, offsetY)
+		end
+	end)
+
+	AS:SkinBackdropFrame(DressUpFrame)
+	AS:StripTextures(DressUpFrame.Inset)
+	AS:SkinCloseButton(DressUpFrame.CloseButton)
+	AS:SkinButton(DressUpFrame.ResetButton)
+
+	DressUpFrame.portrait:SetAlpha(0)
+
 	AS:SkinMaxMinFrame(MaximizeMinimizeFrame)
-	DressUpFrameResetButton:SetPoint("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
 
-	AS:SkinDropDownBox(DressUpFrameOutfitDropDown)
-	DressUpFrameOutfitDropDown:SetSize(195, 34)
+	AS:SkinButton(DressUpFrameCancelButton)
+	DressUpFrame.ResetButton:SetPoint("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
 
-	AS:SkinButton(DressUpFrameOutfitDropDown.SaveButton)
-	DressUpFrameOutfitDropDown.SaveButton:ClearAllPoints()
-	DressUpFrameOutfitDropDown.SaveButton:SetPoint("RIGHT", DressUpFrameOutfitDropDown, 86, 4)
+	AS:SkinDropDownBox(DressUpFrame.OutfitDropDown)
+
+	AS:SkinButton(DressUpFrame.OutfitDropDown.SaveButton)
+	DressUpFrame.OutfitDropDown.SaveButton:SetHeight(20)
+	DressUpFrame.OutfitDropDown.SaveButton:SetPoint("LEFT", DressUpFrame.OutfitDropDown, 'RIGHT', -10, -5)
 end
 
 AS:RegisterSkin('Blizzard_DressUpFrame', AS.Blizzard_DressUpFrame)
