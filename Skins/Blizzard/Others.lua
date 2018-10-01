@@ -82,11 +82,21 @@ function AS:Blizzard_Others()
 	-- _G["ReadyCheckFrameText"]:ClearAllPoints()
 	-- _G["ReadyCheckFrameText"]:SetPoint("TOP", 0, -12)
 
-	-- AS:StripTextures(BasicScriptErrors)
-	-- AS:SetTemplate(BasicScriptErrors)
-	-- AS:CreateShadow(BasicScriptErrors)
-	-- AS:SkinButton(BasicScriptErrorsButton)
-	-- BasicScriptErrors:SetScale(AS.UIScale)
+	AS:SkinBackdropFrame(GameMenuFrame)
+	AS:CreateBackdrop(GameMenuFrameHeader, 'Default')
+	for i = 1, GameMenuFrame:GetNumRegions() do
+		local Region = select(i, GameMenuFrame:GetRegions())
+		if Region.IsObjectType and Region:IsObjectType('FontString') then
+			Region:SetTextColor(1, 1, 1)
+			GameMenuFrameHeader.Backdrop:SetOutside(Region, 24, 6)
+			GameMenuFrameHeader.Backdrop:SetFrameLevel(GameMenuFrame:GetFrameLevel())
+		end
+	end
+	for _, Button in pairs({GameMenuFrame:GetChildren()}) do
+		if Button.IsObjectType and Button:IsObjectType("Button") then
+			AS:SkinButton(Button)
+		end
+	end
 end
 
 AS:RegisterSkin('Blizzard_Others', AS.Blizzard_Others)
