@@ -36,7 +36,7 @@ function AS:Blizzard_Gossip()
 				if button:GetFontString() then
 					local Text = button:GetFontString():GetText()
 					if Text and strfind(Text, '|cff000000') then
-						button:GetFontString():SetText(string.gsub(Text, '|cff000000', '|cffFFFF00'))
+						button:GetFontString():SetText(string.gsub(Text, '|cff000000', '|cffffe519'))
 					end
 				end
 			end

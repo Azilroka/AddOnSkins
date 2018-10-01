@@ -74,7 +74,7 @@ function AS:ParchmentRemover(event, addon)
 					local button = _G['GossipTitleButton'..i]
 					if button:GetFontString() then
 						if button:GetFontString():GetText() and button:GetFontString():GetText():find('|cff000000') then
-							button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), '|cff000000', '|cffFFFF00'))
+							button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), '|cff000000', '|cffffe519'))
 						end
 					end
 				end
@@ -143,7 +143,7 @@ function AS:ParchmentRemover(event, addon)
 					hooksecurefunc(button, 'SetFormattedText', function()
 						if button:GetFontString() then
 							if button:GetFontString():GetText() and button:GetFontString():GetText():find('|cff000000') then
-								button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), '|cff000000', '|cffFFFF00'))
+								button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), '|cff000000', '|cffffe519'))
 							end
 						end
 					end)

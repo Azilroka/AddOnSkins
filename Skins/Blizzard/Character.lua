@@ -181,8 +181,9 @@ function AS:Blizzard_CharacterFrame()
 	hooksecurefunc("ReputationFrame_Update", function()
 		local factionOffset = FauxScrollFrame_GetOffset(ReputationListScrollFrame)
 		local numFactions = GetNumFactions()
-		for i = 1, NUM_FACTIONS_DISPLAYED, 1 do
+		for i = 1, NUM_FACTIONS_DISPLAYED do
 			local FactionName = _G["ReputationBar"..i.."FactionName"]
+			local Button = _G["ReputationBar"..i.."ExpandOrCollapseButton"]
 			local factionIndex = factionOffset + i
 			if ( factionIndex <= numFactions ) then
 				local name, _, _, _, _, _, atWarWith, canToggleAtWar, isHeader, isCollapsed = GetFactionInfo(factionIndex)
