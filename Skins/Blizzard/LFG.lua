@@ -69,6 +69,7 @@ function AS:Blizzard_PvE()
 	AS:SkinButton(LFDQueueFrameFindGroupButton, true)
 	LFDQueueFrameFindGroupButton:SetPoint('BOTTOM', 0, 2)
 
+	AS:StripTextures(LFDQueueFrameSpecificListScrollFrame)
 	AS:SkinScrollBar(LFDQueueFrameSpecificListScrollFrame.ScrollBar)
 
 	hooksecurefunc("LFGRewardsFrame_SetItemButton", function(parentFrame, dungeonID, index, id, name, texture, numItems, rewardType, rewardID, quality, shortageIndex, showTankIcon, showHealerIcon, showDamageIcon)

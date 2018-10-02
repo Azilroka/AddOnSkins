@@ -15,7 +15,9 @@ function AS:Blizzard_Quest()
 	AS:StripTextures(QuestFrameRewardPanel, true)
 	AS:SkinFrame(QuestProgressScrollFrame)
 	AS:SkinFrame(QuestRewardScrollFrame)
-	AS:SkinFrame(QuestDetailScrollFrame)
+	AS:SkinBackdropFrame(QuestDetailScrollFrame)
+	QuestDetailScrollFrame.Backdrop:SetPoint("TOPLEFT", 0, 0)
+	QuestDetailScrollFrame.Backdrop:SetPoint("BOTTOMRIGHT", 4, 0)
 	AS:SkinFrame(QuestGreetingScrollFrame)
 
 	AS:SkinScrollBar(QuestDetailScrollFrameScrollBar)
@@ -68,19 +70,25 @@ function AS:Blizzard_Quest()
 
 	local function HandleReward(frame)
 		if (not frame) then return end
-		if frame.Backdrop then return end
 
-		AS:CreateBackdrop(frame)
-		AS:SkinTexture(frame.Icon, true)
+		if not frame.Backdrop then
+			AS:CreateBackdrop(frame)
+		end
 
-		frame.Backdrop:SetPoint('TOPLEFT', frame.Icon, 'TOPRIGHT', -1, 0)
-		frame.Backdrop:SetPoint('BOTTOMLEFT', frame.Icon, 'BOTTOMRIGHT', -1, 0)
-		frame.Backdrop:SetPoint('RIGHT', frame, 'RIGHT', -5, 0)
+		if frame.Icon then
+			AS:SkinTexture(frame.Icon, true)
 
-		frame.Count:ClearAllPoints()
-		frame.Count:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, 0)
+			frame.Backdrop:SetPoint('TOPLEFT', frame.Icon, 'TOPRIGHT', -1, 0)
+			frame.Backdrop:SetPoint('BOTTOMLEFT', frame.Icon, 'BOTTOMRIGHT', -1, 0)
+			frame.Backdrop:SetPoint('RIGHT', frame, 'RIGHT', -5, 0)
 
-		frame.NameFrame:SetAlpha(0)
+			frame.Count:ClearAllPoints()
+			frame.Count:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, 0)
+		end
+
+		if frame.NameFrame then
+			frame.NameFrame:SetAlpha(0)
+		end
 
 		if (frame.CircleBackground) then
 			frame.CircleBackground:SetAlpha(0)

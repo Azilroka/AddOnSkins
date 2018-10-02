@@ -68,7 +68,7 @@ for i = 1, GetNumAddOns() do
 	AddOn.AddOnVersion[strlower(Name)] = GetAddOnMetadata(Name, "Version")
 end
 
-TEXTURE_ITEM_QUEST_BANG = "Interface\\AddOns\\AddOnSkins\\Media\\Textures\\UI-Icon-QuestBang"
+TEXTURE_ITEM_QUEST_BANG = [[Interface\AddOns\AddOnSkins\Media\Textures\UI-Icon-QuestBang]]
 
 AddOn.Hider = CreateFrame('Frame', nil, UIParent)
 AddOn.Hider:Hide()
