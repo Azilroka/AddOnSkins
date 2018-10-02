@@ -11,23 +11,22 @@ function AS:SetTemplate(Frame, Template, Texture)
 	Template = Template or AS:CheckOption('SkinTemplate')
 
 	local Backdrop = { bgFile = Texture, edgeFile = AS.Blank, tile = false, tileSize = 0, edgeSize = AS.Mult, insets = { left = 0, right = 0, top = 0, bottom = 0 } }
-	local BorderBackdrop = { edgeFile = AS.Blank, edgeSize = AS.Mult, insets = { left = AS.Mult, right = AS.Mult, top = AS.Mult, bottom = AS.Mult } }
 
 	Frame:SetBackdrop(Backdrop)
 
-	for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
-		Frame[Inset] = CreateFrame('Frame', nil, Frame)
-		Frame[Inset]:SetBackdrop(BorderBackdrop)
-		Frame[Inset]:SetBackdropBorderColor(0, 0, 0, 1)
-	end
+	if not AS.PixelPerfect then
+		local BorderBackdrop = { edgeFile = AS.Blank, edgeSize = AS.Mult, insets = { left = AS.Mult, right = AS.Mult, top = AS.Mult, bottom = AS.Mult } }
 
-	Frame.InsideBorder:SetInside(Frame, AS.Mult, AS.Mult)
-	Frame.InsideBorder:SetFrameLevel(Frame:GetFrameLevel() + 1)
+		for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
+			Frame[Inset] = CreateFrame('Frame', nil, Frame)
+			Frame[Inset]:SetBackdrop(BorderBackdrop)
+			Frame[Inset]:SetBackdropBorderColor(0, 0, 0, 1)
+		end
 
-	Frame.OutsideBorder:SetOutside(Frame, AS.Mult, AS.Mult)
+		Frame.InsideBorder:SetInside(Frame, AS.Mult, AS.Mult)
+		Frame.InsideBorder:SetFrameLevel(Frame:GetFrameLevel() + 1)
 
-	if AS.PixelPerfect then
-		AS:HideInset(Frame)
+		Frame.OutsideBorder:SetOutside(Frame, AS.Mult, AS.Mult)
 	end
 
 	local R, G, B = unpack(AS.BackdropColor)
@@ -50,18 +49,6 @@ function AS:SetTemplate(Frame, Template, Texture)
 
 	Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
 	Frame:SetBackdropColor(R, G, B, Alpha)
-end
-
-function AS:HideInset(Frame)
-	for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
-		Frame[Inset]:Hide()
-	end
-end
-
-function AS:ShowInset(Frame)
-	for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
-		Frame[Inset]:Show()
-	end
 end
 
 function AS:CreateBackdrop(Frame, Template, Texture)
@@ -108,11 +95,9 @@ function AS:SkinButton(Button, Strip)
 	AS:SkinFrame(Button, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil, not Strip)
 
 	for _, Region in pairs(BlizzardRegions) do
-		if ButtonName and _G[ButtonName..Region] then
-			_G[ButtonName..Region]:SetAlpha(0)
-		end
-		if Button[Region] then
-			Button[Region]:SetAlpha(0)
+		Region = ButtonName and _G[ButtonName..Region] or Button[Region]
+		if Region then
+			Region:SetAlpha(0)
 		end
 	end
 

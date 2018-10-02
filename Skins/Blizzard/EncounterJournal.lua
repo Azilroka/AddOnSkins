@@ -31,11 +31,11 @@ function AS:Blizzard_EncounterJournal(event, addon)
 		Tab:HookScript('OnLeave', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 	end
 
-	EncounterJournal.encounter.info.overviewTab:SetPoint('TOPLEFT', '$parent', 'TOPRIGHT', AS.PixelMode and -3 or 0, -35)
+	EncounterJournal.encounter.info.overviewTab:SetPoint('TOPLEFT', EncounterJournal.encounter.info, 'TOPRIGHT', AS.PixelPerfect and -2 or 0, -35)
 	EncounterJournal.encounter.info.overviewTab.SetPoint = AS.Noop
 
 	AS:StripTextures(EncounterJournal.instanceSelect)
-
+	AS:SkinFrame(EncounterJournal.suggestFrame)
 	AS:SkinFrame(EncounterJournal.instanceSelect.scroll)
 
 	AS:SkinScrollBar(EncounterJournal.instanceSelect.scroll.ScrollBar)
@@ -50,6 +50,18 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	AS:SkinScrollBar(EncounterJournal.encounter.info.bossesScroll.ScrollBar)
 	AS:SkinScrollBar(EncounterJournal.encounter.instance.loreScroll.ScrollBar)
 
+	AS:StripTextures(EncounterJournal.encounter.info)
+
+	EncounterJournal.encounter.instance.loreScroll.child.lore:SetTextColor(1, 1, 1)
+	EncounterJournal.encounter.info.detailsScroll.child.description:SetTextColor(1, 1, 1)
+	EncounterJournal.encounter.info.overviewScroll.child.loreDescription:SetTextColor(1, 1, 1)
+	EncounterJournal.encounter.info.overviewScroll.child.header:Hide()
+
+	_G.EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildTitle:SetFontObject("GameFontNormalLarge")
+	_G.EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildTitle:SetTextColor(1, 1, 1)
+
+	EncounterJournal.encounter.info.overviewScroll.child.overviewDescription.Text:SetTextColor(1, 1, 1)
+
 	AS:StripTextures(EncounterJournal.LootJournal)
 	AS:StripTextures(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton)
 	AS:SkinButton(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton, true)
@@ -60,21 +72,50 @@ function AS:Blizzard_EncounterJournal(event, addon)
 
 	for i = 1, AJ_MAX_NUM_SUGGESTIONS do
 		local suggestion = EncounterJournal.suggestFrame["Suggestion"..i]
+		local centerDisplay = suggestion.centerDisplay
+		local reward = suggestion.reward
+
+		suggestion.bg:SetAlpha(0)
+		AS:CreateBackdrop(suggestion.bg)
+
+		AS:CreateBackdrop(suggestion.icon)
+
+		centerDisplay.title.text:SetTextColor(1, 1, 1)
+		centerDisplay.description.text:SetTextColor(.9, .9, .9)
+
+		AS:CreateBackdrop(reward.icon)
+		reward.iconRing:Hide()
+		reward.iconRingHighlight:SetTexture("")
+
 		if i == 1 then
+			reward.text:SetTextColor(.9, .9, .9)
+
+			suggestion.icon:SetPoint("TOPLEFT", 135, -15)
+
 			AS:SkinButton(suggestion.button)
 			AS:SkinArrowButton(suggestion.prevButton)
 			AS:SkinArrowButton(suggestion.nextButton)
 		else
+			reward:SetFrameLevel(suggestion:GetFrameLevel() + 3)
 			AS:SkinButton(suggestion.centerDisplay.button)
+			suggestion.bg:SetPoint('TOPLEFT', -16, 4)
 		end
 	end
+
+	AS:SkinButton(EncounterJournal.encounter.info.lootScroll.lootSlotFilter, true)
+	AS:SkinButton(EncounterJournal.encounter.info.lootScroll.filter, true)
+	AS:SkinButton(EncounterJournal.encounter.info.lootScroll.slotFilter, true)
+	AS:StripTextures(EncounterJournal.encounter.info.lootScroll.classClearFilter, true)
+	EncounterJournal.encounter.info.lootScroll.classClearFilter.text:SetTextColor(1, 1, 1)
+	AS:SkinButton(EncounterJournal.encounter.info.reset)
+	AS:SkinButton(EncounterJournal.encounter.info.difficulty, true)
 
 	for i, Button in pairs(EncounterJournal.encounter.info.lootScroll.buttons) do
 		Button.bossTexture:SetAlpha(0)
 		Button.bosslessTexture:SetAlpha(0)
 
 		Button.icon:SetSize(32, 32)
-		Button.icon:Point("TOPLEFT", AS.PixelMode and 3 or 4, -(AS.PixelMode and 7 or 8))
+		Button.icon:Point("TOPLEFT", AS.PixelPerfect and 3 or 4, -(AS.PixelPerfect and 7 or 8))
 		Button.icon:SetDrawLayer("ARTWORK")
 		AS:SkinTexture(Button.icon, true)
 
@@ -213,6 +254,85 @@ function AS:Blizzard_EncounterJournal(event, addon)
 
 			index = index + 1
 			header = _G["EncounterJournalInfoHeader"..index]
+		end
+	end)
+
+	hooksecurefunc("EJSuggestFrame_RefreshDisplay", function()
+		local self = EncounterJournal.suggestFrame
+
+		if #self.suggestions > 0 then
+			local suggestion = self.Suggestion1
+			local data = self.suggestions[1]
+
+			suggestion.iconRing:Hide()
+
+			if data.iconPath then
+				suggestion.icon:SetMask("")
+				suggestion.icon:SetTexture(data.iconPath)
+				suggestion.icon:SetTexCoord(.08, .92, .08, .92)
+			end
+		end
+
+		if #self.suggestions > 1 then
+			for i = 2, #self.suggestions do
+				local suggestion = self["Suggestion"..i]
+				if not suggestion then break end
+
+				local data = self.suggestions[i]
+
+				suggestion.iconRing:Hide()
+
+				if data.iconPath then
+					suggestion.icon:SetMask("")
+					suggestion.icon:SetTexture(data.iconPath)
+					suggestion.icon:SetTexCoord(.08, .92, .08, .92)
+				end
+			end
+		end
+	end)
+
+	hooksecurefunc("EJSuggestFrame_UpdateRewards", function(suggestion)
+		local rewardData = suggestion.reward.data
+		if rewardData then
+			local texture = rewardData.itemIcon or rewardData.currencyIcon or [[Interface\Icons\achievement_guildperk_mobilebanking]]
+			suggestion.reward.icon:SetMask("")
+			suggestion.reward.icon:SetTexture(texture)
+			suggestion.reward.icon:SetTexCoord(.08, .92, .08, .92)
+			local r, g, b = unpack(AS.BorderColor)
+			if rewardData.itemID then
+				local quality = select(3, GetItemInfo(rewardData.itemID))
+				if quality and quality > 1 then
+					r, g, b = GetItemQualityColor(quality)
+				end
+			end
+			suggestion.reward.icon.Backdrop:SetBackdropBorderColor(r, g, b)
+		end
+	end)
+
+	hooksecurefunc(EncounterJournal.LootJournal.ItemSetsFrame, "UpdateList", function(self)
+		for _, Button in pairs(self.buttons) do
+			Button.ItemLevel:SetTextColor(1, 1,  1)
+			Button.Background:Hide()
+			AS:SkinFrame(Button)
+
+			for _, Item in pairs(Button.ItemButtons) do
+				Item.Border:Hide()
+				Item.Icon:SetPoint("TOPLEFT", 1, -1)
+				AS:SkinTexture(Item.Icon, true)
+			end
+		end
+	end)
+
+	hooksecurefunc(EncounterJournal.LootJournal.ItemSetsFrame, 'ConfigureItemButton', function(self, button)
+		local r, g, b = unpack(AS.BorderColor)
+		if button.itemID then
+			local _, _, itemQuality = GetItemInfo(button.itemID)
+			if itemQuality and itemQuality > 1 then
+				r, g, b = GetItemQualityColor(itemQuality)
+			end
+		end
+		if button.Icon.Backdrop then
+			button.Icon.Backdrop:SetBackdropBorderColor(r, g, b)
 		end
 	end)
 
