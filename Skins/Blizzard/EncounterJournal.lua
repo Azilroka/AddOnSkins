@@ -258,34 +258,16 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	end)
 
 	hooksecurefunc("EJSuggestFrame_RefreshDisplay", function()
-		local self = EncounterJournal.suggestFrame
+		for i = 1, 3 do
+			local Suggestion = EncounterJournal.suggestFrame['Suggestion'..i]
+			local Data = EncounterJournal.suggestFrame.suggestions[i]
+			if Suggestion and Data then
+				Suggestion.iconRing:Hide()
 
-		if #self.suggestions > 0 then
-			local suggestion = self.Suggestion1
-			local data = self.suggestions[1]
-
-			suggestion.iconRing:Hide()
-
-			if data.iconPath then
-				suggestion.icon:SetMask("")
-				suggestion.icon:SetTexture(data.iconPath)
-				suggestion.icon:SetTexCoord(.08, .92, .08, .92)
-			end
-		end
-
-		if #self.suggestions > 1 then
-			for i = 2, #self.suggestions do
-				local suggestion = self["Suggestion"..i]
-				if not suggestion then break end
-
-				local data = self.suggestions[i]
-
-				suggestion.iconRing:Hide()
-
-				if data.iconPath then
-					suggestion.icon:SetMask("")
-					suggestion.icon:SetTexture(data.iconPath)
-					suggestion.icon:SetTexCoord(.08, .92, .08, .92)
+				if Data.iconPath then
+					Suggestion.icon:SetMask("")
+					Suggestion.icon:SetTexture(Data.iconPath)
+					AS:SkinTexture(Suggestion.icon)
 				end
 			end
 		end
