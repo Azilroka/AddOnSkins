@@ -8,16 +8,8 @@ function AS:AzerothAutoPilot()
 			AS:SkinCheckBox(Child)
 		elseif Child:IsObjectType('Button') then
 			AS:SkinButton(Child)
-			Child.Text = Child:CreateFontString(nil, "OVERLAY")
-			Child.Text:SetFont(AS.Font, 12, "OUTLINE")
-			Child.Text:SetTextColor(255, 255, 0)
-			Child.Text:SetText(Child:GetText())
-			Child.Text:SetPoint("CENTER", 0, 0)
 		elseif Child:IsObjectType('Slider') then
 			AS:SkinSlideBar(Child, true)
-			Child.Low:SetFont(AS.Font, 10, "OUTLINE")
-			Child.High:SetFont(AS.Font, 10, "OUTLINE")
-			Child.Text:SetFont(AS.Font, 10, "OUTLINE")
 		elseif Child:IsObjectType('Frame') and Child:GetName() and strfind(Child:GetName(), 'DropDown') then
 			AS:SkinDropDownBox(Child)
 		elseif Child:IsObjectType('Frame') then
@@ -32,11 +24,6 @@ function AS:AzerothAutoPilot()
 				AS:SkinCheckBox(Child)
 			elseif Child:IsObjectType('Button') then
 				AS:SkinButton(Child)
-				Child.Text = Child:CreateFontString(nil, "OVERLAY")
-				Child.Text:SetFont(AS.Font, 12, "OUTLINE")
-				Child.Text:SetTextColor(255, 255, 0)
-				Child.Text:SetText(Child:GetText())
-				Child.Text:SetPoint("CENTER", 0, 0)
 			elseif Child:IsObjectType('Frame') then
 				AS:SkinBackdropFrame(Child)
 				Child.Backdrop:SetInside()
@@ -50,11 +37,6 @@ function AS:AzerothAutoPilot()
 				AS:SkinCheckBox(Child)
 			elseif Child:IsObjectType('Button') then
 				AS:SkinButton(Child)
-				Child.Text = Child:CreateFontString(nil, "OVERLAY")
-				Child.Text:SetFont(AS.Font, 12, "OUTLINE")
-				Child.Text:SetTextColor(255, 255, 0)
-				Child.Text:SetText(Child:GetText())
-				Child.Text:SetPoint("CENTER", 0, 0)
 			elseif Child:IsObjectType('Frame') then
 				AS:SkinBackdropFrame(Child)
 				Child.Backdrop:SetInside()

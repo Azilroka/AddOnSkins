@@ -31,6 +31,7 @@ function AS:WeakAuras()
 			end
 			if frame.cooldown and AS:CheckOption('WeakAuraIconCooldown', 'ElvUI') then
 				ElvUI[1]:RegisterCooldown(frame.cooldown)
+				ElvUI[1]:UpdateCooldownSettings('global')
 			end
 		end
 	end

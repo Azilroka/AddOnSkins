@@ -116,13 +116,6 @@ function AS:Blizzard_AuctionUI(event, addon)
 	AuctionFrameAuctions.RightBackground:SetFrameLevel(AuctionFrameAuctions:GetFrameLevel())
 	AuctionsScrollFrame:SetHeight(336)
 
-	AS:SkinFrame(SideDressUpFrame, nil, nil, true)
-	AuctionFrame:HookScript('OnShow', function(self)
-		SideDressUpFrame:SetPoint("TOPLEFT", self, "TOPRIGHT", 2, -28)
-	end)
-	AS:SkinButton(SideDressUpModelResetButton)
-	AS:SkinCloseButton(SideDressUpModelCloseButton)
-
 	AS:SkinFrame(AuctionProgressFrame)
 	AS:CreateShadow(AuctionProgressFrame)
 	AS:StyleButton(AuctionProgressFrameCancelButton)
