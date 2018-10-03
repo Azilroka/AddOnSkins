@@ -60,11 +60,13 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	_G.EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildTitle:SetFontObject("GameFontNormalLarge")
 	_G.EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildTitle:SetTextColor(1, 1, 1)
 
+	EncounterJournal.instanceSelect.suggestTab:SetPoint('BOTTOMLEFT', '$parent', 'TOPLEFT', 25, -49)
 	EncounterJournal.encounter.info.overviewScroll.child.overviewDescription.Text:SetTextColor(1, 1, 1)
 
-	AS:StripTextures(EncounterJournal.LootJournal)
+	AS:SkinFrame(EncounterJournal.LootJournal)
 	AS:StripTextures(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton)
 	AS:SkinButton(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton, true)
+	AS:SkinScrollBar(EncounterJournal.LootJournal.ItemSetsFrame.scrollBar)
 
 	EncounterJournal.instanceSelect.bg:SetAlpha(0)
 
@@ -263,12 +265,9 @@ function AS:Blizzard_EncounterJournal(event, addon)
 			local Data = EncounterJournal.suggestFrame.suggestions[i]
 			if Suggestion and Data then
 				Suggestion.iconRing:Hide()
-
-				if Data.iconPath then
-					Suggestion.icon:SetMask("")
-					Suggestion.icon:SetTexture(Data.iconPath)
-					AS:SkinTexture(Suggestion.icon)
-				end
+				Suggestion.icon:SetMask("")
+				Suggestion.icon:SetTexture(Data.iconPath or QUESTION_MARK_ICON)
+				AS:SkinTexture(Suggestion.icon)
 			end
 		end
 	end)
@@ -279,7 +278,7 @@ function AS:Blizzard_EncounterJournal(event, addon)
 			local texture = rewardData.itemIcon or rewardData.currencyIcon or [[Interface\Icons\achievement_guildperk_mobilebanking]]
 			suggestion.reward.icon:SetMask("")
 			suggestion.reward.icon:SetTexture(texture)
-			suggestion.reward.icon:SetTexCoord(.08, .92, .08, .92)
+			AS:SkinTexture(suggestion.reward.icon)
 			local r, g, b = unpack(AS.BorderColor)
 			if rewardData.itemID then
 				local quality = select(3, GetItemInfo(rewardData.itemID))
