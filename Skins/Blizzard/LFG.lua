@@ -73,8 +73,8 @@ function AS:Blizzard_PvE()
 	AS:SkinScrollBar(LFDQueueFrameSpecificListScrollFrame.ScrollBar)
 
 	hooksecurefunc("LFGRewardsFrame_SetItemButton", function(parentFrame, dungeonID, index, id, name, texture, numItems, rewardType, rewardID, quality, shortageIndex, showTankIcon, showHealerIcon, showDamageIcon)
-		local parentName = parentFrame:GetName();
-		local Button = _G[parentName.."Item"..index];
+		local parentName = parentFrame:GetName()
+		local Button = _G[parentName.."Item"..index]
 		if Button and not Button.Backdrop then
 			Button.NameFrame:SetTexture(nil)
 			Button.shortageBorder:SetTexture(nil)
@@ -129,7 +129,7 @@ function AS:Blizzard_PvE()
 
 	hooksecurefunc('LFGRewardsFrame_UpdateFrame', function(parentFrame, dungeonID, background)
 		if ( not dungeonID ) then
-			return;
+			return
 		end
 
 		parentFrame.MoneyReward.NameFrame:SetTexture(nil)

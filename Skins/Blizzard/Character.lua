@@ -26,9 +26,9 @@ function AS:Blizzard_CharacterFrame()
 			Slot.icon:SetInside()
 
 			if Slot.popoutButton:GetPoint() == 'TOP' then
-				Slot.popoutButton:SetPoint("TOP", Slot, "BOTTOM", 0, 2);
+				Slot.popoutButton:SetPoint("TOP", Slot, "BOTTOM", 0, 2)
 			else
-				Slot.popoutButton:SetPoint("LEFT", Slot, "RIGHT", -2, 0);
+				Slot.popoutButton:SetPoint("LEFT", Slot, "RIGHT", -2, 0)
 			end
 
 			Slot.ignoreTexture:SetTexture([[Interface\PaperDollInfoFrame\UI-GearManager-LeaveItem-Transparent]])

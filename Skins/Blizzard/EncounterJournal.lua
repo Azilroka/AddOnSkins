@@ -147,11 +147,11 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	AS:SkinTooltip(EncounterJournalTooltip)
 
 	hooksecurefunc('AdventureJournal_Reward_OnEnter', function(self)
-		local rewardData = self.data;
+		local rewardData = self.data
 		if ( rewardData ) then
-			local frame = EncounterJournalTooltip;
+			local frame = EncounterJournalTooltip
 			if ( rewardData.itemLink or rewardData.currencyType ) then
-				local _, _, quality = GetItemInfo(rewardData.itemLink);
+				local _, _, quality = GetItemInfo(rewardData.itemLink)
 				AS:SkinTexture(frame.Item1.icon, true)
 				frame.Item1.icon.Backdrop:SetBackdropBorderColor(GetItemQualityColor(quality))
 				frame.Item1.IconBorder:SetAlpha(0)
@@ -161,9 +161,9 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	end)
 
 	hooksecurefunc("EncounterJournal_ListInstances", function()
-		local instanceSelect = EncounterJournal.instanceSelect;
-		local scrollFrame = instanceSelect.scroll.child;
-		local index = 1;
+		local instanceSelect = EncounterJournal.instanceSelect
+		local scrollFrame = instanceSelect.scroll.child
+		local index = 1
 		local Button = scrollFrame["instance"..index]
 
 		while Button do
@@ -171,13 +171,13 @@ function AS:Blizzard_EncounterJournal(event, addon)
 			scrollFrame["instance"..index].bgImage:SetTexCoord(.08, .6, .08, .6)
 			scrollFrame["instance"..index].bgImage:SetDrawLayer('ARTWORK')
 			scrollFrame["instance"..index].bgImage:SetInside()
-			index = index + 1;
+			index = index + 1
 			Button = scrollFrame["instance"..index]
 		end
 	end)
 
 	hooksecurefunc("EncounterJournal_DisplayInstance", function()
-		local bossIndex = 1;
+		local bossIndex = 1
 		local bossButton = _G["EncounterJournalBossButton"..bossIndex]
 
 		while bossButton do
@@ -185,7 +185,7 @@ function AS:Blizzard_EncounterJournal(event, addon)
 			bossButton.creature:ClearAllPoints()
 			bossButton.creature:SetPoint("TOPLEFT", 1, -4)
 
-			bossIndex = bossIndex + 1;
+			bossIndex = bossIndex + 1
 			bossButton = _G["EncounterJournalBossButton"..bossIndex]
 		end
 	end)

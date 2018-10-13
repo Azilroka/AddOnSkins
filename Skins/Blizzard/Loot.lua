@@ -41,9 +41,9 @@ function AS:Blizzard_LootFrames()
 	end
 
 	hooksecurefunc('GroupLootFrame_OnShow', function(self)
-		local texture, name, count, quality, bindOnPickUp = GetLootRollItemInfo(self.rollID);
+		local texture, name, count, quality, bindOnPickUp = GetLootRollItemInfo(self.rollID)
 		if (name == nil) then
-			return;
+			return
 		end
 
 		self.Name:SetText((bindOnPickUp and "BoP" or "BoE")..' |cFFFFFFFF'..name)
