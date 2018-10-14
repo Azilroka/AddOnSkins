@@ -12,7 +12,6 @@ function AS:Blizzard_DressUpFrame()
 	end)
 
 	AS:SkinBackdropFrame(DressUpFrame)
-	AS:StripTextures(DressUpFrame.Inset)
 	AS:SkinCloseButton(DressUpFrame.CloseButton)
 	AS:SkinButton(DressUpFrame.ResetButton)
 

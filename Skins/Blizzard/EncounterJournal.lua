@@ -16,7 +16,6 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	AS:SkinEditBox(EncounterJournal.searchBox)
 	AS:SkinCloseButton(EncounterJournal.CloseButton)
 
-	AS:StripTextures(EncounterJournal.inset, true)
 	AS:CreateBackdrop(EncounterJournal.encounter.info)
 
 	for _, Tab in pairs({ EncounterJournal.encounter.info.bossTab, EncounterJournal.encounter.info.lootTab, EncounterJournal.encounter.info.modelTab, EncounterJournal.encounter.info.overviewTab }) do

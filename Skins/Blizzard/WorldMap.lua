@@ -3,7 +3,6 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_WorldMap()
 	AS:SkinBackdropFrame(WorldMapFrame)
 	AS:CreateShadow(WorldMapFrame.Backdrop)
-	AS:StripTextures(WorldMapFrame.BorderFrame)
 	AS:SkinCloseButton(WorldMapFrameCloseButton)
 
 	WorldMapFrame.BorderFrame.Tutorial:Kill()

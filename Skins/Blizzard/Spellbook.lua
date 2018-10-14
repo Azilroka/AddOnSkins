@@ -3,7 +3,6 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_Spellbook()
 	AS:SkinFrame(SpellBookFrame, nil, nil, true)
 	AS:SkinCloseButton(SpellBookFrame.CloseButton)
-	AS:StripTextures(SpellBookFrame.Inset)
 
 	for i = 1, 5 do
 		AS:SkinTab(_G["SpellBookFrameTabButton"..i])

@@ -15,7 +15,6 @@ function AS:Blizzard_FlightMap(event, addon)
 	if addon ~= 'Blizzard_FlightMap' then return end
 
 	AS:StripTextures(FlightMapFrame)
-	AS:StripTextures(FlightMapFrame.BorderFrame)
 	AS:CreateBackdrop(FlightMapFrame.ScrollContainer)
 	FlightMapFrame.ScrollContainer.Backdrop:SetPoint('TOPLEFT', FlightMapFrame.ScrollContainer, 'TOPLEFT', -1, 0)
 	FlightMapFrame.BorderFrame.TitleText:SetText('')

@@ -6,7 +6,6 @@ function AS:Blizzard_ItemSocketingUI(event, addon)
 	AS:SkinFrame(ItemSocketingFrame)
 	ItemSocketingFrame.portrait:SetAlpha(0)
 	AS:SkinFrame(ItemSocketingScrollFrame)
-	AS:StripTextures(ItemSocketingFrame.Inset)
 	AS:SkinCloseButton(ItemSocketingFrame.CloseButton)
 
 	for i = 1, MAX_NUM_SOCKETS do

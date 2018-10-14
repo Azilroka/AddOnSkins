@@ -3,14 +3,11 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_ArchaeologyUI(event, addon)
 	if addon ~= "Blizzard_ArchaeologyUI" then return end
 
-	AS:SkinFrame(ArchaeologyFrame)
+	AS:SkinFrame(ArchaeologyFrame, nil, nil, true)
 	AS:CreateShadow(ArchaeologyFrame)
 	AS:SkinCloseButton(ArchaeologyFrame.CloseButton)
 
 	ArchaeologyFrame.portrait:Hide()
-	ArchaeologyFrame.Inset:Hide()
-	ArchaeologyFrame.bgLeft:Hide()
-	ArchaeologyFrame.bgRight:Hide()
 
 	AS:SkinDropDownBox(ArchaeologyFrame.raceFilterDropDown)
 	AS:SkinStatusBar(ArchaeologyFrame.rankBar)

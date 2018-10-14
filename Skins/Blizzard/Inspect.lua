@@ -4,7 +4,6 @@ function AS:Blizzard_Inspect(event, addon)
 	if addon ~= "Blizzard_InspectUI" then return end
 
 	AS:SkinFrame(InspectFrame)
-	AS:StripTextures(InspectFrame.Inset)
 	AS:SkinCloseButton(InspectFrame.CloseButton)
 	InspectFrame.portrait:SetAlpha(0)
 

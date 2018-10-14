@@ -2,7 +2,6 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Quest()
 	AS:SkinFrame(QuestFrame)
-	AS:StripTextures(QuestFrame.Inset)
 	QuestFrame.portrait:SetAlpha(0)
 	QuestFrame:SetHeight(500)
 

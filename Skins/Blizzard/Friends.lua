@@ -19,7 +19,6 @@ function AS:Blizzard_Friends()
 		AnimateTexCoords(FriendsFrameIcon, 512, 256, 64, 64, 25, elapsed, 0.01)
 	end)
 
-	AS:StripTextures(FriendsFrame.Inset)
 	AS:SkinCloseButton(FriendsFrame.CloseButton)
 	AS:SkinTooltip(FriendsTooltip)
 

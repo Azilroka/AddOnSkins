@@ -5,13 +5,11 @@ function AS:Blizzard_TrainerUI(event, addon)
 
 	AS:SkinFrame(ClassTrainerFrame, nil, nil, true)
 	AS:SkinCloseButton(ClassTrainerFrame.CloseButton)
-	AS:StripTextures(ClassTrainerFrame.Inset)
 
 	AS:SkinStatusBar(ClassTrainerStatusBar)
 	ClassTrainerStatusBar:SetPoint("TOPLEFT", ClassTrainerFrame, "TOPLEFT", 15, -35)
 
 	AS:SkinButton(ClassTrainerTrainButton, true)
-	AS:StripTextures(ClassTrainerFrame.bottomInset)
 
 	AS:SkinDropDownBox(ClassTrainerFrameFilterDropDown)
 	ClassTrainerFrameFilterDropDown:SetPoint("TOPRIGHT", ClassTrainerFrame, "TOPRIGHT", -6, -32)

@@ -2,7 +2,6 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_PvE()
 	AS:SkinFrame(PVEFrame)
-	AS:StripTextures(PVEFrame.Inset)
 	AS:SkinCloseButton(PVEFrame.CloseButton)
 	PVEFrame.portrait:SetAlpha(0)
 	PVEFrame.shadows:SetAlpha(0)
@@ -57,7 +56,6 @@ function AS:Blizzard_PvE()
 	end)
 
 	AS:StripTextures(LFDParentFrame)
-	AS:StripTextures(LFDParentFrame.Inset)
 	AS:StripTextures(LFDQueueFrame, true)
 
 	AS:SkinFrame(LFDQueueFrame.PartyBackfill)
@@ -112,11 +110,9 @@ function AS:Blizzard_PvE()
 	end
 
 	AS:StripTextures(RaidFinderFrame)
-	AS:StripTextures(RaidFinderFrameBottomInset)
-	AS:StripTextures(RaidFinderFrame.Inset)
-	RaidFinderFrameBottomInsetBg:Hide()
-	RaidFinderFrameBtnCornerRight:Hide()
-	RaidFinderFrameButtonBottomBorder:Hide()
+	--RaidFinderFrameBottomInsetBg:Hide()
+	--RaidFinderFrameBtnCornerRight:Hide()
+	--RaidFinderFrameButtonBottomBorder:Hide()
 	AS:SkinDropDownBox(RaidFinderQueueFrameSelectionDropDown)
 	RaidFinderQueueFrameSelectionDropDown:SetPoint('BOTTOMLEFT', RaidFinderFrame, 'BOTTOMLEFT', 85, 285)
 
@@ -151,7 +147,6 @@ function AS:Blizzard_PvE()
 	end
 
 	AS:StripTextures(ScenarioFinderFrame)
-	AS:StripTextures(ScenarioFinderFrame.Inset)
 
 	AS:StripTextures(ScenarioFinderFrame.Queue, true)
 	AS:SkinDropDownBox(ScenarioFinderFrame.Queue.Dropdown)
@@ -199,7 +194,6 @@ function AS:Blizzard_PvE()
 
 	AS:StripTextures(LFGListFrame.ApplicationViewer, true)
 	AS:SkinScrollBar(LFGListFrame.ApplicationViewer.ScrollFrame.scrollBar)
-	AS:StripTextures(LFGListFrame.ApplicationViewer.Inset)
 	AS:SkinButton(LFGListFrame.ApplicationViewer.RemoveEntryButton, true)
 	AS:SkinButton(LFGListFrame.ApplicationViewer.EditButton, true)
 	AS:SkinFrame(LFGListFrame.ApplicationViewer.NameColumnHeader)

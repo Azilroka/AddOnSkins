@@ -3,7 +3,6 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_GuildUI(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		AS:SkinFrame(PetitionFrame, nil, nil, true)
-		AS:StripTextures(PetitionFrameInset)
 
 		AS:SkinButton(PetitionFrameRequestButton)
 		PetitionFrameRequestButton:SetWidth(110)
@@ -28,7 +27,6 @@ function AS:Blizzard_GuildUI(event, addon)
 		AS:SkinButton(GuildInviteFrameJoinButton, true)
 
 		AS:SkinFrame(GuildRegistrarFrame, nil, nil, true)
-		AS:StripTextures(GuildRegistrarFrameInset)
 		AS:StripTextures(GuildRegistrarGreetingFrame)
 		AS:SkinButton(GuildRegistrarFrameGoodbyeButton)
 		AS:SkinButton(GuildRegistrarFrameCancelButton)
@@ -44,7 +42,6 @@ function AS:Blizzard_GuildUI(event, addon)
 		AvailableServicesText:SetTextColor(1, .9, .1)
 
 		AS:SkinFrame(TabardFrame)
-		AS:StripTextures(TabardFrameInset)
 		TabardFramePortrait:Kill()
 
 		AS:SkinCloseButton(TabardFrameCloseButton)
@@ -90,8 +87,6 @@ function AS:Blizzard_GuildUI(event, addon)
 	AS:SkinCloseButton(GuildMemberDetailCloseButton)
 	AS:SkinCloseButton(GuildFrameCloseButton)
 
-	AS:StripTextures(GuildFrameInset)
-	AS:StripTextures(GuildFrameBottomInset)
 	AS:StripTextures(GuildAllPerksFrame)
 	AS:StripTextures(GuildMemberDetailFrame)
 	AS:StripTextures(GuildMemberNoteBackground)
@@ -337,7 +332,6 @@ function AS:Blizzard_GuildControlUI(event, addon)
 
 	AS:SkinDropDownBox(GuildControlUIRankBankFrameRankDropDown)
 	AS:SkinCloseButton(GuildControlUICloseButton)
-	AS:StripTextures(GuildControlUIRankBankFrameInset)
 	AS:StripTextures(GuildControlUIRankBankFrameInsetScrollFrame)
 	AS:SkinScrollBar(GuildControlUIRankBankFrameInsetScrollFrameScrollBar)
 

@@ -4,7 +4,6 @@ function AS:Blizzard_TalentUI(event, addon)
 	if addon ~= 'Blizzard_TalentUI' then return end
 
 	AS:SkinFrame(PlayerTalentFrame, nil, nil, true)
-	AS:StripTextures(PlayerTalentFrameInset)
 	AS:SkinCloseButton(PlayerTalentFrame.CloseButton)
 
 	for _, Button in pairs({ PlayerTalentFrameTalentsTutorialButton, PlayerTalentFrameSpecializationTutorialButton, PlayerTalentFramePetSpecializationTutorialButton }) do
@@ -232,7 +231,6 @@ function AS:Blizzard_TalentUI(event, addon)
 	PvpTalentFrame.Ring:Hide()
 
 	AS:SkinBackdropFrame(PvpTalentFrame.TalentList)
-	AS:StripTextures(PvpTalentFrame.TalentList.Inset)
 
 	PvpTalentFrame.TalentList:SetPoint("BOTTOMLEFT", PlayerTalentFrame, "BOTTOMRIGHT", 5, 26)
 

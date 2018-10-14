@@ -4,7 +4,6 @@ function AS:Blizzard_Gossip()
 	AS:SkinFrame(GossipFrame)
 	GossipFrame:SetHeight(500)
 
-	AS:StripTextures(GossipFrame.Inset)
 	AS:SkinCloseButton(GossipFrame.CloseButton)
 	GossipFramePortrait:SetAlpha(0)
 

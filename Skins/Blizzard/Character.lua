@@ -4,7 +4,6 @@ function AS:Blizzard_CharacterFrame()
 	CHARACTERFRAME_EXPANDED_WIDTH = 580
 
 	AS:SkinFrame(CharacterFrame)
-	AS:StripTextures(CharacterFrame.Inset)
 	AS:SkinCloseButton(CharacterFrame.CloseButton)
 
 	CharacterFrame:HookScript('OnShow', function() PaperDollBgDesaturate(false) end)

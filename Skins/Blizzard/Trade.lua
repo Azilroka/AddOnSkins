@@ -2,7 +2,6 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_TradeWindow(event, addon)
 	AS:SkinFrame(TradeFrame, nil, nil, true)
-	AS:StripTextures(TradeFrameInset)
 	AS:StripTextures(TradeRecipientMoneyBg)
 	AS:SkinFrame(TradeRecipientMoneyInset)
 	AS:SkinButton(TradeFrameTradeButton, true)

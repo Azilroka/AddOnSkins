@@ -4,7 +4,6 @@ function AS:Blizzard_Merchant()
 	AS:SkinFrame(MerchantFrame, nil, nil, true)
 	AS:SkinCloseButton(MerchantFrame.CloseButton)
 
-	AS:StripTextures(MerchantFrameInset)
 	AS:StripTextures(MerchantMoneyBg)
 	AS:StripTextures(MerchantMoneyInset)
 	AS:SkinDropDownBox(MerchantFrameLootFilter)
