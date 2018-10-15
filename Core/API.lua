@@ -187,6 +187,8 @@ function AS:SetTemplate(Frame, Template, Texture)
 
 		if AS:CheckOption('MerathilisUIStyling', 'ElvUI_MerathilisUI') then
 			Frame:Styling()
+		elseif AS:CheckOption('KlixUIStyling', 'ElvUI_KlixUI') then
+			Frame:Styling()
 		end
 	end
 
