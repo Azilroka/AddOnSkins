@@ -106,6 +106,8 @@ function AS:BuildProfile()
 
 	if AS:CheckAddOn('ElvUI_MerathilisUI') then
 		Defaults.profile['MerathilisUIStyling'] = false
+	elseif AS:CheckAddOn('ElvUI_KlixUI') then
+		Defaults.profile['KlixUIStyling'] = false
 	end
 
 	for skin in pairs(AS.register) do
@@ -540,6 +542,12 @@ function AS:BuildOptions()
 		AS.Options.args.misc.args.MerathilisUIStyling = {
 			type = 'toggle',
 			name = ASL["|cffff7d0aMerathilisUI|r Styling"],
+			order = 6
+		}
+	elseif AS:CheckAddOn("ElvUI_KlixUI") then
+		AS.Options.args.misc.args.KlixUIStyling = {
+			type = 'toggle',
+			name = ASL["|cfff960d9KlixUI|r Styling"],
 			order = 6
 		}
 	end
