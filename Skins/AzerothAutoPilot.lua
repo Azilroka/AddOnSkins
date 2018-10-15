@@ -64,35 +64,20 @@ function AS:AzerothAutoPilot()
 
 	AAP.QuestList.Greetings2FS1:SetWidth(500)
 	AAP.QuestList.Greetings:SetHeight(175)
-	AAP.QuestList.Greetings2FS1:SetFont(AS.Font, 20, "OUTLINE")
-	AAP.QuestList.Greetings2FS2:SetFont(AS.Font, 14, "OUTLINE")
-	AAP.QuestList.Greetings2FS221:SetFont(AS.Font, 14, "OUTLINE")
-	AAP.QuestList.SugQuestFrameFS1:SetFont(AS.Font, 20, "OUTLINE")
-	AAP.QuestList.SugQuestFrameFS2:SetFont(AS.Font, 15, "OUTLINE")
-	AAP.QuestList.WarcampFS2:SetFont(AS.Font, 14, "OUTLINE")
 
 	AS:SkinDropDownBox(AAP_DropDownList)
 	AS:SkinDropDownBox(AAP_DropDown1)
 
 	AS:SkinFrame(AAP_AFkFrames)
-	AAP_AfkFrame.Fontstring:SetFont(AS.Font, 20, "OUTLINE")
-
 	AS:SkinButton(AAP_ArrowActiveButton)
 
-	AAP_ArrowFrame.Fontstring:SetFont(AS.Font, 8, "OUTLINE")
-	AAP_ArrowFrame.Fontstring:SetWidth(AAP_ArrowFrame.Fontstring:GetStringWidth()+100)
-	AAP_ArrowFrame.Button:SetWidth(AAP_ArrowFrame.Fontstring:GetStringWidth()+2)
 	AAP_ArrowFrame.Button:SetScale(1)
-	AAP_ArrowFrame.distance:SetFont(AS.Font, 10, "OUTLINE")
 
 	AS:SkinFrame(AAP_BrutalFrames1)
 	AS:SkinFrame(AAP_BrutalFrames2)
 
 	AAP.BrutallCC.BrutallFrame.FrameName:SetPoint("TOP", AAP.BrutallCC.BrutallFrame.Frame, "TOP", -25, 27)
 
-	for i = 1, 4 do
-		AAP.BrutallCC.BrutallFrame["FS"..i]:SetFont(AS.Font, 16, "OUTLINE")
-	end
 
 	AS:SkinButton(AAP_SBX1)
 	AS:SkinButton(AAP_SBX2)
@@ -102,9 +87,6 @@ function AS:AzerothAutoPilot()
 			Parent["AAP_Button"]:SetPoint("LEFT", Parent, "RIGHT", 1, 0)
 		end
 	end
-
-	AAP.Banners.BannersFrame.FrameFS1:SetFont(AS.Font, 8, "OUTLINE")
-	AAP.Banners.BannersFrame.FrameFS2:SetFont(AS.Font, 10, "OUTLINE")
 
 	AAP.Banners.BannersFrame.B1:SetPoint("TOP", AAP.Banners.BannersFrame.Frame, "BOTTOM", 0, -1)
 	AAP.Banners.BannersFrame.B1.icon = AAP.Banners.BannersFrame.B1:GetNormalTexture()
