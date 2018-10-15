@@ -6,7 +6,8 @@ local strlower, strfind = strlower, strfind
 local CopyTable, tremove = CopyTable, tremove
 local EnumerateFrames = EnumerateFrames
 
-local BlizzardButtonRegions = {
+AS.Blizzard = {}
+AS.Blizzard.Regions = {
 	'Left',
 	'Middle',
 	'Right',
@@ -29,7 +30,7 @@ local BlizzardButtonRegions = {
 	'Cover'
 }
 
-local BlizzardFrameRegions = {
+AS.Blizzard.Frames = {
 	'Inset',
 	'inset',
 	'LeftInset',
@@ -44,7 +45,7 @@ local BlizzardFrameRegions = {
 
 function AS:StripTextures(Frame, Kill, Alpha)
 	local FrameName = Frame:GetName()
-	for _, Blizzard in pairs(BlizzardFrameRegions) do
+	for _, Blizzard in pairs(AS.Blizzard.Frames) do
 		local BlizzFrame = Frame[Blizzard] or FrameName and _G[FrameName..Blizzard]
 		if BlizzFrame then
 			AS:StripTextures(BlizzFrame, Kill, Alpha)
@@ -269,7 +270,7 @@ function AS:SkinButton(Button, Strip)
 
 	AS:SkinFrame(Button, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil, not Strip)
 
-	for _, Region in pairs(BlizzardButtonRegions) do
+	for _, Region in pairs(AS.Blizzard.Regions) do
 		Region = ButtonName and _G[ButtonName..Region] or Button[Region]
 		if Region then
 			Region:SetAlpha(0)
@@ -426,7 +427,7 @@ function AS:SkinEditBox(EditBox, Width, Height)
 
 	local EditBoxName = EditBox:GetName()
 
-	for _, Region in pairs(BlizzardButtonRegions) do
+	for _, Region in pairs(AS.Blizzard.Regions) do
 		if EditBoxName and _G[EditBoxName..Region] then
 			_G[EditBoxName..Region]:SetAlpha(0)
 		end
