@@ -43,6 +43,20 @@ AS.Blizzard.Frames = {
 	'bgRight',
 }
 
+AS.Blizzard.Tooltip = {
+	'Background',
+	'Delimiter1',
+	'Delimiter2',
+	'BorderTop',
+	'BorderTopLeft',
+	'BorderTopRight',
+	'BorderLeft',
+	'BorderRight',
+	'BorderBottom',
+	'BorderBottomRight',
+	'BorderBottomLeft',
+}
+
 function AS:StripTextures(Frame, Kill, Alpha)
 	local FrameName = Frame:GetName()
 	for _, Blizzard in pairs(AS.Blizzard.Frames) do
@@ -295,7 +309,7 @@ function AS:SkinButton(Button, Strip)
 			self:GetFontString():SetTextColor(1, 1, 1)
 		end
 	end)
-	Button:HookScript("OnDisable", function(self) 
+	Button:HookScript("OnDisable", function(self)
 		if self.GetFontString and self:GetFontString() ~= nil then
 			self:GetFontString():SetTextColor(.5, .5, .5)
 		end
@@ -461,8 +475,7 @@ function AS:SkinIconButton(Button)
 
 	if Icon then
 		Texture = Icon:GetTexture()
-		AS:SkinFrame(Button)
-		AS:StyleButton(Button)
+		AS:SkinButton(Button, true)
 		Icon:SetTexture(Texture)
 		AS:SkinTexture(Icon)
 		Icon:SetInside(Button)
@@ -716,7 +729,13 @@ function AS:SkinStatusBar(frame, ClassColor)
 end
 
 function AS:SkinTooltip(tooltip, scale)
-	AS:SkinFrame(tooltip)
+	for _, Region in pairs(AS.Blizzard.Tooltip) do
+		if tooltip[Region] then
+			tooltip[Region]:SetTexture(nil)
+		end
+	end
+
+	tooltip:SetTemplate(AS:CheckOption('SkinTemplate'))
 	tooltip.SetBackdrop = AS.Noop
 	if scale then
 		tooltip:SetScale(AS.UIScale)

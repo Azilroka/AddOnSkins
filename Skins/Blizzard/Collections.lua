@@ -82,7 +82,7 @@ function AS:Blizzard_Collections(event, addon)
 		Button.factionIcon:SetPoint('BOTTOMRIGHT', -1, 4)
 
 		Button.icon:SetPoint("LEFT", -37, 0)
-		Button.unusable:SetTexture('')
+		Button.unusable:SetAlpha(0)
 		Button.iconBorder:SetTexture('')
 		Button.background:SetTexture('')
 		Button.selectedTexture:SetTexture('')
@@ -96,13 +96,11 @@ function AS:Blizzard_Collections(event, addon)
 	AS:SkinFrame(PetJournal.PetCount)
 
 	for _, Button in pairs({ 'HealPetButton', 'SummonRandomFavoritePetButton'}) do
-		AS:SkinButton(PetJournal[Button])
-		AS:SkinTexture(PetJournal[Button].texture)
-		PetJournal[Button].texture:SetInside()
-		_G['PetJournal'..Button..'Border']:SetAlpha(0)
+		AS:SkinIconButton(PetJournal[Button])
 	end
 
 	AS:SkinButton(PetJournal.SummonButton, true)
+	PetJournal.SummonButton:SetPoint('BOTTOMLEFT', PetJournal, 'BOTTOMLEFT', 6, 4)
 	AS:SkinButton(PetJournal.FindBattleButton, true)
 	AS:StripTextures(PetJournal.RightInset)
 	AS:StripTextures(PetJournal.LeftInset)
@@ -111,9 +109,10 @@ function AS:Blizzard_Collections(event, addon)
 	PetJournal.searchBox:SetPoint("TOPLEFT", PetJournal.LeftInset, 5, -10)
 
 	AS:SkinButton(PetJournalFilterButton)
-	AS:StripTextures(PetJournal.listScroll)
+	AS:SkinBackdropFrame(PetJournal.listScroll)
+	PetJournal.listScroll.Backdrop:SetPoint('BOTTOMRIGHT', -3, -3)
+
 	AS:SkinScrollBar(PetJournal.listScroll.scrollBar)
-	AS:StripTextures(PetJournal.loadoutBorder)
 
 	PetJournal.AchievementStatus:DisableDrawLayer("BACKGROUND")
 
@@ -178,9 +177,11 @@ function AS:Blizzard_Collections(event, addon)
 		end)
 	end
 
+	AS:StripTextures(PetJournal.loadoutBorder)
+
 	for i = 1, 3 do
 		local Pet = PetJournal.Loadout['Pet'..i]
-		AS:StripTextures(Pet.helpFrame)
+		AS:SkinFrame(Pet.helpFrame)
 		AS:SkinFrame(Pet)
 		Pet.petTypeIcon:SetPoint("BOTTOMLEFT", 2, 2)
 
@@ -198,18 +199,25 @@ function AS:Blizzard_Collections(event, addon)
 		end)
 
 		for index = 1, 3 do
-			local Spell = _G["PetJournalLoadoutPet"..i.."Spell"..index]
+			local Spell = PetJournal.Loadout['Pet'..i]["spell"..index]
 			AS:SkinIconButton(Spell)
+			Spell.FlyoutArrow:SetPoint("BOTTOM", '$parent', "BOTTOM", 0, -5)
 			Spell.FlyoutArrow:SetTexture([[Interface\Buttons\ActionBarFlyoutButton]])
-			_G["PetJournalLoadoutPet"..i.."Spell"..index.."Icon"]:SetInside(Spell)
 		end
 	end
 
 	for i = 1, 2 do
 		local btn = PetJournal.SpellSelect["Spell"..i]
-		AS:SkinButton(btn)
+		AS:SkinFrame(btn)
 		btn.icon:SetInside(btn)
-		--btn.icon:SetDrawLayer("BORDER")
+		btn.icon:SetDrawLayer("BORDER")
+		hooksecurefunc(btn, 'SetChecked', function(self, value)
+			if value == true then
+				btn:SetBackdropBorderColor(1, .92, 0)
+			else
+				btn:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end)
 	end
 
 	AS:SkinFrame(PetJournal.PetCard)
@@ -227,35 +235,17 @@ function AS:Blizzard_Collections(event, addon)
 	hooksecurefunc(PetJournalPetCardPetInfoQualityBorder, 'SetVertexColor', function(self, r, g, b)
 		PetJournalPetCardPetInfo.Backdrop:SetBackdropBorderColor(r, g, b)
 	end)
-	local tt = PetJournalPrimaryAbilityTooltip
-	tt.Background:SetTexture(nil)
-	if tt.Delimiter1 then
-		tt.Delimiter1:SetTexture(nil)
-		tt.Delimiter2:SetTexture(nil)
-	end
-	tt.BorderTop:SetTexture(nil)
-	tt.BorderTopLeft:SetTexture(nil)
-	tt.BorderTopRight:SetTexture(nil)
-	tt.BorderLeft:SetTexture(nil)
-	tt.BorderRight:SetTexture(nil)
-	tt.BorderBottom:SetTexture(nil)
-	tt.BorderBottomRight:SetTexture(nil)
-	tt.BorderBottomLeft:SetTexture(nil)
-	AS:SetTemplate(tt, 'Transparent')
+
+	AS:SkinTooltip(PetJournalPrimaryAbilityTooltip)
 
 	for i = 1, 6 do
-		local frame = _G["PetJournalPetCardSpell"..i]
-		frame:SetFrameLevel(frame:GetFrameLevel() + 2)
-		frame:DisableDrawLayer("BACKGROUND")
-		AS:CreateBackdrop(frame, 'Default')
-		frame.Backdrop:SetAllPoints()
-		AS:SkinTexture(frame.icon)
-		frame.icon:SetInside(frame.Backdrop)
+		local spell = PetJournal.PetCard["spell"..i]
+		AS:SkinIconButton(spell)
 	end
 
-	AS:SkinStatusBar(PetJournalPetCardHealthFrame.healthBar)
-	AS:SkinStatusBar(PetJournalPetCardXPBar)
-	PetJournalLoadoutBorder:SetHeight(350)
+	AS:SkinStatusBar(PetJournal.PetCard.HealthFrame.healthBar)
+	AS:SkinStatusBar(PetJournal.PetCard.xpBar)
+	PetJournal.loadoutBorder:SetHeight(350)
 
 	-- Toy Box
 	AS:StripTextures(ToyBoxFilterButton, true)
@@ -264,8 +254,8 @@ function AS:Blizzard_Collections(event, addon)
 
 	ToyBox.searchBox:SetPoint("TOPRIGHT", ToyBox, "TOPRIGHT", -117, -34)
 
-	AS:SkinArrowButton(ToyBox.PagingFrame.NextPageButton)
-	AS:SkinArrowButton(ToyBox.PagingFrame.PrevPageButton)
+	AS:SkinArrowButton(ToyBox.PagingFrame.NextPageButton, 'right')
+	AS:SkinArrowButton(ToyBox.PagingFrame.PrevPageButton, 'left')
 	AS:StripTextures(ToyBox.iconsFrame)
 
 	for i = 1, 18 do
@@ -310,8 +300,8 @@ function AS:Blizzard_Collections(event, addon)
 
 	AS:StripTextures(HeirloomsJournalFilterButton, true)
 	AS:SkinButton(HeirloomsJournalFilterButton)
-	AS:SkinArrowButton(HeirloomsJournal.PagingFrame.NextPageButton)
-	AS:SkinArrowButton(HeirloomsJournal.PagingFrame.PrevPageButton)
+	AS:SkinArrowButton(HeirloomsJournal.PagingFrame.NextPageButton, 'right')
+	AS:SkinArrowButton(HeirloomsJournal.PagingFrame.PrevPageButton, 'left')
 
 	hooksecurefunc(HeirloomsJournal, 'LayoutCurrentPage', function(self)
 		local pageLayoutData = self.heirloomLayoutData[self.currentPage]
@@ -349,8 +339,8 @@ function AS:Blizzard_Collections(event, addon)
 	WardrobeCollectionFrame.FilterButton:SetWidth(80)
 	AS:StripTextures(WardrobeCollectionFrame.ItemsCollectionFrame)
 	AS:SkinDropDownBox(WardrobeCollectionFrameWeaponDropDown)
-	AS:SkinArrowButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.PrevPageButton)
-	AS:SkinArrowButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.NextPageButton)
+	AS:SkinArrowButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.NextPageButton, 'right')
+	AS:SkinArrowButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.PrevPageButton, 'left')
 	AS:StripTextures(WardrobeCollectionFrame.FilterButton, true)
 	AS:SkinButton(WardrobeCollectionFrame.FilterButton)
 
