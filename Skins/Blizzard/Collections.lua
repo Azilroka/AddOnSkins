@@ -248,11 +248,11 @@ function AS:Blizzard_Collections(event, addon)
 	PetJournal.loadoutBorder:SetHeight(350)
 
 	-- Toy Box
-	AS:StripTextures(ToyBoxFilterButton, true)
 	AS:SkinButton(ToyBoxFilterButton)
+
 	AS:SkinEditBox(ToyBox.searchBox)
 
-	ToyBox.searchBox:SetPoint("TOPRIGHT", ToyBox, "TOPRIGHT", -117, -34)
+	ToyBox.searchBox:SetPoint("TOPRIGHT", ToyBox, "TOPRIGHT", -117, -35)
 
 	AS:SkinArrowButton(ToyBox.PagingFrame.NextPageButton, 'right')
 	AS:SkinArrowButton(ToyBox.PagingFrame.PrevPageButton, 'left')
@@ -260,16 +260,17 @@ function AS:Blizzard_Collections(event, addon)
 
 	for i = 1, 18 do
 		local Button = ToyBox.iconsFrame['spellButton'..i]
+		AS:SkinFrame(Button)
+		AS:StyleButton(Button)
 		AS:SkinTexture(Button.iconTexture)
 		AS:SkinTexture(Button.iconTextureUncollected)
 		Button.iconTexture:SetInside()
 		Button.iconTextureUncollected:SetInside()
-		AS:SkinFrame(Button)
-		AS:StyleButton(Button)
-		Button:HookScript('OnUpdate', function(self)
-			self.name:SetTextColor(1, 1, 1)
-			--self.name:SetTextColor(unpack(self.TextColor)) -- adjust me
-		end)
+		AS:CreateBackdrop(Button)
+		Button.name:SetPoint('LEFT', Button, 'RIGHT', 9, 0)
+		Button.Backdrop:SetPoint('TOPLEFT', Button, 'TOPRIGHT', 0, -2)
+		Button.Backdrop:SetPoint('BOTTOMLEFT', Button, 'BOTTOMRIGHT', 0, 2)
+		Button.Backdrop:SetPoint('RIGHT', Button.name, 'RIGHT', 0, 0)
 	end
 
 	hooksecurefunc("ToySpellButton_UpdateButton", function(self)
@@ -279,11 +280,11 @@ function AS:Blizzard_Collections(event, addon)
 			if quality then
 				r, g, b = GetItemQualityColor(quality)
 			end
-			self.TextColor = { r, g, b }
 			self:SetBackdropBorderColor(r, g, b)
+			self.name:SetTextColor(r, g, b)
 		else
 			self:SetBackdropBorderColor(unpack(AS.BorderColor))
-			self.TextColor = { .6, .6, .6 }
+			self.name:SetTextColor(.6, .6, .6)
 		end
 	end)
 
