@@ -274,6 +274,7 @@ function AS:Blizzard_Collections(event, addon)
 	end
 
 	hooksecurefunc("ToySpellButton_UpdateButton", function(self)
+		self.name.SetTextColor = nil
 		if (PlayerHasToy(self.itemID)) then
 			local quality = select(3, GetItemInfo(self.itemID))
 			local r, g, b = 1, 1, 1
@@ -286,6 +287,7 @@ function AS:Blizzard_Collections(event, addon)
 			self:SetBackdropBorderColor(unpack(AS.BorderColor))
 			self.name:SetTextColor(.6, .6, .6)
 		end
+		self.name.SetTextColor = AS.Noop
 	end)
 
 	AS:SkinStatusBar(ToyBox.progressBar)
