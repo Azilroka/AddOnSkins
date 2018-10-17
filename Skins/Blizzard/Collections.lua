@@ -293,50 +293,57 @@ function AS:Blizzard_Collections(event, addon)
 	AS:SkinStatusBar(ToyBox.progressBar)
 
 	-- Heirlooms
-	AS:StripTextures(HeirloomsJournal.iconsFrame)
-	AS:SkinDropDownBox(HeirloomsJournalClassDropDown)
-
-	AS:SkinEditBox(HeirloomsJournalSearchBox)
-	HeirloomsJournalSearchBox:SetPoint("TOPRIGHT", HeirloomsJournal, "TOPRIGHT", -117, -34)
-
 	AS:SkinStatusBar(HeirloomsJournal.progressBar)
 
-	AS:StripTextures(HeirloomsJournalFilterButton, true)
+	AS:SkinEditBox(HeirloomsJournal.SearchBox)
+	HeirloomsJournal.SearchBox:SetPoint("TOPRIGHT", HeirloomsJournal, "TOPRIGHT", -117, -34)
+
 	AS:SkinButton(HeirloomsJournalFilterButton)
+
+	AS:SkinDropDownBox(HeirloomsJournal.filterDropDown)
+	AS:SkinDropDownBox(HeirloomsJournal.classDropDown)
+
+	AS:StripTextures(HeirloomsJournal.iconsFrame)
+
 	AS:SkinArrowButton(HeirloomsJournal.PagingFrame.NextPageButton, 'right')
 	AS:SkinArrowButton(HeirloomsJournal.PagingFrame.PrevPageButton, 'left')
 
-	hooksecurefunc(HeirloomsJournal, 'LayoutCurrentPage', function(self)
-		local pageLayoutData = self.heirloomLayoutData[self.currentPage]
-		local numHeadersInUse = 0
-		if pageLayoutData then
-			for i, layoutData in ipairs(pageLayoutData) do
-				if type(layoutData) == "string" then
-					numHeadersInUse = numHeadersInUse + 1
-					local header = self:AcquireFrame(self.heirloomHeaderFrames, numHeadersInUse, "FRAME", "HeirloomHeaderTemplate")
-					header.text:SetTextColor(1,1,1)
-				end
-			end
+	hooksecurefunc(HeirloomsJournal, 'UpdateButton', function(_, Button)
+		if not Button.Backdrop then
+			AS:SkinFrame(Button)
+			AS:StyleButton(Button)
+			AS:SkinTexture(Button.iconTexture)
+			AS:SkinTexture(Button.iconTextureUncollected)
+			Button.iconTexture:SetInside()
+			Button.iconTextureUncollected:SetInside()
+			AS:CreateBackdrop(Button)
+			Button.Backdrop:SetPoint('TOPLEFT', Button, 'TOPRIGHT', 0, -2)
+			Button.Backdrop:SetPoint('BOTTOMLEFT', Button, 'BOTTOMRIGHT', 0, 2)
+			Button.Backdrop:SetPoint('RIGHT', Button.name, 'RIGHT', 2, 0)
+			Button.slotFrameCollected:SetAlpha(0)
+			Button.slotFrameUncollected:SetAlpha(0)
 		end
+
+		Button.levelBackground:SetTexture(nil)
+
+		Button.SetTextColor = nil
+		if C_Heirloom.PlayerHasHeirloom(Button.itemID) then
+			Button.name:SetTextColor(1, 1, 1)
+			Button.special:SetTextColor(1, .82, 0)
+			Button:SetBackdropBorderColor(GetItemQualityColor(7))
+		else
+			Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+		end
+		Button.SetTextColor = AS.Noop
 	end)
 
-	hooksecurefunc(HeirloomsJournal, 'UpdateButton', function(self, button)
-		if button.isSkinned then return end
-		button.isSkinned = true
-		button.slotFrameCollected:SetAlpha(0)
-		AS:SetTemplate(button)
-		AS:StyleButton(button)
-		AS:SkinTexture(button.iconTexture)
-		button.iconTexture:SetInside()
-		AS:SkinTexture(button.iconTextureUncollected)
-		button.iconTextureUncollected:SetInside()
-		button.slotFrameUncollected:SetAlpha(0)
-	end)
+	-- Wardrobe
 
 	AS:SkinTab(WardrobeCollectionFrameTab1)
 	AS:SkinTab(WardrobeCollectionFrameTab2)
-	AS:StripTextures(WardrobeCollectionFrame.progressBar)
+
 	AS:SkinStatusBar(WardrobeCollectionFrame.progressBar)
+
 	AS:SkinEditBox(WardrobeCollectionFrameSearchBox)
 	AS:SkinButton(WardrobeCollectionFrame.FilterButton)
 	WardrobeCollectionFrame.FilterButton:SetWidth(80)
