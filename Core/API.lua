@@ -120,6 +120,7 @@ function AS:CreateShadow(Frame, NoRegister, Inverted)
 
 	Shadow.Inverted = Inverted
 	Shadow:SetBackdropColor(0, 0, 0, .8)
+	Shadow:SetBackdropBorderColor(0, 0, 0, .8)
 
 	if (not NoRegister) and AS.ES then
 		AS.ES:RegisterShadow(Shadow)
