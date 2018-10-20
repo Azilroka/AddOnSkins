@@ -231,7 +231,7 @@ function AS:SetTemplate(Frame, Template, Texture)
 	Frame:SetBackdropColor(R, G, B, Alpha)
 end
 
-local ArrowRotation = {
+AS.ArrowRotation = {
 	['up'] = 0,
 	['down'] = 3.14,
 	['left'] = 1.57,
@@ -259,7 +259,7 @@ function AS:SkinArrowButton(Button, Arrow)
 
 		local Mask = Button:CreateMaskTexture()
 		Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
-		Mask:SetRotation(ArrowRotation[Arrow])
+		Mask:SetRotation(AS.ArrowRotation[Arrow])
 		Mask:SetSize(Button:GetWidth() / 2, Button:GetHeight() / 2)
 		Mask:SetPoint('CENTER')
 
@@ -293,7 +293,7 @@ function AS:SkinArrowButton(Button, Arrow)
 		Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) Normal:SetVertexColor(1, 1, 1) end)
 	end
 
-	Button.Mask:SetRotation(ArrowRotation[Arrow])
+	Button.Mask:SetRotation(AS.ArrowRotation[Arrow])
 end
 
 function AS:SkinButton(Button, Strip)
@@ -304,8 +304,6 @@ function AS:SkinButton(Button, Strip)
 	if Strip then
 		AS:StripTextures(Button)
 	end
-
-	AS:SetTemplate(Button, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 
 	for _, Region in pairs(AS.Blizzard.Regions) do
 		Region = ButtonName and _G[ButtonName..Region] or Button[Region]
@@ -318,6 +316,8 @@ function AS:SkinButton(Button, Strip)
 	if Button.SetHighlightTexture then Button:SetHighlightTexture('') end
 	if Button.SetPushedTexture then Button:SetPushedTexture('') end
 	if Button.SetDisabledTexture then Button:SetDisabledTexture('') end
+
+	AS:SetTemplate(Button, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 
 	if Button.GetFontString and Button:GetFontString() ~= nil then
 		if Button:IsEnabled() then
@@ -340,14 +340,14 @@ function AS:SkinButton(Button, Strip)
 	Button:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
 	Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
-	if Button.Flash then
-		Button.Flash:SetColorTexture(0, 0, 0, 0)
-		AS:CreateBackdrop(Button.Flash)
-		Button.Flash.Backdrop:SetOutside(Button)
-		Button.Flash.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
-		Button.Flash.Backdrop:SetBackdropColor(0, 0, 0, 0)
-		Button.Flash.Backdrop:Hide()
-	end
+	--if Button.Flash then
+	--	Button.Flash:SetColorTexture(0, 0, 0, 0)
+	--	AS:CreateBackdrop(Button.Flash)
+	--	Button.Flash.Backdrop:SetOutside(Button)
+	--	Button.Flash.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
+	--	Button.Flash.Backdrop:SetBackdropColor(0, 0, 0, 0)
+	--	Button.Flash.Backdrop:Hide()
+	--end
 end
 
 function AS:SkinCheckBox(CheckBox)
