@@ -521,11 +521,11 @@ function AS:SkinMaxMinFrame(frame)
 			AS:SkinButton(Button)
 
 			Button:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
-			Button:GetNormalTexture():SetRotation(ArrowRotation[Direction])
+			Button:GetNormalTexture():SetRotation(AS.ArrowRotation[Direction])
 			Button:GetNormalTexture():SetInside(Button, 2, 2)
 
 			Button:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
-			Button:GetPushedTexture():SetRotation(ArrowRotation[Direction])
+			Button:GetPushedTexture():SetRotation(AS.ArrowRotation[Direction])
 			Button:GetPushedTexture():SetInside()
 
 			Button:HookScript('OnEnter', function(self)
