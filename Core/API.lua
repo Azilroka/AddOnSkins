@@ -307,7 +307,7 @@ function AS:SkinButton(Button, Strip)
 
 	AS:SetTemplate(Button, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 
-for _, Region in pairs(AS.Blizzard.Regions) do
+	for _, Region in pairs(AS.Blizzard.Regions) do
 		Region = ButtonName and _G[ButtonName..Region] or Button[Region]
 		if Region then
 			Region:SetAlpha(0)
