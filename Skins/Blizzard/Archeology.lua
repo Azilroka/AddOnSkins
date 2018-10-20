@@ -25,7 +25,7 @@ function AS:Blizzard_ArchaeologyUI(event, addon)
 		AS:SkinTexture(artifact.icon)
 		AS:CreateBackdrop(artifact)
 		artifact.Backdrop:SetOutside(artifact.icon)
-		artifact.artifactName:SetTextColor(1, .9, .1)
+		artifact.artifactName:SetTextColor(1, .8, .1)
 		artifact.artifactSubText:SetTextColor(0.6, 0.6, 0.6)
 	end
 
@@ -33,14 +33,14 @@ function AS:Blizzard_ArchaeologyUI(event, addon)
 		for i = 1, Frame:GetNumRegions() do
 			local Region = select(i, Frame:GetRegions())
 			if Region:IsObjectType("FontString") then
-				Region:SetTextColor(1, .9, .1)
+				Region:SetTextColor(1, .8, .1)
 			end
 		end
 	end
 
 	ArchaeologyFrame.completedPage.infoText:SetTextColor(1, 1, 1)
 
-	ArchaeologyFrame.artifactPage.historyTitle:SetTextColor(1, .9, .1)
+	ArchaeologyFrame.artifactPage.historyTitle:SetTextColor(1, .8, .1)
 
 	AS:SkinTexture(ArchaeologyFrame.artifactPage.icon)
 
@@ -49,9 +49,9 @@ function AS:Blizzard_ArchaeologyUI(event, addon)
 
 	ArchaeologyFrameArtifactPageHistoryScrollChildText:SetTextColor(1, 1, 1)
 
-	ArchaeologyFrame.helpPage.titleText:SetTextColor(1, .9, .1)
+	ArchaeologyFrame.helpPage.titleText:SetTextColor(1, .8, .1)
 
-	ArchaeologyFrameHelpPageDigTitle:SetTextColor(1, .9, .1)
+	ArchaeologyFrameHelpPageDigTitle:SetTextColor(1, .8, .1)
 	ArchaeologyFrameHelpPageHelpScrollHelpText:SetTextColor(1, 1, 1)
 
 	AS:SkinArrowButton(ArchaeologyFrame.summaryPage.prevPageButton)

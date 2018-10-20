@@ -60,11 +60,11 @@ function AS:Blizzard_Spellbook()
 		AS:SkinFrame(Tab)
 
 		Tab:HookScript("OnEnter", function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
-		Tab:HookScript("OnLeave", function(self) if self:GetChecked() then self:SetBackdropBorderColor(1, .9, .1) else self:SetBackdropBorderColor(unpack(AS.BorderColor)) end end)
+		Tab:HookScript("OnLeave", function(self) if self:GetChecked() then self:SetBackdropBorderColor(1, .8, .1) else self:SetBackdropBorderColor(unpack(AS.BorderColor)) end end)
 
 		hooksecurefunc(Tab, 'SetChecked', function(self, value)
 			if value == true then
-				self:SetBackdropBorderColor(1, .9, .1)
+				self:SetBackdropBorderColor(1, .8, .1)
 			else
 				self:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end

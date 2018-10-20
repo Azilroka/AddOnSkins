@@ -116,7 +116,7 @@ function AS:Blizzard_TalentUI(event, addon)
 
 					frame.ring:Hide()
 					frame.icon:SetSize(40, 40)
-					frame.subText:SetTextColor(1, .9, .1)
+					frame.subText:SetTextColor(1, .8, .1)
 				end
 
 				index = index + 1
@@ -258,12 +258,12 @@ function AS:Blizzard_TalentUI(event, addon)
 	AS:SkinScrollBar(PvpTalentFrame.TalentList.ScrollFrame.ScrollBar)
 
 	AS:SkinFrame(TalentMicroButtonAlert)
-	TalentMicroButtonAlert:SetBackdropBorderColor(1, .9, .1)
+	TalentMicroButtonAlert:SetBackdropBorderColor(1, .8, .1)
 	AS:CreateShadow(TalentMicroButtonAlert)
 	AS:SkinCloseButton(TalentMicroButtonAlert.CloseButton)
 	TalentMicroButtonAlert.CloseButton:ClearAllPoints()
 	TalentMicroButtonAlert.CloseButton:SetPoint("TOPRIGHT", 6, 1)
-	TalentMicroButtonAlert.Text:SetTextColor(1, .9, .1)
+	TalentMicroButtonAlert.Text:SetTextColor(1, .8, .1)
 	TalentMicroButtonAlert:ClearAllPoints()
 	TalentMicroButtonAlert:SetPoint("BOTTOM", UIParent, "BOTTOM", 0, -6)
 

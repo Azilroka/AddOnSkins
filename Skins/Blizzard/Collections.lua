@@ -55,8 +55,8 @@ function AS:Blizzard_Collections(event, addon)
 
 		Button:HookScript("OnLeave", function(self)
 			if self.selected then
-				self.Backdrop:SetBackdropBorderColor(1, .9, .1)
-				self.icon.Backdrop:SetBackdropBorderColor(1, .9, .1)
+				self.Backdrop:SetBackdropBorderColor(1, .8, .1)
+				self.icon.Backdrop:SetBackdropBorderColor(1, .8, .1)
 			else
 				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self.icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -67,9 +67,9 @@ function AS:Blizzard_Collections(event, addon)
 		hooksecurefunc(Button.unusable, 'Hide', function() Button.icon:SetVertexColor(1, 1, 1) Button.Backdrop:SetBackdropColor(unpack(AS.BackdropColor)) end)
 
 		hooksecurefunc(Button.selectedTexture, 'Show', function()
-			Button.name:SetTextColor(1, .9, .1)
-			Button.Backdrop:SetBackdropBorderColor(1, .9, .1)
-			Button.icon.Backdrop:SetBackdropBorderColor(1, .9, .1)
+			Button.name:SetTextColor(1, .8, .1)
+			Button.Backdrop:SetBackdropBorderColor(1, .8, .1)
+			Button.icon.Backdrop:SetBackdropBorderColor(1, .8, .1)
 		end)
 
 		hooksecurefunc(Button.selectedTexture, 'Hide', function()
@@ -131,8 +131,8 @@ function AS:Blizzard_Collections(event, addon)
 
 		Button:HookScript("OnLeave", function(self)
 			if self.selected then
-				self.Backdrop:SetBackdropBorderColor(1, .9, .1)
-				self.icon.Backdrop:SetBackdropBorderColor(1, .9, .1)
+				self.Backdrop:SetBackdropBorderColor(1, .8, .1)
+				self.icon.Backdrop:SetBackdropBorderColor(1, .8, .1)
 			else
 				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self.icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -140,9 +140,9 @@ function AS:Blizzard_Collections(event, addon)
 		end)
 
 		hooksecurefunc(Button.selectedTexture, 'Show', function()
-			Button.name:SetTextColor(1, .9, .1)
-			Button.Backdrop:SetBackdropBorderColor(1, .9, .1)
-			Button.icon.Backdrop:SetBackdropBorderColor(1, .9, .1)
+			Button.name:SetTextColor(1, .8, .1)
+			Button.Backdrop:SetBackdropBorderColor(1, .8, .1)
+			Button.icon.Backdrop:SetBackdropBorderColor(1, .8, .1)
 		end)
 
 		hooksecurefunc(Button.selectedTexture, 'Hide', function()

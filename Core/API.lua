@@ -301,9 +301,13 @@ function AS:SkinButton(Button, Strip)
 
 	local ButtonName = Button:GetName()
 
+	if Strip then
+		AS:StripTextures(Button)
+	end
+
 	AS:SetTemplate(Button, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 
-	for _, Region in pairs(AS.Blizzard.Regions) do
+for _, Region in pairs(AS.Blizzard.Regions) do
 		Region = ButtonName and _G[ButtonName..Region] or Button[Region]
 		if Region then
 			Region:SetAlpha(0)
@@ -689,20 +693,23 @@ function AS:StyleButton(Button)
 
 	if Button.SetHighlightTexture then
 		Button:SetHighlightTexture(AS.Blank)
-		Button:GetHighlightTexture():SetVertexColor(1, 1, 1, .5)
+		Button:GetHighlightTexture():SetVertexColor(1, 1, 1, .2)
 		Button:GetHighlightTexture():SetInside()
+		Button.SetHighlightTexture = AS.Noop
 	end
 
 	if Button.SetPushedTexture then
 		Button:SetPushedTexture(AS.Blank)
 		Button:GetPushedTexture():SetVertexColor(.9, .8, .1, .5)
 		Button:GetPushedTexture():SetInside()
+		Button.SetPushedTexture = AS.Noop
 	end
 
 	if Button.GetCheckedTexture then
 		Button:SetPushedTexture(AS.Blank)
 		Button:GetCheckedTexture():SetVertexColor(0, 1, 0, .5)
 		Button:GetCheckedTexture():SetInside()
+		Button.GetCheckedTexture = AS.Noop
 	end
 
 	local Cooldown = Button:GetName() and _G[Button:GetName()..'Cooldown'] or Button.Cooldown or Button.cooldown or nil

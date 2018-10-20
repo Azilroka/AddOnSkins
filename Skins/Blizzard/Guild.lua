@@ -11,11 +11,11 @@ function AS:Blizzard_GuildUI(event, addon)
 		AS:SkinButton(PetitionFrameSignButton)
 		AS:SkinCloseButton(PetitionFrameCloseButton)
 
-		PetitionFrameCharterTitle:SetTextColor(1, .9, .1)
+		PetitionFrameCharterTitle:SetTextColor(1, .8, .1)
 		PetitionFrameCharterName:SetTextColor(1, 1, 1)
-		PetitionFrameMasterTitle:SetTextColor(1, .9, .1)
+		PetitionFrameMasterTitle:SetTextColor(1, .8, .1)
 		PetitionFrameMasterName:SetTextColor(1, 1, 1)
-		PetitionFrameMemberTitle:SetTextColor(1, .9, .1)
+		PetitionFrameMemberTitle:SetTextColor(1, .8, .1)
 		PetitionFrameInstructions:SetTextColor(1, 1, 1)
 
 		for i = 1, 9 do
@@ -39,7 +39,7 @@ function AS:Blizzard_GuildUI(event, addon)
 		end
 
 		GuildRegistrarPurchaseText:SetTextColor(1, 1, 1)
-		AvailableServicesText:SetTextColor(1, .9, .1)
+		AvailableServicesText:SetTextColor(1, .8, .1)
 
 		AS:SkinFrame(TabardFrame)
 		TabardFramePortrait:Kill()
@@ -169,7 +169,7 @@ function AS:Blizzard_GuildUI(event, addon)
 					local achievementID, itemID, itemName, iconTexture, repLevel, moneyCost = GetGuildRewardInfo(Button.index)
 					self:SetBackdropBorderColor(unpack(AS.BorderColor))
 					if itemID then
-						local Quality = select(3, GetItemInfo(itemID)) 
+						local Quality = select(3, GetItemInfo(itemID))
 						if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then
 							self:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
 						end

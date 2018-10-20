@@ -155,14 +155,14 @@ function AS:Blizzard_CharacterFrame()
 		Button:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.Color)) self.icon.Backdrop:SetBackdropBorderColor(unpack(AS.Color)) end)
 		Button:HookScript('OnLeave', function(self)
 			if self.SelectedBar:IsShown() then
-				self.Backdrop:SetBackdropBorderColor(1, .9, .1)
-				self.icon.Backdrop:SetBackdropBorderColor(1, .9, .1)
+				self.Backdrop:SetBackdropBorderColor(1, .8, .1)
+				self.icon.Backdrop:SetBackdropBorderColor(1, .8, .1)
 			else
 				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 				self.icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		end)
-		hooksecurefunc(Button.SelectedBar, "Show", function() Button.Backdrop:SetBackdropBorderColor(1, .9, .1) Button.icon.Backdrop:SetBackdropBorderColor(1, .9, .1) end)
+		hooksecurefunc(Button.SelectedBar, "Show", function() Button.Backdrop:SetBackdropBorderColor(1, .8, .1) Button.icon.Backdrop:SetBackdropBorderColor(1, .8, .1) end)
 		hooksecurefunc(Button.SelectedBar, "Hide", function() Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) Button.icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 	end
 

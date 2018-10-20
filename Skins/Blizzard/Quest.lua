@@ -40,7 +40,7 @@ function AS:Blizzard_Quest()
 			local questItem = QuestInfoRewardsFrame.RewardButtons[i]
 			if (questItem == self) then
 				questItem.Backdrop:SetBackdropBorderColor(1,.9,.1)
-				questItem.Name:SetTextColor(1, .9, .1)
+				questItem.Name:SetTextColor(1, .8, .1)
 			else
 				questItem.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 				questItem.Name:SetTextColor(1, 1, 1)
@@ -177,9 +177,9 @@ function AS:Blizzard_Quest()
 	else
 		GreetingText:SetTextColor(1, 1, 1)
 		GreetingText.SetTextColor = AS.Noop
-		CurrentQuestsText:SetTextColor(1, .9, .1)
+		CurrentQuestsText:SetTextColor(1, .8, .1)
 		CurrentQuestsText.SetTextColor = AS.Noop
-		AvailableQuestsText:SetTextColor(1, .9, .1)
+		AvailableQuestsText:SetTextColor(1, .8, .1)
 		AvailableQuestsText.SetTextColor = AS.Noop
 
 		for i = 1, 16 do
@@ -197,10 +197,10 @@ function AS:Blizzard_Quest()
 		end
 
 		hooksecurefunc('QuestInfo_Display', function(template, parentFrame, acceptButton, material)
-			QuestInfoTitleHeader:SetTextColor(1, .9, .1)
-			QuestInfoDescriptionHeader:SetTextColor(1, .9, .1)
-			QuestInfoObjectivesHeader:SetTextColor(1, .9, .1)
-			QuestInfoRewardsFrame.Header:SetTextColor(1, .9, .1)
+			QuestInfoTitleHeader:SetTextColor(1, .8, .1)
+			QuestInfoDescriptionHeader:SetTextColor(1, .8, .1)
+			QuestInfoObjectivesHeader:SetTextColor(1, .8, .1)
+			QuestInfoRewardsFrame.Header:SetTextColor(1, .8, .1)
 			QuestInfoDescriptionText:SetTextColor(1, 1, 1)
 			QuestInfoObjectivesText:SetTextColor(1, 1, 1)
 			QuestInfoGroupSize:SetTextColor(1, 1, 1)
@@ -227,7 +227,7 @@ function AS:Blizzard_Quest()
 					local objective = _G['QuestInfoObjective'..numVisibleObjectives]
 					if objective then
 						if finished then
-							objective:SetTextColor(1, .9, .1)
+							objective:SetTextColor(1, .8, .1)
 						else
 							objective:SetTextColor(0.6, 0.6, 0.6)
 						end
@@ -244,16 +244,16 @@ function AS:Blizzard_Quest()
 				if requiredMoney > GetMoney() then
 					QuestInfoRequiredMoneyText:SetTextColor(0.6, 0.6, 0.6)
 				else
-					QuestInfoRequiredMoneyText:SetTextColor(1, .9, .1)
+					QuestInfoRequiredMoneyText:SetTextColor(1, .8, .1)
 				end
 			end
 		end)
 
 		hooksecurefunc("QuestFrameProgressItems_Update", function()
-			QuestProgressTitleText:SetTextColor(1, .9, .1)
+			QuestProgressTitleText:SetTextColor(1, .8, .1)
 			QuestProgressText:SetTextColor(1, 1, 1)
-			QuestProgressRequiredItemsText:SetTextColor(1, .9, .1)
-			QuestProgressRequiredMoneyText:SetTextColor(1, .9, .1)
+			QuestProgressRequiredItemsText:SetTextColor(1, .8, .1)
+			QuestProgressRequiredMoneyText:SetTextColor(1, .8, .1)
 		end)
 	end
 end

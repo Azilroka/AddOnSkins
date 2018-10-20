@@ -10,7 +10,7 @@ function AS:ParchmentRemover(event, addon)
 			local artifact = _G["ArchaeologyFrameCompletedPageArtifact"..i]
 
 			if artifact then
-				_G["ArchaeologyFrameCompletedPageArtifact"..i.."ArtifactName"]:SetTextColor(1, .9, .1)
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."ArtifactName"]:SetTextColor(1, .8, .1)
 				_G["ArchaeologyFrameCompletedPageArtifact"..i.."ArtifactSubText"]:SetTextColor(0.6, 0.6, 0.6)
 			end
 		end
@@ -26,22 +26,22 @@ function AS:ParchmentRemover(event, addon)
 		for i = 1, ArchaeologyFrameCompletedPage:GetNumRegions() do
 			local region = select(i, ArchaeologyFrameCompletedPage:GetRegions())
 			if region:GetObjectType() == 'FontString' then
-				region:SetTextColor(1, .9, .1)
+				region:SetTextColor(1, .8, .1)
 			end
 		end
 
 		for i = 1, ArchaeologyFrameSummaryPage:GetNumRegions() do
 			local region = select(i, ArchaeologyFrameSummaryPage:GetRegions())
 			if region:GetObjectType() == 'FontString' then
-				region:SetTextColor(1, .9, .1)
+				region:SetTextColor(1, .8, .1)
 			end
 		end
 
 		ArchaeologyFrameCompletedPage.infoText:SetTextColor(1, 1, 1)
-		ArchaeologyFrameHelpPageTitle:SetTextColor(1, .9, .1)
-		ArchaeologyFrameHelpPageDigTitle:SetTextColor(1, .9, .1)
+		ArchaeologyFrameHelpPageTitle:SetTextColor(1, .8, .1)
+		ArchaeologyFrameHelpPageDigTitle:SetTextColor(1, .8, .1)
 		ArchaeologyFrameHelpPageHelpScrollHelpText:SetTextColor(1, 1, 1)
-		ArchaeologyFrameArtifactPageHistoryTitle:SetTextColor(1, .9, .1)
+		ArchaeologyFrameArtifactPageHistoryTitle:SetTextColor(1, .8, .1)
 		ArchaeologyFrameArtifactPageHistoryScrollChildText:SetTextColor(1, 1, 1)
 	end
 	if addon == 'Blizzard_Calendar' and ElvUI[1].private.skins.blizzard.calendar == true then
@@ -110,7 +110,7 @@ function AS:ParchmentRemover(event, addon)
 			hooksecurefunc('QuestInfoItem_OnClick', function(self)
 				QuestInfoItemHighlight:SetOutside(self.Icon)
 
-				self.Name:SetTextColor(1, .9, .1)
+				self.Name:SetTextColor(1, .8, .1)
 				local parent = self:GetParent()
 				for i=1, #parent.RewardButtons do
 					local questItem = QuestInfoRewardsFrame.RewardButtons[i]
@@ -121,10 +121,10 @@ function AS:ParchmentRemover(event, addon)
 			end)
 
 			hooksecurefunc('QuestFrameProgressItems_Update', function()
-				QuestProgressTitleText:SetTextColor(1, .9, .1)
+				QuestProgressTitleText:SetTextColor(1, .8, .1)
 				QuestProgressText:SetTextColor(1, 1, 1)
-				QuestProgressRequiredItemsText:SetTextColor(1, .9, .1)
-				QuestProgressRequiredMoneyText:SetTextColor(1, .9, .1)
+				QuestProgressRequiredItemsText:SetTextColor(1, .8, .1)
+				QuestProgressRequiredMoneyText:SetTextColor(1, .8, .1)
 			end)
 
 			AS:StripTextures(QuestFrameGreetingPanel)
@@ -132,9 +132,9 @@ function AS:ParchmentRemover(event, addon)
 			QuestGreetingFrameHorizontalBreak:Kill()
 			GreetingText:SetTextColor(1, 1, 1)
 			GreetingText.SetTextColor = AS.Noop
-			CurrentQuestsText:SetTextColor(1, .9, .1)
+			CurrentQuestsText:SetTextColor(1, .8, .1)
 			CurrentQuestsText.SetTextColor = AS.Noop
-			AvailableQuestsText:SetTextColor(1, .9, .1)
+			AvailableQuestsText:SetTextColor(1, .8, .1)
 			AvailableQuestsText.SetTextColor = AS.Noop
 
 			for i = 1, C_QuestLog.GetMaxNumQuestsCanAccept() do
@@ -168,10 +168,10 @@ function AS:ParchmentRemover(event, addon)
 			end
 
 			hooksecurefunc('QuestInfo_Display', function(template, parentFrame, acceptButton, material)
-				QuestInfoTitleHeader:SetTextColor(1, .9, .1)
-				QuestInfoDescriptionHeader:SetTextColor(1, .9, .1)
-				QuestInfoObjectivesHeader:SetTextColor(1, .9, .1)
-				QuestInfoRewardsFrame.Header:SetTextColor(1, .9, .1)
+				QuestInfoTitleHeader:SetTextColor(1, .8, .1)
+				QuestInfoDescriptionHeader:SetTextColor(1, .8, .1)
+				QuestInfoObjectivesHeader:SetTextColor(1, .8, .1)
+				QuestInfoRewardsFrame.Header:SetTextColor(1, .8, .1)
 				QuestInfoDescriptionText:SetTextColor(1, 1, 1)
 				QuestInfoObjectivesText:SetTextColor(1, 1, 1)
 				QuestInfoGroupSize:SetTextColor(1, 1, 1)
@@ -193,7 +193,7 @@ function AS:ParchmentRemover(event, addon)
 						local objective = _G['QuestInfoObjective'..numVisibleObjectives]
 						if objective then
 							if finished then
-								objective:SetTextColor(1, .9, .1)
+								objective:SetTextColor(1, .8, .1)
 							else
 								objective:SetTextColor(0.6, 0.6, 0.6)
 							end
@@ -208,7 +208,7 @@ function AS:ParchmentRemover(event, addon)
 					if requiredMoney > GetMoney() then
 						QuestInfoRequiredMoneyText:SetTextColor(0.6, 0.6, 0.6)
 					else
-						QuestInfoRequiredMoneyText:SetTextColor(1, .9, .1)
+						QuestInfoRequiredMoneyText:SetTextColor(1, .8, .1)
 					end
 				end
 			end)
