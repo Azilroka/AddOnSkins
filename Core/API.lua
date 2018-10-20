@@ -6,6 +6,21 @@ local strlower, strfind = strlower, strfind
 local CopyTable, tremove = CopyTable, tremove
 local EnumerateFrames = EnumerateFrames
 
+-- Add texture id's to be stripped
+-- 137056 -- Interface\\Tooltips\\UI-Tooltip-Background
+-- 137057 -- Interface\\Tooltips\\UI-Tooltip-Border
+-- 131080 -- Interface\\DialogFrame\\UI-DialogBox-Header
+-- 130838 -- Interface\\Buttons\\UI-PlusButton-UP
+-- 130836 -- Interface\\Buttons\\UI-PlusButton-DOWN
+-- 130821 -- Interface\\Buttons\\UI-MinusButton-UP
+-- 130820 -- Interface\\Buttons\\UI-MinusButton-DOWN
+-- 251966 -- Interface\\PaperDollInfoFrame\\UI-GearManager-Title-Background
+-- 251963 -- Interface\\PaperDollInfoFrame\\UI-GearManager-Border
+-- 130843 -- Interface\\Buttons\\UI-RadioButton
+-- 130755 -- Interface\\Buttons\\UI-CheckBox-Up
+-- 130751 -- Interface\\Buttons\\UI-CheckBox-Check
+-- 130753 -- Interface\\Buttons\\UI-CheckBox-Highlight
+
 AS.Blizzard = {}
 AS.Blizzard.Regions = {
 	'Left',
@@ -27,7 +42,11 @@ AS.Blizzard.Regions = {
 	'TabSpacer',
 	'TabSpacer1',
 	'TabSpacer2',
-	'Cover'
+	'_RightSeparator',
+	'_LeftSeparator',
+	'Cover',
+	'Border',
+	'Background',
 }
 
 AS.Blizzard.Frames = {
@@ -236,8 +255,7 @@ function AS:SkinArrowButton(Button, Arrow)
 	end
 
 	if not Button.Mask then
-		AS:StripTextures(Button)
-		AS:SetTemplate(Button)
+		AS:SkinFrame(Button)
 
 		local Mask = Button:CreateMaskTexture()
 		Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
@@ -283,7 +301,7 @@ function AS:SkinButton(Button, Strip)
 
 	local ButtonName = Button:GetName()
 
-	AS:SkinFrame(Button, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil, not Strip)
+	AS:SetTemplate(Button, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
 
 	for _, Region in pairs(AS.Blizzard.Regions) do
 		Region = ButtonName and _G[ButtonName..Region] or Button[Region]

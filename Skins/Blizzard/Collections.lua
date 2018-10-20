@@ -160,7 +160,9 @@ function AS:Blizzard_Collections(event, addon)
 		Button.dragButton.level:SetPoint("TOPLEFT", Button.name, "BOTTOMLEFT", 1, 5)
 
 		hooksecurefunc(Button, 'Show', function(self)
-			self.dragButton.level:SetText(LEVEL..' '..self.dragButton.level:GetText(), true)
+			if self.dragButton.level:GetText() then
+				self.dragButton.level:SetText(LEVEL..' '..self.dragButton.level:GetText(), true)
+			end
 		end)
 
 		Button.petTypeIcon:SetPoint('TOPRIGHT', -4, -4)
@@ -223,17 +225,13 @@ function AS:Blizzard_Collections(event, addon)
 	AS:SkinFrame(PetJournal.PetCard)
 	AS:StripTextures(PetJournal.PetCardInset)
 
-	PetJournalTutorialButton.Ring:SetAlpha(0)
-	PetJournalTutorialButton:ClearAllPoints()
-	PetJournalTutorialButton:SetPoint("TOPLEFT", CollectionsJournal, 0, 0)
-
-	--PetJournalPetCardPetInfo.levelBG:SetTexture(nil)
-	AS:SkinTexture(PetJournalPetCardPetInfoIcon)
-	AS:CreateBackdrop(PetJournalPetCardPetInfo)
-	PetJournalPetCardPetInfo.Backdrop:SetOutside(PetJournalPetCardPetInfoIcon)
-	PetJournalPetCardPetInfoQualityBorder:SetAlpha(0)
-	hooksecurefunc(PetJournalPetCardPetInfoQualityBorder, 'SetVertexColor', function(self, r, g, b)
-		PetJournalPetCardPetInfo.Backdrop:SetBackdropBorderColor(r, g, b)
+	--PetJournal.PetCard.PetInfo.levelBG:SetTexture(nil)
+	AS:SkinTexture(PetJournal.PetCard.PetInfo.icon)
+	AS:CreateBackdrop(PetJournal.PetCard.PetInfo)
+	PetJournal.PetCard.PetInfo.Backdrop:SetOutside(PetJournal.PetCard.PetInfo.icon)
+	PetJournal.PetCard.PetInfo.qualityBorder:SetAlpha(0)
+	hooksecurefunc(PetJournal.PetCard.PetInfo.qualityBorder, 'SetVertexColor', function(self, r, g, b)
+		PetJournal.PetCard.PetInfo.Backdrop:SetBackdropBorderColor(r, g, b)
 	end)
 
 	AS:SkinTooltip(PetJournalPrimaryAbilityTooltip)
@@ -252,7 +250,7 @@ function AS:Blizzard_Collections(event, addon)
 
 	AS:SkinEditBox(ToyBox.searchBox)
 
-	ToyBox.searchBox:SetPoint("TOPRIGHT", ToyBox, "TOPRIGHT", -117, -35)
+	ToyBox.searchBox:SetPoint("TOPRIGHT", ToyBox, "TOPRIGHT", -107, -35)
 
 	AS:SkinArrowButton(ToyBox.PagingFrame.NextPageButton, 'right')
 	AS:SkinArrowButton(ToyBox.PagingFrame.PrevPageButton, 'left')
@@ -296,7 +294,7 @@ function AS:Blizzard_Collections(event, addon)
 	AS:SkinStatusBar(HeirloomsJournal.progressBar)
 
 	AS:SkinEditBox(HeirloomsJournal.SearchBox)
-	HeirloomsJournal.SearchBox:SetPoint("TOPRIGHT", HeirloomsJournal, "TOPRIGHT", -117, -34)
+	HeirloomsJournal.SearchBox:SetPoint("TOPRIGHT", HeirloomsJournal, "TOPRIGHT", -107, -35)
 
 	AS:SkinButton(HeirloomsJournalFilterButton)
 
@@ -310,9 +308,10 @@ function AS:Blizzard_Collections(event, addon)
 
 	hooksecurefunc(HeirloomsJournal, 'UpdateButton', function(_, Button)
 		if not Button.Backdrop then
-			AS:SkinFrame(Button)
+			AS:SetTemplate(Button)
 			AS:StyleButton(Button)
 			AS:SkinTexture(Button.iconTexture)
+			Button.iconTexture:SetDrawLayer("ARTWORK")
 			AS:SkinTexture(Button.iconTextureUncollected)
 			Button.iconTexture:SetInside()
 			Button.iconTextureUncollected:SetInside()
@@ -337,90 +336,80 @@ function AS:Blizzard_Collections(event, addon)
 		Button.SetTextColor = AS.Noop
 	end)
 
-	-- Wardrobe
-
-	AS:SkinTab(WardrobeCollectionFrameTab1)
-	AS:SkinTab(WardrobeCollectionFrameTab2)
+	-- Wardrobe Collections
 
 	AS:SkinStatusBar(WardrobeCollectionFrame.progressBar)
 
-	AS:SkinEditBox(WardrobeCollectionFrameSearchBox)
-	AS:SkinButton(WardrobeCollectionFrame.FilterButton)
-	WardrobeCollectionFrame.FilterButton:SetWidth(80)
-	AS:StripTextures(WardrobeCollectionFrame.ItemsCollectionFrame)
-	AS:SkinDropDownBox(WardrobeCollectionFrameWeaponDropDown)
-	AS:SkinArrowButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.NextPageButton, 'right')
-	AS:SkinArrowButton(WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.PrevPageButton, 'left')
-	AS:StripTextures(WardrobeCollectionFrame.FilterButton, true)
-	AS:SkinButton(WardrobeCollectionFrame.FilterButton)
+	AS:SkinButton(WardrobeCollectionFrame.SetsTab)
+	AS:SkinButton(WardrobeCollectionFrame.ItemsTab)
 
-	for i = 1, 3 do
-		for j = 1, 6 do
-			AS:StripTextures(WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j])
-			WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:SetFrameLevel(WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j]:GetFrameLevel() + 2)
-			AS:CreateBackdrop(WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j])
-			WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j].Border:Kill()
-			hooksecurefunc(WardrobeCollectionFrame.ItemsCollectionFrame["ModelR"..i.."C"..j].Border, 'SetAtlas', function(self, texture)
-				local Color = AS.BorderColor
-				if texture == "transmog-wardrobe-border-uncollected" then
-					Color = { 1, 1, 0}
-				elseif texture == "transmog-wardrobe-border-unusable" then
-					Color = { 1, 0, 0}
-				end
-				self:GetParent().Backdrop:SetBackdropBorderColor(unpack(Color))
-			end)
+	AS:SkinEditBox(WardrobeCollectionFrame.searchBox)
+	AS:SkinButton(WardrobeCollectionFrame.FilterButton)
+	WardrobeCollectionFrame.FilterButton:SetPoint('LEFT', WardrobeCollectionFrame.searchBox, 'RIGHT', 2, 0)
+
+	for _, Frame in ipairs(WardrobeCollectionFrame.ContentFrames) do
+		AS:SkinFrame(Frame)
+		if Frame.Models then
+			for _, Model in pairs(Frame.Models) do
+				AS:SkinBackdropFrame(Model)
+				Model:SetFrameLevel(Model:GetFrameLevel() + 2)
+				Model.Backdrop:SetPoint('BOTTOMRIGHT', 2, -1)
+				Model.Border:Kill()
+				hooksecurefunc(Model.Border, 'SetAtlas', function(self, texture)
+					local r, g, b
+					if texture == "transmog-wardrobe-border-uncollected" then
+						r, g, b = 1, 1, 0
+					elseif texture == "transmog-wardrobe-border-unusable" then
+						r, g, b =  1, 0, 0
+					else
+						r, g, b = unpack(AS.BorderColor)
+					end
+					Model.Backdrop:SetBackdropBorderColor(r, g, b)
+				end)
+			end
+		end
+		if Frame.PagingFrame then
+			AS:SkinArrowButton(Frame.PagingFrame.NextPageButton, 'right')
+			AS:SkinArrowButton(Frame.PagingFrame.PrevPageButton, 'left')
 		end
 	end
 
-	AS:StripTextures(WardrobeCollectionFrame.SetsCollectionFrame)
-	AS:StripTextures(WardrobeCollectionFrame.SetsCollectionFrame.LeftInset)
+	AS:SkinDropDownBox(WardrobeCollectionFrame.ItemsCollectionFrame.WeaponDropDown)
+
 	AS:StripTextures(WardrobeCollectionFrame.SetsCollectionFrame.DetailsFrame)
-	AS:StripTextures(WardrobeCollectionFrame.SetsCollectionFrame.RightInset)
-	AS:SkinScrollBar(WardrobeCollectionFrameScrollFrameScrollBar)
-	AS:SkinButton(WardrobeSetsCollectionVariantSetsButton)
+	AS:SkinScrollBar(WardrobeCollectionFrame.SetsCollectionFrame.ScrollFrame.scrollBar)
+	AS:SkinButton(WardrobeCollectionFrame.SetsCollectionFrame.DetailsFrame.VariantSetsButton)
 
-	AS:StripTextures(WardrobeFrame)
-	WardrobeFrame:SetTemplate("Transparent")
-	AS:SkinCloseButton(WardrobeFrameCloseButton)
-	AS:SkinDropDownBox(WardrobeOutfitDropDown)
-	WardrobeOutfitDropDown:SetSize(200, 32)
-	WardrobeOutfitDropDownText:ClearAllPoints()
-	WardrobeOutfitDropDownText:SetPoint("CENTER", WardrobeOutfitDropDown, 10, 2)
-	AS:SkinButton(WardrobeOutfitDropDown.SaveButton)
-	WardrobeOutfitDropDown.SaveButton:ClearAllPoints()
-	WardrobeOutfitDropDown.SaveButton:SetPoint("LEFT", WardrobeOutfitDropDown, "RIGHT", 1, 4)
-	AS:StripTextures(WardrobeOutfitFrame)
-	WardrobeOutfitFrame:SetTemplate("Transparent")
+	-- Transmog Frame
+	AS:SkinFrame(WardrobeFrame)
+	AS:SkinCloseButton(WardrobeFrame.CloseButton)
+	AS:SkinDropDownBox(WardrobeTransmogFrame.OutfitDropDown)
+	AS:SkinButton(WardrobeTransmogFrame.OutfitDropDown.SaveButton)
+	WardrobeTransmogFrame.OutfitDropDown.SaveButton:SetHeight(20)
+	WardrobeTransmogFrame.OutfitDropDown.SaveButton:SetPoint("LEFT", WardrobeTransmogFrame.OutfitDropDown, "RIGHT", -11, -5)
+	AS:SkinBackdropFrame(WardrobeOutfitFrame)
+	WardrobeOutfitFrame.Backdrop:SetInside(WardrobeOutfitFrame, 8, 8)
 
-	AS:StripTextures(WardrobeTransmogFrame)
-	AS:StripTextures(WardrobeTransmogFrame.Inset)
+	AS:SkinFrame(WardrobeTransmogFrame)
+	AS:CreateBackdrop(WardrobeTransmogFrame.MoneyMiddle)
 
-	for i = 1, #WardrobeTransmogFrame.Model.SlotButtons do
-		AS:StripTextures(WardrobeTransmogFrame.Model.SlotButtons[i])
-		WardrobeTransmogFrame.Model.SlotButtons[i].Icon:SetTexCoord(.08, .92, .08, .92)
-		WardrobeTransmogFrame.Model.SlotButtons[i]:SetFrameLevel(WardrobeTransmogFrame.Model.SlotButtons[i]:GetFrameLevel() + 2)
-		AS:CreateBackdrop(WardrobeTransmogFrame.Model.SlotButtons[i])
-		WardrobeTransmogFrame.Model.SlotButtons[i].Border:Kill()
+	for _, Button in pairs(WardrobeTransmogFrame.Model.SlotButtons) do
+		AS:SkinBackdropFrame(Button)
+		AS:SkinTexture(Button.Icon)
+		Button.Icon:SetAllPoints()
+		Button.StatusBorder:SetOutside(Button, 4, 4)
+		Button.PendingFrame.Ants:SetOutside(Button, 4, 4)
+		Button.PendingFrame.Glow:SetOutside(Button, 12, 12)
+		Button:SetFrameLevel(Button:GetFrameLevel() + 2)
+		Button.Border:Kill()
+		Button.NoItemTexture:SetTexture([[Interface\Transmogrify\Textures]])
 	end
 
-	local function OnEnter_Button(self) AS:SkinButton(self) end
 	AS:SkinButton(WardrobeTransmogFrame.SpecButton)
-	WardrobeTransmogFrame.SpecButton:SetScript("OnEnter", OnEnter_Button)
-	WardrobeTransmogFrame.SpecButton:SetScript("OnLeave", OnEnter_Button)
-	WardrobeTransmogFrame.SpecButton:ClearAllPoints()
-	WardrobeTransmogFrame.SpecButton:SetPoint("RIGHT", WardrobeTransmogFrame.ApplyButton, "LEFT", -2, 0)
 	AS:SkinButton(WardrobeTransmogFrame.ApplyButton)
 
-	AS:StripTextures(WardrobeCollectionFrame.SetsTransmogFrame)
-	AS:SkinArrowButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.PrevPageButton)
-	AS:SkinArrowButton(WardrobeCollectionFrame.SetsTransmogFrame.PagingFrame.NextPageButton)
-
-	for i = 1, 2 do
-		for j = 1, 4 do
-			AS:StripTextures(WardrobeCollectionFrame.SetsTransmogFrame["ModelR"..i.."C"..j])
-			WardrobeCollectionFrame.SetsTransmogFrame["ModelR"..i.."C"..j]:CreateBackdrop("Default")
-		end
-	end
+	WardrobeTransmogFrame.SpecButton:SetPoint("RIGHT", WardrobeTransmogFrame.ApplyButton, "LEFT", -2, 0)
+	WardrobeTransmogFrame.ApplyButton:SetPoint('BOTTOMRIGHT', WardrobeTransmogFrame, 'BOTTOMRIGHT', 0, -23)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
