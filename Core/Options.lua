@@ -90,8 +90,6 @@ function AS:BuildProfile()
 			['DBMFontSize'] = 12,
 			['DBMFontFlag'] = 'OUTLINE',
 			['DBMRadarTrans'] = false,
-			['WeakAuraAuraBar'] = false,
-			['WeakAuraIconCooldown'] = false,
 			['SkinTemplate'] = 'Transparent',
 			['HideChatFrame'] = 'NONE',
 			['Parchment'] = false,
@@ -412,12 +410,6 @@ function AS:BuildOptions()
 						name = ASL['Class Color'],
 						order = 2,
 					},
-					WeakAuraAuraBar = {
-						type = 'toggle',
-						name = ASL['WeakAura AuraBar'],
-						order = 3,
-						disabled = function() return not AS:CheckOption('WeakAuras', 'WeakAuras') end,
-					},
 					Parchment = {
 						type = 'toggle',
 						name = ASL['Parchment'],
@@ -585,13 +577,6 @@ function AS:BuildOptions()
 			type = 'header',
 			name = AS:GetColor(ASL['Blizzard Skins']),
 			order = 0,
-		}
-
-		AS.Options.args.misc.args.WeakAuraIconCooldown = {
-			type = 'toggle',
-			name = ASL['WeakAura Cooldowns'],
-			order = 1,
-			disabled = function() return not AS:CheckOption('WeakAuras', 'WeakAuras') end,
 		}
 
 		AS.Options.args.misc.args.ElvUISkinModule = {
