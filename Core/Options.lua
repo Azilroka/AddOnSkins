@@ -142,7 +142,6 @@ function AS:BuildOptions()
 			type = 'toggle',
 			name = text,
 			order = order,
-			desc = ASL.OptionsPanel.SkinDesc,
 		}
 		if AS:CheckAddOn('ElvUI') and strfind(skinName, 'Blizzard_') then
 			options.set = function(info, value) AS:SetOption(info[#info], value) AS:SetElvUIBlizzardSkinOption(info[#info], not value) AS.NeedReload = true end

@@ -185,7 +185,7 @@ function AS:Desaturate(frame)
 end
 
 function AS:SetTemplate(Frame, Template, Texture)
-	Texture = Texture or AS.NormTex
+	Texture = Texture or AS.NormTex -- [[Interface\AddOns\ProjectAzilroka\Media\StatusBars\Rainbow]]
 	Template = Template or AS:CheckOption('SkinTemplate')
 
 	local Backdrop = { bgFile = Texture, edgeFile = AS.Blank, tile = false, tileSize = 0, edgeSize = AS.Mult, insets = { left = 0, right = 0, top = 0, bottom = 0 } }
@@ -193,11 +193,11 @@ function AS:SetTemplate(Frame, Template, Texture)
 	Frame:SetBackdrop(Backdrop)
 
 	if not AS.PixelPerfect then
-		local BorderBackdrop = { edgeFile = AS.Blank, edgeSize = AS.Mult, insets = { left = AS.Mult, right = AS.Mult, top = AS.Mult, bottom = AS.Mult } }
+		Backdrop = { edgeFile = AS.Blank, edgeSize = AS.Mult, insets = { left = AS.Mult, right = AS.Mult, top = AS.Mult, bottom = AS.Mult } }
 
 		for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
 			Frame[Inset] = CreateFrame('Frame', nil, Frame)
-			Frame[Inset]:SetBackdrop(BorderBackdrop)
+			Frame[Inset]:SetBackdrop(Backdrop)
 			Frame[Inset]:SetBackdropBorderColor(0, 0, 0, 1)
 		end
 
@@ -638,7 +638,9 @@ function AS:SkinTab(Tab)
 
 	AS:CreateBackdrop(Tab)
 
-	Tab:GetFontString():SetTextColor(1, 1, 1)
+	if Tab.GetFontString then
+		Tab:GetFontString():SetTextColor(1, 1, 1)
+	end
 
 	Tab:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.Color)) end)
 	Tab:HookScript('OnLeave', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
