@@ -85,11 +85,48 @@ function AS:Blizzard_Collections(event, addon)
 		Button.unusable:SetAlpha(0)
 		Button.iconBorder:SetTexture('')
 		Button.background:SetTexture('')
-		Button.selectedTexture:SetTexture('')
+		Button.selectedTexture:SetAlpha(0)
 		Button.factionIcon:SetDrawLayer('OVERLAY')
 
 		AS:SkinTexture(Button.icon, true)
 		AS:StyleButton(Button.DragButton)
+		Button.DragButton.ActiveTexture:SetAlpha(0)
+
+		Button.pulseName = Button:CreateFontString(nil, 'OVERLAY', 'GameFontNormal')
+		Button.pulseName:SetJustifyH('LEFT')
+		Button.pulseName:SetSize(147, 25)
+		Button.pulseName:SetAllPoints(Button.name)
+		Button.pulseName:Hide()
+
+		Button.pulseName.anim = Button.pulseName:CreateAnimationGroup()
+		Button.pulseName.anim:SetToFinalAlpha(true)
+
+		Button.pulseName.anim.alphaout = Button.pulseName.anim:CreateAnimation("Alpha")
+		Button.pulseName.anim.alphaout:SetOrder(1)
+		Button.pulseName.anim.alphaout:SetFromAlpha(1)
+		Button.pulseName.anim.alphaout:SetToAlpha(0)
+		Button.pulseName.anim.alphaout:SetDuration(1)
+
+		Button.pulseName.anim.alphain = Button.pulseName.anim:CreateAnimation("Alpha")
+		Button.pulseName.anim.alphain:SetOrder(2)
+		Button.pulseName.anim.alphain:SetFromAlpha(0)
+		Button.pulseName.anim.alphain:SetToAlpha(1)
+		Button.pulseName.anim.alphain:SetDuration(1)
+
+		hooksecurefunc(Button.name, 'SetText', function(self, text)
+			Button.pulseName:SetText(text)
+			Button.pulseName:SetTextColor(unpack(AS.Color))
+		end)
+
+		Button:HookScript("OnUpdate", function(self)
+			if self.active then
+				Button.pulseName:Show()
+				Button.pulseName.anim:Play()
+			elseif Button.pulseName.anim:IsPlaying() then
+				Button.pulseName:Hide()
+				Button.pulseName.anim:Stop()
+			end
+		end)
 	end
 
 	-- Pet Journal
@@ -126,29 +163,24 @@ function AS:Blizzard_Collections(event, addon)
 		Button.name:SetPoint("TOPLEFT", Button.icon, "TOPRIGHT", 10, 2)
 		Button:HookScript("OnEnter", function(self)
 			self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
-			self.icon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 		end)
 
 		Button:HookScript("OnLeave", function(self)
 			if self.selected then
 				self.Backdrop:SetBackdropBorderColor(1, .8, .1)
-				self.icon.Backdrop:SetBackdropBorderColor(1, .8, .1)
 			else
 				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-				self.icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 		end)
 
 		hooksecurefunc(Button.selectedTexture, 'Show', function()
 			Button.name:SetTextColor(1, .8, .1)
 			Button.Backdrop:SetBackdropBorderColor(1, .8, .1)
-			Button.icon.Backdrop:SetBackdropBorderColor(1, .8, .1)
 		end)
 
 		hooksecurefunc(Button.selectedTexture, 'Hide', function()
 			Button.name:SetTextColor(1, 1, 1)
 			Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-			Button.icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end)
 
 		AS:SkinTexture(Button.icon, true)
@@ -321,6 +353,10 @@ function AS:Blizzard_Collections(event, addon)
 			Button.Backdrop:SetPoint('RIGHT', Button.name, 'RIGHT', 2, 0)
 			Button.slotFrameCollected:SetAlpha(0)
 			Button.slotFrameUncollected:SetAlpha(0)
+			Button.special:SetJustifyH('RIGHT')
+			Button.special:ClearAllPoints()
+			Button.special:SetPoint('BOTTOMRIGHT', Button.Backdrop, 'BOTTOMRIGHT', -2, 2)
+			print(Button.level:GetPoint())
 		end
 
 		Button.levelBackground:SetTexture(nil)
@@ -348,13 +384,14 @@ function AS:Blizzard_Collections(event, addon)
 	WardrobeCollectionFrame.FilterButton:SetPoint('LEFT', WardrobeCollectionFrame.searchBox, 'RIGHT', 2, 0)
 
 	for _, Frame in ipairs(WardrobeCollectionFrame.ContentFrames) do
-		AS:SkinFrame(Frame)
+		AS:StripTextures(Frame)
 		if Frame.Models then
 			for _, Model in pairs(Frame.Models) do
 				AS:SkinBackdropFrame(Model)
 				Model:SetFrameLevel(Model:GetFrameLevel() + 2)
-				Model.Backdrop:SetPoint('BOTTOMRIGHT', 2, -1)
+				Model.Backdrop:SetOutside(Model, 2, 2)
 				Model.Border:Kill()
+				Model.TransmogStateTexture:SetAlpha(0)
 				hooksecurefunc(Model.Border, 'SetAtlas', function(self, texture)
 					local r, g, b
 					if texture == "transmog-wardrobe-border-uncollected" then
@@ -368,11 +405,25 @@ function AS:Blizzard_Collections(event, addon)
 				end)
 			end
 		end
+		if Frame.PendingTransmogFrame then
+			Frame.PendingTransmogFrame.Glowframe:SetAtlas(nil)
+			AS:CreateBackdrop(Frame.PendingTransmogFrame.Glowframe)
+			Frame.PendingTransmogFrame.Glowframe.Backdrop:SetOutside()
+			Frame.PendingTransmogFrame.Glowframe.Backdrop:SetBackdropColor(0, 0, 0, 0)
+			Frame.PendingTransmogFrame.Glowframe.Backdrop:SetBackdropBorderColor(1, .77, 1, 1)
+			Frame.PendingTransmogFrame.Glowframe = Frame.PendingTransmogFrame.Glowframe.Backdrop
+
+			for i = 1, 12 do
+				Frame.PendingTransmogFrame['Wisp'..i]:Hide()
+			end
+		end
 		if Frame.PagingFrame then
 			AS:SkinArrowButton(Frame.PagingFrame.NextPageButton, 'right')
 			AS:SkinArrowButton(Frame.PagingFrame.PrevPageButton, 'left')
 		end
 	end
+
+	AS:SkinFrame(WardrobeCollectionFrame.ItemsCollectionFrame)
 
 	AS:SkinDropDownBox(WardrobeCollectionFrame.ItemsCollectionFrame.WeaponDropDown)
 
@@ -392,6 +443,7 @@ function AS:Blizzard_Collections(event, addon)
 
 	AS:SkinFrame(WardrobeTransmogFrame)
 	AS:CreateBackdrop(WardrobeTransmogFrame.MoneyMiddle)
+	AS:SkinButton(WardrobeTransmogFrame.Model.ClearAllPendingButton)
 
 	for _, Button in pairs(WardrobeTransmogFrame.Model.SlotButtons) do
 		AS:SkinBackdropFrame(Button)

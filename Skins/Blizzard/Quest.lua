@@ -35,15 +35,13 @@ function AS:Blizzard_Quest()
 	AS:StripTextures(QuestInfoItemHighlight)
 
 	hooksecurefunc("QuestInfoItem_OnClick", function(self)
-		local parent = self:GetParent()
-		for i = 1, #parent.RewardButtons do
-			local questItem = QuestInfoRewardsFrame.RewardButtons[i]
-			if (questItem == self) then
-				questItem.Backdrop:SetBackdropBorderColor(1,.9,.1)
-				questItem.Name:SetTextColor(1, .8, .1)
-			else
-				questItem.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-				questItem.Name:SetTextColor(1, 1, 1)
+		self.Backdrop:SetBackdropBorderColor(1,.9,.1)
+		self.Name:SetTextColor(1, .8, .1)
+
+		for _, Button in ipairs(QuestInfoRewardsFrame.RewardButtons) do
+			if (Button ~= self) then
+				Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+				Button.Name:SetTextColor(1, 1, 1)
 			end
 		end
 	end)
@@ -70,13 +68,10 @@ function AS:Blizzard_Quest()
 	local function HandleReward(frame)
 		if (not frame) then return end
 
-		if not frame.Backdrop then
-			AS:CreateBackdrop(frame)
-		end
-
 		if frame.Icon then
 			AS:SkinTexture(frame.Icon, true)
 
+			AS:CreateBackdrop(frame)
 			frame.Backdrop:SetPoint('TOPLEFT', frame.Icon, 'TOPRIGHT', -1, 0)
 			frame.Backdrop:SetPoint('BOTTOMLEFT', frame.Icon, 'BOTTOMRIGHT', -1, 0)
 			frame.Backdrop:SetPoint('RIGHT', frame, 'RIGHT', -5, 0)

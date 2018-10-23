@@ -7,8 +7,8 @@ function AS:Talentless()
 		for _, Button in pairs(self.Specs) do
 			AS:SkinButton(Button)
 			Button:SetBackdropColor(0, 0, 0, 0)
+			Button:SetCheckedTexture('')
 			AS:StyleButton(Button)
-			Button:GetCheckedTexture():SetAlpha(0)
 			if Button:GetChecked() then
 				Button:SetBackdropBorderColor(.2, .5, .1)
 			end
