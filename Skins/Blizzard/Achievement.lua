@@ -21,6 +21,16 @@ function AS:SkinAchievement(Achievement, BiggerIcon)
 
 	Achievement.icon.texture:SetInside()
 
+	if Achievement.titleBar then
+		hooksecurefunc(Achievement.titleBar, 'SetTexture', function(self, texture)
+			if texture == [[Interface\AchievementFrame\AccountLevel-AchievementHeader]] then
+				Achievement.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
+			else
+				Achievement.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end)
+	end
+
 	if Achievement.highlight then
 		AS:StripTextures(Achievement.highlight, true)
 		Achievement:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(1, .8, .1) end)
@@ -206,28 +216,9 @@ function AS:Blizzard_AchievementUI(event, addon)
 		hooksecurefunc(Stats.background, 'SetBlendMode', function(self, blend) if blend == 'BLEND' then self:Hide() else self:Show() end end)
 	end
 
-	hooksecurefunc('AchievementButton_DisplayAchievement', function(Achievement)
-		if Achievement.Backdrop then
-			if Achievement.accountWide then
-				Achievement.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
-			else
-				Achievement.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end
-		end
-	end)
-
 	hooksecurefunc('AchievementFrameSummary_UpdateAchievements', function()
-		for i = 1, ACHIEVEMENTUI_MAX_SUMMARY_ACHIEVEMENTS do
-			local Achievement = _G["AchievementFrameSummaryAchievement"..i]
+		for _, Achievement in pairs(AchievementFrameSummaryAchievements.buttons) do
 			AS:SkinAchievement(Achievement)
-
-			if Achievement.Backdrop then
-				if Achievement.accountWide then
-					Achievement.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
-				else
-					Achievement.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-				end
-			end
 		end
 	end)
 
@@ -248,36 +239,24 @@ function AS:Blizzard_AchievementUI(event, addon)
 
 	hooksecurefunc("AchievementObjectives_DisplayCriteria", function(objectivesFrame, id)
 		local numCriteria = GetAchievementNumCriteria(id)
-		local textStrings, metas = 0, 0
+		local textStrings, metas, criteria, object = 0, 0
 		for i = 1, numCriteria do
-			local criteriaString, criteriaType, completed, quantity, reqQuantity, charName, flags, assetID, quantityString = GetAchievementCriteriaInfo(id, i)
+			local _, criteriaType, completed, _, _, _, _, assetID = GetAchievementCriteriaInfo(id, i)
 
 			if ( criteriaType == CRITERIA_TYPE_ACHIEVEMENT and assetID ) then
 				metas = metas + 1
-				local metaCriteria = AchievementButton_GetMeta(metas)
-				if ( objectivesFrame.completed and completed ) then
-					metaCriteria.label:SetShadowOffset(0, 0)
-					metaCriteria.label:SetTextColor(1, 1, 1, 1)
-				elseif ( completed ) then
-					metaCriteria.label:SetShadowOffset(1, -1)
-					metaCriteria.label:SetTextColor(0, 1, 0, 1)
-				else
-					metaCriteria.label:SetShadowOffset(1, -1)
-					metaCriteria.label:SetTextColor(.6, .6, .6, 1)
-				end
+				criteria, object = AchievementButton_GetMeta(metas), 'label'
 			elseif criteriaType ~= 1 then
 				textStrings = textStrings + 1
-				local criteria = AchievementButton_GetCriteria(textStrings)
-				if ( objectivesFrame.completed and completed ) then
-					criteria.name:SetTextColor(1, 1, 1, 1)
-					criteria.name:SetShadowOffset(0, 0)
-				elseif ( completed ) then
-					criteria.name:SetTextColor(0, 1, 0, 1)
-					criteria.name:SetShadowOffset(1, -1)
-				else
-					criteria.name:SetTextColor(.6, .6, .6, 1)
-					criteria.name:SetShadowOffset(1, -1)
-				end
+				criteria, object = AchievementButton_GetCriteria(textStrings), 'name'
+			end
+
+			if ( objectivesFrame.completed and completed ) then
+				criteria[object]:SetTextColor(1, 1, 1)
+			elseif ( completed ) then
+				criteria[object]:SetTextColor(0, 1, 0)
+			else
+				criteria[object]:SetTextColor(.6, .6, .6)
 			end
 		end
 	end)
