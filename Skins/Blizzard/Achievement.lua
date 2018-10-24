@@ -9,7 +9,7 @@ function AS:SkinAchievement(Achievement, BiggerIcon)
 	Achievement.Backdrop:SetInside(Achievement, 2, 2)
 
 	AS:SetTemplate(Achievement.icon)
-	local Size = BiggerIcon and 64 or 38
+	local Size = BiggerIcon and 54 or 38
 	Achievement.icon:SetSize(Size, Size)
 	Achievement.icon:ClearAllPoints()
 	Achievement.icon:SetPoint("LEFT", 6, 0)
@@ -75,8 +75,12 @@ function AS:SkinAchievementStatusBar(StatusBar)
 	end
 
 	if text then
-		text:SetPoint("RIGHT", -4, 0)
-		text:SetTextColor(1, 1, 1)
+		if not (title and label) then
+			text:SetPoint("CENTER", StatusBar, "CENTER", 0, -1)
+		else
+			text:SetPoint("RIGHT", -4, 0)
+			text:SetTextColor(1, 1, 1)
+		end
 	end
 end
 
@@ -206,7 +210,7 @@ function AS:Blizzard_AchievementUI(event, addon)
 		end
 	end)
 
-	hooksecurefunc('AchievementFrameSummary_UpdateAchievements', function(...)
+	hooksecurefunc('AchievementFrameSummary_UpdateAchievements', function()
 		for i = 1, ACHIEVEMENTUI_MAX_SUMMARY_ACHIEVEMENTS do
 			local Achievement = _G["AchievementFrameSummaryAchievement"..i]
 			AS:SkinAchievement(Achievement)
@@ -233,17 +237,6 @@ function AS:Blizzard_AchievementUI(event, addon)
 		local frame = _G["AchievementFrameProgressBar"..index]
 		if frame and not frame.Backdrop then
 			AS:SkinStatusBar(frame)
-
-			frame.text:ClearAllPoints()
-			frame.text:SetPoint("CENTER", frame, "CENTER", 0, -1)
-			frame.text:SetJustifyH("CENTER")
-
-			if index > 1 then
-				frame:ClearAllPoints()
-				frame:SetPoint("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
-				frame.SetPoint = function() end
-				frame.ClearAllPoints = function() end
-			end
 		end
 	end)
 
