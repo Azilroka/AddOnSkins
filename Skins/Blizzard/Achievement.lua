@@ -59,7 +59,7 @@ end
 
 function AS:SkinAchievementStatusBar(StatusBar)
 	AS:SkinStatusBar(StatusBar)
-	StatusBar:SetStatusBarColor(0/255, 100/255, 0/255)
+	StatusBar:SetStatusBarColor(.1, .39, .1)
 
 	local StatusBarName = StatusBar:GetName()
 	local title, label, text = StatusBar.title or _G[StatusBarName..'Title'], StatusBar.label or _G[StatusBarName..'Label'], StatusBar.text or _G[StatusBarName..'Text']
@@ -79,8 +79,8 @@ function AS:SkinAchievementStatusBar(StatusBar)
 			text:SetPoint("CENTER", StatusBar, "CENTER", 0, -1)
 		else
 			text:SetPoint("RIGHT", -4, 0)
-			text:SetTextColor(1, 1, 1)
 		end
+		text:SetTextColor(1, 1, 1)
 	end
 end
 
@@ -122,13 +122,15 @@ function AS:Blizzard_AchievementUI(event, addon)
 	AS:SkinCloseButton(AchievementFrameCloseButton)
 	AchievementFrameCloseButton:SetPoint("TOPRIGHT", AchievementFrame, "TOPRIGHT", 5, 6)
 
-	AS:SkinFrame(AchievementFrameCategories, nil, nil, true)
+	AS:SkinBackdropFrame(AchievementFrameCategories, nil, nil, true)
+	AchievementFrameCategories.Backdrop:SetPoint('TOPLEFT', AchievementFrameCategories, 'TOPLEFT', 2, -2)
+	AchievementFrameCategories.Backdrop:SetPoint('BOTTOMRIGHT', AchievementFrameCategories, 'BOTTOMRIGHT', -2, 2)
 	AchievementFrameCategories.SetBackdrop = AS.Noop
 
 	AS:StripTextures(AchievementFrameHeader, true)
 	AS:SkinBackdropFrame(AchievementFrameSummary, nil, nil, true)
-	AchievementFrameSummary.Backdrop:SetPoint('TOPLEFT', 1, -1)
-	AchievementFrameSummary.Backdrop:SetPoint('BOTTOMRIGHT', -1, 0)
+	AchievementFrameSummary.Backdrop:SetPoint('TOPLEFT', 1, -3)
+	AchievementFrameSummary.Backdrop:SetPoint('BOTTOMRIGHT', -1, 2)
 
 	AS:StripTextures(AchievementFrameSummaryCategoriesHeader, true)
 	AS:StripTextures(AchievementFrameSummaryAchievementsHeader, true)
@@ -144,7 +146,11 @@ function AS:Blizzard_AchievementUI(event, addon)
 	AchievementFrameFilterDropDownText:SetJustifyH('RIGHT')
 	AchievementFrameFilterDropDownText:ClearAllPoints()
 	AchievementFrameFilterDropDownText:SetPoint('RIGHT', AchievementFrameFilterDropDown, 'RIGHT', -34, 0)
-	AchievementFrameFilterDropDown:SetPoint("TOPLEFT", AchievementFrame, "TOPLEFT", 100, 7)
+	AchievementFrameFilterDropDown:ClearAllPoints()
+	AchievementFrameFilterDropDown:SetPoint("TOPLEFT", AchievementFrame, "TOPLEFT", 98, 7)
+	AchievementFrameFilterDropDownButton:ClearAllPoints()
+	AchievementFrameFilterDropDownButton:SetPoint("TOPRIGHT", AchievementFrameFilterDropDown, "TOPRIGHT", -14, -8)
+	AchievementFrameFilterDropDownButton.SetWidth = AS.Noop
 
 	AchievementFrameComparisonHeader:SetPoint("BOTTOMRIGHT", AchievementFrameComparison, "TOPRIGHT", 45, -20)
 
@@ -164,8 +170,8 @@ function AS:Blizzard_AchievementUI(event, addon)
 	AS:SkinAchievementStatusBar(AchievementFrameComparisonSummaryFriendStatusBar)
 
 	AS:SkinBackdropFrame(AchievementFrameAchievementsContainer, nil, nil, true)
-	AchievementFrameAchievementsContainer.Backdrop:SetPoint('TOPLEFT', AchievementFrameCategories, 'TOPRIGHT', 2, 0)
-	AchievementFrameAchievementsContainer.Backdrop:SetPoint('BOTTOMLEFT', AchievementFrameCategories, 'BOTTOMRIGHT', 2, 0)
+	AchievementFrameAchievementsContainer.Backdrop:SetPoint('TOPLEFT', AchievementFrameAchievementsContainer, 'TOPLEFT', -2, 1)
+	AchievementFrameAchievementsContainer.Backdrop:SetPoint('BOTTOMRIGHT', AchievementFrameAchievementsContainer, 'BOTTOMRIGHT', 0, -3)
 
 	AS:SkinScrollBar(AchievementFrameCategoriesContainerScrollBar)
 	AS:SkinScrollBar(AchievementFrameAchievementsContainerScrollBar)
