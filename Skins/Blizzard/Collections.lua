@@ -356,10 +356,12 @@ function AS:Blizzard_Collections(event, addon)
 			Button.special:SetJustifyH('RIGHT')
 			Button.special:ClearAllPoints()
 			Button.special:SetPoint('BOTTOMRIGHT', Button.Backdrop, 'BOTTOMRIGHT', -2, 2)
-			print(Button.level:GetPoint())
 		end
 
 		Button.levelBackground:SetTexture(nil)
+
+		Button.name:SetPoint('LEFT', Button, 'RIGHT', 4, 8)
+		Button.level:SetPoint('TOPLEFT', Button.levelBackground,'TOPLEFT', 25, 2)
 
 		Button.SetTextColor = nil
 		if C_Heirloom.PlayerHasHeirloom(Button.itemID) then

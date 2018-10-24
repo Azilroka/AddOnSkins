@@ -9,7 +9,8 @@ function AS:SkinAchievement(Achievement, BiggerIcon)
 	Achievement.Backdrop:SetInside(Achievement, 2, 2)
 
 	AS:SetTemplate(Achievement.icon)
-	Achievement.icon:SetSize(BiggerIcon and 54 or 38, BiggerIcon and 54 or 38)
+	local Size = BiggerIcon and 64 or 38
+	Achievement.icon:SetSize(Size, Size)
 	Achievement.icon:ClearAllPoints()
 	Achievement.icon:SetPoint("LEFT", 6, 0)
 
