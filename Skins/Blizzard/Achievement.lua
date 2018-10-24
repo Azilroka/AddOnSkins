@@ -94,23 +94,6 @@ function AS:SkinAchievementStatusBar(StatusBar)
 	end
 end
 
---if template == "ComparisonTemplate" then
---	for _, Achievement in pairs(frame.buttons) do
---		AS:SkinAchievement(Achievement.player)
---		AS:SkinAchievement(Achievement.friend)
-
---		hooksecurefunc(Achievement.player, 'Saturate', function()
---			if Achievement.player.accountWide then
---				Achievement.player.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
---				Achievement.friend.Backdrop:SetBackdropBorderColor(ACHIEVEMENTUI_BLUEBORDER_R, ACHIEVEMENTUI_BLUEBORDER_G, ACHIEVEMENTUI_BLUEBORDER_B)
---			else
---				Achievement.player.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
---				Achievement.friend.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
---			end
---		end)
---	end
---end
-
 function AS:Blizzard_AchievementUI(event, addon)
 	if addon ~= 'Blizzard_AchievementUI' then return end
 
@@ -183,6 +166,10 @@ function AS:Blizzard_AchievementUI(event, addon)
 	AchievementFrameAchievementsContainer.Backdrop:SetPoint('TOPLEFT', AchievementFrameAchievementsContainer, 'TOPLEFT', -2, 1)
 	AchievementFrameAchievementsContainer.Backdrop:SetPoint('BOTTOMRIGHT', AchievementFrameAchievementsContainer, 'BOTTOMRIGHT', 0, -3)
 
+	AS:SkinBackdropFrame(AchievementFrameComparisonContainer, nil, nil, true)
+	AchievementFrameComparisonContainer.Backdrop:SetPoint('TOPLEFT', AchievementFrameComparisonContainer, 'TOPLEFT', -2, 1)
+	AchievementFrameComparisonContainer.Backdrop:SetPoint('BOTTOMRIGHT', AchievementFrameComparisonContainer, 'BOTTOMRIGHT', 0, -3)
+
 	AS:SkinScrollBar(AchievementFrameCategoriesContainerScrollBar)
 	AS:SkinScrollBar(AchievementFrameAchievementsContainerScrollBar)
 	AS:SkinScrollBar(AchievementFrameStatsContainerScrollBar)
@@ -214,6 +201,11 @@ function AS:Blizzard_AchievementUI(event, addon)
 		Stats.background:SetAlpha(.3)
 		Stats.background.SetAlpha = AS.Noop
 		hooksecurefunc(Stats.background, 'SetBlendMode', function(self, blend) if blend == 'BLEND' then self:Hide() else self:Show() end end)
+	end
+
+	for _, Achievement in pairs(AchievementFrameComparisonContainer.buttons) do
+		AS:SkinAchievement(Achievement.player)
+		AS:SkinAchievement(Achievement.friend)
 	end
 
 	hooksecurefunc('AchievementFrameSummary_UpdateAchievements', function()
