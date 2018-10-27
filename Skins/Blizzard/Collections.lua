@@ -130,6 +130,9 @@ function AS:Blizzard_Collections(event, addon)
 	end
 
 	-- Pet Journal
+
+	PetJournalTutorialButton:Kill()
+
 	AS:SkinFrame(PetJournal.PetCount)
 
 	for _, Button in pairs({ 'HealPetButton', 'SummonRandomFavoritePetButton'}) do
