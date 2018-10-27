@@ -23,7 +23,7 @@ function AS:WeakAuras()
 		end
 
 		if frame.icon then
-			if frame.keepAspectRatio == true then
+			if type(frame.keepAspectRatio) == 'boolean' and frame.keepAspectRatio == true then
 				frame.icon.SetTexCoord = nil
 			else
 				AS:SkinTexture(frame.icon)
