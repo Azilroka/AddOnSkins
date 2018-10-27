@@ -1,8 +1,30 @@
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_ChatBubbles()
-	--local noscalemult = AS.Mult * UIParent:GetScale()
-	local bubbles = {}
+	local messageToGUID, messageToSender = {}, {}
+
+	local EventFrame = CreateFrame('Frame')
+	EventFrame:RegisterEvent("CHAT_MSG_SAY")
+	EventFrame:RegisterEvent("CHAT_MSG_YELL")
+	EventFrame:RegisterEvent("CHAT_MSG_MONSTER_SAY")
+	EventFrame:RegisterEvent("CHAT_MSG_MONSTER_YELL")
+	EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+	EventFrame:SetScript("OnEvent", function(self, event, msg, sender, _, _, _, _, _, _, _, _, _, guid)
+		if event == 'PLAYER_ENTERING_WORLD' then
+			wipe(messageToGUID)
+			wipe(messageToSender)
+		else
+			messageToGUID[msg] = guid
+			messageToSender[msg] = Ambiguate(sender, "none")
+		end
+	end)
+
+	local ChatBackdrop = {
+			bgFile = AS.Blank,
+			edgeFile = AS.Blank,
+			tile = false, tileSize = 0, edgeSize = AS.Mult,
+			insets = {left = -AS.Mult, right = -AS.Mult, top = -AS.Mult, bottom = -AS.Mult}
+		}
 
 	local function SkinChatBubble(frame)
 		for i = 1, frame:GetNumRegions() do
@@ -14,18 +36,38 @@ function AS:Blizzard_ChatBubbles()
 			end
 		end
 
-		frame:SetBackdrop({
-			bgFile = AS.Blank,
-			edgeFile = AS.Blank,
-			tile = false, tileSize = 0, edgeSize = AS.Mult,
-			insets = {left = -AS.Mult, right = -AS.Mult, top = -AS.Mult, bottom = -AS.Mult}
-		})
+		frame:SetBackdrop(ChatBackdrop)
 		frame:SetBackdropBorderColor(unpack(AS.BorderColor))
 		frame:SetBackdropColor(.1, .1, .1, .8)
 
-		frame.text:SetFont(AS.Font, 14)
+		frame.name = frame:CreateFontString(nil, "BORDER")
+		frame.name:SetPoint("TOPLEFT", 5, 5)
+		frame.name:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", -5, -5)
+		frame.name:SetJustifyH("LEFT")
+		frame.name:SetFont(AS.Font, 14, 'OUTLINE')
 
-		tinsert(bubbles, frame)
+		frame:HookScript("OnUpdate", function(self)
+			local r, g, b = self.text:GetTextColor()
+			frame:SetBackdropBorderColor(r, g, b, .8)
+
+			local text = self.text:GetText()
+			if self.name then
+				self.name:SetText("")
+				local color
+				local guid = messageToGUID[text]
+				if guid ~= nil and guid ~= "" then
+					local _, class = GetPlayerInfoByGUID(guid)
+					if class then
+						color = (CUSTOM_CLASS_COLORS and CUSTOM_CLASS_COLORS[class] and CUSTOM_CLASS_COLORS[class].colorStr) or (RAID_CLASS_COLORS[class] and RAID_CLASS_COLORS[class].colorStr)
+					end
+				end
+				if messageToSender[text] then
+					self.name:SetFormattedText("|c%s%s|r", color or "ffffffff", messageToSender[text])
+				end
+			end
+		end)
+
+		frame.isSkinned = true
 	end
 
 	local function IsChatBubble(frame)
@@ -42,31 +84,13 @@ function AS:Blizzard_ChatBubbles()
 		return false
 	end
 
-	local LastUpdate = -2
-	local Children = 0
-
-	WorldFrame:HookScript("OnUpdate", function(self, elapsed)
-		LastUpdate = LastUpdate + elapsed
-		if (LastUpdate < .1) then return end
-		LastUpdate = 0
-
-		local Count = WorldFrame:GetNumChildren()
-		if (Count ~= Children) then
-			for i = Children + 1, Count do
-				local frame = select(i, WorldFrame:GetChildren())
-
-				if IsChatBubble(frame) then
-					SkinChatBubble(frame)
-				end
+	AS:ScheduleRepeatingTimer(function()
+		for _, chatBubble in pairs(C_ChatBubbles.GetAllChatBubbles()) do
+			if not chatBubble.isSkinned then
+				SkinChatBubble(chatBubble)
 			end
-			Children = Count
 		end
-
-		for _, frame in next, bubbles do
-			local r, g, b = frame.text:GetTextColor()
-			frame:SetBackdropBorderColor(r, g, b, .8)
-		end
-	end)
+	end, .1)
 end
 
 AS:RegisterSkin('Blizzard_ChatBubbles', AS.Blizzard_ChatBubbles)
