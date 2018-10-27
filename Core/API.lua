@@ -52,6 +52,7 @@ AS.Blizzard.Regions = {
 AS.Blizzard.Frames = {
 	'Inset',
 	'inset',
+	'InsetFrame',
 	'LeftInset',
 	'RightInset',
 	'NineSlice',
@@ -60,6 +61,7 @@ AS.Blizzard.Frames = {
 	'BottomInset',
 	'bgLeft',
 	'bgRight',
+	'FilligreeOverlay',
 }
 
 AS.Blizzard.Tooltip = {
@@ -77,7 +79,7 @@ AS.Blizzard.Tooltip = {
 }
 
 function AS:StripTextures(Frame, Kill, Alpha)
-	local FrameName = Frame:GetName()
+	local FrameName = Frame.GetName and Frame:GetName()
 	for _, Blizzard in pairs(AS.Blizzard.Frames) do
 		local BlizzFrame = Frame[Blizzard] or FrameName and _G[FrameName..Blizzard]
 		if BlizzFrame then
@@ -210,7 +212,7 @@ function AS:SetTemplate(Frame, Template, Texture)
 	local R, G, B = unpack(AS.BackdropColor)
 	local Alpha = (Template == 'Transparent' and .8 or 1)
 
-	if AS:CheckAddOn('ElvUI') then
+	if AS:CheckOption('ElvUISkinModule', 'ElvUI') then
 		if Template == 'Transparent' then
 			R, G, B, Alpha = unpack(ElvUI[1]['media'].backdropfadecolor)
 		else
@@ -299,7 +301,7 @@ end
 function AS:SkinButton(Button, Strip)
 	if Button.isSkinned then return end
 
-	local ButtonName = Button:GetName()
+	local ButtonName = Button.GetName and Button:GetName()
 
 	if Strip then
 		AS:StripTextures(Button)
@@ -427,7 +429,7 @@ end
 function AS:SkinDropDownBox(Frame, Width)
 	if Frame.Backdrop then return end
 
-	local FrameName = Frame:GetName()
+	local FrameName = Frame.GetName and Frame:GetName()
 
 	local Button = FrameName and _G[FrameName..'Button'] or Frame.Button
 	local Text = FrameName and _G[FrameName..'Text'] or Frame.Text
@@ -462,7 +464,7 @@ end
 function AS:SkinEditBox(EditBox, Width, Height)
 	if EditBox.Backdrop then return end
 
-	local EditBoxName = EditBox:GetName()
+	local EditBoxName = EditBox.GetName and EditBox:GetName()
 
 	for _, Region in pairs(AS.Blizzard.Regions) do
 		if EditBoxName and _G[EditBoxName..Region] then
@@ -493,7 +495,7 @@ end
 function AS:SkinIconButton(Button)
 	if Button.isSkinned then return end
 
-	local ButtonName = Button:GetName()
+	local ButtonName = Button.GetName and Button:GetName()
 	local Icon, Texture = Button.icon or Button.Icon or ButtonName and (_G[ButtonName..'Icon'] or _G[ButtonName..'IconTexture'])
 
 	if Icon then
@@ -591,14 +593,14 @@ end
 
 local function GrabScrollBarElement(frame, element)
 	local FrameName = frame:GetName()
-	return FrameName and _G[FrameName..element] or frame[element] or nil
+	return FrameName and (_G[FrameName..element] or strfind(FrameName, element)) or frame[element] or nil
 end
 
 function AS:SkinScrollBar(Frame)
 	if Frame.Backdrop then return end
 
-	local ScrollUpButton = GrabScrollBarElement(Frame, 'ScrollUpButton') or GrabScrollBarElement(Frame, 'UpButton')
-	local ScrollDownButton = GrabScrollBarElement(Frame, 'ScrollDownButton') or GrabScrollBarElement(Frame, 'DownButton')
+	local ScrollUpButton = GrabScrollBarElement(Frame, 'ScrollUpButton') or GrabScrollBarElement(Frame, 'UpButton') or GrabScrollBarElement(Frame, 'ScrollUp')
+	local ScrollDownButton = GrabScrollBarElement(Frame, 'ScrollDownButton') or GrabScrollBarElement(Frame, 'DownButton') or GrabScrollBarElement(Frame, 'ScrollDown')
 	local Thumb = GrabScrollBarElement(Frame, 'ThumbTexture') or GrabScrollBarElement(Frame, 'thumbTexture') or Frame.GetThumbTexture and Frame:GetThumbTexture()
 
 	AS:SkinBackdropFrame(Frame)
@@ -608,7 +610,7 @@ function AS:SkinScrollBar(Frame)
 
 	for _, Button in pairs({ ScrollUpButton, ScrollDownButton }) do
 		if Button then
-			AS:SkinArrowButton(Button)
+			AS:SkinArrowButton(Button, Button == ScrollUpButton and 'up' or 'down')
 		end
 	end
 
