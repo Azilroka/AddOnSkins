@@ -745,13 +745,12 @@ function AS:SkinBackdropFrame(frame, template, override, kill, setpoints)
 end
 
 function AS:SkinStatusBar(frame, ClassColor)
-	local Color = { frame:GetStatusBarColor() }
 	AS:SkinBackdropFrame(frame)
 	frame:SetStatusBarTexture(AS.NormTex)
 	if ClassColor then
 		frame:SetStatusBarColor(unpack(AS.ClassColor))
 	else
-		frame:SetStatusBarColor(unpack(Color))
+		frame:SetStatusBarColor(unpack(frame.GetStatusBarColor and { frame:GetStatusBarColor() } or AS.Color))
 	end
 	if AS:CheckAddOn('ElvUI') then
 		ElvUI[1]:RegisterStatusBar(frame)
