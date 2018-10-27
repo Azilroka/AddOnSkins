@@ -84,8 +84,10 @@ function AS:Blizzard_GuildUI(event, addon)
 	AS:SkinFrame(GuildFrame, nil, nil, true)
 	AS:CreateShadow(GuildFrame)
 
+	AS:SkinCloseButton(GuildFrame.CloseButton)
+
+	-- GuildPointFrame
 	AS:SkinCloseButton(GuildMemberDetailCloseButton)
-	AS:SkinCloseButton(GuildFrameCloseButton)
 
 	AS:StripTextures(GuildAllPerksFrame)
 	AS:StripTextures(GuildMemberDetailFrame)
@@ -268,22 +270,17 @@ function AS:Blizzard_GuildControlUI(event, addon)
 	AS:CreateShadow(GuildControlUI)
 
 	local function SkinGuildRanks()
-		for i=1, GuildControlGetNumRanks() do
+		for i = 1, GuildControlGetNumRanks() do
 			local rankFrame = _G["GuildControlUIRankOrderFrameRank"..i]
 			if rankFrame then
-				AS:SkinButton(rankFrame.downButton)
-				AS:SkinButton(rankFrame.upButton)
+				AS:SkinArrowButton(rankFrame.downButton)
+				AS:SkinArrowButton(rankFrame.upButton)
 				AS:SkinButton(rankFrame.deleteButton)
-
-				if not rankFrame.nameBox.backdrop then
-					AS:SkinEditBox(rankFrame.nameBox)
-				end
-
-				rankFrame.nameBox.Backdrop:SetPoint("TOPLEFT", -2, -4)
-				rankFrame.nameBox.Backdrop:SetPoint("BOTTOMRIGHT", -4, 4)
+				AS:SkinEditBox(rankFrame.nameBox)
 			end
 		end
 	end
+
 	hooksecurefunc("GuildControlUI_RankOrder_Update", SkinGuildRanks)
 
 	GuildControlUIRankOrderFrameNewButton:HookScript("OnClick", function()
@@ -368,12 +365,8 @@ function AS:Blizzard_GuildBankUI(event, addon)
 			Button.icon:SetInside()
 			AS:SkinTexture(Button.icon)
 			Button.IconBorder:SetAlpha(0)
-			hooksecurefunc(Button.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
-				Button:SetBackdropBorderColor(r, g, b)
-			end)
-			hooksecurefunc(Button.IconBorder, 'Hide', function(self)
-				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end)
+			hooksecurefunc(Button.IconBorder, 'SetVertexColor', function(self, r, g, b) Button:SetBackdropBorderColor(r, g, b) end)
+			hooksecurefunc(Button.IconBorder, 'Hide', function(self) Button:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 		end
 	end
 
@@ -412,6 +405,69 @@ function AS:Blizzard_GuildBankUI(event, addon)
 	AS:UnregisterSkinEvent(addon, event)
 end
 
+function AS:Blizzard_LookingForGuildUI(event, addon)
+	if addon ~= 'Blizzard_LookingForGuildUI' then return end
+
+	LookingForGuildFrame_CreateUIElements() -- Make sure it's created.
+
+	AS:SkinFrame(LookingForGuildFrame)
+	AS:SkinFrame(LookingForGuildFrame.Inset)
+
+	for _, v in pairs({ LookingForGuildPvPButton, LookingForGuildWeekendsButton, LookingForGuildWeekdaysButton, LookingForGuildRPButton, LookingForGuildRaidButton, LookingForGuildQuestButton, LookingForGuildDungeonButton }) do
+		AS:SkinCheckBox(v)
+	end
+
+	AS:SkinCheckBox(LookingForGuildTankButton.checkButton)
+	AS:SkinCheckBox(LookingForGuildHealerButton.checkButton)
+	AS:SkinCheckBox(LookingForGuildDamagerButton.checkButton)
+
+	AS:SkinScrollBar(LookingForGuildBrowseFrameContainerScrollBar)
+	AS:SkinButton(LookingForGuildBrowseButton)
+	AS:SkinButton(LookingForGuildRequestButton)
+	AS:SkinCloseButton(LookingForGuildFrameCloseButton)
+	AS:SkinBackdropFrame(LookingForGuildCommentInputFrame)
+
+	AS:SkinFrame(GuildFinderRequestMembershipFrame)
+	AS:SkinFrame(GuildFinderRequestMembershipFrameInputFrame)
+	AS:SkinButton(GuildFinderRequestMembershipFrameAcceptButton)
+	AS:SkinButton(GuildFinderRequestMembershipFrameCancelButton)
+
+	AS:SkinFrame(LookingForGuildAvailabilityFrame)
+	AS:SkinFrame(LookingForGuildCommentFrame)
+	AS:SkinFrame(LookingForGuildInterestFrame)
+	AS:SkinFrame(LookingForGuildRolesFrame)
+
+	for i = 1, 3 do
+		AS:SkinButton(_G["LookingForGuildFrameTab"..i])
+	end
+
+	for i = 1, 5 do
+		local Browse = _G["LookingForGuildBrowseFrameContainerButton"..i]
+		local App = _G["LookingForGuildAppsFrameContainerButton"..i]
+
+		Browse:SetBackdrop(nil)
+		AS:CreateBackdrop(Browse)
+		Browse.Backdrop:SetInside()
+		Browse.selectedTex:SetAlpha(0)
+		Browse:SetHighlightTexture('')
+
+		Browse:HookScript("OnEnter", function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.Color)) end)
+		Browse:HookScript("OnLeave", function(self)
+			if Browse.selectedTex:IsShown() then
+				self.Backdrop:SetBackdropBorderColor(1, .8, .1)
+			else
+				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end)
+
+		hooksecurefunc(Browse.selectedTex, 'Show', function() Browse.Backdrop:SetBackdropBorderColor(1, .8, .1) end)
+		hooksecurefunc(Browse.selectedTex, 'Hide', function() Browse.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+
+		App:SetBackdrop(nil)
+	end
+end
+
 AS:RegisterSkin('Blizzard_GuildUI', AS.Blizzard_GuildUI, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_GuildControlUI', AS.Blizzard_GuildControlUI, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_GuildBankUI', AS.Blizzard_GuildBankUI, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_LookingForGuildUI', AS.Blizzard_LookingForGuildUI, 'ADDON_LOADED')
