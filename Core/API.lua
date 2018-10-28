@@ -262,7 +262,7 @@ function AS:SkinArrowButton(Button, Arrow)
 		local Mask = Button:CreateMaskTexture()
 		Mask:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
 		Mask:SetRotation(AS.ArrowRotation[Arrow])
-		Mask:SetSize(Button:GetWidth() / 2, Button:GetHeight() / 2)
+		Mask:SetSize(Button:GetWidth() / 1.5, Button:GetHeight() / 1.5)
 		Mask:SetPoint('CENTER')
 
 		Button.Mask = Mask
@@ -593,7 +593,7 @@ end
 
 local function GrabScrollBarElement(frame, element)
 	local FrameName = frame:GetName()
-	return FrameName and (_G[FrameName..element] or strfind(FrameName, element)) or frame[element] or nil
+	return frame[element] or FrameName and (_G[FrameName..element] or strfind(FrameName, element)) or nil
 end
 
 function AS:SkinScrollBar(Frame)
