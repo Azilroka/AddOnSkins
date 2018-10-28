@@ -86,4 +86,12 @@ function AS:Blizzard_Merchant()
 	end)
 end
 
+function AS:Blizzard_StackSplit()
+	AS:SkinFrame(StackSplitFrame)
+	AS:CreateShadow(StackSplitFrame)
+	AS:SkinButton(StackSplitOkayButton)
+	AS:SkinButton(StackSplitCancelButton)
+end
+
 AS:RegisterSkin('Blizzard_Merchant', AS.Blizzard_Merchant)
+AS:RegisterSkin('Blizzard_StackSplit', AS.Blizzard_StackSplit)
