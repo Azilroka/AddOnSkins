@@ -227,6 +227,10 @@ function AS:SetTemplate(Frame, Template, Texture)
 		end
 	end
 
+	if Template == 'ClassColor' then
+		R, G, B = unpack(AS.ClassColor)
+	end
+
 	Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
 	Frame:SetBackdropColor(R, G, B, Alpha)
 end

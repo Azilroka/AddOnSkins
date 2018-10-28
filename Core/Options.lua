@@ -398,6 +398,7 @@ function AS:BuildOptions()
 						values = {
 							['Transparent'] = 'Transparent',
 							['Default'] = 'Default',
+							['ClassColor'] = 'Class Color',
 							['MerathilisUI'] = 'MerathilisUI',
 							['KlixUI'] = 'KlixUI',
 						}
