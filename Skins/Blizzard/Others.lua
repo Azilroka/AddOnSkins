@@ -97,6 +97,19 @@ function AS:Blizzard_Others()
 			AS:SkinButton(Button)
 		end
 	end
+
+	hooksecurefunc("UIDropDownMenu_CreateFrames", function()
+		local listFrame = _G["DropDownList1"];
+		local listFrameName = listFrame:GetName();
+		local index = listFrame and (listFrame.numButtons + 1) or 1;
+		local expandArrow = _G[listFrameName.."Button"..index.."ExpandArrow"];
+		if expandArrow then
+			expandArrow:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
+			expandArrow:SetSize(12, 12)
+			expandArrow:GetNormalTexture():SetVertexColor(NORMAL_FONT_COLOR:GetRGB())
+			expandArrow:GetNormalTexture():SetRotation(AS.ArrowRotation['right'])
+		end
+	end)
 end
 
 AS:RegisterSkin('Blizzard_Others', AS.Blizzard_Others)
