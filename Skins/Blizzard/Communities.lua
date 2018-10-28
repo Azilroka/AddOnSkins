@@ -193,17 +193,14 @@ function AS:Blizzard_Communities(event, addon)
 	AS:StripTextures(CommunitiesFrame.GuildDetailsFrame)
 	AS:SkinBackdropFrame(CommunitiesFrame.GuildDetailsFrame.Info)
 	CommunitiesFrame.GuildDetailsFrame.Info.Backdrop:SetPoint('TOPLEFT', 0, 0)
-	CommunitiesFrame.GuildDetailsFrame.Info.Backdrop:SetPoint('BOTTOMRIGHT', 10, 0)
+	CommunitiesFrame.GuildDetailsFrame.Info.Backdrop:SetPoint('BOTTOMRIGHT', 14, 0)
 
 	AS:SkinBackdropFrame(CommunitiesFrame.GuildDetailsFrame.News)
 	CommunitiesFrame.GuildDetailsFrame.News.Backdrop:SetPoint('TOPLEFT', 0, 0)
 	CommunitiesFrame.GuildDetailsFrame.News.Backdrop:SetPoint('BOTTOMRIGHT', -10, 0)
 
-	--AS:CreateBackdrop(CommunitiesFrame.GuildDetailsFrame.Info.DetailsFrame)
-	--AS:SkinScrollBar(CommunitiesFrame.GuildDetailsFrame.Info.DetailsFrame.ScrollBar)
-
-	--AS:CreateBackdrop(CommunitiesFrame.GuildDetailsFrame.Info.MOTDScrollFrame)
-	--AS:SkinScrollBar(CommunitiesFrame.GuildDetailsFrame.Info.MOTDScrollFrame.ScrollBar)
+	AS:SkinScrollBar(CommunitiesFrame.GuildDetailsFrame.Info.DetailsFrame.ScrollBar)
+	AS:SkinScrollBar(CommunitiesFrame.GuildDetailsFrame.Info.MOTDScrollFrame.ScrollBar)
 
 	hooksecurefunc("CommunitiesGuildNewsButton_SetNews", function(button)
 		if button.header:IsShown() then
