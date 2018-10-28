@@ -182,9 +182,11 @@ function AS:Blizzard_Communities(event, addon)
 		for _, Button in pairs(CommunitiesFrame.GuildBenefitsFrame.Rewards.RewardsContainer.buttons) do
 			if Button.index then
 				local _, itemID = GetGuildRewardInfo(Button.index)
-				local _, _, quality = GetItemInfo(itemID)
-				if quality and quality > 1 then
-					Button.Icon.Backdrop:SetBackdropBorderColor(GetItemQualityColor(quality))
+				if itemID then
+					local _, _, quality = GetItemInfo(itemID)
+					if quality and quality > 1 then
+						Button.Icon.Backdrop:SetBackdropBorderColor(GetItemQualityColor(quality))
+					end
 				end
 			end
 		end
@@ -516,9 +518,11 @@ function AS:Blizzard_GuildUI(event, addon)
 			local r, g, b = unpack(AS.BorderColor)
 			if Button.index then
 				local _, itemID = GetGuildRewardInfo(Button.index)
-				local Quality = select(3, GetItemInfo(itemID))
-				if Quality and Quality > 1 then
-					r, g, b = GetItemQualityColor(Quality)
+				if itemID then
+					local Quality = select(3, GetItemInfo(itemID))
+					if Quality and Quality > 1 then
+						r, g, b = GetItemQualityColor(Quality)
+					end
 				end
 			end
 
