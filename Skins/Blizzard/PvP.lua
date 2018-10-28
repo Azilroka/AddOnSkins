@@ -248,8 +248,8 @@ function AS:Blizzard_WorldStateScore()
 	AS:SkinFrame(WorldStateScoreFrame)
 	AS:StripTextures(WorldStateScoreScrollFrame)
 
-	AS:HandleCloseButton(WorldStateScoreFrameCloseButton)
-	AS:HandleScrollBar(WorldStateScoreScrollFrameScrollBar)
+	AS:SkinCloseButton(WorldStateScoreFrameCloseButton)
+	AS:SkinScrollBar(WorldStateScoreScrollFrameScrollBar)
 
 	AS:SkinButton(WorldStateScoreFrameLeaveButton)
 	AS:SkinButton(WorldStateScoreFrameQueueButton)
