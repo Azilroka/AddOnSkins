@@ -1,5 +1,41 @@
 local AS = unpack(AddOnSkins)
 
+function AS:Blizzard_AdventureMap(event, addon)
+	if addon ~= 'Blizzard_AdventureMap' then return end
+
+	AS:SkinBackdropFrame(AdventureMapQuestChoiceDialog)
+
+	local function SkinRewards()
+		for reward in pairs(AdventureMapQuestChoiceDialog.rewardPool.activeObjects) do
+			if not reward.isSkinned then
+				AS:SkinIconButton(reward)
+				reward.Icon:SetDrawLayer("OVERLAY")
+				reward.isSkinned = true
+			end
+		end
+	end
+
+	hooksecurefunc(AdventureMapQuestChoiceDialog, "RefreshRewards", SkinRewards)
+
+	AdventureMapQuestChoiceDialog.Details.Child.TitleHeader:SetTextColor(1, 1, 0)
+	AdventureMapQuestChoiceDialog.Details.Child.DescriptionText:SetTextColor(1, 1, 1)
+	AdventureMapQuestChoiceDialog.Details.Child.ObjectivesHeader:SetTextColor(1, 1, 0)
+	AdventureMapQuestChoiceDialog.Details.Child.ObjectivesText:SetTextColor(1, 1, 1)
+
+	AS:SkinCloseButton(AdventureMapQuestChoiceDialog.CloseButton)
+	AS:SkinScrollBar(AdventureMapQuestChoiceDialog.Details.ScrollBar)
+	AS:SkinButton(AdventureMapQuestChoiceDialog.AcceptButton)
+	AS:SkinButton(AdventureMapQuestChoiceDialog.DeclineButton)
+end
+
+function AS:Blizzard_ChallengesUI(event, addon)
+	if addon ~= 'Blizzard_ChallengesUI' then return end
+
+	AS:StripTextures(ChallengesFrameInset, true)
+
+	AS:UnregisterSkinEvent(addon, event)
+end
+
 function AS:Blizzard_PvE()
 	AS:SkinFrame(PVEFrame)
 	AS:SkinCloseButton(PVEFrame.CloseButton)
@@ -220,14 +256,6 @@ function AS:Blizzard_PvE()
 	AS:SkinCloseButton(LFGDungeonReadyStatusCloseButton)
 end
 
-function AS:Blizzard_ChallengesUI(event, addon)
-	if addon ~= 'Blizzard_ChallengesUI' then return end
-
-	AS:StripTextures(ChallengesFrameInset, true)
-
-	AS:UnregisterSkinEvent(addon, event)
-end
-
 function AS:Blizzard_RaidUI(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		AS:SkinButton(RaidFrameConvertToRaidButton)
@@ -259,6 +287,7 @@ function AS:Blizzard_RaidUI(event, addon)
 	AS:UnregisterSkinEvent(addon, event)
 end
 
-AS:RegisterSkin("Blizzard_PvE", AS.Blizzard_PvE)
+AS:RegisterSkin('Blizzard_AdventureMap', AS.Blizzard_AdventureMap, 'ADDON_LOADED')
 AS:RegisterSkin("Blizzard_ChallengesUI", AS.Blizzard_ChallengesUI, 'ADDON_LOADED')
+AS:RegisterSkin("Blizzard_PvE", AS.Blizzard_PvE)
 AS:RegisterSkin("Blizzard_RaidUI", AS.Blizzard_RaidUI, 'ADDON_LOADED')

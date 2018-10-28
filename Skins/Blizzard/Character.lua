@@ -1,6 +1,134 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_CharacterFrame()
+function AS:Blizzard_ArtifactUI(event, addon)
+	if addon ~= 'Blizzard_ArtifactUI' then return end
+
+	AS:SkinBackdropFrame(ArtifactFrame)
+	AS:SkinCloseButton(ArtifactFrame.CloseButton)
+
+	for i = 1, 2 do
+		AS:SkinTab(_G["ArtifactFrameTab" .. i])
+	end
+
+--	ArtifactFrameTab1:SetPoint("TOPLEFT", ArtifactFrame, "BOTTOMLEFT", 0, 0)
+
+	ArtifactFrame.ForgeBadgeFrame.ItemIcon:Hide()
+	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:ClearAllPoints()
+	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:SetPoint("TOPLEFT", ArtifactFrame)
+
+	ArtifactFrame.AppearancesTab:HookScript("OnShow", function(self)
+		for i = 1, self:GetNumChildren() do
+			local child = select(i, self:GetChildren())
+			if child and child.appearanceID and not child.Backdrop then
+				AS:SkinTexture(child.SwatchTexture, true)
+				child.Border:SetAlpha(0)
+				child.Background:SetAlpha(0)
+				child.HighlightTexture:SetAlpha(0)
+				child.HighlightTexture.SetAlpha = AS.Noop
+
+				if child.Selected:IsShown() then
+					child.backdrop:SetBackdropBorderColor(1,1,1)
+				end
+
+				child.Selected:SetAlpha(0)
+				child.Selected.SetAlpha = AS.Noop
+
+				hooksecurefunc(child.Selected, "SetShown", function(_, isActive)
+					if isActive then
+						child.backdrop:SetBackdropBorderColor(1,1,1)
+					else
+						child.backdrop:SetBackdropBorderColor(unpack(E.media.bordercolor))
+					end
+				end)
+			end
+		end
+	end)
+end
+
+function AS:Blizzard_AzeriteUI(event, addon)
+	if addon ~= 'Blizzard_AzeriteUI' then return end
+
+	AS:SkinBackdropFrame(AzeriteEmpoweredItemUI)
+	AS:StripTextures(AzeriteEmpoweredItemUI.BorderFrame)
+	AzeriteEmpoweredItemUI.portrait:SetAlpha(0)
+
+	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.Bg:Hide()
+	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.KeyOverlay.Shadow:Hide()
+
+	AS:SkinCloseButton(AzeriteEmpoweredItemUICloseButton)
+end
+
+local function SkinEtheralFrame(frame)
+	frame.CornerTL:Hide()
+	frame.CornerTR:Hide()
+	frame.CornerBL:Hide()
+	frame.CornerBR:Hide()
+
+	local name = frame:GetName()
+	_G[name.."LeftEdge"]:Hide()
+	_G[name.."RightEdge"]:Hide()
+	_G[name.."TopEdge"]:Hide()
+	_G[name.."BottomEdge"]:Hide()
+
+	local bg = select(23, frame:GetRegions())
+	bg:ClearAllPoints()
+	bg:SetPoint("TOPLEFT", -50, 25)
+	bg:SetPoint("BOTTOMRIGHT")
+	bg:SetTexture([[Interface\Transmogrify\EtherealLines]], true, true)
+	bg:SetHorizTile(true)
+	bg:SetVertTile(true)
+	bg:SetAlpha(0.5)
+end
+
+function AS:Blizzard_AzeriteRespecUI(event, addon)
+	if addon ~= 'Blizzard_AzeriteRespecUI' then return end
+
+	local AzeriteRespecFrame = _G["AzeriteRespecFrame"]
+	AzeriteRespecFrame:SetClipsChildren(true)
+	AzeriteRespecFrame.Background:Hide()
+	SkinEtheralFrame(AzeriteRespecFrame)
+
+	AzeriteRespecFramePortraitFrame:Hide()
+	AzeriteRespecFramePortrait:Hide()
+	AzeriteRespecFrameTitleBg:Hide()
+	AzeriteRespecFrameTopBorder:Hide()
+	AzeriteRespecFrameTopRightCorner:Hide()
+	AzeriteRespecFrameRightBorder:Hide()
+	AzeriteRespecFrameLeftBorder:Hide()
+	AzeriteRespecFrameBottomBorder:Hide()
+	AzeriteRespecFrameBotRightCorner:Hide()
+	AzeriteRespecFrameBotLeftCorner:Hide()
+	AzeriteRespecFrameBg:Hide()
+
+	local ItemSlot = AzeriteRespecFrame.ItemSlot
+	ItemSlot:SetSize(64, 64)
+	ItemSlot:SetPoint("CENTER", AzeriteRespecFrame)
+	ItemSlot.Icon:ClearAllPoints()
+	ItemSlot.Icon:SetPoint("TOPLEFT", 1, -1)
+	ItemSlot.Icon:SetPoint("BOTTOMRIGHT", -1, 1)
+	ItemSlot.GlowOverlay:SetAlpha(0)
+
+	AzeriteRespecFrame.ItemSlot:CreateBackdrop("Transparent")
+	AzeriteRespecFrame.ItemSlot.backdrop:SetBackdropColor(153/255, 0/255, 153/255, 0.5)
+	AS:SkinTexture(AzeriteRespecFrame.ItemSlot.Icon)
+
+	local ButtonFrame = AzeriteRespecFrame.ButtonFrame
+	ButtonFrame:GetRegions():Hide()
+	ButtonFrame.ButtonBorder:Hide()
+	ButtonFrame.ButtonBottomBorder:Hide()
+
+	ButtonFrame.MoneyFrameEdge:Hide()
+	ButtonFrame.MoneyFrame:ClearAllPoints()
+	ButtonFrame.MoneyFrame:SetPoint("BOTTOMRIGHT", ButtonFrame.MoneyFrameEdge, 7, 5)
+
+	AzeriteRespecFrame:CreateBackdrop("Transparent")
+	AzeriteRespecFrame.backdrop:SetAllPoints()
+
+	AS:SkinButton(AzeriteRespecFrame.ButtonFrame.AzeriteRespecButton)
+	AS:SkinCloseButton(AzeriteRespecFrameCloseButton)
+end
+
+function AS:Blizzard_Character()
 	CHARACTERFRAME_EXPANDED_WIDTH = 580
 
 	AS:SkinFrame(CharacterFrame)
@@ -271,4 +399,160 @@ function AS:Blizzard_CharacterFrame()
 	end)
 end
 
-AS:RegisterSkin('Blizzard_CharacterFrame', AS.Blizzard_CharacterFrame)
+function AS:Blizzard_DressUpFrame()
+	AS:SkinFrame(SideDressUpFrame, nil, nil, true)
+	AS:SkinButton(SideDressUpModelResetButton)
+	AS:SkinCloseButton(SideDressUpModelCloseButton)
+
+	hooksecurefunc("SetUpSideDressUpFrame", function(parentFrame, closedWidth, openWidth, point, relativePoint, offsetX, offsetY)
+		if parentFrame == AuctionFrame then
+			SideDressUpFrame:SetPoint(point, parentFrame, relativePoint, 2, offsetY)
+		end
+	end)
+
+	AS:SkinBackdropFrame(DressUpFrame)
+	AS:SkinCloseButton(DressUpFrame.CloseButton)
+	AS:SkinButton(DressUpFrame.ResetButton)
+
+	DressUpFrame.portrait:SetAlpha(0)
+
+	AS:SkinMaxMinFrame(MaximizeMinimizeFrame)
+
+	AS:SkinButton(DressUpFrameCancelButton)
+	DressUpFrame.ResetButton:SetPoint("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
+
+	AS:SkinDropDownBox(DressUpFrame.OutfitDropDown)
+
+	AS:SkinButton(DressUpFrame.OutfitDropDown.SaveButton)
+	DressUpFrame.OutfitDropDown.SaveButton:SetHeight(20)
+	DressUpFrame.OutfitDropDown.SaveButton:SetPoint("LEFT", DressUpFrame.OutfitDropDown, 'RIGHT', -10, -5)
+end
+
+function AS:Blizzard_ItemSocketingUI(event, addon)
+	if addon ~= 'Blizzard_ItemSocketingUI' then return end
+
+	AS:SkinFrame(ItemSocketingFrame)
+	ItemSocketingFrame.portrait:SetAlpha(0)
+	AS:SkinFrame(ItemSocketingScrollFrame)
+	AS:SkinCloseButton(ItemSocketingFrame.CloseButton)
+
+	for i = 1, MAX_NUM_SOCKETS do
+		local button = _G["ItemSocketingSocket"..i]
+		AS:SkinFrame(button)
+		AS:StyleButton(button)
+		AS:SkinTexture(button.icon)
+		button.icon:ClearAllPoints()
+		button.icon:SetInside()
+		_G["ItemSocketingSocket"..i.."BracketFrame"]:SetAlpha(0)
+		_G["ItemSocketingSocket"..i.."Background"]:SetAlpha(0)
+	end
+
+	hooksecurefunc("ItemSocketingFrame_Update", function()
+		for i = 1, GetNumSockets() do
+			local color = GEM_TYPE_INFO[GetSocketTypes(i)]
+			_G["ItemSocketingSocket"..i]:SetBackdropColor(color.r, color.g, color.b, 0.15)
+			_G["ItemSocketingSocket"..i]:SetBackdropBorderColor(color.r, color.g, color.b)
+		end
+	end)
+
+	ItemSocketingSocketButton:ClearAllPoints()
+	ItemSocketingSocketButton:SetPoint("BOTTOMRIGHT", ItemSocketingFrame, "BOTTOMRIGHT", -5, 5)
+	AS:SkinButton(ItemSocketingSocketButton)
+	AS:SkinScrollBar(ItemSocketingScrollFrameScrollBar)
+
+	AS:UnregisterSkinEvent(addon, event)
+end
+
+function AS:Blizzard_TradeWindow(event, addon)
+	AS:SkinFrame(TradeFrame, nil, nil, true)
+	AS:StripTextures(TradeRecipientMoneyBg)
+	AS:SkinFrame(TradeRecipientMoneyInset)
+	AS:SkinButton(TradeFrameTradeButton, true)
+	AS:SkinButton(TradeFrameCancelButton, true)
+	AS:SkinCloseButton(TradeFrameCloseButton)
+
+	AS:SkinEditBox(TradePlayerInputMoneyFrameGold)
+	AS:SkinEditBox(TradePlayerInputMoneyFrameSilver)
+	AS:SkinEditBox(TradePlayerInputMoneyFrameCopper)
+
+	AS:StripTextures(TradePlayerInputMoneyInset)
+	TradePlayerInputMoneyFrame:SetPoint('TOPLEFT', 8, -59)
+	TradePlayerItem1:SetPoint('TOPLEFT', 8, -89)
+
+	for _, Inset in pairs({ TradePlayerItemsInset, TradeRecipientItemsInset, TradePlayerEnchantInset, TradeRecipientEnchantInset }) do
+		AS:SkinFrame(Inset)
+	end
+
+	for _, Highlight in pairs({ TradeHighlightPlayer, TradeHighlightRecipient, TradeHighlightPlayerEnchant, TradeHighlightRecipientEnchant }) do
+		Highlight:StripTextures()
+	end
+
+	for _, Frame in pairs({"TradePlayerItem", "TradeRecipientItem"}) do
+		for i = 1, 7 do
+			local ItemBackground = _G[Frame..i]
+			local ItemButton = _G[Frame..i.."ItemButton"]
+
+			AS:StripTextures(ItemBackground)
+			AS:SkinFrame(ItemButton)
+			AS:StyleButton(ItemButton)
+
+			AS:SkinTexture(ItemButton.icon)
+			ItemButton.icon:SetInside()
+			AS:CreateBackdrop(ItemButton)
+			ItemButton.Backdrop:SetBackdropColor(0, 0, 0, 0)
+			ItemButton.Backdrop:SetPoint("TOPLEFT", ItemButton, "TOPRIGHT", 4, 0)
+			ItemButton.Backdrop:SetPoint("BOTTOMRIGHT", _G[Frame..i.."NameFrame"], "BOTTOMRIGHT", -1, 14)
+		end
+	end
+
+	hooksecurefunc('TradeFrame_SetAcceptState', function(playerState, targetState)
+		if ( playerState == 1 ) then
+			TradePlayerItemsInset:SetBackdropBorderColor(0, 1, 0)
+			TradePlayerEnchantInset:SetBackdropBorderColor(0, 1, 0)
+		else
+			TradePlayerItemsInset:SetBackdropBorderColor(unpack(AS.BorderColor))
+			TradePlayerEnchantInset:SetBackdropBorderColor(unpack(AS.BorderColor))
+		end
+		if ( targetState == 1 ) then
+			TradeRecipientItemsInset:SetBackdropBorderColor(0, 1, 0)
+			TradeRecipientEnchantInset:SetBackdropBorderColor(0, 1, 0)
+			TradeRecipientMoneyInset:SetBackdropBorderColor(0, 1, 0)
+		else
+			TradeRecipientItemsInset:SetBackdropBorderColor(unpack(AS.BorderColor))
+			TradeRecipientEnchantInset:SetBackdropBorderColor(unpack(AS.BorderColor))
+			TradeRecipientMoneyInset:SetBackdropBorderColor(unpack(AS.BorderColor))
+		end
+	end)
+
+	hooksecurefunc('TradeFrame_UpdatePlayerItem', function(id)
+		local tradeItem = _G["TradePlayerItem"..id.."ItemButton"]
+		tradeItem:SetBackdropBorderColor(unpack(AS.BorderColor))
+		local Link = GetTradePlayerItemLink(id)
+		if Link then
+			local Quality = select(3, GetItemInfo(Link))
+			if Quality and Quality > 1 then
+				tradeItem:SetBackdropBorderColor(GetItemQualityColor(Quality))
+			end
+		end
+	end)
+
+	hooksecurefunc('TradeFrame_UpdateTargetItem', function(id)
+		local tradeItem = _G["TradeRecipientItem"..id.."ItemButton"]
+		tradeItem:SetBackdropBorderColor(unpack(AS.BorderColor))
+		local Link = GetTradeTargetItemLink(id)
+		if Link then
+			local Quality = select(3, GetItemInfo(Link))
+			if Quality and Quality > 1 then
+				tradeItem:SetBackdropBorderColor(GetItemQualityColor(Quality))
+			end
+		end
+	end)
+end
+
+AS:RegisterSkin("Blizzard_ArtifactUI", AS.Blizzard_ArtifactUI, 'ADDON_LOADED')
+AS:RegisterSkin("Blizzard_AzeriteUI", AS.Blizzard_AzeriteUI, 'ADDON_LOADED')
+AS:RegisterSkin("Blizzard_AzeriteRespecUI", AS.Blizzard_AzeriteRespecUI, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_Character', AS.Blizzard_Character)
+AS:RegisterSkin('Blizzard_DressUpFrame', AS.Blizzard_DressUpFrame)
+AS:RegisterSkin('Blizzard_ItemSocketingUI', AS.Blizzard_ItemSocketingUI, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_TradeWindow', AS.Blizzard_TradeWindow)
