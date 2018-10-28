@@ -3,32 +3,25 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Omen') then return end
 
 function AS:Omen()
-	Omen.db.profile.Scale = 1
-	Omen.db.profile.Bar.Spacing = 1
-	Omen.db.profile.Background.EdgeSize = 1
-	Omen.db.profile.Background.BarInset = 2
-	Omen.db.profile.TitleBar.UseSameBG = true
+	AS:SkinFrame(_G.Omen.BarList, 'Default')
+	AS:SkinFrame(_G.Omen.Title, 'Default')
 
-	AS:SkinFrame(Omen.BarList, 'Default')
-	AS:SkinFrame(Omen.Title, 'Default')
-	Omen.BarList.SetBackdrop = AS.Noop
-	Omen.BarList.SetBackdropColor = AS.Noop
-	Omen.BarList.SetBackdropBorderColor = AS.Noop
-	Omen.Title.SetBackdrop = AS.Noop
-	Omen.Title.SetBackdropColor = AS.Noop
-	Omen.Title.SetBackdropBorderColor = AS.Noop
+	local db = _G.Omen.db
+	db.profile.Scale = 1
+	db.profile.Bar.Spacing = 1
+	db.profile.Background.EdgeSize = 1
+	db.profile.Background.BarInset = 2
+	db.profile.TitleBar.UseSameBG = true
 
-	hooksecurefunc(Omen, 'Toggle', function(self)
-		if not AS:CheckEmbed('Omen') then return end
-		if self.Anchor:IsShown() then
-			EmbedSystem_MainWindow:Show()
-		else
-			EmbedSystem_MainWindow:Hide()
-		end
-	end)
+	_G.Omen.BarList.SetBackdrop = AS.Noop
+	_G.Omen.BarList.SetBackdropColor = AS.Noop
+	_G.Omen.BarList.SetBackdropBorderColor = AS.Noop
+	_G.Omen.Title.SetBackdrop = AS.Noop
+	_G.Omen.Title.SetBackdropColor = AS.Noop
+	_G.Omen.Title.SetBackdropBorderColor = AS.Noop
 
-	Omen:ReAnchorBars()
-	Omen:ResizeBars()
+	_G.Omen:ReAnchorBars()
+	_G.Omen:ResizeBars()
 end
 
 AS:RegisterSkin('Omen', AS.Omen)
