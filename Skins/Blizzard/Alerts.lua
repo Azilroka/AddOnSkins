@@ -41,7 +41,7 @@ function AS:Blizzard_Alerts()
 		end
 
 		frame.Unlocked:SetTextColor(1, 1, 1)
-		frame.Name:SetTextColor(1, 1, 0)
+		frame.Name:SetTextColor(1, .8, .1)
 		frame.Background:SetAlpha(0)
 		frame.glow:SetAlpha(0)
 		frame.shine:SetAlpha(0)
