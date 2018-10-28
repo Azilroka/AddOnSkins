@@ -1,5 +1,32 @@
 local AS = unpack(AddOnSkins)
 
+function AS:Blizzard_AlliedRacesUI(event, addon)
+	if addon ~= 'Blizzard_AlliedRacesUI' then return end
+
+	AlliedRacesFrame:CreateBackdrop("Transparent")
+	AlliedRacesFrameBg:Hide()
+	AlliedRacesFramePortrait:Hide()
+	AlliedRacesFramePortraitFrame:Hide()
+	AlliedRacesFrameTitleBg:Hide()
+	AlliedRacesFrameTopBorder:Hide()
+	AlliedRacesFrameTopRightCorner:Hide()
+	AlliedRacesFrameRightBorder:Hide()
+	AlliedRacesFrameBotRightCorner:Hide()
+	AlliedRacesFrameBotLeftCorner:Hide()
+	AlliedRacesFrameBtnCornerRight:Hide()
+	AlliedRacesFrameBtnCornerLeft:Hide()
+	AlliedRacesFrameButtonBottomBorder:Hide()
+	AlliedRacesFrameBottomBorder:Hide()
+	AlliedRacesFrameLeftBorder:Hide()
+	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar.Border:Hide()
+	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar.ScrollUpBorder:Hide()
+	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar.ScrollDownBorder:Hide()
+	AlliedRacesFrame.ModelFrame:StripTextures()
+
+	AS:SkinCloseButton(AlliedRacesFrameCloseButton)
+	AS:SkinScrollBar(AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar)
+end
+
 function AS:Blizzard_Gossip()
 	AS:SkinFrame(GossipFrame)
 	GossipFrame:SetHeight(500)
@@ -336,6 +363,7 @@ function AS:Blizzard_WorldMap()
 	end
 end
 
+AS:RegisterSkin("Blizzard_AlliedRacesUI", AS.Blizzard_AlliedRacesUI, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_Gossip', AS.Blizzard_Gossip)
 AS:RegisterSkin('Blizzard_Quest', AS.Blizzard_Quest)
 AS:RegisterSkin('Blizzard_WorldMap', AS.Blizzard_WorldMap)
