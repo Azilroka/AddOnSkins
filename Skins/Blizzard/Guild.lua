@@ -99,12 +99,14 @@ function AS:Blizzard_GuildUI(event, addon)
 	AS:StripTextures(GuildMemberOfficerNoteBackground)
 	AS:StripTextures(GuildTextEditContainer)
 	AS:StripTextures(GuildTextEditFrame)
+
 	AS:StripTextures(GuildRecruitmentRolesFrame)
 	AS:StripTextures(GuildRecruitmentAvailabilityFrame)
 	AS:StripTextures(GuildRecruitmentInterestFrame)
 	AS:StripTextures(GuildRecruitmentLevelFrame)
 	AS:StripTextures(GuildRecruitmentCommentFrame)
 	AS:StripTextures(GuildRecruitmentCommentInputFrame)
+
 	AS:StripTextures(GuildInfoFrameApplicantsContainer)
 	AS:StripTextures(GuildInfoFrameApplicants)
 	AS:StripTextures(GuildInfoFrameApplicantsContainerScrollBar)
@@ -128,23 +130,13 @@ function AS:Blizzard_GuildUI(event, addon)
 	AS:SkinButton(GuildRecruitmentMessageButton, true)
 	AS:SkinButton(GuildRecruitmentDeclineButton, true)
 
-	local checkbuttons = {
-		"Quest",
-		"Dungeon",
-		"Raid",
-		"PvP",
-		"RP",
-		"Weekdays",
-		"Weekends",
-	}
-
-	for _, frame in pairs(checkbuttons) do
+	for _, frame in pairs({ "Quest", "Dungeon", "Raid", "PvP", "RP", "Weekdays", "Weekends" }) do
 		AS:SkinCheckBox(_G["GuildRecruitment"..frame.."Button"])
 	end
 
-	AS:SkinCheckBox(GuildRecruitmentTankButton:GetChildren())
-	AS:SkinCheckBox(GuildRecruitmentHealerButton:GetChildren())
-	AS:SkinCheckBox(GuildRecruitmentDamagerButton:GetChildren())
+	AS:SkinCheckBox(GuildRecruitmentTankButton.checkButton)
+	AS:SkinCheckBox(GuildRecruitmentHealerButton.checkButton)
+	AS:SkinCheckBox(GuildRecruitmentDamagerButton.checkButton)
 
 	for i = 1, 5 do
 		AS:SkinTab(_G["GuildFrameTab"..i])
@@ -157,28 +149,29 @@ function AS:Blizzard_GuildUI(event, addon)
 	GuildFactionBar.Backdrop:SetPoint("TOPLEFT", GuildFactionBar.progress, "TOPLEFT", -2, 2)
 	GuildFactionBar.Backdrop:SetPoint("BOTTOMRIGHT", GuildFactionBar, "BOTTOMRIGHT", 0, 0)
 
-	for _, Object in pairs({'Rewards', 'Perks'}) do
-		for i = 1, 8 do
-			local Button = _G["Guild"..Object.."ContainerButton"..i]
-			AS:StripTextures(Button)
-			AS:SkinTexture(Button.icon)
-			Button.icon:ClearAllPoints()
-			Button.icon:SetPoint("TOPLEFT", 2, -2)
-			AS:CreateBackdrop(Button, 'Default')
-			Button.Backdrop:SetOutside(Button.icon)
-			if Object == 'Rewards' then
-				Button.Backdrop:SetScript('OnUpdate', function(self)
-					local achievementID, itemID, itemName, iconTexture, repLevel, moneyCost = GetGuildRewardInfo(Button.index)
-					self:SetBackdropBorderColor(unpack(AS.BorderColor))
-					if itemID then
-						local Quality = select(3, GetItemInfo(itemID))
-						if Quality and Quality > 1 and BAG_ITEM_QUALITY_COLORS[Quality] then
-							self:SetBackdropBorderColor(BAG_ITEM_QUALITY_COLORS[Quality].r, BAG_ITEM_QUALITY_COLORS[Quality].g, BAG_ITEM_QUALITY_COLORS[Quality].b)
-						end
-					end
-				end)
+	for _, Button in pairs(GuildPerksContainer.buttons) do
+		AS:SkinTexture(Button.icon, true)
+		AS:SkinBackdropFrame(Button)
+		Button.Backdrop:SetInside()
+		Button.Backdrop:SetPoint("BOTTOMRIGHT", -15, 2)
+	end
+
+	for _, Button in pairs(GuildRewardsContainer.buttons) do
+		AS:SkinTexture(Button.icon, true)
+		AS:SkinBackdropFrame(Button)
+		Button.Backdrop:SetInside()
+		hooksecurefunc(Button.icon, "SetTexture", function(self)
+			local r, g, b = unpack(AS.BorderColor)
+			if Button.index then
+				local _, itemID = GetGuildRewardInfo(Button.index)
+				local Quality = select(3, GetItemInfo(itemID))
+				if Quality and Quality > 1 then
+					r, g, b = GetItemQualityColor(Quality)
+				end
 			end
-		end
+
+			self.Backdrop:SetBackdropBorderColor(r, g, b)
+		end)
 	end
 
 	AS:SkinScrollBar(GuildRosterContainerScrollBar)
@@ -225,7 +218,7 @@ function AS:Blizzard_GuildUI(event, addon)
 
 	AS:SetTemplate(GuildRecruitmentCommentInputFrame, 'Default')
 
-	for _, button in next, GuildInfoFrameApplicantsContainer.buttons do
+	for _, button in pairs(GuildInfoFrameApplicantsContainer.buttons) do
 		button.selectedTex:Kill()
 		button:GetHighlightTexture():Kill()
 		button:SetBackdrop(nil)
@@ -401,6 +394,11 @@ function AS:Blizzard_GuildBankUI(event, addon)
 	AS:SkinEditBox(GuildItemSearchBox)
 	AS:StripTextures(GuildBankMoneyFrameBackground)
 	AS:SkinScrollBar(GuildBankInfoScrollFrameScrollBar)
+
+	AS:CreateBackdrop(GuildBankFrame)
+	GuildBankFrame.Backdrop:SetFrameLevel(GuildBankFrame:GetFrameLevel() + 1)
+	GuildBankFrame.Backdrop:SetPoint('TOPLEFT', GuildBankColumn1Button1, 'TOPLEFT', -7, 4)
+	GuildBankFrame.Backdrop:SetPoint('BOTTOMRIGHT', GuildBankColumn7Button14, 'BOTTOMRIGHT', 7, -7)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
