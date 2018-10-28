@@ -16,6 +16,12 @@ function AS:Blizzard_CharacterFrame()
 
 	PaperDollSidebarTabs:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -29, -1)
 
+	local function UpdateAzerite(self)
+		self.AzeriteTexture:SetAtlas("AzeriteIconFrame")
+		self.AzeriteTexture:SetOutside()
+		self.AzeriteTexture:SetDrawLayer("BORDER", 1)
+	end
+
 	for _, Slot in pairs({PaperDollItemsFrame:GetChildren()}) do
 		if Slot:IsObjectType("Button") then
 			AS:SkinTexture(Slot.icon)
@@ -23,6 +29,9 @@ function AS:Blizzard_CharacterFrame()
 			AS:StyleButton(Slot)
 			AS:CreateShadow(Slot, true)
 			Slot.icon:SetInside()
+
+			hooksecurefunc(Slot, "DisplayAsAzeriteItem", UpdateAzerite)
+			hooksecurefunc(Slot, "DisplayAsAzeriteEmpoweredItem", UpdateAzerite)
 
 			if Slot.popoutButton:GetPoint() == 'TOP' then
 				Slot.popoutButton:SetPoint("TOP", Slot, "BOTTOM", 0, 2)

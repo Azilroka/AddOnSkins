@@ -5,6 +5,7 @@ function AS:Blizzard_AzeriteUI(event, addon)
 
 	AS:SkinBackdropFrame(AzeriteEmpoweredItemUI)
 	AS:StripTextures(AzeriteEmpoweredItemUI.BorderFrame)
+	AzeriteEmpoweredItemUI.portrait:SetAlpha(0)
 
 	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.Bg:Hide()
 	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.KeyOverlay.Shadow:Hide()
