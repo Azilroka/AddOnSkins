@@ -316,6 +316,15 @@ function AS:SkinButton(Button, Strip)
 		end
 	end
 
+	if Button.Icon then
+		local Texture = Button.Icon:GetTexture()
+		if Texture and strfind(Texture, [[Interface\ChatFrame\ChatFrameExpandArrow]]) then
+			Button.Icon:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
+			Button.Icon:SetVertexColor(1, 1, 1)
+			Button.Icon:SetRotation(AS.ArrowRotation['right'])
+		end
+	end
+
 	if Button.SetNormalTexture then Button:SetNormalTexture('') end
 	if Button.SetHighlightTexture then Button:SetHighlightTexture('') end
 	if Button.SetPushedTexture then Button:SetPushedTexture('') end
