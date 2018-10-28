@@ -116,10 +116,8 @@ function AS:Blizzard_Communities(event, addon)
 	CommunitiesFrame.MemberList.ShowOfflineButton:SetSize(25, 25)
 
 	hooksecurefunc(CommunitiesFrame.MemberList, "RefreshListDisplay", function(self)
-		for _, Column in pairs({self.ColumnDisplay:GetChildren()}) do
-			if Column:IsObjectType("Button") then
-				AS:SkinButton(Column)
-			end
+		for Column in pairs(self.ColumnDisplay.columnHeaders.activeObjects) do
+			AS:SkinButton(Column)
 		end
 
 		for _, button in ipairs(self.ListScrollFrame.buttons) do

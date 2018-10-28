@@ -463,7 +463,25 @@ function AS:Blizzard_ItemSocketingUI(event, addon)
 	AS:UnregisterSkinEvent(addon, event)
 end
 
-function AS:Blizzard_TradeWindow(event, addon)
+function AS:Blizzard_ScrappingMachineUI(event, addon)
+	if addon ~= 'Blizzard_ScrappingMachineUI' then return end
+
+	AS:SkinBackdropFrame(ScrappingMachineFrame)
+	AS:SkinCloseButton(ScrappingMachineFrame.CloseButton)
+	AS:SkinButton(ScrappingMachineFrame.ScrapButton, true)
+
+	AS:StripTextures(ScrappingMachineFrame.ItemSlots)
+
+	for button in pairs(ScrappingMachineFrame.ItemSlots.scrapButtons.activeObjects) do
+		AS:SkinFrame(button)
+		AS:SkinTexture(button.Icon)
+		button.IconBorder:SetAlpha(0)
+		hooksecurefunc(button.IconBorder, 'SetVertexColor', function(self, r, g, b) button:SetBackdropBorderColor(r, g, b) end)
+		hooksecurefunc(button.IconBorder, 'Hide', function() button:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+	end
+end
+
+function AS:Blizzard_TradeWindow()
 	AS:SkinFrame(TradeFrame, nil, nil, true)
 	AS:StripTextures(TradeRecipientMoneyBg)
 	AS:SkinFrame(TradeRecipientMoneyInset)
@@ -555,4 +573,5 @@ AS:RegisterSkin("Blizzard_AzeriteRespecUI", AS.Blizzard_AzeriteRespecUI, 'ADDON_
 AS:RegisterSkin('Blizzard_Character', AS.Blizzard_Character)
 AS:RegisterSkin('Blizzard_DressUpFrame', AS.Blizzard_DressUpFrame)
 AS:RegisterSkin('Blizzard_ItemSocketingUI', AS.Blizzard_ItemSocketingUI, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_ScrappingMachineUI', AS.Blizzard_ScrappingMachineUI, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_TradeWindow', AS.Blizzard_TradeWindow)
