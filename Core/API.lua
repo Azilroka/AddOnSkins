@@ -210,21 +210,19 @@ function AS:SetTemplate(Frame, Template, Texture)
 	end
 
 	local R, G, B = unpack(AS.BackdropColor)
-	local Alpha = (Template == 'Transparent' and .8 or 1)
+	local Alpha = (Template == 'Default' and 1 or .8)
 
 	if AS:CheckOption('ElvUISkinModule', 'ElvUI') then
-		if Template == 'Transparent' then
-			R, G, B, Alpha = unpack(ElvUI[1]['media'].backdropfadecolor)
-		else
+		if Template == 'Default' then
 			R, G, B = unpack(ElvUI[1]['media'].backdropcolor)
+		else
+			R, G, B, Alpha = unpack(ElvUI[1]['media'].backdropfadecolor)
 		end
 
 		Frame.template = Template
 		ElvUI[1]['frames'][Frame] = true
 
-		if AS:CheckOption('MerathilisUIStyling', 'ElvUI_MerathilisUI') then
-			Frame:Styling()
-		elseif AS:CheckOption('KlixUIStyling', 'ElvUI_KlixUI') then
+		if (Template == 'MerathilisUI' and AS:CheckAddOn('ElvUI_MerathilisUI')) or (Template == 'KlixUI' and AS:CheckAddOn('ElvUI_KlixUI')) then
 			Frame:Styling()
 		end
 	end

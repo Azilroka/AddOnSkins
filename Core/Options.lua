@@ -104,12 +104,6 @@ function AS:BuildProfile()
 		},
 	}
 
-	if AS:CheckAddOn('ElvUI_MerathilisUI') then
-		Defaults.profile['MerathilisUIStyling'] = false
-	elseif AS:CheckAddOn('ElvUI_KlixUI') then
-		Defaults.profile['KlixUIStyling'] = false
-	end
-
 	for skin in pairs(AS.register) do
 		if AS:CheckAddOn('ElvUI') and strfind(skin, 'Blizzard_') then
 			Defaults.profile[skin] = false
@@ -404,6 +398,8 @@ function AS:BuildOptions()
 						values = {
 							['Transparent'] = 'Transparent',
 							['Default'] = 'Default',
+							['MerathilisUI'] = 'MerathilisUI',
+							['KlixUI'] = 'KlixUI',
 						}
 					},
 					ClassColor = {
