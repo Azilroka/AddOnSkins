@@ -24,9 +24,47 @@ function AS:Blizzard_DebugTools(event, addon)
 	AS:SkinTooltip(EventTraceTooltip)
 
 	AS:SkinTooltip(FrameStackTooltip)
-	FrameStackTooltip:SetParent(UIParent)
-	FrameStackTooltip:SetFrameStrata('TOOLTIP')
-	FrameStackTooltip:SetFrameLevel(255)
+
+	local function SkinTableAttributeDisplay(frame)
+		AS:SkinFrame(frame)
+		AS:SkinFrame(frame.ScrollFrameArt)
+
+		AS:SkinCloseButton(frame.CloseButton)
+
+		AS:SkinEditBox(frame.FilterBox)
+
+		AS:SkinArrowButton(frame.OpenParentButton, 'up')
+		AS:SkinArrowButton(frame.DuplicateButton, 'down')
+		AS:SkinArrowButton(frame.NavigateBackwardButton, 'left')
+		AS:SkinArrowButton(frame.NavigateForwardButton, 'right')
+
+		frame.OpenParentButton:Size(17)
+		frame.DuplicateButton:Size(17)
+		frame.NavigateBackwardButton:Size(17)
+		frame.NavigateForwardButton:Size(17)
+
+		AS:SkinCheckBox(frame.VisibilityButton)
+		AS:SkinCheckBox(frame.HighlightButton)
+		AS:SkinCheckBox(frame.DynamicUpdateButton)
+
+		frame.OpenParentButton:SetPoint("TOPLEFT", frame, "TOPLEFT", 2, -2)
+		frame.DuplicateButton:SetPoint("LEFT", frame.NavigateForwardButton, "RIGHT")
+		frame.NavigateBackwardButton:SetPoint("LEFT", frame.OpenParentButton, "RIGHT", 2, 0)
+		frame.NavigateForwardButton:SetPoint("LEFT", frame.NavigateBackwardButton, "RIGHT", 2, 0)
+		frame.DuplicateButton:SetPoint("LEFT", frame.NavigateForwardButton, "RIGHT", 2, 0)
+
+		if frame.LinesScrollFrame and frame.LinesScrollFrame.ScrollBar then
+			AS:SkinScrollBar(frame.LinesScrollFrame.ScrollBar)
+		end
+	end
+
+	SkinTableAttributeDisplay(TableAttributeDisplay)
+	hooksecurefunc(TableInspectorMixin, "OnLoad", function(self)
+		if self and self.ScrollFrameArt and not self.skinned then
+			SkinTableAttributeDisplay(self)
+			self.skinned = true
+		end
+	end)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
