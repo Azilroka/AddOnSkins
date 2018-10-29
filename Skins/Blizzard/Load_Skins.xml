@@ -32,7 +32,6 @@
 	<Script file="TalkingHead.lua"/>
 	<Script file="Taxi.lua"/>
 	<Script file="TimeManager.lua"/>
-	<Script file="Tooltip.lua"/>
 	<Script file="Trainer.lua"/>
 	<Script file="VoidStorage.lua"/>
 	<Script file="WoD.lua"/>
