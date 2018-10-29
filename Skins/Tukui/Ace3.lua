@@ -4,8 +4,11 @@ if AS:CheckAddOn('ElvUI') then return end
 
 function AS:Ace3()
 	local AceGUI = LibStub('AceGUI-3.0', true)
+
 	if not AceGUI then return end
+
 	local oldRegisterAsWidget = AceGUI.RegisterAsWidget
+
 	AceGUI.RegisterAsWidget = function(self, widget)
 		local TYPE = widget.type
 		if TYPE == 'MultiLineEditBox' then
@@ -36,25 +39,31 @@ function AS:Ace3()
 			local frame = widget.dropdown
 			local button = widget.button
 			local text = widget.text
-			AS:StripTextures(frame)
 
-			button:ClearAllPoints()
-			button:Point('RIGHT', frame, 'RIGHT', -20, 0)
+			AS:SkinBackdropFrame(frame)
+			frame.Backdrop:Point('TOPLEFT', 15, -1)
+			frame.Backdrop:Point("BOTTOMRIGHT", -24, 1)
 
 			AS:SkinArrowButton(button)
 
-			AS:CreateBackdrop(frame)
-			frame.Backdrop:Point("TOPLEFT", 20, -2)
-			frame.Backdrop:Point("BOTTOMRIGHT", button, "BOTTOMRIGHT", 2, -2)
+			widget.label:ClearAllPoints()
+			widget.label:SetPoint('BOTTOMLEFT', frame.Backdrop, 'TOPLEFT', 2, 0)
 
-			button:SetParent(frame.Backdrop)
-			text:SetParent(frame.Backdrop)
+			button:SetSize(20, 20)
+			button:ClearAllPoints()
+			button:Point('RIGHT', frame.Backdrop, 'RIGHT', -2, 0)
 
-			button:HookScript('OnClick', function(self) AS:SetTemplate(self.obj.pullout.frame) end)
+			text:ClearAllPoints()
+			text:SetJustifyH("RIGHT")
+			text:SetPoint('RIGHT', button, 'LEFT', -3, 0)
+
+			button:HookScript('PostClick', function(self) AS:SetTemplate(self.obj.pullout.frame) end)
+			widget.button_cover:HookScript('PostClick', function(self) AS:SetTemplate(self.obj.pullout.frame) end)
 		elseif TYPE == 'LSM30_Font' or TYPE == 'LSM30_Sound' or TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' or TYPE == 'LSM30_Statusbar' then
 			local frame = widget.frame
 			local button = frame.dropButton
 			local text = frame.text
+
 			AS:StripTextures(frame)
 
 			AS:SkinArrowButton(button)
@@ -82,7 +91,7 @@ function AS:Ace3()
 
 			button:SetParent(frame.Backdrop)
 			text:SetParent(frame.Backdrop)
-			button:HookScript('OnClick', function(this, button)
+			button:HookScript('PostClick', function(this, button)
 				local self = this.obj
 				if self.dropdown then
 					AS:SetTemplate(self.dropdown)
@@ -109,10 +118,12 @@ function AS:Ace3()
 			widget.lowtext:SetPoint('TOPLEFT', widget.slider, 'BOTTOMLEFT', 2, -2)
 			widget.hightext:SetPoint('TOPRIGHT', widget.slider, 'BOTTOMRIGHT', -2, -2)
 		end
+
 		return oldRegisterAsWidget(self, widget)
 	end
 
 	local oldRegisterAsContainer = AceGUI.RegisterAsContainer
+
 	AceGUI.RegisterAsContainer = function(self, widget)
 		local TYPE = widget.type
 
