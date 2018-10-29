@@ -256,6 +256,125 @@ function AS:Blizzard_PvE()
 
 	AS:SkinFrame(LFGDungeonReadyStatus)
 	AS:SkinCloseButton(LFGDungeonReadyStatusCloseButton)
+
+	AS:SkinFrame(LFGListApplicationDialog)
+	AS:SkinButton(LFGListApplicationDialog.SignUpButton)
+	AS:SkinButton(LFGListApplicationDialog.CancelButton)
+	AS:SkinEditBox(LFGListApplicationDialogDescription)
+
+	local repositionCheckButtons = {
+		LFGListApplicationDialog.TankButton.CheckButton,
+		LFGListApplicationDialog.HealerButton.CheckButton,
+		LFGListApplicationDialog.DamagerButton.CheckButton,
+	}
+
+	for _, checkButton in pairs(repositionCheckButtons) do
+		AS:SkinCheckBox(checkButton)
+		checkButton:ClearAllPoints()
+		checkButton:Point("BOTTOMLEFT", 0, 0)
+	end
+
+	hooksecurefunc("LFGListApplicationDialog_UpdateRoles", function(self) --Copy from Blizzard, we just fix position
+		local availTank, availHealer, availDPS = C_LFGList.GetAvailableRoles();
+
+		local avail1, avail2;
+		if ( availTank ) then
+			avail1 = self.TankButton;
+		end
+		if ( availHealer ) then
+			if ( avail1 ) then
+				avail2 = self.HealerButton;
+			else
+				avail1 = self.HealerButton;
+			end
+		end
+		if ( availDPS ) then
+			if ( avail1 ) then
+				avail2 = self.DamagerButton;
+			else
+				avail1 = self.DamagerButton;
+			end
+		end
+
+		if ( avail2 ) then
+			avail1:ClearAllPoints();
+			avail1:SetPoint("TOPRIGHT", self, "TOP", -40, -35);
+			avail2:ClearAllPoints();
+			avail2:SetPoint("TOPLEFT", self, "TOP", 40, -35);
+		elseif ( avail1 ) then
+			avail1:ClearAllPoints();
+			avail1:SetPoint("TOP", self, "TOP", 0, -35);
+		end
+	end)
+
+
+	AS:SetTemplate(LFGListInviteDialog)
+	AS:SkinButton(LFGListInviteDialog.AcknowledgeButton)
+	AS:SkinButton(LFGListInviteDialog.AcceptButton)
+	AS:SkinButton(LFGListInviteDialog.DeclineButton)
+	LFGListInviteDialog.RoleIcon:SetTexture("Interface\\LFGFrame\\UI-LFG-ICONS-ROLEBACKGROUNDS")
+
+	hooksecurefunc("LFGListInviteDialog_Show", function(self, resultID)
+		local _,_,_,_, role = C_LFGList.GetApplicationInfo(resultID)
+		self.RoleIcon:SetTexCoord(GetBackgroundTexCoordsForRole(role))
+	end)
+
+	AS:SkinEditBox(LFGListFrame.SearchPanel.SearchBox)
+
+	AS:SkinButton(LFGListFrame.SearchPanel.BackButton, true)
+	AS:SkinButton(LFGListFrame.SearchPanel.SignUpButton, true)
+	AS:SkinButton(LFGListSearchPanelScrollFrame.StartGroupButton,  true)
+	LFGListFrame.SearchPanel.BackButton:ClearAllPoints()
+	LFGListFrame.SearchPanel.BackButton:Point("BOTTOMLEFT", -1, 3)
+	LFGListFrame.SearchPanel.SignUpButton:ClearAllPoints()
+	LFGListFrame.SearchPanel.SignUpButton:Point("BOTTOMRIGHT", -6, 3)
+	LFGListFrame.SearchPanel.ResultsInset:StripTextures()
+	AS:SkinScrollBar(LFGListSearchPanelScrollFrameScrollBar)
+
+	AS:SkinButton(LFGListFrame.SearchPanel.FilterButton)
+	LFGListFrame.SearchPanel.FilterButton:SetPoint("LEFT", LFGListFrame.SearchPanel.SearchBox, "RIGHT", 5, 0)
+	AS:SkinButton(LFGListFrame.SearchPanel.RefreshButton)
+	LFGListFrame.SearchPanel.RefreshButton:Size(24)
+	LFGListFrame.SearchPanel.RefreshButton.Icon:SetPoint("CENTER")
+
+	hooksecurefunc("LFGListApplicationViewer_UpdateApplicant", function(button)
+		if not button.DeclineButton.template then
+			AS:SkinButton(button.DeclineButton, nil, true)
+		end
+		if not button.InviteButton.template then
+			AS:SkinButton(button.InviteButton)
+		end
+	end)
+
+	hooksecurefunc("LFGListSearchEntry_Update", function(button)
+		if not button.CancelButton.template then
+			AS:SkinButton(button.CancelButton, nil, true)
+		end
+	end)
+
+	hooksecurefunc("LFGListSearchPanel_UpdateAutoComplete", function(self)
+		for i = 1, LFGListFrame.SearchPanel.AutoCompleteFrame:GetNumChildren() do
+			local child = select(i, LFGListFrame.SearchPanel.AutoCompleteFrame:GetChildren())
+			if child and not child.isSkinned and child:GetObjectType() == "Button" then
+				AS:SkinButton(child)
+				child.isSkinned = true
+			end
+		end
+
+		local text = self.SearchBox:GetText()
+		local matchingActivities = C_LFGList.GetAvailableActivities(self.categoryID, nil, self.filters, text)
+		local numResults = min(#matchingActivities, MAX_LFG_LIST_SEARCH_AUTOCOMPLETE_ENTRIES)
+
+		for i = 2, numResults do
+			local button = self.AutoCompleteFrame.Results[i]
+			if button and not button.moved then
+				button:SetPoint("TOPLEFT", self.AutoCompleteFrame.Results[i-1], "BOTTOMLEFT", 0, -2)
+				button:SetPoint("TOPRIGHT", self.AutoCompleteFrame.Results[i-1], "BOTTOMRIGHT", 0, -2)
+				button.moved = true
+			end
+		end
+		self.AutoCompleteFrame:SetHeight(numResults * (self.AutoCompleteFrame.Results[1]:GetHeight() + 3.5) + 8)
+	end)
 end
 
 function AS:Blizzard_RaidUI(event, addon)
