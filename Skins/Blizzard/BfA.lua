@@ -99,31 +99,24 @@ end
 function AS:Blizzard_IslandsQueueUI(event, addon)
 	if addon ~= 'Blizzard_IslandsQueueUI' then return end
 
-	local IslandsFrame = _G["IslandsQueueFrame"]
-	IslandsFrame:StripTextures()
+	AS:SkinBackdropFrame(IslandsQueueFrame)
 	IslandsQueueFrame.ArtOverlayFrame.PortraitFrame:SetAlpha(0)
 	IslandsQueueFrame.ArtOverlayFrame.portrait:SetAlpha(0)
 	IslandsQueueFrame.portrait:Hide()
 
-	IslandsFrame:CreateBackdrop("Transparent")
+	AS:SkinCloseButton(IslandsQueueFrame.CloseButton)
+	AS:SkinButton(IslandsQueueFrame.DifficultySelectorFrame.QueueButton)
 
-	AS:SkinCloseButton(IslandsQueueFrameCloseButton)
-	AS:SkinButton(IslandsFrame.DifficultySelectorFrame.QueueButton)
-
-	local WeeklyQuest = IslandsFrame.WeeklyQuest
-	local StatusBar = WeeklyQuest.StatusBar
-	WeeklyQuest.OverlayFrame:StripTextures()
-
-	-- StatusBar
-	StatusBar:CreateBackdrop("Default")
+	IslandsQueueFrame.WeeklyQuest.OverlayFrame:StripTextures()
+	IslandsQueueFrame.WeeklyQuest.StatusBar:CreateBackdrop("Default")
 
 	--StatusBar Icon
-	WeeklyQuest.QuestReward.Icon:SetTexCoord(unpack(E.TexCoords))
+	AS:SkinTexture(IslandsQueueFrame.WeeklyQuest.QuestReward.Icon)
 
-	-- Maybe Adjust me
-	local TutorialFrame = IslandsFrame.TutorialFrame
-	AS:SkinButton(TutorialFrame.Leave)
-	AS:SkinCloseButton(TutorialFrame.CloseButton)
+	AS:SkinButton(IslandsQueueFrame.TutorialFrame.Leave)
+	AS:SkinCloseButton(IslandsQueueFrame.TutorialFrame.CloseButton)
+
+	IslandsQueueFrame.HelpButton:Kill()
 
 	AS:UnregisterSkinEvent(addon, event)
 end

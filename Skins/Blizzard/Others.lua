@@ -102,8 +102,6 @@ function AS:Blizzard_Others()
 		local listFrame = _G["DropDownList"..level];
 		local listFrameName = listFrame:GetName();
 		local expandArrow = _G[listFrameName.."Button"..index.."ExpandArrow"];
-		local check = _G[listFrameName.."Button"..index.."Check"];
-        local uncheck = _G[listFrameName.."Button"..index.."UnCheck"];
 		if expandArrow then
 			expandArrow:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
 			expandArrow:SetSize(12, 12)
@@ -112,31 +110,31 @@ function AS:Blizzard_Others()
 		end
 	end)
 
-	hooksecurefunc('UIDropDownMenu_AddButton', function(info, level)
-		if ( not level ) then
-			level = 1;
-		end
+	--hooksecurefunc('UIDropDownMenu_AddButton', function(info, level)
+	--	if ( not level ) then
+	--		level = 1;
+	--	end
 
-		local listFrame = _G["DropDownList"..level];
-		local index = listFrame and (listFrame.numButtons) or 1;
-		local listFrameName = listFrame:GetName();
+	--	local listFrame = _G["DropDownList"..level];
+	--	local index = listFrame and (listFrame.numButtons) or 1;
+	--	local listFrameName = listFrame:GetName();
 
-		if not info.notCheckable then
-			local check = _G[listFrameName.."Button"..index.."Check"];
-			local uncheck = _G[listFrameName.."Button"..index.."UnCheck"];
-			if info.isNotRadio then
-				check:SetTexCoord(0.0, 0.5, 0.0, 0.5);
-				check:SetTexture("Interface\\Common\\UI-DropDownRadioChecks");
-				uncheck:SetTexCoord(0.5, 1.0, 0.0, 0.5);
-				uncheck:SetTexture("Interface\\Common\\UI-DropDownRadioChecks");
-			else
-				check:SetTexCoord(0, 1, 0, 1);
-				check:SetTexture([[Interface\Minimap\UI-Minimap-Background]]);
-				uncheck:SetTexCoord(0, 1, 0, 1);
-				uncheck:SetTexture([[Interface\Minimap\UI-Minimap-Background]]);
-			end
-		end
-	end)
+	--	if not info.notCheckable then
+	--		local check = _G[listFrameName.."Button"..index.."Check"];
+	--		local uncheck = _G[listFrameName.."Button"..index.."UnCheck"];
+	--		if info.isNotRadio then
+	--			check:SetTexCoord(0.0, 0.5, 0.0, 0.5);
+	--			check:SetTexture("Interface\\Common\\UI-DropDownRadioChecks");
+	--			uncheck:SetTexCoord(0.5, 1.0, 0.0, 0.5);
+	--			uncheck:SetTexture("Interface\\Common\\UI-DropDownRadioChecks");
+	--		else
+	--			check:SetTexCoord(0, 1, 0, 1);
+	--			check:SetTexture([[Interface\Minimap\UI-Minimap-Background]]);
+	--			uncheck:SetTexCoord(0, 1, 0, 1);
+	--			uncheck:SetTexture([[Interface\Minimap\UI-Minimap-Background]]);
+	--		end
+	--	end
+	--end)
 end
 
 AS:RegisterSkin('Blizzard_Others', AS.Blizzard_Others)

@@ -18,7 +18,6 @@
 	<Script file="EncounterJournal.lua"/>
 	<Script file="ExtraButtons.lua"/>
 	<Script file="Friends.lua"/>
-	<Script file="Garrison.lua"/>
 	<Script file="Legion.lua"/>
 	<Script file="Loot.lua"/>
 	<Script file="Mail.lua"/>
