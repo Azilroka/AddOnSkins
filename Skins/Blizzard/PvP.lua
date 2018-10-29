@@ -241,6 +241,8 @@ function AS:Blizzard_BattlefieldMap(event, addon)
 	BattlefieldMapFrame.ScrollContainer:HookScript('OnEnter', setRealAlpha)
 	BattlefieldMapFrame.BorderFrame.CloseButton:HookScript('OnLeave', setOldAlpha)
 	BattlefieldMapFrame.BorderFrame.CloseButton:HookScript('OnEnter', setRealAlpha)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 function AS:Blizzard_WorldStateScore()

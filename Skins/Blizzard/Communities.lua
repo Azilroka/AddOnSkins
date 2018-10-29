@@ -350,6 +350,8 @@ function AS:Blizzard_Communities(event, addon)
 
 	AS:SkinScrollBar(CommunitiesTicketManagerDialog.InviteManager.ListScrollFrame.scrollBar)
 	AS:SkinButton(CommunitiesTicketManagerDialog.MaximizeButton)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 function AS:Blizzard_GuildUI(event, addon)
@@ -817,6 +819,8 @@ function AS:Blizzard_LookingForGuildUI(event, addon)
 
 		App:SetBackdrop(nil)
 	end
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin("Blizzard_Communities", AS.Blizzard_Communities, 'ADDON_LOADED')

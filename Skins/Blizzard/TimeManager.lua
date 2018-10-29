@@ -43,4 +43,4 @@ function AS:Blizzard_TimeManager(event, addon)
 	AS:UnregisterSkinEvent(addon, event)
 end
 
-AS:RegisterSkin("Blizzard_TimeManager", AS.Blizzard_TimeManager)
+AS:RegisterSkin("Blizzard_TimeManager", AS.Blizzard_TimeManager, 'ADDON_LOADED')

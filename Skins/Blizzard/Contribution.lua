@@ -1,7 +1,9 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_Contribution()
-	AS:HandleCloseButton(ContributionCollectionFrame.CloseButton)
+function AS:Blizzard_Contribution(event, addon)
+	if addon ~= 'Blizzard_Contribution' then return end
+
+	AS:SkinCloseButton(ContributionCollectionFrame.CloseButton)
 	ContributionCollectionFrame.CloseButton.CloseButtonBackground:SetAlpha(0)
 
 	AS:SkinTooltip(ContributionBuffTooltip)
@@ -30,6 +32,8 @@ function AS:Blizzard_Contribution()
 			reward.isSkinned = true
 		end
 	end)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin("Blizzard_Contribution", AS.Blizzard_Contribution, 'ADDON_LOADED')

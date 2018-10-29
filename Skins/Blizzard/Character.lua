@@ -43,6 +43,8 @@ function AS:Blizzard_ArtifactUI(event, addon)
 			end
 		end
 	end)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 function AS:Blizzard_AzeriteUI(event, addon)
@@ -50,12 +52,14 @@ function AS:Blizzard_AzeriteUI(event, addon)
 
 	AS:SkinBackdropFrame(AzeriteEmpoweredItemUI)
 	AS:StripTextures(AzeriteEmpoweredItemUI.BorderFrame)
-	AzeriteEmpoweredItemUI.portrait:SetAlpha(0)
+	AzeriteEmpoweredItemUI.BorderFrame.portrait:SetAlpha(0)
 
 	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.Bg:Hide()
 	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.KeyOverlay.Shadow:Hide()
 
 	AS:SkinCloseButton(AzeriteEmpoweredItemUICloseButton)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 local function SkinEtheralFrame(frame)
@@ -126,6 +130,8 @@ function AS:Blizzard_AzeriteRespecUI(event, addon)
 
 	AS:SkinButton(AzeriteRespecFrame.ButtonFrame.AzeriteRespecButton)
 	AS:SkinCloseButton(AzeriteRespecFrameCloseButton)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 function AS:Blizzard_Character()
@@ -463,6 +469,34 @@ function AS:Blizzard_ItemSocketingUI(event, addon)
 	AS:UnregisterSkinEvent(addon, event)
 end
 
+function AS:Blizzard_ItemUpgradeUI(event, addon)
+	if addon ~= 'Blizzard_ItemUpgradeUI' then return end
+
+	AS:SkinFrame(ItemUpgradeFrame)
+	--ItemUpgradeFrameShadows:Kill()
+	--ItemUpgradeFrameInset:Kill()
+
+	AS:SkinCloseButton(ItemUpgradeFrameCloseButton)
+
+	AS:SkinIconButton(ItemUpgradeFrame.ItemButton, true)
+
+	hooksecurefunc('ItemUpgradeFrame_Update', function()
+		if GetItemUpgradeItemInfo() then
+			ItemUpgradeFrame.ItemButton.IconTexture:SetAlpha(1)
+			AS:SkinTexture(ItemUpgradeFrame.ItemButton.IconTexture)
+		else
+			ItemUpgradeFrame.ItemButton.IconTexture:SetAlpha(0)
+		end
+	end)
+
+	ItemUpgradeFrameMoneyFrame:StripTextures()
+	AS:SkinButton(ItemUpgradeFrameUpgradeButton, true)
+	ItemUpgradeFrame.FinishedGlow:Kill()
+	ItemUpgradeFrame.ButtonFrame:DisableDrawLayer('BORDER')
+
+	AS:UnregisterSkinEvent(addon, event)
+end
+
 function AS:Blizzard_ScrappingMachineUI(event, addon)
 	if addon ~= 'Blizzard_ScrappingMachineUI' then return end
 
@@ -479,6 +513,19 @@ function AS:Blizzard_ScrappingMachineUI(event, addon)
 		hooksecurefunc(button.IconBorder, 'SetVertexColor', function(self, r, g, b) button:SetBackdropBorderColor(r, g, b) end)
 		hooksecurefunc(button.IconBorder, 'Hide', function() button:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 	end
+
+	AS:UnregisterSkinEvent(addon, event)
+end
+
+function AS:Blizzard_ObliterumUI(event, addon)
+	if addon ~= 'Blizzard_ObliterumUI' then return end
+
+	AS:SkinFrame(ObliterumForgeFrame)
+
+	AS:SkinCloseButton(ObliterumForgeFrameCloseButton)
+	AS:SkinButton(ObliterumForgeFrame.ObliterateButton)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 function AS:Blizzard_TradeWindow()
@@ -568,10 +615,12 @@ function AS:Blizzard_TradeWindow()
 end
 
 AS:RegisterSkin("Blizzard_ArtifactUI", AS.Blizzard_ArtifactUI, 'ADDON_LOADED')
-AS:RegisterSkin("Blizzard_AzeriteUI", AS.Blizzard_AzeriteUI, 'ADDON_LOADED')
 AS:RegisterSkin("Blizzard_AzeriteRespecUI", AS.Blizzard_AzeriteRespecUI, 'ADDON_LOADED')
+AS:RegisterSkin("Blizzard_AzeriteUI", AS.Blizzard_AzeriteUI, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_Character', AS.Blizzard_Character)
 AS:RegisterSkin('Blizzard_DressUpFrame', AS.Blizzard_DressUpFrame)
 AS:RegisterSkin('Blizzard_ItemSocketingUI', AS.Blizzard_ItemSocketingUI, 'ADDON_LOADED')
+AS:RegisterSkin("Blizzard_ItemUpgradeUI", AS.Blizzard_ItemUpgradeUI, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_ObliterumUI', AS.Blizzard_ObliterumUI, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_ScrappingMachineUI', AS.Blizzard_ScrappingMachineUI, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_TradeWindow', AS.Blizzard_TradeWindow)

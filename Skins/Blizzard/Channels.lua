@@ -51,6 +51,8 @@ function AS:Blizzard_Channels(event, addon)
 		self.NormalTexture:SetTexture("")
 		self.HighlightTexture:SetTexture("")
 	end)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 AS:RegisterSkin("Blizzard_Channels", AS.Blizzard_Channels, 'ADDON_LOADED')

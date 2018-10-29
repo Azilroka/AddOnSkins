@@ -13,8 +13,6 @@ function AS:Blizzard_AbilityButton()
 	hooksecurefunc("ZoneAbilityFrame_Update", function(self) self.SpellButton.Style:SetTexture(nil) end)
 end
 
-AS:RegisterSkin('Blizzard_AbilityButton', AS.Blizzard_AbilityButton)
-
 function AS:Blizzard_ExtraActionButton()
 	ExtraActionButton1:SetNormalTexture('')
 	AS:SetTemplate(ExtraActionButton1)
@@ -25,4 +23,5 @@ function AS:Blizzard_ExtraActionButton()
 	hooksecurefunc("ExtraActionBar_Update", function() ExtraActionBarFrame.button.style:SetTexture(nil) end)
 end
 
+AS:RegisterSkin('Blizzard_AbilityButton', AS.Blizzard_AbilityButton)
 AS:RegisterSkin('Blizzard_ExtraActionButton', AS.Blizzard_ExtraActionButton)

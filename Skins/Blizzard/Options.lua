@@ -28,6 +28,8 @@ function AS:Blizzard_BindingUI(event, addon)
 	KeyBindingFrame.okayButton:Point("BOTTOMLEFT", KeyBindingFrame.unbindButton, "BOTTOMRIGHT", 3, 0)
 	KeyBindingFrame.cancelButton:Point("BOTTOMLEFT", KeyBindingFrame.okayButton, "BOTTOMRIGHT", 3, 0)
 	KeyBindingFrame.unbindButton:Point("BOTTOMRIGHT", KeyBindingFrame, "BOTTOMRIGHT", -211, 16)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 function AS:Blizzard_MacroUI(event, addon)

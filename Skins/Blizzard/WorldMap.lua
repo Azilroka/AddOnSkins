@@ -25,6 +25,8 @@ function AS:Blizzard_AlliedRacesUI(event, addon)
 
 	AS:SkinCloseButton(AlliedRacesFrameCloseButton)
 	AS:SkinScrollBar(AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 function AS:Blizzard_Gossip()

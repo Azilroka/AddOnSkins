@@ -26,6 +26,8 @@ function AS:Blizzard_AdventureMap(event, addon)
 	AS:SkinScrollBar(AdventureMapQuestChoiceDialog.Details.ScrollBar)
 	AS:SkinButton(AdventureMapQuestChoiceDialog.AcceptButton)
 	AS:SkinButton(AdventureMapQuestChoiceDialog.DeclineButton)
+
+	AS:UnregisterSkinEvent(addon, event)
 end
 
 function AS:Blizzard_ChallengesUI(event, addon)
@@ -258,17 +260,17 @@ end
 
 function AS:Blizzard_RaidUI(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
-		AS:SkinButton(RaidFrameConvertToRaidButton)
-		AS:SkinButton(RaidFrameRaidInfoButton)
-		AS:SkinCheckBox(RaidFrameAllAssistCheckButton)
-
 		AS:SkinFrame(RaidInfoFrame)
 		AS:SkinScrollBar(RaidInfoScrollFrameScrollBar)
 		AS:SkinCloseButton(RaidInfoCloseButton)
-		AS:SkinButton(RaidInfoExtendButton)
-		AS:SkinButton(RaidInfoCancelButton)
+
 		AS:StripTextures(RaidInfoInstanceLabel)
 		AS:StripTextures(RaidInfoIDLabel)
+		AS:SkinButton(RaidFrameConvertToRaidButton)
+		AS:SkinButton(RaidFrameRaidInfoButton)
+		AS:SkinButton(RaidInfoExtendButton)
+		AS:SkinButton(RaidInfoCancelButton)
+		AS:SkinCheckBox(RaidFrameAllAssistCheckButton)
 	end
 
 	if addon ~= 'Blizzard_RaidUI' then return end

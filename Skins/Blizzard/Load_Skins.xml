@@ -12,6 +12,7 @@
 	<Script file="ChatBubbles.lua"/>
 	<Script file="Collections.lua"/>
 	<Script file="Communities.lua"/>
+	<Script file="Contribution.lua"/>
 	<Script file="DeathRecap.lua"/>
 	<Script file="DebugTools.lua"/>
 	<Script file="EncounterJournal.lua"/>
@@ -19,6 +20,7 @@
 	<Script file="Friends.lua"/>
 	<Script file="Garrison.lua"/>
 	<Script file="Inspect.lua"/>
+	<Script file="Loot.lua"/>
 	<Script file="Mail.lua"/>
 	<Script file="Merchant.lua"/>
 	<Script file="Options.lua"/>
@@ -33,5 +35,6 @@
 	<Script file="TimeManager.lua"/>
 	<Script file="Trainer.lua"/>
 	<Script file="VoidStorage.lua"/>
+	<Script file="Warboard.lua"/>
 	<Script file="WorldMap.lua"/>
 </Ui>
