@@ -1,139 +1,5 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_ArtifactUI(event, addon)
-	if addon ~= 'Blizzard_ArtifactUI' then return end
-
-	AS:SkinBackdropFrame(ArtifactFrame)
-	AS:SkinCloseButton(ArtifactFrame.CloseButton)
-
-	for i = 1, 2 do
-		AS:SkinTab(_G["ArtifactFrameTab" .. i])
-	end
-
---	ArtifactFrameTab1:SetPoint("TOPLEFT", ArtifactFrame, "BOTTOMLEFT", 0, 0)
-
-	ArtifactFrame.ForgeBadgeFrame.ItemIcon:Hide()
-	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:ClearAllPoints()
-	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:SetPoint("TOPLEFT", ArtifactFrame)
-
-	ArtifactFrame.AppearancesTab:HookScript("OnShow", function(self)
-		for i = 1, self:GetNumChildren() do
-			local child = select(i, self:GetChildren())
-			if child and child.appearanceID and not child.Backdrop then
-				AS:SkinTexture(child.SwatchTexture, true)
-				child.Border:SetAlpha(0)
-				child.Background:SetAlpha(0)
-				child.HighlightTexture:SetAlpha(0)
-				child.HighlightTexture.SetAlpha = AS.Noop
-
-				if child.Selected:IsShown() then
-					child.backdrop:SetBackdropBorderColor(1,1,1)
-				end
-
-				child.Selected:SetAlpha(0)
-				child.Selected.SetAlpha = AS.Noop
-
-				hooksecurefunc(child.Selected, "SetShown", function(_, isActive)
-					if isActive then
-						child.backdrop:SetBackdropBorderColor(1,1,1)
-					else
-						child.backdrop:SetBackdropBorderColor(unpack(E.media.bordercolor))
-					end
-				end)
-			end
-		end
-	end)
-
-	AS:UnregisterSkinEvent(addon, event)
-end
-
-function AS:Blizzard_AzeriteUI(event, addon)
-	if addon ~= 'Blizzard_AzeriteUI' then return end
-
-	AS:SkinBackdropFrame(AzeriteEmpoweredItemUI)
-	AS:StripTextures(AzeriteEmpoweredItemUI.BorderFrame)
-	AzeriteEmpoweredItemUI.BorderFrame.portrait:SetAlpha(0)
-
-	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.Bg:Hide()
-	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.KeyOverlay.Shadow:Hide()
-
-	AS:SkinCloseButton(AzeriteEmpoweredItemUICloseButton)
-
-	AS:UnregisterSkinEvent(addon, event)
-end
-
-local function SkinEtheralFrame(frame)
-	frame.CornerTL:Hide()
-	frame.CornerTR:Hide()
-	frame.CornerBL:Hide()
-	frame.CornerBR:Hide()
-
-	local name = frame:GetName()
-	_G[name.."LeftEdge"]:Hide()
-	_G[name.."RightEdge"]:Hide()
-	_G[name.."TopEdge"]:Hide()
-	_G[name.."BottomEdge"]:Hide()
-
-	local bg = select(23, frame:GetRegions())
-	bg:ClearAllPoints()
-	bg:SetPoint("TOPLEFT", -50, 25)
-	bg:SetPoint("BOTTOMRIGHT")
-	bg:SetTexture([[Interface\Transmogrify\EtherealLines]], true, true)
-	bg:SetHorizTile(true)
-	bg:SetVertTile(true)
-	bg:SetAlpha(0.5)
-end
-
-function AS:Blizzard_AzeriteRespecUI(event, addon)
-	if addon ~= 'Blizzard_AzeriteRespecUI' then return end
-
-	local AzeriteRespecFrame = _G["AzeriteRespecFrame"]
-	AzeriteRespecFrame:SetClipsChildren(true)
-	AzeriteRespecFrame.Background:Hide()
-	SkinEtheralFrame(AzeriteRespecFrame)
-
-	AzeriteRespecFramePortraitFrame:Hide()
-	AzeriteRespecFramePortrait:Hide()
-	AzeriteRespecFrameTitleBg:Hide()
-	AzeriteRespecFrameTopBorder:Hide()
-	AzeriteRespecFrameTopRightCorner:Hide()
-	AzeriteRespecFrameRightBorder:Hide()
-	AzeriteRespecFrameLeftBorder:Hide()
-	AzeriteRespecFrameBottomBorder:Hide()
-	AzeriteRespecFrameBotRightCorner:Hide()
-	AzeriteRespecFrameBotLeftCorner:Hide()
-	AzeriteRespecFrameBg:Hide()
-
-	local ItemSlot = AzeriteRespecFrame.ItemSlot
-	ItemSlot:SetSize(64, 64)
-	ItemSlot:SetPoint("CENTER", AzeriteRespecFrame)
-	ItemSlot.Icon:ClearAllPoints()
-	ItemSlot.Icon:SetPoint("TOPLEFT", 1, -1)
-	ItemSlot.Icon:SetPoint("BOTTOMRIGHT", -1, 1)
-	ItemSlot.GlowOverlay:SetAlpha(0)
-
-	AzeriteRespecFrame.ItemSlot:CreateBackdrop("Transparent")
-	AzeriteRespecFrame.ItemSlot.backdrop:SetBackdropColor(153/255, 0/255, 153/255, 0.5)
-	AS:SkinTexture(AzeriteRespecFrame.ItemSlot.Icon)
-
-	local ButtonFrame = AzeriteRespecFrame.ButtonFrame
-	ButtonFrame:GetRegions():Hide()
-	ButtonFrame.ButtonBorder:Hide()
-	ButtonFrame.ButtonBottomBorder:Hide()
-
-	ButtonFrame.MoneyFrameEdge:Hide()
-	ButtonFrame.MoneyFrame:ClearAllPoints()
-	ButtonFrame.MoneyFrame:SetPoint("BOTTOMRIGHT", ButtonFrame.MoneyFrameEdge, 7, 5)
-
-	AzeriteRespecFrame:CreateBackdrop("Transparent")
-	AzeriteRespecFrame.backdrop:SetAllPoints()
-
-	AS:SkinButton(AzeriteRespecFrame.ButtonFrame.AzeriteRespecButton)
-	AS:SkinCloseButton(AzeriteRespecFrameCloseButton)
-
-	AS:UnregisterSkinEvent(addon, event)
-end
-
 function AS:Blizzard_Character()
 	CHARACTERFRAME_EXPANDED_WIDTH = 580
 
@@ -405,6 +271,21 @@ function AS:Blizzard_Character()
 	end)
 end
 
+function AS:Blizzard_DeathRecap(event, addon)
+	if addon ~= 'Blizzard_DeathRecap' then return end
+
+	AS:SkinFrame(DeathRecapFrame)
+	AS:SkinCloseButton(DeathRecapFrame.CloseXButton)
+	AS:SkinButton(DeathRecapFrame.CloseButton)
+
+	for _, Recap in pairs(DeathRecapFrame.DeathRecapEntry) do
+		AS:SkinTexture(Recap.SpellInfo.Icon, true)
+		Recap.SpellInfo.IconBorder:SetAlpha(0)
+	end
+
+	AS:UnregisterSkinEvent(addon, event)
+end
+
 function AS:Blizzard_DressUpFrame()
 	AS:SkinFrame(SideDressUpFrame, nil, nil, true)
 	AS:SkinButton(SideDressUpModelResetButton)
@@ -465,65 +346,6 @@ function AS:Blizzard_ItemSocketingUI(event, addon)
 	ItemSocketingSocketButton:SetPoint("BOTTOMRIGHT", ItemSocketingFrame, "BOTTOMRIGHT", -5, 5)
 	AS:SkinButton(ItemSocketingSocketButton)
 	AS:SkinScrollBar(ItemSocketingScrollFrameScrollBar)
-
-	AS:UnregisterSkinEvent(addon, event)
-end
-
-function AS:Blizzard_ItemUpgradeUI(event, addon)
-	if addon ~= 'Blizzard_ItemUpgradeUI' then return end
-
-	AS:SkinFrame(ItemUpgradeFrame)
-	--ItemUpgradeFrameShadows:Kill()
-	--ItemUpgradeFrameInset:Kill()
-
-	AS:SkinCloseButton(ItemUpgradeFrameCloseButton)
-
-	AS:SkinIconButton(ItemUpgradeFrame.ItemButton, true)
-
-	hooksecurefunc('ItemUpgradeFrame_Update', function()
-		if GetItemUpgradeItemInfo() then
-			ItemUpgradeFrame.ItemButton.IconTexture:SetAlpha(1)
-			AS:SkinTexture(ItemUpgradeFrame.ItemButton.IconTexture)
-		else
-			ItemUpgradeFrame.ItemButton.IconTexture:SetAlpha(0)
-		end
-	end)
-
-	ItemUpgradeFrameMoneyFrame:StripTextures()
-	AS:SkinButton(ItemUpgradeFrameUpgradeButton, true)
-	ItemUpgradeFrame.FinishedGlow:Kill()
-	ItemUpgradeFrame.ButtonFrame:DisableDrawLayer('BORDER')
-
-	AS:UnregisterSkinEvent(addon, event)
-end
-
-function AS:Blizzard_ScrappingMachineUI(event, addon)
-	if addon ~= 'Blizzard_ScrappingMachineUI' then return end
-
-	AS:SkinBackdropFrame(ScrappingMachineFrame)
-	AS:SkinCloseButton(ScrappingMachineFrame.CloseButton)
-	AS:SkinButton(ScrappingMachineFrame.ScrapButton, true)
-
-	AS:StripTextures(ScrappingMachineFrame.ItemSlots)
-
-	for button in pairs(ScrappingMachineFrame.ItemSlots.scrapButtons.activeObjects) do
-		AS:SkinFrame(button)
-		AS:SkinTexture(button.Icon)
-		button.IconBorder:SetAlpha(0)
-		hooksecurefunc(button.IconBorder, 'SetVertexColor', function(self, r, g, b) button:SetBackdropBorderColor(r, g, b) end)
-		hooksecurefunc(button.IconBorder, 'Hide', function() button:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
-	end
-
-	AS:UnregisterSkinEvent(addon, event)
-end
-
-function AS:Blizzard_ObliterumUI(event, addon)
-	if addon ~= 'Blizzard_ObliterumUI' then return end
-
-	AS:SkinFrame(ObliterumForgeFrame)
-
-	AS:SkinCloseButton(ObliterumForgeFrameCloseButton)
-	AS:SkinButton(ObliterumForgeFrame.ObliterateButton)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
@@ -614,13 +436,8 @@ function AS:Blizzard_TradeWindow()
 	end)
 end
 
-AS:RegisterSkin("Blizzard_ArtifactUI", AS.Blizzard_ArtifactUI, 'ADDON_LOADED')
-AS:RegisterSkin("Blizzard_AzeriteRespecUI", AS.Blizzard_AzeriteRespecUI, 'ADDON_LOADED')
-AS:RegisterSkin("Blizzard_AzeriteUI", AS.Blizzard_AzeriteUI, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_Character', AS.Blizzard_Character)
+AS:RegisterSkin('Blizzard_DeathRecap', AS.Blizzard_DeathRecap, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_DressUpFrame', AS.Blizzard_DressUpFrame)
 AS:RegisterSkin('Blizzard_ItemSocketingUI', AS.Blizzard_ItemSocketingUI, 'ADDON_LOADED')
-AS:RegisterSkin("Blizzard_ItemUpgradeUI", AS.Blizzard_ItemUpgradeUI, 'ADDON_LOADED')
-AS:RegisterSkin('Blizzard_ObliterumUI', AS.Blizzard_ObliterumUI, 'ADDON_LOADED')
-AS:RegisterSkin('Blizzard_ScrappingMachineUI', AS.Blizzard_ScrappingMachineUI, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_TradeWindow', AS.Blizzard_TradeWindow)

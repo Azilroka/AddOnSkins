@@ -1,39 +1,59 @@
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_GarrisonUI(event, addon)
-	if addon ~= 'Blizzard_GarrisonUI' then return end
+function AS:Blizzard_ArtifactUI(event, addon)
+	if addon ~= 'Blizzard_ArtifactUI' then return end
 
-	AS:SkinFrame(GarrisonMissionFrame, nil, nil, true)
-	AS:StripTextures(GarrisonMissionFrame.GarrCorners)
-	AS:SkinCloseButton(GarrisonMissionFrame.CloseButton)
+	AS:SkinBackdropFrame(ArtifactFrame)
+	AS:SkinCloseButton(ArtifactFrame.CloseButton)
 
 	for i = 1, 2 do
-		AS:SkinTab(_G["GarrisonMissionFrameTab"..i])
-		AS:SkinTab(_G["GarrisonMissionFrameMissionsTab"..i])
+		AS:SkinTab(_G["ArtifactFrameTab" .. i])
 	end
 
-	AS:StripTextures(GarrisonMissionFrameMissions.MaterialFrame)
-	GarrisonMissionFrameMissions.MaterialFrame.Icon:SetAtlas('GarrMission_CurrencyIcon-Material')
-	AS:SkinScrollBar(GarrisonMissionFrameMissionsListScrollFrameScrollBar)
-	AS:StripTextures(GarrisonMissionFrameMissions)
+--	ArtifactFrameTab1:SetPoint("TOPLEFT", ArtifactFrame, "BOTTOMLEFT", 0, 0)
 
-	AS:StripTextures(GarrisonCapacitiveDisplayFrame, nil, nil, true)
-	AS:CreateBackdrop(GarrisonCapacitiveDisplayFrame)
-	AS:StripTextures(GarrisonCapacitiveDisplayFrameInset)
-	AS:SkinCloseButton(GarrisonCapacitiveDisplayFrame.CloseButton)
-	AS:SkinButton(GarrisonCapacitiveDisplayFrame.StartWorkOrderButton, true)
-	AS:SkinButton(GarrisonCapacitiveDisplayFrame.CreateAllWorkOrdersButton, true)
+	ArtifactFrame.ForgeBadgeFrame.ItemIcon:Hide()
+	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:ClearAllPoints()
+	ArtifactFrame.ForgeBadgeFrame.ForgeLevelBackground:SetPoint("TOPLEFT", ArtifactFrame)
 
-	GarrisonCapacitiveDisplayFramePortrait:Kill()
-	GarrisonCapacitiveDisplayFrameLeft:SetTexture(nil)
-	GarrisonCapacitiveDisplayFrameMiddle:SetTexture(nil)
-	GarrisonCapacitiveDisplayFrameRight:SetTexture(nil)
+	ArtifactFrame.AppearancesTab:HookScript("OnShow", function(self)
+		for i = 1, self:GetNumChildren() do
+			local child = select(i, self:GetChildren())
+			if child and child.appearanceID and not child.Backdrop then
+				AS:SkinTexture(child.SwatchTexture, true)
+				child.Border:SetAlpha(0)
+				child.Background:SetAlpha(0)
+				child.HighlightTexture:SetAlpha(0)
+				child.HighlightTexture.SetAlpha = AS.Noop
 
-	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.IconBG:SetTexture(nil)
+				if child.Selected:IsShown() then
+					child.backdrop:SetBackdropBorderColor(1,1,1)
+				end
 
-	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.DecrementButton)
-	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.IncrementButton)
-	AS:SkinEditBox(GarrisonCapacitiveDisplayFrame.Count)
+				child.Selected:SetAlpha(0)
+				child.Selected.SetAlpha = AS.Noop
+
+				hooksecurefunc(child.Selected, "SetShown", function(_, isActive)
+					if isActive then
+						child.backdrop:SetBackdropBorderColor(1,1,1)
+					else
+						child.backdrop:SetBackdropBorderColor(unpack(E.media.bordercolor))
+					end
+				end)
+			end
+		end
+	end)
+
+	AS:UnregisterSkinEvent(addon, event)
+end
+
+function AS:Blizzard_ObliterumUI(event, addon)
+	if addon ~= 'Blizzard_ObliterumUI' then return end
+
+	AS:SkinFrame(ObliterumForgeFrame)
+
+	AS:SkinCloseButton(ObliterumForgeFrameCloseButton)
+	AS:SkinButton(ObliterumForgeFrame.ObliterateButton)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
@@ -161,5 +181,6 @@ function AS:Blizzard_OrderHallUI(event, addon)
 	AS:UnregisterSkinEvent(addon, event)
 end
 
-AS:RegisterSkin('Blizzard_GarrisonUI', AS.Blizzard_GarrisonUI, 'ADDON_LOADED')
+AS:RegisterSkin("Blizzard_ArtifactUI", AS.Blizzard_ArtifactUI, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_ObliterumUI', AS.Blizzard_ObliterumUI, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_OrderHallUI', AS.Blizzard_OrderHallUI, 'ADDON_LOADED')

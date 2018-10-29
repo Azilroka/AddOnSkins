@@ -6,6 +6,7 @@
 	<Script file="Auction.lua"/>
 	<Script file="Bags.lua"/>
 	<Script file="BarberShop.lua"/>
+	<Script file="BfA.lua"/>
 	<Script file="Calendar.lua"/>
 	<Script file="Channels.lua"/>
 	<Script file="Character.lua"/>
@@ -13,13 +14,13 @@
 	<Script file="Collections.lua"/>
 	<Script file="Communities.lua"/>
 	<Script file="Contribution.lua"/>
-	<Script file="DeathRecap.lua"/>
 	<Script file="DebugTools.lua"/>
 	<Script file="EncounterJournal.lua"/>
 	<Script file="ExtraButtons.lua"/>
 	<Script file="Friends.lua"/>
 	<Script file="Garrison.lua"/>
 	<Script file="Inspect.lua"/>
+	<Script file="Legion.lua"/>
 	<Script file="Loot.lua"/>
 	<Script file="Mail.lua"/>
 	<Script file="Merchant.lua"/>
@@ -33,8 +34,9 @@
 	<Script file="TalkingHead.lua"/>
 	<Script file="Taxi.lua"/>
 	<Script file="TimeManager.lua"/>
+	<Script file="Tooltip.lua"/>
 	<Script file="Trainer.lua"/>
 	<Script file="VoidStorage.lua"/>
-	<Script file="Warboard.lua"/>
+	<Script file="WoD.lua"/>
 	<Script file="WorldMap.lua"/>
 </Ui>
