@@ -192,18 +192,17 @@ function AS:Blizzard_Options(event, addon)
 		InterfaceOptionsFrameTab2:SetPoint('TOPLEFT', InterfaceOptionsFrameTab1, 'TOPRIGHT', 1, 0)
 		InterfaceOptionsSocialPanel.EnableTwitter.Logo:SetAtlas("WoWShare-TwitterLogo")
 
-		-- -- Color Picker
-		-- AS:SkinFrame(ColorPickerFrame, nil, true)
-		-- AS:SkinButton(ColorPickerOkayButton)
-		-- AS:SkinButton(ColorPickerCancelButton)
-		-- ColorPickerCancelButton:SetPoint("BOTTOMRIGHT", -11, 6)
-		-- ColorPickerOkayButton:SetPoint("RIGHT", ColorPickerCancelButton, "LEFT", -3, 0)
-		-- AS:SkinFrame(OpacitySliderFrame)
-		-- OpacitySliderFrame:GetThumbTexture():Size(14)
-		-- OpacitySliderFrame:GetThumbTexture():SetTexture(unpack(AS.BorderColor))
-		-- ColorPickerFrameHeader:SetTexture(nil)
+		AS:SkinFrame(ColorPickerFrame, nil, true)
+		AS:SkinButton(ColorPickerOkayButton)
+		AS:SkinButton(ColorPickerCancelButton)
+		ColorPickerCancelButton:SetPoint("BOTTOMRIGHT", -11, 6)
+		ColorPickerOkayButton:SetPoint("RIGHT", ColorPickerCancelButton, "LEFT", -3, 0)
+		AS:SkinFrame(OpacitySliderFrame)
+		OpacitySliderFrame:GetThumbTexture():Size(14)
+		OpacitySliderFrame:GetThumbTexture():SetTexture(unpack(AS.BorderColor))
+		ColorPickerFrameHeader:SetTexture(nil)
 
-		-- AS:SkinFrame(OpacityFrame)
+		AS:SkinFrame(OpacityFrame)
 
 		-- Item Text Frame -- Needs Parchment
 		AS:SkinFrame(ItemTextFrame, nil, nil, true)

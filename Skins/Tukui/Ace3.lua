@@ -95,7 +95,7 @@ function AS:Ace3()
 
 			button:SetParent(frame.Backdrop)
 			text:SetParent(frame.Backdrop)
-			button:HookScript('PostClick', function(this, button)
+			button:HookScript('PostClick', function(this)
 				local self = this.obj
 				if self.dropdown then
 					AS:SetTemplate(self.dropdown)
@@ -121,6 +121,29 @@ function AS:Ace3()
 
 			widget.lowtext:SetPoint('TOPLEFT', widget.slider, 'BOTTOMLEFT', 2, -2)
 			widget.hightext:SetPoint('TOPRIGHT', widget.slider, 'BOTTOMRIGHT', -2, -2)
+		elseif TYPE == "Keybinding" then
+			local button = widget.button
+			local msgframe = widget.msgframe
+
+			AS:SkinButton(button)
+
+			AS:SkinFrame(msgframe)
+			msgframe.msg:ClearAllPoints()
+			msgframe.msg:SetPoint("CENTER")
+		elseif TYPE == "ColorPicker" then
+			local frame = widget.frame
+			local colorSwatch = widget.colorSwatch
+
+			AS:CreateBackdrop(frame)
+			frame.Backdrop:SetSize(19, 19)
+			frame.Backdrop:ClearAllPoints()
+			frame.Backdrop:SetPoint('LEFT', frame, 'LEFT', 4, 0)
+			colorSwatch:ClearAllPoints()
+			colorSwatch:SetParent(frame.Backdrop)
+			colorSwatch:SetInside(frame.Backdrop)
+
+			local texture = select(2, frame:GetRegions())
+			texture:SetColorTexture(0, 0, 0, 0)
 		end
 
 		return oldRegisterAsWidget(self, widget)

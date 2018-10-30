@@ -110,31 +110,42 @@ function AS:Blizzard_Others()
 		end
 	end)
 
-	--hooksecurefunc('UIDropDownMenu_AddButton', function(info, level)
-	--	if ( not level ) then
-	--		level = 1;
-	--	end
+	hooksecurefunc("UIDropDownMenu_SetIconImage", function(icon, texture)
+		if texture:find("Divider") then
+			local r, g, b = unpack(AS.Color)
+			icon:SetColorTexture(r, g, b, 0.45)
+			icon:SetHeight(1)
+		end
+	end)
 
-	--	local listFrame = _G["DropDownList"..level];
-	--	local index = listFrame and (listFrame.numButtons) or 1;
-	--	local listFrameName = listFrame:GetName();
+	hooksecurefunc('UIDropDownMenu_AddButton', function(info, level)
+		if ( not level ) then
+			level = 1;
+		end
 
-	--	if not info.notCheckable then
-	--		local check = _G[listFrameName.."Button"..index.."Check"];
-	--		local uncheck = _G[listFrameName.."Button"..index.."UnCheck"];
-	--		if info.isNotRadio then
-	--			check:SetTexCoord(0.0, 0.5, 0.0, 0.5);
-	--			check:SetTexture("Interface\\Common\\UI-DropDownRadioChecks");
-	--			uncheck:SetTexCoord(0.5, 1.0, 0.0, 0.5);
-	--			uncheck:SetTexture("Interface\\Common\\UI-DropDownRadioChecks");
-	--		else
-	--			check:SetTexCoord(0, 1, 0, 1);
-	--			check:SetTexture([[Interface\Minimap\UI-Minimap-Background]]);
-	--			uncheck:SetTexCoord(0, 1, 0, 1);
-	--			uncheck:SetTexture([[Interface\Minimap\UI-Minimap-Background]]);
-	--		end
-	--	end
-	--end)
+		local listFrame = _G["DropDownList"..level];
+		local index = listFrame and (listFrame.numButtons) or 1;
+		local listFrameName = listFrame:GetName();
+		local check = _G[listFrameName.."Button"..index.."Check"];
+		local uncheck = _G[listFrameName.."Button"..index.."UnCheck"];
+
+		if check then
+			AS:CreateBackdrop(check)
+			check:SetSize(12, 12)
+			if check.Backdrop then
+				check.Backdrop:Hide()
+			end
+		end
+
+		if not info.notCheckable then
+			uncheck:SetTexture('')
+
+			check:SetTexCoord(0, 1, 0, 1);
+			check:SetTexture(AS.NormTex);
+			check:SetVertexColor(unpack(AS.Color))
+			check.Backdrop:Show()
+		end
+	end)
 end
 
 AS:RegisterSkin('Blizzard_Others', AS.Blizzard_Others)
