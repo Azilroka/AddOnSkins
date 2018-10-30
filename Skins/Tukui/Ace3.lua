@@ -12,9 +12,10 @@ function AS:Ace3()
 	AceGUI.RegisterAsWidget = function(self, widget)
 		local TYPE = widget.type
 		if TYPE == 'MultiLineEditBox' then
-			AS:SetTemplate(widget.scrollBG, 'Default')
+			AS:SetTemplate(widget.scrollBG)
 			AS:SkinButton(widget.button)
 			AS:SkinScrollBar(widget.scrollBar)
+
 			widget.scrollBar:SetPoint('RIGHT', widget.frame, 'RIGHT', 0 -4)
 			widget.scrollBG:SetPoint('TOPRIGHT', widget.scrollBar, 'TOPLEFT', -2, 19)
 			widget.scrollBG:SetPoint('BOTTOMLEFT', widget.button, 'TOPLEFT')
@@ -41,8 +42,8 @@ function AS:Ace3()
 			local text = widget.text
 
 			AS:SkinBackdropFrame(frame)
-			frame.Backdrop:Point('TOPLEFT', 15, -1)
-			frame.Backdrop:Point("BOTTOMRIGHT", -24, 1)
+			frame.Backdrop:SetPoint('TOPLEFT', 15, -2)
+			frame.Backdrop:SetPoint("BOTTOMRIGHT", -21, 0)
 
 			AS:SkinArrowButton(button)
 
@@ -51,7 +52,7 @@ function AS:Ace3()
 
 			button:SetSize(20, 20)
 			button:ClearAllPoints()
-			button:Point('RIGHT', frame.Backdrop, 'RIGHT', -2, 0)
+			button:SetPoint('RIGHT', frame.Backdrop, 'RIGHT', -2, 0)
 
 			text:ClearAllPoints()
 			text:SetJustifyH("RIGHT")
@@ -64,30 +65,33 @@ function AS:Ace3()
 			local button = frame.dropButton
 			local text = frame.text
 
-			AS:StripTextures(frame)
-
+			AS:SkinBackdropFrame(frame)
 			AS:SkinArrowButton(button)
+
+			frame.label:ClearAllPoints()
+			frame.label:SetPoint('BOTTOMLEFT', frame.Backdrop, 'TOPLEFT', 2, 0)
+
 			frame.text:ClearAllPoints()
-			frame.text:Point('RIGHT', button, 'LEFT', -2, 0)
+			frame.text:SetPoint('RIGHT', button, 'LEFT', -2, 0)
 
+			button:SetSize(20, 20)
 			button:ClearAllPoints()
-			button:Point('RIGHT', frame, 'RIGHT', -10, -6)
+			button:SetPoint('RIGHT', frame.Backdrop, 'RIGHT', -2, 0)
 
-			AS:CreateBackdrop(frame, "Default")
-			frame.Backdrop:Point('TOPLEFT', 0, -17)
+			frame.Backdrop:SetPoint('TOPLEFT', 0, -21)
+			frame.Backdrop:SetPoint("BOTTOMRIGHT", -4, -1)
 
 			if TYPE == 'LSM30_Sound' then
 				widget.soundbutton:SetParent(frame.Backdrop)
 				widget.soundbutton:ClearAllPoints()
-				widget.soundbutton:Point('LEFT', frame.Backdrop, 'LEFT', 2, 0)
+				widget.soundbutton:SetPoint('LEFT', frame.Backdrop, 'LEFT', 2, 0)
 			elseif TYPE == 'LSM30_Statusbar' then
 				widget.bar:SetParent(frame.Backdrop)
-				widget.bar:SetInside()
+				widget.bar:ClearAllPoints()
+				widget.bar:SetPoint('TOPLEFT', frame.Backdrop, 'TOPLEFT', 2, -2)
+				widget.bar:SetPoint('BOTTOMRIGHT', button, 'BOTTOMLEFT', -1, 0)
 			elseif TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' then
-				frame.Backdrop:Point('TOPLEFT', 22, -16)
 			end
-
-			frame.Backdrop:Point('BOTTOMRIGHT', button, 'BOTTOMRIGHT', 2, -2)
 
 			button:SetParent(frame.Backdrop)
 			text:SetParent(frame.Backdrop)
