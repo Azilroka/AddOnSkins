@@ -133,7 +133,7 @@ function AS:Blizzard_Others()
 			local uncheck = _G[listFrameName.."Button"..i.."UnCheck"]
 			local highlight = _G["DropDownList"..level.."Button"..i.."Highlight"]
 
-			highlight:SetColorTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
+			highlight:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
 			highlight:SetVertexColor(r, g, b)
 
 			AS:CreateBackdrop(check)
