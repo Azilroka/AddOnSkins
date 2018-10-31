@@ -143,8 +143,18 @@ function AS:Ace3()
 			colorSwatch:SetParent(frame.Backdrop)
 			colorSwatch:SetInside(frame.Backdrop)
 
-			local texture = select(2, frame:GetRegions())
-			texture:SetColorTexture(0, 0, 0, 0)
+			for i = 1, frame:GetNumRegions() do
+				local Region = select(i, frame:GetRegions())
+				if Region and Region:IsObjectType('Texture') then
+					if Region:GetWidth() == 16 then
+						Region:SetColorTexture(0, 0, 0, 0)
+					else
+						Region:ClearAllPoints()
+						Region:SetParent(frame.Backdrop)
+						Region:SetInside(frame.Backdrop)
+					end
+				end
+			end
 		end
 
 		return oldRegisterAsWidget(self, widget)
