@@ -124,13 +124,11 @@ function AS:Blizzard_Others()
 		end
 
 		local r, g, b = unpack(AS.Color)
-		local listFrame = _G["DropDownList"..level];
-		local listFrameName = listFrame:GetName();
 
 		for i = 1, UIDROPDOWNMENU_MAXBUTTONS do
 			local button = _G["DropDownList"..level.."Button"..i]
-			local check = _G[listFrameName.."Button"..i.."Check"]
-			local uncheck = _G[listFrameName.."Button"..i.."UnCheck"]
+			local check = _G["DropDownList"..level.."Button"..i.."Check"]
+			local uncheck = _G["DropDownList"..level.."Button"..i.."UnCheck"]
 			local highlight = _G["DropDownList"..level.."Button"..i.."Highlight"]
 
 			highlight:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
