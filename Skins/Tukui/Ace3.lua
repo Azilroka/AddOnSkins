@@ -135,9 +135,10 @@ function AS:Ace3()
 			local colorSwatch = widget.colorSwatch
 
 			AS:CreateBackdrop(frame)
-			frame.Backdrop:SetSize(19, 19)
+			frame.Backdrop:SetSize(16, 16)
 			frame.Backdrop:ClearAllPoints()
 			frame.Backdrop:SetPoint('LEFT', frame, 'LEFT', 4, 0)
+			colorSwatch:SetTexture(AS.Blank)
 			colorSwatch:ClearAllPoints()
 			colorSwatch:SetParent(frame.Backdrop)
 			colorSwatch:SetInside(frame.Backdrop)

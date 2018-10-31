@@ -2,54 +2,54 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_LootFrames()
 
-	GroupLootContainer.reservedSize = 32
+	--GroupLootContainer.reservedSize = 32
 
-	for i = 1, NUM_GROUP_LOOT_FRAMES do
-		local Frame = _G['GroupLootFrame'..i]
-		AS:StripTextures(Frame)
-		Frame:SetSize(328, 28)
-		Frame:SetFrameStrata('MEDIUM')
-		Frame:SetFrameLevel(1)
+	--for i = 1, NUM_GROUP_LOOT_FRAMES do
+	--	local Frame = _G['GroupLootFrame'..i]
+	--	AS:StripTextures(Frame)
+	--	Frame:SetSize(328, 28)
+	--	Frame:SetFrameStrata('MEDIUM')
+	--	Frame:SetFrameLevel(1)
 
-		Frame.Timer:ClearAllPoints()
-		Frame.Timer:SetInside()
-		AS:SkinStatusBar(Frame.Timer)
+	--	Frame.Timer:ClearAllPoints()
+	--	Frame.Timer:SetInside()
+	--	AS:SkinStatusBar(Frame.Timer)
 
-		Frame.IconFrame:ClearAllPoints()
-		Frame.IconFrame:SetSize(28, 28)
-		Frame.IconFrame:SetPoint('RIGHT', Frame, 'LEFT', -3, 0)
+	--	Frame.IconFrame:ClearAllPoints()
+	--	Frame.IconFrame:SetSize(28, 28)
+	--	Frame.IconFrame:SetPoint('RIGHT', Frame, 'LEFT', -3, 0)
 
-		AS:SetTemplate(Frame.IconFrame)
-		AS:SkinTexture(Frame.IconFrame.Icon)
-		Frame.IconFrame.Icon:SetInside()
-		Frame.IconFrame.Border:SetAlpha(0)
+	--	AS:SetTemplate(Frame.IconFrame)
+	--	AS:SkinTexture(Frame.IconFrame.Icon)
+	--	Frame.IconFrame.Icon:SetInside()
+	--	Frame.IconFrame.Border:SetAlpha(0)
 
-		for _, Button in pairs({'NeedButton', 'GreedButton', 'PassButton', 'DisenchantButton'}) do
-			Frame[Button]:ClearAllPoints()
-			Frame[Button]:SetSize(24, 24)
-		end
+	--	for _, Button in pairs({'NeedButton', 'GreedButton', 'PassButton', 'DisenchantButton'}) do
+	--		Frame[Button]:ClearAllPoints()
+	--		Frame[Button]:SetSize(24, 24)
+	--	end
 
-		Frame.NeedButton:SetPoint("LEFT", 5, -2)
-		Frame.GreedButton:SetPoint("LEFT", Frame.NeedButton, "RIGHT", 5, 0)
-		Frame.DisenchantButton:SetPoint("LEFT", Frame.GreedButton, "RIGHT", 5, 0)
-		Frame.PassButton:SetPoint("LEFT", Frame.DisenchantButton, "RIGHT", 5, 2)
+	--	Frame.NeedButton:SetPoint("LEFT", 5, -2)
+	--	Frame.GreedButton:SetPoint("LEFT", Frame.NeedButton, "RIGHT", 5, 0)
+	--	Frame.DisenchantButton:SetPoint("LEFT", Frame.GreedButton, "RIGHT", 5, 0)
+	--	Frame.PassButton:SetPoint("LEFT", Frame.DisenchantButton, "RIGHT", 5, 2)
 
-		Frame.Name:ClearAllPoints()
-		Frame.Name:SetWordWrap(false)
-		Frame.Name:SetWidth(200)
-		Frame.Name:SetPoint('LEFT', Frame.PassButton, 'RIGHT', 5, 0)
-	end
+	--	Frame.Name:ClearAllPoints()
+	--	Frame.Name:SetWordWrap(false)
+	--	Frame.Name:SetWidth(200)
+	--	Frame.Name:SetPoint('LEFT', Frame.PassButton, 'RIGHT', 5, 0)
+	--end
 
-	hooksecurefunc('GroupLootFrame_OnShow', function(self)
-		local texture, name, count, quality, bindOnPickUp = GetLootRollItemInfo(self.rollID)
-		if (name == nil) then
-			return
-		end
+	--hooksecurefunc('GroupLootFrame_OnShow', function(self)
+	--	local texture, name, count, quality, bindOnPickUp = GetLootRollItemInfo(self.rollID)
+	--	if (name == nil) then
+	--		return
+	--	end
 
-		self.Name:SetText((bindOnPickUp and "BoP" or "BoE")..' |cFFFFFFFF'..name)
-		self.Name:SetVertexColor(bindOnPickUp and 1 or .3, bindOnPickUp and .3 or 1, bindOnPickUp and .1 or .3)
-		self.Timer:SetStatusBarColor(GetItemQualityColor(quality))
-	end)
+	--	self.Name:SetText((bindOnPickUp and "BoP" or "BoE")..' |cFFFFFFFF'..name)
+	--	self.Name:SetVertexColor(bindOnPickUp and 1 or .3, bindOnPickUp and .3 or 1, bindOnPickUp and .1 or .3)
+	--	self.Timer:SetStatusBarColor(GetItemQualityColor(quality))
+	--end)
 
 	--[[
 	AS:SkinFrame(MissingLootFrame)

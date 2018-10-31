@@ -72,15 +72,9 @@ function AS:Blizzard_Others()
 	AS:CreateShadow(RolePollPopup)
 	AS:SkinCloseButton(RolePollPopupCloseButton)
 
-	-- _G["ReadyCheckFrameYesButton"]:SetParent(_G["ReadyCheckFrame"])
-	-- _G["ReadyCheckFrameNoButton"]:SetParent(_G["ReadyCheckFrame"])
-	-- _G["ReadyCheckFrameYesButton"]:ClearAllPoints()
-	-- _G["ReadyCheckFrameNoButton"]:ClearAllPoints()
-	-- _G["ReadyCheckFrameYesButton"]:SetPoint("RIGHT", _G["ReadyCheckFrame"], "CENTER", -2, -20)
-	-- _G["ReadyCheckFrameNoButton"]:SetPoint("LEFT", _G["ReadyCheckFrameYesButton"], "RIGHT", 3, 0)
-	-- _G["ReadyCheckFrameText"]:SetParent(_G["ReadyCheckFrame"])
-	-- _G["ReadyCheckFrameText"]:ClearAllPoints()
-	-- _G["ReadyCheckFrameText"]:SetPoint("TOP", 0, -12)
+	AS:SkinFrame(ReadyCheckFrame)
+	AS:SkinButton(ReadyCheckFrameYesButton)
+	AS:SkinButton(ReadyCheckFrameNoButton)
 
 	AS:SkinBackdropFrame(GameMenuFrame)
 	AS:CreateBackdrop(GameMenuFrameHeader, 'Default')
@@ -97,6 +91,10 @@ function AS:Blizzard_Others()
 			AS:SkinButton(Button)
 		end
 	end
+
+	AS:SkinSlideBar(UnitPopupVoiceSpeakerVolume.Slider)
+	AS:SkinSlideBar(UnitPopupVoiceMicrophoneVolume.Slider)
+	AS:SkinSlideBar(UnitPopupVoiceUserVolume.Slider)
 
 	hooksecurefunc("UIDropDownMenu_CreateFrames", function(level, index)
 		local listFrame = _G["DropDownList"..level];
@@ -161,6 +159,10 @@ function AS:Blizzard_Others()
 			end
 		end
 	end)
+
+	AS:CreateBackdrop(SplashFrame)
+	AS:SkinButton(SplashFrame.BottomCloseButton)
+	AS:SkinCloseButton(SplashFrame.TopCloseButton)
 end
 
 AS:RegisterSkin('Blizzard_Others', AS.Blizzard_Others)
