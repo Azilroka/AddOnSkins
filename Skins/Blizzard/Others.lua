@@ -118,32 +118,49 @@ function AS:Blizzard_Others()
 		end
 	end)
 
-	hooksecurefunc('UIDropDownMenu_AddButton', function(info, level)
+	hooksecurefunc("ToggleDropDownMenu", function(level)
 		if ( not level ) then
 			level = 1;
 		end
 
+		local r, g, b = unpack(AS.Color)
 		local listFrame = _G["DropDownList"..level];
-		local index = listFrame and (listFrame.numButtons) or 1;
 		local listFrameName = listFrame:GetName();
-		local check = _G[listFrameName.."Button"..index.."Check"];
-		local uncheck = _G[listFrameName.."Button"..index.."UnCheck"];
 
-		if check then
+		for i = 1, UIDROPDOWNMENU_MAXBUTTONS do
+			local button = _G["DropDownList"..level.."Button"..i]
+			local check = _G[listFrameName.."Button"..i.."Check"]
+			local uncheck = _G[listFrameName.."Button"..i.."UnCheck"]
+			local highlight = _G["DropDownList"..level.."Button"..i.."Highlight"]
+
+			highlight:SetColorTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
+			highlight:SetVertexColor(r, g, b)
+
 			AS:CreateBackdrop(check)
-			check:SetSize(12, 12)
 			if check.Backdrop then
 				check.Backdrop:Hide()
 			end
-		end
 
-		if not info.notCheckable then
-			uncheck:SetTexture('')
+			if not button.notCheckable then
+				uncheck:SetTexture('')
+				local _, co = check:GetTexCoord()
+				if co == 0 then
+					check:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
+					check:SetVertexColor(r, g, b, 1)
+					check:SetSize(20, 20)
+					check:SetDesaturated(true)
+				else
+					check:SetTexture(AS.NormTex)
+					check:SetVertexColor(r, g, b, .6)
+					check:SetSize(10, 10)
+					check:SetDesaturated(false)
+				end
 
-			check:SetTexCoord(0, 1, 0, 1);
-			check:SetTexture(AS.NormTex);
-			check:SetVertexColor(unpack(AS.Color))
-			check.Backdrop:Show()
+				check:SetTexCoord(0, 1, 0, 1);
+				check.Backdrop:Show()
+			else
+				check:SetSize(16, 16)
+			end
 		end
 	end)
 end
