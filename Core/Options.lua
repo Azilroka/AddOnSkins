@@ -101,6 +101,10 @@ function AS:BuildProfile()
 			['ElvUISkinModule'] = false,
 			['ThinBorder'] = true,
 			['ClassColor'] = false,
+			['BackgroundTexture'] = 'Asphyxia',
+			['StatusBarTexture'] = 'Asphyxia',
+			['Highlight'] = { 1, .8, .1 },
+			['Selected'] = { 0, 0.44, .87 },
 		},
 	}
 
@@ -151,6 +155,91 @@ function AS:BuildOptions()
 		name = AS.Title,
 		childGroups = 'tab',
 		args = {
+			general = {
+				type = 'group',
+				name = GENERAL,
+				order = 0,
+				get = function(info) return AS:CheckOption(info[#info]) end,
+				set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
+				args = {
+					MiscHeader = {
+						order = 0,
+						type = 'header',
+						name = AS:GetColor(GENERAL),
+					},
+					LoginMsg = {
+						type = 'toggle',
+						name = ASL['Login Message'],
+						order = 1,
+					},
+					SkinDebug = {
+						type = 'toggle',
+						name = ASL['Enable Skin Debugging'],
+						order = 2,
+					},
+					Parchment = {
+						type = 'toggle',
+						name = ASL['Parchment']..' (WIP)', -- This doesn't need localized. Once I'm done doing the extra skinning I'll remove it.
+						order = 3,
+					},
+					SkinTemplate = {
+						name = ASL['Skin Template'],
+						order = 4,
+						type = 'select',
+						values = {
+							['Transparent'] = 'Transparent',
+							['Default'] = 'Default',
+							['ClassColor'] = 'Class Color',
+							['MerathilisUI'] = 'MerathilisUI',
+							['KlixUI'] = 'KlixUI',
+						}
+					},
+					Textures = {
+						type = 'group',
+						name = 'Textures',
+						guiInline = true,
+						order = 5,
+						get = function(info) return AS:CheckOption(info[#info]) end,
+						set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
+						args = {
+							BackgroundTexture = {
+								type = 'select',
+								dialogControl = 'LSM30_Statusbar',
+								order = 1,
+								name = 'Background Texture',
+								values = AS.LSM:HashTable('statusbar'),
+							},
+							StatusBarTexture = {
+								type = 'select',
+								dialogControl = 'LSM30_Statusbar',
+								order = 2,
+								name = 'StatusBar Texture',
+								values = AS.LSM:HashTable('statusbar'),
+							},
+						},
+					},
+					Colors = {
+						type = 'group',
+						name = 'Colors',
+						guiInline = true,
+						order = 6,
+						get = function(info) return unpack(AS:CheckOption(info[#info])) end,
+						set = function(info, r, g, b) AS:SetOption(info[#info], { r, g, b }) end,
+						args = {
+							Highlight = {
+								type = 'color',
+								order = 1,
+								name = 'Highlight',
+							},
+							Selected = {
+								type = 'color',
+								order = 2,
+								name = 'Selected',
+							},
+						},
+					},
+				},
+			},
 			addons = {
 				order = 1,
 				type = 'group',
@@ -391,43 +480,11 @@ function AS:BuildOptions()
 						type = 'header',
 						name = AS:GetColor(MISCELLANEOUS),
 					},
-					SkinTemplate = {
-						name = ASL['Skin Template'],
-						order = 1,
-						type = 'select',
-						values = {
-							['Transparent'] = 'Transparent',
-							['Default'] = 'Default',
-							['ClassColor'] = 'Class Color',
-							['MerathilisUI'] = 'MerathilisUI',
-							['KlixUI'] = 'KlixUI',
-						}
-					},
-					ClassColor = {
-						type = 'toggle',
-						name = ASL['Class Color'],
-						order = 2,
-					},
 					WeakAuraAuraBar = {
 						type = 'toggle',
 						name = ASL['WeakAura AuraBar'],
 						order = 3,
 						disabled = function() return not AS:CheckOption('WeakAuras', 'WeakAuras') end,
-					},
-					Parchment = {
-						type = 'toggle',
-						name = ASL['Parchment'],
-						order = 4,
-					},
-					SkinDebug = {
-						type = 'toggle',
-						name = ASL['Enable Skin Debugging'],
-						order = 5,
-					},
-					LoginMsg = {
-						type = 'toggle',
-						name = ASL['Login Message'],
-						order = 6,
 					},
 				},
 			},

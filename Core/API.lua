@@ -197,7 +197,7 @@ function AS:Desaturate(frame)
 end
 
 function AS:SetTemplate(Frame, Template, Texture)
-	Texture = Texture or AS.NormTex -- [[Interface\AddOns\ProjectAzilroka\Media\StatusBars\Rainbow]]
+	Texture = Texture or AS.LSM:Fetch('statusbar', AS:CheckOption('BackgroundTexture')) -- [[Interface\AddOns\ProjectAzilroka\Media\StatusBars\Rainbow]]
 	Template = Template or AS:CheckOption('SkinTemplate')
 
 	local Backdrop = { bgFile = Texture, edgeFile = AS.Blank, tile = false, tileSize = 0, edgeSize = AS.Mult, insets = { left = 0, right = 0, top = 0, bottom = 0 } }
