@@ -216,9 +216,21 @@ function AS:Blizzard_AchievementUI(event, addon)
 
 	hooksecurefunc("AchievementFrameCategories_Update", function()
 		for _, Category in pairs(AchievementFrameCategoriesContainer.buttons) do
-			AS:SkinButton(Category)
-			AS:StyleButton(Category)
-			Category.label:SetTextColor(1, 1, 1)
+			if not Category.isSkinned then
+				AS:SkinFrame(Category)
+				Category:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
+				Category:HookScript('OnLeave', function(self)
+					if self.isSelected then
+						self:SetBackdropBorderColor(1, .82, 0)
+					else
+						self:SetBackdropBorderColor(unpack(AS.BorderColor))
+					end
+				end)
+				hooksecurefunc(Category, 'LockHighlight', function(self) self:SetBackdropBorderColor(1, .82, 0) end)
+				hooksecurefunc(Category, 'UnlockHighlight', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+				Category.label:SetTextColor(1, 1, 1)
+				Category.isSkinned = true
+			end
 		end
 	end)
 

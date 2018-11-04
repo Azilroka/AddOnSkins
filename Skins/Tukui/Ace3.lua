@@ -143,17 +143,14 @@ function AS:Ace3()
 			colorSwatch:SetParent(frame.Backdrop)
 			colorSwatch:SetInside(frame.Backdrop)
 
-			for i = 1, frame:GetNumRegions() do
-				local Region = select(i, frame:GetRegions())
-				if Region and Region:IsObjectType('Texture') then
-					if Region:GetWidth() == 16 then
-						Region:SetColorTexture(0, 0, 0, 0)
-					else
-						Region:ClearAllPoints()
-						Region:SetParent(frame.Backdrop)
-						Region:SetInside(frame.Backdrop)
-					end
-				end
+			if frame.checkers then
+				frame.checkers:ClearAllPoints()
+				frame.checkers:SetParent(frame.Backdrop)
+				frame.checkers:SetInside(frame.Backdrop)
+			end
+
+			if frame.texture then
+				frame.texture:SetColorTexture(0, 0, 0, 0)
 			end
 		end
 
@@ -172,7 +169,7 @@ function AS:Ace3()
 			if TYPE == 'Frame' then
 				AS:StripTextures(frame)
 
-				for i=1, frame:GetNumChildren() do
+				for i = 1, frame:GetNumChildren() do
 					local child = select(i, frame:GetChildren())
 					if child:GetObjectType() == 'Button' and child:GetText() then
 						AS:SkinButton(child)
