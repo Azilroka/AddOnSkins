@@ -301,27 +301,25 @@ function AS:Blizzard_Collections(event, addon)
 		Button.iconTextureUncollected:SetInside()
 		AS:CreateBackdrop(Button)
 		Button.name:SetPoint('LEFT', Button, 'RIGHT', 9, 0)
+		hooksecurefunc(Button.name, 'SetTextColor', function(self, r, g, b)
+			if r == 1 and g == 0.82 and b == 0 then
+				local quality = select(3, GetItemInfo(Button.itemID))
+				r, g, b = 1, 1, 1
+				if quality and quality > 1 then
+					r, g, b = GetItemQualityColor(quality)
+				end
+				Button:SetBackdropBorderColor(r, g, b)
+				Button.name:SetTextColor(r, g, b)
+			end
+			if r == 0.33 and g == 0.27 and b == 0.2 then
+				Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+				Button.name:SetTextColor(.6, .6, .6)
+			end
+		end)
 		Button.Backdrop:SetPoint('TOPLEFT', Button, 'TOPRIGHT', 0, -2)
 		Button.Backdrop:SetPoint('BOTTOMLEFT', Button, 'BOTTOMRIGHT', 0, 2)
 		Button.Backdrop:SetPoint('RIGHT', Button.name, 'RIGHT', 0, 0)
 	end
-
-	hooksecurefunc("ToySpellButton_UpdateButton", function(self)
-		self.name.SetTextColor = nil
-		if (PlayerHasToy(self.itemID)) then
-			local quality = select(3, GetItemInfo(self.itemID))
-			local r, g, b = 1, 1, 1
-			if quality then
-				r, g, b = GetItemQualityColor(quality)
-			end
-			self:SetBackdropBorderColor(r, g, b)
-			self.name:SetTextColor(r, g, b)
-		else
-			self:SetBackdropBorderColor(unpack(AS.BorderColor))
-			self.name:SetTextColor(.6, .6, .6)
-		end
-		self.name.SetTextColor = AS.Noop
-	end)
 
 	AS:SkinStatusBar(ToyBox.progressBar)
 

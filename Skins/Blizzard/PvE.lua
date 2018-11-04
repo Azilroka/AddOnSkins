@@ -215,6 +215,27 @@ function AS:Blizzard_PvE()
 		end
 	end)
 
+	local roleButtons = {
+		LFDQueueFrameRoleButtonHealer,
+		LFDQueueFrameRoleButtonDPS,
+		LFDQueueFrameRoleButtonLeader,
+		LFDQueueFrameRoleButtonTank,
+		RaidFinderQueueFrameRoleButtonHealer,
+		RaidFinderQueueFrameRoleButtonDPS,
+		RaidFinderQueueFrameRoleButtonLeader,
+		RaidFinderQueueFrameRoleButtonTank,
+		LFGInvitePopupRoleButtonTank,
+		LFGInvitePopupRoleButtonHealer,
+		LFGInvitePopupRoleButtonDPS,
+		LFGListApplicationDialog.TankButton,
+		LFGListApplicationDialog.HealerButton,
+		LFGListApplicationDialog.DamagerButton,
+	}
+
+	-- /run LFGInvitePopup_Update("Elvz", true, true, true) StaticPopupSpecial_Show(LFGInvitePopup)
+	for _, roleButton in pairs(roleButtons) do
+		AS:SkinCheckBox(roleButton.checkButton or roleButton.CheckButton)
+	end
 
 	hooksecurefunc('LFGListSearchPanel_UpdateResults', function(self)
 		for _, Button in pairs(self.ScrollFrame.buttons) do
@@ -239,6 +260,36 @@ function AS:Blizzard_PvE()
 	AS:SkinFrame(LFGListFrame.ApplicationViewer.ItemLevelColumnHeader)
 	AS:SkinButton(LFGListFrame.ApplicationViewer.RefreshButton)
 
+	AS:StripTextures(LFGListFrame.EntryCreation.Inset)
+	AS:SkinButton(LFGListFrame.EntryCreation.CancelButton)
+	AS:SkinButton(LFGListFrame.EntryCreation.ListGroupButton)
+
+--	LFGListFrame.EntryCreation.CancelButton:Point("BOTTOMLEFT", -1, 3)
+--	LFGListFrame.EntryCreation.ListGroupButton:Point("BOTTOMRIGHT", -6, 3)
+	AS:SkinEditBox(LFGListFrame.EntryCreation.Description)
+
+	AS:SkinEditBox(LFGListFrame.EntryCreation.Name)
+	AS:SkinEditBox(LFGListFrame.EntryCreation.ItemLevel.EditBox)
+	AS:SkinEditBox(LFGListFrame.EntryCreation.HonorLevel.EditBox)
+	AS:SkinEditBox(LFGListFrame.EntryCreation.VoiceChat.EditBox)
+
+	AS:SkinDropDownBox(LFGListFrame.EntryCreation.ActivityDropDown)
+	AS:SkinDropDownBox(LFGListFrame.EntryCreation.GroupDropDown)
+	AS:SkinDropDownBox(LFGListFrame.EntryCreation.CategoryDropDown, 330)
+
+	AS:SkinCheckBox(LFGListFrame.EntryCreation.ItemLevel.CheckButton)
+	AS:SkinCheckBox(LFGListFrame.EntryCreation.HonorLevel.CheckButton)
+	AS:SkinCheckBox(LFGListFrame.EntryCreation.VoiceChat.CheckButton)
+	AS:SkinCheckBox(LFGListFrame.EntryCreation.PrivateGroup.CheckButton)
+
+	AS:SkinFrame(LFGListFrame.EntryCreation.ActivityFinder.Dialog)
+	AS:SkinFrame(LFGListFrame.EntryCreation.ActivityFinder.Dialog.BorderFrame)
+
+	AS:SkinEditBox(LFGListFrame.EntryCreation.ActivityFinder.Dialog.EntryBox)
+	AS:SkinScrollBar(LFGListFrame.EntryCreation.ActivityFinder.Dialog.ScrollFrame.scrollBar)
+	AS:SkinButton(LFGListFrame.EntryCreation.ActivityFinder.Dialog.SelectButton)
+	AS:SkinButton(LFGListFrame.EntryCreation.ActivityFinder.Dialog.CancelButton)
+
 	AS:StripTextures(LFGListFrame.SearchPanel.ResultsInset)
 	AS:SkinButton(LFGListFrame.SearchPanel.BackButton, true)
 	AS:SkinButton(LFGListFrame.SearchPanel.SignUpButton, true)
@@ -262,17 +313,9 @@ function AS:Blizzard_PvE()
 	AS:SkinButton(LFGListApplicationDialog.CancelButton)
 	AS:SkinEditBox(LFGListApplicationDialogDescription)
 
-	local repositionCheckButtons = {
-		LFGListApplicationDialog.TankButton.CheckButton,
-		LFGListApplicationDialog.HealerButton.CheckButton,
-		LFGListApplicationDialog.DamagerButton.CheckButton,
-	}
-
-	for _, checkButton in pairs(repositionCheckButtons) do
-		AS:SkinCheckBox(checkButton)
-		checkButton:ClearAllPoints()
-		checkButton:Point("BOTTOMLEFT", 0, 0)
-	end
+	AS:SkinFrame(LFGInvitePopup)
+	AS:SkinButton(LFGInvitePopupAcceptButton)
+	AS:SkinButton(LFGInvitePopupDeclineButton)
 
 	hooksecurefunc("LFGListApplicationDialog_UpdateRoles", function(self) --Copy from Blizzard, we just fix position
 		local availTank, availHealer, availDPS = C_LFGList.GetAvailableRoles();
