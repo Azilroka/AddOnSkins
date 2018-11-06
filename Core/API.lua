@@ -44,6 +44,8 @@ AS.Blizzard.Regions = {
 	'TabSpacer2',
 	'_RightSeparator',
 	'_LeftSeparator',
+	'RightSeparator',
+	'LeftSeparator',
 	'Cover',
 	'Border',
 	'Background',
@@ -222,11 +224,13 @@ function AS:SetTemplate(Frame, Template, Texture)
 	local R, G, B = unpack(AS.BackdropColor)
 	local Alpha = (Template == 'Default' and 1 or .8)
 
-	if AS:CheckOption('ElvUISkinModule', 'ElvUI') then
+	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
 		if Template == 'Default' then
 			R, G, B = unpack(ElvUI[1]['media'].backdropcolor)
+			AS.BackdropColor = ElvUI[1]['media'].backdropcolor
 		else
 			R, G, B, Alpha = unpack(ElvUI[1]['media'].backdropfadecolor)
+			AS.BackdropColor = ElvUI[1]['media'].backdropfadecolor
 		end
 
 		Frame.template = Template
@@ -237,12 +241,27 @@ function AS:SetTemplate(Frame, Template, Texture)
 		end
 	end
 
-	if Template == 'ClassColor' then
-		R, G, B = unpack(AS.ClassColor)
+	if Template == 'NoBackdrop' then
+		Frame:SetBackdropColor(0, 0, 0, 0)
+	else
+		Frame:SetBackdropColor(R, G, B, Alpha)
 	end
 
-	Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
-	Frame:SetBackdropColor(R, G, B, Alpha)
+	if Template == 'NoBorder' then
+		Frame:SetBackdropBorderColor(0, 0, 0, 0)
+	else
+		Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
+	end
+
+	if Template == 'ClassColor' then
+		Frame:SetBackdropBorderColor(unpack(AS.ClassColor))
+		AS.BorderColor = AS.ClassColor
+	end
+
+	if Template == 'Custom' then
+		Frame:SetBackdropColor(unpack(AS:CheckOption('BackdropColor')))
+		Frame:SetBackdropBorderColor(unpack(AS:CheckOption('BorderColor')))
+	end
 end
 
 AS.ArrowRotation = {
@@ -340,7 +359,7 @@ function AS:SkinButton(Button, Strip)
 	if Button.SetPushedTexture then Button:SetPushedTexture('') end
 	if Button.SetDisabledTexture then Button:SetDisabledTexture('') end
 
-	AS:SetTemplate(Button, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
+	AS:SetTemplate(Button, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
 	if Button.GetFontString and Button:GetFontString() ~= nil then
 		if Button:IsEnabled() then
@@ -375,7 +394,7 @@ end
 
 function AS:SkinCheckBox(CheckBox)
 	if CheckBox.isSkinned then return end
-	AS:SkinBackdropFrame(CheckBox, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
+	AS:SkinBackdropFrame(CheckBox, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
 	CheckBox.Backdrop:SetInside(CheckBox, 4, 4)
 
@@ -410,7 +429,7 @@ function AS:SkinCloseButton(Button, Reposition)
 
 	Button:HookScript('OnEnter', function(self)
 		self:GetNormalTexture():SetVertexColor(1, .2, .2)
-		if AS:CheckOption('ElvUISkinModule', 'ElvUI') then
+		if AS:CheckOption('ElvUIStyle', 'ElvUI') then
 			self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 		else
 			self.Backdrop:SetBackdropBorderColor(1, .2, .2)
@@ -476,7 +495,7 @@ function AS:SkinDropDownBox(Frame, Width)
 		Frame.Icon:SetPoint('LEFT', 23, 0)
 	end
 
-	AS:CreateBackdrop(Frame, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
+	AS:CreateBackdrop(Frame, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
 	Frame.Backdrop:Point('TOPLEFT', 20, -6)
 	Frame.Backdrop:Point('BOTTOMRIGHT', Button, 'BOTTOMRIGHT', 2, -2)
@@ -496,7 +515,7 @@ function AS:SkinEditBox(EditBox, Width, Height)
 		end
 	end
 
-	AS:CreateBackdrop(EditBox, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
+	AS:CreateBackdrop(EditBox, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
 	if EditBox.GetTextInsets and EditBox.SetTextInsets then
 		local Left, Right, Top, Bottom = EditBox:GetTextInsets()
@@ -668,7 +687,7 @@ function AS:SkinTab(Tab)
 	Tab:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.Color)) end)
 	Tab:HookScript('OnLeave', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
-	if AS:CheckAddOn('ElvUI') or AS:CheckOption('ElvUISkinModule', 'ElvUI') then
+	if AS:CheckAddOn('ElvUI') or AS:CheckOption('ElvUIStyle', 'ElvUI') then
 		if Tab.backdrop then -- Check if ElvUI already provides the backdrop. Otherwise we have two backdrops (e.g. Auctionhouse)
 			Tab.Backdrop:Hide()
 		end
@@ -679,7 +698,7 @@ function AS:SkinTab(Tab)
 end
 
 function AS:SkinSlideBar(Frame, MoveText)
-	AS:SkinBackdropFrame(Frame, AS:CheckOption('ElvUISkinModule', 'ElvUI') and 'Default' or nil)
+	AS:SkinBackdropFrame(Frame, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 	Frame.Backdrop:SetAllPoints()
 
 	hooksecurefunc(Frame, "SetBackdrop", function(self, backdrop) if backdrop ~= nil then self:SetBackdrop(nil) end end)
@@ -799,9 +818,9 @@ function AS:SkinTexture(icon, backdrop)
 	end
 end
 
-function AS:AdjustForPixelPerfect(number)
-	if AS.PixelPerfect then
-		number = number - 1
+function AS:AdjustForPixelPerfect(number, offset)
+	if not AS.PixelPerfect then
+		number = number + (offset or 1)
 	end
 
 	return number

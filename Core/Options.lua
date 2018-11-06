@@ -96,15 +96,17 @@ function AS:BuildProfile()
 			['HideChatFrame'] = 'NONE',
 			['Parchment'] = false,
 			['SkinDebug'] = false,
-			['LoginMsg'] = true,
+			['LoginMsg'] = false,
 			['EmbedSystemMessage'] = true,
-			['ElvUISkinModule'] = false,
+			['ElvUIStyle'] = false,
 			['ThinBorder'] = true,
 			['ClassColor'] = false,
-			['BackgroundTexture'] = 'Asphyxia',
-			['StatusBarTexture'] = 'Asphyxia',
-			['Highlight'] = { 1, .8, .1 },
-			['Selected'] = { 0, 0.44, .87 },
+			['BackgroundTexture'] = 'Blizzard Raid Bar',
+			['StatusBarTexture'] = 'Blizzard Raid Bar',
+			['BackdropColor'] = { .5, .5, .5, .8 },
+			['BorderColor'] = { 0, 0, 0 },
+			['HighlightColor'] = { 1, .8, .1 },
+			['SelectedColor'] = { 0, 0.44, .87 },
 		},
 	}
 
@@ -162,7 +164,7 @@ function AS:BuildOptions()
 				get = function(info) return AS:CheckOption(info[#info]) end,
 				set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
 				args = {
-					MiscHeader = {
+					Header = {
 						order = 0,
 						type = 'header',
 						name = AS:GetColor(GENERAL),
@@ -182,23 +184,27 @@ function AS:BuildOptions()
 						name = ASL['Parchment']..' (WIP)', -- This doesn't need localized. Once I'm done doing the extra skinning I'll remove it.
 						order = 3,
 					},
+					ThinBorder = {
+						name = 'Thin Border',
+						order = 4,
+						type = 'toggle',
+					},
 					SkinTemplate = {
 						name = ASL['Skin Template'],
-						order = 4,
+						order = 6,
 						type = 'select',
 						values = {
-							['Transparent'] = 'Transparent',
-							['Default'] = 'Default',
 							['ClassColor'] = 'Class Color',
-							['MerathilisUI'] = 'MerathilisUI',
-							['KlixUI'] = 'KlixUI',
+							['Custom'] = 'Custom',
+							['Default'] = 'Default',
+							['Transparent'] = 'Transparent',
 						}
 					},
 					Textures = {
 						type = 'group',
 						name = 'Textures',
 						guiInline = true,
-						order = 5,
+						order = 7,
 						get = function(info) return AS:CheckOption(info[#info]) end,
 						set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
 						args = {
@@ -222,19 +228,34 @@ function AS:BuildOptions()
 						type = 'group',
 						name = 'Colors',
 						guiInline = true,
-						order = 6,
+						order = 8,
 						get = function(info) return unpack(AS:CheckOption(info[#info])) end,
-						set = function(info, r, g, b) AS:SetOption(info[#info], { r, g, b }) end,
+						set = function(info, r, g, b, a) AS:SetOption(info[#info], { r, g, b, a }) end,
 						args = {
-							Highlight = {
+							BackdropColor = {
 								type = 'color',
 								order = 1,
-								name = 'Highlight',
+								hasAlpha = true,
+								name = 'Backdrop Color',
+								desc = 'Only Available with Custom Template',
+								disabled = function() return (AS:CheckOption('SkinTemplate') ~= 'Custom' and not AS:CheckOption('ElvUIStyle')) end,
 							},
-							Selected = {
+							BorderColor = {
 								type = 'color',
 								order = 2,
-								name = 'Selected',
+								name = 'Border Color',
+								desc = 'Only Available with Custom Template',
+								disabled = function() return (AS:CheckOption('SkinTemplate') ~= 'Custom' and not AS:CheckOption('ElvUIStyle')) end,
+							},
+							HighlightColor = {
+								type = 'color',
+								order = 3,
+								name = 'Highlight',
+							},
+							SelectedColor = {
+								type = 'color',
+								order = 4,
+								name = 'Selected / Checked',
 							},
 						},
 					},
@@ -633,19 +654,19 @@ function AS:BuildOptions()
 			disabled = function() return not AS:CheckOption('WeakAuras', 'WeakAuras') end,
 		}
 
-		AS.Options.args.misc.args.ElvUISkinModule = {
+		AS.Options.args.general.args.ElvUIStyle = {
 			type = 'toggle',
-			name = 'Use ElvUI Skin Styling',
+			name = 'ElvUI Style',
 			order = 5,
 		}
-	end
 
-	if not AS:CheckAddOn('ElvUI') then
-		AS.Options.args.misc.args.ThinBorder = {
-			name = 'Thin Border',
-			order = 1,
-			type = 'toggle',
-		}
+		if AS:CheckAddOn('ElvUI_MerathilisUI') then
+			AS.Options.args.general.args.SkinTemplate.values['MerathilisUI'] = 'MerathilisUI'
+		end
+
+		if AS:CheckAddOn('ElvUI_KlixUI') then
+			AS.Options.args.general.args.SkinTemplate.values['KlixUI'] = 'KlixUI'
+		end
 	end
 end
 
