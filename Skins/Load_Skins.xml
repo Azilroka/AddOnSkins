@@ -122,7 +122,6 @@
 	<Script file="Talentless.lua"/>
 	<Script file="TalentSetManager.lua"/>
 	<Script file="tdBattlePetScript.lua"/>
-	<Script file="TellMeWhen.lua"/>
 	<Script file="TinyDPS.lua"/>
 	<Script file="TinyInspect.lua"/>
 	<Script file="TitanPanel.lua"/>
