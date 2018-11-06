@@ -187,19 +187,6 @@ function AS:Ace3()
 				AS:SetTemplate(widget.treeframe, 'Transparent')
 				frame:SetPoint('TOPLEFT', widget.treeframe, 'TOPRIGHT', 1, 0)
 
-				local oldCreateButton = widget.CreateButton
-				widget.CreateButton = function(self)
-					local button = oldCreateButton(self)
-					AS:StripTextures(button.toggle)
-					button.toggle.SetNormalTexture = AS.Noop
-					button.toggle.SetPushedTexture = AS.Noop
-					button.toggleText = button.toggle:CreateFontString(nil, 'OVERLAY')
-					button.toggleText:SetFont(AS.Font, 19)
-					button.toggleText:SetPoint('CENTER')
-					button.toggleText:SetText('+')
-					return button
-				end
-
 				local oldRefreshTree = widget.RefreshTree
 				widget.RefreshTree = function(self, scrollToSelection)
 					oldRefreshTree(self, scrollToSelection)
@@ -212,9 +199,13 @@ function AS:Ace3()
 					for i, line in pairs(lines) do
 						local button = buttons[i]
 						if groupstatus[line.uniquevalue] and button then
-							button.toggleText:SetText('-')
+							button.toggle:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Minus]])
+							button.toggle:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Minus]])
+							button.toggle:SetHighlightTexture('')
 						elseif button then
-							button.toggleText:SetText('+')
+							button.toggle:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Plus]])
+							button.toggle:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Plus]])
+							button.toggle:SetHighlightTexture('')
 						end
 					end
 				end
