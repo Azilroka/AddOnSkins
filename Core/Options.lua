@@ -90,8 +90,6 @@ function AS:BuildProfile()
 			['DBMFontSize'] = 12,
 			['DBMFontFlag'] = 'OUTLINE',
 			['DBMRadarTrans'] = false,
-			['WeakAuraAuraBar'] = false,
-			['WeakAuraIconCooldown'] = false,
 			['SkinTemplate'] = 'Transparent',
 			['HideChatFrame'] = 'NONE',
 			['Parchment'] = false,
@@ -489,26 +487,6 @@ function AS:BuildOptions()
 					},
 				},
 			},
-			misc = {
-				type = 'group',
-				name = MISCELLANEOUS,
-				order = 5,
-				get = function(info) return AS:CheckOption(info[#info]) end,
-				set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
-				args = {
-					MiscHeader = {
-						order = 0,
-						type = 'header',
-						name = AS:GetColor(MISCELLANEOUS),
-					},
-					WeakAuraAuraBar = {
-						type = 'toggle',
-						name = ASL['WeakAura AuraBar'],
-						order = 3,
-						disabled = function() return not AS:CheckOption('WeakAuras', 'WeakAuras') end,
-					},
-				},
-			},
 			faq = {
 				type = 'group',
 				name = ASL["FAQ's"],
@@ -645,13 +623,6 @@ function AS:BuildOptions()
 			type = 'header',
 			name = AS:GetColor(ASL['Blizzard Skins']),
 			order = 0,
-		}
-
-		AS.Options.args.misc.args.WeakAuraIconCooldown = {
-			type = 'toggle',
-			name = ASL['WeakAura Cooldowns'],
-			order = 1,
-			disabled = function() return not AS:CheckOption('WeakAuras', 'WeakAuras') end,
 		}
 
 		AS.Options.args.general.args.ElvUIStyle = {
