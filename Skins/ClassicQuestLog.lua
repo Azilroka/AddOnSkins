@@ -35,7 +35,7 @@ function AS:ClassicQuestLog()
 	--Reposition Show Map Button
 	ClassicQuestLog.mapButton:ClearAllPoints()
 	ClassicQuestLog.mapButton:Point('BOTTOMRIGHT', ClassicQuestLog, 'TOPRIGHT', 0, -59)
-	ClassicQuestLog.mapButton.Text:SetFormattedText("Click")
+	ClassicQuestLog.mapButton.text:SetFormattedText("Click") -- Install addon and fix this button.
 
 	--Resize Expand/Collapse Button
 	ClassicQuestLogScrollFrame.expandAll:Size(120, 30)
