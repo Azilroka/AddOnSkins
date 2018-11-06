@@ -82,7 +82,6 @@
 	<Script file="MyRolePlay.lua"/>
 	<Script file="MythicKeystoneStatus.lua"/>
 	<Script file="NoNoGoGo.lua"/>
-	<Script file="Notes.lua"/>
 	<Script file="NugRunning.lua"/>
 	<Script file="Numeration.lua"/>
 	<Script file="Ogri'Lazy.lua"/>
