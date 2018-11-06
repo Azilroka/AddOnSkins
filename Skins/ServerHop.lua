@@ -18,13 +18,6 @@ function AS:ServerHop()
 
 	AS:SkinDropDownBox(hopFramepvpDrop)
 	AS:SkinDropDownBox(CountDrop)
-
-	-- Options Frame
-	AS:SkinFrame(hopOptions)
-	AS:SkinCloseButton(optionsInFrameCloseBut)
-	AS:StripTextures(hopOptions.optionsAuthor)
-	AS:SkinEditBox(hopOptions.optionsAuthor.linkBox)
-	--AS:SkinEditBox(hopOptions.hopSearchOptionsFrame.linkBox)
 end
 
 AS:RegisterSkin('ServerHop', AS.ServerHop)

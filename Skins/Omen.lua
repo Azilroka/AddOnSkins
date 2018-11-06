@@ -3,15 +3,14 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Omen') then return end
 
 function AS:Omen()
-	AS:SkinFrame(_G.Omen.BarList, 'Default')
-	AS:SkinFrame(_G.Omen.Title, 'Default')
+	AS:SkinFrame(_G.Omen.BarList)
+	AS:SkinFrame(_G.Omen.Title)
 
-	local db = _G.Omen.db
-	db.profile.Scale = 1
-	db.profile.Bar.Spacing = 1
-	db.profile.Background.EdgeSize = 1
-	db.profile.Background.BarInset = 2
-	db.profile.TitleBar.UseSameBG = true
+	_G.Omen.db.profile.Scale = 1
+	_G.Omen.db.profile.Bar.Spacing = 1
+	_G.Omen.db.profile.Background.EdgeSize = 1
+	_G.Omen.db.profile.Background.BarInset = 2
+	_G.Omen.db.profile.TitleBar.UseSameBG = true
 
 	_G.Omen.BarList.SetBackdrop = AS.Noop
 	_G.Omen.BarList.SetBackdropColor = AS.Noop

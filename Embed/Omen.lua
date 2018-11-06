@@ -22,17 +22,16 @@ function AS:Embed_Omen()
 	_G.Omen.BarList.SetBackdropColor = AS.Noop
 	_G.Omen.BarList.SetBackdropBorderColor = AS.Noop
 
-	local db = _G.Omen.db
-	db.profile.Scale = 1
-	db.profile.Bar.Spacing = 1
-	db.profile.Background.EdgeSize = 1
-	db.profile.Background.BarInset = 2
-	db.profile.TitleBar.UseSameBG = true
-	db.profile.ShowWith.UseShowWith = false
-	db.profile.Locked = true
-	db.profile.TitleBar.ShowTitleBar = true
-	db.profile.FrameStrata = AS:CheckOption('EmbedFrameStrata')
-	_G.Omen:OnProfileChanged(nil, db)
+	_G.Omen.db.profile.Scale = 1
+	_G.Omen.db.profile.Bar.Spacing = 1
+	_G.Omen.db.profile.Background.EdgeSize = 1
+	_G.Omen.db.profile.Background.BarInset = 2
+	_G.Omen.db.profile.TitleBar.UseSameBG = true
+	_G.Omen.db.profile.ShowWith.UseShowWith = false
+	_G.Omen.db.profile.Locked = true
+	_G.Omen.db.profile.TitleBar.ShowTitleBar = true
+	_G.Omen.db.profile.FrameStrata = AS:CheckOption('EmbedFrameStrata')
+	_G.Omen:OnProfileChanged(nil, _G.Omen.db)
 
 	_G.OmenAnchor:SetParent(EmbedParent)
 	AS:SetTemplate(_G.OmenAnchor)

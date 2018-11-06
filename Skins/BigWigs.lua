@@ -44,7 +44,6 @@ function AS:BigWigs(event, addon)
 			end
 
 			bar.candyBarIconFrame:ClearAllPoints()
-			bar.candyBarIconFrame.SetWidth = nil
 			bar.candyBarIconFrame:SetPoint('TOPLEFT')
 			bar.candyBarIconFrame:SetPoint('BOTTOMLEFT')
 
@@ -98,7 +97,6 @@ function AS:BigWigs(event, addon)
 			bar.candyBarIconFrame:ClearAllPoints()
 			bar.candyBarIconFrame:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
 			bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
-			bar.candyBarIconFrame.SetWidth = AS.Noop
 
 			AS:SkinTexture(bar.candyBarIconFrame)
 		end
@@ -147,7 +145,6 @@ function AS:BigWigs(event, addon)
 			bar.candyBarIconFrame:ClearAllPoints()
 			bar.candyBarIconFrame:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
 			bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
-			bar.candyBarIconFrame.SetWidth = AS.Noop
 
 			bar.candyBarLabel:ClearAllPoints()
 			bar.candyBarLabel:SetPoint("LEFT", bar, "LEFT", 2, 10)
