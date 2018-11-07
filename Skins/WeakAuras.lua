@@ -4,7 +4,7 @@ if not AS:CheckAddOn('WeakAuras') then return end
 
 function AS:WeakAuras()
 	if not WeakAuras.regionTypes then
-		AS:AcceptFrame('You updated WeakAuras while WoW was open. You need to close & relaunch WoW.')
+		AS:AcceptFrame('WeakAuras was updated while WoW was open. Close & Relaunch WoW.')
 		return
 	end
 
