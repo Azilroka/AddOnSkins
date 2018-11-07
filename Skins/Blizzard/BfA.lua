@@ -91,7 +91,7 @@ function AS:Blizzard_IslandsPartyPoseUI(event, addon)
 	if addon ~= 'Blizzard_IslandsPartyPoseUI' then return end
 
 	AS:SkinBackdropFrame(IslandsPartyPoseFrame)
-	AS:HandleButton(IslandsPartyPoseFrame.LeaveButton)
+	AS:SkinButton(IslandsPartyPoseFrame.LeaveButton)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
