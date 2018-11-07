@@ -8,7 +8,6 @@ ASL["Auction House"] = true
 ASL["Available Skins / Skin Requests"] = true
 ASL["BigWigs Half-Bar"] = true
 ASL["Blizzard Skins"] = true
-ASL["BossMod Options"] = true
 ASL["Changelog Link"] = true
 ASL["Credits"] = true
 ASL["Credits:"] = true

@@ -166,6 +166,50 @@ AS.Options = {
 						},
 					},
 				},
+				dbm = {
+					type = 'group',
+					name = 'DBM Options',
+					guiInline = true,
+					order = 9,
+					get = function(info) return AS:CheckOption(info[#info]) end,
+					set = function(info, value) AS:SetOption(info[#info], value) end,
+					args = {
+						DBMFont = {
+							type = 'select', dialogControl = 'LSM30_Font',
+							order = 1,
+							name = ASL['DBM Font'],
+							values = AS.LSM:HashTable('font'),
+						},
+						DBMFontSize = {
+							type = 'range',
+							order = 2,
+							name = ASL['DBM Font Size'],
+							min = 8, max = 18, step = 1,
+						},
+						DBMFontFlag = {
+							name = ASL['DBM Font Flag'],
+							order = 3,
+							type = 'select',
+							values = {
+								['NONE'] = 'None',
+								['OUTLINE'] = 'OUTLINE',
+								['THICKOUTLINE'] = 'THICKOUTLINE',
+								['MONOCHROME'] = 'MONOCHROME',
+								['MONOCHROMEOUTLINE'] = 'MONOCHROMEOUTLINE',
+							},
+						},
+						DBMSkinHalf = {
+							type = 'toggle',
+							name = ASL['DBM Half-bar Skin'],
+							order = 4,
+						},
+						DBMRadarTrans = {
+							type = 'toggle',
+							name = ASL['DBM Transparent Radar'],
+							order = 5,
+						},
+					},
+				},
 			},
 		},
 		addons = {
@@ -174,7 +218,13 @@ AS.Options = {
 			name = ASL['AddOn Skins'],
 			get = function(info) return AS:CheckOption(info[#info]) end,
 			set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
-			args = {},
+			args = {
+				description = {
+					type = 'header',
+					name = AS:GetColor(ASL['AddOn Skins']),
+					order = 0,
+				},
+			},
 		},
 		blizzard = {
 			order = 2,
@@ -182,53 +232,11 @@ AS.Options = {
 			name = ASL['Blizzard Skins'],
 			get = function(info) return AS:CheckOption(info[#info]) end,
 			set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
-			args = {},
-		},
-		bossmods = {
-			type = 'group',
-			name = ASL['BossMod Options'],
-			order = 3,
-			get = function(info) return AS:CheckOption(info[#info]) end,
-			set = function(info, value) AS:SetOption(info[#info], value) end,
 			args = {
-				BossModHeader = {
-					order = 0,
+				description = {
 					type = 'header',
-					name = AS:GetColor(ASL['BossMod Options']),
-				},
-				DBMFont = {
-					type = 'select', dialogControl = 'LSM30_Font',
-					order = 1,
-					name = ASL['DBM Font'],
-					values = AS.LSM:HashTable('font'),
-				},
-				DBMFontSize = {
-					type = 'range',
-					order = 2,
-					name = ASL['DBM Font Size'],
-					min = 8, max = 18, step = 1,
-				},
-				DBMFontFlag = {
-					name = ASL['DBM Font Flag'],
-					order = 3,
-					type = 'select',
-					values = {
-						['NONE'] = 'None',
-						['OUTLINE'] = 'OUTLINE',
-						['THICKOUTLINE'] = 'THICKOUTLINE',
-						['MONOCHROME'] = 'MONOCHROME',
-						['MONOCHROMEOUTLINE'] = 'MONOCHROMEOUTLINE',
-					},
-				},
-				DBMSkinHalf = {
-					type = 'toggle',
-					name = ASL['DBM Half-bar Skin'],
-					order = 4,
-				},
-				DBMRadarTrans = {
-					type = 'toggle',
-					name = ASL['DBM Transparent Radar'],
-					order = 5,
+					name = AS:GetColor(ASL['Blizzard Skins']),
+					order = 0,
 				},
 			},
 		},
@@ -490,7 +498,7 @@ AS.Options = {
 							order = 1,
 							type = 'description',
 							fontSize = 'medium',
-							name = AS.Title..AS.Version,
+							name = tostring(AS.Version),
 						},
 					},
 				},
@@ -608,23 +616,12 @@ function AS:BuildOptions()
 			AS.Options.args.blizzard.args[skinName] = GenerateOptionTable(skinName, blizzorder)
 			blizzorder = blizzorder + 1
 		else
-			AS.Options.args.addons.args.description = {
-				type = 'header',
-				name = AS:GetColor(ASL['AddOn Skins']),
-				order = 0,
-			}
 			AS.Options.args.addons.args[skinName] = GenerateOptionTable(skinName, order)
 			order = order + 1
 		end
 	end
 
 	if AS:CheckAddOn('ElvUI') then
-		AS.Options.args.blizzard.args.description = {
-			type = 'header',
-			name = AS:GetColor(ASL['Blizzard Skins']),
-			order = 0,
-		}
-
 		AS.Options.args.general.args.ElvUIStyle = {
 			type = 'toggle',
 			name = 'ElvUI Style',
