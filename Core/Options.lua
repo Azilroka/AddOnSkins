@@ -58,6 +58,8 @@ for _, devName in pairs(DEVELOPERS) do
 	DEVELOPER_STRING = DEVELOPER_STRING..devName..'    '
 end
 
+local DefaultTemplates = { ['ClassColor'] = 'Class Color', ['Custom'] = 'Custom', ['Default'] = 'Default', ['Transparent'] = 'Transparent' }
+
 AS.Options = {
 	order = 101,
 	type = 'group',
@@ -100,12 +102,7 @@ AS.Options = {
 					name = ASL['Skin Template'],
 					order = 6,
 					type = 'select',
-					values = {
-						['ClassColor'] = 'Class Color',
-						['Custom'] = 'Custom',
-						['Default'] = 'Default',
-						['Transparent'] = 'Transparent',
-					}
+					values = DefaultTemplates,
 				},
 				Textures = {
 					type = 'group',
@@ -145,14 +142,14 @@ AS.Options = {
 							hasAlpha = true,
 							name = 'Backdrop Color',
 							desc = 'Only Available with Custom Template',
-							disabled = function() return (AS:CheckOption('SkinTemplate') ~= 'Custom' and not AS:CheckOption('ElvUIStyle')) end,
+							disabled = function() return (AS:CheckOption('SkinTemplate') ~= 'Custom') or AS:CheckOption('ElvUIStyle') end,
 						},
 						BorderColor = {
 							type = 'color',
 							order = 2,
 							name = 'Border Color',
 							desc = 'Only Available with Custom Template',
-							disabled = function() return (AS:CheckOption('SkinTemplate') ~= 'Custom' and not AS:CheckOption('ElvUIStyle')) end,
+							disabled = function() return (AS:CheckOption('SkinTemplate') ~= 'Custom') or AS:CheckOption('ElvUIStyle') end,
 						},
 						HighlightColor = {
 							type = 'color',
@@ -704,11 +701,17 @@ function AS:BuildOptions()
 		}
 
 		if AS:CheckAddOn('ElvUI_MerathilisUI') then
-			AS.Options.args.general.args.SkinTemplate.values['MerathilisUI'] = 'MerathilisUI'
+			local AddOnTemplate = CopyTable(DefaultTemplates)
+			AddOnTemplate['MerathilisUI'] = '|cffff7d0aMerathilisUI|r'
+
+			AS.Options.args.general.args.SkinTemplate.values = function() return (AS:CheckOption('ElvUIStyle') and AddOnTemplate or DefaultTemplates) end
 		end
 
 		if AS:CheckAddOn('ElvUI_KlixUI') then
-			AS.Options.args.general.args.SkinTemplate.values['KlixUI'] = 'KlixUI'
+			local AddOnTemplate = CopyTable(DefaultTemplates)
+			AddOnTemplate['KlixUI'] = '|cfff960d9KlixUI|r'
+
+			AS.Options.args.general.args.SkinTemplate.values = function() return (AS:CheckOption('ElvUIStyle') and AddOnTemplate or DefaultTemplates) end
 		end
 	end
 end
