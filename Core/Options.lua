@@ -70,7 +70,7 @@ AS.Options = {
 				},
 				SkinTemplate = {
 					name = ASL['Skin Template'],
-					order = 6,
+					order = 7,
 					type = 'select',
 					values = DefaultTemplates,
 				},
@@ -78,7 +78,7 @@ AS.Options = {
 					type = 'group',
 					name = 'Textures',
 					guiInline = true,
-					order = 7,
+					order = 8,
 					get = function(info) return AS:CheckOption(info[#info]) end,
 					set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
 					args = {
@@ -102,7 +102,7 @@ AS.Options = {
 					type = 'group',
 					name = 'Colors',
 					guiInline = true,
-					order = 8,
+					order = 9,
 					get = function(info) return unpack(AS:CheckOption(info[#info])) end,
 					set = function(info, r, g, b, a) AS:SetOption(info[#info], { r, g, b, a }) end,
 					args = {
@@ -137,7 +137,7 @@ AS.Options = {
 					type = 'group',
 					name = 'DBM Options',
 					guiInline = true,
-					order = 9,
+					order = 10,
 					get = function(info) return AS:CheckOption(info[#info]) end,
 					set = function(info, value) AS:SetOption(info[#info], value) end,
 					args = {
@@ -943,6 +943,8 @@ function AS:BuildOptions()
 
 	sort(skins)
 
+	tDeleteItem(skins, 'ParchmentRemover')
+
 	for _, skinName in pairs(skins) do
 		if strfind(skinName, 'Blizzard_') then
 			AS.Options.args.blizzard.args[skinName] = GenerateOptionTable(skinName, blizzorder)
@@ -958,6 +960,13 @@ function AS:BuildOptions()
 			type = 'toggle',
 			name = 'ElvUI Style',
 			order = 5,
+		}
+
+		AS.Options.args.general.args.ParchmentRemover = {
+			type = 'toggle',
+			name = 'ElvUI Parchment Remover',
+			desc = 'Removes Parchment added in ElvUI Blizzard Skins',
+			order = 6,
 		}
 
 		if AS:CheckAddOn('ElvUI_MerathilisUI') then
