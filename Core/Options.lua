@@ -471,8 +471,8 @@ local Changelog = {
 	},
 	['4.02'] = {
 		'Core: Options',
-		'Updated: Island Party Pose',
-		'Added: WeakAura',
+		'Updated: Island Party Pose, Ace3, Parchment Remover',
+		'Added: WeakAuras, Immersion',
 	},
 }
 
