@@ -49,7 +49,12 @@ function AS:Blizzard_Spellbook()
 		for i = 1, SPELLS_PER_PAGE do
 			local Button = _G["SpellButton"..i]
 			Button:SetHighlightTexture('')
-			Button.SpellName:SetTextColor(1, 1, 1)
+			local r = Button.SpellName:GetTextColor()
+			if r < 0.8 then
+				Button.SpellName:SetTextColor(0.6, 0.6, 0.6)
+			else
+				Button.SpellName:SetTextColor(1, 1, 1)
+			end
 			Button.SpellSubName:SetTextColor(0.6, 0.6, 0.6)
 			Button.RequiredLevelString:SetTextColor(0.6, 0.6, 0.6)
 		end

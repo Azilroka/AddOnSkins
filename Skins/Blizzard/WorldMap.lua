@@ -88,7 +88,7 @@ function AS:Blizzard_Quest()
 	AS:StripTextures(QuestFrameRewardPanel, true)
 	AS:SkinFrame(QuestProgressScrollFrame)
 	AS:SkinFrame(QuestRewardScrollFrame)
-	AS:SkinBackdropFrame(QuestDetailScrollFrame)
+	AS:SkinBackdropFrame(QuestDetailScrollFrame, nil, nil, true)
 	QuestDetailScrollFrame.Backdrop:SetPoint("TOPLEFT", 0, 0)
 	QuestDetailScrollFrame.Backdrop:SetPoint("BOTTOMRIGHT", 4, 0)
 	AS:SkinFrame(QuestGreetingScrollFrame)
@@ -324,6 +324,36 @@ function AS:Blizzard_Quest()
 			QuestProgressRequiredItemsText:SetTextColor(1, .8, .1)
 			QuestProgressRequiredMoneyText:SetTextColor(1, .8, .1)
 		end)
+
+		for i = 1, C_QuestLog.GetMaxNumQuestsCanAccept() do
+			local button = _G['QuestTitleButton'..i]
+			if button then
+				hooksecurefunc(button, 'SetFormattedText', function()
+					if button:GetFontString() then
+						if button:GetFontString():GetText() and button:GetFontString():GetText():find('|cff000000') then
+							button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), '|cff000000', '|cffffe519'))
+						end
+					end
+				end)
+			end
+		end
+
+		if (QuestInfoRewardsFrame.spellHeaderPool) then
+			for _, pool in pairs({"followerRewardPool", "spellRewardPool"}) do
+				QuestInfoRewardsFrame[pool]._acquire = QuestInfoRewardsFrame[pool].Acquire
+				QuestInfoRewardsFrame[pool].Acquire = function(self)
+					local frame = QuestInfoRewardsFrame[pool]:_acquire()
+					frame.Name:SetTextColor(1, 1, 1)
+					return frame
+				end
+			end
+			QuestInfoRewardsFrame.spellHeaderPool._acquire = QuestInfoRewardsFrame.spellHeaderPool.Acquire
+			QuestInfoRewardsFrame.spellHeaderPool.Acquire = function(self)
+				local frame = self:_acquire()
+				frame:SetTextColor(1, 1, 1)
+				return frame
+			end
+		end
 	end
 end
 
@@ -359,7 +389,7 @@ function AS:Blizzard_WorldMap()
 	AS:SkinMaxMinFrame(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame)
 
 	if not AS.ParchmentEnabled then
-		AS:StripTextures(QuestMapFrame.DetailsFrame)
+		AS:StripTextures(QuestMapFrame.DetailsFrame, true)
 		AS:StripTextures(QuestMapFrame.DetailsFrame.RewardsFrame)
 		AS:SkinScrollBar(QuestMapFrame.DetailsFrame.ScrollFrame.ScrollBar)
 	end

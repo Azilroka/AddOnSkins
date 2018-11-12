@@ -49,6 +49,11 @@ function AS:Ace3()
 
 			widget.label:ClearAllPoints()
 			widget.label:SetPoint('BOTTOMLEFT', frame.Backdrop, 'TOPLEFT', 2, 0)
+			hooksecurefunc(widget.label, 'SetTextColor', function(self, r, g, b, a)
+				if r == 1 and g == 0.82 and b == 0 then
+					self:SetTextColor(1, 1, 1, 1)
+				end
+			end)
 
 			button:SetSize(20, 20)
 			button:ClearAllPoints()
@@ -70,6 +75,11 @@ function AS:Ace3()
 
 			frame.label:ClearAllPoints()
 			frame.label:SetPoint('BOTTOMLEFT', frame.Backdrop, 'TOPLEFT', 2, 0)
+			hooksecurefunc(frame.label, 'SetTextColor', function(self, r, g, b, a)
+				if r == 1 and g == 0.82 and b == 0 then
+					self:SetTextColor(1, 1, 1, 1)
+				end
+			end)
 
 			frame.text:ClearAllPoints()
 			frame.text:SetPoint('RIGHT', button, 'LEFT', -2, 0)
@@ -90,7 +100,7 @@ function AS:Ace3()
 				widget.bar:ClearAllPoints()
 				widget.bar:SetPoint('TOPLEFT', frame.Backdrop, 'TOPLEFT', 2, -2)
 				widget.bar:SetPoint('BOTTOMRIGHT', button, 'BOTTOMLEFT', -1, 0)
-			elseif TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' then
+			--elseif TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' then
 			end
 
 			button:SetParent(frame.Backdrop)
@@ -108,10 +118,23 @@ function AS:Ace3()
 			end)
 		elseif TYPE == 'EditBox' then
 			AS:SkinEditBox(widget.editbox)
-			widget.editbox:SetHeight(17)
+			hooksecurefunc(widget.editbox, "SetPoint", function(self, a, b, c, d, e)
+				if d == 7 then
+					self:SetPoint(a, b, c, 0, e)
+				end
+			end)
+			hooksecurefunc(widget.label, 'SetTextColor', function(self, r, g, b, a)
+				if r == 1 and g == 0.82 and b == 0 then
+					self:SetTextColor(1, 1, 1, 1)
+				end
+			end)
+			widget.editbox:SetPoint('BOTTOMLEFT', 0, 0)
 			AS:SkinButton(widget.button)
+			widget.editbox.Backdrop:SetPoint('TOPLEFT', 0, -2)
+			widget.editbox.Backdrop:SetPoint('BOTTOMRIGHT', -1, 0)
 		elseif TYPE == 'Button' then
 			AS:SkinButton(widget.frame)
+			widget.text:SetTextColor(1, 1, 1, 1)
 		elseif TYPE == 'Slider' then
 			AS:SkinSlideBar(widget.slider)
 
@@ -119,9 +142,15 @@ function AS:Ace3()
 			widget.editbox:SetHeight(15)
 			widget.editbox:SetPoint('TOP', widget.slider, 'BOTTOM', 0, -1)
 
+			hooksecurefunc(widget.label, 'SetTextColor', function(self, r, g, b, a)
+				if r == 1 and g == 0.82 and b == 0 then
+					self:SetTextColor(1, 1, 1, 1)
+				end
+			end)
+
 			widget.lowtext:SetPoint('TOPLEFT', widget.slider, 'BOTTOMLEFT', 2, -2)
 			widget.hightext:SetPoint('TOPRIGHT', widget.slider, 'BOTTOMRIGHT', -2, -2)
-		elseif TYPE == "Keybinding" then
+		elseif TYPE == 'Keybinding' then
 			local button = widget.button
 			local msgframe = widget.msgframe
 
@@ -130,7 +159,7 @@ function AS:Ace3()
 			AS:SkinFrame(msgframe)
 			msgframe.msg:ClearAllPoints()
 			msgframe.msg:SetPoint("CENTER")
-		elseif TYPE == "ColorPicker" then
+		elseif TYPE == 'ColorPicker' then
 			local frame = widget.frame
 			local colorSwatch = widget.colorSwatch
 
@@ -152,6 +181,8 @@ function AS:Ace3()
 			if frame.texture then
 				frame.texture:SetColorTexture(0, 0, 0, 0)
 			end
+		elseif TYPE == 'Heading' then
+			widget.label:SetTextColor(1, 1, 1, 1)
 		end
 
 		return oldRegisterAsWidget(self, widget)
@@ -183,6 +214,10 @@ function AS:Ace3()
 			end
 			AS:SetTemplate(frame, 'Transparent')
 
+			if widget.titletext then
+				widget.titletext:SetTextColor(1, 1, 1, 1)
+			end
+
 			if widget.treeframe then
 				AS:SetTemplate(widget.treeframe, 'Transparent')
 				frame:SetPoint('TOPLEFT', widget.treeframe, 'TOPRIGHT', 1, 0)
@@ -199,14 +234,17 @@ function AS:Ace3()
 
 					for i = offset + 1, #lines do
 						local button = buttons[i - offset]
-						if groupstatus[lines[i].uniquevalue] and button then
-							button.toggle:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Minus]])
-							button.toggle:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Minus]])
-							button.toggle:SetHighlightTexture('')
-						elseif button then
-							button.toggle:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Plus]])
-							button.toggle:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Plus]])
-							button.toggle:SetHighlightTexture('')
+						if button then
+							if groupstatus[lines[i].uniquevalue] then
+								button.toggle:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Minus]])
+								button.toggle:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Minus]])
+								button.toggle:SetHighlightTexture('')
+							else
+								button.toggle:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Plus]])
+								button.toggle:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Plus]])
+								button.toggle:SetHighlightTexture('')
+							end
+							button.text:SetTextColor(1, 1, 1, 1)
 						end
 					end
 				end
@@ -220,6 +258,7 @@ function AS:Ace3()
 					tab.Backdrop:SetFrameLevel(tab:GetFrameLevel() - 2)
 					tab.Backdrop:Point("TOPLEFT", 10, -3)
 					tab.Backdrop:Point("BOTTOMRIGHT", -10, 0)
+					tab.text:SetTextColor(1, 1, 1, 1)
 					return tab
 				end
 			end
