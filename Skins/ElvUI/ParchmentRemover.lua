@@ -215,8 +215,8 @@ function AS:ParchmentRemover(event, addon)
 		end
 
 		if ElvUI[1].private.skins.blizzard.spellbook == true then
-			AS:StripTextures(SpellBookPage1, true)
-			AS:StripTextures(SpellBookPage2, true)
+			AS:StripTextures(SpellBookPage1)
+			AS:StripTextures(SpellBookPage2)
 			SpellBookPageText:SetTextColor(0.6, 0.6, 0.6)
 
 
