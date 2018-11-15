@@ -219,7 +219,6 @@ function AS:ParchmentRemover(event, addon)
 			AS:StripTextures(SpellBookPage2)
 			SpellBookPageText:SetTextColor(0.6, 0.6, 0.6)
 
-
 			for _, Button in pairs({ PrimaryProfession1, PrimaryProfession2, SecondaryProfession1, SecondaryProfession2, SecondaryProfession3 }) do
 				Button.missingHeader:SetTextColor(1, .82, 0)
 				Button.missingText:SetTextColor(1, 1, 1)
