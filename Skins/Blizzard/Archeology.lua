@@ -22,9 +22,7 @@ function AS:Blizzard_ArchaeologyUI(event, addon)
 		frame.raceName:SetTextColor(1, 1, 1)
 
 		artifact.border:SetTexture(nil)
-		AS:SkinTexture(artifact.icon)
-		AS:CreateBackdrop(artifact)
-		artifact.Backdrop:SetOutside(artifact.icon)
+		AS:SkinTexture(artifact.icon, true)
 		artifact.artifactName:SetTextColor(1, .8, .1)
 		artifact.artifactSubText:SetTextColor(0.6, 0.6, 0.6)
 	end

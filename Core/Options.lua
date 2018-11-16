@@ -943,8 +943,6 @@ function AS:BuildOptions()
 
 	sort(skins)
 
-	tDeleteItem(skins, 'ParchmentRemover')
-
 	for _, skinName in pairs(skins) do
 		if strfind(skinName, 'Blizzard_') then
 			AS.Options.args.blizzard.args[skinName] = GenerateOptionTable(skinName, blizzorder)
@@ -960,13 +958,6 @@ function AS:BuildOptions()
 			type = 'toggle',
 			name = 'ElvUI Style',
 			order = 5,
-		}
-
-		AS.Options.args.general.args.ParchmentRemover = {
-			type = 'toggle',
-			name = 'ElvUI Parchment Remover',
-			desc = 'Removes Parchment added in ElvUI Blizzard Skins',
-			order = 6,
 		}
 
 		if AS:CheckAddOn('ElvUI_MerathilisUI') then

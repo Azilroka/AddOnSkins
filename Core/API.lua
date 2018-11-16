@@ -90,11 +90,21 @@ AS.Blizzard.Tooltip = {
 	'BorderBottomLeft',
 }
 
+function AS:Kill(Object)
+	if Object.UnregisterAllEvents then
+		Object:UnregisterAllEvents()
+		Object:SetParent(AS.Hider)
+	else
+		Object.Show = Object.Hide
+	end
+
+	Object:Hide()
+end
+
 function AS:StripTextures(Object, Kill, Alpha)
 	if Object:IsObjectType('Texture') then
 		if Kill then
-			Object:Hide()
-			Object.Show = AS.Noop
+			AS:Kill(Object)
 		elseif Alpha then
 			Object:SetAlpha(0)
 		else
@@ -115,8 +125,7 @@ function AS:StripTextures(Object, Kill, Alpha)
 				local Region = select(i, Object:GetRegions())
 				if Region and Region:IsObjectType('Texture') then
 					if Kill then
-						Region:Hide()
-						Region.Show = AS.Noop
+						AS:Kill(Object)
 					elseif Alpha then
 						Region:SetAlpha(0)
 					else

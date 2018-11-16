@@ -1,4 +1,5 @@
 <Ui>
+	<Script file="Ace3.lua"/>
 	<Script file="acb_Castbar.lua"/>
 	<Script file="AchieveIt.lua"/>
 	<Script file="ACP.lua"/>
