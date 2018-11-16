@@ -90,13 +90,14 @@ AS.Blizzard.Tooltip = {
 	'BorderBottomLeft',
 }
 
-function AS:StripTextures(Object, Kill)
+function AS:StripTextures(Object, Kill, Alpha)
 	if Object:IsObjectType('Texture') then
 		if Kill then
 			Object:Hide()
 			Object.Show = AS.Noop
-		else
+		elseif Alpha then
 			Object:SetAlpha(0)
+		else
 			Object:SetTexture(nil)
 		end
 	else
@@ -116,8 +117,9 @@ function AS:StripTextures(Object, Kill)
 					if Kill then
 						Region:Hide()
 						Region.Show = AS.Noop
-					else
+					elseif Alpha then
 						Region:SetAlpha(0)
+					else
 						Region:SetTexture(nil)
 					end
 				end
