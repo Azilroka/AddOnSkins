@@ -259,14 +259,16 @@ function AS:Blizzard_Character()
 	TokenFramePopup:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)
 
 	hooksecurefunc('TokenFrame_Update', function()
-		for _, Button in pairs(TokenFrameContainer.buttons) do
-			Button.categoryMiddle:SetAlpha(0)
-			Button.categoryLeft:SetAlpha(0)
-			Button.categoryRight:SetAlpha(0)
-			Button.highlight:SetAlpha(0)
-			Button.stripe:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
-			Button.stripe:SetAlpha(.1)
-			AS:SkinTexture(Button.icon)
+		if TokenFrameContainer.buttons then
+			for _, Button in pairs(TokenFrameContainer.buttons) do
+				Button.categoryMiddle:SetAlpha(0)
+				Button.categoryLeft:SetAlpha(0)
+				Button.categoryRight:SetAlpha(0)
+				Button.highlight:SetAlpha(0)
+				Button.stripe:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
+				Button.stripe:SetAlpha(.1)
+				AS:SkinTexture(Button.icon)
+			end
 		end
 	end)
 end
