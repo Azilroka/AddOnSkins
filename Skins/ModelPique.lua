@@ -7,7 +7,7 @@ function AS:ModelPique()
 	ModelPiqueFrame:SetTemplate("Transparent")
 	AS:SkinButton(ModelPiqueFrameCancelButton)
 	AS:SkinCloseButton(ModelPiqueFrameCloseButton)
-	ModelPiqueFramePortrait:Kill()
+	AS:Kill(ModelPiqueFramePortrait)
 
 	--Reposition Frame
 	ModelPiqueModel:ClearAllPoints()

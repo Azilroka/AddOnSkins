@@ -12,7 +12,7 @@ function AS:Blizzard_Character()
 	CharacterModelFrame.Backdrop:SetPoint('BOTTOMRIGHT', 2, -2)
 	AS:CreateShadow(CharacterModelFrame.Backdrop, true)
 
-	CharacterFramePortrait:Kill()
+	AS:Kill(CharacterFramePortrait)
 
 	PaperDollSidebarTabs:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -29, -1)
 
@@ -85,7 +85,7 @@ function AS:Blizzard_Character()
 		tab.Hider:SetColorTexture(0, 0, 0, .8)
 		tab.Hider:SetPoint("TOPLEFT", 3, -4)
 		tab.Hider:SetPoint("BOTTOMRIGHT", -1, 0)
-		tab.TabBg:Kill()
+		AS:Kill(tab.TabBg)
 		AS:CreateBackdrop(tab)
 		tab.Backdrop:SetPoint("TOPLEFT", 2, -3)
 		tab.Backdrop:SetPoint("BOTTOMRIGHT", 0, -1)

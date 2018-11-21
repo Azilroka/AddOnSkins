@@ -133,7 +133,7 @@ function AS:KarniCrap()
 	KarniCrapTab1:SetPoint('BOTTOMLEFT', KarniCrap, 'BOTTOMLEFT',0,-30)
 	AS:SkinScrollBar(KarniCrap_Inventory_ScrollBarScrollBar)
 	AS:SkinCloseButton(KarniCrapCloseButton)
-	KarniCrapPortrait:Kill()
+	AS:Kill(KarniCrapPortrait)
 
 	for i = 1, 15 do
 		AS:SkinCloseButton(_G['KarniInvEntry'..i..'_BtnCrap'])

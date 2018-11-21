@@ -30,7 +30,7 @@ function AS:Altoholic(event, addon)
 		end
 
 		AS:SkinFrame(AltoholicFrame)
-		AltoholicFramePortrait:Kill()
+		AS:Kill(AltoholicFramePortrait)
 
 		AS:SkinFrame(AltoMessageBox)
 		AS:SkinButton(AltoMessageBox.ButtonYes)

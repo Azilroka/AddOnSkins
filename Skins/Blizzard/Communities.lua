@@ -5,7 +5,7 @@ function AS:Blizzard_Communities(event, addon)
 
 	AS:SkinFrame(CommunitiesFrame)
 	AS:SkinCloseButton(CommunitiesFrame.CloseButton)
-	CommunitiesFrame.PortraitOverlay:Kill()
+	AS:Kill(CommunitiesFrame.PortraitOverlay)
 	AS:StripTextures(CommunitiesFrame.CommunitiesList)
 
 	CommunitiesFrame.CommunitiesList.ListScrollFrame.ScrollBar.ScrollDownButton = CommunitiesFrame.CommunitiesList.ListScrollFrame.scrollDown
@@ -396,7 +396,7 @@ function AS:Blizzard_GuildUI(event, addon)
 		AvailableServicesText:SetTextColor(1, .8, .1)
 
 		AS:SkinFrame(TabardFrame)
-		TabardFramePortrait:Kill()
+		AS:Kill(TabardFramePortrait)
 
 		AS:SkinCloseButton(TabardFrameCloseButton)
 		AS:SkinButton(TabardFrameCancelButton)
@@ -551,7 +551,7 @@ function AS:Blizzard_GuildUI(event, addon)
 	AS:StripTextures(GuildNewsFrame)
 
 	for i = 1, 17 do
-		_G["GuildNewsContainerButton"..i].header:Kill()
+		AS:Kill(_G["GuildNewsContainerButton"..i].header)
 	end
 
 	AS:SkinFrame(GuildNewsFiltersFrame)
@@ -575,8 +575,8 @@ function AS:Blizzard_GuildUI(event, addon)
 	AS:SetTemplate(GuildRecruitmentCommentInputFrame, 'Default')
 
 	for _, button in pairs(GuildInfoFrameApplicantsContainer.buttons) do
-		button.selectedTex:Kill()
-		button:GetHighlightTexture():Kill()
+		AS:Kill(button.selectedTex)
+		AS:Kill(button:GetHighlightTexture())
 		button:SetBackdrop(nil)
 	end
 

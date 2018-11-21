@@ -11,6 +11,7 @@ function AS:GryphonheartItems()
 	hooksecurefunc('GHI_ButtonUI', function()
 		AS:SkinIconButton(GHI_ButtonSquared)
 	end)
+
 	hooksecurefunc('GHI_ToggleBackpack', function()
 		if GHI_ContainerFrame1.IsButtonsDone then return end
 		for k = 1, GHI_ContainerFrame1:GetNumChildren() do
@@ -22,13 +23,14 @@ function AS:GryphonheartItems()
 		end
 		GHI_ContainerFrame1.IsButtonsDone = true
 	end)
- 	hooksecurefunc('GHI_ContainerFrame_GenerateFrame', function(frame, size, itemname, icon, specialTexture)
+
+	hooksecurefunc('GHI_ContainerFrame_GenerateFrame', function(frame, size, itemname, icon, specialTexture)
 		local name = frame:GetName()
-		_G[name.."BackgroundTop"]:Kill()
-		_G[name.."BackgroundMiddle1"]:Kill()
-		_G[name.."BackgroundBottom"]:Kill()
-		_G[name.."BackgroundMiddle2"]:Kill()
-		_G[name.."Background1Slot"]:Kill()
+		AS:Kill(_G[name.."BackgroundTop"])
+		AS:Kill(_G[name.."BackgroundMiddle1"])
+		AS:Kill(_G[name.."BackgroundBottom"])
+		AS:Kill(_G[name.."BackgroundMiddle2"])
+		AS:Kill(_G[name.."Background1Slot"])
 
 		AS:SkinFrame(frame, nil, true)
 		AS:SkinCloseButton(_G[name..'CloseButton'])

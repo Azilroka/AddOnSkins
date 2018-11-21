@@ -187,7 +187,7 @@ function AS:Blizzard_BattlefieldMap(event, addon)
 
 	BattlefieldMapFrame.BorderFrame.CloseButton:SetFrameLevel(BattlefieldMapFrame.BorderFrame.CloseButton:GetFrameLevel()+1)
 	AS:SkinCloseButton(BattlefieldMapFrame.BorderFrame.CloseButton)
-	BattlefieldMapTab:Kill()
+	AS:Kill(BattlefieldMapTab)
 
 	local function InitializeOptionsDropDown()
 		BattlefieldMapTab:InitializeOptionsDropDown()

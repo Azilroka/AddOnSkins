@@ -24,7 +24,7 @@ function AS:Blizzard_GarrisonUI(event, addon)
 	AS:SkinButton(GarrisonCapacitiveDisplayFrame.StartWorkOrderButton, true)
 	AS:SkinButton(GarrisonCapacitiveDisplayFrame.CreateAllWorkOrdersButton, true)
 
-	GarrisonCapacitiveDisplayFramePortrait:Kill()
+	AS:Kill(GarrisonCapacitiveDisplayFramePortrait)
 	GarrisonCapacitiveDisplayFrameLeft:SetTexture(nil)
 	GarrisonCapacitiveDisplayFrameMiddle:SetTexture(nil)
 	GarrisonCapacitiveDisplayFrameRight:SetTexture(nil)
@@ -42,8 +42,7 @@ function AS:Blizzard_ItemUpgradeUI(event, addon)
 	if addon ~= 'Blizzard_ItemUpgradeUI' then return end
 
 	AS:SkinFrame(ItemUpgradeFrame)
-	--ItemUpgradeFrameShadows:Kill()
-	--ItemUpgradeFrameInset:Kill()
+	--AS:Kill(ItemUpgradeFrameShadows)
 
 	AS:SkinCloseButton(ItemUpgradeFrameCloseButton)
 
@@ -60,7 +59,7 @@ function AS:Blizzard_ItemUpgradeUI(event, addon)
 
 	ItemUpgradeFrameMoneyFrame:StripTextures()
 	AS:SkinButton(ItemUpgradeFrameUpgradeButton, true)
-	ItemUpgradeFrame.FinishedGlow:Kill()
+	AS:Kill(ItemUpgradeFrame.FinishedGlow)
 	ItemUpgradeFrame.ButtonFrame:DisableDrawLayer('BORDER')
 
 	AS:UnregisterSkinEvent(addon, event)

@@ -13,7 +13,7 @@ function AS:Scrap(event, addon)
 			ScrapIcon:SetAllPoints()
 			local numTabs = MerchantFrame.numTabs
 			for i = numTabs, 1, -1 do
-				tab = _G[('MerchantFrameTab%d'):format(i)]
+				local tab = _G[('MerchantFrameTab%d'):format(i)]
 				if tab then
 					if tab:GetText() == 'Scrap' then
 						AS:SkinTab(tab)
@@ -27,7 +27,7 @@ function AS:Scrap(event, addon)
 			AddOnCount = AddOnCount + 1
 		end
 	end
-	
+
 	if addon == 'Scrap_Visualizer' or IsAddOnLoaded('Scrap_Visualizer')then
 		AS:SkinFrame(ScrapVisualizer, 'Default')
 		AS:StripTextures(ScrapVisualizerInset)

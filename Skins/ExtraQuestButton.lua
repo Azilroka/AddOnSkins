@@ -5,7 +5,7 @@ if not AS:CheckAddOn('ExtraQuestButton') then return end
 function AS:ExtraQuestButton()
 	AS:SkinButton(ExtraQuestButton)
 	ExtraQuestButton:SetTemplate("Transparent")
-	ExtraQuestButton.Artwork:Kill()
+	AS:Kill(ExtraQuestButton.Artwork)
 	AS:SkinTexture(ExtraQuestButton.Icon)
 	ExtraQuestButton.Icon:SetInside()
 	ExtraQuestButton.Icon:SetDrawLayer("OVERLAY")

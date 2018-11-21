@@ -14,8 +14,8 @@ function AS:SkinAchievement(Achievement, BiggerIcon)
 	Achievement.icon:ClearAllPoints()
 	Achievement.icon:SetPoint("LEFT", 6, 0)
 
-	Achievement.icon.bling:Kill()
-	Achievement.icon.frame:Kill()
+	AS:Kill(Achievement.icon.bling)
+	AS:Kill(Achievement.icon.frame)
 
 	AS:SkinTexture(Achievement.icon.texture)
 

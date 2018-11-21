@@ -53,7 +53,7 @@ function AS:Bartender4()
 		end
 
 		if (BtnBG) then
-			BtnBG:Kill()
+			AS:Kill(BtnBG)
 		end
 
 		AS:SetTemplate(Button)

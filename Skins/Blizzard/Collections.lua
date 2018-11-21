@@ -131,7 +131,7 @@ function AS:Blizzard_Collections(event, addon)
 
 	-- Pet Journal
 
-	PetJournalTutorialButton:Kill()
+	AS:Kill(PetJournalTutorialButton)
 
 	AS:SkinFrame(PetJournal.PetCount)
 
@@ -393,7 +393,7 @@ function AS:Blizzard_Collections(event, addon)
 				AS:SkinBackdropFrame(Model)
 				Model:SetFrameLevel(Model:GetFrameLevel() + 2)
 				Model.Backdrop:SetOutside(Model, 2, 2)
-				Model.Border:Kill()
+				AS:Kill(Model.Border)
 				Model.TransmogStateTexture:SetAlpha(0)
 				hooksecurefunc(Model.Border, 'SetAtlas', function(self, texture)
 					local r, g, b
@@ -456,7 +456,7 @@ function AS:Blizzard_Collections(event, addon)
 		Button.PendingFrame.Ants:SetOutside(Button, 4, 4)
 		Button.PendingFrame.Glow:SetOutside(Button, 12, 12)
 		Button:SetFrameLevel(Button:GetFrameLevel() + 2)
-		Button.Border:Kill()
+		AS:Kill(Button.Border)
 		Button.NoItemTexture:SetTexture([[Interface\Transmogrify\Textures]])
 	end
 

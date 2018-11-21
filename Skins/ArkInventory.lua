@@ -10,8 +10,8 @@ function AS:ArkInventory()
 			if subframe.IsSkinned then return end
 			local name = subframe:GetName()
 			if name then
-				if _G[name..'ArkBorder'] then _G[name..'ArkBorder']:Kill() end
-				if _G[name..'Background'] then _G[name..'Background']:Kill() end
+				if _G[name..'ArkBorder'] then AS:Kill(_G[name..'ArkBorder']) end
+				if _G[name..'Background'] then AS:Kill(_G[name..'Background']) end
 			end
 			AS:SkinFrame(subframe)
 			subframe.IsSkinned = true
@@ -40,8 +40,8 @@ function AS:ArkInventory()
 
 		if not bar.IsSkinned then
 			local name = bar:GetName()
-			if _G[name..'ArkBorder'] then _G[name..'ArkBorder']:Kill() end
-			if _G[name..'Background'] then _G[name..'Background']:Kill() end
+			if _G[name..'ArkBorder'] then AS:Kill(_G[name..'ArkBorder']) end
+			if _G[name..'Background'] then AS:Kill(_G[name..'Background']) end
 			bar.IsSkinned = true
 		end
 
@@ -68,7 +68,7 @@ function AS:ArkInventory()
 		if not ArkInventory.ValidFrame(frame, true) then return end
 		local obj = _G[frame:GetName()..'ArkBorder']
 		if not obj then return end
-		obj:Kill()
+		AS:Kill(obj)
 
 		AS:SetTemplate(frame)
 		frame:SetBackdropBorderColor(obj:GetBackdropBorderColor())

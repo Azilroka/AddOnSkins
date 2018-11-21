@@ -44,7 +44,7 @@ function AS:oRA3(event, addon)
 				end
 			end
 			local contentFrame = oRA3ListFrame:GetParent()
-			if contentFrame then 
+			if contentFrame then
 				contentFrame:SetPoint("BOTTOMRIGHT", -10, 33)
 			end
 			for i, child in ipairs({oRA3ListFrame:GetChildren()}) do
@@ -68,8 +68,8 @@ function AS:oRA3(event, addon)
 					end
 				end
 			end)
-			oRA3ScrollFrameTop:Kill()
-			oRA3ScrollFrameBottom:Kill()
+			AS:Kill(oRA3ScrollFrameTop)
+			AS:Kill(oRA3ScrollFrameBottom)
 			oRA3Frame.IsSkinned = true
 		end
 

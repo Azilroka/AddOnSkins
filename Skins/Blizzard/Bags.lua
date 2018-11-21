@@ -89,13 +89,13 @@ function AS:Blizzard_Bags()
 
 		Bag.Backdrop:SetPoint("TOPLEFT", 4, -2)
 		Bag.Backdrop:SetPoint("BOTTOMRIGHT", 1, 1)
-		_G["ContainerFrame"..i.."BackgroundTop"]:Kill()
-		_G["ContainerFrame"..i.."BackgroundMiddle1"]:Kill()
-		_G["ContainerFrame"..i.."BackgroundMiddle2"]:Kill()
-		_G["ContainerFrame"..i.."BackgroundBottom"]:Kill()
+		AS:Kill(_G["ContainerFrame"..i.."BackgroundTop"])
+		AS:Kill(_G["ContainerFrame"..i.."BackgroundMiddle1"])
+		AS:Kill(_G["ContainerFrame"..i.."BackgroundMiddle2"])
+		AS:Kill(_G["ContainerFrame"..i.."BackgroundBottom"])
 		AS:SkinCloseButton(_G["ContainerFrame"..i.."CloseButton"])
 		AS:SkinButton(Bag.PortraitButton)
-		Bag.PortraitButton.Highlight:Kill()
+		AS:Kill(Bag.PortraitButton.Highlight)
 	end
 
 	local function UpdateBagIcon()

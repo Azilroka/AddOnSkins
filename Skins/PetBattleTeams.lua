@@ -23,7 +23,7 @@ function AS:PetBattleTeams()
 		AS:StyleButton(PBT.menuButton)
 		PBT.menuButton:GetHighlightTexture():SetAllPoints(PBT.menuButton.icon)
 		PBT.menuButton:GetPushedTexture():SetAllPoints(PBT.menuButton.icon)
-		PBT.menuButton.overlay:Kill()
+		AS:Kill(PBT.menuButton.overlay)
 		AS:SkinFrame(PBT.mainFrame.rosterFrame.scrollFrame.ScrollBar)]]
 	end
 

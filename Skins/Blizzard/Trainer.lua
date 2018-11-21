@@ -12,7 +12,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 
 	TradeSkillFrame.LinkToButton:GetNormalTexture():SetTexCoord(0.25, 0.7, 0.37, 0.75)
 	TradeSkillFrame.LinkToButton:GetPushedTexture():SetTexCoord(0.25, 0.7, 0.45, 0.8)
-	TradeSkillFrame.LinkToButton:GetHighlightTexture():Kill()
+	AS:Kill(TradeSkillFrame.LinkToButton:GetHighlightTexture())
 	AS:CreateBackdrop(TradeSkillFrame.LinkToButton)
 	TradeSkillFrame.LinkToButton:SetSize(17, 14)
 	TradeSkillFrame.LinkToButton:SetPoint("BOTTOMRIGHT", TradeSkillFrame.FilterButton, "TOPRIGHT", -2, 4)

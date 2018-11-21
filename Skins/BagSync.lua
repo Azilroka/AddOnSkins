@@ -40,7 +40,7 @@ function AS:BagSync()
 		end
 	end
 	-- AS:SkinEditBox(BagSync_SearchFrameEdit1)
-	-- BagSync_MinimapButton:Kill()
+	-- AS:Kill(BagSync_MinimapButton)
 
 	-- hooksecurefunc(BagSync, 'ShowMoneyTooltip', function()
 		-- if not BagSyncMoneyTooltip.isSkinned then

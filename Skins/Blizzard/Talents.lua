@@ -9,7 +9,7 @@ function AS:Blizzard_TalentUI(event, addon)
 	for _, Button in pairs({ PlayerTalentFrameTalentsTutorialButton, PlayerTalentFrameSpecializationTutorialButton, PlayerTalentFramePetSpecializationTutorialButton }) do
 		Button.Ring:Hide()
 		Button:SetPoint("TOPLEFT", PlayerTalentFrame, "TOPLEFT", -12, 12)
-	--	Button:Kill()
+	--	AS:Kill(Button)
 	end
 
 	AS:SkinButton(PlayerTalentFrameActivateButton, true)
@@ -32,7 +32,7 @@ function AS:Blizzard_TalentUI(event, addon)
 			local Button = Frame['specButton'..i]
 			local _, _, _, icon = GetSpecializationInfo(i, false, Frame.isPet)
 
-			_G["PlayerTalentFrameSpecializationSpecButton"..i.."Glow"]:Kill()
+			AS:Kill(_G["PlayerTalentFrameSpecializationSpecButton"..i.."Glow"])
 
 			AS:SkinBackdropFrame(Button, nil, true)
 			Button.Backdrop:SetPoint("TOPLEFT", 70, 2)
@@ -131,7 +131,7 @@ function AS:Blizzard_TalentUI(event, addon)
 	for i = 1, MAX_TALENT_TIERS do
 		local Row = PlayerTalentFrameTalents['tier'..i]
 		AS:StripTextures(Row, true)
-		Row.GlowFrame:Kill()
+		AS:Kill(Row.GlowFrame)
 
 		for j = 1, NUM_TALENT_COLUMNS do
 			local Button = Row['talent'..j]
@@ -143,7 +143,7 @@ function AS:Blizzard_TalentUI(event, addon)
 
 			Button.GlowFrame.TopGlowLine = Button.Backdrop.Shadow
 			Button.GlowFrame.TopGlowLine:Hide()
-			Button.GlowFrame.BottomGlowLine:Kill()
+			AS:Kill(Button.GlowFrame.BottomGlowLine)
 
 			Button.GlowFrame:HookScript('OnShow', function(self) self.TopGlowLine:Show() Button.Backdrop.Shadow:Show() end)
 			Button.GlowFrame:HookScript('OnHide', function(self) self.TopGlowLine:Hide() Button.Backdrop.Shadow:Hide() end)

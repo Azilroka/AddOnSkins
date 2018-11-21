@@ -35,8 +35,8 @@ function AS:Blizzard_BarbershopUI(event, addon)
 	BarberShopFrameResetButton:ClearAllPoints()
 	BarberShopFrameResetButton:SetPoint("CENTER", BarberShopFrame, 'BOTTOM', 0, 20)
 
-	BarberShopBannerFrameBGTexture:Kill()
-	BarberShopBannerFrame:Kill()
+	AS:Kill(BarberShopBannerFrameBGTexture)
+	AS:Kill(BarberShopBannerFrame)
 
 	AS:SkinFrame(BarberShopAltFormFrame)
 	BarberShopAltFormFrame:SetPoint("BOTTOM", BarberShopFrame, "TOP", 0, 5)

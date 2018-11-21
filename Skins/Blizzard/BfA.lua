@@ -116,7 +116,7 @@ function AS:Blizzard_IslandsQueueUI(event, addon)
 	AS:SkinButton(IslandsQueueFrame.TutorialFrame.Leave)
 	AS:SkinCloseButton(IslandsQueueFrame.TutorialFrame.CloseButton)
 
-	IslandsQueueFrame.HelpButton:Kill()
+	AS:Kill(IslandsQueueFrame.HelpButton)
 
 	AS:UnregisterSkinEvent(addon, event)
 end

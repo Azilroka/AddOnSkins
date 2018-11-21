@@ -25,7 +25,7 @@ function AS:Immersion(event, addon)
 	ImmersionFrame.TalkBox.Elements.Backdrop:SetPoint('BOTTOMRIGHT', ImmersionFrame.TalkBox.Elements, 'BOTTOMRIGHT', -16, 16)
 	AS:CreateShadow(ImmersionFrame.TalkBox.Elements.Backdrop)
 
-	ImmersionFrame.TalkBox.MainFrame.Overlay:Kill()
+	AS:Kill(ImmersionFrame.TalkBox.MainFrame.Overlay)
 
 	AS:SkinStatusBar(ImmersionFrame.TalkBox.ReputationBar)
 	ImmersionFrame.TalkBox.ReputationBar:ClearAllPoints()

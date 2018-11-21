@@ -57,15 +57,15 @@ function AS:Examiner()
 		end
 	end
 
-	Examiner.portrait:Kill()
-	Examiner.bgBottomLeft:Kill()
-	Examiner.dlgBottomLeft:Kill()
-	Examiner.bgTopLeft:Kill()
-	Examiner.dlgTopLeft:Kill()
-	Examiner.bgBottomRight:Kill()
-	Examiner.dlgBottomRight:Kill()
-	Examiner.bgTopRight:Kill()
-	Examiner.dlgTopRight:Kill()
+	AS:Kill(Examiner.portrait)
+	AS:Kill(Examiner.bgBottomLeft)
+	AS:Kill(Examiner.dlgBottomLeft)
+	AS:Kill(Examiner.bgTopLeft)
+	AS:Kill(Examiner.dlgTopLeft)
+	AS:Kill(Examiner.bgBottomRight)
+	AS:Kill(Examiner.dlgBottomRight)
+	AS:Kill(Examiner.bgTopRight)
+	AS:Kill(Examiner.dlgTopRight)
 
 	Examiner:Size(360, 464)
 
