@@ -25,6 +25,9 @@ local Changelog = {
 		'Updated: Blizzard Character Skin',
 		'Removed: Parchment Remover (Added directly into ElvUI now)',
 	},
+	["4.04"] = {
+		'Core: API'
+	}
 }
 
 local DEVELOPERS = {
