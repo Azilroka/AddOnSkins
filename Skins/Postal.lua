@@ -29,7 +29,8 @@ function AS:Postal(event, addon)
 
 	if Postal_OpenAllMenuButton then
 		AS:SkinArrowButton(Postal_OpenAllMenuButton)
-		Postal_OpenAllMenuButton:SetPoint('LEFT', PostalOpenAllButton, 'RIGHT', 5, 0)
+		Postal_OpenAllMenuButton:SetPoint('LEFT', PostalOpenAllButton, 'RIGHT', 2, 0)
+		Postal_OpenAllMenuButton:SetSize(20, 20) -- Original it is 23, 23
 	end
 
 	if PostalOpenAllButton then
