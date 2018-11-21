@@ -4,6 +4,29 @@ local sort, pairs, gsub, strfind, strlower, strtrim = sort, pairs, gsub, strfind
 local DEVELOPER_STRING = ''
 local LINE_BREAK = '\n'
 
+local Changelog = {
+	['4.00'] = {
+		'Core: API, Options & Embed',
+		'Removed: WeakAura & TellMeWhen',
+		'Added: ApparenceTooltip & Zygor',
+		'Updated: Blizzard Skins & Various Skin Updates',
+	},
+	['4.01'] = {
+		'Core: API & Options',
+		'Updated: Classic Quest Log',
+	},
+	['4.02'] = {
+		'Core: Options',
+		'Updated: Island Party Pose, Ace3, Parchment Remover',
+		'Added: WeakAuras, Immersion',
+	},
+	['4.03'] = {
+		'Core: API',
+		'Updated: Blizzard Character Skin',
+		'Removed: Parchment Remover (Added directly into ElvUI now)',
+	},
+}
+
 local DEVELOPERS = {
 	'AcidWeb', 'Affli', 'Aldarana', 'Arstraea',
 	'Blazeflack', 'Brian Thurlow',
@@ -455,24 +478,6 @@ AS.Options = {
 				},
 			},
 		},
-	},
-}
-
-local Changelog = {
-	['4.00'] = {
-		'Core: API, Options & Embed',
-		'Removed: WeakAura & TellMeWhen',
-		'Added: ApparenceTooltip & Zygor',
-		'Updated: Blizzard Skins & Various Skin Updates',
-	},
-	['4.01'] = {
-		'Core: API & Options',
-		'Updated: Classic Quest Log',
-	},
-	['4.02'] = {
-		'Core: Options',
-		'Updated: Island Party Pose, Ace3, Parchment Remover',
-		'Added: WeakAuras, Immersion',
 	},
 }
 
