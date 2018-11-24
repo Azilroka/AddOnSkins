@@ -155,29 +155,27 @@ function AS:Blizzard_WarboardUI(event, addon)
 
 	for i = 1, 4 do
 		local option = WarboardQuestChoiceFrame["Option"..i]
+
 		for x = 1, #option.OptionButtonsContainer.Buttons do
 			AS:SkinButton(option.OptionButtonsContainer.Buttons[x])
 		end
-		option.ArtworkBorder:SetAlpha(0)
 	end
-
-	local WarboardQuestChoiceDelayed = function(self)
-		if not self then return end
-
-		local frame
-		for i = 1, 4 do
-			frame = self["Option"..i]
-			if frame and frame.WidgetContainer then
-				S:SkinWidgetContainer(frame.WidgetContainer)
-			end
-		end
-	end
-
-	WarboardQuestChoiceFrame:HookScript("OnShow", function(self)
-		AS:Delay(.5, WarboardQuestChoiceDelayed, self)
-	end)
 
 	AS:SkinCloseButton(WarboardQuestChoiceFrame.CloseButton)
+
+	hooksecurefunc(WarboardQuestChoiceFrame, "Update", function()
+		local numOptions = WarboardQuestChoiceFrame:GetNumOptions();
+		for i = 1, numOptions do
+			local option = WarboardQuestChoiceFrame.Options[i];
+			option.Background:Hide()
+			option.ArtworkBorder:Hide()
+			AS:CreateBackdrop(option.Artwork)
+			option.OptionText:SetTextColor(1, 1, 1)
+			if option.WidgetContainer then
+				AS:SkinWidgetContainer(option.WidgetContainer)
+			end
+		end
+	end)
 
 	AS:UnregisterSkinEvent(addon, event)
 end

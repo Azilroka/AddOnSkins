@@ -999,3 +999,81 @@ function AS:FindFrameByPoint(point1, relativeTo, point2, x, y, multipleFrames)
 
 	return frame
 end
+
+function AS:SkinIconAndTextWidget(widgetFrame) end
+
+function AS:SkinCaptureBarWidget(widgetFrame) end
+
+function AS:SkinStatusBarWidget(widgetFrame)
+	local bar = widgetFrame.Bar;
+	if not bar then return end
+
+	if bar.BorderLeft then bar.BorderLeft:Hide() end
+	if bar.BorderRight then bar.BorderRight:Hide() end
+	if bar.BorderCenter then bar.BorderCenter:Hide() end
+	if bar.BGLeft then bar.BGLeft:Hide() end
+	if bar.BGRight then bar.BGRight:Hide() end
+	if bar.BGCenter then bar.BGCenter:Hide() end
+
+	if not bar.backdrop then
+		AS:CreateBackdrop(bar)
+	end
+
+	bar:SetStatusBarAtlas('')
+	bar.SetStatusBarAtlas = AS.Noop
+
+	bar:SetStatusBarTexture(AS.NormTex)
+	bar:SetStatusBarColor(1, .81, 0)
+
+	if bar.Spark then
+		bar.Spark:Hide()
+	end
+end
+
+function AS:SkinDoubleStatusBarWidget(widgetFrame) end
+
+function AS:SkinIconTextAndBackgroundWidget(widgetFrame) end
+
+function AS:SkinDoubleIconAndTextWidget(widgetFrame) end
+
+function AS:SKinStackedResourceTrackerWidget(widgetFrame) end
+
+function AS:SkinIconTextAndCurrenciesWidget(widgetFrame) end
+
+function AS:SkinTextWithStateWidget(widgetFrame)
+	local text = widgetFrame.Text;
+	text:SetTextColor(1, 1, 1)
+end
+
+function AS:SkinHorizontalCurrenciesWidget(widgetFrame) end
+
+function AS:SkinBulletTextListWidget(widgetFrame) end
+
+function AS:SkinScenarioHeaderCurrenciesAndBackgroundWidget(widgetFrame) end
+
+function AS:SkinTextureWithStateWidget(widgetFrame) end
+
+local W = Enum.UIWidgetVisualizationType;
+AS.WidgetSkinningFuncs = {
+	[W.IconAndText] = "SkinIconAndTextWidget",
+	[W.CaptureBar] = "SkinCaptureBarWidget",
+	[W.StatusBar] = "SkinStatusBarWidget",
+	[W.DoubleStatusBar] = "SkinDoubleStatusBarWidget",
+	[W.IconTextAndBackground] = "SkinIconTextAndBackgroundWidget",
+	[W.DoubleIconAndText] = "SkinDoubleIconAndTextWidget",
+	[W.StackedResourceTracker] = "SKinStackedResourceTrackerWidget",
+	[W.IconTextAndCurrencies] = "SkinIconTextAndCurrenciesWidget",
+	[W.TextWithState] = "SkinTextWithStateWidget",
+	[W.HorizontalCurrencies] = "SkinHorizontalCurrenciesWidget",
+	[W.BulletTextList] = "SkinBulletTextListWidget",
+	[W.ScenarioHeaderCurrenciesAndBackground] = "SkinScenarioHeaderCurrenciesAndBackgroundWidget",
+	[W.TextureWithState] = "SkinTextureWithStateWidget"
+}
+
+function AS:SkinWidgetContainer(widgetContainer)
+	for _, child in ipairs({widgetContainer:GetChildren()}) do
+		if AS.WidgetSkinningFuncs[child.widgetType] then
+			AS[AS.WidgetSkinningFuncs[child.widgetType]](AS, child)
+		end
+	end
+end
