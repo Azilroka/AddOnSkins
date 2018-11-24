@@ -790,7 +790,6 @@ function AS:StyleButton(Button)
 	Button.HasStyle = true
 end
 
-
 -- Helpers
 
 function AS:SkinFrame(frame, template, override, kill)
@@ -1023,10 +1022,10 @@ function AS:SkinStatusBarWidget(widgetFrame)
 	bar.SetStatusBarAtlas = AS.Noop
 
 	bar:SetStatusBarTexture(AS.NormTex)
-	bar:SetStatusBarColor(1, .81, 0)
+	bar:SetStatusBarColor(0, .8, 0)
 
 	if bar.Spark then
-		bar.Spark:Hide()
+		bar.Spark:SetAlpha(0)
 	end
 end
 
