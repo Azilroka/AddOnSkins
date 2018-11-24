@@ -14,7 +14,7 @@ function AS:Blizzard_TalkingHeadUI(event, addon)
 
 	AS:SkinCloseButton(TalkingHeadFrame.MainFrame.CloseButton)
 
-	AS:SkinBackdropFrame(TalkingHeadFrame.BackgroundFrame, 'Transparent', nil, true)
+	AS:SkinBackdropFrame(TalkingHeadFrame.BackgroundFrame, nil, nil, true)
 	TalkingHeadFrame.BackgroundFrame.Backdrop:SetInside(TalkingHeadFrame.BackgroundFrame, 8, 8)
 	AS:CreateShadow(TalkingHeadFrame.BackgroundFrame.Backdrop)
 

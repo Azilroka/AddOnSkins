@@ -21,7 +21,7 @@ function AS:OrderHallCommander(event, addon)
 				frame.IsSkinned = true
 
 				AS:StripTextures(frame)
-				AS:SetTemplate(frame, 'Transparent')
+				AS:SetTemplate(frame)
 				AS:SkinCloseButton(frame.Close)
 
 				for j = 1, 99 do

@@ -212,14 +212,14 @@ function AS:Ace3()
 				AS:StripTextures(frame)
 				AS:SkinCloseButton(frame.obj.closebutton)
 			end
-			AS:SetTemplate(frame, 'Transparent')
+			AS:SetTemplate(frame)
 
 			if widget.titletext then
 				widget.titletext:SetTextColor(1, 1, 1, 1)
 			end
 
 			if widget.treeframe then
-				AS:SetTemplate(widget.treeframe, 'Transparent')
+				AS:SetTemplate(widget.treeframe)
 				frame:SetPoint('TOPLEFT', widget.treeframe, 'TOPRIGHT', 1, 0)
 
 				local oldRefreshTree = widget.RefreshTree

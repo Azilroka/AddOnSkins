@@ -277,12 +277,11 @@ function AS:SetTemplate(Frame, Template, Texture)
 
 	if Template == 'ClassColor' then
 		Frame:SetBackdropBorderColor(unpack(AS.ClassColor))
-		AS.BorderColor = AS.ClassColor
 	end
 
 	if Template == 'Custom' then
-		Frame:SetBackdropColor(unpack(AS:CheckOption('BackdropColor')))
-		Frame:SetBackdropBorderColor(unpack(AS:CheckOption('BorderColor')))
+		Frame:SetBackdropColor(unpack(AS:CheckOption('CustomBackdropColor')))
+		Frame:SetBackdropBorderColor(unpack(AS:CheckOption('CustomBorderColor')))
 	end
 end
 

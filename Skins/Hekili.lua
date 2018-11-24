@@ -6,7 +6,7 @@ function AS:Hekili()
 	for Display, _ in ipairs( Hekili.DB.profile.displays ) do
 		for Buttons = 1, Hekili.DB.profile.displays[Display].numIcons do
 			local Button = _G['Hekili_D'..Display..'_B'..Buttons]
-			AS:CreateBackdrop(Button, 'Transparent')
+			AS:CreateBackdrop(Button)
 			AS:SkinTexture(Button.Texture)
 		end
 	end

@@ -207,7 +207,7 @@ function AS:SkinLibraries()
 
 	local DBIcon = LibStub("LibDBIcon-1.0", true)
 	if DBIcon and DBIcon.tooltip and DBIcon.tooltip:IsObjectType('GameTooltip') then
-		DBIcon.tooltip:HookScript("OnShow", function(self) AS:SetTemplate(self, 'Transparent') end)
+		DBIcon.tooltip:HookScript("OnShow", function(self) AS:SetTemplate(self) end)
 	end
 
 	local LET = LibStub('LibExtraTip-1', true)

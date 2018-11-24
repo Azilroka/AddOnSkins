@@ -27,19 +27,23 @@ function AS:EasyMail(event)
 	EasyMail_GetAllButton:SetPoint('LEFT', EasyMail_CheckPageButton, 'RIGHT', 4, 0)
 	EasyMail_MailButton:SetPoint('TOPLEFT', SendMailNameEditBox, 'TOPRIGHT', 4, 2)
 	EasyMail_MailButton:SetSize(22, 22)
-	EasyMail_MailDropdownBackdrop:SetTemplate('Transparent')
+
+	AS:SetTemplate(EasyMail_MailDropdownBackdrop)
+
 	OpenMailCancelButton:SetPoint('BOTTOMRIGHT', OpenMailFrame, 'BOTTOMRIGHT', -3, 3)
 	hooksecurefunc('OpenMail_Update', function()
 		EasyMail_AttButton:ClearAllPoints()
 		EasyMail_AttButton:SetPoint('TOP', OpenMailScrollFrame, 'BOTTOM', 13, -5)
 	end)
-	for i = 1, 7 do	
+
+	for i = 1, 7 do
 		local t = _G['MailItem'..i..'ExpireTime']
 		if t then
 			t:ClearAllPoints()
 			t:SetPoint('TOPRIGHT', -10, -4)
 		end
 	end
+
 	AS:UnregisterSkinEvent('EasyMail', event)
 end
 

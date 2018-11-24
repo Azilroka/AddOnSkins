@@ -49,7 +49,7 @@ function AS:DBM(event, addon)
 						icon2.overlay:SetSize(bar.owner.options.Height, bar.owner.options.Height)
 						tbar:SetInside(frame)
 
-						frame:SetTemplate('Transparent')
+						AS:SetTemplate(frame)
 
 						name:ClearAllPoints()
 						name:SetWidth(165)
@@ -98,8 +98,8 @@ function AS:DBM(event, addon)
 				if AS:CheckOption('DBMRadarTrans') then
 					DBMRangeCheckRadar.background:Hide()
 				else
-					DBMRangeCheck:SetTemplate('Transparent')
-					DBMRangeCheckRadar:SetTemplate('Transparent')
+					AS:SetTemplate(DBMRangeCheck)
+					AS:SetTemplate(DBMRangeCheckRadar)
 				end
 			end
 		end
@@ -107,7 +107,7 @@ function AS:DBM(event, addon)
 		local function SkinInfo(self, maxLines, event, ...)
 			if DBM.Options.DontShowInfoFrame and (event or 0) ~= "test" then return end
 			if DBMInfoFrame then
-				DBMInfoFrame:SetTemplate('Transparent')
+				AS:SetTemplate(DBMInfoFrame)
 			end
 		end
 

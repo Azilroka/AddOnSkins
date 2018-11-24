@@ -13,7 +13,7 @@ function AS:Embed_Omen()
 	_G.Omen.BarList.SetBackdropBorderColor = nil
 
 	if AS:CheckOption('OmenBackdrop') then
-		AS:SkinFrame(_G.Omen.BarList, AS:CheckOption('TransparentEmbed') and 'Transparent' or 'Default')
+		AS:SkinFrame(_G.Omen.BarList, AS:CheckOption('TransparentEmbed') and 'Transparent')
 	else
 		AS:StripTextures(_G.Omen.BarList)
 	end

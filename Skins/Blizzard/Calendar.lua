@@ -26,11 +26,11 @@ function AS:Blizzard_Calendar(event, addon)
 	CalendarFilterFrame.Backdrop:SetPoint("TOPLEFT", 20, 2)
 	CalendarFilterFrame.Backdrop:SetPoint("BOTTOMRIGHT", CalendarFilterButton, "BOTTOMRIGHT", 2, -2)
 
-	AS:SetTemplate(CalendarContextMenu, 'Transparent')
+	AS:SetTemplate(CalendarContextMenu)
 	CalendarContextMenu.SetBackdropColor = AS.Noop
 	CalendarContextMenu.SetBackdropBorderColor = AS.Noop
 
-	AS:SetTemplate(CalendarInviteStatusContextMenu, 'Transparent')
+	AS:SetTemplate(CalendarInviteStatusContextMenu)
 	CalendarInviteStatusContextMenu.SetBackdropColor = AS.Noop
 	CalendarInviteStatusContextMenu.SetBackdropBorderColor = AS.Noop
 

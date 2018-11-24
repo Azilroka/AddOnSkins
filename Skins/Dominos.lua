@@ -39,7 +39,7 @@ function AS:Dominos()
 		end
 
 		if not button.isSkinned then
-			AS:CreateBackdrop(button, 'Transparent')
+			AS:CreateBackdrop(button)
 			AS:StyleButton(button)
 			button.Backdrop:SetAllPoints()
 
@@ -75,7 +75,7 @@ function AS:Dominos()
 		end
 
 		if not button.isSkinned then
-			AS:CreateBackdrop(button, 'Transparent')
+			AS:CreateBackdrop(button)
 			AS:StyleButton(button)
 			button.Backdrop:SetAllPoints()
 
@@ -141,7 +141,7 @@ function AS:Dominos()
 		end
 
 		if DominosFramexp then
-			AS:CreateBackdrop(DominosFramexp, 'Transparent')
+			AS:CreateBackdrop(DominosFramexp)
 		end
 	end
 end

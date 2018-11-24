@@ -240,7 +240,7 @@ function AS:Blizzard_TalentUI(event, addon)
 		Button:DisableDrawLayer("BACKGROUND")
 		AS:SkinTexture(Button.Icon)
 		AS:StyleButton(Button)
-		AS:CreateBackdrop(Button, 'Transparent')
+		AS:CreateBackdrop(Button)
 		Button.Selected:SetTexture("")
 		Button.Backdrop:SetAllPoints()
 	end

@@ -3,9 +3,9 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Storyline') then return end
 
 function AS:Storyline()
-	AS:SkinFrame(Storyline_NPCFrame, 'Transparent')
+	AS:SkinFrame(Storyline_NPCFrame)
 	AS:SkinCloseButton(Storyline_NPCFrameClose)
-	Storyline_NPCFrame:SetTemplate("Transparent")
+
 	AS:Desaturate(Storyline_NPCFrameLock)
 	AS:Desaturate(Storyline_NPCFrameResizeButton)
 	AS:Desaturate(Storyline_NPCFrameConfigButton)

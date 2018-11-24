@@ -45,7 +45,7 @@ function AS:FlyoutButtonCustom()
 		hotkey.SetPoint = AS.Noop
 
 		if not button.isSkinned then
-			AS:CreateBackdrop(button, 'Transparent')
+			AS:CreateBackdrop(button)
 			button.Backdrop:SetAllPoints()
 
 			AS:SkinTexture(icon)

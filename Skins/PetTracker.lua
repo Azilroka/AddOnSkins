@@ -31,7 +31,7 @@ function AS:PetTracker(event, addon)
 
 				for i = 1, 6 do
 					local Slot = _G['PetTrackerBattleSlot'..i]
-					AS:SetTemplate(Slot, 'Transparent')
+					AS:SetTemplate(Slot)
 					AS:CreateBackdrop(Slot)
 					Slot.Bg:Hide()
 					AS:SkinTexture(Slot.Icon)
@@ -101,7 +101,7 @@ function AS:PetTracker(event, addon)
 
 			for i = 1, 3 do
 				local Slot = _G['PetTrackerJournalSlot'..i]
-				AS:SetTemplate(Slot, 'Transparent')
+				AS:SetTemplate(Slot)
 				Slot.Bg:Hide()
 				Slot.Quality:Hide()
 				AS:Kill(Slot.Hover)

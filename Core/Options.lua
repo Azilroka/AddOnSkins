@@ -132,7 +132,7 @@ AS.Options = {
 					get = function(info) return unpack(AS:CheckOption(info[#info])) end,
 					set = function(info, r, g, b, a) AS:SetOption(info[#info], { r, g, b, a }) end,
 					args = {
-						BackdropColor = {
+						CustomBackdropColor = {
 							type = 'color',
 							order = 1,
 							hasAlpha = true,
@@ -140,7 +140,7 @@ AS.Options = {
 							desc = 'Only Available with Custom Template',
 							disabled = function() return (AS:CheckOption('SkinTemplate') ~= 'Custom') or AS:CheckOption('ElvUIStyle') end,
 						},
-						BorderColor = {
+						CustomBorderColor = {
 							type = 'color',
 							order = 2,
 							name = 'Border Color',
@@ -890,8 +890,8 @@ function AS:BuildProfile()
 			['ClassColor'] = false,
 			['BackgroundTexture'] = 'Blizzard Raid Bar',
 			['StatusBarTexture'] = 'Blizzard Raid Bar',
-			['BackdropColor'] = { .5, .5, .5, .8 },
-			['BorderColor'] = { 0, 0, 0 },
+			['CustomBackdropColor'] = { .5, .5, .5, .8 },
+			['CustomBorderColor'] = { 0, 0, 0 },
 			['HighlightColor'] = { 1, .8, .1 },
 			['SelectedColor'] = { 0, 0.44, .87 },
 		},
