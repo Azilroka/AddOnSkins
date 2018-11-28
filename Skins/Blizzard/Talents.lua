@@ -73,61 +73,6 @@ function AS:Blizzard_TalentUI(event, addon)
 		Frame.spellsScroll.Backdrop:SetOutside(Frame.spellsScroll.child.specIcon)
 	end
 
-	hooksecurefunc("PlayerTalentFrame_UpdateSpecFrame", function(self, spec)
-		local playerTalentSpec = GetSpecialization(nil, self.isPet, PlayerSpecTab2:GetChecked() and 2 or 1)
-		local shownSpec = spec or playerTalentSpec or 1
-		local id, _, _, icon = GetSpecializationInfo(shownSpec, nil, self.isPet)
-		local scrollChild = self.spellsScroll.child
-		scrollChild.specIcon:SetTexture(icon)
-		AS:SkinTexture(scrollChild.specIcon)
-
-		local index = 1
-		local bonuses
-		local bonusesIncrement = 1
-		if self.isPet then
-			bonuses = {GetSpecializationSpells(shownSpec, nil, self.isPet, true)}
-			bonusesIncrement = 2
-		else
-			bonuses = C_SpecializationInfo.GetSpellsDisplay(id)
-		end
-
-		for i = 1, 4 do
-			local Button = self['specButton'..i]
-			if Button.selected then
-				Button.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
-				Button.specIcon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
-			else
-				Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-				Button.specIcon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end
-		end
-
-		if bonuses then
-			for i = 1, #bonuses, bonusesIncrement do
-				local frame = scrollChild["abilityButton"..index]
-
-				if frame then
-					local _, spellTex = GetSpellTexture(bonuses[i])
-					if spellTex then
-						frame.icon:SetTexture(spellTex)
-					end
-
-					AS:SkinTexture(frame.icon, true)
-
-					frame.ring:Hide()
-					frame.icon:SetSize(40, 40)
-					frame.subText:SetTextColor(1, .8, .1)
-				end
-
-				index = index + 1
-			end
-		end
-	end)
-
-	AS:StripTextures(PlayerTalentFrameTalents, true)
-	PlayerTalentFrameTalents.PvpTalentButton:HookScript("OnShow", function(self) AS:SkinArrowButton(self, self.currentlyExpanded and 'left' or 'right') end)
-	PlayerTalentFrameTalents.PvpTalentButton:HookScript("PostClick", function(self) AS:SkinArrowButton(self, self.currentlyExpanded and 'left' or 'right') end)
-
 	for i = 1, MAX_TALENT_TIERS do
 		local Row = PlayerTalentFrameTalents['tier'..i]
 		AS:StripTextures(Row, true)
@@ -191,6 +136,62 @@ function AS:Blizzard_TalentUI(event, addon)
 			end
 		end
 	end)
+
+	hooksecurefunc("PlayerTalentFrame_UpdateSpecFrame", function(self, spec)
+		local playerTalentSpec = GetSpecialization(nil, self.isPet, PlayerSpecTab2:GetChecked() and 2 or 1)
+		local shownSpec = spec or playerTalentSpec or 1
+		local sex = self.isPet and UnitSex("pet") or UnitSex("player")
+		local id, _, _, icon = GetSpecializationInfo(shownSpec, nil, self.isPet, nil, sex)
+		local scrollChild = self.spellsScroll.child
+		scrollChild.specIcon:SetTexture(icon)
+		AS:SkinTexture(scrollChild.specIcon)
+
+		local index = 1
+		local bonuses
+		local bonusesIncrement = 1
+		if self.isPet then
+			bonuses = {GetSpecializationSpells(shownSpec, nil, self.isPet, true)}
+			bonusesIncrement = 2
+		else
+			bonuses = C_SpecializationInfo.GetSpellsDisplay(id)
+		end
+
+		for i = 1, 4 do
+			local Button = self['specButton'..i]
+			if Button.selected then
+				Button.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
+				Button.specIcon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
+			else
+				Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+				Button.specIcon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+		end
+
+		if bonuses then
+			for i = 1, #bonuses, bonusesIncrement do
+				local frame = scrollChild["abilityButton"..index]
+
+				if frame then
+					local _, spellTex = GetSpellTexture(bonuses[i])
+					if spellTex then
+						frame.icon:SetTexture(spellTex)
+					end
+
+					AS:SkinTexture(frame.icon, true)
+
+					frame.ring:Hide()
+					frame.icon:SetSize(40, 40)
+					frame.subText:SetTextColor(1, .8, .1)
+				end
+
+				index = index + 1
+			end
+		end
+	end)
+
+	AS:StripTextures(PlayerTalentFrameTalents, true)
+	PlayerTalentFrameTalents.PvpTalentButton:HookScript("OnShow", function(self) AS:SkinArrowButton(self, self.currentlyExpanded and 'left' or 'right') end)
+	PlayerTalentFrameTalents.PvpTalentButton:HookScript("PostClick", function(self) AS:SkinArrowButton(self, self.currentlyExpanded and 'left' or 'right') end)
 
 	local PvpTalentFrame = PlayerTalentFrameTalents.PvpTalentFrame
 	AS:StripTextures(PvpTalentFrame)
