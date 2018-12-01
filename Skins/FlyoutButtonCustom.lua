@@ -25,22 +25,19 @@ function AS:FlyoutButtonCustom()
 
 		if border then
 			border:Hide()
-			border = AS.Noop
+			border.Show = border.Hide
 		end
 
 		count:ClearAllPoints()
 		count:SetPoint("BOTTOMRIGHT", 0, 2)
-		count:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
 
 		if btname then
 			btname:ClearAllPoints()
 			btname:SetPoint("BOTTOM", 0, 0)
-			btname:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
 		end
 
 		hotkey:ClearAllPoints()
 		hotkey:SetPoint("TOPRIGHT", 0, 0)
-		hotkey:SetFont(AS.PixelFont, 12, "MONOCHROMEOUTLINE")
 		hotkey.ClearAllPoints = AS.Noop
 		hotkey.SetPoint = AS.Noop
 
