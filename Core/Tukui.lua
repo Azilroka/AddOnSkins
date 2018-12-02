@@ -29,8 +29,6 @@ function AS:UpdateMedia()
 	AS.Blank = C['Medias']['Blank']
 	AS.NormTex = C['Medias']['Normal']
 	AS.Font = C['Medias']['Font']
-	AS.PixelFont = C['Medias']['PixelFont']
-	AS.ActionBarFont = C['Medias']['ActionBarFont']
 	AS.BackdropColor = C['General']['BackdropColor']
 	AS.BorderColor = C['General']['BorderColor']
 end

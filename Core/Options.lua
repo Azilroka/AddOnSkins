@@ -122,6 +122,12 @@ AS.Options = {
 							name = 'StatusBar Texture',
 							values = AS.LSM:HashTable('statusbar'),
 						},
+						CropIcons = {
+							name = ASL['Crop Icons'],
+							desc = ASL['Turn off for Full Icons'],
+							order = 3,
+							type = 'toggle',
+						},
 					},
 				},
 				Colors = {
@@ -894,6 +900,7 @@ function AS:BuildProfile()
 			['CustomBorderColor'] = { 0, 0, 0 },
 			['HighlightColor'] = { 1, .8, .1 },
 			['SelectedColor'] = { 0, 0.44, .87 },
+			['CropIcons'] = true,
 		},
 	}
 

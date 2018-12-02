@@ -832,7 +832,9 @@ function AS:SkinTooltip(tooltip, scale)
 end
 
 function AS:SkinTexture(icon, backdrop)
-	icon:SetTexCoord(unpack(AS.TexCoords))
+	if AS:CheckOption('CropIcons') then
+		icon:SetTexCoord(unpack(AS.TexCoords))
+	end
 	if backdrop then
 		AS:CreateBackdrop(icon)
 	end

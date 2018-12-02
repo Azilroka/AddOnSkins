@@ -74,8 +74,6 @@ end
 function AS:UpdateMedia()
 	AS.Blank = AS.LSM:Fetch('background', 'ElvUI Blank')
 	AS.Font = AS.LSM:Fetch('font', E.db.general.font)
-	AS.ActionBarFont = AS.LSM:Fetch('font', 'Arial')
-	AS.PixelFont = AS.LSM:Fetch('font', 'ElvUI Pixel')
 	AS.NormTex = AS.LSM:Fetch('statusbar', E.private.general.normTex)
 	AS.BackdropColor = E['media'].backdropcolor
 	AS.BorderColor = E['media'].bordercolor

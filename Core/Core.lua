@@ -222,6 +222,18 @@ function AS:UnregisterSkinEvent(addonName, event)
 	AS:UnregisterEvent(event)
 end
 
+function AS:UpdateMedia()
+	AS.Blank = AS.LSM:Fetch('background', 'Solid')
+	AS.Font = AS.LSM:Fetch('font', "Friz Quadrata TT")
+	AS.PixelFont = AS.LSM:Fetch('font', "Arial Narrow")
+	AS.NormTex = AS.LSM:Fetch('statusbar', "Blizzard")
+	AS.BackdropColor = { .2, .2, .2, .8}
+	AS.BorderColor = { 1, 1, 1}
+	AS.PixelPerfect = true
+	AS.Color = AS.ClassColor
+	AS.HideShadows = false
+end
+
 function AS:StartSkinning(event)
 	AS:UnregisterEvent(event)
 
