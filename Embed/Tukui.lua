@@ -68,6 +68,7 @@ function AS:EmbedSystem_WindowResize()
 		_G.EmbedSystem_MainWindow:SetPoint('TOPLEFT', ChatTab, FramePoint, 0, OffsetY)
 		_G.EmbedSystem_MainWindow:SetPoint('BOTTOMRIGHT', ChatPanel, 'TOPRIGHT', 0, 0)
 	end
+
 	_G.EmbedSystem_LeftWindow:SetPoint('RIGHT', _G.EmbedSystem_RightWindow, 'LEFT', -2, 0)
 	_G.EmbedSystem_RightWindow:SetPoint('RIGHT', _G.EmbedSystem_MainWindow, 'RIGHT', 0, 0)
 	_G.EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth') - 1, _G.EmbedSystem_MainWindow:GetHeight())

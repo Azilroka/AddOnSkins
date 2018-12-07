@@ -8,6 +8,7 @@ function AS:Ace3()
 	if not AceGUI then return end
 
 	local oldRegisterAsWidget = AceGUI.RegisterAsWidget
+	local ColorBlind = GetCVarBool('colorblindmode')
 
 	AceGUI.RegisterAsWidget = function(self, widget)
 		local TYPE = widget.type
@@ -22,20 +23,33 @@ function AS:Ace3()
 			widget.scrollFrame:SetPoint('BOTTOMRIGHT', widget.scrollBG, 'BOTTOMRIGHT', -4, 8)
 		elseif TYPE == 'CheckBox' then
 			AS:CreateBackdrop(widget.checkbg)
-			widget.checkbg.Backdrop:SetInside(widget.checkbg, 4, 4)
+			AS:SetInside(widget.checkbg.Backdrop, widget.checkbg, 4, 4)
 			widget.checkbg.Backdrop:SetFrameLevel(widget.checkbg.Backdrop:GetFrameLevel() + 1)
-
-			widget.check:SetTexture(AS.NormTex)
-			widget.check:SetVertexColor(unpack(AS.Color))
 
 			widget.checkbg:SetTexture('')
 			widget.highlight:SetTexture('')
 
-			widget.check:SetInside(widget.checkbg.Backdrop)
+			if not ColorBlind then
+				AS:SetInside(widget.checkbg.Backdrop, widget.checkbg, 5, 5)
+
+				widget.check:SetTexture(AS.NormTex)
+
+				hooksecurefunc(widget.check, "SetDesaturated", function(self, value)
+					if value == true then
+						self:SetVertexColor(.6, .6, .6, .8)
+					else
+						self:SetVertexColor(unpack(AS.Color))
+					end
+				end)
+
+				widget.check.SetTexture = AS.Noop
+				AS:SetInside(widget.check, widget.checkbg.Backdrop)
+			else
+				AS:SetOutside(widget.check, widget.checkbg.Backdrop, 3, 3)
+			end
 
 			widget.checkbg.SetTexture = AS.Noop
 			widget.highlight.SetTexture = AS.Noop
-			widget.check.SetTexture = AS.Noop
 		elseif TYPE == 'Dropdown' then
 			local frame = widget.dropdown
 			local button = widget.button
@@ -164,18 +178,18 @@ function AS:Ace3()
 			local colorSwatch = widget.colorSwatch
 
 			AS:CreateBackdrop(frame)
-			frame.Backdrop:SetSize(16, 16)
+			frame.Backdrop:SetSize(24, 16)
 			frame.Backdrop:ClearAllPoints()
 			frame.Backdrop:SetPoint('LEFT', frame, 'LEFT', 4, 0)
 			colorSwatch:SetTexture(AS.Blank)
 			colorSwatch:ClearAllPoints()
 			colorSwatch:SetParent(frame.Backdrop)
-			colorSwatch:SetInside(frame.Backdrop)
+			AS:SetInside(colorSwatch, frame.Backdrop)
 
 			if frame.checkers then
 				frame.checkers:ClearAllPoints()
 				frame.checkers:SetParent(frame.Backdrop)
-				frame.checkers:SetInside(frame.Backdrop)
+				AS:SetInside(frame.checkers, frame.Backdrop)
 			end
 
 			if frame.texture then
@@ -256,8 +270,8 @@ function AS:Ace3()
 					local tab = oldCreateTab(self, id)
 					AS:SkinBackdropFrame(tab, "Transparent")
 					tab.Backdrop:SetFrameLevel(tab:GetFrameLevel() - 2)
-					tab.Backdrop:Point("TOPLEFT", 10, -3)
-					tab.Backdrop:Point("BOTTOMRIGHT", -10, 0)
+					tab.Backdrop:SetPoint("TOPLEFT", 10, -3)
+					tab.Backdrop:SetPoint("BOTTOMRIGHT", -10, 0)
 					tab.text:SetTextColor(1, 1, 1, 1)
 					return tab
 				end
