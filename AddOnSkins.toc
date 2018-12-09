@@ -3,6 +3,6 @@
 ## Version: 4.04
 ## Author: Azilroka, Whiro
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
-## OptionalDeps: ProjectAzilroka, ElvUI, Tukui
+## OptionalDeps: ElvUI, Tukui
 
 Load_AddOnSkins.xml

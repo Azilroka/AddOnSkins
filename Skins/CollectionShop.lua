@@ -23,11 +23,21 @@ function AS:CollectionShop(event, addon)
 		AuctionFrameCollectionShop_FlyoutPanelButton.SetPushedTexture = AS.Noop
 
 		AS:SkinCheckBox(AuctionFrameCollectionShop_LiveCheckButton)
+		AS:SkinCheckBox(AuctionFrameCollectionShop_UndressCharacterCheckButton)
 
 		AS:SkinButton(AuctionFrameCollectionShop_ScanButton)
 		AS:SkinButton(AuctionFrameCollectionShop_ShopButton)
 		AS:SkinButton(AuctionFrameCollectionShop_BuyAllButton)
 		AS:SkinButton(AuctionFrameCollectionShop_CloseButton)
+
+		AS:SkinButton(AuctionFrameCollectionShop_NameSortButton)
+		AuctionFrameCollectionShop_NameSortButtonArrow:SetTexture([[Interface\Buttons\UI-SortArrow]])
+		AS:SkinButton(AuctionFrameCollectionShop_LvlSortButton)
+		AuctionFrameCollectionShop_LvlSortButtonArrow:SetTexture([[Interface\Buttons\UI-SortArrow]])
+		AS:SkinButton(AuctionFrameCollectionShop_CategorySortButton)
+		AuctionFrameCollectionShop_CategorySortButtonArrow:SetTexture([[Interface\Buttons\UI-SortArrow]])
+		AS:SkinButton(AuctionFrameCollectionShop_ItemPriceSortButton)
+		AuctionFrameCollectionShop_ItemPriceSortButtonArrow:SetTexture([[Interface\Buttons\UI-SortArrow]])
 	end)
 end
 
