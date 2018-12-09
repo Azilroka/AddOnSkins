@@ -77,7 +77,7 @@ function AS:Blizzard_Others()
 	AS:SkinButton(ReadyCheckFrameNoButton)
 
 	AS:SkinBackdropFrame(GameMenuFrame)
-	AS:CreateBackdrop(GameMenuFrameHeader, 'Default')
+	AS:CreateBackdrop(GameMenuFrameHeader)
 	for i = 1, GameMenuFrame:GetNumRegions() do
 		local Region = select(i, GameMenuFrame:GetRegions())
 		if Region.IsObjectType and Region:IsObjectType('FontString') then

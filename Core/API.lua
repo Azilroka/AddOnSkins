@@ -90,6 +90,14 @@ AS.Blizzard.Tooltip = {
 	'BorderBottomLeft',
 }
 
+AS.RegisterTemplates = {}
+
+function AS:UpdateSettings()
+	for Frame in pairs(AS.RegisterTemplates) do
+		AS:SetTemplate(Frame)
+	end
+end
+
 function AS:Kill(Object)
 	if Object.UnregisterAllEvents then
 		Object:UnregisterAllEvents()

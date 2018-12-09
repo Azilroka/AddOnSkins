@@ -35,6 +35,7 @@
 	<Script file="ClassicQuestLog.lua"/>
 	<Script file="ClassOrderHallsComplete.lua"/>
 	<Script file="Clique.lua"/>
+	<Script file="CollectionShop.lua"/>
 	<Script file="ColorPickerPlus.lua"/>
 	<Script file="Coolline.lua"/>
 	<Script file="Cork.lua"/>

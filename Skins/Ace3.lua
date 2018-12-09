@@ -197,6 +197,8 @@ function AS:Ace3()
 			end
 		elseif TYPE == 'Heading' then
 			widget.label:SetTextColor(1, 1, 1, 1)
+		elseif TYPE == 'Icon' then
+			AS:StripTextures(widget.frame)
 		end
 
 		return oldRegisterAsWidget(self, widget)

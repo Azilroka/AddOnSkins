@@ -23,4 +23,4 @@ function AS:ColorPickerPlus()
 	ColorPickerOkayButton:SetPoint("RIGHT", ColorPickerCancelButton, "LEFT", -2, 0)
 end
 
-AS:RegisterSkin('ColorPickerPlus', AS.ColorPickerPlus, "PLAYER_ENTERING_WORLD")
+AS:RegisterSkin('ColorPickerPlus', AS.ColorPickerPlus)

@@ -67,7 +67,7 @@ AS.Options = {
 			name = GENERAL,
 			order = 0,
 			get = function(info) return AS:CheckOption(info[#info]) end,
-			set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
+			set = function(info, value) AS:SetOption(info[#info], value) AS:UpdateSettings() AS.NeedReload = true end,
 			args = {
 				Header = {
 					order = 0,
@@ -106,7 +106,7 @@ AS.Options = {
 					guiInline = true,
 					order = 8,
 					get = function(info) return AS:CheckOption(info[#info]) end,
-					set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
+					set = function(info, value) AS:SetOption(info[#info], value) AS:UpdateSettings() AS.NeedReload = true end,
 					args = {
 						BackgroundTexture = {
 							type = 'select',
@@ -136,7 +136,7 @@ AS.Options = {
 					guiInline = true,
 					order = 9,
 					get = function(info) return unpack(AS:CheckOption(info[#info])) end,
-					set = function(info, r, g, b, a) AS:SetOption(info[#info], { r, g, b, a }) end,
+					set = function(info, r, g, b, a) AS:SetOption(info[#info], { r, g, b, a }) AS:UpdateSettings() end,
 					args = {
 						CustomBackdropColor = {
 							type = 'color',
