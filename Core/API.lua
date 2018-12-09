@@ -468,9 +468,16 @@ function AS:SkinCheckBox(CheckBox)
 		end
 	end)
 
-	CheckBox.SetNormalTexture = AS.Noop
-	CheckBox.SetPushedTexture = AS.Noop
-	CheckBox.SetHighlightTexture = AS.Noop
+	hooksecurefunc(CheckBox, "SetNormalTexture", function(f, t)
+		if t ~= "" then f:SetNormalTexture("") end
+	end)
+	hooksecurefunc(CheckBox, "SetPushedTexture", function(f, t)
+		if t ~= "" then f:SetPushedTexture("") end
+	end)
+	hooksecurefunc(CheckBox, "SetHighlightTexture", function(f, t)
+		if t ~= "" then f:SetDisabledTexture("") end
+	end)
+
 	CheckBox.isSkinned = true
 end
 
@@ -681,10 +688,18 @@ function AS:SkinRadioButton(Button)
 	Disabled:SetVertexColor(.3, .3, .3)
 	Disabled:AddMaskTexture(OutsideMask)
 
-	Button.SetNormalTexture = AS.Noop
-	Button.SetDisabledTexture = AS.Noop
-	Button.SetPushedTexture = AS.Noop
-	Button.SetHighlightTexture = AS.Noop
+	hooksecurefunc(Button, "SetNormalTexture", function(f, t)
+		if t ~= "" then f:SetNormalTexture("") end
+	end)
+	hooksecurefunc(Button, "SetPushedTexture", function(f, t)
+		if t ~= "" then f:SetPushedTexture("") end
+	end)
+	hooksecurefunc(Button, "SetHighlightTexture", function(f, t)
+		if t ~= "" then f:SetDisabledTexture("") end
+	end)
+	hooksecurefunc(Button, "SetDisabledTexture", function(f, t)
+		if t ~= "" then f:SetDisabledTexture("") end
+	end)
 	Button.isSkinned = true
 end
 

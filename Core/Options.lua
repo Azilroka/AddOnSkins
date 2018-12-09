@@ -748,12 +748,10 @@ for Version, Table in pairs(Changelog) do
 	AS.Options.args.about.args.changelog.args[Version] = {
 		type = 'group',
 		name = Version,
-		order = 3,
 		args = {},
 	}
 	for i, Change in pairs(Table) do
 		AS.Options.args.about.args.changelog.args[Version].args[tostring(i)] = {
-			order = i,
 			type = 'description',
 			name = Change,
 			fontSize = 'large',
@@ -765,12 +763,10 @@ for Name, Table in pairs(Skins) do
 	AS.Options.args.about.args.skins.args[Name] = {
 		type = 'group',
 		name = Name,
-		order = 3,
 		args = {},
 	}
 	for i, Change in pairs(Table) do
 		AS.Options.args.about.args.skins.args[Name].args[tostring(i)] = {
-			order = i,
 			type = 'description',
 			name = Change,
 			fontSize = 'large',
@@ -932,12 +928,11 @@ function AS:SetupProfile()
 end
 
 function AS:BuildOptions()
-	local function GenerateOptionTable(skinName, order)
+	local function GenerateOptionTable(skinName)
 		local text = strfind(skinName, 'Blizzard_') and (BlizzardNames[skinName] or strtrim(skinName:gsub('^Blizzard_(.+)','%1'):gsub('(%l)(%u%l)','%1 %2'))) or GetAddOnMetadata(skinName, 'Title') or strtrim(skinName:gsub('(%l)(%u%l)','%1 %2'))
 		local options = {
 			type = 'toggle',
 			name = text,
-			order = order,
 		}
 		if AS:CheckAddOn('ElvUI') and strfind(skinName, 'Blizzard_') then
 			options.set = function(info, value) AS:SetOption(info[#info], value) AS:SetElvUIBlizzardSkinOption(info[#info], not value) AS.NeedReload = true end
@@ -945,7 +940,6 @@ function AS:BuildOptions()
 		return options
 	end
 
-	local order, blizzorder = 1, 1
 	local skins = {}
 
 	for skinName in pairs(AS.register) do
@@ -960,11 +954,9 @@ function AS:BuildOptions()
 
 	for _, skinName in pairs(skins) do
 		if strfind(skinName, 'Blizzard_') then
-			AS.Options.args.blizzard.args[skinName] = GenerateOptionTable(skinName, blizzorder)
-			blizzorder = blizzorder + 1
+			AS.Options.args.blizzard.args[skinName] = GenerateOptionTable(skinName)
 		else
-			AS.Options.args.addons.args[skinName] = GenerateOptionTable(skinName, order)
-			order = order + 1
+			AS.Options.args.addons.args[skinName] = GenerateOptionTable(skinName)
 		end
 	end
 

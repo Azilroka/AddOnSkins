@@ -1,30 +1,5 @@
 local AddOnName, Engine = ...
 
-if IsAddOnLoaded('Tukui') and not IsAddOnLoaded('ProjectAzilroka') then
-	StaticPopupDialogs['ADDONSKINS'] = {
-		text = "AddOnSkins: You will need ProjectAzilroka, https://www.tukui.org/addons.php?id=79",
-		button1 = 'OK',
-		button2 = 'Cancel',
-		timeout = 0,
-		hasEditBox = 1,
-		whileDead = 1,
-		hideOnEscape = 1,
-		showAlert = 1,
-		maxLetters = 38,
-		EditBoxOnEscapePressed = function(self)
-			self:GetParent():Hide()
-		end,
-		OnShow = function(self)
-			self.editBox:SetText("https://www.tukui.org/addons.php?id=79")
-			self.editBox:SetFocus()
-		end,
-	}
-
-	_G.StaticPopup_Show('ADDONSKINS')
-
-	return
-end
-
 local AddOn = LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceEvent-3.0', 'AceHook-3.0', 'AceTimer-3.0')
 
 Engine[1] = AddOn
