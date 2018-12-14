@@ -75,8 +75,6 @@ function AS:Blizzard_TradeSkill(event, addon)
 	--Guild Crafters
 	AS:SkinCloseButton(TradeSkillFrame.DetailsFrame.GuildFrame.CloseButton)
 	AS:SkinButton(TradeSkillFrame.DetailsFrame.ViewGuildCraftersButton)
-	TradeSkillFrame.DetailsFrame.ViewGuildCraftersButton.LeftSeparator:SetTexture(nil)
-	TradeSkillFrame.DetailsFrame.ViewGuildCraftersButton.RightSeparator:SetTexture(nil)
 	AS:SkinFrame(TradeSkillFrame.DetailsFrame.GuildFrame)
 	AS:SkinFrame(TradeSkillFrame.DetailsFrame.GuildFrame.Container)
 

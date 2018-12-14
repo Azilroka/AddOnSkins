@@ -97,7 +97,7 @@ function AS:Blizzard_Spellbook()
 		Button.statusBar.Backdrop:SetOutside(Button.statusBar, 1, 1)
 		Button.statusBar.rankText:SetPoint("CENTER")
 
-		Button.statusBar:SetPoint("TOPLEFT", "$parentRank", "BOTTOMLEFT", 1, -3)
+		--Button.statusBar:SetPoint("TOPLEFT", "$parentRank", "BOTTOMLEFT", 1, -3)
 	end
 
 	for i = 1, 2 do

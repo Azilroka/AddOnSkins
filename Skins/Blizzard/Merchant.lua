@@ -89,8 +89,8 @@ end
 function AS:Blizzard_StackSplit()
 	AS:SkinFrame(StackSplitFrame)
 	AS:CreateShadow(StackSplitFrame)
-	AS:SkinButton(StackSplitOkayButton)
-	AS:SkinButton(StackSplitCancelButton)
+	AS:SkinButton(StackSplitFrame.OkayButton)
+	AS:SkinButton(StackSplitFrame.CancelButton)
 end
 
 AS:RegisterSkin('Blizzard_Merchant', AS.Blizzard_Merchant)

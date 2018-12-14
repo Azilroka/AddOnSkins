@@ -238,7 +238,7 @@ function AS:StartSkinning(event)
 	AS:UnregisterEvent(event)
 
 	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
-	AS.Mult = 768 / AS.ScreenHeight / UIParent:GetScale()
+	AS.Mult = 768 / AS.ScreenHeight / tonumber(string.sub(UIParent:GetEffectiveScale(), 0, 7))
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 
 	AS:UpdateMedia()

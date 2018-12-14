@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_Communities(event, addon)
 	if addon ~= 'Blizzard_Communities' then return end
 
-	AS:SkinFrame(CommunitiesFrame)
+	AS:SkinFrame(CommunitiesFrame, nil, nil, true)
 	AS:SkinCloseButton(CommunitiesFrame.CloseButton)
 	AS:Kill(CommunitiesFrame.PortraitOverlay)
 	AS:StripTextures(CommunitiesFrame.CommunitiesList)
@@ -265,7 +265,6 @@ function AS:Blizzard_Communities(event, addon)
 
 	AS:SkinCloseButton(CommunitiesGuildRecruitmentFrameCloseButton)
 
-	CommunitiesGuildRecruitmentFrameRecruitment.ListGuildButton.LeftSeparator:Hide()
 	AS:SkinButton(CommunitiesGuildRecruitmentFrameRecruitment.ListGuildButton)
 
 	-- Tabs
@@ -276,11 +275,7 @@ function AS:Blizzard_Communities(event, addon)
 	CommunitiesGuildRecruitmentFrameRecruitment.CommentFrame.CommentInputFrame:StripTextures()
 	AS:SkinEditBox(CommunitiesGuildRecruitmentFrameRecruitment.CommentFrame.CommentInputFrame)
 
-	-- Recruitment Request
-	CommunitiesGuildRecruitmentFrameApplicants.InviteButton.RightSeparator:Hide()
-	CommunitiesGuildRecruitmentFrameApplicants.DeclineButton.LeftSeparator:Hide()
-
-	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.InviteButton)
+  	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.InviteButton)
 	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.MessageButton)
 	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.DeclineButton)
 
