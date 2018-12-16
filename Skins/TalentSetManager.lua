@@ -19,7 +19,7 @@ function AS:TalentSetMgr(event, addon)
 
 			AS:CreateBackdrop(TalentSetsMainframe)
 			AS:SkinBackdropFrame(TalentSetsMainframe, true)
-			AS:SkinTexture(TalentSetsMainframeBg)
+			AS:SkinTexture(TalentSetsMainframe.Bg)
 			AS:SkinFrame(TalentSetsShowButton)
 			AS:CreateBackdrop(TalentSetsShowButton)
 			TalentSetsShowButton:SetNormalTexture("Interface\\Icons\\achievement_guildperk_ladyluck_rank2")
