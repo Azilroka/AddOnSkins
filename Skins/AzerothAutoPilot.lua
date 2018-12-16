@@ -3,20 +3,20 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Azeroth Auto Pilot') then return end
 
 function AS:AzerothAutoPilot()
-	for _, Child in pairs(AAP.OptionsFrame) do
-		if Child:IsObjectType('CheckButton') then
-			AS:SkinCheckBox(Child)
-		elseif Child:IsObjectType('Button') then
-			AS:SkinButton(Child)
-		elseif Child:IsObjectType('Slider') then
-			AS:SkinSlideBar(Child, true)
-		elseif Child:IsObjectType('Frame') and Child:GetName() and strfind(Child:GetName(), 'DropDown') then
-			AS:SkinDropDownBox(Child)
-		elseif Child:IsObjectType('Frame') then
-			AS:SkinBackdropFrame(Child)
-			Child.Backdrop:SetInside()
-		end
-	end
+	--for _, Child in pairs(AAP.OptionsFrame) do
+	--	if Child:IsObjectType('CheckButton') then
+	--		AS:SkinCheckBox(Child)
+	--	elseif Child:IsObjectType('Button') then
+	--		AS:SkinButton(Child)
+	--	elseif Child:IsObjectType('Slider') then
+	--		AS:SkinSlideBar(Child, true)
+	--	elseif Child:IsObjectType('Frame') and Child:GetName() and strfind(Child:GetName(), 'DropDown') then
+	--		AS:SkinDropDownBox(Child)
+	--	elseif Child:IsObjectType('Frame') then
+	--		AS:SkinBackdropFrame(Child)
+	--		Child.Backdrop:SetInside()
+	--	end
+	--end
 
 	for Key, Child in pairs(AAP.QuestList) do
 		if Key ~= 0 and Child and Child.IsObjectType then
@@ -64,32 +64,6 @@ function AS:AzerothAutoPilot()
 
 	AAP.QuestList.Greetings2FS1:SetWidth(500)
 	AAP.QuestList.Greetings:SetHeight(175)
-
-	AS:SkinDropDownBox(AAP_DropDownList)
-	AS:SkinDropDownBox(AAP_DropDown1)
-
-	AS:SkinFrame(AAP_AFkFrames)
-	AS:SkinButton(AAP_ArrowActiveButton)
-
-	AAP_ArrowFrame.Button:SetScale(1)
-
-	AS:SkinFrame(AAP_BrutalFrames1)
-	AS:SkinFrame(AAP_BrutalFrames2)
-
-	AAP.BrutallCC.BrutallFrame.FrameName:SetPoint("TOP", AAP.BrutallCC.BrutallFrame.Frame, "TOP", -25, 27)
-
-
-	AS:SkinButton(AAP_SBX1)
-	AS:SkinButton(AAP_SBX2)
-
-	for _, Parent in pairs(AAP.QuestList2) do
-		if Parent["AAP_Button"] then
-			Parent["AAP_Button"]:SetPoint("LEFT", Parent, "RIGHT", 1, 0)
-		end
-	end
-
-	AAP.Banners.BannersFrame.B1:SetPoint("TOP", AAP.Banners.BannersFrame.Frame, "BOTTOM", 0, -1)
-	AAP.Banners.BannersFrame.B1.icon = AAP.Banners.BannersFrame.B1:GetNormalTexture()
 
 	--AS:SkinIconButton(AAP_BannersFrames1B1)
 	--for i = 1, 5 do
