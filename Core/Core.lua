@@ -238,7 +238,7 @@ function AS:StartSkinning(event)
 	AS:UnregisterEvent(event)
 
 	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
-	AS.Mult = PixelUtil.GetNearestPixelSize(1, PixelUtil.GetPixelToUIUnitFactor(), 1)
+	AS.Mult = PixelUtil.GetNearestPixelSize(1, UIParent:GetEffectiveScale())
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 
 	AS:UpdateMedia()
