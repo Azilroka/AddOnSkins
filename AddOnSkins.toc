@@ -1,4 +1,4 @@
-## Interface: 80000
+## Interface: 80100
 ## Title: |cff1784d1AddOnSkins|r
 ## Version: 4.05
 ## Author: Azilroka, Whiro
