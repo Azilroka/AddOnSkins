@@ -2,5 +2,5 @@ package-as: AddOnSkins
 
 externals:
 	Libs/Ace3:
-		url: ssh://git@tukui.org:47333/Azilroka/Ace3.git
+		url: https://repos.wowace.com/wow/ace3/trunk
 		tag: latest
