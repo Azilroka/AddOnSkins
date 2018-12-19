@@ -62,7 +62,7 @@ function AS:Blizzard_TalentUI(event, addon)
 		end
 
 		AS:CreateBackdrop(Frame.spellsScroll)
-		Frame.spellsScroll.child.gradient:Kill()
+		AS:Kill(Frame.spellsScroll.child.gradient)
 		Frame.spellsScroll.child.scrollwork_topleft:SetAlpha(0)
 		Frame.spellsScroll.child.scrollwork_topright:SetAlpha(0)
 		Frame.spellsScroll.child.scrollwork_bottomleft:SetAlpha(0)
@@ -70,7 +70,7 @@ function AS:Blizzard_TalentUI(event, addon)
 		Frame.spellsScroll.child.ring:SetAlpha(0)
 		Frame.spellsScroll.child.Seperator:SetAlpha(0)
 
-		Frame.spellsScroll.Backdrop:SetOutside(Frame.spellsScroll.child.specIcon)
+		AS:SetOutside(Frame.spellsScroll.Backdrop, Frame.spellsScroll.child.specIcon)
 	end
 
 	for i = 1, MAX_TALENT_TIERS do
