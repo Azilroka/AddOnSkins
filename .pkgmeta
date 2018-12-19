@@ -1,1 +1,6 @@
 package-as: AddOnSkins
+
+externals:
+	Libs/Ace3:
+		url: https://git.tukui.org/Azilroka/Ace3.git
+		tag: latest
