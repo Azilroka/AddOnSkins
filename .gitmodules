@@ -1,0 +1,3 @@
+[submodule "Libs/Ace3"]
+	path = Libs/Ace3
+	url = https://git.tukui.org/Azilroka/Ace3.git
