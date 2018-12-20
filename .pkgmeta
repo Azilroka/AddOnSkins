@@ -8,4 +8,4 @@ move-folders:
 externals:
 	Libs/Ace3: https://repos.wowace.com/wow/ace3/trunk/
 
-ignore: Trash
+ignore: - Trash
