@@ -2,10 +2,5 @@ package-as: AddOnSkins
 
 enable-nolib-creation: no
 
-move-folders:
-    Libs/Ace3: Trash
-
 externals:
-	Libs/Ace3: https://repos.wowace.com/wow/ace3/trunk/
-
-ignore: - Trash
+	Libs/Ace3: https://github.com/Azilroka/Ace3.git
