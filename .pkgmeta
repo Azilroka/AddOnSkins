@@ -1,6 +1,3 @@
 package-as: AddOnSkins
 
 enable-nolib-creation: no
-
-externals:
-	Libs/Ace3: https://repos.wowace.com/wow/ace3/trunk
