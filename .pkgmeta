@@ -3,7 +3,7 @@ package-as: AddOnSkins
 enable-nolib-creation: no
 
 externals:
-  Libs/Ace3
+  Libs/Ace3:
     url: https://github.com/Azilroka/Ace3
 
 ignore:
