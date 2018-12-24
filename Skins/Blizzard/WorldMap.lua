@@ -3,25 +3,16 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_AlliedRacesUI(event, addon)
 	if addon ~= 'Blizzard_AlliedRacesUI' then return end
 
-	AlliedRacesFrame:CreateBackdrop("Transparent")
-	AlliedRacesFrameBg:Hide()
-	AlliedRacesFramePortrait:Hide()
-	AlliedRacesFramePortraitFrame:Hide()
-	AlliedRacesFrameTitleBg:Hide()
-	AlliedRacesFrameTopBorder:Hide()
-	AlliedRacesFrameTopRightCorner:Hide()
-	AlliedRacesFrameRightBorder:Hide()
-	AlliedRacesFrameBotRightCorner:Hide()
-	AlliedRacesFrameBotLeftCorner:Hide()
-	AlliedRacesFrameBtnCornerRight:Hide()
-	AlliedRacesFrameBtnCornerLeft:Hide()
-	AlliedRacesFrameButtonBottomBorder:Hide()
-	AlliedRacesFrameBottomBorder:Hide()
-	AlliedRacesFrameLeftBorder:Hide()
+	AS:SkinBackdropFrame(AlliedRacesFrame)
+	AlliedRacesFrame.Bg:Hide()
+
+	AlliedRacesFrame.portrait:Hide()
+	AlliedRacesFrame.TitleBg:Hide()
+
 	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar.Border:Hide()
 	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar.ScrollUpBorder:Hide()
 	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar.ScrollDownBorder:Hide()
-	AlliedRacesFrame.ModelFrame:StripTextures()
+	AS:StripTextures(AlliedRacesFrame.ModelFrame)
 
 	AS:SkinCloseButton(AlliedRacesFrameCloseButton)
 	AS:SkinScrollBar(AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar)
@@ -109,15 +100,13 @@ function AS:Blizzard_Quest()
 	AS:StripTextures(QuestInfoItemHighlight)
 
 	hooksecurefunc("QuestInfoItem_OnClick", function(self)
+		for _, Button in ipairs(QuestInfoRewardsFrame.RewardButtons) do
+			Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			Button.Name:SetTextColor(1, 1, 1)
+		end
+
 		self.Backdrop:SetBackdropBorderColor(1,.9,.1)
 		self.Name:SetTextColor(1, .8, .1)
-
-		for _, Button in ipairs(QuestInfoRewardsFrame.RewardButtons) do
-			if (Button ~= self) then
-				Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-				Button.Name:SetTextColor(1, 1, 1)
-			end
-		end
 	end)
 
 	AS:SkinBackdropFrame(QuestInfoRewardsFrame.SkillPointFrame)
@@ -192,7 +181,10 @@ function AS:Blizzard_Quest()
 			RewardButton.Backdrop:SetPoint('RIGHT', RewardButton, 'RIGHT', -5, 0)
 
 			hooksecurefunc(RewardButton.IconBorder, 'SetVertexColor', function(self, r, g, b) RewardButton.Icon.Backdrop:SetBackdropBorderColor(r, g, b) end)
-			hooksecurefunc(RewardButton.IconBorder, 'Hide', function(self) RewardButton.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+		else
+			RewardButton.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			RewardButton.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			RewardButton.Name:SetTextColor(1, 1, 1)
 		end
 	end)
 
