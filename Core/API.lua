@@ -119,8 +119,8 @@ function AS:SetInside(obj, anchor, xOffset, yOffset, anchor2)
 		obj:ClearAllPoints()
 	end
 
-	obj:Point('TOPLEFT', anchor, 'TOPLEFT', xOffset, -yOffset)
-	obj:Point('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', -xOffset, yOffset)
+	obj:SetPoint('TOPLEFT', anchor, 'TOPLEFT', xOffset, -yOffset)
+	obj:SetPoint('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', -xOffset, yOffset)
 end
 
 function AS:SetOutside(obj, anchor, xOffset, yOffset, anchor2)
@@ -133,8 +133,8 @@ function AS:SetOutside(obj, anchor, xOffset, yOffset, anchor2)
 		obj:ClearAllPoints()
 	end
 
-	obj:Point('TOPLEFT', anchor, 'TOPLEFT', -xOffset, yOffset)
-	obj:Point('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', xOffset, -yOffset)
+	obj:SetPoint('TOPLEFT', anchor, 'TOPLEFT', -xOffset, yOffset)
+	obj:SetPoint('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', xOffset, -yOffset)
 end
 
 function AS:StripTextures(Object, Kill, Alpha)

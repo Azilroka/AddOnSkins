@@ -17,6 +17,20 @@ function AS:Blizzard_AlliedRacesUI(event, addon)
 	AS:SkinCloseButton(AlliedRacesFrameCloseButton)
 	AS:SkinScrollBar(AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar)
 
+	AS:SkinFrame(AlliedRacesFrame.RaceInfoFrame.ScrollFrame.Child.ObjectivesFrame)
+
+	AlliedRacesFrame.RaceInfoFrame.AlliedRacesRaceName:SetTextColor(1, .8, 0)
+	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.Child.RaceDescriptionText:SetTextColor(1, 1, 1)
+	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.Child.RacialTraitsLabel:SetTextColor(1, .8, 0)
+
+	AlliedRacesFrame:HookScript("OnShow", function(self)
+		for button in self.abilityPool:EnumerateActive() do
+			select(3, button:GetRegions()):Hide()
+			AS:SkinTexture(button.Icon, true)
+			button.Text:SetTextColor(1, 1, 1)
+		end
+	end)
+
 	AS:UnregisterSkinEvent(addon, event)
 end
 
@@ -212,6 +226,66 @@ function AS:Blizzard_Quest()
 	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(QuestFrame, parentFrame, portrait, text, name, x, y)
 		QuestNPCModel:ClearAllPoints()
 		QuestNPCModel:SetPoint("TOPLEFT", QuestFrame, "TOPRIGHT", x + 10, y)
+	end)
+
+	--Spell Rewards
+	local spellRewards = {QuestInfoRewardsFrame, MapQuestInfoRewardsFrame}
+	for _, rewardFrame in pairs(spellRewards) do
+		local spellRewardFrame = rewardFrame.spellRewardPool:Acquire()
+		local icon = spellRewardFrame.Icon
+		local nameFrame = spellRewardFrame.NameFrame
+
+		AS:StripTextures(spellRewardFrame)
+		AS:SkinTexture(icon, true)
+		nameFrame:Hide()
+
+--		bg:SetPoint("TOPLEFT", icon, "TOPRIGHT", 0, 2)
+--		bg:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 101, -1)
+	end
+
+	-- Title Reward
+	do
+		local frame = QuestInfoPlayerTitleFrame
+		local icon = frame.Icon
+
+		AS:SkinTexture(icon, true)
+
+		for i = 2, 4 do
+			select(i, frame:GetRegions()):Hide()
+		end
+
+--		bg:SetPoint("TOPLEFT", icon, "TOPRIGHT", 0, 2)
+--		bg:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 220, -1)
+	end
+
+	-- Follower Rewards
+	hooksecurefunc("QuestInfo_Display", function(template, parentFrame, acceptButton, material, mapView)
+		local rewardsFrame = QuestInfoFrame.rewardsFrame
+		local isQuestLog = QuestInfoFrame.questLog ~= nil
+		local isMapQuest = rewardsFrame == MapQuestInfoRewardsFrame
+		local numSpellRewards = isQuestLog and GetNumQuestLogRewardSpells() or GetNumRewardSpells()
+
+		if (template.canHaveSealMaterial) then
+			local questFrame = parentFrame:GetParent():GetParent()
+			questFrame.SealMaterialBG:Hide()
+		end
+
+		if numSpellRewards > 0 then
+			for reward in rewardsFrame.followerRewardPool:EnumerateActive() do
+				local portrait = reward.PortraitFrame
+				if not reward.styled then
+					portrait:ClearAllPoints()
+					portrait:SetPoint("TOPLEFT", 2, -5)
+					reward.BG:Hide()
+					--bg:SetPoint("TOPLEFT", 0, -3)
+					--bg:SetPoint("BOTTOMRIGHT", 2, 7)
+					reward.styled = true
+				end
+				if portrait then
+					--portrait.squareBG:SetBackdropBorderColor(GetItemQualityColor(portrait.quality or 1))
+				end
+			end
+		end
 	end)
 
 	if AS.ParchmentEnabled then

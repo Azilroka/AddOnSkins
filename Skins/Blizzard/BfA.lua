@@ -4,12 +4,11 @@ function AS:Blizzard_AzeriteUI(event, addon)
 	if addon ~= 'Blizzard_AzeriteUI' then return end
 
 	AS:SkinFrame(AzeriteEmpoweredItemUI)
+	AS:SkinCloseButton(AzeriteEmpoweredItemUI.BorderFrame.CloseButton)
+
 	AzeriteEmpoweredItemUI.BorderFrame.portrait:SetAlpha(0)
 
 	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.Bg:Hide()
-	AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.KeyOverlay.Shadow:Hide()
-
-	AS:SkinCloseButton(AzeriteEmpoweredItemUICloseButton)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
