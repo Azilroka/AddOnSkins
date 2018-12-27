@@ -77,7 +77,6 @@ function AS:UpdateMedia()
 	AS.NormTex = AS.LSM:Fetch('statusbar', E.private.general.normTex)
 	AS.BackdropColor = E['media'].backdropcolor
 	AS.BorderColor = E['media'].bordercolor
-	AS.PixelPerfect = E.PixelMode
 	AS.Color = E["media"].rgbvaluecolor or AS.ClassColor
 	AS.HideShadows = false
 

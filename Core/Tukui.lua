@@ -9,7 +9,6 @@ local CreateFrame = CreateFrame
 local T, C = Tukui:unpack()
 
 function AS:UpdateMedia()
-	AS.PixelPerfect = AS:CheckOption('ThinBorder')
 	AS.HideShadows = C['General']['HideShadows']
 
 	AS.DataTextFontSize = 12 -- T['DataTexts']['Size']

@@ -9,7 +9,7 @@ function AS:BigWigs(event, addon)
 				if name == "QueueTimer" then
 					AS:SkinStatusBar(frame)
 					frame:ClearAllPoints()
-					frame:SetPoint('TOP', '$parent', 'BOTTOM', 0, -(AS.PixelPerfect and 2 or 4))
+					frame:SetPoint('TOP', '$parent', 'BOTTOM', 0, AS:AdjustForTheme(-2))
 					frame:SetHeight(16)
 				end
 			end)

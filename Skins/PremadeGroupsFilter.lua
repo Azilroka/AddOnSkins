@@ -5,15 +5,15 @@ if not AS:CheckAddOn('PremadeGroupsFilter') then return end
 function AS:PremadeGroupsFilter()
 	local function Reposition()
 		local dialog = PremadeGroupsFilterDialog
-		dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT", AS.PixelPerfect and 2 or 5, AS.PixelPerfect and 1 or 2)
-		dialog:SetPoint("BOTTOMLEFT", GroupFinderFrame, "BOTTOMRIGHT", AS.PixelPerfect and 2 or 5, -(AS.PixelPerfect and 1 or 2))
+		dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT", AS:AdjustForTheme(2), AS:AdjustForTheme(1))
+		dialog:SetPoint("BOTTOMLEFT", GroupFinderFrame, "BOTTOMRIGHT", AS:AdjustForTheme(2), AS:AdjustForTheme(-1))
 	end
 	hooksecurefunc(PremadeGroupsFilter.Debug, "Dialog_UpdatePosition", Reposition)
 
 	AS:SkinFrame(PremadeGroupsFilterDialog)
 	AS:SkinCloseButton(PremadeGroupsFilterDialog.CloseButton)
 	AS:SkinCheckBox(UsePFGButton)
-	
+
 	AS:SkinCheckBox(PremadeGroupsFilterDialog.Difficulty.Act)
 	AS:SkinDropDownBox(PremadeGroupsFilterDialog.Difficulty.DropDown)
 
@@ -45,7 +45,7 @@ function AS:PremadeGroupsFilter()
 	AS:SkinCheckBox(PremadeGroupsFilterDialog.Dps.Act)
 	AS:SkinEditBox(PremadeGroupsFilterDialog.Dps.Min)
 	AS:SkinEditBox(PremadeGroupsFilterDialog.Dps.Max)
-	
+
 	AS:StripTextures(PremadeGroupsFilterDialog.Advanced)
 
 	AS:SkinFrame(PremadeGroupsFilterDialog.Expression)

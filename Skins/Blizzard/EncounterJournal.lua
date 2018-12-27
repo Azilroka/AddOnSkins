@@ -30,7 +30,7 @@ function AS:Blizzard_EncounterJournal(event, addon)
 		Tab:HookScript('OnLeave', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 	end
 
-	EncounterJournal.encounter.info.overviewTab:SetPoint('TOPLEFT', EncounterJournal.encounter.info, 'TOPRIGHT', AS.PixelPerfect and -2 or 0, -35)
+	EncounterJournal.encounter.info.overviewTab:SetPoint('TOPLEFT', EncounterJournal.encounter.info, 'TOPRIGHT', AS:AdjustForTheme(-2), -35)
 	EncounterJournal.encounter.info.overviewTab.SetPoint = AS.Noop
 
 	AS:StripTextures(EncounterJournal.instanceSelect)
@@ -116,7 +116,7 @@ function AS:Blizzard_EncounterJournal(event, addon)
 		Button.bosslessTexture:SetAlpha(0)
 
 		Button.icon:SetSize(32, 32)
-		Button.icon:Point("TOPLEFT", AS.PixelPerfect and 3 or 4, -(AS.PixelPerfect and 7 or 8))
+		Button.icon:Point("TOPLEFT", AS:AdjustForTheme(3), AS:AdjustForTheme(-7))
 		Button.icon:SetDrawLayer("ARTWORK")
 		AS:SkinTexture(Button.icon, true)
 

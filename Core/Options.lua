@@ -27,7 +27,23 @@ local Changelog = {
 	},
 	["4.04"] = {
 		'Core: API'
-	}
+	},
+	['4.05'] = {
+		'Core: API 8.1',
+		'Updated: Azeroth Auto Pilot, Talent Set Manager, Blizzard Skins, NugRunning, FlyoutButtonCustom',
+		'Added: Collection Shop',
+		'Fixed: Tukui 18 Embed',
+	},
+	['4.06'] = {
+		'Curse Issues'
+	},
+	['4.07'] = {
+		'Fixed Curse Issues'
+	},
+	['4.08'] = {
+		'Core: Themes & Shadows',
+		'Updated: Allied Races, AzeriteUI, World Map, Quest'
+	},
 }
 
 local DEVELOPERS = {
@@ -89,14 +105,24 @@ AS.Options = {
 					name = ASL['Parchment']..' (WIP)', -- This doesn't need localized. Once I'm done doing the extra skinning I'll remove it.
 					order = 3,
 				},
-				ThinBorder = {
-					name = 'Thin Border',
+				Theme = {
+					name = ASL['Themes'],
 					order = 4,
+					type = 'select',
+					values = {
+						['PixelPerfect'] = 'Pixel Perfect',
+						['TwoPixel'] = 'Two Pixel',
+						['ThickBorder'] = 'Thick Border',
+					},
+				},
+				Shadows = {
+					name = ASL['Shadows'],
+					order = 7,
 					type = 'toggle',
 				},
 				SkinTemplate = {
 					name = ASL['Skin Template'],
-					order = 7,
+					order = 8,
 					type = 'select',
 					values = DefaultTemplates,
 				},
@@ -104,7 +130,7 @@ AS.Options = {
 					type = 'group',
 					name = 'Textures',
 					guiInline = true,
-					order = 8,
+					order = 9,
 					get = function(info) return AS:CheckOption(info[#info]) end,
 					set = function(info, value) AS:SetOption(info[#info], value) AS:UpdateSettings() AS.NeedReload = true end,
 					args = {
@@ -896,7 +922,8 @@ function AS:BuildProfile()
 			['SkinDebug'] = false,
 			['SkinTemplate'] = 'Transparent',
 			['StatusBarTexture'] = 'Blizzard Raid Bar',
-			['ThinBorder'] = true,
+			['Theme'] = 'PixelPerfect',
+			['Shadows'] = true,
 		},
 	}
 

@@ -242,7 +242,6 @@ function AS:UpdateMedia()
 	AS.NormTex = AS.LSM:Fetch('statusbar', "Blizzard")
 	AS.BackdropColor = { .2, .2, .2, .8}
 	AS.BorderColor = { 1, 1, 1}
-	AS.PixelPerfect = true
 	AS.Color = AS.ClassColor
 	AS.HideShadows = false
 end
