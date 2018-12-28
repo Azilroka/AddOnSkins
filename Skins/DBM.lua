@@ -27,14 +27,14 @@ function AS:DBM(event, addon)
 							icon1.overlay = CreateFrame('Frame', '$parentIcon1Overlay', tbar)
 							AS:SetTemplate(icon1.overlay)
 							icon1.overlay:SetFrameLevel(0)
-							icon1.overlay:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMLEFT', AS:AjustForTheme(-2), 0)
+							icon1.overlay:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMLEFT', AS:AdjustForTheme(-2), 0)
 						end
 
 						if not icon2.overlay then
 							icon2.overlay = CreateFrame('Frame', '$parentIcon2Overlay', tbar)
 							AS:SetTemplate(icon2.overlay)
 							icon2.overlay:SetFrameLevel(0)
-							icon2.overlay:SetPoint('BOTTOMLEFT', frame, 'BOTTOMRIGHT', AS:AjustForTheme(2), 0)
+							icon2.overlay:SetPoint('BOTTOMLEFT', frame, 'BOTTOMRIGHT', AS:AdjustForTheme(2), 0)
 						end
 
 						AS:SkinTexture(icon1)
