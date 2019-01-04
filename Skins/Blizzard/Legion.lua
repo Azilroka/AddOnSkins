@@ -136,7 +136,8 @@ function AS:Blizzard_OrderHallUI(event, addon)
 		AS:SetTemplate(self)
 		AS:SkinCloseButton(self.CloseButton)
 		AS:SkinButton(self.BackButton)
-		AS:StripTextures(self.LeftInset)
+		AS:StripTextures(self.NineSlice)
+		AS:SkinFrame(self.Inset)
 
 		for i = 1, self:GetNumChildren() do
 			local child = select(i, self:GetChildren())

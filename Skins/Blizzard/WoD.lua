@@ -30,10 +30,25 @@ function AS:Blizzard_GarrisonUI(event, addon)
 	GarrisonCapacitiveDisplayFrameRight:SetTexture(nil)
 
 	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.IconBG:SetTexture(nil)
+	AS:SkinTexture(GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon)
+	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon:SetInside()
 
-	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.DecrementButton)
-	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.IncrementButton)
+	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.DecrementButton, 'left')
+	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.IncrementButton, 'right')
 	AS:SkinEditBox(GarrisonCapacitiveDisplayFrame.Count)
+
+	hooksecurefunc('GarrisonCapacitiveDisplayFrame_Update', function(self)
+		for _, Reagent in ipairs(self.CapacitiveDisplay.Reagents) do
+			if not Reagent.Backdrop then
+				Reagent.NameFrame:SetTexture('')
+				AS:SkinTexture(Reagent.Icon, true)
+				AS:CreateBackdrop(Reagent)
+				Reagent.Backdrop:SetPoint('TOPLEFT', Reagent.Icon, 'TOPRIGHT', -1, 0)
+				Reagent.Backdrop:SetPoint('BOTTOMLEFT', Reagent.Icon, 'BOTTOMRIGHT', -1, 0)
+				Reagent.Backdrop:SetPoint('RIGHT', Reagent, 'RIGHT', -5, 0)
+			end
+		end
+	end)
 
 	AS:UnregisterSkinEvent(addon, event)
 end

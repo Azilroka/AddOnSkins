@@ -193,11 +193,9 @@ function AS:Blizzard_Quest()
 			RewardButton.Backdrop:SetPoint('TOPLEFT', RewardButton.Icon, 'TOPRIGHT', 1, 0)
 			RewardButton.Backdrop:SetPoint('BOTTOMLEFT', RewardButton.Icon, 'BOTTOMRIGHT', 1, 0)
 			RewardButton.Backdrop:SetPoint('RIGHT', RewardButton, 'RIGHT', -5, 0)
-
 			hooksecurefunc(RewardButton.IconBorder, 'SetVertexColor', function(self, r, g, b) RewardButton.Icon.Backdrop:SetBackdropBorderColor(r, g, b) end)
+			hooksecurefunc(RewardButton.IconBorder, 'Hide', function(self) RewardButton.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 		else
-			RewardButton.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-			RewardButton.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			RewardButton.Name:SetTextColor(1, 1, 1)
 		end
 	end)
@@ -369,7 +367,7 @@ function AS:Blizzard_Quest()
 						if finished then
 							objective:SetTextColor(1, .8, .1)
 						else
-							objective:SetTextColor(0.6, 0.6, 0.6)
+							objective:SetTextColor(.63, .09, .09)
 						end
 					end
 				end
