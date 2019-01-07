@@ -26,7 +26,7 @@ function AS:BigWigs(event, addon)
 			return BG
 		end
 
-		local function FreeStyle(bar)
+		local function FreeStyle(bar, FreeBackgrounds)
 			local bg = bar:Get('bigwigs:AddOnSkins:bg')
 			if bg then
 				bg:ClearAllPoints()
@@ -53,37 +53,39 @@ function AS:BigWigs(event, addon)
 			bar.candyBarBar:SetPoint('BOTTOMRIGHT')
 		end
 
-		local function ApplyStyle(bar)
-			bar:SetHeight(buttonsize)
-
-			local bg
+		local function GetBG(FreeBackgrounds)
 			if #FreeBackgrounds > 0 then
-				bg = tremove(FreeBackgrounds)
+				return tremove(FreeBackgrounds)
 			else
-				bg = CreateBG()
+				return CreateBG()
 			end
+		end
 
+		local function SetupBG(bg, bar, ibg)
 			bg:SetParent(bar)
 			bg:SetFrameStrata(bar:GetFrameStrata())
 			bg:SetFrameLevel(bar:GetFrameLevel() - 1)
 			bg:ClearAllPoints()
-			bg:SetOutside(bar)
+			if ibg then
+				bg:SetOutside(bar.candyBarIconFrame)
+				bg:SetBackdropColor(0, 0, 0, 0)
+			else
+				bg:SetOutside(bar)
+				bg:SetBackdropColor(unpack(AS.BackdropColor))
+			end
 			bg:Show()
+		end
+
+		local function ApplyStyle(bar, FreeBackgrounds, buttonsize)
+			bar:SetHeight(buttonsize)
+
+			local bg = GetBG(FreeBackgrounds)
+			SetupBG(bg, bar)
 			bar:Set('bigwigs:AddOnSkins:bg', bg)
 
 			if bar.candyBarIconFrame:GetTexture() then
-				local ibg
-				if #FreeBackgrounds > 0 then
-					ibg = tremove(FreeBackgrounds)
-				else
-					ibg = CreateBG()
-				end
-				ibg:SetParent(bar)
-				ibg:SetFrameStrata(bar:GetFrameStrata())
-				ibg:SetFrameLevel(bar:GetFrameLevel() - 1)
-				ibg:ClearAllPoints()
-				ibg:SetOutside(bar.candyBarIconFrame)
-				ibg:Show()
+				local ibg = GetBG(FreeBackgrounds)
+				SetupBG(ibg, bar, true)
 				bar:Set('bigwigs:AddOnSkins:ibg', ibg)
 			end
 
@@ -91,45 +93,30 @@ function AS:BigWigs(event, addon)
 			bar.candyBarBar:SetAllPoints(bar)
 			bar.candyBarBar.SetPoint = AS.Noop
 			bar.candyBarBar:SetStatusBarTexture(AS.NormTex)
-
 			bar.candyBarBackground:SetTexture(AS.NormTex)
 
 			bar.candyBarIconFrame:ClearAllPoints()
 			bar.candyBarIconFrame:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
 			bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
-
 			AS:SkinTexture(bar.candyBarIconFrame)
+
+			bar.candyBarLabel:ClearAllPoints()
+			bar.candyBarLabel:SetPoint("LEFT", bar, "LEFT", 2, 0)
+			bar.candyBarLabel:SetPoint("RIGHT", bar, "RIGHT", -2, 0)
+
+			bar.candyBarDuration:ClearAllPoints()
+			bar.candyBarDuration:SetPoint("LEFT", bar, "LEFT", 2, 0)
+			bar.candyBarDuration:SetPoint("RIGHT", bar, "RIGHT", -2, 0)
 		end
 
-		local function ApplyStyleHalfBar(bar)
-			local bg
-			if #FreeBackgrounds > 0 then
-				bg = tremove(FreeBackgrounds)
-			else
-				bg = CreateBG()
-			end
-
-			bg:SetParent(bar)
-			bg:SetFrameStrata(bar:GetFrameStrata())
-			bg:SetFrameLevel(bar:GetFrameLevel() - 1)
-			bg:ClearAllPoints()
-			bg:SetOutside(bar)
-			bg:Show()
+		local function ApplyStyleHalfBar(bar, FreeBackgrounds, buttonsize)
+			local bg = GetBG(FreeBackgrounds)
+			SetupBG(bg, bar)
 			bar:Set('bigwigs:AddOnSkins:bg', bg)
 
 			if bar.candyBarIconFrame:GetTexture() then
-				local ibg
-				if #FreeBackgrounds > 0 then
-					ibg = tremove(FreeBackgrounds)
-				else
-					ibg = CreateBG()
-				end
-				ibg:SetParent(bar)
-				ibg:SetFrameStrata(bar:GetFrameStrata())
-				ibg:SetFrameLevel(bar:GetFrameLevel() - 1)
-				ibg:ClearAllPoints()
-				ibg:SetOutside(bar.candyBarIconFrame)
-				ibg:Show()
+				local ibg = GetBG(FreeBackgrounds)
+				SetupBG(ibg, bar, true)
 				bar:Set('bigwigs:AddOnSkins:ibg', ibg)
 			end
 
@@ -139,20 +126,20 @@ function AS:BigWigs(event, addon)
 			bar.candyBarBar:SetAllPoints(bar)
 			bar.candyBarBar.SetPoint = AS.Noop
 			bar.candyBarBar:SetStatusBarTexture(AS.NormTex)
-
 			bar.candyBarBackground:SetTexture(unpack(AS.BackdropColor))
 
 			bar.candyBarIconFrame:ClearAllPoints()
 			bar.candyBarIconFrame:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
 			bar.candyBarIconFrame:SetSize(buttonsize, buttonsize)
+			AS:SkinTexture(bar.candyBarIconFrame)
 
 			bar.candyBarLabel:ClearAllPoints()
-			bar.candyBarLabel:SetPoint("LEFT", bar, "LEFT", 2, 10)
-			bar.candyBarLabel:SetPoint("RIGHT", bar, "RIGHT", -2, 10)
+			bar.candyBarLabel:SetPoint("LEFT", bar, "LEFT", 2, AS:AdjustForTheme(10))
+			bar.candyBarLabel:SetPoint("RIGHT", bar, "RIGHT", -2, AS:AdjustForTheme(10))
 
 			bar.candyBarDuration:ClearAllPoints()
-			bar.candyBarDuration:SetPoint("LEFT", bar, "LEFT", 2, 10)
-			bar.candyBarDuration:SetPoint("RIGHT", bar, "RIGHT", -2, 10)
+			bar.candyBarDuration:SetPoint("LEFT", bar, "LEFT", 2, AS:AdjustForTheme(10))
+			bar.candyBarDuration:SetPoint("RIGHT", bar, "RIGHT", -2, AS:AdjustForTheme(10))
 
 			AS:SkinTexture(bar.candyBarIconFrame)
 		end
@@ -161,17 +148,17 @@ function AS:BigWigs(event, addon)
 		BigWigsBars:RegisterBarStyle('AddOnSkins', {
 			apiVersion = 1,
 			version = 1,
-			GetSpacing = function() return 8 end,
-			ApplyStyle = ApplyStyle,
-			BarStopped = FreeStyle,
+			GetSpacing = function() return 3 end,
+			ApplyStyle = function(bar) ApplyStyle(bar, FreeBackgrounds, buttonsize) end,
+			BarStopped = function(bar) FreeStyle(bar, FreeBackgrounds) end,
 			GetStyleName = function() return 'AddOnSkins' end,
 		})
 		BigWigsBars:RegisterBarStyle('AddOnSkins Half-Bar', {
 			apiVersion = 1,
 			version = 1,
-			GetSpacing = function() return 20 end,
-			ApplyStyle = ApplyStyleHalfBar,
-			BarStopped = FreeStyle,
+			GetSpacing = function() return 13 end,
+			ApplyStyle = function(bar) ApplyStyleHalfBar(bar, FreeBackgrounds, buttonsize) end,
+			BarStopped = function(bar) FreeStyle(bar, FreeBackgrounds) end,
 			GetStyleName = function() return 'AddOnSkins Half-Bar' end,
 		})
 
