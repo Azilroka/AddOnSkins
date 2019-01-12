@@ -112,9 +112,9 @@ function AS:Blizzard_LootFrames()
 
 				-- create a backdrop around the icon
 				AS:CreateBackdrop(frame, 'Default')
-				frame.backdrop:SetPoint("TOPLEFT", frame.Icon, -2, 2)
-				frame.backdrop:SetPoint("BOTTOMRIGHT", frame.Icon, 2, -2)
-				frame.backdrop:SetBackdropColor(0,0,0,0)
+				frame.Backdrop:SetPoint("TOPLEFT", frame.Icon, -2, 2)
+				frame.Backdrop:SetPoint("BOTTOMRIGHT", frame.Icon, 2, -2)
+				frame.Backdrop:SetBackdropColor(0,0,0,0)
 				frame.isSkinned = true
 			end
 		end
@@ -136,8 +136,8 @@ function AS:Blizzard_LootFrames()
 			i:SetTexture(icon)
 			AS:SkinTexture(i)
 			AS:CreateBackdrop(b)
-			b.backdrop:SetOutside(i)
-			b.backdrop:SetBackdropBorderColor(c.r, c.g, c.b)
+			b.Backdrop:SetOutside(i)
+			b.Backdrop:SetBackdropBorderColor(c.r, c.g, c.b)
 		end
 
 		for i=1, MasterLooterFrame:GetNumChildren() do
@@ -159,7 +159,7 @@ function AS:Blizzard_LootFrames()
 	-- bonus
 	AS:StripTextures(BonusRollFrame)
 	AS:CreateBackdrop(BonusRollFrame)
-	BonusRollFrame.backdrop:SetFrameLevel(0)
+	BonusRollFrame.Backdrop:SetFrameLevel(0)
 	AS:SkinTexture(BonusRollFrame.PromptFrame.Icon)
 	BonusRollFrame.PromptFrame.IconBackdrop = CreateFrame("Frame", nil, BonusRollFrame.PromptFrame)
 	BonusRollFrame.PromptFrame.IconBackdrop:SetFrameLevel(BonusRollFrame.PromptFrame.IconBackdrop:GetFrameLevel() - 1)

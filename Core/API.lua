@@ -1077,7 +1077,7 @@ function AS:SkinStatusBarWidget(widgetFrame)
 	if bar.BGRight then bar.BGRight:Hide() end
 	if bar.BGCenter then bar.BGCenter:Hide() end
 
-	if not bar.backdrop then
+	if not bar.Backdrop then
 		AS:CreateBackdrop(bar)
 	end
 

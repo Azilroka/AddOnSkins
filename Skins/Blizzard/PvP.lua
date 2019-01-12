@@ -214,8 +214,8 @@ function AS:Blizzard_BattlefieldMap(event, addon)
 	end)
 
 	local function setBackdropAlpha()
-		if BattlefieldMapFrame.backdrop then
-			BattlefieldMapFrame.backdrop:SetBackdropColor(0, 0, 0, GetOpacity())
+		if BattlefieldMapFrame.Backdrop then
+			BattlefieldMapFrame.Backdrop:SetBackdropColor(0, 0, 0, GetOpacity())
 		end
 	end
 
@@ -266,7 +266,7 @@ function AS:Blizzard_WorldStateScore()
 		if XPBar.Bar and not XPBar.Bar.Backdrop then
 			AS:CreateBackdrop(XPBar.Bar)
 			if XPBar.Bar.Background then
-				XPBar.Bar.Background:SetInside(XPBar.Bar.backdrop)
+				XPBar.Bar.Background:SetInside(XPBar.Bar.Backdrop)
 			end
 			if XPBar.Bar.Spark then
 				XPBar.Bar.Spark:SetAlpha(0)
@@ -280,9 +280,7 @@ function AS:Blizzard_WorldStateScore()
 		if XPBar.PrestigeReward and XPBar.PrestigeReward.Accept then
 			XPBar.PrestigeReward.Accept:ClearAllPoints()
 			XPBar.PrestigeReward.Accept:SetPoint("TOP", XPBar.PrestigeReward, "BOTTOM", 0, 0)
-			if not XPBar.PrestigeReward.Accept.template then
-				AS:SkinButton(XPBar.PrestigeReward.Accept)
-			end
+			AS:SkinButton(XPBar.PrestigeReward.Accept)
 		end
 
 		if XPBar.NextAvailable then

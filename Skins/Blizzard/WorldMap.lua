@@ -173,26 +173,15 @@ function AS:Blizzard_Quest()
 		HandleReward(MapQuestInfoRewardsFrame[frame])
 	end
 
-	hooksecurefunc('QuestInfo_ShowRewards', function(self)
-		for _, frame in pairs(Rewards) do
-			HandleReward(QuestInfoFrame.rewardsFrame[frame])
-		end
-	end)
-
 	hooksecurefunc("QuestInfo_GetRewardButton", function(rewardsFrame, index)
 		local RewardButton = rewardsFrame.RewardButtons[index]
 
 		if (not RewardButton.Backdrop) then
-			AS:CreateBackdrop(RewardButton)
-
-			AS:SkinTexture(RewardButton.Icon, true)
+			HandleReward(RewardButton)
 
 			RewardButton.IconBorder:SetAlpha(0)
 			RewardButton.NameFrame:Hide()
 
-			RewardButton.Backdrop:SetPoint('TOPLEFT', RewardButton.Icon, 'TOPRIGHT', 1, 0)
-			RewardButton.Backdrop:SetPoint('BOTTOMLEFT', RewardButton.Icon, 'BOTTOMRIGHT', 1, 0)
-			RewardButton.Backdrop:SetPoint('RIGHT', RewardButton, 'RIGHT', -5, 0)
 			hooksecurefunc(RewardButton.IconBorder, 'SetVertexColor', function(self, r, g, b) RewardButton.Icon.Backdrop:SetBackdropBorderColor(r, g, b) end)
 			hooksecurefunc(RewardButton.IconBorder, 'Hide', function(self) RewardButton.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 		else
