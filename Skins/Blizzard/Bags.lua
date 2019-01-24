@@ -183,7 +183,6 @@ function AS:Blizzard_Bags()
 	for i = 1, 7 do
 		local BankBag = BankSlotsFrame['Bag'..i]
 		AS:SkinFrame(BankBag)
-		BankBag.HighlightFrame.HighlightTexture:SetTexture(1, 1, 1, .2)
 		AS:StyleButton(BankBag)
 		AS:SkinTexture(BankBag.icon)
 		BankBag.icon:SetInside()
