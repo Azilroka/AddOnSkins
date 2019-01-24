@@ -55,6 +55,9 @@ function AS:EmbedSystemHooks()
 				self.parent:Show()
 				UIFrameFadeIn(self.parent, 0.2, self.parent:GetAlpha(), 1)
 				UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
+				if not AS:CheckOption('EmbedIsHidden') then
+					EmbedSystem_MainWindow:Show()
+				end
 			end
 
 			if not self.parent.editboxforced then
