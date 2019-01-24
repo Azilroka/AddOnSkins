@@ -336,6 +336,10 @@ function AS:Init(event, addon)
 		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 		AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
 		AS:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
+
+		if AS.LSM then
+			AS.LSM:Register('statusbar', 'Solid', [[Interface\Buttons\WHITE8X8]])
+		end
 	end
 end
 

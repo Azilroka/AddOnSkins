@@ -333,8 +333,9 @@ AS.ArrowRotation = {
 }
 
 function AS:SkinArrowButton(Button, Arrow)
-	if Arrow then Arrow = strlower(Arrow) end
-	if (not Arrow) then
+	if Arrow then
+		Arrow = strlower(Arrow)
+	else
 		Arrow = 'down'
 		local ButtonName = Button:GetName() and Button:GetName():lower()
 		if ButtonName then
@@ -408,7 +409,7 @@ function AS:SkinButton(Button, Strip)
 
 	if Button.Icon then
 		local Texture = Button.Icon:GetTexture()
-		if Texture and strfind(Texture, [[Interface\ChatFrame\ChatFrameExpandArrow]]) then
+		if Texture and (type(Texture) == 'string' and strfind(Texture, [[Interface\ChatFrame\ChatFrameExpandArrow]])) then
 			Button.Icon:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
 			Button.Icon:SetVertexColor(1, 1, 1)
 			Button.Icon:SetRotation(AS.ArrowRotation['right'])
