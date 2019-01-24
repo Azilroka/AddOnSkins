@@ -40,10 +40,67 @@ function AS:Immersion(event, addon)
 	ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.ItemHighlight.TextSheen:Hide();
 	ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.ItemHighlight.TextSheen.Show = function() end;
 
+	local function SkinReward(Button)
+		if Button.Icon then
+			AS:CreateBackdrop(Button)
+
+			if Button.NameFrame then
+				Button.NameFrame:Hide()
+			end
+
+			if Button.Border then
+				Button.Border:Hide()
+			end
+
+			if Button.Mask then
+				Button.Mask:Hide()
+			end
+
+			Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
+			Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
+			Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
+
+			AS:SkinTexture(Button.Icon)
+			Button.Icon.Backdrop = CreateFrame('Frame', nil, Button)
+			AS:SetTemplate(Button.Icon.Backdrop)
+			Button.Icon.Backdrop:SetBackdropColor(0, 0, 0, 0)
+			Button.Icon.Backdrop:SetOutside(Button.Icon)
+
+			Button.AutoCastShine = CreateFrame('Frame', '$parentShine', Button, 'AutoCastShineTemplate')
+			Button.AutoCastShine:SetParent(Button.Icon.Backdrop)
+			Button.AutoCastShine:SetAllPoints()
+
+			for _, sparks in pairs(Button.AutoCastShine.sparkles) do
+				sparks:SetSize(sparks:GetWidth() * 2, sparks:GetHeight() * 2)
+			end
+
+			Button:SetScript("OnUpdate", function(self)
+				if ImmersionFrame.TalkBox.Elements.chooseItems and ImmersionFrame.TalkBox.Elements.itemChoice == self:GetID() then
+					AutoCastShine_AutoCastStart(self.AutoCastShine, 0, .44, .87 )
+					self.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
+				else
+					self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+					AutoCastShine_AutoCastStop(self.AutoCastShine)
+				end
+			end)
+		end
+
+		if Button.CircleBackground then
+			Button.CircleBackground:SetTexture(nil)
+			Button.CircleBackgroundGlow:SetTexture(nil)
+			hooksecurefunc(Button.ValueText, "SetText", function(self, text) Button.Count:SetText('+'..text) self:Hide() end)
+		end
+	end
+
+	SkinReward(ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.ArtifactXPFrame)
+	SkinReward(ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.HonorFrame)
+	SkinReward(ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.MoneyFrame)
+	SkinReward(ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.TitleFrame)
+	SkinReward(ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.SkillPointFrame)
+
 	ImmersionFrame:HookScript('OnEvent', function(self)
 		for _, Button in ipairs(self.TitleButtons.Buttons) do
-			if Button and not Button.isSkinned then
-				Button.isSkinned = true
+			if Button and not Button.Backdrop then
 				AS:CreateBackdrop(Button)
 				Button:SetBackdrop(nil)
 				Button.Overlay:Hide()
@@ -57,45 +114,12 @@ function AS:Immersion(event, addon)
 			end
 		end
 		for _, Button in ipairs(self.TalkBox.Elements.Content.RewardsFrame.Buttons) do
-			if Button and not Button.isSkinned then
-				Button.isSkinned = true
-				AS:CreateBackdrop(Button)
-				AS:SkinTexture(Button.Icon)
-				Button.NameFrame:Hide()
-				Button.Border:Hide()
-				Button.Mask:Hide()
-
-				Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
-				Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
-				Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
-
-				Button.Icon.Backdrop = CreateFrame('Frame', nil, Button)
-				AS:SetTemplate(Button.Icon.Backdrop)
-				Button.Icon.Backdrop:SetBackdropColor(0, 0, 0, 0)
-				Button.Icon.Backdrop:SetOutside(Button.Icon)
-
-				Button.AutoCastShine = CreateFrame('Frame', '$parentShine', Button, 'AutoCastShineTemplate')
-				Button.AutoCastShine:SetParent(Button.Icon.Backdrop)
-				Button.AutoCastShine:SetAllPoints()
-
-				for _, sparks in pairs(Button.AutoCastShine.sparkles) do
-					sparks:SetSize(sparks:GetWidth() * 2, sparks:GetHeight() * 2)
-				end
-
-				Button:SetScript("OnUpdate", function(self)
-					if ImmersionFrame.TalkBox.Elements.chooseItems and ImmersionFrame.TalkBox.Elements.itemChoice == self:GetID() then
-						AutoCastShine_AutoCastStart(self.AutoCastShine, 0, .44, .87 )
-						self.Backdrop:SetBackdropBorderColor(0, 0.44, .87, 1)
-					else
-						self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-						AutoCastShine_AutoCastStop(self.AutoCastShine)
-					end
-				end)
+			if Button and not Button.Backdrop then
+				SkinReward(Button)
 			end
 		end
 		for _, Button in ipairs(self.TalkBox.Elements.Progress.Buttons) do
-			if Button and not Button.isSkinned then
-				Button.isSkinned = true
+			if Button and not Button.Backdrop then
 				AS:CreateBackdrop(Button)
 				AS:SkinTexture(Button.Icon)
 				Button.NameFrame:Hide()
