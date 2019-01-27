@@ -140,6 +140,7 @@ AS.Options = {
 							order = 1,
 							name = 'Background Texture',
 							values = AS.LSM:HashTable('statusbar'),
+							disabled = function() return AS:CheckOption('ElvUIStyle', 'ElvUI') end,
 						},
 						StatusBarTexture = {
 							type = 'select',
@@ -147,6 +148,7 @@ AS.Options = {
 							order = 2,
 							name = 'StatusBar Texture',
 							values = AS.LSM:HashTable('statusbar'),
+							disabled = function() return AS:CheckOption('ElvUIStyle', 'ElvUI') end,
 						},
 						CropIcons = {
 							name = ASL['Crop Icons'],
