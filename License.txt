@@ -4,7 +4,7 @@
 	The contents of this addon, excluding third-party resources, are
 	copyrighted to their authors with all rights reserved.
 
-	Authors of this addon hereby grant you the following rights:
+	This addon is free to use and the authors hereby grants you the following rights:
 
 	1. 	You may NOT make any modification inside this addon. If you want
 		to create your own edited version, please create it from outside.
