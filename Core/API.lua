@@ -260,6 +260,32 @@ function AS:SetTemplate(Frame, Template, Texture)
 	Texture = Texture or AS.LSM:Fetch('statusbar', AS:CheckOption('BackgroundTexture')) -- [[Interface\AddOns\ProjectAzilroka\Media\StatusBars\Rainbow]]
 	Template = Template or AS:CheckOption('SkinTemplate')
 
+	local R, G, B = unpack(AS.BackdropColor)
+	local Alpha = (Template == 'Default' and 1 or .8)
+
+	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
+		if Frame:IsObjectType("Button") then
+			Texture = ElvUI[1].media.glossTex
+		else
+			Texture = ElvUI[1].media.blankTex
+		end
+
+		if Template == 'Default' then
+			R, G, B = unpack(ElvUI[1].media.backdropcolor)
+			AS.BackdropColor = ElvUI[1].media.backdropcolor
+		else
+			R, G, B, Alpha = unpack(ElvUI[1].media.backdropfadecolor)
+			AS.BackdropColor = ElvUI[1].media.backdropfadecolor
+		end
+
+		Frame.template = Template
+		ElvUI[1].frames[Frame] = true
+
+		if (Template == 'MerathilisUI' and AS:CheckAddOn('ElvUI_MerathilisUI')) or (Template == 'KlixUI' and AS:CheckAddOn('ElvUI_KlixUI')) then
+			Frame:Styling()
+		end
+	end
+
 	local Backdrop = { bgFile = Texture, edgeFile = AS.Blank, tile = false, tileSize = 0, edgeSize = AS.Mult, insets = { left = 0, right = 0, top = 0, bottom = 0 } }
 
 	Frame:SetBackdrop(Backdrop)
@@ -280,26 +306,6 @@ function AS:SetTemplate(Frame, Template, Texture)
 			Frame.OutsideBorder:SetOutside(Frame, 0, 0)
 		else
 			Frame.OutsideBorder:SetOutside(Frame, AS.Mult, AS.Mult)
-		end
-	end
-
-	local R, G, B = unpack(AS.BackdropColor)
-	local Alpha = (Template == 'Default' and 1 or .8)
-
-	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
-		if Template == 'Default' then
-			R, G, B = unpack(ElvUI[1]['media'].backdropcolor)
-			AS.BackdropColor = ElvUI[1]['media'].backdropcolor
-		else
-			R, G, B, Alpha = unpack(ElvUI[1]['media'].backdropfadecolor)
-			AS.BackdropColor = ElvUI[1]['media'].backdropfadecolor
-		end
-
-		Frame.template = Template
-		ElvUI[1]['frames'][Frame] = true
-
-		if (Template == 'MerathilisUI' and AS:CheckAddOn('ElvUI_MerathilisUI')) or (Template == 'KlixUI' and AS:CheckAddOn('ElvUI_KlixUI')) then
-			Frame:Styling()
 		end
 	end
 
