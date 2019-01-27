@@ -874,7 +874,7 @@ function AS:SkinStatusBar(frame, ClassColor)
 	else
 		frame:SetStatusBarColor(unpack(frame.GetStatusBarColor and { frame:GetStatusBarColor() } or AS.Color))
 	end
-	if AS:CheckAddOn('ElvUI') then
+	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
 		ElvUI[1]:RegisterStatusBar(frame)
 	end
 end
