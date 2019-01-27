@@ -28,12 +28,6 @@ function AS:WeakAuras()
 		end
 
 		if frame.icon then
-			if frame.keepAspectRatio == true then
-				frame.icon.SetTexCoord = nil
-			else
-				AS:SkinTexture(frame.icon)
-				frame.icon.SetTexCoord = AS.Noop
-			end
 			if frame.cooldown and AS:CheckOption('WeakAuraIconCooldown', 'ElvUI') then
 				ElvUI[1]:RegisterCooldown(frame.cooldown)
 				ElvUI[1]:UpdateCooldownSettings('global')
