@@ -71,7 +71,9 @@ function AS:PetTracker(event, addon)
 		end)
 	end
 
-	if addon == 'PetTracker_Journal' then
+	if addon == 'PetTracker_Journal' or IsAddOnLoaded('PetTracker_Journal') then
+		AS:UnregisterSkinEvent('PetTracker_Journal', event)
+
 		AS:SkinTab(CollectionsJournalSecureTab0)
 		hooksecurefunc(PetTrackerRivalJournal, 'Startup', function()
 			AS:StripTextures(CollectionsJournalCoverTab, true)

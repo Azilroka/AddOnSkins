@@ -331,18 +331,18 @@ function AS:Blizzard_Inspect(event, addon)
 	AS:SkinButton(InspectPaperDollFrame.ViewButton)
 	AS:SkinBackdropFrame(InspectModelFrame)
 
-	local Slots = { 'Head', 'Neck', 'Shoulder', 'Back', 'Chest', 'Shirt', 'Tabard', 'Wrist', 'Hands', 'Waist', 'Legs', 'Feet', 'Finger0', 'Finger1', 'Trinket0', 'Trinket1', 'MainHand', 'SecondaryHand' }
+	for _, Slot in pairs({InspectPaperDollItemsFrame:GetChildren()}) do
+		if Slot:IsObjectType("Button") or Slot:IsObjectType("ItemButton") then
+			AS:SkinTexture(Slot.icon)
+			AS:SkinFrame(Slot)
+			AS:StyleButton(Slot)
+			AS:CreateShadow(Slot, true)
+			Slot.icon:SetInside()
 
-	for _, Slot in pairs(Slots) do
-		local Button = _G['Inspect'..Slot..'Slot']
-		AS:SkinFrame(Button)
-		AS:SkinTexture(Button.icon)
-		Button.icon:SetInside()
-		Button.IconBorder:SetAlpha(0)
-		Button:SetFrameLevel(Button:GetFrameLevel() + 2)
-		hooksecurefunc(Button.IconBorder, 'SetVertexColor', function(self, r, g, b) Button:SetBackdropBorderColor(r, g, b) end)
-		hooksecurefunc(Button.IconBorder, 'Hide', function(self) Button:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
-		AS:StyleButton(Button)
+			Slot.IconBorder:SetAlpha(0)
+			hooksecurefunc(Slot.IconBorder, 'SetVertexColor', function(self, r, g, b) Slot:SetBackdropBorderColor(r, g, b) end)
+			hooksecurefunc(Slot.IconBorder, 'Hide', function(self) Slot:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+		end
 	end
 
 	AS:StripTextures(InspectPVPFrame)
