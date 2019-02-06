@@ -55,6 +55,7 @@
 	<Script file="ExtVendor.lua"/>
 	<Script file="FlightMapEnhanced.lua"/>
 	<Script file="FlyoutButtonCustom.lua"/>
+	<Script file="FlyPlateBuffs.lua"/>
 	<Script file="GlobalIgnoreList.lua"/>
 	<Script file="GryphonHeartItems.lua"/>
 	<Script file="Guild_Roster_Manager.lua"/>
