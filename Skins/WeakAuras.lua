@@ -8,6 +8,8 @@ function AS:WeakAuras()
 		return
 	end
 
+	local E = _G.ElvUI and unpack(ElvUI)
+
 	local function Skin_WeakAuras(frame, ftype)
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame)
@@ -29,8 +31,13 @@ function AS:WeakAuras()
 
 		if frame.icon then
 			if frame.cooldown and AS:CheckOption('WeakAuraIconCooldown', 'ElvUI') then
-				ElvUI[1]:RegisterCooldown(frame.cooldown)
-				ElvUI[1]:UpdateCooldownSettings('global')
+				frame.cooldown.CooldownSettings = {
+					['font'] = E.Libs.LSM:Fetch('font', E.db.cooldown.fonts.font),
+					['fontSize'] = E.db.cooldown.fonts.fontSize,
+					['fontOutline'] = E.db.cooldown.fonts.fontOutline,
+				}
+
+				E:RegisterCooldown(frame.cooldown)
 			end
 		end
 	end
