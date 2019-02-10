@@ -343,7 +343,7 @@ function AS:SkinArrowButton(Button, Arrow)
 		Arrow = strlower(Arrow)
 	else
 		Arrow = 'down'
-		local ButtonName = Button:GetName() and Button:GetName():lower()
+		local ButtonName = Button:GetDebugName() and Button:GetDebugName():lower()
 		if ButtonName then
 			if (strfind(ButtonName, 'left') or strfind(ButtonName, 'prev') or strfind(ButtonName, 'decrement') or strfind(ButtonName, 'back')) then
 				Arrow = 'left'
