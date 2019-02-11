@@ -26,9 +26,9 @@ function AS:MailCommander()
 			local Button = MailCommanderFrame[Table]
 			for i = 1, #Button do
 				if not Button[i].isSkinned then
-					Button[i].Bg:SetTexture(nil)
-					Button[i].NameFrame:SetTexture(nil)
-					Button[i].SlotTexture:SetTexture(nil)
+					Button[i].Bg:SetTexture()
+					Button[i].NameFrame:SetTexture()
+					Button[i].SlotTexture:SetTexture()
 					AS:SkinTexture(Button[i].ItemButton.icon)
 					Button[i].ItemButton:SetNormalTexture('')
 					Button[i].ItemButton:SetPushedTexture('')

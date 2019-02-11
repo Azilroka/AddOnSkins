@@ -25,11 +25,11 @@ function AS:Blizzard_GarrisonUI(event, addon)
 	AS:SkinButton(GarrisonCapacitiveDisplayFrame.CreateAllWorkOrdersButton, true)
 
 	AS:Kill(GarrisonCapacitiveDisplayFramePortrait)
-	GarrisonCapacitiveDisplayFrameLeft:SetTexture(nil)
-	GarrisonCapacitiveDisplayFrameMiddle:SetTexture(nil)
-	GarrisonCapacitiveDisplayFrameRight:SetTexture(nil)
+	GarrisonCapacitiveDisplayFrameLeft:SetTexture()
+	GarrisonCapacitiveDisplayFrameMiddle:SetTexture()
+	GarrisonCapacitiveDisplayFrameRight:SetTexture()
 
-	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.IconBG:SetTexture(nil)
+	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.IconBG:SetTexture()
 	AS:SkinTexture(GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon)
 	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon:SetInside()
 

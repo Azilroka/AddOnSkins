@@ -86,8 +86,8 @@ function AS:Immersion(event, addon)
 		end
 
 		if Button.CircleBackground then
-			Button.CircleBackground:SetTexture(nil)
-			Button.CircleBackgroundGlow:SetTexture(nil)
+			Button.CircleBackground:SetTexture()
+			Button.CircleBackgroundGlow:SetTexture()
 			hooksecurefunc(Button.ValueText, "SetText", function(self, text) Button.Count:SetText('+'..text) self:Hide() end)
 		end
 	end

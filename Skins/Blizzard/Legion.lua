@@ -128,7 +128,7 @@ function AS:Blizzard_OrderHallUI(event, addon)
 			local region = select(i, self:GetRegions())
 			if region and region:IsObjectType('Texture') then
 				if not ((region == self.Background) or (self.Currency and self.Currency.Icon and region == self.Currency.Icon)) then
-					region:SetTexture(nil)
+					region:SetTexture()
 				end
 			end
 		end
@@ -146,7 +146,7 @@ function AS:Blizzard_OrderHallUI(event, addon)
 				AS:CreateBackdrop(child)
 				child.Border:SetAlpha(0)
 				child.Highlight:SetAlpha(0)
-				child.AlphaIconOverlay:SetTexture(nil)
+				child.AlphaIconOverlay:SetTexture()
 				AS:SkinTexture(child.Icon)
 				child.Backdrop:SetFrameLevel(child.Backdrop:GetFrameLevel() + 1)
 

@@ -112,8 +112,8 @@ function AS:Blizzard_PvE()
 		local parentName = parentFrame:GetName()
 		local Button = _G[parentName.."Item"..index]
 		if Button and not Button.Backdrop then
-			Button.NameFrame:SetTexture(nil)
-			Button.shortageBorder:SetTexture(nil)
+			Button.NameFrame:SetTexture()
+			Button.shortageBorder:SetTexture()
 
 			Button.IconBorder:SetAlpha(0)
 			AS:SkinTexture(Button.Icon, true)
@@ -166,7 +166,7 @@ function AS:Blizzard_PvE()
 			return
 		end
 
-		parentFrame.MoneyReward.NameFrame:SetTexture(nil)
+		parentFrame.MoneyReward.NameFrame:SetTexture()
 		AS:SkinTexture(parentFrame.MoneyReward.Icon, true)
 
 		AS:CreateBackdrop(parentFrame.MoneyReward)

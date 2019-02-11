@@ -8,7 +8,7 @@ function AS:Scrap(event, addon)
 		if Scrap and Scrap:IsObjectType('Button') and not Scrap.IsSkinned then
 			AS:StyleButton(Scrap)
 			Scrap:SetTemplate('Default', true)
-			ScrapBorder:SetTexture(nil)
+			ScrapBorder:SetTexture()
 			ScrapIcon:SetTexture('Interface\\Addons\\Scrap\\Art\\Enabled Icon')
 			ScrapIcon:SetAllPoints()
 			local numTabs = MerchantFrame.numTabs

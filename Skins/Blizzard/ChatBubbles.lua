@@ -30,7 +30,7 @@ function AS:Blizzard_ChatBubbles()
 		for i = 1, frame:GetNumRegions() do
 			local region = select(i, frame:GetRegions())
 			if region:GetObjectType() == "Texture" then
-				region:SetTexture(nil)
+				region:SetTexture()
 			elseif region:GetObjectType() == "FontString" then
 				frame.text = region
 			end

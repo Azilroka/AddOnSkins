@@ -189,7 +189,7 @@ function AS:Blizzard_Collections(event, addon)
 		AS:SkinTexture(Button.icon, true)
 		AS:StyleButton(Button.dragButton)
 		Button.dragButton.ActiveTexture:SetAlpha(0)
-		Button.dragButton.levelBG:SetTexture(nil)
+		Button.dragButton.levelBG:SetTexture()
 
 		Button.dragButton.level:ClearAllPoints()
 		Button.dragButton.level:SetPoint("TOPLEFT", Button.name, "BOTTOMLEFT", 1, 5)
@@ -260,7 +260,7 @@ function AS:Blizzard_Collections(event, addon)
 	AS:SkinFrame(PetJournal.PetCard)
 	AS:StripTextures(PetJournal.PetCardInset)
 
-	--PetJournal.PetCard.PetInfo.levelBG:SetTexture(nil)
+	--PetJournal.PetCard.PetInfo.levelBG:SetTexture()
 	AS:SkinTexture(PetJournal.PetCard.PetInfo.icon)
 	AS:CreateBackdrop(PetJournal.PetCard.PetInfo)
 	PetJournal.PetCard.PetInfo.Backdrop:SetOutside(PetJournal.PetCard.PetInfo.icon)
@@ -359,7 +359,7 @@ function AS:Blizzard_Collections(event, addon)
 			Button.special:SetPoint('BOTTOMRIGHT', Button.Backdrop, 'BOTTOMRIGHT', -2, 2)
 		end
 
-		Button.levelBackground:SetTexture(nil)
+		Button.levelBackground:SetTexture()
 
 		Button.name:SetPoint('LEFT', Button, 'RIGHT', 4, 8)
 		Button.level:SetPoint('TOPLEFT', Button.levelBackground,'TOPLEFT', 25, 2)

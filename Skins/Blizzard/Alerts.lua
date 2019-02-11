@@ -9,7 +9,7 @@ function AS:Blizzard_Alerts()
 		end
 
 		-- Background
-		frame.Background:SetTexture(nil)
+		frame.Background:SetTexture()
 		frame.OldAchievement:SetAlpha(0)
 		frame.glow:SetAlpha(0)
 		frame.shine:SetAlpha(0)

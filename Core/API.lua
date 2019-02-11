@@ -144,7 +144,7 @@ function AS:StripTextures(Object, Kill, Alpha)
 		elseif Alpha then
 			Object:SetAlpha(0)
 		else
-			Object:SetTexture(nil)
+			Object:SetTexture()
 		end
 	else
 		local FrameName = Object.GetName and Object:GetName()
@@ -165,7 +165,7 @@ function AS:StripTextures(Object, Kill, Alpha)
 					elseif Alpha then
 						Region:SetAlpha(0)
 					else
-						Region:SetTexture(nil)
+						Region:SetTexture()
 					end
 				end
 			end
@@ -227,7 +227,7 @@ function AS:Desaturate(frame)
 			if region:IsObjectType('Texture') then
 				local Texture = region:GetTexture()
 				if type(Texture) == 'string' and strlower(Texture) == 'interface\\dialogframe\\ui-dialogbox-corner' then
-					region:SetTexture(nil)
+					region:SetTexture()
 					AS:Kill(region)
 				else
 					region:SetDesaturated(true)
@@ -721,9 +721,10 @@ end
 
 function AS:SkinScrollBar(Frame)
 	if Frame.Backdrop then return end
+	local Parent = Frame:GetParent()
 
-	local ScrollUpButton = GrabScrollBarElement(Frame, 'ScrollUpButton') or GrabScrollBarElement(Frame, 'UpButton') or GrabScrollBarElement(Frame, 'ScrollUp')
-	local ScrollDownButton = GrabScrollBarElement(Frame, 'ScrollDownButton') or GrabScrollBarElement(Frame, 'DownButton') or GrabScrollBarElement(Frame, 'ScrollDown')
+	local ScrollUpButton = GrabScrollBarElement(Frame, 'ScrollUpButton') or GrabScrollBarElement(Frame, 'UpButton') or GrabScrollBarElement(Frame, 'ScrollUp') or GrabScrollBarElement(Parent, 'scrollUp')
+	local ScrollDownButton = GrabScrollBarElement(Frame, 'ScrollDownButton') or GrabScrollBarElement(Frame, 'DownButton') or GrabScrollBarElement(Frame, 'ScrollDown') or GrabScrollBarElement(Parent, 'scrollDown')
 	local Thumb = GrabScrollBarElement(Frame, 'ThumbTexture') or GrabScrollBarElement(Frame, 'thumbTexture') or Frame.GetThumbTexture and Frame:GetThumbTexture()
 
 	AS:SkinBackdropFrame(Frame)
@@ -758,7 +759,7 @@ function AS:SkinTab(Tab)
 	AS:StripTextures(Tab)
 
 	if Tab.GetHighlightTexture and Tab:GetHighlightTexture() then
-		Tab:GetHighlightTexture():SetTexture(nil)
+		Tab:GetHighlightTexture():SetTexture()
 	end
 
 	AS:CreateBackdrop(Tab)
@@ -882,7 +883,7 @@ end
 function AS:SkinTooltip(tooltip, scale)
 	for _, Region in pairs(AS.Blizzard.Tooltip) do
 		if tooltip[Region] then
-			tooltip[Region]:SetTexture(nil)
+			tooltip[Region]:SetTexture()
 		end
 	end
 

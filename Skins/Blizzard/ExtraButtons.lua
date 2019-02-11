@@ -10,7 +10,7 @@ function AS:Blizzard_AbilityButton()
 	ZoneAbilityFrame.SpellButton.Cooldown:SetInside()
 	ZoneAbilityFrame.SpellButton.Cooldown:SetSwipeColor(0, 0, 0, 1)
 	ZoneAbilityFrame.SpellButton.Cooldown:SetDrawBling(false)
-	hooksecurefunc("ZoneAbilityFrame_Update", function(self) self.SpellButton.Style:SetTexture(nil) end)
+	hooksecurefunc("ZoneAbilityFrame_Update", function(self) self.SpellButton.Style:SetTexture() end)
 end
 
 function AS:Blizzard_ExtraActionButton()
@@ -20,7 +20,7 @@ function AS:Blizzard_ExtraActionButton()
 	AS:SkinTexture(ExtraActionButton1.icon)
 	ExtraActionButton1.icon:SetDrawLayer('ARTWORK')
 	ExtraActionButton1.icon:SetInside()
-	hooksecurefunc("ExtraActionBar_Update", function() ExtraActionBarFrame.button.style:SetTexture(nil) end)
+	hooksecurefunc("ExtraActionBar_Update", function() ExtraActionBarFrame.button.style:SetTexture() end)
 end
 
 AS:RegisterSkin('Blizzard_AbilityButton', AS.Blizzard_AbilityButton)

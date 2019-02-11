@@ -241,8 +241,8 @@ function AS:Blizzard_AuctionUI(event, addon)
 	AS:CreateBackdrop(BrowseWowTokenResultsToken)
 	AS:SkinTexture(BrowseWowTokenResultsTokenIconTexture, true)
 	BrowseWowTokenResultsTokenIconTexture.Backdrop:SetBackdropBorderColor(BrowseWowTokenResultsToken.IconBorder:GetVertexColor())
-	BrowseWowTokenResultsToken.IconBorder:SetTexture(nil)
-	BrowseWowTokenResultsToken.ItemBorder:SetTexture(nil)
+	BrowseWowTokenResultsToken.IconBorder:SetTexture()
+	BrowseWowTokenResultsToken.ItemBorder:SetTexture()
 
 	AS:UnregisterSkinEvent(addon, event)
 end
