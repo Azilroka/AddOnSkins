@@ -572,8 +572,8 @@ function AS:SkinDropDownBox(Frame, Width)
 
 	AS:CreateBackdrop(Frame, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
-	Frame.Backdrop:Point('TOPLEFT', 20, -6)
-	Frame.Backdrop:Point('BOTTOMRIGHT', Button, 'BOTTOMRIGHT', 2, -2)
+	Frame.Backdrop:SetPoint('TOPLEFT', 20, -6)
+	Frame.Backdrop:SetPoint('BOTTOMRIGHT', Button, 'BOTTOMRIGHT', 2, -2)
 end
 
 function AS:SkinEditBox(EditBox, Width, Height)
@@ -762,7 +762,7 @@ function AS:SkinTab(Tab)
 		Tab:GetHighlightTexture():SetTexture()
 	end
 
-	AS:CreateBackdrop(Tab)
+	AS:CreateBackdrop(Tab, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
 	if Tab.GetFontString then
 		Tab:GetFontString():SetTextColor(1, 1, 1)

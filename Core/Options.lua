@@ -911,7 +911,7 @@ function AS:BuildProfile()
 			['DBMRadarTrans'] = false,
 			['DBMSkinHalf'] = false,
 			['DetailsBackdrop'] = true,
-			['ElvUIStyle'] = false,
+			['ElvUIStyle'] = AS:CheckAddOn('ElvUI') and true or false,
 			['EmbedSystemMessage'] = true,
 			['HideChatFrame'] = 'NONE',
 			['HighlightColor'] = { 1, .8, .1 },

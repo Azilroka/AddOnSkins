@@ -18,7 +18,7 @@ function AS:Blizzard_AddonManager()
 
 	AS:SkinCheckBox(AddonListForceLoad)
 	AddonListForceLoad:SetSize(26, 26)
-	AS:SkinDropDownBox(AddonCharacterDropDown)
+	AS:SkinDropDownBox(AddonCharacterDropDown, 165)
 
 	AS:SkinCloseButton(AddonList.CloseButton)
 
