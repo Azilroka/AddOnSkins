@@ -409,7 +409,6 @@ function AS:Blizzard_Collections(event, addon)
 			end
 		end
 		if Frame.PendingTransmogFrame then
-			Frame.PendingTransmogFrame.Glowframe:SetAtlas(nil)
 			AS:CreateBackdrop(Frame.PendingTransmogFrame.Glowframe)
 			Frame.PendingTransmogFrame.Glowframe.Backdrop:SetOutside()
 			Frame.PendingTransmogFrame.Glowframe.Backdrop:SetBackdropColor(0, 0, 0, 0)

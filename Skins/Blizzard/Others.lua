@@ -6,9 +6,12 @@ function AS:Blizzard_Others()
 		if navButton and not navButton.isSkinned then
 			AS:SkinButton(navButton, true)
 			if navButton.MenuArrowButton then
-				AS:SkinArrowButton(navButton.MenuArrowButton)
-				navButton.MenuArrowButton:SetBackdrop(nil)
-				navButton.MenuArrowButton:SetSize(22, 22)
+				navButton.MenuArrowButton:StripTextures()
+				if navButton.MenuArrowButton.Art then
+					navButton.MenuArrowButton.Art:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
+					navButton.MenuArrowButton.Art:SetTexCoord(0, 1, 0, 1)
+					navButton.MenuArrowButton.Art:SetRotation(3.14)
+				end
 			end
 
 			navButton.xoffset = 1
