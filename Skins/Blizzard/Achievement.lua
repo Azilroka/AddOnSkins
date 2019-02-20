@@ -69,7 +69,6 @@ end
 
 function AS:SkinAchievementStatusBar(StatusBar)
 	AS:SkinStatusBar(StatusBar)
-	StatusBar:SetStatusBarColor(.1, .39, .1)
 
 	local StatusBarName = StatusBar:GetName()
 	local title, label, text = StatusBar.title or _G[StatusBarName..'Title'], StatusBar.label or _G[StatusBarName..'Label'], StatusBar.text or _G[StatusBarName..'Text']

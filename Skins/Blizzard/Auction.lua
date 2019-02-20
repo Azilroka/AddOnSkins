@@ -10,10 +10,6 @@ function AS:Blizzard_AuctionUI(event, addon)
 
 	AS:SkinCloseButton(AuctionFrameCloseButton)
 
-	for i = 1, AuctionFrame.numTabs do
-		AS:SkinTab(_G["AuctionFrameTab"..i])
-	end
-
 	local Buttons = {
 		BrowseSearchButton,
 		BrowseResetButton,
@@ -84,6 +80,10 @@ function AS:Blizzard_AuctionUI(event, addon)
 
 	for _, EditBox in pairs(EditBoxes) do
 		AS:SkinEditBox(EditBox)
+	end
+
+	for i = 1, AuctionFrame.numTabs do
+		AS:SkinTab(_G["AuctionFrameTab"..i])
 	end
 
 	for _, Tab in pairs(SortTabs) do
@@ -207,7 +207,7 @@ function AS:Blizzard_AuctionUI(event, addon)
 	AuctionProgressBar.Text:ClearAllPoints()
 	AuctionProgressBar.Text:SetPoint("CENTER")
 
-	AS:SkinStatusBar(AuctionProgressBar, true)
+	AS:SkinStatusBar(AuctionProgressBar)
 	AuctionProgressBar:SetHeight(24)
 
 	for Frame, NumButtons in pairs({ ['Browse'] = NUM_BROWSE_TO_DISPLAY, ['Auctions'] = NUM_AUCTIONS_TO_DISPLAY, ['Bid'] = NUM_BIDS_TO_DISPLAY }) do

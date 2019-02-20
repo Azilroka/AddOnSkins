@@ -22,6 +22,9 @@ function AS:Blizzard_VoidStorage(event, addon)
 	AS:SkinCloseButton(VoidStorageBorderFrame.CloseButton)
 	AS:SkinEditBox(VoidItemSearchBox)
 
+	_G.VoidStoragePurchaseFrame:SetFrameStrata('DIALOG')
+	_G.VoidStoragePurchaseFrame:SetTemplate()
+
 	for _, Frame in pairs({ 'Page1', 'Page2' }) do
 		AS:SkinButton(VoidStorageFrame[Frame], true)
 		AS:StyleButton(VoidStorageFrame[Frame])

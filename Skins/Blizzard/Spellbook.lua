@@ -93,7 +93,7 @@ function AS:Blizzard_Spellbook()
 		Button.missingHeader:SetTextColor(1, 1, 1)
 		Button.missingText:SetTextColor(1, 1, 1)
 
-		AS:SkinStatusBar(Button.statusBar, true)
+		AS:SkinStatusBar(Button.statusBar)
 		Button.statusBar.Backdrop:SetOutside(Button.statusBar, 1, 1)
 		Button.statusBar.rankText:SetPoint("CENTER")
 

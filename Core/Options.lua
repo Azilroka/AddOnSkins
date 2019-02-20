@@ -191,6 +191,11 @@ AS.Options = {
 							order = 4,
 							name = 'Selected / Checked',
 						},
+						StatusBarColor = {
+							type = 'color',
+							order = 5,
+							name = 'Status Bars',
+						},
 					},
 				},
 				dbm = {
@@ -920,6 +925,7 @@ function AS:BuildProfile()
 			['Parchment'] = false,
 			['RecountBackdrop'] = true,
 			['SelectedColor'] = { 0, 0.44, .87 },
+			['StatusBarColor'] = { .01, .39, .1 },
 			['SkadaBackdrop'] = true,
 			['SkinDebug'] = false,
 			['SkinTemplate'] = 'Transparent',

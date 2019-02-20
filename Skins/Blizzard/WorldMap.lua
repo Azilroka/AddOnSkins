@@ -416,39 +416,67 @@ function AS:Blizzard_Quest()
 end
 
 function AS:Blizzard_WorldMap()
+	local WorldMapFrame = _G.WorldMapFrame
+	local QuestMapFrame = _G.QuestMapFrame
+	local QuestScrollFrame = _G.QuestScrollFrame
+	local QuestScrollFrameScrollBar = _G.QuestScrollFrameScrollBar
+
 	AS:SkinBackdropFrame(WorldMapFrame)
 	AS:CreateShadow(WorldMapFrame.Backdrop)
-	AS:SkinCloseButton(WorldMapFrameCloseButton)
-
+	AS:SkinCloseButton(WorldMapFrame.BorderFrame.CloseButton)
 	AS:Kill(WorldMapFrame.BorderFrame.Tutorial)
 
 	AS:StripTextures(WorldMapFrame.NavBar)
 	AS:StripTextures(WorldMapFrame.NavBar.overlay)
 
-	AS:SkinButton(WorldMapFrameHomeButton)
-	WorldMapFrameHomeButton.xoffset = 1
-	WorldMapFrameHomeButton:SetPoint('LEFT', -60, 0)
-	WorldMapFrameHomeButton.text:SetFont(AS.Font, 13)
-	WorldMapFrameHomeButton.text:ClearAllPoints()
-	WorldMapFrameHomeButton.text:SetPoint('CENTER')
+	AS:SkinButton(WorldMapFrame.NavBar.homeButton)
+	WorldMapFrame.NavBar.homeButton.xoffset = 1
+	WorldMapFrame.NavBar.homeButton.text:SetFont(AS.Font, 13)
+
+	AS:SkinMaxMinFrame(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame)
+	AS:SkinArrowButton(WorldMapFrame.SidePanelToggle.CloseButton, 'left')
+	AS:SkinArrowButton(WorldMapFrame.SidePanelToggle.OpenButton, 'right')
+
+	AS:SkinDropDownBox(WorldMapFrame.overlayFrames[1])
+
+	AS:StripTextures(WorldMapFrame.overlayFrames[2])
+	WorldMapFrame.overlayFrames[2].Icon:SetTexture([[Interface\Minimap\Tracking\None]])
+	WorldMapFrame.overlayFrames[2]:SetHighlightTexture([[Interface\Minimap\Tracking\None]], "ADD")
+	WorldMapFrame.overlayFrames[2]:GetHighlightTexture():SetAllPoints()
+
+	QuestMapFrame.VerticalSeparator:Hide()
 
 	AS:SkinScrollBar(QuestScrollFrameScrollBar)
-
 	AS:SkinButton(QuestMapFrame.DetailsFrame.BackButton)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.AbandonButton)
-	--AS:SkinButton(QuestMapFrame.DetailsFrame.IgnoreButton)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.ShareButton, true)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.TrackButton)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.CompleteQuestFrame.CompleteButton, true)
 
-	AS:SkinFrame(QuestMapFrame.QuestsFrame.StoryTooltip)
 	AS:StripTextures(QuestMapFrame.DetailsFrame.CompleteQuestFrame)
 
-	AS:SkinMaxMinFrame(WorldMapFrame.BorderFrame.MaximizeMinimizeFrame)
+	AS:SetTemplate(QuestMapFrame.QuestsFrame.StoryTooltip, "Transparent")
+	AS:SetTemplate(QuestScrollFrame.WarCampaignTooltip, "Transparent")
+
+	AS:SkinBackdropFrame(QuestScrollFrame.DetailFrame)
+	QuestScrollFrame.Contents.Separator.Divider:Hide()
+	QuestScrollFrame.DetailFrame.Backdrop:SetFrameLevel(1)
+	QuestScrollFrame.DetailFrame.Backdrop:SetPoint("TOPLEFT", QuestScrollFrame.DetailFrame, "TOPLEFT", 3, 1)
+	QuestScrollFrame.DetailFrame.Backdrop:SetPoint("BOTTOMRIGHT", QuestScrollFrame.DetailFrame, "BOTTOMRIGHT", -2, -7)
+	QuestScrollFrame.Background:SetInside(QuestScrollFrame.DetailFrame.Backdrop)
+	QuestScrollFrame.Contents.StoryHeader.Background:SetWidth(251)
+	QuestScrollFrame.Contents.StoryHeader.Background:SetPoint("TOP", 0, -9)
+	QuestScrollFrame.Contents.StoryHeader.Text:SetPoint("TOPLEFT", 18, -20)
+	QuestScrollFrame.Contents.StoryHeader.HighlightTexture:SetAllPoints(QuestScrollFrame.Contents.StoryHeader.Background)
+	QuestScrollFrame.Contents.StoryHeader.HighlightTexture:SetAlpha(0)
+	QuestScrollFrameScrollBar:SetPoint("TOPLEFT", QuestScrollFrame.DetailsFrame, "TOPRIGHT", 1, -15)
+	QuestScrollFrameScrollBar:SetPoint("BOTTOMLEFT", QuestScrollFrame.DetailsFrame, "BOTTOMRIGHT", 6, 10)
 
 	if not AS.ParchmentEnabled then
-		AS:StripTextures(QuestMapFrame.DetailsFrame, true)
-		AS:StripTextures(QuestMapFrame.DetailsFrame.RewardsFrame)
+		AS:SkinBackdropFrame(QuestMapFrame.DetailsFrame)
+		QuestMapFrame.DetailsFrame.Backdrop:SetPoint('TOPLEFT', 0, 0)
+		QuestMapFrame.DetailsFrame.Backdrop:SetPoint('BOTTOMRIGHT', QuestMapFrame.DetailsFrame.RewardsFrame, 'TOPRIGHT', 0, 1)
+		AS:SkinFrame(QuestMapFrame.DetailsFrame.RewardsFrame)
 		AS:SkinScrollBar(QuestMapFrame.DetailsFrame.ScrollFrame.ScrollBar)
 	end
 end

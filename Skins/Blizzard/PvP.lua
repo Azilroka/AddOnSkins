@@ -135,13 +135,12 @@ function AS:Blizzard_PVPUI(event, addon)
 		AS:SkinCheckBox(Frame.TankIcon.checkButton, true)
 		AS:SkinCheckBox(Frame.HealerIcon.checkButton, true)
 
-		AS:SkinStatusBar(Frame.ConquestBar)
+		AS:SkinStatusBar(Frame.ConquestBar, AS.Faction == "Alliance" and {0.05, 0.15, 0.36} or {0.63, 0.09, 0.09})
 		Frame.ConquestBar.Reward.Ring:Hide()
 		Frame.ConquestBar.Reward.CircleMask:Hide()
 		AS:SkinTexture(Frame.ConquestBar.Reward.Icon, true)
 
 		Frame.ConquestBar.Reward:SetPoint("LEFT", Frame.ConquestBar, "RIGHT", -8, 0)
-		Frame.ConquestBar:SetStatusBarColor(unpack(AS.Faction == "Alliance" and {0.05, 0.15, 0.36} or {0.63, 0.09, 0.09}))
 
 		hooksecurefunc(Frame.ConquestBar.Reward.Icon, 'SetTexture', function(self) -- Code taken from :GetConquestLevelInfo the function isn't returning the correct id somehow.
 			local Quality

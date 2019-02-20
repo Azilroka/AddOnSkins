@@ -241,17 +241,17 @@ function AS:Desaturate(frame)
 
 		if Normal then
 			Normal:SetDesaturated(true)
-			Normal.SetDesaturated = AS.Noop
+			hooksecurefunc(Normal, 'SetDesaturated', function(self, value) if value ~= true then self:SetDesaturated(true) end end)
 		end
 
 		if Pushed then
 			Pushed:SetDesaturated(true)
-			Pushed.SetDesaturated = AS.Noop
+			hooksecurefunc(Pushed, 'SetDesaturated', function(self, value) if value ~= true then self:SetDesaturated(true) end end)
 		end
 
 		if Highlight then
 			Highlight:SetDesaturated(true)
-			Highlight.SetDesaturated = AS.Noop
+			hooksecurefunc(Highlight, 'SetDesaturated', function(self, value) if value ~= true then self:SetDesaturated(true) end end)
 		end
 	end
 end
@@ -479,15 +479,9 @@ function AS:SkinCheckBox(CheckBox)
 		end
 	end)
 
-	hooksecurefunc(CheckBox, "SetNormalTexture", function(f, t)
-		if t ~= "" then f:SetNormalTexture("") end
-	end)
-	hooksecurefunc(CheckBox, "SetPushedTexture", function(f, t)
-		if t ~= "" then f:SetPushedTexture("") end
-	end)
-	hooksecurefunc(CheckBox, "SetHighlightTexture", function(f, t)
-		if t ~= "" then f:SetDisabledTexture("") end
-	end)
+	hooksecurefunc(CheckBox, "SetNormalTexture", function(f, t) if t ~= "" then f:SetNormalTexture("") end end)
+	hooksecurefunc(CheckBox, "SetPushedTexture", function(f, t) if t ~= "" then f:SetPushedTexture("") end end)
+	hooksecurefunc(CheckBox, "SetHighlightTexture", function(f, t) if t ~= "" then f:SetDisabledTexture("") end end)
 
 	CheckBox.isSkinned = true
 end
@@ -572,6 +566,7 @@ function AS:SkinDropDownBox(Frame, Width)
 
 	AS:CreateBackdrop(Frame, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
+	Frame.Backdrop:SetFrameLevel(Frame:GetFrameLevel())
 	Frame.Backdrop:SetPoint('TOPLEFT', 20, -6)
 	Frame.Backdrop:SetPoint('BOTTOMRIGHT', Button, 'BOTTOMRIGHT', 2, -2)
 end
@@ -591,6 +586,7 @@ function AS:SkinEditBox(EditBox, Width, Height)
 	end
 
 	AS:CreateBackdrop(EditBox, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
+	EditBox.Backdrop:SetFrameLevel(EditBox:GetFrameLevel())
 
 	if EditBox.GetTextInsets and EditBox.SetTextInsets then
 		local Left, Right, Top, Bottom = EditBox:GetTextInsets()
@@ -699,23 +695,16 @@ function AS:SkinRadioButton(Button)
 	Disabled:SetVertexColor(.3, .3, .3)
 	Disabled:AddMaskTexture(OutsideMask)
 
-	hooksecurefunc(Button, "SetNormalTexture", function(f, t)
-		if t ~= "" then f:SetNormalTexture("") end
-	end)
-	hooksecurefunc(Button, "SetPushedTexture", function(f, t)
-		if t ~= "" then f:SetPushedTexture("") end
-	end)
-	hooksecurefunc(Button, "SetHighlightTexture", function(f, t)
-		if t ~= "" then f:SetDisabledTexture("") end
-	end)
-	hooksecurefunc(Button, "SetDisabledTexture", function(f, t)
-		if t ~= "" then f:SetDisabledTexture("") end
-	end)
+	hooksecurefunc(Button, "SetNormalTexture", function(f, t) if t ~= "" then f:SetNormalTexture("") end end)
+	hooksecurefunc(Button, "SetPushedTexture", function(f, t) if t ~= "" then f:SetPushedTexture("") end end)
+	hooksecurefunc(Button, "SetHighlightTexture", function(f, t) if t ~= "" then f:SetHighlightTexture("") end end)
+	hooksecurefunc(Button, "SetDisabledTexture", function(f, t) if t ~= "" then f:SetDisabledTexture("") end end)
+
 	Button.isSkinned = true
 end
 
 local function GrabScrollBarElement(frame, element)
-	local FrameName = frame:GetName()
+	local FrameName = frame:GetName() or frame:GetDebugName()
 	return frame[element] or FrameName and (_G[FrameName..element] or strfind(FrameName, element)) or nil
 end
 
@@ -746,6 +735,8 @@ function AS:SkinScrollBar(Frame)
 		Thumb.Backdrop:SetFrameLevel(Thumb.Backdrop:GetFrameLevel() + 2)
 		Thumb.Backdrop:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
 		Thumb.Backdrop:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+
+		Frame.Thumb = Thumb
 
 		if AS:CheckAddOn('ElvUI') then
 			Thumb.Backdrop:SetBackdropColor(0.6, 0.6, 0.6)
@@ -784,6 +775,7 @@ end
 function AS:SkinSlideBar(Frame, MoveText)
 	AS:SkinBackdropFrame(Frame, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 	Frame.Backdrop:SetAllPoints()
+	Frame.Backdrop:SetFrameLevel(Frame:GetFrameLevel())
 
 	hooksecurefunc(Frame, "SetBackdrop", function(self, backdrop) if backdrop ~= nil then self:SetBackdrop(nil) end end)
 
@@ -823,21 +815,39 @@ function AS:StyleButton(Button)
 		Button:SetHighlightTexture(AS.Blank)
 		Button:GetHighlightTexture():SetVertexColor(1, 1, 1, .2)
 		Button:GetHighlightTexture():SetInside()
-		Button.SetHighlightTexture = AS.Noop
+		hooksecurefunc(Button, "SetHighlightTexture", function(f, t)
+			if t ~= AS.Blank then
+				Button:SetHighlightTexture(AS.Blank)
+				Button:GetHighlightTexture():SetVertexColor(1, 1, 1, .2)
+				Button:GetHighlightTexture():SetInside()
+			end
+		end)
 	end
 
 	if Button.SetPushedTexture then
 		Button:SetPushedTexture(AS.Blank)
 		Button:GetPushedTexture():SetVertexColor(.9, .8, .1, .5)
 		Button:GetPushedTexture():SetInside()
-		Button.SetPushedTexture = AS.Noop
+		hooksecurefunc(Button, "SetPushedTexture", function(f, t)
+			if t ~= AS.Blank then
+				Button:SetPushedTexture(AS.Blank)
+				Button:GetPushedTexture():SetVertexColor(.9, .8, .1, .5)
+				Button:GetPushedTexture():SetInside()
+			end
+		end)
 	end
 
 	if Button.GetCheckedTexture then
-		Button:SetPushedTexture(AS.Blank)
+		Button:SetCheckedTexture(AS.Blank)
 		Button:GetCheckedTexture():SetVertexColor(0, 1, 0, .5)
 		Button:GetCheckedTexture():SetInside()
-		Button.GetCheckedTexture = AS.Noop
+		hooksecurefunc(Button, "SetCheckedTexture", function(f, t)
+			if t ~= AS.Blank then
+				Button:SetCheckedTexture(AS.Blank)
+				Button:GetCheckedTexture():SetVertexColor(0, 1, 0, .5)
+				Button:GetCheckedTexture():SetInside()
+			end
+		end)
 	end
 
 	local Cooldown = Button:GetName() and _G[Button:GetName()..'Cooldown'] or Button.Cooldown or Button.cooldown or nil
@@ -867,16 +877,13 @@ function AS:SkinBackdropFrame(frame, template, override, kill, setpoints)
 	end
 end
 
-function AS:SkinStatusBar(frame, ClassColor)
-	AS:SkinBackdropFrame(frame)
-	frame:SetStatusBarTexture(AS.NormTex)
-	if ClassColor then
-		frame:SetStatusBarColor(unpack(AS.ClassColor))
-	else
-		frame:SetStatusBarColor(unpack(frame.GetStatusBarColor and { frame:GetStatusBarColor() } or AS.Color))
-	end
+function AS:SkinStatusBar(Frame, Color)
+	AS:SkinBackdropFrame(Frame)
+	Frame.Backdrop:SetFrameLevel(Frame:GetFrameLevel())
+	Frame:SetStatusBarTexture(AS.NormTex)
+	Frame:SetStatusBarColor(unpack(Color or AS:CheckOption('StatusBarColor')))
 	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
-		ElvUI[1]:RegisterStatusBar(frame)
+		ElvUI[1]:RegisterStatusBar(Frame)
 	end
 end
 
