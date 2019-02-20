@@ -11,7 +11,6 @@ function AS:ClassicQuestLog()
 	ClassicQuestLog.count:StripTextures()
 	ClassicQuestLogScrollFrame:StripTextures()
 	ClassicQuestLogDetailScrollFrame:StripTextures()
-	AS:Kill(ClassicQuestLogPortraitFrame)
 
 	for i = 1, ClassicQuestLog:GetNumChildren() do
 		local object = select(i, ClassicQuestLog:GetChildren())

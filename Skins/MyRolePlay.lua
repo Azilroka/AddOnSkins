@@ -4,11 +4,7 @@ if not AS:CheckAddOn('MyRolePlay') then return end
 
 function AS:MyRolePlay()
 	AS:SkinFrame(MyRolePlayBrowseFrame)
-	MyRolePlayBrowseFramePortraitFrame:Hide()
-	MyRolePlayBrowseFrameTopBorder:Hide()
-	MyRolePlayBrowseFrameTopRightCorner:Hide()
-	MyRolePlayBrowseFrameInset:DisableDrawLayer("BORDER")
-	MyRolePlayBrowseFrameInsetBg:Hide()
+
 	AS:SkinTab(MyRolePlayBrowseFrameTab1)
 	AS:SkinTab(MyRolePlayBrowseFrameTab2)
 	MyRolePlayBrowseFramePortrait:Hide()
@@ -18,7 +14,6 @@ function AS:MyRolePlay()
 	AS:SkinTab(CharacterFrameTab4)
 
 	MyRolePlayMultiEditFrame:DisableDrawLayer("BORDER")
-	MyRolePlayMultiEditFrameBg:Hide()
 	MyRolePlayMultiEditFrameScrollFrameTop:Hide()
 	MyRolePlayMultiEditFrameScrollFrameBottom:Hide()
 	MyRolePlayCharacterFrame.ver:SetPoint("TOP", CharacterFrameInset, "TOP", -110, 17)
@@ -45,16 +40,6 @@ function AS:MyRolePlay()
 	MyRolePlayCharacterFrame_ProfileComboBox_Button:ClearAllPoints()
 	MyRolePlayCharacterFrame_ProfileComboBox_Button:SetPoint("RIGHT", MyRolePlayCharacterFrame_ProfileComboBox, "RIGHT", 0 , 0)
 	AS:SkinScrollBar(MyRolePlayMultiEditFrameScrollFrameScrollBar)
-
-	AS:SkinCheckBox(MyRolePlayOptionsPanel_Enable)
-	AS:SkinCheckBox(MyRolePlayOptionsPanel_MRPButton)
-	AS:SkinCheckBox(MyRolePlayOptionsPanel_RPChatName)
-	AS:SkinCheckBox(MyRolePlayOptionsPanel_Biog)
-	AS:SkinCheckBox(MyRolePlayOptionsPanel_FormAC)
-	AS:SkinCheckBox(MyRolePlayOptionsPanel_EquipAC)
-	AS:SkinDropDownBox(MyRolePlayOptionsPanel_TTStyle)
-	AS:SkinDropDownBox(MyRolePlayOptionsPanel_HeightUnit)
-	AS:SkinDropDownBox(MyRolePlayOptionsPanel_WeightUnit)
 
 	local MRPFrames = {
 		MyRolePlayBrowseFrame.Appearance,
