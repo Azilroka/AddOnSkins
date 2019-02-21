@@ -32,7 +32,7 @@ function AS:WeakAuras()
 		if frame.icon then
 			if frame.cooldown and AS:CheckOption('WeakAuraIconCooldown', 'ElvUI') then
 				frame.cooldown.CooldownSettings = {
-					['font'] = E.Libs.LSM:Fetch('font', E.db.cooldown.fonts.font),
+					['font'] = AS.LSM:Fetch('font', E.db.cooldown.fonts.font),
 					['fontSize'] = E.db.cooldown.fonts.fontSize,
 					['fontOutline'] = E.db.cooldown.fonts.fontOutline,
 				}
