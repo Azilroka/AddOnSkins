@@ -7,7 +7,7 @@ function AS:BigWigs(event, addon)
 		if BigWigsLoader then
 			BigWigsLoader.RegisterMessage('AddOnSkins', "BigWigs_FrameCreated", function(event, frame, name)
 				if name == "QueueTimer" then
-					AS:SkinStatusBar(frame)
+					AS:SkinStatusBar(frame, {1, 0, 0})
 					frame:ClearAllPoints()
 					frame:SetPoint('TOP', '$parent', 'BOTTOM', 0, AS:AdjustForTheme(-2))
 					frame:SetHeight(16)
