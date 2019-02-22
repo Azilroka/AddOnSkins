@@ -44,6 +44,13 @@ local Changelog = {
 		'Core: Themes & Shadows',
 		'Updated: Allied Races, AzeriteUI, World Map, Quest'
 	},
+	['4.09'] = {
+		'Core: SetTexture(), StatusBarColor, NavButtons',
+		'Updated: Immersion, PetTracker, Inspect, Error Frame, FlyPlateBuffs, WA, AddOnManger, ClassicQuestLog, MyRolePlay, Collections',
+	},
+	['4.10'] = {
+		'Updated: WA Font',
+	},
 }
 
 local DEVELOPERS = {
