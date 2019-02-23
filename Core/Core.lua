@@ -252,6 +252,7 @@ function AS:StartSkinning(event)
 	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
 	AS.Mult = AS:GetUIScale()
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
+	AS.ProperVersion = strlen(AS.Version) == 3 and tostring(AS.Version)..'0' or AS.Version
 
 	AS:UpdateMedia()
 
@@ -305,6 +306,13 @@ function AS:StartSkinning(event)
 
 	if AS.FoundError then
 		AS:BugReportFrame(1)
+	end
+
+	AS:CreateChangeLog()
+
+	if AS:CheckOption('ChangeLogVersion') == nil or AS:CheckOption('ChangeLogVersion') < AS.ProperVersion then
+		AS:SetOption('ChangeLogVersion', AS.ProperVersion)
+		AS:ToggleChangeLog()
 	end
 
 	AS.RunOnce = true
@@ -462,6 +470,74 @@ function AS:BugReportFrame(ErrorIndex)
 	BugReportFrame.BugTitle:SetText(AS.SkinErrors[ErrorIndex].Name)
 	BugReportFrame.BugError:SetText(AS.SkinErrors[ErrorIndex].Error)
 	BugReportFrame:Show()
+end
+
+function AS:CreateChangeLog()
+	local ChangeLogFrame = CreateFrame("Frame", 'AddOnSkins_ChangeLog', UIParent)
+	ChangeLogFrame:Hide()
+	ChangeLogFrame:SetPoint("CENTER")
+	AS:SkinFrame(ChangeLogFrame)
+	ChangeLogFrame:SetMovable(true)
+	ChangeLogFrame:EnableMouse(true)
+	ChangeLogFrame:RegisterForDrag("LeftButton")
+	ChangeLogFrame:SetScript("OnDragStart", ChangeLogFrame.StartMoving)
+	ChangeLogFrame:SetScript("OnDragStop", ChangeLogFrame.StopMovingOrSizing)
+	ChangeLogFrame:SetClampedToScreen(true)
+	ChangeLogFrame.Time = 6
+
+	ChangeLogFrame.Title = ChangeLogFrame:CreateFontString(nil, 'OVERLAY')
+	ChangeLogFrame.Title:SetFont(AS.Font, 16)
+	ChangeLogFrame.Title:SetPoint("TOP", ChangeLogFrame, "TOP", 0, -3)
+	ChangeLogFrame.Title:SetSize(400, 20)
+	ChangeLogFrame.Title:SetFormattedText('%s - ChangeLog %s', AS.Title, WrapTextInColorCode(AS.ProperVersion, "FF00C0FA"))
+
+	ChangeLogFrame.Close = CreateFrame("Button", nil, ChangeLogFrame, "UIPanelButtonTemplate")
+	ChangeLogFrame.Close:Point("BOTTOM", ChangeLogFrame, "BOTTOM", 0, 10)
+	ChangeLogFrame.Close:SetText(CLOSE)
+	ChangeLogFrame.Close:SetSize(80, 20)
+	ChangeLogFrame.Close:SetScript("OnClick", function() ChangeLogFrame:Hide() end)
+	AS:SkinButton(ChangeLogFrame.Close)
+	ChangeLogFrame.Close:Disable()
+
+	ChangeLogFrame.Changes = {}
+
+	local offset, i = 0, 0
+	for _, Change in pairs(AS.ChangeLog[AS.ProperVersion]) do
+		i, offset = i + 1, offset + 16
+		ChangeLogFrame.Changes[i] = ChangeLogFrame:CreateFontString(nil, 'OVERLAY')
+		ChangeLogFrame.Changes[i]:SetSize(375, 16)
+		ChangeLogFrame.Changes[i]:SetFont(AS.Font, 14)
+		ChangeLogFrame.Changes[i]:SetPoint("TOP", ChangeLogFrame.Title, "BOTTOM", 5, -offset)
+		ChangeLogFrame.Changes[i]:SetText(Change)
+		ChangeLogFrame.Changes[i]:SetWordWrap(true)
+	end
+
+	ChangeLogFrame:SetSize(400, 100 + (i * 16))
+
+	AS.ChangeLogFrame = ChangeLogFrame
+end
+
+function AS:ChangeLogTimer()
+	AS.ChangeLogFrame.Time = (AS.ChangeLogFrame.Time < 0 and 0 or AS.ChangeLogFrame.Time - 1)
+
+	if AS.ChangeLogFrame.Time == 0 then
+		AS.ChangeLogFrame.Close:SetText(CLOSE)
+		AS.ChangeLogFrame.Close:Enable()
+		AS:CancelTimer(AS.ChangeLogFrameTimer)
+	else
+		AS.ChangeLogFrame.Close:Disable()
+		AS.ChangeLogFrame.Close:SetFormattedText('%s (%s)', CLOSE, AS.ChangeLogFrame.Time)
+	end
+end
+
+function AS:ToggleChangeLog()
+	PlaySound(SOUNDKIT.IG_MAINMENU_OPTION_CHECKBOX_OFF or 857)
+	if AS.ChangeLogFrame:IsShown() then
+		AS.ChangeLogFrame:Hide()
+	else
+		AS.ChangeLogFrame:Show()
+		AS.ChangeLogFrameTimer = AS:ScheduleRepeatingTimer("ChangeLogTimer", 1)
+	end
 end
 
 AS:RegisterEvent('ADDON_LOADED', 'Init')

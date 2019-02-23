@@ -4,7 +4,7 @@ local sort, pairs, gsub, strfind, strlower, strtrim = sort, pairs, gsub, strfind
 local DEVELOPER_STRING = ''
 local LINE_BREAK = '\n'
 
-local Changelog = {
+AS.ChangeLog = {
 	['4.00'] = {
 		'Core: API, Options & Embed',
 		'Removed: WeakAura & TellMeWhen',
@@ -784,7 +784,7 @@ local Skins = {
 	},
 }
 
-for Version, Table in pairs(Changelog) do
+for Version, Table in pairs(AS.ChangeLog) do
 	AS.Options.args.about.args.changelog.args[Version] = {
 		type = 'group',
 		name = Version,
