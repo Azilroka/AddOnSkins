@@ -247,6 +247,13 @@ function AS:UpdateMedia()
 end
 
 function AS:StartSkinning(event)
+	if AS:CheckAddOn('ElvUI') then
+		if tonumber(ElvUI[1].version) < 10.86 then
+			AS:AcceptFrame(format('AddOnSkins is not compatible with ElvUI %s.\nPlease update ElvUI at www.tukui.org', ElvUI[1].version))
+			return
+		end
+	end
+
 	AS:UnregisterEvent(event)
 
 	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
