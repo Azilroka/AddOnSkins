@@ -88,37 +88,29 @@ function AS:Blizzard_Spellbook()
 
 	-- Professions
 
-	for _, Button in pairs({ PrimaryProfession1, PrimaryProfession2, SecondaryProfession1, SecondaryProfession2, SecondaryProfession3 }) do
-		Button.professionName:SetTextColor(1, 1, 1)
-		Button.missingHeader:SetTextColor(1, 1, 1)
-		Button.missingText:SetTextColor(1, 1, 1)
+	for _, Frame in pairs({ _G.SpellBookProfessionFrame:GetChildren() }) do
+		Frame.professionName:SetTextColor(1, 1, 1)
+		Frame.missingHeader:SetTextColor(1, 1, 1)
+		Frame.missingText:SetTextColor(1, 1, 1)
 
-		AS:SkinStatusBar(Button.statusBar)
-		Button.statusBar.Backdrop:SetOutside(Button.statusBar, 1, 1)
-		Button.statusBar.rankText:SetPoint("CENTER")
+		AS:SkinStatusBar(Frame.statusBar)
+		Frame.statusBar.rankText:SetPoint("CENTER")
 
-		--Button.statusBar:SetPoint("TOPLEFT", "$parentRank", "BOTTOMLEFT", 1, -3)
-	end
+		if Frame.icon then
+			Frame.professionName:SetPoint("TOPLEFT", 100, -4)
+			AS:StripTextures(Frame)
+			AS:SkinTexture(Frame.icon, true)
+			Frame.icon:SetAlpha(1)
+			Frame.icon:SetDesaturated(false)
+		end
 
-	for i = 1, 2 do
-		local Button = _G["PrimaryProfession"..i]
-		_G["PrimaryProfession"..i.."IconBorder"]:Hide()
+		for i = 1, 2 do
+			AS:SkinButton(Frame['button'..i], true)
 
-		Button.professionName:SetPoint("TOPLEFT", 100, -4)
-
-		AS:CreateBackdrop(Button.icon)
-		AS:SkinTexture(Button.icon)
-
-		Button.icon:SetAlpha(1)
-		Button.icon:SetDesaturated(false)
-	end
-
-	for _, Button in pairs({ PrimaryProfession1SpellButtonTop, PrimaryProfession1SpellButtonBottom, PrimaryProfession2SpellButtonTop, PrimaryProfession2SpellButtonBottom, SecondaryProfession1SpellButtonLeft, SecondaryProfession1SpellButtonRight, SecondaryProfession2SpellButtonLeft, SecondaryProfession2SpellButtonRight, SecondaryProfession3SpellButtonLeft, SecondaryProfession3SpellButtonRight }) do
-		AS:SkinButton(Button, true)
-
-		if Button.iconTexture then
-			AS:SkinTexture(Button.iconTexture)
-			Button.iconTexture:SetInside()
+			if Frame['button'..i].iconTexture then
+				AS:SkinTexture(Frame['button'..i].iconTexture)
+				Frame['button'..i].iconTexture:SetInside()
+			end
 		end
 	end
 

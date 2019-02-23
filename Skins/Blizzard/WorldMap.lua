@@ -170,7 +170,8 @@ function AS:Blizzard_Quest()
 	local Rewards = { 'MoneyFrame', 'HonorFrame', 'XPFrame', 'SpellFrame', 'SkillPointFrame' }
 
 	for _, frame in pairs(Rewards) do
-		HandleReward(MapQuestInfoRewardsFrame[frame])
+		HandleReward(_G.MapQuestInfoRewardsFrame[frame])
+		HandleReward(_G.QuestInfoRewardsFrame[frame])
 	end
 
 	hooksecurefunc("QuestInfo_GetRewardButton", function(rewardsFrame, index)
