@@ -878,8 +878,8 @@ function AS:SkinBackdropFrame(frame, template, override, kill, setpoints)
 end
 
 function AS:SkinStatusBar(Frame, Color)
+	Frame:SetFrameLevel(Frame:GetFrameLevel() + 1)
 	AS:SkinBackdropFrame(Frame)
-	Frame.Backdrop:SetFrameLevel(Frame:GetFrameLevel())
 	Frame:SetStatusBarTexture(AS.NormTex)
 	Frame:SetStatusBarColor(unpack(Color or AS:CheckOption('StatusBarColor')))
 	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
