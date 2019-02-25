@@ -14,19 +14,6 @@ AS.SkinErrors = {}
 AS.ErrorIndex = 0
 AS.ErrorCurrentIndex = 1
 
-function AS:GetUIScale()
-	local effectiveScale = _G.UIParent:GetEffectiveScale()
-	local magic = effectiveScale
-
-	local scale = max(.64, min(1.15, magic))
-
-	if strlen(scale) > 6 then
-		scale = tonumber(strsub(scale, 0, 6))
-	end
-
-	return magic/scale
-end
-
 function AS:CheckOption(optionName, ...)
 	for i = 1, select('#', ...) do
 		local addon = select(i, ...)
@@ -257,7 +244,7 @@ function AS:StartSkinning(event)
 	AS:UnregisterEvent(event)
 
 	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
-	AS.Mult = AS:GetUIScale()
+	AS.Mult = PixelUtil.GetNearestPixelSize(1, max(0.4, min(1.15, 768 / AS.ScreenHeight)))
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 	AS.ProperVersion = strlen(AS.Version) == 3 and tostring(AS.Version)..'0' or AS.Version
 

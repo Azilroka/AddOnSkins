@@ -206,7 +206,7 @@ function AS:CreateShadow(Frame, NoRegister, Inverted)
 	else
 		Shadow:SetBackdrop({ edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = AS:Scale(3) })
 		Shadow:SetFrameLevel(FrameLevel)
-		Shadow:SetOutside(Frame, AS:Scale(3), AS:Scale(3))
+		Shadow:SetOutside(Frame, 3, 3)
 	end
 
 	Shadow.Inverted = Inverted
