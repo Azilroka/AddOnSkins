@@ -50,7 +50,13 @@ function AS:Blizzard_MacroUI(event, addon)
 		AS:SkinIconButton(_G["MacroButton"..i])
 	end
 
-	AS:Delay(0, function() for i = 1, 90 do AS:SkinIconButton(_G["MacroPopupButton"..i]) end end)
+	AS:Delay(0, function()
+		for i = 1, 90 do
+			if _G["MacroPopupButton"..i] then
+				AS:SkinIconButton(_G["MacroPopupButton"..i])
+			end
+		end
+	end)
 
 	local Buttons = { MacroDeleteButton, MacroNewButton, MacroExitButton, MacroEditButton, MacroSaveButton, MacroCancelButton }
 
