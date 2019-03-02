@@ -244,7 +244,7 @@ function AS:StartSkinning(event)
 	AS:UnregisterEvent(event)
 
 	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
-	AS.Mult = PixelUtil.GetNearestPixelSize(1, max(0.4, min(1.15, 768 / AS.ScreenHeight))) + 0.01
+	AS.Mult = PixelUtil.GetNearestPixelSize(1, AS:Round(max(0.4, min(1.15, 768 / AS.ScreenHeight)), 5))
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 	AS.ProperVersion = strlen(AS.Version) == 3 and tostring(AS.Version)..'0' or AS.Version
 
