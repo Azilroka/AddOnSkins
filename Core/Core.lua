@@ -235,7 +235,7 @@ end
 
 function AS:StartSkinning(event)
 	if AS:CheckAddOn('ElvUI') then
-		if tonumber(ElvUI[1].version) < 10.86 then
+		if tonumber(ElvUI[1].version) < 10.91 then
 			AS:AcceptFrame(format('AddOnSkins is not compatible with ElvUI %s.\nPlease update ElvUI at www.tukui.org', ElvUI[1].version))
 			return
 		end

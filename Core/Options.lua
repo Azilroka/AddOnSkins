@@ -78,6 +78,82 @@ for _, devName in pairs(DEVELOPERS) do
 end
 
 local DefaultTemplates = { ['ClassColor'] = 'Class Color', ['Custom'] = 'Custom', ['Default'] = 'Default', ['Transparent'] = 'Transparent' }
+local BlizzardSkins = {}
+
+local BlizzardNames = {
+	['Blizzard_AbilityButton'] = 'Ability Button',
+	['Blizzard_AchievementUI'] = 'Achievement',
+	['Blizzard_AddonManager'] = 'AddOn Manager',
+	['Blizzard_AdventureMap'] = 'Adventure Map',
+	['Blizzard_Alerts'] = 'Alerts',
+	['Blizzard_AlliedRacesUI'] = 'Allied Races',
+	['Blizzard_ArchaeologyUI'] = 'Archaeology',
+	['Blizzard_ArtifactUI'] = 'Artifact',
+	['Blizzard_AuctionUI'] = 'Auction',
+	['Blizzard_AzeriteRespecUI'] = 'Azerite Respec',
+	['Blizzard_AzeriteUI'] = 'Azerite',
+	['Blizzard_Bags'] = 'Bags',
+	['Blizzard_BarbershopUI'] = 'Barbershop',
+	['Blizzard_BattlefieldMap'] = 'Battlefield Map',
+	['Blizzard_BindingUI'] = 'Keybindings',
+	['Blizzard_BlackMarketUI'] = 'Black Market',
+	['Blizzard_Calendar'] = 'Calendar',
+	['Blizzard_ChallengesUI'] = 'Challenges',
+	['Blizzard_Channels'] = 'Channels',
+	['Blizzard_Character'] = 'Character',
+	['Blizzard_ChatBubbles'] = 'Chat Bubbles',
+	['Blizzard_Collections'] = 'Collections',
+	['Blizzard_Communities'] = 'Communities',
+	['Blizzard_Contribution'] = 'Contribution',
+	['Blizzard_DeathRecap'] = 'Death Recap',
+	['Blizzard_DebugTools'] = 'Debug Tools',
+	['Blizzard_DressUpFrame'] = 'DressUp Frame',
+	['Blizzard_EncounterJournal'] = 'Encounter Journal',
+	['Blizzard_ExtraActionButton'] = 'Extra Action Button',
+	['Blizzard_FlightMap'] = 'Flight Map',
+	['Blizzard_Friends'] = 'Friends',
+	['Blizzard_GarrisonUI'] = 'Garrison',
+	['Blizzard_GuildBankUI'] = 'Guild Bank',
+	['Blizzard_GuildControlUI'] = 'Guild Control',
+	['Blizzard_GuildUI'] = 'Guild',
+	['Blizzard_InspectUI'] = 'Inspect',
+	['Blizzard_IslandsPartyPoseUI'] = 'Islands Party Pose',
+	['Blizzard_IslandsQueueUI'] = 'Islands Queue',
+	['Blizzard_ItemSocketingUI'] = 'Item Socketing',
+	['Blizzard_ItemUpgradeUI'] = 'Item Upgrade',
+	['Blizzard_LookingForGuildUI'] = 'Looking For Guild',
+	['Blizzard_LootFrames'] = 'Loot Frames',
+	['Blizzard_MacroUI'] = 'Macro',
+	['Blizzard_Mail'] = 'Mail',
+	['Blizzard_Merchant'] = 'Merchant',
+	['Blizzard_Options'] = 'Options',
+	['Blizzard_StackSplit'] = 'Stack Split',
+	['Blizzard_ObliterumUI'] = 'Obliterum',
+	['Blizzard_OrderHallUI'] = 'Order Hall',
+	['Blizzard_PartyPoseUI'] = 'Party Pose',
+	['Blizzard_PetStable'] = 'Pet Stable',
+	['Blizzard_PVPUI'] = 'PvP',
+	['Blizzard_PvE'] = 'PvE',
+	['Blizzard_RaidUI'] = 'Raid',
+	['Blizzard_ScrappingMachineUI'] = 'Scrapping Machine',
+	['Blizzard_Spellbook'] = 'Spellbook',
+--	['Blizzard_SocialUI'] = 'Social',
+	['Blizzard_TalentUI'] = 'Talents',
+	['Blizzard_TalkingHeadUI'] = 'Talking Head',
+	['Blizzard_Taxi'] = 'Taxi',
+	['Blizzard_Gossip'] = 'Gossip',
+	['Blizzard_Quest'] = 'Quest',
+	['Blizzard_TimeManager'] = 'TIme Manager',
+	['Blizzard_TradeSkillUI'] = 'Trade Skill',
+	['Blizzard_TradeWindow'] = 'Trade Window',
+	['Blizzard_TrainerUI'] = 'Trainer',
+	['Blizzard_UIWidgets'] = 'UI Widgets',
+	['Blizzard_VoidStorageUI'] = 'Void Storage',
+	['Blizzard_WarboardUI'] = 'Warboard',
+	['Blizzard_WarfrontsPartyPoseUI'] = 'Warfronts Party Pose',
+	['Blizzard_WorldMap'] = 'World Map',
+	['Blizzard_WorldStateScore'] = 'World State Score',
+}
 
 AS.Options = {
 	order = 101,
@@ -272,11 +348,46 @@ AS.Options = {
 			get = function(info) return AS:CheckOption(info[#info]) end,
 			set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
 			args = {
+				enableAll = {
+					order = 1,
+					type = 'execute',
+					name = 'Enable All',
+					func = function()
+						for SkinName in pairs(BlizzardSkins) do
+							AS:SetOption(SkinName, true)
+							if AS:CheckAddOn('ElvUI') then
+								AS:SetElvUIBlizzardSkinOption(SkinName, false)
+							end
+						end
+					end,
+				},
+				disableAll = {
+					order = 2,
+					type = 'execute',
+					name = 'Disable All',
+					func = function()
+						for SkinName in pairs(BlizzardSkins) do
+							AS:SetOption(SkinName, false)
+							if AS:CheckAddOn('ElvUI') then
+								AS:SetElvUIBlizzardSkinOption(SkinName, true)
+							end
+						end
+					end,
+				},
 				description = {
 					type = 'header',
 					name = AS:GetColor(ASL['Blizzard Skins']),
-					order = 0,
+					order = 3,
 				},
+				skins = {
+					order = 4,
+					type = 'group',
+					name = ASL['Blizzard Skins'],
+					guiInline = true,
+					get = function(info) return AS:CheckOption(info[#info]) end,
+					set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
+					args = {},
+				}
 			},
 		},
 		embed = {
@@ -814,81 +925,6 @@ for Name, Table in pairs(Skins) do
 	end
 end
 
-local BlizzardNames = {
-	['Blizzard_AbilityButton'] = 'Ability Button',
-	['Blizzard_AchievementUI'] = 'Achievement',
-	['Blizzard_AddonManager'] = 'AddOn Manager',
-	['Blizzard_AdventureMap'] = 'Adventure Map',
-	['Blizzard_Alerts'] = 'Alerts',
-	['Blizzard_AlliedRacesUI'] = 'Allied Races',
-	['Blizzard_ArchaeologyUI'] = 'Archaeology',
-	['Blizzard_ArtifactUI'] = 'Artifact',
-	['Blizzard_AuctionUI'] = 'Auction',
-	['Blizzard_AzeriteRespecUI'] = 'Azerite Respec',
-	['Blizzard_AzeriteUI'] = 'Azerite',
-	['Blizzard_Bags'] = 'Bags',
-	['Blizzard_BarbershopUI'] = 'Barbershop',
-	['Blizzard_BattlefieldMap'] = 'Battlefield Map',
-	['Blizzard_BindingUI'] = 'Keybindings',
-	['Blizzard_BlackMarketUI'] = 'Black Market',
-	['Blizzard_Calendar'] = 'Calendar',
-	['Blizzard_ChallengesUI'] = 'Challenges',
-	['Blizzard_Channels'] = 'Channels',
-	['Blizzard_Character'] = 'Character',
-	['Blizzard_ChatBubbles'] = 'Chat Bubbles',
-	['Blizzard_Collections'] = 'Collections',
-	['Blizzard_Communities'] = 'Communities',
-	['Blizzard_Contribution'] = 'Contribution',
-	['Blizzard_DeathRecap'] = 'Death Recap',
-	['Blizzard_DebugTools'] = 'Debug Tools',
-	['Blizzard_DressUpFrame'] = 'DressUp Frame',
-	['Blizzard_EncounterJournal'] = 'Encounter Journal',
-	['Blizzard_ExtraActionButton'] = 'Extra Action Button',
-	['Blizzard_FlightMap'] = 'Flight Map',
-	['Blizzard_Friends'] = 'Friends',
-	['Blizzard_GarrisonUI'] = 'Garrison',
-	['Blizzard_GuildBankUI'] = 'Guild Bank',
-	['Blizzard_GuildControlUI'] = 'Guild Control',
-	['Blizzard_GuildUI'] = 'Guild',
-	['Blizzard_InspectUI'] = 'Inspect',
-	['Blizzard_IslandsPartyPoseUI'] = 'Islands Party Pose',
-	['Blizzard_IslandsQueueUI'] = 'Islands Queue',
-	['Blizzard_ItemSocketingUI'] = 'Item Socketing',
-	['Blizzard_ItemUpgradeUI'] = 'Item Upgrade',
-	['Blizzard_LookingForGuildUI'] = 'Looking For Guild',
-	['Blizzard_LootFrames'] = 'Loot Frames',
-	['Blizzard_MacroUI'] = 'Macro',
-	['Blizzard_Mail'] = 'Mail',
-	['Blizzard_Merchant'] = 'Merchant',
-	['Blizzard_Options'] = 'Options',
-	['Blizzard_StackSplit'] = 'Stack Split',
-	['Blizzard_ObliterumUI'] = 'Obliterum',
-	['Blizzard_OrderHallUI'] = 'Order Hall',
-	['Blizzard_PartyPoseUI'] = 'Party Pose',
-	['Blizzard_PetStable'] = 'Pet Stable',
-	['Blizzard_PVPUI'] = 'PvP',
-	['Blizzard_PvE'] = 'PvE',
-	['Blizzard_RaidUI'] = 'Raid',
-	['Blizzard_ScrappingMachineUI'] = 'Scrapping Machine',
-	['Blizzard_Spellbook'] = 'Spellbook',
---	['Blizzard_SocialUI'] = 'Social',
-	['Blizzard_TalentUI'] = 'Talents',
-	['Blizzard_TalkingHeadUI'] = 'Talking Head',
-	['Blizzard_Taxi'] = 'Taxi',
-	['Blizzard_Gossip'] = 'Gossip',
-	['Blizzard_Quest'] = 'Quest',
-	['Blizzard_TimeManager'] = 'TIme Manager',
-	['Blizzard_TradeSkillUI'] = 'Trade Skill',
-	['Blizzard_TradeWindow'] = 'Trade Window',
-	['Blizzard_TrainerUI'] = 'Trainer',
-	['Blizzard_UIWidgets'] = 'UI Widgets',
-	['Blizzard_VoidStorageUI'] = 'Void Storage',
-	['Blizzard_WarboardUI'] = 'Warboard',
-	['Blizzard_WarfrontsPartyPoseUI'] = 'Warfronts Party Pose',
-	['Blizzard_WorldMap'] = 'World Map',
-	['Blizzard_WorldStateScore'] = 'World State Score',
-}
-
 function AS:BuildProfile()
 	local Embed = AS:CheckAddOn('Details') and 'Details' or AS:CheckAddOn('Skada') and 'Skada' or AS:CheckAddOn('Recount') and 'Recount' or ''
 
@@ -996,7 +1032,8 @@ function AS:BuildOptions()
 
 	for _, skinName in pairs(skins) do
 		if strfind(skinName, 'Blizzard_') then
-			AS.Options.args.blizzard.args[skinName] = GenerateOptionTable(skinName)
+			BlizzardSkins[skinName] = true
+			AS.Options.args.blizzard.args.skins.args[skinName] = GenerateOptionTable(skinName)
 		else
 			AS.Options.args.addons.args[skinName] = GenerateOptionTable(skinName)
 		end

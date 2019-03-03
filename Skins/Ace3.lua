@@ -186,14 +186,14 @@ function AS:Ace3()
 			colorSwatch:SetParent(frame.Backdrop)
 			AS:SetInside(colorSwatch, frame.Backdrop)
 
-			if frame.checkers then
-				frame.checkers:ClearAllPoints()
-				frame.checkers:SetParent(frame.Backdrop)
-				AS:SetInside(frame.checkers, frame.Backdrop)
+			if colorSwatch.checkers then
+				colorSwatch.checkers:ClearAllPoints()
+				colorSwatch.checkers:SetParent(frame.Backdrop)
+				AS:SetInside(colorSwatch.checkers, frame.Backdrop)
 			end
 
-			if frame.texture then
-				frame.texture:SetColorTexture(0, 0, 0, 0)
+			if colorSwatch.background then
+				colorSwatch.background:SetColorTexture(0, 0, 0, 0)
 			end
 		elseif TYPE == 'Heading' then
 			widget.label:SetTextColor(1, 1, 1, 1)

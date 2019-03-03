@@ -2,7 +2,8 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_TradeSkill(event, addon)
 	if addon ~= 'Blizzard_TradeSkillUI' then return end
-	AS:SkinFrame(TradeSkillFrame, nil, nil, true)
+	AS:SkinBackdropFrame(TradeSkillFrame, nil, nil, true)
+	TradeSkillFrame.portrait:SetAlpha(0)
 
 	TradeSkillFrame:SetHeight(TradeSkillFrame:GetHeight() + 12)
 
@@ -28,8 +29,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 	AS:StripTextures(TradeSkillFrame.RecipeList.LearnedTab)
 	AS:StripTextures(TradeSkillFrame.RecipeList.UnlearnedTab)
 
-	AS:SkinScrollBar(TradeSkillFrame)
-
+	AS:SkinScrollBar(TradeSkillFrame.RecipeList.scrollBar)
 	AS:StripTextures(TradeSkillFrame.DetailsFrame)
 
 	AS:SkinBackdropFrame(TradeSkillFrame.DetailsInset)
