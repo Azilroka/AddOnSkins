@@ -310,19 +310,14 @@ function AS:Blizzard_Quest()
 			fontString:SetTextColor(1, 1, 1)
 		end)
 
-		for i = 1, 16 do
-			local button = _G['QuestTitleButton'..i]
-			if button then
-				hooksecurefunc(button, 'SetFormattedText', function(self)
-					if self:GetFontString() then
-						local Text = self:GetFontString():GetText()
-						if Text and strfind(Text, '|cff000000') then
-							button:GetFontString():SetText(string.gsub(Text, '|cff000000', '|cffffe519'))
-						end
-					end
-				end)
+		QuestFrameGreetingPanel:HookScript('OnShow', function()
+			for Button in QuestFrameGreetingPanel.titleButtonPool:EnumerateActive() do
+				local Text = Button:GetFontString():GetText()
+				if Text and strfind(Text, '|cff000000') then
+					Button:GetFontString():SetText(string.gsub(Text, '|cff000000', '|cffffe519'))
+				end
 			end
-		end
+		end)
 
 		hooksecurefunc('QuestInfo_Display', function(template, parentFrame, acceptButton, material)
 			QuestInfoTitleHeader:SetTextColor(1, .8, .1)
