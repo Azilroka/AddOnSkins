@@ -75,8 +75,4 @@ function AS:UpdateMedia()
 	AS.BorderColor = E['media'].bordercolor
 	AS.Color = E["media"].rgbvaluecolor or AS.ClassColor
 	AS.HideShadows = false
-
-	E:GetModule('DataTexts'):RegisterLDB()
-	E:GetModule('DataTexts'):LoadDataTexts()
-	E:UpdateMedia()
 end

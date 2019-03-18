@@ -84,14 +84,16 @@ function AS:Blizzard_TalentUI(event, addon)
 			AS:SkinBackdropFrame(Button)
 			AS:CreateShadow(Button.Backdrop, true)
 
-			Button.Backdrop.Shadow:SetBackdropBorderColor(unpack(AS.Color))
+			if Button.Backdrop.Shadow then
+				Button.Backdrop.Shadow:SetBackdropBorderColor(unpack(AS.Color))
 
-			Button.GlowFrame.TopGlowLine = Button.Backdrop.Shadow
-			Button.GlowFrame.TopGlowLine:Hide()
-			AS:Kill(Button.GlowFrame.BottomGlowLine)
+				Button.GlowFrame.TopGlowLine = Button.Backdrop.Shadow
+				Button.GlowFrame.TopGlowLine:Hide()
+				AS:Kill(Button.GlowFrame.BottomGlowLine)
 
-			Button.GlowFrame:HookScript('OnShow', function(self) self.TopGlowLine:Show() Button.Backdrop.Shadow:Show() end)
-			Button.GlowFrame:HookScript('OnHide', function(self) self.TopGlowLine:Hide() Button.Backdrop.Shadow:Hide() end)
+				Button.GlowFrame:HookScript('OnShow', function(self) self.TopGlowLine:Show() Button.Backdrop.Shadow:Show() end)
+				Button.GlowFrame:HookScript('OnHide', function(self) self.TopGlowLine:Hide() Button.Backdrop.Shadow:Hide() end)
+			end
 
 			Button:SetFrameLevel(Button:GetFrameLevel() + 2)
 			Button.Backdrop:SetPoint("TOPLEFT", 15, -1)
