@@ -12,9 +12,11 @@ function AS:Clique()
 	}
 
 	for _, object in pairs(Frames) do
-		AS:SkinBackdropFrame(object)
+		if object then
+			AS:SkinBackdropFrame(object)
+		end
 	end
-	
+
 	local CliqueButtons = {
 		CliqueConfigPage1ButtonSpell,
 		CliqueConfigPage1ButtonOther,
