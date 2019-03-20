@@ -92,6 +92,111 @@ AS.Blizzard.Tooltip = {
 
 AS.RegisterTemplates = {}
 
+-- ls, Azil, and Simpy made this to replace Blizzard's SetBackdrop API while the textures can't snap
+AS.PixelBorders = {"TOPLEFT", "TOPRIGHT", "BOTTOMLEFT", "BOTTOMRIGHT", "TOP", "BOTTOM", "LEFT", "RIGHT"}
+function AS:SetBackdrop(frame, bgFile, edgeSize, insetLeft, insetRight, insetTop, insetBottom)
+	if not frame.pixelBorders then return end
+
+	frame.pixelBorders.CENTER:SetTexture(bgFile)
+
+	if insetLeft or insetRight or insetTop or insetBottom then
+		frame.pixelBorders.CENTER:SetPoint('TOPLEFT', frame, 'TOPLEFT', -insetLeft or 0, insetTop or 0)
+		frame.pixelBorders.CENTER:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', insetRight or 0, -insetBottom or 0)
+	else
+		frame.pixelBorders.CENTER:SetPoint('TOPLEFT', frame)
+		frame.pixelBorders.CENTER:SetPoint('BOTTOMRIGHT', frame)
+	end
+
+	frame.pixelBorders.TOPLEFT:SetSize(edgeSize, edgeSize)
+	frame.pixelBorders.TOPRIGHT:SetSize(edgeSize, edgeSize)
+	frame.pixelBorders.BOTTOMLEFT:SetSize(edgeSize, edgeSize)
+	frame.pixelBorders.BOTTOMRIGHT:SetSize(edgeSize, edgeSize)
+
+	frame.pixelBorders.TOP:SetHeight(edgeSize)
+	frame.pixelBorders.BOTTOM:SetHeight(edgeSize)
+	frame.pixelBorders.LEFT:SetWidth(edgeSize)
+	frame.pixelBorders.RIGHT:SetWidth(edgeSize)
+end
+
+function AS:GetBackdropColor(frame)
+	if frame.pixelBorders then
+		return frame.pixelBorders.CENTER:GetVertexColor()
+	else
+		return frame:GetBackdropColor()
+	end
+end
+
+function AS:GetBackdropBorderColor(frame)
+	if frame.pixelBorders then
+		return frame.pixelBorders.TOP:GetVertexColor()
+	else
+		return frame:GetBackdropBorderColor()
+	end
+end
+
+function AS:SetBackdropColor(frame, r, g, b, a)
+	if frame.pixelBorders then
+		frame.pixelBorders.CENTER:SetVertexColor(r, g, b, a)
+	end
+end
+
+function AS:SetBackdropBorderColor(frame, r, g, b, a)
+	if frame.pixelBorders then
+		for _, v in pairs(AS.PixelBorders) do
+			frame.pixelBorders[v]:SetColorTexture(r or 0, g or 0, b or 0, a)
+		end
+	end
+end
+
+function AS:HookedSetBackdropColor(r, g, b, a)
+	AS:SetBackdropColor(self, r, g, b, a)
+end
+
+function AS:HookedSetBackdropBorderColor(r, g, b, a)
+	AS:SetBackdropBorderColor(self, r, g, b, a)
+end
+
+function AS:BuildPixelBorders(frame, noSecureHook)
+	if frame and not frame.pixelBorders then
+		local borders = {}
+
+		for _, v in pairs(AS.PixelBorders) do
+			borders[v] = frame:CreateTexture("$parentPixelBorder"..v, "BORDER", nil, 1)
+			borders[v]:SetColorTexture(1, 1, 1)
+			borders[v]:SetSnapToPixelGrid(false)
+			borders[v]:SetTexelSnappingBias(0)
+		end
+
+		borders.CENTER = frame:CreateTexture("$parentPixelBorderCENTER", "BACKGROUND", nil, -8)
+		borders.CENTER:SetSnapToPixelGrid(false)
+		borders.CENTER:SetTexelSnappingBias(0)
+
+		borders.TOPLEFT:Point("BOTTOMRIGHT", borders.CENTER, "TOPLEFT", 1, -1)
+		borders.TOPRIGHT:Point("BOTTOMLEFT", borders.CENTER, "TOPRIGHT", -1, -1)
+		borders.BOTTOMLEFT:Point("TOPRIGHT", borders.CENTER, "BOTTOMLEFT", 1, 1)
+		borders.BOTTOMRIGHT:Point("TOPLEFT", borders.CENTER, "BOTTOMRIGHT", -1, 1)
+
+		borders.TOP:Point("TOPLEFT", borders.TOPLEFT, "TOPRIGHT", 0, 0)
+		borders.TOP:Point("TOPRIGHT", borders.TOPRIGHT, "TOPLEFT", 0, 0)
+
+		borders.BOTTOM:Point("BOTTOMLEFT", borders.BOTTOMLEFT, "BOTTOMRIGHT", 0, 0)
+		borders.BOTTOM:Point("BOTTOMRIGHT", borders.BOTTOMRIGHT, "BOTTOMLEFT", 0, 0)
+
+		borders.LEFT:Point("TOPLEFT", borders.TOPLEFT, "BOTTOMLEFT", 0, 0)
+		borders.LEFT:Point("BOTTOMLEFT", borders.BOTTOMLEFT, "TOPLEFT", 0, 0)
+
+		borders.RIGHT:Point("TOPRIGHT", borders.TOPRIGHT, "BOTTOMRIGHT", 0, 0)
+		borders.RIGHT:Point("BOTTOMRIGHT", borders.BOTTOMRIGHT, "TOPRIGHT", 0, 0)
+
+		if not noSecureHook then
+			hooksecurefunc(frame, "SetBackdropColor", AS.HookedSetBackdropColor)
+			hooksecurefunc(frame, "SetBackdropBorderColor", AS.HookedSetBackdropBorderColor)
+		end
+
+		frame.pixelBorders = borders
+	end
+end
+
 function AS:UpdateSettings()
 	for Frame in pairs(AS.RegisterTemplates) do
 		AS:SetTemplate(Frame)
@@ -278,25 +383,23 @@ function AS:SetTemplate(Frame, Template, Texture)
 			AS.BackdropColor = ElvUI[1].media.backdropfadecolor
 		end
 
-		Frame.template = Template
+		Frame.template = Template or 'Default'
 		ElvUI[1].frames[Frame] = true
-
-		if (Template == 'MerathilisUI' and AS:CheckAddOn('ElvUI_MerathilisUI')) or (Template == 'KlixUI' and AS:CheckAddOn('ElvUI_KlixUI')) then
-			Frame:Styling()
-		end
 	end
 
-	local Backdrop = { bgFile = Texture, edgeFile = AS.Blank, tile = false, tileSize = 0, edgeSize = AS.Mult, insets = { left = 0, right = 0, top = 0, bottom = 0 } }
+	Frame:SetBackdrop(nil)
 
-	Frame:SetBackdrop(Backdrop)
+	AS:BuildPixelBorders(Frame)
+
+	--AS:SetBackdrop(frame, bgFile, edgeSize, insetLeft, insetRight, insetTop, insetBottom)
+	AS:SetBackdrop(Frame, Texture, AS.Mult)
 
 	if (AS:CheckOption('Theme') == 'TwoPixel' or AS:CheckOption('Theme') == 'ThickBorder') then
-		Backdrop = { edgeFile = AS.Blank, edgeSize = AS.Mult, insets = { left = AS.Mult, right = AS.Mult, top = AS.Mult, bottom = AS.Mult } }
-
 		for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
 			Frame[Inset] = CreateFrame('Frame', nil, Frame)
-			Frame[Inset]:SetBackdrop(Backdrop)
-			Frame[Inset]:SetBackdropBorderColor(0, 0, 0, 1)
+			AS:BuildPixelBorders(Frame[Inset], true)
+			AS:SetBackdrop(Frame[Inset], nil, AS.Mult)
+			AS:SetBackdropBorderColor(Frame[Inset], 0, 0, 0, 1)
 		end
 
 		Frame.InsideBorder:SetInside(Frame, AS.Mult, AS.Mult)
@@ -310,24 +413,30 @@ function AS:SetTemplate(Frame, Template, Texture)
 	end
 
 	if Template == 'NoBackdrop' then
-		Frame:SetBackdropColor(0, 0, 0, 0)
+		AS:SetBackdropColor(Frame, 0, 0, 0, 0)
 	else
-		Frame:SetBackdropColor(R, G, B, Alpha)
+		AS:SetBackdropColor(Frame, R, G, B, Alpha)
 	end
 
 	if Template == 'NoBorder' then
-		Frame:SetBackdropBorderColor(0, 0, 0, 0)
+		AS:SetBackdropBorderColor(Frame, 0, 0, 0, 0)
 	else
-		Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
+		AS:SetBackdropBorderColor(Frame, unpack(AS.BorderColor))
 	end
 
 	if Template == 'ClassColor' then
-		Frame:SetBackdropBorderColor(unpack(AS.ClassColor))
+		AS:SetBackdropBorderColor(Frame, unpack(AS.ClassColor))
 	end
 
 	if Template == 'Custom' then
-		Frame:SetBackdropColor(unpack(AS:CheckOption('CustomBackdropColor')))
-		Frame:SetBackdropBorderColor(unpack(AS:CheckOption('CustomBorderColor')))
+		AS:SetBackdropColor(Frame, unpack(AS:CheckOption('CustomBackdropColor')))
+		AS:SetBackdropBorderColor(Frame, unpack(AS:CheckOption('CustomBorderColor')))
+	end
+
+	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
+		if (Template == 'MerathilisUI' and AS:CheckAddOn('ElvUI_MerathilisUI')) or (Template == 'KlixUI' and AS:CheckAddOn('ElvUI_KlixUI')) then
+			Frame:Styling()
+		end
 	end
 end
 
@@ -417,6 +526,8 @@ function AS:SkinButton(Button, Strip)
 		local Texture = Button.Icon:GetTexture()
 		if Texture and (type(Texture) == 'string' and strfind(Texture, [[Interface\ChatFrame\ChatFrameExpandArrow]])) then
 			Button.Icon:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
+			Button.Icon:SetSnapToPixelGrid(false)
+			Button.Icon:SetTexelSnappingBias(0)
 			Button.Icon:SetVertexColor(1, 1, 1)
 			Button.Icon:SetRotation(AS.ArrowRotation['right'])
 		end
@@ -865,15 +976,41 @@ end
 -- Helpers
 
 function AS:SkinFrame(frame, template, override, kill)
-	if not override then AS:StripTextures(frame, kill) end
+	local name = frame and frame.GetName and frame:GetName()
+	local insetFrame = name and _G[name..'Inset'] or frame.Inset
+
+	if not override then
+		AS:StripTextures(frame, kill)
+	end
+
 	AS:SetTemplate(frame, template)
+
+	--if insetFrame then
+	--	AS:SkinFrame(insetFrame)
+	--end
+
+	if frame.CloseButton then
+		AS:SkinCloseButton(frame.CloseButton)
+	end
 end
 
-function AS:SkinBackdropFrame(frame, template, override, kill, setpoints)
-	if not override then AS:StripTextures(frame, kill) end
+function AS:SkinBackdropFrame(frame, template, override, kill)
+	local name = frame and frame.GetName and frame:GetName()
+	local insetFrame = name and _G[name..'Inset'] or frame.Inset
+
+	if not override then
+		AS:StripTextures(frame, kill)
+	end
+
 	AS:CreateBackdrop(frame, template)
-	if setpoints then
-		frame.Backdrop:SetAllPoints()
+	frame.Backdrop:SetAllPoints()
+
+	if insetFrame then
+		AS:SkinFrame(insetFrame)
+	end
+
+	if frame.CloseButton then
+		AS:SkinCloseButton(frame.CloseButton)
 	end
 end
 
@@ -905,6 +1042,8 @@ function AS:SkinTexture(icon, backdrop)
 	if AS:CheckOption('CropIcons') then
 		icon:SetTexCoord(unpack(AS.TexCoords))
 	end
+	icon:SetSnapToPixelGrid(false)
+	icon:SetTexelSnappingBias(0)
 	if backdrop then
 		AS:CreateBackdrop(icon)
 	end
