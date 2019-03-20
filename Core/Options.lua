@@ -51,6 +51,12 @@ AS.ChangeLog = {
 	['4.10'] = {
 		'Updated: WA Font',
 	},
+	['4.11'] = { 'N/A' },
+	['4.12'] = { 'N/A' },
+	['4.13'] = {
+		'Added: Changelog Screen',
+		'Updated: Ace3, AdiBags, Clique, Guild Roster Manager, Macro, Spell Book, Quest, TradeSkill, Talents',
+	}
 }
 
 local DEVELOPERS = {
