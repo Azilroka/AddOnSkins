@@ -35,7 +35,7 @@ function AS:Bartender4()
 		end
 
 		if Btname and Normal then
-			local String = GetActionText(Action)
+			local String = Action and GetActionText(Action)
 
 			if String then
 				local Text = string.sub(String, 1, 5)
