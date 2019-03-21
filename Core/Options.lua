@@ -56,6 +56,10 @@ AS.ChangeLog = {
 	['4.13'] = {
 		'Added: Changelog Screen',
 		'Updated: Ace3, AdiBags, Clique, Guild Roster Manager, Macro, Spell Book, Quest, TradeSkill, Talents',
+	},
+	['4.14'] = {
+		'Added: Changelog Screen',
+		'Updated: Ace3, AdiBags, Clique, Guild Roster Manager, Macro, Spell Book, Quest, TradeSkill, Talents',
 	}
 }
 

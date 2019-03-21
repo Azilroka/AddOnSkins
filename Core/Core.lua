@@ -496,17 +496,18 @@ function AS:CreateChangeLog()
 	ChangeLogFrame.Changes = {}
 
 	local offset, i = 0, 0
-	for _, Change in pairs(AS.ChangeLog[AS.ProperVersion]) do
-		i, offset = i + 1, offset + 16
+
+	for _, Change in pairs(AS.ChangeLog[tostring(AS.ProperVersion or AS.Version)]) do
+		i, offset = i + 1, offset + 28
 		ChangeLogFrame.Changes[i] = ChangeLogFrame:CreateFontString(nil, 'OVERLAY')
-		ChangeLogFrame.Changes[i]:SetSize(375, 16)
+		ChangeLogFrame.Changes[i]:SetSize(375, 28)
 		ChangeLogFrame.Changes[i]:SetFont(AS.Font, 14)
 		ChangeLogFrame.Changes[i]:SetPoint("TOP", ChangeLogFrame.Title, "BOTTOM", 5, -offset)
 		ChangeLogFrame.Changes[i]:SetText(Change)
 		ChangeLogFrame.Changes[i]:SetWordWrap(true)
 	end
 
-	ChangeLogFrame:SetSize(400, 100 + (i * 16))
+	ChangeLogFrame:SetSize(400, 100 + (i * 28))
 
 	AS.ChangeLogFrame = ChangeLogFrame
 end
