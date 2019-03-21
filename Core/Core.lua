@@ -466,7 +466,7 @@ function AS:BugReportFrame(ErrorIndex)
 end
 
 function AS:CreateChangeLog()
-	local ProperVersion = strlen(AS.Version) == 3 and tostring(AS.Version)..'0' or AS.Version
+	local ProperVersion = tostring(strlen(AS.Version) == 3 and AS.Version..'0' or AS.Version)
 	local ChangeLogFrame = CreateFrame("Frame", 'AddOnSkins_ChangeLog', UIParent)
 	ChangeLogFrame:Hide()
 	ChangeLogFrame:SetPoint("CENTER")
