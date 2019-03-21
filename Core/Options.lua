@@ -58,9 +58,11 @@ AS.ChangeLog = {
 		'Updated: Ace3, AdiBags, Clique, Guild Roster Manager, Macro, Spell Book, Quest, TradeSkill, Talents',
 	},
 	['4.14'] = {
-		'Added: Changelog Screen',
-		'Updated: Ace3, AdiBags, Clique, Guild Roster Manager, Macro, Spell Book, Quest, TradeSkill, Talents',
-	}
+		'Updated: API'
+	},
+	['4.15'] = {
+		'Fixed: Comparing a string to a number'
+	},
 }
 
 local DEVELOPERS = {
