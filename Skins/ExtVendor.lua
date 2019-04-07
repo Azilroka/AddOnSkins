@@ -12,6 +12,10 @@ function AS:ExtVendor()
 	MerchantFrameSellJunkButtonIcon:SetInside()
 
 	AS:SkinEditBox(MerchantFrameSearchBox)
+
+	AS:SkinFrame(ExtVendor_SellJunkPopup)
+	AS:SkinFrame(ExtVendor_SellJunkProgressPopup)
+
 	AS:SkinButton(ExtVendor_SellJunkPopupYesButton)
 	AS:SkinButton(ExtVendor_SellJunkPopupNoButton)
 
