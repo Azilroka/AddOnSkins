@@ -103,6 +103,7 @@ function AS:Blizzard_Others()
 		local listFrame = _G["DropDownList"..level];
 		local listFrameName = listFrame:GetName();
 		local expandArrow = _G[listFrameName.."Button"..index.."ExpandArrow"];
+		AS:SetTemplate(_G["DropDownList"..level.."MenuBackdrop"])
 		if expandArrow then
 			expandArrow:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
 			expandArrow:SetSize(12, 12)

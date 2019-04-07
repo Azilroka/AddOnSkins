@@ -392,9 +392,9 @@ function AS:SetTemplate(Frame, Template, Texture)
 	AS:BuildPixelBorders(Frame)
 
 	--AS:SetBackdrop(frame, bgFile, edgeSize, insetLeft, insetRight, insetTop, insetBottom)
-	AS:SetBackdrop(Frame, Texture, AS.Mult)
+	AS:SetBackdrop(Frame, Texture, (AS:CheckOption('Theme') == 'TwoPixel' and AS.Mult*2 or AS.Mult))
 
-	if (AS:CheckOption('Theme') == 'TwoPixel' or AS:CheckOption('Theme') == 'ThickBorder') then
+	if AS:CheckOption('Theme') == 'ThickBorder' then
 		for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
 			Frame[Inset] = CreateFrame('Frame', nil, Frame)
 			AS:BuildPixelBorders(Frame[Inset], true)
@@ -702,7 +702,7 @@ function AS:SkinEditBox(EditBox, Width, Height)
 	if EditBox.GetTextInsets and EditBox.SetTextInsets then
 		local Left, Right, Top, Bottom = EditBox:GetTextInsets()
 		if (Left == 0 and Right == 0 and Top == 0 and Bottom == 0) then
-			EditBox:SetTextInsets(3, 3, 3, 3)
+			EditBox:SetTextInsets(3, 3, 0, 0)
 		end
 	end
 
