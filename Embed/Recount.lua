@@ -1,8 +1,12 @@
 local AS = unpack(AddOnSkins)
-
 if not AS:CheckAddOn('Recount') then return end
 
+-- Cache global variables
+--Lua functions
 local _G = _G
+local strlower = strlower
+--WoW API / Variables
+-- GLOBALS:
 
 function AS:Embed_Recount()
 	local EmbedParent = _G.EmbedSystem_MainWindow

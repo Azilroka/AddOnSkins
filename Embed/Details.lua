@@ -1,13 +1,17 @@
 local AS = unpack(AddOnSkins)
-
 if not AS:CheckAddOn('Details') then return end
 
-local Details
-
-local wipe, tinsert, select, type = wipe, tinsert, select, type
-
+-- Cache global variables
+--Lua functions
 local _G = _G
+local select, type = select, type
+local wipe, tinsert  = table.wipe, table.insert
+local strlower = strlower
+--WoW API / Variables
+local hooksecurefunc = hooksecurefunc
+-- GLOBALS:
 
+local Details
 local NumberToEmbed
 
 AS['DetailsInstances'] = {}

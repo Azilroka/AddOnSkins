@@ -1,15 +1,19 @@
 local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('ElvUI') then return end
-
 local E, L = unpack(ElvUI)
+
+-- Cache global variables
+--Lua functions
 local _G = _G
 local floor = floor
+--WoW API / Variables
 local hooksecurefunc = hooksecurefunc
 local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
 local IsAddOnLoaded = IsAddOnLoaded
 local UnitAffectingCombat = UnitAffectingCombat
 local RightChatToggleButton, LeftChatToggleButton, RightChatPanel, LeftChatPanel, RightChatTab, LeftChatTab, RightChatDataPanel
 local EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow
+-- GLOBALS:
 
 function AS:EmbedSystemHooks()
 	RightChatToggleButton, LeftChatToggleButton, RightChatPanel, LeftChatPanel, RightChatTab, LeftChatTab, RightChatDataPanel = _G.RightChatToggleButton, _G.LeftChatToggleButton, _G.RightChatPanel, _G.LeftChatPanel, _G.RightChatTab, _G.LeftChatTab, _G.RightChatDataPanel
@@ -61,12 +65,12 @@ function AS:EmbedSystemHooks()
 			end
 
 			if not self.parent.editboxforced then
-				GameTooltip:SetOwner(self, 'ANCHOR_TOPLEFT', 0, 4)
-				GameTooltip:ClearLines()
-				GameTooltip:AddDoubleLine(L["Left Click:"], L["Toggle Chat Frame"], 1, 1, 1)
-				GameTooltip:AddLine('')
-				GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
-				GameTooltip:Show()
+				_G.GameTooltip:SetOwner(self, 'ANCHOR_TOPLEFT', 0, 4)
+				_G.GameTooltip:ClearLines()
+				_G.GameTooltip:AddDoubleLine(L["Left Click:"], L["Toggle Chat Frame"], 1, 1, 1)
+				_G.GameTooltip:AddLine('')
+				_G.GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
+				_G.GameTooltip:Show()
 			end
 		end)
 

@@ -1,10 +1,14 @@
 local AS = unpack(AddOnSkins)
-
 if not AS:CheckAddOn('Skada') then return end
 
+-- Cache global variables
+--Lua functions
 local _G = _G
-
-local wipe, pairs, tinsert = wipe, pairs, tinsert
+local pairs = pairs
+local strlower = strlower
+local wipe, tinsert = table.wipe, table.insert
+--WoW API / Variables
+-- GLOBALS:
 
 local NumberToEmbed
 

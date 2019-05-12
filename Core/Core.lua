@@ -1,18 +1,21 @@
 local AS, ASL = unpack(AddOnSkins)
-
 local AddOnName = ...
 
-local AcceptFrame, BugReportFrame
-
+-- Cache global variables
+--Lua functions
+local _G = _G
 local select, pairs, ipairs, type, pcall = select, pairs, ipairs, type, pcall
 local floor, print, format, strlower, strfind, strmatch = floor, print, format, strlower, strfind, strmatch
 local sort, tinsert = sort, tinsert
-local _G = _G
+--WoW API / Variables
 local IsAddOnLoaded, C_Timer = IsAddOnLoaded, C_Timer
+-- GLOBALS:
 
 AS.SkinErrors = {}
 AS.ErrorIndex = 0
 AS.ErrorCurrentIndex = 1
+
+local AcceptFrame, BugReportFrame
 
 function AS:CheckOption(optionName, ...)
 	for i = 1, select('#', ...) do

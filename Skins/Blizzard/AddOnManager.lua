@@ -1,28 +1,34 @@
 local AS = unpack(AddOnSkins)
 
+-- Cache global variables
+--Lua functions
+local _G = _G
+--WoW API / Variables
+-- GLOBALS:
+
 function AS:Blizzard_AddonManager()
-	AS:SkinFrame(AddonList)
-	AS:CreateShadow(AddonList)
+	AS:SkinFrame(_G.AddonList)
+	AS:CreateShadow(_G.AddonList)
 
-	AS:StripTextures(AddonListInset)
+	AS:StripTextures(_G.AddonListInset)
 
-	AS:SkinBackdropFrame(AddonListScrollFrame)
-	AS:SkinScrollBar(AddonListScrollFrameScrollBar)
+	AS:SkinBackdropFrame(_G.AddonListScrollFrame)
+	AS:SkinScrollBar(_G.AddonListScrollFrameScrollBar)
 
-	AddonListScrollFrame.Backdrop:SetPoint('TOPLEFT', -14, 0)
-	AddonListScrollFrame.Backdrop:SetPoint('BOTTOMRIGHT', 0, -1)
-	AS:SkinButton(AddonList.EnableAllButton, true)
-	AS:SkinButton(AddonList.DisableAllButton, true)
-	AS:SkinButton(AddonList.OkayButton, true)
-	AS:SkinButton(AddonList.CancelButton, true)
+	_G.AddonListScrollFrame.Backdrop:SetPoint('TOPLEFT', -14, 0)
+	_G.AddonListScrollFrame.Backdrop:SetPoint('BOTTOMRIGHT', 0, -1)
+	AS:SkinButton(_G.AddonList.EnableAllButton, true)
+	AS:SkinButton(_G.AddonList.DisableAllButton, true)
+	AS:SkinButton(_G.AddonList.OkayButton, true)
+	AS:SkinButton(_G.AddonList.CancelButton, true)
 
-	AS:SkinCheckBox(AddonListForceLoad)
-	AddonListForceLoad:SetSize(26, 26)
-	AS:SkinDropDownBox(AddonCharacterDropDown, 165)
+	AS:SkinCheckBox(_G.AddonListForceLoad)
+	_G.AddonListForceLoad:SetSize(26, 26)
+	AS:SkinDropDownBox(_G.AddonCharacterDropDown, 165)
 
-	AS:SkinCloseButton(AddonList.CloseButton)
+	AS:SkinCloseButton(_G.AddonList.CloseButton)
 
-	for i = 1, MAX_ADDONS_DISPLAYED do
+	for i = 1, _G.MAX_ADDONS_DISPLAYED do
 		AS:SkinCheckBox(_G["AddonListEntry"..i.."Enabled"])
 		AS:SkinButton(_G["AddonListEntry"..i].LoadAddonButton)
 	end

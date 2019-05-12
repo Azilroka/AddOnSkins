@@ -1,8 +1,12 @@
 local AS = unpack(AddOnSkins)
-
 if not AS:CheckAddOn('Omen') then return end
 
+-- Cache global variables
+--Lua functions
 local _G = _G
+local strlower = strlower
+--WoW API / Variables
+-- GLOBALS:
 
 function AS:Embed_Omen()
 	local EmbedParent = _G.EmbedSystem_MainWindow

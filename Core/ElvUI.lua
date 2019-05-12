@@ -1,8 +1,12 @@
 local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('ElvUI') then return end
-
 local E = unpack(ElvUI)
+
+-- Cache global variables
+--Lua functions
 local pairs = pairs
+--WoW API / Variables
+-- GLOBALS:
 
 local ElvUISkinTable = {
 	["Blizzard_AchievementUI"] = { 'achievement' },

@@ -1,7 +1,12 @@
 local AS = unpack(AddOnSkins)
-
 if not AS:CheckAddOn('TinyDPS') then return end
+
+-- Cache global variables
+--Lua functions
 local _G = _G
+local strlower = strlower
+--WoW API / Variables
+-- GLOBALS:
 
 function AS:Embed_TinyDPS()
 	local EmbedParent = _G.EmbedSystem_MainWindow

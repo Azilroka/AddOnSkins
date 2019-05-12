@@ -1,10 +1,14 @@
 local AS, ASL = unpack(AddOnSkins)
 if not AS:CheckAddOn('Tukui') then return end
 
+-- Cache global variables
+--Lua functions
 local select, floor = select, floor
+--WoW API / Variables
+local CreateFrame = CreateFrame
 local IsAddOnLoaded = IsAddOnLoaded
 local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
-local CreateFrame = CreateFrame
+-- GLOBALS:
 
 local T, C = Tukui:unpack()
 

@@ -1,10 +1,15 @@
 local AS, ASL = unpack(AddOnSkins)
 if not AS:CheckAddOn('Tukui') then return end
 
+-- Cache global variables
+--Lua functions
+local _G = _G
 local floor = floor
+--WoW API / Variables
 local IsAddOnLoaded = IsAddOnLoaded
 local UIFrameFadeIn, UIFrameFadeOut = UIFrameFadeIn, UIFrameFadeOut
 local CreateFrame = CreateFrame
+-- GLOBALS:
 
 function AS:EmbedSystemHooks()
 	AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, ASL.EmbedSystem.ToggleEmbed)
@@ -41,14 +46,14 @@ function AS:CreateToggleButton(Name, Text, Panel, TooltipText)
 	UIFrameFadeOut(Frame, 0.2, Frame:GetAlpha(), 0)
 	Frame:SetScript('OnEnter', function(self)
 		UIFrameFadeIn(self, 0.2, self:GetAlpha(), 1)
-		GameTooltip:SetOwner(self, Name == 'LeftToggleButton' and 'ANCHOR_TOPLEFT' or 'ANCHOR_TOPRIGHT', 0, 4)
-		GameTooltip:ClearLines()
-		GameTooltip:AddDoubleLine('Right Click:', TooltipText, 1, 1, 1)
-		GameTooltip:Show()
+		_G.GameTooltip:SetOwner(self, Name == 'LeftToggleButton' and 'ANCHOR_TOPLEFT' or 'ANCHOR_TOPRIGHT', 0, 4)
+		_G.GameTooltip:ClearLines()
+		_G.GameTooltip:AddDoubleLine('Right Click:', TooltipText, 1, 1, 1)
+		_G.GameTooltip:Show()
 	end)
 	Frame:SetScript('OnLeave', function(self)
 		UIFrameFadeOut(self, 0.2, self:GetAlpha(), 0)
-		GameTooltip:Hide()
+		_G.GameTooltip:Hide()
 	end)
 end
 

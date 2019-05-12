@@ -1,8 +1,16 @@
 local AS = unpack(AddOnSkins)
 
+-- Cache global variables
+--Lua functions
+local _G = _G
 local format, pairs = format, pairs
 local strlower, strmatch, strsub = strlower, strmatch, strsub
-local _G, CreateFrame, UIParent = _G, CreateFrame, UIParent
+--WoW API / Variables
+local CreateFrame, UIParent = CreateFrame, UIParent
+local FCF_GetNumActiveChatFrames = FCF_GetNumActiveChatFrames
+local FCF_IsValidChatFrame = FCF_IsValidChatFrame
+local hooksecurefunc = hooksecurefunc
+-- GLOBALS:
 
 AS.ChatFrameHider = CreateFrame('Frame')
 AS.ChatFrameHider:Hide()

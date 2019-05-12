@@ -1,5 +1,4 @@
 local AddOnName, Engine = ...
-
 local AddOn = LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceEvent-3.0', 'AceHook-3.0', 'AceTimer-3.0')
 
 Engine[1] = AddOn
@@ -7,6 +6,24 @@ Engine[2] = LibStub("AceLocale-3.0"):GetLocale('AddOnSkins', false)
 
 _G.AddOnSkins = Engine
 AddOnSkinsDS = {}
+
+-- Cache global variables
+--Lua functions
+local _G = _G
+local select, tonumber = select, tonumber
+local strlower = strlower
+--WoW API / Variables
+local CreateFrame = CreateFrame
+local GetAddOnEnableState = GetAddOnEnableState
+local GetAddOnInfo = GetAddOnInfo
+local GetAddOnMetadata = GetAddOnMetadata
+local GetNumAddOns = GetNumAddOns
+local GetPhysicalScreenSize = GetPhysicalScreenSize
+local GetRealmName = GetRealmName
+local UIParent = UIParent
+local UnitClass, UnitName = UnitClass, UnitName
+local UnitFactionGroup = UnitFactionGroup
+-- GLOBALS:
 
 AddOn.Title = GetAddOnMetadata('AddOnSkins', 'Title')
 AddOn.Version = tonumber(GetAddOnMetadata('AddOnSkins', 'Version'))
@@ -24,7 +41,7 @@ AddOn.Faction = UnitFactionGroup("player")
 
 AddOn.ScreenWidth, AddOn.ScreenHeight = GetPhysicalScreenSize()
 
-local Color = RAID_CLASS_COLORS[AddOn.MyClass]
+local Color = _G.RAID_CLASS_COLORS[AddOn.MyClass]
 AddOn.ClassColor = { Color.r, Color.g, Color.b }
 AddOn.Color = { 0, 0.44, .87, 1 }
 AddOn.Mult = 1
@@ -44,7 +61,7 @@ for i = 1, GetNumAddOns() do
 	AddOn.AddOnVersion[strlower(Name)] = GetAddOnMetadata(Name, "Version")
 end
 
-TEXTURE_ITEM_QUEST_BANG = [[Interface\AddOns\AddOnSkins\Media\Textures\UI-Icon-QuestBang]]
+_G.TEXTURE_ITEM_QUEST_BANG = [[Interface\AddOns\AddOnSkins\Media\Textures\UI-Icon-QuestBang]]
 
 AddOn.Hider = CreateFrame('Frame', nil, UIParent)
 AddOn.Hider:Hide()

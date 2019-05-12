@@ -1,5 +1,40 @@
 local AS = unpack(AddOnSkins)
 
+-- Cache global variables
+--Lua functions
+local _G = _G
+local pairs, select, unpack = pairs, select, unpack
+--WoW API / Variables
+local CreateFrame = CreateFrame
+local GetItemInfo = GetItemInfo
+local hooksecurefunc = hooksecurefunc
+local ITEM_QUALITY_COLORS = ITEM_QUALITY_COLORS
+local SetLargeGuildTabardTextures = SetLargeGuildTabardTextures
+local AchievementAlertSystem = AchievementAlertSystem
+local CriteriaAlertSystem = CriteriaAlertSystem
+local DungeonCompletionAlertSystem = DungeonCompletionAlertSystem
+local GuildChallengeAlertSystem = GuildChallengeAlertSystem
+local InvasionAlertSystem = InvasionAlertSystem
+local ScenarioAlertSystem = ScenarioAlertSystem
+local WorldQuestCompleteAlertSystem = WorldQuestCompleteAlertSystem
+local GarrisonFollowerAlertSystem = GarrisonFollowerAlertSystem
+local GarrisonShipFollowerAlertSystem = GarrisonShipFollowerAlertSystem
+local GarrisonTalentAlertSystem = GarrisonTalentAlertSystem
+local GarrisonBuildingAlertSystem = GarrisonBuildingAlertSystem
+local GarrisonMissionAlertSystem = GarrisonMissionAlertSystem
+local GarrisonShipMissionAlertSystem = GarrisonShipMissionAlertSystem
+local GarrisonRandomMissionAlertSystem = GarrisonRandomMissionAlertSystem
+local LegendaryItemAlertSystem = LegendaryItemAlertSystem
+local LootAlertSystem = LootAlertSystem
+local LootUpgradeAlertSystem = LootUpgradeAlertSystem
+local MoneyWonAlertSystem = MoneyWonAlertSystem
+local StorePurchaseAlertSystem = StorePurchaseAlertSystem
+local DigsiteCompleteAlertSystem = DigsiteCompleteAlertSystem
+local NewRecipeLearnedAlertSystem = NewRecipeLearnedAlertSystem
+local NewPetAlertSystem = NewPetAlertSystem
+local NewMountAlertSystem = NewMountAlertSystem
+-- GLOBALS:
+
 function AS:Blizzard_Alerts()
 	local function SkinAchievementAlert(frame)
 		if not frame.Backdrop then
@@ -642,7 +677,7 @@ function AS:Blizzard_Alerts()
 	hooksecurefunc(NewPetAlertSystem, "setUpFunction", SkinNewPetAlert)
 	hooksecurefunc(NewMountAlertSystem, "setUpFunction", SkinNewPetAlert)
 
-	for _, frame in pairs({ BonusRollMoneyWonFrame, BonusRollLootWonFrame }) do
+	for _, frame in pairs({ _G.BonusRollMoneyWonFrame, _G.BonusRollLootWonFrame }) do
 		frame.Background:SetAlpha(0)
 		frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		frame.IconBorder:SetAlpha(0)
