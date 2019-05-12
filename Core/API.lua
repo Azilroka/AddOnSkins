@@ -1,10 +1,15 @@
 local AS = unpack(AddOnSkins)
 
-local _G, CreateFrame = _G, CreateFrame
+-- Cache global variables
+--Lua functions
+local _G = _G
 local unpack, pairs, select, type, assert, next = unpack, pairs, select, type, assert, next
 local strlower, strfind = strlower, strfind
 local CopyTable, tremove = CopyTable, tremove
+--WoW API / Variables
+local CreateFrame = CreateFrame
 local EnumerateFrames = EnumerateFrames
+-- GLOBALS:
 
 -- Add texture id's to be stripped
 -- 137056 -- Interface\\Tooltips\\UI-Tooltip-Background
