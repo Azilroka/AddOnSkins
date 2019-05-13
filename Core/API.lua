@@ -176,22 +176,22 @@ function AS:BuildPixelBorders(frame, noSecureHook)
 		borders.CENTER:SetSnapToPixelGrid(false)
 		borders.CENTER:SetTexelSnappingBias(0)
 
-		borders.TOPLEFT:Point("BOTTOMRIGHT", borders.CENTER, "TOPLEFT", 1, -1)
-		borders.TOPRIGHT:Point("BOTTOMLEFT", borders.CENTER, "TOPRIGHT", -1, -1)
-		borders.BOTTOMLEFT:Point("TOPRIGHT", borders.CENTER, "BOTTOMLEFT", 1, 1)
-		borders.BOTTOMRIGHT:Point("TOPLEFT", borders.CENTER, "BOTTOMRIGHT", -1, 1)
+		borders.TOPLEFT:SetPoint("BOTTOMRIGHT", borders.CENTER, "TOPLEFT", 1, -1)
+		borders.TOPRIGHT:SetPoint("BOTTOMLEFT", borders.CENTER, "TOPRIGHT", -1, -1)
+		borders.BOTTOMLEFT:SetPoint("TOPRIGHT", borders.CENTER, "BOTTOMLEFT", 1, 1)
+		borders.BOTTOMRIGHT:SetPoint("TOPLEFT", borders.CENTER, "BOTTOMRIGHT", -1, 1)
 
-		borders.TOP:Point("TOPLEFT", borders.TOPLEFT, "TOPRIGHT", 0, 0)
-		borders.TOP:Point("TOPRIGHT", borders.TOPRIGHT, "TOPLEFT", 0, 0)
+		borders.TOP:SetPoint("TOPLEFT", borders.TOPLEFT, "TOPRIGHT", 0, 0)
+		borders.TOP:SetPoint("TOPRIGHT", borders.TOPRIGHT, "TOPLEFT", 0, 0)
 
-		borders.BOTTOM:Point("BOTTOMLEFT", borders.BOTTOMLEFT, "BOTTOMRIGHT", 0, 0)
-		borders.BOTTOM:Point("BOTTOMRIGHT", borders.BOTTOMRIGHT, "BOTTOMLEFT", 0, 0)
+		borders.BOTTOM:SetPoint("BOTTOMLEFT", borders.BOTTOMLEFT, "BOTTOMRIGHT", 0, 0)
+		borders.BOTTOM:SetPoint("BOTTOMRIGHT", borders.BOTTOMRIGHT, "BOTTOMLEFT", 0, 0)
 
-		borders.LEFT:Point("TOPLEFT", borders.TOPLEFT, "BOTTOMLEFT", 0, 0)
-		borders.LEFT:Point("BOTTOMLEFT", borders.BOTTOMLEFT, "TOPLEFT", 0, 0)
+		borders.LEFT:SetPoint("TOPLEFT", borders.TOPLEFT, "BOTTOMLEFT", 0, 0)
+		borders.LEFT:SetPoint("BOTTOMLEFT", borders.BOTTOMLEFT, "TOPLEFT", 0, 0)
 
-		borders.RIGHT:Point("TOPRIGHT", borders.TOPRIGHT, "BOTTOMRIGHT", 0, 0)
-		borders.RIGHT:Point("BOTTOMRIGHT", borders.BOTTOMRIGHT, "TOPRIGHT", 0, 0)
+		borders.RIGHT:SetPoint("TOPRIGHT", borders.TOPRIGHT, "BOTTOMRIGHT", 0, 0)
+		borders.RIGHT:SetPoint("BOTTOMRIGHT", borders.BOTTOMRIGHT, "TOPRIGHT", 0, 0)
 
 		if not noSecureHook then
 			hooksecurefunc(frame, "SetBackdropColor", AS.HookedSetBackdropColor)
