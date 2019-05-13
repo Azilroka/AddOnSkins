@@ -399,7 +399,7 @@ function AS:SetTemplate(Frame, Template, Texture)
 	--AS:SetBackdrop(frame, bgFile, edgeSize, insetLeft, insetRight, insetTop, insetBottom)
 	AS:SetBackdrop(Frame, Texture, (AS:CheckOption('Theme') == 'TwoPixel' and AS.Mult*2 or AS.Mult))
 
-	if AS:CheckOption('Theme') == 'ThickBorder' then
+	if AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel' then
 		for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
 			Frame[Inset] = CreateFrame('Frame', nil, Frame)
 			AS:BuildPixelBorders(Frame[Inset], true)
