@@ -1,49 +1,57 @@
 local AS = unpack(AddOnSkins)
 
+-- Cache global variables
+--Lua functions
+local _G = _G
+--WoW API / Variables
+local ChannelButtonHeaderMixin = ChannelButtonHeaderMixin
+local hooksecurefunc = hooksecurefunc
+-- GLOBALS:
+
 function AS:Blizzard_Channels(event, addon)
 	if addon ~= 'Blizzard_Channels' then return end
 
-	AS:SkinBackdropFrame(ChannelFrame)
-	ChannelFrame.Backdrop:SetPoint('TOPLEFT', -1, -1)
-	ChannelFrame.Backdrop:SetPoint('BOTTOMRIGHT', -1, 2)
+	AS:SkinBackdropFrame(_G.ChannelFrame)
+	_G.ChannelFrame.Backdrop:SetPoint('TOPLEFT', -1, -1)
+	_G.ChannelFrame.Backdrop:SetPoint('BOTTOMRIGHT', -1, 2)
 
-	AS:SkinBackdropFrame(CreateChannelPopup)
+	AS:SkinBackdropFrame(_G.CreateChannelPopup)
 
-	AS:SkinCloseButton(ChannelFrame.CloseButton)
-	AS:SkinButton(ChannelFrame.NewButton)
-	AS:SkinButton(ChannelFrame.SettingsButton)
+	AS:SkinCloseButton(_G.ChannelFrame.CloseButton)
+	AS:SkinButton(_G.ChannelFrame.NewButton)
+	AS:SkinButton(_G.ChannelFrame.SettingsButton)
 
-	ChannelFrame.ChannelRoster.ScrollFrame.scrollBar.ScrollDownButton = ChannelFrame.ChannelRoster.ScrollFrame.scrollDown
-	ChannelFrame.ChannelRoster.ScrollFrame.scrollBar.ScrollUpButton = ChannelFrame.ChannelRoster.ScrollFrame.scrollUp
+	_G.ChannelFrame.ChannelRoster.ScrollFrame.scrollBar.ScrollDownButton = _G.ChannelFrame.ChannelRoster.ScrollFrame.scrollDown
+	_G.ChannelFrame.ChannelRoster.ScrollFrame.scrollBar.ScrollUpButton = _G.ChannelFrame.ChannelRoster.ScrollFrame.scrollUp
 
-	AS:SkinScrollBar(ChannelFrame.ChannelRoster.ScrollFrame.scrollBar)
-	ChannelFrame.ChannelRoster.ScrollFrame.scrollBar:SetPoint('TOPLEFT', ChannelFrame.ChannelRoster.ScrollFrame, 'TOPRIGHT', 1, -13)
-	ChannelFrame.ChannelRoster.ScrollFrame.scrollBar:SetPoint('BOTTOMLEFT', ChannelFrame.ChannelRoster.ScrollFrame, 'BOTTOMRIGHT', 1, 13)
+	AS:SkinScrollBar(_G.ChannelFrame.ChannelRoster.ScrollFrame.scrollBar)
+	_G.ChannelFrame.ChannelRoster.ScrollFrame.scrollBar:SetPoint('TOPLEFT', _G.ChannelFrame.ChannelRoster.ScrollFrame, 'TOPRIGHT', 1, -13)
+	_G.ChannelFrame.ChannelRoster.ScrollFrame.scrollBar:SetPoint('BOTTOMLEFT', _G.ChannelFrame.ChannelRoster.ScrollFrame, 'BOTTOMRIGHT', 1, 13)
 
-	AS:SkinBackdropFrame(ChannelFrame.ChannelRoster.ScrollFrame)
-	ChannelFrame.ChannelRoster.ScrollFrame:SetPoint('TOPLEFT', 3, 1)
-	ChannelFrame.ChannelRoster.ScrollFrame:SetPoint('BOTTOMRIGHT', -3, 5)
+	AS:SkinBackdropFrame(_G.ChannelFrame.ChannelRoster.ScrollFrame)
+	_G.ChannelFrame.ChannelRoster.ScrollFrame:SetPoint('TOPLEFT', 3, 1)
+	_G.ChannelFrame.ChannelRoster.ScrollFrame:SetPoint('BOTTOMRIGHT', -3, 5)
 
-	AS:SkinScrollBar(ChannelFrame.ChannelList.ScrollBar)
-	ChannelFrame.ChannelList.ScrollBar:SetPoint('BOTTOMLEFT', ChannelFrame.ChannelList, 'BOTTOMRIGHT', 0, 15)
+	AS:SkinScrollBar(_G.ChannelFrame.ChannelList.ScrollBar)
+	_G.ChannelFrame.ChannelList.ScrollBar:SetPoint('BOTTOMLEFT', _G.ChannelFrame.ChannelList, 'BOTTOMRIGHT', 0, 15)
 
-	AS:SkinBackdropFrame(ChannelFrame.ChannelList)
+	AS:SkinBackdropFrame(_G.ChannelFrame.ChannelList)
 
-	ChannelFrame.ChannelList.Backdrop:SetPoint('TOPLEFT', -3, 4)
-	ChannelFrame.ChannelList.Backdrop:SetPoint('BOTTOMRIGHT', 0, -1)
-	ChannelFrame.ChannelList:SetPoint('TOPLEFT', ChannelFrame, 'TOPLEFT', 4, -66)
-	ChannelFrame.ChannelList:SetPoint('BOTTOMLEFT', ChannelFrame, 'BOTTOMLEFT', 4, 33)
+	_G.ChannelFrame.ChannelList.Backdrop:SetPoint('TOPLEFT', -3, 4)
+	_G.ChannelFrame.ChannelList.Backdrop:SetPoint('BOTTOMRIGHT', 0, -1)
+	_G.ChannelFrame.ChannelList:SetPoint('TOPLEFT', _G.ChannelFrame, 'TOPLEFT', 4, -66)
+	_G.ChannelFrame.ChannelList:SetPoint('BOTTOMLEFT', _G.ChannelFrame, 'BOTTOMLEFT', 4, 33)
 
-	AS:SkinCloseButton(CreateChannelPopup.CloseButton)
-	AS:SkinButton(CreateChannelPopup.OKButton)
-	AS:SkinButton(CreateChannelPopup.CancelButton)
+	AS:SkinCloseButton(_G.CreateChannelPopup.CloseButton)
+	AS:SkinButton(_G.CreateChannelPopup.OKButton)
+	AS:SkinButton(_G.CreateChannelPopup.CancelButton)
 
-	AS:SkinEditBox(CreateChannelPopup.Name)
-	AS:SkinEditBox(CreateChannelPopup.Password)
+	AS:SkinEditBox(_G.CreateChannelPopup.Name)
+	AS:SkinEditBox(_G.CreateChannelPopup.Password)
 
-	AS:SkinBackdropFrame(VoiceChatPromptActivateChannel)
-	AS:SkinButton(VoiceChatPromptActivateChannel.AcceptButton)
-	AS:SkinCloseButton(VoiceChatPromptActivateChannel.CloseButton)
+	AS:SkinBackdropFrame(_G.VoiceChatPromptActivateChannel)
+	AS:SkinButton(_G.VoiceChatPromptActivateChannel.AcceptButton)
+	AS:SkinCloseButton(_G.VoiceChatPromptActivateChannel.CloseButton)
 
 	-- Hide the Channel Header Textures
 	hooksecurefunc(ChannelButtonHeaderMixin, "Update", function(self)

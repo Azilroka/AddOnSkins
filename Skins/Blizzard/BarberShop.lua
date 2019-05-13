@@ -1,20 +1,26 @@
 local AS = unpack(AddOnSkins)
 
+-- Cache global variables
+--Lua functions
+local _G = _G
+--WoW API / Variables
+-- GLOBALS:
+
 function AS:Blizzard_BarbershopUI(event, addon)
 	if addon ~= "Blizzard_BarbershopUI" then return end
 
-	AS:SkinFrame(BarberShopFrame)
-	BarberShopFrame:SetSize(BarberShopFrame:GetWidth() - 30, BarberShopFrame:GetHeight() - 56)
+	AS:SkinFrame(_G.BarberShopFrame)
+	_G.BarberShopFrame:SetSize(_G.BarberShopFrame:GetWidth() - 30, _G.BarberShopFrame:GetHeight() - 56)
 
-	AS:StripTextures(BarberShopFrameMoneyFrame)
+	AS:StripTextures(_G.BarberShopFrameMoneyFrame)
 
-	AS:SkinButton(BarberShopFrameOkayButton, true)
-	AS:SkinButton(BarberShopFrameCancelButton, true)
-	AS:SkinButton(BarberShopFrameResetButton, true)
+	AS:SkinButton(_G.BarberShopFrameOkayButton, true)
+	AS:SkinButton(_G.BarberShopFrameCancelButton, true)
+	AS:SkinButton(_G.BarberShopFrameResetButton, true)
 
-	for i = 1, #BarberShopFrame.Selector do
-		local selector = BarberShopFrame.Selector[i]
-		local previousSelector = BarberShopFrame.Selector[i-1]
+	for i = 1, #_G.BarberShopFrame.Selector do
+		local selector = _G.BarberShopFrame.Selector[i]
+		local previousSelector = _G.BarberShopFrame.Selector[i-1]
 
 		if selector then
 			selector:StripTextures()
@@ -29,17 +35,17 @@ function AS:Blizzard_BarbershopUI(event, addon)
 		end
 	end
 
-	BarberShopFrameOkayButton:ClearAllPoints()
-	BarberShopFrameOkayButton:SetPoint("RIGHT", BarberShopFrame, "BOTTOM", 0, 50)
+	_G.BarberShopFrameOkayButton:ClearAllPoints()
+	_G.BarberShopFrameOkayButton:SetPoint("RIGHT", _G.BarberShopFrame, "BOTTOM", 0, 50)
 
-	BarberShopFrameResetButton:ClearAllPoints()
-	BarberShopFrameResetButton:SetPoint("CENTER", BarberShopFrame, 'BOTTOM', 0, 20)
+	_G.BarberShopFrameResetButton:ClearAllPoints()
+	_G.BarberShopFrameResetButton:SetPoint("CENTER", _G.BarberShopFrame, 'BOTTOM', 0, 20)
 
-	AS:Kill(BarberShopBannerFrameBGTexture)
-	AS:Kill(BarberShopBannerFrame)
+	AS:Kill(_G.BarberShopBannerFrameBGTexture)
+	AS:Kill(_G.BarberShopBannerFrame)
 
-	AS:SkinFrame(BarberShopAltFormFrame)
-	BarberShopAltFormFrame:SetPoint("BOTTOM", BarberShopFrame, "TOP", 0, 5)
+	AS:SkinFrame(_G.BarberShopAltFormFrame)
+	_G.BarberShopAltFormFrame:SetPoint("BOTTOM", _G.BarberShopFrame, "TOP", 0, 5)
 
 	AS:UnregisterSkinEvent(addon, event)
 end

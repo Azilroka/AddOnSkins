@@ -1,20 +1,45 @@
 local AS = unpack(AddOnSkins)
 
+-- Cache global variables
+--Lua functions
+local _G = _G
+local ipairs, pairs, select, type, unpack = ipairs, pairs, select, type, unpack
+--WoW API / Variables
+local C_SpecializationInfo_GetInspectSelectedPvpTalent = C_SpecializationInfo.GetInspectSelectedPvpTalent
+local FauxScrollFrame_GetOffset = FauxScrollFrame_GetOffset
+local GetFactionInfo = GetFactionInfo
+local GetNumFactions = GetNumFactions
+local GetNumSockets = GetNumSockets
+local GetInspectSpecialization = GetInspectSpecialization
+local GetItemInfo = GetItemInfo
+local GetItemQualityColor = GetItemQualityColor
+local GetTradePlayerItemLink = GetTradePlayerItemLink
+local GetTradeTargetItemLink = GetTradeTargetItemLink
+local GetSocketTypes = GetSocketTypes
+local GetSpecializationInfoByID = GetSpecializationInfoByID
+local GetSpecializationRoleByID = GetSpecializationRoleByID
+local GEM_TYPE_INFO = GEM_TYPE_INFO
+local hooksecurefunc = hooksecurefunc
+local PaperDollBgDesaturate = PaperDollBgDesaturate
+local PAPERDOLL_SIDEBARS = PAPERDOLL_SIDEBARS
+local UnitSex = UnitSex
+-- GLOBALS:
+
 function AS:Blizzard_Character()
-	CHARACTERFRAME_EXPANDED_WIDTH = 580
+	_G.CHARACTERFRAME_EXPANDED_WIDTH = 580
 
-	AS:SkinFrame(CharacterFrame)
-	AS:SkinCloseButton(CharacterFrame.CloseButton)
+	AS:SkinFrame(_G.CharacterFrame)
+	AS:SkinCloseButton(_G.CharacterFrame.CloseButton)
 
-	CharacterFrame:HookScript('OnShow', function() PaperDollBgDesaturate(false) end)
+	_G.CharacterFrame:HookScript('OnShow', function() PaperDollBgDesaturate(false) end)
 
-	AS:SkinBackdropFrame(CharacterModelFrame)
-	CharacterModelFrame.Backdrop:SetPoint('BOTTOMRIGHT', 2, -2)
-	AS:CreateShadow(CharacterModelFrame.Backdrop, true)
+	AS:SkinBackdropFrame(_G.CharacterModelFrame)
+	_G.CharacterModelFrame.Backdrop:SetPoint('BOTTOMRIGHT', 2, -2)
+	AS:CreateShadow(_G.CharacterModelFrame.Backdrop, true)
 
-	AS:Kill(CharacterFramePortrait)
+	AS:Kill(_G.CharacterFramePortrait)
 
-	PaperDollSidebarTabs:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -29, -1)
+	_G.PaperDollSidebarTabs:SetPoint('BOTTOMRIGHT', _G.CharacterFrameInsetRight, 'TOPRIGHT', -29, -1)
 
 	local function UpdateAzerite(self)
 		self.AzeriteTexture:SetAtlas("AzeriteIconFrame")
@@ -22,7 +47,7 @@ function AS:Blizzard_Character()
 		self.AzeriteTexture:SetDrawLayer("BORDER", 1)
 	end
 
-	for _, Slot in pairs({PaperDollItemsFrame:GetChildren()}) do
+	for _, Slot in pairs({_G.PaperDollItemsFrame:GetChildren()}) do
 		if Slot:IsObjectType("Button") then
 			AS:SkinTexture(Slot.icon)
 			AS:SkinFrame(Slot)
@@ -46,14 +71,14 @@ function AS:Blizzard_Character()
 		end
 	end
 
-	AS:StripTextures(CharacterFrameInsetRight)
-	AS:StripTextures(CharacterStatsPane)
+	AS:StripTextures(_G.CharacterFrameInsetRight)
+	AS:StripTextures(_G.CharacterStatsPane)
 
-	CharacterStatsPane.ClassBackground:ClearAllPoints()
-	CharacterStatsPane.ClassBackground:SetTexture([[Interface\AddOns\AddOnSkins\Media\ClassIcons\]]..AS.MyClass)
-	CharacterStatsPane.ClassBackground:SetPoint('BOTTOM')
-	CharacterStatsPane.ClassBackground:SetSize(128, 128)
-	CharacterStatsPane.ClassBackground:SetAlpha(.5)
+	_G.CharacterStatsPane.ClassBackground:ClearAllPoints()
+	_G.CharacterStatsPane.ClassBackground:SetTexture([[Interface\AddOns\AddOnSkins\Media\ClassIcons\]]..AS.MyClass)
+	_G.CharacterStatsPane.ClassBackground:SetPoint('BOTTOM')
+	_G.CharacterStatsPane.ClassBackground:SetSize(128, 128)
+	_G.CharacterStatsPane.ClassBackground:SetAlpha(.5)
 
 	local function CharacterStatFrameCategoryTemplate(Button)
 		local bg = Button.Background
@@ -66,12 +91,12 @@ function AS:Blizzard_Character()
 		bg:SetVertexColor(r * .7, g * .7, b * .7)
 	end
 
-	CharacterStatFrameCategoryTemplate(CharacterStatsPane.EnhancementsCategory)
-	CharacterStatFrameCategoryTemplate(CharacterStatsPane.ItemLevelCategory)
-	CharacterStatFrameCategoryTemplate(CharacterStatsPane.AttributesCategory)
+	CharacterStatFrameCategoryTemplate(_G.CharacterStatsPane.EnhancementsCategory)
+	CharacterStatFrameCategoryTemplate(_G.CharacterStatsPane.ItemLevelCategory)
+	CharacterStatFrameCategoryTemplate(_G.CharacterStatsPane.AttributesCategory)
 
-	CharacterStatsPane.ItemLevelFrame.Background:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
-	CharacterStatsPane.ItemLevelFrame.Background:SetVertexColor(unpack(AS.Color))
+	_G.CharacterStatsPane.ItemLevelFrame.Background:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
+	_G.CharacterStatsPane.ItemLevelFrame.Background:SetVertexColor(unpack(AS.Color))
 
 	for i = 1, 3 do
 		AS:SkinTab(_G["CharacterFrameTab"..i])
@@ -93,7 +118,7 @@ function AS:Blizzard_Character()
 	end
 
 	hooksecurefunc("PaperDollFrame_UpdateStats", function()
-		for _, Table in ipairs({CharacterStatsPane.statsFramePool:EnumerateActive()}) do
+		for _, Table in ipairs({_G.CharacterStatsPane.statsFramePool:EnumerateActive()}) do
 			if type(Table) == 'table' then
 				for statFrame in pairs(Table) do
 					statFrame.Background:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
@@ -105,7 +130,7 @@ function AS:Blizzard_Character()
 	end)
 
 	hooksecurefunc("EquipmentFlyout_CreateButton", function()
-		for _, Button in pairs(EquipmentFlyoutFrame.buttons) do
+		for _, Button in pairs(_G.EquipmentFlyoutFrame.buttons) do
 			if not Button.isStyled then
 				AS:SkinTexture(Button.icon)
 				AS:SkinFrame(Button)
@@ -120,16 +145,16 @@ function AS:Blizzard_Character()
 	end)
 
 	hooksecurefunc("EquipmentFlyout_Show", function()
-		AS:SkinBackdropFrame(EquipmentFlyoutFrame.buttonFrame)
-		EquipmentFlyoutFrame.buttonFrame.Backdrop:SetPoint('BOTTOMRIGHT', 5, -2)
+		AS:SkinBackdropFrame(_G.EquipmentFlyoutFrame.buttonFrame)
+		_G.EquipmentFlyoutFrame.buttonFrame.Backdrop:SetPoint('BOTTOMRIGHT', 5, -2)
 	end)
 
-	PaperDollTitlesPane:SetWidth(PaperDollTitlesPane:GetWidth() + 45)
-	AS:SkinScrollBar(PaperDollTitlesPane.scrollBar)
+	_G.PaperDollTitlesPane:SetWidth(_G.PaperDollTitlesPane:GetWidth() + 45)
+	AS:SkinScrollBar(_G.PaperDollTitlesPane.scrollBar)
 
 	--Titles
 	hooksecurefunc('PaperDollTitlesPane_Update', function()
-		for _, Title in pairs(PaperDollTitlesPane.buttons) do
+		for _, Title in pairs(_G.PaperDollTitlesPane.buttons) do
 			if not Title.isStyled then
 				AS:StripTextures(Title)
 				Title:SetWidth(Title:GetWidth() + 30)
@@ -147,16 +172,16 @@ function AS:Blizzard_Character()
 	end)
 
 	--Equipement Manager
-	PaperDollEquipmentManagerPane:SetPoint('TOPLEFT', CharacterFrameInsetRight, 'TOPLEFT', 40, -4)
-	PaperDollEquipmentManagerPane:SetWidth(PaperDollEquipmentManagerPane:GetWidth() + 9)
+	_G.PaperDollEquipmentManagerPane:SetPoint('TOPLEFT', _G.CharacterFrameInsetRight, 'TOPLEFT', 40, -4)
+	_G.PaperDollEquipmentManagerPane:SetWidth(_G.PaperDollEquipmentManagerPane:GetWidth() + 9)
 
-	AS:SkinButton(PaperDollEquipmentManagerPane.EquipSet, true)
-	AS:SkinButton(PaperDollEquipmentManagerPane.SaveSet)
-	AS:SkinScrollBar(PaperDollEquipmentManagerPane.scrollBar)
-	PaperDollEquipmentManagerPane.EquipSet:SetPoint("TOPLEFT", PaperDollEquipmentManagerPane, "TOPLEFT", 0, -2)
-	PaperDollEquipmentManagerPane.SaveSet:SetPoint("LEFT", PaperDollEquipmentManagerPane.EquipSet, "RIGHT", 4, 0)
+	AS:SkinButton(_G.PaperDollEquipmentManagerPane.EquipSet, true)
+	AS:SkinButton(_G.PaperDollEquipmentManagerPane.SaveSet)
+	AS:SkinScrollBar(_G.PaperDollEquipmentManagerPane.scrollBar)
+	_G.PaperDollEquipmentManagerPane.EquipSet:SetPoint("TOPLEFT", _G.PaperDollEquipmentManagerPane, "TOPLEFT", 0, -2)
+	_G.PaperDollEquipmentManagerPane.SaveSet:SetPoint("LEFT", _G.PaperDollEquipmentManagerPane.EquipSet, "RIGHT", 4, 0)
 
-	for _, Button in pairs(PaperDollEquipmentManagerPane.buttons) do
+	for _, Button in pairs(_G.PaperDollEquipmentManagerPane.buttons) do
 		AS:SkinBackdropFrame(Button)
 		Button.Check:SetTexture([[Interface\Buttons\UI-CheckBox-Check]])
 		AS:SkinTexture(Button.icon, true)
@@ -182,14 +207,14 @@ function AS:Blizzard_Character()
 	end)
 
 	-- Reputation
-	AS:StripTextures(ReputationListScrollFrame)
-	AS:SkinScrollBar(ReputationListScrollFrame.ScrollBar)
-	AS:SkinFrame(ReputationDetailFrame)
-	ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", 4, -28)
+	AS:StripTextures(_G.ReputationListScrollFrame)
+	AS:SkinScrollBar(_G.ReputationListScrollFrame.ScrollBar)
+	AS:SkinFrame(_G.ReputationDetailFrame)
+	_G.ReputationDetailFrame:SetPoint("TOPLEFT", _G.ReputationFrame, "TOPRIGHT", 4, -28)
 	hooksecurefunc("ReputationFrame_Update", function()
-		local factionOffset = FauxScrollFrame_GetOffset(ReputationListScrollFrame)
+		local factionOffset = FauxScrollFrame_GetOffset(_G.ReputationListScrollFrame)
 		local numFactions = GetNumFactions()
-		for i = 1, NUM_FACTIONS_DISPLAYED do
+		for i = 1, _G.NUM_FACTIONS_DISPLAYED do
 			local FactionName = _G["ReputationBar"..i.."FactionName"]
 			local Button = _G["ReputationBar"..i.."ExpandOrCollapseButton"]
 			local factionIndex = factionOffset + i
@@ -208,12 +233,12 @@ function AS:Blizzard_Character()
 		end
 	end)
 
-	AS:SkinCloseButton(ReputationDetailCloseButton)
-	AS:SkinCheckBox(ReputationDetailAtWarCheckBox)
-	ReputationDetailAtWarCheckBox:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
-	AS:SkinCheckBox(ReputationDetailLFGBonusReputationCheckBox)
-	AS:SkinCheckBox(ReputationDetailInactiveCheckBox)
-	AS:SkinCheckBox(ReputationDetailMainScreenCheckBox)
+	AS:SkinCloseButton(_G.ReputationDetailCloseButton)
+	AS:SkinCheckBox(_G.ReputationDetailAtWarCheckBox)
+	_G.ReputationDetailAtWarCheckBox:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
+	AS:SkinCheckBox(_G.ReputationDetailLFGBonusReputationCheckBox)
+	AS:SkinCheckBox(_G.ReputationDetailInactiveCheckBox)
+	AS:SkinCheckBox(_G.ReputationDetailMainScreenCheckBox)
 
 	for i = 1, 15 do
 		AS:StripTextures(_G["ReputationBar"..i])
@@ -221,20 +246,20 @@ function AS:Blizzard_Character()
 	end
 
 	-- Gear Manager
-	AS:SkinFrame(GearManagerDialogPopup)
-	AS:StripTextures(GearManagerDialogPopup.BorderBox)
-	AS:SkinEditBox(GearManagerDialogPopupEditBox)
-	AS:SkinButton(GearManagerDialogPopupOkay)
-	AS:SkinButton(GearManagerDialogPopupCancel)
+	AS:SkinFrame(_G.GearManagerDialogPopup)
+	AS:StripTextures(_G.GearManagerDialogPopup.BorderBox)
+	AS:SkinEditBox(_G.GearManagerDialogPopupEditBox)
+	AS:SkinButton(_G.GearManagerDialogPopupOkay)
+	AS:SkinButton(_G.GearManagerDialogPopupCancel)
 
-	AS:StripTextures(GearManagerDialogPopupScrollFrame)
-	AS:SkinScrollBar(GearManagerDialogPopupScrollFrame.ScrollBar)
+	AS:StripTextures(_G.GearManagerDialogPopupScrollFrame)
+	AS:SkinScrollBar(_G.GearManagerDialogPopupScrollFrame.ScrollBar)
 
-	GearManagerDialogPopup:SetPoint("LEFT", PaperDollFrame, "RIGHT", 4, 0)
-	GearManagerDialogPopup:SetHeight(GearManagerDialogPopup:GetHeight() + 15)
-	GearManagerDialogPopupScrollFrame:SetHeight(GearManagerDialogPopupScrollFrame:GetHeight() + 16)
+	_G.GearManagerDialogPopup:SetPoint("LEFT", _G.PaperDollFrame, "RIGHT", 4, 0)
+	_G.GearManagerDialogPopup:SetHeight(_G.GearManagerDialogPopup:GetHeight() + 15)
+	_G.GearManagerDialogPopupScrollFrame:SetHeight(_G.GearManagerDialogPopupScrollFrame:GetHeight() + 16)
 
-	for i = 1, NUM_GEARSET_ICONS_SHOWN do
+	for i = 1, _G.NUM_GEARSET_ICONS_SHOWN do
 		local Button = _G["GearManagerDialogPopupButton"..i]
 		AS:SetTemplate(Button)
 		AS:StyleButton(Button)
@@ -251,16 +276,16 @@ function AS:Blizzard_Character()
 	end
 
 	--Currency
-	AS:SkinFrame(TokenFramePopup)
-	AS:SkinScrollBar(TokenFrameContainerScrollBar)
-	AS:SkinCloseButton(TokenFramePopupCloseButton)
-	AS:SkinCheckBox(TokenFramePopupInactiveCheckBox)
-	AS:SkinCheckBox(TokenFramePopupBackpackCheckBox)
-	TokenFramePopup:SetPoint("TOPLEFT", TokenFrame, "TOPRIGHT", 4, -28)
+	AS:SkinFrame(_G.TokenFramePopup)
+	AS:SkinScrollBar(_G.TokenFrameContainerScrollBar)
+	AS:SkinCloseButton(_G.TokenFramePopupCloseButton)
+	AS:SkinCheckBox(_G.TokenFramePopupInactiveCheckBox)
+	AS:SkinCheckBox(_G.TokenFramePopupBackpackCheckBox)
+	_G.TokenFramePopup:SetPoint("TOPLEFT", _G.TokenFrame, "TOPRIGHT", 4, -28)
 
 	hooksecurefunc('TokenFrame_Update', function()
-		if TokenFrameContainer.buttons then
-			for _, Button in pairs(TokenFrameContainer.buttons) do
+		if _G.TokenFrameContainer.buttons then
+			for _, Button in pairs(_G.TokenFrameContainer.buttons) do
 				Button.categoryMiddle:SetAlpha(0)
 				Button.categoryLeft:SetAlpha(0)
 				Button.categoryRight:SetAlpha(0)
@@ -276,11 +301,11 @@ end
 function AS:Blizzard_DeathRecap(event, addon)
 	if addon ~= 'Blizzard_DeathRecap' then return end
 
-	AS:SkinFrame(DeathRecapFrame)
-	AS:SkinCloseButton(DeathRecapFrame.CloseXButton)
-	AS:SkinButton(DeathRecapFrame.CloseButton)
+	AS:SkinFrame(_G.DeathRecapFrame)
+	AS:SkinCloseButton(_G.DeathRecapFrame.CloseXButton)
+	AS:SkinButton(_G.DeathRecapFrame.CloseButton)
 
-	for _, Recap in pairs(DeathRecapFrame.DeathRecapEntry) do
+	for _, Recap in pairs(_G.DeathRecapFrame.DeathRecapEntry) do
 		AS:SkinTexture(Recap.SpellInfo.Icon, true)
 		Recap.SpellInfo.IconBorder:SetAlpha(0)
 	end
@@ -289,49 +314,49 @@ function AS:Blizzard_DeathRecap(event, addon)
 end
 
 function AS:Blizzard_DressUpFrame()
-	AS:SkinFrame(SideDressUpFrame, nil, nil, true)
-	AS:SkinButton(SideDressUpModelResetButton)
-	AS:SkinCloseButton(SideDressUpModelCloseButton)
+	AS:SkinFrame(_G.SideDressUpFrame, nil, nil, true)
+	AS:SkinButton(_G.SideDressUpModelResetButton)
+	AS:SkinCloseButton(_G.SideDressUpModelCloseButton)
 
 	hooksecurefunc("SetUpSideDressUpFrame", function(parentFrame, closedWidth, openWidth, point, relativePoint, offsetX, offsetY)
-		if parentFrame == AuctionFrame then
-			SideDressUpFrame:SetPoint(point, parentFrame, relativePoint, 2, offsetY)
+		if parentFrame == _G.AuctionFrame then
+			_G.SideDressUpFrame:SetPoint(point, parentFrame, relativePoint, 2, offsetY)
 		end
 	end)
 
-	AS:SkinBackdropFrame(DressUpFrame)
-	AS:SkinCloseButton(DressUpFrame.CloseButton)
-	AS:SkinButton(DressUpFrame.ResetButton)
+	AS:SkinBackdropFrame(_G.DressUpFrame)
+	AS:SkinCloseButton(_G.DressUpFrame.CloseButton)
+	AS:SkinButton(_G.DressUpFrame.ResetButton)
 
-	DressUpFrame.portrait:SetAlpha(0)
+	_G.DressUpFrame.portrait:SetAlpha(0)
 
-	AS:SkinMaxMinFrame(MaximizeMinimizeFrame)
+	AS:SkinMaxMinFrame(_G.MaximizeMinimizeFrame)
 
-	AS:SkinButton(DressUpFrameCancelButton)
-	DressUpFrame.ResetButton:SetPoint("RIGHT", DressUpFrameCancelButton, "LEFT", -2, 0)
+	AS:SkinButton(_G.DressUpFrameCancelButton)
+	_G.DressUpFrame.ResetButton:SetPoint("RIGHT", _G.DressUpFrameCancelButton, "LEFT", -2, 0)
 
-	AS:SkinDropDownBox(DressUpFrame.OutfitDropDown)
+	AS:SkinDropDownBox(_G.DressUpFrame.OutfitDropDown)
 
-	AS:SkinButton(DressUpFrame.OutfitDropDown.SaveButton)
-	DressUpFrame.OutfitDropDown.SaveButton:SetHeight(20)
-	DressUpFrame.OutfitDropDown.SaveButton:SetPoint("LEFT", DressUpFrame.OutfitDropDown, 'RIGHT', -10, -5)
+	AS:SkinButton(_G.DressUpFrame.OutfitDropDown.SaveButton)
+	_G.DressUpFrame.OutfitDropDown.SaveButton:SetHeight(20)
+	_G.DressUpFrame.OutfitDropDown.SaveButton:SetPoint("LEFT", _G.DressUpFrame.OutfitDropDown, 'RIGHT', -10, -5)
 end
 
 function AS:Blizzard_Inspect(event, addon)
 	if addon ~= "Blizzard_InspectUI" then return end
 
-	AS:SkinFrame(InspectFrame)
-	AS:SkinCloseButton(InspectFrame.CloseButton)
-	InspectFrame.portrait:SetAlpha(0)
+	AS:SkinFrame(_G.InspectFrame)
+	AS:SkinCloseButton(_G.InspectFrame.CloseButton)
+	_G.InspectFrame.portrait:SetAlpha(0)
 
 	for i = 1, 4 do
 		AS:SkinTab(_G["InspectFrameTab"..i])
 	end
 
-	AS:SkinButton(InspectPaperDollFrame.ViewButton)
-	AS:SkinBackdropFrame(InspectModelFrame)
+	AS:SkinButton(_G.InspectPaperDollFrame.ViewButton)
+	AS:SkinBackdropFrame(_G.InspectModelFrame)
 
-	for _, Slot in pairs({InspectPaperDollItemsFrame:GetChildren()}) do
+	for _, Slot in pairs({_G.InspectPaperDollItemsFrame:GetChildren()}) do
 		if Slot:IsObjectType("Button") or Slot:IsObjectType("ItemButton") then
 			AS:SkinTexture(Slot.icon)
 			AS:SkinFrame(Slot)
@@ -345,20 +370,20 @@ function AS:Blizzard_Inspect(event, addon)
 		end
 	end
 
-	AS:StripTextures(InspectPVPFrame)
+	AS:StripTextures(_G.InspectPVPFrame)
 
-	for _, Button in pairs(InspectPVPFrame.Slots) do
+	for _, Button in pairs(_G.InspectPVPFrame.Slots) do
 		AS:CreateBackdrop(Button.Texture)
 
 		Button.Arrow:SetAlpha(0)
 		Button.Border:Hide()
 
 		hooksecurefunc(Button, "Update", function(self)
-			if (not self.slotIndex) or (not INSPECTED_UNIT) then
+			if (not self.slotIndex) or (not _G.INSPECTED_UNIT) then
 				return
 			end
 
-			local slotInfo = C_SpecializationInfo.GetInspectSelectedPvpTalent(INSPECTED_UNIT, self.slotIndex)
+			local slotInfo = C_SpecializationInfo_GetInspectSelectedPvpTalent(_G.INSPECTED_UNIT, self.slotIndex)
 
 			if (slotInfo) then
 				AS:SkinTexture(self.Texture)
@@ -374,15 +399,15 @@ function AS:Blizzard_Inspect(event, addon)
 		end)
 	end
 
-	AS:StripTextures(InspectTalentFrame)
-	InspectTalentFrame.InspectSpec.ring:SetTexture('')
-	AS:SkinTexture(InspectTalentFrame.InspectSpec.specIcon, true)
+	AS:StripTextures(_G.InspectTalentFrame)
+	_G.InspectTalentFrame.InspectSpec.ring:SetTexture('')
+	AS:SkinTexture(_G.InspectTalentFrame.InspectSpec.specIcon, true)
 
-	InspectTalentFrame.InspectSpec:HookScript('OnShow', function(self)
+	_G.InspectTalentFrame.InspectSpec:HookScript('OnShow', function(self)
 		local Spec, Sex
-		if (INSPECTED_UNIT ~= nil) then
-			Spec = GetInspectSpecialization(INSPECTED_UNIT)
-			Sex = UnitSex(INSPECTED_UNIT)
+		if (_G.INSPECTED_UNIT ~= nil) then
+			Spec = GetInspectSpecialization(_G.INSPECTED_UNIT)
+			Sex = UnitSex(_G.INSPECTED_UNIT)
 		end
 		if(Spec ~= nil and Spec > 0 and Sex ~= nil) then
 			local Role = GetSpecializationRoleByID(Spec)
@@ -392,9 +417,9 @@ function AS:Blizzard_Inspect(event, addon)
 		end
 	end)
 
-	for i = 1, MAX_TALENT_TIERS do
-		for j = 1, NUM_TALENT_COLUMNS do
-			local Button = InspectTalentFrame.InspectTalents['tier'..i]["talent"..j]
+	for i = 1, _G.MAX_TALENT_TIERS do
+		for j = 1, _G.NUM_TALENT_COLUMNS do
+			local Button = _G.InspectTalentFrame.InspectTalents['tier'..i]["talent"..j]
 			AS:StripTextures(Button)
 			AS:SkinTexture(Button.icon, true)
 			hooksecurefunc(Button.border, 'SetShown', function(self, value)
@@ -407,7 +432,7 @@ function AS:Blizzard_Inspect(event, addon)
 		end
 	end
 
-	InspectGuildFrameBG:SetTexture('')
+	_G.InspectGuildFrameBG:SetTexture('')
 
 	AS:UnregisterSkinEvent(addon, event)
 end
@@ -415,12 +440,12 @@ end
 function AS:Blizzard_ItemSocketingUI(event, addon)
 	if addon ~= 'Blizzard_ItemSocketingUI' then return end
 
-	AS:SkinFrame(ItemSocketingFrame)
-	ItemSocketingFrame.portrait:SetAlpha(0)
-	AS:SkinFrame(ItemSocketingScrollFrame)
-	AS:SkinCloseButton(ItemSocketingFrame.CloseButton)
+	AS:SkinFrame(_G.ItemSocketingFrame)
+	_G.ItemSocketingFrame.portrait:SetAlpha(0)
+	AS:SkinFrame(_G.ItemSocketingScrollFrame)
+	AS:SkinCloseButton(_G.ItemSocketingFrame.CloseButton)
 
-	for i = 1, MAX_NUM_SOCKETS do
+	for i = 1, _G.MAX_NUM_SOCKETS do
 		local button = _G["ItemSocketingSocket"..i]
 		AS:SkinFrame(button)
 		AS:StyleButton(button)
@@ -439,35 +464,35 @@ function AS:Blizzard_ItemSocketingUI(event, addon)
 		end
 	end)
 
-	ItemSocketingSocketButton:ClearAllPoints()
-	ItemSocketingSocketButton:SetPoint("BOTTOMRIGHT", ItemSocketingFrame, "BOTTOMRIGHT", -5, 5)
-	AS:SkinButton(ItemSocketingSocketButton)
-	AS:SkinScrollBar(ItemSocketingScrollFrameScrollBar)
+	_G.ItemSocketingSocketButton:ClearAllPoints()
+	_G.ItemSocketingSocketButton:SetPoint("BOTTOMRIGHT", _G.ItemSocketingFrame, "BOTTOMRIGHT", -5, 5)
+	AS:SkinButton(_G.ItemSocketingSocketButton)
+	AS:SkinScrollBar(_G.ItemSocketingScrollFrameScrollBar)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
 
 function AS:Blizzard_TradeWindow()
-	AS:SkinFrame(TradeFrame, nil, nil, true)
-	AS:StripTextures(TradeRecipientMoneyBg)
-	AS:SkinFrame(TradeRecipientMoneyInset)
-	AS:SkinButton(TradeFrameTradeButton, true)
-	AS:SkinButton(TradeFrameCancelButton, true)
-	AS:SkinCloseButton(TradeFrameCloseButton)
+	AS:SkinFrame(_G.TradeFrame, nil, nil, true)
+	AS:StripTextures(_G.TradeRecipientMoneyBg)
+	AS:SkinFrame(_G.TradeRecipientMoneyInset)
+	AS:SkinButton(_G.TradeFrameTradeButton, true)
+	AS:SkinButton(_G.TradeFrameCancelButton, true)
+	AS:SkinCloseButton(_G.TradeFrameCloseButton)
 
-	AS:SkinEditBox(TradePlayerInputMoneyFrameGold)
-	AS:SkinEditBox(TradePlayerInputMoneyFrameSilver)
-	AS:SkinEditBox(TradePlayerInputMoneyFrameCopper)
+	AS:SkinEditBox(_G.TradePlayerInputMoneyFrameGold)
+	AS:SkinEditBox(_G.TradePlayerInputMoneyFrameSilver)
+	AS:SkinEditBox(_G.TradePlayerInputMoneyFrameCopper)
 
-	AS:StripTextures(TradePlayerInputMoneyInset)
-	TradePlayerInputMoneyFrame:SetPoint('TOPLEFT', 8, -59)
-	TradePlayerItem1:SetPoint('TOPLEFT', 8, -89)
+	AS:StripTextures(_G.TradePlayerInputMoneyInset)
+	_G.TradePlayerInputMoneyFrame:SetPoint('TOPLEFT', 8, -59)
+	_G.TradePlayerItem1:SetPoint('TOPLEFT', 8, -89)
 
-	for _, Inset in pairs({ TradePlayerItemsInset, TradeRecipientItemsInset, TradePlayerEnchantInset, TradeRecipientEnchantInset }) do
+	for _, Inset in pairs({ _G.TradePlayerItemsInset, _G.TradeRecipientItemsInset, _G.TradePlayerEnchantInset, _G.TradeRecipientEnchantInset }) do
 		AS:SkinFrame(Inset)
 	end
 
-	for _, Highlight in pairs({ TradeHighlightPlayer, TradeHighlightRecipient, TradeHighlightPlayerEnchant, TradeHighlightRecipientEnchant }) do
+	for _, Highlight in pairs({ _G.TradeHighlightPlayer, _G.TradeHighlightRecipient, _G.TradeHighlightPlayerEnchant, _G.TradeHighlightRecipientEnchant }) do
 		Highlight:StripTextures()
 	end
 
@@ -491,20 +516,20 @@ function AS:Blizzard_TradeWindow()
 
 	hooksecurefunc('TradeFrame_SetAcceptState', function(playerState, targetState)
 		if ( playerState == 1 ) then
-			TradePlayerItemsInset:SetBackdropBorderColor(0, 1, 0)
-			TradePlayerEnchantInset:SetBackdropBorderColor(0, 1, 0)
+			_G.TradePlayerItemsInset:SetBackdropBorderColor(0, 1, 0)
+			_G.TradePlayerEnchantInset:SetBackdropBorderColor(0, 1, 0)
 		else
-			TradePlayerItemsInset:SetBackdropBorderColor(unpack(AS.BorderColor))
-			TradePlayerEnchantInset:SetBackdropBorderColor(unpack(AS.BorderColor))
+			_G.TradePlayerItemsInset:SetBackdropBorderColor(unpack(AS.BorderColor))
+			_G.TradePlayerEnchantInset:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end
 		if ( targetState == 1 ) then
-			TradeRecipientItemsInset:SetBackdropBorderColor(0, 1, 0)
-			TradeRecipientEnchantInset:SetBackdropBorderColor(0, 1, 0)
-			TradeRecipientMoneyInset:SetBackdropBorderColor(0, 1, 0)
+			_G.TradeRecipientItemsInset:SetBackdropBorderColor(0, 1, 0)
+			_G.TradeRecipientEnchantInset:SetBackdropBorderColor(0, 1, 0)
+			_G.TradeRecipientMoneyInset:SetBackdropBorderColor(0, 1, 0)
 		else
-			TradeRecipientItemsInset:SetBackdropBorderColor(unpack(AS.BorderColor))
-			TradeRecipientEnchantInset:SetBackdropBorderColor(unpack(AS.BorderColor))
-			TradeRecipientMoneyInset:SetBackdropBorderColor(unpack(AS.BorderColor))
+			_G.TradeRecipientItemsInset:SetBackdropBorderColor(unpack(AS.BorderColor))
+			_G.TradeRecipientEnchantInset:SetBackdropBorderColor(unpack(AS.BorderColor))
+			_G.TradeRecipientMoneyInset:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end
 	end)
 

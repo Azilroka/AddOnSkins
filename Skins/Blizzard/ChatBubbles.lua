@@ -1,5 +1,19 @@
 local AS = unpack(AddOnSkins)
 
+-- Cache global variables
+--Lua functions
+local _G = _G
+local pairs, select, type, unpack = pairs, select, type, unpack
+local strfind, strlower = strfind, strlower
+local twipe = table.wipe
+--WoW API / Variables
+local Ambiguate = Ambiguate
+local C_ChatBubbles_GetAllChatBubbles = C_ChatBubbles.GetAllChatBubbles
+local CUSTOM_CLASS_COLORS, RAID_CLASS_COLORS = CUSTOM_CLASS_COLORS, RAID_CLASS_COLORS
+local CreateFrame = CreateFrame
+local GetPlayerInfoByGUID = GetPlayerInfoByGUID
+-- GLOBALS:
+
 function AS:Blizzard_ChatBubbles()
 	local messageToGUID, messageToSender = {}, {}
 
@@ -11,8 +25,8 @@ function AS:Blizzard_ChatBubbles()
 	EventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
 	EventFrame:SetScript("OnEvent", function(self, event, msg, sender, _, _, _, _, _, _, _, _, _, guid)
 		if event == 'PLAYER_ENTERING_WORLD' then
-			wipe(messageToGUID)
-			wipe(messageToSender)
+			twipe(messageToGUID)
+			twipe(messageToSender)
 		else
 			messageToGUID[msg] = guid
 			messageToSender[msg] = Ambiguate(sender, "none")
@@ -85,7 +99,7 @@ function AS:Blizzard_ChatBubbles()
 	end
 
 	AS:ScheduleRepeatingTimer(function()
-		for _, chatBubble in pairs(C_ChatBubbles.GetAllChatBubbles()) do
+		for _, chatBubble in pairs(C_ChatBubbles_GetAllChatBubbles()) do
 			if not chatBubble.isSkinned then
 				SkinChatBubble(chatBubble)
 			end

@@ -1,5 +1,17 @@
 local AS = unpack(AddOnSkins)
 
+-- Cache global variables
+--Lua functions
+local _G = _G
+local select, unpack = select, unpack
+--WoW API / Variables
+local BAG_ITEM_QUALITY_COLORS = BAG_ITEM_QUALITY_COLORS
+local BankFrameItemButton_Update = BankFrameItemButton_Update
+local GetContainerItemInfo = GetContainerItemInfo
+local GetContainerItemQuestInfo = GetContainerItemQuestInfo
+local hooksecurefunc = hooksecurefunc
+-- GLOBALS:
+
 function AS:Blizzard_Bags()
 	if Tukui and Tukui[2]["Bags"]["Enable"] then return end
 
@@ -8,7 +20,7 @@ function AS:Blizzard_Bags()
 		AS:SkinBackdropFrame(Bag, nil, true)
 		for j = 1, 36 do
 			local ItemButton = _G["ContainerFrame"..i.."Item"..j]
---			AS:SkinTexture(_G["ContainerFrame"..i.."Item"..j..'IconQuestTexture'])
+			--AS:SkinTexture(_G["ContainerFrame"..i.."Item"..j..'IconQuestTexture'])
 			AS:SetTemplate(ItemButton)
 			AS:SkinTexture(ItemButton.icon)
 			ItemButton:SetNormalTexture('')
@@ -56,7 +68,7 @@ function AS:Blizzard_Bags()
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
 				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
 				local QualityColor = Quality and BAG_ITEM_QUALITY_COLORS[Quality] or nil
-				if (Quality > LE_ITEM_QUALITY_COMMON and QualityColor) then
+				if (Quality > _G.LE_ITEM_QUALITY_COMMON and QualityColor) then
 					ItemButton:SetBackdropBorderColor(QualityColor.r, QualityColor.g, QualityColor.b)
 				elseif isQuestItem then
 					ItemButton:SetBackdropBorderColor(1, .82, 0)
@@ -74,7 +86,7 @@ function AS:Blizzard_Bags()
 			hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
 				local isQuestItem = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
-				if Quality and Quality > LE_ITEM_QUALITY_COMMON then
+				if Quality and Quality > _G.LE_ITEM_QUALITY_COMMON then
 					ItemButton:SetBackdropBorderColor(r, g, b)
 				elseif isQuestItem then
 					ItemButton:SetBackdropBorderColor(1, .82, 0)
@@ -106,7 +118,7 @@ function AS:Blizzard_Bags()
 			elseif i <= 5 and i >= 2 then
 				Portrait:SetNormalTexture(_G["CharacterBag"..(i - 2).."SlotIconTexture"]:GetTexture())
 			elseif i <= 12 and i >= 6 then
-				Portrait:SetNormalTexture(BankSlotsFrame["Bag"..(i-5)].icon:GetTexture())
+				Portrait:SetNormalTexture(_G.BankSlotsFrame["Bag"..(i-5)].icon:GetTexture())
 			end
 			if Portrait:GetNormalTexture() then
 				AS:SkinTexture(Portrait:GetNormalTexture())
@@ -117,7 +129,7 @@ function AS:Blizzard_Bags()
 				if ItemButton then
 					local QuestIcon = _G["ContainerFrame"..i.."Item"..j.."IconQuestTexture"]
 					local QuestTexture = QuestIcon:GetTexture()
-					if QuestTexture == TEXTURE_ITEM_QUEST_BANG then
+					if QuestTexture == _G.TEXTURE_ITEM_QUEST_BANG then
 						QuestIcon:SetAlpha(1)
 					else
 						QuestIcon:SetAlpha(0)
@@ -130,19 +142,19 @@ function AS:Blizzard_Bags()
 	hooksecurefunc('BankFrameItemButton_Update', UpdateBagIcon)
 	hooksecurefunc('ContainerFrame_Update', UpdateBagIcon)
 
-	AS:SkinEditBox(BagItemSearchBox)
-	AS:StripTextures(BackpackTokenFrame)
+	AS:SkinEditBox(_G.BagItemSearchBox)
+	AS:StripTextures(_G.BackpackTokenFrame)
 
-	AS:SkinButton(BagItemAutoSortButton)
-	BagItemAutoSortButton:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
-	BagItemAutoSortButton:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
-	AS:SkinTexture(BagItemAutoSortButton:GetNormalTexture())
-	BagItemAutoSortButton:GetNormalTexture():SetInside()
-	AS:SkinTexture(BagItemAutoSortButton:GetPushedTexture())
-	BagItemAutoSortButton:GetPushedTexture():SetInside()
-	BagItemAutoSortButton:SetSize(22, 22)
+	AS:SkinButton(_G.BagItemAutoSortButton)
+	_G.BagItemAutoSortButton:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
+	_G.BagItemAutoSortButton:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
+	AS:SkinTexture(_G.BagItemAutoSortButton:GetNormalTexture())
+	_G.BagItemAutoSortButton:GetNormalTexture():SetInside()
+	AS:SkinTexture(_G.BagItemAutoSortButton:GetPushedTexture())
+	_G.BagItemAutoSortButton:GetPushedTexture():SetInside()
+	_G.BagItemAutoSortButton:SetSize(22, 22)
 
-	BagItemAutoSortButton:SetScript('OnShow', function(self)
+	_G.BagItemAutoSortButton:SetScript('OnShow', function(self)
 		local a, b, c, d, e = self:GetPoint()
 		self:SetPoint(a, b, c, d - 3, e - 1)
 		self.SetPoint = AS.Noop
@@ -157,31 +169,31 @@ function AS:Blizzard_Bags()
 		Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 3, 0)
 	end
 
-	AS:SkinFrame(BankFrame, nil, nil, true)
-	AS:SkinCloseButton(BankFrameCloseButton)
-	AS:StripTextures(BankFrameMoneyFrameBorder)
-	AS:StripTextures(BankFrameMoneyFrameInset)
-	AS:StripTextures(BankSlotsFrame)
+	AS:SkinFrame(_G.BankFrame, nil, nil, true)
+	AS:SkinCloseButton(_G.BankFrameCloseButton)
+	AS:StripTextures(_G.BankFrameMoneyFrameBorder)
+	AS:StripTextures(_G.BankFrameMoneyFrameInset)
+	AS:StripTextures(_G.BankSlotsFrame)
 
-	AS:SkinButton(BankFramePurchaseButton)
-	BankFramePurchaseButton:SetHeight(22)
+	AS:SkinButton(_G.BankFramePurchaseButton)
+	_G.BankFramePurchaseButton:SetHeight(22)
 
-	BankItemSearchBox:SetSize(159, 16)
-	AS:SkinEditBox(BankItemSearchBox)
+	_G.BankItemSearchBox:SetSize(159, 16)
+	AS:SkinEditBox(_G.BankItemSearchBox)
 
-	AS:SkinButton(BankItemAutoSortButton)
-	BankItemAutoSortButton:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
-	BankItemAutoSortButton:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
-	AS:SkinTexture(BankItemAutoSortButton:GetNormalTexture())
-	BankItemAutoSortButton:GetNormalTexture():SetInside()
-	AS:SkinTexture(BankItemAutoSortButton:GetPushedTexture())
-	BankItemAutoSortButton:GetPushedTexture():SetInside()
-	BankItemAutoSortButton:SetSize(20, 20)
-	BankItemAutoSortButton:SetPoint("LEFT", BankItemSearchBox, "RIGHT", 4, 0)
+	AS:SkinButton(_G.BankItemAutoSortButton)
+	_G.BankItemAutoSortButton:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
+	_G.BankItemAutoSortButton:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
+	AS:SkinTexture(_G.BankItemAutoSortButton:GetNormalTexture())
+	_G.BankItemAutoSortButton:GetNormalTexture():SetInside()
+	AS:SkinTexture(_G.BankItemAutoSortButton:GetPushedTexture())
+	_G.BankItemAutoSortButton:GetPushedTexture():SetInside()
+	_G.BankItemAutoSortButton:SetSize(20, 20)
+	_G.BankItemAutoSortButton:SetPoint("LEFT", _G.BankItemSearchBox, "RIGHT", 4, 0)
 
 	-- Bank Bags
 	for i = 1, 7 do
-		local BankBag = BankSlotsFrame['Bag'..i]
+		local BankBag = _G.BankSlotsFrame['Bag'..i]
 		AS:SkinFrame(BankBag)
 		AS:StyleButton(BankBag)
 		AS:SkinTexture(BankBag.icon)
@@ -215,9 +227,9 @@ function AS:Blizzard_Bags()
 	end
 
 	-- Reagent Bank
-	AS:SkinButton(ReagentBankFrame.DespositButton)
-	ReagentBankFrame:HookScript('OnShow', function(self)
-		if ReagentBankFrame.slots_initialized and not ReagentBankFrame.isSkinned then
+	AS:SkinButton(_G.ReagentBankFrame.DespositButton)
+	_G.ReagentBankFrame:HookScript('OnShow', function(self)
+		if _G.ReagentBankFrame.slots_initialized and not _G.ReagentBankFrame.isSkinned then
 			for i = 1, 98 do
 				local ItemButton = _G["ReagentBankFrameItem"..i]
 				AS:SkinFrame(ItemButton)
@@ -237,13 +249,13 @@ function AS:Blizzard_Bags()
 				end)
 				BankFrameItemButton_Update(ItemButton)
 			end
-			AS:StripTextures(ReagentBankFrame, true)
+			AS:StripTextures(_G.ReagentBankFrame, true)
 			self.isSkinned = true
 		end
 	end)
 
-	AS:SkinTab(BankFrameTab1)
-	AS:SkinTab(BankFrameTab2)
+	AS:SkinTab(_G.BankFrameTab1)
+	AS:SkinTab(_G.BankFrameTab2)
 end
 
 AS:RegisterSkin('Blizzard_Bags', AS.Blizzard_Bags)
