@@ -1257,7 +1257,7 @@ function AS:SkinIconTextAndBackgroundWidget(widgetFrame) end
 
 function AS:SkinDoubleIconAndTextWidget(widgetFrame) end
 
-function AS:SKinStackedResourceTrackerWidget(widgetFrame) end
+function AS:SkinStackedResourceTrackerWidget(widgetFrame) end
 
 function AS:SkinIconTextAndCurrenciesWidget(widgetFrame) end
 
@@ -1272,7 +1272,15 @@ function AS:SkinBulletTextListWidget(widgetFrame) end
 
 function AS:SkinScenarioHeaderCurrenciesAndBackgroundWidget(widgetFrame) end
 
-function AS:SkinTextureWithStateWidget(widgetFrame) end
+function AS:SkinTextureAndTextWidget(widgetFrame) end
+
+function AS:SkinSpellDisplay(widgetFrame) end
+
+function AS:SkinDoubleStateIconRow(widgetFrame) end
+
+function AS:SkinTextureAndTextRowWidget(widgetFrame) end
+
+function AS:SkinZoneControl(widgetFrame) end
 
 local W = Enum.UIWidgetVisualizationType;
 AS.WidgetSkinningFuncs = {
@@ -1282,13 +1290,17 @@ AS.WidgetSkinningFuncs = {
 	[W.DoubleStatusBar] = "SkinDoubleStatusBarWidget",
 	[W.IconTextAndBackground] = "SkinIconTextAndBackgroundWidget",
 	[W.DoubleIconAndText] = "SkinDoubleIconAndTextWidget",
-	[W.StackedResourceTracker] = "SKinStackedResourceTrackerWidget",
+	[W.StackedResourceTracker] = "SkinStackedResourceTrackerWidget",
 	[W.IconTextAndCurrencies] = "SkinIconTextAndCurrenciesWidget",
 	[W.TextWithState] = "SkinTextWithStateWidget",
 	[W.HorizontalCurrencies] = "SkinHorizontalCurrenciesWidget",
 	[W.BulletTextList] = "SkinBulletTextListWidget",
 	[W.ScenarioHeaderCurrenciesAndBackground] = "SkinScenarioHeaderCurrenciesAndBackgroundWidget",
-	[W.TextureWithState] = "SkinTextureWithStateWidget"
+	[W.TextureAndText] = "SkinTextureAndTextWidget",
+	[W.SpellDisplay] = "SkinSpellDisplay",
+	[W.DoubleStateIconRow] = "SkinDoubleStateIconRow",
+	[W.TextureAndTextRow] = "SkinTextureAndTextRowWidget",
+	[W.ZoneControl] = "SkinZoneControl",
 }
 
 function AS:SkinWidgetContainer(widgetContainer)
