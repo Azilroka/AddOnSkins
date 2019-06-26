@@ -73,6 +73,11 @@ AS.ChangeLog = {
 	['4.15'] = {
 		'Fixed: Comparing a string to a number'
 	},
+	['4.16'] = {
+		'Fixed: UI Widgets Error Spam',
+		' ',
+		'More updates will follow this weekend',
+	},
 }
 
 local DEVELOPERS = {

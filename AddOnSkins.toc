@@ -1,6 +1,6 @@
 ## Interface: 80100
 ## Title: |cff1784d1AddOnSkins|r
-## Version: 4.15
+## Version: 4.16
 ## Author: Azilroka, Whiro
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 ## OptionalDeps: ElvUI, Tukui
