@@ -244,59 +244,35 @@ function AS:Blizzard_BattlefieldMap(event, addon)
 	AS:UnregisterSkinEvent(addon, event)
 end
 
-function AS:Blizzard_WorldStateScore()
-	-- Macro to show the WorldStateScoreFrame: /run WorldStateScoreFrame:Show()
-	AS:SkinFrame(WorldStateScoreFrame)
-	AS:StripTextures(WorldStateScoreScrollFrame)
+function AS:Blizzard_PVPMatch()
+	-- Macro to show the PVPMatchScoreboard: /run PVPMatchScoreboard:Show()
+	-- Macro to show the PVPMatchResults: /run PVPMatchResults:Show()
+	local PVPMatchScoreboard = _G.PVPMatchScoreboard
+	AS:SkinFrame(PVPMatchScoreboard)
+	AS:SkinCloseButton(PVPMatchScoreboard.CloseButton)
 
-	AS:SkinCloseButton(WorldStateScoreFrameCloseButton)
-	AS:SkinScrollBar(WorldStateScoreScrollFrameScrollBar)
+	PVPMatchScoreboard.Content:StripTextures()
+	AS:SkinScrollBar(PVPMatchScoreboard.Content.ScrollFrame.ScrollBar)
 
-	AS:SkinButton(WorldStateScoreFrameLeaveButton)
-	AS:SkinButton(WorldStateScoreFrameQueueButton)
-
-	for i = 1, 3 do
-		AS:SkinTab(_G["WorldStateScoreFrameTab"..i])
+	for _, tab in pairs({PVPMatchScoreboard.Content.TabContainer.TabGroup:GetChildren()}) do
+		AS:SkinTab(tab)
 	end
 
-	hooksecurefunc('PVPHonorXPBar_SetNextAvailable', function(XPBar)
-		XPBar:StripTextures()
+	local PVPMatchResults = _G.PVPMatchResults
+	AS:SkinFrame(PVPMatchResults)
 
-		if XPBar.Bar and not XPBar.Bar.Backdrop then
-			AS:CreateBackdrop(XPBar.Bar)
-			if XPBar.Bar.Background then
-				XPBar.Bar.Background:SetInside(XPBar.Bar.Backdrop)
-			end
-			if XPBar.Bar.Spark then
-				XPBar.Bar.Spark:SetAlpha(0)
-			end
-			if XPBar.Bar.OverlayFrame and XPBar.Bar.OverlayFrame.Text then
-				XPBar.Bar.OverlayFrame.Text:ClearAllPoints()
-				XPBar.Bar.OverlayFrame.Text:Point("CENTER", XPBar.Bar)
-			end
-		end
+	PVPMatchResults.content:StripTextures()
+	PVPMatchResults.content.tabContainer:StripTextures()
 
-		if XPBar.PrestigeReward and XPBar.PrestigeReward.Accept then
-			XPBar.PrestigeReward.Accept:ClearAllPoints()
-			XPBar.PrestigeReward.Accept:SetPoint("TOP", XPBar.PrestigeReward, "BOTTOM", 0, 0)
-			AS:SkinButton(XPBar.PrestigeReward.Accept)
-		end
+	AS:SkinScrollBar(PVPMatchResults.content.scrollFrame.scrollBar)
+	AS:SkinCloseButton(PVPMatchResults.CloseButton)
+	AS:SkinButton(PVPMatchResults.buttonContainer.leaveButton)
 
-		if XPBar.NextAvailable then
-			if XPBar.Bar then
-				XPBar.NextAvailable:ClearAllPoints()
-				XPBar.NextAvailable:SetPoint("LEFT", XPBar.Bar, "RIGHT", 0, -2)
-			end
-
-			if XPBar.NextAvailable.Icon then
-				AS:StripTextures(XPBar.NextAvailable)
-				AS:CreateBackdrop(XPBar.NextAvailable.Icon, true)
-				XPBar.NextAvailable.Icon:SetDrawLayer("ARTWORK")
-			end
-		end
-	end)
+	for _, tab in pairs({PVPMatchResults.content.tabContainer.tabGroup:GetChildren()}) do
+		AS:SkinTab(tab)
+	end
 end
 
 AS:RegisterSkin("Blizzard_PVPUI", AS.Blizzard_PVPUI, 'ADDON_LOADED')
+AS:RegisterSkin("Blizzard_PVPMatch", AS.Blizzard_PVPMatch)
 AS:RegisterSkin("Blizzard_BattlefieldMap", AS.Blizzard_BattlefieldMap, 'ADDON_LOADED')
-AS:RegisterSkin("Blizzard_WorldStateScore", AS.Blizzard_WorldStateScore)

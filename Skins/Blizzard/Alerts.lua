@@ -677,20 +677,20 @@ function AS:Blizzard_Alerts()
 	hooksecurefunc(NewPetAlertSystem, "setUpFunction", SkinNewPetAlert)
 	hooksecurefunc(NewMountAlertSystem, "setUpFunction", SkinNewPetAlert)
 
-	for _, frame in pairs({ _G.BonusRollMoneyWonFrame, _G.BonusRollLootWonFrame }) do
-		frame.Background:SetAlpha(0)
-		frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-		frame.IconBorder:SetAlpha(0)
+	-- for _, frame in pairs({ _G.BonusRollMoneyWonFrame, _G.BonusRollLootWonFrame }) do
+	-- 	frame.Background:SetAlpha(0)
+	-- 	frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+	-- 	frame.IconBorder:SetAlpha(0)
 
-		frame.Icon.b = CreateFrame("Frame", nil, frame)
-		frame.Icon.b:SetTemplate("Default")
-		frame.Icon.b:SetOutside(frame.Icon)
-		frame.Icon:SetParent(frame.Icon.b)
+	-- 	frame.Icon.b = CreateFrame("Frame", nil, frame)
+	-- 	frame.Icon.b:SetTemplate("Default")
+	-- 	frame.Icon.b:SetOutside(frame.Icon)
+	-- 	frame.Icon:SetParent(frame.Icon.b)
 
-		AS:CreateBackdrop(frame, "Transparent")
-		frame.Backdrop:Point('TOPLEFT', frame.Icon.b, 'TOPLEFT', -4, 4)
-		frame.Backdrop:Point('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -4)
-	end
+	-- 	AS:CreateBackdrop(frame, "Transparent")
+	-- 	frame.Backdrop:Point('TOPLEFT', frame.Icon.b, 'TOPLEFT', -4, 4)
+	-- 	frame.Backdrop:Point('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -4)
+	-- end
 end
 
 AS:RegisterSkin("Blizzard_Alerts", AS.Blizzard_Alerts)

@@ -18,7 +18,19 @@ local GetTradeTargetItemLink = GetTradeTargetItemLink
 local GetSocketTypes = GetSocketTypes
 local GetSpecializationInfoByID = GetSpecializationInfoByID
 local GetSpecializationRoleByID = GetSpecializationRoleByID
-local GEM_TYPE_INFO = GEM_TYPE_INFO
+local GEM_TYPE_INFO = {
+	Yellow = {textureKit="yellow", r=0.97, g=0.82, b=0.29},
+	Red = {textureKit="red", r=1, g=0.47, b=0.47},
+	Blue = {textureKit="blue", r=0.47, g=0.67, b=1},
+	Hydraulic = {textureKit="hydraulic", r=1, g=1, b=1},
+	Cogwheel = {textureKit="cogwheel", r=1, g=1, b=1},
+	Meta = {textureKit="meta", r=1, g=1, b=1},
+	Prismatic = {textureKit="prismatic", r=1, g=1, b=1},
+	PunchcardRed = {textureKit="punchcard-red", r=1, g=0.47, b=0.47},
+	PunchcardYellow = {textureKit="punchcard-yellow", r=0.97, g=0.82, b=0.29},
+	PunchcardBlue = {textureKit="punchcard-blue", r=0.47, g=0.67, b=1},
+}
+
 local hooksecurefunc = hooksecurefunc
 local PaperDollBgDesaturate = PaperDollBgDesaturate
 local PAPERDOLL_SIDEBARS = PAPERDOLL_SIDEBARS

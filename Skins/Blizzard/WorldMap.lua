@@ -416,9 +416,8 @@ end
 
 function AS:Blizzard_WorldMap()
 	local WorldMapFrame = _G.WorldMapFrame
-	local QuestMapFrame = _G.QuestMapFrame
-	local QuestScrollFrame = _G.QuestScrollFrame
-	local QuestScrollFrameScrollBar = _G.QuestScrollFrameScrollBar
+	local QuestMapFrame = WorldMapFrame.QuestLog
+	local QuestScrollFrame = QuestMapFrame.QuestsFrame
 
 	AS:SkinBackdropFrame(WorldMapFrame)
 	AS:CreateShadow(WorldMapFrame.Backdrop)
@@ -445,7 +444,10 @@ function AS:Blizzard_WorldMap()
 
 	QuestMapFrame.VerticalSeparator:Hide()
 
-	AS:SkinScrollBar(QuestScrollFrameScrollBar)
+	AS:SkinScrollBar(QuestScrollFrame.ScrollBar)
+	QuestScrollFrame.ScrollBar:SetPoint("TOPLEFT", QuestScrollFrame, "TOPRIGHT", 1, -15)
+	QuestScrollFrame.ScrollBar:SetPoint("BOTTOMLEFT", QuestScrollFrame, "BOTTOMRIGHT", 6, 10)
+
 	AS:SkinButton(QuestMapFrame.DetailsFrame.BackButton)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.AbandonButton)
 	AS:SkinButton(QuestMapFrame.DetailsFrame.ShareButton, true)
@@ -468,8 +470,6 @@ function AS:Blizzard_WorldMap()
 	QuestScrollFrame.Contents.StoryHeader.Text:SetPoint("TOPLEFT", 18, -20)
 	QuestScrollFrame.Contents.StoryHeader.HighlightTexture:SetAllPoints(QuestScrollFrame.Contents.StoryHeader.Background)
 	QuestScrollFrame.Contents.StoryHeader.HighlightTexture:SetAlpha(0)
-	QuestScrollFrameScrollBar:SetPoint("TOPLEFT", QuestScrollFrame.DetailsFrame, "TOPRIGHT", 1, -15)
-	QuestScrollFrameScrollBar:SetPoint("BOTTOMLEFT", QuestScrollFrame.DetailsFrame, "BOTTOMRIGHT", 6, 10)
 
 	if not AS.ParchmentEnabled then
 		AS:SkinBackdropFrame(QuestMapFrame.DetailsFrame)

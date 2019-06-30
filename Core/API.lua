@@ -73,6 +73,7 @@ AS.Blizzard.Frames = {
 	'LeftInset',
 	'RightInset',
 	'NineSlice',
+	'Border',
 	'BorderFrame',
 	'bottomInset',
 	'BottomInset',

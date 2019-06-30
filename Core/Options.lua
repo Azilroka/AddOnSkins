@@ -78,6 +78,10 @@ AS.ChangeLog = {
 		' ',
 		'More updates will follow this weekend',
 	},
+	['4.17'] = {
+		'Removed: WeakAuras (Due to breaking WeakAuras)',
+		'Fixes: Blizzard Skins - World Map, Alerts, PvP Match'
+	},
 }
 
 local DEVELOPERS = {

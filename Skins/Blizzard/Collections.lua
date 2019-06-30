@@ -63,9 +63,6 @@ function AS:Blizzard_Collections(event, addon)
 			end
 		end)
 
-		hooksecurefunc(Button.unusable, 'Show', function() Button.icon:SetVertexColor(.4, .1, .1) Button.Backdrop:SetBackdropColor(.4, .1, .1) end)
-		hooksecurefunc(Button.unusable, 'Hide', function() Button.icon:SetVertexColor(1, 1, 1) Button.Backdrop:SetBackdropColor(unpack(AS.BackdropColor)) end)
-
 		hooksecurefunc(Button.selectedTexture, 'Show', function()
 			Button.name:SetTextColor(1, .8, .1)
 			Button.Backdrop:SetBackdropBorderColor(1, .8, .1)
@@ -82,7 +79,6 @@ function AS:Blizzard_Collections(event, addon)
 		Button.factionIcon:SetPoint('BOTTOMRIGHT', -1, 4)
 
 		Button.icon:SetPoint("LEFT", -37, 0)
-		Button.unusable:SetAlpha(0)
 		Button.iconBorder:SetTexture('')
 		Button.background:SetTexture('')
 		Button.selectedTexture:SetAlpha(0)
