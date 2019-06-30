@@ -84,6 +84,15 @@ AS.ChangeLog = {
 		'Fixes: Blizzard Skins - World Map, Alerts, PvP Match',
 		'Fixes: Energy Watch Reborn, Pawn'
 	},
+	['4.18'] = {
+		'',
+	},
+	['4.19'] = {
+		'Removed: WeakAuras (Due to breaking WeakAuras)',
+		'Added: ArkInvetory'
+		'Fixes: Blizzard Skins - World Map, Alerts, PvP Match',
+		'Fixes: Energy Watch Reborn, Pawn'
+	}
 }
 
 local DEVELOPERS = {
