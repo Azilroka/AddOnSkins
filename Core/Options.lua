@@ -36,7 +36,7 @@ AS.ChangeLog = {
 		'Removed: Parchment Remover (Added directly into ElvUI now)',
 	},
 	["4.04"] = {
-		'Core: API'
+		'Core: API',
 	},
 	['4.05'] = {
 		'Core: API 8.1',
@@ -45,14 +45,14 @@ AS.ChangeLog = {
 		'Fixed: Tukui 18 Embed',
 	},
 	['4.06'] = {
-		'Curse Issues'
+		'Curse Issues',
 	},
 	['4.07'] = {
-		'Fixed Curse Issues'
+		'Fixed Curse Issues',
 	},
 	['4.08'] = {
 		'Core: Themes & Shadows',
-		'Updated: Allied Races, AzeriteUI, World Map, Quest'
+		'Updated: Allied Races, AzeriteUI, World Map, Quest',
 	},
 	['4.09'] = {
 		'Core: SetTexture(), StatusBarColor, NavButtons',
@@ -68,10 +68,10 @@ AS.ChangeLog = {
 		'Updated: Ace3, AdiBags, Clique, Guild Roster Manager, Macro, Spell Book, Quest, TradeSkill, Talents',
 	},
 	['4.14'] = {
-		'Updated: API'
+		'Updated: API',
 	},
 	['4.15'] = {
-		'Fixed: Comparing a string to a number'
+		'Fixed: Comparing a string to a number',
 	},
 	['4.16'] = {
 		'Fixed: UI Widgets Error Spam',
@@ -80,18 +80,21 @@ AS.ChangeLog = {
 	},
 	['4.17'] = {
 		'Removed: WeakAuras (Due to breaking WeakAuras)',
-		'Added: ArkInvetory'
+		'Added: ArkInvetory',
 		'Fixes: Blizzard Skins - World Map, Alerts, PvP Match',
-		'Fixes: Energy Watch Reborn, Pawn'
+		'Fixes: Energy Watch Reborn, Pawn',
 	},
 	['4.18'] = {
 		'',
 	},
 	['4.19'] = {
+		'',
+	}
+	['4.20'] = {
 		'Removed: WeakAuras (Due to breaking WeakAuras)',
-		'Added: ArkInvetory'
+		'Added: ArkInvetory',
 		'Fixes: Blizzard Skins - World Map, Alerts, PvP Match',
-		'Fixes: Energy Watch Reborn, Pawn'
+		'Fixes: Energy Watch Reborn, Pawn',
 	}
 }
 
