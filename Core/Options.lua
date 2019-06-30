@@ -89,7 +89,7 @@ AS.ChangeLog = {
 	},
 	['4.19'] = {
 		'',
-	}
+	},
 	['4.20'] = {
 		'Removed: WeakAuras (Due to breaking WeakAuras)',
 		'Added: ArkInvetory',
