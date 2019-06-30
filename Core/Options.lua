@@ -81,7 +81,7 @@ AS.ChangeLog = {
 	['4.17'] = {
 		'Removed: WeakAuras (Due to breaking WeakAuras)',
 		'Added: ArkInvetory'
-		'Fixes: Blizzard Skins - World Map, Alerts, PvP Match'
+		'Fixes: Blizzard Skins - World Map, Alerts, PvP Match',
 		'Fixes: Energy Watch Reborn, Pawn'
 	},
 }
