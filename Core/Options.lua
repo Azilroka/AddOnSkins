@@ -85,17 +85,20 @@ AS.ChangeLog = {
 		'Fixes: Energy Watch Reborn, Pawn',
 	},
 	['4.18'] = {
-		'',
+		'N/A',
 	},
 	['4.19'] = {
-		'',
-	}
+		'N/A',
+	},
 	['4.20'] = {
+		'N/A',
+	},
+	['4.21'] = {
 		'Removed: WeakAuras (Due to breaking WeakAuras)',
 		'Added: ArkInvetory',
 		'Fixes: Blizzard Skins - World Map, Alerts, PvP Match',
 		'Fixes: Energy Watch Reborn, Pawn',
-	}
+	},
 }
 
 local DEVELOPERS = {
