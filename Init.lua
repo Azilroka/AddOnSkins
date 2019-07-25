@@ -36,6 +36,11 @@ AddOn.MyName = UnitName('player')
 AddOn.MyRealm = GetRealmName()
 AddOn.Noop = function() end
 AddOn.TexCoords = {.08, .92, .08, .92}
+if _G.ElvUI then
+	if not _G.ElvUI[1].db.general.cropIcon then
+		AddOn.TexCoords = {0, 1, 0, 1}
+	end
+end
 AddOn.UIScale = UIParent:GetScale()
 AddOn.Faction = UnitFactionGroup("player")
 
