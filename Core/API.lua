@@ -1031,6 +1031,7 @@ function AS:SkinStatusBar(Frame, Color)
 end
 
 function AS:SkinTooltip(tooltip, scale)
+	if not tooltip then return end
 	for _, Region in pairs(AS.Blizzard.Tooltip) do
 		if tooltip[Region] then
 			tooltip[Region]:SetTexture()
