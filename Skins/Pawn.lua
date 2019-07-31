@@ -23,7 +23,12 @@ function AS:Pawn(event, addon)
 			PawnUI_SocketingPawnButton:Size(40, 20)
 			PawnUI_SocketingPawnButton:SetNormalTexture(Texture)
 			PawnUI_SocketingPawnButton:GetNormalTexture():SetTexCoord(0, 1, 0, 1)
-			AS:SkinTooltip(PawnSocketingTooltip)
+			hooksecurefunc(ItemSocketingDescription, "SetSocketedItem", function()
+				if (PawnSocketingTooltip and not PawnSocketingTooltip.skinned) then
+					AS:SkinTooltip(PawnSocketingTooltip)
+					PawnSocketingTooltip.skinned = true
+				end
+			end)
 		end)
 	end
 
