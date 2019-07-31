@@ -17,15 +17,13 @@ function AS:Pawn(event, addon)
 	end
 
 	if addon == 'Blizzard_ItemSocketingUI' or event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_ItemSocketingUI') then
+
 		AS:Delay(0.1, function()
 			AS:SkinButton(PawnUI_SocketingPawnButton)
 			PawnUI_SocketingPawnButton:Size(40, 20)
 			PawnUI_SocketingPawnButton:SetNormalTexture(Texture)
 			PawnUI_SocketingPawnButton:GetNormalTexture():SetTexCoord(0, 1, 0, 1)
-			if PawnSocketingTooltip then
-				AS:StripTextures(PawnSocketingTooltip)
-				AS:SkinTooltip(PawnSocketingTooltip)
-			end
+			AS:SkinTooltip(PawnSocketingTooltip)
 		end)
 	end
 
