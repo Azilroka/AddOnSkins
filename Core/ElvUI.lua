@@ -79,4 +79,14 @@ function AS:UpdateMedia()
 	AS.BorderColor = E['media'].bordercolor
 	AS.Color = E["media"].rgbvaluecolor or AS.ClassColor
 	AS.HideShadows = false
+
+	AS.TexCoords = {0, 1, 0, 1}
+	local modifier = 0.04 * _G.ElvUI[1].db.general.cropIcon
+	for i, v in ipairs(AS.TexCoords) do
+		if i % 2 == 0 then
+			AS.TexCoords[i] = v - modifier
+		else
+			AS.TexCoords[i] = v + modifier
+		end
+	end
 end

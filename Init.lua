@@ -37,17 +37,6 @@ AddOn.MyName = UnitName('player')
 AddOn.MyRealm = GetRealmName()
 AddOn.Noop = function() end
 AddOn.TexCoords = {.08, .92, .08, .92}
-if _G.ElvUI then
-	AddOn.TexCoords = {0, 1, 0, 1}
-	local modifier = 0.04 * _G.ElvUI[1].db.general.cropIcon
-	for i, v in ipairs(AddOn.TexCoords) do
-		if i % 2 == 0 then
-			AddOn.TexCoords[i] = v - modifier
-		else
-			AddOn.TexCoords[i] = v + modifier
-		end
-	end
-end
 AddOn.UIScale = UIParent:GetScale()
 AddOn.Faction = UnitFactionGroup("player")
 
