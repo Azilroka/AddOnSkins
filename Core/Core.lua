@@ -308,7 +308,9 @@ function AS:StartSkinning(event)
 
 	if AS:CheckOption('ChangeLogVersion') == nil or tonumber(AS:CheckOption('ChangeLogVersion')) < tonumber(AS.Version) then
 		AS:SetOption('ChangeLogVersion', AS.Version)
-		AS:ToggleChangeLog()
+		if AS.ChangeLog[AS.ProperVersion] then
+			AS:ToggleChangeLog()
+		end
 	end
 
 	AS.RunOnce = true
@@ -498,16 +500,18 @@ function AS:CreateChangeLog()
 
 	ChangeLogFrame.Changes = {}
 
-	local offset, i = 0, 0
+	local offset, i = 28, 1
 
-	for _, Change in pairs(AS.ChangeLog[ProperVersion]) do
-		i, offset = i + 1, offset + 28
-		ChangeLogFrame.Changes[i] = ChangeLogFrame:CreateFontString(nil, 'OVERLAY')
-		ChangeLogFrame.Changes[i]:SetSize(375, 28)
-		ChangeLogFrame.Changes[i]:SetFont(AS.Font, 14)
-		ChangeLogFrame.Changes[i]:SetPoint("TOP", ChangeLogFrame.Title, "BOTTOM", 5, -offset)
-		ChangeLogFrame.Changes[i]:SetText(Change)
-		ChangeLogFrame.Changes[i]:SetWordWrap(true)
+	if AS.ChangeLog[AS.ProperVersion] then
+		for _, Change in pairs(AS.ChangeLog[AS.ProperVersion]) do
+			ChangeLogFrame.Changes[i] = ChangeLogFrame:CreateFontString(nil, 'OVERLAY')
+			ChangeLogFrame.Changes[i]:SetSize(375, 28)
+			ChangeLogFrame.Changes[i]:SetFont(AS.Font, 14)
+			ChangeLogFrame.Changes[i]:SetPoint("TOP", ChangeLogFrame.Title, "BOTTOM", 5, -offset)
+			ChangeLogFrame.Changes[i]:SetText(Change)
+			ChangeLogFrame.Changes[i]:SetWordWrap(true)
+			i, offset = i + 1, offset + 28
+		end
 	end
 
 	ChangeLogFrame:SetSize(400, 100 + (i * 28))
