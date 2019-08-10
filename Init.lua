@@ -27,6 +27,7 @@ local UnitFactionGroup = UnitFactionGroup
 
 AddOn.Title = GetAddOnMetadata('AddOnSkins', 'Title')
 AddOn.Version = tonumber(GetAddOnMetadata('AddOnSkins', 'Version'))
+AddOn.ProperVersion = tostring(strlen(AddOn.Version) == 3 and AddOn.Version..'0' or AddOn.Version)
 AddOn.Authors = GetAddOnMetadata('AddOnSkins', 'Author'):gsub(", ", "    ")
 AddOn.LSM = LibStub('LibSharedMedia-3.0', true)
 AddOn.LCG = LibStub('LibCustomGlow-1.0', true)
