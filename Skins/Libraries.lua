@@ -232,6 +232,15 @@ function AS:SkinLibraries()
 			end
 		end)
 	end
+
+	local LQTRS = LibStub("LibQTip-1.0RS", true)
+	if LQTRS then
+		hooksecurefunc(LQTRS, 'Acquire', function()
+			for _, Tooltip in LQTRS:IterateTooltips() do
+				AS:SkinFrame(Tooltip)
+			end
+		end)
+	end
 end
 
 AS:RegisterSkin('Libraries', AS.SkinLibraries)
