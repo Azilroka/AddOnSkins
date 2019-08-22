@@ -4,7 +4,7 @@ enable-nolib-creation: no
 
 externals:
   Libs/Ace3:
-    url: https://github.com/Azilroka/Ace3
+    url: https://repos.wowace.com/wow/ace3/trunk
 
 ignore:
 	- Libs/Ace3/tests
