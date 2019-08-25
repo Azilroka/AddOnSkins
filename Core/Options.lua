@@ -99,6 +99,25 @@ AS.ChangeLog = {
 		'Fixes: Blizzard Skins - World Map, Alerts, PvP Match',
 		'Fixes: Energy Watch Reborn, Pawn',
 	},
+	['4.22'] = {
+		'Updated: Ace3, GRM',
+		'Take account to ElvUI TexCoords',
+		'Fix: Blizzard Communites Skin',
+		'Fix: Pawn Tooltip',
+	},
+	['4.23'] = {
+		'N/A',
+	},
+	['4.24'] = {
+		'Changelog tweaks',
+		'ElvUI TexCoords',
+	},
+	['4.25'] = {
+		'Updated: Auctionator, LibQTip',
+	},
+	[''] = {
+		'',
+	},
 }
 
 local DEVELOPERS = {
