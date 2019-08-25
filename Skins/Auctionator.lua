@@ -3,7 +3,7 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Auctionator') then return end
 
 function AS:Auctionator(event)
-	if addon == 'Blizzard_TradeSkillUI' or IsAddOnLoaded('Blizzard_TradeSkillUI') then 
+	if addon == 'Blizzard_TradeSkillUI' or IsAddOnLoaded('Blizzard_TradeSkillUI') then
 		TradeSkillFrame:HookScript('OnShow', function() AS:SkinButton(Auctionator_Search, true) end)
 		AS:UnregisterSkinEvent('Auctionator', event)
 	end
@@ -146,9 +146,9 @@ function AS:Auctionator(event)
 		AS:SkinFrame(Atr_Buy_Confirm_Frame, 'Default')
 		AS:SkinFrame(Atr_CheckActives_Frame, 'Default')
 
-		AS:SkinScrollBar(Atr_Hlist_ScrollFrameScrollBar)
-		Atr_Hlist_ScrollFrameScrollBar:SetPoint("TOPLEFT", Atr_Hlist_ScrollFrame, "TOPRIGHT", 4, -13)
-		Atr_Hlist_ScrollFrameScrollBar:SetPoint("BOTTOMLEFT", Atr_Hlist_ScrollFrame, "BOTTOMRIGHT", 4, 31)
+		AS:SkinScrollBar(AuctionatorScrollFrameScrollBar)
+		AuctionatorScrollFrameScrollBar:SetPoint("TOPLEFT", AuctionatorScrollFrame, "TOPRIGHT", 4, -13)
+		AuctionatorScrollFrameScrollBar:SetPoint("BOTTOMLEFT", AuctionatorScrollFrame, "BOTTOMRIGHT", 4, 31)
 
 		Atr_FullScanButton:ClearAllPoints()
 		Atr_FullScanButton:SetPoint('TOPRIGHT', Auctionator1Button, 'BOTTOMRIGHT', 0, -2)
