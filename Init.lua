@@ -40,6 +40,8 @@ AddOn.TexCoords = {.08, .92, .08, .92}
 AddOn.UIScale = UIParent:GetScale()
 AddOn.Faction = UnitFactionGroup("player")
 
+AddOn.isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+
 AddOn.ScreenWidth, AddOn.ScreenHeight = GetPhysicalScreenSize()
 
 local Color = _G.RAID_CLASS_COLORS[AddOn.MyClass]
