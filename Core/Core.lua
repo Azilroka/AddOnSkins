@@ -164,6 +164,7 @@ function AS:RegisteredSkin(addonName, priority, func, events)
 	for event, _ in pairs(events) do
 		if not strfind(event, '%[') then
 			if pcall(Validator.RegisterEvent, Validator, event) then
+				Validator:UnregisterEvent(event)
 				if not AS.events[event] then
 					AS[event] = GenerateEventFunction()
 					AS:RegisterEvent(event)
@@ -200,15 +201,7 @@ function AS:CallSkin(addonName, func, event, ...)
 			AddOnSkinsDS[AS.Version][addonName] = true
 			AS:SetOption(addonName, false)
 
-			AS.ErrorIndex = AS.ErrorIndex + 1
-			AS.SkinErrors[AS.ErrorIndex] = { Name = AS:CheckAddOn(addonName) and format('%s %s', addonName, AS:GetAddOnVersion(addonName)) or addonName, Error = format('```lua\n%s\n```\n\nGenerated with %s %s', error, AS.Title, AS.Version) }
-
-			if AS.RunOnce then
-				AS.ErrorCurrentIndex = AS.ErrorIndex
-				AS:BugReportFrame(AS.ErrorIndex)
-			else
-				AS.FoundError = true
-			end
+			tinsert(AS.SkinErrors, AS:CheckAddOn(addonName) and format('%s %s', addonName, AS:GetAddOnVersion(addonName)) or addonName)
 		end
 	end
 end

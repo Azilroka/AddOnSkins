@@ -5,19 +5,6 @@ local AS = unpack(AddOnSkins)
 local _G = _G
 local ipairs, pairs, select, type, unpack = ipairs, pairs, select, type, unpack
 --WoW API / Variables
-local C_SpecializationInfo_GetInspectSelectedPvpTalent = C_SpecializationInfo.GetInspectSelectedPvpTalent
-local FauxScrollFrame_GetOffset = FauxScrollFrame_GetOffset
-local GetFactionInfo = GetFactionInfo
-local GetNumFactions = GetNumFactions
-local GetNumSockets = GetNumSockets
-local GetInspectSpecialization = GetInspectSpecialization
-local GetItemInfo = GetItemInfo
-local GetItemQualityColor = GetItemQualityColor
-local GetTradePlayerItemLink = GetTradePlayerItemLink
-local GetTradeTargetItemLink = GetTradeTargetItemLink
-local GetSocketTypes = GetSocketTypes
-local GetSpecializationInfoByID = GetSpecializationInfoByID
-local GetSpecializationRoleByID = GetSpecializationRoleByID
 local GEM_TYPE_INFO = {
 	Yellow = {textureKit="yellow", r=0.97, g=0.82, b=0.29},
 	Red = {textureKit="red", r=1, g=0.47, b=0.47},
