@@ -1263,8 +1263,10 @@ function AS:SkinStackedResourceTrackerWidget(widgetFrame) end
 function AS:SkinIconTextAndCurrenciesWidget(widgetFrame) end
 
 function AS:SkinTextWithStateWidget(widgetFrame)
-	local text = widgetFrame.Text;
-	text:SetTextColor(1, 1, 1)
+	local text = widgetFrame.Text
+	if text then
+		text:SetTextColor(1, 1, 1)
+	end
 end
 
 function AS:SkinHorizontalCurrenciesWidget(widgetFrame) end
