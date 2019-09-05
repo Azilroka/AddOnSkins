@@ -1299,12 +1299,15 @@ AS.WidgetSkinningFuncs = {
 	[W.HorizontalCurrencies] = "SkinHorizontalCurrenciesWidget",
 	[W.BulletTextList] = "SkinBulletTextListWidget",
 	[W.ScenarioHeaderCurrenciesAndBackground] = "SkinScenarioHeaderCurrenciesAndBackgroundWidget",
-	[W.TextureAndText] = "SkinTextureAndTextWidget",
-	[W.SpellDisplay] = "SkinSpellDisplay",
-	[W.DoubleStateIconRow] = "SkinDoubleStateIconRow",
-	[W.TextureAndTextRow] = "SkinTextureAndTextRowWidget",
-	[W.ZoneControl] = "SkinZoneControl",
 }
+
+if not AS.isClassic then
+	AS.WidgetSkinningFuncs[W.TextureAndText] = "SkinTextureAndTextWidget"
+	AS.WidgetSkinningFuncs[W.SpellDisplay] = "SkinSpellDisplay"
+	AS.WidgetSkinningFuncs[W.DoubleStateIconRow] = "SkinDoubleStateIconRow"
+	AS.WidgetSkinningFuncs[W.TextureAndTextRow] = "SkinTextureAndTextRowWidget"
+	AS.WidgetSkinningFuncs[W.ZoneControl] = "SkinZoneControl"
+end
 
 function AS:SkinWidgetContainer(widgetContainer)
 	for _, child in ipairs({widgetContainer:GetChildren()}) do

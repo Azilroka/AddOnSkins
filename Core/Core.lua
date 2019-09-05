@@ -16,6 +16,7 @@ AS.ErrorIndex = 0
 AS.ErrorCurrentIndex = 1
 
 local AcceptFrame, BugReportFrame
+local Validator = CreateFrame('Frame')
 
 function AS:CheckOption(optionName, ...)
 	for i = 1, select('#', ...) do
@@ -162,12 +163,14 @@ function AS:RegisteredSkin(addonName, priority, func, events)
 	AS.skins[addonName][priority] = func
 	for event, _ in pairs(events) do
 		if not strfind(event, '%[') then
-			if not AS.events[event] then
-				AS[event] = GenerateEventFunction()
-				AS:RegisterEvent(event)
-				AS.events[event] = {}
+			if pcall(Validator.RegisterEvent, Validator, event) then
+				if not AS.events[event] then
+					AS[event] = GenerateEventFunction()
+					AS:RegisterEvent(event)
+					AS.events[event] = {}
+				end
+				AS.events[event][addonName] = true
 			end
-			AS.events[event][addonName] = true
 		end
 	end
 end
