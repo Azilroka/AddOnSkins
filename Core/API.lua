@@ -1263,10 +1263,8 @@ function AS:SkinStackedResourceTrackerWidget(widgetFrame) end
 function AS:SkinIconTextAndCurrenciesWidget(widgetFrame) end
 
 function AS:SkinTextWithStateWidget(widgetFrame)
-	local text = widgetFrame.Text
-	if text then
-		text:SetTextColor(1, 1, 1)
-	end
+	local text = widgetFrame.Text;
+	text:SetTextColor(1, 1, 1)
 end
 
 function AS:SkinHorizontalCurrenciesWidget(widgetFrame) end
@@ -1299,15 +1297,12 @@ AS.WidgetSkinningFuncs = {
 	[W.HorizontalCurrencies] = "SkinHorizontalCurrenciesWidget",
 	[W.BulletTextList] = "SkinBulletTextListWidget",
 	[W.ScenarioHeaderCurrenciesAndBackground] = "SkinScenarioHeaderCurrenciesAndBackgroundWidget",
+	[W.TextureAndText] = "SkinTextureAndTextWidget",
+	[W.SpellDisplay] = "SkinSpellDisplay",
+	[W.DoubleStateIconRow] = "SkinDoubleStateIconRow",
+	[W.TextureAndTextRow] = "SkinTextureAndTextRowWidget",
+	[W.ZoneControl] = "SkinZoneControl",
 }
-
-if not AS.isClassic then
-	AS.WidgetSkinningFuncs[W.TextureAndText] = "SkinTextureAndTextWidget"
-	AS.WidgetSkinningFuncs[W.SpellDisplay] = "SkinSpellDisplay"
-	AS.WidgetSkinningFuncs[W.DoubleStateIconRow] = "SkinDoubleStateIconRow"
-	AS.WidgetSkinningFuncs[W.TextureAndTextRow] = "SkinTextureAndTextRowWidget"
-	AS.WidgetSkinningFuncs[W.ZoneControl] = "SkinZoneControl"
-end
 
 function AS:SkinWidgetContainer(widgetContainer)
 	for _, child in ipairs({widgetContainer:GetChildren()}) do

@@ -9,8 +9,6 @@ local floor, print, format, strlower, strfind, strmatch = floor, print, format, 
 local sort, tinsert = sort, tinsert
 --WoW API / Variables
 local IsAddOnLoaded, C_Timer = IsAddOnLoaded, C_Timer
-local Validator = CreateFrame('Frame')
-
 -- GLOBALS:
 
 AS.SkinErrors = {}
@@ -164,14 +162,12 @@ function AS:RegisteredSkin(addonName, priority, func, events)
 	AS.skins[addonName][priority] = func
 	for event, _ in pairs(events) do
 		if not strfind(event, '%[') then
-			if pcall(Validator.RegisterEvent, event) then
-				if not AS.events[event] then
-					AS[event] = GenerateEventFunction()
-					AS:RegisterEvent(event)
-					AS.events[event] = {}
-				end
-				AS.events[event][addonName] = true
+			if not AS.events[event] then
+				AS[event] = GenerateEventFunction()
+				AS:RegisterEvent(event)
+				AS.events[event] = {}
 			end
+			AS.events[event][addonName] = true
 		end
 	end
 end
@@ -240,18 +236,18 @@ function AS:UpdateMedia()
 	AS.HideShadows = false
 end
 
-function AS:GetPixelScale()
-	local scale = UIParent:GetScale()
-	local pixel, ratio = 1, 768 / AS.ScreenHeight
-
-	AS.mult = (pixel / scale) - ((pixel - ratio) / scale)
-end
-
 function AS:StartSkinning(event)
+	if AS:CheckAddOn('ElvUI') then
+		if tonumber(ElvUI[1].version) < 10.91 then
+			AS:AcceptFrame(format('AddOnSkins is not compatible with ElvUI %s.\nPlease update ElvUI at www.tukui.org', ElvUI[1].version))
+			return
+		end
+	end
+
 	AS:UnregisterEvent(event)
-	AS:GetPixelScale()
 
 	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
+	AS.Mult = PixelUtil.GetNearestPixelSize(1, AS:Round(max(0.4, min(1.15, 768 / AS.ScreenHeight)), 5))
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 
 	AS:UpdateMedia()
@@ -304,6 +300,19 @@ function AS:StartSkinning(event)
 		AS:AcceptFrame('AddOnSkins is not compatible with AddonLoader.\nPlease remove it if you would like all the skins to function.')
 	end
 
+	if AS.FoundError then
+		AS:BugReportFrame(1)
+	end
+
+	AS:CreateChangeLog()
+
+	if AS:CheckOption('ChangeLogVersion') == nil or tonumber(AS:CheckOption('ChangeLogVersion')) < tonumber(AS.Version) then
+		AS:SetOption('ChangeLogVersion', AS.Version)
+		if AS.ChangeLog[AS.ProperVersion] then
+			AS:ToggleChangeLog()
+		end
+	end
+
 	AS.RunOnce = true
 end
 
@@ -313,9 +322,7 @@ function AS:Init(event, addon)
 
 		AS:UpdateMedia()
 
-		AS:RunPreload(addon)
-
-		AS:UnregisterEvent(event)
+		self:RunPreload(addon)
 	end
 
 	if event == 'PLAYER_LOGIN' then
@@ -332,12 +339,9 @@ function AS:Init(event, addon)
 			AS.EP:RegisterPlugin(AddOnName, AS.GetOptions)
 		end
 
+		AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
+		AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
 		AS:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
-
-		if not AS.isClassic then
-			AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
-			AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
-		end
 
 		if AS.LSM then
 			AS.LSM:Register('statusbar', 'Solid', [[Interface\Buttons\WHITE8X8]])
