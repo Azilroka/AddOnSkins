@@ -1301,7 +1301,7 @@ AS.WidgetSkinningFuncs = {
 	[W.ScenarioHeaderCurrenciesAndBackground] = "SkinScenarioHeaderCurrenciesAndBackgroundWidget",
 }
 
-if not AS.isClassic then
+if AS.Retail then
 	AS.WidgetSkinningFuncs[W.TextureAndText] = "SkinTextureAndTextWidget"
 	AS.WidgetSkinningFuncs[W.SpellDisplay] = "SkinSpellDisplay"
 	AS.WidgetSkinningFuncs[W.DoubleStateIconRow] = "SkinDoubleStateIconRow"

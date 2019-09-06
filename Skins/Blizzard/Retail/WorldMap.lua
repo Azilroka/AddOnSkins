@@ -1,3 +1,4 @@
+if AddOnSkins.Classic then return end
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_AlliedRacesUI(event, addon)

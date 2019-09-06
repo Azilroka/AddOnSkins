@@ -5,6 +5,9 @@ Engine[1] = AddOn
 Engine[2] = LibStub("AceLocale-3.0"):GetLocale('AddOnSkins', false)
 
 _G.AddOnSkins = Engine
+_G.AddOnSkins.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+_G.AddOnSkins.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+
 AddOnSkinsDS = {}
 
 -- Cache global variables
@@ -39,8 +42,6 @@ AddOn.Noop = function() end
 AddOn.TexCoords = {.08, .92, .08, .92}
 AddOn.UIScale = UIParent:GetScale()
 AddOn.Faction = UnitFactionGroup("player")
-
-AddOn.isClassic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 
 AddOn.ScreenWidth, AddOn.ScreenHeight = GetPhysicalScreenSize()
 
