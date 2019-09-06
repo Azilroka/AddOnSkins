@@ -20,6 +20,20 @@ function AS:Blizzard_Friends()
 		AnimateTexCoords(FriendsFrameIcon, 512, 256, 64, 64, 25, elapsed, 0.01)
 	end)
 
+	AS:SkinButton(_G.FriendsFrameFriendsScrollFrame.PendingInvitesHeaderButton, true)
+	_G.FriendsFrameFriendsScrollFrame.PendingInvitesHeaderButton:SetScript('OnMouseUp', nil)
+	_G.FriendsFrameFriendsScrollFrame.PendingInvitesHeaderButton:SetScript('OnMouseDown', nil)
+	AS:SkinArrowButton(_G.FriendsFrameFriendsScrollFrame.PendingInvitesHeaderButton.RightArrow)
+	AS:SkinArrowButton(_G.FriendsFrameFriendsScrollFrame.PendingInvitesHeaderButton.DownArrow)
+	_G.FriendsFrameFriendsScrollFrame.PendingInvitesHeaderButton.RightArrow:SetPoint("LEFT", 11, 0)
+	_G.FriendsFrameFriendsScrollFrame.PendingInvitesHeaderButton.DownArrow:SetPoint("TOPLEFT", 8, -10)
+	hooksecurefunc(_G.FriendsFrameFriendsScrollFrame.invitePool, "Acquire", function()
+		for object in pairs(_G.FriendsFrameFriendsScrollFrame.invitePool.activeObjects) do
+			AS:SkinButton(object.AcceptButton)
+			AS:SkinButton(object.DeclineButton)
+		end
+	end)
+
 	AS:SkinCloseButton(FriendsFrame.CloseButton)
 	AS:SkinTooltip(FriendsTooltip)
 
