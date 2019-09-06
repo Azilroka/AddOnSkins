@@ -39,14 +39,14 @@ function AS:Blizzard_Gossip()
 	AS:SkinFrame(GossipFrame)
 	GossipFrame:SetHeight(500)
 
-	AS:SkinCloseButton(GossipFrame.CloseButton)
+	AS:SkinCloseButton(GossipFrameCloseButton)
 	GossipFramePortrait:SetAlpha(0)
 
 	AS:StripTextures(GossipFrameGreetingPanel)
 	AS:SkinButton(GossipFrameGreetingGoodbyeButton)
 
 	AS:SkinFrame(GossipGreetingScrollFrame)
-	AS:SkinScrollBar(GossipGreetingScrollFrame.ScrollBar)
+	AS:SkinScrollBar(GossipGreetingScrollFrameScrollBar)
 
 	if AS.ParchmentEnabled then
 		GossipGreetingScrollFrame.Background = GossipGreetingScrollFrame:CreateTexture(nil, 'ARTWORK')
@@ -82,10 +82,10 @@ end
 
 function AS:Blizzard_Quest()
 	AS:SkinFrame(QuestFrame)
-	QuestFrame.portrait:SetAlpha(0)
+	QuestFramePortrait:SetAlpha(0)
 	QuestFrame:SetHeight(500)
 
-	AS:SkinCloseButton(QuestFrame.CloseButton)
+	AS:SkinCloseButton(QuestFrameCloseButton)
 
 	AS:StripTextures(QuestFrameDetailPanel, true)
 	AS:StripTextures(QuestDetailScrollChildFrame, true)
@@ -189,32 +189,6 @@ function AS:Blizzard_Quest()
 		else
 			RewardButton.Name:SetTextColor(1, 1, 1)
 		end
-	end)
-
-	AS:SkinFrame(QuestNPCModel)
-	AS:SkinBackdropFrame(QuestNPCModelTextFrame)
-	QuestNPCModelTextFrame.Backdrop:SetPoint("TOPLEFT", QuestNPCModel, "BOTTOMLEFT", 0, -2)
-	QuestNPCModelTextFrame.Backdrop:SetPoint("TOPRIGHT", QuestNPCModel, "BOTTOMRIGHT", 0, -2)
-
-	AS:SkinFrame(QuestLogPopupDetailFrame)
-	AS:SkinButton(QuestLogPopupDetailFrameAbandonButton)
-	AS:SkinButton(QuestLogPopupDetailFrameShareButton)
-	AS:SkinButton(QuestLogPopupDetailFrameTrackButton)
-	AS:StripTextures(QuestLogPopupDetailFrameInset)
-	AS:SkinBackdropFrame(QuestLogPopupDetailFrameScrollFrame)
-	QuestLogPopupDetailFrameScrollFrame.Backdrop:SetPoint('BOTTOMRIGHT', 2, 0)
-	AS:SkinScrollBar(QuestLogPopupDetailFrameScrollFrameScrollBar)
-	AS:SkinCloseButton(QuestLogPopupDetailFrameCloseButton)
-
-	AS:StripTextures(QuestLogPopupDetailFrame.ShowMapButton)
-	AS:SkinButton(QuestLogPopupDetailFrame.ShowMapButton)
-	QuestLogPopupDetailFrame.ShowMapButton.Text:ClearAllPoints()
-	QuestLogPopupDetailFrame.ShowMapButton.Text:SetPoint("CENTER", AS.Mult, 0)
-	QuestLogPopupDetailFrame.ShowMapButton:SetSize(QuestLogPopupDetailFrame.ShowMapButton:GetWidth() - 30, QuestLogPopupDetailFrame.ShowMapButton:GetHeight() - 5)
-
-	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(QuestFrame, parentFrame, portrait, text, name, x, y)
-		QuestNPCModel:ClearAllPoints()
-		QuestNPCModel:SetPoint("TOPLEFT", QuestFrame, "TOPRIGHT", x + 10, y)
 	end)
 
 	--Spell Rewards

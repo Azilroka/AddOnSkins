@@ -375,10 +375,6 @@ function AS:Blizzard_GuildUI(event, addon)
 			_G["PetitionFrameMemberName"..i]:SetTextColor(1, 1, 1)
 		end
 
-		AS:SkinFrame(GuildInviteFrame)
-		AS:SkinButton(GuildInviteFrameDeclineButton, true)
-		AS:SkinButton(GuildInviteFrameJoinButton, true)
-
 		AS:SkinFrame(GuildRegistrarFrame, nil, nil, true)
 		AS:StripTextures(GuildRegistrarGreetingFrame)
 		AS:SkinButton(GuildRegistrarFrameGoodbyeButton)
@@ -411,8 +407,6 @@ function AS:Blizzard_GuildUI(event, addon)
 		TabardCharacterModelRotateRightButton:ClearAllPoints()
 		TabardCharacterModelRotateRightButton:SetPoint("LEFT", TabardCharacterModelRotateLeftButton, "RIGHT", 3, 0)
 
-		AS:StripTextures(TabardFrameMoneyBg)
-		AS:StripTextures(TabardFrameMoneyInset)
 		AS:StripTextures(TabardFrameCostFrame)
 		AS:StripTextures(TabardFrameCustomizationFrame)
 

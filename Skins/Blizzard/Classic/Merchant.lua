@@ -7,10 +7,6 @@ function AS:Blizzard_Merchant()
 
 	AS:StripTextures(MerchantMoneyBg)
 	AS:StripTextures(MerchantMoneyInset)
-	AS:SkinDropDownBox(MerchantFrameLootFilter)
-
-	AS:StripTextures(MerchantExtraCurrencyBg)
-	AS:StripTextures(MerchantExtraCurrencyInset)
 
 	for i = 1, 2 do
 		AS:SkinTab(_G["MerchantFrameTab"..i])
@@ -90,10 +86,10 @@ end
 function AS:Blizzard_StackSplit()
 	AS:SkinFrame(StackSplitFrame)
 	AS:CreateShadow(StackSplitFrame)
-	AS:SkinButton(StackSplitFrame.OkayButton)
-	AS:SkinButton(StackSplitFrame.CancelButton)
-	AS:SkinArrowButton(StackSplitFrame.LeftButton)
-	AS:SkinArrowButton(StackSplitFrame.RightButton)
+	AS:SkinButton(StackSplitOkayButton)
+	AS:SkinButton(StackSplitCancelButton)
+	AS:SkinArrowButton(StackSplitLeftButton)
+	AS:SkinArrowButton(StackSplitRightButton)
 end
 
 AS:RegisterSkin('Blizzard_Merchant', AS.Blizzard_Merchant)

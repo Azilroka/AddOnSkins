@@ -213,14 +213,14 @@ function AS:Blizzard_Options(event, addon)
 
 		-- Item Text Frame -- Needs Parchment
 		AS:SkinFrame(ItemTextFrame, nil, nil, true)
-		AS:StripTextures(ItemTextFrameInset)
 		AS:StripTextures(ItemTextScrollFrame)
 		AS:SkinScrollBar(ItemTextScrollFrameScrollBar)
-		AS:SkinCloseButton(ItemTextFrameCloseButton)
+		AS:SkinCloseButton(ItemTextCloseButton)
 		AS:SkinArrowButton(ItemTextPrevPageButton)
 		AS:SkinArrowButton(ItemTextNextPageButton)
 		ItemTextPageText:SetTextColor(1, 1, 1)
 		ItemTextPageText.SetTextColor = AS.Noop
+		AS:SkinStatusBar(ItemTextStatusBar)
 
 		-- Chat Config
 		local ChatFrames = {

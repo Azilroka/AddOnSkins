@@ -317,7 +317,7 @@ function AS:CreateShadow(Frame, NoRegister, Inverted)
 	else
 		Shadow:SetBackdrop({ edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = AS:Scale(3) })
 		Shadow:SetFrameLevel(FrameLevel)
-		Shadow:SetOutside(Frame, 3, 3)
+		Shadow:SetOutside(Frame, AS:Scale(2), AS:Scale(2))
 	end
 
 	Shadow.Inverted = Inverted
@@ -329,6 +329,29 @@ function AS:CreateShadow(Frame, NoRegister, Inverted)
 	end
 
 	Frame.Shadow = Shadow
+end
+
+function AS:GradientHighlight(frame, layer, color)
+	if frame.SetHighlightTexture then
+		frame:SetHighlightTexture("")
+	end
+
+	local r, g, b = .9, .9, .9
+	if color then
+		r, g, b = color.r or color[1], color.g or color[2], color.b or color[3]
+	end
+
+	local leftGrad = frame:CreateTexture(nil, layer or "HIGHLIGHT")
+	leftGrad:SetSize(frame:GetWidth() * 0.5, frame:GetHeight() * 0.95)
+	leftGrad:SetPoint("LEFT", frame, "CENTER")
+	leftGrad:SetTexture(AS.Blank)
+	leftGrad:SetGradientAlpha("Horizontal", r, g, b, 0.35, r, g, b, 0)
+
+	local rightGrad = frame:CreateTexture(nil, layer or "HIGHLIGHT")
+	rightGrad:SetSize(frame:GetWidth() * 0.5, frame:GetHeight() * 0.95)
+	rightGrad:SetPoint("RIGHT", frame, "CENTER")
+	rightGrad:SetTexture(AS.Blank)
+	rightGrad:SetGradientAlpha("Horizontal", r, g, b, 0, r, g, b, 0.35)
 end
 
 function AS:Desaturate(frame)

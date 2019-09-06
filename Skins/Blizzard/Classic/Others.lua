@@ -2,33 +2,6 @@ if AddOnSkins.Retail then return end
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Others()
-	local function SkinNavBarButtons(self)
-		local navButton = self.navList[#self.navList]
-		if navButton and not navButton.isSkinned then
-			AS:SkinButton(navButton, true)
-			if navButton.MenuArrowButton then
-				navButton.MenuArrowButton:StripTextures()
-				if navButton.MenuArrowButton.Art then
-					navButton.MenuArrowButton.Art:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
-					navButton.MenuArrowButton.Art:SetTexCoord(0, 1, 0, 1)
-					navButton.MenuArrowButton.Art:SetRotation(3.14)
-				end
-			end
-
-			navButton.xoffset = 1
-
-			navButton.isSkinned = true
-		end
-	end
-	hooksecurefunc("NavBar_AddButton", SkinNavBarButtons)
-
-	AS:SkinBackdropFrame(LFDRoleCheckPopup)
-	AS:SkinButton(LFDRoleCheckPopupAcceptButton)
-	AS:SkinButton(LFDRoleCheckPopupDeclineButton)
-	AS:SkinCheckBox(LFDRoleCheckPopupRoleButtonTank.checkButton)
-	AS:SkinCheckBox(LFDRoleCheckPopupRoleButtonDPS.checkButton)
-	AS:SkinCheckBox(LFDRoleCheckPopupRoleButtonHealer.checkButton)
-
 	AS:SetTemplate(CinematicFrameCloseDialog)
 	CinematicFrameCloseDialog:SetScale(UIParent:GetScale())
 	AS:SkinButton(CinematicFrameCloseDialogConfirmButton)
@@ -71,10 +44,6 @@ function AS:Blizzard_Others()
 	end
 
 	AS:SetTemplate(_G["GeneralDockManagerOverflowButtonList"])
-
-	AS:SetTemplate(RolePollPopup, 'Default')
-	AS:CreateShadow(RolePollPopup)
-	AS:SkinCloseButton(RolePollPopupCloseButton)
 
 	AS:SkinFrame(ReadyCheckFrame)
 	AS:SkinButton(ReadyCheckFrameYesButton)
@@ -169,10 +138,6 @@ function AS:Blizzard_Others()
 			end
 		end
 	end)
-
-	AS:CreateBackdrop(SplashFrame)
-	AS:SkinButton(SplashFrame.BottomCloseButton)
-	AS:SkinCloseButton(SplashFrame.TopCloseButton)
 end
 
 AS:RegisterSkin('Blizzard_Others', AS.Blizzard_Others)

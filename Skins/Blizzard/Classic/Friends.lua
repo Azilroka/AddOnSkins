@@ -113,20 +113,16 @@ function AS:Blizzard_Friends()
 
 	AS:SkinDropDownBox(WhoFrameDropDown)
 
-	for i = 1, 3 do
+	for i = 1, 5 do
 		AS:SkinTab(_G["FriendsFrameTab"..i])
 	end
 
-	for i = 1, 3 do
+	for i = 1, 2 do
 		local Tab = _G["FriendsTabHeaderTab"..i]
 		AS:SkinTab(Tab)
 		Tab.Backdrop:SetPoint("TOPLEFT", 3, -8)
 		Tab.Backdrop:SetPoint("BOTTOMRIGHT", -6, 0)
 	end
-
-	AS:StripTextures(QuickJoinScrollFrame)
-	AS:SkinScrollBar(QuickJoinScrollFrameScrollBar)
-	AS:SkinButton(QuickJoinFrame.JoinQueueButton, true)
 end
 
 AS:RegisterSkin('Blizzard_Friends', AS.Blizzard_Friends)
