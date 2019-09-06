@@ -1,4 +1,5 @@
-	local AS = unpack(AddOnSkins)
+if AddOnSkins.Retail then return end
+local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Mail()
 	AS:SkinFrame(MailFrame, nil, nil, true)

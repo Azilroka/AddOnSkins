@@ -1,3 +1,4 @@
+if AddOnSkins.Retail then return end
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Communities(event, addon)
