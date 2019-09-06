@@ -15,8 +15,6 @@ function AS:Blizzard_Communities(event, addon)
 
 	AS:SkinIconButton(CommunitiesFrame.ChatTab)
 	AS:SkinIconButton(CommunitiesFrame.RosterTab)
-	AS:SkinIconButton(CommunitiesFrame.GuildBenefitsTab)
-	AS:SkinIconButton(CommunitiesFrame.GuildInfoTab)
 
 	AS:SkinMaxMinFrame(CommunitiesFrame.MaximizeMinimizeFrame)
 
@@ -27,7 +25,6 @@ function AS:Blizzard_Communities(event, addon)
 	CommunitiesFrame.CommunitiesListDropDownMenu.Text:SetJustifyH("RIGHT")
 
 	AS:SkinButton(CommunitiesFrame.AddToChatButton)
-	AS:SkinButton(CommunitiesFrame.GuildFinderFrame.FindAGuildButton)
 
 	AS:SkinButton(CommunitiesFrame.InviteButton)
 	CommunitiesFrame.AddToChatButton:SetPoint("TOPRIGHT", CommunitiesFrame.ChatEditBox, "BOTTOMRIGHT", 4, 4)
@@ -93,25 +90,9 @@ function AS:Blizzard_Communities(event, addon)
 		end
 	end)
 
-	AS:StripTextures(CommunitiesFrame.GuildFinderFrame)
-
-	AS:SkinBackdropFrame(CommunitiesFrame.GuildMemberDetailFrame)
-	CommunitiesFrame.GuildMemberDetailFrame.Backdrop:SetInside()
-
-	AS:SkinFrame(CommunitiesFrame.GuildMemberDetailFrame.NoteBackground)
-	AS:SkinFrame(CommunitiesFrame.GuildMemberDetailFrame.OfficerNoteBackground)
-
-	AS:SkinCloseButton(CommunitiesFrame.GuildMemberDetailFrame.CloseButton)
-	AS:SkinButton(CommunitiesFrame.GuildMemberDetailFrame.RemoveButton)
-	AS:SkinButton(CommunitiesFrame.GuildMemberDetailFrame.GroupInviteButton)
-	AS:SkinDropDownBox(CommunitiesFrame.GuildMemberDetailFrame.RankDropdown)
-
 	AS:StripTextures(CommunitiesFrame.MemberList.ColumnDisplay)
 
 	AS:SkinFrame(CommunitiesFrame.MemberList.InsetFrame)
-	AS:SkinDropDownBox(CommunitiesFrame.GuildMemberListDropDownMenu)
-	AS:SkinButton(CommunitiesFrame.CommunitiesControlFrame.GuildControlButton)
-	AS:SkinButton(CommunitiesFrame.CommunitiesControlFrame.GuildRecruitmentButton)
 	AS:SkinButton(CommunitiesFrame.CommunitiesControlFrame.CommunitiesSettingsButton)
 	AS:SkinCheckBox(CommunitiesFrame.MemberList.ShowOfflineButton)
 	CommunitiesFrame.MemberList.ShowOfflineButton:SetSize(25, 25)
@@ -123,8 +104,6 @@ function AS:Blizzard_Communities(event, addon)
 
 		for _, button in ipairs(self.ListScrollFrame.buttons) do
 			if not button.hooked then
-				AS:SkinButton(button.ProfessionHeader)
-
 				hooksecurefunc(button, "RefreshExpandedColumns", function(self)
 					if not self.expanded then return end
 
@@ -142,150 +121,6 @@ function AS:Blizzard_Communities(event, addon)
 			end
 		end
 	end)
-
-	AS:StripTextures(CommunitiesFrame.GuildBenefitsFrame)
-
-	AS:SkinBackdropFrame(CommunitiesFrame.GuildBenefitsFrame.Perks)
-	CommunitiesFrame.GuildBenefitsFrame.Perks.Backdrop:SetPoint('TOPLEFT', 0, 0)
-	CommunitiesFrame.GuildBenefitsFrame.Perks.Backdrop:SetPoint('BOTTOMRIGHT', 10, 0)
-
-	AS:SkinBackdropFrame(CommunitiesFrame.GuildBenefitsFrame.Rewards)
-	CommunitiesFrame.GuildBenefitsFrame.Rewards.Backdrop:SetPoint('TOPLEFT', 0, 0)
-	CommunitiesFrame.GuildBenefitsFrame.Rewards.Backdrop:SetPoint('BOTTOMRIGHT', 0, 0)
-
-	for _, Button in pairs(CommunitiesFrameContainer.buttons) do
-		AS:SkinTexture(Button.Icon, true)
-		AS:SkinBackdropFrame(Button)
-		Button.Backdrop:SetInside()
-		Button.Backdrop:SetPoint("BOTTOMRIGHT", -15, 2)
-	end
-
-	CommunitiesFrame.GuildBenefitsFrame.Rewards.RewardsContainer.scrollBar.ScrollDownButton = CommunitiesFrame.GuildBenefitsFrame.Rewards.RewardsContainer.scrollDown
-	CommunitiesFrame.GuildBenefitsFrame.Rewards.RewardsContainer.scrollBar.ScrollUpButton = CommunitiesFrame.GuildBenefitsFrame.Rewards.RewardsContainer.scrollUp
-	AS:SkinScrollBar(CommunitiesFrame.GuildBenefitsFrame.Rewards.RewardsContainer.scrollBar)
-
-	AS:SkinBackdropFrame(CommunitiesFrame.GuildBenefitsFrame.FactionFrame.Bar)
-	CommunitiesFrame.GuildBenefitsFrame.FactionFrame.Bar.Progress:SetTexture(AS.NormTex)
-	CommunitiesFrame.GuildBenefitsFrame.FactionFrame.Bar.Backdrop:SetPoint("TOPLEFT", 0, -3)
-	CommunitiesFrame.GuildBenefitsFrame.FactionFrame.Bar.Backdrop:SetPoint("BOTTOMRIGHT", 0, 1)
-
-	for _, Button in pairs(CommunitiesFrame.GuildBenefitsFrame.Rewards.RewardsContainer.buttons) do
-		AS:SkinTexture(Button.Icon, true)
-		AS:SkinBackdropFrame(Button)
-		Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 1, 2)
-		Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 1, -2)
-		Button.Backdrop:SetPoint('RIGHT', 0, 0)
-	end
-
-	hooksecurefunc("CommunitiesGuildRewards_Update", function(self)
-		for _, Button in pairs(CommunitiesFrame.GuildBenefitsFrame.Rewards.RewardsContainer.buttons) do
-			if Button.index then
-				local _, itemID = GetGuildRewardInfo(Button.index)
-				if itemID then
-					local _, _, quality = GetItemInfo(itemID)
-					if quality and quality > 1 then
-						Button.Icon.Backdrop:SetBackdropBorderColor(GetItemQualityColor(quality))
-					end
-				end
-			end
-		end
-	end)
-
-	AS:StripTextures(CommunitiesFrame.GuildDetailsFrame)
-	AS:SkinBackdropFrame(CommunitiesFrame.GuildDetailsFrame.Info)
-	CommunitiesFrame.GuildDetailsFrame.Info.Backdrop:SetPoint('TOPLEFT', 0, 0)
-	CommunitiesFrame.GuildDetailsFrame.Info.Backdrop:SetPoint('BOTTOMRIGHT', 14, 0)
-
-	AS:SkinBackdropFrame(CommunitiesFrame.GuildDetailsFrame.News)
-	CommunitiesFrame.GuildDetailsFrame.News.Backdrop:SetPoint('TOPLEFT', 0, 0)
-	CommunitiesFrame.GuildDetailsFrame.News.Backdrop:SetPoint('BOTTOMRIGHT', -10, 0)
-
-	AS:SkinScrollBar(CommunitiesFrame.GuildDetailsFrame.Info.DetailsFrame.ScrollBar)
-	AS:SkinScrollBar(CommunitiesFrame.GuildDetailsFrame.Info.MOTDScrollFrame.ScrollBar)
-
-	hooksecurefunc("GuildNewsButton_SetNews", function(button, news_id)
-		local newsInfo = C_GuildInfo.GetGuildNewsInfo(news_id)
-		if newsInfo then
-			if button.header:IsShown() then
-				button.header:SetAlpha(0)
-			end
-		end
-	end)
-
-	CommunitiesFrame.GuildDetailsFrame.News.Container.ScrollBar.ScrollUpButton = CommunitiesFrame.GuildDetailsFrame.News.Container.scrollUp
-	CommunitiesFrame.GuildDetailsFrame.News.Container.ScrollBar.ScrollDownButton = CommunitiesFrame.GuildDetailsFrame.News.Container.scrollDown
-	AS:SkinScrollBar(CommunitiesFrame.GuildDetailsFrame.News.Container.ScrollBar)
-
-	AS:SkinButton(CommunitiesFrame.GuildLogButton)
-
-	AS:SkinFrame(CommunitiesGuildNewsFiltersFrame)
-	AS:SkinCloseButton(CommunitiesGuildNewsFiltersFrame.CloseButton)
-	AS:SkinCheckBox(CommunitiesGuildNewsFiltersFrame.GuildAchievement)
-	AS:SkinCheckBox(CommunitiesGuildNewsFiltersFrame.Achievement)
-	AS:SkinCheckBox(CommunitiesGuildNewsFiltersFrame.DungeonEncounter)
-	AS:SkinCheckBox(CommunitiesGuildNewsFiltersFrame.EpicItemLooted)
-	AS:SkinCheckBox(CommunitiesGuildNewsFiltersFrame.EpicItemCrafted)
-	AS:SkinCheckBox(CommunitiesGuildNewsFiltersFrame.EpicItemPurchased)
-	AS:SkinCheckBox(CommunitiesGuildNewsFiltersFrame.LegendaryItemLooted)
-
-	AS:SkinFrame(CommunitiesGuildTextEditFrame)
-	AS:SkinFrame(CommunitiesGuildTextEditFrame.Container)
-	AS:SkinCloseButton(CommunitiesGuildTextEditFrameCloseButton)
-	AS:SkinScrollBar(CommunitiesGuildTextEditFrame.Container.ScrollFrame.ScrollBar)
-	AS:SkinButton(CommunitiesGuildTextEditFrameAcceptButton)
-	local CloseButton = select(4, CommunitiesGuildTextEditFrame:GetChildren())
-	AS:SkinButton(CloseButton)
-
-	---- Guild Log
-	AS:SkinBackdropFrame(CommunitiesGuildLogFrame)
-	CommunitiesGuildLogFrame.Backdrop:SetInside()
-	AS:SkinFrame(CommunitiesGuildLogFrame.Container)
-	AS:SkinScrollBar(CommunitiesGuildLogFrame.Container.ScrollFrame.ScrollBar)
-	AS:SkinCloseButton(CommunitiesGuildLogFrameCloseButton)
-	local CloseButton = select(3, CommunitiesGuildLogFrame:GetChildren())
-	AS:SkinButton(CloseButton)
-
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrame)
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrame.Inset)
-
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame)
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrameRecruitment.AvailabilityFrame)
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrameRecruitment.RolesFrame)
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrameRecruitment.LevelFrame)
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrameRecruitment.CommentFrame)
-
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame.QuestButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame.DungeonButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame.RaidButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame.PvPButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame.RPButton)
-
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.AvailabilityFrame.WeekdaysButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.AvailabilityFrame.WeekendsButton)
-
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.RolesFrame.TankButton.checkButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.RolesFrame.HealerButton.checkButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.RolesFrame.DamagerButton.checkButton)
-
-	AS:SkinCloseButton(CommunitiesGuildRecruitmentFrameCloseButton)
-
-	AS:SkinButton(CommunitiesGuildRecruitmentFrameRecruitment.ListGuildButton)
-
-	-- Tabs
-	for i = 1, 2 do
-		AS:SkinButton(_G["CommunitiesGuildRecruitmentFrameTab"..i])
-	end
-
-	CommunitiesGuildRecruitmentFrameRecruitment.CommentFrame.CommentInputFrame:StripTextures()
-	AS:SkinEditBox(CommunitiesGuildRecruitmentFrameRecruitment.CommentFrame.CommentInputFrame)
-
-  	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.InviteButton)
-	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.MessageButton)
-	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.DeclineButton)
-
-	for i = 1, 5 do
-		_G["CommunitiesGuildRecruitmentFrameApplicantsContainerButton"..i]:SetBackdrop(nil)
-	end
 
 	AS:SkinFrame(CommunitiesFrame.NotificationSettingsDialog)
 	AS:SkinDropDownBox(CommunitiesFrame.NotificationSettingsDialog.CommunitiesListDropDownMenu)
@@ -349,6 +184,10 @@ function AS:Blizzard_Communities(event, addon)
 
 	AS:SkinScrollBar(CommunitiesTicketManagerDialog.InviteManager.ListScrollFrame.scrollBar)
 	AS:SkinButton(CommunitiesTicketManagerDialog.MaximizeButton)
+
+	for i = 1, 5 do
+		AS:SkinTab(_G['CommunitiesFrameTab'..i])
+	end
 
 	AS:UnregisterSkinEvent(addon, event)
 end

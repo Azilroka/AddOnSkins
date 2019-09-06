@@ -74,7 +74,6 @@ function AS:Blizzard_Others()
 		local listFrameName = listFrame:GetName();
 		local expandArrow = _G[listFrameName.."Button"..index.."ExpandArrow"];
 
-		AS:SkinFrame(listFrame.Border)
 		AS:SetTemplate(_G["DropDownList"..level.."MenuBackdrop"])
 
 		if expandArrow then

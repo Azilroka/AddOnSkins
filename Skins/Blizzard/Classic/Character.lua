@@ -22,8 +22,6 @@ function AS:Blizzard_Character()
 	AS:CreateShadow(_G.CharacterFrame.Backdrop)
 	AS:SkinCloseButton(_G.CharacterFrameCloseButton)
 
-	_G.CharacterFrame:HookScript('OnShow', function() PaperDollBgDesaturate(false) end)
-
 	AS:SkinBackdropFrame(_G.CharacterModelFrame)
 	_G.CharacterModelFrame.Backdrop:SetPoint('TOPLEFT', -2, 4)
 	_G.CharacterModelFrame.Backdrop:SetPoint('BOTTOMRIGHT', 2, -80)
