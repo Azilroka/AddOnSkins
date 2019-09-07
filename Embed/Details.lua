@@ -126,42 +126,6 @@ function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, rela
 		_G.DetailsRowFrame2:SetFrameLevel(_G.DetailsBaseFrame2:GetFrameLevel() + 1)
 	end
 
-	window:ChangeSkin()
-
-	if (window.skin ~= "Forced Square") then
-		if (AS:CheckOption("DetailsBackdrop")) then
-			window:ShowSideBars()
-		else
-			window:HideSideBars()
-
-			local skin = Details.skins[window.skin]
-
-			window.row_info.space.left = skin.instance_cprops.row_info.space.left
-			window.row_info.space.right = skin.instance_cprops.row_info.space.right
-
-			window:InstanceWallpaper (false)
-
-			window:SetBarGrowDirection()
-		end
-	elseif (window.skin == "Forced Square") then
-		if (AS:CheckOption("DetailsBackdrop")) then
-			window:ShowSideBars()
-			window:InstanceColor (1, 1, 1, 1, nil, true)
-		else
-			window:HideSideBars()
-			window:InstanceColor (1, 1, 1, 0, nil, true)
-
-			local skin = Details.skins[window.skin]
-
-			window.row_info.space.left = skin.instance_cprops.row_info.space.left
-			window.row_info.space.right = skin.instance_cprops.row_info.space.right
-
-			window:InstanceWallpaper (false)
-
-			window:SetBarGrowDirection()
-		end
-	end
-
 	if (window:GetSegment() ~= 0) then
 		window:SetDisplay (0)
 	end
@@ -197,8 +161,6 @@ function AS:Embed_Details()
 			tinsert(AS.DetailsInstances, new_instance)
 		end
 	end
-
-	Details:SetTooltipBackdrop("Blizzard Tooltip", 16, {1, 1, 1, 0})
 
 	if NumberToEmbed == 1 then
 		local EmbedParent = _G.EmbedSystem_MainWindow
