@@ -48,29 +48,51 @@ function AS:Blizzard_Gossip()
 	AS:SkinFrame(GossipGreetingScrollFrame)
 	AS:SkinScrollBar(GossipGreetingScrollFrameScrollBar)
 
+	for i = 1, _G.NUMGOSSIPBUTTONS do
+		_G['GossipTitleButton'..i..'GossipIcon']:SetSize(16, 16)
+		_G['GossipTitleButton'..i..'GossipIcon']:SetPoint('TOPLEFT', 3, 1)
+	end
+
 	if AS.ParchmentEnabled then
 		GossipGreetingScrollFrame.Background = GossipGreetingScrollFrame:CreateTexture(nil, 'ARTWORK')
 		GossipGreetingScrollFrame.Background:SetTexture('Interface\\QuestFrame\\QuestBG')
 		GossipGreetingScrollFrame.Background:SetInside()
 		GossipGreetingScrollFrame.Background:SetTexCoord(0, .585, 0.02, .655)
 	else
-		local r, g, b = unpack(AS.ClassColor)
+		_G.GossipGreetingText:SetTextColor(1, 1, 1)
 
-		for i = 1, NUMGOSSIPBUTTONS do
-			_G["GossipTitleButton"..i]:GetFontString():SetTextColor(1, 1, 1)
-			_G["GossipTitleButton"..i]:GetHighlightTexture():SetColorTexture(r, g, b, .3)
-			_G["GossipTitleButton"..i]:GetHighlightTexture():SetInside(_G["GossipTitleButton"..i], 2, 0)
-		end
+		hooksecurefunc('GossipFrameUpdate', function()
+			for i = 1, _G.NUMGOSSIPBUTTONS do
+				local button = _G['GossipTitleButton'..i]
+				local icon = _G['GossipTitleButton'..i..'GossipIcon']
+				local text = button:GetFontString()
 
-		GossipGreetingText:SetTextColor(1, 1, 1)
+				if text and text:GetText() then
+					local textString = gsub(text:GetText(), "|c[Ff][Ff]%x%x%x%x%x%x(.+)|r", "%1")
 
-		hooksecurefunc("GossipFrameUpdate", function()
-			for i = 1, NUMGOSSIPBUTTONS do
-				local button = _G["GossipTitleButton"..i]
-				if button:GetFontString() then
-					local Text = button:GetFontString():GetText()
-					if Text and strfind(Text, '|cff000000') then
-						button:GetFontString():SetText(string.gsub(Text, '|cff000000', '|cffffe519'))
+					button:SetText(textString)
+					text:SetTextColor(1, 1, 1)
+
+					if button.type == 'Available' or button.type == 'Active' then
+						if button.type == 'Active' then
+							icon:SetDesaturation(1)
+							text:SetTextColor(.6, .6, .6)
+						else
+							icon:SetDesaturation(0)
+							text:SetTextColor(1, .8, .1)
+						end
+
+						local numEntries = GetNumQuestLogEntries()
+						for k = 1, numEntries, 1 do
+							local questLogTitleText, _, _, _, _, isComplete, _, questId = GetQuestLogTitle(k)
+							if strmatch(questLogTitleText, textString) then
+								if (isComplete == 1 or IsQuestComplete(questId)) then
+									icon:SetDesaturation(0)
+									button:GetFontString():SetTextColor(1, .8, .1)
+									break
+								end
+							end
+						end
 					end
 				end
 			end
@@ -81,7 +103,9 @@ function AS:Blizzard_Gossip()
 end
 
 function AS:Blizzard_Quest()
-	AS:SkinFrame(QuestFrame)
+	AS:SkinBackdropFrame(QuestFrame)
+	QuestFrame.Backdrop:Point('TOPLEFT', 11, -12)
+	QuestFrame.Backdrop:Point('BOTTOMRIGHT', -22, 0)
 	QuestFramePortrait:SetAlpha(0)
 	QuestFrame:SetHeight(500)
 
@@ -168,9 +192,29 @@ function AS:Blizzard_Quest()
 		end
 	end
 
-	local Rewards = { 'MoneyFrame', 'HonorFrame', 'XPFrame', 'SpellFrame', 'SkillPointFrame' }
+	local function QuestQualityColors(frame, text, link, quality)
+		local r, g, b
+		if link and not quality then
+			quality = select(3, GetItemInfo(link))
+			r, g, b = GetItemQualityColor(quality)
+		end
 
-	for _, frame in pairs(Rewards) do
+		if quality and quality > 1 then
+			if frame and frame.Icon and frame.Icon.backdrop then
+				frame.Icon.backdrop:SetBackdropBorderColor(r, g, b)
+			end
+			text:SetTextColor(r, g, b)
+		else
+			if frame and frame.Icon and frame.Icon.backdrop then
+				frame.Icon.backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
+			if text then
+				text:SetTextColor(1, 1, 1)
+			end
+		end
+	end
+
+	for _, frame in pairs({ 'MoneyFrame', 'HonorFrame', 'XPFrame', 'SpellFrame', 'SkillPointFrame' }) do
 		HandleReward(_G.MapQuestInfoRewardsFrame[frame])
 		HandleReward(_G.QuestInfoRewardsFrame[frame])
 	end
@@ -181,11 +225,7 @@ function AS:Blizzard_Quest()
 		if (not RewardButton.Backdrop) then
 			HandleReward(RewardButton)
 
-			RewardButton.IconBorder:SetAlpha(0)
 			RewardButton.NameFrame:Hide()
-
-			hooksecurefunc(RewardButton.IconBorder, 'SetVertexColor', function(self, r, g, b) RewardButton.Icon.Backdrop:SetBackdropBorderColor(r, g, b) end)
-			hooksecurefunc(RewardButton.IconBorder, 'Hide', function(self) RewardButton.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 		else
 			RewardButton.Name:SetTextColor(1, 1, 1)
 		end
@@ -221,36 +261,6 @@ function AS:Blizzard_Quest()
 --		bg:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 220, -1)
 	end
 
-	-- Follower Rewards
-	hooksecurefunc("QuestInfo_Display", function(template, parentFrame, acceptButton, material, mapView)
-		local rewardsFrame = QuestInfoFrame.rewardsFrame
-		local isQuestLog = QuestInfoFrame.questLog ~= nil
-		local isMapQuest = rewardsFrame == MapQuestInfoRewardsFrame
-		local numSpellRewards = isQuestLog and GetNumQuestLogRewardSpells() or GetNumRewardSpells()
-
-		if (template.canHaveSealMaterial) then
-			local questFrame = parentFrame:GetParent():GetParent()
-			questFrame.SealMaterialBG:Hide()
-		end
-
-		if numSpellRewards > 0 then
-			for reward in rewardsFrame.followerRewardPool:EnumerateActive() do
-				local portrait = reward.PortraitFrame
-				if not reward.styled then
-					portrait:ClearAllPoints()
-					portrait:SetPoint("TOPLEFT", 2, -5)
-					reward.BG:Hide()
-					--bg:SetPoint("TOPLEFT", 0, -3)
-					--bg:SetPoint("BOTTOMRIGHT", 2, 7)
-					reward.styled = true
-				end
-				if portrait then
-					--portrait.squareBG:SetBackdropBorderColor(GetItemQualityColor(portrait.quality or 1))
-				end
-			end
-		end
-	end)
-
 	if AS.ParchmentEnabled then
 		QuestDetailScrollFrame.Background = QuestDetailScrollFrame:CreateTexture(nil, 'ARTWORK')
 		QuestDetailScrollFrame.Background:SetTexture('Interface\\QuestFrame\\QuestBG')
@@ -273,59 +283,75 @@ function AS:Blizzard_Quest()
 		QuestLogPopupDetailFrameScrollFrame.Backdrop.Background:SetInside()
 		QuestLogPopupDetailFrameScrollFrame.Backdrop.Background:SetTexCoord(0, .585, 0.02, .655)
 	else
-		hooksecurefunc('QuestFrameProgressItems_Update', function()
-			QuestProgressRequiredItemsText:SetTextColor(1, .8, .1)
-		end)
+		for i = 1, MAX_NUM_QUESTS do
+			_G["QuestTitleButton"..i.."QuestIcon"]:SetPoint('TOPLEFT', 4, 2)
+			_G["QuestTitleButton"..i.."QuestIcon"]:SetSize(16, 16)
+		end
 
-		hooksecurefunc("QuestFrame_SetTitleTextColor", function(fontString)
-			fontString:SetTextColor(1, .8, .1)
-		end)
+		local function UpdateGreetingFrame()
+			_G.GreetingText:SetTextColor(1, 1, 1)
+			_G.CurrentQuestsText:SetTextColor(1, 0.80, 0.10)
+			_G.AvailableQuestsText:SetTextColor(1, 0.80, 0.10)
 
-		hooksecurefunc("QuestFrame_SetTextColor", function(fontString)
-			fontString:SetTextColor(1, 1, 1)
-		end)
+			local i = 1
+			while _G["QuestTitleButton"..i]:IsVisible() do
+				local title = _G["QuestTitleButton"..i]
+				local icon = _G["QuestTitleButton"..i.."QuestIcon"]
+				local text = title:GetFontString()
+				local textString = gsub(title:GetText(), "|c[Ff][Ff]%x%x%x%x%x%x(.+)|r", "%1")
 
-		local function TitleButtonPool()
-			for Button in QuestFrameGreetingPanel.titleButtonPool:EnumerateActive() do
-				local Text = Button:GetFontString():GetText()
-				if Text and strfind(Text, '|cff000000') then
-					Button:GetFontString():SetText(string.gsub(Text, '|cff000000', '|cffffe519'))
+				title:SetText(textString)
+
+				if (title.isActive == 1) then
+					icon:SetTexture(132048)
+					icon:SetDesaturation(1)
+					text:SetTextColor(.6, .6, .6)
+				else
+					icon:SetTexture(132049)
+					icon:SetDesaturation(0)
+					text:SetTextColor(1, .8, .1)
 				end
+
+				local numEntries = GetNumQuestLogEntries()
+				for k = 1, numEntries, 1 do
+					local questLogTitleText, _, _, _, _, isComplete, _, questId = GetQuestLogTitle(k)
+					if strmatch(questLogTitleText, textString) then
+						if (isComplete == 1 or IsQuestComplete(questId)) then
+							icon:SetDesaturation(0)
+							text:SetTextColor(1, .8, .1)
+							break
+						end
+					end
+				end
+
+				i = i + 1
 			end
 		end
 
-		QuestFrameGreetingPanel:HookScript('OnShow', TitleButtonPool)
-		hooksecurefunc("QuestFrameGreetingPanel_OnShow", TitleButtonPool)
+		QuestFrameGreetingPanel:HookScript('OnShow', UpdateGreetingFrame)
+		hooksecurefunc("QuestFrameGreetingPanel_OnShow", UpdateGreetingFrame)
 
-		hooksecurefunc('QuestInfo_Display', function(template, parentFrame, acceptButton, material)
-			QuestInfoTitleHeader:SetTextColor(1, .8, .1)
-			QuestInfoDescriptionHeader:SetTextColor(1, .8, .1)
-			QuestInfoObjectivesHeader:SetTextColor(1, .8, .1)
-			QuestInfoRewardsFrame.Header:SetTextColor(1, .8, .1)
-			QuestInfoDescriptionText:SetTextColor(1, 1, 1)
-			QuestInfoObjectivesText:SetTextColor(1, 1, 1)
-			QuestInfoGroupSize:SetTextColor(1, 1, 1)
-			QuestInfoRewardText:SetTextColor(1, 1, 1)
-			QuestInfoRewardsFrame.ItemChooseText:SetTextColor(1, 1, 1)
-			QuestInfoRewardsFrame.ItemReceiveText:SetTextColor(1, 1, 1)
+		local textColor = {1, 1, 1}
+		local titleTextColor = {1, .8, .1}
 
-			QuestInfoQuestType:SetTextColor(1, 1, 1)
+		hooksecurefunc(_G, 'QuestLog_UpdateQuestDetails', function()
+			_G.QuestLogDescriptionTitle:SetTextColor(unpack(titleTextColor))
+			_G.QuestLogQuestTitle:SetTextColor(unpack(titleTextColor))
+			_G.QuestLogRewardTitleText:SetTextColor(unpack(titleTextColor))
 
-			if QuestInfoRewardsFrame.SpellLearnText then
-				QuestInfoRewardsFrame.SpellLearnText:SetTextColor(1, 1, 1)
-			end
+			_G.QuestLogItemChooseText:SetTextColor(unpack(textColor))
+			_G.QuestLogItemReceiveText:SetTextColor(unpack(textColor))
+			_G.QuestLogObjectivesText:SetTextColor(unpack(textColor))
+			_G.QuestLogQuestDescription:SetTextColor(unpack(textColor))
+			_G.QuestLogSpellLearnText:SetTextColor(unpack(textColor))
 
-			QuestInfoRewardsFrame.spellHeaderPool.textR, QuestInfoRewardsFrame.spellHeaderPool.textG, QuestInfoRewardsFrame.spellHeaderPool.textB = 1, 1, 1
+			local numObjectives, numVisibleObjectives = GetNumQuestLeaderBoards(), 0
 
-			QuestInfoRewardsFrame.PlayerTitleText:SetTextColor(1, 1, 1)
-			QuestInfoRewardsFrame.XPFrame.ReceiveText:SetTextColor(1, 1, 1)
-			local numObjectives = GetNumQuestLeaderBoards()
-			local numVisibleObjectives = 0
 			for i = 1, numObjectives do
-				local _, type, finished = GetQuestLogLeaderBoard(i)
-				if type ~= 'spell' then
+				local _, _, finished = GetQuestLogLeaderBoard(i)
+				if (type ~= 'spell' and type ~= 'log' and numVisibleObjectives < _G.MAX_OBJECTIVES) then
 					numVisibleObjectives = numVisibleObjectives + 1
-					local objective = _G['QuestInfoObjective'..numVisibleObjectives]
+					local objective = _G['QuestLogObjective'..numVisibleObjectives]
 					if objective then
 						if finished then
 							objective:SetTextColor(1, .8, .1)
@@ -336,7 +362,47 @@ function AS:Blizzard_Quest()
 				end
 			end
 
-			QuestInfo_ShowRequiredMoney()
+			if _G.QuestLogRequiredMoneyText:GetTextColor() == 0 then
+				_G.QuestLogRequiredMoneyText:SetTextColor(.63, .09, .09)
+			else
+				_G.QuestLogRequiredMoneyText:SetTextColor(1, 0.8, 0.1)
+			end
+		end)
+
+		hooksecurefunc('QuestInfo_Display', function()
+			-- Headers
+			_G.QuestInfoTitleHeader:SetTextColor(unpack(titleTextColor))
+			_G.QuestInfoDescriptionHeader:SetTextColor(unpack(titleTextColor))
+			_G.QuestInfoObjectivesHeader:SetTextColor(unpack(titleTextColor))
+			_G.QuestInfoRewardsFrame.Header:SetTextColor(unpack(titleTextColor))
+			-- Other text
+			_G.QuestInfoDescriptionText:SetTextColor(unpack(textColor))
+			_G.QuestInfoObjectivesText:SetTextColor(unpack(textColor))
+			_G.QuestInfoGroupSize:SetTextColor(unpack(textColor))
+			_G.QuestInfoRewardText:SetTextColor(unpack(textColor))
+			-- Reward frame text
+			_G.QuestInfoRewardsFrame.ItemChooseText:SetTextColor(unpack(textColor))
+			_G.QuestInfoRewardsFrame.ItemReceiveText:SetTextColor(unpack(textColor))
+			_G.QuestInfoRewardsFrame.PlayerTitleText:SetTextColor(unpack(textColor))
+			_G.QuestInfoRewardsFrame.XPFrame.ReceiveText:SetTextColor(unpack(textColor))
+
+			_G.QuestInfoRewardsFrame.spellHeaderPool.textR, _G.QuestInfoRewardsFrame.spellHeaderPool.textG, _G.QuestInfoRewardsFrame.spellHeaderPool.textB = unpack(textColor)
+
+			if GetQuestLogRequiredMoney() > 0 then
+				if GetQuestLogRequiredMoney() > GetMoney() then
+					_G.QuestInfoRequiredMoneyText:SetTextColor(0.6, 0.6, 0.6)
+				else
+					_G.QuestInfoRequiredMoneyText:SetTextColor(1, 0.80, 0.10)
+				end
+			end
+
+			for i = 1, _G.MAX_NUM_ITEMS do
+				local item = _G["QuestInfoRewardsFrameQuestInfoItem"..i]
+				if item then
+					local link = item.type and (_G.QuestInfoFrame.questLog and GetQuestLogItemLink or GetQuestItemLink)(item.type, item:GetID())
+					QuestQualityColors(item, item.Name, link)
+				end
+			end
 		end)
 
 		hooksecurefunc('QuestInfo_ShowRequiredMoney', function()

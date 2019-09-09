@@ -2,15 +2,33 @@ if AddOnSkins.Retail then return end
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Spellbook()
+	SpellBookFrame:SetSize(354, 442)
+	SpellBookFrame:SetHitRectInsets(0, 0, 0, 0)
+	SpellBookTitleText:ClearAllPoints()
+	SpellBookTitleText:SetPoint('TOP', '$parent', 'TOP', 0, -5)
+	SpellBookCloseButton:ClearAllPoints()
+	SpellBookCloseButton:SetPoint('TOPRIGHT', '$parent', 'TOPRIGHT', 4, 5)
+	SpellBookTitleText:SetPoint('TOP', '$parent', 'TOP', 0, -5)
+	SpellBookFrameTabButton1:ClearAllPoints()
+	SpellBookFrameTabButton1:SetPoint('TOPLEFT', '$parent', 'BOTTOMLEFT', 0, 1)
+	SpellBookPageText:ClearAllPoints()
+	SpellBookPageText:SetPoint('BOTTOMRIGHT', -100, 38)
+	SpellBookPrevPageButton:ClearAllPoints()
+	SpellBookPrevPageButton:SetPoint('BOTTOMRIGHT', '$parent', -66, 26)
+	SpellBookNextPageButton:ClearAllPoints()
+	SpellBookNextPageButton:SetPoint('BOTTOMRIGHT', '$parent', -31, 26)
+	SpellBookSkillLineTab1:ClearAllPoints()
+	SpellBookSkillLineTab1:SetPoint('TOPLEFT', '$parent', 'TOPRIGHT', 0, -17)
+
 	AS:SkinFrame(SpellBookFrame, nil, nil, true)
 	AS:SkinCloseButton(SpellBookCloseButton)
 
 	for i = 1, 3 do
+		_G["SpellBookFrameTabButton"..i]:SetSize(128, 32)
 		AS:SkinTab(_G["SpellBookFrameTabButton"..i])
 	end
 
 	SpellBookPageText:SetTextColor(1, 1, 1)
-	SpellBookPageText:SetPoint("BOTTOMRIGHT", -100, 32)
 
 	AS:SkinArrowButton(SpellBookPrevPageButton)
 	AS:SkinArrowButton(SpellBookNextPageButton)
@@ -75,8 +93,6 @@ function AS:Blizzard_Spellbook()
 			end
 		end
 	end)
-
-	SpellBookFrameTabButton1:SetPoint("TOPLEFT", SpellBookFrame, "BOTTOMLEFT", -5, 2)
 end
 
 AS:RegisterSkin('Blizzard_Spellbook', AS.Blizzard_Spellbook)

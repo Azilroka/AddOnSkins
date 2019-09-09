@@ -2,7 +2,7 @@ if AddOnSkins.Retail then return end
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Communities(event, addon)
-	if addon ~= 'Blizzard_Communities' then return end
+	if event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_Communities') or addon ~= 'Blizzard_Communities' then return end
 
 	AS:SkinFrame(CommunitiesFrame, nil, nil, true)
 	AS:SkinCloseButton(CommunitiesFrame.CloseButton)
@@ -193,259 +193,93 @@ function AS:Blizzard_Communities(event, addon)
 end
 
 function AS:Blizzard_GuildUI(event, addon)
-	if event == 'PLAYER_ENTERING_WORLD' then
-		AS:SkinFrame(PetitionFrame, nil, nil, true)
+	AS:SkinFrame(PetitionFrame, nil, nil, true)
 
-		AS:SkinButton(PetitionFrameRequestButton)
-		PetitionFrameRequestButton:SetWidth(110)
-		AS:SkinButton(PetitionFrameRenameButton)
-		AS:SkinButton(PetitionFrameCancelButton)
-		AS:SkinButton(PetitionFrameSignButton)
-		AS:SkinCloseButton(PetitionFrameCloseButton)
+	AS:SkinButton(PetitionFrameRequestButton)
+	PetitionFrameRequestButton:SetWidth(110)
+	AS:SkinButton(PetitionFrameRenameButton)
+	AS:SkinButton(PetitionFrameCancelButton)
+	AS:SkinButton(PetitionFrameSignButton)
+	AS:SkinCloseButton(PetitionFrameCloseButton)
 
-		PetitionFrameCharterTitle:SetTextColor(1, .8, .1)
-		PetitionFrameCharterName:SetTextColor(1, 1, 1)
-		PetitionFrameMasterTitle:SetTextColor(1, .8, .1)
-		PetitionFrameMasterName:SetTextColor(1, 1, 1)
-		PetitionFrameMemberTitle:SetTextColor(1, .8, .1)
-		PetitionFrameInstructions:SetTextColor(1, 1, 1)
+	PetitionFrameCharterTitle:SetTextColor(1, .8, .1)
+	PetitionFrameCharterName:SetTextColor(1, 1, 1)
+	PetitionFrameMasterTitle:SetTextColor(1, .8, .1)
+	PetitionFrameMasterName:SetTextColor(1, 1, 1)
+	PetitionFrameMemberTitle:SetTextColor(1, .8, .1)
+	PetitionFrameInstructions:SetTextColor(1, 1, 1)
 
-		for i = 1, 9 do
-			_G["PetitionFrameMemberName"..i]:SetTextColor(1, 1, 1)
-		end
-
-		AS:SkinFrame(GuildRegistrarFrame, nil, nil, true)
-		AS:StripTextures(GuildRegistrarGreetingFrame)
-		AS:SkinButton(GuildRegistrarFrameGoodbyeButton)
-		AS:SkinButton(GuildRegistrarFrameCancelButton)
-		AS:SkinButton(GuildRegistrarFramePurchaseButton)
-		AS:SkinCloseButton(GuildRegistrarFrameCloseButton)
-		AS:SkinEditBox(GuildRegistrarFrameEditBox, nil, 20)
-
-		for i = 1, 2 do
-			_G["GuildRegistrarButton"..i]:GetFontString():SetTextColor(1, 1, 1)
-		end
-
-		GuildRegistrarPurchaseText:SetTextColor(1, 1, 1)
-		AvailableServicesText:SetTextColor(1, .8, .1)
-
-		AS:SkinFrame(TabardFrame)
-		AS:Kill(TabardFramePortrait)
-
-		AS:SkinCloseButton(TabardFrameCloseButton)
-		AS:SkinButton(TabardFrameCancelButton)
-		AS:SkinButton(TabardFrameAcceptButton)
-
-		TabardFrameAcceptButton:ClearAllPoints()
-		TabardFrameAcceptButton:SetPoint("RIGHT", TabardFrameCancelButton, "LEFT", -3, 0)
-
-		AS:SkinArrowButton(TabardCharacterModelRotateLeftButton)
-		AS:SkinArrowButton(TabardCharacterModelRotateRightButton)
-		TabardCharacterModelRotateLeftButton:ClearAllPoints()
-		TabardCharacterModelRotateLeftButton:SetPoint("BOTTOMLEFT", TabardModel, "BOTTOMLEFT", 4, 4)
-		TabardCharacterModelRotateRightButton:ClearAllPoints()
-		TabardCharacterModelRotateRightButton:SetPoint("LEFT", TabardCharacterModelRotateLeftButton, "RIGHT", 3, 0)
-
-		AS:StripTextures(TabardFrameCostFrame)
-		AS:StripTextures(TabardFrameCustomizationFrame)
-
-		for i = 1, 5 do
-			local Frame = _G["TabardFrameCustomization"..i]
-			AS:StripTextures(Frame)
-			AS:SkinArrowButton(_G[Frame:GetName().."LeftButton"])
-			AS:SkinArrowButton(_G[Frame:GetName().."RightButton"])
-
-			if i > 1 then
-				Frame:ClearAllPoints()
-				Frame:SetPoint("TOP", _G["TabardFrameCustomization"..i-1], "BOTTOM", 0, -6)
-			else
-				local point, anchor, point2, x, y = Frame:GetPoint()
-				Frame:SetPoint(point, anchor, point2, x, y + 4)
-			end
-		end
+	for i = 1, 9 do
+		_G["PetitionFrameMemberName"..i]:SetTextColor(1, 1, 1)
 	end
 
-	if addon ~= "Blizzard_GuildUI" then return end
+	AS:SkinFrame(GuildRegistrarFrame, nil, nil, true)
+	AS:StripTextures(GuildRegistrarGreetingFrame)
+	AS:SkinButton(GuildRegistrarFrameGoodbyeButton)
+	AS:SkinButton(GuildRegistrarFrameCancelButton)
+	AS:SkinButton(GuildRegistrarFramePurchaseButton)
+	AS:SkinCloseButton(GuildRegistrarFrameCloseButton)
+	AS:SkinEditBox(GuildRegistrarFrameEditBox, nil, 20)
 
-	AS:SkinFrame(GuildFrame, nil, nil, true)
-	AS:CreateShadow(GuildFrame)
+	for i = 1, 2 do
+		_G["GuildRegistrarButton"..i]:GetFontString():SetTextColor(1, 1, 1)
+	end
 
-	AS:SkinCloseButton(GuildFrame.CloseButton)
+	GuildRegistrarPurchaseText:SetTextColor(1, 1, 1)
+	AvailableServicesText:SetTextColor(1, .8, .1)
+
+	AS:SkinFrame(TabardFrame)
+	AS:Kill(TabardFramePortrait)
+
+	AS:SkinCloseButton(TabardFrameCloseButton)
+	AS:SkinButton(TabardFrameCancelButton)
+	AS:SkinButton(TabardFrameAcceptButton)
+
+	TabardFrameAcceptButton:ClearAllPoints()
+	TabardFrameAcceptButton:SetPoint("RIGHT", TabardFrameCancelButton, "LEFT", -3, 0)
+
+	AS:SkinArrowButton(TabardCharacterModelRotateLeftButton)
+	AS:SkinArrowButton(TabardCharacterModelRotateRightButton)
+	TabardCharacterModelRotateLeftButton:ClearAllPoints()
+	TabardCharacterModelRotateLeftButton:SetPoint("BOTTOMLEFT", TabardModel, "BOTTOMLEFT", 4, 4)
+	TabardCharacterModelRotateRightButton:ClearAllPoints()
+	TabardCharacterModelRotateRightButton:SetPoint("LEFT", TabardCharacterModelRotateLeftButton, "RIGHT", 3, 0)
+
+	AS:StripTextures(TabardFrameCostFrame)
+	AS:StripTextures(TabardFrameCustomizationFrame)
+
+	for i = 1, 5 do
+		local Frame = _G["TabardFrameCustomization"..i]
+		AS:StripTextures(Frame)
+		AS:SkinArrowButton(_G[Frame:GetName().."LeftButton"])
+		AS:SkinArrowButton(_G[Frame:GetName().."RightButton"])
+
+		if i > 1 then
+			Frame:ClearAllPoints()
+			Frame:SetPoint("TOP", _G["TabardFrameCustomization"..i-1], "BOTTOM", 0, -6)
+		else
+			local point, anchor, point2, x, y = Frame:GetPoint()
+			Frame:SetPoint(point, anchor, point2, x, y + 4)
+		end
+	end
 
 	-- GuildPointFrame
 	AS:SkinCloseButton(GuildMemberDetailCloseButton)
 
-	AS:StripTextures(GuildAllPerksFrame)
 	AS:StripTextures(GuildMemberDetailFrame)
 	AS:StripTextures(GuildMemberNoteBackground)
-	AS:StripTextures(GuildInfoFrameInfo)
-	AS:StripTextures(GuildLogContainer)
-	AS:StripTextures(GuildLogFrame)
-	AS:StripTextures(GuildRewardsFrame)
 	AS:StripTextures(GuildMemberOfficerNoteBackground)
-	AS:StripTextures(GuildTextEditContainer)
-	AS:StripTextures(GuildTextEditFrame)
-
-	AS:StripTextures(GuildRecruitmentRolesFrame)
-	AS:StripTextures(GuildRecruitmentAvailabilityFrame)
-	AS:StripTextures(GuildRecruitmentInterestFrame)
-	AS:StripTextures(GuildRecruitmentLevelFrame)
-	AS:StripTextures(GuildRecruitmentCommentFrame)
-	AS:StripTextures(GuildRecruitmentCommentInputFrame)
-
-	AS:StripTextures(GuildInfoFrameApplicantsContainer)
-	AS:StripTextures(GuildInfoFrameApplicants)
-	AS:StripTextures(GuildInfoFrameApplicantsContainerScrollBar)
-
-	GuildRewardsFrameVisitText:ClearAllPoints()
-	GuildRewardsFrameVisitText:SetPoint("TOP", GuildRewardsFrame, "TOP", 0, 30)
-
-	AS:SkinFrame(GuildNewsBossModel)
-	AS:SkinFrame(GuildNewsBossModelTextFrame)
-	GuildNewsBossModelTextFrame:SetPoint("TOPLEFT", GuildNewsBossModel, "BOTTOMLEFT", 0, -1)
-	GuildNewsBossModel:SetPoint("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -43)
 
 	AS:SkinButton(GuildMemberRemoveButton)
 	AS:SkinButton(GuildMemberGroupInviteButton)
-	AS:SkinButton(GuildAddMemberButton, true)
-	AS:SkinButton(GuildViewLogButton, true)
-	AS:SkinButton(GuildControlButton, true)
-	AS:SkinButton(GuildRecruitmentListGuildButton, true)
-	AS:SkinButton(GuildTextEditFrameAcceptButton)
-	AS:SkinButton(GuildRecruitmentInviteButton, true)
-	AS:SkinButton(GuildRecruitmentMessageButton, true)
-	AS:SkinButton(GuildRecruitmentDeclineButton, true)
-
-	for _, frame in pairs({ "Quest", "Dungeon", "Raid", "PvP", "RP", "Weekdays", "Weekends" }) do
-		AS:SkinCheckBox(_G["GuildRecruitment"..frame.."Button"])
-	end
-
-	AS:SkinCheckBox(GuildRecruitmentTankButton.checkButton)
-	AS:SkinCheckBox(GuildRecruitmentHealerButton.checkButton)
-	AS:SkinCheckBox(GuildRecruitmentDamagerButton.checkButton)
-
-	for i = 1, 5 do
-		AS:SkinTab(_G["GuildFrameTab"..i])
-	end
-
-	AS:SkinScrollBar(GuildPerksContainerScrollBar)
-
-	AS:SkinBackdropFrame(GuildFactionBar)
-	GuildFactionBar.progress:SetTexture(AS.NormTex)
-	GuildFactionBar.Backdrop:SetPoint("TOPLEFT", GuildFactionBar.progress, "TOPLEFT", -2, 2)
-	GuildFactionBar.Backdrop:SetPoint("BOTTOMRIGHT", GuildFactionBar, "BOTTOMRIGHT", 0, 0)
-
-	for _, Button in pairs(GuildPerksContainer.buttons) do
-		AS:SkinTexture(Button.icon, true)
-		AS:SkinBackdropFrame(Button)
-		Button.Backdrop:SetInside()
-		Button.Backdrop:SetPoint("BOTTOMRIGHT", -15, 2)
-	end
-
-	for _, Button in pairs(GuildRewardsContainer.buttons) do
-		AS:SkinTexture(Button.icon, true)
-		AS:SkinBackdropFrame(Button)
-		Button.Backdrop:SetInside()
-		hooksecurefunc(Button.icon, "SetTexture", function(self)
-			local r, g, b = unpack(AS.BorderColor)
-			if Button.index then
-				local _, itemID = GetGuildRewardInfo(Button.index)
-				if itemID then
-					local Quality = select(3, GetItemInfo(itemID))
-					if Quality and Quality > 1 then
-						r, g, b = GetItemQualityColor(Quality)
-					end
-				end
-			end
-
-			self.Backdrop:SetBackdropBorderColor(r, g, b)
-		end)
-	end
-
-	AS:SkinScrollBar(GuildRosterContainerScrollBar)
-	AS:SkinCheckBox(GuildRosterShowOfflineButton)
-	AS:SkinDropDownBox(GuildRosterViewDropdown)
-
-	for i = 1, 4 do
-		AS:StripTextures(_G["GuildRosterColumnButton"..i], true)
-	end
-
-	for i = 1, 14 do
-		AS:SkinButton(_G["GuildRosterContainerButton"..i.."HeaderButton"], true)
-	end
 
 	AS:SkinFrame(GuildMemberDetailFrame)
 	AS:StripTextures(GuildMemberNoteBackground)
 	AS:StripTextures(GuildMemberOfficerNoteBackground)
-	GuildMemberRankDropdown:SetFrameLevel(GuildMemberRankDropdown:GetFrameLevel() + 5)
-	AS:SkinDropDownBox(GuildMemberRankDropdown)
-
-	AS:StripTextures(GuildNewsFrame)
-
-	for i = 1, 17 do
-		AS:Kill(_G["GuildNewsContainerButton"..i].header)
-	end
-
-	AS:SkinFrame(GuildNewsFiltersFrame)
-	AS:SkinCloseButton(GuildNewsFiltersFrameCloseButton)
-
-	for _, CheckBox in pairs({'GuildAchievement', 'Achievement', 'DungeonEncounter', 'EpicItemLooted', 'EpicItemPurchased', 'EpicItemCrafted', 'LegendaryItemLooted' }) do
-		AS:SkinCheckBox(GuildNewsFiltersFrame[CheckBox])
-	end
-
-	GuildNewsFiltersFrame:SetPoint("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -20)
-	AS:SkinScrollBar(GuildNewsContainerScrollBar)
-
-	AS:SkinScrollBar(GuildInfoDetailsFrameScrollBar)
-	AS:SkinScrollBar(GuildInfoFrameApplicantsContainerScrollBar)
-	AS:SkinScrollBar(GuildInfoFrameInfoMOTDScrollFrameScrollBar)
-
-	for i = 1, 3 do
-		AS:StripTextures(_G["GuildInfoFrameTab"..i])
-	end
-
-	AS:SetTemplate(GuildRecruitmentCommentInputFrame, 'Default')
-
-	for _, button in pairs(GuildInfoFrameApplicantsContainer.buttons) do
-		AS:Kill(button.selectedTex)
-		AS:Kill(button:GetHighlightTexture())
-		button:SetBackdrop(nil)
-	end
-
-	AS:SetTemplate(GuildTextEditFrame, 'Default')
-	AS:SkinScrollBar(GuildTextEditScrollFrameScrollBar)
-	AS:SetTemplate(GuildTextEditContainer, 'Default')
-	for i = 1, GuildTextEditFrame:GetNumChildren() do
-		local child = select(i, GuildTextEditFrame:GetChildren())
-		local point = select(1, child:GetPoint())
-		if point == "TOPRIGHT" then
-			AS:SkinCloseButton(child)
-		else
-			AS:SkinButton(child, true)
-		end
-	end
-
-	--Guild Log
-	AS:SkinScrollBar(GuildLogScrollFrameScrollBar)
-	AS:SkinFrame(GuildLogFrame)
-
-	for i = 1, GuildLogFrame:GetNumChildren() do
-		local child = select(i, GuildLogFrame:GetChildren())
-		local point = select(1, child:GetPoint())
-		if point == "TOPRIGHT" then
-			AS:SkinCloseButton(child)
-		else
-			AS:SkinButton(child, true)
-		end
-	end
-
-	AS:SkinScrollBar(GuildRewardsContainerScrollBar)
-
-	AS:UnregisterSkinEvent(addon, event)
 end
 
 function AS:Blizzard_GuildControlUI(event, addon)
-	if addon ~= 'Blizzard_GuildControlUI' then return end
+	if event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_GuildControlUI') or addon ~= 'Blizzard_GuildControlUI' then return end
 	AS:SkinFrame(GuildControlUI)
 	AS:StripTextures(GuildControlUIHbar)
 	AS:CreateShadow(GuildControlUI)
@@ -517,7 +351,7 @@ function AS:Blizzard_GuildControlUI(event, addon)
 end
 
 function AS:Blizzard_GuildBankUI(event, addon)
-	if addon ~= 'Blizzard_GuildBankUI' then return end
+	if event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_GuildBankUI') or addon ~= 'Blizzard_GuildBankUI' then return end
 
 	AS:SkinFrame(GuildBankFrame)
 	AS:StripTextures(GuildBankEmblemFrame, true)
