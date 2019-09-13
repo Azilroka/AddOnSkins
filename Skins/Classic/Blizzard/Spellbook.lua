@@ -10,7 +10,7 @@ function AS:Blizzard_Spellbook()
 	SpellBookCloseButton:SetPoint('TOPRIGHT', '$parent', 'TOPRIGHT', 4, 5)
 	SpellBookTitleText:SetPoint('TOP', '$parent', 'TOP', 0, -5)
 	SpellBookFrameTabButton1:ClearAllPoints()
-	SpellBookFrameTabButton1:SetPoint('TOPLEFT', '$parent', 'BOTTOMLEFT', 0, 1)
+	SpellBookFrameTabButton1:SetPoint('TOPLEFT', '$parent', 'BOTTOMLEFT', 0, 19)
 	SpellBookPageText:ClearAllPoints()
 	SpellBookPageText:SetPoint('BOTTOMRIGHT', -100, 38)
 	SpellBookPrevPageButton:ClearAllPoints()
@@ -24,8 +24,10 @@ function AS:Blizzard_Spellbook()
 	AS:SkinCloseButton(SpellBookCloseButton)
 
 	for i = 1, 3 do
-		_G["SpellBookFrameTabButton"..i]:SetSize(128, 32)
-		AS:SkinTab(_G["SpellBookFrameTabButton"..i])
+		local Tab = _G["SpellBookFrameTabButton"..i]
+		AS:SkinTab(Tab)
+		Tab.Backdrop:Point('TOPLEFT', 14, -18)
+		Tab.Backdrop:Point('BOTTOMRIGHT', -14, 18)
 	end
 
 	SpellBookPageText:SetTextColor(1, 1, 1)

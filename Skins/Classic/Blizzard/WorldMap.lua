@@ -1,40 +1,6 @@
 if AddOnSkins.Retail then return end
 local AS = unpack(AddOnSkins)
 
-function AS:Blizzard_AlliedRacesUI(event, addon)
-	if addon ~= 'Blizzard_AlliedRacesUI' then return end
-
-	AS:SkinBackdropFrame(AlliedRacesFrame)
-	AlliedRacesFrame.Bg:Hide()
-
-	AlliedRacesFrame.portrait:Hide()
-	AlliedRacesFrame.TitleBg:Hide()
-
-	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar.Border:Hide()
-	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar.ScrollUpBorder:Hide()
-	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar.ScrollDownBorder:Hide()
-	AS:StripTextures(AlliedRacesFrame.ModelFrame)
-
-	AS:SkinCloseButton(AlliedRacesFrameCloseButton)
-	AS:SkinScrollBar(AlliedRacesFrame.RaceInfoFrame.ScrollFrame.ScrollBar)
-
-	AS:SkinFrame(AlliedRacesFrame.RaceInfoFrame.ScrollFrame.Child.ObjectivesFrame)
-
-	AlliedRacesFrame.RaceInfoFrame.AlliedRacesRaceName:SetTextColor(1, .8, 0)
-	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.Child.RaceDescriptionText:SetTextColor(1, 1, 1)
-	AlliedRacesFrame.RaceInfoFrame.ScrollFrame.Child.RacialTraitsLabel:SetTextColor(1, .8, 0)
-
-	AlliedRacesFrame:HookScript("OnShow", function(self)
-		for button in self.abilityPool:EnumerateActive() do
-			select(3, button:GetRegions()):Hide()
-			AS:SkinTexture(button.Icon, true)
-			button.Text:SetTextColor(1, 1, 1)
-		end
-	end)
-
-	AS:UnregisterSkinEvent(addon, event)
-end
-
 function AS:Blizzard_Gossip()
 	AS:SkinFrame(GossipFrame)
 	GossipFrame:SetHeight(500)
@@ -105,11 +71,18 @@ end
 function AS:Blizzard_Quest()
 	AS:SkinBackdropFrame(QuestFrame)
 	QuestFrame.Backdrop:Point('TOPLEFT', 11, -12)
-	QuestFrame.Backdrop:Point('BOTTOMRIGHT', -22, 0)
+	QuestFrame.Backdrop:Point('BOTTOMRIGHT', -26, 66)
 	QuestFramePortrait:SetAlpha(0)
-	QuestFrame:SetHeight(500)
-
 	AS:SkinCloseButton(QuestFrameCloseButton)
+
+	AS:SkinBackdropFrame(QuestLogFrame)
+	QuestLogFrame.Backdrop:Point('TOPLEFT', 11, -12)
+	QuestLogFrame.Backdrop:Point('BOTTOMRIGHT', -32, 0)
+	AS:SkinFrame(QuestLogListScrollFrame)
+	AS:SkinFrame(QuestLogDetailScrollFrame)
+	AS:SkinButton(QuestLogFrameAbandonButton)
+	AS:SkinButton(QuestFramePushQuestButton)
+	AS:SkinButton(QuestFrameExitButton)
 
 	AS:StripTextures(QuestFrameDetailPanel, true)
 	AS:StripTextures(QuestDetailScrollChildFrame, true)
@@ -157,14 +130,19 @@ function AS:Blizzard_Quest()
 
 	QuestInfoRewardsFrame.SkillPointFrame.ValueText:SetDrawLayer('OVERLAY', 7)
 
-	for i = 1, 6 do
-		local Button = _G["QuestProgressItem"..i]
-		AS:SkinBackdropFrame(Button)
-		AS:SkinTexture(Button.Icon, true)
+	for frame, numItems in pairs({['QuestLogItem'] = MAX_NUM_ITEMS, ['QuestProgressItem'] = MAX_REQUIRED_ITEMS}) do
+		for i = 1, numItems do
+			local Button = _G[frame..i]
 
-		Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
-		Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
-		Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
+			AS:SkinBackdropFrame(Button)
+
+			if Button.Icon then
+				AS:SkinTexture(Button.Icon, true)
+				Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
+				Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
+				Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
+			end
+		end
 	end
 
 	local function HandleReward(frame)
@@ -463,7 +441,6 @@ function AS:Blizzard_WorldMap()
 	AS:SkinCloseButton(WorldMapFrameCloseButton)
 end
 
-AS:RegisterSkin("Blizzard_AlliedRacesUI", AS.Blizzard_AlliedRacesUI, 'ADDON_LOADED')
 AS:RegisterSkin('Blizzard_Gossip', AS.Blizzard_Gossip)
 AS:RegisterSkin('Blizzard_Quest', AS.Blizzard_Quest)
 AS:RegisterSkin('Blizzard_WorldMap', AS.Blizzard_WorldMap)

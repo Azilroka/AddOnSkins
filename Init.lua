@@ -43,6 +43,13 @@ AddOn.TexCoords = {.08, .92, .08, .92}
 AddOn.UIScale = UIParent:GetScale()
 AddOn.Faction = UnitFactionGroup("player")
 
+AddOn.AC = LibStub('AceConfig-3.0')
+AddOn.GUI = LibStub('AceGUI-3.0')
+AddOn.ACR = LibStub('AceConfigRegistry-3.0')
+AddOn.ACD = LibStub('AceConfigDialog-3.0')
+AddOn.ACL = Engine[2]
+AddOn.ADB = LibStub('AceDB-3.0')
+
 AddOn.ScreenWidth, AddOn.ScreenHeight = GetPhysicalScreenSize()
 
 local Color = _G.RAID_CLASS_COLORS[AddOn.MyClass]

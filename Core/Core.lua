@@ -294,7 +294,10 @@ function AS:StartSkinning(event)
 		AS:AcceptFrame('AddOnSkins is not compatible with AddonLoader.\nPlease remove it if you would like all the skins to function.')
 	end
 
-	if AS.SkinErrors then end
+	if not AS:CheckOption('SkinDebug') and AS.SkinErrors then
+		AS:Print(format('%s: There was an error in the following skin(s): %s', AS.Version, table.concat(AS.SkinErrors, ", ")))
+		AS:Print(format('Please report this to Azilroka immediately @ %s', AS:PrintURL(AS.TicketTracker)))
+	end
 
 	AS.RunOnce = true
 end
@@ -320,6 +323,8 @@ function AS:Init(event, addon)
 		AS.EP = LibStub('LibElvUIPlugin-1.0', true)
 		if AS.EP then
 			AS.EP:RegisterPlugin(AddOnName, AS.GetOptions)
+		else
+			AS:GetOptions()
 		end
 
 		AS:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
