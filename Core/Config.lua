@@ -1,5 +1,5 @@
 local AS = unpack(AddOnSkins)
-if AS:CheckAddOn('ProjectAzilroka') then return end
+if AS:CheckAddOn('ProjectAzilroka') or AS:CheckAddOn('ElvUI') then return end
 
 if AS:CheckAddOn('Tukui') then
 	Tukui[1].Miscellaneous.GameMenu.EnableTukuiConfig = function() end
