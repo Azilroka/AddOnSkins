@@ -18,8 +18,6 @@ function AS:Blizzard_AuctionUI(event, addon)
 	_G.AuctionFrame.Backdrop:SetPoint('TOPLEFT', 0, -10)
 	_G.AuctionFrame.Backdrop:SetPoint('BOTTOMRIGHT', 0, 10)
 
-	AS:SkinCloseButton(_G.AuctionFrameCloseButton)
-
 	local Buttons = {
 		_G.BrowseSearchButton,
 		_G.BrowseResetButton,
@@ -161,9 +159,7 @@ function AS:Blizzard_AuctionUI(event, addon)
 	_G.BidScrollFrame:SetHeight(332)
 
 	_G.BrowsePrevPageButton:SetSize(20, 20)
-	_G.BrowsePrevPageButton:SetPoint('TOPLEFT', "$parent", "TOPLEFT", 660, -60)
 	_G.BrowseNextPageButton:SetSize(20, 20)
-	_G.BrowseNextPageButton:SetPoint('TOPRIGHT', "$parent", "TOPRIGHT", 67, -60)
 	_G.BrowseBuyoutButton:SetPoint("RIGHT", _G.BrowseCloseButton, "LEFT", -1, 0)
 	_G.BrowseBidButton:SetPoint("RIGHT", _G.BrowseBuyoutButton, "LEFT", -1, 0)
 	_G.BidBuyoutButton:SetPoint("RIGHT", _G.BidCloseButton, "LEFT", -1, 0)
@@ -175,7 +171,6 @@ function AS:Blizzard_AuctionUI(event, addon)
 
 	AS:SkinScrollBar(_G.AuctionsScrollFrameScrollBar)
 	AS:SkinDropDownBox(_G.PriceDropDown)
-	AS:SkinDropDownBox(_G.DurationDropDown)
 
 	_G.AuctionsCloseButton:SetPoint("BOTTOMRIGHT", _G.AuctionFrameAuctions, "BOTTOMRIGHT", 66, 12)
 	_G.AuctionsCancelAuctionButton:SetPoint("RIGHT", _G.AuctionsCloseButton, "LEFT", -4, 0)
@@ -225,6 +220,7 @@ function AS:Blizzard_AuctionUI(event, addon)
 			local Button = _G[Frame..'Button'..i]
 			local ItemButton = _G[Frame..'Button'..i..'Item']
 			local Texture = _G[Frame..'Button'..i..'ItemIconTexture']
+			local Name = _G[Frame..'Button'..i..'Name']
 
 			AS:SkinFrame(ItemButton, nil, true)
 			ItemButton.IconBorder:SetAlpha(0)
@@ -242,8 +238,15 @@ function AS:Blizzard_AuctionUI(event, addon)
 			AS:SkinTexture(Texture)
 			Texture:SetInside()
 
-			hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b) ItemButton:SetBackdropBorderColor(r, g, b) end)
-			hooksecurefunc(ItemButton.IconBorder, 'Hide', function() ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+			hooksecurefunc(Name, 'SetVertexColor', function(self, r, g, b)
+				if not (r == g) then
+					ItemButton:SetBackdropBorderColor(r, g, b)
+				else
+					ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end
+			end)
+
+			hooksecurefunc(Name, 'Hide', function() ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 		end
 	end
 
@@ -257,77 +260,4 @@ function AS:Blizzard_AuctionUI(event, addon)
 	AS:UnregisterSkinEvent(addon, event)
 end
 
-function AS:Blizzard_BlackMarketUI(event, addon)
-	if addon ~= "Blizzard_BlackMarketUI" then return end
-
-	AS:SkinFrame(_G.BlackMarketFrame)
-	AS:SkinCloseButton(_G.BlackMarketFrame.CloseButton)
-
-	AS:SkinBackdropFrame(_G.BlackMarketScrollFrame)
-	_G.BlackMarketScrollFrame.Backdrop:SetPoint('TOPLEFT', -3, 0)
-	_G.BlackMarketScrollFrame.Backdrop:SetPoint('BOTTOMRIGHT', -2, 2)
-	AS:SkinScrollBar(_G.BlackMarketScrollFrameScrollBar)
-
-	AS:SkinFrame(_G.BlackMarketFrame.MoneyFrameBorder)
-	_G.BlackMarketFrame.MoneyFrameBorder:SetPoint('BOTTOMLEFT', _G.BlackMarketFrame, 'BOTTOMLEFT', 29, 12)
-	_G.BlackMarketMoneyFrame:SetPoint("BOTTOMRIGHT", _G.BlackMarketFrame.MoneyFrameBorder, "BOTTOMRIGHT", 8, 4)
-
-	AS:SkinEditBox(_G.BlackMarketBidPriceGold)
-	_G.BlackMarketBidPriceGold.Backdrop:SetAllPoints()
-	_G.BlackMarketBidPriceGold:SetHeight(16)
-	_G.BlackMarketBidPriceGold:SetPoint("BOTTOMRIGHT", _G.BlackMarketFrame.BidButton, "BOTTOMLEFT", -1, 0)
-
-	AS:SkinButton(_G.BlackMarketFrame.BidButton)
-	_G.BlackMarketFrame.BidButton:SetHeight(20)
-	_G.BlackMarketFrame.BidButton:SetPoint("BOTTOMRIGHT", -285, 12)
-
-	for i = 1, _G.BlackMarketFrame:GetNumRegions() do
-		local region = select(i, _G.BlackMarketFrame:GetRegions())
-		if region and region:IsObjectType("FontString") and region:GetText() == _G.BLACK_MARKET_TITLE then
-			region:ClearAllPoints()
-			region:SetPoint("TOP", _G.BlackMarketFrame, "TOP", 0, -4)
-		end
-	end
-
-	AS:StripTextures(_G.BlackMarketFrame.HotDeal)
-	AS:SetTemplate(_G.BlackMarketFrame.HotDeal.Item)
-	AS:StyleButton(_G.BlackMarketFrame.HotDeal.Item)
-	AS:SkinTexture(_G.BlackMarketFrame.HotDeal.Item.IconTexture)
-	_G.BlackMarketFrame.HotDeal.Item.IconTexture:SetInside()
-	_G.BlackMarketFrame.HotDeal.Item.IconBorder:SetAlpha(0)
-
-	hooksecurefunc(_G.BlackMarketFrame.HotDeal.Item.IconBorder, 'SetVertexColor', function(self, r, g, b) _G.BlackMarketFrame.HotDeal.Item:SetBackdropBorderColor(r, g, b) end)
-	hooksecurefunc(_G.BlackMarketFrame.HotDeal.Item.IconBorder, 'Hide', function() _G.BlackMarketFrame.HotDeal.Item:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
-
-	for _, Tab in pairs({ 'ColumnName', 'ColumnLevel', 'ColumnType', 'ColumnDuration', 'ColumnHighBidder', 'ColumnCurrentBid' }) do
-		AS:SkinButton(_G.BlackMarketFrame[Tab])
-	end
-
-	hooksecurefunc("BlackMarketScrollFrame_Update", function()
-		for _, Button in pairs(_G.BlackMarketScrollFrame.buttons) do
-			if not Button.skinned then
-				AS:StripTextures(Button)
-				AS:StyleButton(Button)
-				Button:GetHighlightTexture():SetAllPoints(Button.Selection)
-				Button:GetPushedTexture():SetAllPoints(Button.Selection)
-				Button.Selection:SetColorTexture(1, 1, 1, .3)
-				AS:SkinFrame(Button.Item)
-				AS:StyleButton(Button.Item)
-
-				AS:SkinTexture(Button.Item.IconTexture)
-
-				Button.Item.IconTexture:SetInside()
-				Button.Item.IconBorder:SetAlpha(0)
-				hooksecurefunc(Button.Item.IconBorder, 'SetVertexColor', function(self, r, g, b) Button.Item:SetBackdropBorderColor(r, g, b) end)
-				hooksecurefunc(Button.Item.IconBorder, 'Hide', function() Button.Item:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
-
-				Button.skinned = true
-			end
-		end
-	end)
-
-	AS:UnregisterSkinEvent(addon, event)
-end
-
 AS:RegisterSkin('Blizzard_AuctionUI', AS.Blizzard_AuctionUI, 'ADDON_LOADED')
-AS:RegisterSkin('Blizzard_BlackMarketUI', AS.Blizzard_BlackMarketUI, 'ADDON_LOADED')

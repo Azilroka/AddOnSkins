@@ -74,5 +74,12 @@ end
 
 _G.TEXTURE_ITEM_QUEST_BANG = [[Interface\AddOns\AddOnSkins\Media\Textures\UI-Icon-QuestBang]]
 
+AddOn.Media = {
+	Textures = {
+		Plus = [[Interface\AddOns\AddOnSkins\Media\Textures\Plus]],
+		Minus = [[Interface\AddOns\AddOnSkins\Media\Textures\Minus]],
+	}
+}
+
 AddOn.Hider = CreateFrame('Frame', nil, UIParent)
 AddOn.Hider:Hide()

@@ -1,6 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="AddOnManager.lua"/>
-	<Script file="Alerts.lua"/>
 	<Script file="Auction.lua"/>
 	<Script file="Bags.lua"/>
 	<Script file="BarberShop.lua"/>

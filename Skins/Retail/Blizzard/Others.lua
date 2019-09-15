@@ -107,6 +107,7 @@ function AS:Blizzard_Others()
 
 		AS:SkinFrame(listFrame.Border)
 		AS:SetTemplate(_G["DropDownList"..level.."MenuBackdrop"])
+		AS:SetTemplate(_G["DropDownList"..level.."Backdrop"])
 
 		if expandArrow then
 			expandArrow:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
@@ -133,6 +134,7 @@ function AS:Blizzard_Others()
 
 		for i = 1, UIDROPDOWNMENU_MAXBUTTONS do
 			local button = _G["DropDownList"..level.."Button"..i]
+			local normalText = _G["DropDownList"..level.."Button"..i.."NormalText"];
 			local check = _G["DropDownList"..level.."Button"..i.."Check"]
 			local uncheck = _G["DropDownList"..level.."Button"..i.."UnCheck"]
 			local highlight = _G["DropDownList"..level.."Button"..i.."Highlight"]
@@ -143,6 +145,14 @@ function AS:Blizzard_Others()
 			AS:CreateBackdrop(check)
 			if check.Backdrop then
 				check.Backdrop:Hide()
+			end
+
+			normalText:SetTextColor(1, 1, 1)
+
+			for k = 2, 8 do
+				if normalText:GetText() == _G["ITEM_QUALITY"..k.."_DESC"] then
+					normalText:SetTextColor(GetItemQualityColor(k))
+				end
 			end
 
 			if not button.notCheckable then

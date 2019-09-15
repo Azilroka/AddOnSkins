@@ -127,6 +127,7 @@ function AS:Blizzard_AuctionUI(event, addon)
 	AS:SkinArrowButton(_G.BrowsePrevPageButton)
 
 	AS:SkinDropDownBox(_G.BrowseDropDown, 155)
+	UIDropDownMenu_SetAnchor(_G.BrowseDropDown, 0, 0, 'TOPLEFT', _G.BrowseDropDown, 'TOPLEFT')
 	_G.BrowseDropDown:SetPoint('TOPLEFT', _G.BrowseMaxLevel, 'TOPRIGHT', -6, 7)
 	_G.BrowseDropDown.Text:SetPoint("RIGHT", _G.BrowseDropDownRight, "RIGHT", -43, -2)
 	_G.BrowseDropDownName:SetPoint('BOTTOMLEFT', _G.BrowseDropDown, 'TOPLEFT', 20, -2)

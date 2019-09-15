@@ -1,0 +1,6 @@
+<Ui>
+	<Include file="Blizzard\Load_Skins.xml"/>
+
+	<Script file="Questie.lua"/>
+	<Script file="WhatsTraining.lua"/>
+</Ui>

@@ -59,6 +59,7 @@ function AS:Blizzard_Spellbook()
 	hooksecurefunc("SpellButton_UpdateButton", function()
 		for i = 1, SPELLS_PER_PAGE do
 			local Button = _G["SpellButton"..i]
+			local iconTexture = _G["SpellButton"..i.."IconTexture"];
 			Button:SetHighlightTexture('')
 			local r = Button.SpellName:GetTextColor()
 			if r < 0.8 then

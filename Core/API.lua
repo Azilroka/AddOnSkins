@@ -1019,6 +1019,7 @@ end
 function AS:SkinFrame(frame, template, override, kill)
 	local name = frame and frame.GetName and frame:GetName()
 	local insetFrame = name and _G[name..'Inset'] or frame.Inset
+	local closeButton = name and _G[name..'CloseButton'] or frame.CloseButton
 
 	if not override then
 		AS:StripTextures(frame, kill)
@@ -1026,18 +1027,19 @@ function AS:SkinFrame(frame, template, override, kill)
 
 	AS:SetTemplate(frame, template)
 
-	--if insetFrame then
-	--	AS:SkinFrame(insetFrame)
-	--end
+	if insetFrame then
+		AS:SkinFrame(insetFrame)
+	end
 
-	if frame.CloseButton then
-		AS:SkinCloseButton(frame.CloseButton)
+	if closeButton then
+		AS:SkinCloseButton(closeButton)
 	end
 end
 
 function AS:SkinBackdropFrame(frame, template, override, kill)
 	local name = frame and frame.GetName and frame:GetName()
 	local insetFrame = name and _G[name..'Inset'] or frame.Inset
+	local closeButton = name and _G[name..'CloseButton'] or frame.CloseButton
 
 	if not override then
 		AS:StripTextures(frame, kill)
@@ -1050,8 +1052,8 @@ function AS:SkinBackdropFrame(frame, template, override, kill)
 		AS:SkinFrame(insetFrame)
 	end
 
-	if frame.CloseButton then
-		AS:SkinCloseButton(frame.CloseButton)
+	if closeButton then
+		AS:SkinCloseButton(closeButton)
 	end
 end
 

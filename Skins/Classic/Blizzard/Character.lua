@@ -20,7 +20,6 @@ function AS:Blizzard_Character()
 	_G.CharacterFrame.Backdrop:Point('TOPLEFT', 11, -12)
 	_G.CharacterFrame.Backdrop:Point('BOTTOMRIGHT', -31, 76)
 	AS:CreateShadow(_G.CharacterFrame.Backdrop)
-	AS:SkinCloseButton(_G.CharacterFrameCloseButton)
 
 	AS:SkinBackdropFrame(_G.CharacterModelFrame)
 	_G.CharacterModelFrame.Backdrop:SetPoint('TOPLEFT', -2, 4)
@@ -98,20 +97,30 @@ function AS:Blizzard_Character()
 	end
 
 	-- Reputation
+	AS:StripTextures(ReputationFrame)
 	AS:StripTextures(_G.ReputationListScrollFrame)
 	AS:SkinScrollBar(_G.ReputationListScrollFrame.ScrollBar)
 	AS:SkinFrame(_G.ReputationDetailFrame)
+
 	_G.ReputationDetailFrame:SetPoint("TOPLEFT", _G.ReputationFrame, "TOPRIGHT", 4, -28)
+
 	hooksecurefunc("ReputationFrame_Update", function()
 		local factionOffset = FauxScrollFrame_GetOffset(_G.ReputationListScrollFrame)
 		local numFactions = GetNumFactions()
 		for i = 1, _G.NUM_FACTIONS_DISPLAYED do
 			local FactionName = _G["ReputationBar"..i.."FactionName"]
 			local Button = _G["ReputationBar"..i.."ExpandOrCollapseButton"]
+			local Header = _G['ReputationHeader'..i]
 			local factionIndex = factionOffset + i
 			if ( factionIndex <= numFactions ) then
 				local name, _, _, _, _, _, atWarWith, canToggleAtWar, isHeader, isCollapsed = GetFactionInfo(factionIndex)
 				if isHeader then
+					if isCollapsed then
+						Header:SetNormalTexture(AS.Media.Textures.Plus)
+					else
+						Header:SetNormalTexture(AS.Media.Textures.Minus)
+					end
+					Header:SetHighlightTexture(nil)
 					FactionName:SetTextColor(.9, .8, 0)
 				else
 					if atWarWith and canToggleAtWar then
@@ -131,9 +140,66 @@ function AS:Blizzard_Character()
 	AS:SkinCheckBox(_G.ReputationDetailMainScreenCheckBox)
 
 	for i = 1, 15 do
-		AS:StripTextures(_G["ReputationBar"..i])
---		AS:SkinStatusBar(_G["ReputationBar"..i.."ReputationBar"])
+		AS:SkinStatusBar(_G["ReputationBar"..i])
+		AS:SetOutside(_G["ReputationBar"..i].Backdrop, _G["ReputationBar"..i])
 	end
+
+	-- Skill Frame
+	AS:StripTextures(_G.SkillFrame)
+
+	AS:StripTextures(_G.SkillFrameExpandButtonFrame)
+
+	hooksecurefunc('SkillFrame_UpdateSkills', function()
+		if strfind(_G.SkillFrameCollapseAllButton:GetNormalTexture():GetTexture(), 'MinusButton') then
+			_G.SkillFrameCollapseAllButton:SetNormalTexture(AS.Media.Textures.Minus)
+		else
+			_G.SkillFrameCollapseAllButton:SetNormalTexture(AS.Media.Textures.Plus)
+		end
+		_G.SkillFrameCollapseAllButton:SetHighlightTexture(nil)
+	end)
+
+	AS:SkinButton(_G.SkillFrameCancelButton)
+
+	for i = 1, _G.SKILLS_TO_DISPLAY do
+		local bar = _G['SkillRankFrame'..i]
+		local label = _G['SkillTypeLabel'..i]
+		local border = _G['SkillRankFrame'..i..'Border']
+		local background = _G['SkillRankFrame'..i..'Background']
+
+		AS:SkinStatusBar(bar)
+		AS:SetOutside(bar.Backdrop, bar, 1, 1)
+		border:StripTextures()
+		background:SetTexture(nil)
+
+		label:GetNormalTexture():Size(14)
+		label:SetHighlightTexture(nil)
+	end
+
+	hooksecurefunc('SkillFrame_SetStatusBar', function(statusBarID, skillIndex, numSkills)
+		local skillLine = _G["SkillTypeLabel"..statusBarID]
+		if strfind(skillLine:GetNormalTexture():GetTexture(), 'MinusButton') then
+			skillLine:SetNormalTexture(AS.Media.Textures.Minus)
+		else
+			skillLine:SetNormalTexture(AS.Media.Textures.Plus)
+		end
+	end)
+
+	_G.SkillListScrollFrame:StripTextures()
+	AS:SkinScrollBar(_G.SkillListScrollFrameScrollBar)
+
+	_G.SkillDetailScrollFrame:StripTextures()
+	AS:SkinScrollBar(_G.SkillDetailScrollFrameScrollBar)
+
+	AS:SkinStatusBar(_G.SkillDetailStatusBar)
+
+	AS:SkinArrowButton(_G.SkillDetailStatusBarUnlearnButton)
+	_G.SkillDetailStatusBarUnlearnButton:Size(24)
+	_G.SkillDetailStatusBarUnlearnButton:Point('LEFT', _G.SkillDetailStatusBarBorder, 'RIGHT', 5, 0)
+	_G.SkillDetailStatusBarUnlearnButton:SetHitRectInsets(0, 0, 0, 0)
+
+	-- Honor Frame
+	AS:StripTextures(HonorFrame)
+	AS:SkinStatusBar(HonorFrameProgressBar)
 end
 
 function AS:Blizzard_DressUpFrame()

@@ -18,7 +18,6 @@ function AS:Blizzard_Channels(event, addon)
 
 	AS:SkinBackdropFrame(_G.CreateChannelPopup)
 
-	AS:SkinCloseButton(_G.ChannelFrame.CloseButton)
 	AS:SkinButton(_G.ChannelFrame.NewButton)
 	AS:SkinButton(_G.ChannelFrame.SettingsButton)
 

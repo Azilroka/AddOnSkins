@@ -2,8 +2,9 @@ if AddOnSkins.Retail then return end
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Gossip()
-	AS:SkinFrame(GossipFrame)
-	GossipFrame:SetHeight(500)
+	AS:SkinBackdropFrame(GossipFrame)
+	GossipFrame.Backdrop:Point('TOPLEFT', 11, -12)
+	GossipFrame.Backdrop:Point('BOTTOMRIGHT', -26, 66)
 
 	AS:SkinCloseButton(GossipFrameCloseButton)
 	GossipFramePortrait:SetAlpha(0)
@@ -73,13 +74,14 @@ function AS:Blizzard_Quest()
 	QuestFrame.Backdrop:Point('TOPLEFT', 11, -12)
 	QuestFrame.Backdrop:Point('BOTTOMRIGHT', -26, 66)
 	QuestFramePortrait:SetAlpha(0)
-	AS:SkinCloseButton(QuestFrameCloseButton)
 
 	AS:SkinBackdropFrame(QuestLogFrame)
 	QuestLogFrame.Backdrop:Point('TOPLEFT', 11, -12)
-	QuestLogFrame.Backdrop:Point('BOTTOMRIGHT', -32, 0)
+	QuestLogFrame.Backdrop:Point('BOTTOMRIGHT', -32, 45)
 	AS:SkinFrame(QuestLogListScrollFrame)
 	AS:SkinFrame(QuestLogDetailScrollFrame)
+	AS:SkinScrollBar(QuestLogDetailScrollFrameScrollBar)
+	AS:SkinScrollBar(QuestLogListScrollFrameScrollBar)
 	AS:SkinButton(QuestLogFrameAbandonButton)
 	AS:SkinButton(QuestFramePushQuestButton)
 	AS:SkinButton(QuestFrameExitButton)
@@ -103,6 +105,7 @@ function AS:Blizzard_Quest()
 	AS:SkinScrollBar(QuestRewardScrollFrameScrollBar)
 
 	AS:SkinButton(QuestFrameAcceptButton)
+	AS:SkinButton(QuestFrameCancelButton)
 	AS:SkinButton(QuestFrameDeclineButton)
 	AS:SkinButton(QuestFrameCompleteButton)
 	AS:SkinButton(QuestFrameGoodbyeButton)
@@ -197,6 +200,37 @@ function AS:Blizzard_Quest()
 		HandleReward(_G.QuestInfoRewardsFrame[frame])
 	end
 
+	for i = 1, _G.QUESTS_DISPLAYED do
+		local questLogTitle = _G['QuestLogTitle'..i]
+
+		questLogTitle:SetNormalTexture(AS.Media.Textures.Plus)
+		questLogTitle.SetNormalTexture = AS.Noop
+
+		questLogTitle:GetNormalTexture():Size(16)
+		questLogTitle:GetNormalTexture():Point('LEFT', 5, 0)
+
+		questLogTitle:SetHighlightTexture('')
+		questLogTitle.SetHighlightTexture = AS.Noop
+
+		questLogTitle:Width(300)
+
+		_G['QuestLogTitle'..i..'Highlight']:SetAlpha(0)
+
+		_G['QuestLogTitle'..i..'Tag']:SetPoint('RIGHT', -30, 0)
+
+		hooksecurefunc(questLogTitle, 'SetNormalTexture', function(self, texture)
+			local tex = self:GetNormalTexture()
+
+			if strfind(texture, 'MinusButton') then
+				tex:SetTexture(AS.Media.Textures.Minus)
+			elseif strfind(texture, 'PlusButton') then
+				tex:SetTexture(AS.Media.Textures.Plus)
+			else
+				tex:SetTexture()
+			end
+		end)
+	end
+
 	hooksecurefunc("QuestInfo_GetRewardButton", function(rewardsFrame, index)
 		local RewardButton = rewardsFrame.RewardButtons[index]
 
@@ -238,6 +272,32 @@ function AS:Blizzard_Quest()
 --		bg:SetPoint("TOPLEFT", icon, "TOPRIGHT", 0, 2)
 --		bg:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 220, -1)
 	end
+
+	local QuestLogCollapseAllButton = _G.QuestLogCollapseAllButton
+	AS:StripTextures(QuestLogCollapseAllButton)
+
+	QuestLogCollapseAllButton:SetNormalTexture(AS.Media.Textures.Plus)
+	QuestLogCollapseAllButton.SetNormalTexture = AS.Noop
+	QuestLogCollapseAllButton:GetNormalTexture():Size(16)
+
+	QuestLogCollapseAllButton:SetHighlightTexture('')
+	QuestLogCollapseAllButton.SetHighlightTexture = AS.Noop
+
+	QuestLogCollapseAllButton:SetDisabledTexture(AS.Media.Textures.Plus)
+	QuestLogCollapseAllButton.SetDisabledTexture = AS.Noop
+	QuestLogCollapseAllButton:GetDisabledTexture():Size(16)
+	QuestLogCollapseAllButton:GetDisabledTexture():SetTexture(AS.Media.Textures.Plus)
+	QuestLogCollapseAllButton:GetDisabledTexture():SetDesaturated(true)
+
+	hooksecurefunc(_G.QuestLogCollapseAllButton, 'SetNormalTexture', function(self, texture)
+		local tex = self:GetNormalTexture()
+
+		if strfind(texture, 'MinusButton') then
+			tex:SetTexture(AS.Media.Textures.Minus)
+		else
+			tex:SetTexture(AS.Media.Textures.Plus)
+		end
+	end)
 
 	if AS.ParchmentEnabled then
 		QuestDetailScrollFrame.Background = QuestDetailScrollFrame:CreateTexture(nil, 'ARTWORK')
@@ -439,6 +499,10 @@ function AS:Blizzard_WorldMap()
 	AS:SkinBackdropFrame(WorldMapFrame)
 	AS:CreateShadow(WorldMapFrame.Backdrop)
 	AS:SkinCloseButton(WorldMapFrameCloseButton)
+
+	AS:SkinDropDownBox(WorldMapContinentDropDown)
+	AS:SkinDropDownBox(WorldMapZoneDropDown)
+	AS:SkinButton(WorldMapZoomOutButton)
 end
 
 AS:RegisterSkin('Blizzard_Gossip', AS.Blizzard_Gossip)

@@ -11,8 +11,6 @@ function AS:Blizzard_AddonManager()
 	AS:SkinFrame(_G.AddonList)
 	AS:CreateShadow(_G.AddonList)
 
-	AS:StripTextures(_G.AddonListInset)
-
 	AS:SkinBackdropFrame(_G.AddonListScrollFrame)
 	AS:SkinScrollBar(_G.AddonListScrollFrameScrollBar)
 
@@ -26,8 +24,6 @@ function AS:Blizzard_AddonManager()
 	AS:SkinCheckBox(_G.AddonListForceLoad)
 	_G.AddonListForceLoad:SetSize(26, 26)
 	AS:SkinDropDownBox(_G.AddonCharacterDropDown, 165)
-
-	AS:SkinCloseButton(_G.AddonList.CloseButton)
 
 	for i = 1, _G.MAX_ADDONS_DISPLAYED do
 		AS:SkinCheckBox(_G["AddonListEntry"..i.."Enabled"])
