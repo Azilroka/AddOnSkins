@@ -1,3 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Include file="Blizzard\Load_Skins.xml"/>
+
+	<Script file="Auctionator.lua"/>
 </Ui>

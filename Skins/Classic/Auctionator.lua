@@ -1,12 +1,9 @@
 local AS = unpack(AddOnSkins)
 
+if AddOnSkins.Retail then return end
 if not AS:CheckAddOn('Auctionator') then return end
 
 function AS:Auctionator(event)
-	if addon == 'Blizzard_TradeSkillUI' or IsAddOnLoaded('Blizzard_TradeSkillUI') then
-		TradeSkillFrame:HookScript('OnShow', function() AS:SkinButton(Auctionator_Search, true) end)
-		AS:UnregisterSkinEvent('Auctionator', event)
-	end
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 	if event == 'AUCTION_HOUSE_SHOW' then
 

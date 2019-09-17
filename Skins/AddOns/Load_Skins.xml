@@ -12,7 +12,6 @@
 	<Script file="ArkInventory.lua"/>
 	<Script file="Atlas.lua"/>
 	<Script file="AtlasLoot.lua"/>
-	<Script file="Auctionator.lua"/>
 	<Script file="Auctioneer.lua"/>
 	<Script file="AuctionLite.lua"/>
 	<Script file="AutoBar.lua"/>

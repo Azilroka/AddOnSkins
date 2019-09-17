@@ -3,63 +3,147 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_TradeSkill(event, addon)
 	if addon ~= 'Blizzard_TradeSkillUI' then return end
-	AS:SkinBackdropFrame(TradeSkillFrame, nil, nil, true)
-	TradeSkillFramePortrait:SetAlpha(0)
+	AS:SkinBackdropFrame(_G.TradeSkillFrame, nil, nil, true)
+	_G.TradeSkillFramePortrait:SetAlpha(0)
+	_G.TradeSkillFrame.Backdrop:Point('TOPLEFT', 11, -12)
+	_G.TradeSkillFrame.Backdrop:Point('BOTTOMRIGHT', -32, 76)
 
-	AS:SkinStatusBar(TradeSkillRankFrame)
+	AS:SkinStatusBar(_G.TradeSkillRankFrame)
 
-	AS:SkinCloseButton(TradeSkillFrameCloseButton)
+	AS:SkinCloseButton(_G.TradeSkillFrameCloseButton)
 
-	--AS:SkinBackdropFrame(TradeSkillFrame.RecipeInset)
-	--TradeSkillFrame.RecipeInset.Backdrop:SetFrameLevel(TradeSkillFrame.RecipeInset.Backdrop:GetFrameLevel() + 1)
-	--TradeSkillFrame.RecipeInset.Backdrop:SetPoint("TOPLEFT", 0, -1)
-	--TradeSkillFrame.RecipeInset.Backdrop:SetPoint("BOTTOMRIGHT", 0, -2)
+	AS:StripTextures(_G.TradeSkillExpandButtonFrame)
 
-	--AS:StripTextures(TradeSkillFrame.RecipeList.LearnedTab)
-	--AS:StripTextures(TradeSkillFrame.RecipeList.UnlearnedTab)
+	local TradeSkillCollapseAllButton = _G.TradeSkillCollapseAllButton
+	TradeSkillCollapseAllButton:GetNormalTexture():SetPoint('LEFT', 3, 2)
+	TradeSkillCollapseAllButton:GetNormalTexture():Size(15)
 
-	--AS:SkinScrollBar(TradeSkillFrame.RecipeList.scrollBar)
-	--AS:StripTextures(TradeSkillFrame.DetailsFrame)
+	TradeSkillCollapseAllButton:SetHighlightTexture('')
+	TradeSkillCollapseAllButton.SetHighlightTexture = AS.Noop
 
-	--AS:SkinBackdropFrame(TradeSkillFrame.DetailsInset)
-	--TradeSkillFrame.DetailsInset.Backdrop:SetFrameLevel(TradeSkillFrame.DetailsInset.Backdrop:GetFrameLevel() + 1)
-	--TradeSkillFrame.DetailsInset.Backdrop:SetPoint("TOPLEFT", 4, -1)
-	--TradeSkillFrame.DetailsInset.Backdrop:SetPoint("BOTTOMRIGHT", 1, 1)
+	TradeSkillCollapseAllButton:SetDisabledTexture(AS.Media.Textures.Minus)
+	TradeSkillCollapseAllButton.SetDisabledTexture = AS.Noop
+	TradeSkillCollapseAllButton:GetDisabledTexture():SetPoint('LEFT', 3, 2)
+	TradeSkillCollapseAllButton:GetDisabledTexture():Size(15)
+	TradeSkillCollapseAllButton:GetDisabledTexture():SetDesaturated(true)
 
-	--AS:SkinScrollBar(TradeSkillFrame.DetailsFrame.ScrollBar)
+	AS:SkinDropDownBox(_G.TradeSkillInvSlotDropDown)
 
-	--TradeSkillFrame.DetailsFrame.Background:Hide()
+	AS:SkinDropDownBox(_G.TradeSkillSubClassDropDown)
 
-	--AS:SkinEditBox(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox)
+	_G.TradeSkillFrameTitleText:ClearAllPoints()
+	_G.TradeSkillFrameTitleText:Point('TOP', _G.TradeSkillFrame, 'TOP', 0, -18)
 
-	--TradeSkillFrame.DetailsFrame.CreateMultipleInputBox:DisableDrawLayer("BACKGROUND")
+	for i = 1, _G.TRADE_SKILLS_DISPLAYED do
+		local button = _G['TradeSkillSkill'..i]
+		local highlight = _G['TradeSkillSkill'..i..'Highlight']
 
-	--AS:SkinButton(TradeSkillFrame.DetailsFrame.CreateAllButton, true)
-	--AS:SkinButton(TradeSkillFrame.DetailsFrame.CreateButton, true)
-	--AS:SkinButton(TradeSkillFrame.DetailsFrame.ExitButton, true)
+		button:GetNormalTexture():Size(14)
+		button:GetNormalTexture():SetPoint('LEFT', 2, 1)
 
-	--AS:SkinArrowButton(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.DecrementButton)
-	--AS:SkinArrowButton(TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.IncrementButton)
-	--TradeSkillFrame.DetailsFrame.CreateMultipleInputBox.IncrementButton:SetPoint("LEFT", TradeSkillFrame.DetailsFrame.CreateMultipleInputBox, "RIGHT", 4, 0)
+		highlight:SetTexture('')
+		highlight.SetTexture = AS.Noop
+	end
 
-	--hooksecurefunc(TradeSkillFrame.DetailsFrame, "RefreshDisplay", function(self)
-	--	AS:StyleButton(self.Contents.ResultIcon)
-	--	AS:SetTemplate(self.Contents.ResultIcon)
+	hooksecurefunc('TradeSkillFrame_Update', function()
+		for i = 1, _G.TRADE_SKILLS_DISPLAYED do
+			local button = _G['TradeSkillSkill'..i]
+			local texture = button:GetNormalTexture():GetTexture()
+			if texture then
+				if strfind(texture, 'MinusButton') then
+					button:SetNormalTexture(AS.Media.Textures.Minus)
+				elseif strfind(texture, 'PlusButton') then
+					button:SetNormalTexture(AS.Media.Textures.Plus)
+				end
+			end
+		end
 
-	--	if self.Contents.ResultIcon:GetNormalTexture() then
-	--		AS:SkinTexture(self.Contents.ResultIcon:GetNormalTexture())
-	--		self.Contents.ResultIcon:GetNormalTexture():SetInside()
-	--	end
+		if TradeSkillCollapseAllButton.collapsed then
+			TradeSkillCollapseAllButton:SetNormalTexture(AS.Media.Textures.Plus)
+		else
+			TradeSkillCollapseAllButton:SetNormalTexture(AS.Media.Textures.Minus)
+		end
+	end)
 
-	--	self.Contents.ResultIcon.ResultBorder:SetTexture("")
-	--	self.Contents.ResultIcon.IconBorder:SetTexture("")
-	--	self.Contents.ResultIcon:SetBackdropBorderColor(self.Contents.ResultIcon.IconBorder:GetVertexColor())
+	_G.TradeSkillDetailScrollFrame:StripTextures()
+	_G.TradeSkillListScrollFrame:StripTextures()
+	_G.TradeSkillDetailScrollChildFrame:StripTextures()
 
-	--	for _, Button in pairs(self.Contents.Reagents) do
-	--		AS:SkinTexture(Button.Icon, true)
-	--		Button.NameFrame:SetTexture("")
-	--	end
-	--end)
+	AS:SkinScrollBar(_G.TradeSkillListScrollFrameScrollBar)
+	AS:SkinScrollBar(_G.TradeSkillDetailScrollFrameScrollBar)
+
+	AS:StyleButton(_G.TradeSkillSkillIcon, nil, true)
+
+	for i = 1, _G.MAX_TRADE_SKILL_REAGENTS do
+		local icon = _G['TradeSkillReagent'..i..'IconTexture']
+		local nameFrame = _G['TradeSkillReagent'..i..'NameFrame']
+
+		AS:SkinTexture(icon, true)
+		icon:SetDrawLayer('OVERLAY')
+
+		nameFrame:Kill()
+	end
+
+	AS:SkinButton(_G.TradeSkillCancelButton)
+	AS:SkinButton(_G.TradeSkillCreateButton)
+	AS:SkinButton(_G.TradeSkillCreateAllButton)
+
+	AS:SkinArrowButton(_G.TradeSkillDecrementButton)
+	_G.TradeSkillInputBox:Height(16)
+	AS:SkinEditBox(_G.TradeSkillInputBox)
+	AS:SkinArrowButton(_G.TradeSkillIncrementButton)
+
+	hooksecurefunc('TradeSkillFrame_SetSelection', function(id)
+		local skillName, skillType, numAvailable, isExpanded = GetTradeSkillInfo(id)
+		if skillType == "header" then
+			return
+		end
+
+		if _G.TradeSkillSkillIcon:GetNormalTexture() then
+			_G.TradeSkillSkillIcon:SetAlpha(1)
+			AS:SkinTexture(_G.TradeSkillSkillIcon:GetNormalTexture(), true)
+			_G.TradeSkillSkillIcon:GetNormalTexture():SetInside()
+		else
+			_G.TradeSkillSkillIcon:SetAlpha(0)
+		end
+
+		_G.TradeSkillSkillIcon:Size(40)
+		_G.TradeSkillSkillIcon:Point('TOPLEFT', 2, -3)
+
+		local skillLink = GetTradeSkillItemLink(id)
+		if skillLink then
+			local quality = select(3, GetItemInfo(skillLink))
+			if quality and quality > 1 then
+				_G.TradeSkillSkillIcon:SetBackdropBorderColor(GetItemQualityColor(quality))
+				_G.TradeSkillSkillName:SetTextColor(GetItemQualityColor(quality))
+			else
+				_G.TradeSkillSkillIcon:SetBackdropBorderColor(unpack(AS.BorderColor))
+				_G.TradeSkillSkillName:SetTextColor(1, 1, 1)
+			end
+		end
+
+		local numReagents = GetTradeSkillNumReagents(id)
+		for i = 1, numReagents, 1 do
+			local _, _, reagentCount, playerReagentCount = GetTradeSkillReagentInfo(id, i)
+			local reagentLink = GetTradeSkillReagentItemLink(id, i)
+			local icon = _G['TradeSkillReagent'..i..'IconTexture']
+			local name = _G['TradeSkillReagent'..i..'Name']
+
+			if reagentLink then
+				local quality = select(3, GetItemInfo(reagentLink))
+				if quality and quality > 1 then
+					icon.backdrop:SetBackdropBorderColor(GetItemQualityColor(quality))
+					if playerReagentCount < reagentCount then
+						name:SetTextColor(0.5, 0.5, 0.5)
+					else
+						name:SetTextColor(GetItemQualityColor(quality))
+					end
+				else
+					icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+				end
+			end
+		end
+	end)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
