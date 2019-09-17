@@ -1,7 +1,7 @@
 <Ui>
 	<Include file="Blizzard\Load_Skins.xml"/>
 
-    <Script file="DejaClassicStats.lua"/>
+	<Script file="DejaClassicStats.lua"/>
 	<Script file="Questie.lua"/>
 	<Script file="WhatsTraining.lua"/>
 </Ui>

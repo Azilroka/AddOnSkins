@@ -10,7 +10,7 @@ function AS:DejaClassicStats()
 		DCS_StatScrollFrame:SetPoint(point, relativeFrame, relativePoint, xOfs+1, yOfs+14)
 		DCS_StatScrollFrame:SetHeight(424)
 		DejaClassicStatsFrame:SetHeight(DejaClassicStatsFrame_Height+20)
-	end	
+	end
 	AS:SkinFrame(DCS_StatScrollFrame, "Transparent")
 	AS:SkinFrame(DejaClassicStatsFrame, "Transparent")
 	AS:SkinScrollBar(DCS_StatScrollFrame.ScrollBar)
