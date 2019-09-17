@@ -199,8 +199,13 @@ function AS:CallSkin(addonName, func, event, ...)
 			AddOnSkinsDS[AS.Version] = AddOnSkinsDS[AS.Version] or {}
 			AddOnSkinsDS[AS.Version][addonName] = true
 			AS:SetOption(addonName, false)
+			local Name = AS:CheckAddOn(addonName) and format('%s %s', addonName, AS:GetAddOnVersion(addonName)) or addonName
 
-			tinsert(AS.SkinErrors, AS:CheckAddOn(addonName) and format('%s %s', addonName, AS:GetAddOnVersion(addonName)) or addonName)
+			tinsert(AS.SkinErrors, Name)
+
+			if AS.RunOnce then
+				AS:Print(format('%s: There was an error in the following skin: %s', AS.Version, Name))
+			end
 		end
 	end
 end
