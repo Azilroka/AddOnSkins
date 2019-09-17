@@ -195,6 +195,7 @@ function AS:CallSkin(addonName, func, event, ...)
 	else
 		local pass, error = pcall(func, self, event, ...)
 		if not pass then
+			AS.FoundError = true
 			AddOnSkinsDS[AS.Version] = AddOnSkinsDS[AS.Version] or {}
 			AddOnSkinsDS[AS.Version][addonName] = true
 			AS:SetOption(addonName, false)
@@ -294,7 +295,7 @@ function AS:StartSkinning(event)
 		AS:AcceptFrame('AddOnSkins is not compatible with AddonLoader.\nPlease remove it if you would like all the skins to function.')
 	end
 
-	if not AS:CheckOption('SkinDebug') and AS.SkinErrors then
+	if not AS:CheckOption('SkinDebug') and AS.FoundError then
 		AS:Print(format('%s: There was an error in the following skin(s): %s', AS.Version, table.concat(AS.SkinErrors, ", ")))
 		AS:Print(format('Please report this to Azilroka immediately @ %s', AS:PrintURL(AS.TicketTracker)))
 	end
