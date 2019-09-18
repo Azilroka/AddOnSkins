@@ -79,7 +79,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 		local nameFrame = _G['TradeSkillReagent'..i..'NameFrame']
 
 		AS:SkinTexture(icon, true)
-		icon:SetDrawLayer('OVERLAY')
+		icon:SetDrawLayer('ARTWORK')
 
 		nameFrame:Kill()
 	end
