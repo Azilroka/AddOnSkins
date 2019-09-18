@@ -114,17 +114,9 @@ function AS:Blizzard_Alerts()
 		frame.heroicIcon:SetAlpha(0)
 
 		-- Icon
-		frame.dungeonTexture:SetTexCoord(unpack(AS.TexCoords))
-		frame.dungeonTexture:SetDrawLayer('OVERLAY')
+		AS:SkinTexture(frame.dungeonTexture, true)
 		frame.dungeonTexture:ClearAllPoints()
 		frame.dungeonTexture:Point("LEFT", frame, 7, 0)
-
-		if not frame.dungeonTexture.b then
-			frame.dungeonTexture.b = CreateFrame("Frame", nil, frame)
-			frame.dungeonTexture.b:SetTemplate("Default")
-			frame.dungeonTexture.b:SetOutside(frame.dungeonTexture)
-			frame.dungeonTexture:SetParent(frame.dungeonTexture.b)
-		end
 	end
 
 	local function SkinGuildChallengeAlert(frame)
@@ -208,18 +200,9 @@ function AS:Blizzard_Alerts()
 		frame.glowFrame.glow:SetAlpha(0)
 
 		-- Icon
-		frame.dungeonTexture:SetTexCoord(0.1, 0.9, 0.1, 0.9)
+		AS:SkinTexture(frame.dungeonTexture, true)
 		frame.dungeonTexture:ClearAllPoints()
 		frame.dungeonTexture:Point("LEFT", frame.Backdrop, 9, 0)
-		frame.dungeonTexture:SetDrawLayer("OVERLAY")
-
-		-- Icon border
-		if not frame.dungeonTexture.b then
-			frame.dungeonTexture.b = CreateFrame("Frame", nil, frame)
-			frame.dungeonTexture.b:SetTemplate("Default")
-			frame.dungeonTexture.b:SetOutside(frame.dungeonTexture)
-			frame.dungeonTexture:SetParent(frame.dungeonTexture.b)
-		end
 	end
 
 	local function SkinWorldQuestCompleteAlert(frame)
@@ -238,12 +221,8 @@ function AS:Blizzard_Alerts()
 				end
 			end
 			--Icon
-			frame.QuestTexture:SetTexCoord(unpack(AS.TexCoords))
-			frame.QuestTexture:SetDrawLayer("ARTWORK")
-			frame.QuestTexture.b = CreateFrame("Frame", nil, frame)
-			frame.QuestTexture.b:SetTemplate("Default")
-			frame.QuestTexture.b:SetOutside(frame.QuestTexture)
-			frame.QuestTexture:SetParent(frame.QuestTexture.b)
+
+			AS:SkinTexture(frame.QuestTexture, true)
 
 			frame.isSkinned = true
 		end

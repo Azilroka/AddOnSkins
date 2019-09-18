@@ -58,7 +58,6 @@ function AS:Blizzard_Communities(event, addon)
 				Button.Backdrop:SetPoint('BOTTOMRIGHT', -8, 4)
 
 				Button.Icon:RemoveMaskTexture(self.CircleMask)
-				Button.Icon:SetDrawLayer("OVERLAY", 1)
 				AS:SkinTexture(Button.Icon, true)
 				Button.Icon.Backdrop:Hide()
 				Button.IconRing:SetAlpha(0)

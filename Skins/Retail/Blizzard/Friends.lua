@@ -73,7 +73,6 @@ function AS:Blizzard_Friends()
 	AS:SkinButton(FriendsTabHeader.RaFButton)
 	AS:StyleButton(FriendsTabHeader.RaFButton)
 	AS:SkinTexture(FriendsTabHeader.RaFButton.Icon)
-	FriendsTabHeader.RaFButton.Icon:SetDrawLayer("ARTWORK")
 	FriendsTabHeader.RaFButton.Icon:SetInside()
 
 	AS:SkinFrame(RecruitAFriendFrame)

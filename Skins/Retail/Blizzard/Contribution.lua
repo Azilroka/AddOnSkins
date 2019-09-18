@@ -28,7 +28,6 @@ function AS:Blizzard_Contribution(event, addon)
 		if (reward and not reward.isSkinned) then
 			reward:SetFrameLevel(5)
 			reward.Border:SetAlpha(0)
-			reward.Icon:SetDrawLayer("OVERLAY")
 			AS:SkinTexture(reward.Icon)
 			reward.isSkinned = true
 		end

@@ -134,7 +134,6 @@ function AS:PetTracker(event, addon)
 				Button.iconbg:SetOutside(Button.icon)
 
 				Button.icon:SetPoint("LEFT", -41, 0)
-				Button.icon:SetDrawLayer('ARTWORK')
 
 				Button.model.quality:SetAlpha(0)
 				Button.model.levelRing:SetAlpha(0)

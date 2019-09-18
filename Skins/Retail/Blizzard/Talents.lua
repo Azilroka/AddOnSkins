@@ -106,7 +106,6 @@ function AS:Blizzard_TalentUI(event, addon)
 			AS:SkinTexture(Button.icon)
 
 			Button.icon:SetSize(32, 32)
-			Button.icon:SetDrawLayer("ARTWORK")
 
 			Button:HookScript('OnEnter', function(self)
 				self.Backdrop:SetBackdropBorderColor(1, .82, 0)

@@ -22,7 +22,6 @@ function AS:Skillet()
 		end
 
 		if texture then
-			texture:SetDrawLayer('OVERLAY')
 			texture:ClearAllPoints()
 			texture:SetInside()
 			AS:SkinTexture(texture)

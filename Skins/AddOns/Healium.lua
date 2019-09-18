@@ -72,7 +72,6 @@ function AS:Healium()
 		local texture = icon:GetTexture()
 		AS:SkinIconButton(self, true)
 		icon:SetTexture(texture)
-		icon:SetDrawLayer('OVERLAY')
 		icon:ClearAllPoints()
 		icon:SetInside()
 		skinnedFrames[self:GetName()] = true
@@ -87,8 +86,7 @@ function AS:Healium()
 		local count = self.count
 		local border = self.border
 		AS:SkinIconButton(self, true)
-		self:SetSize(28,28)			
-		icon:SetDrawLayer('OVERLAY')
+		self:SetSize(28,28)
 		icon:ClearAllPoints()
 		icon:SetInside()
 		count:ClearAllPoints()

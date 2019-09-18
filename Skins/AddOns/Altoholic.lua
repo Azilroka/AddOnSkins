@@ -157,7 +157,6 @@ function AS:Altoholic(event, addon)
 				AS:SetTemplate(obj)
 				obj.IconBorder:SetTexture('')
 				AS:SkinTexture(obj.Background)
-				obj.Background:SetDrawLayer('ARTWORK')
 				obj.Background:SetInside()
 			end
 		)
@@ -189,7 +188,6 @@ function AS:Altoholic(event, addon)
 				obj.IconBorder:SetTexture('')
 				AS:SkinTexture(obj.Background)
 				obj.Background.SetTexCoord = AS.Noop
-				obj.Background:SetDrawLayer('ARTWORK')
 				obj.Background:SetInside()
 			end
 		)

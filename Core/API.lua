@@ -1085,6 +1085,11 @@ function AS:SkinTexture(icon, backdrop)
 	if AS:CheckOption('CropIcons') then
 		icon:SetTexCoord(unpack(AS.TexCoords))
 	end
+
+	if icon:GetDrawLayer() ~= 'ARTWORK' then
+		icon:SetDrawLayer("ARTWORK")
+	end
+
 	icon:SetSnapToPixelGrid(false)
 	icon:SetTexelSnappingBias(0)
 	if backdrop then

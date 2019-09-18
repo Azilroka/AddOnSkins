@@ -6,9 +6,7 @@
 	<Script file="Channels.lua"/>
 	<Script file="Character.lua"/>
 	<Script file="ChatBubbles.lua"/>
-	<Script file="Collections.lua"/>
 	<Script file="Communities.lua"/>
-	<Script file="Contribution.lua"/>
 	<Script file="DebugTools.lua"/>
 	<Script file="EncounterJournal.lua"/>
 	<Script file="Friends.lua"/>
