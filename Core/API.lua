@@ -1075,7 +1075,7 @@ function AS:SkinTooltip(tooltip, scale)
 	end
 
 	AS:SkinFrame(tooltip)
-	tooltip.SetBackdrop = AS.Noop
+
 	if scale then
 		tooltip:SetScale(AS.UIScale)
 	end
