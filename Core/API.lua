@@ -1074,7 +1074,7 @@ function AS:SkinTooltip(tooltip, scale)
 		end
 	end
 
-	tooltip:SetTemplate(AS:CheckOption('SkinTemplate'))
+	AS:SkinFrame(tooltip)
 	tooltip.SetBackdrop = AS.Noop
 	if scale then
 		tooltip:SetScale(AS.UIScale)
