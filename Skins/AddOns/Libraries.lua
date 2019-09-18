@@ -228,7 +228,10 @@ function AS:SkinLibraries()
 	if LQT then
 		hooksecurefunc(LQT, 'Acquire', function()
 			for _, Tooltip in LQT:IterateTooltips() do
-				AS:SkinFrame(Tooltip)
+				if not Tooltip.isSkinned then
+					AS:SkinFrame(Tooltip)
+					Tooltip.isSkinned = true
+				end
 			end
 		end)
 	end
@@ -237,7 +240,10 @@ function AS:SkinLibraries()
 	if LQTRS then
 		hooksecurefunc(LQTRS, 'Acquire', function()
 			for _, Tooltip in LQTRS:IterateTooltips() do
-				AS:SkinFrame(Tooltip)
+				if not Tooltip.isSkinned then
+					AS:SkinFrame(Tooltip)
+					Tooltip.isSkinned = true
+				end
 			end
 		end)
 	end

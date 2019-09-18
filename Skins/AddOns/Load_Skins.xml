@@ -76,7 +76,6 @@
 	<Script file="Ludwig.lua"/>
 	<Script file="MageNuggets.lua"/>
 	<Script file="MailCommander.lua"/>
-	<Script file="MasterPlan.lua"/>
 	<Script file="MinimalArchaeology.lua"/>
 	<Script file="ModelPique.lua"/>
 	<Script file="MogIt.lua"/>

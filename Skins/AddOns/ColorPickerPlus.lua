@@ -14,9 +14,16 @@ function AS:ColorPickerPlus()
 			hooksecurefunc(Region, "Show", Region.Hide) --This is just a precaution, in case something tries to call :Show on them
 		end
 	end
+
 	AS:SetTemplate(ColorPickerFrame)
 
+	if ColorPickerFrame.Border then
+		AS:StripTextures(ColorPickerFrame.Border)
+	end
+
 	AS:SkinButton(ColorPPSwitcher)
+	AS:SkinButton(ColorPPCopy)
+	AS:SkinButton(ColorPPPaste)
 	AS:SkinButton(ColorPickerOkayButton)
 	AS:SkinButton(ColorPickerCancelButton)
 	ColorPickerOkayButton:ClearAllPoints()

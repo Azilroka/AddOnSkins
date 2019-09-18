@@ -3,15 +3,16 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Outfitter') then return end
 
 function AS:Outfitter()
+	local LDD = LibStub("LibDropdownMC-1.0")
 	CharacterFrame:HookScript('OnShow', function(self) PaperDollSidebarTabs:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -14, 0) end)
-	OutfitterFrame:HookScript('OnShow', function(self) 
+	OutfitterFrame:HookScript('OnShow', function(self)
 		AS:SkinFrame(OutfitterFrame)
 		OutfitterFrameTab1:SetSize(60, 25)
 		OutfitterFrameTab2:SetSize(60, 25)
 		OutfitterFrameTab3:SetSize(60, 25)
 		AS:StripTextures(OutfitterMainFrame, true)
 		for i = 0, 13 do
-			if _G['OutfitterItem'..i..'OutfitSelected'] then 
+			if _G['OutfitterItem'..i..'OutfitSelected'] then
 				AS:SkinButton(_G['OutfitterItem'..i..'OutfitSelected'])
 				_G['OutfitterItem'..i..'OutfitSelected']:ClearAllPoints()
 				_G['OutfitterItem'..i..'OutfitSelected']:Size(16)
@@ -19,6 +20,17 @@ function AS:Outfitter()
 			end
 		end
 	end)
+
+	local index = 0
+	local function SkinDropdownList()
+		if _G['LibDropdownFrame'..index] then
+			AS:SetTemplate(_G['LibDropdownFrame'..index])
+			index = index + 1
+		end
+	end
+
+	OutfitterFrame:HookScript("OnUpdate", SkinDropdownList)
+	OutfitterMinimapButton:HookScript("OnUpdate", SkinDropdownList)
 
 	AS:StripTextures(OutfitterMainFrameScrollbarTrench, true)
 	OutfitterFrameTab1:ClearAllPoints()
