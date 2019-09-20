@@ -11,8 +11,12 @@ function AS:DejaClassicStats()
 		DCS_StatScrollFrame:SetHeight(424)
 		DejaClassicStatsFrame:SetHeight(DejaClassicStatsFrame_Height+20)
 	end
-	AS:SkinFrame(DCS_StatScrollFrame, "Transparent")
-	AS:SkinFrame(DejaClassicStatsFrame, "Transparent")
+	AS:SkinFrame(DCSPrimaryStatsHeader)
+	AS:SkinFrame(DCSDefenseStatsHeader)
+	AS:SkinFrame(DCSMeleeEnhancementsStatsHeader)
+	AS:SkinFrame(DCSSpellEnhancementsStatsHeader)
+	AS:SkinFrame(DCS_StatScrollFrame)
+	AS:SkinFrame(DejaClassicStatsFrame)
 	AS:SkinScrollBar(DCS_StatScrollFrame.ScrollBar)
 end
 

@@ -219,6 +219,7 @@ function AS:Blizzard_AuctionUI(event, addon)
 		for i = 1, NumButtons do
 			local Button = _G[Frame..'Button'..i]
 			local ItemButton = _G[Frame..'Button'..i..'Item']
+			local ItemCount = _G[Frame..'Button'..i..'ItemCount']
 			local Texture = _G[Frame..'Button'..i..'ItemIconTexture']
 			local Name = _G[Frame..'Button'..i..'Name']
 
@@ -238,6 +239,7 @@ function AS:Blizzard_AuctionUI(event, addon)
 			AS:SkinTexture(Texture)
 			Texture:SetInside()
 
+			ItemCount:SetDrawLayer("OVERLAY")
 			hooksecurefunc(Name, 'SetVertexColor', function(self, r, g, b)
 				if not (r == g) then
 					ItemButton:SetBackdropBorderColor(r, g, b)
