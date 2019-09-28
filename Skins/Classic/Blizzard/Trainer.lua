@@ -294,7 +294,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 			if reagentLink then
 				local quality = select(3, GetItemInfo(reagentLink))
 				if quality and quality > 1 then
-					icon.backdrop:SetBackdropBorderColor(GetItemQualityColor(quality))
+					icon.Backdrop:SetBackdropBorderColor(GetItemQualityColor(quality))
 					if playerReagentCount < reagentCount then
 						name:SetTextColor(0.5, 0.5, 0.5)
 					else
