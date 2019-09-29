@@ -43,7 +43,7 @@ function AS:Blizzard_Character()
 	_G.PetAttributesFrame.Backdrop:Point('BOTTOMRIGHT', 2, -2)
 
 	AS:StripTextures(_G.PetPaperDollFrameExpBar)
-	AS:SkinBackdropFrame(_G.PetPaperDollFrameExpBar)
+	AS:SkinStatusBar(_G.PetPaperDollFrameExpBar)
 	
 	AS:SkinButton(_G.PetPaperDollCloseButton)
 
