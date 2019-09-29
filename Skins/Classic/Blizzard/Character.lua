@@ -10,6 +10,8 @@ local ipairs, pairs, select, type, unpack = ipairs, pairs, select, type, unpack
 local hooksecurefunc = hooksecurefunc
 local PaperDollBgDesaturate = PaperDollBgDesaturate
 local UnitSex = UnitSex
+local HasPetUI = HasPetUI
+local GetPetHappiness = GetPetHappiness
 -- GLOBALS:
 
 function AS:Blizzard_Character()
@@ -33,6 +35,22 @@ function AS:Blizzard_Character()
 
 	AS:Kill(_G.CharacterFramePortrait)
 	AS:StripTextures(_G.CharacterAttributesFrame)
+
+	AS:StripTextures(_G.PetPaperDollFrame)
+	AS:StripTextures(_G.PetAttributesFrame)
+	AS:SkinBackdropFrame(_G.PetAttributesFrame)
+	_G.PetAttributesFrame.Backdrop:Point('TOPLEFT', -2, 2)
+	_G.PetAttributesFrame.Backdrop:Point('BOTTOMRIGHT', 2, -2)
+
+	AS:StripTextures(_G.PetPaperDollFrameExpBar)
+	AS:SkinBackdropFrame(_G.PetPaperDollFrameExpBar)
+	
+	AS:SkinButton(_G.PetPaperDollCloseButton)
+
+	PetModelFrameRotateRightButton:SetSize(20, 20)
+	PetModelFrameRotateLeftButton:SetSize(20, 20)
+	AS:SkinArrowButton(_G.PetModelFrameRotateRightButton)
+	AS:SkinArrowButton(_G.PetModelFrameRotateLeftButton)
 
 	for _, frame in pairs({_G.CharacterAttributesFrame:GetChildren()}) do
 		AS:GradientHighlight(frame, nil, AS:CheckOption('HighlightColor'))
@@ -91,6 +109,26 @@ function AS:Blizzard_Character()
 	end
 
 	HandleResistanceFrame('MagicResFrame')
+	HandleResistanceFrame('PetMagicResFrame')
+
+	local function updHappiness(self)
+		local happiness = GetPetHappiness()
+		local _, isHunterPet = HasPetUI()
+		if not happiness or not isHunterPet then return end
+
+		local texture = self:GetRegions()
+		if happiness == 1 then
+			texture:SetTexCoord(0.41, 0.53, 0.06, 0.30)
+		elseif happiness == 2 then
+			texture:SetTexCoord(0.22, 0.345, 0.06, 0.30)
+		elseif happiness == 3 then
+			texture:SetTexCoord(0.04, 0.15, 0.06, 0.30)
+		end
+	end
+
+	PetPaperDollPetInfo:RegisterEvent('UNIT_HAPPINESS')
+	PetPaperDollPetInfo:SetScript('OnEvent', updHappiness)
+	PetPaperDollPetInfo:SetScript('OnShow', updHappiness)
 
 	for i = 1, 4 do
 		AS:SkinTab(_G["CharacterFrameTab"..i])
