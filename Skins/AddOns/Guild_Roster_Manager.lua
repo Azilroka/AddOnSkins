@@ -1,4 +1,4 @@
--- Updated for 8.2 24/7/19 GRM ver 1.66
+-- Updated for 8.2 09/09/19 GRM ver 1.71 (Classic Compatible)
 
 local AS = unpack(AddOnSkins)
 local GRM = {};
@@ -6,6 +6,9 @@ local GRM = {};
 if not AS:CheckAddOn('Guild_Roster_Manager') then return end
 
 function AS:GuildRosterManager()
+
+	-- For Classic Compatibility and one code-base
+	local buildVersion = select ( 4 , GetBuildInfo() );
 
 	-- Tabs
 	AS:SkinButton(GRM_LogTab)
@@ -104,8 +107,31 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_AddBanConfirmButton)
 	AS:SkinEditBox(GRM_AddBanNameSelectionEditBox)
 	AS:SkinEditBox(GRM_AddBanReasonEditBox)
-	GRM_BanServerDropDownMenu.NineSlice:Hide()
-	GRM_AddBanDropDownMenu.NineSlice:Hide()
+
+	-- Classic compatibility, one code-base
+	if buildVersion < 80000 then
+		GRM_BanServerDropDownMenuInsetBottomBorder:Hide()
+		GRM_BanServerDropDownMenuInsetTopBorder:Hide()
+		GRM_BanServerDropDownMenuInsetLeftBorder:Hide()
+		GRM_BanServerDropDownMenuInsetRightBorder:Hide()
+		GRM_BanServerDropDownMenuInsetTopLeftCorner:Hide()
+		GRM_BanServerDropDownMenuInsetTopRightCorner:Hide()
+		GRM_BanServerDropDownMenuInsetBotRightCorner:Hide()
+		GRM_BanServerDropDownMenuInsetBotLeftCorner:Hide()
+
+		GRM_AddBanDropDownMenuInsetBottomBorder:Hide()
+		GRM_AddBanDropDownMenuInsetTopBorder:Hide()
+		GRM_AddBanDropDownMenuInsetLeftBorder:Hide()
+		GRM_AddBanDropDownMenuInsetRightBorder:Hide()
+		GRM_AddBanDropDownMenuInsetTopLeftCorner:Hide()
+		GRM_AddBanDropDownMenuInsetTopRightCorner:Hide()
+		GRM_AddBanDropDownMenuInsetBotRightCorner:Hide()
+		GRM_AddBanDropDownMenuInsetBotLeftCorner:Hide()
+	else
+		GRM_BanServerDropDownMenu.NineSlice:Hide()
+		GRM_AddBanDropDownMenu.NineSlice:Hide()
+	end
+
 	AS:SkinScrollBar(GRM_AddBanScrollFrameSlider)
 
 	-- Ban Frame Confirm Window
@@ -183,6 +209,8 @@ function AS:GuildRosterManager()
 	-- --Guild Frame
 	AS:SkinButton(GRM_LoadLogButton)
 	AS:SkinButton(GRM_LoadLogOldRosterButton)
+	AS:SkinButton(GRM_LoadToolButton)
+	AS:SkinButton(GRM_LoadToolOldRosterButton)
 	--Guild Detail Frame
 	AS:SkinFrame(GRM_MemberDetailMetaData)	
 	AS:SkinCloseButton(GRM_MemberDetailMetaDataCloseButton)
@@ -217,8 +245,27 @@ function AS:GuildRosterManager()
 
 	-- Generic custom popup window
 	AS:SkinFrame(GRM_GeneralPopupWindow)
+	AS:SkinFrame(GRM_ToolIgnoreListFrame)
 	AS:SkinButton(GRM_GeneralPopupWindowYesButton)
 	AS:SkinButton(GRM_GeneralPopupWindowNoButton)
+
+	-- Macro Tool
+	AS:SkinFrame(GRM_ToolCoreFrame)
+	AS:SkinCloseButton(GRM_ToolCoreFrameCloseButton)
+	AS:SkinCloseButton(GRM_ToolIgnoreListFrameCloseButton)
+	AS:SkinButton(GRM_ToolBuildMacroButton)
+	AS:SkinButton(GRM_ToolViewSafeListButton)
+	AS:SkinButton(GRM_ToolClearSelectedMacrodNamesButton)
+	AS:SkinButton(GRM_ToolResetSelectedMacroNamesButton)
+	AS:SkinButton(GRM_ToolIgnoreClearSelectionButton)
+	AS:SkinButton(GRM_ToolIgnoreResetSelectedNamesButton)
+	AS:SkinButton(GRM_ToiolIgnoreRemoveAllButton)
+	AS:SkinEditBox(GRM_RosterKickRecommendEditBox)
+	AS:SkinFrame(GRM_TimeScaleDropDownMenu)
+	AS:SkinFrame(GRM_ToolMacrodScrollBorderFrame)
+	AS:SkinFrame(GRM_ToolQueuedScrollBorderFrame)
+	AS:SkinFrame(GRM_ToolIgnoredScrollBorderFrame)
+
 	local sideGroupingLogic = function()
 		GRM_AltGroupingScrollBorderFrame:HookScript ( "OnShow" , function()
 			if GRM_MemberDetailMetaData:IsMouseOver() then
@@ -232,13 +279,14 @@ function AS:GuildRosterManager()
 			end
 		end)
 	end
+	
 	local isLoaded = false
 	local isLoaded2 = false
 	local isLoaded3 = false
 
 	GRM_MemberDetailMetaData:HookScript("OnShow" , function( self )
 		if not isLoaded then
-			self:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 25 , 5 )
+			
 			GRM_AddAltEditFrame:SetPoint ( "BOTTOMLEFT" , self , "BOTTOMRIGHT" ,  2 , 0 )
 			AS:SkinEditBox(GRM_AddAltEditBox, 120, 15)
 			AS:SkinEditBox(GRM_PlayerNoteEditBox)
@@ -246,9 +294,43 @@ function AS:GuildRosterManager()
 			-- AS:SkinEditBox(GRM_CustomNoteEditBox)
 
 			AS:SkinFrame(GRM_CustomNoteRankDropDownSelected)
-			GRM_CustomNoteRankDropDownSelected.NineSlice:Hide();
+			if buildVersion < 80000 then
+				self:SetPoint ( "TOPLEFT" , GuildFrame , "TOPRIGHT" , -2 , 5 )
+				GRM_CustomNoteRankDropDownSelectedInsetBottomBorder:Hide()
+				GRM_CustomNoteRankDropDownSelectedInsetTopBorder:Hide()
+				GRM_CustomNoteRankDropDownSelectedInsetLeftBorder:Hide()
+				GRM_CustomNoteRankDropDownSelectedInsetRightBorder:Hide()
+				GRM_CustomNoteRankDropDownSelectedInsetTopLeftCorner:Hide()
+				GRM_CustomNoteRankDropDownSelectedInsetTopRightCorner:Hide()
+				GRM_CustomNoteRankDropDownSelectedInsetBotRightCorner:Hide()
+				GRM_CustomNoteRankDropDownSelectedInsetBotLeftCorner:Hide()
+
+				GRM_CustomNoteRankDropDownMenuInsetBottomBorder:Hide()
+				GRM_CustomNoteRankDropDownMenuInsetTopBorder:Hide()
+				GRM_CustomNoteRankDropDownMenuInsetLeftBorder:Hide()
+				GRM_CustomNoteRankDropDownMenuInsetRightBorder:Hide()
+				GRM_CustomNoteRankDropDownMenuInsetTopLeftCorner:Hide()
+				GRM_CustomNoteRankDropDownMenuInsetTopRightCorner:Hide()
+				GRM_CustomNoteRankDropDownMenuInsetBotRightCorner:Hide()
+				GRM_CustomNoteRankDropDownMenuInsetBotLeftCorner:Hide()
+				
+			else
+				self:SetPoint ( "TOPLEFT" , GRM_UI.GuildRosterFrame , "TOPRIGHT" , 25 , 5 )
+				GRM_CustomNoteRankDropDownSelected.NineSlice:Hide();
+				GRM_CustomNoteRankDropDownMenu.NineSlice:Hide();
+
+				CommunitiesFrame.GuildMemberDetailFrame:HookScript ( "OnShow" , function( self )
+					self:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 34 , 0 )
+					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , self , "TOPRIGHT" , 2 , 0.5 )
+				end)
+				
+				CommunitiesFrame.GuildMemberDetailFrame:HookScript ( "OnHide" , function( self )
+					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 25 , 5 )
+				end)
+
+			end
+			
 			AS:SkinFrame(GRM_CustomNoteRankDropDownMenu)
-			GRM_CustomNoteRankDropDownMenu.NineSlice:Hide();
 			AS:SkinFrame(GRM_PlayerNoteWindow)
 			AS:SkinFrame(GRM_PlayerOfficerNoteWindow)
 			AS:SkinFrame(GRM_SyncJoinDateSideFrame)
@@ -279,15 +361,6 @@ function AS:GuildRosterManager()
 
 			GRM_AltGroupingScrollFrameSlider:SetPoint ( "TOPLEFT" , GRM_AltGroupingScrollFrame , "TOPRIGHT" , -19 , -14.5 )
 			GRM_AltGroupingScrollBorderFrameCloseButton:SetPoint ( "TOPRIGHT" , GRM_AltGroupingScrollBorderFrame , "TOPRIGHT" , 8 , 7 )
-						
-			CommunitiesFrame.GuildMemberDetailFrame:HookScript ( "OnShow" , function( self )
-				self:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 34 , 0 )
-				GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , self , "TOPRIGHT" , 2 , 0.5 )
-			end)
-			
-			CommunitiesFrame.GuildMemberDetailFrame:HookScript ( "OnHide" , function( self )
-				GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 25 , 5 )
-			end)
 
 			if not isLoaded2 then
 				sideGroupingLogic()
@@ -356,35 +429,38 @@ function AS:GuildRosterManager()
 	end)
 
 	-- Guild Recruitment Frames
-	GRM.WaitForLoad = function()
-		if not CommunitiesGuildRecruitmentFrame then
-			C_Timer.After ( 3 , function()
-				GRM.WaitForLoad()
-			end);
-		else
-			CommunitiesGuildRecruitmentFrame:HookScript ( "OnShow" , function()
-				if not isLoaded3 then
-					C_Timer.After( 0.25 , function()
-						AS:SkinButton(CommunitiesGuildRecruitmentFrame.GRM_MoveBackwardButton)
-						AS:SkinButton(CommunitiesGuildRecruitmentFrame.GRM_MoveForwardButton)
-						AS:SkinButton(GRM_ClearAllRecruitsButton)
-						AS:SkinButton(GRM_InviteAllRecruitsButton)
-						GRM_InviteMessageFrameBottomBorder:Hide()
-						GRM_InviteMessageFrameTopBorder:Hide()
-						GRM_InviteMessageFrameLeftBorder:Hide()
-						GRM_InviteMessageFrameRightBorder:Hide()
-						GRM_InviteMessageFrameTopLeftCorner:Hide()
-						GRM_InviteMessageFrameTopRightCorner:Hide()
-						GRM_InviteMessageFrameBottomRightCorner:Hide()
-						GRM_InviteMessageFrameBottomLeftCorner:Hide()
-						isLoaded3 = true;
-					end);
-				end
-			end);
-		end
-	end
 
-	GRM.WaitForLoad();
+	if buildVersion >= 80000 then
+		GRM.WaitForLoad = function()
+			if not CommunitiesGuildRecruitmentFrame then
+				C_Timer.After ( 3 , function()
+					GRM.WaitForLoad()
+				end);
+			else
+				CommunitiesGuildRecruitmentFrame:HookScript ( "OnShow" , function()
+					if not isLoaded3 then
+						C_Timer.After( 0.25 , function()
+							AS:SkinButton(CommunitiesGuildRecruitmentFrame.GRM_MoveBackwardButton)
+							AS:SkinButton(CommunitiesGuildRecruitmentFrame.GRM_MoveForwardButton)
+							AS:SkinButton(GRM_ClearAllRecruitsButton)
+							AS:SkinButton(GRM_InviteAllRecruitsButton)
+							GRM_InviteMessageFrameBottomBorder:Hide()
+							GRM_InviteMessageFrameTopBorder:Hide()
+							GRM_InviteMessageFrameLeftBorder:Hide()
+							GRM_InviteMessageFrameRightBorder:Hide()
+							GRM_InviteMessageFrameTopLeftCorner:Hide()
+							GRM_InviteMessageFrameTopRightCorner:Hide()
+							GRM_InviteMessageFrameBottomRightCorner:Hide()
+							GRM_InviteMessageFrameBottomLeftCorner:Hide()
+							isLoaded3 = true;
+						end);
+					end
+				end);
+			end
+		end
+
+		GRM.WaitForLoad();
+	end
 	
 end
 
