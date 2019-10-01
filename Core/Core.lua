@@ -199,7 +199,7 @@ function AS:CallSkin(addonName, func, event, ...)
 			AddOnSkinsDS[AS.Version] = AddOnSkinsDS[AS.Version] or {}
 			AddOnSkinsDS[AS.Version][addonName] = true
 			AS:SetOption(addonName, false)
-			local Name = AS:CheckAddOn(addonName) and format('%s %s', addonName, AS:GetAddOnVersion(addonName)) or addonName
+			local Name = AS:CheckAddOn(addonName) and format('%s %s', addonName, AS:GetAddOnVersion(addonName) or 'UNKNOWN') or addonName
 
 			tinsert(AS.SkinErrors, Name)
 
@@ -237,10 +237,7 @@ function AS:UpdateMedia()
 end
 
 function AS:GetPixelScale()
-	local scale = UIParent:GetScale()
-	local pixel, ratio = 1, 768 / AS.ScreenHeight
-
-	AS.mult = (pixel / scale) - ((pixel - ratio) / scale)
+	AS.mult = max(0.4, min(1.15, 768 / AS.ScreenHeight))
 end
 
 function AS:StartSkinning(event)
