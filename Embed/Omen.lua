@@ -4,20 +4,19 @@ if not AS:CheckAddOn('Omen') then return end
 -- Cache global variables
 --Lua functions
 local _G = _G
-local strlower = strlower
 --WoW API / Variables
 -- GLOBALS:
 
 function AS:Embed_Omen()
 	local EmbedParent = _G.EmbedSystem_MainWindow
-	if AS:CheckOption('EmbedSystemDual') then EmbedParent = strlower(AS:CheckOption('EmbedRight')) == 'omen' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
+	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Omen' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
 
 	_G.Omen.BarList.SetBackdrop = nil
 	_G.Omen.BarList.SetBackdropColor = nil
 	_G.Omen.BarList.SetBackdropBorderColor = nil
 
-	if AS:CheckOption('OmenBackdrop') then
-		AS:SkinFrame(_G.Omen.BarList, AS:CheckOption('TransparentEmbed') and 'Transparent')
+	if AS:CheckOption('EmbedBackdrop') then
+		AS:SkinFrame(_G.Omen.BarList, AS:CheckOption('EmbedBackdropTransparent') and 'Transparent')
 	else
 		AS:StripTextures(_G.Omen.BarList)
 	end
