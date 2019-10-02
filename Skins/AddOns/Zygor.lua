@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('ZygorGuidesViewer') then return end
+if not (AS:CheckAddOn('ZygorGuidesViewer') or AS:CheckAddOn('ZygorGuidesViewerClassic')) then return end
 
 function AS:Zygor()
 	AS:StripTextures(ZygorGuidesViewerFrame_Border, true)
