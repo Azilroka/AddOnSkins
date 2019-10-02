@@ -31,7 +31,9 @@ function AS:Blizzard_Character()
 	CharacterModelFrameRotateLeftButton:SetSize(16, 16)
 	CharacterModelFrameRotateRightButton:SetSize(16, 16)
 	AS:SkinArrowButton(_G.CharacterModelFrameRotateLeftButton)
+	_G.CharacterModelFrameRotateLeftButton:Point('TOPLEFT', 2, 1)
 	AS:SkinArrowButton(_G.CharacterModelFrameRotateRightButton)
+	_G.CharacterModelFrameRotateRightButton:Point('TOPLEFT', _G.CharacterModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
 
 	AS:Kill(_G.CharacterFramePortrait)
 	AS:StripTextures(_G.CharacterAttributesFrame)
@@ -47,10 +49,12 @@ function AS:Blizzard_Character()
 	
 	AS:SkinButton(_G.PetPaperDollCloseButton)
 
-	PetModelFrameRotateRightButton:SetSize(20, 20)
-	PetModelFrameRotateLeftButton:SetSize(20, 20)
+	PetModelFrameRotateLeftButton:SetSize(16, 16)
+	PetModelFrameRotateRightButton:SetSize(16, 16)
 	AS:SkinArrowButton(_G.PetModelFrameRotateRightButton)
+	_G.PetModelFrameRotateLeftButton:Point('TOPLEFT', 2, 1)
 	AS:SkinArrowButton(_G.PetModelFrameRotateLeftButton)
+	_G.PetModelFrameRotateRightButton:Point('TOPLEFT', _G.PetModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
 
 	for _, frame in pairs({_G.CharacterAttributesFrame:GetChildren()}) do
 		AS:GradientHighlight(frame, nil, AS:CheckOption('HighlightColor'))
@@ -255,6 +259,18 @@ function AS:Blizzard_DressUpFrame()
 	AS:SkinCloseButton(_G.DressUpFrameCloseButton)
 	AS:SkinButton(_G.DressUpFrameResetButton)
 
+	_G.DressUpFrame.Backdrop:SetPoint("TOPLEFT", 11, -12)
+	_G.DressUpFrame.Backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
+
+	AS:SkinArrowButton(_G.DressUpModelFrameRotateLeftButton)
+	_G.DressUpModelFrameRotateLeftButton:Point('TOPLEFT', DressUpFrame, 25, -79)
+
+	AS:SkinArrowButton(_G.DressUpModelFrameRotateRightButton)
+	_G.DressUpModelFrameRotateRightButton:Point('TOPLEFT', _G.DressUpModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
+
+	DressUpModelFrameRotateLeftButton:SetSize(16, 16)
+	DressUpModelFrameRotateRightButton:SetSize(16, 16)
+
 	_G.DressUpFramePortrait:SetAlpha(0)
 
 	AS:SkinButton(_G.DressUpFrameCancelButton)
@@ -264,16 +280,27 @@ end
 function AS:Blizzard_Inspect(event, addon)
 	if addon ~= "Blizzard_InspectUI" then return end
 
-	AS:SkinFrame(_G.InspectFrame)
-	AS:SkinCloseButton(_G.InspectFrame.CloseButton)
-	_G.InspectFrame.portrait:SetAlpha(0)
+	AS:SkinBackdropFrame(_G.InspectPaperDollFrame)
+	AS:SkinCloseButton(_G.InspectFrameCloseButton)
+	_G.InspectFramePortrait:SetAlpha(0)
 
-	for i = 1, 4 do
+	_G.InspectPaperDollFrame.Backdrop:SetPoint("TOPLEFT", 11, -12)
+	_G.InspectPaperDollFrame.Backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
+
+	AS:SkinBackdropFrame(_G.InspectModelFrame)
+
+	AS:SkinArrowButton(_G.InspectModelFrameRotateLeftButton)
+	_G.InspectModelFrameRotateLeftButton:Point('TOPLEFT', 3, -3)
+
+	AS:SkinArrowButton(_G.InspectModelFrameRotateRightButton)
+	_G.InspectModelFrameRotateRightButton:Point('TOPLEFT', _G.InspectModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
+
+	InspectModelFrameRotateLeftButton:SetSize(16, 16)
+	InspectModelFrameRotateRightButton:SetSize(16, 16)
+
+	for i = 1, 2 do
 		AS:SkinTab(_G["InspectFrameTab"..i])
 	end
-
-	AS:SkinButton(_G.InspectPaperDollFrame.ViewButton)
-	AS:SkinBackdropFrame(_G.InspectModelFrame)
 
 	for _, Slot in pairs({_G.InspectPaperDollItemsFrame:GetChildren()}) do
 		if Slot:IsObjectType("Button") or Slot:IsObjectType("ItemButton") then
@@ -289,69 +316,10 @@ function AS:Blizzard_Inspect(event, addon)
 		end
 	end
 
-	AS:StripTextures(_G.InspectPVPFrame)
+	AS:SkinBackdropFrame(_G.InspectHonorFrame)
 
-	for _, Button in pairs(_G.InspectPVPFrame.Slots) do
-		AS:CreateBackdrop(Button.Texture)
-
-		Button.Arrow:SetAlpha(0)
-		Button.Border:Hide()
-
-		hooksecurefunc(Button, "Update", function(self)
-			if (not self.slotIndex) or (not _G.INSPECTED_UNIT) then
-				return
-			end
-
-			local slotInfo = C_SpecializationInfo_GetInspectSelectedPvpTalent(_G.INSPECTED_UNIT, self.slotIndex)
-
-			if (slotInfo) then
-				AS:SkinTexture(self.Texture)
-				self.Texture:SetDesaturated(false)
-				self.Texture.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-			else
-				self.Texture:SetTexture([[Interface\PetBattles\PetBattle-LockIcon]])
-				self.Texture:SetTexCoord(0, 1, 0, 1)
-				self.Texture:SetDesaturated(true)
-				self.Texture:Show()
-				self.Texture.Backdrop:SetBackdropBorderColor(1, 0, 0, 1)
-			end
-		end)
-	end
-
-	AS:StripTextures(_G.InspectTalentFrame)
-	_G.InspectTalentFrame.InspectSpec.ring:SetTexture('')
-	AS:SkinTexture(_G.InspectTalentFrame.InspectSpec.specIcon, true)
-
-	_G.InspectTalentFrame.InspectSpec:HookScript('OnShow', function(self)
-		local Spec, Sex
-		if (_G.INSPECTED_UNIT ~= nil) then
-			Spec = GetInspectSpecialization(_G.INSPECTED_UNIT)
-			Sex = UnitSex(_G.INSPECTED_UNIT)
-		end
-		if(Spec ~= nil and Spec > 0 and Sex ~= nil) then
-			local Role = GetSpecializationRoleByID(Spec)
-			if (Role ~= nil) then
-				self.specIcon:SetTexture(select(4, GetSpecializationInfoByID(Spec, Sex)))
-			end
-		end
-	end)
-
-	for i = 1, _G.MAX_TALENT_TIERS do
-		for j = 1, _G.NUM_TALENT_COLUMNS do
-			local Button = _G.InspectTalentFrame.InspectTalents['tier'..i]["talent"..j]
-			AS:StripTextures(Button)
-			AS:SkinTexture(Button.icon, true)
-			hooksecurefunc(Button.border, 'SetShown', function(self, value)
-				if value == true then
-					Button.icon.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
-				else
-					Button.icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-				end
-			end)
-		end
-	end
-
-	_G.InspectGuildFrameBG:SetTexture('')
+	_G.InspectHonorFrame.Backdrop:SetPoint("TOPLEFT", 11, -12)
+	_G.InspectHonorFrame.Backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
