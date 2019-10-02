@@ -40,7 +40,7 @@ function AS:EmbedSkadaWindow(window, width, height, point, relativeFrame, relati
 	window.bargroup:SetBackdrop(nil)
 	if window.bargroup.Backdrop then
 		AS:SetTemplate(window.bargroup.Backdrop, AS:CheckOption('TransparentEmbed') and "Transparent" or 'Default')
-		if AS:CheckOption('SkadaBackdrop') then
+		if AS:CheckOption('Backdrop') then
 			window.bargroup.Backdrop:Show()
 		else
 			window.bargroup.Backdrop:Hide()
