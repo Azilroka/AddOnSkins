@@ -27,13 +27,19 @@ function AS:Blizzard_TalentUI(event, addon)
 	for i = 1, MAX_NUM_TALENTS do
 		local talent = _G['TalentFrameTalent'..i]
 		local icon = _G['TalentFrameTalent'..i..'IconTexture']
+		local rank = _G['TalentFrameTalent'..i..'Rank']
 
 		if talent then
-			AS:SkinFrame(talent)
+			AS:SkinBackdropFrame(talent)
 			talent:StyleButton()
+			talent.Backdrop:SetFrameStrata('LOW')
+			talent.Backdrop:SetFrameLevel(talent:GetFrameLevel() - 1)
 
-			icon:SetInside()
+			icon:SetInside(talent.Backdrop, 2, 2)
 			AS:SkinTexture(icon)
+			icon:SetDrawLayer('ARTWORK')
+
+			--rank:SetFont(AS.Font, 12, 'OUTLINE') -- easier to read
 		end
 	end
 

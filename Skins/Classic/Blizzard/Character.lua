@@ -46,6 +46,8 @@ function AS:Blizzard_Character()
 
 	AS:StripTextures(_G.PetPaperDollFrameExpBar)
 	AS:SkinStatusBar(_G.PetPaperDollFrameExpBar)
+	AS:SetOutside(_G.PetPaperDollFrameExpBar.Backdrop, _G.PetPaperDollFrameExpBar)
+	_G.PetPaperDollFrameExpBar.Backdrop:SetFrameLevel(_G.PetPaperDollFrameExpBar:GetFrameLevel())
 	
 	AS:SkinButton(_G.PetPaperDollCloseButton)
 
@@ -55,6 +57,10 @@ function AS:Blizzard_Character()
 	_G.PetModelFrameRotateLeftButton:Point('TOPLEFT', 2, 1)
 	AS:SkinArrowButton(_G.PetModelFrameRotateLeftButton)
 	_G.PetModelFrameRotateRightButton:Point('TOPLEFT', _G.PetModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
+
+	AS:CreateBackdrop(PetPaperDollPetInfo)
+	PetPaperDollPetInfo:Point('TOPLEFT', _G.PetModelFrameRotateLeftButton, 'BOTTOMLEFT', 1, -5)
+	PetPaperDollPetInfo:Size(24)
 
 	for _, frame in pairs({_G.CharacterAttributesFrame:GetChildren()}) do
 		AS:GradientHighlight(frame, nil, AS:CheckOption('HighlightColor'))
