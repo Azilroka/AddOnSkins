@@ -175,6 +175,8 @@ function AS:Auctionator(event)
 			end
 		end)
 
+		AS:SkinScrollBar(Atr_Hlist_ScrollFrameScrollBar)
+
 		Atr_SrchSListButton:SetWidth(196)
 		Atr_MngSListsButton:SetWidth(196)
 		Atr_NewSListButton:SetWidth(196)
