@@ -23,6 +23,7 @@ function AS:XToLevel()
 
 	for _, button in pairs(Buttons) do
 		AS:SkinButton(button)
+		AS:SetTemplate(button, "Transparent") -- Mera want transparency!
 	end
 end
 
