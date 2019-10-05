@@ -1089,13 +1089,6 @@ function AS:BuildOptions()
 
 			AS.Options.args.general.args.SkinTemplate.values = function() return (AS:CheckOption('ElvUIStyle') and AddOnTemplate or DefaultTemplates) end
 		end
-
-		if AS:CheckAddOn('ElvUI_KlixUI') then
-			local AddOnTemplate = CopyTable(DefaultTemplates)
-			AddOnTemplate['KlixUI'] = '|cfff960d9KlixUI|r'
-
-			AS.Options.args.general.args.SkinTemplate.values = function() return (AS:CheckOption('ElvUIStyle') and AddOnTemplate or DefaultTemplates) end
-		end
 	end
 end
 
