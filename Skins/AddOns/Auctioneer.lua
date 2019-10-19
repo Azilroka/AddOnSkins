@@ -13,6 +13,11 @@ function AS:Auctioneer(event)
 	if AucAdvScanButton then AS:SkinButton(AucAdvScanButton) end
 	if AucAdvSimpFrameCreate then AS:SkinButton(AucAdvSimpFrameCreate) end
 	if AucAdvSimpFrameRemember then AS:SkinButton(AucAdvSimpFrameRemember) end
+
+	for i = 1, _G.AuctionFrame.numTabs do
+		AS:SkinTab(_G["AuctionFrameTab"..i])
+	end
+
 	AS:UnregisterSkinEvent('Auctioneer', event)
 end
 
