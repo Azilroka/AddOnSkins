@@ -62,11 +62,20 @@ function AS:Blizzard_PVPUI(event, addon)
 		Button.SelectedTexture:SetTexture('')
 		Button.SelectedTexture:Hide()
 
-		AS:StripTextures(Button.Reward)
 		AS:SkinTexture(Button.Reward.Icon, true)
+		Button.Reward.Border:Hide()
+		Button.Reward.CircleMask:Hide()
 
-		AS:StripTextures(Button.Reward.EnlistmentBonus)
-		AS:SkinTexture(Button.Reward.EnlistmentBonus.Icon, true)
+		Button.Reward.EnlistmentBonus:StripTextures()
+		AS:SetTemplate(Button.Reward.EnlistmentBonus)
+		Button.Reward.EnlistmentBonus:Size(20, 20)
+		Button.Reward.EnlistmentBonus:Point("TOPRIGHT", 2, 2)
+
+		local EnlistmentBonusIcon = Button.Reward.EnlistmentBonus:CreateTexture()
+		EnlistmentBonusIcon:Point("TOPLEFT", Button.Reward.EnlistmentBonus, "TOPLEFT", 2, -2)
+		EnlistmentBonusIcon:Point("BOTTOMRIGHT", Button.Reward.EnlistmentBonus, "BOTTOMRIGHT", -2, 2)
+		EnlistmentBonusIcon:SetTexture("Interface\\Icons\\achievement_guildperk_honorablemention_rank2")
+		EnlistmentBonusIcon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 
 		Button:HookScript('OnEnter', function(self)
 			self:SetBackdropBorderColor(1, .82, 0)
