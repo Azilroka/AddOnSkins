@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Titan') then return end
+if not (AS:CheckAddOn('Titan') or AS:CheckAddOn('TitanClassic')) then return end
 
 function AS:TitanPanel()
 	AS:Delay(1, function()
