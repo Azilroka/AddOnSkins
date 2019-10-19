@@ -2,5 +2,4 @@
 	<Include file="Blizzard\Load_Skins.xml"/>
 
 	<Script file="Auctionator.lua"/>
-	<Script file="Skillet.lua"/>
 </Ui>

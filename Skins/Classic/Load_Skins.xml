@@ -5,7 +5,6 @@
 	<Script file="DejaClassicStats.lua"/>
 	<Script file="ExtendedCharacterStats.lua"/>
 	<Script file="Questie.lua"/>
-	<Script file="Skillet.lua"/>
 	<Script file="WhatsTraining.lua"/>
 	<Script file="XToLevel.lua"/>
 </Ui>
