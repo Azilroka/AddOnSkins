@@ -1,6 +1,7 @@
 local AS = unpack(AddOnSkins)
 
-if not (AS:CheckAddOn('Skillet') or AS:CheckAddOn('Skillet-Classic')) then return end
+if AddOnSkins.Retail then return end
+if not AS:CheckAddOn('Skillet-Classic') then return end
 
 function AS:Skillet()
 	local function SkinButton(ButtonOrSpellID, Guild)

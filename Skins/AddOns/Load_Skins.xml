@@ -115,7 +115,6 @@
 	<Script file="SilverDragon.lua"/>
 	<Script file="Simulationcraft.lua"/>
 	<Script file="Skada.lua"/>
-	<Script file="Skillet.lua"/>
 	<Script file="Soundtrack.lua"/>
 	<Script file="Spy.lua"/>
 	<Script file="Storyline.lua"/>
