@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('BuyEmAll') then return end
+if not (AS:CheckAddOn('BuyEmAll') or AS:CheckAddOn('BuyEmAllClassic')) then return end
 
 function AS:BuyEmAll()
 	AS:SkinFrame(BuyEmAllFrame)
