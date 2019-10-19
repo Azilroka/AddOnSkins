@@ -3,8 +3,13 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Spy') then return end
 
 function AS:Spy()
-	AS:StripTextures(Spy_MainWindow)
-	AS:CreateBackdrop(Spy_MainWindow.Background)
+	if Spy_MainWindow.Background then
+		AS:CreateBackdrop(Spy_MainWindow.Background)
+		AS:StripTextures(Spy_MainWindow)
+	else
+		AS:SkinFrame(Spy_MainWindow)
+	end
+
 	AS:SkinFrame(Spy_AlertWindow)
 	AS:SkinCloseButton(Spy_MainWindow.CloseButton)
 	AS:Desaturate(Spy_MainWindow.ClearButton)
