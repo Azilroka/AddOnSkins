@@ -7,22 +7,30 @@ function AS:WhatsTraining()
 		AS:StripTextures(WhatsTrainingFrame)
 
 		for i = 1, 22 do
-			if i == 1 then
-				WhatsTrainingFrame.rows[1]:SetPoint("TOPLEFT", WhatsTrainingFrame, 26, -48)
-			else
-				WhatsTrainingFrame.rows[i]:SetPoint("TOPLEFT", WhatsTrainingFrame.rows[i - 1], "BOTTOMLEFT", 0, -2)
+			if (WhatsTrainingFrame.rows[i]) then
+				if i == 1 then
+					WhatsTrainingFrame.rows[1]:SetPoint("TOPLEFT", WhatsTrainingFrame, 26, -48)
+				else
+					WhatsTrainingFrame.rows[i]:SetPoint("TOPLEFT", WhatsTrainingFrame.rows[i - 1], "BOTTOMLEFT", 0, -2)
+				end
+				AS:SkinTexture(WhatsTrainingFrame.rows[i].spell.icon)
 			end
-			AS:SkinTexture(WhatsTrainingFrame.rows[i].spell.icon)
 		end
 
 		WhatsTrainingFrame:HookScript("OnShow", function()
-			SpellBookSpellIconsFrame:Hide()
+			local inCombat = InCombatLockdown() or UnitAffectingCombat("player")
+			if not inCombat then
+				SpellBookSpellIconsFrame:Hide()
+			end
 			SpellBookPageText:Hide()
 			SpellBookPrevPageButton:Hide()
 			SpellBookNextPageButton:Hide()
 		end)
 		WhatsTrainingFrame:HookScript("OnHide", function()
-			SpellBookSpellIconsFrame:Show()
+			local inCombat = InCombatLockdown() or UnitAffectingCombat("player")
+			if not inCombat then
+				SpellBookSpellIconsFrame:Show()
+			end
 			SpellBookPageText:Show()
 			SpellBookPrevPageButton:Show()
 			SpellBookNextPageButton:Show()
@@ -30,7 +38,7 @@ function AS:WhatsTraining()
 
 		AS:SkinScrollBar(WhatsTrainingFrameScrollBarScrollBar)
 		WhatsTrainingFrameScrollBar:SetPoint("TOPLEFT", '$parent', 20, -45)
-		WhatsTrainingFrameScrollBar:SetPoint("BOTTOMRIGHT", '$parent', -65, 41)
+		WhatsTrainingFrameScrollBar:SetPoint("BOTTOMRIGHT", '$parent', -65, 81)
 		AS:SkinBackdropFrame(WhatsTrainingFrameScrollBar)
 
 	end)
