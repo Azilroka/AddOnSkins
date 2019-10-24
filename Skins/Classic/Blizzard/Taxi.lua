@@ -3,10 +3,14 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Taxi()
 	AS:StripTextures(TaxiFrame)
-	AS:CreateBackdrop(TaxiRouteMap)
+	AS:SkinBackdropFrame(TaxiFrame)
 	AS:SkinCloseButton(TaxiCloseButton)
 	TaxiCloseButton:SetFrameLevel(TaxiRouteMap:GetFrameLevel() + 1)
-	TaxiCloseButton:SetPoint("TOPRIGHT", 0, -18)
+	TaxiCloseButton:SetPoint("TOPRIGHT", -28, -8)
+	TaxiPortrait:Kill()
+
+	TaxiFrame.Backdrop:SetPoint("TOPLEFT", 11, -12)
+	TaxiFrame.Backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
 end
 
 function AS:Blizzard_FlightMap(event, addon)
