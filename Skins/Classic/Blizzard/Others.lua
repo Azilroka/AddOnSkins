@@ -1,10 +1,6 @@
 if AddOnSkins.Retail then return end
 local AS = unpack(AddOnSkins)
 
-if AS:CheckAddOn('Tukui') then
-	Tukui[1].Miscellaneous.DropDown.Skin = function() end
-end
-
 function AS:Blizzard_Others()
 	AS:SetTemplate(CinematicFrameCloseDialog)
 	CinematicFrameCloseDialog:SetScale(UIParent:GetScale())

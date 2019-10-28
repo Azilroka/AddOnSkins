@@ -1,9 +1,13 @@
 local AS, ASL = unpack(AddOnSkins)
 if not AS:CheckAddOn('Tukui') then return end
-
-local T, C = Tukui:unpack()
+local T, C
 
 function AS:UpdateMedia()
+	if not Tukui then return end
+	if not T then
+		T, C = Tukui:unpack()
+	end
+
 	AS.HideShadows = C['General']['HideShadows']
 
 	AS.DataTextFontSize = 12 -- T['DataTexts']['Size']

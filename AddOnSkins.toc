@@ -1,8 +1,7 @@
 ## Interface: 80205
 ## Title: |cff1784d1AddOnSkins|r
-## Version: 4.32
+## Version: 4.33
 ## Author: Azilroka, NihilisticPandemonium
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
-## OptionalDeps: ElvUI, Tukui
 
 Load_AddOnSkins.xml

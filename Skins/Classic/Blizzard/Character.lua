@@ -4,12 +4,10 @@ local AS = unpack(AddOnSkins)
 -- Cache global variables
 --Lua functions
 local _G = _G
-local ipairs, pairs, select, type, unpack = ipairs, pairs, select, type, unpack
+local pairs, select, unpack = pairs, select, unpack
 --WoW API / Variables
 
 local hooksecurefunc = hooksecurefunc
-local PaperDollBgDesaturate = PaperDollBgDesaturate
-local UnitSex = UnitSex
 local HasPetUI = HasPetUI
 local GetPetHappiness = GetPetHappiness
 -- GLOBALS:
@@ -48,7 +46,7 @@ function AS:Blizzard_Character()
 	AS:SkinStatusBar(_G.PetPaperDollFrameExpBar)
 	AS:SetOutside(_G.PetPaperDollFrameExpBar.Backdrop, _G.PetPaperDollFrameExpBar)
 	_G.PetPaperDollFrameExpBar.Backdrop:SetFrameLevel(_G.PetPaperDollFrameExpBar:GetFrameLevel())
-	
+
 	AS:SkinButton(_G.PetPaperDollCloseButton)
 
 	PetModelFrameRotateLeftButton:SetSize(16, 16)

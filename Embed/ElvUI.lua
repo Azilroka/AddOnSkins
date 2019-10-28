@@ -1,7 +1,6 @@
 local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('ElvUI') then return end
-local E, L = unpack(ElvUI)
-
+local E, L
 -- Cache global variables
 --Lua functions
 local _G = _G
@@ -16,6 +15,10 @@ local EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow
 -- GLOBALS:
 
 function AS:EmbedSystemHooks()
+	if not E then
+		E, L = unpack(ElvUI)
+	end
+
 	RightChatToggleButton, LeftChatToggleButton, RightChatPanel, LeftChatPanel, RightChatTab, LeftChatTab, RightChatDataPanel = _G.RightChatToggleButton, _G.LeftChatToggleButton, _G.RightChatPanel, _G.LeftChatPanel, _G.RightChatTab, _G.LeftChatTab, _G.RightChatDataPanel
 	EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow = _G.EmbedSystem_MainWindow, _G.EmbedSystem_LeftWindow, _G.EmbedSystem_RightWindow
 
