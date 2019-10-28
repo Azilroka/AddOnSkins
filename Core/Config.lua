@@ -1,11 +1,6 @@
 local AS = unpack(AddOnSkins)
 if AS:CheckAddOn('ProjectAzilroka') or AS:CheckAddOn('ElvUI') then return end
 
-if AS:CheckAddOn('Tukui') then
-	Tukui[1].Miscellaneous.GameMenu.EnableTukuiConfig = function() end
-	Tukui[1].Miscellaneous.GameMenu.AddHooks = function() end
-end
-
 local EC = AS:NewModule("EnhancedConfig", 'AceConsole-3.0', 'AceEvent-3.0')
 _G.Enhanced_Config = EC
 
@@ -80,6 +75,14 @@ function EC:ToggleConfig()
 	GameTooltip:Hide()
 end
 
+function EC:ADDON_LOADED(event, addon)
+	if addon == 'Tukui' then
+		Tukui[1].Miscellaneous.GameMenu.EnableTukuiConfig = function() end
+		Tukui[1].Miscellaneous.GameMenu.AddHooks = function() end
+		EC:UnregisterEvent(event)
+	end
+end
+
 function EC:Initialize()
 	local GameMenuButton = CreateFrame("Button", nil, GameMenuFrame, "GameMenuButtonTemplate")
 	GameMenuButton:SetText(AS.Title)
@@ -98,6 +101,8 @@ function EC:Initialize()
 	AS.AC:RegisterOptionsTable('Enhanced_Config', EC.Options)
 	AS.ACD:SetDefaultSize('Enhanced_Config', 1200, 800)
 	EC:RegisterChatCommand('ec', 'ToggleConfig')
+
+	EC:RegisterEvent('ADDON_LOADED')
 end
 
 EC:Initialize()
