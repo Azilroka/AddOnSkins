@@ -302,6 +302,8 @@ function AS:StartSkinning(event)
 		AS:Print(format('Please report this to Azilroka immediately @ %s', AS:PrintURL(AS.TicketTracker)))
 	end
 
+	AS:EmbedInit()
+
 	AS.RunOnce = true
 end
 
@@ -316,8 +318,6 @@ function AS:Init(event, addon)
 
 	if event == 'PLAYER_LOGIN' then
 		AS:BuildOptions()
-		AS:UpdateMedia()
-		AS:EmbedInit()
 
 		if _G.EnhancedShadows then
 			AS.ES = _G.EnhancedShadows
