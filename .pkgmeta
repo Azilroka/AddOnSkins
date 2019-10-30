@@ -11,4 +11,4 @@ ignore:
 	- AddOnSkins_Classic.toc
 
 move-folders:
-	AddOnSkins\Retail: AddOnSkins
+	AddOnSkins\Classic: AddOnSkins
