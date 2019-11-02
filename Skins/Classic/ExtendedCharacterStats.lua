@@ -1,4 +1,3 @@
-
 local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ExtendedCharacterStats') then return end
