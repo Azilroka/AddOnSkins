@@ -29,9 +29,9 @@ function AS:WorldQuestTab()
 	WQT_WorldQuestFrameFilterButton:ClearAllPoints()
 	WQT_WorldQuestFrameFilterButton:SetPoint('LEFT', WQT_WorldQuestFrameSortButton, 'RIGHT', 18, 0)
 
-	WQT_WorldQuestFrameSortButton:Size(92, 32)
-	WQT_WorldQuestFrameSortButtonButton:Size(27, 28)
-	WQT_WorldQuestFrameFilterButton:Size(92, 32)
+	WQT_WorldQuestFrameSortButton:SetSize(92, 32)
+	WQT_WorldQuestFrameSortButtonButton:SetSize(27, 28)
+	WQT_WorldQuestFrameFilterButton:SetSize(92, 32)
 
 	AS:SkinScrollBar(WQT_QuestScrollFrameScrollBar)
 

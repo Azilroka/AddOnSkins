@@ -12,7 +12,7 @@ function AS:Pawn(event, addon)
 			PawnUI_InspectPawnButton:GetNormalTexture():SetTexCoord(0, 1, 0, 1)
 			PawnUI_InspectPawnButton:ClearAllPoints()
 			PawnUI_InspectPawnButton:SetPoint('RIGHT', InspectFrameCloseButton, 'LEFT', -8, -4)
-			PawnUI_InspectPawnButton:Size(40, 20)
+			PawnUI_InspectPawnButton:SetSize(40, 20)
 		end)
 	end
 
@@ -20,7 +20,7 @@ function AS:Pawn(event, addon)
 
 		AS:Delay(0.1, function()
 			AS:SkinButton(PawnUI_SocketingPawnButton)
-			PawnUI_SocketingPawnButton:Size(40, 20)
+			PawnUI_SocketingPawnButton:SetSize(40, 20)
 			PawnUI_SocketingPawnButton:SetNormalTexture(Texture)
 			PawnUI_SocketingPawnButton:GetNormalTexture():SetTexCoord(0, 1, 0, 1)
 			hooksecurefunc(ItemSocketingDescription, "SetSocketedItem", function()
@@ -44,7 +44,7 @@ function AS:Pawn(event, addon)
 
 		AS:SkinButton(PawnUI_InventoryPawnButton)
 		PawnUI_InventoryPawnButton:SetNormalTexture(Texture)
-		PawnUI_InventoryPawnButton:Size(40, 20)
+		PawnUI_InventoryPawnButton:SetSize(40, 20)
 		PawnUI_InventoryPawnButton:GetNormalTexture():SetTexCoord(0, 1, 0, 1)
 
 		for i = 1, PawnUIFrame.numTabs do

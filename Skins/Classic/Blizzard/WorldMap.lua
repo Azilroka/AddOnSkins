@@ -206,7 +206,7 @@ function AS:Blizzard_Quest()
 		questLogTitle:SetNormalTexture(AS.Media.Textures.Plus)
 		questLogTitle.SetNormalTexture = AS.Noop
 
-		questLogTitle:GetNormalTexture():Size(16)
+		questLogTitle:GetNormalTexture():SetSize(16, 16)
 		questLogTitle:GetNormalTexture():SetPoint('LEFT', 5, 0)
 
 		questLogTitle:SetHighlightTexture('')
@@ -278,14 +278,14 @@ function AS:Blizzard_Quest()
 
 	QuestLogCollapseAllButton:SetNormalTexture(AS.Media.Textures.Plus)
 	QuestLogCollapseAllButton.SetNormalTexture = AS.Noop
-	QuestLogCollapseAllButton:GetNormalTexture():Size(16)
+	QuestLogCollapseAllButton:GetNormalTexture():SetSize(16, 16)
 
 	QuestLogCollapseAllButton:SetHighlightTexture('')
 	QuestLogCollapseAllButton.SetHighlightTexture = AS.Noop
 
 	QuestLogCollapseAllButton:SetDisabledTexture(AS.Media.Textures.Plus)
 	QuestLogCollapseAllButton.SetDisabledTexture = AS.Noop
-	QuestLogCollapseAllButton:GetDisabledTexture():Size(16)
+	QuestLogCollapseAllButton:GetDisabledTexture():SetSize(16, 16)
 	QuestLogCollapseAllButton:GetDisabledTexture():SetTexture(AS.Media.Textures.Plus)
 	QuestLogCollapseAllButton:GetDisabledTexture():SetDesaturated(true)
 

@@ -15,7 +15,7 @@ function AS:Outfitter()
 			if _G['OutfitterItem'..i..'OutfitSelected'] then
 				AS:SkinButton(_G['OutfitterItem'..i..'OutfitSelected'])
 				_G['OutfitterItem'..i..'OutfitSelected']:ClearAllPoints()
-				_G['OutfitterItem'..i..'OutfitSelected']:Size(16)
+				_G['OutfitterItem'..i..'OutfitSelected']:SetSize(16, 16)
 				_G['OutfitterItem'..i..'OutfitSelected']:SetPoint('LEFT', _G['OutfitterItem'..i..'Outfit'], 'LEFT', 8, 0)
 			end
 		end

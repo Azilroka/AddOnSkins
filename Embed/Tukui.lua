@@ -40,7 +40,7 @@ end
 function AS:CreateToggleButton(Name, Text, Panel, TooltipText)
 	local Frame = CreateFrame('Button', Name, UIParent)
 	Frame:SetFrameStrata("DIALOG")
-	Frame:Size(17, Panel:GetHeight() - 4)
+	Frame:SetSize(17, Panel:GetHeight() - 4)
 	AS:SkinArrowButton(Frame)
 	Frame:RegisterForClicks('LeftButtonDown', 'RightButtonDown')
 	UIFrameFadeOut(Frame, 0.2, Frame:GetAlpha(), 0)

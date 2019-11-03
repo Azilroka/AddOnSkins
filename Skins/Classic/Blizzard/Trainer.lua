@@ -31,7 +31,7 @@ function AS:Blizzard_CraftUI(event, addon)
 
 	CraftCollapseAllButton:SetPoint('LEFT', CraftExpandTabLeft, 'RIGHT', -8, 5)
 	CraftCollapseAllButton:GetNormalTexture():SetPoint('LEFT', 3, 2)
-	CraftCollapseAllButton:GetNormalTexture():Size(15)
+	CraftCollapseAllButton:GetNormalTexture():SetSize(15, 15)
 
 	CraftCollapseAllButton:SetHighlightTexture('')
 	CraftCollapseAllButton.SetHighlightTexture = AS.Noop
@@ -39,14 +39,14 @@ function AS:Blizzard_CraftUI(event, addon)
 	CraftCollapseAllButton:SetDisabledTexture(AS.Media.Textures.Minus)
 	CraftCollapseAllButton.SetDisabledTexture = AS.Noop
 	CraftCollapseAllButton:GetDisabledTexture():SetPoint('LEFT', 3, 2)
-	CraftCollapseAllButton:GetDisabledTexture():Size(15)
+	CraftCollapseAllButton:GetDisabledTexture():SetSize(15, 15)
 	CraftCollapseAllButton:GetDisabledTexture():SetDesaturated(true)
 
 	for i = 1, CRAFTS_DISPLAYED do
 		local button = _G['Craft'..i]
 		local highlight = _G['Craft'..i..'Highlight']
 
-		button:GetNormalTexture():Size(14)
+		button:GetNormalTexture():SetSize(14, 14)
 		button:GetNormalTexture():SetPoint('LEFT', 4, 1)
 
 		highlight:SetTexture('')
@@ -61,7 +61,7 @@ function AS:Blizzard_CraftUI(event, addon)
 
 		AS:SetTemplate(reagent)
 		AS:StyleButton(reagent)
-		reagent:Size(143, 40)
+		reagent:SetSize(143, 40)
 
 		AS:SkinTexture(icon, true)
 
@@ -179,7 +179,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 
 	local TradeSkillCollapseAllButton = _G.TradeSkillCollapseAllButton
 	TradeSkillCollapseAllButton:GetNormalTexture():SetPoint('LEFT', 3, 2)
-	TradeSkillCollapseAllButton:GetNormalTexture():Size(15)
+	TradeSkillCollapseAllButton:GetNormalTexture():SetSize(15, 15)
 
 	TradeSkillCollapseAllButton:SetHighlightTexture('')
 	TradeSkillCollapseAllButton.SetHighlightTexture = AS.Noop
@@ -187,7 +187,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 	TradeSkillCollapseAllButton:SetDisabledTexture(AS.Media.Textures.Minus)
 	TradeSkillCollapseAllButton.SetDisabledTexture = AS.Noop
 	TradeSkillCollapseAllButton:GetDisabledTexture():SetPoint('LEFT', 3, 2)
-	TradeSkillCollapseAllButton:GetDisabledTexture():Size(15)
+	TradeSkillCollapseAllButton:GetDisabledTexture():SetSize(15, 15)
 	TradeSkillCollapseAllButton:GetDisabledTexture():SetDesaturated(true)
 
 	AS:SkinDropDownBox(_G.TradeSkillInvSlotDropDown)
@@ -201,7 +201,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 		local button = _G['TradeSkillSkill'..i]
 		local highlight = _G['TradeSkillSkill'..i..'Highlight']
 
-		button:GetNormalTexture():Size(14)
+		button:GetNormalTexture():SetSize(14, 14)
 		button:GetNormalTexture():SetPoint('LEFT', 2, 1)
 
 		highlight:SetTexture('')
@@ -269,7 +269,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 			_G.TradeSkillSkillIcon:SetAlpha(0)
 		end
 
-		_G.TradeSkillSkillIcon:Size(40)
+		_G.TradeSkillSkillIcon:SetSize(40, 40)
 		_G.TradeSkillSkillIcon:SetPoint('TOPLEFT', 2, -3)
 
 		local skillLink = GetTradeSkillItemLink(id)
@@ -345,7 +345,7 @@ function AS:Blizzard_TrainerUI(event, addon)
 		button:SetNormalTexture(AS.Media.Textures.Plus)
 		button.SetNormalTexture = AS.Noop
 
-		button:GetNormalTexture():Size(16)
+		button:GetNormalTexture():SetSize(16, 16)
 		button:GetNormalTexture():SetPoint('LEFT', 5, 0)
 
 		highlight:SetTexture('')
@@ -369,7 +369,7 @@ function AS:Blizzard_TrainerUI(event, addon)
 	_G.ClassTrainerCollapseAllButton:SetNormalTexture(AS.Media.Textures.Plus)
 	_G.ClassTrainerCollapseAllButton.SetNormalTexture = AS.Noop
 	_G.ClassTrainerCollapseAllButton:GetNormalTexture():SetPoint('LEFT', 3, 2)
-	_G.ClassTrainerCollapseAllButton:GetNormalTexture():Size(15)
+	_G.ClassTrainerCollapseAllButton:GetNormalTexture():SetSize(15, 15)
 
 	_G.ClassTrainerCollapseAllButton:SetHighlightTexture('')
 	_G.ClassTrainerCollapseAllButton.SetHighlightTexture = AS.Noop
@@ -377,7 +377,7 @@ function AS:Blizzard_TrainerUI(event, addon)
 	_G.ClassTrainerCollapseAllButton:SetDisabledTexture(AS.Media.Textures.Plus)
 	_G.ClassTrainerCollapseAllButton.SetDisabledTexture = AS.Noop
 	_G.ClassTrainerCollapseAllButton:GetDisabledTexture():SetPoint('LEFT', 3, 2)
-	_G.ClassTrainerCollapseAllButton:GetDisabledTexture():Size(15)
+	_G.ClassTrainerCollapseAllButton:GetDisabledTexture():SetSize(15, 15)
 	_G.ClassTrainerCollapseAllButton:GetDisabledTexture():SetDesaturated(true)
 
 	hooksecurefunc(_G.ClassTrainerCollapseAllButton, 'SetNormalTexture', function(self, texture)

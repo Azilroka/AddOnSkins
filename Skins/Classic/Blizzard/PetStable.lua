@@ -33,7 +33,7 @@ function AS:Blizzard_PetStable()
 
 	AS:CreateBackdrop(PetStablePetInfo)
 	PetStablePetInfo:SetPoint('TOPLEFT', 3, -22)
-	PetStablePetInfo:Size(24)
+	PetStablePetInfo:SetSize(24, 24)
 
 	hooksecurefunc('PetStable_Update', function()
 		local hasPetUI, isHunterPet = HasPetUI()

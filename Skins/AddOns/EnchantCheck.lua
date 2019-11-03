@@ -6,7 +6,7 @@ function AS:EnchantCheck()
 	AS:SkinButton(CharacterFrameEnchantCheckButton)
 	AS:SkinButton(InspectFrameEnchantCheckButton)
 	AS:SkinButton(InspectFrameInviteButton)
-	CharacterFrameEnchantCheckButton:Size(112, 20)
+	CharacterFrameEnchantCheckButton:SetSize(112, 20)
 
 	--Reposition Expand/Collapse Button
 	CharacterFrameEnchantCheckButton:ClearAllPoints()

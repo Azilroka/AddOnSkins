@@ -66,7 +66,7 @@ function AS:Examiner()
 	AS:Kill(Examiner.bgTopRight)
 	AS:Kill(Examiner.dlgTopRight)
 
-	Examiner:Size(360, 464)
+	Examiner:SetSize(360, 464)
 
 	Examiner.model:ClearAllPoints()
 	Examiner.model:SetPoint('BOTTOMLEFT', Examiner, 'BOTTOMLEFT', 22, 22)

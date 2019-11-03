@@ -27,7 +27,7 @@ function AS:ClassicQuestLog()
 	ClassicQuestLogScrollFrame.expandAll:ClearAllPoints()
 	ClassicQuestLogScrollFrame.expandAll:SetPoint('BOTTOMLEFT', ClassicQuestLog, 'TOPLEFT', 10, -53)
 
-	ClassicQuestLog.count:Size(100, 20)
+	ClassicQuestLog.count:SetSize(100, 20)
 	ClassicQuestLog.count:ClearAllPoints()
 	ClassicQuestLog.count:SetPoint('LEFT', ClassicQuestLogScrollFrame.expandAll, 'RIGHT', -4, -4)
 
@@ -37,11 +37,11 @@ function AS:ClassicQuestLog()
 	ClassicQuestLog.mapButton.text:SetFormattedText("Click") -- Install addon and fix this button.
 
 	--Resize Expand/Collapse Button
-	ClassicQuestLogScrollFrame.expandAll:Size(120, 30)
+	ClassicQuestLogScrollFrame.expandAll:SetSize(120, 30)
 	ClassicQuestLogScrollFrame.expandAll:SetFormattedText("Expand/Collapse")
 
 	--Resize Show Map Button
-	ClassicQuestLog.mapButton:Size(56, 40)
+	ClassicQuestLog.mapButton:SetSize(56, 40)
 end
 
 AS:RegisterSkin('Classic Quest Log', AS.ClassicQuestLog)

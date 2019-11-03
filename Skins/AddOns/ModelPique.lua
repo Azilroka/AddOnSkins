@@ -4,7 +4,6 @@ if not AS:CheckAddOn('ModelPique') then return end
 
 function AS:ModelPique()
 	AS:SkinFrame(ModelPiqueFrame)
-	ModelPiqueFrame:SetTemplate("Transparent")
 	AS:SkinButton(ModelPiqueFrameCancelButton)
 	AS:SkinCloseButton(ModelPiqueFrameCloseButton)
 	AS:Kill(ModelPiqueFramePortrait)
@@ -20,7 +19,7 @@ function AS:ModelPique()
 	ModelPiqueFrameCloseButton:SetPoint('TOPRIGHT', ModelPiqueFrame, 'TOPRIGHT', 0, 0)
 
 	--Resize Frame
-	ModelPiqueFrame:Size(327, 410)
+	ModelPiqueFrame:SetSize(327, 410)
 end
 
 AS:RegisterSkin('ModelPique', AS.ModelPique)

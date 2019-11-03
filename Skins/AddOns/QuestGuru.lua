@@ -29,11 +29,11 @@ function AS:QuestGuru()
 	QuestGuru.mapButton:SetPoint('RIGHT', QuestGuru.count, 'RIGHT', 407, 0)
 
 	--Resize Expand/Collapse Button
-	QuestGuruScrollFrame.expandAll:Size(120, 30)
+	QuestGuruScrollFrame.expandAll:SetSize(120, 30)
 	QuestGuruScrollFrame.expandAll:SetFormattedText(" Expand/Collapse ")
 
 	--Resize Show Map Button
-	QuestGuru.mapButton:Size(50, 40)
+	QuestGuru.mapButton:SetSize(50, 40)
 	QuestGuru.mapButton:SetFormattedText(" Quest Log ")
 
 	AS:SkinScrollBar(QuestGuruScrollFrameScrollBar)

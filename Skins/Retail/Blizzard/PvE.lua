@@ -378,7 +378,7 @@ function AS:Blizzard_PvE()
 	AS:SkinButton(LFGListFrame.SearchPanel.FilterButton)
 	LFGListFrame.SearchPanel.FilterButton:SetPoint("LEFT", LFGListFrame.SearchPanel.SearchBox, "RIGHT", 5, 0)
 	AS:SkinButton(LFGListFrame.SearchPanel.RefreshButton)
-	LFGListFrame.SearchPanel.RefreshButton:Size(24)
+	LFGListFrame.SearchPanel.RefreshButton:SetSize(24, 24)
 	LFGListFrame.SearchPanel.RefreshButton.Icon:SetPoint("CENTER")
 
 	hooksecurefunc("LFGListApplicationViewer_UpdateApplicant", function(button)

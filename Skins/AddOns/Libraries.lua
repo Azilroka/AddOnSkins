@@ -186,7 +186,7 @@ function AS:SkinLibraries()
 		AS:RawHook(LZF, "Create", function(self, ...)
 			local frame = AS.hooks[self].Create(self, ...)
 			AS:SetTemplate(frame.ZMain)
-			frame.ZMain.close:Size(32)
+			frame.ZMain.close:SetSize(32, 32)
 			AS:SkinCloseButton(frame.ZMain.close, frame.ZMain)
 			return frame
 		end, true)

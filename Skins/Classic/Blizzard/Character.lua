@@ -58,7 +58,7 @@ function AS:Blizzard_Character()
 
 	AS:CreateBackdrop(PetPaperDollPetInfo)
 	PetPaperDollPetInfo:SetPoint('TOPLEFT', _G.PetModelFrameRotateLeftButton, 'BOTTOMLEFT', 1, -5)
-	PetPaperDollPetInfo:Size(24)
+	PetPaperDollPetInfo:SetSize(24, 24)
 
 	for _, frame in pairs({_G.CharacterAttributesFrame:GetChildren()}) do
 		AS:GradientHighlight(frame, nil, AS:CheckOption('HighlightColor'))
@@ -96,7 +96,7 @@ function AS:Blizzard_Character()
 	local function HandleResistanceFrame(frameName)
 		for i = 1, 5 do
 			local frame, icon, text = _G[frameName..i], _G[frameName..i]:GetRegions()
-			frame:Size(24)
+			frame:SetSize(24, 24)
 			frame:SetTemplate('Default')
 
 			if i ~= 1 then
@@ -217,7 +217,7 @@ function AS:Blizzard_Character()
 		border:StripTextures()
 		background:SetTexture(nil)
 
-		label:GetNormalTexture():Size(14)
+		label:GetNormalTexture():SetSize(14, 14)
 		label:SetHighlightTexture(nil)
 	end
 
@@ -239,7 +239,7 @@ function AS:Blizzard_Character()
 	AS:SkinStatusBar(_G.SkillDetailStatusBar)
 
 	AS:SkinArrowButton(_G.SkillDetailStatusBarUnlearnButton)
-	_G.SkillDetailStatusBarUnlearnButton:Size(24)
+	_G.SkillDetailStatusBarUnlearnButton:SetSize(24, 24)
 	_G.SkillDetailStatusBarUnlearnButton:SetPoint('LEFT', _G.SkillDetailStatusBarBorder, 'RIGHT', 5, 0)
 	_G.SkillDetailStatusBarUnlearnButton:SetHitRectInsets(0, 0, 0, 0)
 
