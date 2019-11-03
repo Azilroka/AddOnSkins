@@ -228,9 +228,9 @@ function AS:Blizzard_TradeSkill(event, addon)
 		end
 	end)
 
-	_G.TradeSkillDetailScrollFrame:StripTextures()
-	_G.TradeSkillListScrollFrame:StripTextures()
-	_G.TradeSkillDetailScrollChildFrame:StripTextures()
+	AS:StripTextures(_G.TradeSkillDetailScrollFrame)
+	AS:StripTextures(_G.TradeSkillListScrollFrame)
+	AS:StripTextures(_G.TradeSkillDetailScrollChildFrame)
 
 	AS:SkinScrollBar(_G.TradeSkillListScrollFrameScrollBar)
 	AS:SkinScrollBar(_G.TradeSkillDetailScrollFrameScrollBar)
@@ -323,10 +323,10 @@ function AS:Blizzard_TrainerUI(event, addon)
 
 	AS:SkinDropDownBox(ClassTrainerFrameFilterDropDown)
 
-	_G.ClassTrainerListScrollFrame:StripTextures()
+	AS:StripTextures(_G.ClassTrainerListScrollFrame)
 	AS:SkinScrollBar(_G.ClassTrainerListScrollFrameScrollBar)
 
-	_G.ClassTrainerDetailScrollFrame:StripTextures()
+	AS:StripTextures(_G.ClassTrainerDetailScrollFrame)
 	AS:SkinScrollBar(_G.ClassTrainerDetailScrollFrameScrollBar)
 	AS:StripTextures(_G.ClassTrainerSkillIcon)
 

@@ -214,7 +214,7 @@ function AS:Blizzard_Character()
 
 		AS:SkinStatusBar(bar)
 		AS:SetOutside(bar.Backdrop, bar, 1, 1)
-		border:StripTextures()
+		AS:StripTextures(border)
 		background:SetTexture(nil)
 
 		label:GetNormalTexture():SetSize(14, 14)
@@ -230,10 +230,10 @@ function AS:Blizzard_Character()
 		end
 	end)
 
-	_G.SkillListScrollFrame:StripTextures()
+	AS:StripTextures(_G.SkillListScrollFrame)
 	AS:SkinScrollBar(_G.SkillListScrollFrameScrollBar)
 
-	_G.SkillDetailScrollFrame:StripTextures()
+	AS:StripTextures(_G.SkillDetailScrollFrame)
 	AS:SkinScrollBar(_G.SkillDetailScrollFrameScrollBar)
 
 	AS:SkinStatusBar(_G.SkillDetailStatusBar)
@@ -349,7 +349,7 @@ function AS:Blizzard_TradeWindow()
 	end
 
 	for _, Highlight in pairs({ _G.TradeHighlightPlayer, _G.TradeHighlightRecipient, _G.TradeHighlightPlayerEnchant, _G.TradeHighlightRecipientEnchant }) do
-		Highlight:StripTextures()
+		AS:StripTextures(Highlight)
 	end
 
 	for _, Frame in pairs({"TradePlayerItem", "TradeRecipientItem"}) do

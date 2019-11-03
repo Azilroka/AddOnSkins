@@ -493,7 +493,7 @@ function AS:Blizzard_TradeWindow()
 	end
 
 	for _, Highlight in pairs({ _G.TradeHighlightPlayer, _G.TradeHighlightRecipient, _G.TradeHighlightPlayerEnchant, _G.TradeHighlightRecipientEnchant }) do
-		Highlight:StripTextures()
+		AS:StripTextures(Highlight)
 	end
 
 	for _, Frame in pairs({"TradePlayerItem", "TradeRecipientItem"}) do

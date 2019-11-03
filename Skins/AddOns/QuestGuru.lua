@@ -39,9 +39,9 @@ function AS:QuestGuru()
 	AS:SkinScrollBar(QuestGuruScrollFrameScrollBar)
 	AS:SkinScrollBar(QuestGuruDetailScrollFrameScrollBar)
 
-	QuestGuruInset:StripTextures()
-	QuestGuruDetailScrollFrame:StripTextures()
-	QuestGuruScrollFrame:StripTextures()
+	AS:StripTextures(QuestGuruInset)
+	AS:StripTextures(QuestGuruDetailScrollFrame)
+	AS:StripTextures(QuestGuruScrollFrame)
 end
 
 AS:RegisterSkin('QuestGuru', AS.QuestGuru)

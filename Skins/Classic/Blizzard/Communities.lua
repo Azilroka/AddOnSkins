@@ -170,8 +170,8 @@ function AS:Blizzard_Communities(event, addon)
 
 	AS:SkinFrame(CommunitiesTicketManagerDialog)
 	CommunitiesTicketManagerDialog.InviteManager.ArtOverlay:Hide()
-	CommunitiesTicketManagerDialog.InviteManager.ColumnDisplay:StripTextures()
-	CommunitiesTicketManagerDialog.InviteManager.ListScrollFrame:StripTextures()
+	AS:StripTextures(CommunitiesTicketManagerDialog.InviteManager.ColumnDisplay)
+	AS:StripTextures(CommunitiesTicketManagerDialog.InviteManager.ListScrollFrame)
 
 	AS:SkinButton(CommunitiesTicketManagerDialog.LinkToChat)
 	AS:SkinButton(CommunitiesTicketManagerDialog.Copy)

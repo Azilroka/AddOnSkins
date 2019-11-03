@@ -11,10 +11,10 @@ function AS:tdBattlePetScript()
 		local frame = select(i, tdBattlePetScript.MainPanel:GetChildren())
 		if frame:IsObjectType("Frame") then
 			for j = 1, frame:GetNumRegions() do
-				local region = select(j, frame:GetRegions()) 
+				local region = select(j, frame:GetRegions())
 				if region.GetTexture and region:GetTexture() and type(region:GetTexture() == "string") then
 					if strfind(strlower(region:GetTexture()), "ui%-background%-marble") then
-						frame:StripTextures()
+						AS:StripTextures(frame)
 					elseif strfind(strlower(region:GetTexture()), "ui%-panel%-minimizebutton") then
 						AS:SkinCloseButton(frame)
 					end

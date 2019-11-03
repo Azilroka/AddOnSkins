@@ -7,7 +7,7 @@ function AS:Keyed()
 	AS:SkinFrame(KeyedFrameInset)
 	AS:SkinCheckBox(KeyedFrameShowMinimapButton)
 	AS:SkinCloseButton(KeyedFrameCloseButton)
-	KeystoneListScrollFrame:StripTextures(true)
+	AS:StripTextures(KeystoneListScrollFrame, true)
 	AS:SkinScrollBar(KeystoneListScrollFrameScrollBar)
 
 	for i = 1, 3 do

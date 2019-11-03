@@ -6,7 +6,7 @@ function AS:TrainAll(event, addon)
 	if addon == 'Blizzard_TrainerUI' or IsAddOnLoaded('Blizzard_TrainerUI') then
 		ClassTrainerFrame:HookScript('OnShow', function(self)
 			if not TrainAllButton.isSkinned then
-				TrainAllButton:StripTextures()
+				AS:StripTextures(TrainAllButton)
 				AS:SkinButton(TrainAllButton)
 			end
 		end)

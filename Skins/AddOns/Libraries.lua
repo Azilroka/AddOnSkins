@@ -104,7 +104,7 @@ local function SkinRockConfig(lib)
 		if self.base.isSkinned then return end
 
 		AS:SetTemplate(self.base, "Transparent")
-		self.base.header:StripTextures()
+		AS:StripTextures(self.base.header)
 		AS:SkinCloseButton(self.base.closeButton, self.base)
 
 		AS:SetTemplate(self.base.treeView)

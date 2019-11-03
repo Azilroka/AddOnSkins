@@ -87,7 +87,7 @@ function AS:Blizzard_IslandsQueueUI(event, addon)
 	AS:SkinCloseButton(_G.IslandsQueueFrame.CloseButton)
 	AS:SkinButton(_G.IslandsQueueFrame.DifficultySelectorFrame.QueueButton)
 
-	_G.IslandsQueueFrame.WeeklyQuest.OverlayFrame:StripTextures()
+	AS:StripTextures(_G.IslandsQueueFrame.WeeklyQuest.OverlayFrame)
 	_G.IslandsQueueFrame.WeeklyQuest.StatusBar:CreateBackdrop("Default")
 
 	--StatusBar Icon
@@ -125,7 +125,7 @@ function AS:Blizzard_WarboardUI(event, addon)
 	if addon ~= 'Blizzard_WarboardUI' then return end
 
 	local WarboardQuestChoiceFrame = _G["WarboardQuestChoiceFrame"]
-	WarboardQuestChoiceFrame:StripTextures()
+	AS:StripTextures(WarboardQuestChoiceFrame)
 	WarboardQuestChoiceFrame:CreateBackdrop("Transparent")
 
 	WarboardQuestChoiceFrame.BorderFrame:Hide()

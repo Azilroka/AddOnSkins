@@ -7,7 +7,7 @@ function AS:Blizzard_Others()
 		if navButton and not navButton.isSkinned then
 			AS:SkinButton(navButton, true)
 			if navButton.MenuArrowButton then
-				navButton.MenuArrowButton:StripTextures()
+				AS:StripTextures(navButton.MenuArrowButton)
 				if navButton.MenuArrowButton.Art then
 					navButton.MenuArrowButton.Art:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
 					navButton.MenuArrowButton.Art:SetTexCoord(0, 1, 0, 1)

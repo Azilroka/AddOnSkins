@@ -66,7 +66,7 @@ function AS:Blizzard_PVPUI(event, addon)
 		Button.Reward.Border:Hide()
 		Button.Reward.CircleMask:Hide()
 
-		Button.Reward.EnlistmentBonus:StripTextures()
+		AS:StripTextures(Button.Reward.EnlistmentBonus)
 		AS:SetTemplate(Button.Reward.EnlistmentBonus)
 		Button.Reward.EnlistmentBonus:SetSize(20, 20)
 		Button.Reward.EnlistmentBonus:SetPoint("TOPRIGHT", 2, 2)
@@ -261,7 +261,7 @@ function AS:Blizzard_PVPMatch()
 	AS:SkinFrame(PVPMatchScoreboard)
 	AS:SkinCloseButton(PVPMatchScoreboard.CloseButton)
 
-	PVPMatchScoreboard.Content:StripTextures()
+	AS:StripTextures(PVPMatchScoreboard.Content)
 	AS:SkinScrollBar(PVPMatchScoreboard.Content.ScrollFrame.ScrollBar)
 
 	for _, tab in pairs({PVPMatchScoreboard.Content.TabContainer.TabGroup:GetChildren()}) do
@@ -271,8 +271,8 @@ function AS:Blizzard_PVPMatch()
 	local PVPMatchResults = _G.PVPMatchResults
 	AS:SkinFrame(PVPMatchResults)
 
-	PVPMatchResults.content:StripTextures()
-	PVPMatchResults.content.tabContainer:StripTextures()
+	AS:StripTextures(PVPMatchResults.content)
+	AS:StripTextures(PVPMatchResults.content.tabContainer)
 
 	AS:SkinScrollBar(PVPMatchResults.content.scrollFrame.scrollBar)
 	AS:SkinCloseButton(PVPMatchResults.CloseButton)

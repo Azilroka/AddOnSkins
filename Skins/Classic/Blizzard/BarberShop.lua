@@ -24,7 +24,7 @@ function AS:Blizzard_BarbershopUI(event, addon)
 		local previousSelector = _G.BarberShopFrame.Selector[i-1]
 
 		if selector then
-			selector:StripTextures()
+			AS:StripTextures(selector)
 
 			AS:SkinArrowButton(selector.Prev, nil, true)
 			AS:SkinArrowButton(selector.Next)

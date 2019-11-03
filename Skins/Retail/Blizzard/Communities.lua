@@ -275,10 +275,10 @@ function AS:Blizzard_Communities(event, addon)
 		AS:SkinButton(_G["CommunitiesGuildRecruitmentFrameTab"..i])
 	end
 
-	CommunitiesGuildRecruitmentFrameRecruitment.CommentFrame.CommentInputFrame:StripTextures()
+	AS:StripTextures(CommunitiesGuildRecruitmentFrameRecruitment.CommentFrame.CommentInputFrame)
 	AS:SkinEditBox(CommunitiesGuildRecruitmentFrameRecruitment.CommentFrame.CommentInputFrame)
 
-  	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.InviteButton)
+	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.InviteButton)
 	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.MessageButton)
 	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.DeclineButton)
 
@@ -335,8 +335,8 @@ function AS:Blizzard_Communities(event, addon)
 
 	AS:SkinFrame(CommunitiesTicketManagerDialog)
 	CommunitiesTicketManagerDialog.InviteManager.ArtOverlay:Hide()
-	CommunitiesTicketManagerDialog.InviteManager.ColumnDisplay:StripTextures()
-	CommunitiesTicketManagerDialog.InviteManager.ListScrollFrame:StripTextures()
+	AS:StripTextures(CommunitiesTicketManagerDialog.InviteManager.ColumnDisplay)
+	AS:StripTextures(CommunitiesTicketManagerDialog.InviteManager.ListScrollFrame)
 
 	AS:SkinButton(CommunitiesTicketManagerDialog.LinkToChat)
 	AS:SkinButton(CommunitiesTicketManagerDialog.Copy)

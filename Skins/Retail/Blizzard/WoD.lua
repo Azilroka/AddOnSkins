@@ -73,7 +73,7 @@ function AS:Blizzard_ItemUpgradeUI(event, addon)
 		end
 	end)
 
-	ItemUpgradeFrameMoneyFrame:StripTextures()
+	AS:StripTextures(ItemUpgradeFrameMoneyFrame)
 	AS:SkinButton(ItemUpgradeFrameUpgradeButton, true)
 	AS:Kill(ItemUpgradeFrame.FinishedGlow)
 	ItemUpgradeFrame.ButtonFrame:DisableDrawLayer('BORDER')
