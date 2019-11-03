@@ -63,7 +63,7 @@ function AS:MageNuggets()
 
 	for _, object in pairs({MageNugMI_Frame, MageNugCauterize_Frame, MageNugInvokers_Frame}) do
 		AS:CreateBackdrop(object)
-		object.Backdrop:SetOutside(_G[object:GetName()..'Texture1'])
+		AS:SetOutside(object.Backdrop, _G[object:GetName()..'Texture1'])
 		AS:SkinTexture(_G[object:GetName()..'Texture1'])
 	end
 

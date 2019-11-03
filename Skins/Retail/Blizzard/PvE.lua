@@ -242,7 +242,7 @@ function AS:Blizzard_PvE()
 		for _, Button in pairs(self.ScrollFrame.buttons) do
 			if not Button.Backdrop then
 				AS:CreateBackdrop(Button)
-				Button.Backdrop:SetInside(Button, 6, 1)
+				AS:SetInside(Button.Backdrop, Button, 6, 1)
 				Button.ResultBG:SetAlpha(0)
 				Button.Highlight:SetColorTexture(1, 1, 1, 0.1)
 				Button.Highlight:SetAllPoints(Button.Backdrop)

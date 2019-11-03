@@ -18,13 +18,13 @@ function AS:Blizzard_Mail()
 				AS:SkinFrame(Frame.Button)
 				AS:StyleButton(Frame.Button)
 				AS:SkinTexture(Frame.Button.Icon)
-				Frame.Button.Icon:SetInside()
+				AS:SetInside(Frame.Button.Icon)
 				Frame.Button.IconBorder:SetAlpha(0)
 			else
 				Frame.IconBorder:SetAlpha(0)
 				if Frame.icon then
 					AS:SkinTexture(Frame.icon)
-					Frame.icon:SetInside()
+					AS:SetInside(Frame.icon)
 				end
 			end
 
@@ -74,11 +74,11 @@ function AS:Blizzard_Mail()
 
 	AS:SkinButton(OpenMailLetterButton)
 	AS:SkinTexture(OpenMailLetterButton.icon)
-	OpenMailLetterButton.icon:SetInside()
+	AS:SetInside(OpenMailLetterButton.icon)
 
 	AS:SkinButton(OpenMailMoneyButton)
 	AS:SkinTexture(OpenMailMoneyButton.icon)
-	OpenMailMoneyButton.icon:SetInside()
+	AS:SetInside(OpenMailMoneyButton.icon)
 
 	OpenMailReplyButton:SetPoint("RIGHT", OpenMailDeleteButton, "LEFT", -2, 0)
 	OpenMailDeleteButton:SetPoint("RIGHT", OpenMailCancelButton, "LEFT", -2, 0)
@@ -92,7 +92,7 @@ function AS:Blizzard_Mail()
 			local Texture = _G["SendMailAttachment"..i]:GetNormalTexture()
 			if Texture then
 				AS:SkinTexture(Texture)
-				Texture:SetInside()
+				AS:SetInside(Texture)
 			end
 		end
 	end)

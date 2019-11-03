@@ -46,7 +46,7 @@ function AS:FlyoutButtonCustom()
 			button.Backdrop:SetAllPoints()
 
 			AS:SkinTexture(icon)
-			icon:SetInside()
+			AS:SetInside(icon)
 
 			button.isSkinned = true
 		end

@@ -33,7 +33,7 @@ function AS:Blizzard_Communities(event, addon)
 	CommunitiesFrame.AddToChatButton:SetPoint("TOPRIGHT", CommunitiesFrame.ChatEditBox, "BOTTOMRIGHT", 4, 4)
 
 	AS:SkinEditBox(CommunitiesFrame.ChatEditBox)
-	CommunitiesFrame.ChatEditBox.Backdrop:SetInside(CommunitiesFrame.ChatEditBox, -5, 8)
+	AS:SetInside(CommunitiesFrame.ChatEditBox.Backdrop, CommunitiesFrame.ChatEditBox, -5, 8)
 	AS:StripTextures(CommunitiesFrame.MemberList)
 	CommunitiesFrame.MemberList.InsetFrame:Hide()
 
@@ -95,7 +95,7 @@ function AS:Blizzard_Communities(event, addon)
 	AS:StripTextures(CommunitiesFrame.GuildFinderFrame)
 
 	AS:SkinBackdropFrame(CommunitiesFrame.GuildMemberDetailFrame)
-	CommunitiesFrame.GuildMemberDetailFrame.Backdrop:SetInside()
+	AS:SetInside(CommunitiesFrame.GuildMemberDetailFrame.Backdrop)
 
 	AS:SkinFrame(CommunitiesFrame.GuildMemberDetailFrame.NoteBackground)
 	AS:SkinFrame(CommunitiesFrame.GuildMemberDetailFrame.OfficerNoteBackground)
@@ -155,7 +155,7 @@ function AS:Blizzard_Communities(event, addon)
 	for _, Button in pairs(CommunitiesFrameContainer.buttons) do
 		AS:SkinTexture(Button.Icon, true)
 		AS:SkinBackdropFrame(Button)
-		Button.Backdrop:SetInside()
+		AS:SetInside(Button.Backdrop)
 		Button.Backdrop:SetPoint("BOTTOMRIGHT", -15, 2)
 	end
 
@@ -237,7 +237,7 @@ function AS:Blizzard_Communities(event, addon)
 
 	---- Guild Log
 	AS:SkinBackdropFrame(CommunitiesGuildLogFrame)
-	CommunitiesGuildLogFrame.Backdrop:SetInside()
+	AS:SetInside(CommunitiesGuildLogFrame.Backdrop)
 	AS:SkinFrame(CommunitiesGuildLogFrame.Container)
 	AS:SkinScrollBar(CommunitiesGuildLogFrame.Container.ScrollFrame.ScrollBar)
 	AS:SkinCloseButton(CommunitiesGuildLogFrameCloseButton)
@@ -504,14 +504,14 @@ function AS:Blizzard_GuildUI(event, addon)
 	for _, Button in pairs(GuildPerksContainer.buttons) do
 		AS:SkinTexture(Button.icon, true)
 		AS:SkinBackdropFrame(Button)
-		Button.Backdrop:SetInside()
+		AS:SetInside(Button.Backdrop)
 		Button.Backdrop:SetPoint("BOTTOMRIGHT", -15, 2)
 	end
 
 	for _, Button in pairs(GuildRewardsContainer.buttons) do
 		AS:SkinTexture(Button.icon, true)
 		AS:SkinBackdropFrame(Button)
-		Button.Backdrop:SetInside()
+		AS:SetInside(Button.Backdrop)
 		hooksecurefunc(Button.icon, "SetTexture", function(self)
 			local r, g, b = unpack(AS.BorderColor)
 			if Button.index then
@@ -709,7 +709,7 @@ function AS:Blizzard_GuildBankUI(event, addon)
 			Button:SetNormalTexture("")
 			AS:StyleButton(Button)
 			AS:SetTemplate(Button, 'Default')
-			Button.icon:SetInside()
+			AS:SetInside(Button.icon)
 			AS:SkinTexture(Button.icon)
 			Button.IconBorder:SetAlpha(0)
 			hooksecurefunc(Button.IconBorder, 'SetVertexColor', function(self, r, g, b) Button:SetBackdropBorderColor(r, g, b) end)
@@ -799,7 +799,7 @@ function AS:Blizzard_LookingForGuildUI(event, addon)
 
 		Browse:SetBackdrop(nil)
 		AS:CreateBackdrop(Browse)
-		Browse.Backdrop:SetInside()
+		AS:SetInside(Browse.Backdrop)
 		Browse.selectedTex:SetAlpha(0)
 		Browse:SetHighlightTexture('')
 

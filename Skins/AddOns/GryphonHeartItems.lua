@@ -35,7 +35,7 @@ function AS:GryphonheartItems()
 		AS:SkinFrame(frame, nil, true)
 		AS:SkinCloseButton(_G[name..'CloseButton'])
 		AS:SkinTexture(_G[name.."Portrait"])
-		_G[name.."Portrait"]:SetInside(_G[name.."PortraitButton"])
+		AS:SetInside(_G[name.."Portrait"], _G[name.."PortraitButton"])
 		_G[name.."PortraitButton"]:SetPoint('TOPLEFT', frame, 'TOPLEFT', 2, -2)
 
 		_G[name..'CloseButton'].IsSkinned = true

@@ -33,7 +33,7 @@ function AS:Examiner()
 		local Button = _G['ExaminerItemButton'..Slot..'Slot']
 		AS:SkinTexture(Button.texture)
 		AS:SkinFrame(Button)
-		Button.texture:SetInside()
+		AS:SetInside(Button.texture)
 		Button.border:SetAlpha(0)
 		Button:SetFrameLevel(Button:GetFrameLevel() + 2)
 		hooksecurefunc(Button.border, 'SetVertexColor', function(self, r, g, b)

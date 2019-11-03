@@ -60,7 +60,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 
 		if self.Contents.ResultIcon:GetNormalTexture() then
 			AS:SkinTexture(self.Contents.ResultIcon:GetNormalTexture())
-			self.Contents.ResultIcon:GetNormalTexture():SetInside()
+			AS:SetInside(self.Contents.ResultIcon:GetNormalTexture())
 		end
 
 		self.Contents.ResultIcon.ResultBorder:SetTexture("")

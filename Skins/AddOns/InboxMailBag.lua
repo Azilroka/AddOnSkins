@@ -14,7 +14,7 @@ function AS:InboxMailBag(event)
 	while _G['InboxMailbagFrameItem'..index] do
 		local button = _G['InboxMailbagFrameItem'..index]
 		AS:SkinFrame(button)
-		button.icon:SetInside()
+		AS:SetInside(button.icon)
 		AS:SkinTexture(button.icon)
 		button.qualityOverlay:SetTexture()
 		button:SetNormalTexture()

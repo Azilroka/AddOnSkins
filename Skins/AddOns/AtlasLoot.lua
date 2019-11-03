@@ -77,7 +77,7 @@ function AS:AtlasLoot(event, addon)
 	AS:SkinArrowButton(AtlasLootItemFrame.prevPageButton)
 	AS:SkinButton(AtlasLootItemFrame.itemsButton)
 	AS:SkinButton(AtlasLootItemFrame.clasFilterButton)
-	AtlasLootItemFrame.clasFilterButton.texture:SetInside()
+	AS:SetInside(AtlasLootItemFrame.clasFilterButton.texture)
 	AtlasLootItemFrame.clasFilterButton:HookScript('OnUpdate', function(self)
 		if self.texture:GetTexture() == "Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes" then
 			self.texture:SetTexCoord(CLASS_ICON_TCOORDS[AS.MyClass][1] + 0.015, CLASS_ICON_TCOORDS[AS.MyClass][2] - 0.02, CLASS_ICON_TCOORDS[AS.MyClass][3] + 0.018, CLASS_ICON_TCOORDS[AS.MyClass][4] - .02)

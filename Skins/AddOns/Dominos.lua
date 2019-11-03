@@ -44,7 +44,7 @@ function AS:Dominos()
 			button.Backdrop:SetAllPoints()
 
 			AS:SkinTexture(icon)
-			icon:SetInside()
+			AS:SetInside(icon)
 
 			button.isSkinned = true
 		end
@@ -64,7 +64,7 @@ function AS:Dominos()
 
 		if flash then
 			flash:SetTexture(0.8, 0.8, 0.8, 0.5)
-			flash:SetOutside(button, 2, 2)
+			AS:SetOutside(flash, button, 2, 2)
 		end
 
 		if hotkey then
@@ -79,8 +79,7 @@ function AS:Dominos()
 			button.Backdrop:SetAllPoints()
 
 			AS:SkinTexture(icon)
-			icon:ClearAllPoints()
-			icon:SetInside()
+			AS:SetInside(icon)
 
 			if pet then
 				local autocast = _G[name.."AutoCastable"]

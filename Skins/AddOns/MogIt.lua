@@ -15,7 +15,7 @@ function AS:MogIt()
 					AS:CreateBackdrop(object)
 					object.icon:ClearAllPoints()
 					AS:SkinTexture(object.icon)
-					object.icon:SetInside(object.Backdrop)
+					AS:SetInside(object.icon, object.Backdrop)
 					object:SetNormalTexture(nil)
 					AS:StyleButton(object)
 				end

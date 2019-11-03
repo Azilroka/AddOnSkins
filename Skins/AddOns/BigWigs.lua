@@ -67,10 +67,10 @@ function AS:BigWigs(event, addon)
 			bg:SetFrameLevel(bar:GetFrameLevel() - 1)
 			bg:ClearAllPoints()
 			if ibg then
-				bg:SetOutside(bar.candyBarIconFrame)
+				AS:SetOutside(bg, bar.candyBarIconFrame)
 				bg:SetBackdropColor(0, 0, 0, 0)
 			else
-				bg:SetOutside(bar)
+				AS:SetOutside(bg, bar)
 				bg:SetBackdropColor(unpack(AS.BackdropColor))
 			end
 			bg:Show()

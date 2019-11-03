@@ -52,7 +52,7 @@ function AS:Blizzard_ArchaeologyUI(event, addon)
 	AS:SkinTexture(_G.ArchaeologyFrame.artifactPage.icon)
 
 	AS:CreateBackdrop(_G.ArchaeologyFrame.artifactPage)
-	_G.ArchaeologyFrame.artifactPage.Backdrop:SetOutside(_G.ArchaeologyFrame.artifactPage.icon)
+	AS:SetOutside(_G.ArchaeologyFrame.artifactPage.Backdrop, _G.ArchaeologyFrame.artifactPage.icon)
 
 	_G.ArchaeologyFrameArtifactPageHistoryScrollChildText:SetTextColor(1, 1, 1)
 

@@ -56,17 +56,10 @@ function AS:Blizzard_Alerts()
 		frame.Unlocked:SetTextColor(1, 1, 1)
 
 		-- Icon
-		frame.Icon.Texture:SetTexCoord(unpack(AS.TexCoords))
+		AS:SkinTexture(frame.Icon.Texture, true)
 		frame.Icon.Overlay:SetAlpha(0)
 		frame.Icon.Texture:ClearAllPoints()
 		frame.Icon.Texture:Point("LEFT", frame, 7, 0)
-
-		if not frame.Icon.Texture.b then
-			frame.Icon.Texture.b = CreateFrame("Frame", nil, frame)
-			frame.Icon.Texture.b:SetTemplate("Default")
-			frame.Icon.Texture.b:SetOutside(frame.Icon.Texture)
-			frame.Icon.Texture:SetParent(frame.Icon.Texture.b)
-		end
 	end
 
 	local function SkinCriteriaAlert(frame)
@@ -84,15 +77,7 @@ function AS:Blizzard_Alerts()
 		frame.Icon.Bling:SetAlpha(0)
 		frame.Icon.Overlay:SetAlpha(0)
 
-		-- Icon border
-		if not frame.Icon.Texture.b then
-			frame.Icon.Texture.b = CreateFrame("Frame", nil, frame)
-			frame.Icon.Texture.b:SetTemplate("Default")
-			frame.Icon.Texture.b:Point("TOPLEFT", frame.Icon.Texture, "TOPLEFT", -3, 3)
-			frame.Icon.Texture.b:Point("BOTTOMRIGHT", frame.Icon.Texture, "BOTTOMRIGHT", 3, -2)
-			frame.Icon.Texture:SetParent(frame.Icon.Texture.b)
-		end
-		frame.Icon.Texture:SetTexCoord(unpack(AS.TexCoords))
+		AS:SkinTexture(frame.Icon.Texture, true)
 	end
 
 	local function SkinDungeonCompletionAlert(frame)
@@ -166,12 +151,7 @@ function AS:Blizzard_Alerts()
 			-- Icon border
 			if icon and icon:GetObjectType() == "Texture" then
 				if icon:GetTexture() == "Interface\\Icons\\Ability_Warlock_DemonicPower" then
-					icon.b = CreateFrame("Frame", nil, frame)
-					icon.b:SetTemplate("Default")
-					icon.b:SetOutside(icon)
-					icon:SetParent(icon.b)
-					icon:SetDrawLayer("OVERLAY")
-					icon:SetTexCoord(unpack(AS.TexCoords))
+					AS:SkinTexture(icon, true)
 				end
 			end
 			frame.isSkinned = true
@@ -303,13 +283,8 @@ function AS:Blizzard_Alerts()
 			frame.glow:SetAlpha(0)
 			frame.shine:SetAlpha(0)
 			--Icon
-			frame.Icon:SetTexCoord(unpack(AS.TexCoords))
-			frame.Icon:SetDrawLayer("ARTWORK")
-			frame.Icon.b = CreateFrame("Frame", nil, frame)
-			frame.Icon.b:SetTemplate("Default")
-			frame.Icon.b:SetOutside(frame.Icon)
-			frame.Icon:SetParent(frame.Icon.b)
-			--Create Backdrop
+			AS:SkinTexture(frame.Icon, true)
+
 			AS:CreateBackdrop(frame, "Transparent")
 			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 8, -2)
 			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 2)
@@ -327,13 +302,8 @@ function AS:Blizzard_Alerts()
 			AS:CreateBackdrop(frame, "Transparent")
 			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 8, -8)
 			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 8)
-			--Icon
-			frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
-			frame.Icon:SetDrawLayer("ARTWORK")
-			frame.Icon.b = CreateFrame("Frame", nil, frame)
-			frame.Icon.b:SetTemplate("Default")
-			frame.Icon.b:SetOutside(frame.Icon)
-			frame.Icon:SetParent(frame.Icon.b)
+
+			AS:SkinTexture(frame.Icon, true)
 
 			frame.isSkinned = true
 		end
@@ -345,14 +315,9 @@ function AS:Blizzard_Alerts()
 			frame.shine:SetAlpha(0)
 			frame.IconBG:Hide()
 			frame.Background:SetAlpha(0)
-			--Icon
-			frame.MissionType:SetTexCoord(unpack(AS.TexCoords))
-			frame.MissionType:SetDrawLayer("ARTWORK")
-			frame.MissionType.b = CreateFrame("Frame", nil, frame)
-			frame.MissionType.b:SetTemplate("Default")
-			frame.MissionType.b:SetOutside(frame.MissionType)
-			frame.MissionType:SetParent(frame.MissionType.b)
-			--Create Backdrop
+
+			AS:SkinTexture(frame.MissionType, true)
+
 			AS:CreateBackdrop(frame, "Transparent")
 			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 8, -2)
 			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 2)
@@ -366,14 +331,9 @@ function AS:Blizzard_Alerts()
 			frame.Background:SetAlpha(0)
 			frame.glow:SetAlpha(0)
 			frame.shine:SetAlpha(0)
-			--Icon
-			frame.MissionType:SetTexCoord(unpack(AS.TexCoords))
-			frame.MissionType:SetDrawLayer("ARTWORK")
-			frame.MissionType.b = CreateFrame("Frame", nil, frame)
-			frame.MissionType.b:SetTemplate("Default")
-			frame.MissionType.b:SetOutside(frame.MissionType)
-			frame.MissionType:SetParent(frame.MissionType.b)
-			--Create Backdrop
+
+			AS:SkinTexture(frame.MissionType, true)
+
 			AS:CreateBackdrop(frame, "Transparent")
 			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 8, -2)
 			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 2)
@@ -494,7 +454,7 @@ function AS:Blizzard_Alerts()
 		frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		frame.Icon:SetDrawLayer("BORDER", 5)
 		frame.Icon:ClearAllPoints()
-		frame.Icon:SetInside(frame.BaseQualityBorder, 5, 5)
+		AS:SetInside(frame.Icon, frame.BaseQualityBorder, 5, 5)
 
 		-- Icon border
 		if not frame.Icon.b then

@@ -431,7 +431,7 @@ function AS:Blizzard_Options(event, addon)
 		HelpFrameCharacterStuckHearthstone:SetHighlightTexture(nil)
 		HelpFrameCharacterStuckHearthstone.SetHighlightTexture = AS.Noop
 		AS:SkinButton(HelpFrameCharacterStuckHearthstone)
-		HelpFrameCharacterStuckHearthstone.IconTexture:SetInside()
+		AS:SetInside(HelpFrameCharacterStuckHearthstone.IconTexture)
 		AS:SkinTexture(HelpFrameCharacterStuckHearthstone.IconTexture)
 
 		for _, Frame in pairs({ HelpFrameSubmitSuggestion, HelpFrameReportBug }) do
@@ -456,7 +456,7 @@ function AS:Blizzard_Options(event, addon)
 
 		for _, Button in pairs(NavButtons) do
 			AS:CreateBackdrop(Button)
-			Button.Backdrop:SetInside(Button, 3, 3)
+			AS:SetInside(Button.Backdrop, Button, 3, 3)
 			Button:SetNormalTexture('')
 			Button:SetPushedTexture('')
 			Button:SetHighlightTexture('')

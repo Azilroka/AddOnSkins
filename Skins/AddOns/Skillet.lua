@@ -23,7 +23,7 @@ function AS:Skillet()
 
 		if texture then
 			texture:ClearAllPoints()
-			texture:SetInside()
+			AS:SetInside(texture)
 			AS:SkinTexture(texture)
 		end
 	end
@@ -81,7 +81,7 @@ function AS:Skillet()
 		for _, object in pairs(Backdrops) do
 			AS:SkinBackdropFrame(object)
 			object.Backdrop:SetFrameLevel(object:GetFrameLevel())
-			object.Backdrop:SetInside()
+			AS:SetInside(object.Backdrop)
 		end
 
 		AS:SkinCloseButton(SkilletNotesCloseButton)

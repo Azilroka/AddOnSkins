@@ -10,13 +10,13 @@ function AS:PetBattleTeams()
 		AS:SkinFrame(PBT.mainFrame)
 --[[
 		AS:SkinButton(PBT.mainFrame.addTeamButton)
-		PBT.mainFrame.addTeamButton.icon:SetInside()
+		AS:SetInside(PBT.mainFrame.addTeamButton.icon)
 		AS:SkinTexture(PBT.mainFrame.addTeamButton.icon)
 
 		for _, object in pairs({'reviveButton', 'bandageButton'}) do
 			AS:SkinButton(PBT.mainFrame[object])
 			AS:SkinTexture(PBT.mainFrame[object].Icon)
-			PBT.mainFrame[object].Icon:SetInside()
+			AS:SetInside(PBT.mainFrame[object].Icon)
 			PBT.mainFrame[object].Border:SetTexture()
 		end
 

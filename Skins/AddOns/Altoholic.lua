@@ -5,7 +5,7 @@ if not AS:CheckAddOn('Altoholic') then return end
 local function SkinItemButton(obj, itemIDGetFunc)
 	AS:SkinTexture(obj.Icon)
 	AS:SkinFrame(obj)
-	obj.Icon:SetInside()
+	AS:SetInside(obj.Icon)
 	hooksecurefunc(obj:GetParent(), 'Show', function(self)
 		if self:GetID() then
 			local ItemID = itemIDGetFunc and itemIDGetFunc(self) or self.id
@@ -157,7 +157,7 @@ function AS:Altoholic(event, addon)
 				AS:SetTemplate(obj)
 				obj.IconBorder:SetTexture('')
 				AS:SkinTexture(obj.Background)
-				obj.Background:SetInside()
+				AS:SetInside(obj.Background)
 			end
 		)
 	end
@@ -188,7 +188,7 @@ function AS:Altoholic(event, addon)
 				obj.IconBorder:SetTexture('')
 				AS:SkinTexture(obj.Background)
 				obj.Background.SetTexCoord = AS.Noop
-				obj.Background:SetInside()
+				AS:SetInside(obj.Background)
 			end
 		)
 	end

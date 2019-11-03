@@ -14,12 +14,12 @@ function AS:InvenMount(event, addon)
 
 			if Button.checkbox.SetCheckedTexture then
 				Button.checkbox:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
-				Button.checkbox:GetCheckedTexture():SetInside(nil, -4, -4)
+				AS:SetInside(Button.checkbox:GetCheckedTexture(), nil, -4, -4)
 			end
-			
+
 			if Button.checkbox.SetDisabledTexture then
 				Button.checkbox:SetDisabledTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
-				Button.checkbox:GetDisabledTexture():SetInside(nil, -4, -4)
+				AS:SetInside(Button.checkbox:GetDisabledTexture(), nil, -4, -4)
 			end
 
 			Button.checkbox:HookScript('OnDisable', function(self)

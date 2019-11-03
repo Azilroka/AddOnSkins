@@ -9,13 +9,13 @@ function AS:Blizzard_TalkingHeadUI(event, addon)
 
 	TalkingHeadFrame.MainFrame.Model.ModelShadow = TalkingHeadFrame.MainFrame.Model:CreateTexture(nil, "OVERLAY", nil, 2)
 	TalkingHeadFrame.MainFrame.Model.ModelShadow:SetAtlas("Artifacts-BG-Shadow")
-	TalkingHeadFrame.MainFrame.Model.ModelShadow:SetOutside()
+	AS:SetOutside(TalkingHeadFrame.MainFrame.Model.ModelShadow)
 	TalkingHeadFrame.MainFrame.Model.PortraitBg:Hide()
 
 	AS:SkinCloseButton(TalkingHeadFrame.MainFrame.CloseButton)
 
 	AS:SkinBackdropFrame(TalkingHeadFrame.BackgroundFrame, nil, nil, true)
-	TalkingHeadFrame.BackgroundFrame.Backdrop:SetInside(TalkingHeadFrame.BackgroundFrame, 8, 8)
+	AS:SetInside(TalkingHeadFrame.BackgroundFrame.Backdrop, TalkingHeadFrame.BackgroundFrame, 8, 8)
 	AS:CreateShadow(TalkingHeadFrame.BackgroundFrame.Backdrop)
 
 	TalkingHeadFrame.NameFrame.Name:SetTextColor(1, 0.82, 0.02)

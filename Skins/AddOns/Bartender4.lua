@@ -61,7 +61,7 @@ function AS:Bartender4()
 		Button:UnregisterEvent("ACTIONBAR_HIDEGRID")
 
 		AS:SkinTexture(Icon)
-		Icon:SetInside()
+		AS:SetInside(Icon)
 
 		if (Normal) then
 			Normal:ClearAllPoints()

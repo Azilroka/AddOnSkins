@@ -16,7 +16,7 @@ function AS:Baggins(event)
 	function AddOnSkins_BagginsSkin:SkinBag(frame)
 		if not frame.Backdrop then
 			AS:SkinBackdropFrame(frame)
-			frame.Backdrop:SetInside()
+			AS:SetInside(frame.Backdrop)
 		end
 
 		AS:SkinCloseButton(frame.closebutton)
@@ -44,7 +44,7 @@ function AS:Baggins(event)
 		AS:StyleButton(button)
 
 		AS:SkinTexture(button.icon)
-		button.icon:SetInside()
+		AS:SetInside(button.icon)
 
 		button.IconBorder:SetAlpha(0)
 

@@ -26,7 +26,7 @@ function AS:Blizzard_Bags()
 			AS:SkinTexture(ItemButton.icon)
 			ItemButton:SetNormalTexture('')
 			ItemButton:SetPushedTexture('')
-			ItemButton.icon:SetInside()
+			AS:SetInside(ItemButton.icon)
 
 			ItemButton.IconBorder:SetAlpha(0)
 			ItemButton.NewItemTexture:SetAtlas(nil)
@@ -123,7 +123,7 @@ function AS:Blizzard_Bags()
 			end
 			if Portrait:GetNormalTexture() then
 				AS:SkinTexture(Portrait:GetNormalTexture())
-				Portrait:GetNormalTexture():SetInside()
+				AS:SetInside(Portrait:GetNormalTexture())
 			end
 			for j = 1, 30 do
 				local ItemButton = _G["ContainerFrame"..i.."Item"..j]
@@ -150,9 +150,9 @@ function AS:Blizzard_Bags()
 	_G.BagItemAutoSortButton:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
 	_G.BagItemAutoSortButton:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
 	AS:SkinTexture(_G.BagItemAutoSortButton:GetNormalTexture())
-	_G.BagItemAutoSortButton:GetNormalTexture():SetInside()
+	AS:SetInside(_G.BagItemAutoSortButton:GetNormalTexture())
 	AS:SkinTexture(_G.BagItemAutoSortButton:GetPushedTexture())
-	_G.BagItemAutoSortButton:GetPushedTexture():SetInside()
+	AS:SetInside(_G.BagItemAutoSortButton:GetPushedTexture())
 	_G.BagItemAutoSortButton:SetSize(22, 22)
 
 	_G.BagItemAutoSortButton:SetScript('OnShow', function(self)
@@ -164,9 +164,7 @@ function AS:Blizzard_Bags()
 
 	for i = 1, 3 do
 		local Token = _G["BackpackTokenFrameToken"..i]
-		AS:SkinTexture(Token.icon)
-		AS:CreateBackdrop(Token, 'Default')
-		Token.Backdrop:SetOutside(Token.icon)
+		AS:SkinTexture(Token.icon, true)
 		Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 3, 0)
 	end
 
@@ -186,9 +184,9 @@ function AS:Blizzard_Bags()
 	_G.BankItemAutoSortButton:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
 	_G.BankItemAutoSortButton:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
 	AS:SkinTexture(_G.BankItemAutoSortButton:GetNormalTexture())
-	_G.BankItemAutoSortButton:GetNormalTexture():SetInside()
+	AS:SetInside(_G.BankItemAutoSortButton:GetNormalTexture())
 	AS:SkinTexture(_G.BankItemAutoSortButton:GetPushedTexture())
-	_G.BankItemAutoSortButton:GetPushedTexture():SetInside()
+	AS:SetInside(_G.BankItemAutoSortButton:GetPushedTexture())
 	_G.BankItemAutoSortButton:SetSize(20, 20)
 	_G.BankItemAutoSortButton:SetPoint("LEFT", _G.BankItemSearchBox, "RIGHT", 4, 0)
 
@@ -198,7 +196,7 @@ function AS:Blizzard_Bags()
 		AS:SkinFrame(BankBag)
 		AS:StyleButton(BankBag)
 		AS:SkinTexture(BankBag.icon)
-		BankBag.icon:SetInside()
+		AS:SetInside(BankBag.icon)
 		hooksecurefunc(BankBag.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
 			BankBag:SetBackdropBorderColor(r, g, b)
 		end)
@@ -212,7 +210,7 @@ function AS:Blizzard_Bags()
 		local ItemButton = _G["BankFrameItem"..i]
 		AS:SkinFrame(ItemButton)
 		AS:SkinTexture(ItemButton.icon)
-		ItemButton.icon:SetInside()
+		AS:SetInside(ItemButton.icon)
 
 		ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
 		ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
@@ -235,7 +233,7 @@ function AS:Blizzard_Bags()
 				local ItemButton = _G["ReagentBankFrameItem"..i]
 				AS:SkinFrame(ItemButton)
 				AS:SkinTexture(ItemButton.icon)
-				ItemButton.icon:SetInside()
+				AS:SetInside(ItemButton.icon)
 
 				ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
 				ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)

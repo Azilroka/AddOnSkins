@@ -12,15 +12,15 @@ function AS:Quartz()
 			self.IconBorder = CreateFrame("Frame", nil, self)
 			AS:SkinFrame(self.IconBorder)
 			self.IconBorder:SetFrameLevel(0)
-			self.IconBorder:SetOutside(self.Icon)
+			AS:SetOutside(self.IconBorder, self.Icon)
 			AS:SkinBackdropFrame(self.Bar, nil, true)
 			self.isSkinned = true
 		end
- 		if self.config.hideicon then
- 			self.IconBorder:Hide()
- 		else
- 			self.IconBorder:Show()
- 		end
+		if self.config.hideicon then
+			self.IconBorder:Hide()
+		else
+			self.IconBorder:Show()
+		end
 		if Quartz3GCDBar and not Quartz3GCDBar.isSkinned then AS:SkinBackdropFrame(Quartz3GCDBar, nil, true) Quartz3GCDBar.isSkinned = true end
 	end
 

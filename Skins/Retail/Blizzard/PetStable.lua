@@ -26,7 +26,7 @@ function AS:Blizzard_PetStable()
 			AS:StyleButton(Button)
 
 			AS:SkinTexture(Icon)
-			Icon:SetInside()
+			AS:SetInside(Icon)
 
 			if Button.Border then
 				Button.Border:Hide()

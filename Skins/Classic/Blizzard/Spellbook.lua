@@ -41,12 +41,12 @@ function AS:Blizzard_Spellbook()
 
 		AS:SkinButton(Button, true)
 		AS:SkinTexture(Icon)
-		Icon:SetInside()
+		AS:SetInside(Icon)
 
 		Button:SetCheckedTexture('')
 		Button:SetPushedTexture('')
 
-		Button.cooldown:SetInside()
+		AS:SetInside(Button.cooldown)
 
 		Button.AutoCastShine = CreateFrame('Frame', '$parentShine', Button, 'AutoCastShineTemplate')
 		Button.AutoCastShine:SetAllPoints()
@@ -92,7 +92,7 @@ function AS:Blizzard_Spellbook()
 			local Tab = _G["SpellBookSkillLineTab"..i]
 			if Tab:GetNormalTexture() then
 				AS:SkinTexture(Tab:GetNormalTexture())
-				Tab:GetNormalTexture():SetInside()
+				AS:SetInside(Tab:GetNormalTexture())
 			end
 		end
 	end)

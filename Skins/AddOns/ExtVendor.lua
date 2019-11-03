@@ -9,7 +9,7 @@ function AS:ExtVendor()
 	AS:SkinButton(MerchantFrameSellJunkButton)
 	AS:SkinTexture(MerchantFrameSellJunkButtonIcon)
 
-	MerchantFrameSellJunkButtonIcon:SetInside()
+	AS:SetInside(MerchantFrameSellJunkButtonIcon)
 
 	AS:SkinEditBox(MerchantFrameSearchBox)
 
@@ -25,7 +25,7 @@ function AS:ExtVendor()
 		AS:SkinFrame(Slot.ItemButton)
 		AS:StyleButton(Slot.ItemButton)
 		AS:SkinTexture(Slot.ItemButton.icon)
-		Slot.ItemButton.icon:SetInside()
+		AS:SetInside(Slot.ItemButton.icon)
 		Slot.ItemButton:SetPoint("TOPLEFT", Slot, "TOPLEFT", 4, -4)
 		Slot.ItemButton.IconBorder:SetAlpha(0)
 
@@ -33,7 +33,7 @@ function AS:ExtVendor()
 		hooksecurefunc(Slot.ItemButton.IconBorder, 'Hide', function(self) Slot.ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
 		_G["MerchantItem"..i.."MoneyFrame"]:ClearAllPoints()
-		_G["MerchantItem"..i.."MoneyFrame"]:Point("BOTTOMLEFT", Slot.ItemButton, "BOTTOMRIGHT", 3, 0)
+		_G["MerchantItem"..i.."MoneyFrame"]:SetPoint("BOTTOMLEFT", Slot.ItemButton, "BOTTOMRIGHT", 3, 0)
 
 		for j = 1, 3 do
 			AS:CreateBackdrop(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"])

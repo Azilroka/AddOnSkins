@@ -72,8 +72,7 @@ function AS:Healium()
 		local texture = icon:GetTexture()
 		AS:SkinIconButton(self, true)
 		icon:SetTexture(texture)
-		icon:ClearAllPoints()
-		icon:SetInside()
+		AS:SetInside(icon)
 		skinnedFrames[self:GetName()] = true
 	end
 
@@ -87,8 +86,7 @@ function AS:Healium()
 		local border = self.border
 		AS:SkinIconButton(self, true)
 		self:SetSize(28,28)
-		icon:ClearAllPoints()
-		icon:SetInside()
+		AS:SetInside(icon)
 		count:ClearAllPoints()
 		count:SetPoint('BOTTOMRIGHT', icon, 'BOTTOMRIGHT', -1, 1)
 		skinnedFrames[self:GetName()] = true

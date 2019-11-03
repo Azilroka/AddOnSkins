@@ -179,7 +179,7 @@ function AS:Blizzard_AuctionUI(event, addon)
 	_G.AuctionsItemButton.IconBorder:SetAlpha(0)
 	hooksecurefunc(_G.AuctionsItemButton, "SetNormalTexture", function(self, texture)
 		if self:GetNormalTexture() then
-			self:GetNormalTexture():SetInside()
+			AS:SetInside(self:GetNormalTexture())
 			AS:SkinTexture(self:GetNormalTexture())
 		end
 	end)
@@ -196,13 +196,13 @@ function AS:Blizzard_AuctionUI(event, addon)
 	AS:StyleButton(_G.AuctionProgressFrameCancelButton)
 	AS:SetTemplate(_G.AuctionProgressFrameCancelButton, 'Default')
 	_G.AuctionProgressFrameCancelButton:SetHitRectInsets(0, 0, 0, 0)
-	_G.AuctionProgressFrameCancelButton:GetNormalTexture():SetInside()
+	AS:SetInside(_G.AuctionProgressFrameCancelButton:GetNormalTexture())
 	_G.AuctionProgressFrameCancelButton:GetNormalTexture():SetTexture([[Interface\PaperDollInfoFrame\UI-GearManager-LeaveItem-Transparent]])
 	_G.AuctionProgressFrameCancelButton:SetSize(28, 28)
 	_G.AuctionProgressFrameCancelButton:SetPoint("LEFT", _G.AuctionProgressBar, "RIGHT", 8, 0)
 
 	AS:CreateBackdrop(_G.AuctionProgressFrame)
-	_G.AuctionProgressFrame.Backdrop:SetOutside(_G.AuctionProgressBarIcon)
+	AS:SetOutside(_G.AuctionProgressFrame.Backdrop, _G.AuctionProgressBarIcon)
 	_G.AuctionProgressFrame.Backdrop:SetFrameLevel(_G.AuctionProgressFrame:GetFrameLevel())
 
 	_G.AuctionProgressBar.Icon:SetSize(36, 36)
@@ -237,7 +237,7 @@ function AS:Blizzard_AuctionUI(event, addon)
 			AS:StyleButton(ItemButton)
 
 			AS:SkinTexture(Texture)
-			Texture:SetInside()
+			AS:SetInside(Texture)
 
 			ItemCount:SetDrawLayer("OVERLAY")
 			hooksecurefunc(Name, 'SetVertexColor', function(self, r, g, b)

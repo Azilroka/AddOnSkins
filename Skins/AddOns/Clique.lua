@@ -71,7 +71,7 @@ function AS:Clique()
 	CliqueSpellTab:SetNormalTexture([[Interface\AddOns\Clique\images\icon_square_64]])
 	AS:SkinTexture(CliqueSpellTab:GetNormalTexture())
 	CliqueSpellTab:GetNormalTexture():ClearAllPoints()
-	CliqueSpellTab:GetNormalTexture():SetInside()
+	AS:SetInside(CliqueSpellTab:GetNormalTexture())
 	AS:StripTextures(CliqueConfigInset)
 end
 

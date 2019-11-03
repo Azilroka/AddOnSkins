@@ -32,7 +32,7 @@ function AS:Blizzard_GarrisonUI(event, addon)
 
 	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.IconBG:SetTexture()
 	AS:SkinTexture(GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon)
-	GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon:SetInside()
+	AS:SetInside(GarrisonCapacitiveDisplayFrame.CapacitiveDisplay.ShipmentIconFrame.Icon)
 
 	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.DecrementButton, 'left')
 	AS:SkinArrowButton(GarrisonCapacitiveDisplayFrame.IncrementButton, 'right')

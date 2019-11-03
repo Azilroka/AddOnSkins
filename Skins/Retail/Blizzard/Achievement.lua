@@ -19,7 +19,7 @@ function AS:SkinAchievement(Achievement, BiggerIcon)
 
 	Achievement:SetBackdrop(nil)
 	Achievement.SetBackdrop = AS.Noop
-	Achievement.Backdrop:SetInside(Achievement, 2, 2)
+	AS:SetInside(Achievement.Backdrop, Achievement, 2, 2)
 
 	AS:SetTemplate(Achievement.icon)
 	local Size = BiggerIcon and 54 or 38
@@ -32,7 +32,7 @@ function AS:SkinAchievement(Achievement, BiggerIcon)
 
 	AS:SkinTexture(Achievement.icon.texture)
 
-	Achievement.icon.texture:SetInside()
+	AS:SetInside(Achievement.icon.texture)
 
 	if Achievement.titleBar then
 		hooksecurefunc(Achievement.titleBar, 'SetTexture', function(self, texture)

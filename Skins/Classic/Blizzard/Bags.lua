@@ -27,7 +27,7 @@ function AS:Blizzard_Bags()
 			AS:SkinTexture(ItemButton.icon)
 			ItemButton:SetNormalTexture('')
 			ItemButton:SetPushedTexture('')
-			ItemButton.icon:SetInside()
+			AS:SetInside(ItemButton.icon)
 
 			ItemButton.IconBorder:SetAlpha(0)
 			ItemButton.NewItemTexture:SetAtlas(nil)
@@ -126,7 +126,7 @@ function AS:Blizzard_Bags()
 			end
 			if Portrait:GetNormalTexture() then
 				AS:SkinTexture(Portrait:GetNormalTexture())
-				Portrait:GetNormalTexture():SetInside()
+				AS:SetInside(Portrait:GetNormalTexture())
 			end
 			for j = 1, 30 do
 				local ItemButton = _G["ContainerFrame"..i.."Item"..j]
@@ -159,7 +159,7 @@ function AS:Blizzard_Bags()
 		if ItemButton:IsObjectType("Button") then
 			AS:SkinFrame(ItemButton)
 			AS:SkinTexture(ItemButton.icon)
-			ItemButton.icon:SetInside()
+			AS:SetInside(ItemButton.icon)
 
 			ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
 			ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)

@@ -290,7 +290,7 @@ function AS:CreateBackdrop(Frame, Template, Texture)
 	local Parent = Frame.IsObjectType and Frame:IsObjectType('Texture') and Frame:GetParent() or Frame
 
 	local Backdrop = CreateFrame('Frame', nil, Parent)
-	Backdrop:SetOutside(Frame)
+	AS:SetOutside(Backdrop, Frame)
 	AS:SetTemplate(Backdrop, Template, Texture)
 
 	if (Parent:GetFrameLevel() - 1) >= 0 then
@@ -313,11 +313,11 @@ function AS:CreateShadow(Frame, NoRegister, Inverted)
 	if Inverted then
 		Shadow:SetBackdrop({ bgFile = [[Interface\AddOns\AddOnSkins\Media\Textures\InvertedShadow]] })
 		Shadow:SetFrameLevel(FrameLevel + 1)
-		Shadow:SetInside(Frame)
+		AS:SetInside(Shadow, Frame)
 	else
 		Shadow:SetBackdrop({ edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = 3 })
 		Shadow:SetFrameLevel(FrameLevel)
-		Shadow:SetOutside(Frame)
+		AS:SetOutside(Shadow, Frame)
 	end
 
 	Shadow.Inverted = Inverted
@@ -431,13 +431,13 @@ function AS:SetTemplate(Frame, Template, Texture)
 			AS:SetBackdropBorderColor(Frame[Inset], 0, 0, 0, 1)
 		end
 
-		Frame.InsideBorder:SetInside(Frame, AS.Mult, AS.Mult)
+		AS:SetInside(Frame.InsideBorder, Frame, AS.Mult, AS.Mult)
 		Frame.InsideBorder:SetFrameLevel(Frame:GetFrameLevel() + 1)
 
 		if AS:CheckOption('Theme') == 'TwoPixel' then
-			Frame.OutsideBorder:SetOutside(Frame, 0, 0)
+			AS:SetOutside(Frame.OutsideBorder, Frame, 0, 0)
 		else
-			Frame.OutsideBorder:SetOutside(Frame, AS.Mult, AS.Mult)
+			AS:SetOutside(Frame.OutsideBorder, Frame, AS.Mult, AS.Mult)
 		end
 	end
 
@@ -513,19 +513,19 @@ function AS:SkinArrowButton(object, Arrow)
 
 			local Normal, Disabled, Pushed = Button:GetNormalTexture(), Button:GetDisabledTexture(), Button:GetPushedTexture()
 
-			Normal:SetInside()
+			AS:SetInside(Normal)
 			Normal:SetTexCoord(0, 1, 0, 1)
 			Normal.SetTexCoord = AS.Noop
 			Normal:SetVertexColor(1, 1, 1)
 			Normal:AddMaskTexture(Mask)
 
-			Disabled:SetInside()
+			AS:SetInside(Disabled)
 			Disabled:SetTexCoord(0, 1, 0, 1)
 			Disabled.SetTexCoord = AS.Noop
 			Disabled:SetVertexColor(.3, .3, .3)
 			Disabled:AddMaskTexture(Mask)
 
-			Pushed:SetInside()
+			AS:SetInside(Pushed)
 			Pushed:SetTexCoord(0, 1, 0, 1)
 			Pushed.SetTexCoord = AS.Noop
 			Pushed:SetVertexColor(unpack(AS.Color))
@@ -616,7 +616,7 @@ function AS:SkinCheckBox(CheckBox)
 	if CheckBox.isSkinned then return end
 	AS:SkinBackdropFrame(CheckBox, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
-	CheckBox.Backdrop:SetInside(CheckBox, 4, 4)
+	AS:SetInside(CheckBox.Backdrop, CheckBox, 4, 4)
 
 	CheckBox:SetCheckedTexture('Interface\\Buttons\\UI-CheckBox-Check')
 	CheckBox:SetDisabledCheckedTexture('Interface\\Buttons\\UI-CheckBox-Check-Disabled')
@@ -674,11 +674,11 @@ function AS:SkinCloseButton(Button, Reposition)
 
 	local Normal, Pushed = Button:GetNormalTexture(), Button:GetPushedTexture()
 
-	Normal:SetInside(Button.Backdrop)
+	AS:SetInside(Normal, Button.Backdrop)
 	Normal:SetVertexColor(1, 1, 1)
 	Normal:AddMaskTexture(Mask)
 
-	Pushed:SetInside(Button.Backdrop)
+	AS:SetInside(Pushed, Button.Backdrop)
 	Pushed:SetVertexColor(1, .2, .2)
 	Pushed:AddMaskTexture(Mask)
 
@@ -766,7 +766,7 @@ function AS:SkinIconButton(Button)
 		AS:SkinButton(Button, true)
 		Icon:SetTexture(Texture)
 		AS:SkinTexture(Icon)
-		Icon:SetInside(Button)
+		AS:SetInside(Icon, Button)
 		Button.isSkinned = true
 	end
 end
@@ -787,11 +787,11 @@ function AS:SkinMaxMinFrame(frame)
 
 			Button:SetNormalTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
 			Button:GetNormalTexture():SetRotation(AS.ArrowRotation[Direction])
-			Button:GetNormalTexture():SetInside(Button, 2, 2)
+			AS:SetInside(Button:GetNormalTexture(), Button, 2, 2)
 
 			Button:SetPushedTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
 			Button:GetPushedTexture():SetRotation(AS.ArrowRotation[Direction])
-			Button:GetPushedTexture():SetInside()
+			AS:SetInside(Button:GetPushedTexture())
 
 			Button:HookScript('OnEnter', function(self)
 				self:SetBackdropBorderColor(unpack(AS.Color))
@@ -832,14 +832,14 @@ function AS:SkinRadioButton(Button)
 
 	Check:SetVertexColor(unpack(AS.Color))
 	Check:SetTexCoord(0, 1, 0, 1)
-	Check:SetInside()
+	AS:SetInside(Check)
 	Check:AddMaskTexture(InsideMask)
 
 	Highlight:SetTexCoord(0, 1, 0, 1)
 	Highlight:SetVertexColor(1, 1, 1)
 	Highlight:AddMaskTexture(InsideMask)
 
-	Normal:SetOutside()
+	AS:SetOutside(Normal)
 	Normal:SetTexCoord(0, 1, 0, 1)
 	Normal:SetVertexColor(unpack(AS.BorderColor))
 	Normal:AddMaskTexture(OutsideMask)
@@ -966,12 +966,12 @@ function AS:StyleButton(Button)
 	if Button.SetHighlightTexture then
 		Button:SetHighlightTexture(AS.Blank)
 		Button:GetHighlightTexture():SetVertexColor(1, 1, 1, .2)
-		Button:GetHighlightTexture():SetInside()
+		AS:SetInside(Button:GetHighlightTexture())
 		hooksecurefunc(Button, "SetHighlightTexture", function(f, t)
 			if t ~= AS.Blank then
 				Button:SetHighlightTexture(AS.Blank)
 				Button:GetHighlightTexture():SetVertexColor(1, 1, 1, .2)
-				Button:GetHighlightTexture():SetInside()
+				AS:SetInside(Button:GetHighlightTexture())
 			end
 		end)
 	end
@@ -979,12 +979,12 @@ function AS:StyleButton(Button)
 	if Button.SetPushedTexture then
 		Button:SetPushedTexture(AS.Blank)
 		Button:GetPushedTexture():SetVertexColor(.9, .8, .1, .5)
-		Button:GetPushedTexture():SetInside()
+		AS:SetInside(Button:GetPushedTexture())
 		hooksecurefunc(Button, "SetPushedTexture", function(f, t)
 			if t ~= AS.Blank then
 				Button:SetPushedTexture(AS.Blank)
 				Button:GetPushedTexture():SetVertexColor(.9, .8, .1, .5)
-				Button:GetPushedTexture():SetInside()
+				AS:SetInside(Button:GetPushedTexture())
 			end
 		end)
 	end
@@ -992,12 +992,12 @@ function AS:StyleButton(Button)
 	if Button.GetCheckedTexture then
 		Button:SetCheckedTexture(AS.Blank)
 		Button:GetCheckedTexture():SetVertexColor(0, 1, 0, .5)
-		Button:GetCheckedTexture():SetInside()
+		AS:SetInside(Button:GetCheckedTexture())
 		hooksecurefunc(Button, "SetCheckedTexture", function(f, t)
 			if t ~= AS.Blank then
 				Button:SetCheckedTexture(AS.Blank)
 				Button:GetCheckedTexture():SetVertexColor(0, 1, 0, .5)
-				Button:GetCheckedTexture():SetInside()
+				AS:SetInside(Button:GetCheckedTexture())
 			end
 		end)
 	end
@@ -1005,7 +1005,7 @@ function AS:StyleButton(Button)
 	local Cooldown = Button:GetName() and _G[Button:GetName()..'Cooldown'] or Button.Cooldown or Button.cooldown or nil
 
 	if Cooldown then
-		Cooldown:SetInside()
+		AS:SetInside(Cooldown)
 		if Cooldown.SetSwipeColor then
 			Cooldown:SetSwipeColor(0, 0, 0, 1)
 		end

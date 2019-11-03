@@ -25,7 +25,7 @@ function AS:Blizzard_TimeManager(event, addon)
 	AS:StripTextures(TimeManagerStopwatchFrame)
 	AS:SetTemplate(TimeManagerStopwatchCheck)
 	AS:SkinTexture(TimeManagerStopwatchCheck:GetNormalTexture())
-	TimeManagerStopwatchCheck:GetNormalTexture():SetInside()
+	AS:SetInside(TimeManagerStopwatchCheck:GetNormalTexture())
 	AS:StyleButton(TimeManagerStopwatchCheck)
 
 	AS:SkinBackdropFrame(StopwatchFrame)

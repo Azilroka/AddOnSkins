@@ -11,7 +11,7 @@ function AS:AutoBar(event, addon)
 				AS:StyleButton(button.frame)
 				button.frame:DisableDrawLayer('ARTWORK')
 				AS:SkinTexture(button.frame.icon)
-				button.frame.icon:SetInside(button.frame, 1, 1)
+				AS:SetInside(button.frame.icon, button.frame, 1, 1)
 				button.IsStyled = true
 			end
 			if button.frame.popupHeader then
@@ -22,7 +22,7 @@ function AS:AutoBar(event, addon)
 						AS:StyleButton(popup.frame)
 						popup.frame:DisableDrawLayer('ARTWORK')
 						AS:SkinTexture(popup.frame.icon)
-						popup.frame.icon:SetInside(popup.frame, 1, 1)
+						AS:SetInside(popup.frame.icon, popup.frame, 1, 1)
 						popup.IsStyled = true
 					end
 				end

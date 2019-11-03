@@ -15,9 +15,8 @@ function AS:Archy()
 		for _, object in pairs({"surveyButton", "crateButton", "loritemButton"}) do
 			AS:SkinButton(ArchyDistanceIndicatorFrame[object])
 			ArchyDistanceIndicatorFrame[object]:SetFrameLevel(ArchyDistanceIndicatorFrame:GetFrameLevel() + 3)
-			ArchyDistanceIndicatorFrame[object].icon:SetInside()
-			ArchyDistanceIndicatorFrame[object].icon:SetDrawLayer('OVERLAY')
-			ArchyDistanceIndicatorFrame[object].icon:SetTexCoord(unpack(AS.TexCoords))
+			AS:SetInside(ArchyDistanceIndicatorFrame[object].icon)
+			AS:SkinTexture(ArchyDistanceIndicatorFrame[object].icon)
 		end
 	end
 
@@ -38,7 +37,7 @@ function AS:Archy()
 					if not icon.isSkinned then
 						AS:SkinFrame(icon, false, true)
 						AS:SkinTexture(icon.texture)
-						icon.texture:SetInside()
+						AS:SetInside(icon.texture)
 						icon.isSkinned = true
 					end
 
@@ -48,10 +47,10 @@ function AS:Archy()
 					end
 
 					if solveButton:GetNormalTexture() then
-						solveButton:GetNormalTexture():SetTexCoord(unpack(AS.TexCoords))
-						solveButton:GetNormalTexture():SetInside()
-						solveButton:GetDisabledTexture():SetTexCoord(unpack(AS.TexCoords))
-						solveButton:GetDisabledTexture():SetInside()
+						AS:SkinTexture(solveButton:GetNormalTexture())
+						AS:SetInside(solveButton:GetNormalTexture())
+						AS:SkinTexture(solveButton:GetDisabledTexture())
+						AS:SetInside(solveButton:GetDisabledTexture())
 					end
 
 					icon:SetSize(solveButton:GetHeight(),solveButton:GetHeight())

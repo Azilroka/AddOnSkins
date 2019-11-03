@@ -107,7 +107,7 @@ function AS:Blizzard_Calendar(event, addon)
 			local buttonIcon = button:GetNormalTexture()
 			buttonIcon:SetTexture("Interface\\Glues\\CharacterCreate\\UI-CharacterCreate-Classes")
 			buttonIcon:SetTexCoord(tcoords[1] + 0.015, tcoords[2] - 0.02, tcoords[3] + 0.018, tcoords[4] - 0.02)
-			buttonIcon:SetInside()
+			AS:SetInside(buttonIcon)
 		end
 	end)
 

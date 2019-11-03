@@ -11,7 +11,7 @@ function AS:Blizzard_BattlefieldMap(event, addon)
 	local oldAlpha = GetOpacity()
 
 	AS:SkinBackdropFrame(BattlefieldMapFrame)
-	BattlefieldMapFrame.Backdrop:SetOutside(BattlefieldMapFrame.ScrollContainer)
+	AS:SetOutside(BattlefieldMapFrame.Backdrop, BattlefieldMapFrame.ScrollContainer)
 	BattlefieldMapFrame.Backdrop:SetBackdropColor(0, 0, 0, oldAlpha)
 
 	BattlefieldMapFrame:SetClampedToScreen(true)

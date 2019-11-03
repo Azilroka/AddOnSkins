@@ -10,7 +10,7 @@ function AS:acb_CastBar()
 		if Bar then
 			AS:StripTextures(Bar)
 			AS:CreateBackdrop(Bar)
-			Bar.Backdrop:SetOutside(Bar.icon)
+			AS:SetOutside(Bar.Backdrop, Bar.icon)
 			AS:SkinStatusBar(Bar.status)
 
 			if not AzCastBar_Config[Frame]['AddOnSkins'] then

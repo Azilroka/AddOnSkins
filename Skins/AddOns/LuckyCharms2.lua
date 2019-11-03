@@ -13,7 +13,7 @@ function AS:LuckyCharms2(event, addon)
 			AS:StyleButton(button)
 			button.Backdrop:SetAllPoints()
 			AS:SkinTexture(icon)
-			icon:SetInside()
+			AS:SetInside(icon)
 			button.isSkinned = true
 		end
 	end

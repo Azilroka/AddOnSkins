@@ -169,7 +169,7 @@ function AS:Blizzard_EncounterJournal(event, addon)
 			AS:SkinButton(Button)
 			scrollFrame["instance"..index].bgImage:SetTexCoord(.08, .6, .08, .6)
 			scrollFrame["instance"..index].bgImage:SetDrawLayer('ARTWORK')
-			scrollFrame["instance"..index].bgImage:SetInside()
+			AS:SetInside(scrollFrame["instance"..index].bgImage)
 			index = index + 1
 			Button = scrollFrame["instance"..index]
 		end

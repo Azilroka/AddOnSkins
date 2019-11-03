@@ -515,7 +515,7 @@ function AS:Blizzard_Alerts()
 		frame.Icon:SetTexCoord(0.1, 0.9, 0.1, 0.9)
 		frame.Icon:SetDrawLayer("BORDER", 5)
 		frame.Icon:ClearAllPoints()
-		frame.Icon:SetInside(frame.BaseQualityBorder, 5, 5)
+		AS:SetInside(frame.Icon, frame.BaseQualityBorder, 5, 5)
 
 		-- Icon border
 		if not frame.Icon.b then

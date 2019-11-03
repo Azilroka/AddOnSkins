@@ -18,7 +18,7 @@ function AS:Ovale()
         end
         if self.icone then
             AS:SkinTexture(self.icone)
-            self.icone:SetInside(self.Backdrop)
+            AS:SetInside(self.icone)
         end
 	end)
 end

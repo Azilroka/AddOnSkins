@@ -40,7 +40,7 @@ function AS:Blizzard_Others()
 		AS:SkinFrame(Popup.ItemFrame)
 		AS:StyleButton(Popup.ItemFrame)
 		AS:SkinTexture(Popup.ItemFrame.icon)
-		Popup.ItemFrame.icon:SetInside()
+		AS:SetInside(Popup.ItemFrame.icon)
 	end
 
 	AS:SetTemplate(_G["GeneralDockManagerOverflowButtonList"])
@@ -55,7 +55,7 @@ function AS:Blizzard_Others()
 		local Region = select(i, GameMenuFrame:GetRegions())
 		if Region.IsObjectType and Region:IsObjectType('FontString') then
 			Region:SetTextColor(1, 1, 1)
-			GameMenuFrameHeader.Backdrop:SetOutside(Region, 24, 6)
+			AS:SetOutside(GameMenuFrameHeader.Backdrop, Region, 24, 6)
 			GameMenuFrameHeader.Backdrop:SetFrameLevel(GameMenuFrame:GetFrameLevel())
 		end
 	end
@@ -131,13 +131,13 @@ function AS:Blizzard_Others()
 					check:SetVertexColor(r, g, b, 1)
 					check:SetSize(20, 20)
 					check:SetDesaturated(true)
-					check.Backdrop:SetInside(check, 4, 4)
+					AS:SetInside(check.Backdrop, check, 4, 4)
 				else
 					check:SetTexture(AS.NormTex)
 					check:SetVertexColor(r, g, b, .6)
 					check:SetSize(10, 10)
 					check:SetDesaturated(false)
-					check.Backdrop:SetOutside(check)
+					AS:SetOutside(check.Backdrop, check)
 				end
 
 				check.Backdrop:Show()

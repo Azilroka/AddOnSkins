@@ -68,7 +68,7 @@ function AS:Blizzard_Character()
 		local icon = _G[Slot:GetName()..'IconTexture']
 --		local cooldown = _G[slot:GetName()..'Cooldown']
 		AS:SkinTexture(icon)
-		icon:SetInside()
+		AS:SetInside(icon)
 		AS:SkinFrame(Slot)
 		AS:StyleButton(Slot)
 		AS:CreateShadow(Slot, true)
@@ -105,7 +105,7 @@ function AS:Blizzard_Character()
 			end
 
 			if icon then
-				icon:SetInside()
+				AS:SetInside(icon)
 				icon:SetTexCoord(unpack(ResistanceCoords[i]))
 				icon:SetDrawLayer('ARTWORK')
 			end
@@ -312,7 +312,7 @@ function AS:Blizzard_Inspect(event, addon)
 			AS:SkinFrame(Slot)
 			AS:StyleButton(Slot)
 			AS:CreateShadow(Slot, true)
-			Slot.icon:SetInside()
+			AS:SetInside(Slot.icon)
 
 			Slot.IconBorder:SetAlpha(0)
 			hooksecurefunc(Slot.IconBorder, 'SetVertexColor', function(self, r, g, b) Slot:SetBackdropBorderColor(r, g, b) end)
@@ -362,7 +362,7 @@ function AS:Blizzard_TradeWindow()
 			AS:StyleButton(ItemButton)
 
 			AS:SkinTexture(ItemButton.icon)
-			ItemButton.icon:SetInside()
+			AS:SetInside(ItemButton.icon)
 			AS:CreateBackdrop(ItemButton)
 			ItemButton.Backdrop:SetBackdropColor(0, 0, 0, 0)
 			ItemButton.Backdrop:SetPoint("TOPLEFT", ItemButton, "TOPRIGHT", 4, 0)

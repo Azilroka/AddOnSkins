@@ -48,7 +48,7 @@ function AS:Blizzard_AzeriteRespecUI(event, addon)
 	ItemSlot:SetSize(64, 64)
 	ItemSlot:SetPoint("CENTER", AzeriteRespecFrame)
 
-	ItemSlot.Icon:SetInside()
+	AS:SetInside(ItemSlot.Icon)
 	ItemSlot.GlowOverlay:SetAlpha(0)
 
 	ItemSlot.Backdrop:SetBackdropColor(.6, 0, .6, .5)
