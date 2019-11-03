@@ -111,7 +111,7 @@ local function SkinRockConfig(lib)
 		AS:SkinScrollBar(self.base.treeView.scrollBar)
 		AS:SkinDropDownBox(self.base.addonChooser)
 
-		self.base.addonChooser.text:Height(20)
+		self.base.addonChooser.text:SetHeight(20)
 		AS:SetTemplate(self.base.addonChooser.text)
 		AS:SkinArrowButton(self.base.addonChooser.button)
 

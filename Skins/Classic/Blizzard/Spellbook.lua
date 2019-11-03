@@ -26,8 +26,8 @@ function AS:Blizzard_Spellbook()
 	for i = 1, 3 do
 		local Tab = _G["SpellBookFrameTabButton"..i]
 		AS:SkinTab(Tab)
-		Tab.Backdrop:Point('TOPLEFT', 14, -18)
-		Tab.Backdrop:Point('BOTTOMRIGHT', -14, 18)
+		Tab.Backdrop:SetPoint('TOPLEFT', 14, -18)
+		Tab.Backdrop:SetPoint('BOTTOMRIGHT', -14, 18)
 	end
 
 	SpellBookPageText:SetTextColor(1, 1, 1)

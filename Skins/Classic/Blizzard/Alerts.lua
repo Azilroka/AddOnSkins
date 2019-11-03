@@ -40,8 +40,8 @@ function AS:Blizzard_Alerts()
 	local function SkinAchievementAlert(frame)
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point("TOPLEFT", frame.Background, "TOPLEFT", -2, -6)
-			frame.Backdrop:Point("BOTTOMRIGHT", frame.Background, "BOTTOMRIGHT", -2, 6)
+			frame.Backdrop:SetPoint("TOPLEFT", frame.Background, "TOPLEFT", -2, -6)
+			frame.Backdrop:SetPoint("BOTTOMRIGHT", frame.Background, "BOTTOMRIGHT", -2, 6)
 		end
 
 		-- Background
@@ -59,14 +59,14 @@ function AS:Blizzard_Alerts()
 		AS:SkinTexture(frame.Icon.Texture, true)
 		frame.Icon.Overlay:SetAlpha(0)
 		frame.Icon.Texture:ClearAllPoints()
-		frame.Icon.Texture:Point("LEFT", frame, 7, 0)
+		frame.Icon.Texture:SetPoint("LEFT", frame, 7, 0)
 	end
 
 	local function SkinCriteriaAlert(frame)
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point("TOPLEFT", frame, "TOPLEFT", -2, -6)
-			frame.Backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
+			frame.Backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -2, -6)
+			frame.Backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
 		end
 
 		frame.Unlocked:SetTextColor(1, 1, 1)
@@ -83,8 +83,8 @@ function AS:Blizzard_Alerts()
 	local function SkinDungeonCompletionAlert(frame)
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point("TOPLEFT", frame, "TOPLEFT", -2, -6)
-			frame.Backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
+			frame.Backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -2, -6)
+			frame.Backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
 		end
 
 		frame.shine:SetAlpha(0)
@@ -101,14 +101,14 @@ function AS:Blizzard_Alerts()
 		-- Icon
 		AS:SkinTexture(frame.dungeonTexture, true)
 		frame.dungeonTexture:ClearAllPoints()
-		frame.dungeonTexture:Point("LEFT", frame, 7, 0)
+		frame.dungeonTexture:SetPoint("LEFT", frame, 7, 0)
 	end
 
 	local function SkinGuildChallengeAlert(frame)
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point("TOPLEFT", frame, "TOPLEFT", -2, -6)
-			frame.Backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
+			frame.Backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", -2, -6)
+			frame.Backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -2, 6)
 		end
 
 		-- Background
@@ -128,8 +128,8 @@ function AS:Blizzard_Alerts()
 		if not EmblemIcon.b then
 			EmblemIcon.b = CreateFrame("Frame", nil, frame)
 			EmblemIcon.b:SetTemplate("Default")
-			EmblemIcon.b:Point("TOPLEFT", EmblemIcon, "TOPLEFT", -3, 3)
-			EmblemIcon.b:Point("BOTTOMRIGHT", EmblemIcon, "BOTTOMRIGHT", 3, -2)
+			EmblemIcon.b:SetPoint("TOPLEFT", EmblemIcon, "TOPLEFT", -3, 3)
+			EmblemIcon.b:SetPoint("BOTTOMRIGHT", EmblemIcon, "BOTTOMRIGHT", 3, -2)
 			EmblemIcon:SetParent(EmblemIcon.b)
 		end
 
@@ -139,8 +139,8 @@ function AS:Blizzard_Alerts()
 	local function SkinInvasionAlert(frame)
 		if not frame.isSkinned then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point("TOPLEFT", frame, "TOPLEFT", 4, 4)
-			frame.Backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -7, 6)
+			frame.Backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", 4, 4)
+			frame.Backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -7, 6)
 			--Background contains the item border too, so have to remove it
 			local region, icon = frame:GetRegions()
 			if region and region:GetObjectType() == "Texture" then
@@ -161,8 +161,8 @@ function AS:Blizzard_Alerts()
 	local function SkinScenarioAlert(frame)
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point("TOPLEFT", frame, "TOPLEFT", 4, 4)
-			frame.Backdrop:Point("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -7, 6)
+			frame.Backdrop:SetPoint("TOPLEFT", frame, "TOPLEFT", 4, 4)
+			frame.Backdrop:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -7, 6)
 		end
 
 		-- Background
@@ -182,7 +182,7 @@ function AS:Blizzard_Alerts()
 		-- Icon
 		AS:SkinTexture(frame.dungeonTexture, true)
 		frame.dungeonTexture:ClearAllPoints()
-		frame.dungeonTexture:Point("LEFT", frame.Backdrop, 9, 0)
+		frame.dungeonTexture:SetPoint("LEFT", frame.Backdrop, 9, 0)
 	end
 
 	local function SkinWorldQuestCompleteAlert(frame)
@@ -225,8 +225,8 @@ function AS:Blizzard_Alerts()
 			end
 			--Create Backdrop
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 16, -3)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -16, 16)
+			frame.Backdrop:SetPoint('TOPLEFT', frame, 'TOPLEFT', 16, -3)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -16, 16)
 
 			frame.PortraitFrame.PortraitRing:Hide()
 			frame.PortraitFrame.PortraitRingQuality:SetTexture("")
@@ -234,12 +234,12 @@ function AS:Blizzard_Alerts()
 
 			local level = frame.PortraitFrame.Level
 			level:ClearAllPoints()
-			level:Point("BOTTOM", frame.PortraitFrame, 0, 12)
+			level:SetPoint("BOTTOM", frame.PortraitFrame, 0, 12)
 
 			local squareBG = CreateFrame("Frame", nil, frame.PortraitFrame)
 			squareBG:SetFrameLevel(frame.PortraitFrame:GetFrameLevel()-1)
-			squareBG:Point("TOPLEFT", 3, -3)
-			squareBG:Point("BOTTOMRIGHT", -3, 11)
+			squareBG:SetPoint("TOPLEFT", 3, -3)
+			squareBG:SetPoint("BOTTOMRIGHT", -3, 11)
 			squareBG:SetTemplate("Default")
 			frame.PortraitFrame.squareBG = squareBG
 
@@ -270,8 +270,8 @@ function AS:Blizzard_Alerts()
 			frame.Background:SetAlpha(0)
 			--Create Backdrop
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 16, -3)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -16, 16)
+			frame.Backdrop:SetPoint('TOPLEFT', frame, 'TOPLEFT', 16, -3)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -16, 16)
 
 			frame.isSkinned = true
 		end
@@ -286,8 +286,8 @@ function AS:Blizzard_Alerts()
 			AS:SkinTexture(frame.Icon, true)
 
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 8, -2)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 2)
+			frame.Backdrop:SetPoint('TOPLEFT', frame, 'TOPLEFT', 8, -2)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 2)
 
 			frame.isSkinned = true
 		end
@@ -300,8 +300,8 @@ function AS:Blizzard_Alerts()
 			frame:GetRegions():Hide()
 			--Create Backdrop
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 8, -8)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 8)
+			frame.Backdrop:SetPoint('TOPLEFT', frame, 'TOPLEFT', 8, -8)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 8)
 
 			AS:SkinTexture(frame.Icon, true)
 
@@ -319,8 +319,8 @@ function AS:Blizzard_Alerts()
 			AS:SkinTexture(frame.MissionType, true)
 
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 8, -2)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 2)
+			frame.Backdrop:SetPoint('TOPLEFT', frame, 'TOPLEFT', 8, -2)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 2)
 
 			frame.isSkinned = true
 		end
@@ -335,8 +335,8 @@ function AS:Blizzard_Alerts()
 			AS:SkinTexture(frame.MissionType, true)
 
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 8, -2)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 2)
+			frame.Backdrop:SetPoint('TOPLEFT', frame, 'TOPLEFT', 8, -2)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 2)
 
 			frame.isSkinned = true
 		end
@@ -358,8 +358,8 @@ function AS:Blizzard_Alerts()
 			frame.MissionType:SetParent(frame.MissionType.b)
 			--Create Backdrop
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 8, -2)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 2)
+			frame.Backdrop:SetPoint('TOPLEFT', frame, 'TOPLEFT', 8, -2)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -6, 2)
 
 			frame.isSkinned = true
 		end
@@ -393,8 +393,8 @@ function AS:Blizzard_Alerts()
 			frame.Icon:SetParent(frame.Icon.b)
 			--Create Backdrop
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 20, -20)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -20, 20)
+			frame.Backdrop:SetPoint('TOPLEFT', frame, 'TOPLEFT', 20, -20)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -20, 20)
 
 			frame.isSkinned = true
 		end
@@ -442,8 +442,8 @@ function AS:Blizzard_Alerts()
 
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame.Icon.b, 'TOPLEFT', -4, 4)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -4)
+			frame.Backdrop:SetPoint('TOPLEFT', frame.Icon.b, 'TOPLEFT', -4, 4)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -4)
 		end
 	end
 
@@ -466,8 +466,8 @@ function AS:Blizzard_Alerts()
 
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame.Icon.b, 'TOPLEFT', -8, 8)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -8)
+			frame.Backdrop:SetPoint('TOPLEFT', frame.Icon.b, 'TOPLEFT', -8, 8)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -8)
 		end
 	end
 
@@ -486,8 +486,8 @@ function AS:Blizzard_Alerts()
 
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame.Icon.b, 'TOPLEFT', -4, 4)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -4)
+			frame.Backdrop:SetPoint('TOPLEFT', frame.Icon.b, 'TOPLEFT', -4, 4)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -4)
 		end
 	end
 
@@ -534,8 +534,8 @@ function AS:Blizzard_Alerts()
 	local function SkinNewRecipeLearnedAlert(frame)
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame, 'TOPLEFT', 19, -6)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -23, 6)
+			frame.Backdrop:SetPoint('TOPLEFT', frame, 'TOPLEFT', 19, -6)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -23, 6)
 		end
 
 		frame.glow:SetAlpha(0)
@@ -577,8 +577,8 @@ function AS:Blizzard_Alerts()
 
 		if not frame.Backdrop then
 			AS:CreateBackdrop(frame, "Transparent")
-			frame.Backdrop:Point('TOPLEFT', frame.Icon.b, 'TOPLEFT', -8, 8)
-			frame.Backdrop:Point('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -8)
+			frame.Backdrop:SetPoint('TOPLEFT', frame.Icon.b, 'TOPLEFT', -8, 8)
+			frame.Backdrop:SetPoint('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -8)
 		end
 	end
 
@@ -628,8 +628,8 @@ function AS:Blizzard_Alerts()
 	-- 	frame.Icon:SetParent(frame.Icon.b)
 
 	-- 	AS:CreateBackdrop(frame, "Transparent")
-	-- 	frame.Backdrop:Point('TOPLEFT', frame.Icon.b, 'TOPLEFT', -4, 4)
-	-- 	frame.Backdrop:Point('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -4)
+	-- 	frame.Backdrop:SetPoint('TOPLEFT', frame.Icon.b, 'TOPLEFT', -4, 4)
+	-- 	frame.Backdrop:SetPoint('BOTTOMRIGHT', frame.Icon.b, 'BOTTOMRIGHT', 180, -4)
 	-- end
 end
 

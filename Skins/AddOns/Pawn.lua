@@ -11,7 +11,7 @@ function AS:Pawn(event, addon)
 			PawnUI_InspectPawnButton:SetNormalTexture(Texture)
 			PawnUI_InspectPawnButton:GetNormalTexture():SetTexCoord(0, 1, 0, 1)
 			PawnUI_InspectPawnButton:ClearAllPoints()
-			PawnUI_InspectPawnButton:Point('RIGHT', InspectFrameCloseButton, 'LEFT', -8, -4)
+			PawnUI_InspectPawnButton:SetPoint('RIGHT', InspectFrameCloseButton, 'LEFT', -8, -4)
 			PawnUI_InspectPawnButton:Size(40, 20)
 		end)
 	end

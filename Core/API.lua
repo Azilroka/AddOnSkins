@@ -643,8 +643,8 @@ function AS:SkinCloseButton(Button, Reposition)
 
 	AS:SkinBackdropFrame(Button)
 
-	Button.Backdrop:Point('TOPLEFT', 7, -8)
-	Button.Backdrop:Point('BOTTOMRIGHT', -7, 8)
+	Button.Backdrop:SetPoint('TOPLEFT', 7, -8)
+	Button.Backdrop:SetPoint('BOTTOMRIGHT', -7, 8)
 
 	Button:SetHitRectInsets(6, 6, 7, 7)
 
@@ -683,7 +683,7 @@ function AS:SkinCloseButton(Button, Reposition)
 	Pushed:AddMaskTexture(Mask)
 
 	if Reposition then
-		Button:Point('TOPRIGHT', Reposition, 'TOPRIGHT', 2, 2)
+		Button:SetPoint('TOPRIGHT', Reposition, 'TOPRIGHT', 2, 2)
 	end
 end
 
@@ -747,11 +747,11 @@ function AS:SkinEditBox(EditBox, Width, Height)
 		end
 	end
 
-	if Width then EditBox:Width(Width) end
-	if Height then EditBox:Height(Height) end
+	if Width then EditBox:SetWidth(Width) end
+	if Height then EditBox:SetHeight(Height) end
 
 	if EditBoxName and (EditBoxName:find('Silver') or EditBoxName:find('Copper')) then
-		EditBox.Backdrop:Point('BOTTOMRIGHT', -12, -2)
+		EditBox.Backdrop:SetPoint('BOTTOMRIGHT', -12, -2)
 	end
 end
 

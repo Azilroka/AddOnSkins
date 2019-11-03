@@ -277,7 +277,7 @@ function AS:Blizzard_GuildUI(event, addon)
 	GuildFrameDemoteButton:SetSize(24, 24)
 	AS:SkinArrowButton(GuildFrameDemoteButton, 'down')
 	GuildFrameDemoteButton:SetHitRectInsets(0, 0, 0, 0)
-	GuildFrameDemoteButton:Point("LEFT", GuildFramePromoteButton, "RIGHT", 2, 0)
+	GuildFrameDemoteButton:SetPoint("LEFT", GuildFramePromoteButton, "RIGHT", 2, 0)
 
 	AS:StripTextures(GuildListScrollFrame)
 	AS:SkinScrollBar(GuildListScrollFrameScrollBar)
@@ -307,8 +307,8 @@ function AS:Blizzard_GuildUI(event, addon)
 
 	-- Info Frame
 	AS:SkinBackdropFrame(GuildInfoFrame)
-	GuildInfoFrame.Backdrop:Point("TOPLEFT", 3, -6)
-	GuildInfoFrame.Backdrop:Point("BOTTOMRIGHT", -2, 3)
+	GuildInfoFrame.Backdrop:SetPoint("TOPLEFT", 3, -6)
+	GuildInfoFrame.Backdrop:SetPoint("BOTTOMRIGHT", -2, 3)
 
 	AS:SetTemplate(GuildInfoTextBackground, "Default")
 	AS:SkinScrollBar(GuildInfoFrameScrollFrameScrollBar)
@@ -316,10 +316,10 @@ function AS:Blizzard_GuildUI(event, addon)
 	AS:SkinCloseButton(GuildInfoCloseButton)
 
 	AS:SkinButton(GuildInfoSaveButton)
-	GuildInfoSaveButton:Point("BOTTOMLEFT", 8, 11)
+	GuildInfoSaveButton:SetPoint("BOTTOMLEFT", 8, 11)
 
 	AS:SkinButton(GuildInfoCancelButton)
-	GuildInfoCancelButton:Point("LEFT", GuildInfoSaveButton, "RIGHT", 3, 0)
+	GuildInfoCancelButton:SetPoint("LEFT", GuildInfoSaveButton, "RIGHT", 3, 0)
 end
 
 function AS:Blizzard_GuildControlUI(event, addon)

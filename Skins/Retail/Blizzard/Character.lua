@@ -44,7 +44,7 @@ function AS:Blizzard_Character()
 	local function UpdateAzerite(self)
 		self.AzeriteTexture:SetAtlas("AzeriteIconFrame")
 		AS:SetOutside(self.AzeriteTexture)
-		self.AzeriteTexture:SetDrawLayer("BORDER", 1)
+		self.AzeriteTexture:SetDrawLayer("ARTWORK", 1)
 	end
 
 	for _, Slot in pairs({_G.PaperDollItemsFrame:GetChildren()}) do

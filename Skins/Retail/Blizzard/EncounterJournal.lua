@@ -117,7 +117,7 @@ function AS:Blizzard_EncounterJournal(event, addon)
 		Button.bosslessTexture:SetAlpha(0)
 
 		Button.icon:SetSize(32, 32)
-		Button.icon:Point("TOPLEFT", AS:AdjustForTheme(3), AS:AdjustForTheme(-7))
+		Button.icon:SetPoint("TOPLEFT", AS:AdjustForTheme(3), AS:AdjustForTheme(-7))
 		AS:SkinTexture(Button.icon, true)
 
 		Button.name:SetPoint("TOPLEFT", Button.icon, "TOPRIGHT", 6, -2)
@@ -134,12 +134,12 @@ function AS:Blizzard_EncounterJournal(event, addon)
 		end)
 
 		AS:CreateBackdrop(Button)
-		Button.Backdrop:Point("TOPLEFT", 0, -4)
-		Button.Backdrop:Point("BOTTOMRIGHT", 0, AS.PixelMode and 3 or 0)
+		Button.Backdrop:SetPoint("TOPLEFT", 0, -4)
+		Button.Backdrop:SetPoint("BOTTOMRIGHT", 0, AS.PixelMode and 3 or 0)
 
 		if i == 1 then
 			Button:ClearAllPoints()
-			Button:Point("TOPLEFT", EncounterJournal.encounter.info.lootScroll.scrollChild, "TOPLEFT", 5, 0)
+			Button:SetPoint("TOPLEFT", EncounterJournal.encounter.info.lootScroll.scrollChild, "TOPLEFT", 5, 0)
 		end
 	end
 

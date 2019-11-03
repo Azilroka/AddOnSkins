@@ -10,7 +10,7 @@ function AS:ExtraQuestButton()
 	AS:SetInside(ExtraQuestButton.Icon)
 	ExtraQuestButton:SetCheckedTexture("")
 	ExtraQuestButton.HotKey:ClearAllPoints()
-	ExtraQuestButton.HotKey:Point('TOP', ExtraQuestButton, 'TOP', 0, -1)
+	ExtraQuestButton.HotKey:SetPoint('TOP', ExtraQuestButton, 'TOP', 0, -1)
 end
 
 AS:RegisterSkin('ExtraQuestButton', AS.ExtraQuestButton)

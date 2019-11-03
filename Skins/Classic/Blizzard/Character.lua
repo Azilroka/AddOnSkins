@@ -17,8 +17,8 @@ function AS:Blizzard_Character()
 
 	AS:StripTextures(_G.PaperDollFrame)
 	AS:SkinBackdropFrame(_G.CharacterFrame)
-	_G.CharacterFrame.Backdrop:Point('TOPLEFT', 11, -12)
-	_G.CharacterFrame.Backdrop:Point('BOTTOMRIGHT', -31, 76)
+	_G.CharacterFrame.Backdrop:SetPoint('TOPLEFT', 11, -12)
+	_G.CharacterFrame.Backdrop:SetPoint('BOTTOMRIGHT', -31, 76)
 	AS:CreateShadow(_G.CharacterFrame.Backdrop)
 
 	AS:SkinBackdropFrame(_G.CharacterModelFrame)
@@ -29,9 +29,9 @@ function AS:Blizzard_Character()
 	CharacterModelFrameRotateLeftButton:SetSize(16, 16)
 	CharacterModelFrameRotateRightButton:SetSize(16, 16)
 	AS:SkinArrowButton(_G.CharacterModelFrameRotateLeftButton)
-	_G.CharacterModelFrameRotateLeftButton:Point('TOPLEFT', 2, 1)
+	_G.CharacterModelFrameRotateLeftButton:SetPoint('TOPLEFT', 2, 1)
 	AS:SkinArrowButton(_G.CharacterModelFrameRotateRightButton)
-	_G.CharacterModelFrameRotateRightButton:Point('TOPLEFT', _G.CharacterModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
+	_G.CharacterModelFrameRotateRightButton:SetPoint('TOPLEFT', _G.CharacterModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
 
 	AS:Kill(_G.CharacterFramePortrait)
 	AS:StripTextures(_G.CharacterAttributesFrame)
@@ -39,8 +39,8 @@ function AS:Blizzard_Character()
 	AS:StripTextures(_G.PetPaperDollFrame)
 	AS:StripTextures(_G.PetAttributesFrame)
 	AS:SkinBackdropFrame(_G.PetAttributesFrame)
-	_G.PetAttributesFrame.Backdrop:Point('TOPLEFT', -2, 2)
-	_G.PetAttributesFrame.Backdrop:Point('BOTTOMRIGHT', 2, -2)
+	_G.PetAttributesFrame.Backdrop:SetPoint('TOPLEFT', -2, 2)
+	_G.PetAttributesFrame.Backdrop:SetPoint('BOTTOMRIGHT', 2, -2)
 
 	AS:StripTextures(_G.PetPaperDollFrameExpBar)
 	AS:SkinStatusBar(_G.PetPaperDollFrameExpBar)
@@ -52,12 +52,12 @@ function AS:Blizzard_Character()
 	PetModelFrameRotateLeftButton:SetSize(16, 16)
 	PetModelFrameRotateRightButton:SetSize(16, 16)
 	AS:SkinArrowButton(_G.PetModelFrameRotateRightButton)
-	_G.PetModelFrameRotateLeftButton:Point('TOPLEFT', 2, 1)
+	_G.PetModelFrameRotateLeftButton:SetPoint('TOPLEFT', 2, 1)
 	AS:SkinArrowButton(_G.PetModelFrameRotateLeftButton)
-	_G.PetModelFrameRotateRightButton:Point('TOPLEFT', _G.PetModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
+	_G.PetModelFrameRotateRightButton:SetPoint('TOPLEFT', _G.PetModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
 
 	AS:CreateBackdrop(PetPaperDollPetInfo)
-	PetPaperDollPetInfo:Point('TOPLEFT', _G.PetModelFrameRotateLeftButton, 'BOTTOMLEFT', 1, -5)
+	PetPaperDollPetInfo:SetPoint('TOPLEFT', _G.PetModelFrameRotateLeftButton, 'BOTTOMLEFT', 1, -5)
 	PetPaperDollPetInfo:Size(24)
 
 	for _, frame in pairs({_G.CharacterAttributesFrame:GetChildren()}) do
@@ -101,7 +101,7 @@ function AS:Blizzard_Character()
 
 			if i ~= 1 then
 				frame:ClearAllPoints()
-				frame:Point('TOP', _G[frameName..i - 1], 'BOTTOM', 0, -1)
+				frame:SetPoint('TOP', _G[frameName..i - 1], 'BOTTOM', 0, -1)
 			end
 
 			if icon then
@@ -240,7 +240,7 @@ function AS:Blizzard_Character()
 
 	AS:SkinArrowButton(_G.SkillDetailStatusBarUnlearnButton)
 	_G.SkillDetailStatusBarUnlearnButton:Size(24)
-	_G.SkillDetailStatusBarUnlearnButton:Point('LEFT', _G.SkillDetailStatusBarBorder, 'RIGHT', 5, 0)
+	_G.SkillDetailStatusBarUnlearnButton:SetPoint('LEFT', _G.SkillDetailStatusBarBorder, 'RIGHT', 5, 0)
 	_G.SkillDetailStatusBarUnlearnButton:SetHitRectInsets(0, 0, 0, 0)
 
 	-- Honor Frame
@@ -267,10 +267,10 @@ function AS:Blizzard_DressUpFrame()
 	_G.DressUpFrame.Backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
 
 	AS:SkinArrowButton(_G.DressUpModelFrameRotateLeftButton)
-	_G.DressUpModelFrameRotateLeftButton:Point('TOPLEFT', DressUpFrame, 25, -79)
+	_G.DressUpModelFrameRotateLeftButton:SetPoint('TOPLEFT', DressUpFrame, 25, -79)
 
 	AS:SkinArrowButton(_G.DressUpModelFrameRotateRightButton)
-	_G.DressUpModelFrameRotateRightButton:Point('TOPLEFT', _G.DressUpModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
+	_G.DressUpModelFrameRotateRightButton:SetPoint('TOPLEFT', _G.DressUpModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
 
 	DressUpModelFrameRotateLeftButton:SetSize(16, 16)
 	DressUpModelFrameRotateRightButton:SetSize(16, 16)
@@ -294,10 +294,10 @@ function AS:Blizzard_Inspect(event, addon)
 	AS:SkinBackdropFrame(_G.InspectModelFrame)
 
 	AS:SkinArrowButton(_G.InspectModelFrameRotateLeftButton)
-	_G.InspectModelFrameRotateLeftButton:Point('TOPLEFT', 3, -3)
+	_G.InspectModelFrameRotateLeftButton:SetPoint('TOPLEFT', 3, -3)
 
 	AS:SkinArrowButton(_G.InspectModelFrameRotateRightButton)
-	_G.InspectModelFrameRotateRightButton:Point('TOPLEFT', _G.InspectModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
+	_G.InspectModelFrameRotateRightButton:SetPoint('TOPLEFT', _G.InspectModelFrameRotateLeftButton, 'TOPRIGHT', 3, 0)
 
 	InspectModelFrameRotateLeftButton:SetSize(16, 16)
 	InspectModelFrameRotateRightButton:SetSize(16, 16)

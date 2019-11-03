@@ -30,7 +30,7 @@ function AS:Blizzard_Merchant()
 		hooksecurefunc(Slot.ItemButton.IconBorder, 'Hide', function(self) Slot.ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
 		_G["MerchantItem"..i.."MoneyFrame"]:ClearAllPoints()
-		_G["MerchantItem"..i.."MoneyFrame"]:Point("BOTTOMLEFT", Slot.ItemButton, "BOTTOMRIGHT", 3, 0)
+		_G["MerchantItem"..i.."MoneyFrame"]:SetPoint("BOTTOMLEFT", Slot.ItemButton, "BOTTOMRIGHT", 3, 0)
 
 		for j = 1, 3 do
 			AS:SkinTexture(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"], true)

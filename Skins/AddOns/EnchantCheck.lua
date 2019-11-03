@@ -10,7 +10,7 @@ function AS:EnchantCheck()
 
 	--Reposition Expand/Collapse Button
 	CharacterFrameEnchantCheckButton:ClearAllPoints()
-	CharacterFrameEnchantCheckButton:Point('RIGHT', CharacterMainHandSlot, 'LEFT', -8, -15)
+	CharacterFrameEnchantCheckButton:SetPoint('RIGHT', CharacterMainHandSlot, 'LEFT', -8, -15)
 end
 
 AS:RegisterSkin('EnchantCheck', AS.EnchantCheck)

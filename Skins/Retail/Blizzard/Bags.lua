@@ -165,7 +165,7 @@ function AS:Blizzard_Bags()
 	for i = 1, 3 do
 		local Token = _G["BackpackTokenFrameToken"..i]
 		AS:SkinTexture(Token.icon, true)
-		Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 3, 0)
+		--Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 3, 0)
 	end
 
 	AS:SkinFrame(_G.BankFrame, nil, nil, true)

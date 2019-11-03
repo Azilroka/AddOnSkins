@@ -16,7 +16,7 @@ function AS:Blizzard_BindingUI(event, addon)
 
 	AS:SkinCheckBox(KeyBindingFrame.characterSpecificButton)
 	KeyBindingFrame.header:ClearAllPoints()
-	KeyBindingFrame.header:Point("TOP", KeyBindingFrame, "TOP", 0, -4)
+	KeyBindingFrame.header:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
 
 	AS:SkinFrame(KeyBindingFrameCategoryList)
 	AS:SkinFrame(KeyBindingFrame.bindingsContainer)
@@ -26,9 +26,9 @@ function AS:Blizzard_BindingUI(event, addon)
 		AS:SkinButton(_G["KeyBindingFrameKeyBinding"..i.."Key2Button"])
 	end
 
-	KeyBindingFrame.okayButton:Point("BOTTOMLEFT", KeyBindingFrame.unbindButton, "BOTTOMRIGHT", 3, 0)
-	KeyBindingFrame.cancelButton:Point("BOTTOMLEFT", KeyBindingFrame.okayButton, "BOTTOMRIGHT", 3, 0)
-	KeyBindingFrame.unbindButton:Point("BOTTOMRIGHT", KeyBindingFrame, "BOTTOMRIGHT", -211, 16)
+	KeyBindingFrame.okayButton:SetPoint("BOTTOMLEFT", KeyBindingFrame.unbindButton, "BOTTOMRIGHT", 3, 0)
+	KeyBindingFrame.cancelButton:SetPoint("BOTTOMLEFT", KeyBindingFrame.okayButton, "BOTTOMRIGHT", 3, 0)
+	KeyBindingFrame.unbindButton:SetPoint("BOTTOMRIGHT", KeyBindingFrame, "BOTTOMRIGHT", -211, 16)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
@@ -67,7 +67,7 @@ function AS:Blizzard_MacroUI(event, addon)
 
 	for i = 1, 2 do
 		AS:SkinButton(_G['MacroFrameTab'..i], true)
-		_G['MacroFrameTab'..i]:Height(22)
+		_G['MacroFrameTab'..i]:SetHeight(22)
 	end
 
 	MacroFrameTab1:SetPoint("TOPLEFT", MacroFrame, "TOPLEFT", 85, -39)

@@ -3,8 +3,8 @@ local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Gossip()
 	AS:SkinBackdropFrame(GossipFrame)
-	GossipFrame.Backdrop:Point('TOPLEFT', 11, -12)
-	GossipFrame.Backdrop:Point('BOTTOMRIGHT', -26, 66)
+	GossipFrame.Backdrop:SetPoint('TOPLEFT', 11, -12)
+	GossipFrame.Backdrop:SetPoint('BOTTOMRIGHT', -26, 66)
 
 	AS:SkinCloseButton(GossipFrameCloseButton)
 	GossipFramePortrait:SetAlpha(0)
@@ -71,13 +71,13 @@ end
 
 function AS:Blizzard_Quest()
 	AS:SkinBackdropFrame(QuestFrame)
-	QuestFrame.Backdrop:Point('TOPLEFT', 11, -12)
-	QuestFrame.Backdrop:Point('BOTTOMRIGHT', -26, 66)
+	QuestFrame.Backdrop:SetPoint('TOPLEFT', 11, -12)
+	QuestFrame.Backdrop:SetPoint('BOTTOMRIGHT', -26, 66)
 	QuestFramePortrait:SetAlpha(0)
 
 	AS:SkinBackdropFrame(QuestLogFrame)
-	QuestLogFrame.Backdrop:Point('TOPLEFT', 11, -12)
-	QuestLogFrame.Backdrop:Point('BOTTOMRIGHT', -32, 45)
+	QuestLogFrame.Backdrop:SetPoint('TOPLEFT', 11, -12)
+	QuestLogFrame.Backdrop:SetPoint('BOTTOMRIGHT', -32, 45)
 	AS:SkinFrame(QuestLogListScrollFrame)
 	AS:SkinFrame(QuestLogDetailScrollFrame)
 	AS:SkinScrollBar(QuestLogDetailScrollFrameScrollBar)
@@ -207,12 +207,12 @@ function AS:Blizzard_Quest()
 		questLogTitle.SetNormalTexture = AS.Noop
 
 		questLogTitle:GetNormalTexture():Size(16)
-		questLogTitle:GetNormalTexture():Point('LEFT', 5, 0)
+		questLogTitle:GetNormalTexture():SetPoint('LEFT', 5, 0)
 
 		questLogTitle:SetHighlightTexture('')
 		questLogTitle.SetHighlightTexture = AS.Noop
 
-		questLogTitle:Width(300)
+		questLogTitle:SetWidth(300)
 
 		_G['QuestLogTitle'..i..'Highlight']:SetAlpha(0)
 

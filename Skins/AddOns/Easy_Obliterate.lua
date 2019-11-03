@@ -10,7 +10,7 @@
 	-- AS:Desaturate(WQGFManualActionsFrameLockButton)
 	-- WQGFManualActionsFrameCloseButton:Size(30, 30)
 	-- WQGFManualActionsFrameCloseButton:ClearAllPoints()
-	-- WQGFManualActionsFrameCloseButton:Point('LEFT', WQGFManualActionsFrameTitleFrame, 'RIGHT', -27, 0)
+	-- WQGFManualActionsFrameCloseButton:SetPoint('LEFT', WQGFManualActionsFrameTitleFrame, 'RIGHT', -27, 0)
 -- end
 
 -- AS:RegisterSkin('Easy_Obliterate', AS.Easy_Obliterate)

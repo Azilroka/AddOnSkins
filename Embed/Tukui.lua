@@ -13,7 +13,7 @@ local CreateFrame = CreateFrame
 
 function AS:EmbedSystemHooks()
 	AS:CreateToggleButton('RightToggleButton', '►', AS.InfoRight, ASL.EmbedSystem.ToggleEmbed)
-	_G.RightToggleButton:Point('RIGHT', AS.InfoRight, 'RIGHT', -2, 0)
+	_G.RightToggleButton:SetPoint('RIGHT', AS.InfoRight, 'RIGHT', -2, 0)
 	_G.RightToggleButton:HookScript('OnClick', function(self, button)
 		if button == 'RightButton' then
 			if _G.EmbedSystem_MainWindow:IsShown() then
@@ -27,7 +27,7 @@ function AS:EmbedSystemHooks()
 	end)
 
 	AS:CreateToggleButton('LeftToggleButton', '◄', AS.InfoLeft, ASL.EmbedSystem.ToggleOptions)
-	_G.LeftToggleButton:Point('LEFT', AS.InfoLeft, 'LEFT', 2, 0)
+	_G.LeftToggleButton:SetPoint('LEFT', AS.InfoLeft, 'LEFT', 2, 0)
 	_G.LeftToggleButton:HookScript('OnClick', function(self, button)
 		if button == 'RightButton' then
 			if IsAddOnLoaded('Enhanced_Config') then

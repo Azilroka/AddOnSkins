@@ -69,7 +69,7 @@ function AS:Examiner()
 	Examiner:Size(360, 464)
 
 	Examiner.model:ClearAllPoints()
-	Examiner.model:Point('BOTTOMLEFT', Examiner, 'BOTTOMLEFT', 22, 22)
+	Examiner.model:SetPoint('BOTTOMLEFT', Examiner, 'BOTTOMLEFT', 22, 22)
 end
 
 AS:RegisterSkin('Examiner', AS.Examiner)

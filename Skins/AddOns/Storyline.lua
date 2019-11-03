@@ -12,11 +12,11 @@ function AS:Storyline()
 
 	--Reposition Menu
 	Storyline_NPCFrameResizeButton:ClearAllPoints()
-	Storyline_NPCFrameResizeButton:Point('TOPRIGHT', Storyline_NPCFrame, 'BOTTOMRIGHT', 0, 32)
+	Storyline_NPCFrameResizeButton:SetPoint('TOPRIGHT', Storyline_NPCFrame, 'BOTTOMRIGHT', 0, 32)
 	Storyline_NPCFrameLock:ClearAllPoints()
-	Storyline_NPCFrameLock:Point('BOTTOM', Storyline_NPCFrameConfigButton, 'TOP', 0, 4)
+	Storyline_NPCFrameLock:SetPoint('BOTTOM', Storyline_NPCFrameConfigButton, 'TOP', 0, 4)
 	Storyline_NPCFrameConfigButton:ClearAllPoints()
-	Storyline_NPCFrameConfigButton:Point('BOTTOM', Storyline_NPCFrameResizeButton, 'TOP', 1, 2)
+	Storyline_NPCFrameConfigButton:SetPoint('BOTTOM', Storyline_NPCFrameResizeButton, 'TOP', 1, 2)
 end
 
 AS:RegisterSkin('Storyline', AS.Storyline)

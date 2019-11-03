@@ -9,7 +9,7 @@ function AS:WardrobeSort()
 	-- AS:SkinFrame(WardRobeSortDropDown)
 	--Reposition Menu
 	-- foglightmenu:ClearAllPoints()
-	-- foglightmenu:Point('TOPLEFT', -19, 3)
+	-- foglightmenu:SetPoint('TOPLEFT', -19, 3)
 end
 
 AS:RegisterSkin('WardrobeSort', AS.WardrobeSort)

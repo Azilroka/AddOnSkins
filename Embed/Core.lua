@@ -47,7 +47,7 @@ function AS:ToggleChatFrame(Hide)
 end
 
 function AS:EmbedInit()
-	if AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual') then
+	if (AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual')) and AS.EmbedSystemHooks and AS.EmbedSystem_WindowResize then
 		if not AS.EmbedSystemCreated then
 			EmbedSystem_MainWindow = CreateFrame('Frame', 'EmbedSystem_MainWindow', UIParent)
 			EmbedSystem_LeftWindow = CreateFrame('Frame', 'EmbedSystem_LeftWindow', EmbedSystem_MainWindow)

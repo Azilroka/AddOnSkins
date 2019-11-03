@@ -5,8 +5,8 @@ function AS:Blizzard_CraftUI(event, addon)
 	if addon ~= 'Blizzard_CraftUI' then return end
 
 	AS:SkinBackdropFrame(CraftFrame, nil, nil, true)
-	CraftFrame.Backdrop:Point('TOPLEFT', 10, -12)
-	CraftFrame.Backdrop:Point('BOTTOMRIGHT', -34, 70)
+	CraftFrame.Backdrop:SetPoint('TOPLEFT', 10, -12)
+	CraftFrame.Backdrop:SetPoint('BOTTOMRIGHT', -34, 70)
 
 	AS:SkinStatusBar(CraftRankFrame)
 
@@ -29,8 +29,8 @@ function AS:Blizzard_CraftUI(event, addon)
 
 	AS:StripTextures(CraftExpandButtonFrame)
 
-	CraftCollapseAllButton:Point('LEFT', CraftExpandTabLeft, 'RIGHT', -8, 5)
-	CraftCollapseAllButton:GetNormalTexture():Point('LEFT', 3, 2)
+	CraftCollapseAllButton:SetPoint('LEFT', CraftExpandTabLeft, 'RIGHT', -8, 5)
+	CraftCollapseAllButton:GetNormalTexture():SetPoint('LEFT', 3, 2)
 	CraftCollapseAllButton:GetNormalTexture():Size(15)
 
 	CraftCollapseAllButton:SetHighlightTexture('')
@@ -38,7 +38,7 @@ function AS:Blizzard_CraftUI(event, addon)
 
 	CraftCollapseAllButton:SetDisabledTexture(AS.Media.Textures.Minus)
 	CraftCollapseAllButton.SetDisabledTexture = AS.Noop
-	CraftCollapseAllButton:GetDisabledTexture():Point('LEFT', 3, 2)
+	CraftCollapseAllButton:GetDisabledTexture():SetPoint('LEFT', 3, 2)
 	CraftCollapseAllButton:GetDisabledTexture():Size(15)
 	CraftCollapseAllButton:GetDisabledTexture():SetDesaturated(true)
 
@@ -47,7 +47,7 @@ function AS:Blizzard_CraftUI(event, addon)
 		local highlight = _G['Craft'..i..'Highlight']
 
 		button:GetNormalTexture():Size(14)
-		button:GetNormalTexture():Point('LEFT', 4, 1)
+		button:GetNormalTexture():SetPoint('LEFT', 4, 1)
 
 		highlight:SetTexture('')
 		highlight.SetTexture = AS.Noop
@@ -65,16 +65,16 @@ function AS:Blizzard_CraftUI(event, addon)
 
 		AS:SkinTexture(icon, true)
 
-		name:Point('LEFT', nameFrame, 'LEFT', 20, 0)
+		name:SetPoint('LEFT', nameFrame, 'LEFT', 20, 0)
 
 		nameFrame:Kill()
 	end
 
-	CraftReagent1:Point('TOPLEFT', CraftReagentLabel, 'BOTTOMLEFT', -3, -3)
-	CraftReagent2:Point('LEFT', CraftReagent1, 'RIGHT', 3, 0)
-	CraftReagent4:Point('LEFT', CraftReagent3, 'RIGHT', 3, 0)
-	CraftReagent6:Point('LEFT', CraftReagent5, 'RIGHT', 3, 0)
-	CraftReagent8:Point('LEFT', CraftReagent7, 'RIGHT', 3, 0)
+	CraftReagent1:SetPoint('TOPLEFT', CraftReagentLabel, 'BOTTOMLEFT', -3, -3)
+	CraftReagent2:SetPoint('LEFT', CraftReagent1, 'RIGHT', 3, 0)
+	CraftReagent4:SetPoint('LEFT', CraftReagent3, 'RIGHT', 3, 0)
+	CraftReagent6:SetPoint('LEFT', CraftReagent5, 'RIGHT', 3, 0)
+	CraftReagent8:SetPoint('LEFT', CraftReagent7, 'RIGHT', 3, 0)
 
 	hooksecurefunc('CraftFrame_Update', function()
 		CraftRankFrame:SetStatusBarColor(0.13, 0.28, 0.85)
@@ -103,7 +103,7 @@ function AS:Blizzard_CraftUI(event, addon)
 			return;
 		end
 
-		CraftReagentLabel:Point('TOPLEFT', CraftDescription, 'BOTTOMLEFT', 0, -10)
+		CraftReagentLabel:SetPoint('TOPLEFT', CraftDescription, 'BOTTOMLEFT', 0, -10)
 
 		if CraftIcon:GetNormalTexture() then
 			CraftReagentLabel:SetAlpha(1)
@@ -168,8 +168,8 @@ function AS:Blizzard_TradeSkill(event, addon)
 	if addon ~= 'Blizzard_TradeSkillUI' then return end
 	AS:SkinBackdropFrame(_G.TradeSkillFrame, nil, nil, true)
 	_G.TradeSkillFramePortrait:SetAlpha(0)
-	_G.TradeSkillFrame.Backdrop:Point('TOPLEFT', 11, -12)
-	_G.TradeSkillFrame.Backdrop:Point('BOTTOMRIGHT', -32, 76)
+	_G.TradeSkillFrame.Backdrop:SetPoint('TOPLEFT', 11, -12)
+	_G.TradeSkillFrame.Backdrop:SetPoint('BOTTOMRIGHT', -32, 76)
 
 	AS:SkinStatusBar(_G.TradeSkillRankFrame)
 
@@ -195,7 +195,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 	AS:SkinDropDownBox(_G.TradeSkillSubClassDropDown)
 
 	_G.TradeSkillFrameTitleText:ClearAllPoints()
-	_G.TradeSkillFrameTitleText:Point('TOP', _G.TradeSkillFrame, 'TOP', 0, -18)
+	_G.TradeSkillFrameTitleText:SetPoint('TOP', _G.TradeSkillFrame, 'TOP', 0, -18)
 
 	for i = 1, _G.TRADE_SKILLS_DISPLAYED do
 		local button = _G['TradeSkillSkill'..i]
@@ -251,7 +251,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 	AS:SkinButton(_G.TradeSkillCreateAllButton)
 
 	AS:SkinArrowButton(_G.TradeSkillDecrementButton)
-	_G.TradeSkillInputBox:Height(16)
+	_G.TradeSkillInputBox:SetHeight(16)
 	AS:SkinEditBox(_G.TradeSkillInputBox)
 	AS:SkinArrowButton(_G.TradeSkillIncrementButton)
 
@@ -270,7 +270,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 		end
 
 		_G.TradeSkillSkillIcon:Size(40)
-		_G.TradeSkillSkillIcon:Point('TOPLEFT', 2, -3)
+		_G.TradeSkillSkillIcon:SetPoint('TOPLEFT', 2, -3)
 
 		local skillLink = GetTradeSkillItemLink(id)
 		if skillLink then
@@ -315,8 +315,8 @@ function AS:Blizzard_TrainerUI(event, addon)
 
 	AS:SkinBackdropFrame(ClassTrainerFrame, nil, nil, true)
 	AS:SkinCloseButton(ClassTrainerFrameCloseButton)
-	ClassTrainerFrame.Backdrop:Point('TOPLEFT', 10, -11)
-	ClassTrainerFrame.Backdrop:Point('BOTTOMRIGHT', -32, 74)
+	ClassTrainerFrame.Backdrop:SetPoint('TOPLEFT', 10, -11)
+	ClassTrainerFrame.Backdrop:SetPoint('BOTTOMRIGHT', -32, 74)
 
 	AS:SkinButton(ClassTrainerTrainButton, true)
 	AS:SkinButton(ClassTrainerCancelButton, true)
@@ -346,7 +346,7 @@ function AS:Blizzard_TrainerUI(event, addon)
 		button.SetNormalTexture = AS.Noop
 
 		button:GetNormalTexture():Size(16)
-		button:GetNormalTexture():Point('LEFT', 5, 0)
+		button:GetNormalTexture():SetPoint('LEFT', 5, 0)
 
 		highlight:SetTexture('')
 		highlight.SetTexture = AS.Noop

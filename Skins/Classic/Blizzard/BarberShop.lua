@@ -31,7 +31,7 @@ function AS:Blizzard_BarbershopUI(event, addon)
 
 			if i ~= 1 then
 				selector:ClearAllPoints()
-				selector:Point("TOP", previousSelector, "BOTTOM", 0, -3)
+				selector:SetPoint("TOP", previousSelector, "BOTTOM", 0, -3)
 			end
 		end
 	end

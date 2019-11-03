@@ -16,8 +16,8 @@ function AS:Embed_TinyDPS()
 	_G.tdpsFrame:SetFrameStrata(EmbedParent:GetFrameStrata())
 	_G.tdpsFrame:SetFrameLevel(EmbedParent:GetFrameLevel())
 	_G.tdpsAnchor:ClearAllPoints()
-	_G.tdpsAnchor:Point('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
-	_G.tdpsAnchor:Point('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
+	_G.tdpsAnchor:SetPoint('TOPLEFT', EmbedParent, 'TOPLEFT', 0, 0)
+	_G.tdpsAnchor:SetPoint('BOTTOMRIGHT', EmbedParent, 'BOTTOMRIGHT', 0, 0)
 	_G.tdpsFrame:SetWidth(_G.tdpsAnchor:GetWidth())
 
 	_G.tdps.hideOOC = false

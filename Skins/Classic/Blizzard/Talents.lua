@@ -7,8 +7,8 @@ function AS:Blizzard_TalentUI(event, addon)
 	AS:SkinBackdropFrame(TalentFrame)
 	TalentFramePortrait:Hide()
 	AS:SkinCloseButton(TalentFrameCloseButton)
-	TalentFrame.Backdrop:Point('TOPLEFT', 13, -12)
-	TalentFrame.Backdrop:Point('BOTTOMRIGHT', -31, 76)
+	TalentFrame.Backdrop:SetPoint('TOPLEFT', 13, -12)
+	TalentFrame.Backdrop:SetPoint('BOTTOMRIGHT', -31, 76)
 
 	for i = 1, 5 do
 		AS:SkinTab(_G["TalentFrameTab"..i])
@@ -19,10 +19,10 @@ function AS:Blizzard_TalentUI(event, addon)
 	AS:StripTextures(TalentFrameScrollFrame)
 
 	AS:SkinScrollBar(TalentFrameScrollFrameScrollBar)
-	TalentFrameScrollFrameScrollBar:Point('TOPLEFT', TalentFrameScrollFrame, 'TOPRIGHT', 10, -16)
+	TalentFrameScrollFrameScrollBar:SetPoint('TOPLEFT', TalentFrameScrollFrame, 'TOPRIGHT', 10, -16)
 
-	TalentFrameSpentPoints:Point('TOP', 0, -42)
-	TalentFrameTalentPointsText:Point('BOTTOMRIGHT', TalentFrame, 'BOTTOMLEFT', 220, 84)
+	TalentFrameSpentPoints:SetPoint('TOP', 0, -42)
+	TalentFrameTalentPointsText:SetPoint('BOTTOMRIGHT', TalentFrame, 'BOTTOMLEFT', 220, 84)
 
 	for i = 1, MAX_NUM_TALENTS do
 		local talent = _G['TalentFrameTalent'..i]
