@@ -191,10 +191,7 @@ function AS:Blizzard_Quest()
 		end
 	end)
 
-	AS:SkinFrame(QuestNPCModel)
-	AS:SkinBackdropFrame(QuestNPCModelTextFrame)
-	QuestNPCModelTextFrame.Backdrop:SetPoint("TOPLEFT", QuestNPCModel, "BOTTOMLEFT", 0, -2)
-	QuestNPCModelTextFrame.Backdrop:SetPoint("TOPRIGHT", QuestNPCModel, "BOTTOMRIGHT", 0, -2)
+	AS:SkinFrame(QuestModelScene)
 
 	AS:SkinFrame(QuestLogPopupDetailFrame)
 	AS:SkinButton(QuestLogPopupDetailFrameAbandonButton)

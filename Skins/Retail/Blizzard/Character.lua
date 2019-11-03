@@ -315,8 +315,8 @@ end
 
 function AS:Blizzard_DressUpFrame()
 	AS:SkinFrame(_G.SideDressUpFrame, nil, nil, true)
-	AS:SkinButton(_G.SideDressUpModelResetButton)
-	AS:SkinCloseButton(_G.SideDressUpModelCloseButton)
+	AS:SkinButton(_G.SideDressUpFrame.ResetButton)
+	AS:SkinCloseButton(_G.SideDressUpFrameCloseButton)
 
 	hooksecurefunc("SetUpSideDressUpFrame", function(parentFrame, closedWidth, openWidth, point, relativePoint, offsetX, offsetY)
 		if parentFrame == _G.AuctionFrame then

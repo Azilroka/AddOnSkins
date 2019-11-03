@@ -231,7 +231,7 @@ function AS:UpdateMedia()
 	AS.PixelFont = AS.LSM:Fetch('font', "Arial Narrow")
 	AS.NormTex = AS.LSM:Fetch('statusbar', "Blizzard")
 	AS.BackdropColor = { .2, .2, .2, .8}
-	AS.BorderColor = { 1, 1, 1}
+	AS.BorderColor = { 0, 0, 0 }
 	AS.Color = AS.ClassColor
 	AS.HideShadows = false
 end

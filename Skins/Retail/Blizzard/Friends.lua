@@ -2,6 +2,9 @@ if AddOnSkins.Classic then return end
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Friends()
+	ToggleFrame(FriendsFrame)
+	ToggleFrame(FriendsFrame)
+
 	AS:SkinFrame(FriendsFrame)
 	FriendsFrameIcon:SetPoint('TOPLEFT', FriendsFrame, 'TOPLEFT', 0, 0)
 	FriendsFrameIcon:SetTexture([[Interface\AddOns\AddOnSkins\Media\Icons\Bnet]])
@@ -23,11 +26,6 @@ function AS:Blizzard_Friends()
 	AS:SkinCloseButton(FriendsFrame.CloseButton)
 	AS:SkinTooltip(FriendsTooltip)
 
-	AS:SkinBackdropFrame(FriendsFrameFriendsScrollFrame)
-	FriendsFrameFriendsScrollFrame.Backdrop:SetPoint('TOPLEFT', -4, 1)
-	FriendsFrameFriendsScrollFrame.Backdrop:SetPoint('BOTTOMRIGHT', 0, -3)
-
-	AS:SkinScrollBar(FriendsFrameFriendsScrollFrameScrollBar)
 	AS:SkinDropDownBox(FriendsFrameStatusDropDown, 70)
 	FriendsFrameStatusDropDown:SetPoint('TOPLEFT', 43, -24)
 	FriendsFrameStatusDropDownStatus:SetPoint('LEFT', '$parent', 'LEFT', 23, 0)
@@ -47,10 +45,11 @@ function AS:Blizzard_Friends()
 	FriendsFrameBattlenetFrame.BroadcastButton.SetPushedTexture = AS.Noop
 
 	AS:SkinFrame(FriendsFrameBattlenetFrame.BroadcastFrame)
-	AS:SkinBackdropFrame(FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame)
-	AS:SetOutside(FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.Backdrop, FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame, 3, 3)
-	AS:SkinButton(FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.CancelButton)
-	AS:SkinButton(FriendsFrameBattlenetFrame.BroadcastFrame.ScrollFrame.UpdateButton)
+	AS:SkinEditBox(FriendsFrameBattlenetFrame.BroadcastFrame.EditBox)
+	AS:SkinButton(FriendsFrameBattlenetFrame.BroadcastFrame.CancelButton)
+	AS:SkinButton(FriendsFrameBattlenetFrame.BroadcastFrame.UpdateButton)
+
+	AS:SkinScrollBar(FriendsListFrameScrollFrame.scrollBar)
 
 	AS:SkinButton(FriendsFrameAddFriendButton)
 	AS:SkinButton(FriendsFrameSendMessageButton)
@@ -58,30 +57,6 @@ function AS:Blizzard_Friends()
 	AS:SkinButton(FriendsFrameUnsquelchButton)
 
 	AS:StripTextures(IgnoreListFrame)
-	AS:SkinScrollBar(FriendsFrameIgnoreScrollFrameScrollBar)
-	FriendsFrameIgnoreScrollFrame:SetHeight(294)
-	FriendsFrameIgnoreScrollFrameScrollBar:SetPoint("TOPLEFT", FriendsFrameIgnoreScrollFrame, "TOPRIGHT", 42, -10)
-
-	AS:SkinFrame(FriendsFriendsFrame)
-	AS:SkinFrame(FriendsFriendsScrollFrame)
-	AS:StripTextures(FriendsFriendsList)
-	AS:SkinDropDownBox(FriendsFriendsFrameDropDown)
-	AS:SkinScrollBar(FriendsFriendsScrollFrameScrollBar)
-	AS:SkinButton(FriendsFriendsSendRequestButton)
-	AS:SkinButton(FriendsFriendsCloseButton)
-
-	AS:SkinButton(FriendsTabHeader.RaFButton)
-	AS:StyleButton(FriendsTabHeader.RaFButton)
-	AS:SkinTexture(FriendsTabHeader.RaFButton.Icon)
-	AS:SetInside(FriendsTabHeader.RaFButton.Icon)
-
-	AS:SkinFrame(RecruitAFriendFrame)
-	AS:SkinEditBox(RecruitAFriendNameEditBox)
-	AS:SkinButton(RecruitAFriendFrameSendButton)
-	AS:SkinCloseButton(RecruitAFriendFrameCloseButton)
-	AS:SkinFrame(RecruitAFriendNoteFrame)
-	AS:SkinScrollBar(RecruitAFriendNoteFrameScrollFrameScrollBar)
-	AS:StripTextures(RecruitAFriendFrame.CharacterInfo)
 
 	AS:SkinFrame(AddFriendFrame)
 	AS:SkinEditBox(AddFriendNameEditBox)
@@ -90,16 +65,27 @@ function AS:Blizzard_Friends()
 	AS:SkinButton(AddFriendEntryFrameCancelButton)
 	AS:SkinButton(AddFriendInfoFrameContinueButton)
 
+	for i = 1, FriendsFrame.numTabs do
+		AS:SkinTab(_G["FriendsFrameTab"..i])
+	end
+
+	for i = 1, 3 do
+		local Tab = _G["FriendsTabHeaderTab"..i]
+		AS:SkinTab(Tab)
+		Tab.Backdrop:SetPoint("TOPLEFT", 3, -8)
+		Tab.Backdrop:SetPoint("BOTTOMRIGHT", -6, 0)
+	end
+
 	for i = 1, 4 do
 		AS:StripTextures(_G["WhoFrameColumnHeader"..i])
 	end
 
 	AS:StripTextures(WhoFrameListInset)
 	AS:StripTextures(WhoFrameEditBoxInset)
-	AS:SkinScrollBar(WhoListScrollFrameScrollBar)
 	AS:SkinButton(WhoFrameWhoButton)
 	AS:SkinButton(WhoFrameAddFriendButton)
 	AS:SkinButton(WhoFrameGroupInviteButton)
+	AS:SkinScrollBar(WhoListScrollFrame.scrollBar)
 
 	WhoFrameWhoButton:SetPoint("RIGHT", WhoFrameAddFriendButton, "LEFT", -6, 0)
 	WhoFrameAddFriendButton:SetPoint("RIGHT", WhoFrameGroupInviteButton, "LEFT", -6, 0)
@@ -112,20 +98,16 @@ function AS:Blizzard_Friends()
 
 	AS:SkinDropDownBox(WhoFrameDropDown)
 
-	for i = 1, 3 do
-		AS:SkinTab(_G["FriendsFrameTab"..i])
-	end
-
-	for i = 1, 3 do
-		local Tab = _G["FriendsTabHeaderTab"..i]
-		AS:SkinTab(Tab)
-		Tab.Backdrop:SetPoint("TOPLEFT", 3, -8)
-		Tab.Backdrop:SetPoint("BOTTOMRIGHT", -6, 0)
-	end
-
 	AS:StripTextures(QuickJoinScrollFrame)
-	AS:SkinScrollBar(QuickJoinScrollFrameScrollBar)
 	AS:SkinButton(QuickJoinFrame.JoinQueueButton, true)
+	AS:SkinScrollBar(QuickJoinScrollFrame.scrollBar)
+
+	AS:SkinFrame(FriendsFriendsFrame)
+	AS:SkinFrame(FriendsFriendsScrollFrame)
+	AS:SkinDropDownBox(FriendsFriendsFrameDropDown)
+	AS:SkinScrollBar(FriendsFriendsScrollFrame.scrollBar)
+	AS:SkinButton(FriendsFriendsFrame.SendRequestButton)
+	AS:SkinButton(FriendsFriendsFrame.CloseButton)
 end
 
 AS:RegisterSkin('Blizzard_Friends', AS.Blizzard_Friends)

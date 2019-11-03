@@ -80,6 +80,7 @@ AS.Blizzard.Frames = {
 	'bgLeft',
 	'bgRight',
 	'FilligreeOverlay',
+	'ScrollFrameBorder',
 }
 
 AS.Blizzard.Tooltip = {
