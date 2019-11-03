@@ -2,9 +2,6 @@ if AddOnSkins.Classic then return end
 local AS = unpack(AddOnSkins)
 
 function AS:Blizzard_Friends()
-	ToggleFrame(FriendsFrame)
-	ToggleFrame(FriendsFrame)
-
 	AS:SkinFrame(FriendsFrame)
 	FriendsFrameIcon:SetPoint('TOPLEFT', FriendsFrame, 'TOPLEFT', 0, 0)
 	FriendsFrameIcon:SetTexture([[Interface\AddOns\AddOnSkins\Media\Icons\Bnet]])
