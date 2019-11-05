@@ -9,3 +9,6 @@ externals:
 ignore:
 	- Libs/Ace3/tests
 	- AddOnSkins_Classic.toc
+
+move-folders:
+	AddOnSkins\Classic: AddOnSkins
