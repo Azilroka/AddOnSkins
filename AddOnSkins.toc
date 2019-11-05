@@ -1,6 +1,6 @@
 ## Interface: 80205
 ## Title: |cff1784d1AddOnSkins|r
-## Version: 4.36
+## Version: 4.37
 ## Author: Azilroka, NihilisticPandemonium
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 
