@@ -224,7 +224,7 @@ local BlizzardNames = {
 }
 
 AS.Options = {
-	order = 101,
+	order = -4,
 	type = 'group',
 	name = AS.Title,
 	childGroups = 'tab',
