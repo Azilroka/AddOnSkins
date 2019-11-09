@@ -5,6 +5,5 @@
 	<Include file="Core\Load_Core.xml"/>
 	<Include file="Embed\Load_Embed.xml"/>
 	<Include file="Skins\AddOns\Load_Skins.xml"/>
-	<Include file="Skins\Retail\Load_Skins.xml"/>
-	<Include file="Skins\Classic\Load_Skins.xml"/>
+	<Include file="Skins\Blizzard\Load_Skins.xml"/>
 </Ui>
