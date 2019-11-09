@@ -28,59 +28,19 @@ local EnumerateFrames = EnumerateFrames
 
 AS.Blizzard = {}
 AS.Blizzard.Regions = {
-	'Left',
-	'Middle',
-	'Right',
-	'Mid',
-	'LeftDisabled',
-	'MiddleDisabled',
-	'RightDisabled',
-	'TopLeft',
-	'TopRight',
-	'BottomLeft',
-	'BottomRight',
-	'TopMiddle',
-	'MiddleLeft',
-	'MiddleRight',
-	'BottomMiddle',
-	'MiddleMiddle',
-	'TabSpacer',
-	'TabSpacer1',
-	'TabSpacer2',
-	'_RightSeparator',
-	'_LeftSeparator',
-	'RightSeparator',
-	'LeftSeparator',
-	'Cover',
-	'Border',
-	'Background',
+	'Left', 'Middle', 'Right', 'Mid',
+	'LeftDisabled', 'MiddleDisabled', 'RightDisabled',
+	'TopLeft', 'TopRight', 'BottomLeft', 'BottomRight', 'TopMiddle', 'MiddleLeft', 'MiddleRight', 'BottomMiddle', 'MiddleMiddle',
+	'TabSpacer', 'TabSpacer1', 'TabSpacer2', '_RightSeparator', '_LeftSeparator', 'RightSeparator', 'LeftSeparator',
+	'Cover', 'Border', 'Background',
 	-- EditBox
-	'TopTex',
-	'TopLeftTex',
-	'TopRightTex',
-	'LeftTex',
-	'BottomTex',
-	'BottomLeftTex',
-	'BottomRightTex',
-	'RightTex',
-	'MiddleTex',
+	'TopTex', 'TopLeftTex', 'TopRightTex', 'LeftTex', 'BottomTex', 'BottomLeftTex', 'BottomRightTex', 'RightTex', 'MiddleTex'
 }
 
 AS.Blizzard.Frames = {
-	'Inset',
-	'inset',
-	'InsetFrame',
-	'LeftInset',
-	'RightInset',
-	'NineSlice',
-	'Border',
-	'BorderFrame',
-	'bottomInset',
-	'BottomInset',
-	'bgLeft',
-	'bgRight',
-	'FilligreeOverlay',
-	'ScrollFrameBorder',
+	'Inset', 'inset', 'InsetFrame', 'LeftInset', 'RightInset', 'NineSlice',
+	'Border', 'BorderFrame',
+	'bottomInset', 'BottomInset', 'bgLeft', 'bgRight', 'FilligreeOverlay', 'ScrollFrameBorder'
 }
 
 AS.Blizzard.Tooltip = {

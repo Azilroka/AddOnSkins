@@ -1,0 +1,8 @@
+<Ui>
+	<Script file="AddOnManager.lua"/>
+	<Script file="Bags.lua"/>
+	<Script file="ChatBubbles.lua"/>
+
+	<Include file="Classic\Load_Skins.xml"/>
+	<Include file="Retail\Load_Skins.xml"/>
+</Ui>

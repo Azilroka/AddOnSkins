@@ -45,8 +45,9 @@ function AS:Blizzard_Merchant()
 	hooksecurefunc(MerchantBuyBackItem.ItemButton.IconBorder, 'Hide', function(self) MerchantBuyBackItem.ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
 	AS:SkinButton(MerchantRepairItemButton)
-	MerchantRepairItemButton:GetRegions():SetTexCoord(0.04, 0.24, 0.06, 0.5)
-	AS:SetInside(MerchantRepairItemButton:GetRegions())
+	local RepairTexture = MerchantRepairItemButton:GetRegions()
+	RepairTexture:SetTexCoord(0.04, 0.24, 0.06, 0.5)
+	AS:SetInside(RepairTexture)
 
 	AS:SkinButton(MerchantGuildBankRepairButton)
 	MerchantGuildBankRepairButtonIcon:SetTexCoord(0.61, 0.82, 0.1, 0.52)

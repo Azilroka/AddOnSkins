@@ -61,6 +61,9 @@ function AS:DBM(event, addon)
 						timer:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 						name:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 
+						if bar.owner.options.IconLeft then icon1.Backdrop:Show() else icon1.Backdrop:Hide() end
+						if bar.owner.options.IconRight then icon2.Backdrop:Show() else icon2.Backdrop:Hide() end
+
 						bar.injected = true
 					end)
 					bar:ApplyStyle()

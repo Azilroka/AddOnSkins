@@ -142,4 +142,7 @@
 	<Script file="xMerchant.lua"/>
 	<Script file="XPBarNone.lua"/>
 	<Script file="Zygor.lua"/>
+
+	<Include file="Classic\Load_Skins.xml"/>
+	<Include file="Retail\Load_Skins.xml"/>
 </Ui>

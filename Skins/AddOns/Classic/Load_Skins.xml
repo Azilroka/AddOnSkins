@@ -1,6 +1,4 @@
 <Ui>
-	<Include file="Blizzard\Load_Skins.xml"/>
-
 	<Script file="Auctionator.lua"/>
 	<Script file="DejaClassicStats.lua"/>
 	<Script file="ExtendedCharacterStats.lua"/>

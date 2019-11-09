@@ -1,4 +1,3 @@
-if AddOnSkins.Retail then return end
 local AS = unpack(AddOnSkins)
 
 -- Cache global variables
@@ -6,8 +5,6 @@ local AS = unpack(AddOnSkins)
 local _G = _G
 local select, unpack = select, unpack
 --WoW API / Variables
-local BAG_ITEM_QUALITY_COLORS = BAG_ITEM_QUALITY_COLORS
-local BankFrameItemButton_Update = BankFrameItemButton_Update
 local GetContainerItemInfo = GetContainerItemInfo
 local GetContainerItemQuestInfo = GetContainerItemQuestInfo
 local hooksecurefunc = hooksecurefunc
@@ -34,51 +31,6 @@ function AS:Blizzard_Bags()
 			ItemButton.NewItemTexture.SetAtlas = AS.Noop
 
 			_G["ContainerFrame"..i.."Item"..j..'IconQuestTexture']:SetAlpha(0)
-
-			-- This shit is hax.
-			AS:CreateBackdrop(ItemButton)
-			AS:CreateShadow(ItemButton.Backdrop)
-			ItemButton.Backdrop:Hide()
-			hooksecurefunc(ItemButton.NewItemTexture, 'Show', function()
-				ItemButton.Backdrop:Show()
-			end)
-			hooksecurefunc(ItemButton.NewItemTexture, 'Hide', function()
-				ItemButton.Backdrop:Hide()
-			end)
-			ItemButton.Backdrop:SetAllPoints()
-			ItemButton.Backdrop:SetFrameStrata(ItemButton:GetFrameStrata())
-			ItemButton.Backdrop:SetFrameLevel(ItemButton:GetFrameLevel() + 4)
-			ItemButton.Backdrop:SetBackdropColor(0, 0, 0, 0)
-			ItemButton.Backdrop:SetScript('OnUpdate', function(self)
-				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
-				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
-				local QualityColor = Quality and BAG_ITEM_QUALITY_COLORS[Quality] or nil
-				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
-				if QualityColor then
-					self:SetBackdropBorderColor(QualityColor.r, QualityColor.g, QualityColor.b)
-					self.Shadow:SetBackdropBorderColor(QualityColor.r, QualityColor.g, QualityColor.b)
-				elseif isQuestItem then
-					self:SetBackdropBorderColor(1, .82, 0)
-					self.Shadow:SetBackdropBorderColor(1, .82, 0)
-				else
-					self:SetBackdropBorderColor(1, 1, 1)
-					self.Shadow:SetBackdropBorderColor(1, 1, 1)
-				end
-				self:SetAlpha(self:GetParent().NewItemTexture:GetAlpha())
-			end)
-			ItemButton.Backdrop:SetScript('OnHide', function(self)
-				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
-				local isQuestItem, questId, isActive = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
-				local QualityColor = Quality and BAG_ITEM_QUALITY_COLORS[Quality] or nil
-				if (Quality > _G.LE_ITEM_QUALITY_COMMON and QualityColor) then
-					ItemButton:SetBackdropBorderColor(QualityColor.r, QualityColor.g, QualityColor.b)
-				elseif isQuestItem then
-					ItemButton:SetBackdropBorderColor(1, .82, 0)
-				else
-					ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
-				end
-			end)
-			-- End of hax.
 
 			ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
 			ItemButton.searchOverlay:SetColorTexture(0, 0, 0, .8)
@@ -167,6 +119,71 @@ function AS:Blizzard_Bags()
 			ItemButton:SetNormalTexture(nil)
 			AS:StyleButton(ItemButton)
 		end
+	end
+
+	if AS.Retail then
+		AS:SkinEditBox(_G.BagItemSearchBox)
+
+		AS:SkinEditBox(_G.BankItemSearchBox)
+		_G.BankItemSearchBox:SetSize(159, 16)
+
+		AS:StripTextures(_G.BackpackTokenFrame)
+
+		for i = 1, 3 do
+			local Token = _G["BackpackTokenFrameToken"..i]
+			AS:SkinTexture(Token.icon, true)
+			--Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 3, 0)
+		end
+
+		for _, Button in pairs({ _G.BagItemAutoSortButton, _G.BankItemAutoSortButton }) do
+			AS:SkinButton(Button)
+			Button:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
+			Button:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
+			AS:SkinTexture(Button:GetNormalTexture())
+			AS:SetInside(Button:GetNormalTexture())
+			AS:SkinTexture(Button:GetPushedTexture())
+			AS:SetInside(Button:GetPushedTexture())
+			Button:SetSize(22, 22)
+		end
+
+		_G.BankItemAutoSortButton:SetPoint("LEFT", _G.BankItemSearchBox, "RIGHT", 4, 0)
+		_G.BagItemAutoSortButton:SetScript('OnShow', function(self)
+			local a, b, c, d, e = self:GetPoint()
+			self:SetPoint(a, b, c, d - 3, e - 1)
+			self.SetPoint = AS.Noop
+			self:SetScript('OnShow', nil)
+		end)
+
+		-- Reagent Bank
+		AS:SkinButton(_G.ReagentBankFrame.DespositButton)
+		_G.ReagentBankFrame:HookScript('OnShow', function(self)
+			if _G.ReagentBankFrame.slots_initialized and not _G.ReagentBankFrame.isSkinned then
+				for i = 1, 98 do
+					local ItemButton = _G["ReagentBankFrameItem"..i]
+					AS:SkinFrame(ItemButton)
+					AS:SkinTexture(ItemButton.icon)
+					AS:SetInside(ItemButton.icon)
+
+					ItemButton.searchOverlay:SetAllPoints(ItemButton.icon)
+					ItemButton.searchOverlay:SetTexture(0, 0, 0, .8)
+
+					ItemButton:SetNormalTexture(nil)
+					AS:StyleButton(ItemButton)
+					hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
+						ItemButton:SetBackdropBorderColor(r, g, b)
+					end)
+					hooksecurefunc(ItemButton.IconBorder, 'Hide', function(self)
+						ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
+					end)
+					BankFrameItemButton_Update(ItemButton)
+				end
+				AS:StripTextures(_G.ReagentBankFrame, true)
+				self.isSkinned = true
+			end
+		end)
+
+		AS:SkinTab(_G.BankFrameTab1)
+		AS:SkinTab(_G.BankFrameTab2)
 	end
 end
 
