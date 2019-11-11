@@ -24,7 +24,12 @@ function AS:DBM(event, addon)
 						local timer = _G[frame:GetName()..'BarTimer']
 
 						AS:SkinTexture(icon1, true)
+						icon1:ClearAllPoints()
+						icon1:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMLEFT', AS:AdjustForTheme(-2), 0)
+
 						AS:SkinTexture(icon2, true)
+						icon2:ClearAllPoints()
+						icon2:SetPoint('BOTTOMLEFT', frame, 'BOTTOMRIGHT', AS:AdjustForTheme(2), 0)
 
 						AS:SetInside(tbar, frame)
 
