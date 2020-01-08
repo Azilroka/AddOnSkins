@@ -23,11 +23,11 @@ function AS:CheckOption(optionName, ...)
 		if not AS:CheckAddOn(addon) then return false end
 	end
 
-	return self.db[optionName]
+	return AS.db[optionName]
 end
 
 function AS:SetOption(optionName, value)
-	self.db[optionName] = value
+	AS.db[optionName] = value
 
 	if AddOnSkinsDS[AS.Version] and AddOnSkinsDS[AS.Version][optionName] == true then
 		AddOnSkinsDS[AS.Version][optionName] = nil
@@ -252,7 +252,7 @@ function AS:UpdateMedia()
 	AS.Font = AS.LSM:Fetch('font', "Friz Quadrata TT")
 	AS.PixelFont = AS.LSM:Fetch('font', "Arial Narrow")
 	AS.NormTex = AS.LSM:Fetch('statusbar', "Blizzard")
-	AS.BackdropColor = { .2, .2, .2, .8}
+	AS.BackdropColor = { .2, .2, .2, .8 }
 	AS.BorderColor = { 0, 0, 0 }
 	AS.Color = AS.ClassColor
 	AS.HideShadows = false
@@ -333,7 +333,7 @@ function AS:Init(event, addon)
 
 		AS:UpdateMedia()
 
-		self:RunPreload(addon)
+		AS:RunPreload(addon)
 	end
 
 	if event == 'PLAYER_LOGIN' then

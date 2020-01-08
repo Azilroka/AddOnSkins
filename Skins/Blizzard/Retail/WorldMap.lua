@@ -69,8 +69,8 @@ function AS:Blizzard_Gossip()
 				local button = _G["GossipTitleButton"..i]
 				if button:GetFontString() then
 					local Text = button:GetFontString():GetText()
-					if Text and strfind(Text, '|cff000000') then
-						button:GetFontString():SetText(string.gsub(Text, '|cff000000', '|cffffe519'))
+					if Text and strmatch(Text:GetText(), '|c[Ff][Ff]%x%x%x%x%x%x') then
+						button:GetFontString():SetText(gsub(Text, '|c[Ff][Ff]%x%x%x%x%x%x', '|cffffe519'))
 					end
 				end
 			end
@@ -311,8 +311,8 @@ function AS:Blizzard_Quest()
 		local function TitleButtonPool()
 			for Button in QuestFrameGreetingPanel.titleButtonPool:EnumerateActive() do
 				local Text = Button:GetFontString():GetText()
-				if Text and strfind(Text, '|cff000000') then
-					Button:GetFontString():SetText(string.gsub(Text, '|cff000000', '|cffffe519'))
+				if Text and strmatch(Text:GetText(), '|c[Ff][Ff]%x%x%x%x%x%x') then
+					Button:GetFontString():SetText(gsub(Text, '|c[Ff][Ff]%x%x%x%x%x%x', '|cffffe519'))
 				end
 			end
 		end

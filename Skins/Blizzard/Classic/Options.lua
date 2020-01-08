@@ -469,7 +469,9 @@ function AS:Blizzard_Options(event, addon)
 
 		AS:SkinFrame(BrowserSettingsTooltip)
 		AS:SkinButton(BrowserSettingsTooltip.CookiesButton, true)
-		AS:SkinButton(BrowserSettingsTooltip.CacheButton, true)
+		if BrowserSettingsTooltip.CacheButton then
+			AS:SkinButton(BrowserSettingsTooltip.CacheButton, true)
+		end
 	end
 end
 
