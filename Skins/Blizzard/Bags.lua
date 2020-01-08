@@ -37,7 +37,7 @@ function AS:Blizzard_Bags()
 
 			ItemButton:SetNormalTexture('')
 			AS:StyleButton(ItemButton)
-			hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b, a)
+			hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(_, r, g, b, a)
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
 				local isQuestItem = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
 				if Quality and Quality > _G.LE_ITEM_QUALITY_COMMON then
@@ -48,7 +48,7 @@ function AS:Blizzard_Bags()
 					ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 				end
 			end)
-			hooksecurefunc(ItemButton.IconBorder, 'Hide', function(self)
+			hooksecurefunc(ItemButton.IconBorder, 'Hide', function()
 				ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end)
 		end
@@ -61,7 +61,9 @@ function AS:Blizzard_Bags()
 		AS:Kill(_G["ContainerFrame"..i.."BackgroundBottom"])
 		AS:SkinCloseButton(_G["ContainerFrame"..i.."CloseButton"])
 		AS:SkinButton(Bag.PortraitButton)
-		AS:Kill(Bag.PortraitButton.Highlight)
+		if Bag.PortraitButton.Highlight then
+			AS:Kill(Bag.PortraitButton.Highlight)
+		end
 	end
 
 	local function UpdateBagIcon()

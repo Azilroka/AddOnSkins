@@ -8,9 +8,18 @@ function AS:ItemRack()
 			AS:SkinIconButton(_G["ItemRackMenu"..idx])
 		end
 	end
+	local function SkinButton2()
+		for i=0,20 do
+			if _G["ItemRackButton"..i] then
+				AS:SkinIconButton(_G["ItemRackButton"..i])
+			end
+		end
+	end
 
 	hooksecurefunc(ItemRack, 'CreateMenuButton', SkinButton)
+	hooksecurefunc(ItemRack, 'InitButtons', SkinButton2)
 	SkinButton(1)
+	SkinButton2()
 end
 
 AS:RegisterSkin('ItemRack', AS.ItemRack)
