@@ -32,6 +32,39 @@ function AS:BtWLoadouts()
 	AS:SkinEditBox(_G.BtWLoadoutsFrame.Talents.Name)
 	AS:SkinDropDownBox(_G.BtWLoadoutsFrame.Talents.SpecDropDown)
 
+	for i = 1, MAX_TALENT_TIERS do
+		local Row = BtWLoadoutsFrame.Talents.rows[i]
+		AS:StripTextures(Row, true)
+
+		for j = 1, NUM_TALENT_COLUMNS do
+			local Button = Row.talents[j]
+
+			AS:SkinBackdropFrame(Button)
+			AS:CreateShadow(Button.Backdrop, true)
+
+			Button:SetFrameLevel(Button:GetFrameLevel() + 2)
+			Button.Backdrop:SetPoint("TOPLEFT", 15, -1)
+			Button.Backdrop:SetPoint("BOTTOMRIGHT", -10, 1)
+
+			Button.knownSelection:SetAlpha(0)
+
+			AS:CreateBackdrop(Button.icon)
+			AS:SkinTexture(Button.icon)
+
+			Button.icon:SetSize(32, 32)
+
+			Button:HookScript('OnEnter', function(self)
+				self.Backdrop:SetBackdropBorderColor(1, .82, 0)
+				self.icon.Backdrop:SetBackdropBorderColor(1, .82, 0)
+			end)
+
+			Button:HookScript('OnLeave', function(self)
+				self.Backdrop:SetBackdropBorderColor(nil)
+				self.icon.Backdrop:SetBackdropBorderColor(nil)
+			end)
+		end
+	end
+
 	AS:SkinFrame(_G.BtWLoadoutsFrame.PvPTalents.Inset)
 	AS:SkinEditBox(_G.BtWLoadoutsFrame.PvPTalents.Name)
 	AS:SkinDropDownBox(_G.BtWLoadoutsFrame.PvPTalents.SpecDropDown)
