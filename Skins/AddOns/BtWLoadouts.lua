@@ -48,19 +48,16 @@ function AS:BtWLoadouts()
 
 			Button.knownSelection:SetAlpha(0)
 
-			AS:CreateBackdrop(Button.icon)
 			AS:SkinTexture(Button.icon)
 
 			Button.icon:SetSize(32, 32)
 
 			Button:HookScript('OnEnter', function(self)
 				self.Backdrop:SetBackdropBorderColor(1, .82, 0)
-				self.icon.Backdrop:SetBackdropBorderColor(1, .82, 0)
 			end)
 
 			Button:HookScript('OnLeave', function(self)
 				self.Backdrop:SetBackdropBorderColor(nil)
-				self.icon.Backdrop:SetBackdropBorderColor(nil)
 			end)
 		end
 	end
