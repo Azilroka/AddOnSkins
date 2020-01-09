@@ -672,7 +672,7 @@ function AS:SkinDropDownBox(Frame, Width, Pos)
 	if Pos then
 		Button:SetPoint("TOPRIGHT", Frame.Right, -20, -21)
 	else
-		Button:SetPoint("RIGHT", Frame, "RIGHT", -10, 3)
+		Button:SetPoint("RIGHT", Frame, "RIGHT", -10, 0)
 	end
 
 	Button.SetPoint = AS.noop
