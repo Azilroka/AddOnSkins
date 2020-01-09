@@ -648,40 +648,44 @@ function AS:SkinCloseButton(Button, Reposition)
 	end
 end
 
-function AS:SkinDropDownBox(Frame, Width)
+function AS:SkinDropDownBox(Frame, Width, Pos)
 	if Frame.Backdrop then return end
 
 	local FrameName = Frame.GetName and Frame:GetName()
+	local Button = Frame.Button or FrameName and (_G[FrameName.."Button"] or _G[FrameName.."_Button"])
+	local Text = FrameName and _G[FrameName.."Text"] or Frame.Text
+	local Icon = Frame.Icon
 
-	local Button = FrameName and _G[FrameName..'Button'] or Frame.Button
-	local Text = FrameName and _G[FrameName..'Text'] or Frame.Text
+	if not Width then
+		Width = 155
+	end
 
 	AS:StripTextures(Frame)
-
-	if Width then
-		Frame:SetWidth(Width)
-	end
-
-	if Text then
-		local a, b, c, d, e = Text:GetPoint()
-		Text:SetPoint(a, b, c, d + 10, e - 4)
-		Text:SetWidth(Frame:GetWidth() / 1.4)
-	end
-
-	Button:SetPoint('TOPRIGHT', -14, -8)
-	Button:SetSize(16, 16)
-
-	AS:SkinArrowButton(Button, 'DOWN')
-
-	if Frame.Icon then
-		Frame.Icon:SetPoint('LEFT', 23, 0)
-	end
+	Frame:SetWidth(Width)
 
 	AS:CreateBackdrop(Frame, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
+	Frame.Backdrop:SetPoint("TOPLEFT", 20, -2)
+	Frame.Backdrop:SetPoint("BOTTOMRIGHT", Button, "BOTTOMRIGHT", 2, -2)
 
-	Frame.Backdrop:SetFrameLevel(Frame:GetFrameLevel())
-	Frame.Backdrop:SetPoint('TOPLEFT', 20, -6)
-	Frame.Backdrop:SetPoint('BOTTOMRIGHT', Button, 'BOTTOMRIGHT', 2, -2)
+	Button:ClearAllPoints()
+
+	if Pos then
+		Button:SetPoint("TOPRIGHT", Frame.Right, -20, -21)
+	else
+		Button:SetPoint("RIGHT", Frame, "RIGHT", -10, 3)
+	end
+
+	Button.SetPoint = AS.noop
+	AS:SkinArrowButton(Button, 'DOWN')
+
+	if Text then
+		Text:ClearAllPoints()
+		Text:SetPoint("RIGHT", Button, "LEFT", -2, 0)
+	end
+
+	if Icon then
+		Icon:SetPoint("LEFT", 23, 0)
+	end
 end
 
 function AS:SkinEditBox(EditBox, Width, Height)
