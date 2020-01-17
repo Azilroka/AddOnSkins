@@ -1,4 +1,4 @@
-## Interface: 80205
+## Interface: 80300
 ## Title: |cff1784d1AddOnSkins|r
 ## Version: 4.39
 ## Author: Azilroka, NihilisticPandemonium
