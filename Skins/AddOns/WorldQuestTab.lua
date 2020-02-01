@@ -6,32 +6,19 @@ function AS:WorldQuestTab()
 	AS:SkinButton(WQT_TabNormal)
 	AS:SkinButton(WQT_TabWorld)
 
-	AS:SkinButton(WQT_WorldQuestFrameSortButton)
+	AS:StripTextures(WQT_WorldQuestFrameSortButton)
 
 	AS:StripTextures(WQT_WorldQuestFrameFilterButton, true)
 
 	AS:SkinButton(WQT_WorldQuestFrameFilterButton)
 
-	AS:SkinArrowButton(WQT_WorldQuestFrameSortButtonButton)
+	AS:SkinArrowButton(WQT_WorldQuestFrameSortButton.Button)
 
 	WQT_TabWorld.TabBg:Hide()
 	WQT_TabWorld.Highlight:SetTexture("")
 
 	WQT_TabNormal.Highlight:SetTexture("")
 	WQT_TabNormal.TabBg:Hide()
-
-	WQT_WorldQuestFrameSortButton:ClearAllPoints()
-	WQT_WorldQuestFrameSortButton:SetPoint('LEFT', WQT_TabWorld, 'RIGHT', 18, -2)
-	WQT_WorldQuestFrameSortButtonButton:ClearAllPoints()
-	WQT_WorldQuestFrameSortButtonButton:SetPoint('LEFT', WQT_WorldQuestFrameSortButton, 'RIGHT', -29, 0)
-	WQT_WorldQuestFrameSortButtonText:ClearAllPoints()
-	WQT_WorldQuestFrameSortButtonText:SetPoint('CENTER', WQT_WorldQuestFrameSortButton, 'CENTER', -20, 0)
-	WQT_WorldQuestFrameFilterButton:ClearAllPoints()
-	WQT_WorldQuestFrameFilterButton:SetPoint('LEFT', WQT_WorldQuestFrameSortButton, 'RIGHT', 18, 0)
-
-	WQT_WorldQuestFrameSortButton:SetSize(92, 32)
-	WQT_WorldQuestFrameSortButtonButton:SetSize(27, 28)
-	WQT_WorldQuestFrameFilterButton:SetSize(92, 32)
 
 	AS:SkinScrollBar(WQT_QuestScrollFrameScrollBar)
 
