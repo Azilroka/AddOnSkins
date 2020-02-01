@@ -18,7 +18,6 @@
 	<Script file="AutoEquipQuestItem.lua"/>
 	<Script file="AzerothAutoPilot.lua"/>
 	<Script file="Baggins.lua"/>
-	<Script file="Bagnon.lua"/>
 	<Script file="BagSync.lua"/>
 	<Script file="Bartender4.lua"/>
 	<Script file="BattlePetBreedID.lua"/>
