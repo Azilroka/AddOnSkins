@@ -18,30 +18,32 @@ AS['DetailsInstances'] = {}
 hooksecurefunc(AS, 'EmbedInit', function()
 	Details = _G._detalhes
 
-	local listener = Details:CreateEventListener()
-	listener:RegisterEvent("DETAILS_INSTANCE_OPEN")
-	listener:RegisterEvent("DETAILS_INSTANCE_CLOSE")
+	if Details.CreateEventListener then
+		local listener = Details:CreateEventListener()
+		listener:RegisterEvent("DETAILS_INSTANCE_OPEN")
+		listener:RegisterEvent("DETAILS_INSTANCE_CLOSE")
 
-	function listener:OnDetailsEvent (event, ...)
-		if (event == "DETAILS_INSTANCE_CLOSE") then
-			local instance = select (1, ...)
-			if (instance._ElvUIEmbed and _G.DetailsOptionsWindow and _G.DetailsOptionsWindow:IsShown()) then
-				Details:Msg("You just closed a window Embed on ElvUI, if wasn't intended click on Reopen.") --> need localization
-			end
-		elseif (event == "DETAILS_INSTANCE_OPEN") then
-			local instance = select(1, ...)
-			if (instance._ElvUIEmbed) then
-				if (#AS.DetailsInstances >= 2) then
-					AS.DetailsInstances[1]:UngroupInstance()
-					AS.DetailsInstances[2]:UngroupInstance()
+		function listener:OnDetailsEvent (event, ...)
+			if (event == "DETAILS_INSTANCE_CLOSE") then
+				local instance = select (1, ...)
+				if (instance._ElvUIEmbed and _G.DetailsOptionsWindow and _G.DetailsOptionsWindow:IsShown()) then
+					Details:Msg("You just closed a window Embed on ElvUI, if wasn't intended click on Reopen.") --> need localization
+				end
+			elseif (event == "DETAILS_INSTANCE_OPEN") then
+				local instance = select(1, ...)
+				if (instance._ElvUIEmbed) then
+					if (#AS.DetailsInstances >= 2) then
+						AS.DetailsInstances[1]:UngroupInstance()
+						AS.DetailsInstances[2]:UngroupInstance()
 
-					AS.DetailsInstances[1].baseframe:ClearAllPoints()
-					AS.DetailsInstances[2].baseframe:ClearAllPoints()
+						AS.DetailsInstances[1].baseframe:ClearAllPoints()
+						AS.DetailsInstances[2].baseframe:ClearAllPoints()
 
-					AS.DetailsInstances[1]:RestoreMainWindowPosition()
-					AS.DetailsInstances[2]:RestoreMainWindowPosition()
+						AS.DetailsInstances[1]:RestoreMainWindowPosition()
+						AS.DetailsInstances[2]:RestoreMainWindowPosition()
 
-					AS.DetailsInstances[2]:MakeInstanceGroup({1})
+						AS.DetailsInstances[2]:MakeInstanceGroup({1})
+					end
 				end
 			end
 		end
