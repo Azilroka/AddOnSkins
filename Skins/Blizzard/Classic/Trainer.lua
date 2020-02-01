@@ -67,7 +67,7 @@ function AS:Blizzard_CraftUI(event, addon)
 
 		name:SetPoint('LEFT', nameFrame, 'LEFT', 20, 0)
 
-		nameFrame:Kill()
+		AS:Kill(nameFrame)
 	end
 
 	CraftReagent1:SetPoint('TOPLEFT', CraftReagentLabel, 'BOTTOMLEFT', -3, -3)
@@ -109,7 +109,7 @@ function AS:Blizzard_CraftUI(event, addon)
 			CraftReagentLabel:SetAlpha(1)
 			CraftIcon:SetAlpha(1)
 			AS:SkinTexture(CraftIcon:GetNormalTexture())
-			CraftIcon:GetNormalTexture():SetInside()
+			AS:SetInside(CraftIcon:GetNormalTexture())
 		else
 			CraftReagentLabel:SetAlpha(0)
 			CraftIcon:SetAlpha(0)
@@ -243,7 +243,7 @@ function AS:Blizzard_TradeSkill(event, addon)
 
 		AS:SkinTexture(icon, true)
 
-		nameFrame:Kill()
+		AS:Kill(nameFrame)
 	end
 
 	AS:SkinButton(_G.TradeSkillCancelButton)

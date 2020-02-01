@@ -7,7 +7,7 @@ function AS:Blizzard_Taxi()
 	AS:SkinCloseButton(TaxiCloseButton)
 	TaxiCloseButton:SetFrameLevel(TaxiRouteMap:GetFrameLevel() + 1)
 	TaxiCloseButton:SetPoint("TOPRIGHT", -28, -8)
-	TaxiPortrait:Kill()
+	AS:Kill(TaxiPortrait)
 
 	TaxiFrame.Backdrop:SetPoint("TOPLEFT", 11, -12)
 	TaxiFrame.Backdrop:SetPoint("BOTTOMRIGHT", -32, 76)

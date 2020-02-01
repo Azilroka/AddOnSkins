@@ -97,7 +97,7 @@ function AS:Blizzard_Character()
 		for i = 1, 5 do
 			local frame, icon, text = _G[frameName..i], _G[frameName..i]:GetRegions()
 			frame:SetSize(24, 24)
-			frame:SetTemplate('Default')
+			AS:SetTemplate(frame)
 
 			if i ~= 1 then
 				frame:ClearAllPoints()
