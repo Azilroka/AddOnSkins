@@ -31,13 +31,14 @@ function AS:Blizzard_TalentUI(event, addon)
 
 		if talent then
 			AS:SkinBackdropFrame(talent)
-			talent:StyleButton()
+			AS:StyleButton(talent)
 			talent.Backdrop:SetFrameStrata('LOW')
 			talent.Backdrop:SetFrameLevel(talent:GetFrameLevel() - 1)
 
-			icon:SetInside(talent.Backdrop, 2, 2)
+			AS:SetInside(icon, talent.Backdrop, 2, 2)
 			AS:SkinTexture(icon)
 			icon:SetDrawLayer('ARTWORK')
+			rank:SetDrawLayer('OVERLAY')
 
 			--rank:SetFont(AS.Font, 12, 'OUTLINE') -- easier to read
 		end
