@@ -548,18 +548,11 @@ function AS:SkinButton(Button, Strip)
 		else
 			Button:GetFontString():SetTextColor(.5, .5, .5)
 		end
+
+		Button:HookScript("OnEnable", function(self) self:GetFontString():SetTextColor(1, 1, 1) end)
+		Button:HookScript("OnDisable", function(self) self:GetFontString():SetTextColor(.5, .5, .5) end)
 	end
 
-	Button:HookScript("OnEnable", function(self)
-		if self.GetFontString and self:GetFontString() ~= nil then
-			self:GetFontString():SetTextColor(1, 1, 1)
-		end
-	end)
-	Button:HookScript("OnDisable", function(self)
-		if self.GetFontString and self:GetFontString() ~= nil then
-			self:GetFontString():SetTextColor(.5, .5, .5)
-		end
-	end)
 	Button:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
 	Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
