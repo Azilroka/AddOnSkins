@@ -18,12 +18,12 @@
 	<Script file="AutoEquipQuestItem.lua"/>
 	<Script file="AzerothAutoPilot.lua"/>
 	<Script file="Baggins.lua"/>
+	<Script file="Bagnon.lua"/>
 	<Script file="BagSync.lua"/>
 	<Script file="Bartender4.lua"/>
 	<Script file="BattlePetBreedID.lua"/>
 	<Script file="BGDefender.lua"/>
 	<Script file="BigWigs.lua"/>
-	<Script file="BtWLoadouts.lua"/>
 	<Script file="BtWQuests.lua"/>
 	<Script file="BugSack.lua"/>
 	<Script file="BuyEmAll.lua"/>
@@ -48,6 +48,7 @@
 	<Script file="Easy_Obliterate.lua"/>
 	<Script file="EnchantCheck.lua"/>
 	<Script file="EnergyWatch.lua"/>
+	<Script file="EssenceSetManager.lua"/>
 	<Script file="Examiner.lua"/>
 	<Script file="ExtraQuestButton.lua"/>
 	<Script file="ExtVendor.lua"/>
