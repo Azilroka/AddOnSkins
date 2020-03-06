@@ -70,9 +70,9 @@ function AS:Pawn(event, addon)
 		AS:SkinButton(PawnUIFrame_ClearValueButton)
 
 		-- Compare
-		AS:SkinBackdropFrame(PawnUICompareItemIcon1, nil, true, false, true)
-		AS:SkinBackdropFrame(PawnUICompareItemIcon2, nil, true, false, true)
-		-- AS:SkinButton(PawnUIFrame_ClearItemsButton) -- This button needs some attention
+		AS:SkinBackdropFrame(PawnUICompareItemIcon1, nil, false)
+		AS:SkinBackdropFrame(PawnUICompareItemIcon2, nil, false)
+		AS:SkinBackdropFrame(PawnUIFrame_ClearItemsButton, nil, false)
 		AS:SkinButton(PawnUIFrame_CompareSwapButton)
 		AS:SkinScrollBar(PawnUICompareScrollFrameScrollBar)
 
