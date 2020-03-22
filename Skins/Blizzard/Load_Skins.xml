@@ -1,6 +1,5 @@
 <Ui>
 	<Script file="AddOnManager.lua"/>
-	<Script file="Bags.lua"/>
 	<Script file="ChatBubbles.lua"/>
 	<Script file="Trade.lua"/>
 

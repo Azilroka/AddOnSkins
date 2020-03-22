@@ -302,7 +302,7 @@ function AS:StartSkinning(event)
 			end
 		end
 
-		if AS:CheckOption(addonName) and AS:CheckAddOn(addonName) then
+		if AS:CheckOption(addonName) and (AS:CheckAddOn(addonName) or strfind(addonName, 'Blizzard_')) then
 			for _, func in ipairs(funcs) do
 				AS:CallSkin(addonName, func, event)
 			end

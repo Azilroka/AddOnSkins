@@ -122,6 +122,7 @@ function AS:Blizzard_Others()
 			local r, g, b = unpack(AS.Color)
 			icon:SetColorTexture(r, g, b, 0.45)
 			icon:SetHeight(1)
+			AS:CreateBackdrop(icon)
 		end
 	end)
 
@@ -159,7 +160,7 @@ function AS:Blizzard_Others()
 				uncheck:SetTexture('')
 				local _, co = check:GetTexCoord()
 				if co == 0 then
-					check:SetTexture("Interface\\Buttons\\UI-CheckBox-Check")
+					check:SetTexture("Interface/Buttons/UI-CheckBox-Check")
 					check:SetVertexColor(r, g, b, 1)
 					check:SetSize(20, 20)
 					check:SetDesaturated(true)

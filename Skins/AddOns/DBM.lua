@@ -58,7 +58,7 @@ function AS:DBM(event, addon)
 							name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 0, 3)
 							timer:SetPoint('BOTTOMRIGHT', frame, 'TOPRIGHT', -1, 1)
 						else
-							frame:SetHeight(bar.owner.options.Height)
+							frame:SetHeight(bar.owner.options.Height + 2)
 							name:SetPoint('LEFT', frame, 'LEFT', 4, 0)
 							timer:SetPoint('RIGHT', frame, 'RIGHT', -4, 0)
 						end
