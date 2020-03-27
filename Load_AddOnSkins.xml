@@ -4,6 +4,7 @@
 	<Script file="Init.lua"/>
 	<Include file="Core\Load_Core.xml"/>
 	<Include file="Embed\Load_Embed.xml"/>
+
 	<Include file="Skins\AddOns\Load_Skins.xml"/>
 	<Include file="Skins\Blizzard\Load_Skins.xml"/>
 </Ui>

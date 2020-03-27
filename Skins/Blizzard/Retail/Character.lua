@@ -383,7 +383,7 @@ function AS:Blizzard_Inspect(event, addon)
 				return
 			end
 
-			local slotInfo = C_SpecializationInfo_GetInspectSelectedPvpTalent(_G.INSPECTED_UNIT, self.slotIndex)
+			local slotInfo = C_SpecializationInfo.GetInspectSelectedPvpTalent(_G.INSPECTED_UNIT, self.slotIndex)
 
 			if (slotInfo) then
 				AS:SkinTexture(self.Texture)

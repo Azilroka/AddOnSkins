@@ -1,3 +1,4 @@
+if AddOnSkins.Classic then return end
 local AS = unpack(AddOnSkins)
 
 -- Cache global variables
@@ -101,7 +102,7 @@ function AS:Blizzard_Bags()
 	hooksecurefunc('ContainerFrame_Update', UpdateBagIcon)
 
 	AS:SkinFrame(_G.BankFrame, nil, nil, true)
-	AS:SkinCloseButton(_G.BankCloseButton)
+	AS:SkinCloseButton(_G.BankFrameCloseButton)
 
 	AS:StripTextures(_G.BankSlotsFrame)
 

@@ -1,5 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
 	<Script file="Auction.lua"/>
+	<Script file="Bags.lua"/>
 	<Script file="Channels.lua"/>
 	<Script file="Character.lua"/>
 	<Script file="Communities.lua"/>

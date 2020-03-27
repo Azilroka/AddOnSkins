@@ -69,7 +69,7 @@ function AS:Blizzard_Gossip()
 				local button = _G["GossipTitleButton"..i]
 				if button:GetFontString() then
 					local Text = button:GetFontString():GetText()
-					if Text and strmatch(Text:GetText(), '|c[Ff][Ff]%x%x%x%x%x%x') then
+					if Text and Text.GetText and strmatch(Text:GetText(), '|c[Ff][Ff]%x%x%x%x%x%x') then
 						button:GetFontString():SetText(gsub(Text, '|c[Ff][Ff]%x%x%x%x%x%x', '|cffffe519'))
 					end
 				end

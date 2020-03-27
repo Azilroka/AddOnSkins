@@ -41,6 +41,11 @@ function AS:WhatsTraining()
 		WhatsTrainingFrameScrollBar:SetPoint("BOTTOMRIGHT", '$parent', -65, 81)
 		AS:SkinBackdropFrame(WhatsTrainingFrameScrollBar)
 
+		if WhatsTrainingTooltip then
+			WhatsTrainingTooltip:SetScript("OnShow", function()
+				AS:SkinTooltip(WhatsTrainingTooltip)
+			end)
+		end
 	end)
 end
 
