@@ -1,6 +1,6 @@
-## Interface: 11302
+## Interface: 11304
 ## Title: |cff1784d1AddOnSkins|r
-## Version: 4.39
+## Version: 4.40
 ## Author: Azilroka, NihilisticPandemonium
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 
