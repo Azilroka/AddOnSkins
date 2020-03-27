@@ -303,12 +303,15 @@ function AS:Blizzard_AuctionHouseUI(event, addon)
 	end
 
 	local SummaryList = AuctionsFrame.SummaryList
+	HandleSellList(SummaryList)
 	AS:SkinButton(AuctionsFrame.CancelAuctionButton)
 
 	local AllAuctionsList = AuctionsFrame.AllAuctionsList
+	HandleSellList(AllAuctionsList, true)
 	AS:SkinButton(AllAuctionsList.RefreshFrame.RefreshButton)
 
 	local BidsList = AuctionsFrame.BidsList
+	HandleSellList(BidsList, true)
 	AS:SkinButton(BidsList.RefreshFrame.RefreshButton)
 	AS:SkinEditBox(_G.AuctionHouseFrameAuctionsFrameGold)
 	AS:SkinEditBox(_G.AuctionHouseFrameAuctionsFrameSilver)

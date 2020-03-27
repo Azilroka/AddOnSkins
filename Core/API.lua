@@ -543,14 +543,14 @@ function AS:SkinButton(Button, Strip)
 	AS:SetTemplate(Button, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
 	if Button.GetFontString and Button:GetFontString() ~= nil then
+		Button:HookScript("OnEnable", function(self) self:GetFontString():SetTextColor(1, 1, 1) end)
+		Button:HookScript("OnDisable", function(self) self:GetFontString():SetTextColor(.5, .5, .5) end)
+
 		if Button:IsEnabled() then
 			Button:GetFontString():SetTextColor(1, 1, 1)
 		else
 			Button:GetFontString():SetTextColor(.5, .5, .5)
 		end
-
-		Button:HookScript("OnEnable", function(self) self:GetFontString():SetTextColor(1, 1, 1) end)
-		Button:HookScript("OnDisable", function(self) self:GetFontString():SetTextColor(.5, .5, .5) end)
 	end
 
 	Button:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
@@ -865,8 +865,15 @@ function AS:SkinTab(Tab)
 
 	AS:CreateBackdrop(Tab, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
-	if Tab.GetFontString then
-		Tab:GetFontString():SetTextColor(1, 1, 1)
+	if Tab.GetFontString and Tab:GetFontString() ~= nil then
+		Tab:HookScript("OnEnable", function(self) self:GetFontString():SetTextColor(1, 1, 1) end)
+		Tab:HookScript("OnDisable", function(self) self:GetFontString():SetTextColor(.5, .5, .5) end)
+
+		if Tab:IsEnabled() then
+			Tab:GetFontString():SetTextColor(1, 1, 1)
+		else
+			Tab:GetFontString():SetTextColor(.5, .5, .5)
+		end
 	end
 
 	Tab:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.Color)) end)
