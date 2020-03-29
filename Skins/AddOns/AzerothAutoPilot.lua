@@ -1,6 +1,6 @@
 local AS = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Azeroth Auto Pilot') then return end
+if not AS:CheckAddOn('AAP-Core') then return end
 
 function AS:AzerothAutoPilot()
 	for Key, Child in pairs(AAP.QuestList) do
@@ -51,4 +51,4 @@ function AS:AzerothAutoPilot()
 	AAP.QuestList.Greetings:SetHeight(175)
 end
 
-AS:RegisterSkin('Azeroth Auto Pilot', AS.AzerothAutoPilot)
+AS:RegisterSkin('AAP-Core', AS.AzerothAutoPilot)
