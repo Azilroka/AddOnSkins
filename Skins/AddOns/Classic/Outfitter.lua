@@ -1,10 +1,11 @@
+if AddOnSkins.Retail then return end
 local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Outfitter') then return end
 
 function AS:Outfitter()
 	local LDD = LibStub("LibDropdownMC-1.0")
-	CharacterFrame:HookScript('OnShow', function(self) PaperDollSidebarTabs:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -14, 0) end)
+	CharacterFrame:HookScript('OnShow', function(self) CharacterFrame:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -14, 0) end)
 	OutfitterFrame:HookScript('OnShow', function(self)
 		AS:SkinFrame(OutfitterFrame)
 		OutfitterFrameTab1:SetSize(60, 25)
@@ -49,7 +50,7 @@ function AS:Outfitter()
 	AS:SkinButton(OutfitterEnableAll)
 	AS:Desaturate(OutfitterButton)
 	OutfitterButton:ClearAllPoints()
-	OutfitterButton:SetPoint('RIGHT', PaperDollSidebarTabs, 'RIGHT', 26, -2)
+	OutfitterButton:SetPoint('TOPRIGHT', CharacterFrame, 'TOPRIGHT', -28, -38)
 	OutfitterButton:SetHighlightTexture(nil)
 	OutfitterSlotEnables:SetFrameStrata('HIGH')
 	AS:SkinCheckBox(OutfitterEnableHeadSlot)
