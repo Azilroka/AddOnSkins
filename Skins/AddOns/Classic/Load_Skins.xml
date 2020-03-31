@@ -1,5 +1,6 @@
 <Ui>
 	<Script file="Auctionator.lua"/>
+	<Script file="AutoCarrot.lua"/>
 	<Script file="DejaClassicStats.lua"/>
 	<Script file="ExtendedCharacterStats.lua"/>
 	<Script file="GatherLite.lua"/>
