@@ -262,8 +262,8 @@ function AS:GetPixelScale()
 	AS.mult = max(0.4, min(1.15, 768 / AS.ScreenHeight))
 end
 
-function AS:StartSkinning(event)
-	AS:UnregisterEvent(event)
+function AS:StartSkinning()
+	AS:UnregisterEvent('PLAYER_ENTERING_WORLD')
 	AS:GetPixelScale()
 
 	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
@@ -295,16 +295,20 @@ function AS:StartSkinning(event)
 			AS:SetOption(addonName, false)
 		end
 
-		-- Check forced Blizzard AddOns
-		if AS:CheckOption(addonName) and strfind(addonName, 'Blizzard_') and IsAddOnLoaded(addonName) then
+		-- Check Blizzard
+		if AS:CheckOption(addonName) and strfind(addonName, 'Blizzard_') then
 			for _, func in ipairs(funcs) do
-				AS:CallSkin(addonName, func, 'ADDON_LOADED', addonName)
+				if IsAddOnLoaded(addonName) then
+					AS:CallSkin(addonName, func, 'ADDON_LOADED', addonName)
+				end
+
+				AS:CallSkin(addonName, func, 'PLAYER_ENTERING_WORLD')
 			end
 		end
 
-		if AS:CheckOption(addonName) and (AS:CheckAddOn(addonName) or strfind(addonName, 'Blizzard_') or addonName == 'Libraries') then
+		if AS:CheckOption(addonName) and (AS:CheckAddOn(addonName) or addonName == 'Libraries' or addonName == 'Ace3') then
 			for _, func in ipairs(funcs) do
-				AS:CallSkin(addonName, func, event)
+				AS:CallSkin(addonName, func, 'PLAYER_ENTERING_WORLD')
 			end
 		end
 	end
