@@ -2,46 +2,40 @@ local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('NovaWorldBuffs') then return end
 
-function AS:NovaWorldBuffs()
-	local Frames = {
-		nefNWBWorldMap.noLayerFrame,
-		onyWorldMapTimerFrame,
-		nefWorldMapTimerFrame,
-		rendWorldMapTimerFrame,
-		NWBDMFTimerFrame,
-		NWBbuffListFrame,
-		NWBlayerFrame,
-	}
+function AS:SkinNovaFrame(frame)
+	if frame then
+		if frame.timerFrame then AS:SkinFrame(frame.timerFrame) end
+		if frame.noLayerFrame then AS:SkinFrame(frame.noLayerFrame) end
+		if frame.tooltip then AS:SkinTooltip(frame.tooltip) end
+		if frame.texture then AS:SkinTexture(frame.texture, true) end
+	end
+end
 
-	for _, Frame in pairs(Frames) do
-		if Frame then AS:SkinFrame(Frame) end
+
+function AS:NovaWorldBuffs()
+	if (NWB.isLayered) then
+		local count = 0;
+		for layer, data in NWB:pairsByKeys(NWB.data.layers) do
+			count = count + 1;
+			for k, v in pairs(NWB.worldBuffMapMarkerTypes) do
+				AS:SkinNovaFrame(_G[k .. layer .. "NWBWorldMap"])
+			end
+		end
 	end
 
-	local Tooltips = {
-		onyWorldMapTooltip,
-		nefWorldMapTooltip,
-		rendWorldMapTooltip,
-		NWBDMFTooltip,
-		NWBDMFContinentTooltip,
-		NWBlayerDragTooltip,
-		NWBVersionDragTooltip,
-		NWBbuffListDragTooltip,
-	}
-
-	for _, Tooltip in pairs(Tooltips) do
-		if Tooltip then AS:SkinTooltip(Tooltip) end
+	for k, v in pairs(NWB.worldBuffMapMarkerTypes) do
+		AS:SkinNovaFrame(_G[k .. "NWBWorldMap"])
 	end
 	
-	local Textures = {
-		onyNWBWorldMap.texture,
-		nefNWBWorldMap.texture,
-		rendNWBWorldMap.texture,
-		NWBDMF.texture,
-	}
-
-	for _, Texture in pairs(Textures) do
-		if Texture then AS:SkinTexture(Texture, true) end
-	end
+	AS:SkinNovaFrame(_G["NWBDMF"])
+	AS:SkinFrame(_G["NWBDMFTimerFrame"])
+	AS:SkinFrame(_G["NWBbuffListFrame"])
+	AS:SkinFrame(_G["NWBlayerFrame"])
+	
+	AS:SkinTooltip(_G["NWBDMFContinentTooltip"])
+	AS:SkinTooltip(_G["NWBlayerDragTooltip"])
+	AS:SkinTooltip(_G["NWBVersionDragTooltip"])
+	AS:SkinTooltip(_G["NWBbuffListDragTooltip"])
 
 	local Buttons = {
 		NWBbuffListFrameConfButton,
