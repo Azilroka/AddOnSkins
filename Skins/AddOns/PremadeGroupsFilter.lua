@@ -8,10 +8,13 @@ function AS:PremadeGroupsFilter()
 		dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT", AS:AdjustForTheme(2), AS:AdjustForTheme(1))
 		dialog:SetPoint("BOTTOMLEFT", GroupFinderFrame, "BOTTOMRIGHT", AS:AdjustForTheme(2), AS:AdjustForTheme(-1))
 	end
-	hooksecurefunc(PremadeGroupsFilter.Debug, "Dialog_UpdatePosition", Reposition)
+	hooksecurefunc(PremadeGroupsFilter.Debug, "Dialog_ResetPosition", Reposition)
 
 	AS:SkinFrame(PremadeGroupsFilterDialog)
 	AS:SkinCloseButton(PremadeGroupsFilterDialog.CloseButton)
+	AS:Desaturate(PremadeGroupsFilterDialog.MoveableToggle)
+	AS:Desaturate(PremadeGroupsFilterDialog.MinimizeButton)
+	AS:Desaturate(PremadeGroupsFilterDialog.MaximizeButton)
 	AS:SkinCheckBox(UsePFGButton)
 
 	AS:SkinCheckBox(PremadeGroupsFilterDialog.Difficulty.Act)
