@@ -1,5 +1,5 @@
 ## Interface: 80300
-## Title: |cff1784d1AddOnSkins|r
+## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
 ## Version: 4.411
 ## Author: Azilroka, NihilisticPandemonium
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
