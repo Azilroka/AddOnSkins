@@ -224,6 +224,15 @@ function AS:SkinLibraries()
 		end, 0)
 	end
 
+	local LSF = LibStub("LibSimpleFrame-Mod-1.0", true)
+	if LSF then
+		for name, frame in pairs(LSF.registry) do
+			AS:SetTemplate(frame)
+			frame.SetBackdropColor = AS.Noop
+			frame.SetBackdropBorderColor = AS.Noop
+		end
+	end
+
 	local LQT = LibStub("LibQTip-1.0", true)
 	if LQT then
 		hooksecurefunc(LQT, 'Acquire', function()
