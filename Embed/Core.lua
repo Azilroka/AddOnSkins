@@ -129,6 +129,7 @@ function AS:Embed_Check(Message)
 	end
 
 	AS:EmbedSystem_WindowResize()
+	EmbedSystem_MainWindow:SetShown(not AS:CheckOption('EmbedIsHidden'))
 
 	for _, Window in pairs({EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow}) do
 		Window:SetFrameStrata(strsub(AS:CheckOption('EmbedFrameStrata'), 3))

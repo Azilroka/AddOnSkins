@@ -423,9 +423,6 @@ AS.Options = {
 					func = function()
 						for SkinName in pairs(BlizzardSkins) do
 							AS:SetOption(SkinName, true)
-							if AS:CheckAddOn('ElvUI') then
-								AS:SetElvUIBlizzardSkinOption(SkinName, false)
-							end
 						end
 					end,
 				},
@@ -436,9 +433,6 @@ AS.Options = {
 					func = function()
 						for SkinName in pairs(BlizzardSkins) do
 							AS:SetOption(SkinName, false)
-							if AS:CheckAddOn('ElvUI') then
-								AS:SetElvUIBlizzardSkinOption(SkinName, true)
-							end
 						end
 					end,
 				},
@@ -465,19 +459,26 @@ AS.Options = {
 			get = function(info) return AS:CheckOption(info[#info]) end,
 			set = function(info, value) AS:SetOption(info[#info], value) AS:Embed_Check() end,
 			args = {
-				EmbedHeader = {
+				EmbedIsHidden = {
 					order = 0,
+					type = 'toggle',
+					name = ASL['|cFFFF0000Embed is HIDDEN|r'],
+					hidden = function() return not AS:CheckOption('EmbedIsHidden') end,
+					width = 'full',
+				},
+				EmbedHeader = {
+					order = 1,
 					type = 'header',
 					name = AS:GetColor(ASL['Embed Settings']),
 				},
 				EmbedSystemMessage = {
 					type = 'toggle',
 					name = ASL['Embed System Message'],
-					order = 1,
+					order = 2,
 				},
 				HideChatFrame = {
 					name = ASL['Hide Chat Frame'],
-					order = 2,
+					order = 3,
 					type = 'select',
 					values = function() return AS:GetChatWindowInfo() end,
 					disabled = function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end,
@@ -485,54 +486,54 @@ AS.Options = {
 				EmbedRightChat = {
 					type = 'toggle',
 					name = ASL['Embed into Right Chat Panel'],
-					order = 3,
+					order = 4,
 				},
 				EmbedBelowTop = {
 					type = 'toggle',
 					name = ASL['Embed Below Top Tab'],
-					order = 4,
+					order = 5,
 				},
 				EmbedBackdrop = {
 					type = 'toggle',
 					name = ASL['Backdrop'],
-					order = 5,
+					order = 6,
 				},
 				EmbedBackdropTransparent = {
 					type = 'toggle',
 					name = ASL['Transparent Backdrop'],
-					order = 6,
+					order = 7,
 				},
 				spacer1 = {
-					order = 7,
+					order = 8,
 					type = 'header',
 					name = '',
 				},
 				EmbedSystem = {
-					order = 8,
+					order = 9,
 					type = 'toggle',
 					name = ASL['One Window Embed System'],
 					disabled = function() return AS:CheckOption('EmbedSystemDual') end,
 				},
 				EmbedMain = {
-					order = 9,
+					order = 10,
 					type = 'select',
 					name = ASL['Embed for One Window'],
 					disabled = function() return not AS:CheckOption('EmbedSystem') end,
 					values = Embeds,
 				},
 				spacer2 = {
-					order = 10,
+					order = 11,
 					type = 'header',
 					name = '',
 				},
 				EmbedSystemDual = {
-					order = 11,
+					order = 12,
 					type = 'toggle',
 					name = ASL['Two Window Embed System'],
 					disabled = function() return AS:CheckOption('EmbedSystem') end,
 				},
 				EmbedLeft = {
-					order = 12,
+					order = 13,
 					type = 'select',
 					name = ASL["Window One Embed"],
 					disabled = function() return not AS:CheckOption('EmbedSystemDual') end,
@@ -540,26 +541,26 @@ AS.Options = {
 				},
 				EmbedLeftWidth = {
 					type = 'range',
-					order = 13,
+					order = 14,
 					name = ASL['Window One Width'],
 					min = 100, max = 300, step = 1,
 					disabled = function() return not AS:CheckOption('EmbedSystemDual') end,
 				},
 				EmbedRight = {
-					order = 14,
+					order = 15,
 					type = 'select',
 					name = ASL["Window Two Embed"],
 					disabled = function() return not AS:CheckOption('EmbedSystemDual') end,
 					values = Embeds,
 				},
 				spacer3 = {
-					order = 15,
+					order = 16,
 					type = 'header',
 					name = 'Strata, Level and Combat Options',
 				},
 				EmbedFrameStrata = {
 					name = ASL['Embed Frame Strata'],
-					order = 16,
+					order = 17,
 					type = 'select',
 					values = {
 						['1-BACKGROUND'] = 'BACKGROUND',
@@ -575,7 +576,7 @@ AS.Options = {
 				},
 				EmbedFrameLevel = {
 					name = ASL['Embed Frame Level'],
-					order = 17,
+					order = 18,
 					type = 'range',
 					min = 1,
 					max = 255,
@@ -585,11 +586,11 @@ AS.Options = {
 				EmbedOoC = {
 					type = 'toggle',
 					name = ASL['Out of Combat (Hide)'],
-					order = 18,
+					order = 19,
 				},
 				EmbedOoCDelay = {
 					name = ASL['Embed OoC Delay'],
-					order = 19,
+					order = 20,
 					type = 'range',
 					min = 1, max = 30, step = 1,
 					disabled = function() return not ((AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) and AS:CheckOption('EmbedOoC')) end,

@@ -291,10 +291,6 @@ function AS:StartSkinning()
 	end
 
 	for addonName, funcs in AS:OrderedPairs(AS.skins) do
-		if AS:CheckAddOn('ElvUI') and AS:GetElvUIBlizzardSkinOption(addonName) then
-			AS:SetOption(addonName, false)
-		end
-
 		-- Check Blizzard
 		if AS:CheckOption(addonName) and strfind(addonName, 'Blizzard_') then
 			for _, func in ipairs(funcs) do

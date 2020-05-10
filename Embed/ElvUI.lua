@@ -35,11 +35,11 @@ function AS:EmbedSystemHooks()
 			if btn == 'RightButton' then
 				if EmbedSystem_MainWindow:IsShown() then
 					AS:SetOption('EmbedIsHidden', true)
-					EmbedSystem_MainWindow:Hide()
 				else
 					AS:SetOption('EmbedIsHidden', false)
-					EmbedSystem_MainWindow:Show()
 				end
+
+				EmbedSystem_MainWindow:SetShown(not AS:CheckOption('EmbedIsHidden'))
 			else
 				if E.db[self.parent:GetName()..'Faded'] then
 					E.db[self.parent:GetName()..'Faded'] = nil
@@ -76,15 +76,6 @@ function AS:EmbedSystemHooks()
 				_G.GameTooltip:Show()
 			end
 		end)
-
-		function HideRightChat()
-			RightChatToggleButton:Click()
-		end
-
-		function HideBothChat()
-			LeftChatToggleButton:Click()
-			RightChatToggleButton:Click()
-		end
 	end
 end
 
@@ -92,14 +83,11 @@ function AS:EmbedSystem_WindowResize()
 	if UnitAffectingCombat('player') or not AS.EmbedSystemCreated then return end
 	local ChatPanel = AS:CheckOption('EmbedRightChat') and RightChatPanel or LeftChatPanel
 	local ChatTab = AS:CheckOption('EmbedRightChat') and RightChatTab or LeftChatTab
-	local ChatData = AS:CheckOption('EmbedRightChat') and RightChatDataPanel or LeftChatToggleButton
-	local TopRight = ChatData == RightChatDataPanel and (E.db.datatexts.rightChatPanel and 'TOPLEFT' or 'BOTTOMLEFT') or ChatData == LeftChatToggleButton and (E.db.datatexts.leftChatPanel and 'TOPLEFT' or 'BOTTOMLEFT')
-	local yOffset = (ChatData == RightChatDataPanel and E.db.datatexts.rightChatPanel and (E.PixelMode and 1 or 0)) or (ChatData == LeftChatToggleButton and E.db.datatexts.leftChatPanel and (E.PixelMode and 1 or 0)) or (E.PixelMode and 0 or -1)
 
 	EmbedSystem_MainWindow:SetParent(ChatPanel)
 	EmbedSystem_MainWindow:ClearAllPoints()
-	EmbedSystem_MainWindow:SetPoint('BOTTOMLEFT', ChatData, TopRight, 0, yOffset)
 	EmbedSystem_MainWindow:SetPoint('TOPRIGHT', ChatTab, AS:CheckOption('EmbedBelowTop') and 'BOTTOMRIGHT' or 'TOPRIGHT', 0, AS:CheckOption('EmbedBelowTop') and -1 or 0)
+	EmbedSystem_MainWindow:SetPoint('BOTTOMLEFT', ChatPanel, 'BOTTOMLEFT', 0, (E.PixelMode and 0 or -1))
 
 	EmbedSystem_LeftWindow:SetSize(AS:CheckOption('EmbedLeftWidth'), EmbedSystem_MainWindow:GetHeight())
 	EmbedSystem_RightWindow:SetSize((EmbedSystem_MainWindow:GetWidth() - AS:CheckOption('EmbedLeftWidth')) - 1, EmbedSystem_MainWindow:GetHeight())
