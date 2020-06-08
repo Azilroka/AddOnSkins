@@ -355,7 +355,7 @@ function AS:GuildRosterManager()
 			AS:SkinEditBox(GRM_PlayerNoteEditBox)
 			AS:SkinEditBox(GRM_PlayerOfficerNoteEditBox)
 			-- AS:SkinEditBox(GRM_CustomNoteEditBox)			-- Not skinning for now - seems odd looking
-			AS:SkinFrame(GRM_CustomNoteRankDropDownSelected)
+			-- AS:SkinFrame(GRM_CustomNoteRankDropDownSelected)
 
 			if buildVersion < 80000 then
 				self:SetPoint ( "TOPLEFT" , GuildFrame , "TOPRIGHT" , -2 , 5 )
@@ -384,8 +384,8 @@ function AS:GuildRosterManager()
 					self:SetPoint ( "TOPLEFT" , GRM_UI.GuildRosterFrame , "TOPRIGHT" , 25 , 5 )
 				end
 
-				GRM_CustomNoteRankDropDownSelected.NineSlice:Hide()
-				GRM_CustomNoteRankDropDownMenu.NineSlice:Hide()
+				-- GRM_CustomNoteRankDropDownSelected.NineSlice:Hide()
+				-- GRM_CustomNoteRankDropDownMenu.NineSlice:Hide()
 
 				CommunitiesFrame.GuildMemberDetailFrame:HookScript ( "OnShow" , function( self )
 					self:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 34 , 0 )
@@ -397,7 +397,7 @@ function AS:GuildRosterManager()
 				end)
 			end
 
-			AS:SkinFrame(GRM_CustomNoteRankDropDownMenu)
+			-- AS:SkinFrame(GRM_CustomNoteRankDropDownMenu)
 			AS:SkinFrame(GRM_PlayerNoteWindow)
 			AS:SkinFrame(GRM_PlayerOfficerNoteWindow)
 			AS:SkinFrame(GRM_SyncJoinDateSideFrame)
