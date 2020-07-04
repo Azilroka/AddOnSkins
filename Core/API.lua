@@ -60,7 +60,7 @@ AS.Blizzard.Tooltip = {
 AS.RegisterTemplates = {}
 
 -- ls, Azil, and Simpy made this to replace Blizzard's SetBackdrop API while the textures can't snap
-AS.PixelBorders = {"TOPLEFT", "TOPRIGHT", "BOTTOMLEFT", "BOTTOMRIGHT", "TOP", "BOTTOM", "LEFT", "RIGHT"}
+AS.PixelBorders = {'TOP', 'BOTTOM', 'LEFT', 'RIGHT'}
 function AS:SetBackdrop(frame, bgFile, edgeSize, insetLeft, insetRight, insetTop, insetBottom)
 	if not frame.pixelBorders then return end
 
@@ -73,11 +73,6 @@ function AS:SetBackdrop(frame, bgFile, edgeSize, insetLeft, insetRight, insetTop
 		frame.pixelBorders.CENTER:SetPoint('TOPLEFT', frame)
 		frame.pixelBorders.CENTER:SetPoint('BOTTOMRIGHT', frame)
 	end
-
-	frame.pixelBorders.TOPLEFT:SetSize(edgeSize, edgeSize)
-	frame.pixelBorders.TOPRIGHT:SetSize(edgeSize, edgeSize)
-	frame.pixelBorders.BOTTOMLEFT:SetSize(edgeSize, edgeSize)
-	frame.pixelBorders.BOTTOMRIGHT:SetSize(edgeSize, edgeSize)
 
 	frame.pixelBorders.TOP:SetHeight(edgeSize)
 	frame.pixelBorders.BOTTOM:SetHeight(edgeSize)
@@ -138,22 +133,17 @@ function AS:BuildPixelBorders(frame, noSecureHook)
 		borders.CENTER:SetSnapToPixelGrid(false)
 		borders.CENTER:SetTexelSnappingBias(0)
 
-		borders.TOPLEFT:SetPoint("BOTTOMRIGHT", borders.CENTER, "TOPLEFT", 1, -1)
-		borders.TOPRIGHT:SetPoint("BOTTOMLEFT", borders.CENTER, "TOPRIGHT", -1, -1)
-		borders.BOTTOMLEFT:SetPoint("TOPRIGHT", borders.CENTER, "BOTTOMLEFT", 1, 1)
-		borders.BOTTOMRIGHT:SetPoint("TOPLEFT", borders.CENTER, "BOTTOMRIGHT", -1, 1)
+		borders.TOP:SetPoint('BOTTOMLEFT', borders.CENTER, 'TOPLEFT', 1, -1)
+		borders.TOP:SetPoint('BOTTOMRIGHT', borders.CENTER, 'TOPRIGHT', -1, -1)
 
-		borders.TOP:SetPoint("TOPLEFT", borders.TOPLEFT, "TOPRIGHT", 0, 0)
-		borders.TOP:SetPoint("TOPRIGHT", borders.TOPRIGHT, "TOPLEFT", 0, 0)
+		borders.BOTTOM:SetPoint('TOPLEFT', borders.CENTER, 'BOTTOMLEFT', 1, 1)
+		borders.BOTTOM:SetPoint('TOPRIGHT', borders.CENTER, 'BOTTOMRIGHT', -1, 1)
 
-		borders.BOTTOM:SetPoint("BOTTOMLEFT", borders.BOTTOMLEFT, "BOTTOMRIGHT", 0, 0)
-		borders.BOTTOM:SetPoint("BOTTOMRIGHT", borders.BOTTOMRIGHT, "BOTTOMLEFT", 0, 0)
+		borders.LEFT:SetPoint('TOPRIGHT', borders.TOP, 'TOPLEFT', 0, 0)
+		borders.LEFT:SetPoint('BOTTOMRIGHT', borders.BOTTOM, 'BOTTOMLEFT', 0, 0)
 
-		borders.LEFT:SetPoint("TOPLEFT", borders.TOPLEFT, "BOTTOMLEFT", 0, 0)
-		borders.LEFT:SetPoint("BOTTOMLEFT", borders.BOTTOMLEFT, "TOPLEFT", 0, 0)
-
-		borders.RIGHT:SetPoint("TOPRIGHT", borders.TOPRIGHT, "BOTTOMRIGHT", 0, 0)
-		borders.RIGHT:SetPoint("BOTTOMRIGHT", borders.BOTTOMRIGHT, "TOPRIGHT", 0, 0)
+		borders.RIGHT:SetPoint('TOPLEFT', borders.TOP, 'TOPRIGHT', 0, 0)
+		borders.RIGHT:SetPoint('BOTTOMLEFT', borders.BOTTOM, 'BOTTOMRIGHT', 0, 0)
 
 		if not noSecureHook then
 			hooksecurefunc(frame, "SetBackdropColor", AS.HookedSetBackdropColor)
