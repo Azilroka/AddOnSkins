@@ -120,11 +120,20 @@ function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, rela
 	end
 
 	if (window:GetId() == 1) then
+		--bookmark frame
+		_G.Details_SwitchButtonFrame1:SetParent(_G.DetailsBaseFrame1)
+		_G.Details_SwitchButtonFrame1:SetFrameLevel(_G.DetailsBaseFrame1:GetFrameLevel() + 3)
+		--row frame
 		_G.DetailsRowFrame1:SetParent(_G.DetailsBaseFrame1)
-		_G.DetailsRowFrame1:SetFrameLevel(_G.DetailsBaseFrame1:GetFrameLevel() + 1)
+		_G.DetailsRowFrame1:SetFrameLevel(_G.DetailsBaseFrame1:GetFrameLevel() + 2)
+
 	elseif (window:GetId() == 2) then
+		--bookmark frame
+		_G.Details_SwitchButtonFrame2:SetParent(_G.DetailsBaseFrame2)
+		_G.Details_SwitchButtonFrame2:SetFrameLevel(_G.DetailsBaseFrame2:GetFrameLevel() + 3)
+		--row frame
 		_G.DetailsRowFrame2:SetParent(_G.DetailsBaseFrame2)
-		_G.DetailsRowFrame2:SetFrameLevel(_G.DetailsBaseFrame2:GetFrameLevel() + 1)
+		_G.DetailsRowFrame2:SetFrameLevel(_G.DetailsBaseFrame2:GetFrameLevel() + 2)
 	end
 
 	if (window:GetSegment() ~= 0) then
