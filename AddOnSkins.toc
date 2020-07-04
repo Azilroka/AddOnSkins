@@ -3,5 +3,6 @@
 ## Version: 4.411
 ## Author: Azilroka, NihilisticPandemonium
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
+## OptionalDeps: ElvUI
 
 Load_AddOnSkins.xml

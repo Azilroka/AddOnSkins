@@ -22,13 +22,6 @@ function AS:WorldQuestTab()
 
 	AS:SkinScrollBar(WQT_QuestScrollFrameScrollBar)
 
-	for _, Button in ipairs(WQT_QuestScrollFrame.buttons) do
-		Button.Reward:SetSize(26, 26)
-		AS:SkinTexture(Button.Reward.Icon, true)
-		Button.Reward.IconBorder:SetAlpha(0)
-		hooksecurefunc(Button.Reward.IconBorder, 'SetVertexColor', function(self, r, g, b) Button.Reward.Icon.Backdrop:SetBackdropBorderColor(r, g, b) end)
-	end
-
 	for _, Tooltip in pairs({ WQT_CompareTooltip1, WQT_CompareTooltip2, WQT_Tooltip}) do
 		AS:SkinTooltip(Tooltip)
 	end

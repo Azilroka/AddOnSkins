@@ -1,124 +1,13 @@
 local AS, ASL = unpack(AddOnSkins)
 
--- Cache global variables
---Lua functions
-local CopyTable = CopyTable
 local sort, pairs, gsub, strfind, strlower, strtrim, tostring, unpack = sort, pairs, gsub, strfind, strlower, strtrim, tostring, unpack
 local tinsert = table.insert
---WoW API / Variables
+
 local GetAddOnMetadata = GetAddOnMetadata
 local GENERAL = GENERAL
 local hooksecurefunc = hooksecurefunc
--- GLOBALS:
 
 local DEVELOPER_STRING = ''
-local LINE_BREAK = '\n'
-
-AS.ChangeLog = {
-	['4.00'] = {
-		'Core: API, Options & Embed',
-		'Removed: WeakAura & TellMeWhen',
-		'Added: ApparenceTooltip & Zygor',
-		'Updated: Blizzard Skins & Various Skin Updates',
-	},
-	['4.01'] = {
-		'Core: API & Options',
-		'Updated: Classic Quest Log',
-	},
-	['4.02'] = {
-		'Core: Options',
-		'Updated: Island Party Pose, Ace3, Parchment Remover',
-		'Added: WeakAuras, Immersion',
-	},
-	['4.03'] = {
-		'Core: API',
-		'Updated: Blizzard Character Skin',
-		'Removed: Parchment Remover (Added directly into ElvUI now)',
-	},
-	["4.04"] = {
-		'Core: API',
-	},
-	['4.05'] = {
-		'Core: API 8.1',
-		'Updated: Azeroth Auto Pilot, Talent Set Manager, Blizzard Skins, NugRunning, FlyoutButtonCustom',
-		'Added: Collection Shop',
-		'Fixed: Tukui 18 Embed',
-	},
-	['4.06'] = {
-		'Curse Issues',
-	},
-	['4.07'] = {
-		'Fixed Curse Issues',
-	},
-	['4.08'] = {
-		'Core: Themes & Shadows',
-		'Updated: Allied Races, AzeriteUI, World Map, Quest',
-	},
-	['4.09'] = {
-		'Core: SetTexture(), StatusBarColor, NavButtons',
-		'Updated: Immersion, PetTracker, Inspect, Error Frame, FlyPlateBuffs, WA, AddOnManger, ClassicQuestLog, MyRolePlay, Collections',
-	},
-	['4.10'] = {
-		'Updated: WA Font',
-	},
-	['4.11'] = { 'N/A' },
-	['4.12'] = { 'N/A' },
-	['4.13'] = {
-		'Added: Changelog Screen',
-		'Updated: Ace3, AdiBags, Clique, Guild Roster Manager, Macro, Spell Book, Quest, TradeSkill, Talents',
-	},
-	['4.14'] = {
-		'Updated: API',
-	},
-	['4.15'] = {
-		'Fixed: Comparing a string to a number',
-	},
-	['4.16'] = {
-		'Fixed: UI Widgets Error Spam',
-		' ',
-		'More updates will follow this weekend',
-	},
-	['4.17'] = {
-		'Removed: WeakAuras (Due to breaking WeakAuras)',
-		'Added: ArkInvetory',
-		'Fixes: Blizzard Skins - World Map, Alerts, PvP Match',
-		'Fixes: Energy Watch Reborn, Pawn',
-	},
-	['4.18'] = {
-		'N/A',
-	},
-	['4.19'] = {
-		'N/A',
-	},
-	['4.20'] = {
-		'N/A',
-	},
-	['4.21'] = {
-		'Removed: WeakAuras (Due to breaking WeakAuras)',
-		'Added: ArkInvetory',
-		'Fixes: Blizzard Skins - World Map, Alerts, PvP Match',
-		'Fixes: Energy Watch Reborn, Pawn',
-	},
-	['4.22'] = {
-		'Updated: Ace3, GRM',
-		'Take account to ElvUI TexCoords',
-		'Fix: Blizzard Communites Skin',
-		'Fix: Pawn Tooltip',
-	},
-	['4.23'] = {
-		'N/A',
-	},
-	['4.24'] = {
-		'Changelog tweaks',
-		'ElvUI TexCoords',
-	},
-	['4.25'] = {
-		'Updated: Auctionator, LibQTip',
-	},
-	[''] = {
-		'',
-	},
-}
 
 local DEVELOPERS = {
 	'AcidWeb', 'Affli', 'Aldarana', 'Arstraea',
@@ -261,9 +150,9 @@ AS.Options = {
 					order = 4,
 					type = 'select',
 					values = {
-						['PixelPerfect'] = 'Pixel Perfect',
-						['TwoPixel'] = 'Two Pixel',
-						['ThickBorder'] = 'Thick Border',
+						PixelPerfect = 'Pixel Perfect',
+						TwoPixel = 'Two Pixel',
+						ThickBorder = 'Thick Border',
 					},
 				},
 				Shadows = {
@@ -275,7 +164,7 @@ AS.Options = {
 					name = ASL['Skin Template'],
 					order = 8,
 					type = 'select',
-					values = DefaultTemplates,
+					values = function() return DefaultTemplates end,
 				},
 				Textures = {
 					type = 'group',
@@ -374,11 +263,11 @@ AS.Options = {
 							order = 3,
 							type = 'select',
 							values = {
-								['NONE'] = 'None',
-								['OUTLINE'] = 'OUTLINE',
-								['THICKOUTLINE'] = 'THICKOUTLINE',
-								['MONOCHROME'] = 'MONOCHROME',
-								['MONOCHROMEOUTLINE'] = 'MONOCHROMEOUTLINE',
+								NONE = 'None',
+								OUTLINE = 'OUTLINE',
+								THICKOUTLINE = 'THICKOUTLINE',
+								MONOCHROME = 'MONOCHROME',
+								MONOCHROMEOUTLINE = 'MONOCHROMEOUTLINE',
 							},
 						},
 						DBMSkinHalf = {
@@ -407,6 +296,14 @@ AS.Options = {
 					name = AS:GetColor(ASL['AddOn Skins']),
 					order = 0,
 				},
+				skins = {
+					order = 1,
+					type = 'multiselect',
+					name = '',
+					get = function(_, key) return AS:CheckOption(key) end,
+					set = function(_, key, value) AS:SetOption(key, value) AS.NeedReload = true end,
+					values = {},
+				}
 			},
 		},
 		blizzard = {
@@ -443,12 +340,11 @@ AS.Options = {
 				},
 				skins = {
 					order = 4,
-					type = 'group',
-					name = ASL['Blizzard Skins'],
-					guiInline = true,
-					get = function(info) return AS:CheckOption(info[#info]) end,
-					set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
-					args = {},
+					type = 'multiselect',
+					name = '',
+					get = function(_, key) return AS:CheckOption(key) end,
+					set = function(_, key, value) AS:SetOption(key, value) AS.NeedReload = true end,
+					values = {},
 				}
 			},
 		},
@@ -597,20 +493,6 @@ AS.Options = {
 				},
 			},
 		},
-		importlinks = {
-			type = 'group',
-			name = 'Import Links',
-			order = 6,
-			args = {
-				WAIconLink = {
-					type = 'input',
-					order = 1,
-					width = 'full',
-					name = "WeakAura Icon Border Link by Hekili",
-					get = function() return 'https://wago.io/IconSkins' end,
-				},
-			},
-		},
 		about = {
 			type = 'group',
 			name = ASL['About/Help'],
@@ -667,306 +549,10 @@ AS.Options = {
 						},
 					},
 				},
-				skins = {
-					type = 'group',
-					name = ASL['Skins'],
-					order = 2,
-					args = {},
-				},
-				changelog = {
-					type = 'group',
-					name = ASL['Changelog'],
-					order = 3,
-					args = {},
-				},
 			},
 		},
 	},
 }
-
-local Skins = {
-	['Available'] = {
-		"acb_Castbar",
-		"Achieve It",
-		"Addon Control Panel",
-		"AdiBags",
-		"AllTheThings",
-		"Altoholic",
-		"Analyst",
-		"Appearance Tooltip",
-		"Argus Elite Tracker",
-		"ArkInventory",
-		"Atlas",
-		"AtlasLoot",
-		"Auctionator",
-		"Auctioneer",
-		"Auction Lite",
-		"AutoBar",
-		"Auto Equip Quest Item",
-		"Azeroth Auto Pilot",
-		"Baggins",
-		"Bagnon",
-		"BagSync",
-		"Bartender4",
-		"BattlePetBreedID",
-		"BGDefender",
-		"BigWigs",
-		"BtWQuests",
-		"BugSack",
-		"BuyEmAll",
-		"Capping",
-		"Chocolate Bar",
-		"Classic Guild Frame",
-		"Classic Quest Log",
-		"Class OrderHalls Complete",
-		"Clique",
-		"Color Picker Plus",
-		"Coolline",
-		"Cork",
-		"Critline",
-		"Deadly Boss Mods",
-		"DejaCharacterStats",
-		"Details",
-		"Dominos",
-		"Dresser",
-		"DressUp",
-		"EasyMail",
-		"Easy Obliterate",
-		"Enchant Check",
-		"Energy Watch",
-		"Examiner",
-		"Extra Quest Button",
-		"Extended Vendor",
-		"Flight Map Enhanced",
-		"FlyoutButton Custom",
-		"Global Ignore List",
-		"Gryphon Heart Items",
-		"Guild Roster Manager",
-		"GupPet",
-		"Hack",
-		"Healium",
-		"Hekili",
-		"Immersion",
-		"Inbox Mail Bag",
-		"Incoming",
-		"Inspect Equip",
-		"Instance Profits",
-		"InvenMount",
-		"Karni's Crap Filter",
-		"Keyed",
-		"Lightheaded",
-		"LinkWrangler",
-		"Lucky Charms 2",
-		"Ludwig",
-		"MageNuggets",
-		"Mail Commander",
-		"Master Plan",
-		"Minimal Archaeology",
-		"Model Pique",
-		"MogIt",
-		"MoveAnything",
-		"Mizus Raid Tools",
-		"My RolePlay",
-		"Mythic Keystone Status",
-		"No No Go Go",
-		"NugRunning",
-		"Numeration",
-		"Ogri'Lazy",
-		"Omen",
-		"One Click Enchant Scroll",
-		"oRA3",
-		"OrderHall Commander",
-		"Outfitter",
-		"Ovale",
-		"Overachiever",
-		"Pawn",
-		"Pet Battle Teams",
-		"Pet Journal Enhanced",
-		"PetTracker",
-		"Postal",
-		"Premade Groups Filter",
-		"Quartz",
-		"Quest Completist",
-		"Quest Guru",
-		"Quest Pointer",
-		"Quik Emotes",
-		"Recount",
-		"Scrap",
-		"Searing Plasma Tracker",
-		"Server Hop",
-		"SexyCooldown",
-		"ShieldBars",
-		"SilverDragon",
-		"Simulationcraft",
-		"Skada",
-		"Skillet",
-		"Soundtrack",
-		"Spy",
-		"Storyline",
-		"Swatter",
-		"Talented",
-		"Talentless",
-		"Talent Set Manager",
-		"tdBattlePetScript",
-		"TinyDPS",
-		"TinyInspect",
-		"TitanPanel",
-		"Tome Of Teleportation",
-		"TomTom",
-		"Tongues",
-		"TrainAll",
-		"Vendomatic",
-		"WardrobeSort",
-		"WeakAuras",
-		"WhisperPop",
-		"Wholly",
-		"World Boss Status",
-		"World Quest Tab",
-		"WowLua",
-		"WoWPro",
-		"xMerchant",
-		"XPBarNone",
-		"Zygor",
-	},
-	['Removed'] = {
-		"AdiCastBar",
-		"Advanced Icon Selector",
-		"AffDots",
-		"alDamageMeter",
-		"Arcanometer",
-		"Advanced Trade Skill Window",
-		"Better Quest",
-		"BigBrother",
-		"Balance Power Tracker",
-		"Bulk Order",
-		"CLCInfo",
-		"CLCProt",
-		"CLCRet",
-		"Combustion Helper",
-		"Creator",
-		"DeusVox Encounters",
-		"DKDots",
-		"EavesDrop",
-		"Every Gold To Banker",
-		"Face Shooter",
-		"Factionizer",
-		"Flight Map",
-		"GCGambler",
-		"Grinder",
-		"Guild Member Info Trade Skills",
-		"Ignition",
-		"KeepingTabs",
-		"LegacyQuest",
-		"LootCouncilLite",
-		"LootLog",
-		"MrTrader",
-		"Odyssey",
-		"Poisoner",
-		"PowerAuras",
-		"Prayer of Mending Tracker",
-		"ProfessionTabs",
-		"Quest Item Bar",
-		"Raid Invite Organizer",
-		"Raid Targets",
-		"Rare Announcer",
-		"Rare Coordinator",
-		"Rares Tip",
-		"RCLootCouncil",
-		"Reagent Maker",
-		"ReforgeLite",
-		"Reforgenator",
-		"Reforgerade",
-		"Shield Monitor",
-		"Social Tabs",
-		"Spine Counter",
-		"Storm Earth and Fire",
-		"Symbiosis",
-		"SymbiosisTip",
-		"TradeTabs",
-		"Raven",
-		"VanasKoS",
-		"VengeanceStatus",
-		"wTetriNET",
-	},
-	['Incompatible'] = {
-		'Castbars',
-	},
-	['Denied'] = {
-		"Ackis Recipe List",
-		"Collectinator",
-		"JS' Hunter Bar",
-		"Norganna Slidebar",
-		"Panda",
-		"TradeSkillMaster",
-		"QuickMark",
-		"BattlegroundTargets",
-		"ButtonForge",
-		"Button Timers",
-		"Carbonite",
-		"Cellular",
-		"DeathNote",
-		"EPGP",
-		"EPGPLootMaster",
-		"EventHorizon",
-		"FarmIt",
-		"FloTotemBar",
-		"ForteXorcist",
-		"Gladius",
-		"Grid",
-		"GroupCalendar5",
-		"Hagakure Cooldowns",
-		"Healbot",
-		"hpetbattleany",
-		"LoseControl",
-		"Mapster",
-		"Need To Know",
-		"OPie",
-		"RaidCheckList",
-		"RoguePowerBars",
-		"Steal, Purge, & Dispel",
-		"Tanker",
-		"Tbag-Shefki",
-		"Vuhdo",
-		"WoW Instant Messenger",
-		"XBar",
-		"XLoot",
-		"NameplateSCT",
-		"Hermes",
-		"Lightwell Counter",
-		"Total RP 2",
-		"Upgrade List",
-	},
-}
-
-for Version, Table in pairs(AS.ChangeLog) do
-	AS.Options.args.about.args.changelog.args[Version] = {
-		type = 'group',
-		name = Version,
-		args = {},
-	}
-	for i, Change in pairs(Table) do
-		AS.Options.args.about.args.changelog.args[Version].args[tostring(i)] = {
-			type = 'description',
-			name = Change,
-			fontSize = 'large',
-		}
-	end
-end
-
-for Name, Table in pairs(Skins) do
-	AS.Options.args.about.args.skins.args[Name] = {
-		type = 'group',
-		name = Name,
-		args = {},
-	}
-	for i, Change in pairs(Table) do
-		AS.Options.args.about.args.skins.args[Name].args[tostring(i)] = {
-			type = 'description',
-			name = Change,
-			fontSize = 'large',
-		}
-	end
-end
 
 function AS:BuildProfile()
 	local Embed = AS:CheckAddOn('Details') and 'Details' or AS:CheckAddOn('Skada') and 'Skada' or AS:CheckAddOn('Recount') and 'Recount' or ''
@@ -1044,18 +630,6 @@ function AS:SetupProfile()
 end
 
 function AS:BuildOptions()
-	local function GenerateOptionTable(skinName)
-		local text = strfind(skinName, 'Blizzard_') and (BlizzardNames[skinName] or strtrim(skinName:gsub('^Blizzard_(.+)','%1'):gsub('(%l)(%u%l)','%1 %2'))) or GetAddOnMetadata(skinName, 'Title') or strtrim(skinName:gsub('(%l)(%u%l)','%1 %2'))
-		local options = {
-			type = 'toggle',
-			name = text,
-		}
-		if AS:CheckAddOn('ElvUI') and strfind(skinName, 'Blizzard_') then
-			options.set = function(info, value) AS:SetOption(info[#info], value) AS:SetElvUIBlizzardSkinOption(info[#info], not value) AS.NeedReload = true end
-		end
-		return options
-	end
-
 	local skins = {}
 
 	for skinName in pairs(AS.register) do
@@ -1066,14 +640,12 @@ function AS:BuildOptions()
 		tinsert(skins, skinName)
 	end
 
-	sort(skins)
-
 	for _, skinName in pairs(skins) do
 		if strfind(skinName, 'Blizzard_') then
 			BlizzardSkins[skinName] = true
-			AS.Options.args.blizzard.args.skins.args[skinName] = GenerateOptionTable(skinName)
+			AS.Options.args.blizzard.args.skins.values[skinName] = strfind(skinName, 'Blizzard_') and (BlizzardNames[skinName] or strtrim(skinName:gsub('^Blizzard_(.+)','%1'):gsub('(%l)(%u%l)','%1 %2')))
 		else
-			AS.Options.args.addons.args[skinName] = GenerateOptionTable(skinName)
+			AS.Options.args.addons.args.skins.values[skinName] = GetAddOnMetadata(skinName, 'Title') or strtrim(skinName:gsub('(%l)(%u%l)','%1 %2'))
 		end
 	end
 
@@ -1085,10 +657,7 @@ function AS:BuildOptions()
 		}
 
 		if AS:CheckAddOn('ElvUI_MerathilisUI') then
-			local AddOnTemplate = CopyTable(DefaultTemplates)
-			AddOnTemplate['MerathilisUI'] = '|cffff7d0aMerathilisUI|r'
-
-			AS.Options.args.general.args.SkinTemplate.values = function() return (AS:CheckOption('ElvUIStyle') and AddOnTemplate or DefaultTemplates) end
+			DefaultTemplates['MerathilisUI'] = '|cffff7d0aMerathilisUI|r'
 		end
 	end
 end
