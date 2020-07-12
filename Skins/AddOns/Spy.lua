@@ -10,6 +10,7 @@ function AS:Spy()
 		AS:SkinFrame(Spy_MainWindow)
 	end
 
+	AS:SkinFrame(TestFrame)
 	AS:SkinFrame(Spy_AlertWindow)
 	AS:SkinCloseButton(Spy_MainWindow.CloseButton)
 	AS:Desaturate(Spy_MainWindow.ClearButton)
