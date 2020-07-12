@@ -90,12 +90,14 @@ function AS:ArkInventory()
 		parent:SetBackdropColor(unpack(AS.BackdropColor))
 	end)
 
-	hooksecurefunc(ArkInventory, 'Frame_Item_Update_Clickable', function(frame)
-		local obj = _G[frame:GetName()..ArkInventory.Const.Frame.Cooldown.Name]
-		if obj then
-			ElvUI[1]:RegisterCooldown(obj)
-		end
-	end)
+	if AS:CheckAddOn('ElvUI') then
+		hooksecurefunc(ArkInventory, 'Frame_Item_Update_Clickable', function(frame)
+			local obj = _G[frame:GetName()..ArkInventory.Const.Frame.Cooldown.Name]
+			if obj then
+				ElvUI[1]:RegisterCooldown(obj)
+			end
+		end)
+	end
 end
 
 AS:RegisterSkin('ArkInventory', AS.ArkInventory)
