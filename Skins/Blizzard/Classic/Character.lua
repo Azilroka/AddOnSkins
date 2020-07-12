@@ -246,6 +246,10 @@ function AS:Blizzard_Character()
 	-- Honor Frame
 	AS:StripTextures(HonorFrame)
 	AS:SkinStatusBar(HonorFrameProgressBar)
+	HonorFrameCurrentPVPTitle:SetParent(HonorFrameProgressBar)
+	HonorFrameCurrentPVPRank:SetParent(HonorFrameProgressBar)
+	HonorFrameCurrentPVPTitle:SetDrawLayer('OVERLAY')
+	HonorFrameCurrentPVPRank:SetDrawLayer('OVERLAY')
 end
 
 function AS:Blizzard_DressUpFrame()
