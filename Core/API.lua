@@ -369,6 +369,7 @@ function AS:SetTemplate(Frame, Template, Texture)
 		ElvUI[1].frames[Frame] = true
 	end
 
+	if not Frame.SetBackdrop then Mixin(Frame, BackdropTemplateMixin) end
 	Frame:SetBackdrop(nil)
 
 	AS:BuildPixelBorders(Frame)
