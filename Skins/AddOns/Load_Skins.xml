@@ -98,7 +98,7 @@
 	<Script file="Pawn.lua"/>
 	<Script file="PetBattleTeams.lua"/>
 	<Script file="PetJournalEnhanced.lua"/>
-	<!--Script file="PetTracker.lua"/-->
+	<Script file="PetTracker.lua"/>
 	<Script file="Postal.lua"/>
 	<Script file="PremadeGroupsFilter.lua"/>
 	<Script file="Quartz.lua"/>
