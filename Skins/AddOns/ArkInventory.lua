@@ -11,6 +11,7 @@ function AS:ArkInventory()
 			local name = subframe:GetName()
 			if name then
 				if _G[name..'ArkBorder'] then AS:Kill(_G[name..'ArkBorder']) end
+				if subframe.ArkBorder then AS:Kill(subframe.ArkBorder) end
 				if _G[name..'Background'] then AS:Kill(_G[name..'Background']) end
 			end
 			AS:SkinFrame(subframe)
@@ -55,7 +56,7 @@ function AS:ArkInventory()
 			bar:SetBackdropBorderColor(1, 0, 0, 1)
 			bar:SetBackdropColor(1, 0, 0, .1)
 		else
-			bar:SetBackdropBorderColor(_G[bar:GetName()..'ArkBorder']:GetBackdropBorderColor())
+			bar:SetBackdropBorderColor((bar.ArkBorder or _G[bar:GetName()..'ArkBorder']):GetBackdropBorderColor())
 		end
 	end)
 
@@ -68,7 +69,7 @@ function AS:ArkInventory()
 
 	hooksecurefunc(ArkInventory, 'Frame_Item_Update_Border', function(frame)
 		if not ArkInventory.ValidFrame(frame, true) then return end
-		local obj = _G[frame:GetName()..'ArkBorder']
+		local obj = frame.ArkBorder or _G[frame:GetName()..'ArkBorder']
 		if not obj then return end
 		AS:Kill(obj)
 
