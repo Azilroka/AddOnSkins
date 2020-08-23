@@ -3,21 +3,21 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('ArkInventory') then return end
 
 function AS:ArkInventory()
-  hooksecurefunc(ArkInventory, 'Frame_Main_Paint', function(frame)
-    if not ArkInventory.ValidFrame(frame, true) then return end
-    for i = 1, select('#', frame:GetChildren()) do
-      local subframe = select(i, frame:GetChildren())
-      if subframe.IsSkinned then return end
-      local name = subframe:GetName()
-      if name then
-        if _G[name..'ArkBorder'] then AS:Kill(_G[name..'ArkBorder']) end
-        if _G[name..'Background'] then AS:Kill(_G[name..'Background']) end
-        if subframe.ArkBorder then AS:Kill(subframe.ArkBorder) end
-      end
-      AS:SkinFrame(subframe)
-      subframe.IsSkinned = true
-    end
-  end)
+	hooksecurefunc(ArkInventory, 'Frame_Main_Paint', function(frame)
+		if not ArkInventory.ValidFrame(frame, true) then return end
+		for i = 1, select('#', frame:GetChildren()) do
+			local subframe = select(i, frame:GetChildren())
+			if subframe.IsSkinned then return end
+			local name = subframe:GetName()
+			if name then
+				if _G[name..'ArkBorder'] then AS:Kill(_G[name..'ArkBorder']) end
+				if subframe.ArkBorder then AS:Kill(subframe.ArkBorder) end
+				if _G[name..'Background'] then AS:Kill(_G[name..'Background']) end
+			end
+			AS:SkinFrame(subframe)
+			subframe.IsSkinned = true
+		end
+	end)
 
   hooksecurefunc(ArkInventory, 'Frame_Main_Anchor_Set', function(loc_id)
     local mainframe = ArkInventory.Frame_Main_Get(loc_id):GetName()
@@ -53,15 +53,13 @@ function AS:ArkInventory()
 
     AS:SetTemplate(bar)
 
-    if ArkInventory.Global.Mode.Edit then
-      bar:SetBackdropBorderColor(1, 0, 0, 1)
-      bar:SetBackdropColor(1, 0, 0, .1)
-    else
-      if bar.ArkBorder then
-        bar:SetBackdropBorderColor(bar.ArkBorder:GetBackdropBorderColor())
-      end
-    end
-  end)
+		if ArkInventory.Global.Mode.Edit then
+			bar:SetBackdropBorderColor(1, 0, 0, 1)
+			bar:SetBackdropColor(1, 0, 0, .1)
+		else
+			bar:SetBackdropBorderColor((bar.ArkBorder or _G[bar:GetName()..'ArkBorder']):GetBackdropBorderColor())
+		end
+	end)
 
   hooksecurefunc(ArkInventory, 'SetItemButtonTexture', function(frame, texture, r, g, b)
     if not (frame and frame.icon) then return end
@@ -70,11 +68,11 @@ function AS:ArkInventory()
     AS:SetInside(frame.icon)
   end)
 
-  hooksecurefunc(ArkInventory, 'Frame_Item_Update_Border', function(frame)
-    if not ArkInventory.ValidFrame(frame, true) then return end
-    local obj = frame.ArkBorder
-    if not obj then return end
-    AS:Kill(obj)
+	hooksecurefunc(ArkInventory, 'Frame_Item_Update_Border', function(frame)
+		if not ArkInventory.ValidFrame(frame, true) then return end
+		local obj = frame.ArkBorder or _G[frame:GetName()..'ArkBorder']
+		if not obj then return end
+		AS:Kill(obj)
 
     AS:SetTemplate(frame)
     frame:SetBackdropBorderColor(obj:GetBackdropBorderColor())
