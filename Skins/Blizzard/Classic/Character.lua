@@ -18,13 +18,10 @@ function AS:Blizzard_Character()
 	AS:StripTextures(_G.PaperDollFrame)
 	AS:SkinBackdropFrame(_G.CharacterFrame)
 	_G.CharacterFrame.Backdrop:SetPoint('TOPLEFT', 11, -12)
-	_G.CharacterFrame.Backdrop:SetPoint('BOTTOMRIGHT', -31, 76)
-	AS:CreateShadow(_G.CharacterFrame.Backdrop)
-
-	AS:SkinBackdropFrame(_G.CharacterModelFrame)
-	_G.CharacterModelFrame.Backdrop:SetPoint('TOPLEFT', -2, 4)
-	_G.CharacterModelFrame.Backdrop:SetPoint('BOTTOMRIGHT', 2, -80)
-	AS:CreateShadow(_G.CharacterModelFrame.Backdrop, true)
+	_G.CharacterFrame.Backdrop:SetPoint('BOTTOMRIGHT', -32, 76)
+	AS:CreateShadow(_G.CharacterFrame)
+	_G.CharacterFrame.Shadow:SetPoint('TOPLEFT', 8, -9)
+	_G.CharacterFrame.Shadow:SetPoint('BOTTOMRIGHT', -29, 73)
 
 	CharacterModelFrameRotateLeftButton:SetSize(16, 16)
 	CharacterModelFrameRotateRightButton:SetSize(16, 16)
@@ -35,6 +32,9 @@ function AS:Blizzard_Character()
 
 	AS:Kill(_G.CharacterFramePortrait)
 	AS:StripTextures(_G.CharacterAttributesFrame)
+	AS:SkinBackdropFrame(_G.CharacterAttributesFrame)
+	_G.CharacterAttributesFrame.Backdrop:SetPoint('TOPLEFT', -2, 1)
+	_G.CharacterAttributesFrame.Backdrop:SetPoint('BOTTOMRIGHT', 2, -5)
 
 	AS:StripTextures(_G.PetPaperDollFrame)
 	AS:StripTextures(_G.PetAttributesFrame)
@@ -245,11 +245,17 @@ function AS:Blizzard_Character()
 
 	-- Honor Frame
 	AS:StripTextures(HonorFrame)
-	AS:SkinStatusBar(HonorFrameProgressBar)
-	HonorFrameCurrentPVPTitle:SetParent(HonorFrameProgressBar)
-	HonorFrameCurrentPVPRank:SetParent(HonorFrameProgressBar)
-	HonorFrameCurrentPVPTitle:SetDrawLayer('OVERLAY')
-	HonorFrameCurrentPVPRank:SetDrawLayer('OVERLAY')
+	AS:SkinBackdropFrame(HonorFrame)
+	HonorFrame.Backdrop:SetPoint("TOPLEFT", 18, -105)
+	HonorFrame.Backdrop:SetPoint("BOTTOMRIGHT", -39, 83)
+	HonorFrame.Backdrop:SetFrameLevel(HonorFrame:GetFrameLevel())
+
+	AS:CreateBackdrop(HonorFrameProgressButton, "Transparent")
+	HonorFrameProgressBar:Width(325)
+	HonorFrameProgressBar:SetStatusBarTexture(AS.NormTex)
+
+	HonorFrameProgressBar:ClearAllPoints()
+	HonorFrameProgressBar:SetPoint("TOP", HonorFrame, "TOP", -10, -73)
 end
 
 function AS:Blizzard_DressUpFrame()

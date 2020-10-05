@@ -295,8 +295,12 @@ function AS:Blizzard_GuildUI(event, addon)
 	AS:SkinButton(GuildMemberGroupInviteButton)
 
 	AS:SkinFrame(GuildMemberDetailFrame)
-	AS:StripTextures(GuildMemberNoteBackground)
-	AS:StripTextures(GuildMemberOfficerNoteBackground)
+	AS:SkinFrame(GuildMemberNoteBackground)
+	AS:SkinFrame(GuildMemberOfficerNoteBackground)
+
+	_G.GuildMOTDEditButton:CreateBackdrop('Default')
+	_G.GuildMOTDEditButton.Backdrop:SetPoint('TOPLEFT', -3, 3)
+	_G.GuildMOTDEditButton.Backdrop:SetPoint('BOTTOMRIGHT', 3, -2)
 
 	for i = 1, 4 do
 		AS:StripTextures(_G["GuildFrameColumnHeader"..i])

@@ -40,7 +40,7 @@ function AS:Blizzard_TalentUI(event, addon)
 			icon:SetDrawLayer('ARTWORK')
 			rank:SetDrawLayer('OVERLAY')
 
-			--rank:SetFont(AS.Font, 12, 'OUTLINE') -- easier to read
+			rank:SetFont(AS.Font, 12, 'OUTLINE') -- easier to read
 		end
 	end
 
