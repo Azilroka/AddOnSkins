@@ -417,7 +417,7 @@ function AS:SetTemplate(Frame, Template, Texture)
 	end
 
 	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
-		if (Template == 'MerathilisUI' and AS:CheckAddOn('ElvUI_MerathilisUI')) or (Template == 'KlixUI' and AS:CheckAddOn('ElvUI_KlixUI')) then
+		if (Template == 'MerathilisUI' and AS:CheckAddOn('ElvUI_MerathilisUI')) then
 			Frame:Styling()
 		end
 	end
