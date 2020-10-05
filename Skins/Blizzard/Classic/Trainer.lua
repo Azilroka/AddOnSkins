@@ -170,8 +170,16 @@ function AS:Blizzard_TradeSkill(event, addon)
 	_G.TradeSkillFramePortrait:SetAlpha(0)
 	_G.TradeSkillFrame.Backdrop:SetPoint('TOPLEFT', 11, -12)
 	_G.TradeSkillFrame.Backdrop:SetPoint('BOTTOMRIGHT', -32, 76)
+	AS:CreateShadow(_G.TradeSkillFrame)
+	_G.TradeSkillFrame.Shadow:SetPoint('TOPLEFT', 8, -9)
+	_G.TradeSkillFrame.Shadow:SetPoint('BOTTOMRIGHT', -29, 73)
 
-	AS:SkinStatusBar(_G.TradeSkillRankFrame)
+	AS:StripTextures(_G.TradeSkillRankFrame)
+	AS:CreateBackdrop(_G.TradeSkillRankFrame, "Transparent")
+	_G.TradeSkillRankFrame:Size(322, 16)
+	_G.TradeSkillRankFrame:ClearAllPoints()
+	_G.TradeSkillRankFrame:Point('TOP', -10, -45)
+	_G.TradeSkillRankFrame:SetStatusBarTexture(AS.NormTex)
 
 	AS:SkinCloseButton(_G.TradeSkillFrameCloseButton)
 
@@ -191,8 +199,12 @@ function AS:Blizzard_TradeSkill(event, addon)
 	TradeSkillCollapseAllButton:GetDisabledTexture():SetDesaturated(true)
 
 	AS:SkinDropDownBox(_G.TradeSkillInvSlotDropDown)
+	_G.TradeSkillInvSlotDropDown:ClearAllPoints()
+	_G.TradeSkillInvSlotDropDown:SetPoint('TOPRIGHT', TradeSkillFrame, 'TOPRIGHT', -32, -64)
 
 	AS:SkinDropDownBox(_G.TradeSkillSubClassDropDown)
+	_G.TradeSkillSubClassDropDown:ClearAllPoints()
+	_G.TradeSkillSubClassDropDown:SetPoint('RIGHT', _G.TradeSkillInvSlotDropDown, 'RIGHT', -130, 0)
 
 	_G.TradeSkillFrameTitleText:ClearAllPoints()
 	_G.TradeSkillFrameTitleText:SetPoint('TOP', _G.TradeSkillFrame, 'TOP', 0, -18)
