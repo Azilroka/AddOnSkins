@@ -5,7 +5,6 @@ if not AS:CheckAddOn('Outfitter') then return end
 
 function AS:Outfitter()
 	local LDD = LibStub("LibDropdownMC-1.0")
-	CharacterFrame:HookScript('OnShow', function(self) CharacterFrame:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -14, 0) end)
 	OutfitterFrame:HookScript('OnShow', function(self)
 		AS:SkinFrame(OutfitterFrame)
 		OutfitterFrameTab1:SetSize(60, 25)
