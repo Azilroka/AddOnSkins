@@ -56,25 +56,25 @@ function AS:Blizzard_Gossip()
 	else
 		local r, g, b = unpack(AS.ClassColor)
 
-		for i = 1, NUMGOSSIPBUTTONS do
-			_G["GossipTitleButton"..i]:GetFontString():SetTextColor(1, 1, 1)
-			_G["GossipTitleButton"..i]:GetHighlightTexture():SetColorTexture(r, g, b, .3)
-			AS:SetInside(_G["GossipTitleButton"..i]:GetHighlightTexture(), _G["GossipTitleButton"..i], 2, 0)
-		end
+		--for i = 1, NUMGOSSIPBUTTONS do
+		--	_G["GossipTitleButton"..i]:GetFontString():SetTextColor(1, 1, 1)
+		--	_G["GossipTitleButton"..i]:GetHighlightTexture():SetColorTexture(r, g, b, .3)
+		--	AS:SetInside(_G["GossipTitleButton"..i]:GetHighlightTexture(), _G["GossipTitleButton"..i], 2, 0)
+		--end
 
-		GossipGreetingText:SetTextColor(1, 1, 1)
+		--GossipGreetingText:SetTextColor(1, 1, 1)
 
-		hooksecurefunc("GossipFrameUpdate", function()
-			for i = 1, NUMGOSSIPBUTTONS do
-				local button = _G["GossipTitleButton"..i]
-				if button:GetFontString() then
-					local Text = button:GetFontString():GetText()
-					if Text and Text.GetText and strmatch(Text:GetText(), '|c[Ff][Ff]%x%x%x%x%x%x') then
-						button:GetFontString():SetText(gsub(Text, '|c[Ff][Ff]%x%x%x%x%x%x', '|cffffe519'))
-					end
-				end
-			end
-		end)
+		--hooksecurefunc("GossipFrameUpdate", function()
+		--	for i = 1, NUMGOSSIPBUTTONS do
+		--		local button = _G["GossipTitleButton"..i]
+		--		if button:GetFontString() then
+		--			local Text = button:GetFontString():GetText()
+		--			if Text and Text.GetText and strmatch(Text:GetText(), '|c[Ff][Ff]%x%x%x%x%x%x') then
+		--				button:GetFontString():SetText(gsub(Text, '|c[Ff][Ff]%x%x%x%x%x%x', '|cffffe519'))
+		--			end
+		--		end
+		--	end
+		--end)
 	end
 
 	AS:SkinStatusBar(NPCFriendshipStatusBar)
@@ -455,14 +455,12 @@ function AS:Blizzard_WorldMap()
 	AS:StripTextures(QuestMapFrame.DetailsFrame.CompleteQuestFrame)
 
 	AS:SetTemplate(QuestMapFrame.QuestsFrame.StoryTooltip, "Transparent")
-	AS:SetTemplate(QuestScrollFrame.WarCampaignTooltip, "Transparent")
 
 	AS:SkinBackdropFrame(QuestScrollFrame.DetailFrame)
 	QuestScrollFrame.Contents.Separator.Divider:Hide()
 	QuestScrollFrame.DetailFrame.Backdrop:SetFrameLevel(1)
 	QuestScrollFrame.DetailFrame.Backdrop:SetPoint("TOPLEFT", QuestScrollFrame.DetailFrame, "TOPLEFT", 3, 1)
 	QuestScrollFrame.DetailFrame.Backdrop:SetPoint("BOTTOMRIGHT", QuestScrollFrame.DetailFrame, "BOTTOMRIGHT", -2, -7)
-	AS:SetInside(QuestScrollFrame.Background, QuestScrollFrame.DetailFrame.Backdrop)
 	QuestScrollFrame.Contents.StoryHeader.Background:SetWidth(251)
 	QuestScrollFrame.Contents.StoryHeader.Background:SetPoint("TOP", 0, -9)
 	QuestScrollFrame.Contents.StoryHeader.Text:SetPoint("TOPLEFT", 18, -20)

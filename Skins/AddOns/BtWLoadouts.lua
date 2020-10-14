@@ -11,7 +11,6 @@ function AS:BtWLoadouts()
 	AS:SkinButton(_G.BtWLoadoutsFrame.ActivateButton)
 	AS:SkinButton(_G.BtWLoadoutsFrame.DeleteButton)
 
-	AS:SkinFrame(_G.BtWLoadoutsFrame.ScrollInset)
 	AS:SkinFrame(_G.BtWLoadoutsFrame.Profiles.Inset)
 	AS:SkinEditBox(_G.BtWLoadoutsFrame.Profiles.Name)
 

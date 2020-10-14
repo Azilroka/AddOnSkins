@@ -236,7 +236,6 @@ function AS:Blizzard_Character()
 	AS:SkinCloseButton(_G.ReputationDetailCloseButton)
 	AS:SkinCheckBox(_G.ReputationDetailAtWarCheckBox)
 	_G.ReputationDetailAtWarCheckBox:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-SwordCheck")
-	AS:SkinCheckBox(_G.ReputationDetailLFGBonusReputationCheckBox)
 	AS:SkinCheckBox(_G.ReputationDetailInactiveCheckBox)
 	AS:SkinCheckBox(_G.ReputationDetailMainScreenCheckBox)
 

@@ -1,6 +1,6 @@
-## Interface: 80300
+## Interface: 90001
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
-## Version: 4.44
+## Version: 4.45
 ## Author: Azilroka, NihilisticPandemonium
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 ## OptionalDeps: ElvUI

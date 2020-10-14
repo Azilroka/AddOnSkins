@@ -9,7 +9,7 @@ function AS:LinkWrangler()
 		if not button then return end
 
 		button:SetNormalTexture(tex)
-		button:SetDisabledTexture(distex)
+		button:SetDisabledTexture(distex or tex)
 		button:SetPushedTexture(tex)
 		button:SetHighlightTexture(tex)
 	end
@@ -25,6 +25,7 @@ function AS:LinkWrangler()
 		LWSkin_SkinButton(_G[framename.."WhisperButton"], Path.."whisper")
 		LWSkin_SkinButton(_G[framename.."RelinkButton"], Path.."relink")
 		LWSkin_SkinButton(_G[framename.."DressupButton"], Path.."dress")
+
 		frame.isSkinned = true
 	end
 

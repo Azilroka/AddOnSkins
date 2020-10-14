@@ -59,6 +59,7 @@ AS.Blizzard.Tooltip = {
 
 AS.RegisterTemplates = {}
 
+--[[
 -- ls, Azil, and Simpy made this to replace Blizzard's SetBackdrop API while the textures can't snap
 AS.PixelBorders = {'TOP', 'BOTTOM', 'LEFT', 'RIGHT'}
 function AS:SetBackdrop(frame, bgFile, edgeSize, insetLeft, insetRight, insetTop, insetBottom)
@@ -153,6 +154,10 @@ function AS:BuildPixelBorders(frame, noSecureHook)
 		frame.pixelBorders = borders
 	end
 end
+]]
+
+local invertedShadow = { bgFile = [[Interface\AddOns\AddOnSkins\Media\Textures\InvertedShadow]] }
+local shadow = { edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = 3 }
 
 function AS:UpdateSettings()
 	for Frame in pairs(AS.RegisterTemplates) do
@@ -240,8 +245,7 @@ function AS:CreateBackdrop(Frame, Template, Texture)
 
 	local Parent = Frame.IsObjectType and Frame:IsObjectType('Texture') and Frame:GetParent() or Frame
 
-	local Backdrop = CreateFrame('Frame', nil, Parent)
-	if not Backdrop.SetBackdrop then Mixin(Backdrop, BackdropTemplateMixin) end
+	local Backdrop = CreateFrame('Frame', nil, Parent, 'BackdropTemplate')
 	AS:SetOutside(Backdrop, Frame)
 	AS:SetTemplate(Backdrop, Template, Texture)
 
@@ -257,18 +261,17 @@ end
 function AS:CreateShadow(Frame, NoRegister, Inverted)
 	if (not AS:CheckOption('Shadows')) or Frame.Shadow then return end
 
-	local Shadow = CreateFrame('Frame', nil, Frame)
-	if not Shadow.SetBackdrop then Mixin(Shadow, BackdropTemplateMixin) end
+	local Shadow = CreateFrame('Frame', nil, Frame, 'BackdropTemplate')
 	Shadow:SetFrameStrata(Frame:GetFrameStrata())
 
 	local FrameLevel = Frame:GetFrameLevel() > 1 and Frame:GetFrameLevel() or 1
 
 	if Inverted then
-		Shadow:SetBackdrop({ bgFile = [[Interface\AddOns\AddOnSkins\Media\Textures\InvertedShadow]] })
+		Shadow:SetBackdrop(invertedShadow)
 		Shadow:SetFrameLevel(FrameLevel + 1)
 		AS:SetInside(Shadow, Frame)
 	else
-		Shadow:SetBackdrop({ edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = 3 })
+		Shadow:SetBackdrop(shadow)
 		Shadow:SetFrameLevel(FrameLevel)
 		AS:SetOutside(Shadow, Frame)
 	end
@@ -307,6 +310,10 @@ function AS:GradientHighlight(frame, layer, color)
 	rightGrad:SetGradientAlpha("Horizontal", r, g, b, 0, r, g, b, 0.35)
 end
 
+local function Desaturate(self, value)
+	if value ~= true then self:SetDesaturated(true) end
+end
+
 function AS:Desaturate(frame)
 	if frame.GetNumRegions then
 		for i = 1, frame:GetNumRegions() do
@@ -328,17 +335,17 @@ function AS:Desaturate(frame)
 
 		if Normal then
 			Normal:SetDesaturated(true)
-			hooksecurefunc(Normal, 'SetDesaturated', function(self, value) if value ~= true then self:SetDesaturated(true) end end)
+			hooksecurefunc(Normal, 'SetDesaturated', Desaturate)
 		end
 
 		if Pushed then
 			Pushed:SetDesaturated(true)
-			hooksecurefunc(Pushed, 'SetDesaturated', function(self, value) if value ~= true then self:SetDesaturated(true) end end)
+			hooksecurefunc(Pushed, 'SetDesaturated', Desaturate)
 		end
 
 		if Highlight then
 			Highlight:SetDesaturated(true)
-			hooksecurefunc(Highlight, 'SetDesaturated', function(self, value) if value ~= true then self:SetDesaturated(true) end end)
+			hooksecurefunc(Highlight, 'SetDesaturated', Desaturate)
 		end
 	end
 end
@@ -352,37 +359,37 @@ function AS:SetTemplate(Frame, Template, Texture)
 
 	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
 		if Frame:IsObjectType("Button") then
-			Texture = ElvUI[1].media.glossTex
+			Texture = _G.ElvUI[1].media.glossTex
 		else
-			Texture = ElvUI[1].media.blankTex
+			Texture = _G.ElvUI[1].media.blankTex
 		end
 
 		if Template == 'Default' then
-			R, G, B = unpack(ElvUI[1].media.backdropcolor)
-			AS.BackdropColor = ElvUI[1].media.backdropcolor
+			R, G, B = unpack(_G.ElvUI[1].media.backdropcolor)
+			AS.BackdropColor = _G.ElvUI[1].media.backdropcolor
 		else
-			R, G, B, Alpha = unpack(ElvUI[1].media.backdropfadecolor)
-			AS.BackdropColor = ElvUI[1].media.backdropfadecolor
+			R, G, B, Alpha = unpack(_G.ElvUI[1].media.backdropfadecolor)
+			AS.BackdropColor = _G.ElvUI[1].media.backdropfadecolor
 		end
 
 		Frame.template = Template or 'Default'
-		ElvUI[1].frames[Frame] = true
+		_G.ElvUI[1].frames[Frame] = true
 	end
 
-	if not Frame.SetBackdrop then Mixin(Frame, BackdropTemplateMixin) end
-	Frame:SetBackdrop(nil)
+	if not Frame.SetBackdrop then _G.Mixin(Frame, _G.BackdropTemplateMixin) end
 
-	AS:BuildPixelBorders(Frame)
+	Frame:SetBackdrop({ edgeFile = AS.Blank, bgFile = Texture, edgeSize = 1 })
+
+	--AS:BuildPixelBorders(Frame)
 
 	--AS:SetBackdrop(frame, bgFile, edgeSize, insetLeft, insetRight, insetTop, insetBottom)
-	AS:SetBackdrop(Frame, Texture, (AS:CheckOption('Theme') == 'TwoPixel' and AS.Mult*2 or AS.Mult))
+	--AS:SetBackdrop(Frame, Texture, (AS:CheckOption('Theme') == 'TwoPixel' and AS.Mult*2 or AS.Mult))
 
 	if AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel' then
 		for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
 			Frame[Inset] = CreateFrame('Frame', nil, Frame)
-			AS:BuildPixelBorders(Frame[Inset], true)
-			AS:SetBackdrop(Frame[Inset], nil, AS.Mult)
-			AS:SetBackdropBorderColor(Frame[Inset], 0, 0, 0, 1)
+			Frame[Inset]:SetBackdrop({ edgeFile = AS.Blank, bgFile = Texture, edgeSize = 1 })
+			Frame[Inset]:SetBackdropBorderColor(0, 0, 0, 1)
 		end
 
 		AS:SetInside(Frame.InsideBorder, Frame, AS.Mult, AS.Mult)
@@ -396,24 +403,24 @@ function AS:SetTemplate(Frame, Template, Texture)
 	end
 
 	if Template == 'NoBackdrop' then
-		AS:SetBackdropColor(Frame, 0, 0, 0, 0)
+		Frame:SetBackdropColor(0, 0, 0, 0)
 	else
-		AS:SetBackdropColor(Frame, R, G, B, Alpha)
+		Frame:SetBackdropColor(R, G, B, Alpha)
 	end
 
 	if Template == 'NoBorder' then
-		AS:SetBackdropBorderColor(Frame, 0, 0, 0, 0)
+		Frame:SetBackdropBorderColor(0, 0, 0, 0)
 	else
-		AS:SetBackdropBorderColor(Frame, unpack(AS.BorderColor))
+		Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
 	end
 
 	if Template == 'ClassColor' then
-		AS:SetBackdropBorderColor(Frame, unpack(AS.ClassColor))
+		Frame:SetBackdropBorderColor(unpack(AS.ClassColor))
 	end
 
 	if Template == 'Custom' then
-		AS:SetBackdropColor(Frame, unpack(AS:CheckOption('CustomBackdropColor')))
-		AS:SetBackdropBorderColor(Frame, unpack(AS:CheckOption('CustomBorderColor')))
+		Frame:SetBackdropColor(unpack(AS:CheckOption('CustomBackdropColor')))
+		Frame:SetBackdropBorderColor(unpack(AS:CheckOption('CustomBorderColor')))
 	end
 
 	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
@@ -485,8 +492,8 @@ function AS:SkinArrowButton(object, Arrow)
 			Pushed:SetVertexColor(unpack(AS.Color))
 			Pushed:AddMaskTexture(Mask)
 
-			Button:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) Normal:SetVertexColor(unpack(AS.Color)) end)
-			Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) Normal:SetVertexColor(1, 1, 1) end)
+			Button:HookScript('OnEnter', function(s) s:SetBackdropBorderColor(unpack(AS.Color)) Normal:SetVertexColor(unpack(AS.Color)) end)
+			Button:HookScript('OnLeave', function(s) s:SetBackdropBorderColor(unpack(AS.BorderColor)) Normal:SetVertexColor(1, 1, 1) end)
 		end
 
 		Button.Mask:SetRotation(AS.ArrowRotation[Arrow])

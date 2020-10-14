@@ -22,5 +22,5 @@ function AS:Blizzard_ExtraActionButton()
 	hooksecurefunc("ExtraActionBar_Update", function() ExtraActionBarFrame.button.style:SetTexture() end)
 end
 
-AS:RegisterSkin('Blizzard_AbilityButton', AS.Blizzard_AbilityButton)
-AS:RegisterSkin('Blizzard_ExtraActionButton', AS.Blizzard_ExtraActionButton)
+--AS:RegisterSkin('Blizzard_AbilityButton', AS.Blizzard_AbilityButton)
+--AS:RegisterSkin('Blizzard_ExtraActionButton', AS.Blizzard_ExtraActionButton)
