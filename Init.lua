@@ -68,7 +68,7 @@ AddOn.AddOnVersion = {}
 
 for i = 1, GetNumAddOns() do
 	local Name, _, _, _, Reason = GetAddOnInfo(i)
-	AddOn.AddOns[strlower(Name)] = GetAddOnEnableState(AddOn.MyName, Name) == 2 and not Reason
+	AddOn.AddOns[strlower(Name)] = GetAddOnEnableState(AddOn.MyName, Name) == 2 and (not Reason or Reason ~= 'DEMAND_LOADED')
 	AddOn.AddOnVersion[strlower(Name)] = GetAddOnMetadata(Name, "Version")
 end
 
