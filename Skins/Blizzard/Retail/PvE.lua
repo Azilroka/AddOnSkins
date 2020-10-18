@@ -52,7 +52,9 @@ function AS:Blizzard_PvE()
 	for i = 1, 3 do
 		local Button = GroupFinderFrame["groupButton"..i]
 
-		AS:SkinFrame(Button)
+		AS:SetTemplate(Button)
+		Button.bg:SetAlpha(0)
+		Button.ring:SetAlpha(0)
 		Button:SetHighlightTexture('')
 
 		AS:SkinTexture(Button.icon, true)
@@ -75,10 +77,6 @@ function AS:Blizzard_PvE()
 			end
 		end)
 	end
-
-	GroupFinderFrameGroupButton1.icon:SetTexture([[Interface\Icons\INV_Helmet_08]])
-	GroupFinderFrameGroupButton2.icon:SetTexture([[Interface\\Icons\\Icon_Scenarios]])
-	GroupFinderFrameGroupButton3.icon:SetTexture([[Interface\\Icons\\inv_helmet_06]])
 
 	hooksecurefunc('GroupFinderFrame_SelectGroupButton', function()
 		for i = 1, 3 do
