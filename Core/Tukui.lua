@@ -14,15 +14,15 @@ function AS:UpdateMedia()
 	AS.DataTexts = T.DataTexts
 	AS.InfoLeft = T.DataTexts.Panels.Left
 	AS.InfoRight = T.DataTexts.Panels.Right
-	AS.ChatBackgroundRight = T.Chat.Panels.RightChat
-	AS.ChatBackgroundLeft = T.Chat.Panels.LeftChat
-	AS.TabsRightBackground = T.Chat.Panels.RightChatTabs
-	AS.TabsLeftBackground = T.Chat.Panels.LeftChatTabs
+	AS.ChatBackgroundRight = T.Chat.Panels and T.Chat.Panels.RightChat
+	AS.ChatBackgroundLeft = T.Chat.Panels and T.Chat.Panels.LeftChat
+	AS.TabsRightBackground = T.Chat.Panels and T.Chat.Panels.RightChatTabs
+	AS.TabsLeftBackground = T.Chat.Panels and T.Chat.Panels.LeftChatTabs
 	AS.Minimap = T.Maps.Minimap
-	AS.ActionBar1 = T.ActionBars.Bars.Bar1
-	AS.ActionBar2 = T.ActionBars.Bars.Bar2
-	AS.ActionBar3 = T.ActionBars.Bars.Bar3
-	AS.ActionBar4 = T.ActionBars.Bars.Bar4
+	AS.ActionBar1 = T.ActionBars.Bars and T.ActionBars.Bars.Bar1
+	AS.ActionBar2 = T.ActionBars.Bars and T.ActionBars.Bars.Bar2
+	AS.ActionBar3 = T.ActionBars.Bars and T.ActionBars.Bars.Bar3
+	AS.ActionBar4 = T.ActionBars.Bars and T.ActionBars.Bars.Bar4
 
 	AS.Blank = C.Medias.Blank
 	AS.NormTex = C.Medias.Normal
