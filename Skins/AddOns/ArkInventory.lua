@@ -31,6 +31,7 @@ function AS:ArkInventory()
 				local bbc = ArkInventory.GetLocationCodex(loc_id).style.bar.border.colour
 				bd:SetFrameLevel(f:GetFrameLevel())
 				AS:SetOutside(bd, nil, 1, -5)
+				Mixin(bd, BackdropTemplateMixin)	
 				bd:SetBackdropBorderColor(bbc.r, bbc.g, bbc.b, bbc.a or 1)
 			end
 		end
@@ -56,6 +57,7 @@ function AS:ArkInventory()
 		AS:SetTemplate(bar)
 
 		if ArkInventory.Global.Mode.Edit then
+			Mixin(bar, BackdropTemplateMixin)	
 			bar:SetBackdropBorderColor(1, 0, 0, 1)
 			bar:SetBackdropColor(1, 0, 0, .1)
 		else
@@ -77,6 +79,7 @@ function AS:ArkInventory()
 		AS:Kill(obj)
 
 		AS:SetTemplate(frame)
+		Mixin(frame, BackdropTemplateMixin)	
 		frame:SetBackdropBorderColor(obj:GetBackdropBorderColor())
 		frame:SetBackdropColor(unpack(AS.BorderColor))
 		AS:SkinTexture(frame.icon)
@@ -91,6 +94,7 @@ function AS:ArkInventory()
 
 	hooksecurefunc(ArkInventory, 'Frame_Border_Paint', function(border, slot, file, size, offset, scale, r, g, b, a)
 		local parent = border:GetParent()
+		Mixin(parent, BackdropTemplateMixin)	
 		parent:SetBackdropBorderColor(r, g, b, a)
 		parent:SetBackdropColor(unpack(AS.BackdropColor))
 	end)
