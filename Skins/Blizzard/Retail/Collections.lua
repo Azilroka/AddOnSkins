@@ -439,9 +439,9 @@ function AS:Blizzard_Collections(event, addon)
 
 	AS:SkinFrame(WardrobeTransmogFrame)
 	AS:CreateBackdrop(WardrobeTransmogFrame.MoneyMiddle)
-	AS:SkinButton(WardrobeTransmogFrame.Model.ClearAllPendingButton)
+	AS:SkinButton(WardrobeTransmogFrame.ModelScene.ClearAllPendingButton)
 
-	for _, Button in pairs(WardrobeTransmogFrame.Model.SlotButtons) do
+	for _, Button in pairs(WardrobeTransmogFrame.ModelScene.SlotButtons) do
 		AS:SkinBackdropFrame(Button)
 		AS:SkinTexture(Button.Icon)
 		Button.Icon:SetAllPoints()
