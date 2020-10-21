@@ -41,7 +41,7 @@ function AS:Blizzard_Bags()
 			hooksecurefunc(ItemButton.IconBorder, 'SetVertexColor', function(_, r, g, b, a)
 				local Quality = select(4, GetContainerItemInfo(ItemButton:GetParent():GetID(), ItemButton:GetID()))
 				local isQuestItem = GetContainerItemQuestInfo(ItemButton:GetParent():GetID(), ItemButton:GetID())
-				if Quality and Quality > _G.LE_ITEM_QUALITY_COMMON then
+				if Quality and Quality > Enum.ItemQuality.Common then
 					ItemButton:SetBackdropBorderColor(r, g, b)
 				elseif isQuestItem then
 					ItemButton:SetBackdropBorderColor(1, .82, 0)
@@ -71,7 +71,7 @@ function AS:Blizzard_Bags()
 		for i = 1, 12 do
 			local Portrait = _G["ContainerFrame"..i.."PortraitButton"]
 			if i == 1 then
-				Portrait:SetNormalTexture("Interface\\Buttons\\Button-Backpack-Up")
+				Portrait:SetNormalTexture("Interface/Buttons/Button-Backpack-Up")
 			elseif i <= 5 and i >= 2 then
 				Portrait:SetNormalTexture(_G["CharacterBag"..(i - 2).."SlotIconTexture"]:GetTexture())
 			elseif i <= 12 and i >= 6 then
@@ -140,8 +140,8 @@ function AS:Blizzard_Bags()
 
 		for _, Button in pairs({ _G.BagItemAutoSortButton, _G.BankItemAutoSortButton }) do
 			AS:SkinButton(Button)
-			Button:SetNormalTexture("Interface\\ICONS\\INV_Pet_Broom")
-			Button:SetPushedTexture("Interface\\ICONS\\INV_Pet_Broom")
+			Button:SetNormalTexture("Interface/ICONS/INV_Pet_Broom")
+			Button:SetPushedTexture("Interface/ICONS/INV_Pet_Broom")
 			AS:SkinTexture(Button:GetNormalTexture())
 			AS:SetInside(Button:GetNormalTexture())
 			AS:SkinTexture(Button:GetPushedTexture())

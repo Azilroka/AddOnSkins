@@ -47,9 +47,7 @@ function AS:RGBToHex(r, g, b, header)
 end
 
 function AS:GetClassColor(class)
-	if not class then return end
-
-	local color = (_G.CUSTOM_CLASS_COLORS and _G.CUSTOM_CLASS_COLORS[class]) or _G.RAID_CLASS_COLORS[class]
+	local color = (_G.CUSTOM_CLASS_COLORS and _G.CUSTOM_CLASS_COLORS[class]) or _G.RAID_CLASS_COLORS[class or 'PRIEST']
 	if type(color) ~= 'table' then return end
 
 	if not color.colorStr then
