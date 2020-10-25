@@ -245,7 +245,8 @@ function AS:CreateBackdrop(Frame, Template, Texture)
 
 	local Parent = Frame.IsObjectType and Frame:IsObjectType('Texture') and Frame:GetParent() or Frame
 
-	local Backdrop = CreateFrame('Frame', nil, Parent, 'BackdropTemplate')
+	local Backdrop = CreateFrame('Frame', nil, Parent)
+	if not Backdrop.SetBackdrop then _G.Mixin(Backdrop, _G.BackdropTemplateMixin) end
 	AS:SetOutside(Backdrop, Frame)
 	AS:SetTemplate(Backdrop, Template, Texture)
 
@@ -261,7 +262,8 @@ end
 function AS:CreateShadow(Frame, NoRegister, Inverted)
 	if (not AS:CheckOption('Shadows')) or Frame.Shadow then return end
 
-	local Shadow = CreateFrame('Frame', nil, Frame, 'BackdropTemplate')
+	local Shadow = CreateFrame('Frame', nil, Frame)
+	if not Shadow.SetBackdrop then _G.Mixin(Shadow, _G.BackdropTemplateMixin) end
 	Shadow:SetFrameStrata(Frame:GetFrameStrata())
 
 	local FrameLevel = Frame:GetFrameLevel() > 1 and Frame:GetFrameLevel() or 1
