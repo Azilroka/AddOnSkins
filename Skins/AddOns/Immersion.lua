@@ -98,7 +98,7 @@ function AS:Immersion(event, addon)
 	SkinReward(ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.TitleFrame)
 	SkinReward(ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.SkillPointFrame)
 
-	ImmersionFrame:HookScript('OnEvent', function(self)
+	ImmersionFrame:HookScript('OnUpdate', function(self)
 		for _, Button in ipairs(self.TitleButtons.Buttons) do
 			if Button and not Button.Backdrop then
 				AS:CreateBackdrop(Button)
