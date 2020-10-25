@@ -417,9 +417,12 @@ function AS:Blizzard_WorldMap()
 	local QuestMapFrame = WorldMapFrame.QuestLog
 	local QuestScrollFrame = QuestMapFrame.QuestsFrame
 
-	--AS:SkinBackdropFrame(WorldMapFrame)
+	AS:SkinBackdropFrame(WorldMapFrame)
 	AS:CreateShadow(WorldMapFrame.Backdrop)
+
+	AS:StripTextures(WorldMapFrame.BorderFrame, true)
 	AS:SkinCloseButton(WorldMapFrame.BorderFrame.CloseButton)
+
 	AS:Kill(WorldMapFrame.BorderFrame.Tutorial)
 
 	AS:StripTextures(WorldMapFrame.NavBar)
@@ -448,6 +451,8 @@ function AS:Blizzard_WorldMap()
 	AS:StripTextures(QuestMapFrame.DetailsFrame.CompleteQuestFrame)
 
 	AS:SetTemplate(QuestMapFrame.QuestsFrame.StoryTooltip, "Transparent")
+
+	AS:SkinDropDownBox(WorldMapFrame.overlayFrames[1])
 
 	AS:SkinBackdropFrame(QuestScrollFrame.DetailFrame)
 	QuestScrollFrame.Contents.Separator.Divider:Hide()
