@@ -77,14 +77,8 @@ function AS:Blizzard_Merchant()
 		end
 	end)
 
-	hooksecurefunc('MerchantFrame_UpdateCurrencies', function()
-		for i = 1, MAX_MERCHANT_CURRENCIES do
-			local Token = _G["MerchantToken"..i]
-			if Token then
-				AS:SkinTexture(Token.icon, true)
-				Token.icon:SetPoint("LEFT", Token.count, "RIGHT", 2, 0)
-			end
-		end
+	hooksecurefunc('MerchantFrame_UpdateCurrencyButton', function(tokenButton)
+		AS:SkinTexture(tokenButton.icon)
 	end)
 end
 
