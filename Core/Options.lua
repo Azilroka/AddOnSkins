@@ -314,8 +314,7 @@ AS.Options = {
 			set = function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end,
 			args = {
 				elvuiUsers = {
-					type = 'description',
-					fontSize = 'large',
+					type = 'header',
 					name = 'DO NOT ENABLE THESE WITH ElvUI Skins turned on.',
 					hidden = not AS:CheckAddOn('ElvUI'),
 					order = 0

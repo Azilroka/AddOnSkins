@@ -6,10 +6,6 @@ local AS = unpack(AddOnSkins)
 local _G = _G
 local pairs, select, unpack = pairs, select, unpack
 --WoW API / Variables
-local AchievementButton_GetCriteria = AchievementButton_GetCriteria
-local AchievementButton_GetMeta = AchievementButton_GetMeta
-local GetAchievementCriteriaInfo = GetAchievementCriteriaInfo
-local GetAchievementNumCriteria = GetAchievementNumCriteria
 local hooksecurefunc = hooksecurefunc
 -- GLOBALS:
 
