@@ -55,24 +55,24 @@ local function SkinMainFrames()
 	local selling = _G.AuctionatorSellingFrame
 	local cancelling = _G.AuctionatorCancellingFrame
 
-	list:StripTextures()
+	AS:StripTextures(list)
 	AS:CreateBackdrop(list)
 
-	config:StripTextures()
+	AS:StripTextures(config)
 	AS:CreateBackdrop(config)
 
-	cancelling.ResultsListing.ScrollFrame:StripTextures()
+	AS:StripTextures(cancelling.ResultsListing)
 	AS:CreateBackdrop(cancelling.ResultsListing.ScrollFrame)
 	cancelling.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', cancelling.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 16, -6)
 	selling.CurrentItemListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentItemListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 	selling.HistoricalPriceListing.ScrollFrame:SetPoint('TOPLEFT', selling.HistoricalPriceListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 	list.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', list.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 15, -4)
 
-	_G.AuctionatorShoppingListFrameBg:StripTextures()
-	list.ScrollList.InsetFrame:StripTextures()
+	AS:StripTextures(_G.AuctionatorShoppingListFrameBg)
+	AS:StripTextures(list.ScrollList.InsetFrame)
 	list.ScrollList.InsetFrame:SetPoint('TOPLEFT', list.ScrollList, 'TOPLEFT', 3, 0)
-	cancelling.HistoricalPriceInset:StripTextures()
-	selling.HistoricalPriceInset:StripTextures()
+	AS:StripTextures(cancelling.HistoricalPriceInset)
+	AS:StripTextures(selling.HistoricalPriceInset)
 	AS:CreateBackdrop(selling.HistoricalPriceInset)
 	AS:SetInside(selling.HistoricalPriceInset.Backdrop)
 	selling.HistoricalPriceInset:SetPoint('TOPLEFT', selling.HistoricalPriceListing, 'TOPLEFT', -7, -25)
@@ -171,13 +171,13 @@ local function SkinMainFrames()
 			local backdrop = editbox.Backdrop -- reference it before change, so it doesnt try to use InputBox backdrop
 			if quantity then
 				editbox = editbox.InputBox
-				editbox:StripTextures()
+				AS:StripTextures(editbox)
 			end
 
 			editbox:SetHeight(28)
 			SetOutsideText(editbox, backdrop, 6)
 		elseif editbox.InputBox then
-			editbox.InputBox:StripTextures()
+			AS:StripTextures(editbox.InputBox)
 			editbox.Backdrop:SetAllPoints(editbox.InputBox)
 		end
 	end
@@ -265,7 +265,7 @@ local function SkinExportCheckBox(frame)
 	if checkbox and not frame.isSkinned then -- isSkinned is set by HandleCheckBox
 		AS:SkinCheckBox(checkbox)
 
-		checkbox:Size(30)
+		checkbox:SetSize(30, 30)
 
 		if checkbox.Label then
 			checkbox.Label:ClearAllPoints()
