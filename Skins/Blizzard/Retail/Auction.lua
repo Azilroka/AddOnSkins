@@ -135,7 +135,7 @@ function AS:Blizzard_AuctionHouseUI(event, addon)
 	end
 
 	local function HandleSellList(frame, hasHeader)
-		frame:StripTextures()
+		AS:StripTextures(frame)
 
 		if frame.RefreshFrame then
 			HandleAuctionButtons(frame.RefreshFrame.RefreshButton)
@@ -147,7 +147,7 @@ function AS:Blizzard_AuctionHouseUI(event, addon)
 			AS:CreateBackdrop(frame.ScrollFrame)
 			hooksecurefunc(frame, "RefreshScrollFrame", HandleHeaders)
 		else
-			hooksecurefunc(frame, "RefreshScrollFrame", HandleSummaryIcons)
+			hooksecurefunc(frame, "RefreshListDisplay", HandleSummaryIcons)
 		end
 	end
 
@@ -261,7 +261,7 @@ function AS:Blizzard_AuctionHouseUI(event, addon)
 
 	AS:SkinButton(ItemBuyFrame.BidFrame.BidButton)
 	ItemBuyFrame.BidFrame.BidButton:ClearAllPoints()
-	ItemBuyFrame.BidFrame.BidButton:Point("LEFT", ItemBuyFrame.BidFrame.BidAmount, "RIGHT", 2, -2)
+	ItemBuyFrame.BidFrame.BidButton:SetPoint("LEFT", ItemBuyFrame.BidFrame.BidAmount, "RIGHT", 2, -2)
 	AS:SkinButton(ItemBuyFrame.BidFrame.BidButton)
 
 	--[[ Item Sell Frame | TAB 2 ]]--
