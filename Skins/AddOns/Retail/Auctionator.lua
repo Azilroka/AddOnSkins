@@ -3,202 +3,387 @@ local AS = unpack(AddOnSkins)
 if AddOnSkins.Classic then return end
 if not AS:CheckAddOn('Auctionator') then return end
 
-function AS:Auctionator(event)
-	if addon == 'Blizzard_TradeSkillUI' or IsAddOnLoaded('Blizzard_TradeSkillUI') then
-		TradeSkillFrame:HookScript('OnShow', function() AS:SkinButton(Auctionator_Search, true) end)
-		AS:UnregisterSkinEvent('Auctionator', event)
+-- Credits: Simpy
+local _G = _G
+
+local function SkinHeaders(header, x, y)
+	header:SetPoint('TOPLEFT', header:GetParent(), 'TOPLEFT', x or -20, y or -3)
+
+	local maxHeaders = header:GetNumChildren()
+	for i = 1, maxHeaders do
+		local section = select(i, header:GetChildren())
+		if section then
+			if not section.Backdrop then
+				section:DisableDrawLayer('BACKGROUND')
+				AS:CreateBackdrop(section)
+				section.Backdrop:SetPoint('BOTTOMRIGHT', i < maxHeaders and -5 or 0, -2)
+			end
+		end
 	end
-	if event == 'PLAYER_ENTERING_WORLD' then return end
+end
+
+local function SkinItem(item)
+	if item.Icon and not item.backdrop then
+		item.Icon:SetTexCoord(unpack(AS.TexCoords))
+		AS:CreateBackdrop(item)
+		item.Backdrop:SetAllPoints()
+		item.EmptySlot:Hide()
+		AS:SetInside(item.Icon, item.Backdrop)
+		--S:HandleIconBorder(item.IconBorder, item.backdrop) -- h a l p
+	end
+end
+
+local function SetItemInfo(item, info)
+	if info then
+		SkinItem(item)
+	end
+end
+
+local function SetOutsideText(editbox, backdrop, width, height)
+	for i=1, editbox:GetNumRegions() do
+		local region = select(i, editbox:GetRegions())
+		if region and region:IsObjectType('FontString') then
+			--backdrop:SetOutside(region, width, height) -- h a l p
+			break
+		end
+	end
+end
+
+local function SkinMainFrames()
+	local list = _G.AuctionatorShoppingListFrame
+	local config = _G.AuctionatorConfigFrame
+	local selling = _G.AuctionatorSellingFrame
+	local cancelling = _G.AuctionatorCancellingFrame
+
+	list:StripTextures()
+	AS:CreateBackdrop(list)
+
+	config:StripTextures()
+	AS:CreateBackdrop(config)
+
+	cancelling.ResultsListing.ScrollFrame:StripTextures()
+	AS:CreateBackdrop(cancelling.ResultsListing.ScrollFrame)
+	cancelling.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', cancelling.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 16, -6)
+	selling.CurrentItemListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentItemListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
+	selling.HistoricalPriceListing.ScrollFrame:SetPoint('TOPLEFT', selling.HistoricalPriceListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
+	list.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', list.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 15, -4)
+
+	_G.AuctionatorShoppingListFrameBg:StripTextures()
+	list.ScrollList.InsetFrame:StripTextures()
+	list.ScrollList.InsetFrame:SetPoint('TOPLEFT', list.ScrollList, 'TOPLEFT', 3, 0)
+	cancelling.HistoricalPriceInset:StripTextures()
+	selling.HistoricalPriceInset:StripTextures()
+	AS:CreateBackdrop(selling.HistoricalPriceInset)
+	AS:SetInside(selling.HistoricalPriceInset.Backdrop)
+	selling.HistoricalPriceInset:SetPoint('TOPLEFT', selling.HistoricalPriceListing, 'TOPLEFT', -7, -25)
+	selling.HistoricalPriceInset:SetPoint('BOTTOMRIGHT', selling.HistoricalPriceListing, 'BOTTOMRIGHT', -2, 0)
+	AS:StripTextures(selling.CurrentItemInset)
+	AS:CreateBackdrop(selling.CurrentItemInset)
+	AS:SetInside(selling.CurrentItemInset.Backdrop)
+	selling.CurrentItemInset:SetPoint('TOPLEFT', selling.CurrentItemListing, 'TOPLEFT', -7, -25)
+	selling.CurrentItemInset:SetPoint('BOTTOMRIGHT', selling.CurrentItemListing, 'BOTTOMRIGHT', -2, 0)
+	AS:StripTextures(selling.BagInset)
+	AS:StripTextures(selling.BagListing.ScrollFrame)
+	AS:CreateBackdrop(selling.BagListing.ScrollFrame)
+	AS:SetOutside(selling.BagListing.ScrollFrame, selling.BagListing)
+	AS:SetOutside(selling.BagListing.ScrollFrame.Backdrop, selling.BagListing, 5, 5)
+
+	AS:SkinDropDownBox(list.ListDropdown, 250)
+
+	-- handle sell item icon
+	SkinItem(selling.AuctionatorSaleItem.Icon)
+	selling.AuctionatorSaleItem.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+
+	-- handle bag item icons
+	hooksecurefunc(_G.AuctionatorBagItemMixin, 'SetItemInfo', SetItemInfo)
+
+	list.ListDropdown:ClearAllPoints()
+	list.ListDropdown:SetPoint('TOPLEFT', list, 'TOPLEFT', 0, 50)
+	list.CreateList:ClearAllPoints()
+	list.CreateList:SetPoint('LEFT', list.ListDropdown.Backdrop, 'RIGHT', 5, 0)
+
+	local buttons = {
+		-- Shopping
+		_G.AuctionatorShoppingLists_AddItem,
+		list.ManualSearch,
+		list.CreateList,
+		list.DeleteList,
+		list.Rename,
+		list.Export,
+		list.Import,
+
+		--Selling
+		selling.SaleItemFrame.MaxButton,
+		selling.SaleItemFrame.PostButton,
+
+		--Auctionator
+		config.OptionsButton,
+		config.ScanButton
+	}
+
+	for _, button in ipairs(buttons) do
+		AS:SkinButton(button)
+		--button.Backdrop:SetFrameLevel(button:GetFrameLevel()) -- h a l p
+	end
+
+	local scrollbars = {
+		_G.AuctionatorSellingFrameScrollBar,
+		cancelling.ResultsListing.ScrollFrame.scrollBar,
+		list.ScrollList.ScrollFrame.scrollBar,
+		list.ResultsListing.ScrollFrame.scrollBar,
+		selling.CurrentItemListing.ScrollFrame.scrollBar,
+		selling.HistoricalPriceListing.ScrollFrame.scrollBar
+	}
+
+	for _, scrollbar in ipairs(scrollbars) do
+		AS:SkinScrollBar(scrollbar)
+	end
+
+	local tabs = {
+		_G.AuctionatorTabs_Auctionator,
+		_G.AuctionatorTabs_Cancelling,
+		_G.AuctionatorTabs_Selling,
+		_G.AuctionatorTabs_ShoppingLists
+	}
+
+	for _, tab in ipairs(tabs) do
+		AS:SkinTab(tab)
+	end
+
+	local editboxes = {
+		--Selling
+		selling.SaleItemFrame.Quantity,
+		selling.SaleItemFrame.Price.MoneyInput.GoldBox,
+		selling.SaleItemFrame.Price.MoneyInput.SilverBox,
+		selling.SaleItemFrame.Price.MoneyInput.CopperBox,
+
+		--Config
+		config.DiscordLink,
+		config.TechnicalRoadmap,
+		config.BugReportLink,
+	}
+
+	for _, editbox in ipairs(editboxes) do
+		AS:SkinEditBox(editbox)
+
+		local quantity = editbox.labelText == 'Quantity'
+		if editbox.iconAtlas or quantity then -- Money Input (Buyout Price) and Quantity
+			local backdrop = editbox.Backdrop -- reference it before change, so it doesnt try to use InputBox backdrop
+			if quantity then
+				editbox = editbox.InputBox
+				editbox:StripTextures()
+			end
+
+			editbox:SetHeight(28)
+			SetOutsideText(editbox, backdrop, 6)
+		elseif editbox.InputBox then
+			editbox.InputBox:StripTextures()
+			editbox.Backdrop:SetAllPoints(editbox.InputBox)
+		end
+	end
+
+	selling.SaleItemFrame.MaxButton:ClearAllPoints()
+	selling.SaleItemFrame.MaxButton:SetPoint('LEFT', selling.SaleItemFrame.Quantity.backdrop, 'RIGHT', 5, 0)
+
+	local headers = {
+		{ frame = list.ResultsListing.HeaderContainer, x = -20, y = -1 },
+		cancelling.ResultsListing.HeaderContainer,
+		selling.CurrentItemListing.HeaderContainer,
+		selling.HistoricalPriceListing.HeaderContainer
+	}
+
+	for _, header in ipairs(headers) do
+		if header.frame then
+			SkinHeaders(header.frame, header.x, header.y)
+		else
+			SkinHeaders(header)
+		end
+	end
+
+	-- duration radio buttons
+	for _, duration in ipairs(selling.AuctionatorSaleItem.Duration.radioButtons) do
+		if duration.RadioButton then
+			AS:SkinRadioButton(duration.RadioButton)
+		end
+	end
+
+	-- undercut butttons
+	for _, child in ipairs({cancelling:GetChildren()}) do
+		if child.StartScanButton then
+			AS:SkinButton(child.StartScanButton)
+			AS:SkinButton(child.CancelNextButton)
+		end
+	end
+
+	-- create list backdrop
+	for i=1, list.ScrollList:GetNumRegions() do
+		local region = select(i, list.ScrollList:GetRegions())
+		if region:IsObjectType('Texture') and region:GetTexture() == 3054898 then
+			AS:StripTextures(region)
+			AS:CreateBackdrop(region)
+			AS:SetOutside(region.Backdrop, list.ScrollList.InsetFrame)
+		end
+	end
+end
+
+local function SkinOptions()
+	local options = {
+		_G.AuctionatorConfigBasicOptionsFrame,
+		_G.AuctionatorConfigTooltipsFrame,
+		_G.AuctionatorConfigShoppingFrame,
+		_G.AuctionatorConfigSellingFrame,
+		_G.AuctionatorConfigLIFOFrame,		-- Selling: Items
+		_G.AuctionatorConfigNotLIFOFrame,	-- Selling: Gear/Pets
+		_G.AuctionatorConfigCancellingFrame,
+		_G.AuctionatorConfigProfileFrame,
+		_G.AuctionatorConfigAdvancedFrame
+	}
+
+	for _, frame in ipairs(options) do
+		for _, child in ipairs({frame:GetChildren()}) do
+			if child.CheckBox then AS:SkinCheckBox(child.CheckBox) end
+			if child.DropDown then AS:SkinDropDownBox(child.DropDown) end
+
+			if child.InputBox then
+				AS:SkinEditBox(child.InputBox)
+				SetOutsideText(child.InputBox, child.InputBox.Backdrop, 6, 6)
+			end
+
+			if child.radioButtons then
+				for _, duration in ipairs(child.radioButtons) do
+					if duration.RadioButton then
+						AS:SkinRadioButton(duration.RadioButton)
+					end
+				end
+			end
+		end
+	end
+end
+
+local function SkinExportCheckBox(frame)
+	local checkbox = frame and frame.CheckBox
+	if checkbox and not frame.isSkinned then -- isSkinned is set by HandleCheckBox
+		AS:SkinCheckBox(checkbox)
+
+		checkbox:Size(30)
+
+		if checkbox.Label then
+			checkbox.Label:ClearAllPoints()
+			checkbox.Label:SetPoint('LEFT', checkbox.Backdrop, 'RIGHT', 8, 0)
+		end
+	end
+end
+
+local function SkinImportExport()
+	local export = _G.AuctionatorExportListFrame
+	local import = _G.AuctionatorImportListFrame
+	local copy = _G.AuctionatorCopyTextFrame
+
+	AS:StripTextures(copy)
+	AS:StripTextures(import)
+	AS:StripTextures(export)
+
+	AS:CreateBackdrop(copy)
+	AS:CreateBackdrop(import)
+	AS:CreateBackdrop(export)
+
+	AS:StripTextures(copy)
+	AS:StripTextures(import)
+	AS:StripTextures(export)
+
+	AS:SkinScrollBar(copy.ScrollFrame.ScrollBar)
+	AS:SkinScrollBar(import.ScrollFrame.ScrollBar)
+	AS:SkinScrollBar(export.ScrollFrame.ScrollBar)
+
+	AS:SkinButton(export.SelectAll)
+	AS:SkinButton(export.UnselectAll)
+	AS:SkinButton(export.Export)
+	AS:SkinButton(import.Import)
+	AS:SkinButton(copy.Close)
+
+	AS:SkinCloseButton(export.CloseDialog)
+	AS:SkinCloseButton(import.CloseDialog)
+
+	hooksecurefunc(export, 'AddToPool', function(self)
+		SkinExportCheckBox(self.checkBoxPool[#self.checkBoxPool])
+	end)
+
+	for _, checkbox in ipairs(export.checkBoxPool) do
+		SkinExportCheckBox(checkbox)
+	end
+end
+
+local function SkinTextArea(frame)
+	frame.Left:Hide()
+	frame.Middle:Hide()
+	frame.Right:Hide()
+
+	if not frame.Backdrop then
+		AS:CreateBackdrop(frame)
+	end
+end
+
+local function SkinItemFrame(frame)
+	AS:StripTextures(frame)
+	AS:CreateBackdrop(frame)
+
+	AS:SkinButton(frame.Cancel)
+	AS:SkinButton(frame.ResetAllButton)
+	AS:SkinButton(frame.Finished)
+
+	frame.ResetAllButton:SetPoint('TOPLEFT', frame.Cancel, 'TOPRIGHT', 3, 0)
+
+	AS:StripTextures(frame.FilterKeySelector)
+	AS:CreateBackdrop(frame.FilterKeySelector)
+	AS:SetOutside(frame.FilterKeySelector.Backdrop, frame.FilterKeySelector.Text, 5, 5)
+
+	AS:SkinArrowButton(frame.FilterKeySelector.Button)
+	frame.FilterKeySelector.Button:ClearAllPoints()
+	frame.FilterKeySelector.Button:SetPoint('LEFT', frame.FilterKeySelector.Backdrop, 'RIGHT', -1, 0)
+	frame.FilterKeySelector.Button:SetSize(20, 20)
+
+	AS:SkinCheckBox(frame.SearchContainer.IsExact)
+	frame.SearchContainer.IsExact:SetSize(26, 26)
+
+	local textareas = {
+		frame.LevelRange.MaxBox,
+		frame.LevelRange.MinBox,
+		frame.ItemLevelRange.MaxBox,
+		frame.ItemLevelRange.MinBox,
+		frame.PriceRange.MaxBox,
+		frame.PriceRange.MinBox,
+		frame.CraftedLevelRange.MaxBox,
+		frame.CraftedLevelRange.MinBox,
+		frame.SearchContainer.SearchString
+	}
+
+	for _, textarea in ipairs(textareas) do
+		SkinTextArea(textarea)
+	end
+
+	local resetButtons = {
+		frame.LevelRange.ResetButton,
+		frame.ItemLevelRange.ResetButton,
+		frame.PriceRange.ResetButton,
+		frame.CraftedLevelRange.ResetButton,
+		frame.FilterKeySelector.ResetButton,
+		frame.SearchContainer.ResetSearchStringButton
+	}
+
+	for _, resetButton in ipairs(resetButtons) do
+		AS:SkinCloseButton(resetButton)
+		resetButton:SetHitRectInsets(1, 1, 1, 1)
+	end
+end
+
+function AS:Auctionator(event)
+	SkinOptions()
+
 	if event == 'AUCTION_HOUSE_SHOW' then
-
-		local Frames = {
-			Atr_BasicOptionsFrame,
-			Atr_TooltipsOptionsFrame,
-			Atr_UCConfigFrame,
-			Atr_StackingOptionsFrame,
-			Atr_ScanningOptionsFrame,
-			AuctionatorResetsFrame,
-			Atr_ShpList_Options_Frame,
-			AuctionatorDescriptionFrame,
-			Atr_Stacking_List,
-			Atr_ShpList_Frame,
-			Atr_ListTabsTab1,
-			Atr_ListTabsTab2,
-			Atr_ListTabsTab3,
-			Atr_FullScanResults,
-			Atr_Adv_Search_Dialog,
-			Atr_FullScanFrame,
-			Atr_Error_Frame,
-		}
-
-		for _, Frame in pairs(Frames) do
-			AS:SkinFrame(Frame)
-		end
-
-		local MoneyEditBoxes = {
-			'UC_5000000_MoneyInput',
-			'UC_1000000_MoneyInput',
-			'UC_200000_MoneyInput',
-			'UC_50000_MoneyInput',
-			'UC_10000_MoneyInput',
-			'UC_2000_MoneyInput',
-			'UC_500_MoneyInput',
-			'Atr_StackPrice',
-			'Atr_StartingPrice',
-			'Atr_ItemPrice',
-		}
-
-		for _, MoneyEditBox in pairs(MoneyEditBoxes) do
-			AS:SkinEditBox(_G[MoneyEditBox..'Gold'])
-			AS:SkinEditBox(_G[MoneyEditBox..'Silver'])
-			AS:SkinEditBox(_G[MoneyEditBox..'Copper'])
-		end
-
-		local DropDownBoxes = {
-			AuctionatorOption_Deftab,
-			Atr_tipsShiftDD,
-			Atr_deDetailsDD,
-			Atr_scanLevelDD,
-			Atr_Duration,
-			Atr_DropDownSL,
-			Atr_ASDD_Class,
-			Atr_ASDD_Subclass,
-		}
-
-		for _, DropDown in pairs(DropDownBoxes) do
-			AS:SkinDropDownBox(DropDown)
-		end
-
-		for i = 1, Atr_ShpList_Options_Frame:GetNumChildren() do
-			local object = select(i, Atr_ShpList_Options_Frame:GetChildren())
-			if object:IsObjectType('Button') then
-				AS:SkinButton(object)
-			end
-		end
-
-		for i = 1, AuctionatorResetsFrame:GetNumChildren() do
-			local object = select(i, AuctionatorResetsFrame:GetChildren())
-			if object:IsObjectType('Button') then
-				AS:SkinButton(object)
-			end
-		end
-
-		local Buttons = {
-			Atr_Search_Button,
-			Atr_Back_Button,
-			Atr_Buy1_Button,
-			Auctionator1Button,
-			Atr_CreateAuctionButton,
-			Atr_RemFromSListButton,
-			Atr_AddToSListButton,
-			Atr_SrchSListButton,
-			Atr_MngSListsButton,
-			Atr_NewSListButton,
-			Atr_CheckActiveButton,
-			AuctionatorCloseButton,
-			Atr_CancelSelectionButton,
-			Atr_FullScanStartButton,
-			Atr_FullScanDone,
-			Atr_CheckActives_Yes_Button,
-			Atr_CheckActives_No_Button,
-			Atr_Adv_Search_ResetBut,
-			Atr_Adv_Search_OKBut,
-			Atr_Adv_Search_CancelBut,
-			Atr_Buy_Confirm_OKBut,
-			Atr_Buy_Confirm_CancelBut,
-			Atr_SaveThisList_Button,
-			Atr_UCConfigFrame_Reset,
-			Atr_StackingOptionsFrame_Edit,
-			Atr_StackingOptionsFrame_New,
-			Atr_FullScanButton,
-		}
-
-		for _, Button in pairs(Buttons) do
-			AS:SkinButton(Button, true)
-		end
-
-		local EditBoxes = {
-			Atr_Batch_NumAuctions,
-			Atr_Batch_Stacksize,
-			Atr_Search_Box,
-			Atr_AS_Searchtext,
-			Atr_AS_Minlevel,
-			Atr_AS_Maxlevel,
-			Atr_AS_MinItemlevel,
-			Atr_AS_MaxItemlevel,
-			Atr_Starting_Discount,
-			Atr_ScanOpts_MaxHistAge,
-		}
-
-		for _, EditBox in pairs(EditBoxes) do
-			AS:SkinEditBox(EditBox)
-		end
-
-		AS:SkinCheckBox(AuctionatorOption_Enable_Alt_CB)
-		AS:SkinCheckBox(AuctionatorOption_Show_StartingPrice_CB)
-		AS:SkinCheckBox(ATR_tipsVendorOpt_CB)
-		AS:SkinCheckBox(ATR_tipsAuctionOpt_CB)
-		AS:SkinCheckBox(ATR_tipsDisenchantOpt_CB)
-		AS:SkinCheckBox(Atr_Adv_Search_Button)
-		AS:SkinCheckBox(Atr_Exact_Search_Button)
-
-		AS:SkinFrame(Atr_HeadingsBar, 'Default')
-		AS:SkinFrame(Atr_Hlist, 'Default')
-		AS:SkinFrame(Atr_Buy_Confirm_Frame, 'Default')
-		AS:SkinFrame(Atr_CheckActives_Frame, 'Default')
-
-		AS:SkinScrollBar(AuctionatorScrollFrameScrollBar)
-		AuctionatorScrollFrameScrollBar:SetPoint("TOPLEFT", AuctionatorScrollFrame, "TOPRIGHT", 4, -13)
-		AuctionatorScrollFrameScrollBar:SetPoint("BOTTOMLEFT", AuctionatorScrollFrame, "BOTTOMRIGHT", 4, 31)
-
-		Atr_FullScanButton:ClearAllPoints()
-		Atr_FullScanButton:SetPoint('TOPRIGHT', Auctionator1Button, 'BOTTOMRIGHT', 0, -2)
-		Atr_deDetailsDDText:SetJustifyH('RIGHT')
-
-		Atr_HeadingsBar:SetHeight(19)
-
-		AS:CreateBackdrop(Atr_Hlist)
-		Atr_Hlist.Backdrop:SetPoint("TOPLEFT", -2, 0)
-		Atr_Hlist.Backdrop:SetPoint("BOTTOMRIGHT", 0, 2)
-		Atr_Hlist:SetWidth(195)
-		Atr_Hlist:ClearAllPoints()
-		Atr_Hlist:SetPoint('TOPLEFT', -195, -75)
-
-		hooksecurefunc("AuctionFrameTab_OnClick", function(self, button, down, index)
-			local index = self:GetID()
-			if index == 4 then
-				Atr_Hlist:SetPoint("TOPLEFT", -193, -67)
-			else
-				Atr_Hlist:SetHeight (337)
-				Atr_Hlist_ScrollFrame:SetHeight (337)
-				Atr_Hlist:SetPoint("TOPLEFT", -193, -75)
-			end
-		end)
-
-		AS:SkinScrollBar(Atr_Hlist_ScrollFrameScrollBar)
-
-		Atr_SrchSListButton:SetWidth(196)
-		Atr_MngSListsButton:SetWidth(196)
-		Atr_NewSListButton:SetWidth(196)
-		Atr_CheckActiveButton:SetWidth(196)
-
-		Atr_ListTabs:SetPoint('BOTTOMRIGHT', Atr_HeadingsBar, 'TOPRIGHT', 8, 1)
-		Atr_Back_Button:SetPoint('TOPLEFT', Atr_HeadingsBar, 'TOPLEFT', 0, 19)
-
-		AuctionatorCloseButton:ClearAllPoints()
-		AuctionatorCloseButton:SetPoint('BOTTOMRIGHT', Atr_Main_Panel, 'BOTTOMRIGHT', -10, 10)
-		Atr_Buy1_Button:SetPoint('RIGHT', AuctionatorCloseButton, 'LEFT', -5, 0)
-		Atr_CancelSelectionButton:SetPoint('RIGHT', Atr_Buy1_Button, 'LEFT', -5, 0)
-
-		AS:StripTextures(Atr_SellControls_Tex)
-		AS:StyleButton(Atr_SellControls_Tex)
-		AS:SetTemplate(Atr_SellControls_Tex, 'Default')
-
-		AS:UnregisterSkinEvent('Auctionator', 'AUCTION_HOUSE_SHOW')
-
-		for i = 1, AuctionFrame.numTabs do
-			AS:SkinTab(_G["AuctionFrameTab"..i])
-		end
+		SkinMainFrames()
+		SkinImportExport()
+		SkinItemFrame(_G.AuctionatorAddItemFrame)
+		SkinItemFrame(_G.AuctionatorEditItemFrame)
 	end
 end
 
