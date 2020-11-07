@@ -376,20 +376,16 @@ local function SkinItemFrame(frame)
 	end
 end
 
-function AS:Auctionator(event, addon)
-	if addon ~= 'Auctionator' then return end
+function AS:Auctionator(event)
+	SkinOptions()
 
-	if event == 'ADDON_LOADED' then
-		SkinOptions()
-
-		AS:UnregisterSkinEvent(addon, event)
-	elseif event == 'AUCTION_HOUSE_SHOW' then
+	if event == 'AUCTION_HOUSE_SHOW' then
 		SkinMainFrames()
 		SkinImportExport()
 		SkinItemFrame(_G.AuctionatorAddItemFrame)
 		SkinItemFrame(_G.AuctionatorEditItemFrame)
 
-		AS:UnregisterSkinEvent(addon, event)
+		AS:UnregisterSkinEvent(event)
 	end
 end
 
