@@ -385,7 +385,7 @@ function AS:Auctionator(event)
 		SkinItemFrame(_G.AuctionatorAddItemFrame)
 		SkinItemFrame(_G.AuctionatorEditItemFrame)
 
-		AS:UnregisterSkinEvent(event)
+		AS:UnregisterSkinEvent('Auctionator', event)
 	end
 end
 
