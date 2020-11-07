@@ -377,7 +377,9 @@ local function SkinItemFrame(frame)
 end
 
 function AS:Auctionator(event)
-	SkinOptions()
+	if event == 'PLAYER_ENTERING_WORLD' then
+		SkinOptions()
+	end
 
 	if event == 'AUCTION_HOUSE_SHOW' then
 		SkinMainFrames()
