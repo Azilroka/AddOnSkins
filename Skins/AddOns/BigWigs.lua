@@ -14,9 +14,10 @@ function AS:BigWigs(event, addon)
 				end
 			end)
 		end
+		return
 	end
 
-	if event == 'ADDON_LOADED' and addon == 'BigWigs_Plugins' then
+	if event == 'ADDON_LOADED' and addon == 'BigWigs_Plugins' or IsAddOnLoaded('BigWigs_Plugins') then
 		local buttonsize = 19
 		local FreeBackgrounds = {}
 
