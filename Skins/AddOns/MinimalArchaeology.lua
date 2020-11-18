@@ -21,10 +21,10 @@ function AS:MinimalArchaeology()
 	AS:SkinCloseButton(MinArchHistButtonClose)
 
 	for i = 1, ARCHAEOLOGY_NUM_RACES do
-		AS:SkinStatusBar(MinArch['artifactbars'][i], {1.0, 0.4, 0})
-		AS:SkinButton(MinArch['artifactbars'][i].buttonSolve)
-		--MinArch['artifactbars'][i].buttonSolve:SetHeight(17)
-		--MinArch['artifactbars'][i].buttonSolve:SetPoint('TOPLEFT', _G['MinArchMainArtifactBar'..i], 'TOPRIGHT', 5, 2)
+		AS:SkinStatusBar(MinArchArtifactBars[i], {1.0, 0.4, 0})
+		AS:SkinButton(MinArchArtifactBars[i].buttonSolve)
+		--MinArchArtifactBars[i].buttonSolve:SetHeight(17)
+		--MinArchArtifactBars[i].buttonSolve:SetPoint('TOPLEFT', _G['MinArchMainArtifactBar'..i], 'TOPRIGHT', 5, 2)
 	end
 end
 
