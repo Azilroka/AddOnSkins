@@ -107,6 +107,7 @@
 	<Script file="QuestPointer.lua"/>
 	<Script file="QuikEmotes.lua"/>
 	<Script file="RaiderIO.lua"/>
+	<Script file="RareScanner.lua"/>
 	<Script file="Recount.lua"/>
 	<Script file="Scrap.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
