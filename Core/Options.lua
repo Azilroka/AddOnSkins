@@ -642,8 +642,10 @@ function AS:BuildOptions()
 		tinsert(skins, skinName)
 	end
 
-	for skinName in pairs(AS.preload) do
-		tinsert(skins, skinName)
+	for skinName, data in pairs(AS.preload) do
+		if not data.addon or data.addon and not tContains(skins, data.addon) then
+			tinsert(skins, skinName)
+		end
 	end
 
 	for _, skinName in pairs(skins) do

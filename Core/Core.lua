@@ -199,8 +199,9 @@ function AS:RegisterSkinForPreload(addonName, skinFunc, addon1)
 end
 
 function AS:RunPreload(addonName)
-	if AS.preload[addonName] then
-		pcall(AS.preload[addonName].func, self, 'ADDON_LOADED', AS.preload[addonName].addon or addonName)
+	local preloadData = AS.preload[addonName]
+	if preloadData and AS:CheckOption(preloadData.addon or addonName) then
+		pcall(preloadData.func, self, 'ADDON_LOADED', addonName)
 	end
 end
 
