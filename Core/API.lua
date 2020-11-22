@@ -240,6 +240,33 @@ function AS:StripTextures(Object, Kill, Alpha)
 	end
 end
 
+function AS:StripTexture(Object, Texture, Kill, Alpha)
+	if Object:IsObjectType('Texture') then
+		if Kill then
+			AS:Kill(Object)
+		elseif Alpha then
+			Object:SetAlpha(0)
+		else
+			Object:SetTexture()
+		end
+	else
+		if Object.GetNumRegions then
+			for i = 1, Object:GetNumRegions() do
+				local Region = select(i, Object:GetRegions())
+				if Region and Region:IsObjectType('Texture') and Region:GetTexture() == Texture then
+					if Kill then
+						AS:Kill(Region)
+					elseif Alpha then
+						Region:SetAlpha(0)
+					else
+						Region:SetTexture()
+					end
+				end
+			end
+		end
+	end
+end
+
 function AS:CreateBackdrop(Frame, Template, Texture)
 	if Frame.Backdrop then return end
 
