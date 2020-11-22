@@ -8,21 +8,12 @@ function AS:Scrap(event, addon)
 		if Button and not Button.IsSkinned then
 			Button:OnEnable()
 			AS:StyleButton(Button)
-			Button:SetTemplate('Default', true)
+			AS:SetTemplate(Button, nil, true)
 			Button.border:SetTexture()
-			Button.icon:SetTexture('Interface/Addons/Scrap/Art/Enabled Icon')
+			Button.icon:SetTexture([[Interface\Addons\Scrap\Art\Enabled Icon]])
 			Button.icon:SetAllPoints()
-			local numTabs = MerchantFrame.numTabs
-			for i = numTabs, 1, -1 do
-				local tab = _G[('MerchantFrameTab%d'):format(i)]
-				if tab then
-					if tab:GetText() == 'Scrap' then
-						AS:SkinTab(tab)
-						break
-					end
-				else
-					break
-				end
+			for _, tab in ipairs(MerchantFrame.numTabs) do
+				AS:SkinTab(tab)
 			end
 			Button.IsSkinned = true
 		end
