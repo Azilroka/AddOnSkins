@@ -4,8 +4,10 @@ local AS = unpack(AddOnSkins)
 --Lua functions
 local _G = _G
 local unpack, pairs, select, type, assert, next = unpack, pairs, select, type, assert, next
+local abs = abs
 local strlower, strfind = strlower, strfind
 local CopyTable, tremove = CopyTable, tremove
+local hooksecurefunc = hooksecurefunc
 --WoW API / Variables
 local CreateFrame = CreateFrame
 local EnumerateFrames = EnumerateFrames
@@ -59,103 +61,6 @@ AS.Blizzard.Tooltip = {
 
 AS.RegisterTemplates = {}
 
---[[
--- ls, Azil, and Simpy made this to replace Blizzard's SetBackdrop API while the textures can't snap
-AS.PixelBorders = {'TOP', 'BOTTOM', 'LEFT', 'RIGHT'}
-function AS:SetBackdrop(frame, bgFile, edgeSize, insetLeft, insetRight, insetTop, insetBottom)
-	if not frame.pixelBorders then return end
-
-	frame.pixelBorders.CENTER:SetTexture(bgFile)
-
-	if insetLeft or insetRight or insetTop or insetBottom then
-		frame.pixelBorders.CENTER:SetPoint('TOPLEFT', frame, 'TOPLEFT', -insetLeft or 0, insetTop or 0)
-		frame.pixelBorders.CENTER:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMRIGHT', insetRight or 0, -insetBottom or 0)
-	else
-		frame.pixelBorders.CENTER:SetPoint('TOPLEFT', frame)
-		frame.pixelBorders.CENTER:SetPoint('BOTTOMRIGHT', frame)
-	end
-
-	frame.pixelBorders.TOP:SetHeight(edgeSize)
-	frame.pixelBorders.BOTTOM:SetHeight(edgeSize)
-	frame.pixelBorders.LEFT:SetWidth(edgeSize)
-	frame.pixelBorders.RIGHT:SetWidth(edgeSize)
-end
-
-function AS:GetBackdropColor(frame)
-	if frame.pixelBorders then
-		return frame.pixelBorders.CENTER:GetVertexColor()
-	else
-		return frame:GetBackdropColor()
-	end
-end
-
-function AS:GetBackdropBorderColor(frame)
-	if frame.pixelBorders then
-		return frame.pixelBorders.TOP:GetVertexColor()
-	else
-		return frame:GetBackdropBorderColor()
-	end
-end
-
-function AS:SetBackdropColor(frame, r, g, b, a)
-	if frame.pixelBorders then
-		frame.pixelBorders.CENTER:SetVertexColor(r, g, b, a)
-	end
-end
-
-function AS:SetBackdropBorderColor(frame, r, g, b, a)
-	if frame.pixelBorders then
-		for _, v in pairs(AS.PixelBorders) do
-			frame.pixelBorders[v]:SetColorTexture(r or 0, g or 0, b or 0, a)
-		end
-	end
-end
-
-function AS:HookedSetBackdropColor(r, g, b, a)
-	AS:SetBackdropColor(self, r, g, b, a)
-end
-
-function AS:HookedSetBackdropBorderColor(r, g, b, a)
-	AS:SetBackdropBorderColor(self, r, g, b, a)
-end
-
-function AS:BuildPixelBorders(frame, noSecureHook)
-	if frame and not frame.pixelBorders then
-		local borders = {}
-
-		for _, v in pairs(AS.PixelBorders) do
-			borders[v] = frame:CreateTexture("$parentPixelBorder"..v, "BORDER", nil, 1)
-			borders[v]:SetColorTexture(1, 1, 1)
-			borders[v]:SetSnapToPixelGrid(false)
-			borders[v]:SetTexelSnappingBias(0)
-		end
-
-		borders.CENTER = frame:CreateTexture("$parentPixelBorderCENTER", "BACKGROUND", nil, -8)
-		borders.CENTER:SetSnapToPixelGrid(false)
-		borders.CENTER:SetTexelSnappingBias(0)
-
-		borders.TOP:SetPoint('BOTTOMLEFT', borders.CENTER, 'TOPLEFT', 1, -1)
-		borders.TOP:SetPoint('BOTTOMRIGHT', borders.CENTER, 'TOPRIGHT', -1, -1)
-
-		borders.BOTTOM:SetPoint('TOPLEFT', borders.CENTER, 'BOTTOMLEFT', 1, 1)
-		borders.BOTTOM:SetPoint('TOPRIGHT', borders.CENTER, 'BOTTOMRIGHT', -1, 1)
-
-		borders.LEFT:SetPoint('TOPRIGHT', borders.TOP, 'TOPLEFT', 0, 0)
-		borders.LEFT:SetPoint('BOTTOMRIGHT', borders.BOTTOM, 'BOTTOMLEFT', 0, 0)
-
-		borders.RIGHT:SetPoint('TOPLEFT', borders.TOP, 'TOPRIGHT', 0, 0)
-		borders.RIGHT:SetPoint('BOTTOMLEFT', borders.BOTTOM, 'BOTTOMRIGHT', 0, 0)
-
-		if not noSecureHook then
-			hooksecurefunc(frame, "SetBackdropColor", AS.HookedSetBackdropColor)
-			hooksecurefunc(frame, "SetBackdropBorderColor", AS.HookedSetBackdropBorderColor)
-		end
-
-		frame.pixelBorders = borders
-	end
-end
-]]
-
 local invertedShadow = { bgFile = [[Interface\AddOns\AddOnSkins\Media\Textures\InvertedShadow]] }
 local shadow = { edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures\Shadows]], edgeSize = 3 }
 
@@ -204,15 +109,19 @@ function AS:SetOutside(obj, anchor, xOffset, yOffset, anchor2)
 	obj:SetPoint('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', xOffset, -yOffset)
 end
 
+function AS:CleanTexture(Object, Kill, Alpha)
+	if Kill then
+		AS:Kill(Object)
+	elseif Alpha then
+		Object:SetAlpha(0)
+	else
+		Object:SetTexture()
+	end
+end
+
 function AS:StripTextures(Object, Kill, Alpha)
 	if Object:IsObjectType('Texture') then
-		if Kill then
-			AS:Kill(Object)
-		elseif Alpha then
-			Object:SetAlpha(0)
-		else
-			Object:SetTexture()
-		end
+		AS:CleanTexture(Object, Kill, Alpha)
 	else
 		local FrameName = Object.GetName and Object:GetName()
 
@@ -227,13 +136,7 @@ function AS:StripTextures(Object, Kill, Alpha)
 			for i = 1, Object:GetNumRegions() do
 				local Region = select(i, Object:GetRegions())
 				if Region and Region:IsObjectType('Texture') then
-					if Kill then
-						AS:Kill(Region)
-					elseif Alpha then
-						Region:SetAlpha(0)
-					else
-						Region:SetTexture()
-					end
+					AS:CleanTexture(Region, Kill, Alpha)
 				end
 			end
 		end
@@ -241,26 +144,14 @@ function AS:StripTextures(Object, Kill, Alpha)
 end
 
 function AS:StripTexture(Object, Texture, Kill, Alpha)
-	if Object:IsObjectType('Texture') then
-		if Kill then
-			AS:Kill(Object)
-		elseif Alpha then
-			Object:SetAlpha(0)
-		else
-			Object:SetTexture()
-		end
+	if Object:IsObjectType('Texture') and strlower(Object:GetTexture()) == strlower(Texture) then
+		AS:CleanTexture(Object, Kill, Alpha)
 	else
 		if Object.GetNumRegions then
 			for i = 1, Object:GetNumRegions() do
 				local Region = select(i, Object:GetRegions())
-				if Region and Region:IsObjectType('Texture') and Region:GetTexture() == Texture then
-					if Kill then
-						AS:Kill(Region)
-					elseif Alpha then
-						Region:SetAlpha(0)
-					else
-						Region:SetTexture()
-					end
+				if Region and Region:IsObjectType('Texture') and strlower(Region:GetTexture()) == strlower(Texture) then
+					AS:CleanTexture(Region, Kill, Alpha)
 				end
 			end
 		end
@@ -318,7 +209,7 @@ end
 
 function AS:GradientHighlight(frame, layer, color)
 	if frame.SetHighlightTexture then
-		frame:SetHighlightTexture("")
+		frame:SetHighlightTexture('')
 	end
 
 	local r, g, b = .9, .9, .9
@@ -326,17 +217,17 @@ function AS:GradientHighlight(frame, layer, color)
 		r, g, b = color.r or color[1], color.g or color[2], color.b or color[3]
 	end
 
-	local leftGrad = frame:CreateTexture(nil, layer or "HIGHLIGHT")
+	local leftGrad = frame:CreateTexture(nil, layer or 'HIGHLIGHT')
 	leftGrad:SetSize(frame:GetWidth() * 0.5, frame:GetHeight() * 0.95)
-	leftGrad:SetPoint("LEFT", frame, "CENTER")
+	leftGrad:SetPoint('LEFT', frame, 'CENTER')
 	leftGrad:SetTexture(AS.Blank)
-	leftGrad:SetGradientAlpha("Horizontal", r, g, b, 0.35, r, g, b, 0)
+	leftGrad:SetGradientAlpha('Horizontal', r, g, b, 0.35, r, g, b, 0)
 
-	local rightGrad = frame:CreateTexture(nil, layer or "HIGHLIGHT")
+	local rightGrad = frame:CreateTexture(nil, layer or 'HIGHLIGHT')
 	rightGrad:SetSize(frame:GetWidth() * 0.5, frame:GetHeight() * 0.95)
-	rightGrad:SetPoint("RIGHT", frame, "CENTER")
+	rightGrad:SetPoint('RIGHT', frame, 'CENTER')
 	rightGrad:SetTexture(AS.Blank)
-	rightGrad:SetGradientAlpha("Horizontal", r, g, b, 0, r, g, b, 0.35)
+	rightGrad:SetGradientAlpha('Horizontal', r, g, b, 0, r, g, b, 0.35)
 end
 
 local function Desaturate(self, value)
@@ -387,7 +278,7 @@ function AS:SetTemplate(Frame, Template, Texture)
 	local Alpha = (Template == 'Default' and 1 or .8)
 
 	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
-		if Frame:IsObjectType("Button") then
+		if Frame:IsObjectType('Button') then
 			Texture = _G.ElvUI[1].media.glossTex
 		else
 			Texture = _G.ElvUI[1].media.blankTex
@@ -455,12 +346,7 @@ function AS:SetTemplate(Frame, Template, Texture)
 	end
 end
 
-AS.ArrowRotation = {
-	['up'] = 0,
-	['down'] = 3.14,
-	['left'] = 1.57,
-	['right'] = -1.57,
-}
+AS.ArrowRotation = { up = 0, down = 3.14, left = 1.57, right = -1.57 }
 
 function AS:SkinArrowButton(object, Arrow)
 	if Arrow then
@@ -479,7 +365,7 @@ function AS:SkinArrowButton(object, Arrow)
 		end
 	end
 
-	if object:IsObjectType("Button") then
+	if object:IsObjectType('Button') then
 		local Button = object
 
 		if not Button.Mask then
@@ -522,7 +408,7 @@ function AS:SkinArrowButton(object, Arrow)
 		end
 
 		Button.Mask:SetRotation(AS.ArrowRotation[Arrow])
-	elseif object:IsObjectType("Texture") then
+	elseif object:IsObjectType('Texture') then
 		object:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]], 'CLAMPTOBLACKADDITIVE', 'CLAMPTOBLACKADDITIVE')
 		object:SetRotation(AS.ArrowRotation[Arrow])
 	end
@@ -568,8 +454,8 @@ function AS:SkinButton(Button, Strip)
 	AS:SetTemplate(Button, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
 	if Button.GetFontString and Button:GetFontString() ~= nil then
-		Button:HookScript("OnEnable", function(self) self:GetFontString():SetTextColor(1, 1, 1) end)
-		Button:HookScript("OnDisable", function(self) self:GetFontString():SetTextColor(.5, .5, .5) end)
+		Button:HookScript('OnEnable', function(s) s:GetFontString():SetTextColor(1, 1, 1) end)
+		Button:HookScript('OnDisable', function(s) s:GetFontString():SetTextColor(.5, .5, .5) end)
 
 		if Button:IsEnabled() then
 			Button:GetFontString():SetTextColor(1, 1, 1)
@@ -577,12 +463,12 @@ function AS:SkinButton(Button, Strip)
 			Button:GetFontString():SetTextColor(.5, .5, .5)
 		end
 
-		Button:HookScript("OnEnable", function(self) self:GetFontString():SetTextColor(1, 1, 1) end)
-		Button:HookScript("OnDisable", function(self) self:GetFontString():SetTextColor(.5, .5, .5) end)
+		Button:HookScript('OnEnable', function(s) s:GetFontString():SetTextColor(1, 1, 1) end)
+		Button:HookScript('OnDisable', function(s) s:GetFontString():SetTextColor(.5, .5, .5) end)
 	end
 
-	Button:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
-	Button:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+	Button:HookScript('OnEnter', function(s) s:SetBackdropBorderColor(unpack(AS.Color)) end)
+	Button:HookScript('OnLeave', function(s) s:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
 	--if Button.Flash then
 	--	Button.Flash:SetColorTexture(0, 0, 0, 0)
@@ -603,19 +489,19 @@ function AS:SkinCheckBox(CheckBox)
 	CheckBox:SetCheckedTexture('Interface\\Buttons\\UI-CheckBox-Check')
 	CheckBox:SetDisabledCheckedTexture('Interface\\Buttons\\UI-CheckBox-Check-Disabled')
 
-	CheckBox:HookScript('OnDisable', function(self)
-		if not self.SetDisabledTexture then return end
+	CheckBox:HookScript('OnDisable', function(s)
+		if not s.SetDisabledTexture then return end
 
-		if self:GetChecked() then
-			self:SetDisabledTexture('Interface\\Buttons\\UI-CheckBox-Check-Disabled')
+		if s:GetChecked() then
+			s:SetDisabledTexture('Interface\\Buttons\\UI-CheckBox-Check-Disabled')
 		else
-			self:SetDisabledTexture('')
+			s:SetDisabledTexture('')
 		end
 	end)
 
-	hooksecurefunc(CheckBox, "SetNormalTexture", function(f, t) if t ~= "" then f:SetNormalTexture("") end end)
-	hooksecurefunc(CheckBox, "SetPushedTexture", function(f, t) if t ~= "" then f:SetPushedTexture("") end end)
-	hooksecurefunc(CheckBox, "SetHighlightTexture", function(f, t) if t ~= "" then f:SetDisabledTexture("") end end)
+	hooksecurefunc(CheckBox, 'SetNormalTexture', function(f, t) if t ~= '' then f:SetNormalTexture('') end end)
+	hooksecurefunc(CheckBox, 'SetPushedTexture', function(f, t) if t ~= '' then f:SetPushedTexture('') end end)
+	hooksecurefunc(CheckBox, 'SetHighlightTexture', function(f, t) if t ~= '' then f:SetDisabledTexture('') end end)
 
 	CheckBox.isSkinned = true
 end
@@ -630,18 +516,18 @@ function AS:SkinCloseButton(Button, Reposition)
 
 	Button:SetHitRectInsets(6, 6, 7, 7)
 
-	Button:HookScript('OnEnter', function(self)
-		self:GetNormalTexture():SetVertexColor(1, .2, .2)
+	Button:HookScript('OnEnter', function(s)
+		s:GetNormalTexture():SetVertexColor(1, .2, .2)
 		if AS:CheckOption('ElvUIStyle', 'ElvUI') then
-			self.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
+			s.Backdrop:SetBackdropBorderColor(unpack(AS.Color))
 		else
-			self.Backdrop:SetBackdropBorderColor(1, .2, .2)
+			s.Backdrop:SetBackdropBorderColor(1, .2, .2)
 		end
 	end)
 
-	Button:HookScript('OnLeave', function(self)
-		self:GetNormalTexture():SetVertexColor(1, 1, 1)
-		self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+	Button:HookScript('OnLeave', function(s)
+		s:GetNormalTexture():SetVertexColor(1, 1, 1)
+		s.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 	end)
 
 	local Mask = Button:CreateMaskTexture()
@@ -673,8 +559,8 @@ function AS:SkinDropDownBox(Frame, Width, Pos)
 	if Frame.Backdrop then return end
 
 	local FrameName = Frame.GetName and Frame:GetName()
-	local Button = Frame.Button or FrameName and (_G[FrameName.."Button"] or _G[FrameName.."_Button"])
-	local Text = FrameName and _G[FrameName.."Text"] or Frame.Text
+	local Button = Frame.Button or FrameName and (_G[FrameName..'Button'] or _G[FrameName..'_Button'])
+	local Text = FrameName and _G[FrameName..'Text'] or Frame.Text
 	local Icon = Frame.Icon
 
 	if not Width then
@@ -685,15 +571,15 @@ function AS:SkinDropDownBox(Frame, Width, Pos)
 	Frame:SetWidth(Width)
 
 	AS:CreateBackdrop(Frame, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
-	Frame.Backdrop:SetPoint("TOPLEFT", 20, -2)
-	Frame.Backdrop:SetPoint("BOTTOMRIGHT", Button, "BOTTOMRIGHT", 2, -2)
+	Frame.Backdrop:SetPoint('TOPLEFT', 20, -2)
+	Frame.Backdrop:SetPoint('BOTTOMRIGHT', Button, 'BOTTOMRIGHT', 2, -2)
 
 	Button:ClearAllPoints()
 
 	if Pos then
-		Button:SetPoint("TOPRIGHT", Frame.Right, -20, -21)
+		Button:SetPoint('TOPRIGHT', Frame.Right, -20, -21)
 	else
-		Button:SetPoint("RIGHT", Frame, "RIGHT", -10, 0)
+		Button:SetPoint('RIGHT', Frame, 'RIGHT', -10, 0)
 	end
 
 	Button.SetPoint = AS.noop
@@ -701,11 +587,11 @@ function AS:SkinDropDownBox(Frame, Width, Pos)
 
 	if Text then
 		Text:ClearAllPoints()
-		Text:SetPoint("RIGHT", Button, "LEFT", -2, 0)
+		Text:SetPoint('RIGHT', Button, 'LEFT', -2, 0)
 	end
 
 	if Icon then
-		Icon:SetPoint("LEFT", 23, 0)
+		Icon:SetPoint('LEFT', 23, 0)
 	end
 end
 
@@ -760,7 +646,7 @@ end
 function AS:SkinMaxMinFrame(frame)
 	AS:StripTextures(frame, true)
 
-	for Name, Direction in pairs({ ['MaximizeButton'] = 'up', ['MinimizeButton'] = 'down' }) do
+	for Name, Direction in pairs({ MaximizeButton = 'up', MinimizeButton = 'down' }) do
 		local Button = frame[Name]
 
 		if Button then
@@ -779,14 +665,14 @@ function AS:SkinMaxMinFrame(frame)
 			Button:GetPushedTexture():SetRotation(AS.ArrowRotation[Direction])
 			AS:SetInside(Button:GetPushedTexture())
 
-			Button:HookScript('OnEnter', function(self)
-				self:SetBackdropBorderColor(unpack(AS.Color))
-				self:GetNormalTexture():SetVertexColor(unpack(AS.Color))
+			Button:HookScript('OnEnter', function(s)
+				s:SetBackdropBorderColor(unpack(AS.Color))
+				s:GetNormalTexture():SetVertexColor(unpack(AS.Color))
 			end)
 
-			Button:HookScript('OnLeave', function(self)
-				self:SetBackdropBorderColor(unpack(AS.BorderColor))
-				self:GetNormalTexture():SetVertexColor(1, 1, 1)
+			Button:HookScript('OnLeave', function(s)
+				s:SetBackdropBorderColor(unpack(AS.BorderColor))
+				s:GetNormalTexture():SetVertexColor(1, 1, 1)
 			end)
 		end
 	end
@@ -833,10 +719,10 @@ function AS:SkinRadioButton(Button)
 	Disabled:SetVertexColor(.3, .3, .3)
 	Disabled:AddMaskTexture(OutsideMask)
 
-	hooksecurefunc(Button, "SetNormalTexture", function(f, t) if t ~= "" then f:SetNormalTexture("") end end)
-	hooksecurefunc(Button, "SetPushedTexture", function(f, t) if t ~= "" then f:SetPushedTexture("") end end)
-	hooksecurefunc(Button, "SetHighlightTexture", function(f, t) if t ~= "" then f:SetHighlightTexture("") end end)
-	hooksecurefunc(Button, "SetDisabledTexture", function(f, t) if t ~= "" then f:SetDisabledTexture("") end end)
+	hooksecurefunc(Button, 'SetNormalTexture', function(f, t) if t ~= '' then f:SetNormalTexture('') end end)
+	hooksecurefunc(Button, 'SetPushedTexture', function(f, t) if t ~= '' then f:SetPushedTexture('') end end)
+	hooksecurefunc(Button, 'SetHighlightTexture', function(f, t) if t ~= '' then f:SetHighlightTexture('') end end)
+	hooksecurefunc(Button, 'SetDisabledTexture', function(f, t) if t ~= '' then f:SetDisabledTexture('') end end)
 
 	Button.isSkinned = true
 end
@@ -871,8 +757,8 @@ function AS:SkinScrollBar(Frame)
 		Thumb.Backdrop:SetPoint('TOPLEFT', Thumb, 'TOPLEFT', 2, -4)
 		Thumb.Backdrop:SetPoint('BOTTOMRIGHT', Thumb, 'BOTTOMRIGHT', -2, 4)
 		Thumb.Backdrop:SetFrameLevel(Thumb.Backdrop:GetFrameLevel() + 2)
-		Thumb.Backdrop:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
-		Thumb.Backdrop:HookScript('OnLeave', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+		Thumb.Backdrop:HookScript('OnEnter', function(s) s:SetBackdropBorderColor(unpack(AS.Color)) end)
+		Thumb.Backdrop:HookScript('OnLeave', function(s) s:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
 		Frame.Thumb = Thumb
 
@@ -894,8 +780,8 @@ function AS:SkinTab(Tab)
 	AS:CreateBackdrop(Tab, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or nil)
 
 	if Tab.GetFontString and Tab:GetFontString() ~= nil then
-		Tab:HookScript("OnEnable", function(self) self:GetFontString():SetTextColor(1, 1, 1) end)
-		Tab:HookScript("OnDisable", function(self) self:GetFontString():SetTextColor(.5, .5, .5) end)
+		Tab:HookScript('OnEnable', function(s) s:GetFontString():SetTextColor(1, 1, 1) end)
+		Tab:HookScript('OnDisable', function(s) s:GetFontString():SetTextColor(.5, .5, .5) end)
 
 		if Tab:IsEnabled() then
 			Tab:GetFontString():SetTextColor(1, 1, 1)
@@ -904,8 +790,8 @@ function AS:SkinTab(Tab)
 		end
 	end
 
-	Tab:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.Color)) end)
-	Tab:HookScript('OnLeave', function(self) self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+	Tab:HookScript('OnEnter', function(s) s.Backdrop:SetBackdropBorderColor(unpack(AS.Color)) end)
+	Tab:HookScript('OnLeave', function(s) s.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
 	if AS:CheckAddOn('ElvUI') or AS:CheckOption('ElvUIStyle', 'ElvUI') then
 		if Tab.backdrop then -- Check if ElvUI already provides the backdrop. Otherwise we have two backdrops (e.g. Auctionhouse)
@@ -922,7 +808,7 @@ function AS:SkinSlideBar(Frame, MoveText)
 	Frame.Backdrop:SetAllPoints()
 	Frame.Backdrop:SetFrameLevel(Frame:GetFrameLevel())
 
-	hooksecurefunc(Frame, "SetBackdrop", function(self, backdrop) if backdrop ~= nil then self:SetBackdrop(nil) end end)
+	hooksecurefunc(Frame, 'SetBackdrop', function(s, backdrop) if backdrop ~= nil then s:SetBackdrop(nil) end end)
 
 	if MoveText then
 		for i = 1, Frame:GetNumRegions() do
@@ -960,7 +846,7 @@ function AS:StyleButton(Button)
 		Button:SetHighlightTexture(AS.Blank)
 		Button:GetHighlightTexture():SetVertexColor(1, 1, 1, .2)
 		AS:SetInside(Button:GetHighlightTexture())
-		hooksecurefunc(Button, "SetHighlightTexture", function(f, t)
+		hooksecurefunc(Button, 'SetHighlightTexture', function(_, t)
 			if t ~= AS.Blank then
 				Button:SetHighlightTexture(AS.Blank)
 				Button:GetHighlightTexture():SetVertexColor(1, 1, 1, .2)
@@ -973,7 +859,7 @@ function AS:StyleButton(Button)
 		Button:SetPushedTexture(AS.Blank)
 		Button:GetPushedTexture():SetVertexColor(.9, .8, .1, .5)
 		AS:SetInside(Button:GetPushedTexture())
-		hooksecurefunc(Button, "SetPushedTexture", function(f, t)
+		hooksecurefunc(Button, 'SetPushedTexture', function(_, t)
 			if t ~= AS.Blank then
 				Button:SetPushedTexture(AS.Blank)
 				Button:GetPushedTexture():SetVertexColor(.9, .8, .1, .5)
@@ -986,7 +872,7 @@ function AS:StyleButton(Button)
 		Button:SetCheckedTexture(AS.Blank)
 		Button:GetCheckedTexture():SetVertexColor(0, 1, 0, .5)
 		AS:SetInside(Button:GetCheckedTexture())
-		hooksecurefunc(Button, "SetCheckedTexture", function(f, t)
+		hooksecurefunc(Button, 'SetCheckedTexture', function(_, t)
 			if t ~= AS.Blank then
 				Button:SetCheckedTexture(AS.Blank)
 				Button:GetCheckedTexture():SetVertexColor(0, 1, 0, .5)
@@ -1056,7 +942,7 @@ function AS:SkinStatusBar(Frame, Color)
 	Frame:SetStatusBarTexture(AS.NormTex)
 	Frame:SetStatusBarColor(unpack(Color or AS:CheckOption('StatusBarColor')))
 	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
-		ElvUI[1]:RegisterStatusBar(Frame)
+		_G.ElvUI[1]:RegisterStatusBar(Frame)
 	end
 end
 
@@ -1080,7 +966,7 @@ function AS:SkinTexture(icon, backdrop)
 	end
 
 	if icon:GetDrawLayer() ~= 'ARTWORK' then
-		icon:SetDrawLayer("ARTWORK")
+		icon:SetDrawLayer('ARTWORK')
 	end
 
 	icon:SetSnapToPixelGrid(false)
@@ -1322,26 +1208,26 @@ function AS:SkinZoneControl(widgetFrame) end
 
 local W = Enum.UIWidgetVisualizationType;
 AS.WidgetSkinningFuncs = {
-	[W.IconAndText] = "SkinIconAndTextWidget",
-	[W.CaptureBar] = "SkinCaptureBarWidget",
-	[W.StatusBar] = "SkinStatusBarWidget",
-	[W.DoubleStatusBar] = "SkinDoubleStatusBarWidget",
-	[W.IconTextAndBackground] = "SkinIconTextAndBackgroundWidget",
-	[W.DoubleIconAndText] = "SkinDoubleIconAndTextWidget",
-	[W.StackedResourceTracker] = "SkinStackedResourceTrackerWidget",
-	[W.IconTextAndCurrencies] = "SkinIconTextAndCurrenciesWidget",
-	[W.TextWithState] = "SkinTextWithStateWidget",
-	[W.HorizontalCurrencies] = "SkinHorizontalCurrenciesWidget",
-	[W.BulletTextList] = "SkinBulletTextListWidget",
-	[W.ScenarioHeaderCurrenciesAndBackground] = "SkinScenarioHeaderCurrenciesAndBackgroundWidget",
+	[W.IconAndText] = 'SkinIconAndTextWidget',
+	[W.CaptureBar] = 'SkinCaptureBarWidget',
+	[W.StatusBar] = 'SkinStatusBarWidget',
+	[W.DoubleStatusBar] = 'SkinDoubleStatusBarWidget',
+	[W.IconTextAndBackground] = 'SkinIconTextAndBackgroundWidget',
+	[W.DoubleIconAndText] = 'SkinDoubleIconAndTextWidget',
+	[W.StackedResourceTracker] = 'SkinStackedResourceTrackerWidget',
+	[W.IconTextAndCurrencies] = 'SkinIconTextAndCurrenciesWidget',
+	[W.TextWithState] = 'SkinTextWithStateWidget',
+	[W.HorizontalCurrencies] = 'SkinHorizontalCurrenciesWidget',
+	[W.BulletTextList] = 'SkinBulletTextListWidget',
+	[W.ScenarioHeaderCurrenciesAndBackground] = 'SkinScenarioHeaderCurrenciesAndBackgroundWidget',
 }
 
 if AS.Retail then
-	AS.WidgetSkinningFuncs[W.TextureAndText] = "SkinTextureAndTextWidget"
-	AS.WidgetSkinningFuncs[W.SpellDisplay] = "SkinSpellDisplay"
-	AS.WidgetSkinningFuncs[W.DoubleStateIconRow] = "SkinDoubleStateIconRow"
-	AS.WidgetSkinningFuncs[W.TextureAndTextRow] = "SkinTextureAndTextRowWidget"
-	AS.WidgetSkinningFuncs[W.ZoneControl] = "SkinZoneControl"
+	AS.WidgetSkinningFuncs[W.TextureAndText] = 'SkinTextureAndTextWidget'
+	AS.WidgetSkinningFuncs[W.SpellDisplay] = 'SkinSpellDisplay'
+	AS.WidgetSkinningFuncs[W.DoubleStateIconRow] = 'SkinDoubleStateIconRow'
+	AS.WidgetSkinningFuncs[W.TextureAndTextRow] = 'SkinTextureAndTextRowWidget'
+	AS.WidgetSkinningFuncs[W.ZoneControl] = 'SkinZoneControl'
 end
 
 function AS:SkinWidgetContainer(widgetContainer)
