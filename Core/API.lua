@@ -144,13 +144,13 @@ function AS:StripTextures(Object, Kill, Alpha)
 end
 
 function AS:StripTexture(Object, Texture, Kill, Alpha)
-	if Object:IsObjectType('Texture') and strlower(Object:GetTexture()) == strlower(Texture) then
+	if Object:IsObjectType('Texture') and type(Object:GetTexture()) == 'string' and strlower(Object:GetTexture()) == strlower(Texture) then
 		AS:CleanTexture(Object, Kill, Alpha)
 	else
 		if Object.GetNumRegions then
 			for i = 1, Object:GetNumRegions() do
 				local Region = select(i, Object:GetRegions())
-				if Region and Region:IsObjectType('Texture') and strlower(Region:GetTexture()) == strlower(Texture) then
+				if Region and Region:IsObjectType('Texture') and type(Region:GetTexture()) == 'string' and strlower(Region:GetTexture()) == strlower(Texture) then
 					AS:CleanTexture(Region, Kill, Alpha)
 				end
 			end
