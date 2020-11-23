@@ -7,14 +7,11 @@ function AS:Scrap(event, addon)
 		local Button = Scrap.Merchant
 		if Button and not Button.IsSkinned then
 			Button:OnEnable()
-			AS:StyleButton(Button)
-			AS:SetTemplate(Button, nil, true)
-			Button.border:SetTexture()
-			Button.icon:SetTexture([[Interface\Addons\Scrap\Art\Enabled Icon]])
-			Button.icon:SetAllPoints()
-			for _, tab in ipairs(MerchantFrame.numTabs) do
-				AS:SkinTab(tab)
-			end
+			AS:StripTextures(Button, nil, true)
+			AS:SkinButton(Button)
+			AS:SkinTexture(Button.icon)
+			Button.icon:SetInside()
+			Button.icon:SetAlpha(1)
 			Button.IsSkinned = true
 		end
 
