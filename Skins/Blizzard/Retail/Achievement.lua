@@ -12,13 +12,10 @@ local hooksecurefunc = hooksecurefunc
 function AS:SkinAchievement(Achievement, BiggerIcon)
 	if Achievement.Backdrop then return end
 	AS:SkinBackdropFrame(Achievement, nil, nil, true)
-
-	Achievement:SetBackdrop(nil)
-	Achievement.SetBackdrop = AS.Noop
-	AS:SetInside(Achievement.Backdrop, Achievement, 2, 2)
+	AS:SetInside(Achievement.Backdrop, Achievement)
 
 	AS:SetTemplate(Achievement.icon)
-	local Size = BiggerIcon and 54 or 38
+	local Size = BiggerIcon and 56 or 38
 	Achievement.icon:SetSize(Size, Size)
 	Achievement.icon:ClearAllPoints()
 	Achievement.icon:SetPoint("LEFT", 6, 0)
@@ -27,42 +24,22 @@ function AS:SkinAchievement(Achievement, BiggerIcon)
 	AS:Kill(Achievement.icon.frame)
 
 	AS:SkinTexture(Achievement.icon.texture)
-
 	AS:SetInside(Achievement.icon.texture)
 
-	if Achievement.titleBar then
-		hooksecurefunc(Achievement.titleBar, 'SetTexture', function(self, texture)
-			if texture == [[Interface\AchievementFrame\AccountLevel-AchievementHeader]] then
-				Achievement.Backdrop:SetBackdropBorderColor(_G.ACHIEVEMENTUI_BLUEBORDER_R, _G.ACHIEVEMENTUI_BLUEBORDER_G, _G.ACHIEVEMENTUI_BLUEBORDER_B)
-			else
-				Achievement.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end
-		end)
+	if Achievement.label then
+		Achievement.label:SetTextColor(1, .8, .1)
+		hooksecurefunc(Achievement.label, 'SetVertexColor', function(s, r, g, b) if r == 1 and g == 1 and b == 1 then s:SetTextColor(1, .8, .1) end end)
 	end
 
 	if Achievement.highlight then
 		AS:StripTextures(Achievement.highlight, true)
-		Achievement:HookScript('OnEnter', function(self) self.Backdrop:SetBackdropBorderColor(1, .8, .1) end)
-		Achievement:HookScript('OnLeave', function(self)
-			if (self.player and self.player.accountWide or self.accountWide) then
-				self.Backdrop:SetBackdropBorderColor(_G.ACHIEVEMENTUI_BLUEBORDER_R, _G.ACHIEVEMENTUI_BLUEBORDER_G, _G.ACHIEVEMENTUI_BLUEBORDER_B)
-			else
-				self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end
-		end)
-	end
-
-	if Achievement.label then
-		Achievement.label:SetTextColor(1, 1, 1)
+		Achievement:HookScript('OnEnter', function(s) s.Backdrop:SetBackdropBorderColor(1, .8, .1) end)
+		Achievement:HookScript('OnLeave', function(s) s.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 	end
 
 	if Achievement.description then
-		Achievement.description:SetTextColor(.6, .6, .6)
-		hooksecurefunc(Achievement.description, 'SetTextColor', function(self, r, g, b)
-			if r == 0 and g == 0 and b == 0 then
-				Achievement.description:SetTextColor(.6, .6, .6)
-			end
-		end)
+		Achievement.description:SetTextColor(1, 1, 1)
+		hooksecurefunc(Achievement.description, 'SetTextColor', function(s, r, g, b) if r == 0 and g == 0 and b == 0 then s:SetTextColor(1, 1, 1) end end)
 	end
 
 	if Achievement.hiddenDescription then
@@ -71,6 +48,7 @@ function AS:SkinAchievement(Achievement, BiggerIcon)
 
 	if Achievement.tracked then
 		AS:SkinCheckBox(Achievement.tracked)
+		Achievement.tracked:GetRegions():SetTextColor(1, 1, 1)
 		Achievement.tracked:ClearAllPoints()
 		Achievement.tracked:SetPoint('TOPLEFT', Achievement.icon, 'BOTTOMLEFT', 0, 0)
 	end
@@ -216,9 +194,22 @@ function AS:Blizzard_AchievementUI(event, addon)
 		AS:SkinAchievement(Achievement.friend)
 	end
 
+	local function setAchievementColor(frame)
+		if frame and frame.Backdrop then
+			if frame.accountWide then
+				frame.Backdrop:SetBackdropColor(.1, .2, .3)
+			else
+				frame.Backdrop:SetBackdropColor(unpack(AS.BackdropColor))
+			end
+		end
+	end
+
+	hooksecurefunc('AchievementButton_DisplayAchievement', setAchievementColor)
+
 	hooksecurefunc('AchievementFrameSummary_UpdateAchievements', function()
 		for _, Achievement in pairs(_G.AchievementFrameSummaryAchievements.buttons) do
 			AS:SkinAchievement(Achievement)
+			setAchievementColor(Achievement)
 		end
 	end)
 
@@ -226,16 +217,16 @@ function AS:Blizzard_AchievementUI(event, addon)
 		for _, Category in pairs(_G.AchievementFrameCategoriesContainer.buttons) do
 			if not Category.isSkinned then
 				AS:SkinFrame(Category)
-				Category:HookScript('OnEnter', function(self) self:SetBackdropBorderColor(unpack(AS.Color)) end)
-				Category:HookScript('OnLeave', function(self)
-					if self.isSelected then
-						self:SetBackdropBorderColor(1, .82, 0)
+				Category:HookScript('OnEnter', function(s) s:SetBackdropColor(unpack(AS.Color)) end)
+				Category:HookScript('OnLeave', function(s)
+					if s.isSelected then
+						s:SetBackdropColor(1, .82, 0)
 					else
-						self:SetBackdropBorderColor(unpack(AS.BorderColor))
+						s:SetBackdropColor(unpack(AS.BackdropColor))
 					end
 				end)
-				hooksecurefunc(Category, 'LockHighlight', function(self) self:SetBackdropBorderColor(1, .82, 0) end)
-				hooksecurefunc(Category, 'UnlockHighlight', function(self) self:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+				hooksecurefunc(Category, 'LockHighlight', function(self) self:SetBackdropColor(1, .82, 0) end)
+				hooksecurefunc(Category, 'UnlockHighlight', function(self) self:SetBackdropColor(unpack(AS.BackdropColor)) end)
 				Category.label:SetTextColor(1, 1, 1)
 				Category.isSkinned = true
 			end
@@ -263,13 +254,15 @@ function AS:Blizzard_AchievementUI(event, addon)
 				criteria, object = AchievementButton_GetCriteria(textStrings), 'name'
 			end
 
+			local r, g, b, x, y = .6, .6, .6, 1, -1
 			if ( objectivesFrame.completed and completed ) then
-				criteria[object]:SetTextColor(1, 1, 1)
+				r, g, b, x, y = 1, 1, 1, 0, 0
 			elseif ( completed ) then
-				criteria[object]:SetTextColor(0, 1, 0)
-			else
-				criteria[object]:SetTextColor(.6, .6, .6)
+				r, g, b, x, y = 0, 1, 0, 1, -1
 			end
+
+			criteria[object]:SetTextColor(r, g, b)
+			criteria[object]:SetShadowOffset(x, y)
 		end
 	end)
 
