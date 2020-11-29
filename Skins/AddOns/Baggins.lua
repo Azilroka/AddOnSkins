@@ -36,7 +36,6 @@ function AS:Baggins(event)
 
 	function AddOnSkins_BagginsSkin:SkinItem(button)
 		if button.IsSkinned then return end
-
 		button:SetNormalTexture("")
 		button:SetPushedTexture("")
 
@@ -70,36 +69,41 @@ function AS:Baggins(event)
 
 	Baggins:RegisterSkin('AddOnSkins', AddOnSkins_BagginsSkin)
 
-	hooksecurefunc(Baggins, "CreateMoneyFrame", function()
-		BagginsCopperText:ClearAllPoints()
-		BagginsGoldText:ClearAllPoints()
-		BagginsSilverText:ClearAllPoints()
-		BagginsCopperText:SetPoint("RIGHT", BagginsCopperIcon, "LEFT")
-		BagginsSilverText:SetPoint("RIGHT", BagginsSilverIcon, "LEFT")
-		BagginsGoldText:SetPoint("RIGHT", BagginsGoldIcon, "LEFT")
+	hooksecurefunc(Baggins, "CreateMoneyFrame", function(self)
+		local p = self.db.profile
+		if p.skin and p.skin == 'AddOnSkins' then
+			BagginsCopperText:ClearAllPoints()
+			BagginsGoldText:ClearAllPoints()
+			BagginsSilverText:ClearAllPoints()
+			BagginsCopperText:SetPoint("RIGHT", BagginsCopperIcon, "LEFT")
+			BagginsSilverText:SetPoint("RIGHT", BagginsSilverIcon, "LEFT")
+			BagginsGoldText:SetPoint("RIGHT", BagginsGoldIcon, "LEFT")
+		end
 	end)
 
 	hooksecurefunc(Baggins, "UpdateItemButton", function(self, _, button, bag, slot)
 		local p = self.db.profile
-		local texture, _, _, quality = GetContainerItemInfo(bag, slot)
-		local link = GetContainerItemLink(bag, slot)
-		if link then
-			local qual = select(3, GetItemInfo(link))
-			quality = qual or quality
-		end
-		if p.qualitycolor and texture and quality >= p.qualitycolormin then
-			local r, g, b = GetItemQualityColor(quality)
-			local glowTexture = button.glow:GetTexture()
-			if glowTexture ~= TEXTURE_ITEM_QUEST_BANG and glowTexture ~= TEXTURE_ITEM_QUEST_BORDER then
-				button.glow:Hide()
+		if p.skin and p.skin == 'AddOnSkins' then
+			local texture, _, _, quality = GetContainerItemInfo(bag, slot)
+			local link = GetContainerItemLink(bag, slot)
+			if link then
+				local qual = select(3, GetItemInfo(link))
+				quality = qual or quality
 			end
-			button:SetBackdropBorderColor(r, g, b, 1)
-		else
-			button:SetBackdropBorderColor(unpack(AS.BorderColor))
-		end
+			if p.qualitycolor and texture and quality >= p.qualitycolormin then
+				local r, g, b = GetItemQualityColor(quality)
+				local glowTexture = button.glow:GetTexture()
+				if glowTexture ~= TEXTURE_ITEM_QUEST_BANG and glowTexture ~= TEXTURE_ITEM_QUEST_BORDER then
+					button.glow:Hide()
+				end
+				button:SetBackdropBorderColor(r, g, b, 1)
+			else
+				button:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end
 
-		button.Count:ClearAllPoints()
-		button.Count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT")
+			button.Count:ClearAllPoints()
+			button.Count:SetPoint("BOTTOMRIGHT", button, "BOTTOMRIGHT")
+		end
 	end)
 end
 
