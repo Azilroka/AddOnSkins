@@ -213,7 +213,7 @@ function AS:Blizzard_AchievementUI(event, addon)
 		end
 	end)
 
-	hooksecurefunc("AchievementFrameCategories_Update", function()
+	hooksecurefunc('AchievementFrameCategories_Update', function()
 		for _, Category in pairs(_G.AchievementFrameCategoriesContainer.buttons) do
 			if not Category.isSkinned then
 				AS:SkinFrame(Category)
@@ -233,14 +233,14 @@ function AS:Blizzard_AchievementUI(event, addon)
 		end
 	end)
 
-	hooksecurefunc("AchievementButton_GetProgressBar", function(index)
-		local frame = _G["AchievementFrameProgressBar"..index]
+	hooksecurefunc('AchievementButton_GetProgressBar', function(index)
+		local frame = _G['AchievementFrameProgressBar'..index]
 		if frame and not frame.Backdrop then
 			AS:SkinStatusBar(frame)
 		end
 	end)
 
-	hooksecurefunc("AchievementObjectives_DisplayCriteria", function(objectivesFrame, id)
+	hooksecurefunc('AchievementObjectives_DisplayCriteria', function(objectivesFrame, id)
 		local numCriteria = GetAchievementNumCriteria(id)
 		local textStrings, metas, criteria, object = 0, 0
 		for i = 1, numCriteria do
