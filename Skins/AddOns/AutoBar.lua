@@ -9,7 +9,7 @@ function AS:AutoBar(event, addon)
 				AS:CreateBackdrop(button.frame)
 				button.frame.Backdrop:SetAllPoints()
 				AS:StyleButton(button.frame)
-				button.frame:DisableDrawLayer('ARTWORK')
+				button.frame.NormalTexture:SetAlpha(0)
 				AS:SkinTexture(button.frame.icon)
 				AS:SetInside(button.frame.icon, button.frame, 1, 1)
 				button.IsStyled = true
