@@ -68,7 +68,7 @@ local function SkinMainFrames()
 	selling.HistoricalPriceListing.ScrollFrame:SetPoint('TOPLEFT', selling.HistoricalPriceListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 	list.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', list.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 15, -4)
 
-	AS:StripTextures(_G.AuctionatorShoppingListFrameBg)
+	AS:StripTextures(list.ShoppingResultsInset)
 	AS:StripTextures(list.ScrollList.InsetFrame)
 	list.ScrollList.InsetFrame:SetPoint('TOPLEFT', list.ScrollList, 'TOPLEFT', 3, 0)
 	AS:StripTextures(cancelling.HistoricalPriceInset)
