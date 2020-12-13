@@ -310,9 +310,10 @@ function AS:Blizzard_Quest()
 
 		local function TitleButtonPool()
 			for Button in QuestFrameGreetingPanel.titleButtonPool:EnumerateActive() do
-				local Text = Button:GetFontString():GetText()
-				if Text and strmatch(Text:GetText(), '|c[Ff][Ff]%x%x%x%x%x%x') then
-					Button:GetFontString():SetText(gsub(Text, '|c[Ff][Ff]%x%x%x%x%x%x', '|cffffe519'))
+				local String = Button:GetFontString()
+				local Text = String:GetText()
+				if Text and strmatch(Text, '|c[Ff][Ff]%x%x%x%x%x%x') then
+					String:SetText(gsub(Text, '|c[Ff][Ff]%x%x%x%x%x%x', '|cffffe519'))
 				end
 			end
 		end
