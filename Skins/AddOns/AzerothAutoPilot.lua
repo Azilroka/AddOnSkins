@@ -29,22 +29,6 @@ function AS:AzerothAutoPilot()
 		end
 	end
 
-	for Key, Child in pairs(AAP.Banners.BannersFrame) do
-		if Key ~= 0 and Child and Child.IsObjectType then
-			if Child:IsObjectType('CheckButton') then
-				AS:SkinCheckBox(Child)
-			elseif Child:IsObjectType('Button') then
-				AS:SkinTexture(Child:GetNormalTexture())
-				AS:CreateBackdrop(Child)
-				AS:StyleButton(Child)
-				Child:SetSize(29, 29)
-			elseif Child:IsObjectType('Frame') then
-				AS:SkinBackdropFrame(Child)
-				AS:SetInside(Child.Backdrop)
-			end
-		end
-	end
-
 	AAP.QuestList.ListFrame.Backdrop:Hide()
 
 	AAP.QuestList.Greetings2FS1:SetWidth(500)
