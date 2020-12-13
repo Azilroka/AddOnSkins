@@ -21,7 +21,6 @@ function AS:ExtVendor()
 
 	for i = 13, 20 do
 		local Slot = _G["MerchantItem"..i]
-		AS:SkinBackdropFrame(Slot, nil, nil, true)
 		AS:SkinFrame(Slot.ItemButton)
 		AS:StyleButton(Slot.ItemButton)
 		AS:SkinTexture(Slot.ItemButton.icon)
