@@ -1,6 +1,6 @@
 <Ui>
 	<Script file="AddOnManager.lua"/>
-	<Script file="ChatBubbles.lua"/>
+	<!--Script file="ChatBubbles.lua"/-->
 	<Script file="Trade.lua"/>
 
 	<Include file="Classic\Load_Skins.xml"/>
