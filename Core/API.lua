@@ -808,7 +808,9 @@ function AS:SkinSlideBar(Frame, MoveText)
 	Frame.Backdrop:SetAllPoints()
 	Frame.Backdrop:SetFrameLevel(Frame:GetFrameLevel())
 
-	hooksecurefunc(Frame, 'SetBackdrop', function(s, backdrop) if backdrop ~= nil then s:SetBackdrop(nil) end end)
+	if Frame.SetBackdrop then
+		hooksecurefunc(Frame, 'SetBackdrop', function(s, backdrop) if backdrop ~= nil then s:SetBackdrop(nil) end end)
+	end
 
 	if MoveText then
 		for i = 1, Frame:GetNumRegions() do
