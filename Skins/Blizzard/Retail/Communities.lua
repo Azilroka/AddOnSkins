@@ -27,10 +27,7 @@ function AS:Blizzard_Communities(event, addon)
 	CommunitiesFrame.CommunitiesListDropDownMenu.Text:SetJustifyH("RIGHT")
 
 	AS:SkinButton(CommunitiesFrame.AddToChatButton)
-	AS:SkinButton(CommunitiesFrame.GuildFinderFrame.FindAGuildButton)
-
 	AS:SkinButton(CommunitiesFrame.InviteButton)
-	CommunitiesFrame.AddToChatButton:SetPoint("TOPRIGHT", CommunitiesFrame.ChatEditBox, "BOTTOMRIGHT", 4, 4)
 
 	AS:SkinEditBox(CommunitiesFrame.ChatEditBox)
 	AS:SetInside(CommunitiesFrame.ChatEditBox.Backdrop, CommunitiesFrame.ChatEditBox, -5, 8)
