@@ -24,7 +24,7 @@ function AS:Outfitter()
 	local index = 0
 	local function SkinDropdownList()
 		if _G['LibDropdownFrame'..index] then
-			AS:SetTemplate(_G['LibDropdownFrame'..index])
+			AS:CreateBackdrop(_G['LibDropdownFrame'..index])
 			index = index + 1
 		end
 	end
