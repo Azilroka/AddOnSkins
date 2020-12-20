@@ -108,6 +108,14 @@ function AS:BigWigs(event, addon)
 				end
 			end
 
+			bar.candyBarLabel:ClearAllPoints()
+			bar.candyBarLabel:Point("LEFT", bar, "LEFT", 2, AS:AdjustForTheme(12))
+			bar.candyBarLabel:Point("RIGHT", bar, "RIGHT", -2, AS:AdjustForTheme(12))
+
+			bar.candyBarDuration:ClearAllPoints()
+			bar.candyBarDuration:Point("LEFT", bar, "LEFT", 2, AS:AdjustForTheme(12))
+			bar.candyBarDuration:Point("RIGHT", bar, "RIGHT", -2, AS:AdjustForTheme(12))
+
 			bd:Show()
 			if AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel' then
 				bd.InsideBorder:SetShown(AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel')
