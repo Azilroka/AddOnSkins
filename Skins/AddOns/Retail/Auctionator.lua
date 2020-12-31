@@ -88,6 +88,8 @@ local function SkinMainFrames()
 	AS:SetOutside(selling.BagListing.ScrollFrame, selling.BagListing)
 	AS:SetOutside(selling.BagListing.ScrollFrame.Backdrop, selling.BagListing, 5, 5)
 
+	AS:SkinButton(list.ExportCSV)
+
 	AS:SkinDropDownBox(list.ListDropdown, 250)
 
 	-- handle sell item icon
@@ -121,9 +123,18 @@ local function SkinMainFrames()
 		config.ScanButton
 	}
 
+	local tabs = {
+		selling.HistoryTabsContainer.RealmHistoryTab,
+		selling.HistoryTabsContainer.YourHistoryTab
+	}
+
 	for _, button in ipairs(buttons) do
 		AS:SkinButton(button)
 		--button.Backdrop:SetFrameLevel(button:GetFrameLevel()) -- h a l p
+	end
+
+	for _, tab in ipairs(tabs) do
+		AS:SkinTab(tab)
 	end
 
 	local scrollbars = {
@@ -189,7 +200,8 @@ local function SkinMainFrames()
 		{ frame = list.ResultsListing.HeaderContainer, x = -20, y = -1 },
 		cancelling.ResultsListing.HeaderContainer,
 		selling.CurrentItemListing.HeaderContainer,
-		selling.HistoricalPriceListing.HeaderContainer
+		selling.HistoricalPriceListing.HeaderContainer,
+		selling.ResultsListing.HeaderContainer,
 	}
 
 	for _, header in ipairs(headers) do
@@ -286,10 +298,6 @@ local function SkinImportExport()
 	AS:CreateBackdrop(copy)
 	AS:CreateBackdrop(import)
 	AS:CreateBackdrop(export)
-
-	AS:StripTextures(copy)
-	AS:StripTextures(import)
-	AS:StripTextures(export)
 
 	AS:SkinScrollBar(copy.ScrollFrame.ScrollBar)
 	AS:SkinScrollBar(import.ScrollFrame.ScrollBar)
