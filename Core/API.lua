@@ -927,7 +927,7 @@ function AS:SkinBackdropFrame(frame, template, override, kill)
 	end
 
 	AS:CreateBackdrop(frame, template)
-	frame.Backdrop:SetAllPoints()
+	AS:SetOutside(frame.Backdrop)
 
 	if insetFrame then
 		AS:SkinFrame(insetFrame)
