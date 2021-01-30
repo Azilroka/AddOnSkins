@@ -143,7 +143,8 @@ local function SkinMainFrames()
 		list.ScrollList.ScrollFrame.scrollBar,
 		list.ResultsListing.ScrollFrame.scrollBar,
 		selling.CurrentItemListing.ScrollFrame.scrollBar,
-		selling.HistoricalPriceListing.ScrollFrame.scrollBar
+		selling.HistoricalPriceListing.ScrollFrame.scrollBar,
+		selling.ResultsListing.ScrollFrame.scrollBar,
 	}
 
 	for _, scrollbar in ipairs(scrollbars) do
