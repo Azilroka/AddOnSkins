@@ -229,7 +229,7 @@ local function SkinMainFrames()
 	end
 
 	-- create list backdrop
-	for i=1, list.ScrollList:GetNumRegions() do
+	for i = 1, list.ScrollList:GetNumRegions() do
 		local region = select(i, list.ScrollList:GetRegions())
 		if region:IsObjectType('Texture') and region:GetTexture() == 3054898 then
 			AS:StripTextures(region)
@@ -268,6 +268,10 @@ local function SkinOptions()
 						AS:SkinRadioButton(duration.RadioButton)
 					end
 				end
+			end
+
+			if child.Middle and strmatch(child.Middle:GetTexture(), 'UI%-Panel%-Button') then
+				AS:SkinButton(child)
 			end
 		end
 	end
