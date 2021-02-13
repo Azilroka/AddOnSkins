@@ -8,7 +8,7 @@ _G.AddOnSkins = Engine
 _G.AddOnSkins.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 _G.AddOnSkins.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 
-AddOnSkinsDS = {}
+_G.AddOnSkinsDS = {}
 
 -- Cache global variables
 --Lua functions
