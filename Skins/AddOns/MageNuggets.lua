@@ -25,8 +25,8 @@ function AS:MageNuggets()
 
 	for _, object in pairs(Frames) do
 		if _G[object] then
-			_G[object]:SetBackdrop(nil)
 			AS:SkinBackdropFrame(_G[object], nil, true)
+			if _G[object].SetBackdrop then _G[object]:SetBackdrop(nil) end
 			if _G[object..'_ProcBar'] then
 				_G[object..'_ProcBar']:SetStatusBarTexture(AS.NormTex)
 			end
@@ -43,7 +43,7 @@ function AS:MageNuggets()
 	}
 
 	for _, object in pairs(SmallIcons) do
-		if _G[object] then
+		if _G[object].SetBackdrop then
 			_G[object]:SetBackdrop(nil)
 		end
 	end
