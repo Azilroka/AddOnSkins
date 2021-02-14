@@ -48,7 +48,7 @@ function AS:Blizzard_Others()
 	for i = 1, 4 do
 		local Popup = _G["StaticPopup"..i]
 
-		AS:SkinFrame(Popup, nil, true)
+		AS:SkinFrame(Popup)
 
 		for j = 1, 4 do
 			AS:SkinButton(Popup['button'..j])
