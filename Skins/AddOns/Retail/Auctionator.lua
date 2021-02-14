@@ -43,14 +43,14 @@ local function SetOutsideText(editbox, backdrop, width, height)
 	for i=1, editbox:GetNumRegions() do
 		local region = select(i, editbox:GetRegions())
 		if region and region:IsObjectType('FontString') then
-			--backdrop:SetOutside(region, width, height) -- h a l p
+			backdrop:SetOutside(region, width, height) -- h a l p
 			break
 		end
 	end
 end
 
 local function SkinMoneyInput(editbox, height)
-	local backdrop = editbox.backdrop -- reference it before change, so it doesnt try to use InputBox backdrop
+	local backdrop = editbox.Backdrop -- reference it before change, so it doesnt try to use InputBox backdrop
 	if editbox.labelText == 'Quantity' then
 		editbox = editbox.InputBox
 		editbox:StripTextures()
@@ -193,12 +193,12 @@ local function SkinMainFrames()
 			SkinMoneyInput(editbox, 28)
 		elseif editbox.InputBox then
 			editbox.InputBox:StripTextures()
-			editbox.backdrop:SetAllPoints(editbox.InputBox)
+			editbox.Backdrop:SetAllPoints(editbox.InputBox)
 		end
 	end
 
 	selling.SaleItemFrame.MaxButton:ClearAllPoints()
-	selling.SaleItemFrame.MaxButton:SetPoint('LEFT', selling.SaleItemFrame.Quantity.backdrop, 'RIGHT', 5, 0)
+	selling.SaleItemFrame.MaxButton:SetPoint('LEFT', selling.SaleItemFrame.Quantity.Backdrop, 'RIGHT', 5, 0)
 
 	local headers = {
 		{ frame = list.ResultsListing.HeaderContainer, x = -20, y = -1 },
@@ -264,7 +264,7 @@ local function SkinOptions()
 				AS:SkinDropDownBox(child.DropDown)
 			elseif child.InputBox then
 				AS:SkinEditBox(child.InputBox)
-				SetOutsideText(child.InputBox, child.InputBox.backdrop, 6, 6)
+				SetOutsideText(child.InputBox, child.InputBox.Backdrop, 6, 6)
 			elseif child.MoneyInput then
 				for x = 1, child.MoneyInput:GetNumChildren() do
 					local box = select(x, child.MoneyInput:GetChildren())
