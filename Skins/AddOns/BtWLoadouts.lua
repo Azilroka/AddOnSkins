@@ -35,30 +35,38 @@ function AS:BtWLoadouts()
 		local Row = BtWLoadoutsFrame.Talents.rows[i]
 		AS:StripTextures(Row, true)
 
-		for j = 1, NUM_TALENT_COLUMNS do
-			local Button = Row.talents[j]
+		hooksecurefunc(Row, "Update", function(self)
+			for bg in self.BackgroundPool:EnumerateActive() do
+				bg:Hide()
+			end
 
-			AS:SkinBackdropFrame(Button)
-			AS:CreateShadow(Button.Backdrop, true)
+			for sep in self.SeparatorPool:EnumerateActive() do
+				sep:Hide()
+			end
 
-			Button:SetFrameLevel(Button:GetFrameLevel() + 2)
-			Button.Backdrop:SetPoint("TOPLEFT", 15, -1)
-			Button.Backdrop:SetPoint("BOTTOMRIGHT", -10, 1)
+			for Button in self.ButtonPool:EnumerateActive() do
+				if not Button.isSkinned then
+					Button.Slot:SetAlpha(0)
+					AS:SkinTexture(Button.Icon)
+					AS:SetTemplate(Button)
+					Button.KnownSelection:SetAlpha(0)
+					Button.Highlight:SetAlpha(0)
 
-			Button.knownSelection:SetAlpha(0)
+					if Button.KnownSelection:IsShown() then
+						Button:SetBackdropBorderColor(1, 0, 0)
+					end
 
-			AS:SkinTexture(Button.icon)
-
-			Button.icon:SetSize(32, 32)
-
-			Button:HookScript('OnEnter', function(self)
-				self.Backdrop:SetBackdropBorderColor(1, .82, 0)
-			end)
-
-			Button:HookScript('OnLeave', function(self)
-				self.Backdrop:SetBackdropBorderColor(nil)
-			end)
-		end
+					Button:HookScript("OnEnter", function() Button:SetBackdropBorderColor(unpack(AS:CheckOption('HighlightColor'))) end)
+					Button:HookScript("OnLeave", function()
+						if Button.KnownSelection:IsShown() then
+							Button:SetBackdropBorderColor(1, 0, 0)
+						else
+							Button:SetBackdropBorderColor(unpack(AS.BorderColor))
+						end
+					end)
+				end
+			end
+		end)
 	end
 
 	AS:SkinFrame(_G.BtWLoadoutsFrame.PvPTalents.Inset)
