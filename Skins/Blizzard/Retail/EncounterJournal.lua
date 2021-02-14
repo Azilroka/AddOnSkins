@@ -64,9 +64,6 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	EncounterJournal.encounter.info.overviewScroll.child.overviewDescription.Text:SetTextColor(1, 1, 1)
 
 	AS:SkinFrame(EncounterJournal.LootJournal)
-	AS:StripTextures(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton)
-	AS:SkinButton(EncounterJournal.LootJournal.ItemSetsFrame.ClassButton, true)
-	AS:SkinScrollBar(EncounterJournal.LootJournal.ItemSetsFrame.scrollBar)
 
 	EncounterJournal.instanceSelect.bg:SetAlpha(0)
 
@@ -286,33 +283,6 @@ function AS:Blizzard_EncounterJournal(event, addon)
 				end
 			end
 			suggestion.reward.icon.Backdrop:SetBackdropBorderColor(r, g, b)
-		end
-	end)
-
-	hooksecurefunc(EncounterJournal.LootJournal.ItemSetsFrame, "UpdateList", function(self)
-		for _, Button in pairs(self.buttons) do
-			Button.ItemLevel:SetTextColor(1, 1,  1)
-			Button.Background:Hide()
-			AS:SkinFrame(Button)
-
-			for _, Item in pairs(Button.ItemButtons) do
-				Item.Border:Hide()
-				Item.Icon:SetPoint("TOPLEFT", 1, -1)
-				AS:SkinTexture(Item.Icon, true)
-			end
-		end
-	end)
-
-	hooksecurefunc(EncounterJournal.LootJournal.ItemSetsFrame, 'ConfigureItemButton', function(self, button)
-		local r, g, b = unpack(AS.BorderColor)
-		if button.itemID then
-			local _, _, itemQuality = GetItemInfo(button.itemID)
-			if itemQuality and itemQuality > 1 then
-				r, g, b = GetItemQualityColor(itemQuality)
-			end
-		end
-		if button.Icon.Backdrop then
-			button.Icon.Backdrop:SetBackdropBorderColor(r, g, b)
 		end
 	end)
 
