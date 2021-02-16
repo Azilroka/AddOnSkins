@@ -8,27 +8,23 @@ function AS:Blizzard_BindingUI(event, addon)
 		AS:SkinButton(KeyBindingFrame[v])
 	end
 
-	AS:SkinFrame(KeyBindingFrame)
+	AS:StripTextures(KeyBindingFrame.BG)
+	AS:StripTextures(KeyBindingFrame.Header)
+	AS:SkinFrame(KeyBindingFrame, nil, nil, true)
 
-	AS:StripTextures(KeyBindingFrame.header)
 	AS:StripTextures(KeyBindingFrameScrollFrame)
 	AS:SkinScrollBar(KeyBindingFrameScrollFrameScrollBar)
 
 	AS:SkinCheckBox(KeyBindingFrame.characterSpecificButton)
-	KeyBindingFrame.header:ClearAllPoints()
-	KeyBindingFrame.header:SetPoint("TOP", KeyBindingFrame, "TOP", 0, -4)
 
 	AS:SkinFrame(KeyBindingFrameCategoryList)
 	AS:SkinFrame(KeyBindingFrame.bindingsContainer)
+	KeyBindingFrame.bindingsContainer:SetBackdropColor(0, 0, 0, 0)
 
 	for i = 1, KEY_BINDINGS_DISPLAYED, 1 do
 		AS:SkinButton(_G["KeyBindingFrameKeyBinding"..i.."Key1Button"])
 		AS:SkinButton(_G["KeyBindingFrameKeyBinding"..i.."Key2Button"])
 	end
-
-	KeyBindingFrame.okayButton:SetPoint("BOTTOMLEFT", KeyBindingFrame.unbindButton, "BOTTOMRIGHT", 3, 0)
-	KeyBindingFrame.cancelButton:SetPoint("BOTTOMLEFT", KeyBindingFrame.okayButton, "BOTTOMRIGHT", 3, 0)
-	KeyBindingFrame.unbindButton:SetPoint("BOTTOMRIGHT", KeyBindingFrame, "BOTTOMRIGHT", -211, 16)
 
 	AS:UnregisterSkinEvent(addon, event)
 end

@@ -154,7 +154,7 @@ function AS:Blizzard_TalentUI(event, addon)
 		if self.isPet then
 			bonuses = {GetSpecializationSpells(shownSpec, nil, self.isPet, true)}
 			bonusesIncrement = 2
-		else
+		elseif id then
 			bonuses = C_SpecializationInfo.GetSpellsDisplay(id)
 		end
 
