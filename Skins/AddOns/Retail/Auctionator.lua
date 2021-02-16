@@ -26,10 +26,10 @@ local function SkinItem(item)
 	if item.Icon and not item.backdrop then
 		item.Icon:SetTexCoord(unpack(AS.TexCoords))
 		AS:CreateBackdrop(item)
+		AS:StyleButton(item)
 		item.Backdrop:SetAllPoints()
 		item.EmptySlot:Hide()
 		AS:SetInside(item.Icon, item.Backdrop)
-		--S:HandleIconBorder(item.IconBorder, item.backdrop) -- h a l p
 	end
 end
 
