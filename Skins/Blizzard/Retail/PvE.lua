@@ -4,15 +4,35 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_AdventureMap(event, addon)
 	if addon ~= 'Blizzard_AdventureMap' then return end
 
+	local function HandleReward(frame)
+		if (not frame) then return end
+
+		if frame.Icon then
+			AS:SkinTexture(frame.Icon, true)
+
+			AS:CreateBackdrop(frame)
+			frame.Backdrop:SetPoint('TOPLEFT', frame.Icon, 'TOPRIGHT', -1, 0)
+			frame.Backdrop:SetPoint('BOTTOMLEFT', frame.Icon, 'BOTTOMRIGHT', -1, 0)
+			frame.Backdrop:SetPoint('RIGHT', frame, 'RIGHT', -5, 0)
+
+			frame.Count:ClearAllPoints()
+			frame.Count:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, 0)
+		end
+
+		if frame.NameFrame then frame.NameFrame:SetAlpha(0) end
+		if frame.ItemNameBG then frame.ItemNameBG:SetAlpha(0) end
+
+		if (frame.CircleBackground) then
+			frame.CircleBackground:SetAlpha(0)
+			frame.CircleBackgroundGlow:SetAlpha(0)
+		end
+	end
+
 	AS:SkinBackdropFrame(AdventureMapQuestChoiceDialog)
 
 	local function SkinRewards()
 		for reward in pairs(AdventureMapQuestChoiceDialog.rewardPool.activeObjects) do
-			if not reward.isSkinned then
-				AS:SkinIconButton(reward)
-				reward.Icon:SetDrawLayer("OVERLAY")
-				reward.isSkinned = true
-			end
+			HandleReward(reward)
 		end
 	end
 
