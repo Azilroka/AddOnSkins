@@ -128,6 +128,7 @@ local function SkinMainFrames()
 		--Selling
 		selling.SaleItemFrame.MaxButton,
 		selling.SaleItemFrame.PostButton,
+		selling.SaleItemFrame.SkipButton,
 
 		--Auctionator
 		config.OptionsButton,
@@ -184,6 +185,9 @@ local function SkinMainFrames()
 		config.DiscordLink,
 		config.TechnicalRoadmap,
 		config.BugReportLink,
+
+		--Canceling
+		cancelling.SearchFilter,
 	}
 
 	for _, editbox in ipairs(editboxes) do
@@ -199,6 +203,9 @@ local function SkinMainFrames()
 
 	selling.SaleItemFrame.MaxButton:ClearAllPoints()
 	selling.SaleItemFrame.MaxButton:SetPoint('LEFT', selling.SaleItemFrame.Quantity.Backdrop, 'RIGHT', 5, 0)
+
+	selling.SaleItemFrame.SkipButton:ClearAllPoints()
+	selling.SaleItemFrame.SkipButton:SetPoint('TOPLEFT', selling.SaleItemFrame.PostButton, 'TOPRIGHT', 2, 0)
 
 	local headers = {
 		{ frame = list.ResultsListing.HeaderContainer, x = -20, y = -1 },
