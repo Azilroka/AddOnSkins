@@ -373,7 +373,7 @@ function AS:Blizzard_PvE()
 
 	AS:SkinButton(LFGListFrame.SearchPanel.BackButton, true)
 	AS:SkinButton(LFGListFrame.SearchPanel.SignUpButton, true)
-	AS:SkinButton(LFGListSearchPanelScrollFrame.StartGroupButton,  true)
+	AS:SkinButton(LFGListSearchPanelScrollFrameScrollChild.StartGroupButton,  true)
 	LFGListFrame.SearchPanel.BackButton:ClearAllPoints()
 	LFGListFrame.SearchPanel.BackButton:SetPoint("BOTTOMLEFT", -1, 3)
 	LFGListFrame.SearchPanel.SignUpButton:ClearAllPoints()
