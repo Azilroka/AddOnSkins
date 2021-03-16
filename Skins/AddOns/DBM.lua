@@ -8,10 +8,10 @@ function AS:DBM(event, addon)
 			for bar in self:GetBarIterator() do
 				if not bar.injected then
 					hooksecurefunc(bar, "Update", function()
-						local sparkEnabled = bar.owner.options.Style ~= "BigWigs" and bar.owner.options.Spark
+						local sparkEnabled = DBT.Options.Spark
 						if not (AS:CheckOption('DBMSkinHalf') and sparkEnabled) then return end
 						local spark = _G[bar.frame:GetName().."BarSpark"]
-						spark:SetSize(12, bar.owner.options.Height*3/2 - 2)
+						spark:SetSize(12, DBT.Options.Height*3/2 - 2)
 						local a, b, c, d = spark:GetPoint()
 						spark:SetPoint(a, b, c, d, 0)
 					end)
@@ -46,28 +46,25 @@ function AS:DBM(event, addon)
 						timer:SetShadowColor(0, 0, 0, 0)
 
 						if AS:CheckOption('DBMSkinHalf') then
-							if (not bar.owner.options.BarYOffset or bar.owner.options.BarYOffset and bar.owner.options.BarYOffset < 13) then
-								bar.owner.options.BarYOffset = 13
+							if (not DBT.Options.BarYOffset or DBT.Options.BarYOffset and DBT.Options.BarYOffset < 13) then
+								DBT.Options.BarYOffset = 13
 							end
 
-							if (not bar.owner.options.HugeBarYOffset or bar.owner.options.HugeBarYOffset and bar.owner.options.HugeBarYOffset < 13) then
-								bar.owner.options.HugeBarYOffset = 13
+							if (not DBT.Options.HugeBarYOffset or DBT.Options.HugeBarYOffset and DBT.Options.HugeBarYOffset < 13) then
+								DBT.Options.HugeBarYOffset = 13
 							end
 
-							frame:SetHeight(bar.owner.options.Height / 3)
+							frame:SetHeight(DBT.Options.Height / 3)
 							name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 0, 3)
 							timer:SetPoint('BOTTOMRIGHT', frame, 'TOPRIGHT', -1, 1)
 						else
-							frame:SetHeight(bar.owner.options.Height + 2)
+							frame:SetHeight(DBT.Options.Height + 2)
 							name:SetPoint('LEFT', frame, 'LEFT', 4, 0)
 							timer:SetPoint('RIGHT', frame, 'RIGHT', -4, 0)
 						end
 
-						timer:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
-						name:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
-
-						if bar.owner.options.IconLeft then icon1.Backdrop:Show() else icon1.Backdrop:Hide() end
-						if bar.owner.options.IconRight then icon2.Backdrop:Show() else icon2.Backdrop:Hide() end
+						if DBT.Options.IconLeft then icon1.Backdrop:Show() else icon1.Backdrop:Hide() end
+						if DBT.Options.IconRight then icon2.Backdrop:Show() else icon2.Backdrop:Hide() end
 
 						bar.injected = true
 					end)
