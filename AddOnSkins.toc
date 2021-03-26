@@ -1,7 +1,7 @@
 ## Interface: 90002
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
 ## Version: 4.49
-## Author: Azilroka, NihilisticPandemonium
+## Author: Azilroka, Nihilistzsche
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 ## OptionalDeps: ElvUI
 
