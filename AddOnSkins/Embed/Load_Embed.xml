@@ -1,0 +1,10 @@
+<Ui>
+	<Script file='Core.lua'/>
+	<Script file='Details.lua'/>
+	<Script file='ElvUI.lua'/>
+	<Script file='Omen.lua'/>
+	<Script file='Recount.lua'/>
+	<Script file='Skada.lua'/>
+	<Script file='TinyDPS.lua'/>
+	<Script file='Tukui.lua'/>
+</Ui>
