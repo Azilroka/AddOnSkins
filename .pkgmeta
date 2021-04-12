@@ -7,7 +7,7 @@ externals:
     url: https://repos.wowace.com/wow/ace3/trunk
 
 ignore:
-	- Libs/Ace3/tests
+    - Libs/Ace3/tests
 
 move-folders:
     AddOnSkins/AddOnSkins: AddOnSkins
