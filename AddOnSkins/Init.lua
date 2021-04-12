@@ -1,21 +1,10 @@
 local _, Engine = ...
-local AddOn = LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceEvent-3.0', 'AceHook-3.0', 'AceTimer-3.0')
+local AddOn = _G.LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceEvent-3.0', 'AceHook-3.0', 'AceTimer-3.0')
 
-Engine[1] = AddOn
-Engine[2] = LibStub("AceLocale-3.0"):GetLocale('AddOnSkins', false)
-
-_G.AddOnSkins = Engine
-_G.AddOnSkins.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
-_G.AddOnSkins.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
-
-_G.AddOnSkinsDS = {}
-
--- Cache global variables
---Lua functions
 local _G = _G
-local select, tonumber = select, tonumber
+local select = select
+local format = format
 local strlower = strlower
---WoW API / Variables
 local CreateFrame = CreateFrame
 local GetAddOnEnableState = GetAddOnEnableState
 local GetAddOnInfo = GetAddOnInfo
@@ -24,38 +13,50 @@ local GetNumAddOns = GetNumAddOns
 local GetPhysicalScreenSize = GetPhysicalScreenSize
 local GetRealmName = GetRealmName
 local UIParent = UIParent
-local UnitClass, UnitName = UnitClass, UnitName
+local UnitClass = UnitClass
+local UnitName = UnitName
 local UnitFactionGroup = UnitFactionGroup
--- GLOBALS:
 
-AddOn.Title = GetAddOnMetadata('AddOnSkins', 'Title')
-AddOn.Version = tonumber(GetAddOnMetadata('AddOnSkins', 'Version'))
-AddOn.ProperVersion = tostring(strlen(AddOn.Version) == 3 and AddOn.Version..'0' or AddOn.Version)
-AddOn.Authors = GetAddOnMetadata('AddOnSkins', 'Author'):gsub(", ", "    ")
-AddOn.LSM = LibStub('LibSharedMedia-3.0', true)
-AddOn.LCG = LibStub('LibCustomGlow-1.0', true)
+Engine[1] = AddOn
+Engine[2] = _G.LibStub("AceLocale-3.0"):GetLocale('AddOnSkins', false)
+
+_G.AddOnSkins = Engine
+_G.AddOnSkins.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+_G.AddOnSkins.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+
+_G.AddOnSkinsDS = {}
+
+AddOn.Title = GetAddOnMetadata(..., 'Title')
+AddOn.Version = tonumber(GetAddOnMetadata(..., 'Version'))
+AddOn.Authors = GetAddOnMetadata(..., 'Author'):gsub(", ", "    ")
+AddOn.ProperVersion = format('%.2f', AddOn.Version)
 AddOn.TicketTracker = 'https://git.tukui.org/Azilroka/AddOnSkins/issues'
 AddOn.MyClass = select(2, UnitClass('player'))
 AddOn.MyName = UnitName('player')
 AddOn.MyRealm = GetRealmName()
 AddOn.Noop = function() end
-AddOn.TexCoords = {.08, .92, .08, .92}
+AddOn.TexCoords = { .075, .925, .075, .925 }
 AddOn.UIScale = UIParent:GetScale()
-AddOn.Faction = UnitFactionGroup("player")
-
-AddOn.AC = LibStub('AceConfig-3.0')
-AddOn.GUI = LibStub('AceGUI-3.0')
-AddOn.ACR = LibStub('AceConfigRegistry-3.0')
-AddOn.ACD = LibStub('AceConfigDialog-3.0')
-AddOn.ACL = Engine[2]
-AddOn.ADB = LibStub('AceDB-3.0')
-
+AddOn.Faction = UnitFactionGroup('player')
+AddOn.Mult = 1
 AddOn.ScreenWidth, AddOn.ScreenHeight = GetPhysicalScreenSize()
+
+AddOn.Libs = {
+	ACH = _G.LibStub('LibAceConfigHelper'),
+	LSM = _G.LibStub('LibSharedMedia-3.0', true),
+	LCG = _G.LibStub('LibCustomGlow-1.0', true),
+	AC = _G.LibStub('AceConfig-3.0'),
+	GUI = _G.LibStub('AceGUI-3.0'),
+	ACR = _G.LibStub('AceConfigRegistry-3.0'),
+	ACD = _G.LibStub('AceConfigDialog-3.0'),
+	ACL = Engine[2],
+	ADB = _G.LibStub('AceDB-3.0'),
+}
 
 local Color = _G.RAID_CLASS_COLORS[AddOn.MyClass]
 AddOn.ClassColor = { Color.r, Color.g, Color.b }
 AddOn.Color = { 0, 0.44, .87, 1 }
-AddOn.Mult = 1
+
 AddOn.skins = {}
 AddOn.events = {}
 AddOn.register = {}
@@ -69,15 +70,14 @@ AddOn.AddOnVersion = {}
 for i = 1, GetNumAddOns() do
 	local Name, _, _, _, Reason = GetAddOnInfo(i)
 	AddOn.AddOns[strlower(Name)] = GetAddOnEnableState(AddOn.MyName, Name) == 2 and (not Reason or Reason ~= 'DEMAND_LOADED')
-	AddOn.AddOnVersion[strlower(Name)] = GetAddOnMetadata(Name, "Version")
+	AddOn.AddOnVersion[strlower(Name)] = GetAddOnMetadata(Name, 'Version')
 end
-
-_G.TEXTURE_ITEM_QUEST_BANG = [[Interface\AddOns\AddOnSkins\Media\Textures\UI-Icon-QuestBang]]
 
 AddOn.Media = {
 	Textures = {
 		Plus = [[Interface\AddOns\AddOnSkins\Media\Textures\Plus]],
 		Minus = [[Interface\AddOns\AddOnSkins\Media\Textures\Minus]],
+		QuestBang = [[Interface\AddOns\AddOnSkins\Media\Textures\UI-Icon-QuestBang]]
 	}
 }
 

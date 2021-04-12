@@ -247,10 +247,10 @@ function AS:UnregisterSkinEvent(addonName, event)
 end
 
 function AS:UpdateMedia()
-	AS.Blank = AS.LSM:Fetch('background', 'Solid')
-	AS.Font = AS.LSM:Fetch('font', "Friz Quadrata TT")
-	AS.PixelFont = AS.LSM:Fetch('font', "Arial Narrow")
-	AS.NormTex = AS.LSM:Fetch('statusbar', "Blizzard")
+	AS.Blank = AS.Libs.LSM:Fetch('background', 'Solid')
+	AS.Font = AS.Libs.LSM:Fetch('font', "Friz Quadrata TT")
+	AS.PixelFont = AS.Libs.LSM:Fetch('font', "Arial Narrow")
+	AS.NormTex = AS.Libs.LSM:Fetch('statusbar', "Blizzard")
 	AS.BackdropColor = { .2, .2, .2, .8 }
 	AS.BorderColor = { 0, 0, 0 }
 	AS.Color = AS.ClassColor
@@ -351,8 +351,8 @@ function AS:Init(event, addon)
 
 		AS:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
 
-		if AS.LSM then
-			AS.LSM:Register('statusbar', 'Solid', [[Interface\Buttons\WHITE8X8]])
+		if AS.Libs.LSM then
+			AS.Libs.LSM:Register('statusbar', 'Solid', [[Interface\Buttons\WHITE8X8]])
 		end
 
 		if AS.Retail then
@@ -385,7 +385,7 @@ function AS:AcceptFrame(MainText, Function)
 	end
 	AcceptFrame.Text:SetText(MainText)
 	AcceptFrame:SetSize(AcceptFrame.Text:GetStringWidth() + 100, AcceptFrame.Text:GetStringHeight() + 60)
-	AcceptFrame.Accept:SetScript('OnClick', Function or function(self) AcceptFrame:Hide() end)
+	AcceptFrame.Accept:SetScript('OnClick', Function or function() AcceptFrame:Hide() end)
 	AcceptFrame:Show()
 end
 

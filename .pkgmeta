@@ -8,3 +8,6 @@ externals:
 
 ignore:
 	- Libs/Ace3/tests
+
+move-folders:
+    AddOnSkins/AddOnSkins: AddOnSkins

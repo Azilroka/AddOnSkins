@@ -46,12 +46,12 @@ function AS:DBM(event, addon)
 						timer:SetShadowColor(0, 0, 0, 0)
 
 						if AS:CheckOption('DBMSkinHalf') then
-							if (not DBT.Options.BarYOffset or DBT.Options.BarYOffset and DBT.Options.BarYOffset < 13) then
-								DBT.Options.BarYOffset = 13
+							if (not DBT.Options.BarYOffset or DBT.Options.BarYOffset and DBT.Options.BarYOffset < 3) then
+								DBT.Options.BarYOffset = 3
 							end
 
-							if (not DBT.Options.HugeBarYOffset or DBT.Options.HugeBarYOffset and DBT.Options.HugeBarYOffset < 13) then
-								DBT.Options.HugeBarYOffset = 13
+							if (not DBT.Options.HugeBarYOffset or DBT.Options.HugeBarYOffset and DBT.Options.HugeBarYOffset < 3) then
+								DBT.Options.HugeBarYOffset = 3
 							end
 
 							frame:SetHeight(DBT.Options.Height / 3)
@@ -76,12 +76,8 @@ function AS:DBM(event, addon)
 		local function SkinRange(self, range, filter, forceshow, redCircleNumPlayers)
 			if DBM.Options.DontShowRangeFrame and not forceshow then return end
 			if DBMRangeCheck then
-				if AS:CheckOption('DBMRadarTrans') then
-					DBMRangeCheckRadar.background:Hide()
-				else
-					AS:SetTemplate(DBMRangeCheck)
-					AS:SetTemplate(DBMRangeCheckRadar)
-				end
+				AS:SetTemplate(DBMRangeCheck)
+				AS:SetTemplate(DBMRangeCheckRadar)
 			end
 		end
 
@@ -95,6 +91,12 @@ function AS:DBM(event, addon)
 		hooksecurefunc(DBT, 'CreateBar', SkinBars)
 		hooksecurefunc(DBM.RangeCheck, 'Show', SkinRange)
 		hooksecurefunc(DBM.InfoFrame, 'Show', SkinInfo)
+
+		local halfBarskin = DBT:RegisterSkin("AddOnSkins Half-Bar")
+		halfBarskin.Options = {}
+
+		local barSkin = DBT:RegisterSkin("AddOnSkins")
+		barSkin.Options = {}
 	end
 
 	if addon == 'DBM-GUI' then
@@ -109,7 +111,7 @@ function AS:DBM(event, addon)
 		AS:SkinButton(DBM_GUI_OptionsFrameOkay, true)
 		AS:SkinButton(DBM_GUI_OptionsFrameWebsiteButton, true)
 		AS:SkinScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
-		AS:UnregisterSkinEvent('DBM', event)
+		AS:UnregisterSkinEvent('DBM-Core', event)
 	end
 end
 

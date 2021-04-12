@@ -1,7 +1,0 @@
-## Interface: 11305
-## Title: |cff1784d1AddOnSkins|r
-## Version: 4.44
-## Author: Azilroka, Nihilistzsche
-## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
-
-Load_AddOnSkins.xml

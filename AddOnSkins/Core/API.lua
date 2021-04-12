@@ -1,17 +1,18 @@
 local AS = unpack(AddOnSkins)
 
--- Cache global variables
---Lua functions
 local _G = _G
-local unpack, pairs, select, type, assert, next = unpack, pairs, select, type, assert, next
+local unpack = unpack
+local pairs = pairs
+local select = select
+local type = type
+local next = next
 local abs = abs
 local strlower, strfind = strlower, strfind
 local CopyTable, tremove = CopyTable, tremove
 local hooksecurefunc = hooksecurefunc
---WoW API / Variables
+
 local CreateFrame = CreateFrame
 local EnumerateFrames = EnumerateFrames
--- GLOBALS:
 
 -- Add texture id's to be stripped
 -- 137056 -- Interface\\Tooltips\\UI-Tooltip-Background
@@ -29,35 +30,10 @@ local EnumerateFrames = EnumerateFrames
 -- 130753 -- Interface\\Buttons\\UI-CheckBox-Highlight
 
 AS.Blizzard = {}
-AS.Blizzard.Regions = {
-	'Left', 'Middle', 'Right', 'Mid',
-	'LeftDisabled', 'MiddleDisabled', 'RightDisabled',
-	'TopLeft', 'TopRight', 'BottomLeft', 'BottomRight', 'TopMiddle', 'MiddleLeft', 'MiddleRight', 'BottomMiddle', 'MiddleMiddle',
-	'TabSpacer', 'TabSpacer1', 'TabSpacer2', '_RightSeparator', '_LeftSeparator', 'RightSeparator', 'LeftSeparator',
-	'Cover', 'Border', 'Background',
-	-- EditBox
-	'TopTex', 'TopLeftTex', 'TopRightTex', 'LeftTex', 'BottomTex', 'BottomLeftTex', 'BottomRightTex', 'RightTex', 'MiddleTex'
-}
 
-AS.Blizzard.Frames = {
-	'Inset', 'inset', 'InsetFrame', 'LeftInset', 'RightInset', 'NineSlice',
-	'Border', 'BorderFrame',
-	'bottomInset', 'BottomInset', 'bgLeft', 'bgRight', 'FilligreeOverlay', 'ScrollFrameBorder'
-}
-
-AS.Blizzard.Tooltip = {
-	'Background',
-	'Delimiter1',
-	'Delimiter2',
-	'BorderTop',
-	'BorderTopLeft',
-	'BorderTopRight',
-	'BorderLeft',
-	'BorderRight',
-	'BorderBottom',
-	'BorderBottomRight',
-	'BorderBottomLeft',
-}
+AS.Blizzard.Regions = { 'Left', 'Middle', 'Right', 'Top', 'Bottom', 'Tab', 'Cover', 'Border', 'Background', 'Center', 'Mid' }
+AS.Blizzard.Frames = { '[iI]nset', 'NineSlice', 'Border', 'bg', 'FilligreeOverlay' }
+AS.Blizzard.Tooltip = { 'Background', 'Delimiter', 'Border' }
 
 AS.RegisterTemplates = {}
 
@@ -82,28 +58,18 @@ function AS:Kill(Object)
 end
 
 function AS:SetInside(obj, anchor, xOffset, yOffset, anchor2)
-	xOffset = xOffset or 1
-	yOffset = yOffset or 1
-	anchor = anchor or obj:GetParent()
+	xOffset, yOffset, anchor = xOffset or 1, yOffset or 1, anchor or obj:GetParent()
 
-	assert(anchor)
-	if obj:GetPoint() then
-		obj:ClearAllPoints()
-	end
+	if obj:GetPoint() then obj:ClearAllPoints() end
 
 	obj:SetPoint('TOPLEFT', anchor, 'TOPLEFT', xOffset, -yOffset)
 	obj:SetPoint('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', -xOffset, yOffset)
 end
 
 function AS:SetOutside(obj, anchor, xOffset, yOffset, anchor2)
-	xOffset = xOffset or 1
-	yOffset = yOffset or 1
-	anchor = anchor or obj:GetParent()
+	xOffset, yOffset, anchor = xOffset or 1, yOffset or 1, anchor or obj:GetParent()
 
-	assert(anchor)
-	if obj:GetPoint() then
-		obj:ClearAllPoints()
-	end
+	if obj:GetPoint() then obj:ClearAllPoints() end
 
 	obj:SetPoint('TOPLEFT', anchor, 'TOPLEFT', -xOffset, yOffset)
 	obj:SetPoint('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', xOffset, -yOffset)
@@ -120,15 +86,19 @@ function AS:CleanTexture(Object, Kill, Alpha)
 end
 
 function AS:StripTextures(Object, Kill, Alpha)
-	if Object:IsObjectType('Texture') then
+	if Object.IsObjectType and Object:IsObjectType('Texture') then
 		AS:CleanTexture(Object, Kill, Alpha)
 	else
 		local FrameName = Object.GetName and Object:GetName()
 
-		for _, Blizzard in pairs(AS.Blizzard.Frames) do
-			local BlizzFrame = Object[Blizzard] or FrameName and _G[FrameName..Blizzard]
-			if BlizzFrame then
-				AS:StripTextures(BlizzFrame, Kill)
+		for objectName, objectType in pairs(Object) do
+			for _, Blizzard in pairs(AS.Blizzard.Frames) do
+				if type(objectName) == 'string' and (type(objectType) == 'string' or type(objectType) == 'table') and strfind(objectName, Blizzard) then
+					local BlizzFrame = Object[objectName] or FrameName and _G[FrameName..objectName]
+					if BlizzFrame then
+						AS:StripTextures(BlizzFrame, Kill)
+					end
+				end
 			end
 		end
 
@@ -271,18 +241,15 @@ function AS:Desaturate(frame)
 end
 
 function AS:SetTemplate(Frame, Template, Texture)
-	Texture = Texture or AS.LSM:Fetch('statusbar', AS:CheckOption('BackgroundTexture')) -- [[Interface\AddOns\ProjectAzilroka\Media\StatusBars\Rainbow]]
+	Texture = Texture or AS.Libs.LSM:Fetch('statusbar', AS:CheckOption('BackgroundTexture'))
 	Template = Template or AS:CheckOption('SkinTemplate')
 
 	local R, G, B = unpack(AS.BackdropColor)
 	local Alpha = (Template == 'Default' and 1 or .8)
+	local ElvUIStyle = AS:CheckOption('ElvUIStyle', 'ElvUI')
 
-	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
-		if Frame:IsObjectType('Button') then
-			Texture = _G.ElvUI[1].media.glossTex
-		else
-			Texture = _G.ElvUI[1].media.blankTex
-		end
+	if ElvUIStyle then
+		Texture = Frame:IsObjectType('Button') and _G.ElvUI[1].media.glossTex or _G.ElvUI[1].media.blankTex
 
 		if Template == 'Default' then
 			R, G, B = unpack(_G.ElvUI[1].media.backdropcolor)
@@ -298,7 +265,13 @@ function AS:SetTemplate(Frame, Template, Texture)
 
 	if not Frame.SetBackdrop then _G.Mixin(Frame, _G.BackdropTemplateMixin) end
 
-	Frame:SetBackdrop({ edgeFile = AS.Blank, bgFile = Texture, edgeSize = 1 })
+	local Backdrop = { edgeFile = AS.Blank, bgFile = Texture, edgeSize = 1 }
+
+	if Template == 'NoBackdrop' then
+		Backdrop.bgFile = nil
+	elseif Template == 'NoBorder' then
+		Backdrop.edgeFile = nil
+	end
 
 	if AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel' then
 		for _, Inset in pairs({ 'InsideBorder', 'OutsideBorder' }) do
@@ -308,38 +281,32 @@ function AS:SetTemplate(Frame, Template, Texture)
 			Frame[Inset]:SetBackdropBorderColor(0, 0, 0, 1)
 		end
 
-		AS:SetInside(Frame.InsideBorder, Frame, AS.Mult, AS.Mult)
+		AS:SetInside(Frame.InsideBorder, Frame, 1, 1)
 		Frame.InsideBorder:SetFrameLevel(Frame:GetFrameLevel() + 1)
 
 		if AS:CheckOption('Theme') == 'TwoPixel' then
 			AS:SetOutside(Frame.OutsideBorder, Frame, 0, 0)
 		else
-			AS:SetOutside(Frame.OutsideBorder, Frame, AS.Mult, AS.Mult)
+			AS:SetOutside(Frame.OutsideBorder, Frame, 1, 1)
 		end
 	end
 
-	if Template == 'NoBackdrop' then
-		Frame:SetBackdropColor(0, 0, 0, 0)
-	else
-		Frame:SetBackdropColor(R, G, B, Alpha)
-	end
-
-	if Template == 'NoBorder' then
-		Frame:SetBackdropBorderColor(0, 0, 0, 0)
-	else
-		Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
-	end
-
-	if Template == 'ClassColor' then
-		Frame:SetBackdropBorderColor(unpack(AS.ClassColor))
-	end
+	Frame:SetBackdrop(Backdrop)
 
 	if Template == 'Custom' then
 		Frame:SetBackdropColor(unpack(AS:CheckOption('CustomBackdropColor')))
 		Frame:SetBackdropBorderColor(unpack(AS:CheckOption('CustomBorderColor')))
+	else
+		if Template == 'ClassColor' then
+			Frame:SetBackdropBorderColor(unpack(AS.ClassColor))
+		else
+			Frame:SetBackdropBorderColor(unpack(AS.BorderColor))
+		end
+
+		Frame:SetBackdropColor(R, G, B, Alpha)
 	end
 
-	if AS:CheckOption('ElvUIStyle', 'ElvUI') then
+	if ElvUIStyle then
 		if (Template == 'MerathilisUI' and AS:CheckAddOn('ElvUI_MerathilisUI')) then
 			Frame:Styling()
 		end
@@ -431,10 +398,14 @@ function AS:SkinButton(Button, Strip)
 		AS:StripTextures(Button)
 	end
 
-	for _, Region in pairs(AS.Blizzard.Regions) do
-		Region = ButtonName and _G[ButtonName..Region] or Button[Region]
-		if Region then
-			Region:SetAlpha(0)
+	for objectName, objectType in pairs(Button) do
+		for _, Region in pairs(AS.Blizzard.Regions) do
+			if type(objectName) == 'string' and (type(objectType) == 'string' or type(objectType) == 'table') and strfind(objectName, Region) then
+				local obj = ButtonName and _G[ButtonName..Region] or Button[Region]
+				if obj then
+					obj:SetAlpha(0)
+				end
+			end
 		end
 	end
 
@@ -462,9 +433,6 @@ function AS:SkinButton(Button, Strip)
 		else
 			Button:GetFontString():SetTextColor(.5, .5, .5)
 		end
-
-		Button:HookScript('OnEnable', function(s) s:GetFontString():SetTextColor(1, 1, 1) end)
-		Button:HookScript('OnDisable', function(s) s:GetFontString():SetTextColor(.5, .5, .5) end)
 	end
 
 	Button:HookScript('OnEnter', function(s) s:SetBackdropBorderColor(unpack(AS.Color)) end)
@@ -600,12 +568,14 @@ function AS:SkinEditBox(EditBox, Width, Height)
 
 	local EditBoxName = EditBox.GetName and EditBox:GetName()
 
-	for _, Region in pairs(AS.Blizzard.Regions) do
-		if EditBoxName and _G[EditBoxName..Region] then
-			_G[EditBoxName..Region]:SetAlpha(0)
-		end
-		if EditBox[Region] then
-			EditBox[Region]:SetAlpha(0)
+	for objectName, objectType in pairs(EditBox) do
+		for _, Region in pairs(AS.Blizzard.Regions) do
+			if type(objectName) == 'string' and (type(objectType) == 'string' or type(objectType) == 'table') and strfind(objectName, Region) then
+				local obj = EditBoxName and _G[EditBoxName..Region] or EditBox[Region]
+				if obj then
+					obj:SetAlpha(0)
+				end
+			end
 		end
 	end
 
@@ -950,8 +920,13 @@ end
 
 function AS:SkinTooltip(tooltip, scale)
 	for _, Region in pairs(AS.Blizzard.Tooltip) do
-		if tooltip[Region] then
-			tooltip[Region]:SetTexture()
+		for objectName, objectType in pairs(tooltip) do
+			if type(objectName) == 'string' and (type(objectType) == 'string' or type(objectType) == 'table') and strfind(objectName, Region) then
+				local obj = tooltip[Region]
+				if obj then
+					obj:SetTexture()
+				end
+			end
 		end
 	end
 
@@ -973,6 +948,7 @@ function AS:SkinTexture(icon, backdrop)
 
 	icon:SetSnapToPixelGrid(false)
 	icon:SetTexelSnappingBias(0)
+
 	if backdrop then
 		AS:CreateBackdrop(icon)
 	end
@@ -1145,10 +1121,6 @@ function AS:FindFrameByPoint(point1, relativeTo, point2, x, y, multipleFrames)
 	return frame
 end
 
-function AS:SkinIconAndTextWidget(widgetFrame) end
-
-function AS:SkinCaptureBarWidget(widgetFrame) end
-
 function AS:SkinStatusBarWidget(widgetFrame)
 	local bar = widgetFrame.Bar;
 	if not bar then return end
@@ -1175,16 +1147,6 @@ function AS:SkinStatusBarWidget(widgetFrame)
 	end
 end
 
-function AS:SkinDoubleStatusBarWidget(widgetFrame) end
-
-function AS:SkinIconTextAndBackgroundWidget(widgetFrame) end
-
-function AS:SkinDoubleIconAndTextWidget(widgetFrame) end
-
-function AS:SkinStackedResourceTrackerWidget(widgetFrame) end
-
-function AS:SkinIconTextAndCurrenciesWidget(widgetFrame) end
-
 function AS:SkinTextWithStateWidget(widgetFrame)
 	local text = widgetFrame.Text
 	if text then
@@ -1192,20 +1154,20 @@ function AS:SkinTextWithStateWidget(widgetFrame)
 	end
 end
 
+function AS:SkinIconAndTextWidget(widgetFrame) end
+function AS:SkinCaptureBarWidget(widgetFrame) end
+function AS:SkinDoubleStatusBarWidget(widgetFrame) end
+function AS:SkinIconTextAndBackgroundWidget(widgetFrame) end
+function AS:SkinDoubleIconAndTextWidget(widgetFrame) end
+function AS:SkinStackedResourceTrackerWidget(widgetFrame) end
+function AS:SkinIconTextAndCurrenciesWidget(widgetFrame) end
 function AS:SkinHorizontalCurrenciesWidget(widgetFrame) end
-
 function AS:SkinBulletTextListWidget(widgetFrame) end
-
 function AS:SkinScenarioHeaderCurrenciesAndBackgroundWidget(widgetFrame) end
-
 function AS:SkinTextureAndTextWidget(widgetFrame) end
-
 function AS:SkinSpellDisplay(widgetFrame) end
-
 function AS:SkinDoubleStateIconRow(widgetFrame) end
-
 function AS:SkinTextureAndTextRowWidget(widgetFrame) end
-
 function AS:SkinZoneControl(widgetFrame) end
 
 local W = Enum.UIWidgetVisualizationType;

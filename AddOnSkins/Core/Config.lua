@@ -1,11 +1,11 @@
 local AS = unpack(AddOnSkins)
 if AS:CheckAddOn('ProjectAzilroka') or AS:CheckAddOn('ElvUI') then return end
 
-local EC = AS:NewModule("EnhancedConfig", 'AceConsole-3.0', 'AceEvent-3.0')
-_G.Enhanced_Config = EC
+local AC = AS:NewModule("AddOnSkinsConfig", 'AceConsole-3.0', 'AceEvent-3.0')
+_G.AddOnSkins_Config = AC
 
-EC.Title = "|cff1784d1Enhanced Config|r"
-EC.Authors = "Azilroka"
+AC.Title = "|cff1784d1AddOnSkins Config|r"
+AC.Authors = "Azilroka"
 
 local DEVELOPERS = {
 	'Elv',
@@ -21,7 +21,7 @@ for _, devName in pairs(DEVELOPERS) do
 	DEVELOPER_STRING = DEVELOPER_STRING..'\n'..devName
 end
 
-EC.Options = {
+AC.Options = {
 	type = 'group',
 	name = AS.Title,
 	order = 205,
@@ -42,7 +42,7 @@ EC.Options = {
 	},
 }
 
-function EC:PositionGameMenuButton()
+function AC:PositionGameMenuButton()
 	GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + GameMenuButtonLogout:GetHeight() - 4)
 
 	if AS:CheckAddOn('Tukui') and Tukui[1].Miscellaneous.GameMenu.Tukui then
@@ -50,47 +50,47 @@ function EC:PositionGameMenuButton()
 	end
 
 	local _, relTo, _, _, offY = GameMenuButtonLogout:GetPoint()
-	if relTo ~= GameMenuFrame['EC'] then
-		GameMenuFrame['EC']:ClearAllPoints()
-		GameMenuFrame['EC']:SetPoint("TOPLEFT", AS:CheckAddOn('Tukui') and Tukui[1].Miscellaneous.GameMenu.Tukui or relTo, "BOTTOMLEFT", 0, -1)
+	if relTo ~= GameMenuFrame['AC'] then
+		GameMenuFrame['AC']:ClearAllPoints()
+		GameMenuFrame['AC']:SetPoint("TOPLEFT", AS:CheckAddOn('Tukui') and Tukui[1].Miscellaneous.GameMenu.Tukui or relTo, "BOTTOMLEFT", 0, -1)
 		GameMenuButtonLogout:ClearAllPoints()
-		GameMenuButtonLogout:SetPoint("TOPLEFT", GameMenuFrame['EC'], "BOTTOMLEFT", 0, offY)
+		GameMenuButtonLogout:SetPoint("TOPLEFT", GameMenuFrame['AC'], "BOTTOMLEFT", 0, offY)
 	end
 end
 
-function EC.OnConfigClosed(widget, event)
-	AS.ACD.OpenFrames['Enhanced_Config'] = nil
+function AC.OnConfigClosed(widget, event)
+	AS.ACD.OpenFrames['AddOnSkins_Config'] = nil
 	AS.GUI:Release(widget)
 end
 
-function EC:ToggleConfig()
-	if not AS.ACD.OpenFrames['Enhanced_Config'] then
+function AC:ToggleConfig()
+	if not AS.ACD.OpenFrames['AddOnSkins_Config'] then
 		local Container = AS.GUI:Create('Frame')
 		AS:CreateShadow(Container.frame)
-		AS.ACD.OpenFrames['Enhanced_Config'] = Container
-		Container:SetCallback('OnClose', EC.OnConfigClosed)
-		AS.ACD:Open('Enhanced_Config', Container)
+		AS.ACD.OpenFrames['AddOnSkins_Config'] = Container
+		Container:SetCallback('OnClose', AC.OnConfigClosed)
+		AS.ACD:Open('AddOnSkins_Config', Container)
 	end
 
 	GameTooltip:Hide()
 end
 
-function EC:ADDON_LOADED(event, addon)
+function AC:ADDON_LOADED(event, addon)
 	if addon == 'Tukui' then
 		Tukui[1].Miscellaneous.GameMenu.EnableTukuiConfig = function() end
 		Tukui[1].Miscellaneous.GameMenu.AddHooks = function() end
-		EC:UnregisterEvent(event)
+		AC:UnregisterEvent(event)
 	end
 end
 
-function EC:Initialize()
+function AC:Initialize()
 	local GameMenuButton = CreateFrame("Button", nil, GameMenuFrame, "GameMenuButtonTemplate")
 	GameMenuButton:SetText(AS.Title)
 	GameMenuButton:SetScript("OnClick", function()
-		EC:ToggleConfig()
+		AC:ToggleConfig()
 		HideUIPanel(GameMenuFrame)
 	end)
-	GameMenuFrame['EC'] = GameMenuButton
+	GameMenuFrame['AC'] = GameMenuButton
 
 	if not IsAddOnLoaded("ConsolePortUI_Menu") then
 		GameMenuButton:SetSize(GameMenuButtonLogout:GetWidth(), GameMenuButtonLogout:GetHeight())
@@ -98,11 +98,11 @@ function EC:Initialize()
 		hooksecurefunc('GameMenuFrame_UpdateVisibleButtons', self.PositionGameMenuButton)
 	end
 
-	AS.AC:RegisterOptionsTable('Enhanced_Config', EC.Options)
-	AS.ACD:SetDefaultSize('Enhanced_Config', 1200, 800)
-	EC:RegisterChatCommand('ec', 'ToggleConfig')
+	AS.AC:RegisterOptionsTable('AddOnSkins_Config', AC.Options)
+	AS.ACD:SetDefaultSize('AddOnSkins_Config', 1200, 800)
+	AC:RegisterChatCommand('addonskins', 'ToggleConfig')
 
-	EC:RegisterEvent('ADDON_LOADED')
+	AC:RegisterEvent('ADDON_LOADED')
 end
 
-EC:Initialize()
+AC:Initialize()
