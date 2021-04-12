@@ -3,11 +3,11 @@ package-as: AddOnSkins
 enable-nolib-creation: no
 
 externals:
-  Libs/Ace3:
+  AddOnSkins/Libs/Ace3:
     url: https://repos.wowace.com/wow/ace3/trunk
 
 ignore:
-    - Libs/Ace3/tests
+    - AddOnSkins/Libs/Ace3/tests
 
 move-folders:
     AddOnSkins/AddOnSkins: AddOnSkins
