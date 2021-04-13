@@ -136,24 +136,34 @@ AS.Options.args.skins.args.blizzardDisableAll = ACH:Execute('Blizzard: Disable A
 
 AS.Options.args.embed = ACH:Group(ASL['Embed Settings'], nil, 4, nil, function(info) return AS:CheckOption(info[#info]) end, function(info, value) AS:SetOption(info[#info], value) AS:Embed_Check() end)
 AS.Options.args.embed.args.EmbedIsHidden = ACH:Toggle(ASL['|cFFFF0000Embed is currently HIDDEN|r'], nil, 0, nil, nil, 'full', nil, nil, nil, function() return not AS:CheckOption('EmbedIsHidden') end)
-AS.Options.args.embed.args.EmbedSystemMessage = ACH:Toggle(ASL['Embed System Message'], nil, 1)
-AS.Options.args.embed.args.EmbedRightChat = ACH:Toggle(ASL['Embed into Right Chat Panel'], nil, 2)
 
-AS.Options.args.embed.args.EmbedOoC = ACH:Toggle(ASL['Out of Combat - Hide'], nil, 3)
-AS.Options.args.embed.args.EmbedOoCDelay = ACH:Range(ASL['Out of Combat - Hide Delay'], nil, 4, { min = 1, max = 30, step = 1 }, nil, nil, nil, nil, function() return not ((AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) and AS:CheckOption('EmbedOoC')) end)
+AS.Options.args.embed.args.General = ACH:Group('General', nil, 1)
+AS.Options.args.embed.args.General.inline = true
+AS.Options.args.embed.args.General.args.EmbedSystemMessage = ACH:Toggle(ASL['Embed System Message'], nil, 1)
+AS.Options.args.embed.args.General.args.EmbedRightChat = ACH:Toggle(ASL['Embed into Right Chat Panel'], nil, 2)
+AS.Options.args.embed.args.General.args.HideChatFrame = ACH:Select(ASL['Hide Chat Frame'], nil, 3, function() return AS:GetChatWindowInfo() end, nil, nil, nil, nil, function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end)
+AS.Options.args.embed.args.General.args.EmbedBelowTop = ACH:Toggle(ASL['Embed Below Top Tab'], nil, 4)
+AS.Options.args.embed.args.General.args.EmbedBackdrop = ACH:Toggle(ASL['Backdrop'], nil, 5)
+AS.Options.args.embed.args.General.args.EmbedBackdropTransparent = ACH:Toggle(ASL['Transparent Backdrop'], nil, 6)
 
-AS.Options.args.embed.args.HideChatFrame = ACH:Select(ASL['Hide Chat Frame'], nil, 5, function() return AS:GetChatWindowInfo() end, nil, nil, nil, nil, function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end)
-AS.Options.args.embed.args.EmbedBelowTop = ACH:Toggle(ASL['Embed Below Top Tab'], nil, 6)
-AS.Options.args.embed.args.EmbedBackdrop = ACH:Toggle(ASL['Backdrop'], nil, 7)
-AS.Options.args.embed.args.EmbedBackdropTransparent = ACH:Toggle(ASL['Transparent Backdrop'], nil, 8)
-AS.Options.args.embed.args.EmbedSystem = ACH:Toggle(ASL['One Window Embed System'], nil, 9, nil, nil, nil, nil, nil, function() return AS:CheckOption('EmbedSystemDual') end)
-AS.Options.args.embed.args.EmbedMain = ACH:Select(ASL['Embed for One Window'], nil, 10, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystem') end)
-AS.Options.args.embed.args.EmbedSystemDual = ACH:Toggle(ASL['Two Window Embed System'], nil, 11, nil, nil, nil, nil, nil, function() return AS:CheckOption('EmbedSystem') end)
-AS.Options.args.embed.args.EmbedLeft = ACH:Select(ASL["Window One Embed"], nil, 12, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
-AS.Options.args.embed.args.EmbedLeftWidth = ACH:Range(ASL['Window One Width'], nil, 13, { min = 100, max = 300, step = 1 }, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
-AS.Options.args.embed.args.EmbedRight = ACH:Select(ASL["Window Two Embed"], nil, 14, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
+AS.Options.args.embed.args.SingleEmbedSystem = ACH:Group('Two Window Embed System', nil, 4)
+AS.Options.args.embed.args.SingleEmbedSystem.inline = true
+AS.Options.args.embed.args.SingleEmbedSystem.args.EmbedSystem = ACH:Toggle(ASL['Enable'], nil, 9, nil, nil, nil, nil, nil, function() return AS:CheckOption('EmbedSystemDual') end)
+AS.Options.args.embed.args.SingleEmbedSystem.args.EmbedMain = ACH:Select(ASL['Embed'], nil, 10, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystem') end)
 
-AS.Options.args.embed.args.strataLevel = ACH:Group('Strata and Frame Level', nil, 3)
+AS.Options.args.embed.args.DualEmbedSystem = ACH:Group('Two Window Embed System', nil, 5)
+AS.Options.args.embed.args.DualEmbedSystem.inline = true
+AS.Options.args.embed.args.DualEmbedSystem.args.EmbedSystemDual = ACH:Toggle(ASL['Enable'], nil, 1, nil, nil, nil, nil, nil, function() return AS:CheckOption('EmbedSystem') end)
+AS.Options.args.embed.args.DualEmbedSystem.args.EmbedLeft = ACH:Select(ASL["Window One Embed"], nil, 2, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
+AS.Options.args.embed.args.DualEmbedSystem.args.EmbedLeftWidth = ACH:Range(ASL['Window One Width'], nil, 3, { min = 100, max = 300, step = 1 }, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
+AS.Options.args.embed.args.DualEmbedSystem.args.EmbedRight = ACH:Select(ASL["Window Two Embed"], nil, 4, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
+
+AS.Options.args.embed.args.OoC = ACH:Group('Out of Combat', nil, 6)
+AS.Options.args.embed.args.OoC.inline = true
+AS.Options.args.embed.args.OoC.args.EmbedOoC = ACH:Toggle(ASL['Hide'], nil, 1)
+AS.Options.args.embed.args.OoC.args.EmbedOoCDelay = ACH:Range(ASL['Hide Delay'], nil, 2, { min = 1, max = 30, step = 1 })
+
+AS.Options.args.embed.args.strataLevel = ACH:Group('Strata and Frame Level', nil, 7)
 AS.Options.args.embed.args.strataLevel.inline = true
 AS.Options.args.embed.args.strataLevel.args.EmbedFrameStrata = ACH:Select(ASL['Embed Frame Strata'], nil, 1, { ['1-BACKGROUND'] = 'BACKGROUND', ['2-LOW'] = 'LOW', ['3-MEDIUM'] = 'MEDIUM', ['4-HIGH'] = 'HIGH' }, nil, nil, nil, nil, function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end)
 AS.Options.args.embed.args.strataLevel.args.EmbedFrameLevel = ACH:Range(ASL['Embed Frame Level'], nil, 2, { min = 1, max = 255, step = 1 }, nil, nil, nil, function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end)
