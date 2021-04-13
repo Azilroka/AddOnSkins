@@ -14,9 +14,13 @@ jobs:
     steps:
       - name: Clone project
         uses: actions/checkout@v1
-      - name: Package and release
+      - name: Retail
         uses: BigWigsMods/packager@master
-      - name: Package and release for Classic
+      - name: Classic
         uses: BigWigsMods/packager@master
         with:
           args: -g classic
+      - name: Burning Crusade Classic
+        uses: BigWigsMods/packager@master
+        with:
+          args: -g bc
