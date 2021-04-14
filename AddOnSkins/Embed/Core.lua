@@ -89,7 +89,6 @@ function AS:EmbedInit()
 					if AS:CheckOption('HideChatFrame') ~= 'NONE' and not FCF_IsValidChatFrame(_G[AS:CheckOption('HideChatFrame')]) then
 						AS:SetOption('HideChatFrame', 'NONE')
 					end
-					AS.Options.args.embed.args.HideChatFrame.values = AS:GetChatWindowInfo()
 				end)
 			end
 		end
