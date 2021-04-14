@@ -146,7 +146,7 @@ AS.Options.args.embed.args.General.args.EmbedBelowTop = ACH:Toggle(ASL['Embed Be
 AS.Options.args.embed.args.General.args.EmbedBackdrop = ACH:Toggle(ASL['Backdrop'], nil, 5)
 AS.Options.args.embed.args.General.args.EmbedBackdropTransparent = ACH:Toggle(ASL['Transparent Backdrop'], nil, 6)
 
-AS.Options.args.embed.args.SingleEmbedSystem = ACH:Group('Two Window Embed System', nil, 4)
+AS.Options.args.embed.args.SingleEmbedSystem = ACH:Group('One Window Embed System', nil, 4)
 AS.Options.args.embed.args.SingleEmbedSystem.inline = true
 AS.Options.args.embed.args.SingleEmbedSystem.args.EmbedSystem = ACH:Toggle(ASL['Enable'], nil, 9, nil, nil, nil, nil, nil, function() return AS:CheckOption('EmbedSystemDual') end)
 AS.Options.args.embed.args.SingleEmbedSystem.args.EmbedMain = ACH:Select(ASL['Embed'], nil, 10, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystem') end)
