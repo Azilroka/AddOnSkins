@@ -33,10 +33,10 @@ function AS:SilverDragon()
 			self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end)
 
-		popup.title:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
-		popup.source:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+		popup.title:SetFont(AS.Libs.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+		popup.source:SetFont(AS.Libs.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 		popup.source:SetTextColor(1.0, 1.0, 1.0)
-		popup.status:SetFont(AS.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
+		popup.status:SetFont(AS.Libs.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))
 		popup.status:SetTextColor(1.0, 1.0, 1.0)
 	end
 
