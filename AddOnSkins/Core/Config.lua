@@ -59,17 +59,17 @@ function AC:PositionGameMenuButton()
 end
 
 function AC.OnConfigClosed(widget, event)
-	AS.ACD.OpenFrames['AddOnSkins_Config'] = nil
-	AS.GUI:Release(widget)
+	AS.Libs.ACD.OpenFrames['AddOnSkins_Config'] = nil
+	AS.Libs.GUI:Release(widget)
 end
 
 function AC:ToggleConfig()
-	if not AS.ACD.OpenFrames['AddOnSkins_Config'] then
-		local Container = AS.GUI:Create('Frame')
+	if not AS.Libs.ACD.OpenFrames['AddOnSkins_Config'] then
+		local Container = AS.Libs.GUI:Create('Frame')
 		AS:CreateShadow(Container.frame)
-		AS.ACD.OpenFrames['AddOnSkins_Config'] = Container
+		AS.Libs.ACD.OpenFrames['AddOnSkins_Config'] = Container
 		Container:SetCallback('OnClose', AC.OnConfigClosed)
-		AS.ACD:Open('AddOnSkins_Config', Container)
+		AS.Libs.ACD:Open('AddOnSkins_Config', Container)
 	end
 
 	GameTooltip:Hide()
@@ -98,8 +98,8 @@ function AC:Initialize()
 		hooksecurefunc('GameMenuFrame_UpdateVisibleButtons', self.PositionGameMenuButton)
 	end
 
-	AS.AC:RegisterOptionsTable('AddOnSkins_Config', AC.Options)
-	AS.ACD:SetDefaultSize('AddOnSkins_Config', 1200, 800)
+	AS.Libs.AC:RegisterOptionsTable('AddOnSkins_Config', AC.Options)
+	AS.Libs.ACD:SetDefaultSize('AddOnSkins_Config', 1200, 800)
 	AC:RegisterChatCommand('addonskins', 'ToggleConfig')
 
 	AC:RegisterEvent('ADDON_LOADED')
