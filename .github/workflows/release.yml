@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Clone project
         uses: actions/checkout@v1
+        with:
+          fetch-depth: 100
       - name: Retail
         uses: BigWigsMods/packager@master
       - name: Classic
