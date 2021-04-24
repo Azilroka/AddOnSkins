@@ -11,8 +11,9 @@ function AS:SkinNovaFrame(frame)
 	end
 end
 
-
 function AS:NovaWorldBuffs()
+	local NWB = LibStub("AceAddon-3.0"):GetAddon('NovaWorldBuffs')
+
 	if (NWB.isLayered) then
 		local count = 0;
 		for layer, data in NWB:pairsByKeys(NWB.data.layers) do
@@ -26,12 +27,12 @@ function AS:NovaWorldBuffs()
 	for k, v in pairs(NWB.worldBuffMapMarkerTypes) do
 		AS:SkinNovaFrame(_G[k .. "NWBWorldMap"])
 	end
-	
+
 	AS:SkinNovaFrame(_G["NWBDMF"])
 	AS:SkinFrame(_G["NWBDMFTimerFrame"])
 	AS:SkinFrame(_G["NWBbuffListFrame"])
 	AS:SkinFrame(_G["NWBlayerFrame"])
-	
+
 	AS:SkinTooltip(_G["NWBDMFContinentTooltip"])
 	AS:SkinTooltip(_G["NWBlayerDragTooltip"])
 	AS:SkinTooltip(_G["NWBVersionDragTooltip"])
@@ -49,7 +50,6 @@ function AS:NovaWorldBuffs()
 		if Button then AS:SkinButton(Button, true) end
 	end
 
-	NWBbufflistFrameTimersButton:SetPoint("CENTER", -58, -18)
 	NWBbuffListFrameWipeButton:SetPoint("BOTTOMRIGHT", -4, 4)
 
 	NWBlayerFrameBuffsButton:SetPoint("CENTER", -58, -18)
