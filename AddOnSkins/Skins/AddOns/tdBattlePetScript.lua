@@ -23,8 +23,18 @@ function AS:tdBattlePetScript()
 		end
 	end
 
+	local BlockDialog = tdBattlePetScript.BlockDialog
+	AS:SkinFrame(BlockDialog)
+	BlockDialog:SetFrameStrata("DIALOG")
+	BlockDialog:SetFrameLvel(10000)
+	BlockDialog.Text:SetFont(AS.Font, 12)
+	AS:SkinButton(BlockDialog.AcceptButton)
+	AS:SkinButton(BlockDialog.CancelButton)
+	AS:SkinEditBox(BlockDialog.EditBox)
 	tdBattlePetScript.MainPanel.Portrait.Border:Hide()
 	AS:SkinScrollBar(tdBattlePetScript.ScriptList.scrollBar)
+
+	AS:SkinButton(_G.tdBattlePetScriptAutoButton)
 end
 
 AS:RegisterSkin('tdBattlePetScript', AS.tdBattlePetScript)
