@@ -54,11 +54,11 @@ function AS:DBM(event, addon)
 								DBT.Options.HugeBarYOffset = 3
 							end
 
-							frame:SetHeight(DBT.Options.Height / 3)
+							frame:SetHeight((bar.enlarged and DBT.Options.HugeBarHeight or DBT.Options.Height) / 3)
 							name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 0, 3)
 							timer:SetPoint('BOTTOMRIGHT', frame, 'TOPRIGHT', -1, 1)
 						else
-							frame:SetHeight(DBT.Options.Height + 2)
+							frame:SetHeight((bar.enlarged and DBT.Options.HugeBarHeight or DBT.Options.Height) + 2)
 							name:SetPoint('LEFT', frame, 'LEFT', 4, 0)
 							timer:SetPoint('RIGHT', frame, 'RIGHT', -4, 0)
 						end
