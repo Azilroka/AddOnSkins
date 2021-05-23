@@ -28,4 +28,4 @@ jobs:
       - name: Burning Crusade Classic
         uses: BigWigsMods/packager@master
         with:
-          args: -g bc
+          args: -g bcc
