@@ -46,14 +46,6 @@ function AS:DBM(event, addon)
 						timer:SetShadowColor(0, 0, 0, 0)
 
 						if AS:CheckOption('DBMSkinHalf') then
-							if (not DBT.Options.BarYOffset or DBT.Options.BarYOffset and DBT.Options.BarYOffset < 3) then
-								DBT.Options.BarYOffset = 3
-							end
-
-							if (not DBT.Options.HugeBarYOffset or DBT.Options.HugeBarYOffset and DBT.Options.HugeBarYOffset < 3) then
-								DBT.Options.HugeBarYOffset = 3
-							end
-
 							frame:SetHeight((bar.enlarged and DBT.Options.HugeBarHeight or DBT.Options.Height) / 3)
 							name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 0, 3)
 							timer:SetPoint('BOTTOMRIGHT', frame, 'TOPRIGHT', -1, 1)
@@ -68,6 +60,7 @@ function AS:DBM(event, addon)
 
 						bar.injected = true
 					end)
+					DBT:UpdateBars(true)
 					bar:ApplyStyle()
 				end
 			end
@@ -92,11 +85,16 @@ function AS:DBM(event, addon)
 		hooksecurefunc(DBM.RangeCheck, 'Show', SkinRange)
 		hooksecurefunc(DBM.InfoFrame, 'Show', SkinInfo)
 
-		local halfBarskin = DBT:RegisterSkin("AddOnSkins Half-Bar")
-		halfBarskin.Options = {}
-
-		local barSkin = DBT:RegisterSkin("AddOnSkins")
-		barSkin.Options = {}
+		if AS:CheckOption('DBMSkinHalf') then
+			local halfBarskin = DBT:RegisterSkin("AddOnSkins Half-Bar")
+			if (not halfBarskin.Options.BarYOffset < 3) then
+				halfBarskin.Options.BarYOffset = 3
+			end
+			if (not halfBarskin.Options.HugeBarYOffset < 3) then
+				halfBarskin.Options.HugeBarYOffset = 3
+			end
+			DBT:SetSkin("AddOnSkins Half-Bar")
+		end
 	end
 
 	if addon == 'DBM-GUI' then
