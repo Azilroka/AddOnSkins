@@ -46,11 +46,9 @@ function AS:DBM(event, addon)
 						timer:SetShadowColor(0, 0, 0, 0)
 
 						if AS:CheckOption('DBMSkinHalf') then
-							frame:SetHeight((bar.enlarged and DBT.Options.HugeBarHeight or DBT.Options.Height) / 3)
 							name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 0, 3)
 							timer:SetPoint('BOTTOMRIGHT', frame, 'TOPRIGHT', -1, 1)
 						else
-							frame:SetHeight((bar.enlarged and DBT.Options.HugeBarHeight or DBT.Options.Height) + 2)
 							name:SetPoint('LEFT', frame, 'LEFT', 4, 0)
 							timer:SetPoint('RIGHT', frame, 'RIGHT', -4, 0)
 						end
@@ -87,13 +85,21 @@ function AS:DBM(event, addon)
 
 		if AS:CheckOption('DBMSkinHalf') then
 			local halfBarskin = DBT:RegisterSkin("AddOnSkins Half-Bar")
-			if (not halfBarskin.Options.BarYOffset < 3) then
-				halfBarskin.Options.BarYOffset = 3
+			print(DBT.Options.BarYOffset)
+			if DBT.Options.BarYOffset < 18 then
+				halfBarskin.Options.BarYOffset = 18
 			end
-			if (not halfBarskin.Options.HugeBarYOffset < 3) then
-				halfBarskin.Options.HugeBarYOffset = 3
+			if DBT.Options.HugeBarYOffset < 18 then
+				halfBarskin.Options.HugeBarYOffset = 18
 			end
+			halfBarskin.Options.Height = DBT.Options.Height / 3
+			halfBarskin.Options.HugeHeight = DBT.Options.HugeHeight / 3
 			DBT:SetSkin("AddOnSkins Half-Bar")
+		else
+			local skin = DBT:RegisterSkin("AddOnSkins")
+			skin.Options.Height = DBT.Options.Height + 2
+			skin.Options.HugeHeight = DBT.Options.HugeHeight + 2
+			DBT:SetSkin("AddOnSkins")
 		end
 	end
 
