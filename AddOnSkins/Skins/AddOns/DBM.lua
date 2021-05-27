@@ -22,14 +22,17 @@ function AS:DBM(event, addon)
 						local icon2 = _G[frame:GetName()..'BarIcon2']
 						local name = _G[frame:GetName()..'BarName']
 						local timer = _G[frame:GetName()..'BarTimer']
+						local iconSize = (bar.enlarged and DBT.Options.HugeBarHeight or DBT.Options.Height) - 2
 
 						AS:SkinTexture(icon1, true)
 						icon1:ClearAllPoints()
 						icon1:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMLEFT', AS:AdjustForTheme(-2), 1)
+						icon1:SetSize(iconSize, iconSize)
 
 						AS:SkinTexture(icon2, true)
 						icon2:ClearAllPoints()
 						icon2:SetPoint('BOTTOMLEFT', frame, 'BOTTOMRIGHT', AS:AdjustForTheme(2), 1)
+						icon2:SetSize(iconSize, iconSize)
 
 						AS:SetInside(tbar, frame)
 
@@ -58,7 +61,6 @@ function AS:DBM(event, addon)
 
 						bar.injected = true
 					end)
-					DBT:UpdateBars(true)
 					bar:ApplyStyle()
 				end
 			end
@@ -94,11 +96,13 @@ function AS:DBM(event, addon)
 			end
 			halfBarskin.Options.Height = DBT.Options.Height / 3
 			halfBarskin.Options.HugeHeight = DBT.Options.HugeHeight / 3
+			halfBarskin.Options.IconLocked = true
 			DBT:SetSkin("AddOnSkins Half-Bar")
 		else
 			local skin = DBT:RegisterSkin("AddOnSkins")
 			skin.Options.Height = DBT.Options.Height + 2
 			skin.Options.HugeHeight = DBT.Options.HugeHeight + 2
+			skin.Options.IconLocked = true
 			DBT:SetSkin("AddOnSkins")
 		end
 	end
