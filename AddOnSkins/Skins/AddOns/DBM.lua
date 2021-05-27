@@ -22,7 +22,7 @@ function AS:DBM(event, addon)
 						local icon2 = _G[frame:GetName()..'BarIcon2']
 						local name = _G[frame:GetName()..'BarName']
 						local timer = _G[frame:GetName()..'BarTimer']
-						local iconSize = (bar.enlarged and DBT.Options.HugeBarHeight or (DBT.Options.Height * 3)) - 2
+						local iconSize = (bar.enlarged and DBT.Options.HugeBarHeight or (DBT.Options.Height * (AS:CheckOption('DBMSkinHalf') and 1 or 3)) - 2
 
 						AS:SkinTexture(icon1, true)
 						icon1:ClearAllPoints()
