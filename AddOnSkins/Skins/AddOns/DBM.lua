@@ -93,7 +93,7 @@ function AS:DBM(event, addon)
 			if DBT.Options.HugeBarYOffset < 18 then
 				halfBarskin.Options.HugeBarYOffset = 18
 			end
-			if not halfBarskin.Options.Height -- Skin is new
+			if not halfBarskin.Options.Height then -- Skin is new
 				halfBarskin.Options.Height = DBT.DefaultOptions.Height / 3
 				halfBarskin.Options.HugeHeight = DBT.DefaultOptions.HugeHeight / 3
 				halfBarskin.Options.IconLocked = true
