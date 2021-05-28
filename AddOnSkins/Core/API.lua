@@ -726,9 +726,10 @@ function AS:SkinScrollBar(Frame)
 		AS:CreateBackdrop(Thumb)
 		Thumb.Backdrop:SetPoint('TOPLEFT', Thumb, 'TOPLEFT', 2, -4)
 		Thumb.Backdrop:SetPoint('BOTTOMRIGHT', Thumb, 'BOTTOMRIGHT', -2, 4)
-		Thumb.Backdrop:SetFrameLevel(Thumb.Backdrop:GetFrameLevel() + 2)
-		Thumb.Backdrop:HookScript('OnEnter', function(s) s:SetBackdropBorderColor(unpack(AS.Color)) end)
-		Thumb.Backdrop:HookScript('OnLeave', function(s) s:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+		Thumb.Backdrop:SetFrameLevel(Parent:GetFrameLevel() + 2)
+		Frame:HookScript('OnEnter', function(s) if s.Thumb:IsMouseOver() then s.Thumb.Backdrop:SetBackdropBorderColor(unpack(AS.Color)) end end)
+		Frame:HookScript('OnLeave', function(s) s.Thumb.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+		Thumb.Backdrop:EnableMouse(false)
 
 		Frame.Thumb = Thumb
 

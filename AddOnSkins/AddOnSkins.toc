@@ -2,7 +2,7 @@
 ## Interface-Classic: 11306
 ## Interface-BCC: 20501
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
-## Version: 4.51
+## Version: 4.52
 ## Author: Azilroka, Nihilistzsche
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 ## OptionalDeps: ElvUI
