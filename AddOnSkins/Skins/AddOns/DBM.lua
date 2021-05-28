@@ -87,22 +87,25 @@ function AS:DBM(event, addon)
 
 		if AS:CheckOption('DBMSkinHalf') then
 			local halfBarskin = DBT:RegisterSkin("AddOnSkins Half-Bar")
-			print(DBT.Options.BarYOffset)
 			if DBT.Options.BarYOffset < 18 then
 				halfBarskin.Options.BarYOffset = 18
 			end
 			if DBT.Options.HugeBarYOffset < 18 then
 				halfBarskin.Options.HugeBarYOffset = 18
 			end
-			halfBarskin.Options.Height = DBT.Options.Height / 3
-			halfBarskin.Options.HugeHeight = DBT.Options.HugeHeight / 3
-			halfBarskin.Options.IconLocked = true
+			if not halfBarskin.Options.Height -- Skin is new
+				halfBarskin.Options.Height = DBT.DefaultOptions.Height / 3
+				halfBarskin.Options.HugeHeight = DBT.DefaultOptions.HugeHeight / 3
+				halfBarskin.Options.IconLocked = true
+			end
 			DBT:SetSkin("AddOnSkins Half-Bar")
 		else
 			local skin = DBT:RegisterSkin("AddOnSkins")
-			skin.Options.Height = DBT.Options.Height + 2
-			skin.Options.HugeHeight = DBT.Options.HugeHeight + 2
-			skin.Options.IconLocked = true
+			if not skin.Options.Height then -- Skin is new
+				skin.Options.Height = DBT.DefaultOptions.Height + 2
+				skin.Options.HugeHeight = DBT.DefaultOptions.HugeHeight + 2
+				skin.Options.IconLocked = true
+			end
 			DBT:SetSkin("AddOnSkins")
 		end
 	end
