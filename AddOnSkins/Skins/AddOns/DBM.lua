@@ -11,7 +11,7 @@ function AS:DBM(event, addon)
 						local sparkEnabled = DBT.Options.Spark
 						if not (AS:CheckOption('DBMSkinHalf') and sparkEnabled) then return end
 						local spark = _G[bar.frame:GetName().."BarSpark"]
-						spark:SetSize(12, (bar.enlarged and DBT.Options.HugeBarHeight or DBT.Options.Height)*3/2 - 2)
+						spark:SetSize(12, (bar.enlarged and DBT.Options.HugeHeight or DBT.Options.Height)*3/2 - 2)
 						local a, b, c, d = spark:GetPoint()
 						spark:SetPoint(a, b, c, d, 0)
 					end)
@@ -22,7 +22,11 @@ function AS:DBM(event, addon)
 						local icon2 = _G[frame:GetName()..'BarIcon2']
 						local name = _G[frame:GetName()..'BarName']
 						local timer = _G[frame:GetName()..'BarTimer']
-						local iconSize = (bar.enlarged and DBT.Options.HugeBarHeight or (DBT.Options.Height * (AS:CheckOption('DBMSkinHalf') and 3 or 1))) - 2
+						local iconSize = bar.enlarged and DBT.Options.HugeHeight or DBT.Options.Height
+						if AS:CheckOption('DBMSkinHalf') then
+							iconSize = iconSize * 3
+						end
+						iconSize = iconSize - 2
 
 						AS:SkinTexture(icon1, true)
 						icon1:ClearAllPoints()
@@ -87,21 +91,20 @@ function AS:DBM(event, addon)
 
 		if AS:CheckOption('DBMSkinHalf') then
 			local halfBarskin = DBT:RegisterSkin("AddOnSkins Half-Bar")
-			print(DBT.Options.BarYOffset)
 			if DBT.Options.BarYOffset < 18 then
 				halfBarskin.Options.BarYOffset = 18
 			end
 			if DBT.Options.HugeBarYOffset < 18 then
 				halfBarskin.Options.HugeBarYOffset = 18
 			end
-			halfBarskin.Options.Height = DBT.Options.Height / 3
-			halfBarskin.Options.HugeHeight = DBT.Options.HugeHeight / 3
+			halfBarskin.Defaults.Height = DBT.Options.Height / 3
+			halfBarskin.Defaults.HugeHeight = DBT.Options.HugeHeight / 3
 			halfBarskin.Options.IconLocked = true
 			DBT:SetSkin("AddOnSkins Half-Bar")
 		else
 			local skin = DBT:RegisterSkin("AddOnSkins")
-			skin.Options.Height = DBT.Options.Height + 2
-			skin.Options.HugeHeight = DBT.Options.HugeHeight + 2
+			skin.Defaults.Height = DBT.Options.Height + 2
+			skin.Defaults.HugeHeight = DBT.Options.HugeHeight + 2
 			skin.Options.IconLocked = true
 			DBT:SetSkin("AddOnSkins")
 		end
