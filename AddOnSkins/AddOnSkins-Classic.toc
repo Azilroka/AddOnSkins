@@ -1,6 +1,4 @@
-## Interface: 90005
-## Interface-Classic: 11306
-## Interface-BCC: 20501
+## Interface: 11306
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
 ## Version: 4.53
 ## Author: Azilroka, Nihilistzsche
@@ -15,4 +13,4 @@ Init.lua
 Core\Load_Core.xml
 Embed\Load_Embed.xml
 
-Skins\Mainline\Load_Skins.xml
+Skins\Classic\Load_Skins.xml

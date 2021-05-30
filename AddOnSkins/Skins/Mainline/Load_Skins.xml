@@ -1,0 +1,4 @@
+<Ui>
+	<Include file="AddOns\Load_Skins.xml"/>
+	<Include file="Blizzard\Load_Skins.xml"/>
+</Ui>
