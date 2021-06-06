@@ -224,7 +224,6 @@ function AS:Blizzard_GuildUI(event, addon)
 	end
 
 	GuildRegistrarPurchaseText:SetTextColor(1, 1, 1)
-	AvailableServicesText:SetTextColor(1, .8, .1)
 
 	AS:SkinFrame(TabardFrame)
 	AS:Kill(TabardFramePortrait)
@@ -297,7 +296,7 @@ function AS:Blizzard_GuildUI(event, addon)
 	AS:SkinFrame(GuildMemberNoteBackground)
 	AS:SkinFrame(GuildMemberOfficerNoteBackground)
 
-	_G.GuildMOTDEditButton:CreateBackdrop('Default')
+	AS:CreateBackdrop(_G.GuildMOTDEditButton)
 	_G.GuildMOTDEditButton.Backdrop:SetPoint('TOPLEFT', -3, 3)
 	_G.GuildMOTDEditButton.Backdrop:SetPoint('BOTTOMRIGHT', 3, -2)
 

@@ -74,7 +74,7 @@ function AS:Blizzard_Character()
 	end
 
 	hooksecurefunc('PaperDollItemSlotButton_Update', function(self, cooldownOnly)
-		if cooldownOnly then return end
+		if not self.SetBackdropBorderColor or cooldownOnly then return end
 
 		local rarity = GetInventoryItemQuality('player', self:GetID())
 		if rarity and rarity > 1 then
@@ -243,18 +243,7 @@ function AS:Blizzard_Character()
 	_G.SkillDetailStatusBarUnlearnButton:SetHitRectInsets(0, 0, 0, 0)
 
 	-- Honor Frame
-	AS:StripTextures(HonorFrame)
-	AS:SkinBackdropFrame(HonorFrame)
-	HonorFrame.Backdrop:SetPoint("TOPLEFT", 18, -105)
-	HonorFrame.Backdrop:SetPoint("BOTTOMRIGHT", -39, 83)
-	HonorFrame.Backdrop:SetFrameLevel(HonorFrame:GetFrameLevel())
-
-	AS:CreateBackdrop(HonorFrameProgressButton, "Transparent")
-	HonorFrameProgressBar:Width(325)
-	HonorFrameProgressBar:SetStatusBarTexture(AS.NormTex)
-
-	HonorFrameProgressBar:ClearAllPoints()
-	HonorFrameProgressBar:SetPoint("TOP", HonorFrame, "TOP", -10, -73)
+	AS:StripTextures(PVPFrame)
 end
 
 function AS:Blizzard_DressUpFrame()

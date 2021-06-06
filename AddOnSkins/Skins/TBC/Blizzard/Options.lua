@@ -387,7 +387,6 @@ function AS:Blizzard_Options(event, addon)
 		-- Help
 		AS:SkinFrame(HelpFrame, nil, nil, true)
 		AS:SkinCloseButton(HelpFrameCloseButton)
-		AS:SkinCloseButton(HelpFrameKnowledgebaseErrorFrameCloseButton)
 
 		local HelpFrames = {
 			HelpFrameLeftInset,
@@ -396,100 +395,8 @@ function AS:Blizzard_Options(event, addon)
 			HelpFrameKnowledgebaseErrorFrame,
 		}
 
-		local HelpButtons = {
-			HelpFrameAccountSecurityOpenTicket,
-			HelpFrameOpenTicketHelpTopIssues,
-			HelpFrameOpenTicketHelpOpenTicket,
-			HelpFrameKnowledgebaseSearchButton,
-			HelpFrameKnowledgebaseNavBarHomeButton,
-			HelpFrameCharacterStuckStuck,
-			GMChatOpenLog,
-			HelpFrameTicketSubmit,
-			HelpFrameTicketCancel,
-			HelpFrameSubmitSuggestionSubmit,
-		}
-
 		for _, Frame in pairs(HelpFrames) do
 			AS:SkinFrame(Frame, nil, nil, true)
-		end
-
-		AS:StripTextures(HelpFrameHeader)
-
-		for _, Button in pairs(HelpButtons) do
-			AS:SkinButton(Button, true)
-
-			if Button.text then
-				Button.text:ClearAllPoints()
-				Button.text:SetPoint("CENTER")
-				Button.text:SetJustifyH("CENTER")
-			end
-		end
-
-		local HelpSideButtons = { 1, 2, 3, 4, 5, 6, 16 }
-
-		for _, Num in pairs(HelpSideButtons) do
-			local Button = HelpFrame['button'..Num]
-			Button.selected:SetTexture('')
-			Button:SetNormalTexture('')
-			Button:SetPushedTexture('')
-			Button:SetHighlightTexture('')
-			Button:SetDisabledTexture('')
-			AS:SetTemplate(Button)
-		end
-
-		local point, relativeTo, relativePoint, xOffset, yOffset = HelpFrameButton6:GetPoint()
-		HelpFrameButton6:SetPoint(point, relativeTo, relativePoint, xOffset + 2, yOffset)
-
-		hooksecurefunc('HelpFrame_SetSelectedButton', function(Button)
-			for _, Num in pairs(HelpSideButtons) do
-				HelpFrame['button'..Num]:SetBackdropBorderColor(unpack(AS.BorderColor))
-			end
-			Button:SetBackdropBorderColor(0, 0.44, .87)
-		end)
-
-		HelpFrameCharacterStuckHearthstone:SetHighlightTexture(nil)
-		HelpFrameCharacterStuckHearthstone.SetHighlightTexture = AS.Noop
-		AS:SkinButton(HelpFrameCharacterStuckHearthstone)
-		AS:SetInside(HelpFrameCharacterStuckHearthstone.IconTexture)
-		AS:SkinTexture(HelpFrameCharacterStuckHearthstone.IconTexture)
-
-		for _, Frame in pairs({ HelpFrameSubmitSuggestion, HelpFrameReportBug }) do
-			for i = 1, Frame:GetNumChildren() do
-				local Child = select(i, Frame:GetChildren())
-				if Child and Child:IsObjectType('Frame') and not Child:GetName() then
-					AS:SkinFrame(Child)
-				end
-			end
-		end
-
-		AS:SkinButton(HelpFrameReportBugSubmit)
-		AS:SkinScrollBar(HelpFrameSubmitSuggestionScrollFrameScrollBar)
-		AS:SkinScrollBar(HelpFrameReportBugScrollFrameScrollBar)
-
-		local NavButtons = {
-			HelpBrowserNavHome,
-			HelpBrowserNavReload,
-			HelpBrowserNavStop,
-			HelpBrowserBrowserSettings,
-		}
-
-		for _, Button in pairs(NavButtons) do
-			AS:CreateBackdrop(Button)
-			AS:SetInside(Button.Backdrop, Button, 3, 3)
-			Button:SetNormalTexture('')
-			Button:SetPushedTexture('')
-			Button:SetHighlightTexture('')
-			Button:SetDisabledTexture('')
-		end
-
-		for _, Button in pairs({ HelpBrowserNavBack, HelpBrowserNavForward }) do
-			AS:SkinArrowButton(Button)
-		end
-
-		AS:SkinFrame(BrowserSettingsTooltip)
-		AS:SkinButton(BrowserSettingsTooltip.CookiesButton, true)
-		if BrowserSettingsTooltip.CacheButton then
-			AS:SkinButton(BrowserSettingsTooltip.CacheButton, true)
 		end
 	end
 end

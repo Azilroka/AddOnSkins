@@ -3,30 +3,30 @@ local AS = unpack(AddOnSkins)
 function AS:Blizzard_TalentUI(event, addon)
 	if addon ~= 'Blizzard_TalentUI' then return end
 
-	AS:SkinBackdropFrame(TalentFrame)
-	TalentFramePortrait:Hide()
-	AS:SkinCloseButton(TalentFrameCloseButton)
-	TalentFrame.Backdrop:SetPoint('TOPLEFT', 13, -12)
-	TalentFrame.Backdrop:SetPoint('BOTTOMRIGHT', -31, 76)
+	AS:SkinBackdropFrame(PlayerTalentFrame)
+	PlayerTalentFramePortrait:Hide()
+	AS:SkinCloseButton(PlayerTalentFrameCloseButton)
+	PlayerTalentFrame.Backdrop:SetPoint('TOPLEFT', 13, -12)
+	PlayerTalentFrame.Backdrop:SetPoint('BOTTOMRIGHT', -31, 76)
 
 	for i = 1, 5 do
-		AS:SkinTab(_G["TalentFrameTab"..i])
+		AS:SkinTab(_G["PlayerTalentFrameTab"..i])
 	end
 
-	AS:SkinButton(TalentFrameCancelButton)
+	AS:SkinButton(PlayerTalentFrameCancelButton)
 
-	AS:StripTextures(TalentFrameScrollFrame)
+	AS:StripTextures(PlayerTalentFrameScrollFrame)
 
-	AS:SkinScrollBar(TalentFrameScrollFrameScrollBar)
-	TalentFrameScrollFrameScrollBar:SetPoint('TOPLEFT', TalentFrameScrollFrame, 'TOPRIGHT', 10, -16)
+	AS:SkinScrollBar(PlayerTalentFrameScrollFrameScrollBar)
+	PlayerTalentFrameScrollFrameScrollBar:SetPoint('TOPLEFT', PlayerTalentFrameScrollFrame, 'TOPRIGHT', 10, -16)
 
-	TalentFrameSpentPoints:SetPoint('TOP', 0, -42)
-	TalentFrameTalentPointsText:SetPoint('BOTTOMRIGHT', TalentFrame, 'BOTTOMLEFT', 220, 84)
+	PlayerTalentFrameSpentPoints:SetPoint('TOP', 0, -42)
+	PlayerTalentFrameTalentPointsText:SetPoint('BOTTOMRIGHT', PlayerTalentFrame, 'BOTTOMLEFT', 220, 84)
 
 	for i = 1, MAX_NUM_TALENTS do
-		local talent = _G['TalentFrameTalent'..i]
-		local icon = _G['TalentFrameTalent'..i..'IconTexture']
-		local rank = _G['TalentFrameTalent'..i..'Rank']
+		local talent = _G['PlayerTalentFrameTalent'..i]
+		local icon = _G['PlayerTalentFrameTalent'..i..'IconTexture']
+		local rank = _G['PlayerTalentFrameTalent'..i..'Rank']
 
 		if talent then
 			AS:SkinBackdropFrame(talent)

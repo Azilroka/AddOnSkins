@@ -158,8 +158,10 @@ function AS:Blizzard_Quest()
 			frame.Backdrop:SetPoint('BOTTOMLEFT', frame.Icon, 'BOTTOMRIGHT', -1, 0)
 			frame.Backdrop:SetPoint('RIGHT', frame, 'RIGHT', -5, 0)
 
-			frame.Count:ClearAllPoints()
-			frame.Count:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, 0)
+			if frame.Count then
+				frame.Count:ClearAllPoints()
+				frame.Count:SetPoint("BOTTOMRIGHT", frame.Icon, "BOTTOMRIGHT", 2, 0)
+			end
 		end
 
 		if frame.NameFrame then
@@ -180,13 +182,13 @@ function AS:Blizzard_Quest()
 		end
 
 		if quality and quality > 1 then
-			if frame and frame.Icon and frame.Icon.backdrop then
+			if frame and frame.Icon and frame.Icon.Backdrop then
 				frame.Icon.backdrop:SetBackdropBorderColor(r, g, b)
 			end
 			text:SetTextColor(r, g, b)
 		else
-			if frame and frame.Icon and frame.Icon.backdrop then
-				frame.Icon.backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			if frame and frame.Icon and frame.Icon.Backdrop then
+				frame.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 			end
 			if text then
 				text:SetTextColor(1, 1, 1)
