@@ -135,10 +135,6 @@ function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, rela
 		_G.DetailsRowFrame2:SetParent(_G.DetailsBaseFrame2)
 		_G.DetailsRowFrame2:SetFrameLevel(_G.DetailsBaseFrame2:GetFrameLevel() + 2)
 	end
-
-	if (window:GetSegment() ~= 0) then
-		window:SetDisplay (0)
-	end
 end
 
 function AS:Embed_Details()
