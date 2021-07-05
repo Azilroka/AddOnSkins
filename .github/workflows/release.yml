@@ -21,6 +21,8 @@ jobs:
           fetch-depth: 100
       - name: Retail
         uses: BigWigsMods/packager@master
+        with:
+          args: -g retail
       - name: Classic
         uses: BigWigsMods/packager@master
         with:
