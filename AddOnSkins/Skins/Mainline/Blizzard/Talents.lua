@@ -181,7 +181,7 @@ function AS:Blizzard_TalentUI(event, addon)
 					AS:SkinTexture(frame.icon, true)
 
 					frame.ring:Hide()
-					frame.icon:SetSize(40, 40)
+					frame.icon:SetSize(60, 60)
 					frame.subText:SetTextColor(1, .8, .1)
 				end
 
