@@ -8,7 +8,6 @@ externals:
 
 ignore:
     - AddOnSkins/Libs/Ace3/tests
-    - AddOnSkins/AddOnSkins.toc
 
 move-folders:
     AddOnSkins/AddOnSkins: AddOnSkins
