@@ -20,7 +20,7 @@ local EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow
 function AS:GetChatWindowInfo()
 	local ChatTabInfo = {['NONE'] = 'NONE'}
 	for i = 1, NUM_CHAT_WINDOWS do
-		if FCF_IsChatWindowIndexActive(i) then
+		if i ~= 2 and FCF_IsChatWindowIndexActive(i) then
 			ChatTabInfo["ChatFrame"..i] = _G["ChatFrame"..i.."Tab"]:GetText()
 		end
 	end
