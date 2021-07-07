@@ -113,15 +113,7 @@ function AS:Blizzard_Quest()
 
 	AS:StripTextures(QuestInfoItemHighlight)
 
-	hooksecurefunc("QuestInfoItem_OnClick", function(self)
-		for _, Button in ipairs(QuestInfoRewardsFrame.RewardButtons) do
-			Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
-			Button.Name:SetTextColor(1, 1, 1)
-		end
 
-		self.Backdrop:SetBackdropBorderColor(1,.9,.1)
-		self.Name:SetTextColor(1, .8, .1)
-	end)
 
 	AS:SkinBackdropFrame(QuestInfoRewardsFrame.SkillPointFrame)
 	AS:SkinTexture(QuestInfoRewardsFrame.SkillPointFrame.Icon, true)
@@ -180,15 +172,16 @@ function AS:Blizzard_Quest()
 			quality = select(3, GetItemInfo(link))
 			r, g, b = GetItemQualityColor(quality)
 		end
-
 		if quality and quality > 1 then
 			if frame and frame.Icon and frame.Icon.Backdrop then
-				frame.Icon.backdrop:SetBackdropBorderColor(r, g, b)
+				frame.Icon.Backdrop:SetBackdropBorderColor(r, g, b) --fixed typo
+				frame.Backdrop:SetBackdropBorderColor(r, g, b) --color border around item name
 			end
 			text:SetTextColor(r, g, b)
 		else
 			if frame and frame.Icon and frame.Icon.Backdrop then
 				frame.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+				frame.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor)) --color border around item name
 			end
 			if text then
 				text:SetTextColor(1, 1, 1)
@@ -273,6 +266,22 @@ function AS:Blizzard_Quest()
 --		bg:SetPoint("TOPLEFT", icon, "TOPRIGHT", 0, 2)
 --		bg:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 220, -1)
 	end
+	
+	hooksecurefunc("QuestInfoItem_OnClick", function(self)
+		for _, Button in ipairs(QuestInfoRewardsFrame.RewardButtons) do
+			Button.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			--Button.Name:SetTextColor(1, 1, 1)
+		end
+			for i = 1, _G.MAX_NUM_ITEMS do
+				local item = _G["QuestInfoRewardsFrameQuestInfoItem"..i]
+				if item then
+					local link = item.type and (_G.QuestInfoFrame.questLog and GetQuestLogItemLink or GetQuestItemLink)(item.type, item:GetID())
+					QuestQualityColors(item, item.Name, link)
+				end
+			end
+		self.Backdrop:SetBackdropBorderColor(1,1,0.5)
+		self.Name:SetTextColor(1, 1, 0.2)
+	end)
 
 	local QuestLogCollapseAllButton = _G.QuestLogCollapseAllButton
 	AS:StripTextures(QuestLogCollapseAllButton)
@@ -406,6 +415,16 @@ function AS:Blizzard_Quest()
 			else
 				_G.QuestLogRequiredMoneyText:SetTextColor(1, 0.8, 0.1)
 			end
+
+			--fix for coloring quest rewards (icon borders and item names)
+			for i = 1, _G.MAX_NUM_ITEMS do
+				local item = _G["QuestLogItem"..i]
+				if item then
+					local link = item.type and GetQuestLogItemLink(item.type, item:GetID())
+					QuestQualityColors(item, item.Name, link)
+				end
+			end	
+			
 		end)
 
 		hooksecurefunc('QuestInfo_Display', function()
