@@ -344,7 +344,7 @@ function AS:Blizzard_TrainerUI(event, addon)
 	hooksecurefunc('ClassTrainer_SetSelection', function()
 		local skillIcon = _G.ClassTrainerSkillIcon:GetNormalTexture()
 		if skillIcon then
-			skillIcon:SetInside()
+			AS:SetInside(skillIcon)
 			AS:SkinTexture(skillIcon, true)
 		end
 	end)
