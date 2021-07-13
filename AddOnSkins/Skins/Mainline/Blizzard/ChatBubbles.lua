@@ -50,6 +50,7 @@ function AS:Blizzard_ChatBubbles()
 	local function SkinChatBubble(frame)
 		local chatBubble = frame:GetChildren()
 		if chatBubble and not chatBubble:IsForbidden() then
+			Mixin(chatBubble, BackdropTemplateMixin and "BackdropTemplate")
 			chatBubble:ClearBackdrop()
 			AS:SkinFrame(frame)
 			chatBubble.Tail:SetTexture('')
