@@ -290,17 +290,11 @@ function AS:BuildOptions()
 end
 
 function AS:GetOptions()
-	local Ace3OptionsPanel = AS:CheckAddOn('ElvUI') and _G.ElvUI[1] or _G.Enhanced_Config
-	if Ace3OptionsPanel then
-		Ace3OptionsPanel.Options.args.addonskins = AS.Options
-	elseif _G.AddOnSkins_Config then
-		_G.AddOnSkins_Config.Options.args = AS.Options.args
-	end
-
 	AS.Options.args.profiles = _G.LibStub('AceDBOptions-3.0'):GetOptionsTable(AS.data)
 	AS.Options.args.profiles.order = -2
 
 	if AS:CheckAddOn('ElvUI') then
+		_G.ElvUI[1].Options.args.addonskins = AS.Options
 		hooksecurefunc(_G.LibStub('AceConfigDialog-3.0-ElvUI'), 'CloseAll', function()
 			if AS.NeedReload then
 				_G.ElvUI[1]:StaticPopup_Show("PRIVATE_RL")
