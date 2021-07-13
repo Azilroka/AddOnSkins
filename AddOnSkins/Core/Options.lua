@@ -282,6 +282,11 @@ function AS:BuildOptions()
 			DefaultTemplates['MerathilisUI'] = '|cffff7d0aMerathilisUI|r'
 		end
 	end
+
+	if not AS:CheckAddOn('ElvUI') then
+		AS.Libs.AC:RegisterOptionsTable('AddOnSkins', AS.Options)
+		AS.Libs.ACD:AddToBlizOptions('AddOnSkins', 'AddOnSkins')
+	end
 end
 
 function AS:GetOptions()
