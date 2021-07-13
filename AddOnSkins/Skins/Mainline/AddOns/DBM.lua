@@ -113,10 +113,12 @@ function AS:DBM(event, addon)
 	if addon == 'DBM-GUI' then
 		DBM_GUI_OptionsFrame:HookScript('OnShow', function()
 			AS:SkinFrame(DBM_GUI_OptionsFrame)
+			AS:SkinFrame(DBM_GUI_OptionsFrameList)
 			AS:SkinFrame(DBM_GUI_OptionsFrameBossMods)
 			AS:SkinFrame(DBM_GUI_OptionsFrameDBMOptions)
 			AS:SkinFrame(DBM_GUI_OptionsFramePanelContainer)
 		end)
+
 		AS:SkinTab(DBM_GUI_OptionsFrameTab1)
 		AS:SkinTab(DBM_GUI_OptionsFrameTab2)
 		AS:SkinButton(DBM_GUI_OptionsFrameOkay, true)
