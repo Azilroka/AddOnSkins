@@ -26,7 +26,6 @@ function AS:DBM(event, addon)
 						if AS:CheckOption('DBMSkinHalf') then
 							iconSize = iconSize * 3
 						end
-						iconSize = iconSize - 2
 
 						AS:SkinTexture(icon1, true)
 						icon1:ClearAllPoints()
