@@ -1,6 +1,6 @@
 ## Interface: 20501
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
-## Version: 4.54
+## Version: 4.55
 ## Author: Azilroka, Nihilistzsche
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 ## OptionalDeps: ElvUI
