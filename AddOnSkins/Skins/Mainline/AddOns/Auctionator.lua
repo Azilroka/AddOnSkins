@@ -14,7 +14,7 @@ local function SkinHeaders(header, x, y)
 		if section then
 			if not section.Backdrop then
 				section:DisableDrawLayer('BACKGROUND')
-				AS:CreateBackdrop(section)
+				AS:CreateBackdrop(section, 'Transparent')
 				section.Backdrop:SetPoint('BOTTOMRIGHT', i < maxHeaders and -5 or 0, -2)
 			end
 		end
@@ -22,7 +22,7 @@ local function SkinHeaders(header, x, y)
 end
 
 local function SkinItem(item)
-	if item.Icon and not item.backdrop then
+	if item.Icon and not item.Backdrop then
 		item.Icon:SetTexCoord(unpack(AS.TexCoords))
 		AS:CreateBackdrop(item)
 		AS:StyleButton(item)
@@ -66,35 +66,36 @@ local function SkinMainFrames()
 	local cancelling = _G.AuctionatorCancellingFrame
 
 	AS:StripTextures(list)
-	AS:CreateBackdrop(list)
+	AS:SetTemplate(list)
+	AS:SetTemplate(list.ResultsListing.ScrollFrame, 'Transparent')
 
 	AS:StripTextures(config)
-	AS:CreateBackdrop(config)
+	AS:SetTemplate(config, 'Transparent')
 
 	AS:StripTextures(cancelling.ResultsListing)
-	AS:CreateBackdrop(cancelling.ResultsListing.ScrollFrame)
+	AS:SetTemplate(cancelling.ResultsListing.ScrollFrame, 'Transparent')
 	cancelling.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', cancelling.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 16, -6)
 	selling.CurrentItemListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentItemListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 	selling.HistoricalPriceListing.ScrollFrame:SetPoint('TOPLEFT', selling.HistoricalPriceListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 	list.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', list.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 15, -4)
 
+	list.ExportCSV:ClearAllPoints()
+	list.ExportCSV:Point('TOPRIGHT', list, 'BOTTOMRIGHT', -2, -2)
 	AS:StripTextures(list.ShoppingResultsInset)
 	AS:StripTextures(list.ScrollList.InsetFrame)
 	list.ScrollList.InsetFrame:SetPoint('TOPLEFT', list.ScrollList, 'TOPLEFT', 3, 0)
 	AS:StripTextures(cancelling.HistoricalPriceInset)
 	AS:StripTextures(selling.HistoricalPriceInset)
-	AS:CreateBackdrop(selling.HistoricalPriceInset)
-	AS:SetInside(selling.HistoricalPriceInset.Backdrop)
+	AS:SetTemplate(selling.HistoricalPriceInset, 'Transparent')
 	selling.HistoricalPriceInset:SetPoint('TOPLEFT', selling.HistoricalPriceListing, 'TOPLEFT', -7, -25)
 	selling.HistoricalPriceInset:SetPoint('BOTTOMRIGHT', selling.HistoricalPriceListing, 'BOTTOMRIGHT', -2, 0)
 	AS:StripTextures(selling.CurrentItemInset)
-	AS:CreateBackdrop(selling.CurrentItemInset)
-	AS:SetInside(selling.CurrentItemInset.Backdrop)
+	AS:SetTemplate(selling.CurrentItemInset, 'Transparent')
 	selling.CurrentItemInset:SetPoint('TOPLEFT', selling.CurrentItemListing, 'TOPLEFT', -7, -25)
 	selling.CurrentItemInset:SetPoint('BOTTOMRIGHT', selling.CurrentItemListing, 'BOTTOMRIGHT', -2, 0)
 	AS:StripTextures(selling.BagInset)
 	AS:StripTextures(selling.BagListing.ScrollFrame)
-	AS:CreateBackdrop(selling.BagListing.ScrollFrame)
+	AS:CreateBackdrop(selling.BagListing.ScrollFrame, 'Transparent')
 	AS:SetOutside(selling.BagListing.ScrollFrame, selling.BagListing)
 	AS:SetOutside(selling.BagListing.ScrollFrame.Backdrop, selling.BagListing, 5, 5)
 
@@ -134,18 +135,8 @@ local function SkinMainFrames()
 		config.ScanButton
 	}
 
-	local tabs = {
-		selling.HistoryTabsContainer.RealmHistoryTab,
-		selling.HistoryTabsContainer.YourHistoryTab
-	}
-
 	for _, button in ipairs(buttons) do
 		AS:SkinButton(button)
-		--button.Backdrop:SetFrameLevel(button:GetFrameLevel()) -- h a l p
-	end
-
-	for _, tab in ipairs(tabs) do
-		AS:SkinTab(tab)
 	end
 
 	local scrollbars = {
@@ -160,13 +151,28 @@ local function SkinMainFrames()
 
 	for _, scrollbar in ipairs(scrollbars) do
 		AS:SkinScrollBar(scrollbar)
+
+		scrollbar:ClearAllPoints()
+
+		if scrollbar == _G.AuctionatorSellingFrameScrollBar then
+			scrollbar:Point('TOPLEFT', nil, 'TOPRIGHT', 7, -14)
+			scrollbar:Point('BOTTOMLEFT', nil, 'BOTTOMRIGHT', 7, 14)
+		elseif scrollbar == list.ScrollList.ScrollFrame.scrollBar then
+			scrollbar:Point('TOPLEFT', nil, 'TOPRIGHT', 2, -9)
+			scrollbar:Point('BOTTOMLEFT', nil, 'BOTTOMRIGHT', 2, 16)
+		else
+			scrollbar:Point('TOPLEFT', nil, 'TOPRIGHT', 1, -16)
+			scrollbar:Point('BOTTOMLEFT', nil, 'BOTTOMRIGHT', 1, 16)
+		end
 	end
 
 	local tabs = {
 		_G.AuctionatorTabs_Auctionator,
 		_G.AuctionatorTabs_Cancelling,
 		_G.AuctionatorTabs_Selling,
-		_G.AuctionatorTabs_ShoppingLists
+		_G.AuctionatorTabs_ShoppingLists,
+		selling.HistoryTabsContainer.RealmHistoryTab,
+		selling.HistoryTabsContainer.YourHistoryTab
 	}
 
 	for _, tab in ipairs(tabs) do
@@ -229,11 +235,20 @@ local function SkinMainFrames()
 		end
 	end
 
-	-- undercut butttons
+	-- undercut butttons, refresh button
 	for _, child in ipairs({cancelling:GetChildren()}) do
-		if child.StartScanButton then
-			AS:SkinButton(child.StartScanButton)
-			AS:SkinButton(child.CancelNextButton)
+		if child.StartScanButton then AS:SkinButton(child.StartScanButton) end
+		if child.CancelNextButton then AS:SkinButton(child.CancelNextButton) end
+		if child.iconAtlas == 'UI-RefreshButton' then
+			AS:SkinButton(child)
+			child:Size(24)
+		end
+	end
+
+	for _, child in ipairs({selling.AuctionatorSaleItem:GetChildren()}) do
+		if child.iconAtlas == 'UI-RefreshButton' then
+			AS:SkinButton(child)
+			child:Size(24)
 		end
 	end
 
@@ -242,7 +257,7 @@ local function SkinMainFrames()
 		local region = select(i, list.ScrollList:GetRegions())
 		if region:IsObjectType('Texture') and region:GetTexture() == 3054898 then
 			AS:StripTextures(region)
-			AS:CreateBackdrop(region)
+			AS:CreateBackdrop(region, 'Transparent')
 			AS:SetOutside(region.Backdrop, list.ScrollList.InsetFrame)
 		end
 	end
@@ -255,6 +270,7 @@ local function SkinOptions()
 		_G.AuctionatorConfigTooltipsFrame,
 		_G.AuctionatorConfigShoppingFrame,
 		_G.AuctionatorConfigSellingFrame,
+		_G.AuctionatorConfigSellingShortcutsFrame,
 		_G.AuctionatorConfigLIFOFrame,		-- Selling: Items
 		_G.AuctionatorConfigNotLIFOFrame,	-- Selling: Gear/Pets
 		_G.AuctionatorConfigCancellingFrame,
@@ -265,7 +281,9 @@ local function SkinOptions()
 	for _, frame in ipairs(options) do
 		for i = 1, frame:GetNumChildren() do
 			local child = select(i, frame:GetChildren())
-			if child.CheckBox then
+			if child.Button then
+				AS:SkinButton(child.Button)
+			elseif child.CheckBox then
 				AS:SkinCheckBox(child.CheckBox)
 			elseif child.DropDown then
 				AS:SkinDropDownBox(child.DropDown)
@@ -316,9 +334,9 @@ local function SkinImportExport()
 	AS:StripTextures(import)
 	AS:StripTextures(export)
 
-	AS:CreateBackdrop(copy)
-	AS:CreateBackdrop(import)
-	AS:CreateBackdrop(export)
+	AS:SetTemplate(copy, 'Transparent')
+	AS:SetTemplate(import, 'Transparent')
+	AS:SetTemplate(export, 'Transparent')
 
 	AS:SkinScrollBar(copy.ScrollFrame.ScrollBar)
 	AS:SkinScrollBar(import.ScrollFrame.ScrollBar)
@@ -347,14 +365,12 @@ local function SkinTextArea(frame)
 	frame.Middle:Hide()
 	frame.Right:Hide()
 
-	if not frame.Backdrop then
-		AS:CreateBackdrop(frame)
-	end
+	AS:SetTemplate(frame)
 end
 
 local function SkinItemFrame(frame)
 	AS:StripTextures(frame)
-	AS:CreateBackdrop(frame)
+	AS:SetTemplate(frame, 'Transparent')
 
 	AS:SkinButton(frame.Cancel)
 	AS:SkinButton(frame.ResetAllButton)
@@ -400,6 +416,7 @@ local function SkinItemFrame(frame)
 	}
 
 	for _, resetButton in ipairs(resetButtons) do
+		-- HandleBlizzardRegions(resetButton)
 		AS:SkinCloseButton(resetButton)
 		resetButton:SetHitRectInsets(1, 1, 1, 1)
 	end
