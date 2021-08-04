@@ -24,7 +24,7 @@ function AS:DBM(event, addon)
 						local timer = _G[frame:GetName()..'BarTimer']
 						local iconSize = bar.enlarged and DBT.Options.HugeHeight or DBT.Options.Height
 						if AS:CheckOption('DBMSkinHalf') then
-							iconSize = iconSize * 3
+							iconSize = iconSize * 2
 						end
 
 						AS:SkinTexture(icon1, true)
@@ -96,14 +96,14 @@ function AS:DBM(event, addon)
 			if DBT.Options.HugeBarYOffset < 18 then
 				halfBarskin.Options.HugeBarYOffset = 18
 			end
-			halfBarskin.Defaults.Height = DBT.Options.Height / 3
-			halfBarskin.Defaults.HugeHeight = DBT.Options.HugeHeight / 3
+			halfBarskin.Defaults.Height = 10
+			halfBarskin.Defaults.HugeHeight = 10
 			halfBarskin.Options.IconLocked = true
 			DBT:SetSkin("AddOnSkins Half-Bar")
 		else
 			local skin = DBT:RegisterSkin("AddOnSkins")
-			skin.Defaults.Height = DBT.Options.Height + 2
-			skin.Defaults.HugeHeight = DBT.Options.HugeHeight + 2
+			skin.Defaults.Height = 30
+			skin.Defaults.HugeHeight = 30
 			skin.Options.IconLocked = true
 			DBT:SetSkin("AddOnSkins")
 		end
