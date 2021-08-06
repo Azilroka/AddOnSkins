@@ -318,10 +318,10 @@ function AS:Blizzard_Inspect(event, addon)
 		end
 	end
 
-	AS:SkinBackdropFrame(_G.InspectHonorFrame)
+	AS:SkinBackdropFrame(_G.InspectPVPFrame)
 
-	_G.InspectHonorFrame.Backdrop:SetPoint("TOPLEFT", 11, -12)
-	_G.InspectHonorFrame.Backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
+	_G.InspectPVPFrame.Backdrop:SetPoint("TOPLEFT", 11, -12)
+	_G.InspectPVPFrame.Backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
 
 	AS:UnregisterSkinEvent(addon, event)
 end
