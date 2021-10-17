@@ -1,7 +1,7 @@
 ## Interface: 11307
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
-## Version: 4.56
-## Author: Azilroka, Nihilistzsche
+## Version: 4.57
+## Author: Azilroka
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 ## OptionalDeps: ElvUI
 ## X-Curse-Project-ID: 54541

@@ -3,7 +3,7 @@
 ## Interface-BCC: 20501
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
 ## Version: 4.56
-## Author: Azilroka, Nihilistzsche
+## Author: Azilroka
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 ## OptionalDeps: ElvUI
 ## X-Curse-Project-ID: 54541
