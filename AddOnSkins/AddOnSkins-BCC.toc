@@ -13,4 +13,5 @@ Init.lua
 Core\Load_Core.xml
 Embed\Load_Embed.xml
 
+Skins\AddOns\Load_Skins.xml
 Skins\TBC\Load_Skins.xml

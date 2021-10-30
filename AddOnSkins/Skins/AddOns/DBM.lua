@@ -11,7 +11,7 @@ function AS:DBM(event, addon)
 						local sparkEnabled = DBT.Options.Spark
 						if not (AS:CheckOption('DBMSkinHalf') and sparkEnabled) then return end
 						local spark = _G[bar.frame:GetName().."BarSpark"]
-						spark:SetSize(12, (bar.enlarged and DBT.Options.HugeHeight or DBT.Options.Height)*3/2 - 2)
+						spark:SetSize(12, ((bar.enlarged and DBT.Options.HugeHeight or DBT.Options.Height) * 3) - 2)
 						local a, b, c, d = spark:GetPoint()
 						spark:SetPoint(a, b, c, d, 0)
 					end)
