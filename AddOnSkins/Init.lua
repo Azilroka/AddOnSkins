@@ -24,7 +24,7 @@ _G.AddOnSkins = Engine
 _G.AddOnSkins.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 _G.AddOnSkins.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 _G.AddOnSkins.TBC = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
-_G.AddOnSkins.Wrath = false
+_G.AddOnSkins.WotLK = false
 
 _G.AddOnSkinsDS = {}
 
