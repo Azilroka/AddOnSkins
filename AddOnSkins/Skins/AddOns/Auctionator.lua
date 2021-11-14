@@ -4,6 +4,13 @@ if not AS:CheckAddOn('Auctionator') then return end
 
 -- Credits: Simpy
 local _G = _G
+local next = next
+local select = select
+local unpack = unpack
+local tostring = tostring
+local strmatch = strmatch
+local GetItemInfo = GetItemInfo
+local hooksecurefunc = hooksecurefunc
 
 local function SkinHeaders(header, x, y)
 	header:SetPoint('TOPLEFT', header:GetParent(), 'TOPLEFT', x or -20, y or -3)
@@ -64,6 +71,9 @@ local function SkinMainFrames()
 	local config = _G.AuctionatorConfigFrame
 	local selling = _G.AuctionatorSellingFrame
 	local cancelling = _G.AuctionatorCancellingFrame
+	local recentList = list.ScrollListRecents
+	local shoppingList = list.ScrollListShoppingList
+	local shopTabs = list.RecentsTabsContainer
 
 	AS:StripTextures(list)
 	AS:SetTemplate(list)
@@ -78,13 +88,24 @@ local function SkinMainFrames()
 	selling.CurrentItemListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentItemListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 	selling.HistoricalPriceListing.ScrollFrame:SetPoint('TOPLEFT', selling.HistoricalPriceListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 	list.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', list.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 15, -4)
-
+	list.ListDropdown:ClearAllPoints()
+	list.ListDropdown:Point('RIGHT', list.Export, 'LEFT', -20, -2)
 	list.ExportCSV:ClearAllPoints()
 	list.ExportCSV:Point('TOPRIGHT', list, 'BOTTOMRIGHT', -2, -2)
+
 	AS:StripTextures(list.ShoppingResultsInset)
-	AS:StripTextures(list.ScrollList.InsetFrame)
-	list.ScrollList.InsetFrame:SetPoint('TOPLEFT', list.ScrollList, 'TOPLEFT', 3, 0)
 	AS:StripTextures(cancelling.HistoricalPriceInset)
+	list.OneItemSearchButton:ClearAllPoints()
+	list.OneItemSearchButton:Point('LEFT', list.OneItemSearchBox, 'RIGHT', 3, 0)
+	list.OneItemSearchExtendedButton:ClearAllPoints()
+	list.OneItemSearchExtendedButton:Point('LEFT', list.OneItemSearchButton, 'RIGHT', 2, 0)
+	list.Export:ClearAllPoints()
+	list.Export:Point('RIGHT', list.Import, 'LEFT', -3, 0)
+
+	recentList.InsetFrame:StripTextures()
+	recentList.InsetFrame:Point('TOPLEFT', recentList, 'TOPLEFT', 3, 0)
+	shoppingList.InsetFrame:StripTextures()
+	shoppingList.InsetFrame:Point('TOPLEFT', shoppingList, 'TOPLEFT', 3, 0)
 	AS:StripTextures(selling.HistoricalPriceInset)
 	AS:SetTemplate(selling.HistoricalPriceInset, 'Transparent')
 	selling.HistoricalPriceInset:SetPoint('TOPLEFT', selling.HistoricalPriceListing, 'TOPLEFT', -7, -25)
@@ -101,8 +122,6 @@ local function SkinMainFrames()
 
 	AS:SkinButton(list.ExportCSV)
 
-	AS:SkinDropDownBox(list.ListDropdown, 250)
-
 	-- handle sell item icon
 	SkinItem(selling.AuctionatorSaleItem.Icon)
 	selling.AuctionatorSaleItem.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
@@ -110,20 +129,18 @@ local function SkinMainFrames()
 	-- handle bag item icons
 	hooksecurefunc(_G.AuctionatorBagItemMixin, 'SetItemInfo', SetItemInfo)
 
-	list.ListDropdown:ClearAllPoints()
-	list.ListDropdown:SetPoint('TOPLEFT', list, 'TOPLEFT', 0, 50)
-	list.CreateList:ClearAllPoints()
-	list.CreateList:SetPoint('LEFT', list.ListDropdown.Backdrop, 'RIGHT', 5, 0)
-
-	local buttons = {
+	for _, button in next, {
 		-- Shopping
 		_G.AuctionatorShoppingLists_AddItem,
 		list.ManualSearch,
-		list.CreateList,
-		list.DeleteList,
+		list.ExportCSV,
 		list.Rename,
 		list.Export,
 		list.Import,
+		list.AddItem,
+		list.SortItems,
+		list.OneItemSearchButton,
+		list.OneItemSearchExtendedButton,
 
 		--Selling
 		selling.SaleItemFrame.MaxButton,
@@ -133,23 +150,20 @@ local function SkinMainFrames()
 		--Auctionator
 		config.OptionsButton,
 		config.ScanButton
-	}
-
-	for _, button in ipairs(buttons) do
+	} do
 		AS:SkinButton(button)
 	end
 
-	local scrollbars = {
+	for _, scrollbar in next, {
 		_G.AuctionatorSellingFrameScrollBar,
 		cancelling.ResultsListing.ScrollFrame.scrollBar,
-		list.ScrollList.ScrollFrame.scrollBar,
+		recentList.ScrollFrame.scrollBar,
+		shoppingList.ScrollFrame.scrollBar,
 		list.ResultsListing.ScrollFrame.scrollBar,
 		selling.CurrentItemListing.ScrollFrame.scrollBar,
 		selling.HistoricalPriceListing.ScrollFrame.scrollBar,
-		selling.ResultsListing.ScrollFrame.scrollBar,
-	}
-
-	for _, scrollbar in ipairs(scrollbars) do
+		selling.ResultsListing.ScrollFrame.scrollBar
+	} do
 		AS:SkinScrollBar(scrollbar)
 
 		scrollbar:ClearAllPoints()
@@ -157,7 +171,7 @@ local function SkinMainFrames()
 		if scrollbar == _G.AuctionatorSellingFrameScrollBar then
 			scrollbar:Point('TOPLEFT', nil, 'TOPRIGHT', 7, -14)
 			scrollbar:Point('BOTTOMLEFT', nil, 'BOTTOMRIGHT', 7, 14)
-		elseif scrollbar == list.ScrollList.ScrollFrame.scrollBar then
+		elseif scrollbar == recentList.ScrollFrame.scrollBar or scrollbar == shoppingList.ScrollFrame.scrollBar then
 			scrollbar:Point('TOPLEFT', nil, 'TOPRIGHT', 2, -9)
 			scrollbar:Point('BOTTOMLEFT', nil, 'BOTTOMRIGHT', 2, 16)
 		else
@@ -166,20 +180,22 @@ local function SkinMainFrames()
 		end
 	end
 
-	local tabs = {
+	for _, tab in next, {
 		_G.AuctionatorTabs_Auctionator,
 		_G.AuctionatorTabs_Cancelling,
 		_G.AuctionatorTabs_Selling,
 		_G.AuctionatorTabs_ShoppingLists,
 		selling.HistoryTabsContainer.RealmHistoryTab,
-		selling.HistoryTabsContainer.YourHistoryTab
-	}
-
-	for _, tab in ipairs(tabs) do
+		selling.HistoryTabsContainer.YourHistoryTab,
+		shopTabs.ListTab,
+		shopTabs.RecentsTab
+	} do
 		AS:SkinTab(tab)
 	end
 
-	local editboxes = {
+	for _, editbox in next, {
+		list.OneItemSearchBox,
+
 		--Selling
 		selling.SaleItemFrame.Quantity,
 		selling.SaleItemFrame.Price.MoneyInput.GoldBox,
@@ -191,17 +207,15 @@ local function SkinMainFrames()
 		config.TechnicalRoadmap,
 		config.BugReportLink,
 
-		--Canceling
-		cancelling.SearchFilter,
-	}
-
-	for _, editbox in ipairs(editboxes) do
+		--Cancelling
+		cancelling.SearchFilter
+	} do
 		AS:SkinEditBox(editbox)
 
 		if editbox.iconAtlas or editbox.labelText == 'Quantity' then
 			SkinMoneyInput(editbox, 28)
 		elseif editbox.InputBox then
-			editbox.InputBox:StripTextures()
+			AS:StripTextures(editbox.InputBox)
 			editbox.Backdrop:SetAllPoints(editbox.InputBox)
 		end
 	end
@@ -212,15 +226,13 @@ local function SkinMainFrames()
 	selling.SaleItemFrame.SkipButton:ClearAllPoints()
 	selling.SaleItemFrame.SkipButton:SetPoint('TOPLEFT', selling.SaleItemFrame.PostButton, 'TOPRIGHT', 2, 0)
 
-	local headers = {
+	for _, header in next, {
 		{ frame = list.ResultsListing.HeaderContainer, x = -20, y = -1 },
 		cancelling.ResultsListing.HeaderContainer,
 		selling.CurrentItemListing.HeaderContainer,
 		selling.HistoricalPriceListing.HeaderContainer,
-		selling.ResultsListing.HeaderContainer,
-	}
-
-	for _, header in ipairs(headers) do
+		selling.ResultsListing.HeaderContainer
+	} do
 		if header.frame then
 			SkinHeaders(header.frame, header.x, header.y)
 		else
@@ -229,23 +241,34 @@ local function SkinMainFrames()
 	end
 
 	-- duration radio buttons
-	for _, duration in ipairs(selling.AuctionatorSaleItem.Duration.radioButtons) do
+	for _, duration in next, selling.AuctionatorSaleItem.Duration.radioButtons do
 		if duration.RadioButton then
 			AS:SkinRadioButton(duration.RadioButton)
 		end
 	end
 
 	-- undercut butttons, refresh button
-	for _, child in ipairs({cancelling:GetChildren()}) do
-		if child.StartScanButton then AS:SkinButton(child.StartScanButton) end
-		if child.CancelNextButton then AS:SkinButton(child.CancelNextButton) end
+	for _, child in next, {cancelling:GetChildren()} do
+		if child.StartScanButton then
+			AS:SkinButton(child.StartScanButton)
+		end
+		if child.CancelNextButton then
+			AS:SkinButton(child.CancelNextButton)
+		end
+		if child.StartScanButton and child.CancelNextButton then
+			child.StartScanButton:ClearAllPoints()
+			child.StartScanButton:Point('RIGHT', child.CancelNextButton, 'LEFT', -3, 0)
+
+			child.CancelNextButton:ClearAllPoints()
+			child.CancelNextButton:Point('TOPRIGHT', cancelling, 'BOTTOMRIGHT', -2, -2)
+		end
 		if child.iconAtlas == 'UI-RefreshButton' then
 			AS:SkinButton(child)
 			child:Size(24)
 		end
 	end
 
-	for _, child in ipairs({selling.AuctionatorSaleItem:GetChildren()}) do
+	for _, child in next, {selling.AuctionatorSaleItem:GetChildren()} do
 		if child.iconAtlas == 'UI-RefreshButton' then
 			AS:SkinButton(child)
 			child:Size(24)
@@ -253,18 +276,22 @@ local function SkinMainFrames()
 	end
 
 	-- create list backdrop
-	for i = 1, list.ScrollList:GetNumRegions() do
-		local region = select(i, list.ScrollList:GetRegions())
-		if region:IsObjectType('Texture') and region:GetTexture() == 3054898 then
-			AS:StripTextures(region)
-			AS:CreateBackdrop(region, 'Transparent')
-			AS:SetOutside(region.Backdrop, list.ScrollList.InsetFrame)
+	for _, frame in next, {recentList, shoppingList} do
+		for i = 1, frame:GetNumRegions() do
+			local region = select(i, frame:GetRegions())
+			if region:IsObjectType('Texture') and region:GetTexture() == 3054898 then
+				AS:StripTextures(region)
+				AS:CreateBackdrop(region, 'Transparent')
+				--if region.Backdrop then
+					AS:SetOutside(region.Backdrop, frame.InsetFrame)
+				--end
+			end
 		end
 	end
 end
 
 local function SkinOptions()
-	local options = {
+	for _, frame in next, {
 		_G.AuctionatorConfigBasicOptionsFrame,
 		_G.AuctionatorConfigQuantitiesFrame,
 		_G.AuctionatorConfigTooltipsFrame,
@@ -276,9 +303,7 @@ local function SkinOptions()
 		_G.AuctionatorConfigCancellingFrame,
 		_G.AuctionatorConfigProfileFrame,
 		_G.AuctionatorConfigAdvancedFrame
-	}
-
-	for _, frame in ipairs(options) do
+	} do
 		for i = 1, frame:GetNumChildren() do
 			local child = select(i, frame:GetChildren())
 			if child.Button then
@@ -299,7 +324,7 @@ local function SkinOptions()
 					end
 				end
 			elseif child.radioButtons then
-				for _, duration in ipairs(child.radioButtons) do
+				for _, duration in next, child.radioButtons do
 					if duration.RadioButton then
 						AS:SkinRadioButton(duration.RadioButton)
 					end
@@ -390,7 +415,7 @@ local function SkinItemFrame(frame)
 	AS:SkinCheckBox(frame.SearchContainer.IsExact)
 	frame.SearchContainer.IsExact:SetSize(26, 26)
 
-	local textareas = {
+	for _, textarea in next, {
 		frame.LevelRange.MaxBox,
 		frame.LevelRange.MinBox,
 		frame.ItemLevelRange.MaxBox,
@@ -400,23 +425,18 @@ local function SkinItemFrame(frame)
 		frame.CraftedLevelRange.MaxBox,
 		frame.CraftedLevelRange.MinBox,
 		frame.SearchContainer.SearchString
-	}
-
-	for _, textarea in ipairs(textareas) do
+	} do
 		SkinTextArea(textarea)
 	end
 
-	local resetButtons = {
+	for _, resetButton in next, {
 		frame.LevelRange.ResetButton,
 		frame.ItemLevelRange.ResetButton,
 		frame.PriceRange.ResetButton,
 		frame.CraftedLevelRange.ResetButton,
 		frame.FilterKeySelector.ResetButton,
 		frame.SearchContainer.ResetSearchStringButton
-	}
-
-	for _, resetButton in ipairs(resetButtons) do
-		-- HandleBlizzardRegions(resetButton)
+	} do
 		AS:SkinCloseButton(resetButton)
 		resetButton:SetHitRectInsets(1, 1, 1, 1)
 	end
@@ -430,8 +450,9 @@ function AS:Auctionator(event)
 	if event == 'AUCTION_HOUSE_SHOW' then
 		SkinMainFrames()
 		SkinImportExport()
-		SkinItemFrame(_G.AuctionatorAddItemFrame)
-		SkinItemFrame(_G.AuctionatorEditItemFrame)
+		SkinItemFrame(_G.AuctionatorShoppingItemFrame)
+		--SkinItemFrame(_G.AuctionatorAddItemFrame)
+		--SkinItemFrame(_G.AuctionatorEditItemFrame)
 
 		AS:UnregisterSkinEvent('Auctionator', event)
 	end
