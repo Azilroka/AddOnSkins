@@ -52,6 +52,7 @@
 	<Script file="EnergyWatch.lua"/>
 	<Script file="EssenceSetManager.lua"/>
 	<Script file="Examiner.lua"/>
+	<Script file="ExtendedCharacterStats.lua"/>
 	<Script file="ExtraQuestButton.lua"/>
 	<Script file="ExtVendor.lua"/>
 	<Script file="FlightMapEnhanced.lua"/>
