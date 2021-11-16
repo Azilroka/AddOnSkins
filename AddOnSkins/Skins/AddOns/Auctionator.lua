@@ -295,6 +295,11 @@ local function SkinMainFrames()
 		end
 	end
 
+	-- Classic / TBC Skin
+	if not AS.Retail then
+		AS:SkinDropDownBox(AuctionatorShoppingListFrame.ListDropdown, 200)
+	end
+
 	-- create list backdrop
 	for _, frame in next, {recentList, shoppingList} do
 		for i = 1, frame:GetNumRegions() do
