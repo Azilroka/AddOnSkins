@@ -83,16 +83,18 @@ local function SkinMainFrames()
 	AS:StripTextures(config)
 	AS:SetTemplate(config, 'Transparent')
 
-	AS:StripTextures(cancelling.ResultsListing)
-	AS:SetTemplate(cancelling.ResultsListing.ScrollFrame, 'Transparent')
-	cancelling.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', cancelling.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 16, -6)
-	selling.CurrentItemListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentItemListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
-	selling.HistoricalPriceListing.ScrollFrame:SetPoint('TOPLEFT', selling.HistoricalPriceListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
-	list.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', list.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 15, -4)
-	list.ListDropdown:ClearAllPoints()
-	list.ListDropdown:Point('RIGHT', list.Export, 'LEFT', -20, -2)
-	list.ExportCSV:ClearAllPoints()
-	list.ExportCSV:Point('TOPRIGHT', list, 'BOTTOMRIGHT', -2, -2)
+	if AS.Retail then
+		AS:StripTextures(cancelling.ResultsListing)
+		AS:SetTemplate(cancelling.ResultsListing.ScrollFrame, 'Transparent')
+		cancelling.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', cancelling.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 16, -6)
+		selling.CurrentItemListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentItemListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
+		selling.HistoricalPriceListing.ScrollFrame:SetPoint('TOPLEFT', selling.HistoricalPriceListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
+		list.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', list.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 15, -4)
+		list.ListDropdown:ClearAllPoints()
+		list.ListDropdown:Point('RIGHT', list.Export, 'LEFT', -20, -2)
+		list.ExportCSV:ClearAllPoints()
+		list.ExportCSV:Point('TOPRIGHT', list, 'BOTTOMRIGHT', -2, -2)
+	end
 
 	AS:StripTextures(list.ShoppingResultsInset)
 	AS:StripTextures(cancelling.HistoricalPriceInset)
@@ -103,23 +105,25 @@ local function SkinMainFrames()
 	list.Export:ClearAllPoints()
 	list.Export:Point('RIGHT', list.Import, 'LEFT', -3, 0)
 
-	recentList.InsetFrame:StripTextures()
-	recentList.InsetFrame:Point('TOPLEFT', recentList, 'TOPLEFT', 3, 0)
-	shoppingList.InsetFrame:StripTextures()
-	shoppingList.InsetFrame:Point('TOPLEFT', shoppingList, 'TOPLEFT', 3, 0)
-	AS:StripTextures(selling.HistoricalPriceInset)
-	AS:SetTemplate(selling.HistoricalPriceInset, 'Transparent')
-	selling.HistoricalPriceInset:SetPoint('TOPLEFT', selling.HistoricalPriceListing, 'TOPLEFT', -7, -25)
-	selling.HistoricalPriceInset:SetPoint('BOTTOMRIGHT', selling.HistoricalPriceListing, 'BOTTOMRIGHT', -2, 0)
-	AS:StripTextures(selling.CurrentItemInset)
-	AS:SetTemplate(selling.CurrentItemInset, 'Transparent')
-	selling.CurrentItemInset:SetPoint('TOPLEFT', selling.CurrentItemListing, 'TOPLEFT', -7, -25)
-	selling.CurrentItemInset:SetPoint('BOTTOMRIGHT', selling.CurrentItemListing, 'BOTTOMRIGHT', -2, 0)
-	AS:StripTextures(selling.BagInset)
-	AS:StripTextures(selling.BagListing.ScrollFrame)
-	AS:CreateBackdrop(selling.BagListing.ScrollFrame, 'Transparent')
-	AS:SetOutside(selling.BagListing.ScrollFrame, selling.BagListing)
-	AS:SetOutside(selling.BagListing.ScrollFrame.Backdrop, selling.BagListing, 5, 5)
+	if AS.Retail then
+		recentList.InsetFrame:StripTextures()
+		recentList.InsetFrame:Point('TOPLEFT', recentList, 'TOPLEFT', 3, 0)
+		shoppingList.InsetFrame:StripTextures()
+		shoppingList.InsetFrame:Point('TOPLEFT', shoppingList, 'TOPLEFT', 3, 0)
+		AS:StripTextures(selling.HistoricalPriceInset)
+		AS:SetTemplate(selling.HistoricalPriceInset, 'Transparent')
+		selling.HistoricalPriceInset:SetPoint('TOPLEFT', selling.HistoricalPriceListing, 'TOPLEFT', -7, -25)
+		selling.HistoricalPriceInset:SetPoint('BOTTOMRIGHT', selling.HistoricalPriceListing, 'BOTTOMRIGHT', -2, 0)
+		AS:StripTextures(selling.CurrentItemInset)
+		AS:SetTemplate(selling.CurrentItemInset, 'Transparent')
+		selling.CurrentItemInset:SetPoint('TOPLEFT', selling.CurrentItemListing, 'TOPLEFT', -7, -25)
+		selling.CurrentItemInset:SetPoint('BOTTOMRIGHT', selling.CurrentItemListing, 'BOTTOMRIGHT', -2, 0)
+		AS:StripTextures(selling.BagInset)
+		AS:StripTextures(selling.BagListing.ScrollFrame)
+		AS:CreateBackdrop(selling.BagListing.ScrollFrame, 'Transparent')
+		AS:SetOutside(selling.BagListing.ScrollFrame, selling.BagListing)
+		AS:SetOutside(selling.BagListing.ScrollFrame.Backdrop, selling.BagListing, 5, 5)
+	end
 
 	AS:SkinButton(list.ExportCSV)
 
@@ -155,16 +159,20 @@ local function SkinMainFrames()
 		AS:SkinButton(button)
 	end
 
-	for _, scrollbar in next, {
+	local scrollBars = {
 		_G.AuctionatorSellingFrameScrollBar,
 		cancelling.ResultsListing.ScrollFrame.scrollBar,
 		recentList.ScrollFrame.scrollBar,
 		shoppingList.ScrollFrame.scrollBar,
 		list.ResultsListing.ScrollFrame.scrollBar,
-		selling.CurrentItemListing.ScrollFrame.scrollBar,
-		selling.HistoricalPriceListing.ScrollFrame.scrollBar,
-		selling.ResultsListing.ScrollFrame.scrollBar
-	} do
+	}
+	if AS.Retail then
+		tinsert(scrollBars, selling.CurrentItemListing.ScrollFrame.scrollBar)
+		tinsert(scrollBars, selling.HistoricalPriceListing.ScrollFrame.scrollBar)
+		tinsert(scrollBars, selling.ResultsListing.ScrollFrame.scrollBar)
+	end
+
+	for _, scrollbar in next, scrollBars do
 		AS:SkinScrollBar(scrollbar)
 
 		scrollbar:ClearAllPoints()
@@ -181,27 +189,25 @@ local function SkinMainFrames()
 		end
 	end
 
-	for _, tab in next, {
+	local tabs = {
 		_G.AuctionatorTabs_Auctionator,
 		_G.AuctionatorTabs_Cancelling,
 		_G.AuctionatorTabs_Selling,
 		_G.AuctionatorTabs_ShoppingLists,
-		selling.HistoryTabsContainer.RealmHistoryTab,
-		selling.HistoryTabsContainer.YourHistoryTab,
 		shopTabs.ListTab,
-		shopTabs.RecentsTab
-	} do
+		shopTabs.RecentsTab,
+	}
+	if AS.Retail then
+		tinsert(tabs, selling.HistoryTabsContainer.RealmHistoryTab)
+		tinsert(tabs, selling.HistoryTabsContainer.YourHistoryTab)
+	end
+
+	for _, tab in next, tabs do
 		AS:SkinTab(tab)
 	end
 
-	for _, editbox in next, {
+	local editBoxes = {
 		list.OneItemSearchBox,
-
-		--Selling
-		selling.SaleItemFrame.Quantity,
-		selling.SaleItemFrame.Price.MoneyInput.GoldBox,
-		selling.SaleItemFrame.Price.MoneyInput.SilverBox,
-		selling.SaleItemFrame.Price.MoneyInput.CopperBox,
 
 		--Config
 		config.DiscordLink,
@@ -209,8 +215,16 @@ local function SkinMainFrames()
 		config.BugReportLink,
 
 		--Cancelling
-		cancelling.SearchFilter
-	} do
+		cancelling.SearchFilter,
+	}
+	if AS.Retail then
+		tinsert(editBoxes, selling.SaleItemFrame.Quantity)
+		tinsert(editBoxes, selling.SaleItemFrame.Price.MoneyInput.GoldBox)
+		tinsert(editBoxes, selling.SaleItemFrame.Price.MoneyInput.SilverBox)
+		tinsert(editBoxes, selling.SaleItemFrame.Price.MoneyInput.CopperBox)
+	end
+
+	for _, editbox in next, editBoxes do
 		AS:SkinEditBox(editbox)
 
 		if editbox.iconAtlas or editbox.labelText == 'Quantity' then
@@ -221,19 +235,24 @@ local function SkinMainFrames()
 		end
 	end
 
-	selling.SaleItemFrame.MaxButton:ClearAllPoints()
-	selling.SaleItemFrame.MaxButton:SetPoint('LEFT', selling.SaleItemFrame.Quantity.Backdrop, 'RIGHT', 5, 0)
+	if AS.Retail then
+		selling.SaleItemFrame.MaxButton:ClearAllPoints()
+		selling.SaleItemFrame.MaxButton:SetPoint('LEFT', selling.SaleItemFrame.Quantity.Backdrop, 'RIGHT', 5, 0)
 
-	selling.SaleItemFrame.SkipButton:ClearAllPoints()
-	selling.SaleItemFrame.SkipButton:SetPoint('TOPLEFT', selling.SaleItemFrame.PostButton, 'TOPRIGHT', 2, 0)
+		selling.SaleItemFrame.SkipButton:ClearAllPoints()
+		selling.SaleItemFrame.SkipButton:SetPoint('TOPLEFT', selling.SaleItemFrame.PostButton, 'TOPRIGHT', 2, 0)
+	end
 
-	for _, header in next, {
+	local headers = {
 		{ frame = list.ResultsListing.HeaderContainer, x = -20, y = -1 },
 		cancelling.ResultsListing.HeaderContainer,
-		selling.CurrentItemListing.HeaderContainer,
-		selling.HistoricalPriceListing.HeaderContainer,
-		selling.ResultsListing.HeaderContainer
-	} do
+	}
+	if AS.Retail then
+		tinsert(headers, selling.CurrentItemListing.HeaderContainer)
+		tinsert(headers, selling.HistoricalPriceListing.HeaderContainer)
+		tinsert(headers, selling.ResultsListing.HeaderContainer)
+	end
+	for _, header in next, headers do
 		if header.frame then
 			SkinHeaders(header.frame, header.x, header.y)
 		else
