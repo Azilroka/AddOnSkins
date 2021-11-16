@@ -173,7 +173,7 @@ AS.Options.args.about = ACH:Group(ASL['About/Help'], nil, -2, 'tab')
 AS.Options.args.about.args.links = ACH:Group(ASL['Links'], nil, 1)
 AS.Options.args.about.args.links.inline = true
 AS.Options.args.about.args.links.args.tukuilink = ACH:Input(ASL['Download Link'], nil, 1, nil, 'full', function() return 'https://www.tukui.org/addons.php?id=3' end)
-AS.Options.args.about.args.links.args.gitlablink = ACH:Input(ASL['GitLab Link / Report Errors'], nil, 2, nil, 'full', function() return 'https://git.tukui.org/Azilroka/AddOnSkins' end)
+AS.Options.args.about.args.links.args.gitlablink = ACH:Input(ASL['GitLab Link / Report Errors'], nil, 2, nil, 'full', function() return 'https://github.com/Azilroka/AddOnSkins' end)
 
 AS.Options.args.about.args.credits = ACH:Group(ASL['Credits'], nil, -1)
 AS.Options.args.about.args.credits.inline = true
