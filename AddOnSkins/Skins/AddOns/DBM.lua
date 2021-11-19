@@ -109,23 +109,6 @@ function AS:DBM(event, addon)
 			DBT:SetSkin("AddOnSkins")
 		end
 	end
-
-	if addon == 'DBM-GUI' then
-		DBM_GUI_OptionsFrame:HookScript('OnShow', function()
-			AS:SkinFrame(DBM_GUI_OptionsFrame)
-			AS:SkinFrame(DBM_GUI_OptionsFrameList)
-			AS:SkinFrame(DBM_GUI_OptionsFrameBossMods)
-			AS:SkinFrame(DBM_GUI_OptionsFrameDBMOptions)
-			AS:SkinFrame(DBM_GUI_OptionsFramePanelContainer)
-		end)
-
-		AS:SkinTab(DBM_GUI_OptionsFrameTab1)
-		AS:SkinTab(DBM_GUI_OptionsFrameTab2)
-		AS:SkinButton(DBM_GUI_OptionsFrameOkay, true)
-		AS:SkinButton(DBM_GUI_OptionsFrameWebsiteButton, true)
-		AS:SkinScrollBar(DBM_GUI_OptionsFramePanelContainerFOVScrollBar)
-		AS:UnregisterSkinEvent('DBM-Core', event)
-	end
 end
 
 AS:RegisterSkin('DBM-Core', AS.DBM, 'ADDON_LOADED')
