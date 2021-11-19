@@ -1155,45 +1155,11 @@ function AS:SkinTextWithStateWidget(widgetFrame)
 	end
 end
 
-function AS:SkinIconAndTextWidget(widgetFrame) end
-function AS:SkinCaptureBarWidget(widgetFrame) end
-function AS:SkinDoubleStatusBarWidget(widgetFrame) end
-function AS:SkinIconTextAndBackgroundWidget(widgetFrame) end
-function AS:SkinDoubleIconAndTextWidget(widgetFrame) end
-function AS:SkinStackedResourceTrackerWidget(widgetFrame) end
-function AS:SkinIconTextAndCurrenciesWidget(widgetFrame) end
-function AS:SkinHorizontalCurrenciesWidget(widgetFrame) end
-function AS:SkinBulletTextListWidget(widgetFrame) end
-function AS:SkinScenarioHeaderCurrenciesAndBackgroundWidget(widgetFrame) end
-function AS:SkinTextureAndTextWidget(widgetFrame) end
-function AS:SkinSpellDisplay(widgetFrame) end
-function AS:SkinDoubleStateIconRow(widgetFrame) end
-function AS:SkinTextureAndTextRowWidget(widgetFrame) end
-function AS:SkinZoneControl(widgetFrame) end
-
 local W = Enum.UIWidgetVisualizationType;
 AS.WidgetSkinningFuncs = {
-	[W.IconAndText] = 'SkinIconAndTextWidget',
-	[W.CaptureBar] = 'SkinCaptureBarWidget',
 	[W.StatusBar] = 'SkinStatusBarWidget',
-	[W.DoubleStatusBar] = 'SkinDoubleStatusBarWidget',
-	[W.IconTextAndBackground] = 'SkinIconTextAndBackgroundWidget',
-	[W.DoubleIconAndText] = 'SkinDoubleIconAndTextWidget',
-	[W.StackedResourceTracker] = 'SkinStackedResourceTrackerWidget',
-	[W.IconTextAndCurrencies] = 'SkinIconTextAndCurrenciesWidget',
 	[W.TextWithState] = 'SkinTextWithStateWidget',
-	[W.HorizontalCurrencies] = 'SkinHorizontalCurrenciesWidget',
-	[W.BulletTextList] = 'SkinBulletTextListWidget',
-	[W.ScenarioHeaderCurrenciesAndBackground] = 'SkinScenarioHeaderCurrenciesAndBackgroundWidget',
 }
-
-if AS.Retail then
-	AS.WidgetSkinningFuncs[W.TextureAndText] = 'SkinTextureAndTextWidget'
-	AS.WidgetSkinningFuncs[W.SpellDisplay] = 'SkinSpellDisplay'
-	AS.WidgetSkinningFuncs[W.DoubleStateIconRow] = 'SkinDoubleStateIconRow'
-	AS.WidgetSkinningFuncs[W.TextureAndTextRow] = 'SkinTextureAndTextRowWidget'
-	AS.WidgetSkinningFuncs[W.ZoneControl] = 'SkinZoneControl'
-end
 
 function AS:SkinWidgetContainer(widgetContainer)
 	for _, child in ipairs({widgetContainer:GetChildren()}) do
