@@ -6,7 +6,7 @@ function AS:ExtendedCharacterStats()
 
 	-- Main frame
 	ECS_StatsFrame:ClearAllPoints()
-	ECS_StatsFrame:Point('RIGHT', _G.CharacterFrame, 169, 32)
+	ECS_StatsFrame:Point('RIGHT', _G.CharacterFrame, 149, 32)
 	ECS_StatsFrame:SetHeight(424)
 	AS:SkinFrame(ECS_StatsFrame)
 
