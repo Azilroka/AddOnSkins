@@ -28,6 +28,7 @@ function AS:Blizzard_Character()
 	_G.CHARACTERFRAME_EXPANDED_WIDTH = 580
 
 	AS:SkinFrame(_G.CharacterFrame)
+	_G.CharacterLevelText:SetFont(AS.Font, 11)
 	AS:SkinCloseButton(_G.CharacterFrame.CloseButton)
 
 	_G.CharacterFrame:HookScript('OnShow', function() PaperDollBgDesaturate(false) end)
@@ -96,6 +97,7 @@ function AS:Blizzard_Character()
 
 	_G.CharacterStatsPane.ItemLevelFrame.Background:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
 	_G.CharacterStatsPane.ItemLevelFrame.Background:SetVertexColor(unpack(AS.Color))
+	_G.CharacterStatsPane.ItemLevelFrame.Value:SetFont(AS.Font, 15, 'OUTLINE')
 
 	for i = 1, _G.CharacterFrame.numTabs do
 		AS:SkinTab(_G["CharacterFrameTab"..i])
@@ -160,6 +162,7 @@ function AS:Blizzard_Character()
 				Title.Stripe:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Highlight]])
 				Title.Stripe.SetColorTexture = AS.Noop
 				Title.Check:SetTexture([[Interface\Buttons\UI-CheckBox-Check]])
+				Title.text:SetFont(AS.Font, 10)
 				Title.text:SetTextColor(1, 1, 1)
 				Title:HookScript('OnEnter', function(self) self.text:SetTextColor(unpack(AS.Color)) end)
 				Title:HookScript('OnLeave', function(self) self.text:SetTextColor(1, 1, 1) end)
