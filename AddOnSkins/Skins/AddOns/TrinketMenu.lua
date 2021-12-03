@@ -68,6 +68,16 @@ function AS:TrinketMenu()
 		AS:SkinSlideBar(slider)
 	end
 
+	-- Main Frame
+	AS:SkinFrame(TrinketMenu_MainFrame)
+	AS:SkinFrame(TrinketMenu_MenuFrame)
+	AS:SkinIconButton(TrinketMenu_Trinket0)
+	AS:SkinIconButton(TrinketMenu_Trinket1)
+
+	for i = (TrinketMenu.NumberOfTrinkets + 1), TrinketMenu.MaxTrinkets do
+		local trinkets = _G['TrinketMenu_Menu'..i]
+		AS:SkinIconButton(trinkets)
+	end
 end
 
 AS:RegisterSkin('TrinketMenu', AS.TrinketMenu)
