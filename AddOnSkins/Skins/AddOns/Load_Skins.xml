@@ -138,6 +138,7 @@
 	<Script file="TomTom.lua"/>
 	<Script file="Tongues.lua"/>
 	<Script file="TrainAll.lua"/>
+	<Script file="TrinketMenu.lua"/>
 	<Script file="Vendomatic.lua"/>
 	<Script file="WardrobeSort.lua"/>
 	<Script file="WhisperPop.lua"/>
