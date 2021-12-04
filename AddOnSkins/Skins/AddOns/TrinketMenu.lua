@@ -69,8 +69,6 @@ function AS:TrinketMenu()
 	end
 
 	-- Main Frame
-	AS:SkinFrame(TrinketMenu_MainFrame)
-	AS:SkinFrame(TrinketMenu_MenuFrame)
 	AS:SkinIconButton(TrinketMenu_Trinket0)
 	AS:SkinIconButton(TrinketMenu_Trinket1)
 
