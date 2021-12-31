@@ -17,17 +17,5 @@ jobs:
     steps:
       - name: Clone project
         uses: actions/checkout@v1
-        with:
-          fetch-depth: 100
-      - name: Retail
-        uses: BigWigsMods/packager@master
-        with:
-          args: -g retail
-      - name: Classic
-        uses: BigWigsMods/packager@master
-        with:
-          args: -g classic
-      - name: Burning Crusade Classic
-        uses: BigWigsMods/packager@master
-        with:
-          args: -g bcc
+      - name: Package
+        uses: BigWigsMods/packager@multitoc
