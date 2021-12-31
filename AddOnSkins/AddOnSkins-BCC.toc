@@ -1,9 +1,9 @@
-## Interface: 20501
+## Interface: 20502
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
 ## Version: 4.57
 ## Author: Azilroka
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
-## OptionalDeps: ElvUI
+## OptionalDeps: AllTheThings, ElvUI
 ## X-Curse-Project-ID: 54541
 ## X-Wago-ID: RXKqy5Ky
 
