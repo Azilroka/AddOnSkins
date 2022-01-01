@@ -255,6 +255,11 @@ function AS:UpdateMedia()
 	AS.BorderColor = { 0, 0, 0 }
 	AS.Color = AS.ClassColor
 	AS.HideShadows = false
+
+	if AS:CheckOption('SkinTemplate') then
+		AS.BackdropColor = AS:CheckOption('CustomBackdropColor')
+		AS.BorderColor = AS:CheckOption('CustomBorderColor')
+	end
 end
 
 function AS:GetPixelScale()

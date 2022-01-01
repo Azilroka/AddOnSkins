@@ -30,6 +30,11 @@ if AddOnSkins.Classic then
 		AS.Font = C['Medias']['Font']
 		AS.BackdropColor = C['General']['BackdropColor']
 		AS.BorderColor = C['General']['BorderColor']
+
+		if AS:CheckOption('SkinTemplate') then
+			AS.BackdropColor = AS:CheckOption('CustomBackdropColor')
+			AS.BorderColor = AS:CheckOption('CustomBorderColor')
+		end
 	end
 else
 	function AS:UpdateMedia()
@@ -59,5 +64,10 @@ else
 		AS.Font = C.Medias.Font
 		AS.BackdropColor = C.General.BackdropColor
 		AS.BorderColor = C.General.BorderColor
+
+		if AS:CheckOption('SkinTemplate') then
+			AS.BackdropColor = AS:CheckOption('CustomBackdropColor')
+			AS.BorderColor = AS:CheckOption('CustomBorderColor')
+		end
 	end
 end

@@ -16,6 +16,11 @@ function AS:UpdateMedia()
 	AS.Color = E["media"].rgbvaluecolor or AS.ClassColor
 	AS.HideShadows = false
 
+	if AS:CheckOption('SkinTemplate') then
+		AS.BackdropColor = AS:CheckOption('CustomBackdropColor')
+		AS.BorderColor = AS:CheckOption('CustomBorderColor')
+	end
+
 	AS.TexCoords = { 0, 1, 0, 1 }
 	local modifier = 0.04 * _G.ElvUI[1].db.general.cropIcon
 	for i, v in ipairs(AS.TexCoords) do
