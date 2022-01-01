@@ -74,7 +74,7 @@ function AS:Blizzard_Character()
 	end
 
 	hooksecurefunc('PaperDollItemSlotButton_Update', function(self, cooldownOnly)
-		if cooldownOnly then return end
+		if cooldownOnly and self.SetBackdropBorderColor then return end
 
 		local rarity = GetInventoryItemQuality('player', self:GetID())
 		if rarity and rarity > 1 then
