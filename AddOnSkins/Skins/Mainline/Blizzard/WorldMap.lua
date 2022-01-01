@@ -208,7 +208,7 @@ function AS:Blizzard_Quest()
 	QuestLogPopupDetailFrame.ShowMapButton.Text:SetPoint("CENTER", AS.Mult, 0)
 	QuestLogPopupDetailFrame.ShowMapButton:SetSize(QuestLogPopupDetailFrame.ShowMapButton:GetWidth() - 30, QuestLogPopupDetailFrame.ShowMapButton:GetHeight() - 5)
 
-	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(QuestFrame, parentFrame, portrait, text, name, x, y)
+	hooksecurefunc("QuestFrame_ShowQuestPortrait", function(QuestFrame, _, _, _, _, _, x, y)
 		QuestModelScene:ClearAllPoints()
 		QuestModelScene:SetPoint("TOPLEFT", QuestFrame, "TOPRIGHT", x + 10, y)
 	end)
