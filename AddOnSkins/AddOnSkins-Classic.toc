@@ -1,6 +1,6 @@
 ## Interface: 11401
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
-## Version: 4.57
+## Version: 4.58
 ## Author: Azilroka
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 ## OptionalDeps: AllTheThings, ElvUI
