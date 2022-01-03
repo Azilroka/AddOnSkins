@@ -16,7 +16,7 @@ function AS:UpdateMedia()
 	AS.Color = E["media"].rgbvaluecolor or AS.ClassColor
 	AS.HideShadows = false
 
-	if AS:CheckOption('SkinTemplate') then
+	if AS:CheckOption('SkinTemplate') == 'Custom' then
 		AS.BackdropColor = AS:CheckOption('CustomBackdropColor')
 		AS.BorderColor = AS:CheckOption('CustomBorderColor')
 	end

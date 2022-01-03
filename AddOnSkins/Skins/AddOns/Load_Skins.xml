@@ -72,6 +72,7 @@
 	<Script file="InspectEquip.lua"/>
 	<Script file="InstanceProfits.lua"/>
 	<Script file="InvenMount.lua"/>
+	<Script file="ItemRack.lua"/>
 	<Script file="KarniCrap.lua"/>
 	<Script file="Keyed.lua"/>
 	<Script file="Libraries.lua"/>
