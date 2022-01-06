@@ -30,7 +30,7 @@ function AS:Blizzard_ChatBubbles()
 		local chatBubble = frame:GetChildren()
 		if chatBubble and not chatBubble:IsForbidden() then
 			local r, g, b = chatBubble.String:GetTextColor()
-			frame:SetBackdropBorderColor(r, g, b, .8)
+			frame.Backdrop:SetBackdropBorderColor(r, g, b, .8)
 
 			local text = chatBubble.String:GetText()
 			if chatBubble.name then
@@ -47,16 +47,21 @@ function AS:Blizzard_ChatBubbles()
 		end
 	end
 
+	local bubbleParts = { 'BottomRightCorner', 'BottomLeftCorner', 'TopLeftCorner',	'TopRightCorner', 'Center', 'LeftEdge', 'TopEdge', 'BottomEdge', 'RightEdge', 'Tail' }
 	local function SkinChatBubble(frame)
 		local chatBubble = frame:GetChildren()
 		if chatBubble and not chatBubble:IsForbidden() then
-			chatBubble:ClearBackdrop()
-			AS:SkinFrame(frame)
-			chatBubble.Tail:SetTexture('')
+			for _, tex in next, bubbleParts do
+				chatBubble[tex]:SetTexture('')
+			end
 
-			chatBubble.name = chatBubble:CreateFontString(nil, "BORDER")
-			chatBubble.name:SetPoint("TOPLEFT", 5, 5)
-			chatBubble.name:SetPoint("BOTTOMRIGHT", chatBubble, "TOPRIGHT", -5, -5)
+			AS:SkinBackdropFrame(frame)
+			frame.Backdrop:SetScale(UIParent:GetEffectiveScale())
+			AS:SetInside(frame.Backdrop, frame, 10, 10)
+
+			chatBubble.name = frame.Backdrop:CreateFontString(nil, "BORDER")
+			chatBubble.name:SetPoint('BOTTOMLEFT', frame.Backdrop, 'TOPLEFT', 0, 2)
+			chatBubble.name:SetPoint('BOTTOMRIGHT', frame.Backdrop, 'TOPRIGHT', 0, 2)
 			chatBubble.name:SetJustifyH("LEFT")
 			chatBubble.name:SetFont(AS.Font, 14, 'OUTLINE')
 

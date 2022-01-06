@@ -30,9 +30,6 @@ function AS:UpdateMedia()
 	AS.BackdropColor = C.General.BackdropColor
 	AS.BorderColor = C.General.BorderColor
 
-	print(AS.BackdropColor)
-	print(AS.BorderColor)
-
 	if AS:CheckOption('SkinTemplate') == 'Custom' then
 		AS.BackdropColor = AS:CheckOption('CustomBackdropColor')
 		AS.BorderColor = AS:CheckOption('CustomBorderColor')

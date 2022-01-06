@@ -81,7 +81,7 @@ function AS:CleanTexture(Object, Kill, Alpha)
 	elseif Alpha then
 		Object:SetAlpha(0)
 	else
-		Object:SetTexture()
+		Object:SetTexture('')
 	end
 end
 
