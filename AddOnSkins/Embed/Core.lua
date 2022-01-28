@@ -96,8 +96,6 @@ function AS:EmbedInit()
 				end
 			end)
 
-			UIParent:GetScript('OnShow')(UIParent)
-
 			for _, Function in pairs({"FCF_Close", "FCF_OpenNewWindow", "FCF_SetWindowName"}) do
 				hooksecurefunc(Function, function()
 					if AS:CheckOption('HideChatFrame') ~= 'NONE' and not FCF_IsValidChatFrame(_G[AS:CheckOption('HideChatFrame')]) then
@@ -143,7 +141,7 @@ function AS:Embed_Check(Message)
 	end
 
 	AS:EmbedSystem_WindowResize()
-	EmbedSystem_MainWindow:SetShown(not AS:CheckOption('EmbedIsHidden'))
+	EmbedSystem_MainWindow:SetShown(not (AS:CheckOption('EmbedIsHidden') or AS:CheckOption('EmbedOoC')))
 
 	for _, Window in pairs({EmbedSystem_MainWindow, EmbedSystem_LeftWindow, EmbedSystem_RightWindow}) do
 		Window:SetFrameStrata(strsub(AS:CheckOption('EmbedFrameStrata'), 3))
