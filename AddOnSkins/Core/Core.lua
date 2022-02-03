@@ -139,11 +139,9 @@ function AS:RegisterSkin(addonName, skinFunc, ...)
 			events[event] = true
 		end
 	end
-
 	local registerMe = { func = skinFunc, events = events, priority = priority }
-	if not AS.register[addonName] then AS.register[addonName] = { funcs = {} } end
-
-	tinsert(AS.register[addonName].funcs, registerMe)
+	if not AS.register[addonName] then AS.register[addonName] = {} end
+	AS.register[addonName][skinFunc] = registerMe
 end
 
 function AS:UnregisterSkin(addonName, skinFunc)
