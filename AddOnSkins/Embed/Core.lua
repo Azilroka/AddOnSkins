@@ -9,8 +9,11 @@ local strsub = strsub
 local CreateFrame = CreateFrame
 local FCF_IsValidChatFrame = FCF_IsValidChatFrame
 local FCF_IsChatWindowIndexActive = FCF_IsChatWindowIndexActive
+local FCF_GetChatWindowInfo = FCF_GetChatWindowInfo
 local hooksecurefunc = hooksecurefunc
 local UIParent = UIParent
+
+local NUM_CHAT_WINDOWS = NUM_CHAT_WINDOWS
 
 AS.ChatFrameHider = CreateFrame('Frame')
 AS.ChatFrameHider:Hide()
@@ -30,7 +33,7 @@ if not FCF_IsChatWindowIndexActive then
 end
 
 function AS:GetChatWindowInfo()
-	local ChatTabInfo = {['NONE'] = 'NONE'}
+	local ChatTabInfo = { NONE = 'NONE'}
 	for i = 1, NUM_CHAT_WINDOWS do
 		if i ~= 2 and FCF_IsChatWindowIndexActive(i) then
 			ChatTabInfo["ChatFrame"..i] = _G["ChatFrame"..i.."Tab"]:GetText()

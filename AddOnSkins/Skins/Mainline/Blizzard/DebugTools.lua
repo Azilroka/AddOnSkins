@@ -15,19 +15,13 @@ function AS:Blizzard_DebugTools(event, addon)
 		AS:SkinBackdropFrame(ScriptErrorsFrame.ScrollFrame)
 		ScriptErrorsFrame.ScrollFrame:SetFrameLevel(ScriptErrorsFrame.ScrollFrame:GetFrameLevel() + 2)
 	end
+
 	if addon ~= 'Blizzard_DebugTools' then return end
-
-	AS:SkinFrame(EventTraceFrame)
-	AS:SkinScrollBar(EventTraceFrameScroll)
-	AS:SkinCloseButton(EventTraceFrameCloseButton)
-
-	AS:SkinTooltip(EventTraceTooltip)
-
 	AS:SkinTooltip(FrameStackTooltip)
 
 	local function SkinTableAttributeDisplay(frame)
 		AS:SkinFrame(frame)
-		AS:SkinFrame(frame.ScrollFrameArt)
+		AS:SkinBackdropFrame(frame.ScrollFrameArt)
 
 		AS:SkinCloseButton(frame.CloseButton)
 
@@ -69,4 +63,4 @@ function AS:Blizzard_DebugTools(event, addon)
 	AS:UnregisterSkinEvent(addon, event)
 end
 
-AS:RegisterSkin('Blizzard_DebugTools', AS.Blizzard_DebugTools, 'ADDON_LOADED')
+ AS:RegisterSkin('Blizzard_DebugTools', AS.Blizzard_DebugTools, 'ADDON_LOADED')

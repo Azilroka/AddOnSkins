@@ -53,7 +53,7 @@ function AS:Blizzard_PVPUI(event, addon)
 	AS:StripTextures(HonorFrame.BonusFrame)
 	AS:StripTextures(HonorFrame.BonusFrame.ShadowOverlay)
 
-	local Buttons = { ['RandomBGButton'] = HonorFrame.BonusFrame, ['RandomEpicBGButton'] = HonorFrame.BonusFrame, ['Arena1Button'] = HonorFrame.BonusFrame, ['BrawlButton'] = HonorFrame.BonusFrame, ['RatedBG'] = ConquestFrame, ['Arena2v2'] = ConquestFrame, ['Arena3v3'] = ConquestFrame }
+	local Buttons = { RandomBGButton = HonorFrame.BonusFrame, RandomEpicBGButton = HonorFrame.BonusFrame, Arena1Button = HonorFrame.BonusFrame, BrawlButton = HonorFrame.BonusFrame, RatedBG = ConquestFrame, Arena2v2 = ConquestFrame, Arena3v3 = ConquestFrame }
 
 	for Section, Parent in pairs(Buttons) do
 		local Button = Parent[Section]
@@ -93,7 +93,7 @@ function AS:Blizzard_PVPUI(event, addon)
 
 		if currencyRewards then
 			for _, reward in ipairs(currencyRewards) do
-				local name, _, texture, _, _, _, _, quality = GetCurrencyInfo(reward.id)
+				local name, _, texture, _, _, _, _, quality = C_CurrencyInfo.GetCurrencyInfo(reward.id)
 				if quality == LE_ITEM_QUALITY_ARTIFACT then
 					_, rewardTexture, _, rewardQuaility = CurrencyContainerUtil.GetCurrencyContainerInfo(reward.id, reward.quantity, name, texture, quality)
 				end
@@ -154,7 +154,7 @@ function AS:Blizzard_PVPUI(event, addon)
 		hooksecurefunc(Frame.ConquestBar.Reward.Icon, 'SetTexture', function(self) -- Code taken from :GetConquestLevelInfo the function isn't returning the correct id somehow.
 			local Quality
 			for _, questID in ipairs(C_QuestLine.GetQuestLineQuests(782)) do
-				if not IsQuestFlaggedCompleted(questID) and not C_QuestLog.IsOnQuest(questID) then
+				if not C_QuestLog.IsQuestFlaggedCompleted(questID) and not C_QuestLog.IsOnQuest(questID) then
 					break
 				end
 				if HaveQuestRewardData(questID) then

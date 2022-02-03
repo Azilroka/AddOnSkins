@@ -272,16 +272,16 @@ function AS:Blizzard_PvE()
 
 --	LFGListFrame.EntryCreation.CancelButton:SetPoint("BOTTOMLEFT", -1, 3)
 --	LFGListFrame.EntryCreation.ListGroupButton:SetPoint("BOTTOMRIGHT", -6, 3)
-	AS:SkinEditBox(LFGListFrame.EntryCreation.Description)
 
 	AS:SkinEditBox(LFGListFrame.EntryCreation.Name)
+	AS:StripTextures(LFGListFrame.EntryCreation.Description)
+	AS:SkinEditBox(LFGListFrame.EntryCreation.Description)
 	AS:SkinEditBox(LFGListFrame.EntryCreation.ItemLevel.EditBox)
 	AS:SkinEditBox(LFGListFrame.EntryCreation.PVPRating.EditBox)
 	AS:SkinEditBox(LFGListFrame.EntryCreation.VoiceChat.EditBox)
 
 	AS:SkinDropDownBox(LFGListFrame.EntryCreation.ActivityDropDown)
 	AS:SkinDropDownBox(LFGListFrame.EntryCreation.GroupDropDown)
-	AS:SkinDropDownBox(LFGListFrame.EntryCreation.CategoryDropDown, 330)
 
 	AS:SkinCheckBox(LFGListFrame.EntryCreation.ItemLevel.CheckButton)
 	AS:SkinCheckBox(LFGListFrame.EntryCreation.PVPRating.CheckButton)
