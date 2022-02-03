@@ -276,7 +276,7 @@ function AS:Blizzard_PvE()
 
 	AS:SkinEditBox(LFGListFrame.EntryCreation.Name)
 	AS:SkinEditBox(LFGListFrame.EntryCreation.ItemLevel.EditBox)
-	AS:SkinEditBox(LFGListFrame.EntryCreation.HonorLevel.EditBox)
+	AS:SkinEditBox(LFGListFrame.EntryCreation.PVPRating.EditBox)
 	AS:SkinEditBox(LFGListFrame.EntryCreation.VoiceChat.EditBox)
 
 	AS:SkinDropDownBox(LFGListFrame.EntryCreation.ActivityDropDown)
@@ -284,7 +284,7 @@ function AS:Blizzard_PvE()
 	AS:SkinDropDownBox(LFGListFrame.EntryCreation.CategoryDropDown, 330)
 
 	AS:SkinCheckBox(LFGListFrame.EntryCreation.ItemLevel.CheckButton)
-	AS:SkinCheckBox(LFGListFrame.EntryCreation.HonorLevel.CheckButton)
+	AS:SkinCheckBox(LFGListFrame.EntryCreation.PVPRating.CheckButton)
 	AS:SkinCheckBox(LFGListFrame.EntryCreation.VoiceChat.CheckButton)
 	AS:SkinCheckBox(LFGListFrame.EntryCreation.PrivateGroup.CheckButton)
 
