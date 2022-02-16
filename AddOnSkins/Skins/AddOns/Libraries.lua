@@ -217,6 +217,16 @@ function AS:SkinLibraries()
 				end
 			end
 		end, 0)
+		AS:RawHook(LET, "GetFreeExtraTipObject", function(self)
+			local tooltip = AS.hooks[self].GetFreeExtraTipObject(self)
+
+			if not tooltip.isSkinned then
+				AS:SetTemplate(tooltip)
+				tooltip.isSkinned = true
+			end
+
+			return tooltip
+		end)
 	end
 
 	local LQT = LibStub("LibQTip-1.0", true)
