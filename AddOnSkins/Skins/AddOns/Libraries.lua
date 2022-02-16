@@ -162,20 +162,6 @@ function AS:SkinLibraries()
 		SkinTablet2(Tablet)
 	end
 
-	local LibExtraTip = LibStub("LibExtraTip-1", true)
-	if LibExtraTip and not AS:IsHooked(LibExtraTip, "GetFreeExtraTipObject") then
-		AS:RawHook(LibExtraTip, "GetFreeExtraTipObject", function(self)
-			local tooltip = AS.hooks[self].GetFreeExtraTipObject(self)
-
-			if not tooltip.isSkinned then
-				AS:SetTemplate(tooltip)
-				tooltip.isSkinned = true
-			end
-
-			return tooltip
-		end)
-	end
-
 	local LRC = LibStub("LibRockConfig-1.0", true)
 	if LRC then
 		SkinRockConfig(LRC)
@@ -210,6 +196,15 @@ function AS:SkinLibraries()
 		DBIcon.tooltip:HookScript("OnShow", function(self) AS:SetTemplate(self) end)
 	end
 
+	local LSF = LibStub("LibSimpleFrame-Mod-1.0", true)
+	if LSF then
+		for name, frame in pairs(LSF.registry) do
+			AS:SetTemplate(frame)
+			frame.SetBackdropColor = AS.Noop
+			frame.SetBackdropBorderColor = AS.Noop
+		end
+	end
+
 	local LET = LibStub('LibExtraTip-1', true)
 	if LET then
 		LET:AddCallback(function(tip,_,_,_,_,quality)
@@ -222,15 +217,6 @@ function AS:SkinLibraries()
 				end
 			end
 		end, 0)
-	end
-
-	local LSF = LibStub("LibSimpleFrame-Mod-1.0", true)
-	if LSF then
-		for name, frame in pairs(LSF.registry) do
-			AS:SetTemplate(frame)
-			frame.SetBackdropColor = AS.Noop
-			frame.SetBackdropBorderColor = AS.Noop
-		end
 	end
 
 	local LQT = LibStub("LibQTip-1.0", true)
