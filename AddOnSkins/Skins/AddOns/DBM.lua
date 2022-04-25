@@ -30,12 +30,12 @@ function AS:DBM(event, addon)
 
 						AS:SkinTexture(icon1, true)
 						icon1:ClearAllPoints()
-						icon1:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMLEFT', AS:AdjustForTheme(-2), 1)
+						icon1:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMLEFT', AS:AdjustForTheme(-1), 1)
 						icon1:SetSize(iconSize, iconSize)
 
 						AS:SkinTexture(icon2, true)
 						icon2:ClearAllPoints()
-						icon2:SetPoint('BOTTOMLEFT', frame, 'BOTTOMRIGHT', AS:AdjustForTheme(2), 1)
+						icon2:SetPoint('BOTTOMLEFT', frame, 'BOTTOMRIGHT', AS:AdjustForTheme(1), 1)
 						icon2:SetSize(iconSize, iconSize)
 
 						AS:SetInside(tbar, frame)
