@@ -21,12 +21,12 @@ Engine[1] = AddOn
 Engine[2] = _G.LibStub("AceLocale-3.0"):GetLocale('AddOnSkins', false)
 
 _G.AddOnSkins = Engine
-_G.AddOnSkins.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
-_G.AddOnSkins.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
-_G.AddOnSkins.TBC = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
-_G.AddOnSkins.WotLK = false
-
 _G.AddOnSkinsDS = {}
+
+AddOn.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+AddOn.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+AddOn.TBC = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+AddOn.WotLK = false
 
 AddOn.Title = GetAddOnMetadata(..., 'Title')
 AddOn.Version = tonumber(GetAddOnMetadata(..., 'Version'))
