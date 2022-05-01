@@ -360,7 +360,7 @@ function AS:Init(event, addon)
 			AS.Libs.LSM:Register('statusbar', 'Solid', [[Interface\Buttons\WHITE8X8]])
 		end
 
-		if _G.AddOnSkins.Retail then
+		if AS.Retail then
 			AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 			AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
 		end

@@ -123,7 +123,7 @@ function AS:Blizzard_Bags()
 		end
 	end
 
-	if _G.AddOnSkins.Retail then
+	if AS.Retail then
 		AS:SkinEditBox(_G.BagItemSearchBox)
 
 		AS:SkinEditBox(_G.BankItemSearchBox)

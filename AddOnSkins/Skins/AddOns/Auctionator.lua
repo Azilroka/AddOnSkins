@@ -11,7 +11,6 @@ local tostring = tostring
 local strmatch = strmatch
 local GetItemInfo = GetItemInfo
 local hooksecurefunc = hooksecurefunc
-local tinsert = table.insert
 
 local function SkinHeaders(header, x, y)
 	header:SetPoint('TOPLEFT', header:GetParent(), 'TOPLEFT', x or -20, y or -3)
@@ -84,7 +83,7 @@ local function SkinMainFrames()
 	AS:StripTextures(config)
 	AS:SetTemplate(config, 'Transparent')
 
-	if _G.AddOnSkins.Retail then
+	if AS.Retail then
 		AS:StripTextures(cancelling.ResultsListing)
 		AS:SetTemplate(cancelling.ResultsListing.ScrollFrame, 'Transparent')
 		cancelling.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', cancelling.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 16, -6)
@@ -106,7 +105,7 @@ local function SkinMainFrames()
 	list.Export:ClearAllPoints()
 	list.Export:Point('RIGHT', list.Import, 'LEFT', -3, 0)
 
-	if _G.AddOnSkins.Retail then
+	if AS.Retail then
 		recentList.InsetFrame:StripTextures()
 		recentList.InsetFrame:Point('TOPLEFT', recentList, 'TOPLEFT', 3, 0)
 		shoppingList.InsetFrame:StripTextures()
@@ -167,7 +166,7 @@ local function SkinMainFrames()
 		shoppingList.ScrollFrame.scrollBar,
 		list.ResultsListing.ScrollFrame.scrollBar,
 	}
-	if _G.AddOnSkins.Retail then
+	if AS.Retail then
 		tinsert(scrollBars, selling.CurrentItemListing.ScrollFrame.scrollBar)
 		tinsert(scrollBars, selling.HistoricalPriceListing.ScrollFrame.scrollBar)
 		tinsert(scrollBars, selling.ResultsListing.ScrollFrame.scrollBar)
@@ -198,7 +197,7 @@ local function SkinMainFrames()
 		shopTabs.ListTab,
 		shopTabs.RecentsTab,
 	}
-	if _G.AddOnSkins.Retail then
+	if AS.Retail then
 		tinsert(tabs, selling.HistoryTabsContainer.RealmHistoryTab)
 		tinsert(tabs, selling.HistoryTabsContainer.YourHistoryTab)
 	end
@@ -218,11 +217,11 @@ local function SkinMainFrames()
 		--Cancelling
 		cancelling.SearchFilter,
 	}
-	if _G.AddOnSkins.Retail then
-		tinsert(editBoxes, selling.AuctionatorSaleItem.Quantity)
-		tinsert(editBoxes, selling.AuctionatorSaleItem.Price.MoneyInput.GoldBox)
-		tinsert(editBoxes, selling.AuctionatorSaleItem.Price.MoneyInput.SilverBox)
-		tinsert(editBoxes, selling.AuctionatorSaleItem.Price.MoneyInput.CopperBox)
+	if AS.Retail then
+		tinsert(editBoxes, selling.SaleItemFrame.Quantity)
+		tinsert(editBoxes, selling.SaleItemFrame.Price.MoneyInput.GoldBox)
+		tinsert(editBoxes, selling.SaleItemFrame.Price.MoneyInput.SilverBox)
+		tinsert(editBoxes, selling.SaleItemFrame.Price.MoneyInput.CopperBox)
 	end
 
 	for _, editbox in next, editBoxes do
@@ -236,19 +235,19 @@ local function SkinMainFrames()
 		end
 	end
 
-	if _G.AddOnSkins.Retail then
-		selling.AuctionatorSaleItem.MaxButton:ClearAllPoints()
-		selling.AuctionatorSaleItem.MaxButton:SetPoint('LEFT', selling.AuctionatorSaleItem.Quantity.Backdrop, 'RIGHT', 5, 0)
+	if AS.Retail then
+		selling.SaleItemFrame.MaxButton:ClearAllPoints()
+		selling.SaleItemFrame.MaxButton:SetPoint('LEFT', selling.SaleItemFrame.Quantity.Backdrop, 'RIGHT', 5, 0)
 
-		selling.AuctionatorSaleItem.SkipButton:ClearAllPoints()
-		selling.AuctionatorSaleItem.SkipButton:SetPoint('TOPLEFT', selling.AuctionatorSaleItem.PostButton, 'TOPRIGHT', 2, 0)
+		selling.SaleItemFrame.SkipButton:ClearAllPoints()
+		selling.SaleItemFrame.SkipButton:SetPoint('TOPLEFT', selling.SaleItemFrame.PostButton, 'TOPRIGHT', 2, 0)
 	end
 
 	local headers = {
 		{ frame = list.ResultsListing.HeaderContainer, x = -20, y = -1 },
 		cancelling.ResultsListing.HeaderContainer,
 	}
-	if _G.AddOnSkins.Retail then
+	if AS.Retail then
 		tinsert(headers, selling.CurrentItemListing.HeaderContainer)
 		tinsert(headers, selling.HistoricalPriceListing.HeaderContainer)
 		tinsert(headers, selling.ResultsListing.HeaderContainer)
@@ -297,7 +296,7 @@ local function SkinMainFrames()
 	end
 
 	-- Classic / TBC Skin
-	if not _G.AddOnSkins.Retail then
+	if not AS.Retail then
 		AS:SkinDropDownBox(AuctionatorShoppingListFrame.ListDropdown, 200)
 	end
 
