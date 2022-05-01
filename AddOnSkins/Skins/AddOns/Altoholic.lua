@@ -129,7 +129,7 @@ function AS:Altoholic(event, addon)
 		AS:StripTextures(AltoholicTabGuild.Members.ScrollFrame, true)
 
 		AS:EnumObjects(function(index) return AltoholicTabGuild['MenuItem'..index] end, function(obj) AS:SkinButton(obj, true) end)
-		AS:EnumObjects({ function(index) return AS.Retail and AltoholicTabGuild.Bank['Entry'..index] end, function(obj, index) return obj['Item'..index] end }, function(obj) SkinItemButton(obj) end)
+		AS:EnumObjects({ function(index) return _G.AddOnSkins.Retail and AltoholicTabGuild.Bank['Entry'..index] end, function(obj, index) return obj['Item'..index] end }, function(obj) SkinItemButton(obj) end)
 
 		AS:EnumObjects(function(index) return AltoholicTabGuild.Members['Item'..index] end, function(obj) SkinItemButton(obj) end)
 		AS:EnumObjects(function(index) return AltoholicTabGuild["SortButtons"]["Sort"..index] end, function(obj) AS:SkinButton(obj) end)
