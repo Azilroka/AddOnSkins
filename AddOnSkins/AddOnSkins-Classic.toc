@@ -1,4 +1,4 @@
-## Interface: 11401
+## Interface: 11403
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
 ## Version: 4.58
 ## Author: Azilroka
