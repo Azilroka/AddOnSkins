@@ -47,7 +47,7 @@ local function SetItemInfo(item, info)
 end
 
 local function SetOutsideText(editbox, backdrop, width, height)
-	for i=1, editbox:GetNumRegions() do
+	for i = 1, editbox:GetNumRegions() do
 		local region = select(i, editbox:GetRegions())
 		if region and region:IsObjectType('FontString') then
 			backdrop:SetOutside(region, width, height) -- h a l p
