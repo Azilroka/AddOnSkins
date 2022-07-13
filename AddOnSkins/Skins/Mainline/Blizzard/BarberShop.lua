@@ -1,10 +1,6 @@
 local AS = unpack(AddOnSkins)
 
--- Cache global variables
---Lua functions
 local _G = _G
---WoW API / Variables
--- GLOBALS:
 
 function AS:Blizzard_BarbershopUI(event, addon)
 	if addon ~= "Blizzard_BarbershopUI" then return end
