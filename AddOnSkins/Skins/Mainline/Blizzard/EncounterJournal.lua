@@ -108,34 +108,36 @@ function AS:Blizzard_EncounterJournal(event, addon)
 	AS:SkinButton(EncounterJournal.encounter.info.reset)
 	AS:SkinButton(EncounterJournal.encounter.info.difficulty, true)
 
-	for i, Button in pairs(EncounterJournal.encounter.info.lootScroll.buttons) do
-		Button.bossTexture:SetAlpha(0)
-		Button.bosslessTexture:SetAlpha(0)
+	for i, items in next, EncounterJournal.encounter.info.lootScroll.buttons do
+		local item = items.lootFrame
 
-		Button.icon:SetSize(32, 32)
-		Button.icon:SetPoint("TOPLEFT", AS:AdjustForTheme(3), AS:AdjustForTheme(-7))
-		AS:SkinTexture(Button.icon, true)
+		item.bossTexture:SetAlpha(0)
+		item.bosslessTexture:SetAlpha(0)
 
-		Button.name:SetPoint("TOPLEFT", Button.icon, "TOPRIGHT", 6, -2)
-		Button.boss:SetTextColor(1, 1, 1)
-		Button.boss:SetPoint("BOTTOMLEFT", 4, 6)
-		Button.slot:SetPoint("TOPLEFT", Button.name, "BOTTOMLEFT", 0, -3)
-		Button.slot:SetTextColor(1, 1, 1)
-		Button.armorType:SetTextColor(1, 1, 1)
-		Button.armorType:SetPoint("RIGHT", Button, "RIGHT", -10, 0)
+		item.icon:SetSize(32, 32)
+		item.icon:SetPoint("TOPLEFT", AS:AdjustForTheme(3), AS:AdjustForTheme(-7))
+		AS:SkinTexture(item.icon, true)
 
-		hooksecurefunc(Button.IconBorder, "SetVertexColor", function(self, r, g, b)
+		item.name:SetPoint("TOPLEFT", item.icon, "TOPRIGHT", 6, -2)
+		item.boss:SetTextColor(1, 1, 1)
+		item.boss:SetPoint("BOTTOMLEFT", 4, 6)
+		item.slot:SetPoint("TOPLEFT", item.name, "BOTTOMLEFT", 0, -3)
+		item.slot:SetTextColor(1, 1, 1)
+		item.armorType:SetTextColor(1, 1, 1)
+		item.armorType:SetPoint("RIGHT", item, "RIGHT", -10, 0)
+
+		hooksecurefunc(item.IconBorder, "SetVertexColor", function(self, r, g, b)
 			self:GetParent().icon.Backdrop:SetBackdropBorderColor(r, g, b)
 			self:SetTexture("")
 		end)
 
-		AS:CreateBackdrop(Button)
-		Button.Backdrop:SetPoint("TOPLEFT", 0, -4)
-		Button.Backdrop:SetPoint("BOTTOMRIGHT", 0, AS.PixelMode and 3 or 0)
+		AS:CreateBackdrop(item)
+		item.Backdrop:SetPoint("TOPLEFT", 0, -4)
+		item.Backdrop:SetPoint("BOTTOMRIGHT", 0, AS.PixelMode and 3 or 0)
 
 		if i == 1 then
-			Button:ClearAllPoints()
-			Button:SetPoint("TOPLEFT", EncounterJournal.encounter.info.lootScroll.scrollChild, "TOPLEFT", 5, 0)
+			item:ClearAllPoints()
+			item:SetPoint("TOPLEFT", EncounterJournal.encounter.info.lootScroll.scrollChild, "TOPLEFT", 5, 0)
 		end
 	end
 

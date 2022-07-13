@@ -240,47 +240,18 @@ function AS:Blizzard_Communities(event, addon)
 	local CloseButton = select(3, CommunitiesGuildLogFrame:GetChildren())
 	AS:SkinButton(CloseButton)
 
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrame)
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrame.Inset)
-
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame)
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrameRecruitment.AvailabilityFrame)
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrameRecruitment.RolesFrame)
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrameRecruitment.LevelFrame)
-	AS:SkinFrame(CommunitiesGuildRecruitmentFrameRecruitment.CommentFrame)
-
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame.QuestButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame.DungeonButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame.RaidButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame.PvPButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.InterestFrame.RPButton)
-
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.AvailabilityFrame.WeekdaysButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.AvailabilityFrame.WeekendsButton)
-
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.RolesFrame.TankButton.checkButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.RolesFrame.HealerButton.checkButton)
-	AS:SkinCheckBox(CommunitiesGuildRecruitmentFrameRecruitment.RolesFrame.DamagerButton.checkButton)
-
-	AS:SkinCloseButton(CommunitiesGuildRecruitmentFrameCloseButton)
-
-	AS:SkinButton(CommunitiesGuildRecruitmentFrameRecruitment.ListGuildButton)
-
-	-- Tabs
-	for i = 1, 2 do
-		AS:SkinButton(_G["CommunitiesGuildRecruitmentFrameTab"..i])
-	end
-
-	AS:StripTextures(CommunitiesGuildRecruitmentFrameRecruitment.CommentFrame.CommentInputFrame)
-	AS:SkinEditBox(CommunitiesGuildRecruitmentFrameRecruitment.CommentFrame.CommentInputFrame)
-
-	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.InviteButton)
-	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.MessageButton)
-	AS:SkinButton(CommunitiesGuildRecruitmentFrameApplicants.DeclineButton)
-
-	for i = 1, 5 do
-		_G["CommunitiesGuildRecruitmentFrameApplicantsContainerButton"..i]:SetBackdrop(nil)
-	end
+	AS:SkinFrame(CommunitiesFrame.RecruitmentDialog)
+	AS:SkinCheckBox(CommunitiesFrame.RecruitmentDialog.ShouldListClub.Button)
+	AS:SkinDropDownBox(CommunitiesFrame.RecruitmentDialog.ClubFocusDropdown, 220)
+	AS:SkinDropDownBox(CommunitiesFrame.RecruitmentDialog.LookingForDropdown, 220)
+	AS:SkinDropDownBox(CommunitiesFrame.RecruitmentDialog.LanguageDropdown, 190)
+	AS:SkinEditBox(CommunitiesFrame.RecruitmentDialog.RecruitmentMessageFrame.RecruitmentMessageInput)
+	AS:SkinCheckBox(CommunitiesFrame.RecruitmentDialog.MaxLevelOnly.Button)
+	AS:SkinCheckBox(CommunitiesFrame.RecruitmentDialog.MinIlvlOnly.Button)
+	AS:SkinEditBox(CommunitiesFrame.RecruitmentDialog.MinIlvlOnly.EditBox)
+	AS:SkinButton(CommunitiesFrame.RecruitmentDialog.Accept)
+	AS:SkinButton(CommunitiesFrame.RecruitmentDialog.Cancel)
+	AS:SkinScrollBar(CommunitiesFrame.RecruitmentDialog.RecruitmentMessageFrame.RecruitmentMessageInput.ScrollBar)
 
 	AS:SkinFrame(CommunitiesFrame.NotificationSettingsDialog)
 	AS:SkinDropDownBox(CommunitiesFrame.NotificationSettingsDialog.CommunitiesListDropDownMenu)
