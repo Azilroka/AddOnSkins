@@ -53,7 +53,16 @@ function AS:Blizzard_PVPUI(event, addon)
 	AS:StripTextures(HonorFrame.BonusFrame)
 	AS:StripTextures(HonorFrame.BonusFrame.ShadowOverlay)
 
-	local Buttons = { RandomBGButton = HonorFrame.BonusFrame, RandomEpicBGButton = HonorFrame.BonusFrame, Arena1Button = HonorFrame.BonusFrame, BrawlButton = HonorFrame.BonusFrame, RatedBG = ConquestFrame, Arena2v2 = ConquestFrame, Arena3v3 = ConquestFrame }
+	local Buttons = {
+		RandomBGButton = HonorFrame.BonusFrame,
+		RandomEpicBGButton = HonorFrame.BonusFrame,
+		Arena1Button = HonorFrame.BonusFrame,
+		BrawlButton = HonorFrame.BonusFrame,
+		BrawlButton2 = HonorFrame.BonusFrame,
+		RatedBG = ConquestFrame,
+		Arena2v2 = ConquestFrame,
+		Arena3v3 = ConquestFrame
+	}
 
 	for Section, Parent in pairs(Buttons) do
 		local Button = Parent[Section]
