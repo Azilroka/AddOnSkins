@@ -469,6 +469,31 @@ local function SkinItemFrame(frame)
 	end
 end
 
+local function HandleLostThings()
+	AS:StripTextures(_G.AuctionatorShoppingListFrame.ScrollListRecents.InsetFrame)
+
+	AS:StripTextures(_G.AuctionatorShoppingListFrame.ScrollListShoppingList.InsetFrame)
+	AS:StripTextures(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Icon.IconBorder)
+	AS:StripTextures(_G.AuctionatorSellingFrame.BagListing.ScrollFrame)
+	AS:StripTextures(_G.AuctionatorSellingFrame.BagListing)
+	AS:StripTextures(_G.AuctionatorSellingFrame.BagInset)
+	AS:StripTextures(_G.AuctionatorSellingFrame.BagInset.NineSlice)
+
+	AS:StripTextures(_G.AuctionatorSellingFrame.HistoricalPriceInset.NineSlice)
+	AS:StripTextures(_G.AuctionatorSellingFrame.CurrentItemInset.NineSlice)
+
+	AS:SkinTab(_G.AuctionatorSellingFrame.HistoryTabsContainer.RealmHistoryTab)
+	AS:SkinTab(_G.AuctionatorSellingFrame.HistoryTabsContainer.YourHistoryTab)
+
+	AS:SkinEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Price.MoneyInput.GoldBox)
+	AS:SkinEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Price.MoneyInput.SilverBox)
+	AS:SkinEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Quantity.InputBox)
+
+	AS:SkinScrollBar(_G.AuctionatorSellingFrame.CurrentItemListing.ScrollFrame.scrollBar)
+	AS:SkinScrollBar(_G.AuctionatorSellingFrame.HistoricalPriceListing.ScrollFrame.scrollBar)
+	AS:SkinScrollBar(_G.AuctionatorSellingFrame.ResultsListing.ScrollFrame.scrollBar)
+end
+
 function AS:Auctionator(event)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		SkinOptions()
@@ -480,6 +505,8 @@ function AS:Auctionator(event)
 		SkinItemFrame(_G.AuctionatorShoppingItemFrame)
 		--SkinItemFrame(_G.AuctionatorAddItemFrame)
 		--SkinItemFrame(_G.AuctionatorEditItemFrame)
+
+		HandleLostThings()
 
 		AS:UnregisterSkinEvent('Auctionator', event)
 	end
