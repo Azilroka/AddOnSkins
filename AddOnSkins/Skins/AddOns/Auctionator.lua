@@ -469,119 +469,9 @@ local function SkinItemFrame(frame)
 	end
 end
 
-local function DrawButtons(...) ------for item.icons at bag
-		local a = {...}
-		for k,v in pairs(a) do
-			-- print(k,v)
-			for q,w in pairs(v) do
-				-- print(q,w)
-				if q == "buttons" then
-					for e,r in pairs(w) do     ----------- TODO r its buttons
-						-- print(e,r,"--------480")
-						-- AS:SkinButton(r)
-						-- r.Icon:StripTextures()
-						if not r.isSkinned then
-							r.IconBorder:StripTextures()
-							-- r.Icon:SetTexture(r.itemInfo.texture)
-							-- r.Icon:Show()
-							r.Icon:SetTexCoord(unpack(AS.TexCoords))
-							r.isSkinned = true
-						end
-						-- for t,y in pairs (r) do
-							-- print(t,y,482)
-							-- if t == "IconBorder" then
-								-- y:StripTextures()  --------- TODO that all buttons but need ahother method
-								-- AS:CreateBackdrop(y, 'Transparent')
-								-- local rc, gc, bc, hex = GetItemQualityColor(r.itemInfo.quality)
-								-- y:SetColorTexture(rc, gc, bc, 0.2)
-								-- y:SetTexCoord(unpack(AS.TexCoords))
-								-- AS:SkinIconButton(r)
-								-- AS:SetInside(y)
-							-- end
-							-- if t == "itemInfo" then
-								-- for u,i in pairs(y) do
-									-- print(u,i)
-								-- end
-							-- end
-						-- end
-					end
-				end
-			end
-		end
-	-- print(...)
-end
-
-local function Update(...)   ---------for frame
-	local a = {...}
-	for k,v in pairs(a) do
-		-- print(k,v)
-		for q,w in pairs(v) do
-			-- print(q,w)
-			if q =="frameMap" then
-				for e,r in pairs(w) do
-					-- print(e,r)
-					-- for t,y in pairs(r) do
-						-- print(t,y)
-							if r.SectionTitle then
-								AS:StripTextures(r.SectionTitle)
-								AS:SkinButton(r.SectionTitle)
-							end
-					-- end
-				end
-			end
-		end
-	end
-end
-
-local function HeaderContainers(...) ---- for tabs
-	local a = {...}
-	for k,v in pairs(a) do
-		-- print(k,v,"k,v")
-		if type(v) == "table" then
-			AS:StripTextures(v)
-			AS:SkinButton(v)
-		end
-	end
-end
-
-local function HandleLostThings()
-
-	AS:StripTextures(_G.AuctionatorShoppingListFrame.ScrollListRecents.InsetFrame)
-
-	AS:StripTextures(_G.AuctionatorShoppingListFrame.ScrollListShoppingList.InsetFrame)
-	AS:StripTextures(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Icon.IconBorder)
-	AS:StripTextures(_G.AuctionatorSellingFrame.BagListing.ScrollFrame)
-	AS:StripTextures(_G.AuctionatorSellingFrame.BagListing)
-	AS:StripTextures(_G.AuctionatorSellingFrame.BagInset)
-	AS:StripTextures(_G.AuctionatorSellingFrame.BagInset.NineSlice)
-
-	AS:StripTextures(_G.AuctionatorSellingFrame.HistoricalPriceInset.NineSlice)
-	AS:StripTextures(_G.AuctionatorSellingFrame.CurrentItemInset.NineSlice)
-
-	----- tabs
-	AS:SkinTab(AuctionatorSellingFrame.HistoryTabsContainer.RealmHistoryTab)
-	AS:SkinTab(AuctionatorSellingFrame.HistoryTabsContainer.YourHistoryTab)
-	----- money edit boxes
-	AS:SkinEditBox(AuctionatorSellingFrame.AuctionatorSaleItem.Price.MoneyInput.GoldBox)
-	AS:SkinEditBox(AuctionatorSellingFrame.AuctionatorSaleItem.Price.MoneyInput.SilverBox)
-	AS:SkinEditBox(AuctionatorSellingFrame.AuctionatorSaleItem.Quantity.InputBox)
-	----- scroll bars
-	AS:SkinScrollBar(AuctionatorSellingFrame.CurrentItemListing.ScrollFrame.scrollBar)
-	AS:SkinScrollBar(AuctionatorSellingFrame.HistoricalPriceListing.ScrollFrame.scrollBar)
-	AS:SkinScrollBar(AuctionatorSellingFrame.ResultsListing.ScrollFrame.scrollBar)
-
-	-- print("yep")
-
-end
-
 function AS:Auctionator(event)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		SkinOptions()
-		---hooks for auc
-		hooksecurefunc(AuctionatorBagItemContainerMixin,"DrawButtons",DrawButtons)
-		hooksecurefunc(AuctionatorSellingBagFrameMixin,"Update",Update)
-		hooksecurefunc(AuctionatorStringColumnHeaderTemplateMixin,"Init",HeaderContainers)
-		---hooks for auc
 	end
 
 	if event == 'AUCTION_HOUSE_SHOW' then
@@ -591,12 +481,6 @@ function AS:Auctionator(event)
 		--SkinItemFrame(_G.AuctionatorAddItemFrame)
 		--SkinItemFrame(_G.AuctionatorEditItemFrame)
 
-		----------- new things
-		TradeSkillFrame:HookScript("OnUpdate", function() ---------AuctionatorTradeSkillSearch button
-			AS:SkinButton(AuctionatorTradeSkillSearch)
-		end)
-		HandleLostThings()
-		----------- end new things
 		AS:UnregisterSkinEvent('Auctionator', event)
 	end
 end

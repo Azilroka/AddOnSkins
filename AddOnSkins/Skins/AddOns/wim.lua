@@ -1,6 +1,8 @@
 
 local AS = unpack(AddOnSkins)
 
+local _G = _G
+
 if not AS:CheckAddOn("WIM") then return end
 
 function AS:WIM(event)
@@ -17,10 +19,10 @@ function AS:WIM(event)
 		local WIMMenu = _G["WIM3Menu"]
 		local WIMGroup1 = _G["WIM3MenuGroup1"]
 		local WIMGroup1T = _G["WIM3MenuGroup1Title"]
-		local function wimHookSkinDialog()
 
+		local function wimHookSkinDialog()
 			WIMMenu:StripTextures()
-			WIMMenu:CreateBackdrop("Transparent")
+			AS:SkinFrame(WIMMenu)
 
 			WIMGroup1:StripTextures()
 			WIMGroup1T:StripTextures()
@@ -29,36 +31,35 @@ function AS:WIM(event)
 				local button =_G["WIM3MenuButton"..i]
 				if button then
 					AS:SkinButton(button)
-				else break
+				else
+					break
 				end
 			end
 		end
-
-		WIMMenu:HookScript("OnShow",wimHookSkinDialog)
+		WIMMenu:HookScript("OnShow", wimHookSkinDialog)
 
 		local winopthook = _G["WIM3_Options"]
-
 		local function wimHookSkinOpt()
-
 			winopthook:StripTextures()
-			winopthook:CreateBackdrop("Transparent")
+			AS:SkinFrame(winopthook)
+
 			for i = 1,4 do
 				local button = _G["WIM3_OptionsNavCat"..i]
 				if button then
 					AS:SkinButton(button)
 				end
 			end
+
 			for i = 1,13 do
 				local button = _G["WIM3_OptionsNavSubButton"..i]
 				if button then
 					AS:SkinButton(button)
-				else break
+				else
+					break
 				end
 			end
 		end
-
 		winopthook:HookScript("OnShow",wimHookSkinOpt)
-
 	end
 end
 
