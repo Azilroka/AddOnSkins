@@ -85,7 +85,6 @@
 	<Script file="MinimalArchaeology.lua"/>
 	<Script file="ModelPique.lua"/>
 	<Script file="MogIt.lua"/>
-	<Script file="MoveAnything.lua"/>
 	<Script file="MRT.lua"/>
 	<Script file="MyRolePlay.lua"/>
 	<Script file="MythicKeystoneStatus.lua"/>
