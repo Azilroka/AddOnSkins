@@ -33,12 +33,12 @@ function AS:Altoholic(event, addon)
 		AS:Kill(AltoholicFramePortrait)
 
 		AS:SkinFrame(AltoMessageBox)
-		AS:SkinButton(AltoMessageBox.ButtonYes)
+		AS:SkinButton(AltoMessageBox.Button1)
 		-- Bug in Altoholic currently
-		AS:SkinButton(_G["ButtonNo"] or AltoMessageBox.ButtonNo)
+		AS:SkinButton(AltoMessageBox.Button2)
 
 		AS:SkinCloseButton(AltoholicFrameCloseButton)
-		AS:SkinEditBox(AltoholicFrame_SearchEditBox, 175, 15)
+		AS:SkinEditBox(AltoholicFrame.SearchBox, 175, 15)
 		AS:SkinButton(AltoholicFrame_ResetButton)
 		AS:SkinButton(AltoholicFrame_SearchButton)
 		AltoholicFrameTab1:SetPoint("TOPLEFT", AltoholicFrame, "BOTTOMLEFT", -5, 2)

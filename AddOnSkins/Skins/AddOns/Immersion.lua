@@ -59,7 +59,7 @@ function AS:Immersion(event, addon)
 	local function SkinReward(Button)
 		if Button.Icon then
 			AS:CreateBackdrop(Button)
-			AS:StripTexture(Button, [[Interface\Spellbook\Spellbook-Parts]])
+			AS:StripTextures(Button, [[Interface\Spellbook\Spellbook-Parts]])
 
 			if Button.NameFrame then
 				Button.NameFrame:Hide()
