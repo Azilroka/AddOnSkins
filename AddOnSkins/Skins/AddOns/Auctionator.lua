@@ -87,7 +87,7 @@ local function SkinMainFrames()
 		AS:StripTextures(cancelling.ResultsListing)
 		AS:SetTemplate(cancelling.ResultsListing.ScrollFrame, 'Transparent')
 		cancelling.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', cancelling.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 16, -6)
-		selling.CurrentItemListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentItemListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
+		--selling.CurrentItemListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentItemListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 		selling.HistoricalPriceListing.ScrollFrame:SetPoint('TOPLEFT', selling.HistoricalPriceListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 		list.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', list.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 15, -4)
 		list.ListDropdown:ClearAllPoints()
@@ -116,10 +116,10 @@ local function SkinMainFrames()
 		AS:SetTemplate(selling.HistoricalPriceInset, 'Transparent')
 		selling.HistoricalPriceInset:SetPoint('TOPLEFT', selling.HistoricalPriceListing, 'TOPLEFT', -7, -25)
 		selling.HistoricalPriceInset:SetPoint('BOTTOMRIGHT', selling.HistoricalPriceListing, 'BOTTOMRIGHT', -2, 0)
-		AS:StripTextures(selling.CurrentItemInset)
-		AS:SetTemplate(selling.CurrentItemInset, 'Transparent')
-		selling.CurrentItemInset:SetPoint('TOPLEFT', selling.CurrentItemListing, 'TOPLEFT', -7, -25)
-		selling.CurrentItemInset:SetPoint('BOTTOMRIGHT', selling.CurrentItemListing, 'BOTTOMRIGHT', -2, 0)
+		--AS:StripTextures(selling.CurrentItemInset)
+		--AS:SetTemplate(selling.CurrentItemInset, 'Transparent')
+		--selling.CurrentItemInset:SetPoint('TOPLEFT', selling.CurrentItemListing, 'TOPLEFT', -7, -25)
+		--selling.CurrentItemInset:SetPoint('BOTTOMRIGHT', selling.CurrentItemListing, 'BOTTOMRIGHT', -2, 0)
 		AS:StripTextures(selling.BagInset)
 		AS:StripTextures(selling.BagListing.ScrollFrame)
 		AS:CreateBackdrop(selling.BagListing.ScrollFrame, 'Transparent')
@@ -169,7 +169,7 @@ local function SkinMainFrames()
 		list.ResultsListing.ScrollFrame.scrollBar,
 	}
 	if AS.Retail then
-		tinsert(scrollBars, selling.CurrentItemListing.ScrollFrame.scrollBar)
+		--tinsert(scrollBars, selling.CurrentItemListing.ScrollFrame.scrollBar)
 		tinsert(scrollBars, selling.HistoricalPriceListing.ScrollFrame.scrollBar)
 		tinsert(scrollBars, selling.ResultsListing.ScrollFrame.scrollBar)
 	end
@@ -199,10 +199,10 @@ local function SkinMainFrames()
 		shopTabs.ListTab,
 		shopTabs.RecentsTab,
 	}
-	if AS.Retail then
-		tinsert(tabs, selling.HistoryTabsContainer.RealmHistoryTab)
-		tinsert(tabs, selling.HistoryTabsContainer.YourHistoryTab)
-	end
+	--if AS.Retail then
+		--tinsert(tabs, selling.HistoryTabsContainer.RealmHistoryTab)
+		--tinsert(tabs, selling.HistoryTabsContainer.YourHistoryTab)
+	--end
 
 	for _, tab in next, tabs do
 		AS:SkinTab(tab)
@@ -250,7 +250,7 @@ local function SkinMainFrames()
 		cancelling.ResultsListing.HeaderContainer,
 	}
 	if AS.Retail then
-		tinsert(headers, selling.CurrentItemListing.HeaderContainer)
+		--tinsert(headers, selling.CurrentItemListing.HeaderContainer)
 		tinsert(headers, selling.HistoricalPriceListing.HeaderContainer)
 		tinsert(headers, selling.ResultsListing.HeaderContainer)
 	end
@@ -480,16 +480,16 @@ local function HandleLostThings()
 	AS:StripTextures(_G.AuctionatorSellingFrame.BagInset.NineSlice)
 
 	AS:StripTextures(_G.AuctionatorSellingFrame.HistoricalPriceInset.NineSlice)
-	AS:StripTextures(_G.AuctionatorSellingFrame.CurrentItemInset.NineSlice)
+	--AS:StripTextures(_G.AuctionatorSellingFrame.CurrentItemInset.NineSlice)
 
-	AS:SkinTab(_G.AuctionatorSellingFrame.HistoryTabsContainer.RealmHistoryTab)
-	AS:SkinTab(_G.AuctionatorSellingFrame.HistoryTabsContainer.YourHistoryTab)
+	--AS:SkinTab(_G.AuctionatorSellingFrame.HistoryTabsContainer.RealmHistoryTab)
+	--AS:SkinTab(_G.AuctionatorSellingFrame.HistoryTabsContainer.YourHistoryTab)
 
 	AS:SkinEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Price.MoneyInput.GoldBox)
 	AS:SkinEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Price.MoneyInput.SilverBox)
 	AS:SkinEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Quantity.InputBox)
 
-	AS:SkinScrollBar(_G.AuctionatorSellingFrame.CurrentItemListing.ScrollFrame.scrollBar)
+	--AS:SkinScrollBar(_G.AuctionatorSellingFrame.CurrentItemListing.ScrollFrame.scrollBar)
 	AS:SkinScrollBar(_G.AuctionatorSellingFrame.HistoricalPriceListing.ScrollFrame.scrollBar)
 	AS:SkinScrollBar(_G.AuctionatorSellingFrame.ResultsListing.ScrollFrame.scrollBar)
 end
