@@ -1,5 +1,5 @@
 local _, Engine = ...
-local AddOn = _G.LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceConsole-3.0', 'AceEvent-3.0', 'AceHook-3.0', 'AceTimer-3.0')
+local AS = _G.LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceConsole-3.0', 'AceEvent-3.0', 'AceHook-3.0', 'AceTimer-3.0')
 
 local _G = _G
 local select = select
@@ -17,33 +17,35 @@ local UnitClass = UnitClass
 local UnitName = UnitName
 local UnitFactionGroup = UnitFactionGroup
 
-Engine[1] = AddOn
+Engine[1] = AS
 Engine[2] = _G.LibStub("AceLocale-3.0"):GetLocale('AddOnSkins', false)
 
 _G.AddOnSkins = Engine
 _G.AddOnSkinsDS = {}
 
-AddOn.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
-AddOn.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
-AddOn.TBC = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
-AddOn.WotLK = false
+local _, _, _, wowtoc = GetBuildInfo() -- TODO: Move back to Core.lua
 
-AddOn.Title = GetAddOnMetadata(..., 'Title')
-AddOn.Version = tonumber(GetAddOnMetadata(..., 'Version'))
-AddOn.Authors = GetAddOnMetadata(..., 'Author'):gsub(", ", "    ")
-AddOn.ProperVersion = format('%.2f', AddOn.Version)
-AddOn.TicketTracker = 'https://github.com/Azilroka/AddOnSkins/issues'
-AddOn.MyClass = select(2, UnitClass('player'))
-AddOn.MyName = UnitName('player')
-AddOn.MyRealm = GetRealmName()
-AddOn.Noop = function() end
-AddOn.TexCoords = { .075, .925, .075, .925 }
-AddOn.UIScale = UIParent:GetScale()
-AddOn.Faction = UnitFactionGroup('player')
-AddOn.Mult = 1
-AddOn.ScreenWidth, AddOn.ScreenHeight = GetPhysicalScreenSize()
+AS.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
+AS.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+AS.TBC = wowtoc >= 20504 and wowtoc < 30000
+AS.Wrath = wowtoc >= 30400 and wowtoc < 40000
 
-AddOn.Libs = {
+AS.Title = GetAddOnMetadata(..., 'Title')
+AS.Version = tonumber(GetAddOnMetadata(..., 'Version'))
+AS.Authors = GetAddOnMetadata(..., 'Author'):gsub(", ", "    ")
+AS.ProperVersion = format('%.2f', AS.Version)
+AS.TicketTracker = 'https://github.com/Azilroka/AddOnSkins/issues'
+AS.MyClass = select(2, UnitClass('player'))
+AS.MyName = UnitName('player')
+AS.MyRealm = GetRealmName()
+AS.Noop = function() end
+AS.TexCoords = { .075, .925, .075, .925 }
+AS.UIScale = UIParent:GetScale()
+AS.Faction = UnitFactionGroup('player')
+AS.Mult = 1
+AS.ScreenWidth, AS.ScreenHeight = GetPhysicalScreenSize()
+
+AS.Libs = {
 	ACH = _G.LibStub('LibAceConfigHelper'),
 	LSM = _G.LibStub('LibSharedMedia-3.0', true),
 	LCG = _G.LibStub('LibCustomGlow-1.0', true),
@@ -55,27 +57,27 @@ AddOn.Libs = {
 	ADB = _G.LibStub('AceDB-3.0'),
 }
 
-local Color = _G.RAID_CLASS_COLORS[AddOn.MyClass]
-AddOn.ClassColor = { Color.r, Color.g, Color.b }
-AddOn.Color = { 0, 0.44, .87, 1 }
+local Color = _G.RAID_CLASS_COLORS[AS.MyClass]
+AS.ClassColor = { Color.r, Color.g, Color.b }
+AS.Color = { 0, 0.44, .87, 1 }
 
-AddOn.skins = {}
-AddOn.events = {}
-AddOn.register = {}
-AddOn.FrameLocks = {}
+AS.skins = {}
+AS.events = {}
+AS.register = {}
+AS.FrameLocks = {}
 
-AddOn.preload = {}
+AS.preload = {}
 
-AddOn.AddOns = {}
-AddOn.AddOnVersion = {}
+AS.AddOns = {}
+AS.AddOnVersion = {}
 
 for i = 1, GetNumAddOns() do
 	local Name, _, _, _, Reason = GetAddOnInfo(i)
-	AddOn.AddOns[strlower(Name)] = GetAddOnEnableState(AddOn.MyName, Name) == 2 and (not Reason or Reason ~= 'DEMAND_LOADED')
-	AddOn.AddOnVersion[strlower(Name)] = GetAddOnMetadata(Name, 'Version')
+	AS.AddOns[strlower(Name)] = GetAddOnEnableState(AS.MyName, Name) == 2 and (not Reason or Reason ~= 'DEMAND_LOADED')
+	AS.AddOnVersion[strlower(Name)] = GetAddOnMetadata(Name, 'Version')
 end
 
-AddOn.Media = {
+AS.Media = {
 	Textures = {
 		Plus = [[Interface\AddOns\AddOnSkins\Media\Textures\Plus]],
 		Minus = [[Interface\AddOns\AddOnSkins\Media\Textures\Minus]],
@@ -83,5 +85,5 @@ AddOn.Media = {
 	}
 }
 
-AddOn.Hider = CreateFrame('Frame', nil, UIParent)
-AddOn.Hider:Hide()
+AS.Hider = CreateFrame('Frame', nil, UIParent)
+AS.Hider:Hide()
