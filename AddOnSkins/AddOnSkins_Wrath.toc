@@ -14,4 +14,4 @@ Core\Load_Core.xml
 Embed\Load_Embed.xml
 
 Skins\AddOns\Load_Skins.xml
-Skins\Classic\Load_Skins.xml
+Skins\Wrath\Load_Skins.xml
