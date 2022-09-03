@@ -17,11 +17,11 @@ function AS:Blizzard_DebugTools(event, addon)
 	end
 	if addon ~= 'Blizzard_DebugTools' then return end
 
-	AS:SkinFrame(EventTraceFrame)
-	AS:SkinScrollBar(EventTraceFrameScroll)
-	AS:SkinCloseButton(EventTraceFrameCloseButton)
+	--AS:SkinFrame(EventTraceFrame)
+	--AS:SkinScrollBar(EventTraceFrameScroll)
+	--AS:SkinCloseButton(EventTraceFrameCloseButton)
 
-	AS:SkinTooltip(EventTraceTooltip)
+	--AS:SkinTooltip(EventTraceTooltip)
 
 	AS:SkinTooltip(FrameStackTooltip)
 

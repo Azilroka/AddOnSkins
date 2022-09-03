@@ -184,7 +184,7 @@ function AS:Blizzard_Quest()
 
 		if quality and quality > 1 then
 			if frame and frame.Icon and frame.Icon.Backdrop then
-				frame.Icon.backdrop:SetBackdropBorderColor(r, g, b)
+				frame.Icon.Backdrop:SetBackdropBorderColor(r, g, b)
 			end
 			text:SetTextColor(r, g, b)
 		else
@@ -424,7 +424,6 @@ function AS:Blizzard_Quest()
 			-- Reward frame text
 			_G.QuestInfoRewardsFrame.ItemChooseText:SetTextColor(unpack(textColor))
 			_G.QuestInfoRewardsFrame.ItemReceiveText:SetTextColor(unpack(textColor))
-			_G.QuestInfoRewardsFrame.PlayerTitleText:SetTextColor(unpack(textColor))
 			_G.QuestInfoRewardsFrame.XPFrame.ReceiveText:SetTextColor(unpack(textColor))
 
 			_G.QuestInfoRewardsFrame.spellHeaderPool.textR, _G.QuestInfoRewardsFrame.spellHeaderPool.textG, _G.QuestInfoRewardsFrame.spellHeaderPool.textB = unpack(textColor)
