@@ -148,25 +148,24 @@ function AS:Blizzard_Others()
 		end
 	end)
 
+	--local BattlefieldFrame = _G.BattlefieldFrame
+	--AS:SkinBackdropFrame(BattlefieldFrame)
+	--BattlefieldFrame.Backdrop:SetPoint("TOPLEFT", 11, -12)
+	--BattlefieldFrame.Backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
 
-	local BattlefieldFrame = _G.BattlefieldFrame
-	AS:SkinBackdropFrame(BattlefieldFrame)
-	BattlefieldFrame.Backdrop:SetPoint("TOPLEFT", 11, -12)
-	BattlefieldFrame.Backdrop:SetPoint("BOTTOMRIGHT", -32, 76)
+	----AS:StripTextures(_G.BattlefieldListScrollFrame)
+	----AS:SkinScrollBar(_G.BattlefieldListScrollFrameScrollBar)
 
-	AS:StripTextures(_G.BattlefieldListScrollFrame)
-	AS:SkinScrollBar(_G.BattlefieldListScrollFrameScrollBar)
+	--_G.BattlefieldFrameZoneDescription:SetTextColor(1, 1, 1)
 
-	_G.BattlefieldFrameZoneDescription:SetTextColor(1, 1, 1)
+	--AS:SkinButton(_G.BattlefieldFrameCancelButton)
+	--AS:SkinButton(_G.BattlefieldFrameJoinButton)
+	--AS:SkinButton(_G.BattlefieldFrameGroupJoinButton)
 
-	AS:SkinButton(_G.BattlefieldFrameCancelButton)
-	AS:SkinButton(_G.BattlefieldFrameJoinButton)
-	AS:SkinButton(_G.BattlefieldFrameGroupJoinButton)
-	
-	_G.BattlefieldFrameGroupJoinButton:ClearAllPoints()
-	_G.BattlefieldFrameGroupJoinButton:SetPoint("RIGHT", _G.BattlefieldFrameJoinButton, "LEFT", -2, 0)
+	--_G.BattlefieldFrameGroupJoinButton:ClearAllPoints()
+	--_G.BattlefieldFrameGroupJoinButton:SetPoint("RIGHT", _G.BattlefieldFrameJoinButton, "LEFT", -2, 0)
 
-	AS:SkinCloseButton(_G.BattlefieldFrameCloseButton)
+	--AS:SkinCloseButton(_G.BattlefieldFrameCloseButton)
 end
 
 AS:RegisterSkin('Blizzard_Others', AS.Blizzard_Others)

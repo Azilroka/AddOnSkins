@@ -83,7 +83,6 @@ function AS:Blizzard_Quest()
 	AS:SkinScrollBar(QuestLogListScrollFrameScrollBar)
 	AS:SkinButton(QuestLogFrameAbandonButton)
 	AS:SkinButton(QuestFramePushQuestButton)
-	AS:SkinButton(QuestFrameExitButton)
 
 	AS:StripTextures(QuestFrameDetailPanel, true)
 	AS:StripTextures(QuestDetailScrollChildFrame, true)
@@ -132,17 +131,19 @@ function AS:Blizzard_Quest()
 
 	QuestInfoRewardsFrame.SkillPointFrame.ValueText:SetDrawLayer('OVERLAY', 7)
 
-	for frame, numItems in pairs({['QuestLogItem'] = MAX_NUM_ITEMS, ['QuestProgressItem'] = MAX_REQUIRED_ITEMS}) do
+	for frame, numItems in pairs({ QuestLogItem = MAX_NUM_ITEMS, QuestProgressItem = MAX_REQUIRED_ITEMS}) do
 		for i = 1, numItems do
 			local Button = _G[frame..i]
 
-			AS:SkinBackdropFrame(Button)
+			if Button then
+				AS:SkinBackdropFrame(Button)
 
-			if Button.Icon then
-				AS:SkinTexture(Button.Icon, true)
-				Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
-				Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
-				Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
+				if Button.Icon then
+					AS:SkinTexture(Button.Icon, true)
+					Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
+					Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
+					Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
+				end
 			end
 		end
 	end
@@ -203,33 +204,34 @@ function AS:Blizzard_Quest()
 
 	for i = 1, _G.QUESTS_DISPLAYED do
 		local questLogTitle = _G['QuestLogTitle'..i]
+		if questLogTitle then
+			questLogTitle:SetNormalTexture(AS.Media.Textures.Plus)
+			questLogTitle.SetNormalTexture = AS.Noop
 
-		questLogTitle:SetNormalTexture(AS.Media.Textures.Plus)
-		questLogTitle.SetNormalTexture = AS.Noop
+			questLogTitle:GetNormalTexture():SetSize(16, 16)
+			questLogTitle:GetNormalTexture():SetPoint('LEFT', 5, 0)
 
-		questLogTitle:GetNormalTexture():SetSize(16, 16)
-		questLogTitle:GetNormalTexture():SetPoint('LEFT', 5, 0)
+			questLogTitle:SetHighlightTexture('')
+			questLogTitle.SetHighlightTexture = AS.Noop
 
-		questLogTitle:SetHighlightTexture('')
-		questLogTitle.SetHighlightTexture = AS.Noop
+			questLogTitle:SetWidth(300)
 
-		questLogTitle:SetWidth(300)
+			_G['QuestLogTitle'..i..'Highlight']:SetAlpha(0)
 
-		_G['QuestLogTitle'..i..'Highlight']:SetAlpha(0)
+			_G['QuestLogTitle'..i..'Tag']:SetPoint('RIGHT', -30, 0)
 
-		_G['QuestLogTitle'..i..'Tag']:SetPoint('RIGHT', -30, 0)
+			hooksecurefunc(questLogTitle, 'SetNormalTexture', function(self, texture)
+				local tex = self:GetNormalTexture()
 
-		hooksecurefunc(questLogTitle, 'SetNormalTexture', function(self, texture)
-			local tex = self:GetNormalTexture()
-
-			if strfind(texture, 'MinusButton') then
-				tex:SetTexture(AS.Media.Textures.Minus)
-			elseif strfind(texture, 'PlusButton') then
-				tex:SetTexture(AS.Media.Textures.Plus)
-			else
-				tex:SetTexture()
-			end
-		end)
+				if strfind(texture, 'MinusButton') then
+					tex:SetTexture(AS.Media.Textures.Minus)
+				elseif strfind(texture, 'PlusButton') then
+					tex:SetTexture(AS.Media.Textures.Plus)
+				else
+					tex:SetTexture()
+				end
+			end)
+		end
 	end
 
 	hooksecurefunc("QuestInfo_GetRewardButton", function(rewardsFrame, index)
@@ -260,45 +262,45 @@ function AS:Blizzard_Quest()
 	end
 
 	-- Title Reward
-	do
-		local frame = QuestInfoPlayerTitleFrame
-		local icon = frame.Icon
+--	do
+--		local frame = QuestInfoPlayerTitleFrame
+--		local icon = frame.Icon
 
-		AS:SkinTexture(icon, true)
+--		AS:SkinTexture(icon, true)
 
-		for i = 2, 4 do
-			select(i, frame:GetRegions()):Hide()
-		end
+--		for i = 2, 4 do
+--			select(i, frame:GetRegions()):Hide()
+--		end
 
---		bg:SetPoint("TOPLEFT", icon, "TOPRIGHT", 0, 2)
---		bg:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 220, -1)
-	end
+----		bg:SetPoint("TOPLEFT", icon, "TOPRIGHT", 0, 2)
+----		bg:SetPoint("BOTTOMRIGHT", icon, "BOTTOMRIGHT", 220, -1)
+--	end
 
-	local QuestLogCollapseAllButton = _G.QuestLogCollapseAllButton
-	AS:StripTextures(QuestLogCollapseAllButton)
+	--local QuestLogCollapseAllButton = _G.QuestLogCollapseAllButton
+	--AS:StripTextures(QuestLogCollapseAllButton)
 
-	QuestLogCollapseAllButton:SetNormalTexture(AS.Media.Textures.Plus)
-	QuestLogCollapseAllButton.SetNormalTexture = AS.Noop
-	QuestLogCollapseAllButton:GetNormalTexture():SetSize(16, 16)
+	--QuestLogCollapseAllButton:SetNormalTexture(AS.Media.Textures.Plus)
+	--QuestLogCollapseAllButton.SetNormalTexture = AS.Noop
+	--QuestLogCollapseAllButton:GetNormalTexture():SetSize(16, 16)
 
-	QuestLogCollapseAllButton:SetHighlightTexture('')
-	QuestLogCollapseAllButton.SetHighlightTexture = AS.Noop
+	--QuestLogCollapseAllButton:SetHighlightTexture('')
+	--QuestLogCollapseAllButton.SetHighlightTexture = AS.Noop
 
-	QuestLogCollapseAllButton:SetDisabledTexture(AS.Media.Textures.Plus)
-	QuestLogCollapseAllButton.SetDisabledTexture = AS.Noop
-	QuestLogCollapseAllButton:GetDisabledTexture():SetSize(16, 16)
-	QuestLogCollapseAllButton:GetDisabledTexture():SetTexture(AS.Media.Textures.Plus)
-	QuestLogCollapseAllButton:GetDisabledTexture():SetDesaturated(true)
+	--QuestLogCollapseAllButton:SetDisabledTexture(AS.Media.Textures.Plus)
+	--QuestLogCollapseAllButton.SetDisabledTexture = AS.Noop
+	--QuestLogCollapseAllButton:GetDisabledTexture():SetSize(16, 16)
+	--QuestLogCollapseAllButton:GetDisabledTexture():SetTexture(AS.Media.Textures.Plus)
+	--QuestLogCollapseAllButton:GetDisabledTexture():SetDesaturated(true)
 
-	hooksecurefunc(_G.QuestLogCollapseAllButton, 'SetNormalTexture', function(self, texture)
-		local tex = self:GetNormalTexture()
+	--hooksecurefunc(_G.QuestLogCollapseAllButton, 'SetNormalTexture', function(self, texture)
+	--	local tex = self:GetNormalTexture()
 
-		if strfind(texture, 'MinusButton') then
-			tex:SetTexture(AS.Media.Textures.Minus)
-		else
-			tex:SetTexture(AS.Media.Textures.Plus)
-		end
-	end)
+	--	if strfind(texture, 'MinusButton') then
+	--		tex:SetTexture(AS.Media.Textures.Minus)
+	--	else
+	--		tex:SetTexture(AS.Media.Textures.Plus)
+	--	end
+	--end)
 
 	if AS.ParchmentEnabled then
 		QuestDetailScrollFrame.Background = QuestDetailScrollFrame:CreateTexture(nil, 'ARTWORK')
