@@ -18,4 +18,4 @@ jobs:
       - name: Clone project
         uses: actions/checkout@v1
       - name: Package
-        uses: BigWigsMods/packager@multitoc
+        uses: BigWigsMods/packager@v2
