@@ -87,7 +87,7 @@ local function SkinMainFrames()
 		AS:StripTextures(cancelling.ResultsListing)
 		AS:SetTemplate(cancelling.ResultsListing.ScrollFrame, 'Transparent')
 		cancelling.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', cancelling.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 16, -6)
-		--selling.CurrentItemListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentItemListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
+		selling.CurrentPricesListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentPricesListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 		selling.HistoricalPriceListing.ScrollFrame:SetPoint('TOPLEFT', selling.HistoricalPriceListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 		list.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', list.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 15, -4)
 		list.ListDropdown:ClearAllPoints()
@@ -116,10 +116,7 @@ local function SkinMainFrames()
 		AS:SetTemplate(selling.HistoricalPriceInset, 'Transparent')
 		selling.HistoricalPriceInset:SetPoint('TOPLEFT', selling.HistoricalPriceListing, 'TOPLEFT', -7, -25)
 		selling.HistoricalPriceInset:SetPoint('BOTTOMRIGHT', selling.HistoricalPriceListing, 'BOTTOMRIGHT', -2, 0)
-		--AS:StripTextures(selling.CurrentItemInset)
-		--AS:SetTemplate(selling.CurrentItemInset, 'Transparent')
-		--selling.CurrentItemInset:SetPoint('TOPLEFT', selling.CurrentItemListing, 'TOPLEFT', -7, -25)
-		--selling.CurrentItemInset:SetPoint('BOTTOMRIGHT', selling.CurrentItemListing, 'BOTTOMRIGHT', -2, 0)
+
 		AS:StripTextures(selling.BagInset)
 		AS:StripTextures(selling.BagListing.ScrollFrame)
 		AS:CreateBackdrop(selling.BagListing.ScrollFrame, 'Transparent')
@@ -169,7 +166,7 @@ local function SkinMainFrames()
 		list.ResultsListing.ScrollFrame.scrollBar,
 	}
 	if AS.Retail then
-		--tinsert(scrollBars, selling.CurrentItemListing.ScrollFrame.scrollBar)
+		tinsert(scrollBars, selling.CurrentPricesListing.ScrollFrame.scrollBar)
 		tinsert(scrollBars, selling.HistoricalPriceListing.ScrollFrame.scrollBar)
 		tinsert(scrollBars, selling.ResultsListing.ScrollFrame.scrollBar)
 	end
@@ -199,10 +196,11 @@ local function SkinMainFrames()
 		shopTabs.ListTab,
 		shopTabs.RecentsTab,
 	}
-	--if AS.Retail then
-		--tinsert(tabs, selling.HistoryTabsContainer.RealmHistoryTab)
-		--tinsert(tabs, selling.HistoryTabsContainer.YourHistoryTab)
-	--end
+	if AS.Retail then
+		tinsert(tabs, selling.PricesTabsContainer.CurrentPricesTab)
+		tinsert(tabs, selling.PricesTabsContainer.RealmHistoryTab)
+		tinsert(tabs, selling.PricesTabsContainer.YourHistoryTab)
+	end
 
 	for _, tab in next, tabs do
 		AS:SkinTab(tab)
@@ -250,7 +248,7 @@ local function SkinMainFrames()
 		cancelling.ResultsListing.HeaderContainer,
 	}
 	if AS.Retail then
-		--tinsert(headers, selling.CurrentItemListing.HeaderContainer)
+		tinsert(headers, selling.CurrentPricesListing.HeaderContainer)
 		tinsert(headers, selling.HistoricalPriceListing.HeaderContainer)
 		tinsert(headers, selling.ResultsListing.HeaderContainer)
 	end
