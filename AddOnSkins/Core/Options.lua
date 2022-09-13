@@ -22,7 +22,7 @@ local DEVELOPERS = { 'AcidWeb', 'Affli', 'Aldarana', 'Arstraea', 'Blazeflack', '
 sort(DEVELOPERS, function(a, b) return strlower(a) < strlower(b) end)
 local DEVELOPER_STRING = table.concat(DEVELOPERS, '|n')
 
-local DefaultTemplates = { ClassColor = 'Class Color', Custom = 'Custom', Default = 'Default', Transparent = 'Transparent' }
+local DefaultTemplates = { ClassColor = ASL['Class Color'], Custom = ASL['Custom'], Default = ASL['Default'], Transparent = ASL['Transparent'] }
 local Embeds = { NONE = 'None', Details = 'Details', Omen = 'Omen', Skada = 'Skada', Recount = 'Recount', TinyDPS = 'TinyDPS' }
 local BlizzardSkins = {}
 
@@ -108,7 +108,7 @@ AS.Options.args.general.args.general.inline = true
 AS.Options.args.general.args.general.args.LoginMsg = ACH:Toggle(ASL['Login Message'], nil, 1)
 AS.Options.args.general.args.general.args.SkinDebug = ACH:Toggle(ASL['Enable Skin Debugging'], nil, 2)
 
-AS.Options.args.general.args.Theme = ACH:Select(ASL['Themes'], nil, 2, { PixelPerfect = 'Thin Border', TwoPixel = 'Two Pixel', ThickBorder = 'Thick Border' })
+AS.Options.args.general.args.Theme = ACH:Select(ASL['Themes'], nil, 2, { PixelPerfect = ASL['Thin Border'], TwoPixel = ASL['Two Pixel'], ThickBorder = ASL['Thick Border'] })
 AS.Options.args.general.args.SkinTemplate = ACH:Select(ASL['Template'], nil, 3, function() local tbl = CopyTable(DefaultTemplates) if AS:CheckOption('ElvUIStyle', 'ElvUI') then tbl.Custom = nil end return tbl end)
 
 AS.Options.args.general.args.Textures = ACH:Group(ASL['Textures'], nil, 4)
@@ -276,7 +276,7 @@ function AS:BuildOptions()
 	wipe(skins)
 
 	if AS:CheckAddOn('ElvUI') then
-		AS.Options.args.general.args.Textures.args.ElvUIStyle = ACH:Toggle('ElvUI Style', nil, 0)
+		AS.Options.args.general.args.Textures.args.ElvUIStyle = ACH:Toggle(ASL['ElvUI Style'], nil, 0)
 
 		if AS:CheckAddOn('ElvUI_MerathilisUI') then
 			DefaultTemplates['MerathilisUI'] = '|cffff7d0aMerathilisUI|r'
