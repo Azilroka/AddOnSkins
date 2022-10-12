@@ -68,7 +68,7 @@ local function SkinMoneyInput(editbox, height)
 end
 
 local function SkinMainFrames()
-	local list = _G.AuctionatorShoppingListFrame
+	local list = _G.AuctionatorShoppingFrame
 	local config = _G.AuctionatorConfigFrame
 	local selling = _G.AuctionatorSellingFrame
 	local cancelling = _G.AuctionatorCancellingFrame
@@ -191,6 +191,7 @@ local function SkinMainFrames()
 	local tabs = {
 		_G.AuctionatorTabs_Auctionator,
 		_G.AuctionatorTabs_Cancelling,
+		_G.AuctionatorTabs_Shopping,
 		_G.AuctionatorTabs_Selling,
 		_G.AuctionatorTabs_ShoppingLists,
 		shopTabs.ListTab,
@@ -468,9 +469,9 @@ local function SkinItemFrame(frame)
 end
 
 local function HandleLostThings()
-	AS:StripTextures(_G.AuctionatorShoppingListFrame.ScrollListRecents.InsetFrame)
+	AS:StripTextures(_G.AuctionatorShoppingFrame.ScrollListRecents.InsetFrame)
 
-	AS:StripTextures(_G.AuctionatorShoppingListFrame.ScrollListShoppingList.InsetFrame)
+	AS:StripTextures(_G.AuctionatorShoppingFrame.ScrollListShoppingList.InsetFrame)
 	AS:StripTextures(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Icon.IconBorder)
 	AS:StripTextures(_G.AuctionatorSellingFrame.BagListing.ScrollFrame)
 	AS:StripTextures(_G.AuctionatorSellingFrame.BagListing)
