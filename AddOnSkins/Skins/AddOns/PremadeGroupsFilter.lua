@@ -12,18 +12,20 @@ function AS:PremadeGroupsFilter()
 
 	AS:SkinFrame(PremadeGroupsFilterDialog)
 	AS:SkinCloseButton(PremadeGroupsFilterDialog.CloseButton)
-	AS:Desaturate(PremadeGroupsFilterDialog.MoveableToggle)
-	AS:Desaturate(PremadeGroupsFilterDialog.MinimizeButton)
-	AS:Desaturate(PremadeGroupsFilterDialog.MaximizeButton)
+	AS:SkinMaxMinFrame(PremadeGroupsFilterDialog.MaximizeMinimizeFrame)
 	AS:SkinCheckBox(UsePFGButton)
 
 	AS:SkinCheckBox(PremadeGroupsFilterDialog.Difficulty.Act)
 	AS:SkinDropDownBox(PremadeGroupsFilterDialog.Difficulty.DropDown)
 
-	AS:SkinCheckBox(PremadeGroupsFilterDialog.Ilvl.Act)
-	AS:SkinEditBox(PremadeGroupsFilterDialog.Ilvl.Min)
-	AS:SkinEditBox(PremadeGroupsFilterDialog.Ilvl.Max)
-	AS:SkinCheckBox(PremadeGroupsFilterDialog.Noilvl.Act)
+	AS:SkinCheckBox(PremadeGroupsFilterDialog.MPRating.Act)
+	AS:SkinEditBox(PremadeGroupsFilterDialog.MPRating.Min)
+	AS:SkinEditBox(PremadeGroupsFilterDialog.MPRating.Max)
+	--AS:SkinCheckBox(PremadeGroupsFilterDialog.Noilvl.Act)
+
+	AS:SkinCheckBox(PremadeGroupsFilterDialog.PVPRating.Act)
+	AS:SkinEditBox(PremadeGroupsFilterDialog.PVPRating.Min)
+	AS:SkinEditBox(PremadeGroupsFilterDialog.PVPRating.Max)
 
 	AS:SkinCheckBox(PremadeGroupsFilterDialog.Defeated.Act)
 	AS:SkinEditBox(PremadeGroupsFilterDialog.Defeated.Min)
@@ -49,10 +51,11 @@ function AS:PremadeGroupsFilter()
 	AS:SkinEditBox(PremadeGroupsFilterDialog.Dps.Min)
 	AS:SkinEditBox(PremadeGroupsFilterDialog.Dps.Max)
 
-	AS:StripTextures(PremadeGroupsFilterDialog.Advanced)
+	--AS:StripTextures(PremadeGroupsFilterDialog.Advanced)
 
 	AS:SkinFrame(PremadeGroupsFilterDialog.Expression)
 	AS:SkinScrollBar(PremadeGroupsFilterDialog.Expression.ScrollBar)
+	AS:SkinEditBox(PremadeGroupsFilterDialog.Sorting.SortingExpression)
 	PremadeGroupsFilterDialog.Expression.ScrollBar:SetPoint("TOPLEFT", PremadeGroupsFilterDialog.Expression, "TOPRIGHT", -17, -12)
 	PremadeGroupsFilterDialog.Expression.ScrollBar:SetPoint("BOTTOMLEFT", PremadeGroupsFilterDialog.Expression, "BOTTOMRIGHT", -17, 12)
 
