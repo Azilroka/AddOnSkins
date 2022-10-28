@@ -1,4 +1,4 @@
- 	-- Updated for 9.0 October 21st, 2020 GRM ver 1.913 (Classic Compatible)
+ 	-- Updated for 10.0 October 27th, 2022 GRM ver 1.942 (Classic/Wrath/Live Retail Compatible)
 
 local AS = unpack(AddOnSkins)
 local GRM = {}
@@ -129,6 +129,8 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_OpenExportToolButton)
 	AS:SkinButton(GRM_OpenAuditJoinDateToolButton)
 	AS:SkinButton(GRM_RosterResetOptionsButton)
+	AS:SkinFrame(GRM_DefaultTabSelected)
+	AS:SkinFrame(GRM_DefaultTabMenu	)
 
 	-- Options: Tabs
 	AS:SkinButton(GRM_GeneralTab)
@@ -170,6 +172,12 @@ function AS:GuildRosterManager()
 	AS:SkinCheckBox(GRM_LevelFilter4Button)
 	AS:SkinCheckBox(GRM_LevelFilter5Button)
 	AS:SkinCheckBox(GRM_LevelFilter6Button)
+	if GRM_LevelFilter7Button then
+		AS:SkinCheckBox(GRM_LevelFilter7Button)	-- 10.0 with level 70 introduced need for
+	end
+	if GRM_LevelFilter8Button then
+		AS:SkinCheckBox(GRM_LevelFilter8Button)	-- Anticipated Cata expansion Classic
+	end
 	AS:SkinEditBox(GRM_RosterTimeIntervalEditBox)
 	AS:SkinEditBox(GRM_ReportInactiveReturnEditBox)
 	AS:SkinEditBox(GRM_RosterReportUpcomingEventsEditBox)
@@ -185,7 +193,6 @@ function AS:GuildRosterManager()
 	AS:SkinCheckBox(GRM_CustomNoteSyncCheckBox)
 	AS:SkinCheckBox(GRM_BDaySyncCheckBox)
 	AS:SkinCheckBox(GRM_RosterNotifyOnChangesCheckButton)
-	AS:SkinSlideBar(GRM_SyncSpeedSlider)
 	AS:SkinEditBox(GRM_AutoTriggerTimeEditBox)
 
 	-- Officer Tab
@@ -232,6 +239,8 @@ function AS:GuildRosterManager()
 	AdjustSliderThumbFrameLevel ( GRM_AddEventScrollFrameSliderThumbTexture )
 	AS:SkinButton(GRM_EventsFrameSetAnnounceButton)
 	AS:SkinButton(GRM_EventsFrameIgnoreButton)
+	AS:SkinButton(GRM_PlayerSearchBanEditBox)
+	AS:SkinButton(GRM_EventsFrameIgnoreAllButton)
 
 	--------------------
 	--Ban List
@@ -247,6 +256,7 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_BanListRemoveButton)
 	AS:SkinButton(GRM_BanListAddButton)
 	AS:SkinButton(GRM_BanListEditButton)
+	AS:SkinButton(GRM_BanListRemoveAllCurrentButton)
 	AS:SkinScrollBar(GRM_CoreBanListScrollFrameSlider)
 	AdjustSliderThumbFrameLevel ( GRM_CoreBanListScrollFrameSliderThumbTexture )
 
@@ -256,6 +266,8 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_AddBanConfirmButton)
 	AS:SkinEditBox(GRM_AddBanNameSelectionEditBox)
 	AS:SkinEditBox(GRM_AddBanReasonEditBox)
+	AS:SkinEditBox(GRM_RosterMinLvlEditBox)
+	AS:SkinEditBox(GRM_PlayerSearchBanEditBox)
 
 	-- Classic compatibility, one code-base
 	if buildVersion < 80000 then
@@ -331,6 +343,7 @@ function AS:GuildRosterManager()
 	GRM_AuditScrollBorderFrameTopRightCorner:Hide()
 	GRM_AuditScrollBorderFrameBottomRightCorner:Hide()
 	GRM_AuditScrollBorderFrameBottomLeftCorner:Hide()
+	AS:SkinEditBox(GRM_PlayerSearchAuditEditBox)
 
 	-- AuditToolButton
 	AS:SkinFrame(GRM_AuditJDTool)
@@ -435,7 +448,8 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_ToolResetSelectedMacroNamesButton)
 	AS:SkinButton(GRM_ToolIgnoreClearSelectionButton)
 	AS:SkinButton(GRM_ToolIgnoreResetSelectedNamesButton)
-	AS:SkinButton(GRM_ToiolIgnoreRemoveAllButton)
+	AS:SkinButton(GRM_ToolIgnoreRemoveAllButton)
+	AS:SkinButton(GRM_ToolSyncRulesButton)
 	AS:SkinEditBox(GRM_RosterKickRecommendEditBox)
 	AS:SkinFrame(GRM_ToolMacrodScrollBorderFrame)
 	AS:SkinFrame(GRM_ToolQueuedScrollBorderFrame)
@@ -509,11 +523,9 @@ function AS:GuildRosterManager()
 
 	-- Since much of the addon only loads on demand, this AddOnSkins file needs to wait til certain things have been configured first...
 	local isLoaded , isLoaded2 , isLoaded3 , isLoaded4 , isLoaded5 , isLoaded6 = false , false , false , false , false , false
-
-
-	GRM_MemberDetailMetaData:HookScript("OnShow" , function( self )
+	GRM_PlayerNoteWindow:HookScript("OnShow" , function()
 		if not isLoaded then
-			GRM_AddAltEditFrame:SetPoint ( "BOTTOMLEFT" , self , "BOTTOMRIGHT" ,  2 , 0 )
+			GRM_AddAltEditFrame:SetPoint ( "BOTTOMLEFT" , GRM_MemberDetailMetaData , "BOTTOMRIGHT" ,  2 , 0 )
 			AS:SkinEditBox(GRM_AddAltEditBox, 120, 15)
 			AS:SkinEditBox(GRM_PlayerNoteEditBox)
 			AS:SkinEditBox(GRM_PlayerOfficerNoteEditBox)
@@ -521,13 +533,13 @@ function AS:GuildRosterManager()
 
 			if buildVersion < 80000 then
 				if GRM_UI.GuildRosterFrame:IsVisible() then
-					self:ClearAllPoints()
-					self:SetPoint ( "TOPLEFT" , GRM_UI.GuildRosterFrame , "TOPRIGHT" , 0 , 5 )
+					GRM_MemberDetailMetaData:ClearAllPoints()
+					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GRM_UI.GuildRosterFrame , "TOPRIGHT" , 0 , 5 )
 				end
 
 				if GuildMemberDetailFrame:IsVisible() then
-					self:ClearAllPoints()
-					self:SetPoint ( "TOPLEFT" , GuildMemberDetailFrame , "TOPRIGHT" , 2 , 0.5 )
+					GRM_MemberDetailMetaData:ClearAllPoints()
+					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GuildMemberDetailFrame , "TOPRIGHT" , 2 , 0.5 )
 				end
 
 				GuildMemberDetailFrame:HookScript ( "OnShow" , function( self )
@@ -544,11 +556,11 @@ function AS:GuildRosterManager()
 
 			else
 				if CommunitiesFrame:IsVisible() then
-					self:ClearAllPoints();
-					self:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 25 , 5 )
+					GRM_MemberDetailMetaData:ClearAllPoints();
+					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 25 , 5 )
 				elseif GRM_UI.GuildRosterFrame:IsVisible() then
-					self:ClearAllPoints();
-					self:SetPoint ( "TOPLEFT" , GRM_UI.GuildRosterFrame , "TOPRIGHT" , 25 , 5 )
+					GRM_MemberDetailMetaData:ClearAllPoints();
+					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GRM_UI.GuildRosterFrame , "TOPRIGHT" , 25 , 5 )
 				end
 
 				if GuildFrame:IsVisible() and not GRM_G.CurrentPinCommunity then
@@ -593,9 +605,11 @@ function AS:GuildRosterManager()
 			AS:SkinFrame(GRM_CustomNoteEditBoxFrame)
 			AS:SkinFrame(GRM_altDropDownOptions)
 			AS:SkinFrame(GRM_DropDownList1AttachmentFrame)
-			-- Ban Popup Frames
 			AS:SkinFrame(GRM_PopupWindow)
 			AS:SkinFrame(GRM_MemberDetailEditBoxFrame)
+			AS:SkinCheckBox(GRM_PopupWindowCheckButton1)
+			AS:SkinCheckBox(GRM_PopupWindowCheckButton2)
+			-- Ban Popup Frames
 
 			GRM_MemberDetailRankToolTip:HookScript ( "OnShow" , function()
 				AS:SkinFrame(GRM_MemberDetailRankToolTip)
@@ -612,18 +626,12 @@ function AS:GuildRosterManager()
 			GRM_MemberDetailNJDSyncTooltip:HookScript ( "OnShow" , function()
 				AS:SkinFrame(GRM_MemberDetailNJDSyncTooltip)
 			end)
-			GRM_AltGroupingTooltip:HookScript ( "OnShow" , function()
-				AS:SkinFrame(GRM_AltGroupingTooltip)
-			end)
 
-			GRM_PopupWindow:SetPoint ( "TOPLEFT" , StaticPopup1 , "BOTTOMLEFT" , 0 , -1 )
-			GRM_MemberDetailEditBoxFrame:SetPoint ( "TOP" , GRM_PopupWindow , "BOTTOM" , 0 , -1 )
 			GRM_SyncJoinDateSideFrame:SetPoint ( "TOPLEFT" , GRM_MemberDetailMetaData , "TOPRIGHT" , 1 , 0 )
-
 			GRM_AltGroupingScrollFrameSlider:SetPoint ( "TOPLEFT" , GRM_AltGroupingScrollFrame , "TOPRIGHT" , -19 , -14.5 )
 			GRM_AltGroupingScrollBorderFrameCloseButton:SetPoint ( "TOPRIGHT" , GRM_AltGroupingScrollBorderFrame , "TOPRIGHT" , 8 , 7 )
-			GRM_AltGroupingScrollBorderFrameTitle:SetPoint ( "Bottom" , GRM_AltGroupingScrollBorderFrame , "TOP" , 0 , 2 )
-			GRM_WindowIsLockedText:SetPoint ( "BOTTOMRIGHT" , GRM_MemberDetailMetaData , "TOPRIGHT" , -5 , 0 )
+			GRM_UI.GRM_MemberDetailMetaData.GRM_AltGroupingScrollBorderFrameTitle:SetPoint ( "Bottom" , GRM_AltGroupingScrollBorderFrame , "TOP" , 0 , 2 )
+			GRM_UI.GRM_MemberDetailMetaData.GRM_WindowIsLockedText:SetPoint ( "BOTTOMRIGHT" , GRM_MemberDetailMetaData , "TOPRIGHT" , -5 , 0 )
 
 			if not isLoaded2 then
 				sideGroupingLogic()
@@ -632,25 +640,29 @@ function AS:GuildRosterManager()
 			GRM_CoreAltScrollFrameSlider:SetPoint( "TOPLEFT" , GRM_CoreAltScrollFrame , "TOPRIGHT" , -2 , -10 )
 
 			-- FONT ISSUES
-			GRM_MemberDetailLastOnlineTitleTxt:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9 , "NONE" );
-			GRM_MemberDetailMetaZoneInfoText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9 , "NONE" );
-			GRM_MemberDetailDateJoinedTitleTxt:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9 , "NONE" );
-			GRM_MemberDetailBirthdayTitleText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9 , "NONE" );
-			GRM_altFrameTitleText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 , "NONE" );
-			GRM_AddAltTitleText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 , "NONE" );
+			GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailLastOnlineTitleTxt:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9 , "NONE" );
+			GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailMetaZoneInfoText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9 , "NONE" );
+			GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailDateJoinedTitleTxt:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9 , "NONE" );
+			GRM_UI.GRM_MemberDetailMetaData.GRM_MemberDetailBirthdayTitleText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 9 , "NONE" );
+			GRM_UI.GRM_MemberDetailMetaData.GRM_altFrameTitleText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 8 , "NONE" );
+			GRM_UI.GRM_CoreAltFrame.GRM_AddAltEditFrame.GRM_AddAltTitleText:SetFont ( GRM_G.FontChoice , GRM_G.FontModifier + 11 , "NONE" );
 
 			-- Tooltip Scaling should be a bit bigger
 			GRM_MemberDetailNJDSyncTooltip:SetScale ( 0.85 )
 			GRM_MemberDetailNotifyStatusChangeTooltip:SetScale ( 0.85 )
+			C_Timer.After ( 0.5 , function()
+				GRM_MemberDetailMetaDataCloseButton:SetPoint( "TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData , "TOPRIGHT" , 0 , 0 );
+				AS:SkinButton(GRM_SyncDateArrowButton)
+				AS:SkinButton(GRM_ExtraAltDetailsArrowButton)
+			end);
 			isLoaded = true
 		end
 	end)
 	
-
 	GRM_RosterCheckBoxSideFrame:HookScript("OnShow" , function()
 		if not isLoaded2 then
 			-- MISC FRAMES
-			GRM_LogTab:SetPoint ( "BOTTOMLEFT" , GRM_RosterChangeLogFrame , "TOPLEFT" , 0 , 0 )
+			GRM_LogTab:SetPoint ( "BOTTOMLEFT" , GRM_RosterChangeLogFrame , "TOPLEFT" , 0 , 1 )
 			GRM_RosterCheckBoxSideFrame:SetPoint ( "TOPLEFT" , GRM_RosterChangeLogFrame , "TOPRIGHT" , 2 , 0 )
 			GRM_AddBanNameSelectionEditBox:SetSize ( 129 , 20 )
 			GRM_BanServerSelected:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionEditBox , "BOTTOMLEFT" , 0 , -2 )
@@ -683,7 +695,7 @@ function AS:GuildRosterManager()
 			GRM_LogExtraOptionsFrame:SetPoint ( "TOPLEFT" , GRM_LogFrame , "BOTTOMLEFT" , 0 , -1 )
 			GRM_LogExtraOptionsFrame:SetSize ( 600 , 155 )
 			GRM_LogExtraOptionsButton:SetPoint ( "TOP" , GRM_RosterCheckBoxSideFrame , "BOTTOM" , 0 , -1 );
-			GRM_EventsFrameStatusMessageText2:SetPoint ( "TOP" , GRM_EventsFrame , 0 , 55 );
+			GRM_UI.GRM_RosterChangeLogFrame.GRM_EventsFrame.GRM_EventsFrameStatusMessageText2:SetPoint ( "TOP" , GRM_EventsFrame , 0 , 55 );
 
 			if not isLoaded then
 				sideGroupingLogic()
@@ -766,6 +778,7 @@ function AS:GuildRosterManager()
 		if a or b then
 			C_Timer.After ( 3 , function()
 				GRM.WaitForLoad( a , b )
+				return;
 			end)
 		end
 	end
