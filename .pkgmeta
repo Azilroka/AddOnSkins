@@ -4,7 +4,7 @@ enable-nolib-creation: no
 
 externals:
   AddOnSkins/Libs/Ace3:
-    url: https://repos.wowace.com/wow/ace3/trunk
+    url: https://github.com/WoWUIDev/Ace3
 
 ignore:
     - AddOnSkins/Libs/Ace3/tests
