@@ -72,8 +72,6 @@ local function SkinMainFrames()
 	local config = _G.AuctionatorConfigFrame
 	local selling = _G.AuctionatorSellingFrame
 	local cancelling = _G.AuctionatorCancellingFrame
-	local recentList = list.ScrollListRecents
-	local shoppingList = list.ScrollListShoppingList
 	local shopTabs = list.RecentsTabsContainer
 
 	AS:StripTextures(list)
@@ -106,12 +104,6 @@ local function SkinMainFrames()
 	list.Export:Point('RIGHT', list.Import, 'LEFT', -3, 0)
 
 	if AS.Retail then
-		recentList.InsetFrame:StripTextures()
-		recentList.InsetFrame:Point('TOPLEFT', recentList, 'TOPLEFT', 3, 0)
-		shoppingList.InsetFrame:StripTextures()
-		shoppingList.InsetFrame:Point('TOPLEFT', shoppingList, 'TOPLEFT', 3, 0)
-		AS:StripTextures(shoppingList.ScrollFrame)
-		AS:SetTemplate(shoppingList.ScrollFrame, 'Transparent')
 		AS:StripTextures(selling.HistoricalPriceInset)
 		AS:SetTemplate(selling.HistoricalPriceInset, 'Transparent')
 		selling.HistoricalPriceInset:SetPoint('TOPLEFT', selling.HistoricalPriceListing, 'TOPLEFT', -7, -25)
@@ -135,7 +127,7 @@ local function SkinMainFrames()
 
 	for _, button in next, {
 		-- Shopping
-		_G.AuctionatorShoppingLists_AddItem,
+		--_G.AuctionatorShoppingLists_AddItem,
 		list.ManualSearch,
 		list.ExportCSV,
 		list.Rename,
@@ -161,8 +153,6 @@ local function SkinMainFrames()
 	local scrollBars = {
 		_G.AuctionatorSellingFrameScrollBar,
 		cancelling.ResultsListing.ScrollFrame.scrollBar,
-		recentList.ScrollFrame.scrollBar,
-		shoppingList.ScrollFrame.scrollBar,
 		list.ResultsListing.ScrollFrame.scrollBar,
 	}
 	if AS.Retail then
@@ -179,9 +169,6 @@ local function SkinMainFrames()
 		if scrollbar == _G.AuctionatorSellingFrameScrollBar then
 			scrollbar:Point('TOPLEFT', nil, 'TOPRIGHT', 7, -14)
 			scrollbar:Point('BOTTOMLEFT', nil, 'BOTTOMRIGHT', 7, 14)
-		elseif scrollbar == recentList.ScrollFrame.scrollBar or scrollbar == shoppingList.ScrollFrame.scrollBar then
-			scrollbar:Point('TOPLEFT', nil, 'TOPRIGHT', 2, -9)
-			scrollbar:Point('BOTTOMLEFT', nil, 'BOTTOMRIGHT', 2, 16)
 		else
 			scrollbar:Point('TOPLEFT', nil, 'TOPRIGHT', 1, -16)
 			scrollbar:Point('BOTTOMLEFT', nil, 'BOTTOMRIGHT', 1, 16)
@@ -193,14 +180,16 @@ local function SkinMainFrames()
 		_G.AuctionatorTabs_Cancelling,
 		_G.AuctionatorTabs_Shopping,
 		_G.AuctionatorTabs_Selling,
-		_G.AuctionatorTabs_ShoppingLists,
+		--_G.AuctionatorTabs_ShoppingLists,
 		shopTabs.ListTab,
 		shopTabs.RecentsTab,
 	}
 	if AS.Retail then
-		tinsert(tabs, selling.PricesTabsContainer.CurrentPricesTab)
-		tinsert(tabs, selling.PricesTabsContainer.RealmHistoryTab)
-		tinsert(tabs, selling.PricesTabsContainer.YourHistoryTab)
+		if tabs then
+			tinsert(tabs, selling.PricesTabsContainer.CurrentPricesTab)
+			tinsert(tabs, selling.PricesTabsContainer.RealmHistoryTab)
+			tinsert(tabs, selling.PricesTabsContainer.YourHistoryTab)
+		end
 	end
 
 	for _, tab in next, tabs do
@@ -298,21 +287,7 @@ local function SkinMainFrames()
 
 	-- Classic / TBC Skin
 	if not AS.Retail then
-		AS:SkinDropDownBox(AuctionatorShoppingListFrame.ListDropdown, 200)
-	end
-
-	-- create list backdrop
-	for _, frame in next, {recentList, shoppingList} do
-		for i = 1, frame:GetNumRegions() do
-			local region = select(i, frame:GetRegions())
-			if region:IsObjectType('Texture') and region:GetTexture() == 3054898 then
-				AS:StripTextures(region)
-				AS:CreateBackdrop(region, 'Transparent')
-				--if region.Backdrop then
-					AS:SetOutside(region.Backdrop, frame.InsetFrame)
-				--end
-			end
-		end
+		AS:SkinDropDownBox(_G.AuctionatorShoppingListFrame.ListDropdown, 200)
 	end
 end
 
@@ -471,7 +446,7 @@ end
 local function HandleLostThings()
 	AS:StripTextures(_G.AuctionatorShoppingFrame.ScrollListRecents.InsetFrame)
 
-	AS:StripTextures(_G.AuctionatorShoppingFrame.ScrollListShoppingList.InsetFrame)
+	--AS:StripTextures(_G.AuctionatorShoppingFrame.ScrollListShoppingList.InsetFrame)
 	AS:StripTextures(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Icon.IconBorder)
 	AS:StripTextures(_G.AuctionatorSellingFrame.BagListing.ScrollFrame)
 	AS:StripTextures(_G.AuctionatorSellingFrame.BagListing)
