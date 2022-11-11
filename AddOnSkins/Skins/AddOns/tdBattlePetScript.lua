@@ -26,7 +26,7 @@ function AS:tdBattlePetScript()
 	local BlockDialog = tdBattlePetScript.BlockDialog
 	AS:SkinFrame(BlockDialog)
 	BlockDialog:SetFrameStrata("DIALOG")
-	BlockDialog:SetFrameLvel(10000)
+	BlockDialog:SetFrameLevel(10000)
 	BlockDialog.Text:SetFont(AS.Font, 12)
 	AS:SkinButton(BlockDialog.AcceptButton)
 	AS:SkinButton(BlockDialog.CancelButton)
