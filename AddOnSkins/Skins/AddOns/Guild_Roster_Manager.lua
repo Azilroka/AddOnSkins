@@ -1,4 +1,4 @@
- 	-- Updated for 10.0 November 11th, 2022 GRM ver 1.947 (Classic/Wrath/Live Retail Compatible)
+ 	-- Updated for 10.0.2 November 15th, 2022 GRM ver 1.948 (Classic/Wrath/Live Retail Compatible)
 
 local AS = unpack(AddOnSkins)
 local GRM = {}
@@ -174,6 +174,8 @@ function AS:GuildRosterManager()
 	AS:SkinCheckBox(GRM_LevelFilter4Button)
 	AS:SkinCheckBox(GRM_LevelFilter5Button)
 	AS:SkinCheckBox(GRM_LevelFilter6Button)
+	AS:SkinCheckBox(GRM_AnnounceBdaysOnLoginButton)
+
 	if GRM_LevelFilter7Button then
 		AS:SkinCheckBox(GRM_LevelFilter7Button)	-- 10.0 with level 70 introduced need for
 	end
