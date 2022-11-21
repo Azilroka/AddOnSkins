@@ -184,7 +184,6 @@ function AS:GuildRosterManager()
 	AS:SkinEditBox(GRM_RosterMinLvlEditBox)
 
 	-- Sync Tab
-	AS:SkinCheckBox(GRM_SyncOnlyCurrentVersionCheckButton)
 	AS:SkinCheckBox(GRM_SyncCompatibilityMessageButton)
 	AS:SkinCheckBox(GRM_RosterSyncCheckButton)
 	AS:SkinCheckBox(GRM_AutoTriggerSyncCheckButton)
