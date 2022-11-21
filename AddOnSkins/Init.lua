@@ -23,12 +23,10 @@ Engine[2] = _G.LibStub("AceLocale-3.0"):GetLocale('AddOnSkins', false)
 _G.AddOnSkins = Engine
 _G.AddOnSkinsDS = {}
 
-local _, _, _, wowtoc = GetBuildInfo() -- TODO: Move back to Core.lua
-
 AS.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 AS.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
-AS.TBC = wowtoc >= 20504 and wowtoc < 30000
-AS.Wrath = wowtoc >= 30400 and wowtoc < 40000
+AS.TBC = WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+AS.Wrath = WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
 
 AS.Title = GetAddOnMetadata(..., 'Title')
 AS.Version = tonumber(GetAddOnMetadata(..., 'Version'))
