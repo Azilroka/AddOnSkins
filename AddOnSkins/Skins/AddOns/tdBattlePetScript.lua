@@ -4,7 +4,7 @@ if not AS:CheckAddOn('tdBattlePetScript') then return end
 
 function AS:tdBattlePetScript()
 	--/run LibStub('AceAddon-3.0'):GetAddon('tdBattlePetScript'):GetModule('UI.MainPanel').MainPanel:SetTemplate()
-	local tdBattlePetScript = LibStub('AceAddon-3.0'):GetAddon('tdBattlePetScript'):GetModule('UI.MainPanel')
+	local tdBattlePetScript = LibStub('AceAddon-3.0'):GetAddon('PetBattleScripts'):GetModule('UI.MainPanel')
 
 	AS:SkinFrame(tdBattlePetScript.MainPanel, nil, nil, true)
 	for i = 1, tdBattlePetScript.MainPanel:GetNumChildren() do
