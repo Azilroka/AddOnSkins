@@ -38,9 +38,15 @@ function AS:Outfitter()
 	OutfitterFrameTab1:ClearAllPoints()
 	OutfitterFrameTab2:ClearAllPoints()
 	OutfitterFrameTab3:ClearAllPoints()
-	OutfitterFrameTab1:SetPoint('TOPLEFT', OutfitterFrame, 'BOTTOMRIGHT', -65, -2)
-	OutfitterFrameTab2:SetPoint('LEFT', OutfitterFrameTab1, 'LEFT', -65, 0)
-	OutfitterFrameTab3:SetPoint('LEFT', OutfitterFrameTab2, 'LEFT', -65, 0)
+	if AS.Retail then
+		OutfitterFrameTab3:SetPoint('BOTTOMLEFT', OutfitterFrame, 'BOTTOMLEFT', 60, -25)
+		OutfitterFrameTab2:SetPoint('LEFT', OutfitterFrameTab3, 'LEFT', 0, 0)
+		OutfitterFrameTab1:SetPoint('LEFT', OutfitterFrameTab2, 'LEFT', 0, 0)
+	else
+		OutfitterFrameTab1:SetPoint('TOPLEFT', OutfitterFrame, 'BOTTOMRIGHT', -65, -2)
+		OutfitterFrameTab2:SetPoint('LEFT', OutfitterFrameTab1, 'LEFT', -65, 0)
+		OutfitterFrameTab3:SetPoint('LEFT', OutfitterFrameTab2, 'LEFT', -65, 0)
+	end
 	AS:SkinButton(OutfitterFrameTab1, true)
 	AS:SkinButton(OutfitterFrameTab2, true)
 	AS:SkinButton(OutfitterFrameTab3, true)
