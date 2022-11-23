@@ -80,7 +80,7 @@ function AS:ArkInventory()
 		frame:SetBackdropBorderColor(obj:GetBackdropBorderColor())
 		frame:SetBackdropColor(unpack(AS.BorderColor))
 		AS:SkinTexture(frame.icon)
-		frame:SetNormalTexture(nil)
+		frame:SetNormalTexture('')
 
 		if _G[frame:GetName()] == ARKINV_Frame1ChangerWindowBag1 then
 			ARKINV_Frame1ChangerWindowBag1IconTexture:SetTexture('interface\\icons\\inv_misc_bag_07_green')
