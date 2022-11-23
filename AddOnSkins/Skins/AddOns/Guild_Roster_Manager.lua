@@ -1,4 +1,4 @@
- 	-- Updated for 10.0 October 27th, 2022 GRM ver 1.942 (Classic/Wrath/Live Retail Compatible)
+ 	-- Updated for 10.0.2 November 15th, 2022 GRM ver 1.948 (Classic/Wrath/Live Retail Compatible)
 
 local AS = unpack(AddOnSkins)
 local GRM = {}
@@ -111,6 +111,8 @@ function AS:GuildRosterManager()
 	AS:SkinFrame(GRM_FontDropDownMenu)
 	AS:SkinFrame(GRM_TimestampSelected)
 	AS:SkinFrame(GRM_TimestampSelectedDropDownMenu)
+	AS:SkinFrame(GRM_NonGlobalTimestampSelected)
+	AS:SkinFrame(GRM_NonGlobalTimestampSelectedDropDownMenu)
 	AS:SkinFrame(GRM_24HrSelected)
 	AS:SkinFrame(GRM_24HrSelectedDropDownMenu)
 	AS:SkinButton(GRM_ScanOptionsButton)
@@ -172,6 +174,8 @@ function AS:GuildRosterManager()
 	AS:SkinCheckBox(GRM_LevelFilter4Button)
 	AS:SkinCheckBox(GRM_LevelFilter5Button)
 	AS:SkinCheckBox(GRM_LevelFilter6Button)
+	AS:SkinCheckBox(GRM_AnnounceBdaysOnLoginButton)
+
 	if GRM_LevelFilter7Button then
 		AS:SkinCheckBox(GRM_LevelFilter7Button)	-- 10.0 with level 70 introduced need for
 	end
@@ -467,6 +471,7 @@ function AS:GuildRosterManager()
 	AS:SkinEditBox(GRM_NoteSearchEditBox)
 	AS:SkinCheckBox(GRM_ToolCoreIgnoreCheckButton)
 	AS:SkinCheckBox(GRM_MacroToolDisableLogSpamCheckbutton)
+	AS:SkinCheckBox(GRM_MacroToolShowOnlineOnlyCheckButton)
 
 	AS:SkinScrollBar(GRM_ToolMacrodScrollFrameSilder)
 	AdjustSliderThumbFrameLevel ( GRM_ToolMacrodScrollFrameSilderThumbTexture )
@@ -482,11 +487,12 @@ function AS:GuildRosterManager()
 	--------------------
 	-- Export Tool
 	--------------------
+	AS:SkinCheckBox (GRM_ExportAutoIncludeHeadersCheckButton)
 	AS:SkinButton(GRM_ShowExportWindowButton)
 	AS:SkinButton(GRM_ExportSelectedRangeButton)
 	AS:SkinButton(GRM_ExportNextRangeButton)
 	AS:SkinButton(GRM_ExportPreviousRangeButton)
-	AS:SkinButton(GRM_ExportMemberDetailsHeadersButton)
+	AS:SkinButton(GRM_ExportMemberDetailsHeadersButton)	
 	AS:SkinButton(GRM_ExportResetOptionsButton)
 	AS:SkinFrame(GRM_ExportLogScrollBorderFrame)
 	AS:SkinEditBox(GRM_ExportRangeEditBox1)
@@ -495,6 +501,12 @@ function AS:GuildRosterManager()
 	AS:SkinFrame(GRM_DelimiterDropdownMenuSelected)
 	AS:SkinScrollBar(GRM_ExportLogScrollFrameSlider)
 	AdjustSliderThumbFrameLevel ( GRM_ExportLogScrollFrameSliderThumbTexture )
+
+	for i = 1 , 21 do
+		if i ~= 19 then
+			AS:SkinCheckBox(_G["GRM_ExportFilter"..i])
+		end
+	end
 
 	local sideGroupingLogic = function()
 		GRM_AltGroupingScrollBorderFrame:HookScript ( "OnShow" , function()
