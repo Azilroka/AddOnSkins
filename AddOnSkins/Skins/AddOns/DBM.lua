@@ -43,14 +43,10 @@ function AS:DBM(event, addon)
 						AS:SetTemplate(frame)
 
 						name:ClearAllPoints()
-						name:SetWidth(165)
-						name:SetHeight(8)
 						name:SetJustifyH('LEFT')
-						name:SetShadowColor(0, 0, 0, 0)
 
 						timer:ClearAllPoints()
 						timer:SetJustifyH('RIGHT')
-						timer:SetShadowColor(0, 0, 0, 0)
 
 						if AS:CheckOption('DBMSkinHalf') then
 							name:SetPoint('BOTTOMLEFT', frame, 'TOPLEFT', 0, 3)
