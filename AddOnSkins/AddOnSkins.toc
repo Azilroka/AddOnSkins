@@ -1,6 +1,6 @@
 ## Interface: 100002
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
-## Version: 4.60
+## Version: 4.61
 ## Author: Azilroka, Nihilistzsche
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 ## OptionalDeps: AllTheThings, ElvUI

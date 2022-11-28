@@ -42,7 +42,6 @@
 	<Script file="Critline.lua"/>
 	<Script file="DBM.lua"/>
 	<Script file="DejaCharacterStats.lua"/>
-	<Script file="Details.lua"/>
 	<Script file="Dominos.lua"/>
 	<Script file="Dresser.lua"/>
 	<Script file="DressUp.lua"/>
