@@ -24,7 +24,7 @@ function AS:DBM(event, addon)
 						local timer = _G[frame:GetName()..'BarTimer']
 						local iconSize = bar.enlarged and DBT.Options.HugeHeight or DBT.Options.Height
 						if AS:CheckOption('DBMSkinHalf') then
-							iconSize = iconSize * 2
+							iconSize = iconSize / 2
 						end
 						iconSize = iconSize - 2
 
