@@ -3,12 +3,6 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Recount') then return end
 
 function AS:Recount()
-	local L = LibStub('AceLocale-3.0'):GetLocale('Recount')
-
-	function Recount:ShowReset()
-		AS:AcceptFrame(L['Reset Recount?'], function(self) Recount:ResetData() self:GetParent():Hide() end)
-	end
-
 	local function SkinFrame(frame)
 		AS:SkinBackdropFrame(frame)
 		frame.Backdrop:SetAllPoints()

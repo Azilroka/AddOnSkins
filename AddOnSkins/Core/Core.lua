@@ -13,7 +13,6 @@ local IsAddOnLoaded, C_Timer = IsAddOnLoaded, C_Timer
 
 AS.SkinErrors = {}
 
-local AcceptFrame
 local Validator = CreateFrame('Frame')
 
 function AS:CheckOption(optionName, ...)
@@ -318,7 +317,7 @@ function AS:StartSkinning()
 	end
 
 	if AS:CheckAddOn('AddonLoader') then
-		AS:AcceptFrame('AddOnSkins is not compatible with AddonLoader.\nPlease remove it if you would like all the skins to function.')
+		AS:Print('AddOnSkins is not compatible with AddonLoader.\nPlease remove it if you would like all the skins to function.')
 	end
 
 	if not AS:CheckOption('SkinDebug') and AS.FoundError then
@@ -365,33 +364,6 @@ function AS:Init(event, addon)
 			AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
 		end
 	end
-end
-
-function AS:AcceptFrame(MainText, Function)
-	if not AcceptFrame then
-		AcceptFrame = CreateFrame('Frame', 'AcceptFrame', UIParent)
-		AS:SkinFrame(AcceptFrame)
-		AcceptFrame:SetPoint('CENTER', UIParent, 'CENTER')
-		AcceptFrame:SetFrameStrata('DIALOG')
-		AcceptFrame.Text = AcceptFrame:CreateFontString(nil, "OVERLAY")
-		AcceptFrame.Text:SetFont(AS.Font, 14)
-		AcceptFrame.Text:SetPoint('TOP', AcceptFrame, 'TOP', 0, -10)
-		AcceptFrame.Accept = CreateFrame('Button', nil, AcceptFrame, 'OptionsButtonTemplate')
-		AS:SkinButton(AcceptFrame.Accept)
-		AcceptFrame.Accept:SetSize(70, 25)
-		AcceptFrame.Accept:SetPoint('RIGHT', AcceptFrame, 'BOTTOM', -10, 20)
-		AcceptFrame.Accept:SetFormattedText('|cFFFFFFFF%s|r', OKAY)
-		AcceptFrame.Close = CreateFrame('Button', nil, AcceptFrame, 'OptionsButtonTemplate')
-		AS:SkinButton(AcceptFrame.Close)
-		AcceptFrame.Close:SetSize(70, 25)
-		AcceptFrame.Close:SetPoint('LEFT', AcceptFrame, 'BOTTOM', 10, 20)
-		AcceptFrame.Close:SetScript('OnClick', function(self) self:GetParent():Hide() end)
-		AcceptFrame.Close:SetFormattedText('|cFFFFFFFF%s|r', CLOSE)
-	end
-	AcceptFrame.Text:SetText(MainText)
-	AcceptFrame:SetSize(AcceptFrame.Text:GetStringWidth() + 100, AcceptFrame.Text:GetStringHeight() + 60)
-	AcceptFrame.Accept:SetScript('OnClick', Function or function() AcceptFrame:Hide() end)
-	AcceptFrame:Show()
 end
 
 AS:RegisterEvent('ADDON_LOADED', 'Init')

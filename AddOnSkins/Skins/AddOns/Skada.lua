@@ -3,12 +3,6 @@ local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Skada') then return end
 
 function AS:Skada()
-	local L = LibStub('AceLocale-3.0'):GetLocale('Skada', false)
-
-	function Skada:ShowPopup()
-		AS:AcceptFrame(L['Do you want to reset Skada?'], function(self) Skada:Reset() self:GetParent():Hide() end)
-	end
-
 	local SkadaDisplayBar = Skada.displays['bar']
 
 	hooksecurefunc(SkadaDisplayBar, 'AddDisplayOptions', function(self, win, options)
