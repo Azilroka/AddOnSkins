@@ -28,24 +28,6 @@ function AS:Immersion(event, addon)
 	AS:Kill(ImmersionFrame.TalkBox.MainFrame.Overlay)
 
 	AS:SkinStatusBar(ImmersionFrame.TalkBox.ReputationBar)
-	ImmersionFrame.TalkBox.ReputationBar:ClearAllPoints()
-	ImmersionFrame.TalkBox.ReputationBar:SetPoint('TOPLEFT', ImmersionFrame.TalkBox.BackgroundFrame.Backdrop, 'BOTTOMLEFT', 0, 0)
-	ImmersionFrame.TalkBox.ReputationBar.icon:SetAlpha(1)
-	ImmersionFrame.TalkBox.ReputationBar.friendshipRep = ImmersionFrame.TalkBox.ReputationBar:CreateFontString(nil, 'OVERLAY', 'SystemFont_Shadow_Med2')
-	ImmersionFrame.TalkBox.ReputationBar.friendshipRep:SetPoint('CENTER')
-	ImmersionFrame.TalkBox.ReputationBar:HookScript("OnShow", function(self)
-		local id, rep, maxRep, name, text, texture, reaction, threshold, nextThreshold = ImmersionAPI:GetFriendshipReputation()
-		if ( id and id > 0 ) then
-			if ( not nextThreshold ) then
-				threshold, nextThreshold, rep = 0, 1, 1
-			end
-
-			self.friendshipRep:SetFormattedText('%s (%s / %s)', reaction, rep - threshold, nextThreshold - threshold)
-			self.friendshipRep:Show()
-		else
-			self.friendshipRep:Hide()
-		end
-	end)
 
 	ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.ItemHighlight.Icon:Hide();
 	ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.ItemHighlight.Icon.Show = function() end;
