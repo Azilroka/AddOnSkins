@@ -1,6 +1,6 @@
 ## Interface: 30400
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
-## Version: 4.61
+## Version: 4.62
 ## Author: Azilroka
 ## SavedVariables: AddOnSkinsDB, AddOnSkinsDS
 ## OptionalDeps: AllTheThings, ElvUI
