@@ -113,6 +113,7 @@
 	<Script file="RareScanner.lua"/>
 	<Script file="RCLootCouncil.lua"/>
 	<Script file="Recount.lua"/>
+	<Script file="Saddlebag.lua"/>
 	<Script file="Scrap.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
 	<Script file="ServerHop.lua"/>
