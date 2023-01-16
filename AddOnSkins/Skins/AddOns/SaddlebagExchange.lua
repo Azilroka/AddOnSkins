@@ -9,6 +9,7 @@ function AS:Saddlebag()
 			AS:SkinFrame(SaddlebagFrame)
 			AS:SkinButton(SaddlebagFrameButton)
 			AS:SkinScrollBar(SaddlebagScrollFrameScrollBar)
+			SaddlebagFrame.isSkinned = true
 		end
 	end)
 end
