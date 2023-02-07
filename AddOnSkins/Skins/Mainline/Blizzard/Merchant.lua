@@ -77,7 +77,7 @@ function AS:Blizzard_Merchant()
 	end)
 
 	hooksecurefunc('MerchantFrame_UpdateCurrencyButton', function(tokenButton)
-		AS:SkinTexture(tokenButton.icon)
+		AS:SkinTexture(tokenButton.Icon)
 	end)
 end
 
