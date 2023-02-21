@@ -1,15 +1,11 @@
 local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Omen') then return end
 
--- Cache global variables
---Lua functions
 local _G = _G
---WoW API / Variables
--- GLOBALS:
+local ES = AS.EmbedSystem
 
-function AS:Embed_Omen()
-	local EmbedParent = _G.EmbedSystem_MainWindow
-	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Omen' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
+function ES:Omen()
+	local EmbedParent = AS:CheckOption('EmbedSystemDual') and (AS:CheckOption('EmbedRight') == 'Omen' and ES.Right or ES.Left) or ES.Main
 
 	_G.Omen.BarList.SetBackdrop = nil
 	_G.Omen.BarList.SetBackdropColor = nil

@@ -1,10 +1,14 @@
-local AS, ASL = unpack(AddOnSkins)
+AddOnSkins[2] = AddOnSkins[1].Libs.ACL:GetLocale('ElvUI', GetLocale()) -- Locale doesn't exist yet, make it exist.
+
+local AS, L = unpack(AddOnSkins)
 local AddOnName = ...
+
+local ES = AS.EmbedSystem
 
 -- Cache global variables
 --Lua functions
 local _G = _G
-local select, pairs, ipairs, type, pcall = select, pairs, ipairs, type, pcall
+local pairs, ipairs, type, pcall = pairs, ipairs, type, pcall
 local floor, print, format, strlower, strfind, strmatch = floor, print, format, strlower, strfind, strmatch
 local sort, tinsert = sort, tinsert
 --WoW API / Variables
@@ -16,8 +20,7 @@ AS.SkinErrors = {}
 local Validator = CreateFrame('Frame')
 
 function AS:CheckOption(optionName, ...)
-	for i = 1, select('#', ...) do
-		local addon = select(i, ...)
+	for _, addon in next, {...} do
 		if not addon then break end
 		if not AS:CheckAddOn(addon) then return false end
 	end
@@ -129,12 +132,12 @@ end
 function AS:RegisterSkin(addonName, skinFunc, ...)
 	local events = {}
 	local priority = 1
-	for i = 1, select('#', ...) do
-		local event = select(i, ...)
+	for _, event in next, {...} do
 		if not event then break end
 		if type(event) == 'number' then
 			priority = event
-		else
+		elseif pcall(Validator.RegisterEvent, Validator, event) then
+			Validator:UnregisterEvent(event)
 			events[event] = true
 		end
 	end
@@ -170,7 +173,7 @@ local function GenerateEventFunction()
 end
 
 function AS:RegisteredSkin(addonName, priority, func, events)
-	for c, _ in pairs(events) do
+	for c in pairs(events) do
 		if strfind(c, '%[') then
 			local conflict = strmatch(c, '%[([!%w_]+)%]')
 			if AS:CheckAddOn(conflict) then return end
@@ -178,17 +181,14 @@ function AS:RegisteredSkin(addonName, priority, func, events)
 	end
 	if not AS.skins[addonName] then AS.skins[addonName] = {} end
 	AS.skins[addonName][priority] = func
-	for event, _ in pairs(events) do
+	for event in pairs(events) do
 		if not strfind(event, '%[') then
-			if pcall(Validator.RegisterEvent, Validator, event) then
-				Validator:UnregisterEvent(event)
-				if not AS.events[event] then
-					AS[event] = GenerateEventFunction()
-					AS:RegisterEvent(event)
-					AS.events[event] = {}
-				end
-				AS.events[event][addonName] = true
+			if not AS.events[event] then
+				AS[event] = GenerateEventFunction()
+				AS:RegisterEvent(event)
+				AS.events[event] = {}
 			end
+			AS.events[event][addonName] = true
 		end
 	end
 end
@@ -204,16 +204,12 @@ function AS:RunPreload(addonName)
 	end
 end
 
-local function errorhandler(err)
-	return geterrorhandler()(err)
-end
-
 function AS:CallSkin(addonName, func, event, ...)
 	if (AS:CheckOption('SkinDebug')) then
 		local args = {...}
-		xpcall(function() func(self, event, unpack(args)) end, errorhandler)
+		securecallfunction(function() func(self, event, unpack(args)) end)
 	else
-		local pass, error = pcall(func, self, event, ...)
+		local pass = pcall(func, self, event, ...)
 		if not pass then
 			AS.FoundError = true
 			AddOnSkinsDS[AS.Version] = AddOnSkinsDS[AS.Version] or {}
@@ -262,7 +258,7 @@ function AS:UpdateMedia()
 end
 
 function AS:GetPixelScale()
-	AS.mult = max(0.4, min(1.15, 768 / AS.ScreenHeight))
+	AS.Mult = max(0.4, min(1.15, 768 / AS.ScreenHeight))
 end
 
 function AS:StartSkinning()
@@ -273,6 +269,10 @@ function AS:StartSkinning()
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
 
 	AS:UpdateMedia()
+
+	if AS:CheckAddOn('ElvUI') then
+		AS:SecureHook(ElvUI[1], 'UpdateMedia')
+	end
 
 	for addonName, alldata in pairs(AS.register) do
 		for _, data in pairs(alldata) do
@@ -325,7 +325,7 @@ function AS:StartSkinning()
 		AS:Print(format('Please report this to Azilroka immediately @ %s', AS:PrintURL(AS.TicketTracker)))
 	end
 
-	AS:EmbedInit()
+	ES:Initialize()
 
 	AS.RunOnce = true
 end
@@ -346,7 +346,6 @@ function AS:Init(event, addon)
 			AS.ES = _G.EnhancedShadows
 		end
 
-		AS.EP = LibStub('LibElvUIPlugin-1.0', true)
 		if AS.EP then
 			AS.EP:RegisterPlugin(AddOnName, AS.GetOptions)
 		else
@@ -354,11 +353,6 @@ function AS:Init(event, addon)
 		end
 
 		AS:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
-
-		if AS.Libs.LSM then
-			AS.Libs.LSM:Register('statusbar', 'Solid', [[Interface\Buttons\WHITE8X8]])
-		end
-
 		if AS.Retail then
 			AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 			AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')

@@ -1,15 +1,11 @@
 local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Recount') then return end
 
--- Cache global variables
---Lua functions
+local ES = AS.EmbedSystem
 local _G = _G
---WoW API / Variables
--- GLOBALS:
 
-function AS:Embed_Recount()
-	local EmbedParent = _G.EmbedSystem_MainWindow
-	if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Recount' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
+function ES:Recount()
+	local EmbedParent = AS:CheckOption('EmbedSystemDual') and (AS:CheckOption('EmbedRight') == 'Recount' and ES.Right or ES.Left) or ES.Main
 
 	_G.Recount_MainWindow:SetParent(EmbedParent)
 	_G.Recount_MainWindow:ClearAllPoints()

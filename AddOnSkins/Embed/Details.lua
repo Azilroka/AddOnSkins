@@ -1,56 +1,18 @@
 local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Details') then return end
 
--- Cache global variables
---Lua functions
+local ES = AS.EmbedSystem
+
 local _G = _G
 local select, type = select, type
-local wipe, tinsert  = table.wipe, table.insert
---WoW API / Variables
-local hooksecurefunc = hooksecurefunc
--- GLOBALS:
+local wipe, tinsert  = wipe, tinsert
 
 local Details
 local NumberToEmbed
 
-AS['DetailsInstances'] = {}
+ES.DetailsInstances = {}
 
-hooksecurefunc(AS, 'EmbedInit', function()
-	Details = _G._detalhes
-
-	if Details.CreateEventListener then
-		local listener = Details:CreateEventListener()
-		listener:RegisterEvent("DETAILS_INSTANCE_OPEN")
-		listener:RegisterEvent("DETAILS_INSTANCE_CLOSE")
-
-		function listener:OnDetailsEvent (event, ...)
-			if (event == "DETAILS_INSTANCE_CLOSE") then
-				local instance = select (1, ...)
-				if (instance._ElvUIEmbed and _G.DetailsOptionsWindow and _G.DetailsOptionsWindow:IsShown()) then
-					Details:Msg("You just closed a window Embed on ElvUI, if wasn't intended click on Reopen.") --> need localization
-				end
-			elseif (event == "DETAILS_INSTANCE_OPEN") then
-				local instance = select(1, ...)
-				if (instance._ElvUIEmbed) then
-					if (#AS.DetailsInstances >= 2) then
-						AS.DetailsInstances[1]:UngroupInstance()
-						AS.DetailsInstances[2]:UngroupInstance()
-
-						AS.DetailsInstances[1].baseframe:ClearAllPoints()
-						AS.DetailsInstances[2].baseframe:ClearAllPoints()
-
-						AS.DetailsInstances[1]:RestoreMainWindowPosition()
-						AS.DetailsInstances[2]:RestoreMainWindowPosition()
-
-						AS.DetailsInstances[2]:MakeInstanceGroup({1})
-					end
-				end
-			end
-		end
-	end
-end)
-
-function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+function ES:DetailsWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 	if not window then return end
 
 	if (not window:IsEnabled()) then
@@ -137,19 +99,52 @@ function AS:EmbedDetailsWindow(window, width, height, point, relativeFrame, rela
 	end
 end
 
-function AS:Embed_Details()
-	wipe(AS['DetailsInstances'])
+function ES:Details()
+	if not Details then
+		Details = _G._detalhes
+
+		if Details.CreateEventListener then
+			local listener = Details:CreateEventListener()
+			listener:RegisterEvent("DETAILS_INSTANCE_OPEN")
+			listener:RegisterEvent("DETAILS_INSTANCE_CLOSE")
+
+			function listener:OnDetailsEvent (event, ...)
+				if (event == "DETAILS_INSTANCE_CLOSE") then
+					local instance = select (1, ...)
+					if (instance._ElvUIEmbed and _G.DetailsOptionsWindow and _G.DetailsOptionsWindow:IsShown()) then
+						Details:Msg("You just closed a window Embed on ElvUI, if wasn't intended click on Reopen.") --> need localization
+					end
+				elseif (event == "DETAILS_INSTANCE_OPEN") then
+					local instance = select(1, ...)
+					if (instance._ElvUIEmbed) then
+						if (#ES.DetailsInstances >= 2) then
+							ES.DetailsInstances[1]:UngroupInstance()
+							ES.DetailsInstances[2]:UngroupInstance()
+
+							ES.DetailsInstances[1].baseframe:ClearAllPoints()
+							ES.DetailsInstances[2].baseframe:ClearAllPoints()
+
+							ES.DetailsInstances[1]:RestoreMainWindowPosition()
+							ES.DetailsInstances[2]:RestoreMainWindowPosition()
+
+							ES.DetailsInstances[2]:MakeInstanceGroup({1})
+						end
+					end
+				end
+			end
+		end
+	end
+
+	wipe(ES.DetailsInstances)
 
 	for _, instance in Details:ListInstances() do
-		tinsert(AS.DetailsInstances, instance)
+		tinsert(ES.DetailsInstances, instance)
 	end
 
 	NumberToEmbed = 0
 	if AS:CheckOption('EmbedSystem') then
 		NumberToEmbed = 1
-	end
-
-	if AS:CheckOption('EmbedSystemDual') then
+	elseif AS:CheckOption('EmbedSystemDual') then
 		if AS:CheckOption('EmbedRight') == 'Details' then NumberToEmbed = NumberToEmbed + 1 end
 		if AS:CheckOption('EmbedLeft') == 'Details' then NumberToEmbed = NumberToEmbed + 1 end
 	end
@@ -164,22 +159,22 @@ function AS:Embed_Details()
 		local new_instance = Details:CreateInstance(i)
 
 		if (type(new_instance) == "table") then
-			tinsert(AS.DetailsInstances, new_instance)
+			tinsert(ES.DetailsInstances, new_instance)
 		end
 	end
 
 	if NumberToEmbed == 1 then
-		local EmbedParent = _G.EmbedSystem_MainWindow
+		local EmbedParent = ES.Main
 		if AS:CheckOption('EmbedSystemDual') then
-			EmbedParent = AS:CheckOption('EmbedRight') == 'Details' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow
+			EmbedParent = AS:CheckOption('EmbedRight') == 'Details' and ES.Right or ES.Left
 		end
-		AS:EmbedDetailsWindow(AS.DetailsInstances[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
+		ES:DetailsWindow(ES.DetailsInstances[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
 
-		if (AS.DetailsInstances[2]) then
-			AS.DetailsInstances[2]._ElvUIEmbed = nil
+		if (ES.DetailsInstances[2]) then
+			ES.DetailsInstances[2]._ElvUIEmbed = nil
 		end
 	elseif NumberToEmbed == 2 then
-		AS:EmbedDetailsWindow(AS.DetailsInstances[1], _G.EmbedSystem_LeftWindow:GetWidth(), _G.EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', _G.EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
-		AS:EmbedDetailsWindow(AS.DetailsInstances[2], _G.EmbedSystem_RightWindow:GetWidth(), _G.EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', _G.EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
+		ES:DetailsWindow(ES.DetailsInstances[1], ES.Left:GetWidth(), ES.Left:GetHeight(), 'TOPLEFT', ES.Left, 'TOPLEFT', 2, 0)
+		ES:DetailsWindow(ES.DetailsInstances[2], ES.Right:GetWidth(), ES.Right:GetHeight(), 'TOPRIGHT', ES.Right, 'TOPRIGHT', -2, 0)
 	end
 end

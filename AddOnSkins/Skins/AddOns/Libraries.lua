@@ -2,6 +2,42 @@ local AS = unpack(AddOnSkins)
 
 local _G = _G
 local select = select
+local EnumerateFrames = EnumerateFrames
+
+function AS:FindFrameBySizeChild(childTypes, width, height)
+	local obj = EnumerateFrames()
+
+	width = AS:Round(width)
+	height = AS:Round(height)
+
+	while obj do
+		if obj.IsObjectType and obj:IsObjectType('Frame') then
+			if not (obj:GetName() and obj:GetParent()) then
+				if AS:Round(obj:GetWidth()) == width and AS:Round(obj:GetHeight()) == height then
+					local childs = {}
+					for _, child in pairs({obj:GetChildren()}) do
+						childs[#childs + 1] = child:GetObjectType()
+					end
+
+					local matched = 0
+					for _, cType in pairs(childTypes) do
+						for _, type in pairs(childs) do
+							if cType == type then
+								matched = matched + 1
+							end
+						end
+					end
+
+					if matched == #childTypes then
+						return obj
+					end
+				end
+			end
+		end
+
+		obj = EnumerateFrames(obj)
+	end
+end
 
 local function SkinDewdrop2()
 	local frame

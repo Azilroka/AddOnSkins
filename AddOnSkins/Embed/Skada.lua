@@ -1,20 +1,17 @@
 local AS = unpack(AddOnSkins)
 if not AS:CheckAddOn('Skada') then return end
 
--- Cache global variables
---Lua functions
+local ES = AS.EmbedSystem
+
 local _G = _G
 local pairs = pairs
-local strlower = strlower
 local wipe, tinsert = table.wipe, table.insert
---WoW API / Variables
--- GLOBALS:
 
 local NumberToEmbed
 
-AS['SkadaWindows'] = {}
+ES.SkadaWindows = {}
 
-function AS:EmbedSkadaWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
+function ES:SkadaWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 	if not window then return end
 	local barmod = _G.Skada.displays['bar']
 	if window.db.reversegrowth then
@@ -39,7 +36,7 @@ function AS:EmbedSkadaWindow(window, width, height, point, relativeFrame, relati
 	window.bargroup:SetFrameLevel(relativeFrame:GetFrameLevel())
 	window.bargroup:SetBackdrop(nil)
 	if window.bargroup.Backdrop then
-		AS:SetTemplate(window.bargroup.Backdrop, AS:CheckOption('EmbedBackdropTransparent') and "Transparent" or 'Default')
+		AS:SetTemplate(window.bargroup.Backdrop, AS:CheckOption('EmbedBackdropTransparent') and 'Transparent')
 		if AS:CheckOption('EmbedBackdrop') then
 			window.bargroup.Backdrop:Show()
 		else
@@ -49,17 +46,13 @@ function AS:EmbedSkadaWindow(window, width, height, point, relativeFrame, relati
 	barmod.ApplySettings(barmod, window)
 end
 
-function AS:Embed_Skada()
-	wipe(AS['SkadaWindows'])
+function ES:Skada()
+	wipe(ES.SkadaWindows)
 	for _, window in pairs(_G.Skada:GetWindows()) do
-		tinsert(AS.SkadaWindows, window)
+		tinsert(ES.SkadaWindows, window)
 	end
 
-	NumberToEmbed = 0
-
-	if AS:CheckOption('EmbedSystem') then
-		NumberToEmbed = 1
-	end
+	NumberToEmbed = AS:CheckOption('EmbedSystem') and 1 or 0
 
 	if AS:CheckOption('EmbedSystemDual') then
 		if AS:CheckOption('EmbedRight') == 'Skada' then NumberToEmbed = NumberToEmbed + 1 end
@@ -67,11 +60,10 @@ function AS:Embed_Skada()
 	end
 
 	if NumberToEmbed == 1 then
-		local EmbedParent = _G.EmbedSystem_MainWindow
-		if AS:CheckOption('EmbedSystemDual') then EmbedParent = AS:CheckOption('EmbedRight') == 'Skada' and _G.EmbedSystem_RightWindow or _G.EmbedSystem_LeftWindow end
-		AS:EmbedSkadaWindow(AS.SkadaWindows[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
+		local EmbedParent = AS:CheckOption('EmbedSystemDual') and (AS:CheckOption('EmbedRight') == 'Skada' and ES.Right or ES.Left) or ES.Main
+		AS:EmbedSkadaWindow(ES.SkadaWindows[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
 	elseif NumberToEmbed == 2 then
-		AS:EmbedSkadaWindow(AS.SkadaWindows[1], _G.EmbedSystem_LeftWindow:GetWidth(), _G.EmbedSystem_LeftWindow:GetHeight(), 'TOPLEFT', _G.EmbedSystem_LeftWindow, 'TOPLEFT', 2, 0)
-		AS:EmbedSkadaWindow(AS.SkadaWindows[2], _G.EmbedSystem_RightWindow:GetWidth(), _G.EmbedSystem_RightWindow:GetHeight(), 'TOPRIGHT', _G.EmbedSystem_RightWindow, 'TOPRIGHT', -2, 0)
+		AS:EmbedSkadaWindow(ES.SkadaWindows[1], ES.Left:GetWidth(), ES.Left:GetHeight(), 'TOPLEFT', ES.Left, 'TOPLEFT', 2, 0)
+		AS:EmbedSkadaWindow(ES.SkadaWindows[2], ES.Right:GetWidth(), ES.Right:GetHeight(), 'TOPRIGHT', ES.Right, 'TOPRIGHT', -2, 0)
 	end
 end
