@@ -1,4 +1,4 @@
-AddOnSkins[2] = AddOnSkins[1].Libs.ACL:GetLocale('ElvUI', GetLocale()) -- Locale doesn't exist yet, make it exist.
+AddOnSkins[2] = AddOnSkins[1].Libs.ACL:GetLocale('AddOnSkins', GetLocale()) -- Locale doesn't exist yet, make it exist.
 
 local AS, L = unpack(AddOnSkins)
 local AddOnName = ...

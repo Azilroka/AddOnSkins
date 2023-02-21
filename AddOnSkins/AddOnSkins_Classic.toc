@@ -8,8 +8,9 @@
 ## X-Wago-ID: RXKqy5Ky
 
 Libs\Load_Libs.xml
-Locale\Load_Locale.xml
 Init.lua
+
+Locale\Load_Locale.xml
 Core\Load_Core.xml
 Embed\Load_Embed.xml
 
