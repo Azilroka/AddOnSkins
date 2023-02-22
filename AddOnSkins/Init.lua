@@ -7,7 +7,6 @@ local GetAddOnEnableState = GetAddOnEnableState
 local GetAddOnInfo = GetAddOnInfo
 local GetAddOnMetadata = GetAddOnMetadata
 local GetNumAddOns = GetNumAddOns
-local GetPhysicalScreenSize = GetPhysicalScreenSize
 local GetRealmName = GetRealmName
 local UIParent = UIParent
 local UnitClass = UnitClass
@@ -25,7 +24,7 @@ _G.AddOnSkins = Engine
 _G.AddOnSkinsDS = {}
 
 AS.EmbedSystem = AS:NewModule('EmbedSystem', 'AceEvent-3.0', 'AceHook-3.0')
-AS.Skins = AS:NewModule('Skins','AceTimer-3.0','AceHook-3.0','AceEvent-3.0')
+AS.Skins = AS:NewModule('Skins', 'AceTimer-3.0', 'AceHook-3.0', 'AceEvent-3.0')
 
 AS.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 AS.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
@@ -56,10 +55,7 @@ AS.MyName = UnitName('player')
 AS.MyRealm = GetRealmName()
 AS.Noop = function() end
 AS.TexCoords = { .075, .925, .075, .925 }
-AS.UIScale = UIParent:GetScale()
 AS.Faction = UnitFactionGroup('player')
-AS.Mult = 1
-AS.ScreenWidth, AS.ScreenHeight = GetPhysicalScreenSize()
 
 local Color = _G.RAID_CLASS_COLORS[AS.MyClass]
 AS.ClassColor = { Color.r, Color.g, Color.b }

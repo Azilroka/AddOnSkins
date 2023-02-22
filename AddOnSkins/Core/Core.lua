@@ -36,6 +36,13 @@ function AS:SetOption(optionName, value)
 	end
 end
 
+function AS:IsSkinEnabled(name, elvName)
+	if _G.ElvUI and _G.ElvUI[1].private.skins.blizzard.enable and _G.ElvUI[1].private.skins.blizzard[elvName] then
+		return false
+	end
+	return AS:CheckOption(name)
+end
+
 function AS:GetColor(name)
 	local color = '|cff1784d1%s|r'
 	return (color):format(name)
@@ -59,10 +66,6 @@ function AS:GetClassColor(class)
 	end
 
 	return color
-end
-
-function AS:Scale(Number)
-	return AS.Mult * floor(Number/AS.Mult + .5)
 end
 
 function AS:OrderedPairs(t, f)
@@ -250,20 +253,10 @@ function AS:UpdateMedia()
 	AS.BorderColor = { 0, 0, 0 }
 	AS.Color = AS.ClassColor
 	AS.HideShadows = false
-
-	if AS:CheckOption('SkinTemplate') == 'Custom' then
-		AS.BackdropColor = AS:CheckOption('CustomBackdropColor')
-		AS.BorderColor = AS:CheckOption('CustomBorderColor')
-	end
-end
-
-function AS:GetPixelScale()
-	AS.Mult = max(0.4, min(1.15, 768 / AS.ScreenHeight))
 end
 
 function AS:StartSkinning()
 	AS:UnregisterEvent('PLAYER_ENTERING_WORLD')
-	AS:GetPixelScale()
 
 	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
@@ -342,17 +335,8 @@ function AS:Init(event, addon)
 	if event == 'PLAYER_LOGIN' then
 		AS:BuildOptions()
 
-		if _G.EnhancedShadows then
-			AS.ES = _G.EnhancedShadows
-		end
-
-		if AS.EP then
-			AS.EP:RegisterPlugin(AddOnName, AS.GetOptions)
-		else
-			AS:GetOptions()
-		end
-
 		AS:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
+
 		if AS.Retail then
 			AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
 			AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')

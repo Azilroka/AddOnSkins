@@ -288,7 +288,9 @@ function AS:BuildOptions()
 		end
 	end
 
-	if not AS:CheckAddOn('ElvUI') then
+	if AS.Libs.EP and AS:CheckAddOn('ElvUI') then
+		AS.Libs.EP:RegisterPlugin('AddOnSkins', AS.GetOptions)
+	else
 		AS.Libs.AC:RegisterOptionsTable('AddOnSkins', AS.Options)
 		AS.Libs.ACD:AddToBlizOptions('AddOnSkins', 'AddOnSkins')
 	end

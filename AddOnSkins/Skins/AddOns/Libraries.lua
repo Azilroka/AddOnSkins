@@ -1,14 +1,16 @@
-local AS = unpack(AddOnSkins)
+local AS, L, R = unpack(AddOnSkins)
+local S = AS.Skins
 
 local _G = _G
+local LibStub = LibStub
+
 local select = select
 local EnumerateFrames = EnumerateFrames
 
 function AS:FindFrameBySizeChild(childTypes, width, height)
 	local obj = EnumerateFrames()
 
-	width = AS:Round(width)
-	height = AS:Round(height)
+	width, height = AS:Round(width), AS:Round(height)
 
 	while obj do
 		if obj.IsObjectType and obj:IsObjectType('Frame') then
@@ -47,11 +49,11 @@ local function SkinDewdrop2()
 		frame = _G["Dewdrop20Level" .. i]
 
 		if not frame.isSkinned then
-			AS:SetTemplate(frame)
+			S:SetTemplate(frame)
 
 			select(1, frame:GetChildren()):Hide()
-			frame.SetBackdropColor = AS.Noop
-			frame.SetBackdropBorderColor = AS.Noop
+			frame.SetBackdropColor = S.noop
+			frame.SetBackdropBorderColor = S.noop
 
 			frame.isSkinned = true
 		end
@@ -71,8 +73,8 @@ local function SkinDewdrop2()
 						dewdropEditBoxFrame = AS:FindFrameBySizeChild({"EditBox"}, 200, 40)
 
 						if dewdropEditBoxFrame then
-							AS:SetTemplate(dewdropEditBoxFrame)
-							AS:SkinEditBox(dewdropEditBoxFrame.editBox)
+							S:SetTemplate(dewdropEditBoxFrame)
+							S:HandleEditBox(dewdropEditBoxFrame.editBox)
 							dewdropEditBoxFrame.editBox:DisableDrawLayer("BACKGROUND")
 						end
 					end
@@ -80,9 +82,9 @@ local function SkinDewdrop2()
 						dewdropSliderFrame = AS:FindFrameBySizeChild({"Slider", "EditBox"}, 100, 170)
 
 						if dewdropSliderFrame then
-							AS:SetTemplate(dewdropSliderFrame)
-							AS:SkinSlideBar(dewdropSliderFrame.slider)
-							AS:SkinEditBox(dewdropSliderFrame.currentText)
+							S:SetTemplate(dewdropSliderFrame)
+							S:HandleSliderFrame(dewdropSliderFrame.slider)
+							S:SkinEditBox(dewdropSliderFrame.currentText)
 							dewdropSliderFrame.currentText:DisableDrawLayer("BACKGROUND")
 						end
 					end
@@ -110,8 +112,8 @@ local function SkinTablet2(lib)
 				frame = _G["Tablet20DetachedFrame" .. i]
 
 				if not frame.isSkinned then
-					AS:SetTemplate(frame, "Transparent")
-					AS:SkinSlideBar(frame.slider)
+					S:SetTemplate(frame, "Transparent")
+					S:HandleSliderFrame(frame.slider)
 
 					frame.isSkinned = true
 				end
@@ -121,15 +123,15 @@ local function SkinTablet2(lib)
 		end
 	end
 
-	if not AS:IsHooked(lib, "Open") then
-		AS:SecureHook(lib, "Open", function(self, fakeParent, parent)
-			AS:SetTemplate(_G["Tablet20Frame"], "Transparent")
+	if not S:IsHooked(lib, "Open") then
+		S:SecureHook(lib, "Open", function(self, fakeParent, parent)
+			S:SetTemplate(_G["Tablet20Frame"], "Transparent")
 			SkinDetachedFrame(self, fakeParent, parent)
 		end)
 	end
 
-	if not AS:IsHooked(lib, "Detach") then
-		AS:SecureHook(lib, "Detach", function(self, parent)
+	if not S:IsHooked(lib, "Detach") then
+		S:SecureHook(lib, "Detach", function(self, parent)
 			SkinDetachedFrame(self, parent)
 		end)
 	end
@@ -139,58 +141,58 @@ local function SkinRockConfig(lib)
 	local function SkinMainFrame(self)
 		if self.base.isSkinned then return end
 
-		AS:SetTemplate(self.base, "Transparent")
-		AS:StripTextures(self.base.header)
-		AS:SkinCloseButton(self.base.closeButton, self.base)
+		S:SetTemplate(self.base, "Transparent")
+		S:StripTextures(self.base.header)
+		S:HandleCloseButton(self.base.closeButton, self.base)
 
-		AS:SetTemplate(self.base.treeView)
-		AS:SkinScrollBar(self.base.treeView.scrollBar)
-		AS:SkinDropDownBox(self.base.addonChooser)
+		S:SetTemplate(self.base.treeView)
+		S:HandleScrollBar(self.base.treeView.scrollBar)
+		S:HandleDropDownBox(self.base.addonChooser)
 
 		self.base.addonChooser.text:SetHeight(20)
-		AS:SetTemplate(self.base.addonChooser.text)
-		AS:SkinArrowButton(self.base.addonChooser.button)
+		S:SetTemplate(self.base.addonChooser.text)
+		S:HandleNextPrevButton(self.base.addonChooser.button)
 
 		local pullout = _G[self.base.mainPane:GetName().."_ChoicePullout"]
 		if pullout then
-			AS:SetTemplate(pullout)
+			S:SetTemplate(pullout)
 		else
-			AS:SecureHookScript(self.base.addonChooser.button, "OnClick", function(self)
-				AS:SetTemplate(_G[lib.base.mainPane:GetName().."_ChoicePullout"])
-				AS:Unhook(self, "OnClick")
+			S:SecureHookScript(self.base.addonChooser.button, "OnClick", function(self)
+				S:SetTemplate(_G[lib.base.mainPane:GetName().."_ChoicePullout"])
+				S:Unhook(self, "OnClick")
 			end)
 		end
 
-		AS:SetTemplate(self.base.mainPane)
-		AS:ScrollBar(self.base.mainPane.scrollBar)
+		S:SetTemplate(self.base.mainPane)
+		S:HandleScrollBar(self.base.mainPane.scrollBar)
 
-		AS:SetTemplate(self.base.treeView.sizer)
+		S:SetTemplate(self.base.treeView.sizer)
 
 		self.base.isSkinned = true
 	end
 
-	AS:SecureHook(lib, "OpenConfigMenu", function(self)
+	S:SecureHook(lib, "OpenConfigMenu", function(self)
 		SkinMainFrame(self)
-		AS:Unhook(self, "OpenConfigMenu")
+		S:Unhook(self, "OpenConfigMenu")
 	end)
 
 	local LR = LibStub("LibRock-1.0", true)
 	if LR then
 		for object in LR:IterateMixinObjects("LibRockConfig-1.0") do
-			if not AS:IsHooked(object, "OpenConfigMenu") then
-				AS:SecureHook(object, "OpenConfigMenu", function(self)
+			if not S:IsHooked(object, "OpenConfigMenu") then
+				S:SecureHook(object, "OpenConfigMenu", function(self)
 					SkinMainFrame(lib)
-					AS:Unhook(self, "OpenConfigMenu")
+					S:Unhook(self, "OpenConfigMenu")
 				end)
 			end
 		end
 	end
 end
 
-function AS:SkinLibraries()
+function R:Libraries()
 	local Dewdrop = LibStub("Dewdrop-2.0", true)
-	if Dewdrop and not AS:IsHooked(Dewdrop, "Open") then
-		AS:SecureHook(Dewdrop, "Open", SkinDewdrop2)
+	if Dewdrop and not S:IsHooked(Dewdrop, "Open") then
+		S:SecureHook(Dewdrop, "Open", SkinDewdrop2)
 	end
 
 	local Tablet = LibStub("Tablet-2.0", true)
@@ -204,8 +206,8 @@ function AS:SkinLibraries()
 	end
 
 	local LZF = LibStub("ZFrame-1.0", true)
-	if LZF and not AS:IsHooked(LZF, "Create") then
-		AS:RawHook(LZF, "Create", function(self, ...)
+	if LZF and not S:IsHooked(LZF, "Create") then
+		S:RawHook(LZF, "Create", function(self, ...)
 			local frame = AS.hooks[self].Create(self, ...)
 			AS:SetTemplate(frame.ZMain)
 			frame.ZMain.close:SetSize(32, 32)
@@ -217,7 +219,7 @@ function AS:SkinLibraries()
 	local Poncho = LibStub('Poncho-1.0', true)
 	if Poncho then
 		if SushiDropFrame then
-			hooksecurefunc(SushiDropFrame, 'SetMenu', function(self)
+			S:SecureHook(SushiDropFrame, 'SetMenu', function(self)
 				if not self.bg.Backdrop then
 					self.bg:SetBackdrop(nil)
 					self.bg.SetBackdrop = function() end
@@ -229,15 +231,15 @@ function AS:SkinLibraries()
 
 	local DBIcon = LibStub("LibDBIcon-1.0", true)
 	if DBIcon and DBIcon.tooltip and DBIcon.tooltip:IsObjectType('GameTooltip') then
-		DBIcon.tooltip:HookScript("OnShow", function(self) AS:SetTemplate(self) end)
+		S:HandleTooltip(DBIcon.tooltip, nil, true)
 	end
 
 	local LSF = LibStub("LibSimpleFrame-Mod-1.0", true)
 	if LSF then
-		for name, frame in pairs(LSF.registry) do
-			AS:SetTemplate(frame)
-			frame.SetBackdropColor = AS.Noop
-			frame.SetBackdropBorderColor = AS.Noop
+		for _, frame in pairs(LSF.registry) do
+			S:SetTemplate(frame)
+			frame.SetBackdropColor = S.noop
+			frame.SetBackdropBorderColor = S.noop
 		end
 	end
 
@@ -246,18 +248,18 @@ function AS:SkinLibraries()
 		LET:AddCallback(function(tip,_,_,_,_,quality)
 			local extraTip = LET:GetExtraTip(tip)
 			if extraTip then
-				AS:SetTemplate(extraTip)
+				S:SetTemplate(extraTip)
 				if quality and quality > 1 then
-					local color = BAG_ITEM_QUALITY_COLORS[quality]
+					local color = _G.BAG_ITEM_QUALITY_COLORS[quality]
 					extraTip:SetBackdropBorderColor(color.r, color.g, color.b)
 				end
 			end
 		end, 0)
-		AS:RawHook(LET, "GetFreeExtraTipObject", function(self)
-			local tooltip = AS.hooks[self].GetFreeExtraTipObject(self)
+		S:RawHook(LET, "GetFreeExtraTipObject", function(tip)
+			local tooltip = S.hooks[tip].GetFreeExtraTipObject(tip)
 
 			if not tooltip.isSkinned then
-				AS:SetTemplate(tooltip)
+				S:SetTemplate(tooltip)
 				tooltip.isSkinned = true
 			end
 
@@ -267,11 +269,11 @@ function AS:SkinLibraries()
 
 	local LQT = LibStub("LibQTip-1.0", true)
 	if LQT then
-		hooksecurefunc(LQT, 'Acquire', function()
-			for _, Tooltip in LQT:IterateTooltips() do
-				if not Tooltip.isSkinned then
-					AS:SkinFrame(Tooltip)
-					Tooltip.isSkinned = true
+		S:SecureHook(LQT, 'Acquire', function()
+			for _, tooltip in LQT:IterateTooltips() do
+				if not tooltip.isSkinned then
+					S:HandleTooltip(tooltip)
+					tooltip.isSkinned = true
 				end
 			end
 		end)
@@ -279,15 +281,15 @@ function AS:SkinLibraries()
 
 	local LQTRS = LibStub("LibQTip-1.0RS", true)
 	if LQTRS then
-		hooksecurefunc(LQTRS, 'Acquire', function()
-			for _, Tooltip in LQTRS:IterateTooltips() do
-				if not Tooltip.isSkinned then
-					AS:SkinFrame(Tooltip)
-					Tooltip.isSkinned = true
+		S:SecureHook(LQTRS, 'Acquire', function()
+			for _, tooltip in LQTRS:IterateTooltips() do
+				if not tooltip.isSkinned then
+					S:HandleTooltip(tooltip)
+					tooltip.isSkinned = true
 				end
 			end
 		end)
 	end
 end
 
-AS:RegisterSkin('Libraries', AS.SkinLibraries)
+AS:RegisterSkin('Libraries', R.Libraries)

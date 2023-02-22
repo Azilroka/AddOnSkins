@@ -7,8 +7,10 @@ local _G, _ = _G
 local tremove, unpack, next, ipairs, pairs = tremove, unpack, next, ipairs, pairs
 local abs, min, max, floor = abs, min, max, floor
 local strlower, strfind, type = strlower, strfind, type
-local CopyTable, hooksecurefunc = CopyTable, hooksecurefunc
+local hooksecurefunc = hooksecurefunc
 
+local GetPhysicalScreenSize = GetPhysicalScreenSize
+local CopyTable = CopyTable
 local CreateFrame = CreateFrame
 local UIParent = UIParent
 local ITEM_QUALITY_COLORS = ITEM_QUALITY_COLORS
@@ -21,9 +23,9 @@ S.Wrath = WOW_PROJECT_ID == WOW_PROJECT_WRATH_CLASSIC
 S.Hider = CreateFrame('Frame')
 S.Hider:Hide()
 
-local noop = function() end
+S.noop = function() end
 
-local BlizzardRegions = { 'Left', 'Middle', 'Right', 'LeftDisabled', 'MiddleDisabled', 'RightDisabled', 'TopLeft', 'TopRight', 'BottomLeft', 'BottomRight', 'TopMiddle', 'MiddleLeft', 'MiddleRight', 'BottomMiddle', 'MiddleMiddle', 'Center', 'TopTex', 'TopLeftTex', 'TopRightTex', 'LeftTex', 'BottomTex', 'BottomLeftTex', 'BottomRightTex', 'RightTex', 'MiddleTex', 'TabSpacer', 'TabSpacer1', 'TabSpacer2', '_RightSeparator', '_LeftSeparator', 'Cover', 'Mid', 'Border', 'Background' }
+local BlizzardRegions = { 'Left', 'Middle', 'Right', 'LeftDisabled', 'MiddleDisabled', 'RightDisabled', 'TopLeft', 'TopRight', 'BottomLeft', 'BottomRight', 'TopMiddle', 'MiddleLeft', 'MiddleRight', 'BottomMiddle', 'MiddleMiddle', 'Center', 'TopTex', 'TopLeftTex', 'TopRightTex', 'LeftTex', 'BottomTex', 'BottomLeftTex', 'BottomRightTex', 'RightTex', 'MiddleTex', 'TabSpacer', 'TabSpacer1', 'TabSpacer2', '_RightSeparator', '_LeftSeparator', 'Cover', 'Mid', 'Border', 'Background', 'Delimiter' }
 local BlizzardFrames = { 'Inset', 'inset', 'InsetFrame', 'LeftInset', 'RightInset', 'NineSlice', 'BG', 'bgLeft', 'bgRight', 'border', 'Border', 'BorderFrame', 'bottomInset', 'BottomInset', 'FilligreeOverlay', 'PortraitOverlay', 'ArtOverlayFrame', 'Portrait', 'portrait', 'ScrollFrameBorder' }
 local BlizzardTextureIDs = {
 	[137056] = true, -- Interface\\Tooltips\\UI-Tooltip-Background
@@ -87,15 +89,18 @@ local Media = S.Media
 S.Mult = 1
 S.Border = 1
 S.PixelMode = false
+_, S.ScreenHeight = GetPhysicalScreenSize()
+S.UIScale = 1
 
 function S:Scale(number)
 	return S.Mult * floor(number/S.Mult + .5)
 end
 
 function S:GetPixelScale()
-	S.Mult = max(0.4, min(1.15, 768 / AS.ScreenHeight)) / UIParent:GetEffectiveScale()
+	S.Mult = max(0.4, min(1.15, 768 / S.ScreenHeight)) / UIParent:GetEffectiveScale()
 	S.Border = S.Mult * (AS:CheckOption('Theme') == 'ThickBorder' and 3 or AS:CheckOption('Theme') == 'TwoPixel' and 2 or 1)
 	S.PixelMode = AS:CheckOption('Theme') == 'PixelPerfect'
+	S.UIScale = UIParent:GetEffectiveScale()
 end
 
 function S:ColorGradient(perc, ...)
@@ -240,6 +245,7 @@ end
 
 function S:SetOutside(obj, anchor, xOffset, yOffset, anchor2, noScale)
 	local x, y = S:GetAnchorOffsets(obj, xOffset, yOffset, noScale)
+	anchor = anchor or obj:GetParent()
 
 	obj:SetPoint('TOPLEFT', anchor, 'TOPLEFT', -x, y)
 	obj:SetPoint('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', x, -y)
@@ -247,6 +253,7 @@ end
 
 function S:SetInside(obj, anchor, xOffset, yOffset, anchor2, noScale)
 	local x, y = S:GetAnchorOffsets(obj, xOffset, yOffset, noScale)
+	anchor = anchor or obj:GetParent()
 
 	obj:SetPoint('TOPLEFT', anchor, 'TOPLEFT', x, -y)
 	obj:SetPoint('BOTTOMRIGHT', anchor2 or anchor, 'BOTTOMRIGHT', -x, y)
@@ -258,7 +265,7 @@ do
 	local backdrop = { edgeFile = Media.Blank }
 	local blank = { 0, 0, 0, 0 }
 
-	function S:SetTemplate(frame, template, glossTex, ignoreUpdates, _, _, _, noScale)
+	function S:SetTemplate(frame, template, glossTex, ignoreUpdates, _, _, _, noScale, noHook)
 		frame.template = template or AS:CheckOption('SkinTemplate')
 		frame.glossTex = glossTex or AS.Libs.LSM:Fetch('statusbar', AS:CheckOption('BackgroundTexture'))
 		frame.forcedBorderColors = frame.template == 'NoBorder' and blank or frame.forcedBorderColors
@@ -268,7 +275,9 @@ do
 
 		if not frame.SetBackdrop then
 			_G.Mixin(frame, _G.BackdropTemplateMixin)
-			frame:HookScript('OnSizeChanged', frame.OnBackdropSizeChanged)
+			if not noHook then
+				frame:HookScript('OnSizeChanged', frame.OnBackdropSizeChanged)
+			end
 		end
 
 		if frame.template == 'NoBackdrop' then
@@ -1286,7 +1295,7 @@ function S:HandleDropDownBox(dropDown, width, pos, template)
 		S:Point(button, 'RIGHT', dropDown, 'RIGHT', -10, 3)
 	end
 
-	button.SetPoint = noop
+	button.SetPoint = S.noop
 	S:HandleNextPrevButton(button, 'down')
 
 	if text then
@@ -1650,22 +1659,16 @@ function S:Desaturate(frame)
 	end
 end
 
-function S:SkinTooltip(tooltip, scale)
-	for _, Region in pairs(AS.Blizzard.Tooltip) do
-		for objectName, objectType in pairs(tooltip) do
-			if type(objectName) == 'string' and (type(objectType) == 'string' or type(objectType) == 'table') and strfind(objectName, Region) then
-				local obj = tooltip[Region]
-				if obj then
-					obj:SetTexture()
-				end
-			end
-		end
+function S:HandleTooltip(tooltip, scale, showHook)
+	S:HandleBlizzardRegions(tooltip)
+	S:SetTemplate(tooltip, nil, nil, nil, nil, nil, nil, nil, true)
+
+	if showHook then
+		tooltip:HookScript('OnShow', function(tt) S:SetTemplate(tt) end)
 	end
 
-	AS:SkinFrame(tooltip)
-
 	if scale then
-		tooltip:SetScale(AS.UIScale)
+		tooltip:SetScale(S.UIScale)
 	end
 end
 
