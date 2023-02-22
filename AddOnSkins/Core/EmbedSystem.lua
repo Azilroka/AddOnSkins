@@ -1,4 +1,4 @@
-local AS = unpack(_G.AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 local ES = AS.EmbedSystem
 

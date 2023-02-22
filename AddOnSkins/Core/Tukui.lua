@@ -1,4 +1,4 @@
-local AS, L = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 if not AS:CheckAddOn('Tukui') then return end
 
 local ES = AS.EmbedSystem

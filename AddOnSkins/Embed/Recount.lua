@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 if not AS:CheckAddOn('Recount') then return end
 
 local ES = AS.EmbedSystem
@@ -14,13 +14,9 @@ function ES:Recount()
 	_G.Recount_MainWindow:SetFrameLevel(AS:CheckOption('EmbedFrameLevel'))
 
 	if AS:CheckOption('Recount') then
-		if _G.Recount_MainWindow.Backdrop then
-			AS:SetTemplate(_G.Recount_MainWindow.Backdrop, AS:CheckOption('EmbedBackdropTransparent') and 'Transparent')
-			if AS:CheckOption('EmbedBackdrop') then
-				_G.Recount_MainWindow.Backdrop:Show()
-			else
-				_G.Recount_MainWindow.Backdrop:Hide()
-			end
+		if _G.Recount_MainWindow.backdrop then
+			S:SetTemplate(_G.Recount_MainWindow.backdrop, AS:CheckOption('EmbedBackdropTransparent') and 'Transparent')
+			_G.Recount_MainWindow.backdrop:SetShown(AS:CheckOption('EmbedBackdrop'))
 		end
 	end
 

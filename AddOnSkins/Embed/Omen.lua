@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 if not AS:CheckAddOn('Omen') then return end
 
 local _G = _G
@@ -11,11 +11,7 @@ function ES:Omen()
 	_G.Omen.BarList.SetBackdropColor = nil
 	_G.Omen.BarList.SetBackdropBorderColor = nil
 
-	if AS:CheckOption('EmbedBackdrop') then
-		AS:SkinFrame(_G.Omen.BarList, AS:CheckOption('EmbedBackdropTransparent') and 'Transparent')
-	else
-		AS:StripTextures(_G.Omen.BarList)
-	end
+	S:SetTemplate(_G.Omen.BarList, AS:CheckOption('EmbedBackdrop') and (AS:CheckOption('EmbedBackdropTransparent') and 'Transparent' or 'Default') or 'NoBackdrop')
 
 	_G.Omen.BarList.SetBackdrop = AS.Noop
 	_G.Omen.BarList.SetBackdropColor = AS.Noop
@@ -33,7 +29,7 @@ function ES:Omen()
 	_G.Omen:OnProfileChanged(nil, _G.Omen.db)
 
 	_G.OmenAnchor:SetParent(EmbedParent)
-	AS:SetTemplate(_G.OmenAnchor)
+	S:SetTemplate(_G.OmenAnchor)
 	_G.OmenAnchor:SetFrameLevel(AS:CheckOption('EmbedFrameLevel'))
 	_G.OmenAnchor:SetBackdropColor(0, 0, 0, 0)
 	_G.OmenAnchor:ClearAllPoints()

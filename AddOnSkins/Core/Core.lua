@@ -165,7 +165,7 @@ end
 local function GenerateEventFunction()
 	local eventHandler = function(_, event, ...)
 		for skin, funcs in pairs(AS.skins) do
-			if AS:CheckOption(skin) and AS.events[event][skin] then
+			if AS.events[event][skin] and AS:CheckOption(skin) then
 				for _, func in ipairs(funcs) do
 					AS:CallSkin(skin, func, event, ...)
 				end

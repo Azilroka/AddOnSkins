@@ -1,5 +1,4 @@
-local AS, L, R = unpack(AddOnSkins)
-local S = AS.Skins
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local LibStub = LibStub

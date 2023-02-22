@@ -1,6 +1,5 @@
-local AS = unpack(AddOnSkins)
+local AS, _, S, R = unpack(AddOnSkins)
 if not AS:CheckAddOn('ElvUI') then return end
-local S = AS.Skins
 
 local _G = _G
 
@@ -14,7 +13,7 @@ local E, L = unpack(ElvUI)
 
 function AS:UpdateMedia()
 	S.Media.Blank = AS.Libs.LSM:Fetch('background', 'ElvUI Blank')
-	S.Media.CheckBox = AS.Libs.LSM:Fetch('statusbar', E.private.general.normTex)
+	S.Media.StatusBar = AS.Libs.LSM:Fetch('statusbar', E.private.general.normTex)
 
 	S.Media.defaultBackdrop = E.media.backdropcolor
 	S.Media.transparentBackdrop = E.media.backdropfadecolor

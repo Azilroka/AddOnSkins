@@ -16,15 +16,16 @@ local UnitFactionGroup = UnitFactionGroup
 local AddOnName, Engine = ...
 local AS = _G.LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceConsole-3.0', 'AceEvent-3.0', 'AceHook-3.0', 'AceTimer-3.0')
 
+AS.EmbedSystem = AS:NewModule('EmbedSystem', 'AceEvent-3.0', 'AceHook-3.0')
+AS.Skins = AS:NewModule('Skins', 'AceTimer-3.0', 'AceHook-3.0', 'AceEvent-3.0')
+
 Engine[1] = AS
 Engine[2] = {}
-Engine[3] = {}
+Engine[3] = AS.Skins
+Engine[4] = {}
 
 _G.AddOnSkins = Engine
 _G.AddOnSkinsDS = {}
-
-AS.EmbedSystem = AS:NewModule('EmbedSystem', 'AceEvent-3.0', 'AceHook-3.0')
-AS.Skins = AS:NewModule('Skins', 'AceTimer-3.0', 'AceHook-3.0', 'AceEvent-3.0')
 
 AS.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 AS.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE

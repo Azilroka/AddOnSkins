@@ -1,4 +1,4 @@
-local AS, L = unpack(_G.AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 local ES = AS.EmbedSystem
 
 local max, floor = max, floor

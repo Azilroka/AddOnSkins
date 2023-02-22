@@ -1,7 +1,4 @@
-local AS = unpack(AddOnSkins)
-local S = AS:GetModule('Skins')
-
-local LibStub = _G.LibStub
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G, _ = _G
 local tremove, unpack, next, ipairs, pairs = tremove, unpack, next, ipairs, pairs
@@ -14,6 +11,8 @@ local CopyTable = CopyTable
 local CreateFrame = CreateFrame
 local UIParent = UIParent
 local ITEM_QUALITY_COLORS = ITEM_QUALITY_COLORS
+
+local LibStub = _G.LibStub
 
 S.Classic = WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 S.Retail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
@@ -61,7 +60,7 @@ S.Media = {
 	ClearTexture = S.Retail and 0 or '',
 
 	Blank = AS.Libs.LSM:Fetch('statusbar', 'Solid'),
-	CheckBox = AS.Libs.LSM:Fetch('statusbar', 'Solid'),
+	StatusBar = AS.Libs.LSM:Fetch('statusbar', 'Solid'),
 	Close = [[Interface\AddOns\AddOnSkins\Media\Textures\Close]],
 	Plus = [[Interface\AddOns\AddOnSkins\Media\Textures\Plus]],
 	Minus = [[Interface\AddOns\AddOnSkins\Media\Textures\Minus]],
@@ -86,19 +85,19 @@ local shadowTemplate = { edgeFile = [[Interface\AddOns\AddOnSkins\Media\Textures
 local Media = S.Media
 
 -- Toolkit API
-S.Mult = 1
-S.Border = 1
+S.mult = 1
+S.border = 1
 S.PixelMode = false
 _, S.ScreenHeight = GetPhysicalScreenSize()
 S.UIScale = 1
 
 function S:Scale(number)
-	return S.Mult * floor(number/S.Mult + .5)
+	return S.mult * floor(number/S.mult + .5)
 end
 
 function S:GetPixelScale()
-	S.Mult = max(0.4, min(1.15, 768 / S.ScreenHeight)) / UIParent:GetEffectiveScale()
-	S.Border = S.Mult * (AS:CheckOption('Theme') == 'ThickBorder' and 3 or AS:CheckOption('Theme') == 'TwoPixel' and 2 or 1)
+	S.mult = max(0.4, min(1.15, 768 / S.ScreenHeight)) / UIParent:GetEffectiveScale()
+	S.border = S.mult * (AS:CheckOption('Theme') == 'ThickBorder' and 3 or AS:CheckOption('Theme') == 'TwoPixel' and 2 or 1)
 	S.PixelMode = AS:CheckOption('Theme') == 'PixelPerfect'
 	S.UIScale = UIParent:GetEffectiveScale()
 end
@@ -229,8 +228,8 @@ function S:Point(obj, arg1, arg2, arg3, arg4, arg5, ...)
 end
 
 function S:GetAnchorOffsets(obj, xOffset, yOffset, noScale)
-	if not xOffset then xOffset = S.Border end
-	if not yOffset then yOffset = S.Border end
+	if not xOffset then xOffset = S.border end
+	if not yOffset then yOffset = S.border end
 	local x = (noScale and xOffset) or S:Scale(xOffset)
 	local y = (noScale and yOffset) or S:Scale(yOffset)
 
@@ -576,6 +575,7 @@ function S:HandleFrame(frame, setBackdrop, template, x1, y1, x2, y2)
 	local portraitFrame = frame.Portrait or frame.portrait or name and _G[name..'Portrait']
 	local portraitFrameOverlay = frame.PortraitOverlay or name and _G[name..'PortraitOverlay']
 	local artFrameOverlay = frame.ArtOverlayFrame or name and _G[name..'ArtOverlayFrame']
+	local closeButton = frame.CloseButton or name and _G[name..'CloseButton']
 
 	S:StripTextures(frame)
 
@@ -587,8 +587,8 @@ function S:HandleFrame(frame, setBackdrop, template, x1, y1, x2, y2)
 		S:HandleInsetFrame(insetFrame)
 	end
 
-	if frame.CloseButton then
-		S:HandleCloseButton(frame.CloseButton)
+	if closeButton then
+		S:HandleCloseButton(closeButton)
 	end
 
 	if setBackdrop then
@@ -1323,12 +1323,12 @@ do
 	local function checkPushedTexture(checkBox, texture) if texture ~= S.Media.ClearTexture then checkBox:SetPushedTexture(S.Media.ClearTexture) end end
 	local function checkHighlightTexture(checkBox, texture) if texture ~= S.Media.ClearTexture then checkBox:SetHighlightTexture(S.Media.ClearTexture) end end
 	local function checkCheckedTexture(checkBox, texture)
-		if texture == Media.CheckBox then return end
-		checkBox:SetCheckedTexture(Media.CheckBox)
+		if texture == Media.StatusBar then return end
+		checkBox:SetCheckedTexture(Media.StatusBar)
 	end
 	local function checkOnDisable(checkBox)
 		if not checkBox.SetDisabledTexture then return end
-		checkBox:SetDisabledTexture(checkBox:GetChecked() and Media.CheckBox or '')
+		checkBox:SetDisabledTexture(checkBox:GetChecked() and Media.StatusBar or '')
 	end
 
 	function S:HandleCheckBox(checkBox, noBackdrop, noReplaceTextures, frameLevel, template)
@@ -1345,7 +1345,7 @@ do
 
 		if not noReplaceTextures then
 			if checkBox.SetCheckedTexture then
-				checkBox:SetCheckedTexture(Media.CheckBox)
+				checkBox:SetCheckedTexture(Media.StatusBar)
 
 				local checkedTexture = checkBox:GetCheckedTexture()
 				checkedTexture:SetVertexColor(1, .82, 0, 0.8)
@@ -1353,7 +1353,7 @@ do
 			end
 
 			if checkBox.SetDisabledTexture then
-				checkBox:SetDisabledTexture(Media.CheckBox)
+				checkBox:SetDisabledTexture(Media.StatusBar)
 
 				local disabledTexture = checkBox:GetDisabledTexture()
 				disabledTexture:SetVertexColor(.6, .6, .6, .8)
@@ -1395,10 +1395,10 @@ do
 		S:Point(OutsideMask, 'CENTER')
 		button.OutsideMask = OutsideMask
 
-		button:SetCheckedTexture(Media.CheckBox)
-		button:SetNormalTexture(Media.CheckBox)
-		button:SetHighlightTexture(Media.CheckBox)
-		button:SetDisabledTexture(Media.CheckBox)
+		button:SetCheckedTexture(Media.StatusBar)
+		button:SetNormalTexture(Media.StatusBar)
+		button:SetHighlightTexture(Media.StatusBar)
+		button:SetDisabledTexture(Media.StatusBar)
 
 		local Check = button:GetCheckedTexture()
 		Check:SetVertexColor(unpack(Media.valueColor))
@@ -1583,7 +1583,7 @@ function S:HandleSliderFrame(frame, template, frameLevel)
 	end
 
 	S:StripTextures(frame)
-	frame:SetThumbTexture(Media.CheckBox)
+	frame:SetThumbTexture(Media.StatusBar)
 
 	if not frame.backdrop then
 		S:CreateBackdrop(frame, AS:CheckOption('ElvUIStyle', 'ElvUI') and 'Default' or template, nil, nil, nil, nil, nil, nil, true, frameLevel)
