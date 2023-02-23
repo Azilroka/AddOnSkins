@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('MageNuggets') then return end
 
@@ -25,13 +25,13 @@ function AS:MageNuggets()
 
 	for _, object in pairs(Frames) do
 		if _G[object] then
-			AS:SkinBackdropFrame(_G[object], nil, true)
+			S:HandleFrame(_G[object], true)
 			if _G[object].SetBackdrop then _G[object]:SetBackdrop(nil) end
 			if _G[object..'_ProcBar'] then
 				_G[object..'_ProcBar']:SetStatusBarTexture(AS.NormTex)
 			end
 			if _G[object..'Texture'] then
-				AS:SkinTexture(_G[object..'Texture'])
+				S:HandleIcon(_G[object..'Texture'])
 			end
 		end
 	end
@@ -58,21 +58,21 @@ function AS:MageNuggets()
 	}
 
 	for _, StatusBar in pairs(StatusBars) do
-		AS:SkinStatusBar(StatusBar)
+		S:HandleStatusBar(StatusBar)
 	end
 
 	for _, object in pairs({MageNugMI_Frame, MageNugCauterize_Frame, MageNugInvokers_Frame}) do
-		AS:CreateBackdrop(object)
-		AS:SetOutside(object.Backdrop, _G[object:GetName()..'Texture1'])
-		AS:SkinTexture(_G[object:GetName()..'Texture1'])
+		S:CreateBackdrop(object)
+		S:SetOutside(object.backdrop, _G[object:GetName()..'Texture1'])
+		S:HandleIcon(_G[object:GetName()..'Texture1'])
 	end
 
 	MageNugMI_Frame_MiBar:SetPoint('LEFT', MageNugMI_FrameTexture1, 'LEFT', 20, 0)
 	MageNugCauterize_Frame_Bar:SetPoint('LEFT', MageNugCauterize_FrameTexture1, 'LEFT', 20, 0)
-	AS:SkinButton(MageNugHordeFrameClose)
-	AS:SkinButton(MageNugHordeFrameShowOptions)
-	AS:SkinButton(MageNugAlliFrameClose)
-	AS:SkinButton(MageNugAlliFrameShowOptions)
+	S:HandleButton(MageNugHordeFrameClose)
+	S:HandleButton(MageNugHordeFrameShowOptions)
+	S:HandleButton(MageNugAlliFrameClose)
+	S:HandleButton(MageNugAlliFrameShowOptions)
 	MNabCast_Frame:ClearAllPoints()
 	MNabCast_Frame:SetPoint('BOTTOM', MageNugAB_Frame, 'TOP', 0, 6)
 end

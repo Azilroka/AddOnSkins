@@ -1,10 +1,10 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Cork') then return end
 
-function AS:Cork()
-	AS:SkinBackdropFrame(Corkboard)
-	Corkboard:HookScript('OnUpdate', function(frame) AS:StripTextures(frame) end)
+function R:Cork()
+	S:HandleFrame(Corkboard, true)
+	Corkboard:HookScript('OnUpdate', function(frame) S:StripTextures(frame) end)
 end
 
-AS:RegisterSkin('Cork', AS.Cork)
+AS:RegisterSkin('Cork', R.Cork)

@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('OrderHallCommander') then return end
 
@@ -7,7 +7,7 @@ function AS:OrderHallCommander(event, addon)
 		local OHC = LibStub('LibInit'):GetAddon('OrderHallCommander')
 		local OHCCache = OHC:GetCacheModule()
 		local TroopFrame = OHCCache:GetTroopsFrame()
-		AS:SkinFrame(TroopFrame)
+		S:HandleFrame(TroopFrame)
 		TroopFrame:ClearAllPoints()
 		TroopFrame:SetPoint("BOTTOM", OrderHallMissionFrame, "TOP", 0, 0)
 		TroopFrame:SetWidth(OrderHallMissionFrame:GetWidth()+2)
@@ -20,30 +20,30 @@ function AS:OrderHallCommander(event, addon)
 
 				frame.IsSkinned = true
 
-				AS:StripTextures(frame)
-				AS:SetTemplate(frame)
-				AS:SkinCloseButton(frame.Close)
+				S:StripTextures(frame)
+				S:SetTemplate(frame)
+				S:HandleCloseButton(frame.Close)
 
 				for j = 1, 99 do
 					local i = j
 					if (j < 10) then i = "0"..j end
 					if _G["LibInitCheckbox0000"..i] ~= nil then
-						AS:SkinCheckBox(_G["LibInitCheckbox0000"..i])
+						S:HandleCheckBox(_G["LibInitCheckbox0000"..i])
 					elseif _G["LibInitSlider000"..i] ~= nil then
-						AS:SkinSlideBar(_G["LibInitSlider000"..i])
+						S:HandleSlideBar(_G["LibInitSlider000"..i])
 					elseif _G["LibInitCheckbox000"..i] ~= nil then
-						AS:SkinCheckBox(_G["LibInitCheckbox000"..i])
+						S:HandleCheckBox(_G["LibInitCheckbox000"..i])
 					elseif _G["LibInitDropdown000"..i] ~= nil then
-						AS:SkinDropDownBox(_G["LibInitDropdown000"..i])
+						S:HandleDropDownBox(_G["LibInitDropdown000"..i])
 					elseif _G["LibInitCheckbox000"..i] ~= nil then
-						AS:SkinCheckBox(_G["LibInitCheckbox000"..i])
+						S:HandleCheckBox(_G["LibInitCheckbox000"..i])
 					elseif _G["LibInitButton000"..i] ~= nil then
-						AS:SkinButton(_G["LibInitButton000"..i])
+						S:HandleButton(_G["LibInitButton000"..i])
 					end
 				end
 
 				frame = {self.CompleteDialog.BorderFrame.ViewButton:GetChildren()}
-				AS:SkinButton(frame[1])
+				S:HandleButton(frame[1])
 			end)
 		end)
 		AS:UnregisterSkinEvent('OrderHallCommander', event)
@@ -52,8 +52,8 @@ function AS:OrderHallCommander(event, addon)
 		AS:UnregisterSkinEvent('OrderHallCommander', event)
 
 		AS:Delay(0.3, function()
-			AS:SkinFrame(OHCGUIContainer1)
-			AS:SkinCloseButton(OHCGUIContainer1.Close)
+			S:HandleFrame(OHCGUIContainer1)
+			S:HandleCloseButton(OHCGUIContainer1.Close)
 		end)
 	end
 end

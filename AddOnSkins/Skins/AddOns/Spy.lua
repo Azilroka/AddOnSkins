@@ -1,21 +1,21 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Spy') then return end
 
 function AS:Spy()
 	if Spy_MainWindow.Background then
-		AS:CreateBackdrop(Spy_MainWindow.Background)
-		AS:StripTextures(Spy_MainWindow)
+		S:CreateBackdrop(Spy_MainWindow.Background)
+		S:StripTextures(Spy_MainWindow)
 	else
-		AS:SkinFrame(Spy_MainWindow)
+		S:HandleFrame(Spy_MainWindow)
 	end
 
-	AS:SkinFrame(TestFrame)
-	AS:SkinFrame(Spy_AlertWindow)
-	AS:SkinCloseButton(Spy_MainWindow.CloseButton)
-	AS:Desaturate(Spy_MainWindow.ClearButton)
-	AS:Desaturate(Spy_MainWindow.LeftButton)
-	AS:Desaturate(Spy_MainWindow.RightButton)
+	S:HandleFrame(TestFrame)
+	S:HandleFrame(Spy_AlertWindow)
+	S:HandleCloseButton(Spy_MainWindow.CloseButton)
+	S:Desaturate(Spy_MainWindow.ClearButton)
+	S:Desaturate(Spy_MainWindow.LeftButton)
+	S:Desaturate(Spy_MainWindow.RightButton)
 	Spy_AlertWindow:SetPoint('TOP', UIParent, 'TOP', 0, -130)
 end
 

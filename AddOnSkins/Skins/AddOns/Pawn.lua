@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Pawn') then return end
 
@@ -7,7 +7,7 @@ function AS:Pawn(event, addon)
 
 	if addon == 'Blizzard_InspectUI' or event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_InspectUI') then
 		AS:Delay(0.1, function()
-			AS:SkinButton(PawnUI_InspectPawnButton, true)
+			S:HandleButton(PawnUI_InspectPawnButton, true)
 			PawnUI_InspectPawnButton:SetNormalTexture(Texture)
 			PawnUI_InspectPawnButton:GetNormalTexture():SetTexCoord(0, 1, 0, 1)
 			PawnUI_InspectPawnButton:ClearAllPoints()
@@ -19,13 +19,13 @@ function AS:Pawn(event, addon)
 	if addon == 'Blizzard_ItemSocketingUI' or event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_ItemSocketingUI') then
 
 		AS:Delay(0.1, function()
-			AS:SkinButton(PawnUI_SocketingPawnButton)
+			S:HandleButton(PawnUI_SocketingPawnButton)
 			PawnUI_SocketingPawnButton:SetSize(40, 20)
 			PawnUI_SocketingPawnButton:SetNormalTexture(Texture)
 			PawnUI_SocketingPawnButton:GetNormalTexture():SetTexCoord(0, 1, 0, 1)
 			hooksecurefunc(ItemSocketingDescription, "SetSocketedItem", function()
 				if (PawnSocketingTooltip and not PawnSocketingTooltip.skinned) then
-					AS:SkinTooltip(PawnSocketingTooltip)
+					S:HandleTooltip(PawnSocketingTooltip)
 					PawnSocketingTooltip.skinned = true
 				end
 			end)
@@ -34,66 +34,66 @@ function AS:Pawn(event, addon)
 
 	if event == 'PLAYER_ENTERING_WORLD' then
 		-- General
-		AS:SkinFrame(PawnUIFrame)
-		AS:SkinCloseButton(PawnUIFrame_TinyCloseButton)
-		AS:SkinScrollBar(PawnUIScaleSelectorScrollFrameScrollBar)
-		AS:SkinFrame(PawnUIStringDialogMultiLine)
-		AS:SkinEditBox(PawnUIStringDialogMultiLine_TextBox)
-		AS:SkinButton(PawnUIStringDialogMultiLine.OKButton)
-		AS:SkinButton(PawnUIStringDialogMultiLine.CancelButton)
+		S:HandleFrame(PawnUIFrame)
+		S:HandleCloseButton(PawnUIFrame_TinyCloseButton)
+		S:HandleScrollBar(PawnUIScaleSelectorScrollFrameScrollBar)
+		S:HandleFrame(PawnUIStringDialogMultiLine)
+		S:HandleEditBox(PawnUIStringDialogMultiLine_TextBox)
+		S:HandleButton(PawnUIStringDialogMultiLine.OKButton)
+		S:HandleButton(PawnUIStringDialogMultiLine.CancelButton)
 
-		AS:SkinButton(PawnUI_InventoryPawnButton)
+		S:HandleButton(PawnUI_InventoryPawnButton)
 		PawnUI_InventoryPawnButton:SetNormalTexture(Texture)
 		PawnUI_InventoryPawnButton:SetSize(40, 20)
 		PawnUI_InventoryPawnButton:GetNormalTexture():SetTexCoord(0, 1, 0, 1)
 
 		for i = 1, PawnUIFrame.numTabs do
-			AS:SkinTab(_G["PawnUIFrameTab"..i])
+			S:HandleTab(_G["PawnUIFrameTab"..i])
 		end
 
 		-- Scale
-		AS:SkinButton(PawnUIFrame_RenameScaleButton)
-		AS:SkinButton(PawnUIFrame_DeleteScaleButton)
-		AS:SkinCheckBox(PawnUIFrame_ShowScaleCheck)
-		AS:SkinButton(PawnUIFrame_ImportScaleButton)
-		AS:SkinButton(PawnUIFrame_ExportScaleButton)
-		AS:SkinButton(PawnUIFrame_CopyScaleButton)
-		AS:SkinButton(PawnUIFrame_NewScaleFromDefaultsButton)
-		AS:SkinButton(PawnUIFrame_NewScaleButton)
-		AS:SkinButton(PawnUIFrame_AutoSelectScalesOnButton) -- huge button, with highlight
-		AS:SkinButton(PawnUIFrame_AutoSelectScalesOffButton) -- huge button, with highlight
+		S:HandleButton(PawnUIFrame_RenameScaleButton)
+		S:HandleButton(PawnUIFrame_DeleteScaleButton)
+		S:HandleCheckBox(PawnUIFrame_ShowScaleCheck)
+		S:HandleButton(PawnUIFrame_ImportScaleButton)
+		S:HandleButton(PawnUIFrame_ExportScaleButton)
+		S:HandleButton(PawnUIFrame_CopyScaleButton)
+		S:HandleButton(PawnUIFrame_NewScaleFromDefaultsButton)
+		S:HandleButton(PawnUIFrame_NewScaleButton)
+		S:HandleButton(PawnUIFrame_AutoSelectScalesOnButton) -- huge button, with highlight
+		S:HandleButton(PawnUIFrame_AutoSelectScalesOffButton) -- huge button, with highlight
 
 		-- Weights
-		AS:SkinScrollBar(PawnUIFrame_StatsListScrollBar)
-		AS:SkinCheckBox(PawnUIFrame_NormalizeValuesCheck)
-		AS:SkinEditBox(PawnUIFrame_StatValueBox)
-		AS:SkinButton(PawnUIFrame_ClearValueButton)
+		S:HandleScrollBar(PawnUIFrame_StatsListScrollBar)
+		S:HandleCheckBox(PawnUIFrame_NormalizeValuesCheck)
+		S:HandleEditBox(PawnUIFrame_StatValueBox)
+		S:HandleButton(PawnUIFrame_ClearValueButton)
 
 		-- Compare
-		AS:SkinBackdropFrame(PawnUICompareItemIcon1, nil, false)
-		AS:SkinBackdropFrame(PawnUICompareItemIcon2, nil, false)
-		AS:SkinBackdropFrame(PawnUIFrame_ClearItemsButton, nil, false)
-		AS:SkinButton(PawnUIFrame_CompareSwapButton)
-		AS:SkinScrollBar(PawnUICompareScrollFrameScrollBar)
+		S:HandleFrame(PawnUICompareItemIcon1, true)
+		S:HandleFrame(PawnUICompareItemIcon2, true)
+		S:HandleFrame(PawnUIFrame_ClearItemsButton, true)
+		S:HandleButton(PawnUIFrame_CompareSwapButton)
+		S:HandleScrollBar(PawnUICompareScrollFrameScrollBar)
 
 		-- Gems
-		AS:SkinEditBox(PawnUIFrame_GemQualityLevelBox, 40, 20)
-		AS:SkinScrollBar(PawnUIGemScrollFrameScrollBar)
+		S:HandleEditBox(PawnUIFrame_GemQualityLevelBox, 40, 20)
+		S:HandleScrollBar(PawnUIGemScrollFrameScrollBar)
 
 		-- Options
-		AS:SkinButton(PawnUIFrame_ResetUpgradesButton)
-		AS:SkinCheckBox(PawnUIFrame_EnchantedValuesCheck)
-		AS:SkinCheckBox(PawnUIFrame_ShowIconsCheck)
-		AS:SkinCheckBox(PawnUIFrame_ShowSpecIconsCheck)
-		AS:SkinCheckBox(PawnUIFrame_AlignRightCheck)
-		AS:SkinCheckBox(PawnUIFrame_ColorTooltipBorderCheck)
-		AS:SkinCheckBox(PawnUIFrame_ShowBagUpgradeAdvisorCheck)
-		AS:SkinCheckBox(PawnUIFrame_ShowLootUpgradeAdvisorCheck)
-		AS:SkinCheckBox(PawnUIFrame_ShowQuestUpgradeAdvisorCheck)
-		AS:SkinCheckBox(PawnUIFrame_ShowSocketingAdvisorCheck)
-		AS:SkinCheckBox(PawnUIFrame_IgnoreGemsWhileLevelingCheck)
-		AS:SkinCheckBox(PawnUIFrame_DebugCheck)
-		AS:SkinCheckBox(PawnUIFrame_ShowItemIDsCheck)
+		S:HandleButton(PawnUIFrame_ResetUpgradesButton)
+		S:HandleCheckBox(PawnUIFrame_EnchantedValuesCheck)
+		S:HandleCheckBox(PawnUIFrame_ShowIconsCheck)
+		S:HandleCheckBox(PawnUIFrame_ShowSpecIconsCheck)
+		S:HandleCheckBox(PawnUIFrame_AlignRightCheck)
+		S:HandleCheckBox(PawnUIFrame_ColorTooltipBorderCheck)
+		S:HandleCheckBox(PawnUIFrame_ShowBagUpgradeAdvisorCheck)
+		S:HandleCheckBox(PawnUIFrame_ShowLootUpgradeAdvisorCheck)
+		S:HandleCheckBox(PawnUIFrame_ShowQuestUpgradeAdvisorCheck)
+		S:HandleCheckBox(PawnUIFrame_ShowSocketingAdvisorCheck)
+		S:HandleCheckBox(PawnUIFrame_IgnoreGemsWhileLevelingCheck)
+		S:HandleCheckBox(PawnUIFrame_DebugCheck)
+		S:HandleCheckBox(PawnUIFrame_ShowItemIDsCheck)
 	end
 end
 

@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not (AS:CheckAddOn('Skillet') or AS:CheckAddOn('Skillet-Classic')) then return end
 
@@ -12,9 +12,9 @@ function AS:Skillet()
 
 		local texture = button:GetName() and _G[button:GetName()..'Icon'] or button:GetNormalTexture()
 
-		AS:SkinButton(button)
+		S:HandleButton(button)
 
-		AS:StyleButton(button)
+		S:StyleButton(button)
 
 		if Guild then
 			button:ClearAllPoints()
@@ -23,23 +23,23 @@ function AS:Skillet()
 
 		if texture then
 			texture:ClearAllPoints()
-			AS:SetInside(texture)
-			AS:SkinTexture(texture)
+			S:SetInside(texture)
+			S:HandleIcon(texture)
 		end
 	end
 
 	local function SkinShopping(self)
-		AS:SkinFrame(SkilletShoppingList)
-		AS:SkinFrame(SkilletShoppingListParent,'Default')
-		AS:SkinCloseButton(SkilletShoppingListCloseButton)
-		AS:SkinCheckBox(SkilletShowQueuesFromAllAlts)
-		AS:SkinScrollBar(SkilletShoppingListListScrollBar)
+		S:HandleFrame(SkilletShoppingList)
+		S:HandleFrame(SkilletShoppingListParent,'Default')
+		S:HandleCloseButton(SkilletShoppingListCloseButton)
+		S:HandleCheckBox(SkilletShowQueuesFromAllAlts)
+		S:HandleScrollBar(SkilletShoppingListListScrollBar)
 	end
 
 	local function SkinPluginButtons(self)
 		local index = 1
 		while _G['SkilletPluginDropdown'..index] do
-			AS:SkinButton(_G['SkilletPluginDropdown'..index])
+			S:HandleButton(_G['SkilletPluginDropdown'..index])
 			index = index + 1
 		end
 	end
@@ -75,43 +75,42 @@ function AS:Skillet()
 		SkinButton(SkilletCollapseAllButton)
 
 		for _, object in pairs(Frames) do
-			AS:SkinFrame(object)
+			S:HandleFrame(object)
 		end
 
 		for _, object in pairs(Backdrops) do
-			AS:SkinBackdropFrame(object)
-			object.Backdrop:SetFrameLevel(object:GetFrameLevel())
-			AS:SetInside(object.Backdrop)
+			S:HandleFrame(object, true)
+			S:SetInside(object.backdrop)
 		end
 
-		AS:SkinCloseButton(SkilletNotesCloseButton)
+		S:HandleCloseButton(SkilletNotesCloseButton)
 
-		AS:SkinTooltip(SkilletTradeskillTooltip)
-		AS:SkinScrollBar(SkilletQueueListScrollBar)
+		S:HandleTooltip(SkilletTradeskillTooltip)
+		S:HandleScrollBar(SkilletQueueListScrollBar)
 
 		for i = 1, 2 do
 			local queDelete = _G['SkilletQueueButton'..i..'DeleteButton']
 			if queDelete then
-				AS:SkinButton(queDelete)
+				S:HandleButton(queDelete)
 				queDelete:SetSize(14, 14)
 			end
 		end
 
 		if Enchantrix_BarkerOptions_Frame then
-			AS:SkinFrame(Enchantrix_BarkerOptions_Frame)
+			S:HandleFrame(Enchantrix_BarkerOptions_Frame)
 			Enchantrix_BarkerOptions_Frame:SetHeight(480)
 
 			for i = 1, 4 do
-				AS:SkinTab(_G['Enchantrix_BarkerOptions_FrameTab'..i])
+				S:HandleTab(_G['Enchantrix_BarkerOptions_FrameTab'..i])
 			end
 
 			Enchantrix_BarkerOptions_FrameTab1:ClearAllPoints()
 			Enchantrix_BarkerOptions_FrameTab1:SetPoint('TOPLEFT', Enchantrix_BarkerOptions_Frame, 'BOTTOMLEFT', 11, 1)
 			Enchantrix_BarkerOptions_CloseButton:SetPoint('TOPRIGHT', Enchantrix_BarkerOptions_Frame, 'TOPRIGHT', -5, -2)
-			AS:SkinButton(Enchantrix_BarkerOptionsBark_Button)
-			AS:SkinButton(Enchantrix_BarkerOptionsReset_Button)
-			AS:SkinButton(Enchantrix_BarkerOptionsTest_Button)
-			AS:SkinCloseButton(Enchantrix_BarkerOptions_CloseButton)
+			S:HandleButton(Enchantrix_BarkerOptionsBark_Button)
+			S:HandleButton(Enchantrix_BarkerOptionsReset_Button)
+			S:HandleButton(Enchantrix_BarkerOptionsTest_Button)
+			S:HandleCloseButton(Enchantrix_BarkerOptions_CloseButton)
 		end
 	end
 
@@ -126,7 +125,7 @@ function AS:Skillet()
 			for i = 1, 13 do
 				local queDelete = _G['SkilletQueueButton'..i..'DeleteButton']
 				if queDelete then
-					AS:SkinButton(queDelete)
+					S:HandleButton(queDelete)
 					queDelete:SetWidth(14)
 					queDelete:SetHeight(14)
 				end
@@ -154,41 +153,41 @@ function AS:Skillet()
 	}
 
 	for _, button in pairs(Buttons) do
-		AS:SkinButton(button)
+		S:HandleButton(button)
 	end
 
-	AS:SkinCloseButton(SkilletFrameCloseButton)
-	AS:SkinCloseButton(SkilletStandaloneQueueCloseButton)
+	S:HandleCloseButton(SkilletFrameCloseButton)
+	S:HandleCloseButton(SkilletStandaloneQueueCloseButton)
 
-	AS:SkinDropDownBox(SkilletRecipeGroupDropdown, 155)
+	S:HandleDropDownBox(SkilletRecipeGroupDropdown, 155)
 	SkilletRecipeGroupDropdownText:SetPoint('RIGHT', SkilletRecipeGroupDropdownRight, 'RIGHT', -40, -2)
-	AS:SkinDropDownBox(SkilletSortDropdown, 155)
+	S:HandleDropDownBox(SkilletSortDropdown, 155)
 	SkilletSortDropdownText:SetPoint('RIGHT', SkilletSortDropdownRight, 'RIGHT', -40, -2)
-	AS:SkinDropDownBox(SkilletQueueLoadDropdown, 160)
+	S:HandleDropDownBox(SkilletQueueLoadDropdown, 160)
 	SkilletQueueLoadDropdownText:SetPoint('RIGHT', SkilletQueueLoadDropdownRight, 'RIGHT', -40, -2)
 	SkilletQueueLoadButton:SetPoint('LEFT', SkilletQueueLoadDropdown, 'RIGHT', -10, 0)
 	SkilletQueueDeleteButton:SetPoint('LEFT', SkilletQueueLoadButton, 'RIGHT', 2, 0)
 
 	if SkilletSearchFilterClear then
-		AS:Desaturate(SkilletSearchFilterClear)
+		S:Desaturate(SkilletSearchFilterClear)
 	end
 
-	AS:SkinArrowButton(SkilletSortAscButton)
-	AS:SkinArrowButton(SkilletSortDescButton)
-	AS:SkinArrowButton(SkilletRecipeGroupOperations)
+	S:HandleNextPrevButton(SkilletSortAscButton)
+	S:HandleNextPrevButton(SkilletSortDescButton)
+	S:HandleNextPrevButton(SkilletRecipeGroupOperations)
 
-	AS:SkinEditBox(SkilletItemCountInputBox)
-	AS:SkinEditBox(SkillButtonNameEdit)
-	AS:SkinEditBox(GroupButtonNameEdit)
-	AS:SkinEditBox(SkilletQueueSaveEditBox)
-	SkilletQueueSaveEditBox.Backdrop:SetAllPoints()
+	S:HandleEditBox(SkilletItemCountInputBox)
+	S:HandleEditBox(SkillButtonNameEdit)
+	S:HandleEditBox(GroupButtonNameEdit)
+	S:HandleEditBox(SkilletQueueSaveEditBox)
+	SkilletQueueSaveEditBox.backdrop:SetAllPoints()
 	SkilletQueueSaveButton:SetPoint('LEFT', SkilletQueueSaveEditBox, 'RIGHT', 2, 0)
 
-	AS:StripTextures(SkilletRankFrameBorder)
+	S:StripTextures(SkilletRankFrameBorder)
 
-	AS:SkinStatusBar(SkilletRankFrame)
+	S:HandleStatusBar(SkilletRankFrame)
 	SkilletRankFrame:SetHeight(10)
-	AS:SkinScrollBar(SkilletSkillListScrollBar)
+	S:HandleScrollBar(SkilletSkillListScrollBar)
 
 	_G['SkilletSkillListParent']:SetScript('OnShow', SkilletFrameOnShow)
 	_G['SkilletSkillListParent']:SetScript('OnUpdate', SkilletFrameOnUpdate)

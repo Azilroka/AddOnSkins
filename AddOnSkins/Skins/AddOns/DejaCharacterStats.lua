@@ -1,11 +1,11 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('DejaCharacterStats') then return end
 
 function AS:DejaCharacterStats()
-	AS:Desaturate(DCS_configButton)
-	AS:SkinButton(DCS_TableRelevantStats)
-	AS:SkinButton(DCS_TableResetButton)
+	S:Desaturate(DCS_configButton)
+	S:HandleButton(DCS_TableRelevantStats)
+	S:HandleButton(DCS_TableResetButton)
 end
 
 AS:RegisterSkin('DejaCharacterStats', AS.DejaCharacterStats)

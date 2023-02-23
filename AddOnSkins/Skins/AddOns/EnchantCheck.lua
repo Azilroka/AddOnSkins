@@ -1,11 +1,11 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('EnchantCheck') then return end
 
 function AS:EnchantCheck()
-	AS:SkinButton(CharacterFrameEnchantCheckButton)
-	AS:SkinButton(InspectFrameEnchantCheckButton)
-	AS:SkinButton(InspectFrameInviteButton)
+	S:HandleButton(CharacterFrameEnchantCheckButton)
+	S:HandleButton(InspectFrameEnchantCheckButton)
+	S:HandleButton(InspectFrameInviteButton)
 	CharacterFrameEnchantCheckButton:SetSize(112, 20)
 
 	--Reposition Expand/Collapse Button

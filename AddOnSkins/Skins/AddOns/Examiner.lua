@@ -1,12 +1,12 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Examiner') then return end
 
 function AS:Examiner()
-	AS:SkinFrame(Examiner)
-	AS:SkinScrollBar(ExaminerStatsScrollScrollBar)
-	AS:SkinScrollBar(ExaminerFeatsScrollScrollBar)
-	AS:SkinScrollBar(ExaminerGearScrollScrollBar)
+	S:HandleFrame(Examiner)
+	S:HandleScrollBar(ExaminerStatsScrollScrollBar)
+	S:HandleScrollBar(ExaminerFeatsScrollScrollBar)
+	S:HandleScrollBar(ExaminerGearScrollScrollBar)
 
 	local Slots = {
 		'Head',
@@ -31,9 +31,9 @@ function AS:Examiner()
 
 	for _, Slot in pairs(Slots) do
 		local Button = _G['ExaminerItemButton'..Slot..'Slot']
-		AS:SkinTexture(Button.texture)
-		AS:SkinFrame(Button)
-		AS:SetInside(Button.texture)
+		S:HandleIcon(Button.texture)
+		S:HandleFrame(Button)
+		S:SetInside(Button.texture)
 		Button.border:SetAlpha(0)
 		Button:SetFrameLevel(Button:GetFrameLevel() + 2)
 		hooksecurefunc(Button.border, 'SetVertexColor', function(self, r, g, b)
@@ -42,29 +42,29 @@ function AS:Examiner()
 		hooksecurefunc(Button.border, 'Hide', function(self)
 			Button:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end)
-		AS:StyleButton(Button)
+		S:StyleButton(Button)
 	end
 
 	for i = 1, Examiner:GetNumChildren() do
 		local object = select(i, Examiner:GetChildren())
 		if object:IsObjectType('Button') then
 			if object:GetText() ~= nil then
-				AS:SkinButton(object, true)
+				S:HandleButton(object, true)
 			else
-				AS:SkinCloseButton(object, true)
+				S:HandleCloseButton(object, true)
 			end
 		end
 	end
 
-	AS:Kill(Examiner.portrait)
-	AS:Kill(Examiner.bgBottomLeft)
-	AS:Kill(Examiner.dlgBottomLeft)
-	AS:Kill(Examiner.bgTopLeft)
-	AS:Kill(Examiner.dlgTopLeft)
-	AS:Kill(Examiner.bgBottomRight)
-	AS:Kill(Examiner.dlgBottomRight)
-	AS:Kill(Examiner.bgTopRight)
-	AS:Kill(Examiner.dlgTopRight)
+	S:Kill(Examiner.portrait)
+	S:Kill(Examiner.bgBottomLeft)
+	S:Kill(Examiner.dlgBottomLeft)
+	S:Kill(Examiner.bgTopLeft)
+	S:Kill(Examiner.dlgTopLeft)
+	S:Kill(Examiner.bgBottomRight)
+	S:Kill(Examiner.dlgBottomRight)
+	S:Kill(Examiner.bgTopRight)
+	S:Kill(Examiner.dlgTopRight)
 
 	Examiner:SetSize(360, 464)
 

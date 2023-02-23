@@ -1,25 +1,25 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('WhisperPop') then return end
 
 function AS:WhisperPop()
-	AS:SkinFrame(WhisperPopFrame)
-	AS:SkinFrame(WhisperPopMessageFrame)
+	S:HandleFrame(WhisperPopFrame)
+	S:HandleFrame(WhisperPopMessageFrame)
 
-	AS:SkinArrowButton(WhisperPopScrollingMessageFrameButtonDown)
-	AS:SkinArrowButton(WhisperPopScrollingMessageFrameButtonEnd)
-	AS:SkinArrowButton(WhisperPopScrollingMessageFrameButtonUp)
+	S:HandleNextPrevButton(WhisperPopScrollingMessageFrameButtonDown)
+	S:HandleNextPrevButton(WhisperPopScrollingMessageFrameButtonEnd)
+	S:HandleNextPrevButton(WhisperPopScrollingMessageFrameButtonUp)
 
 	WhisperPopScrollingMessageFrameButtonDown:SetPoint('BOTTOM', WhisperPopScrollingMessageFrameButtonEnd, 'TOP', 0, 0)
 	WhisperPopScrollingMessageFrameButtonUp:SetPoint('BOTTOM', WhisperPopScrollingMessageFrameButtonDown, 'TOP', 0, 0)
 
-	AS:SkinCheckBox(WhisperPopMessageFrameProtectCheck)
-	AS:SkinIconButton(WhisperPopFrameConfig)
-	AS:SkinIconButton(WhisperPopNotifyButton)
-	AS:SkinScrollBar(WhisperPopFrameListScrollBar)
+	S:HandleCheckBox(WhisperPopMessageFrameProtectCheck)
+	S:HandleItemButton(WhisperPopFrameConfig)
+	S:HandleItemButton(WhisperPopNotifyButton)
+	S:HandleScrollBar(WhisperPopFrameListScrollBar)
 
 	for _, Button in pairs({ WhisperPopFrameListDelete, WhisperPopFrameTopCloseButton, WhisperPopMessageFrameTopCloseButton }) do
-		AS:SkinCloseButton(Button)
+		S:HandleCloseButton(Button)
 	end
 end
 

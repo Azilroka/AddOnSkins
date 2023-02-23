@@ -1,11 +1,11 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not (AS:CheckAddOn('DBM-Core') and AS:CheckAddOn('DBM-StatusBarTimers')) then return end
 
-function AS:DBM(event, addon)
+function R:DBM(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
-		local function SkinBars(self)
-			for bar in self:GetBarIterator() do
+		local function SkinBars(s)
+			for bar in s:GetBarIterator() do
 				if not bar.injected then
 					hooksecurefunc(bar, "Update", function()
 						local sparkEnabled = DBT.Options.Spark
@@ -28,19 +28,19 @@ function AS:DBM(event, addon)
 						end
 						iconSize = iconSize - 2
 
-						AS:SkinTexture(icon1, true)
+						S:HandleIcon(icon1, true)
 						icon1:ClearAllPoints()
 						icon1:SetPoint('BOTTOMRIGHT', frame, 'BOTTOMLEFT', AS:AdjustForTheme(-1), 1)
 						icon1:SetSize(iconSize, iconSize)
 
-						AS:SkinTexture(icon2, true)
+						S:HandleIcon(icon2, true)
 						icon2:ClearAllPoints()
 						icon2:SetPoint('BOTTOMLEFT', frame, 'BOTTOMRIGHT', AS:AdjustForTheme(1), 1)
 						icon2:SetSize(iconSize, iconSize)
 
-						AS:SetInside(tbar, frame)
+						S:SetInside(tbar, frame)
 
-						AS:SetTemplate(frame)
+						S:SetTemplate(frame)
 
 						name:ClearAllPoints()
 						name:SetJustifyH('LEFT')
@@ -56,8 +56,8 @@ function AS:DBM(event, addon)
 							timer:SetPoint('RIGHT', frame, 'RIGHT', -4, 0)
 						end
 
-						if DBT.Options.IconLeft then icon1.Backdrop:Show() else icon1.Backdrop:Hide() end
-						if DBT.Options.IconRight then icon2.Backdrop:Show() else icon2.Backdrop:Hide() end
+						if DBT.Options.IconLeft then icon1.backdrop:Show() else icon1.backdrop:Hide() end
+						if DBT.Options.IconRight then icon2.backdrop:Show() else icon2.backdrop:Hide() end
 
 						bar.injected = true
 					end)
@@ -66,18 +66,18 @@ function AS:DBM(event, addon)
 			end
 		end
 
-		local function SkinRange(self, range, filter, forceshow, redCircleNumPlayers)
+		local function SkinRange(s, range, filter, forceshow, redCircleNumPlayers)
 			if DBM.Options.DontShowRangeFrame and not forceshow then return end
 			if DBMRangeCheck then
-				AS:SetTemplate(DBMRangeCheck)
-				AS:SetTemplate(DBMRangeCheckRadar)
+				S:SetTemplate(DBMRangeCheck)
+				S:SetTemplate(DBMRangeCheckRadar)
 			end
 		end
 
-		local function SkinInfo(self, maxLines, event, ...)
+		local function SkinInfo(s, maxLines, event, ...)
 			if DBM.Options.DontShowInfoFrame and (event or 0) ~= "test" then return end
 			if DBMInfoFrame then
-				AS:SetTemplate(DBMInfoFrame)
+				S:SetTemplate(DBMInfoFrame)
 			end
 		end
 

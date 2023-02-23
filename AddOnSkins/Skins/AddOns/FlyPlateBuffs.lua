@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('FlyPlateBuffs') then return end
 
@@ -10,10 +10,10 @@ function AS:FPB()
 		Button.durationBg:SetTexture('')
 		Button.border:SetTexture('')
 		--texture
-		AS:SkinTexture(Button.texture)
+		S:HandleIcon(Button.texture)
 		Button.texture:SetInside(Button, 0, 0)
 
-		AS:CreateBackdrop(Button)
+		S:CreateBackdrop(Button)
 
 	end
 

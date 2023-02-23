@@ -1,20 +1,21 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('TinyDPS') then return end
 
+local ES = AS.EmbedSystem
+
 function AS:TinyDPS()
-	AS:SkinBackdropFrame(tdpsFrame)
-	tdpsFrame.Backdrop:SetAllPoints()
+	S:HandleFrame(tdpsFrame)
+	tdpsFrame.backdrop:SetAllPoints()
 
 	tdpsFrame:HookScript('OnShow', function()
 		if AS:CheckEmbed('TinyDPS') then
-			EmbedSystem_MainWindow:Show()
+			ES.Main:Show()
 		end
 	end)
 
 	if tdpsStatusBar then
-		tdpsStatusBar:SetBackdrop({bgFile = AS.NormTex, edgeFile = AS.Blank, tile = false, tileSize = 0, edgeSize = 1})
-		tdpsStatusBar:SetStatusBarTexture(AS.NormTex)
+		S:HandleStatusBar(tdpsStatusBar)
 	end
 
 	tdpsRefresh()

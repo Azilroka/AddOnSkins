@@ -1,9 +1,9 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Numeration') then return end
 
 function AS:Numeration()
-	AS:SkinFrame(NumerationFrame)
+	S:HandleFrame(NumerationFrame)
 end
 
 AS:RegisterSkin('Numeration', AS.Numeration)

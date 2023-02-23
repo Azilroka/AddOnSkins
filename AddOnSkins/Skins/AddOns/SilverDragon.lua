@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('SilverDragon') then return end
 
@@ -9,11 +9,11 @@ function AS:SilverDragon()
 	function module.Looks:SilverDragon(popup)
 		original(self, popup)
 
-		AS:SkinFrame(popup)
+		S:HandleFrame(popup)
 
-		AS:SkinBackdropFrame(popup.close)
-		popup.close.Backdrop:SetPoint('TOPLEFT', 7, -8)
-		popup.close.Backdrop:SetPoint('BOTTOMRIGHT', -8, 8)
+		S:HandlepFrame(popup.close, true)
+		popup.close.backdrop:SetPoint('TOPLEFT', 7, -8)
+		popup.close.backdrop:SetPoint('BOTTOMRIGHT', -8, 8)
 		popup.close.Text = popup.close:CreateFontString(nil, 'OVERLAY')
 		popup.close.Text:SetFont(AS.Font, 16, 'OUTLINE')
 		popup.close.Text:SetText('x')
@@ -25,12 +25,12 @@ function AS:SilverDragon()
 		popup.close:SetScale(1)
 		popup.close:HookScript("OnEnter", function(self)
 			self.Text:SetTextColor(1, .2, .2)
-			self.Backdrop:SetBackdropBorderColor(1, .2, .2)
+			self.backdrop:SetBackdropBorderColor(1, .2, .2)
 		end)
 
 		popup.close:HookScript("OnLeave", function(self)
 			self.Text:SetTextColor(1, 1, 1)
-			self.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+			self.backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 		end)
 
 		popup.title:SetFont(AS.Libs.LSM:Fetch('font', AS:CheckOption('DBMFont')), AS:CheckOption('DBMFontSize'), AS:CheckOption('DBMFontFlag'))

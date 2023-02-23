@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('NugRunning') then return end
 
@@ -9,9 +9,9 @@ function AS:NugRunning()
 				timer:SetBackdrop(nil)
 
 				local ic = timer.icon:GetParent()
-				AS:CreateBackdrop(ic, 'Default')
+				S:CreateBackdrop(ic, 'Default')
 
-				AS:CreateBackdrop(timer.bar, 'Default')
+				S:CreateBackdrop(timer.bar, 'Default')
 				timer.isSkinned = true
 			end
 		end

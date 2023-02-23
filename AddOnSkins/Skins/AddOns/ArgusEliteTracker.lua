@@ -1,10 +1,10 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ArgusEliteTracker') then return end
 
-function AS:ArgusEliteTracker()
-	AS:SkinFrame(ArgusEliteTrackerFram.TitleBar)
-	AS:SkinFrame(ArgusEliteTrackerFram.elitesContainer)
+function R:ArgusEliteTracker()
+	S:HandleFrame(ArgusEliteTrackerFram.TitleBar)
+	S:HandleFrame(ArgusEliteTrackerFram.elitesContainer)
 end
 
-AS:RegisterSkin('ArgusEliteTracker', AS.ArgusEliteTracker)
+AS:RegisterSkin('ArgusEliteTracker', R.ArgusEliteTracker)

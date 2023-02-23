@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Auctionator') then return end
 
@@ -19,24 +19,24 @@ local function SkinHeaders(header, x, y)
 	for i = 1, maxHeaders do
 		local section = select(i, header:GetChildren())
 		if section then
-			if not section.Backdrop then
+			if not section.backdrop then
 				section:DisableDrawLayer('BACKGROUND')
-				AS:CreateBackdrop(section, 'Transparent')
-				section.Backdrop:SetPoint('BOTTOMRIGHT', i < maxHeaders and -5 or 0, -2)
+				S:CreateBackdrop(section, 'Transparent')
+				section.backdrop:SetPoint('BOTTOMRIGHT', i < maxHeaders and -5 or 0, -2)
 			end
 		end
 	end
 end
 
 local function SkinItem(item)
-	if item.Icon and not item.Backdrop then
+	if item.Icon and not item.backdrop then
 		item.Icon:SetTexCoord(unpack(AS.TexCoords))
-		AS:CreateBackdrop(item)
-		AS:StyleButton(item)
-		item.Backdrop:SetAllPoints()
+		S:CreateBackdrop(item)
+		S:StyleButton(item)
+		item.backdrop:SetAllPoints()
 		item.EmptySlot:Hide()
 		item.IconMask:Hide()
-		AS:SetInside(item.Icon, item.Backdrop)
+		S:SetInside(item.Icon, item.backdrop)
 	end
 end
 
@@ -57,7 +57,7 @@ local function SetOutsideText(editbox, backdrop, width, height)
 end
 
 local function SkinMoneyInput(editbox, height)
-	local backdrop = editbox.Backdrop -- reference it before change, so it doesnt try to use InputBox backdrop
+	local backdrop = editbox.backdrop -- reference it before change, so it doesnt try to use InputBox backdrop
 	if editbox.labelText == 'Quantity' then
 		editbox = editbox.InputBox
 		editbox:StripTextures()
@@ -73,13 +73,13 @@ local function SkinMainFrames()
 	local selling = _G.AuctionatorSellingFrame
 	local cancelling = _G.AuctionatorCancellingFrame
 
-	AS:StripTextures(list)
-	AS:SetTemplate(list)
-	AS:SetTemplate(list.ResultsListing.ScrollFrame, 'Transparent')
+	S:StripTextures(list)
+	S:SetTemplate(list)
+	S:SetTemplate(list.ResultsListing.ScrollFrame, 'Transparent')
 
 	if AS.Retail then
-		AS:StripTextures(cancelling.ResultsListing)
-		AS:SetTemplate(cancelling.ResultsListing.ScrollFrame, 'Transparent')
+		S:StripTextures(cancelling.ResultsListing)
+		S:SetTemplate(cancelling.ResultsListing.ScrollFrame, 'Transparent')
 		cancelling.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', cancelling.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 16, -6)
 		selling.CurrentPricesListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentPricesListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 		selling.HistoricalPriceListing.ScrollFrame:SetPoint('TOPLEFT', selling.HistoricalPriceListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
@@ -90,8 +90,8 @@ local function SkinMainFrames()
 		list.ExportCSV:Point('TOPRIGHT', list, 'BOTTOMRIGHT', -2, -2)
 	end
 
-	AS:StripTextures(list.ShoppingResultsInset)
-	AS:StripTextures(cancelling.HistoricalPriceInset)
+	S:StripTextures(list.ShoppingResultsInset)
+	S:StripTextures(cancelling.HistoricalPriceInset)
 	list.OneItemSearchButton:ClearAllPoints()
 	list.OneItemSearchButton:Point('LEFT', list.OneItemSearchBox, 'RIGHT', 3, 0)
 	list.OneItemSearchExtendedButton:ClearAllPoints()
@@ -100,23 +100,23 @@ local function SkinMainFrames()
 	list.Export:Point('RIGHT', list.Import, 'LEFT', -3, 0)
 
 	if AS.Retail then
-		AS:StripTextures(selling.HistoricalPriceInset)
-		AS:SetTemplate(selling.HistoricalPriceInset, 'Transparent')
+		S:StripTextures(selling.HistoricalPriceInset)
+		S:SetTemplate(selling.HistoricalPriceInset, 'Transparent')
 		selling.HistoricalPriceInset:SetPoint('TOPLEFT', selling.HistoricalPriceListing, 'TOPLEFT', -7, -25)
 		selling.HistoricalPriceInset:SetPoint('BOTTOMRIGHT', selling.HistoricalPriceListing, 'BOTTOMRIGHT', -2, 0)
 
-		AS:StripTextures(selling.BagInset)
-		AS:StripTextures(selling.BagListing.ScrollFrame)
-		AS:CreateBackdrop(selling.BagListing.ScrollFrame, 'Transparent')
-		AS:SetOutside(selling.BagListing.ScrollFrame, selling.BagListing)
-		AS:SetOutside(selling.BagListing.ScrollFrame.Backdrop, selling.BagListing, 5, 5)
+		S:StripTextures(selling.BagInset)
+		S:StripTextures(selling.BagListing.ScrollFrame)
+		S:CreateBackdrop(selling.BagListing.ScrollFrame, 'Transparent')
+		S:SetOutside(selling.BagListing.ScrollFrame, selling.BagListing)
+		S:SetOutside(selling.BagListing.ScrollFrame.backdrop, selling.BagListing, 5, 5)
 	end
 
-	AS:SkinButton(list.ExportCSV)
+	S:HandleButton(list.ExportCSV)
 
 	-- handle sell item icon
 	SkinItem(selling.AuctionatorSaleItem.Icon)
-	selling.AuctionatorSaleItem.Icon.Backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
+	selling.AuctionatorSaleItem.Icon.backdrop:SetBackdropBorderColor(unpack(AS.BorderColor))
 
 	-- handle bag item icons
 	hooksecurefunc(_G.AuctionatorBagItemMixin, 'SetItemInfo', SetItemInfo)
@@ -143,7 +143,7 @@ local function SkinMainFrames()
 		config.OptionsButton,
 		config.ScanButton
 	} do
-		AS:SkinButton(button)
+		S:HandleButton(button)
 	end
 
 	local scrollBars = {
@@ -158,7 +158,7 @@ local function SkinMainFrames()
 	end
 
 	for _, scrollbar in next, scrollBars do
-		AS:SkinScrollBar(scrollbar)
+		S:HandleScrollBar(scrollbar)
 
 		scrollbar:ClearAllPoints()
 
@@ -187,7 +187,7 @@ local function SkinMainFrames()
 	end
 
 	for _, tab in next, tabs do
-		AS:SkinTab(tab)
+		S:HandleTab(tab)
 	end
 
 	local editBoxes = {
@@ -209,19 +209,19 @@ local function SkinMainFrames()
 	end
 
 	for _, editbox in next, editBoxes do
-		AS:SkinEditBox(editbox)
+		S:HandleEditBox(editbox)
 
 		if editbox.iconAtlas or editbox.labelText == 'Quantity' then
 			SkinMoneyInput(editbox, 28)
 		elseif editbox.InputBox then
-			AS:StripTextures(editbox.InputBox)
-			editbox.Backdrop:SetAllPoints(editbox.InputBox)
+			S:StripTextures(editbox.InputBox)
+			editbox.backdrop:SetAllPoints(editbox.InputBox)
 		end
 	end
 
 	if AS.Retail then
 		selling.SaleItemFrame.MaxButton:ClearAllPoints()
-		selling.SaleItemFrame.MaxButton:SetPoint('LEFT', selling.SaleItemFrame.Quantity.Backdrop, 'RIGHT', 5, 0)
+		selling.SaleItemFrame.MaxButton:SetPoint('LEFT', selling.SaleItemFrame.Quantity.backdrop, 'RIGHT', 5, 0)
 
 		selling.SaleItemFrame.SkipButton:ClearAllPoints()
 		selling.SaleItemFrame.SkipButton:SetPoint('TOPLEFT', selling.SaleItemFrame.PostButton, 'TOPRIGHT', 2, 0)
@@ -247,17 +247,17 @@ local function SkinMainFrames()
 	-- duration radio buttons
 	for _, duration in next, selling.AuctionatorSaleItem.Duration.radioButtons do
 		if duration.RadioButton then
-			AS:SkinRadioButton(duration.RadioButton)
+			S:HandleRadioButton(duration.RadioButton)
 		end
 	end
 
 	-- undercut butttons, refresh button
 	for _, child in next, {cancelling:GetChildren()} do
 		if child.StartScanButton then
-			AS:SkinButton(child.StartScanButton)
+			S:HandleButton(child.StartScanButton)
 		end
 		if child.CancelNextButton then
-			AS:SkinButton(child.CancelNextButton)
+			S:HandleButton(child.CancelNextButton)
 		end
 		if child.StartScanButton and child.CancelNextButton then
 			child.StartScanButton:ClearAllPoints()
@@ -267,21 +267,21 @@ local function SkinMainFrames()
 			child.CancelNextButton:Point('TOPRIGHT', cancelling, 'BOTTOMRIGHT', -2, -2)
 		end
 		if child.iconAtlas == 'UI-RefreshButton' then
-			AS:SkinButton(child)
+			S:HandleButton(child)
 			child:Size(24)
 		end
 	end
 
 	for _, child in next, {selling.AuctionatorSaleItem:GetChildren()} do
 		if child.iconAtlas == 'UI-RefreshButton' then
-			AS:SkinButton(child)
+			S:HandleButton(child)
 			child:Size(24)
 		end
 	end
 
 	-- Classic / TBC Skin
 	if not AS.Retail then
-		AS:SkinDropDownBox(_G.AuctionatorShoppingFrame.ListDropdown, 200)
+		S:HandleDropDownBox(_G.AuctionatorShoppingFrame.ListDropdown, 200)
 	end
 end
 
@@ -303,30 +303,30 @@ local function SkinOptions()
 		for i = 1, frame:GetNumChildren() do
 			local child = select(i, frame:GetChildren())
 			if child.Button then
-				AS:SkinButton(child.Button)
+				S:HandleButton(child.Button)
 			elseif child.CheckBox then
-				AS:SkinCheckBox(child.CheckBox)
+				S:HandleCheckBox(child.CheckBox)
 			elseif child.DropDown then
-				AS:SkinDropDownBox(child.DropDown)
+				S:HandleDropDownBox(child.DropDown)
 			elseif child.InputBox then
-				AS:SkinEditBox(child.InputBox)
-				SetOutsideText(child.InputBox, child.InputBox.Backdrop, 6, 6)
+				S:HandleEditBox(child.InputBox)
+				SetOutsideText(child.InputBox, child.InputBox.backdrop, 6, 6)
 			elseif child.MoneyInput then
 				for x = 1, child.MoneyInput:GetNumChildren() do
 					local box = select(x, child.MoneyInput:GetChildren())
 					if box and box.iconAtlas then
-						AS:SkinEditBox(box)
+						S:HandleEditBox(box)
 						SkinMoneyInput(box, 30)
 					end
 				end
 			elseif child.radioButtons then
 				for _, duration in next, child.radioButtons do
 					if duration.RadioButton then
-						AS:SkinRadioButton(duration.RadioButton)
+						S:HandleRadioButton(duration.RadioButton)
 					end
 				end
 			elseif child.Middle and strmatch(child.Middle:GetTexture(), 'UI%-Panel%-Button') then
-				AS:SkinButton(child)
+				S:HandleButton(child)
 			end
 		end
 	end
@@ -335,13 +335,13 @@ end
 local function SkinExportCheckBox(frame)
 	local checkbox = frame and frame.CheckBox
 	if checkbox and not frame.isSkinned then -- isSkinned is set by HandleCheckBox
-		AS:SkinCheckBox(checkbox)
+		S:HandleCheckBox(checkbox)
 
 		checkbox:SetSize(30, 30)
 
 		if checkbox.Label then
 			checkbox.Label:ClearAllPoints()
-			checkbox.Label:SetPoint('LEFT', checkbox.Backdrop, 'RIGHT', 8, 0)
+			checkbox.Label:SetPoint('LEFT', checkbox.backdrop, 'RIGHT', 8, 0)
 		end
 	end
 end
@@ -351,26 +351,26 @@ local function SkinImportExport()
 	local import = _G.AuctionatorImportListFrame
 	local copy = _G.AuctionatorCopyTextFrame
 
-	AS:StripTextures(copy)
-	AS:StripTextures(import)
-	AS:StripTextures(export)
+	S:StripTextures(copy)
+	S:StripTextures(import)
+	S:StripTextures(export)
 
-	AS:SetTemplate(copy, 'Transparent')
-	AS:SetTemplate(import, 'Transparent')
-	AS:SetTemplate(export, 'Transparent')
+	S:SetTemplate(copy, 'Transparent')
+	S:SetTemplate(import, 'Transparent')
+	S:SetTemplate(export, 'Transparent')
 
-	AS:SkinScrollBar(copy.ScrollFrame.ScrollBar)
-	AS:SkinScrollBar(import.ScrollFrame.ScrollBar)
-	AS:SkinScrollBar(export.ScrollFrame.ScrollBar)
+	S:HandleScrollBar(copy.ScrollFrame.ScrollBar)
+	S:HandleScrollBar(import.ScrollFrame.ScrollBar)
+	S:HandleScrollBar(export.ScrollFrame.ScrollBar)
 
-	AS:SkinButton(export.SelectAll)
-	AS:SkinButton(export.UnselectAll)
-	AS:SkinButton(export.Export)
-	AS:SkinButton(import.Import)
-	AS:SkinButton(copy.Close)
+	S:HandleButton(export.SelectAll)
+	S:HandleButton(export.UnselectAll)
+	S:HandleButton(export.Export)
+	S:HandleButton(import.Import)
+	S:HandleButton(copy.Close)
 
-	AS:SkinCloseButton(export.CloseDialog)
-	AS:SkinCloseButton(import.CloseDialog)
+	S:HandleCloseButton(export.CloseDialog)
+	S:HandleCloseButton(import.CloseDialog)
 
 	hooksecurefunc(export, 'AddToPool', function(self)
 		SkinExportCheckBox(self.checkBoxPool[#self.checkBoxPool])
@@ -386,29 +386,29 @@ local function SkinTextArea(frame)
 	frame.Middle:Hide()
 	frame.Right:Hide()
 
-	AS:SetTemplate(frame)
+	S:SetTemplate(frame)
 end
 
 local function SkinItemFrame(frame)
-	AS:StripTextures(frame)
-	AS:SetTemplate(frame, 'Transparent')
+	S:StripTextures(frame)
+	S:SetTemplate(frame, 'Transparent')
 
-	AS:SkinButton(frame.Cancel)
-	AS:SkinButton(frame.ResetAllButton)
-	AS:SkinButton(frame.Finished)
+	S:HandleButton(frame.Cancel)
+	S:HandleButton(frame.ResetAllButton)
+	S:HandleButton(frame.Finished)
 
 	frame.ResetAllButton:SetPoint('TOPLEFT', frame.Cancel, 'TOPRIGHT', 3, 0)
 
-	AS:StripTextures(frame.FilterKeySelector)
-	AS:CreateBackdrop(frame.FilterKeySelector)
-	AS:SetOutside(frame.FilterKeySelector.Backdrop, frame.FilterKeySelector.Text, 5, 5)
+	S:StripTextures(frame.FilterKeySelector)
+	S:CreateBackdrop(frame.FilterKeySelector)
+	S:SetOutside(frame.FilterKeySelector.backdrop, frame.FilterKeySelector.Text, 5, 5)
 
-	AS:SkinArrowButton(frame.FilterKeySelector.Button)
+	S:HandleNextPrevButton(frame.FilterKeySelector.Button)
 	frame.FilterKeySelector.Button:ClearAllPoints()
-	frame.FilterKeySelector.Button:SetPoint('LEFT', frame.FilterKeySelector.Backdrop, 'RIGHT', -1, 0)
+	frame.FilterKeySelector.Button:SetPoint('LEFT', frame.FilterKeySelector.backdrop, 'RIGHT', -1, 0)
 	frame.FilterKeySelector.Button:SetSize(20, 20)
 
-	AS:SkinCheckBox(frame.SearchContainer.IsExact)
+	S:HandleCheckBox(frame.SearchContainer.IsExact)
 	frame.SearchContainer.IsExact:SetSize(26, 26)
 
 	for _, textarea in next, {
@@ -433,34 +433,34 @@ local function SkinItemFrame(frame)
 		frame.FilterKeySelector.ResetButton,
 		frame.SearchContainer.ResetSearchStringButton
 	} do
-		AS:SkinCloseButton(resetButton)
+		S:HandleCloseButton(resetButton)
 		resetButton:SetHitRectInsets(1, 1, 1, 1)
 	end
 end
 
 local function HandleLostThings()
-	AS:StripTextures(_G.AuctionatorShoppingFrame.ScrollListRecents.InsetFrame)
+	S:StripTextures(_G.AuctionatorShoppingFrame.ScrollListRecents.InsetFrame)
 
-	--AS:StripTextures(_G.AuctionatorShoppingFrame.ScrollListShoppingList.InsetFrame)
-	AS:StripTextures(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Icon.IconBorder)
-	AS:StripTextures(_G.AuctionatorSellingFrame.BagListing.ScrollFrame)
-	AS:StripTextures(_G.AuctionatorSellingFrame.BagListing)
-	AS:StripTextures(_G.AuctionatorSellingFrame.BagInset)
-	AS:StripTextures(_G.AuctionatorSellingFrame.BagInset.NineSlice)
+	--S:StripTextures(_G.AuctionatorShoppingFrame.ScrollListShoppingList.InsetFrame)
+	S:StripTextures(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Icon.IconBorder)
+	S:StripTextures(_G.AuctionatorSellingFrame.BagListing.ScrollFrame)
+	S:StripTextures(_G.AuctionatorSellingFrame.BagListing)
+	S:StripTextures(_G.AuctionatorSellingFrame.BagInset)
+	S:StripTextures(_G.AuctionatorSellingFrame.BagInset.NineSlice)
 
-	AS:StripTextures(_G.AuctionatorSellingFrame.HistoricalPriceInset.NineSlice)
-	--AS:StripTextures(_G.AuctionatorSellingFrame.CurrentItemInset.NineSlice)
+	S:StripTextures(_G.AuctionatorSellingFrame.HistoricalPriceInset.NineSlice)
+	--S:StripTextures(_G.AuctionatorSellingFrame.CurrentItemInset.NineSlice)
 
-	--AS:SkinTab(_G.AuctionatorSellingFrame.HistoryTabsContainer.RealmHistoryTab)
-	--AS:SkinTab(_G.AuctionatorSellingFrame.HistoryTabsContainer.YourHistoryTab)
+	--S:HandleTab(_G.AuctionatorSellingFrame.HistoryTabsContainer.RealmHistoryTab)
+	--S:HandleTab(_G.AuctionatorSellingFrame.HistoryTabsContainer.YourHistoryTab)
 
-	AS:SkinEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Price.MoneyInput.GoldBox)
-	AS:SkinEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Price.MoneyInput.SilverBox)
-	AS:SkinEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Quantity.InputBox)
+	S:HandleEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Price.MoneyInput.GoldBox)
+	S:HandleEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Price.MoneyInput.SilverBox)
+	S:HandleEditBox(_G.AuctionatorSellingFrame.AuctionatorSaleItem.Quantity.InputBox)
 
-	--AS:SkinScrollBar(_G.AuctionatorSellingFrame.CurrentItemListing.ScrollFrame.scrollBar)
-	AS:SkinScrollBar(_G.AuctionatorSellingFrame.HistoricalPriceListing.ScrollFrame.scrollBar)
-	AS:SkinScrollBar(_G.AuctionatorSellingFrame.ResultsListing.ScrollFrame.scrollBar)
+	--S:HandleScrollBar(_G.AuctionatorSellingFrame.CurrentItemListing.ScrollFrame.scrollBar)
+	S:HandleScrollBar(_G.AuctionatorSellingFrame.HistoricalPriceListing.ScrollFrame.scrollBar)
+	S:HandleScrollBar(_G.AuctionatorSellingFrame.ResultsListing.ScrollFrame.scrollBar)
 end
 
 local function StartSkinning()

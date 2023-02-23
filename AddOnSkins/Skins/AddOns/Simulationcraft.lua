@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Simulationcraft') then return end
 
@@ -6,9 +6,9 @@ function AS:Simulationcraft()
 	local Simulationcraft = LibStub("AceAddon-3.0"):GetAddon("Simulationcraft")
 	hooksecurefunc(Simulationcraft, 'GetMainFrame', function()
 		if not SimcFrame.isSkinned then
-			AS:SkinFrame(SimcFrame)
-			AS:SkinButton(SimcFrameButton)
-			AS:SkinScrollBar(SimcScrollFrameScrollBar)
+			S:HandleFrame(SimcFrame)
+			S:HandleButton(SimcFrameButton)
+			S:HandleScrollBar(SimcScrollFrameScrollBar)
 		end
 	end)
 end

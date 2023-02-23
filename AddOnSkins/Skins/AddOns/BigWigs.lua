@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BigWigs') then return end
 
@@ -7,7 +7,7 @@ function AS:BigWigs(event, addon)
 		if BigWigsLoader then
 			BigWigsLoader.RegisterMessage('AddOnSkins', "BigWigs_FrameCreated", function(event, frame, name)
 				if name == "QueueTimer" then
-					AS:SkinStatusBar(frame, {1, 0, 0})
+					S:HandleStatusBar(frame, {1, 0, 0})
 					frame:ClearAllPoints()
 					frame:SetPoint('TOP', '$parent', 'BOTTOM', 0, AS:AdjustForTheme(-2))
 					frame:SetHeight(16)
@@ -46,7 +46,7 @@ function AS:BigWigs(event, addon)
 		local function ApplyStyle(bar)
 			local bd = bar.candyBarBackdrop
 
-			AS:SetTemplate(bd)
+			S:SetTemplate(bd)
 			bd:SetOutside(bar)
 
 			local tex = bar:GetIcon()
@@ -59,10 +59,10 @@ function AS:BigWigs(event, addon)
 				icon:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
 				icon:SetSize(bar:GetHeight(), bar:GetHeight())
 				bar:Set("bigwigs:restoreicon", tex)
-				AS:SkinTexture(icon)
+				S:HandleIcon(icon)
 
 				local iconBd = bar.candyBarIconFrameBackdrop
-				AS:SetTemplate(iconBd)
+				S:SetTemplate(iconBd)
 				iconBd:SetOutside(icon)
 
 				iconBd:Show()
@@ -82,7 +82,7 @@ function AS:BigWigs(event, addon)
 		local function ApplyStyleHalfBar(bar)
 			local bd = bar.candyBarBackdrop
 
-			AS:SetTemplate(bd)
+			S:SetTemplate(bd)
 			bd:SetOutside(bar)
 
 			local tex = bar:GetIcon()
@@ -95,10 +95,10 @@ function AS:BigWigs(event, addon)
 				icon:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
 				icon:SetSize(bar:GetHeight() * 2, bar:GetHeight() * 2)
 				bar:Set("bigwigs:restoreicon", tex)
-				AS:SkinTexture(icon)
+				S:HandleIcon(icon)
 
 				local iconBd = bar.candyBarIconFrameBackdrop
-				AS:SetTemplate(iconBd)
+				S:SetTemplate(iconBd)
 				iconBd:SetOutside(icon)
 
 				iconBd:Show()

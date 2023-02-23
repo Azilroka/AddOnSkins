@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('PetBattleTeams') then return end
 
@@ -7,28 +7,28 @@ function AS:PetBattleTeams()
 	local PBT = LibStub("AceAddon-3.0"):GetAddon("PetBattleTeams"):GetModule("GUI")
 
 	local function SkinPBT()
-		AS:SkinFrame(PBT.mainFrame)
+		S:HandleFrame(PBT.mainFrame)
 --[[
-		AS:SkinButton(PBT.mainFrame.addTeamButton)
-		AS:SetInside(PBT.mainFrame.addTeamButton.icon)
-		AS:SkinTexture(PBT.mainFrame.addTeamButton.icon)
+		S:HandleButton(PBT.mainFrame.addTeamButton)
+		S:SetInside(PBT.mainFrame.addTeamButton.icon)
+		S:HandleIcon(PBT.mainFrame.addTeamButton.icon)
 
 		for _, object in pairs({'reviveButton', 'bandageButton'}) do
-			AS:SkinButton(PBT.mainFrame[object])
-			AS:SkinTexture(PBT.mainFrame[object].Icon)
-			AS:SetInside(PBT.mainFrame[object].Icon)
+			S:HandleButton(PBT.mainFrame[object])
+			S:HandleIcon(PBT.mainFrame[object].Icon)
+			S:SetInside(PBT.mainFrame[object].Icon)
 			PBT.mainFrame[object].Border:SetTexture()
 		end
 
-		AS:StyleButton(PBT.menuButton)
+		S:StyleButton(PBT.menuButton)
 		PBT.menuButton:GetHighlightTexture():SetAllPoints(PBT.menuButton.icon)
 		PBT.menuButton:GetPushedTexture():SetAllPoints(PBT.menuButton.icon)
-		AS:Kill(PBT.menuButton.overlay)
-		AS:SkinFrame(PBT.mainFrame.rosterFrame.scrollFrame.ScrollBar)]]
+		S:Kill(PBT.menuButton.overlay)
+		S:HandleFrame(PBT.mainFrame.rosterFrame.scrollFrame.ScrollBar)]]
 	end
 
 	PetBattleTeamsTooltip:HookScript('OnShow', function(self)
-		AS:SkinTexture(self.Icon)
+		S:HandleIcon(self.Icon)
 		self.Border:SetTexture()
 		self.rarityGlow:SetTexture()
 		self.Background:SetTexture()
@@ -40,7 +40,7 @@ function AS:PetBattleTeams()
 		self.BorderBottom:SetTexture()
 		self.BorderBottomRight:SetTexture()
 		self.BorderBottomLeft:SetTexture()
-		AS:SkinFrame(self, false, true)
+		S:HandleFrame(self, false, true)
 	end)
 
 	if PBT.mainFrame then

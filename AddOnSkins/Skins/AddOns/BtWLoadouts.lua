@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BtWLoadouts') then return end
 
@@ -6,13 +6,13 @@ local _G = _G
 local pairs = pairs
 
 function AS:BtWLoadouts()
-	AS:SkinFrame(_G.BtWLoadoutsFrame)
-	AS:SkinButton(_G.BtWLoadoutsFrame.AddButton)
-	AS:SkinButton(_G.BtWLoadoutsFrame.ActivateButton)
-	AS:SkinButton(_G.BtWLoadoutsFrame.DeleteButton)
+	S:HandleFrame(_G.BtWLoadoutsFrame)
+	S:HandleButton(_G.BtWLoadoutsFrame.AddButton)
+	S:HandleButton(_G.BtWLoadoutsFrame.ActivateButton)
+	S:HandleButton(_G.BtWLoadoutsFrame.DeleteButton)
 
-	AS:SkinFrame(_G.BtWLoadoutsFrame.Profiles.Inset)
-	AS:SkinEditBox(_G.BtWLoadoutsFrame.Profiles.Name)
+	S:HandleFrame(_G.BtWLoadoutsFrame.Profiles.Inset)
+	S:HandleEditBox(_G.BtWLoadoutsFrame.Profiles.Name)
 
 	local ProfileDropDowns = {
 		_G.BtWLoadoutsFrame.Profiles.SpecDropDown,
@@ -24,16 +24,16 @@ function AS:BtWLoadouts()
 	}
 
 	for _, DropDown in pairs(ProfileDropDowns) do
-		AS:SkinDropDownBox(DropDown)
+		S:HandleDropDownBox(DropDown)
 	end
 
-	AS:SkinFrame(_G.BtWLoadoutsFrame.Talents.Inset)
-	AS:SkinEditBox(_G.BtWLoadoutsFrame.Talents.Name)
-	AS:SkinDropDownBox(_G.BtWLoadoutsFrame.Talents.SpecDropDown)
+	S:HandleFrame(_G.BtWLoadoutsFrame.Talents.Inset)
+	S:HandleEditBox(_G.BtWLoadoutsFrame.Talents.Name)
+	S:HandleDropDownBox(_G.BtWLoadoutsFrame.Talents.SpecDropDown)
 
 	for i = 1, MAX_TALENT_TIERS do
 		local Row = BtWLoadoutsFrame.Talents.rows[i]
-		AS:StripTextures(Row, true)
+		S:StripTextures(Row, true)
 
 		hooksecurefunc(Row, "Update", function(self)
 			for bg in self.BackgroundPool:EnumerateActive() do
@@ -47,8 +47,8 @@ function AS:BtWLoadouts()
 			for Button in self.ButtonPool:EnumerateActive() do
 				if not Button.isSkinned then
 					Button.Slot:SetAlpha(0)
-					AS:SkinTexture(Button.Icon)
-					AS:SetTemplate(Button)
+					S:HandleIcon(Button.Icon)
+					S:SetTemplate(Button)
 					Button.KnownSelection:SetAlpha(0)
 					Button.Highlight:SetAlpha(0)
 
@@ -69,23 +69,23 @@ function AS:BtWLoadouts()
 		end)
 	end
 
-	AS:SkinFrame(_G.BtWLoadoutsFrame.PvPTalents.Inset)
-	AS:SkinEditBox(_G.BtWLoadoutsFrame.PvPTalents.Name)
-	AS:SkinDropDownBox(_G.BtWLoadoutsFrame.PvPTalents.SpecDropDown)
+	S:HandleFrame(_G.BtWLoadoutsFrame.PvPTalents.Inset)
+	S:HandleEditBox(_G.BtWLoadoutsFrame.PvPTalents.Name)
+	S:HandleDropDownBox(_G.BtWLoadoutsFrame.PvPTalents.SpecDropDown)
 
-	AS:SkinFrame(_G.BtWLoadoutsFrame.Essences.Inset)
-	AS:SkinEditBox(_G.BtWLoadoutsFrame.Essences.Name)
-	AS:SkinDropDownBox(_G.BtWLoadoutsFrame.Essences.RoleDropDown)
+	S:HandleFrame(_G.BtWLoadoutsFrame.Essences.Inset)
+	S:HandleEditBox(_G.BtWLoadoutsFrame.Essences.Name)
+	S:HandleDropDownBox(_G.BtWLoadoutsFrame.Essences.RoleDropDown)
 
-	AS:SkinFrame(_G.BtWLoadoutsFrame.Equipment.Inset)
-	AS:SkinEditBox(_G.BtWLoadoutsFrame.Equipment.Name)
+	S:HandleFrame(_G.BtWLoadoutsFrame.Equipment.Inset)
+	S:HandleEditBox(_G.BtWLoadoutsFrame.Equipment.Name)
 
-	AS:SkinFrame(_G.BtWLoadoutsFrame.ActionBars.Inset)
-	AS:SkinEditBox(_G.BtWLoadoutsFrame.ActionBars.Name)
+	S:HandleFrame(_G.BtWLoadoutsFrame.ActionBars.Inset)
+	S:HandleEditBox(_G.BtWLoadoutsFrame.ActionBars.Name)
 
-	AS:SkinFrame(_G.BtWLoadoutsFrame.Conditions.Inset)
-	AS:SkinCheckBox(_G.BtWLoadoutsFrame.Conditions.Enabled)
-	AS:SkinEditBox(_G.BtWLoadoutsFrame.Conditions.Name)
+	S:HandleFrame(_G.BtWLoadoutsFrame.Conditions.Inset)
+	S:HandleCheckBox(_G.BtWLoadoutsFrame.Conditions.Enabled)
+	S:HandleEditBox(_G.BtWLoadoutsFrame.Conditions.Name)
 
 	local ConditionsDropDowns = {
 		_G.BtWLoadoutsFrame.Conditions.ProfileDropDown,
@@ -97,7 +97,7 @@ function AS:BtWLoadouts()
 	}
 
 	for _, DropDown in pairs(ConditionsDropDowns) do
-		AS:SkinDropDownBox(DropDown)
+		S:HandleDropDownBox(DropDown)
 	end
 end
 

@@ -1,26 +1,26 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('MailCommander') then return end
 
 function AS:MailCommander()
-	AS:SkinFrame(MailCommanderFrame)
-	AS:SkinCloseButton(MailCommanderFrame.CloseButton)
-	AS:SkinArrowButton(MailCommanderFrame.NextPageButton)
-	AS:SkinArrowButton(MailCommanderFrame.PrevPageButton)
+	S:HandleFrame(MailCommanderFrame)
+	S:HandleCloseButton(MailCommanderFrame.CloseButton)
+	S:HandleNextPrevButton(MailCommanderFrame.NextPageButton)
+	S:HandleNextPrevButton(MailCommanderFrame.PrevPageButton)
 
-	AS:SkinButton(MailCommanderFrame.Send)
-	AS:SkinButton(MailCommanderFrame.Delete)
+	S:HandleButton(MailCommanderFrame.Send)
+	S:HandleButton(MailCommanderFrame.Delete)
 
-	AS:SkinDropDownBox(MailCommanderFrame.Filter)
+	S:HandleDropDownBox(MailCommanderFrame.Filter)
 
-	AS:SkinCheckBox(MailCommanderFrame.All)
+	S:HandleCheckBox(MailCommanderFrame.All)
 
-	AS:SkinTab(MailCommanderFrame.tabNEED)
-	AS:SkinTab(MailCommanderFrame.tabSEND)
-	AS:SkinTab(MailCommanderFrame.tabFILTER)
-	AS:SkinTab(MailCommanderFrame.tabCATEGORIES)
+	S:HandleTab(MailCommanderFrame.tabNEED)
+	S:HandleTab(MailCommanderFrame.tabSEND)
+	S:HandleTab(MailCommanderFrame.tabFILTER)
+	S:HandleTab(MailCommanderFrame.tabCATEGORIES)
 
-	AS:SkinTooltip(MailCommanderTooltip)
+	S:HandleTooltip(MailCommanderTooltip)
 	hooksecurefunc(LibStub('LibInit'):GetAddon('MailCommander'), 'RenderButtonList', function()
 		for _, Table in pairs({'Additional', 'Items'}) do
 			local Button = MailCommanderFrame[Table]
@@ -29,15 +29,15 @@ function AS:MailCommander()
 					Button[i].Bg:SetTexture()
 					Button[i].NameFrame:SetTexture()
 					Button[i].SlotTexture:SetTexture()
-					AS:SkinTexture(Button[i].ItemButton.icon)
+					S:HandleIcon(Button[i].ItemButton.icon)
 					Button[i].ItemButton:SetNormalTexture('')
 					Button[i].ItemButton:SetPushedTexture('')
 					Button[i].ItemButton:SetHighlightTexture('')
-					AS:SkinIconButton(Button[i].ItemButton)
-					AS:CreateBackdrop(Button[i])
-					Button[i].Backdrop:SetPoint('TOPLEFT', Button[i].NameFrame, 'TOPLEFT', -2, -2)
-					Button[i].Backdrop:SetPoint('BOTTOMLEFT', Button[i].NameFrame, 'BOTTOMLEFT', -2, 23)
-					Button[i].Backdrop:SetPoint('RIGHT', Button[i], 'RIGHT', 0, 0)
+					S:HandleItemButton(Button[i].ItemButton)
+					S:CreateBackdrop(Button[i])
+					Button[i].backdrop:SetPoint('TOPLEFT', Button[i].NameFrame, 'TOPLEFT', -2, -2)
+					Button[i].backdrop:SetPoint('BOTTOMLEFT', Button[i].NameFrame, 'BOTTOMLEFT', -2, 23)
+					Button[i].backdrop:SetPoint('RIGHT', Button[i], 'RIGHT', 0, 0)
 					Button[i].isSkinned = true
 				end
 			end

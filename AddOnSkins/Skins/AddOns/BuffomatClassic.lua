@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BuffomatClassic') then return end
 
@@ -17,10 +17,10 @@ function AS:BuffomatClassic()
 	};
 	
 	-- Skin elements
-	for _, Button in pairs(Buttons) do AS:SkinButton(Button); end
-	for _, Tab in pairs(Tabs) do AS:SkinFrame(Tab);	end
-	AS:SkinFrame(BomC_MainWindow);
-	AS:SkinScrollBar(BomC_SpellTab_ScrollScrollBar);
+	for _, Button in pairs(Buttons) do S:HandleButton(Button); end
+	for _, Tab in pairs(Tabs) do S:HandleFrame(Tab);	end
+	S:HandleFrame(BomC_MainWindow);
+	S:HandleScrollBar(BomC_SpellTab_ScrollScrollBar);
 
 	-- Reposition Tabs to fit nicely underneath the MainWindow
 	local point, relTo, relPoint, xOfs, yOfs = BomC_MainWindowTab1:GetPoint();

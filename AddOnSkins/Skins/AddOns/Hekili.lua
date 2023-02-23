@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Hekili') then return end
 
@@ -6,8 +6,8 @@ function AS:Hekili()
 	for Display, _ in ipairs( Hekili.DB.profile.displays ) do
 		for Buttons = 1, Hekili.DB.profile.displays[Display].numIcons do
 			local Button = _G['Hekili_D'..Display..'_B'..Buttons]
-			AS:CreateBackdrop(Button)
-			AS:SkinTexture(Button.Texture)
+			S:CreateBackdrop(Button)
+			S:HandleIcon(Button.Texture)
 		end
 	end
 end

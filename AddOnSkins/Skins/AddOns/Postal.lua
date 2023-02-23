@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Postal') then return end
 
@@ -7,7 +7,7 @@ function AS:Postal(event, addon)
 
 	InboxPrevPageButton:SetPoint('CENTER', InboxFrame, 'BOTTOMLEFT', 45, 112)
 	InboxNextPageButton:SetPoint('CENTER', InboxFrame, 'BOTTOMLEFT', 295, 112)
-	AS:Kill(OpenAllMail)
+	S:Kill(OpenAllMail)
 
 	for i = 1, INBOXITEMS_TO_DISPLAY do
 		local b = _G['MailItem'..i..'ExpireTime']
@@ -18,38 +18,38 @@ function AS:Postal(event, addon)
 			end
 		end
 		if _G['PostalInboxCB'..i] then
-			AS:SkinCheckBox(_G['PostalInboxCB'..i])
+			S:HandleCheckBox(_G['PostalInboxCB'..i])
 		end
 	end
 
 	if PostalSelectOpenButton then
-		AS:SkinButton(PostalSelectOpenButton, true)
+		S:HandleButton(PostalSelectOpenButton, true)
 		PostalSelectOpenButton:SetPoint('RIGHT', InboxFrame, 'TOP', -41, -48)
 	end
 
 	if Postal_OpenAllMenuButton then
-		AS:SkinArrowButton(Postal_OpenAllMenuButton)
+		S:HandleNextPrevButton(Postal_OpenAllMenuButton)
 		Postal_OpenAllMenuButton:SetPoint('LEFT', PostalOpenAllButton, 'RIGHT', 2, 0)
 		Postal_OpenAllMenuButton:SetSize(20, 20) -- Original it is 23, 23
 	end
 
 	if PostalOpenAllButton then
-		AS:SkinButton(PostalOpenAllButton, true)
+		S:HandleButton(PostalOpenAllButton, true)
 		PostalOpenAllButton:SetPoint('CENTER', InboxFrame, 'TOP', -34, -400)
 	end
 
 	if PostalSelectReturnButton then
-		AS:SkinButton(PostalSelectReturnButton, true)
+		S:HandleButton(PostalSelectReturnButton, true)
 		PostalSelectReturnButton:SetPoint('LEFT', InboxFrame, 'TOP', -5, -48)
 	end
 
 	if Postal_ModuleMenuButton then
-		AS:SkinArrowButton(Postal_ModuleMenuButton)
+		S:HandleNextPrevButton(Postal_ModuleMenuButton)
 		Postal_ModuleMenuButton:SetPoint('TOPRIGHT', MailFrame, -53, -6)
 	end
 
 	if Postal_BlackBookButton then
-		AS:SkinArrowButton(Postal_BlackBookButton)
+		S:HandleNextPrevButton(Postal_BlackBookButton)
 		Postal_BlackBookButton:SetPoint('LEFT', SendMailNameEditBox, 'RIGHT', 5, 2)
 	end
 

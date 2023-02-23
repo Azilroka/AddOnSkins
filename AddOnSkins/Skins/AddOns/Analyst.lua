@@ -1,21 +1,21 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Analyst') then return end
 
-function AS:Analyst()
-	AS:SkinFrame(EconomyFrame)
+function R:Analyst()
+	S:HandleFrame(EconomyFrame)
 	EconomyFrame:SetHeight(450)
 	EconomyFrame:SetWidth(364)
 	EconomyFrameTitleFrame:ClearAllPoints()
 	EconomyFrameTitleFrame:SetPoint('TOP', EconomyFrame, 'TOP', 0, -5)
-	AS:SkinCloseButton(EconomyFrameCloseButton)
-	AS:SkinFrame(EconomyFrameTopStats)
-	AS:SkinFrame(EconomyFrameLeftStats)
-	AS:SkinFrame(EconomyFrameRightStats)
-	AS:SkinDropDownBox(EconomyFramePeriodDropDown)
-	AS:SkinDropDownBox(EconomyFrameLeftStatsReportDropDown)
-	AS:SkinDropDownBox(EconomyFrameRightStatsReportDropDown)
-	AS:SkinCheckBox(EconomyFrameAllCharacters)
+	S:HandleCloseButton(EconomyFrameCloseButton)
+	S:HandleFrame(EconomyFrameTopStats)
+	S:HandleFrame(EconomyFrameLeftStats)
+	S:HandleFrame(EconomyFrameRightStats)
+	S:HandleDropDownBox(EconomyFramePeriodDropDown)
+	S:HandleDropDownBox(EconomyFrameLeftStatsReportDropDown)
+	S:HandleDropDownBox(EconomyFrameRightStatsReportDropDown)
+	S:HandleCheckBox(EconomyFrameAllCharacters)
 end
 
-AS:RegisterSkin('Analyst', AS.Analyst)
+AS:RegisterSkin('Analyst', R.Analyst)

@@ -1,18 +1,18 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Immersion') then return end
 
 function AS:Immersion(event, addon)
-	AS:SkinBackdropFrame(ImmersionFrame.TalkBox.BackgroundFrame)
-	AS:CreateShadow(ImmersionFrame.TalkBox.BackgroundFrame.Backdrop)
+	S:HandleFrame(ImmersionFrame.TalkBox.BackgroundFrame, true)
+	S:CreateShadow(ImmersionFrame.TalkBox.BackgroundFrame.backdrop)
 
-	ImmersionFrame.TalkBox.BackgroundFrame.Backdrop:SetPoint('TOPLEFT', ImmersionFrame.TalkBox.BackgroundFrame, 'TOPLEFT', 8, -8)
-	ImmersionFrame.TalkBox.BackgroundFrame.Backdrop:SetPoint('BOTTOMRIGHT', ImmersionFrame.TalkBox.BackgroundFrame, 'BOTTOMRIGHT', -8, 8)
+	ImmersionFrame.TalkBox.BackgroundFrame.backdrop:SetPoint('TOPLEFT', ImmersionFrame.TalkBox.BackgroundFrame, 'TOPLEFT', 8, -8)
+	ImmersionFrame.TalkBox.BackgroundFrame.backdrop:SetPoint('BOTTOMRIGHT', ImmersionFrame.TalkBox.BackgroundFrame, 'BOTTOMRIGHT', -8, 8)
 
-	AS:StripTextures(ImmersionFrame.TalkBox.PortraitFrame)
-	AS:SkinCloseButton(ImmersionFrame.TalkBox.MainFrame.CloseButton)
+	S:StripTextures(ImmersionFrame.TalkBox.PortraitFrame)
+	S:HandleCloseButton(ImmersionFrame.TalkBox.MainFrame.CloseButton)
 
-	AS:SetTemplate(ImmersionFrame.TalkBox.Hilite)
+	S:SetTemplate(ImmersionFrame.TalkBox.Hilite)
 	ImmersionFrame.TalkBox.Hilite:SetBackdropBorderColor(0, 0.44, .87, 1)
 	ImmersionFrame.TalkBox.Hilite:SetBackdropColor(0, 0, 0, 0)
 
@@ -20,14 +20,14 @@ function AS:Immersion(event, addon)
 	ImmersionFrame.TalkBox.MainFrame.Model.ModelShadow:SetPoint("BOTTOMRIGHT", 2, -2)
 	ImmersionFrame.TalkBox.MainFrame.Model.PortraitBG:Hide()
 
-	AS:SkinBackdropFrame(ImmersionFrame.TalkBox.Elements)
-	ImmersionFrame.TalkBox.Elements.Backdrop:SetPoint('TOPLEFT', ImmersionFrame.TalkBox.Elements, 'TOPLEFT', 8, -8)
-	ImmersionFrame.TalkBox.Elements.Backdrop:SetPoint('BOTTOMRIGHT', ImmersionFrame.TalkBox.Elements, 'BOTTOMRIGHT', -8, 8)
-	AS:CreateShadow(ImmersionFrame.TalkBox.Elements.Backdrop)
+	S:HandleFrame(ImmersionFrame.TalkBox.Elements, true)
+	ImmersionFrame.TalkBox.Elements.backdrop:SetPoint('TOPLEFT', ImmersionFrame.TalkBox.Elements, 'TOPLEFT', 8, -8)
+	ImmersionFrame.TalkBox.Elements.backdrop:SetPoint('BOTTOMRIGHT', ImmersionFrame.TalkBox.Elements, 'BOTTOMRIGHT', -8, 8)
+	S:CreateShadow(ImmersionFrame.TalkBox.Elements.backdrop)
 
-	AS:Kill(ImmersionFrame.TalkBox.MainFrame.Overlay)
+	S:Kill(ImmersionFrame.TalkBox.MainFrame.Overlay)
 
-	AS:SkinStatusBar(ImmersionFrame.TalkBox.ReputationBar)
+	S:HandleStatusBar(ImmersionFrame.TalkBox.ReputationBar)
 
 	ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.ItemHighlight.Icon:Hide();
 	ImmersionFrame.TalkBox.Elements.Content.RewardsFrame.ItemHighlight.Icon.Show = function() end;
@@ -40,7 +40,7 @@ function AS:Immersion(event, addon)
 
 	local function SkinReward(Button)
 		if Button.Icon then
-			AS:CreateBackdrop(Button)
+			S:CreateBackdrop(Button)
 			AS:StripTexture(Button, [[Interface\Spellbook\Spellbook-Parts]])
 
 			if Button.NameFrame then
@@ -55,14 +55,14 @@ function AS:Immersion(event, addon)
 				Button.Mask:Hide()
 			end
 
-			Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
-			Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
-			Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
+			Button.backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
+			Button.backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
+			Button.backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
 
-			AS:SkinTexture(Button.Icon, true)
+			S:HandleIcon(Button.Icon, true)
 
 			Button.AutoCastShine = CreateFrame('Frame', '$parentShine', Button, 'AutoCastShineTemplate')
-			Button.AutoCastShine:SetParent(Button.Icon.Backdrop)
+			Button.AutoCastShine:SetParent(Button.Icon.backdrop)
 			Button.AutoCastShine:SetAllPoints()
 
 			for _, sparks in pairs(Button.AutoCastShine.sparkles) do
@@ -93,48 +93,48 @@ function AS:Immersion(event, addon)
 
 	ImmersionFrame:HookScript('OnUpdate', function(self)
 		for _, Button in ipairs(self.TitleButtons.Buttons) do
-			if Button and not Button.Backdrop then
-				AS:CreateBackdrop(Button)
+			if Button and not Button.backdrop then
+				S:CreateBackdrop(Button)
 				Button:SetBackdrop(nil)
 				Button.Overlay:Hide()
-				AS:CreateShadow(Button.Backdrop)
-				AS:SetInside(Button.Backdrop, Button, 4, 4)
-				AS:SetTemplate(Button.Hilite)
+				S:CreateShadow(Button.backdrop)
+				S:SetInside(Button.backdrop, Button, 4, 4)
+				S:SetTemplate(Button.Hilite)
 				Button.Hilite:SetBackdropBorderColor(0, 0.44, .87, 1)
 				Button.Hilite:SetBackdropColor(0, 0, 0, 0)
-				Button.Hilite:SetAllPoints(Button.Backdrop)
+				Button.Hilite:SetAllPoints(Button.backdrop)
 				Button:SetHighlightTexture('')
 			end
 		end
 		for _, Button in ipairs(self.TalkBox.Elements.Content.RewardsFrame.Buttons) do
-			if Button and not Button.Backdrop then
+			if Button and not Button.backdrop then
 				SkinReward(Button)
 			end
 		end
 
 		for Button in self.TalkBox.Elements.Content.RewardsFrame.spellRewardPool:EnumerateActive() do
-			if Button and not Button.Backdrop then
+			if Button and not Button.backdrop then
 				SkinReward(Button)
 				Button:SetSize(250, 54)
 				Button.Icon:SetSize(52, 52)
 				Button.Icon:SetPoint('TOPLEFT', 0, 0)
 
-				Button.Backdrop:SetBackdropBorderColor(.83, .69, .22)
-				Button.Icon.Backdrop:SetBackdropBorderColor(.83, .69, .22)
+				Button.backdrop:SetBackdropBorderColor(.83, .69, .22)
+				Button.Icon.backdrop:SetBackdropBorderColor(.83, .69, .22)
 			end
 		end
 
 		for _, Button in ipairs(self.TalkBox.Elements.Progress.Buttons) do
-			if Button and not Button.Backdrop then
-				AS:CreateBackdrop(Button)
-				AS:SkinTexture(Button.Icon, true)
+			if Button and not Button.backdrop then
+				S:CreateBackdrop(Button)
+				S:HandleIcon(Button.Icon, true)
 				Button.NameFrame:Hide()
 				Button.Border:Hide()
 				Button.Mask:Hide()
 
-				Button.Backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
-				Button.Backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
-				Button.Backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
+				Button.backdrop:SetPoint('TOPLEFT', Button.Icon, 'TOPRIGHT', 0, 0)
+				Button.backdrop:SetPoint('BOTTOMLEFT', Button.Icon, 'BOTTOMRIGHT', 0, 0)
+				Button.backdrop:SetPoint('RIGHT', Button, 'RIGHT', -5, 0)
 			end
 		end
 	end)

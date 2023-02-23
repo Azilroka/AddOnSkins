@@ -1,14 +1,14 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Talentless') then return end
 
 function AS:Talentless()
 	hooksecurefunc(Talentless, "CreateSpecButtons", function(self)
 		for _, Button in pairs(self.Specs) do
-			AS:SkinButton(Button)
+			S:HandleButton(Button)
 			Button:SetBackdropColor(0, 0, 0, 0)
 			Button:SetCheckedTexture('')
-			AS:StyleButton(Button)
+			S:StyleButton(Button)
 			if Button:GetChecked() then
 				Button:SetBackdropBorderColor(.2, .5, .1)
 			end
@@ -29,9 +29,9 @@ function AS:Talentless()
 
 	hooksecurefunc(Talentless, "CreateSpecButtons", function(self)
 		for _, Button in pairs(self.Items) do
-			AS:SkinButton(Button)
+			S:HandleButton(Button)
 			Button:SetBackdropColor(0, 0, 0, 0)
-			AS:StyleButton(Button)
+			S:StyleButton(Button)
 		end
 	end)
 end

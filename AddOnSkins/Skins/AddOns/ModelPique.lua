@@ -1,12 +1,12 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ModelPique') then return end
 
 function AS:ModelPique()
-	AS:SkinFrame(ModelPiqueFrame)
-	AS:SkinButton(ModelPiqueFrameCancelButton)
-	AS:SkinCloseButton(ModelPiqueFrameCloseButton)
-	AS:Kill(ModelPiqueFramePortrait)
+	S:HandleFrame(ModelPiqueFrame)
+	S:HandleButton(ModelPiqueFrameCancelButton)
+	S:HandleCloseButton(ModelPiqueFrameCloseButton)
+	S:Kill(ModelPiqueFramePortrait)
 
 	--Reposition Frame
 	ModelPiqueModel:ClearAllPoints()

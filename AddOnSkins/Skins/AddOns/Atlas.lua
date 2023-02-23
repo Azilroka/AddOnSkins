@@ -1,25 +1,25 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Atlas') then return end
 
-function AS:Atlas(event, addon)
-	AS:SkinFrame(AtlasFrame)
-	AS:SkinFrame(AtlasFrameSmall)
+function R:Atlas(event, addon)
+	S:HandleFrame(AtlasFrame)
+	S:HandleFrame(AtlasFrameSmall)
 
 	-- Skin Elements
-	AS:SkinCloseButton(AtlasFrameCloseButton)
-	AS:SkinCloseButton(AtlasFrameSmallCloseButton)
-	AS:SkinButton(AtlasFrameOptionsButton)
-	AS:SkinButton(AtlasFrameSmallOptionsButton)
-	AS:SkinButton(AtlasSearchButton)
-	AS:SkinButton(AtlasSearchClearButton)
-	AS:SkinButton(AtlasSwitchButton)
-	AS:SkinDropDownBox(AtlasFrameDropDown)
-	AS:SkinDropDownBox(AtlasFrameDropDownType)
-	AS:SkinDropDownBox(AtlasFrameSmallDropDown)
-	AS:SkinDropDownBox(AtlasFrameSmallDropDownType)
-	AS:SkinEditBox(AtlasSearchEditBox)
-	AS:SkinScrollBar(AtlasScrollBarScrollBar)
+	S:HandleCloseButton(AtlasFrameCloseButton)
+	S:HandleCloseButton(AtlasFrameSmallCloseButton)
+	S:HandleButton(AtlasFrameOptionsButton)
+	S:HandleButton(AtlasFrameSmallOptionsButton)
+	S:HandleButton(AtlasSearchButton)
+	S:HandleButton(AtlasSearchClearButton)
+	S:HandleButton(AtlasSwitchButton)
+	S:HandleDropDownBox(AtlasFrameDropDown)
+	S:HandleDropDownBox(AtlasFrameDropDownType)
+	S:HandleDropDownBox(AtlasFrameSmallDropDown)
+	S:HandleDropDownBox(AtlasFrameSmallDropDownType)
+	S:HandleEditBox(AtlasSearchEditBox)
+	S:HandleScrollBar(AtlasScrollBarScrollBar)
 
 	--Reposition Elements
 	AtlasFrameCloseButton:ClearAllPoints()
@@ -48,4 +48,4 @@ function AS:Atlas(event, addon)
 	AtlasSwitchButton:SetPoint('BOTTOMRIGHT', AtlasFrame, 'BOTTOMRIGHT', -10, 10)
 end
 
-AS:RegisterSkin('Atlas', AS.Atlas)
+AS:RegisterSkin('Atlas', R.Atlas)

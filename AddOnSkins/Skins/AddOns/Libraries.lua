@@ -208,9 +208,9 @@ function R:Libraries()
 	if LZF and not S:IsHooked(LZF, "Create") then
 		S:RawHook(LZF, "Create", function(self, ...)
 			local frame = AS.hooks[self].Create(self, ...)
-			AS:SetTemplate(frame.ZMain)
+			S:SetTemplate(frame.ZMain)
 			frame.ZMain.close:SetSize(32, 32)
-			AS:SkinCloseButton(frame.ZMain.close, frame.ZMain)
+			S:HandleCloseButton(frame.ZMain.close, frame.ZMain)
 			return frame
 		end, true)
 	end
@@ -219,10 +219,10 @@ function R:Libraries()
 	if Poncho then
 		if SushiDropFrame then
 			S:SecureHook(SushiDropFrame, 'SetMenu', function(self)
-				if not self.bg.Backdrop then
+				if not self.bg.backdrop then
 					self.bg:SetBackdrop(nil)
 					self.bg.SetBackdrop = function() end
-					AS:CreateBackdrop(self.bg)
+					S:CreateBackdrop(self.bg)
 				end
 			end)
 		end

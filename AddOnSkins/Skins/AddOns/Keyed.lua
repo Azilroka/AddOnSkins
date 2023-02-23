@@ -1,17 +1,17 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Keyed') then return end
 
 function AS:Keyed()
-	AS:SkinFrame(KeyedFrame)
-	AS:SkinFrame(KeyedFrameInset)
-	AS:SkinCheckBox(KeyedFrameShowMinimapButton)
-	AS:SkinCloseButton(KeyedFrameCloseButton)
-	AS:StripTextures(KeystoneListScrollFrame, true)
-	AS:SkinScrollBar(KeystoneListScrollFrameScrollBar)
+	S:HandleFrame(KeyedFrame)
+	S:HandleFrame(KeyedFrameInset)
+	S:HandleCheckBox(KeyedFrameShowMinimapButton)
+	S:HandleCloseButton(KeyedFrameCloseButton)
+	S:StripTextures(KeystoneListScrollFrame, true)
+	S:HandleScrollBar(KeystoneListScrollFrameScrollBar)
 
 	for i = 1, 3 do
-		AS:SkinButton(_G["KeyedFrameColumnHeader"..i], true)
+		S:HandleButton(_G["KeyedFrameColumnHeader"..i], true)
 	end
 
 	KeyedFrameColumnHeader1:SetPoint("TOPLEFT", 4, -57)

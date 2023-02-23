@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Soundtrack') then return end
 
@@ -86,54 +86,54 @@ function AS:Soundtrack()
 
 	for _, object in pairs(frames) do
 		if _G[object] then
-			AS:SkinFrame(_G[object])
+			S:HandleFrame(_G[object])
 		end
 	end
 
 	for _, object in pairs(buttons) do
 		if _G[object] then
-			AS:SkinButton(_G[object])
+			S:HandleButton(_G[object])
 		end
 	end
 
 	for _, object in pairs(cboxes) do
 		if _G[object] then
-			AS:SkinCheckBox(_G[object])
+			S:HandleCheckBox(_G[object])
 		end
 	end
 
 	for i = 1, 10 do
-		AS:SkinTab(_G['SoundtrackFrameTab'..i])
+		S:HandleTab(_G['SoundtrackFrameTab'..i])
 	end
 
 	SoundtrackFrameTab1:SetPoint('TOPLEFT', SoundtrackFrame, 'BOTTOMLEFT', 10, 2)
 
-	AS:SkinCloseButton(SoundtrackFrame_CloseButton)
-	AS:SkinStatusBar(SoundtrackFrame_StatusBarTrack)
-	AS:Kill(SoundtrackFrame_StatusBarTrackBorder)
-	AS:SkinStatusBar(SoundtrackFrame_StatusBarEvent)
-	AS:Kill(SoundtrackFrame_StatusBarEventBorder)
-	AS:StripTextures(SoundtrackFrame_TrackFilter)
+	S:HandleCloseButton(SoundtrackFrame_CloseButton)
+	S:HandleStatusBar(SoundtrackFrame_StatusBarTrack)
+	S:Kill(SoundtrackFrame_StatusBarTrackBorder)
+	S:HandleStatusBar(SoundtrackFrame_StatusBarEvent)
+	S:Kill(SoundtrackFrame_StatusBarEventBorder)
+	S:StripTextures(SoundtrackFrame_TrackFilter)
 	SoundtrackFrame_TrackFilter:SetHeight(18)
-	AS:SkinEditBox(SoundtrackFrame_TrackFilter)
-	AS:SkinBackdropFrame(NowPlayingTextFrame)
-	AS:SkinScrollBar(SoundtrackFrameTrackScrollFrameScrollBar)
-	AS:SkinScrollBar(SoundtrackFrameAssignedTracksScrollFrameScrollBar)
-	AS:SkinScrollBar(SoundtrackFrameEventScrollFrameScrollBar)
-	AS:SkinDropDownBox(SoundtrackFrame_ColumnHeaderNameDropDown)
-	AS:SkinDropDownBox(SoundtrackFrame_PlaybackButtonsLocationDropDown)
-	AS:SkinDropDownBox(SoundtrackFrame_BattleCooldownDropDown)
-	AS:SkinDropDownBox(SoundtrackFrame_LowHealthPercentDropDown)
-	AS:SkinDropDownBox(SoundtrackFrame_SilenceDropDown)
-	AS:SkinBackdropFrame(SoundtrackControlFrame)
-	AS:SkinStatusBar(SoundtrackControlFrame_StatusBarTrack)
-	AS:Kill(SoundtrackControlFrame_StatusBarTrackBorder)
-	AS:SkinStatusBar(SoundtrackControlFrame_StatusBarEvent)
-	AS:Kill(SoundtrackControlFrame_StatusBarEventBorder)
-	AS:SkinEditBox(SoundtrackReportFrame_WhisperEditBox)
-	AS:SkinEditBox(SoundtrackReportFrame_ChannelEditBox)
+	S:HandleEditBox(SoundtrackFrame_TrackFilter)
+	S:HandleFrame(NowPlayingTextFrame, true)
+	S:HandleScrollBar(SoundtrackFrameTrackScrollFrameScrollBar)
+	S:HandleScrollBar(SoundtrackFrameAssignedTracksScrollFrameScrollBar)
+	S:HandleScrollBar(SoundtrackFrameEventScrollFrameScrollBar)
+	S:HandleDropDownBox(SoundtrackFrame_ColumnHeaderNameDropDown)
+	S:HandleDropDownBox(SoundtrackFrame_PlaybackButtonsLocationDropDown)
+	S:HandleDropDownBox(SoundtrackFrame_BattleCooldownDropDown)
+	S:HandleDropDownBox(SoundtrackFrame_LowHealthPercentDropDown)
+	S:HandleDropDownBox(SoundtrackFrame_SilenceDropDown)
+	S:HandleFrame(SoundtrackControlFrame, true)
+	S:HandleStatusBar(SoundtrackControlFrame_StatusBarTrack)
+	S:Kill(SoundtrackControlFrame_StatusBarTrackBorder)
+	S:HandleStatusBar(SoundtrackControlFrame_StatusBarEvent)
+	S:Kill(SoundtrackControlFrame_StatusBarEventBorder)
+	S:HandleEditBox(SoundtrackReportFrame_WhisperEditBox)
+	S:HandleEditBox(SoundtrackReportFrame_ChannelEditBox)
 
-	AS:SkinTooltip(SoundtrackTooltip)
+	S:HandleTooltip(SoundtrackTooltip)
 	NowPlayingTextFrame:Show()
 	NowPlayingTextFrame:Hide()
 	NowPlayingTextFrame:SetSize(200, 40)

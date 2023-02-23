@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ChocolateBar') then return end
 
@@ -6,7 +6,7 @@ function AS:ChocolateBar()
 	for i = 1, 20 do 	
 		local f = _G['ChocolateBar'..i]
 		if f then
-			AS:SkinFrame(f, 'Default')
+			S:HandleFrame(f, 'Default')
 		end
 	end
 	if RaidUtility_ShowButton then

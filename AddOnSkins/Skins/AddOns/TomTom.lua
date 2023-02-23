@@ -1,10 +1,10 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('TomTom') then return end
 
 function AS:TomTom()
 	if TomTomBlock then
-		AS:SkinFrame(TomTomBlock)
+		S:HandleFrame(TomTomBlock)
 	end
 end
 

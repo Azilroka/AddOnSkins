@@ -1,11 +1,11 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Overachiever') then return end
 
 function AS:Overachiever(event, addon)
 	if addon == "Overachiever_Tabs" or IsAddOnLoaded("Overachiever_Tabs") then
 		for i = 4, 6 do
-			AS:SkinTab(_G["AchievementFrameTab"..i])
+			S:HandleTab(_G["AchievementFrameTab"..i])
 		end
 
 		local leftFrame = _G["Overachiever_LeftFrame"]
@@ -13,13 +13,13 @@ function AS:Overachiever(event, addon)
 			for _, component in pairs({childFrame:GetChildren()}) do
 				local type = component:GetObjectType()
 				if (type == "Button") then
-					AS:SkinButton(component)
+					S:HandleButton(component)
 				elseif (type == "EditBox") then
-					AS:SkinEditBox(component)
+					S:HandleEditBox(component)
 				elseif (type == "CheckButton") then
-					AS:SkinCheckBox(component)
+					S:HandleCheckBox(component)
 				elseif (type == "Frame" and strfind(component:GetName(), "Drop")) then
-					AS:SkinDropDownBox(component)
+					S:HandleDropDownBox(component)
 				end
 			end
 		end
@@ -34,12 +34,10 @@ function AS:Overachiever(event, addon)
 			local container = _G[name]
 			local frameBorder, scrollFrame = container:GetChildren()
 			local scrollBar = _G[scrollFrame:GetName().."ScrollBar"]
-			AS:StripTextures(container)
-			AS:StripTextures(frameBorder)
-			AS:SkinBackdropFrame(scrollFrame)
-			scrollFrame.Backdrop:SetPoint("TOPLEFT", 0, 2)
-			scrollFrame.Backdrop:SetPoint("BOTTOMRIGHT", -3, -3)
-			AS:SkinScrollBar(scrollBar)
+			S:StripTextures(container)
+			S:StripTextures(frameBorder)
+			S:HandleFrame(scrollFrame, true, nil, 0, 2, -3, -3)
+			S:HandleScrollBar(scrollBar)
 		end
 
 		AS:UnregisterSkinEvent('Overachiever', "ADDON_LOADED")

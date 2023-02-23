@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('KarniCrap') then return end
 
@@ -13,7 +13,7 @@ function AS:KarniCrap()
 	}
 
 	for _, object in pairs(Frames) do
-		AS:SkinFrame(object)
+		S:HandleFrame(object)
 	end
 
 	local Tabs = {
@@ -23,7 +23,7 @@ function AS:KarniCrap()
 	}
 
 	for _, object in pairs(Tabs) do
-		AS:SkinTab(object)
+		S:HandleTab(object)
 	end
 
 	local Buttons = {
@@ -38,7 +38,7 @@ function AS:KarniCrap()
 	}
 
 	for _, object in pairs(Buttons) do
-		AS:SkinButton(object)
+		S:HandleButton(object)
 	end
 
 	local CheckBoxes = {
@@ -112,7 +112,7 @@ function AS:KarniCrap()
 	}
 
 	for _, object in pairs(CheckBoxes) do
-		AS:SkinCheckBox(object)
+		S:HandleCheckBox(object)
 	end
 
 	local EditBoxes = {
@@ -126,17 +126,17 @@ function AS:KarniCrap()
 	}
 
 	--[[for _, object in pairs(EditBoxes) do
-		AS:SkinEditBox(object)
+		S:HandleEditBox(object)
 	end]]
 
-	AS:StripTextures(KarniCrap_Inventory_ScrollBar, true)
+	S:StripTextures(KarniCrap_Inventory_ScrollBar, true)
 	KarniCrapTab1:SetPoint('BOTTOMLEFT', KarniCrap, 'BOTTOMLEFT',0,-30)
-	AS:SkinScrollBar(KarniCrap_Inventory_ScrollBarScrollBar)
-	AS:SkinCloseButton(KarniCrapCloseButton)
-	AS:Kill(KarniCrapPortrait)
+	S:HandleScrollBar(KarniCrap_Inventory_ScrollBarScrollBar)
+	S:HandleCloseButton(KarniCrapCloseButton)
+	S:Kill(KarniCrapPortrait)
 
 	for i = 1, 15 do
-		AS:SkinCloseButton(_G['KarniInvEntry'..i..'_BtnCrap'])
+		S:HandleCloseButton(_G['KarniInvEntry'..i..'_BtnCrap'])
 	end
 end
 

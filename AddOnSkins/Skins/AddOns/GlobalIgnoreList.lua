@@ -1,48 +1,48 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('GlobalIgnoreList') then return end
 
 function AS:GlobalIgnoreList()
 	FriendsFrame:HookScript("OnShow", function()
 		if GIL and not GIL.isSkinned then
-			AS:SkinFrame(GIL)
-			AS:SkinCloseButton(GIL.CloseButton)
+			S:HandleFrame(GIL)
+			S:HandleCloseButton(GIL.CloseButton)
 
 			for i = 1, 3 do
-				AS:SkinTab(_G['GILTab'..i])
-				AS:SkinFrame(_G['GILFrame'..i])
+				S:HandleTab(_G['GILTab'..i])
+				S:HandleFrame(_G['GILFrame'..i])
 				for j = 1, 6 do
 					if _G['GILFrame'..i..'Header'..j] then
-						AS:SkinFrame(_G['GILFrame'..i..'Header'..j])
+						S:HandleFrame(_G['GILFrame'..i..'Header'..j])
 					end
 				end
 			end
 
-			AS:SkinButton(GILFrame1IgnoreButton)
+			S:HandleButton(GILFrame1IgnoreButton)
 
-			AS:SkinButton(GILFrame2RemoveButton)
-			AS:SkinButton(GILFrame2CreateButton)
-			AS:SkinButton(GILFrame2ResetButton)
+			S:HandleButton(GILFrame2RemoveButton)
+			S:HandleButton(GILFrame2CreateButton)
+			S:HandleButton(GILFrame2ResetButton)
 
-			AS:SkinFrame(GILFrame2Edit)
-			AS:SkinButton(GILFrame2EditSaveButton)
-			AS:SkinButton(GILFrame2EditCancelButton)
+			S:HandleFrame(GILFrame2Edit)
+			S:HandleButton(GILFrame2EditSaveButton)
+			S:HandleButton(GILFrame2EditCancelButton)
 
-			AS:SkinCheckBox(GILFrame2Active)
+			S:HandleCheckBox(GILFrame2Active)
 
-			AS:SkinEditBox(GILFrame2EditDescField)
+			S:HandleEditBox(GILFrame2EditDescField)
 
-			AS:StripTextures(GILFrame2EditFilterField)
-			AS:SkinEditBox(GILFrame2EditFilterField)
-			AS:SkinButton(GILFrame2EditFilterHelp)
+			S:StripTextures(GILFrame2EditFilterField)
+			S:HandleEditBox(GILFrame2EditFilterField)
+			S:HandleButton(GILFrame2EditFilterHelp)
 
-			AS:StripTextures(GILFrame2EditTestField)
-			AS:SkinEditBox(GILFrame2EditTestField)
-			AS:SkinButton(GILFrame2EditTestHelp)
-			AS:SkinButton(GILFrame2EditTestTest)
+			S:StripTextures(GILFrame2EditTestField)
+			S:HandleEditBox(GILFrame2EditTestField)
+			S:HandleButton(GILFrame2EditTestHelp)
+			S:HandleButton(GILFrame2EditTestTest)
 
-			AS:SkinEditBox(GILFrame2EditLinkField)
-			AS:SkinButton(GILFrame2EditLinkHelp)
+			S:HandleEditBox(GILFrame2EditLinkField)
+			S:HandleButton(GILFrame2EditLinkHelp)
 
 			GIL.isSkinned = true
 		end

@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('SexyCooldown2') then return end
 
@@ -21,7 +21,7 @@ function AS:SexyCooldown2()
 
 	local function SkinSexyCooldownBar(bar)
 		SCDStripSkinSettings(bar)
-		AS:SkinFrame(bar)
+		S:HandleFrame(bar)
 		AS:RegisterForPetBattleHide(bar)
 		if AS:CheckOption('EmbedSexyCooldown') then
 			if AS:CheckAddOn('Tukui') then
@@ -65,16 +65,16 @@ function AS:SexyCooldown2()
 
 	local function SkinSexyCooldownIcon(bar, icon)
 		if not icon.skinned then
-			AS:SkinFrame(icon, false, true)
-			AS:SkinBackdropFrame(icon.overlay, false, true)
+			S:HandleFrame(icon, false, true)
+			S:HandleFrame(icon.overlay, true)
 			icon.skinned = true
 		end
-		AS:SkinTexture(icon.overlay.tex)
-		AS:SkinTexture(icon.tex)
+		S:HandleIcon(icon.overlay.tex)
+		S:HandleIcon(icon.tex)
 	end
 
 	local function SkinSexyCooldownBackdrop(bar)
-		AS:SkinFrame(bar, nil, true)
+		S:HandleFrame(bar, nil, true)
 	end
 
 	local function HookSCDBar(bar)

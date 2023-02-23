@@ -1612,7 +1612,7 @@ end
 -- Needs Redone
 function S:CleanTexture(Object, Kill, Alpha)
 	if Kill then
-		AS:Kill(Object)
+		S:Kill(Object)
 	elseif Alpha then
 		Object:SetAlpha(0)
 	else

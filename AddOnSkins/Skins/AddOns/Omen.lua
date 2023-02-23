@@ -1,10 +1,10 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Omen') then return end
 
 function AS:Omen()
-	AS:SkinFrame(_G.Omen.BarList)
-	AS:SkinFrame(_G.Omen.Title)
+	S:HandleFrame(_G.Omen.BarList)
+	S:HandleFrame(_G.Omen.Title)
 
 	_G.Omen.db.profile.Scale = 1
 	_G.Omen.db.profile.Bar.Spacing = 1

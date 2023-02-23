@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BGDefender') then return end
 
@@ -21,7 +21,7 @@ function AS:BGDefender()
 		GameTooltip:Hide()
 	end
 
-	AS:SkinFrame(BGDefenderFrame)
+	S:HandleFrame(BGDefenderFrame)
 
 	local StripAllTextures = {
 		'Button9',
@@ -44,11 +44,11 @@ function AS:BGDefender()
 	}
 
 	for _, object in pairs(StripAllTextures) do
-		AS:StripTextures(_G[object])
+		S:StripTextures(_G[object])
 	end	
 
 	for _, button in pairs(buttons) do
-		AS:SkinButton(_G[button])
+		S:HandleButton(_G[button])
 		_G[button]:SetText('|cFFFFFFFF'.._G[button]:GetText())
 	end	
 
@@ -71,10 +71,10 @@ function AS:BGDefender()
 	Button7:SetPoint('TOPLEFT', BGDefenderFrame, 'TOPLEFT', 5, -48)
 	Button8:SetPoint('TOPLEFT', BGDefenderFrame, 'TOPLEFT', 97, -48)
 
-	AS:SkinDropDownBox(DropDown1)
-	AS:SkinDropDownBox(DropDown2)
-	AS:SkinDropDownBox(DropDown3)
-	AS:SkinCheckBox(BGDefenderPrefaceButton)
+	S:HandleDropDownBox(DropDown1)
+	S:HandleDropDownBox(DropDown2)
+	S:HandleDropDownBox(DropDown3)
+	S:HandleCheckBox(BGDefenderPrefaceButton)
 	Text1:SetTextColor(23/255, 132/255, 209/255)
 	Button9:SetScript('OnEnter', OnEnter)
 	Button9:SetScript('OnLeave', OnLeave)

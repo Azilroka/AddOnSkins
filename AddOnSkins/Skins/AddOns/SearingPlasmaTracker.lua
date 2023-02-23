@@ -1,9 +1,9 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('SearingPlasmaTracker') then return end
 
 function AS:SearingPlasmaTracker()
-	AS:SkinFrame(SearingPlasmaTrackerFrame)
+	S:HandleFrame(SearingPlasmaTrackerFrame)
 end
 
 AS:RegisterSkin('SearingPlasmaTracker', AS.SearingPlasmaTracker)

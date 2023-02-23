@@ -1,8 +1,8 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ACP') then return end
 
-function AS:ACP()
+function R:ACP()
 	local function cbResize(self, event, ...)
 		for i = 1, 20, 1 do
 			local checkbox = _G["ACP_AddonListEntry" .. i .. "Enabled"]
@@ -18,22 +18,21 @@ function AS:ACP()
 	end
 
 	hooksecurefunc(ACP, 'AddonList_OnShow_Fast', cbResize)
-	AS:SkinFrame(ACP_AddonList)
-	AS:SkinFrame(ACP_AddonList_ScrollFrame)
-	AS:SkinButton(ACP_AddonListSetButton)
-	AS:SkinButton(ACP_AddonListDisableAll)
-	AS:SkinButton(ACP_AddonListEnableAll)
-	AS:SkinButton(ACP_AddonList_ReloadUI)
-	AS:SkinButton(ACP_AddonListBottomClose)
-	AS:SkinCloseButton(ACP_AddonListCloseButton)
-	AS:SkinCheckBox(ACP_AddonList_NoRecurse)
-	AS:SkinCheckBox(ACPAddonListForceLoad)
-	AS:SkinScrollBar(ACP_AddonList_ScrollFrameScrollBar)
-	AS:SkinDropDownBox(ACP_AddonListSortDropDown)
+	S:HandleFrame(ACP_AddonList)
+	S:HandleFrame(ACP_AddonList_ScrollFrame)
+	S:HandleButton(ACP_AddonListSetButton)
+	S:HandleButton(ACP_AddonListDisableAll)
+	S:HandleButton(ACP_AddonListEnableAll)
+	S:HandleButton(ACP_AddonList_ReloadUI)
+	S:HandleButton(ACP_AddonListBottomClose)
+	S:HandleCheckBox(ACP_AddonList_NoRecurse)
+	S:HandleCheckBox(ACPAddonListForceLoad)
+	S:HandleScrollBar(ACP_AddonList_ScrollFrameScrollBar)
+	S:HandleDropDownBox(ACP_AddonListSortDropDown)
 
 	for i = 1, 20 do
-		AS:SkinButton(_G["ACP_AddonListEntry"..i.."LoadNow"])
-		AS:SkinCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
+		S:HandleButton(_G["ACP_AddonListEntry"..i.."LoadNow"])
+		S:HandleCheckBox(_G["ACP_AddonListEntry"..i.."Enabled"])
 	end
 
 	ACP_AddonList_ScrollFrame:SetWidth(590)
@@ -50,4 +49,4 @@ function AS:ACP()
 	ACP_AddonList:SetScale(UIParent:GetScale())
 end
 
-AS:RegisterSkin('ACP', AS.ACP)
+AS:RegisterSkin('ACP', R.ACP)

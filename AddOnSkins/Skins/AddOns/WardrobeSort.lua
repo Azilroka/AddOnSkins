@@ -1,12 +1,12 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('WardrobeSort') then return end
 
 function AS:WardrobeSort()
-	-- AS:SkinDropDownBox(WardRobeSortDropDown)
-	-- AS:SkinButton(WardRobeSortDropDownButton, true)
-	-- AS:SkinDropDownBox(WardRobeSortDropDownButton)
-	-- AS:SkinFrame(WardRobeSortDropDown)
+	-- S:HandleDropDownBox(WardRobeSortDropDown)
+	-- S:HandleButton(WardRobeSortDropDownButton, true)
+	-- S:HandleDropDownBox(WardRobeSortDropDownButton)
+	-- S:HandleFrame(WardRobeSortDropDown)
 	--Reposition Menu
 	-- foglightmenu:ClearAllPoints()
 	-- foglightmenu:SetPoint('TOPLEFT', -19, 3)

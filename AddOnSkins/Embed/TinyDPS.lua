@@ -8,7 +8,7 @@ local _G = _G
 function ES:Embed_TinyDPS()
 	local EmbedParent = AS:CheckOption('EmbedSystemDual') and (AS:CheckOption('EmbedRight') == 'TinyDPS' and ES.Right or ES.Left) or ES.Main
 
-	AS:SetTemplate(_G.tdpsFrame.Backdrop, AS:CheckOption('EmbedBackdropTransparent') and 'Transparent')
+	S:SetTemplate(_G.tdpsFrame.backdrop, AS:CheckOption('EmbedBackdropTransparent') and 'Transparent')
 	_G.tdpsFrame:SetParent(EmbedParent)
 	_G.tdpsFrame:SetFrameStrata(EmbedParent:GetFrameStrata())
 	_G.tdpsFrame:SetFrameLevel(EmbedParent:GetFrameLevel())

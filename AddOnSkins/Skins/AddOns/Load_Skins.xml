@@ -7,7 +7,6 @@
 	<Script file="Altoholic.lua"/>
 	<Script file="Analyst.lua"/>
 	<Script file="AppearanceTooltip.lua"/>
-	<Script file="Archy.lua"/>
 	<Script file="ArgusEliteTracker.lua"/>
 	<Script file="ArkInventory.lua"/>
 	<Script file="Atlas.lua"/>

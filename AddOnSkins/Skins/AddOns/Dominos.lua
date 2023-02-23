@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Dominos') then return end
 
@@ -39,12 +39,12 @@ function AS:Dominos()
 		end
 
 		if not button.isSkinned then
-			AS:CreateBackdrop(button)
-			AS:StyleButton(button)
-			button.Backdrop:SetAllPoints()
+			S:CreateBackdrop(button)
+			S:StyleButton(button)
+			button.backdrop:SetAllPoints()
 
-			AS:SkinTexture(icon)
-			AS:SetInside(icon)
+			S:HandleIcon(icon)
+			S:SetInside(icon)
 
 			button.isSkinned = true
 		end
@@ -59,12 +59,12 @@ function AS:Dominos()
 	local function StyleSmallButton(button, icon, name, hotkey, pet)
 		if not button then return end
 		local flash = _G[name.."Flash"]
-		AS:StyleButton(button)
+		S:StyleButton(button)
 		button:SetNormalTexture("")
 
 		if flash then
 			flash:SetTexture(0.8, 0.8, 0.8, 0.5)
-			AS:SetOutside(flash, button, 2, 2)
+			S:SetOutside(flash, button, 2, 2)
 		end
 
 		if hotkey then
@@ -74,12 +74,12 @@ function AS:Dominos()
 		end
 
 		if not button.isSkinned then
-			AS:CreateBackdrop(button)
-			AS:StyleButton(button)
-			button.Backdrop:SetAllPoints()
+			S:CreateBackdrop(button)
+			S:StyleButton(button)
+			button.backdrop:SetAllPoints()
 
-			AS:SkinTexture(icon)
-			AS:SetInside(icon)
+			S:HandleIcon(icon)
+			S:SetInside(icon)
 
 			if pet then
 				local autocast = _G[name.."AutoCastable"]
@@ -122,10 +122,10 @@ function AS:Dominos()
 
 		if MainMenuBarBackpackButton then
 			local Texture = MainMenuBarBackpackButton.icon:GetTexture()
-			AS:SkinIconButton(MainMenuBarBackpackButton, true)
+			S:HandleItemButton(MainMenuBarBackpackButton, true)
 			MainMenuBarBackpackButton.icon:SetTexture(Texture)
 			for i = 0, 3 do
-				AS:SkinIconButton(_G['CharacterBag'..i..'Slot'], true)
+				S:HandleItemButton(_G['CharacterBag'..i..'Slot'], true)
 			end
 		end
 
@@ -138,7 +138,7 @@ function AS:Dominos()
 		end
 
 		if DominosFramexp then
-			AS:CreateBackdrop(DominosFramexp)
+			S:CreateBackdrop(DominosFramexp)
 		end
 	end
 end

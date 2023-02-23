@@ -1,8 +1,8 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Baggins') then return end
 
-function AS:Baggins(event)
+function R:Baggins()
 	local AddOnSkins_BagginsSkin = {
 		BagLeftPadding = 10,
 		BagRightPadding = 10,
@@ -14,12 +14,12 @@ function AS:Baggins(event)
 	}
 
 	function AddOnSkins_BagginsSkin:SkinBag(frame)
-		if not frame.Backdrop then
-			AS:SkinBackdropFrame(frame)
-			AS:SetInside(frame.Backdrop)
+		if not frame.backdrop then
+			S:HandleFrame(frame, true)
+			S:SetInside(frame.backdrop)
 		end
 
-		AS:SkinCloseButton(frame.closebutton)
+		S:HandleCloseButton(frame.closebutton)
 
 		frame.closebutton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", 0, 0)
 
@@ -39,11 +39,11 @@ function AS:Baggins(event)
 		button:SetNormalTexture("")
 		button:SetPushedTexture("")
 
-		AS:SetTemplate(button)
-		AS:StyleButton(button)
+		S:SetTemplate(button)
+		S:StyleButton(button)
 
-		AS:SkinTexture(button.icon)
-		AS:SetInside(button.icon)
+		S:HandleIcon(button.icon)
+		S:SetInside(button.icon)
 
 		button.IconBorder:SetAlpha(0)
 
@@ -57,7 +57,7 @@ function AS:Baggins(event)
 	local BankColor = { 0, .5, 1 }
 
 	function AddOnSkins_BagginsSkin:SetBankVisual(frame, isBank)
-		frame.Backdrop:SetBackdropBorderColor(unpack(isBank and BankColor or AS.BorderColor))
+		frame.backdrop:SetBackdropBorderColor(unpack(isBank and BankColor or AS.BorderColor))
 	end
 
 	function AddOnSkins_BagginsSkin:SkinSection(frame)

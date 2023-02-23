@@ -1,19 +1,19 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('DressUp') then return end
 
 function AS:DressUp()
 	CustomDressUpFrame.portrait:SetAlpha(0)
 
-	AS:SkinButton(CustomDressUpFrame.ResetButton)
-	AS:SkinCloseButton(CustomDressUpFrame.CloseButton)
+	S:HandleButton(CustomDressUpFrame.ResetButton)
+	S:HandleCloseButton(CustomDressUpFrame.CloseButton)
 
-	AS:SkinButton(CustomDressUpFrameCancelButton)
+	S:HandleButton(CustomDressUpFrameCancelButton)
 
-	AS:SkinButton(DressUpHideArmorButton)
-	AS:SkinDropDownBox(DressUpRaceDropdown)
-	AS:SkinCheckBox(DressUpGenderButtonFemale)
-	AS:SkinCheckBox(DressUpGenderButtonMale)
+	S:HandleButton(DressUpHideArmorButton)
+	S:HandleDropDownBox(DressUpRaceDropdown)
+	S:HandleCheckBox(DressUpGenderButtonFemale)
+	S:HandleCheckBox(DressUpGenderButtonMale)
 
 	CustomDressUpFrame.Inset:SetAlpha(0)
 end

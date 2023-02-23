@@ -1,17 +1,17 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('acb_CastBar') then return end
 
-function AS:acb_CastBar()
+function R:acb_CastBar()
 	local Bars = { 'Player', 'Pet', 'Target', 'Focus', 'Mirror' }
 
 	for _, Frame in pairs(Bars) do
 		local Bar = _G['AzCastBarPlugin'..Frame]
 		if Bar then
-			AS:StripTextures(Bar)
-			AS:CreateBackdrop(Bar)
-			AS:SetOutside(Bar.Backdrop, Bar.icon)
-			AS:SkinStatusBar(Bar.status)
+			S:StripTextures(Bar)
+			S:CreateBackdrop(Bar)
+			S:SetOutside(Bar.backdrop, Bar.icon)
+			S:HandleStatusBar(Bar.status)
 
 			if not AzCastBar_Config[Frame]['AddOnSkins'] then
 				AzCastBar_Config[Frame]["useSameBGTexture"] = true
@@ -25,4 +25,4 @@ function AS:acb_CastBar()
 	end
 end
 
-AS:RegisterSkin('acb_CastBar', AS.acb_CastBar)
+AS:RegisterSkin('acb_CastBar', R.acb_CastBar)

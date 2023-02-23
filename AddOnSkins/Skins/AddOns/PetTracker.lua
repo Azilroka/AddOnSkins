@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('PetTracker') then return end
 
@@ -7,9 +7,9 @@ function AS:PetTracker(event, addon)
 		if not AS:CheckAddOn('Carbonite.Quests') then
 			AS:Delay(1, function()
 				local bar = PetTracker.Objectives.Anchor
-				AS:StripTextures(bar.Overlay)
-				AS:CreateBackdrop(bar.Overlay)
-				bar.Overlay.Backdrop:SetBackdropColor(0, 0, 0, 0)
+				S:StripTextures(bar.Overlay)
+				S:CreateBackdrop(bar.Overlay)
+				bar.Overlay.backdrop:SetBackdropColor(0, 0, 0, 0)
 				for i = 1, PetTracker.MaxQuality do
 					bar.Bars[i]:SetStatusBarTexture(AS.NormTex)
 				end
@@ -17,7 +17,7 @@ function AS:PetTracker(event, addon)
 		end
 
 		AS:Delay(5, function()
-			AS:SkinTooltip(PetTracker.MapCanvas.Tip)
+			S:HandleTooltip(PetTracker.MapCanvas.Tip)
 		end)
 	end
 
@@ -27,16 +27,16 @@ function AS:PetTracker(event, addon)
 			for _, region in ipairs(regions) do
 				if region.Tag and region.Tag == 'PETTRACKER_' then
 					for _, button in ipairs(region.Buttons) do
-						AS:SkinIconButton(button)
-						AS:SkinTexture(button.Icon)
+						S:HandleItemButton(button)
+						S:HandleIcon(button.Icon)
 					end
 					break
 				end
 			end
 
-			AS:SkinFrame(PetTrackerSwitcher)
-			AS:SkinCloseButton(PetTrackerSwitcherCloseButton)
-			AS:StripTextures(PetTrackerSwitcher.Inset)
+			S:HandleFrame(PetTrackerSwitcher)
+			S:HandleCloseButton(PetTrackerSwitcherCloseButton)
+			S:StripTextures(PetTrackerSwitcher.Inset)
 
 			for i = 1, PetTrackerSwitcher:GetNumChildren() do
 				local Region = select(i, PetTrackerSwitcher:GetChildren())
@@ -48,26 +48,26 @@ function AS:PetTracker(event, addon)
 			for i = 1, 2 do
 				for j = 1, 3 do
 					local Slot = PetTrackerSwitcher[i .. j]
-					AS:SetTemplate(Slot)
-					AS:CreateBackdrop(Slot)
+					S:SetTemplate(Slot)
+					S:CreateBackdrop(Slot)
 					Slot.Bg:Hide()
-					AS:SkinTexture(Slot.Icon)
-					Slot.Backdrop:SetFrameLevel(Slot.Backdrop:GetFrameLevel()+1)
-					Slot.Backdrop:SetBackdropColor(0, 0, 0, 0)
-					AS:SetOutside(Slot.Backdrop, Slot.Icon)
+					S:HandleIcon(Slot.Icon)
+					Slot.backdrop:SetFrameLevel(Slot.backdrop:GetFrameLevel()+1)
+					Slot.backdrop:SetBackdropColor(0, 0, 0, 0)
+					S:SetOutside(Slot.backdrop, Slot.Icon)
 					Slot.IconBorder:Hide()
 					Slot.Quality:Hide()
-					AS:StripTextures(Slot.Highlight)
+					S:StripTextures(Slot.Highlight)
 					Slot.Highlight:HookScript('OnShow', function() Slot:SetBackdropBorderColor(1, .8, .1) end)
 					Slot.Highlight:HookScript('OnHide', function() Slot:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
-					AS:SkinStatusBar(Slot.Health)
-					AS:SkinStatusBar(Slot.Xp)
+					S:HandleStatusBar(Slot.Health)
+					S:HandleStatusBar(Slot.Xp)
 
 					for _, Ability in ipairs(Slot.Abilities) do
 						if not Ability.isSkinned then
 							Ability:DisableDrawLayer("BACKGROUND")
-							AS:CreateBackdrop(Ability)
-							AS:SkinTexture(Ability.Icon)
+							S:CreateBackdrop(Ability)
+							S:HandleIcon(Ability.Icon)
 							Ability.isSkinned = true
 						end
 					end
@@ -77,18 +77,18 @@ function AS:PetTracker(event, addon)
 	end
 
 	if addon == 'PetTracker_Journal' or IsAddOnLoaded('PetTracker_Journal') then
-		AS:SkinCheckBox(PetTrackerTrackToggle)
+		S:HandleCheckBox(PetTrackerTrackToggle)
 
 		if CollectionsJournalSecureTab0 then
-			AS:SkinTab(CollectionsJournalSecureTab0)
+			S:HandleTab(CollectionsJournalSecureTab0)
 		else
 			hooksecurefunc(PetTrackerRivalsJournal, 'OnEnable', function()
-				AS:SkinTab(CollectionsJournalSecureTab0)
+				S:HandleTab(CollectionsJournalSecureTab0)
 			end)
 		end
 
 		hooksecurefunc(PetTrackerRivalsJournal, 'OnShow', function()
-			AS:StripTextures(CollectionsJournalCoverTab, true)
+			S:StripTextures(CollectionsJournalCoverTab, true)
 
 			PetTrackerRivalsJournal:HookScript("OnShow", function(self)
 				AS:Delay(0, function() _G[CollectionsJournalCoverTab:GetParent():GetName()..'Text']:Hide() end)
@@ -100,51 +100,51 @@ function AS:PetTracker(event, addon)
 				end
 			end)
 
-			AS:SkinFrame(PetTrackerRivalsJournal, 'Default')
-			AS:SkinCloseButton(PetTrackerRivalsJournal.CloseButton)
-			AS:SkinCheckBox(PetTrackerTrackToggle)
-			AS:SkinFrame(PetTrackerRivalsJournal.Card)
-			AS:StripTextures(PetTrackerRivalsJournal.Team)
-			AS:StripTextures(PetTrackerRivalsJournal.Team.Border)
-			AS:StripTextures(PetTrackerRivalsJournal.ListInset)
+			S:HandleFrame(PetTrackerRivalsJournal, 'Default')
+			S:HandleCloseButton(PetTrackerRivalsJournal.CloseButton)
+			S:HandleCheckBox(PetTrackerTrackToggle)
+			S:HandleFrame(PetTrackerRivalsJournal.Card)
+			S:StripTextures(PetTrackerRivalsJournal.Team)
+			S:StripTextures(PetTrackerRivalsJournal.Team.Border)
+			S:StripTextures(PetTrackerRivalsJournal.ListInset)
 			PetTrackerRivalsJournalListButton11:SetFrameLevel(PetTrackerRivalsJournal:GetFrameLevel()-1)
 
-			AS:SkinEditBox(PetTrackerRivalsJournal.SearchBox)
-			AS:SkinFrame(PetTrackerRivalsJournal.Count)
-			AS:SkinScrollBar(PetTrackerRivalsJournalListScrollBar)
+			S:HandleEditBox(PetTrackerRivalsJournal.SearchBox)
+			S:HandleFrame(PetTrackerRivalsJournal.Count)
+			S:HandleScrollBar(PetTrackerRivalsJournalListScrollBar)
 
 			for i = 1, 3 do
 				local Slot = PetTrackerRivalsJournal.Slots[i]
-				AS:SetTemplate(Slot)
+				S:SetTemplate(Slot)
 				Slot.Bg:Hide()
 				Slot.Quality:Hide()
-				AS:Kill(Slot.Hover)
-				AS:SkinTexture(Slot.Icon)
+				S:Kill(Slot.Hover)
+				S:HandleIcon(Slot.Icon)
 				Slot.IconBorder:Hide()
 				Slot.LevelBG:Hide()
 
 				for _, Ability in ipairs(Slot.Abilities) do
 					if not Ability.isSkinned then
 						Ability:DisableDrawLayer("BACKGROUND")
-						AS:CreateBackdrop(Ability)
-						AS:SkinTexture(Ability.Icon)
+						S:CreateBackdrop(Ability)
+						S:HandleIcon(Ability.Icon)
 						Ability.isSkinned = true
 					end
 				end
 
-				AS:SkinIconButton(PetTrackerRivalsJournal['Tab'..i])
+				S:HandleItemButton(PetTrackerRivalsJournal['Tab'..i])
 			end
 
 			for i = 1, 11 do
 				local Button = _G["PetTrackerRivalsJournalListButton"..i]
-				AS:StripTextures(Button)
-				AS:CreateBackdrop(Button)
-				AS:SetInside(Button.Backdrop, Button)
-				Button.Backdrop:SetBackdropColor(0, 0, 0, 0)
-				Button.Backdrop:SetFrameLevel(Button:GetFrameLevel() + 5)
-				AS:StyleButton(Button)
-				AS:SkinTexture(Button.icon, true)
-				AS:StyleButton(Button.dragButton)
+				S:StripTextures(Button)
+				S:CreateBackdrop(Button)
+				S:SetInside(Button.backdrop, Button)
+				Button.backdrop:SetBackdropColor(0, 0, 0, 0)
+				Button.backdrop:SetFrameLevel(Button:GetFrameLevel() + 5)
+				S:StyleButton(Button)
+				S:HandleIcon(Button.icon, true)
+				S:StyleButton(Button.dragButton)
 				Button.dragButton.ActiveTexture:SetAlpha(0)
 
 				Button.icon:SetPoint("LEFT", -41, 0)
@@ -153,11 +153,11 @@ function AS:PetTracker(event, addon)
 				Button.model.levelRing:SetAlpha(0)
 
 				hooksecurefunc(Button.model.quality, 'SetVertexColor', function(self, r, g, b)
-					Button.icon.Backdrop:SetBackdropBorderColor(r, g, b)
+					Button.icon.backdrop:SetBackdropBorderColor(r, g, b)
 				end)
 
 				hooksecurefunc(Button.model.quality, 'Hide', function(self)
-					Button.icon.Backdrop:SetBackdropColor(unpack(AS.BorderColor))
+					Button.icon.backdrop:SetBackdropColor(unpack(AS.BorderColor))
 				end)
 			end
 		end)

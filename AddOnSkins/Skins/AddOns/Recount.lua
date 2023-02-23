@@ -44,10 +44,10 @@ function R:Recount()
 		end
 	end
 
-	AS:SkinScrollBar(Recount.MainWindow.ScrollBar)
+	S:HandleScrollBar(Recount.MainWindow.ScrollBar)
 
 	Recount.MainWindow:HookScript('OnShow', function() if AS:CheckEmbed('Recount') then ES.Main:Show() end end)
-	Recount.MainWindow.FileButton:HookScript('OnClick', function() if LibDropdownFrame0 then AS:SetTemplate(LibDropdownFrame0) end end)
+	Recount.MainWindow.FileButton:HookScript('OnClick', function() if LibDropdownFrame0 then S:SetTemplate(LibDropdownFrame0) end end)
 
 	hooksecurefunc(Recount, 'ShowScrollbarElements', function() Recount_MainWindow_ScrollBarScrollBar:Show() end)
 	hooksecurefunc(Recount, 'HideScrollbarElements', function() Recount_MainWindow_ScrollBarScrollBar:Hide() end)

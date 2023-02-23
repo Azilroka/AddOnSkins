@@ -1,16 +1,16 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('EavesDrop') then return end
 
 function AS:EavesDrop()
-	AS:SkinFrame(EavesDropFrame)
-	AS:SkinFrame(EavesDropHistoryFrame)
-	AS:SkinTab(EavesDropTab)
-	EavesDropTab.Backdrop:SetPoint('TOPLEFT', 0, -5)
-	EavesDropTab.Backdrop:SetPoint('BOTTOMRIGHT', 0, 2)
+	S:HandleFrame(EavesDropFrame)
+	S:HandleFrame(EavesDropHistoryFrame)
+	S:HandleTab(EavesDropTab)
+	EavesDropTab.backdrop:SetPoint('TOPLEFT', 0, -5)
+	EavesDropTab.backdrop:SetPoint('BOTTOMRIGHT', 0, 2)
 	EavesDropTabText:ClearAllPoints()
 	EavesDropTabText:SetPoint('CENTER', EavesDropTab, 'CENTER', 0, -2)
-	AS:SkinButton(EavesDropHistoryFrameReset)
-	AS:SkinCloseButton(EavesDropHistoryFrameClose)
+	S:HandleButton(EavesDropHistoryFrameReset)
+	S:HandleCloseButton(EavesDropHistoryFrameClose)
 end
 AS:RegisterSkin('EavesDrop', AS.EavesDrop)

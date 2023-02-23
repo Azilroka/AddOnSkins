@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Healium') then return end
 
@@ -32,8 +32,8 @@ function AS:Healium()
 		local captionbar = self.CaptionBar
 		local captiontext = self.CaptionBar.Caption
 		local closebutton = self.CaptionBar.CloseButton
-		AS:SkinFrame(captionbar, false, true)
-		AS:SkinCloseButton(closebutton)
+		S:HandleFrame(captionbar, false, true)
+		S:HandleCloseButton(closebutton)
 		skinnedFrames[self:GetName()] = true
 	end
 
@@ -50,10 +50,10 @@ function AS:Healium()
 		local predictbar = self.PredictBar
 		local healthbar = self.HealthBar
 		local manabar = self.ManaBar
-		AS:StripTextures(self)
-		AS:SkinStatusBar(predictbar)
-		AS:SkinStatusBar(healthbar)
-		AS:SkinStatusBar(manabar)
+		S:StripTextures(self)
+		S:HandleStatusBar(predictbar)
+		S:HandleStatusBar(healthbar)
+		S:HandleStatusBar(manabar)
 		predictbar:SetHeight(24)
 		healthbar:SetHeight(24)
 		manabar:SetHeight(24)
@@ -70,9 +70,9 @@ function AS:Healium()
 		end
 		local icon = self.icon
 		local texture = icon:GetTexture()
-		AS:SkinIconButton(self, true)
+		S:HandleItemButton(self, true)
 		icon:SetTexture(texture)
-		AS:SetInside(icon)
+		S:SetInside(icon)
 		skinnedFrames[self:GetName()] = true
 	end
 
@@ -84,9 +84,9 @@ function AS:Healium()
 		local cooldown = self.cooldown
 		local count = self.count
 		local border = self.border
-		AS:SkinIconButton(self, true)
+		S:HandleItemButton(self, true)
 		self:SetSize(28,28)
-		AS:SetInside(icon)
+		S:SetInside(icon)
 		count:ClearAllPoints()
 		count:SetPoint('BOTTOMRIGHT', icon, 'BOTTOMRIGHT', -1, 1)
 		skinnedFrames[self:GetName()] = true

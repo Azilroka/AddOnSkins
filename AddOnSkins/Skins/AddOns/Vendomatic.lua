@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Vendomatic') then return end
 
@@ -27,43 +27,43 @@ function AS:Vendomatic()
 	}
 
 	for _, object in pairs(CheckBoxes) do
-		AS:SkinCheckBox(object)
+		S:HandleCheckBox(object)
 	end
 
 	for _, object in pairs(Buttons) do
-		AS:SkinButton(object)
+		S:HandleButton(object)
 	end
 
-	AS:SkinFrame(VendomaticFrame)
-	AS:SkinFrame(VendomaticOptionsFrame)
-	AS:SkinFrame(Vendomatic_OptionsRepairFrame)
-	AS:SkinFrame(Vendomatic_OptionsStockFrame)
-	AS:SkinFrame(Vendomatic_OptionsSellFrame)
-	AS:SkinFrame(SellItemFauxFrame)
-	AS:SkinFrame(StockItemFauxFrame)
+	S:HandleFrame(VendomaticFrame)
+	S:HandleFrame(VendomaticOptionsFrame)
+	S:HandleFrame(Vendomatic_OptionsRepairFrame)
+	S:HandleFrame(Vendomatic_OptionsStockFrame)
+	S:HandleFrame(Vendomatic_OptionsSellFrame)
+	S:HandleFrame(SellItemFauxFrame)
+	S:HandleFrame(StockItemFauxFrame)
 
 	VendomaticOptionsFrame:SetPoint('TOPLEFT', VendomaticFrame, 'BOTTOMLEFT', 0, 0)
 	Vendomatic_OptionsRepairFrame:SetPoint('TOPLEFT', VendomaticOptionsFrame, 'TOPRIGHT', 0, 0)
 	Vendomatic_OptionsStockFrame:SetPoint('TOPLEFT', VendomaticOptionsFrame, 'TOPRIGHT', 0, 0)
 	Vendomatic_OptionsSellFrame:SetPoint('TOPLEFT', VendomaticOptionsFrame, 'TOPRIGHT', 0, 0)
 
-	AS:SkinArrowButton(SellItemFauxIncrementButton)
+	S:HandleNextPrevButton(SellItemFauxIncrementButton)
 	SellItemFauxIncrementButton:ClearAllPoints()
 	SellItemFauxIncrementButton:SetPoint('TOPRIGHT', SellItemFauxFrame, 'TOPRIGHT', -2, -2)
-	AS:SkinArrowButton(SellItemFauxDecrementButton)
+	S:HandleNextPrevButton(SellItemFauxDecrementButton)
 	SellItemFauxDecrementButton:ClearAllPoints()
 	SellItemFauxDecrementButton:SetPoint('BOTTOMRIGHT', SellItemFauxFrame, 'BOTTOMRIGHT', -2, 2)
-	AS:SkinArrowButton(StockItemFauxIncrementButton)
+	S:HandleNextPrevButton(StockItemFauxIncrementButton)
 	StockItemFauxIncrementButton:ClearAllPoints()
 	StockItemFauxIncrementButton:SetPoint('TOPRIGHT', StockItemFauxFrame, 'TOPRIGHT', -2, -2)
-	AS:SkinArrowButton(StockItemFauxDecrementButton)
+	S:HandleNextPrevButton(StockItemFauxDecrementButton)
 	StockItemFauxDecrementButton:ClearAllPoints()
 	StockItemFauxDecrementButton:SetPoint('BOTTOMRIGHT', StockItemFauxFrame, 'BOTTOMRIGHT', -2, 2)
 
-	AS:SkinEditBox(Vendomatic_OptionsStockFrame_EditBox)
+	S:HandleEditBox(Vendomatic_OptionsStockFrame_EditBox)
 
-	AS:SkinIconButton(Vendomatic_OptionsSellFrame_DropBox)
-	AS:SkinIconButton(Vendomatic_OptionsStockFrame_DropBox)
+	S:HandleItemButton(Vendomatic_OptionsSellFrame_DropBox)
+	S:HandleItemButton(Vendomatic_OptionsStockFrame_DropBox)
 end
 
 AS:RegisterSkin('Vendomatic', AS.Vendomatic)

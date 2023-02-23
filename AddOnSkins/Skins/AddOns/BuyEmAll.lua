@@ -1,13 +1,13 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not (AS:CheckAddOn('BuyEmAll') or AS:CheckAddOn('BuyEmAllClassic')) then return end
 
 function AS:BuyEmAll()
-	AS:SkinFrame(BuyEmAllFrame)
-	AS:SkinButton(BuyEmAllStackButton)
-	AS:SkinButton(BuyEmAllMaxButton)
-	AS:SkinButton(BuyEmAllCancelButton)
-	AS:SkinButton(BuyEmAllOkayButton)
+	S:HandleFrame(BuyEmAllFrame)
+	S:HandleButton(BuyEmAllStackButton)
+	S:HandleButton(BuyEmAllMaxButton)
+	S:HandleButton(BuyEmAllCancelButton)
+	S:HandleButton(BuyEmAllOkayButton)
 end
 
 AS:RegisterSkin('BuyEmAll', AS.BuyEmAll, '[AddonLoader]')

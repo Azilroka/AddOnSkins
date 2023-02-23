@@ -1,31 +1,31 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ExtVendor') then return end
 
 function AS:ExtVendor()
-	AS:StripTextures(MerchantFrameFilterButton, true)
-	AS:SkinButton(MerchantFrameFilterButton)
+	S:StripTextures(MerchantFrameFilterButton, true)
+	S:HandleButton(MerchantFrameFilterButton)
 
-	AS:SkinButton(MerchantFrameSellJunkButton)
-	AS:SkinTexture(MerchantFrameSellJunkButtonIcon)
+	S:HandleButton(MerchantFrameSellJunkButton)
+	S:HandleIcon(MerchantFrameSellJunkButtonIcon)
 
-	AS:SetInside(MerchantFrameSellJunkButtonIcon)
+	S:SetInside(MerchantFrameSellJunkButtonIcon)
 
-	AS:SkinEditBox(MerchantFrameSearchBox)
+	S:HandleEditBox(MerchantFrameSearchBox)
 
-	AS:SkinFrame(ExtVendor_SellJunkPopup)
-	AS:SkinFrame(ExtVendor_SellJunkProgressPopup)
+	S:HandleFrame(ExtVendor_SellJunkPopup)
+	S:HandleFrame(ExtVendor_SellJunkProgressPopup)
 
-	AS:SkinButton(ExtVendor_SellJunkPopupYesButton)
-	AS:SkinButton(ExtVendor_SellJunkPopupNoButton)
+	S:HandleButton(ExtVendor_SellJunkPopupYesButton)
+	S:HandleButton(ExtVendor_SellJunkPopupNoButton)
 
 	for i = 13, 20 do
 		local Slot = _G["MerchantItem"..i]
-		AS:SkinFrame(Slot)
-		AS:SkinFrame(Slot.ItemButton)
-		AS:StyleButton(Slot.ItemButton)
-		AS:SkinTexture(Slot.ItemButton.icon)
-		AS:SetInside(Slot.ItemButton.icon)
+		S:HandleFrame(Slot)
+		S:HandleFrame(Slot.ItemButton)
+		S:StyleButton(Slot.ItemButton)
+		S:HandleIcon(Slot.ItemButton.icon)
+		S:SetInside(Slot.ItemButton.icon)
 		Slot.ItemButton:SetPoint("TOPLEFT", Slot, "TOPLEFT", 4, -4)
 		Slot.ItemButton.IconBorder:SetAlpha(0)
 
@@ -36,8 +36,8 @@ function AS:ExtVendor()
 		_G["MerchantItem"..i.."MoneyFrame"]:SetPoint("BOTTOMLEFT", Slot.ItemButton, "BOTTOMRIGHT", 3, 0)
 
 		for j = 1, 3 do
-			AS:CreateBackdrop(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"])
-			AS:SkinTexture(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"])
+			S:CreateBackdrop(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"])
+			S:HandleIcon(_G["MerchantItem"..i.."AltCurrencyFrameItem"..j.."Texture"])
 		end
 	end
 

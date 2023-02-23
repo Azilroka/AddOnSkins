@@ -1,21 +1,21 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('EasyMail') then return end
 
 function AS:EasyMail(event)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 	MailFrame:SetSize(360, 440)
-	AS:Desaturate(EasyMail_CheckAllButton)
-	AS:Desaturate(EasyMail_ClearAllButton)
-	AS:Desaturate(EasyMail_CheckPageButton)
-	AS:Desaturate(EasyMail_ClearPageButton)
-	AS:Desaturate(EasyMail_GetAllButton)
-	AS:Desaturate(EasyMail_MailButton)
-	AS:SkinButton(EasyMail_AttButton)
-	AS:SkinButton(EasyMail_ForwardButton)
+	S:Desaturate(EasyMail_CheckAllButton)
+	S:Desaturate(EasyMail_ClearAllButton)
+	S:Desaturate(EasyMail_CheckPageButton)
+	S:Desaturate(EasyMail_ClearPageButton)
+	S:Desaturate(EasyMail_GetAllButton)
+	S:Desaturate(EasyMail_MailButton)
+	S:HandleButton(EasyMail_AttButton)
+	S:HandleButton(EasyMail_ForwardButton)
 
 	for i = 1, 7 do
-		AS:SkinCheckBox(_G['EasyMail_CheckButton'..i])
+		S:HandleCheckBox(_G['EasyMail_CheckButton'..i])
 	end
 
 	EasyMail_ForwardButton:SetPoint('RIGHT', OpenMailReplyButton, 'LEFT', -2, 0)
@@ -28,7 +28,7 @@ function AS:EasyMail(event)
 	EasyMail_MailButton:SetPoint('TOPLEFT', SendMailNameEditBox, 'TOPRIGHT', 4, 2)
 	EasyMail_MailButton:SetSize(22, 22)
 
-	AS:SetTemplate(EasyMail_MailDropdownBackdrop)
+	S:SetTemplate(EasyMail_MailDropdownBackdrop)
 
 	OpenMailCancelButton:SetPoint('BOTTOMRIGHT', OpenMailFrame, 'BOTTOMRIGHT', -3, 3)
 	hooksecurefunc('OpenMail_Update', function()

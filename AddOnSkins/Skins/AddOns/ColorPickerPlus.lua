@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ColorPickerPlus') then return end
 
@@ -6,7 +6,7 @@ function AS:ColorPickerPlus()
 	--Make sure the color picker is not click-through anymore
 	ColorPickerFrame:EnableMouse(true)
 
-	-- AS:SkinFrame(ColorPickerFrame) --Using StripTextures causes a WoW crash for some reason
+	-- S:HandleFrame(ColorPickerFrame) --Using StripTextures causes a WoW crash for some reason
 	for i = 1, ColorPickerFrame:GetNumRegions() do
 		local Region = select(i, ColorPickerFrame:GetRegions())
 		if Region and Region:GetObjectType() == "Texture" then
@@ -15,17 +15,17 @@ function AS:ColorPickerPlus()
 		end
 	end
 
-	AS:SetTemplate(ColorPickerFrame)
+	S:SetTemplate(ColorPickerFrame)
 
 	if ColorPickerFrame.Border then
-		AS:StripTextures(ColorPickerFrame.Border)
+		S:StripTextures(ColorPickerFrame.Border)
 	end
 
-	AS:SkinButton(ColorPPSwitcher)
-	AS:SkinButton(ColorPPCopy)
-	AS:SkinButton(ColorPPPaste)
-	AS:SkinButton(ColorPickerOkayButton)
-	AS:SkinButton(ColorPickerCancelButton)
+	S:HandleButton(ColorPPSwitcher)
+	S:HandleButton(ColorPPCopy)
+	S:HandleButton(ColorPPPaste)
+	S:HandleButton(ColorPickerOkayButton)
+	S:HandleButton(ColorPickerCancelButton)
 	ColorPickerOkayButton:ClearAllPoints()
 	ColorPickerOkayButton:SetPoint("RIGHT", ColorPickerCancelButton, "LEFT", -2, 0)
 end

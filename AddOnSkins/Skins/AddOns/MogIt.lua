@@ -1,29 +1,29 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('MogIt') then return end
 
 function AS:MogIt()
-	AS:SkinFrame(MogItFrame)
-	AS:StripTextures(MogItFrameInset, true)
-	AS:SkinFrame(MogItFilters)
-	AS:StripTextures(MogItFiltersInset, true)
+	S:HandleFrame(MogItFrame)
+	S:StripTextures(MogItFrameInset, true)
+	S:HandleFrame(MogItFilters)
+	S:StripTextures(MogItFiltersInset, true)
 
 	local function SkinMogItPreview()
 		for i = 1, 99 do
 			if _G['MogItPreview'..i] and not _G['MogItPreview'..i].isSkinned then
 				for _, object in pairs(_G['MogItPreview'..i].slots) do
-					AS:CreateBackdrop(object)
+					S:CreateBackdrop(object)
 					object.icon:ClearAllPoints()
-					AS:SkinTexture(object.icon)
-					AS:SetInside(object.icon, object.Backdrop)
+					S:HandleIcon(object.icon)
+					S:SetInside(object.icon, object.backdrop)
 					object:SetNormalTexture(nil)
-					AS:StyleButton(object)
+					S:StyleButton(object)
 				end
 
-				if _G['MogItPreview'..i] then AS:SkinFrame(_G['MogItPreview'..i]) end
-				if _G['MogItPreview'..i..'CloseButton'] then AS:SkinCloseButton(_G['MogItPreview'..i..'CloseButton']) end
-				if _G['MogItPreview'..i..'Inset'] then AS:StripTextures(_G['MogItPreview'..i..'Inset'], true) end
-				if _G['MogItPreview'..i..'Activate'] then AS:SkinButton(_G['MogItPreview'..i..'Activate'], true) end
+				if _G['MogItPreview'..i] then S:HandleFrame(_G['MogItPreview'..i]) end
+				if _G['MogItPreview'..i..'CloseButton'] then S:HandleCloseButton(_G['MogItPreview'..i..'CloseButton']) end
+				if _G['MogItPreview'..i..'Inset'] then S:StripTextures(_G['MogItPreview'..i..'Inset'], true) end
+				if _G['MogItPreview'..i..'Activate'] then S:HandleButton(_G['MogItPreview'..i..'Activate'], true) end
 				_G['MogItPreview'..i].isSkinned = true
 			end
 		end
@@ -31,13 +31,13 @@ function AS:MogIt()
 
 	hooksecurefunc(MogIt, 'CreatePreview', SkinMogItPreview)
 	SkinMogItPreview()
-	AS:SkinTooltip(MogItTooltip)
-	AS:SkinCloseButton(MogItFrameCloseButton)
-	AS:SkinCloseButton(MogItFiltersCloseButton)
-	AS:StripTextures(MogItFrameFiltersDefaults, true)
-	AS:SkinButton(MogItFrameFiltersDefaults, true)
-	AS:SkinScrollBar(MogItScroll)
-	AS:SkinScrollBar(MogItFiltersScrollScrollBar)
+	S:HandleTooltip(MogItTooltip)
+	S:HandleCloseButton(MogItFrameCloseButton)
+	S:HandleCloseButton(MogItFiltersCloseButton)
+	S:StripTextures(MogItFrameFiltersDefaults, true)
+	S:HandleButton(MogItFrameFiltersDefaults, true)
+	S:HandleScrollBar(MogItScroll)
+	S:HandleScrollBar(MogItFiltersScrollScrollBar)
 end
 
 AS:RegisterSkin('MogIt', AS.MogIt)

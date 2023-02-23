@@ -1,13 +1,13 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('WorldBossStatus') then return end
 
 function AS:WorldBossStatus()
 	hooksecurefunc(WorldBossStatus, 'ShowToolTip', function(self)
-		AS:SkinFrame(self.tooltip, nil, true)
+		S:HandleFrame(self.tooltip, nil, true)
 	end)
 	hooksecurefunc(WorldBossStatus, 'ShowSubTooltip', function(self)
-		AS:SkinFrame(self.subTooltip, nil, true)
+		S:HandleFrame(self.subTooltip, nil, true)
 	end)
 end
 

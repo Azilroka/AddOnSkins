@@ -1,11 +1,11 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Altoholic') then return end
 
 local function SkinItemButton(obj, itemIDGetFunc)
-	AS:SkinTexture(obj.Icon)
-	AS:SkinFrame(obj)
-	AS:SetInside(obj.Icon)
+	S:HandleIcon(obj.Icon)
+	S:HandleFrame(obj)
+	S:SetInside(obj.Icon)
 	hooksecurefunc(obj:GetParent(), 'Show', function(self)
 		if self:GetID() then
 			local ItemID = itemIDGetFunc and itemIDGetFunc(self) or self.id
@@ -23,52 +23,52 @@ local function SkinItemButton(obj, itemIDGetFunc)
 	end)
 end
 
-function AS:Altoholic(event, addon)
+function R:Altoholic(event, addon)
 	if addon == "Altoholic_Summary" then
 		if AltoTooltip then
-			AS:SkinTooltip(AltoTooltip)
+			S:HandleTooltip(AltoTooltip)
 		end
 
-		AS:SkinFrame(AltoholicFrame)
-		AS:Kill(AltoholicFramePortrait)
+		S:HandleFrame(AltoholicFrame)
+		S:Kill(AltoholicFramePortrait)
 
-		AS:SkinFrame(AltoMessageBox)
-		AS:SkinButton(AltoMessageBox.Button1)
+		S:HandleFrame(AltoMessageBox)
+		S:HandleButton(AltoMessageBox.Button1)
 		-- Bug in Altoholic currently
-		AS:SkinButton(AltoMessageBox.Button2)
+		S:HandleButton(AltoMessageBox.Button2)
 
-		AS:SkinCloseButton(AltoholicFrameCloseButton)
-		AS:SkinEditBox(AltoholicFrame.SearchBox, 175, 15)
-		AS:SkinButton(AltoholicFrame_ResetButton)
-		AS:SkinButton(AltoholicFrame_SearchButton)
+		S:HandleCloseButton(AltoholicFrameCloseButton)
+		S:HandleEditBox(AltoholicFrame.SearchBox, 175, 15)
+		S:HandleButton(AltoholicFrame_ResetButton)
+		S:HandleButton(AltoholicFrame_SearchButton)
 		AltoholicFrameTab1:SetPoint("TOPLEFT", AltoholicFrame, "BOTTOMLEFT", -5, 2)
 		AltoholicFrame_ResetButton:SetPoint("TOPLEFT", AltoholicFrame, "TOPLEFT", 25, -77)
 		AltoholicFrame_SearchEditBox:SetPoint("TOPLEFT", AltoholicFrame, "TOPLEFT", 37, -56)
 		AltoholicFrame_ResetButton:SetSize(85, 24)
 		AltoholicFrame_SearchButton:SetSize(85, 24)
 
-		AS:SkinFrame(AltoholicFrameSummary)
+		S:HandleFrame(AltoholicFrameSummary)
 
-		AS:StripTextures(AltoholicFrameSummary.ScrollFrame)
-		AS:SkinScrollBar(AltoholicFrameSummary.ScrollFrame.ScrollBar)
+		S:StripTextures(AltoholicFrameSummary.ScrollFrame)
+		S:HandleScrollBar(AltoholicFrameSummary.ScrollFrame.ScrollBar)
 
-		AS:SkinIconButton(AltoholicTabSummary.RealmsIcon)
-		AS:SkinIconButton(AltoholicTabSummary.FactionIcon)
-		AS:SkinIconButton(AltoholicTabSummary.LevelIcon)
-		AS:SkinIconButton(AltoholicTabSummary.ProfessionsIcon)
-		AS:SkinIconButton(AltoholicTabSummary.ClassIcon)
-		AS:SkinIconButton(AltoholicTabSummary.RequestSharing)
-		AS:SkinIconButton(AltoholicTabSummary.AltoholicOptionsIcon)
-		AS:SkinIconButton(AltoholicTabSummary.DataStoreOptionsIcon)
+		S:HandleItemButton(AltoholicTabSummary.RealmsIcon)
+		S:HandleItemButton(AltoholicTabSummary.FactionIcon)
+		S:HandleItemButton(AltoholicTabSummary.LevelIcon)
+		S:HandleItemButton(AltoholicTabSummary.ProfessionsIcon)
+		S:HandleItemButton(AltoholicTabSummary.ClassIcon)
+		S:HandleItemButton(AltoholicTabSummary.RequestSharing)
+		S:HandleItemButton(AltoholicTabSummary.AltoholicOptionsIcon)
+		S:HandleItemButton(AltoholicTabSummary.DataStoreOptionsIcon)
 
-		AS:EnumObjects(function(index) return AltoholicTabSummary['MenuItem'..index] end, function(obj) AS:SkinButton(obj, true) end)
-		AS:EnumObjects(function(index) return AltoholicTabSummary['SortButtons']['Sort'..index] end, function(obj) AS:SkinButton(obj, true) end)
-		AS:EnumObjects(function(index) return _G["AltoholicFrameTab"..index] end, function(obj) AS:SkinTab(obj, true) end)
+		S:EnumObjects(function(index) return AltoholicTabSummary['MenuItem'..index] end, function(obj) S:HandleButton(obj, true) end)
+		S:EnumObjects(function(index) return AltoholicTabSummary['SortButtons']['Sort'..index] end, function(obj) S:HandleButton(obj, true) end)
+		S:EnumObjects(function(index) return _G["AltoholicFrameTab"..index] end, function(obj) S:HandleTab(obj, true) end)
 	end
 
 	if addon == "Altoholic_Characters" then
-		AS:SkinFrame(AltoholicFrameContainers)
-		AS:SkinScrollBar(AltoholicFrameContainersScrollFrame.ScrollBar)
+		S:HandleFrame(AltoholicFrameContainers)
+		S:HandleScrollBar(AltoholicFrameContainersScrollFrame.ScrollBar)
 
 		local Buttons = {
 			'CharactersIcon',
@@ -84,9 +84,9 @@ function AS:Altoholic(event, addon)
 
 		for _, Button in pairs(Buttons) do
 			if AltoholicTabCharacters_MenuIcons[Button] then
-				AS:StyleButton(AltoholicTabCharacters_MenuIcons[Button])
-				AS:CreateBackdrop(AltoholicTabCharacters_MenuIcons[Button])
-				AS:SkinTexture(AltoholicTabCharacters_MenuIcons[Button].Icon)
+				S:StyleButton(AltoholicTabCharacters_MenuIcons[Button])
+				S:CreateBackdrop(AltoholicTabCharacters_MenuIcons[Button])
+				S:HandleIcon(AltoholicTabCharacters_MenuIcons[Button].Icon)
 			end
 		end
 
@@ -100,22 +100,22 @@ function AS:Altoholic(event, addon)
 	end
 
 	if addon == "Altoholic_Search" then
-		AS:SkinBackdropFrame(AltoholicFrameSearch, true)
-		AS:StripTextures(AltoholicFrameSearch.ScrollFrame, true)
-		AS:StripTextures(AltoholicTabSearch.ScrollFrame, true)
-		AS:SkinScrollBar(AltoholicFrameSearch.ScrollFrame.ScrollBar)
-		AS:SkinScrollBar(AltoholicTabSearch.ScrollFrame.ScrollBar)
-		AS:SkinDropDownBox(AltoholicTabSearch_SelectRarity)
-		AS:SkinDropDownBox(AltoholicTabSearch_SelectSlot)
-		AS:SkinDropDownBox(AltoholicTabSearch_SelectLocation)
+		S:HandleFrame(AltoholicFrameSearch, true)
+		S:StripTextures(AltoholicFrameSearch.ScrollFrame, true)
+		S:StripTextures(AltoholicTabSearch.ScrollFrame, true)
+		S:HandleScrollBar(AltoholicFrameSearch.ScrollFrame.ScrollBar)
+		S:HandleScrollBar(AltoholicTabSearch.ScrollFrame.ScrollBar)
+		S:HandleDropDownBox(AltoholicTabSearch_SelectRarity)
+		S:HandleDropDownBox(AltoholicTabSearch_SelectSlot)
+		S:HandleDropDownBox(AltoholicTabSearch_SelectLocation)
 		AltoholicTabSearch_SelectRarity:SetSize(125, 32)
 		AltoholicTabSearch_SelectSlot:SetSize(125, 32)
 		AltoholicTabSearch_SelectLocation:SetSize(175, 32)
-		AS:SkinEditBox(AltoholicTabSearch.MinLevel)
-		AS:SkinEditBox(AltoholicTabSearch.MaxLevel)
+		S:HandleEditBox(AltoholicTabSearch.MinLevel)
+		S:HandleEditBox(AltoholicTabSearch.MaxLevel)
 
-		AS:EnumObjects(function(index) return AltoholicTabSearch['Entry'..index] end, function(obj) AS:SkinButton(obj, true) end)
-		AS:EnumObjects(function(index) return AltoholicTabSearch["SortButtons"]["Sort"..index] end, function(obj) AS:SkinButton(obj) end)
+		AS:EnumObjects(function(index) return AltoholicTabSearch['Entry'..index] end, function(obj) S:HandleButton(obj, true) end)
+		AS:EnumObjects(function(index) return AltoholicTabSearch["SortButtons"]["Sort"..index] end, function(obj) S:HandleButton(obj) end)
 		AS:EnumObjects(
 			function(index) local obj = AltoholicFrameSearch['Entry'..index] return obj and obj.Item or nil end,
 			function(obj) SkinItemButton(obj, function(self) if (self:GetID()) then return Altoholic.Search:GetResult((self:GetID())).id else return nil end end) end
@@ -123,53 +123,53 @@ function AS:Altoholic(event, addon)
 	end
 
 	if addon == "Altoholic_Guild" then
-		AS:SkinFrame(AltoholicTabGuild.Members)
-		if AltoholicTabGuild.Bank then AS:SkinFrame(AltoholicTabGuild.Bank) end
-		AS:SkinScrollBar(AltoholicTabGuild.Members.ScrollFrame.ScrollBar)
-		AS:StripTextures(AltoholicTabGuild.Members.ScrollFrame, true)
+		S:HandleFrame(AltoholicTabGuild.Members)
+		if AltoholicTabGuild.Bank then S:HandleFrame(AltoholicTabGuild.Bank) end
+		S:HandleScrollBar(AltoholicTabGuild.Members.ScrollFrame.ScrollBar)
+		S:StripTextures(AltoholicTabGuild.Members.ScrollFrame, true)
 
-		AS:EnumObjects(function(index) return AltoholicTabGuild['MenuItem'..index] end, function(obj) AS:SkinButton(obj, true) end)
+		AS:EnumObjects(function(index) return AltoholicTabGuild['MenuItem'..index] end, function(obj) S:HandleButton(obj, true) end)
 		AS:EnumObjects({ function(index) return AS.Retail and AltoholicTabGuild.Bank['Entry'..index] end, function(obj, index) return obj['Item'..index] end }, function(obj) SkinItemButton(obj) end)
 
 		AS:EnumObjects(function(index) return AltoholicTabGuild.Members['Item'..index] end, function(obj) SkinItemButton(obj) end)
-		AS:EnumObjects(function(index) return AltoholicTabGuild["SortButtons"]["Sort"..index] end, function(obj) AS:SkinButton(obj) end)
+		AS:EnumObjects(function(index) return AltoholicTabGuild["SortButtons"]["Sort"..index] end, function(obj) S:HandleButton(obj) end)
 	end
 
 	if addon == "Altoholic_Achievements" then
-		AS:StripTextures(AltoholicTabAchievements.Achievements.ScrollFrame, true)
-		AS:StripTextures(AltoholicTabAchievements.ScrollFrame, true)
-		AS:SkinScrollBar(AltoholicTabAchievements.Achievements.ScrollFrame.ScrollBar)
-		AS:SkinScrollBar(AltoholicTabAchievements.ScrollFrame.ScrollBar)
+		S:StripTextures(AltoholicTabAchievements.Achievements.ScrollFrame, true)
+		S:StripTextures(AltoholicTabAchievements.ScrollFrame, true)
+		S:HandleScrollBar(AltoholicTabAchievements.Achievements.ScrollFrame.ScrollBar)
+		S:HandleScrollBar(AltoholicTabAchievements.ScrollFrame.ScrollBar)
 
-		AS:EnumObjects(function(index) return AltoholicTabAchievements['Entry'..index] end, function(obj) return AS:SkinButton(obj, true) end)
+		AS:EnumObjects(function(index) return AltoholicTabAchievements['Entry'..index] end, function(obj) return S:HandleButton(obj, true) end)
 		AS:EnumObjects(
 			{
 				function(index) return AltoholicTabAchievements.Achievements['Entry'..index] end,
 				function(obj, index) return obj['Item'..index] end,
 			},
 			function(obj)
-				AS:SetTemplate(obj)
+				S:SetTemplate(obj)
 				obj.IconBorder:SetTexture('')
-				AS:SkinTexture(obj.Background)
-				AS:SetInside(obj.Background)
+				S:HandleIcon(obj.Background)
+				S:SetInside(obj.Background)
 			end
 		)
 	end
 
 	if addon == "Altoholic_Agenda" then
-		--AS:SkinFrame(AltoholicFrameCalendarScrollFrame)
-		--AS:SkinScrollBar(AltoholicFrameCalendarScrollFrame.ScrollBar)
-		AS:SkinArrowButton(AltoholicTabAgenda.Calendar.NextMonth)
-		AS:SkinArrowButton(AltoholicTabAgenda.Calendar.PrevMonth)
-		AS:SkinButton(AltoholicTabAgenda.MenuItem1, true)
+		--S:HandleFrame(AltoholicFrameCalendarScrollFrame)
+		--S:HandleScrollBar(AltoholicFrameCalendarScrollFrame.ScrollBar)
+		S:HandleNextPrevButton(AltoholicTabAgenda.Calendar.NextMonth)
+		S:HandleNextPrevButton(AltoholicTabAgenda.Calendar.PrevMonth)
+		S:HandleButton(AltoholicTabAgenda.MenuItem1, true)
 
-		AS:EnumObjects(function(index) return AltoholicTabAgenda.Calendar["Day"..index] end, function(obj) AS:StripTextures(obj) end)
+		AS:EnumObjects(function(index) return AltoholicTabAgenda.Calendar["Day"..index] end, function(obj) S:StripTextures(obj) end)
 	end
 
 	if addon == "Altoholic_Grids" then
-		AS:StripTextures(AltoholicFrameGrids.ScrollFrame, true)
-		AS:SkinBackdropFrame(AltoholicFrameGrids)
-		AS:SkinScrollBar(AltoholicFrameGrids.ScrollFrame.ScrollBar)
+		S:StripTextures(AltoholicFrameGrids.ScrollFrame, true)
+		S:HandleFrame(AltoholicFrameGrids)
+		S:HandleScrollBar(AltoholicFrameGrids.ScrollFrame.ScrollBar)
 
 		AS:EnumObjects(
 			{
@@ -177,11 +177,11 @@ function AS:Altoholic(event, addon)
 				function(obj, index) return obj['Item'..index] end,
 			},
 			function(obj)
-				AS:SetTemplate(obj)
+				S:SetTemplate(obj)
 				obj.IconBorder:SetTexture('')
-				AS:SkinTexture(obj.Background)
+				S:HandleIcon(obj.Background)
 				obj.Background.SetTexCoord = AS.Noop
-				AS:SetInside(obj.Background)
+				S:SetInside(obj.Background)
 			end
 		)
 	end

@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('TrinketMenu') then return end
 
@@ -6,9 +6,9 @@ function AS:TrinketMenu()
 
 	-- Config Panel
 	local TrinketMenu = _G.TrinketMenu
-	AS:SkinFrame(TrinketMenu_OptFrame)
+	S:HandleFrame(TrinketMenu_OptFrame)
 	TrinketMenu_OptFrame:SetWidth(380)
-	AS:SkinFrame(TrinketMenu_SubOptFrame)
+	S:HandleFrame(TrinketMenu_SubOptFrame)
 	TrinketMenu_SubOptFrame:SetWidth(340)
 
 	TrinketMenu_Trinket0Check:ClearAllPoints()
@@ -19,7 +19,7 @@ function AS:TrinketMenu()
 	-- Config Tabs
 	for i = 1, 3 do
 		local tabs = _G['TrinketMenu_Tab'..i]
-		AS:SkinTab(tabs)
+		S:HandleTab(tabs)
 		tabs:SetWidth(124)
 	end
 
@@ -54,7 +54,7 @@ function AS:TrinketMenu()
 	}
 
 	for _, checkbox in pairs(checkboxes) do
-		AS:SkinCheckBox(checkbox)
+		S:HandleCheckBox(checkbox)
 	end
 
 	-- Config Sliders
@@ -65,16 +65,16 @@ function AS:TrinketMenu()
 	}
 
 	for _, slider in pairs(sliders) do
-		AS:SkinSlideBar(slider)
+		S:HandleSlideBar(slider)
 	end
 
 	-- Main Frame
-	AS:SkinIconButton(TrinketMenu_Trinket0)
-	AS:SkinIconButton(TrinketMenu_Trinket1)
+	S:HandleItemButton(TrinketMenu_Trinket0)
+	S:HandleItemButton(TrinketMenu_Trinket1)
 
 	for i = (TrinketMenu.NumberOfTrinkets + 1), TrinketMenu.MaxTrinkets do
 		local trinkets = _G['TrinketMenu_Menu'..i]
-		AS:SkinIconButton(trinkets)
+		S:HandleItemButton(trinkets)
 	end
 end
 
