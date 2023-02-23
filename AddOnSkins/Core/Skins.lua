@@ -266,7 +266,7 @@ do
 
 	function S:SetTemplate(frame, template, glossTex, ignoreUpdates, _, _, _, noScale, noHook)
 		frame.template = template or AS:CheckOption('SkinTemplate')
-		frame.glossTex = glossTex and AS.Libs.LSM:Fetch('statusbar', AS:CheckOption('StatusBarTexture'))
+		frame.glossTex = glossTex and (type(glossTex) == 'string' and glossTex or AS.Libs.LSM:Fetch('statusbar', AS:CheckOption('StatusBarTexture')))
 		frame.forcedBorderColors = frame.template == 'NoBorder' and blank or frame.forcedBorderColors
 		frame.ignoreUpdates = ignoreUpdates
 
