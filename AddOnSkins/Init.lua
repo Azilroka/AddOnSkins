@@ -58,16 +58,10 @@ AS.Noop = function() end
 AS.TexCoords = { .075, .925, .075, .925 }
 AS.Faction = UnitFactionGroup('player')
 
-local Color = _G.RAID_CLASS_COLORS[AS.MyClass]
-AS.ClassColor = { Color.r, Color.g, Color.b }
-AS.Color = { 0, 0.44, .87, 1 }
-
+AS.preload = {}
 AS.skins = {}
 AS.events = {}
-AS.register = {}
 AS.FrameLocks = {}
-
-AS.preload = {}
 
 AS.AddOns = {}
 AS.AddOnVersion = {}

@@ -235,7 +235,7 @@ function AS:BuildProfile()
 		},
 	}
 
-	for _, tbl in pairs({ 'preload', 'register'}) do
+	for _, tbl in pairs({ 'preload', 'skins'}) do
 		for skin in pairs(AS[tbl]) do
 			if AS:CheckAddOn('ElvUI') and strfind(skin, 'Blizzard_') then
 				Defaults.profile[skin] = false
@@ -259,7 +259,7 @@ end
 function AS:BuildOptions()
 	local skins = {}
 
-	for skinName in pairs(AS.register) do
+	for skinName in pairs(AS.skins) do
 		tinsert(skins, skinName)
 	end
 

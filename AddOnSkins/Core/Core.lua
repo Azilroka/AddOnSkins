@@ -37,10 +37,10 @@ function AS:SetOption(optionName, value)
 end
 
 function AS:IsSkinEnabled(name, elvName)
-	if _G.ElvUI and _G.ElvUI[1].private.skins.blizzard.enable and _G.ElvUI[1].private.skins.blizzard[elvName] then
+	if elvName and _G.ElvUI and _G.ElvUI[1].private.skins.blizzard.enable and _G.ElvUI[1].private.skins.blizzard[elvName] then
 		return false
 	end
-	return AS:CheckOption(name)
+	return name and AS:CheckOption(name)
 end
 
 function AS:GetColor(name)
@@ -132,36 +132,6 @@ function AS:RemoveNonPetBattleFrames()
 	end
 end
 
-function AS:RegisterSkin(addonName, skinFunc, ...)
-	local events = {}
-	local priority = 1
-	for _, event in next, {...} do
-		if not event then break end
-		if type(event) == 'number' then
-			priority = event
-		elseif pcall(Validator.RegisterEvent, Validator, event) then
-			Validator:UnregisterEvent(event)
-			events[event] = true
-		end
-	end
-	local registerMe = { func = skinFunc, events = events, priority = priority }
-	if not AS.register[addonName] then AS.register[addonName] = {} end
-	AS.register[addonName][skinFunc] = registerMe
-end
-
-function AS:UnregisterSkin(addonName, skinFunc)
-	if (not AS.register[addonName] or not AS.preload[addonName]) then return end
-
-	if skinFunc then
-		AS.register[addonName][skinFunc] = nil
-	else
-		AS.register[addonName] = nil
-	end
-	if AS.preload[addonName] then
-		AS.preload[addonName] = nil
-	end
-end
-
 local function GenerateEventFunction()
 	local eventHandler = function(_, event, ...)
 		for skin, funcs in pairs(AS.skins) do
@@ -175,29 +145,39 @@ local function GenerateEventFunction()
 	return eventHandler
 end
 
-function AS:RegisteredSkin(addonName, priority, func, events)
-	for c in pairs(events) do
-		if strfind(c, '%[') then
-			local conflict = strmatch(c, '%[([!%w_]+)%]')
-			if AS:CheckAddOn(conflict) then return end
-		end
-	end
-	if not AS.skins[addonName] then AS.skins[addonName] = {} end
-	AS.skins[addonName][priority] = func
-	for event in pairs(events) do
-		if not strfind(event, '%[') then
-			if not AS.events[event] then
-				AS[event] = GenerateEventFunction()
-				AS:RegisterEvent(event)
-				AS.events[event] = {}
-			end
+function AS:RegisterSkin(addonName, skinFunc, ...)
+	local priority = 1
+	for _, event in next, {...} do
+		if not event then break end
+		local conflict = strmatch(event, '%[([!%w_]+)%]')
+		if conflict and AS:CheckAddOn(conflict) then
+			return
+		elseif type(event) == 'number' then
+			priority = event
+		elseif pcall(Validator.RegisterEvent, Validator, event) then
+			Validator:UnregisterEvent(event)
+			AS[event] = GenerateEventFunction()
+			AS:RegisterEvent(event)
+			AS.events[event] = {}
 			AS.events[event][addonName] = true
 		end
 	end
+
+	if not AS.skins[addonName] then AS.skins[addonName] = {} end
+	AS.skins[addonName][priority] = skinFunc
 end
 
-function AS:RegisterSkinForPreload(addonName, skinFunc, addon1)
-	AS.preload[addonName] = { func = skinFunc, addon = addon1 }
+function AS:UnregisterSkin(addonName)
+	if (not AS.skins[addonName] or not AS.preload[addonName]) then return end
+
+	AS.skins[addonName] = nil
+	if AS.preload[addonName] then
+		AS.preload[addonName] = nil
+	end
+end
+
+function AS:RegisterSkinForPreload(addonName, skinFunc, addon)
+	AS.preload[addonName] = { func = skinFunc, addon = addon }
 end
 
 function AS:RunPreload(addonName)
@@ -267,12 +247,6 @@ function AS:StartSkinning()
 		AS:SecureHook(ElvUI[1], 'UpdateMedia')
 	end
 
-	for addonName, alldata in pairs(AS.register) do
-		for _, data in pairs(alldata) do
-			AS:RegisteredSkin(addonName, data.priority, data.func, data.events)
-		end
-	end
-
 	if not AS:CheckOption('SkinDebug') then
 		for Version, SkinTable in pairs(AddOnSkinsDS) do
 			if Version == AS.Version or Version < AS.Version then
@@ -288,7 +262,7 @@ function AS:StartSkinning()
 
 	for addonName, funcs in AS:OrderedPairs(AS.skins) do
 		-- Check Blizzard
-		if AS:CheckOption(addonName) and strfind(addonName, 'Blizzard_') then
+		if strfind(addonName, 'Blizzard_') and AS:CheckOption(addonName) then
 			for _, func in ipairs(funcs) do
 				if IsAddOnLoaded(addonName) then
 					AS:CallSkin(addonName, func, 'ADDON_LOADED', addonName)
@@ -298,7 +272,7 @@ function AS:StartSkinning()
 			end
 		end
 
-		if AS:CheckOption(addonName) and (AS:CheckAddOn(addonName) or addonName == 'Libraries' or addonName == 'Ace3') then
+		if AS:CheckOption(addonName) and (addonName == 'Libraries' or addonName == 'Ace3' or AS:CheckAddOn(addonName)) then
 			for _, func in ipairs(funcs) do
 				AS:CallSkin(addonName, func, 'PLAYER_ENTERING_WORLD')
 			end
