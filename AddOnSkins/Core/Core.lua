@@ -132,7 +132,7 @@ function AS:RemoveNonPetBattleFrames()
 	end
 end
 
-function AS:SkinEvent(_, event, ...)
+function AS:SkinEvent(event, ...)
 	for skin, funcs in pairs(AS.skins) do
 		if AS.events[event][skin] and AS:CheckOption(skin) then
 			for _, func in ipairs(funcs) do
