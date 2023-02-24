@@ -1,7 +1,5 @@
 <Ui>
-	<Script file="acb_Castbar.lua"/>
 	<Script file="Ace3.lua"/>
-	<Script file="AchieveIt.lua"/>
 	<Script file="ACP.lua"/>
 	<Script file="AllTheThings.lua"/>
 	<Script file="Altoholic.lua"/>

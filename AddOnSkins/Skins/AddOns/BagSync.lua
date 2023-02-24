@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BagSync') then return end
 
-function AS:BagSync()
+function R:BagSync()
 	local Frames = {
 		BagSync_SearchFrame,
 		BagSync_TokensFrame,
@@ -28,8 +28,7 @@ function AS:BagSync()
 				self.scrollbar.isSkinned = true
 			end
 		end)
-		for i = 1, frame:GetNumChildren() do
-			local object = select(i, frame:GetChildren())
+		for _, object in pairs({frame:GetChildren()}) do
 			if object:IsObjectType('Button') then
 				if object:GetText() ~= nil then
 					S:HandleButton(object, true)
@@ -54,4 +53,4 @@ function AS:BagSync()
 	-- end)
 end
 
-AS:RegisterSkin('BagSync', AS.BagSync)
+AS:RegisterSkin('BagSync', R.BagSync)

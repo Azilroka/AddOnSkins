@@ -132,17 +132,14 @@ function AS:RemoveNonPetBattleFrames()
 	end
 end
 
-local function GenerateEventFunction()
-	local eventHandler = function(_, event, ...)
-		for skin, funcs in pairs(AS.skins) do
-			if AS.events[event][skin] and AS:CheckOption(skin) then
-				for _, func in ipairs(funcs) do
-					AS:CallSkin(skin, func, event, ...)
-				end
+function AS:SkinEvent(_, event, ...)
+	for skin, funcs in pairs(AS.skins) do
+		if AS.events[event][skin] and AS:CheckOption(skin) then
+			for _, func in ipairs(funcs) do
+				AS:CallSkin(skin, func, event, ...)
 			end
 		end
 	end
-	return eventHandler
 end
 
 function AS:RegisterSkin(addonName, skinFunc, ...)
@@ -156,8 +153,6 @@ function AS:RegisterSkin(addonName, skinFunc, ...)
 			priority = event
 		elseif pcall(Validator.RegisterEvent, Validator, event) then
 			Validator:UnregisterEvent(event)
-			AS[event] = GenerateEventFunction()
-			AS:RegisterEvent(event)
 			AS.events[event] = {}
 			AS.events[event][addonName] = true
 		end
@@ -237,6 +232,10 @@ end
 
 function AS:StartSkinning()
 	AS:UnregisterEvent('PLAYER_ENTERING_WORLD')
+
+	for event in pairs(AS.events) do
+		AS:RegisterEvent(event, 'SkinEvent')
+	end
 
 	AS.Color = AS:CheckOption('ClassColor') and AS.ClassColor or { 0, 0.44, .87, 1 }
 	AS.ParchmentEnabled = AS:CheckOption('Parchment')
