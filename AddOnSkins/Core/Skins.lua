@@ -1430,7 +1430,7 @@ do
 	end
 end
 
-function S:HandleIcon(icon, backdrop)
+function S:HandleIcon(icon, backdrop, frameLevel)
 	icon:SetTexCoord(unpack(Media.TexCoords))
 
 	if icon:GetDrawLayer() ~= 'ARTWORK' then
@@ -1440,7 +1440,7 @@ function S:HandleIcon(icon, backdrop)
 	S:DisablePixelSnap(icon)
 
 	if backdrop and not icon.backdrop then
-		S:CreateBackdrop(icon)
+		S:CreateBackdrop(icon, nil, nil, nil, nil, nil, nil, nil, nil, frameLevel)
 	end
 end
 
