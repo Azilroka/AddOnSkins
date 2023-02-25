@@ -44,6 +44,26 @@ function AS:GlobalIgnoreList()
 			S:HandleEditBox(GILFrame2EditLinkField)
 			S:HandleButton(GILFrame2EditLinkHelp)
 
+			local checkBoxes = {
+				GILFrame3AskNote,
+				GILFrame3OpenUI,
+				GILFrame3SameServer,
+				GILFrame3TrackChanges,
+				GILFrame3EnableFilter,
+				GILFrame3InvertFilter,
+				GILFrame3UpdateFilter,
+				GILFrame3SkipGuild,
+				GILFrame3SkipParty,
+				GILFrame3SkipPrivate
+			}
+			for _, checkbox in next, checkBoxes do
+				if checkbox then
+					S:HandleCheckBox(checkbox)
+				end
+			end
+
+			S:HandleEditBox(GILFrame3Exp)
+
 			GIL.isSkinned = true
 		end
 	end)
