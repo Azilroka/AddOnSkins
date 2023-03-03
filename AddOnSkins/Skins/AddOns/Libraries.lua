@@ -254,7 +254,7 @@ function R:Libraries()
 				end
 			end
 		end, 0)
-		S:RawHook(LET, "GetFreeExtraTipObject", function(tip)
+		S:SecureHook(LET, "GetFreeExtraTipObject", function(tip)
 			local tooltip = S.hooks[tip].GetFreeExtraTipObject(tip)
 
 			if not tooltip.isSkinned then
