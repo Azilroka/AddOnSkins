@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('CollectionShop') then return end
 
-function AS:CollectionShop(event, addon)
+function R:CollectionShop(event, addon)
 	if addon ~= 'Blizzard_AuctionUI' then return end
 	AS:Delay(.1, function()
 		for i = 1, AuctionFrame.numTabs do
@@ -41,4 +41,4 @@ function AS:CollectionShop(event, addon)
 	end)
 end
 
-AS:RegisterSkin('CollectionShop', AS.CollectionShop, 'ADDON_LOADED')
+AS:RegisterSkin('CollectionShop', R.CollectionShop, 'ADDON_LOADED')

@@ -264,6 +264,14 @@ do
 		return Media.borderColor, template == 'Transparent' and Media.transparentBackdrop or Media.defaultBackdrop
 	end
 
+	function S:ToggleBorders(frame, enabled)
+		for _, which in pairs(borders) do
+			if frame[which] then
+				frame[which]:SetShown(enabled)
+			end
+		end
+	end
+
 	function S:SetTemplate(frame, template, glossTex, ignoreUpdates, _, _, _, noScale, noHook)
 		frame.template = template or AS:CheckOption('SkinTemplate')
 		frame.glossTex = glossTex and (type(glossTex) == 'string' and glossTex or AS.Libs.LSM:Fetch('statusbar', AS:CheckOption('StatusBarTexture')))

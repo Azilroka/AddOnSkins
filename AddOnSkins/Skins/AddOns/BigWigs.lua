@@ -2,14 +2,14 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BigWigs') then return end
 
-function AS:BigWigs(event, addon)
+function R:BigWigs(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		if BigWigsLoader then
 			BigWigsLoader.RegisterMessage('AddOnSkins', "BigWigs_FrameCreated", function(event, frame, name)
 				if name == "QueueTimer" then
 					S:HandleStatusBar(frame, {1, 0, 0})
 					frame:ClearAllPoints()
-					frame:SetPoint('TOP', '$parent', 'BOTTOM', 0, AS:AdjustForTheme(-2))
+					frame:SetPoint('TOP', '$parent', 'BOTTOM', 0, S:AdjustForTheme(-2))
 					frame:SetHeight(16)
 				end
 			end)
@@ -36,10 +36,8 @@ function AS:BigWigs(event, addon)
 			bd:Hide()
 			iconBd:Hide()
 			if AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel' then
-				bd.InsideBorder:Hide()
-				bd.OutsideBorder:Hide()
-				iconBd.InsideBorder:Hide()
-				iconBd.OutsideBorder:Hide()
+				S:ToggleBorders(bd, false)
+				S:ToggleBorders(iconBd, false)
 			end
 		end
 
@@ -47,7 +45,7 @@ function AS:BigWigs(event, addon)
 			local bd = bar.candyBarBackdrop
 
 			S:SetTemplate(bd)
-			bd:SetOutside(bar)
+			S:SetOutside(bd, bar)
 
 			local tex = bar:GetIcon()
 			if tex then
@@ -63,20 +61,14 @@ function AS:BigWigs(event, addon)
 
 				local iconBd = bar.candyBarIconFrameBackdrop
 				S:SetTemplate(iconBd)
-				iconBd:SetOutside(icon)
+				S:SetOutside(iconBd, icon)
 
 				iconBd:Show()
-				if AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel' then
-					iconBd.InsideBorder:SetShown(AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel')
-					iconBd.OutsideBorder:SetShown(AS:CheckOption('Theme') == 'ThickBorder')
-				end
+				S:ToggleBorders(iconBd, AS:CheckOption('Theme') == 'ThickBorder')
 			end
 
 			bd:Show()
-			if AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel' then
-				bd.InsideBorder:SetShown(AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel')
-				bd.OutsideBorder:SetShown(AS:CheckOption('Theme') == 'ThickBorder')
-			end
+			S:ToggleBorders(bd, AS:CheckOption('Theme') == 'ThickBorder')
 		end
 
 		local function ApplyStyleHalfBar(bar)
@@ -102,10 +94,7 @@ function AS:BigWigs(event, addon)
 				iconBd:SetOutside(icon)
 
 				iconBd:Show()
-				if AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel' then
-					iconBd.InsideBorder:SetShown(AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel')
-					iconBd.OutsideBorder:SetShown(AS:CheckOption('Theme') == 'ThickBorder')
-				end
+				S:ToggleBorders(iconBd, AS:CheckOption('Theme') == 'ThickBorder')
 			end
 
 			bar.candyBarLabel:ClearAllPoints()
@@ -117,10 +106,7 @@ function AS:BigWigs(event, addon)
 			bar.candyBarDuration:Point("RIGHT", bar, "RIGHT", -2, AS:AdjustForTheme(12))
 
 			bd:Show()
-			if AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel' then
-				bd.InsideBorder:SetShown(AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel')
-				bd.OutsideBorder:SetShown(AS:CheckOption('Theme') == 'ThickBorder')
-			end
+			S:ToggleBorders(bd, AS:CheckOption('Theme') == 'ThickBorder')
 		end
 
 		BigWigsAPI:RegisterBarStyle('AddOnSkins', {
@@ -144,5 +130,5 @@ function AS:BigWigs(event, addon)
 	end
 end
 
-AS:RegisterSkin('BigWigs', AS.BigWigs, 'ADDON_LOADED')
-AS:RegisterSkinForPreload('BigWigs_Plugins', AS.BigWigs, 'BigWigs')
+AS:RegisterSkin('BigWigs', R.BigWigs, 'ADDON_LOADED')
+AS:RegisterSkinForPreload('BigWigs_Plugins', R.BigWigs, 'BigWigs')

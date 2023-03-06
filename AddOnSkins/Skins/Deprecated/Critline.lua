@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Critline') then return end
 
-function AS:Critline()
+function R:Critline()
 	local CritLineDisplay = Critline:GetModule('Display')
 	S:HandleFrame(CritLineDisplay)
 	for i = 1, CritLineDisplay:GetNumChildren() do
@@ -15,4 +15,4 @@ function AS:Critline()
 	end
 end
 
-AS:RegisterSkin('Critline', AS.Critline)
+AS:RegisterSkin('Critline', R.Critline)

@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BattlePetBreedID') then return end
 
-function AS:BattlePetBreedID()
+function R:BattlePetBreedID()
 	local function SkinTooltip(Parent, SpeciesID, BreedID, Rareness)
 		local Tooltip, Rarity, R, G, B
 		if (Parent == FloatingBattlePetTooltip) then
@@ -24,4 +24,4 @@ function AS:BattlePetBreedID()
 	hooksecurefunc(_G, "BPBID_SetBreedTooltip", SkinTooltip)
 end
 
-AS:RegisterSkin('BattlePetBreedID', AS.BattlePetBreedID)
+AS:RegisterSkin('BattlePetBreedID', R.BattlePetBreedID)

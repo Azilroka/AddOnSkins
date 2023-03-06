@@ -18,8 +18,6 @@
 	<Script file="Baggins.lua"/>
 	<Script file="BagSync.lua"/>
 	<Script file="Bartender4.lua"/>
-	<Script file="BattlePetBreedID.lua"/>
-	<Script file="BGDefender.lua"/>
 	<Script file="BigWigs.lua"/>
 	<Script file="BtWLoadouts.lua"/>
 	<Script file="BtWQuests.lua"/>
@@ -36,7 +34,6 @@
 	<Script file="ColorPickerPlus.lua"/>
 	<Script file="Coolline.lua"/>
 	<Script file="Cork.lua"/>
-	<Script file="Critline.lua"/>
 	<Script file="DBM.lua"/>
 	<Script file="DejaCharacterStats.lua"/>
 	<Script file="Dominos.lua"/>

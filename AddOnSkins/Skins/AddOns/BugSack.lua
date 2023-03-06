@@ -2,8 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('BugSack') then return end
 
-function AS:BugSack(event, addon)
-
+function R:BugSack(event, addon)
 	hooksecurefunc(BugSack, "OpenSack", function()
 		if BugSackFrame.IsSkinned then return end
 		S:HandleFrame(BugSackFrame)
@@ -18,10 +17,11 @@ function AS:BugSack(event, addon)
 		for _, child in pairs({BugSackFrame:GetChildren()}) do
 			if (child:IsObjectType('Button') and child:GetScript('OnClick') == BugSack.CloseSack) then
 				S:HandleCloseButton(child)
+				break
 			end
 		end
 		BugSackFrame.IsSkinned = true
 	end)
 end
 
-AS:RegisterSkin('BugSack', AS.BugSack)
+AS:RegisterSkin('BugSack', R.BugSack)

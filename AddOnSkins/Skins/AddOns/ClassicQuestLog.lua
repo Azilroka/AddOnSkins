@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Classic Quest Log') then return end
 
-function AS:ClassicQuestLog()
+function R:ClassicQuestLog()
 	S:HandleFrame(ClassicQuestLog, "Transparent")
 	S:HandleScrollBar(ClassicQuestLogScrollFrameScrollBar)
 	S:HandleScrollBar(ClassicQuestLogDetailScrollFrameScrollBar)
@@ -46,4 +46,4 @@ function AS:ClassicQuestLog()
 	ClassicQuestLog.chrome.mapButton:SetSize(56, 40)
 end
 
-AS:RegisterSkin('Classic Quest Log', AS.ClassicQuestLog)
+AS:RegisterSkin('Classic Quest Log', R.ClassicQuestLog)

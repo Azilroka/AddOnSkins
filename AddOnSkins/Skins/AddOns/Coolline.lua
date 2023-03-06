@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('CoolLine') then return end
 
-function AS:CoolLine()
+function R:CoolLine()
 	CoolLineDB.bgcolor = { r = 0, g = 0, b = 0, a = 0, }
 	CoolLineDB.border = 'None'
 	CoolLine.updatelook()

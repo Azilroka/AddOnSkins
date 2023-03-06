@@ -5,7 +5,7 @@ if not AS:CheckAddOn('BtWLoadouts') then return end
 local _G = _G
 local pairs = pairs
 
-function AS:BtWLoadouts()
+function R:BtWLoadouts()
 	S:HandleFrame(_G.BtWLoadoutsFrame)
 	S:HandleButton(_G.BtWLoadoutsFrame.AddButton)
 	S:HandleButton(_G.BtWLoadoutsFrame.ActivateButton)
@@ -101,4 +101,4 @@ function AS:BtWLoadouts()
 	end
 end
 
-AS:RegisterSkin('BtWLoadouts', AS.BtWLoadouts)
+AS:RegisterSkin('BtWLoadouts', R.BtWLoadouts)

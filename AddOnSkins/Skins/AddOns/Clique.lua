@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Clique') then return end
 
-function AS:Clique()
+function R:Clique()
 	local Frames = {
 		CliqueDialog,
 		CliqueConfig,
@@ -75,4 +75,4 @@ function AS:Clique()
 	S:StripTextures(CliqueConfigInset)
 end
 
-AS:RegisterSkin('Clique', AS.Clique)
+AS:RegisterSkin('Clique', R.Clique)

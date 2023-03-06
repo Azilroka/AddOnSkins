@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ClassOrderHallsComplete') then return end
 
-function AS:ClassOrderHallsComplete()
+function R:ClassOrderHallsComplete()
 	-- General
 	S:HandleFrame(ClassOrderHallsCompleteUIMainFrame)
 	S:HandleCloseButton(ClassOrderHallsCompleteUIMainFrameCloseButton)
@@ -79,4 +79,4 @@ function AS:ClassOrderHallsComplete()
 	ClassOrderHallsCompleteUIMainFrameTab6SubFrame:SetPoint('TOPLEFT', ClassOrderHallsCompleteUIMainFrame, 'TOPLEFT', 10, -57)
 end
 
-AS:RegisterSkin('ClassOrderHallsComplete', AS.ClassOrderHallsComplete)
+AS:RegisterSkin('ClassOrderHallsComplete', R.ClassOrderHallsComplete)

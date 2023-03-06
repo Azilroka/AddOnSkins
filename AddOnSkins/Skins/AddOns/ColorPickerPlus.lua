@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ColorPickerPlus') then return end
 
-function AS:ColorPickerPlus()
+function R:ColorPickerPlus()
 	--Make sure the color picker is not click-through anymore
 	ColorPickerFrame:EnableMouse(true)
 
@@ -30,4 +30,4 @@ function AS:ColorPickerPlus()
 	ColorPickerOkayButton:SetPoint("RIGHT", ColorPickerCancelButton, "LEFT", -2, 0)
 end
 
-AS:RegisterSkin('ColorPickerPlus', AS.ColorPickerPlus)
+AS:RegisterSkin('ColorPickerPlus', R.ColorPickerPlus)

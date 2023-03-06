@@ -2,6 +2,8 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not (AS:CheckAddOn('DBM-Core') and AS:CheckAddOn('DBM-StatusBarTimers')) then return end
 
+local min = min
+
 function R:DBM(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		local function SkinBars(s)
@@ -24,7 +26,7 @@ function R:DBM(event, addon)
 						local timer = _G[frame:GetName()..'BarTimer']
 						local iconSize = bar.enlarged and DBT.Options.HugeHeight or DBT.Options.Height
 						if AS:CheckOption('DBMSkinHalf') then
-							iconSize = iconSize * 2
+							iconSize = min(iconSize * 2, 35)
 						end
 						iconSize = iconSize - 2
 

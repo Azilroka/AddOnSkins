@@ -5,15 +5,12 @@ local AddOnName = ...
 
 local ES = AS.EmbedSystem
 
--- Cache global variables
---Lua functions
 local _G = _G
 local pairs, ipairs, type, pcall = pairs, ipairs, type, pcall
 local floor, print, format, strlower, strfind, strmatch = floor, print, format, strlower, strfind, strmatch
 local sort, tinsert = sort, tinsert
---WoW API / Variables
+
 local IsAddOnLoaded, C_Timer = IsAddOnLoaded, C_Timer
--- GLOBALS:
 
 AS.SkinErrors = {}
 
@@ -108,28 +105,7 @@ function AS:Round(num, idp)
 end
 
 function AS:RegisterForPetBattleHide(frame)
-	if frame.IsVisible and frame:GetName() then
-		AS.FrameLocks[frame:GetName()] = { shown = false }
-	end
-end
-
-function AS:AddNonPetBattleFrames()
-	for frame,data in pairs(AS.FrameLocks) do
-		if data.shown then
-			_G[frame]:Show()
-		end
-	end
-end
-
-function AS:RemoveNonPetBattleFrames()
-	for frame,data in pairs(AS.FrameLocks) do
-		if _G[frame]:IsVisible() then
-			data.shown = true
-			_G[frame]:Hide()
-		else
-			data.shown = false
-		end
-	end
+	RegisterStateDriver(frame, 'visibility', '[petbattle] hide; show')
 end
 
 function AS:SkinEvent(event, ...)
@@ -153,7 +129,7 @@ function AS:RegisterSkin(addonName, skinFunc, ...)
 			priority = event
 		elseif pcall(Validator.RegisterEvent, Validator, event) then
 			Validator:UnregisterEvent(event)
-			AS.events[event] = {}
+			if not AS.events[event] then AS.events[event] = {} end
 			AS.events[event][addonName] = true
 		end
 	end
@@ -309,11 +285,6 @@ function AS:Init(event, addon)
 		AS:BuildOptions()
 
 		AS:RegisterEvent('PLAYER_ENTERING_WORLD', 'StartSkinning')
-
-		if AS.Retail then
-			AS:RegisterEvent('PET_BATTLE_CLOSE', 'AddNonPetBattleFrames')
-			AS:RegisterEvent('PET_BATTLE_OPENING_START', 'RemoveNonPetBattleFrames')
-		end
 	end
 end
 
