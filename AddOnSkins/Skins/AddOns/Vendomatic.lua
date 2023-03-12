@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Vendomatic') then return end
 
-function AS:Vendomatic()
+function R:Vendomatic()
 	local Buttons = {
 		VendomaticOptionsFrame_Button1,
 		VendomaticOptionsFrame_StockButton,
@@ -66,4 +66,4 @@ function AS:Vendomatic()
 	S:HandleItemButton(Vendomatic_OptionsStockFrame_DropBox)
 end
 
-AS:RegisterSkin('Vendomatic', AS.Vendomatic)
+AS:RegisterSkin('Vendomatic', R.Vendomatic)

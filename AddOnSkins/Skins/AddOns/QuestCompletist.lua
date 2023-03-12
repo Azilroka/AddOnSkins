@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('QuestCompletist') then return end
 
-function AS:QuestCompletist()
+function R:QuestCompletist()
 	local tooltips = {
 		'qcMapTooltip',
 		'qcQuestInformationTooltip',
@@ -14,7 +14,7 @@ function AS:QuestCompletist()
 
 	for _, object in pairs(tooltips) do
 		if _G[object] then
-			_G[object]:SetFrameStrata('DIALOG')
+			--_G[object]:SetFrameStrata('DIALOG')
 			S:HandleTooltip(_G[object])
 		end
 	end
@@ -30,4 +30,4 @@ function AS:QuestCompletist()
 	qcMenuSlider:SetHeight(256)
 end
 
-AS:RegisterSkin('QuestCompletist', AS.QuestCompletist)
+AS:RegisterSkin('QuestCompletist', R.QuestCompletist)

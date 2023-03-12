@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('InboxMailBag') then return end
 
-function AS:InboxMailBag(event)
+function R:InboxMailBag(event)
 	if event ~= 'MAIL_SHOW' then return end
 	S:StripTextures(InboxMailbagFrame)
 	S:HandleEditBox(InboxMailbagFrameItemSearchBox)
@@ -22,11 +22,12 @@ function AS:InboxMailBag(event)
 			button:SetBackdropBorderColor(r, g, b)
 		end)
 		hooksecurefunc(button.qualityOverlay, 'Hide', function(self)
-			button:SetBackdropBorderColor(unpack(AS.BorderColor))
+			button:SetBackdropBorderColor(unpack(S.borderColor))
 		end)
 		index = index + 1
 	end
+
 	AS:UnregisterSkinEvent('InboxMailBag', event)
 end
 
-AS:RegisterSkin('InboxMailBag', AS.InboxMailBag, 'MAIL_SHOW')
+AS:RegisterSkin('InboxMailBag', R.InboxMailBag, 'MAIL_SHOW')

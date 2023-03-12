@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('GHI') then return end
 
-function AS:GryphonheartItems()
+function R:GryphonheartItems()
 	local holder = ExtraActionBarFrame:GetParent()
 	GHI_ExtraButtonFrame:SetParent(holder)
 	GHI_ExtraButtonFrame:ClearAllPoints()
@@ -50,11 +50,11 @@ function AS:GryphonheartItems()
 					local r, g, b = GetItemQualityColor(quality)
 					self:SetBackdropBorderColor(r, g, b)
 				else
-					self:SetBackdropBorderColor(unpack(AS.BorderColor))
+					self:SetBackdropBorderColor(unpack(S.borderColor))
 				end
 			end)
 		end
 	end)
 end
 
-AS:RegisterSkin('GryphonHeartItems', AS.GryphonheartItems)
+AS:RegisterSkin('GryphonHeartItems', R.GryphonheartItems)

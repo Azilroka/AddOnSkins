@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('QuikEmotes') then return end
 
-function AS:QuikEmotes()
+function R:QuikEmotes()
 	S:HandleFrame(Group1)
 	S:HandleButton(Button1)
 	S:HandleButton(Button2)
@@ -34,4 +34,4 @@ function AS:QuikEmotes()
 
 end
 
-AS:RegisterSkin('QuikEmotes', AS.QuikEmotes)
+AS:RegisterSkin('QuikEmotes', R.QuikEmotes)

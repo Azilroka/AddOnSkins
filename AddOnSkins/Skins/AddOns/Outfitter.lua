@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Outfitter') then return end
 
-function AS:Outfitter()
+function R:Outfitter()
 	if AS.Retail then
 		CharacterFrame:HookScript('OnShow', function(self) PaperDollSidebarTabs:SetPoint('BOTTOMRIGHT', CharacterFrameInsetRight, 'TOPRIGHT', -14, 0) end)
 	end
@@ -97,4 +97,4 @@ function AS:Outfitter()
 	S:HandleTab(OutfitterEditScriptDialogTab2)
 end
 
-AS:RegisterSkin('Outfitter', AS.Outfitter)
+AS:RegisterSkin('Outfitter', R.Outfitter)

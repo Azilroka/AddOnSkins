@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('MizusRaidTracker') then return end
 
-function AS:MizusRaidTracker()
+function R:MizusRaidTracker()
 	S:HandleFrame(MRT_GUIFrame)
 	S:HandleFrame(MRT_GUI_FourRowDialog)
 	S:HandleCloseButton(MRT_GUIFrame_CloseButton)
@@ -36,4 +36,4 @@ function AS:MizusRaidTracker()
 	S:HandleTooltip(MRT_GUI_TT)
 end
 
-AS:RegisterSkin('MizusRaidTracker', AS.MizusRaidTracker)
+AS:RegisterSkin('MizusRaidTracker', R.MizusRaidTracker)

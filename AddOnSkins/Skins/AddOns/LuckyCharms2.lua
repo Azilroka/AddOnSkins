@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('LuckyCharms2') then return end
 
-function AS:LuckyCharms2(event, addon)
+function R:LuckyCharms2(event, addon)
 	local function StyleButton(self)
 		local name = self:GetName()
 		local button = self
@@ -49,4 +49,4 @@ function AS:LuckyCharms2(event, addon)
 	LuckyCharms.Flares.SetTexCoords()
 end
 
-AS:RegisterSkin('LuckyCharms2', AS.LuckyCharms2)
+AS:RegisterSkin('LuckyCharms2', R.LuckyCharms2)

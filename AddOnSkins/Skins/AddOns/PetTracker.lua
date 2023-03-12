@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('PetTracker') then return end
 
-function AS:PetTracker(event, addon)
+function R:PetTracker(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		if not AS:CheckAddOn('Carbonite.Quests') then
 			AS:Delay(1, function()
@@ -11,7 +11,7 @@ function AS:PetTracker(event, addon)
 				S:CreateBackdrop(bar.Overlay)
 				bar.Overlay.backdrop:SetBackdropColor(0, 0, 0, 0)
 				for i = 1, PetTracker.MaxQuality do
-					bar.Bars[i]:SetStatusBarTexture(AS.NormTex)
+					bar.Bars[i]:SetStatusBarTexture(S.Media.StatusBar)
 				end
 			end)
 		end
@@ -157,11 +157,11 @@ function AS:PetTracker(event, addon)
 				end)
 
 				hooksecurefunc(Button.model.quality, 'Hide', function(self)
-					Button.icon.backdrop:SetBackdropColor(unpack(AS.BorderColor))
+					Button.icon.backdrop:SetBackdropColor(unpack(S.Media.borderColor))
 				end)
 			end
 		end)
 	end
 end
 
-AS:RegisterSkin('PetTracker', AS.PetTracker, 'ADDON_LOADED')
+AS:RegisterSkin('PetTracker', R.PetTracker, 'ADDON_LOADED')

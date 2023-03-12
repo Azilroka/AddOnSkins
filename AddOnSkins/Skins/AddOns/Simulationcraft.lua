@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Simulationcraft') then return end
 
-function AS:Simulationcraft()
+function R:Simulationcraft()
 	local Simulationcraft = LibStub("AceAddon-3.0"):GetAddon("Simulationcraft")
 	hooksecurefunc(Simulationcraft, 'GetMainFrame', function()
 		if not SimcFrame.isSkinned then
@@ -13,4 +13,4 @@ function AS:Simulationcraft()
 	end)
 end
 
-AS:RegisterSkin('Simulationcraft', AS.Simulationcraft)
+AS:RegisterSkin('Simulationcraft', R.Simulationcraft)

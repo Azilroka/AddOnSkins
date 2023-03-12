@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('MageNuggets') then return end
 
-function AS:MageNuggets()
+function R:MageNuggets()
 	local Frames = {
 		'MNSpellSteal_Frame',
 		'MNSpellStealFocus_Frame',
@@ -28,7 +28,7 @@ function AS:MageNuggets()
 			S:HandleFrame(_G[object], true)
 			if _G[object].SetBackdrop then _G[object]:SetBackdrop(nil) end
 			if _G[object..'_ProcBar'] then
-				_G[object..'_ProcBar']:SetStatusBarTexture(AS.NormTex)
+				_G[object..'_ProcBar']:SetStatusBarTexture(S.Media.StatusBar)
 			end
 			if _G[object..'Texture'] then
 				S:HandleIcon(_G[object..'Texture'])
@@ -77,4 +77,4 @@ function AS:MageNuggets()
 	MNabCast_Frame:SetPoint('BOTTOM', MageNugAB_Frame, 'TOP', 0, 6)
 end
 
-AS:RegisterSkin('MageNuggets', AS.MageNuggets)
+AS:RegisterSkin('MageNuggets', R.MageNuggets)

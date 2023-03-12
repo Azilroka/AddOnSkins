@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Spy') then return end
 
-function AS:Spy()
+function R:Spy()
 	if Spy_MainWindow.Background then
 		S:CreateBackdrop(Spy_MainWindow.Background)
 		S:StripTextures(Spy_MainWindow)
@@ -19,4 +19,4 @@ function AS:Spy()
 	Spy_AlertWindow:SetPoint('TOP', UIParent, 'TOP', 0, -130)
 end
 
-AS:RegisterSkin('Spy', AS.Spy)
+AS:RegisterSkin('Spy', R.Spy)

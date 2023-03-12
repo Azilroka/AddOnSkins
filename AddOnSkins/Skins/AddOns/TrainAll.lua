@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Train-All') then return end
 
-function AS:TrainAll(event, addon)
+function R:TrainAll(event, addon)
 	if addon == 'Blizzard_TrainerUI' or IsAddOnLoaded('Blizzard_TrainerUI') then
 		ClassTrainerFrame:HookScript('OnShow', function(self)
 			if not TrainAllButton.isSkinned then
@@ -14,4 +14,4 @@ function AS:TrainAll(event, addon)
 	end
 end
 
-AS:RegisterSkin('TrainAll', AS.TrainAll, 'ADDON_LOADED')
+AS:RegisterSkin('TrainAll', R.TrainAll, 'ADDON_LOADED')

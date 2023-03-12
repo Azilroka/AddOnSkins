@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('EnchantCheck') then return end
 
-function AS:EnchantCheck()
+function R:EnchantCheck()
 	S:HandleButton(CharacterFrameEnchantCheckButton)
 	S:HandleButton(InspectFrameEnchantCheckButton)
 	S:HandleButton(InspectFrameInviteButton)
@@ -13,4 +13,4 @@ function AS:EnchantCheck()
 	CharacterFrameEnchantCheckButton:SetPoint('RIGHT', CharacterMainHandSlot, 'LEFT', -8, -15)
 end
 
-AS:RegisterSkin('EnchantCheck', AS.EnchantCheck)
+AS:RegisterSkin('EnchantCheck', R.EnchantCheck)

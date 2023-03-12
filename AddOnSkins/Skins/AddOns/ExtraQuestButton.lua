@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ExtraQuestButton') then return end
 
-function AS:ExtraQuestButton()
+function R:ExtraQuestButton()
 	S:HandleButton(ExtraQuestButton)
 	ExtraQuestButton:SetTemplate("Transparent")
 	S:Kill(ExtraQuestButton.Artwork)
@@ -13,4 +13,4 @@ function AS:ExtraQuestButton()
 	ExtraQuestButton.Hotkey:SetPoint('TOPRIGHT', ExtraQuestButton, 'TOPRIGHT', -1, -3)
 end
 
-AS:RegisterSkin('ExtraQuestButton', AS.ExtraQuestButton)
+AS:RegisterSkin('ExtraQuestButton', R.ExtraQuestButton)

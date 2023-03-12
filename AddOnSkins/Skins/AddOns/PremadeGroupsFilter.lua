@@ -2,11 +2,11 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('PremadeGroupsFilter') then return end
 
-function AS:PremadeGroupsFilter()
+function R:PremadeGroupsFilter()
 	local function Reposition()
 		local dialog = PremadeGroupsFilterDialog
-		dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT", AS:AdjustForTheme(2), AS:AdjustForTheme(1))
-		dialog:SetPoint("BOTTOMLEFT", GroupFinderFrame, "BOTTOMRIGHT", AS:AdjustForTheme(2), AS:AdjustForTheme(-1))
+		dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT", S:AdjustForTheme(2), S:AdjustForTheme(1))
+		dialog:SetPoint("BOTTOMLEFT", GroupFinderFrame, "BOTTOMRIGHT", S:AdjustForTheme(2), S:AdjustForTheme(-1))
 	end
 	hooksecurefunc(PremadeGroupsFilter.Debug, "Dialog_ResetPosition", Reposition)
 
@@ -65,4 +65,4 @@ function AS:PremadeGroupsFilter()
 	S:HandleButton(PremadeGroupsFilterDialog.RefreshButton)
 end
 
-AS:RegisterSkin('PremadeGroupsFilter', AS.PremadeGroupsFilter)
+AS:RegisterSkin('PremadeGroupsFilter', R.PremadeGroupsFilter)

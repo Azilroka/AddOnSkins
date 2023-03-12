@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('EasyMail') then return end
 
-function AS:EasyMail(event)
+function R:EasyMail(event)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 	MailFrame:SetSize(360, 440)
 	S:Desaturate(EasyMail_CheckAllButton)
@@ -47,4 +47,4 @@ function AS:EasyMail(event)
 	AS:UnregisterSkinEvent('EasyMail', event)
 end
 
-AS:RegisterSkin('EasyMail', AS.EasyMail, 'MAIL_SHOW')
+AS:RegisterSkin('EasyMail', R.EasyMail, 'MAIL_SHOW')

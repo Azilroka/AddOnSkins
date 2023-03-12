@@ -5,7 +5,7 @@ local _G = _G
 
 if not AS:CheckAddOn("WIM") then return end
 
-function AS:WIM(event)
+function R:WIM(event)
 	if event == 'PLAYER_ENTERING_WORLD' then
 
 		WIM:ShowOptions()
@@ -63,4 +63,4 @@ function AS:WIM(event)
 	end
 end
 
-AS:RegisterSkin('WIM', AS.WIM, 'ADDON_LOADED')
+AS:RegisterSkin('WIM', R.WIM, 'ADDON_LOADED')

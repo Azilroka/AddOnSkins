@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Talentless') then return end
 
-function AS:Talentless()
+function R:Talentless()
 	hooksecurefunc(Talentless, "CreateSpecButtons", function(self)
 		for _, Button in pairs(self.Specs) do
 			S:HandleButton(Button)
@@ -16,7 +16,7 @@ function AS:Talentless()
 				if value == true then
 					self:SetBackdropBorderColor(.2, .5, .1)
 				else
-					self:SetBackdropBorderColor(unpack(AS.BorderColor))
+					self:SetBackdropBorderColor(unpack(S.Media.borderColor))
 				end
 			end)
 			Button:HookScript("OnLeave", function(self)

@@ -33,12 +33,9 @@
 	<Script file="CollectionShop.lua"/>
 	<Script file="ColorPickerPlus.lua"/>
 	<Script file="Coolline.lua"/>
-	<Script file="Cork.lua"/>
 	<Script file="DBM.lua"/>
 	<Script file="DejaCharacterStats.lua"/>
 	<Script file="Dominos.lua"/>
-	<Script file="Dresser.lua"/>
-	<Script file="DressUp.lua"/>
 	<Script file="EasyMail.lua"/>
 	<Script file="Easy_Obliterate.lua"/>
 	<Script file="EavesDrop.lua"/>
@@ -102,7 +99,6 @@
 	<Script file="QuestCompletist.lua"/>
 	<Script file="QuestGuru.lua"/>
 	<Script file="QuestPointer.lua"/>
-	<Script file="QuikEmotes.lua"/>
 	<Script file="RaiderIO.lua"/>
 	<Script file="RareScanner.lua"/>
 	<Script file="RCLootCouncil.lua"/>
@@ -134,7 +130,6 @@
 	<Script file="TrainAll.lua"/>
 	<Script file="TrinketMenu.lua"/>
 	<Script file="Vendomatic.lua"/>
-	<Script file="WardrobeSort.lua"/>
 	<Script file="WhisperPop.lua"/>
 	<Script file="Wholly.lua"/>
 	<Script file="WorldBossStatus.lua"/>

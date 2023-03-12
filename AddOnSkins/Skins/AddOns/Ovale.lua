@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Ovale') then return end
 
-function AS:Ovale()
+function R:Ovale()
 	hooksecurefunc(LibStub:GetLibrary("ovale/Icon").OvaleIcon, 'Update', function(self)
 		S:StripTextures(self.parent.frame)
 
@@ -23,4 +23,4 @@ function AS:Ovale()
 	end)
 end
 
-AS:RegisterSkin('Ovale', AS.Ovale)
+AS:RegisterSkin('Ovale', R.Ovale)

@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('OrderHallCommander') then return end
 
-function AS:OrderHallCommander(event, addon)
+function R:OrderHallCommander(event, addon)
 	if (event == "ADDON_LOADED" and addon == 'OrderHallCommander') or event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('OrderHallCommander') then
 		local OHC = LibStub('LibInit'):GetAddon('OrderHallCommander')
 		local OHCCache = OHC:GetCacheModule()
@@ -58,4 +58,4 @@ function AS:OrderHallCommander(event, addon)
 	end
 end
 
-AS:RegisterSkin('OrderHallCommander', AS.OrderHallCommander, 'ADDON_LOADED', 'GARRISON_MISSION_COMPLETE_RESPONSE')
+AS:RegisterSkin('OrderHallCommander', R.OrderHallCommander, 'ADDON_LOADED', 'GARRISON_MISSION_COMPLETE_RESPONSE')

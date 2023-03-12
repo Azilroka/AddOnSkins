@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('MogIt') then return end
 
-function AS:MogIt()
+function R:MogIt()
 	S:HandleFrame(MogItFrame)
 	S:StripTextures(MogItFrameInset, true)
 	S:HandleFrame(MogItFilters)
@@ -40,4 +40,4 @@ function AS:MogIt()
 	S:HandleScrollBar(MogItFiltersScrollScrollBar)
 end
 
-AS:RegisterSkin('MogIt', AS.MogIt)
+AS:RegisterSkin('MogIt', R.MogIt)

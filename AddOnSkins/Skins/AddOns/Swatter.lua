@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('!Swatter') then return end
 
-function AS:Swatter()
+function R:Swatter()
 	if SwatterErrorFrame then
 		S:HandleFrame(SwatterErrorFrame)
 		SwatterErrorEditBox:SetFrameLevel(2)
@@ -14,4 +14,4 @@ function AS:Swatter()
 	end
 end
 
-AS:RegisterSkin('Swatter', AS.Swatter, '[!BugGrabber]', '[!ImprovedErrorFrame]')
+AS:RegisterSkin('Swatter', R.Swatter, '[!BugGrabber]', '[!ImprovedErrorFrame]')

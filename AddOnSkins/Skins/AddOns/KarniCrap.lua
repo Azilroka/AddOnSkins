@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('KarniCrap') then return end
 
-function AS:KarniCrap()
+function R:KarniCrap()
 	local Frames = {
 		KarniCrap,
 		KarniCrap_Blacklist,
@@ -140,4 +140,4 @@ function AS:KarniCrap()
 	end
 end
 
-AS:RegisterSkin('KarniCrap', AS.KarniCrap)
+AS:RegisterSkin('KarniCrap', R.KarniCrap)

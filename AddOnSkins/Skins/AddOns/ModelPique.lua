@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ModelPique') then return end
 
-function AS:ModelPique()
+function R:ModelPique()
 	S:HandleFrame(ModelPiqueFrame)
 	S:HandleButton(ModelPiqueFrameCancelButton)
 	S:HandleCloseButton(ModelPiqueFrameCloseButton)
@@ -22,4 +22,4 @@ function AS:ModelPique()
 	ModelPiqueFrame:SetSize(327, 410)
 end
 
-AS:RegisterSkin('ModelPique', AS.ModelPique)
+AS:RegisterSkin('ModelPique', R.ModelPique)

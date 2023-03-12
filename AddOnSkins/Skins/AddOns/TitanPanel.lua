@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not (AS:CheckAddOn('Titan') or AS:CheckAddOn('TitanClassic')) then return end
 
-function AS:TitanPanel()
+function R:TitanPanel()
 	AS:Delay(1, function()
 		S:HandleFrame(Titan_Bar__Display_Bar, 'Default', nil, true)
 		S:HandleFrame(Titan_Bar__Display_Bar2, 'Default', nil, true)
@@ -14,4 +14,4 @@ function AS:TitanPanel()
 	end)
 end
 
-AS:RegisterSkin('TitanPanel', AS.TitanPanel)
+AS:RegisterSkin('TitanPanel', R.TitanPanel)

@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('WoWPro') then return end
 
-function AS:WoWPro()
+function R:WoWPro()
 	S:HandleFrame(WoWPro.Titlebar)
 	S:HandleFrame(WoWPro.MainFrame, true)
 	for i = 1, 15 do
@@ -10,4 +10,4 @@ function AS:WoWPro()
 	end
 end
 
-AS:RegisterSkin('WoWPro', AS.WoWPro)
+AS:RegisterSkin('WoWPro', R.WoWPro)

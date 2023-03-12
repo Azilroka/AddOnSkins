@@ -11,7 +11,6 @@ function R:FlightMapEnhanced()
 			if _G['FlightMapEnhancedTaxiChoiceContainerButton'..i] then S:StripTextures(_G['FlightMapEnhancedTaxiChoiceContainerButton'..i]) end
 		end
 	end)
-	hooksecurefunc('FlightMapEnhancedTaxiChoiceButton_OnEnter', function() GameTooltip:Show() end)
 end
 
 AS:RegisterSkin('FlightMapEnhanced', R.FlightMapEnhanced)

@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('RareScanner') then return end
 
-function AS:RareScanner()
+function R:RareScanner()
 	S:HandleFrame(scanner_button, 'Default')
 	S:HandleCloseButton(scanner_button.CloseButton)
 	scanner_button.CloseButton:ClearAllPoints()
@@ -17,4 +17,4 @@ function AS:RareScanner()
 	scanner_button.FilterEnabledButton:SetPoint("TOPLEFT", 5, -5)
 end
 
-AS:RegisterSkin('RareScanner', AS.RareScanner)
+AS:RegisterSkin('RareScanner', R.RareScanner)

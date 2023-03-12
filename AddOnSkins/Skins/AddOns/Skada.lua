@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Skada') then return end
 
-function AS:Skada()
+function R:Skada()
 	local SkadaDisplayBar = Skada.displays['bar']
 
 	hooksecurefunc(SkadaDisplayBar, 'AddDisplayOptions', function(self, win, options)
@@ -70,4 +70,4 @@ function AS:Skada()
 	end)
 end
 
-AS:RegisterSkin('Skada', AS.Skada)
+AS:RegisterSkin('Skada', R.Skada)

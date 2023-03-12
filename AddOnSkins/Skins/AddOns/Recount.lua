@@ -65,4 +65,4 @@ function R:Recount()
 	end)
 end
 
-AS:RegisterSkin('Recount', AS.Recount)
+AS:RegisterSkin('Recount', R.Recount)

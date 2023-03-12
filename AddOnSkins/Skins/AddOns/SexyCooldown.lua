@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('SexyCooldown2') then return end
 
-function AS:SexyCooldown2()
+function R:SexyCooldown2()
 	local function SCDStripSkinSettings(bar)
 		bar.optionsTable.args.icon.args.borderheader = nil
 		bar.optionsTable.args.icon.args.border = nil
@@ -23,44 +23,6 @@ function AS:SexyCooldown2()
 		SCDStripSkinSettings(bar)
 		S:HandleFrame(bar)
 		AS:RegisterForPetBattleHide(bar)
-		if AS:CheckOption('EmbedSexyCooldown') then
-			if AS:CheckAddOn('Tukui') then
-				bar:ClearAllPoints()
-				AS.ActionBar2:HookScript('OnShow', function()
-					bar:SetPoint('BOTTOM', AS.ActionBar2, 'TOP', 0, 1)
-					bar:SetHeight(ActionButton1:GetHeight())
-					bar:SetWidth(AS.ActionBar2:GetWidth())
-				end)
-				AS.ActionBar2:HookScript('OnHide', function()
-					bar:SetPoint('BOTTOM', AS.ActionBar1, 'TOP', 0, 1)
-					bar:SetHeight(ActionButton1:GetHeight())
-					bar:SetWidth(AS.ActionBar1:GetWidth())
-				end)
-			elseif AS:CheckAddOn('ElvUI') then
-				bar:ClearAllPoints()
-				bar:SetPoint('BOTTOMRIGHT', ElvUI_Bar1, 'TOPRIGHT', 0, 2)
-				bar:SetPoint("BOTTOMLEFT", ElvUI_Bar1, "TOPLEFT", 0, 2)
-				bar:SetHeight(ElvUI_Bar1Button1:GetHeight())
-				local activated
-				ElvUI_Bar1:HookScript("OnShow", function() bar:Show() end)
-				ElvUI_Bar1:HookScript("OnHide", function() if (not activated) then bar:Hide() end end)
-				hooksecurefunc(ElvUI_Bar1, "SetAlpha", function(_, alpha)
-					if (not activated) then
-						bar:SetAlpha(alpha)
-					end
-				end)
-				hooksecurefunc(bar, "Activate", function()
-					activated = true
-				end)
-				hooksecurefunc(bar, "Deactivate", function()
-					activated = false
-					if (not ElvUI_Bar1:IsShown()) then
-						bar:Hide()
-					end
-					bar:SetAlpha(ElvUI_Bar1:GetAlpha())
-				end)
-			end
-		end
 	end
 
 	local function SkinSexyCooldownIcon(bar, icon)
@@ -99,4 +61,4 @@ function AS:SexyCooldown2()
 	end)
 end
 
-AS:RegisterSkin('SexyCooldown2', AS.SexyCooldown2)
+AS:RegisterSkin('SexyCooldown2', R.SexyCooldown2)

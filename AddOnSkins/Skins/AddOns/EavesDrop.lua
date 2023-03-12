@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('EavesDrop') then return end
 
-function AS:EavesDrop()
+function R:EavesDrop()
 	S:HandleFrame(EavesDropFrame)
 	S:HandleFrame(EavesDropHistoryFrame)
 	S:HandleTab(EavesDropTab)
@@ -13,4 +13,4 @@ function AS:EavesDrop()
 	S:HandleButton(EavesDropHistoryFrameReset)
 	S:HandleCloseButton(EavesDropHistoryFrameClose)
 end
-AS:RegisterSkin('EavesDrop', AS.EavesDrop)
+AS:RegisterSkin('EavesDrop', R.EavesDrop)

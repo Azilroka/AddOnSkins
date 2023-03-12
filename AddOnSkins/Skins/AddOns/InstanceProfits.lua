@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('InstanceProfits') then return end
 
-function AS:InstanceProfits(event, addon)
+function R:InstanceProfits(event, addon)
   InstanceProfits_LiveDisplay:SetHeight(90)
   S:HandleFrame(InstanceProfits_LiveDisplay, true)
   InstanceProfits_LiveDisplay:CreateBackdrop("Transparent")
@@ -98,4 +98,4 @@ function AS:InstanceProfits(event, addon)
   S:HandleRadioButton(InstanceProfits_ShareDialogTrade)
 end
 
-AS:RegisterSkin('InstanceProfits', AS.InstanceProfits)
+AS:RegisterSkin('InstanceProfits', R.InstanceProfits)

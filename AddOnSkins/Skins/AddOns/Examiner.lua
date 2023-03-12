@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Examiner') then return end
 
-function AS:Examiner()
+function R:Examiner()
 	S:HandleFrame(Examiner)
 	S:HandleScrollBar(ExaminerStatsScrollScrollBar)
 	S:HandleScrollBar(ExaminerFeatsScrollScrollBar)
@@ -45,8 +45,7 @@ function AS:Examiner()
 		S:StyleButton(Button)
 	end
 
-	for i = 1, Examiner:GetNumChildren() do
-		local object = select(i, Examiner:GetChildren())
+	for _, object in pairs({Examiner:GetChildren()}) do
 		if object:IsObjectType('Button') then
 			if object:GetText() ~= nil then
 				S:HandleButton(object, true)
@@ -72,4 +71,4 @@ function AS:Examiner()
 	Examiner.model:SetPoint('BOTTOMLEFT', Examiner, 'BOTTOMLEFT', 22, 22)
 end
 
-AS:RegisterSkin('Examiner', AS.Examiner)
+AS:RegisterSkin('Examiner', R.Examiner)

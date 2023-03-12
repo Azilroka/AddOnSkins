@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('TalentSetManager') then return end
 
-function AS:TalentSetMgr(event, addon)
+function R:TalentSetMgr(event, addon)
 	if addon == 'Blizzard_TalentUI' then
 		AS:Delay(0.02, function()
 			TalentSetsListEquipSet.ButtonBackground:Hide()
@@ -52,4 +52,4 @@ function AS:TalentSetMgr(event, addon)
 	end
 end
 
-AS:RegisterSkin('TalentSetManager', AS.TalentSetMgr, "ADDON_LOADED")
+AS:RegisterSkin('TalentSetManager', R.TalentSetMgr, "ADDON_LOADED")

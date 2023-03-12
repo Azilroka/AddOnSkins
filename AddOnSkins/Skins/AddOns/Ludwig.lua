@@ -2,10 +2,10 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Ludwig') then return end
 
-function AS:Ludwig()
+function R:Ludwig()
 	hooksecurefunc(Ludwig, 'ToggleSearchFrame', function()
 		if LudwigFrame.isSkinned then return end
-		
+
 		-- Main frame
 		S:HandleFrame(LudwigFrame)
 		LudwigFrame:SetHeight(456)
@@ -17,7 +17,7 @@ function AS:Ludwig()
 		LudwigFrame:SetScript('OnDragStop', LudwigFrame.StopMovingOrSizing)
 
 		S:HandleCloseButton(LudwigFrameCloseButton, true)
-		
+
 		-- Search box
 		S:HandleEditBox(LudwigFramesearch)
 		LudwigFramesearch:SetPoint('TOPLEFT', 58, -44)
@@ -31,7 +31,7 @@ function AS:Ludwig()
 		-- Reset button
 		local LudwigFrameResetButton = select(5, LudwigFrame:GetChildren())
 		S:Desaturate(LudwigFrameResetButton)
-		
+
 		-- Scroll frame and scroll bar
 		S:HandleFrame(LudwigFrameScrollFrame, 'Default')
 		LudwigFrameScrollFrame:ClearAllPoints()
@@ -39,7 +39,7 @@ function AS:Ludwig()
 		LudwigFrameScrollFrame:SetHeight(330)
 		LudwigFrameScrollFrame:SetWidth(300)
 		S:HandleScrollBar(LudwigFrameScrollFrameScrollBar)
-		
+
 		-- Dropdown boxes (Needs work on dropdown lists positions)
 		S:HandleDropDownBox(LudwigFrameQuality)
 		LudwigFrameQuality:ClearAllPoints()
@@ -54,4 +54,4 @@ function AS:Ludwig()
 	end)
 end
 
-AS:RegisterSkin('Ludwig', AS.Ludwig)
+AS:RegisterSkin('Ludwig', R.Ludwig)

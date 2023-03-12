@@ -3,16 +3,16 @@ if not AS:CheckAddOn('RaiderIO') then return end
 
 local _G = _G
 
-function AS:RaiderIO()
+function R:RaiderIO()
 	if _G.RaiderIO_CustomDropDownListMenuBackdrop then
 		S:HandleTooltip(_G.RaiderIO_CustomDropDownListMenuBackdrop)
 	end
-	
+
 	if _G.Raiderio_CustomDropDownListMenuBackdrop then
 		S:HandleTooltip(_G.Raiderio_CustomDropDownListMenuBackdrop)
 	end
 
-	
+
 	_G.PVEFrame:HookScript("OnShow", function(self)
 		if _G.Raiderio_ProfileTooltip and not _G.Raiderio_ProfileTooltip.IsSkinned then
 			S:HandleFrame(_G.Raiderio_ProfileTooltip)
@@ -27,4 +27,4 @@ function AS:RaiderIO()
 	end)
 end
 
-AS:RegisterSkin('RaiderIO', AS.RaiderIO)
+AS:RegisterSkin('RaiderIO', R.RaiderIO)

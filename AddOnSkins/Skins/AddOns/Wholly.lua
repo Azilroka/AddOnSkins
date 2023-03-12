@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not (AS:CheckAddOn('Wholly') and AS:CheckAddOn('Grail')) then return end
 
-function AS:Wholly()
+function R:Wholly()
 	S:HandleTooltip(com_mithrandir_WhollyTooltip)
 	com_mithrandir_whollyFrame:HookScript('OnShow', function(self)
 		if not self.isSkinned then
@@ -36,4 +36,4 @@ function AS:Wholly()
 	end)
 end
 
-AS:RegisterSkin('Wholly', AS.Wholly)
+AS:RegisterSkin('Wholly', R.Wholly)

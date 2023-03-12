@@ -1,11 +1,11 @@
- 	-- Updated for 10.0.2 November 15th, 2022 GRM ver 1.948 (Classic/Wrath/Live Retail Compatible)
+-- Updated for 10.0.2 November 15th, 2022 GRM ver 1.948 (Classic/Wrath/Live Retail Compatible)
 
 local AS, L, S, R = unpack(AddOnSkins)
 local GRM = {}
 
 if not AS:CheckAddOn('Guild_Roster_Manager') then return end
 
-function AS:GuildRosterManager()
+function R:GuildRosterManager()
 
 	-- For Classic Compatibility and one code-base
 	local buildVersion = select ( 4 , GetBuildInfo() )
@@ -602,7 +602,7 @@ function AS:GuildRosterManager()
 					GRM_MemberDetailMetaData:ClearAllPoints()
 					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , self , "TOPRIGHT" , 2 , 0.5 );
 				end);
-			
+
 				GRM_UI.MemberDetailFrameClassic:SetScript ( "OnHide" , function()
 					GRM_MemberDetailMetaData:ClearAllPoints()
 					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GuildFrame , "TOPRIGHT" , 1 , 5 );
@@ -669,7 +669,7 @@ function AS:GuildRosterManager()
 			isLoaded = true
 		end
 	end)
-	
+
 	GRM_RosterCheckBoxSideFrame:HookScript("OnShow" , function()
 		if not isLoaded2 then
 			-- MISC FRAMES
@@ -798,4 +798,4 @@ function AS:GuildRosterManager()
 
 end
 
-AS:RegisterSkin('Guild_Roster_Manager', AS.GuildRosterManager)
+AS:RegisterSkin('Guild_Roster_Manager', R.GuildRosterManager)

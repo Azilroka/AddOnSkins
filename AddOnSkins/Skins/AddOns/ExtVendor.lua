@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ExtVendor') then return end
 
-function AS:ExtVendor()
+function R:ExtVendor()
 	S:StripTextures(MerchantFrameFilterButton, true)
 	S:HandleButton(MerchantFrameFilterButton)
 
@@ -29,8 +29,8 @@ function AS:ExtVendor()
 		Slot.ItemButton:SetPoint("TOPLEFT", Slot, "TOPLEFT", 4, -4)
 		Slot.ItemButton.IconBorder:SetAlpha(0)
 
-		hooksecurefunc(Slot.ItemButton.IconBorder, 'SetVertexColor', function(self, r, g, b) Slot.ItemButton:SetBackdropBorderColor(r, g, b) end)
-		hooksecurefunc(Slot.ItemButton.IconBorder, 'Hide', function(self) Slot.ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
+		hooksecurefunc(Slot.ItemButton.IconBorder, 'SetVertexColor', function(_, r, g, b) Slot.ItemButton:SetBackdropBorderColor(r, g, b) end)
+		hooksecurefunc(Slot.ItemButton.IconBorder, 'Hide', function() Slot.ItemButton:SetBackdropBorderColor(unpack(AS.BorderColor)) end)
 
 		_G["MerchantItem"..i.."MoneyFrame"]:ClearAllPoints()
 		_G["MerchantItem"..i.."MoneyFrame"]:SetPoint("BOTTOMLEFT", Slot.ItemButton, "BOTTOMRIGHT", 3, 0)
@@ -41,7 +41,7 @@ function AS:ExtVendor()
 		end
 	end
 
-	MerchantFrame:HookScript('OnShow', function(self) self:SetWidth(690) end)
+	MerchantFrame:HookScript('OnShow', function(s) s:SetWidth(690) end)
 end
 
-AS:RegisterSkin('ExtVendor', AS.ExtVendor)
+AS:RegisterSkin('ExtVendor', R.ExtVendor)

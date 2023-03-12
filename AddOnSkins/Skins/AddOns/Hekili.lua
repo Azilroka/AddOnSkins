@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Hekili') then return end
 
-function AS:Hekili()
+function R:Hekili()
 	for Display, _ in ipairs( Hekili.DB.profile.displays ) do
 		for Buttons = 1, Hekili.DB.profile.displays[Display].numIcons do
 			local Button = _G['Hekili_D'..Display..'_B'..Buttons]
@@ -12,4 +12,4 @@ function AS:Hekili()
 	end
 end
 
-AS:RegisterSkin('Hekili', AS.Hekili)
+AS:RegisterSkin('Hekili', R.Hekili)

@@ -2,15 +2,14 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('QuestGuru') then return end
 
-function AS:QuestGuru()
+function R:QuestGuru()
 	S:HandleFrame(QuestGuru)
 	S:HandleFrame(QuestGuru.count)
 	S:HandleFrame(QuestGuruScrollFrame.expandAll)
 	QuestGuru:SetTemplate("Transparent")
 
 	-- Skin QuestGuru Buttons
-	for i = 1, QuestGuru:GetNumChildren() do
-		local object = select(i, QuestGuru:GetChildren())
+	for _, object in pairs({QuestGuru:GetChildren()}) do
 		if object:IsObjectType('Button') then
 			if object:GetText() ~= nil then
 				S:HandleButton(object, true)
@@ -30,11 +29,11 @@ function AS:QuestGuru()
 
 	--Resize Expand/Collapse Button
 	QuestGuruScrollFrame.expandAll:SetSize(120, 30)
-	QuestGuruScrollFrame.expandAll:SetFormattedText(" Expand/Collapse ")
+	QuestGuruScrollFrame.expandAll:SetText(" Expand/Collapse ")
 
 	--Resize Show Map Button
 	QuestGuru.mapButton:SetSize(50, 40)
-	QuestGuru.mapButton:SetFormattedText(" Quest Log ")
+	QuestGuru.mapButton:SetText(" Quest Log ")
 
 	S:HandleScrollBar(QuestGuruScrollFrameScrollBar)
 	S:HandleScrollBar(QuestGuruDetailScrollFrameScrollBar)
@@ -44,4 +43,4 @@ function AS:QuestGuru()
 	S:StripTextures(QuestGuruScrollFrame)
 end
 
-AS:RegisterSkin('QuestGuru', AS.QuestGuru)
+AS:RegisterSkin('QuestGuru', R.QuestGuru)

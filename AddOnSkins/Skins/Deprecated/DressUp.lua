@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('DressUp') then return end
 
-function AS:DressUp()
+function R:DressUp()
 	CustomDressUpFrame.portrait:SetAlpha(0)
 
 	S:HandleButton(CustomDressUpFrame.ResetButton)
@@ -18,4 +18,4 @@ function AS:DressUp()
 	CustomDressUpFrame.Inset:SetAlpha(0)
 end
 
-AS:RegisterSkin('DressUp', AS.DressUp)
+AS:RegisterSkin('DressUp', R.DressUp)

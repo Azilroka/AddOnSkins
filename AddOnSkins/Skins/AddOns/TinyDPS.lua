@@ -4,7 +4,7 @@ if not AS:CheckAddOn('TinyDPS') then return end
 
 local ES = AS.EmbedSystem
 
-function AS:TinyDPS()
+function R:TinyDPS()
 	S:HandleFrame(tdpsFrame)
 	tdpsFrame.backdrop:SetAllPoints()
 
@@ -21,4 +21,4 @@ function AS:TinyDPS()
 	tdpsRefresh()
 end
 
-AS:RegisterSkin('TinyDPS', AS.TinyDPS)
+AS:RegisterSkin('TinyDPS', R.TinyDPS)

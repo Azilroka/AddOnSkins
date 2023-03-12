@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('WhisperPop') then return end
 
-function AS:WhisperPop()
+function R:WhisperPop()
 	S:HandleFrame(WhisperPopFrame)
 	S:HandleFrame(WhisperPopMessageFrame)
 
@@ -23,4 +23,4 @@ function AS:WhisperPop()
 	end
 end
 
-AS:RegisterSkin('WhisperPop', AS.WhisperPop)
+AS:RegisterSkin('WhisperPop', R.WhisperPop)

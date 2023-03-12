@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Pawn') then return end
 
-function AS:Pawn(event, addon)
+function R:Pawn(event, addon)
 	local Texture = "Interface\\AddOns\\Pawn\\Textures\\PawnLogo"
 
 	if addon == 'Blizzard_InspectUI' or event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('Blizzard_InspectUI') then
@@ -97,4 +97,4 @@ function AS:Pawn(event, addon)
 	end
 end
 
-AS:RegisterSkin('Pawn', AS.Pawn, 'ADDON_LOADED')
+AS:RegisterSkin('Pawn', R.Pawn, 'ADDON_LOADED')

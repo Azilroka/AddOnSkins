@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('PetJournalEnhanced') then return end
 
-function AS:PetJournalEnhanced(event, addon)
+function R:PetJournalEnhanced(event, addon)
 	if addon == 'Blizzard_PetJournal' or IsAddOnLoaded('Blizzard_PetJournal') then
 		PetJournal:HookScript('OnShow', function()
 			S:StripTextures(PJEUniquePetCount)
@@ -13,4 +13,4 @@ function AS:PetJournalEnhanced(event, addon)
 	end
 end
 
-AS:RegisterSkin('PetJournalEnhanced', AS.PetJournalEnhanced, 'ADDON_LOADED')
+AS:RegisterSkin('PetJournalEnhanced', R.PetJournalEnhanced, 'ADDON_LOADED')

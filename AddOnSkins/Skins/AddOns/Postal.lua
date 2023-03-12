@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Postal') then return end
 
-function AS:Postal(event, addon)
+function R:Postal(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 
 	InboxPrevPageButton:SetPoint('CENTER', InboxFrame, 'BOTTOMLEFT', 45, 112)
@@ -56,4 +56,4 @@ function AS:Postal(event, addon)
 	AS:UnregisterSkinEvent('Postal', event)
 end
 
-AS:RegisterSkin('Postal', AS.Postal, 'MAIL_SHOW', '[AddonLoader]')
+AS:RegisterSkin('Postal', R.Postal, 'MAIL_SHOW')

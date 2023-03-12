@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Tongues') then return end
 
-function AS:Tongues()
+function R:Tongues()
 	S:HandleFrame(Tongues.UI.MainMenu.Frame)
 	S:HandleFrame(Tongues.UI.MainMenu.AdvancedOptions.Frame)
 	S:HandleButton(Tongues.UI.MiniMenu.Frame)
@@ -55,4 +55,4 @@ function AS:Tongues()
 	S:HandleIcon(Tongues.UI.MainMenu.Minimize.texture[1])
 end
 
-AS:RegisterSkin('Tongues', AS.Tongues)
+AS:RegisterSkin('Tongues', R.Tongues)

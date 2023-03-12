@@ -10,4 +10,4 @@ function R:BuyEmAll()
 	S:HandleButton(BuyEmAllOkayButton)
 end
 
-AS:RegisterSkin('BuyEmAll', R.BuyEmAll, '[AddonLoader]')
+AS:RegisterSkin('BuyEmAll', R.BuyEmAll)

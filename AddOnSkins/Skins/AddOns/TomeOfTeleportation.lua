@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('TomeOfTeleportation') then return end
 
-function AS:TomeOfTeleportation()
+function R:TomeOfTeleportation()
 	local function SkinFrame()
 		S:SetTemplate(TeleporterFrame)
 
@@ -14,4 +14,4 @@ function AS:TomeOfTeleportation()
 	hooksecurefunc(_G, "TeleporterOpenFrame", SkinFrame)
 end
 
-AS:RegisterSkin('TomeOfTeleportation', AS.TomeOfTeleportation)
+AS:RegisterSkin('TomeOfTeleportation', R.TomeOfTeleportation)

@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Incoming') then return end
 
-function AS:Incoming(self)
+function R:Incoming()
 	S:HandleFrame(LocationMessageView)
 
 	local buttons = {
@@ -18,7 +18,7 @@ function AS:Incoming(self)
 
 	for _, button in pairs(buttons) do
 		S:HandleButton(_G[button])
-	end	
+	end
 
 	LocationMessageView:SetWidth(99)
 	LocationMessageView:SetHeight(130)
@@ -34,4 +34,4 @@ function AS:Incoming(self)
 	SendMore:SetPoint('TOPLEFT', LocationMessageView, 'TOPLEFT', 3, -100)
 end
 
-AS:RegisterSkin('Incoming', AS.Incoming)
+AS:RegisterSkin('Incoming', R.Incoming)

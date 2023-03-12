@@ -2,8 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Dresser') then return end
 
-function AS:Dresser()
-
+function R:Dresser()
 	for i = 1, 4 do
 		local Button = _G['DressUpFrameLegacyDresser'..i]
 		S:HandleButton(Button)
@@ -16,4 +15,4 @@ function AS:Dresser()
 	DressUpFrameLegacyDresser4:SetPoint('RIGHT', DressUpFrameLegacyDresser3, 'LEFT', -2, 0)
 end
 
-AS:RegisterSkin('Dresser', AS.Dresser)
+AS:RegisterSkin('Dresser', R.Dresser)

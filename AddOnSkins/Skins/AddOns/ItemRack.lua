@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ItemRack') then return end
 
-function AS:ItemRack()
+function R:ItemRack()
 	local function SkinButton(idx,itemID)
 		if _G["ItemRackMenu"..idx] then
 			S:HandleItemButton(_G["ItemRackMenu"..idx])
@@ -22,4 +22,4 @@ function AS:ItemRack()
 	SkinButton2()
 end
 
-AS:RegisterSkin('ItemRack', AS.ItemRack)
+AS:RegisterSkin('ItemRack', R.ItemRack)

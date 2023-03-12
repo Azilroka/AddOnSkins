@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Saddlebag') then return end
 
-function AS:Saddlebag()
+function R:Saddlebag()
 	local Saddlebag = LibStub("AceAddon-3.0"):GetAddon("Saddlebag")
 	hooksecurefunc(Saddlebag, 'auctionButton', function()
 		if not SaddlebagFrame.isSkinned then
@@ -14,4 +14,4 @@ function AS:Saddlebag()
 	end)
 end
 
-AS:RegisterSkin('Saddlebag', AS.Saddlebag)
+AS:RegisterSkin('Saddlebag', R.Saddlebag)

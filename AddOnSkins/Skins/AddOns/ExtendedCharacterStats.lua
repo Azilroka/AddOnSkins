@@ -2,8 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('ExtendedCharacterStats') then return end
 
-function AS:ExtendedCharacterStats()
-
+function R:ExtendedCharacterStats()
 	-- Main frame
 	ECS_StatsFrame:ClearAllPoints()
 	ECS_StatsFrame:Point('RIGHT', _G.CharacterFrame, 149, 32)
@@ -24,4 +23,4 @@ function AS:ExtendedCharacterStats()
 	ECS_StatsFrame.ScrollFrame.ScrollBar:Point('RIGHT', ECS_StatsFrame, -1, -1)
 end
 
-AS:RegisterSkin('ExtendedCharacterStats', AS.ExtendedCharacterStats)
+AS:RegisterSkin('ExtendedCharacterStats', R.ExtendedCharacterStats)

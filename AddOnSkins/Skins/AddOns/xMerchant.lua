@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('xMerchant') then return end
 
-function AS:xMerchant()
+function R:xMerchant()
 	S:HandleCheckBox(NuuhMerchantFrameTooltipSearching)
 	S:StripTextures(NuuhMerchantFrame, true)
 	S:HandleFrame(NuuhMerchantFrameSearch, 'Default')
@@ -12,4 +12,4 @@ function AS:xMerchant()
 	end
 end
 
-AS:RegisterSkin('xMerchant', AS.xMerchant)
+AS:RegisterSkin('xMerchant', R.xMerchant)

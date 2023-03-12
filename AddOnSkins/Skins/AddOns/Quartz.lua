@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Quartz') then return end
 
-function AS:Quartz()
+function R:Quartz()
 	local Quartz3 = LibStub("AceAddon-3.0"):GetAddon("Quartz3")
 	local GCD = Quartz3:GetModule("GCD")
 	local CastBar = Quartz3.CastBarTemplate.template
@@ -28,4 +28,4 @@ function AS:Quartz()
 	hooksecurefunc(CastBar, 'UNIT_SPELLCAST_CHANNEL_START', SkinQuartzBar)
 end
 
-AS:RegisterSkin('Quartz', AS.Quartz)
+AS:RegisterSkin('Quartz', R.Quartz)
