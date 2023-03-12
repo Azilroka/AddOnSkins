@@ -13,7 +13,7 @@ function AS:PremadeGroupsFilter()
 	S:HandleFrame(PremadeGroupsFilterDialog)
 	S:HandleCloseButton(PremadeGroupsFilterDialog.CloseButton)
 	S:HandleMaxMinFrame(PremadeGroupsFilterDialog.MaximizeMinimizeFrame)
-	S:HandleCheckBox(UsePFGButton)
+	S:HandleCheckBox(UsePGFButton)
 
 	S:HandleCheckBox(PremadeGroupsFilterDialog.Difficulty.Act)
 	S:HandleDropDownBox(PremadeGroupsFilterDialog.Difficulty.DropDown)
