@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('MyRolePlay') then return end
-
 function R:MyRolePlay()
 	S:HandleFrame(MyRolePlayBrowseFrame)
 
@@ -66,4 +64,4 @@ function R:MyRolePlay()
 	end
 end
 
-AS:RegisterSkin('MyRolePlay', R.MyRolePlay)
+AS:RegisterSkin('MyRolePlay')

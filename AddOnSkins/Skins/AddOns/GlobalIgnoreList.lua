@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('GlobalIgnoreList') then return end
-
 function R:GlobalIgnoreList()
 	FriendsFrame:HookScript("OnShow", function()
 		if GIL and not GIL.isSkinned then
@@ -69,4 +67,4 @@ function R:GlobalIgnoreList()
 	end)
 end
 
-AS:RegisterSkin('GlobalIgnoreList', R.GlobalIgnoreList)
+AS:RegisterSkin('GlobalIgnoreList')

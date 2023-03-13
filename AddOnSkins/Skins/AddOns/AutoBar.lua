@@ -1,8 +1,6 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('AutoBar') then return end
-
-function R:AutoBar(event, addon)
+function R:AutoBar()
 	local function AutoBarSkin()
 		for buttonName, button in pairs(AutoBar.buttonList) do
 			if not button.IsStyled then
@@ -33,4 +31,4 @@ function R:AutoBar(event, addon)
 	hooksecurefunc(AutoBarGlobalCodeSpace, 'UpdateSpells', AutoBarSkin)
 end
 
-AS:RegisterSkin('AutoBar', R.AutoBar)
+AS:RegisterSkin('AutoBar')

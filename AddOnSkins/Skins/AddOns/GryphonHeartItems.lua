@@ -1,8 +1,6 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('GHI') then return end
-
-function R:GryphonheartItems()
+function R:GHI()
 	local holder = ExtraActionBarFrame:GetParent()
 	GHI_ExtraButtonFrame:SetParent(holder)
 	GHI_ExtraButtonFrame:ClearAllPoints()
@@ -57,4 +55,4 @@ function R:GryphonheartItems()
 	end)
 end
 
-AS:RegisterSkin('GryphonHeartItems', R.GryphonheartItems)
+AS:RegisterSkin('GHI')

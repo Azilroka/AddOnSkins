@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Omen') then return end
-
 function R:Omen()
 	S:HandleFrame(_G.Omen.BarList)
 	S:HandleFrame(_G.Omen.Title)
@@ -23,4 +21,4 @@ function R:Omen()
 	_G.Omen:ResizeBars()
 end
 
-AS:RegisterSkin('Omen', R.Omen)
+AS:RegisterSkin('Omen')

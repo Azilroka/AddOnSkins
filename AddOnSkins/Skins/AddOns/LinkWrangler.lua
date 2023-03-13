@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('LinkWrangler') then return end
-
 function R:LinkWrangler()
 	local Path = [[Interface\AddOns\AddOnSkins\Media\Textures\Buttons\]]
 
@@ -32,4 +30,4 @@ function R:LinkWrangler()
 	LinkWrangler.RegisterCallback("LinkWrangler_Skin", LWSkin, "show", "showcomp")
 end
 
-AS:RegisterSkin('LinkWrangler', R.LinkWrangler)
+AS:RegisterSkin('LinkWrangler')

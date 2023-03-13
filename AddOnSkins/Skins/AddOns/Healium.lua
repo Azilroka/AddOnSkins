@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Healium') then return end
-
 function R:Healium()
 	local captionFrames = {
 		'HealiumPartyFrame',
@@ -120,4 +118,4 @@ function R:Healium()
 	hooksecurefunc('HealiumUnitFrames_Button_OnLoad', skinUnitFrame)
 end
 
-AS:RegisterSkin('Healium', R.Healium)
+AS:RegisterSkin('Healium')

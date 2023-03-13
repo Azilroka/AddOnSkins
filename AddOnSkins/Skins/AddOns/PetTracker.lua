@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('PetTracker') then return end
-
 function R:PetTracker(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		if not AS:CheckAddOn('Carbonite.Quests') then
@@ -164,4 +162,4 @@ function R:PetTracker(event, addon)
 	end
 end
 
-AS:RegisterSkin('PetTracker', R.PetTracker, 'ADDON_LOADED')
+AS:RegisterSkin('PetTracker', nil, 'ADDON_LOADED')

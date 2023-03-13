@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Examiner') then return end
-
 function R:Examiner()
 	S:HandleFrame(Examiner)
 	S:HandleScrollBar(ExaminerStatsScrollScrollBar)
@@ -71,4 +69,4 @@ function R:Examiner()
 	Examiner.model:SetPoint('BOTTOMLEFT', Examiner, 'BOTTOMLEFT', 22, 22)
 end
 
-AS:RegisterSkin('Examiner', R.Examiner)
+AS:RegisterSkin('Examiner')

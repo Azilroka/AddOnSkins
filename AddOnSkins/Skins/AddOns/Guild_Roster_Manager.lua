@@ -3,9 +3,7 @@
 local AS, L, S, R = unpack(AddOnSkins)
 local GRM = {}
 
-if not AS:CheckAddOn('Guild_Roster_Manager') then return end
-
-function R:GuildRosterManager()
+function R:Guild_Roster_Manager()
 
 	-- For Classic Compatibility and one code-base
 	local buildVersion = select ( 4 , GetBuildInfo() )
@@ -746,7 +744,7 @@ function R:GuildRosterManager()
 							tileSize = 32,
 							edgeSize = 9,
 							insets = { left = -2 , right = -2 , top = -3 , bottom = -2 }
-						} );				
+						} )
 					end
 				end
 			end);
@@ -798,4 +796,4 @@ function R:GuildRosterManager()
 
 end
 
-AS:RegisterSkin('Guild_Roster_Manager', R.GuildRosterManager)
+AS:RegisterSkin('Guild_Roster_Manager')

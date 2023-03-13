@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('ServerHop') then return end
-
 function R:ServerHop()
 	local hopAddOn = _G["ServerHop"]
 	local hopFrame = hopAddOn.hopFrame
@@ -20,4 +18,4 @@ function R:ServerHop()
 	S:HandleDropDownBox(CountDrop)
 end
 
-AS:RegisterSkin('ServerHop', R.ServerHop)
+AS:RegisterSkin('ServerHop')

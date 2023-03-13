@@ -37,7 +37,6 @@
 	<Script file="DejaCharacterStats.lua"/>
 	<Script file="Dominos.lua"/>
 	<Script file="EasyMail.lua"/>
-	<Script file="Easy_Obliterate.lua"/>
 	<Script file="EavesDrop.lua"/>
 	<Script file="EnchantCheck.lua"/>
 	<Script file="EnergyWatch.lua"/>

@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('EasyMail') then return end
-
 function R:EasyMail(event)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 	MailFrame:SetSize(360, 440)
@@ -47,4 +45,4 @@ function R:EasyMail(event)
 	AS:UnregisterSkinEvent('EasyMail', event)
 end
 
-AS:RegisterSkin('EasyMail', R.EasyMail, 'MAIL_SHOW')
+AS:RegisterSkin('EasyMail', nil, 'MAIL_SHOW')

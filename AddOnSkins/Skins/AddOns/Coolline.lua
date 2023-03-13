@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('CoolLine') then return end
-
 function R:CoolLine()
 	CoolLineDB.bgcolor = { r = 0, g = 0, b = 0, a = 0, }
 	CoolLineDB.border = 'None'
@@ -12,4 +10,4 @@ function R:CoolLine()
 	AS:RegisterForPetBattleHide(CoolLine)
 end
 
-AS:RegisterSkin('CoolLine', R.CoolLine, '[ElvUI_CoolLine]')
+AS:RegisterSkin('CoolLine', nil, '[ElvUI_CoolLine]')

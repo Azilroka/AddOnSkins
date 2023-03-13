@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Ludwig') then return end
-
 function R:Ludwig()
 	hooksecurefunc(Ludwig, 'ToggleSearchFrame', function()
 		if LudwigFrame.isSkinned then return end
@@ -54,4 +52,4 @@ function R:Ludwig()
 	end)
 end
 
-AS:RegisterSkin('Ludwig', R.Ludwig)
+AS:RegisterSkin('Ludwig')

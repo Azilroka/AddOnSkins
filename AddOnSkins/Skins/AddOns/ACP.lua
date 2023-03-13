@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('ACP') then return end
-
 function R:ACP()
 	local function cbResize(self, event, ...)
 		for i = 1, 20 do
@@ -39,4 +37,4 @@ function R:ACP()
 	ACP_AddonListBottomClose:SetPoint("BOTTOMRIGHT", ACP_AddonList, "BOTTOMRIGHT", -74, 20)
 end
 
-AS:RegisterSkin('ACP', R.ACP)
+AS:RegisterSkin('ACP')

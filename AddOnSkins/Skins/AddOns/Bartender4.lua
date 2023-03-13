@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Bartender4') then return end
-
 function R:Bartender4()
 	local function StyleNormalButton(self)
 		local Name = self:GetName()
@@ -101,4 +99,4 @@ function R:Bartender4()
 	end
 end
 
-AS:RegisterSkin('Bartender4', R.Bartender4)
+AS:RegisterSkin('Bartender4')

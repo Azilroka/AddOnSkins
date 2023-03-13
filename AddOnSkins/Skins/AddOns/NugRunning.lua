@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('NugRunning') then return end
-
 function R:NugRunning()
 	hooksecurefunc(NugRunning, 'ActivateTimer', function(self, w, h)
 		for _, timer in pairs(self.timers) do
@@ -18,4 +16,4 @@ function R:NugRunning()
 	end)
 end
 
-AS:RegisterSkin('NugRunning', R.NugRunning)
+AS:RegisterSkin('NugRunning')

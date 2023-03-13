@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('ShieldBars') then return end
-
 function R:ShieldBars()
 	hooksecurefunc(ShieldBars, 'DisplayShields', function()
 		local i = 1
@@ -12,4 +10,4 @@ function R:ShieldBars()
 	end)
 end
 
-AS:RegisterSkin('ShieldBars', R.ShieldBars)
+AS:RegisterSkin('ShieldBars')

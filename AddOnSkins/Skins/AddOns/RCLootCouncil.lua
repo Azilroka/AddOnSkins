@@ -1,8 +1,6 @@
 local AS, L, S, R = unpack(AddOnSkins)
-if not AS:CheckAddOn('RCLootCouncil') then return end
 
 function R:RCLootCouncil()
-
 	--MainFrame:SetScale(1)
 	S:HandleFrame(MainFrame, 'Transparent', true)
 	S:HandleFrame(ContentFrame, 'Default')
@@ -50,4 +48,4 @@ function R:RCLootCouncil()
 	S:HandleScrollBar(RCVersionFrameContentFrameScrollBar)
 end
 
-AS:RegisterSkin('RCLootCouncil', R.RCLootCouncil)
+AS:RegisterSkin('RCLootCouncil')

@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('ExtVendor') then return end
-
 function R:ExtVendor()
 	S:StripTextures(MerchantFrameFilterButton, true)
 	S:HandleButton(MerchantFrameFilterButton)
@@ -44,4 +42,4 @@ function R:ExtVendor()
 	MerchantFrame:HookScript('OnShow', function(s) s:SetWidth(690) end)
 end
 
-AS:RegisterSkin('ExtVendor', R.ExtVendor)
+AS:RegisterSkin('ExtVendor')

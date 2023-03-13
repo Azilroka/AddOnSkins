@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('KarniCrap') then return end
-
 function R:KarniCrap()
 	local Frames = {
 		KarniCrap,
@@ -140,4 +138,4 @@ function R:KarniCrap()
 	end
 end
 
-AS:RegisterSkin('KarniCrap', R.KarniCrap)
+AS:RegisterSkin('KarniCrap')

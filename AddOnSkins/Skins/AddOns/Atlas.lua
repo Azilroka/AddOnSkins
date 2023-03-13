@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Atlas') then return end
-
 function R:Atlas(event, addon)
 	S:HandleFrame(AtlasFrame)
 	S:HandleFrame(AtlasFrameSmall)
@@ -48,4 +46,4 @@ function R:Atlas(event, addon)
 	AtlasSwitchButton:SetPoint('BOTTOMRIGHT', AtlasFrame, 'BOTTOMRIGHT', -10, 10)
 end
 
-AS:RegisterSkin('Atlas', R.Atlas)
+AS:RegisterSkin('Atlas')

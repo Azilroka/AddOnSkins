@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('InvenMount') then return end
-
 function R:InvenMount(event, addon)
 	if addon == "Blizzard_PetJournal" or event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded("Blizzard_PetJournal") then
 		for i = 1, #MountJournal.ListScrollFrame.buttons do
@@ -47,4 +45,4 @@ function R:InvenMount(event, addon)
 	end
 end
 
-AS:RegisterSkin('InvenMount', R.InvenMount, 'ADDON_LOADED')
+AS:RegisterSkin('InvenMount', nil, 'ADDON_LOADED')

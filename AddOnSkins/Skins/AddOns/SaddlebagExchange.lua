@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Saddlebag') then return end
-
 function R:Saddlebag()
 	local Saddlebag = LibStub("AceAddon-3.0"):GetAddon("Saddlebag")
 	hooksecurefunc(Saddlebag, 'auctionButton', function()
@@ -14,4 +12,4 @@ function R:Saddlebag()
 	end)
 end
 
-AS:RegisterSkin('Saddlebag', R.Saddlebag)
+AS:RegisterSkin('Saddlebag')

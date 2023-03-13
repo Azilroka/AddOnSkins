@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Capping') then return end
-
 function R:Capping()
 	CappingFrame:HookScript('OnUpdate', function(s)
 		for bar in pairs(s.bars) do
@@ -12,4 +10,4 @@ function R:Capping()
 	end)
 end
 
-AS:RegisterSkin('Capping', R.Capping)
+AS:RegisterSkin('Capping')

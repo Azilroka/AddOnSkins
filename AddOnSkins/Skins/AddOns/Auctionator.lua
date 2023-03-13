@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Auctionator') then return end
-
 -- Credits: Simpy
 local _G = _G
 local next = next
@@ -472,7 +470,7 @@ local function StartSkinning()
 	HandleLostThings()
 end
 
-function AS:Auctionator(event)
+function R:Auctionator(event)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		SkinOptions()
 	end
@@ -483,4 +481,4 @@ function AS:Auctionator(event)
 	end
 end
 
-AS:RegisterSkin('Auctionator', AS.Auctionator, 'AUCTION_HOUSE_SHOW', 'ADDON_LOADED')
+AS:RegisterSkin('Auctionator', nil, 'AUCTION_HOUSE_SHOW', 'ADDON_LOADED')

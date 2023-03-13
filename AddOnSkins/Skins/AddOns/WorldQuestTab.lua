@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('WorldQuestTab') then return end
-
 function R:WorldQuestTab()
 	S:HandleButton(WQT_TabNormal)
 	S:HandleButton(WQT_TabWorld)
@@ -27,4 +25,4 @@ function R:WorldQuestTab()
 	end
 end
 
-AS:RegisterSkin('WorldQuestTab', R.WorldQuestTab)
+AS:RegisterSkin('WorldQuestTab')

@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('FlightMapEnhanced') then return end
-
 function R:FlightMapEnhanced()
 	S:HandleFrame(FlightMapEnhancedTaxiChoice, true)
 	S:HandleCloseButton(FlightMapEnhancedTaxiChoice.CloseButton)
@@ -13,4 +11,4 @@ function R:FlightMapEnhanced()
 	end)
 end
 
-AS:RegisterSkin('FlightMapEnhanced', R.FlightMapEnhanced)
+AS:RegisterSkin('FlightMapEnhanced')

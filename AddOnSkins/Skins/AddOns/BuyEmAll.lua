@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not (AS:CheckAddOn('BuyEmAll') or AS:CheckAddOn('BuyEmAllClassic')) then return end
-
 function R:BuyEmAll()
 	S:HandleFrame(BuyEmAllFrame)
 	S:HandleButton(BuyEmAllStackButton)
@@ -10,4 +8,4 @@ function R:BuyEmAll()
 	S:HandleButton(BuyEmAllOkayButton)
 end
 
-AS:RegisterSkin('BuyEmAll', R.BuyEmAll)
+AS:RegisterSkin('BuyEmAll')

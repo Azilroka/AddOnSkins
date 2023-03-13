@@ -1,8 +1,6 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('FlyPlateBuffs') then return end
-
-function R:FPB()
+function R:FlyPlateBuffs()
 	local C_NamePlate_GetNamePlateForUnit = C_NamePlate.GetNamePlateForUnit
 
 	local function skinNameplateButton(Button)
@@ -39,4 +37,4 @@ function R:FPB()
 	end)
 end
 
-AS:RegisterSkin('FlyPlateBuffs', R.FPB)
+AS:RegisterSkin('FlyPlateBuffs')

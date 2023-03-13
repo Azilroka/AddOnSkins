@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn("Ogri'Lazy") then return end
-
 function R:OgriLazy()
 	S:HandleFrame(Relic_View)
 	S:HandleCloseButton(Relic_View.close)
@@ -13,4 +11,4 @@ function R:OgriLazy()
 	end
 end
 
-AS:RegisterSkin('OgriLazy', R.OgriLazy)
+AS:RegisterSkin("Ogri'Lazy", R.OgriLazy)

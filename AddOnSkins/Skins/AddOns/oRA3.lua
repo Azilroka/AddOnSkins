@@ -1,8 +1,6 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('oRA3') then return end
-
-function R:oRA3(event, addon)
+function R:oRA3()
 	local SkinOra = function(module)
 		if module == "main" and not oRA3Frame.IsSkinned then
 			local buttonNames = {["oRA3Disband"] = true, ["oRA3Options"] = true}
@@ -111,4 +109,4 @@ function R:oRA3(event, addon)
 	end
 end
 
-AS:RegisterSkin('oRA3', R.oRA3, 'ADDON_LOADED')
+AS:RegisterSkin('oRA3')

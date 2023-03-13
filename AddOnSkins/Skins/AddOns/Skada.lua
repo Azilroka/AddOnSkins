@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Skada') then return end
-
 function R:Skada()
 	local SkadaDisplayBar = Skada.displays['bar']
 
@@ -70,4 +68,4 @@ function R:Skada()
 	end)
 end
 
-AS:RegisterSkin('Skada', R.Skada)
+AS:RegisterSkin('Skada')

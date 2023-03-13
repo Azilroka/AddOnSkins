@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Dominos') then return end
-
 function R:Dominos()
 	local function StyleNormalButton(self)
 		local name = self:GetName()
@@ -143,4 +141,4 @@ function R:Dominos()
 	end
 end
 
-AS:RegisterSkin('Dominos', R.Dominos)
+AS:RegisterSkin('Dominos')

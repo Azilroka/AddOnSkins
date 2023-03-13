@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('BagSync') then return end
-
 function R:BagSync()
 	local Frames = {
 		BagSync_SearchFrame,
@@ -53,4 +51,4 @@ function R:BagSync()
 	-- end)
 end
 
-AS:RegisterSkin('BagSync', R.BagSync)
+AS:RegisterSkin('BagSync')

@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Keyed') then return end
-
 function R:Keyed()
 	S:HandleFrame(KeyedFrame)
 	S:HandleFrame(KeyedFrameInset)
@@ -18,4 +16,4 @@ function R:Keyed()
 	KeyedFrameColumnHeader3:SetWidth(48)
 end
 
-AS:RegisterSkin('Keyed', R.Keyed)
+AS:RegisterSkin('Keyed')

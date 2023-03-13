@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('MageNuggets') then return end
-
 function R:MageNuggets()
 	local Frames = {
 		'MNSpellSteal_Frame',
@@ -77,4 +75,4 @@ function R:MageNuggets()
 	MNabCast_Frame:SetPoint('BOTTOM', MageNugAB_Frame, 'TOP', 0, 6)
 end
 
-AS:RegisterSkin('MageNuggets', R.MageNuggets)
+AS:RegisterSkin('MageNuggets')

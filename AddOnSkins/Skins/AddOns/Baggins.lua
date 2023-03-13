@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Baggins') then return end
-
 function R:Baggins()
 	local AddOnSkins_BagginsSkin = {
 		BagLeftPadding = 10,
@@ -107,4 +105,4 @@ function R:Baggins()
 	end)
 end
 
-AS:RegisterSkinForPreload('Baggins', AS.Baggins)
+AS:RegisterSkinForPreload('Baggins')

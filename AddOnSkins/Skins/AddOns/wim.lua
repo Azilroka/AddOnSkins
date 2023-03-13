@@ -1,9 +1,6 @@
-
 local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
-
-if not AS:CheckAddOn("WIM") then return end
 
 function R:WIM(event)
 	if event == 'PLAYER_ENTERING_WORLD' then
@@ -63,4 +60,4 @@ function R:WIM(event)
 	end
 end
 
-AS:RegisterSkin('WIM', R.WIM, 'ADDON_LOADED')
+AS:RegisterSkin('WIM')

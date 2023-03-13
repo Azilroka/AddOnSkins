@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('AuctionLite') then return end
-
 function R:AuctionLite(event)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 
@@ -35,4 +33,4 @@ function R:AuctionLite(event)
 	AS:UnregisterSkinEvent('AuctionLite', event)
 end
 
-AS:RegisterSkin('AuctionLite', R.AuctionLite, 'AUCTION_HOUSE_SHOW')
+AS:RegisterSkin('AuctionLite', nil, 'AUCTION_HOUSE_SHOW')

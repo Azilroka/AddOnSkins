@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Postal') then return end
-
 function R:Postal(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 
@@ -56,4 +54,4 @@ function R:Postal(event, addon)
 	AS:UnregisterSkinEvent('Postal', event)
 end
 
-AS:RegisterSkin('Postal', R.Postal, 'MAIL_SHOW')
+AS:RegisterSkin('Postal', nil, 'MAIL_SHOW')

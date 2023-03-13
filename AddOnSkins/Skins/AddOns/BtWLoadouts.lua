@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('BtWLoadouts') then return end
-
 local _G = _G
 local pairs = pairs
 
@@ -101,4 +99,4 @@ function R:BtWLoadouts()
 	end
 end
 
-AS:RegisterSkin('BtWLoadouts', R.BtWLoadouts)
+AS:RegisterSkin('BtWLoadouts')

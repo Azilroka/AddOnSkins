@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Classic Quest Log') then return end
-
 function R:ClassicQuestLog()
 	S:HandleFrame(ClassicQuestLog, "Transparent")
 	S:HandleScrollBar(ClassicQuestLogScrollFrameScrollBar)

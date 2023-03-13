@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('InboxMailBag') then return end
-
 function R:InboxMailBag(event)
 	if event ~= 'MAIL_SHOW' then return end
 	S:StripTextures(InboxMailbagFrame)
@@ -30,4 +28,4 @@ function R:InboxMailBag(event)
 	AS:UnregisterSkinEvent('InboxMailBag', event)
 end
 
-AS:RegisterSkin('InboxMailBag', R.InboxMailBag, 'MAIL_SHOW')
+AS:RegisterSkin('InboxMailBag', nil, 'MAIL_SHOW')

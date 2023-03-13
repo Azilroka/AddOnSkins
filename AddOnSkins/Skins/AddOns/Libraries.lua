@@ -291,4 +291,4 @@ function R:Libraries()
 	end
 end
 
-AS:RegisterSkin('Libraries', R.Libraries)
+AS:RegisterSkin('Libraries')

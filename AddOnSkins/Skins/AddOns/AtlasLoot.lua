@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('AtlasLoot') then return end
-
 function R:AtlasLoot(event, addon)
 	S:HandleFrame(AtlasLootTooltip)
 	AtlasLootTooltip:HookScript('OnShow', function(self)
@@ -87,4 +85,4 @@ function R:AtlasLoot(event, addon)
 	end)
 end
 
-AS:RegisterSkin('AtlasLoot', R.AtlasLoot)
+AS:RegisterSkin('AtlasLoot')

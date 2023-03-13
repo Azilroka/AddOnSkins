@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('SilverDragon') then return end
-
 function R:SilverDragon()
 	local SilverDragon = LibStub("AceAddon-3.0"):GetAddon("SilverDragon")
 	local module = SilverDragon:GetModule("ClickTarget")
@@ -42,4 +40,4 @@ function R:SilverDragon()
 
 end
 
-AS:RegisterSkin('SilverDragon', R.SilverDragon)
+AS:RegisterSkin('SilverDragon')

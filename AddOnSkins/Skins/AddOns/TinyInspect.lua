@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('TinyInspect') then return end
-
 function R:TinyInspect()
 	for i = 1, 9 do
 		select(i, TinyInspectRaidFrame:GetRegions()):Hide()
@@ -20,4 +18,4 @@ function R:TinyInspect()
 	end)
 end
 
-AS:RegisterSkin('TinyInspect', R.TinyInspect)
+AS:RegisterSkin('TinyInspect')

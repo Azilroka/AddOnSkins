@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('QuestGuru') then return end
-
 function R:QuestGuru()
 	S:HandleFrame(QuestGuru)
 	S:HandleFrame(QuestGuru.count)
@@ -43,4 +41,4 @@ function R:QuestGuru()
 	S:StripTextures(QuestGuruScrollFrame)
 end
 
-AS:RegisterSkin('QuestGuru', R.QuestGuru)
+AS:RegisterSkin('QuestGuru')

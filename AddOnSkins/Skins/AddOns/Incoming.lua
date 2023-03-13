@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Incoming') then return end
-
 function R:Incoming()
 	S:HandleFrame(LocationMessageView)
 
@@ -34,4 +32,4 @@ function R:Incoming()
 	SendMore:SetPoint('TOPLEFT', LocationMessageView, 'TOPLEFT', 3, -100)
 end
 
-AS:RegisterSkin('Incoming', R.Incoming)
+AS:RegisterSkin('Incoming')

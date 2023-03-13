@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Pawn') then return end
-
 function R:Pawn(event, addon)
 	local Texture = "Interface\\AddOns\\Pawn\\Textures\\PawnLogo"
 
@@ -97,4 +95,4 @@ function R:Pawn(event, addon)
 	end
 end
 
-AS:RegisterSkin('Pawn', R.Pawn, 'ADDON_LOADED')
+AS:RegisterSkin('Pawn', nil, 'ADDON_LOADED')

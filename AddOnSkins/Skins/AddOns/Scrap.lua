@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Scrap') then return end
-
 function R:Scrap(event, addon)
 	if addon == 'Scrap_Merchant' or IsAddOnLoaded('Scrap_Merchant') then
 		local function skinButton()
@@ -42,4 +40,4 @@ function R:Scrap(event, addon)
 	end
 end
 
-AS:RegisterSkin('Scrap', R.Scrap, 'ADDON_LOADED')
+AS:RegisterSkin('Scrap', nil, 'ADDON_LOADED')

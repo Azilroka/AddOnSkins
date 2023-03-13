@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn("Talented") then return end
-
 function R:Talented(_, addon)
     if addon ~= "Blizzard_TalentUI" then return end
 
@@ -30,4 +28,4 @@ function R:Talented(_, addon)
     AS:Delay(0.02, TalentedSkin)
 end
 
-AS:RegisterSkin('Talented', R.Talented, "ADDON_LOADED")
+AS:RegisterSkin('Talented', nil, "ADDON_LOADED")

@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Lightheaded') then return end
-
 function R:LightHeaded()
 	S:HandleFrame(LightHeadedFrame)
 	--QuestNPCModel:SetScale(UIParent:GetScale())
@@ -21,4 +19,4 @@ function R:LightHeaded()
 	LightHeadedFrameSub.title:SetTextColor(23 / 255, 132 / 255, 209 / 255)
 end
 
-AS:RegisterSkin('Lightheaded', R.LightHeaded)
+AS:RegisterSkin('Lightheaded')

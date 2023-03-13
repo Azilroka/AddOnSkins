@@ -1,8 +1,6 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Hack') then return end
-
-function R:Hack(event)
+function R:Hack()
 	S:HandleFrame(HackListFrame)
 	S:HandleFrame(HackEditFrame)
 	S:HandleCloseButton(HackListFrameClose)
@@ -15,4 +13,4 @@ function R:Hack(event)
 	S:HandleTab(HackListFrameTab2)
 end
 
-AS:RegisterSkin('Hack', R.Hack)
+AS:RegisterSkin('Hack')

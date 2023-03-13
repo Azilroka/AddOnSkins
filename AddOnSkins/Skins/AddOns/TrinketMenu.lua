@@ -1,9 +1,6 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('TrinketMenu') then return end
-
 function R:TrinketMenu()
-
 	-- Config Panel
 	local TrinketMenu = _G.TrinketMenu
 	S:HandleFrame(TrinketMenu_OptFrame)
@@ -78,4 +75,4 @@ function R:TrinketMenu()
 	end
 end
 
-AS:RegisterSkin('TrinketMenu', R.TrinketMenu)
+AS:RegisterSkin('TrinketMenu')

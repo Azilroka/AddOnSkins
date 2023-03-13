@@ -1,8 +1,6 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Immersion') then return end
-
-function R:Immersion(event, addon)
+function R:Immersion()
 	S:HandleFrame(ImmersionFrame.TalkBox.BackgroundFrame, true)
 	S:CreateShadow(ImmersionFrame.TalkBox.BackgroundFrame.backdrop)
 
@@ -140,4 +138,4 @@ function R:Immersion(event, addon)
 	end)
 end
 
-AS:RegisterSkin('Immersion', R.Immersion)
+AS:RegisterSkin('Immersion')

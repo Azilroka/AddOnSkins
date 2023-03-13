@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('GupPet') then return end
-
 function R:GupPet()
 --[[
 	if GupPet_IngameFrameTemplateAuto then
@@ -49,4 +47,4 @@ function R:GupPet()
 	S:HandleTab(GupPet_InterfaceOptionsFrameMountsCompanionsMainTabCompanion)
 end
 
-AS:RegisterSkin('GupPet', R.GupPet)
+AS:RegisterSkin('GupPet')

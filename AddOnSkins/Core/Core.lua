@@ -1,6 +1,6 @@
 AddOnSkins[2] = AddOnSkins[1].Libs.ACL:GetLocale('AddOnSkins', GetLocale()) -- Locale doesn't exist yet, make it exist.
 
-local AS, L = unpack(AddOnSkins)
+local AS, L, S, R = unpack(AddOnSkins)
 local AddOnName = ...
 
 local ES = AS.EmbedSystem
@@ -110,7 +110,7 @@ end
 
 function AS:SkinEvent(event, ...)
 	for skin, funcs in pairs(AS.skins) do
-		if AS.events[event][skin] and AS:CheckOption(skin) then
+		if AS.events[event][skin] and AS:CheckOption(skin) and AS:CheckAddOn(skin) then
 			for _, func in ipairs(funcs) do
 				AS:CallSkin(skin, func, event, ...)
 			end
@@ -135,7 +135,7 @@ function AS:RegisterSkin(addonName, skinFunc, ...)
 	end
 
 	if not AS.skins[addonName] then AS.skins[addonName] = {} end
-	AS.skins[addonName][priority] = skinFunc
+	AS.skins[addonName][priority] = skinFunc or R[addonName]
 end
 
 function AS:UnregisterSkin(addonName)
@@ -235,7 +235,7 @@ function AS:StartSkinning()
 		end
 	end
 
-	for addonName, funcs in AS:OrderedPairs(AS.skins) do
+	for addonName, funcs in next, AS.skins do
 		-- Check Blizzard
 		if strfind(addonName, 'Blizzard_') and AS:CheckOption(addonName) then
 			for _, func in ipairs(funcs) do
@@ -274,9 +274,10 @@ end
 
 function AS:Init(event, addon)
 	if event == 'ADDON_LOADED' and IsAddOnLoaded(AddOnName) then
-		AS:BuildProfile()
-
-		AS:UpdateMedia()
+		if addon == AddOnName then
+			AS:BuildProfile()
+			AS:UpdateMedia()
+		end
 
 		AS:RunPreload(addon)
 	end

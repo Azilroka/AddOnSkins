@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('AllTheThings') then return end
-
 function R:AllTheThings()
 	for _, Instance in pairs({ 'Prime', 'CurrentInstance' }) do
 		local Window = AllTheThings:GetWindow(Instance)
@@ -12,5 +10,5 @@ function R:AllTheThings()
 	end
 end
 
-AS:RegisterSkin('AllTheThings', R.AllTheThings)
+AS:RegisterSkin('AllTheThings')
 

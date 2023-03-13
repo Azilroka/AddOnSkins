@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('MailCommander') then return end
-
 function R:MailCommander()
 	S:HandleFrame(MailCommanderFrame)
 	S:HandleCloseButton(MailCommanderFrame.CloseButton)
@@ -45,4 +43,4 @@ function R:MailCommander()
 	end)
 end
 
-AS:RegisterSkin('MailCommander', R.MailCommander)
+AS:RegisterSkin('MailCommander')

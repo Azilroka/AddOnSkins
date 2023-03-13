@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('SexyCooldown2') then return end
-
 function R:SexyCooldown2()
 	local function SCDStripSkinSettings(bar)
 		bar.optionsTable.args.icon.args.borderheader = nil
@@ -61,4 +59,4 @@ function R:SexyCooldown2()
 	end)
 end
 
-AS:RegisterSkin('SexyCooldown2', R.SexyCooldown2)
+AS:RegisterSkin('SexyCooldown2')

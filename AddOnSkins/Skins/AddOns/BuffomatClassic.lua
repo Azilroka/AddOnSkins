@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('BuffomatClassic') then return end
-
 function R:BuffomatClassic()
 	local Buttons = {
 		BomC_MainWindow_CloseButton,
@@ -28,4 +26,4 @@ function R:BuffomatClassic()
 	BomC_MainWindowTab2:SetPoint(point, relTo, relPoint, (xOfs+18), yOfs)
 end
 
-AS:RegisterSkin('BuffomatClassic', R.BuffomatClassic)
+AS:RegisterSkin('BuffomatClassic')

@@ -1,5 +1,4 @@
 local AS, L, S, R = unpack(AddOnSkins)
-if not AS:CheckAddOn('Recount') then return end
 
 local ES = AS.EmbedSystem
 
@@ -65,4 +64,4 @@ function R:Recount()
 	end)
 end
 
-AS:RegisterSkin('Recount', R.Recount)
+AS:RegisterSkin('Recount')

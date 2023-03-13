@@ -1,5 +1,4 @@
 local AS, L, S, R = unpack(AddOnSkins)
-if not AS:CheckAddOn('RaiderIO') then return end
 
 local _G = _G
 
@@ -27,4 +26,4 @@ function R:RaiderIO()
 	end)
 end
 
-AS:RegisterSkin('RaiderIO', R.RaiderIO)
+AS:RegisterSkin('RaiderIO')

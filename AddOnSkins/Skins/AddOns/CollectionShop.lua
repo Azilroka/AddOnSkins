@@ -1,8 +1,6 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('CollectionShop') then return end
-
-function R:CollectionShop(event, addon)
+function R:CollectionShop(_, addon)
 	if addon ~= 'Blizzard_AuctionUI' then return end
 	AS:Delay(.1, function()
 		for i = 1, AuctionFrame.numTabs do
@@ -11,16 +9,16 @@ function R:CollectionShop(event, addon)
 		-- AuctionFrameCollectionShop
 		S:StripTextures(AuctionFrameCollectionShop_FlyoutPanelButton)
 		S:HandleNextPrevButton(AuctionFrameCollectionShop_FlyoutPanelButton, AuctionFrameCollectionShop_FlyoutPanelButton.FlyoutPanel:IsShown() and 'left' or 'right')
-		AuctionFrameCollectionShop_FlyoutPanelButton:HookScript('PostClick', function(self)
-			if self.FlyoutPanel:IsShown() then
-				S:HandleNextPrevButton(self, 'left')
+		AuctionFrameCollectionShop_FlyoutPanelButton:HookScript('PostClick', function(s)
+			if s.FlyoutPanel:IsShown() then
+				S:HandleNextPrevButton(s, 'left')
 			else
-				S:HandleNextPrevButton(self, 'right')
+				S:HandleNextPrevButton(s, 'right')
 			end
 		end)
-		AuctionFrameCollectionShop_FlyoutPanelButton.SetNormalTexture = AS.Noop
-		AuctionFrameCollectionShop_FlyoutPanelButton.SetHightlightTexture = AS.Noop
-		AuctionFrameCollectionShop_FlyoutPanelButton.SetPushedTexture = AS.Noop
+		AuctionFrameCollectionShop_FlyoutPanelButton.SetNormalTexture = S.noop
+		AuctionFrameCollectionShop_FlyoutPanelButton.SetHightlightTexture = S.noop
+		AuctionFrameCollectionShop_FlyoutPanelButton.SetPushedTexture = S.noop
 
 		S:HandleCheckBox(AuctionFrameCollectionShop_LiveCheckButton)
 		S:HandleCheckBox(AuctionFrameCollectionShop_UndressCharacterCheckButton)
@@ -41,4 +39,4 @@ function R:CollectionShop(event, addon)
 	end)
 end
 
-AS:RegisterSkin('CollectionShop', R.CollectionShop, 'ADDON_LOADED')
+AS:RegisterSkin('CollectionShop', nil, 'ADDON_LOADED')

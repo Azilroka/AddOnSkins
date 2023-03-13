@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('AAP-Core') then return end
-
 function R:AzerothAutoPilot()
 	for Key, Child in pairs(AAP.QuestList) do
 		if Key ~= 0 and Child and Child.IsObjectType then

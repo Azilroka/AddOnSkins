@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('ArkInventory') then return end
-
 function R:ArkInventory()
 	hooksecurefunc(ArkInventory, 'Frame_Main_Paint', function(frame)
 		if not ArkInventory.ValidFrame(frame, true) then return end
@@ -102,4 +100,4 @@ function R:ArkInventory()
 	end
 end
 
-AS:RegisterSkin('ArkInventory', R.ArkInventory)
+AS:RegisterSkin('ArkInventory')

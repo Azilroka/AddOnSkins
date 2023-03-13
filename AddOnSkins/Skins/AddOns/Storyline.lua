@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Storyline') then return end
-
 function R:Storyline()
 	S:HandleFrame(Storyline_NPCFrame)
 	S:HandleCloseButton(Storyline_NPCFrameClose)
@@ -19,4 +17,4 @@ function R:Storyline()
 	Storyline_NPCFrameConfigButton:SetPoint('BOTTOM', Storyline_NPCFrameResizeButton, 'TOP', 1, 2)
 end
 
-AS:RegisterSkin('Storyline', R.Storyline)
+AS:RegisterSkin('Storyline')

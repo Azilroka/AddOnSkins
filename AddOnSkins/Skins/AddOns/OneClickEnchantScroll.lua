@@ -1,8 +1,6 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('OneClickEnchantScroll') then return end
-
-function R:OneClickEnchantScroll(event, addon)
+function R:OneClickEnchantScroll(_, addon)
 	if addon == 'OneClickEnchantScroll' then
 		S:HandleButton(TradeSkillCreateScrollButton, true)
 		TradeSkillCreateScrollButton:ClearAllPoints()
@@ -12,4 +10,4 @@ function R:OneClickEnchantScroll(event, addon)
 	end
 end
 
-AS:RegisterSkin('OneClickEnchantScroll', R.OneClickEnchantScroll, 'ADDON_LOADED')
+AS:RegisterSkin('OneClickEnchantScroll', nil, 'ADDON_LOADED')

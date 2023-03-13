@@ -1,8 +1,6 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not (AS:CheckAddOn('ZygorGuidesViewer') or AS:CheckAddOn('ZygorGuidesViewerClassic')) then return end
-
-function R:Zygor()
+function R:ZygorGuidesViewer()
 	S:StripTextures(ZygorGuidesViewerFrame_Border, true)
 	S:HandleFrame(ZygorGuidesViewerFrame, nil, nil, true)
 
@@ -11,4 +9,4 @@ function R:Zygor()
 	end
 end
 
-AS:RegisterSkin('Zygor', R.Zygor)
+AS:RegisterSkin('ZygorGuidesViewer')

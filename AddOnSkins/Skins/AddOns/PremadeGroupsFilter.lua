@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('PremadeGroupsFilter') then return end
-
 function R:PremadeGroupsFilter()
 	local function Reposition()
 		local dialog = PremadeGroupsFilterDialog
@@ -65,4 +63,4 @@ function R:PremadeGroupsFilter()
 	S:HandleButton(PremadeGroupsFilterDialog.RefreshButton)
 end
 
-AS:RegisterSkin('PremadeGroupsFilter', R.PremadeGroupsFilter)
+AS:RegisterSkin('PremadeGroupsFilter')

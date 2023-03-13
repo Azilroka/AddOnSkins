@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('BigWigs') then return end
-
 function R:BigWigs(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		if BigWigsLoader then
@@ -130,5 +128,5 @@ function R:BigWigs(event, addon)
 	end
 end
 
-AS:RegisterSkin('BigWigs', R.BigWigs, 'ADDON_LOADED')
+AS:RegisterSkin('BigWigs', nil, 'ADDON_LOADED')
 AS:RegisterSkinForPreload('BigWigs_Plugins', R.BigWigs, 'BigWigs')

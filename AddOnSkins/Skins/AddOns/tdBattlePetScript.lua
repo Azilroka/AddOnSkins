@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('tdBattlePetScript') then return end
-
 function R:tdBattlePetScript()
 	--/run LibStub('AceAddon-3.0'):GetAddon('tdBattlePetScript'):GetModule('UI.MainPanel').MainPanel:SetTemplate()
 	local tdBattlePetScript = LibStub('AceAddon-3.0'):GetAddon('PetBattleScripts'):GetModule('UI.MainPanel')
@@ -37,4 +35,4 @@ function R:tdBattlePetScript()
 	S:HandleButton(_G.tdBattlePetScriptAutoButton)
 end
 
-AS:RegisterSkin('tdBattlePetScript', R.tdBattlePetScript)
+AS:RegisterSkin('tdBattlePetScript')

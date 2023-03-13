@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('FlyoutButtonCustom') then return end
-
 function R:FlyoutButtonCustom()
 	if FlyoutButtonCustom_Settings then
 		FlyoutButtonCustom_Settings.Highlight = false
@@ -62,4 +60,4 @@ function R:FlyoutButtonCustom()
 	hooksecurefunc(FlyoutListButton, "UpdateTexture", CreateBorder)
 end
 
-AS:RegisterSkin('FlyoutButtonCustom', R.FlyoutButtonCustom)
+AS:RegisterSkin('FlyoutButtonCustom')

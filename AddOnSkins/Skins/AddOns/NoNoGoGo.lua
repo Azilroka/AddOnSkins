@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('NoNoGoGo') then return end
-
 function R:NoNoGoGo()
 	S:CreateBackdrop(NNGGAnchorFrame)
 	S:HandleButton(NNGGPullTimerFrame, true)
@@ -9,4 +7,4 @@ function R:NoNoGoGo()
 	S:HandleStatusBar(NNGGStatusBarFrame)
 end
 
-AS:RegisterSkin('NoNoGoGo', R.NoNoGoGo)
+AS:RegisterSkin('NoNoGoGo')

@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('BtWQuests') then return end
-
 local _G = _G
 
 function R:BtWQuests()
@@ -67,4 +65,4 @@ function R:BtWQuests()
 --	BtWQuests_ListCategories()
 end
 
-AS:RegisterSkin('BtWQuests', R.BtWQuests)
+AS:RegisterSkin('BtWQuests')

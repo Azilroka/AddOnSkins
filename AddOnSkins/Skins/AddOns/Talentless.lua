@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Talentless') then return end
-
 function R:Talentless()
 	hooksecurefunc(Talentless, "CreateSpecButtons", function(self)
 		for _, Button in pairs(self.Specs) do
@@ -36,4 +34,4 @@ function R:Talentless()
 	end)
 end
 
-AS:RegisterSkin('Talentless', AS.Talentless)
+AS:RegisterSkin('Talentless')

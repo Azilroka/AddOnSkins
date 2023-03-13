@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('MinimalArchaeology') then return end
-
 function R:MinimalArchaeology()
 	S:HandleFrame(MinArchMain)
 	S:HandleStatusBar(MinArchMainSkillBar)
@@ -28,4 +26,4 @@ function R:MinimalArchaeology()
 	end
 end
 
-AS:RegisterSkin('MinimalArchaeology', R.MinimalArchaeology)
+AS:RegisterSkin('MinimalArchaeology')

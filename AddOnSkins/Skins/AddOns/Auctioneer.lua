@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Auc-Advanced') then return end
-
 function R:Auctioneer(event)
 	if event == 'PLAYER_ENTERING_WORLD' then return end
 	if AS:CheckAddOn('Auc-Stat-Purchased') then
@@ -21,4 +19,4 @@ function R:Auctioneer(event)
 	AS:UnregisterSkinEvent('Auctioneer', event)
 end
 
-AS:RegisterSkin('Auctioneer', R.Auctioneer, 'AUCTION_HOUSE_SHOW')
+AS:RegisterSkin('Auctioneer', nil, 'AUCTION_HOUSE_SHOW')

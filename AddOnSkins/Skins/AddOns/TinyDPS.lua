@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('TinyDPS') then return end
-
 local ES = AS.EmbedSystem
 
 function R:TinyDPS()
@@ -21,4 +19,4 @@ function R:TinyDPS()
 	tdpsRefresh()
 end
 
-AS:RegisterSkin('TinyDPS', R.TinyDPS)
+AS:RegisterSkin('TinyDPS')

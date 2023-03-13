@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('QuestCompletist') then return end
-
 function R:QuestCompletist()
 	local tooltips = {
 		'qcMapTooltip',
@@ -30,4 +28,4 @@ function R:QuestCompletist()
 	qcMenuSlider:SetHeight(256)
 end
 
-AS:RegisterSkin('QuestCompletist', R.QuestCompletist)
+AS:RegisterSkin('QuestCompletist')

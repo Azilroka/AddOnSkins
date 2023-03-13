@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Analyst') then return end
-
 function R:Analyst()
 	S:HandleFrame(EconomyFrame)
 	EconomyFrame:SetHeight(450)
@@ -18,4 +16,4 @@ function R:Analyst()
 	S:HandleCheckBox(EconomyFrameAllCharacters)
 end
 
-AS:RegisterSkin('Analyst', R.Analyst)
+AS:RegisterSkin('Analyst')

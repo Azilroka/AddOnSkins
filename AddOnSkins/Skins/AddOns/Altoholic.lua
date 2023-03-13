@@ -1,7 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
-if not AS:CheckAddOn('Altoholic') then return end
-
 local function SkinItemButton(obj, itemIDGetFunc)
 	S:HandleIcon(obj.Icon)
 	S:HandleFrame(obj)
@@ -187,4 +185,4 @@ function R:Altoholic(event, addon)
 	end
 end
 
-AS:RegisterSkin('Altoholic', AS.Altoholic, "ADDON_LOADED")
+AS:RegisterSkin('Altoholic', nil, "ADDON_LOADED")
