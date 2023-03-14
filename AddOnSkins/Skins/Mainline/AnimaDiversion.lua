@@ -1,16 +1,13 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 
-function S:Blizzard_AnimaDiversionUI()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.animaDiversion) then return end
+function R:Blizzard_AnimaDiversionUI()
+	if not AS:IsSkinEnabled('Blizzard_AnimaDiversionUI', 'animaDiversion') then return end
 
 	local frame = _G.AnimaDiversionFrame
-	frame:StripTextures()
-	frame:SetTemplate('Transparent')
+	S:HandleFrame(frame)
 
-	S:HandleCloseButton(frame.CloseButton)
 	frame.CloseButton:ClearAllPoints()
 	frame.CloseButton:Point('TOPRIGHT', frame, 'TOPRIGHT', 4, 4) --default is -5, -5
 	frame.AnimaDiversionCurrencyFrame.Background:SetAlpha(0)
@@ -18,4 +15,4 @@ function S:Blizzard_AnimaDiversionUI()
 	S:HandleButton(frame.ReinforceInfoFrame.AnimaNodeReinforceButton)
 end
 
-S:AddCallbackForAddon('Blizzard_AnimaDiversionUI')
+AS:RegisterSkin('Blizzard_AnimaDiversionUI')

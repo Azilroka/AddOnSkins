@@ -1,5 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local next, pairs, unpack = next, pairs, unpack
@@ -120,7 +119,7 @@ local function HandleSellFrame(frame)
 	if ItemButton.IconMask then ItemButton.IconMask:Hide() end
 
 	ItemButton.EmptyBackground:Hide()
-	ItemButton:SetPushedTexture(E.ClearTexture)
+	ItemButton:SetPushedTexture(S.Media.ClearTexture)
 	ItemButton.Highlight:SetColorTexture(1, 1, 1, .25)
 	ItemButton.Highlight:SetAllPoints(ItemButton.Icon)
 
@@ -159,7 +158,7 @@ local function HandleTokenSellFrame(frame)
 	if ItemButton.IconMask then ItemButton.IconMask:Hide() end
 
 	ItemButton.EmptyBackground:Hide()
-	ItemButton:SetPushedTexture(E.ClearTexture)
+	ItemButton:SetPushedTexture(S.Media.ClearTexture)
 	ItemButton.Highlight:SetColorTexture(1, 1, 1, .25)
 	ItemButton.Highlight:SetAllPoints(ItemButton.Icon)
 
@@ -227,8 +226,8 @@ local function HandleTabs(arg1)
 	end
 end
 
-local function LoadSkin()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.auctionhouse) then return end
+function R:Blizzard_AuctionHouseUI()
+	if not AS:IsSkinEnabled('Blizzard_AuctionHouseUI', 'auctionhouse') then return end
 
 	--[[ Main Frame | TAB 1]]--
 	local Frame = _G.AuctionHouseFrame
@@ -251,7 +250,7 @@ local function LoadSkin()
 	S:HandleTrimScrollBar(Categories.ScrollBar)
 
 	hooksecurefunc('AuctionHouseFilterButton_SetUp', function(button)
-		local r, g, b = unpack(E.media.rgbvaluecolor)
+		local r, g, b = unpack(S.Media.valueColor)
 		button.NormalTexture:SetAlpha(0)
 		button.SelectedTexture:SetColorTexture(r, g, b, .25)
 		button.HighlightTexture:SetColorTexture(1, 1, 1, .1)
@@ -442,4 +441,4 @@ local function LoadSkin()
 	progressBar.IconBackdrop:SetTemplate()
 end
 
-S:AddCallbackForAddon('Blizzard_AuctionHouseUI', 'AuctionHouse', LoadSkin)
+AS:RegisterSkin('Blizzard_AuctionHouseUI')

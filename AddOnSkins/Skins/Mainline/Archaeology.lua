@@ -1,11 +1,10 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local pairs, next = pairs, next
 
-function S:Blizzard_ArchaeologyUI()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.archaeology) then return end
+function R:Blizzard_ArchaeologyUI()
+	if not AS:IsSkinEnabled('Blizzard_AnimaDiversionUI', 'archaeology') then return end
 
 	local ArchaeologyFrame = _G.ArchaeologyFrame
 	S:HandlePortraitFrame(ArchaeologyFrame)
@@ -16,7 +15,10 @@ function S:Blizzard_ArchaeologyUI()
 	_G.ArchaeologyFrame.raceFilterDropDown.Text:ClearAllPoints()
 	_G.ArchaeologyFrame.raceFilterDropDown.Text:Point('LEFT', _G.ArchaeologyFrame.raceFilterDropDown.backdrop, 'LEFT', 4, 0)
 
-	if E.private.skins.parchmentRemoverEnable then
+	if AS:CheckOptions('Parchment') then
+		_G.ArchaeologyFrameBgLeft:SetDrawLayer('BACKGROUND', 2)
+		_G.ArchaeologyFrameBgRight:SetDrawLayer('BACKGROUND', 2)
+	else
 		_G.ArchaeologyFrameBgLeft:Kill()
 		_G.ArchaeologyFrameBgRight:Kill()
 
@@ -48,9 +50,6 @@ function S:Blizzard_ArchaeologyUI()
 				end
 			end
 		end
-	else
-		_G.ArchaeologyFrameBgLeft:SetDrawLayer('BACKGROUND', 2)
-		_G.ArchaeologyFrameBgRight:SetDrawLayer('BACKGROUND', 2)
 	end
 
 	S:HandleButton(ArchaeologyFrame.summaryPage.prevPageButton, nil, nil, true)
@@ -58,11 +57,8 @@ function S:Blizzard_ArchaeologyUI()
 	S:HandleButton(ArchaeologyFrame.completedPage.prevPageButton, nil, nil, true)
 	S:HandleButton(ArchaeologyFrame.completedPage.nextPageButton, nil, nil, true)
 
-	ArchaeologyFrame.rankBar:StripTextures()
-	ArchaeologyFrame.rankBar:CreateBackdrop()
-	ArchaeologyFrame.rankBar:SetStatusBarTexture(E.media.normTex)
+	S:HandleStatusBar(ArchaeologyFrame.rankBar)
 	ArchaeologyFrame.rankBar.backdrop.Center:SetDrawLayer('BACKGROUND', 3) -- over BgLeft and BgRight
-	E:RegisterStatusBar(ArchaeologyFrame.rankBar)
 
 	S:HandleStatusBar(ArchaeologyFrame.artifactPage.solveFrame.statusBar, {0.7, 0.2, 0})
 	S:HandleIcon(_G.ArchaeologyFrameArtifactPageIcon)
@@ -72,8 +68,6 @@ function S:Blizzard_ArchaeologyUI()
 	_G.ArcheologyDigsiteProgressBar:Point('TOP', _G.UIParent, 'TOP', 0, -400)
 	_G.ArcheologyDigsiteProgressBar.BarTitle:FontTemplate(nil, nil, 'OUTLINE')
 	S:HandleStatusBar(_G.ArcheologyDigsiteProgressBar.FillBar, {0.7, 0.2, 0})
-
-	--E:CreateMover(_G.ArcheologyDigsiteProgressBar, 'DigSiteProgressBarMover', L["Archeology Progress Bar"])
 end
 
-S:AddCallbackForAddon('Blizzard_ArchaeologyUI')
+AS:RegisterSkin('Blizzard_ArchaeologyUI')

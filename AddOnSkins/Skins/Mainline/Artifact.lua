@@ -1,5 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local next = next
@@ -7,7 +6,7 @@ local unpack = unpack
 local hooksecurefunc = hooksecurefunc
 
 function S:Blizzard_ArtifactUI()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.artifact) then return end
+	if not AS:IsSkinEnabled('Blizzard_ArtifactUI', 'artifact') then return end
 
 	local ArtifactFrame = _G.ArtifactFrame
 	ArtifactFrame:StripTextures()
@@ -57,4 +56,4 @@ function S:Blizzard_ArtifactUI()
 	end)
 end
 
-S:AddCallbackForAddon('Blizzard_ArtifactUI')
+AS:RegisterSkin('Blizzard_ArtifactUI')

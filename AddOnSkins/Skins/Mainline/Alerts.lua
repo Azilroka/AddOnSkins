@@ -752,8 +752,8 @@ local function SkinNewPetAlert(frame)
 	end
 end
 
-function S:AlertSystem()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.alertframes) then return end
+function R:AlertSystem()
+	if not AS:IsSkinEnabled('Blizzard_AlertSystem', 'alertframes') then return end
 
 	-- Achievements
 	hooksecurefunc(_G.AchievementAlertSystem, 'setUpFunction', SkinAchievementAlert)
@@ -841,4 +841,4 @@ function S:AlertSystem()
 	frame.backdrop:Point('BOTTOMRIGHT', lootItem.Icon.b, 'BOTTOMRIGHT', 180, -4)
 end
 
-AS:RegisterSkin('AlertSystem')
+AS:RegisterSkin('Blizzard_AlertSystem')

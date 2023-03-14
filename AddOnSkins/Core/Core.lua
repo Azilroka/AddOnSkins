@@ -273,8 +273,9 @@ function AS:StartSkinning()
 end
 
 function AS:Init(event, addon)
-	if event == 'ADDON_LOADED' and IsAddOnLoaded(AddOnName) then
+	if event == 'ADDON_LOADED' and (AS.Initialized or IsAddOnLoaded(AddOnName)) then
 		if addon == AddOnName then
+			AS.Initialized = true
 			AS:BuildProfile()
 			AS:UpdateMedia()
 		end
