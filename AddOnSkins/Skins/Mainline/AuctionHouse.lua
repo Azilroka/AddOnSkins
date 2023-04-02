@@ -40,7 +40,7 @@ local function HandleListIcon(frame)
 						S:HandleIcon(cell.Icon)
 
 						if cell.IconBorder then
-							cell.IconBorder:Kill()
+							S:Kill(cell.IconBorder)
 						end
 
 						cell.IsSkinned = true
@@ -58,7 +58,7 @@ local function HandleSummaryIcons(frame)
 				S:HandleIcon(child.Icon)
 
 				if child.IconBorder then
-					child.IconBorder:Kill()
+					S:Kill(child.IconBorder)
 				end
 
 				child.IsSkinned = true
@@ -69,10 +69,7 @@ end
 
 local function SkinItemDisplay(frame)
 	local ItemDisplay = frame.ItemDisplay
-	ItemDisplay:StripTextures()
-	ItemDisplay:CreateBackdrop('Transparent')
-	ItemDisplay.backdrop:Point('TOPLEFT', 3, -3)
-	ItemDisplay.backdrop:Point('BOTTOMRIGHT', -3, 0)
+	S:HandleFrame(ItemDisplay, true, nil, 3, -3, -3)
 
 	local ItemButton = ItemDisplay.ItemButton
 	ItemButton.CircleMask:Hide()
@@ -89,14 +86,14 @@ local function HandleHeaders(frame)
 			header:DisableDrawLayer('BACKGROUND')
 
 			if not header.backdrop then
-				header:CreateBackdrop('Transparent')
+				S:CreateBackdrop(header, 'Transparent')
 			end
 
 			header.IsSkinned = true
 		end
 
 		if header.backdrop then
-			header.backdrop:Point('BOTTOMRIGHT', i < maxHeaders and -5 or 0, -2)
+			S:Point(header.backdrop, 'BOTTOMRIGHT', i < maxHeaders and -5 or 0, -2)
 		end
 	end
 
@@ -109,11 +106,10 @@ local function HandleAuctionButtons(button)
 end
 
 local function HandleSellFrame(frame)
-	frame:StripTextures()
+	S:StripTextures(frame)
 
 	local ItemDisplay = frame.ItemDisplay
-	ItemDisplay:StripTextures()
-	ItemDisplay:SetTemplate('Transparent')
+	S:HandleFrame(ItemDisplay)
 
 	local ItemButton = ItemDisplay.ItemButton
 	if ItemButton.IconMask then ItemButton.IconMask:Hide() end
@@ -143,16 +139,15 @@ local function HandleSellFrame(frame)
 
 	if frame.BuyoutModeCheckButton then
 		S:HandleCheckBox(frame.BuyoutModeCheckButton)
-		frame.BuyoutModeCheckButton:Size(20)
+		S:Size(frame.BuyoutModeCheckButton, 20)
 	end
 end
 
 local function HandleTokenSellFrame(frame)
-	frame:StripTextures()
+	S:StripTextures(frame)
 
 	local ItemDisplay = frame.ItemDisplay
-	ItemDisplay:StripTextures()
-	ItemDisplay:SetTemplate('Transparent')
+	S:HandleFrame(ItemDisplay)
 
 	local ItemButton = ItemDisplay.ItemButton
 	if ItemButton.IconMask then ItemButton.IconMask:Hide() end
@@ -171,14 +166,13 @@ local function HandleTokenSellFrame(frame)
 	S:HandleButton(frame.PostButton)
 	HandleAuctionButtons(frame.DummyRefreshButton)
 
-	frame.DummyItemList:StripTextures()
-	frame.DummyItemList:SetTemplate('Transparent')
+	S:HandleFrame(frame.DummyItemList)
 	HandleAuctionButtons(frame.DummyRefreshButton)
 	S:HandleScrollBar(frame.DummyItemList.DummyScrollBar)
 end
 
 local function HandleSellList(frame, hasHeader, fitScrollBar)
-	frame:StripTextures()
+	S:StripTextures(frame)
 
 	if frame.RefreshFrame then
 		HandleAuctionButtons(frame.RefreshFrame.RefreshButton)
@@ -188,12 +182,12 @@ local function HandleSellList(frame, hasHeader, fitScrollBar)
 
 	if fitScrollBar then
 		frame.ScrollBar:ClearAllPoints()
-		frame.ScrollBar:Point('TOPRIGHT', frame, 1, -16)
-		frame.ScrollBar:Point('BOTTOMRIGHT', frame, 1, 16)
+		S:Point(frame.ScrollBar, 'TOPRIGHT', frame, 1, -16)
+		S:Point(frame.ScrollBar, 'BOTTOMRIGHT', frame, 1, 16)
 	end
 
 	if hasHeader then
-		frame.ScrollBox:SetTemplate('Transparent')
+		S:SetTemplate(frame.ScrollBox, 'Transparent')
 
 		hooksecurefunc(frame, 'RefreshScrollFrame', HandleHeaders)
 	else
@@ -207,26 +201,21 @@ local function HandleTabs(arg1)
 
 	local lastTab = _G.AuctionHouseFrameBuyTab
 	for index, tab in next, frame.Tabs do
-		-- we can move addon tabs but only skin the blizzard ones (AddonSkins handles the rest)
-		local blizzTab = tab == _G.AuctionHouseFrameBuyTab or tab == _G.AuctionHouseFrameSellTab or tab == _G.AuctionHouseFrameAuctionsTab
-		if blizzTab and not tab.backdrop then
-			S:HandleTab(tab)
-		end
+		S:HandleTab(tab)
 
-		-- tab positions
 		tab:ClearAllPoints()
 
 		if index == 1 then
-			tab:Point('BOTTOMLEFT', frame, 'BOTTOMLEFT', -3, -32)
-		else -- skinned ones can be closer together
-			tab:Point('TOPLEFT', lastTab, 'TOPRIGHT', (tab.backdrop or tab.backdrop) and -5 or 0, 0)
+			S:Point(tab, 'BOTTOMLEFT', frame, 'BOTTOMLEFT', -3, -32)
+		else
+			S:Point(tab, 'TOPLEFT', lastTab, 'TOPRIGHT', (tab.backdrop or tab.backdrop) and -5 or 0, 0)
 		end
 
 		lastTab = tab
 	end
 end
 
-function R:Blizzard_AuctionHouseUI()
+function R:Blizzard_AuctionHouseUI(event)
 	if not AS:IsSkinEnabled('Blizzard_AuctionHouseUI', 'auctionhouse') then return end
 
 	--[[ Main Frame | TAB 1]]--
@@ -239,14 +228,14 @@ function R:Blizzard_AuctionHouseUI()
 
 	-- SearchBar Frame
 	HandleSearchBarFrame(Frame.SearchBar)
-	Frame.MoneyFrameBorder:StripTextures()
-	Frame.MoneyFrameInset:StripTextures()
+	S:StripTextures(Frame.MoneyFrameBorder)
+	S:StripTextures(Frame.MoneyFrameInset)
 
 	--[[ Categorie List ]]--
 	local Categories = Frame.CategoriesList
-	Categories:StripTextures()
-	Categories.NineSlice:SetTemplate('Transparent')
-	Categories.NineSlice:SetInside(Categories)
+	S:StripTextures(Categories)
+	S:SetTemplate(Categories.NineSlice, 'Transparent')
+	S:SetInside(Categories.NineSlice, Categories)
 	S:HandleTrimScrollBar(Categories.ScrollBar)
 
 	hooksecurefunc('AuctionHouseFilterButton_SetUp', function(button)
@@ -260,22 +249,21 @@ function R:Blizzard_AuctionHouseUI()
 	local Browse = Frame.BrowseResultsFrame
 
 	local BrowseList = Browse.ItemList
-	BrowseList:StripTextures()
+	S:StripTextures(BrowseList)
 	hooksecurefunc(BrowseList, 'RefreshScrollFrame', HandleHeaders)
 	S:HandleTrimScrollBar(BrowseList.ScrollBar)
-	BrowseList:SetTemplate('Transparent')
+	S:SetTemplate(BrowseList, 'Transparent')
 	BrowseList.ScrollBar:ClearAllPoints()
-	BrowseList.ScrollBar:Point('TOPRIGHT', BrowseList, 1, -16)
-	BrowseList.ScrollBar:Point('BOTTOMRIGHT', BrowseList, 1, 16)
+	S:Point(BrowseList.ScrollBar, 'TOPRIGHT', BrowseList, 1, -16)
+	S:Point(BrowseList.ScrollBar, 'BOTTOMRIGHT', BrowseList, 1, 16)
 
 	--[[ BuyOut Frame]]
 	local CommoditiesBuyFrame = Frame.CommoditiesBuyFrame
-	CommoditiesBuyFrame.BuyDisplay:StripTextures()
+	S:StripTextures(CommoditiesBuyFrame.BuyDisplay)
 	S:HandleButton(CommoditiesBuyFrame.BackButton)
 
 	local CommoditiesBuyList = Frame.CommoditiesBuyFrame.ItemList
-	CommoditiesBuyList:StripTextures()
-	CommoditiesBuyList:SetTemplate('Transparent')
+	S:HandleFrame(CommoditiesBuyList)
 	S:HandleButton(CommoditiesBuyList.RefreshFrame.RefreshButton)
 	S:HandleTrimScrollBar(CommoditiesBuyList.ScrollBar)
 
@@ -293,8 +281,7 @@ function R:Blizzard_AuctionHouseUI()
 	SkinItemDisplay(ItemBuyFrame)
 
 	local ItemBuyList = ItemBuyFrame.ItemList
-	ItemBuyList:StripTextures()
-	ItemBuyList:SetTemplate('Transparent')
+	S:HandleFrame(ItemBuyList)
 	S:HandleTrimScrollBar(ItemBuyList.ScrollBar)
 	S:HandleButton(ItemBuyList.RefreshFrame.RefreshButton)
 	hooksecurefunc(ItemBuyList, 'RefreshScrollFrame', HandleHeaders)
@@ -310,13 +297,13 @@ function R:Blizzard_AuctionHouseUI()
 
 	S:HandleButton(ItemBuyFrame.BidFrame.BidButton)
 	ItemBuyFrame.BidFrame.BidButton:ClearAllPoints()
-	ItemBuyFrame.BidFrame.BidButton:Point('LEFT', ItemBuyFrame.BidFrame.BidAmount, 'RIGHT', 2, -2)
+	S:Point(ItemBuyFrame.BidFrame.BidButton, 'LEFT', ItemBuyFrame.BidFrame.BidAmount, 'RIGHT', 2, -2)
 	S:HandleButton(ItemBuyFrame.BidFrame.BidButton)
 
 	--[[ Item Sell Frame | TAB 2 ]]--
 	local SellFrame = Frame.ItemSellFrame
 	HandleSellFrame(SellFrame)
-	Frame.ItemSellFrame:SetTemplate('Transparent')
+	S:SetTemplate(Frame.ItemSellFrame, 'Transparent')
 
 	local ItemSellList = Frame.ItemSellList
 	HandleSellList(ItemSellList, true, true)
@@ -332,7 +319,7 @@ function R:Blizzard_AuctionHouseUI()
 
 	--[[ Auctions Frame | TAB 3 ]]--
 	local AuctionsFrame = _G.AuctionHouseFrameAuctionsFrame
-	AuctionsFrame:StripTextures()
+	S:StripTextures(AuctionsFrame)
 	SkinItemDisplay(AuctionsFrame)
 	S:HandleButton(AuctionsFrame.BuyoutFrame.BuyoutButton)
 
@@ -357,21 +344,21 @@ function R:Blizzard_AuctionHouseUI()
 
 	local SummaryList = AuctionsFrame.SummaryList
 	HandleSellList(SummaryList)
-	SummaryList:SetTemplate('Transparent')
+	S:SetTemplate(SummaryList, 'Transparent')
 	S:HandleButton(AuctionsFrame.CancelAuctionButton)
 
 	SummaryList.ScrollBar:ClearAllPoints()
-	SummaryList.ScrollBar:Point('TOPRIGHT', SummaryList, -3, -20)
-	SummaryList.ScrollBar:Point('BOTTOMRIGHT', SummaryList, -3, 20)
+	S:Point(SummaryList.ScrollBar, 'TOPRIGHT', SummaryList, -3, -20)
+	S:Point(SummaryList.ScrollBar, 'BOTTOMRIGHT', SummaryList, -3, 20)
 
 	local AllAuctionsList = AuctionsFrame.AllAuctionsList
 	HandleSellList(AllAuctionsList, true, true)
 	S:HandleButton(AllAuctionsList.RefreshFrame.RefreshButton)
 	AllAuctionsList.ResultsText:SetParent(AllAuctionsList.ScrollFrame)
 
-	SummaryList:Point('BOTTOM', AuctionsFrame, 0, 0) -- normally this is anchored to the cancel button.. ? lol
+	S:Point(SummaryList, 'BOTTOM', AuctionsFrame, 0, 0) -- normally this is anchored to the cancel button.. ? lol
 	AuctionsFrame.CancelAuctionButton:ClearAllPoints()
-	AuctionsFrame.CancelAuctionButton:Point('TOPRIGHT', AllAuctionsList, 'BOTTOMRIGHT', -6, 1)
+	S:Point(AuctionsFrame.CancelAuctionButton, 'TOPRIGHT', AllAuctionsList, 'BOTTOMRIGHT', -6, 1)
 
 	local BidsList = AuctionsFrame.BidsList
 	HandleSellList(BidsList, true, true)
@@ -385,25 +372,24 @@ function R:Blizzard_AuctionHouseUI()
 
 	--[[ WoW Token Category ]]--
 	local TokenFrame = Frame.WoWTokenResults
-	TokenFrame:StripTextures()
+	S:StripTextures(TokenFrame)
 	S:HandleButton(TokenFrame.Buyout)
 	S:HandleScrollBar(TokenFrame.DummyScrollBar) --MONITOR THIS
 
 	local Token = TokenFrame.TokenDisplay
-	Token:StripTextures()
-	Token:SetTemplate('Transparent')
+	S:HandleFrame(Token)
 
 	local ItemButton = Token.ItemButton
 	S:HandleIcon(ItemButton.Icon, true)
 	ItemButton.Icon.backdrop:SetBackdropBorderColor(0, .8, 1)
 	ItemButton:GetHighlightTexture():Hide()
 	ItemButton.CircleMask:Hide()
-	ItemButton.IconBorder:Kill()
+	S:Kill(ItemButton.IconBorder)
 
 	--WoW Token Tutorial Frame
 	local WowTokenGameTimeTutorial = Frame.WoWTokenResults.GameTimeTutorial
 	WowTokenGameTimeTutorial.NineSlice:Hide()
-	WowTokenGameTimeTutorial:SetTemplate('Transparent')
+	S:SetTemplate(WowTokenGameTimeTutorial, 'Transparent')
 	S:HandleCloseButton(WowTokenGameTimeTutorial.CloseButton)
 	S:HandleButton(WowTokenGameTimeTutorial.RightDisplay.StoreButton)
 	WowTokenGameTimeTutorial.Bg:SetAlpha(0)
@@ -413,20 +399,16 @@ function R:Blizzard_AuctionHouseUI()
 	WowTokenGameTimeTutorial.RightDisplay.Tutorial1:SetTextColor(1, 0, 0)
 
 	--[[ Dialogs ]]--
-	Frame.BuyDialog:StripTextures()
-	Frame.BuyDialog:SetTemplate('Transparent')
+	S:HandleFrame(Frame.BuyDialog)
 	S:HandleButton(Frame.BuyDialog.BuyNowButton)
 	S:HandleButton(Frame.BuyDialog.CancelButton)
 
 	--[[ Multisell ]]--
 	local multisellFrame = _G.AuctionHouseMultisellProgressFrame
-	multisellFrame:StripTextures()
-	multisellFrame:SetTemplate('Transparent')
+	S:HandleFrame(multisellFrame)
 
 	local progressBar = multisellFrame.ProgressBar
-	progressBar:StripTextures()
-	progressBar:CreateBackdrop(nil, nil, nil, nil, nil, nil, nil, nil, true)
-	progressBar:SetStatusBarTexture(E.media.normTex)
+	S:HandleStatusBar(progressBar)
 
 	progressBar.Text:ClearAllPoints()
 	progressBar.Text:Point('BOTTOM', progressBar, 'TOP', 0, 5)
@@ -441,4 +423,4 @@ function R:Blizzard_AuctionHouseUI()
 	progressBar.IconBackdrop:SetTemplate()
 end
 
-AS:RegisterSkin('Blizzard_AuctionHouseUI')
+AS:RegisterSkin('Blizzard_AuctionHouseUI', nil, 'ADDON_LOADED')

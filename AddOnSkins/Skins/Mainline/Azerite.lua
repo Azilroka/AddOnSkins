@@ -1,16 +1,13 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 
-function S:Blizzard_AzeriteUI()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.azerite) then return end
+function R:Blizzard_AzeriteUI()
+	if not AS:IsSkinEnabled('Blizzard_AzeriteUI', 'azerite') then return end
 
 	_G.AzeriteEmpoweredItemUIPortrait:Hide()
-	_G.AzeriteEmpoweredItemUI:StripTextures()
-	_G.AzeriteEmpoweredItemUI:SetTemplate('Transparent')
+	S:HandleFrame(_G.AzeriteEmpoweredItemUI)
 	_G.AzeriteEmpoweredItemUI.ClipFrame.BackgroundFrame.Bg:Hide()
-	S:HandleCloseButton(_G.AzeriteEmpoweredItemUICloseButton)
 end
 
-S:AddCallbackForAddon('Blizzard_AzeriteUI')
+AS:RegisterSkin('Blizzard_AzeriteUI', nil, 'ADDON_LOADED')

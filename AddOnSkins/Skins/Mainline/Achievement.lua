@@ -205,7 +205,7 @@ function R:Blizzard_AchievementUI()
 		end
 	end)
 
-	if not AS:CheckOption('Parchment') then
+	if AS:CheckOption('Parchment') then
 		_G.AchievementFrameCategories.NineSlice:SetCenterColor(unpack(S.Media.transparentBackdrop))
 		select(3, _G.AchievementFrameAchievements:GetRegions()):Hide()
 	else
@@ -350,7 +350,7 @@ function R:Blizzard_AchievementUI()
 	_G.AchievementFrameComparisonHeaderBG:Hide()
 	_G.AchievementFrameComparisonHeaderPortrait:Hide()
 	_G.AchievementFrameComparisonHeaderPortraitBg:Hide()
-	S:Point(_G.AchievementFrameComparisonHeader'BOTTOMRIGHT', Comparison, 'TOPRIGHT', 39, 26)
+	S:Point(_G.AchievementFrameComparisonHeader, 'BOTTOMRIGHT', Comparison, 'TOPRIGHT', 39, 26)
 	S:CreateBackdrop(_G.AchievementFrameComparisonHeader, 'Transparent')
 	S:Point(_G.AchievementFrameComparisonHeader.backdrop, 'TOPLEFT', 20, -20)
 	S:Point(_G.AchievementFrameComparisonHeader.backdrop, 'BOTTOMRIGHT', -28, -5)
@@ -379,4 +379,4 @@ function R:Blizzard_AchievementUI()
 	end
 end
 
-AS:RegisterSkin('Blizzard_AchievementUI', R.Blizzard_AchievementUI)
+AS:RegisterSkin('Blizzard_AchievementUI', nil, 'ADDON_LOADED')

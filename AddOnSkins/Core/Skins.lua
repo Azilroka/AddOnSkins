@@ -1323,7 +1323,7 @@ function S:HandleStatusBar(statusBar, color, template)
 	statusBar:SetStatusBarTexture(Media.barTexture)
 	statusBar:SetStatusBarColor(unpack(color or AS:CheckOption('StatusBarColor')))
 
-	S.StatusBar[statusBar] = true
+	S.StatusBars[statusBar] = true
 end
 
 do

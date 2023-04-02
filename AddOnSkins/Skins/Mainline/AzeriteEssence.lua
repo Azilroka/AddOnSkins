@@ -1,12 +1,11 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local pairs = pairs
 local C_AzeriteEssence_CanOpenUI = C_AzeriteEssence.CanOpenUI
 
-function S:Blizzard_AzeriteEssenceUI()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.azeriteEssence) then return end
+function R:Blizzard_AzeriteEssenceUI()
+	if not AS:IsSkinEnabled('Blizzard_AzeriteEssenceUI', 'azeriteEssence') then return end
 	if not C_AzeriteEssence_CanOpenUI() then return end
 
 	local AzeriteEssenceUI = _G.AzeriteEssenceUI
@@ -14,33 +13,32 @@ function S:Blizzard_AzeriteEssenceUI()
 
 	-- Reposition the Level Badge
 	AzeriteEssenceUI.PowerLevelBadgeFrame:ClearAllPoints()
-	AzeriteEssenceUI.PowerLevelBadgeFrame:Point('TOPLEFT')
+	S:Point(AzeriteEssenceUI.PowerLevelBadgeFrame, 'TOPLEFT')
 	AzeriteEssenceUI.PowerLevelBadgeFrame.Ring:Hide()
 	AzeriteEssenceUI.PowerLevelBadgeFrame.BackgroundBlack:Hide()
 
 	AzeriteEssenceUI.OrbBackground:SetAllPoints(AzeriteEssenceUI.ItemModelScene)
-	AzeriteEssenceUI.OrbRing:Size(483, 480)
+	S:Size(AzeriteEssenceUI.OrbRing, 483, 480)
 
 	S:HandleScrollBar(AzeriteEssenceUI.EssenceList.ScrollBar)
 
 	-- Essence List on the right
 	for _, button in pairs(AzeriteEssenceUI.EssenceList.buttons) do
 		button:DisableDrawLayer('ARTWORK')
-		button:StyleButton()
+		S:StyleButton(button)
 
 		S:HandleIcon(button.Icon)
-		button.Icon:Point('LEFT', button, 'LEFT', 6, 0)
+		S:Point(button.Icon, 'LEFT', button, 'LEFT', 6, 0)
 
-		button:CreateBackdrop()
-		button.backdrop:Point('TOPLEFT', 2, -3)
-		button.backdrop:Point('BOTTOMRIGHT', -2, 3)
+		S:CreateBackdrop(button)
+		S:Point(button.backdrop,'TOPLEFT', 2, -3)
+		S:Point(button.backdrop, 'BOTTOMRIGHT', -2, 3)
 	end
 
 	-- Header on the Essence List
 	AzeriteEssenceUI:HookScript('OnShow', function(s)
-		s.EssenceList.HeaderButton:StripTextures()
-		s.EssenceList.HeaderButton:SetTemplate('Transparent')
+		S:HandleFrame(s.EssenceList.HeaderButton)
 	end)
 end
 
-S:AddCallbackForAddon('Blizzard_AzeriteEssenceUI')
+AS:RegisterSkin('Blizzard_AzeriteEssenceUI')

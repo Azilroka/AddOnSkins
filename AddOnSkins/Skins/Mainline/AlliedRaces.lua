@@ -11,16 +11,14 @@ function S:Blizzard_AlliedRacesUI()
 		AlliedRacesFrame.NineSlice:SetAlpha(0)
 		_G.AlliedRacesFramePortrait:SetAlpha(0)
 		_G.AlliedRacesFrameBg:SetAlpha(0)
-		AlliedRacesFrame.ModelFrame:StripTextures()
-		AlliedRacesFrame:SetTemplate('Transparent')
+		S:StripTextures(AlliedRacesFrame.ModelFrame)
+		S:SetTemplate(AlliedRacesFrame, 'Transparent')
 
 		local scrollFrame = AlliedRacesFrame.RaceInfoFrame.ScrollFrame
 		scrollFrame.ScrollBar.Border:Hide()
 		scrollFrame.ScrollBar.ScrollUpBorder:Hide()
 		scrollFrame.ScrollBar.ScrollDownBorder:Hide()
 		S:HandleScrollBar(scrollFrame.ScrollBar)
-
-		S:HandleCloseButton(_G.AlliedRacesFrameCloseButton)
 	else
 		S:HandlePortraitFrame(AlliedRacesFrame)
 		select(2, AlliedRacesFrame.ModelFrame:GetRegions()):Hide()
@@ -50,4 +48,4 @@ function S:Blizzard_AlliedRacesUI()
 	end)
 end
 
-S:AddCallbackForAddon('Blizzard_AlliedRacesUI')
+AS:RegisterSkin('Blizzard_AlliedRacesUI')

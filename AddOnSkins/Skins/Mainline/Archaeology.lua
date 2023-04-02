@@ -13,14 +13,14 @@ function R:Blizzard_ArchaeologyUI()
 
 	S:HandleDropDownBox(_G.ArchaeologyFrame.raceFilterDropDown)
 	_G.ArchaeologyFrame.raceFilterDropDown.Text:ClearAllPoints()
-	_G.ArchaeologyFrame.raceFilterDropDown.Text:Point('LEFT', _G.ArchaeologyFrame.raceFilterDropDown.backdrop, 'LEFT', 4, 0)
+	S:Point(_G.ArchaeologyFrame.raceFilterDropDown.Text, 'LEFT', _G.ArchaeologyFrame.raceFilterDropDown.backdrop, 'LEFT', 4, 0)
 
 	if AS:CheckOptions('Parchment') then
 		_G.ArchaeologyFrameBgLeft:SetDrawLayer('BACKGROUND', 2)
 		_G.ArchaeologyFrameBgRight:SetDrawLayer('BACKGROUND', 2)
 	else
-		_G.ArchaeologyFrameBgLeft:Kill()
-		_G.ArchaeologyFrameBgRight:Kill()
+		S:Kill(_G.ArchaeologyFrameBgLeft)
+		S:Kill(_G.ArchaeologyFrameBgRight)
 
 		ArchaeologyFrame.completedPage.infoText:SetTextColor(1, 1, 1)
 		ArchaeologyFrame.helpPage.titleText:SetTextColor(1, 1, 0)
@@ -63,11 +63,11 @@ function R:Blizzard_ArchaeologyUI()
 	S:HandleStatusBar(ArchaeologyFrame.artifactPage.solveFrame.statusBar, {0.7, 0.2, 0})
 	S:HandleIcon(_G.ArchaeologyFrameArtifactPageIcon)
 
-	_G.ArcheologyDigsiteProgressBar:StripTextures()
+	S:StripTextures(_G.ArcheologyDigsiteProgressBar)
 	_G.ArcheologyDigsiteProgressBar:ClearAllPoints()
-	_G.ArcheologyDigsiteProgressBar:Point('TOP', _G.UIParent, 'TOP', 0, -400)
-	_G.ArcheologyDigsiteProgressBar.BarTitle:FontTemplate(nil, nil, 'OUTLINE')
+	S:Point(_G.ArcheologyDigsiteProgressBar, 'TOP', _G.UIParent, 'TOP', 0, -400)
+	S:FontTemplate(_G.ArcheologyDigsiteProgressBar.BarTitle, nil, nil, 'OUTLINE')
 	S:HandleStatusBar(_G.ArcheologyDigsiteProgressBar.FillBar, {0.7, 0.2, 0})
 end
 
-AS:RegisterSkin('Blizzard_ArchaeologyUI')
+AS:RegisterSkin('Blizzard_ArchaeologyUI', nil, 'ADDON_LOADED')
