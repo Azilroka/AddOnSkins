@@ -1,5 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local next = next
@@ -16,14 +15,11 @@ local function SkinTab(tab)
 	tab.Right:SetAlpha(0)
 end
 
-function S:Blizzard_BlackMarketUI()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.bmah) then return end
+function R:Blizzard_BlackMarketUI()
+	if not AS:IsSkinEnabled('Blizzard_BlackMarketUI', 'bmah') then return end
 
 	local BlackMarketFrame = _G.BlackMarketFrame
-	BlackMarketFrame:StripTextures()
-	BlackMarketFrame:SetTemplate('Transparent')
-	BlackMarketFrame.Inset:StripTextures()
-	BlackMarketFrame.Inset:SetTemplate('Transparent')
+	S:HandleFrame(BlackMarketFrame)
 
 	S:HandleCloseButton(BlackMarketFrame.CloseButton)
 	S:HandleTrimScrollBar(BlackMarketFrame.ScrollBar)
@@ -36,13 +32,13 @@ function S:Blizzard_BlackMarketUI()
 
 	BlackMarketFrame.MoneyFrameBorder:StripTextures()
 	S:HandleEditBox(_G.BlackMarketBidPriceGold)
-	_G.BlackMarketBidPriceGold.backdrop:Point('TOPLEFT', -2, 0)
-	_G.BlackMarketBidPriceGold.backdrop:Point('BOTTOMRIGHT', -2, 0)
+	S:Point(_G.BlackMarketBidPriceGold.backdrop, 'TOPLEFT', -2, 0)
+	S:Point(_G.BlackMarketBidPriceGold.backdrop, 'BOTTOMRIGHT', -2, 0)
 
 	S:HandleButton(BlackMarketFrame.BidButton)
 
 	BlackMarketFrame.ColumnName:ClearAllPoints()
-	BlackMarketFrame.ColumnName:Point('TOPLEFT', BlackMarketFrame.TopLeftCorner, 25, -50)
+	S:Point(BlackMarketFrame.ColumnName, 'TOPLEFT', BlackMarketFrame.TopLeftCorner, 25, -50)
 
 	hooksecurefunc('BlackMarketScrollFrame_Update', function()
 		for _, button in next, { BlackMarketFrame.ScrollBox.ScrollTarget:GetChildren() } do
@@ -50,8 +46,8 @@ function S:Blizzard_BlackMarketUI()
 				S:HandleItemButton(button.Item)
 				S:HandleIconBorder(button.Item.IconBorder)
 
-				button:StripTextures()
-				button:StyleButton(nil, true)
+				S:StripTextures(button)
+				S:StyleButton(button, nil, true)
 
 				button.Selection:SetColorTexture(0.9, 0.8, 0.1, 0.3)
 
@@ -63,13 +59,12 @@ function S:Blizzard_BlackMarketUI()
 	for _, region in next, { BlackMarketFrame:GetRegions() } do
 		if region:IsObjectType('FontString') and region:GetText() == _G.BLACK_MARKET_TITLE then
 			region:ClearAllPoints()
-			region:Point('TOP', BlackMarketFrame, 'TOP', 0, -4)
+			S:Point(region, 'TOP', BlackMarketFrame, 'TOP', 0, -4)
+			break
 		end
 	end
 
-	BlackMarketFrame.HotDeal:StripTextures()
-	BlackMarketFrame.HotDeal:SetTemplate('Transparent')
-
+	S:HandleFrame(BlackMarketFrame.HotDeal)
 	S:HandleItemButton(BlackMarketFrame.HotDeal.Item, true)
 	S:HandleIconBorder(BlackMarketFrame.HotDeal.Item.IconBorder)
 
@@ -84,4 +79,4 @@ function S:Blizzard_BlackMarketUI()
 	end)
 end
 
-S:AddCallbackForAddon('Blizzard_BlackMarketUI')
+AS:RegisterSkin('Blizzard_BlackMarketUI')

@@ -1,18 +1,16 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local hooksecurefunc = hooksecurefunc
 
-function S:Blizzard_BarbershopUI()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.barber) then return end
+function R:Blizzard_BarbershopUI()
+	if not AS:IsSkinEnabled('Blizzard_BarbershopUI', 'barber') then return end
 
 	local frame = _G.BarberShopFrame
 	S:HandleButton(frame.ResetButton, nil, nil, nil, true, nil, nil, nil, true)
 	S:HandleButton(frame.CancelButton, nil, nil, nil, true, nil, nil, nil, true)
 	S:HandleButton(frame.AcceptButton, nil, nil, nil, true, nil, nil, nil, true)
 end
-S:AddCallbackForAddon('Blizzard_BarbershopUI')
 
 local function HandleButton(button)
 	S:HandleNextPrevButton(button)
@@ -22,8 +20,8 @@ local function HandleButton(button)
 	button:SetScript('OnMouseDown', nil)
 end
 
-function S:Blizzard_CharacterCustomize()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.barber) then return end -- yes, it belongs also to tbe BarberUI
+function R:Blizzard_CharacterCustomize()
+	if not AS:IsSkinEnabled('Blizzard_CharacterCustomize', 'barber') then return end
 
 	-- backdrop is ugly, so dont use a style
 	local frame = _G.CharCustomizeFrame
@@ -44,11 +42,11 @@ function S:Blizzard_CharacterCustomize()
 					button.HighlightTexture:SetAlpha(0)
 					button.NormalTexture:SetAlpha(0)
 
-					button.Popout:StripTextures()
-					button.Popout:SetTemplate('Transparent')
+					S:StripTextures(button.Popout)
+					S:SetTemplate(button.Popout, 'Transparent')
 
 					S:HandleButton(button, nil, nil, nil, true)
-					button.backdrop:SetInside(nil, 4, 4)
+					S:SetInside(button.backdrop, nil, 4, 4)
 
 					popout.IsSkinned = true
 				end
@@ -66,4 +64,5 @@ function S:Blizzard_CharacterCustomize()
 	end)
 end
 
-S:AddCallbackForAddon('Blizzard_CharacterCustomize')
+AS:RegisterSkin('Blizzard_BarbershopUI')
+AS:RegisterSkin('Blizzard_CharacterCustomize')

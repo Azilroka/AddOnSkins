@@ -630,6 +630,7 @@ function S:HandlePortraitFrame(frame, createBackdrop, noStrip)
 	local portraitFrame = frame.Portrait or frame.portrait or name and _G[name..'Portrait']
 	local portraitFrameOverlay = frame.PortraitOverlay or name and _G[name..'PortraitOverlay']
 	local artFrameOverlay = frame.ArtOverlayFrame or name and _G[name..'ArtOverlayFrame']
+	local closeButton = frame.CloseButton or name and _G[name..'CloseButton']
 
 	if not noStrip then
 		S:StripTextures(frame)
@@ -643,8 +644,8 @@ function S:HandlePortraitFrame(frame, createBackdrop, noStrip)
 		end
 	end
 
-	if frame.CloseButton then
-		S:HandleCloseButton(frame.CloseButton)
+	if closeButton then
+		S:HandleCloseButton(closeButton)
 	end
 
 	if createBackdrop then
@@ -1828,13 +1829,13 @@ do
 
 	local function UpdateFollower(button)
 		if not S.Retail then
-			button:SetTemplate(button.mode == 'CATEGORY' and 'NoBackdrop' or 'Transparent')
+			S:SetTemplate(button, button.mode == 'CATEGORY' and 'NoBackdrop' or 'Transparent')
 		end
 
 		local category = button.Category
 		if category then
 			category:ClearAllPoints()
-			category:Point('TOP', button, 'TOP', 0, -4)
+			S:Point(category, 'TOP', button, 'TOP', 0, -4)
 		end
 
 		local follower = button.Follower

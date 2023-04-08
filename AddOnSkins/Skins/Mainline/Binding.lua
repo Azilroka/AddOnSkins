@@ -1,5 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local next = next
@@ -14,18 +13,18 @@ local function HandleScrollChild(self)
 		local icon = child.Icon
 		if icon and not icon.IsSkinned then
 			S:HandleIcon(icon)
-			icon:Point('LEFT', 3, 0)
+			S:Point(icon, 'LEFT', 3, 0)
 
 			child.Background:Hide()
-			child:CreateBackdrop(nil, nil, nil, true, nil, nil, nil, true)
+			S:CreateBackdrop(child, nil, nil, nil, true, nil, nil, nil, true)
 
 			S:HandleButton(child.DeleteButton)
-			child.DeleteButton:Size(20)
-			child.FrameHighlight:SetInside(child.bg)
+			S:Size(child.DeleteButton, 20)
+			S:SetInside(child.FrameHighlight, child.bg)
 			child.FrameHighlight:SetColorTexture(1, 1, 1, .20)
 
 			child.NewOutline:SetTexture('')
-			child.BindingText:FontTemplate()
+			S:FontTemplate(child.BindingText)
 			hooksecurefunc(child, 'Init', updateNewGlow)
 
 			icon.IsSkinned = true
@@ -42,23 +41,23 @@ local function UpdateButtonColor(button, isSelected)
 end
 
 local function HandlePortraitIcon(button, texture)
-	button:StripTextures()
+	S:StripTextures(button)
 	button.Portrait:SetTexture(texture)
 	S:HandleIcon(button.Portrait, true)
 	button.Portrait.backdrop:SetBackdropColor(0, 0, 0)
 	button.Highlight:SetColorTexture(1, 1, 1, .25)
-	button.Highlight:SetInside(button.Portrait.backdrop)
+	S:SetInside(button.Highlight, button.Portrait.backdrop)
 	hooksecurefunc(button, 'SetSelectedState', UpdateButtonColor)
 end
 
 function S:Blizzard_ClickBindingUI()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.binding) then return end
+	if not AS:IsSkinEnabled('Blizzard_ClickBindingUI', 'binding') then return end
 
 	local frame = _G.ClickBindingFrame
 	S:HandlePortraitFrame(frame)
 
 	frame.TutorialButton.Ring:Hide()
-	frame.TutorialButton:Point('TOPLEFT', frame, 'TOPLEFT', -12, 12)
+	S:Point(frame.TutorialButton, 'TOPLEFT', frame, 'TOPLEFT', -12, 12)
 
 	for _, v in next, { 'ResetButton', 'AddBindingButton', 'SaveButton' } do
 		S:HandleButton(frame[v])
@@ -70,8 +69,8 @@ function S:Blizzard_ClickBindingUI()
 
 	-- Tutorial Frame ugly af WIP
 	local tutorial = frame.TutorialFrame
-	tutorial.NineSlice:StripTextures()
-	tutorial:SetTemplate('Transparent')
+	S:StripTextures(tutorial.NineSlice)
+	S:SetTemplate(tutorial, 'Transparent')
 
 	local titleBG = tutorial.TitleBg or tutorial.Bg
 	if titleBG then
@@ -86,4 +85,4 @@ function S:Blizzard_ClickBindingUI()
 	end
 end
 
-S:AddCallbackForAddon('Blizzard_ClickBindingUI')
+AS:RegisterSkin('Blizzard_ClickBindingUI')

@@ -1,11 +1,10 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local next = next
 
-function S:BattleNetFrames()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.misc) then return end
+function R:Blizzard_BattleNetFrames()
+	if not AS:IsSkinEnabled('Blizzard_BattleNetFrames', 'misc') then return end
 
 	local skins = {
 		_G.BNToastFrame,
@@ -14,13 +13,11 @@ function S:BattleNetFrames()
 	}
 
 	for i = 1, #skins do
-		skins[i]:SetTemplate('Transparent')
+		S:SetTemplate(skins[i], 'Transparent')
 	end
 
 	local ReportFrame = _G.ReportFrame
-	ReportFrame:StripTextures()
-	ReportFrame:SetTemplate('Transparent')
-	S:HandleCloseButton(ReportFrame.CloseButton)
+	S:HandleFrame(ReportFrame)
 	S:HandleDropDownBox(ReportFrame.ReportingMajorCategoryDropdown)
 	S:HandleButton(ReportFrame.ReportButton)
 	S:HandleEditBox(ReportFrame.Comment)
@@ -28,16 +25,16 @@ function S:BattleNetFrames()
 	-- Fill me with LOVE <3
 
 	local ReportCheatingDialog = _G.ReportCheatingDialog
-	ReportCheatingDialog:StripTextures()
+	S:StripTextures(ReportCheatingDialog)
 	_G.ReportCheatingDialogCommentFrame:StripTextures()
 	S:HandleButton(_G.ReportCheatingDialogReportButton)
 	S:HandleButton(_G.ReportCheatingDialogCancelButton)
-	ReportCheatingDialog:SetTemplate('Transparent')
+	S:SetTemplate(ReportCheatingDialog, 'Transparent')
 	S:HandleEditBox(_G.ReportCheatingDialogCommentFrameEditBox)
 
 	local BattleTagInviteFrame = _G.BattleTagInviteFrame
-	BattleTagInviteFrame:StripTextures()
-	BattleTagInviteFrame:SetTemplate('Transparent')
+	S:StripTextures(BattleTagInviteFrame)
+	S:SetTemplate(BattleTagInviteFrame, 'Transparent')
 
 	for _, child in next, { BattleTagInviteFrame:GetChildren() } do
 		if child:IsObjectType('Button') then
@@ -46,4 +43,4 @@ function S:BattleNetFrames()
 	end
 end
 
-S:AddCallback('BattleNetFrames')
+AS:RegisterSkin('Blizzard_BattleNetFrames')

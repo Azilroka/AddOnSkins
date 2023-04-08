@@ -1,5 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local hooksecurefunc = hooksecurefunc
@@ -40,14 +39,14 @@ local function refreshAlpha()
 	oldAlpha = GetOpacity()
 end
 
-function S:Blizzard_BattlefieldMap()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.bgmap) then return end
+function R:Blizzard_BattlefieldMap()
+	if not AS:IsSkinEnabled('Blizzard_BattlefieldMap', 'bgmap') then return end
 
 	refreshAlpha() -- will need this soon
 
 	local frame = _G.BattlefieldMapFrame
-	frame:StripTextures()
-	frame:CreateBackdrop()
+	S:StripTextures(frame)
+	S:CreateBackdrop(frame)
 	frame:EnableMouse(true)
 	frame:SetMovable(true)
 	frame:SetClampedToScreen(true)
@@ -55,18 +54,18 @@ function S:Blizzard_BattlefieldMap()
 	frame:SetScript('OnUpdate', _G.MapCanvasMixin.OnUpdate) -- shut off the tab fading in, but keep the canvas updater
 
 	local border = frame.BorderFrame
-	border:StripTextures()
+	S:StripTextures(border)
 
 	local close = border.CloseButton
 	close:SetAlpha(0.1)
 	close:SetIgnoreParentAlpha(1)
 	close:SetFrameLevel(close:GetFrameLevel()+1)
 	close:ClearAllPoints()
-	close:Point('TOPRIGHT', 3, 8)
+	S:Point(close, 'TOPRIGHT', 3, 8)
 	S:HandleCloseButton(close)
 
 	local scroll = frame.ScrollContainer
-	frame.backdrop:SetOutside(scroll)
+	S:SetOutside(frame.backdrop, scroll)
 	frame.backdrop:SetBackdropColor(0, 0, 0, oldAlpha)
 
 	local tab = _G.BattlefieldMapTab
@@ -106,4 +105,4 @@ function S:Blizzard_BattlefieldMap()
 	close:HookScript('OnEnter', setRealAlpha)
 end
 
-S:AddCallbackForAddon('Blizzard_BattlefieldMap')
+AS:RegisterSkin('Blizzard_BattlefieldMap')

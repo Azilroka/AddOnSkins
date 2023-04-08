@@ -1,7 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local AB = E:GetModule('ActionBars')
-local S = E:GetModule('Skins')
-local B = E:GetModule('Bags')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local next = next
@@ -29,7 +26,7 @@ local function UpdateBorderColors(button)
 		local r, g, b = GetItemQualityColor(button.quality)
 		button:SetBackdropBorderColor(r, g, b)
 	else
-		button:SetBackdropBorderColor(unpack(E.media.bordercolor))
+		button:SetBackdropBorderColor(unpack(S.Media.borderColor))
 	end
 end
 
@@ -50,9 +47,9 @@ local function BackpackToken_Update(container)
 		if not token.Icon.backdrop then
 			S:HandleIcon(token.Icon, true)
 			token.Count:ClearAllPoints()
-			token.Count:Point('RIGHT', token.Icon, 'LEFT', -3, 0)
-			token.Count:FontTemplate(nil, 12)
-			token.Icon:Size(14)
+			S:Point(token.Count, 'RIGHT', token.Icon, 'LEFT', -3, 0)
+			S:FontTemplate(token.Count, nil, 12)
+			S:Size(token.Icon, 14)
 		end
 	end
 end
@@ -71,32 +68,25 @@ local function SkinButton(button)
 
 	StripBlizzard(button)
 
-	button:SetTemplate()
-	button:StyleButton()
+	S:SetTemplate(button)
+	S:StyleButton(button)
 	button.IconBorder:SetAlpha(0)
 
-	button.icon:SetInside()
-	button.icon:SetTexCoord(unpack(E.TexCoords))
+	S:SetInside(button.icon)
+	S:HandleIcon(button.icon)
 	button.searchOverlay:SetColorTexture(0, 0, 0, 0.8)
 
 	if button.IconQuestTexture then
-		button.IconQuestTexture:SetTexCoord(unpack(E.TexCoords))
-		button.IconQuestTexture:SetInside(button)
+		S:HandleIcon(button.IconQuestTexture)
+		S:SetInside(button.IconQuestTexture)
 	end
 
 	if button.Cooldown then
-		E:RegisterCooldown(button.Cooldown, 'bags')
-
 		local slotID, bagID = GetSlotAndBagID(button)
 		if slotID and bagID then -- initialize any cooldown
 			local start, duration = GetContainerItemCooldown(bagID, slotID)
 			button.Cooldown:SetCooldown(start, duration)
 		end
-	end
-
-	-- bag keybind support from actionbar module
-	if E.private.actionbar.enable then
-		button:HookScript('OnEnter', BagButtonOnEnter)
 	end
 end
 
@@ -301,10 +291,10 @@ local function UpdateBankItem(button)
 	end
 end
 
-function S:ContainerFrame()
-	if E.private.bags.enable or not (E.private.skins.blizzard.enable and E.private.skins.blizzard.bags) then return end
+function R:Blizzard_Bags()
+	if not AS:IsSkinEnabled('Blizzard_Bags', 'bags') then return end
 
-	_G.BankSlotsFrame:StripTextures()
+	S:StripTextures(_G.BankSlotsFrame)
 	S:HandleTab(_G.BankFrameTab1)
 	S:HandleTab(_G.BankFrameTab2)
 	S:HandleEditBox(_G.BagItemSearchBox)
@@ -314,14 +304,14 @@ function S:ContainerFrame()
 	_G.ReagentBankFrame:HookScript('OnShow', _G.ReagentBankFrame.StripTextures)
 
 	for _, icon in next, { _G.BagItemAutoSortButton, _G.BankItemAutoSortButton } do
-		icon:StripTextures()
-		icon:SetTemplate()
-		icon:StyleButton()
+		S:StripTextures(icon)
+		S:SetTemplate(icon)
+		S:StyleButton(icon)
 
 		icon.Icon = icon:CreateTexture()
 		icon.Icon:SetTexture(E.Media.Textures.PetBroom)
-		icon.Icon:SetTexCoord(unpack(E.TexCoords))
-		icon.Icon:SetInside()
+		S:HandleIcon(icon.Icon)
+		S:SetInside(icon.Icon)
 	end
 
 	_G.BackpackTokenFrame:StripTextures(true)
@@ -331,4 +321,4 @@ function S:ContainerFrame()
 	SkinAllBags()
 end
 
-S:AddCallback('ContainerFrame')
+AS:RegisterSkin('Blizzard_Bags')
