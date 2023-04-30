@@ -12,7 +12,7 @@ function S:Blizzard_AlliedRacesUI()
 		_G.AlliedRacesFramePortrait:SetAlpha(0)
 		_G.AlliedRacesFrameBg:SetAlpha(0)
 		S:StripTextures(AlliedRacesFrame.ModelFrame)
-		S:SetTemplate(AlliedRacesFrame, 'Transparent')
+		S:SetTemplate(AlliedRacesFrame)
 
 		local scrollFrame = AlliedRacesFrame.RaceInfoFrame.ScrollFrame
 		scrollFrame.ScrollBar.Border:Hide()
@@ -48,4 +48,4 @@ function S:Blizzard_AlliedRacesUI()
 	end)
 end
 
-AS:RegisterSkin('Blizzard_AlliedRacesUI')
+AS:RegisterSkin('Blizzard_AlliedRacesUI', nil, 'ADDON_LOADED')

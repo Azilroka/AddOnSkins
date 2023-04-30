@@ -1,6 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
-local TT = E:GetModule('Tooltip')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local unpack = unpack
@@ -10,20 +8,19 @@ local hooksecurefunc = hooksecurefunc
 local function StyleTooltip(frame)
 	if not frame then return end
 
-	TT:SetStyle(frame)
+	S:HandleTooltip(frame)
 end
 
 local function AbilityTooltip(frame)
 	if not frame then return end
 
-	frame.Icon:SetTexCoord(unpack(E.TexCoords))
+	S:HandleTooltip(frame)
 	S:HandleIcon(frame.Icon, true)
-	TT:SetStyle(frame)
 end
 
 function S:GarrisonShipyardTooltip()
 	local tt = _G.GarrisonShipyardMapMissionTooltip
-	TT:SetStyle(tt)
+	S:HandleTooltip(tt)
 
 	local reward = tt.ItemTooltip
 	local icon = reward and reward.Icon
@@ -46,8 +43,8 @@ function S:GarrisonShipyardTooltip()
 	StyleTooltip(_G.GarrisonMissionMechanicTooltip)
 end
 
-function S:GarrisonTooltip()
-	if not E.private.skins.blizzard.enable or not E.private.skins.blizzard.tooltip then return end
+function R:Blizzard_GarrisonTooltip()
+	if not AS:IsSkinEnabled('Blizzard_GarrisonTooltip', 'tooltip') then return end
 
 	StyleTooltip(_G.GarrisonFollowerTooltip)
 	StyleTooltip(_G.FloatingGarrisonFollowerTooltip)
@@ -75,13 +72,7 @@ function S:GarrisonTooltip()
 		local abilities = tooltipFrame.Abilities
 		local ability = abilities[numAbilitiesStyled]
 		while ability do
-			local icon = ability.Icon
-			icon:SetTexCoord(unpack(E.TexCoords))
-
-			if not ability.border then
-				ability.border = CreateFrame('Frame', nil, ability)
-				S:HandleIcon(ability.Icon, ability.border)
-			end
+			S:HandleIcon(ability.Icon, true)
 
 			numAbilitiesStyled = numAbilitiesStyled + 1
 			ability = abilities[numAbilitiesStyled]
@@ -97,13 +88,7 @@ function S:GarrisonTooltip()
 		local traits = tooltipFrame.Traits
 		local trait = traits[numTraitsStyled]
 		while trait do
-			local icon = trait.Icon
-			icon:SetTexCoord(unpack(E.TexCoords))
-
-			if not trait.border then
-				trait.border = CreateFrame('Frame', nil, trait)
-				S:HandleIcon(trait.Icon, trait.border)
-			end
+			S:HandleIcon(trait.Icon, true)
 
 			numTraitsStyled = numTraitsStyled + 1
 			trait = traits[numTraitsStyled]
@@ -120,12 +105,7 @@ function S:GarrisonTooltip()
 		local properties = tooltipFrame.Properties
 		local property = properties[numPropertiesStyled]
 		while property do
-			property.Icon:SetTexCoord(unpack(E.TexCoords))
-
-			if not property.border then
-				property.border = CreateFrame('Frame', nil, property)
-				S:HandleIcon(property.Icon, property.border)
-			end
+			S:HandleIcon(property.Icon, true)
 
 			numPropertiesStyled = numPropertiesStyled + 1
 			property = properties[numPropertiesStyled]
@@ -135,4 +115,4 @@ function S:GarrisonTooltip()
 	end)
 end
 
-S:AddCallback('GarrisonTooltip')
+AS:RegisterSkin('Blizzard_GarrisonTooltip')

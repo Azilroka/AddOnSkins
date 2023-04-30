@@ -1,11 +1,10 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local hooksecurefunc = hooksecurefunc
 
-function S:Blizzard_CovenantRenown()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.covenantRenown) then return end
+function R:Blizzard_CovenantRenown()
+	if not AS:IsSkinEnabled('Blizzard_CovenantRenown', 'covenantRenown') then return end
 
 	local frame = _G.CovenantRenownFrame
 	S:HandleCloseButton(frame.CloseButton)
@@ -13,15 +12,14 @@ function S:Blizzard_CovenantRenown()
 	hooksecurefunc(frame, 'SetUpCovenantData', function(Frame)
 		Frame.CloseButton.Border:Hide()
 
-		if E.private.skins.parchmentRemoverEnable then
-			Frame:StripTextures()
-			Frame:SetTemplate('Transparent')
+		if not AS:CheckOption('Parchment') then
+			S:HandleFrame(Frame)
 		end
 	end)
 
-	if E.private.skins.parchmentRemoverEnable then
-		frame.TrackFrame:SetTemplate('Transparent')
+	if not AS:CheckOption('Parchment') then
+		S:SetTemplate(frame.TrackFrame)
 	end
 end
 
-S:AddCallbackForAddon('Blizzard_CovenantRenown')
+AS:RegisterSkin('Blizzard_CovenantRenown', nil, 'ADDON_LOADED')

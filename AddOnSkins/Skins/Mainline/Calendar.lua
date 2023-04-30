@@ -12,7 +12,7 @@ local function SkinContainer(frame, container)
 
 	local child = container or frame.scrollFrame
 	if child and not child.backdrop then
-		S:CreateBackdrop(child, 'Transparent')
+		S:CreateBackdrop(child)
 	end
 end
 
@@ -35,7 +35,7 @@ function R:Blizzard_Calendar()
 
 	local CalendarFrame = _G.CalendarFrame
 	CalendarFrame:DisableDrawLayer('BORDER')
-	S:CreateBackdrop(CalendarFrame, 'Transparent')
+	S:CreateBackdrop(CalendarFrame)
 
 	S:HandleCloseButton(_G.CalendarCloseButton)
 	S:Point(_G.CalendarCloseButton, 'TOPRIGHT', CalendarFrame, 'TOPRIGHT', -4, -4)
@@ -89,8 +89,8 @@ function R:Blizzard_Calendar()
 	S:Point(_G.CalendarFilterFrame.backdrop, 'TOPLEFT', 20, 2)
 	S:Point(_G.CalendarFilterFrame.backdrop, 'BOTTOMRIGHT', _G.CalendarFilterButton, 'BOTTOMRIGHT', 2, -2)
 
-	S:SetTemplate(_G.CalendarContextMenu.NineSlice, 'Transparent')
-	S:SetTemplate(_G.CalendarInviteStatusContextMenu.NineSlice, 'Transparent')
+	S:SetTemplate(_G.CalendarContextMenu.NineSlice)
+	S:SetTemplate(_G.CalendarInviteStatusContextMenu.NineSlice)
 
 	--Boost frame levels
 	for i = 1, 42 do
@@ -214,7 +214,7 @@ function R:Blizzard_Calendar()
 
 	--Holiday View
 	S:StripTextures(_G.CalendarViewHolidayFrame, true)
-	S:SetTemplate(_G.CalendarViewHolidayFrame, 'Transparent')
+	S:SetTemplate(_G.CalendarViewHolidayFrame)
 	S:Point(_G.CalendarViewHolidayFrame, 'TOPLEFT', CalendarFrame, 'TOPRIGHT', 3, -24)
 	S:StripTextures(_G.CalendarViewHolidayFrame.Header)
 	_G.CalendarViewHolidayFrameModalOverlay:SetAlpha(0)
@@ -240,4 +240,4 @@ function R:Blizzard_Calendar()
 	S:HandleButton(_G.CalendarEventPickerCloseButton, true)
 end
 
-AS:RegisterSkin('Blizzard_Calendar')
+AS:RegisterSkin('Blizzard_Calendar', nil, 'ADDON_LOADED')

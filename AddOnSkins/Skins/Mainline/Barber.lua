@@ -43,7 +43,7 @@ function R:Blizzard_CharacterCustomize()
 					button.NormalTexture:SetAlpha(0)
 
 					S:StripTextures(button.Popout)
-					S:SetTemplate(button.Popout, 'Transparent')
+					S:SetTemplate(button.Popout)
 
 					S:HandleButton(button, nil, nil, nil, true)
 					S:SetInside(button.backdrop, nil, 4, 4)
@@ -64,5 +64,5 @@ function R:Blizzard_CharacterCustomize()
 	end)
 end
 
-AS:RegisterSkin('Blizzard_BarbershopUI')
-AS:RegisterSkin('Blizzard_CharacterCustomize')
+AS:RegisterSkin('Blizzard_BarbershopUI', nil, 'ADDON_LOADED')
+AS:RegisterSkin('Blizzard_CharacterCustomize', nil, 'ADDON_LOADED')

@@ -1,5 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local next = next
@@ -12,13 +11,11 @@ local function HandleCheckBox(checkbox)
 	for _, region in next, { checkbox:GetRegions() } do
 		if region:IsObjectType('Texture') then
 			if region:GetTexture() == 130751 then
-				if E.private.skins.checkBoxSkin then
-					region:SetTexture(E.Media.Textures.Melli)
+				region:SetTexture(S.Media.StatusBar)
 
-					local checkedTexture = checkbox:GetCheckedTexture()
-					checkedTexture:SetVertexColor(1, .82, 0, 0.8)
-					checkedTexture:SetInside(checkbox.backdrop)
-				end
+				local checkedTexture = checkbox:GetCheckedTexture()
+				checkedTexture:SetVertexColor(1, .82, 0, 0.8)
+				S:SetInside(checkedTexture, checkbox.backdrop)
 			else
 				region:SetTexture('')
 			end
@@ -48,16 +45,14 @@ local function HandleDialogs()
 	end
 end
 
-function S:EditorManagerFrame()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.editor) then return end
+function R:Blizzard_EditorManagerFrame()
+	if not AS:IsSkinEnabled('Blizzard_EditorManagerFrame', 'editor') then return end
 
 	-- Main Window
 	local editMode = _G.EditModeManagerFrame
-	editMode:StripTextures()
-	editMode:CreateBackdrop('Transparent')
+	S:HandleFrame(editMode, true)
 	editMode.Tutorial:Kill()
 
-	S:HandleCloseButton(editMode.CloseButton)
 	S:HandleButton(editMode.RevertAllChangesButton)
 	S:HandleButton(editMode.SaveChangesButton)
 	S:HandleDropDownBox(editMode.LayoutDropdown.DropDownMenu, 250)
@@ -73,8 +68,7 @@ function S:EditorManagerFrame()
 
 	-- Layout Creator
 	local layout = _G.EditModeNewLayoutDialog
-	layout:StripTextures()
-	layout:CreateBackdrop('Transparent')
+	S:HandleFrame(layout)
 	S:HandleButton(layout.AcceptButton)
 	S:HandleButton(layout.CancelButton)
 	S:HandleEditBox(layout.LayoutNameEditBox)
@@ -82,16 +76,14 @@ function S:EditorManagerFrame()
 
 	-- Layout Unsaved
 	local unsaved = _G.EditModeUnsavedChangesDialog
-	unsaved:StripTextures()
-	unsaved:CreateBackdrop('Transparent')
+	S:HandleFrame(unsaved)
 	S:HandleButton(unsaved.CancelButton)
 	S:HandleButton(unsaved.ProceedButton)
 	S:HandleButton(unsaved.SaveAndProceedButton)
 
 	-- Layout Importer
 	local import = _G.EditModeImportLayoutDialog
-	import:StripTextures()
-	import:CreateBackdrop('Transparent')
+	S:HandleFrame(import)
 	S:HandleButton(import.AcceptButton)
 	S:HandleButton(import.CancelButton)
 	HandleCheckBox(import.CharacterSpecificLayoutCheckButton.Button)
@@ -101,31 +93,30 @@ function S:EditorManagerFrame()
 
 	local importBackdrop = importBox.backdrop
 	importBackdrop:ClearAllPoints()
-	importBackdrop:Point('TOPLEFT', importBox, -4, 4)
-	importBackdrop:Point('BOTTOMRIGHT', importBox, 0, -4)
+	S:Point(importBackdrop, 'TOPLEFT', importBox, -4, 4)
+	S:Point(importBackdrop, 'BOTTOMRIGHT', importBox, 0, -4)
 
 	local scrollbar = importBox.ScrollBar
 	S:HandleScrollBar(scrollbar)
 	scrollbar:ClearAllPoints()
-	scrollbar:Point('TOPLEFT', importBox, 'TOPRIGHT', 4, 4)
-	scrollbar:Point('BOTTOMLEFT', importBox, 'BOTTOMRIGHT', 0, -4)
+	S:Point(scrollbar, 'TOPLEFT', importBox, 'TOPRIGHT', 4, 4)
+	S:Point(scrollbar, 'BOTTOMLEFT', importBox, 'BOTTOMRIGHT', 0, -4)
 
 	local editbox = import.LayoutNameEditBox
 	S:HandleEditBox(editbox)
 
 	local editbackdrop = editbox.backdrop
 	editbackdrop:ClearAllPoints()
-	editbackdrop:Point('TOPLEFT', editbox, -2, -4)
-	editbackdrop:Point('BOTTOMRIGHT', editbox, 2, 4)
+	S:Point(editbackdrop, 'TOPLEFT', editbox, -2, -4)
+	S:Point(editbackdrop, 'BOTTOMRIGHT', editbox, 2, 4)
 
 	-- Dialog (Mover Settings)
 	local dialog = _G.EditModeSystemSettingsDialog
-	dialog:StripTextures()
-	dialog:CreateBackdrop('Transparent')
+	S:HandleFrame(dialog)
 	S:HandleCloseButton(dialog.CloseButton)
 
 	hooksecurefunc(dialog.Buttons, 'AddLayoutChildren', HandleDialogs)
 	HandleDialogs()
 end
 
-S:AddCallback('EditorManagerFrame')
+AS:RegisterSkin('Blizzard_EditorManagerFrame')

@@ -86,7 +86,7 @@ local function HandleHeaders(frame)
 			header:DisableDrawLayer('BACKGROUND')
 
 			if not header.backdrop then
-				S:CreateBackdrop(header, 'Transparent')
+				S:CreateBackdrop(header)
 			end
 
 			header.IsSkinned = true
@@ -187,7 +187,7 @@ local function HandleSellList(frame, hasHeader, fitScrollBar)
 	end
 
 	if hasHeader then
-		S:SetTemplate(frame.ScrollBox, 'Transparent')
+		S:SetTemplate(frame.ScrollBox)
 
 		hooksecurefunc(frame, 'RefreshScrollFrame', HandleHeaders)
 	else
@@ -234,7 +234,7 @@ function R:Blizzard_AuctionHouseUI(event)
 	--[[ Categorie List ]]--
 	local Categories = Frame.CategoriesList
 	S:StripTextures(Categories)
-	S:SetTemplate(Categories.NineSlice, 'Transparent')
+	S:SetTemplate(Categories.NineSlice)
 	S:SetInside(Categories.NineSlice, Categories)
 	S:HandleTrimScrollBar(Categories.ScrollBar)
 
@@ -252,7 +252,7 @@ function R:Blizzard_AuctionHouseUI(event)
 	S:StripTextures(BrowseList)
 	hooksecurefunc(BrowseList, 'RefreshScrollFrame', HandleHeaders)
 	S:HandleTrimScrollBar(BrowseList.ScrollBar)
-	S:SetTemplate(BrowseList, 'Transparent')
+	S:SetTemplate(BrowseList)
 	BrowseList.ScrollBar:ClearAllPoints()
 	S:Point(BrowseList.ScrollBar, 'TOPRIGHT', BrowseList, 1, -16)
 	S:Point(BrowseList.ScrollBar, 'BOTTOMRIGHT', BrowseList, 1, 16)
@@ -303,7 +303,7 @@ function R:Blizzard_AuctionHouseUI(event)
 	--[[ Item Sell Frame | TAB 2 ]]--
 	local SellFrame = Frame.ItemSellFrame
 	HandleSellFrame(SellFrame)
-	S:SetTemplate(Frame.ItemSellFrame, 'Transparent')
+	S:SetTemplate(Frame.ItemSellFrame)
 
 	local ItemSellList = Frame.ItemSellList
 	HandleSellList(ItemSellList, true, true)
@@ -344,7 +344,7 @@ function R:Blizzard_AuctionHouseUI(event)
 
 	local SummaryList = AuctionsFrame.SummaryList
 	HandleSellList(SummaryList)
-	S:SetTemplate(SummaryList, 'Transparent')
+	S:SetTemplate(SummaryList)
 	S:HandleButton(AuctionsFrame.CancelAuctionButton)
 
 	SummaryList.ScrollBar:ClearAllPoints()
@@ -389,7 +389,7 @@ function R:Blizzard_AuctionHouseUI(event)
 	--WoW Token Tutorial Frame
 	local WowTokenGameTimeTutorial = Frame.WoWTokenResults.GameTimeTutorial
 	WowTokenGameTimeTutorial.NineSlice:Hide()
-	S:SetTemplate(WowTokenGameTimeTutorial, 'Transparent')
+	S:SetTemplate(WowTokenGameTimeTutorial)
 	S:HandleCloseButton(WowTokenGameTimeTutorial.CloseButton)
 	S:HandleButton(WowTokenGameTimeTutorial.RightDisplay.StoreButton)
 	WowTokenGameTimeTutorial.Bg:SetAlpha(0)
@@ -414,13 +414,7 @@ function R:Blizzard_AuctionHouseUI(event)
 	progressBar.Text:Point('BOTTOM', progressBar, 'TOP', 0, 5)
 
 	S:HandleCloseButton(multisellFrame.CancelButton)
-	S:HandleIcon(progressBar.Icon)
-
-	-- progressBar already has a backdrop for itself
-	progressBar.IconBackdrop = CreateFrame('Frame', '$parentIconBackdrop', progressBar)
-	progressBar.IconBackdrop:SetFrameLevel(progressBar:GetFrameLevel())
-	progressBar.IconBackdrop:SetOutside(progressBar.Icon)
-	progressBar.IconBackdrop:SetTemplate()
+	S:HandleIcon(progressBar.Icon, true)
 end
 
 AS:RegisterSkin('Blizzard_AuctionHouseUI', nil, 'ADDON_LOADED')

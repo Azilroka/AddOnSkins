@@ -79,4 +79,4 @@ function R:Blizzard_BlackMarketUI()
 	end)
 end
 
-AS:RegisterSkin('Blizzard_BlackMarketUI')
+AS:RegisterSkin('Blizzard_BlackMarketUI', nil, 'ADDON_LOADED')

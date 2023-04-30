@@ -791,8 +791,8 @@ function S:SkinLibDropDownMenu(prefix)
 
 	local bd = _G[key..'_DropDownList1Backdrop']
 	local mbd = _G[key..'_DropDownList1MenuBackdrop']
-	if bd and not bd.template then S:SetTemplate(bd, 'Transparent') end
-	if mbd and not mbd.template then S:SetTemplate(mbd, 'Transparent') end
+	if bd and not bd.template then S:SetTemplate(bd) end
+	if mbd and not mbd.template then S:SetTemplate(mbd) end
 
 	S[prefix..'_UIDropDownMenuSkinned'] = true
 
@@ -802,8 +802,8 @@ function S:SkinLibDropDownMenu(prefix)
 			local lvls = _G[(key == 'Lib' and 'LIB' or key)..'_UIDROPDOWNMENU_MAXLEVELS']
 			local ddbd = lvls and _G[key..'_DropDownList'..lvls..'Backdrop']
 			local ddmbd = lvls and _G[key..'_DropDownList'..lvls..'MenuBackdrop']
-			if ddbd and not ddbd.template then S:SetTemplate(ddbd, 'Transparent') end
-			if ddmbd and not ddmbd.template then S:SetTemplate(ddmbd, 'Transparent') end
+			if ddbd and not ddbd.template then S:SetTemplate(ddbd) end
+			if ddmbd and not ddmbd.template then S:SetTemplate(ddmbd) end
 		end)
 	end
 end
@@ -1132,7 +1132,7 @@ do
 		local thumb = scrollBar:GetThumb()
 		if thumb then
 			thumb:DisableDrawLayer('BACKGROUND')
-			S:CreateBackdrop(thumb, 'Transparent')
+			S:CreateBackdrop(thumb)
 			thumb.backdrop:SetFrameLevel(thumb:GetFrameLevel()+1)
 
 			local r, g, b = unpack(Media.valueColor)
@@ -1841,7 +1841,7 @@ do
 		local follower = button.Follower
 		if follower then
 			if not follower.template then
-				S:SetTemplate(follower, 'Transparent')
+				S:SetTemplate(follower)
 				follower.Name:SetWordWrap(false)
 				follower.Selection:SetTexture()
 				follower.AbilitiesBG:SetTexture()
@@ -1958,7 +1958,7 @@ function S:HandleGarrisonPortrait(portrait, updateAtlas)
 	if not main then return end
 
 	if not main.backdrop then
-		S:CreateBackdrop(main, 'Transparent')
+		S:CreateBackdrop(main)
 	end
 
 	local level = portrait.Level or portrait.LevelText
@@ -2156,7 +2156,7 @@ function S:SkinStatusBarWidget(widgetFrame)
 	local bar = widgetFrame.Bar
 	if not bar or bar.backdrop then return end
 
-	S:CreateBackdrop(bar, 'Transparent')
+	S:CreateBackdrop(bar)
 	bar:SetScale(0.99) -- lol yes, this will keep it placed correctly for Simpy
 
 	if bar.BGLeft then bar.BGLeft:SetAlpha(0) end
@@ -2171,7 +2171,7 @@ do
 	local function handleBar(bar)
 		if not bar or bar.backdrop then return end
 
-		S:CreateBackdrop(bar, 'Transparent')
+		S:CreateBackdrop(bar)
 
 		if bar.BG then bar.BG:SetAlpha(0) end
 		if bar.Spark then bar.Spark:SetAlpha(0) end

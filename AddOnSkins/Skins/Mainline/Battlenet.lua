@@ -13,7 +13,7 @@ function R:Blizzard_BattleNetFrames()
 	}
 
 	for i = 1, #skins do
-		S:SetTemplate(skins[i], 'Transparent')
+		S:SetTemplate(skins[i])
 	end
 
 	local ReportFrame = _G.ReportFrame
@@ -29,12 +29,12 @@ function R:Blizzard_BattleNetFrames()
 	_G.ReportCheatingDialogCommentFrame:StripTextures()
 	S:HandleButton(_G.ReportCheatingDialogReportButton)
 	S:HandleButton(_G.ReportCheatingDialogCancelButton)
-	S:SetTemplate(ReportCheatingDialog, 'Transparent')
+	S:SetTemplate(ReportCheatingDialog)
 	S:HandleEditBox(_G.ReportCheatingDialogCommentFrameEditBox)
 
 	local BattleTagInviteFrame = _G.BattleTagInviteFrame
 	S:StripTextures(BattleTagInviteFrame)
-	S:SetTemplate(BattleTagInviteFrame, 'Transparent')
+	S:SetTemplate(BattleTagInviteFrame)
 
 	for _, child in next, { BattleTagInviteFrame:GetChildren() } do
 		if child:IsObjectType('Button') then

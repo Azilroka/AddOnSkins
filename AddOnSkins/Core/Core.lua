@@ -225,7 +225,7 @@ function AS:StartUp(event, ...)
 	AS:UpdateMedia()
 
 	if AS:CheckAddOn('ElvUI') then
-		AS:SecureHook(ElvUI[1], 'UpdateMedia')
+		AS:SecureHook(_G.ElvUI[1], 'UpdateMedia')
 	end
 
 	if not AS:CheckOption('SkinDebug') then
@@ -256,10 +256,6 @@ function AS:StartUp(event, ...)
 
 	if AS:CheckOption('LoginMsg') then
 		AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
-	end
-
-	if AS:CheckAddOn('AddonLoader') then
-		AS:Print('AddOnSkins is not compatible with AddonLoader.\nPlease remove it if you would like all the skins to function.')
 	end
 
 	if not AS:CheckOption('SkinDebug') and AS.FoundError then

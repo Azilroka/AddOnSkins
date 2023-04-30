@@ -41,4 +41,4 @@ function R:Blizzard_AzeriteEssenceUI()
 	end)
 end
 
-AS:RegisterSkin('Blizzard_AzeriteEssenceUI')
+AS:RegisterSkin('Blizzard_AzeriteEssenceUI', nil, 'ADDON_LOADED')

@@ -70,7 +70,7 @@ function S:Blizzard_ClickBindingUI()
 	-- Tutorial Frame ugly af WIP
 	local tutorial = frame.TutorialFrame
 	S:StripTextures(tutorial.NineSlice)
-	S:SetTemplate(tutorial, 'Transparent')
+	S:SetTemplate(tutorial)
 
 	local titleBG = tutorial.TitleBg or tutorial.Bg
 	if titleBG then
@@ -85,4 +85,4 @@ function S:Blizzard_ClickBindingUI()
 	end
 end
 
-AS:RegisterSkin('Blizzard_ClickBindingUI')
+AS:RegisterSkin('Blizzard_ClickBindingUI', nil, 'ADDON_LOADED')

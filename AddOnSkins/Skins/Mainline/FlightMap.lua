@@ -1,16 +1,11 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 
-function S:Blizzard_FlightMap()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.taxi) then return end
+function R:Blizzard_FlightMap()
+	if not AS:IsSkinEnabled('Blizzard_FlightMap', 'taxi') then return end
 
-	local FlightMapFrame = _G.FlightMapFrame
-	_G.FlightMapFramePortrait:Kill()
-	FlightMapFrame:StripTextures()
-	FlightMapFrame:SetTemplate('Transparent')
-	S:HandleCloseButton(_G.FlightMapFrameCloseButton)
+	S:HandlePortraitFrame(_G.FlightMapFrame)
 end
 
-S:AddCallbackForAddon('Blizzard_FlightMap')
+AS:RegisterSkin('Blizzard_FlightMap', nil, 'ADDON_LOADED')

@@ -1,6 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
-local TT = E:GetModule('Tooltip')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local hooksecurefunc = hooksecurefunc
@@ -20,16 +18,15 @@ local FrameTexs = {
 
 local function SkinOnShow()
 	local ScriptErrorsFrame = _G.ScriptErrorsFrame
-	ScriptErrorsFrame:SetParent(E.UIParent)
-	ScriptErrorsFrame:SetTemplate('Transparent')
+	S:SetTemplate(ScriptErrorsFrame)
 	S:HandleScrollBar(_G.ScriptErrorsFrameScrollBar)
 	S:HandleCloseButton(_G.ScriptErrorsFrameClose)
 
-	ScriptErrorsFrame.ScrollFrame:SetTemplate()
-	ScriptErrorsFrame.ScrollFrame.Text:FontTemplate(nil, 13)
+	S:SetTemplate(ScriptErrorsFrame.ScrollFrame)
+	S:FontTemplate(ScriptErrorsFrame.ScrollFrame.Text, nil, 13)
 	ScriptErrorsFrame.ScrollFrame:SetFrameLevel(ScriptErrorsFrame.ScrollFrame:GetFrameLevel() + 2)
 
-	for i=1, #FrameTexs do
+	for i = 1, #FrameTexs do
 		_G['ScriptErrorsFrame'..FrameTexs[i]]:SetTexture()
 	end
 
@@ -51,30 +48,30 @@ local function SkinOnShow()
 end
 
 local function SkinTableAttributeDisplay(frame)
-	frame:StripTextures()
-	frame:SetTemplate('Transparent')
-	frame.ScrollFrameArt.NineSlice:SetTemplate('Transparent')
+	S:StripTextures(frame)
+	S:SetTemplate(frame)
+	S:SetTemplate(frame.ScrollFrameArt.NineSlice)
 	S:HandleCloseButton(frame.CloseButton)
 	frame.OpenParentButton:ClearAllPoints()
-	frame.OpenParentButton:Point('TOPLEFT', frame, 'TOPLEFT', 2, -2)
+	S:Point(frame.OpenParentButton, 'TOPLEFT', frame, 'TOPLEFT', 2, -2)
 	S:HandleNextPrevButton(frame.OpenParentButton, 'up')
-	frame.OpenParentButton:Size(17)
+	S:Size(frame.OpenParentButton, 17)
 	frame.DuplicateButton:ClearAllPoints()
-	frame.DuplicateButton:Point('LEFT', frame.NavigateForwardButton, 'RIGHT')
+	S:Point(frame.DuplicateButton, 'LEFT', frame.NavigateForwardButton, 'RIGHT')
 	S:HandleCheckBox(frame.VisibilityButton)
-	frame.VisibilityButton:Size(28)
+	S:Size(frame.VisibilityButton, 28)
 	S:HandleCheckBox(frame.HighlightButton)
-	frame.HighlightButton:Size(28)
+	S:Size(frame.HighlightButton, 28)
 	S:HandleCheckBox(frame.DynamicUpdateButton)
-	frame.DynamicUpdateButton:Size(28)
+	S:Size(frame.DynamicUpdateButton, 28)
 	frame.NavigateBackwardButton:ClearAllPoints()
-	frame.NavigateBackwardButton:Point('LEFT', frame.OpenParentButton, 'RIGHT', 2, 0)
+	S:Point(frame.NavigateBackwardButton, 'LEFT', frame.OpenParentButton, 'RIGHT', 2, 0)
 	frame.NavigateForwardButton:ClearAllPoints()
-	frame.NavigateForwardButton:Point('LEFT', frame.NavigateBackwardButton, 'RIGHT', 2, 0)
+	S:Point(frame.NavigateForwardButton, 'LEFT', frame.NavigateBackwardButton, 'RIGHT', 2, 0)
 	frame.DuplicateButton:ClearAllPoints()
-	frame.DuplicateButton:Point('LEFT', frame.NavigateForwardButton, 'RIGHT', 2, 0)
+	S:Point(frame.DuplicateButton, 'LEFT', frame.NavigateForwardButton, 'RIGHT', 2, 0)
 	S:HandleNextPrevButton(frame.DuplicateButton)
-	frame.DuplicateButton:Size(17)
+	S:Size(frame.DuplicateButton, 17)
 	S:HandleNextPrevButton(frame.NavigateBackwardButton)
 	S:HandleNextPrevButton(frame.NavigateForwardButton)
 	S:HandleEditBox(frame.FilterBox)
@@ -83,19 +80,17 @@ local function SkinTableAttributeDisplay(frame)
 	frame.isSkinned = true
 end
 
-function S:ScriptErrorsFrame()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.debug) then return end
+function R:Blizzard_ScriptErrorsFrame()
+	if not AS:IsSkinEnabled('Blizzard_ScriptErrorsFrame', 'debug') then return end
 
 	S:SecureHookScript(_G.ScriptErrorsFrame, 'OnShow', SkinOnShow)
 end
 
-function S:Blizzard_DebugTools()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.debug) then return end
+function R:Blizzard_DebugTools()
+	if not AS:IsSkinEnabled('Blizzard_DebugTools', 'debug') then return end
 
 	-- Tooltips
-	if E.private.skins.blizzard.tooltip then
-		TT:SetStyle(_G.FrameStackTooltip)
-	end
+	S:HandleTooltip(_G.FrameStackTooltip)
 
 	--New Table Attribute Display: mouse over frame and (/tableinspect or [/fstack -> then Ctrl])
 	SkinTableAttributeDisplay(_G.TableAttributeDisplay)
@@ -106,12 +101,5 @@ function S:Blizzard_DebugTools()
 	end)
 end
 
--- ScriptErrorsFrame Skin
-S:AddCallback('ScriptErrorsFrame')
-
--- FrameStack, TableInspect Skins
-if _G.IsAddOnLoaded('Blizzard_DebugTools') then
-	S:AddCallback('Blizzard_DebugTools')
-else
-	S:AddCallbackForAddon('Blizzard_DebugTools')
-end
+AS:RegisterSkin('Blizzard_ScriptErrorsFrame')
+AS:RegisterSkin('Blizzard_DebugTools', nil, 'ADDON_LOADED')

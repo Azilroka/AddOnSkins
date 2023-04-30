@@ -105,4 +105,4 @@ function R:Blizzard_BattlefieldMap()
 	close:HookScript('OnEnter', setRealAlpha)
 end
 
-AS:RegisterSkin('Blizzard_BattlefieldMap')
+AS:RegisterSkin('Blizzard_BattlefieldMap', nil, 'ADDON_LOADED')

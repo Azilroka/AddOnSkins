@@ -19,7 +19,7 @@ local function SkinHeaders(header, x, y)
 		if section then
 			if not section.backdrop then
 				section:DisableDrawLayer('BACKGROUND')
-				S:CreateBackdrop(section, 'Transparent')
+				S:CreateBackdrop(section)
 				section.backdrop:SetPoint('BOTTOMRIGHT', i < maxHeaders and -5 or 0, -2)
 			end
 		end
@@ -73,11 +73,11 @@ local function SkinMainFrames()
 
 	S:StripTextures(list)
 	S:SetTemplate(list)
-	S:SetTemplate(list.ResultsListing.ScrollFrame, 'Transparent')
+	S:SetTemplate(list.ResultsListing.ScrollFrame)
 
 	if AS.Retail then
 		S:StripTextures(cancelling.ResultsListing)
-		S:SetTemplate(cancelling.ResultsListing.ScrollFrame, 'Transparent')
+		S:SetTemplate(cancelling.ResultsListing.ScrollFrame)
 		cancelling.ResultsListing.ScrollFrame:SetPoint('TOPLEFT', cancelling.ResultsListing.HeaderContainer, 'BOTTOMLEFT', 16, -6)
 		selling.CurrentPricesListing.ScrollFrame:SetPoint('TOPLEFT', selling.CurrentPricesListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
 		selling.HistoricalPriceListing.ScrollFrame:SetPoint('TOPLEFT', selling.HistoricalPriceListing.HeaderContainer, 'BOTTOMLEFT', -3, -4)
@@ -99,13 +99,13 @@ local function SkinMainFrames()
 
 	if AS.Retail then
 		S:StripTextures(selling.HistoricalPriceInset)
-		S:SetTemplate(selling.HistoricalPriceInset, 'Transparent')
+		S:SetTemplate(selling.HistoricalPriceInset)
 		selling.HistoricalPriceInset:SetPoint('TOPLEFT', selling.HistoricalPriceListing, 'TOPLEFT', -7, -25)
 		selling.HistoricalPriceInset:SetPoint('BOTTOMRIGHT', selling.HistoricalPriceListing, 'BOTTOMRIGHT', -2, 0)
 
 		S:StripTextures(selling.BagInset)
 		S:StripTextures(selling.BagListing.ScrollFrame)
-		S:CreateBackdrop(selling.BagListing.ScrollFrame, 'Transparent')
+		S:CreateBackdrop(selling.BagListing.ScrollFrame)
 		S:SetOutside(selling.BagListing.ScrollFrame, selling.BagListing)
 		S:SetOutside(selling.BagListing.ScrollFrame.backdrop, selling.BagListing, 5, 5)
 	end
@@ -353,9 +353,9 @@ local function SkinImportExport()
 	S:StripTextures(import)
 	S:StripTextures(export)
 
-	S:SetTemplate(copy, 'Transparent')
-	S:SetTemplate(import, 'Transparent')
-	S:SetTemplate(export, 'Transparent')
+	S:SetTemplate(copy)
+	S:SetTemplate(import)
+	S:SetTemplate(export)
 
 	S:HandleScrollBar(copy.ScrollFrame.ScrollBar)
 	S:HandleScrollBar(import.ScrollFrame.ScrollBar)
@@ -389,7 +389,7 @@ end
 
 local function SkinItemFrame(frame)
 	S:StripTextures(frame)
-	S:SetTemplate(frame, 'Transparent')
+	S:SetTemplate(frame)
 
 	S:HandleButton(frame.Cancel)
 	S:HandleButton(frame.ResetAllButton)

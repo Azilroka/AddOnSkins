@@ -1,5 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local pairs, next = pairs, next
@@ -18,7 +17,7 @@ local function reskinScrollChild(self)
 			S:HandleCloseButton(button)
 
 			button:ClearAllPoints()
-			button:Point('LEFT', 3, 0)
+			S:Point(button, 'LEFT', 3, 0)
 
 			local checkButton = child.CheckButton
 			if checkButton then
@@ -33,7 +32,7 @@ end
 
 local function ReskinEventTraceScrollBox(frame)
 	frame:DisableDrawLayer('BACKGROUND')
-	frame:CreateBackdrop('Transparent')
+	S:CreateBackdrop(frame)
 
 	hooksecurefunc(frame, 'Update', reskinScrollChild)
 end
@@ -43,21 +42,19 @@ local function ReskinEventTraceFrame(frame)
 	S:HandleTrimScrollBar(frame.ScrollBar)
 end
 
-function S:Blizzard_EventTrace()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.eventLog) then return end
+function R:Blizzard_EventTrace()
+	if not AS:IsSkinEnabled('Blizzard_EventTrace', 'eventLog') then return end
 
 	-- Frame
 	local EventTrace = _G.EventTrace
-	EventTrace:StripTextures()
-	EventTrace:CreateBackdrop('Transparent')
-	S:HandleCloseButton(_G.EventTraceCloseButton)
+	S:handleFrame(EventTrace)
 
 	_G.EventTraceTooltip:SetFrameLevel(10)
 
 	-- Top Buttons
 	local SubtitleBar = EventTrace.SubtitleBar
-	EventTrace.SubtitleBar.ViewLog:StripTextures()
-	EventTrace.SubtitleBar.ViewFilter:StripTextures()
+	S:StripTextures(EventTrace.SubtitleBar.ViewLog)
+	S:StripTextures(EventTrace.SubtitleBar.ViewFilter)
 	S:HandleButton(EventTrace.SubtitleBar.ViewLog)
 	S:HandleButton(EventTrace.SubtitleBar.ViewFilter)
 
@@ -70,18 +67,18 @@ function S:Blizzard_EventTrace()
 	local LogBar = EventTrace.Log.Bar
 	S:HandleEditBox(LogBar.SearchBox)
 	LogBar.SearchBox:SetHeight(18)
-	LogBar.DiscardAllButton:StripTextures()
-	LogBar.PlaybackButton:StripTextures()
-	LogBar.MarkButton:StripTextures()
+	S:StripTextures(LogBar.DiscardAllButton)
+	S:StripTextures(LogBar.PlaybackButton)
+	S:StripTextures(LogBar.MarkButton)
 	S:HandleButton(LogBar.DiscardAllButton)
 	S:HandleButton(LogBar.PlaybackButton)
 	S:HandleButton(LogBar.MarkButton)
 
 	-- Filter Bar
 	local FilterBar = EventTrace.Filter.Bar
-	FilterBar.DiscardAllButton:StripTextures()
-	FilterBar.UncheckAllButton:StripTextures()
-	FilterBar.CheckAllButton:StripTextures()
+	S:StripTextures(FilterBar.DiscardAllButton)
+	S:StripTextures(FilterBar.UncheckAllButton)
+	S:StripTextures(FilterBar.CheckAllButton)
 	S:HandleButton(FilterBar.DiscardAllButton)
 	S:HandleButton(FilterBar.UncheckAllButton)
 	S:HandleButton(FilterBar.CheckAllButton)
@@ -109,4 +106,4 @@ function S:Blizzard_EventTrace()
 	end
 end
 
-S:AddCallbackForAddon('Blizzard_EventTrace')
+AS:RegisterSkin('Blizzard_EventTrace', nil, 'ADDON_LOADED')

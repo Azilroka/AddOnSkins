@@ -1,5 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local ipairs, pairs, next = ipairs, pairs, next
@@ -19,8 +18,8 @@ local function ReskinPickerOptions(self)
 				if check then
 					check:SetColorTexture(1, .82, 0, 0.8)
 					check:SetSize(10, 10)
-					check:Point('LEFT', 2, 0)
-					check:CreateBackdrop('Transparent')
+					S:Point(check, 'LEFT', 2, 0)
+					S:CreateBackdrop(check)
 				end
 
 				child.IsSkinned = true
@@ -31,18 +30,16 @@ end
 
 local function HandleVoicePicker(voicePicker)
 	local customFrame = voicePicker:GetChildren()
-	customFrame:StripTextures()
-	customFrame:CreateBackdrop('Transparent')
+	S:HandleFrame(customFrame, true)
 	voicePicker:HookScript('OnShow', ReskinPickerOptions)
 end
 
-function S:ChatConfig()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.blizzardOptions) then return end
+function R:Blizzard_ChatConfig()
+	if not AS:IsSkinEnabled('Blizzard_ChatConfig', 'blizzardOptions') then return end
 
 	local ChatConfigFrame = _G.ChatConfigFrame
-	ChatConfigFrame:StripTextures()
-	ChatConfigFrame:SetTemplate('Transparent')
-	ChatConfigFrame.Header:StripTextures()
+	S:HandleFrame(ChatConfigFrame)
+	S:StripTextures(ChatConfigFrame.Header)
 
 	hooksecurefunc('ChatConfig_UpdateCheckboxes', function(frame)
 		if not FCF_GetCurrentChatFrame() then return end
@@ -52,7 +49,7 @@ function S:ChatConfig()
 			local checkBoxName = nameString..index
 			local checkbox = _G[checkBoxName]
 			if checkbox and not checkbox.IsSkinned then
-				checkbox:StripTextures()
+				S:StripTextures(checkbox)
 				S:HandleCheckBox(_G[checkBoxName..'Check'])
 
 				checkbox.IsSkinned = true
@@ -81,7 +78,7 @@ function S:ChatConfig()
 	hooksecurefunc(_G.ChatConfigFrameChatTabManager, 'UpdateWidth', function(frame)
 		for tab in frame.tabPool:EnumerateActive() do
 			if not tab.IsSkinned then
-				tab:StripTextures()
+				S:StripTextures(tab)
 
 				tab.IsSkinned = true
 			end
@@ -91,7 +88,7 @@ function S:ChatConfig()
 	for i = 1, 5 do
 		local tab = _G['CombatConfigTab'..i]
 		if tab then
-			tab:StripTextures()
+			S:StripTextures(tab)
 
 			local text = tab.Text
 			if text then
@@ -120,17 +117,17 @@ function S:ChatConfig()
 		_G.CombatConfigColorsUnitColors,
 		_G.CombatConfigMessageSourcesDoneTo,
 	}) do
-		frame:StripTextures()
+		S:StripTextures(frame)
 	end
 
-	_G.ChatConfigCategoryFrame:CreateBackdrop('Transparent')
-	_G.ChatConfigCategoryFrame.backdrop:SetInside()
+	S:CreateBackdrop(_G.ChatConfigCategoryFrame)
+	S:SetInside(_G.ChatConfigCategoryFrame.backdrop)
 
-	_G.ChatConfigBackgroundFrame:CreateBackdrop('Transparent')
-	_G.ChatConfigBackgroundFrame.backdrop:SetInside()
+	S:CreateBackdrop(_G.ChatConfigBackgroundFrame)
+	S:SetInside(_G.ChatConfigBackgroundFrame.backdrop)
 
-	_G.ChatConfigCombatSettingsFilters:CreateBackdrop('Transparent')
-	_G.ChatConfigCombatSettingsFilters.backdrop:SetInside()
+	S:CreateBackdrop(_G.ChatConfigCombatSettingsFilters)
+	S:SetInside(_G.ChatConfigCombatSettingsFilters.backdrop)
 
 	for _, box in pairs({ -- combat boxes
 		_G.CombatConfigColorsHighlightingLine,
@@ -165,9 +162,8 @@ function S:ChatConfig()
 		for index in ipairs(frame.swatchTable) do
 			local bu = _G[nameString..index]
 			if bu and not bu.backdrop then
-				bu:StripTextures()
-				bu:CreateBackdrop('Transparent')
-				bu.backdrop:SetInside()
+				S:HandleFrame(bu, true)
+				S:SetInside(bu.backdrop)
 
 				bu.backdrop = true
 			end
@@ -188,10 +184,10 @@ function S:ChatConfig()
 
 	_G.ChatConfigMoveFilterUpButton:SetSize(22, 22)
 	_G.ChatConfigMoveFilterDownButton:SetSize(22, 22)
-	_G.ChatConfigCombatSettingsFiltersAddFilterButton:Point('RIGHT', _G.ChatConfigCombatSettingsFiltersDeleteButton, 'LEFT', -1, 0)
-	_G.ChatConfigCombatSettingsFiltersCopyFilterButton:Point('RIGHT', _G.ChatConfigCombatSettingsFiltersAddFilterButton, 'LEFT', -1, 0)
-	_G.ChatConfigMoveFilterUpButton:Point('TOPLEFT', _G.ChatConfigCombatSettingsFilters, 'BOTTOMLEFT', 3, 0)
-	_G.ChatConfigMoveFilterDownButton:Point('LEFT', _G.ChatConfigMoveFilterUpButton, 'RIGHT', 1, 0)
+	S:Point(_G.ChatConfigCombatSettingsFiltersAddFilterButton, 'RIGHT', _G.ChatConfigCombatSettingsFiltersDeleteButton, 'LEFT', -1, 0)
+	S:Point(_G.ChatConfigCombatSettingsFiltersCopyFilterButton, 'RIGHT', _G.ChatConfigCombatSettingsFiltersAddFilterButton, 'LEFT', -1, 0)
+	S:Point(_G.ChatConfigMoveFilterUpButton, 'TOPLEFT', _G.ChatConfigCombatSettingsFilters, 'BOTTOMLEFT', 3, 0)
+	S:Point(_G.ChatConfigMoveFilterDownButton, 'LEFT', _G.ChatConfigMoveFilterUpButton, 'RIGHT', 1, 0)
 
 	S:HandleEditBox(_G.CombatConfigSettingsNameEditBox)
 	S:HandleRadioButton(_G.CombatConfigColorsColorizeEntireLineBySource)
@@ -199,7 +195,7 @@ function S:ChatConfig()
 	S:HandleTrimScrollBar(_G.ChatConfigCombatSettingsFilters.ScrollBar)
 
 	-- TextToSpeech
-	_G.TextToSpeechButton:StripTextures()
+	S:StripTextures(_G.TextToSpeechButton)
 
 	S:HandleButton(_G.TextToSpeechFramePlaySampleButton)
 	S:HandleButton(_G.TextToSpeechFramePlaySampleAlternateButton)
@@ -238,7 +234,7 @@ function S:ChatConfig()
 	HandleVoicePicker(_G.TextToSpeechFrameTtsVoicePicker)
 	HandleVoicePicker(_G.TextToSpeechFrameTtsVoiceAlternatePicker)
 
-	_G.ChatConfigTextToSpeechChannelSettingsLeft:StripTextures()
+	S:StripTextures(_G.ChatConfigTextToSpeechChannelSettingsLeft)
 end
 
-S:AddCallback('ChatConfig')
+AS:RegisterSkin('Blizzard_ChatConfig')

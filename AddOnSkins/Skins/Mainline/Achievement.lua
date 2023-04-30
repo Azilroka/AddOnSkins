@@ -94,7 +94,7 @@ local function HandleCompareCategory(button)
 	button:DisableDrawLayer('BORDER')
 	HideBackdrop(button)
 	button.Background:Hide()
-	S:CreateBackdrop(button, 'Transparent')
+	S:CreateBackdrop(button)
 	S:SetInside(button.backdrop, button, 2, 2)
 
 	button.TitleBar:Hide()
@@ -195,7 +195,7 @@ function R:Blizzard_AchievementUI()
 				bu.Icon.frame:Hide()
 				S:HandleIcon(bu.Icon.texture, true)
 
-				S:CreateBackdrop(bu, 'Transparent')
+				S:CreateBackdrop(bu)
 				S:SetInside(bu.backdrop)
 
 				bu.isSkinned = true
@@ -291,7 +291,7 @@ function R:Blizzard_AchievementUI()
 				child.Description:SetTextColor(.9, .9, .9)
 				child.Description.SetTextColor = S.noop
 
-				S:CreateBackdrop(child, 'Transparent')
+				S:CreateBackdrop(child)
 				S:Point(child.backdrop, 'TOPLEFT', 1, -1)
 				S:Point(child.backdrop, 'BOTTOMRIGHT', 0, 2)
 				S:HandleIcon(child.Icon.texture, true)
@@ -351,7 +351,7 @@ function R:Blizzard_AchievementUI()
 	_G.AchievementFrameComparisonHeaderPortrait:Hide()
 	_G.AchievementFrameComparisonHeaderPortraitBg:Hide()
 	S:Point(_G.AchievementFrameComparisonHeader, 'BOTTOMRIGHT', Comparison, 'TOPRIGHT', 39, 26)
-	S:CreateBackdrop(_G.AchievementFrameComparisonHeader, 'Transparent')
+	S:CreateBackdrop(_G.AchievementFrameComparisonHeader)
 	S:Point(_G.AchievementFrameComparisonHeader.backdrop, 'TOPLEFT', 20, -20)
 	S:Point(_G.AchievementFrameComparisonHeader.backdrop, 'BOTTOMRIGHT', -28, -5)
 

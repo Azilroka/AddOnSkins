@@ -1,5 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local next = next
@@ -12,28 +11,28 @@ local function HandlePanel(panel)
 	if panel.CloseButton then
 		S:HandleCloseButton(panel.CloseButton)
 	end
-
-	if panel.MajorFactionList then
-		-- 🧁
-	end
 end
 
-function S:Blizzard_ExpansionLandingPage()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.expansionLanding) then return end
+function R:Blizzard_ExpansionLandingPage()
+	if not AS:IsSkinEnabled('Blizzard_ExpansionLandingPage', 'expansionLanding') then return end
 
 	local frame = _G.ExpansionLandingPage
 	if frame.Overlay then
 		for _, child in next, { frame.Overlay:GetChildren() } do
-			if E.private.skins.parchmentRemoverEnable then
-				child:StripTextures()
-				child:SetTemplate('Transparent')
+			if not AS:CheckOption('Parchment') then
+				S:StripTextures(child)
+				S:SetTemplate(child)
 			end
 
 			if child.DragonridingPanel then
 				HandlePanel(child)
 			end
+
+			if child.MajorFactionList then
+				S:HandleTrimScrollBar(child.MajorFactionList.ScrollBar)
+			end
 		end
 	end
 end
 
-S:AddCallbackForAddon('Blizzard_ExpansionLandingPage')
+AS:RegisterSkin('Blizzard_ExpansionLandingPage', nil, 'ADDON_LOADED')

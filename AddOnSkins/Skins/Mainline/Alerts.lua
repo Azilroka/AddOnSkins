@@ -24,7 +24,7 @@ local function SkinAchievementAlert(frame)
 	end
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', frame.Background, 'TOPLEFT', -2, -6)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', frame.Background, 'BOTTOMRIGHT', -2, 6)
 	end
@@ -59,7 +59,7 @@ local function SkinCriteriaAlert(frame)
 	end
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', frame, 'TOPLEFT', -2, -6)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -2, 6)
 	end
@@ -84,7 +84,7 @@ local function SkinDungeonCompletionAlert(frame)
 	end
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', frame, 'TOPLEFT', -2, -6)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -2, 6)
 	end
@@ -121,7 +121,7 @@ local function SkinGuildChallengeAlert(frame)
 	end
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', -2, -6)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', -2, 6)
 	end
@@ -163,7 +163,7 @@ local function SkinHonorAwardedAlert(frame)
 	end
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', frame.Icon, 'TOPLEFT', -4, 4)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', frame.Icon, 'BOTTOMRIGHT', 180, -4)
 	end
@@ -174,7 +174,7 @@ local function SkinInvasionAlert(frame)
 		frame:SetAlpha(1)
 		hooksecurefunc(frame, 'SetAlpha', forceAlpha)
 
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', 4, 4)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', -7, 6)
 
@@ -208,7 +208,7 @@ local function SkinScenarioAlert(frame)
 	end
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', 4, 4)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', -7, 6)
 	end
@@ -236,7 +236,7 @@ local function SkinWorldQuestCompleteAlert(frame)
 		frame:SetAlpha(1)
 		hooksecurefunc(frame, 'SetAlpha', forceAlpha)
 
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', 10, -6)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', -14, 6)
 
@@ -271,7 +271,7 @@ local function SkinGarrisonFollowerAlert(frame, _, _, _, quality)
 		end
 
 		--Create Backdrop
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', 16, -3)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', -16, 16)
 
@@ -315,7 +315,7 @@ local function SkinGarrisonShipFollowerAlert(frame)
 		S:Kill(frame.Background)
 
 		--Create Backdrop
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', 16, -3)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', -16, 16)
 
@@ -333,7 +333,7 @@ local function SkinGarrisonTalentAlert(frame)
 		S:HandleIcon(frame.Icon, true)
 
 		--Create Backdrop
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', 8, -2)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', -6, 2)
 
@@ -348,7 +348,7 @@ local function SkinGarrisonBuildingAlert(frame)
 		frame:GetRegions():Hide()
 
 		--Create Backdrop
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', 8, -8)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', -6, 8)
 
@@ -370,7 +370,7 @@ local function SkinGarrisonMissionAlert(frame) -- SkinGarrisonShipMissionAlert
 		S:HandleIcon(frame.MissionType, true)
 
 		--Create Backdrop
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', 8, -2)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', -6, 2)
 
@@ -390,7 +390,7 @@ local function SkinGarrisonRandomMissionAlert(frame, _, _, _, _, _, quality)
 		S:HandleIcon(frame.MissionType, true)
 
 		--Create Backdrop
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', 8, -2)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', -6, 2)
 
@@ -424,7 +424,7 @@ local function SkinLegendaryItemAlert(frame, itemLink)
 		S:HandleIcon(frame.Icon, true)
 
 		--Create Backdrop
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', 20, -20)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', -20, 20)
 
@@ -461,7 +461,7 @@ local function SkinLootWonAlert(frame)
 	lootItem.SpecRing:SetTexture('')
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', lootItem.Icon.backdrop, 'TOPLEFT', -4, 4)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', lootItem.Icon.backdrop, 'BOTTOMRIGHT', 180, -4)
 	end
@@ -482,7 +482,7 @@ local function SkinLootUpgradeAlert(frame)
 	S:HandleIcon(frame.Icon, true)
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', frame.Icon.backdrop, 'TOPLEFT', -8, 8)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', frame.Icon.backdrop, 'BOTTOMRIGHT', 180, -8)
 	end
@@ -503,7 +503,7 @@ local function SkinMoneyWonAlert(frame)
 	S:HandleIcon(frame.Icon, true)
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', frame.Icon.backdrop, 'TOPLEFT', -4, 4)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', frame.Icon.backdrop, 'BOTTOMRIGHT', 180, -4)
 	end
@@ -518,7 +518,7 @@ local function SkinEntitlementDeliveredAlert(frame)
 	end
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', frame, 'TOPLEFT', 10, -6)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -14, 6)
 	end
@@ -541,7 +541,7 @@ local function SkinRafRewardDeliveredAlert(frame)
 	end
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', frame, 'TOPLEFT', 10, -6)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -14, 6)
 	end
@@ -566,7 +566,7 @@ local function SkinDigsiteCompleteAlert(frame)
 	end
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', frame, 'TOPLEFT', -16, -6)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', frame, 'BOTTOMRIGHT', 13, 6)
 	end
@@ -586,7 +586,7 @@ local function SkinNewRecipeLearnedAlert(frame)
 	end
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', frame, 'TOPLEFT', 19, -6)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', frame, 'BOTTOMRIGHT', -23, 6)
 	end
@@ -617,7 +617,7 @@ local function SkinNewPetAlert(frame)
 	S:HandleIcon(frame.Icon, true)
 
 	if not frame.backdrop then
-		S:CreateBackdrop(frame, 'Transparent')
+		S:CreateBackdrop(frame)
 		S:Point(frame.backdrop, 'TOPLEFT', frame.Icon.backdrop, 'TOPLEFT', -8, 8)
 		S:Point(frame.backdrop, 'BOTTOMRIGHT', frame.Icon.backdrop, 'BOTTOMRIGHT', 180, -8)
 	end
@@ -678,7 +678,7 @@ function R:AlertSystem()
 	S:Kill(frame.IconBorder)
 
 	--Create Backdrop
-	S:CreateBackdrop(frame, 'Transparent')
+	S:CreateBackdrop(frame)
 	S:Point(frame.backdrop, 'TOPLEFT', frame.Icon.backdrop, 'TOPLEFT', -4, 4)
 	S:Point(frame.backdrop, 'BOTTOMRIGHT', frame.Icon.backdrop, 'BOTTOMRIGHT', 180, -4)
 
@@ -695,7 +695,7 @@ function R:AlertSystem()
 	S:Kill(lootItem.IconBorder)
 
 	--Create Backdrop
-	S:CreateBackdrop(frame, 'Transparent')
+	S:CreateBackdrop(frame)
 	S:Point(frame.backdrop, 'TOPLEFT', frame.Icon.backdrop, 'TOPLEFT', -4, 4)
 	S:Point(frame.backdrop, 'BOTTOMRIGHT', frame.Icon.backdrop, 'BOTTOMRIGHT', 180, -4)
 end

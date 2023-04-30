@@ -27,7 +27,7 @@ function S:Blizzard_ArtifactUI()
 	ArtifactFrame.AppearancesTab:HookScript('OnShow', function(frame)
 		for _, child in next, { frame:GetChildren() } do
 			if child.appearanceID and not child.backdrop then
-				S:CreateBackdrop(child, 'Transparent')
+				S:CreateBackdrop(child)
 				child.SwatchTexture:SetTexCoord(.20,.80,.20,.80)
 				S:SetInside(child.SwatchTexture, child.backdrop)
 				child.Border:SetAlpha(0)
@@ -54,4 +54,4 @@ function S:Blizzard_ArtifactUI()
 	end)
 end
 
-AS:RegisterSkin('Blizzard_ArtifactUI')
+AS:RegisterSkin('Blizzard_ArtifactUI', nil, 'ADDON_LOADED')

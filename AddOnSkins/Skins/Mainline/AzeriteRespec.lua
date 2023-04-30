@@ -47,4 +47,4 @@ function S:Blizzard_AzeriteRespecUI()
 	S:HandleButton(ButtonFrame.AzeriteRespecButton, true)
 end
 
-AS:RegisterSkin('Blizzard_AzeriteRespecUI')
+AS:RegisterSkin('Blizzard_AzeriteRespecUI', nil, 'ADDON_LOADED')

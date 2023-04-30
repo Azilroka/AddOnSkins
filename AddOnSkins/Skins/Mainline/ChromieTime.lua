@@ -1,30 +1,28 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 
-function S:Blizzard_ChromieTimeUI()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.chromieTime) then return end
+function R:Blizzard_ChromieTimeUI()
+	if not AS:IsSkinEnabled('Blizzard_ChromieTimeUI', 'chromieTime') then return end
 
 	local frame = _G.ChromieTimeFrame
 	S:HandleCloseButton(frame.CloseButton)
 	S:HandleButton(frame.SelectButton)
 
-	if E.private.skins.parchmentRemoverEnable then
-		frame:StripTextures()
+	if not AS:CheckOption('Parchment') then
+		S:HandleFrame(frame)
 		frame.Background:Hide()
-		frame:SetTemplate('Transparent')
 
 		local Title = frame.Title
 		Title:DisableDrawLayer('BACKGROUND')
-		Title:SetTemplate('Transparent')
+		S:SetTemplate(Title)
 
 		local InfoFrame = frame.CurrentlySelectedExpansionInfoFrame
 		InfoFrame:DisableDrawLayer('BACKGROUND')
-		InfoFrame:SetTemplate('Transparent')
+		S:SetTemplate(InfoFrame)
 		InfoFrame.Name:SetTextColor(1, .8, 0)
 		InfoFrame.Description:SetTextColor(1, 1, 1)
 	end
 end
 
-S:AddCallbackForAddon('Blizzard_ChromieTimeUI')
+AS:RegisterSkin('Blizzard_ChromieTimeUI', nil, 'ADDON_LOADED')

@@ -1,15 +1,14 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local hooksecurefunc = hooksecurefunc
 
-function S:Blizzard_CovenantPreviewUI()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.covenantPreview) then return end
+function R:Blizzard_CovenantPreviewUI()
+	if not AS:IsSkinEnabled('Blizzard_CovenantPreviewUI', 'covenantPreview') then return end
 
 	local frame = _G.CovenantPreviewFrame
 
-	if E.private.skins.parchmentRemoverEnable then
+	if not AS:CheckOption('Parchment') then
 		frame.InfoPanel.Name:SetTextColor(1, 1, 1)
 		frame.InfoPanel.Location:SetTextColor(1, 1, 1)
 		frame.InfoPanel.Description:SetTextColor(1, 1, 1)
@@ -20,21 +19,21 @@ function S:Blizzard_CovenantPreviewUI()
 
 	hooksecurefunc(frame, 'TryShow', function(covenantInfo)
 		if covenantInfo and not frame.IsSkinned then
-			frame:SetTemplate('Transparent')
+			S:SetTemplate(frame)
 
 			frame.ModelSceneContainer.ModelSceneBorder:SetAlpha(0)
-			frame.InfoPanel:SetTemplate('Transparent')
+			S:SetTemplate(frame.InfoPanel)
 
-			if E.private.skins.parchmentRemoverEnable then
+			if not AS:CheckOption('Parchment') then
 				frame.Title:DisableDrawLayer('BACKGROUND')
 				frame.Title.Text:SetTextColor(1, .8, 0)
-				frame.Title:SetTemplate('Transparent')
+				S:SetTemplate(frame.Title)
 				frame.Background:SetAlpha(0)
 				frame.BorderFrame:SetAlpha(0)
 				frame.InfoPanel.Parchment:SetAlpha(0)
 			end
 
-			frame.CloseButton.Border:Kill()
+			S:Kill(frame.CloseButton.Border)
 			S:HandleCloseButton(frame.CloseButton)
 			S:HandleButton(frame.SelectButton)
 
@@ -47,4 +46,4 @@ function S:Blizzard_CovenantPreviewUI()
 	S:HandleCheckBox(_G.TransmogAndMountDressupFrame.ShowMountCheckButton)
 end
 
-S:AddCallbackForAddon('Blizzard_CovenantPreviewUI')
+AS:RegisterSkin('Blizzard_CovenantPreviewUI', nil, 'ADDON_LOADED')

@@ -1,5 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local gsub, ipairs = gsub, ipairs
@@ -21,11 +20,11 @@ local function ReskinTalents(self)
 			frame.TierBorder:SetAlpha(0)
 			frame.Background:SetAlpha(0)
 
-			frame:SetTemplate('Transparent')
+			S:SetTemplate(frame)
 			frame:SetBackdropBorderColor(0, 1, 0)
 
 			S:HandleIcon(frame.Icon, true)
-			frame.Icon:Point('TOPLEFT', 7, -7)
+			S:Point(frame.Icon, 'TOPLEFT', 7, -7)
 			frame.Highlight:SetColorTexture(1, 1, 1, .25)
 
 			HandleIconString(frame.InfoText)
@@ -47,18 +46,14 @@ local function ReplaceCurrencies(displayGroup)
 	end
 end
 
-function S:Blizzard_CovenantSanctum()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.covenantSanctum) then return end
+function R:Blizzard_CovenantSanctum()
+	if not AS:IsSkinEnabled('Blizzard_CovenantSanctum', 'covenantSanctum') then return end
 
 	local frame = _G.CovenantSanctumFrame
-	frame.LevelFrame.Level:FontTemplate()
-
-	if E.private.skins.parchmentRemoverEnable then
-		frame.LevelFrame.Background:SetAlpha(0)
-	end
+	S:FontTemplate(frame.LevelFrame.Level)
 
 	local UpgradesTab = frame.UpgradesTab
-	UpgradesTab.Background:CreateBackdrop('Transparent')
+	S:CreateBackdrop(UpgradesTab.Background)
 	S:HandleButton(UpgradesTab.DepositButton)
 	UpgradesTab.DepositButton:SetFrameLevel(10)
 	UpgradesTab.CurrencyBackground:SetAlpha(0)
@@ -70,35 +65,33 @@ function S:Blizzard_CovenantSanctum()
 		end
 	end
 
-	if E.private.skins.parchmentRemoverEnable then
-		UpgradesTab.Background:SetAlpha(0)
-	end
-
 	local TalentList = frame.UpgradesTab.TalentsList
-	TalentList:SetTemplate('Transparent')
+	S:SetTemplate(TalentList)
 	S:HandleButton(TalentList.UpgradeButton)
 	TalentList.UpgradeButton:SetFrameLevel(10)
 	TalentList.IntroBox.Background:Hide()
 	hooksecurefunc(TalentList, 'Refresh', ReskinTalents)
 
-	if E.private.skins.parchmentRemoverEnable then
+	if not AS:CheckOption('Parchment') then
+		frame.LevelFrame.Background:SetAlpha(0)
+		UpgradesTab.Background:SetAlpha(0)
 		TalentList.Divider:SetAlpha(0)
 		TalentList.BackgroundTile:SetAlpha(0)
 	end
 
 	frame:HookScript('OnShow', function()
 		if not frame.IsSkinned then
-			frame:SetTemplate('Transparent')
+			S:SetTemplate(frame)
 			frame.NineSlice:SetAlpha(0)
 
 			frame.CloseButton.Border:SetAlpha(0)
 			S:HandleCloseButton(frame.CloseButton)
 			frame.CloseButton:ClearAllPoints()
-			frame.CloseButton:Point('TOPRIGHT', frame, 'TOPRIGHT', 2, 2)
+			S:Point(frame.CloseButton, 'TOPRIGHT', frame, 'TOPRIGHT', 2, 2)
 
 			frame.IsSkinned = true
 		end
 	end)
 end
 
-S:AddCallbackForAddon('Blizzard_CovenantSanctum')
+AS:RegisterSkin('Blizzard_CovenantSanctum', nil, 'ADDON_LOADED')

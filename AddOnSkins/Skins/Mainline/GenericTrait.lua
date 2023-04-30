@@ -1,5 +1,4 @@
-local E, L, V, P, G = unpack(ElvUI)
-local S = E:GetModule('Skins')
+local AS, L, S, R = unpack(AddOnSkins)
 
 local _G = _G
 local gsub = gsub
@@ -13,19 +12,19 @@ local function ReplaceIconString(frame, text)
 	if count > 0 then frame:SetFormattedText('%s', newText) end
 end
 
-function S:Blizzard_GenericTraitUI()
-	if not (E.private.skins.blizzard.enable and E.private.skins.blizzard.genericTrait) then return end
+function R:Blizzard_GenericTraitUI()
+	if not AS:IsSkinEnabled('Blizzard_GenericTraitUI', 'genericTrait') then return end
 
 	local GenericTrait = _G.GenericTraitFrame
-	if E.private.skins.parchmentRemoverEnable then
-		GenericTrait:StripTextures()
+	if not AS:CheckOption('Parchment') then
+		S:StripTextures(GenericTrait)
 	end
 
-	GenericTrait:SetTemplate('Transparent')
+	S:SetTemplate(GenericTrait)
 	S:HandleCloseButton(GenericTrait.CloseButton)
 
 	ReplaceIconString(GenericTrait.Currency.UnspentPointsCount)
 	hooksecurefunc(GenericTrait.Currency.UnspentPointsCount, 'SetText', ReplaceIconString)
 end
 
-S:AddCallbackForAddon('Blizzard_GenericTraitUI')
+AS:RegisterSkin('Blizzard_GenericTraitUI', nil, 'ADDON_LOADED')

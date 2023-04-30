@@ -59,7 +59,7 @@ end
 local function StatsPane(which)
 	local stat = CharacterStatsPane[which]
 	S:StripTextures(stat)
-	S:CreateBackdrop(stat, 'Transparent')
+	S:CreateBackdrop(stat)
 	stat.backdrop:ClearAllPoints()
 	S:Point(stat.backdrop, 'CENTER')
 	S:Size(stat.backdrop, 150, 18)
@@ -285,7 +285,7 @@ function R:Blizzard_CharacterFrame()
 	S:Point(_G.CharacterModelScene.backdrop, 'TOPLEFT', S.PixelMode and -1 or -2, S.PixelMode and 1 or 2)
 	S:Point(_G.CharacterModelScene.backdrop, 'BOTTOMRIGHT', S.PixelMode and 1 or 2, S.PixelMode and -2 or -3)
 
-	S:CreateBackdrop(_G.CharacterFrameInset, 'Transparent', nil, nil, nil, nil, nil, nil, nil, true)
+	S:CreateBackdrop(_G.CharacterFrameInset, nil, nil, nil, nil, nil, nil, nil, true)
 
 	for _, button in pairs({
 		'CharacterModelSceneZoomInButton',
@@ -384,7 +384,7 @@ function R:Blizzard_CharacterFrame()
 				S:HandleIcon(child.Icon)
 
 				if child.ExpandIcon then
-					S:CreateBackdrop(child.ExpandIcon, 'Transparent')
+					S:CreateBackdrop(child.ExpandIcon)
 					S:SetInside(child.ExpandIcon.backdrop, 3, 3)
 				end
 

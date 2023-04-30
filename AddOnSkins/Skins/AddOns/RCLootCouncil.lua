@@ -2,7 +2,7 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 function R:RCLootCouncil()
 	--MainFrame:SetScale(1)
-	S:HandleFrame(MainFrame, 'Transparent', true)
+	S:HandleFrame(MainFrame, true)
 	S:HandleFrame(ContentFrame, 'Default')
 	S:HandleButton(BtClose)
 	if _G['BtAward'] then S:HandleButton(BtAward) end
@@ -22,7 +22,7 @@ function R:RCLootCouncil()
 		for i = 1,5 do
 			if _G['RCLootFrameEntry'..i] then
 				--_G['RCLootFrameEntry'..i]:SetScale(1)
-				S:HandleFrame(_G['RCLootFrameEntry'..i], 'Transparent', true)
+				S:HandleFrame(_G['RCLootFrameEntry'..i], true)
 
 				for j = 1,8 do
 					if _G['RCLootFrameEntry'..i..'Button'..j] then
