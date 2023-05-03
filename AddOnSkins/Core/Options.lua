@@ -12,7 +12,7 @@ local strlower = strlower
 local strtrim = strtrim
 local unpack = unpack
 
-local GetAddOnMetadata = GetAddOnMetadata
+local GetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
 local GENERAL = GENERAL
 local hooksecurefunc = hooksecurefunc
 local tContains = tContains
