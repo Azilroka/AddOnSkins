@@ -260,12 +260,16 @@ function AS:BuildOptions()
 	local skins = {}
 
 	for skinName in pairs(AS.skins) do
-		tinsert(skins, skinName)
+		if AS:CheckAddOn(skinName) then -- C_AddOns Metadata doesn't check if an addon is enabled/installed and will error otherwise
+			tinsert(skins, skinName)
+		end
 	end
 
 	for skinName, data in pairs(AS.preload) do
 		if not data.addon or data.addon and not tContains(skins, data.addon) then
-			tinsert(skins, skinName)
+			if AS:CheckAddOn(skinName) then
+				tinsert(skins, skinName)
+			end
 		end
 	end
 
