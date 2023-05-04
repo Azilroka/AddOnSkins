@@ -162,7 +162,7 @@ AS.Options.args.embed.args.DualEmbedSystem = ACH:Group(L['Two Window Embed Syste
 AS.Options.args.embed.args.DualEmbedSystem.inline = true
 AS.Options.args.embed.args.DualEmbedSystem.args.EmbedSystemDual = ACH:Toggle(L['Enable'], nil, 1, nil, nil, nil, nil, nil, function() return AS:CheckOption('EmbedSystem') end)
 AS.Options.args.embed.args.DualEmbedSystem.args.EmbedLeft = ACH:Select(L["Window One Embed"], nil, 2, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
-AS.Options.args.embed.args.DualEmbedSystem.args.EmbedLeftWidth = ACH:Range(L['Window One Width'], nil, 3, { min = function() return max(floor((ES.Main:GetWidth() or 0) * .25), 100) end, max = function() return max(floor((ES.Main:GetWidth() or 0) * .75), 300) end, step = 1 }, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
+AS.Options.args.embed.args.DualEmbedSystem.args.EmbedLeftWidth = ACH:Range(L['Window One Width'], nil, 3, { min = (AS:CheckAddOn('ElvUI') and function() return max(floor((ES.Main:GetWidth() or 0) * .25), 100) end or 100), max = (AS:CheckAddOn('ElvUI') and function() return max(floor((ES.Main:GetWidth() or 0) * .75), 300) end or 300), step = 1 }, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
 AS.Options.args.embed.args.DualEmbedSystem.args.EmbedRight = ACH:Select(L["Window Two Embed"], nil, 4, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
 
 AS.Options.args.embed.args.OoC = ACH:Group(L['Out of Combat'], nil, 6)

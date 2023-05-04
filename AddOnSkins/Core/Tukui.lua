@@ -85,7 +85,7 @@ function AS:CreateToggleButton(Name, Text, Panel, TooltipText)
 	end)
 end
 
-function AS:EmbedSystem_WindowResize()
+function ES:Resize()
 	local ChatPanel = AS:CheckOption('EmbedRightChat') and AS.InfoRight or AS.InfoLeft
 	local ChatTab = AS:CheckOption('EmbedRightChat') and AS.TabsRightBackground or AS.TabsLeftBackground
 	if Tukui[2]['General']['Themes']['Value'] == 'Tukui 17' then
