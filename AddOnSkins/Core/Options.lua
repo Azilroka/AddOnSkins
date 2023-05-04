@@ -260,16 +260,12 @@ function AS:BuildOptions()
 	local skins = {}
 
 	for skinName in pairs(AS.skins) do
-		if AS:CheckAddOn(skinName) then -- C_AddOns Metadata doesn't check if an addon is enabled/installed and will error otherwise
-			tinsert(skins, skinName)
-		end
+		tinsert(skins, skinName)
 	end
 
 	for skinName, data in pairs(AS.preload) do
 		if not data.addon or data.addon and not tContains(skins, data.addon) then
-			if AS:CheckAddOn(skinName) then
-				tinsert(skins, skinName)
-			end
+			tinsert(skins, skinName)
 		end
 	end
 
@@ -278,7 +274,7 @@ function AS:BuildOptions()
 			BlizzardSkins[skinName] = true
 			AS.Options.args.skins.args.blizzard.values[skinName] = strfind(skinName, 'Blizzard_') and (BlizzardNames[skinName] or strtrim(skinName:gsub('^Blizzard_(.+)','%1'):gsub('(%l)(%u%l)','%1 %2')))
 		else
-			AS.Options.args.skins.args.addons.values[skinName] = GetAddOnMetadata(skinName, 'Title') or strtrim(skinName:gsub('(%l)(%u%l)','%1 %2'))
+			AS.Options.args.skins.args.addons.values[skinName] = AS:CheckAddOn(skinName) and GetAddOnMetadata(skinName, 'Title') or strtrim(skinName:gsub('(%l)(%u%l)','%1 %2'))
 		end
 	end
 
