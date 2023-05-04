@@ -50,17 +50,16 @@ end
 
 function ES:ToggleChatFrame(Hide)
 	local ChatFrame = AS:CheckOption('HideChatFrame')
-	if ChatFrame == 'NONE' or not FCF_IsValidChatFrame(ChatFrame) then return end
-
 	local frame, tab = _G[ChatFrame], _G[ChatFrame..'Tab']
+	if ChatFrame == 'NONE' or not FCF_IsValidChatFrame(frame) then return end
 
 	if Hide then
 		if frame:GetParent() ~= ES.ChatFrameHider and tab:GetParent() ~= ES.ChatFrameHider then
 			frame.OriginalParent, tab.OriginalParent = frame:GetParent(), tab:GetParent()
 		end
 
-		frame:SetParent(AS.ChatFrameHider)
-		tab:SetParent(AS.ChatFrameHider)
+		frame:SetParent(ES.ChatFrameHider)
+		tab:SetParent(ES.ChatFrameHider)
 	else
 		if frame.OriginalParent then
 			frame:SetParent(frame.OriginalParent)
