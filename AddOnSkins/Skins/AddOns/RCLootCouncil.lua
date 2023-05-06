@@ -48,4 +48,4 @@ function R:RCLootCouncil()
 	S:HandleScrollBar(RCVersionFrameContentFrameScrollBar)
 end
 
-AS:RegisterSkin('RCLootCouncil')
+--AS:RegisterSkin('RCLootCouncil')
