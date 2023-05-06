@@ -146,13 +146,13 @@ function ES:Check(Message)
 	end
 end
 
-function ES:PLAYER_REGEN_ENABLED()
+function ES:PLAYER_REGEN_DISABLED()
 	if AS:CheckOption('EmbedOoC') then
 		ES.Main:Show()
 	end
 end
 
-function ES:PLAYER_REGEN_DISABLED()
+function ES:PLAYER_REGEN_ENABLED()
 	if AS:CheckOption('EmbedOoC') then
 		AS:Delay(AS:CheckOption('EmbedOoCDelay'), function()
 			ES.Main:Hide()

@@ -61,9 +61,9 @@ function ES:Skada()
 
 	if NumberToEmbed == 1 then
 		local EmbedParent = AS:CheckOption('EmbedSystemDual') and (AS:CheckOption('EmbedRight') == 'Skada' and ES.Right or ES.Left) or ES.Main
-		AS:EmbedSkadaWindow(ES.SkadaWindows[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
+		ES:EmbedSkadaWindow(ES.SkadaWindows[1], EmbedParent:GetWidth(), EmbedParent:GetHeight(), 'TOPLEFT', EmbedParent, 'TOPLEFT', 2, 0)
 	elseif NumberToEmbed == 2 then
-		AS:EmbedSkadaWindow(ES.SkadaWindows[1], ES.Left:GetWidth(), ES.Left:GetHeight(), 'TOPLEFT', ES.Left, 'TOPLEFT', 2, 0)
-		AS:EmbedSkadaWindow(ES.SkadaWindows[2], ES.Right:GetWidth(), ES.Right:GetHeight(), 'TOPRIGHT', ES.Right, 'TOPRIGHT', -2, 0)
+		ES:EmbedSkadaWindow(ES.SkadaWindows[1], ES.Left:GetWidth(), ES.Left:GetHeight(), 'TOPLEFT', ES.Left, 'TOPLEFT', 2, 0)
+		ES:EmbedSkadaWindow(ES.SkadaWindows[2], ES.Right:GetWidth(), ES.Right:GetHeight(), 'TOPRIGHT', ES.Right, 'TOPRIGHT', -2, 0)
 	end
 end
