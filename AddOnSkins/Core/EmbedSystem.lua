@@ -84,6 +84,9 @@ function ES:Initialize()
 		ES.Main:HookScript('OnShow', ES.Show)
 		ES.Main:HookScript('OnHide', ES.Hide)
 
+		ES:RegisterEvent('PLAYER_REGEN_ENABLED')
+		ES:RegisterEvent('PLAYER_REGEN_DISABLED')
+
 		UIParent:HookScript('OnShow', function()
 			if AS:CheckOption('EmbedIsHidden') or AS:CheckOption('EmbedOoC') then
 				ES:Hide()
@@ -143,13 +146,13 @@ function ES:Check(Message)
 	end
 end
 
-function AS:PLAYER_REGEN_ENABLED()
+function ES:PLAYER_REGEN_ENABLED()
 	if AS:CheckOption('EmbedOoC') then
 		ES.Main:Show()
 	end
 end
 
-function AS:PLAYER_REGEN_DISABLED()
+function ES:PLAYER_REGEN_DISABLED()
 	if AS:CheckOption('EmbedOoC') then
 		AS:Delay(AS:CheckOption('EmbedOoCDelay'), function()
 			ES.Main:Hide()
