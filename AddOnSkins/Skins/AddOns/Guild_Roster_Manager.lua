@@ -12,7 +12,9 @@ function AS:GuildRosterManager()
 
 	-- Stylistic choice for GRM
 	local AdjustSliderThumbFrameLevel = function ( thumb )
-		thumb.Backdrop:SetFrameLevel ( thumb.Backdrop:GetFrameLevel() - 2 )
+        if thumb.Backdrop then
+            thumb.Backdrop:SetFrameLevel ( thumb.Backdrop:GetFrameLevel() - 2 )
+        end
 	end
 
 	--------------------

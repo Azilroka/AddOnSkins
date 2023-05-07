@@ -1610,7 +1610,7 @@ function S:HandleSliderFrame(frame, template, frameLevel)
 		for _, region in next, { frame:GetRegions() } do
 			if region:IsObjectType('FontString') then
 				local point, anchor, anchorPoint, x, y = region:GetPoint()
-				if strfind(anchorPoint, 'BOTTOM') then
+				if anchorPoint and strfind(anchorPoint, 'BOTTOM') then
 					S:Point(region, point, anchor, anchorPoint, x, y - 4)
 				end
 			end
