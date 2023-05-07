@@ -84,7 +84,7 @@ function ES:Hooks()
 			if not s.parent.editboxforced then
 				_G.GameTooltip:SetOwner(s, 'ANCHOR_TOPLEFT', 0, 4)
 				_G.GameTooltip:ClearLines()
-				_G.GameTooltip:AddDoubleLine(L["Left Click:"], L["Toggle Chat Frame"], 1, 1, 1)
+				_G.GameTooltip:AddDoubleLine(L['Left Click:'], L['Toggle Chat Frame'], 1, 1, 1)
 				_G.GameTooltip:AddDoubleLine(L['Right Click:'], L['Toggle Embedded Addon'], 1, 1, 1)
 				_G.GameTooltip:Show()
 			end
