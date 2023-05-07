@@ -46,7 +46,7 @@ function R:WIM(event)
 			end
 		end
 	end
-	winopthook:HookScript("OnShow",wimHookSkinOpt)
+	--winopthook:HookScript("OnShow",wimHookSkinOpt) .. Fix me plx
 end
 
 AS:RegisterSkin('WIM')
