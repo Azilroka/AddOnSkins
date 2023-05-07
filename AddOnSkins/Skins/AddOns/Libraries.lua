@@ -254,8 +254,8 @@ function R:Libraries()
 				end
 			end
 		end, 0)
-		S:SecureHook(LET, "GetFreeExtraTipObject", function(tip)
-			local tooltip = S.hooks[tip].GetFreeExtraTipObject(tip)
+		--[[S:SecureHook(LET, "GetFreeExtraTipObject", function(tip)
+			local tooltip = AS.hooks[tip].GetFreeExtraTipObject(tip)
 
 			if not tooltip.isSkinned then
 				S:SetTemplate(tooltip)
@@ -263,7 +263,7 @@ function R:Libraries()
 			end
 
 			return tooltip
-		end)
+		end)]]
 	end
 
 	local LQT = LibStub("LibQTip-1.0", true)
