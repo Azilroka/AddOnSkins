@@ -25,7 +25,7 @@ local DEVELOPERS = { 'AcidWeb', 'Affli', 'Aldarana', 'Arstraea', 'Blazeflack', '
 sort(DEVELOPERS, function(a, b) return strlower(a) < strlower(b) end)
 local DEVELOPER_STRING = table.concat(DEVELOPERS, '|n')
 
-local DefaultTemplates = { Custom = L['Custom'], Default = L['Default'], Transparent = L['Transparent'] }
+local DefaultTemplates = { Custom = L["Custom"], Default = L["Default"], Transparent = L["Transparent"] }
 local Embeds = { NONE = 'None', Details = 'Details', Omen = 'Omen', Skada = 'Skada', Recount = 'Recount', TinyDPS = 'TinyDPS' }
 local BlizzardSkins = {}
 
@@ -108,80 +108,80 @@ AS.Options = ACH:Group(AS.Title, nil, 6, 'tab')
 AS.Options.args.general = ACH:Group(GENERAL, nil, 0, nil, function(info) return AS:CheckOption(info[#info]) end, function(info, value) AS:SetOption(info[#info], value) AS:UpdateSettings() AS.NeedReload = true end)
 AS.Options.args.general.args.general = ACH:Group(' ', nil, 1)
 AS.Options.args.general.args.general.inline = true
-AS.Options.args.general.args.general.args.LoginMsg = ACH:Toggle(L['Login Message'], nil, 1)
-AS.Options.args.general.args.general.args.SkinDebug = ACH:Toggle(L['Enable Skin Debugging'], nil, 2)
+AS.Options.args.general.args.general.args.LoginMsg = ACH:Toggle(L["Login Message"], nil, 1)
+AS.Options.args.general.args.general.args.SkinDebug = ACH:Toggle(L["Enable Skin Debugging"], nil, 2)
 
-AS.Options.args.general.args.Theme = ACH:Select(L['Themes'], nil, 2, { PixelPerfect = L['Thin Border'], TwoPixel = L['Two Pixel'], ThickBorder = L['Thick Border'] })
-AS.Options.args.general.args.SkinTemplate = ACH:Select(L['Template'], nil, 3, function() local tbl = CopyTable(DefaultTemplates) if AS:CheckOption('ElvUIStyle', 'ElvUI') then tbl.Custom = nil end return tbl end)
+AS.Options.args.general.args.Theme = ACH:Select(L["Themes"], nil, 2, { PixelPerfect = L["Thin Border"], TwoPixel = L["Two Pixel"], ThickBorder = L["Thick Border"] })
+AS.Options.args.general.args.SkinTemplate = ACH:Select(L["Template"], nil, 3, function() local tbl = CopyTable(DefaultTemplates) if AS:CheckOption('ElvUIStyle', 'ElvUI') then tbl.Custom = nil end return tbl end)
 
-AS.Options.args.general.args.Font = ACH:SharedMediaFont(L['Font'], nil, 1)
-AS.Options.args.general.args.FontSize = ACH:Range(L['Font Size'], nil, 2, { min = 6, max = 22, step = 1 })
-AS.Options.args.general.args.FontFlag = ACH:FontFlags(L['Font Flag'], nil, 3)
+AS.Options.args.general.args.Font = ACH:SharedMediaFont(L["Font"], nil, 1)
+AS.Options.args.general.args.FontSize = ACH:Range(L["Font Size"], nil, 2, { min = 6, max = 22, step = 1 })
+AS.Options.args.general.args.FontFlag = ACH:FontFlags(L["Font Flag"], nil, 3)
 
-AS.Options.args.general.args.Textures = ACH:Group(L['Textures'], nil, 4)
+AS.Options.args.general.args.Textures = ACH:Group(L["Textures"], nil, 4)
 AS.Options.args.general.args.Textures.inline = true
 AS.Options.args.general.args.Textures.args.BackgroundTexture = ACH:SharedMediaStatusbar('Background Texture', nil, 1, nil, nil, nil, nil, function() return AS:CheckOption('ElvUIStyle', 'ElvUI') end)
 AS.Options.args.general.args.Textures.args.StatusBarTexture = ACH:SharedMediaStatusbar('StatusBar Texture', nil, 2, nil, nil, nil, nil, function() return AS:CheckOption('ElvUIStyle', 'ElvUI') end)
-AS.Options.args.general.args.Textures.args.CropIcons = ACH:Toggle(L['Crop Icons'], nil, 3)
-AS.Options.args.general.args.Textures.args.Parchment = ACH:Toggle(L['Parchment']..' (WIP)', nil, 3)
-AS.Options.args.general.args.Textures.args.Shadows = ACH:Toggle(L['Shadows'], nil, 4)
-AS.Options.args.general.args.Textures.args.DBMSkinHalf = ACH:Toggle(L['DBM Half-bar Skin'], nil, 5)
+AS.Options.args.general.args.Textures.args.CropIcons = ACH:Toggle(L["Crop Icons"], nil, 3)
+AS.Options.args.general.args.Textures.args.Parchment = ACH:Toggle(L["Parchment"]..' (WIP)', nil, 3)
+AS.Options.args.general.args.Textures.args.Shadows = ACH:Toggle(L["Shadows"], nil, 4)
+AS.Options.args.general.args.Textures.args.DBMSkinHalf = ACH:Toggle(L["DBM Half-bar Skin"], nil, 5)
 
-AS.Options.args.general.args.Colors = ACH:Group(L['Colors'], nil, 5, nil, function(info) return unpack(AS:CheckOption(info[#info])) end, function(info, r, g, b, a) AS:SetOption(info[#info], { r, g, b, a }) AS:UpdateSettings() end)
+AS.Options.args.general.args.Colors = ACH:Group(L["Colors"], nil, 5, nil, function(info) return unpack(AS:CheckOption(info[#info])) end, function(info, r, g, b, a) AS:SetOption(info[#info], { r, g, b, a }) AS:UpdateSettings() end)
 AS.Options.args.general.args.Colors.inline = true
-AS.Options.args.general.args.Colors.args.CustomBackdropColor = ACH:Color('Backdrop Color', nil, 1, true, nil, nil, nil, nil, function() return (AS:CheckOption('SkinTemplate') ~= 'Custom') or AS:CheckOption('ElvUIStyle', 'ElvUI') end)
-AS.Options.args.general.args.Colors.args.CustomBorderColor = ACH:Color('Border Color', nil, 2, true, nil, nil, nil, nil, function() return (AS:CheckOption('SkinTemplate') ~= 'Custom') or AS:CheckOption('ElvUIStyle', 'ElvUI') end)
-AS.Options.args.general.args.Colors.args.HighlightColor = ACH:Color(L['Highlight'], nil, 3)
-AS.Options.args.general.args.Colors.args.SelectedColor = ACH:Color(L['Selected / Checked'], nil, 4)
-AS.Options.args.general.args.Colors.args.StatusBarColor = ACH:Color(L['Status Bars'], nil, 5)
+AS.Options.args.general.args.Colors.args.CustomBackdropColor = ACH:Color(L["Backdrop Color"], nil, 1, true, nil, nil, nil, nil, function() return (AS:CheckOption('SkinTemplate') ~= 'Custom') or AS:CheckOption('ElvUIStyle', 'ElvUI') end)
+AS.Options.args.general.args.Colors.args.CustomBorderColor = ACH:Color(L["Border Color"], nil, 2, true, nil, nil, nil, nil, function() return (AS:CheckOption('SkinTemplate') ~= 'Custom') or AS:CheckOption('ElvUIStyle', 'ElvUI') end)
+AS.Options.args.general.args.Colors.args.HighlightColor = ACH:Color(L["Highlight"], nil, 3)
+AS.Options.args.general.args.Colors.args.SelectedColor = ACH:Color(L["Selected / Checked"], nil, 4)
+AS.Options.args.general.args.Colors.args.StatusBarColor = ACH:Color(L["Status Bars"], nil, 5)
 
-AS.Options.args.skins = ACH:Group(L['Skins'], nil, 1, nil, function(info) return AS:CheckOption(info[#info]) end, function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end)
-AS.Options.args.skins.args.addons = ACH:MultiSelect(L['AddOns'], nil, 1, nil, nil, nil, function(_, key) return AS:CheckOption(key) end, function(_, key, value) AS:SetOption(key, value) AS.NeedReload = true end)
-AS.Options.args.skins.args.blizzard = ACH:MultiSelect(L['Blizzard'], nil, 2, nil, nil, nil, function(_, key) return AS:CheckOption(key) end, function(_, key, value) AS:SetOption(key, value) AS.NeedReload = true end)
-AS.Options.args.skins.args.blizzardEnableAll = ACH:Execute(L['Blizzard: Enable All'], nil, 3, function() for SkinName in pairs(BlizzardSkins) do AS:SetOption(SkinName, true) end end)
-AS.Options.args.skins.args.blizzardDisableAll = ACH:Execute(L['Blizzard: Disable All'], nil, 4, function() for SkinName in pairs(BlizzardSkins) do AS:SetOption(SkinName, false) end end)
+AS.Options.args.skins = ACH:Group(L["Skins"], nil, 1, nil, function(info) return AS:CheckOption(info[#info]) end, function(info, value) AS:SetOption(info[#info], value) AS.NeedReload = true end)
+AS.Options.args.skins.args.addons = ACH:MultiSelect(L["AddOns"], nil, 1, nil, nil, nil, function(_, key) return AS:CheckOption(key) end, function(_, key, value) AS:SetOption(key, value) AS.NeedReload = true end)
+AS.Options.args.skins.args.blizzard = ACH:MultiSelect(L["Blizzard"], nil, 2, nil, nil, nil, function(_, key) return AS:CheckOption(key) end, function(_, key, value) AS:SetOption(key, value) AS.NeedReload = true end)
+AS.Options.args.skins.args.blizzardEnableAll = ACH:Execute(L["Blizzard: Enable All"], nil, 3, function() for SkinName in pairs(BlizzardSkins) do AS:SetOption(SkinName, true) end end)
+AS.Options.args.skins.args.blizzardDisableAll = ACH:Execute(L["Blizzard: Disable All"], nil, 4, function() for SkinName in pairs(BlizzardSkins) do AS:SetOption(SkinName, false) end end)
 
-AS.Options.args.embed = ACH:Group(L['Embed Settings'], nil, 4, nil, function(info) return AS:CheckOption(info[#info]) end, function(info, value) AS:SetOption(info[#info], value) ES:Check() end)
-AS.Options.args.embed.args.EmbedIsHidden = ACH:Toggle(L['|cFFFF0000Embed is currently HIDDEN|r'], nil, 0, nil, nil, 'full', nil, nil, nil, function() return not AS:CheckOption('EmbedIsHidden') end)
+AS.Options.args.embed = ACH:Group(L["Embed Settings"], nil, 4, nil, function(info) return AS:CheckOption(info[#info]) end, function(info, value) AS:SetOption(info[#info], value) ES:Check() end)
+AS.Options.args.embed.args.EmbedIsHidden = ACH:Toggle(L["|cFFFF0000Embed is currently HIDDEN|r"], nil, 0, nil, nil, 'full', nil, nil, nil, function() return not AS:CheckOption('EmbedIsHidden') end)
 
-AS.Options.args.embed.args.General = ACH:Group(L['General'], nil, 1)
+AS.Options.args.embed.args.General = ACH:Group(L["General"], nil, 1)
 AS.Options.args.embed.args.General.inline = true
-AS.Options.args.embed.args.General.args.EmbedSystemMessage = ACH:Toggle(L['Embed System Message'], nil, 1)
-AS.Options.args.embed.args.General.args.EmbedRightChat = ACH:Toggle(L['Embed into Right Chat Panel'], nil, 2)
-AS.Options.args.embed.args.General.args.HideChatFrame = ACH:Select(L['Hide Chat Frame'], nil, 3, function() return ES:GetChatWindowInfo() end, nil, nil, nil, nil, function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end)
-AS.Options.args.embed.args.General.args.EmbedBelowTop = ACH:Toggle(L['Embed Below Top Tab'], nil, 4)
-AS.Options.args.embed.args.General.args.EmbedBackdrop = ACH:Toggle(L['Backdrop'], nil, 5)
-AS.Options.args.embed.args.General.args.EmbedBackdropTransparent = ACH:Toggle(L['Transparent Backdrop'], nil, 6)
+AS.Options.args.embed.args.General.args.EmbedSystemMessage = ACH:Toggle(L["Embed System Message"], nil, 1)
+AS.Options.args.embed.args.General.args.EmbedRightChat = ACH:Toggle(L["Embed into Right Chat Panel"], nil, 2)
+AS.Options.args.embed.args.General.args.HideChatFrame = ACH:Select(L["Hide Chat Frame"], nil, 3, function() return ES:GetChatWindowInfo() end, nil, nil, nil, nil, function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end)
+AS.Options.args.embed.args.General.args.EmbedBelowTop = ACH:Toggle(L["Embed Below Top Tab"], nil, 4)
+AS.Options.args.embed.args.General.args.EmbedBackdrop = ACH:Toggle(L["Backdrop"], nil, 5)
+AS.Options.args.embed.args.General.args.EmbedBackdropTransparent = ACH:Toggle(L["Transparent Backdrop"], nil, 6)
 
-AS.Options.args.embed.args.SingleEmbedSystem = ACH:Group(L['One Window Embed System'], nil, 4)
+AS.Options.args.embed.args.SingleEmbedSystem = ACH:Group(L["One Window Embed System"], nil, 4)
 AS.Options.args.embed.args.SingleEmbedSystem.inline = true
-AS.Options.args.embed.args.SingleEmbedSystem.args.EmbedSystem = ACH:Toggle(L['Enable'], nil, 9, nil, nil, nil, nil, nil, function() return AS:CheckOption('EmbedSystemDual') end)
-AS.Options.args.embed.args.SingleEmbedSystem.args.EmbedMain = ACH:Select(L['Embed'], nil, 10, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystem') end)
+AS.Options.args.embed.args.SingleEmbedSystem.args.EmbedSystem = ACH:Toggle(L["Enable"], nil, 9, nil, nil, nil, nil, nil, function() return AS:CheckOption('EmbedSystemDual') end)
+AS.Options.args.embed.args.SingleEmbedSystem.args.EmbedMain = ACH:Select(L["Embed"], nil, 10, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystem') end)
 
-AS.Options.args.embed.args.DualEmbedSystem = ACH:Group(L['Two Window Embed System'], nil, 5)
+AS.Options.args.embed.args.DualEmbedSystem = ACH:Group(L["Two Window Embed System"], nil, 5)
 AS.Options.args.embed.args.DualEmbedSystem.inline = true
-AS.Options.args.embed.args.DualEmbedSystem.args.EmbedSystemDual = ACH:Toggle(L['Enable'], nil, 1, nil, nil, nil, nil, nil, function() return AS:CheckOption('EmbedSystem') end)
+AS.Options.args.embed.args.DualEmbedSystem.args.EmbedSystemDual = ACH:Toggle(L["Enable"], nil, 1, nil, nil, nil, nil, nil, function() return AS:CheckOption('EmbedSystem') end)
 AS.Options.args.embed.args.DualEmbedSystem.args.EmbedLeft = ACH:Select(L["Window One Embed"], nil, 2, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
-AS.Options.args.embed.args.DualEmbedSystem.args.EmbedLeftWidth = ACH:Range(L['Window One Width'], nil, 3, { min = (AS:CheckAddOn('ElvUI') and function() return max(floor((ES.Main:GetWidth() or 0) * .25), 100) end or 100), max = (AS:CheckAddOn('ElvUI') and function() return max(floor((ES.Main:GetWidth() or 0) * .75), 300) end or 300), step = 1 }, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
+AS.Options.args.embed.args.DualEmbedSystem.args.EmbedLeftWidth = ACH:Range(L["Window One Width"], nil, 3, { min = (AS:CheckAddOn('ElvUI') and function() return max(floor((ES.Main:GetWidth() or 0) * .25), 100) end or 100), max = (AS:CheckAddOn('ElvUI') and function() return max(floor((ES.Main:GetWidth() or 0) * .75), 300) end or 300), step = 1 }, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
 AS.Options.args.embed.args.DualEmbedSystem.args.EmbedRight = ACH:Select(L["Window Two Embed"], nil, 4, Embeds, nil, nil, nil, nil, function() return not AS:CheckOption('EmbedSystemDual') end)
 
-AS.Options.args.embed.args.OoC = ACH:Group(L['Out of Combat'], nil, 6)
+AS.Options.args.embed.args.OoC = ACH:Group(L["Out of Combat"], nil, 6)
 AS.Options.args.embed.args.OoC.inline = true
-AS.Options.args.embed.args.OoC.args.EmbedOoC = ACH:Toggle(L['Hide'], nil, 1)
-AS.Options.args.embed.args.OoC.args.EmbedOoCDelay = ACH:Range(L['Hide Delay'], nil, 2, { min = 1, max = 30, step = 1 })
+AS.Options.args.embed.args.OoC.args.EmbedOoC = ACH:Toggle(L["Hide"], nil, 1)
+AS.Options.args.embed.args.OoC.args.EmbedOoCDelay = ACH:Range(L["Hide Delay"], nil, 2, { min = 1, max = 30, step = 1 })
 
-AS.Options.args.embed.args.strataLevel = ACH:Group(L['Strata and Frame Level'], nil, 7)
+AS.Options.args.embed.args.strataLevel = ACH:Group(L["Strata and Frame Level"], nil, 7)
 AS.Options.args.embed.args.strataLevel.inline = true
-AS.Options.args.embed.args.strataLevel.args.EmbedFrameStrata = ACH:Select(L['Embed Frame Strata'], nil, 1, { ['1-BACKGROUND'] = 'BACKGROUND', ['2-LOW'] = 'LOW', ['3-MEDIUM'] = 'MEDIUM', ['4-HIGH'] = 'HIGH' }, nil, nil, nil, nil, function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end)
-AS.Options.args.embed.args.strataLevel.args.EmbedFrameLevel = ACH:Range(L['Embed Frame Level'], nil, 2, { min = 1, max = 255, step = 1 }, nil, nil, nil, function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end)
+AS.Options.args.embed.args.strataLevel.args.EmbedFrameStrata = ACH:Select(L["Embed Frame Strata"], nil, 1, { ['1-BACKGROUND'] = 'BACKGROUND', ['2-LOW'] = 'LOW', ['3-MEDIUM'] = 'MEDIUM', ['4-HIGH'] = 'HIGH' }, nil, nil, nil, nil, function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end)
+AS.Options.args.embed.args.strataLevel.args.EmbedFrameLevel = ACH:Range(L["Embed Frame Level"], nil, 2, { min = 1, max = 255, step = 1 }, nil, nil, nil, function() return not (AS:CheckOption('EmbedSystemDual') or AS:CheckOption('EmbedSystem')) end)
 
-AS.Options.args.about = ACH:Group(L['About/Help'], nil, -2, 'tab')
+AS.Options.args.about = ACH:Group(L["About/Help"], nil, -2, 'tab')
 
-AS.Options.args.about.args.links = ACH:Group(L['Links'], nil, 1)
+AS.Options.args.about.args.links = ACH:Group(L["Links"], nil, 1)
 AS.Options.args.about.args.links.inline = true
-AS.Options.args.about.args.links.args.gitlablink = ACH:Input(L['GitHub Link / Report Errors'], nil, 2, nil, 'full', function() return 'https://github.com/Azilroka/AddOnSkins' end)
+AS.Options.args.about.args.links.args.gitlablink = ACH:Input(L["GitHub Link / Report Errors"], nil, 2, nil, 'full', function() return 'https://github.com/Azilroka/AddOnSkins' end)
 
-AS.Options.args.about.args.credits = ACH:Group(L['Credits'], nil, -1)
+AS.Options.args.about.args.credits = ACH:Group(L["Credits"], nil, -1)
 AS.Options.args.about.args.credits.inline = true
 AS.Options.args.about.args.credits.args.AuthorHeader = ACH:Header('Authors:', 0)
 AS.Options.args.about.args.credits.args.Authors = ACH:Description(AS.Authors, 1, 'large')
@@ -281,7 +281,7 @@ function AS:BuildOptions()
 	wipe(skins)
 
 	if AS:CheckAddOn('ElvUI') then
-		AS.Options.args.general.args.Textures.args.ElvUIStyle = ACH:Toggle(L['ElvUI Style'], nil, 0)
+		AS.Options.args.general.args.Textures.args.ElvUIStyle = ACH:Toggle(L["ElvUI Style"], nil, 0)
 
 		if AS:CheckAddOn('ElvUI_MerathilisUI') then
 			DefaultTemplates['MerathilisUI'] = '|cffff7d0aMerathilisUI|r'
