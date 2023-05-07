@@ -184,7 +184,7 @@ function AS:CallSkin(addonName, func, event, ...)
 			tinsert(AS.SkinErrors, Name)
 
 			if AS.RunOnce then
-				AS:Print(format('%s: There was an error in the following skin: %s', AS.Version, Name))
+				AS:Print(format(L['%s: There was an error in the following skin: %s'], AS.Version, Name))
 			end
 		end
 	end
@@ -255,12 +255,12 @@ function AS:StartUp(event, ...)
 	AS:SkinEvent(event, ...)
 
 	if AS:CheckOption('LoginMsg') then
-		AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
+		AS:Print(format(L["Version: |cFF1784D1%s|r Loaded!"], AS.Version))
 	end
 
 	if not AS:CheckOption('SkinDebug') and AS.FoundError then
-		AS:Print(format('%s: There was an error in the following skin(s): %s', AS.Version, table.concat(AS.SkinErrors, ", ")))
-		AS:Print(format('Please report this to Azilroka immediately @ %s', AS:PrintURL(AS.TicketTracker)))
+		AS:Print(format(L['%s: There was an error in the following skin(s): %s'], AS.Version, table.concat(AS.SkinErrors, ", ")))
+		AS:Print(format(L['Please report this to Azilroka immediately @ %s'], AS:PrintURL(AS.TicketTracker)))
 	end
 
 	ES:Initialize()
