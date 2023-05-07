@@ -36,7 +36,7 @@ function ES:SkadaWindow(window, width, height, point, relativeFrame, relativePoi
 	window.bargroup:SetFrameLevel(relativeFrame:GetFrameLevel())
 	window.bargroup:SetBackdrop(nil)
 	if window.bargroup.backdrop then
-		S:SetTemplate(window.bargroup.backdrop, AS:CheckOption('EmbedBackdropTransparent') and 'Transparent')
+		AS:SetTemplate(window.bargroup.backdrop, AS:CheckOption('EmbedBackdropTransparent') and 'Transparent')
 		if AS:CheckOption('EmbedBackdrop') then
 			window.bargroup.backdrop:Show()
 		else

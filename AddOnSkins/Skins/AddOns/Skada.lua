@@ -1,4 +1,5 @@
 local AS, L, S, R = unpack(AddOnSkins)
+local ES = AS.EmbedSystem
 
 function R:Skada()
 	local SkadaDisplayBar = Skada.displays['bar']
@@ -53,17 +54,17 @@ function R:Skada()
 
 	hooksecurefunc(Skada, 'CreateWindow', function()
 		if AS:CheckEmbed('Skada') then
-			AS:Embed_Skada()
+			ES:Skada()
 		end
 	end)
 	hooksecurefunc(Skada, 'DeleteWindow', function()
 		if AS:CheckEmbed('Skada') then
-			AS:Embed_Skada()
+			ES:Skada()
 		end
 	end)
 	hooksecurefunc(Skada, 'UpdateDisplay', function()
 		if AS:CheckEmbed('Skada') and not InCombatLockdown() then
-			AS:Embed_Skada()
+			ES:Skada()
 		end
 	end)
 end
