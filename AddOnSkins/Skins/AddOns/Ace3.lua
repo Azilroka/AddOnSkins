@@ -150,7 +150,7 @@ function AS:Ace3()
 			S:HandleButton(widget.frame)
 			widget.text:SetTextColor(1, 1, 1, 1)
 		elseif TYPE == 'Slider' then
-			S:HandleSlideBar(widget.slider)
+			S:HandleSliderFrame(widget.slider)
 
 			S:SetTemplate(widget.editbox)
 			widget.editbox:SetHeight(15)
