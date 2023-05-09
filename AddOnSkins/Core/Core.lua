@@ -158,7 +158,7 @@ function AS:UnregisterSkin(addonName)
 end
 
 function AS:RegisterSkinForPreload(addonName, skinFunc, addon)
-	AS.preload[addonName] = { func = skinFunc, addon = addon }
+	AS.preload[addonName] = { func = skinFunc or R[addonName], addon = addon }
 end
 
 function AS:RunPreload(addonName)
