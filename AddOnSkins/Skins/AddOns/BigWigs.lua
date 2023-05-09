@@ -15,7 +15,7 @@ function R:BigWigs(event, addon)
 		return
 	end
 
-	if event == 'ADDON_LOADED' and addon == 'BigWigs_Plugins' then
+	if event == 'ADDON_LOADED' and addon == 'BigWigs' then
 		local function FreeStyle(bar)
 			local bd = bar.candyBarBackdrop
 			local iconBd = bar.candyBarIconFrameBackdrop
@@ -129,4 +129,4 @@ function R:BigWigs(event, addon)
 end
 
 AS:RegisterSkin('BigWigs', nil, 'ADDON_LOADED')
-AS:RegisterSkinForPreload('BigWigs_Plugins', R.BigWigs, 'BigWigs')
+AS:RegisterSkinForPreload('BigWigs', R.BigWigs)
