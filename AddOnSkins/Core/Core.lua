@@ -130,7 +130,7 @@ local alwaysValid = { PLAYER_ENTERING_WORLD = true, ADDON_LOADED = true }
 
 function AS:RegisterSkin(addonName, skinFunc, ...)
 	local priority = 1
-	for _, event in next, {... or 'PLAYER_ENTERING_WORLD'} do
+	for _, event in next, { 'PLAYER_ENTERING_WORLD', ... } do
 		if not event then break end
 		local conflict = strmatch(event, '%[([!%w_]+)%]')
 		if conflict and AS:CheckAddOn(conflict) then
