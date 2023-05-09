@@ -183,9 +183,9 @@ AS.Options.args.about.args.links.args.gitlablink = ACH:Input(L["GitHub Link / Re
 
 AS.Options.args.about.args.credits = ACH:Group(L["Credits"], nil, -1)
 AS.Options.args.about.args.credits.inline = true
-AS.Options.args.about.args.credits.args.AuthorHeader = ACH:Header('Authors:', 0)
+AS.Options.args.about.args.credits.args.AuthorHeader = ACH:Header(L["Authors:"], 0)
 AS.Options.args.about.args.credits.args.Authors = ACH:Description(AS.Authors, 1, 'large')
-AS.Options.args.about.args.credits.args.CreditsHeader = ACH:Header('Credits:', 2)
+AS.Options.args.about.args.credits.args.CreditsHeader = ACH:Header(L["Credits:"], 2)
 AS.Options.args.about.args.credits.args.Credits = ACH:Description(DEVELOPER_STRING, 3, 'medium')
 
 function AS:BuildProfile()
