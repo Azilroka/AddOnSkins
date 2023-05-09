@@ -1,5 +1,6 @@
 local L = AddOnSkins[1].Libs.ACL:NewLocale('AddOnSkins', 'enUS', true, true)
 
+
 L["%s: There was an error in the following skin: %s"] = true
 L["%s: There was an error in the following skin(s): %s"] = true
 L["|cffff7d0aMerathilisUI|r Styling"] = true
@@ -92,9 +93,6 @@ L["Toggle Right Chat Panel"] = true
 L["Transparent Backdrop"] = true
 L["Two Window Embed System"] = true
 L["Two Window Embed System"] = true
-L["Version"] = true
-L["WeakAura AuraBar"] = true
-L["WeakAura Cooldowns"] = true
 L["Window One Embed"] = true
 L["Window One Width"] = true
 L["Window Two Embed"] = true
