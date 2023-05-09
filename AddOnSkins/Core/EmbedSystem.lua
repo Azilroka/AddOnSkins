@@ -141,8 +141,8 @@ function ES:Check(Message)
 	if AS:CheckEmbed('Recount') then ES:Recount() end
 
 	if Message and AS:CheckOption('EmbedSystemMessage') then
-		if AS:CheckOption('EmbedMain') then AS:Print(format("Embed System: Main: '%s'", AS:CheckOption('EmbedMain'))) end
-		if AS:CheckOption('EmbedSystemDual') then AS:Print(format("Embed System: Left: '%s' | Right: '%s'", AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight'))) end
+		if AS:CheckOption('EmbedMain') then AS:Print(format(L["Embed System: Main: '%s'"], AS:CheckOption('EmbedMain'))) end
+		if AS:CheckOption('EmbedSystemDual') then AS:Print(format(L["Embed System: Left: '%s' | Right: '%s'"], AS:CheckOption('EmbedLeft'), AS:CheckOption('EmbedRight'))) end
 	end
 end
 
