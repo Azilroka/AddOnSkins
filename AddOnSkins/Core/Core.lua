@@ -10,6 +10,7 @@ local pairs, ipairs, type, pcall = pairs, ipairs, type, pcall
 local floor, print, format, strlower, strmatch, strlen = floor, print, format, strlower, strmatch, strlen
 local sort, tinsert = sort, tinsert
 
+local geterrorhandler = geterrorhandler
 local IsAddOnLoaded, C_Timer = IsAddOnLoaded, C_Timer
 
 AS.SkinErrors = {}
@@ -170,10 +171,15 @@ function AS:RunPreload(addonName)
 	end
 end
 
+
+local function errorhandler(err)
+	return geterrorhandler()(err)
+end
+
 function AS:CallSkin(addonName, func, event, ...)
 	if (AS:CheckOption('SkinDebug')) then
 		local args = {...}
-		securecallfunction(function() func(self, event, unpack(args)) end)
+		xpcall(function() func(self, event, unpack(args)) end, errorhandler)
 	else
 		local pass = pcall(func, self, event, ...)
 		if not pass then
