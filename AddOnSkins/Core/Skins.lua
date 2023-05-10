@@ -1319,7 +1319,6 @@ end
 
 function S:HandleStatusBar(statusBar, color, template)
 	statusBar:SetFrameLevel(statusBar:GetFrameLevel() + 1)
-	S:StripTextures(statusBar)
 	S:CreateBackdrop(statusBar, template or 'Transparent')
 	statusBar:SetStatusBarTexture(Media.barTexture)
 	statusBar:SetStatusBarColor(unpack(color or AS:CheckOption('StatusBarColor')))
