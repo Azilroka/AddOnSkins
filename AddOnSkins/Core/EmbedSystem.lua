@@ -12,7 +12,7 @@ local FCF_IsValidChatFrame = FCF_IsValidChatFrame
 local FCF_IsChatWindowIndexActive = FCF_IsChatWindowIndexActive
 local FCF_GetChatWindowInfo = FCF_GetChatWindowInfo
 local UIParent = UIParent
-
+local InCombatLockdown, UnitAffectingCombat = InCombatLockdown, UnitAffectingCombat
 local NUM_CHAT_WINDOWS = NUM_CHAT_WINDOWS
 
 ES.ChatFrameHider = CreateFrame('Frame')
@@ -155,7 +155,10 @@ end
 function ES:PLAYER_REGEN_ENABLED()
 	if AS:CheckOption('EmbedOoC') then
 		AS:Delay(AS:CheckOption('EmbedOoCDelay'), function()
-			ES.Main:Hide()
+            local inCombat = InCombatLockdown() or UnitAffectingCombat("player") or UnitAffectingCombat("pet")
+            if not inCombat then
+			    ES.Main:Hide()
+            end
 		end)
 	end
 end
