@@ -554,7 +554,7 @@ do
 			for _, which in pairs(gradients) do
 				local grad = frame:CreateTexture(nil, layer or 'HIGHLIGHT')
 				S:Height(grad, frame:GetHeight() * 0.95)
-				grad:SetTexture(Media.barTexture)
+				grad:SetTexture(Media.StatusBar)
 				frame[which] = grad
 			end
 		end
@@ -1317,11 +1317,15 @@ function S:HandleDropDownBox(dropDown, width, pos, template)
 	end
 end
 
-function S:HandleStatusBar(statusBar, color, template)
+function S:HandleStatusBar(statusBar, color, template, ignoreColor)
 	statusBar:SetFrameLevel(statusBar:GetFrameLevel() + 1)
+	S:StripTextures(statusBar)
 	S:CreateBackdrop(statusBar, template or 'Transparent')
-	statusBar:SetStatusBarTexture(Media.barTexture)
-	statusBar:SetStatusBarColor(unpack(color or AS:CheckOption('StatusBarColor')))
+	statusBar:SetStatusBarTexture(Media.StatusBar)
+
+	if not ignoreColor then
+		statusBar:SetStatusBarColor(unpack(color or AS:CheckOption('StatusBarColor')))
+	end
 
 	S.StatusBars[statusBar] = true
 end

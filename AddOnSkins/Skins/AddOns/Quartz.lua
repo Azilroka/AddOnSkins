@@ -7,17 +7,12 @@ function R:Quartz()
 
 	local function SkinQuartzBar(self)
 		if not self.isSkinned then
-			self.IconBorder = CreateFrame("Frame", nil, self)
-			S:HandleFrame(self.IconBorder)
-			self.IconBorder:SetFrameLevel(0)
-			S:SetOutside(self.IconBorder, self.Icon)
-			S:HandleFrame(self.Bar, true)
+			local oldTex = self.Icon:GetTexture()
+			S:StripTextures(self)
+			S:HandleIcon(self.Icon, true)
+			S:HandleStatusBar(self.Bar, nil, nil, true)
+			self.Icon:SetTexture(oldTex)
 			self.isSkinned = true
-		end
-		if self.config.hideicon then
-			self.IconBorder:Hide()
-		else
-			self.IconBorder:Show()
 		end
 		if Quartz3GCDBar and not Quartz3GCDBar.isSkinned then S:HandleFrame(Quartz3GCDBar, true) Quartz3GCDBar.isSkinned = true end
 	end
