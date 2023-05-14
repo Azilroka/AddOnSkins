@@ -7,7 +7,7 @@ function R:BigWigs(event, addon)
 				if name == "QueueTimer" then
 					S:HandleStatusBar(frame, {1, 0, 0})
 					frame:ClearAllPoints()
-					frame:SetPoint('TOP', '$parent', 'BOTTOM', 0, S:AdjustForTheme(-2))
+					frame:SetPoint('TOP', frame:GetParent(), 'BOTTOM', 0, S:AdjustForTheme(-2))
 					frame:SetHeight(16)
 				end
 			end)
