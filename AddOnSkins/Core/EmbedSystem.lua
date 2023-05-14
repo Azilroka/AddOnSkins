@@ -97,21 +97,21 @@ function ES:Initialize()
 	end
 end
 
-function ES:Show()
-	ES.Main:Show()
+function ES:Toggle(shown)
+	ES.Main:SetShown(shown)
 	if AS:CheckOption('EmbedSystemDual') then
-		ES.Left:Show()
-		ES.Right:Show()
+		ES.Left:SetShown(shown)
+		ES.Right:SetShown(shown)
 	end
+end
+
+function ES:Show()
+	ES:Toggle(true)
 	ES:ToggleChatFrame(true)
 end
 
 function ES:Hide()
-	ES.Main:Hide()
-	if AS:CheckOption('EmbedSystemDual') then
-		ES.Left:Hide()
-		ES.Right:Hide()
-	end
+	ES:Toggle(false)
 	ES:ToggleChatFrame(false)
 end
 
@@ -148,17 +148,17 @@ end
 
 function ES:PLAYER_REGEN_DISABLED()
 	if AS:CheckOption('EmbedOoC') then
-		ES.Main:Show()
+		ES:Toggle(true)
 	end
 end
 
 function ES:PLAYER_REGEN_ENABLED()
 	if AS:CheckOption('EmbedOoC') then
 		AS:Delay(AS:CheckOption('EmbedOoCDelay'), function()
-            local inCombat = InCombatLockdown() or UnitAffectingCombat("player") or UnitAffectingCombat("pet")
-            if not inCombat then
-			    ES.Main:Hide()
-            end
+			local inCombat = InCombatLockdown() or UnitAffectingCombat('player') or UnitAffectingCombat('pet')
+			if not inCombat then
+				ES:Toggle(false)
+			end
 		end)
 	end
 end
