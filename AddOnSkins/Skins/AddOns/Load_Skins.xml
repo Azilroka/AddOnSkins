@@ -6,7 +6,7 @@
 	<Script file="Analyst.lua"/>
 	<Script file="AppearanceTooltip.lua"/>
 	<Script file="ArgusEliteTracker.lua"/>
-	<Script file="ArkInventory.lua"/>
+	<!--Script file="ArkInventory.lua"/-->
 	<Script file="Atlas.lua"/>
 	<Script file="AtlasLoot.lua"/>
 	<Script file="Auctionator.lua"/>
