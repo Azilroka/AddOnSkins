@@ -1331,9 +1331,9 @@ function S:HandleStatusBar(statusBar, color, template, ignoreColor)
 end
 
 do
-	local function checkNormalTexture(checkBox, texture) if texture ~= S.Media.ClearTexture then checkBox:SetNormalTexture(S.Media.ClearTexture) end end
-	local function checkPushedTexture(checkBox, texture) if texture ~= S.Media.ClearTexture then checkBox:SetPushedTexture(S.Media.ClearTexture) end end
-	local function checkHighlightTexture(checkBox, texture) if texture ~= S.Media.ClearTexture then checkBox:SetHighlightTexture(S.Media.ClearTexture) end end
+	local function checkNormalTexture(checkBox, texture) if texture ~= Media.ClearTexture then checkBox:SetNormalTexture(Media.ClearTexture) end end
+	local function checkPushedTexture(checkBox, texture) if texture ~= Media.ClearTexture then checkBox:SetPushedTexture(Media.ClearTexture) end end
+	local function checkHighlightTexture(checkBox, texture) if texture ~= Media.ClearTexture then checkBox:SetHighlightTexture(Media.ClearTexture) end end
 	local function checkCheckedTexture(checkBox, texture)
 		if texture == Media.StatusBar then return end
 		checkBox:SetCheckedTexture(Media.StatusBar)
