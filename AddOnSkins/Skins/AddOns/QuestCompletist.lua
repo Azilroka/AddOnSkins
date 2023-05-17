@@ -23,7 +23,7 @@ function R:QuestCompletist()
 	S:HandleButton(qcOptionsButton)
 	S:HandleButton(qcCategoryDropdownButton)
 	S:HandleCloseButton(qcXButton)
-	S:HandleSlideBar(qcMenuSlider)
+	S:HandleSliderFrame(qcMenuSlider)
 	qcMenuSlider:SetPoint('TOPLEFT', qcQuestCompletistUI, 'TOPLEFT', 303, -90)
 	qcMenuSlider:SetHeight(256)
 end

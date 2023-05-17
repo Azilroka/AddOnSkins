@@ -62,7 +62,7 @@ function R:TrinketMenu()
 	}
 
 	for _, slider in pairs(sliders) do
-		S:HandleSlideBar(slider)
+		S:HandleSliderFrame(slider)
 	end
 
 	-- Main Frame

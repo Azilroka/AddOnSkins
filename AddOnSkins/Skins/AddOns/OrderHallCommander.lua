@@ -28,7 +28,7 @@ function R:OrderHallCommander(event, addon)
 					if _G["LibInitCheckbox0000"..i] ~= nil then
 						S:HandleCheckBox(_G["LibInitCheckbox0000"..i])
 					elseif _G["LibInitSlider000"..i] ~= nil then
-						S:HandleSlideBar(_G["LibInitSlider000"..i])
+						S:HandleSliderFrame(_G["LibInitSlider000"..i])
 					elseif _G["LibInitCheckbox000"..i] ~= nil then
 						S:HandleCheckBox(_G["LibInitCheckbox000"..i])
 					elseif _G["LibInitDropdown000"..i] ~= nil then
