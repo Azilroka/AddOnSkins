@@ -20,6 +20,7 @@ function R:BigWigs(event, addon)
 			local bd = bar.candyBarBackdrop
 			local iconBd = bar.candyBarIconFrameBackdrop
 
+			bd:Hide()
 			local height = bar:Get("bigwigs:restoreheight")
 			if height then
 				bar:SetHeight(height)
@@ -29,10 +30,18 @@ function R:BigWigs(event, addon)
 			if tex then
 				bar:SetIcon(tex)
 				bar:Set("bigwigs:restoreicon", nil)
+
+				iconBd:Hide()
 			end
 
-			bd:Hide()
-			iconBd:Hide()
+			bar.candyBarDuration:ClearAllPoints()
+			bar.candyBarDuration:SetPoint("TOPLEFT", bar.candyBarBar, "TOPLEFT", 2, 0)
+			bar.candyBarDuration:SetPoint("BOTTOMRIGHT", bar.candyBarBar, "BOTTOMRIGHT", -2, 0)
+
+			bar.candyBarLabel:ClearAllPoints()
+			bar.candyBarLabel:SetPoint("TOPLEFT", bar.candyBarBar, "TOPLEFT", 2, 0)
+			bar.candyBarLabel:SetPoint("BOTTOMRIGHT", bar.candyBarBar, "BOTTOMRIGHT", -2, 0)
+
 			if AS:CheckOption('Theme') == 'ThickBorder' or AS:CheckOption('Theme') == 'TwoPixel' then
 				S:ToggleBorders(bd, false)
 				S:ToggleBorders(iconBd, false)
@@ -52,7 +61,11 @@ function R:BigWigs(event, addon)
 				icon:SetTexture(tex)
 				icon:Show()
 				icon:ClearAllPoints()
-				icon:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
+				if bar.iconPosition == "RIGHT" then
+					icon:SetPoint("BOTTOMLEFT", bar, "BOTTOMRIGHT", (S.PixelMode and 1 or 5), 0)
+				else
+					icon:SetPoint("BOTTOMRIGHT", bar, "BOTTOMLEFT", (S.PixelMode and -1 or -5), 0)
+				end
 				icon:SetSize(bar:GetHeight(), bar:GetHeight())
 				bar:Set("bigwigs:restoreicon", tex)
 				S:HandleIcon(icon)
@@ -81,8 +94,11 @@ function R:BigWigs(event, addon)
 				bar:SetIcon(nil)
 				icon:SetTexture(tex)
 				icon:Show()
-				icon:ClearAllPoints()
-				icon:SetPoint('BOTTOMRIGHT', bar, 'BOTTOMLEFT', -7, 0)
+				if bar.iconPosition == "RIGHT" then
+					icon:SetPoint("BOTTOMLEFT", bar, "BOTTOMRIGHT", (S.PixelMode and 1 or 5), 0)
+				else
+					icon:SetPoint("BOTTOMRIGHT", bar, "BOTTOMLEFT", (S.PixelMode and -1 or -5), 0)
+				end
 				icon:SetSize(bar:GetHeight() * 2, bar:GetHeight() * 2)
 				bar:Set("bigwigs:restoreicon", tex)
 				S:HandleIcon(icon)
@@ -96,12 +112,12 @@ function R:BigWigs(event, addon)
 			end
 
 			bar.candyBarLabel:ClearAllPoints()
-			bar.candyBarLabel:Point("LEFT", bar, "LEFT", 2, AS:AdjustForTheme(12))
-			bar.candyBarLabel:Point("RIGHT", bar, "RIGHT", -2, AS:AdjustForTheme(12))
+			bar.candyBarLabel:SetPoint("LEFT", bar, "LEFT", 2, AS:AdjustForTheme(12))
+			bar.candyBarLabel:SetPoint("RIGHT", bar, "RIGHT", -2, AS:AdjustForTheme(12))
 
 			bar.candyBarDuration:ClearAllPoints()
-			bar.candyBarDuration:Point("LEFT", bar, "LEFT", 2, AS:AdjustForTheme(12))
-			bar.candyBarDuration:Point("RIGHT", bar, "RIGHT", -2, AS:AdjustForTheme(12))
+			bar.candyBarDuration:SetPoint("LEFT", bar, "LEFT", 2, AS:AdjustForTheme(12))
+			bar.candyBarDuration:SetPoint("RIGHT", bar, "RIGHT", -2, AS:AdjustForTheme(12))
 
 			bd:Show()
 			S:ToggleBorders(bd, AS:CheckOption('Theme') == 'ThickBorder')
