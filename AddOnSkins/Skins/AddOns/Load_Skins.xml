@@ -94,6 +94,7 @@
 	<Script file="PetTracker.lua"/>
 	<Script file="Postal.lua"/>
 	<Script file="PremadeGroupsFilter.lua"/>
+	<Script file="ProfessionShoppingList.lua"/>
 	<Script file="Quartz.lua"/>
 	<Script file="QuestCompletist.lua"/>
 	<Script file="QuestGuru.lua"/>
