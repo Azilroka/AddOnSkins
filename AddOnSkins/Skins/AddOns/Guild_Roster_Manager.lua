@@ -1,7 +1,6 @@
- 	-- Updated April 20th 2023 GRM ver 1.972 (Classic/Wrath/Live Retail Compatible)
+ 	-- Updated July 27th 2023 GRM ver 1.980 (Classic/Wrath/Live Retail Compatible, all tested)
 
 local AS = unpack(AddOnSkins)
-local GRM = {}
 
 if not AS:CheckAddOn('Guild_Roster_Manager') then return end
 
@@ -15,6 +14,19 @@ function AS:GuildRosterManager()
 		thumb.backdrop:SetFrameLevel( thumb.backdrop:GetFrameLevel() - 2 )
 	end
 
+	local HideEdges = function ( frameName , isClassic )
+
+		local bottomRight , bottomLeft = "BottomRightCorner" , "BottomLeftCorner";
+		if isClassic then
+			bottomRight , bottomLeft = "BotRightCorner","BotLeftCorner"
+		end
+		
+		local edgeNames = {"BottomBorder","TopBorder","LeftBorder","RightBorder","TopLeftCorner","TopRightCorner",bottomRight,bottomLeft}
+
+		for i = 1 , #edgeNames do
+			_G[frameName .. edgeNames[i]]:Hide()
+		end
+	end
 	--------------------
 	-- Tabs
 	--------------------
@@ -24,23 +36,14 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_AddonUsersTab)
 	AS:SkinButton(GRM_OptionsTab)
 	AS:SkinButton(GRM_GuildAuditTab)
-
 	--------------------
 	-- Event Log
 	--------------------
 	AS:SkinFrame(GRM_RosterChangeLogFrame)
-	GRM_RosterChangeLogScrollBorderFrameBottomBorder:Hide()
-	GRM_RosterChangeLogScrollBorderFrameTopBorder:Hide()
-	GRM_RosterChangeLogScrollBorderFrameLeftBorder:Hide()
-	GRM_RosterChangeLogScrollBorderFrameRightBorder:Hide()
-	GRM_RosterChangeLogScrollBorderFrameTopLeftCorner:Hide()
-	GRM_RosterChangeLogScrollBorderFrameTopRightCorner:Hide()
-	GRM_RosterChangeLogScrollBorderFrameBottomRightCorner:Hide()
-	GRM_RosterChangeLogScrollBorderFrameBottomLeftCorner:Hide()
+	HideEdges("GRM_RosterChangeLogScrollBorderFrame");
 
 	AS:SkinScrollBar(GRM_RosterChangeLogScrollFrameSlider)
 	AdjustSliderThumbFrameLevel ( GRM_RosterChangeLogScrollFrameSliderThumbTexture )
-	AS:SkinCloseButton(GRM_RosterChangeLogFrame.CloseButton)
 	AS:SkinButton(GRM_RosterClearLogButton)
 
 	-- Event Log: Options Frame
@@ -221,14 +224,8 @@ function AS:GuildRosterManager()
 	----------------------------
 	-- Add Event to Calendar Frame
 	------------------------------
-	GRM_AddEventScrollBorderFrameBottomBorder:Hide()
-	GRM_AddEventScrollBorderFrameTopBorder:Hide()
-	GRM_AddEventScrollBorderFrameLeftBorder:Hide()
-	GRM_AddEventScrollBorderFrameRightBorder:Hide()
-	GRM_AddEventScrollBorderFrameTopLeftCorner:Hide()
-	GRM_AddEventScrollBorderFrameTopRightCorner:Hide()
-	GRM_AddEventScrollBorderFrameBottomRightCorner:Hide()
-	GRM_AddEventScrollBorderFrameBottomLeftCorner:Hide()
+
+	HideEdges("GRM_AddEventScrollBorderFrame")
 	AS:SkinScrollBar(GRM_AddEventScrollFrameSlider)
 	AdjustSliderThumbFrameLevel ( GRM_AddEventScrollFrameSliderThumbTexture )
 	AS:SkinButton(GRM_EventsFrameSetAnnounceButton)
@@ -239,14 +236,8 @@ function AS:GuildRosterManager()
 	--------------------
 	-- Ban List
 	--------------------
-	GRM_CoreBanListScrollBorderFrameBottomBorder:Hide()
-	GRM_CoreBanListScrollBorderFrameTopBorder:Hide()
-	GRM_CoreBanListScrollBorderFrameLeftBorder:Hide()
-	GRM_CoreBanListScrollBorderFrameRightBorder:Hide()
-	GRM_CoreBanListScrollBorderFrameTopLeftCorner:Hide()
-	GRM_CoreBanListScrollBorderFrameTopRightCorner:Hide()
-	GRM_CoreBanListScrollBorderFrameBottomRightCorner:Hide()
-	GRM_CoreBanListScrollBorderFrameBottomLeftCorner:Hide()
+
+	HideEdges("GRM_CoreBanListScrollBorderFrame")
 	AS:SkinButton(GRM_BanListRemoveButton)
 	AS:SkinButton(GRM_BanListAddButton)
 	AS:SkinButton(GRM_BanListEditButton)
@@ -256,7 +247,6 @@ function AS:GuildRosterManager()
 
 	--Ban Frame
 	AS:SkinFrame(GRM_AddBanFrame)
-	AS:SkinCloseButton(GRM_AddBanFrame.CloseButton)
 	AS:SkinButton(GRM_AddBanConfirmButton)
 	AS:SkinEditBox(GRM_AddBanNameSelectionEditBox)
 	AS:SkinEditBox(GRM_AddBanReasonEditBox)
@@ -265,23 +255,8 @@ function AS:GuildRosterManager()
 
 	-- Classic compatibility, one code-base
 	if buildVersion < 80000 then
-		GRM_BanServerDropDownMenuInsetBottomBorder:Hide()
-		GRM_BanServerDropDownMenuInsetTopBorder:Hide()
-		GRM_BanServerDropDownMenuInsetLeftBorder:Hide()
-		GRM_BanServerDropDownMenuInsetRightBorder:Hide()
-		GRM_BanServerDropDownMenuInsetTopLeftCorner:Hide()
-		GRM_BanServerDropDownMenuInsetTopRightCorner:Hide()
-		GRM_BanServerDropDownMenuInsetBotRightCorner:Hide()
-		GRM_BanServerDropDownMenuInsetBotLeftCorner:Hide()
-
-		GRM_AddBanDropDownMenuInsetBottomBorder:Hide()
-		GRM_AddBanDropDownMenuInsetTopBorder:Hide()
-		GRM_AddBanDropDownMenuInsetLeftBorder:Hide()
-		GRM_AddBanDropDownMenuInsetRightBorder:Hide()
-		GRM_AddBanDropDownMenuInsetTopLeftCorner:Hide()
-		GRM_AddBanDropDownMenuInsetTopRightCorner:Hide()
-		GRM_AddBanDropDownMenuInsetBotRightCorner:Hide()
-		GRM_AddBanDropDownMenuInsetBotLeftCorner:Hide()
+		HideEdges("GRM_BanServerDropDownMenuInset" , true )
+		HideEdges("GRM_AddBanDropDownMenuInset" , true )
 	else
 		GRM_BanServerDropDownMenu.NineSlice:Hide()
 		GRM_AddBanDropDownMenu.NineSlice:Hide()
@@ -294,14 +269,7 @@ function AS:GuildRosterManager()
 	AS:SkinFrame(GRM_PopupWindowConfirmFrame)
 	AS:SkinButton(GRM_PopupWindowConfirmFrameYesButton)
 	AS:SkinButton(GRM_PopupWindowConfirmFrameCancelButton)
-	GRM_PopupWindowConfirmFrameBottomBorder:Hide()
-	GRM_PopupWindowConfirmFrameTopBorder:Hide()
-	GRM_PopupWindowConfirmFrameLeftBorder:Hide()
-	GRM_PopupWindowConfirmFrameRightBorder:Hide()
-	GRM_PopupWindowConfirmFrameTopLeftCorner:Hide()
-	GRM_PopupWindowConfirmFrameTopRightCorner:Hide()
-	GRM_PopupWindowConfirmFrameBottomRightCorner:Hide()
-	GRM_PopupWindowConfirmFrameBottomLeftCorner:Hide()
+	HideEdges("GRM_PopupWindowConfirmFrame")
 
 	--------------------
 	-- Addon Users
@@ -309,14 +277,7 @@ function AS:GuildRosterManager()
 	AS:SkinFrame(GRM_AddonUsersFrame)
 	AS:SkinScrollBar(GRM_AddonUsersScrollFrameSlider)
 	AdjustSliderThumbFrameLevel ( GRM_AddonUsersScrollFrameSliderThumbTexture )
-	GRM_AddonUsersScrollBorderFrameBottomBorder:Hide()
-	GRM_AddonUsersScrollBorderFrameTopBorder:Hide()
-	GRM_AddonUsersScrollBorderFrameLeftBorder:Hide()
-	GRM_AddonUsersScrollBorderFrameRightBorder:Hide()
-	GRM_AddonUsersScrollBorderFrameTopLeftCorner:Hide()
-	GRM_AddonUsersScrollBorderFrameTopRightCorner:Hide()
-	GRM_AddonUsersScrollBorderFrameBottomRightCorner:Hide()
-	GRM_AddonUsersScrollBorderFrameBottomLeftCorner:Hide()
+	HideEdges("GRM_AddonUsersScrollBorderFrame")
 
 	--------------------
 	-- Audit Frame
@@ -329,19 +290,11 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_JDAuditToolButton)
 	AS:SkinScrollBar(GRM_AuditScrollFrameSlider)
 	AdjustSliderThumbFrameLevel ( GRM_AuditScrollFrameSliderThumbTexture )
-	GRM_AuditScrollBorderFrameBottomBorder:Hide()
-	GRM_AuditScrollBorderFrameTopBorder:Hide()
-	GRM_AuditScrollBorderFrameLeftBorder:Hide()
-	GRM_AuditScrollBorderFrameRightBorder:Hide()
-	GRM_AuditScrollBorderFrameTopLeftCorner:Hide()
-	GRM_AuditScrollBorderFrameTopRightCorner:Hide()
-	GRM_AuditScrollBorderFrameBottomRightCorner:Hide()
-	GRM_AuditScrollBorderFrameBottomLeftCorner:Hide()
+	HideEdges("GRM_AuditScrollBorderFrame")
 	AS:SkinEditBox(GRM_PlayerSearchAuditEditBox)
 
 	-- AuditToolButton
 	AS:SkinFrame(GRM_AuditJDTool)
-	AS:SkinCloseButton(GRM_AuditJDTool.CloseButton)
 	AS:SkinScrollBar(GRM_JDToolScrollFrameSlider)
 	AdjustSliderThumbFrameLevel ( GRM_JDToolScrollFrameSliderThumbTexture )
 	AS:SkinCheckBox(GRM_AuditFrameShowAllCheckbox)
@@ -354,14 +307,7 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_AuditJDToolButton5)
 	AS:SkinButton(GRM_AuditJDToolButton6)
 	AS:SkinButton(GRM_AuditJDToolButton7)
-	GRM_JDToolScrollBorderFrameBottomBorder:Hide()
-	GRM_JDToolScrollBorderFrameTopBorder:Hide()
-	GRM_JDToolScrollBorderFrameLeftBorder:Hide()
-	GRM_JDToolScrollBorderFrameRightBorder:Hide()
-	GRM_JDToolScrollBorderFrameTopLeftCorner:Hide()
-	GRM_JDToolScrollBorderFrameTopRightCorner:Hide()
-	GRM_JDToolScrollBorderFrameBottomRightCorner:Hide()
-	GRM_JDToolScrollBorderFrameBottomLeftCorner:Hide()
+	HideEdges("GRM_JDToolScrollBorderFrame")
 
 	------------------
 	-- Backup Frame
@@ -369,14 +315,7 @@ function AS:GuildRosterManager()
 	AS:SkinFrame(GRM_UIOptionsFrame)
 	AS:SkinScrollBar(GRM_CoreBackupScrollFrameSlider)
 	AdjustSliderThumbFrameLevel ( GRM_CoreBackupScrollFrameSliderThumbTexture )
-	GRM_CoreBackupScrollBorderFrameBottomBorder:Hide()
-	GRM_CoreBackupScrollBorderFrameTopBorder:Hide()
-	GRM_CoreBackupScrollBorderFrameLeftBorder:Hide()
-	GRM_CoreBackupScrollBorderFrameRightBorder:Hide()
-	GRM_CoreBackupScrollBorderFrameTopLeftCorner:Hide()
-	GRM_CoreBackupScrollBorderFrameTopRightCorner:Hide()
-	GRM_CoreBackupScrollBorderFrameBottomRightCorner:Hide()
-	GRM_CoreBackupScrollBorderFrameBottomLeftCorner:Hide()
+	HideEdges("GRM_CoreBackupScrollBorderFrame")
 
 	--------------------
 	-- Guild Frame
@@ -434,8 +373,6 @@ function AS:GuildRosterManager()
 	-- Macro Tool
 	--------------------
 	AS:SkinFrame(GRM_ToolCoreFrame)
-	AS:SkinCloseButton(GRM_ToolCoreFrameCloseButton)
-	AS:SkinCloseButton(GRM_ToolIgnoreListFrameCloseButton)
 	AS:SkinButton(GRM_ToolBuildMacroButton)
 	AS:SkinButton(GRM_ToolViewSafeListButton)
 	AS:SkinButton(GRM_ToolClearSelectedMacrodNamesButton)
@@ -444,6 +381,7 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_ToolIgnoreResetSelectedNamesButton)
 	AS:SkinButton(GRM_ToolIgnoreRemoveAllButton)
 	AS:SkinButton(GRM_ToolSyncRulesButton)
+	AS:SkinButton(GRM_ToolCopyQuedButton)
 	AS:SkinEditBox(GRM_RosterKickRecommendEditBox)
 	AS:SkinFrame(GRM_ToolMacrodScrollBorderFrame)
 	AS:SkinFrame(GRM_ToolQueuedScrollBorderFrame)
@@ -499,6 +437,49 @@ function AS:GuildRosterManager()
 		end
 	end
 
+	--------------------
+	---- GRM Roster ----
+	--------------------
+
+	local SkinNewRoster = function()
+
+		-- Sort tabs
+		AS:SkinFrame(GRM_RosterFrame)
+		AS:SkinFrame(GRM_RosterFrameScrollFrame)
+		AS:SkinFrame(GRM_RosterFrameDropDown)
+		AS:SkinFrame(GRM_RosterFrameDropDownRank)
+		AS:SkinButton(GRM_RosterColumnLvl)
+		AS:SkinButton(GRM_RosterColumnName)
+		AS:SkinButton(GRM_RosterColumnLastOnline)
+		AS:SkinButton(GRM_RosterColumnRank)
+		AS:SkinButton(GRM_RosterColumnNote)
+		AS:SkinButton(GRM_RosterColumnOfficerNote)
+		
+		if GRM_G.BuildVersion >= 80000 then
+			AS:SkinButton(GRM_RosterColumnMythicPlus)
+		end
+		AS:SkinScrollBar(GRM_RosterFrameScrollFrameSlider)		
+		AS:SkinEditBox(GRM_RosterFrameNameEditBox)
+		AS:SkinEditBox(GRM_RosterNoteEditBox)
+	
+		newRosterLoaded = true;
+
+	end
+
+	-- Macro Rule Ignore Lists
+	local skinMacroIgnoreLists = function()
+		AS:SkinFrame(GRM_MacroToolIgnoreListSettingsFrame)
+		AS:SkinCheckBox(GRM_IgnoreListKickTimeExpireButton)
+		AS:SkinCheckBox(GRM_IgnoreListPromoteTimeExpireButton)
+		AS:SkinCheckBox(GRM_IgnoreListDemoteTimeExpireButton)
+		AS:SkinCheckBox(GRM_IgnoreListFrameKickCheckBox)
+		AS:SkinCheckBox(GRM_IgnoreListFramePromoteCheckBox)
+		AS:SkinCheckBox(GRM_IgnoreListFrameDemoteCheckBox)
+		AS:SkinEditBox(GRM_IgnoreListPromoteTimeExpireEditBox)
+		AS:SkinEditBox(GRM_IgnoreListKickTimeExpireEditBox)
+		AS:SkinEditBox(GRM_IgnoreListDemoteTimeExpireEditBox)
+	end
+
 	local sideGroupingLogic = function()
 		GRM_AltGroupingScrollBorderFrame:HookScript ( "OnShow" , function()
 			if GRM_MemberDetailMetaData:IsMouseOver() then
@@ -524,14 +505,13 @@ function AS:GuildRosterManager()
 	end)
 
 	-- Since much of the addon only loads on demand, this AddOnSkins file needs to wait til certain things have been configured first...
-	local isLoaded , isLoaded2 , isLoaded3 , isLoaded4 , isLoaded5 , isLoaded6 = false , false , false , false , false , false
+	local isLoaded , isLoaded2 , isLoaded3 , isLoaded4 , isLoaded5 , isLoaded6 , isLoaded7 = false , false , false , false , false , false , false
 	GRM_PlayerNoteWindow:HookScript("OnShow" , function()
 		if not isLoaded then
 			GRM_AddAltEditFrame:SetPoint ( "BOTTOMLEFT" , GRM_MemberDetailMetaData , "BOTTOMRIGHT" ,  2 , 0 )
 			AS:SkinEditBox(GRM_AddAltEditBox, 120, 15)
 			AS:SkinEditBox(GRM_PlayerNoteEditBox)
 			AS:SkinEditBox(GRM_PlayerOfficerNoteEditBox)
-			-- AS:SkinEditBox(GRM_CustomNoteEditBox)			-- Not skinning for now - seems odd looking
 
 			if buildVersion < 80000 then
 				if GRM_UI.GuildRosterFrame:IsVisible() then
@@ -559,20 +539,7 @@ function AS:GuildRosterManager()
 			else
 				if CommunitiesFrame:IsVisible() then
 					GRM_MemberDetailMetaData:ClearAllPoints();
-					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 25 , 5 )
-				elseif GRM_UI.GuildRosterFrame:IsVisible() then
-					GRM_MemberDetailMetaData:ClearAllPoints();
-					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GRM_UI.GuildRosterFrame , "TOPRIGHT" , 25 , 5 )
-				end
-
-				if GuildFrame:IsVisible() and not GRM_G.CurrentPinCommunity then
-					GRM_MemberDetailMetaData:ClearAllPoints()
-					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GRM_UI.GuildRosterFrame , "TOPRIGHT" , 1 , 5 );
-				end
-
-				if GuildMemberDetailFrame:IsVisible() and not GRM_G.CurrentPinCommunity then
-					GRM_MemberDetailMetaData:ClearAllPoints()
-					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GuildMemberDetailFrame , "TOPRIGHT" , 2 , 0.5 );
+					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 35 , 5 )
 				end
 
 				CommunitiesFrame.GuildMemberDetailFrame:HookScript ( "OnShow" , function( self )
@@ -584,20 +551,8 @@ function AS:GuildRosterManager()
 
 				CommunitiesFrame.GuildMemberDetailFrame:HookScript ( "OnHide" , function( self )
 					GRM_MemberDetailMetaData:ClearAllPoints()
-					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 25 , 5 )
+					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , CommunitiesFrame , "TOPRIGHT" , 34 , 5 )
 				end)
-
-				GRM_UI.MemberDetailFrameClassic:SetScript ( "OnShow" , function( self )
-					GRM_UI.MemberDetailFrameClassic:ClearAllPoints()
-					GRM_UI.MemberDetailFrameClassic:SetPoint ( "TOPLEFT" , GRM_UI.GuildRosterFrame , "TOPRIGHT" , 2 , -1 );
-					GRM_MemberDetailMetaData:ClearAllPoints()
-					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , self , "TOPRIGHT" , 2 , 0.5 );
-				end);
-			
-				GRM_UI.MemberDetailFrameClassic:SetScript ( "OnHide" , function()
-					GRM_MemberDetailMetaData:ClearAllPoints()
-					GRM_MemberDetailMetaData:SetPoint ( "TOPLEFT" , GuildFrame , "TOPRIGHT" , 1 , 5 );
-				end);
 
 			end
 
@@ -613,21 +568,11 @@ function AS:GuildRosterManager()
 			AS:SkinCheckBox(GRM_PopupWindowCheckButton2)
 			-- Ban Popup Frames
 
-			GRM_MemberDetailRankToolTip:HookScript ( "OnShow" , function()
-				AS:SkinFrame(GRM_MemberDetailRankToolTip)
-			end)
-			GRM_MemberDetailJoinDateToolTip:HookScript ( "OnShow" , function()
-				AS:SkinFrame(GRM_MemberDetailJoinDateToolTip)
-			end)
-			GRM_MemberDetailServerNameToolTip:HookScript ( "OnShow" , function()
-				AS:SkinFrame(GRM_MemberDetailServerNameToolTip)
-			end)
-			GRM_MemberDetailNotifyStatusChangeTooltip:HookScript ( "OnShow" , function()
-				AS:SkinFrame(GRM_MemberDetailNotifyStatusChangeTooltip)
-			end)
-			GRM_MemberDetailNJDSyncTooltip:HookScript ( "OnShow" , function()
-				AS:SkinFrame(GRM_MemberDetailNJDSyncTooltip)
-			end)
+			AS:SkinFrame(GRM_MemberDetailRankToolTip)
+			AS:SkinFrame(GRM_MemberDetailJoinDateToolTip)
+			AS:SkinFrame(GRM_MemberDetailServerNameToolTip)
+			AS:SkinFrame(GRM_MemberDetailNotifyStatusChangeTooltip)
+			AS:SkinFrame(GRM_MemberDetailNJDSyncTooltip)
 
 			GRM_SyncJoinDateSideFrame:SetPoint ( "TOPLEFT" , GRM_MemberDetailMetaData , "TOPRIGHT" , 1 , 0 )
 			GRM_AltGroupingScrollFrameSlider:SetPoint ( "TOPLEFT" , GRM_AltGroupingScrollFrame , "TOPRIGHT" , -19 , -14.5 )
@@ -654,9 +599,11 @@ function AS:GuildRosterManager()
 			GRM_MemberDetailNotifyStatusChangeTooltip:SetScale ( 0.85 )
 			C_Timer.After ( 0.5 , function()
 				GRM_MemberDetailMetaDataCloseButton:SetPoint( "TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData , "TOPRIGHT" , 0 , 0 );
-				AS:SkinButton(GRM_SyncDateArrowButton)
-				AS:SkinButton(GRM_ExtraAltDetailsArrowButton)
 			end);
+
+			-- Ignore Macro 
+			skinMacroIgnoreLists()
+
 			isLoaded = true
 		end
 	end)
@@ -681,8 +628,6 @@ function AS:GuildRosterManager()
 				GRM_AddonUsersTooltip:HookScript ( "OnShow" , function()
 					AS:SkinFrame(GRM_AddonUsersTooltip)
 				end)
-
-				AS:SkinCloseButton(GRM_RosterConfirmFrame.CloseButton)
 
 				AS:SkinButton(GRM_RosterConfirmYesButton)
 				AS:SkinButton(GRM_RosterConfirmCancelButton)
@@ -749,6 +694,13 @@ function AS:GuildRosterManager()
 			AS:SkinFrame(GRM_RosterMinLvlOverlayNote)
 			AS:SkinFrame(GRM_AutoTriggerTimeOverlayNote)
 
+			-- Verify All Frame
+			AS:SkinFrame(GRM_AuditVerifyAllFrame)
+			AS:SkinEditBox(GRM_VerifyFrameEditBox1)
+			AS:SkinButton(GRM_VerifyAllConfirmButton)
+			AS:SkinButton(GRM_VerifyAllRankButton)
+			AS:SkinButton(GRM_VerifyAllJoinButton)
+
 			isLoaded2 = true
 		end
 	end)
@@ -760,31 +712,60 @@ function AS:GuildRosterManager()
 		AS:SkinCloseButton(GRM_GroupButtonFrameCloseButton)
 	end
 
-	-- Guild Recruitment Frames
+	local WaitForLoad;
+	WaitForLoad = function ( load1 , load2 , load3 , load4 )
 
-	GRM.WaitForLoad = function( load1 , load2 )
-		local a = load1 or true;
-		local b = load2 or true;
-
-		if a and GRM_EnableMouseOver then
-			a = false
+		if load1 and GRM_EnableMouseOver then
+			load1 = false
 			AS:SkinCheckBox(GRM_EnableMouseOver)
 		end
 
-		if b and GRM_EnableMouseOverOldRoster then
-			b = false
-			AS:SkinCheckBox(GRM_EnableMouseOverOldRoster)
+		if GRM_G.BuildVersion < 80000 then
+
+			if load2 and GRM_EnableMouseOverOldRoster then
+				load2 = false
+				AS:SkinCheckBox(GRM_EnableMouseOverOldRoster)
+			end
+
+			if load4 and GRM_RosterTab and FriendsFrame then
+				AS:SkinButton (GRM_RosterTab)
+				GRM_RosterTab:SetSize ( 32,32 )
+				GRM_RosterTab:SetPoint( "LEFT" , FriendsFrameTab4 , "RIGHT" , -5 , -3 )
+				load4 = false;
+			end
+
+		else
+			load2 = false;
+
+			if load4 and GRM_RosterTab and CommunitiesFrame then
+				AS:SkinButton (GRM_RosterTab)
+				GRM_RosterTab:SetSize ( 32,32 )
+				GRM_RosterTab:SetPoint( "TOP" , CommunitiesFrame.GuildInfoTab , "BOTTOM" , 0 , -20 )
+				load4 = false;
+			end
+
 		end
 
-		if a or b then
+		if load3 and GRM_RosterFrame then
+			load3 = false;
+
+			GRM_RosterFrame:HookScript ( "OnShow" , function()
+				if not isLoaded7 then
+					SkinNewRoster()
+					isLoaded7 = true
+				end
+			end);
+		end
+
+		if load1 or load2 or load3 or load4 then
 			C_Timer.After ( 3 , function()
-				GRM.WaitForLoad( a , b )
+				WaitForLoad( load1 , load2 , load3 , load4 )
 				return;
 			end)
 		end
 	end
 
-	GRM.WaitForLoad()
+	WaitForLoad ( true , true , true , true );
 
 end
 
