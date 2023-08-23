@@ -51,6 +51,22 @@ function R:Postal(event, addon)
 		Postal_BlackBookButton:SetPoint('LEFT', SendMailNameEditBox, 'RIGHT', 5, 2)
 	end
 
+	if PostalForwardButton then
+		S:HandleButton(PostalForwardButton, true)
+		PostalForwardButton:SetSize(76, 22)
+		PostalForwardButton:SetPoint("RIGHT", OpenMailReplyButton, "LEFT", -2, 0)
+	end
+
+	for i = 1, 13 do
+		local button = _G['Postal_QuickAttachButton'..i]
+		if button then
+			S:HandleButton(button)
+			button:SetSize(42, 42)
+			button.icon:SetTexCoord(0.05, 0.95, 0.05, 0.95)
+			button:SetPoint("TOPLEFT", MailFrame, "TOPRIGHT", 0, -44 * (i-1))
+		end
+	end
+
 	AS:UnregisterSkinEvent('Postal', event)
 end
 
