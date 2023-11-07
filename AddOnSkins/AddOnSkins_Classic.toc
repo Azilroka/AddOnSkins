@@ -1,4 +1,4 @@
-## Interface: 11403
+## Interface: 11404
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
 ## Version: 4.68
 ## Author: Azilroka, Nihilistzsche
