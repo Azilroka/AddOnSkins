@@ -33,8 +33,8 @@ function R:InstanceProfits()
   InstanceProfits_LiveDisplay_ButtonShare:SetHeight(16)
   InstanceProfits_LiveDisplay_ButtonShare.Text:SetText("S")
   InstanceProfits_LiveDisplay_ButtonShare.Text:SetTextColor(1, 1, 1, 1)
-  InstanceProfits_LiveDisplay_ButtonShare.Text:SetJustifyV("CENTER");
   InstanceProfits_LiveDisplay_ButtonShare.Text:SetJustifyH("CENTER");
+  InstanceProfits_LiveDisplay_ButtonShare.Text:SetJustifyV("MIDDLE");
   S:HandleButton(InstanceProfits_LiveDisplay_ButtonShare)
 
 
