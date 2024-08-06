@@ -1,66 +1,138 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
 function R:PremadeGroupsFilter()
-	local function Reposition()
-		local dialog = PremadeGroupsFilterDialog
-		dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT", S:AdjustForTheme(2), S:AdjustForTheme(1))
-		dialog:SetPoint("BOTTOMLEFT", GroupFinderFrame, "BOTTOMRIGHT", S:AdjustForTheme(2), S:AdjustForTheme(-1))
-	end
-	hooksecurefunc(PremadeGroupsFilter.Debug, "Dialog_ResetPosition", Reposition)
+	-- local function Reposition()
+	-- 	local dialog = PremadeGroupsFilterDialog
+	-- 	dialog:SetPoint("TOPLEFT", GroupFinderFrame, "TOPRIGHT", S:AdjustForTheme(2), S:AdjustForTheme(1))
+	-- 	dialog:SetPoint("BOTTOMLEFT", GroupFinderFrame, "BOTTOMRIGHT", S:AdjustForTheme(2), S:AdjustForTheme(-1))
+	-- end
+	-- hooksecurefunc(PremadeGroupsFilter.Debug, "Dialog_ResetPosition", Reposition)
 
 	S:HandleFrame(PremadeGroupsFilterDialog)
 	S:HandleCloseButton(PremadeGroupsFilterDialog.CloseButton)
 	S:HandleMaxMinFrame(PremadeGroupsFilterDialog.MaximizeMinimizeFrame)
 	S:HandleCheckBox(UsePGFButton)
 
-	S:HandleCheckBox(PremadeGroupsFilterDialog.Difficulty.Act)
-	S:HandleDropDownBox(PremadeGroupsFilterDialog.Difficulty.DropDown)
-
-	S:HandleCheckBox(PremadeGroupsFilterDialog.MPRating.Act)
-	S:HandleEditBox(PremadeGroupsFilterDialog.MPRating.Min)
-	S:HandleEditBox(PremadeGroupsFilterDialog.MPRating.Max)
-	--S:HandleCheckBox(PremadeGroupsFilterDialog.Noilvl.Act)
-
-	S:HandleCheckBox(PremadeGroupsFilterDialog.PVPRating.Act)
-	S:HandleEditBox(PremadeGroupsFilterDialog.PVPRating.Min)
-	S:HandleEditBox(PremadeGroupsFilterDialog.PVPRating.Max)
-
-	S:HandleCheckBox(PremadeGroupsFilterDialog.Defeated.Act)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Defeated.Min)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Defeated.Max)
-
-	S:HandleCheckBox(PremadeGroupsFilterDialog.Members.Act)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Members.Min)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Members.Max)
-
-	S:HandleCheckBox(PremadeGroupsFilterDialog.Tanks.Act)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Tanks.Min)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Tanks.Max)
-
-	S:HandleCheckBox(PremadeGroupsFilterDialog.Heals.Act)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Heals.Min)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Heals.Max)
-
-	S:HandleCheckBox(PremadeGroupsFilterDialog.Dps.Act)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Dps.Min)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Dps.Max)
-
-	S:HandleCheckBox(PremadeGroupsFilterDialog.Dps.Act)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Dps.Min)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Dps.Max)
-
-	--S:StripTextures(PremadeGroupsFilterDialog.Advanced)
-
-	S:HandleFrame(PremadeGroupsFilterDialog.Expression)
-	S:HandleScrollBar(PremadeGroupsFilterDialog.Expression.ScrollBar)
-	S:HandleEditBox(PremadeGroupsFilterDialog.Sorting.SortingExpression)
-	PremadeGroupsFilterDialog.Expression.ScrollBar:SetPoint("TOPLEFT", PremadeGroupsFilterDialog.Expression, "TOPRIGHT", -17, -12)
-	PremadeGroupsFilterDialog.Expression.ScrollBar:SetPoint("BOTTOMLEFT", PremadeGroupsFilterDialog.Expression, "BOTTOMRIGHT", -17, 12)
+	local panels = {
+		PremadeGroupsFilterDungeonPanel,
+		PremadeGroupsFilterRaidPanel,
+		PremadeGroupsFilterRBGPanel,
+		PremadeGroupsFilterArenaPanel,
+        PremadeGroupsFilterExpressionPanel
+	}
+	for _, panel in pairs(panels) do
+		if panel.Group then
+			if panel.Group.Difficulty then
+		    	S:HandleCheckBox(panel.Group.Difficulty.Act)
+		    	panel.Group.Difficulty.Act:SetWidth(30)
+		    	panel.Group.Difficulty.Act:SetHeight(30)
+		    	S:HandleDropDownBox(panel.Group.Difficulty.DropDown)
+		    end
+		    if panel.Group.MPRating then
+		    	S:HandleCheckBox(panel.Group.MPRating.Act)
+		    	panel.Group.MPRating.Act:SetWidth(30)
+		    	panel.Group.MPRating.Act:SetHeight(30)
+		    	S:HandleEditBox(panel.Group.MPRating.Min)
+		    	S:HandleEditBox(panel.Group.MPRating.Max)
+		    end
+		    if panel.Group.Members then
+		    	S:HandleCheckBox(panel.Group.Members.Act)
+		    	panel.Group.Members.Act:SetWidth(30)
+		    	panel.Group.Members.Act:SetHeight(30)
+		    	S:HandleEditBox(panel.Group.Members.Min)
+		    	S:HandleEditBox(panel.Group.Members.Max)
+		    end
+		    if panel.Group.Tanks then
+		    	S:HandleCheckBox(panel.Group.Tanks.Act)
+		    	panel.Group.Tanks.Act:SetWidth(30)
+		    	panel.Group.Tanks.Act:SetHeight(30)
+		    	S:HandleEditBox(panel.Group.Tanks.Min)
+		    	S:HandleEditBox(panel.Group.Tanks.Max)
+		    end
+		    if panel.Group.Heals then
+		    	S:HandleCheckBox(panel.Group.Heals.Act)
+		    	panel.Group.Heals.Act:SetWidth(30)
+		    	panel.Group.Heals.Act:SetHeight(30)
+		    	S:HandleEditBox(panel.Group.Heals.Min)
+		    	S:HandleEditBox(panel.Group.Heals.Max)
+		    end
+		    if panel.Group.DPS then
+		    	S:HandleCheckBox(panel.Group.DPS.Act)
+		    	panel.Group.DPS.Act:SetWidth(30)
+		    	panel.Group.DPS.Act:SetHeight(30)
+		    	S:HandleEditBox(panel.Group.DPS.Min)
+		    	S:HandleEditBox(panel.Group.DPS.Max)
+		    end
+		    if panel.Group.Partyfit then
+		    	S:HandleCheckBox(panel.Group.Partyfit.Act)
+		    	panel.Group.Partyfit.Act:SetWidth(30)
+		    	panel.Group.Partyfit.Act:SetHeight(30)
+		    end
+		    if panel.Group.BLFit then
+		    	S:HandleCheckBox(panel.Group.BLFit.Act)
+		    	panel.Group.BLFit.Act:SetWidth(30)
+		    	panel.Group.BLFit.Act:SetHeight(30)
+		    end
+		    if panel.Group.BRFit then
+		    	S:HandleCheckBox(panel.Group.BRFit.Act)
+		    	panel.Group.BRFit.Act:SetWidth(30)
+		    	panel.Group.BRFit.Act:SetHeight(30)
+		    end
+		    if panel.Group.Defeated then
+		    	S:HandleCheckBox(panel.Group.Defeated.Act)
+		    	panel.Group.Defeated.Act:SetWidth(30)
+		    	panel.Group.Defeated.Act:SetHeight(30)
+		    	S:HandleEditBox(panel.Group.Defeated.Min)
+		    	S:HandleEditBox(panel.Group.Defeated.Max)
+		    end
+		    if panel.Group.MatchingId then
+		    	S:HandleCheckBox(panel.Group.MatchingId.Act)
+		    	panel.Group.MatchingId.Act:SetWidth(30)
+		    	panel.Group.MatchingId.Act:SetHeight(30)
+		    end
+			if panel.Group.PvPRating then
+				S:HandleCheckBox(panel.Group.PvPRating.Act)
+				panel.Group.PvPRating.Act:SetWidth(30)
+				panel.Group.PvPRating.Act:SetHeight(30)
+				S:HandleEditBox(panel.Group.PvPRating.Min)
+				S:HandleEditBox(panel.Group.PvPRating.Max)
+			end
+		end
+		if panel.Dungeons then
+            for i = 1, 10 do
+	        	if panel.Dungeons["Dungeon"..i] then
+	        	    S:HandleCheckBox(panel.Dungeons["Dungeon"..i].Act)
+					panel.Dungeons["Dungeon"..i].Act:SetWidth(30)
+					panel.Dungeons["Dungeon"..i].Act:SetHeight(30)
+	        	end
+	        end
+		end
+		if panel.Advanced then
+		    S:HandleFrame(panel.Advanced.Expression)
+		    S:HandleScrollBar(panel.Advanced.Expression.ScrollBar)
+		    panel.Advanced.Expression.ScrollBar:SetPoint("TOPLEFT", panel.Advanced.Expression, "TOPRIGHT", -13, 0)
+		    panel.Advanced.Expression.ScrollBar:SetPoint("BOTTOMLEFT", panel.Advanced.Expression, "BOTTOMRIGHT", -13, 0)
+		end
+		if panel.Sorting then
+			S:HandleEditBox(panel.Sorting.Expression)
+		end
+	end
 
 	S:StripTextures(PremadeGroupsFilterDialog.ResetButton)
 	S:HandleButton(PremadeGroupsFilterDialog.ResetButton)
 	S:StripTextures(PremadeGroupsFilterDialog.RefreshButton)
 	S:HandleButton(PremadeGroupsFilterDialog.RefreshButton)
+
+	S:HandleFrame(PremadeGroupsFilterStaticPopup)
+	S:StripTextures(PremadeGroupsFilterStaticPopup.Button1)
+	S:HandleButton(PremadeGroupsFilterStaticPopup.Button1)
+	S:StripTextures(PremadeGroupsFilterStaticPopup.Button2)
+	S:HandleButton(PremadeGroupsFilterStaticPopup.Button2)
+	S:StripTextures(PremadeGroupsFilterStaticPopup.Button3)
+	S:HandleButton(PremadeGroupsFilterStaticPopup.Button3)
+	S:StripTextures(PremadeGroupsFilterStaticPopup.Button4)
+	S:HandleButton(PremadeGroupsFilterStaticPopup.Button4)
+
 end
 
 AS:RegisterSkin('PremadeGroupsFilter')
