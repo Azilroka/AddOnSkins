@@ -1,7 +1,7 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
 function R:AllTheThings()
-	for _, Instance in pairs({ 'Prime', 'CurrentInstance' }) do
+	for _, Instance in pairs({ 'Prime', 'CurrentInstance', 'WorldQuests' }) do
 		local Window = AllTheThings:GetWindow(Instance)
 		S:SetTemplate(Window)
 		S:HandleCloseButton(Window.CloseButton)
