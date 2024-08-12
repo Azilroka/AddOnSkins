@@ -8,5 +8,6 @@
 	<Script file="ptBR.lua"/>
 	<Script file="ruRU.lua"/>
 	<Script file="esES.lua"/>
+	<Script file="esMX.lua"/>
 	<Script file="zhTW.lua"/>
 </Ui>
