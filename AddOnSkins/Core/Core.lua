@@ -62,20 +62,6 @@ function AS:GetClassColor(class)
 	return color
 end
 
-function AS:OrderedPairs(t, f)
-	local a = {}
-	for n in pairs(t) do tinsert(a, n) end
-	sort(a, f)
-	local i = 0
-	local iter = function()
-		i = i + 1
-		if a[i] == nil then return nil
-			else return a[i], t[a[i]]
-		end
-	end
-	return iter
-end
-
 function AS:Delay(delay, func)
 	C_Timer.After(delay, func)
 end

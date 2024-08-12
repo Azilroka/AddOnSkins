@@ -1,12 +1,11 @@
 local _G = _G
-local select = select
 local format = format
 local strlower = strlower
 local CreateFrame = CreateFrame
-local GetAddOnEnableState = GetAddOnEnableState
-local GetAddOnInfo = GetAddOnInfo
-local GetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
-local GetNumAddOns = GetNumAddOns
+local GetAddOnEnableState = C_AddOns.GetAddOnEnableState
+local GetAddOnInfo = C_AddOns.GetAddOnInfo
+local GetAddOnMetadata = C_AddOns.GetAddOnMetadata
+local GetNumAddOns =  C_AddOns.GetNumAddOns
 local GetRealmName = GetRealmName
 local UIParent = UIParent
 local UnitClass = UnitClass
@@ -15,6 +14,7 @@ local UnitFactionGroup = UnitFactionGroup
 
 local AddOnName, Engine = ...
 local AS = _G.LibStub('AceAddon-3.0'):NewAddon('AddOnSkins', 'AceConsole-3.0', 'AceEvent-3.0', 'AceHook-3.0', 'AceTimer-3.0')
+local _
 
 AS.EmbedSystem = AS:NewModule('EmbedSystem', 'AceEvent-3.0', 'AceHook-3.0')
 AS.Skins = AS:NewModule('Skins', 'AceTimer-3.0', 'AceHook-3.0', 'AceEvent-3.0')
@@ -51,8 +51,8 @@ AS.Version = tonumber(GetAddOnMetadata(AddOnName, 'Version'))
 AS.Authors = GetAddOnMetadata(AddOnName, 'Author'):gsub(", ", "    ")
 AS.ProperVersion = format('%.2f', AS.Version)
 AS.TicketTracker = 'https://github.com/Azilroka/AddOnSkins/issues'
-AS.MyClass = select(2, UnitClass('player'))
-AS.MyName = UnitName('player')
+AS.MyClass = UnitClass('player')
+_, AS.MyName = UnitName('player')
 AS.MyRealm = GetRealmName()
 AS.Noop = function() end
 AS.TexCoords = { .075, .925, .075, .925 }
