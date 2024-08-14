@@ -57,6 +57,7 @@ AS.MyRealm = GetRealmName()
 AS.Noop = function() end
 AS.TexCoords = { .075, .925, .075, .925 }
 AS.Faction = UnitFactionGroup('player')
+AS.Debug = false
 
 AS.preload = {}
 AS.skins = {}

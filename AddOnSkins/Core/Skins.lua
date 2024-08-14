@@ -562,13 +562,8 @@ do
 		S:Point(frame.leftGrad, 'LEFT', frame, 'CENTER')
 		S:Point(frame.rightGrad, 'RIGHT', frame, 'CENTER')
 
-		if S.Retail or S.Wrath then
-			frame.leftGrad:SetGradient("Horizontal", { r, g, b, 0.35 }, { r, g, b, 0 })
-			frame.rightGrad:SetGradient("Horizontal", { r, g, b, 0 }, { r, g, b, 0.35 })
-		else
-			frame.leftGrad:SetGradientAlpha("Horizontal", r, g, b, 0.35, r, g, b, 0)
-			frame.rightGrad:SetGradientAlpha("Horizontal", r, g, b, 0, r, g, b, 0.35)
-		end
+		frame.leftGrad:SetGradient("Horizontal", { r, g, b, 0.35 }, { r, g, b, 0 })
+		frame.rightGrad:SetGradient("Horizontal", { r, g, b, 0 }, { r, g, b, 0.35 })
 	end
 end
 
@@ -578,7 +573,6 @@ function S:HandlePointXY(frame, x, y)
 end
 
 function S:HandleFrame(frame, setBackdrop, template, x1, y1, x2, y2)
-	if not frame then return end
 	local name = frame and frame.GetName and frame:GetName()
 	local insetFrame = frame.Inset or name and _G[name..'Inset']
 	local portraitFrame = frame.Portrait or frame.portrait or name and _G[name..'Portrait']
