@@ -578,6 +578,7 @@ function S:HandlePointXY(frame, x, y)
 end
 
 function S:HandleFrame(frame, setBackdrop, template, x1, y1, x2, y2)
+	if not frame then return end
 	local name = frame and frame.GetName and frame:GetName()
 	local insetFrame = frame.Inset or name and _G[name..'Inset']
 	local portraitFrame = frame.Portrait or frame.portrait or name and _G[name..'Portrait']
