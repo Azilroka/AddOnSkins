@@ -1,4 +1,4 @@
-## Interface: 110000
+## Interface: 110002
 ## Title: |cff16C3F2AddOn|r|cFFFFFFFFSkins|r
 ## Version: 4.71
 ## Author: Azilroka, Nihilistzsche
