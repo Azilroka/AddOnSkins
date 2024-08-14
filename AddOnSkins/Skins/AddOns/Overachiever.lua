@@ -1,7 +1,7 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
 function R:Overachiever(_, addon)
-	if addon == "Overachiever_Tabs" or IsAddOnLoaded("Overachiever_Tabs") then
+	if addon == "Overachiever_Tabs" or C_AddOns.IsAddOnLoaded("Overachiever_Tabs") then
 		for i = 4, 6 do
 			S:HandleTab(_G["AchievementFrameTab"..i])
 		end

@@ -1,5 +1,7 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
+local IsAddOnLoaded = C_AddOns.IsAddOnLoaded
+
 function R:PetTracker(event, addon)
 	if event == 'PLAYER_ENTERING_WORLD' then
 		if not AS:CheckAddOn('Carbonite.Quests') then

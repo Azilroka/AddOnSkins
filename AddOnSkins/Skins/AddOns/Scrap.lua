@@ -1,7 +1,7 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
 function R:Scrap(event, addon)
-	if addon == 'Scrap_Merchant' or IsAddOnLoaded('Scrap_Merchant') then
+	if addon == 'Scrap_Merchant' or C_AddOns.IsAddOnLoaded('Scrap_Merchant') then
 		local function skinButton()
 			local Button = Scrap.Merchant
 			if Button and not Button.IsSkinned then

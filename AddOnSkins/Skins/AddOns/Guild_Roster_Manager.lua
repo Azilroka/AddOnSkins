@@ -20,7 +20,7 @@ function AS:GuildRosterManager()
 		if isClassic then
 			bottomRight , bottomLeft = "BotRightCorner","BotLeftCorner"
 		end
-		
+
 		local edgeNames = {"BottomBorder","TopBorder","LeftBorder","RightBorder","TopLeftCorner","TopRightCorner",bottomRight,bottomLeft}
 
 		for i = 1 , #edgeNames do
@@ -425,7 +425,7 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_ExportSelectedRangeButton)
 	AS:SkinButton(GRM_ExportNextRangeButton)
 	AS:SkinButton(GRM_ExportPreviousRangeButton)
-	AS:SkinButton(GRM_ExportMemberDetailsHeadersButton)	
+	AS:SkinButton(GRM_ExportMemberDetailsHeadersButton)
 	AS:SkinButton(GRM_ExportResetOptionsButton)
 	AS:SkinFrame(GRM_ExportLogScrollBorderFrame)
 	AS:SkinEditBox(GRM_ExportRangeEditBox1)
@@ -440,7 +440,7 @@ function AS:GuildRosterManager()
 			AS:SkinCheckBox(_G["GRM_ExportFilter"..i])
 		end
 	end
-	
+
 	AS:SkinButton(GRM_ExportLogTab)
 	AS:SkinButton(GRM_ExportGuildDataTab)
 	AS:SkinButton(GRM_ExportLeftGuildDataTab)
@@ -481,14 +481,14 @@ function AS:GuildRosterManager()
 		if GRM_G.BuildVersion >= 80000 then
 			AS:SkinButton(GRM_RosterColumnMythicPlus)
 		end
-		AS:SkinScrollBar(GRM_RosterFrameScrollFrameSlider)		
+		AS:SkinScrollBar(GRM_RosterFrameScrollFrameSlider)
 		AS:SkinEditBox(GRM_RosterFrameNameEditBox)
 		AS:SkinEditBox(GRM_RosterNoteEditBox)
 
 		-- Spacing
 		GRM_RosterOptions:SetPoint ( "TOP" , GRM_UI.GRM_RosterFrame , "BOTTOM" , 0 , -1 )
 		GRM_RosterOptionsButton:SetPoint ( "BOTTOMRIGHT" , GRM_UI.GRM_RosterFrame , "BOTTOMLEFT" , 0 , 0 )
-	
+
 		newRosterLoaded = true;
 
 	end
@@ -529,7 +529,7 @@ function AS:GuildRosterManager()
 		AS:SkinCheckBox(GRM_IgnoreListFrameKickCheckBox)
 		AS:SkinCheckBox(GRM_IgnoreListFramePromoteCheckBox)
 		AS:SkinCheckBox(GRM_IgnoreListFrameDemoteCheckBox)
-		AS:SkinEditBox(GRM_IgnoreListPromoteTimeExpireEditBox) 
+		AS:SkinEditBox(GRM_IgnoreListPromoteTimeExpireEditBox)
 		AS:SkinEditBox(GRM_IgnoreListKickTimeExpireEditBox)
 		AS:SkinEditBox(GRM_IgnoreListDemoteTimeExpireEditBox)
 	end
@@ -655,13 +655,13 @@ function AS:GuildRosterManager()
 				GRM_MemberDetailMetaDataCloseButton:SetPoint( "TOPRIGHT" , GRM_UI.GRM_MemberDetailMetaData , "TOPRIGHT" , 0 , 0 );
 			end);
 
-			-- Ignore Macro 
+			-- Ignore Macro
 			skinMacroIgnoreLists()
 
 			isLoaded = true
 		end
 	end)
-	
+
 	GRM_RosterCheckBoxSideFrame:HookScript("OnShow" , function()
 		if not isLoaded2 then
 			-- MISC FRAMES
@@ -736,7 +736,7 @@ function AS:GuildRosterManager()
 							tileSize = 32,
 							edgeSize = 9,
 							insets = { left = -2 , right = -2 , top = -3 , bottom = -2 }
-						} );				
+						} );
 					end
 				end
 			end);
@@ -756,7 +756,7 @@ function AS:GuildRosterManager()
 	end)
 
 	-- Module Group Info - GRM dependent addon
-	if IsAddOnLoaded ( "Guild_Roster_Manager_Group_Info" ) then
+	if C_AddOns.IsAddOnLoaded ( "Guild_Roster_Manager_Group_Info" ) then
 		AS:SkinButton(GRM_GroupRulesButton)
 		AS:SkinFrame(GRM_GroupButtonFrame)
 		AS:SkinCloseButton(GRM_GroupButtonFrameCloseButton)

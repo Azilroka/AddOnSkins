@@ -1,7 +1,7 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
 function R:OrderHallCommander(event, addon)
-	if (event == "ADDON_LOADED" and addon == 'OrderHallCommander') or event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded('OrderHallCommander') then
+	if (event == "ADDON_LOADED" and addon == 'OrderHallCommander') or event == 'PLAYER_ENTERING_WORLD' and C_AddOns.IsAddOnLoaded('OrderHallCommander') then
 		local OHC = LibStub('LibInit'):GetAddon('OrderHallCommander')
 		local OHCCache = OHC:GetCacheModule()
 		local TroopFrame = OHCCache:GetTroopsFrame()

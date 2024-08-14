@@ -1,7 +1,7 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
 function R:TrainAll(event, addon)
-	if addon == 'Blizzard_TrainerUI' or IsAddOnLoaded('Blizzard_TrainerUI') then
+	if addon == 'Blizzard_TrainerUI' or C_AddOns.IsAddOnLoaded('Blizzard_TrainerUI') then
 		ClassTrainerFrame:HookScript('OnShow', function(self)
 			if not TrainAllButton.isSkinned then
 				S:StripTextures(TrainAllButton)

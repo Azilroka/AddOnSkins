@@ -1,7 +1,7 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
 function R:InvenMount(event, addon)
-	if addon == "Blizzard_PetJournal" or event == 'PLAYER_ENTERING_WORLD' and IsAddOnLoaded("Blizzard_PetJournal") then
+	if addon == "Blizzard_PetJournal" or event == 'PLAYER_ENTERING_WORLD' and C_AddOns.IsAddOnLoaded("Blizzard_PetJournal") then
 		for i = 1, #MountJournal.ListScrollFrame.buttons do
 			local Button = _G["MountJournalListScrollFrameButton"..i]
 			Button.checkbox:ClearAllPoints()

@@ -1,7 +1,7 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
 function R:PetJournalEnhanced(event, addon)
-	if addon == 'Blizzard_PetJournal' or IsAddOnLoaded('Blizzard_PetJournal') then
+	if addon == 'Blizzard_PetJournal' or C_AddOns.IsAddOnLoaded('Blizzard_PetJournal') then
 		PetJournal:HookScript('OnShow', function()
 			S:StripTextures(PJEUniquePetCount)
 			S:HandleScrollBar(PetJournalEnhancedListScrollFrameScrollBar)

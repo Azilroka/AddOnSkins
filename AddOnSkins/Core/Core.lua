@@ -11,7 +11,7 @@ local floor, print, format, strlower, strmatch, strlen = floor, print, format, s
 local sort, tinsert = sort, tinsert
 
 local geterrorhandler = geterrorhandler
-local IsAddOnLoaded, C_Timer = IsAddOnLoaded, C_Timer
+local IsAddOnLoaded, C_Timer = C_AddOns.IsAddOnLoaded, C_Timer
 
 AS.SkinErrors = {}
 

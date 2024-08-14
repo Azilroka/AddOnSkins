@@ -109,7 +109,7 @@ end
 S:AddCallback('ScriptErrorsFrame')
 
 -- FrameStack, TableInspect Skins
-if _G.IsAddOnLoaded('Blizzard_DebugTools') then
+if C_AddOns.IsAddOnLoaded('Blizzard_DebugTools') then
 	S:AddCallback('Blizzard_DebugTools')
 else
 	S:AddCallbackForAddon('Blizzard_DebugTools')

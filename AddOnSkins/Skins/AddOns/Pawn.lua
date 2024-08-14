@@ -1,5 +1,7 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
+local IsAddOnLoaded = C_AddOns.IsAddOnLoaded
+
 function R:Pawn(event, addon)
 	local Texture = "Interface\\AddOns\\Pawn\\Textures\\PawnLogo"
 
