@@ -12,7 +12,7 @@ function R:RareScanner()
 	S:HandleButton(RARESCANNER_BUTTON.UnfilterEnabledButton)
 	RARESCANNER_BUTTON.FilterEnabledTexture:SetTexture([[Interface\WorldMap\Skull_64]])
 	RARESCANNER_BUTTON.UnfilterEnabledButton:ClearAllPoints()
-	RARESCANNER_BUTTON.UnfilterEnabledButton:SetPoint("TOPLEFT", 5, -5)```
+	RARESCANNER_BUTTON.UnfilterEnabledButton:SetPoint("TOPLEFT", 5, -5)
 end
 
 AS:RegisterSkin('RareScanner')
