@@ -1,7 +1,7 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
 function R:EssenceSetManager(event, addon)
-	if addon == 'Blizzard_AzeriteEssenceUI' or IsAddOnLoaded('Blizzard_AzeriteEssenceUI') then
+	if addon == 'Blizzard_AzeriteEssenceUI' or C_AddOns.IsAddOnLoaded('Blizzard_AzeriteEssenceUI') then
 		AzeriteEssenceUI:HookScript('OnShow', function(self)
 			local esm = ESSENCE_SET_MANAGER_ADDON
 			S:HandleEditBox(esm.input)
