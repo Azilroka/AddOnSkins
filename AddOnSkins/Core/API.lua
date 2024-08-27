@@ -1,4 +1,4 @@
-local AS = unpack(AddOnSkins)
+local AS = unpack(_G.AddOnSkins)
 local S = AS.Skins
 
 -- Deprecated - Moved to Skins Module

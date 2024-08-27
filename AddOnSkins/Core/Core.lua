@@ -6,9 +6,8 @@ local AddOnName = ...
 local ES = AS.EmbedSystem
 
 local _G = _G
-local pairs, ipairs, type, pcall = pairs, ipairs, type, pcall
+local pairs, ipairs, type, pcall, tinsert = pairs, ipairs, type, pcall, tinsert
 local floor, print, format, strlower, strmatch, strlen = floor, print, format, strlower, strmatch, strlen
-local sort, tinsert = sort, tinsert
 
 local geterrorhandler = geterrorhandler
 local IsAddOnLoaded, C_Timer = C_AddOns.IsAddOnLoaded, C_Timer
@@ -38,8 +37,7 @@ function AS:IsSkinEnabled(name, elvName)
 end
 
 function AS:GetColor(name)
-	local color = '|cff1784d1%s|r'
-	return (color):format(name)
+	return format('|cff1784d1%s|r', name)
 end
 
 function AS:RGBToHex(r, g, b, header)
@@ -200,7 +198,7 @@ function AS:UnregisterSkinEvent(addonName, event)
 end
 
 function AS:UpdateMedia()
-	AS.Blank = AS.Libs.LSM:Fetch('background', 'Solid')
+	AS.Blank = AS.Libs.LSM:Fetch('statusbar', 'Solid')
 	AS.Font = AS.Libs.LSM:Fetch('font', "Friz Quadrata TT")
 	AS.PixelFont = AS.Libs.LSM:Fetch('font', "Arial Narrow")
 	AS.NormTex = AS.Libs.LSM:Fetch('statusbar', "Blizzard")
