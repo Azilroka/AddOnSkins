@@ -1,8 +1,17 @@
- 	-- Updated November 7th, 2023
+ 	-- Updated September 4th, 2024 - Fully compatible with the 11.0 update for GRM and 1.15.3 CE and 4.4.0 Cata
 
 local AS = unpack(AddOnSkins)
 
 if not AS:CheckAddOn('Guild_Roster_Manager') then return end
+
+-- Checking if modules are ready - Classic/Retail build version API issue for now.
+local AddonIsLoaded = function(addonName)
+    if C_AddOns and C_AddOns.IsAddOnLoaded then
+        return C_AddOns.IsAddOnLoaded(addonName);
+    else
+        return IsAddOnLoaded(addonName);
+    end
+end
 
 function AS:GuildRosterManager()
 
@@ -192,7 +201,6 @@ function AS:GuildRosterManager()
 	AS:SkinCheckBox(GRM_SyncAllRestrictReceiveButton)
 	AS:SkinCheckBox(GRM_RosterSyncBanList)
 	AS:SkinCheckBox(GRM_CustomNoteSyncCheckBox)
-	AS:SkinCheckBox(GRM_BDaySyncCheckBox)
 	AS:SkinCheckBox(GRM_RosterNotifyOnChangesCheckButton)
 	AS:SkinEditBox(GRM_AutoTriggerTimeEditBox)
 	AS:SkinButton(GRM_SyncProgressButton)
@@ -251,18 +259,13 @@ function AS:GuildRosterManager()
 	AS:SkinFrame(GRM_AddBanFrame)
 	AS:SkinButton(GRM_AddBanConfirmButton)
 	AS:SkinEditBox(GRM_AddBanNameSelectionEditBox)
+	AS:SkinEditBox(GRM_AddBanServerSelectionEditBox)
 	AS:SkinEditBox(GRM_AddBanReasonEditBox)
 	AS:SkinEditBox(GRM_RosterMinLvlEditBox)
 	AS:SkinEditBox(GRM_PlayerSearchBanEditBox)
-
-	-- Classic compatibility, one code-base
-	if buildVersion < 80000 then
-		HideEdges("GRM_BanServerDropDownMenuInset" , true )
-		HideEdges("GRM_AddBanDropDownMenuInset" , true )
-	else
-		GRM_BanServerDropDownMenu.NineSlice:Hide()
-		GRM_AddBanDropDownMenu.NineSlice:Hide()
-	end
+	AS:SkinFrame(GRM_AddBanDropDownClassSelected)
+	AS:SkinFrame(GRM_AddBanDropDownMenu)
+	AS:SkinFrame(GRM_AddBanReasonEditBoxFrame)
 
 	AS:SkinScrollBar(GRM_AddBanScrollFrameSlider)
 	AdjustSliderThumbFrameLevel ( GRM_AddBanScrollFrameSliderThumbTexture )
@@ -272,6 +275,12 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_PopupWindowConfirmFrameYesButton)
 	AS:SkinButton(GRM_PopupWindowConfirmFrameCancelButton)
 	HideEdges("GRM_PopupWindowConfirmFrame")
+
+	-- GRM popup Window
+	AS:SkinFrame(GRM_GeneralPopupWindow)
+	AS:SkinButton(GRM_GeneralPopupWindowYesButton)
+	AS:SkinButton(GRM_GeneralPopupWindowIgnoreButton)
+	AS:SkinButton(GRM_GeneralPopupWindowNoButton)
 
 	--------------------
 	-- Addon Users
@@ -323,9 +332,7 @@ function AS:GuildRosterManager()
 	-- Guild Frame
 	--------------------
 	AS:SkinButton(GRM_LoadLogButton)
-	AS:SkinButton(GRM_LoadLogOldRosterButton)
 	AS:SkinButton(GRM_LoadToolButton)
-	AS:SkinButton(GRM_LoadToolOldRosterButton)
 
 	----------------------------------------
 	-- Guild Detail Frame (GRM Tooltip)
@@ -416,6 +423,7 @@ function AS:GuildRosterManager()
 	AS:SkinButton(GRM_DemoteTab)
 	AS:SkinButton(GRM_SpecialTab)
 	AS:SkinButton(GRM_ToolHotKeyEditButton)
+	AS:SkinCheckBox(GRM_MacroRuleSelectAllCheckBox)
 
 	--------------------
 	-- Export Tool
@@ -452,9 +460,9 @@ function AS:GuildRosterManager()
 	AS:SkinEditBox(GRM_ExportLevelRangeEditBox1)
 	AS:SkinEditBox(GRM_ExportLevelRangeEditBox2)
 
-	--------------------
-	---- GRM Roster ----
-	--------------------
+	------------------
+	-- GRM Roster ----
+	------------------
 
 	local SkinNewRoster = function()
 
@@ -470,6 +478,7 @@ function AS:GuildRosterManager()
 		AS:SkinButton(GRM_RosterColumnRank)
 		AS:SkinButton(GRM_RosterColumnNote)
 		AS:SkinButton(GRM_RosterColumnOfficerNote)
+		AS:SkinButton(GRM_RosterColumnCustomNote)
 		AS:SkinCheckBox(GRM_RosterShowOfflineCheckBox)
 		AS:SkinCheckBox(GRM_RosterOptionsShowMains)
 		AS:SkinCheckBox(GRM_RosterOptionsShowAlts)
@@ -493,6 +502,11 @@ function AS:GuildRosterManager()
 
 	end
 
+	-- EXPORT WINDOW FRAMES
+	local SkinExportWindow = function()
+		AS:SkinCheckBox(GRM_ExportFilterRealm)
+	end
+
 	-- GRM wrote it's own custom UI API to load frames on-demand, this has some issues now with skinning frames that might not exist on load. This creates the skinning
 	-- to be nested. More will be added with time as this is a recent update, and eventually all frames will be rewritten into the new API, saving 1000s
 	-- of lines of code.
@@ -500,8 +514,6 @@ function AS:GuildRosterManager()
 
 		-- Hardcore
 		AS:SkinButton(GRM_HardcoreTab)
-		AS:SkinCheckBox(GRM_HardcoreAddTagCheckbox)
-		AS:SkinCheckBox(GRM_HardcoreAddTimeCheckbox)
 
 		-- Audit Window
 		AS:SkinFrame(GRM_AuditVerifyAllFrame)
@@ -534,6 +546,15 @@ function AS:GuildRosterManager()
 		AS:SkinEditBox(GRM_IgnoreListDemoteTimeExpireEditBox)
 	end
 
+	local skinModules = function()
+		-- Module Group Info - GRM dependent addon
+		if AddonIsLoaded ( "Guild_Roster_Manager_Group_Info" ) then
+			AS:SkinCheckBox(GRM_EnableGIModuleCheckButton)
+			AS:SkinCheckBox(GRM_DisableGroupInfoTooltipCheckButton)
+		end
+
+	end
+
 	local sideGroupingLogic = function()
 		GRM_AltGroupingScrollBorderFrame:HookScript ( "OnShow" , function()
 			if GRM_MemberDetailMetaData:IsMouseOver() then
@@ -559,7 +580,7 @@ function AS:GuildRosterManager()
 	end)
 
 	-- Since much of the addon only loads on demand, this AddOnSkins file needs to wait til certain things have been configured first...
-	local isLoaded , isLoaded2 , isLoaded3 , isLoaded4 , isLoaded5 , isLoaded6 , isLoaded7 = false , false , false , false , false , false , false
+	local isLoaded , isLoaded2 , isLoaded3 , isLoaded4 , isLoaded5 = false , false , false , false , false
 	GRM_PlayerNoteWindow:HookScript("OnShow" , function()
 		if not isLoaded then
 			GRM_AddAltEditFrame:SetPoint ( "BOTTOMLEFT" , GRM_MemberDetailMetaData , "BOTTOMRIGHT" ,  2 , 0 )
@@ -658,6 +679,11 @@ function AS:GuildRosterManager()
 			-- Ignore Macro
 			skinMacroIgnoreLists()
 
+			-- Need to update textures
+			GRM_UI.GRM_MemberDetailMetaData.GRM_HordeIconTexture:SetTexture ( "Interface\\AddOns\\Guild_Roster_Manager\\media\\Icons\\Horde_Icon.blp" );
+			GRM_UI.GRM_MemberDetailMetaData.GRM_AllianceIconTexture:SetTexture ( "Interface\\AddOns\\Guild_Roster_Manager\\media\\Icons\\Alliance_Icon.blp" );
+			GRM_UI.GRM_MemberDetailMetaData.GRM_DeathTexture:SetTexture ( "Interface\\AddOns\\Guild_Roster_Manager\\media\\Icons\\dead.png" );
+
 			isLoaded = true
 		end
 	end)
@@ -668,8 +694,6 @@ function AS:GuildRosterManager()
 			GRM_LogTab:SetPoint ( "BOTTOMLEFT" , GRM_RosterChangeLogFrame , "TOPLEFT" , 0 , 1 )
 			GRM_RosterCheckBoxSideFrame:SetPoint ( "TOPLEFT" , GRM_RosterChangeLogFrame , "TOPRIGHT" , 2 , 0 )
 			GRM_AddBanNameSelectionEditBox:SetSize ( 129 , 20 )
-			GRM_BanServerSelected:SetPoint ( "TOPLEFT" , GRM_UI.GRM_RosterChangeLogFrame.GRM_CoreBanListFrame.GRM_AddBanFrame.GRM_AddBanNameSelectionEditBox , "BOTTOMLEFT" , 0 , -2 )
-			AS:SkinFrame ( GRM_BanServerSelected )
 			AS:SkinFrame ( GRM_AddBanDropDownClassSelected )
 
 			--Confirm Frames
@@ -715,8 +739,8 @@ function AS:GuildRosterManager()
 			end)
 
 			GRM_ExportLogBorderFrame:HookScript ( "OnShow" , function()
-				if not isLoaded4 then
-					isLoaded4 = true
+				if not isLoaded3 then
+					isLoaded3 = true
 					GRM_ExportLogScrollFrameSlider:SetPoint ( "TOPLEFT" , GRM_ExportLogScrollBorderFrame , "TOPRIGHT" , 0 , -17 )
 				end
 			end)
@@ -725,8 +749,8 @@ function AS:GuildRosterManager()
 			AS:SkinEditBox(GRM_LogEditBox)
 
 			GRM_LogExtraOptionsFrame:HookScript ( "OnShow" , function()
-				if not isLoaded5 then
-					isLoaded5 = true;
+				if not isLoaded4 then
+					isLoaded4 = true;
 					for i = 1 , 14 do
 						-- no need to skin here, just remove edge...
 						GRM_LogExtraOptionsFrame["colorBoxFrame" .. i]:SetBackdrop ( {
@@ -751,78 +775,98 @@ function AS:GuildRosterManager()
 			AS:SkinFrame(GRM_AutoTriggerTimeOverlayNote)
 			AS:SkinCheckBox(GRM_AnnounceBdaysOnLoginButton)
 
+			AS:SkinCheckBox(GRM_DeathsChannelEnabledCheckbox)
+			AS:SkinCheckBox(GRM_HardcoreAddTagCheckbox)
+			AS:SkinCheckBox(GRM_HardcoreAddTimeCheckbox)
+
+			-- Classic Professions
+			AS:SkinCheckBox(GRM_ProfAutoUpdateCheckbox)
+			AS:SkinCheckBox(GRM_ProfReportUpdatesToChatCheckBox)
+			AS:SkinButton(GRM_SetProfessionsToNoteButton)
+			AS:SkinRadioButton(GRM_ProfNoteDestinationRadial1)
+			AS:SkinRadioButton(GRM_ProfNoteDestinationRadial2)
+			AS:SkinRadioButton(GRM_ProfNoteDestinationRadial3)
+
 			isLoaded2 = true
 		end
 	end)
 
 	-- Module Group Info - GRM dependent addon
-	if C_AddOns.IsAddOnLoaded ( "Guild_Roster_Manager_Group_Info" ) then
+	if AddonIsLoaded ( "Guild_Roster_Manager_Group_Info" ) then
 		AS:SkinButton(GRM_GroupRulesButton)
 		AS:SkinFrame(GRM_GroupButtonFrame)
 		AS:SkinCloseButton(GRM_GroupButtonFrameCloseButton)
 	end
 
+	-- GRM is compartmentalized and certain frame objects only load on demand. AddOnSkins needs to check if these are loaded first before processing
 	local WaitForLoad;
-	WaitForLoad = function ( load1 , load2 , load3 , load4 , load5 )
+	WaitForLoad = function ( load1 , load2 , load3 , load4 , load5 , load6 )
 
 		if load1 and GRM_EnableMouseOver then
 			load1 = false
 			AS:SkinCheckBox(GRM_EnableMouseOver)
 		end
 
-		if GRM_G.BuildVersion < 80000 then
-
-			if load2 and GRM_EnableMouseOverOldRoster then
-				load2 = false
-				AS:SkinCheckBox(GRM_EnableMouseOverOldRoster)
-			end
-
-			if load4 and GRM_RosterTab and FriendsFrame then
-				AS:SkinButton (GRM_RosterTab)
-				GRM_RosterTab:SetPoint( "TOPRIGHT" , FriendsFrame, "BOTTOMRIGHT" , -5 , 0 )
-				load4 = false;
-			end
-
-		else
+		if load2 and GRM_RosterTab and CommunitiesFrame then
+			AS:SkinButton (GRM_RosterTab)
+			GRM_RosterTab:SetSize ( 32,32 )
+			GRM_RosterTab:SetPoint( "TOP" , CommunitiesFrame.GuildInfoTab , "BOTTOM" , 0 , -20 )
 			load2 = false;
-
-			if load4 and GRM_RosterTab and CommunitiesFrame then
-				AS:SkinButton (GRM_RosterTab)
-				GRM_RosterTab:SetSize ( 32,32 )
-				GRM_RosterTab:SetPoint( "TOP" , CommunitiesFrame.GuildInfoTab , "BOTTOM" , 0 , -20 )
-				load4 = false;
-			end
-
 		end
 
 		if load3 and GRM_RosterFrame then
 			load3 = false;
 
 			GRM_RosterFrame:HookScript ( "OnShow" , function()
-				if not isLoaded7 then
-					SkinNewRoster()
-					isLoaded7 = true
-				end
+				SkinNewRoster()
+				GRM_RosterFrame:SetScript ( "OnShow" , nil );
+				GRM_RosterFrame:SetScript ( "OnShow" , GRM_UI.RosterFrameSetScript );
 			end);
 		end
 
-		if load5 then
+		if load4 then
 
 			if GRM_HardcoreTab then
-				load5 = false;
+				load4 = false;
 				GRM_CustomUI_API_DelayLoad()
 			end
 		end
 
-		if load1 or load2 or load3 or load4 or load5 then
-			C_Timer.After ( 3 , function()
-				WaitForLoad( load1 , load2 , load3 , load4 , load5 )
+		if load5 then
+			if GRM_ExportLogBorderFrame and GRM_ExportLogBorderFrame:GetScript("OnShow") then	-- Slight delay before script is set, so need to make sure first
+
+				GRM_ExportLogBorderFrame:HookScript ( "OnShow" , function()
+					SkinExportWindow();
+					GRM_ExportLogBorderFrame:SetScript ( "OnShow" , nil );
+					GRM_ExportLogBorderFrame:SetScript ( "OnShow" , GRM_UI.SetExportTabHighlights );
+				end)
+
+				load5 = false;
+			end
+		end
+
+		if load6 then
+			if GRM_ModulesFrame and GRM_ModulesFrame:GetScript ( "OnShow" ) then
+				GRM_ModulesFrame:HookScript ( "OnShow" , function()
+					skinModules();
+					GRM_ModulesFrame:SetScript ( "OnShow" , nil );
+					GRM_ModulesFrame:SetScript ( "OnShow" , GRM_UI.LoadModulesFrameOnShow );
+				end)
+
+				load6 = false;
+			end
+		end
+
+		if load1 or load2 or load3 or load4 or load5 or load6 then
+			C_Timer.After ( 5 , function()
+				WaitForLoad( load1 , load2 , load3 , load4 , load5 , load6 )
 				return;
 			end)
 		end
+
 	end
 
-	WaitForLoad ( true , true , true , true , true );
+	WaitForLoad ( true , true , true , true , true , true );
 
 end
 
