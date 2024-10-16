@@ -9,13 +9,13 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     env:
       GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
       CF_API_KEY: ${{ secrets.CF_API_KEY }}
       WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
     steps:
       - name: Clone project
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
       - name: Package
-        uses: BigWigsMods/packager@v2
+        uses: BigWigsMods/packager@master
