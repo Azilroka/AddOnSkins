@@ -73,6 +73,11 @@ function R:PremadeGroupsFilter()
 		    	panel.Group.BLFit.Act:SetWidth(30)
 		    	panel.Group.BLFit.Act:SetHeight(30)
 		    end
+                   if panel.Group.NotDeclined then
+		    	S:HandleCheckBox(panel.Group.NotDeclined.Act)
+		    	panel.Group.NotDeclined.Act:SetWidth(30)
+		    	panel.Group.NotDeclined.Act:SetHeight(30)
+		    end
 		    if panel.Group.BRFit then
 		    	S:HandleCheckBox(panel.Group.BRFit.Act)
 		    	panel.Group.BRFit.Act:SetWidth(30)
