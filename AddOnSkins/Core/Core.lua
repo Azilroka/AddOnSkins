@@ -41,9 +41,7 @@ function AS:GetColor(name)
 end
 
 function AS:RGBToHex(r, g, b, header)
-	r = r <= 1 and r >= 0 and r or 1
-	g = g <= 1 and g >= 0 and g or 1
-	b = b <= 1 and b >= 0 and b or 1
+	r, g, b = r <= 1 and r >= 0 and r or 1, g <= 1 and g >= 0 and g or 1, b <= 1 and b >= 0 and b or 1
 	return format('%s%02x%02x%02x', header or '|cff', r * 255, g * 255, b * 255)
 end
 
