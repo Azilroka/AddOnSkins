@@ -1,4 +1,4 @@
- 	-- Updated April 22nd, 2025 - Fully Compatible wiht 11.1.5, Cata 4.4.0, and Classic 1.15.7
+ 	-- Updated May 23rd, 2025 - Fully Compatible wiht 11.1.5, Cata 4.4.0, and Classic 1.15.7 (GRM v1.9921)
 
 local AS = unpack(AddOnSkins)
 
@@ -112,8 +112,6 @@ function AS:GuildRosterManager()
 	AS:SkinFrame(GRM_RosterBanListDropDownMenu)
 	AS:SkinFrame(GRM_LanguageSelected)
 	AS:SkinFrame(GRM_LanguageDropDownMenu)
-	AS:SkinFrame(GRM_MainTagFormatSelected)
-	AS:SkinFrame(GRM_MainTagFormatMenu)
 	AS:SkinFrame(GRM_DefaultCustomSelected)
 	AS:SkinFrame(GRM_DefaultCustomRankDropDownMenu)
 	AS:SkinFrame(GRM_FontSelected)
@@ -153,18 +151,14 @@ function AS:GuildRosterManager()
 	AS:SkinCheckBox(GRM_RosterLoadOnLogonCheckButton)
 	AS:SkinCheckBox(GRM_RosterLoadOnLogonChangesCheckButton)
 	AS:SkinCheckBox(GRM_ColorizeSystemMessagesCheckButton)
-	AS:SkinCheckBox(GRM_RosterShowMainTagCheckButton)
-	AS:SkinCheckBox(GRM_ShowMainTagOnMains)
 	AS:SkinCheckBox(GRM_ShowMinimapButton)
 	AS:SkinCheckBox(GRM_AchievementAnnounceButton)
 	AS:SkinCheckBox(GRM_SyncAllSettingsCheckButton)
 	AS:SkinCheckBox(GRM_DefaultTabSelectionButton)
-
 	AS:SkinEditBox(GRM_ReportDestinationEditBox)
 	AS:SkinSlideBar(GRM_FontSizeSlider)
 	AS:SkinSlideBar(GRM_TooltipScaleSlider)
 	AS:SkinFrame(GRM_DefaultTabSelected)
-	AS:SkinFrame(GRM_ColorSelectOptionsFrame)
 
 	-- Scan Tab
 	AS:SkinCheckBox(GRM_RosterTimeIntervalCheckButton)
@@ -575,6 +569,9 @@ function AS:GuildRosterManager()
 		-- Hardcore
 		AS:SkinButton(GRM_HardcoreTab)
 
+	 -- Names
+	 AS:SkinButton(GRM_NamesTab)
+
 		-- Audit Window
 		AS:SkinFrame(GRM_AuditVerifyAllFrame)
 		AS:SkinEditBox(GRM_VerifyFrameEditBox1)
@@ -821,9 +818,24 @@ function AS:GuildRosterManager()
 		AS:SkinCheckBox(GRM_ProfAutoUpdateCheckbox)
 		AS:SkinCheckBox(GRM_ProfReportUpdatesToChatCheckBox)
 		AS:SkinButton(GRM_SetProfessionsToNoteButton)
+	 	AS:SkinButton(GRM_RemoveProfNotesButton)
 		AS:SkinRadioButton(GRM_ProfNoteDestinationRadial1)
 		AS:SkinRadioButton(GRM_ProfNoteDestinationRadial2)
 		AS:SkinRadioButton(GRM_ProfNoteDestinationRadial3)
+
+	 -- Names Options
+		AS:SkinCheckBox(GRM_ShowMainAltTagsButton)
+		AS:SkinCheckBox(GRM_ShowMainNameCheckButton)
+		AS:SkinCheckBox(GRM_ShowNicknameButton)
+		AS:SkinCheckBox(GRM_ShowNicknameInsteadButton)
+		AS:SkinCheckBox(GRM_ShowNicknameToAll)
+		AS:SkinCheckBox(GRM_ShareNicknamesButton)
+		AS:SkinFrame(GRM_ColorSelectOptionsFrame)
+		AS:SkinButton(GRM_ColorPickerButtonConfirm)
+		AS:SkinButton(GRM_ColorPickerButtonCancel)
+		AS:SkinFrame(GRM_MainTagFormatSelected)
+		AS:SkinFrame(GRM_MainTagFormatMenu)
+
 
 		GRM_RosterCheckBoxSideFrame:SetScript ( "OnUpdate" , nil )	-- Only need to run this once
 	end)
