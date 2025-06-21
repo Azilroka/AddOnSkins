@@ -267,6 +267,10 @@ function AS:Init(event, addon)
 		end
 
 		AS:RunPreload(addon)
+
+		if IsAddOnLoaded('BigWigs') then
+			AS:RunPreload('BigWigs')
+		end
 	end
 
 	if event == 'PLAYER_LOGIN' then
