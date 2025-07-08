@@ -56,7 +56,7 @@ for i = 1, GetNumAddOns() do
 	local Name, _, _, _, Reason = GetAddOnInfo(i)
 	local LoweredName = strlower(Name)
 	AS.AddOns[LoweredName] = GetAddOnEnableState(Name, AS.MyName) == 2 and (not Reason or Reason ~= 'DEMAND_LOADED')
-	AS.AlreadyLoaded[LoweredName] = IsAddOnLoaded(Name)
+	AS.AlreadyLoaded[Name] = IsAddOnLoaded(Name)
 	AS.AddOnVersion[LoweredName] = GetAddOnMetadata(Name, 'Version')
 end
 
