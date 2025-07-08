@@ -264,13 +264,15 @@ function AS:Init(event, addon)
 			AS.Initialized = true
 			AS:BuildProfile()
 			AS:UpdateMedia()
+
+			for addonName, funcs in next, AS.preload do
+				if AS.AlreadyLoaded[addonName] then
+					AS:RunPreload(AS.AlreadyLoaded[addonName])
+				end
+			end
 		end
 
 		AS:RunPreload(addon)
-
-		if IsAddOnLoaded('BigWigs') then
-			AS:RunPreload('BigWigs')
-		end
 	end
 
 	if event == 'PLAYER_LOGIN' then

@@ -1,7 +1,7 @@
 local _G = _G
 local format, strlower = format, strlower
 
-local GetAddOnEnableState, GetAddOnInfo, GetAddOnMetadata, GetNumAddOns = C_AddOns.GetAddOnEnableState, C_AddOns.GetAddOnInfo, C_AddOns.GetAddOnMetadata, C_AddOns.GetNumAddOns
+local GetAddOnEnableState, GetAddOnInfo, GetAddOnMetadata, GetNumAddOns, IsAddOnLoaded = C_AddOns.GetAddOnEnableState, C_AddOns.GetAddOnInfo, C_AddOns.GetAddOnMetadata, C_AddOns.GetNumAddOns, C_AddOns.IsAddOnLoaded
 local UnitName, GetRealmName, UnitClass, UnitFactionGroup = UnitName, GetRealmName, UnitClass, UnitFactionGroup
 
 local UIParent, CreateFrame = UIParent, CreateFrame
@@ -50,11 +50,14 @@ AS.FrameLocks = {}
 
 AS.AddOns = {}
 AS.AddOnVersion = {}
+AS.AlreadyLoaded = {}
 
 for i = 1, GetNumAddOns() do
 	local Name, _, _, _, Reason = GetAddOnInfo(i)
-	AS.AddOns[strlower(Name)] = GetAddOnEnableState(Name, AS.MyName) == 2 and (not Reason or Reason ~= 'DEMAND_LOADED')
-	AS.AddOnVersion[strlower(Name)] = GetAddOnMetadata(Name, 'Version')
+	local LoweredName = strlower(Name)
+	AS.AddOns[LoweredName] = GetAddOnEnableState(Name, AS.MyName) == 2 and (not Reason or Reason ~= 'DEMAND_LOADED')
+	AS.AlreadyLoaded[LoweredName] = IsAddOnLoaded(Name)
+	AS.AddOnVersion[LoweredName] = GetAddOnMetadata(Name, 'Version')
 end
 
 AS.Hider = CreateFrame('Frame', nil, UIParent)
