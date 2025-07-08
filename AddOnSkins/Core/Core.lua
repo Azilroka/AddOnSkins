@@ -267,7 +267,7 @@ function AS:Init(event, addon)
 
 			for addonName, funcs in next, AS.preload do
 				if AS.AlreadyLoaded[addonName] then
-					AS:RunPreload(AS.AlreadyLoaded[addonName])
+					AS:RunPreload(addonName)
 				end
 			end
 		end
