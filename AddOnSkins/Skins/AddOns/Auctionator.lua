@@ -6,12 +6,12 @@ local _G = _G
 local next = next
 local hooksecurefunc = hooksecurefunc
 
-local whiteTex = (E and E.Media and E.Media.Textures and E.Media.Textures.White8x8) or 'Interface/Buttons/WHITE8X8.BLP'
+local whiteTex = (E and E.Media and E.Media.Textures and E.Media.Textures.White8x8) or "Interface/Buttons/WHITE8X8.BLP"
 
 -- Helper function to safely hook into mixin methods
 local function tryPostHook(frameName, methodName, hookFunc)
     if frameName and methodName and _G[frameName] and _G[frameName][methodName] then
-        hooksecurefunc(_G[frameName], methodName, function (frame, ...)
+        hooksecurefunc(_G[frameName], methodName, function(frame, ...)
             if not frame.__AS_Skinned then
                 hookFunc(frame, ...)
                 frame.__AS_Skinned = true
@@ -60,7 +60,7 @@ local function HandleHeaders(frame)
     local maxHeaders = frame.HeaderContainer:GetNumChildren()
     for i, header in next, { frame.HeaderContainer:GetChildren() } do
         if not header.__AS_Skinned then
-            header:DisableDrawLayer('BACKGROUND')
+            header:DisableDrawLayer("BACKGROUND")
 
             if not header.backdrop then
                 S:CreateBackdrop(header)
@@ -70,7 +70,7 @@ local function HandleHeaders(frame)
         end
 
         if header.backdrop then
-            header.backdrop:SetPoint('BOTTOMRIGHT', i < maxHeaders and -5 or 0, -2)
+            header.backdrop:SetPoint("BOTTOMRIGHT", i < maxHeaders and -5 or 0, -2)
         end
     end
 
@@ -93,10 +93,10 @@ local function buyIconName(frame)
             local pointsCache = {}
             for i = 1, frame.Icon:GetNumPoints() do
                 local point, relativeTo, relativePoint, xOfs, yOfs = frame.Icon:GetPoint(i)
-                if relativePoint == 'TOPLEFT' then
+                if relativePoint == "TOPLEFT" then
                     xOfs = xOfs + 2
                     yOfs = yOfs - 2
-                elseif relativePoint == 'BOTTOMRIGHT' then
+                elseif relativePoint == "BOTTOMRIGHT" then
                     xOfs = xOfs - 2
                     yOfs = yOfs + 2
                 end
@@ -156,10 +156,10 @@ local function viewItem(frame)
                 local pointsCache = {}
                 for i = 1, frame.Icon:GetNumPoints() do
                     local point, relativeTo, relativePoint, xOfs, yOfs = frame.Icon:GetPoint(i)
-                    if relativePoint == 'TOPLEFT' then
+                    if relativePoint == "TOPLEFT" then
                         xOfs = xOfs + 2
                         yOfs = yOfs - 2
-                    elseif relativePoint == 'BOTTOMRIGHT' then
+                    elseif relativePoint == "BOTTOMRIGHT" then
                         xOfs = xOfs - 2
                         yOfs = yOfs + 2
                     end
@@ -220,7 +220,55 @@ end
 -- Drop down internal
 local function dropDownInternal(frame)
     if not frame.__AS_Skinned then
-        S:HandleDropDownBox(frame, frame:GetWidth(), nil, true)
+        if frame.DropDown then
+            S:HandleButton(frame.DropDown, true)
+            -- Handle dropdown arrow texture if it exists
+            if frame.DropDown.Arrow then
+                -- Set to a custom atlas or recolor for AddOnSkins style
+                if frame.DropDown.Arrow.SetAtlas then
+                    frame.DropDown.Arrow:SetAtlas("common-dropdown-arrow")
+                end
+                frame.DropDown.Arrow:SetVertexColor(1, 1, 1, 1)
+            end
+            -- Handle label if it exists
+            if frame.Label then
+                frame.Label:SetTextColor(1, 1, 1)
+            end
+        end
+        -- Handle close button if it exists
+        if frame.Close then
+            S:HandleCloseButton(frame.Close)
+        elseif frame.CloseButton then
+            S:HandleCloseButton(frame.CloseButton)
+        elseif frame.CloseDialog then
+            S:HandleCloseButton(frame.CloseDialog)
+        end
+        frame.__AS_Skinned = true
+    end
+end
+
+-- Filter key selector dropdown
+local function filterKeySelectorDropdown(frame)
+    if not frame.__AS_Skinned then
+        if frame.DropDown then
+            S:HandleButton(frame.DropDown, true)
+            if frame.DropDown.Arrow then
+                if frame.DropDown.Arrow.SetAtlas then
+                    frame.DropDown.Arrow:SetAtlas("common-dropdown-arrow")
+                end
+                frame.DropDown.Arrow:SetVertexColor(1, 1, 1, 1)
+            end
+        end
+        if frame.ResetButton then
+            S:HandleButton(frame.ResetButton)
+        end
+        if frame.Close then
+            S:HandleCloseButton(frame.Close)
+        elseif frame.CloseButton then
+            S:HandleCloseButton(frame.CloseButton)
+        elseif frame.CloseDialog then
+            S:HandleCloseButton(frame.CloseDialog)
+        end
         frame.__AS_Skinned = true
     end
 end
@@ -244,7 +292,7 @@ local function bagUse(frame)
         end
 
         for _, child in pairs({ frame:GetChildren() }) do
-            if child ~= frame.View and child:IsObjectType('Button') then
+            if child ~= frame.View and child:IsObjectType("Button") then
                 S:HandleButton(child)
             end
         end
@@ -304,7 +352,7 @@ end
 local function undercutScan(frame)
     if not frame.__AS_Skinned then
         for _, child in pairs({ frame:GetChildren() }) do
-            if child:GetObjectType() == 'Button' then
+            if child:GetObjectType() == "Button" then
                 S:HandleButton(child)
             end
         end
@@ -325,10 +373,10 @@ local function saleItem(frame)
                     local pointsCache = {}
                     for i = 1, icon:GetNumPoints() do
                         local point, relativeTo, relativePoint, xOfs, yOfs = icon:GetPoint(i)
-                        if relativePoint == 'TOPLEFT' then
+                        if relativePoint == "TOPLEFT" then
                             xOfs = xOfs + 2
                             yOfs = yOfs - 2
-                        elseif relativePoint == 'BOTTOMRIGHT' then
+                        elseif relativePoint == "BOTTOMRIGHT" then
                             xOfs = xOfs - 2
                             yOfs = yOfs + 2
                         end
@@ -362,7 +410,7 @@ local function saleItem(frame)
         if frame.MaxButton then
             S:HandleButton(frame.MaxButton)
             frame.MaxButton:ClearAllPoints()
-            frame.MaxButton:SetPoint('TOPLEFT', frame.Quantity, 'TOPRIGHT', 0, 0)
+            frame.MaxButton:SetPoint("TOPLEFT", frame.Quantity, "TOPRIGHT", 0, 0)
         end
         if frame.PostButton then
             S:HandleButton(frame.PostButton)
@@ -372,7 +420,7 @@ local function saleItem(frame)
         end
 
         for _, child in pairs({ frame:GetChildren() }) do
-            if child:IsObjectType('Button') and child.Icon then
+            if child:IsObjectType("Button") and child.Icon then
                 S:HandleButton(child)
             end
         end
@@ -383,9 +431,14 @@ end
 -- Bottom tab buttons
 local function bottomTabButtons(frame)
     if not frame.__AS_Skinned then
-        if _G.Auctionator and _G.Auctionator.Tabs and _G.Auctionator.Tabs.State and _G.Auctionator.Tabs.State.knownTabs then
+        if
+            _G.Auctionator
+            and _G.Auctionator.Tabs
+            and _G.Auctionator.Tabs.State
+            and _G.Auctionator.Tabs.State.knownTabs
+        then
             for _, details in ipairs(_G.Auctionator.Tabs.State.knownTabs) do
-                local tabButtonFrameName = 'AuctionatorTabs_' .. details.name
+                local tabButtonFrameName = "AuctionatorTabs_" .. details.name
                 local tabButton = _G[tabButtonFrameName]
 
                 if tabButton and not tabButton.__AS_Skinned then
@@ -423,7 +476,7 @@ local function resultsListing(frame)
         end
 
         HandleHeaders(frame)
-        hooksecurefunc(frame, 'UpdateTable', HandleHeaders)
+        hooksecurefunc(frame, "UpdateTable", HandleHeaders)
         frame.__AS_Skinned = true
     end
 end
@@ -509,6 +562,38 @@ local function sellingTab(frame)
         if frame.HistoricalPriceInset then
             frame.HistoricalPriceInset:StripTextures()
         end
+        -- Skin all direct child buttons
+        for _, child in pairs({ frame:GetChildren() }) do
+            if child:IsObjectType("Button") then
+                S:HandleButton(child)
+            end
+            -- Handle up/down increment buttons if present
+            if child.IncrementButton then
+                S:HandleNextPrevButton(child.IncrementButton, "up")
+            end
+            if child.DecrementButton then
+                S:HandleNextPrevButton(child.DecrementButton, "down")
+            end
+        end
+        -- Explicitly handle known buttons if present
+        if frame.PostButton then
+            S:HandleButton(frame.PostButton)
+        end
+        if frame.HistoryButton then
+            S:HandleButton(frame.HistoryButton)
+        end
+        if frame.RefreshButton then
+            S:HandleButton(frame.RefreshButton)
+        end
+        if frame.BuyButton then
+            S:HandleButton(frame.BuyButton)
+        end
+        if frame.CancelAuctionButton then
+            S:HandleButton(frame.CancelAuctionButton)
+        end
+        if frame.MaxButton then
+            S:HandleButton(frame.MaxButton)
+        end
         frame.__AS_Skinned = true
     end
 end
@@ -521,7 +606,7 @@ local function cancellingFrame(frame)
         end
 
         for _, child in pairs({ frame:GetChildren() }) do
-            if child:IsObjectType('Button') and child.Icon then
+            if child:IsObjectType("Button") and child.Icon then
                 S:HandleButton(child)
             end
         end
@@ -735,7 +820,7 @@ local function buyCommodity(frame)
         end
 
         for _, child in pairs({ frame:GetChildren() }) do
-            if child:IsObjectType('Button') and child.iconAtlas and child.iconAtlas == 'UI-RefreshButton' then
+            if child:IsObjectType("Button") and child.iconAtlas and child.iconAtlas == "UI-RefreshButton" then
                 S:HandleButton(child)
                 break
             end
@@ -746,44 +831,51 @@ end
 
 function R:Auctionator()
     -- Hook into mixin methods for widgets
-    tryPostHook('AuctionatorBuyIconNameTemplateMixin', 'SetItem', buyIconName)
-    tryPostHook('AuctionatorGroupsViewGroupMixin', 'SetName', viewGroup)
-    tryPostHook('AuctionatorGroupsViewItemMixin', 'SetItemInfo', viewItem)
-    tryPostHook('AuctionatorConfigCheckboxMixin', 'OnLoad', configCheckbox)
-    tryPostHook('AuctionatorConfigHorizontalRadioButtonGroupMixin', 'SetupRadioButtons', configRadioButtonGroup)
-    tryPostHook('AuctionatorConfigMinMaxMixin', 'OnLoad', configMinMax)
-    tryPostHook('AuctionatorConfigMoneyInputMixin', 'OnLoad', configMoneyInput)
-    tryPostHook('AuctionatorConfigNumericInputMixin', 'OnLoad', configNumericInput)
-    tryPostHook('AuctionatorConfigRadioButtonGroupMixin', 'SetupRadioButtons', configRadioButtonGroup)
-    tryPostHook('AuctionatorKeyBindingConfigMixin', 'OnLoad', keyBindingConfig)
-    tryPostHook('AuctionatorResultsListingMixin', 'OnShow', resultsListing)
-    tryPostHook('AuctionatorSaleItemMixin', 'OnLoad', saleItem)
-    tryPostHook('AuctionatorShoppingTabFrameMixin', 'OnLoad', shoppingTabFrame)
-    tryPostHook('AuctionatorShoppingTabSearchOptionsMixin', 'OnLoad', shoppingTabSearchOptions)
-    tryPostHook('AuctionatorShoppingTabListsContainerMixin', 'OnLoad', shoppingTabContainer)
-    tryPostHook('AuctionatorShoppingTabRecentsContainerMixin', 'OnLoad', shoppingTabContainer)
-    tryPostHook('AuctionatorShoppingTabContainerTabsMixin', 'OnLoad', shoppingTabContainerTabs)
-    tryPostHook('AuctionatorBagUseMixin', 'OnLoad', bagUse)
-    tryPostHook('AuctionatorSellingTabPricesContainerMixin', 'OnLoad', sellingTabPricesContainer)
-    tryPostHook('AuctionatorTabContainerMixin', 'OnLoad', bottomTabButtons)
-    tryPostHook('AuctionatorUndercutScanMixin', 'OnLoad', undercutScan)
+    tryPostHook("AuctionatorBuyIconNameTemplateMixin", "SetItem", buyIconName)
+    tryPostHook("AuctionatorGroupsViewGroupMixin", "SetName", viewGroup)
+    tryPostHook("AuctionatorGroupsViewItemMixin", "SetItemInfo", viewItem)
+    tryPostHook("AuctionatorConfigCheckboxMixin", "OnLoad", configCheckbox)
+    tryPostHook("AuctionatorConfigHorizontalRadioButtonGroupMixin", "SetupRadioButtons", configRadioButtonGroup)
+    tryPostHook("AuctionatorConfigMinMaxMixin", "OnLoad", configMinMax)
+    tryPostHook("AuctionatorConfigMoneyInputMixin", "OnLoad", configMoneyInput)
+    tryPostHook("AuctionatorConfigNumericInputMixin", "OnLoad", configNumericInput)
+    tryPostHook("AuctionatorConfigRadioButtonGroupMixin", "SetupRadioButtons", configRadioButtonGroup)
+    tryPostHook("AuctionatorKeyBindingConfigMixin", "OnLoad", keyBindingConfig)
+    tryPostHook("AuctionatorResultsListingMixin", "OnShow", resultsListing)
+    tryPostHook("AuctionatorSaleItemMixin", "OnLoad", saleItem)
+    tryPostHook("AuctionatorShoppingTabFrameMixin", "OnLoad", shoppingTabFrame)
+    tryPostHook("AuctionatorShoppingTabSearchOptionsMixin", "OnLoad", shoppingTabSearchOptions)
+    tryPostHook("AuctionatorShoppingTabListsContainerMixin", "OnLoad", shoppingTabContainer)
+    tryPostHook("AuctionatorShoppingTabRecentsContainerMixin", "OnLoad", shoppingTabContainer)
+    tryPostHook("AuctionatorShoppingTabContainerTabsMixin", "OnLoad", shoppingTabContainerTabs)
+    tryPostHook("AuctionatorBagUseMixin", "OnLoad", bagUse)
+    tryPostHook("AuctionatorSellingTabPricesContainerMixin", "OnLoad", sellingTabPricesContainer)
+    tryPostHook("AuctionatorTabContainerMixin", "OnLoad", bottomTabButtons)
+    tryPostHook("AuctionatorUndercutScanMixin", "OnLoad", undercutScan)
 
     -- Hook into mixin methods for tab frames
-    tryPostHook('AuctionatorCancellingFrameMixin', 'OnLoad', cancellingFrame)
-    tryPostHook('AuctionatorConfigTabMixin', 'OnLoad', configTab)
-    tryPostHook('AuctionatorSellingTabMixin', 'OnLoad', sellingTab)
+    tryPostHook("AuctionatorCancellingFrameMixin", "OnLoad", cancellingFrame)
+    tryPostHook("AuctionatorConfigTabMixin", "OnLoad", configTab)
+    tryPostHook("AuctionatorSellingTabMixin", "OnLoad", sellingTab)
 
     -- Hook into mixin methods for frames
-    tryPostHook('AuctionatorConfigSellingFrameMixin', 'OnLoad', configSellingFrame)
-    tryPostHook('AuctionatorExportTextFrameMixin', 'OnLoad', exportTextFrame)
-    tryPostHook('AuctionatorListExportFrameMixin', 'OnLoad', listExportFrame)
-    tryPostHook('AuctionatorListImportFrameMixin', 'OnLoad', listImportFrame)
-    tryPostHook('AuctionatorItemHistoryFrameMixin', 'Init', itemHistoryFrame)
-    tryPostHook('AuctionatorCraftingInfoObjectiveTrackerFrameMixin', 'OnLoad', craftingInfoObjectiveTrackerFrame)
-    tryPostHook('AuctionatorCraftingInfoProfessionsFrameMixin', 'OnLoad', craftingInfoProfessionsFrame)
-    tryPostHook('AuctionatorShoppingItemMixin', 'OnLoad', shoppingItem)
-    tryPostHook('AuctionatorSplashScreenMixin', 'OnLoad', splashFrame)
-    tryPostHook('AuctionatorBuyCommodityFrameTemplateMixin', 'OnLoad', buyCommodity)
+    tryPostHook("AuctionatorConfigSellingFrameMixin", "OnLoad", configSellingFrame)
+    tryPostHook("AuctionatorExportTextFrameMixin", "OnLoad", exportTextFrame)
+    tryPostHook("AuctionatorListExportFrameMixin", "OnLoad", listExportFrame)
+    tryPostHook("AuctionatorListImportFrameMixin", "OnLoad", listImportFrame)
+    tryPostHook("AuctionatorItemHistoryFrameMixin", "Init", itemHistoryFrame)
+    tryPostHook("AuctionatorCraftingInfoObjectiveTrackerFrameMixin", "OnLoad", craftingInfoObjectiveTrackerFrame)
+    tryPostHook("AuctionatorCraftingInfoProfessionsFrameMixin", "OnLoad", craftingInfoProfessionsFrame)
+    tryPostHook("AuctionatorShoppingItemMixin", "OnLoad", shoppingItem)
+    tryPostHook("AuctionatorSplashScreenMixin", "OnLoad", splashFrame)
+    tryPostHook("AuctionatorBuyCommodityFrameTemplateMixin", "OnLoad", buyCommodity)
+    tryPostHook("AuctionatorDropDownMixin", "OnLoad", dropDownInternal)
+    tryPostHook("AuctionatorFilterKeySelectorMixin", "OnLoad", filterKeySelectorDropdown)
 end
 
-AS:RegisterSkin('Auctionator', nil, 'AUCTION_HOUSE_SHOW', 'ADDON_LOADED')
+local isEra = AS.Classic or AS.TBC or AS.Wrath
+if isEra then
+    AS:RegisterSkin("Auctionator", nil, "PLAYER_ENTERING_WORLD", "ADDON_LOADED")
+else
+    AS:RegisterSkin("Auctionator", nil, "AUCTION_HOUSE_SHOW", "PLAYER_ENTERING_WORLD")
+end
