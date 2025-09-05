@@ -245,7 +245,7 @@ function AS:StartUp(event, ...)
 	AS:SkinEvent(event, ...)
 
 	if AS:CheckOption('LoginMsg') then
-		AS:Print(format("Version: |cFF1784D1%s|r Loaded!", AS.Version))
+		AS:Print(format(L["Version: |cFF1784D1%s|r Loaded!"], AS.Version))
 	end
 
 	if not AS.Debug and AS.FoundError then
