@@ -3,8 +3,8 @@ local AS, L, S, R = unpack(AddOnSkins)
 function R:ExtendedCharacterStats()
 	-- Main frame
 	ECS_StatsFrame:ClearAllPoints()
-	ECS_StatsFrame:Point('RIGHT', _G.CharacterFrame, 149, 32)
-	ECS_StatsFrame:SetHeight(424)
+	ECS_StatsFrame:Point('LEFT', _G.CharacterFrame, 352, 32)
+	ECS_StatsFrame:SetHeight(425)
 	S:HandleFrame(ECS_StatsFrame)
 
 	-- Misc buttons
