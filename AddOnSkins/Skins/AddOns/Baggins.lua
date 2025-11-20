@@ -93,19 +93,32 @@ function R:Baggins()
 
 	local BankColor = { 0, .5, 1 }
 
+	local function GetASThemeColors()
+		-- Prefer ElvUI theme if present, fall back to AddOnSkins defaults
+		if AS:CheckAddOn('ElvUI') and _G.ElvUI and _G.ElvUI[1] then
+			local media = _G.ElvUI[1].media or {}
+			local border = media.bordercolor or media.borderColor
+			local backdrop = media.backdropfadecolor or media.backdropFadeColor or media.backdropcolor or media.backdropColor
+			if border or backdrop then
+				return border or { 1, 1, 1, 1 }, backdrop or { 0, 0, 0, 0.5 }
+			end
+		end
+
+		return AS.BorderColor or AS.Color or { 1, 1, 1, 1 }, AS.BackdropColor or { 0, 0, 0, 0.5 }
+	end
+
 	function AddOnSkins_BagginsSkin:SetBankVisual(frame, isBank)
 		if not frame or not frame.backdrop then
             return
         end
 
-        local borderColor
+		local borderColor, backdropColor = GetASThemeColors()
 
-        if isBank then
-            borderColor = BankColor
-        else
-            -- Fall back hierarchy: BorderColor -> Color -> plain white
-            borderColor = AS.BorderColor or AS.Color or { 1, 1, 1 }
-        end
+		frame.backdrop:SetBackdropColor(unpack(backdropColor))
+
+		if isBank then
+			borderColor = BankColor
+		end
 
         frame.backdrop:SetBackdropBorderColor(unpack(borderColor))
     end
@@ -148,7 +161,7 @@ function R:Baggins()
 				end
 				button:SetBackdropBorderColor(r, g, b, 1)
 			else
-				local borderColor = AS.BorderColor or AS.Color or { 1, 1, 1 }
+				local borderColor = GetASThemeColors()
             	button:SetBackdropBorderColor(unpack(borderColor))
 			end
 
