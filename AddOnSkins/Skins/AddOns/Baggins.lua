@@ -1,5 +1,44 @@
 local AS, L, S, R = unpack(AddOnSkins)
 
+--Compatibility helpers for bag APIs
+local function AS_GetContainerItemInfo(bag, slot)
+    -- Retail C_Container API (Dragonflight / The War Within)
+    if C_Container and C_Container.GetContainerItemInfo then
+        local info = C_Container.GetContainerItemInfo(bag, slot)
+        if not info then
+            return
+        end
+
+        local icon      = info.iconFileID
+        local count     = info.stackCount
+        local locked    = info.isLocked
+        local quality   = info.quality
+        local readable  = info.isReadable
+        local itemLink  = C_Container.GetContainerItemLink(bag, slot)
+        local itemID    = info.itemID
+
+        -- Return values in the same order as the old API where it matters
+        -- texture, itemCount, locked, quality, readable, lootable,
+        -- itemLink, isFiltered, hasNoValue, itemID
+        return icon, count, locked, quality, readable, nil, itemLink, nil, nil, itemID
+    end
+
+    -- Older / Classic clients
+    if GetContainerItemInfo then
+        return GetContainerItemInfo(bag, slot)
+    end
+end
+
+local function AS_GetContainerItemLink(bag, slot)
+    if C_Container and C_Container.GetContainerItemLink then
+        return C_Container.GetContainerItemLink(bag, slot)
+    end
+
+    if GetContainerItemLink then
+        return GetContainerItemLink(bag, slot)
+    end
+end
+
 function R:Baggins()
 	local AddOnSkins_BagginsSkin = {
 		BagLeftPadding = 10,
@@ -55,8 +94,21 @@ function R:Baggins()
 	local BankColor = { 0, .5, 1 }
 
 	function AddOnSkins_BagginsSkin:SetBankVisual(frame, isBank)
-		frame.backdrop:SetBackdropBorderColor(unpack(isBank and BankColor or AS.BorderColor))
-	end
+		if not frame or not frame.backdrop then
+            return
+        end
+
+        local borderColor
+
+        if isBank then
+            borderColor = BankColor
+        else
+            -- Fall back hierarchy: BorderColor -> Color -> plain white
+            borderColor = AS.BorderColor or AS.Color or { 1, 1, 1 }
+        end
+
+        frame.backdrop:SetBackdropBorderColor(unpack(borderColor))
+    end
 
 	function AddOnSkins_BagginsSkin:SkinSection(frame)
 		frame.title:SetVertexColor(1, 1, 1, 1)
@@ -82,8 +134,8 @@ function R:Baggins()
 	hooksecurefunc(Baggins, "UpdateItemButton", function(self, _, button, bag, slot)
 		local p = self.db.profile
 		if p.skin and p.skin == 'AddOnSkins' then
-			local texture, _, _, quality = GetContainerItemInfo(bag, slot)
-			local link = GetContainerItemLink(bag, slot)
+			local texture, _, _, quality = AS_GetContainerItemInfo(bag, slot)
+			local link = AS_GetContainerItemLink(bag, slot)
 			if link then
 				local qual = select(3, GetItemInfo(link))
 				quality = qual or quality
@@ -96,7 +148,8 @@ function R:Baggins()
 				end
 				button:SetBackdropBorderColor(r, g, b, 1)
 			else
-				button:SetBackdropBorderColor(unpack(AS.BorderColor))
+				local borderColor = AS.BorderColor or AS.Color or { 1, 1, 1 }
+            	button:SetBackdropBorderColor(unpack(borderColor))
 			end
 
 			button.Count:ClearAllPoints()
