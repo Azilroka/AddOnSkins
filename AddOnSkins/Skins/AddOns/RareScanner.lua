@@ -1,18 +1,40 @@
-local AS, L, S, R = unpack(AddOnSkins)
+local AS = unpack(AddOnSkins)
 
-function R:RareScanner()
-	S:HandleFrame(RARESCANNER_BUTTON, 'Default')
-	S:HandleButton(RARESCANNER_BUTTON.CloseButton)
-	RARESCANNER_BUTTON.CloseButton:ClearAllPoints()
-	RARESCANNER_BUTTON.CloseButton:SetPoint("TOPRIGHT", -5, -5)
-	S:HandleButton(RARESCANNER_BUTTON.FilterEntityButton)
-	RARESCANNER_BUTTON.FilterEntityButton:SetNormalTexture([[Interface\WorldMap\Dash_64Grey]])
-	RARESCANNER_BUTTON.FilterEntityButton:ClearAllPoints()
-	RARESCANNER_BUTTON.FilterEntityButton:SetPoint("TOPLEFT", 5, -5)
-	S:HandleButton(RARESCANNER_BUTTON.UnfilterEnabledButton)
-	RARESCANNER_BUTTON.FilterEnabledTexture:SetTexture([[Interface\WorldMap\Skull_64]])
-	RARESCANNER_BUTTON.UnfilterEnabledButton:ClearAllPoints()
-	RARESCANNER_BUTTON.UnfilterEnabledButton:SetPoint("TOPLEFT", 5, -5)
+local function SkinRareScanner()
+	local btn = _G['RARESCANNER_BUTTON']
+	if not btn or btn._asSkinned then return end
+	btn._asSkinned = true
+
+	-- Replace parchment background and default tooltip border with ElvUI style
+	btn:SetNormalTexture('')
+	btn:SetPushedTexture('')
+	btn:SetHighlightTexture('')
+	AS:StripTextures(btn)
+	AS:SetTemplate(btn)
+	AS:CreateShadow(btn)
+
+	-- Close button
+	if btn.CloseButton then
+		AS:SkinCloseButton(btn.CloseButton)
+		btn.CloseButton:ClearAllPoints()
+		btn.CloseButton:SetPoint('TOPRIGHT', btn, 'TOPRIGHT', -4, -4)
+	end
+
+	-- Filter buttons use custom icon textures from RareScanner media - only skin the frame border
+	if btn.FilterEntityButton then
+		AS:CreateBackdrop(btn.FilterEntityButton)
+	end
+	if btn.UnFilterEntityButton then
+		AS:CreateBackdrop(btn.UnFilterEntityButton)
+	end
 end
 
-AS:RegisterSkin('RareScanner')
+function AS:RareScanner(event, addon)
+	local loaded = (C_AddOns and C_AddOns.IsAddOnLoaded and C_AddOns.IsAddOnLoaded('RareScanner'))
+		or (_G.IsAddOnLoaded and _G.IsAddOnLoaded('RareScanner'))
+	if not loaded then return end
+
+	C_Timer.After(0, SkinRareScanner)
+end
+
+AS:RegisterSkin('RareScanner', AS.RareScanner)

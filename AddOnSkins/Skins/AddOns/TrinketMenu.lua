@@ -2,7 +2,6 @@ local AS, L, S, R = unpack(AddOnSkins)
 
 function R:TrinketMenu()
 	-- Config Panel
-	local TrinketMenu = _G.TrinketMenu
 	S:HandleFrame(TrinketMenu_OptFrame)
 	TrinketMenu_OptFrame:SetWidth(380)
 	S:HandleFrame(TrinketMenu_SubOptFrame)
@@ -65,13 +64,42 @@ function R:TrinketMenu()
 		S:HandleSliderFrame(slider)
 	end
 
-	-- Main Frame
-	S:HandleItemButton(TrinketMenu_Trinket0)
-	S:HandleItemButton(TrinketMenu_Trinket1)
+	-- TrinketMenu buttons inherit ActionButtonTemplate. The icon is $parentIcon
+	-- (e.g. TrinketMenu_Trinket0Icon, TrinketMenu_Menu3Icon).
+	-- HandleItemButton calls StripTextures which wipes the icon before TrinketMenu
+	-- sets it, leaving an empty texture. Skin without touching the icon texture.
+	local function SkinTrinketButton(button)
+		if not button or button._tmSkinned then return end
+		button._tmSkinned = true
 
+		local name = button:GetName()
+		local icon = name and _G[name .. 'Icon']
+
+		-- Strip only non-icon regions.
+		for _, region in next, { button:GetRegions() } do
+			if region and region ~= icon and region.IsObjectType and region:IsObjectType('Texture') then
+				region:SetTexture('')
+			end
+		end
+
+		S:CreateBackdrop(button, nil, true, nil, nil, nil, nil, nil, true)
+		S:StyleButton(button)
+
+		if icon then
+			S:HandleIcon(icon)
+			S:SetInside(icon, button)
+			icon:SetParent(button.backdrop or button)
+		end
+	end
+
+	-- Main Frame (equipped trinkets)
+	SkinTrinketButton(TrinketMenu_Trinket0)
+	SkinTrinketButton(TrinketMenu_Trinket1)
+
+	-- Menu buttons (inventory trinkets) - created dynamically
+	local TrinketMenu = _G.TrinketMenu
 	for i = (TrinketMenu.NumberOfTrinkets + 1), TrinketMenu.MaxTrinkets do
-		local trinkets = _G['TrinketMenu_Menu'..i]
-		S:HandleItemButton(trinkets)
+		SkinTrinketButton(_G['TrinketMenu_Menu'..i])
 	end
 end
 

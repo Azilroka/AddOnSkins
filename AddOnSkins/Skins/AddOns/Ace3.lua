@@ -10,6 +10,115 @@ function AS:Ace3()
 	local oldRegisterAsWidget = AceGUI.RegisterAsWidget
 	local ColorBlind = GetCVarBool('colorblindmode')
 
+	local BLANK = (_G.ElvUI and _G.ElvUI[1] and _G.ElvUI[1].media.blankTex)
+		or [[Interface\Buttons\WHITE8X8]]
+
+	local function SkinAceCheckBox(widget)
+		local frame = widget.frame
+		if frame._asSkinned then return end
+		frame._asSkinned = true
+
+		-- Wipe button-state slots
+		frame:SetNormalTexture('')
+		frame:SetPushedTexture('')
+		frame:SetHighlightTexture('')
+		frame:SetCheckedTexture(BLANK)
+		local ct = frame:GetCheckedTexture()
+		if ct then ct:SetAlpha(0) end
+
+		-- Hide all texture regions (checkbg, check, highlight are Textures on frame)
+		for i = 1, frame:GetNumRegions() do
+			local r = select(i, frame:GetRegions())
+			if r and r.GetObjectType and r:GetObjectType() ~= 'FontString' then
+				r:SetTexture(nil)
+				r:SetAlpha(0)
+				r:Hide()
+			end
+		end
+		-- Prevent SetType() from restoring them
+		widget.checkbg.SetTexture = AS.noop
+		widget.check.SetTexture   = AS.noop
+		widget.highlight.SetTexture = AS.noop
+
+		local border = frame:CreateTexture(nil, 'BACKGROUND')
+		border:SetPoint('TOPLEFT', frame, 'TOPLEFT', 2, -5)
+		border:SetSize(13, 13)
+		border:SetTexture(BLANK)
+		border:SetVertexColor(unpack(AS.BorderColor))
+		frame._aceBorder = border
+
+		local fill = frame:CreateTexture(nil, 'ARTWORK')
+		fill:SetPoint('TOPLEFT', border, 'TOPLEFT', 1, -1)
+		fill:SetSize(11, 11)
+		fill:SetTexture(BLANK)
+		fill:SetVertexColor(unpack(AS.Color))
+		fill:Hide()
+		frame._aceFill = fill
+
+		local function Update(f)
+			if f:GetChecked() then
+				f._aceBorder:SetVertexColor(unpack(AS.Color))
+				f._aceFill:Show()
+			else
+				f._aceBorder:SetVertexColor(unpack(AS.BorderColor))
+				f._aceFill:Hide()
+			end
+		end
+
+		frame:HookScript('OnClick', Update)
+		hooksecurefunc(frame, 'SetChecked', function(f)
+			C_Timer.After(0, function() Update(f) end)
+		end)
+		C_Timer.After(0, function() Update(frame) end)
+	end
+
+	local function SkinAceDropdown(widget)
+		local dd = widget.dropdown -- UIDropDownMenuTemplate frame
+		if dd._asSkinned then return end
+		dd._asSkinned = true
+
+		-- Strip the three UIDropDownMenu background textures
+		local name = dd:GetName()
+		for _, suffix in ipairs({'Left','Middle','Right'}) do
+			local tex = _G[name..suffix]
+			if tex then tex:SetTexture(nil) tex:Hide() end
+		end
+
+		-- Apply backdrop directly on the dropdown frame
+		AS:SetTemplate(dd)
+		dd:SetBackdropColor(unpack(AS.BackdropColor))
+
+		-- Arrow button
+		local btn = _G[name..'Button']
+		if btn then
+			for _, getter in ipairs({'GetNormalTexture','GetPushedTexture','GetHighlightTexture','GetDisabledTexture'}) do
+				local tex = btn[getter] and btn[getter](btn)
+				if tex then tex:SetTexture(nil) tex:Hide() end
+			end
+			local arrow = dd:CreateTexture(nil, 'OVERLAY')
+			arrow:SetTexture([[Interface\AddOns\AddOnSkins\Media\Textures\Arrow]])
+			arrow:SetRotation(3.14)
+			arrow:SetSize(12, 12)
+			arrow:SetPoint('RIGHT', dd, 'RIGHT', -4, 0)
+			arrow:SetVertexColor(1, 1, 1)
+			dd:HookScript('OnEnter', function()
+				arrow:SetVertexColor(unpack(AS.Color))
+				dd:SetBackdropBorderColor(unpack(AS.Color))
+			end)
+			dd:HookScript('OnLeave', function()
+				arrow:SetVertexColor(1, 1, 1)
+				dd:SetBackdropBorderColor(unpack(AS.BorderColor))
+			end)
+		end
+
+		-- Label color fix
+		if widget.label then
+			hooksecurefunc(widget.label, 'SetTextColor', function(self, r, g, b)
+				if r == 1 and g == 0.82 and b == 0 then self:SetTextColor(1,1,1,1) end
+			end)
+		end
+	end
+
 	AceGUI.RegisterAsWidget = function(self, widget)
 		local TYPE = widget.type
 		if TYPE == 'MultiLineEditBox' then
@@ -22,63 +131,9 @@ function AS:Ace3()
 			widget.scrollBG:SetPoint('BOTTOMLEFT', widget.button, 'TOPLEFT')
 			widget.scrollFrame:SetPoint('BOTTOMRIGHT', widget.scrollBG, 'BOTTOMRIGHT', -4, 8)
 		elseif TYPE == 'CheckBox' then
-			S:CreateBackdrop(widget.checkbg)
-			S:SetInside(widget.checkbg.backdrop, widget.checkbg, 4, 4)
-			widget.checkbg.backdrop:SetFrameLevel(widget.checkbg.backdrop:GetFrameLevel() + 1)
-
-			widget.checkbg:SetTexture('')
-			widget.highlight:SetTexture('')
-
-			if not ColorBlind then
-				S:SetInside(widget.checkbg.backdrop, widget.checkbg, 5, 5)
-
-				widget.check:SetTexture(AS.NormTex)
-
-				hooksecurefunc(widget.check, "SetDesaturated", function(self, value)
-					if value == true then
-						self:SetVertexColor(.6, .6, .6, .8)
-					else
-						self:SetVertexColor(unpack(S.Media.valueColor))
-					end
-				end)
-
-				widget.check.SetTexture = S.noop
-				S:SetInside(widget.check, widget.checkbg.backdrop)
-			else
-				S:SetOutside(widget.check, widget.checkbg.backdrop, 3, 3)
-			end
-
-			widget.checkbg.SetTexture = S.noop
-			widget.highlight.SetTexture = AS.noop
+			SkinAceCheckBox(widget)
 		elseif TYPE == 'Dropdown' then
-			local frame = widget.dropdown
-			local button = widget.button
-			local text = widget.text
-
-			S:HandleFrame(frame, true)
-			frame.backdrop:SetPoint('TOPLEFT', 15, -2)
-			frame.backdrop:SetPoint("BOTTOMRIGHT", -21, 0)
-
-			S:HandleNextPrevButton(button)
-
-			widget.label:ClearAllPoints()
-			widget.label:SetPoint('BOTTOMLEFT', frame.backdrop, 'TOPLEFT', 2, 0)
-			hooksecurefunc(widget.label, 'SetTextColor', function(self, r, g, b, a)
-				if r == 1 and g == 0.82 and b == 0 then
-					self:SetTextColor(1, 1, 1, 1)
-				end
-			end)
-
-			button:SetSize(20, 20)
-			button:ClearAllPoints()
-			button:SetPoint('RIGHT', frame.backdrop, 'RIGHT', -2, 0)
-
-			text:ClearAllPoints()
-			text:SetJustifyH("RIGHT")
-			text:SetPoint('RIGHT', button, 'LEFT', -3, 0)
-
-			button:HookScript('PostClick', function(s) S:SetTemplate(s.obj.pullout.frame) end)
-			widget.button_cover:HookScript('PostClick', function(s) S:SetTemplate(s.obj.pullout.frame) end)
+			SkinAceDropdown(widget)
 		elseif TYPE == 'LSM30_Font' or TYPE == 'LSM30_Sound' or TYPE == 'LSM30_Border' or TYPE == 'LSM30_Background' or TYPE == 'LSM30_Statusbar' then
 			local frame = widget.frame
 			local button = frame.dropButton
@@ -218,8 +273,14 @@ function AS:Ace3()
 
 				for i = 1, frame:GetNumChildren() do
 					local child = select(i, frame:GetChildren())
-					if child:GetObjectType() == 'Button' and child:GetText() then
+					local childType = child:GetObjectType()
+					local childText = childType == 'Button' and child:GetText()
+					if childText and childText ~= '' then
 						S:HandleButton(child)
+					elseif childType == 'Button' then
+						-- statusbg: Button without label text, has its own backdrop
+						S:StripTextures(child)
+						S:SetTemplate(child)
 					else
 						S:StripTextures(child)
 					end

@@ -127,18 +127,20 @@ function ES:Check(Message)
 	if not (AS:CheckOption('EmbedSystem') or AS:CheckOption('EmbedSystemDual')) then return end
 
 	ES:Resize()
-	ES.Main:SetShown(not (AS:CheckOption('EmbedIsHidden') or AS:CheckOption('EmbedOoC')))
+	local shouldShow = not (AS:CheckOption('EmbedIsHidden') or AS:CheckOption('EmbedOoC'))
+	ES.Main:SetShown(shouldShow)
+	ES:ToggleChatFrame(shouldShow)
 
 	for _, Window in next, ES.Windows do
 		Window:SetFrameStrata(strsub(AS:CheckOption('EmbedFrameStrata'), 3))
 		Window:SetFrameLevel(AS:CheckOption('EmbedFrameLevel'))
 	end
 
-	if AS:CheckEmbed('Details') then ES:Details() end
-	if AS:CheckEmbed('Omen') then ES:Omen() end
-	if AS:CheckEmbed('Skada') then ES:Skada() end
-	if AS:CheckEmbed('TinyDPS') then ES:TinyDPS() end
-	if AS:CheckEmbed('Recount') then ES:Recount() end
+	if AS:CheckEmbed('Details') and ES.Details   then ES:Details()  end
+	if AS:CheckEmbed('Omen')    and ES.Omen      then ES:Omen()     end
+	if AS:CheckEmbed('Skada')   and ES.Skada     then ES:Skada()    end
+	if AS:CheckEmbed('TinyDPS') and ES.TinyDPS   then ES:TinyDPS()  end
+	if AS:CheckEmbed('Recount') and ES.Recount   then ES:Recount()  end
 
 	if Message and AS:CheckOption('EmbedSystemMessage') then
 		if AS:CheckOption('EmbedMain') then AS:Print(format(L["Embed System: Main: '%s'"], AS:CheckOption('EmbedMain'))) end
