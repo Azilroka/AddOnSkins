@@ -12,7 +12,8 @@ local strlower = strlower
 local strtrim = strtrim
 local unpack = unpack
 
-local GetAddOnMetadata = C_AddOns and C_AddOns.GetAddOnMetadata or GetAddOnMetadata
+local C_AddOns = C_AddOns
+local GetAddOnMetadata = (C_AddOns and C_AddOns.GetAddOnMetadata) or _G.GetAddOnMetadata
 local GENERAL = GENERAL
 local hooksecurefunc = hooksecurefunc
 local tContains = tContains
@@ -109,6 +110,7 @@ AS.Options.args.general = ACH:Group(GENERAL, nil, 0, nil, function(info) return 
 AS.Options.args.general.args.general = ACH:Group(' ', nil, 1)
 AS.Options.args.general.args.general.inline = true
 AS.Options.args.general.args.general.args.LoginMsg = ACH:Toggle(L["Login Message"], nil, 1)
+AS.Options.args.general.args.general.args.SkinDebug = ACH:Toggle('Enable Skin Debugging', nil, 2)
 
 AS.Options.args.general.args.Theme = ACH:Select(L["Themes"], nil, 2, { PixelPerfect = L["Thin Border"], TwoPixel = L["Two Pixel"], ThickBorder = L["Thick Border"] })
 AS.Options.args.general.args.SkinTemplate = ACH:Select(L["Template"], nil, 3, function() local tbl = CopyTable(DefaultTemplates) if AS:CheckOption('ElvUIStyle', 'ElvUI') then tbl.Custom = nil end return tbl end)
@@ -223,6 +225,7 @@ function AS:BuildProfile()
 			HideChatFrame = 'NONE',
 			HighlightColor = { 1, .8, .1 },
 			LoginMsg = false,
+			SkinDebug = false,
 			Parchment = false,
 			SelectedColor = { 0, 0.44, .87 },
 			Shadows = true,
@@ -288,6 +291,9 @@ function AS:BuildOptions()
 
 	if AS.Libs.EP and AS:CheckAddOn('ElvUI') then
 		AS.Libs.EP:RegisterPlugin('AddOnSkins', AS.GetOptions)
+		-- On Anniversary, LibElvUIPlugin may not fire the callback if ElvUI_Options
+		-- is already loaded by this point. Force one call to ensure hooks are set up.
+		C_Timer.After(0, function() pcall(AS.GetOptions, AS) end)
 	else
 		AS.Libs.AC:RegisterOptionsTable('AddOnSkins', AS.Options)
 		AS.Libs.ACD:AddToBlizOptions('AddOnSkins', 'AddOnSkins')

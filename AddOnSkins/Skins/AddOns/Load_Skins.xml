@@ -1,14 +1,18 @@
 <Ui>
+	<Script file="acb_Castbar.lua"/>
 	<Script file="Ace3.lua"/>
+	<Script file="AchieveIt.lua"/>
 	<Script file="ACP.lua"/>
 	<Script file="AllTheThings.lua"/>
 	<Script file="Altoholic.lua"/>
 	<Script file="Analyst.lua"/>
 	<Script file="AppearanceTooltip.lua"/>
+	<Script file="Archy.lua"/>
 	<Script file="ArgusEliteTracker.lua"/>
-	<!--Script file="ArkInventory.lua"/-->
+	<Script file="ArkInventory.lua"/>
 	<Script file="Atlas.lua"/>
 	<Script file="AtlasLoot.lua"/>
+	<Script file="AtlasQuest.lua"/>
 	<Script file="Auctionator.lua"/>
 	<Script file="Auctioneer.lua"/>
 	<Script file="AuctionLite.lua"/>
@@ -18,6 +22,8 @@
 	<Script file="Baggins.lua"/>
 	<Script file="BagSync.lua"/>
 	<Script file="Bartender4.lua"/>
+	<Script file="BattlePetBreedID.lua"/>
+	<Script file="BGDefender.lua"/>
 	<Script file="BigWigs.lua"/>
 	<Script file="BtWLoadouts.lua"/>
 	<Script file="BtWQuests.lua"/>
@@ -33,10 +39,15 @@
 	<Script file="CollectionShop.lua"/>
 	<Script file="ColorPickerPlus.lua"/>
 	<Script file="Coolline.lua"/>
+	<Script file="Cork.lua"/>
+	<Script file="Critline.lua"/>
 	<Script file="DBM.lua"/>
 	<Script file="DejaCharacterStats.lua"/>
 	<Script file="Dominos.lua"/>
+	<Script file="Dresser.lua"/>
+	<Script file="DressUp.lua"/>
 	<Script file="EasyMail.lua"/>
+	<Script file="Easy_Obliterate.lua"/>
 	<Script file="EavesDrop.lua"/>
 	<Script file="EnchantCheck.lua"/>
 	<Script file="EnergyWatch.lua"/>
@@ -88,6 +99,7 @@
 	<Script file="Outfitter.lua"/>
 	<Script file="Ovale.lua"/>
 	<Script file="Overachiever.lua"/>
+	<Script file="PallyPower.lua"/>
 	<Script file="Pawn.lua"/>
 	<Script file="PetBattleTeams.lua"/>
 	<Script file="PetJournalEnhanced.lua"/>
@@ -98,11 +110,11 @@
 	<Script file="QuestCompletist.lua"/>
 	<Script file="QuestGuru.lua"/>
 	<Script file="QuestPointer.lua"/>
+	<Script file="QuikEmotes.lua"/>
 	<Script file="RaiderIO.lua"/>
 	<Script file="RareScanner.lua"/>
 	<Script file="RCLootCouncil.lua"/>
 	<Script file="Recount.lua"/>
-	<Script file="SaddlebagExchange.lua"/>
 	<Script file="Scrap.lua"/>
 	<Script file="SearingPlasmaTracker.lua"/>
 	<Script file="ServerHop.lua"/>
@@ -120,6 +132,7 @@
 	<Script file="Talentless.lua"/>
 	<Script file="TalentSetManager.lua"/>
 	<Script file="tdBattlePetScript.lua"/>
+	<Script file="TellMeWhen.lua"/>
 	<Script file="TinyDPS.lua"/>
 	<Script file="TinyInspect.lua"/>
 	<Script file="TitanPanel.lua"/>
@@ -129,6 +142,7 @@
 	<Script file="TrainAll.lua"/>
 	<Script file="TrinketMenu.lua"/>
 	<Script file="Vendomatic.lua"/>
+	<Script file="WardrobeSort.lua"/>
 	<Script file="WhisperPop.lua"/>
 	<Script file="Wholly.lua"/>
 	<Script file="WorldBossStatus.lua"/>
@@ -137,6 +151,7 @@
 	<Script file="WoWPro.lua"/>
 	<Script file="xMerchant.lua"/>
 	<Script file="XPBarNone.lua"/>
+	<Script file="XToLevel.lua"/>
 	<Script file="Zygor.lua"/>
 	<Script file="WIM.lua"/>
 </Ui>

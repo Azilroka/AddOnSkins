@@ -1488,14 +1488,19 @@ do
 	function S:HandleCloseButton(button, point, x, y)
 		S:StripTextures(button)
 
-		if not button.Texture then
-			button.Texture = button:CreateTexture(nil, 'OVERLAY')
+		-- button.Texture may exist as a parentKey from UIPanelCloseButton but still
+		-- hold a numeric fileID after StripTextures. Only skip if it's a string path
+		-- (i.e. was already set by a previous HandleCloseButton call).
+		if not button.Texture or type(button.Texture:GetTexture()) ~= 'string' then
+			if not button.Texture then
+				button.Texture = button:CreateTexture(nil, 'OVERLAY')
+				button:HookScript('OnEnter', closeOnEnter)
+				button:HookScript('OnLeave', closeOnLeave)
+				button:SetHitRectInsets(6, 6, 7, 7)
+			end
 			S:Point(button.Texture, 'CENTER')
 			button.Texture:SetTexture(Media.Close)
 			S:Size(button.Texture, 12, 12)
-			button:HookScript('OnEnter', closeOnEnter)
-			button:HookScript('OnLeave', closeOnLeave)
-			button:SetHitRectInsets(6, 6, 7, 7)
 		end
 
 		if point then
@@ -1670,8 +1675,19 @@ function S:HandleTooltip(tooltip, scale, showHook)
 	S:HandleBlizzardRegions(tooltip)
 	S:SetTemplate(tooltip, nil, nil, nil, nil, nil, nil, nil, true)
 
+	-- HandleBlizzardRegions hides .Center (it's in BlizzardRegions list),
+	-- but SetTemplate needs it as the backdrop fill texture. Re-show it.
+	if tooltip.Center and not tooltip.Center:IsShown() then
+		tooltip.Center:Show()
+	end
+
 	if showHook then
-		tooltip:HookScript('OnShow', function(tt) S:SetTemplate(tt) end)
+		tooltip:HookScript('OnShow', function(tt)
+			S:SetTemplate(tt)
+			if tt.Center and not tt.Center:IsShown() then
+				tt.Center:Show()
+			end
+		end)
 	end
 
 	if scale then
